@@ -164,6 +164,45 @@ gcloud iam service-accounts add-iam-policy-binding \
   --member="serviceAccount:${PROJECT_ID}.svc.id.goog[datadog-cloudprem/cloudprem-ksa]"
 ```
 
+## Ingestion issues
+
+### Ingest errors on CloudPrem indexers
+
+**Symptom:** Indexer logs show ingest errors, or the `ingest_requests.count` metric shows failures. The OP Worker may report backpressure or buffer full errors.
+
+**Common causes:**
+- **Indexers undersized:** Check CPU utilization and the `pending_merge_ops.gauge` metric. If merge operations are backing up, indexers need more CPU or additional pods.
+- **Disk full:** Check `disk.available_space.gauge`. If the write-ahead log (WAL) fills up, indexers stop accepting new data. Increase persistent volume size or add more indexer pods.
+- **Rate limiting:** On initial deployment or after a restart, you may see `429 Too Many Requests` errors. This is typically transient while the cluster stabilizes. If it persists, check that your indexer count matches your ingestion volume.
+
+### OP Worker backpressure
+
+**Symptom:** OP Worker logs show buffer full errors or dropped events. The `component_sent_event_bytes_total` metric shows drops.
+
+**Solution:**
+- Verify that the OP Worker HPA (Horizontal Pod Autoscaler) is configured. The default of 2 replicas is often insufficient for production volumes.
+- Remove CPU limits on OP Worker pods to avoid CFS throttling during traffic spikes. Keep CPU requests for scheduling.
+
+### Monitoring log loss at the collector level
+
+To detect log loss before it reaches CloudPrem, monitor these Datadog Agent metrics:
+
+- **`datadog.logs_client_http_destination.payloads_dropped`**: Number of log payloads dropped by the Agent when the destination is unreachable or returning errors. This is the primary metric to watch for data loss.
+- **`datadog.logs.bytes_missed`**: Number of bytes from logs that could not be tailed after a file rotation (before the Agent finished reading the file).
+
+Configure the Datadog Agent to report these metrics and set up alerts to detect log loss early.
+
+## Search performance
+
+### Queries timing out
+
+**Symptom:** Search queries in Log Explorer return errors or take longer than expected. Dashboard widgets show "No Data" or loading spinners.
+
+**Common causes:**
+- **Not enough searcher pods:** Check searcher CPU utilization. If pods are at high CPU, add more replicas or increase `searcher.podSize`.
+- **Wildcard queries:** Queries with contained wildcards (for example, `*:*abcd*`) are significantly more expensive than prefix or term queries. Consider using more specific query terms.
+- **Large time ranges with aggregations:** Aggregation queries (timeseries, top lists, percentiles) over multi-day ranges scan large amounts of data. Narrow the time range or add more searcher resources.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
