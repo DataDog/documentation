@@ -65,7 +65,7 @@ Order the graph by {{< ui >}}Tags{{< /ui >}} or by {{< ui >}}Values{{< /ui >}} t
 
 To display two y-axes at the same time, add a second graph. Use the **Y-axis** dropdown to select whether each y-axis is displayed on the left or right.
 
-{{< img src="dashboards/widgets/timeseries/metric_alias.png" alt="Selecting the sides for two separate y-axes" style="width:100%;" >}}
+{{< img src="dashboards/widgets/timeseries/dual_y_axis.png" alt="Selecting the sides for two separate y-axes" style="width:100%;" >}}
 
 ### Metric aliasing
 
