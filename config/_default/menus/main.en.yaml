@@ -101,6 +101,11 @@ menu:
       url: getting_started/teams/
       parent: getting_started
       weight: 27
+    - name: Organization Topology
+      identifier: getting_started_organization_topology
+      url: getting_started/organization_topology/
+      parent: getting_started
+      weight: 28
     - name: Datadog Site
       identifier: getting_started_datadog_site
       url: getting_started/site/

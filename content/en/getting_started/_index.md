@@ -110,6 +110,7 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: Communicate and track problems in your systems.{{< /nextlink >}}
 {{< nextlink href="/getting_started/monitors" >}}<u>Monitors</u>: Set up alerts and notifications so that your team knows when critical changes occur.{{< /nextlink >}}
 {{< nextlink href="/getting_started/notebooks" >}}<u>Notebooks</u>: Combine live graphs, metrics, logs, and monitors to isolate issues and create interactive guides.{{< /nextlink >}}
+{{< nextlink href="/getting_started/organization_topology" >}}<u>Organization Topology</u>: Choose between single-org and multi-org Datadog deployments and manage isolation with access controls.{{< /nextlink >}}
 {{< nextlink href="/getting_started/teams" >}}<u>Teams</u>: Build a reliable ownership model by syncing team data from identity providers, GitHub, and other sources into Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: Automate end-to-end processes in response to alerts and security signals.{{< /nextlink >}}
 {{< /whatsnext >}}
