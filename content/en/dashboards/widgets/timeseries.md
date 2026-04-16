@@ -119,7 +119,7 @@ The following configuration options are available:
 | `Max`                 | No       | Specify the maximum value to show on the y-axis. It takes a number or `Auto` as the default value.                                                                                                                        |
 | `Scale`               | No       | Specifies the scale type. Possible values include:<br>- *linear*: A linear scale (default).<br>- *log*: A logarithmic scale.<br>- *pow*: A Power of 2 scale (2 is default, modify in JSON).<br>- *sqrt*: A square root scale. |
 | `Always include zero` | No       | Always include zero or fit the y-axis to the data range. The default is to always include zero.                                                                                                                             |
-<div class="alert alert-info">Because the mathematical log function does not accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise, an empty graph is returned.</div>
+<div class="alert alert-info">Because the mathematical log function does not accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise, Datadog returns an empty graph.</div>
 
 ### Legend configuration
 
