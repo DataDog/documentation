@@ -18,7 +18,7 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 - Compare two configuration versions side by side
 - Use AI-generated summaries to understand changes and their potential impact during incidents
 
-{{< img src="/network_device_monitoring/config_mgmt/network_device_config_redacted.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/config_mgmt/network_device_config_ndm_view.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
 
 **Note**: NCM is read-only in Preview. 
 
@@ -32,45 +32,45 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 1. In the Agent's root configuration directory at `conf.d/network_config_management.d/`, create the `conf.yaml` file and configure it as follows:
 
    ```yaml
-     init_config:
-       ## @param namespace - string - optional - default: default
-       ## The namespace should match namespaces of devices being monitored
-       namespace: default
-       ## @param min_collection_interval - integer - optional - default: 900 (15 minutes)
-       min_collection_interval: 900
-       ## @param ssh - object - optional
-       ## Global SSH configuration that applies to all device instances unless 
-       ## overridden at the device level. 
-       ssh:
-         ## @param timeout - duration - optional - default: 30 (seconds)
-         ## Maximum time for the SSH client to establish a TCP connection.
-         timeout: 30
-         ## @param known_hosts_path - string - required (unless insecure_skip_verify is true)
-         ## Path to the known_hosts file containing public keys of servers to 
-         ## verify the identity of remote hosts. Required for secure connections.
-         known_hosts_path: /path/to/known_hosts
-         ## @param insecure_skip_verify - boolean - optional - default: false
-         ## Skip host key verification. This is INSECURE and should only be used
-         ## for development/testing purposes.
-         insecure_skip_verify: false 
-      instances:
-        ip_address - string - required
-        ## The IP address of the network device to collect configurations from.
-        ip_address: <IP_ADDRESS>
-        ## @param auth - object - required
-        ## Authentication credentials to connect to the network device.
-        auth:
-          ## @param username - string - required
-          ## Username to authenticate to the network device.
-          username: <USERNAME>
-          ## @param password - string - required (if private_key_file is not provided)
-          ## Password to authenticate to the network device.
-          ## Used as a fallback after private key authentication if both are provided.
-          password: <PASSWORD>
-          ## @param private_key_file - string - optional
-          ## Path to the SSH private key file for authentication.
-          ## At least one of password or private_key_file must be provided.
-          private_key_file: /path/to/private_key
+   init_config:
+     ## @param namespace - string - optional - default: default
+     ## The namespace should match namespaces of devices being monitored
+     namespace: default
+     ## @param min_collection_interval - integer - optional - default: 900 (15 minutes)
+     min_collection_interval: 900
+     ## @param ssh - object - optional
+     ## Global SSH configuration that applies to all device instances unless 
+     ## overridden at the device level. 
+     ssh:
+       ## @param timeout - duration - optional - default: 30 (seconds)
+       ## Maximum time for the SSH client to establish a TCP connection.
+       timeout: 30
+       ## @param known_hosts_path - string - required (unless insecure_skip_verify is true)
+       ## Path to the known_hosts file containing public keys of servers to 
+       ## verify the identity of remote hosts. Required for secure connections.
+       known_hosts_path: /path/to/known_hosts
+       ## @param insecure_skip_verify - boolean - optional - default: false
+       ## Skip host key verification. This is INSECURE and should only be used
+       ## for development/testing purposes.
+       insecure_skip_verify: false 
+   instances:
+     ## ip_address - string - required
+     ## The IP address of the network device to collect configurations from.
+   - ip_address: <IP_ADDRESS>
+     ## @param auth - object - required
+     ## Authentication credentials to connect to the network device.
+     auth:
+       ## @param username - string - required
+       ## Username to authenticate to the network device.
+       username: <USERNAME>
+       ## @param password - string - required (if private_key_file is not provided)
+       ## Password to authenticate to the network device.
+       ## Used as a fallback after private key authentication if both are provided.
+       password: <PASSWORD>
+       ## @param private_key_file - string - optional
+       ## Path to the SSH private key file for authentication.
+       ## At least one of password or private_key_file must be provided.
+       private_key_file: /path/to/private_key
    ```
 
 2. Optionally, if your devices require specific SSH algorithms, use the following configuration:
@@ -90,13 +90,13 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
 ## Viewing configurations
 
-Network Configuration Management is accessible from the device side panel in Network Device Monitoring:
+Network Configuration Management is accessible from the NDM device view in Network Device Monitoring:
 
 1. Navigate to [Network Device Monitoring][3].
 2. Select a device from the device list or from any NDM visualization such as [Device Geomap][4] or the [Device Topology][5] map.
-3. Open the **Configuration** tab in the device side panel.
+3. Open the **Configuration** tab in the NDM device view.
 
-   {{< img src="/network_device_monitoring/config_mgmt/config_tab_redacted.png" alt="Network Device Management side panel, highlighting the Configuration tab." style="width:100%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/config_tab.png" alt="The NDM device view, highlighting the Configuration tab." style="width:100%;" >}}
 
    On the Configuration tab, you can filter what the configuration list displays:
    - **All**: Shows both running and startup configurations
@@ -129,11 +129,11 @@ To see what changed between configuration versions:
 1. Select two configurations from the history list or timeline using the checkboxes. 
 2. Click **Compare Two Configs** to open the comparison view.
 
-   {{< img src="/network_device_monitoring/config_mgmt/compare_two_configs_2.png" alt="Network Device Management configuration tab, highlighting the Compare Two Configs option." style="width:100%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/compare_two_configs_3.png" alt="Network Device Management configuration tab, highlighting the Compare Two Configs option." style="width:100%;" >}}
 
 The comparison view shows both configurations side by side with inline diffs that highlight changed lines. You can switch between different configuration pairs without closing the comparison view.
 
-   {{< img src="/network_device_monitoring/config_mgmt/config_screen_split_2.png" alt="Network Device Management configuration tab, comparing two versions in split view" style="width:90%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/config_screen_split_3.png" alt="Network Device Management configuration tab, comparing two versions in split view" style="width:90%;" >}}
 
 ## AI summaries
 

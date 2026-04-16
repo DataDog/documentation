@@ -27,7 +27,7 @@ Support levels are defined by the following:
 | :--- | :--- | :--- |
 | **General Availability (GA)** | <li>New features and enhancements</li><li>All bug and security fixes (on the latest minor release)</li><li>Critical fixes backported (to the 3 most recent minor releases)</li> | A major version is in GA for **12 months** following its initial `x.0.0` release. |
 | **Maintenance** | <li>Critical security and bug fixes only</li> | A major version enters Maintenance **12 months** after its initial release and remains for **6 months**. |
-| **End of Life (EOL)** | <li>No updates or support</li> | A major version becomes EOL **18 months** after its initial `x.0.0` release. |  
+| **End of Life (EOL)** | <li>No updates or support</li> | A major version becomes EOL **18 months** after its initial `x.0.0` release. |
 
 The Python APM Client library supports the following Python runtimes:
 
@@ -95,6 +95,11 @@ The `ddtrace` library includes support for the following data stores:
 | [SQLAlchemy][42]                   | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
 | [SQLite3][43]                      | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
 | [Vertica][44]                      | >= 0.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
+
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
 
 ### Library compatibility
 

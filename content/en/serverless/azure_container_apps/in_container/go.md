@@ -69,6 +69,8 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 {{% serverless-init-env-vars-in-container language="go" defaultSource="containerapp" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}

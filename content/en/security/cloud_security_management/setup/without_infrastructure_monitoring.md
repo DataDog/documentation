@@ -37,6 +37,11 @@ In addition to setting up Cloud Security with or without an Agent, you can also 
 **Note**: In your Cloud Security settings, set up [resource evaluation filters][1] to limit the number of hosts you need security on.
 
 ### Oracle Cloud Infrastructure
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Oracle Cloud Infrastructure (OCI) is not supported for the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 1. Navigate to the [Oracle Cloud Infrastructure configuration page][5] in Datadog.
 1. Select the tenancy you want to enable Cloud Security on.<br />If you don't see the required tenancy, add it by clicking **Add New Tenancy** and following the onscreen prompts.
 1. To turn off infrastructure monitoring on the selected tenancy, under the tenancy name, navigate to the **Metric Collection** tab. Then, above the Metric Collection table, click **Disable All**.

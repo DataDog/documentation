@@ -168,5 +168,54 @@
         "prefix": ";;check",
         "body": "{% x/ %}",
         "description": "X tag (self-closing) for checkmark"
+    },
+
+    "Includes": {
+        "scope": "markdoc",
+        "prefix": ";;includes",
+        "body": [
+            "<!-- Content applies to specified options: ${2:option_id_1} ${3:option_id_2} -->",
+            "{% if includes($${1:trait_id}, [\"${2:option_id_1}\", \"${3:option_id_2}\"]) %}",
+            "${4:Content shown for the specified options}",
+            "{% /if %}"
+        ],
+        "description": "Markdoc includes function to show content for specific trait options"
+    },
+
+    "Underline": {
+        "scope": "markdoc",
+        "prefix": ";;u",
+        "body": "{% u %}${1:underlined text}{% /u %}",
+        "description": "Markdoc underline tag"
+    },
+
+    "Superscript": {
+        "scope": "markdoc",
+        "prefix": ";;sup",
+        "body": "{% sup %}${1:superscript text}{% /sup %}",
+        "description": "Markdoc superscript tag"
+    },
+
+    "Stepper": {
+        "scope": "markdoc",
+        "prefix": ";;stepper",
+        "body": [
+            "{% stepper open=${1|false,true|} %}",
+            "",
+            "{% step title=\"${2:Step 1 title}\" %}",
+            "${3:Step 1 contents go here. You can use tabs, if tags, collapsible sections, etc.}",
+            "{% /step %}",
+            "",
+            "{% step title=\"${4:Step 2 title}\" %}",
+            "${5:Step 2 contents go here.}",
+            "{% /step %}",
+            "",
+            "{% stepper-finished %}",
+            "${6:This section is optional, and it's where you can put bonus \"call to action\" content that displays when the user has finished all the steps. It will not show at all when the stepper is open/expanded; don't use it for mission-critical content.}",
+            "{% /stepper-finished %}",
+            "",
+            "{% /stepper %}"
+        ],
+        "description": "Markdoc stepper component with steps and optional finished section"
     }
 }

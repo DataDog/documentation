@@ -31,6 +31,9 @@ attributes:
   - product: Bits AI Dev Agent
     data_type: |
        - **Source Code**: 7 days
+  - product: Bits AI SRE
+    data_type: |
+       - **Investigations**: Retained for the duration of the account
   - product: Browser RUM
     data_type: |
        - **Session, View, Action, and Error Events**: 30 days
@@ -137,7 +140,7 @@ attributes:
   - product: Product Analytics
     data_type: |
        - **Events**: 15 months
-       - **User Profiles**: 30 days
+       - **User Profiles**: 15 months, or 30 days if <a href="/product_analytics/guide/rum_and_product_analytics/#how-do-i-set-up-product-analytics">Product Analytics is not enabled</a>
   - product: PR Gates
     data_type: |
        - **Gate evaluations**: 30 days
@@ -175,3 +178,4 @@ attributes:
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+

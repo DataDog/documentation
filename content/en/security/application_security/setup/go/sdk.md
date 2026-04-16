@@ -138,7 +138,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 
 func authMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		user := "<username>" // Do real authentification here
+		user := "<username>" // Do real authentication here
 
 		// Set user context on all authenticated requests
 		if err := appsec.SetUser(r.Context(), user); err != nil && events.IsSecurityError(err) {
