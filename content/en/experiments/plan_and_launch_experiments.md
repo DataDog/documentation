@@ -19,7 +19,7 @@ Before you begin, make sure you have:
 
 - A [feature flag][4] for deploying and managing the experiment variants you want to test.
 - At least one [experiment metric][2] for measuring the outcome of your experiment.
-- A [subject type][6] for grouping users (default is `@usr.id`).
+- A [subject type][6] for grouping users (default is **User**).
 
 ## Plan your experiment
 Give your experiment a name and hypothesis, then define the settings.
@@ -66,8 +66,8 @@ Estimate the sample size needed to detect meaningful differences between variant
 1. Expand **Calculation details**. Your primary and secondary metrics appear under **Metrics**.
 1. Use the **Entry point** dropdown to select the event that assigns users to the experiment. Datadog uses this to estimate expected traffic.
 1. (Optional) Add a **Filter** to narrow the entry point's audience. If you do not see the property you need, type the property name in the **Custom property** field and click **Add**.
-1. Set the **Number of variants** (default 2) and **Traffic exposure** percentage (default 100%).
-1. Under **Additional inputs**, configure the statistical **Power** (default 80%) and **Target experiment duration** in weeks.
+1. Set the **Number of variants** (default is 2) and **Traffic exposure** percentage (default is 100%).
+1. Under **Additional inputs**, configure the statistical **Power** (default is 80%) and **Target experiment duration** in weeks.
 1. Click **Run Calculation** to see an estimate of the **[Minimum detectable effect (MDE)][3] over time** for your metrics.
 1. Close the **Sample Size Calculator** side panel and continue to [Add a feature flag](#add-a-feature-flag).
 
@@ -88,14 +88,14 @@ Randomize your users and split traffic across your experiment variants.
 
 After you select a feature flag, Datadog pre-populates the randomization settings based on the flag's configuration.
 
-<div class="alert alert-info">The randomization settings you configure here have the following effect when you launch your experiment:<br><br><ul><li>Datadog adds a targeting rule to the selected feature flag that randomly assigns users to variants.</li><li>If multiple experiments share the same flag, Datadog evaluates traffic based on the order of the flag's targeting rules. You can reorder targeting rules in the confirmation modal before launching.</li></ul></div>
+<div class="alert alert-info">The randomization settings you configure here have the following effect when you launch your experiment:<br><br><ul><li>Datadog adds a targeting rule to the selected feature flag.</li><li>If multiple experiments share the same flag, Datadog evaluates traffic based on the order of the flag's targeting rules. You can reorder targeting rules in the confirmation modal before launching.</li></ul></div>
 
 To configure how users are assigned to variants:
-1. Select the **Environment** for your experiment from the dropdown. The default is `prod`.
+1. Select the **Environment** for your experiment from the dropdown. The default is **prod**.
 1. Under **Targeting rules**:
    1. Click **Add Filter** to define conditions based on custom attributes set in your SDK's evaluation context and filter which users to include in the experiment.
    1. Click **Add Condition** to set additional conditions.
-1. Under **Variants**, set how traffic is split between your experiment groups. Use the **Randomize users and split traffic** dropdown to choose **Equally** or **Custom**. Each user consistently sees the same variant throughout the experiment.
+1. Under **Variants**, use the **Randomize users and split traffic** dropdown to choose **Equally** or **Custom**. This sets how traffic is split between your experiment groups. Each user consistently sees their assigned variant throughout the experiment.
 1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
 1. (Optional) [Schedule a staged rollout](#schedule-a-staged-rollout-optional) and [set additional configurations](#additional-config).
 1. After configuring your experiment, proceed to [Launch your experiment](#launch-your-experiment).
@@ -118,12 +118,12 @@ At each rollout stage, Datadog samples a percentage of eligible users to include
 Select recipients from the **Recipients** dropdown to receive alerts about experiment lifecycle events, such as when results reach statistical significance or an issue is detected.
 
 ##### Choose a statistical analysis plan
-Choose the **Confidence interval method** for your statistical analysis. Datadog uses the **Sequential** method by default. This provides statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
+Choose the **Confidence interval method** for your statistical analysis. Datadog uses the **Sequential** method by default. If your organization has configured default settings, a **Company Default** badge appears. This provides statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
 
 To use a different statistical method:
 1. Expand the **Statistical analysis plan** section.
 1. Select the method from the **Confidence interval method** dropdown. The default is **Sequential**.
-1. Select a percentage from the **Confidence level** dropdown. The default is **95%**.
+1. Select a percentage from the **Confidence level** dropdown.
 1. Toggle on **CUPED calculation** to reduce variance and improve experiment sensitivity.
 1. Toggle on **Multiple testing correction** to adjust for multiple comparisons across metrics.
 
@@ -139,7 +139,7 @@ Expand the **Split-by exploration dimensions** section. Select properties from t
 To launch your experiment:
 
 1. Click **Start Experiment** to open the **Confirm starting the experiment** dialog.
-1. Review your experiment settings. If multiple experiments share the same flag, use the arrow buttons to reorder the targeting rules as needed.
+1. Review your experiment settings. If multiple experiments share the same flag, use the arrow on the targeting rules to re-order them as needed.
 1. Click **Start Experiment & Enable Flag** to launch the experiment.
 
 Launching the experiment opens the **Flag & Exposures** page. Verify that the experiment is running correctly:
