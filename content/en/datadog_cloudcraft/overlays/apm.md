@@ -36,9 +36,7 @@ The APM overlay shows connections for resources that include a Cloud Resource ID
 - Lambda
 - RDS
 
-<!-- TODO: Screenshots needed. Reach out to Vesa Halttunen or the Cloudcraft team for assets showing:
-1. The APM overlay with trace arcs on a diagram
-2. The trace side panel -->
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_apm_overlay_diagram.png" alt="APM overlay in Cloudcraft showing green trace arcs connecting services across an AWS architecture diagram, with the Traces count and legend visible in the bottom left." style="width:100%;" >}}
 
 ## Prerequisites
 
