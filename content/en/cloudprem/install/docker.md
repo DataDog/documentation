@@ -17,7 +17,11 @@ further_reading:
 
 ## Overview
 
-This installation guide shows you how to run Datadog CloudPrem locally using either standalone Docker containers or Docker Compose. Follow these steps to deploy a minimal CloudPrem environment on your machine, ideal for exploring CloudPrem features and testing log ingestion with Datadog before deploying to production.
+<div class="alert alert-warning">
+<strong>This installation method is for local evaluation only.</strong> Docker is not supported for production deployments. For production workloads, deploy CloudPrem on a <a href="/cloudprem/install/">supported Kubernetes platform</a> (EKS, GKE, AKS, or self-managed Kubernetes).
+</div>
+
+This installation guide shows you how to run Datadog CloudPrem locally using either standalone Docker containers or Docker Compose. Follow these steps to deploy a minimal CloudPrem environment on your machine, ideal for exploring CloudPrem features and testing log ingestion with Datadog.
 
 ## Prerequisites
 

@@ -8,6 +8,9 @@ further_reading:
   - link: /llm_observability/experiments
     tag: Documentation
     text: Run experiments to test improvements
+  - link: "https://www.datadoghq.com/blog/automations-annotation-queues"
+    tag: "Blog"
+    text: "Annotate traces to improve LLM quality with Datadog LLM Observability"
 ---
 
 ## Overview
