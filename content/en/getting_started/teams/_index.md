@@ -140,9 +140,9 @@ Use GitHub as your authority for code ownership and hierarchy, while another sys
 Using API endpoints or Terraform to manage teams lets you provide a custom source of truth.
 
 Use the API or Terraform if your organization has the following characteristics:
-- You have internal tools that model teams
-- You need custom logic (for example, merging, aliasing, or special naming)
-- You want to centrally control team structure and membership and feed different systems, including Datadog
+- You have internal tools that model teams.
+- You need custom logic (for example, merging, aliasing, or special naming).
+- You want to centrally control team structure and membership and feed different systems, including Datadog.
 
 #### Limitations
 When manually provisioning teams through the API or Terraform, you must define and maintain your own desired state to avoid drift.
