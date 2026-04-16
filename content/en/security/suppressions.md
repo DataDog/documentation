@@ -23,7 +23,7 @@ products:
 
 Suppressions are specific conditions for when a signal should not be generated, which can improve the accuracy and relevance of the signals that are generated.
 
-{{< callout btn_hidden="true" header="Suppression timing" >}}
+{{< callout btn_hidden="true" header="Suppression evaluation" >}}
 There are two types of suppression queries: suppression on **signal attributes** and suppression on **log or event attributes**. Signal-based suppressions are only evaluated at the time a signal is created—they are not re-evaluated when a signal is updated. Log or event attribute suppressions prevent matching events from both generating new signals and updating existing ones, making them the recommended approach to reliably exclude specific activity.
 {{< /callout >}}
 
