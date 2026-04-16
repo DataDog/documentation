@@ -488,7 +488,7 @@ Break down active connections for a given host by the upstream APM services maki
 
 {{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filter your database hosts by the APM services that call them.">}}
 
-Filter the Database List to display only the database hosts that your specific APM services depend on. Identify if any of your downstream dependencies have blocking activity that may impact service performance.
+Filter the Database List to display only the database hosts that your specific APM services depend on. Identify whether any of your downstream dependencies have blocking activity that may impact service performance.
 
 ### View the associated trace for a query sample
 
