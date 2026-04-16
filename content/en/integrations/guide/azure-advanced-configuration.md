@@ -55,13 +55,17 @@ After this is completed, data collection begins automatically. The app registrat
 
 ## Log collection
 
-The diagram below provides a reference architecture for forwarding logs from Azure to Datadog, as described in the [Event Hub log forwarding guide][5].
+The diagram below provides a reference architecture for forwarding logs from Azure to Datadog using [automated log forwarding][29]. A control plane deployed in your chosen subscription discovers resources and configures their diagnostic settings. Log forwarders, consisting of an Azure Container Apps job and a storage account, are deployed in each region where your resources generate logs, and they scale up or down to match log volume.
+
+{{<img src="/logs/guide/azure_automated_logs_architecture/high_level_architecture_06-13-2025.png" alt="Architecture diagram showing three main components of Azure automated log forwarding: Control Plane and Log Forwarder (deployed by Datadog to customer environments) connecting to Azure Resources" style="width:100%">}}
+
+For setup instructions, see the [Azure Automated Log Forwarding Setup guide][29].
+
+{{% collapse-content title="Event Hub log forwarding (legacy)" level="h3" expanded=false id="legacy-event-hub-log-forwarding" %}}
+
+The following reference architecture applies to existing Event Hub log forwarding setups. For new deployments, use [automated log forwarding][29] instead.
 
 {{< img src="integrations/guide/azure_architecture_and_configuration/manual_log_forwarding.png" alt="Architecture diagram showing manual Azure log forwarding setup across two regions where Azure resources use diagnostic settings to send logs through Event Hubs and Log Forwarding Functions to Datadog Logs Ingestion." >}}
-
-### Alternate configuration options for log forwarding
-
-The default architecture above is suitable for most users. Depending on the scale and composition of your Azure environment, as well as the methods your organization uses to implement this architecture, the sections below detail additional considerations that may be relevant.
 
 #### Using the provided templates
 
@@ -79,6 +83,8 @@ However, diagnostic settings are not limited to sending logs to Event Hubs in th
 
 As the volume of logs scales, you may see bottlenecks, typically arising in the Event Hubs. If you plan to submit high log volumes, you may want to consider adding additional partitions or using a Premium or Dedicated tier.
 For especially high log volumes, you may consider adding additional Event Hub and forwarder function pairs within the same region, and splitting traffic between them.
+
+{{% /collapse-content %}}
 
 {{% collapse-content title="Commands to install the Azure Datadog Extension" level="h4" expanded=false id="azure-datadog-extension-commands" %}}
 ## Install on Azure
@@ -658,6 +664,7 @@ The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
 [26]: https://learn.microsoft.com/azure/event-hubs/event-hubs-scalability
 [27]: https://learn.microsoft.com/azure/azure-monitor/reference/metrics-index
 [28]: /metrics/#space-aggregation
+[29]: /logs/guide/azure-automated-log-forwarding/
 [30]: https://azure.microsoft.com/support
 [31]: https://app.datadoghq.com/metric/explorer
 [32]: https://learn.microsoft.com/azure/azure-monitor/reference/tables/containerappconsolelogs
