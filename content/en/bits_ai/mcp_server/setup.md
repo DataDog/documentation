@@ -420,7 +420,7 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 ### Available toolsets
 
-These toolsets are generally available. See [Datadog MCP Server Tools][49] for information on specific tools in each toolset, with example prompts.
+These toolsets are generally available. See [Datadog MCP Server Tools][49] for a complete reference of available tools organized by toolset, with example prompts.
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
