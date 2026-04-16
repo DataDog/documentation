@@ -58,5 +58,5 @@ disable_toc: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Troubleshooting Guides:" >}}
-   {{< nextlink href="/security/guide/troubleshoot-integrations-cloud-siem" >}}Troubleshoot the Cribl Stream integration with Cloud SIEM{{< /nextlink >}}
+   {{< nextlink href="/security/guide/troubleshoot-cribl-stream-cloud-siem" >}}Troubleshoot the Cribl Stream integration with Cloud SIEM{{< /nextlink >}}
 {{< /whatsnext >}}
