@@ -106,9 +106,9 @@ Make the IdP the authority for membership, then enrich ownership and metadata us
 
 Use SAML mapping to sync Datadog Teams if your organization has the following characteristics:
 
-- You already have SAML configured for login
-- You want team assignment to happen as part of authentication-based provisioning
-- You need a low-effort way to start using teams without building a custom sync
+- You already have SAML configured for login.
+- You want team assignment to happen as part of authentication-based provisioning.
+- You need a low-effort way to start using teams without building a custom sync.
 
 **Note:** SAML mappings take effect during login. Suppose a user moves from Team A to Team B during an active login session. The team change is reflected in Datadog only after the user logs out and logs back in.
 
