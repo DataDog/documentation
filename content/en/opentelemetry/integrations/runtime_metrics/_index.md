@@ -55,7 +55,7 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 
 #### Collector configuration
 
-The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Also set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta`.
+The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Also set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` otel processor.
 
 ```yaml
 processors:
@@ -129,7 +129,7 @@ OTEL_METRIC_EXPORT_INTERVAL=10000
 
 #### Collector configuration
 
-The `dotnet.process.cpu.time` metric requires the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Also set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta`.
+The `dotnet.process.cpu.time` and `process.cpu.time` metrics requires the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Also set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` otel processor.
 
 ```yaml
 processors:
