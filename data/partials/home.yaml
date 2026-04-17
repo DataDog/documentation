@@ -278,8 +278,6 @@ nav_sections:
         link: client_sdks/
         icon: building-block
         desc: Install and configure the Datadog SDK for your platform
-      - title: Developers
-        link: developers/
       - title: Extend Datadog
         link: extend/
         icon: dev-code
