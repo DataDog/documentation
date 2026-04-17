@@ -542,6 +542,7 @@ class ConversationalSearch {
             query,
             history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
             conversationId: this.conversationId,
+            anchorUrl: window.location.href,
             rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
             signal: this.abortController.signal,
             onThinking: (message) => {
