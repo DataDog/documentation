@@ -73,9 +73,29 @@ Setting up cloud-provider based authentication for AWS involves two parts:
 
 <div class="alert alert-info">For identity mapping to work, your AWS account <strong>must be integrated</strong> with Datadog through the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog-AWS integration</a>. If an AWS account is not integrated, the authentication flow cannot verify the caller, and mapping fails.</div>
 
-First, map your AWS identities (ARNs) to Datadog service accounts or user accounts. During the preview, you must perform the mapping using the Datadog API.
+Map your AWS identities (ARNs) to Datadog service accounts or user accounts. You can configure identity mappings from the UI or using the API.
 
 If you need to create IAM roles in AWS, see the [AWS IAM role creation documentation][5].
+
+#### Using the UI
+
+Navigate to [**Organization Settings** > **Cloud Authentication**][6] and click the **Identity Mappings** tab. Each mapping grants a cloud role the permissions of a specific Datadog user or service account.
+
+{{< img src="account_management/cloud_provider_authentication/identity-mappings-list.png" alt="Identity Mappings tab in Cloud Authentication showing a list of AWS ARN patterns mapped to Datadog users and service accounts" style="width:100%;" >}}
+
+To create an identity mapping:
+
+1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
+2. Select a **Cloud Provider**.
+3. Enter a **Source Pattern (ARN)**. Use `*` for wildcard patterns (for example, `role/terraform-*`).
+4. Search for and select a **Target Identity** — the Datadog user or service account this cloud identity authenticates as.
+5. Click {{< ui >}}Create Mapping{{< /ui >}}.
+
+{{< img src="account_management/cloud_provider_authentication/identity-mapping-create.png" alt="Create Identity Mapping dialog with fields for Cloud Provider, Source Pattern ARN, and Target Identity" style="width:70%;" >}}
+
+<div class="alert alert-info">Prefer service accounts over user accounts to avoid tying access to individuals.</div>
+
+#### Using the API
 
 #### Map an AWS ARN to a Datadog user account
 For `account_identifier`, use the email shown in the user's Datadog profile.
@@ -242,9 +262,26 @@ Setting up cloud-based authentication for the Agent involves two parts:
 
 <div class="alert alert-info">For intake mapping to work, your AWS account <strong>must be integrated</strong> with Datadog through the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog-AWS integration</a>. If an AWS account is not integrated, the authentication flow cannot verify the caller, and mapping fails.</div>
 
-First, configure intake mappings to authorize specific AWS ARN patterns for Agent authentication. Unlike the persona mapping used for Terraform, intake mapping only requires an ARN pattern. No Datadog account identifier is needed, because the Agent authenticates to send data rather than perform user actions.
+Configure intake mappings to authorize specific AWS ARN patterns for Agent authentication. Unlike identity mappings, intake mappings only require an ARN pattern — no Datadog account identifier is needed, because the Agent authenticates to send data rather than perform user actions. Datadog automatically provisions, configures, and rotates the underlying API key on your behalf.
 
 If you need to create IAM roles in AWS, see the [AWS IAM role creation documentation][5].
+
+#### Using the UI
+
+Navigate to [**Organization Settings** > **Cloud Authentication**][6] and click the **Intake Mappings** tab.
+
+{{< img src="account_management/cloud_provider_authentication/intake-mappings-list.png" alt="Intake Mappings tab in Cloud Authentication showing a list of AWS ARN patterns authorized for Agent authentication" style="width:100%;" >}}
+
+To create an intake mapping:
+
+1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
+2. Select a **Cloud Provider**.
+3. Enter a **Source Pattern (ARN)**. Use `*` for wildcard patterns (for example, `role/terraform-*`).
+4. Click {{< ui >}}Create Mapping{{< /ui >}}.
+
+{{< img src="account_management/cloud_provider_authentication/intake-mapping-create.png" alt="Create Intake Mapping dialog with fields for Cloud Provider and Source Pattern ARN" style="width:70%;" >}}
+
+#### Using the API
 
 #### Create an intake mapping
 
@@ -392,3 +429,4 @@ delegated_auth:
 [3]: /integrations/amazon-web-services/
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html
+[6]: https://app.datadoghq.com/organization-settings/cloud-authentication
