@@ -772,7 +772,7 @@ Guides you through onboarding serverless applications to Datadog, including AWS 
 
 - Help me monitor my AWS Lambda functions with Datadog.
 - Help me monitor my GCP Cloud Run services with Datadog.
-- Help me monitor my GCP Cloud Run Function with Datadog.
+- Help me monitor my GCP Cloud Run functions with Datadog.
 
 ### `source_map_uploads`
 *Toolset: **onboarding***\
