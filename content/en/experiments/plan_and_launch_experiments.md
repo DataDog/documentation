@@ -54,7 +54,7 @@ Define the metrics that measure the outcome of your experiment.
    1. Select a primary metric to measure the main outcome of your experiment.
    1. (Optional) Scope the list to **Certified** or **Non-certified** metrics.
    1. (Optional) Click **Create Metric** to define a new metric. For setup instructions, see [Create Experiment Metrics][2].
-1. (Optional) Add **Secondary metrics** to monitor unintended effects of the experiment on other areas like performance, engagement, or revenue.
+1. (Optional) Add **Secondary metrics** (also called guardrail metrics) to monitor unintended effects of the experiment on other areas like performance, engagement, or revenue.
 1. Proceed to [Run a sample size calculation (optional)](#run-a-sample-size-calculation-optional) or skip to [Add a feature flag](#add-a-feature-flag).
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_decision_metric.png" alt="The experiment configuration page showing the Decision metrics section with a Calculate metrics by dropdown set to User (@usr.id), a primary metric set to Add to Cart Conversion, and a Secondary metrics section." style="width:80%;" >}}
@@ -71,7 +71,7 @@ Estimate the sample size needed to detect meaningful differences between variant
 1. Click **Run Calculation** to see an estimate of the **[Minimum detectable effect (MDE)][3] over time** for your metrics.
 1. Close the **Sample Size Calculator** side panel and continue to [Add a feature flag](#add-a-feature-flag).
 
-{{< img src="/product_analytics/experiment/exp_plan_launch_sample_size.png" alt="The Sample Size Calculator side panel showing calculation details with Add to Cart Conversion as the primary metric and Number of cart views as a guardrail, an entry point set to click on ADD TO CART, two variants at 100% traffic exposure, and additional inputs for power and target experiment duration." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_plan_launch_sample_size.png" alt="The Sample Size Calculator side panel showing calculation details with Add to Cart Conversion as the primary metric and Number of cart views as a secondary metric (guardrail), an entry point set to click on ADD TO CART, two variants at 100% traffic exposure, and additional inputs for power and target experiment duration." style="width:80%;" >}}
 
 #### Add a feature flag
 Link a feature flag to control how traffic is split between the experiment variants.
