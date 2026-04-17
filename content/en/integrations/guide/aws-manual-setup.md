@@ -59,10 +59,18 @@ To set up the AWS integration manually, create an IAM policy and IAM role in you
 
 ## Setup
 
+<div class="alert alert-info">
+Changing the access type on an existing AWS account is a destructive operation. To switch methods (for example, from Access Keys to Role Delegation), delete the existing account entry and re-add it with the new access type. Per-account settings are not preserved when you re-add an account. This includes metric collection filters, log collection configuration, and tag customizations. Reconfigure these settings after re-adding the account.
+</div>
+
 ### Generate an external ID
 
 1. In the [AWS integration configuration page][1], click **Add AWS Account(s)**, and then select **Manually**.
 2. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][2] in the AWS documentation for more information.
+
+   <div class="alert alert-info">
+   If your AWS account is in the <code>aws-us-gov</code> (GovCloud) partition, verify with your compliance team before connecting it to your Datadog site. Confirm that forwarding data from that account meets your organization's authorization boundary and data handling requirements. Applicable frameworks may include FedRAMP, ITAR, IL4, or IL5.
+   </div>
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial regions.
 {{< /site-region >}}
@@ -139,6 +147,10 @@ This policy defines the permissions necessary for the Datadog integration role t
 
 ## Setup
 
+<div class="alert alert-info">
+Changing the access type on an existing AWS account is a destructive operation. To switch methods (for example, from Access Keys to Role Delegation), delete the existing account entry and re-add it with the new access type. Per-account settings are not preserved when you re-add an account. This includes metric collection filters, log collection configuration, and tag customizations. Reconfigure these settings after re-adding the account.
+</div>
+
 ### AWS
 
 1. In your AWS console, create an IAM user to be used by the Datadog integration with the [necessary permissions](#aws-integration-iam-policy).
@@ -149,6 +161,14 @@ This policy defines the permissions necessary for the Datadog integration role t
 3. In the [AWS integration tile][1], click **Add AWS Account**, and then select **Manually**.
 4. Select the **Access Keys** tab.
 5. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][9] in the AWS documentation for more information.
+
+   <div class="alert alert-warning">
+   Access keys authentication is supported only for AWS accounts in the <code>aws-us-gov</code> (GovCloud) and <code>aws-cn</code> (China) partitions. For AWS accounts in the <code>aws</code> (commercial) partition, use Role Delegation instead.
+   </div>
+
+   <div class="alert alert-info">
+   If your AWS account is in the <code>aws-us-gov</code> (GovCloud) partition, verify with your compliance team before connecting it to your Datadog site. Confirm that forwarding data from that account meets your organization's authorization boundary and data handling requirements. Applicable frameworks may include FedRAMP, ITAR, IL4, or IL5.
+   </div>
 6. Click the **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account** checkbox.
 7. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`.
 8. Click **Save**.
