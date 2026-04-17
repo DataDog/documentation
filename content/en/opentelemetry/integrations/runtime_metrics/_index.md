@@ -75,6 +75,8 @@ processors:
 
 {{% tab "Go" %}}
 
+#### Manual instrumentation
+
 OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime metrics, see the documentation for the [runtime package][4].
 
 #### Collector configuration
@@ -109,8 +111,6 @@ processors:
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-danger">The minimum supported version of the .NET OpenTelemetry SDK is <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a></div>
-
 #### Automatic instrumentation
 
 If you use [OpenTelemetry automatic instrumentation][3] for .NET applications, runtime metrics are enabled by default.
@@ -138,6 +138,8 @@ processors:
       - dotnet.process.cpu.time
       - process.cpu.time
 ```
+
+**Note**: The minimum supported version of the .NET OpenTelemetry SDK is [1.5.0](https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0).
 
 [3]: https://opentelemetry.io/docs/instrumentation/net/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/net/manual/
@@ -197,7 +199,13 @@ Runtime metrics are not enabled by default for Python applications. Install the 
 pip install opentelemetry-instrumentation-system-metrics
 ```
 
-If you use [automatic instrumentation][3], `opentelemetry-instrument` discovers and enables the package after installation. If you use [manual instrumentation][4], enable it in your application:
+#### Automatic instrumentation
+
+If you use [OpenTelemetry automatic instrumentation][3] for Python applications, `opentelemetry-instrument` discovers and enables the package after installation.
+
+#### Manual instrumentation
+
+If you use [OpenTelemetry manual instrumentation][4], enable the package in your application:
 
 ```python
 from opentelemetry.instrumentation.system_metrics import SystemMetricsInstrumentor
@@ -224,9 +232,12 @@ After setup is complete, you can view runtime metrics in:
 
 ## Data collected
 
-The following tables list the OpenTelemetry runtime metrics used in Datadog's out-of-the-box in-app experiences.
+The following tables list the OpenTelemetry runtime metrics used in Datadog's out-of-the-box in-app experiences. Each row maps an OpenTelemetry metric to the equivalent Datadog metric name, along with a description and any attribute conditions Datadog uses to identify the correct data point:
 
-<div class="alert alert-danger"> OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.</div>
+- **Transform**: shown when both the OpenTelemetry metric and the Datadog metric require attribute filters to uniquely identify the data point.
+- **Filter**: shown when only the OpenTelemetry metric requires an attribute filter.
+
+For Collector processor configuration required to make these metrics compatible with Datadog, see the [Collector configuration](#2-configure-your-application) instructions above.
 
 {{< tabs >}}
 {{< tab "Java" >}}
@@ -247,6 +258,8 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 
 {{< tab "Go" >}}
 
+<h3>Go Runtime Metrics</h3>
+<p>These metrics are collected by the OpenTelemetry Go <a href="https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime">runtime instrumentation package</a>.</p>
 {{< mapping-table resource="go-contrib-runtime.csv">}}
 
 {{< /tab >}}
@@ -281,24 +294,31 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 
 {{% tab "Python" %}}
 
-The following table lists the conceptual equivalences between OpenTelemetry and Datadog Python runtime metrics. There are no direct metric-name mappings because the metric types differ between the two systems.
+<h3>Python Runtime Metrics</h3>
+<p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-system-metrics"><code>opentelemetry-instrumentation-system-metrics</code></a> package. The following table lists the conceptual equivalences between OpenTelemetry and Datadog Python runtime metrics. There are no direct metric-name mappings because the metric types differ between the two systems.</p>
 
-| Datadog metric | Description | OpenTelemetry metric |
-| --- | --- | --- |
-| `runtime.python.cpu.time.sys` | Number of seconds executing in the kernel. | `process.cpu.time` (`type: system`) |
-| `runtime.python.cpu.time.user` | Number of seconds executing outside the kernel. | `process.cpu.time` (`type: user`) |
-| `runtime.python.cpu.percent` | CPU utilization percentage. OTel divides the raw value by 100 times the number of CPU cores. | `process.cpu.utilization` |
-| `runtime.python.cpu.ctx_switch.voluntary` | Number of voluntary context switches. | `process.context_switches` (`type: voluntary`) |
-| `runtime.python.cpu.ctx_switch.involuntary` | Number of involuntary context switches. | `process.context_switches` (`type: involuntary`) |
-| `runtime.python.gc.count.gen0` | Number of generation 0 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 0`) |
-| `runtime.python.gc.count.gen1` | Number of generation 1 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 1`) |
-| `runtime.python.gc.count.gen2` | Number of generation 2 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 2`) |
-| `runtime.python.mem.rss` | Resident set memory. | `process.memory.usage` |
-| `runtime.python.thread_count` | Number of threads. | `process.thread.count` |
+| OTEL | Datadog | Description | Filter |
+| --- | --- | --- | --- |
+| `process.cpu.time` | `runtime.python.cpu.time.sys` | Number of seconds executing in the kernel. | `type`: `system` |
+| `process.cpu.time` | `runtime.python.cpu.time.user` | Number of seconds executing outside the kernel. | `type`: `user` |
+| `process.cpu.utilization` | `runtime.python.cpu.percent` | CPU utilization percentage. OTel divides the raw value by 100 times the number of CPU cores. | |
+| `process.context_switches` | `runtime.python.cpu.ctx_switch.voluntary` | Number of voluntary context switches. | `type`: `voluntary` |
+| `process.context_switches` | `runtime.python.cpu.ctx_switch.involuntary` | Number of involuntary context switches. | `type`: `involuntary` |
+| `process.runtime.{python_implementation}.gc_count` | `runtime.python.gc.count.gen0` | Number of generation 0 objects. | `count`: `0` |
+| `process.runtime.{python_implementation}.gc_count` | `runtime.python.gc.count.gen1` | Number of generation 1 objects. | `count`: `1` |
+| `process.runtime.{python_implementation}.gc_count` | `runtime.python.gc.count.gen2` | Number of generation 2 objects. | `count`: `2` |
+| `process.memory.usage` | `runtime.python.mem.rss` | Resident set memory. | |
+| `process.thread.count` | `runtime.python.thread_count` | Number of threads. | |
 
 {{% /tab %}}
 
 {{< /tabs >}}
+
+## Troubleshooting
+
+### Metric name mapping
+
+<div class="alert alert-danger"> OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.</div>
 
 ## Further reading
 
