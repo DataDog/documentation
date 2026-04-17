@@ -964,6 +964,13 @@
       "description": "Update incident notification template returns \"OK\" response"
     }
   ],
+  "CreatePersonalAccessToken": [
+    {
+      "group": "key_management",
+      "suffix": "",
+      "description": "Create a personal access token returns \"Created\" response"
+    }
+  ],
   "CreateAPIKey": [
     {
       "group": "key_management",
@@ -1002,6 +1009,13 @@
       "group": "key_management",
       "suffix": "",
       "description": "Edit an application key returns \"OK\" response"
+    }
+  ],
+  "UpdatePersonalAccessToken": [
+    {
+      "group": "key_management",
+      "suffix": "",
+      "description": "Update a personal access token returns \"OK\" response"
     }
   ],
   "AggregateLogs": [
@@ -1181,6 +1195,101 @@
       "group": "metrics",
       "suffix": "_3112571352",
       "description": "Scalar cross product query returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2533499017",
+      "description": "Scalar cross product query with apm_dependency_stats data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_779493885",
+      "description": "Scalar cross product query with apm_metrics data source and span_kind returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_1904811219",
+      "description": "Scalar cross product query with apm_metrics data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_1479548882",
+      "description": "Scalar cross product query with apm_resource_stats data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_3210877526",
+      "description": "Scalar cross product query with audit data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2398494003",
+      "description": "Scalar cross product query with ci_pipelines data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_397220765",
+      "description": "Scalar cross product query with ci_tests data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_891952130",
+      "description": "Scalar cross product query with container data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_3740015316",
+      "description": "Scalar cross product query with events data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2757564916",
+      "description": "Scalar cross product query with logs data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_4257291081",
+      "description": "Scalar cross product query with network data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_3470073355",
+      "description": "Scalar cross product query with on_call_events data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_4230617918",
+      "description": "Scalar cross product query with process data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_922754919",
+      "description": "Scalar cross product query with product_analytics data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_420944803",
+      "description": "Scalar cross product query with profiles data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2312509843",
+      "description": "Scalar cross product query with rum data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_394862343",
+      "description": "Scalar cross product query with security_signals data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2298288525",
+      "description": "Scalar cross product query with slo data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_3246660196",
+      "description": "Scalar cross product query with spans data source returns \"OK\" response"
     }
   ],
   "SubmitMetrics": [
@@ -1200,6 +1309,101 @@
       "group": "metrics",
       "suffix": "_301142940",
       "description": "Timeseries cross product query returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_847716941",
+      "description": "Timeseries cross product query with apm_dependency_stats data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_3535807425",
+      "description": "Timeseries cross product query with apm_metrics data source and span_kind returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_4246412951",
+      "description": "Timeseries cross product query with apm_metrics data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_4028506518",
+      "description": "Timeseries cross product query with apm_resource_stats data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_1080761370",
+      "description": "Timeseries cross product query with audit data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_475733751",
+      "description": "Timeseries cross product query with ci_pipelines data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2649955681",
+      "description": "Timeseries cross product query with ci_tests data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_3174309318",
+      "description": "Timeseries cross product query with container data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_1639521432",
+      "description": "Timeseries cross product query with events data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_597826488",
+      "description": "Timeseries cross product query with logs data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2186419469",
+      "description": "Timeseries cross product query with network data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_1606557647",
+      "description": "Timeseries cross product query with on_call_events data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2159746306",
+      "description": "Timeseries cross product query with process data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_3442090283",
+      "description": "Timeseries cross product query with product_analytics data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2673679719",
+      "description": "Timeseries cross product query with profiles data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_123149143",
+      "description": "Timeseries cross product query with rum data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2884575435",
+      "description": "Timeseries cross product query with security_signals data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_108927825",
+      "description": "Timeseries cross product query with slo data source returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_1116544040",
+      "description": "Timeseries cross product query with spans data source returns \"OK\" response"
     }
   ],
   "UpdateTagConfiguration": [
@@ -1734,6 +1938,13 @@
       "description": "Convert a rule from JSON to Terraform returns \"OK\" response"
     }
   ],
+  "ConvertSecurityMonitoringTerraformResource": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Convert security monitoring resource to Terraform returns \"OK\" response"
+    }
+  ],
   "CreateJiraIssues": [
     {
       "group": "security_monitoring",
@@ -1834,6 +2045,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a new vulnerability-based notification rule returns \"Successfully created the notification rule.\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2417112739",
+      "description": "Create a new vulnerability-based notification rule with sast and secret rule types returns \"Successfully created the notification rule.\" response"
     }
   ],
   "CreateSecurityFilter": [
@@ -1879,6 +2095,13 @@
       "description": "Detach security findings from their case returns \"No Content\" response"
     }
   ],
+  "BulkExportSecurityMonitoringTerraformResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Export security monitoring resources to Terraform returns \"OK\" response"
+    }
+  ],
   "SearchSecurityMonitoringSignals": [
     {
       "group": "security_monitoring",
@@ -1921,11 +2144,11 @@
       "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
-  "RunThreatHuntingJob": [
+  "RunHistoricalJob": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Run a threat hunting job returns \"Status created\" response"
+      "description": "Run a historical job returns \"Status created\" response"
     }
   ],
   "SearchSecurityFindings": [
@@ -2079,6 +2302,13 @@
       "description": "Create a service account returns \"OK\" response"
     }
   ],
+  "CreateServiceAccountAccessToken": [
+    {
+      "group": "service_accounts",
+      "suffix": "",
+      "description": "Create an access token for a service account returns \"Created\" response"
+    }
+  ],
   "CreateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
@@ -2096,6 +2326,13 @@
       "group": "service_accounts",
       "suffix": "",
       "description": "Edit an application key for this service account returns \"OK\" response"
+    }
+  ],
+  "UpdateServiceAccountAccessToken": [
+    {
+      "group": "service_accounts",
+      "suffix": "",
+      "description": "Update an access token for a service account returns \"OK\" response"
     }
   ],
   "CreateOrUpdateServiceDefinitions": [

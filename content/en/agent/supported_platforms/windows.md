@@ -174,8 +174,8 @@ There are two different methods to uninstall the Agent on Windows. Both methods 
 ### Add or remove programs
 
 1. Press **CTRL** and **Esc** or use the Windows key to run Windows Search.
-1. Search for `add` and click **Add or remove programs**.
-1. Search for `Datadog Agent` and click **Uninstall**.
+1. Search for `add` and click {{< ui >}}Add or remove programs{{< /ui >}}.
+1. Search for `Datadog Agent` and click {{< ui >}}Uninstall{{< /ui >}}.
 
 ### PowerShell
 
@@ -199,13 +199,13 @@ To verify the Agent is running, check if the `DatadogAgent` service in the Servi
 
 To receive more information about the Agent's state, start the Datadog Agent Manager:
 
-* Right click on the Datadog Agent system tray icon -> Configure, or
+* Right click on the Datadog Agent system tray icon > {{< ui >}}Configure{{< /ui >}}, or
 * Run `launch-gui` command from an **elevated(run as Admin)** command line
 	- PowerShell: `& "<PATH_TO_AGENT.EXE>" launch-gui`
 	- cmd: `"<PATH_TO_AGENT.EXE>" launch-gui`
 
-Then, open the status page by going to *Status* -> *General*.
-Get more information on running checks in *Status* -> *Collector* and *Checks* -> *Summary*.
+Then, open the status page by going to {{< ui >}}Status{{< /ui >}} > {{< ui >}}General{{< /ui >}}.
+Get more information on running checks in {{< ui >}}Status{{< /ui >}} > {{< ui >}}Collector{{< /ui >}} and {{< ui >}}Checks{{< /ui >}} > {{< ui >}}Summary{{< /ui >}}.
 
 The status command is available for PowerShell:
 
@@ -229,7 +229,7 @@ The Agent logs are located in `C:\ProgramData\Datadog\logs\agent.log`.
 
 ###  Monitoring a Windows service
 
-On your target host, launch the Datadog Agent Manager and select the "Windows Service" integration from the list. There is an out-of-the-box example; however, this example uses DHCP.
+On your target host, launch the Datadog Agent Manager and select the {{< ui >}}Windows Service{{< /ui >}} integration from the list. There is an out-of-the-box example; however, this example uses DHCP.
 
 To get the name of the service, open `services.msc` and locate your target service. Using DHCP as the target, you can see the service name at the top of the service properties window:
 
@@ -241,7 +241,7 @@ When adding your own services, be sure to follow the formatting exactly as shown
 
 Also, whenever you modify an integration, the Datadog service needs to be restarted. You can do this from services.msc or from the UI sidebar.
 
-For Services, Datadog doesn't track the metrics—only their availability. (For metrics, use the [Process](#monitoring-windows-processes) or [WMI][7] integration). To set up a Monitor, select the [Integration monitor type][8] then search for **Windows Service**. From *Integration Status -> Pick Monitor Scope*, choose the service you would like to monitor.
+For Services, Datadog doesn't track the metrics—only their availability. (For metrics, use the [Process](#monitoring-windows-processes) or [WMI][7] integration). To set up a Monitor, select the [Integration monitor type][8] then search for {{< ui >}}Windows Service{{< /ui >}}. From {{< ui >}}Integration Status{{< /ui >}} > {{< ui >}}Pick Monitor Scope{{< /ui >}}, choose the service you would like to monitor.
 
 ### Monitoring system load for Windows
 

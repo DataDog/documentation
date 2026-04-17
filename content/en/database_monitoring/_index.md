@@ -2,6 +2,9 @@
 title: Database Monitoring
 description: Learn about Database Monitoring and get started
 further_reading:
+- link: "https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency"
+  tag: "Blog"
+  text: "Analyzing round trip query latency"
 - link: "https://www.datadoghq.com/blog/database-monitoring-recommendations/"
   tag: "Blog"
   text: "Improve database host and query performance with Database Monitoring Recommendations"
@@ -26,6 +29,9 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to level up your Database Monitoring"
+- link: "https://learn.datadoghq.com/courses/database-monitoring"
+  tag: "Learning Center"
+  text: "Monitoring a Postgres Database with Datadog DBM"
 algolia:
   tags: ['database monitoring', 'dbm']
 cascade:

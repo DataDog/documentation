@@ -23,7 +23,7 @@ You can delete data from the Logs product using the UI.
 To grant an account access to delete data, perform the following steps:
 
 1. Under Organizational Settings, go to [Roles][3].
-2. Request or create a role that has the **Delete Data** permission for the product you wish to delete data from. For example, to delete data from Logs, request or create a role with the **Logs Delete Data** permission.
+2. Request or create a role that has the {{< ui >}}Delete Data{{< /ui >}} permission for the product you wish to delete data from. For example, to delete data from Logs, request or create a role with the {{< ui >}}Logs Delete Data{{< /ui >}} permission.
 
 ### Start deletions
 
@@ -37,9 +37,9 @@ To delete data, perform the following steps:
 2. Select a product to delete from. 
 3. Select a time frame to search across.
 4. Query for events within the time frame to delete.
-5. After the search shows the results you wish to delete, click the **Delete** button in the bottom right.
+5. After the search shows the results you wish to delete, click the {{< ui >}}Delete{{< /ui >}} button in the bottom right.
 6. Confirm the deletion by selecting the checkbox and entering the requested confirmation text. 
-7. Click **Confirm**.
+7. Click {{< ui >}}Confirm{{< /ui >}}.
 
 The deletion begins instantly after you confirm the request; target data is inaccessible.
 
@@ -54,7 +54,7 @@ From the [Deletion History][5] tab, you can see the status of deletions. You can
 
 **Note**: When a deletion request is created, it is in a recoverable status for 10 days. During this period, deleted data is inaccessible in Datadog but recovered if the deletion request is canceled.
 
-To cancel a deletion, click **Cancel** on an **Upcoming** or **Done (Recoverable)** job.
+To cancel a deletion, click {{< ui >}}Cancel{{< /ui >}} on an {{< ui >}}Upcoming{{< /ui >}} or {{< ui >}}Done (Recoverable){{< /ui >}} job.
 
 ### Audit deletions
 
