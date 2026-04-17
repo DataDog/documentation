@@ -214,7 +214,7 @@ final datadogConfig = DatadogConfiguration(
 For most Dio setups, use Datadog Tracking Http Client instead of the specialized Dio interceptor. Only use the Dio interceptor if you're using a non-standard Dio `HttpClientAdapter` that cannot be tracked by Datadog Tracking Http Client.
 {% /alert %}
 
-Datadog provides [`datadog_dio`][11] for use with the [Dio Flutter package][7]. The Dio interceptor automatically tracks requests from a given Dio client as RUM Resources and enables distributed tracing with APM.
+Datadog provides [`datadog_dio`][11] for use with the [Dio Flutter package][12]. The Dio interceptor automatically tracks requests from a given Dio client as RUM Resources and enables distributed tracing with APM.
 
 ### Setup
 
@@ -248,7 +248,7 @@ Calling `addDatadogInterceptor` adds the Datadog interceptor as the first interc
 
 ### Use with other Datadog network tracking
 
-To track all network requests, including those made by `dart:io` and widgets like `NetworkImage`, use `datadog_tracking_http_client` to capture these requests. However, depending on your setup, the global override method used in `enableHttpTracking` may cause resources to be double reported (once by the global override and once by the Dio interceptor)
+To track all network requests, including those made by `dart:io` and widgets like `NetworkImage`, use `datadog_tracking_http_client` to capture these requests. However, depending on your setup, the global override method used in `enableHttpTracking` may cause resources to be double reported (once by the global override and once by the Dio interceptor).
 
 To avoid this, use the `ignoreUrlPatterns` parameter when calling `enableHttpTracking` to ignore requests made by your Dio client.
 
@@ -263,3 +263,4 @@ To avoid this, use the `ignoreUrlPatterns` parameter when calling `enableHttpTra
 [9]: https://pub.dev/packages/flutter_inappwebview
 [10]: /real_user_monitoring/application_monitoring/web_view_tracking?tab=flutter
 [11]: https://pub.dev/packages/datadog_dio
+[12]: https://pub.dev/packages/dio

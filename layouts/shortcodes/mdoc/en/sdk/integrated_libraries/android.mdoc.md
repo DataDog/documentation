@@ -116,7 +116,7 @@ RUM error event for it.
 
 ## Apollo (GraphQL)
 
-If you use Kotlin Coroutines, see Datadog's [dedicated library with extensions for Apollo][11] and [andndroid advanced network configuration][12].
+If you use Apollo (GraphQL) in your application, see Datadog's [dedicated library with extensions for Apollo][11] and [Android advanced network configuration][12].
 
 ## Android TV (Leanback)
 
