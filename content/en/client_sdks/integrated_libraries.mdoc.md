@@ -1,5 +1,6 @@
 ---
 title: Integrated Libraries
+private: true
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
@@ -8,9 +9,14 @@ content_filters:
 
 ## Overview
 
-Select a platform below to see the libraries available for integration with the Datadog SDK.
+The Datadog SDK supports integration with third-party libraries to extend its functionality.
 
-<!-- Browser: no integrated libraries page -->
+<!-- Browser, Roku, Unity: no integrated libraries -->
+{% if includes($platform, ["browser", "roku", "unity"]) %}
+{% alert %}
+Integrated libraries are not available for the selected SDK.
+{% /alert %}
+{% /if %}
 
 <!-- Android -->
 {% if equals($platform, "android") %}
@@ -37,6 +43,3 @@ Select a platform below to see the libraries available for integration with the 
 {% partial file="sdk/integrated_libraries/kotlin_multiplatform.mdoc.md" /%}
 {% /if %}
 
-<!-- Roku: no integrated libraries page -->
-
-<!-- Unity: no integrated libraries page -->
