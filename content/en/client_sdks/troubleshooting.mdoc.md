@@ -6,10 +6,6 @@ content_filters:
     label: "SDK"
 ---
 
-## Overview
-
-Use the resources below to resolve common issues with the Datadog SDK for your platform. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
-
 <!-- Browser -->
 {% if equals($platform, "browser") %}
 {% partial file="sdk/troubleshooting/browser.mdoc.md" /%}

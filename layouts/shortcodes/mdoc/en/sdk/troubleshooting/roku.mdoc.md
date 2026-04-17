@@ -3,6 +3,8 @@ This partial contains troubleshooting content for the Roku SDK.
 It can be included in the Roku SDK troubleshooting page or in the unified client_sdks view.
 -->
 
+## Overview
+
 If you experience unexpected behavior with the Datadog Roku SDK, use this guide to resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
 ## SDK not sending data to Datadog

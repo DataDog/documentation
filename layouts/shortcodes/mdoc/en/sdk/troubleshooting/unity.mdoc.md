@@ -3,13 +3,15 @@ This partial contains troubleshooting content for the Unity SDK.
 It can be included in the Unity SDK troubleshooting page or in the unified client_sdks view.
 -->
 
+## Overview
+
 If you experience unexpected behavior with Datadog RUM, use this guide to resolve those issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
 ## Set sdkVerbosity for easier debugging
 
 If you're able to run your app, but you are not seeing the data you expect on the Datadog site, try adding the following to your code as part of initialization:
 
-```cs
+```csharp
 DatadogSdk.Instance.SetSdkVerbosity(CoreLoggerLevel.Debug);
 ```
 
@@ -17,7 +19,9 @@ This causes the SDK to output additional information about what it's doing and w
 
 ## The SDK is not sending data
 
-<div class="alert alert-info">Datadog does not support sending data from the Unity Editor, only from iOS and Android simulators, emulators, and devices.</div>
+{% alert level="info" %}
+Datadog does not support sending data from the Unity Editor, only from iOS and Android simulators, emulators, and devices.
+{% /alert %}
 
 If you're not seeing any data in Datadog:
 
@@ -25,7 +29,7 @@ If you're not seeing any data in Datadog:
 2. Check that you have set the `TrackingConsent` as part of your initialization. Tracking consent is set to `TrackingConsent.Pending` during initialization,
 and needs to be set to `TrackingConsent.Granted` before Datadog sends any information.
 
-   ```cs
+   ```csharp
    DatadogSdk.Instance.SetTrackingConsent(TrackingConsent.Granted);
    ```
 

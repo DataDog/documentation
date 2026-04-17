@@ -3,6 +3,8 @@ This partial contains troubleshooting content for the React Native SDK.
 It can be included in the React Native SDK troubleshooting page or in the unified client_sdks view.
 -->
 
+## Overview
+
 If you experience unexpected behavior with Datadog React Native RUM, use this guide to resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
 ## No data is being sent to Datadog

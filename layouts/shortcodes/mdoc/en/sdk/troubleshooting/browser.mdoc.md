@@ -3,6 +3,8 @@ This partial contains troubleshooting content for the Browser SDK.
 It can be included in the browser SDK troubleshooting page or in the unified client_sdks view.
 -->
 
+## Overview
+
 If you experience unexpected behavior with Datadog Browser RUM, use this guide to resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance. Regularly update to the latest version of the [RUM Browser SDK][2], as each release contains improvements and fixes.
 
 ## Missing data
