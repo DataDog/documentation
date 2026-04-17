@@ -476,7 +476,7 @@ Searches for Datadog users by email, name, or handle. Useful for finding the rig
 Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
 
 ### `get_datadog_dashboard`
-*Toolset: **core***\
+*Toolset: **core**, **dashboards***\
 *Permissions Required: `Dashboards Read` and `User Access Read`*\
 Retrieves a Datadog [dashboard][46] by ID, returning its title, description, tags, and widgets. Use `search_datadog_dashboards` first to find dashboard IDs.
 
@@ -485,7 +485,7 @@ Retrieves a Datadog [dashboard][46] by ID, returning its title, description, tag
 - Retrieve the template variables configured on this dashboard.
 
 ### `upsert_datadog_dashboard`
-*Toolset: **core***\
+*Toolset: **core**, **dashboards***\
 *Permissions Required: `Dashboards Read` and `Dashboards Write`*\
 Creates or updates a Datadog [dashboard][46]. To update an existing dashboard, provide the dashboard ID; omit it to create a new one. Call `get_widget_reference` for widget schemas before building widgets.
 
