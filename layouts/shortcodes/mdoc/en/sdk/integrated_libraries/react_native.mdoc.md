@@ -9,7 +9,7 @@ This page lists integrated libraries you can use for React Native applications.
 
 ### Setup
 
-**Note**: This package is an integration for [`react-navigation`][1] library. Make sure you first install and setup the core `mobile-react-native` SDK.
+**Note**: This package is an integration for [`react-navigation`][1] library. Make sure you first install and set up the core `mobile-react-native` SDK.
 
 To install with npm, run:
 
@@ -55,7 +55,7 @@ function App() {
 
 ## React Native Navigation
 
-**Note**: This package is an integration for `react-native-navigation` library. Make sure you first install and setup the core `mobile-react-native` SDK.
+**Note**: This package is an integration for `react-native-navigation` library. Make sure you first install and set up the core `mobile-react-native` SDK.
 
 ### Setup
 
