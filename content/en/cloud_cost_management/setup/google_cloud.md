@@ -89,7 +89,7 @@ Enter the following details for your configuration:
 
 ### Create cost export and enable Google Service APIs
 
-* Refer to the Enable Detailed Usage Cost Export and Enable Google Service APIs sections above to complete these steps manually, then return to CCM.
+* See the [Enable detailed usage cost export](#enable-detailed-usage-cost-export) and [Enable Google Service APIs](#enable-google-service-apis) sections above to complete these steps manually, then return to CCM.
 
 ### Copy generated Terraform HCL and apply changes
 
@@ -149,6 +149,11 @@ Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to th
    * `storage.objects.list`
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud roles `roles/storage.legacyObjectReader` and `roles/storage.legacyBucketWriter`.
+
+[6]: https://cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add
+[7]: https://cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role
+[8]: https://cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset
+[9]: https://cloud.google.com/bigquery/docs/exporting-data#data-locations
 
 {{% /tab %}}
 
@@ -241,10 +246,6 @@ The following out-of-the-box tags are available:
 [3]: https://app.datadoghq.com/cost/setup
 [4]: https://app.datadoghq.com/integrations/google-cloud-platform
 [5]: https://cloud.google.com/bigquery/docs/enable-transfer-service
-[6]: https://cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add
-[7]: https://cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role
-[8]: https://cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset
-[9]: https://cloud.google.com/bigquery/docs/exporting-data#data-locations
 [10]: https://cloud.google.com/bigquery/docs/enable-transfer-service#cross-project_service_account_authorization
 [11]: https://cloud.google.com/iam/docs/create-service-agents#create
 [12]: /integrations/google_cloud_platform/
