@@ -1494,6 +1494,11 @@ menu:
       identifier: bits_ai_mcp_server_tools
       parent: bits_ai_mcp_server
       weight: 502
+    - name: Agent Builder
+      url: actions/agents/
+      identifier: bits_ai_agent_builder
+      parent: bits_ai
+      weight: 6
     - name: Dashboards
       url: dashboards/
       pre: dashboard
