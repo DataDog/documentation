@@ -118,9 +118,9 @@ At each rollout stage, Datadog samples a percentage of eligible users to include
 Select recipients from the **Recipients** dropdown to receive alerts about experiment lifecycle events, such as when results reach statistical significance or an issue is detected.
 
 ##### Choose a statistical analysis plan
-Select the **Confidence interval method** for your statistical analysis. Datadog uses the **Sequential** method by default. If your organization has configured default settings, a **COMPANY DEFAULT** badge appears. This provides statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
+If your organization has configured default settings, a **COMPANY DEFAULT** badge appears and the settings are pre-populated.
 
-To use a different statistical method:
+To modify the statistical analysis plan:
 1. Expand the **Statistical analysis plan** section.
 1. Select the method from the **Confidence interval method** dropdown. The default is **Sequential**.
 1. Select a percentage from the **Confidence level** dropdown.
