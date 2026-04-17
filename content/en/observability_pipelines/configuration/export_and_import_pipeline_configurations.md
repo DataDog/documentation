@@ -1,5 +1,5 @@
 ---
-title: Export and Import a Pipeline Configuration in JSON or Terraform
+title: Export and Import a Pipeline Configuration
 disable_toc: false
 further_reading:
 - link: "observability_pipelines/configuration/set_up_pipelines/"
@@ -69,18 +69,18 @@ When editing a deployed pipeline, you can add new components such as [Packs][6] 
    - [API documentation][5]
    - [Terraform documentation][4]
 
-### Import a pipeline's JSON configuration to the UI
+## Import a pipeline's JSON configuration to the UI
 
-To help build your pipelines and easily transfer pipeline configurations across Datadog orgs, you can also import a pipeline's JSON to the UI.
+To help build your pipelines and transfer pipeline configurations across Datadog orgs, you can also import a pipeline's JSON to the UI.
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a draft pipeline to view the configuration.
 1. Click on the settings and select **Import Pipeline**
    {{< img src="observability_pipelines/export_pipeline/import_access.png" alt="The settings menu showing Import Pipeline" style="width:100%;" >}}
-1. Choose a pipeline configuration as a JSON file from your local storage.
+1. Choose a pipeline configuration as a JSON file from your computer.
    {{< img src="observability_pipelines/export_pipeline/import_select.png" alt="The import modal giving the option to select a JSON file" style="width:100%;" >}}
-1. Click Import. This will replace your current pipeline configuration with the imported JSON's pipeline configuration. 
-1. [Install the Observability Pipelines Worker and deploy your pipeline using the UI][8]
+1. Click Import. This replaces your current pipeline configuration with the imported JSON's pipeline configuration. 
+1. [Install the Observability Pipelines Worker and deploy your pipeline using the UI][8].
 
 ## Further reading
 
