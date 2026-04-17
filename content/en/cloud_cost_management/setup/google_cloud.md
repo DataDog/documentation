@@ -67,6 +67,39 @@ The following permissions allow Datadog to access and transfer the billing expor
 
   **Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.
 
+{{< tabs >}}
+
+{{% tab "Terraform" %}}
+
+{{< img src="cloud_cost/setup/gcp_terraform_setup.png" alt="Cloud Cost Management setup form in Terraform mode" style="width:100%" >}}
+
+### Define configuration details
+
+Enter the following details for your configuration:
+
+* **GCP Storage Bucket**: Select **Yes** to create a storage bucket, or select **No** to use an existing bucket.
+
+**Note**: If using an existing bucket, verify that the bucket is co-located with the BigQuery export dataset.
+
+* **Bucket name**: The name of your new or existing GCP storage bucket.
+* **Region**: The GCP region of your bucket. For example, `northamerica-northeast1`.
+* **Billing account ID**: The ID of the billing account that your usage cost export will report on.
+* **Export project name and ID**: The name and ID of your export project.
+* **Export dataset name and ID**: The name and ID of your export dataset.
+
+### Create cost export and enable Google Service APIs
+
+* Refer to the Enable Detailed Usage Cost Export and Enable Google Service APIs sections above to complete these steps manually, then return to CCM.
+
+### Copy generated Terraform HCL and apply changes
+
+In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform Configuration** step. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+{{< img src="cloud_cost/setup/gcp_manual_setup.png" alt="Cloud Cost Management setup form in manual mode" style="width:100%" >}}
 
 #### Configure export project access
 [Add the service account as a principal on the export dataset project resource][7]:
@@ -116,6 +149,10 @@ Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to th
    * `storage.objects.list`
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud roles `roles/storage.legacyObjectReader` and `roles/storage.legacyBucketWriter`.
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### (Optional) Configure cross-project service authorization:
 If your integrated Service Account exists in a different Google Cloud Platform project than your billing export dataset, you need to [grant cross-project service account authorization][10]:
