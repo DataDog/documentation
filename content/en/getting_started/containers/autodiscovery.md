@@ -69,7 +69,7 @@ annotations:
   ad.datadoghq.com/redis.logs: '[{"source":"redis"}]'
 ```
 
-In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, and even `version` as tags for all logs and metrics emitted for the pod's redis container. These standard labels are part of [Unified Service Tagging][1]. As a best practice, Datadog recommends using unified service tagging when configuring tags and environment variables.
+In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, and even `version` as tags for all logs and metrics emitted for the pod's `redis` container. These standard labels are part of [Unified Service Tagging][1]. As a best practice, Datadog recommends using unified service tagging when configuring tags and environment variables.
 
 The check configuration annotation key follows the format `ad.datadoghq.com/<container-name>.checks`.
 
@@ -98,7 +98,7 @@ annotations:
   ad.datadoghq.com/redis.logs: '[{"source":"redis"}]'
 ```
 
-In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, and even `version` as tags for all logs and metrics emitted for the pod's redis container. These standard labels are part of [Unified Service Tagging][1]. As a best practice, Datadog recommends using unified service tagging when configuring tags and environment variables.
+In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, and even `version` as tags for all logs and metrics emitted for the pod's `redis` container. These standard labels are part of [Unified Service Tagging][1]. As a best practice, Datadog recommends using unified service tagging when configuring tags and environment variables.
 
 The check configuration annotation key follows the format `ad.datadoghq.com/<container-name>.checks`.
 
