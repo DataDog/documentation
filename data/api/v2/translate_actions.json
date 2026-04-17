@@ -11,6 +11,18 @@
     "description": "Retrieve detailed information about a specific Datadog Agent.\nThis endpoint returns comprehensive information about an agent including:\n- Agent details and metadata\n- Configured integrations organized by status (working, warning, error, missing)\n- Detected integrations\n- Configuration files and layers",
     "summary": "Get detailed information about an agent"
   },
+  "ListFleetAgentTracers": {
+    "description": "Retrieve a paginated list of tracers for a specific agent.\n\nThis endpoint returns tracers associated with a given agent key, identified by the\nagent's hostname. Use this to discover telemetry-derived service names for a particular host.",
+    "summary": "List tracers for a specific agent"
+  },
+  "ListFleetClusters": {
+    "description": "Retrieve a paginated list of Kubernetes clusters in the fleet.\n\nThis endpoint returns clusters with metadata including node counts, agent versions,\nenabled products, and associated services. Use the `page_number` and `page_size`\nquery parameters to paginate through results.",
+    "summary": "List all fleet clusters"
+  },
+  "ListFleetInstrumentedPods": {
+    "description": "Retrieve the list of pods targeted for Single Step Instrumentation (SSI) injection\nin a specific Kubernetes cluster.\n\nThis endpoint returns pod groups organized by owner reference (deployment, statefulset, etc.)\nwith their injection annotations and applied targets. Use the clusters list endpoint\nto discover available cluster names.",
+    "summary": "List instrumented pods for a cluster"
+  },
   "ListFleetDeployments": {
     "description": "Retrieve a list of all deployments for fleet automation.\nUse the `page_size` and `page_offset` parameters to paginate results.",
     "summary": "List all deployments"
@@ -62,6 +74,10 @@
   "TriggerFleetSchedule": {
     "description": "Manually trigger a schedule to immediately create and start a deployment.\n\nThis endpoint allows you to manually initiate a deployment using the schedule's\nconfiguration, without waiting for the next scheduled maintenance window. This is\nuseful for:\n- Testing a schedule before it runs automatically\n- Performing an emergency update outside the regular maintenance window\n- Creating an ad-hoc deployment with the same settings as a schedule\n\nThe deployment is created immediately with:\n- The same filter query as the schedule\n- The package version determined by the schedule's version strategy\n- All matching hosts as targets\n\nThe manually triggered deployment is independent of the schedule and does not\naffect the schedule's normal recurrence pattern.",
     "summary": "Trigger a schedule deployment"
+  },
+  "ListFleetTracers": {
+    "description": "Retrieve a paginated list of all fleet tracers.\n\nThis endpoint returns telemetry-derived service names from the SDK telemetry pipeline.\nThese names may differ from span-derived names in APM and are useful for querying\nservice library configurations.\nUse the `page_number` and `page_size` query parameters to paginate through results.",
+    "summary": "List all fleet tracers"
   },
   "ListDatastores": {
     "description": "Lists all datastores for the organization.",
@@ -3683,6 +3699,14 @@
     "description": "Get a list of security scanned assets metadata for an organization.\n\n### Pagination\n\nFor the \"List Vulnerabilities\" endpoint, see the [Pagination section](#pagination).\n\n### Filtering\n\nFor the \"List Vulnerabilities\" endpoint, see the [Filtering section](#filtering).\n\n### Metadata\n\n For the \"List Vulnerabilities\" endpoint, see the [Metadata section](#metadata).\n\n### Related endpoints\n\nThis endpoint returns additional metadata for cloud resources that is not available from the standard resource endpoints. To access a richer dataset, call this endpoint together with the relevant resource endpoint(s) and merge (join) their results using the resource identifier.\n\n**Hosts**\n\nTo enrich host data, join the response from the [Hosts](https://docs.datadoghq.com/api/latest/hosts/) endpoint with the response from the scanned-assets-metadata endpoint on the following key fields:\n\n| ENDPOINT | JOIN KEY | TYPE |\n| --- | --- | --- |\n| [/api/v1/hosts](https://docs.datadoghq.com/api/latest/hosts/) | host_list.host_name | string |\n| /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |\n\n**Host Images**\n\nTo enrich host image data, join the response from the [Hosts](https://docs.datadoghq.com/api/latest/hosts/) endpoint with the response from the scanned-assets-metadata endpoint on the following key fields:\n\n| ENDPOINT | JOIN KEY | TYPE |\n| --- | --- | --- |\n| [/api/v1/hosts](https://docs.datadoghq.com/api/latest/hosts/) | host_list.tags_by_source[\"Amazon Web Services\"][\"image\"] | string |\n| /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |\n\n**Container Images**\n\nTo enrich container image data, join the response from the [Container Images](https://docs.datadoghq.com/api/latest/container-images/) endpoint with the response from the scanned-assets-metadata endpoint on the following key fields:\n\n| ENDPOINT | JOIN KEY | TYPE |\n| --- | --- | --- |\n| [/api/v2/container_images](https://docs.datadoghq.com/api/latest/container-images/) | `data.attributes.name`@`data.attributes.repo_digest` | string |\n| /api/v2/security/scanned-assets-metadata | data.attributes.asset.name | string |",
     "summary": "List scanned assets metadata"
   },
+  "ListIndicatorsOfCompromise": {
+    "description": "Get a list of indicators of compromise (IoCs) matching the specified filters.",
+    "summary": "List indicators of compromise"
+  },
+  "GetIndicatorOfCompromise": {
+    "description": "Get detailed information about a specific indicator of compromise (IoC).",
+    "summary": "Get an indicator of compromise"
+  },
   "GetSignalNotificationRules": {
     "description": "Returns the list of notification rules for security signals.",
     "summary": "Get the list of signal-based notification rules"
@@ -3985,6 +4009,22 @@
     "description": "Get the list of suggested actions for a given security signal.",
     "summary": "Get suggested actions for a signal"
   },
+  "BulkExportSecurityMonitoringTerraformResources": {
+    "description": "Export multiple security monitoring resources to Terraform, packaged as a zip archive.\nThe `resource_type` path parameter specifies the type of resources to export\nand must be one of `suppressions` or `critical_assets`.\nA maximum of 1000 resources can be exported in a single request.",
+    "summary": "Export security monitoring resources to Terraform",
+    "request_description": "The resource IDs to export.",
+    "request_schema_description": "Request body for bulk exporting security monitoring resources to Terraform."
+  },
+  "ConvertSecurityMonitoringTerraformResource": {
+    "description": "Convert a security monitoring resource that doesn't (yet) exist from JSON to Terraform.\nThe `resource_type` path parameter specifies the type of resource to convert\nand must be one of `suppressions` or `critical_assets`.",
+    "summary": "Convert security monitoring resource to Terraform",
+    "request_description": "The resource JSON to convert.",
+    "request_schema_description": "Request body for converting a security monitoring resource JSON to Terraform."
+  },
+  "ExportSecurityMonitoringTerraformResource": {
+    "description": "Export a security monitoring resource to a Terraform configuration.\nThe `resource_type` path parameter specifies the type of resource to export\nand must be one of `suppressions` or `critical_assets`.",
+    "summary": "Export security monitoring resource to Terraform"
+  },
   "ListScanningGroups": {
     "description": "List all the Scanning groups in your organization.",
     "summary": "List Scanning Groups"
@@ -4151,33 +4191,33 @@
     "description": "Get a hist signal's details.",
     "summary": "Get a hist signal's details"
   },
-  "ListThreatHuntingJobs": {
-    "description": "List threat hunting jobs.",
-    "summary": "List threat hunting jobs"
+  "ListHistoricalJobs": {
+    "description": "List historical jobs.",
+    "summary": "List historical jobs"
   },
-  "RunThreatHuntingJob": {
-    "description": "Run a threat hunting job.",
-    "summary": "Run a threat hunting job",
+  "RunHistoricalJob": {
+    "description": "Run a historical job.",
+    "summary": "Run a historical job",
     "request_description": "",
-    "request_schema_description": "Run a threat hunting job request."
+    "request_schema_description": "Run a historical job request."
   },
   "ConvertJobResultToSignal": {
     "description": "Convert a job result to a signal.",
     "summary": "Convert a job result to a signal",
     "request_description": "",
-    "request_schema_description": "Request for converting threat hunting job results to signals."
+    "request_schema_description": "Request for converting historical job results to signals."
   },
-  "DeleteThreatHuntingJob": {
+  "DeleteHistoricalJob": {
     "description": "Delete an existing job.",
     "summary": "Delete an existing job"
   },
-  "GetThreatHuntingJob": {
+  "GetHistoricalJob": {
     "description": "Get a job's details.",
     "summary": "Get a job's details"
   },
-  "CancelThreatHuntingJob": {
-    "description": "Cancel a threat hunting job.",
-    "summary": "Cancel a threat hunting job"
+  "CancelHistoricalJob": {
+    "description": "Cancel a historical job.",
+    "summary": "Cancel a historical job"
   },
   "GetSecurityMonitoringHistsignalsByJobId": {
     "description": "Get a job's hist signals.",

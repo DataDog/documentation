@@ -46,6 +46,8 @@ Learn more about the [Session Replay for Mobile][6].
 
 ## AI-powered summaries and smart chapters
 
+{{< site-region region="gov" >}}<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
+
 Summaries and smart chapters give you context about what happened in a session before you watch it.
 
 **Summaries** describe the user's intent, key actions, friction signals, and outcome. Specific moments in the summary are hyperlinked so you can jump directly to that point in the replay. In the session list, hover over a replay to preview the summary, or open the replay directly. If a session has been summarized before, the summary appears instantly when you open the replay.
