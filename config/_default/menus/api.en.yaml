@@ -2684,6 +2684,45 @@ menu:
         unstable:
           - v2
         order: 69
+    - name: Export security monitoring resource to Terraform
+      url: '#export-security-monitoring-resource-to-terraform'
+      identifier: security-monitoring-export-security-monitoring-resource-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExportSecurityMonitoringTerraformResource
+        unstable:
+          - v2
+        order: 91
+    - name: Convert security monitoring resource to Terraform
+      url: '#convert-security-monitoring-resource-to-terraform'
+      identifier: security-monitoring-convert-security-monitoring-resource-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConvertSecurityMonitoringTerraformResource
+        unstable:
+          - v2
+        order: 93
+    - name: Export security monitoring resources to Terraform
+      url: '#export-security-monitoring-resources-to-terraform'
+      identifier: security-monitoring-export-security-monitoring-resources-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkExportSecurityMonitoringTerraformResources
+        unstable:
+          - v2
+        order: 92
     - name: Get suggested actions for a signal
       url: '#get-suggested-actions-for-a-signal'
       identifier: security-monitoring-get-suggested-actions-for-a-signal
