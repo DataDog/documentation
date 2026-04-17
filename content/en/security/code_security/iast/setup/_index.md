@@ -341,7 +341,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 {{% collapse-content title="Python" level="h4" %}}
 
-You can detect code-level vulnerabilities and monitor application security in Python applicationss running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
+You can detect code-level vulnerabilities and monitor application security in Python applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 

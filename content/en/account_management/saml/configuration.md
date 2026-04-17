@@ -44,19 +44,19 @@ This page covers how to enable single sign-on (SSO) with SAML in Datadog, as wel
 
 2. Download Datadog's [Service Provider metadata][17] to configure your IdP to recognize Datadog as a Service Provider.
 
-3. In Datadog, hover over your username in the bottom left corner and select **Organization Settings**. Select [**Login Methods**][16] and click **Configure** under SAML.
+3. In Datadog, hover over your username in the bottom left corner and select {{< ui >}}Organization Settings{{< /ui >}}. Select [**Login Methods**][16] and click {{< ui >}}Configure{{< /ui >}} under SAML.
 
-4. Click **Add SAML**.
+4. Click {{< ui >}}Add SAML{{< /ui >}}.
 
 5. In the configuration modal:
     * Create a user-friendly name for this SAML provider. The name appears to end users when they choose a login method.
-    * Upload the IdP metadata from your SAML identity provider by clicking **browse files** or dragging and dropping the XML metadata file onto the modal.
+    * Upload the IdP metadata from your SAML identity provider by clicking {{< ui >}}browse files{{< /ui >}} or dragging and dropping the XML metadata file onto the modal.
       <br>
       <div class="alert alert-info">The IdP metadata must contain ASCII characters only.</a></div>
 
     {{< img src="account_management/saml/saml_configure.png" alt="Configure SAML by uploading your IdP metadata" style="width:100%;" >}}
 
-6. Click **Save**.
+6. Click {{< ui >}}Save{{< /ui >}}.
 
 **Note**: To configure SAML for a multi-org, see [Managing Multiple-Organization Accounts][18].
 
@@ -66,14 +66,14 @@ Enterprise customers can have multiple SAML configurations per organization (up 
 
 To configure additional SAML providers:
 
-1. Navigate to **Organization Settings > Login Methods**. Under **SAML**, click **Update**, then **Add SAML**.
+1. Navigate to {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Login Methods{{< /ui >}}. Under {{< ui >}}SAML{{< /ui >}}, click {{< ui >}}Update{{< /ui >}}, then {{< ui >}}Add SAML{{< /ui >}}.
 2. In the configuration modal:
 
     - Create a user-friendly name for this SAML provider. The name appears to end users when they choose a login method.
       <br>
       <div class="alert alert-info">All users can see and access all configured IdPs; there is no way to assign specific user groups to specific configurations. Setting clear and descriptive names for each provider helps users select the appropriate IdP during login. Also note that there is no way to set a default configuration.</a></div>
-    - Upload the IdP metadata from your SAML identity provider by clicking **browse files** or dragging and dropping the XML metadata file onto the modal.
-4. Click **Save**.
+    - Upload the IdP metadata from your SAML identity provider by clicking {{< ui >}}browse files{{< /ui >}} or dragging and dropping the XML metadata file onto the modal.
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Role mapping with multiple SAML providers
 

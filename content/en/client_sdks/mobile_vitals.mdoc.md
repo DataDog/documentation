@@ -1,5 +1,6 @@
 ---
 title: Mobile Vitals
+private: true
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_mobile_platform_options
