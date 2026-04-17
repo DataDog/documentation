@@ -3,6 +3,7 @@ phrase:
   priority_files:
     - "content/en/llm_observability/instrumentation/sdk.md"
     - "content/en/gpu_monitoring/fleet.md"
+    - "content/en/logs/log_configuration/parsing.md"
   sources:
     - src: "content/en/agent/configuration/secrets-management.md"
       dst: "content/{lang}/agent/configuration/secrets-management.md"
@@ -64,6 +65,10 @@ phrase:
       dst: "content/{lang}/logs/log_collection/_index.md"
     - src: "content/en/agent/configuration/network.md"
       dst: "content/{lang}/agent/configuration/network.md"
+    - src: "content/en/client_sdks/setup.mdoc.md"
+      dst: "content/{lang}/client_sdks/setup.mdoc.md"
+    - src: "content/en/tracing/trace_collection/custom_instrumentation/server-side/_index.mdoc.md"
+      dst: "content/{lang}/tracing/trace_collection/custom_instrumentation/server-side/_index.mdoc.md"
 
 # Legacy Transifex ignores (kept for reference)
 #   - "content/en/observability_pipelines/legacy/*.md"
