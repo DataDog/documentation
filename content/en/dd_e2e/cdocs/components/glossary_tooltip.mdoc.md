@@ -1,9 +1,7 @@
 ---
-title: Glossary tooltip Test Page
+title: Glossary tooltip
 draft: true
 ---
-
-Note: I made this page before we introduced Playwright. I'll set that up soon.
 
 ## Case tests
 
