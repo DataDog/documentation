@@ -9041,6 +9041,18 @@ menu:
           - UnarchiveFeatureFlag
         unstable: []
         order: 14
+    - name: Create a flag suggestion
+      url: '#create-a-flag-suggestion'
+      identifier: feature-flags-create-a-flag-suggestion
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFlagSuggestion
+        unstable: []
+        order: 24
     - name: Enable a feature flag in an environment
       url: '#enable-a-feature-flag-in-an-environment'
       identifier: feature-flags-enable-a-feature-flag-in-an-environment
@@ -9125,6 +9137,54 @@ menu:
           - GetFeatureFlag
         unstable: []
         order: 17
+    - name: Reject a flag suggestion
+      url: '#reject-a-flag-suggestion'
+      identifier: feature-flags-reject-a-flag-suggestion
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RejectFlagSuggestion
+        unstable: []
+        order: 20
+    - name: Approve a flag suggestion
+      url: '#approve-a-flag-suggestion'
+      identifier: feature-flags-approve-a-flag-suggestion
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ApproveFlagSuggestion
+        unstable: []
+        order: 21
+    - name: Get a flag suggestion
+      url: '#get-a-flag-suggestion'
+      identifier: feature-flags-get-a-flag-suggestion
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFlagSuggestion
+        unstable: []
+        order: 23
+    - name: Delete a flag suggestion
+      url: '#delete-a-flag-suggestion'
+      identifier: feature-flags-delete-a-flag-suggestion
+      parent: feature-flags
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteFlagSuggestion
+        unstable: []
+        order: 22
     - name: Stop a progressive rollout
       url: '#stop-a-progressive-rollout'
       identifier: feature-flags-stop-a-progressive-rollout
