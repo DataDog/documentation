@@ -123,9 +123,11 @@ If your organization has configured default settings, a **COMPANY DEFAULT** badg
 To modify the statistical analysis plan:
 1. Expand the **Statistical analysis plan** section.
 1. Select the method from the **Confidence interval method** dropdown. The default is **Sequential**.
+   - If you select **Bayesian**, choose a **Standard Deviation of Prior** from the dropdown. The default is **Medium (5.00%)**.
 1. Select a percentage from the **Confidence level** dropdown.
 1. Toggle on **CUPED calculation** to reduce variance and improve experiment sensitivity.
 1. Toggle on **Multiple testing correction** to adjust for multiple comparisons across metrics.
+1. (Optional) Click **Reset to Default** to restore the Datadog default, or your company default if configured.
 
 ##### Add split-by exploration dimensions
 Segment experiment results by context attributes.
