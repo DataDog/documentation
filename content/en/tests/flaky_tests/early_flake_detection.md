@@ -103,8 +103,8 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{< /tabs >}}
 
-<div class="alert alert-warning">
-The known tests endpoint enforces a hard limit of 100,000 tests for non-paginated requests. If a test service exceeds this limit, the endpoint returns an HTTP 413 error. Latest tracer versions use pagination automatically and are unaffected. If you are using an older tracer version without pagination support, update to the latest version.
+<div class="alert alert-danger">
+The known tests endpoint returns a maximum of 100,000 tests per non-paginated request. If your test service has more than 100,000 known tests and the Datadog library does not paginate, the request fails and the library cannot retrieve the list of known tests for that session. Recent tracer versions paginate automatically; update to a version that supports pagination if you are affected.
 </div>
 
 ## Explore results in the Test Optimization Explorer
@@ -125,7 +125,7 @@ This could be caused by a couple of reasons:
 * This test has ran previously.
 * This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
 
-Additionally, the known tests endpoint enforces a hard limit of 100,000 tests for non-paginated requests. If your test service exceeds this limit and you are using an older tracer version without pagination support, no tests will be identified as new. Update to the latest tracer version to enable pagination.
+Additionally, the known tests endpoint returns a maximum of 100,000 tests per non-paginated request. If your test service has more than 100,000 known tests and the Datadog library does not paginate, the library cannot retrieve the list of known tests and Early Flake Detection cannot identify new tests for that session. Update to a tracer version that supports pagination.
 
 ### A test was retried that is not new
 
