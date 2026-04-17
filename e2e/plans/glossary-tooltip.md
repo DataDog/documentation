@@ -74,7 +74,6 @@ Tests (keep small and focused — one behavior per test):
      - sentence case: `Simple network management protocol (snmp)`
 5. **Hover shows the tooltip popup** — hover over the default-case `.tooltip-trigger`. `tooltip.js` moves the popup to `<body>` on hover (to escape ancestor `overflow: hidden`), so assert against `body > .tooltip-content.show` — a paragraph-scoped locator stops working after hover. Verify it contains the `short_definition` text from `new.md`.
 6. **Tooltip contains a working glossary link** — assert `a.tooltip-full-link` has an href ending in `/glossary/#new` (Hugo rewrites to absolute URLs at serve time, so use a regex tail-match rather than exact string) and text `Glossary`. Hover, click the link, and assert `page.url()` ends with `/glossary/#new`.
-7. **"Fallback" line (anomaly)** — assert the paragraph under "Falls back to plain text when no short definition is found" contains plain text `anomaly` with no `.tooltip-container`. Same code path as #4; included because it's in the source mdoc.
 
 Locators: use paragraph-scoped queries (e.g., `page.locator('p', { hasText: 'Default case:' })`) to keep tests resilient to ordering changes. Do NOT use `nth()`.
 

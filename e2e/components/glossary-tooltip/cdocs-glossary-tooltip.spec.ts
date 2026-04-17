@@ -73,9 +73,4 @@ test.describe('Cdocs glossary-tooltip component', () => {
         await expect(page).toHaveURL(/\/glossary\/#new$/);
     });
 
-    test('anomaly fallback renders title as plain text, no tooltip wrapper', async ({ page }) => {
-        const para = paragraph(page, 'No glossary-tooltip rendered:');
-        await expect(para).toContainText('anomaly');
-        await expect(para.locator('.tooltip-container')).toHaveCount(0);
-    });
 });

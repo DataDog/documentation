@@ -18,7 +18,3 @@ Sentence case (no short definition): {% glossary-tooltip term="snmp" case="sente
 Lower case: {% glossary-tooltip term="new" case="lower" /%}
 
 Upper case: {% glossary-tooltip term="new" case="upper" /%}
-
-## Falls back to plain text when no short definition is found
-
-No glossary-tooltip rendered: {% glossary-tooltip term="anomaly" /%}
