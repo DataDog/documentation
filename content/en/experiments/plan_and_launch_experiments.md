@@ -127,6 +127,7 @@ To modify the statistical analysis plan:
 1. Select a percentage from the **Confidence level** dropdown.
 1. Toggle on **CUPED calculation** to reduce variance and improve experiment sensitivity.
 1. Toggle on **Multiple testing correction** to adjust for multiple comparisons across metrics.
+   - **Multiple testing correction** is not available when using the **Bayesian** method.
 1. (Optional) Click **Reset to Default** to restore the Datadog default, or your company default if configured.
 
 ##### Add split-by exploration dimensions
