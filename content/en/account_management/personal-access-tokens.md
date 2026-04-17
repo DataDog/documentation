@@ -139,11 +139,14 @@ Manage PATs programmatically through the Datadog API:
 
 | Operation | Endpoint |
 |-----------|----------|
-| List PATs | `GET /api/v2/personal_access_tokens` |
+| List PATs and SATs | `GET /api/v2/personal_access_tokens` |
 | Create a PAT | `POST /api/v2/personal_access_tokens` |
 | Get a specific PAT | `GET /api/v2/personal_access_tokens/<PAT_ID>` |
 | Update a PAT | `PATCH /api/v2/personal_access_tokens/<PAT_ID>` |
 | Revoke a PAT | `DELETE /api/v2/personal_access_tokens/<PAT_ID>` |
+
+The `GET /api/v2/personal_access_tokens` endpoint returns both PATs and SATs in a single call.
+To manage SATs, see [Service Access Tokens][7].
 
 For the full API reference, see [Key Management][6].
 

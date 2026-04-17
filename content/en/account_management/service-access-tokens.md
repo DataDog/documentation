@@ -137,6 +137,13 @@ Manage SATs programmatically through the Datadog API:
 | Update a SAT | `PATCH /api/v2/service_accounts/<SERVICE_ACCOUNT_ID>/access_tokens/<TOKEN_ID>` |
 | Revoke a SAT | `DELETE /api/v2/service_accounts/<SERVICE_ACCOUNT_ID>/access_tokens/<TOKEN_ID>` |
 
+To retrieve all PATs and SATs across users and service accounts in a single call, use the unified
+endpoint:
+
+```
+GET /api/v2/personal_access_tokens
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
