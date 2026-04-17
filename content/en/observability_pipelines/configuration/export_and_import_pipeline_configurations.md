@@ -1,5 +1,7 @@
 ---
 title: Export and Import a Pipeline Configuration
+aliases:
+  - /observability_pipelines/configuration/export_pipeline_configuration/
 disable_toc: false
 further_reading:
 - link: "observability_pipelines/configuration/set_up_pipelines/"
