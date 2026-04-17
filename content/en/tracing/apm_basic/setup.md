@@ -3,6 +3,7 @@ title: APM Basic Setup
 description: "Configure APM Basic to collect RED metrics from network traffic for uninstrumented services."
 aliases:
 - /universal_service_monitoring/setup/
+- /universal_service_monitoring/additional_protocols/
 ---
 
 
