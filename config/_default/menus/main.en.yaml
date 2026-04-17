@@ -862,11 +862,16 @@ menu:
       identifier: otel_runtime_metrics
       parent: otel_integrations
       weight: 814
+    - name: SQL Server Metrics
+      url: opentelemetry/integrations/sqlserver_metrics/
+      identifier: otel_sqlserver_metrics
+      parent: otel_integrations
+      weight: 815
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 815
+      weight: 816
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
