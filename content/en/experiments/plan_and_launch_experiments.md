@@ -78,7 +78,7 @@ Link a feature flag to control how traffic is split between the experiment varia
 
 1. Click the **Add a feature flag** button to open the picker.
 1. Select the feature flag you want to use for your experiment.
-1. If you have not created a feature flag, click **Create New Feature Flag**. For setup instructions, see [Create your first feature flag][4].
+1. If you have not created a feature flag, click **Create New Feature Flag**. For setup instructions, see [Create your first feature flag][9].
 1. Continue to [randomize your users and set traffic exposure](#configure-randomization).
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_add_ff.png" alt="The feature flag picker showing a list of available flags sorted by creation date, with new_product_photos selected and its details displayed, including the flag key new-product-photos, type Boolean, and a Create New Feature Flag link at the bottom." style="width:80%;" >}}
@@ -88,19 +88,19 @@ Randomize your users and split traffic across your experiment variants.
 
 After you select a feature flag, Datadog pre-populates the randomization settings based on the flag's configuration.
 
-<div class="alert alert-info">The randomization settings you configure here have the following effect when you launch your experiment:<br><br><ul><li>Datadog adds a targeting rule to the selected feature flag.</li><li>If multiple experiments share the same flag, Datadog evaluates traffic based on the order of the flag's targeting rules. You can reorder targeting rules in the confirmation modal before launching.</li></ul></div>
+<div class="alert alert-info">The randomization settings you configure here have the following effect after you launch your experiment:<br><br><ul><li>Datadog adds a targeting rule to the selected feature flag.</li><li>If multiple experiments share the same flag, Datadog evaluates traffic based on the order of the flag's targeting rules. You can reorder targeting rules in the confirmation dialog before launching your experiment.</li></ul></div>
 
 To configure how users are assigned to variants:
 1. Select the **Environment** for your experiment from the dropdown. The default is **prod**.
 1. Under **Targeting rules**:
    1. Click **Add Filter** to define conditions based on custom attributes set in your SDK's evaluation context and filter which users to include in the experiment.
    1. Click **Add Condition** to set additional conditions.
-1. Under **Variants**, use the **Randomize users and split traffic** dropdown to choose **Equally** or **Custom**. This sets how traffic is split between your experiment groups. Each user consistently sees their assigned variant throughout the experiment.
+1. Under **Variants**, use the **Randomize users and split traffic** dropdown to choose **Equally (recommended)** or **Custom**. This sets how traffic is split between your experiment groups. Each user consistently sees their assigned variant throughout the experiment.
 1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
 1. (Optional) [Schedule a staged rollout](#schedule-a-staged-rollout-optional) and [set additional configurations](#additional-config).
 1. After configuring your experiment, proceed to [Launch your experiment](#launch-your-experiment).
 
-{{< img src="/product_analytics/experiment/exp_plan_launch_ui_randomization.png" alt="The Randomization section showing the environment set to staging, a targeting rule with an IF condition, two variants with an equal 50/50 split between Control (False) and variant B (True), and traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_plan_launch_randomization_ui.png" alt="The Randomization section showing the environment set to prod, a targeting rule with an IF condition, two variants with an equal 50/50 split between Control (Enabled/true) and variant B (Disabled/false), and traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option." style="width:80%;" >}}
 
 {{% collapse-content title="Additional configuration settings (optional)" level="h4" expanded=false id="additional-config" %}}
 
@@ -118,7 +118,7 @@ At each rollout stage, Datadog samples a percentage of eligible users to include
 Select recipients from the **Recipients** dropdown to receive alerts about experiment lifecycle events, such as when results reach statistical significance or an issue is detected.
 
 ##### Choose a statistical analysis plan
-Choose the **Confidence interval method** for your statistical analysis. Datadog uses the **Sequential** method by default. If your organization has configured default settings, a **Company Default** badge appears. This provides statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
+Select the **Confidence interval method** for your statistical analysis. Datadog uses the **Sequential** method by default. If your organization has configured default settings, a **COMPANY DEFAULT** badge appears. This provides statistically valid confidence intervals throughout the experiment, so you can make decisions at any time.
 
 To use a different statistical method:
 1. Expand the **Statistical analysis plan** section.
@@ -155,8 +155,10 @@ After launching your experiment, see [Reading Experiment Results][5] to review y
 [1]: https://app.datadoghq.com/product-analytics/experiments
 [2]: /experiments/defining_metrics
 [3]: /experiments/minimum_detectable_effect
-[4]: /getting_started/feature_flags/
+[4]: /getting_started/feature_flags
 [5]: /experiments/reading_results
 [6]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
 [7]: https://app.datadoghq.com/feature-flags
 [8]: /experiments/
+[9]: /getting_started/feature_flags/#create-your-first-feature-flag
+
