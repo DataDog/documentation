@@ -149,10 +149,10 @@ This policy defines the permissions necessary for the Datadog integration role t
 3. In the [AWS integration tile][1], click **Add AWS Account**, and then select **Manually**.
 4. Select the **Access Keys** tab.
 5. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][9] in the AWS documentation for more information.
-5. Click the **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account** checkbox.
-6. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`.
-7. Click **Save**.
-8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
+6. Click the **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account** checkbox.
+7. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`.
+8. Click **Save**.
+9. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
 \*{{% mainland-china-disclaimer %}}
 
