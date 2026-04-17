@@ -2567,16 +2567,16 @@ menu:
         unstable:
           - v2
         order: 68
-    - name: Cancel a threat hunting job
-      url: '#cancel-a-threat-hunting-job'
-      identifier: security-monitoring-cancel-a-threat-hunting-job
+    - name: Cancel a historical job
+      url: '#cancel-a-historical-job'
+      identifier: security-monitoring-cancel-a-historical-job
       parent: security-monitoring
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CancelThreatHuntingJob
+          - CancelHistoricalJob
         unstable:
           - v2
         order: 66
@@ -2589,7 +2589,7 @@ menu:
         versions:
           - v2
         operationids:
-          - GetThreatHuntingJob
+          - GetHistoricalJob
         unstable:
           - v2
         order: 64
@@ -2602,7 +2602,7 @@ menu:
         versions:
           - v2
         operationids:
-          - DeleteThreatHuntingJob
+          - DeleteHistoricalJob
         unstable:
           - v2
         order: 65
@@ -2619,29 +2619,29 @@ menu:
         unstable:
           - v2
         order: 67
-    - name: Run a threat hunting job
-      url: '#run-a-threat-hunting-job'
-      identifier: security-monitoring-run-a-threat-hunting-job
+    - name: Run a historical job
+      url: '#run-a-historical-job'
+      identifier: security-monitoring-run-a-historical-job
       parent: security-monitoring
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - RunThreatHuntingJob
+          - RunHistoricalJob
         unstable:
           - v2
         order: 62
-    - name: List threat hunting jobs
-      url: '#list-threat-hunting-jobs'
-      identifier: security-monitoring-list-threat-hunting-jobs
+    - name: List historical jobs
+      url: '#list-historical-jobs'
+      identifier: security-monitoring-list-historical-jobs
       parent: security-monitoring
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ListThreatHuntingJobs
+          - ListHistoricalJobs
         unstable:
           - v2
         order: 63
@@ -2684,6 +2684,45 @@ menu:
         unstable:
           - v2
         order: 69
+    - name: Export security monitoring resource to Terraform
+      url: '#export-security-monitoring-resource-to-terraform'
+      identifier: security-monitoring-export-security-monitoring-resource-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExportSecurityMonitoringTerraformResource
+        unstable:
+          - v2
+        order: 91
+    - name: Convert security monitoring resource to Terraform
+      url: '#convert-security-monitoring-resource-to-terraform'
+      identifier: security-monitoring-convert-security-monitoring-resource-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConvertSecurityMonitoringTerraformResource
+        unstable:
+          - v2
+        order: 93
+    - name: Export security monitoring resources to Terraform
+      url: '#export-security-monitoring-resources-to-terraform'
+      identifier: security-monitoring-export-security-monitoring-resources-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkExportSecurityMonitoringTerraformResources
+        unstable:
+          - v2
+        order: 92
     - name: Get suggested actions for a signal
       url: '#get-suggested-actions-for-a-signal'
       identifier: security-monitoring-get-suggested-actions-for-a-signal
@@ -3350,6 +3389,32 @@ menu:
           - GetSignalNotificationRules
         unstable: []
         order: 9
+    - name: Get an indicator of compromise
+      url: '#get-an-indicator-of-compromise'
+      identifier: security-monitoring-get-an-indicator-of-compromise
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIndicatorOfCompromise
+        unstable:
+          - v2
+        order: 90
+    - name: List indicators of compromise
+      url: '#list-indicators-of-compromise'
+      identifier: security-monitoring-list-indicators-of-compromise
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIndicatorsOfCompromise
+        unstable:
+          - v2
+        order: 89
     - name: List scanned assets metadata
       url: '#list-scanned-assets-metadata'
       identifier: security-monitoring-list-scanned-assets-metadata
