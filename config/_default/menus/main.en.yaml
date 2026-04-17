@@ -862,11 +862,16 @@ menu:
       identifier: otel_runtime_metrics
       parent: otel_integrations
       weight: 814
+    - name: SQL Server Metrics
+      url: opentelemetry/integrations/sqlserver_metrics/
+      identifier: otel_sqlserver_metrics
+      parent: otel_integrations
+      weight: 815
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 815
+      weight: 816
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
@@ -1494,6 +1499,11 @@ menu:
       identifier: bits_ai_mcp_server_tools
       parent: bits_ai_mcp_server
       weight: 502
+    - name: Agent Builder
+      url: actions/agents/
+      identifier: bits_ai_agent_builder
+      parent: bits_ai
+      weight: 6
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2998,6 +3008,11 @@ menu:
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_monitors
       weight: 105
+    - name: APM
+      url: datadog_cloudcraft/overlays/apm/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_apm
+      weight: 106
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
