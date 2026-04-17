@@ -74,7 +74,7 @@ Navigate the split paths independently using the zoom controls, the minimap, or 
 
 Click **Inspect** on a shared hop to open a sidebar detailing the metadata and confirming that the hop is present in both views. Unique hops are wrapped in a distinct color to indicate that they exist in only one view.
 
-The **Analysis** tab provides a side-by-side hop-by-hop breakdown of packets and RTT latency for each time range.
+The **Analysis** tab provides a side-by-side, hop-by-hop breakdown of packets and RTT latency for each time range.
 
 {{< img src="network_performance_monitoring/network_path/network_path_analysis_comparison.png" alt="Analysis tab of the Visual Comparison view showing a side-by-side Hop RTT Latency table for paths A and B" style="width:100%;" >}}
 
