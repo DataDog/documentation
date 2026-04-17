@@ -234,5 +234,17 @@ dataset.delete(1)  # Deletes the second record
 dataset.push()
 ```
 
+### Customizing the dataset table
+
+When viewing a dataset's records, you can customize the table to quickly scan and compare records without expanding each one individually.
+
+#### Column picker
+
+Use the column picker to toggle columns on or off and drag to reorder them.
+
+#### Custom columns
+
+Extract specific fields from your dataset records and display them as dedicated table columns. To add a custom column, type a field path in the **Add Column** input at the top of the table. You can add multiple custom columns and reorder them with drag-and-drop. Column configuration is saved to your browser's local storage per project.
+
 [1]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
 

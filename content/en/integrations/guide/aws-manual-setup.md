@@ -169,10 +169,10 @@ Changing the access type on an existing AWS account is a destructive operation. 
    <div class="alert alert-info">
    If your AWS account is in the <code>aws-us-gov</code> (GovCloud) partition, verify with your compliance team before connecting it to your Datadog site. Confirm that forwarding data from that account meets your organization's authorization boundary and data handling requirements. Applicable frameworks may include FedRAMP, ITAR, IL4, or IL5.
    </div>
-5. Click the **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account** checkbox.
-6. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`.
-7. Click **Save**.
-8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
+6. Click the **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account** checkbox.
+7. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`.
+8. Click **Save**.
+9. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
 \*{{% mainland-china-disclaimer %}}
 

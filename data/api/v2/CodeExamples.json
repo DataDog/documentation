@@ -1938,6 +1938,13 @@
       "description": "Convert a rule from JSON to Terraform returns \"OK\" response"
     }
   ],
+  "ConvertSecurityMonitoringTerraformResource": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Convert security monitoring resource to Terraform returns \"OK\" response"
+    }
+  ],
   "CreateJiraIssues": [
     {
       "group": "security_monitoring",
@@ -2088,6 +2095,13 @@
       "description": "Detach security findings from their case returns \"No Content\" response"
     }
   ],
+  "BulkExportSecurityMonitoringTerraformResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Export security monitoring resources to Terraform returns \"OK\" response"
+    }
+  ],
   "SearchSecurityMonitoringSignals": [
     {
       "group": "security_monitoring",
@@ -2130,11 +2144,11 @@
       "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
-  "RunThreatHuntingJob": [
+  "RunHistoricalJob": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Run a threat hunting job returns \"Status created\" response"
+      "description": "Run a historical job returns \"Status created\" response"
     }
   ],
   "SearchSecurityFindings": [
