@@ -38,7 +38,6 @@ You can add additional metrics, organize metrics into groups, and explore relate
 ### Segment-level results
 Each experiment subject (for example, a user) has properties captured at the time of exposure, such as region, device type, or visitor status. Subjects that share a property form a segment. Use segment-level results to understand whether specific groups of users reacted differently to the new experience.
 
-<!-- ADD STEPS -->
 
 {{< img src="/product_analytics/experiment/exp_segment_view.png" alt="Segment-level view of a metric split by Country ISO Code, showing a bar chart of relative lift and a data table with control and treatment values per country." style="width:90%;" >}}
 
