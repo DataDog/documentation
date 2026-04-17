@@ -40,7 +40,31 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 ### Create the Datadog user
 
-{{% dbm-create-oracle-user %}}
+If you already have the legacy Oracle integration installed, the user already exists, and you can skip this step.
+
+Create a read-only login to connect to your server and grant the required permissions:
+
+{{< tabs >}}
+{{% tab "Multi-tenant" %}}
+```SQL
+CREATE USER c##datadog IDENTIFIED BY <YOUR_PASSWORD> CONTAINER = ALL ;
+
+ALTER USER c##datadog SET CONTAINER_DATA=ALL CONTAINER=CURRENT;
+```
+{{% /tab %}}
+
+{{% tab "Non-CDB" %}}
+```SQL
+CREATE USER datadog IDENTIFIED BY <YOUR_PASSWORD> ;
+```
+{{% /tab %}}
+
+{{% tab "Oracle 11" %}}
+```SQL
+CREATE USER datadog IDENTIFIED BY <YOUR_PASSWORD> ;
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Securely store your password
 {{% dbm-secret %}}
@@ -56,6 +80,8 @@ For installation steps, see the [Agent installation instructions][9].
 Configure the Agent for each RAC node by following the instructions for [self-hosted Oracle databases][3].
 
 You must configure the Agent for each Real Application Cluster (RAC) node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic. The collected data from each RAC node is aggregated in the frontend.
+
+<div class="alert alert-info">The <code>username</code> value must match the user created above: use <code>c##datadog</code> for multitenant (CDB) environments, or <code>datadog</code> for non-CDB and Oracle 11 environments.</div>
 
 ```yaml
 init_config:
