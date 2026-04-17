@@ -1,4 +1,5 @@
 ---
+id: intelligent_retention_filter
 core_product:
 - apm
 title: 인텔리전트 보존 필터

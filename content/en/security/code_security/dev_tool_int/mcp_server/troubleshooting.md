@@ -50,7 +50,7 @@ If the values are set but scans still fail, verify your keys have the correct pe
 
 ## Partial results
 
-When running a comprehensive scan (`datadog_code_security_scan`), some scan types may succeed while others fail (for example, if only some binaries are installed). The server returns:
+When running a comprehensive scan, some scan types may succeed while others fail (for example, if only some binaries are installed). The server returns:
 
 - Results from all successful scanners.
 - Error messages with installation instructions for any scanners that failed.

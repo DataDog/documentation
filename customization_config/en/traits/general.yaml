@@ -52,3 +52,13 @@ traits:
   label: Protocol
   type: text
   internal_notes: For example, HTTP, gRPC, or SOCKS.
+
+- id: interface
+  label: Interface
+  type: text
+  internal_notes: The tool through which the user is performing a task or otherwise accessing Datadog features. For example, web UI, API, CLI, or Terraform.
+
+- id: secrets_source
+  label: Secrets source
+  type: text
+  internal_notes: The location of the user's sensitive information, such as API keys or other credentials. For example, Secrets Management or environment variables.

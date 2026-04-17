@@ -1,4 +1,5 @@
 ---
+id: resource
 title: resource
 core_product:
   - apm

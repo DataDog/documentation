@@ -4,13 +4,16 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
     tag: "Blog"
     text: "From performance to impact: Bridging frontend teams through shared context"
+  - link: "https://www.datadoghq.com/blog/product-analytics-faster-decisions"
+    tag: "Blog"
+    text: "Make faster, better product decisions with Datadog Product Analytics"
+  - link: "https://www.datadoghq.com/blog/product-data-best-practices"
+    tag: "Blog"
+    text: "What your product data is actually saying"
 ---
 
 ## Overview
 Action Management is a no-code way to label autocaptured actions from your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page describes how to get started with Action Management.
-
-Your feedback is invaluable to Datadog during this preview stage. Please share your feedback with your Customer Success Manager.
-
 
 ## Setup 
 
@@ -67,3 +70,7 @@ After you define an action, you can find it in the [list of labeled actions][4].
 [2]: https://docs.datadoghq.com/synthetics/guide/manually-adding-chrome-extension/
 [3]: https://app.datadoghq.com/product-analytics/data-management
 [4]: https://app.datadoghq.com/product-analytics/data-management
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

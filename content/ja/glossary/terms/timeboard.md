@@ -1,9 +1,10 @@
 ---
+id: timeboard
 core_product:
 - ダッシュボード
 related_terms:
-- ダッシュボード
-- スクリーンボード
+- dashboard
+- screenboard
 title: タイムボード
 ---
 

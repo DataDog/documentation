@@ -3,17 +3,18 @@ further_reading:
 - link: /error_tracking/regression_detection/
   tag: Documentación
   text: Detección de regresión
-title: Estados de problemas durante el seguimiento de errores
+title: Estados de incidentes en Error Tracking
 ---
 
 ## Información general
 
-Todos los problemas en el Seguimiento de errores tienen un estado para ayudarte a clasificar y priorizar los problemas o descartar el ruido. Existen cuatro estados:
+Todas las incidencias en Error Tracking tienen un estado que te ayuda a clasificar y priorizar las incidencias o a descartar el ruido. Hay cinco estados:
 
-- **FOR REVIEW** (PARA REVISIÓN): en curso y con necesidad de atención porque el problema es nuevo o se trata de una regresión.
-- **REVIEWED** (REVISADO): clasificado y necesita ser solucionado, ya sea ahora o más tarde. 
-- **IGNORED** (IGNORADO): no requiere ninguna investigación o acción adicional.
-- **RESOLVED** (RESUELTO): solucionado y ya no sucede.
+- **FOR REVIEW** (PARA REVISIÓN): incidencias nuevas o regresivas que requieren atención.
+- **REVIEWED** (REVISADO): incidencias de triaje que deben solucionarse, ahora o más adelante.
+- **RESOLVED** (RESUELTO): incidencias que se han solucionado y ya no se producen.
+- **IGNORED** (IGNORADOS): incidencias que no requieren más investigación o acción.
+- **EXCLUDED** (EXCLUIDOS): incidencias que no requieren más investigación, deja de recopilar nuevos errores y ya no cuentan para el uso o la facturación.
 
 Todas los problemas comienzan con un estado FOR REVIEW (PARA REVISAR). El seguimiento de errores actualiza automáticamente el estado en los casos descritos a continuación, o puedes [actualizar manualmente el estado](#updating-an-error-status). También puedes [ver el historial](#issue-history) de los cambios de estado de un error determinado.
 
@@ -27,14 +28,16 @@ El seguimiento de errores marca automáticamente los problemas como **REVIEWED**
 - Se ha asignado el problema
 - Se ha creado un caso a partir del problema
 
-{{< img src="error_tracking/auto-review-actions.png" alt="Acciones de revisión automática del Seguimiento de errores" style="width:75%;" >}}
+{{< img src="error_tracking/auto-review-actions-2.png" alt="Acciones de revisión automáticas de Error Tracking" style="width:75%;" >}}
 
 ## Resolución automática
 
 El seguimiento de errores marca automáticamente como **RESOLVED** (RESUELTOS) los problemas que parecen inactivos o resueltos debido a la falta de incidencias de error recientes:
 
-- Si el problema se notificó por última vez en una versión con más de 14 días de antigüedad y se ha publicado una versión más reciente que no notifica el mismo error, el Seguimiento de errores resuelve automáticamente el problema. Configura tus servicios con etiquetas de versión (consulta las instrucciones para [APM][1], [RUM][2] y [logs][3]) para asegurarte de que la resolución automática tiene en cuenta las versiones de tus servicios. 
+- Si el problema se notificó por última vez en una versión con más de 14 días de antigüedad y se ha publicado una versión más reciente que no notifica el mismo error, Error Tracking lo resolverá automáticamente. Configura tus servicios con etiquetas de versión (consulta las instrucciones para [APM][1], [RUM][2] y [Logs][3]) para garantizar que la resolución automática tenga en cuenta las versiones de tus servicios.
 - Si no se configuran etiquetas de `version`, el Seguimiento de errores resuelve automáticamente un problema si no se han notificado nuevos errores para ese problemas en los últimos 14 días.
+
+**Nota**: La lógica de autoresolución no tiene en cuenta `version`.
 
 ## Reapertura automática mediante detección de regresiones
 
@@ -42,14 +45,25 @@ Consulta [Detección de regresión][4].
 
 ## Actualización del estado del problema
 
-El estado de un problema aparece en cualquier lugar donde se pueda ver, como en la lista de problemas o en el panel de detalles de un problema determinado. Para actualizar manualmente el estado de un problema, haz clic en el estado y selecciona otro en el menú desplegable.
+El estado de un problema aparece en cualquier lugar donde se pueda ver, como en la lista de problemas o en el panel de detalles de un problema determinada. Para actualizar manualmente el estado de un problema, haz clic en el estado y selecciona otro en el menú desplegable.
 
-{{< img src="error_tracking/updating-issue-status.png" alt="La línea temporal de la actividad en el problema del Seguimiento de errores" style="width:100%;" >}}
+{{< img src="error_tracking/updating-issue-status.png" alt="La escala de tiempo de la actividad en el problema de rastreo de errores" style="width:100%;" >}}
 
-## Historial del problema
-Ve un historial de la actividad de tu problema con la **Línea temporal de la actividad**. En el panel de detalles de cualquier problema de Seguimiento de errores, ve la Línea temporal de la actividad haciendo clic en la pestaña **Activity** (Actividad).
+## Excluir una incidencia
 
-{{< img src="error_tracking/issue-status-history-3.png" alt="La línea temporal de la actividad en el problema del Seguimiento de errores" style="width:80%;" >}}
+El estado `EXCLUDED` te permite evitar que se realice un seguimiento de errores específicos, garantizando que no se recopilen ni se tengan en cuenta para la facturación. Esto te ayuda a eliminar errores no procesables o problemas causados por fallos esperados sin necesidad de complejas reglas de exclusión.
+
+Para excluir una incidencia, haz clic en su estado y selecciona **EXCLUDED** (EXCLUIDO) en el menú desplegable. Las incidencias excluidas siguen siendo accesibles en la pestaña **EXCLUDED** (EXCLUIDO). Puedes consultar su historial en cualquier momento.
+
+{{< img src="error_tracking/issue-states-excluded.png" alt="Excluido en el menú desplegable de estado de la incidencia" style="width:100%;" >}}
+
+Para reanudar la recopilación de errores de una incidencia excluida, selecciona cualquier estado que no sea **EXCLUDED** (EXCLUIDO).
+
+
+## Historial de problemas
+Consulta el historial de la actividad de tu incidencia con la **Cronología de la actividad**. En el panel de detalles de cualquier incidencia de Error Tracking, consulta la cronología de la actividad haciendo clic en la pestaña **Activity** (Actividad).
+
+{{< img src="error_tracking/issue-status-history-3.png" alt="La Cronología de la actividad en la incidencia de Error Tracking" style="width:80%;" >}}
 
 ## Referencias adicionales
 
