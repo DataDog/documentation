@@ -1938,6 +1938,13 @@
       "description": "Convert a rule from JSON to Terraform returns \"OK\" response"
     }
   ],
+  "ConvertSecurityMonitoringTerraformResource": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Convert security monitoring resource to Terraform returns \"OK\" response"
+    }
+  ],
   "CreateJiraIssues": [
     {
       "group": "security_monitoring",
@@ -2086,6 +2093,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Detach security findings from their case returns \"No Content\" response"
+    }
+  ],
+  "BulkExportSecurityMonitoringTerraformResources": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Export security monitoring resources to Terraform returns \"OK\" response"
     }
   ],
   "SearchSecurityMonitoringSignals": [
