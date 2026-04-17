@@ -83,7 +83,7 @@ Enter the following details for your configuration:
 
 * **Bucket name**: The name of your new or existing GCP storage bucket.
 * **Region**: The GCP region of your bucket. For example, `northamerica-northeast1`.
-* **Billing account ID**: The ID of the billing account that your usage cost export will report on.
+* **Billing account ID**: The ID of the billing account that your usage cost export will report costs for.
 * **Export project name and ID**: The name and ID of your export project.
 * **Export dataset name and ID**: The name and ID of your export dataset.
 
