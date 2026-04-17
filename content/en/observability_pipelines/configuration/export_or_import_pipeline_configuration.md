@@ -76,7 +76,9 @@ To help build your pipelines and easily transfer pipeline configurations across 
 1. Navigate to [Observability Pipelines][1].
 1. Select a draft pipeline to view the configuration.
 1. Click on the settings and select **Import Pipeline**
+   {{< img src="observability_pipelines/export_pipeline/import_access.png" alt="The settings menu showing Import Pipeline" style="width:100%;" >}}
 1. Choose a pipeline configuration as a JSON file from your local storage.
+   {{< img src="observability_pipelines/export_pipeline/import_select.png" alt="The import modal giving the option to select a JSON file" style="width:100%;" >}}
 1. Click Import. This will replace your current pipeline configuration with the imported JSON's pipeline configuration. 
 1. [Install the Observability Pipelines Worker and deploy your pipeline using the UI][8]
 
