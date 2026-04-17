@@ -29,5 +29,9 @@ Use the Datadog MCP server's [`serverless_onboarding`][2] tool to set up monitor
 Help me monitor my GCP Cloud Run functions with Datadog using Terraform.
 ```
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /integrations/google-cloud-platform/
 [2]: /bits_ai/mcp_server/tools/#serverless_onboarding
