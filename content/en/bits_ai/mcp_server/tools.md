@@ -768,9 +768,11 @@ Guides you through onboarding Test Optimization in Datadog.
 ### `serverless_onboarding`
 *Toolset: **onboarding***\
 *Permissions Required: None*\
-Guides you through onboarding serverless applications to Datadog.
+Guides you through onboarding serverless applications to Datadog, including AWS Lambda functions and GCP Cloud Run and Cloud Run functions (Gen 2).
 
 - Help me monitor my AWS Lambda functions with Datadog.
+- Help me monitor my GCP Cloud Run services with Datadog.
+- Help me monitor my GCP Cloud Run functions with Datadog.
 
 ### `source_map_uploads`
 *Toolset: **onboarding***\
