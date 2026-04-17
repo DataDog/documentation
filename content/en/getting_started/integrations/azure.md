@@ -307,7 +307,7 @@ See [Azure Automated Log Forwarding Architecture][34] for more details.
 
 ### Resource tag filtering for logs
 
-Use tag filters to control which Azure resources have their logs forwarded to Datadog. Configure tag filters in the **Configuration** tab of the [Azure integration tile][20]. A tag filter is a comma-separated list of tags in the form `key:value`. Only resources that match at least one tag in the filter have their logs forwarded.
+Use tag filters to control which Azure resources have their logs forwarded to Datadog. To configure tag filters for logs, click **Configure Log Forwarding** in the [Azure integration tile][20] and follow the flow. A tag filter is a comma-separated list of tags in the form `key:value`. Only resources that match at least one tag in the filter have their logs forwarded.
 
 You can use wildcards in your tag filters:
 - `?` matches a single character.
