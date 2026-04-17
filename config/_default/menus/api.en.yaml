@@ -3350,6 +3350,32 @@ menu:
           - GetSignalNotificationRules
         unstable: []
         order: 9
+    - name: Get an indicator of compromise
+      url: '#get-an-indicator-of-compromise'
+      identifier: security-monitoring-get-an-indicator-of-compromise
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIndicatorOfCompromise
+        unstable:
+          - v2
+        order: 90
+    - name: List indicators of compromise
+      url: '#list-indicators-of-compromise'
+      identifier: security-monitoring-list-indicators-of-compromise
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIndicatorsOfCompromise
+        unstable:
+          - v2
+        order: 89
     - name: List scanned assets metadata
       url: '#list-scanned-assets-metadata'
       identifier: security-monitoring-list-scanned-assets-metadata

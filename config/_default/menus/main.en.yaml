@@ -96,6 +96,11 @@ menu:
       url: getting_started/application/
       parent: getting_started
       weight: 8
+    - name: Teams
+      identifier: getting_started_teams
+      url: getting_started/teams/
+      parent: getting_started
+      weight: 27
     - name: Datadog Site
       identifier: getting_started_datadog_site
       url: getting_started/site/
@@ -2993,6 +2998,11 @@ menu:
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_monitors
       weight: 105
+    - name: APM
+      url: datadog_cloudcraft/overlays/apm/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_apm
+      weight: 106
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
