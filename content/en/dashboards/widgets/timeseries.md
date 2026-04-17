@@ -99,7 +99,7 @@ To add markers for additional datasets, click {{< ui >}}Add Marker{{< /ui >}} in
 
 ### Dual y-axis
 
-To display more than one y-axis on the same graph, click **Add Graph**. Use the **Y-axis** dropdown to select whether the request's data will be associated with the left or right axis. You can assign as many requests as you want to each side.
+To display more than one y-axis on the same graph, click **Add Graph**. Use the **Y-axis** dropdown to associate the request's data with the left or right axis. You can assign any number of requests to each side.
 
 {{< img src="dashboards/widgets/timeseries/dual_y_axis.png" alt="The Timeseries widget shows two metric queries: system.uptime in purple on the left y-axis and system.disk.used in orange on the right y-axis." style="width:100%;" >}}
 
