@@ -4009,6 +4009,22 @@
     "description": "Get the list of suggested actions for a given security signal.",
     "summary": "Get suggested actions for a signal"
   },
+  "BulkExportSecurityMonitoringTerraformResources": {
+    "description": "Export multiple security monitoring resources to Terraform, packaged as a zip archive.\nThe `resource_type` path parameter specifies the type of resources to export\nand must be one of `suppressions` or `critical_assets`.\nA maximum of 1000 resources can be exported in a single request.",
+    "summary": "Export security monitoring resources to Terraform",
+    "request_description": "The resource IDs to export.",
+    "request_schema_description": "Request body for bulk exporting security monitoring resources to Terraform."
+  },
+  "ConvertSecurityMonitoringTerraformResource": {
+    "description": "Convert a security monitoring resource that doesn't (yet) exist from JSON to Terraform.\nThe `resource_type` path parameter specifies the type of resource to convert\nand must be one of `suppressions` or `critical_assets`.",
+    "summary": "Convert security monitoring resource to Terraform",
+    "request_description": "The resource JSON to convert.",
+    "request_schema_description": "Request body for converting a security monitoring resource JSON to Terraform."
+  },
+  "ExportSecurityMonitoringTerraformResource": {
+    "description": "Export a security monitoring resource to a Terraform configuration.\nThe `resource_type` path parameter specifies the type of resource to export\nand must be one of `suppressions` or `critical_assets`.",
+    "summary": "Export security monitoring resource to Terraform"
+  },
   "ListScanningGroups": {
     "description": "List all the Scanning groups in your organization.",
     "summary": "List Scanning Groups"
