@@ -27,7 +27,7 @@ A code session captures a segment of work with the Bits AI Dev Agent, including 
 {{< img src="bits_ai/dev_agent/code_sessions_overview.png" alt="A tab titled 'Code Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
 ### Create a code session
-You can start a code session:
+After [completing setup][6], you can start a code session:
 - By entering a freeform prompt on [**Code Sessions**][7]
   - Enter a custom prompt or generate one by clicking a **Suggestions** card. (If the Dev Agent has created proactive fixes for any of your repositories, a **Proactive Fixes** section appears instead.)
 - By invoking Bits AI Dev Agent in a [supported Datadog product][9]
@@ -124,7 +124,7 @@ Datadog Code Security uses Bits AI to enhance static analysis and generate remed
 
 ## Get started
 
-To enable Bits AI Dev Agent, see [Setup][6].
+To enable Bits AI Dev Agent, see [Setup][6]. Then [create your first code session][18].
 
 ## Limitations
 
