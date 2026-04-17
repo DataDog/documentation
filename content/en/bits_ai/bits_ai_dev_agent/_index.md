@@ -21,6 +21,8 @@ Bits AI Dev Agent is a generative AI coding assistant that uses observability da
 
 Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][18], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
 
+To get started with Bits AI Dev Agent, follow the instructions on [Setup][6]. Then, [create your first code session][18].
+
 ## Code sessions
 A code session captures a segment of work with the Bits AI Dev Agent, including its analysis and code changes. Create, view, and manage your sessions on **Bits AI** > **Dev Agent** > [**Code Sessions**][7].
 
@@ -121,10 +123,6 @@ Bits AI Dev Agent remediates vulnerabilities at scale, from single issues to lar
 - Use the Campaign tool to push PRs incrementally and manage review workload across teams.
 
 Datadog Code Security uses Bits AI to enhance static analysis and generate remediation suggestions, which can be reviewed and applied through the Bits AI Dev Agent. Learn more about [AI-Enhanced Static Code Analysis][15].
-
-## Get started
-
-To enable Bits AI Dev Agent, see [Setup][6]. Then [create your first code session][18].
 
 ## Limitations
 
