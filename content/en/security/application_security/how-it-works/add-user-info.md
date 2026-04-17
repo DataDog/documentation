@@ -394,8 +394,8 @@ public class LoginController {
         String userId = null;
         Map<String, String> metadata = new HashMap<>();
         metadata.put("usr.login", userName);
-        if (userExists != null) {
-            userId = getUserId(userName)
+        if (userExists) {
+            userId = getUserId(userName);
             metadata.put("email", user.getEmail());
         } else {
             userId = userName;
