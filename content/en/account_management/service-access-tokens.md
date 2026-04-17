@@ -1,6 +1,16 @@
 ---
 title: Service Access Tokens
 description: "Create and manage Service Access Tokens to authenticate Datadog API calls on behalf of a service account, without relying on individual user credentials."
+further_reading:
+    - link: "/account_management/org_settings/service_accounts/"
+      tag: "Documentation"
+      text: "Service Accounts"
+    - link: "/account_management/personal-access-tokens/"
+      tag: "Documentation"
+      text: "Personal Access Tokens"
+    - link: "/account_management/cloud_provider_authentication/"
+      tag: "Documentation"
+      text: "Cloud-Based Authentication"
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!" >}}
