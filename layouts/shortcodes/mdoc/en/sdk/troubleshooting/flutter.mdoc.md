@@ -32,9 +32,9 @@ Execution failed for task ':app:checkDebugDuplicateClasses'.
 
 Make sure that you've updated your version of Kotlin to at least 1.8 in your `build.gradle` file.
 
-## Cocoapods issues
+## CocoaPods issues
 
-If you have trouble building your iOS application after adding the Datadog SDK because of errors being thrown by Cocoapods, check which error you are getting. The most common error is an issue getting the most up-to-date native library from Cocoapods, which can be solved by running the following in your `ios` directory:
+If you have trouble building your iOS application after adding the Datadog SDK because of errors being thrown by CocoaPods, check which error you are getting. The most common error is an issue getting the most up-to-date native library from CocoaPods, which can be solved by running the following in your `ios` directory:
 
 ```bash
 pod install --repo-update

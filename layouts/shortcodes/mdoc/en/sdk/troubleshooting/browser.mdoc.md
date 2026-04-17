@@ -30,7 +30,7 @@ Check if the RUM Browser SDK is initialized by running `window.DD_RUM.getInterna
 
 {% img src="real_user_monitoring/browser/troubleshooting/success_rum_internal_context.png" alt="Successful get internal context command" /%}
 
-If the RUM Browser SDK is not installed, or if it is not successfully initialized, you may see the `ReferenceError: DD_RUM is not defined` error like the one below:
+If the RUM Browser SDK is not installed, or if it is not successfully initialized, you may see the following `ReferenceError: DD_RUM is not defined` error:
 
 {% img src="real_user_monitoring/browser/troubleshooting/error_rum_internal_context.png" alt="Error get internal context command" /%}
 
@@ -40,7 +40,7 @@ You can also check your browser developer tools console or network tab if you no
 
 ### Data to the Datadog intake
 
-The RUM SDK sends batches of event data to Datadog's intake every time one of these conditions have been met:
+The RUM SDK sends batches of event data to Datadog's intake every time one of these conditions has been met:
 
 - Every 30 seconds
 - When 50 events have been reached
@@ -63,7 +63,7 @@ The RUM Browser SDK relies on cookies to store session information and follow a 
 
 **Note**: The `_dd_l`, `_dd_r`, and `_dd` cookies have been replaced with `_dd_s` in recent versions of the RUM Browser SDK.
 
-## Session IDs, cookies and RUM applications
+## Session IDs, cookies, and RUM applications
 
 There is a one-to-one relation between a RUM session and the RUM application it belongs to. Therefore, the domain set for the `_dd_s` cookie is fully dedicated to the RUM application it is monitoring and cannot monitor any additional applications.
 
@@ -119,9 +119,9 @@ If an event or a request goes beyond any of the [listed RUM technical limitation
 
 ## "Customer data exceeds the recommended threshold" warning
 
-The RUM browser SDK allows you to set [global context][10], [user information][11] and [feature flags][12] which are then included with the collected events.
+The RUM Browser SDK allows you to set [global context][10], [user information][11], and [feature flags][12], which are then included with the collected events.
 
-To minimize the user bandwidth impact, the RUM browser SDK throttles the data sent to the Datadog intake. However, sending large volumes of data can still impact the performance for users on slow internet connections.
+To minimize the user bandwidth impact, the RUM Browser SDK throttles the data sent to the Datadog intake. However, sending large volumes of data can still impact the performance for users on slow internet connections.
 
 For the best user experience, Datadog recommends keeping the size of the global context, user information, and feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data exceeds the recommended 3KiB threshold.`
 
