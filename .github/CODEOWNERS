@@ -184,3 +184,4 @@ customization_config/                                         @DataDog/cdocs-rev
 content/en/**/*.mdoc.md                                       @DataDog/cdocs-reviewers @DataDog/documentation  
 layouts/shortcodes/**/*.mdoc.md                               @DataDog/cdocs-reviewers @DataDog/documentation
 content/.gitignore                                            @DataDog/cdocs-reviewers @DataDog/documentation
+content/en/dd_e2e                                             @DataDog/docs-dev

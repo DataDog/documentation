@@ -25,7 +25,7 @@ The personal settings pages in Datadog allow you to control how you appear to ot
 
 ### Profile
 
-Your profile is how others in your organization recognize you in Datadog. Set or update your name, email address, and title from the [Profile tab][11] within the **Personal Settings** page.
+Your profile is how others in your organization recognize you in Datadog. Set or update your name, email address, and title from the [Profile tab][11] within the {{< ui >}}Personal Settings{{< /ui >}} page.
 
 To update your picture, create an account on [Gravatar][1] and associate it with your email address.
 
@@ -34,7 +34,7 @@ If you log in to Datadog using Google authentication, your email address is prov
 ### Preferences
 
 {{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
-You can manage your time zone, time format, visual accessibility preference, and email subscriptions from the [Preferences tab][3] within the **Personal Settings** page.
+You can manage your time zone, time format, visual accessibility preference, and email subscriptions from the [Preferences tab][3] within the {{< ui >}}Personal Settings{{< /ui >}} page.
 
 #### Email subscriptions
 
@@ -46,12 +46,12 @@ Under email subscriptions, you have access to the following reports:
 * Daily Digest
 * Weekly Digest
 
-If you are unsure if an email digest is relevant to you, you can view an example by clicking the **Example** link next to each email subscription. You can also use the **Unsubscribe From All** button to unsubscribe from all email subscriptions.
+If you are unsure if an email digest is relevant to you, you can view an example by clicking the {{< ui >}}Example{{< /ui >}} link next to each email subscription. You can also use the {{< ui >}}Unsubscribe From All{{< /ui >}} button to unsubscribe from all email subscriptions.
 {{% /site-region %}}
 
 
 {{% site-region region="gov" %}}
-You can manage your time zone, time format, and visual accessibility preference from the [**Preferences** tab][3] within the **Personal Settings** page.
+You can manage your time zone, time format, and visual accessibility preference from the [**Preferences** tab][3] within the {{< ui >}}Personal Settings{{< /ui >}} page.
 {{% /site-region %}}
 
 #### Time format
@@ -66,11 +66,11 @@ The visual accessibility preference has five different settings to address color
 
 ### Organizations
 
-The [Organizations tab][12] in **Personal Settings** lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.
+The [Organizations tab][12] in {{< ui >}}Personal Settings{{< /ui >}} lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.
 
 **Note**: If you leave an organization, you cannot rejoin unless invited by an administrator in that organization.
 
-To join an existing organization, you must be invited by an administrator. After you are invited, you are sent an email with the subject "You've been invited to join \<Organization Name>". Click the **Join Account** button in the email.
+To join an existing organization, you must be invited by an administrator. After you are invited, you are sent an email with the subject "You've been invited to join \<Organization Name>". Click the {{< ui >}}Join Account{{< /ui >}} button in the email.
 
 If you are an organization administrator, reference the additional documentation to:
 
@@ -84,11 +84,11 @@ If you are an organization administrator, reference the additional documentation
 
 #### Application keys
 
-The [Application Keys tab][13] in **Personal Settings** allows you to manage your application keys. To copy a key, hover over it until the **Copy Key** icon appears to the right, and click on it. You can also click into a specific key to edit its name, view when it was created, view the profile of the key's owner, copy it, or revoke it.
+The [Application Keys tab][13] in {{< ui >}}Personal Settings{{< /ui >}} allows you to manage your application keys. To copy a key, hover over it until the {{< ui >}}Copy Key{{< /ui >}} icon appears to the right, and click on it. You can also click into a specific key to edit its name, view when it was created, view the profile of the key's owner, copy it, or revoke it.
 
 #### Apps
 
-The [Apps tab][14] in **Personal Settings** allows you to manage apps that have been installed or created by members of your organization. You can filter apps with a search string, or choose to view only enabled or disabled apps using checkboxes.
+The [Apps tab][14] in {{< ui >}}Personal Settings{{< /ui >}} allows you to manage apps that have been installed or created by members of your organization. You can filter apps with a search string, or choose to view only enabled or disabled apps using checkboxes.
 
 When you hover over an app, the option to enable or disable it appears on the right of the app listing.
 
@@ -108,10 +108,10 @@ Unverified users can still access Datadog, but are limited to viewing organizati
 #### Verify your email
 
 To verify your email:
-1. Navigate to your **Profile Settings**.
-2. Click on **Verify Account**.
+1. Navigate to your {{< ui >}}Profile Settings{{< /ui >}}.
+2. Click on {{< ui >}}Verify Account{{< /ui >}}.
 3. Enter the **verification code** sent to your registered email.
-4. Click **Submit** to complete the verification process.
+4. Click {{< ui >}}Submit{{< /ui >}} to complete the verification process.
 
 #### Log out of all active web sessions
 
@@ -120,8 +120,8 @@ Logging out of all active web sessions logs you out of all current sessions acro
 
 
 To log out of all active sessions:
-1. Go to **Personal Settings**.
-2. Click **Log Out of All Web Sessions**.
+1. Go to {{< ui >}}Personal Settings{{< /ui >}}.
+2. Click {{< ui >}}Log Out of All Web Sessions{{< /ui >}}.
 3. Confirm the action.
 
 After confirming, you are logged out from all devices and need to log back in.
@@ -130,7 +130,7 @@ After confirming, you are logged out from all devices and need to log back in.
 
 View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
 
-To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog's appearance to the theme you've set at the OS level.
+To adapt to your computer's appearance setting, select the {{< ui >}}System{{< /ui >}} option. This automatically matches Datadog's appearance to the theme you've set at the OS level.
 
 ## Connecting to GitHub
 

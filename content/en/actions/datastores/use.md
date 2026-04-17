@@ -28,25 +28,25 @@ You can get started with a workflow or app directly from a datastore. Each time 
 
 To create a workflow from a datastore:
 1. On the [Datastores page][1], locate your datastore in the list and click to open it.
-1. Click **Create** > **Workflow from Datastore**.
+1. Click {{< ui >}}Create{{< /ui >}} > {{< ui >}}Workflow from Datastore{{< /ui >}}.
 
-Datadog creates a workflow with a **List items** workflow step prepopulated with your datastore ID. From here, follow the [Workflow Automation][2] documentation to build your workflow. For a list of available datastore actions, see the [Action Catalog][4].
+Datadog creates a workflow with a {{< ui >}}List items{{< /ui >}} workflow step prepopulated with your datastore ID. From here, follow the [Workflow Automation][2] documentation to build your workflow. For a list of available datastore actions, see the [Action Catalog][4].
 
 ### App Builder
 
 To create an app from a datastore:
 1. On the [Datastores page][1], locate your datastore in the list and click to open it.
-1. Click **Create** > **App from Datastore**.
+1. Click {{< ui >}}Create{{< /ui >}} > {{< ui >}}App from Datastore{{< /ui >}}.
 
 Datadog creates an app prepopulated with your datastore ID. From here, follow the [App Builder][3] documentation to build your app. For a list of available datastore actions, see the [Action Catalog][4].
 
 ## Use a datastore in an app {#use-app}
 
 To use a datastore in an existing app, add a datastore action:
-1. Click the Data (**{&nbsp;}**) icon to open the Data tab.
-1. Click the plus (**+**) icon, select **Action**, and add a Datastore action to add to your app. For a list of available datastore actions, see the [Action Catalog][4].
+1. Click the {{< ui >}}Data{{< /ui >}} ({{< ui >}}{&nbsp;}{{< /ui >}}) icon to open the {{< ui >}}Data{{< /ui >}} tab.
+1. Click the plus ({{< ui >}}+{{< /ui >}}) icon, select {{< ui >}}Action{{< /ui >}}, and add a Datastore action to add to your app. For a list of available datastore actions, see the [Action Catalog][4].
 1. Choose an existing connection or [create one][10].
-1. From the **Datastore ID** drop-down menu, select an existing datastore, or select **New Datastore** to create one.
+1. From the {{< ui >}}Datastore ID{{< /ui >}} drop-down menu, select an existing datastore, or select {{< ui >}}New Datastore{{< /ui >}} to create one.
 
    {{< img src="/actions/datastore/datastore-add-app.png" alt="Add the datastore from an App Builder action" style="width:100%;" >}}
 
@@ -81,15 +81,15 @@ The table uses the output from the List Items action to display the data from th
 
 To retrieve the UUID for a datastore:
 1. On the [Datastores page][1], locate your datastore in the list and click to open it.
-1. Click **Table Options** > **Copy datastore UUID**.
+1. Click {{< ui >}}Table Options{{< /ui >}} > {{< ui >}}Copy datastore UUID{{< /ui >}}.
 
 ## Use a datastore in a workflow {#use-workflow}
 
 To use a datastore in an existing workflow, add a datastore action:
-1. Click the plus (**+**) icon to add a step to your workflow.
+1. Click the plus ({{< ui >}}+{{< /ui >}}) icon to add a step to your workflow.
 1. Search for `datastore` and select a Datastore action to add to your workflow. For a list of available datastore actions, see the [Action Catalog][4].
 1. Click on the step in the workflow canvas.
-1. From the **Datastore ID** drop-down menu, select an existing datastore, or select **New Datastore** to create one.
+1. From the {{< ui >}}Datastore ID{{< /ui >}} drop-down menu, select an existing datastore, or select {{< ui >}}New Datastore{{< /ui >}} to create one.
 
    {{< img src="/actions/datastore/datastore-create.png" alt="Add the datastore from an App Builder action" style="width:100%;" >}}
 
