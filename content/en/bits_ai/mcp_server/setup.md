@@ -396,7 +396,7 @@ Example configuration file location:
 
 ## Toolsets
 
-The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
+The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
@@ -420,7 +420,7 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 ### Available toolsets
 
-These toolsets are generally available:
+These toolsets are generally available. See [Datadog MCP Server Tools][49] for a complete reference of available tools organized by toolset, with example prompts.
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
@@ -614,3 +614,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [46]: /dashboards/
 [47]: /help/
 [48]: /reference_tables/
+[49]: /bits_ai/mcp_server/tools
