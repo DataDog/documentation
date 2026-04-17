@@ -1379,6 +1379,24 @@ kubectl apply -f <filename>
 
 On other managed services, such as Azure Kubernetes Service (AKS) and Google Kubernetes Engine (GKE), the user cannot access the control plane components. As a result, it is not possible to run the `kube_apiserver`, `kube_controller_manager`, `kube_scheduler`, or `etcd` checks in these environments.
 
+### GKE control plane metrics through the Google Cloud integration
+
+Although Agent-based control plane checks are not supported on GKE, you can collect control plane metrics through Datadog's [Google Cloud Platform integration][12]. GKE exposes control plane metrics (API server, scheduler, controller manager) through [Google Cloud Managed Service for Prometheus][13], which Datadog collects as `gcp.gke.control_plane.*` metrics.
+
+To enable this:
+
+1. [Enable GKE control plane metrics][14] on your GKE cluster (API Server, Scheduler, Controller Manager).
+2. Set up the [Google Cloud Platform integration][12] in Datadog.
+3. In the Datadog [Google Cloud integration tile][15], go to the **Metric Collection** tab and ensure the **Prometheus** metric namespace is enabled. GKE control plane metrics are exported under the `prometheus.googleapis.com/` namespace in Google Cloud Monitoring, so this namespace must be included for Datadog to collect them.
+
+For more details on available GKE metrics, see the [Google Kubernetes Engine integration][16] page.
+
+[12]: /integrations/google_cloud_platform/
+[13]: https://cloud.google.com/stackdriver/docs/managed-prometheus
+[14]: https://cloud.google.com/kubernetes-engine/docs/how-to/control-plane-metrics
+[15]: https://app.datadoghq.com/integrations/google-cloud-platform
+[16]: /integrations/google_kubernetes_engine/
+
 
 [1]: https://docs.datadoghq.com/integrations/kube_apiserver_metrics/
 [2]: https://docs.datadoghq.com/integrations/etcd/?tab=containerized
