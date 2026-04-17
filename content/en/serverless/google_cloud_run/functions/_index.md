@@ -5,6 +5,9 @@ further_reading:
   - link: 'https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions'
     tag: 'Blog'
     text: 'Cloud Functions is now Cloud Run functions — event-driven programming in one unified serverless platform'
+  - link: "/bits_ai/mcp_server/tools/#serverless_onboarding"
+    tag: 'Documentation'
+    text: 'Datadog MCP Server: serverless_onboarding tool'
 
 ---
 
@@ -18,4 +21,13 @@ Then, select your runtime below for instructions on how to instrument your appli
 
 {{% container-languages path="google_cloud_run/functions" functions="true" %}}
 
+## Use the Datadog MCP server
+
+Use the Datadog MCP server's [`serverless_onboarding`][2] tool to set up monitoring for your Cloud Run functions with AI assistance. After you connect, try a prompt like:
+
+```shell
+Help me monitor my GCP Cloud Run functions with Datadog using Terraform.
+```
+
 [1]: /integrations/google-cloud-platform/
+[2]: /bits_ai/mcp_server/tools/#serverless_onboarding
