@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-This guide explains how to use Datadog Feature Flags to run Experiments with a headless CMS such as Contentful, Builder.io, or Strapi. Instead of hardcoding content into your flag variants, you author all content variations directly in your CMS. Use a string or JSON flag to map each variant to a content or model ID, which your frontend resolves at render time. This keeps content management in editors' hands while giving engineers full observability through Datadog.
+This guide explains how to use Datadog Feature Flags to run Experiments with a headless CMS (content management system) such as Contentful, Builder.io, or Strapi. Instead of hardcoding content into your flag variants, you author all content variations directly in your CMS. Use a string or JSON flag to map each variant to a content or model ID, which your frontend resolves at render time. This keeps content management in editors' hands while giving engineers full observability through Datadog.
 
 **The core pattern:**
 
