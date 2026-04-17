@@ -2567,16 +2567,16 @@ menu:
         unstable:
           - v2
         order: 68
-    - name: Cancel a threat hunting job
-      url: '#cancel-a-threat-hunting-job'
-      identifier: security-monitoring-cancel-a-threat-hunting-job
+    - name: Cancel a historical job
+      url: '#cancel-a-historical-job'
+      identifier: security-monitoring-cancel-a-historical-job
       parent: security-monitoring
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CancelThreatHuntingJob
+          - CancelHistoricalJob
         unstable:
           - v2
         order: 66
@@ -2589,7 +2589,7 @@ menu:
         versions:
           - v2
         operationids:
-          - GetThreatHuntingJob
+          - GetHistoricalJob
         unstable:
           - v2
         order: 64
@@ -2602,7 +2602,7 @@ menu:
         versions:
           - v2
         operationids:
-          - DeleteThreatHuntingJob
+          - DeleteHistoricalJob
         unstable:
           - v2
         order: 65
@@ -2619,29 +2619,29 @@ menu:
         unstable:
           - v2
         order: 67
-    - name: Run a threat hunting job
-      url: '#run-a-threat-hunting-job'
-      identifier: security-monitoring-run-a-threat-hunting-job
+    - name: Run a historical job
+      url: '#run-a-historical-job'
+      identifier: security-monitoring-run-a-historical-job
       parent: security-monitoring
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - RunThreatHuntingJob
+          - RunHistoricalJob
         unstable:
           - v2
         order: 62
-    - name: List threat hunting jobs
-      url: '#list-threat-hunting-jobs'
-      identifier: security-monitoring-list-threat-hunting-jobs
+    - name: List historical jobs
+      url: '#list-historical-jobs'
+      identifier: security-monitoring-list-historical-jobs
       parent: security-monitoring
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ListThreatHuntingJobs
+          - ListHistoricalJobs
         unstable:
           - v2
         order: 63
