@@ -19,15 +19,17 @@ With PATs, you can:
 - Limit the blast radius of leaked credentials through mandatory time-to-live (TTL) values. Expired tokens are automatically revoked, so inactive credentials do not persist indefinitely.
 - Separate concerns by reserving API keys for telemetry submission (Agent, logs, metrics) and use PATs for all other web API calls.
 
-### PATs compared to application keys
+### PATs compared to other credential types
 
-| | Personal Access Tokens | Application keys |
-|---|---|---|
-| Standalone authentication | Yes; no API key pairing needed | No; requires an API key |
-| Scoped by default | Yes; scopes are mandatory | Optional; unscoped by default |
-| Time-to-live (TTL) | Required (24 hours to one year) | No expiration |
-| Identifiable prefix | Yes; `ddpat_` | Yes; `ddap_` (new) |
-| Linked to | Individual user | Individual user |
+| | Personal Access Tokens | Service Access Tokens | Application keys |
+|---|---|---|---|
+| Standalone authentication | Yes; no API key pairing needed | Yes; no API key pairing needed | No; requires an API key |
+| Scoped by default | Yes; scopes are mandatory | Yes; scopes are mandatory | Optional; unscoped by default |
+| Time-to-live (TTL) | Required (24 hours to one year) | Optional; can be long-lived | No expiration |
+| Identifiable prefix | `ddpat_` | `ddpat_` | `ddap_` (new) |
+| Linked to | Individual user | Service account | Individual user or service account |
+
+For Service Access Tokens, see [Service Access Tokens][7].
 
 ## Prerequisites
 
@@ -155,3 +157,4 @@ PATs follow an eventual consistency model. After creation or revocation, changes
 [4]: /account_management/audit_trail/
 [5]: https://app.datadoghq.com/audit-trail
 [6]: /api/latest/key-management/
+[7]: /account_management/service-access-tokens/
