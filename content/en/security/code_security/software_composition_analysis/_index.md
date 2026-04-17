@@ -61,7 +61,7 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 | Risk factor                       | How it is evaluated                                                  | Impact on the score                                    |
 |-----------------------------------|----------------------------------------------------------------------|--------------------------------------------------------|
 | Base CVSS score                   | Published CVSS score for the vulnerability.                          | Starting point for the severity score.                 |
-| Reachability                      | Whether the vulnerable code path is actually executed.               | Increased when the vulnerable code is invoked.         |
+| Reachability                      | Whether the vulnerable function is referenced in the source code (detected statically at the repository level). | Increased when the vulnerable function is found to be reachable in the code. |
 | Production runtime context        | Whether the affected service is running in a production environment. | Decreased if the service is not running in production. |
 | Under attack                      | Evidence of active attack activity targeting the service.            | Decreased if there is no observed attack activity.     |
 | Exploit availability              | Availability of public exploits for the vulnerability.               | Decreased if no exploit is available.                  |
