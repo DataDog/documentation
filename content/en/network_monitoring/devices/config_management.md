@@ -148,9 +148,11 @@ When you compare two configuration versions, the AI summary automatically:
 
 NCM uses device profiles to collect configurations from network devices over SSH. Profiles are bundled with the Datadog Agent and matched automatically based on your device's operating system.
 
+NCM profiles are managed and updated automatically through Agent releases, so new device support and improvements are included without any manual configuration.
+
 For the profile source files, see the [NCM default profiles directory][8] in the `datadog-agent` repository.
 
-| Vendor | OS | Profile | Minimal Agent version | Running | Startup |
+| Vendor | OS | Profile | Min. Agent version | Running | Startup |
 |---|---|---|---|---|---|
 | Arista | EOS | `eos` | 7.77.0 | {{< X >}} | {{< X >}} |
 | Aruba | AOS-CX | `aoscx` | 7.76.0 | {{< X >}} | {{< X >}} |
