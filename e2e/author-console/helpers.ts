@@ -78,11 +78,3 @@ export async function selectAutocompleteOption(
 export async function waitForConsole(page: Page) {
     await page.waitForSelector('h1#title');
 }
-
-/**
- * Default mask for screenshots: hide the build-time line in the h1 (dynamic
- * text, even with a frozen clock — locale formatting can shift between runs).
- */
-export function timestampMask(page: Page): Locator[] {
-    return [page.locator('h1#title span')];
-}

@@ -4,7 +4,6 @@ import {
     freezeClock,
     patchConsoleData,
     selectAutocompleteOption,
-    timestampMask,
     waitForConsole
 } from './helpers';
 
@@ -48,9 +47,7 @@ test.describe('Build errors tab', () => {
 
     test('no-errors state snapshot', async ({ page }) => {
         await setupConsole(page, { tab: 'build-errors' });
-        await expect(page).toHaveScreenshot('build-errors-no-errors.png', {
-            mask: timestampMask(page)
-        });
+        await expect(page).toHaveScreenshot('build-errors-no-errors.png');
     });
 
     test('errors state shows alert and compilation errors heading', async ({ page }) => {
@@ -80,9 +77,7 @@ test.describe('Build errors tab', () => {
 
     test('errors state snapshot', async ({ page }) => {
         await setupConsole(page, { tab: 'build-errors', errorsByFilePath: errorsOverlay });
-        await expect(page).toHaveScreenshot('build-errors-with-errors.png', {
-            mask: timestampMask(page)
-        });
+        await expect(page).toHaveScreenshot('build-errors-with-errors.png');
     });
 });
 
@@ -104,9 +99,7 @@ test.describe('Quick filter tab', () => {
     });
 
     test('initial snapshot', async ({ page }) => {
-        await expect(page).toHaveScreenshot('quick-filter-initial.png', {
-            mask: timestampMask(page)
-        });
+        await expect(page).toHaveScreenshot('quick-filter-initial.png');
     });
 
     test('selecting only a trait does not generate markup', async ({ page }) => {
@@ -145,9 +138,7 @@ test.describe('Quick filter tab', () => {
         );
         await expect(page.getByRole('heading', { name: 'Generated markup' })).toBeVisible();
 
-        await expect(page).toHaveScreenshot('quick-filter-after-lookup.png', {
-            mask: timestampMask(page)
-        });
+        await expect(page).toHaveScreenshot('quick-filter-after-lookup.png');
     });
 });
 
@@ -166,9 +157,7 @@ test.describe('Page wizard tab', () => {
     });
 
     test('initial snapshot', async ({ page }) => {
-        await expect(page).toHaveScreenshot('page-wizard-initial.png', {
-            mask: timestampMask(page)
-        });
+        await expect(page).toHaveScreenshot('page-wizard-initial.png');
     });
 
     test.describe('existing-config path', () => {
