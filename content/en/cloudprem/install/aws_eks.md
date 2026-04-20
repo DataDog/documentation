@@ -1,28 +1,28 @@
 ---
-title: Install CloudPrem on AWS EKS
+title: Install BYOC Logs on AWS EKS
 aliases:
 - /cloudprem/configure/aws_config/
-description: Learn how to install and configure CloudPrem on AWS EKS
+description: Learn how to install and configure BYOC Logs on AWS EKS
 further_reading:
 - link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
-  text: "Configure CloudPrem Ingress"
+  text: "Configure BYOC Logs Ingress"
 - link: "/cloudprem/ingest/"
   tag: "Documentation"
   text: "Configure Log Ingestion"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
 
-This document walks you through the process of configuring your AWS environment and installing CloudPrem on AWS EKS.
+This document walks you through the process of configuring your AWS environment and installing BYOC Logs on AWS EKS.
 
 ## Prerequisites
 
-To deploy CloudPrem on AWS, you need to configure:
+To deploy BYOC Logs on AWS, you need to configure:
 - AWS credentials and authentication
 - AWS region selection
 - IAM permissions for S3 object storage
@@ -31,7 +31,7 @@ To deploy CloudPrem on AWS, you need to configure:
 
 ### AWS credentials
 
-When starting a node, CloudPrem attempts to find AWS credentials using the credential provider chain implemented by [rusoto_core::ChainProvider][2] and looks for credentials in this order:
+When starting a node, BYOC Logs attempts to find AWS credentials using the credential provider chain implemented by [rusoto_core::ChainProvider][2] and looks for credentials in this order:
 
 1. Environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `AWS_SESSION_TOKEN` (optional).
 2. Credential profiles file, typically located at `~/.aws/credentials` or otherwise specified by the `AWS_SHARED_CREDENTIALS_FILE` and `AWS_PROFILE` environment variables if set and not empty.
@@ -42,7 +42,7 @@ An error is returned if no credentials are found in the chain.
 
 ### AWS Region
 
-CloudPrem attempts to find the AWS region from multiple sources, using the following order of precedence:
+BYOC Logs attempts to find the AWS region from multiple sources, using the following order of precedence:
 
 1. **Environment variables**: Checks `AWS_REGION`, then `AWS_DEFAULT_REGION`.
 2. **AWS config file**: Typically located at `~/.aws/config`, or at the path specified by the `AWS_CONFIG_FILE` environment variable (if set and not empty).
@@ -98,7 +98,7 @@ You can create a micro RDS instance with the following command. For production e
 
 ```shell
 # Micro RDS instance for testing purposes. Takes around 5 min.
-aws rds create-db-instance --db-instance-identifier cloudprem-postgres --db-instance-class db.t3.micro --engine postgres --engine-version 16.3 --master-username cloudprem --master-user-password 'FixMeCloudPrem' --allocated-storage 20 --storage-type gp2 --db-subnet-group-name <VPC-ID> --vpc-security-group-ids <VPC-SECURITY-GROUP-ID> --db-name cloudprem --backup-retention-period 0 --no-multi-az
+aws rds create-db-instance --db-instance-identifier cloudprem-postgres --db-instance-class db.t3.micro --engine postgres --engine-version 16.3 --master-username cloudprem --master-user-password 'FixMeBYOC Logs' --allocated-storage 20 --storage-type gp2 --db-subnet-group-name <VPC-ID> --vpc-security-group-ids <VPC-SECURITY-GROUP-ID> --db-name cloudprem --backup-retention-period 0 --no-multi-az
 ```
 
 You can retrieve RDS info by executing the following shell commmands:
@@ -114,16 +114,16 @@ DATABASE=$(echo $RDS_INFO | jq -r '.Database')
 
 echo ""
 echo "🔗 Full URI:"
-echo "postgres://cloudprem:FixMeCloudPrem@$ENDPOINT:$PORT/$DATABASE"
+echo "postgres://cloudprem:FixMeBYOC Logs@$ENDPOINT:$PORT/$DATABASE"
 echo ""
 ```
 
 ## Installation steps
 
-1. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart)
+1. [Install the BYOC Logs Helm chart](#install-the-cloudprem-helm-chart)
 2. [Verify installation](#verification)
 
-## Install the CloudPrem Helm chart
+## Install the BYOC Logs Helm chart
 
 1. Add and update the Datadog Helm repository:
    ```shell
@@ -203,10 +203,10 @@ echo ""
      eksRoleName: cloudprem
      extraAnnotations: {}
 
-   # CloudPrem node configuration
+   # BYOC Logs node configuration
    config:
      # The root URI where index data is stored. This should be an S3 path.
-     # All indexes created in CloudPrem are stored under this location.
+     # All indexes created in BYOC Logs are stored under this location.
      default_index_root_uri: s3://<BUCKET_NAME>/indexes
 
    # Internal ingress configuration for access within the VPC
@@ -278,7 +278,7 @@ echo ""
 
 ### Check deployment status
 
-Verify that all CloudPrem components are running:
+Verify that all BYOC Logs components are running:
 
 ```shell
 kubectl get pods -n <NAMESPACE_NAME>
@@ -288,7 +288,7 @@ kubectl get services -n <NAMESPACE_NAME>
 
 ## Uninstall
 
-To uninstall CloudPrem:
+To uninstall BYOC Logs:
 
 ```shell
 helm uninstall <RELEASE_NAME>
@@ -296,7 +296,7 @@ helm uninstall <RELEASE_NAME>
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent][8]** - Configure the Datadog Agent to send logs to CloudPrem
+**[Set up log ingestion with Datadog Agent][8]** - Configure the Datadog Agent to send logs to BYOC Logs
 
 ## Further reading
 

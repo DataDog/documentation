@@ -323,7 +323,7 @@ Worker version 2.9.0 gives you access to the following:
 #### New features
 
 - [OpenTelemetry Collector source][10]: Ingest logs from your OpenTelemetry Collector into Observability Pipelines.
-- [Datadog CloudPrem destination][11]: Route logs to the Datadog CloudPrem destination.
+- [BYOC Logs destination][11]: Route logs to the BYOC Logs destination.
 - [Google Pub/Sub destination][12]: Send logs from Observability Pipelines to the Google Pub/Sub messaging system.
 - The `haversine` custom function to calculate haversine distance and bearing.
 

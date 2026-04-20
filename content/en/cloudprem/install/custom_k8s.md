@@ -1,25 +1,25 @@
 ---
-title: Install CloudPrem on Kubernetes with PostgreSQL and MinIO
-description: Learn how to install and configure CloudPrem on any Kubernetes cluster using PostgreSQL and MinIO for object storage
+title: Install BYOC Logs on Kubernetes with PostgreSQL and MinIO
+description: Learn how to install and configure BYOC Logs on any Kubernetes cluster using PostgreSQL and MinIO for object storage
 further_reading:
 - link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
-  text: "Configure CloudPrem Ingress"
+  text: "Configure BYOC Logs Ingress"
 - link: "/cloudprem/ingest/"
   tag: "Documentation"
   text: "Configure Log Ingestion"
 - link: "/cloudprem/operate/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshooting CloudPrem"
+  text: "Troubleshooting BYOC Logs"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
 
-This documentation walks you through the process of installing CloudPrem on any Kubernetes cluster using PostgreSQL for metadata storage and MinIO for S3-compatible object storage.
+This documentation walks you through the process of installing BYOC Logs on any Kubernetes cluster using PostgreSQL for metadata storage and MinIO for S3-compatible object storage.
 
 This setup is ideal for environments where you manage your own infrastructure or don't use a major cloud provider's managed services.
 
@@ -42,7 +42,7 @@ Before you begin, confirm you have:
   kubectl get nodes
   ```
 
-- A **Datadog account** with the CloudPrem feature enabled
+- A **Datadog account** with the BYOC Logs feature enabled
 
 - A **[Datadog API key][1]**
 
@@ -54,7 +54,7 @@ Before you begin, confirm you have:
   - Password
 
 - A **MinIO instance** accessible from your Kubernetes cluster, with:
-  - A bucket created for CloudPrem data (for example, `cloudprem`)
+  - A bucket created for BYOC Logs data (for example, `cloudprem`)
   - An access key and secret key with read/write permissions on the bucket
   - The MinIO endpoint URL (for example, `http://minio.minio.svc.cluster.local:9000`)
 
@@ -84,10 +84,10 @@ If successful, the command lists the contents of your MinIO bucket.
 
 ## Installation steps
 
-1. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart)
+1. [Install the BYOC Logs Helm chart](#install-the-cloudprem-helm-chart)
 2. [Verify installation](#verification)
 
-## Install the CloudPrem Helm chart
+## Install the BYOC Logs Helm chart
 
 1. Add and update the Datadog Helm repository:
    ```shell
@@ -169,10 +169,10 @@ serviceAccount:
   create: true
   name: cloudprem
 
-# CloudPrem node configuration
+# BYOC Logs node configuration
 config:
   # The root URI where index data is stored. This should be an S3-compatible path pointing to your MinIO bucket.
-  # All indexes created in CloudPrem are stored under this location.
+  # All indexes created in BYOC Logs are stored under this location.
   default_index_root_uri: s3://<BUCKET_NAME>/indexes
   storage:
     s3:
@@ -262,7 +262,7 @@ janitor:
 
 ### Check deployment status
 
-Verify that all CloudPrem components are running:
+Verify that all BYOC Logs components are running:
 
 ```shell
 kubectl get pods -n <NAMESPACE_NAME>
@@ -301,7 +301,7 @@ kubectl logs -n <NAMESPACE_NAME> -l app.kubernetes.io/component=indexer --tail=5
 
 ## Uninstall
 
-To uninstall CloudPrem:
+To uninstall BYOC Logs:
 
 ```shell
 helm uninstall <RELEASE_NAME> -n <NAMESPACE_NAME>
@@ -315,7 +315,7 @@ kubectl delete namespace <NAMESPACE_NAME>
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent][2]** - Configure the Datadog Agent to send logs to CloudPrem
+**[Set up log ingestion with Datadog Agent][2]** - Configure the Datadog Agent to send logs to BYOC Logs
 
 ## Further reading
 

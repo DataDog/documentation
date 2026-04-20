@@ -5,7 +5,7 @@
 | Amazon Security Lake                       | None           | 256               | 300                 |
 | Azure Storage (Datadog Log Archives)       | None           | 100               | 900                 |
 | CrowdStrike                                | None           | 1                 | 1                   |
-| Datadog CloudPrem                          | 1,000          | 4.25              | 5                   |
+| BYOC Logs                                  | 1,000          | 4.25              | 5                   |
 | Datadog Logs                               | 1,000          | 4.25              | 5                   |
 | Datadog Metrics                            | 100,000        | None              | 2                   |
 | Elasticsearch                              | None           | 10                | 1                   |

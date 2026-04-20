@@ -25,7 +25,7 @@ These are the available destinations:
 - [Amazon Security Lake][3]
 - [Azure Storage][4]
 - [Datadog Archives][2]
-- [Datadog CloudPrem][5]
+- [BYOC Logs][5]
 - [CrowdStrike Next-Gen SIEM][6]
 - [Datadog Logs][7]
 - [Elasticsearch][8]

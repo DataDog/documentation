@@ -1,35 +1,35 @@
 ---
-title: Install CloudPrem on Azure AKS
+title: Install BYOC Logs on Azure AKS
 aliases:
 - /cloudprem/configure/azure_config/
-description: Learn how to install and configure CloudPrem on Azure AKS
+description: Learn how to install and configure BYOC Logs on Azure AKS
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
 
-This document walks you through the process of configuring your Azure environment and installing CloudPrem on Azure AKS.
+This document walks you through the process of configuring your Azure environment and installing BYOC Logs on Azure AKS.
 
 ## Prerequisites
 
-Before you install CloudPrem on Azure, you must set up a set of supporting infrastructure resources. These components provide the foundational compute, storage, database, and networking services that CloudPrem depends on.
+Before you install BYOC Logs on Azure, you must set up a set of supporting infrastructure resources. These components provide the foundational compute, storage, database, and networking services that BYOC Logs depends on.
 
 ### Infrastructure Requirements
 Here are the components you must provision:
 
-- [**Azure Kubernetes Service (AKS)**](#azure-kubernetes-service-aks): A running AKS cluster sized for your expected CloudPrem workload.
-- [**PostgreSQL Flexible Server**](#azure-postgresql-flexible-server): An Azure Database for PostgreSQL instance that CloudPrem will use to store its metadata.
-- [**Blob Storage container**](#blob-storage-container): An Azure Storage container to hold CloudPrem logs.
+- [**Azure Kubernetes Service (AKS)**](#azure-kubernetes-service-aks): A running AKS cluster sized for your expected BYOC Logs workload.
+- [**PostgreSQL Flexible Server**](#azure-postgresql-flexible-server): An Azure Database for PostgreSQL instance that BYOC Logs will use to store its metadata.
+- [**Blob Storage container**](#blob-storage-container): An Azure Storage container to store BYOC Logs data.
 - [**Client Identity and permissions**](#client-identity-and-permissions): An Azure AD application with read/write access to the storage container.
-- [**NGINX Ingress Controller**](#nginx-ingress-controller): Installed on the AKS cluster to route external traffic to CloudPrem services.
-- **Datadog Agent**: Deployed on the AKS cluster to collect and send logs to CloudPrem.
+- [**NGINX Ingress Controller**](#nginx-ingress-controller): Installed on the AKS cluster to route external traffic to BYOC Logs services.
+- **Datadog Agent**: Deployed on the AKS cluster to collect and send logs to BYOC Logs.
 
 ### Azure Kubernetes Service (AKS)
 
-CloudPrem runs entirely on Kubernetes. You need an AKS cluster with sufficient CPU, memory, and disk space configured for your workload. See the Kubernetes cluster sizing recommendations for guidance.
+BYOC Logs runs entirely on Kubernetes. You need an AKS cluster with sufficient CPU, memory, and disk space configured for your workload. See the Kubernetes cluster sizing recommendations for guidance.
 
 #### Deploy the AKS cluster
 
@@ -44,7 +44,7 @@ kubectl get nodes -o wide
 
 ### Azure PostgreSQL Flexible Server
 
-CloudPrem stores its metadata and configuration in a PostgreSQL database. Datadog recommends the Azure Database for PostgreSQL Flexible Server. It must be reachable from the AKS cluster, ideally with private networking enabled. See the Postgres sizing recommendations for details.
+BYOC Logs stores its metadata and configuration in a PostgreSQL database. Datadog recommends the Azure Database for PostgreSQL Flexible Server. It must be reachable from the AKS cluster, ideally with private networking enabled. See the Postgres sizing recommendations for details.
 
 #### Create the PostgreSQL database
 
@@ -53,7 +53,7 @@ CloudPrem stores its metadata and configuration in a PostgreSQL database. Datado
 
 #### Verify database connectivity
 
-<div class="alert alert-info">For security, create a dedicated database and user for CloudPrem, and grant the user rights only on that database, not cluster-wide.</div>
+<div class="alert alert-info">For security, create a dedicated database and user for BYOC Logs, and grant the user rights only on that database, not cluster-wide.</div>
 
 Connect to your PostgreSQL database from within the AKS network using the PostgreSQL client, `psql`. First, start an interactive pod in your Kubernetes cluster using an image that includes `psql`:
 ```shell
@@ -85,7 +85,7 @@ Type "help" for help.
 
 ### Blob Storage Container
 
-CloudPrem uses Azure Blob Storage to persist logs. Create a dedicated container for this purpose.
+BYOC Logs uses Azure Blob Storage to persist logs. Create a dedicated container for this purpose.
 
 #### Create a Blob Storage container
 Use a dedicated container per environment (for example, `cloudprem-prod`, `cloudprem-staging`), and assign least-privilege RBAC roles at the container level, rather than at the storage account scope.
@@ -95,7 +95,7 @@ Use a dedicated container per environment (for example, `cloudprem-prod`, `cloud
 
 ### Client Identity and permissions
 
-An Azure AD application must be granted read/write access to the Blob Storage container. Register a dedicated application for CloudPrem and assign the corresponding service principal the `Contributor` role on the Blob Storage container created above.
+An Azure AD application must be granted read/write access to the Blob Storage container. Register a dedicated application for BYOC Logs and assign the corresponding service principal the `Contributor` role on the Blob Storage container created above.
 
 #### Register the application
 [Register an application in Microsoft Entra ID][8]
@@ -107,12 +107,12 @@ An Azure AD application must be granted read/write access to the Blob Storage co
 
 #### Public NGINX Ingress Controller
 
-The public ingress is essential for enabling Datadog's control plane and query service to manage and query CloudPrem clusters over the public internet. It provides secure access to the CloudPrem gRPC API through the following mechanisms:
+The public ingress is essential for enabling Datadog's control plane and query service to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API through the following mechanisms:
 - Creates an internet-facing Azure Load Balancer that accepts traffic from Datadog services
 - Implements TLS encryption with termination at the ingress controller level
-- Uses HTTP/2 (gRPC) for communication between Datadog and CloudPrem clusters
+- Uses HTTP/2 (gRPC) for communication between Datadog and BYOC Logs clusters
 - Requires mutual TLS (mTLS) authentication where Datadog services must present valid client certificates
-- Configures the controller in TLS passthrough mode to forward client certificates to CloudPrem pods with the `ssl-client-cert` header
+- Configures the controller in TLS passthrough mode to forward client certificates to BYOC Logs pods with the `ssl-client-cert` header
 - Rejects requests that are missing valid client certificates or the certificate header
 
 Use the following `nginx-public.yaml` Helm values file in order to create the public NGINX Ingress Controller:
@@ -198,10 +198,10 @@ Optionally, you can add a DNS entry pointing to the IP of the public load balanc
 
 ## Installation steps
 
-1. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart)
+1. [Install the BYOC Logs Helm chart](#install-the-cloudprem-helm-chart)
 2. [Verify installation](#verification)
 
-## Install the CloudPrem Helm chart
+## Install the BYOC Logs Helm chart
 
 1. Add and update the Datadog Helm repository:
    ```shell
@@ -302,10 +302,10 @@ azure:
      create: true
      name: cloudprem
 
-# CloudPrem node configuration
+# BYOC Logs node configuration
 config:
   # The root URI where index data is stored. This should be an Azure path.
-  # All indexes created in CloudPrem are stored under this location.
+  # All indexes created in BYOC Logs are stored under this location.
   default_index_root_uri: azure://<CONTAINER_NAME>/indexes
 
 # Internal ingress configuration
@@ -314,7 +314,7 @@ config:
 # Additional annotations can be added to customize the ALB behavior.
 ingress:
   # The internal ingress is used by Datadog Agents and other collectors running outside
-  # the Kubernetes cluster to send their logs to CloudPrem.
+  # the Kubernetes cluster to send their logs to BYOC Logs.
   internal:
     enabled: true
     ingressClassName: nginx-internal
@@ -377,7 +377,7 @@ indexer:
 
 ### Check deployment status
 
-Verify that all CloudPrem components are running:
+Verify that all BYOC Logs components are running:
 
 ```shell
 kubectl get pods -n <NAMESPACE_NAME>
@@ -387,7 +387,7 @@ kubectl get services -n <NAMESPACE_NAME>
 
 ## Uninstall
 
-To uninstall CloudPrem, execute the following command:
+To uninstall BYOC Logs, execute the following command:
 
 ```shell
 helm uninstall <RELEASE_NAME>
@@ -395,7 +395,7 @@ helm uninstall <RELEASE_NAME>
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent][10]** - Configure the Datadog Agent to send logs to CloudPrem
+**[Set up log ingestion with Datadog Agent][10]** - Configure the Datadog Agent to send logs to BYOC Logs
 
 [2]: https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-cli
 [3]: https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-terraform?pivots=development-environment-azure-cli

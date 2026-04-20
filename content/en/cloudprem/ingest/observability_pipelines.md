@@ -1,8 +1,8 @@
 ---
-title: Send logs to CloudPrem with Observability Pipelines
+title: Send logs to BYOC Logs with Observability Pipelines
 aliases:
 - /cloudprem/ingest_logs/observability_pipelines/
-description: Configure Observability Pipelines to send logs to CloudPrem with optional dual shipping
+description: Configure Observability Pipelines to send logs to BYOC Logs with optional dual shipping
 further_reading:
 - link: "/cloudprem/ingest_logs/datadog_agent/"
   tag: "Documentation"
@@ -15,16 +15,16 @@ further_reading:
   text: "Observability Pipelines Overview"
 - link: "/observability_pipelines/destinations/cloudprem/"
   tag: "Documentation"
-  text: "CloudPrem Destination for Observability Pipelines"
+  text: "BYOC Logs Destination for Observability Pipelines"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
 
-Observability Pipelines provides a flexible intermediary layer between your Datadog Agents and CloudPrem, allowing you to process, transform, and route logs before they reach your CloudPrem deployment. Configure Observability Pipelines to receive logs from the Datadog Agent and forward them to CloudPrem:
+Observability Pipelines provides a flexible intermediary layer between your Datadog Agents and BYOC Logs, allowing you to process, transform, and route logs before they reach your BYOC Logs deployment. Configure Observability Pipelines to receive logs from the Datadog Agent and forward them to BYOC Logs:
 1. [**Create and configure the pipeline**](#create-and-configure-an-observability-pipeline) - Define your pipeline configuration (source, processors, destination) in the Observability Pipelines UI. This creates the pipeline definition that will be used by the Worker.
 2. [**Deploy the Observability Pipelines Worker**](##deploy-your-observability-pipelines) - Install the Worker with your pipeline configuration. The Worker must be running and listening for logs before the Agent can connect to it.
 3. [**Configure the Datadog Agent**](#configure-the-datadog-agent) - Point the Agent to send logs to the deployed Worker. This step must come last because the Agent needs the Worker's address to be available.
@@ -36,7 +36,7 @@ Observability Pipelines provides a flexible intermediary layer between your Data
 1. Set up your pipeline:
     1. Choose the [**Datadog Agent** source][3].
     1. Remove any default processors from the pipeline.
-    1. Select the [**Datadog CloudPrem** destination][4] to forward logs to your CloudPrem instance. Leave the configuration empty.
+    1. Select the [**Datadog BYOC Logs** destination][4] to forward logs to your BYOC Logs instance. Leave the configuration empty.
 
 <!-- This image shows an example with dual shipping when the instructions say log volume control -->
 <!-- {{< img src="/cloudprem/ingest/observability-pipelines-cloudprem-setup.png" alt="Screenshot of the Logs Explorer interface showing how to filter logs by selecting the cloudprem index in the facets panel" style="width:80%;" >}} -->
@@ -46,7 +46,7 @@ Observability Pipelines provides a flexible intermediary layer between your Data
 
 After creating your pipeline in the UI, deploy the Observability Pipelines Worker. The Worker runs your pipeline configuration and listens for logs from the Datadog Agent.
 
-The following Helm command installs or upgrades the Worker, configuring it to listen for logs and forward them to your CloudPrem indexer.
+The following Helm command installs or upgrades the Worker, configuring it to listen for logs and forward them to your BYOC Logs indexer.
 <br>
 **Note**: You need the `pipelineId` from the pipeline you created in the previous step. This ID links the Worker to your pipeline configuration.
 
@@ -61,7 +61,7 @@ helm upgrade --install opw \
 	datadog/observability-pipelines-worker
 ```
 
-After a minute, verify that logs are flowing through the pipeline and reaching the CloudPrem destination. This indicates that the Worker is running and ready to receive logs, and you can proceed to configure the Agent.
+After a minute, verify that logs are flowing through the pipeline and reaching the BYOC Logs destination. This indicates that the Worker is running and ready to receive logs, and you can proceed to configure the Agent.
 
 ## Configure the Datadog Agent
 
@@ -105,7 +105,7 @@ kubectl get pods -l app=observability-pipelines-worker
 # Check worker logs
 kubectl logs -l app=observability-pipelines-worker
 
-# Verify logs are reaching CloudPrem
+# Verify logs are reaching BYOC Logs
 kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://localhost:7280/api/v1/datadog/search?query='
 ```
 

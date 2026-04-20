@@ -5,16 +5,16 @@ aliases:
 further_reading:
 - link: "/cloudprem/architecture/"
   tag: "Documentation"
-  text: "CloudPrem Architecture"
+  text: "BYOC Logs Architecture"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
 
-This page provides troubleshooting guidance for common issues you may encounter when deploying or operating Datadog CloudPrem. It includes typical error messages, diagnostic steps, and tips for resolving problems related to access permissions, storage configuration, and component health. Use this guide to quickly diagnose issues or to gather context before reaching out to [Datadog support][1].
+This page provides troubleshooting guidance for common issues you may encounter when deploying or operating Datadog BYOC Logs. It includes typical error messages, diagnostic steps, and tips for resolving problems related to access permissions, storage configuration, and component health. Use this guide to quickly diagnose issues or to gather context before reaching out to [Datadog support][1].
 
 
 ## Component health
@@ -33,7 +33,7 @@ kubectl describe pod -n datadog-cloudprem <pod-name>
 
 ## Access permissions
 
-The most common errors come from access permissions to the object storage or to the metastore. To troubleshoot, use `kubectl` and verify logs from CloudPrem components: indexer pods, metastore pods, and searcher pods.
+The most common errors come from access permissions to the object storage or to the metastore. To troubleshoot, use `kubectl` and verify logs from BYOC Logs components: indexer pods, metastore pods, and searcher pods.
 
 ## Metastore errors
 

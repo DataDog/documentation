@@ -1,24 +1,24 @@
 ---
-title: CloudPrem on Google Kubernetes Engine (GKE)
+title: BYOC Logs on Google Kubernetes Engine (GKE)
 further_reading:
 - link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
-  text: "Configure CloudPrem Ingress"
+  text: "Configure BYOC Logs Ingress"
 - link: "/cloudprem/ingest/"
   tag: "Documentation"
   text: "Configure Log Ingestion"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
 
-This installation setup walks you through deploying Datadog CloudPrem on Google Kubernetes Engine (GKE).
+This installation setup walks you through deploying Datadog BYOC Logs on Google Kubernetes Engine (GKE).
 
-CloudPrem on GKE uses the following Google Cloud services:
-- **Google Kubernetes Engine (GKE)**: Container orchestration platform for running CloudPrem components
+BYOC Logs on GKE uses the following Google Cloud services:
+- **Google Kubernetes Engine (GKE)**: Container orchestration platform for running BYOC Logs components
 - **Cloud Storage (GCS)**: Object storage for telemetry data and indexes
 - **Cloud SQL for PostgreSQL**: Managed PostgreSQL database for metadata storage
 - **Workload Identity**: Secure authentication between GKE workloads and Google Cloud services
@@ -113,7 +113,7 @@ kubectl get nodes
 
 ### Step 3: Create Cloud Storage bucket
 
-Create a GCS bucket for CloudPrem data storage:
+Create a GCS bucket for BYOC Logs data storage:
 
 ```shell
 export BUCKET_NAME="cloudprem-data-${PROJECT_ID}"
@@ -149,7 +149,7 @@ gcloud sql instances describe cloudprem-postgres \
 # Should output: RUNNABLE
 ```
 
-Create the CloudPrem database:
+Create the BYOC Logs database:
 ```shell
 gcloud sql databases create cloudprem \
   --instance=cloudprem-postgres
@@ -179,13 +179,13 @@ gcloud sql instances patch cloudprem-postgres \
 
 ### Step 5: Configure IAM and Workload Identity
 
-Create a GCP service account for CloudPrem:
+Create a GCP service account for BYOC Logs:
 
 ```shell
 export SERVICE_ACCOUNT_NAME="cloudprem-sa"
 
 gcloud iam service-accounts create ${SERVICE_ACCOUNT_NAME} \
-  --display-name="CloudPrem Service Account" \
+  --display-name="BYOC Logs Service Account" \
   --project=${PROJECT_ID}
 ```
 
@@ -248,7 +248,7 @@ kubectl create secret generic cloudprem-metastore-config \
   --namespace=datadog-cloudprem
 ```
 
-### Step 7: Install CloudPrem with Helm
+### Step 7: Install BYOC Logs with Helm
 
 Add the Datadog Helm repository:
 
@@ -276,10 +276,10 @@ serviceAccount:
   extraAnnotations:
     iam.gke.io/gcp-service-account: cloudprem-sa@${YOUR_PROJECT_ID}.iam.gserviceaccount.com
 
-# CloudPrem node configuration
+# BYOC Logs node configuration
 config:
   # The root URI where index data is stored. This should be an gs path.
-  # All indexes created in CloudPrem are stored under this location.
+  # All indexes created in BYOC Logs are stored under this location.
   default_index_root_uri: gs://${BUCKET_NAME}/indexes
 
 # Internal ingress configuration for access within the VPC
@@ -326,7 +326,7 @@ searcher:
   podSize: xlarge
 ```
 
-Install CloudPrem:
+Install BYOC Logs:
 
 ```shell
 helm install cloudprem datadog/cloudprem \
@@ -363,7 +363,7 @@ kubectl apply -f ingress-values.yaml
 
 ### Step 9: Install Datadog Agent (Recommended)
 
-Install the Datadog Agent to collect metrics from CloudPrem components and send them to Datadog.
+Install the Datadog Agent to collect metrics from BYOC Logs components and send them to Datadog.
 
 Create a separate namespace for the Datadog Agent:
 
@@ -423,7 +423,7 @@ Verify the Datadog Agent is running:
 kubectl get pods -n datadog
 ```
 
-Update CloudPrem to send metrics to the Datadog Agent's DogStatsD service. Add this to your `values.yaml`:
+Update BYOC Logs to send metrics to the Datadog Agent's DogStatsD service. Add this to your `values.yaml`:
 
 ```yaml
 # DogStatsD configuration - send metrics to Datadog Agent
@@ -433,7 +433,7 @@ dogstatsdServer:
   port: 8125
 ```
 
-Upgrade CloudPrem with the new configuration:
+Upgrade BYOC Logs with the new configuration:
 
 ```shell
 helm upgrade cloudprem datadog/cloudprem \
@@ -476,7 +476,7 @@ kubectl logs -n datadog-cloudprem -l app.kubernetes.io/component=metastore --tai
 
 ## Uninstall
 
-To completely remove CloudPrem:
+To completely remove BYOC Logs:
 
 ```shell
 # Uninstall Helm release
@@ -508,17 +508,17 @@ gcloud container clusters delete ${CLUSTER_NAME} \
 - **Enable Cloud SQL backups** for disaster recovery.
 - **Use regional GKE clusters** for high availability.
 - **Monitor disk usage** on indexer nodes and enable auto-scaling.
-- **Set up alerts** in Datadog for CloudPrem component health.
+- **Set up alerts** in Datadog for BYOC Logs component health.
 - **Use private GKE clusters** for enhanced security in production.
-- **Regularly update** CloudPrem to the latest version for bug fixes and features.
+- **Regularly update** BYOC Logs to the latest version for bug fixes and features.
 - **Test scaling** in a staging environment before production changes.
 - **Store the database password** in Secret Manager and use External Secrets Operator (ESO) or the Secrets Store CSI Driver to provide the password to metastore pods.
 
 ## Next steps
 
-- Configure your applications to send telemetry to CloudPrem
-- Set up dashboards in Datadog to monitor CloudPrem performance
-- Review CloudPrem logs and metrics in your Datadog account
+- Configure your applications to send telemetry to BYOC Logs
+- Set up dashboards in Datadog to monitor BYOC Logs performance
+- Review BYOC Logs metrics and data in your Datadog account
 - Plan capacity based on your data volume
 
 ## Further reading
