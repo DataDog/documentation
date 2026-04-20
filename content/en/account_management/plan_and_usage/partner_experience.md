@@ -52,7 +52,7 @@ The following table lists each Plan & Usage feature and its availability for dir
 | Projected costs | {{< X >}} | {{< X >}} |  |
 | Usage summary | {{< X >}} | {{< X >}} |  |
 | Cost & usage API endpoints | {{< X >}} | {{< X >}} | See [Supported API endpoints](#supported-api-endpoints) for the full list |
-| Cost attribution |  |  |  |
+| Cost attribution | {{< X >}} |  | Individual customer organizations can access cost attribution from their own [Plan & Usage][1] page |
 | Usage attribution | {{< X >}} |  | Individual customer organizations can access usage attribution from their own [Plan & Usage][1] page |
 | Product-specific usage tables (for example, custom metrics, logs usage by index) | {{< X >}} |  | Individual customer organizations can view these tables from their own [Usage Details][3] page |
 | Datadog costs in Cloud Cost Management | {{< X >}} |  | Not available at the partner admin org level or the customer org level for customers purchasing through a partner |
