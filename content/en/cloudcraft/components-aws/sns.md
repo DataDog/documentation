@@ -11,11 +11,11 @@ Use the SNS component to represent notification services from your Amazon Web Se
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Rotate item**: Rotate the component and change its direction.
-- **Requests/month (K)**: Enter the number of requests sent per month, in thousands.
-- **Notifications/month (K)**: Enter the number of notifications sent per month, in thousands.
-- **Notification type**: Select the type of notification for the SNS component.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Rotate item{{< /ui >}}: Rotate the component and change its direction.
+- {{< ui >}}Requests/month (K){{< /ui >}}: Enter the number of requests sent per month, in thousands.
+- {{< ui >}}Notifications/month (K){{< /ui >}}: Enter the number of notifications sent per month, in thousands.
+- {{< ui >}}Notification type{{< /ui >}}: Select the type of notification for the SNS component.
 
 ## API
 
