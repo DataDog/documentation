@@ -181,8 +181,8 @@ Run the agent installer package for the latest 5.x version, instructions can be 
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
-1. Stop the Agent with the systray app, if it's running.
-2. Exit the systray app.
+1. Stop the Agent with the {{< ui >}}systray app{{< /ui >}}, if it's running.
+2. Exit the {{< ui >}}systray app{{< /ui >}}.
 3. Uninstall the Datadog Agent application.
 4. Install the Agent 5 DMG package using your preferred installation method.
 

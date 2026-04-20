@@ -39,7 +39,7 @@ Indexers receive logs from Datadog Agents, then process, index, and store them a
 | **Memory** | 4 GB RAM per vCPU | |
 | **Minimum Pod Size** | 2 vCPUs, 8 GB RAM | Recommended minimum for indexer pods |
 | **Storage Capacity** | At least 250 GB | Required for temporary data while creating and merging index files |
-| **Storage Type** | Local SSDs (preferred) | Local HDDs or network-attached block storage (Amazon EBS, Azure Managed Disks) can also be used |
+| **Storage Type** | Network-attached block storage | For example: Amazon EBS gp3, Azure Managed Disks, or GCP Persistent Disk. Data is temporarily stored in a write-ahead log (WAL) before being uploaded to object storage. The WAL is not replicated, so using local (ephemeral) SSDs increases the risk of losing a few minutes of data if the disk fails. Network-attached block storage provides built-in redundancy. |
 | **Disk I/O** | ~20 MB/s per vCPU | Equivalent to 320 IOPS per vCPU for Amazon EBS (assuming 64 KB IOPS) |
 
 

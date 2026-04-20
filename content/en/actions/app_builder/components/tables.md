@@ -22,15 +22,15 @@ When you have a full list of items already and you want to filter them, there ar
 
 ### Column filtering
 
-Under **Columns**, expand a column and enable the **Filterable** option to allow users to filter by entries in that column. When enabled, a drop-down menu appears in the table header which allows the user to select an item from that column to filter on.
+Under {{< ui >}}Columns{{< /ui >}}, expand a column and enable the {{< ui >}}Filterable{{< /ui >}} option to allow users to filter by entries in that column. When enabled, a drop-down menu appears in the table header which allows the user to select an item from that column to filter on.
 
 ### Filter by date range
 
-To allow date range filtering, under **Appearance**, enable the **Has Date Range Filter** option and select a data path to filter by. When enabled, a drop-down menu appears in the table header which allows the user to select a time span to filter by.
+To allow date range filtering, under {{< ui >}}Appearance{{< /ui >}}, enable the {{< ui >}}Has Date Range Filter{{< /ui >}} option and select a data path to filter by. When enabled, a drop-down menu appears in the table header which allows the user to select a time span to filter by.
 
 ### Filter with search
 
-To add a search bar to your table, under **Appearance**, enable the **Is Searchable** option.
+To add a search bar to your table, under {{< ui >}}Appearance{{< /ui >}}, enable the {{< ui >}}Is Searchable{{< /ui >}} option.
 
 ### Filter a table with a text input or search component
 
@@ -38,11 +38,11 @@ One common use case is filtering a table component using the value in a text inp
 
 For example, if you want to list your dashboards in a table that you can filter using a text input component, you could do the following:
 
-1. Add a new query using the **+** button.
-1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
+1. Add a new query using the {{< ui >}}+{{< /ui >}} button.
+1. Search for "list dashboards" and click the {{< ui >}}List Dashboards{{< /ui >}} action. Name your query `listDashboards0`.
 1. Add a text input or search component to your app. Name it `searchInput`.
 1. Add a table component.
-1. Set the table's **data source** property to your data filtered by the text input or search component that you created. In this example, set the **data source** to the following expression:
+1. Set the table's {{< ui >}}data source{{< /ui >}} property to your data filtered by the text input or search component that you created. In this example, set the {{< ui >}}data source{{< /ui >}} to the following expression:
 
     ```
     ${listDashboards0?.outputs.dashboards.filter(row => row.title.includes(searchInput.value))}
@@ -56,11 +56,11 @@ Another common use case is filtering a table using a select component.
 
 For example, if you want to list your dashboards in a table that you can filter using a select component, you could do the following:
 
-1. Add a new query using the **+** button.
-1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
+1. Add a new query using the {{< ui >}}+{{< /ui >}} button.
+1. Search for "list dashboards" and click the {{< ui >}}List Dashboards{{< /ui >}} action. Name your query `listDashboards0`.
 1. Add a select component to your app. Name it `selectInput`.
 1. Add a table component.
-1. Set the table's **data source** property to your data filtered by the select component. In this example, set **data source** to the following expression:
+1. Set the table's {{< ui >}}data source{{< /ui >}} property to your data filtered by the select component. In this example, set {{< ui >}}data source{{< /ui >}} to the following expression:
 
     ```
     ${listDashboards0?.outputs.dashboards.filter(row => row.title.includes(selectInput.value))}
@@ -72,11 +72,11 @@ You can select a value from the select component and the rows of table are filte
 
 If you want to filter the results of a query itself, then use those results in your table, perform the following steps:
 
-1. Add a new query using the **+** button.
-1. Search for "list dashboards" and click the **List Dashboards** action. Name your query `listDashboards0`.
+1. Add a new query using the {{< ui >}}+{{< /ui >}} button.
+1. Search for "list dashboards" and click the {{< ui >}}List Dashboards{{< /ui >}} action. Name your query `listDashboards0`.
 1. Add a text input or search component to your app. Name it `searchInput`.
-1. Add a table component and set its **data source** property to the query that you added.
-1. Expand the **Advanced** section of the query and find **Post-query Transformation**.
+1. Add a table component and set its {{< ui >}}data source{{< /ui >}} property to the query that you added.
+1. Expand the {{< ui >}}Advanced{{< /ui >}} section of the query and find {{< ui >}}Post-query Transformation{{< /ui >}}.
 1. Replace `return outputs` with the following line:
 
     ```
@@ -107,7 +107,7 @@ The GitHub API accepts query parameters for filtering based on organization, aut
 If you want to show a loading indicator on a table while the data is being fetched, you can set the _table's_ `isLoading` value equal to the _query's_ `isLoading` property. For example:
 
 1. Follow the steps in [filtering with a text input][2].
-1. In the properties of your table, under **Appearance**, click the **&lt;/&gt;** next to **Is Loading** to open the code editor.
+1. In the properties of your table, under {{< ui >}}Appearance{{< /ui >}}, click the {{< ui >}}&lt;/&gt;{{< /ui >}} next to {{< ui >}}Is Loading{{< /ui >}} to open the code editor.
 1. Set the table's `isLoading` value to the following expression:
 
     ```
@@ -118,7 +118,7 @@ The table shows a loading indicator when you type new text into the text input c
 
 ## Dynamic table values
 
-You can use the **data source** property of a table component to dynamically fill table values and constrain which objects are pulled into the table as columns.
+You can use the {{< ui >}}data source{{< /ui >}} property of a table component to dynamically fill table values and constrain which objects are pulled into the table as columns.
 
 For example, the [GitHub PR Summarizer][3] blueprint uses a series of GitHub queries to summarize a list of pull requests in a repository. The query uses the data source entry below to constrain the table to 6 columns: `title`,`Summary`,`updated_at`,`user`,`html_url`, and `state`. The highlighted code dynamically populates the user column for each pull request with the author's avatar and GitHub username.
 
@@ -146,7 +146,7 @@ ${(() => {
 })()}
 {{< /highlight >}}
 
-In the table, the **User** column fills with an avatar and GitHub username for each PR author.
+In the table, the {{< ui >}}User{{< /ui >}} column fills with an avatar and GitHub username for each PR author.
 
 
 

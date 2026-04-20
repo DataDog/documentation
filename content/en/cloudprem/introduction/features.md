@@ -12,25 +12,39 @@ Datadog CloudPrem brings core Log Explorer capabilities to your self-hosted envi
 
 ## Supported features
 
-The following log features are already supported:
+The following log features are supported:
+
+**Search and visualization**
 - Full text search on any log attributes
 - List, Timeseries, Top List, Table, Tree Map, Pie Chart, Scatter Plot visualizations
-- Group by into Fields and Patterns (except the monthly timeshift)
-- Dashboards
-- Log monitors
-- RBAC through [Log Restriction Queries][1]
+- Group by into Fields and Patterns (except monthly timeshift)
+- Facet-based filtering and drill-down
 - Download CSV
-- Correlation from a log to metrics sent to Datadog SaaS (the reverse is not yet supported)
-- Correlation from a log to traces sent to Datadog SaaS (the reverse is not yet supported)
+
+**Dashboards and monitors**
+- Dashboards with CloudPrem log data
+- Log monitors on CloudPrem indexes
+- Bits AI SRE
+
+**Index management**
+- Multiple indexes with independent retention periods and routing rules
+
+**Access control**
+- RBAC through [Log Restriction Queries][1]
+
+**Correlation**
+- Correlation from a CloudPrem log to metrics sent to Datadog SaaS
+- Correlation from a CloudPrem log to traces sent to Datadog SaaS
 
 ## Unsupported features
 
 Feature support is actively evolving. The following are not currently supported:
-- Bits AI SRE
-- Index management for multiple retention periods and segmentation needs
-- Notebooks
-- Federated search
-- LiveTail
-- Watchdogs
+
+- **SIEM**: Not available for CloudPrem logs.
+- **Watchdog**: Not available for CloudPrem logs.
+- **Notebooks**: Log data from CloudPrem cannot be used in Notebooks.
+- **Federated search**: Searching across multiple CloudPrem clusters from a single query is not supported.
+- **LiveTail**: Real-time log streaming is not available for CloudPrem indexes.
+- **Log context view**: Viewing surrounding logs in context is not yet supported.
 
 [1]: /api/latest/logs-restriction-queries/
