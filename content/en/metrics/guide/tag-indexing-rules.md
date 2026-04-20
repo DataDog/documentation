@@ -1,6 +1,6 @@
 ---
 title: Tag Indexing Rules
-description: "Use tag rules to configure metrics proactively, after ingestion, so you can mitigate high cardinality and enforce consistent tag management across your organization"
+description: "Use tag rules to configure metrics proactively, after ingestion, so you can mitigate high cardinality and enforce consistent tag management across your organization."
 further_reading:
 - link: "/account_management/billing/custom_metrics/?tab=countrate"
   tag: "Documentation"
@@ -44,7 +44,7 @@ Metric names or prefixes
 : Apply the rule to specific metric names or namespaces (for example, `http.*`, `db.query.*`)
 
 Prefix exceptions
-: Exclude specific prefixes from the rule scope (for example, apply to `http.*` except `http.client.*`)
+: Exclude specific prefixes from the rule scope (for example, apply to `http.*` but exclude `http.client.*`)
 
 {{< img src="metrics/guide/tag_indexing_rules/define_rule_scope.png" alt="The Choose Metrics step showing a rule scoped to http.* with http.client.* excluded as a sub-prefix." style="width:80%;">}}
 
@@ -54,15 +54,21 @@ If multiple rules apply to the same metrics, Datadog evaluates them in order. Op
 
 Define how the rule handles tags for metrics in scope.
 
-**Merge or override existing configurations**: Choose whether this rule builds on or replaces existing tag configurations.
+#### Merge or override existing configurations
+
+Choose whether this rule builds on or replaces existing tag configurations.
 - **Merge** (default)—applies this rule on top of existing tag configurations. Metrics with no prior configuration are unaffected.
 - **Override**—ignores all other rules that apply to the same prefixes and enforces this rule exclusively. Select the **Override all other rules that apply to these prefixes** option to enable this behavior.
 
-**Note**: Use **Override** behavior on a narrower rule to prevent a broader rule's excluded tags from stacking. For example, if Rule 1 excludes `host` from `dd.*` (Merge) and Rule 2 excludes `app_name` from `dd.payments.*`, using **Merge** behavior on Rule 2 drops both `host` and `app_name` tags from `dd.payments.*` metrics. Using **Override** behavior on Rule 2 drops only `app_name` (Rule 1's effect is overridden for that prefix).
+**Note**: Use **Override** behavior on a narrower rule to prevent a broader rule's excluded tags from stacking. For example, suppose Rule 1 uses **Merge** behavior to exclude `host` from `dd.*`, and Rule 2 excludes `app_name` from `dd.payments.*`. If Rule 2 also uses **Merge**, both `host` and `app_name` are dropped from `dd.payments.*` metrics. If Rule 2 uses **Override**, only `app_name` is dropped (Rule 1's effect is overridden for that prefix).
 
-**Apply to new metrics only**: Applies this rule only to metrics submitted after the rule is created. Existing metrics that match the rule remain unchanged.
+#### Apply to new metrics only
 
-**Select tags to include or exclude**: Choose whether to use an allowlist or a blocklist for tag filtering.
+Applies this rule only to metrics submitted after the rule is created. Existing metrics that match the rule remain unchanged.
+
+#### Select tags to include or exclude
+
+Choose whether to use an allowlist or a blocklist for tag filtering.
 - **Include tags**—use an allowlist of tags that remain queryable.
 - **Exclude tags**—use a blocklist to define non-queryable tags.
 
@@ -76,8 +82,8 @@ After you configure tag behavior, the preview shows a list of affected metrics (
 
 ### Limitations
 
-- **Exclude** rules take effect after Datadog observes a tag on a metric
-- Datadog evaluates rules sequentially, and each subsequent rule either builds on or replaces earlier configurations
+- **Exclude** rules take effect after Datadog observes a tag on a metric.
+- Datadog evaluates rules sequentially, and each subsequent rule either builds on or replaces earlier configurations.
 
 ## Modify a rule
 
@@ -109,7 +115,7 @@ To reapply rules, restore the metric's default configuration from the same panel
 
 When multiple rules apply to the same metrics, Datadog evaluates them sequentially. Rule order matters because:
 
-- Later rules modify the results of earlier rules
+- Rules lower in the evaluation order modify the results of earlier rules
 - **Override** behavior overwrites previous configurations for matching metrics
 - **Merge** behavior builds on existing configurations
 - When multiple rules use **Override** behavior, the last applied rule determines whether the final configuration is in include or exclude mode
@@ -135,6 +141,8 @@ When multiple rules apply to the same metrics, Datadog evaluates them in order. 
 
 Starting tags:  
 `host`, `env`, `service`
+
+In this example, Rule 2 uses an **Include** configuration, which acts as an allowlist. Only the listed tags are retained; any tag not listed is dropped.
 
 #### Order 1: Specific rule first
 
