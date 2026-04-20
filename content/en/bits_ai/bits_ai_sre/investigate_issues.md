@@ -103,6 +103,8 @@ Bits is able to run investigations on the following monitor types:
   - Outlier
   - Logs
   - APM (`APM Metrics` type only; `Trace Analytics` is not supported)
+  - Composites
+  - SLOs (Preview)
   - Synthetics API and Browser tests (Preview)
 
 <div class="alert alert-info">
