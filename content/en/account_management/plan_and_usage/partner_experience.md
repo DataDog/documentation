@@ -36,7 +36,7 @@ View estimated, historical, and projected cost data for all customer organizatio
 
 {{< img src="account_management/plan_and_usage/partner-cost-details.png" alt="Cost Summary page for a partner admin organization showing estimated and projected costs across customer organizations with a cumulative cost breakdown chart and per-customer cost table." >}}
 
-### Usage Details
+### Usage details
 
 View usage data for all customer organizations in one place. Partners can see a total across all customers, or group and filter by customer organization, product, and account. See [Usage Details][3] for full documentation.
 
