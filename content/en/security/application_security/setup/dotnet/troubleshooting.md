@@ -4,15 +4,15 @@ title: Troubleshooting .NET App and API Protection
 
 ## Common Issues
 
-### No security signals appearing
+### No Security Signals appear
 
 1. Verify Agent version:
-    - Ensure you're running Datadog Agent v7.41.1 or higher.
+    - Confirm you're running Datadog Agent v7.41.1 or higher.
     - Check Agent status: `datadog-agent status`.
 2. Check .NET tracer version:
     - Confirm you're using .NET tracer v2.42.0 or higher.
 3. Verify environment variables:
-    - Ensure `DD_APPSEC_ENABLED=true` is set.
+    - Confirm `DD_APPSEC_ENABLED=true` is set.
     - Check `DD_SERVICE` and `DD_ENV` are properly configured.
     - Verify `DD_APM_ENABLED=true` if using APM features.
 4. Check file system permissions:
@@ -39,6 +39,7 @@ title: Troubleshooting .NET App and API Protection
 ### Still having issues?
 
 If you're still experiencing problems:
+
 1. Check the [Application Security Monitoring troubleshooting guide][1]
 2. Review the [.NET tracer documentation][2]
 3. Contact [Datadog support][3]
