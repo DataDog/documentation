@@ -21,30 +21,23 @@ Learn how to set up and configure the Datadog MCP Server, which lets you retriev
 {{< tabs >}}
 {{% tab "Cursor" %}}
 
-Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server.
+For Cursor, Datadog recommends installing the [**Datadog plugin**][2] from the Cursor plugin marketplace.
+
+<div class="alert alert-info">The Datadog plugin for Cursor is in Preview.</div>
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. Install the extension (omit `--profile` and profile name to install to the default Cursor profile):
-    ```shell
-    cursor --install-extension datadog.datadog-vscode --profile <PROFILE_NAME>
-    ```
-   Alternatively, install the [Datadog extension][2]. If you have the extension installed already, make sure it's the latest version.
-1. Sign in to your Datadog account.
-   {{< img src="bits_ai/mcp_server/ide_sign_in.png" alt="Sign in to Datadog from the IDE extension" style="width:70%;" >}}
-1. **Restart the IDE.**
-1. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), select the **Tools & MCP** tab, and expand the extension's tools list.
-1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
+1. Install the Datadog plugin from the [Cursor plugin marketplace][2].
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-[2]: /ide_plugins/vscode/?tab=cursor#installation
-[3]: /bits_ai/mcp_server/tools
+<div class="alert alert-info">The Datadog extension for Cursor no longer installs the Datadog MCP Server. Use the Datadog plugin for MCP Server access. Install the <a href="/ide_plugins/vscode/?tab=cursor">Datadog extension</a> separately for other features such as Exception Replay, Code Insights, View in Cursor, Log Annotations, Static Code Analysis, and Fix in Chat.</div>
+
+[2]: https://cursor.com/marketplace/datadog
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-[1]: /ide_plugins/vscode/
 {{% /tab %}}
 
 {{% tab "Claude Code" %}}
@@ -482,7 +475,7 @@ These toolsets are in Preview. Sign up for a toolset by completing the Product P
 
 | Client | Developer | Notes |
 |--------|------|------|
-| [Cursor][3] | Cursor | Datadog [Cursor & VS Code extension][15] recommended. |
+| [Cursor][3] | Cursor | Datadog plugin from the Cursor plugin marketplace recommended. See the [Cursor tab](?tab=cursor#installation) above. |
 | [Claude Code][4] | Anthropic | |
 | [Claude][19] | Anthropic | Use [custom connector setup](?tab=claude#installation). Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
