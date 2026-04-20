@@ -82,6 +82,9 @@ This folder contains a collection of pages used for e2e tests. These pages are n
 * [Tooltip](/dd_e2e/cdocs/components/tooltip)
 * Variations of the tooltip component render as expected on initial page load.
 ---
+* [UI](/dd_e2e/cdocs/components/ui)
+* Variations of the ui component render as expected on initial page load.
+---
 * [Underline](/dd_e2e/cdocs/components/underline)
 * Variations of the underline component render as expected on initial page load.
 ---
