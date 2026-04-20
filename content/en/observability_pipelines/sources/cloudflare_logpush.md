@@ -90,3 +90,4 @@ After your Logpush job has been successfully created, you can view your Cloudfla
 [4]: /observability_pipelines/configuration/install_the_worker/?tab=docker#pipeline-ui-setup
 [5]: https://developers.cloudflare.com/logs/logpush/logpush-job/enable-destinations/http/
 [6]: https://app.datadoghq.com/logs
+[7]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
