@@ -44,7 +44,9 @@ The [Datadog Lambda Forwarder][1] can send AWS CloudWatch Logs to CloudPrem by s
 DD_URL=<CLOUDPREM_HOST>
 ```
 
-The forwarder sends logs to `https://<DD_URL>:443/api/v2/logs`. Note that API key validation (`/api/v1/validate`) is sent to Datadog SaaS (controlled by `DD_API_URL`), not to CloudPrem. This means you need a valid Datadog API key even when forwarding to CloudPrem.
+The forwarder sends logs to `https://<DD_URL>:443/api/v2/logs`. 
+
+**Note:** API key validation (`/api/v1/validate`) is sent to Datadog SaaS (controlled by `DD_API_URL`), not to CloudPrem. This means you need a valid Datadog API key even when forwarding to CloudPrem.
 
 ### OpenTelemetry
 
