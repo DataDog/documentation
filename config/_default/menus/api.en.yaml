@@ -2723,6 +2723,18 @@ menu:
         unstable:
           - v2
         order: 92
+    - name: Update security signal triage state or assignee
+      url: '#update-security-signal-triage-state-or-assignee'
+      identifier: security-monitoring-update-security-signal-triage-state-or-assignee
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EditSecurityMonitoringSignal
+        unstable: []
+        order: 94
     - name: Get suggested actions for a signal
       url: '#get-suggested-actions-for-a-signal'
       identifier: security-monitoring-get-suggested-actions-for-a-signal
@@ -2783,6 +2795,18 @@ menu:
           - SearchSecurityMonitoringSignals
         unstable: []
         order: 72
+    - name: Bulk update security signals
+      url: '#bulk-update-security-signals'
+      identifier: security-monitoring-bulk-update-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignals
+        unstable: []
+        order: 95
     - name: Bulk update triage state of security signals
       url: '#bulk-update-triage-state-of-security-signals'
       identifier: security-monitoring-bulk-update-triage-state-of-security-signals
