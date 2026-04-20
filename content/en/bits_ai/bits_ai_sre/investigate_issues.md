@@ -18,46 +18,64 @@ You can launch a Bits AI SRE investigation from several entry points:
   - [**Automatic**](#enable-automatic-investigations): Configure monitors to automatically launch a Bits investigation whenever they enter an alert state
 - [APM latency graphs on service pages](#apm-latency-graphs-on-service-pages)
 - [APM latency Watchdog stories](#apm-latency-watchdog-stories)
+- [Synthetic test details page](#from-the-synthetic-test-details-page)
 - [General prompt](#general-prompt)
 
-### Manually start an investigation
-
-#### Monitor alerts {#manual-monitor-alerts}
+### Monitor alerts {#manual-monitor-alerts}
 
 You can invoke Bits on an individual monitor alert or warn event from several entry points:
 
-##### Option 1: Bits AI SRE Monitors list {#monitor-list}
+#### Option 1: Bits AI SRE Monitors list {#monitor-list}
 1. Go to [**Bits AI SRE** > **Monitors** > **Supported**][5].
 1. Click **Investigate Recent Alerts** and select an alert.
 
-##### Option 2: Monitor status page
+#### Option 2: Monitor status page
 Navigate to the monitor status page of a [Bits AI SRE-supported monitor](#supported-monitors) and click **Investigate with Bits AI SRE** in the top-right corner.
 
-##### Option 3: Monitor event side panel
+#### Option 3: Monitor event side panel
 In the monitor event side panel of a [Bits AI SRE-supported monitor](#supported-monitors), click **Investigate with Bits AI SRE**.
 
-##### Option 4: Slack
+#### Option 4: Slack
 To use the Slack integration, [connect your Slack workspace to Bits AI SRE][8].
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
-#### APM latency (Preview)
+### APM latency (Preview)
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
 Bits AI SRE investigations started from APM latency graphs and APM Watchdog stories are in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
-##### APM latency graphs on service pages
+#### APM latency graphs on service pages
 
 1. In Datadog, navigate to [APM][1] and open the service or resource page you want to investigate. Next to the latency graph, click **Investigate**.
 1. Click and drag your cursor over the point plot visualization to make a rectangular selection over a region that shows unusual latency to seed the analysis. Initial diagnostics on the latency issue appear, including the observed user impact, anomalous tags contributing to the issue, and recent changes. For more information, see [APM Investigator][2].
 1. Click **Investigate with Bits AI SRE** to run a deeper investigation.
 
-##### APM latency Watchdog stories
+#### APM latency Watchdog stories
 
 On a Watchdog APM latency story, click **Investigate with Bits AI SRE**.
 
-#### General prompt (Preview)
+### Synthetic tests (Preview)
+
+<div class="alert alert-info">
+Bits AI SRE investigations started from Synthetic Browser and API tests are in Preview.</div>
+
+When a Synthetic Browser or API test monitor triggers, you can launch a Bits AI SRE investigation to identify the root cause. Bits AI SRE analyzes Synthetic test results and history alongside traces, logs, and metrics. It surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
+
+#### From the Synthetic test details page
+
+1. On the [Synthetic Tests][18] page, open the Synthetic test you want to investigate and go to the **Timeline** section.
+1. Select the **Alert Triggered** event for the failing test run.
+1. Click **Investigate with Bits AI SRE**.
+
+The investigation opens in a new page, and you can also view it from the test details page after it runs.
+
+#### From a Synthetic monitor
+
+Synthetic monitors support the same monitor-based entry points as other supported monitor types. See [Monitor alerts](#manual-monitor-alerts) for the available options, or toggle **Auto-Investigate** on a Synthetic monitor to start investigations automatically. For details, see [Enable automatic investigations](#enable-automatic-investigations).
+
+### General prompt (Preview)
 
 Click on [New Investigation][16] and describe the issue you want to troubleshoot. Include as much relevant context as possible:
 - Observed symptoms (e.g., errors, latency) including any links to Datadog telemetry that indicate this
@@ -106,9 +124,6 @@ Bits is able to run investigations on the following monitor types:
   - Composites
   - SLOs (Preview)
   - Synthetics API and Browser tests (Preview)
-
-<div class="alert alert-info">
-Starting Bits AI SRE investigations from Synthetic tests is in Preview for all customers.</div>
 
 ## How Bits AI SRE investigates
 When Bits AI SRE investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits AI SRE updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause.
@@ -174,6 +189,7 @@ The Reports tab enables you to track the number of investigations run over time 
 [15]: /account_management/rbac/permissions/#bits-ai
 [16]: https://app.datadoghq.com/bits-ai/investigations/new
 [17]: /source_code/#tag-your-apm-telemetry-with-git-information
+[18]: https://app.datadoghq.com/synthetics/tests
 
 ## Further reading
 
