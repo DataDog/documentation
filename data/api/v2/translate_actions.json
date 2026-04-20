@@ -267,6 +267,12 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "AnonymizeUsers": {
+    "description": "Anonymize a list of users, removing their personal data. This operation is irreversible.\nRequires the `user_access_manage` permission.",
+    "summary": "Anonymize users",
+    "request_description": "",
+    "request_schema_description": "Request body for anonymizing users."
+  },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
     "summary": "Get all API keys"
