@@ -14,13 +14,13 @@ further_reading:
 
 The CI Visibility Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) pipeline executions at multiple levels using any tag.
 
-Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][5] to see your CI pipeline execution results across the following levels: **Pipeline**, **Stage**, **Job**, **Step**, and **Command**.
+Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][5] to see your CI pipeline execution results across the following levels: {{< ui >}}Pipeline{{< /ui >}}, {{< ui >}}Stage{{< /ui >}}, {{< ui >}}Job{{< /ui >}}, {{< ui >}}Step{{< /ui >}}, and {{< ui >}}Command{{< /ui >}}.
 
 {{< img src="/continuous_integration/pipeline_executions.png" text="CI Pipeline Executions page" style="width:100%" >}}
 
 ## Default CI facets
 
-The **CI** panel on the left lists default facets you can use to search for your pipeline executions.
+The {{< ui >}}CI{{< /ui >}} panel on the left lists default facets you can use to search for your pipeline executions.
 
 | Facet | Description |
 |---|---|
@@ -58,7 +58,7 @@ For more information about common facets that you can use as part of your search
 
 You can see aggregated data about pipeline executions over the selected time frame. Use the search field and facets to scope the list down to the executions you want to investigate. Change the list to show pipelines, stages, or jobs using the buttons at the top.
 
-Below are three graphs that visualize the durations of your most active pipelines, your failed pipelines over time, and the executions of your pipelines with an option to toggle to accumulated duration, respectively. These graphs are scoped to the level chosen at the top left (`Pipeline`, `Stage`, `Job`, and more.)
+Below are three graphs that visualize the durations of your most active pipelines, your failed pipelines over time, and the executions of your pipelines with an option to toggle to accumulated duration, respectively. These graphs are scoped to the level chosen at the top left ({{< ui >}}Pipeline{{< /ui >}}, {{< ui >}}Stage{{< /ui >}}, {{< ui >}}Job{{< /ui >}}, and more.)
 
 {{< img src="ci/pipeline_explorer_trends.png" alt="Explorer view trend graphs for Duration, Errored, and Executions" style="width:100%;">}}
 

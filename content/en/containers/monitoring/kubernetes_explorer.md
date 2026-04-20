@@ -160,7 +160,7 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 
 ### Views
 
-Toggle among the **Pods**, **Clusters**, **Namespaces**, and other Kubernetes resources in the **Select Resources** dropdown menu in the top left corner of the page.
+Toggle among the {{< ui >}}Pods{{< /ui >}}, {{< ui >}}Clusters{{< /ui >}}, {{< ui >}}Namespaces{{< /ui >}}, and other Kubernetes resources in the {{< ui >}}Select Resources{{< /ui >}} dropdown menu in the top left corner of the page.
 
 Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
@@ -192,7 +192,7 @@ Click on any row in the table or on any object in a Cluster Map to view informat
 
 {{< img src="infrastructure/livecontainers/orch_ex_panel.png" alt="A view of resources in the side panel, opened to processes." style="width:80%;">}}
 
-The side panel's **YAML** tab shows the full resource definition. Starting in **Agent version 7.44.0**, it also includes seven days of definition history. You can compare what changed over time and across different versions. The time indicated is approximately when the changes were applied to the resource.
+The side panel's {{< ui >}}YAML{{< /ui >}} tab shows the full resource definition. Starting in **Agent version 7.44.0**, it also includes seven days of definition history. You can compare what changed over time and across different versions. The time indicated is approximately when the changes were applied to the resource.
 
 To prevent displaying a large number of irrelevant changes, updates affecting only the following fields are ignored:
 
@@ -209,10 +209,10 @@ The other tabs show more information for troubleshooting the selected resource:
 * [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in the Log Explorer.
 * [**APM**][11]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
 * [**Metrics**][10]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
-* **Processes**: View all processes running in the container of this resource.
-* **Network**: View a container or resource's network performance, including source, destination, sent and received volume, and throughput fields. Use the **Destination** field to search by tags like `DNS` or `ip_type`, or use the **Group by** filter in this view to group network data by tags, like `pod_name` or `service`.
+* {{< ui >}}Processes{{< /ui >}}: View all processes running in the container of this resource.
+* {{< ui >}}Network{{< /ui >}}: View a container or resource's network performance, including source, destination, sent and received volume, and throughput fields. Use the {{< ui >}}Destination{{< /ui >}} field to search by tags like `DNS` or `ip_type`, or use the {{< ui >}}Group by{{< /ui >}} filter in this view to group network data by tags, like `pod_name` or `service`.
 * [**Events**][12]: View all Kubernetes events for your resource.
-* **Monitors**: View monitors tagged, scoped, or grouped for this resource.
+* {{< ui >}}Monitors{{< /ui >}}: View monitors tagged, scoped, or grouped for this resource.
 
 For a detailed dashboard of this resource, click the View Dashboard in the top right corner of this panel.
 

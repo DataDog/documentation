@@ -59,9 +59,9 @@ This ECS daemon task definition launches the Datadog Agent container with the ne
 {{% tab "AWS Console" %}}
 
 1. Log in to your [AWS Console][1] and navigate to the Elastic Container Service section.
-2. Select **Task Definitions** in the navigation pane. On the **Create new task definition** menu, select **Create new task definition with JSON**.
+2. Select {{< ui >}}Task Definitions{{< /ui >}} in the navigation pane. On the {{< ui >}}Create new task definition{{< /ui >}} menu, select {{< ui >}}Create new task definition with JSON{{< /ui >}}.
 3. In the JSON editor box, paste the contents of your daemon task definition file.
-4. Select **Create**.
+4. Select {{< ui >}}Create{{< /ui >}}.
 
 [1]: https://aws.amazon.com/console
 {{% /tab %}}
@@ -85,12 +85,12 @@ The daemon is attached to a capacity provider and deploys automatically to each 
 {{% tab "AWS Console" %}}
 1. Log in to your [AWS Web Console][1] and navigate to the Elastic Container Service section.
 2. Choose the cluster to run the Datadog Agent on.
-3. On the **Daemons** tab, click **Create**.
-4. For **Daemon Task Definition**, select the task definition created in the previous steps.
-5. Enter a **Daemon name**.
-6. For **Capacity Provider**, choose the capacity provider tied to the cluster.
+3. On the {{< ui >}}Daemons{{< /ui >}} tab, click {{< ui >}}Create{{< /ui >}}.
+4. For {{< ui >}}Daemon Task Definition{{< /ui >}}, select the task definition created in the previous steps.
+5. Enter a {{< ui >}}Daemon name{{< /ui >}}.
+6. For {{< ui >}}Capacity Provider{{< /ui >}}, choose the capacity provider tied to the cluster.
 7. Fill in the rest of the optional fields based on your preference.
-8. Click **Create**.
+8. Click {{< ui >}}Create{{< /ui >}}.
 
 [1]: https://aws.amazon.com/console
 {{% /tab %}}
@@ -123,10 +123,10 @@ To enable integrations, add Docker label annotations to your application contain
 
 1. Log in to your [AWS Web Console][1] and navigate to the ECS section.
 2. Choose the cluster the Datadog Agent is running on.
-3. Click the **Tasks** tab, then click the **Task definition** name containing the Datadog Agent container.
-4. Click the **Create new revision** button.
-5. Select the application container you want to monitor and click **Edit**.
-6. Under **Docker labels**, add the following:
+3. Click the {{< ui >}}Tasks{{< /ui >}} tab, then click the {{< ui >}}Task definition{{< /ui >}} name containing the Datadog Agent container.
+4. Click the {{< ui >}}Create new revision{{< /ui >}} button.
+5. Select the application container you want to monitor and click {{< ui >}}Edit{{< /ui >}}.
+6. Under {{< ui >}}Docker labels{{< /ui >}}, add the following:
 
 | Key                           | Value                                           |
 |-------------------------------|-------------------------------------------------|
@@ -134,7 +134,7 @@ To enable integrations, add Docker label annotations to your application contain
 | com.datadoghq.ad.check_names  | `["<CHECK_NAME>"]`                              |
 | com.datadoghq.ad.init_configs | `[{}]`                                          |
 
-7. Click the **Update** button, then click the **Create** button.
+7. Click the {{< ui >}}Update{{< /ui >}} button, then click the {{< ui >}}Create{{< /ui >}} button.
 
 [1]: https://aws.amazon.com/console
 {{% /tab %}}
@@ -170,10 +170,10 @@ aws ecs register-task-definition --cli-input-json file://<path-to-task-definitio
 {{< tabs >}}
 {{% tab "AWS Console" %}}
 
-1. Within the cluster, click the **Services** tab, then click the **Service Name**.
-2. Click the **Update** button.
-3. For **Task Definition**, choose the latest **Revision** from the dropdown menu.
-4. Click the **Update Service** button.
+1. Within the cluster, click the {{< ui >}}Services{{< /ui >}} tab, then click the {{< ui >}}Service Name{{< /ui >}}.
+2. Click the {{< ui >}}Update{{< /ui >}} button.
+3. For {{< ui >}}Task Definition{{< /ui >}}, choose the latest {{< ui >}}Revision{{< /ui >}} from the dropdown menu.
+4. Click the {{< ui >}}Update Service{{< /ui >}} button.
 
 {{% /tab %}}
 {{% tab "AWS CLI" %}}
@@ -522,10 +522,10 @@ After completing the changes above, register each updated application task defin
 {{< tabs >}}
 {{% tab "AWS Console" %}}
 
-1. In the AWS Console, navigate to **Elastic Container Service** > **Task Definitions**.
-2. Select your application task definition and click **Create new revision with JSON**.
-3. Apply your changes and click **Create**.
-4. Navigate to the service using this task definition, click **Update**, select the new revision, and click **Update Service**.
+1. In the AWS Console, navigate to {{< ui >}}Elastic Container Service{{< /ui >}} > {{< ui >}}Task Definitions{{< /ui >}}.
+2. Select your application task definition and click {{< ui >}}Create new revision with JSON{{< /ui >}}.
+3. Apply your changes and click {{< ui >}}Create{{< /ui >}}.
+4. Navigate to the service using this task definition, click {{< ui >}}Update{{< /ui >}}, select the new revision, and click {{< ui >}}Update Service{{< /ui >}}.
 
 {{% /tab %}}
 {{% tab "AWS CLI" %}}
@@ -561,9 +561,9 @@ In the sidecar deployment model, the Datadog Agent runs as an additional contain
 {{% tab "AWS Console" %}}
 
 1. Log in to your [AWS Console][1] and navigate to the Elastic Container Service section.
-2. Select **Task Definitions** in the navigation pane. On the **Create new task definition** menu, select **Create new task definition with JSON**.
+2. Select {{< ui >}}Task Definitions{{< /ui >}} in the navigation pane. On the {{< ui >}}Create new task definition{{< /ui >}} menu, select {{< ui >}}Create new task definition with JSON{{< /ui >}}.
 3. In the JSON editor box, paste the contents of your task definition file.
-4. Select **Create**.
+4. Select {{< ui >}}Create{{< /ui >}}.
 
 [1]: https://aws.amazon.com/console
 {{% /tab %}}
@@ -586,13 +586,13 @@ aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-
 
 1. Log in to your [AWS Web Console][1] and navigate to the Elastic Container Service section.
 2. Choose the cluster to run the Datadog Agent on.
-3. On the **Services** tab, click **Create**.
-4. For **Task Definition**, select the task created in the previous steps.
-5. Enter a **Service name**.
-6. For **Launch type**, choose **Capacity Provider** and select the Managed Instance capacity provider tied to the cluster.
-7. For **Number of tasks**, enter `1`. Click **Next step**.
+3. On the {{< ui >}}Services{{< /ui >}} tab, click {{< ui >}}Create{{< /ui >}}.
+4. For {{< ui >}}Task Definition{{< /ui >}}, select the task created in the previous steps.
+5. Enter a {{< ui >}}Service name{{< /ui >}}.
+6. For {{< ui >}}Launch type{{< /ui >}}, choose {{< ui >}}Capacity Provider{{< /ui >}} and select the Managed Instance capacity provider tied to the cluster.
+7. For {{< ui >}}Number of tasks{{< /ui >}}, enter `1`. Click {{< ui >}}Next step{{< /ui >}}.
 8. Fill in the rest of the optional fields based on your preference.
-9. Click **Create service**.
+9. Click {{< ui >}}Create service{{< /ui >}}.
 
 [1]: https://aws.amazon.com/console
 {{% /tab %}}
