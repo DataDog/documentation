@@ -197,7 +197,7 @@ To set up logging in your application, see [Node.js Log Collection][603]. To set
 
 ### Instrumentation
 
-Instrumentation is done using a sidecar container. This sidecar container collects traces, metrics, and logs from your main application container and sends them to Datadog.
+Instrumentation is done using a sidecar container. This sidecar container collects traces, enhanced metrics, custom metrics, and logs from your main application container and sends them to Datadog. [Enhanced metrics][5] are distinguished with the `azure.app_services.enhanced.*` namespace.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -1002,3 +1002,4 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 [2]: /serverless/guide/azure_app_service_linux_containers_serverless_init
 [3]: https://app.datadoghq.com/integrations/azure
 [4]: /profiler/
+[5]: /integrations/azure-app-services/#metrics
