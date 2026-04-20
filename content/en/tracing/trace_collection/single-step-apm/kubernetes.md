@@ -891,3 +891,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [35]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 [37]: /containers/kubernetes/csi_driver/
+[41]: /tracing/guide/injectors/

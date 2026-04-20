@@ -57,7 +57,7 @@ Automated fixes from Bits AI Kubernetes Remediation is in Preview. To sign up, c
 [8]: /infrastructure/containers/kubernetes_explorer
 [9]: https://app.datadoghq.com/orchestration/resource/pod
 [10]: /infrastructure/containers/kubernetes_resource_utilization
-[11]: https://demo.datadoghq.com/orchestration/scaling/summary
+[11]: https://app.datadoghq.com/orchestration/scaling/summary
 [12]: /containers/monitoring/autoscaling
 [13]: https://app.datadoghq.com/orchestration/remediation
 [14]: /bits_ai/bits_ai_dev_agent

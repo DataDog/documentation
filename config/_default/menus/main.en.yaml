@@ -96,6 +96,11 @@ menu:
       url: getting_started/application/
       parent: getting_started
       weight: 8
+    - name: Teams
+      identifier: getting_started_teams
+      url: getting_started/teams/
+      parent: getting_started
+      weight: 27
     - name: Datadog Site
       identifier: getting_started_datadog_site
       url: getting_started/site/
@@ -842,26 +847,36 @@ menu:
       identifier: otel_mysql_metrics
       parent: otel_integrations
       weight: 811
+    - name: PostgreSQL Metrics
+      url: opentelemetry/integrations/postgres_metrics/
+      identifier: otel_postgres_metrics
+      parent: otel_integrations
+      weight: 812
     - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations
-      weight: 812
+      weight: 813
     - name: Podman Metrics
       url: opentelemetry/integrations/podman_metrics/
       identifier: otel_podman_metrics
       parent: otel_integrations
-      weight: 813
+      weight: 814
     - name: Runtime Metrics
       url: opentelemetry/integrations/runtime_metrics/
       identifier: otel_runtime_metrics
       parent: otel_integrations
-      weight: 814
+      weight: 815
+    - name: SQL Server Metrics
+      url: opentelemetry/integrations/sqlserver_metrics/
+      identifier: otel_sqlserver_metrics
+      parent: otel_integrations
+      weight: 816
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 815
+      weight: 817
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
@@ -1479,6 +1494,16 @@ menu:
       identifier: bits_ai_mcp_server_setup
       parent: bits_ai_mcp_server
       weight: 501
+    - name: MCP Tools
+      url: bits_ai/mcp_server/tools
+      identifier: bits_ai_mcp_server_tools
+      parent: bits_ai_mcp_server
+      weight: 502
+    - name: Agent Builder
+      url: actions/agents/
+      identifier: bits_ai_agent_builder
+      parent: bits_ai
+      weight: 6
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -1620,6 +1645,9 @@ menu:
       url: dashboards/sharing/shared_dashboards
       parent: dashboards_sharing
       weight: 1002
+    - name: Widget Public URLs
+      identifier: dashboards_sharing_widget_public_urls
+      url: dashboards/sharing/widget_public_urls
     - name: Secure Embedded Dashboards
       identifier: dashboards_sharing_secure_embedded_dashboards
       url: dashboards/sharing/secure_embedded_dashboards
@@ -2975,6 +3003,16 @@ menu:
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_ccm
       weight: 104
+    - name: Monitors
+      url: datadog_cloudcraft/overlays/monitors/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_monitors
+      weight: 105
+    - name: APM
+      url: datadog_cloudcraft/overlays/apm/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_apm
+      weight: 106
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
@@ -8912,21 +8950,26 @@ menu:
       parent: rum
       identifier: rum_operations_monitoring
       weight: 10
+    - name: Managed Archive
+      url: real_user_monitoring/managed_archive/
+      parent: rum
+      identifier: rum_managed_archive
+      weight: 11
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 11
+      weight: 12
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 12
+      weight: 13
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 13
+      weight: 14
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
