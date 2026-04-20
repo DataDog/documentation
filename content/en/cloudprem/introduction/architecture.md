@@ -42,7 +42,7 @@ The CloudPrem cluster, typically deployed on Kubernetes (EKS), consists of sever
 
 ### Ingestion path (logs entering CloudPrem)
 
-Logs are ingested into CloudPrem entirely within your infrastructure. The typical flow is:
+Logs are ingested into CloudPrem within your infrastructure. The typical flow is:
 
 1. Your applications emit logs to the **Datadog Agent** or **Observability Pipelines Worker**.
 2. Logs are forwarded to CloudPrem **indexers** running in your cluster.
@@ -52,7 +52,7 @@ Logs are ingested into CloudPrem entirely within your infrastructure. The typica
 
 ### Query path (searching logs from Datadog UI)
 
-When you search CloudPrem logs from the Datadog UI (for example, Log Explorer), the query flows through a secure connection between Datadog and your cluster:
+When you search CloudPrem logs from the Datadog UI (for example, in the Log Explorer), the query flows through a secure connection between Datadog and your cluster:
 
 1. The Datadog UI sends the search query to Datadog's backend.
 2. Datadog's backend forwards the query to your CloudPrem cluster through the established connection (reverse connection or ingress).

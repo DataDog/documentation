@@ -16,7 +16,7 @@ This document provides an overview of how CloudPrem and Datadog communicate with
 
 By default, CloudPrem **searcher** pods initiate an outbound WebSocket connection to Datadog using your API key. Each searcher pod maintains its own connection to `wss://<DD_SITE>/api/unstable/cloudprem-connection-gateway/connect`.
 
-This is the recommended setup because:
+Datadog recommends this setup because:
 - **No inbound ports need to be opened** in your network.
 - **No DNS record or public ingress is required.**
 - The connection is initiated from your infrastructure, which simplifies firewall and security policies.
@@ -33,7 +33,7 @@ This is the recommended setup because:
 
 Searcher pods require **outbound HTTPS (port 443)** access to your Datadog site (for example, `app.datadoghq.com`). No inbound connectivity is required.
 
-If your environment uses an HTTP proxy, CloudPrem supports standard proxy configuration via `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` environment variables.
+If your environment uses an HTTP proxy, CloudPrem supports standard proxy configuration with `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` environment variables.
 
 ### Which pods connect to Datadog
 
