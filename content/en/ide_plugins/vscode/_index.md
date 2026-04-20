@@ -51,7 +51,7 @@ The extension includes these features:
 
 -   [**View in IDE**](#view-in-ide): Jump directly from code references in Datadog to your source files.
 
--   [**Code Security**](#code-security): Detect and fix security issues before you commit changes, and write custom SAST rules with the built-in rule editor.
+-   [**Code Security**](#code-security): Detect and fix security issues before you commit, and write custom SAST rules.
 
 -   [**Exception Replay**](#exception-replay): Debug your production code.
 
