@@ -1,6 +1,5 @@
 ---
 title: Set up GPU Monitoring
-private: true
 ---
 This page provides instructions on setting up Datadog's GPU Monitoring on your infrastructure. Follow the configuration instructions that match your operating environment below.
 
@@ -28,7 +27,14 @@ If using Kubernetes, the following additional requirements must be met:
 - [**Datadog Operator**][5]: version 1.18, _or_ [**Datadog Helm chart**][6]: version 3.137.3
 - **Kubernetes**: 1.22 with PodResources API active
 
-## Set up GPU Monitoring on a non-Kubernetes environment or uniform Kubernetes cluster
+## Setting up GPU Monitoring 
+Setting up GPU Monitoring does not require DCGM at all. You will need to opt-in to the collection of GPU Monitoring metrics at the Agent depending on your environment: non-Kubernetes/uniform Kubernetes cluster or mixed cluster. 
+
+Once you've enabled the collection of GPU Monitoring metrics, you can opt-in to enabling several integrations for more advanced insights: 
+- For cloud costs and cloud instance-type information: enable the AWS[9], Google Cloud[10], Azure[11], or Oracle [12] cloud integrations in your Datadog UI
+- For process-level insights, set up Datadog's Live Processes[13] .
+
+### Set up GPU Monitoring on a non-Kubernetes environment or uniform Kubernetes cluster
 
 The following instructions are the basic steps to set up GPU Monitoring in the following environments:
 - In a Kubernetes cluster where **all** nodes have GPU devices
@@ -550,3 +556,8 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
 [6]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [7]: /containers/docker/
 [8]: /agent/supported_platforms/linux/
+[9]: https://docs.datadoghq.com/getting_started/integrations/aws/
+[10]:https://docs.datadoghq.com/getting_started/integrations/google_cloud/?tab=orglevel
+[11]:https://docs.datadoghq.com/getting_started/integrations/azure/?tab=createanappregistration
+[12]:https://docs.datadoghq.com/getting_started/integrations/oci/
+[13]:https://docs.datadoghq.com/infrastructure/process?tab=linuxwindows#installation
