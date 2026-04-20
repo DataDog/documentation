@@ -54,7 +54,7 @@ You can select from the following monitor types:
 | Anomalies    | Yes               | Identify unusual or unexpected cost patterns. <br> <br> Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
 | Threshold    | Yes               | Alert when costs exceed a set value.                                                                                                                                                                                                                      | Set alerts when today's total cost exceeds $10,000.                                                                                                                                                                                                       |
 | Forecast     | Yes               | Alert if forecasted costs will exceed a threshold.                                                                                                                                                                                                        | Alert daily if the forecasted cost for this month is projected to exceed $500.                                                                                                                                                                            |
-| Budget       | No                | Alert if costs exceed your [budget][7].                                                                                                                                                                                                                   | Alert if the total cost for the month exceeds the budget of $10,000.                                                                                                                                                                                      |
+| Budget       | No                | Alert if actual or forecasted costs exceed your [budget][7].                                                                                                                                                                                              | Alert if the forecasted month cost is projected to exceed 90% of the assigned $10,000 budget.                                                                                                                                                             |
 
 ### Specify which cost to track
 
@@ -118,14 +118,16 @@ If you are using the **Cost Forecast** monitor type, you can trigger an alert wh
 {{% /tab %}}
 
 {{% tab "Budget" %}}
-If you are using the **Budget** monitor type, you can trigger an alert when the cloud cost exceeds the budget you selected in the previous step.
+If you are using the **Budget** monitor type, you can trigger an alert when either the actual or the forecasted cloud cost exceeds a percentage of the budget you selected in the previous step.
 
-| Step               | Purpose                                                        | Values                            |
-|--------------------|----------------------------------------------------------------|-----------------------------------|
-| Granularity        | Level of detail at which the cost is evaluated.                | `overall` (total cost), `per_row` |
-| Threshold          | Percentage of budget that is utilized to trigger the alert.    | Number between 0 and 100 (%)      |
-| Timeframe          | Evaluation window used to assess if the threshold is breached. | `all_months`, `current_month`     |
+| Step               | Purpose                                                                           | Values                            |
+|--------------------|-----------------------------------------------------------------------------------|-----------------------------------|
+| Evaluation basis   | Whether the monitor compares actual spend or forecasted spend against the budget. | `actual`, `forecasted`            |
+| Granularity        | Level of detail at which the cost is evaluated.                                   | `overall` (total cost), `per_row` |
+| Threshold          | Percentage of budget that is utilized to trigger the alert.                       | Number between 0 and 100 (%)      |
+| Timeframe          | Evaluation window used to assess if the threshold is breached.                    | `all_months`, `current_month`     |
 
+When you select **forecasted**, the monitor uses the same forecasting model as budget cards and the Forecast monitor type. Forecasts require at least 64 consecutive days of cost data — see [Forecasting][8] for details.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -163,3 +165,4 @@ You can also turn on **Audit Notifications** to alert the monitor creator and re
 [5]: https://app.datadoghq.com/cost/explorer
 [6]: /monitors/notify/
 [7]: /cloud_cost_management/planning/budgets/
+[8]: /cloud_cost_management/planning/forecasting/
