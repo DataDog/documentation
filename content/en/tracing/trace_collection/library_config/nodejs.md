@@ -26,6 +26,8 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
+{{% apm-config-visibility %}}
+
 Tracer settings can be configured with the following environment variables:
 
 ### Unified Service Tagging

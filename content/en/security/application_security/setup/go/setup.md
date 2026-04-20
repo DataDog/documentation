@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/security/application_security/setup/go/sdk"
   tag: "Documentation"
-  text: "App & API Protecion SDK for Go"
+  text: "App & API Protection SDK for Go"
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Adding user information to traces"

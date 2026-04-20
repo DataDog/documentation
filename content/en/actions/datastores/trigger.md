@@ -22,30 +22,30 @@ This page explains how to use and audit automation rules for datastores. With au
 To create a new automation rule: 
 1. Navigate to the [Datastores page][1].
 1. Select a datastore. 
-1. Click **Automation Rules**, then **+ New Automation Rule**. 
+1. Click {{< ui >}}Automation Rules{{< /ui >}}, then {{< ui >}}+ New Automation Rule{{< /ui >}}. 
 1. Configure your new automation rule: 
-    1. Choose if the rule will be triggered when a new entry is added, a value has changed, or an entry is deleted.
+    1. Choose if the rule will be triggered when new entries are added, a value has changed, or an entry is deleted.
     1. Choose the workflow that will be triggered when the event occurs. 
     1. Name your rule. 
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Edit an automation rule 
 
 To edit an automation rule: 
 1. Navigate to the [Datastores page][1].
 1. Select a datastore. 
-1. Click **Automation Rules**, then **+ New Automation Rule**. 
-1. Click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
+1. Click {{< ui >}}Automation Rules{{< /ui >}}, then {{< ui >}}+ New Automation Rule{{< /ui >}}. 
+1. Click the {{< ui >}}Edit{{< /ui >}} {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
 1. Make your changes. 
-1. Click **Save Changes**.
+1. Click {{< ui >}}Save Changes{{< /ui >}}.
 
 ### Delete an automation rule
 
 To delete an automation rule: 
 1. Navigate to the [Datastores page][1].
 1. Select a datastore. 
-1. Click **Automation Rules**, then **+ New Automation Rule**. 
-1. Click the **Delete** {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon. 
+1. Click {{< ui >}}Automation Rules{{< /ui >}}, then {{< ui >}}+ New Automation Rule{{< /ui >}}. 
+1. Click the {{< ui >}}Delete{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon. 
 1. When prompted, confirm deletion.
 
 ## Audit automation rules
@@ -63,11 +63,11 @@ In the screenshot below, audit logs were created for automation rules run when n
 To audit an automation rule: 
 1. Navigate to the [Datastores page][1].
 1. Select a datastore. 
-1. Click **Automation Rules**.
-1. Click **Audit Logs**.
+1. Click {{< ui >}}Automation Rules{{< /ui >}}.
+1. Click {{< ui >}}Audit Logs{{< /ui >}}.
 1. Click the dropdown menu on the left to filter by automation rule. 
 1. Click the dropdown menu on the right to filter results to a specific date range. 
-1. To sort the list, click **DATE** or **RULES**. 
+1. To sort the list, click {{< ui >}}DATE{{< /ui >}} or {{< ui >}}RULES{{< /ui >}}. 
 1. To see more information, click a log. Logs for item keys display the datastore entry that triggered the automation rule. Logs for workflow executions display a link to your workflow's configuration.
 
 ## Further reading

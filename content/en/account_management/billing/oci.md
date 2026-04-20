@@ -15,22 +15,24 @@ If you run containers on OCI (for example, on Oracle Kubernetes Engine), contain
 Use the OCI integration tile to control which resources Datadog collects metrics from:
 
 1. Open the [OCI integration tile][1].
-2. Go to the **Metric Collection** tab.
+2. Go to the {{< ui >}}Metric Collection{{< /ui >}} tab.
 3. For each connected tenancy, optionally:
-   - Limit metric collection to specific compartments.
-  
-**Note**: You can exclude OCI regions from all data collection (metrics and logs) on the **General** tab of the OCI integration tile.
+   - Limit metric collection to specific compartments using compartment tag filters.
+   - Limit metric collection to specific resources within an OCI service using resource tag filters in the {{< ui >}}Limit Collection to Specific Resources{{< /ui >}} section.
+
+**Note**: Filters are evaluated in order: enabled services first, then compartment tag filters, then resource tag filters. Resource tag filters apply only to compartments that pass the compartment tag filter. You can exclude OCI regions from all data collection (metrics and logs) on the {{< ui >}}General{{< /ui >}} tab of the OCI integration tile.
 
 ## OCI log exclusion
 
 Use the OCI integration tile to control which resources Datadog collects logs from:
 
 1. Open the [OCI integration tile][1].
-2. Go to the **Log Collection** tab.
+2. Go to the {{< ui >}}Log Collection{{< /ui >}} tab.
 3. For each connected tenancy, optionally:
-   - Limit log collection to specific compartments.
-  
-**Note**: You can exclude OCI regions from all data collection (metrics and logs) on the **General** tab of the OCI integration tile.
+   - Limit log collection to specific compartments using compartment tag filters.
+   - Limit log collection to specific resources within an OCI service using resource tag filters in the {{< ui >}}Limit Collection to Specific Resources{{< /ui >}} section.
+
+**Note**: Filters are evaluated in order: enabled services first, then compartment tag filters, then resource tag filters. Resource tag filters apply only to compartments that pass the compartment tag filter. You can exclude OCI regions from all data collection (metrics and logs) on the {{< ui >}}General{{< /ui >}} tab of the OCI integration tile.
 
 When you add or change limits for an existing OCI tenancy, previously discovered Compute instances can remain in the [Infrastructure List][3] for up to two hours while filters propagate. During this transition period, affected instances can display a status of `???`. This does not count toward your billing.
 

@@ -1,4 +1,5 @@
 ---
+id: explorer
 title: explorador
 ---
 Events Explorer es una página de Datadog en la que se puede ver y agregar eventos. Events Explorer muestra los eventos más recientes que generan los servicios e infraestructura del usuario como despliegues de código, estado del servicio, cambios de configuración o alertas de monitorización.

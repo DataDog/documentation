@@ -8,10 +8,10 @@ requests:
   image: int_jmx.png
   link: /integrations/java
   name: JMX Beans
-- description: '[DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/) と [API](https://docs.datadoghq.com/api/latest/metrics/)
+- description: '[DogStatsD](https://docs.datadoghq.com/extend/dogstatsd/) と [API](https://docs.datadoghq.com/api/latest/metrics/)
     を使って、ビジネス統計のカスタムメトリクスの送信を行います。Datadog Agent インテグレーションは、Python ファイルによるメトリクスのクエリです。Agent
-    のコードはすべてオープンソースなので、独自の[カスタム Agent チェック](https://docs.datadoghq.com/developers/custom_checks/)や[カスタム
-    Agent インテグレーション](https://docs.datadoghq.com/developers/integrations/)を書くことが可能です。[integrations-extras
+    のコードはすべてオープンソースなので、独自の[カスタム Agent チェック](https://docs.datadoghq.com/extend/custom_checks/)や[カスタム
+    Agent インテグレーション](https://docs.datadoghq.com/extend/integrations/)を書くことが可能です。[integrations-extras
     GitHub リポジトリ](https://github.com/DataDog/integrations-extras)には、コミュニティで開発されたカスタムインテグレーションが多数含まれています。'
   image: int_custom_metrics.png
   link: metrics/custom_metrics

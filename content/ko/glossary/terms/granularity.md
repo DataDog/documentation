@@ -1,4 +1,5 @@
 ---
+id: granularity
 core_product:
 - 대시보드
 - 메트릭

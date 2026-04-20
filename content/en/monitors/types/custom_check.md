@@ -93,10 +93,10 @@ For detailed instructions on the **Configure notifications and automations** sec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/
-[2]: /developers/custom_checks/write_agent_check/
-[3]: /developers/dogstatsd/
+[2]: /extend/custom_checks/write_agent_check/
+[3]: /extend/dogstatsd/
 [4]: /api/v1/service-checks/
-[5]: /developers/service_checks/#overview
+[5]: /extend/service_checks/#overview
 [6]: https://app.datadoghq.com/monitors/create/custom
 [7]: /monitors/configuration/#advanced-alert-conditions
 [8]: /monitors/configuration/#no-data

@@ -304,8 +304,8 @@ namespace Example
 1. [Install][1] the DogStatsD client for your runtime
 2. Follow the [sample code][2] to submit your custom metrics.
 
-[1]: /developers/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
-[2]: /developers/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
+[1]: /extend/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
+[2]: /extend/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

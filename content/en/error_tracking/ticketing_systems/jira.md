@@ -2,6 +2,7 @@
 title: Integrate Jira with Error Tracking
 is_beta: false
 private: false
+site_support_id: jira_error_tracking
 further_reading:
   - link: '/error_tracking/explorer/'
     tag: 'Documentation'

@@ -34,31 +34,31 @@ A service account can be associated with a workflow and act as the identity of t
 - provide an identity for workflow executions
 - provide an identity for workflow [audit trails][1]
 
-To create a service account for a workflow, you must have either the Datadog admin role, or a custom role with the **Service Account Write** permission. The service account you create adopts your role and permissions. For more information on service accounts and permissions, see [Service accounts][2] or [Role based access control][3].
+To create a service account for a workflow, you must have either the Datadog admin role, or a custom role with the {{< ui >}}Service Account Write{{< /ui >}} permission. The service account you create adopts your role and permissions. For more information on service accounts and permissions, see [Service accounts][2] or [Role based access control][3].
 
 #### Associate a service account with a workflow
 
 You can dynamically create a service account for your workflow when you [add an automatic trigger][4].
 
-1. Click the cog (**Settings**) icon.
-1. Click **Manage workflow identity**.
-1. Select **Run as Service Account**.
+1. Click the cog ({{< ui >}}Settings{{< /ui >}}) icon.
+1. Click {{< ui >}}Manage ownership and identity{{< /ui >}}.
+1. Click {{< ui >}}Run as Service Account{{< /ui >}}.
 1. Select a role for your service account user or select an existing Service Account.
-1. Click **Save** to save the service account and apply the changes.
+1. Click {{< ui >}}Save{{< /ui >}} to save the service account and apply the changes.
 
 When you run a workflow, the service account user resolves the connections defined in the workflow actions. Therefore, the service account user needs the `connections_resolve` permission. The Datadog Admin Role and the Datadog Standard Role include the `connections_resolve` permission.
 
 #### View service account details
 
-1. Click the cog (**Settings**) icon.
-1. Select **Manage workflow identity**.
+1. Click the cog ({{< ui >}}Settings{{< /ui >}}) icon.
+1. Click {{< ui >}}Manage ownership and identity{{< /ui >}}.
 1. Click on your service account next to *Run As*.
 
 #### Remove a service account associated with a workflow
 
-1. Click the cog (**Settings**) icon.
-1. Select **Manage workflow identity**.
-1. Click **Remove service account**.
+1. Click the cog ({{< ui >}}Settings{{< /ui >}}) icon.
+1. Click {{< ui >}}Manage ownership and identity{{< /ui >}}.
+1. Click {{< ui >}}Change service account{{< /ui >}}.
 
 ## Action credentials
 
@@ -74,19 +74,19 @@ For more information on configuring credentials, see [Connections][6].
 
 Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][7].
 
-By default, the author of a workflow or connection is the only user who receives **Editor** access. The rest of the Datadog organization receives **Viewer** access to the workflow or connection.
+By default, the author of a workflow or connection is the only user who receives {{< ui >}}Editor{{< /ui >}} access. The rest of the Datadog organization receives {{< ui >}}Viewer{{< /ui >}} access to the workflow or connection.
 
 ### Restrict access on a specific connection
 
-Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**. By default, only the author of the connection receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
+Set permissions on each connection to limit modifications or restrict their use. The granular permissions include {{< ui >}}Viewer{{< /ui >}}, {{< ui >}}Resolver{{< /ui >}}, and {{< ui >}}Editor{{< /ui >}}. By default, only the author of the connection receives {{< ui >}}Editor{{< /ui >}} access. The author can choose to grant access to additional users, roles, or teams.
 
-Viewer
+{{< ui >}}Viewer{{< /ui >}}
 : Can view the connection
 
-Resolver
+{{< ui >}}Resolver{{< /ui >}}
 : Can resolve and view the connection
 
-Editor
+{{< ui >}}Editor{{< /ui >}}
 : Can edit, resolve, and view the connection
 
 Resolving a connection includes getting the connection object assigned to a step and retrieving the secret associated with it.
@@ -94,48 +94,48 @@ Resolving a connection includes getting the connection object assigned to a step
 Follow the steps below to modify the permissions on a specific connection:
 
 1. Navigate to the [Workflow Automation page][8].
-1. Click **Connections** in the upper right. A list of connections appears.
-1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
-1. Click the padlock (**Permissions**) icon.
-1. Select **Restrict Access**.
-1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. Click {{< ui >}}Connections{{< /ui >}} in the upper right. A list of connections appears.
+1. Hover over the connection on which you would like to set granular permissions. {{< ui >}}Edit{{< /ui >}}, {{< ui >}}Permissions{{< /ui >}}, and {{< ui >}}Delete{{< /ui >}} icons appear on the right.
+1. Click the padlock ({{< ui >}}Permissions{{< /ui >}}) icon.
+1. Select {{< ui >}}Restrict Access{{< /ui >}}.
+1. Select a role from the dropdown menu. Click {{< ui >}}Add{{< /ui >}}. The role you selected populates into the bottom of the dialog box.
 1. Next to the role name, select your desired permission from the dropdown menu.
 1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Restrict access on a specific workflow
 
-Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**. By default, only the author of the workflow receives **Editor** access. The author can choose to grant access to additional users, roles, or teams.
+Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include {{< ui >}}Viewer{{< /ui >}}, {{< ui >}}Runner{{< /ui >}}, and {{< ui >}}Editor{{< /ui >}}. By default, only the author of the workflow receives {{< ui >}}Editor{{< /ui >}} access. The author can choose to grant access to additional users, roles, or teams.
 
-Viewer
+{{< ui >}}Viewer{{< /ui >}}
 : Can view the workflow
 
-Runner
+{{< ui >}}Runner{{< /ui >}}
 : Can run and view the workflow
 
-Editor
+{{< ui >}}Editor{{< /ui >}}
 : Can edit, run, and view the workflow
 
 You can restrict access on a specific workflow either from the workflow list page or from the workflow canvas while editing the workflow.
 
 **Restricting permissions from the workflow list page**
 1. Navigate to the [Workflow Automation page][8].
-1. Hover over the workflow on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
-1. Click the padlock (**Permissions**) icon.
-1. Select **Restrict Access**.
-1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. Hover over the workflow on which you would like to set granular permissions. {{< ui >}}Edit{{< /ui >}}, {{< ui >}}Permissions{{< /ui >}}, and {{< ui >}}Delete{{< /ui >}} icons appear on the right.
+1. Click the padlock ({{< ui >}}Permissions{{< /ui >}}) icon.
+1. Select {{< ui >}}Restrict Access{{< /ui >}}.
+1. Select a role from the dropdown menu. Click {{< ui >}}Add{{< /ui >}}. The role you selected populates into the bottom of the dialog box.
 1. Next to the role name, select your desired permission from the dropdown menu.
 1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 **Restricting permissions from the workflow editor**
-1. In the workflow editor click on the cog (**Settings**) icon.
-1. Select **Edit Permissions** from the dropdown.
-1. Select **Restrict Access**.
-1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. In the workflow editor click on the cog ({{< ui >}}Settings{{< /ui >}}) icon.
+1. Select {{< ui >}}Edit Permissions{{< /ui >}} from the dropdown.
+1. Select {{< ui >}}Restrict Access{{< /ui >}}.
+1. Select a role from the dropdown menu. Click {{< ui >}}Add{{< /ui >}}. The role you selected populates into the bottom of the dialog box.
 1. Next to the role name, select your desired permission from the dropdown menu.
 1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Further Reading
 

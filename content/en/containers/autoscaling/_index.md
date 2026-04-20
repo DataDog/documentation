@@ -4,15 +4,6 @@ description: Automatically scale Kubernetes workloads using Datadog metrics and 
 aliases:
 - /containers/monitoring/autoscaling
 further_reading:
-- link: https://www.datadoghq.com/blog/kubernetes-custom-query-autoscaling
-  tag: Blog
-  text: Optimize Kubernetes workloads with Custom Query Scaling
-- link: https://www.datadoghq.com/blog/ddot-gateway
-  tag: Blog
-  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
-- link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
-  tag: "Blog"
-  text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 - link: "/infrastructure/containers/kubernetes_resource_utilization"
   tag: "Documentation"
   text: "Kubernetes Resource Utilization"
@@ -22,6 +13,18 @@ further_reading:
 - link: "/agent/remote_config/"
   tag: "Documentation"
   text: "Remote Configuration"
+- link: "https://www.datadoghq.com/blog/autoscaling-custom-metrics"
+  tag: "Blog"
+  text: "Scaling Kubernetes workloads on custom metrics"
+- link: https://www.datadoghq.com/blog/kubernetes-custom-query-autoscaling
+  tag: Blog
+  text: Optimize Kubernetes workloads with Custom Query Scaling
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
+- link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
+  tag: "Blog"
+  text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 ---
 
 {{< site-region region="gov" >}}
@@ -433,7 +436,7 @@ As an alternative to Autoscaling, you can also deploy Datadog's scaling recommen
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /agent/remote_config/?tab=configurationyamlfile#enable-remote-configuration
 [3]: https://helm.sh/
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [5]: /containers/kubernetes/distributions

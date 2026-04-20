@@ -13,13 +13,19 @@ further_reading:
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
 
-<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
+{{< /site-region >}}
+
+{{< callout header="Preview" btn_hidden="true" >}}
+RUM Auto-Instrumentation for NGINX is in Preview.
+{{< /callout >}}
 
 ## Overview
 
-RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method leverages the [NGINX Dynamic Modules capability][3] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses identified as HTML. After auto-instrumentation is set up, you can manage configurations from the UI.
+RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method uses the [NGINX Dynamic Modules capability][3] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses identified as HTML. After auto-instrumentation is set up, you can manage configurations from the UI.
 
-To understand important limitations and compatibility requirements, see [Limitations][1].
+{{% rum-browser-auto-instrumentation-limitations %}}
 
 ## Prerequisites
 
@@ -67,9 +73,6 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
 
-### Limitations
-
-See other [Limitations][1].
 
 ## Uninstall
 

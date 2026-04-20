@@ -228,7 +228,6 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     display: none;
     @media (min-width: 991px) {
         display: block;
-        margin-top: -1rem;
     }
 
     a {
@@ -254,6 +253,12 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 
     #page-copied-text {
         display: none;
+    }
+}
+
+.toc-edit-btn + .toc-copy-btn {
+    @media (min-width: 991px) {
+        margin-top: -1rem;
     }
 }
 

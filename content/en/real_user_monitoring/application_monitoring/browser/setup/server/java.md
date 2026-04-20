@@ -7,6 +7,9 @@ code_lang_weight: 7
 aliases:
   - /real_user_monitoring/browser/setup/server/java
 further_reading:
+- link: "https://www.datadoghq.com/blog/rum-apm-single-step"
+  tag: "Blog"
+  text: "Enable end-to-end visibility into your Java apps with a single command"
 - link: '/real_user_monitoring/application_monitoring/browser/setup/server'
   tag: 'Documentation'
   text: 'Browser Monitoring Auto-Instrumentation'
@@ -14,6 +17,10 @@ further_reading:
   tag: 'Documentation'
   text: 'Single Step APM Instrumentation'
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">RUM Auto-Instrumentation is not available for the selected site ({{< region-param key="dd_site_name" >}}). Use <a href="/real_user_monitoring/application_monitoring/browser/setup/client">Client-Side instrumentation</a> instead.</div>
+{{< /site-region >}}
 
 ## Overview
 

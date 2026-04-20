@@ -1,4 +1,5 @@
 ---
+id: extract_etl
 related_terms: null
 title: 抽出、変換、書き出し (ETL)
 ---

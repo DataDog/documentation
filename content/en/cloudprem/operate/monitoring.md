@@ -54,5 +54,5 @@ Configure either option with your organization's API key to export these metrics
 
 Coming soon. -->
 
-[1]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent
+[1]: https://docs.datadoghq.com/extend/dogstatsd/?tab=hostagent
 [2]: https://app.datadoghq.com/dashboard/lists?q=cloudprem&p=1
