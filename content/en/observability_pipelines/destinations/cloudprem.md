@@ -9,7 +9,7 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Bring Your Own Cloud (BYOC) destination to send logs to Datadog BYOC Logs.
+Use Observability Pipelines' Bring Your Own Cloud (BYOC) Logs destination to send logs to Datadog BYOC Logs.
 
 
 ## Prerequisites
