@@ -10923,6 +10923,45 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Create or update a custom evaluator configuration
+      url: '#create-or-update-a-custom-evaluator-configuration'
+      identifier: llm-observability-create-or-update-a-custom-evaluator-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 26
+    - name: Get a custom evaluator configuration
+      url: '#get-a-custom-evaluator-configuration'
+      identifier: llm-observability-get-a-custom-evaluator-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 25
+    - name: Delete a custom evaluator configuration
+      url: '#delete-a-custom-evaluator-configuration'
+      identifier: llm-observability-delete-a-custom-evaluator-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 27
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
