@@ -25,7 +25,7 @@ Set up the Datadog Metrics destination and its environment variables when you [s
 
 {{< img src="observability_pipelines/destinations/datadog_metrics_settings.png" alt="The Datadog Metrics destination settings" style="width:40%;" >}}
 
-### Set up the destination
+To set up the destination:
 
 #### Optional settings
 

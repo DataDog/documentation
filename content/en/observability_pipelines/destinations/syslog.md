@@ -17,7 +17,7 @@ Use Observability Pipelines' syslog destinations to send logs to rsyslog or sysl
 
 Set up the rsyslog or syslog-ng destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
-### Set up the destination
+To set up the destination:
 
 <div class="alert alert-danger">The rsyslog and syslog-ng destinations support the <a href="https://datatracker.ietf.org/doc/html/rfc5424">RFC5424</a> format. </div>
 

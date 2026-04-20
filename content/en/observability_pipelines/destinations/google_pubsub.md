@@ -83,7 +83,7 @@ You reference this file in the Google Pub/Sub destination's **Credentials path**
 
 Set up the Google Pub/Sub destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
-### Set up the destination
+To set up the destination:
 
 1. Enter the destination project name.
 	- This is the GCP project where your Pub/Sub topic lives.

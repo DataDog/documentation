@@ -17,7 +17,7 @@ Use Observability Pipelines' CrowdStrike Next-Gen SIEM destination to send logs 
 
 Set up the CrowdStrike NG-SIEM destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
-### Set up the destination
+To set up the destination:
 
 To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike data connector using the HEC/HTTP Event Connector. See [Step 1: Set up the HEC/HTTP event data connector][3] for instructions. When you set up the data connector, you are given a HEC API key and URL, which you use when you configure the Observability Pipelines Worker later on.
 

@@ -19,7 +19,7 @@ The Observability Pipelines Worker uses standard Google authentication methods. 
 
 Set up the Google SecOps destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
-### Set up the destination
+To set up the destination:
 
 To set up the Worker's Google SecOps destination:
 

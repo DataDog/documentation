@@ -29,7 +29,7 @@ Common scenarios when you might use this destination:
 
 Set up the Kafka destination and its environment variables when you [set up a pipeline][5]. The information below is configured in the pipelines UI.
 
-### Set up the destination
+To set up the destination:
 
 <div class="alert alert-danger">Only enter the identifiers for the Kafka bootstrap servers and, if applicable, the SASL username and password and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 

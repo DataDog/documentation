@@ -27,7 +27,7 @@ Set up the Amazon Security Lake destination and its environment variables when y
 - When you add the Amazon Security Lake destination, the OCSF processor is automatically added so that you can convert your logs to Parquet before they are sent to Amazon Security Lake. See [Remap to OCSF documentation][3] for setup instructions.
 - Only logs formatted by the OCSF processor are converted to Parquet.
 
-### Set up the destination
+To set up the destination:
 
 1. Enter your S3 bucket name.
 1. Enter the AWS region.

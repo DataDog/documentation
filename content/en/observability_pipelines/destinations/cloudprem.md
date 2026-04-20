@@ -22,7 +22,7 @@ Before configuring the destination, you need to deploy a BYOC Logs cluster. Lear
 
 Set up the BYOC Logs destination and its environment variables when you [set up a pipeline][1].
 
-### Set up the destination
+To set up the destination:
 
 #### Optional settings
 

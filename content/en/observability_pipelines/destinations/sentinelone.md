@@ -21,7 +21,7 @@ Use Observability Pipelines' SentinelOne destination to send logs to SentinelOne
 
 Set up the SentinelOne destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
-### Set up the destination
+To set up the destination:
 
 <div class="alert alert-danger">Only enter the identifier for the token. Do <b>not</b> enter the actual value.</a></div>
 

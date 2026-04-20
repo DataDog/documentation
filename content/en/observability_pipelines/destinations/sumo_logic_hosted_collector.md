@@ -17,7 +17,7 @@ Use Observability Pipelines' Sumo Logic destination to send logs to your Sumo Lo
 
 Set up the Sumo Logic destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
-### Set up the destination
+To set up the destination:
 
 <div class="alert alert-danger">Only enter the identifier for the Sumo Logic endpoint URL. Do <b>not</b> enter the actual value.</div>
 

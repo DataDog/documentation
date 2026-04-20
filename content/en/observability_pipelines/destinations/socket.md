@@ -17,7 +17,7 @@ Use Observability Pipelines' Socket destination to send logs to a socket endpoin
 
 Set up the Socket destination and its environment variables when you [set up a pipeline][1]. The following information is configured in the pipelines UI.
 
-### Set up the destination
+To set up the destination:
 
 <div class="alert alert-danger">Only enter the identifier for the socket address and, if appliable, the key pass. Do <b>not</b> enter the actual values.</a></div>
 

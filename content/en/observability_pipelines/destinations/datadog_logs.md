@@ -17,7 +17,7 @@ Use Observability Pipelines' Datadog Logs destination to send logs to Datadog Lo
 
 Set up the Datadog Logs destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
-### Set up the destination
+To set up the destination:
 
 There are no required setup steps.
 
