@@ -256,13 +256,13 @@ HTML template:
 
 ## Multi-tenancy
 
-To serve multiple tenants from a single source dashboard, create one secure embed per tenant. Set `selectable_template_vars` with `visible_tags` scoped to each tenant's resources. Each tenant gets a unique credential and base URL, which your backend stores and retrieves when generating iFrame URLs.
+To serve multiple tenants from a single source dashboard, create one secure embed per tenant. Use `selectable_template_vars` to scope each tenant's default template variable values to their own resources. Each tenant gets a unique credential and base URL, which your backend stores and retrieves when generating iFrame URLs.
 
 ```text
 Dashboard
-  └── Secure Embed 1: Tenant A  →  visible_tags scoped to Tenant A
-  └── Secure Embed 2: Tenant B  →  visible_tags scoped to Tenant B
-  └── Secure Embed 3: Tenant C  →  visible_tags scoped to Tenant C
+  └── Secure Embed 1: Tenant A  →  default_values scoped to Tenant A
+  └── Secure Embed 2: Tenant B  →  default_values scoped to Tenant B
+  └── Secure Embed 3: Tenant C  →  default_values scoped to Tenant C
 ```
 
 ### Manage tenant embeds
@@ -271,9 +271,8 @@ The following example uses the [Secure Embed API][5] to create, update, and dele
 
 Before using this code, implement the following helper functions for your environment:
 
-- `get_org_id_for_tenant(tenant_id)`: returns the org ID for the tenant
-- `get_hosts_for_tenant(tenant_id)`: returns the list of hosts for the tenant
-- `is_new_tenant(tenant_id)`, `is_existing_tenant(tenant_id)`, `is_offboarding_tenant(tenant_id)`: tenant lifecycle checks
+- `get_template_var_value_for_tenant(tenant_id)`: returns the template variable values for the tenant
+- `is_new_tenant(tenant_id)`, `is_existing_tenant(tenant_id)`, `is_offboarding_tenant(tenant_id)`: tenant life cycle checks
 - `save_tenant_credentials(tenant_id, token, base_url, credential)`: stores the tenant's share token, base URL, and credential in your secret store
 - `get_secure_embed_token_for_tenant(tenant_id)`: retrieves the share token for a tenant from your secret store
 - `get_base_url_for_tenant(tenant_id)`: retrieves the base URL for a tenant from your secret store
@@ -286,6 +285,8 @@ import requests
 
 DD_API_URL = "https://api.datadoghq.com"
 DASHBOARD_ID = "abc-def-ghi"
+TEMPLATE_VAR_NAME = "<TEMPLATE_VAR_NAME>"      # Template variable name as defined on the dashboard
+TEMPLATE_VAR_PREFIX = "<TEMPLATE_VAR_PREFIX>"  # Template variable prefix as defined on the dashboard
 HEADERS = {
     "Content-Type": "application/vnd.api+json",
     "DD-API-KEY": DD_API_KEY,
@@ -296,16 +297,9 @@ HEADERS = {
 def build_selectable_template_vars(tenant_id: str) -> list[dict]:
     return [
         {
-            "name": "org_id",
-            "prefix": "org_id",
-            "default_values": [get_org_id_for_tenant(tenant_id)],
-            "visible_tags": [get_org_id_for_tenant(tenant_id)],
-        },
-        {
-            "name": "host",
-            "prefix": "host",
-            "default_values": get_hosts_for_tenant(tenant_id),
-            "visible_tags": get_hosts_for_tenant(tenant_id),
+            "name": TEMPLATE_VAR_NAME,
+            "prefix": TEMPLATE_VAR_PREFIX,
+            "default_values": get_template_var_value_for_tenant(tenant_id),
         },
     ]
 
@@ -396,7 +390,7 @@ def embed_url():
     return jsonify({"iframeUrl": iframe_url})
 ```
 
-Because `visible_tags` is scoped to each tenant at embed creation time, the URL enforces data isolation: each tenant can only see the template variable values assigned to them.
+Because `default_values` are scoped to each tenant at embed creation time, each tenant sees only their own data when the dashboard loads.
 
 ## Limitations
 
