@@ -112,6 +112,119 @@ To calculate the Jaccard similarity between the two logs:
 
 $$\text"J(log1,log2)" = 2 / 8 = 0.25$$
 
+## API schema reference
+
+This section describes the API payload for creating or updating a `content_anomaly` rule using the `POST /api/v2/security_monitoring/rules` and `PUT /api/v2/security_monitoring/rules/{rule_id}` endpoints.
+
+### Top-level payload fields
+
+#### Required
+
+| Field | Type | Description |
+|---|---|---|
+| `name` | string | The name of the rule. |
+| `type` | string enum | The rule type. Use `log_detection` for Cloud SIEM rules. Allowed values: `log_detection`, `workload_security`, `application_security`, `api_security`, `workload_activity`. |
+| `message` | string | Message for generated signals. Supports Mustache templating (see [Security notification variables][6]). |
+| `isEnabled` | bool | Whether the rule is enabled. |
+| `options` | object | Contains `detectionMethod` and content anomaly options. See [Options](#options). |
+| `queries` | array | Queries for selecting logs which are part of the rule. See [Queries](#queries). |
+| `cases` | array | Cases for generating signals. See [Cases](#cases). |
+
+#### Optional
+
+| Field | Type | Description |
+|---|---|---|
+| `tags` | array\<string\> | Tags for generated signals. |
+| `hasExtendedTitle` | bool | Whether the notifications include the triggering group-by values in their title. |
+| `groupSignalsBy` | array\<string\> | Additional grouping to perform on top of the existing groups in the query section. Must be a subset of the existing groups. |
+| `referenceTables` | array | Reference tables for the rule. Maximum of 1,000,000 rows. |
+
+### Queries
+
+Content anomaly supports multiple queries per rule.
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `name` | string | yes | Name of the query. Used as an alias referenced in `cases[].condition`. |
+| `query` | string | yes | Query to run on logs. See [Log search syntax][7]. |
+| `aggregation` | string enum | yes | The aggregation type. Allowed values: `count`, `cardinality`, `sum`, `max`, `new_value`, `geo_data`, `event_count`, `none`. |
+| `groupByFields` | array\<string\> | no | Fields to group by. |
+| `distinctFields` | array\<string\> | conditional | Field for which the cardinality is measured. Required when `aggregation` is `cardinality`. |
+| `metrics` | array\<string\> | conditional | Target fields to aggregate over. Required for `sum`, `max`, `geo_data`, `new_value` aggregations. |
+| `dataSource` | string enum | no | Source of events. Defaults to `logs`. Allowed values: `logs`, `audit`, `app_sec_spans`, `spans`, `security_runtime`, `network`, `events`, `security_signals`. |
+| `hasOptionalGroupByFields` | bool | no | When `false`, events without a group-by value are ignored. When `true`, events with missing group-by fields are processed with `N/A`. |
+
+### Cases
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `name` | string | no | Name of the case. |
+| `status` | string enum | yes | Severity of the Security Signal. Allowed values: `info`, `low`, `medium`, `high`, `critical`. |
+| `condition` | string | no | A case contains logical operations (`>`, `>=`, `<`, `<=`, `&&`, `||`) to determine if a signal should be generated based on the anomalous event counts from the defined queries. |
+| `notifications` | array\<string\> | no | Notification targets (for example, `@slack-*`, `@team-*`). |
+
+### Options
+
+Common `options` fields:
+
+| Field | Type | Typical | Description |
+|---|---|---|---|
+| `detectionMethod` | string enum | required | The detection method. Must be `content_anomaly` for this method. |
+| `evaluationWindow` | int (seconds) | 0–86400 | Defines the time frame for counting anomalous logs. Allowed values: `0`, `60`, `300`, `600`, `900`, `1800`, `3600`, `7200`, `10800`, `21600`. |
+| `keepAlive` | int (seconds) | ≥ `evaluationWindow` | Once a signal is generated, the signal remains "open" if a case is matched at least once within this keep-alive window. |
+| `maxSignalDuration` | int (seconds) | 3600–86400 | A signal "closes" regardless of case matching once the time exceeds the maximum duration. |
+| `decreaseCriticalityBasedOnEnv` | bool | `false` | If `true`, signals in non-production environments have a lower severity. |
+
+**Cross-field constraint (server-enforced):** `evaluationWindow ≤ keepAlive ≤ maxSignalDuration`.
+
+#### Content anomaly options
+
+Method-specific options controlling the anomaly detection logic. See [Anomaly detection parameters](#anomaly-detection-parameters) above for UI-level configuration.
+
+| Field | Type | Typical | Description |
+|---|---|---|---|
+| `learningDuration` | int (days) | 7 | Time window during which values are learned. No signals are generated during this phase. Range: `1`–`10` days. |
+| `forgetAfter` | int (days) | 7 | How long learned values are retained before being discarded. Range: `1`–`10` days. |
+| Similarity percentage threshold | int (percent) | 70 | Minimum similarity required to consider a log as normal. Range: `35`–`100`%. |
+| Similar items threshold | int | 1 | Number of matching historical logs required for an incoming value to be considered normal. Range: `1`–`20`. |
+
+### Example payload
+
+```json
+{
+  "name": "Anomalous content in CloudTrail user creation events",
+  "type": "log_detection",
+  "isEnabled": true,
+  "message": "Anomalous event content detected for {{@usr.name}}.",
+  "tags": [
+    "source:cloudtrail",
+    "security:attack"
+  ],
+  "options": {
+    "detectionMethod": "content_anomaly",
+    "evaluationWindow": 3600,
+    "keepAlive": 7200,
+    "maxSignalDuration": 86400
+  },
+  "queries": [
+    {
+      "name": "anomalous_user_creation",
+      "query": "source:cloudtrail @evt.name:CreateUser",
+      "aggregation": "count",
+      "groupByFields": ["@usr.name"]
+    }
+  ],
+  "cases": [
+    {
+      "name": "",
+      "status": "medium",
+      "condition": "anomalous_user_creation >= 1",
+      "notifications": []
+    }
+  ]
+}
+```
+
 ## Comparing content anomaly method with other detection methods
 
 | Feature | Anomaly Detection | New Value Detection | Content Anomaly Detection |
@@ -131,3 +244,6 @@ $$\text"J(log1,log2)" = 2 / 8 = 0.25$$
 [3]: https://en.wikipedia.org/wiki/Jaccard_index
 [4]: https://en.wikipedia.org/wiki/MinHash
 [5]: https://en.wikipedia.org/wiki/Locality-sensitive_hashing
+[6]: /security/notifications/variables/
+[7]: /logs/search_syntax/
+[8]: /api/latest/security-monitoring/#create-a-detection-rule

@@ -343,4 +343,201 @@ In the **Preview detection** section, check the steps, transitions, and time win
 
 {{% cloud_siem/create_suppression %}}
 
+## API schema reference
+
+This section describes the API payload for creating or updating a real-time detection rule using the `POST /api/v2/security_monitoring/rules` and `PUT /api/v2/security_monitoring/rules/{rule_id}` endpoints. It covers the `threshold` detection method (the default) and the case condition grammar that applies across all real-time detection methods.
+
+For method-specific schemas, see the dedicated pages: [Anomaly][11], [New Value][12], [Impossible Travel][13], [Content Anomaly][14], [Third Party][15], [Sequence][16].
+
+### Top-level payload fields
+
+#### Required
+
+| Field | Type | Description |
+|---|---|---|
+| `name` | string | The name of the rule. |
+| `type` | string enum | The rule type. Use `log_detection` for Cloud SIEM rules. Allowed values: `log_detection`, `workload_security`, `application_security`, `api_security`, `workload_activity`. |
+| `message` | string | Message for generated signals. Supports Mustache templating (see [Security notification variables][17]). |
+| `isEnabled` | bool | Whether the rule is enabled. |
+| `options` | object | Contains `detectionMethod` plus method-specific sub-objects. See [Options](#options). |
+| `queries` | array | Queries for selecting logs which are part of the rule. See [Queries](#queries). |
+| `cases` | array | Cases for generating signals. See [Cases](#cases). |
+
+#### Optional
+
+| Field | Type | Description |
+|---|---|---|
+| `tags` | array\<string\> | Tags for generated signals. |
+| `hasExtendedTitle` | bool | Whether the notifications include the triggering group-by values in their title. |
+| `groupSignalsBy` | array\<string\> | Additional grouping to perform on top of the existing groups in the query section. Must be a subset of the existing groups. |
+| `referenceTables` | array | Reference tables for the rule. Maximum of 1,000,000 rows. |
+| `schedulingOptions` | object | Options for scheduled rules. When this field is present, the rule runs based on the schedule (RRULE, RFC 5545). Minimum frequency is 1 day. |
+| `calculatedFields` | array | Calculated fields. Only allowed for scheduled rules — in other words, when `schedulingOptions` is also defined. |
+| `thirdPartyCases` | array | Required when `detectionMethod` is `third_party`; replaces `cases`. See [Third Party][15]. |
+
+### Queries
+
+A threshold rule can contain one or more queries. See method-specific pages for constraints on other detection methods.
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `name` | string | yes | Name of the query. Used as an alias referenced in `cases[].condition`. |
+| `query` | string | yes | Query to run on logs. See [Log search syntax][18]. |
+| `aggregation` | string enum | yes | The aggregation type. Allowed values: `count`, `cardinality`, `sum`, `max`, `new_value`, `geo_data`, `event_count`, `none`. |
+| `groupByFields` | array\<string\> | usually | Fields to group by. One signal is emitted per distinct group-by tuple. |
+| `distinctFields` | array\<string\> | conditional | Field for which the cardinality is measured. Required when `aggregation` is `cardinality`. |
+| `metrics` | array\<string\> | conditional | Target fields to aggregate over. Required for `sum`, `max`, `geo_data`, and `new_value` aggregations. |
+| `dataSource` | string enum | no | Source of events. Defaults to `logs`. Allowed values: `logs`, `audit`, `app_sec_spans`, `spans`, `security_runtime`, `network`, `events`, `security_signals`. |
+| `indexes` | array\<string\> | no | List of indexes to query when the `dataSource` is `logs`. Only used for scheduled rules. |
+| `hasOptionalGroupByFields` | bool | no | When `false`, events without a group-by value are ignored by the rule. When `true`, events with missing group-by fields are processed with `N/A` replacing the missing values. |
+
+#### Aggregation rules matrix
+
+Server-enforced combinations of `aggregation`, `distinctFields`, `metrics`, and `groupByFields`:
+
+| Aggregation | `distinctFields` | `metrics` | `groupByFields` |
+|---|---|---|---|
+| `count` | no | no | yes |
+| `cardinality` | yes | no | yes |
+| `sum` | no | yes (numeric field) | yes |
+| `max` | no | yes (numeric field) | yes |
+| `new_value` | no | yes (watched attribute) | yes |
+| `geo_data` | no | yes (`@network.client.geoip`) | yes |
+| `event_count` | no | no | no |
+| `none` | no | no | no (used by `third_party`) |
+
+### Cases
+
+Cases turn query results into signals. They are evaluated **top-down, first match wins**. Order cases by decreasing severity (`critical` → `high` → `medium` → `low` → `info`) so the most important verdict is picked first. If no case matches, no signal is generated.
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `name` | string | no | Name of the case. Available as `{{case_name}}` in the `message` template. |
+| `status` | string enum | yes | Severity of the Security Signal. Allowed values: `info`, `low`, `medium`, `high`, `critical`. |
+| `condition` | string | conditional | Expression over query aliases (for example, `failed_logins > 5`). Required when multiple cases compete; may be omitted when a rule has a single trivial case. |
+| `notifications` | array\<string\> | no | Notification targets (for example, `@slack-*`, `@team-*`, `@email-...`, `@webhook-...`). Mustache templates like `@slack-{{service.name}}` are supported. |
+| `actions` | array | no | AppSec only — omit on `log_detection` rules. |
+
+#### Case condition grammar
+
+The `condition` field accepts a grammar of logical, comparison, sequential, and multiplicative operators over query aliases and non-negative integer literals.
+
+**Supported operators:**
+
+| Category | Operators |
+|---|---|
+| Comparison | `>`, `>=`, `<`, `<=` |
+| Logical | `&&` (AND), `||` (OR) |
+| Sequential | `THEN` (uppercase keyword) |
+| Multiplicative | `*` against a non-negative integer literal (for example, `a > 2 * b`, `3 * a > b`) |
+| Grouping | parentheses |
+
+**Not supported** — rejected at validation time:
+
+- `==`, `!=` (equality / inequality)
+- `!` (logical NOT)
+- `+`, `-`, `/`, `%` (arithmetic other than multiplicative)
+- Negative numbers
+- Decimal numbers
+
+**Operand rules:**
+
+- Query aliases must match `[a-z][a-z0-9_]*` (lowercase start, lowercase / digits / underscore after).
+- `NUMBER` tokens are non-negative integers only.
+- A comparison accepts these shapes:
+  - `query op NUMBER` (for example, `failed_logins > 5`)
+  - `NUMBER op query` (for example, `5 < failed_logins`) — **both forms are valid**
+  - `query op query` (for example, `errors > warnings`)
+  - Either side may be multiplied by an integer literal: `query * NUMBER` or `NUMBER * query`
+
+**Precedence:** `&&` binds tighter than `||`. Use parentheses to disambiguate:
+
+```
+(a > 0 && b > 0) || c > 10
+```
+
+**`THEN` (sequential):**
+
+A case condition is either a single expression or `<if-expr> THEN <then-expr>`. Exactly one `THEN` per condition is allowed. Do not combine `THEN` with top-level `&&` / `||` — group into the two sides of the `THEN`.
+
+`THEN` enforces **temporal ordering**: `create_user > 0 THEN attach_admin > 0` fires only when a `create_user` match precedes an `attach_admin` match in time. Rewriting the same condition as `create_user > 0 && attach_admin > 0` silently drops the ordering requirement.
+
+`THEN` here is the threshold-style sequential operator for `log_detection` cases. It is **not** the same feature as the [Sequence][16] detection method, which encodes ordering explicitly via `options.sequenceDetectionOptions.steps` and `stepTransitions`.
+
+**Anomaly detection subset:** For `anomaly_detection` rules, the parser accepts only the narrow forms `query op NUMBER` or `NUMBER op query`. See [Anomaly][11].
+
+### Options
+
+Common `options` fields shared across detection methods:
+
+| Field | Type | Typical | Description |
+|---|---|---|---|
+| `detectionMethod` | string enum | required | The detection method. Allowed values: `threshold`, `new_value`, `anomaly_detection`, `impossible_travel`, `third_party`, `sequence_detection`. |
+| `evaluationWindow` | int (seconds) | 300 | A time window that matches when at least one of the cases evaluates true. Sliding, real-time. Allowed values: `0`, `60`, `300`, `600`, `900`, `1800`, `3600`, `7200`, `10800`, `21600`. Not used for `third_party`. |
+| `keepAlive` | int (seconds) | ≥ `evaluationWindow` | Once a signal is generated, the signal remains "open" if a case is matched at least once within this keep-alive window. Not used for `third_party`. |
+| `maxSignalDuration` | int (seconds) | 3600–86400 | A signal "closes" regardless of case matching once the time exceeds the maximum duration. |
+| `decreaseCriticalityBasedOnEnv` | bool | `false` | If `true`, signals in non-production environments have a lower severity. Decreased by one level when the environment tag starts with `staging`, `test`, or `dev`. `INFO` remains `INFO`. |
+
+**Cross-field constraint (server-enforced):** `evaluationWindow ≤ keepAlive ≤ maxSignalDuration`.
+
+For method-specific options (`newValueOptions`, `anomalyDetectionOptions`, `impossibleTravelOptions`, `thirdPartyRuleOptions`, `sequenceDetectionOptions`), see the corresponding method page.
+
+### Example threshold payload
+
+Example of a `threshold` rule that fires when there are more than 5 failed authentications within a 5-minute window, grouped by user.
+
+```json
+{
+  "name": "Multiple failed authentications from a single user",
+  "type": "log_detection",
+  "isEnabled": true,
+  "message": "User {{@usr.name}} failed authentication {{events_matched}} times.",
+  "tags": [
+    "source:cloudtrail",
+    "security:attack",
+    "technique:T1110-brute-force",
+    "tactic:TA0006-credential-access"
+  ],
+  "options": {
+    "detectionMethod": "threshold",
+    "evaluationWindow": 300,
+    "keepAlive": 3600,
+    "maxSignalDuration": 86400,
+    "decreaseCriticalityBasedOnEnv": true
+  },
+  "queries": [
+    {
+      "name": "failed_logins",
+      "query": "source:cloudtrail @evt.name:ConsoleLogin @responseElements.ConsoleLogin:Failure",
+      "aggregation": "count",
+      "groupByFields": ["@usr.name"],
+      "distinctFields": []
+    }
+  ],
+  "cases": [
+    {
+      "name": "brute_force_attempt",
+      "status": "high",
+      "condition": "failed_logins > 5",
+      "notifications": []
+    }
+  ]
+}
+```
+
+### Further reading
+
+- [Create a detection rule (API reference)][10]
+- [Log search syntax][18]
+- [Security notification variables][17]
+
 [1]: https://app.datadoghq.com/security/siem/rules/new
+[10]: /api/latest/security-monitoring/#create-a-detection-rule
+[11]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly/
+[12]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/new_value/
+[13]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/impossible_travel/
+[14]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/content_anomaly/
+[15]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/third_party/
+[16]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/sequence/
+[17]: /security/notifications/variables/
+[18]: /logs/search_syntax/
