@@ -30,7 +30,7 @@ Partners must have the **Datadog Admin** role, or a custom role with `billing_re
 
 Partners accessing Plan & Usage from their partner admin organization see cost and usage data across all of their customer organizations. Only the **Usage & Cost** tab is available in the partner view; the Plan, Billing History, and Usage Notifications tabs are not displayed.
 
-### Cost Details
+### Cost details
 
 View estimated, historical, and projected cost data for all customer organizations in one place. Partners can see a total across all customers, or group and filter by customer organization, product, and account. See [Cost Details][2] for full documentation.
 
