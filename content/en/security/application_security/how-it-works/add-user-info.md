@@ -157,8 +157,8 @@ Datadog::Kit::Identity.set_user(
 
   # optional tags with known semantics
   name: 'Jean Example',
-  email:, 'jean.example@example.com',
-  session_id:, '987654321',
+  email: 'jean.example@example.com',
+  session_id: '987654321',
   role: 'admin',
   scope: 'read:message, write:files',
 
@@ -394,8 +394,8 @@ public class LoginController {
         String userId = null;
         Map<String, String> metadata = new HashMap<>();
         metadata.put("usr.login", userName);
-        if (userExists != null) {
-            userId = getUserId(userName)
+        if (userExists) {
+            userId = getUserId(userName);
             metadata.put("email", user.getEmail());
         } else {
             userId = userName;
