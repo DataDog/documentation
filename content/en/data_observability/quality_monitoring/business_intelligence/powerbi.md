@@ -55,7 +55,7 @@ Datadog's Power BI integration helps data teams make changes to their data platf
 From the Power BI Admin portal:
 
 1. From the sidebar, click **Workspaces** to open the Workspaces pane.
-2. For each workspace you want Datadog to have access to, open the **Access** panel by clicking the three vertical dots and selecting **Workspace access**.
+2. For each workspace you want Datadog to have access to, open the **Access** panel by clicking the three vertical dots and selecting **Workspace access** (reader/viewer permissions).
 
 ### Add the Power BI integration
 
