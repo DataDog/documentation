@@ -63,6 +63,12 @@ The following pages describe how to install and configure Serverless Monitoring 
     <u>Log Collection</u>: Read more about log collection, how to filter logs, and how to connect logs and traces.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+### Estimate your serverless pricing
+
+Deploy the Datadog Lambda pricing estimator to get an estimate of your serverless monitoring costs.
+
+[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=dd-serverless-pricing-estimator&templateURL=https%3A%2F%2Fserverless-pricing-estimator.s3.us-east-1.amazonaws.com%2Fdd-serverless-pricing-estimator.yaml)
+
 ### Monitor your entire serverless stack in the Serverless view
 
 The Serverless view enables you to correlate high-level metrics from AWS resources with those of Lambda functions, so you can quickly spot issues and start your investigation.
