@@ -54,6 +54,24 @@ LLM Observability supports the following span kinds:
 
 For instructions on creating spans from your application, including code examples, see [Tracing spans][2] in the LLM Observability SDK for Python documentation.
 
+### Span hierarchy
+
+Span kinds follow a natural hierarchy. Agent and workflow spans act as containers for other span kinds:
+
+```
+agent or workflow (root span)
+├── llm         ← Calls to language models
+├── tool        ← Calls to external services or APIs
+├── task        ← Internal processing steps (no external calls)
+├── embedding   ← Calls to embedding models
+├── retrieval   ← Vector search operations (subcategory of tool)
+└── workflow    ← Nested static sub-pipelines
+```
+
+- **Root spans**: `agent`, `workflow`, and `llm` spans can be root spans. Agent spans represent dynamic decision-making; workflow spans represent static sequences.
+- **Nesting**: Any span kind can have children. Nesting is determined by the execution context, not the span kind. In practice, `agent` and `workflow` spans are the most common parent spans, but `tool` and `task` spans can also contain children when needed.
+- **Retrieval vs. tool**: Retrieval spans are a specialized subcategory of tool spans, used only for vector search operations that return ranked documents from a knowledge base. For all other external calls, including traditional database queries and API requests, use tool spans.
+
 #### LLM span
 
 LLM spans represent a call to an LLM where input and outputs are represented as text.

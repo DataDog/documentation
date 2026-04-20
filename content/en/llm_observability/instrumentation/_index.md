@@ -50,6 +50,91 @@ All supported SDKs provide advanced capabilities for custom instrumentation of y
 
 To learn more, see the [SDK Reference Documentation][2].
 
+##### Decorator quick-reference
+
+The following examples show how to add LLM Observability instrumentation to your functions. The `@workflow`, `@agent`, `@tool`, and `@task` decorators automatically capture function inputs and outputs. For full arguments and options, see the [SDK Reference Documentation][2].
+
+{{< tabs >}}
+{{% tab "Python" %}}
+{{< code-block lang="python" >}}
+from ddtrace.llmobs.decorators import workflow, agent, tool, task, llm, retrieval
+
+@workflow
+def my_pipeline(input_data):
+    # Top-level entry point for a static sequence of operations
+    ...
+
+@agent
+def my_agent(user_message):
+    # Autonomous agent with dynamic decision-making
+    ...
+
+@tool
+def call_external_api(query):
+    # Calls to external services, APIs, or databases
+    ...
+
+@task
+def preprocess_data(raw_input):
+    # Internal processing steps (no external calls)
+    ...
+
+@llm(model_name="gpt-4o", model_provider="openai")
+def invoke_llm(prompt):
+    # Direct LLM call (only needed if not using auto-instrumentation)
+    ...
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init({ llmobs: { mlApp: '<ML_APP>' } })
+const llmobs = tracer.llmobs
+
+// Top-level entry point for a static sequence of operations
+myPipeline = llmobs.wrap({ kind: 'workflow' }, myPipeline)
+
+// Autonomous agent with dynamic decision-making
+myAgent = llmobs.wrap({ kind: 'agent' }, myAgent)
+
+// Calls to external services, APIs, or databases
+callExternalApi = llmobs.wrap({ kind: 'tool' }, callExternalApi)
+
+// Internal processing steps (no external calls)
+preprocessData = llmobs.wrap({ kind: 'task' }, preprocessData)
+
+// Direct LLM call (only needed if not using auto-instrumentation)
+invokeLlm = llmobs.wrap({ kind: 'llm', modelName: 'gpt-4o', modelProvider: 'openai' }, invokeLlm)
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+
+// Top-level entry point for a static sequence of operations
+LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("my-pipeline", null, null);
+
+// Autonomous agent with dynamic decision-making
+LLMObsSpan agentSpan = LLMObs.startAgentSpan("my-agent", null, null);
+
+// Calls to external services, APIs, or databases
+LLMObsSpan toolSpan = LLMObs.startToolSpan("call-external-api", null, null);
+
+// Internal processing steps (no external calls)
+LLMObsSpan taskSpan = LLMObs.startTaskSpan("preprocess-data", null, null);
+
+// Direct LLM call (only needed if not using auto-instrumentation)
+LLMObsSpan llmSpan = LLMObs.startLLMSpan("invoke-llm", "gpt-4o", "openai", null, null);
+
+// Call span.finish() after each operation completes
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+<div class="alert alert-info">Instrumentation is additive. Add imports and decorators to your existing functions without modifying their signatures, return values, or internal logic. Do not restructure or refactor code to accommodate instrumentation.</div>
+
 ### HTTP API instrumentation
 If your language is not supported by the SDKs or you are using custom integrations, you can instrument your application using Datadog's HTTP API.
 
