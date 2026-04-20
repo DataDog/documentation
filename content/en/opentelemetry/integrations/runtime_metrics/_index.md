@@ -57,6 +57,8 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 
 To collect additional JVM metrics beyond the default runtime instrumentation, install the [OpenTelemetry JMX Metric Scraper][9]. The scraper scrapes MBeans over JMX and emits them as OpenTelemetry metrics, which Datadog then maps to runtime metrics (see the [JVM Contrib table](#jvm-contrib) in [Data collected](#data-collected)).
 
+Configure the scraper with `otel.jmx.target.source=legacy` to collect these additional metrics. The scraper's `instrumentation` source emits the same semantic-convention metrics already produced natively by the OpenTelemetry Java SDK, so it does not provide additional coverage.
+
 #### Collector configuration
 
 The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` processor.
