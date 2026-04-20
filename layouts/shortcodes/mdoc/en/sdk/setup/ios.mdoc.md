@@ -486,6 +486,8 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {% /tab %}
 {% /tabs %}
 
+**Note**: `URLSessionInstrumentation` requires access to a `URLSession` delegate class. For third-party libraries that don't expose a session delegate, use the [Custom Resources API][17] to manually track those network calls.
+
 ### Instrument views
 
 The Datadog iOS SDK allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
@@ -580,4 +582,5 @@ See [Supported versions][9] for a list of operating system versions and platform
 [14]: /error_tracking/
 [15]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-actions
 [16]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
+[17]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-resources
 

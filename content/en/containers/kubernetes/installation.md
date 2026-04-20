@@ -50,6 +50,8 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
    - [Datadog Operator][9] (recommended): a Kubernetes [operator][10] that you can use to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
    - [Helm][11]
    - Manual installation. See [Manually install and configure the Datadog Agent with a DaemonSet][12]
+  
+<div class="alert alert-info">If you plan to implement APM with <a href="/containers/kubernetes/apm">Single Step Instrumentation (SSI)</a> in your Kubernetes environment, install the Datadog Agent in its own namespace. SSI does not instrument pods in the same namespace as the Datadog Agent.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}

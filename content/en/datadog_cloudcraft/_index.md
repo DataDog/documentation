@@ -179,6 +179,7 @@ Learn how to navigate between [built-in overlays][4] to view your architecture f
 - [Observability][9]: Indicates which hosts have the Agent installed and what observability features are enabled.
 - [Security][10]: IAM, firewall, and security group visibility.
 - [Cloud Cost Management][11]: Track and optimize resource spend.
+- [APM][15]: Visualize distributed traces between cloud resources (AWS only, Preview).
 
 ## Further reading
 
@@ -198,3 +199,4 @@ Learn how to navigate between [built-in overlays][4] to view your architecture f
 [12]: /security/sensitive_data_scanner
 [13]: /account_management/rbac/permissions/#compliance
 [14]: /account_management/rbac/permissions/#infrastructure
+[15]: /datadog_cloudcraft/overlays/apm/

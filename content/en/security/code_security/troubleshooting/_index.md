@@ -49,7 +49,7 @@ When uploading results from third-party static analysis tools to Datadog, ensure
 To upload a SARIF report, follow the steps below:
 
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
-2. Optionally, set a [`DD_SITE` variable][7] (this default to `datadoghq.com`).
+2. Optionally, set a [`DD_SITE` variable][7] (this defaults to `datadoghq.com`).
 3. Install the `datadog-ci` utility:
 
    ```bash
