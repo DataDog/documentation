@@ -553,7 +553,7 @@ Identifies upstream APM services and resources that call database queries. Corre
 ### `get_datadog_database_explain_plans`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
-Retrieves PostgreSQL explain plans for a query signature within a timeframe. Returns simplified plan structures with operator trees, index usage, and estimated costs, sorted by cost.
+Retrieves PostgreSQL explain plans for a query signature within a time frame. Returns simplified plan structures with operator trees, index usage, and estimated costs, sorted by cost.
 
 - Get explain plans for query signature `abc123def` on `db-prod-1`.
 - Show me the most expensive execution plans for this slow query.
@@ -562,10 +562,10 @@ Retrieves PostgreSQL explain plans for a query signature within a timeframe. Ret
 ### `get_datadog_database_health_signals`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
-Runs health checks to surface potential PostgreSQL issues such as CPU saturation, restarts, query latency, and blocking. Compares a regression timeframe against a baseline period.
+Runs health checks to surface potential PostgreSQL issues such as CPU saturation, restarts, query latency, and blocking. Compares a regression time frame against a baseline period.
 
 - Run health checks on `db-prod-1` for the last hour versus the previous hour.
-- Check database health around the incident timeframe.
+- Check database health around the incident time frame.
 - What signals explain the regression on the payments database?
 
 ### `get_datadog_database_query_performance`
