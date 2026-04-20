@@ -14,7 +14,7 @@ disable_sidebar: true
 | SQL Server 2017 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
 | SQL Server 2019 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
 | SQL Server 2022 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
-| SQL Server 2025 | {{< X >}}   |           |            |                  | Requires Datadog Agent 7.79+. Support for Azure, Amazon RDS, and Google Cloud SQL is in progress. |
+| SQL Server 2025 | {{< X >}}   |           |            |                  | Requires Datadog Agent 7.79+. |
 
 For setup instructions, select your hosting type:
 
