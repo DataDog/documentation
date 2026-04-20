@@ -1,5 +1,7 @@
 ---
-title: Export a Pipeline Configuration to JSON or Terraform
+title: Export and Import a Pipeline Configuration
+aliases:
+  - /observability_pipelines/configuration/export_pipeline_configuration/
 disable_toc: false
 further_reading:
 - link: "observability_pipelines/configuration/set_up_pipelines/"
@@ -18,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Setting up and updating a pipeline with Terraform or the API can be time-consuming, manual, and prone to syntax errors. Instead, you can create a pipeline or update an existing pipeline in the UI, and then export the configuration to JSON or Terraform to programmatically create or update the pipeline.
+Setting up and updating a pipeline with Terraform or the API can be time-consuming, manual, and prone to syntax errors. Instead, you can create a pipeline or update an existing pipeline in the UI, and then export the configuration to JSON or Terraform to programmatically create or update the pipeline. Additionally, you can import a pipeline's configuration in JSON to the UI.
 
 
 ## Export the configuration of a pipeline in draft mode
@@ -69,6 +71,19 @@ When editing a deployed pipeline, you can add new components such as [Packs][6] 
    - [API documentation][5]
    - [Terraform documentation][4]
 
+## Import a pipeline's JSON configuration to the UI
+
+To help build your pipelines and transfer pipeline configurations across Datadog orgs, you can also import a pipeline's JSON to the UI.
+
+1. Navigate to [Observability Pipelines][1].
+1. Select a draft pipeline to view the configuration.
+1. Click on the settings and select **Import Pipeline**
+   {{< img src="observability_pipelines/export_pipeline/import_access.png" alt="The settings menu showing Import Pipeline" style="width:100%;" >}}
+1. Choose a pipeline configuration as a JSON file from your computer.
+   {{< img src="observability_pipelines/export_pipeline/import_select.png" alt="The import modal giving the option to select a JSON file" style="width:100%;" >}}
+1. Click Import. This replaces your current pipeline configuration with the imported JSON's pipeline configuration. 
+1. [Install the Observability Pipelines Worker and deploy your pipeline using the UI][8].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -80,3 +95,4 @@ When editing a deployed pipeline, you can add new components such as [Packs][6] 
 [5]: https://docs.datadoghq.com/api/latest/observability-pipelines/#update-a-pipeline
 [6]: /observability_pipelines/packs/
 [7]: /observability_pipelines/configuration/install_the_worker/#api-or-terraform-pipeline-setup
+[8]: https://docs.datadoghq.com/observability_pipelines/configuration/install_the_worker/?tab=docker#pipeline-ui-setup

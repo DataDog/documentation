@@ -91,13 +91,19 @@ Use the same query format as for the [Event Explorer][8], for example:
 
 ### Markers
 
-To add markers for additional data sets, click {{< ui >}}Add Marker{{< /ui >}} in the {{< ui >}}Markers{{< /ui >}} section.
+To add markers for additional datasets, click {{< ui >}}Add Marker{{< /ui >}} in the {{< ui >}}Markers{{< /ui >}} section.
 
 1. Select a Line or Range and input a value or a range or values.
 2. In the {{< ui >}}Show as{{< /ui >}} field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line.
-3. To add a label that displays on the bottom left of the timeseries widget, define a value for the Y-Axis and click the {{< ui >}}Label{{< /ui >}} checkbox.
+3. To add a label that displays on the bottom left of the timeseries widget, define a value for the y-axis and click the {{< ui >}}Label{{< /ui >}} checkbox.
 
-### Y-Axis controls
+### Dual y-axis
+
+To display more than one y-axis on the same graph, click **Add Graph**. Use the **Y-axis** dropdown to associate the request's data with the left or right axis. You can assign any number of requests to each side.
+
+{{< img src="dashboards/widgets/timeseries/dual_y_axis.png" alt="The Timeseries widget shows two metric queries: system.uptime in purple on the left y-axis and system.disk.used in orange on the right y-axis." style="width:100%;" >}}
+
+### Y-axis controls
 
 Y-axis controls are available in the UI and in the JSON editor. You can set the value and type of the y-axis to:
 
@@ -113,8 +119,7 @@ The following configuration options are available:
 | `Max`                 | No       | Specify the maximum value to show on the y-axis. It takes a number or `Auto` as the default value.                                                                                                                        |
 | `Scale`               | No       | Specifies the scale type. Possible values include:<br>- *linear*: A linear scale (default).<br>- *log*: A logarithmic scale.<br>- *pow*: A Power of 2 scale (2 is default, modify in JSON).<br>- *sqrt*: A square root scale. |
 | `Always include zero` | No       | Always include zero or fit the y-axis to the data range. The default is to always include zero.                                                                                                                             |
-
-Because the mathematical log function does not accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise, an empty graph is returned.
+<div class="alert alert-info">Because the mathematical log function does not accept negative values, the Datadog log scale only works if values are of the same sign (everything > 0 or everything < 0). Otherwise, Datadog returns an empty graph.</div>
 
 ### Legend configuration
 
