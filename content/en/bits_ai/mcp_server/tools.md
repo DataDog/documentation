@@ -532,6 +532,87 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 
 Tools for interacting with [Database Monitoring][26].
 
+### `find_datadog_database_instances`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Discovers and ranks database instances for DBM investigation. Call this before other DBM tools that require a `database_instance` parameter. Accepts an APM trace or span ID, tags, or both to find matching instances, then assesses and ranks their health.
+
+- Find database instances correlated with trace `abc123` from an hour ago.
+- What PostgreSQL instances match `cluster_name:payments-prod`?
+- Rank database instances for service `checkout-api` by health.
+
+### `get_datadog_database_calling_services`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Identifies upstream APM services and resources that call database queries. Correlates database activity with application traces for root cause analysis across the APM-database boundary.
+
+- Which services are calling the slowest queries on `db-prod-1`?
+- Find the primary caller of query signature `abc123def`.
+- Show me APM resources driving load on the payments database.
+
+### `get_datadog_database_explain_plans`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Retrieves PostgreSQL explain plans for a query signature within a timeframe. Returns simplified plan structures with operator trees, index usage, and estimated costs, sorted by cost.
+
+- Get explain plans for query signature `abc123def` on `db-prod-1`.
+- Show me the most expensive execution plans for this slow query.
+- What plan variations does query signature `xyz789` have over the past day?
+
+### `get_datadog_database_health_signals`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Runs health checks to surface potential PostgreSQL issues such as CPU saturation, restarts, query latency, and blocking. Compares a regression timeframe against a baseline period.
+
+- Run health checks on `db-prod-1` for the last hour versus the previous hour.
+- Check database health around the incident timeframe.
+- What signals explain the regression on the payments database?
+
+### `get_datadog_database_query_performance`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Analyzes a specific PostgreSQL query's performance. Returns throughput, average latency, execution time, rows per execution, cache hit ratio, I/O stats, connection activity, wait events, and transaction duration, with both overall statistics and time-bucketed analysis.
+
+- Analyze performance for query signature `abc123def` over the last hour.
+- Why is this query slow on the production PostgreSQL instance?
+- Show wait events and cache hit ratio for query signature `xyz789`.
+
+### `get_datadog_database_query_statement`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Retrieves the SQL statement text for a given query signature. Use this to map signature hashes back to the concrete SQL for investigation and reporting.
+
+- Get the SQL for query signature `abc123def`.
+- Show me the statement behind this query hash on `db-prod-1`.
+- What query does signature `xyz789` correspond to?
+
+### `get_datadog_database_recommendations`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Retrieves live database recommendations for a database, query, table, host, or index. Returns the matching recommendations with status, severity, and a normalized scope block highlighting affected instances, query signatures, tables, indexes, services, plans, and infrastructure identifiers.
+
+- Show open database recommendations for `db-prod-1`.
+- List missing index recommendations on the payments database.
+- Get high-severity recommendations for query signature `abc123def`.
+
+### `get_datadog_database_schemas`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Fetches schema definitions (columns, indexes, foreign keys, partitions) for one or more database objects. Accepts table names with optional schema, database, and instance qualifiers.
+
+- Show me the schema for the `orders` table.
+- Get columns and indexes for `public.users` on `db-prod-1`.
+- Fetch foreign keys for the `payments` table.
+
+### `optimize_datadog_database_query`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Analyzes a PostgreSQL query for optimization opportunities using deterministic rules. Returns query rewrites, anti-pattern detection (`SELECT *`, `OFFSET` without `ORDER BY`, `ORDER BY` without `LIMIT`), missing index suggestions, and idle-in-transaction impact analysis. Accepts either SQL text or a query signature.
+
+- Optimize query signature `abc123def` on the payments database.
+- Check this SQL for missing indexes and anti-patterns.
+- Suggest rewrites for the slowest query on `db-prod-1`.
+
 ### `search_datadog_database_plans`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
