@@ -396,7 +396,7 @@ Example configuration file location:
 
 ## Toolsets
 
-The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
+The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
@@ -420,7 +420,7 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 ### Available toolsets
 
-These toolsets are generally available:
+These toolsets are generally available. See [Datadog MCP Server Tools][49] for a complete reference of available tools organized by toolset, with example prompts.
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
@@ -430,10 +430,10 @@ These toolsets are generally available:
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments
 - `llmobs`: Tools for searching and analyzing [LLM Observability][36] spans and experiments
-- `product-analytics`: Tools for interacting with [Product Analytics][41] queries
-- `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage
 - `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38]
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
+- `product-analytics`: Tools for interacting with [Product Analytics][41] queries
+- `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage
 - `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
@@ -441,7 +441,7 @@ These toolsets are generally available:
 
 ### Preview toolsets
 
-These toolsets are in Preview. Sign up by completing the Product Preview form or contact [Datadog support][47] to request access.
+These toolsets are in Preview. Sign up for a toolset by completing the Product Preview form or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
 - `ddsql`: ([Request access][47]) Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 
@@ -614,3 +614,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [46]: /dashboards/
 [47]: /help/
 [48]: /reference_tables/
+[49]: /bits_ai/mcp_server/tools
