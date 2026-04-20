@@ -56,7 +56,7 @@ The following table lists each Plan & Usage feature and its availability for dir
 | Usage attribution | {{< X >}} |  | Individual customer organizations can access usage attribution from their own [Plan & Usage][1] page |
 | Product-specific usage tables (for example, custom metrics, logs usage by index) | {{< X >}} |  | Individual customer organizations can view these tables from their own [Usage Details][3] page |
 | Datadog costs in Cloud Cost Management | {{< X >}} |  | Individual customer organizations can access [Datadog Costs](/cloud_cost_management/datadog_costs/) from their own Cloud Cost Management page |
-| Plan tab and Billing History tab |  |  | Not available at the partner admin org level or the customer org level for customers purchasing through a partner |
+| Plan and Billing History tabs | {{< X >}} |  | Individual customer organizations can access Plan and Billing History tabs from their own [Plan & Usage][1] page |
 | [Bill Overview][4] | {{< X >}} |  | Not available at the partner admin org level |
 | Usage Notifications tab | {{< X >}} |  | Individual customer organizations can configure usage notifications from their own [Plan & Usage][1] page |
 
