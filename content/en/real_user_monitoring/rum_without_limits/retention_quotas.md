@@ -16,22 +16,37 @@ further_reading:
     text: Retention Filter Best Practices
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/rum-managed-archive/" btn_hidden="false" header="Join the Preview!">}}
+Retention Quotas are in Preview.
+{{< /callout >}}
+
 ## Overview
 
-Retention quotas let you cap the number of sessions retained per day across your retention filters. This gives you tighter cost control and prevents unexpected billing spikes caused by traffic surges or misconfigured filters.
+Retention quotas let you **cap** the number of sessions retained per day across your retention filters.
 
-{{< img src="real_user_monitoring/rum_without_limits/retention-quotas-configuration.png" alt="The retention quota configuration panel showing the daily quota threshold, reset time, and behavior options." style="width:80%" >}}
-
-<div class="alert alert-info">Sessions retained by <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a> are not counted toward the quota.</div>
+This gives you tighter **cost control** and prevents **unexpected billing** spikes caused by traffic surges or misconfigured filters.
 
 ## How quotas work
 
 You define a daily quota as a maximum number of retained sessions. After the quota is reached, you can choose one of two behaviors:
 
-- **Stop retention**: No additional sessions are retained for the rest of the day. All incoming sessions are discarded by the retention filters until the quota resets.
-- **Slow down retention**: Retention continues at 10% of its normal rate. Sessions that would have been retained are instead sampled down by 90%, allowing a trickle of data to continue flowing in.
+- **Stop retention**: No additional sessions are retained for the rest of the day. All incoming sessions are dropped until the quota resets.
+- **Slow down retention**: Retention continues but at a slower rate. Only 10% of the sessions that should be normally retained are effectively retained.
 
-Any configuration change (quota limit, retention behavior, reset time) is instantly applied.
+## Setup
+
+To set up a retention quota for an application:
+
+1. In Datadog, navigate to **Digital Experience > Real User Monitoring > Manage Applications**.
+2. Select your application.
+3. Go to **Product Settings > Retention Filters**.
+4. Set a daily quota threshold, a reset time, and a behavior when the quota is reached.
+
+{{< img src="real_user_monitoring/rum_without_limits/retention-quotas-configuration.png" alt="The retention quota configuration panel showing the daily quota threshold, reset time, and behavior options." style="width:80%" >}}
+
+<div class="alert alert-info">Only sessions retained by your regular retention filters count toward the quota. Sessions kept by <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a> are always retained.</div>
+
+Configuration is done at the application level, which means you can apply different retention strategies per application. Any configuration change (quota limit, retention behavior, reset time) is instantly applied.
 
 ## Monitoring quota usage
 
