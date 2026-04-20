@@ -59,7 +59,7 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
         </tr>
     </table>
 
-### Optional settings
+### Optional TLS settings
 
 {{% observability_pipelines/tls_settings %}}
 

@@ -30,7 +30,7 @@ To configure your Syslog source:
 1. Enter the identifier for your syslog address. If you leave it blank, the [default](#set-secrets) is used.
 1. In the **Socket Type** dropdown menu, select the communication protocol you want to use: **TCP** or **UDP**.
 
-### Optional settings
+### Optional TLS settings
 
 {{% observability_pipelines/tls_settings %}}
 

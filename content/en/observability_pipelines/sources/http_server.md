@@ -33,7 +33,7 @@ To configure your HTTP/S Server source, enter the following:
     - Enter the identifiers for your HTTP Server username and password. If you leave it blank, the [default](#set-secrets) is used.
 1. Select the decoder you want to use on the HTTP messages. Your HTTP client logs must be in this format. **Note**: If you select `bytes` decoding, the raw log is stored in the `message` field.
 
-### Optional settings
+### Optional TLS settings
 
 {{% observability_pipelines/tls_settings %}}
 

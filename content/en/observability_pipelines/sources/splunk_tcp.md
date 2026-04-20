@@ -25,7 +25,7 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 - Enter the identifier for your Splunk TCP address. If you leave it blank, the [default](#set-secrets) is used.
 
-### Optional settings
+### Optional TLS settings
 
 {{% observability_pipelines/tls_settings %}}
 

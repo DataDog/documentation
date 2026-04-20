@@ -47,7 +47,7 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 | 7.1.x          | General Availability                  | All             |
 | 7.0.x          | General Availability                  | All             |
 
-App and API Protection capabililties for PHP support the following SAPI's:
+App and API Protection capabilities for PHP support the following SAPI's:
 
 | SAPI           | Support type    |
 |:---------------|:----------------|
@@ -59,7 +59,7 @@ App and API Protection capabililties for PHP support the following SAPI's:
 
 ## Supported processor architectures
 
-App and API Protection capabililties for PHP support the following architectures:
+App and API Protection capabilities for PHP support the following architectures:
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
