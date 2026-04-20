@@ -7,34 +7,34 @@ title: Troubleshooting .NET App and API Protection
 ### No security signals appearing
 
 1. Verify Agent version:
-   - Ensure you're running Datadog Agent v7.41.1 or higher.
-   - Check Agent status: `datadog-agent status`.
+    - Ensure you're running Datadog Agent v7.41.1 or higher.
+    - Check Agent status: `datadog-agent status`.
 2. Check .NET tracer version:
-   - Confirm you're using .NET tracer v2.42.0 or higher.
+    - Confirm you're using .NET tracer v2.42.0 or higher.
 3. Verify environment variables:
-   - Ensure `DD_APPSEC_ENABLED=true` is set.
-   - Check `DD_SERVICE` and `DD_ENV` are properly configured.
-   - Verify `DD_APM_ENABLED=true` if using APM features.
+    - Ensure `DD_APPSEC_ENABLED=true` is set.
+    - Check `DD_SERVICE` and `DD_ENV` are properly configured.
+    - Verify `DD_APM_ENABLED=true` if using APM features.
 4. Check file system permissions:
-   - Ensure the application has write access to `/tmp`.
-   - Verify the Java agent JAR is readable.
+    - Verify the Datadog .NET tracer installation directory exists and that the native tracer library is readable.
+    - Verify the tracer log directory is writable (`/var/log/datadog/dotnet/` on Linux or `%PROGRAMDATA%\Datadog .NET Tracer\logs\` on Windows).
 
 ### Application fails to start
 
 1. Check logs for errors:
-   - Logs are located at
-     - Linux: `/var/log/datadog/dotnet/`
-     - Windows: `%PROGRAMDATA%\Datadog .NET Tracer\logs\`
+    - Logs are located at
+        - Linux: `/var/log/datadog/dotnet/`
+        - Windows: `%PROGRAMDATA%\Datadog .NET Tracer\logs\`
 
 ### Performance impact
 
 1. High latency:
-   - Check Agent resource usage.
-   - Verify network connectivity between Agent and Datadog.
-   - Consider adjusting sampling rates.
+    - Check Agent resource usage.
+    - Verify network connectivity between Agent and Datadog.
+    - Consider adjusting sampling rates.
 2. High memory usage:
-   - Monitor memory usage.
-   - Adjust Agent resource limits if needed
+    - Monitor memory usage.
+    - Adjust Agent resource limits if needed
 
 ### Still having issues?
 
