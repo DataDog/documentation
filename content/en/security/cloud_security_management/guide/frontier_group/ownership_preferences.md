@@ -9,7 +9,7 @@ further_reading:
   text: "Reference Tables"
 ---
 
-The Ownership Agent automatically determines who owns each cloud resource with a security finding. By default, it uses cloud resource tags, service catalog data, and other signals to infer ownership.
+The Ownership Agent automatically determines who owns a subset of cloud resources with security findings. By default, it uses cloud resource tags, service catalog data, and other data sources to infer ownership.
 
 **Ownership preferences** let you customize this process by providing your own rules. You store them in a Datadog [reference table][1], and the Ownership Agent reads them automatically to enhance its results.
 
@@ -39,9 +39,9 @@ Each row in your reference table is one preference. The `preference_type` column
 
 A tag mapping says: _"When a resource has tag `X:Y`, it belongs to this owner."_
 
-The agent checks cloud resource tags against your mappings. When a match is found, the specified owner is added as a candidate. Multiple mappings can match the same resource, producing multiple candidates that are ranked alongside other signals.
+The agent checks cloud resource tags against your mappings. When a match is found, the specified owner is added as a candidate. Multiple mappings can match the same resource, producing multiple candidates that are ranked alongside other data sources.
 
-Tag mappings complement existing ownership signals. They do not override a direct ownership tag (like `dd-team`) already present on the resource.
+Tag mappings complement existing ownership data sources. They do not override a direct ownership tag (like `dd-team`) already present on the resource.
 
 **Columns used:**
 
@@ -103,7 +103,7 @@ preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_t
 tag_mapping,managed-by,,team-infra,team,low,,,,,
 ```
 
-This matches any value of the `managed-by` tag and assigns it to `team-infra` with low confidence. Because the confidence is low, stronger signals from other sources take priority.
+This matches any value of the `managed-by` tag and assigns it to `team-infra` with low confidence. Because the confidence is low, stronger data sources take priority.
 
 ### Exclusions
 
@@ -157,7 +157,7 @@ This excludes `legacy-ops` only when it appears as a team candidate for EC2 inst
 
 ### Custom prompt text
 
-Custom prompt text provides free-form guidance to the AI inference engine. Use it to share organizational context that helps the AI make better ownership decisions, such as naming conventions, team structures, or which signals to prioritize.
+Custom prompt text provides free-form guidance to the AI inference engine. Use it to share organizational context that helps the AI make better ownership decisions, such as naming conventions, team structures, or which data sources to prioritize.
 
 You can provide up to **three** prompt text entries, one for each priority level (`high`, `medium`, `low`). Entries with the same priority are concatenated. Use priority to control which guidance the AI engine considers first.
 
@@ -187,7 +187,7 @@ prompt_text,,,,,,,,For container images the repository owner in our GitHub organ
 
 ## Validation rules
 
-All preference data is validated when the Ownership Agent reads your reference table. **Validation is all-or-nothing**: if any row fails validation, the **entire** preference set is rejected for that sync cycle. When this happens, the previously synced preferences (if any) are preserved and no data is lost.
+All preference data is validated when the Ownership Agent reads your reference table. **Validation is all-or-nothing**: if any row fails validation, the **entire** preference set is rejected for that sync cycle. When this happens, the preferences are left empty until a valid set is uploaded.
 
 This strict approach helps ensure you are working with a consistent, fully valid set of preferences.
 
@@ -234,7 +234,7 @@ Prompt text is processed by the AI engine as organizational context. To help ens
 
 - **Use plain, declarative sentences**: Describe facts about your organization, not instructions to the AI.
 - **Avoid special formatting**: Markdown headings, HTML tags, and XML-like tags are stripped during processing.
-- **Focus on ownership signals**: Describe which tags, naming conventions, or team structures indicate ownership.
+- **Focus on ownership data sources**: Describe which tags, naming conventions, or team structures indicate ownership.
 
 **Good examples:**
 
@@ -350,11 +350,11 @@ Replace `api.datadoghq.com` with your [Datadog site URL][4] if applicable (for e
 
 Changes to your reference table take effect within **24 hours**.
 
-**Note**: If you delete all rows from the table (leaving it empty), the agent actively clears your previous preferences. This is different from deleting the table entirely, which preserves the last successfully synced preferences. If you want to temporarily disable preferences, delete the reference table rather than emptying it.
+**Note**: If you delete all rows from the table (leaving it empty), the agent actively clears your previous preferences. Deleting the table entirely has the same effect—the cached preferences expire and are left empty.
 
 ## Troubleshooting
 
-Validation is all-or-nothing. If any row has an issue, the entire preference set is rejected and the previously synced preferences (if any) remain in effect.
+Validation is all-or-nothing. If any row has an issue, the entire preference set is rejected and preferences are left empty until a valid set is uploaded.
 
 | Problem | Likely cause | Fix |
 | --- | --- | --- |
@@ -370,7 +370,7 @@ Validation is all-or-nothing. If any row has an issue, the entire preference set
 | All preferences rejected | Prompt text formatting | Markdown headings and HTML/XML tags are stripped during processing. Use plain text only |
 | Tag mapping not matching a resource | Spelling mismatch | Matching is case-insensitive, but verify the exact tag key and value on your resource |
 | Exclusion not applying | Scoping filters too narrow | All non-empty fields must match (AND logic). Leave `exclusion_type` and `exclusion_resource_type` empty for broad exclusions |
-| Preferences cleared unexpectedly | Table was emptied instead of deleted | An empty table actively clears preferences. To disable preferences temporarily, delete the reference table instead |
+| Preferences cleared unexpectedly | Table was emptied or deleted | Both an empty table and a deleted table cause cached preferences to expire. Upload a valid CSV to restore preferences |
 
 ## Complete example
 
