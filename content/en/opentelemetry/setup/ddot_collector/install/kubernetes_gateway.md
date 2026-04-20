@@ -33,7 +33,7 @@ The OpenTelemetry Collector can be deployed in multiple ways. The *daemonset* pa
 
 The [gateway][6] pattern provides an additional deployment option that uses a centralized, standalone Collector service. This gateway layer can perform actions such as tail-based sampling, aggregation, filtering, and routing before exporting the data to one or more backends such as Datadog. It acts as a central point for managing and enforcing observability policies.
 
-{{< img src="opentelemetry/embedded_collector/ddot_gateway.png" alt="Architecture diagram of the OpenTelemetry Collector gateway pattern. Applications send OTLP data to local Agent DaemonSets running on each node. The DaemonSets forward this data to a central load balancer, which distributes it to a separate deployment of gateway Collector pods. These gateway pods then process and send the telemetry data to Datadog." style="width:100%;" >}}
+{{< img src="opentelemetry/embedded_collector/ddot_gateway_diagram.png" alt="Architecture diagram of the OpenTelemetry Collector gateway pattern. Applications send OTLP data to local DDOT DaemonSets running on each node. The DaemonSets forward this data to a central load balancer, which distributes it to a separate deployment of DDOT gateway pods. These gateway pods then send the telemetry data to Datadog." style="width:100%;" >}}
 
 When you enable the gateway:
 1.  A Kubernetes Deployment (`<RELEASE_NAME>-datadog-otel-agent-gateway-deployment`) manages the standalone **gateway Collector pods**.
