@@ -50,7 +50,7 @@ Tag mappings complement existing ownership signals. They do not override a direc
 | `preference_type` | Yes | Must be `tag_mapping` |
 | `tag_key` | Yes | Tag key to match (for example, `cost-center`, `project`) |
 | `tag_value` | No | Tag value to match. Leave empty to match any value for that key (wildcard) |
-| `owner` | Yes | Owner to assign (for example, `team-platform`, `alice@company.com`) |
+| `owner` | Yes | Owner to assign (for example, `team-platform`, `alice@example.com`) |
 | `owner_type` | Yes | Type of owner: `team`, `user`, or `service` |
 | `confidence` | Yes | How strongly this mapping indicates ownership: `high`, `medium`, or `low` |
 
@@ -61,7 +61,7 @@ The `owner_type` field tells the agent what kind of entity the owner is. This he
 | Value | When to use |
 | --- | --- |
 | `team` | The owner is a team handle (for example, `team-platform`, `sre-team`) |
-| `user` | The owner is an individual (for example, `alice@company.com`) |
+| `user` | The owner is an individual (for example, `alice@example.com`) |
 | `service` | The owner is a service or automation account (for example, `payment-svc`) |
 
 **Matching behavior:**
@@ -92,7 +92,7 @@ tag_mapping,cost-center,CC-300,team-security,team,high,,,,,
 ```text
 preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
 tag_mapping,project,atlas,team-atlas,team,medium,,,,,
-tag_mapping,project,hermes,alice@company.com,user,medium,,,,,
+tag_mapping,project,hermes,alice@example.com,user,medium,,,,,
 tag_mapping,project,payments,team-fintech,team,high,,,,,
 ```
 
@@ -159,7 +159,7 @@ This excludes `legacy-ops` only when it appears as a team candidate for EC2 inst
 
 Custom prompt text provides free-form guidance to the AI inference engine. Use it to share organizational context that helps the AI make better ownership decisions, such as naming conventions, team structures, or which signals to prioritize.
 
-You can provide up to **3** prompt text entries, one for each priority level (`high`, `medium`, `low`). Entries with the same priority are concatenated. Use priority to control which guidance the AI engine considers first.
+You can provide up to **three** prompt text entries, one for each priority level (`high`, `medium`, `low`). Entries with the same priority are concatenated. Use priority to control which guidance the AI engine considers first.
 
 **Columns used:**
 
@@ -215,7 +215,7 @@ These restrictions prevent formatting artifacts and help ensure clean processing
 | --- | --- |
 | Maximum tag mappings | 50 rows |
 | Maximum exclusions | 20 rows |
-| Maximum prompt text entries | 3 rows (one per priority level) |
+| Maximum prompt text entries | Three rows (one per priority level) |
 | Maximum bytes per field | 1,024 bytes (applies to tag keys, tag values, owners, handles, and similar fields) |
 | Maximum bytes per prompt text entry | 4,096 bytes |
 
@@ -366,7 +366,7 @@ Validation is all-or-nothing. If any row has an issue, the entire preference set
 | All preferences rejected | Duplicate or conflicting rows | Two tag mappings with the same `tag_key`+`tag_value` but different `owner` or `confidence` values cause rejection. Exact duplicates of exclusions also cause rejection. See [Duplicate detection](#duplicate-detection) |
 | All preferences rejected | Invalid `confidence` value | Must be exactly `high`, `medium`, or `low` |
 | All preferences rejected | Invalid `owner_type` value | Must be `team`, `user`, or `service` (case-insensitive) |
-| All preferences rejected | Size limit exceeded | Check row counts (50 tag mappings, 20 exclusions, 3 prompt text entries) and field lengths (1,024 bytes per field, 4,096 per prompt entry) |
+| All preferences rejected | Size limit exceeded | Check row counts (50 tag mappings, 20 exclusions, three prompt text entries) and field lengths (1,024 bytes per field, 4,096 per prompt entry) |
 | All preferences rejected | Prompt text formatting | Markdown headings and HTML/XML tags are stripped during processing. Use plain text only |
 | Tag mapping not matching a resource | Spelling mismatch | Matching is case-insensitive, but verify the exact tag key and value on your resource |
 | Exclusion not applying | Scoping filters too narrow | All non-empty fields must match (AND logic). Leave `exclusion_type` and `exclusion_resource_type` empty for broad exclusions |
@@ -382,7 +382,7 @@ tag_mapping,cost-center,CC-100,team-platform,team,high,,,,,
 tag_mapping,cost-center,CC-200,team-data-eng,team,high,,,,,
 tag_mapping,cost-center,CC-300,team-security,team,high,,,,,
 tag_mapping,project,atlas,team-atlas,team,medium,,,,,
-tag_mapping,project,hermes,alice@company.com,user,medium,,,,,
+tag_mapping,project,hermes,alice@example.com,user,medium,,,,,
 tag_mapping,env,production,sre-team,team,low,,,,,
 tag_mapping,managed-by,,team-infra,team,low,,,,,
 exclusion,,,,,,deploy-bot,,,,
