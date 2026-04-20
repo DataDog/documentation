@@ -32,6 +32,8 @@ Set up CI Visibility for Buildkite to optimize your resource usage, reduce overh
 | [Custom spans][14] | Custom spans | Configure custom spans for your pipelines. |
 | [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][10]. |
+
 
 ### Terminology
 
@@ -54,6 +56,12 @@ To set up the Datadog integration for [Buildkite][1]:
    * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
    * **Branch filtering**: Leave empty to trace all branches or select the subset of branches you want to trace.
 3. Click **Add Datadog Pipeline Visibility Notification** to save the integration.
+
+### Collect job logs
+
+The Datadog Buildkite integration collects logs from your finished Buildkite jobs and forwards them to Datadog. To install and configure this integration, see the [Buildkite integration documentation][11].
+
+Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for Buildkite jobs can be identified by the `datadog.product:cipipeline` and `source:buildkite` tags.
 
 ## Advanced configuration
 
@@ -154,3 +162,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [16]: /continuous_integration/search/#search-for-pipelines
 [17]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [18]: /glossary/#pipeline-execution-time
+[19]: /integrations/buildkite/#setup
