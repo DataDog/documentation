@@ -279,6 +279,23 @@ test.describe('Page wizard tab', () => {
             await expect(mdocCode).toContainText('trait_id: favorite_movie_candy');
         });
 
+        test('filled-out filter form snapshot (before final submit)', async ({ page }) => {
+            await buildNewFilter(page, monsterMovieSpec, { skipFilterSave: true });
+
+            // The filter row summary shows the filled-in data before we submit.
+            await expect(
+                page.getByText(/Favorite monster movie: Jaws, Godzilla/)
+            ).toBeVisible();
+            await expect(page.getByRole('heading', { name: 'Setup instructions' })).toBeHidden();
+
+            const filtersSection = page
+                .getByRole('heading', { level: 1, name: 'Filters' })
+                .locator('xpath=..');
+            await expect(filtersSection).toHaveScreenshot(
+                'page-wizard-new-filter-filled-out.png'
+            );
+        });
+
         test('YAML traits section snapshot', async ({ page }) => {
             await buildBothFilters(page);
             await expect(codeAfter(page, 'Add new traits')).toHaveScreenshot(
@@ -346,8 +363,16 @@ interface NewFilterSpec {
 /**
  * Build one filter entirely from new config: new trait, new option group
  * with new options. Mirrors the UI path exercised in twoNewFilters.test.ts.
+ *
+ * When `skipFilterSave` is set, stops after the option group is saved —
+ * leaves the filter row summary visible alongside an enabled filter-level
+ * Save button so callers can snapshot the pre-submit state.
  */
-async function buildNewFilter(page: Page, spec: NewFilterSpec) {
+async function buildNewFilter(
+    page: Page,
+    spec: NewFilterSpec,
+    { skipFilterSave = false }: { skipFilterSave?: boolean } = {}
+) {
     await page.getByRole('button', { name: 'Add filter' }).click();
 
     // --- New trait ---
@@ -379,5 +404,6 @@ async function buildNewFilter(page: Page, spec: NewFilterSpec) {
     // --- Filter-level Save (outside any accordion — last Save in DOM) ---
     const filterLevelSave = page.getByRole('button', { name: 'Save', exact: true }).last();
     await expect(filterLevelSave).toBeEnabled();
+    if (skipFilterSave) return;
     await filterLevelSave.click();
 }
