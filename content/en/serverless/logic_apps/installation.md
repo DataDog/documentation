@@ -10,9 +10,9 @@ further_reading:
       text: 'Azure Automated Log Forwarding'
 ---
 
-{{< callout url=
- btn_hidden="true" header="This feature is in Preview">}}
-Serverless Monitoring for Azure Logic Apps is in Preview.
+{{< callout url="#"
+ btn_hidden="false" header="Join the Preview!">}}
+Serverless Monitoring for Azure Logic Apps is in Preview. Complete the form to request access.
 {{< /callout >}}
 
 Azure Logic Apps is a fully managed service, and the Datadog Agent cannot be directly installed on Logic Apps. However, Datadog can monitor Logic Apps through Azure diagnostic logs.

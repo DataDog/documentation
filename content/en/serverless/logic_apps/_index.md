@@ -10,9 +10,9 @@ further_reading:
     text: "Troubleshoot Serverless Monitoring for Azure Logic Apps"
 ---
 
-{{< callout url=
- btn_hidden="true" header="This feature is in Preview">}}
-Serverless Monitoring for Azure Logic Apps is in Preview.
+{{< callout url="#"
+ btn_hidden="false" header="Join the Preview!">}}
+Serverless Monitoring for Azure Logic Apps is in Preview. Complete the form to request access.
 {{< /callout >}}
 
 Azure Logic Apps is a serverless orchestration service that lets developers create and manage multi-step application workflows in Azure. Datadog provides Azure Logic Apps tracing and enhanced metrics through the collection of Azure diagnostic logs.
