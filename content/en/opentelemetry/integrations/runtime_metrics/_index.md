@@ -53,6 +53,10 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 - [Java 8][5]
 - [Java 17][6]
 
+#### Additional JMX metrics
+
+To collect additional JVM metrics beyond the default runtime instrumentation, install the [OpenTelemetry JMX Metric Scraper][9]. The scraper scrapes MBeans over JMX and emits them as OpenTelemetry metrics, which Datadog then maps to runtime metrics (see the [JVM Contrib table](#jvm-contrib) in [Data collected](#data-collected)).
+
 #### Collector configuration
 
 The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` processor.
@@ -70,6 +74,7 @@ processors:
 [5]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java8/library
 [6]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java17/library
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatorateprocessor
+[9]: https://github.com/open-telemetry/opentelemetry-java-contrib/tree/main/jmx-scraper
 
 {{% /tab %}}
 
@@ -155,8 +160,6 @@ processors:
 
 If you use [OpenTelemetry automatic instrumentation][3] for Node.js applications, runtime metrics are enabled by default through the [`@opentelemetry/instrumentation-runtime-node`][5] package.
 
-**Note**: Runtime metrics are only exported if a `MeterProvider` and metric exporter are configured. Set the `OTEL_METRICS_EXPORTER` environment variable or programmatically configure a `metricReader` in your SDK initialization.
-
 #### Manual instrumentation
 
 If you use [OpenTelemetry manual instrumentation][4], see the documentation for the [`@opentelemetry/instrumentation-runtime-node`][5] library.
@@ -182,7 +185,7 @@ Host-level metrics such as system CPU and memory usage are not included in OpenT
    hostMetrics.start();
    ```
 
-For the list of metrics collected by this package, see the [Node Contrib Host table](#node-contrib-host).
+For the list of metrics collected by this package, see the [Node.js Contrib Host table](#nodejs-contrib-host).
 
 [3]: https://opentelemetry.io/docs/zero-code/js/
 [4]: https://opentelemetry.io/docs/languages/js/instrumentation/
@@ -192,6 +195,8 @@ For the list of metrics collected by this package, see the [Node Contrib Host ta
 {{% /tab %}}
 
 {{% tab "Python" %}}
+
+#### Installation
 
 Runtime metrics are not enabled by default for Python applications. Install the [`opentelemetry-instrumentation-system-metrics`][5] package:
 
@@ -226,7 +231,7 @@ SystemMetricsInstrumentor().instrument()
 After setup is complete, you can view runtime metrics in:
 - The service's details page (see Java example below)
 - The flame graph metrics tab
-- Default [runtime dashboards][7]
+- Default runtime dashboards ([Java Example][7])
 
 {{< img src="opentelemetry/otel_runtime_metrics_service_page.png" alt="Service page showing OpenTelemetry runtime metrics on the JVM Metrics tab" style="width:100%;" >}}
 
@@ -247,10 +252,10 @@ For Collector processor configuration required to make these metrics compatible 
 {{< mapping-table resource="jvm-instrumentation.csv">}}
 
 <h3>JVM Contrib</h3>
-<p>These metrics are collected when using the OpenTelemetry JMX Metrics Gatherer.</p>
+<p>These metrics are collected when using the OpenTelemetry JMX Metric Scraper.</p>
 {{< mapping-table resource="jvm-contrib.csv">}}
 
-<h3>JVM Deprecated</h3>
+<h3>Deprecated JVM Metrics</h3>
 <p>These metrics are collected when using OpenTelemetry Java SDK versions 1.32.0 and earlier.</p>
 {{< mapping-table resource="jvm-deprecated.csv">}}
 
@@ -282,11 +287,11 @@ For Collector processor configuration required to make these metrics compatible 
 
 {{< tab "Node.js" >}}
 
-<h3>Node Contrib Runtime</h3>
+<h3>Node.js Contrib Runtime</h3>
 <p>These metrics are emitted from auto-instrumentation with the latest version of the OpenTelemetry Node.js SDK.</p>
 {{< mapping-table resource="node-contrib-runtime.csv">}}
 
-<h3>Node Contrib Host</h3>
+<h3>Node.js Contrib Host</h3>
 <p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/host-metrics">@opentelemetry/host-metrics</a> package. This package is not included in OpenTelemetry automatic instrumentation and must be installed and configured manually.</p>
 {{< mapping-table resource="node-contrib-host.csv">}}
 
@@ -318,7 +323,7 @@ For Collector processor configuration required to make these metrics compatible 
 
 ### Metric name mapping
 
-<div class="alert alert-danger"> OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.</div>
+OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.
 
 ## Further reading
 
