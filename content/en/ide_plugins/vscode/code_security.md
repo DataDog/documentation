@@ -36,6 +36,21 @@ To analyze an entire folder or workspace, right-click a folder in the file explo
 
 <div class="alert alert-info">Static Code Analysis does not require a Datadog account, as source files are analyzed locally.</div>
 
+### Rule editor
+
+Write and test [custom Static Code Analysis rules][4] without leaving your IDE. Use the rule editor to design detection logic for internal standards, security patterns, or maintainability checks specific to your codebase.
+
+{{< img src="/ide_plugins/vscode/static-analysis-rule-editor.png" alt="SAST rule editor in the Datadog extension for VS Code" style="width:100%;" >}}
+
+The rule editor provides the following panels.
+
+- A **Tree-sitter query editor** for pattern matching against the abstract syntax tree.
+- A **JavaScript rule panel** for expressing detection logic and reporting violations.
+- **Compliant and non-compliant test files** that run against the rule as you edit, with expected and actual match counts shown in real time.
+- An **AST tree view** showing how the parser represents your test code.
+
+Import an existing rule from disk, or export a finished rule and upload it to Datadog.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -43,3 +58,4 @@ To analyze an entire folder or workspace, right-click a folder in the file explo
 [1]: /security/code_security/static_analysis/
 [2]: /security/code_security/static_analysis/static_analysis_rules/
 [3]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
+[4]: /security/code_security/static_analysis/custom_rules/
