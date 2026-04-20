@@ -73,8 +73,8 @@ For more information on access controls and log security, see [How to Set Up RBA
 3. Enter a query, such as `user_id:abc123`.
 4. (Optional) Rename the search.
 5. Under **Mode**, choose the kind of search you want to perform.
-   - Choose **Search** to limit your search to the last 100,000 logs from the last 24 hours.
-   - Choose **Search & Rehydration** to specify your own volume and time limit for your search.
+   - Choose **Search** to retrieve results in real time, with up to 100,000 logs retained for 24 hours.
+   - Choose **Search & Rehydration** to rehydrate results for full platform access and custom retention.
 6. Click **Search**.
 
 Logs stream into the results page in real time. A progress bar shows scan status, and you can cancel the search at any time.
@@ -133,10 +133,6 @@ To optimize performance and reduce costs:
 
 
 ### Accelerate searches with Partition Attributes
-
-{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" >}}
-Archive Partition Attributes are in Preview. Sign up to try early access.
-{{< /callout >}}
 
 You can configure **Partition Attributes** on your archives to group logs by low-cardinality field values at write time. Use attributes like `service`, `source`, `env`, or `status`.
 
@@ -233,7 +229,7 @@ In order to search log events from your archives, Datadog uses a service account
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/archives/?tab=awss3
-[2]: /observability_pipelines/destinations/amazon_s3/?tab=docker
+[2]: /observability_pipelines/destinations/datadog_archives/?tab=docker
 [3]: /logs/log_configuration/archives/?tab=awss3
 [4]: https://app.datadoghq.com/logs/archive-search/new
 [5]: https://app.datadoghq.com/logs/archive-search/

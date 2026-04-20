@@ -26,7 +26,7 @@ Select an Error Tracking code insight from the Code Insights view. Go to the sta
 
 Select a stack trace frame and inspect the values of all the variables that Datadog captured from your production code.
 
-{{< img src="/developers/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
+{{< img src="/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
 
 ## Further reading
 

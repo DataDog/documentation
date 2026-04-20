@@ -29,7 +29,7 @@ When using OpenTelemetry with Datadog, you might encounter various hostname-rela
          fieldRef:
            apiVersion: v1
            fieldPath: status.podIP
-     - name: OTEL_RESOURCE
+     - name: OTEL_RESOURCE_ATTRIBUTES
        value: k8s.pod.ip=$(MY_POD_IP)
    ```
 

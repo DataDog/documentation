@@ -1,4 +1,5 @@
 ---
+id: finding
 core_product:
 - seguridad
 - protección de cargas de trabajo

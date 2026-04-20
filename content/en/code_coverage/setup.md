@@ -299,15 +299,7 @@ example/notifications/notifier.go:104.3,104.10 1 3
 
 <div class="alert alert-info">If you use GitHub Actions, you can skip this installation step. The <a href="#uploading-coverage-reports">GitHub Actions upload method</a> below uses a dedicated action that handles <code>datadog-ci</code> installation automatically.</div>
 
-Install the [`datadog-ci`][7] CLI globally using `npm`:
-
-{{< code-block lang="shell" >}}
-npm install -g @datadog/datadog-ci
-{{< /code-block >}}
-
-#### Standalone binary
-
-If installing Node.js in the CI is an issue, standalone binaries are provided with [Datadog CI releases][8]. Only _linux-x64_, _linux-arm64_, _darwin-x64_, _darwin-arm64_ (MacOS) and _win-x64_ (Windows) are supported. To install, run the following from your terminal:
+Standalone binaries are provided with [Datadog CI releases][8]. The _linux-x64_, _linux-arm64_, _darwin-x64_, _darwin-arm64_ (MacOS), and _win-x64_ (Windows) architectures are supported. To install, run the following from your terminal:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -343,6 +335,14 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
+
+#### npm
+
+Alternatively, if Node.js is available in your CI environment, install the [`datadog-ci`][7] CLI globally using `npm`:
+
+{{< code-block lang="shell" >}}
+npm install -g @datadog/datadog-ci
+{{< /code-block >}}
 
 #### Docker image
 
@@ -509,7 +509,7 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [7]: https://www.npmjs.com/package/@datadog/datadog-ci
 [8]: https://github.com/DataDog/datadog-ci/releases
 [9]: https://app.datadoghq.com/organization-settings/api-keys
-[10]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/coverage/README.md
+[10]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-coverage
 [11]: https://app.datadoghq.com/ci/code-coverage
 [12]: #integrate-with-source-code-provider
 [13]: https://hub.docker.com/r/datadog/ci

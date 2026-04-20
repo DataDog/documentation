@@ -22,13 +22,13 @@ The extension runs [Static Code Analysis][1] rules on the source files in your w
 
 Static Code Analysis supports many programming languages. For a complete list, see [Static Code Analysis Rules][2]. Issues are shown in the source code editor, and you can apply suggested fixes directly.
 
-{{< img src="/developers/ide_plugins/vscode/static_analysis.mp4" alt="Preview of Static Analysis" style="width:100%" video=true >}}
+{{< img src="/ide_plugins/vscode/static_analysis.mp4" alt="Preview of Static Analysis" style="width:100%" video=true >}}
 
 ### Get started with Static Code Analysis
 
 When you open a source file, the extension looks for [`static-analysis.datadog.yml`][3] at your repository root and prompts you to create one if it does not exist.
 
-{{< img src="/developers/ide_plugins/vscode/static-analysis-onboard.png" alt="Onboarding banner for setting up Static Code Analysis with Python files" style="width:75%;" >}}
+{{< img src="/ide_plugins/vscode/static-analysis-onboard.png" alt="Onboarding banner for setting up Static Code Analysis with Python files" style="width:75%;" >}}
 
 After you create the configuration file, the analyzer runs automatically in the background when you open a file. To enable Static Code Analysis for a specific language, run the `Datadog: Configure Static Analysis Languages` command from the command palette (`Shift` + `Cmd/Ctrl` + `P`).
 

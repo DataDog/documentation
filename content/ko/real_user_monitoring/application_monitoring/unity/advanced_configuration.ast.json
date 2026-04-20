@@ -1,0 +1,60 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "b178a0f9672fa80b5f4a83ab15f4228d": {
+            "string": "Unity 고급 구성"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "cdd3969d1a3c1a618fd97f99ababf48d": {
+            "string": "Unity 모니터링 구성 방법을 알아보세요."
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "https://github.com/DataDog/dd-sdk-unity",
+            "text": {
+              "itemTranslationData": {
+                "654faba15ede1a6e6bd32653b566adfb": {
+                  "string": "dd-sdk-unity 소스 코드"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "51a8f7e6bf4837b35d750e426156c24b": {
+                  "string": "소스 코드"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "/real_user_monitoring/explorer/",
+            "text": {
+              "itemTranslationData": {
+                "0635cf624daa33cc9cd201de54357e39": {
+                  "string": "RUM 데이터를 탐색하는 방법 알아보기"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "70aa5288b9ea1e893c1176b970cb43c2": {
+                  "string": "문서"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "document"}

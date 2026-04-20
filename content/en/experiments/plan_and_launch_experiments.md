@@ -4,6 +4,9 @@ description: Use Datadog Experiments to measure the causal relationship that new
 aliases:
   - /product_analytics/experimentation/
 further_reading:
+- link: "https://www.datadoghq.com/blog/experiments"
+  tag: "Blog"
+  text: "Measure the business impact of every product change with Datadog Experiments"
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
@@ -11,10 +14,6 @@ further_reading:
   tag: "Documentation"
   text: "Defining Experiment Metrics"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/datadog-experiments/" >}}
-Datadog Experiments is in Preview. Complete the form to request access.
-{{< /callout >}}
 
 ## Overview
 Use Datadog Experiments to measure the causal relationship that new experiences and features have on user outcomes. Datadog Experiments uses [Feature Flags][4] to randomly allocate traffic between two or more variations, using one of the variations as a control group.

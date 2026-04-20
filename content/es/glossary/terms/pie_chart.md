@@ -1,4 +1,5 @@
 ---
+id: pie_chart
 core_product:
 - dashboards
 related_terms:

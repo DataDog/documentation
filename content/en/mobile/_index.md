@@ -24,6 +24,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-app-reduce-mttr/"
   tag: "Blog"
   text: "Reduce your mean time to repair with the Datadog mobile app"
+- link: "https://www.datadoghq.com/blog/designing-on-call-sounds"
+  tag: "Blog"
+  text: "How we designed empathetic alert sounds for on-call engineers"
 ---
 
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
@@ -315,6 +318,9 @@ If you are automatically logged out during the 90 day token period, you will sti
 
 ### Why am I not receiving notifications?
 Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
+
+### Will I receive notifications for all organizations that I am signed into?
+Yes, regardless of the organization that you switch to, you receive notifications for all organizations you are signed into. This includes critical push notifications. 
 
 ### What happens if a user is disabled?
 The mobile app token will be invalid and force the user to log out.

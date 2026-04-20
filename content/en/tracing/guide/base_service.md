@@ -1,6 +1,6 @@
 ---
-title: Base Service, Integration Overrides, and Service Overrides
-description: Understand service overrides, integration overrides, and how to adapt your configuration when using inferred services to improve service dependency representation.
+title: Base Service, Integration Overrides, and Custom Overrides
+description: Understand custom overrides, integration overrides, and how to adapt your configuration when using inferred services to improve service dependency representation.
 disable_toc: false
 aliases:
 - /tracing/guide/service_overrides/
@@ -15,13 +15,13 @@ further_reading:
 
 ## Overview
 
-Both integration overrides and service overrides change the service name of spans. The initial service name is referred to as the [**base service**](#base-service).
+Both integration overrides and custom overrides change the service name of spans. The initial service name is referred to as the [**base service**](#base-service).
 
-This page explains [**integration overrides**](#integration-override) and [**service overrides**](#service-override) in APM.
+This page explains [**integration overrides**](#integration-override) and [**custom overrides**](#custom-override) in APM.
 
 
-### Service overrides
-You can manually set the service name on spans. This gives you visibility into specific components of the service, such as shared libraries and middleware layers. These types of overrides are referred to as **service overrides**.
+### Custom overrides
+You can manually set the service name on spans. This gives you visibility into specific components of the service, such as shared libraries and middleware layers. These types of overrides are referred to as **custom overrides**.
 
 ### Integration overrides
 Datadog tracing libraries automatically set different service names on client spans to represent databases, queues, or third-party dependencies in integrations. These types of overrides are referred to as **integration overrides**. With inferred entities, **integration overrides are not necessary to represent dependencies**, and may pollute service lists and maps. For instructions on how to remove integration overrides, see [Integration Override Removal][2].
@@ -55,10 +55,10 @@ You can remove integration overrides directly in the Datadog UI or with a config
 ## Glossary
 
 ##### Integration override
-A service name set for a span which differs from the default `DD_SERVICE` name, set [automatically](#integration-service-overrides) by some Datadog integrations.
+A service name set for a span which differs from the default `DD_SERVICE` name, set [automatically](#integration-overrides) by some Datadog integrations.
 
-##### Service override
-A service name set for a span which differs from the default `DD_SERVICE` name, set [manually](#custom-service-overrides) by users.
+##### Custom override
+A service name set for a span which differs from the default `DD_SERVICE` name, set [manually](#custom-overrides) by users.
 
 ##### Base service
 The default `DD_SERVICE` name.
