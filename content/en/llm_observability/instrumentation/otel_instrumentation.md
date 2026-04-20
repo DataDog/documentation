@@ -16,6 +16,8 @@ To send <a href="/llm_observability/evaluations/external_evaluations#submitting-
 
 For information on using Prompt Tracking with OpenTelemetry spans, see <a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Prompt Tracking - OpenTelemetry Instrumentation</a>.
 
+For information on using Prompt Tracking with OpenTelemetry spans, see <a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Prompt Tracking - OpenTelemetry Instrumentation</a>.
+
 ## Setup
 
 To send OpenTelemetry traces to LLM Observability, configure your OpenTelemetry exporter with the following settings:
