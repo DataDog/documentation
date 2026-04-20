@@ -42,110 +42,48 @@ further_reading:
       text: 'Fix problems you encounter while using the profiler'
 ---
 
-<!-- Library-based languages -->
-{% if not(includes($prog_lang, ["php", "c", "cpp", "rust", "dot_net"])) %}
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+<!-- Java -->
+{% if equals($prog_lang, "java") %}
+{% partial file="profiler/enabling/java.mdoc.md" /%}
 {% /if %}
 
-<!-- .NET: self-contained (complex multi-tab install/enable flow) -->
+<!-- Python -->
+{% if equals($prog_lang, "python") %}
+{% partial file="profiler/enabling/python.mdoc.md" /%}
+{% /if %}
+
+<!-- Go -->
+{% if equals($prog_lang, "go") %}
+{% partial file="profiler/enabling/go.mdoc.md" /%}
+{% /if %}
+
+<!-- Ruby -->
+{% if equals($prog_lang, "ruby") %}
+{% partial file="profiler/enabling/ruby.mdoc.md" /%}
+{% /if %}
+
+<!-- Node.js -->
+{% if equals($prog_lang, "node_js") %}
+{% partial file="profiler/enabling/nodejs.mdoc.md" /%}
+{% /if %}
+
+<!-- .NET -->
 {% if equals($prog_lang, "dot_net") %}
 {% partial file="profiler/enabling/dotnet.mdoc.md" /%}
 {% /if %}
 
-<!-- C/C++/Rust: self-contained (standalone profiler tool) -->
+<!-- PHP -->
+{% if equals($prog_lang, "php") %}
+{% partial file="profiler/enabling/php.mdoc.md" /%}
+{% /if %}
+
+<!-- C / C++ / Rust (ddprof) -->
 {% if includes($prog_lang, ["c", "cpp", "rust"]) %}
 {% partial file="profiler/enabling/ddprof.mdoc.md" /%}
 {% /if %}
 
-{% if not(includes($prog_lang, ["dot_net", "c", "cpp", "rust"])) %}
-
-## Requirements
-
-For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][2].
-
-{% if equals($prog_lang, "java") %}
-{% partial file="profiler/enabling/java_requirements.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "python") %}
-{% partial file="profiler/enabling/python_requirements.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "go") %}
-{% partial file="profiler/enabling/go_requirements.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "ruby") %}
-{% partial file="profiler/enabling/ruby_requirements.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "node_js") %}
-{% partial file="profiler/enabling/nodejs_requirements.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "php") %}
-{% partial file="profiler/enabling/php_requirements.mdoc.md" /%}
-{% /if %}
-
-## Installation
-
-To begin profiling applications:
-
-1. Make sure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][3].
-
-{% if equals($prog_lang, "java") %}
-{% partial file="profiler/enabling/java_installation.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "python") %}
-{% partial file="profiler/enabling/python_installation.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "go") %}
-{% partial file="profiler/enabling/go_installation.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "ruby") %}
-{% partial file="profiler/enabling/ruby_installation.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "node_js") %}
-{% partial file="profiler/enabling/nodejs_installation.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "php") %}
-{% partial file="profiler/enabling/php_installation.mdoc.md" /%}
-{% /if %}
-
-{% if not(includes($prog_lang, ["node_js", "php"])) %}
-
-## Configuration
-
-{% if equals($prog_lang, "java") %}
-{% partial file="profiler/enabling/java_configuration.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "python") %}
-{% partial file="profiler/enabling/python_configuration.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "go") %}
-{% partial file="profiler/enabling/go_configuration.mdoc.md" /%}
-{% /if %}
-
-{% if equals($prog_lang, "ruby") %}
-{% partial file="profiler/enabling/ruby_configuration.mdoc.md" /%}
-{% /if %}
-
-{% /if %}
-
-{% /if %}
-
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][7] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][1] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
-[1]: /tracing/trace_collection/
-[2]: /profiler/enabling/supported_versions/
-[3]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[7]: /getting_started/profiler/
+[1]: /getting_started/profiler/
