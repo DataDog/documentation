@@ -8945,6 +8945,11 @@ menu:
       parent: rum_without_limits
       identifier: rum_without_limits_retention
       weight: 902
+    - name: Retention Quotas
+      url: real_user_monitoring/rum_without_limits/retention_quotas
+      parent: rum_without_limits
+      identifier: rum_without_limits_retention_quotas
+      weight: 903
     - name: Operations Monitoring
       url: real_user_monitoring/operations_monitoring/
       parent: rum
