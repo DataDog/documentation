@@ -79,6 +79,20 @@
     "description": "Retrieve a paginated list of all fleet tracers.\n\nThis endpoint returns telemetry-derived service names from the SDK telemetry pipeline.\nThese names may differ from span-derived names in APM and are useful for querying\nservice library configurations.\nUse the `page_number` and `page_size` query parameters to paginate through results.",
     "summary": "List all fleet tracers"
   },
+  "DeleteLLMObsCustomEvalConfig": {
+    "description": "Delete a custom LLM Observability evaluator configuration by its name.",
+    "summary": "Delete a custom evaluator configuration"
+  },
+  "GetLLMObsCustomEvalConfig": {
+    "description": "Retrieve a custom LLM Observability evaluator configuration by its name.",
+    "summary": "Get a custom evaluator configuration"
+  },
+  "UpdateLLMObsCustomEvalConfig": {
+    "description": "Create or update a custom LLM Observability evaluator configuration by its name.",
+    "summary": "Create or update a custom evaluator configuration",
+    "request_description": "Custom evaluator configuration payload.",
+    "request_schema_description": "Request to create or update a custom LLM Observability evaluator configuration."
+  },
   "ListDatastores": {
     "description": "Lists all datastores for the organization.",
     "summary": "List datastores"
