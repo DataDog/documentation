@@ -13,6 +13,15 @@
      --port=8080 \
      --update-env-vars=DD_API_KEY=$DD_API_KEY \
      --update-env-vars=DD_SITE=$DD_SITE \
+   ```{{ else if eq (.Get "cloudrun_jobs") "true" }}
+
+   The following command deploys the job:
+
+   ```shell
+   gcloud run jobs deploy <JOB_NAME> \
+     --image=gcr.io/<YOUR_PROJECT>/<APP_NAME> \
+     --set-env-vars=DD_API_KEY=$DD_API_KEY \
+     --set-env-vars=DD_SITE=$DD_SITE \
    ```{{ end }}
 
 [1001]: https://app.datadoghq.com/organization-settings/api-keys

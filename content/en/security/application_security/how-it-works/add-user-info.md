@@ -157,8 +157,8 @@ Datadog::Kit::Identity.set_user(
 
   # optional tags with known semantics
   name: 'Jean Example',
-  email:, 'jean.example@example.com',
-  session_id:, '987654321',
+  email: 'jean.example@example.com',
+  session_id: '987654321',
   role: 'admin',
   scope: 'read:message, write:files',
 
@@ -394,8 +394,8 @@ public class LoginController {
         String userId = null;
         Map<String, String> metadata = new HashMap<>();
         metadata.put("usr.login", userName);
-        if (userExists != null) {
-            userId = getUserId(userName)
+        if (userExists) {
+            userId = getUserId(userName);
             metadata.put("email", user.getEmail());
         } else {
             userId = userName;
@@ -889,7 +889,7 @@ Available since dd-trace-py v3.7, `track_user_sdk` provides 5 functions:
 
 Available since dd-trace-py v3.17, `track_user_sdk` provides this additional function:
 
-- `tracker_user_id`
+- `track_user_id`
 
 
 ```python

@@ -98,7 +98,7 @@ Use one of the following setup methods:
 
 - **[Configure in `application_monitoring.yaml`][18]**:
 
-  Enable products across all services on a host without modifying application command lines.
+  Configure products and features across all services on a host without modifying application command lines.
 
 - **[Set environment variables][17]**:
 
@@ -116,11 +116,6 @@ To update the SDK versions:
 1. Restart your applications.
 
 ### Define instrumentation rules
-
-{{< callout url="https://www.datadoghq.com/product-preview/single-step-instrumentation-targeting-rules-on-linux/"
- btn_hidden="false" header="Join the Preview!">}}
-Instrumentation rules are in Preview.
-{{< /callout >}}
 
 Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
 
@@ -153,14 +148,37 @@ Each rule consists of one or more conditions. A condition includes the following
 - **Value**: The text or pattern to match, such as a process name or command-line flag.
 
 Supported attributes include:
-| Attribute    | Description | Example |
-| ----------- | ----------- | --------- |
+| Attribute | Description | Example |
+| --------- | ----------- | ------- |
 | Operating System | OS of the host. | `linux` |
 | Executable | Executable name of the process. | `python3.11` |
-| Executable File Path | Full path of the executable. | `/usr/bin/python3.11` |
+| Executable Full Path | Full path of the executable. | `/usr/bin/python3.11` |
 | Arguments | Command-line arguments used to start the process. | `--env=production` |
 | Working Directory | Working directory of the process. | `/app` |
 | Language | Programming language detected for the process. | `python` |
+| Entry Point File | The specific file used to launch the application. | `app.py`, `server.js` |
+
+#### Example use cases
+
+Review the following examples demonstrating how to apply instrumentation rules:
+
+{{< collapse-content title="Example 1: Instrument all processes except specific ones" level="h5" >}}
+
+Instrument all processes by default. Add block rules to exclude services that would add noise without value, such as analytics cron jobs and Java batch processors.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Two block instrumentation rules targeting Working Directory and Entry Point File conditions, with a default of allow instrumentation" style="width:100%;" >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Example 2: Instrument only specific processes" level="h5" >}}
+
+Block all instrumentation by default. Add allow rules to opt specific processes into APM. This approach gives you precise control and works well for gradual rollouts.
+
+For example, to instrument only a checkout service and a customer portal, create allow rules using <strong>Working Directory</strong>, then set the default behavior to <strong>Block Instrumentation</strong>.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-linux-example-2.png" alt="Two allow instrumentation rules targeting services in specific working directories, with a default of block instrumentation" style="width:100%;" >}}
+
+{{< /collapse-content >}}
 
 ## Remove Single Step APM instrumentation from your Agent
 
@@ -190,7 +208,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
 [16]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#non-containerized-environment
 [17]: /tracing/trace_collection/library_config/
-[18]: /tracing/trace_collection/automatic_instrumentation/configure_apm_features_linux/
+[18]: /tracing/trace_collection/library_config/application_monitoring_yaml/
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
 

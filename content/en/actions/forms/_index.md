@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSe_OxTl8E_djqF107dKJDhcUuLxh1n9ytEKT6CZa-u8ZPqokg/viewform" btn_hidden="false" header="Join the Preview!" >}}
-Forms are in Preview. Click <b>Request Access</b>, and fill in the Datadog Product Preview Program form.
+Forms are in Preview. Click {{< ui >}}Request Access{{< /ui >}}, and fill in the Datadog Product Preview Program form.
 {{< /callout >}}
 
 ## Overview
@@ -32,36 +32,36 @@ When creating a form, you can use a template or start from scratch. Templates ar
 {{< img src="/actions/forms/forms-blueprint-selected.png" alt="The form creation page with the IDP Feedback Survey selected" style="width:100%;" >}}
 
 To create a form: 
-1. On the [Forms][1] page, click **New Form**.
-1. Select a template or **Start with a blank form**, then click **Continue**.
-1. Optionally, name your form and give it a description. Click **Continue**.
+1. On the [Forms][1] page, click {{< ui >}}New Form{{< /ui >}}.
+1. Select a template or {{< ui >}}Start with a blank form{{< /ui >}}, then click {{< ui >}}Continue{{< /ui >}}.
+1. Optionally, name your form and give it a description. Click {{< ui >}}Continue{{< /ui >}}.
 1. New forms are auto-populated with placeholder components. To edit the form, click a placeholder component, or click the **<i class="icon-plus-circled-wui"></i>** icon to add a new component. Component types include short answer, paragraph, dropdown, checkboxes, ratings, and toggle. The following table lists the elements available inside components:
     | Element  | Description    | Component Availability |
     |----------------------------|---------------------------------------------------------------------|-----|
-    | Required | Determines whether the question requires an answer from the respondent; required questions are marked with a red asterisk on forms. | All components | 
-    | Field name           | The name of the field. Appears in the JSON version in [**Responses**][8]. Not visible to respondents.                                   | All components | 
-    | Placeholder         | The text the respondent sees before entering any text.                 | Short answer, paragraph, and dropdown |
-    | Default value         | The default item or text that is selected before the respondent makes a selection.                                | All components except ratings and checkboxes | 
-    | Data         | The available options that respondents can choose from.                | Dropdown and checkboxes | 
-    | Questions             | The questions respondents are asked when rating their experience. | Ratings |  
-1. Click **Save** to save your changes. 
+    | {{< ui >}}Required{{< /ui >}} | Determines whether the question requires an answer from the respondent; required questions are marked with a red asterisk on forms. | All components | 
+    | {{< ui >}}Field name{{< /ui >}}           | The name of the field. Appears in the JSON version in [**Responses**][8]. Not visible to respondents.                                   | All components | 
+    | {{< ui >}}Placeholder{{< /ui >}}         | The text the respondent sees before entering any text.                 | Short answer, paragraph, and dropdown |
+    | {{< ui >}}Default value{{< /ui >}}         | The default item or text that is selected before the respondent makes a selection.                                | All components except ratings and checkboxes | 
+    | {{< ui >}}Data{{< /ui >}}         | The available options that respondents can choose from.                | Dropdown and checkboxes | 
+    | {{< ui >}}Questions{{< /ui >}}             | The questions respondents are asked when rating their experience. | Ratings |  
+1. Click {{< ui >}}Save{{< /ui >}} to save your changes. 
 
 To preview, share, and debug your form:
-1. Click **View** to display the form as it appears to respondents. Click **Edit** to return to the creator view. 
-1. Click **Share** to copy the form link.
-1. In the **Debug** section, you can:
-    - Click **Form** to show a mini-preview of your form.
-    - Click **Data Definition** to show the JSON version of the components' definition.
-    - Click **UI Definition** to show the JSON version of the form's UI.
+1. Click {{< ui >}}View{{< /ui >}} to display the form as it appears to respondents. Click {{< ui >}}Edit{{< /ui >}} to return to the creator view. 
+1. Click {{< ui >}}Share{{< /ui >}} to copy the form link.
+1. In the {{< ui >}}Debug{{< /ui >}} section, you can:
+    - Click {{< ui >}}Form{{< /ui >}} to show a mini-preview of your form.
+    - Click {{< ui >}}Data Definition{{< /ui >}} to show the JSON version of the components' definition.
+    - Click {{< ui >}}UI Definition{{< /ui >}} to show the JSON version of the form's UI.
 
 ### Add automation 
 
 After creating a form, you can add an [action][4] or [workflow blueprint][5] that triggers automatically when a form is submitted. 
 1. From the [Forms][1] page, click a form. 
-1. Click **Automation**.
+1. Click {{< ui >}}Automation{{< /ui >}}.
 1. Choose an action or blueprint. 
 1. The action or blueprint opens in a workflow canvas, where you can [edit it][2]. 
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 **Note**: Because forms are powered by workflows, automations triggered by forms appear under [Workflow Automation][6]. Additionally, there is no charge associated with workflow executions that are triggered by a form. 
 
@@ -70,8 +70,8 @@ After creating a form, you can add an [action][4] or [workflow blueprint][5] tha
 By default, only the creator of a form can access it. To change the permissions on a form: 
 1. From the [Forms][1] page, click a form.
 1. Click the gear <i class="icon-cog-2"></i> icon. 
-1. To change who can see the form and submit answers, click **Edit Form Permissions**.
-1. To change who can see the submitted responses, click **Edit Response Permissions**.
+1. To change who can see the form and submit answers, click {{< ui >}}Edit Form Permissions{{< /ui >}}.
+1. To change who can see the submitted responses, click {{< ui >}}Edit Response Permissions{{< /ui >}}.
 
 ## Analyze your data 
 
@@ -79,7 +79,7 @@ By default, only the creator of a form can access it. To change the permissions 
 
 To view form responses in a table format: 
 1. From the [Forms][1] page, click a form.
-1. Click **Responses**.
+1. Click {{< ui >}}Responses{{< /ui >}}.
 1. Click the edit icon on a response to view the JSON version. 
 
 **Note**: Datadog stores responses in a datastore, which is listed in [Datastores][7].
@@ -88,13 +88,13 @@ To view form responses in a table format:
 
 To visualize form responses in a dashboard:
 1. Navigate to the [DDSQL Editor][13].
-1. In the **Data** tab, click **Actions Datastores**.
-1. Select the datastore associated with your form, then click **Insert into editor**.
+1. In the {{< ui >}}Data{{< /ui >}} tab, click {{< ui >}}Actions Datastores{{< /ui >}}.
+1. Select the datastore associated with your form, then click {{< ui >}}Insert into editor{{< /ui >}}.
 1. Optionally, click the query's title to rename it. 
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 1. [Create a dashboard][9], then [add a widget][14]. For forms, all widgets except Timeseries are supported.
-1. When [defining the metric][15], select **DDSQL Editor** and the datastore query you created earlier.
-1. Finish [configuring your widget][12], then click **Save**.
+1. When [defining the metric][15], select {{< ui >}}DDSQL Editor{{< /ui >}} and the datastore query you created earlier.
+1. Finish [configuring your widget][12], then click {{< ui >}}Save{{< /ui >}}.
 
 ## Further reading
 

@@ -70,7 +70,7 @@ With device tagging, you can dynamically enrich network devices monitored by Dat
 
 To enable ingestion of device tags:
 
-1. Configure a [Query Builder][1] query in your ServiceNow instance. Make sure it is returning the device IP address. The IP is matched against all IP addresses collected for the device in Datadog, not just the primary IP. Schedule the query to execute at your desired refresh interval.
+1. Configure a [Query Builder][1] query in your ServiceNow instance. Make sure it is returning the device IP address. The IP is matched against all IP addresses collected for the device in Datadog, not just the primary IP. Schedule the query to execute at your desired refresh interval (Datadog recommends every hour).
 1. If you are using a custom IP namespace in Datadog, you need to add it to ServiceNow. Create a column on the Network device CI called `u_dd_device_namespace`, populated by the corresponding namespace for each device. If this column is not present, ServiceNow uses the default namespace.
 1. After the query is saved in ServiceNow, go to Datadog's ServiceNow integration tile. In the **Configure**  section, in the **CMDB Enrichment** tab, select **Device Tagging**.
 1. Under **Query Configuration**, click **Add New Query**.

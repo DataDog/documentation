@@ -46,7 +46,7 @@ Outdated Go versions are not compatible with the latest security features:
 When CGO is disabled, special build configuration is required:
 
 - **Error example** (when running with `DD_TRACE_DEBUG=true`):
-  ```
+  ```text
   go-libddwaf is disabled when cgo is disabled unless you compile with the go build tag `appsec`. It will require libdl.so.2. libpthread.so.0 and libc.so.6 shared libraries at run time on linux
   ```
 - **Solution**: Build with the `appsec` tag: `CGO_ENABLED=0 go build -tags=appsec`
