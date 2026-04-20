@@ -82,7 +82,7 @@ In some cases, a team's membership cannot be directly modified within Datadog by
 
 ### Subteams (hierarchical teams) 
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-warning">
 This feature is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).
 </div>

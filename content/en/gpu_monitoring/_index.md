@@ -10,7 +10,7 @@ further_reading:
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">
     GPU Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>

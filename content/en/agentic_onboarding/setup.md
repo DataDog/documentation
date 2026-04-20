@@ -28,7 +28,7 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 
 {{< tabs >}}
 {{% tab "Claude Code" %}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -48,7 +48,7 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

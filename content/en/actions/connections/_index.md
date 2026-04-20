@@ -16,7 +16,7 @@ aliases:
 disable_toc: false
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Actions, Workflows, and Apps might use Connections that send customer data to third-party services outside the Datadog for Government region. See <a href="https://trust.datadoghq.com">Trust Center</a> for instructions to obtain the customer responsibility matrix and additional information about the Datadog for Government region.</div>
 {{< /site-region >}}
 

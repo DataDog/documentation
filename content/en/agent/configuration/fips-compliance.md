@@ -91,8 +91,10 @@ The following baseline controls apply to each platform. Your system may require 
 {{< /tabs >}}
 
 In addition to the Operating System (OS) requirements above:
-- You must have access to a FIPS-compliant Datadog environment (US1-FED).
+- You must have access to a FIPS-compliant Datadog environment (US1-FED or US2-FED).
 - The Agent version must be 7.65.0 and above to access the FIPS Agent
+
+**Note**: The examples in this guide use `ddog-gov.com` (US1-FED). If you are on US2-FED, replace `ddog-gov.com` with `us2.ddog-gov.com` in each command or configuration value.
 
 ## Installation
 

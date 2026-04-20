@@ -6,7 +6,7 @@ algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST', 'custom rule']
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>

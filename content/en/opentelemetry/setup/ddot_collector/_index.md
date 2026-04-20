@@ -14,10 +14,10 @@ further_reading:
   text: "Unify OpenTelemetry and Datadog with the DDOT Collector"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-warning"><strong>The Datadog Distribution of OpenTelemetry Collector (DDOT) is not yet FedRAMP/FIPS compliant.</strong><br>
 &bull; If you require a FedRAMP or FIPS-compliant data collection pipeline, use the <a href="/agent/configuration/fips-compliance/?tab=linux">FIPS-enabled Datadog Agent</a>.<br>
-&bull; If you are a GovCloud customer whose only requirement is data residency in the GovCloud (US1-FED) data center, you <strong>may</strong> use the DDOT Collector.</div>
+&bull; If you are a GovCloud customer whose only requirement is data residency in a GovCloud data center ({{< region-param key="dd_datacenter" >}}), you <strong>may</strong> use the DDOT Collector.</div>
 {{< /site-region >}}
 
 {{< callout btn_hidden="true" >}}

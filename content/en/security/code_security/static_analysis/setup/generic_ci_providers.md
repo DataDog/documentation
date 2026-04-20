@@ -12,7 +12,7 @@ algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST']
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>

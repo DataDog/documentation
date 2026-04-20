@@ -175,7 +175,7 @@ For instructions on how to remove service overrides and migrate to inferred serv
 [5]: /tracing/services/renaming_rules/
 
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">The Inferred Services feature is not available by default in your datacenter. Fill out this <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">form</a> to request access.</div>
 
 {{< /site-region >}}

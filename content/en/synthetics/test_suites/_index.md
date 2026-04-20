@@ -49,7 +49,7 @@ To create a Synthetic Monitoring Test Suite:
 4. _Optionally, remove tests using the Remove Test from Suite icon next to each entry_.
 
 5. Configure alerting for the suite:
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">Alerting for Test Suites is not supported for this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}})</div>
 {{% /site-region %}}
 
