@@ -9,7 +9,7 @@ further_reading:
   text: "Reference Tables"
 ---
 
-The Ownership Agent automatically determines who owns a subset of cloud resources with security findings. By default, it uses cloud resource tags, service catalog data, and other data sources to infer ownership.
+The Ownership Agent selects a subset of cloud resources with security findings and infers an owner for each one. By default, it uses cloud resource tags, service catalog data, and other data sources to infer ownership.
 
 **Ownership preferences** let you customize this process by providing your own rules. You store them in a Datadog [reference table][1], and the Ownership Agent reads them automatically to enhance its results.
 
