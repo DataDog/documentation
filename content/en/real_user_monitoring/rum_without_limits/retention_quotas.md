@@ -50,7 +50,7 @@ Configuration is done at the application level, which means you can apply differ
 
 ## Monitoring quota usage
 
-The `rum.measure.sessions.blocked_quota` metric tracks the volume of sessions that were blocked after the quota was reached.
+The `rum.measure.session.quota_limited` metric tracks the volume of sessions that were blocked after the quota was reached.
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-quotas-blocked-metric.png" alt="The retention quota metric showing the volume of sessions blocked after the quota was reached." style="width:100%" >}}
 
