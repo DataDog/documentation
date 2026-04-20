@@ -19,7 +19,7 @@ You can either add step-by-step troubleshooting instructions directly in the mon
 
 Because these links are user-defined, you have control over what Bits AI SRE reviews, ensuring it focuses on the same data you would, and giving you the flexibility to tailor investigations to your team's workflows.
 
- **Notebooks**: Monitors can link to notebooks that contain instructions on how to troubleshoot the monitor or related service. Notebooks support markdown as well as Datadog queries, giving the agent instructions on how to best perform root cause analysis.
+- **Notebooks**: Monitors can link to notebooks that contain instructions on how to troubleshoot the monitor or related service. Notebooks support markdown as well as Datadog queries, giving the agent instructions on how to best perform root cause analysis.
 
 - **Confluence integration**: If your runbooks live in Confluence, link the relevant pages in the monitor message. During an investigation, Bits AI SRE reads the page, extracts telemetry links, follows documented troubleshooting steps where possible, and incorporates remediation guidance into its recommendations.
 
