@@ -132,7 +132,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Track failed login
-	appsec.TrackUserLoginFailure(r.Context(), req.Username, true, metadata)
+	appsec.TrackUserLoginFailure(r.Context(), req.Username, true, nil)
 	http.Error(w, "Invalid credentials", http.StatusUnauthorized)
 }
 
@@ -155,7 +155,7 @@ func profileHandler(w http.ResponseWriter, r *http.Request) {
 		"data_type": "personal_info",
 	})
 
-	userAsked := r.Query().Get("user")
+	userAsked := r.URL.Query().Get("user")
 	user := users[0] // Search for the user
 
 	// Monitor response body
