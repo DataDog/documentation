@@ -21,18 +21,17 @@ Bits AI Dev Agent is a generative AI coding assistant that uses observability da
 
 Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][18], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
 
-To get started with Bits AI Dev Agent, follow the instructions on [Setup][6]. Then, [create your first code session][18].
+To get started with Bits AI Dev Agent, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first code session][18].
 
 ## Code sessions
-A code session captures a segment of work with the Bits AI Dev Agent, including its analysis and code changes. Create, view, and manage your sessions on **Bits AI** > **Dev Agent** > [**Code Sessions**][7].
+A code session captures a segment of work with the Bits AI Dev Agent, including its analysis and code changes. Create, view, and manage your sessions at **Bits AI** > **Dev Agent** > [**Code Sessions**][7].
 
 {{< img src="bits_ai/dev_agent/code_sessions_overview.png" alt="A tab titled 'Code Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
 ### Create a code session
-After [completing setup][6], you can start a code session:
-- By entering a freeform prompt on [**Code Sessions**][7]
-  - Enter a custom prompt or generate one by clicking a **Suggestions** card. (If the Dev Agent has created proactive fixes for any of your repositories, a **Proactive Fixes** section appears instead.)
-- By invoking Bits AI Dev Agent in a [supported Datadog product][9]
+After [completing setup][6], to start a code session:
+- Enter a freeform prompt at [**Code Sessions**][7]: Enter a custom prompt or generate one by clicking a **Suggestions** or **Proactive Fixes** card
+- Invoke Bits AI Dev Agent in a [supported Datadog product][9]
 
 A code session can also be created when another Bits AI agent (like [Bits Assistant][16] or [Bits AI SRE][17]) hands off a coding task to the Dev Agent.
 
