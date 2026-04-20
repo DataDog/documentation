@@ -31,7 +31,7 @@ Give your experiment a name and hypothesis, then define the settings.
 
 To create a draft experiment:
 
-1. Navigate to [Experiments][1] in Datadog Product Analytics.
+1. Navigate to **[Experiments > Experiment List][1]** in Datadog Product Analytics.
 1. Click **Create Experiment**.
 1. Enter your **Experiment name** and **Hypothesis**.
 1. Click **Create Draft Experiment** to open the experiment's setup page.
@@ -53,7 +53,7 @@ After drafting your experiment, define the metrics, feature flag, and randomizat
 Define the metrics that measure the outcome of your experiment.
 
 1. Use the **Calculate metrics by** dropdown to select the subject type. The default is **User (@usr.id)**. To define a custom subject type, click **Create subject type** from the dropdown.
-1. Click the **Primary metric** button to open the metric picker:
+1. Click the **Primary metric** button to open the picker:
    1. Select a primary metric to measure the main outcome of your experiment.
    1. (Optional) Scope the list to **Certified** or **Non-certified** metrics.
    1. (Optional) Click **Create Metric** to define a new metric. For setup instructions, see [Create Experiment Metrics][2].
@@ -95,15 +95,16 @@ After you select a feature flag, Datadog pre-populates the randomization setting
 
 To configure how users are assigned to variants:
 1. Select the **Environment** for your experiment from the dropdown. The default is **prod**.
-1. Under **Targeting rules**:
-   1. Click **Add Filter** to define conditions based on custom attributes set in your SDK's evaluation context and filter which users to include in the experiment.
-   1. Click **Add Condition** to set additional conditions.
+1. Under **Targeting rules**, configure a filter to target users based on custom attributes set on your SDK's evaluation context:
+   1. In the default filter, enter an attribute, operator, and value for the `IF` row.
+   1. Click **Add Condition** to add an `AND` row within the same filter.
+   1. Click **Add Filter** to add another filter joined by `OR`.
 1. Under **Variants**, use the **Randomize users and split traffic** dropdown to choose **Equally (recommended)** or **Custom**. This sets how traffic is split between your experiment groups. Each user consistently sees their assigned variant throughout the experiment.
 1. Under **Traffic exposure**, set the percentage of targeted traffic to include in the experiment.
 1. (Optional) [Schedule a staged rollout](#schedule-a-staged-rollout-optional) and [set additional configurations](#additional-config).
 1. After configuring your experiment, proceed to [Launch your experiment](#launch-your-experiment).
 
-{{< img src="/product_analytics/experiment/exp_plan_launch_randomization_ui.png" alt="The Randomization section showing the environment set to prod, a targeting rule with an IF condition, two variants with an equal 50/50 split between Control (Enabled/true) and variant B (Disabled/false), and traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_plan_launch_randomization_section.png" alt="The Randomization section with the environment set to prod, two targeting rule filters joined by OR (each containing an IF and AND condition with an Add Condition button), an Add Filter button below, a 50/50 equal split between Control (true) and Treatment (false) variants, and traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option." style="width:80%;" >}}
 
 {{% collapse-content title="Additional configuration settings (optional)" level="h4" expanded=false id="additional-config" %}}
 
