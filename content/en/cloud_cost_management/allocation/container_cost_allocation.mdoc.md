@@ -23,7 +23,7 @@ Clouds
 Resources
 : CCM allocates costs for Kubernetes clusters and includes cost analysis for many associated resources such as Kubernetes persistent volumes used by your pods.
 
-CCM displays costs for resources including CPU, memory, and more depending on the cloud and orchestrator you are using on the [{{< ui >}}Containers{{< /ui >}} page][1].
+CCM displays costs for resources including CPU, memory, and more depending on the cloud and orchestrator you are using on the [{% ui %}Containers{% /ui %} page][1].
 
 {% img src="cloud_cost/container_cost_allocation/container_allocation.png" alt="Cloud cost allocation table showing requests and idle costs over the past month on the Containers page" style="width:100%;" /%}
 
@@ -229,7 +229,7 @@ The cost of an EBS volume has three components: IOPS, throughput, and storage. E
 | Spend type | Description    |
 | -----------| -----------    |
 | Usage | Cost of provisioned IOPS, throughput, or storage used by workloads. Storage cost is based on the maximum amount of volume storage used that day, while IOPS and throughput costs are based on the average amount of volume storage used that day. |
-| Workload idle | Cost of provisioned IOPS, throughput, or storage that are reserved and allocated but not used by workloads. Storage cost is based on the maximum amount of volume storage used that day, while IOPS and throughput costs are based on the average amount of volume storage used that day. This is the difference between the total resources requested and the average usage. **Note:** This tag is only available if you have enabled `Resource Collection` in your [AWS Integration][21]. To prevent being charged for `Cloud Security Posture Management`, ensure that during the `Resource Collection` setup, the {{< ui >}}Cloud Security Posture Management{{< /ui >}} box is unchecked. |
+| Workload idle | Cost of provisioned IOPS, throughput, or storage that are reserved and allocated but not used by workloads. Storage cost is based on the maximum amount of volume storage used that day, while IOPS and throughput costs are based on the average amount of volume storage used that day. This is the difference between the total resources requested and the average usage. **Note:** This tag is only available if you have enabled {% ui %}Resource Collection{% /ui %} in your [AWS Integration][21]. To prevent being charged for {% ui %}Cloud Security Posture Management{% /ui %}, ensure that during the {% ui %}Resource Collection{% /ui %} setup, the {% ui %}Cloud Security Posture Management{% /ui %} box is unchecked. |
 | Cluster idle | Cost of provisioned IOPS, throughput, or storage that are not reserved by any pods that day. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
 **Note**: Persistent volume allocation is only supported in Kubernetes clusters, and is only available for pods that are part of a Kubernetes StatefulSet.
@@ -294,22 +294,22 @@ Cluster idle costs (identified by `allocated_spend_type:cluster_idle`) represent
 
 To configure cluster idle allocation, go to the [Cluster Idle Allocation settings][22] page and follow these steps:
 
-1. Click {{< ui >}}Enable cluster idle allocation{{< /ui >}}.
+1. Click {% ui %}Enable cluster idle allocation{% /ui %}.
 1. Select a redistribution level:
 
-   {{< ui >}}Cluster{{< /ui >}}
+   {% ui %}Cluster{% /ui %}
    : Redistributes idle costs at the cluster level.
 
-   {{< ui >}}Node{{< /ui >}}
+   {% ui %}Node{% /ui %}
    : Redistributes idle costs at the node level. Datadog also allocates to the `kube_node_name` tag.
 
-   {{< ui >}}Nodepool{{< /ui >}}
+   {% ui %}Nodepool{% /ui %}
    : Redistributes idle costs at the nodepool level. Select a nodepool tag.
 
 1. Optionally, select up to two additional destination tags.
-1. Click {{< ui >}}Save{{< /ui >}}.
+1. Click {% ui %}Save{% /ui %}.
 
-To disable cluster idle allocation, return to the [Cluster Idle Allocation settings][22] page and click {{< ui >}}Disable{{< /ui >}}.
+To disable cluster idle allocation, return to the [Cluster Idle Allocation settings][22] page and click {% ui %}Disable{% /ui %}.
 
 **Note**: Any settings change, including disabling, re-enabling, or modifying the redistribution level, re-backfills the last 3 months of data with the latest settings.
 
