@@ -38,7 +38,7 @@ The rsyslog and syslog-ng destinations match these log fields to the following S
 
 To set up the syslog destination in the UI:
 
-- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
 
 #### Optional settings
 
@@ -54,7 +54,7 @@ Enter the number of seconds to wait before sending TCP keepalive probes on an id
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

@@ -21,7 +21,7 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 
 <div class="alert alert-danger">Only enter the identifiers for the Amazon OpenSearch endpoint URL, and if applicable, username and password. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your Amazon OpenSearch endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your Amazon OpenSearch endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
 1. In the **Mode** dropdown menu, select **Bulk** or **Data streams**.
 	- **Bulk** mode
 		- Uses Amazon OpenSearch's [Bulk API][4] to send batched events directly into a standard index.
@@ -39,8 +39,8 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 1. Optionally, enter the name of the Amazon OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 1. Select an authentication strategy, **Basic** or **AWS**. If you selected:
 	- **Basic**:
-		- Enter the identifier for your Amazon OpenSearch username. If you leave it blank, the [default](#set-secrets) is used.
-		- Enter the identifier for your Amazon OpenSearch password. If you leave it blank, the [default](#set-secrets) is used.
+		- Enter the identifier for your Amazon OpenSearch username. If you leave it blank, the [default](#secrets-defaults) is used.
+		- Enter the identifier for your Amazon OpenSearch password. If you leave it blank, the [default](#secrets-defaults) is used.
 	- **AWS**:
 		1. Enter the AWS region.
 		1. (Optional) Select an AWS authentication option. The **Assume role** option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
@@ -51,7 +51,7 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

@@ -23,8 +23,8 @@ To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike dat
 
 <div class="alert alert-danger">Only enter the identifiers for the CrowdStrike NG-SIEM endpoint URL, token, and if applicable, the TLS pass key. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your CrowdStrike NG-SIEM endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your CrowdStrike NG-SIEM token. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your CrowdStrike NG-SIEM endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
+1. Enter the identifier for your CrowdStrike NG-SIEM token. If you leave it blank, the [default](#secrets-defaults) is used.
 1. Select **JSON** or **Raw** encoding in the dropdown menu.
 
 #### Optional settings
@@ -42,7 +42,7 @@ To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike dat
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

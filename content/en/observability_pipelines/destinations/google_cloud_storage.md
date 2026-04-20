@@ -58,7 +58,7 @@ Enter a prefix that you want to apply to all key objects.
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

@@ -114,7 +114,7 @@ Select an AWS authentication option. If you are only using the [user or role you
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

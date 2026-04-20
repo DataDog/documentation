@@ -21,7 +21,7 @@ Set up the Socket destination and its environment variables when you [set up a p
 
 <div class="alert alert-danger">Only enter the identifier for the socket address and, if appliable, the key pass. Do <b>not</b> enter the actual values.</a></div>
 
-1. Enter the identifier for your address. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your address. If you leave it blank, the [default](#secrets-defaults) is used.
 1.  In the **Mode** dropdown menu, select the socket type to use.
 1.  In the **Encoding** dropdown menu, select either `JSON` or `Raw message` as the output format.
 
@@ -35,7 +35,7 @@ Set up the Socket destination and its environment variables when you [set up a p
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

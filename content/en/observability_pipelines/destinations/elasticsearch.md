@@ -29,8 +29,8 @@ Set up the Elasticsearch destination and its environment variables when you [set
 
 <div class="alert alert-danger">Only enter the identifiers for the Elasticsearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifiers for your Elasticsearch username and password. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your Elasticsearch endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifiers for your Elasticsearch username and password. If you leave it blank, the [default](#secrets-defaults) is used.
+1. Enter the identifier for your Elasticsearch endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
 1. (Optional) Enter the Elasticsearch version.
 1. In the **Mode** dropdown menu, select **Bulk** or **Data stream**.
 	- **Bulk** mode
@@ -56,7 +56,7 @@ Set up the Elasticsearch destination and its environment variables when you [set
 ##### Enable TLS
 
 Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the key pass. See [Set secrets](#set-secrets) for the default used if the field is left blank.
+- If you are using Secrets Management, enter the identifier for the key pass. See [Secrets defaults](#secrets-defaults) for the default used if the field is left blank.
 - The following certificate and key files are required for TLS:
   - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
   - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER, PEM, or CERT (X.509).
@@ -81,7 +81,7 @@ Toggle the switch to enable **Compression**. Select a compression algorithm (**g
 1. In the **Pipeline** field, enter the name of an Elasticsearch ingest pipeline to apply to events before indexing.
 1. Enable the **Retry partial failures** toggle to retry a failed bulk request when some events in a batch fail while others succeed.
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

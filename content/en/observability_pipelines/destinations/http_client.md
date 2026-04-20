@@ -22,13 +22,13 @@ Set up the HTTP Client destination and its environment variables when you [set u
 
 <div class="alert alert-danger">Only enter the identifiers for the HTTP Client URI and, if applicable, username and password for basic authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your HTTP Client URI. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your HTTP Client URI. If you leave it blank, the [default](#secrets-defaults) is used.
 1. Select your authorization strategy (**None**, **Basic**, or **Bearer**). If you selected:
 	- **Basic**:
-		- Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#set-secrets) is used.
-		- Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#set-secrets) is used.
+		- Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#secrets-defaults) is used.
+		- Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#secrets-defaults) is used.
 	- **Bearer**:
-		- Enter the identifier for your HTTP Client token. If you leave it blank, the [default](#set-secrets) is used.
+		- Enter the identifier for your HTTP Client token. If you leave it blank, the [default](#secrets-defaults) is used.
 1. JSON is the only available encoder.
 
 ### Optional settings
@@ -47,7 +47,7 @@ Toggle the switch to **Enable Compression**. If enabled:
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

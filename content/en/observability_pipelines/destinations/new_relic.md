@@ -21,15 +21,15 @@ Set up the New Relic destination and its environment variables when you [set up 
 
 <div class="alert alert-danger">Only enter the identifiers for the account ID and license. Do <b>not</b> enter the actual values.</div>
 
-1.  Enter the identifier for your account ID. If you leave it blank, the [default](#set-secrets) is used.
-1.  Enter the identifier for your license. If you leave it blank, the [default](#set-secrets) is used.
+1.  Enter the identifier for your account ID. If you leave it blank, the [default](#secrets-defaults) is used.
+1.  Enter the identifier for your license. If you leave it blank, the [default](#secrets-defaults) is used.
 1. Select the data center region (**US** or **EU**) of your New Relic account.
 
 #### Optional buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

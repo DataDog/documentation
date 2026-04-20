@@ -132,7 +132,7 @@ Then these are the values you enter for configuring the S3 bucket for Log Archiv
 
 {{< img src="observability_pipelines/setup/amazon_s3_archive.png" alt="The log archive configuration with the example values" style="width:70%;" >}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

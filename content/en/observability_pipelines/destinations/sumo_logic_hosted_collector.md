@@ -21,7 +21,7 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 <div class="alert alert-danger">Only enter the identifier for the Sumo Logic endpoint URL. Do <b>not</b> enter the actual value.</div>
 
-- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
 
 #### Optional settings
 
@@ -35,7 +35,7 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

@@ -25,7 +25,7 @@ You need to have Datadog's [Azure integration][3] installed to set up Datadog Lo
 
 Set up the Azure Storage destination and its environment variables when you [set up an Archive Logs pipeline][4]. The information below is configured in the pipelines UI.
 
-1. Enter the identifier for your Azure connection string. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your Azure connection string. If you leave it blank, the [default](#secrets-defaults) is used.
     - **Note**: Only enter the identifier for the connection string. Do **not** enter the actual connection string.
 1. Enter the name of the Azure container you created earlier.
 
@@ -43,7 +43,7 @@ Enter a prefix that you want to apply to all key objects.
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

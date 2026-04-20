@@ -31,7 +31,7 @@ Set up the Datadog Metrics destination and its environment variables when you [s
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

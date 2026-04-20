@@ -30,7 +30,7 @@ Set up the BYOC Logs destination and its environment variables when you [set up 
 
 {{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="The BYOC Logs destination settings" style="width:35%;" >}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

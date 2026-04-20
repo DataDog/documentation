@@ -21,9 +21,9 @@ Set up the OpenSearch destination and its environment variables when you [set up
 
 <div class="alert alert-danger">Only enter the identifiers for the OpenSearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your OpenSearch endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your OpenSearch username. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your OpenSearch password. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your OpenSearch endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
+1. Enter the identifier for your OpenSearch username. If you leave it blank, the [default](#secrets-defaults) is used.
+1. Enter the identifier for your OpenSearch password. If you leave it blank, the [default](#secrets-defaults) is used.
 1. In the **Mode** dropdown menu, select **Bulk** or **Data streams**.
 	- **Bulk** mode
 		- Uses OpenSearch's [Bulk API][4] to send batched events directly into a standard index.
@@ -49,7 +49,7 @@ Enter the name of the OpenSearch index. See [template syntax][3] if you want to 
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secrets defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
