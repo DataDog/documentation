@@ -28,6 +28,7 @@ Set up CI Visibility for GitLab to collect data on your pipeline executions, ana
 | [CI jobs failure analysis][28] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Filter CI Jobs on the critical path][29] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
+| [Automatic job retries][31] | Automatic job retries | Preview. Datadog retries failed jobs classified as transient by its AI error model. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
 | [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log collection][12]. |
@@ -466,3 +467,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [28]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [29]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [30]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
+[31]: /continuous_integration/pipelines/automatic_retries/
