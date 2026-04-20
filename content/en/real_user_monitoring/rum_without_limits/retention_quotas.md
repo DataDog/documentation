@@ -44,7 +44,7 @@ To set up a retention quota for an application:
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-quotas-configuration.png" alt="The retention quota configuration panel showing the daily quota threshold, reset time, and behavior options." style="width:80%" >}}
 
-<div class="alert alert-info">Only sessions retained by your regular retention filters count toward the quota. Sessions kept by <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a> are always retained.</div>
+<div class="alert alert-info">Quotas do not apply to sessions retained by <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>.</div>
 
 Configuration is done at the application level, which means you can apply different retention strategies per application. Any configuration change (quota limit, retention behavior, reset time) is instantly applied.
 
