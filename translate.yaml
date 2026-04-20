@@ -69,6 +69,10 @@ phrase:
       dst: "content/{lang}/client_sdks/setup.mdoc.md"
     - src: "content/en/tracing/trace_collection/custom_instrumentation/server-side/_index.mdoc.md"
       dst: "content/{lang}/tracing/trace_collection/custom_instrumentation/server-side/_index.mdoc.md"
+    - src: "content/en/real_user_monitoring/application_monitoring/browser/advanced_configuration.mdoc.md"
+      dst: "content/{lang}/real_user_monitoring/application_monitoring/browser/advanced_configuration.mdoc.md"
+    - src: "content/en/opentelemetry/instrument/dd_sdks/api_support.mdoc.md"
+      dst: "content/{lang}/opentelemetry/instrument/dd_sdks/api_support.mdoc.md"
 
 # Legacy Transifex ignores (kept for reference)
 #   - "content/en/observability_pipelines/legacy/*.md"
