@@ -35,7 +35,7 @@ Worker version 2.15.0 gives you access to the following:
     - AWS WAF Web ACL logs. Transforms WAF log events into OCSF HTTP Activity (class 4002) with `cloud` and `security_control` profiles.
     - Zscaler ZPA User Status logs to OCSF schema version 1.3.0 (Authentication, class 3002) with `datetime` and `host` profiles.
 - The OpenTelemetry source now supports metrics pipelines.
-- The Elasticsearch destination is now availabe for metrics pipelines.
+- The Elasticsearch destination is now available for metrics pipelines.
 - The `parse_yaml` function is now available for the Custom Processor. This function parses YAML according to the [YAML 1.1 spec][41].
 
 #### Enhancements
@@ -44,14 +44,14 @@ Worker version 2.15.0 gives you access to the following:
 - The Elasticsearch destination has been updated with new options: `auto_routing`, `compression`, `id_key`, `pipeline`, `request_retry_partial`, `sync_fields`, and `tls`.
 - Mapping array-of-object source fields into OCSF array-of-object destinations is now supported.
 - The Datadog Metrics destination now defaults to the Datadog series v2 endpoint (`/api/v2/series`).
-- The Enrichment Table processor's GeoIP option now includes a network field containing the CIDR network associated with the lookup result. It's available for all database types (City, ISP/ASN, Connection-Type, Anonymous-IP).
+- The Enrichment Table processor's GeoIP option now includes a network field containing the CIDR network associated with the lookup result. The network field is available for all database types (City, ISP/ASN, Connection-Type, Anonymous-IP).
 - The Custom Processor now has an `encode_csv` function that encodes an array of values into a CSV-formatted string. This is the inverse of the `parse_csv` function and supports an optional single-byte delimiter (defaults to `,`).
 - Field names now support `.`, such as `foo."bar.baz"`.
 
 #### Fixes
 
-- The accuracy of the buffer utilization metric tracking has been updated.
-- For the Custom Processor, incorrect parameter types for `floor`, `md5`, `parse_key_value`, `precision`, and `seahash` has been fixed.
+- Improved the accuracy of the buffer utilization metric tracking.
+- For the Custom Processor, incorrect parameter types for `floor`, `md5`, `parse_key_value`, `precision`, and `seahash` have been fixed.
 
 ---
 
