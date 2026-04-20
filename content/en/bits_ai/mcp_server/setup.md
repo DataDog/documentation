@@ -161,7 +161,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 1. Run in terminal:
     <pre><code>gemini mcp add --transport http datadog {{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
-   Alternatively, add the following block to `~/.gemini/settings.json`. Gemini CLI uses the `httpUrl` field (not `url`) to indicate Streamable HTTP transport:
+   Alternatively, add to `~/.gemini/settings.json`:
     <pre><code>{
       "mcpServers": {
         "datadog": {
