@@ -79,17 +79,17 @@ Enter the following details for your configuration:
 
 * **GCP Storage Bucket**: Select **Yes** to create a storage bucket, or select **No** to use an existing bucket.
 
-**Note**: If using an existing bucket, verify that the bucket is co-located with the BigQuery export dataset.
+    **Note**: If using an existing bucket, verify that the bucket is co-located with the BigQuery export dataset.
 
 * **Bucket name**: The name of your new or existing GCP storage bucket.
 * **Region**: The GCP region of your bucket. For example, `northamerica-northeast1`.
-* **Billing account ID**: The ID of the billing account that your usage cost export will report costs for.
+* **Billing account ID**: The ID of the billing account that your usage cost export reports costs for.
 * **Export project name and ID**: The name and ID of your export project.
 * **Export dataset name and ID**: The name and ID of your export dataset.
 
 ### Create cost export and enable Google Service APIs
 
-* See the [Enable detailed usage cost export](#enable-detailed-usage-cost-export) and [Enable Google Service APIs](#enable-google-service-apis) sections above to complete these steps manually, then return to CCM.
+Complete the [Enable detailed usage cost export](#enable-detailed-usage-cost-export) and [Enable Google Service APIs](#enable-google-service-apis) steps above, then return to CCM.
 
 ### Copy generated Terraform HCL and apply changes
 
@@ -130,12 +130,6 @@ In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform 
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud role `roles/bigquery.dataEditor`.
 
-### Create or select a Google Cloud Storage bucket
-Use an existing Google Cloud Storage bucket or create a new one.
-Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to the selected bucket and prefixed with `datadog_cloud_cost_detailed_usage_export`.
-
-**Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
-
 #### Configure bucket access
 [Add the service account as a principal on the GCS bucket resource][6]:
 1. Navigate to the Cloud Storage Buckets page in the Google Cloud console, and select your bucket.
@@ -153,11 +147,15 @@ Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to th
 [6]: https://cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add
 [7]: https://cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role
 [8]: https://cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset
-[9]: https://cloud.google.com/bigquery/docs/exporting-data#data-locations
 
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### Create or select a Google Cloud Storage bucket
+Cloud Cost Management uses a GCP storage bucket to receive data extracted from your Detailed Usage Cost BigQuery dataset (prefixed with `datadog_cloud_cost_detailed_usage_export`). You can create a new bucket or use an existing one.
+
+**Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
 
 ### (Optional) Configure cross-project service authorization:
 If your integrated Service Account exists in a different Google Cloud Platform project than your billing export dataset, you need to [grant cross-project service account authorization][10]:
@@ -246,6 +244,7 @@ The following out-of-the-box tags are available:
 [3]: https://app.datadoghq.com/cost/setup
 [4]: https://app.datadoghq.com/integrations/google-cloud-platform
 [5]: https://cloud.google.com/bigquery/docs/enable-transfer-service
+[9]: https://cloud.google.com/bigquery/docs/exporting-data#data-locations
 [10]: https://cloud.google.com/bigquery/docs/enable-transfer-service#cross-project_service_account_authorization
 [11]: https://cloud.google.com/iam/docs/create-service-agents#create
 [12]: /integrations/google_cloud_platform/
