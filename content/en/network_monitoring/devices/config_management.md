@@ -146,9 +146,7 @@ When you compare two configuration versions, the AI summary automatically:
 
 ## Supported device profiles
 
-NCM uses device profiles to collect configurations from network devices over SSH. Profiles are bundled with the Datadog Agent and matched automatically based on your device's operating system.
-
-NCM profiles are managed and updated automatically through Agent releases, so new device support and improvements are included without any manual configuration.
+NCM uses device profiles to collect configurations from network devices over SSH. Profiles are bundled with the Datadog Agent, matched automatically based on your device's operating system, and updated through Agent releases.
 
 For the profile source files, see the [NCM default profiles directory][8] in the `datadog-agent` repository.
 
