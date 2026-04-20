@@ -414,6 +414,37 @@ The Datadog Agent automatically recognizes and supplies basic configuration for 
 
 Configurations set with Kubernetes annotations take precedence over auto-configuration, but auto-configuration takes precedence over configurations set with Datadog Operator or Helm. To use Datadog Operator or Helm to configure an integration in the [Autodiscovery auto-configuration][20] list, you must [disable auto-configuration][22].
 
+## Integrations security
+
+Integrations often need to read configuration files, certificates, or other resources from the filesystem. When file paths come from untrusted configuration providers (for example, pod annotations or external service autodiscovery), there is a risk of path traversal or unauthorized file access.
+
+To control filesystem access based on the trust level of a configuration provider, set the following parameters in the Agent's `datadog.yaml`:
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `integration_ignore_untrusted_file_params` | bool | `false` | When enabled, integrations ignore configuration parameters that refer to file paths if the configuration provider is not trusted. |
+| `integration_file_paths_allowlist` | list | `[]` | List of file paths that integrations are allowed to access, even when provided by an untrusted configuration provider. An empty list means all file paths are allowed. |
+| `integration_trusted_providers` | list | `["file", "remote-config"]` | List of configuration providers considered trusted. Any provider not in this list is considered untrusted. By default, local configuration files (`file`) and Datadog Remote Configuration (`remote-config`) are trusted. |
+| `integration_security_excluded_checks` | list | `[]` | List of integration names that are excluded from the above security restrictions. |
+
+These options are backwards compatible: the default values preserve existing behavior. To opt in, enable `integration_ignore_untrusted_file_params` and adjust the remaining parameters to match your environment.
+
+Example `datadog.yaml`:
+
+```yaml
+integration_ignore_untrusted_file_params: true
+integration_file_paths_allowlist:
+  - /etc/datadog-agent/certs
+  - /var/run/secrets
+integration_trusted_providers:
+  - file
+  - remote-config
+integration_security_excluded_checks:
+  - <INTEGRATION_NAME>
+```
+
+With this configuration, an integration configured through pod annotations (an untrusted provider) cannot reference file paths outside `/etc/datadog-agent/certs` or `/var/run/secrets`, unless the integration name is listed in `integration_security_excluded_checks`.
+
 ## Example: Postgres integration
 
 In this example scenario, you deployed Postgres on Kubernetes. You want to set up and configure the [Datadog-Postgres integration][26]. All of your Postgres containers have container names that contain the string `postgres`.
