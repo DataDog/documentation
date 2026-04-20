@@ -256,7 +256,7 @@ If no tag filter is set, Datadog collects metrics from all Azure resources.
 
 You can use the automated log forwarding feature to setup and configure the services and diagnostic settings needed to forward logs to Datadog. If an automated log forwarding control plane already exists in the tenant, this flow modifies it and extends its scope to include the selected subscriptions or management groups. For more detail, see [Azure Automated Log Forwarding Setup][19].
 
-Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, you can use an Azure Resource Manager (ARM) template to [automate log forwarding setup][19] across your Azure environment with no manual configuration. This feature automatically manages and scales log forwarding services.
+Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, use the **Configure Log Forwarding** flow in the [Azure integration][20] to set up and manage automated log forwarding directly in Datadog. You can also deploy log forwarding with an [Azure Resource Manager (ARM) template][19]. Both methods automatically manage and scale log forwarding services.
 
 {{% collapse-content title="Automated (recommended)" level="h4" expanded=false id="automated-log-forwarding-setup" %}}
 
@@ -268,11 +268,28 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 
 ### Instructions
 
+#### Configure Log Forwarding (recommended)
+
+Use the **Configure Log Forwarding** flow to set up new or manage existing log forwarders directly in Datadog:
+
+1. In Datadog, navigate to [**Integrations > Azure**][20].
+1. Click **Configure Log Forwarding**.
+1. Copy the provided command and paste it in your Azure Cloud Shell.
+1. Select the subscriptions to forward logs from.
+1. Optionally, add or remove log filters.
+1. Click **Confirm**.
+
+For more details, see [Azure Automated Log Forwarding Setup][19].
+
+#### ARM template
+
+Alternatively, deploy log forwarding with an Azure Resource Manager (ARM) template:
+
 1. Open the [Automated Log Forwarding ARM template][29] in Azure.
-2. Configure your Azure project and instance details on the [Basics tab][30].
-3. Enter your Datadog credentials on the [Datadog Configuration tab][31].
-4. Acknowledge deployment warnings on the [Deployment tab][32].
-5. Start the deployment process on the [Review + create tab][33].
+1. Configure your Azure project and instance details on the [Basics tab][30].
+1. Enter your Datadog credentials on the [Datadog Configuration tab][31].
+1. Acknowledge deployment warnings on the [Deployment tab][32].
+1. Start the deployment process on the [Review + create tab][33].
 
 {{< site-region region="us3" >}}
 

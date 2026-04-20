@@ -257,7 +257,7 @@ Search for events in the event explorer using `source:<SEARCH_TERM>`.
 | Java                            | java                              | java                               |
 | Jenkins                         | jenkins                           | jenkins                            |
 | Jira                            | jira                              | jira                               |
-| Jumpcloud                       | jumpcloud                         | jumpcloud                          |
+| JumpCloud                       | jumpcloud                         | jumpcloud                          |
 | Kafka                           | kafka                             | kafka                              |
 | Knative For Anthos              | knative for anthos                | knative_for_anthos                 |
 | Kong                            | kong                              | kong                               |

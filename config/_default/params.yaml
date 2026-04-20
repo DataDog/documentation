@@ -2,12 +2,12 @@ environment: default
 # do not delete repo_name, used by websites-modules as context
 repo_name: "documentation"
 integrations_img_url: "https://static.datadoghq.com/static/images/logos/"
-imgix:
-  header_jpg: "?ch=Width&fit=max&fm=jpg&auto=format&lossless=true"
-  header_png: "?ch=Width&fit=max&fm=png&auto=format&lossless=1"
-  header_gif: "?ch=Width,Save-Data&fm=gif"
-  jpg: "?fm=jpg&auto=format&lossless=true"
-  png: "?fm=png&auto=format&lossless=1"
+img:
+  header_jpg: "?fit=max&fm=jpg&auto=format"
+  header_png: "?fit=max&fm=png&auto=format"
+  header_gif: "?fm=gif"
+  jpg: "?fm=jpg&auto=format"
+  png: "?fm=png&auto=format"
   gif: ""
 code_languages:
   'py':
@@ -275,13 +275,12 @@ core_product:
 # Unsupported sites for each product
 unsupported_sites:
   advanced_analysis: [gov]
-  actions: [gov]
   adaptive_sampling: [gov]
   agent_flare: [gov]
   agentic_onboarding: [gov]
   agentless_scanning: [gov] # docs page
   agentless-scanning: [gov] # api page
-  amazon_event_bridge: [gov]
+  amazon-event-bridge: [gov]
   apm_processing_pipelines: [gov]
   apm_recommendations: [gov]
   app_builder: [gov]
@@ -301,6 +300,7 @@ unsupported_sites:
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
   coterm: [gov]
+  cloudcraft_monitors_overlay: [gov]
   cloudprem: [gov]
   csm_jira: [us,us3,us5,eu,ap1,ap2]
   data_jobs: [gov]
@@ -328,6 +328,8 @@ unsupported_sites:
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
   incident_ai: [gov]
+  jetbrains-ides: [gov]
+  jira-service-management-ops: [gov]
   inferred_entity_remapping_rules: [gov]
   internal_developer_portal: [gov]
   jira_error_tracking: [gov]
@@ -353,11 +355,13 @@ unsupported_sites:
   safety_center: [gov]
   scorecards: [gov]
   self_service_actions: [gov]
+  setup_remote_config: [gov]
   service_remapping_rules: [gov]
   service_override_removal: [gov]
   snmp_profile_manager: [gov]
   software_delivery_mcp_tools: [gov]
   status_pages: [gov]
+  storage_management: [gov]
   supported_deployment_types: [gov]
   synthetics_email_validation: [gov]
   synthetics_safari: [gov]

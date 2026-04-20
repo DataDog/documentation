@@ -49,7 +49,7 @@ The following command works on Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ub
 {{% tab "Windows" %}}
 
 1. [Download the Datadog Agent installer][1].
-2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
+2. Run the installer (as {{< ui >}}Administrator{{< /ui >}}) by opening `datadog-agent-7-latest.amd64.msi`.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 

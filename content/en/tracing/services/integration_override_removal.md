@@ -14,7 +14,7 @@ further_reading:
   text: "Inferred Services"
 ---
 
-This page explains how to remove integration overrides, which use integration-specific service names to represent calls to other services. For conceptual background, see [Base Service, Integration Overrides, and Service Overrides][10] and [Inferred Services][8].
+This page explains how to remove integration overrides, which use integration-specific service names to represent calls to other services. For conceptual background, see [Base Service, Integration Overrides, and Custom Overrides][10] and [Inferred Services][8].
 
 ## Prerequisites
 
@@ -27,7 +27,8 @@ Before you remove integration overrides:
 
 | Language   | Minimum supported version |
 |------------|---------------------------|
-| .NET       | [3.4.0][1]                |
+| C++        | All versions supported    |
+| Dotnet     | [3.4.0][1]                |
 | Go         | [1.55.0][2]               |
 | Java       | [1.20.0][3]               |
 | Node.js    | [4.16.0][4]               |
@@ -51,7 +52,7 @@ To remove integration overrides in Datadog:
 
 1. Remove overrides individually or in bulk:
    - **Select specific overrides to remove**: Choose individual integration overrides to remove. A **Migration Progress** bar shows your progress as you remove overrides.
-   - **Remove all overrides**: Select **Finish Migration** to remove all integration overrides and prevent future ones from appearing as APM usage increases. Custom service overrides are not affected.
+   - **Remove all overrides**: Select **Finish Migration** to remove all integration overrides and prevent future ones from appearing as APM usage increases. Custom overrides are not affected.
   
    Removing overrides is reversible.
 
@@ -84,7 +85,7 @@ You can also remove integration overrides by setting an environment variable in 
    DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
    ```
 
-This ensures the `service` attribute always uses the base service name instead of appending the integration name (for example, `*-postgres`, `*-http-client`). Custom service overrides are not affected and must be removed directly in your code.
+This ensures the `service` attribute always uses the base service name instead of appending the integration name (for example, `*-postgres`, `*-http-client`). [Custom overrides][10] are not affected and must be removed directly in your code.
 
 ## Further reading
 
