@@ -1,6 +1,10 @@
 ---
 title: Set up GPU Monitoring
 private: true
+further_reading:
+- link: "/gpu_monitoring/troubleshooting"
+  tag: "Documentation"
+  text: "Troubleshooting GPU Monitoring"
 ---
 This page provides instructions on setting up Datadog's GPU Monitoring on your infrastructure. Follow the configuration instructions that match your operating environment below.
 
