@@ -1,4 +1,5 @@
 ---
+id: autodiscovery
 core_product:
 - datadog agent
 title: 자동탐지

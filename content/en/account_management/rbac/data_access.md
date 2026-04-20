@@ -28,7 +28,7 @@ Data Access Control relies on tags and attributes in your data that can be used 
 
 Data Access Control allows you to create a Restricted Dataset, specifying data that only users in designated teams or roles can access.
 
-To view all of your Restricted Datasets, navigate to [Organization Settings][6], and select [Data Access Controls][7] on the left, under the **Access** heading.
+To view all of your Restricted Datasets, navigate to [Organization Settings][6], and select [Data Access Controls][7] on the left, under the {{< ui >}}Access{{< /ui >}} heading.
 
 ### Datadog site
 
@@ -36,11 +36,11 @@ Log in as a user assigned the Datadog Admin role, or any user with a role in you
 
 1. Navigate to [Organization Settings][6].
 1. On the left side of the page, select [Data Access Controls][7].
-1. Click **New Restricted Dataset**.
+1. Click {{< ui >}}New Restricted Dataset{{< /ui >}}.
 
 In order to create a Restricted Dataset, identify the data to be restricted with a query.
 
-{{< img src="/account_management/rbac/restricted_dataset-2.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
+{{< img src="/account_management/rbac/restricted_dataset-3.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
 
 Name Dataset
 : A descriptive name to help users understand what data is contained in the dataset.
@@ -53,7 +53,7 @@ Grant access
 
 You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider defining an additional Restricted Dataset if you need additional pairs.
 
-After completing all the fields to define the dataset, click **Create Restricted Dataset** to apply it to your organization.
+After completing all the fields to define the dataset, click {{< ui >}}Create Restricted Dataset{{< /ui >}} to apply it to your organization.
 
 You may create a maximum of 100 Restricted Datasets under the Enterprise plan, and a maximum of 10 datasets otherwise. If you need a higher limit, reach out to Support.
 
@@ -62,13 +62,13 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 - APM traces
 - Logs
 - RUM sessions
+- LLM Observability
 
 The following are available as a Preview upon request:
 - Cloud costs
 - Custom metrics
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
-- LLM Observability
 - Software Delivery repository info (in CI Visibility pipelines, Test Optimization, and Code Coverage products)
 
 ## Usage constraints
@@ -121,7 +121,7 @@ If you have too many combinations of tags or attributes to fit within these cons
 #### Restricted Dataset 2
 * Telemetry type: RUM
     * Filters: `@application.id:EFGH`
-* Telemetry type: Metrics
+* Telemetry type: Custom Metrics
     * Filters: `env:prod`
 
 ### Not supported example
@@ -159,11 +159,11 @@ Before configuring Data Access Control, it's important to evaluate your access s
 If you have already identified which data needs to be protected, you can build your Data Access Control configuration around only this specific data. This ensures that non-sensitive data is generally available to your users, allowing them to collaborate and understand ongoing issues or incidents.
 
 For example, if you have a single application that is instrumented with Real User Monitoring (RUM) and captures sensitive inputs from users, consider creating a Restricted Dataset only for that application:
-* **Name dataset:** Restricted RUM data
-* **Select data to be included in this Dataset:**
+* {{< ui >}}Name dataset:{{< /ui >}} Restricted RUM data
+* {{< ui >}}Select data to be included in this Dataset:{{< /ui >}}
     * Telemetry type: RUM
         * Filters: `@application.id:<rum-app-id>`
-* **Grant access:**
+* {{< ui >}}Grant access:{{< /ui >}}
     * Teams or roles of users who can see this RUM data
 
 This configuration example would protect the RUM data from this application, and keep other data from this application available to existing users in your organization.
@@ -174,17 +174,17 @@ If you are instead looking to protect data from a specific service, you can buil
 
 For example, if you have a service `NewService` that is instrumented with Real User Monitoring (RUM) and capturing sensitive inputs from users, consider creating a Restricted Dataset only for that application:
 
-* **Name Dataset:** Restricted NewService data
-* **Select data to be included in this Dataset:**
+* {{< ui >}}Name Dataset:{{< /ui >}} Restricted NewService data
+* {{< ui >}}Select data to be included in this Dataset:{{< /ui >}}
     * Telemetry type: RUM
         * Filters: `@service:NewService`
-    * Telemetry type: Metrics
+    * Telemetry type: Custom Metrics
         * Filters: `@service:NewService`
     * Telemetry type: APM
         * Filters: `@service:NewService`
     * Telemetry type: Logs
         * Filters: `@service:NewService`
-* **Grant access:**
+* {{< ui >}}Grant access:{{< /ui >}}
     * Team who owns the service
 
 This configuration example protects all supported data from `NewService`.

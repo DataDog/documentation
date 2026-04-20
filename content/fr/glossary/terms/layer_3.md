@@ -1,4 +1,5 @@
 ---
+id: layer_3
 core_product:
 - Surveillance d'appareils réseau
 - network performance monitoring

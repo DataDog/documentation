@@ -1,4 +1,5 @@
 ---
+id: tail
 core_product:
 - log management
 title: tail (suivi)

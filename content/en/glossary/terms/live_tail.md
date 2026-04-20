@@ -1,4 +1,5 @@
 ---
+id: live_tail
 title: Live Tail
 core_product:
   - log management

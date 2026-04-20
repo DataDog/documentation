@@ -101,7 +101,7 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
 
 #### Map an AWS ARN to a Datadog service account
 For `account_identifier`, you can use either:
-- The service account's **UUID**: Go to **Organization settings > Service accounts**, click the service account you want to map, and copy the `service_account_id` from the URL. For example, if the URL ends in `/organization-settings/service-accounts?service_account_id=3fa85f64-5717-4562-b3fc-2c963f66afa6`, then use `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
+- The service account's **UUID**: Go to {{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}Service accounts{{< /ui >}}, click the service account you want to map, and copy the `service_account_id` from the URL. For example, if the URL ends in `/organization-settings/service-accounts?service_account_id=3fa85f64-5717-4562-b3fc-2c963f66afa6`, then use `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
 - The service account's **email address**: Use the email address shown in the service account's details.
 
 **Example**: An API call that maps an AWS ARN to a Datadog service account using the UUID, `3fa85f64-5717-4562-b3fc-2c963f66afa6`.

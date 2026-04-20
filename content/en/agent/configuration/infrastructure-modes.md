@@ -63,7 +63,7 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 : **Minimum Agent version**: 7.77.0<br>
 **Recommended for**: Hosts configured only for [Log Management][13], [APM][14], or [Error Tracking][15]<br>
 : The Agent does not collect any infrastructure metrics or run infrastructure integrations. You can still use custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations such as [journald][11] or [Windows Event Log][12].
-: Hosts in `none` mode appear in [Fleet Automation][17] under the **View Agents** tab because the Agent continues to send metadata to Datadog. However, these hosts do not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
+: Hosts in `none` mode appear in [Fleet Automation][17] under the {{< ui >}}View Agents{{< /ui >}} tab because the Agent continues to send metadata to Datadog. However, these hosts do not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
 
 ### End User Device
 
@@ -98,8 +98,8 @@ infrastructure_mode: <MODE>  # Replace <MODE> with the mode for the host: `full`
 
 To verify the infrastructure mode set on your hosts:
 
-1. Navigate to [Fleet Automation][17] and click the **View Agents** tab.
-1. Select **Infrastructure Mode** from the **Group by** dropdown.
+1. Navigate to [Fleet Automation][17] and click the {{< ui >}}View Agents{{< /ui >}} tab.
+1. Select {{< ui >}}Infrastructure Mode{{< /ui >}} from the {{< ui >}}Group by{{< /ui >}} dropdown.
 1. Click a mode group to expand it and see the hosts it contains.
 1. Optionally, use the search bar to filter to a specific hostname (for example, `hostname:worker1`).
 

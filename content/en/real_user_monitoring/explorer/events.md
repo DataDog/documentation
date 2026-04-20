@@ -19,6 +19,16 @@ The distribution visualization at the top helps you understand whether the curre
 
 Click any tab to view its corresponding details and investigate specific aspects of the event. See [Additional tabs](#additional-tabs) for a full list.
 
+## Navigate between user sessions
+
+When `@usr.id` is set in the RUM SDK and you filter the Explorer by a specific `@usr.id` value, **Previous** and **Next** buttons appear in the session side panel. Use these buttons to navigate between that user's sessions without returning to the Explorer list.
+
+Only sessions retained by [retention filters][5] appear in the navigation. Non-retained sessions are skipped. For example, if a user had three sessions and only the first and third were retained, the buttons move directly between those two with no indication that a session occurred in between.
+
+To set `@usr.id`, see [Advanced Configuration][6].
+
+{{< img src="real_user_monitoring/explorer/events/rum-explorer-session-continuity.png" alt="RUM Explorer session side panel with Previous and Next navigation buttons highlighted, showing a tooltip with the session start screen and end reason" style="width:100%;" >}}
+
 ## Waterfall tab
 
 The **Waterfall** tab displays an interactive timeline of the events associated with this view. Overlays display key performance markers, including [Core Web Vitals][3] or mobile timings, with pass or fail indicators.
@@ -84,3 +94,5 @@ Attributes
 [2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [3]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#track-additional-performance-timings
+[5]: /real_user_monitoring/rum_without_limits/retention_filters
+[6]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
