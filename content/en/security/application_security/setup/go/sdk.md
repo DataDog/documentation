@@ -76,9 +76,9 @@ type LoginRequest struct {
 }
 
 type User struct {
-	Name     string `json:name`
-	Username string `json:username`
-	Email    string `json:email`
+	Name     string `json:"name"`
+	Username string `json:"username"`
+	Email    string `json:"email"`
 	password string
 }
 
