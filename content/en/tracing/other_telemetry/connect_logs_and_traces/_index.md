@@ -17,6 +17,8 @@ It is recommended to configure your application's tracer with `DD_ENV`, `DD_SERV
 
 Before correlating traces with logs, ensure your logs are either sent as JSON, or [parsed by the proper language level log processor][3]. Your language level logs _must_ be turned into Datadog attributes in order for traces and logs correlation to work.
 
+**Note:** Traces and logs are sampled independently. Even after correlation is configured, a log may contain a trace ID that refers to a trace that was not ingested or not retained due to [trace sampling][4]. This does not indicate a configuration error. For more information, see [Log has a trace ID but the associated trace is missing][5].
+
 To learn more about automatically or manually connecting your logs to your traces, select your language below:
 
 {{< partial name="apm/apm-connect-logs-and-traces.html" >}}
@@ -24,3 +26,5 @@ To learn more about automatically or manually connecting your logs to your trace
 [1]: /tracing/glossary/#trace
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /agent/logs/#enabling-log-collection-from-integrations
+[4]: /tracing/trace_pipeline/ingestion_controls/
+[5]: /logs/troubleshooting/#log-has-a-trace-id-but-the-associated-trace-is-missing
