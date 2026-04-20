@@ -345,7 +345,7 @@ In the **Preview detection** section, check the steps, transitions, and time win
 
 ## API schema reference
 
-This section describes the API payload for creating or updating a real-time detection rule using the `POST /api/v2/security_monitoring/rules` and `PUT /api/v2/security_monitoring/rules/{rule_id}` endpoints. It covers the `threshold` detection method (the default) and the case condition grammar that applies across all real-time detection methods.
+This section describes the real-time detection rule schema, covering the `threshold` detection method (the default) and the case condition grammar that applies across all real-time detection methods. It is also used by the [Security Monitoring API][10] to create and update rules.
 
 For method-specific schemas, see the dedicated pages: [Anomaly][11], [New Value][12], [Impossible Travel][13], [Content Anomaly][14], [Third Party][15], [Sequence][16].
 

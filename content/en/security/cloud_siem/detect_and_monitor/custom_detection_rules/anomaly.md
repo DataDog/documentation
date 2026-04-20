@@ -36,7 +36,7 @@ A short learning period is applied for new rules or newly observed values for a 
 
 ## API schema reference
 
-This section describes the API payload for creating or updating an `anomaly_detection` rule using the `POST /api/v2/security_monitoring/rules` and `PUT /api/v2/security_monitoring/rules/{rule_id}` endpoints.
+This section describes the `anomaly_detection` rule schema. It is also used by the [Security Monitoring API][5] to create and update rules.
 
 ### Top-level payload fields
 

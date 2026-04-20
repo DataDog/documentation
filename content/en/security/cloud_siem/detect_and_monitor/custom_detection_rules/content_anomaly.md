@@ -114,7 +114,7 @@ $$\text"J(log1,log2)" = 2 / 8 = 0.25$$
 
 ## API schema reference
 
-This section describes the API payload for creating or updating a `content_anomaly` rule using the `POST /api/v2/security_monitoring/rules` and `PUT /api/v2/security_monitoring/rules/{rule_id}` endpoints.
+This section describes the `content_anomaly` rule schema. It is also used by the [Security Monitoring API][8] to create and update rules.
 
 ### Top-level payload fields
 
