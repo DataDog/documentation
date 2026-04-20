@@ -30,6 +30,7 @@ Set up CI Visibility for GitHub Actions to track the execution of your workflows
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [CI jobs failure analysis][23] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
+| [Automatic job retries](#automatic-job-retries) | Automatic job retries | Preview. Datadog retries failed jobs classified as transient by its AI error model. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][4] for GitHub jobs. |
 | [Custom tags][5] [and measures at runtime][6] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
@@ -122,6 +123,43 @@ You can also add job failure analysis to a PR comment. See the guide on [using P
 
 For a full explanation, see the guide on [using CI jobs failure analysis][23].
 
+## Automatic job retries
+
+<div class="alert alert-info">Automatic job retries are in Preview. To request access, contact your Datadog account team.</div>
+
+Automatic job retries save developer time by re-running only the failures that are likely transient—such as network timeouts, infrastructure hiccups, or flaky tests—while leaving genuine code defects untouched. Datadog classifies each failed job with an AI-powered error model and, when the failure is determined retriable, triggers a retry through the GitHub Actions API without manual intervention.
+
+### How it works
+
+1. A job fails in your workflow.
+2. Datadog's AI error classifier inspects the job's logs and error context to determine whether the failure is transient.
+3. If the failure is classified as retriable, Datadog requests a retry through the GitHub Actions API.
+4. Datadog retries each job up to a configurable maximum to prevent infinite retry loops.
+5. The retry outcome is reflected on the original pipeline in CI Visibility.
+
+### Requirements
+
+- CI Visibility enabled for your GitHub Actions integration (see [Configure the Datadog integration](#configure-the-datadog-integration)).
+- [Datadog Source Code Integration][27] configured for the repositories where you want automatic retries.
+- Automatic job retries enabled for your organization. Because this feature is in Preview, access is gated—contact your Datadog account team to request enablement.
+
+### GitHub-specific behavior
+
+GitHub Actions imposes two provider-level limitations that shape how retries work:
+
+- **Retries happen after the workflow finishes.** The GitHub API does not allow retrying an individual job while the rest of the workflow is still running. Datadog waits for the workflow to reach a final state before issuing retries.
+- **All failed jobs are retried together.** The GitHub API does not support retrying a single job when other jobs in the workflow have also failed. Datadog uses the "rerun failed jobs" endpoint, which re-runs every failed job in the workflow. This may increase the GitHub Actions compute minutes consumed by your pipelines.
+
+### Protected branches
+
+The Datadog GitHub App's default permissions do not allow retries on protected branches. To enable automatic retries on a protected branch (for example, your default branch), grant the app Maintainer-level access. Review your organization's policies before expanding permissions.
+
+### Limitations
+
+- Each logical job is retried at most one time.
+- Jobs classified as non-retriable (for example, compilation errors or asserted test failures) are never retried.
+- If a job has already been retried manually or by provider-native retry rules, Datadog does not issue an additional retry.
+
 ## Visualize pipeline data in Datadog
 
 The [**CI Pipeline List**][17] and [**Executions**][18] pages populate with data after the pipelines finish.
@@ -158,3 +196,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [24]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [25]: /glossary/#pipeline-execution-time
 [26]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
+[27]: /integrations/guide/source-code-integration/

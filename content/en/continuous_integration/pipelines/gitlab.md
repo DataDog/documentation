@@ -28,6 +28,7 @@ Set up CI Visibility for GitLab to collect data on your pipeline executions, ana
 | [CI jobs failure analysis][28] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Filter CI Jobs on the critical path][29] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
+| [Automatic job retries](#automatic-job-retries) | Automatic job retries | Preview. Datadog retries failed jobs classified as transient by its AI error model. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
 | [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
 | Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log collection][12]. |
@@ -426,6 +427,34 @@ You can also apply these filters using the facet panel on the left hand side of 
 
 {{< img src="ci/partial_retries_facet_panel.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:20%;">}}
 
+## Automatic job retries
+
+<div class="alert alert-info">Automatic job retries are in Preview. To request access, contact your Datadog account team.</div>
+
+Automatic job retries save developer time by re-running only the failures that are likely transient—such as network timeouts, infrastructure hiccups, or flaky tests—while leaving genuine code defects untouched. Datadog classifies each failed job with an AI-powered error model and, when the failure is determined retriable, triggers a retry through the GitLab API without manual intervention.
+
+On GitLab, Datadog performs **smart retries**: only the specific job classified as retriable is re-run. Other failed jobs that aren't classified retriable, and passing jobs, aren't affected.
+
+### How it works
+
+1. A job fails in your pipeline.
+2. Datadog's AI error classifier inspects the job's logs and error context to determine whether the failure is transient.
+3. If the failure is classified as retriable, Datadog requests a retry through the GitLab API—per job, as soon as the job finishes failing.
+4. Datadog retries each job up to a configurable maximum to prevent infinite retry loops.
+5. The retry outcome is reflected on the original pipeline in CI Visibility.
+
+### Requirements
+
+- CI Visibility enabled for your GitLab integration (see [Configure the Datadog integration](#configure-the-datadog-integration)).
+- [Datadog Source Code Integration][31] configured for the repositories where you want automatic retries. Works with GitLab.com (SaaS) and self-hosted GitLab instances reachable by the Source Code Integration.
+- Automatic job retries enabled for your organization. Because this feature is in Preview, access is gated—contact your Datadog account team to request enablement.
+
+### Limitations
+
+- Each logical job is retried at most one time.
+- Jobs classified as non-retriable (for example, compilation errors or asserted test failures) are never retried.
+- If a job has already been retried manually or by provider-native retry rules, Datadog does not issue an additional retry.
+
 ## Visualize pipeline data in Datadog
 
 Once the integration is successfully configured, the [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
@@ -466,3 +495,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [28]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [29]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [30]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
+[31]: /integrations/guide/source-code-integration/
