@@ -42,7 +42,7 @@ The Datadog extension for VS Code and Cursor brings Datadog to your code editor 
 
 The extension includes these features:
 
-- [**Model Context Protocol (MCP) Server**](?tab=vscode#installation): Connect the editor's AI agent to production telemetry, tools, and contexts from Datadog. For Cursor, install the [Datadog plugin from the Cursor plugin marketplace][19] instead of this extension to access the MCP Server.
+- [**Model Context Protocol (MCP) Server**](?tab=vscode#installation): Connect the editor's AI agent to production telemetry, tools, and contexts from Datadog. For Cursor, install the [Datadog plugin from the Cursor plugin marketplace](https://cursor.com/marketplace/datadog) instead of this extension to access the MCP Server.
 
 - [**Log Annotations**](#log-annotations): Gauge log volumes and search logs from your code.
 
@@ -102,12 +102,13 @@ Use the extension in Cursor for features such as [Log Annotations](#log-annotati
 
 ### MCP Server setup
 
-<div class="alert alert-info">The Datadog extension for Cursor no longer installs the Datadog MCP Server. To connect Cursor to the Datadog MCP Server, install the Datadog plugin from the Cursor plugin marketplace.</div>
+<div class="alert alert-info">The Datadog extension for Cursor no longer installs the Datadog MCP Server. To connect Cursor to the Datadog MCP Server, install the <a href="https://cursor.com/marketplace/datadog">Datadog plugin from the Cursor plugin marketplace</a>.</div>
 
-For MCP Server access in Cursor, Datadog recommends the **Datadog plugin** from the Cursor plugin marketplace. See [Set up the Datadog MCP Server][3] for installation steps. You can use the plugin and this extension side by side: the plugin provides MCP Server access, and the extension provides the features listed above.
+For MCP Server access in Cursor, Datadog recommends the [**Datadog plugin**][20] from the Cursor plugin marketplace. See [Set up the Datadog MCP Server][3] for more details. You can use the plugin and this extension side by side: the plugin provides MCP Server access, and the extension provides the features listed above.
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
 [3]: /bits_ai/mcp_server/setup/?tab=cursor
+[20]: https://cursor.com/marketplace/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -248,4 +249,3 @@ Do you use [Cursor][17], or another fork of VS Code? Find the extension on the [
 [16]: https://github.com/DataDog/datadog-for-vscode/issues?q=is%3Aissue+label%3A%22known+issue%22
 [17]: https://www.cursor.com/
 [18]: /account_management/multi_organization/#custom-sub-domains
-[19]: /bits_ai/mcp_server/setup/?tab=cursor

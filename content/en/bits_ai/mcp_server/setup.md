@@ -21,21 +21,17 @@ Learn how to set up and configure the Datadog MCP Server, which lets you retriev
 {{< tabs >}}
 {{% tab "Cursor" %}}
 
-For Cursor, Datadog recommends installing the **Datadog plugin** from the Cursor plugin marketplace. The plugin manages OAuth authentication, regional endpoint configuration, and toolset selection for you.
+For Cursor, Datadog recommends installing the [**Datadog plugin**][2] from the Cursor plugin marketplace.
 
 <div class="alert alert-info">The Datadog plugin for Cursor is in Preview.</div>
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. Open Cursor Settings (`Cmd/Ctrl` + `,`) and go to the **Plugins** section.
-1. Search for `datadog` and install the Datadog plugin.
-1. Restart Cursor if prompted.
-1. In the chat panel, run `/ddconfig` to select your Datadog site (for example, US1, US3, EU1) and sign in through OAuth.
-1. (Optional) Run `/ddconfig` again to enable additional [toolsets](#toolsets). The `core` toolset is enabled by default.
-1. If you previously installed the Datadog MCP Server another way, disable or remove that entry (for example, in `.cursor/mcp.json`, from an earlier version of the Datadog extension, or from a manual configuration). Running both causes duplicate tools and conflicts.
+1. Install the Datadog plugin from the [Cursor plugin marketplace][2].
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 <div class="alert alert-info">The Datadog extension for Cursor no longer installs the Datadog MCP Server. Use the Datadog plugin for MCP Server access. Install the <a href="/ide_plugins/vscode/?tab=cursor">Datadog extension</a> separately for other features such as Exception Replay, Code Insights, View in Cursor, Log Annotations, Static Code Analysis, and Fix in Chat.</div>
 
+[2]: https://cursor.com/marketplace/datadog
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
