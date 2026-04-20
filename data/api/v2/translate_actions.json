@@ -3987,6 +3987,12 @@
     "request_description": "Attributes describing the signal state updates.",
     "request_schema_description": "Request body for updating the triage states of multiple security signals."
   },
+  "BulkEditSecurityMonitoringSignals": {
+    "description": "Update the triage state or assignee of multiple security signals at once.\nThe maximum number of signals that can be updated in a single request is 199.",
+    "summary": "Bulk update security signals",
+    "request_description": "Attributes describing the signal updates.",
+    "request_schema_description": "Request body for updating multiple attributes of multiple security signals."
+  },
   "SearchSecurityMonitoringSignals": {
     "description": "Returns security signals that match a search query.\nBoth this endpoint and the GET endpoint can be used interchangeably for listing\nsecurity signals.",
     "summary": "Get a list of security signals",
@@ -4022,6 +4028,12 @@
   "GetSuggestedActionsMatchingSignal": {
     "description": "Get the list of suggested actions for a given security signal.",
     "summary": "Get suggested actions for a signal"
+  },
+  "EditSecurityMonitoringSignal": {
+    "description": "Update the triage state or assignee of a security signal.",
+    "summary": "Update security signal triage state or assignee",
+    "request_description": "Attributes describing the signal triage state or assignee update.",
+    "request_schema_description": "Request body for updating the triage state or assignee of a security signal."
   },
   "BulkExportSecurityMonitoringTerraformResources": {
     "description": "Export multiple security monitoring resources to Terraform, packaged as a zip archive.\nThe `resource_type` path parameter specifies the type of resources to export\nand must be one of `suppressions` or `critical_assets`.\nA maximum of 1000 resources can be exported in a single request.",
