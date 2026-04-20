@@ -16,6 +16,8 @@ To send <a href="/llm_observability/evaluations/external_evaluations#submitting-
 
 For information on using Prompt Tracking with OpenTelemetry spans, see <a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Prompt Tracking - OpenTelemetry Instrumentation</a>.
 
+You can also use OpenTelemetry spans inside <a href="/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments">LLM Observability Experiments</a>. By setting <code>DD_TRACE_OTEL_ENABLED=1</code>, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+
 ## Setup
 
 To send OpenTelemetry traces to LLM Observability, configure your OpenTelemetry exporter with the following settings:

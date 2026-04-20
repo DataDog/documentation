@@ -5,6 +5,9 @@ aliases:
   - /infrastructure/containermap/
   - /guides/hostmap
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-host-map"
+  tag: "Blog"
+  text: "A new Host Map for modern infrastructure"
 - link: "/infrastructure/livecontainers/"
   tag: "Documentation"
   text: "Get real-time visibility of all of the containers across your environment"

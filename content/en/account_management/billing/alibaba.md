@@ -10,7 +10,7 @@ Other Alibaba resources (CDNs, Express Connect Instances, Aspara DBs, etc.) are 
 
 ## Alibaba VM exclusion
 
-Use the [Datadog-Alibaba integration][1] tile to filter your VMs monitored by Datadog using [host tags][2]. Go to the **Configuration** tab and edit an existing account or add a new one. Filtering for each account is controlled by clicking it and filling in the field for **Optionally limit metrics collection to hosts with tag**:
+Use the [Datadog-Alibaba integration][1] tile to filter your VMs monitored by Datadog using [host tags][2]. Go to the {{< ui >}}Configuration{{< /ui >}} tab and edit an existing account or add a new one. Filtering for each account is controlled by clicking it and filling in the field for {{< ui >}}Optionally limit metrics collection to hosts with tag{{< /ui >}}:
 
 {{< img src="account_management/billing/alibaba_filter.png" alt="Alibaba VM Filter" >}}
 

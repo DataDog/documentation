@@ -855,7 +855,7 @@ This table provides an overview of the supported window functions. For comprehen
 | json_array_elements_text(text json)           | rows of text | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
 
 ## Table functions
-Table functions are used to query logs, metrics, and other unstructured data sources.
+Table functions are used to query logs, metrics, cloud costs, and other data sources.
 
 <table style="width: 100%; table-layout: fixed;">
   <thead>
@@ -922,12 +922,56 @@ dd.metrics_timeseries(
     query varchar [, from_timestamp timestamp, to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Returns metric data as a timeseries. The function accepts a metrics query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns data points over time rather than a single aggregated value.</td>
+      <td>Returns metric data as a timeseries. The function accepts a metrics query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns datapoints over time rather than a single aggregated value.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
 FROM dd.metrics_timeseries(
     'avg:system.cpu.user{*} by {service}',
+    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+)
+ORDER BY timestamp, service;{{< /code-block >}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre>
+dd.cloud_cost_scalar(
+    query varchar,
+    reducer varchar
+    [, from_timestamp timestamp,
+    to_timestamp timestamp]
+)</pre>
+      </td>
+      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a scalar value. The function accepts a cloud cost query (with optional grouping), an aggregation reducer (use <code>sum</code> for cost data; other reducers such as <code>avg</code>, <code>min</code>, and <code>max</code> are accepted but rarely applicable to cost queries), and optional timestamp parameters (default 1 hour) to define the time range. <strong>Note</strong>: Cloud cost data is typically delayed by 24-48 hours, so recent timestamps may return no results.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT *
+FROM dd.cloud_cost_scalar(
+    'sum:all.cost{*} by {service}',
+    'sum',
+    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+)
+ORDER BY value DESC;{{< /code-block >}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre>
+dd.cloud_cost_timeseries(
+    query varchar
+    [, from_timestamp timestamp,
+    to_timestamp timestamp]
+)</pre>
+      </td>
+      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a timeseries. The function accepts a cloud cost query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns cost datapoints over time rather than a single aggregated value. <strong>Note</strong>: Cloud cost data is typically delayed by 24-48 hours, so recent timestamps may return no results.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT *
+FROM dd.cloud_cost_timeseries(
+    'sum:all.cost{*} by {service}',
     TIMESTAMP '2025-07-10 00:00:00.000-04:00',
     TIMESTAMP '2025-07-17 00:00:00.000-04:00'
 )
