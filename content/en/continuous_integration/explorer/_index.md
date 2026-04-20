@@ -14,7 +14,7 @@ further_reading:
 
 The CI Visibility Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) pipeline executions at multiple levels using any tag.
 
-Navigate to [**Software Delivery** > **CI Visibility** > **Executions**][5] to see your CI pipeline execution results across the following levels: {{< ui >}}Pipeline{{< /ui >}}, {{< ui >}}Stage{{< /ui >}}, {{< ui >}}Job{{< /ui >}}, {{< ui >}}Step{{< /ui >}}, and {{< ui >}}Command{{< /ui >}}.
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}CI Visibility{{< /ui >}} > {{< ui >}}Executions{{< /ui >}}][5] to see your CI pipeline execution results across the following levels: {{< ui >}}Pipeline{{< /ui >}}, {{< ui >}}Stage{{< /ui >}}, {{< ui >}}Job{{< /ui >}}, {{< ui >}}Step{{< /ui >}}, and {{< ui >}}Command{{< /ui >}}.
 
 {{< img src="/continuous_integration/pipeline_executions.png" text="CI Pipeline Executions page" style="width:100%" >}}
 
