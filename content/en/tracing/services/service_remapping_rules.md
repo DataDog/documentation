@@ -24,6 +24,7 @@ You can create service remapping rules only for services instrumented with suppo
 
 | Language   | Minimum supported tracer version |
 |------------|----------------------------------|
+| C++        | All versions supported           |
 | Dotnet     | [3.4.0][3]                       |
 | Go         | [1.55.0][6]                      |
 | Java       | [1.20.0][2]                      |
