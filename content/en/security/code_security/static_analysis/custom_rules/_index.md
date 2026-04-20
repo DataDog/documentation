@@ -27,7 +27,7 @@ ruleset names are `python-security`, `cobra-team-checks`, or `my-company-securit
 
 ## Write rules with the VS Code extension
 
-The DDSA Rule Editor is a VS Code extension for interactively writing and testing custom rules. It connects to the [Datadog VS Code Extension][6] to provide real-time feedback as you write.
+The [Datadog VS Code Extension][6] includes the DDSA Rule Editor for interactively writing and testing custom rules.
 
 ### Prerequisites
 
@@ -38,10 +38,10 @@ Install the [Datadog VS Code Extension][6] from the VS Code marketplace and keep
 **To create a new rule**, open the command palette (**Cmd+Shift+P** / **Ctrl+Shift+P**) and run:
 
 ```
-DDSA: Open Rule Editor
+Datadog: New DDSA Rule
 ```
 
-**To edit an existing rule**, right-click any `.yaml` rule file in the explorer and select **Open in DDSA Editor**.
+**To edit an existing rule**, right-click any `.yaml` rule file in the explorer and select **Datadog Code Security > Open in DDSA Rule Editor**.
 
 The [template repository](#manage-rules-with-the-template-repository) includes a `.ddsainclude` file that automatically opens matching rule YAML files in the editor.
 
