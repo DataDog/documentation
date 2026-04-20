@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog. After completing setup, you can start working in a [code session][7].
+[Bits AI Dev Agent][8] integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog. After completing setup, you can [start using the Dev Agent][7].
 
 ## Prerequisites
 
@@ -51,7 +51,7 @@ To configure telemetry tagging, see [Tag your APM telemetry with Git information
 You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][5] > **Service Repository Mapping**.
 
 ### Enable auto-push
-To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to [**Bits AI Dev** > **Settings** > **General**][12] , and set the toggle to **Enable**.
+To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to **Bits AI Dev** > **Settings** > [**General**][6] , and set the toggle to **Enable**.
 
 **Note**: If auto-push is disabled, you must review and approve code in Datadog before the Dev Agent can push it.
 
@@ -67,7 +67,7 @@ The Dev Agent ingests custom instruction files from your repository, including:
 - `agent.md`
 
 
-You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI Dev** > [**Settings**][12] > **General**, in the **Global Agent Instructions** section.
+You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI Dev** > **Settings** > [**General**][6], in the **Global Agent Instructions** section.
 
 ## Environment setup
 
@@ -75,7 +75,7 @@ Configure the Dev Agent's runtime environment, including network access policies
 
 ### Configure internet access
 
-By default, the Dev Agent has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
+By default, the Dev Agent has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to **Bits AI Dev** > **Settings** > [**General**][6], and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
 
 The default allowlist includes the following domains:
 
@@ -123,4 +123,5 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [4]: /integrations/guide/source-code-integration/?tab=go#tag-your-apm-telemetry-with-git-information
 [5]: https://app.datadoghq.com/code/settings?tab=repositories
 [6]: https://app.datadoghq.com/code/settings
-[7]: /bits_ai/bits_ai_dev_agent/#code_sessions/
+[7]: /bits_ai/bits_ai_dev_agent/#start-a-code-session
+[8]: /bits_ai/bits_ai_dev_agent/
