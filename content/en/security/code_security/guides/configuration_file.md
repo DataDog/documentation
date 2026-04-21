@@ -1,6 +1,6 @@
 ---
-title: Code Security Configuration File Reference
-description: Reference documentation for the code-security.datadog.yaml file, including configuration locations, precedence, and file format.
+title: Code Security Configuration Reference
+description: Reference for Datadog Code Security configuration, including the schema, configuration locations, and precedence.
 disable_toc: false
 further_reading:
 - link: /security/code_security/static_analysis/configuration/
@@ -13,7 +13,7 @@ further_reading:
 
 Datadog Code Security can be configured in Datadog, in a file at the root of your repository, or in both locations.
 
-## File format and schema versions
+## Configuration schema
 
 The configuration file must begin with `schema-version: v1.0` or `schema-version: v1.1`, followed by top-level keys for each product you want to configure. Use `v1.1` to enable SCA support.
 
