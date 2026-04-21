@@ -85,6 +85,10 @@ The sections below provide instructions for completing each page of the template
 1. Review the finalized deployment details.
 2. Click **Create**.
 
+## Resource tag filtering
+
+You can use tag filters to control which Azure resources have their logs forwarded to Datadog. For tag filter syntax, wildcard support, and examples, see [Resource tag filtering][21] in the Azure getting started guide.
+
 ## Log Analytics Workspaces
 
 You can forward logs from Azure Log Analytics Workspaces (LAWs) to Datadog through the automated log forwarder. Previously, Datadog only supported [diagnostic setting][13] logs from LAWs. With [data export rules][17], you can also forward logs from LAW Log Tables to Datadog.
@@ -217,3 +221,4 @@ The script first discovers any instances running in each subscription, then prom
 [18]: https://learn.microsoft.com/azure/azure-monitor/logs/logs-data-export?tabs=portal#unsupported-tables
 [19]: https://portal.azure.com
 [20]: https://learn.microsoft.com/troubleshoot/azure/azure-monitor/log-analytics/workspaces/workspace-data-export-faq
+[21]: /getting_started/integrations/azure/#resource-tag-filtering-for-logs

@@ -95,7 +95,7 @@ To add markers for additional datasets, click {{< ui >}}Add Marker{{< /ui >}} in
 
 1. Select a Line or Range and input a value or a range or values.
 2. In the {{< ui >}}Show as{{< /ui >}} field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line.
-3. To add a label that displays on the bottom left of the timeseries widget, define a value for the y-axis and click the {{< ui >}}Label{{< /ui >}} checkbox.
+3. To add a label that displays on the bottom left of the timeseries widget, click the {{< ui >}}Label{{< /ui >}} checkbox and define a value for the y-axis.
 
 ### Dual y-axis
 

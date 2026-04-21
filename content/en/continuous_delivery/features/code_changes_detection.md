@@ -22,11 +22,11 @@ Code Changes Detection allows Datadog to identify the commits introduced as part
 
 To detect the code changes deployed, Datadog runs the [`git log`][1] between the current deployment commit SHA and the previous deployment commit SHA. Merge commits are excluded from the computation.
 
-The deployed code changes are visible inside any deployment execution of the [Deployment Executions page][2]. The **Code Changes** tab shows the previous deployment taken into consideration, and the code changes detected between the two.
+The deployed code changes are visible inside any deployment execution of the [Deployment Executions page][2]. The {{< ui >}}Code Changes{{< /ui >}} tab shows the previous deployment taken into consideration, and the code changes detected between the two.
 
 {{< img src="continuous_delivery/features/code_changes_tab.png" alt="Code Changes tab for changes detection feature" style="width:100%;">}}
 
-Additionally, the **Deployments** column of the [Recent Code Changes][3] page displays the service and environment details for all deployments that included a specific commit. This view provides a quick way to understand if and where your code changes are deployed.
+Additionally, the {{< ui >}}Deployments{{< /ui >}} column of the [Recent Code Changes][3] page displays the service and environment details for all deployments that included a specific commit. This view provides a quick way to understand if and where your code changes are deployed.
 Hovering over the service value reveals whether the deployment has reached all expected environments, based on where the service is typically deployed.
 
 {{< img src="continuous_delivery/features/recent_code_changes_deployments.png" alt="Showing deployments in Recent Code Changes page" style="width:100%;">}}
@@ -60,10 +60,10 @@ If you are using the <code>pull_request</code> trigger, use the alternative meth
 If the [GitHub integration][1] is not already installed, install it on the [GitHub integration tile][2].
 
 When configuring the GitHub App:
-1. Select at least **Read** repository permissions for **Contents** and **Pull Requests**.
-2. Subscribe at least to **Push**, **PullRequest** and **PullRequestReview** events.
+1. Select at least {{< ui >}}Read{{< /ui >}} repository permissions for {{< ui >}}Contents{{< /ui >}} and {{< ui >}}Pull Requests{{< /ui >}}.
+2. Subscribe at least to {{< ui >}}Push{{< /ui >}}, {{< ui >}}PullRequest{{< /ui >}} and {{< ui >}}PullRequestReview{{< /ui >}} events.
 
-To confirm that the setup is valid, select your GitHub App in the [GitHub integration tile][2] and verify that, in the **Datadog Features** table, the **Pull Request Information** feature is marked as valid.
+To confirm that the setup is valid, select your GitHub App in the [GitHub integration tile][2] and verify that, in the {{< ui >}}Datadog Features{{< /ui >}} table, the {{< ui >}}Pull Request Information{{< /ui >}} feature is marked as valid.
 
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/

@@ -49,7 +49,7 @@ Bits AI Dev Agent integrates with GitHub to create pull requests, respond to com
   
   **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev never auto-merges PRs.
 
-Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
+Go to {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Dev Agent{{< /ui >}} > [{{< ui >}}Code sessions{{< /ui >}}][7] to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
 
 ### Auto-push
 
@@ -74,7 +74,7 @@ In [Error Tracking][1], Bits AI Dev Agent diagnoses and remediates code issues w
 - Determines whether an error can be fixed through code and generates a fix with unit tests.
 - Provides links within the chat to relevant files and methods for streamlined navigation.
 - Analyzes errors asynchronously as they arrive.
-- Marks errors with a **Fix available** status and enables filtering to surface those issues.
+- Marks errors with a {{< ui >}}Fix available{{< /ui >}} status and enables filtering to surface those issues.
 
 [Auto-push](#auto-push) is available for this feature. 
 
