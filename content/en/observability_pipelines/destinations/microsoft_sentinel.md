@@ -156,24 +156,24 @@ The table below summarizes the Azure and Microsoft Sentinel information you need
 
 ## Setup
 
-Set up the Microsoft Sentinel destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][1], using the [API][11], or with [Terraform][12]. The instructions in this section are for setting up the destination in the UI.
-
-After you select the Microsoft Sentinel destination in the pipeline UI:
+Set up the Microsoft Sentinel destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][1], using the [API][11], or with [Terraform][12]. The steps in this section are configured in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the Microsoft Sentinel client secret and Data Collection Endpoint. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your Microsoft Sentinel client secret. If you leave it blank, the [default](#secrets-defaults) is used.
-1. Enter the identifier for your Microsoft Sentinel Data Collection endpoint. If you leave it blank, the [default](#secrets-defaults) is used.
+After you select the Microsoft Sentinel destination in the pipeline UI:
+
+1. Enter the identifier for your Microsoft Sentinel client secret. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your Microsoft Sentinel Data Collection endpoint. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the client ID for your application, such as `550e8400-e29b-41d4-a716-446655440000`.
 1. Enter the directory ID for your tenant, such as `72f988bf-86f1-41af-91ab-2d7cd011db47`. This is the Azure AD tenant ID.
 1. Enter the full table name to which you are sending logs. An example table name: `Custom-MyOPWLogs_CL`.
 1. Enter the Data Collection Rule (DCR) immutable ID, such as `dcr-000a00a000a00000a000000aa000a0aa`.
 
-#### Optional buffering
+### Optional buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

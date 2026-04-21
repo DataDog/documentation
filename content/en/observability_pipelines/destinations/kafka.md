@@ -27,13 +27,13 @@ Common scenarios when you might use this destination:
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][5], using the [API][11], or with [Terraform][12]. The instructions in this section are configured in the UI.
-
-After you select the Kafka destination in the pipeline UI:
+Configure the Kafka destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][5], using the [API][11], or with [Terraform][12]. The steps in this section are configured in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the Kafka bootstrap servers and, if applicable, the SASL username and password and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your Kafka bootstrap servers. If you leave it blank, the [default](#secrets-defaults) is used.
+After you select the Kafka destination in the pipeline UI:
+
+1. Enter the identifier for your Kafka bootstrap servers. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the name of the topic you want to send logs to.
 1. In the **Encoding** dropdown menu, select either `JSON` or `Raw message` as the output format.
 
@@ -48,7 +48,7 @@ After you select the Kafka destination in the pipeline UI:
 ##### Enable SASL authentication
 
 1. Toggle the switch to enable **SASL Authentication**.
-1. Enter the identifiers for your Kafka SASL username and password. If you leave them blank, the [defaults](#secrets-defaults) are used.
+1. Enter the identifiers for your Kafka SASL username and password. If you leave them blank, the [defaults](#secret-defaults) are used.
 1. Select the mechanism (**PLAIN**, **SCHRAM-SHA-256**, or **SCHRAM-SHA-512**) in the dropdown menu.
 
 ##### Enable compression
@@ -78,7 +78,7 @@ Click **Advanced** if you want to set any of the following fields:
     1. Check your values against the [librdkafka documentation][7] to make sure they have the correct type and are within the set range.
     1. Click **Add Option** to add another librdkafka option.
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

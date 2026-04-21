@@ -79,7 +79,7 @@ You can also [route logs to Snowflake using the Amazon S3 destination](#route-lo
 
 ## Set up the destination for your pipeline
 
-Set up the Amazon S3 destination when you [set up a pipeline][11]. You can set up a pipeline in the [UI][8], using the [API][9], or with [Terraform][10]. The information below is configured in the UI.
+Set up the Amazon S3 destination when you [set up a pipeline][11]. You can set up a pipeline in the [UI][8], using the [API][9], or with [Terraform][10]. The steps in this section are configured in the UI.
 
 After you select the Amazon S3 destination in the pipeline UI:
 
@@ -116,7 +116,7 @@ Select an AWS authentication option. If you are only using the [user or role you
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

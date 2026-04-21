@@ -29,7 +29,7 @@ You need to have Datadog's [Google Cloud Platform integration][3] installed to s
 
 ## Set up the destination for your pipeline {#set-up-the-destinations}
 
-Configure the Google Cloud Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The information below is configured in the UI.
+Configure the Google Cloud Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The steps in this section are configured in the UI.
 
 After you select the Google Cloud Storage destination in the pipeline UI:
 
@@ -40,10 +40,9 @@ After you select the Google Cloud Storage destination in the pipeline UI:
 1. Select the storage class for the created objects.
 1. Select the access level of the created objects.
 
+### Optional settings
 
-#### Optional settings
-
-##### Prefix to apply to all key objects
+#### Prefix to apply to all key objects
 
 Enter a prefix that you want to apply to all key objects.
 
@@ -51,16 +50,16 @@ Enter a prefix that you want to apply to all key objects.
 - See [template syntax][7] if you want to route logs to different object keys based on specific fields in your logs.
   - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 
-##### Metadata
+#### Metadata
 
 1. Click **Add Header** to add metadata.
 1. Enter values for the header name and value.
 
-##### Buffering
+#### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

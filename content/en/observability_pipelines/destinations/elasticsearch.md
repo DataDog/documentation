@@ -23,14 +23,14 @@ Use Observability Pipelines' Elasticsearch destination to send logs or metrics (
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][7]. You can set up a pipeline in the [UI][1], using the [API][8], or with [Terraform][9]. The instructions in this section are configured in the UI.
-
-After you select the Elasticsearch destination in the pipeline UI:
+Configure the Elasticsearch destination when you [set up a pipeline][7]. You can set up a pipeline in the [UI][1], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the Elasticsearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifiers for your Elasticsearch username and password. If you leave it blank, the [default](#secrets-defaults) is used.
-1. Enter the identifier for your Elasticsearch endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
+After you select the Elasticsearch destination in the pipeline UI:
+
+1. Enter the identifiers for your Elasticsearch username and password. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your Elasticsearch endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. (Optional) Enter the Elasticsearch version.
 1. In the **Mode** dropdown menu, select **Bulk** or **Data stream**.
 	- **Bulk** mode
@@ -56,7 +56,7 @@ After you select the Elasticsearch destination in the pipeline UI:
 ##### Enable TLS
 
 Toggle the switch to **Enable TLS**.
-- If you are using Secrets Management, enter the identifier for the key pass. See [Secrets defaults](#secrets-defaults) for the default used if the field is left blank.
+- If you are using Secrets Management, enter the identifier for the key pass. See [Secret defaults](#secret-defaults) for the default used if the field is left blank.
 - The following certificate and key files are required for TLS:
   - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
   - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER, PEM, or CERT (X.509).
@@ -81,7 +81,7 @@ Toggle the switch to enable **Compression**. Select a compression algorithm (**g
 1. In the **Pipeline** field, enter the name of an Elasticsearch ingest pipeline to apply to events before indexing.
 1. Enable the **Retry partial failures** toggle to retry a failed bulk request when some events in a batch fail while others succeed.
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

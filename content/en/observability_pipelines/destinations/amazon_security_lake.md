@@ -21,7 +21,7 @@ You need to do the following before setting up the Amazon Security Lake destinat
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The instructions in this section are configured in the UI.
+Configure the Amazon Security Lake destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The steps in this section are configured in the UI.
 
 **Notes**:
 - When you add the Amazon Security Lake destination, the OCSF processor is automatically added so that you can convert your logs to Parquet before they are sent to Amazon Security Lake. See [Remap to OCSF documentation][3] for setup instructions.
@@ -51,7 +51,7 @@ After you select the Amazon Security Lake destination in the pipeline UI:
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

@@ -81,7 +81,7 @@ You reference this file in the Google Pub/Sub destination's **Credentials path**
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][9]. You can set up a pipeline in the [UI][1], using the [API][10], or with [Terraform][11]. The instructions in this section are configured in the UI.
+Configure the Google Pub/Sub destination when you [set up a pipeline][9]. You can set up a pipeline in the [UI][1], using the [API][10], or with [Terraform][11]. The steps in this section are configured in the UI.
 
 After you select the Google Pub/Sub destination in the pipeline UI:
 
@@ -97,19 +97,19 @@ After you select the Google Pub/Sub destination in the pipeline UI:
 	- Or set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 	- Credentials are automatically managed if you're using [workload identity][7] on GKE.
 
-#### Optional settings
+### Optional settings
 
-##### Enable TLS
+#### Enable TLS
 
 {{% observability_pipelines/tls_settings %}}
 
-##### Buffering
+#### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
 {{< img src="observability_pipelines/destinations/google_pubsub_settings.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

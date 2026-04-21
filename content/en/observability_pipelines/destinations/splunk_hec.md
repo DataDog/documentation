@@ -15,39 +15,39 @@ Use Observability Pipelines' Splunk HTTP Event Collector (HEC) destination to se
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][5]. You can set up a pipeline in the [UI][1], using the [API][6], or with [Terraform][7]. The instructions in this section are configured in the UI.
-
-After you select the Splunk HEC destination in the pipeline UI:
+Configure the Splunk HEC destination when you [set up a pipeline][5]. You can set up a pipeline in the [UI][1], using the [API][6], or with [Terraform][7]. The steps in this section are configured in the UI.
 
 <div class="alert alert-danger">Observability Pipelines compresses logs with the gzip (level 6) algorithm.<br>Only enter the identifiers for the Splunk HEC token and endpoint. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your token. If you leave it blank, the [default](#secrets-defaults) is used.
-1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
+After you select the Splunk HEC destination in the pipeline UI:
 
-#### Optional settings
+1. Enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 
-##### Splunk index
+### Optional settings
+
+#### Splunk index
 
 Enter the name of the Splunk index you want your data in. This has to be an allowed index for your HEC. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 
-##### Auto-extract timestamp
+#### Auto-extract timestamp
 
 Select whether the timestamp should be auto-extracted. If set to `true`, Splunk extracts the timestamp from the message with the expected format of `yyyy-mm-dd hh:mm:ss`.
 
-##### Sourcetype override
+#### Sourcetype override
 
 Set the `sourcetype` to override Splunk's default value, which is `httpevent` for HEC data. See [template syntax][3] if you want to route logs to different source types based on specific fields in your logs.
 
-##### Encoding
+#### Encoding
 
 Select the **Encoding** in the dropdown menu (**JSON** or **Raw**).
 - If you selected **JSON**, optionally click **Add Field** to add keys of fields you want extracted as [indexed fields][4]. This indexes the specified fields when the Splunk HTTP Event Collector ingests the logs.
 
-##### Buffering
+#### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

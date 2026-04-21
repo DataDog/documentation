@@ -15,15 +15,15 @@ Use Observability Pipelines' OpenSearch destination to send logs to OpenSearch.
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The instructions in this section are configured in the UI.
-
-After you select the OpenSearch destination in the pipeline UI:
+Configure the OpenSearch destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The steps in this section are configured in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the OpenSearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your OpenSearch endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
-1. Enter the identifier for your OpenSearch username. If you leave it blank, the [default](#secrets-defaults) is used.
-1. Enter the identifier for your OpenSearch password. If you leave it blank, the [default](#secrets-defaults) is used.
+After you select the OpenSearch destination in the pipeline UI:
+
+1. Enter the identifier for your OpenSearch endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your OpenSearch username. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your OpenSearch password. If you leave it blank, the [default](#secret-defaults) is used.
 1. In the **Mode** dropdown menu, select **Bulk** or **Data streams**.
 	- **Bulk** mode
 		- Uses OpenSearch's [Bulk API][4] to send batched events directly into a standard index.
@@ -39,17 +39,17 @@ After you select the OpenSearch destination in the pipeline UI:
 			- In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
 			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production`.
 
-#### Optional settings
+### Optional settings
 
-##### OpenSearch index
+#### OpenSearch index
 
 Enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 
-##### Buffering
+#### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

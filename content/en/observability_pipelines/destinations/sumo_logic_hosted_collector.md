@@ -15,14 +15,14 @@ Use Observability Pipelines' Sumo Logic destination to send logs to your Sumo Lo
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The instructions in this section are configured in the UI.
+Configure the Sumo Logic destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
 After you select the Sumo Logic destination in the pipeline UI:
 
-- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
+- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
   - **Note**: Only enter the identifier for the Sumo Logic endpoint URL. Do **not** enter the actual value.
 
-#### Optional settings
+### Optional settings
 
 1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in `JSON`, `Logfmt`, or `Raw` text. If no decoding is selected, the decoding defaults to JSON.
 1. Enter a **source name** to override the default `name` value configured for your Sumo Logic collector's source.
@@ -30,11 +30,11 @@ After you select the Sumo Logic destination in the pipeline UI:
 1. Enter a **category name** to override the default `category` value configured for your Sumo Logic collector's source.
 1. Click **Add Header** to add any custom header fields and values.
 
-##### Buffering options
+#### Buffering options
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

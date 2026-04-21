@@ -17,26 +17,26 @@ Use Observability Pipelines' syslog destinations to send logs to rsyslog or sysl
 
 <div class="alert alert-danger">The rsyslog and syslog-ng destinations support the <a href="https://datatracker.ietf.org/doc/html/rfc5424">RFC5424</a> format. </div>
 
-Configure this destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The instructions in this section are configured in the UI.
+Configure the rsyslog or syslog-ng destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The steps in this section are configured in the UI.
 
 After you select the rsyslog or syslog-ng destination in the pipeline UI:
 
-- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
+- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 	- **Note**: Only enter the identifiers for the syslog endpoint URL and, if applicable, the key pass. Do **not** enter the actual values.
 
 See [Matching log fields to syslog fields](#matching-log-fields-to-syslog-fields) for information on how fields are matched.
 
-#### Optional settings
+### Optional settings
 
-##### Enable TLS
+#### Enable TLS
 
 {{% observability_pipelines/tls_settings %}}
 
-##### Wait time for TCP keepalive probes
+#### Wait time for TCP keepalive probes
 
 Enter the number of seconds to wait before sending TCP keepalive probes on an idle connection.
 
-##### Buffering
+#### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
@@ -55,7 +55,7 @@ The rsyslog and syslog-ng destinations match these log fields to the following s
 | log["host"]     | HOSTNAME     | `NIL`                      |
 | log["timestamp"]| TIMESTAMP    | Current UTC time.          |
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

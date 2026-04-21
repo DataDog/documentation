@@ -19,14 +19,14 @@ To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike dat
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The instructions in this section are configured in the UI.
-
-After you select the CrowdStrike NG-SIEM destination in the pipeline UI:
+Configure the CrowdStrike NG-SIEM destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the CrowdStrike NG-SIEM endpoint URL, token, and if applicable, the TLS pass key. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your CrowdStrike NG-SIEM endpoint URL. If you leave it blank, the [default](#secrets-defaults) is used.
-1. Enter the identifier for your CrowdStrike NG-SIEM token. If you leave it blank, the [default](#secrets-defaults) is used.
+After you select the CrowdStrike NG-SIEM destination in the pipeline UI:
+
+1. Enter the identifier for your CrowdStrike NG-SIEM endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your CrowdStrike NG-SIEM token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select **JSON** or **Raw** encoding in the dropdown menu.
 
 #### Optional settings
@@ -44,7 +44,7 @@ After you select the CrowdStrike NG-SIEM destination in the pipeline UI:
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

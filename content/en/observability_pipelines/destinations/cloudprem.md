@@ -20,9 +20,9 @@ Before configuring the destination, you need to deploy a BYOC Logs cluster. Lear
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The instructions in this section are configured in the UI.
+Configure the BYOC Logs destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
-#### Optional buffering
+### Optional buffering
 
 After you select the BYOC Logs destination in the pipeline UI, you can configure buffering.
 
@@ -30,7 +30,7 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 
 {{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="The BYOC Logs destination settings" style="width:35%;" >}}
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 

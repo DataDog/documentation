@@ -15,13 +15,13 @@ Use Observability Pipelines' Datadog Logs destination to send logs to Datadog Lo
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The instructions in this section are configured in the UI.
+Configure the Datadog Logs destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
-#### Optional settings
+### Optional settings
 
 After you select the Datadog Logs destination in the pipeline UI, you can configure these optional settings.
 
-##### Route logs to multiple Datadog organizations
+#### Route logs to multiple Datadog organizations
 
 You can route logs to multiple Datadog organizations. After routing has been set up, you can [view metrics for the component or specific organizations](#view-metrics-for-the-component-or-specific-organizations) to which you are routing logs.
 
@@ -40,7 +40,7 @@ Click **Route to Multiple Organizations** to set up routing to multiple Datadog 
 
 **Note**: If you don't set up routing to multiple Datadog organizations, logs are routed to the default Datadog organization, which is the organization that is tied to the API key when you install the Worker.
 
-##### Add an organization
+#### Add an organization
 
 <div class="alert alert-warning">Logs that do not match any of the organization filters are dropped. The <a href="#component-level-metrics">component metric</a> <code>Data dropped (intentional)</code> shows the number logs that do not match the filters and are dropped.</div>
 
@@ -52,11 +52,11 @@ Click **Route to Multiple Organizations** to set up routing to multiple Datadog 
 	- **Note**: Only enter the identifier for the API key. Do **not** enter the actual API key.
 1. Click **Save**.
 
-##### Buffering
+#### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Secrets defaults
+## Secret defaults
 
 **Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
 

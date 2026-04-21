@@ -18,19 +18,19 @@ Use Observability Pipelines' HTTP Client destination to send logs to an HTTP cli
 
 ## Set up destination
 
-Configure this destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The instructions in this section are configured in the UI.
-
-After you select the HTTP Client destination in the pipeline UI:
+Configure the HTTP Client destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the HTTP Client URI and, if applicable, username and password for basic authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your HTTP Client URI. If you leave it blank, the [default](#secrets-defaults) is used.
+After you select the HTTP Client destination in the pipeline UI:
+
+1. Enter the identifier for your HTTP Client URI. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your authorization strategy (**None**, **Basic**, or **Bearer**). If you selected:
 	- **Basic**:
-		- Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#secrets-defaults) is used.
-		- Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#secrets-defaults) is used.
+		- Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#secret-defaults) is used.
+		- Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#secret-defaults) is used.
 	- **Bearer**:
-		- Enter the identifier for your HTTP Client token. If you leave it blank, the [default](#secrets-defaults) is used.
+		- Enter the identifier for your HTTP Client token. If you leave it blank, the [default](#secret-defaults) is used.
 1. JSON is the only available encoder.
 
 ### Optional settings
@@ -49,7 +49,7 @@ Toggle the switch to **Enable Compression**. If enabled:
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Secrets defaults
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
