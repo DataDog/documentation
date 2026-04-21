@@ -98,7 +98,7 @@ CloudPrem compresses and indexes log data before storing it in object storage. T
 | Metric | Typical range |
 |--------|---------------|
 | **Compression ratio** | 3x to 5x (raw input to stored size) |
-| **Storage per TB/day ingested** | 200–350 GB/day on object storage |
+| **Storage per TB/day ingested** | 200-350 GB/day on object storage |
 
 To estimate your object storage requirements:
 
