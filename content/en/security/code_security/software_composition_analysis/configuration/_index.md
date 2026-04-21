@@ -28,4 +28,4 @@ sca:
 
 For more information on configuration locations, precedence, and merging, see [Code Security configuration file][1].
 
-[1]: /security/code_security/guides/configuration_file/
+[1]: /security/code_security/guides/configuration/

@@ -210,4 +210,4 @@ To customize SCA analysis — including excluding paths from scanning — see [S
 [24]: https://github.com/pypa/advisory-database
 [25]: https://github.com/cloudsecurityalliance/gsd-database
 [26]: https://github.com/DataDog/guarddog
-[27]: /security/code_security/guides/configuration_file/
+[27]: /security/code_security/guides/configuration/

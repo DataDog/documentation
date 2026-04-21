@@ -277,4 +277,4 @@ myBar = 2
 
 [6]: /security/code_security/static_analysis/static_analysis_rules
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
-[26]: /security/code_security/guides/configuration_file/
+[26]: /security/code_security/guides/configuration/

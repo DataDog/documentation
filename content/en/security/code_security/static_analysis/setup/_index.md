@@ -273,7 +273,7 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [22]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
 [24]: https://docs.datadoghq.com/account_management/teams/
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
-[26]: /security/code_security/guides/configuration_file/
+[26]: /security/code_security/guides/configuration/
 [27]: /security/code_security/static_analysis/configuration/
 [101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
