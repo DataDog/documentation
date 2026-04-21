@@ -5805,16 +5805,21 @@ menu:
       parent: tests
       identifier: tests_correlate_logs_and_tests
       weight: 14
+    - name: Validate Advanced Features
+      url: tests/validate_advanced_features/
+      parent: tests
+      identifier: tests_validate_advanced_features
+      weight: 15
     - name: Guides
       url: tests/guides/
       parent: tests
       identifier: tests_guides
-      weight: 15
+      weight: 16
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
       identifier: tests_troubleshooting
-      weight: 16
+      weight: 17
     - name: Code Coverage
       url: code_coverage/
       pre: ci
