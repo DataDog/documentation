@@ -215,7 +215,7 @@ allowedRegions:
     weight: 40
     domain: us2.ddog-gov.com
     exact_domains:
-      - "TODO.oncall.datadoghq.com"
+      - "navy.oncall.datadoghq.com"
 
 core_product:
   value_required: false

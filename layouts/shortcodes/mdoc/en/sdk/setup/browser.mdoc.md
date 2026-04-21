@@ -122,7 +122,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 ```
 
 {% /site-region %}
-{% site-region region="gov" %}
+{% site-region region="gov,gov2" %}
 
 ```javascript
 <script>
@@ -203,7 +203,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```
 
 {% /site-region %}
-{% site-region region="gov" %}
+{% site-region region="gov,gov2" %}
 
 ```javascript
 <script
