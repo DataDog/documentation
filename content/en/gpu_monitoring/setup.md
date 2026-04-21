@@ -556,7 +556,7 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
 [6]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [7]: /containers/docker/
 [8]: /agent/supported_platforms/linux/
-[9]: https://docs.datadoghq.com/getting_started/integrations/aws/
+[9]: /getting_started/integrations/aws/
 [10]: /getting_started/integrations/google_cloud/?tab=orglevel
 [11]:https://docs.datadoghq.com/getting_started/integrations/azure/?tab=createanappregistration
 [12]:https://docs.datadoghq.com/getting_started/integrations/oci/
