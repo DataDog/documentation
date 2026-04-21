@@ -50,6 +50,8 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
    - [Datadog Operator][9] (recommended): a Kubernetes [operator][10] that you can use to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
    - [Helm][11]
    - Manual installation. See [Manually install and configure the Datadog Agent with a DaemonSet][12]
+  
+<div class="alert alert-info">If you plan to implement APM with <a href="/containers/kubernetes/apm">Single Step Instrumentation (SSI)</a> in your Kubernetes environment, install the Datadog Agent in its own namespace. SSI does not instrument pods in the same namespace as the Datadog Agent.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -226,12 +228,14 @@ Datadog publishes container images to the Datadog Container Registry, Google Art
 
 {{% container-images-table %}}
 
-By default, the Helm chart and Datadog Operator pull images from Google Artifact Registry (`gcr.io/datadoghq`).
+By default, the Helm chart pulls images from Google Artifact Registry (`gcr.io/datadoghq`). The Datadog Operator chart is progressively migrating to the Datadog Container Registry (`registry.datadoghq.com`).
 
 <div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from another registry. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
+
+The Datadog Operator chart is migrating to `registry.datadoghq.com` for both the operator image and Agent images it manages. Previously, Agent images were pulled from site-specific registries (`gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, `asia.gcr.io/datadoghq`, or `datadoghq.azurecr.io`). To keep using the previous site-specific registries, set `registryMigrationMode: ""` in your Operator Helm `values.yaml`.
 
 To use a different container registry, modify `global.registry` in `datadog-agent.yaml`.
 

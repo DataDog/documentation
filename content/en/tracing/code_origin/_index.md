@@ -85,6 +85,14 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 
 {{% /tab %}}
 
+{{% tab "PHP" %}}
+
+| Tracing Library Version | Frameworks |
+|---|---|
+| 1.11.0+ | All supported web frameworks |
+
+{{% /tab %}}
+
 {{% /tabs %}}
 
 ### Enable Code Origin

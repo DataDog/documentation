@@ -151,7 +151,7 @@ The task definition files provided in the previous section are minimal. These fi
 For additional features:
 
 #### APM
-Consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm.json][23].
+Consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm-uds.json][23].
 
 #### Log Management
 Consult the [Log collection documentation][7] and the sample [datadog-agent-ecs-logs.json][24]

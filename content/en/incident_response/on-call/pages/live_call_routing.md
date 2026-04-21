@@ -4,24 +4,24 @@ aliases:
 - /service_management/on-call/triggering_pages/live_call_routing/
 - /incident_response/on-call/triggering_pages/live_call_routing/
 further_reading:
-- link: '/incident_response/On-Call/'
+- link: '/incident_response/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 ---
 
 <div class="alert alert-info">
-Live call routing is provisioned by Datadog. To enable it for your organization, contact your account manager or <a href="mailto:support@datadoghq.com">Datadog Support</a>. Include your use case and the country and country code where you need the number provisioned (for example, <code>+1</code>, United States).
+Live call routing is provisioned by Datadog. To enable it for your organization, contact <a href="mailto:support@datadoghq.com">Datadog Support</a>. Include your use case and the desired country code (for example, <code>+33</code> for France).
 </div>
 
 
 ## Overview
 
-Live call routing connects phone calls to your On-Call team. When someone calls your dedicated number, the system handles the call according to your configuration. 
+Live call routing connects phone calls to your On-Call Team. When someone calls your dedicated number, the system handles the call according to your configuration. 
 
 Datadog On-Call supports two routing types:
 
-- **Direct call routing**: Connects the caller to an active responder, following the escalation policy for the On-Call team. Enables real-time coordination during critical incidents.
-- **Voicemail routing**: Prompts the caller to leave a voicemail, then converts the voice message to a page for the On-Call team. Useful for non-technical callers or third-party vendors who need to report issues without a live conversation.
+- **Direct call routing**: Connects the caller to an active responder, following the escalation policy for the On-Call Team. Enables real-time coordination during critical incidents.
+- **Voicemail routing**: Prompts the caller to leave a voicemail, then converts the voice message to a Page for the On-Call Team. Useful for non-technical callers or third-party vendors who need to report issues without a live conversation.
 
 ## Configuration
 
@@ -32,14 +32,14 @@ Each live call route includes:
 - **Name**: A descriptive label, such as "Production Incidents" or "Security Escalations."
 - **Phone Number**: The dedicated number provisioned by Datadog for this route.
 - **Region Code**: The geographic region for the phone number (for example, `US` for the United States).
-- **Active Status**: Whether the route is currently accepting calls.
+- **Active Status**: Whether the route is accepting calls.
 - **Routing Type**: How calls are handled (see [Routing types](#routing-types)).
 
 ### Keypad options
 
 Keypad options offer callers a menu when they dial your routing number. 
 
-You can configure up to nine options per route. Each option maps a key (1-9) to an On-Call team and triggers that team's paging process. To improve usability:
+You can configure up to nine options per route. Each option maps a key (1-9) to an On-Call Team and triggers that team's paging process. To improve usability:
 - Use option 1 for the most critical team or escalation path.
 - Group related teams under adjacent keys.
 - Keep menu prompts concise and clear.
@@ -50,7 +50,7 @@ Datadog On-Call supports two routing types: direct call routing and voicemail ro
 
 ### Direct call routing
 
-In direct call routing, the system follows the On-Call team's escalation policy to connect the caller to the first available responder.
+In direct call routing, the system follows the On-Call Team's escalation policy to connect the caller to the first available responder.
 
 Responders must have valid phone numbers in their profiles; On-Call skips any responders that don't.
 
@@ -81,32 +81,46 @@ For direct call routing, escalation proceeds as follows:
 
 ### Voicemail routing 
 
-In voicemail routing, callers are prompted to leave a message. The message is transcribed and sent as a page to the On-Call team.
+In voicemail routing, callers are prompted to leave a message. The message is transcribed and sent as a Page to the On-Call Team.
 
 #### Best practices
 
-- Confirm team members have notification preferences configured to receive pages.
+- Confirm team members have notification preferences configured to receive Pages.
 - Test your routing setup regularly:
   - Test each keypad option to verify it routes to the correct team.
   - Confirm that voicemail recordings are properly captured and transcribed.
-  - Verify that pages are created and sent to the correct team members.
+  - Verify that Pages are created and sent to the correct team members.
 
 ## Troubleshooting
 
 ### Route issues
 
 If your route isn't accepting calls:
-- Ensure the route is active.
-- Confirm provisioning is complete.
-- Verify the phone number is correctly configured.
+- Confirm the route is set to active.
+- Confirm that provisioning is complete. If provisioning is still in progress, contact [Datadog Support][1].
+- Verify the phone number is correctly configured for this route.
 
 ### Keypad problems
 
-- Ensure keypad options are linked to a valid On-Call team, and test each option individually. 
-- Verify that your phone system supports DTMF (touch-tone) input.
+If a keypad option is not routing calls correctly:
+- Confirm each keypad option is linked to a valid On-Call team.
+- Test each option individually by dialing the route and pressing the corresponding key.
+- Verify that your phone system supports DTMF (touch-tone) input, as some VoIP systems disable it by default.
 
-### Voicemail and page issues
+### Direct call routing: calls not connecting or no Page created
 
-If voicemail isn't converting to pages:
-- For **direct call routing**: If calls fall back to voicemail or fail to page, confirm that the On-Call team is properly configured and that team members have valid notification preferences in place.
-- For **voicemail routing**: Confirm that your routing type is set to voicemail, the On-Call team is properly configured, and team members have valid notification preferences configured to receive pages.
+If calls are not reaching a responder or no Page is created:
+- Confirm that the On-Call Team has an active escalation policy with at least one escalation level defined.
+- Verify that all responders in the escalation policy have a valid phone number in their profile. On-Call skips responders without a phone number.
+- Check that each responder's phone number is reachable and not blocked or forwarded to an unavailable destination.
+- Confirm that each team member has notification preferences configured to receive Pages.
+
+### Voicemail routing: voicemail not converting to a Page
+
+If a voicemail is left but no Page is created:
+- Confirm the route's routing type is set to **Voicemail routing**, not **Direct call routing**.
+- Verify the On-Call Team assigned to the route has an active escalation policy.
+- Confirm that team members have notification preferences configured to receive Pages.
+- Check that the voicemail recording completed successfully. Callers who hang up before the beep may not leave a recording that the system can process.
+
+[1]: /help/

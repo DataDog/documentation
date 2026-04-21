@@ -1,4 +1,5 @@
 ---
+id: rbac
 title: Role-Based Access Control (RBAC)
 ---
 RBAC permet de contrôler l'accès en lecture et en écriture aux ressources du compte en fonction des rôles dotés dʼautorisations et attribués aux utilisateurs. 

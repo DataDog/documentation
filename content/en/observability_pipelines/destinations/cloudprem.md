@@ -1,5 +1,5 @@
 ---
-title: Datadog CloudPrem Destination
+title: Datadog BYOC Logs Destination
 disable_toc: false
 products:
 - name: Logs
@@ -9,16 +9,16 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' CloudPrem destination to send logs to Datadog CloudPrem.
+Use Observability Pipelines' Bring Your Own Cloud (BYOC) Logs destination to send logs to Datadog BYOC Logs.
 
 
 ## Prerequisites
 
-Before configuring the destination, you need to deploy a CloudPrem cluster. Learn how to install it in the [CloudPrem installation section][3].
+Before configuring the destination, you need to deploy a BYOC Logs cluster. Learn how to install it in the [BYOC Logs installation section][3].
 
 ## Setup
 
-Set up the CloudPrem destination and its environment variables when you [set up a pipeline][1].
+Set up the BYOC Logs destination and its environment variables when you [set up a pipeline][1].
 
 ### Set up the destination
 
@@ -26,7 +26,7 @@ Set up the CloudPrem destination and its environment variables when you [set up 
 
 {{% observability_pipelines/destination_buffer %}}
 
-{{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="The CloudPrem destination settings" style="width:35%;" >}}
+{{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="The BYOC Logs destination settings" style="width:35%;" >}}
 
 ### Set secrets
 
@@ -35,7 +35,7 @@ Set up the CloudPrem destination and its environment variables when you [set up 
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-- CloudPrem endpoint URL identifier:
+- BYOC Logs endpoint URL identifier:
 	- References the intake endpoint to which Observability Pipelines sends logs. 
 	- In your secrets manager:
 		- Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
@@ -46,10 +46,10 @@ Set up the CloudPrem destination and its environment variables when you [set up 
 
 {{% tab "Environment Variables" %}}
 
-{{< img src="observability_pipelines/destinations/cloudprem_env_vars.png" alt="The install page showing the CloudPrem environment variable field" style="width:75%;" >}}
+{{< img src="observability_pipelines/destinations/cloudprem_env_vars.png" alt="The install page showing the BYOC Logs environment variable field" style="width:75%;" >}}
 
 - CloudPrem endpoint URL
-	- Observability Pipelines sends logs to the CloudPrem intake endpoint. Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
+	- Observability Pipelines sends logs to the BYOC Logs intake endpoint. Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
 	- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
   - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
 
@@ -62,9 +62,9 @@ Set up the CloudPrem destination and its environment variables when you [set up 
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 1,000          | 4,250,000       | 5                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 1,000          | 4.25              | 5                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

@@ -133,12 +133,12 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: EBS Volume
       recommendation_type: Downsize EBS Volume Provisioned Throughput
-      recommendation_description: An EBS volume using less than 80% of the provisioned throughput for reads and writes.
+      recommendation_description: An EBS volume using less than the configured threshold of the provisioned throughput for reads and writes.
       recommendation_prerequisites: '[Amazon EC2 integration](/integrations/amazon_ec2/)'
     - category: Downsize
       cloud_provider: AWS
       resource_type: EBS Volume
-      recommendation_type: Downsize EBS volume storage capacity
+      recommendation_type: Downsize EBS Volume Storage Capacity
       recommendation_description: An EBS volume with less than 20% of its storage capacity used.
       recommendation_prerequisites: '[Amazon EC2 integration](/integrations/amazon_ec2/)'
     - category: Migrate
@@ -205,13 +205,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: ECR Repository
       recommendation_type: Delete ECR Repository
-      recommendation_description: ECR Repository with 0 image pulls.
-      recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: AWS
-      resource_type: ECR Repository
-      recommendation_type: Delete old ECR Images
-      recommendation_description: ECR Image bytes older than 180 days.
+      recommendation_description: ECR repository with no pull activity that can be deleted to reduce costs.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
@@ -229,7 +223,19 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: ElastiCache Cluster
       recommendation_type: Terminate ElastiCache Cluster
-      recommendation_description: ElastiCache Redis Cluster with 0 cache hits and 0 replication bytes.
+      recommendation_description: An ElastiCache Redis cluster with no cache hits and no replication or a Memcached cluster with no cache hits.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: OpenSearch Domain
+      recommendation_type: Delete OpenSearch Domain
+      recommendation_description: OpenSearch domain with no request activity.
+      recommendation_prerequisites: ""
+    - category: Purchase
+      cloud_provider: AWS
+      resource_type: OpenSearch Domain
+      recommendation_type: Purchase Reserved OpenSearch Instance
+      recommendation_description: OpenSearch domain eligible for Reserved Instance purchase.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
@@ -239,13 +245,13 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
-      resource_type: Application Load Balancer
+      resource_type: Load Balancer
       recommendation_type: Terminate Application Load Balancer
       recommendation_description: An application load balancer with no traffic being processed.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
-      resource_type: Network Load Balancer
+      resource_type: Load Balancer
       recommendation_type: Terminate Network Load Balancer
       recommendation_description: A network load balancer with 0 processed bytes.
       recommendation_prerequisites: ""
@@ -257,27 +263,21 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
-      resource_type: CloudWatch Logs
+      resource_type: CloudWatch Log Group
       recommendation_type: Delete Lambda CloudWatch Logs and write permissions
       recommendation_description: Remove write permissions for Lambda CloudWatch Logs to prevent further unnecessary logging.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: AWS
+      resource_type: CloudWatch Log Group
+      recommendation_type: Set CloudWatch Logs Retention Policy
+      recommendation_description: Reduce CloudWatch Logs storage costs by setting appropriate retention policies.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: MQ Broker
       recommendation_type: Terminate MQ Broker
       recommendation_description: An MQ broker with 0 connections.
-      recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: AWS
-      resource_type: OpenSearch
-      recommendation_type: Delete OpenSearch Domain
-      recommendation_description: An OpenSearch domain with 0 connections.
-      recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: AWS
-      resource_type: OpenSearch Domain
-      recommendation_type: Purchase Reserved OpenSearch Instance
-      recommendation_description: An OpenSearch instance older than 45 days is still charged with on-demand rates.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
@@ -288,14 +288,14 @@ multifiltersearch:
     - category: Migrate
       cloud_provider: AWS
       resource_type: RDS Instance
-      recommendation_type: Migrate RDS Instance to Graviton
-      recommendation_description: RDS Instances that can be migrated to an equivalent Graviton instance type.
+      recommendation_type: Migrate RDS Instance Engine
+      recommendation_description: An RDS running an engine version that is no longer supported and incurring [extended support charges](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support-charges.html).
       recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: AWS
       resource_type: RDS Instance
-      recommendation_type: Migrate the RDS Instance Engine
-      recommendation_description: An RDS running an engine version that is no longer supported and incurring [extended support charges](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support-charges.html)
+      recommendation_type: Migrate RDS Instance to Graviton
+      recommendation_description: RDS Instances that can be migrated to an equivalent Graviton instance type.
       recommendation_prerequisites: ""
     - category: Purchase
       cloud_provider: AWS
@@ -311,21 +311,27 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Purchase
       cloud_provider: AWS
-      resource_type: Redshift
+      resource_type: Redshift Cluster
       recommendation_type: Purchase Reserved Redshift Cluster Node
       recommendation_description: Redshift cluster node older than 45 days is still charged with on-demand rates.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
-      resource_type: Redshift
+      resource_type: Redshift Cluster
       recommendation_type: Terminate Redshift Cluster
       recommendation_description: Redshift cluster with 0 database connections.
       recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: AWS
+      resource_type: S3 Bucket
+      recommendation_type: Clean up old versions to reduce storage costs
+      recommendation_description: A bucket with versioning enabled has significant storage costs from old object versions.
+      recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
     - category: Terminate
       cloud_provider: AWS
       resource_type: S3 Bucket
-      recommendation_type: Delete S3 non-current version objects
-      recommendation_description: A standard S3 bucket without a non-current version expiration lifecycle and that does not serve a website contains non-current version storage bytes older than 30 days.
+      recommendation_type: Delete S3 noncurrent version objects
+      recommendation_description: A standard S3 bucket without a noncurrent version expiration lifecycle and that does not serve a website contains noncurrent version storage bytes older than 30 days.
       recommendation_prerequisites: '[Storage Lens](/integrations/amazon_s3_storage_lens/)'
     - category: Terminate
       cloud_provider: AWS
@@ -333,6 +339,18 @@ multifiltersearch:
       recommendation_type: Delete abandoned S3 multipart uploads
       recommendation_description: S3 buckets with incomplete multipart uploads older than 7 days that are consuming storage space.
       recommendation_prerequisites: '[Storage Lens](/integrations/amazon_s3_storage_lens/)'
+    - category: Migrate
+      cloud_provider: AWS
+      resource_type: S3 Bucket
+      recommendation_type: Reduce small file count to reduce storage costs
+      recommendation_description: A bucket has a significant percentage of small files in infrequent access storage classes, increasing storage costs due to minimum billing size.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: S3 Bucket
+      recommendation_type: Terminate S3 Bucket
+      recommendation_description: An S3 bucket with minimal storage costs and no GET or PUT requests.
+      recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: AWS
       resource_type: S3 Bucket
@@ -345,21 +363,27 @@ multifiltersearch:
       recommendation_type: Transition S3 Standard objects to Intelligent Tiering
       recommendation_description: A bucket's costs are almost entirely in per-GB standard storage, but GET requests indicate few objects are accessed.
       recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: AWS
+      resource_type: S3 Bucket
+      recommendation_type: Transition S3 objects to Infrequent Access by Prefix
+      recommendation_description: A bucket prefix's costs are almost entirely in per-GB standard storage, but GET requests indicate few objects in the prefix are accessed.
+      recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
     - category: Downsize
       cloud_provider: AWS
-      resource_type: NAT Gateway
+      resource_type: VPC NAT Gateway
       recommendation_type: Reduce NAT Gateway Cross-Zone Transfers
       recommendation_description: Resources that need a NAT gateway should use one that is in the same availability zone, or they can incur unnecessary cross-zone transfer charges.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
       resource_type: VPC NAT Gateway
-      recommendation_type: Reduce NAT Within-VPC Transfers
+      recommendation_type: Reduce NAT Gateway Within-VPC Transfers
       recommendation_description: Resources in the same VPC should avoid communicating with each other through a NAT gateway because that incurs unnecessary NAT gateway processing charges.
       recommendation_prerequisites: '[NPM](/network_monitoring/performance/setup/)'
     - category: Terminate
       cloud_provider: AWS
-      resource_type: NAT Gateway
+      resource_type: VPC NAT Gateway
       recommendation_type: Terminate NAT Gateway
       recommendation_description: A NAT Gateway that has no bytes sent through it.
       recommendation_prerequisites: ""
@@ -403,13 +427,13 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Managed Disk
       recommendation_type: Downsize Managed Disk IOPS
-      recommendation_description: Managed disk using less than 80% of the provisioned IOPS.
+      recommendation_description: Managed disk using less than the configured threshold of provisioned IOPS.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
       resource_type: Managed Disk
       recommendation_type: Downsize Managed Disk Throughput
-      recommendation_description: Managed disk using less than 80% of the provisioned throughput.
+      recommendation_description: Managed disk using less than the configured threshold of provisioned throughput.
       recommendation_prerequisites: ""
     - category: Purchase
       cloud_provider: Azure
@@ -471,6 +495,42 @@ multifiltersearch:
       recommendation_type: Terminate Azure VM Instance
       recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Downsize
+      cloud_provider: AWS
+      resource_type: Databricks Cluster
+      recommendation_type: Downsize Databricks All-Purpose
+      recommendation_description: Identifies overprovisioned all-purpose Databricks clusters and suggests rightsizing to smaller instance types to reduce costs.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: Databricks Cluster
+      recommendation_type: Downsize Databricks All-Purpose
+      recommendation_description: Identifies overprovisioned all-purpose Databricks clusters and suggests rightsizing to smaller instance types to reduce costs.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: GCP
+      resource_type: Databricks Cluster
+      recommendation_type: Downsize Databricks All-Purpose
+      recommendation_description: Identifies overprovisioned all-purpose Databricks clusters and suggests rightsizing to smaller instance types to reduce costs.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: AWS
+      resource_type: Databricks Cluster
+      recommendation_type: Downsize Databricks Job
+      recommendation_description: Identifies overprovisioned Databricks jobs and suggests rightsizing to smaller instance types to reduce costs.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: Databricks Cluster
+      recommendation_type: Downsize Databricks Job
+      recommendation_description: Identifies overprovisioned Databricks jobs and suggests rightsizing to smaller instance types to reduce costs.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: GCP
+      resource_type: Databricks Cluster
+      recommendation_type: Downsize Databricks Job
+      recommendation_description: Identifies overprovisioned Databricks jobs and suggests rightsizing to smaller instance types to reduce costs.
+      recommendation_prerequisites: ""
     - category: Purchase
       cloud_provider: GCP
       resource_type: Cloud Run Job
@@ -540,8 +600,8 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: GCP
       resource_type: Storage Bucket
-      recommendation_type: Delete Non-Current Cloud Storage Objects
-      recommendation_description: Cloud Storage buckets that benefit from lifecycle rules to automatically delete non-current object versions.
+      recommendation_type: Delete Noncurrent Cloud Storage Objects
+      recommendation_description: Cloud Storage buckets that benefit from lifecycle rules to automatically delete noncurrent object versions.
       recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: GCP
@@ -638,6 +698,22 @@ For each cloud account that you would like to receive recommendations for:
 1. Install the [Datadog Agent][5] (required for Downsize recommendations).
 
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
+
+## Recommendation statuses
+
+Assign a status to each recommendation to track cost optimization progress across your teams. Statuses persist when recommendations regenerate daily. You don't need to re-triage the same recommendations.
+
+| Status | Description |
+|--------|-------------|
+| Open | (Default) The recommendation has not been triaged. |
+| In Progress | Work is underway to address this recommendation. |
+| Completed | The recommended action has been taken or is no longer relevant. |
+| Dismissed | No work is planned for this recommendation over the time frame specified when dismissing. |
+
+### Change a recommendation status
+
+1. Click a recommendation in the [**Cloud Cost Recommendations**][1] list to open the side panel.
+1. Use the status dropdown to select a new status.
 
 ## Recommendation action-taking
 You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:

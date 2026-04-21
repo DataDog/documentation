@@ -73,7 +73,7 @@ Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then cli
 7. Follow step 5 of the [Snowflake integration][103] page to configure the key-value pair authentication.
 8. Click **Save**.
 
-Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Snowflake cost data from the past 6 months is available in Cloud Cost Management within 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 **Snowflake query tags**
 

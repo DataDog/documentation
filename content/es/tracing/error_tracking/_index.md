@@ -22,7 +22,7 @@ title: Seguimiento de errores para servicios de backend
 
 ## Información general
 
-{{< img src="error_tracking/error-tracking-overview-2.png" alt="Información detallada de un problema en el Explorador de seguimiento de errores" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="Información detallada de un problema en el Explorador de seguimiento de errores" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
@@ -32,7 +32,7 @@ Error Tracking está disponible para todos los lenguajes compatibles con APM. No
 
 Opcionalmente, para ver fragmentos de código en trazas (traces) de stack tecnológico, configura la [integración de GitHub][4].
 
-{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="Un fragmento de código en línea en una traza de stack tecnológico," style="width:70%;" >}}
+{{< img src="tracing/error_tracking/inline_code_snippet_2.png" alt="Un fragmento de código en línea en una traza de stack tecnológico," style="width:70%;" >}}
 
 Para empezar a configurar tu repositorio, consulta la [documentación sobre la integración del código fuente][6].
 

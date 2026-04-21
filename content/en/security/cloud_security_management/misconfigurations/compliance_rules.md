@@ -39,11 +39,12 @@ To filter the default compliance rules by cloud provider:
 
 1. Navigate to the [**Misconfiguration Rules**][13] page.
 2. Choose one of the following values from the **Tag** facet.
-    - **AWS**: cloud_provider:aws
-    - **Azure**: cloud_provider:azure
-    - **Google Cloud**: cloud_provider:gcp
-    - **Docker**: framework:cis-docker
-    - **Kubernetes**: framework:cis-kubernetes
+    - **AWS**: `cloud_provider:aws`
+    - **Azure**: `cloud_provider:azure`
+    - **Google Cloud**: `cloud_provider:gcp`
+    - **OCI**: `cloud_provider:oci`
+    - **Docker**: `framework:cis-docker`
+    - **Kubernetes**: `framework:cis-kubernetes`
 
 ## Customize how your environment is scanned by each rule
 
@@ -71,8 +72,8 @@ The rule deprecation process is as follows:
     - Signal side panel's **Rule Details > Playbook** section
     - Misconfigurations side panel
     - [Rule editor][23] for that specific rule
-2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][23] in the UI.
-3. Once the rule is deleted, you can no longer clone and re-enable it.
+2. After the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][23] in the UI.
+3. After the rule is deleted, you can no longer clone and re-enable it.
 
 ## Further Reading
 

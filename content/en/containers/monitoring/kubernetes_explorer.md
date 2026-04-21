@@ -395,12 +395,8 @@ Some resources have specific tags that are extracted based on your cluster's env
 The following workload resources are enriched with resource utilization metrics:
 
 - Clusters
-- Daemonsets
-- Deployments
 - Nodes
 - Pods
-- Replica Sets
-- Stateful Sets
 
 These metrics are calculated at the time of collection, based on the average values over the last 15 minutes. You can filter by metric values like so: `metric#<metric_name><comparator><numeric_value>`.
 
@@ -408,7 +404,7 @@ These metrics are calculated at the time of collection, based on the average val
 - `comparator` is a supported [comparator](#comparator)
 - and `numeric_value` is a floating point value.
 
-For these workload resources, the following metric names are available:
+For Pods, the following metric names are available:
 
 | CPU | Memory |
 |---|---|

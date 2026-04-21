@@ -1,4 +1,5 @@
 ---
+id: standard_deviation
 title: standard deviation
 core_product:
   - dashboards

@@ -73,7 +73,7 @@ curl -X POST "http://localhost:7280/api/v2/logs" \
 ## Step 4: Explore logs
 
 1. Go to the [Datadog Log Explorer][5].
-2. On the left facet panel, select the checkbox for your index under **CLOUDPREM INDEXES**.
+2. On the left facet panel, select the checkbox for your index under {{< ui >}}CLOUDPREM INDEXES{{< /ui >}}.
 3. You should see your "Hello world from CloudPrem" log entry.
 
 {{< img src="/cloudprem/quickstart/cloudprem_indexes.png" alt="The CloudPrem index selection in the Datadog Log Explorer" style="width:100%;" >}}

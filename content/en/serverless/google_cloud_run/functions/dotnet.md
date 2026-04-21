@@ -82,6 +82,8 @@ logger.LogInformation("Hello World!");
 
 {{% serverless-init-env-vars-sidecar language="csharp" function="true" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" %}}

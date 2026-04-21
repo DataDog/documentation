@@ -4,6 +4,12 @@ aliases:
   - /infrastructure/cloud_cost_management
   - /integrations/cloudability
 further_reading:
+  - link: "/monitors/types/cloud_cost/"
+    tag: "Documentation"
+    text: "Create a Cloud Cost monitor"
+  - link: "/cloud_cost_management/tags/"
+    tag: "Documentation"
+    text: "Learn about Tags in Cloud Cost Management"
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
@@ -19,12 +25,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
     tag: "Blog"
     text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
-  - link: "/monitors/types/cloud_cost/"
-    tag: "Documentation"
-    text: "Create a Cloud Cost monitor"
-  - link: "/cloud_cost_management/tags/"
-    tag: "Documentation"
-    text: "Learn about Tags in Cloud Cost Management"
   - link: "https://www.datadoghq.com/blog/cloud-costs-study-learnings/"
     tag: "Blog"
     text: "Key learnings from the State of Cloud Costs study"
@@ -139,4 +139,4 @@ Use this page to troubleshoot data delays or confirm that recent tag pipelines a
 [6]: /account_management/rbac/data_access/
 [7]: https://www.datadoghq.com/product-preview/data-access-control/
 [8]: /cloud_cost_management/datadog_costs
-[9]: /cloud_cost_management/permissions
+[9]: /cloud_cost_management/setup/permissions

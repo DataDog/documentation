@@ -48,6 +48,26 @@ The following table lists minimum tracing library versions required for adaptive
 | C++/Proxies | [v0.2.2][14]             |
 | PHP         | [v1.4.0][17]             |
 
+## Limitations
+
+Limits apply to service and environment combinations depending on the sampling configuration:
+
+#### Adaptive sampling
+
+- The maximum number of `service/env` combinations onboarded to adaptive sampling is 800.
+- Each unique `service/env` pair configured for adaptive sampling counts toward this limit.
+
+#### Remote sampling configuration
+
+- The maximum number of `service/env` combinations using remote sampling configuration is **1000**.
+- This limit applies regardless of how many sampling rules are defined for each service.
+- Each unique `service/env` pair with remote sampling enabled counts once toward this limit.
+
+#### Services using both adaptive and remote sampling
+
+- If a `service/env` combination uses both adaptive sampling and remote sampling configuration, it counts once toward each respective limit (once toward the 800 adaptive sampling limit and once toward the 1000 remote sampling limit).
+- It does **not** count twice within either individual limit.
+
 ## Configure the adaptive sampling target
 
 To get started with adaptive sampling, you first need to pick a target strategy setting:

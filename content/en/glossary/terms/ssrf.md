@@ -1,4 +1,5 @@
 ---
+id: ssrf
 title: server-side request forgery (SSRF)
 core_product:
   - security
