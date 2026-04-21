@@ -10,9 +10,12 @@
   scrollbar-width: none;
   padding: var(--space-md) var(--space-md) var(--space-md) 0;
   /* box-shadow extends the rail color past the element's left edge so it
-     reaches the viewport edge without adding horizontal overflow. */
-  background: var(--color-surface-rail);
-  box-shadow: -100vw 0 0 100vw var(--color-surface-rail);
+     reaches the viewport edge without adding horizontal overflow.
+     clip-path trims the shadow's vertical overspill so it can't paint over
+     the footer (box-shadow spread inflates equally on all sides). */
+  background: var(--color-gray-lightest);
+  box-shadow: -100vw 0 0 100vw var(--color-gray-lightest);
+  clip-path: inset(0 -100vw);
 }
 
 .nav::-webkit-scrollbar {

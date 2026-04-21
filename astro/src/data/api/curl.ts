@@ -20,6 +20,8 @@ export interface GenerateCurlOptions {
   path: string;
   /** Datadog site domain, e.g. 'datadoghq.com' */
   site?: string;
+  /** Subdomain of the API host, e.g. 'api'. Defaults to 'api'. */
+  subdomain?: string;
   pathParams?: CurlParam[];
   queryParams?: CurlParam[];
   /** Prettified JSON string for the request body */
@@ -115,6 +117,7 @@ export function generateCurl(options: GenerateCurlOptions): string {
     method,
     path,
     site = 'datadoghq.com',
+    subdomain = 'api',
     pathParams,
     queryParams,
     requestBodyJson,
@@ -124,7 +127,7 @@ export function generateCurl(options: GenerateCurlOptions): string {
   const auth = getAuthHeaders(security);
   const interpolatedPath = interpolatePath(path, pathParams);
   const queryString = buildQueryString(queryParams);
-  const url = `https://api.${site}${interpolatedPath}${queryString}`;
+  const url = `https://${subdomain}.${site}${interpolatedPath}${queryString}`;
 
   const lines: string[] = [];
 

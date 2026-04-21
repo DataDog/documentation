@@ -8,7 +8,10 @@ import { RequestBodyTabs } from '../RequestBodyTabs/RequestBodyTabs';
 import type { SchemaField } from '../SchemaTable/SchemaTable';
 import type { ResponseData } from '../ApiResponse/ApiResponse';
 import type { CodeExampleSet } from '../ApiCodeExample/ApiCodeExample';
+import { getDefaultRegions } from '../../data/api/regions';
 import styles from './ApiEndpoint.module.css';
+
+const allRegions = getDefaultRegions();
 
 interface EndpointData {
   operationId: string;
@@ -75,7 +78,14 @@ const hasParams = ep && (
     </h2>
     <div class={`api-endpoint__url-line ${styles.urlLine}`}>
       <HttpMethodBadge method={ep.method} />
-      <code class={`api-endpoint__path ${styles.path}`}>{ep.regionUrls?.['us1'] ?? ep.regionUrls?.[Object.keys(ep.regionUrls ?? {})[0]] ?? ep.path}</code>
+      {allRegions.map((region) => {
+        const url = ep.regionUrls?.[region.key];
+        return url ? (
+          <code class={`api-endpoint__path ${styles.path}`} data-region={region.key}>{url}</code>
+        ) : (
+          <code class={`api-endpoint__path api-endpoint__path--unsupported ${styles.path} ${styles.pathUnsupported}`} data-region={region.key}>Not supported in the {region.label} region</code>
+        );
+      })}
     </div>
 
     {/* Description — rendered as slot content from Markdoc */}

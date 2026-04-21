@@ -69,7 +69,6 @@
   --color-surface-header-text: #000;
   --color-surface-alt: #fdfcff;
   --color-surface-bg: #fdfcff;
-  --color-surface-rail: #f8f8f8;
 
   /* Colors — Named (badge/indicator pairs) */
   --color-teal: #26759c;
@@ -82,6 +81,7 @@
   --color-amber-tint: #fff0d4;
   --color-crimson: #b72a3a;
   --color-crimson-tint: #fbd6db;
+  --color-gray-lightest: #f6f6f6;
 
   /* Colors — Semantic */
   --color-blue: #1a73e8;
@@ -283,7 +283,6 @@
   --color-surface-header-text: #e0e0e0;
   --color-surface-alt: #1e1a30;
   --color-surface-bg: #1e1a30;
-  --color-surface-rail: #242438;
 
   /* Colors — Named (badge/indicator pairs) */
   --color-teal: #5baed4;
@@ -296,6 +295,7 @@
   --color-amber-tint: rgba(212, 168, 79, 0.15);
   --color-crimson: #e86070;
   --color-crimson-tint: rgba(232, 96, 112, 0.15);
+  --color-gray-lightest: #242438;
 
   /* Colors — Semantic */
   --color-blue: #5b9cf5;
@@ -383,7 +383,6 @@
   --color-surface-header-text: #3c2415;
   --color-surface-alt: #f0dfc0;
   --color-surface-bg: #f0dfc0;
-  --color-surface-rail: #ebd9b2;
 
   /* Colors — Named (badge pairs) */
   --color-teal: #5a7a6a;
@@ -396,6 +395,7 @@
   --color-amber-tint: rgba(139, 105, 20, 0.15);
   --color-crimson: #8b3020;
   --color-crimson-tint: rgba(139, 48, 32, 0.15);
+  --color-gray-lightest: #ebd9b2;
 
   /* Colors — Semantic */
   --color-blue: #4a6a8a;
@@ -474,7 +474,6 @@
   --color-surface-header-text: #d4c4a0;
   --color-surface-alt: #241a10;
   --color-surface-bg: #241a10;
-  --color-surface-rail: #362818;
 
   /* Colors — Named (badge pairs) */
   --color-teal: #6aaa8a;
@@ -487,6 +486,7 @@
   --color-amber-tint: rgba(212, 168, 79, 0.15);
   --color-crimson: #c47050;
   --color-crimson-tint: rgba(196, 112, 80, 0.15);
+  --color-gray-lightest: #362818;
 
   /* Colors — Semantic */
   --color-blue: #7a9aba;

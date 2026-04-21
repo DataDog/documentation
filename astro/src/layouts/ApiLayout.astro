@@ -4,7 +4,6 @@ import ApiSideNav from '../components/ApiSideNav/ApiSideNav.astro';
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs.astro';
 import type { BreadcrumbItem } from '../components/Breadcrumbs/Breadcrumbs.astro';
 import { RegionSelector } from '../components/RegionSelector/RegionSelector';
-import { getDefaultRegions } from '../data/api/regions';
 import type { ApiCategory } from '../data/api/index';
 
 interface Props {
@@ -15,7 +14,6 @@ interface Props {
 }
 
 const { title, categories, currentSlug, breadcrumbs } = Astro.props;
-const regions = getDefaultRegions();
 ---
 
 <BaseLayout title={title}>
@@ -24,7 +22,7 @@ const regions = getDefaultRegions();
     <main class="api-main">
       <div class="api-toolbar">
         {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
-        <RegionSelector client:load regions={regions} />
+        <RegionSelector client:load />
       </div>
       <div class="prose">
         <slot />
@@ -60,6 +58,17 @@ const regions = getDefaultRegions();
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--space-md);
+    position: sticky;
+    top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
+    z-index: 5;
+    background: var(--color-bg);
+    padding: var(--space-sm) 0;
+  }
+
+  @media (min-width: 992px) {
+    .api-toolbar {
+      top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop) - var(--hugo-header-shrink));
+    }
   }
 
   @media (max-width: 768px) {

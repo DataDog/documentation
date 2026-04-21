@@ -1,81 +1,77 @@
 /**
  * Region data extraction from OpenAPI spec server definitions.
  *
- * The spec's `servers` block defines URL templates with a `site` variable
- * whose enum lists all supported Datadog sites (regions).
+ * Each operation in the spec may define `servers[0].variables.site.enum` —
+ * the list of Datadog sites that operation is available on. We intersect
+ * that enum with the `allowedRegions` list from the Hugo config snapshot so
+ * endpoints that aren't available on a given region surface a "Not supported"
+ * message in the UI.
  */
+
+import { getAllowedRegions } from './regionConfig';
 
 export interface Region {
-  key: string;   // e.g. 'us1', 'eu', 'ap1'
-  label: string; // e.g. 'US1', 'EU', 'AP1'
-  site: string;  // e.g. 'datadoghq.com', 'datadoghq.eu'
+  /** Region key, e.g. `us`, `eu`, `ap1`. Matches Hugo's `site` cookie value. */
+  key: string;
+  /** Display label, e.g. `US1`, `EU`. */
+  label: string;
+  /** API-site domain, e.g. `datadoghq.com`. */
+  site: string;
 }
 
-/** Maps site domain → region key and label. */
-const SITE_TO_REGION: Record<string, { key: string; label: string }> = {
-  'datadoghq.com':     { key: 'us1', label: 'US1' },
-  'us3.datadoghq.com': { key: 'us3', label: 'US3' },
-  'us5.datadoghq.com': { key: 'us5', label: 'US5' },
-  'ap1.datadoghq.com': { key: 'ap1', label: 'AP1' },
-  'ap2.datadoghq.com': { key: 'ap2', label: 'AP2' },
-  'datadoghq.eu':      { key: 'eu',  label: 'EU' },
-  'ddog-gov.com':      { key: 'gov', label: 'GOV' },
-};
-
-let _cache: Region[] | null = null;
+let _defaultCache: Region[] | null = null;
 
 /**
- * Extracts the list of available regions from a parsed OpenAPI spec.
- * Reads `servers[0].variables.site.enum` to discover all sites.
- */
-export function getRegions(spec: any): Region[] {
-  if (_cache) return _cache;
-
-  const servers = spec?.servers;
-  if (!Array.isArray(servers) || servers.length === 0) {
-    _cache = [{ key: 'us1', label: 'US1', site: 'datadoghq.com' }];
-    return _cache;
-  }
-
-  const siteVar = servers[0]?.variables?.site;
-  if (!siteVar?.enum || !Array.isArray(siteVar.enum)) {
-    _cache = [{ key: 'us1', label: 'US1', site: 'datadoghq.com' }];
-    return _cache;
-  }
-
-  const regions: Region[] = [];
-  for (const site of siteVar.enum as string[]) {
-    const mapping = SITE_TO_REGION[site];
-    if (mapping) {
-      regions.push({ key: mapping.key, label: mapping.label, site });
-    } else {
-      // Unknown site — derive key from domain
-      const key = site.replace(/\..*/, '');
-      regions.push({ key, label: key.toUpperCase(), site });
-    }
-  }
-
-  _cache = regions;
-  return regions;
-}
-
-/**
- * Builds the full API URL for a given path, site, and subdomain.
- * Uses the server URL template pattern from the spec:
- *   https://{subdomain}.{site}{path}
- */
-export function buildApiUrl(site: string, path: string, subdomain = 'api'): string {
-  return `https://${subdomain}.${site}${path}`;
-}
-
-/**
- * Returns the default set of Datadog regions from the static mapping.
- * Use this when you need regions without parsing a spec file.
+ * Returns the full set of Datadog regions defined in the Hugo config snapshot.
+ * Used as the source of truth for the dropdown and for rendering a variant per
+ * region on every endpoint.
  */
 export function getDefaultRegions(): Region[] {
-  return Object.entries(SITE_TO_REGION).map(([site, { key, label }]) => ({
-    key,
-    label,
-    site,
+  if (_defaultCache) return _defaultCache;
+  _defaultCache = getAllowedRegions().map((r) => ({
+    key: r.key,
+    label: r.label,
+    site: r.domain,
   }));
+  return _defaultCache;
+}
+
+/**
+ * Extracts the regions supported by a given operation (or, if no operation
+ * is passed, by the top-level spec).
+ *
+ * Reads `servers[0].variables.site.enum` and intersects with `allowedRegions`.
+ * Returns regions in allowedRegions order.
+ */
+export function getRegions(spec: any, operation?: any): Region[] {
+  const all = getDefaultRegions();
+
+  const servers = operation?.servers ?? spec?.servers;
+  if (!Array.isArray(servers) || servers.length === 0) return all;
+
+  const siteVar = servers[0]?.variables?.site;
+  if (!siteVar?.enum || !Array.isArray(siteVar.enum)) return all;
+
+  const enumSet = new Set<string>(siteVar.enum);
+  return all.filter((r) => enumSet.has(r.site));
+}
+
+/**
+ * Builds an endpoint URL from a server block (or falls back to `api.{site}{path}`).
+ * Resolves the `{subdomain}` and `{site}` variables in the server URL template.
+ */
+export function buildApiUrlFromServers(servers: any, site: string, path: string): string {
+  if (!Array.isArray(servers) || servers.length === 0) {
+    return `https://api.${site}${path}`;
+  }
+  const server = servers[0];
+  const template: string = server?.url ?? 'https://{subdomain}.{site}';
+  const subdomain: string = server?.variables?.subdomain?.default ?? 'api';
+  const base = template.replace('{subdomain}', subdomain).replace('{site}', site);
+  return `${base}${path}`;
+}
+
+/** Convenience wrapper kept for callers that don't need full server resolution. */
+export function buildApiUrl(site: string, path: string, subdomain = 'api'): string {
+  return `https://${subdomain}.${site}${path}`;
 }

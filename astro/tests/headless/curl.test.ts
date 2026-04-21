@@ -89,6 +89,17 @@ describe('generateCurl', () => {
     expect(result).toContain('DD_SITE="datadoghq.eu"');
   });
 
+  it('uses custom subdomain', () => {
+    const result = generateCurl({
+      method: 'GET',
+      path: '/api/v1/logs',
+      site: 'datadoghq.com',
+      subdomain: 'http-intake',
+    });
+
+    expect(result).toContain('https://http-intake.datadoghq.com/api/v1/logs');
+  });
+
   it('respects security requirements for auth headers', () => {
     const result = generateCurl({
       method: 'GET',

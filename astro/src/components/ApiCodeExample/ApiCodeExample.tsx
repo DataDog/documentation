@@ -9,6 +9,8 @@ export interface CodeExampleEntry {
   code: string;
   syntax: string;
   highlightedCode?: string;
+  /** If present, render one code block per region. Only the variant matching the active region is visible. */
+  regionVariants?: Record<string, { code: string; highlightedCode?: string }>;
 }
 
 export interface CodeExampleSet {
@@ -36,13 +38,33 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
     });
   };
 
+  const renderEntryBody = (entry: CodeExampleEntry) => {
+    if (entry.regionVariants) {
+      return (
+        <>
+          {Object.entries(entry.regionVariants).map(([regionKey, variant]) => (
+            <div
+              key={regionKey}
+              data-region={regionKey}
+              data-testid={`api-code-example-region-${regionKey}`}
+              class={`api-code-example__code-block ${styles.codeBlock}`}
+            >
+              <CodeBlock content={variant.code} language={entry.syntax} highlightedCode={variant.highlightedCode} />
+            </div>
+          ))}
+        </>
+      );
+    }
+    return (
+      <div class={`api-code-example__code-block ${styles.codeBlock}`}>
+        <CodeBlock content={entry.code} language={entry.syntax} highlightedCode={entry.highlightedCode} />
+      </div>
+    );
+  };
+
   const renderPanel = (ex: CodeExampleSet) => {
     if (ex.entries.length === 1) {
-      return (
-        <div class={`api-code-example__code-block ${styles.codeBlock}`}>
-          <CodeBlock content={ex.entries[0].code} language={ex.entries[0].syntax} highlightedCode={ex.entries[0].highlightedCode} />
-        </div>
-      );
+      return renderEntryBody(ex.entries[0]);
     }
 
     return (
@@ -63,11 +85,7 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
                 </svg>
                 <span>{entry.description}</span>
               </button>
-              {isOpen && (
-                <div class={`api-code-example__code-block ${styles.codeBlock}`}>
-                  <CodeBlock content={entry.code} language={entry.syntax} highlightedCode={entry.highlightedCode} />
-                </div>
-              )}
+              {isOpen && renderEntryBody(entry)}
             </div>
           );
         })}

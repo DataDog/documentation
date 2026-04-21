@@ -47,4 +47,47 @@ test.describe('ApiEndpoint component', () => {
     const codeExample = endpoint.locator('[data-testid="api-code-example"]');
     await expect(codeExample).toBeVisible();
   });
+
+  test('shows only the active region URL (default: datadoghq.com)', async ({ page }) => {
+    const endpoint = page.locator('[data-testid="api-endpoint"]').first();
+    const visibleUrl = endpoint.locator('[data-region="us"]').first();
+    await expect(visibleUrl).toBeVisible();
+    await expect(visibleUrl).toContainText('datadoghq.com');
+
+    // EU variant is rendered in the DOM but hidden.
+    const euUrl = endpoint.locator('[data-region="eu"]').first();
+    await expect(euUrl).toBeHidden();
+  });
+});
+
+test.describe('ApiEndpoint region switching', () => {
+  test('swapping the region swaps the visible endpoint URL', async ({ page, context }) => {
+    await context.clearCookies();
+    await page.goto('/docs/components/api-endpoint');
+
+    await page.locator('[data-testid="region-selector-select"]').selectOption('eu');
+
+    const endpoint = page.locator('[data-testid="api-endpoint"]').first();
+    const euUrl = endpoint.locator('[data-region="eu"]').first();
+    await expect(euUrl).toBeVisible();
+    await expect(euUrl).toContainText('datadoghq.eu');
+
+    const usUrl = endpoint.locator('[data-region="us"]').first();
+    await expect(usUrl).toBeHidden();
+  });
+
+  test('swapping the region swaps the visible curl command', async ({ page, context }) => {
+    await context.clearCookies();
+    await page.goto('/docs/components/api-endpoint');
+
+    await page.locator('[data-testid="region-selector-select"]').selectOption('eu');
+
+    const codeExample = page.locator('[data-testid="api-code-example"]').first();
+    const euVariant = codeExample.locator('[data-testid="api-code-example-region-eu"]').first();
+    await expect(euVariant).toBeVisible();
+    await expect(euVariant).toContainText('datadoghq.eu');
+
+    const usVariant = codeExample.locator('[data-testid="api-code-example-region-us"]').first();
+    await expect(usVariant).toBeHidden();
+  });
 });

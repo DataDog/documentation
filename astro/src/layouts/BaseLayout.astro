@@ -37,6 +37,25 @@ const { title } = Astro.props;
         }
         // SCROLL MODE — end
       })();
+      (function () {
+        // Resolve the active Datadog region before first paint so region-scoped
+        // content (elements with `data-region`) renders in its final state and
+        // there's no flash of the wrong region. Precedence matches Hugo:
+        // ?site= query param → `site` cookie → default `us`. Referrer-based
+        // sync runs later in the regionState module.
+        var allowed = ['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov'];
+        var params = new URLSearchParams(window.location.search);
+        var fromQuery = params.get('site');
+        var cookieMatch = document.cookie.match(/(?:^|; )site=([^;]*)/);
+        var fromCookie = cookieMatch ? decodeURIComponent(cookieMatch[1]) : null;
+        var region = 'us';
+        if (fromQuery && allowed.indexOf(fromQuery) !== -1) {
+          region = fromQuery;
+        } else if (fromCookie && allowed.indexOf(fromCookie) !== -1) {
+          region = fromCookie;
+        }
+        document.documentElement.setAttribute('data-active-region', region);
+      })();
     </script>
   </head>
   <body>

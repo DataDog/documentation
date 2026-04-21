@@ -91,15 +91,6 @@ export default defineMarkdocConfig({
     regionSelector: {
       render: component('./src/components/RegionSelector/RegionSelectorIsland.astro'),
       selfClosing: true,
-      attributes: {
-        regions: {
-          type: String,
-          required: true,
-        },
-        defaultRegion: {
-          type: String,
-        },
-      },
     },
     apiResponse: {
       render: component('./src/components/ApiResponse/ApiResponseIsland.astro'),

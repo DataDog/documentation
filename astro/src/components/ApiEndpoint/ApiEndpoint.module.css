@@ -37,6 +37,12 @@
   word-break: break-all;
 }
 
+.pathUnsupported {
+  color: var(--color-text-muted);
+  font-style: italic;
+  background: transparent;
+}
+
 .permissions {
   font-size: var(--font-size-sm);
   margin-bottom: var(--space-md);

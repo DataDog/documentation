@@ -1,41 +1,37 @@
-import { useState, useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import styles from './RegionSelector.module.css';
+import {
+  getActiveRegion,
+  setActiveRegion,
+  syncRegionFromReferrer,
+  onRegionChange,
+} from './regionState';
+import { getAllowedRegions, DEFAULT_REGION_KEY } from '../../data/api/regionConfig';
 
-export interface Region {
-  key: string;
-  label: string;
-  site: string;
-}
-
-interface RegionSelectorProps {
-  regions: Region[];
-  defaultRegion?: string;
-}
-
-const STORAGE_KEY = 'dd-api-region';
-
-export function RegionSelector({ regions, defaultRegion = 'us1' }: RegionSelectorProps): JSX.Element {
-  const [selected, setSelected] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem(STORAGE_KEY) || defaultRegion;
-    }
-    return defaultRegion;
-  });
+/**
+ * Dropdown for picking the active Datadog site. Population, persistence, and
+ * DOM sync all go through `regionState` — there are no props because the full
+ * list of sites is a global (Hugo's `allowedRegions` snapshot).
+ */
+export function RegionSelector(): JSX.Element {
+  const regions = getAllowedRegions();
+  const [selected, setSelected] = useState<string>(DEFAULT_REGION_KEY);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, selected);
-    document.documentElement.setAttribute('data-region', selected);
-    document.dispatchEvent(new CustomEvent('regionchange', { detail: { region: selected } }));
-  }, [selected]);
+    syncRegionFromReferrer();
+    setSelected(getActiveRegion());
+    const unsubscribe = onRegionChange((region) => setSelected(region));
+    return unsubscribe;
+  }, []);
 
   const handleChange = (e: JSX.TargetedEvent<HTMLSelectElement>) => {
-    setSelected(e.currentTarget.value);
+    setActiveRegion(e.currentTarget.value);
   };
 
   return (
     <div class={`region-selector ${styles.selector}`} data-testid="region-selector">
-      <label class={`region-selector__label ${styles.label}`} for="region-select">Site:</label>
+      <label class={`region-selector__label ${styles.label}`} for="region-select">Datadog site</label>
       <select
         id="region-select"
         class={`region-selector__select ${styles.select}`}

@@ -4,17 +4,29 @@ title: "RegionSelector Component"
 
 # RegionSelector
 
-A dropdown for selecting the API region. Persists selection in localStorage and dispatches a `regionchange` event on the document.
+A dropdown for picking the active Datadog site. The full list of sites is sourced from the Hugo config snapshot (`allowedRegions` in `params.yaml`), so the component takes no props.
 
-## Properties
+The active region is persisted to the `site` cookie (path `/`) and the `?site=` URL query parameter, which keeps it in sync with the Hugo site if the user moves between them. The component also listens for navigations from Datadog app subdomains and updates the region to match.
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `regions` | `string` (JSON) | — | JSON string of `Region[]` with `key`, `label`, and `site` |
-| `defaultRegion` | `string` | `us1` | Default selected region key |
+When the region changes, the component:
+- Writes the `site` cookie and updates `?site=` in the URL.
+- Sets `data-active-region` on the `<html>` element. CSS rules in [global.css](../styles/global.css) use this to show the matching variant among sibling elements tagged with `data-region="<key>"` (e.g. the per-region endpoint URLs and curl snippets on API pages).
+- Dispatches a `regionchange` `CustomEvent` on `document` for any components that need to react programmatically.
 
-## Examples
+## Region keys
 
-### Default
+The keys below match Hugo's `site` cookie so a region chosen on either site applies on the other.
 
-{% regionSelector regions="[{\"key\":\"us1\",\"label\":\"US1\",\"site\":\"datadoghq.com\"},{\"key\":\"us3\",\"label\":\"US3\",\"site\":\"us3.datadoghq.com\"},{\"key\":\"us5\",\"label\":\"US5\",\"site\":\"us5.datadoghq.com\"},{\"key\":\"eu\",\"label\":\"EU\",\"site\":\"datadoghq.eu\"},{\"key\":\"ap1\",\"label\":\"AP1\",\"site\":\"ap1.datadoghq.com\"},{\"key\":\"gov\",\"label\":\"GOV\",\"site\":\"ddog-gov.com\"}]" /%}
+| Key | Label |
+|-----|-------|
+| `us` | US1 |
+| `us3` | US3 |
+| `us5` | US5 |
+| `eu` | EU |
+| `ap1` | AP1 |
+| `ap2` | AP2 |
+| `gov` | US1-FED |
+
+## Example
+
+{% regionSelector /%}

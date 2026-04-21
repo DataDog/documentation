@@ -21,7 +21,7 @@ import type { CurlParam } from './curl';
 import { getCodeExamplesForOperation } from './examples';
 import type { CodeExampleSet } from './examples';
 import { renderMarkdown, renderMarkdownInline } from './markdown';
-import { getRegions, buildApiUrl } from './regions';
+import { getRegions, buildApiUrlFromServers } from './regions';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -427,25 +427,36 @@ function toCurlParams(params: any[]): CurlParam[] {
 }
 
 /**
- * Generate a curl command for the given operation.
+ * Generate curl commands for the given operation, one per supported region.
+ * Returns a map keyed by region.key (e.g. `us`, `eu`) so the UI can render
+ * a `[data-region]` wrapper per variant.
  */
-function buildCurl(
+function buildCurlByRegion(
   spec: any,
   method: string,
   path: string,
   operation: any,
   splitParams: SplitParams,
   requestBodyJson?: string
-): string {
-  return generateCurl({
-    method,
-    path,
-    site: 'datadoghq.com',
-    pathParams: toCurlParams(splitParams.path),
-    queryParams: toCurlParams(splitParams.query),
-    requestBodyJson,
-    security: operation.security,
-  });
+): Record<string, string> {
+  const regions = getRegions(spec, operation);
+  const servers = operation?.servers ?? spec?.servers;
+  const subdomain: string = servers?.[0]?.variables?.subdomain?.default ?? 'api';
+
+  const result: Record<string, string> = {};
+  for (const region of regions) {
+    result[region.key] = generateCurl({
+      method,
+      path,
+      site: region.site,
+      subdomain,
+      pathParams: toCurlParams(splitParams.path),
+      queryParams: toCurlParams(splitParams.query),
+      requestBodyJson,
+      security: operation.security,
+    });
+  }
+  return result;
 }
 
 /* ------------------------------------------------------------------ */
@@ -525,18 +536,29 @@ export function getEndpointsForCategory(slug: string): EndpointData[] {
         const oauthScopes = extractOauthScopes(operation.security);
 
         // --- Region URLs ---
-        const regions = getRegions(spec);
+        // Only regions this operation supports (intersection of allowedRegions
+        // and the operation's `servers[].variables.site.enum`). Regions that
+        // aren't in this map render as "Not supported in the <X> region".
+        const regions = getRegions(spec, operation);
+        const operationServers = operation?.servers ?? spec?.servers;
         const regionUrls: Record<string, string> = {};
         for (const region of regions) {
-          regionUrls[region.key] = buildApiUrl(region.site, pathStr);
+          regionUrls[region.key] = buildApiUrlFromServers(operationServers, region.site, pathStr);
         }
 
         // --- Code examples (SDK) ---
         const sdkExamples = getCodeExamplesForOperation(operationId, version, primaryTag);
 
-        // --- Curl ---
+        // --- Curl (one variant per supported region) ---
         const requestBodyJson = requestBody?.examples?.[0]?.value;
-        const curlCode = buildCurl(spec, method, pathStr, operation, params, requestBodyJson);
+        const curlByRegion = buildCurlByRegion(spec, method, pathStr, operation, params, requestBodyJson);
+        const defaultRegionKey = regions[0]?.key ?? 'us';
+        const defaultCurl = curlByRegion[defaultRegionKey] ?? '';
+
+        const curlVariants: Record<string, { code: string; highlightedCode?: string }> = {};
+        for (const [key, code] of Object.entries(curlByRegion)) {
+          curlVariants[key] = { code };
+        }
 
         // Prepend curl as the first code example
         const codeExamples: CodeExampleSet[] = [
@@ -546,8 +568,9 @@ export function getEndpointsForCategory(slug: string): EndpointData[] {
             entries: [
               {
                 description: `${summary} curl example`,
-                code: curlCode,
+                code: defaultCurl,
                 syntax: 'bash',
+                regionVariants: curlVariants,
               },
             ],
           },

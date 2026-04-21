@@ -44,6 +44,17 @@ export async function highlightEndpoints(endpoints: EndpointData[]): Promise<voi
             if (html) entry.highlightedCode = html;
           })
         );
+
+        // Highlight per-region variants (used by curl).
+        if (entry.regionVariants) {
+          for (const variant of Object.values(entry.regionVariants)) {
+            jobs.push(
+              highlight(variant.code, entry.syntax).then((html) => {
+                if (html) variant.highlightedCode = html;
+              })
+            );
+          }
+        }
       }
     }
 

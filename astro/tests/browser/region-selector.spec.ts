@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('RegionSelector component', () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, context }) => {
+    await context.clearCookies();
     await page.goto('/docs/components/region-selector');
   });
 
@@ -10,32 +11,37 @@ test.describe('RegionSelector component', () => {
     await expect(selector).toBeVisible();
   });
 
-  test('defaults to US1 region', async ({ page }) => {
+  test('defaults to US1 (key `us`) when no cookie or query param is set', async ({ page }) => {
     const select = page.locator('[data-testid="region-selector-select"]');
-    await expect(select).toHaveValue('us1');
+    await expect(select).toHaveValue('us');
+    await expect(page.locator('html')).toHaveAttribute('data-active-region', 'us');
   });
 
-  test('changes region when a different option is selected', async ({ page }) => {
+  test('offers all allowed Datadog sites as options', async ({ page }) => {
+    const select = page.locator('[data-testid="region-selector-select"]');
+    const values = await select.locator('option').evaluateAll((opts) =>
+      opts.map((o) => (o as HTMLOptionElement).value)
+    );
+    expect(values).toEqual(['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov']);
+  });
+
+  test('changes region, writes cookie, updates query param, and sets data-active-region', async ({ page }) => {
     const select = page.locator('[data-testid="region-selector-select"]');
     await select.selectOption('eu');
     await expect(select).toHaveValue('eu');
+    await expect(page.locator('html')).toHaveAttribute('data-active-region', 'eu');
+
+    const cookies = await page.context().cookies();
+    const siteCookie = cookies.find((c) => c.name === 'site');
+    expect(siteCookie?.value).toBe('eu');
+
+    await expect(page).toHaveURL(/[?&]site=eu(?:&|$)/);
   });
 
-  test('persists selection in localStorage', async ({ page }) => {
+  test('reads the region from the `?site=` query param on load', async ({ page }) => {
+    await page.goto('/docs/components/region-selector?site=ap1');
     const select = page.locator('[data-testid="region-selector-select"]');
-    await select.selectOption('eu');
-
-    const stored = await page.evaluate(() => localStorage.getItem('dd-api-region'));
-    expect(stored).toBe('eu');
-  });
-
-  test('sets data-region attribute on document element', async ({ page }) => {
-    const select = page.locator('[data-testid="region-selector-select"]');
-    await select.selectOption('ap1');
-
-    const region = await page.evaluate(() =>
-      document.documentElement.getAttribute('data-region')
-    );
-    expect(region).toBe('ap1');
+    await expect(select).toHaveValue('ap1');
+    await expect(page.locator('html')).toHaveAttribute('data-active-region', 'ap1');
   });
 });
