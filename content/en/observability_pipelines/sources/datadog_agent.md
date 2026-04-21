@@ -35,8 +35,6 @@ Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][6], using the [API][7], or with [Terraform][8]. The instructions in this section are for setting up the source in the UI.
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
-
 To configure your Datadog Agent source:
 
 <div class="alert alert-danger">Only enter the identifier for the Datadog Agent address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
