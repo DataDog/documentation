@@ -1,15 +1,18 @@
 ---
 title: Software Composition Analysis (SCA) Configuration
-description: Learn how to customize Datadog Software Composition Analysis for your repositories.
+description: Reference documentation for Datadog Software Composition Analysis (SCA) configuration, including path exclusion.
+further_reading:
+- link: /security/code_security/software_composition_analysis/
+  tag: Documentation
+  text: Software Composition Analysis
+- link: /security/code_security/guides/configuration/
+  tag: Documentation
+  text: Code Security Configuration Reference
 ---
 
-## Customize your configuration
+Datadog Software Composition Analysis (SCA) detects open source libraries and their vulnerabilities in your code. You can exclude specific paths from analysis. Configure this setting under the `sca` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
 
-You can exclude paths from SCA analysis. You can customize these settings locally in your repository or within the Datadog App.
-
-The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
-
-To configure SCA analysis, the configuration file must begin with `schema-version: v1.1`, followed by a `sca` key containing the analysis configuration. The `sca` section supports the following field:
+The `sca` key requires `schema-version: v1.1` and supports the following field:
 
 | **Property** | **Type** | **Description** | **Default** |
 | --- | --- | --- | --- |
@@ -26,6 +29,10 @@ sca:
     - "third_party/"
 ```
 
-For more information on configuration locations, precedence, and merging, see [Code Security configuration file][1].
+For more information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][1].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/guides/configuration/
