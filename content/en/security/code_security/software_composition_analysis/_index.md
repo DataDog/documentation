@@ -173,6 +173,10 @@ Software Composition Analysis (SCA) supports the following languages:
 
 {{< partial name="code_security/sca-lang-support.html" >}}
 
+## Customize your configuration
+
+To customize SCA analysis — including excluding paths from scanning — see [Software Composition Analysis (SCA) Configuration][27].
+
 ## Next steps
 
 1. [Set up Static SCA][1] to scan your repositories.
@@ -206,3 +210,4 @@ Software Composition Analysis (SCA) supports the following languages:
 [24]: https://github.com/pypa/advisory-database
 [25]: https://github.com/cloudsecurityalliance/gsd-database
 [26]: https://github.com/DataDog/guarddog
+[27]: /security/code_security/configuration/
