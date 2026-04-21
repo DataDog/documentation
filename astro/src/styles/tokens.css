@@ -69,6 +69,7 @@
   --color-surface-header-text: #000;
   --color-surface-alt: #fdfcff;
   --color-surface-bg: #fdfcff;
+  --color-surface-rail: #f8f8f8;
 
   /* Colors — Named (badge/indicator pairs) */
   --color-teal: #26759c;
@@ -205,8 +206,8 @@
   --hugo-footer-popup-bg: #323232;
   --hugo-footer-popup-hover: #616161;
   --hugo-footer-popup-secondary: #c7c7c7;
-  --hugo-footer-cta-primary-bg: #774aa4;
-  --hugo-footer-cta-primary-border: #774aa4;
+  --hugo-footer-cta-primary-bg: #632ca6;
+  --hugo-footer-cta-primary-border: #632ca6;
 
   /* Hugo footer typography */
   --hugo-footer-link-font-size: 16px;
@@ -282,6 +283,7 @@
   --color-surface-header-text: #e0e0e0;
   --color-surface-alt: #1e1a30;
   --color-surface-bg: #1e1a30;
+  --color-surface-rail: #242438;
 
   /* Colors — Named (badge/indicator pairs) */
   --color-teal: #5baed4;
@@ -320,6 +322,16 @@
   --color-placeholder-bg: #632ca6;
   --color-placeholder-outline: #e9d8f4;
   --color-placeholder-text: var(--color-placeholder-outline);
+
+  /* Hugo nav — dark overrides */
+  --hugo-nav-text: #b0b0c0;
+  --hugo-nav-text-hover: #b388e0;
+  --hugo-nav-brand-primary: #9b6dd7;
+  --hugo-nav-border: #2a2a3e;
+  --hugo-nav-btn-hover-bg: rgba(255, 255, 255, 0.05);
+  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --hugo-nav-gray-light: #333;
+  --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* SCROLL MODE — start */
@@ -371,6 +383,7 @@
   --color-surface-header-text: #3c2415;
   --color-surface-alt: #f0dfc0;
   --color-surface-bg: #f0dfc0;
+  --color-surface-rail: #ebd9b2;
 
   /* Colors — Named (badge pairs) */
   --color-teal: #5a7a6a;
@@ -404,6 +417,16 @@
   --shadow-md: 0 4px 15px rgba(60, 36, 21, 0.2);
   --shadow-md-hover: 0 4px 15px rgba(60, 36, 21, 0.3);
   --shadow-brand: 0 -4px 12px rgba(139, 69, 19, 0.1);
+
+  /* Hugo nav — scroll overrides */
+  --hugo-nav-text: #3c2415;
+  --hugo-nav-text-hover: #a0522d;
+  --hugo-nav-brand-primary: #8b4513;
+  --hugo-nav-border: #c4a97d;
+  --hugo-nav-btn-hover-bg: rgba(60, 36, 21, 0.06);
+  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(60, 36, 21, 0.2);
+  --hugo-nav-gray-light: #c4a97d;
+  --hugo-header-shadow: 0 0 8px 8px rgba(60, 36, 21, 0.1);
 }
 
 /* Dark scroll — ancient scroll by candlelight */
@@ -451,6 +474,7 @@
   --color-surface-header-text: #d4c4a0;
   --color-surface-alt: #241a10;
   --color-surface-bg: #241a10;
+  --color-surface-rail: #362818;
 
   /* Colors — Named (badge pairs) */
   --color-teal: #6aaa8a;
@@ -484,6 +508,16 @@
   --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.5);
   --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.65);
   --shadow-brand: 0 -4px 12px rgba(196, 148, 58, 0.12);
+
+  /* Hugo nav — dark+scroll overrides */
+  --hugo-nav-text: #d4c4a0;
+  --hugo-nav-text-hover: #d4a84f;
+  --hugo-nav-brand-primary: #c4943a;
+  --hugo-nav-border: #5a4530;
+  --hugo-nav-btn-hover-bg: rgba(212, 196, 160, 0.08);
+  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  --hugo-nav-gray-light: #5a4530;
+  --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.4);
 }
 /* SCROLL MODE — end */
 

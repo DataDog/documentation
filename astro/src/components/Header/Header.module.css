@@ -18,7 +18,7 @@
   top: var(--hugo-banner-height);
   align-items: center;
   box-shadow: var(--hugo-header-shadow);
-  background-color: #ffffff;
+  background-color: var(--color-bg);
   z-index: var(--hugo-header-z);
   transition: height 0.2s ease;
 }
@@ -186,7 +186,7 @@
   border: 0;
   cursor: pointer;
   font-size: 21px;
-  color: #555555;
+  color: var(--hugo-nav-text);
   line-height: 1;
 }
 
@@ -209,7 +209,7 @@
 .btnGradient {
   position: relative;
   display: inline-block;
-  background: #ffffff;
+  background: var(--color-bg);
   color: var(--hugo-nav-text);
   border: 0 solid transparent;
   border-radius: 4px;
@@ -346,7 +346,7 @@
   border: 0;
   border-top: 3px solid var(--hugo-nav-brand-primary);
   border-radius: 0;
-  background-color: #ffffff;
+  background-color: var(--color-bg);
   padding: 0.5rem;
   min-width: 200px;
   overflow: auto;
@@ -365,7 +365,7 @@
   display: block;
   text-transform: capitalize;
   font-weight: 300;
-  color: #000;
+  color: var(--color-text);
   white-space: nowrap;
   padding: 7px 11px;
   border-radius: 4px;
@@ -410,7 +410,7 @@
 }
 
 .solutionsHeader {
-  color: #000;
+  color: var(--color-text);
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;

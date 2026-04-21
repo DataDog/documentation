@@ -47,7 +47,7 @@
 }
 
 .product-menu p.product-hype {
-  color: #000000;
+  color: var(--color-text);
   font-size: 28px;
   line-height: 32px;
   font-weight: 700;
@@ -236,7 +236,7 @@
   line-height: 18px;
   text-wrap: wrap;
   text-transform: capitalize;
-  color: #000000;
+  color: var(--color-text);
   border-radius: 4px;
   text-decoration: none;
   font-weight: 300;

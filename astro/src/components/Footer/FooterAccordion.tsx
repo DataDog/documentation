@@ -28,6 +28,11 @@ interface Props {
   sections: FooterSection[];
   classes: {
     column: string;
+    /** Per-section modifier classes keyed by section id (e.g. styles['column--product']).
+       Needed because the accordion is rendered as a `client:load` island; the
+       `<astro-island>` wrapper would break any .mainRow > :nth-child(N)
+       structural selectors. */
+    columnByKey: Record<SectionKey, string>;
     header: string;
     body: string;
     bodyOpen: string;
@@ -74,7 +79,7 @@ export default function FooterAccordion({ sections, classes }: Props) {
           : classes.columnBodyFlex;
         const halfClass = s.stackOnDesktop ? classes.menuLinksHalfLg100 : classes.menuLinksHalf;
         return (
-          <div class={classes.column} data-testid={`footer-section-${s.id}`}>
+          <div class={`${classes.column} ${classes.columnByKey[s.id]}`} data-testid={`footer-section-${s.id}`}>
             <p
               class={classes.header}
               role="button"

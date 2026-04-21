@@ -9,8 +9,10 @@
   overflow-x: hidden;
   scrollbar-width: none;
   padding: var(--space-md) var(--space-md) var(--space-md) 0;
-  border-right: var(--border-width) solid var(--color-border);
-  background: var(--color-bg);
+  /* box-shadow extends the rail color past the element's left edge so it
+     reaches the viewport edge without adding horizontal overflow. */
+  background: var(--color-surface-rail);
+  box-shadow: -100vw 0 0 100vw var(--color-surface-rail);
 }
 
 .nav::-webkit-scrollbar {
@@ -19,8 +21,8 @@
 
 @media (min-width: 992px) {
   .nav {
-    top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop));
-    max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height-desktop));
+    top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop) - var(--hugo-header-shrink));
+    max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height-desktop) + var(--hugo-header-shrink));
   }
 }
 
@@ -80,11 +82,12 @@
 
 .operation {
   display: block;
-  padding: var(--space-xs) var(--space-md) var(--space-xs) var(--space-xl);
-  color: var(--color-text-muted);
+  padding: 0 var(--space-md) 0 var(--space-xl);
+  color: var(--color-text);
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
   text-decoration: none;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .operation:hover {

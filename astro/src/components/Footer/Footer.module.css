@@ -135,11 +135,17 @@
   background: var(--hugo-footer-cta-primary-bg);
   border: 1px solid var(--hugo-footer-cta-primary-border);
   border-radius: 4px;
+  font-weight: 600;
   font-size: 18px;
   line-height: 18px;
   text-transform: uppercase;
   text-decoration: none;
   box-sizing: border-box;
+}
+
+.ctaPrimary:lang(ja),
+.ctaPrimary:lang(ko) {
+  font-size: 16px;
 }
 
 @media (min-width: 768px) {
@@ -177,6 +183,10 @@
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: flex-start;
+    /* Bootstrap-identical gutter — negative margins cancel the leftmost and
+       rightmost column's side padding so the row stays flush with .container. */
+    margin-left: -12px;
+    margin-right: -12px;
   }
 }
 
@@ -185,49 +195,65 @@
   box-sizing: border-box;
 }
 
+/* Bootstrap-identical 12px side padding on each column at ≥992px, so each
+   column's .divider--desktop stops short of the next column's divider and
+   the rule under the headers reads as four separate segments (Hugo parity). */
+@media (min-width: 992px) {
+  .column {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
 /* Column widths at ≥992px, matching Hugo's col-lg-3/col-lg-4/col-lg-2 grid
-   plus the custom col-lg-2-about / col-lg-1-blog widths. */
+   plus the custom col-lg-2-about / col-lg-1-blog widths. Applied via
+   per-section modifier classes — the accordion is rendered as a client island
+   and its `<astro-island>` wrapper would break any structural selectors on
+   .mainRow's direct children. */
 @media (min-width: 992px) {
   .column--trial {
     width: 25%;            /* col-lg-3 */
     flex: 0 0 25%;
     order: 0;
   }
-}
-
-/* Mobile ordering: the Hugo ordering on small screens is
-     .order-0 (trial), .order-1 (resources), .order-2 (product),
-     .order-3 (about), .order-4 (blog)
-   which puts resources right after the trial block, then product, about, blog.
-   Since the accordion doesn't know about the trial block, we render trial
-   first in markup and let CSS flex `order` on the accordion sections match. */
-@media (max-width: 991.98px) {
-  .column--trial {
-    order: 0;
-  }
-}
-
-/* The accordion renders five siblings inside the .mainRow after the trial
-   block. Give them explicit widths and orders matching Hugo. */
-@media (min-width: 992px) {
-  .mainRow > :nth-child(2) { /* product */
-    width: 33.3333%;
+  .column--product {
+    width: 33.3333%;       /* col-lg-4 */
     flex: 0 0 33.3333%;
     order: 1;
   }
-  .mainRow > :nth-child(3) { /* resources */
-    width: 16.6667%;
+  .column--resources {
+    width: 16.6667%;       /* col-lg-2 */
     flex: 0 0 16.6667%;
     order: 2;
   }
-  .mainRow > :nth-child(4) { /* about */
+  .column--about {
     width: var(--hugo-footer-col-about);
     flex: 0 0 var(--hugo-footer-col-about);
     order: 3;
   }
-  .mainRow > :nth-child(5) { /* blog */
+  .column--blog {
     width: var(--hugo-footer-col-blog);
     flex: 0 0 var(--hugo-footer-col-blog);
+    order: 4;
+  }
+}
+
+/* Mobile ordering matches Hugo's .order-0..order-4. We render the trial
+   block first in markup; the accordion sections follow in DOM order. */
+@media (max-width: 991.98px) {
+  .column--trial {
+    order: 0;
+  }
+  .column--resources {
+    order: 1;
+  }
+  .column--product {
+    order: 2;
+  }
+  .column--about {
+    order: 3;
+  }
+  .column--blog {
     order: 4;
   }
 }
@@ -372,12 +398,18 @@
   background: transparent;
   border: 1px solid var(--hugo-footer-text-strong);
   border-radius: 4px;
+  font-weight: 600;
   font-size: 18px;
   line-height: 18px;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
   box-sizing: border-box;
+}
+
+.ctaOutline:lang(ja),
+.ctaOutline:lang(ko) {
+  font-size: 16px;
 }
 
 .ctaOutline:hover {
