@@ -11,7 +11,7 @@ A light-purple box with a dark-purple outline and a centered label. Used to stan
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
 | `name` | `string` | (required) | The label text rendered inside the placeholder |
-| `class` | `string` | — | Optional extra class applied to the root element, used by the `FooterPlaceholder` layout wrapper to set dimensions and positioning |
+| `class` | `string` | — | Optional extra class applied to the root element |
 
 ## Examples
 
@@ -23,13 +23,7 @@ A light-purple box with a dark-purple outline and a centered label. Used to stan
 
 {% placeholder name="FOOTER" class="placeholder-demo--tall" /%}
 
-## Layout wrappers
-
-The primitive is consumed by the `FooterPlaceholder` wrapper, which takes care of positioning and sizing with Hugo-identical dimensions. It renders automatically in `BaseLayout`, so you can see it right now on this page:
-
-- **`FooterPlaceholder`** — in normal flow at the bottom of the page, with Hugo-matching responsive vertical padding.
-
-The announcement banner and header are no longer placeholders — they have real implementations under `src/components/AnnouncementBanner/` and `src/components/Header/`.
+The announcement banner, header, and footer all have real implementations now under `src/components/AnnouncementBanner/`, `src/components/Header/`, and `src/components/Footer/`.
 
 <style>
   .placeholder-demo--short {

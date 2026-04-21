@@ -195,6 +195,46 @@
   /* Hugo button gradient (GET STARTED FREE) */
   --hugo-btn-gradient-start: #3023ae;
   --hugo-btn-gradient-end: #c024b6;
+
+  /* Hugo footer colors */
+  --hugo-footer-bg: #110617;
+  --hugo-footer-text: rgba(255, 255, 255, 0.5);
+  --hugo-footer-text-strong: #ffffff;
+  --hugo-footer-border-gray: #616161;
+  --hugo-footer-border-gray-darker: #2a1f30;
+  --hugo-footer-popup-bg: #323232;
+  --hugo-footer-popup-hover: #616161;
+  --hugo-footer-popup-secondary: #c7c7c7;
+  --hugo-footer-cta-primary-bg: #774aa4;
+  --hugo-footer-cta-primary-border: #774aa4;
+
+  /* Hugo footer typography */
+  --hugo-footer-link-font-size: 16px;
+  --hugo-footer-link-line-height: 16px;
+  --hugo-footer-section-header-font-size: 18px;
+  --hugo-footer-section-header-font-size-desktop: 16px;
+  --hugo-footer-copyright-font-size: 14px;
+  --hugo-footer-copyright-font-size-desktop: 16px;
+
+  /* Hugo footer column widths (custom Bootstrap grid overrides from _footer.scss) */
+  --hugo-footer-col-about: 14.583%;
+  --hugo-footer-col-blog: 10.417%;
+
+  /* Hugo language selector */
+  --hugo-lang-toggle-height: 32px;
+  --hugo-lang-toggle-min-width: 120px;
+  --hugo-lang-toggle-max-width: 166px;
+
+  /* Hugo footer CTA button */
+  --hugo-footer-btn-height: 42px;
+  --hugo-footer-btn-min-height-tablet: 50px;
+  --hugo-footer-btn-min-width-desktop: 165px;
+
+  /* Hugo footer modal */
+  --hugo-modal-bg: #ffffff;
+  --hugo-modal-overlay: rgba(0, 0, 0, 0.5);
+  --hugo-modal-border-radius: 6px;
+  --hugo-modal-max-width: 500px;
 }
 
 /* Dark mode tokens */

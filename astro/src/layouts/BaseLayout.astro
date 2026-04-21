@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import AnnouncementBanner from '../components/AnnouncementBanner/AnnouncementBanner.astro';
 import Header from '../components/Header/Header.astro';
-import FooterPlaceholder from '../components/FooterPlaceholder/FooterPlaceholder.astro';
+import Footer from '../components/Footer/Footer.astro';
 
 interface Props {
   title: string;
@@ -44,7 +44,7 @@ const { title } = Astro.props;
     <div class="base-layout__body">
       <slot />
     </div>
-    <FooterPlaceholder />
+    <Footer />
     <div id="theme-toggles">
       <button
         id="theme-toggle"

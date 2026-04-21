@@ -389,3 +389,15 @@ storage_management:
   other: 'Storage Management'
 secret_scanning:
   other: 'Secret Scanning'
+
+# Footer
+footer_blurb_heading:
+  other: "Can't find something?"
+footer_blurb_desc:
+  other: "Our friendly, knowledgeable solutions engineers are here to help!"
+contact_us:
+  other: "Contact Us"
+resources:
+  other: "Resources"
+personalized_demo:
+  other: "Request a personalized demo"

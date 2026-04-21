@@ -1,0 +1,53 @@
+---
+title: "Footer Component"
+---
+
+# Footer
+
+Site-wide footer rendered at the bottom of every page by `BaseLayout`. Ported from the docs-default branch of Hugo's `footer.html` partial — dimensions, colors, and interactions match the Hugo site. Scroll to the bottom of this page to see the footer itself.
+
+## Sub-components
+
+| Component | Type | Role |
+|-----------|------|------|
+| `Footer.astro` | Astro (static) | Footer shell — reads menu data at build time and renders the docs blurb, five-column main row, and bottom row statically. |
+| `FooterBlurb.astro` | Static | Docs-only "Can't find something?" intro with the Contact Us CTA. |
+| `FooterAccordion.tsx` | Preact island | Wraps the four menu columns (Product, Resources, About, Blog). Below 992px collapses them into a single-open accordion (default: Resources); above 992px all stay open. |
+| `LanguageSelector.tsx` | Preact island | Bottom-row globe/caret dropdown. Shows the current language plus alternates. English-only for now; add to `availableLanguages` in `Footer.astro` when more languages land. |
+| `FreeTrialModal.tsx` | Preact island | Opens when any element with `data-trigger="free-trial"` is clicked. Embeds the signup flow in an iframe (currently `app.datadoghq.com/signup`). Close on Escape, backdrop click, or the × button. |
+| `SocialIcon.astro` | Static | Inlines a social-network SVG from `mocked_dependencies/websites_modules/static/icons/` keyed by the `pre` field in `footer_social`. |
+| `SvgIcon.astro` | Static | Inlines a docs-repo SVG from `mocked_dependencies/hugo_site/static/images/svg-icons/`, performing Hugo's `default-*` placeholder substitutions for size/color/opacity. |
+
+## Data flow
+
+Footer menu data comes from `src/lib/footerMenus.ts`, which parses the copied `menus.en.yaml` snapshot in `mocked_dependencies/websites_modules/config/_default/menus/` and exposes the `footer_resources`, `footer_about`, `footer_blog`, `footer_sub`, and `footer_social` lists (sorted by `weight`). URLs are normalized with `resolveFooterUrl()`. The Product column pulls from the same `menuData.ts` used by the header mega-menu, flattened and deduped. The language selector reads from `src/lib/languageNames.ts`.
+
+## Properties (Free-trial modal)
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `title` | `string` | (required) | Modal heading and aria-label |
+| `iframeSrc` | `string` | (required) | URL loaded in the embedded iframe |
+
+Swap `iframeSrc` in `Footer.astro` to move off `app.datadoghq.com/signup`.
+
+## Properties (Language selector)
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `currentLang` | `LanguageOption` | (required) | Current language — `{ code, primary, secondary, href }` |
+| `alternates` | `LanguageOption[]` | `[]` | Alternate languages; popup reveals these |
+| `worldIconHtml` | `string` | (required) | Pre-inlined globe SVG |
+| `caretIconHtml` | `string` | (required) | Pre-inlined caret SVG |
+
+## Dimensions (Hugo-identical)
+
+| Viewport | Padding | Layout |
+|----------|---------|--------|
+| <768px   | 1rem top/bottom | Single column stack; accordion closed except Resources |
+| ≥768px   | 9rem top/bottom | Stack, accordion active |
+| ≥992px   | 3rem top / 4rem bottom | Five-column row, all open |
+
+## Tokens
+
+See the Hugo-identical section of `src/styles/tokens.css` (the `--hugo-footer-*` and `--hugo-lang-toggle-*` blocks).

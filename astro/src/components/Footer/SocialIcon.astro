@@ -1,0 +1,50 @@
+---
+/**
+ * Maps a social-icon key (e.g. "twitter-x", "linkedin-new", "youtube-tetra",
+ * "instagram") to an inlined SVG from websites_modules/static/icons. Replaces
+ * the Hugo icon-font approach (<i class="icon-twitter-x">) with real SVGs.
+ */
+const icons = import.meta.glob<string>(
+  '../../mocked_dependencies/websites_modules/static/icons/*.svg',
+  { query: '?raw', import: 'default', eager: true }
+);
+
+interface Props {
+  name: string;
+  class?: string;
+  size?: string;
+}
+
+const { name, class: className, size } = Astro.props;
+const key = `../../mocked_dependencies/websites_modules/static/icons/${name}.svg`;
+const raw: string | undefined = icons[key];
+const style = size ? `width:${size};height:${size}` : undefined;
+---
+
+{raw ? (
+  <span class={`social-icon ${className ?? ''}`} style={style} set:html={raw} />
+) : (
+  <span class={`social-icon social-icon--missing ${className ?? ''}`} style={style} aria-hidden="true" />
+)}
+
+<style is:global>
+  .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  .social-icon svg {
+    width: 1em;
+    height: 1em;
+  }
+  .social-icon--missing::before {
+    content: '';
+    display: inline-block;
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.4;
+  }
+</style>

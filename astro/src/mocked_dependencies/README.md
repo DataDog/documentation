@@ -17,14 +17,17 @@ Under each root, the subpath exactly matches the upstream path. To find the upst
 
 ### `websites_modules/`
 
+- `config/_default/menus/menus.en.yaml` — Footer menus (`footer_resources`, `footer_about`, `footer_blog`, `footer_sub`, `footer_social`), copied verbatim.
 - `data/menu_data/menus.yaml` — site header `main_left` and `main_right` menu trees (copied verbatim).
 - `data/menu_data/product_categories.yaml` — Product mega-menu category groupings, gradients, icons (copied verbatim).
 - `data/menu_data/products.yaml` — Per-product `lang_key`/`url`/`icon` (copied verbatim).
-- `i18n/en.yaml` — English label translations (copied verbatim; the Astro site is English-only for now, so this is the only language bundled).
-- `static/icons/` — Subset of SVG icons referenced by the nav/banner. See `static/icons/README.md` for the list and any gaps or fallbacks.
+- `data/language_names.yaml` — Per-language label dictionary for the footer language selector (copied verbatim).
+- `i18n/en.yaml` — English label translations (copied verbatim and extended with footer-specific keys: `footer_blurb_heading`, `footer_blurb_desc`, `contact_us`, `resources`, `personalized_demo`).
+- `static/icons/` — Subset of SVG icons referenced by the nav, banner, and footer social links (e.g. `twitter-x`, `linkedin-new`, `youtube-tetra`, `instagram`). See `static/icons/README.md` for the list and any gaps or fallbacks.
 
 ### `hugo_site/`
 
 - `config/_default/params.en.yaml` — Site-level params (copied whole). Code only reads the `announcement_banner:` block, but the rest is preserved to keep the snapshot traceable.
 - `data/api/` — OpenAPI spec and SDK examples (moved here from the old flat `api/` folder so it fits the mirrored-path convention).
 - `data/en/webinars.yaml` — Geo-targeting data for the announcement banner. Currently seeded with `{ webinars: [] }`, which matches live behavior where the banner falls back to site params.
+- `static/images/svg-icons/` — Docs-repo SVGs referenced by the footer (`world`, `arrow`, `app-store-badge`, `google-play-badge`, `apple`, `google-play`). These files use Hugo's `default-size` / `default-fill` / `default-opacity` placeholder tokens; `SvgIcon.astro` substitutes them at render time.

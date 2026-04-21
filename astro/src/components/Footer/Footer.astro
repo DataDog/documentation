@@ -1,0 +1,266 @@
+---
+/**
+ * Docs-default footer. Port of the `{{- else -}}` branch of
+ * ~/dd/websites-modules/layouts/partials/footer.html. Skips all the
+ * corp-hugo-only trailing modals/scripts and the variant footers
+ * (footer-small, footer-nycactivities, aws-reinvent-2020, footer-slim).
+ */
+import styles from './Footer.module.css';
+import FooterBlurb from './FooterBlurb.astro';
+import FooterAccordion from './FooterAccordion.tsx';
+import LanguageSelector from './LanguageSelector.tsx';
+import FreeTrialModal from './FreeTrialModal.tsx';
+import SocialIcon from './SocialIcon.astro';
+import SvgIcon from './SvgIcon.astro';
+import {
+  getFooterResources,
+  getFooterAbout,
+  getFooterBlog,
+  getFooterSub,
+  getFooterSocial,
+  resolveFooterUrl,
+  splitHalves,
+} from '../../lib/footerMenus';
+import { i18n } from '../../lib/i18n';
+import { getTranslations, getNativeLabel, type LangCode } from '../../lib/languageNames';
+import { getProductCategories, getProduct, resolveUrl } from '../../lib/menuData';
+
+// Products — assembled from the mega-menu product tree so the Product column
+// matches Hugo's `$datadir.menu_data.products` source. Flatten to a deduped
+// list preserving first-seen order.
+const seen = new Set<string>();
+const products: Array<{ identifier: string; label: string; url: string }> = [];
+for (const cat of getProductCategories()) {
+  for (const sub of cat.children ?? []) {
+    const ids = sub.products ?? (sub.sections ?? []).flatMap((s) => s.products);
+    for (const id of ids) {
+      if (seen.has(id)) continue;
+      seen.add(id);
+      const p = getProduct(id);
+      if (p) products.push({ identifier: p.identifier, label: i18n(p.lang_key), url: resolveUrl(p.url) });
+    }
+  }
+}
+const productHalves = splitHalves(products);
+
+const resourcesItems = getFooterResources().map((it) => ({ ...it, href: resolveFooterUrl(it.url) }));
+const aboutItems = getFooterAbout().map((it) => ({ ...it, href: resolveFooterUrl(it.url) }));
+const blogItems = getFooterBlog().map((it) => ({ ...it, href: resolveFooterUrl(it.url) }));
+const subItems = getFooterSub().map((it) => ({ ...it, href: resolveFooterUrl(it.url) }));
+const socialItems = getFooterSocial().map((it) => ({ ...it, href: resolveFooterUrl(it.url) }));
+
+const resourcesHalves = splitHalves(resourcesItems);
+const aboutHalves = splitHalves(aboutItems);
+const blogHalves = splitHalves(blogItems);
+
+const year = new Date().getFullYear();
+
+// Language selector — English-only for now. When i18n lands, append alternates
+// to this array and the popup will reveal them automatically.
+const currentLang: LangCode = 'en';
+const availableLanguages: LangCode[] = ['en'];
+const translate = getTranslations(currentLang);
+const currentLangOption = {
+  code: currentLang,
+  primary: getNativeLabel(currentLang),
+  secondary: translate(currentLang),
+  href: `/?lang_pref=${currentLang}`,
+};
+const alternates = availableLanguages
+  .filter((c) => c !== currentLang)
+  .map((code) => ({
+    code,
+    primary: getNativeLabel(code),
+    secondary: translate(code),
+    href: `/${code}/?lang_pref=${code}`,
+  }));
+
+// Pre-resolve globe and caret SVGs for the language selector island.
+const svgIcons = import.meta.glob<string>(
+  '../../mocked_dependencies/hugo_site/static/images/svg-icons/*.svg',
+  { query: '?raw', import: 'default', eager: true }
+);
+function inlineSvg(name: string, color: string, size: string): string {
+  const raw = svgIcons[`../../mocked_dependencies/hugo_site/static/images/svg-icons/${name}`];
+  if (!raw) return '';
+  return raw
+    .replaceAll('default-size', size)
+    .replaceAll('default-fill', color)
+    .replaceAll('default-opacity', '1.0');
+}
+const worldIconHtml = inlineSvg('world.svg', '#ffffff', '16px');
+const caretIconHtml = inlineSvg('arrow.svg', '#ffffff', '16px');
+
+// Free-trial modal config — swap iframeSrc when we move off app.datadoghq.com/signup.
+const freeTrialHref = 'https://app.datadoghq.com/signup';
+const freeTrialLabel = i18n('free_trial');
+
+const accordionClasses = {
+  column: styles.column,
+  header: styles.sectionHeader,
+  body: styles.sectionBody,
+  bodyOpen: styles['sectionBody--open'],
+  divider: styles.divider,
+  dividerDesktop: styles['divider--desktop'],
+  dividerMobile: styles['divider--mobile'],
+  columnBodyFlex: styles.columnBodyFlex,
+  columnBodyFlexStacked: styles.columnBodyFlexStacked,
+  menuLinks: styles.menuLinks,
+  menuLinksHalf: styles.menuLinksHalf,
+  menuLinksHalfLg100: styles.menuLinksHalfLg100,
+  menuLink: styles.menuLink,
+};
+
+const accordionSections = [
+  {
+    id: 'product' as const,
+    title: i18n('product'),
+    firstColumn: productHalves.first.map((p) => ({ label: p.label, href: p.url })),
+    secondColumn: productHalves.second.map((p) => ({ label: p.label, href: p.url })),
+    stackOnDesktop: false,
+  },
+  {
+    id: 'resources' as const,
+    title: i18n('resources'),
+    firstColumn: resourcesHalves.first.map((it) => ({ label: it.name, href: it.href, target: it.target })),
+    secondColumn: resourcesHalves.second.map((it) => ({ label: it.name, href: it.href, target: it.target })),
+    stackOnDesktop: true,
+  },
+  {
+    id: 'about' as const,
+    title: i18n('about'),
+    firstColumn: aboutHalves.first.map((it) => ({ label: it.name, href: it.href, target: it.target })),
+    secondColumn: aboutHalves.second.map((it) => ({ label: it.name, href: it.href, target: it.target })),
+    stackOnDesktop: true,
+  },
+  {
+    id: 'blog' as const,
+    title: i18n('blog'),
+    firstColumn: blogHalves.first.map((it) => ({ label: it.name, href: it.href, target: it.target })),
+    secondColumn: blogHalves.second.map((it) => ({ label: it.name, href: it.href, target: it.target })),
+    stackOnDesktop: true,
+  },
+];
+
+const langClasses = {
+  wrapper: styles.langToggle,
+  button: styles.langButton,
+  buttonLabel: styles.langButtonLabel,
+  caret: styles.langCaret,
+  caretOpen: styles['langCaret--open'],
+  popup: styles.langPopup,
+  popupOpen: styles['langPopup--open'],
+  item: styles.langItem,
+  primary: styles.langPrimary,
+  secondary: styles.langSecondary,
+};
+
+const modalClasses = {
+  overlay: styles.modalOverlay,
+  overlayOpen: styles['modalOverlay--open'],
+  dialog: styles.modalDialog,
+  header: styles.modalHeader,
+  title: styles.modalTitle,
+  close: styles.modalClose,
+  body: styles.modalBody,
+  iframe: styles.modalIframe,
+};
+---
+
+<footer class={styles.footer} data-testid="footer">
+  <div class={styles.container}>
+    <FooterBlurb />
+
+    <div class={styles.mainRow}>
+      {/* Trial + download column */}
+      <div class={`${styles.column} ${styles['column--trial']}`}>
+        <a
+          href={freeTrialHref}
+          class={styles.ctaOutline}
+          data-trigger="free-trial"
+          data-event-category="Signup"
+          data-event-action="Step 1 Footer Initiated"
+        >
+          <span>{freeTrialLabel}</span>
+        </a>
+
+        <p class={styles.downloadApp}>{i18n('download_mobile_app')}</p>
+
+        <div class={styles.downloadBadges}>
+          <a href="https://apps.apple.com/app/datadog/id1391380318" aria-label="Apple Store Link">
+            <span class={styles.badgeMobile}>
+              <SvgIcon src="app-store-badge.svg" color="#ffffff" />
+            </span>
+            <span class={styles.badgeDesktop}>
+              <SvgIcon src="apple.svg" color="#ffffff" />
+            </span>
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.datadog.app"
+            aria-label="Google Play Store Link"
+          >
+            <span class={styles.badgeMobile}>
+              <SvgIcon src="google-play-badge.svg" color="#ffffff" />
+            </span>
+            <span class={styles.badgeDesktop}>
+              <SvgIcon src="google-play.svg" color="#ffffff" />
+            </span>
+          </a>
+        </div>
+
+        <div class={`${styles.divider} ${styles['divider--mobile']}`} aria-hidden="true" />
+      </div>
+
+      <FooterAccordion
+        client:load
+        classes={accordionClasses}
+        sections={accordionSections}
+      />
+    </div>
+  </div>
+
+  <div class={`${styles.borderTop} ${styles['borderTop--desktop']}`} aria-hidden="true" />
+  <div class={styles.spacer} aria-hidden="true" />
+
+  <div class={styles.container}>
+    <div class={styles.bottomRow}>
+      <div class={styles.langCell}>
+        <LanguageSelector
+          client:load
+          currentLang={currentLangOption}
+          alternates={alternates}
+          worldIconHtml={worldIconHtml}
+          caretIconHtml={caretIconHtml}
+          classes={langClasses}
+        />
+      </div>
+
+      <div class={styles.legalCell}>
+        <span class={styles.copyright}>&copy; Datadog {year}</span>
+        {subItems.map((it, i) => (
+          <span class={styles.legalItem}>
+            <a href={it.href} class={styles.menuLink} target={it.target}>{it.name}</a>
+            {i !== subItems.length - 1 && <span>&nbsp;|&nbsp;</span>}
+          </span>
+        ))}
+      </div>
+
+      <div class={styles.socialCell}>
+        {socialItems.map((it, i) => (
+          <span class={`${styles.socialItem} ${i !== socialItems.length - 1 ? styles['socialItem--spaced'] : ''}`}>
+            <a
+              class={styles.socialLink}
+              href={it.href}
+              aria-label={`${it.name} link`}
+              target={it.target}
+            >
+              <SocialIcon name={it.pre} />
+            </a>
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>
+
+<FreeTrialModal client:load title={freeTrialLabel} iframeSrc={freeTrialHref} classes={modalClasses} />

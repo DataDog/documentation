@@ -1,0 +1,52 @@
+---
+/**
+ * Inlines an SVG from the hugo_site/static/images/svg-icons mock, mirroring
+ * Hugo's svg.html partial. Replaces `default-size` / `default-fill` /
+ * `default-opacity` placeholders with the props passed in, matching the
+ * behavior Hugo uses to color world.svg etc. at render time.
+ */
+const icons = import.meta.glob<string>(
+  '../../mocked_dependencies/hugo_site/static/images/svg-icons/*.svg',
+  { query: '?raw', import: 'default', eager: true }
+);
+
+interface Props {
+  src: string;
+  size?: string;
+  color?: string;
+  opacity?: string;
+  class?: string;
+}
+
+const { src, size = '100%', color = '#000000', opacity = '1.0', class: className } = Astro.props;
+const key = `../../mocked_dependencies/hugo_site/static/images/svg-icons/${src}`;
+const rawOriginal: string | undefined = icons[key];
+
+const raw = rawOriginal
+  ? rawOriginal
+      .replaceAll('default-size', size)
+      .replaceAll('default-fill', color)
+      .replaceAll('default-opacity', opacity)
+  : undefined;
+---
+
+{raw ? (
+  <span class={`svg-icon ${className ?? ''}`} set:html={raw} />
+) : (
+  <span class={`svg-icon svg-icon--missing ${className ?? ''}`} aria-hidden="true" />
+)}
+
+<style is:global>
+  .svg-icon {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
+  .svg-icon--missing {
+    width: 1em;
+    height: 1em;
+    background: currentColor;
+    opacity: 0.4;
+    border-radius: 50%;
+  }
+</style>
