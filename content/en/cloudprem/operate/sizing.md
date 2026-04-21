@@ -185,7 +185,7 @@ The following values are automatically applied to searcher configuration when yo
 
 ## Sizing examples
 
-The following table provides starting-point configurations for common daily log volumes. These are baseline recommendations — adjust based on your observed performance.
+The following table provides starting-point configurations for common daily log volumes. These are baseline recommendations—adjust based on your observed performance.
 
 | Daily volume | Indexer pods | Indexer podSize | Searcher pods | Searcher podSize | Object storage (30-day retention, ~4x compression) |
 |-------------|-------------|-----------------|---------------|-------------------|-----------------------------------------------------|
