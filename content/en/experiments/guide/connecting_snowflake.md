@@ -85,16 +85,16 @@ GRANT ALL PRIVILEGES ON WAREHOUSE datadog_experiments_wh TO ROLE datadog_experim
 
 To connect your Snowflake account to Datadog for warehouse-native experiment analysis:
 
-1. Navigate to [Datadog's integrations page][2] and search for **Snowflake**.
-1. Click the **Snowflake** tile to open its modal.
-1. Select the **Configure** tab and click **Add Snowflake Account**.
-1. Add your **Account URL**. To find your account URL, see the [Snowflake guide][3].
+1. Navigate to [Datadog's integrations page][2] and search for {{< ui >}}Snowflake{{< /ui >}}.
+1. Click the {{< ui >}}Snowflake{{< /ui >}} tile to open its modal.
+1. Select the {{< ui >}}Configure{{< /ui >}} tab and click {{< ui >}}Add Snowflake Account{{< /ui >}}.
+1. Add your {{< ui >}}Account URL{{< /ui >}}. To find your account URL, see the [Snowflake guide][3].
 1. Toggle off all resources (these are not needed for experiment analysis).
-1. Enter the Snowflake **User Name** you created in [Step 1](#step-1-prepare-the-snowflake-service-account) (for example, `datadog_experiments_user`).
-1. Scroll to the **Configure a key pair authentication** section and upload your unencrypted **private key**.
-1. Click **Save**.
+1. Enter the Snowflake {{< ui >}}User Name{{< /ui >}} you created in [Step 1](#step-1-prepare-the-snowflake-service-account) (for example, `datadog_experiments_user`).
+1. Scroll to the {{< ui >}}Configure a key pair authentication{{< /ui >}} section and upload your unencrypted {{< ui >}}private key{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
-<div class="alert alert-info">The grants in the <strong>Recommended Warehouse Settings</strong> section of the Snowflake integration tile are not needed for warehouse-native experiment analysis. The privileges granted in <a href="#grant-privileges-to-the-role">Step 1</a> are sufficient.
+<div class="alert alert-info">The grants in the {{< ui >}}Recommended Warehouse Settings{{< /ui >}} section of the Snowflake integration tile are not needed for warehouse-native experiment analysis. The privileges granted in <a href="#grant-privileges-to-the-role">Step 1</a> are sufficient.
 <br><br> If you plan to use other warehouse observability functionality in Datadog, see <a href="https://docs.datadoghq.com/integrations/snowflake-web/">Datadog's Snowflake integration documentation</a> to determine which resources to enable.</div>
 
 {{< img src="/product_analytics/experiment/guide/snowflake_main_integration.png" alt="The Snowflake integration tile in Datadog showing the Configure tab with the Add a new Snowflake account form, including an Account URL field and resource toggles for Metrics and Logs." style="width:90%;" >}}
@@ -105,12 +105,12 @@ To connect your Snowflake account to Datadog for warehouse-native experiment ana
 
 After you set up your Snowflake integration, configure the experiment settings in [Datadog Product Analytics][4]:
 
-1. In the left navigation, hover over **Settings**, then click **Experiments**.
-1. Select the **Warehouse Connections** tab.
-1. Click **Connect a data warehouse**. If you already have a warehouse connected, click **Edit** instead.
-1. Select the **Snowflake** tile.
-1. Enter the **Account**, **Role**, **Warehouse**, **Database**, and **Schema** you configured in [Step 1](#step-1-prepare-the-snowflake-service-account). If your database and schema do not appear in the dropdown, enter them manually to add them to the list.
-1. Click **Save**.
+1. In the left navigation, hover over {{< ui >}}Settings{{< /ui >}}, then click {{< ui >}}Experiments{{< /ui >}}.
+1. Select the {{< ui >}}Warehouse Connections{{< /ui >}} tab.
+1. Click {{< ui >}}Connect a data warehouse{{< /ui >}}. If you already have a warehouse connected, click {{< ui >}}Edit{{< /ui >}} instead.
+1. Select the {{< ui >}}Snowflake{{< /ui >}} tile.
+1. Enter the {{< ui >}}Account{{< /ui >}}, {{< ui >}}Role{{< /ui >}}, {{< ui >}}Warehouse{{< /ui >}}, {{< ui >}}Database{{< /ui >}}, and {{< ui >}}Schema{{< /ui >}} you configured in [Step 1](#step-1-prepare-the-snowflake-service-account). If your database and schema do not appear in the dropdown, enter them manually to add them to the list.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="/product_analytics/experiment/guide/snowflake_experiment_setup.png" alt="The Edit Data Warehouse modal with Snowflake selected, showing two sections: Select Snowflake Account with fields for Account, Role, and Warehouse, and Select Database and Schema with fields for Database and Schema." style="width:90%;" >}}
 

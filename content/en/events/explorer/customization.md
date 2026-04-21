@@ -8,7 +8,7 @@ Customize your Events Explorer to fit your visualization and analyzing needs.
 
 ## Options
 
-At the top of the right of your events table, click the cog **Options** button to:
+At the top of the right of your events table, click the cog {{< ui >}}Options{{< /ui >}} button to:
 
 - Adjust the columns displayed.
 - Select list density from compact to expanded.

@@ -26,7 +26,7 @@ To create, configure, and launch your experiment, complete the following steps:
 ### Step 1 - Create your experiment
 
 1. Navigate to the [Experiments][1] page in Datadog Product Analytics.
-2. Click **+ Create Experiment**.
+2. Click {{< ui >}}+ Create Experiment{{< /ui >}}.
 3. Enter your experiment name and hypothesis.
 
 {{< img src="/product_analytics/experiment/exp_create_experiment.png" alt="The experiment creation form with fields for experiment name and hypothesis." style="width:80%;" >}}
@@ -41,8 +41,8 @@ After you have created an experiment, add your primary metric and optional guard
 
 After selecting your experiment’s metrics, use the optional sample size calculator to determine how small of a change your experiment can reliably detect with your current sample size.
 
-1. Select the **Entrypoint Event** of your experiment. This specifies _when_ in the user journey they will be enrolled into the test.
-1. Click **Run calculation** to see the [Minimum Detectable Effects][3] (MDE) your experiment has on your metrics. The MDE is the smallest difference you can detect between your experiment’s variants.
+1. Select the {{< ui >}}Entrypoint Event{{< /ui >}} of your experiment. This specifies _when_ in the user journey they will be enrolled into the test.
+1. Click {{< ui >}}Run calculation{{< /ui >}} to see the [Minimum Detectable Effects][3] (MDE) your experiment has on your metrics. The MDE is the smallest difference you can detect between your experiment’s variants.
 
 {{< img src="/product_analytics/experiment/exp_sample_size.png" alt="The Sample Size Calculator modal with the Entrypoint Event dropdown highlighted." style="width:90%;" >}}
 
@@ -52,7 +52,7 @@ After specifying your metrics, you can launch your experiment.
 
 1. Select a feature flag that captures the variants you want to test. If you have not yet created a feature flag, see the [Getting Started with Feature Flags][4] page.
 
-1. Click **Set Up Experiment on Feature Flag** to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout.
+1. Click {{< ui >}}Set Up Experiment on Feature Flag{{< /ui >}} to specify how you want to roll out your experiment. You can either launch the experiment to all traffic, or schedule a gradual rollout.
 
 {{< img src="/product_analytics/experiment/exp_feature_flag.png" alt="Set up an experiment on a Feature Flag." style="width:90%;" >}}
 

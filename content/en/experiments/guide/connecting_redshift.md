@@ -26,21 +26,21 @@ Datadog Experiments connects to Redshift through [Datadog's Amazon Web Services 
 
 {{% collapse-content title="Set up the AWS integration" level="h4" %}}
 
-<div class="alert alert-info">Adding an AWS account requires the <strong>AWS Configurations Manage</strong> permission. If your organization uses custom roles, verify that your role includes this permission.</div>
+<div class="alert alert-info">Adding an AWS account requires the {{< ui >}}AWS Configurations Manage{{< /ui >}} permission. If your organization uses custom roles, verify that your role includes this permission.</div>
 
-1. Navigate to [Datadog's integrations page][5] and search for **Amazon Web Services**.
-1. Click the **Amazon Web Services** tile to open its modal.
-1. Click **Add AWS Account(s)** under the **Configuration** tab.
-   1. If you do not yet have the AWS integration installed, **Add AWS Account(s)** appears on the AWS landing page after you open the integration tile.
-1. Follow the **CloudFormation** setup flow to create an IAM role that allows Datadog to make API calls to your AWS account:
-   1. Select your **AWS Region**.
-   1. Choose your **Datadog API Key**.
-   1. Create a **Datadog Application Key**.
-   1. Toggle off **Deploy log forwarder** and **Disable All** Log Resources (these are not needed for experiment analysis).
-   1. Select **No** for **Detect security issues**.
-   1. Click **Open in AWS Console** to launch your CloudFormation template. See the [Getting Started with AWS documentation][6] for instructions on navigating the AWS console.
+1. Navigate to [Datadog's integrations page][5] and search for {{< ui >}}Amazon Web Services{{< /ui >}}.
+1. Click the {{< ui >}}Amazon Web Services{{< /ui >}} tile to open its modal.
+1. Click {{< ui >}}Add AWS Account(s){{< /ui >}} under the {{< ui >}}Configuration{{< /ui >}} tab.
+   1. If you do not yet have the AWS integration installed, {{< ui >}}Add AWS Account(s){{< /ui >}} appears on the AWS landing page after you open the integration tile.
+1. Follow the {{< ui >}}CloudFormation{{< /ui >}} setup flow to create an IAM role that allows Datadog to make API calls to your AWS account:
+   1. Select your {{< ui >}}AWS Region{{< /ui >}}.
+   1. Choose your {{< ui >}}Datadog API Key{{< /ui >}}.
+   1. Create a {{< ui >}}Datadog Application Key{{< /ui >}}.
+   1. Toggle off {{< ui >}}Deploy log forwarder{{< /ui >}} and {{< ui >}}Disable All{{< /ui >}} Log Resources (these are not needed for experiment analysis).
+   1. Select {{< ui >}}No{{< /ui >}} for {{< ui >}}Detect security issues{{< /ui >}}.
+   1. Click {{< ui >}}Open in AWS Console{{< /ui >}} to launch your CloudFormation template. See the [Getting Started with AWS documentation][6] for instructions on navigating the AWS console.
 
-You can follow your configuration's completion steps under **Deployment Status** on the integration setup page in Datadog.
+You can follow your configuration's completion steps under {{< ui >}}Deployment Status{{< /ui >}} on the integration setup page in Datadog.
 
 {{% /collapse-content %}}
 
@@ -154,27 +154,27 @@ Use the following table to gather the values for your environment, then add the 
 
 ## Step 3: Configure experiment settings
 
-<div class="alert alert-info">Datadog supports one warehouse connection per organization. Connecting Redshift replaces any existing warehouse connection (for example, Snowflake).<br><br>Configuring experiment settings requires the <strong>Product Analytics Settings Write</strong> permission. If your organization uses custom roles, verify that your role includes this permission.</div>
+<div class="alert alert-info">Datadog supports one warehouse connection per organization. Connecting Redshift replaces any existing warehouse connection (for example, Snowflake).<br><br>Configuring experiment settings requires the {{< ui >}}Product Analytics Settings Write{{< /ui >}} permission. If your organization uses custom roles, verify that your role includes this permission.</div>
 
 After you set up your AWS integration and Redshift cluster, configure the experiment settings in Datadog:
 
 1. Open [Datadog Product Analytics][2].
-1. In the left navigation, hover over **Settings** and click **Experiments**.
-1. Select the **Warehouse Connections** tab.
-1. Click **Connect a data warehouse**. If you already have a warehouse connected, click **Edit** instead.
-1. Select the **Redshift** tile.
-1. Select your **AWS account** from the dropdown.
-1. Under **Cluster Connection**, enter:
-   - **AWS region**: The region your Redshift cluster is in (for example, `us-east-1`).
-   - **Cluster identifier**: The name of your Redshift cluster.
-   - **Cluster endpoint**: The full endpoint URL for your cluster.
-   - **Port**: The port your cluster is listening on (default: `5439`).
-1. Under **Database and Storage**, enter:
-   - **Database**: The name of the database containing your source tables.
-   - **Database user**: The service user you created in [Step 1](#create-a-datadog-service-user-in-your-redshift-database) (for example, `datadog_experiments_user`).
-   - **Schema**: The schema you created in [Step 1](#create-an-output-schema) for Datadog Experiments to write to (for example, `datadog_experiments_output`).
-   - **Temp S3 bucket**: The S3 bucket you created in [Step 2](#create-an-s3-bucket) (for example, `datadog-experimentation-[aws_account_id]`).
-1. Click **Save**.
+1. In the left navigation, hover over {{< ui >}}Settings{{< /ui >}} and click {{< ui >}}Experiments{{< /ui >}}.
+1. Select the {{< ui >}}Warehouse Connections{{< /ui >}} tab.
+1. Click {{< ui >}}Connect a data warehouse{{< /ui >}}. If you already have a warehouse connected, click {{< ui >}}Edit{{< /ui >}} instead.
+1. Select the {{< ui >}}Redshift{{< /ui >}} tile.
+1. Select your {{< ui >}}AWS account{{< /ui >}} from the dropdown.
+1. Under {{< ui >}}Cluster Connection{{< /ui >}}, enter:
+   - {{< ui >}}AWS region{{< /ui >}}: The region your Redshift cluster is in (for example, `us-east-1`).
+   - {{< ui >}}Cluster identifier{{< /ui >}}: The name of your Redshift cluster.
+   - {{< ui >}}Cluster endpoint{{< /ui >}}: The full endpoint URL for your cluster.
+   - {{< ui >}}Port{{< /ui >}}: The port your cluster is listening on (default: `5439`).
+1. Under {{< ui >}}Database and Storage{{< /ui >}}, enter:
+   - {{< ui >}}Database{{< /ui >}}: The name of the database containing your source tables.
+   - {{< ui >}}Database user{{< /ui >}}: The service user you created in [Step 1](#create-a-datadog-service-user-in-your-redshift-database) (for example, `datadog_experiments_user`).
+   - {{< ui >}}Schema{{< /ui >}}: The schema you created in [Step 1](#create-an-output-schema) for Datadog Experiments to write to (for example, `datadog_experiments_output`).
+   - {{< ui >}}Temp S3 bucket{{< /ui >}}: The S3 bucket you created in [Step 2](#create-an-s3-bucket) (for example, `datadog-experimentation-[aws_account_id]`).
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="/product_analytics/experiment/guide/redshift_pa_setup.png" alt="The Redshift connection setup page in Datadog showing warehouse type tiles for Snowflake, BigQuery, Redshift (selected), and Databricks, with three sections: Select AWS Account with an AWS account dropdown, Cluster Connection with fields for AWS region, Cluster identifier, Cluster endpoint, and Port, and Database and Storage with fields for Database, Database user, Schema, and Temp S3 bucket." style="width:90%;" >}}
 

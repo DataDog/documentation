@@ -38,13 +38,13 @@ You can create a Case Management case directly from the issue panel to group inv
 
 1. Navigate to the [Error Tracking Explorer][2].
 2. Click on an issue to open the issue panel.
-3. In the issue panel, in the **Actions** dropdown, click **Add Case**.
+3. In the issue panel, in the {{< ui >}}Actions{{< /ui >}} dropdown, click {{< ui >}}Add Case{{< /ui >}}.
 4. Choose the Case Management project in which the case should be created. By default, the case will automatically be created in the Error Tracking project.
-5. Click **Create** to create the case.
+5. Click {{< ui >}}Create{{< /ui >}} to create the case.
 
 {{< img src="error_tracking/create-case.png" alt="Create a Case Management case from an Error Tracking issue" style="width:100%;" >}}
 
-After it is created, the case is linked to the Error Tracking issue. The case link then appears in the issue panel, and the issue status automatically changes to **REVIEWED**.
+After it is created, the case is linked to the Error Tracking issue. The case link then appears in the issue panel, and the issue status automatically changes to {{< ui >}}REVIEWED{{< /ui >}}.
 
 When an issue is linked to a case, their state, assignee, and comments are two-way synced.
 See [State dual-way sync between issues and cases](#state-dual-way-sync-between-issues-and-cases) for more information on how the issue state and case status are synced.
@@ -55,9 +55,9 @@ You can attach multiple Error Tracking issues to a single Case Management case t
 
 1. Navigate to the [Error Tracking Explorer][2].
 2. Click on an issue to open the issue panel.
-3. In the issue panel, in the **Actions** dropdown, click **Add Case**.
-4. In the **Add to Existing Case** tab, select the case in which you want to group your issues.
-5. Click **Attach to Case** to attach the issue to the case.
+3. In the issue panel, in the {{< ui >}}Actions{{< /ui >}} dropdown, click {{< ui >}}Add Case{{< /ui >}}.
+4. In the {{< ui >}}Add to Existing Case{{< /ui >}} tab, select the case in which you want to group your issues.
+5. Click {{< ui >}}Attach to Case{{< /ui >}} to attach the issue to the case.
 6. Repeat these actions on all the issues you want to add to this group.
 
 {{< img src="error_tracking/add-to-existing-case.png" alt="Add an Error Tracking issue to an existing case" >}}
@@ -79,11 +79,11 @@ the default status of the corresponding case status group:
 
 | Error Tracking Issue State | Case Management Status Group |
 |----------------------------|------------------------------|
-| FOR REVIEW                 | Open                         |
-| REVIEWED                   | In Progress                  |
-| RESOLVED                   | Closed                       |
-| IGNORED                    | Closed                       |
-| EXCLUDED                   | Closed                       |
+| {{< ui >}}FOR REVIEW{{< /ui >}}  | {{< ui >}}Open{{< /ui >}}        |
+| {{< ui >}}REVIEWED{{< /ui >}}    | {{< ui >}}In Progress{{< /ui >}} |
+| {{< ui >}}RESOLVED{{< /ui >}}    | {{< ui >}}Closed{{< /ui >}}      |
+| {{< ui >}}IGNORED{{< /ui >}}     | {{< ui >}}Closed{{< /ui >}}      |
+| {{< ui >}}EXCLUDED{{< /ui >}}    | {{< ui >}}Closed{{< /ui >}}      |
 
 ### Multiple Error Tracking issues linked to single Case Management case
 
@@ -93,10 +93,10 @@ When multiple Error Tracking issues are linked to the same Case Management case,
 
 | State before                                                       | Action                                                 | Resulting state                                                                                 |
 |--------------------------------------------------------------------|--------------------------------------------------------|-------------------------------------------------------------------------------------------------|
-| The case is `CLOSED` and all issues are `RESOLVED`.                | You update one issue to `FOR REVIEW`.                  | The case is `OPEN` but all other issues remain `RESOLVED`.                                      |
-| The case is `OPEN` and all issues are `FOR REVIEW`.                | You update one issue to `RESOLVED`.                    | The case is `OPEN`, one issue is `RESOLVED`, all other issues remain `FOR REVIEW`.              |
-| The case is `CLOSED` and you have one unlinked issue `FOR REVIEW`. | You link the `FOR REVIEW` issue to your `CLOSED` case. | The case is `CLOSED` and all issues are `RESOLVED` (including the newly linked issue).          |
-| The case is `OPEN` and you have one unlinked `RESOLVED` issue.     | You link the `RESOLVED` issue to your `OPEN` case.     | The case is `OPEN` and all issues are `FOR REVIEW` except the new one which remains `RESOLVED`. |
+| The case is {{< ui >}}CLOSED{{< /ui >}} and all issues are {{< ui >}}RESOLVED{{< /ui >}}.                | You update one issue to {{< ui >}}FOR REVIEW{{< /ui >}}.                  | The case is {{< ui >}}OPEN{{< /ui >}} but all other issues remain {{< ui >}}RESOLVED{{< /ui >}}.                                      |
+| The case is {{< ui >}}OPEN{{< /ui >}} and all issues are {{< ui >}}FOR REVIEW{{< /ui >}}.                | You update one issue to {{< ui >}}RESOLVED{{< /ui >}}.                    | The case is {{< ui >}}OPEN{{< /ui >}}, one issue is {{< ui >}}RESOLVED{{< /ui >}}, all other issues remain {{< ui >}}FOR REVIEW{{< /ui >}}.              |
+| The case is {{< ui >}}CLOSED{{< /ui >}} and you have one unlinked issue {{< ui >}}FOR REVIEW{{< /ui >}}. | You link the {{< ui >}}FOR REVIEW{{< /ui >}} issue to your {{< ui >}}CLOSED{{< /ui >}} case. | The case is {{< ui >}}CLOSED{{< /ui >}} and all issues are {{< ui >}}RESOLVED{{< /ui >}} (including the newly linked issue).          |
+| The case is {{< ui >}}OPEN{{< /ui >}} and you have one unlinked {{< ui >}}RESOLVED{{< /ui >}} issue.     | You link the {{< ui >}}RESOLVED{{< /ui >}} issue to your {{< ui >}}OPEN{{< /ui >}} case.     | The case is {{< ui >}}OPEN{{< /ui >}} and all issues are {{< ui >}}FOR REVIEW{{< /ui >}} except the new one which remains {{< ui >}}RESOLVED{{< /ui >}}. |
 
 ## Automation rules
 
@@ -112,13 +112,13 @@ To create automation rules for your Error Tracking issues, you need one (1) of t
 
 To create an automation rule for Case Management:
 
-1. Navigate to [Error Tracking Settings][3], in the **Ticketing & Automation** section.
-2. Click **New Rule**.
+1. Navigate to [Error Tracking Settings][3], in the {{< ui >}}Ticketing & Automation{{< /ui >}} section.
+2. Click {{< ui >}}New Rule{{< /ui >}}.
 3. Configure the rule:
-    - **Match Criteria**: Define conditions that issues must meet to trigger the rule
-    - **Project**: Select the destination Case Management project when cases are created from issues that match the rule
-    - **Auto-create**: Optionally enable automatic case creation when issues match
-4. Click **Save Rule**.
+    - {{< ui >}}Match Criteria{{< /ui >}}: Define conditions that issues must meet to trigger the rule
+    - {{< ui >}}Project{{< /ui >}}: Select the destination Case Management project when cases are created from issues that match the rule
+    - {{< ui >}}Auto-create{{< /ui >}}: Optionally enable automatic case creation when issues match
+4. Click {{< ui >}}Save Rule{{< /ui >}}.
 
 {{< img src="error_tracking/create-case-management-automation-rule.png" alt="Create a Case Management automation rule" style="width:100%;" >}}
 
@@ -126,8 +126,8 @@ To create an automation rule for Case Management:
 
 Configure rules based on the following attributes:
 
-- **Service**: Match issues from specific services (for example, `service:web-store`)
-- **Team**: Match issues based on [Issue Team Ownership][4] (for example, `team:Shopist`)
+- {{< ui >}}Service{{< /ui >}}: Match issues from specific services (for example, `service:web-store`)
+- {{< ui >}}Team{{< /ui >}}: Match issues based on [Issue Team Ownership][4] (for example, `team:Shopist`)
 
 You can combine multiple criteria to create precise routing rules. The issue matching query supports the following operators:
 

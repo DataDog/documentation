@@ -44,7 +44,7 @@ The [Check Summary][1] page lists all checks reported across your infrastructure
 
 ### Screenboards
 
-You can visualize service checks with a **Check status** widget in a screenboard:
+You can visualize service checks with a {{< ui >}}Check status{{< /ui >}} widget in a screenboard:
 
 {{< img src="extend/service_checks/check_status_widget.png" alt="Check status widget" >}}
 
@@ -54,10 +54,10 @@ After clicking on the **Check status** widget icon, the following pop-up appears
 
 In this form, you can:
 
-- **Check Name**: Select your service check name.
-- **Reporting Timeframe**: Select the time frame on which you want to aggregate your status.
-- **Scoping**: Select a single check or a cluster of check statuses reported by a single tag value or a tag key.
-- **Widget Title**: Set your widget title.
+- {{< ui >}}Check Name{{< /ui >}}: Select your service check name.
+- {{< ui >}}Reporting Timeframe{{< /ui >}}: Select the time frame on which you want to aggregate your status.
+- {{< ui >}}Scoping{{< /ui >}}: Select a single check or a cluster of check statuses reported by a single tag value or a tag key.
+- {{< ui >}}Widget Title{{< /ui >}}: Set your widget title.
 
 ## Service check monitor
 
@@ -67,11 +67,11 @@ Even if you can't graph a service check over time as you would for metrics, you 
 
 In this form, you can:
 
-- **Pick a service check**: Select the check status name to monitor.
-- **Pick monitor scope**: Select the context for your monitor (including/excluding tags).
-- **Set alert conditions**: Choose between a simple check alert or a cluster alert.
-- **Configure notifications and automations**: Choose who this monitor should notify and edit the notifications sent (find more about [Datadog notifications][4]).
-- **Define permissions and audit notifications**: Edit access permissions for your monitor and set audit notifications.
+- {{< ui >}}Pick a service check{{< /ui >}}: Select the check status name to monitor.
+- {{< ui >}}Pick monitor scope{{< /ui >}}: Select the context for your monitor (including/excluding tags).
+- {{< ui >}}Set alert conditions{{< /ui >}}: Choose between a simple check alert or a cluster alert.
+- {{< ui >}}Configure notifications and automations{{< /ui >}}: Choose who this monitor should notify and edit the notifications sent (find more about [Datadog notifications][4]).
+- {{< ui >}}Define permissions and audit notifications{{< /ui >}}: Edit access permissions for your monitor and set audit notifications.
 
 For more information on creating a service check, see [Service Check Monitor][5].
 
