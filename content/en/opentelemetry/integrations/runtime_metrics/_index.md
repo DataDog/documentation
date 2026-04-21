@@ -53,6 +53,14 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 - [Java 8][5]
 - [Java 17][6]
 
+#### Experimental telemetry
+
+Enabling experimental OpenTelemetry runtime telemetry may provide additional metric mappings between Datadog and OpenTelemetry for Java. To enable it, set the following environment variable:
+
+```
+OTEL_INSTRUMENTATION_RUNTIME_TELEMETRY_EMIT_EXPERIMENTAL_TELEMETRY=true
+```
+
 #### Additional JMX metrics
 
 To collect additional JVM metrics beyond the default runtime instrumentation, install the [OpenTelemetry JMX Metric Scraper][9]. The scraper scrapes MBeans over JMX and emits them as OpenTelemetry metrics, which Datadog then maps to runtime metrics (see the [JVM Contrib table](#jvm-contrib) in [Data collected](#data-collected)).
@@ -70,6 +78,8 @@ processors:
       - jvm.gc.collections.count
       - jvm.gc.collections.elapsed
 ```
+
+**Note**: The minimum supported version of the OpenTelemetry Java agent is [2.0.0](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/tag/v2.0.0).
 
 [3]: https://opentelemetry.io/docs/instrumentation/java/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/java/manual/
@@ -108,6 +118,8 @@ processors:
         - go.memory.allocations
       match_type: strict
 ```
+
+**Note**: The minimum supported version of [`go.opentelemetry.io/contrib/instrumentation/runtime`][4] is v0.46.0, which also requires Go 1.20+ and [OpenTelemetry Go SDK v1.21.0+](https://github.com/open-telemetry/opentelemetry-go/releases/tag/v1.21.0).
 
 [3]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [4]: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime
@@ -188,6 +200,8 @@ Host-level metrics such as system CPU and memory usage are not included in OpenT
    ```
 
 For the list of metrics collected by this package, see the [Node.js Contrib Host table](#nodejs-contrib-host).
+
+**Note**: The minimum supported version of [`@opentelemetry/instrumentation-runtime-node`][5] is [0.9.0](https://github.com/open-telemetry/opentelemetry-js-contrib/releases/tag/instrumentation-runtime-node-v0.9.0).
 
 [3]: https://opentelemetry.io/docs/zero-code/js/
 [4]: https://opentelemetry.io/docs/languages/js/instrumentation/
