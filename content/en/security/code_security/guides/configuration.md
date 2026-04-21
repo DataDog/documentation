@@ -147,7 +147,7 @@ sca:
 
 The example demonstrates each merge rule from the table above:
 
-- **Lists concatenate**: `use-rulesets` merges to `[A, B]`; `ignore-paths` merges to `["vendor/", "third_party/"]`.
+- **Lists concatenate**: `use-rulesets` merges to `[A, B]`; the SCA `ignore-paths` merges to `["vendor/", "third_party/"]`.
 - **Scalars use the highest-precedence value**: `maxCount: 22` (repo-level) overrides `maxCount: 10` (org-level).
 - **Maps merge recursively**: The `foo` rule config keeps `ignore-paths` from the org level while applying `maxCount: 22` from the repo level. New entries like `bar` are added from the repo level.
 
