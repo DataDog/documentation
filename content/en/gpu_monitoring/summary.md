@@ -1,6 +1,5 @@
 ---
 title: GPU Monitoring Summary Page
-private: true
 description: "Real-time insights across your entire GPU fleet for better provisioning and cost optimization"
 further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"

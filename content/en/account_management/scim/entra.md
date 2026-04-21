@@ -36,40 +36,40 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 ## Add Datadog to the Microsoft Entra ID application gallery
 
 1. Sign in to the [Microsoft Entra admin center][6] as at least a [Cloud Application Administrator][7]
-1. Browse to **Identity** -> **Applications** -> **Enterprise Applications**
-1. Click **New Application**
+1. Browse to {{< ui >}}Identity{{< /ui >}} -> {{< ui >}}Applications{{< /ui >}} -> {{< ui >}}Enterprise Applications{{< /ui >}}
+1. Click {{< ui >}}New Application{{< /ui >}}
 1. Type "Datadog" in the search box
 1. Select the Datadog application from the gallery
-1. Optionally, enter a name in the **Name** text box
-1. Click **Create**
+1. Optionally, enter a name in the {{< ui >}}Name{{< /ui >}} text box
+1. Click {{< ui >}}Create{{< /ui >}}
 
-**Note:** If you already have Datadog configured with Microsoft Entra ID for SSO, go to **Enterprise Applications** and select your existing Datadog application.
+**Note:** If you already have Datadog configured with Microsoft Entra ID for SSO, go to {{< ui >}}Enterprise Applications{{< /ui >}} and select your existing Datadog application.
 
 ## Configure automatic user provisioning
 
-1. In the application management screen, select **Provisioning** in the left panel
-2. In the **Provisioning Mode** menu, select **Automatic**
-3. Open **Admin Credentials**
-4. Complete the **Admin Credentials** section as follows:
-    - **Tenant URL**: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim?aadOptscim062020`
+1. In the application management screen, select {{< ui >}}Provisioning{{< /ui >}} in the left panel
+2. In the {{< ui >}}Provisioning Mode{{< /ui >}} menu, select {{< ui >}}Automatic{{< /ui >}}
+3. Open {{< ui >}}Admin Credentials{{< /ui >}}
+4. Complete the {{< ui >}}Admin Credentials{{< /ui >}} section as follows:
+    - {{< ui >}}Tenant URL{{< /ui >}}: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim?aadOptscim062020`
         - **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
         - **Note:** The `?aadOptscim062020` part of the Tenant URL is specifically for Entra ID. This is a flag that tells Entra to correct its SCIM behavior as outlined in this [Microsoft Entra documentation][8]. If you are not using Entra ID, you should not include this suffix on the URL.
-    - **Secret Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
+    - {{< ui >}}Secret Token{{< /ui >}}: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
 
 {{< img src="/account_management/scim/admin-credentials-entra-flag.png" alt="Azure AD Admin Credentials configuration screen">}}
 
-5. Click **Test Connection**, and wait for the message confirming that the credentials are authorized to enable provisioning.
-6. Click **Save**. The mapping section appears. See the following section to configure mapping.
+5. Click {{< ui >}}Test Connection{{< /ui >}}, and wait for the message confirming that the credentials are authorized to enable provisioning.
+6. Click {{< ui >}}Save{{< /ui >}}. The mapping section appears. See the following section to configure mapping.
 
 ## Attribute mapping
 
 ### User attributes
 
-1. Expand the **Mappings** section
-2. Click **Provision Azure Active Directory Users**. The Attribute Mapping page appears.
-3. Set **Enabled** to **Yes**
-4. Click the **Save** icon
-5. Under **Target Object actions**, ensure Create, Update, and Delete actions are selected
+1. Expand the {{< ui >}}Mappings{{< /ui >}} section
+2. Click {{< ui >}}Provision Azure Active Directory Users{{< /ui >}}. The Attribute Mapping page appears.
+3. Set {{< ui >}}Enabled{{< /ui >}} to {{< ui >}}Yes{{< /ui >}}
+4. Click the {{< ui >}}Save{{< /ui >}} icon
+5. Under {{< ui >}}Target Object actions{{< /ui >}}, ensure Create, Update, and Delete actions are selected
 6. Review the user attributes that are synchronized from Microsoft Entra ID to Datadog in the attribute mapping section. Set the following mappings:
 | Microsoft Entra ID Attribute     | Datadog Attribute              |
 |----------------------------------|--------------------------------|
@@ -81,7 +81,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 
    {{< img src="/account_management/scim/ad-users-2.png" alt="Attribute mapping configuration, Provision Azure Active Directory Users">}}
 
-7. After you set your mappings, click **Save**.
+7. After you set your mappings, click {{< ui >}}Save{{< /ui >}}.
 
 ### Group attributes
 

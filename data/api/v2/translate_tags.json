@@ -47,6 +47,10 @@
     "name": "AuthN Mappings",
     "description": "[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map groups of users to roles in Datadog using attributes\nsent from Identity Providers. Use these endpoints to manage your AuthN Mappings."
   },
+  "bits-ai": {
+    "name": "Bits AI",
+    "description": "Use the Bits AI endpoints to retrieve AI-powered investigations."
+  },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
     "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information."
@@ -123,9 +127,13 @@
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
+  "dashboard-secure-embed": {
+    "name": "Dashboard Secure Embed",
+    "description": "Manage securely embedded Datadog dashboards. Secure embeds use HMAC-SHA256 signed sessions\nfor authentication, enabling customers to embed dashboards in their own applications with\nserver-side auth control. Unlike public dashboards (open URL) or invite dashboards\n(email-based access), secure embeds provide programmatic access control.\n\n**Requirements:**\n- **Embed** sharing must be enabled under **Organization Settings** > **Public Sharing** > **Shared Dashboards**.\n- You need [an API key and an application key](https://docs.datadoghq.com/account_management/api-app-keys/) to interact with these endpoints."
+  },
   "datasets": {
     "name": "Datasets",
-    "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, custom metrics, and RUM data)."
+    "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
   },
   "deployment-gates": {
     "name": "Deployment Gates",
@@ -205,7 +213,7 @@
   },
   "llm-observability": {
     "name": "LLM Observability",
-    "description": "Manage LLM Observability projects, datasets, dataset records, and experiments via the Experiments API."
+    "description": "Manage LLM Observability projects, datasets, dataset records, experiments, and annotations."
   },
   "logs": {
     "name": "Logs",
@@ -271,6 +279,10 @@
     "name": "Org Connections",
     "description": "Manage connections between organizations. Org connections allow for controlled sharing of data between different Datadog organizations. See the [Cross-Organization Visibiltiy](https://docs.datadoghq.com/account_management/org_settings/cross_org_visibility/) page for more information."
   },
+  "org-groups": {
+    "name": "Org Groups",
+    "description": "Manage organization groups, memberships, policies, policy overrides, and policy configurations."
+  },
   "organizations": {
     "name": "Organizations",
     "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization)."
@@ -335,6 +347,10 @@
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
   },
+  "scorecards": {
+    "name": "Scorecards",
+    "description": "API to create and update scorecard rules and outcomes. See [Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information."
+  },
   "seats": {
     "name": "Seats",
     "description": "The seats API allows you to view, assign, and unassign seats for your organization."
@@ -358,10 +374,6 @@
   "service-level-objectives": {
     "name": "Service Level Objectives",
     "description": "[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\n(SLOs) are a key part of the site reliability engineering toolkit.\nSLOs provide a framework for defining clear targets around application performance,\nwhich ultimately help teams provide a consistent customer experience,\nbalance feature development with platform stability,\nand improve communication with internal and external users."
-  },
-  "service-scorecards": {
-    "name": "Service Scorecards",
-    "description": "API to create and update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   },
   "servicenow-integration": {
     "name": "ServiceNow Integration",

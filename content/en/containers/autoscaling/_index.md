@@ -4,15 +4,6 @@ description: Automatically scale Kubernetes workloads using Datadog metrics and 
 aliases:
 - /containers/monitoring/autoscaling
 further_reading:
-- link: https://www.datadoghq.com/blog/kubernetes-custom-query-autoscaling
-  tag: Blog
-  text: Optimize Kubernetes workloads with Custom Query Scaling
-- link: https://www.datadoghq.com/blog/ddot-gateway
-  tag: Blog
-  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
-- link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
-  tag: "Blog"
-  text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 - link: "/infrastructure/containers/kubernetes_resource_utilization"
   tag: "Documentation"
   text: "Kubernetes Resource Utilization"
@@ -22,6 +13,18 @@ further_reading:
 - link: "/agent/remote_config/"
   tag: "Documentation"
   text: "Remote Configuration"
+- link: "https://www.datadoghq.com/blog/autoscaling-custom-metrics"
+  tag: "Blog"
+  text: "Scaling Kubernetes workloads on custom metrics"
+- link: https://www.datadoghq.com/blog/kubernetes-custom-query-autoscaling
+  tag: Blog
+  text: Optimize Kubernetes workloads with Custom Query Scaling
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
+- link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
+  tag: "Blog"
+  text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 ---
 
 {{< site-region region="gov" >}}
@@ -205,15 +208,15 @@ _Fixed cost values are subject to refinement over time._
 
 The [Autoscaling Summary page][6] provides a starting point for platform teams to understand the total Kubernetes Resource savings opportunities across an organization, and filter down to key clusters and namespaces. The [Cluster Scaling view][7] provides per-cluster information about total idle CPU, total idle memory, and costs. Click on a cluster for detailed information and a table of the cluster's workloads. If you are an individual application or service owner, you can also filter by your team or service name directly from the [Workload Scaling list view][8].
 
-Click **Optimize** on any workload to see its scaling recommendation.
+Click {{< ui >}}Optimize{{< /ui >}} on any workload to see its scaling recommendation.
 
 ### Enable Autoscaling for a workload
 
-After you identify a workload to optimize, Datadog recommends inspecting its **Scaling Recommendation**. You can also click **Configure Recommendation** to add constraints or adjust target utilization levels.
+After you identify a workload to optimize, Datadog recommends inspecting its {{< ui >}}Scaling Recommendation{{< /ui >}}. You can also click {{< ui >}}Configure Recommendation{{< /ui >}} to add constraints or adjust target utilization levels.
 
 When you are ready to proceed with enabling Autoscaling for a workload, you have two options for deployment:
 
-- Click **Enable Autoscaling**. (Requires Workload Scaling Write permission.)
+- Click {{< ui >}}Enable Autoscaling{{< /ui >}}. (Requires Workload Scaling Write permission.)
 
    Datadog automatically installs and configures autoscaling for this workload on your behalf.
 
@@ -228,7 +231,7 @@ The following examples demonstrate common `DatadogPodAutoscaler` configurations 
 {{< tabs >}}
 {{% tab "Optimize Cost" %}}
 
-The **Optimize Cost** profile uses multidimensional scaling to aggressively reduce resource waste. It sets a high CPU utilization target (85%), allows scaling down to a single replica, and uses aggressive scale-down rules for fast response to reduced load.
+The {{< ui >}}Optimize Cost{{< /ui >}} profile uses multidimensional scaling to aggressively reduce resource waste. It sets a high CPU utilization target (85%), allows scaling down to a single replica, and uses aggressive scale-down rules for fast response to reduced load.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -276,7 +279,7 @@ spec:
 {{% /tab %}}
 {{% tab "Optimize Balance" %}}
 
-The **Optimize Balance** profile provides a middle ground between cost optimization and stability. It uses a moderate CPU utilization target (70%), maintains at least 2 replicas, and applies conservative scale-down rules to avoid disruptive scaling events.
+The {{< ui >}}Optimize Balance{{< /ui >}} profile provides a middle ground between cost optimization and stability. It uses a moderate CPU utilization target (70%), maintains at least 2 replicas, and applies conservative scale-down rules to avoid disruptive scaling events.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -426,7 +429,7 @@ spec:
 
 ### Deploy recommendations manually
 
-As an alternative to Autoscaling, you can also deploy Datadog's scaling recommendations manually. When you configure resources for your Kubernetes deployments, use the values suggested in the scaling recommendations. You can also click **Export Recommendation** to see a generated `kubectl patch` command.
+As an alternative to Autoscaling, you can also deploy Datadog's scaling recommendations manually. When you configure resources for your Kubernetes deployments, use the values suggested in the scaling recommendations. You can also click {{< ui >}}Export Recommendation{{< /ui >}} to see a generated `kubectl patch` command.
 
 ## Further reading
 

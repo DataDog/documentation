@@ -277,6 +277,8 @@ Assessment Criteria is not currently available for JSON evaluations.
 
 ### Define the evaluation scope: Filtering and sampling
 
+<div class="alert alert-info">Span fields used in evaluations are limited to 250 KB each. Fields exceeding this size are truncated before being sent to the LLM judge.</div>
+
 Under **Evaluation Scope**, define where and how your evaluation runs. This helps control coverage (which spans are included) and cost (how many spans are sampled).
    - **Application**: Select the application you want to evaluate.
    - **Evaluate On**: Choose one of the following:
@@ -368,6 +370,14 @@ If you need more details, the following metrics allow you to track the LLM resou
 
 Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
 
+## Configure LLM-as-a-judge evaluations from the API
+
+You can use basic CRUD operations to manipluate managed evaluation configs, one you have the `DD_API_KEY` [API key][14] specified in your environment.
+
+ - [GET][11] existing evaluation configurations
+ - [PUT][12] existing evaluation configurations
+ - [DELETE][13] existing evaluation configurations
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -382,3 +392,8 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 [8]: /llm_observability/experiments
 [9]: /llm_observability/guide/evaluation_developer_guide/#using-managed-evaluators
 [10]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
+[11]: /api/latest/llm-observability/#get-a-custom-evaluator-configuration
+[12]: /api/latest/llm-observability/#create-or-update-a-custom-evaluator-configuration
+[13]: /api/latest/llm-observability/#delete-a-custom-evaluator-configuration
+[14]: /account_management/api-app-keys
+
