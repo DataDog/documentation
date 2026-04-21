@@ -973,6 +973,11 @@ menu:
     #   parent: sdk
     #   identifier: sdk_data_collected
     #   weight: 3
+    # - name: Integrated Libraries
+    #   url: client_sdks/integrated_libraries/
+    #   parent: sdk
+    #   identifier: sdk_integrated_libraries
+    #   weight: 4
     - name: Extend Datadog
       url: extend/
       pre: dev-code
