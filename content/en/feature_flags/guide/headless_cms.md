@@ -2,9 +2,6 @@
 title: Integrate Feature Flags with a Headless CMS
 description: Learn how to integrate Datadog Feature Flags with a headless CMS (such as Contentful, Builder.io, or Strapi) to control content delivery.
 further_reading:
-- link: "/feature_flags/"
-  tag: "Documentation"
-  text: "Feature Flags Overview"
 - link: "/feature_flags/client/"
   tag: "Documentation"
   text: "Client-Side Feature Flags"
@@ -17,9 +14,9 @@ further_reading:
 - link: "/real_user_monitoring/browser/tracking_user_actions/"
   tag: "Documentation"
   text: "RUM Custom Actions"
-- link: "/product_analytics/experimentation/"
+- link: "/experiments/"
   tag: "Documentation"
-  text: "Experimentation"
+  text: "Learn about Datadog Experiments"
 ---
 
 ## Overview
