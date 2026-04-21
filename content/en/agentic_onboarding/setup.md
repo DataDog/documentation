@@ -65,6 +65,36 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 {{< /site-region >}}
 
 {{% /tab %}}
+
+{{% tab "Datadog AI Setup CLI" %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+The Datadog AI Setup CLI configures your project without a coding assistant.
+
+1. Run the `npx` command, replacing `<PRODUCT>` with the identifier for the product you want to set up:
+
+   | Product | Identifier |
+   |---------|------------|
+   | Error Tracking | `error-tracking` |
+   | Infrastructure Monitoring | `infra-monitoring` |
+   | Product Analytics | `product-analytics` |
+   | Real User Monitoring | `rum` |
+   | Studio | `studio` |
+
+   ```shell
+   npx @datadog/ai-setup-cli --product <PRODUCT>
+   ```
+
+2. A browser window opens for authentication. Complete the OAuth flow and grant access to your Datadog account.
+3. Return to your terminal. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary tokens.
+
+After the CLI completes, skip to [Deploy your app to production](#deploy-your-app-to-production).
+{{< /site-region >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Set up your project
