@@ -286,21 +286,22 @@ function propertyToField(
   let resolved = schema;
   let resolvedRef: string | undefined;
   if (schema.$ref) {
-    resolvedRef = schema.$ref;
+    const ref = schema.$ref;
+    resolvedRef = ref;
 
     // Circular reference guard
-    if (visited.has(resolvedRef) || visited.size >= MAX_DEPTH) {
+    if (visited.has(ref) || visited.size >= MAX_DEPTH) {
       return {
         name,
-        type: refName(resolvedRef),
+        type: refName(ref),
         required,
         deprecated: false,
         readOnly: false,
-        description: `Circular reference to ${refName(resolvedRef)}.`,
+        description: `Circular reference to ${refName(ref)}.`,
       };
     }
 
-    resolved = resolveRef(spec, resolvedRef) ?? schema;
+    resolved = resolveRef(spec, ref) ?? schema;
   }
 
   const nextVisited = new Set(visited);

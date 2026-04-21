@@ -13,7 +13,7 @@ const theme: ThemeRegistrationRaw = {
     'editor.background': '#0d1117',
     'editor.foreground': '#e0e0e0',
   },
-  tokenColors: [
+  settings: [
     // — Default
     {
       scope: [

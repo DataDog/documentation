@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import * as cheerio from 'cheerio';
+import type { AnyNode } from 'domhandler';
 
 type Site = 'hugo' | 'astro';
 
@@ -11,7 +12,7 @@ const CONTENT_SELECTORS: Record<Site, string> = {
 /**
  * Remove noise elements that shouldn't be part of the text comparison.
  */
-function removeNoise($: cheerio.CheerioAPI, root: cheerio.Cheerio<cheerio.AnyNode>): void {
+function removeNoise($: cheerio.CheerioAPI, root: cheerio.Cheerio<AnyNode>): void {
   root.find('script, style, noscript, svg').remove();
   root.find('.api-toolbar').remove();
   root.find('[aria-hidden="true"]').remove();
@@ -68,7 +69,7 @@ export function extractPageText(htmlPath: string, site: Site): string {
  */
 function extractHugoEndpoints(
   $: cheerio.CheerioAPI,
-  content: cheerio.Cheerio<cheerio.AnyNode>,
+  content: cheerio.Cheerio<AnyNode>,
   excludeCode: boolean,
 ): Map<string, string> {
   const result = new Map<string, string>();
@@ -100,7 +101,7 @@ function extractHugoEndpoints(
  */
 function extractAstroEndpoints(
   $: cheerio.CheerioAPI,
-  content: cheerio.Cheerio<cheerio.AnyNode>,
+  content: cheerio.Cheerio<AnyNode>,
   excludeCode: boolean,
 ): Map<string, string> {
   const result = new Map<string, string>();

@@ -19,7 +19,9 @@
     "yaml": "^2.8.3"
   },
   "devDependencies": {
+    "@astrojs/ts-plugin": "^1.10.7",
     "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.0",
     "cheerio": "^1.2.0",
     "preact-render-to-string": "^6.6.7",
     "typescript": "^5.7.0",

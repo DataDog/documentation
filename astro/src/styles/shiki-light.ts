@@ -24,7 +24,7 @@ const theme: ThemeRegistrationRaw = {
     'editor.background': '#ffffff',
     'editor.foreground': '#000000',
   },
-  tokenColors: [
+  settings: [
     // — Default: most identifiers, names, operators are black
     {
       scope: [
