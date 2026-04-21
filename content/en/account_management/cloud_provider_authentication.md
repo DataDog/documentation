@@ -88,7 +88,7 @@ To create an identity mapping:
 1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
 2. Select a **Cloud Provider**.
 3. Enter a **Source Pattern (ARN)**. Use `*` for wildcard patterns (for example, `role/terraform-*`).
-4. Search for and select a **Target Identity** — the Datadog user or service account this cloud identity authenticates as.
+4. Search for and select a **Target Identity**. This is the Datadog user or service account this cloud identity authenticates as.
 5. Click {{< ui >}}Create Mapping{{< /ui >}}.
 
 {{< img src="account_management/cloud_provider_authentication/identity-mapping-create.png" alt="Create Identity Mapping dialog with fields for Cloud Provider, Source Pattern ARN, and Target Identity" style="width:70%;" >}}
@@ -97,7 +97,7 @@ To create an identity mapping:
 
 #### Using the API
 
-#### Map an AWS ARN to a Datadog user account
+##### Map an AWS ARN to a Datadog user account
 For `account_identifier`, use the email shown in the user's Datadog profile.
 
 **Example**: An API call that maps an AWS ARN to a Datadog user account, `john.doe@myorg.com`.
@@ -119,7 +119,7 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
 }'
 ```
 
-#### Map an AWS ARN to a Datadog service account
+##### Map an AWS ARN to a Datadog service account
 For `account_identifier`, you can use either:
 - The service account's **UUID**: Go to {{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}Service accounts{{< /ui >}}, click the service account you want to map, and copy the `service_account_id` from the URL. For example, if the URL ends in `/organization-settings/service-accounts?service_account_id=3fa85f64-5717-4562-b3fc-2c963f66afa6`, then use `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
 - The service account's **email address**: Use the email address shown in the service account's details.
@@ -162,7 +162,7 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
 }'
 ```
 
-#### Using wildcards in ARN patterns
+##### Using wildcards in ARN patterns
 
 ARN patterns support wildcard matching to handle dynamic or variable portions of resource ARNs. This is useful when working with assumed roles that include session identifiers or other variable components.
 
@@ -195,7 +195,7 @@ This pattern matches actual assumed role ARNs like:
 
 <div class="alert alert-info">Wildcard matching is particularly useful for CI/CD pipelines where role sessions have dynamically generated identifiers.</div>
 
-#### List existing mappings
+##### List existing mappings
 
 ```bash
 curl -X GET "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
@@ -262,7 +262,7 @@ Setting up cloud-based authentication for the Agent involves two parts:
 
 <div class="alert alert-info">For intake mapping to work, your AWS account <strong>must be integrated</strong> with Datadog through the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog-AWS integration</a>. If an AWS account is not integrated, the authentication flow cannot verify the caller, and mapping fails.</div>
 
-Configure intake mappings to authorize specific AWS ARN patterns for Agent authentication. Unlike identity mappings, intake mappings only require an ARN pattern — no Datadog account identifier is needed, because the Agent authenticates to send data rather than perform user actions. Datadog automatically provisions, configures, and rotates the underlying API key on your behalf.
+Configure intake mappings to authorize specific AWS ARN patterns for Agent authentication. Unlike identity mappings, intake mappings only require an ARN pattern. No Datadog account identifier is needed, because the Agent authenticates to send data rather than perform user actions. Datadog automatically provisions, configures, and rotates the underlying API key on your behalf.
 
 If you need to create IAM roles in AWS, see the [AWS IAM role creation documentation][5].
 
@@ -283,7 +283,7 @@ To create an intake mapping:
 
 #### Using the API
 
-#### Create an intake mapping
+##### Create an intake mapping
 
 **Example**: An API call that authorizes Agents running with a specific IAM role to authenticate.
 
@@ -302,7 +302,7 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
 }'
 ```
 
-#### Using wildcards in ARN patterns
+##### Using wildcards in ARN patterns
 
 ARN patterns support wildcard matching to handle dynamic or variable portions of resource ARNs. This is useful when working with assumed roles that include session identifiers or when you have multiple Agent instances.
 
@@ -332,7 +332,7 @@ This pattern matches actual assumed role ARNs like:
 - `arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/i-0abc123def456`
 - `arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/eks-datadog-agent-xyz`
 
-#### List existing intake mappings
+##### List existing intake mappings
 
 ```bash
 curl -X GET "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/intake_mapping" \
@@ -340,7 +340,7 @@ curl -X GET "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/i
 -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
 ```
 
-#### Delete an intake mapping
+##### Delete an intake mapping
 
 ```bash
 curl -X DELETE "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/intake_mapping/<MAPPING_UUID>" \
