@@ -36,7 +36,7 @@ To create a draft experiment:
 
 1. Navigate to **[Experiments > Experiment List][1]** in Datadog Product Analytics.
 1. Click **Create Experiment** to open the dialog, then enter your **Experiment name** and **Hypothesis**.
-1. Click **Create Draft Experiment** to open the experiment's setup page.
+1. Click **Create Draft Experiment** to open the experiment's setup page and continue to [Set up your experiment](#set-up-your-experiment).
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_create_experiment.png" alt="The Create new draft experiment dialog with an experiment name of New Product Photos Experiment, a hypothesis about higher-resolution product photos increasing add-to-cart conversions, and a Create Draft Experiment button highlighted." style="width:80%;" >}}
 
@@ -44,7 +44,10 @@ You can also create an experiment directly from a feature flag's detail page:
 
 1. Navigate to the **[Feature Flags][7]** page and select the **Overview** tab.
 1. Select the feature flag you want to use for your experiment to open its detail page.
-1. In the **Targeting rules & rollouts** section, click **Create New Experiment** to open the dialog. The **Experiment name** is pre-filled. Enter your **Hypothesis**, then click **Create Experiment** to open the experiment's setup page.
+1. In the **Targeting rules & rollouts** section, click **Create New Experiment** to open the dialog.
+1. In the dialog, click **Create Experiment** to open the experiment's setup page.
+1. On the experiment setup page, Datadog pre-fills the **Experiment name** with the name of the feature flag. Edit it as needed.
+1. Enter your **Hypothesis** and continue to [Set up your experiment](#set-up-your-experiment).
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_ff_new_experiment.png" alt="The feature flag detail page for a flag called new_product_photos, showing targeting rules and rollouts with a 50/50 split between control and treatment variants, and a Create New Experiment button highlighted at the bottom." style="width:80%;" >}}
 
@@ -69,7 +72,7 @@ To define the metrics that measure the outcome of your experiment:
 
 #### Run a sample size calculation (optional)
 
-The sample size calculator projects how many users and how long you need to detect a meaningful effect. You choose an entry point, the event that triggers a user's inclusion in the experiment, and Datadog uses traffic against that event to produce the estimate.
+The sample size calculator projects the number of users and the duration needed to detect a meaningful effect. You choose an entry point, the event that assigns users to the experiment, and Datadog uses the volume of traffic to that event to produce the estimate.
 
 To estimate the sample size and duration needed to detect a meaningful effect:
 
@@ -81,7 +84,9 @@ To estimate the sample size and duration needed to detect a meaningful effect:
    1. In the filter row that appears, modify the operator as needed and select a value from the dropdown. The default operator is **= (is)**.
    1. (Optional) Click **Filter** to add more rows. Between rows, use the dropdown to select **or** or **and** to set how filters combine.
 1. Set the **Number of variants** (default is 2) and **Traffic exposure** percentage (default is 100%).
-1. Expand **Additional inputs**, then choose the statistical **Power** (default is 80%) and enter a **Target experiment duration** in weeks. The calculator projects MDE values and expected user counts at 1-, 2-, 4-, 6-, and 8-week intervals, so this value must be 1 or an even number. For longer intervals, enter a higher even value.
+1. Expand **Additional inputs**, then choose the statistical **Power** (default is 80%) and enter a **Target experiment duration** in weeks.
+   - The **Target experiment duration** value must be 1 or an even number because the calculator projects MDE values and expected user counts at 1-, 2-, 4-, 6-, and 8-week intervals.
+   - For longer intervals, enter a higher even value.
 1. Click **Run Calculation** to see an estimate of the **[Minimum detectable effect (MDE)][3] over time** for your metrics.
 1. Close the side panel and continue to [Add a feature flag](#add-a-feature-flag).
 
@@ -89,7 +94,7 @@ To estimate the sample size and duration needed to detect a meaningful effect:
 
 #### Add a feature flag
 
-To link a feature flag to control how Datadog splits traffic between the experiment variants:
+To add a feature flag to control how Datadog splits traffic between the experiment variants:
 
 1. In the **Feature flag** section, click the **Add a feature flag** button to open the picker.
 1. Select the feature flag for your experiment.
@@ -115,8 +120,8 @@ To configure randomization:
       - To add an `AND` row within the same filter, click **Add Condition**.
       - To add another filter joined by `OR`, click **Add Filter**.
 1. Under **Variants**, use the **Randomize users and split traffic** dropdown to choose **Equally (recommended)** or **Custom**. This sets how Datadog splits traffic between your experiment groups. Each user sees only their assigned variant throughout the experiment.
-   - If you select **Custom**, enter a percentage for each variant. The percentages must sum to 100%.
-1. Under **Traffic exposure**, set the percentage of users matching your targeting rules to include in the experiment. Users outside the sample still see the default experience.
+   - If you select **Custom**, enter a percentage for each variant. Percentages must sum to 100%.
+1. Under **Traffic exposure**, set the percentage of users matching your targeting rules to include in the experiment.
 1. (Optional) [Schedule a staged rollout](#schedule-a-staged-rollout), [configure additional settings](#additional-configs), or both.
 1. After configuring your experiment, proceed to [Launch your experiment](#launch-your-experiment).
 
@@ -132,11 +137,11 @@ To gradually ramp up experiment traffic instead of launching to all users at onc
 1. Adjust the **Traffic exposure** percentage for each step as needed.
 1. Set the hold duration between steps using the **Scheduled rollout by holding between steps for** dropdowns.
 
-At each rollout stage, Datadog samples a percentage of eligible users to include in the experiment. Users outside the sample still see the default (control) experience, but Datadog does not include them in experiment results.
+At each rollout step, Datadog samples a percentage of eligible users to include in the experiment. Users outside the sample still see the default (control) experience, but Datadog does not include them in experiment results.
 
 ##### Set notifications
 
-Configure who receives notifications about key experiment events.
+Route notifications to the right people as the experiment progresses.
 
 In the **Notifications** section, use the **Recipients** dropdown to select who receives notifications about experiment lifecycle events, such as results reaching statistical significance or Datadog detecting an issue.
 
@@ -153,7 +158,8 @@ To modify the statistical analysis plan:
    - If you select **Bayesian**, choose a **Standard Deviation of Prior** from the dropdown. The default is **Medium (5.00%)**.
 1. Select a percentage from the **Confidence level** dropdown. The default is **95%**.
 1. Toggle on **CUPED calculation**. CUPED uses pre-experiment data from each subject to reduce the variance of the metrics and improve experiment sensitivity.
-1. Toggle on **Multiple testing correction**. This setting adjusts for the increased risk of false positives across multiple metric comparisons, producing more conservative results. This is not available when you use the **Bayesian** method.
+1. Toggle on **Multiple testing correction**. This setting adjusts for the increased risk of false positives across multiple metric comparisons, producing more conservative results.
+   - This setting is not available when you use the **Bayesian** method.
 1. (Optional) Click **Reset to Default** to restore the Datadog default, or your company default if your organization has one configured.
 
 ##### Add split-by exploration dimensions
@@ -164,7 +170,7 @@ To configure split-by dimensions:
 
 1. Expand the **Split-by exploration dimensions** section.
 1. Select properties from the **Properties to compute for dimensional analysis** dropdown. Available properties have the `context.` prefix.
-1. (Optional) If you do not see the property you need:
+1. If you do not see the property you need:
    1. Type the property name in the dropdown field, prefixed with `context.` (for example, `context.team`). Then, click **Add custom property** to open the **Split-by exploration dimensions** dialog.
    1. Verify the auto-filled **Column Name** matches the property name you entered.
    1. Select the property **Type** from the dropdown. The default is **String**.
@@ -182,7 +188,7 @@ To launch your experiment:
 1. Click **Start Experiment & Enable Flag** to launch the experiment.
 
 Launching the experiment opens the **Flag & Exposures** page. Verify that the experiment is running correctly:
-- Review the **Exposure balance check** to confirm that Datadog splits users across variants as expected.
+- Review the **Exposure balance check** to confirm that Datadog splits users across variants to your configured percentages.
 - Click **View Exposures Log** to see a real-time list of users enrolling in your experiment.
 
 After launching your experiment, see [Reading Experiment Results][5] to review your data.
