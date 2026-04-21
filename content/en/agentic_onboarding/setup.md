@@ -89,7 +89,7 @@ The Datadog AI Setup CLI configures your project without a coding assistant.
    | Test Optimization | `test-optimization` |
 -->
 
-1. Run the following command, replacing `<PRODUCT>` with the identifier for the product you want to set up:
+1. Run the `npx` command, replacing `<PRODUCT>` with the identifier for the product you want to set up:
 
    | Product | Identifier |
    |---------|------------|
