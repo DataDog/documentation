@@ -30,9 +30,9 @@ further_reading:
 Your Datadog organization topology, single-organization or multi-organization, shapes how you observe services, control access, manage users, and attribute cost.
 
 This guide covers:
-- The capabilities of a single-organization
-- The scenarios that justify a multi-organization
-- Manage multi-organization environments with Organization Groups.
+- The capabilities of a single-organization topology
+- The scenarios that justify a multi-organization topology
+- Managing multi-organization with Organization Groups
 
 ## Getting started 
 Datadog recommends a [single-organization topology](#single-organization-topology-recommended) for most deployments and offers a flexible access management system that allows you to customize the level access to your Datadog resources. For example, large enterprises with thousands of users, multiple business units, can use [granular access control][10] to satisfy strict compliance requirements.
@@ -127,42 +127,6 @@ Mergers and acquisitions often create temporary multi-organization states. The a
 | Feature rollout | Immediate | Must enable per organization | Centralized from group |
 
 **Note**: Organization Groups is in preview. Contact your account team to learn more.
-
-### Answer the four questions
-
-Use the following four questions to reach a topology recommendation:
-
-```
-Q1: Does a regulation or contract require data to exist
-    in a physically separate organization boundary?
-    |
-    +-- YES -> Multi-org (see Isolate regulated data)
-    |
-    +-- NO
-        |
-Q2: Is cross-region data transfer prohibited for some
-    portion of your telemetry?
-    |
-    +-- YES -> Multi-org (see Meet data residency requirements)
-    |
-    +-- NO
-        |
-Q3: Are you an MSP serving external customers who need
-    independent billing, data, and user management?
-    |
-    +-- YES -> Multi-org (see Isolate MSP customers)
-    |
-    +-- NO
-        |
-Q4: Are you integrating an acquisition that has its own
-    Datadog organization?
-    |
-    +-- YES -> Temporary multi-org (see Integrate an acquired company)
-    |
-    +-- NO -> Single org
-              Use RBAC, DAC, Granular Access Control, and Teams
-              for isolation.
-```
 
 ## Manage multi-organization with Organization Groups
 
