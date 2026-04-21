@@ -29,7 +29,7 @@ A code session captures a segment of work with the Bits AI Dev Agent, including 
 {{< img src="bits_ai/dev_agent/code_sessions_overview.png" alt="A tab titled 'Code Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
 
 ### Start a code session
-After [completing setup][6], to start a code session:
+After [completing setup][6], do one of the following to start a code session:
 - Enter a freeform prompt at [**Code Sessions**][7]: enter a custom prompt or generate one by clicking a **Suggestions** or **Proactive Fixes** card
 - Invoke Bits AI Dev Agent in a [supported Datadog product][9]
 
@@ -38,7 +38,7 @@ A code session can also be created when another Bits AI agent (like [Bits Assist
 ### View and manage code sessions
 On [Code Sessions][7], view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR.
 
-Click a session to view its details and continue working with the Dev Agent. To remove a session from your **My Sessions** list, click {{< img src="bits_ai/dev_agent/archive_icon.png" inline="true" style="width:24px">}} (**Archive for everyone**) or {{< img src="bits_ai/dev_agent/unwatch_icon.png" inline="true" style="width:24px">}} (**Unwatch session**).
+Click a session to view its details and continue working with the Dev Agent. To remove a session from your **My Sessions** list, click <i class="icon-archive-wui"></i> (**Archive for everyone**) or <i class="icon-eye-slashed-wui"></i> (**Unwatch session**).
 
 ## Supported Datadog products
 
