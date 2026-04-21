@@ -351,7 +351,7 @@ Agent `v7.73+` is required.
         ## @param filters - list - optional
         ## Include or exclude specific domains or IP ranges from dynamic monitoring.
         ## Filters are applied sequentially, with later filters taking precedence.
-        ## See the [filter syntax](#filter-syntax) section for details and examples.
+        ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
         #
         # filters:
         #   - match_domain: '*.example.com'
@@ -418,7 +418,7 @@ Agent `v7.73+` is required.
         ## @param filters - list - optional
         ## Include or exclude specific domains or IP ranges from dynamic monitoring.
         ## Filters are applied sequentially, with later filters taking precedence.
-        ## See the [filter syntax](#filter-syntax) section for details and examples.
+        ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
         #
         # filters:
         #   - match_domain: '*.example.com'
@@ -476,7 +476,7 @@ datadog:
     ## @param filters - list - optional
     ## Include or exclude specific domains or IP ranges from dynamic monitoring.
     ## Filters are applied sequentially, with later filters taking precedence.
-    ## See the [filter syntax](#filter-syntax) section for details and examples.
+    ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
     #
     # filters:
     #   - match_domain: '*.example.com'
