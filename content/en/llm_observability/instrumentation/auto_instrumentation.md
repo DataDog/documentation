@@ -942,11 +942,11 @@ For more specific control over library patching and the integration that starts 
 {{% tab "Python" %}}
 
 `DD_PATCH_MODULES`
-: A comma-separated list of modules to patch or not patch, overriding the default. Use the format `DD_PATCH_MODULES=module:patch,module:patch...`.<br>
+: A comma-separated list of modules to patch or not patch, overriding the default. Use the format `DD_PATCH_MODULES=module:patch,module:patch...`. Available in version 2.17.4+.<br>
 **Example**: `DD_PATCH_MODULES=openai:false,langchain:false`
 
 `DD_TRACE_<INTEGRATION>_ENABLED`
-: Set to `false` to disable tracing for a specific integration. Replace `<INTEGRATION>` with the uppercase integration name.<br>
+: Set to `false` to disable tracing for a specific integration. Replace `<INTEGRATION>` with the uppercase integration name. Available in version 2.17.4+.<br>
 **Example**: `DD_TRACE_OPENAI_ENABLED=false`
 
 {{% /tab %}}
