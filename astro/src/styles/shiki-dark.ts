@@ -2,7 +2,7 @@
  * Dark variant of the custom Shiki theme.
  *
  * Lighter token colors designed for dark backgrounds, paired with
- * shiki-datadog.ts (light) via Shiki's dual-theme support.
+ * shiki-light.ts via Shiki's dual-theme support.
  */
 import type { ThemeRegistrationRaw } from 'shiki';
 
