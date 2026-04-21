@@ -11,11 +11,11 @@ Use the Security Group component to represent security groups from your Amazon W
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Name**: Give the security group a name.
-- **Shape**: Select a shape for the security group, dynamic or rectangular.
-- **Padding**: Increase or decrease the amount of space inside the security group.
-- **Inbound/Outbound**: View, remove, or add inbound and outbound rules for components inside this security group.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Name{{< /ui >}}: Give the security group a name.
+- {{< ui >}}Shape{{< /ui >}}: Select a shape for the security group, dynamic or rectangular.
+- {{< ui >}}Padding{{< /ui >}}: Increase or decrease the amount of space inside the security group.
+- {{< ui >}}Inbound/Outbound{{< /ui >}}: View, remove, or add inbound and outbound rules for components inside this security group.
 
 ## API
 

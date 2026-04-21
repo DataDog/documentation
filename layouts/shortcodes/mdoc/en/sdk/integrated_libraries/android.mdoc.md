@@ -1,15 +1,7 @@
----
-title: Android and Android TV Libraries for RUM
-description: "Integrate popular Android libraries like Coil, OkHttp, and Retrofit with RUM for automatic monitoring of network requests and image loading."
-aliases:
-- /real_user_monitoring/android/integrated_libraries/
-- /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/android
-- /real_user_monitoring/mobile_and_tv_monitoring/android/integrated_libraries
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-android
-  tag: "Source Code"
-  text: Source code for dd-sdk-android
----
+<!--
+This partial contains integrated libraries content for the Android SDK.
+It can be included in the Android SDK integrated libraries page or in the unified client_sdks view.
+-->
 
 This page lists integrated libraries you can use for Android and Android TV applications.
 
@@ -37,8 +29,8 @@ If you use RxJava in your application, see Datadog's [dedicated RxJava library][
 
 If you use Picasso, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about network requests made by Picasso.
 
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{% tabs %}
+{% tab label="Kotlin" %}
    ```kotlin
    val picasso = Picasso.Builder(context)
       .downloader(OkHttp3Downloader(okHttpClient))
@@ -46,8 +38,8 @@ If you use Picasso, use it with the `OkHttpClient` that's been instrumented with
       .build()
    Picasso.setSingletonInstance(picasso)
    ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{% /tab %}
+{% tab label="Java" %}
    ```java
    final Picasso picasso = new Picasso.Builder(context)
       .downloader(new OkHttp3Downloader(okHttpClient))
@@ -55,31 +47,31 @@ If you use Picasso, use it with the `OkHttpClient` that's been instrumented with
       .build();
    Picasso.setSingletonInstance(picasso);
    ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 ## Retrofit
 
 If you use Retrofit, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about network requests made with Retrofit.
 
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{% tabs %}
+{% tab label="Kotlin" %}
    ```kotlin
    val retrofitClient = Retrofit.Builder()
       .client(okHttpClient)
       // …
       .build()
    ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{% /tab %}
+{% tab label="Java" %}
    ```java
    final Retrofit retrofitClient = new Retrofit.Builder()
       .client(okHttpClient)
       // …
       .build();
    ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 ## SQLDelight
 
@@ -93,8 +85,8 @@ Following SQLiteOpenHelper's [generated API documentation][5], you only have to 
 Doing this detects whenever a database is corrupted and sends a relevant
 RUM error event for it.
 
-{{< tabs >}}
-{{% tab "Kotlin" %}}
+{% tabs %}
+{% tab label="Kotlin" %}
    ```kotlin
    class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(
                                     <Context>,
@@ -106,8 +98,8 @@ RUM error event for it.
 
    }
    ```
-{{% /tab %}}
-{{% tab "Java" %}}
+{% /tab %}
+{% tab label="Java" %}
    ```java
    public class <YourOwnSqliteOpenHelper> extends SqliteOpenHelper {
       public <YourOwnSqliteOpenHelper>(){
@@ -119,12 +111,12 @@ RUM error event for it.
       }
    }
    ```
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 ## Apollo (GraphQL)
 
-If you use Kotlin Coroutines, see Datadog's [dedicated library with extensions for Apollo][11] and [andndroid advanced network configuration][12].
+If you use Apollo (GraphQL) in your application, see Datadog's [dedicated library with extensions for Apollo][11] and [Android advanced network configuration][12].
 
 ## Android TV (Leanback)
 
@@ -133,10 +125,6 @@ If you use the Leanback API to add actions into your Android TV application, see
 ## Kotlin Coroutines
 
 If you use Kotlin Coroutines, see Datadog's [dedicated library with extensions for RUM][9] and with [extensions for Trace][10].
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-coil
 [2]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-fresco

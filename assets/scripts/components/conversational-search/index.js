@@ -406,7 +406,7 @@ class ConversationalSearch {
      * sends a thinking event (auto-rotation is killed on first call); call stop()
      * to remove the indicator.
      */
-    startLoading() {
+    showLoadingIndicator() {
         const emptyState = this.messagesContainer.querySelector('.conv-search-empty-state');
         if (emptyState) emptyState.remove();
 
@@ -525,7 +525,7 @@ class ConversationalSearch {
     async runInternalStream(query) {
         this.abortController = new AbortController();
         const startTime = Date.now();
-        const loading = this.startLoading();
+        const loadingIndicator = this.showLoadingIndicator();
 
         const isFirstMessage = this.chatHistory.length === 0;
         const isSuggestion = this.isSuggestionQuery;
@@ -537,39 +537,43 @@ class ConversationalSearch {
         let responseContainer = null;
         let lastRenderTime = 0;
 
-        const answer = await streamDocsAiChat({
-            config: docsAiConfig,
-            query,
-            history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
-            conversationId: this.conversationId,
-            anchorUrl: window.location.href,
-            rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
-            signal: this.abortController.signal,
-            onThinking: (message) => {
-                loading.updateStatus(message);
-            },
-            onToken: (_token, fullMessage) => {
-                if (!responseContainer) {
-                    loading.stop();
-                    responseContainer = this.addResponseContainer();
-                }
-
-                const now = Date.now();
-                if (now - lastRenderTime > RENDER_THROTTLE) {
-                    const { displayMarkdown, sources } = extractSources(fullMessage);
-                    responseContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
-                    if (sources.length > 0) {
-                        responseContainer.appendChild(buildSourceCards(sources));
+        let answer;
+        try {
+            answer = await streamDocsAiChat({
+                config: docsAiConfig,
+                query,
+                history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
+                conversationId: this.conversationId,
+                anchorUrl: window.location.href,
+                rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
+                signal: this.abortController.signal,
+                onThinking: (message) => {
+                    loadingIndicator.updateStatus(message);
+                },
+                onToken: (_token, fullMessage) => {
+                    if (!responseContainer) {
+                        loadingIndicator.stop();
+                        responseContainer = this.addResponseContainer();
                     }
-                    lastRenderTime = now;
-                    this.scrollToBottom();
+
+                    const now = Date.now();
+                    if (now - lastRenderTime > RENDER_THROTTLE) {
+                        const { displayMarkdown, sources } = extractSources(fullMessage);
+                        responseContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
+                        if (sources.length > 0) {
+                            responseContainer.appendChild(buildSourceCards(sources));
+                        }
+                        lastRenderTime = now;
+                        this.scrollToBottom();
+                    }
+                },
+                onError: (error) => {
+                    this.logErr('Docs AI Streaming Error', error);
                 }
-            },
-            onError: (error) => {
-                this.logErr('Docs AI Streaming Error', error);
-            }
-        });
-        loading.stop();
+            });
+        } finally {
+            loadingIndicator.stop();
+        }
 
         if (!responseContainer) {
             responseContainer = this.addResponseContainer();
@@ -588,48 +592,52 @@ class ConversationalSearch {
     async runTypesenseStream(query) {
         this.abortController = new AbortController();
         const startTime = Date.now();
-        const loading = this.startLoading();
+        const loadingIndicator = this.showLoadingIndicator();
 
         let responseContainer = null;
         let accumulatedMessage = '';
         let lastRenderTime = 0;
 
-        const response = await streamConversation({
-            typesenseConfig,
-            query,
-            modelId: this.selectedModelId,
-            conversationId: this.conversationId,
-            signal: this.abortController.signal,
-            onChunk: (chunk) => {
-                if (chunk?.conversation_id && !this.conversationId) {
-                    this.conversationId = chunk.conversation_id;
-                }
-
-                if (chunk?.message !== undefined) {
-                    if (!responseContainer) {
-                        loading.stop();
-                        responseContainer = this.addResponseContainer();
+        let response;
+        try {
+            response = await streamConversation({
+                typesenseConfig,
+                query,
+                modelId: this.selectedModelId,
+                conversationId: this.conversationId,
+                signal: this.abortController.signal,
+                onChunk: (chunk) => {
+                    if (chunk?.conversation_id && !this.conversationId) {
+                        this.conversationId = chunk.conversation_id;
                     }
 
-                    accumulatedMessage += chunk.message;
-
-                    const now = Date.now();
-                    if (now - lastRenderTime > RENDER_THROTTLE) {
-                        const { displayMarkdown, sources } = extractSources(accumulatedMessage);
-                        responseContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
-                        if (sources.length > 0) {
-                            responseContainer.appendChild(buildSourceCards(sources));
+                    if (chunk?.message !== undefined) {
+                        if (!responseContainer) {
+                            loadingIndicator.stop();
+                            responseContainer = this.addResponseContainer();
                         }
-                        lastRenderTime = now;
-                        this.scrollToBottom();
+
+                        accumulatedMessage += chunk.message;
+
+                        const now = Date.now();
+                        if (now - lastRenderTime > RENDER_THROTTLE) {
+                            const { displayMarkdown, sources } = extractSources(accumulatedMessage);
+                            responseContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
+                            if (sources.length > 0) {
+                                responseContainer.appendChild(buildSourceCards(sources));
+                            }
+                            lastRenderTime = now;
+                            this.scrollToBottom();
+                        }
                     }
+                },
+                onError: (error) => {
+                    this.logErr('Typesense Streaming Error', error);
                 }
-            },
-            onError: (error) => {
-                this.logErr('Typesense Streaming Error', error);
-            }
-        });
-        loading.stop();
+            });
+        } finally {
+            loadingIndicator.stop();
+        }
 
         const finalConversationId = response?.results?.[0]?.conversation?.conversation_id;
         if (finalConversationId) {
@@ -652,7 +660,7 @@ class ConversationalSearch {
     async runTypesenseFetch(query) {
         this.abortController = new AbortController();
         const startTime = Date.now();
-        const loading = this.startLoading();
+        const loadingIndicator = this.showLoadingIndicator();
 
         let response;
         try {
@@ -664,7 +672,7 @@ class ConversationalSearch {
                 signal: this.abortController.signal
             });
         } finally {
-            loading.stop();
+            loadingIndicator.stop();
         }
 
         const conversation = response?.conversation || response?.results?.[0]?.conversation;
