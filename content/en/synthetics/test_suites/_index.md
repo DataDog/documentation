@@ -136,7 +136,7 @@ You can trigger test runs in two ways:
 
 From the suite detail page, click **Run Suite Now** in the top right to trigger every test in the suite.
 
-{{< img src="synthetics/test_suites/run_suite_now.png" alt="The test suite detail page with the Run Suite Now button in the top right" style="width:100%;" >}}
+{{< img src="synthetics/test_suites/run_suite_now.png" alt="The test suite detail page with the Run Suite Now button in the top right." style="width:100%;" >}}
 
 ### Run selected tests
 
@@ -146,7 +146,7 @@ To run a subset of tests:
 2. Select the tests you want to run using the checkboxes.
 3. Click **Run Tests Now**.
 
-{{< img src="synthetics/test_suites/run_tests_now.png" alt="The Tests in the Suite tab with tests bulk selected and the Run Tests Now button visible" style="width:100%;" >}}
+{{< img src="synthetics/test_suites/run_tests_now.png" alt="The Tests in the Suite tab with tests bulk selected and the Run Tests Now button visible." style="width:100%;" >}}
 
 **Note**: You can run a maximum of 50 tests at a time with **Run Tests Now**.
 
