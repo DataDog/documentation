@@ -560,4 +560,4 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two different Helm
 [10]: /getting_started/integrations/google_cloud/?tab=orglevel
 [11]: /getting_started/integrations/azure/?tab=createanappregistration
 [12]: /getting_started/integrations/oci/
-[13]:https://docs.datadoghq.com/infrastructure/process?tab=linuxwindows#installation
+[13]: /infrastructure/process?tab=linuxwindows#installation
