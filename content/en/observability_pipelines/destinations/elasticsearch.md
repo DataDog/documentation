@@ -23,9 +23,9 @@ Use Observability Pipelines' Elasticsearch destination to send logs or metrics (
 
 ## Setup
 
-Set up the Elasticsearch destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure this destination when you [set up a pipeline][7]. You can set up a pipeline in the [UI][1], using the [API][8], or with [Terraform][9]. The instructions in this section are for configuring the destination in the UI.
 
-To set up the destination:
+After you select the Elasticsearch destination in the pipeline UI:
 
 <div class="alert alert-danger">Only enter the identifiers for the Elasticsearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
 
@@ -120,3 +120,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [4]: https://www.elastic.co/docs/reference/fleet/data-streams
 [5]: https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk
 [6]: /configuration/install_the_worker/advanced_worker_configurations/
+[7]: /observability_pipelines/configuration/set_up_pipelines/
+[8]: /api/latest/observability-pipelines/
+[9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

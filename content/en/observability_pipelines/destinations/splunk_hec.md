@@ -15,9 +15,9 @@ Use Observability Pipelines' Splunk HTTP Event Collector (HEC) destination to se
 
 ## Setup
 
-Set up the Splunk HEC destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure this destination when you [set up a pipeline][5]. You can set up a pipeline in the [UI][1], using the [API][6], or with [Terraform][7]. The instructions in this section are for configuring the destination in the UI.
 
-To set up the destination:
+After you select the Splunk HEC destination in the pipeline UI:
 
 <div class="alert alert-danger">Observability Pipelines compresses logs with the gzip (level 6) algorithm.<br>Only enter the identifiers for the Splunk HEC token and endpoint. Do <b>not</b> enter the actual values.</div>
 
@@ -85,3 +85,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/destinations/#template-syntax
 [4]: https://help.splunk.com/en/splunk-enterprise/get-started/get-data-in/9.0/get-data-with-http-event-collector/automate-indexed-field-extractions-with-http-event-collector
+[5]: /observability_pipelines/configuration/set_up_pipelines/
+[6]: /api/latest/observability-pipelines/
+[7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

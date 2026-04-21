@@ -21,13 +21,13 @@ You need to do the following before setting up the Amazon Security Lake destinat
 
 ## Setup
 
-Set up the Amazon Security Lake destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure this destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The instructions in this section are for configuring the destination in the UI.
 
 **Notes**:
 - When you add the Amazon Security Lake destination, the OCSF processor is automatically added so that you can convert your logs to Parquet before they are sent to Amazon Security Lake. See [Remap to OCSF documentation][3] for setup instructions.
 - Only logs formatted by the OCSF processor are converted to Parquet.
 
-To set up the destination:
+After you select the Amazon Security Lake destination in the pipeline UI:
 
 1. Enter your S3 bucket name.
 1. Enter the AWS region.
@@ -92,3 +92,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/processors/remap_ocsf
 [5]: /observability_pipelines/destinations/amazon_security_lake/#aws-authentication
+[6]: /observability_pipelines/configuration/set_up_pipelines/
+[7]: /api/latest/observability-pipelines/
+[8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

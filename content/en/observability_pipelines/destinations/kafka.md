@@ -27,9 +27,9 @@ Common scenarios when you might use this destination:
 
 ## Setup
 
-Set up the Kafka destination and its environment variables when you [set up a pipeline][5]. The information below is configured in the pipelines UI.
+Configure this destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][5], using the [API][11], or with [Terraform][12]. The instructions in this section are for configuring the destination in the UI.
 
-To set up the destination:
+After you select the Kafka destination in the pipeline UI:
 
 <div class="alert alert-danger">Only enter the identifiers for the Kafka bootstrap servers and, if applicable, the SASL username and password and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
@@ -154,3 +154,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [7]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
 [8]: /observability_pipelines/monitoring/metrics/
 [9]: /observability_pipelines/destinations/#event-batching
+[10]: /observability_pipelines/configuration/set_up_pipelines/
+[11]: /api/latest/observability-pipelines/
+[12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

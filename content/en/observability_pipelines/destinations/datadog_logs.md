@@ -15,13 +15,11 @@ Use Observability Pipelines' Datadog Logs destination to send logs to Datadog Lo
 
 ## Setup
 
-Set up the Datadog Logs destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
-
-To set up the destination:
-
-There are no required setup steps.
+Configure this destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The instructions in this section are for configuring the destination in the UI.
 
 #### Optional settings
+
+After you select the Datadog Logs destination in the pipeline UI, you can configure these optional settings.
 
 ##### Route logs to multiple Datadog organizations
 
@@ -145,3 +143,6 @@ To send logs from Observability Pipelines to Datadog using Azure Private Link, s
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/search_syntax/logs/
+[4]: /observability_pipelines/configuration/set_up_pipelines/
+[5]: /api/latest/observability-pipelines/
+[6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

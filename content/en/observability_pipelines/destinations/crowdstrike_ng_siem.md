@@ -13,13 +13,15 @@ products:
 
 Use Observability Pipelines' CrowdStrike Next-Gen SIEM destination to send logs to CrowdStrike Next-Gen SIEM.
 
+## Prerequisites
+
+To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike data connector using the HEC/HTTP Event Connector. See [Step 1: Set up the HEC/HTTP event data connector][3] for instructions. When you set up the data connector, you are given a HEC API key and URL, which you use when you configure the Observability Pipelines Worker.
+
 ## Setup
 
-Set up the CrowdStrike NG-SIEM destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure this destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The instructions in this section are for configuring the destination in the UI.
 
-To set up the destination:
-
-To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike data connector using the HEC/HTTP Event Connector. See [Step 1: Set up the HEC/HTTP event data connector][3] for instructions. When you set up the data connector, you are given a HEC API key and URL, which you use when you configure the Observability Pipelines Worker later on.
+After you select the CrowdStrike NG-SIEM destination in the pipeline UI:
 
 <div class="alert alert-danger">Only enter the identifiers for the CrowdStrike NG-SIEM endpoint URL, token, and if applicable, the TLS pass key. Do <b>not</b> enter the actual values.</div>
 
@@ -79,3 +81,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: https://falcon.us-2.crowdstrike.com/documentation/page/bdded008/hec-http-event-connector-guide
+[4]: /observability_pipelines/configuration/set_up_pipelines/
+[5]: /api/latest/observability-pipelines/
+[6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

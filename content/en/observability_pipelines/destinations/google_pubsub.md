@@ -81,9 +81,9 @@ You reference this file in the Google Pub/Sub destination's **Credentials path**
 
 ## Setup
 
-Set up the Google Pub/Sub destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure this destination when you [set up a pipeline][9]. You can set up a pipeline in the [UI][1], using the [API][10], or with [Terraform][11]. The instructions in this section are for configuring the destination in the UI.
 
-To set up the destination:
+After you select the Google Pub/Sub destination in the pipeline UI:
 
 1. Enter the destination project name.
 	- This is the GCP project where your Pub/Sub topic lives.
@@ -188,3 +188,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [6]: /observability_pipelines/destinations/#event-batching
 [7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[9]: /observability_pipelines/configuration/set_up_pipelines/
+[10]: /api/latest/observability-pipelines/
+[11]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

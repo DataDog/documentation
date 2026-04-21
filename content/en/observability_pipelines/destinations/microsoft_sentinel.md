@@ -13,13 +13,7 @@ products:
 
 Use Observability Pipelines' Microsoft Sentinel destination to send logs to Microsoft Sentinel. See [Logs Ingestion API][3] for API call limits in Microsoft Sentinel.
 
-## Setup
-
-Set up the Microsoft Sentinel destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI, except for [Prerequisites](#prerequisites) which provides instructions on how to find the information you need in Microsoft Azure.
-
-### Set up the destination
-
-#### Prerequisites
+## Prerequisites
 
 To set up the Microsoft Sentinel destination, you need to create a Workspace in Azure if you haven't already. In that workspace:
 1. [Add Microsoft Sentinel][6] to the workspace.
@@ -159,9 +153,12 @@ The table below summarizes the Azure and Microsoft Sentinel information you need
 | Table (Stream) Name                | The name of the stream which matches the table chosen when configuring the Data Collection Rule (DCR).  **Note**: The full table name can be found in the resource JSON of the DCR under `streamDeclarations`. <br>**Example**: `Custom-MyOPWLogs_CL`                                                                                                          |
 | Data Collection Rule (DCR) immutable ID | This is the immutable ID of the DCR where logging routes are defined. It is the **Immutable ID** shown on the DCR Overview page.<br>**Note**: Ensure the Monitoring Metrics Publisher role is assigned in the DCR IAM settings.<br>**Example**: `dcr-000a00a000a00000a000000aa000a0aa`<br>See [Data collection rules (DCRs) in Azure Monitor][5] to learn more about creating or viewing DCRs. |
 
-#### Set up the destination in Observability Pipelines
 
-To set up the Microsoft Sentinel destination in Observability Pipelines:
+## Setup
+
+Set up the Microsoft Sentinel destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][1], using the [API][11], or with [Terraform][12]. The instructions in this section are for setting up the destination in the UI.
+
+After you select the Microsoft Sentinel destination in the pipeline UI:
 
 <div class="alert alert-danger">Only enter the identifiers for the Microsoft Sentinel client secret and Data Collection Endpoint. Do <b>not</b> enter the actual values.</div>
 
@@ -218,3 +215,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [7]: https://portal.azure.com/#view/HubsExtension/BrowseResource.ReactView/resourceType/microsoft.insights%2Fdatacollectionendpoints
 [8]: https://portal.azure.com/#create/Microsoft.LogAnalyticsOMS
 [9]: https://portal.azure.com/#view/HubsExtension/BrowseResource.ReactView/resourceType/microsoft.insights%2Fdatacollectionrules
+[10]: /observability_pipelines/configuration/set_up_pipelines/
+[11]: /api/latest/observability-pipelines/
+[12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

@@ -23,7 +23,9 @@ You need to have Datadog's [Azure integration][3] installed to set up Datadog Lo
 
 ## Set up the destination for your pipeline
 
-Set up the Azure Storage destination and its environment variables when you [set up an Archive Logs pipeline][4]. The information below is configured in the pipelines UI.
+Configure the Azure Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The information below is configured in the pipeline UI.
+
+After you select the Azure Storage destination in the pipeline UI:
 
 1. Enter the identifier for your Azure connection string. If you leave it blank, the [default](#secrets-defaults) is used.
     - **Note**: Only enter the identifier for the connection string. Do **not** enter the actual connection string.
@@ -76,6 +78,9 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/
 [3]: /integrations/azure/#setup
-[4]: /observability_pipelines/configuration/explore_templates/?tab=logs#archive-logs
+[4]: /observability_pipelines/configuration/set_up_pipelines/
 [5]: /observability_pipelines/destinations/#event-batching
 [6]: /observability_pipelines/destinations/#template-syntax
+[7]: https://app.datadoghq.com/observability-pipelines
+[8]: /api/latest/observability-pipelines/
+[9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

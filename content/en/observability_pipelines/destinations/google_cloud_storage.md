@@ -29,7 +29,9 @@ You need to have Datadog's [Google Cloud Platform integration][3] installed to s
 
 ## Set up the destination for your pipeline {#set-up-the-destinations}
 
-Set up the Google Cloud Storage destination and its environment variables when you [set up an Archive Logs pipeline][4]. The information below is configured in the pipelines UI.
+Configure the Google Cloud Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The information below is configured in the pipeline UI.
+
+After you select the Google Cloud Storage destination in the pipeline UI:
 
 1. Enter the name of your Google Cloud storage bucket. If you configured Log Archives, it's the bucket you created earlier.
 1. If you have a credentials JSON file, enter the path to your credentials JSON file. If you configured Log Archives it's the credentials you downloaded [earlier](#create-a-service-account-to-allow-workers-to-write-to-the-bucket). The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
@@ -89,9 +91,12 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/
 [3]: /integrations/google_cloud_platform/#setup
-[4]: /observability_pipelines/configuration/explore_templates/?tab=logs#archive-logs
+[4]: /observability_pipelines/configuration/set_up_pipelines/
 [5]: /observability_pipelines/destinations/#event-batching
 [6]: https://cloud.google.com/docs/authentication#auth-flowchart
 [7]: /observability_pipelines/destinations/#template-syntax
 [8]: https://cloud.google.com/docs/authentication#auth-flowchart
 [9]: https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
+[10]: https://app.datadoghq.com/observability-pipelines
+[11]: /api/latest/observability-pipelines/
+[12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
