@@ -17,22 +17,22 @@ If your organization uses custom roles, an admin must add this permission manual
 
 1. Install the [GitHub integration][2]. For full installation and configuration steps, see the [GitHub integration guide][3].
 
-1. In your GitHub account, navigate to **Settings** > **Apps** > **Datadog** to configure GitHub permissions.
+1. In your GitHub account, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}} to configure GitHub permissions.
 
    1. To enable basic Dev Agent functionality, set the following permissions:
 
-      - **Repository permissions**
+      - {{< ui >}}Repository permissions{{< /ui >}}
         - Repository contents: Read & write
         - Pull requests: Read & write
-      - **Subscribe to events**
+      - {{< ui >}}Subscribe to events{{< /ui >}}
         - Push
 
    1. (Optional) To allow the Dev Agent to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
 
-       - **Repository permissions**  
+       - {{< ui >}}Repository permissions{{< /ui >}}
          - Checks: Read  
          - Commit statuses: Read only 
-       - **Subscribe to events**  
+       - {{< ui >}}Subscribe to events{{< /ui >}}
          - Check run
          - Check suite  
          - Issue comment  
@@ -48,7 +48,7 @@ Bits AI Dev Agent uses the `service` and `version` telemetry tags to match detec
 
 To configure telemetry tagging, see [Tag your APM telemetry with Git information][4]. 
 
-You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][5] > **Service Repository Mapping**.
+You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [{{< ui >}}Repositories{{< /ui >}}][5] > {{< ui >}}Service Repository Mapping{{< /ui >}}.
 
 ### Enable auto-push
 To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to **Bits AI Dev** > **Settings** > [**General**][6] , and set the toggle to **Enable**.
@@ -96,10 +96,10 @@ Configure a custom environment for the Dev Agent to install dependencies, format
 
 To configure a repository environment:
 
-1. Go to **Bits AI Dev** > **Settings** > [**Repositories**][5], and find the **Environments** section.
-1. Click **Add Environment** to create a repository configuration:
+1. Go to {{< ui >}}Bits AI Dev{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Repositories{{< /ui >}}][5], and find the {{< ui >}}Environments{{< /ui >}} section.
+1. Click {{< ui >}}Add Environment{{< /ui >}} to create a repository configuration:
    1. Select a repository from the dropdown.
-   1. (Optional) Under **Pre-installed Languages**, click **Select Versions** to specify the language versions the sandbox should use.
+   1. (Optional) Under {{< ui >}}Pre-installed Languages{{< /ui >}}, click {{< ui >}}Select Versions{{< /ui >}} to specify the language versions the sandbox should use.
    1. (Optional) Define environment variables and secrets. Environment variables are available during both environment setup and Dev Agent execution. Secrets are available as environment variables only during environment setup.
    1. (Optional) Add a shell script with setup commands to execute (for example: `pip install -r requirements.txt`).
 1. Run the setup command to ensure it runs successfully.
