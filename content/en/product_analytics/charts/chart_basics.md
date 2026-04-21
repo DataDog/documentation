@@ -12,6 +12,9 @@ further_reading:
     - link: '/product_analytics/charts#deciding-which-chart-to-use'
       tag: Documentation
       text: Decide which chart to use
+    - link: "https://www.datadoghq.com/blog/product-analytics-faster-decisions"
+      tag: "Blog"
+      text: "Make faster, better product decisions with Datadog Product Analytics"
 ---
 
 ## Overview

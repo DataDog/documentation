@@ -2,6 +2,9 @@
 title: Experiments
 description: Plan, run, and analyze randomized experiments across your stack with Datadog Experiments.
 further_reading:
+- link: "https://www.datadoghq.com/blog/experiments"
+  tag: "Blog"
+  text: "Measure the business impact of every product change with Datadog Experiments"
 - link: "/feature_flags/"
   tag: "Documentation"
   text: "Feature Flags"
