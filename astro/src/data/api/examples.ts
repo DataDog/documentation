@@ -5,7 +5,7 @@
  * corresponding source files (Python, Ruby, Go, Java, TypeScript) from
  * the examples directory. Runs at build time using synchronous fs reads.
  *
- * Data currently sourced from src/mocked_dependencies/api/. The mocked
+ * Data currently sourced from src/mocked_dependencies/hugo_site/data/api/. The mocked
  * inventory includes CodeExamples.json but not the SDK source files, so
  * only curl examples render until a live feed is wired up.
  */
@@ -52,7 +52,7 @@ interface CodeExampleMeta {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** Root of the mocked_dependencies API data (relative to this module). */
-const MOCKED_API_ROOT = path.resolve(__dirname, '../../mocked_dependencies/api');
+const MOCKED_API_ROOT = path.resolve(__dirname, '../../mocked_dependencies/hugo_site/data/api');
 
 /** Language configuration: file extensions and display metadata */
 const LANGUAGES = [

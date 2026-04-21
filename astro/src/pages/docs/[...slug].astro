@@ -17,7 +17,9 @@ const { Content } = await render(entry);
 
 <BaseLayout title={entry.data.title}>
   <nav><a href="/">&larr; Home</a></nav>
-  <Content />
+  <div class="prose">
+    <Content />
+  </div>
 </BaseLayout>
 
 <style>

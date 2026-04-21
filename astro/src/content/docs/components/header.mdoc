@@ -1,0 +1,34 @@
+---
+title: "Header Component"
+---
+
+# Header
+
+Site-wide header rendered at the top of every page by `BaseLayout`. Ported from the Hugo `main-nav` partial — dimensions, colors, shadows, breakpoints, hover timings, and interactions all match the Hugo site. The header you see above this content is the component itself.
+
+## Sub-components
+
+| Component | Type | Role |
+|-----------|------|------|
+| `Header.astro` | Astro (static) | Nav shell — reads menu data at build time and renders logo, left menu, right menu, and hamburger statically for SEO. |
+| `NavDropdown.tsx` | Preact island | Hover-open dropdown used for Solutions, About, and Blog menus. Opens on mouse-enter, closes 150ms after mouse-leave. |
+| `ProductMegaMenu.tsx` | Preact island | The Product dropdown. Holds `openCategory` state with a 160ms hover debounce; resets to the first category when the dropdown closes. |
+| `LogoDownloadPanel.astro` | Static + tiny `<script is:inline>` | Hidden "Looking for Datadog logos?" popover. Click-toggle behavior mirrors Hugo's `.js-logo-download`. |
+| `HeaderScroll.astro` | `<script is:inline>` | Sets `--hugo-header-shrink` to `min(scrollY, 65px)` at ≥992px, and adds/removes the `.main-nav-scrolled` class on `<html>`. |
+| `MobileNav.tsx` | Preact island | Hamburger-triggered right-side overlay. Renders the docs mobile nav variant with home/docs/api quick-links, search stub, and full menu tree. |
+| `NavIcon.astro` | Static | Inlines SVG icons from `mocked_dependencies/websites_modules/static/icons/` and colors them via `currentColor`. |
+
+## Data flow
+
+Menu data is loaded at build time via `src/lib/menuData.ts`, which parses the YAML snapshots in `mocked_dependencies/websites_modules/data/menu_data/`. Labels go through the `i18n(key)` helper in `src/lib/i18n.ts`, which reads `mocked_dependencies/websites_modules/i18n/en.yaml`. URLs are normalized with `resolveUrl()` so relative paths become `https://www.datadoghq.com/…`.
+
+## Dimensions (Hugo-identical)
+
+| Viewport | Header height | Scroll shrink |
+|----------|---------------|---------------|
+| <992px   | 60px          | No shrink     |
+| ≥992px, scrollY = 0  | 130px | — |
+| ≥992px, scrollY = 30 | 100px | 30px shrink |
+| ≥992px, scrollY ≥ 65 | 65px  | clamped at 65px |
+
+The corresponding tokens live in the Hugo-identical section of `src/styles/tokens.css`.

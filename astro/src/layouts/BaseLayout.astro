@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
-import AnnouncementBannerPlaceholder from '../components/AnnouncementBannerPlaceholder/AnnouncementBannerPlaceholder.astro';
-import HeaderPlaceholder from '../components/HeaderPlaceholder/HeaderPlaceholder.astro';
+import AnnouncementBanner from '../components/AnnouncementBanner/AnnouncementBanner.astro';
+import Header from '../components/Header/Header.astro';
 import FooterPlaceholder from '../components/FooterPlaceholder/FooterPlaceholder.astro';
 
 interface Props {
@@ -39,35 +39,12 @@ const { title } = Astro.props;
     </script>
   </head>
   <body>
-    <AnnouncementBannerPlaceholder />
-    <HeaderPlaceholder />
+    <AnnouncementBanner />
+    <Header />
     <div class="base-layout__body">
       <slot />
     </div>
     <FooterPlaceholder />
-    <script is:inline>
-      (function () {
-        var root = document.documentElement;
-        var DESKTOP_MIN_WIDTH = 992;
-        var MAX_SHRINK = 65;
-        var ticking = false;
-        function update() {
-          var shrink = window.innerWidth >= DESKTOP_MIN_WIDTH
-            ? Math.min(window.scrollY, MAX_SHRINK)
-            : 0;
-          root.style.setProperty('--hugo-header-shrink', shrink + 'px');
-          ticking = false;
-        }
-        function onScroll() {
-          if (ticking) return;
-          ticking = true;
-          requestAnimationFrame(update);
-        }
-        update();
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onScroll, { passive: true });
-      })();
-    </script>
     <div id="theme-toggles">
       <button
         id="theme-toggle"

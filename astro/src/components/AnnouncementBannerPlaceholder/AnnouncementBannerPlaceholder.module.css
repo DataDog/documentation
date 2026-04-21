@@ -1,9 +1,0 @@
-.banner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--hugo-banner-height);
-  z-index: var(--hugo-banner-z);
-  font-size: var(--font-size-xs);
-}

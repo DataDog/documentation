@@ -1,0 +1,249 @@
+/* Global styles for the product mega-menu. Kept global (rather than a CSS
+   module) because the Preact island markup uses class names directly, and
+   these class names were ported verbatim from Hugo so the CSS cascade and
+   inspector UX match the Hugo site. */
+
+.product-menu {
+  min-height: var(--hugo-mega-menu-min-height);
+  width: var(--hugo-mega-menu-width);
+  padding: 0 !important;
+  left: var(--hugo-mega-menu-offset-left) !important;
+  font-weight: 400;
+}
+
+@media (max-width: 1399.98px) {
+  .product-menu {
+    width: var(--hugo-mega-menu-width-xxl-down);
+    left: var(--hugo-mega-menu-offset-left-xxl-down) !important;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .product-menu {
+    width: var(--hugo-mega-menu-width-xl-down);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .product-menu {
+    width: var(--hugo-mega-menu-width-lg-down);
+  }
+}
+
+.product-menu .product-menu__row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  min-height: var(--hugo-mega-menu-min-height);
+}
+
+.product-menu .product-menu__toggleColumn {
+  padding: 1rem 1rem 1rem 2rem;
+  border-right: 1px solid var(--hugo-nav-border);
+  position: relative;
+}
+
+.product-menu .product-menu__detailColumn {
+  position: relative;
+}
+
+.product-menu p.product-hype {
+  color: #000000;
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 700;
+  padding: 28px 12px;
+  margin: 0;
+}
+
+.product-menu ul.category-toggle-list {
+  list-style: none;
+  display: block;
+  margin: 0 0 60px 0;
+  padding: 0;
+}
+
+@media (min-width: 1200px) {
+  .product-menu ul.category-toggle-list {
+    padding-right: 20px;
+  }
+}
+
+.product-menu ul.category-toggle-list li {
+  list-style: none;
+}
+
+.product-menu ul.category-toggle-list button {
+  all: unset;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 22px;
+  line-height: 24px;
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 12px;
+  vertical-align: middle;
+  cursor: pointer;
+  color: var(--hugo-nav-text);
+}
+
+.product-menu ul.category-toggle-list button:hover {
+  color: var(--hugo-nav-text-hover) !important;
+  background: var(--hugo-nav-btn-hover-bg);
+  border-radius: 4px;
+}
+
+.product-menu ul.category-toggle-list button.text-primary {
+  color: var(--hugo-nav-brand-primary);
+}
+
+.product-menu ul.category-toggle-list button .category-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  width: 22px;
+  height: 22px;
+}
+
+.product-menu ul.category-toggle-list button .category-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.product-menu a.pricing-link {
+  all: unset;
+  color: var(--hugo-nav-brand-primary);
+  text-transform: uppercase;
+  margin-left: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  position: absolute;
+  bottom: 40px;
+  left: 2rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.product-menu a.pricing-link:hover {
+  color: var(--hugo-nav-text-hover);
+}
+
+.product-menu a.pricing-link .pricing-carrot {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 5px;
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+}
+
+.product-menu a.pricing-link .pricing-carrot svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.product-menu .product-category {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 40px 40px 25px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  max-height: 80vh;
+}
+
+.product-menu .product-category .category-details {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.product-menu .category-description {
+  padding: 28px;
+  border-radius: 4px;
+  display: flex;
+  margin-bottom: 40px;
+  color: #ffffff;
+}
+
+.product-menu .category-description .category-header {
+  font-size: 28px;
+  line-height: 24px;
+  font-weight: 700;
+  padding-bottom: 5px;
+  margin: 0;
+  color: #ffffff;
+}
+
+.product-menu .category-description .category-description-text {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
+  margin: 0;
+  color: #ffffff;
+}
+
+.product-menu .category-description__icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 48px;
+  line-height: 48px;
+  margin-right: 20px;
+  color: #ffffff;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.product-menu .category-description__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.product-menu p.subcategory-header {
+  font-size: 16px;
+  line-height: 18px;
+  padding: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.product-menu .product-subcategory {
+  width: 33%;
+}
+
+.product-menu .product-subcategory.related {
+  border-left: 1px solid var(--hugo-nav-border);
+  padding-left: 8px;
+}
+
+.product-menu ul.product-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.product-menu ul.product-list li a {
+  display: block;
+  padding: 12px;
+  font-size: 18px;
+  line-height: 18px;
+  text-wrap: wrap;
+  text-transform: capitalize;
+  color: #000000;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 300;
+  white-space: normal;
+}
+
+.product-menu ul.product-list li a:hover {
+  color: var(--hugo-nav-text-hover);
+  background: var(--hugo-nav-btn-hover-bg);
+}

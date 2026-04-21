@@ -148,32 +148,35 @@ h6 {
   font-size: var(--font-size-h6);
 }
 
-/* Lists */
-ul {
+/* Lists — opt-in via `.prose`. Wrap rendered docs/API prose in
+   <div class="prose"> (or add `prose` to the container) so lists in content
+   get the en-dash bullet; UI components like nav menus, tabs, and the side
+   nav stay unaffected. */
+.prose ul {
   list-style: none;
   padding-left: 1.222rem;
 }
 
-ul li {
+.prose ul li {
   position: relative;
   padding-left: 0;
 }
 
-ul li::before {
+.prose ul li::before {
   content: '\2013';
   position: absolute;
   left: -1.111rem;
 }
 
-ul ul {
+.prose ul ul {
   padding-left: 1.111rem;
 }
 
-ol ol {
+.prose ol ol {
   list-style-type: lower-alpha;
 }
 
-ol ol ol {
+.prose ol ol ol {
   list-style-type: lower-roman;
 }
 

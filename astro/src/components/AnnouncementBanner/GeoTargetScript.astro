@@ -1,0 +1,93 @@
+---
+import { getWebinarList } from '../../lib/bannerData';
+
+interface Props {
+  isCustomBanner: boolean;
+}
+
+const { isCustomBanner } = Astro.props;
+const webinarList = getWebinarList();
+const webinarListJson = JSON.stringify(webinarList);
+const isCustomBannerJson = JSON.stringify(isCustomBanner);
+---
+
+<script is:inline define:vars={{ webinarListJson, isCustomBannerJson }}>
+  (function () {
+    // Ported verbatim from ~/dd/websites-modules/layouts/partials/announcement_banner.html.
+    // The geo-target feature swaps the banner copy when the user's IP maps to
+    // a country code configured in webinars.yaml. We keep it as a <script is:inline>
+    // so it stays off the hydration graph — it's procedural, runs once, and
+    // mutates the DOM directly.
+    var webinarList = JSON.parse(webinarListJson);
+    var isCustomBanner = JSON.parse(isCustomBannerJson);
+    var countryCode = 'US';
+
+    function setWithTimestamp(key, val, ttl) {
+      var item = { value: val, timestamp: Date.now() + ttl };
+      try { localStorage.setItem(key, JSON.stringify(item)); } catch (e) {}
+    }
+
+    function getLocation() {
+      var apiUrl = window.document.URL.match(/(www|docs)\.datadoghq\.com/)
+        ? 'https://www.datadoghq.com/locate'
+        : 'https://corpsite-staging.datadoghq.com/locate';
+      return fetch(apiUrl)
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          countryCode = data.country;
+          setWithTimestamp('country', countryCode, 604800000);
+        })
+        .catch(function () { setWithTimestamp('country', countryCode, 0); });
+    }
+
+    function getWithExpiry() {
+      try {
+        var stored = localStorage.getItem('country');
+        var parsed = JSON.parse(stored);
+        if (Date.now() < parsed.timestamp) {
+          countryCode = parsed.value;
+          return countryCode;
+        }
+        getLocation();
+      } catch (e) {
+        getLocation();
+      }
+      return countryCode;
+    }
+
+    function getLanguage() {
+      var preferredLang = (window.DD_RUM && window.DD_RUM.getUser && window.DD_RUM.getUser().preferred_lang) || navigator.language || 'en';
+      return preferredLang.split('-')[0];
+    }
+
+    function populateBanner(webinar) {
+      var desktop = document.querySelector('[data-testid="announcement-banner"] .banner-title-desktop');
+      var mobile = document.querySelector('[data-testid="announcement-banner"] .banner-title-mobile');
+      if (desktop) desktop.innerHTML = webinar.desktop_title;
+      if (mobile) mobile.innerHTML = webinar.mobile_title;
+      var link = document.querySelector('[data-testid="announcement-banner"] > a');
+      if (link && webinar.link) link.href = webinar.link;
+    }
+
+    function updateBanner(webinar) {
+      var today = new Date();
+      var startDate = new Date(webinar.start_date);
+      var endDate = new Date(webinar.end_date);
+      var userLanguage = getLanguage();
+      var env = document.documentElement.dataset.env;
+      if (env !== 'live' && webinar.test_message && userLanguage === webinar.supported_language) {
+        populateBanner(webinar);
+      }
+      if (today >= startDate && today <= endDate && userLanguage === webinar.supported_language) {
+        populateBanner(webinar);
+      }
+    }
+
+    if (webinarList && webinarList.webinars && webinarList.webinars.length > 0 && !isCustomBanner) {
+      getWithExpiry();
+      webinarList.webinars.forEach(function (webinar) {
+        if (webinar.codes.indexOf(countryCode) !== -1) updateBanner(webinar);
+      });
+    }
+  })();
+</script>

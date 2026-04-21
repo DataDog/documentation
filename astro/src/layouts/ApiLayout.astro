@@ -26,7 +26,9 @@ const regions = getDefaultRegions();
         {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
         <RegionSelector client:load regions={regions} />
       </div>
-      <slot />
+      <div class="prose">
+        <slot />
+      </div>
     </main>
   </div>
 </BaseLayout>
@@ -36,6 +38,15 @@ const regions = getDefaultRegions();
     display: flex;
     max-width: var(--content-max-width);
     margin: 0 auto;
+  }
+
+  /* Hugo caps `.container.container__content` at 1336px from 1400px up
+     (the `.container` @1400px !important rule wins over the base 1440px).
+     Match that step so Astro's page body is never wider than Hugo's. */
+  @media (min-width: 1400px) {
+    .api-shell {
+      max-width: 1336px;
+    }
   }
 
   .api-main {

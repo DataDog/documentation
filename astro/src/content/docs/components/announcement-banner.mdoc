@@ -1,0 +1,30 @@
+---
+title: "Announcement Banner Component"
+---
+
+# AnnouncementBanner
+
+Fixed site-wide banner rendered at the top of every page by `BaseLayout`. Ported from the Hugo `announcement_banner` partial — dimensions, colors, and z-index match the Hugo site pixel-for-pixel. The banner you see above this content is the component itself.
+
+The banner reads its copy from the mocked `announcement_banner` block in `mocked_dependencies/hugo_site/config/_default/params.en.yaml`. A geo-targeting inline script (`GeoTargetScript.astro`) swaps the copy when `mocked_dependencies/hugo_site/data/en/webinars.yaml` contains a webinar whose country codes match the visitor's.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `override` | `BannerParams` | site params | Page-level override, matching Hugo's per-page `announcement_banner` front-matter. When set, the geo-target webinar swap is skipped (mirrors Hugo's `$isCustomBanner` flag). |
+
+### BannerParams fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `desktop_message` | `string` (HTML) | Message shown ≥768px. Rendered with `set:html` to match Hugo's `safeHTML`. |
+| `mobile_message` | `string` (HTML) | Message shown <768px. Falls back to `desktop_message`. |
+| `background_color` | `string` | Solid background override. Applied as inline `background: <value>`. |
+| `gradient_color_one` / `gradient_color_two` | `string` | When both set, override to `linear-gradient(45deg, one 0%, two 100%)`. |
+| `external_link` | `string` | Absolute URL; wraps the banner text in an `<a>` without the `?ref=announcement-banner` query string. |
+| `link` | `string` | Relative URL; wraps the banner text in an `<a>` with `?ref=announcement-banner` appended. |
+| `custom_classes` | `string` | Appended to the banner root (e.g. `dash-announcement-banner`). |
+| `icon` | `string` | Name of an SVG in `mocked_dependencies/websites_modules/static/icons/`. |
+| `icon_color` | `string` | Fill color for the icon. Default `#9C43FE`. |
+| `custom_event_banner` | `boolean` | When `true`, renders the desktop message as a centered `<p>` with no link. |

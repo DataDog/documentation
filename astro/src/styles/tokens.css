@@ -145,6 +145,56 @@
   --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.07);
   --hugo-header-z: 200;
   --hugo-banner-z: 1080;
+  --hugo-mobile-nav-z: 99;
+  --hugo-mobile-nav-bg-z: 8;
+
+  /* Hugo-identical breakpoints (Bootstrap 5).
+     CSS custom properties can't be used inside @media queries, so the same
+     pixel values are duplicated in the media query itself — update both. */
+  --hugo-breakpoint-xl: 1200px;
+  --hugo-breakpoint-xxl: 1400px;
+  --hugo-breakpoint-xs: 480px;
+
+  /* Hugo nav colors (resolved from Bootstrap variables in _main-nav.scss).
+     $gray-dark is #555555 (see websites-modules/assets/styles/base/_colors.scss);
+     $gray-darker (#333333) is a different, unused color in the nav. */
+  --hugo-nav-text: #555555;
+  --hugo-nav-text-hover: #7700ff;
+  --hugo-nav-brand-primary: #632ca6;
+  --hugo-nav-border: #e2e2e2;
+  --hugo-nav-btn-hover-bg: rgba(0, 0, 0, 0.05);
+  --hugo-nav-dropdown-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --hugo-nav-gray-light: #dddddd;
+
+  /* Hugo nav typography */
+  --hugo-nav-item-font-size: 18px;
+  --hugo-nav-item-font-weight: 600;
+  --hugo-nav-item-padding: 8.5px 8px 9.5px;
+  --hugo-nav-item-padding-xxl: 8.5px 12px 9.5px;
+
+  /* Hugo product mega-menu */
+  --hugo-mega-menu-width: 1300px;
+  --hugo-mega-menu-width-xxl-down: 1200px;
+  --hugo-mega-menu-width-xl-down: 1000px;
+  --hugo-mega-menu-width-lg-down: 820px;
+  --hugo-mega-menu-min-height: 630px;
+  --hugo-mega-menu-offset-left: 13px;
+  --hugo-mega-menu-offset-left-xxl-down: -25px;
+
+  /* Hugo announcement banner */
+  --hugo-banner-text-color: #ffffff;
+  --hugo-banner-font-size: 20px;
+  --hugo-banner-gradient-start: #632ca6;
+  --hugo-banner-gradient-end: #2f80ed;
+
+  /* Hugo mobile-nav overlay */
+  --hugo-mobile-nav-bg-opacity: 0.5;
+  --hugo-mobile-nav-width-md: 400px;
+  --hugo-mobile-nav-padding-top: 90px;
+
+  /* Hugo button gradient (GET STARTED FREE) */
+  --hugo-btn-gradient-start: #3023ae;
+  --hugo-btn-gradient-end: #c024b6;
 }
 
 /* Dark mode tokens */

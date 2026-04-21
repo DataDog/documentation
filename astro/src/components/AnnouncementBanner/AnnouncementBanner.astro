@@ -1,0 +1,65 @@
+---
+import styles from './AnnouncementBanner.module.css';
+import GeoTargetScript from './GeoTargetScript.astro';
+import { getBannerParams, type BannerParams } from '../../lib/bannerData';
+
+interface Props {
+  /** Optional override, mirroring Hugo's page-level `announcement_banner` param. */
+  override?: BannerParams;
+}
+
+const { override } = Astro.props;
+const site = getBannerParams();
+const params: BannerParams = override ?? site;
+const isCustomBanner = Boolean(override);
+
+const iconColor = params.icon_color || '#9C43FE';
+
+let backgroundStyle = '';
+if (params.gradient_color_one && params.gradient_color_two) {
+  backgroundStyle = `background: linear-gradient(45deg, ${params.gradient_color_one} 0%, ${params.gradient_color_two} 100%);`;
+} else if (params.background_color) {
+  backgroundStyle = `background: ${params.background_color};`;
+}
+
+const desktopMessage = params.desktop_message ?? '';
+const mobileMessage = params.mobile_message ?? desktopMessage;
+const href = params.external_link || params.link || '';
+const isExternal = Boolean(params.external_link);
+const href_resolved = isExternal
+  ? href
+  : href
+    ? `${href.startsWith('/') ? '' : '/'}${href}?ref=announcement-banner`
+    : '';
+const wrapInLink = Boolean(href_resolved);
+const classes = [styles.banner, params.custom_classes].filter(Boolean).join(' ');
+---
+
+<div
+  class={`announcement-banner ${classes}`}
+  style={backgroundStyle || undefined}
+  data-testid="announcement-banner"
+>
+  {params.custom_event_banner ? (
+    <p
+      class={styles.banner__customEvent}
+      set:html={desktopMessage}
+    />
+  ) : (
+    <>
+      {wrapInLink && (
+        <a href={href_resolved}>
+          <span class={`banner-title-desktop ${styles.banner__titleDesktop}`} set:html={desktopMessage} />
+          <span class={`banner-title-mobile ${styles.banner__titleMobile}`} set:html={mobileMessage} />
+        </a>
+      )}
+      {!wrapInLink && (
+        <>
+          <span class={`banner-title-desktop ${styles.banner__titleDesktop}`} set:html={desktopMessage} />
+          <span class={`banner-title-mobile ${styles.banner__titleMobile}`} set:html={mobileMessage} />
+        </>
+      )}
+    </>
+  )}
+  <GeoTargetScript isCustomBanner={isCustomBanner} />
+</div>
