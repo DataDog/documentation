@@ -103,7 +103,7 @@ After updating either file on your default branch, it may take up to six hours f
 
 **If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
 
-If you are using Datadog's analyzer, [diff-aware scanning][21] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
+If you are using Datadog’s analyzer, [diff-aware scanning][21] is enabled by default. If you are running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
 
 ### Diff-aware is not working
 
