@@ -1,17 +1,19 @@
 /**
  * Custom Shiki theme matching the Hugo site's Chroma syntax highlighting.
+ * Source of truth: assets/styles/vendor/_chroma-styles.scss
  *
  * Color mapping from Chroma token types → TextMate scopes:
- *   Keywords (#a90d91)  → keyword, storage
- *   Strings  (#c41a16)  → string
- *   Numbers  (#1c01ce)  → constant.numeric
- *   Comments (#177500)  → comment
- *   Classes  (#3f6e75)  → entity.name.type
- *   Attrs    (#836c28)  → entity.other.attribute-name
- *   Builtins (#a90d91)  → support.function, support.type
- *   Self     (#5b269a)  → variable.language
- *   Preproc  (#633820)  → meta.preprocessor
- *   Default  (#000000)  → everything else
+ *   Keywords  (#a90d91) → keyword, storage, constant.language (true/false/null)
+ *   Strings   (#c41a16) → string, string.regexp, constant.character.escape
+ *   CharLit   (#2300ce) → constant.character (Chroma .sc)
+ *   Numbers   (#1c01ce) → constant.numeric
+ *   Comments  (#177500) → comment
+ *   Classes   (#3f6e75) → entity.name.type
+ *   Attrs     (#836c28) → entity.other.attribute-name, support.type.property-name
+ *   Builtins  (#a90d91) → support.function, support.type (non-property)
+ *   Self/this (#5b269a) → variable.language
+ *   Preproc   (#633820) → meta.preprocessor
+ *   Default   (#000000) → everything else
  */
 import type { ThemeRegistrationRaw } from 'shiki';
 
@@ -67,16 +69,27 @@ const theme: ThemeRegistrationRaw = {
       settings: { foreground: '#5b269a' },
     },
 
-    // — Strings (Chroma .s / .s1 / .s2)
+    // — Strings, regex, string escapes (Chroma .s / .s1 / .s2 / .sr / .se)
     {
-      scope: ['string', 'punctuation.definition.string'],
+      scope: [
+        'string',
+        'string.regexp',
+        'punctuation.definition.string',
+        'constant.character.escape',
+      ],
       settings: { foreground: '#c41a16' },
     },
 
-    // — Numbers & language constants (Chroma .m / .mi / .mf)
+    // — Numbers (Chroma .m / .mi / .mf)
     {
-      scope: ['constant.numeric', 'constant.language'],
+      scope: ['constant.numeric'],
       settings: { foreground: '#1c01ce' },
+    },
+
+    // — Language constants: true / false / null / nil (Chroma .kc — KeywordConstant)
+    {
+      scope: ['constant.language'],
+      settings: { foreground: '#a90d91' },
     },
 
     // — Character literals (Chroma .sc)
@@ -108,9 +121,14 @@ const theme: ThemeRegistrationRaw = {
       settings: { foreground: '#3f6e75' },
     },
 
-    // — Attributes (Chroma .na)
+    // — Attributes & CSS property names (Chroma .na)
+    // CSS property names map to support.type.property-name in Shiki, which would
+    // otherwise cascade to the purple support.type rule above.
     {
-      scope: ['entity.other.attribute-name'],
+      scope: [
+        'entity.other.attribute-name',
+        'support.type.property-name',
+      ],
       settings: { foreground: '#836c28' },
     },
 
