@@ -29,7 +29,7 @@ You need to have Datadog's [Google Cloud Platform integration][3] installed to s
 
 ## Set up the destination for your pipeline {#set-up-the-destinations}
 
-Configure the Google Cloud Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The information below is configured in the pipeline UI.
+Configure the Google Cloud Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The information below is configured in the UI.
 
 After you select the Google Cloud Storage destination in the pipeline UI:
 

@@ -23,7 +23,7 @@ You need to have Datadog's [Azure integration][3] installed to set up Datadog Lo
 
 ## Set up the destination for your pipeline
 
-Configure the Azure Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The information below is configured in the pipeline UI.
+Configure the Azure Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The information below is configured in the UI.
 
 After you select the Azure Storage destination in the pipeline UI:
 

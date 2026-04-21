@@ -85,7 +85,7 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 
 ## Set up the destination for your pipeline
 
-Configure the Datadog Archives destination when you [set up an Archive Logs pipeline][4]. You can set up a pipeline in the [UI][13], using the [API][14], or with [Terraform][15]. The information below is configured in the pipeline UI.
+Configure the Datadog Archives destination when you [set up an Archive Logs pipeline][4]. You can set up a pipeline in the [UI][13], using the [API][14], or with [Terraform][15]. The information below is configured in the UI.
 
 After you select the Datadog Archives destination in the pipeline UI:
 
