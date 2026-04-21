@@ -21,14 +21,14 @@ further_reading:
 
 ## Overview
 
-This guide explains how to use Datadog Feature Flags to run Experiments with a headless CMS (content management system) such as Contentful, Builder.io, or Strapi. Instead of hardcoding content into your flag variants, you author all content variations directly in your CMS. Use a string or JSON flag to map each variant to a content or model ID, which your frontend resolves at render time. This keeps content management in editors' hands while giving engineers full observability through Datadog.
+This guide explains how to use Datadog Feature Flags to run Experiments with a headless CMS (content management system) such as [Contentful][3], [Builder.io][1], or [Strapi][4]. Instead of hardcoding content into your flag variants, you author all content variations directly in your CMS. Use a string or JSON flag to map each variant to a content or model ID, which your frontend resolves at render time. This keeps content management in editors' hands while giving engineers full observability through Datadog.
 
 **The core pattern:**
 
 1. Content authors create multiple content entries (variants) in the CMS.
 2. Engineers create a Datadog feature flag whose variants are strings (such as a Contentful Entry ID) or JSON objects (for example, `{ "entryId": "abc123", "label": "spring-promotion" }`).
 3. On page load, the flag is evaluated for the current user and the returned value is used to fetch the matching CMS content.
-4. User interactions are tracked as RUM custom actions and surfaced in Datadog Product Analytics Experiments.
+4. User interactions are tracked as [RUM custom actions][5] and surfaced in [Datadog Product Analytics Experiments][6].
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ This guide explains how to use Datadog Feature Flags to run Experiments with a h
 
 ## Step 1: Author content variants in your CMS
 
-Before creating a flag, set up your content variants in your CMS. Each variant should be a *separate content entry*—do not try to pack multiple variants into a single entry. Datadog flags also allow for multiple variations on a flag, enabling A/B/n and multivariate tests. The following section provides vendor-specific examples for Contentful, [Builder.io][1], and Strapi; these patterns can be extended to any headless or API-based CMS.
+Before creating a flag, set up your content variants in your CMS. Each variant should be a *separate content entry*—do not try to pack multiple variants into a single entry. Datadog flags also allow for multiple variations on a flag, enabling A/B/n and multivariate tests. The following section provides vendor-specific examples for Contentful, Builder.io, and Strapi; these patterns can be extended to any headless or API-based CMS.
 
 {{< tabs >}}
 {{% tab "Contentful" %}}
@@ -342,3 +342,7 @@ Use the following tools in Datadog to monitor and analyze your experiment result
 
 [1]: https://www.builder.io
 [2]: /feature_flags/client/
+[3]: https://www.contentful.com
+[4]: https://strapi.io
+[5]: /real_user_monitoring/
+[6]: /experiments/
