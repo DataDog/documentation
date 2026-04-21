@@ -28,7 +28,7 @@ The [Datadog MCP (Model Context Protocol) server][1] allows you to query your Da
 
 - A running CloudPrem deployment with logs ingested.
 - Access to the [Datadog MCP server][1].
-- Your CloudPrem index name (visible in the [Datadog Log Explorer][2] under **BYOC INDEXES**).
+- Your BYOC index name (visible in the [Datadog Log Explorer][2] under **BYOC INDEXES**).
 
 ## Querying CloudPrem logs
 
