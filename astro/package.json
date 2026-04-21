@@ -6,8 +6,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "test": "vitest run",
-    "test:browser": "playwright test",
-    "qa:compare": "npx tsx qa/compare.ts"
+    "test:browser": "playwright test"
   },
   "dependencies": {
     "@astrojs/markdoc": "^0.14.0",
