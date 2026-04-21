@@ -28,7 +28,7 @@ The [Datadog MCP (Model Context Protocol) server][1] allows you to query your Da
 
 - A running CloudPrem deployment with logs ingested.
 - Access to the [Datadog MCP server][1].
-- Your CloudPrem index name (visible in the [Datadog Log Explorer][2] under **CLOUDPREM INDEXES**).
+- Your CloudPrem index name (visible in the [Datadog Log Explorer][2] under {{< ui >}}CLOUDPREM INDEXES{{< /ui >}}).
 
 ## Querying CloudPrem logs
 
@@ -62,10 +62,10 @@ For examples of parameter and natural language queries, see [Advanced query exam
 To find your CloudPrem index name:
 
 1. Navigate to the [Datadog Log Explorer][2].
-2. Look for the **CLOUDPREM INDEXES** section in the left facet panel.
+2. Look for the {{< ui >}}CLOUDPREM INDEXES{{< /ui >}} section in the left facet panel.
 3. Your CloudPrem indexes are listed there, in the format `cloudprem--<cluster_name>--<index_name>`.
 
-You can also find your index names in the [CloudPrem console][3] by selecting a cluster and clicking **View Indexes**.
+You can also find your index names in the [CloudPrem console][3] by selecting a cluster and clicking {{< ui >}}View Indexes{{< /ui >}}.
 
 ## Advanced query examples
 

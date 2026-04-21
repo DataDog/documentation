@@ -29,7 +29,7 @@ algolia:
 Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent.
 </div>
 
-All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][11], click the `DATADOG SITE` selector on the right.
+All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][11], click the {{< ui >}}DATADOG SITE{{< /ui >}} selector on the right.
 
 ## Installation
 

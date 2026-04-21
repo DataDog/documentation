@@ -129,6 +129,10 @@ The metric description helps you understand what a metric represents, why it exi
 
 #### AI-generated description
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">AI-generated metric descriptions are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 For custom metrics with connected source code, Datadog can automatically create AI-generated descriptions to provide additional context. These descriptions are fully editable, and human edits always take precedence.
 
 To enable auto-generated descriptions from source code, ensure that you've installed Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
@@ -137,6 +141,10 @@ To enable auto-generated descriptions from source code, ensure that you've insta
 
 
 ## Source Code
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">Metric Source Code is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 The Source Code section in the metric side panel provides a centralized view of every custom metric and its underlying context.
 

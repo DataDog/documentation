@@ -26,6 +26,9 @@ This folder contains a collection of pages used for e2e tests. These pages are n
 ---
 * [Conditionally displayed filters: hide_if](/dd_e2e/cdocs/integration/conditionally_displayed_filters/hide_if)
 * A filter conditionally appears or disappears based on another filter's selection using `hide_if`.
+---
+* [Dynamic options](/dd_e2e/cdocs/integration/dynamic_options)
+* The second filter shows different options depending on the selection made in the first filter.
 {% /table %}
 
 ## Component test pages
@@ -78,6 +81,9 @@ This folder contains a collection of pages used for e2e tests. These pages are n
 ---
 * [Tooltip](/dd_e2e/cdocs/components/tooltip)
 * Variations of the tooltip component render as expected on initial page load.
+---
+* [UI](/dd_e2e/cdocs/components/ui)
+* Variations of the ui component render as expected on initial page load.
 ---
 * [Underline](/dd_e2e/cdocs/components/underline)
 * Variations of the underline component render as expected on initial page load.

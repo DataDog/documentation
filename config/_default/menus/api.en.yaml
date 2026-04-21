@@ -1148,6 +1148,66 @@ menu:
       url: /api/latest/key-management/
       identifier: key-management
       generated: true
+    - name: Update a personal access token
+      url: '#update-a-personal-access-token'
+      identifier: key-management-update-a-personal-access-token
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePersonalAccessToken
+        unstable: []
+        order: 18
+    - name: Get a personal access token
+      url: '#get-a-personal-access-token'
+      identifier: key-management-get-a-personal-access-token
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPersonalAccessToken
+        unstable: []
+        order: 17
+    - name: Revoke a personal access token
+      url: '#revoke-a-personal-access-token'
+      identifier: key-management-revoke-a-personal-access-token
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RevokePersonalAccessToken
+        unstable: []
+        order: 19
+    - name: Create a personal access token
+      url: '#create-a-personal-access-token'
+      identifier: key-management-create-a-personal-access-token
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePersonalAccessToken
+        unstable: []
+        order: 15
+    - name: Get all personal access tokens
+      url: '#get-all-personal-access-tokens'
+      identifier: key-management-get-all-personal-access-tokens
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPersonalAccessTokens
+        unstable: []
+        order: 16
     - name: Edit an application key owned by current user
       url: '#edit-an-application-key-owned-by-current-user'
       identifier: key-management-edit-an-application-key-owned-by-current-user
@@ -2507,16 +2567,16 @@ menu:
         unstable:
           - v2
         order: 68
-    - name: Cancel a threat hunting job
-      url: '#cancel-a-threat-hunting-job'
-      identifier: security-monitoring-cancel-a-threat-hunting-job
+    - name: Cancel a historical job
+      url: '#cancel-a-historical-job'
+      identifier: security-monitoring-cancel-a-historical-job
       parent: security-monitoring
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CancelThreatHuntingJob
+          - CancelHistoricalJob
         unstable:
           - v2
         order: 66
@@ -2529,7 +2589,7 @@ menu:
         versions:
           - v2
         operationids:
-          - GetThreatHuntingJob
+          - GetHistoricalJob
         unstable:
           - v2
         order: 64
@@ -2542,7 +2602,7 @@ menu:
         versions:
           - v2
         operationids:
-          - DeleteThreatHuntingJob
+          - DeleteHistoricalJob
         unstable:
           - v2
         order: 65
@@ -2559,29 +2619,29 @@ menu:
         unstable:
           - v2
         order: 67
-    - name: Run a threat hunting job
-      url: '#run-a-threat-hunting-job'
-      identifier: security-monitoring-run-a-threat-hunting-job
+    - name: Run a historical job
+      url: '#run-a-historical-job'
+      identifier: security-monitoring-run-a-historical-job
       parent: security-monitoring
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - RunThreatHuntingJob
+          - RunHistoricalJob
         unstable:
           - v2
         order: 62
-    - name: List threat hunting jobs
-      url: '#list-threat-hunting-jobs'
-      identifier: security-monitoring-list-threat-hunting-jobs
+    - name: List historical jobs
+      url: '#list-historical-jobs'
+      identifier: security-monitoring-list-historical-jobs
       parent: security-monitoring
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ListThreatHuntingJobs
+          - ListHistoricalJobs
         unstable:
           - v2
         order: 63
@@ -2624,6 +2684,57 @@ menu:
         unstable:
           - v2
         order: 69
+    - name: Export security monitoring resource to Terraform
+      url: '#export-security-monitoring-resource-to-terraform'
+      identifier: security-monitoring-export-security-monitoring-resource-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExportSecurityMonitoringTerraformResource
+        unstable:
+          - v2
+        order: 91
+    - name: Convert security monitoring resource to Terraform
+      url: '#convert-security-monitoring-resource-to-terraform'
+      identifier: security-monitoring-convert-security-monitoring-resource-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConvertSecurityMonitoringTerraformResource
+        unstable:
+          - v2
+        order: 93
+    - name: Export security monitoring resources to Terraform
+      url: '#export-security-monitoring-resources-to-terraform'
+      identifier: security-monitoring-export-security-monitoring-resources-to-terraform
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkExportSecurityMonitoringTerraformResources
+        unstable:
+          - v2
+        order: 92
+    - name: Update security signal triage state or assignee
+      url: '#update-security-signal-triage-state-or-assignee'
+      identifier: security-monitoring-update-security-signal-triage-state-or-assignee
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EditSecurityMonitoringSignal
+        unstable: []
+        order: 94
     - name: Get suggested actions for a signal
       url: '#get-suggested-actions-for-a-signal'
       identifier: security-monitoring-get-suggested-actions-for-a-signal
@@ -2684,6 +2795,18 @@ menu:
           - SearchSecurityMonitoringSignals
         unstable: []
         order: 72
+    - name: Bulk update security signals
+      url: '#bulk-update-security-signals'
+      identifier: security-monitoring-bulk-update-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignals
+        unstable: []
+        order: 95
     - name: Bulk update triage state of security signals
       url: '#bulk-update-triage-state-of-security-signals'
       identifier: security-monitoring-bulk-update-triage-state-of-security-signals
@@ -3290,6 +3413,32 @@ menu:
           - GetSignalNotificationRules
         unstable: []
         order: 9
+    - name: Get an indicator of compromise
+      url: '#get-an-indicator-of-compromise'
+      identifier: security-monitoring-get-an-indicator-of-compromise
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIndicatorOfCompromise
+        unstable:
+          - v2
+        order: 90
+    - name: List indicators of compromise
+      url: '#list-indicators-of-compromise'
+      identifier: security-monitoring-list-indicators-of-compromise
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIndicatorsOfCompromise
+        unstable:
+          - v2
+        order: 89
     - name: List scanned assets metadata
       url: '#list-scanned-assets-metadata'
       identifier: security-monitoring-list-scanned-assets-metadata
@@ -9136,6 +9285,19 @@ menu:
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
       generated: true
+    - name: List all fleet tracers
+      url: '#list-all-fleet-tracers'
+      identifier: fleet-automation-list-all-fleet-tracers
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetTracers
+        unstable:
+          - v2
+        order: 15
     - name: Trigger a schedule deployment
       url: '#trigger-a-schedule-deployment'
       identifier: fleet-automation-trigger-a-schedule-deployment
@@ -9279,6 +9441,45 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: List instrumented pods for a cluster
+      url: '#list-instrumented-pods-for-a-cluster'
+      identifier: fleet-automation-list-instrumented-pods-for-a-cluster
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetInstrumentedPods
+        unstable:
+          - v2
+        order: 18
+    - name: List all fleet clusters
+      url: '#list-all-fleet-clusters'
+      identifier: fleet-automation-list-all-fleet-clusters
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetClusters
+        unstable:
+          - v2
+        order: 17
+    - name: List tracers for a specific agent
+      url: '#list-tracers-for-a-specific-agent'
+      identifier: fleet-automation-list-tracers-for-a-specific-agent
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgentTracers
+        unstable:
+          - v2
+        order: 16
     - name: Get detailed information about an agent
       url: '#get-detailed-information-about-an-agent'
       identifier: fleet-automation-get-detailed-information-about-an-agent
@@ -10746,6 +10947,45 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Create or update a custom evaluator configuration
+      url: '#create-or-update-a-custom-evaluator-configuration'
+      identifier: llm-observability-create-or-update-a-custom-evaluator-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 26
+    - name: Get a custom evaluator configuration
+      url: '#get-a-custom-evaluator-configuration'
+      identifier: llm-observability-get-a-custom-evaluator-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 25
+    - name: Delete a custom evaluator configuration
+      url: '#delete-a-custom-evaluator-configuration'
+      identifier: llm-observability-delete-a-custom-evaluator-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 27
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -13837,6 +14077,66 @@ menu:
           - ListServiceAccountApplicationKeys
         unstable: []
         order: 2
+    - name: Update an access token for a service account
+      url: '#update-an-access-token-for-a-service-account'
+      identifier: service-accounts-update-an-access-token-for-a-service-account
+      parent: service-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateServiceAccountAccessToken
+        unstable: []
+        order: 10
+    - name: Get an access token for a service account
+      url: '#get-an-access-token-for-a-service-account'
+      identifier: service-accounts-get-an-access-token-for-a-service-account
+      parent: service-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetServiceAccountAccessToken
+        unstable: []
+        order: 9
+    - name: Revoke an access token for a service account
+      url: '#revoke-an-access-token-for-a-service-account'
+      identifier: service-accounts-revoke-an-access-token-for-a-service-account
+      parent: service-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RevokeServiceAccountAccessToken
+        unstable: []
+        order: 11
+    - name: Create an access token for a service account
+      url: '#create-an-access-token-for-a-service-account'
+      identifier: service-accounts-create-an-access-token-for-a-service-account
+      parent: service-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateServiceAccountAccessToken
+        unstable: []
+        order: 8
+    - name: List access tokens for a service account
+      url: '#list-access-tokens-for-a-service-account'
+      identifier: service-accounts-list-access-tokens-for-a-service-account
+      parent: service-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListServiceAccountAccessTokens
+        unstable: []
+        order: 7
     - name: Create a service account
       url: '#create-a-service-account'
       identifier: service-accounts-create-a-service-account
