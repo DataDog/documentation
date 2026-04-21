@@ -39,7 +39,6 @@ All authentication to Datadog is handled by the underlying Private Action Runner
      - **AWS**: [Set up VPC Endpoints][3] (available in US1, AP1, and AP2)
      - **Azure**: [Private Link service setup][6] (available in US3 only). This requires approval in the Datadog Azure account. Reach out to Datadog Support as specified in the instructions.
      - **GCP**: [Set up Private Service Connect Endpoints][7] (available in US5 and EU1)
-
 1. Create a Datadog service account:
    1. Go to the [Service Accounts][8] page.
    1. Click **New Service Account**.
@@ -57,7 +56,6 @@ All authentication to Datadog is handled by the underlying Private Action Runner
    1. Click **Add service principal**, then click **Add new** and enter a name.
       - Alternatively, to reuse a service principal from another workspace, select an existing service principal and skip the next step.
    1. Click **Add**.
-
 1. Generate secrets for the Databricks service principal ([Databricks documentation][10]):
    1. Select the service principal created above.
    1. Click the **Secrets** tab, then click **Generate secret**.
@@ -69,7 +67,6 @@ All authentication to Datadog is handled by the underlying Private Action Runner
       ```
       Datadog supports **AWS Secrets Manager**, **AWS Parameter Store**, and **Azure Key Vault**.
    1. Make note of the secret path (AWS ARN, AKV vault-name/secret-name, or AKV URL).
-
 1. Add the service principal as a workspace admin. Alternatively, assign more granular permissions following the instructions in [Permissions][11].
    1. Click the **Identity and access** tab.
    1. Next to **Groups**, click **Manage**.
@@ -90,13 +87,10 @@ Set up your Private Action Runner using **one** of the following options.
    1. Select the **Script** option, then click **Next**.
    1. Follow the instructions under **Kubernetes**.
    1. The Private Action Runner should show up at the bottom as "successfully installed."
-
 1. Update the existing `values.yaml` (referencing the [Helm chart values][4]):
    1. Set `image.repository` to `gcr.io/datadoghq/dd-data-observability-par`.
    1. Set `image.tag` to `1.21.0-0`.
-
 1. Assign an identity ([Workload Identity][5] or [IAM Role][6]) to the pod. This identity **must** have permissions to read the secret created in [Step 2](#step-2-databricks-prerequisites).
-
 1. Restart the deployment for these changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
@@ -118,9 +112,7 @@ Set up your Private Action Runner using **one** of the following options.
       **Important**: Replace `gcr.io/datadoghq/private-action-runner:v1.21.0-large` with `gcr.io/datadoghq/dd-data-observability-par:1.21.0-0`.
 
    1. The Private Action Runner should show up at the bottom as "successfully installed."
-
 1. Assign an identity ([Managed Identity][3] or [IAM Role][4]) to the instance. This identity **must** have permissions to read the secret created in [Step 2](#step-2-databricks-prerequisites).
-
 1. Restart the Docker container for the changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
@@ -149,7 +141,6 @@ Set up your Private Action Runner using **one** of the following options.
    1. Select **Next, Confirm Access**.
    1. Add the service account created in [Step 1](#step-1-datadog-prerequisites) with **Resolver** access.
    1. Select **Create and Test**. Verify the test results do not return an error.
-
 1. Set up the Databricks integration:
    1. Go to the [Databricks integration][13] tile.
    1. Under **Credentials**, select **Private Action Runner**.
@@ -159,7 +150,6 @@ Set up your Private Action Runner using **one** of the following options.
    1. Complete the remainder of the integration setup as described in [Configure the Datadog-Databricks integration][14]:
       1. Enter the **Workspace Name**, **Workspace URL**, and **System Tables SQL Warehouse ID**.
       1. Enable the products you are interested in.
-
          **Note:** Model Serving behind Private Link is not supported at this time.
    1. Click **Save Databricks Workspace**.
    1. Verify there are no errors on save.
