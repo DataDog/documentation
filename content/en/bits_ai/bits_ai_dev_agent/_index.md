@@ -19,7 +19,7 @@ Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</stron
 
 Bits AI Dev Agent is a generative AI coding assistant that uses observability data from Datadog to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and draws on multiple Datadog products to generate contextual fixes.
 
-Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][18], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][19], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
 
 To get started with Bits AI Dev Agent, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first code session][18].
 
@@ -36,7 +36,7 @@ After [completing setup][6], do one of the following to start a code session:
 A code session can also be created when another Bits AI agent (like [Bits Assistant][16] or [Bits AI SRE][17]) hands off a coding task to the Dev Agent.
 
 ### View and manage code sessions
-On [Code Sessions][7], view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR.
+On **[Code Sessions][7]**, view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR.
 
 Click a session to view its details and continue working with the Dev Agent. To remove a session from your **My Sessions** list, click <i class="icon-archive-wui"></i> (**Archive for everyone**) or <i class="icon-eye-slashed-wui"></i> (**Unwatch session**).
 
@@ -141,3 +141,4 @@ Datadog Code Security uses Bits AI to enhance static analysis and generate remed
 [16]: /bits_ai/bits_assistant/
 [17]: /bits_ai/bits_ai_sre/
 [18]: #start-a-code-session
+[19]: #code-sessions
