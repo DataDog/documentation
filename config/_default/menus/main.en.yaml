@@ -96,6 +96,11 @@ menu:
       url: getting_started/application/
       parent: getting_started
       weight: 8
+    - name: Teams
+      identifier: getting_started_teams
+      url: getting_started/teams/
+      parent: getting_started
+      weight: 27
     - name: Datadog Site
       identifier: getting_started_datadog_site
       url: getting_started/site/
@@ -842,26 +847,36 @@ menu:
       identifier: otel_mysql_metrics
       parent: otel_integrations
       weight: 811
+    - name: PostgreSQL Metrics
+      url: opentelemetry/integrations/postgres_metrics/
+      identifier: otel_postgres_metrics
+      parent: otel_integrations
+      weight: 812
     - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations
-      weight: 812
+      weight: 813
     - name: Podman Metrics
       url: opentelemetry/integrations/podman_metrics/
       identifier: otel_podman_metrics
       parent: otel_integrations
-      weight: 813
+      weight: 814
     - name: Runtime Metrics
       url: opentelemetry/integrations/runtime_metrics/
       identifier: otel_runtime_metrics
       parent: otel_integrations
-      weight: 814
+      weight: 815
+    - name: SQL Server Metrics
+      url: opentelemetry/integrations/sqlserver_metrics/
+      identifier: otel_sqlserver_metrics
+      parent: otel_integrations
+      weight: 816
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 815
+      weight: 817
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
@@ -958,10 +973,10 @@ menu:
     #   parent: sdk
     #   identifier: sdk_data_collected
     #   weight: 3
-    # - name: Mobile Vitals
-    #   url: client_sdks/mobile_vitals/
+    # - name: Integrated Libraries
+    #   url: client_sdks/integrated_libraries/
     #   parent: sdk
-    #   identifier: sdk_mobile_vitals
+    #   identifier: sdk_integrated_libraries
     #   weight: 4
     - name: Extend Datadog
       url: extend/
@@ -1489,6 +1504,11 @@ menu:
       identifier: bits_ai_mcp_server_tools
       parent: bits_ai_mcp_server
       weight: 502
+    - name: Agent Builder
+      url: actions/agents/
+      identifier: bits_ai_agent_builder
+      parent: bits_ai
+      weight: 6
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2993,6 +3013,11 @@ menu:
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_monitors
       weight: 105
+    - name: APM
+      url: datadog_cloudcraft/overlays/apm/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_apm
+      weight: 106
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
@@ -5391,6 +5416,33 @@ menu:
       parent: llm_obs
       identifier: llm_obs_guide
       weight: 9
+    - name: GPU Monitoring
+      url: gpu_monitoring/
+      pre: gpu-monitoring-wui
+      identifier: gpu_monitoring
+      parent: ai_observability_heading
+      weight: 20000
+    - name: Setup
+      url: gpu_monitoring/setup/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_setup
+      weight: 1
+    - name: Summary Page
+      url: gpu_monitoring/summary/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_summary
+      weight: 2
+    - name: Fleet Page
+      url: gpu_monitoring/fleet/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_fleet
+      weight: 3
+    - name: AI Agents Console
+      url: ai_agents_console/
+      pre: llm-observability
+      identifier: ai_agents_console
+      parent: ai_observability_heading
+      weight: 30000
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -6016,6 +6068,26 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_vscode
       weight: 2
+    - name: Logs
+      url: ide_plugins/vscode/logs/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_logs
+      weight: 101
+    - name: Code Insights
+      url: ide_plugins/vscode/code_insights/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_code_insights
+      weight: 102
+    - name: Exception Replay
+      url: ide_plugins/vscode/exception_replay/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_exception_replay
+      weight: 103
+    - name: Code Security
+      url: ide_plugins/vscode/code_security/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_code_security
+      weight: 104
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
@@ -8506,7 +8578,7 @@ menu:
       identifier: rum_mobile_ios_data_collected
       weight: 106
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/ios/mobile_vitals
+      url: real_user_monitoring/application_monitoring/ios/mobile_vitals?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_mobile_vitals
       weight: 107
@@ -8561,7 +8633,7 @@ menu:
       identifier: rum_mobile_flutter_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/flutter/mobile_vitals
+      url: real_user_monitoring/application_monitoring/flutter/mobile_vitals?tab=flutter
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_mobile_vitals
       weight: 105
@@ -8651,7 +8723,7 @@ menu:
       identifier: rum_mobile_react_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/react_native/mobile_vitals
+      url: real_user_monitoring/application_monitoring/react_native/mobile_vitals?tab=reactnative
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_mobile_vitals
       weight: 105
@@ -8726,7 +8798,7 @@ menu:
       identifier: rum_mobile_unity_data_collected
       weight: 104
     - name: Mobile Vitals
-      url: real_user_monitoring/application_monitoring/unity/mobile_vitals
+      url: real_user_monitoring/application_monitoring/unity/mobile_vitals?tab=unity
       parent: rum_mobile_unity
       identifier: rum_mobile_unity_mobile_vitals
       weight: 105

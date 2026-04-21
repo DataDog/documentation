@@ -13,49 +13,49 @@ You can configure Azure Private Link to expose a private IP address for each Dat
 
 ### Connect an endpoint
 
-1. In the Azure portal, go to **Private Link**.
-2. On the left navigation menu, select **Private endpoints**.
-3. Select **Create**.
-4. On the **Create a private endpoint** > **Basics** page, configure the following:
-   - Under **Project details**, select the **Subscription** and **Resource group** from which production resources should access Private Link.
-   - Under **Instance details**, enter a **Name** (for example, `datadog-api-private-link`) and select your **Region**.
+1. In the Azure portal, go to {{< ui >}}Private Link{{< /ui >}}.
+2. On the left navigation menu, select {{< ui >}}Private endpoints{{< /ui >}}.
+3. Select {{< ui >}}Create{{< /ui >}}.
+4. On the {{< ui >}}Create a private endpoint{{< /ui >}} > {{< ui >}}Basics{{< /ui >}} page, configure the following:
+   - Under {{< ui >}}Project details{{< /ui >}}, select the {{< ui >}}Subscription{{< /ui >}} and {{< ui >}}Resource group{{< /ui >}} from which production resources should access Private Link.
+   - Under {{< ui >}}Instance details{{< /ui >}}, enter a {{< ui >}}Name{{< /ui >}} (for example, `datadog-api-private-link`) and select your {{< ui >}}Region{{< /ui >}}.
 
-   Select **Next: Resource** to continue.
-5. On the **Create a private endpoint** > **Resource** page, configure the following:
-   - For **Connection method**, select **Connect to an Azure resource by resource ID or alias**.
-   - For **Resource ID or alias**, enter the Private Link service name that corresponds to the Datadog intake service that you want to use. You can find this service name in the [table of published services](#published-services).
-   - Optionally, for **Request message**, you can enter your email address (associated with a Datadog account). This helps Datadog identify your request and reach out to you if necessary.
+   Select {{< ui >}}Next: Resource{{< /ui >}} to continue.
+5. On the {{< ui >}}Create a private endpoint{{< /ui >}} > {{< ui >}}Resource{{< /ui >}} page, configure the following:
+   - For {{< ui >}}Connection method{{< /ui >}}, select {{< ui >}}Connect to an Azure resource by resource ID or alias{{< /ui >}}.
+   - For {{< ui >}}Resource ID or alias{{< /ui >}}, enter the Private Link service name that corresponds to the Datadog intake service that you want to use. You can find this service name in the [table of published services](#published-services).
+   - Optionally, for {{< ui >}}Request message{{< /ui >}}, you can enter your email address (associated with a Datadog account). This helps Datadog identify your request and reach out to you if necessary.
 
-   Select **Next: Virtual Network** to continue.
-6. On the **Create a private endpoint** > **Virtual Network** page, configure the following:
-   - Under **Networking**, select the **Virtual network** and **Subnet** where the endpoint should live. Typically, this is located in the same network as the compute resources that need to access the private endpoint.
-   - Under **Private DNS integration**, select **No**.
+   Select {{< ui >}}Next: Virtual Network{{< /ui >}} to continue.
+6. On the {{< ui >}}Create a private endpoint{{< /ui >}} > {{< ui >}}Virtual Network{{< /ui >}} page, configure the following:
+   - Under {{< ui >}}Networking{{< /ui >}}, select the {{< ui >}}Virtual network{{< /ui >}} and {{< ui >}}Subnet{{< /ui >}} where the endpoint should live. Typically, this is located in the same network as the compute resources that need to access the private endpoint.
+   - Under {{< ui >}}Private DNS integration{{< /ui >}}, select {{< ui >}}No{{< /ui >}}.
 
-   Select **Next: Tags** to continue.
-7. On the **Create a private endpoint** > **Tags** page, you can optionally set tags. Select **Next**.
-8. On the **Review + create** page, review your configuration settings. Then, select **Create**.
-9. After your private endpoint is created, find it in the list. Take note of this endpoint's **Private IP**, as this is used in the next section. The Connection Status field should be Pending.
+   Select {{< ui >}}Next: Tags{{< /ui >}} to continue.
+7. On the {{< ui >}}Create a private endpoint{{< /ui >}} > {{< ui >}}Tags{{< /ui >}} page, you can optionally set tags. Select {{< ui >}}Next{{< /ui >}}.
+8. On the {{< ui >}}Review + create{{< /ui >}} page, review your configuration settings. Then, select {{< ui >}}Create{{< /ui >}}.
+9. After your private endpoint is created, find it in the list. Take note of this endpoint's {{< ui >}}Private IP{{< /ui >}}, as this is used in the next section. The Connection Status field should be Pending.
 10. Next, Datadog's approval is necessary and manual. Reach out to Datadog Support and request approval of your private link endpoint, include your endpoint name.
-11. After Datadog Support has confirmed that the endpoint is created, confirm that it is fully working. In the Azure portal navigate to **Home > Private Endpoints**. Click the endpoint name, and confirm that the Connection Status shows **Approved**. 
-12. Navigate to **Monitoring > Metrics**. Confirm the `Bytes In` and `Bytes Out` metrics are non-zero. These metrics should also be captured by the Datadog Azure Integration as `azure.network_privateendpoints.pe_bytes_[in/out]`.
+11. After Datadog Support has confirmed that the endpoint is created, confirm that it is fully working. In the Azure portal navigate to {{< ui >}}Home{{< /ui >}} > {{< ui >}}Private Endpoints{{< /ui >}}. Click the endpoint name, and confirm that the Connection Status shows {{< ui >}}Approved{{< /ui >}}. 
+12. Navigate to {{< ui >}}Monitoring{{< /ui >}} > {{< ui >}}Metrics{{< /ui >}}. Confirm the `Bytes In` and `Bytes Out` metrics are non-zero. These metrics should also be captured by the Datadog Azure Integration as `azure.network_privateendpoints.pe_bytes_[in/out]`.
 
 ### Create a Private DNS zone
-1. In the Azure portal, go to **Private DNS zones**.
-2. Select **Create**.
-3. On the **Create Private DNS zone** > **Basics** page, configure the following:
-   - Under **Project details**, select the **Subscription** and **Resource group** from which production resources should access the private endpoint.
-   - Under **Instance details**, for **Name**, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find this service name in the [table of published services](#published-services).
+1. In the Azure portal, go to {{< ui >}}Private DNS zones{{< /ui >}}.
+2. Select {{< ui >}}Create{{< /ui >}}.
+3. On the {{< ui >}}Create Private DNS zone{{< /ui >}} > {{< ui >}}Basics{{< /ui >}} page, configure the following:
+   - Under {{< ui >}}Project details{{< /ui >}}, select the {{< ui >}}Subscription{{< /ui >}} and {{< ui >}}Resource group{{< /ui >}} from which production resources should access the private endpoint.
+   - Under {{< ui >}}Instance details{{< /ui >}}, for {{< ui >}}Name{{< /ui >}}, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find this service name in the [table of published services](#published-services).
 
-   Select **Review create**.
-4. Review your configuration settings. Then, select **Create**.
+   Select {{< ui >}}Review create{{< /ui >}}.
+4. Review your configuration settings. Then, select {{< ui >}}Create{{< /ui >}}.
 5. After the Private DNS zone is created, select it from the list.
-6. In the panel that opens, select **+ Record set**.
-7. In the **Add record set** panel, configure the following:
-   - For **Name**, enter `*`.
-   - For **Type**, select **A - Address record**.
-   - For **IP address**, enter the IP address you noted at the end of the previous section.
+6. In the panel that opens, select {{< ui >}}+ Record set{{< /ui >}}.
+7. In the {{< ui >}}Add record set{{< /ui >}} panel, configure the following:
+   - For {{< ui >}}Name{{< /ui >}}, enter `*`.
+   - For {{< ui >}}Type{{< /ui >}}, select {{< ui >}}A - Address record{{< /ui >}}.
+   - For {{< ui >}}IP address{{< /ui >}}, enter the IP address you noted at the end of the previous section.
 
-   Select **OK** to finish.
+   Select {{< ui >}}OK{{< /ui >}} to finish.
 ### Additional required steps for metrics and traces
 Two Datadog Intake Services are subdomains of the `agent.`{{< region-param key="dd_site" code="true" >}} domain. Because of this, the Private DNS zone is slightly different from other intakes.
 

@@ -233,7 +233,7 @@ Optionally, you can add a DNS entry pointing to the IP of the public load balanc
    ```
 
 1. Store the PostgreSQL database connection string as a Kubernetes secret:
-   To retrieve your PostgreSQL connection details, go the Azure Portal, navigate to **All resources**, then click on your _Azure Database for PostgreSQL flexible server_ instance. Finally, in the **Getting started** tab, click on the _View connection strings_ link in the **Connect card**.
+   To retrieve your PostgreSQL connection details, go the Azure Portal, navigate to {{< ui >}}All resources{{< /ui >}}, then click on your _Azure Database for PostgreSQL flexible server_ instance. Finally, in the {{< ui >}}Getting started{{< /ui >}} tab, click on the {{< ui >}}View connection strings{{< /ui >}} link in the {{< ui >}}Connect{{< /ui >}} card.
 
    ```shell
    kubectl create secret generic cloudprem-metastore-uri \

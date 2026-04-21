@@ -47,7 +47,7 @@ Data security considerations
 
 ## Configure the AWS integration
 
-Enable **Resource Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][3].
+Enable {{< ui >}}Resource Collection{{< /ui >}} in the {{< ui >}}Resource Collection{{< /ui >}} section of your [Amazon Web Services integration tile][3].
 
 ## Configure Postgres settings
 

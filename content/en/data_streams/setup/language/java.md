@@ -64,7 +64,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.t
 {{< /tabs >}}
 
 ### One-Click Installation
-To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][4]. Navigate to the APM Service Page and `Enable DSM`.
+To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][4]. Navigate to the APM Service Page and {{< ui >}}Enable DSM{{< /ui >}}.
 
 {{< img src="data_streams/enable_dsm_service_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
 
