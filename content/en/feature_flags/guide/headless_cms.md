@@ -124,7 +124,7 @@ export default function App() {
 
 ## Step 3: Create the feature flag in Datadog
 
-1. Navigate to **Feature Flags** in the Datadog UI and click **\+ Create Feature Flag**.
+1. Navigate to **Feature Flags** in the Datadog UI and click **\+ Create Flag**.
 2. Configure the flag:
    * **Name**: for example, `cms_homepage_hero_variant`
    * **Key**: `cms_homepage_hero_variant`
@@ -135,14 +135,14 @@ export default function App() {
 
 **String flag example:**
 
-| Variant Key | Variant Value |
+| Variant Name | Variant Value |
 | :---- | :---- |
 | `control` | `"1a2b3c4d5e6f"` |
 | `treatment` | `"7g8h9i0j1k2l"` |
 
 **JSON flag example (recommended for richer metadata):**
 
-| Variant Key | Variant Value |
+| Variant Name | Variant Value |
 | ----- | ----- |
 | `control` | `{ "entryId": "1a2b3c4d5e6f", "label": "spring-hero-control" }` |
 | `treatment` | `{ "entryId": "7g8h9i0j1k2l", "label": "spring-hero-discount" }` |
