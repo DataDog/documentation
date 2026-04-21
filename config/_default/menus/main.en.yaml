@@ -5437,6 +5437,12 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_fleet
       weight: 3
+    - name: AI Agents Console
+      url: ai_agents_console/
+      pre: llm-observability
+      identifier: ai_agents_console
+      parent: ai_observability_heading
+      weight: 30000
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
