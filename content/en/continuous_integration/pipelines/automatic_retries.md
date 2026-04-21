@@ -35,7 +35,10 @@ Automatic retries reduce the number of pipelines that developers re-run by hand,
 
 - CI Visibility enabled for your [GitHub Actions][1] or [GitLab][2] integration.
 - [Datadog Source Code Integration][3] configured for the repositories where you want automatic retries.
+- Indexed CI job logs for those repositories (see [Collect job logs for GitHub Actions][4] or [Collect job logs for GitLab][5]).
 - Automatic job retries enabled for your organization (see the banner above for how to request access).
+
+Automatic retries rely on the same AI error classifier used by [CI jobs failure analysis][6], which reads indexed job logs to decide whether a failure is transient.
 
 ## Provider-specific behavior
 
@@ -76,3 +79,6 @@ The Datadog GitHub App's default permissions do not allow retries on protected b
 [1]: /continuous_integration/pipelines/github/
 [2]: /continuous_integration/pipelines/gitlab/
 [3]: /integrations/guide/source-code-integration/
+[4]: /continuous_integration/pipelines/github/#collect-job-logs
+[5]: /continuous_integration/pipelines/gitlab/#collect-job-logs
+[6]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
