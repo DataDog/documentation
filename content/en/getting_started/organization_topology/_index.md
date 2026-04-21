@@ -35,7 +35,7 @@ This guide covers:
 - Manage multi-organization environments with Organization Groups.
 
 ## Getting started 
-Datadog recommends a [single-organization topology](#single-organization-topology-recommended) for most deployments and offers a flexible access management system that allows you to customize the level access to your Datadog resources. For example, large enterprises with thousands of users, multiple business units, can use [granular access control] to satisfy strict compliance requirements.
+Datadog recommends a [single-organization topology](#single-organization-topology-recommended) for most deployments and offers a flexible access management system that allows you to customize the level access to your Datadog resources. For example, large enterprises with thousands of users, multiple business units, can use [granular access control][10] to satisfy strict compliance requirements.
 
 Use a [multi-organization topology](#multi-organization-topology) only when a single organization cannot satisfy a hard requirement.
 
