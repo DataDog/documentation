@@ -42,8 +42,8 @@ Ensure [remote configuration][3] is set up for the agent running the Kafka Consu
 
 #### Validation
 
-1. In Datadog, under [Remote Configuration][13], check that remote configuration is enabled at the organization level.
-2. In Datadog, under [Remote Configuration][13], check that the agent running the Kafka Consumer integration has remote configuration enabled, and is using an API key with remote configuration enabled.
+1. In Datadog, under [{{< ui >}}Remote Configuration{{< /ui >}}][13], check that remote configuration is enabled at the organization level.
+2. In Datadog, under [{{< ui >}}Remote Configuration{{< /ui >}}][13], check that the agent running the Kafka Consumer integration has remote configuration enabled, and is using an API key with remote configuration enabled.
 
 ## Required permissions
 
@@ -52,34 +52,34 @@ You must have the `Data Streams Monitoring Capture Messages` permission, and the
 * `Logs Read Data`
 * `Logs Live Tail`
 
-You can verify your current permissions on your [Profile page][7].
-To enable permissions, edit an existing role or create a new one on the [Roles page][8]. If you do not have permission to modify roles, contact your organization's administrator.
+You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} page][7].
+To enable permissions, edit an existing role or create a new one on the [{{< ui >}}Roles{{< /ui >}} page][8]. If you do not have permission to modify roles, contact your organization's administrator.
 
 ### 1. Create a new role
 
-1. Navigate to the [Roles page][8] in Datadog.
-2. Click **+ New Role** in the top-right corner.
+1. Navigate to the [{{< ui >}}Roles{{< /ui >}} page][8] in Datadog.
+2. Click {{< ui >}}+ New Role{{< /ui >}} in the top-right corner.
    <div class="alert alert-info">
    If you see "Read Only" instead of the "+ New Role button", you don't have permission to create roles. Contact your Datadog administrator for assistance.
    </div>
 3. Enter a descriptive name for your new role (for example, "Data Streams Messages Access").
-4. In the **Search Permissions** field, type `Data Streams Monitoring Capture Messages`.
+4. In the {{< ui >}}Search Permissions{{< /ui >}} field, type `Data Streams Monitoring Capture Messages`.
 5. Select the permission from the search results to enable it for this role.
-6. Click **Save**.
+6. Click {{< ui >}}Save{{< /ui >}}.
 7. Confirm your role was created successfully by searching for it in the roles list.
 
 ### 2. Assign the role to users
 
-1. Go to the [Users page][9] in Datadog.
+1. Go to the [{{< ui >}}Users{{< /ui >}} page][9] in Datadog.
 2. Find and click on the user you want to assign the role to.
-3. In the user details panel, click **Edit** next to their name.
+3. In the user details panel, click {{< ui >}}Edit{{< /ui >}} next to their name.
    <div class="alert alert-info">
-   If you don't see an "Edit" button, you need administrator privileges to modify user roles. Contact your Datadog administrator.
+   If you don't see an {{< ui >}}Edit{{< /ui >}} button, you need administrator privileges to modify user roles. Contact your Datadog administrator.
    </div>
-4. In the modal that opens, locate the **Roles** section.
+4. In the modal that opens, locate the {{< ui >}}Roles{{< /ui >}} section.
 5. Add your newly created role to the user.
-6. Click **Save**.
-7. Look for a "User updated" confirmation message to verify the change was successful.
+6. Click {{< ui >}}Save{{< /ui >}}.
+7. Look for a {{< ui >}}User updated{{< /ui >}} confirmation message to verify the change was successful.
 
 [1]: #agent-setup
 [2]: #required-permissions
