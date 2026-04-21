@@ -99,8 +99,6 @@ Select a rule to open its details panel, then click **Edit** to change the rule'
 
 Drag rules to change the evaluation order. The evaluation order determines how rules interact when multiple rules apply to the same metrics.
 
-{{< img src="metrics/guide/tag_indexing_rules/reorder_rules.mp4" video="true" alt="Dragging a rule to a new position in the rules list to change the evaluation order." style="width:80%;">}}
-
 ### Delete a rule
 
 Remove rules that are no longer needed. When you delete a rule, Datadog recomputes the tag configuration for affected metrics based on the remaining rules.
