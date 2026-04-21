@@ -189,6 +189,13 @@
         "description": "Markdoc underline tag"
     },
 
+    "UI element": {
+        "scope": "markdoc",
+        "prefix": ";;ui",
+        "body": "{% ui %}${1:UI element name}{% /ui %}",
+        "description": "Markdoc ui tag for rendering references to UI elements"
+    },
+
     "Superscript": {
         "scope": "markdoc",
         "prefix": ";;sup",

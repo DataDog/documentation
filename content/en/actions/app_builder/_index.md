@@ -67,9 +67,9 @@ For example, the [EC2 integration dashboard][7] offers an EC2 instance managemen
 
 {{< img src="/service_management/app_builder/ootb-app-ec2-demo-data.png" alt="An EC2 app created by Datadog" caption="An EC2 app created by Datadog" style="width:100%;" >}}
 
-To use the app with your data, click **+ Connect Data**, then either create a new connection or select an existing one. After you save your selection, the app displays data from your connection.
+To use the app with your data, click {{< ui >}}+ Connect Data{{< /ui >}}, then either create a new connection or select an existing one. After you save your selection, the app displays data from your connection.
 
-You can change the selected connection by clicking **Change Connection** in the app.
+You can change the selected connection by clicking {{< ui >}}Change Connection{{< /ui >}} in the app.
 
 ## App Builder Overview dashboard
 

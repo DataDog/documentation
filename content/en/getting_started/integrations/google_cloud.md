@@ -451,7 +451,7 @@ After setting up Cloud Security, toggle the **Enable Resource Collection** optio
 
 ### Expanded BigQuery monitoring
 
-You can get granular visibility into your BigQuery environments to monitor the performance of your BigQuery jobs and the quality of your BigQuery data. See the [Expanded BigQuery monitoring section][65] in the main Google Cloud integration page for more information and setup instructions.
+Expanded BigQuery monitoring provides granular visibility into your BigQuery environments. See the [BigQuery Data Observability][68] documentation for more information.
 
 ## Further reading
 
@@ -517,6 +517,6 @@ You can get granular visibility into your BigQuery environments to monitor the p
 [61]: https://cloud.google.com/vpc/docs/private-service-connect-compatibility#third-party-services
 [62]: https://app.datadoghq.com/event/overview
 [63]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
-[65]: /integrations/google_cloud_platform/#expanded-bigquery-monitoring
 [66]: https://cloud.google.com/identity/docs/overview
 [67]: https://docs.datadoghq.com/logs/guide/google-cloud-log-forwarding
+[68]: https://docs.datadoghq.com/data_observability/quality_monitoring/data_warehouses/bigquery/

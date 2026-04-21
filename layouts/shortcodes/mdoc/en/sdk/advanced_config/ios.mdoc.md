@@ -110,7 +110,7 @@ For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom resources
 
-In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. Use the following methods on `RUMMonitor.shared()` to manually collect RUM resources:
+In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. This is the recommended approach for third-party libraries that don't expose a `URLSession` delegate. Use the following methods on `RUMMonitor.shared()` to manually collect RUM resources:
 
 - `.startResource(resourceKey:request:)`
 - `.stopResource(resourceKey:response:)`

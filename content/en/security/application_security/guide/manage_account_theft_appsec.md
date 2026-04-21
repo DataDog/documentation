@@ -382,7 +382,7 @@ After confirming that the traits match the attackers, you can push an In-App WAF
 
 To create the rule, do the following:
 
-1. Go to **AAP** > **Policies** > **In-App WAF** > [Custom Rules][28]].
+1. Go to **AAP** > **Policies** > **In-App WAF** > [Custom Rules][33].
 2. Click **Create New Rule** and complete the configuration. 
 3. Follow the steps in **Define your custom rule**.   
 4. In **Select the services you want this rule to apply to**, select your login service, or the services where you want to block requests. You can also target blocking to the login route.
@@ -553,7 +553,7 @@ If the Denylist isn't sufficient, you can create a WAF rule. A WAF rule evaluate
 
 To create a new rule, do the following:
 
-1. Go to **AAP** > **Policies** > **In-App WAF** > [Custom Rules][28]].
+1. Go to **AAP** > **Policies** > **In-App WAF** > [Custom Rules][33].
 2. Click **Create New Rule** and complete the configuration. 
 3. Follow the steps in **Define your custom rule**.   
 4. In **Select the services you want this rule to apply to**, select your login service, or whichever services where you want to block requests. You can also target the blocking to the login route.
@@ -569,7 +569,7 @@ The response is pushed to tracers automatically and blocked traces appear in the
 
 Multiple blocking actions are available. Depending on the sophistication of the attackers, you might want a stealthier response so that attackers don't immediately realize they were blocked.
 
-For more information, see [In-App WAF Rules][30].
+For more information, see [In-App WAF Rules][34].
 
 #### Automated data export
 
@@ -640,7 +640,7 @@ If you configured permanent blocking, unblock users and IPs from the Denylist by
 
 #### Disable or delete any custom In-App WAF rule(s)
 
-To disable or delete In-App WAF rule(s), go to the [custom In-App WAF rules page][28] and disable the rules by clicking on **Monitoring** or **Blocking**, and selecting **Disable Rule**. 
+To disable or delete In-App WAF rule(s), go to the [custom In-App WAF rules page][33] and disable the rules by clicking on **Monitoring** or **Blocking**, and selecting **Disable Rule**. 
 
 If the rule is no longer relevant, you can delete it by clicking more options (**...**) and selecting **Delete**.
 
@@ -733,7 +733,7 @@ This is general guidance. Depending on your applications and environments, there
 [28]: /api/latest/webhooks-integration/
 [29]: /security/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 [30]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&mitreFilters=%7B%22visualize%22%3A%7B%22value%22%3A%5B%22all%22%5D%2C%22excluded%22%3Afalse%7D%2C%22ruleDensity%22%3A%7B%22value%22%3A%5B%5D%2C%22excluded%22%3Afalse%7D%7D&sort=date&viz=rules
-[28]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
-[30]: /security/application_security/policies/inapp_waf_rules/
 [31]: /api/latest/spans/#aggregate-spans
 [32]: https://haveibeenpwned.com/
+[33]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
+[34]: /security/application_security/policies/inapp_waf_rules/

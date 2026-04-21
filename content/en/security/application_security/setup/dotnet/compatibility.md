@@ -49,7 +49,7 @@ These are supported on the following architectures:
 - macOS (Darwin) x86-64, ARM64
 - Windows (msvc) x86, x86-64
 
-For a complete list of supported versions abd operating systems, see the [.NET Core tracer documentation][3] and [.NET Framework tracer documentation][4].
+For a complete list of supported versions and operating systems, see the [.NET Core tracer documentation][3] and [.NET Framework tracer documentation][4].
 
 You must be running Datadog Agent v7.41.1+ for App and API Protection features.
 

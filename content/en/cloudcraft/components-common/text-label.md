@@ -12,12 +12,12 @@ The Text label component can be used to label components, icons, and areas in a 
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
-- **Toggle 3D/2D projection**: Display the label in 3D or 2D view.
-- **Toggle flat/standing projection**: Display the label flat or standing. Not available when 2D projection is toggled.
-- **Size**: The size of the text label. Accepts a maximum value of 112.
-- **Rotate item**: Rotate a text label component and change its direction.
-- **Outline**: Add an outline to the text label for increased color contrast.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
+- {{< ui >}}Toggle 3D/2D projection{{< /ui >}}: Display the label in 3D or 2D view.
+- {{< ui >}}Toggle flat/standing projection{{< /ui >}}: Display the label flat or standing. Not available when 2D projection is toggled.
+- {{< ui >}}Size{{< /ui >}}: The size of the text label. Accepts a maximum value of 112.
+- {{< ui >}}Rotate item{{< /ui >}}: Rotate a text label component and change its direction.
+- {{< ui >}}Outline{{< /ui >}}: Add an outline to the text label for increased color contrast.
 
 ## API
 
