@@ -919,6 +919,10 @@ For more specific control over library patching and the integration that starts 
 : A comma-separated string of library names that are not patched when the tracer is initialized.<br>
 **Example**: `DD_TRACE_DISABLED_INSTRUMENTATIONS=openai,http`
 
+`DD_TRACE_<INTEGRATION>_ENABLED`
+: Set to `false` to disable tracing for a specific integration. Replace `<INTEGRATION>` with the uppercase integration name.<br>
+**Example**: `DD_TRACE_OPENAI_ENABLED=false`
+
 {{% /tab %}}
 {{< /tabs >}}
 
