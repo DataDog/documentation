@@ -23,7 +23,7 @@ Use Observability Pipelines' Elasticsearch destination to send logs or metrics (
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][7]. You can set up a pipeline in the [UI][1], using the [API][8], or with [Terraform][9]. The instructions in this section are for configuring the destination in the UI.
+Configure this destination when you [set up a pipeline][7]. You can set up a pipeline in the [UI][1], using the [API][8], or with [Terraform][9]. The instructions in this section are configured in the UI.
 
 After you select the Elasticsearch destination in the pipeline UI:
 

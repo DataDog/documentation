@@ -15,7 +15,7 @@ Use Observability Pipelines' OpenSearch destination to send logs to OpenSearch.
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The instructions in this section are for configuring the destination in the UI.
+Configure this destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The instructions in this section are configured in the UI.
 
 After you select the OpenSearch destination in the pipeline UI:
 

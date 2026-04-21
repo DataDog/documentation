@@ -15,7 +15,7 @@ Use Observability Pipelines' Splunk HTTP Event Collector (HEC) destination to se
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][5]. You can set up a pipeline in the [UI][1], using the [API][6], or with [Terraform][7]. The instructions in this section are for configuring the destination in the UI.
+Configure this destination when you [set up a pipeline][5]. You can set up a pipeline in the [UI][1], using the [API][6], or with [Terraform][7]. The instructions in this section are configured in the UI.
 
 After you select the Splunk HEC destination in the pipeline UI:
 

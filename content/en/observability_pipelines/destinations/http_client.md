@@ -18,7 +18,7 @@ Use Observability Pipelines' HTTP Client destination to send logs to an HTTP cli
 
 ## Set up destination
 
-Configure this destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The instructions in this section are for configuring the destination in the UI.
+Configure this destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The instructions in this section are configured in the UI.
 
 After you select the HTTP Client destination in the pipeline UI:
 

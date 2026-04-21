@@ -27,7 +27,7 @@ Common scenarios when you might use this destination:
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][5], using the [API][11], or with [Terraform][12]. The instructions in this section are for configuring the destination in the UI.
+Configure this destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][5], using the [API][11], or with [Terraform][12]. The instructions in this section are configured in the UI.
 
 After you select the Kafka destination in the pipeline UI:
 

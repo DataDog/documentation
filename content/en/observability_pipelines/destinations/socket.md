@@ -15,7 +15,7 @@ Use Observability Pipelines' Socket destination to send logs to a socket endpoin
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The instructions in this section are for configuring the destination in the UI.
+Configure this destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The instructions in this section are configured in the UI.
 
 After you select the Socket destination in the pipeline UI:
 

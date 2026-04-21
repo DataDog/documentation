@@ -81,7 +81,7 @@ You reference this file in the Google Pub/Sub destination's **Credentials path**
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][9]. You can set up a pipeline in the [UI][1], using the [API][10], or with [Terraform][11]. The instructions in this section are for configuring the destination in the UI.
+Configure this destination when you [set up a pipeline][9]. You can set up a pipeline in the [UI][1], using the [API][10], or with [Terraform][11]. The instructions in this section are configured in the UI.
 
 After you select the Google Pub/Sub destination in the pipeline UI:
 

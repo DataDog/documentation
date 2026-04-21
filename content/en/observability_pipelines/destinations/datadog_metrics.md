@@ -21,7 +21,7 @@ Use Observability Pipelines' Datadog Metrics destination ({{< tooltip glossary="
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][5]. You can set up a pipeline in the [UI][1], using the [API][6], or with [Terraform][7]. The instructions in this section are for configuring the destination in the UI.
+Configure this destination when you [set up a pipeline][5]. You can set up a pipeline in the [UI][1], using the [API][6], or with [Terraform][7]. The instructions in this section are configured in the UI.
 
 {{< img src="observability_pipelines/destinations/datadog_metrics_settings.png" alt="The Datadog Metrics destination settings" style="width:40%;" >}}
 

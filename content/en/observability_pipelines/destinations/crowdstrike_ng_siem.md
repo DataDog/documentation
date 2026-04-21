@@ -19,7 +19,7 @@ To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike dat
 
 ## Setup
 
-Configure this destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The instructions in this section are for configuring the destination in the UI.
+Configure this destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The instructions in this section are configured in the UI.
 
 After you select the CrowdStrike NG-SIEM destination in the pipeline UI:
 
