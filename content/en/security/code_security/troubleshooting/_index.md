@@ -293,10 +293,10 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [1]: /help/
 [2]: /security/code_security/static_analysis/github_actions
 [3]: /security/code_security/static_analysis/github_actions#inputs
-[4]: https://app.datadoghq.com/source-code/repositories
-[5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[6]: https://docs.datadoghq.com/security/code_security/static_analysis/setup/#diff-aware-scanning
-[7]: https://github.com/DataDog/datadog-sbom-generator
+[4]: /tracing/troubleshooting/
+[5]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
+[6]: /tracing/troubleshooting/connection_errors/
+[7]: /getting_started/site/
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
 [12]: https://app.datadoghq.com/security/appsec/vm/library
@@ -304,6 +304,5 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [17]: https://app.datadoghq.com/security/configuration/code-security/setup
 [16]: https://app.datadoghq.com/services?&lens=Security
 [18]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
-[19]: https://www.datadoghq.com/blog/monitoring-flask-apps-with-datadog/
-[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/?tab=datadog#running-options
+[19]: /tracing/trace_collection/dd_libraries/python/
 [20]: /security/configuration/code-security/setup?steps=iast
