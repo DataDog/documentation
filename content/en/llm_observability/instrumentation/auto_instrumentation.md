@@ -963,7 +963,7 @@ For more specific control over library patching and the integration that starts 
 
 `DD_TRACE_<INTEGRATION>_ENABLED`
 : Set to `false` to disable tracing for a specific integration. Replace `<INTEGRATION>` with the uppercase integration name.<br>
-**Example**: `DD_TRACE_GOOGLE_GENAI_ENABLED=false` (for `google-genai`)
+**Example**: `DD_TRACE_GOOGLE_GENAI_ENABLED=false` (the `google-genai` integration name becomes `GOOGLE_GENAI`)
 
 {{% /tab %}}
 {{< /tabs >}}
