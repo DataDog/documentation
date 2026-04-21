@@ -151,6 +151,43 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 [1]: /getting_started/site/
 {{% /tab %}}
 
+{{% tab "Gemini CLI" %}}
+
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the **Datadog Site** selector on the right side of this documentation page to select your site.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+
+1. Run in terminal:
+    <pre><code>gemini mcp add --transport http datadog {{< region-param key="mcp_server_endpoint" >}}</code></pre>
+
+   Alternatively, add to `~/.gemini/settings.json`:
+    <pre><code>{
+      "mcpServers": {
+        "datadog": {
+          "httpUrl": "{{< region-param key="mcp_server_endpoint" >}}"
+        }
+      }
+    }</code></pre>
+
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+
+   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+<div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
+
+[1]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+[1]: /getting_started/site/
+{{% /tab %}}
+
 {{% tab "Warp" %}}
 
 [Warp][1] is an agentic terminal with built-in MCP support. Point the Warp agent to the MCP Server endpoint for your regional [Datadog site][2]. For the correct instructions, use the **Datadog Site** selector on the right side of this documentation page to select your site.
@@ -216,7 +253,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 
 {{% tab "JetBrains IDEs" %}}
 
-JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. GitHub offers the [Copilot][4] plugin. Alternatively, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE.
+JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. GitHub offers the [Copilot][4] plugin. Alternatively, many developers use an agent CLI, such as Claude Code, Codex, or Gemini CLI, alongside their IDE.
 
 Point your plugin to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the **Datadog Site** selector on the right side of this documentation page to select your site.
 
@@ -296,15 +333,17 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{% /collapse-content %}}
 
 {{% collapse-content title="Agent CLIs" level="h4" expanded=false id="jetbrains-agent-clis" %}}
-Many developers use an agent CLI such as Claude Code or Codex alongside their JetBrains IDE. See the configuration for those CLI tools:
+Many developers use an agent CLI such as Claude Code, Codex, or Gemini CLI alongside their JetBrains IDE. See the configuration for those CLI tools:
 - [Claude Code][4]
 - [Codex][5]
+- [Gemini CLI][6]
 
 The [Datadog plugin for JetBrains IDEs][3] integrates with these agent CLIs. For an uninterrupted experience, install the plugin at the same time as you configure the Datadog MCP Server.
 
 [3]: /ide_plugins/idea/
 [4]: /bits_ai/mcp_server/setup/?tab=claudecode
 [5]: /bits_ai/mcp_server/setup/?tab=codex
+[6]: /bits_ai/mcp_server/setup/?tab=geminicli
 {{% /collapse-content %}}
 {{< /site-region >}}
 
@@ -377,12 +416,6 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-Example configuration file location:
-
-| Client | Configuration file |
-|--------|---------------------|
-| Gemini CLI | `~/.gemini/settings.json` |
-
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
@@ -396,7 +429,7 @@ Example configuration file location:
 
 ## Toolsets
 
-The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
+The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
@@ -420,7 +453,7 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 
 ### Available toolsets
 
-These toolsets are generally available:
+These toolsets are generally available. See [Datadog MCP Server Tools][49] for a complete reference of available tools organized by toolset, with example prompts.
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
@@ -453,6 +486,7 @@ These toolsets are in Preview. Sign up for a toolset by completing the Product P
 | [Claude Code][4] | Anthropic | |
 | [Claude][19] | Anthropic | Use [custom connector setup](?tab=claude#installation). Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
+| [Gemini CLI][50] | Google | |
 | [Warp][28] | Warp | |
 | [VS Code][7] | Microsoft | Datadog [Cursor & VS Code extension][16] recommended. |
 | [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
@@ -614,3 +648,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [46]: /dashboards/
 [47]: /help/
 [48]: /reference_tables/
+[49]: /bits_ai/mcp_server/tools
+[50]: https://github.com/google-gemini/gemini-cli

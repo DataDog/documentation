@@ -37,7 +37,7 @@ In Azure, you can group resources by:
 
 To apply a preset to your diagram:
 
-1. Switch to the **Live** tab within Cloudcraft.
+1. Switch to the {{< ui >}}Live{{< /ui >}} tab within Cloudcraft.
 2. Select the desired preset from the menu at the top of the diagram view.
 3. The diagram automatically updates to reflect the chosen preset.
 
@@ -73,6 +73,6 @@ The Network preset adds granularity by introducing Subnet grouping, making it es
 For use cases that require a tailored view, Cloudcraft allows you to customize groupings and filters to create personalized presets.
 
 1. Adjust the filter and group-by settings to suit your requirements.
-2. Save your custom configuration as a new preset by clicking the **Save as preset** button.
+2. Save your custom configuration as a new preset by clicking the {{< ui >}}Save as preset{{< /ui >}} button.
 
 Once saved, these custom presets can be reused by anyone with access to the blueprint.

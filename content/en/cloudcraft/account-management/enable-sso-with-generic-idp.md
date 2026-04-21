@@ -15,8 +15,8 @@ For more general information on using SSO with Cloudcraft, check out [Enable SSO
 
 <div class="alert alert-info">Only the account owner can configure the SAML SSO feature. If the account owner is unable to configure SSO, <a href="https://app.cloudcraft.co/app/support" title="Contact the Cloudcraft support team">contact the Cloudcraft support team</a> to enable this feature.</div>
 
-1. In Cloudcraft, navigate to **User** > **Security & SSO**.
-2. The details you need to create a new application with Azure can be found in the **Cloudcraft service provider details** section.
+1. In Cloudcraft, navigate to {{< ui >}}User{{< /ui >}} > {{< ui >}}Security & SSO{{< /ui >}}.
+2. The details you need to create a new application with Azure can be found in the {{< ui >}}Cloudcraft service provider details{{< /ui >}} section.
 
 {{< img src="cloudcraft/account-management/enable-sso-with-generic-idp/service-provider-details.png" alt="Screenshot of Cloudcraft service provider details for Identity Provider configuration with entity ID and assertion consumer service URL." responsive="true" style="width:100%;">}}
 
@@ -24,11 +24,11 @@ For more general information on using SSO with Cloudcraft, check out [Enable SSO
 4. Follow their documentation to create a new application for SAML integration.
 5. Map their fields with Cloudcraft's fields. For reference, the fields are usually mapped as follows, with the first one being the label used by your identity provider and the second one being the label at Cloudcraft.
 
-    - **Single sign on URL**: Assertion Consumer Service URL
-    - **Audience URI**: Service Provider Entity ID
-    - **Name ID**: NameId Format
+    - {{< ui >}}Single sign on URL{{< /ui >}}: Assertion Consumer Service URL
+    - {{< ui >}}Audience URI{{< /ui >}}: Service Provider Entity ID
+    - {{< ui >}}Name ID{{< /ui >}}: NameId Format
 
-6. If the **Name ID** field is a dropdown, select **emailAddress** or similar.
+6. If the {{< ui >}}Name ID{{< /ui >}} field is a dropdown, select {{< ui >}}emailAddress{{< /ui >}} or similar.
 
 <div class="alert alert-info">You can also include an app logo to make it easier for users to see which application they are signing in to. We have one that fit most provider's restrictions <a href="https://static.cloudcraft.co/images/cloudcraft-okta-logo.png" title="Cloudcraft Logo" rel="noopener noreferrer" target="_new">over here</a>.
 </div>
@@ -39,8 +39,8 @@ For more general information on using SSO with Cloudcraft, check out [Enable SSO
 
 {{< img src="cloudcraft/account-management/enable-sso-with-generic-idp/upload-metadata.png" alt="Successfully configured SAML Single Sign-On status with identity provider URL visible in security settings interface." responsive="true" style="width:100%;">}}
 
-10. Toggle the **SAML Single Sign-On is enabled** option.
-11.  If you prefer to have your users access Cloudcraft only via your identity provider, enable the **Strict mode** option.
+10. Toggle the {{< ui >}}SAML Single Sign-On is enabled{{< /ui >}} option.
+11.  If you prefer to have your users access Cloudcraft only via your identity provider, enable the {{< ui >}}Strict mode{{< /ui >}} option.
 
 [1]: /cloudcraft/account-management/enable-sso-with-azure-ad/
 [2]: /cloudcraft/account-management/enable-sso-with-okta/

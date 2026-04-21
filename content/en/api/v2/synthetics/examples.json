@@ -604,7 +604,7 @@
         "data": {
           "attributes": {
             "public_ids": [
-              ""
+              "abc-def-123"
             ]
           }
         }
@@ -614,7 +614,7 @@
           "attributes": {
             "force_delete_dependencies": false,
             "public_ids": [
-              ""
+              "abc-def-123"
             ]
           },
           "id": "string",
