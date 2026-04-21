@@ -431,7 +431,7 @@ You can also apply these filters using the facet panel on the left hand side of 
 
 <div class="alert alert-info">Automatic job retries are in Preview. To request access, contact your Datadog account team.</div>
 
-Automatic job retries save developer time by re-running failures that are likely transient, such as network timeouts, infrastructure failures, or flaky tests. Genuine code defects are left alone. Datadog runs each failed job through an AI-powered error classifier. When the failure is identified as retriable, Datadog triggers a retry through the GitLab API without manual intervention.
+Automatic job retries save developer time by re-running failures that are likely transient, such as network timeouts, infrastructure failures, or flaky tests. Genuine code defects are not retried. Datadog runs each failed job through an AI-powered error classifier. When the failure is identified as retriable, Datadog triggers a retry through the GitLab API without manual intervention.
 
 On GitLab, Datadog performs **smart retries**: only the specific job classified as retriable is re-run. Other failed jobs (that aren't classified as retriable) and passing jobs aren't affected.
 
@@ -439,15 +439,16 @@ On GitLab, Datadog performs **smart retries**: only the specific job classified 
 
 1. A job fails in your pipeline.
 2. Datadog's AI error classifier inspects the job's logs and error context to determine whether the failure is transient.
-3. If the failure is classified as retriable, Datadog requests a retry through the GitLab API, per job, as soon as the job finishes failing.
+3. If the failure is classified as retriable, Datadog requests a retry through the GitLab API as soon as the job fails. Retries are dispatched per job.
 4. Datadog retries each job up to a maximum number of attempts to prevent infinite retry loops.
 5. Datadog records the retry outcome on the original pipeline in CI Visibility.
 
 ### Requirements
 
 - CI Visibility enabled for your GitLab integration (see [Configure the Datadog integration](#configure-the-datadog-integration)).
-- [Datadog Source Code Integration][31] configured for the repositories where you want automatic retries. Smart retries work with GitLab.com (SaaS) and with self-hosted GitLab instances reachable by the Source Code Integration.
-- Automatic job retries enabled for your organization. Because this feature is in Preview, access is gated. Contact your Datadog account team to request enablement.
+- [Datadog Source Code Integration][31] configured for the repositories where you want automatic retries.
+- Smart retries work with GitLab.com (SaaS) and self-hosted GitLab instances reachable by the Source Code Integration.
+- Automatic job retries enabled for your organization (see the banner above for how to request access).
 
 ### Limitations
 

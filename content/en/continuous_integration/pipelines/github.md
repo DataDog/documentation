@@ -127,7 +127,7 @@ For a full explanation, see the guide on [using CI jobs failure analysis][23].
 
 <div class="alert alert-info">Automatic job retries are in Preview. To request access, contact your Datadog account team.</div>
 
-Automatic job retries save developer time by re-running failures that are likely transient, such as network timeouts, infrastructure failures, or flaky tests. Genuine code defects are left alone. Datadog runs each failed job through an AI-powered error classifier. When the failure is identified as retriable, Datadog triggers a retry through the GitHub Actions API without manual intervention.
+Automatic job retries save developer time by re-running failures that are likely transient, such as network timeouts, infrastructure failures, or flaky tests. Genuine code defects are not retried. Datadog runs each failed job through an AI-powered error classifier. When the failure is identified as retriable, Datadog triggers a retry through the GitHub Actions API without manual intervention.
 
 ### How it works
 
@@ -141,7 +141,7 @@ Automatic job retries save developer time by re-running failures that are likely
 
 - CI Visibility enabled for your GitHub Actions integration (see [Configure the Datadog integration](#configure-the-datadog-integration)).
 - [Datadog Source Code Integration][27] configured for the repositories where you want automatic retries.
-- Automatic job retries enabled for your organization. Because this feature is in Preview, access is gated. Contact your Datadog account team to request enablement.
+- Automatic job retries enabled for your organization (see the banner above for how to request access).
 
 ### GitHub-specific behavior
 
