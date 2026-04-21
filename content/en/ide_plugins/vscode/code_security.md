@@ -10,11 +10,14 @@ further_reading:
     - link: '/security/code_security/static_analysis/static_analysis_rules/'
       tag: 'Documentation'
       text: 'Static Analysis Rules'
+    - link: '/security/code_security/secret_scanning/'
+      tag: 'Documentation'
+      text: 'Learn more about Secret Scanning'
 ---
 
 ## Overview
 
-The Code Security features in the Datadog extension for VS Code and Cursor help you identify and fix security vulnerabilities before you commit your changes.
+The Code Security features in the Datadog extension for VS Code and Cursor help you detect and fix security issues in your code before you commit your changes. The extension runs [Static Code Analysis](#static-code-analysis) to catch vulnerabilities, bugs, and maintainability issues, and [Secret Scanning](#secret-scanning) to find exposed credentials such as API keys, tokens, and passwords.
 
 ## Static Code Analysis
 
@@ -36,6 +39,40 @@ To analyze an entire folder or workspace, right-click a folder in the file explo
 
 <div class="alert alert-info">Static Code Analysis does not require a Datadog account, as source files are analyzed locally.</div>
 
+## Secret Scanning
+
+The extension runs [Secret Scanning][4] on the source files in your workspace to detect exposed credentials, such as API keys, tokens, and passwords, before you commit your changes. File contents are scanned locally, and findings are shown in the editor as you type.
+
+{{< img src="/ide_plugins/vscode/secret_scanning.mp4" alt="Preview of Secret Scanning" style="width:100%" video=true >}}
+
+### Get started with Secret Scanning
+
+Secret Scanning is enabled by default and runs in the background whenever you open a source file. To scan an entire folder or workspace, right-click a folder in the file explorer and select **Datadog Static Analysis > Analyze Folder** or **Analyze Workspace**.
+
+{{< img src="/ide_plugins/vscode/secret-scanning-batch-analysis.png" alt="Batch analysis report with a Secret Scanning section listing findings per file" style="width:100%;" >}}
+
+Unlike Static Code Analysis, Secret Scanning does not require a [`static-analysis.datadog.yml`][3] file in your repository, and it scans all text files regardless of programming language. Likely-binary files are skipped automatically.
+
+<div class="alert alert-info">Secret Scanning requires you to be signed in to Datadog, because detection rules are fetched from your Datadog organization.</div>
+
+### Review findings
+
+Detected secrets are shown in three places:
+
+- **Inline in the editor**: Each finding appears as an underline on the detected secret, with severity derived from the rule's priority.
+- **Problems panel**: All findings are listed with the source `Datadog`.
+- **File Insights view**: Findings are grouped alongside other Code Security issues.
+
+{{< img src="/ide_plugins/vscode/secret-scanning-findings.png" alt="A detected secret shown inline in the editor with a hover diagnostic, alongside the Problems panel and the File Insights view" style="width:100%;" >}}
+
+### Suppress a finding
+
+To suppress an individual detection, use the code action on the flagged secret to insert a `no-dd-secrets` comment on the line above. The comment suppresses all secret findings on the following line.
+
+### Turn Secret Scanning on or off
+
+To toggle Secret Scanning, run the `Datadog: Turn on Secret Scanning` or `Datadog: Turn off Secret Scanning` command from the command palette (`Shift` + `Cmd/Ctrl` + `P`), or change the `datadog.codeSecurity.setup.secretScanning.enabled` setting.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -43,3 +80,4 @@ To analyze an entire folder or workspace, right-click a folder in the file explo
 [1]: /security/code_security/static_analysis/
 [2]: /security/code_security/static_analysis/static_analysis_rules/
 [3]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
+[4]: /security/code_security/secret_scanning/
