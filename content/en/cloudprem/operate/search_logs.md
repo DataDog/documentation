@@ -20,7 +20,7 @@ further_reading:
 ## Explore CloudPrem logs in the Logs Explorer
 
 1. Go to the [Datadog Log Explorer][1].
-2. On the left facet panel, under **CLOUDPREM INDEXES**, select one or more indexes to search.
+2. On the left facet panel, under **BYOC INDEXES**, select one or more indexes to search.
 
 You can select a specific index to narrow your search, or select all indexes in a cluster to search across them.
 
