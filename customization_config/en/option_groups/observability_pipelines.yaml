@@ -1,0 +1,17 @@
+op_platform_options:
+  - id: docker
+    default: true
+  - id: kubernetes
+  - id: linux
+  - id: cloudformation
+
+op_pipelines_setup_method_options:
+  - id: ui
+    default: true
+  - id: api
+  - id: terraform
+
+op_secrets_source_options:
+  - id: secrets_manager
+    default: true
+  - id: environment_variables
