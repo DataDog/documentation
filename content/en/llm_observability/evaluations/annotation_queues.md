@@ -18,9 +18,9 @@ further_reading:
 
 ## Overview
 
-Annotation Queues provide a structured workflow for human review of LLM traces. Use annotation queues to:
-- Review traces with complete context including spans, metadata, tool calls, inputs, outputs, and evaluation results
-- Apply structured labels and free-form observations to traces
+Annotation Queues provide a structured workflow for human review of LLM traces and sessions. Use annotation queues to:
+- Review traces and sessions with complete context including spans, metadata, tool calls, inputs, outputs, and evaluation results
+- Apply structured labels and free-form observations to traces and sessions
 - Identify and categorize failure patterns
 - Validate LLM-as-a-Judge evaluation accuracy
 - Build golden datasets with human-verified labels for testing and validation
@@ -45,9 +45,9 @@ Annotation Queues provide a structured workflow for human review of LLM traces. 
 
    {{< img src="llm_observability/evaluations/annotation_queues/schema_edit.png" alt="The Edit Queue modal showing the Schema tab with label configuration on the left and a preview pane on the right. The left panel displays fields for configuring a categorical label named failure_type with three categories: hallucination, formatting_error, and refusal. Checkboxes enable Assessment Criteria and Reasoning options. The right preview pane shows how the label appears to annotators with checkboxes for each category, Pass/Fail assessment buttons, and a reasoning text field." style="width:100%;" >}}
 
-### Step 2: Select traces for annotation
+### Step 2: Select traces or sessions for annotation
 
-You can create add traces to queue manually from Trace Explorer or populate queues automatically using Automation Rules.
+You can add traces or sessions to a queue manually from Trace Explorer, or populate queues automatically using Automation Rules.
 
 {{< tabs >}}
 
@@ -81,16 +81,16 @@ Traces matching the rule's filters are added to the queue automatically as they 
 {{< /tabs >}}
 
 
-## Annotating traces
+## Annotating traces and sessions
 
 ### Accessing your queues
 
-Navigate to [**AI Observability > Experiment > Annotations**][2] to see all available annotation queues. Click on a queue to see the trace list, then click **Review** to begin annotating.
+Navigate to [**AI Observability > Experiment > Annotations**][2] to see all available annotation queues. Click on a queue to see the list of interactions (traces and sessions), then click **Review** to begin annotating.
 
 Review Mode displays:
-- **Full trace context** (right panel):
-  - Complete span tree with inputs, outputs, metadata
-  - Tool calls and intermediate reasoning steps
+- **Full context** (right panel):
+  - For traces: complete span tree with inputs, outputs, metadata, tool calls, and intermediate reasoning steps
+  - For sessions: list of traces within the session
   - Evaluation results on trace and individual spans
 
 - **Annotation controls** (left panel):
@@ -102,8 +102,8 @@ Review Mode displays:
 
 ### Applying labels
 
-For each trace:
-1. **Review the full trace context**: Expand spans as needed to understand inputs, outputs, tool calls, and evaluation results.
+For each trace or session:
+1. **Review the full context**: Expand spans as needed to understand inputs, outputs, tool calls, and evaluation results.
 2. **Apply labels**: Fill in the configured labels based on your assessment.
 3. Annotations are be autosaved.
     
@@ -125,10 +125,10 @@ For each trace:
 
 The Annotations list page displays a progress bar for each queue showing the ratio of reviewed interactions to total interactions. Use this to monitor annotation completion across queues at a glance.
 
-### Filtering traces by annotation labels
+### Filtering by annotation labels
 
-use the **Annotation Labels** facet to filter traces by labels applied in annotation queues. This allows you to:
-- Find all traces tagged with a specific failure mode (for example, `failure_type: hallucination`)
+Use the **Annotation Labels** facet to filter traces and sessions by labels applied in annotation queues. This allows you to:
+- Find all traces or sessions tagged with a specific failure mode (for example, `failure_type: hallucination`)
 - Build targeted samples for downstream review, dataset creation, or CSV export for data analysis
   
 ### Editing queue schema
@@ -145,12 +145,14 @@ You can modify a queue's label schema after creation:
 
 ### Exporting annotated data
 
-Export annotated traces for analysis or use in other workflows:
+Export annotated traces and sessions to CSV for analysis or use in other workflows:
 
 1. Navigate to [**AI Observability > Experiment > Annotations**][2].
 2. Open the queue.
-3. Select traces (or select all).
+3. Select interactions (or select all).
 4. Click **Export**.
+
+The CSV export includes a **Content ID** column (trace ID or session ID) and a **Type** column (`trace` or `session`) to identify each row. For session interactions, the Input and Output columns are empty.
 
 ### Adding to datasets
 
@@ -158,7 +160,7 @@ Transfer annotated traces to datasets for experiment evaluation:
 
 1. Navigate to [**AI Observability > Experiment > Annotations**][2].
 2. Open the queue.
-3. Select traces to transfer.
+3. Select interactions to transfer.
 4. Click **Add to Dataset**.
 5. Choose an existing dataset, or create a dataset.
 
@@ -173,14 +175,14 @@ To delete a queue:
 2. Open the queue.
 3. Click **Delete** in the Details panel.
 
-<div class="alert alert-info">Deleting a queue removes the queue and label associations, but does not delete the underlying traces from LLM Observability. Traces remain accessible in Trace Explorer.</div>
+<div class="alert alert-info">Deleting a queue removes the queue and label associations, but does not delete the underlying traces or sessions from LLM Observability. Traces and sessions remain accessible in their respective explorers.</div>
 
 ## Using the API
 
 You can manage annotation queues programmatically with the LLM Observability API. Use the API to:
 
 - Create, list, update, and delete annotation queues
-- Add interactions to a queue
+- Add interactions (traces or sessions) to a queue
 - Retrieve annotated interactions from a queue
 
 For endpoints, request schemas, and examples, see the [LLM Observability API reference][4].
@@ -190,8 +192,8 @@ For endpoints, request schemas, and examples, see the [LLM Observability API ref
 
 | Data              | Retention period                                    |
 | ----------------- | ----------------------------------------------------|
-| Traces in queues  | Capped by your organization's trace retention period|
-| Annotation labels | Indefinite                                          |
+| Traces and sessions in queues | Capped by your organization's trace retention period |
+| Annotation labels             | Indefinite                                           |
 
 
 ## Example workflows
