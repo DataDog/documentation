@@ -1,5 +1,5 @@
 ---
-title: Designing Your Organization Topology
+title: Getting Started with Organization Topology
 description: Choose between single-org and multi-org Datadog deployments, achieve isolation with access controls, and manage multi-org environments.
 further_reading:
 - link: "/account_management/multi_organization/"
@@ -27,176 +27,165 @@ further_reading:
 
 ## Overview
 
-Your Datadog organization topology—single org or multi-org—affects how you observe services, control access, manage users, and attribute costs. This guide helps you choose the right topology, understand when multi-org is justified, and manage multi-org environments when they are.
+Your Datadog organization topology, single-organization or multi-organization, shapes how you observe services, control access, manage users, and attribute cost.
 
-## Start with a single organization
+This guide covers:
+- The capabilities of a single-organization
+- The scenarios that justify a multi-organization
+- Manage multi-organization environments with Organization Groups.
 
-**Use one Datadog organization.** For most deployments, including large enterprises with thousands of users, multiple business units, and strict compliance requirements, a single org with [Teams][7] and access controls is the right architecture.
+## Getting started 
+Datadog recommends a [single-organization topology](#single-organization-topology-recommended) for most deployments and offers a flexible access management system that allows you to customize the level access to your Datadog resources. For example, large enterprises with thousands of users, multiple business units, can use [granular access control] to satisfy strict compliance requirements.
 
+Use a [multi-organization topology](#multi-organization-topology) only when a single organization cannot satisfy a hard requirement.
+
+## Single-organization topology (recommended)
+
+In a single-organization topology, business units, teams, and environments share one organization. Tag-based conventions (`team:`, `env:`, `service:`, `cost_center:`) drive access policies, dashboards, and billing attribution. Access controls enforce isolation between groups when needed.
+
+### Capabilities of a single-org topology
 A single organization gives you:
 
-- **Connected observability.** Distributed traces flow end-to-end across services without gaps. Correlated views across metrics, logs, and traces work out of the box.
-- **One configuration surface.** Monitors, dashboards, pipelines, and SLOs live in one place. No duplication, no drift.
-- **Simpler user management.** One SSO configuration, one SCIM integration, one set of roles and teams.
-- **Per-team cost visibility.** Usage attribution breaks down spend by team, service, or business unit using tags. No need for separate orgs to get separate billing views.
-- **Lower operational cost.** No Terraform modules per org, no cross-org workarounds, no duplicated alert routing.
+- **Connected observability**:  Distributed traces flow end-to-end across services without gaps, and correlated views across metrics, logs, and traces work by default.
+- **One configuration surface**: Monitors, dashboards, pipelines, and SLOs live in one place, with no duplication and no drift.
+- **Simpler user management**: One SSO configuration, one SCIM integration, and one set of roles and teams.
+- **Per-team cost visibility**: Usage attribution breaks down spend by team, service, or business unit using tags, so you don't need separate organizations for separate billing views.
+- **Lower operational cost**: No Terraform modules per organization, no cross-organization workarounds, and no duplicated alert routing.
 
-## When to use multiple organizations
 
-Use multi-org when a single org with access controls cannot satisfy a hard requirement, or when separate billing entities require independent invoicing. Five scenarios qualify.
+**Example:** A large technology company with 5,000 Datadog users across 12 business units uses one organization. Each business unit has a Team with DAC restrictions on its telemetry. Platform admins have a global role; business unit engineers see only their team's data.
 
-### Regulatory or contractual data isolation
+### Access control within a single organization
 
-**Test question:** "Would co-locating this data in the same org violate a regulation or contract, even with team-based access restrictions?"
+Most organizations that consider multi-organization can meet their requirements with a single organization's access controls. [RBAC][3], [Data Access Control][4], [Granular Access Control][6], [Teams][7], and IP allowlists enforce strong data segregation within a single organization, even in regulated industries.
 
-Some regulations require that data never coexist in the same logical boundary—not that users cannot see it, but that the data cannot share the same org. If your compliance team or external auditors require physical org-level separation (not row-level restrictions), multi-org is the right choice.
+For detailed implementation guidance, see the [access control documentation][3].
 
-### Data residency
+#### Limitations
+
+All users within an organization can see core functionality such as infrastructure. Not all telemetry types support row-level restriction. See [supported telemetry types][5] for the full list.
+
+## Multi-organization topology
+
+Use multi-organization when a single organization with access controls cannot satisfy a hard requirement, or when separate billing entities require independent invoicing. The following five scenarios qualify.
+
+### Scenario 1: Regulatory or contractual data isolation 
+
+**Test question:** "Would co-locating this data in the same organization violate a regulation or contract, even with team-based access restrictions?"
+
+Some regulations require that data never coexist in the same logical boundary. The requirement is not that users cannot see the data, but that the data cannot share the same organization. If your compliance team or external auditors require physical organization-level separation (not row-level restrictions), multi-organization is the right choice.
+
+Use multiple organizations: one per regulated workload, one per required region (for example, a European region), and one for everything else. [Cross-Organization Visibility][2] connects them for operational dashboards using consolidated metrics. The regulated organization has stricter access policies, IP allowlists, and audit controls.
+
+**Example:** A financial services firm separates its trading platform telemetry (subject to SEC/FINRA data handling requirements) into a dedicated organization, while all other business units share the primary organization.
+
+### Scenario 2: Meet data residency requirements
 
 **Test question:** "Is cross-region data transfer prohibited for this data?"
 
-When regulations prohibit telemetry from leaving a geographic region, you need orgs in different Datadog sites (for example, US1, EU1, AP1). [Cross-Organization Visibility][2] connects these orgs for operational dashboards without moving raw telemetry across borders.
+When regulations prohibit telemetry from leaving a geographic region, you need organizations in different Datadog sites (for example, US1, EU1, AP1). [Cross-Organization Visibility][2] connects these organizations for operational dashboards without moving raw telemetry across borders.
 
-### Complete data firewall between teams
+### Scenario 3: Firewall data between teams
 
-**Test question:** "Is it a risk if one team sees any possible trace of another team's data?"
+**Test question:** "Is it a risk if one team sees any trace of another team's data?"
 
-Datadog access controls restrict the most common sources of sensitive data but do not support complete firewalled separation of all telemetry data or asset metadata. If your requirements demand zero data co-mingling, use separate orgs.
+Datadog access controls restrict the most common sources of sensitive data, but they do not support complete firewalled separation of all telemetry data or asset metadata. If your requirements demand zero data co-mingling, use separate organizations.
 
-### MSP multi-tenancy
+### Scenario 4: Isolate MSP customers
 
 **Test question:** "Do you need separate billing, data boundaries, and user pools per customer?"
 
-Managed service providers serving multiple external customers typically need each customer in an isolated org with independent billing, data, and user management. Datadog's [parent-child org model][1] supports this pattern.
+Managed service providers serving multiple external customers typically need each customer in an isolated organization with independent billing, data, and user management. Datadog's [parent-child organization model][1] supports this pattern.
 
-### M&A transition
+Use a parent organization for the MSP's internal operations, with child organizations per customer. Each child organization has isolated data, users, and billing. The parent organization provides centralized operational views through [Cross-Organization Visibility][2].
 
-**Test question:** "Are you integrating an acquired company that already has its own Datadog org?"
+**Example:** A managed infrastructure provider with 200+ customers creates a child organization per customer. The parent organization's NOC team monitors service health across all customer organizations with cross-organization dashboards.
 
-Mergers and acquisitions often create temporary multi-org states. The goal is consolidation into a single org after access controls and migration tooling are in place.
+### Scenario 5: Integrate an acquired company
 
-## Decision framework
+**Test question:** "Are you integrating an acquired company that already has its own Datadog organization?"
 
-### Flowchart
+Mergers and acquisitions often create temporary multi-organization states. The acquired company's organization remains active during integration while you prepare the target organization with appropriate access controls, teams, and configurations. The goal is consolidation into a single organization after access controls and migration tooling are in place. For consolidation guidance, contact your account team.
 
-Use these four questions to reach a topology recommendation:
+**Example:** After acquiring a SaaS company, an enterprise connects both organizations with [Cross-Organization Visibility][2] for immediate operational awareness, then executes a phased consolidation over three to six months.
+
+## Decide your topology
+
+### Compare capabilities
+
+| Capability | Single organization | Multi-organization | With Organization Groups |
+| :---- | :---- | :---- | :---- |
+| End-to-end distributed traces | Full | Cannot cross organization boundaries | No change |
+| Telemetry data | Full | Share metrics, logs, and CI data into dashboards with [Cross-Organization Visibility][2] | No change |
+| Dashboards (metrics, logs, traces) | Full | Share [invite-only shared dashboards][9] with members of another organization | No change |
+| Monitor alerting across data sources | Full | No cross-organization monitor evaluation | No change |
+| SLOs across services | Full | Cannot span organizations | No change |
+| User management | One integration | Separate SCIM per organization | Centralized from group |
+| RBAC and custom roles | One configuration | Must duplicate per organization | Centralized from group |
+| SSO / SAML | One config ([multi-SAML][8] supports multiple IdPs) | Separate SAML per organization | Centralized from group |
+| Billing and usage | Usage attribution per organization | Datadog aggregates usage across all child organizations and bills it at the parent organization level | No change |
+| Feature rollout | Immediate | Must enable per organization | Centralized from group |
+
+**Note**: Organization Groups is in preview. Contact your account team to learn more.
+
+### Answer the four questions
+
+Use the following four questions to reach a topology recommendation:
 
 ```
 Q1: Does a regulation or contract require data to exist
-    in a physically separate org boundary?
+    in a physically separate organization boundary?
     |
-    +-- YES -> Multi-org (compliance or residency split -- Pattern B)
+    +-- YES -> Multi-org (see Isolate regulated data)
     |
     +-- NO
         |
 Q2: Is cross-region data transfer prohibited for some
     portion of your telemetry?
     |
-    +-- YES -> Multi-org (compliance or residency split -- Pattern B)
+    +-- YES -> Multi-org (see Meet data residency requirements)
     |
     +-- NO
         |
 Q3: Are you an MSP serving external customers who need
     independent billing, data, and user management?
     |
-    +-- YES -> Multi-org (MSP multi-tenancy -- Pattern C)
+    +-- YES -> Multi-org (see Isolate MSP customers)
     |
     +-- NO
         |
 Q4: Are you integrating an acquisition that has its own
-    Datadog org?
+    Datadog organization?
     |
-    +-- YES -> Temporary multi-org with consolidation target
-    |           (M&A transition -- Pattern D)
+    +-- YES -> Temporary multi-org (see Integrate an acquired company)
     |
-    +-- NO -> Single org (Pattern A)
+    +-- NO -> Single org
               Use RBAC, DAC, Granular Access Control, and Teams
               for isolation.
 ```
 
-### Capability comparison
+## Manage multi-organization with Organization Groups
 
-| Capability | Single org | Multi-org | With Organization Groups |
-| :---- | :---- | :---- | :---- |
-| End-to-end distributed traces | Full | Do not cross org boundaries | No change |
-| Telemetry data | Full | Metrics, logs, and CI data can be shared into dashboards with [Cross-Organization Visibility][2] | No change |
-| Dashboards (metrics, logs, traces) | Full | [Invite-only shared dashboards][9] can be shared to members of another org | No change |
-| Monitor alerting across data sources | Full | No cross-org monitor evaluation | No change |
-| SLOs across services | Full | Cannot span orgs | No change |
-| User management | One integration | Separate SCIM per org | Centralized from group |
-| RBAC and custom roles | One configuration | Must duplicate per org | Centralized from group |
-| SSO / SAML | One config ([multi-SAML][8] supports multiple IdPs) | Separate SAML per org | Centralized from group |
-| Billing and usage | Usage attribution per org | Usage is aggregated across all child organizations and billed at the parent organization level | No change |
-| Feature rollout | Immediate | Must enable per org | Centralized from group |
+For organizations that remain multi-organization, Organization Groups introduces centralized governance across organizations, reducing the operational cost that makes multi-organization expensive.
 
-**Note:** Organization Groups is in preview. Contact your account team to learn more.
+### Centralize governance across organizations
 
-## Topology patterns
+Organization Groups lets administrators manage multiple Datadog organizations as a single unit. Instead of configuring roles, policies, and settings individually per organization, administrators define them once at the group level and push them to member organizations.
 
-Four reference architectures cover the most common deployment models.
+- **View and manage organizations in a group.** See all member organizations from the group and navigate between them.
+- **Push roles and policies from group to member organizations.** Define custom roles, access policies, and session settings in the parent organization and apply them to child organizations.
+- **Manage users centrally.** Add or remove users across multiple organizations from the parent without per-organization invitations.
+- **Configure roles, teams, and Data Access Control policies across organizations.** Define access rules once and apply them across organizations.
 
-### Pattern A: single org (default)
+### Apply Organization Groups to your decision
 
-**When to use:** No regulatory, residency, or MSP requirement for org-level separation.
+#### For new multi-organization deployments
+If your use case requires multi-organization, Organization Groups gives you centralized controls to manage it from a single parent organization.
 
-All business units, teams, and environments share one org. Tag-based conventions (`team:`, `env:`, `service:`, `cost_center:`) drive access policies, dashboards, and billing attribution. Access controls enforce isolation between groups when needed.
+#### For existing multi-organization customers considering consolidation
+Organization Groups provides a middle path. If full consolidation is impractical, Organization Groups brings many of the benefits of a single organization—centralized policy management, reduced configuration drift, and simpler user management—without requiring migration.
 
-**Example:** A large technology company with 5,000 Datadog users across 12 business units uses one org. Each business unit has a Team with DAC restrictions on their telemetry. Platform admins have a global role; business unit engineers see only their team's data.
-
-### Pattern B: compliance or data residency split
-
-**When to use:** A subset of services or data requires org-level isolation for regulatory compliance or data residency reasons.
-
-Multiple orgs: one org per regulated workload, one org per required region (for example, a Europe-based data center), and one for everything else. [Cross-Organization Visibility][2] connects them for operational dashboards using consolidated metrics. The regulated org has stricter access policies, IP allowlists, and audit controls.
-
-**Example:** A financial services firm separates its trading platform telemetry (subject to SEC/FINRA data handling requirements) into a dedicated org, while all other business units share the primary org.
-
-### Pattern C: MSP multi-tenancy
-
-**When to use:** Serving external customers who need independent billing, data, and user management.
-
-A parent org for the MSP's internal operations, with child orgs per customer. Each child org has isolated data, users, and billing. The parent org provides centralized operational views through [Cross-Organization Visibility][2].
-
-**Example:** A managed infrastructure provider with 200+ customers creates a child org per customer. The parent org's NOC team monitors service health across all customer orgs with cross-org dashboards.
-
-### Pattern D: M&A transition
-
-**When to use:** Integrating an acquired company with an existing Datadog deployment.
-
-Temporary multi-org state. The acquired company's org remains active during integration while the target org is prepared with appropriate access controls, teams, and configurations. The goal is consolidation. For consolidation guidance, contact your account team.
-
-**Example:** After acquiring a SaaS company, an enterprise connects both orgs with [Cross-Organization Visibility][2] for immediate operational awareness, then executes a phased consolidation over three to six months.
-
-## Achieving isolation within a single org
-
-Most organizations that consider multi-org can meet their requirements with a single org's access controls. [RBAC][3], [Data Access Control][4], [Granular Access Control][6], [Teams][7], and IP allowlists enforce enterprise-grade data segregation within a single org, even in regulated industries.
-
-For detailed implementation guidance, see the [access control documentation][3].
-
-### Access control limitations
-
-All users within an org can see core functionality such as infrastructure. Not all telemetry types support row-level restriction. See [supported telemetry types][5] for the full list.
-
-## Managing multi-org with Organization Groups
-
-For organizations that remain multi-org, Organization Groups introduces centralized governance across orgs, reducing the operational cost that makes multi-org expensive.
-
-### What Organization Groups enables
-
-Organization Groups lets administrators manage multiple Datadog orgs as a single unit. Instead of configuring roles, policies, and settings individually per org, administrators define them once at the group level and push them to member orgs.
-
-- **View and manage orgs in a group.** Administrators see all member orgs from the group and can navigate between them.
-- **Push roles and policies from group to member orgs.** Define custom roles, access policies, and session settings in the parent org and apply them to child orgs.
-- **Centralized user management.** Add or remove users across multiple orgs from the parent without per-org invitations.
-- **Cross-org configuration of roles, teams, and Data Access Control policies.** Define access rules once and apply across orgs.
-
-### How Organization Groups changes the topology decision
-
-**For new multi-org deployments:** If your use case genuinely requires multi-org, Organization Groups gives you centralized controls to manage it from a single parent org.
-
-**For existing multi-org customers considering consolidation:** Organization Groups provides a middle path. If full consolidation is impractical, Organization Groups brings many of the benefits of a single org—centralized policy management, reduced configuration drift, simpler user management—without requiring migration.
-
-**Interested in Organization Groups?** Contact your account team to discuss early access.
+Contact your account team to discuss early access to Organization Groups.
 
 ## Further reading
 
@@ -211,3 +200,4 @@ Organization Groups lets administrators manage multiple Datadog orgs as a single
 [7]: /account_management/teams/
 [8]: /account_management/saml/
 [9]: /dashboards/sharing/shared_dashboards/#invite-only-shared-dashboards
+[10]: https://docs.datadoghq.com/account_management/rbac/granular_access/
