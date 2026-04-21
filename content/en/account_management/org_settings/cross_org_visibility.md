@@ -50,7 +50,7 @@ To browse connections, navigate to the [cross-organization visibility page][6] i
 
 Creating a cross-organization connection allows you to query metrics from the source organization in the destination organization.
 
-<div class="alert alert-info">Datadog recommends using a <ahref="/account_management/org_settings/service_accounts/">service account</a> to create and manage cross-organization connections. Connections are tied to their creator's account: if the creator's account is deactivated, the connection is deleted, which can interrupt data flow. Service accounts are not tied to individual users and avoid this operational risk. Service account application keys can also be used with the <ahref="/account_management/org_settings/cross_org_visibility_api/">Cross-Org Connections API</a> to create and manage connections programmatically.</div>
+<div class="alert alert-info">Datadog recommends using a <a href="/account_management/org_settings/service_accounts/">service account</a> to create and manage cross-organization connections. Connections are tied to their creator's account: if the creator's account is deactivated, the connection is deleted, which can interrupt data flow. Service accounts are not tied to individual users and avoid this operational risk. Service account application keys can also be used with the <a href="/account_management/org_settings/cross_org_visibility_api/">Cross-Org Connections API</a> to create and manage connections programmatically.</div>
 
 1. Make sure you are signed in to the _source_ organization that contains the data you want to expose.
 1. On the [cross-organization visibility page][6], click **New Connection**. The **New Connection** dialog box appears.
