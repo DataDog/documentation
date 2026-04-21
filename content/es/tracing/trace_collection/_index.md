@@ -33,7 +33,7 @@ Instrumentar la aplicación permite enviar datos de observabilidad al Agent, que
 
 ## Tipos de instrumentación
 
-Existen dos enfoques principales para instrumentar tu aplicación: automático o personalizado {{< tooltip glossary="Instrumentación" >}}.
+Existen dos enfoques principales para instrumentar tu aplicación: automático o personalizado {{< tooltip glossary="instrumentation" >}}.
 
 ### Instrumentación automática
 

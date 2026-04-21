@@ -29,7 +29,7 @@ Or to sample based on HTTP URL tags:
 DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "sample_rate": 0.0}]'
 ```
 
-<div class="alert alert-info">Sampling decisions are determined using the first span in a trace. If the span containing the tag you want to filter on is not a {{< tooltip glossary="trace root span" case="sentence" >}}, this rule is not applied.</div>
+<div class="alert alert-info">Sampling decisions are determined using the first span in a trace. If the span containing the tag you want to filter on is not a {{< tooltip glossary="trace_root_span" case="sentence" >}}, this rule is not applied.</div>
 
 ## Filtering in the Datadog Agent
 

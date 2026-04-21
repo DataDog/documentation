@@ -31,12 +31,12 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
     <th>Support level</th>
   </thead>
   <tr>
-    <td>from 26 and upward</td>
+    <td>from 27 and upward</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">Preview</a></td>
   </tr>
   <tr>
-    <td>from 18 to 25</td>
+    <td>from 18 to 26</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">GA</a></td>
   </tr>
@@ -251,25 +251,25 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 `dd-java-agent` includes support for automatically tracing the following frameworks.
 
-| Framework           | Versions   | Support Type                                           | Instrumentation Names (used for configuration) |
-|---------------------|------------|--------------------------------------------------------|------------------------------------------------|
-| Apache CXF (Jax-WS) | 3.0+       | [OpenTelemetry Extension][10]                          | `cxf`                                          |
-| Datanucleus JDO     | 4.0+       | Fully Supported                                        | `datanucleus`                                  |
-| Dropwizard Views    | 0.7+       | Fully Supported                                        | `dropwizard`, `dropwizard-view`                |
-| GraphQL             | 14.0+      | Fully Supported                                        | `graphql-java`                                 |
-| Hazelcast (client)  | 3.6+       | [Preview](#framework-integrations-disabled-by-default) | `hazelcast`, `hazelcast_legacy`                |
-| Hibernate           | 3.5+       | Fully Supported                                        | `hibernate`, `hibernate-core`                  |
-| Hystrix             | 1.4+       | Fully Supported                                        | `hystrix`                                      |
-| JSP Rendering       | 2.3+       | Fully Supported                                        | `jsp`, `jsp-render`, `jsp-compile`             |
-| JUnit               | 4.1+, 5.3+ | Fully Supported                                        | `junit`, `junit-4`, `junit-5`                  |
-| Kotlin Coroutines   | 1.3+       | Fully Supported                                        | `kotlin_coroutine`                             |
-| Project Reactor     | 3.1+       | Fully Supported                                        | `reactor-core`                                 |
-| Quartz              | 2.x        | Fully Supported                                        | `quartz`                                       |
-| RxJava              | 2.x        | Fully Supported                                        | `rxjava`                                       |
-| Spring Data         | 1.8+       | Fully Supported                                        | `spring-data`                                  |
-| Spring Scheduling   | 3.1+       | Fully Supported                                        | `spring-scheduling`                            |
-| TIBCO BusinessWorks | 5.14.0+    | [Preview](#framework-integrations-disabled-by-default) | `tibco`, `tibco_bw`                            |
-| Twilio SDK          | < 8.0      | Fully Supported                                        | `twilio-sdk`                                   |
+| Framework           | Versions         | Support Type                                           | Instrumentation Names (used for configuration) |
+|---------------------|------------------|--------------------------------------------------------|------------------------------------------------|
+| Apache CXF (Jax-WS) | 3.0+             | [OpenTelemetry Extension][10]                          | `cxf`                                          |
+| Datanucleus JDO     | 4.0+             | Fully Supported                                        | `datanucleus`                                  |
+| Dropwizard Views    | 0.7+             | Fully Supported                                        | `dropwizard`, `dropwizard-view`                |
+| GraphQL             | 14.0+            | Fully Supported                                        | `graphql-java`                                 |
+| Hazelcast (client)  | 3.6+             | [Preview](#framework-integrations-disabled-by-default) | `hazelcast`, `hazelcast_legacy`                |
+| Hibernate           | 3.5+             | Fully Supported                                        | `hibernate`, `hibernate-core`                  |
+| Hystrix             | 1.4+             | Fully Supported                                        | `hystrix`                                      |
+| JSP Rendering       | 2.3+             | Fully Supported                                        | `jsp`, `jsp-render`, `jsp-compile`             |
+| JUnit               | 4.1+, 5.3+       | Fully Supported                                        | `junit`, `junit-4`, `junit-5`                  |
+| Kotlin Coroutines   | 1.3+             | Fully Supported                                        | `kotlin_coroutine`                             |
+| Project Reactor     | 3.1+             | Fully Supported                                        | `reactor-core`                                 |
+| Quartz              | 2.x              | Fully Supported                                        | `quartz`                                       |
+| RxJava              | 2.x              | Fully Supported                                        | `rxjava`                                       |
+| Spring Data         | 1.8+             | Fully Supported                                        | `spring-data`                                  |
+| Spring Scheduling   | 3.1+             | Fully Supported                                        | `spring-scheduling`                            |
+| TIBCO BusinessWorks | 5.14.0 - 6.11.0  | [Preview](#framework-integrations-disabled-by-default) | `tibco`, `tibco_bw`                            |
+| Twilio SDK          | < 8.0            | Fully Supported                                        | `twilio-sdk`                                   |
 
 Don't see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
 

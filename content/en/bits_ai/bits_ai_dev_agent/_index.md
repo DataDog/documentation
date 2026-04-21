@@ -4,6 +4,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/bits-ai-dev-agent/"
     tag: "Blog"
     text: "Automatically identify issues and generate fixes with the Bits AI Dev Agent"
+  - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
+    tag: "Blog"
+    text: "Introducing Bits AI Dev Agent for Code Security"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
@@ -25,7 +28,6 @@ Bits AI Dev Agent is available for the following Datadog products:
 | Product                   | Availability         | Capabilities                                                       |
 |---------------------------|----------------------|--------------------------------------------------------------------|
 | [Error Tracking][1]       | Preview              | Diagnoses issues and generates code fixes on-demand or autonomously|
-| [Trace Explorer][11]      | Preview              | Analyzes traces and provides remediations for errors and latency bottlenecks |
 | [Code Security][2]        | Preview              | Remediates code vulnerabilities individually or in bulk    |
 | [Test Optimization][4]    | Preview              | Provides code fixes for flaky tests and verifies that tests remain stable                                                         |
 | [Continuous Profiler][3]  | Preview              | Provides code changes for [Automated Analysis][10] insights                  |
@@ -47,7 +49,7 @@ Bits AI Dev Agent integrates with GitHub to create pull requests, respond to com
   
   **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev never auto-merges PRs.
 
-Go to **Bits AI** > **Dev Agent** > **[Code sessions][7]** to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
+Go to {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Dev Agent{{< /ui >}} > [{{< ui >}}Code sessions{{< /ui >}}][7] to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
 
 ### Auto-push
 
@@ -72,7 +74,7 @@ In [Error Tracking][1], Bits AI Dev Agent diagnoses and remediates code issues w
 - Determines whether an error can be fixed through code and generates a fix with unit tests.
 - Provides links within the chat to relevant files and methods for streamlined navigation.
 - Analyzes errors asynchronously as they arrive.
-- Marks errors with a **Fix available** status and enables filtering to surface those issues.
+- Marks errors with a {{< ui >}}Fix available{{< /ui >}} status and enables filtering to surface those issues.
 
 [Auto-push](#auto-push) is available for this feature. 
 
@@ -81,13 +83,6 @@ In [Error Tracking][1], Bits AI Dev Agent diagnoses and remediates code issues w
 Bits AI Dev Agent fixes flaky tests that are detected through Flaky Test Management in [Test Optimization][4] and attempts to verify that tests remain stable.
 
 [Auto-push](#auto-push) is available for this feature. 
-
-### Trace investigation
-
-Bits AI Dev Agent debugs errors and latency directly from [traces][11] using natural language queries:
-- Analyzes and summarizes large traces.
-- Determines likely root causes for errors and latency.
-- Generates code fixes when prompted.
 
 ### Product recommendations
 
@@ -123,7 +118,6 @@ To enable Bits AI Dev Agent, see [Setup][6].
 [7]: https://app.datadoghq.com/code
 [8]: /bits_ai/bits_ai_sre/
 [10]: /profiler/automated_analysis/
-[11]: /tracing/trace_explorer/
 [12]: /containers/
 [13]: /containers/bits_ai_kubernetes_remediation
 [14]: https://app.datadoghq.com/code/settings

@@ -1,4 +1,5 @@
 ---
+id: role
 title: ロール
 ---
 ロールは、ユーザーのアカウント権限を定義します。Datadog では、3 つのデフォルトのロールがあります。Admin、Standard、および Read-only です。

@@ -37,7 +37,7 @@ For more information about the existing Datadog-Jenkins integration, see [Set up
 
 ### Add a Node.js installation
 
-Navigate to the global Jenkins Configuration panel and add a Node.js installation.
+Navigate to the global Jenkins {{< ui >}}Configuration{{< /ui >}} panel and add a {{< ui >}}Node.js{{< /ui >}} installation.
 
 {{< img src="synthetics/cicd_integrations/jenkins/nodejs-installation.png" alt="Node.js Installations in Jenkins" style="width:80%;">}}
 

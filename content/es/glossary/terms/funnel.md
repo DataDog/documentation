@@ -1,4 +1,5 @@
 ---
+id: funnel
 core_product:
 - dashboards
 - real user monitoring

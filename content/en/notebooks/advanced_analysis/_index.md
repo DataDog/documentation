@@ -12,6 +12,9 @@ further_reading:
 - link: "/notebooks/advanced_analysis/getting_started"
   tag: "Documentation"
   text: "Getting Started with Analysis Features"
+- link: https://learn.datadoghq.com/courses/log-analytics-with-notebooks
+  tag: Learning Center
+  text: Log Analytics with Notebooks
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
@@ -152,7 +155,7 @@ To download your dataset as a CSV file:
 
 ### Schedule a CSV report
 
-With scheduled reports, you can automatically receive query results from notebook analysis cells by email or Slack.
+With scheduled reports, you can automatically receive query results from notebook analysis cells by email, Slack, or Microsoft Teams.
 
 To schedule a report on an analysis cell:
 
@@ -185,7 +188,13 @@ To schedule a report on an analysis cell:
 
    {{< img src="/notebooks/analysis_features/add_slack_recipients.png" alt="Slack recipient selection in the report scheduling modal" style="width:100%;" >}}
 
-6.  Save your schedule.
+6. Add Microsoft Teams recipients.
+   - Click on the **Microsoft Teams** tab, then choose a **Tenant**, **Team**, and **Channel**.
+     - Ensure the [Microsoft Teams integration][7] is installed in your Datadog organization.
+     - The Datadog app must be added to the target Team in Microsoft Teams.
+   - To preview the message, add a channel and click **Send Test Message.**
+
+7.  Save your schedule.
 
 You can view, search, edit, and delete existing report schedules from the **Reports** tab:
 
@@ -203,3 +212,4 @@ You can view, search, edit, and delete existing report schedules from the **Repo
 [4]: /ddsql_reference/
 [5]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/
 [6]: /integrations/slack/?tab=datadogforslack
+[7]: /integrations/microsoft_teams/

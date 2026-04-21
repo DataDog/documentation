@@ -15,36 +15,6 @@ The [Datadog Code Security MCP Server][1] exposes the following tools for AI cod
 
 <div class="alert alert-info">This MCP server is separate from the <a href="/bits_ai/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
 
-## `datadog_code_security_scan`
-
-Run a comprehensive security scan combining Static Application Security Testing (SAST), secrets detection, Software Composition Analysis (SCA), and Infrastructure-as-Code (IaC) scanning. All scan types execute in parallel for maximum performance.
-
-### Parameters
-
-| Parameter     | Type            | Required | Description                                                                 |
-| ------------- | --------------- | :------: | --------------------------------------------------------------------------- |
-| `file_paths`  | `array[string]` |   Yes    | File paths or directories to scan (relative to `working_dir`)               |
-| `working_dir` | `string`        |    No    | Base directory for resolving relative paths (defaults to current directory) |
-
-### Required binaries
-
-`datadog-static-analyzer`, `datadog-sbom-generator`, `datadog-security-cli`, `datadog-iac-scanner`
-
-## `datadog_sast_scan`
-
-Run SAST to detect security vulnerabilities in source code, such as SQL injection, XSS, path traversal, and insecure cryptography.
-
-### Parameters
-
-| Parameter     | Type            | Required | Description                                 |
-| ------------- | --------------- | :------: | ------------------------------------------- |
-| `file_paths`  | `array[string]` |   Yes    | File paths or directories to scan           |
-| `working_dir` | `string`        |    No    | Base directory for resolving relative paths |
-
-### Required binary
-
-`datadog-static-analyzer`
-
 ## `datadog_secrets_scan`
 
 Detect hardcoded credentials, API keys, passwords, and tokens in source code and configuration files.

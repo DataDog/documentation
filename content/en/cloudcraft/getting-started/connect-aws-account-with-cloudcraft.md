@@ -34,45 +34,45 @@ Cloudcraft implements rigorous security processes and controls for the SOC2 comp
 
 ### Add account
 
-1. In Cloudcraft, navigate to **User** > **AWS accounts**.
-2. At the bottom of the modal, click **Add AWS Account**.
-3. The next page provides step-by-step instructions. Click **Open the AWS IAM Console to the Create Role page** to configures the read-only IAM role in AWS.
+1. In Cloudcraft, navigate to {{< ui >}}User{{< /ui >}} > {{< ui >}}AWS accounts{{< /ui >}}.
+2. At the bottom of the modal, click {{< ui >}}Add AWS Account{{< /ui >}}.
+3. The next page provides step-by-step instructions. Click {{< ui >}}Open the AWS IAM Console to the Create Role page{{< /ui >}} to configures the read-only IAM role in AWS.
 
 <div class="alert alert-info">If you can't access the <strong>Create Role</strong> page, you may lack <strong>AdministrativeAccess</strong> or sufficient IAM permissions to create a new IAM role. If this is the case, contact your AWS account's administrator and have them complete the following steps.</div>
 
-4. On the **Create role** page in AWS, leave **Require MFA** unchecked, and click **Next**.
+4. On the {{< ui >}}Create role{{< /ui >}} page in AWS, leave {{< ui >}}Require MFA{{< /ui >}} unchecked, and click {{< ui >}}Next{{< /ui >}}.
 
 <div class="alert alert-info"><strong>Require MFA</strong> must be disabled as it's not applicable for system-to-system access where there is no human involved. Access is instead protected by being limited to access from the Cloucraft AWS account.</div>
 
 {{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/create-iam-role.png" alt="AWS Identity and Access Management console screen showing options for selecting trusted entities for role configuration." responsive="true" style="width:100%;">}}
 
-5. Next, add permissions policies to your role. Type **ReadOnlyAccess** in the search box and press **Enter** to filter policies by name.
-6. Select the **ReadOnlyAccess** policy that provides read-only access to AWS services and resources, then click **Next**.
+5. Next, add permissions policies to your role. Type {{< ui >}}ReadOnlyAccess{{< /ui >}} in the search box and press {{< ui >}}Enter{{< /ui >}} to filter policies by name.
+6. Select the {{< ui >}}ReadOnlyAccess{{< /ui >}} policy that provides read-only access to AWS services and resources, then click {{< ui >}}Next{{< /ui >}}.
 
 {{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/read-only-role.png" alt="AWS management console page with the 'ReadOnlyAccess' policy highlighted and selected." responsive="true" style="width:100%;">}}
 
 7. Enter a name and description for the IAM role. You can also add tags to organize, track, or control access for the role. Tagging your role is optional. For tagging best practices, see [Best Practices for Tagging AWS Resources][6].
-8. Click **Create role**.
-9. Select the `cloudcraft` role from the list of roles. On the **Summary** page, copy the **Role ARN**.
+8. Click {{< ui >}}Create role{{< /ui >}}.
+9. Select the `cloudcraft` role from the list of roles. On the {{< ui >}}Summary{{< /ui >}} page, copy the {{< ui >}}Role ARN{{< /ui >}}.
 
 {{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/role-summary.png" alt="AWS IAM role configuration screen showing Role ARN for Cloudcraft integration." responsive="true" style="width:100%;">}}
 
-10. In Cloudcraft, paste the ARN in the **Role ARN** field, and enter a name for your account.
-11. Optionally, configure team access by clicking the blue button beneath **Team access** and selecting the teams you want to share access to the AWS account with.
+10. In Cloudcraft, paste the ARN in the {{< ui >}}Role ARN{{< /ui >}} field, and enter a name for your account.
+11. Optionally, configure team access by clicking the blue button beneath {{< ui >}}Team access{{< /ui >}} and selecting the teams you want to share access to the AWS account with.
 
 {{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/team-access.png" alt="Cloudcraft interface showing Team access options with Cloudcraft, Team Demo, and Cloudcraft Sales + Support team tags." responsive="true" style="width:100%;">}}
 
-12. Click **Save Account**.
+12. Click {{< ui >}}Save Account{{< /ui >}}.
 
 ### Edit account
 
 To edit an account, click the gray pencil icon to the left of the account you want to edit. You can change details of the account, such as the name, ARN, and team access.
 
-When you are done, click **Save Account**.
+When you are done, click {{< ui >}}Save Account{{< /ui >}}.
 
 ### Remove account
 
-To remove an account, click the trash can icon to the right of the account you want to remove, then click **Remove**.
+To remove an account, click the trash can icon to the right of the account you want to remove, then click {{< ui >}}Remove{{< /ui >}}.
 
 [1]: /cloudcraft/account-management/roles-and-permissions/
 [2]: https://www.cloudcraft.co/pricing
