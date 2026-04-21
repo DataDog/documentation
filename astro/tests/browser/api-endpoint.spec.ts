@@ -10,8 +10,8 @@ test.describe('ApiEndpoint component', () => {
     await expect(endpoint.first()).toBeVisible();
   });
 
-  test('renders HTTP method badge', async ({ page }) => {
-    const badge = page.locator('[data-testid="http-method-badge"]');
+  test('renders API method badge', async ({ page }) => {
+    const badge = page.locator('[data-testid="api-method-badge"]');
     await expect(badge.first()).toBeVisible();
   });
 

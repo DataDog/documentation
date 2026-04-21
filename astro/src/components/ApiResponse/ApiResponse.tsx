@@ -1,8 +1,8 @@
 import type { JSX } from 'preact';
 import { Tabs } from '../Tabs/Tabs';
-import { SchemaTable } from '../SchemaTable/SchemaTable';
+import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
 import { CodeBlock } from '../CodeBlock/CodeBlock';
-import type { SchemaField } from '../SchemaTable/SchemaTable';
+import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
 import styles from './ApiResponse.module.css';
 
 export interface ResponseData {
@@ -48,7 +48,7 @@ export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
                     const activeLabel = toggleLabels[activeToggleIndex];
 
                     if (activeLabel === 'Model' && r.schema) {
-                      return <SchemaTable fields={r.schema} />;
+                      return <ApiSchemaTable fields={r.schema} />;
                     }
 
                     if (activeLabel === 'Example' && r.examples && r.examples.length > 0) {

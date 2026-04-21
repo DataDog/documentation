@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from 'preact-render-to-string';
 import { h } from 'preact';
-import { RequestBodyTabs } from './RequestBodyTabs';
+import { ApiRequestBodyTabs } from './ApiRequestBodyTabs';
 
 const schema = [
   {
@@ -15,16 +15,16 @@ const schema = [
 ];
 const examples = [{ name: 'Example', value: '{"id": "abc"}' }];
 
-describe('RequestBodyTabs component', () => {
+describe('ApiRequestBodyTabs component', () => {
   it('renders only the schema table when no examples are provided', () => {
-    const html = render(h(RequestBodyTabs, { schema, examples: [] }));
+    const html = render(h(ApiRequestBodyTabs, { schema, examples: [] }));
 
     expect(html).toContain('data-testid="schema-table"');
     expect(html).not.toContain('data-testid="tabs"');
   });
 
   it('renders only code blocks when no schema is provided', () => {
-    const html = render(h(RequestBodyTabs, { schema: [], examples }));
+    const html = render(h(ApiRequestBodyTabs, { schema: [], examples }));
 
     expect(html).toContain('data-testid="code-block"');
     expect(html).not.toContain('data-testid="schema-table"');
@@ -32,7 +32,7 @@ describe('RequestBodyTabs component', () => {
   });
 
   it('renders a Model/Example tab pair when both are provided', () => {
-    const html = render(h(RequestBodyTabs, { schema, examples }));
+    const html = render(h(ApiRequestBodyTabs, { schema, examples }));
 
     expect(html).toContain('data-testid="tabs"');
     expect(html).toContain('Model');
@@ -40,7 +40,7 @@ describe('RequestBodyTabs component', () => {
   });
 
   it('renders nothing when both schema and examples are empty', () => {
-    const html = render(h(RequestBodyTabs, { schema: [], examples: [] }));
+    const html = render(h(ApiRequestBodyTabs, { schema: [], examples: [] }));
 
     expect(html).toBe('');
   });

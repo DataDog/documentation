@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
-import styles from './SchemaTable.module.css';
+import styles from './ApiSchemaTable.module.css';
 
 export interface SchemaField {
   name: string;
@@ -15,7 +15,7 @@ export interface SchemaField {
   unionOptions?: { label: string; fields: SchemaField[] }[];
 }
 
-interface SchemaTableProps {
+interface ApiSchemaTableProps {
   fields: SchemaField[];
   title?: string;
   showExpandAll?: boolean;
@@ -163,7 +163,7 @@ function collectPaths(fields: SchemaField[], parentPath: string, result: string[
   }
 }
 
-export function SchemaTable({ fields, title, showExpandAll = true }: SchemaTableProps): JSX.Element {
+export function ApiSchemaTable({ fields, title, showExpandAll = true }: ApiSchemaTableProps): JSX.Element {
   const [expandedPaths, setExpandedPaths] = useState<Set<string>>(new Set());
 
   const togglePath = (path: string) => {

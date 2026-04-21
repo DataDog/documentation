@@ -7,13 +7,13 @@ const { method } = Astro.props;
 const normalized = method.toLowerCase();
 const label = method.toUpperCase();
 
-import styles from './HttpMethodBadge.module.css';
+import styles from './ApiMethodBadge.module.css';
 ---
 
 <span
-  class:list={['http-method-badge', `http-method-badge--${normalized}`, styles.badge, styles[`badge--${normalized}`]]}
+  class:list={['api-method-badge', `api-method-badge--${normalized}`, styles.badge, styles[`badge--${normalized}`]]}
   data-method={normalized}
-  data-testid="http-method-badge"
+  data-testid="api-method-badge"
 >
   {label}
 </span>

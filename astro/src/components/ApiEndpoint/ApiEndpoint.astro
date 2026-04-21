@@ -1,11 +1,11 @@
 ---
-import HttpMethodBadge from '../HttpMethodBadge/HttpMethodBadge.astro';
+import ApiMethodBadge from '../ApiMethodBadge/ApiMethodBadge.astro';
 import ApiStatusAlert from '../ApiStatusAlert/ApiStatusAlert.astro';
-import { SchemaTable } from '../SchemaTable/SchemaTable';
+import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
 import { ApiResponse } from '../ApiResponse/ApiResponse';
 import { ApiCodeExample } from '../ApiCodeExample/ApiCodeExample';
-import { RequestBodyTabs } from '../RequestBodyTabs/RequestBodyTabs';
-import type { SchemaField } from '../SchemaTable/SchemaTable';
+import { ApiRequestBodyTabs } from '../ApiRequestBodyTabs/ApiRequestBodyTabs';
+import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
 import type { ResponseData } from '../ApiResponse/ApiResponse';
 import type { CodeExampleSet } from '../ApiCodeExample/ApiCodeExample';
 import { getDefaultRegions } from '../../data/api/regions';
@@ -77,7 +77,7 @@ const hasParams = ep && (
       {ep.version && <span class={`api-endpoint__version-badge ${styles.versionBadge}`}>{ep.version === 'v2' ? 'v2 (latest)' : ep.version}</span>}
     </h2>
     <div class={`api-endpoint__url-line ${styles.urlLine}`}>
-      <HttpMethodBadge method={ep.method} />
+      <ApiMethodBadge method={ep.method} />
       {allRegions.map((region) => {
         const url = ep.regionUrls?.[region.key];
         return url ? (
@@ -112,13 +112,13 @@ const hasParams = ep && (
       <div class={`api-endpoint__section ${styles.section}`}>
         <h3>Arguments</h3>
         {ep.pathParams && ep.pathParams.length > 0 && (
-          <SchemaTable client:load fields={ep.pathParams} />
+          <ApiSchemaTable client:load fields={ep.pathParams} />
         )}
         {ep.queryParams && ep.queryParams.length > 0 && (
-          <SchemaTable client:load fields={ep.queryParams} />
+          <ApiSchemaTable client:load fields={ep.queryParams} />
         )}
         {ep.headerParams && ep.headerParams.length > 0 && (
-          <SchemaTable client:load fields={ep.headerParams} />
+          <ApiSchemaTable client:load fields={ep.headerParams} />
         )}
       </div>
     )}
@@ -130,7 +130,7 @@ const hasParams = ep && (
         {ep.requestBody.description && (
           <p set:html={ep.requestBody.description} />
         )}
-        <RequestBodyTabs
+        <ApiRequestBodyTabs
           client:load
           schema={ep.requestBody.schema}
           examples={ep.requestBody.examples}

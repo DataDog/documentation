@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('SchemaTable component', () => {
+test.describe('ApiSchemaTable component', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/components/schema-table');
+    await page.goto('/docs/components/api-schema-table');
   });
 
   test('renders schema table on the page', async ({ page }) => {

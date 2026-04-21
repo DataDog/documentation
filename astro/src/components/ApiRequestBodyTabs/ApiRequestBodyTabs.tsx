@@ -1,21 +1,21 @@
 import { Tabs } from '../Tabs/Tabs';
-import { SchemaTable } from '../SchemaTable/SchemaTable';
+import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
 import { CodeBlock } from '../CodeBlock/CodeBlock';
-import type { SchemaField } from '../SchemaTable/SchemaTable';
+import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
 import styles from '../ApiEndpoint/ApiEndpoint.module.css';
 
-interface RequestBodyTabsProps {
+interface ApiRequestBodyTabsProps {
   schema: SchemaField[];
   examples: Array<{ name: string; value: string; highlightedValue?: string }>;
 }
 
-export function RequestBodyTabs({ schema, examples }: RequestBodyTabsProps) {
+export function ApiRequestBodyTabs({ schema, examples }: ApiRequestBodyTabsProps) {
   const hasSchema = schema.length > 0;
   const hasExamples = examples.length > 0;
 
   // If only schema or only examples, render without tabs
   if (hasSchema && !hasExamples) {
-    return <SchemaTable fields={schema} />;
+    return <ApiSchemaTable fields={schema} />;
   }
   if (!hasSchema && hasExamples) {
     return (
@@ -32,7 +32,7 @@ export function RequestBodyTabs({ schema, examples }: RequestBodyTabsProps) {
     <Tabs labels={['Model', 'Example']} variant="pills">
       {(activeIndex: number) =>
         activeIndex === 0 ? (
-          <SchemaTable fields={schema} />
+          <ApiSchemaTable fields={schema} />
         ) : (
           <div class={`request-body-tabs__examples ${styles.requestExamples}`}>
             {examples.map((ex) => (

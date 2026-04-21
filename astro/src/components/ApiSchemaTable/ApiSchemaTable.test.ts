@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from 'preact-render-to-string';
 import { h } from 'preact';
-import { SchemaTable } from './SchemaTable';
+import { ApiSchemaTable } from './ApiSchemaTable';
 
 const flatFields = [
   {
@@ -22,9 +22,9 @@ const flatFields = [
   },
 ];
 
-describe('SchemaTable component', () => {
+describe('ApiSchemaTable component', () => {
   it('renders with data-testid and column headers', () => {
-    const html = render(h(SchemaTable, { fields: flatFields }));
+    const html = render(h(ApiSchemaTable, { fields: flatFields }));
 
     expect(html).toContain('data-testid="schema-table"');
     expect(html).toContain('Name');
@@ -33,7 +33,7 @@ describe('SchemaTable component', () => {
   });
 
   it('renders a row for every top-level field', () => {
-    const html = render(h(SchemaTable, { fields: flatFields }));
+    const html = render(h(ApiSchemaTable, { fields: flatFields }));
     const rowCount = (html.match(/data-testid="schema-table-row"/g) ?? []).length;
 
     expect(rowCount).toBe(2);
@@ -42,7 +42,7 @@ describe('SchemaTable component', () => {
   });
 
   it('flags required fields with a [required] marker', () => {
-    const html = render(h(SchemaTable, { fields: flatFields }));
+    const html = render(h(ApiSchemaTable, { fields: flatFields }));
 
     expect(html).toContain('data-testid="schema-field-required"');
     expect(html).toContain('[required]');
@@ -69,7 +69,7 @@ describe('SchemaTable component', () => {
         ],
       },
     ];
-    const html = render(h(SchemaTable, { fields: nested }));
+    const html = render(h(ApiSchemaTable, { fields: nested }));
 
     expect(html).toContain('data-testid="schema-table-toggle"');
     expect(html).toContain('data-testid="schema-table-expand-all"');

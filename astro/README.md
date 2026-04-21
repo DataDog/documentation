@@ -100,9 +100,9 @@ An index page at [`src/pages/api/latest/index.astro`](src/pages/api/latest/index
 | Section | Component | Type |
 |---------|-----------|------|
 | Deprecated/unstable alerts | [`ApiStatusAlert.astro`](src/components/ApiStatusAlert/ApiStatusAlert.astro) | Static |
-| HTTP method + path | [`HttpMethodBadge.astro`](src/components/HttpMethodBadge/HttpMethodBadge.astro) | Static |
-| Parameters (path, query, header) | [`SchemaTable.tsx`](src/components/SchemaTable/SchemaTable.tsx) | Preact island |
-| Request body (schema + examples) | [`RequestBodyTabs.tsx`](src/components/RequestBodyTabs/RequestBodyTabs.tsx) | Preact island |
+| HTTP method + path | [`ApiMethodBadge.astro`](src/components/ApiMethodBadge/ApiMethodBadge.astro) | Static |
+| Parameters (path, query, header) | [`ApiSchemaTable.tsx`](src/components/ApiSchemaTable/ApiSchemaTable.tsx) | Preact island |
+| Request body (schema + examples) | [`ApiRequestBodyTabs.tsx`](src/components/ApiRequestBodyTabs/ApiRequestBodyTabs.tsx) | Preact island |
 | Responses (status codes + bodies) | [`ApiResponse.tsx`](src/components/ApiResponse/ApiResponse.tsx) | Preact island |
 | SDK code examples | [`ApiCodeExample.tsx`](src/components/ApiCodeExample/ApiCodeExample.tsx) | Preact island |
 
@@ -136,8 +136,8 @@ v2/full_spec.yaml ──┘         │
                                                 │
                                          ApiEndpoint ×N
                                   ┌──────────┼──────────┐
-                            SchemaTable  ApiResponse  ApiCodeExample
-                           RequestBodyTabs
+                        ApiSchemaTable  ApiResponse  ApiCodeExample
+                        ApiRequestBodyTabs
                           (Preact islands, client:load)
 ```
 

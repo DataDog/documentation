@@ -25,15 +25,6 @@ export default defineMarkdocConfig({
         },
       },
     },
-    counter: {
-      render: component('./src/components/Counter/CounterIsland.astro'),
-      attributes: {
-        initialCount: {
-          type: Number,
-          default: 0,
-        },
-      },
-    },
     tabs: {
       render: component('./src/components/Tabs/TabsIsland.astro'),
     },
@@ -46,8 +37,8 @@ export default defineMarkdocConfig({
         },
       },
     },
-    httpMethodBadge: {
-      render: component('./src/components/HttpMethodBadge/HttpMethodBadge.astro'),
+    apiMethodBadge: {
+      render: component('./src/components/ApiMethodBadge/ApiMethodBadge.astro'),
       selfClosing: true,
       attributes: {
         method: {
@@ -72,7 +63,7 @@ export default defineMarkdocConfig({
       },
     },
     schemaTable: {
-      render: component('./src/components/SchemaTable/SchemaTableIsland.astro'),
+      render: component('./src/components/ApiSchemaTable/ApiSchemaTableIsland.astro'),
       selfClosing: true,
       attributes: {
         fields: {
