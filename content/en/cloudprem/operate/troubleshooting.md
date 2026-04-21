@@ -190,7 +190,7 @@ To detect log loss before it reaches CloudPrem, monitor these Datadog Agent metr
 - **`datadog.logs_client_http_destination.payloads_dropped`**: Number of log payloads dropped by the Agent when the destination is unreachable or returning errors. This is the primary metric to watch for data loss.
 - **`datadog.logs.bytes_missed`**: Number of bytes from logs that could not be tailed after a file rotation (before the Agent finished reading the file).
 
-Configure the Datadog Agent to report these metrics and set up alerts to detect log loss early.
+Configure the Datadog Agent to report these metrics, and set up alerts to detect log loss early.
 
 ## Search performance
 
