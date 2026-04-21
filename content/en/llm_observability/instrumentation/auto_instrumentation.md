@@ -942,7 +942,7 @@ For more specific control over library patching and the integration that starts 
 {{% tab "Python" %}}
 
 `DD_PATCH_MODULES`
-: A comma-separated list of modules to patch or not patch, overriding the default. Use the format `DD_PATCH_MODULES=module:patch,module:patch...`. Available in version 2.17.4+.<br>
+: A comma-separated list of modules to enable or disable patching for. Overrides the default patching behavior. Use the format `module:true,module:false`. Available in version 2.17.4+.<br>
 **Example**: `DD_PATCH_MODULES=openai:false,langchain:false`
 
 `DD_TRACE_<INTEGRATION>_ENABLED`
