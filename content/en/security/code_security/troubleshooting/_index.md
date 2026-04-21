@@ -49,7 +49,7 @@ When uploading results from third-party static analysis tools to Datadog, ensure
 To upload a SARIF report, follow the steps below:
 
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
-2. Optionally, set a [`DD_SITE` variable][7] (this defaults to `datadoghq.com`).
+2. Optionally, set a [`DD_SITE` variable][24] (this defaults to `datadoghq.com`).
 3. Install the `datadog-ci` utility:
 
    ```bash
@@ -103,7 +103,7 @@ After updating either file on your default branch, it may take up to six hours f
 
 **If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
 
-If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
+If you are using Datadog's analyzer, [diff-aware scanning][21] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
 
 ### Diff-aware is not working
 
@@ -199,7 +199,7 @@ If you have enabled Runtime Software Composition Analysis (SCA) on your services
 
 If you are not seeing `datadog.appsec.risk_management.sca.host_instance`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
-Runtime application security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+Runtime application security data is sent with APM traces. See [APM troubleshooting][22] to [confirm APM setup][23] and check for [connection errors][6].
 
 ### Confirm tracer versions are updated
 
@@ -222,7 +222,7 @@ If you have enabled Runtime Code Analysis (IAST) on your services, you can use t
 
 If you are not seeing `datadog.appsec.risk_management.iast.host_instance`, check the [in-app instructions][20] to confirm that all steps for the initial setup are complete.
 
-Runtime application security data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+Runtime application security data is sent with APM traces. See [APM troubleshooting][22] to [confirm APM setup][23] and check for [connection errors][6].
 
 ### Issues with Python and Flask instrumentation
 If you're running a Flask application, ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`. For more information, see the [Flask integration documentation][19].
@@ -293,10 +293,10 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [1]: /help/
 [2]: /security/code_security/static_analysis/github_actions
 [3]: /security/code_security/static_analysis/github_actions#inputs
-[4]: /tracing/troubleshooting/
-[5]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
+[4]: https://app.datadoghq.com/source-code/repositories
+[5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
 [6]: /tracing/troubleshooting/connection_errors/
-[7]: /getting_started/site/
+[7]: https://github.com/DataDog/datadog-sbom-generator
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
 [12]: https://app.datadoghq.com/security/appsec/vm/library
@@ -306,3 +306,7 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [18]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
 [19]: /tracing/trace_collection/dd_libraries/python/
 [20]: /security/configuration/code-security/setup?steps=iast
+[21]: /security/code_security/static_analysis/setup/#diff-aware-scanning
+[22]: /tracing/troubleshooting/
+[23]: /tracing/troubleshooting/#confirm-apm-setup-and-agent-status
+[24]: /getting_started/site/
