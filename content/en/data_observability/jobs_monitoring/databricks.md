@@ -65,8 +65,8 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
    - Grant the service principal read access to the Unity Catalog [system tables][20] by running the following commands:
    ```sql
    GRANT USE CATALOG ON CATALOG system TO <service_principal>;
+   GRANT USE SCHEMA ON SCHEMA system.billing TO <service_principal>;
    GRANT SELECT ON CATALOG system TO <service_principal>;
-   GRANT USE SCHEMA ON CATALOG system TO <service_principal>;
    ```
    The user granting these must have `MANAGE` privilege on `CATALOG system`.
 
@@ -101,11 +101,11 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. To gain visibility into your Databricks costs in Data Observability: Jobs Monitoring or [Cloud Cost Management][18], provide the ID of a [Databricks SQL Warehouse][19] that Datadog can use to query your [system tables][20].
 
    - The token's principal must have access to the SQL Warehouse. Give it `CAN USE` permission from **Permissions** at the top right of the Warehouse configuration page.
-   - Grant the service principal read access to the Unity Catalog [system tables][20] by running the following commands::
+   - Grant the service principal read access to the Unity Catalog [system tables][20] by running the following commands:
    ```sql
    GRANT USE CATALOG ON CATALOG system TO <token_principal>;
+   GRANT USE SCHEMA ON SCHEMA system.billing TO <token_principal>;
    GRANT SELECT ON CATALOG system TO <token_principal>;
-   GRANT USE SCHEMA ON CATALOG system TO <token_principal>;
    ```
    The user granting these must have `MANAGE` privilege on `CATALOG system`.
    -  The SQL Warehouse must be Pro or Serverless. Classic Warehouses are **NOT** supported. A 2XS size warehouse is recommended, with Auto Stop configured for 5-10 minutes to minimize cost.
@@ -433,8 +433,8 @@ Additionally, for Datadog to access your Databricks cost data in Data Observabil
    - Read access to the [system tables][27] within Unity Catalog. This can be granted with:
    ```sql
    GRANT USE CATALOG ON CATALOG system TO <service_principal>;
+   GRANT USE SCHEMA ON SCHEMA system.billing TO <service_principal>;
    GRANT SELECT ON CATALOG system TO <service_principal>;
-   GRANT USE SCHEMA ON CATALOG system TO <service_principal>;
    ```
    The user granting these must have `MANAGE` privilege on `CATALOG system`.
 
