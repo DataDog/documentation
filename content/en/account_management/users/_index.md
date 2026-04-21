@@ -72,7 +72,9 @@ To edit a user's login methods:
 
 ## Disable existing members
 
-Only users with the Access Management permission, such as users with the Datadog Admin Role, can disable members. You cannot permanently remove users, as they might have authored dashboards or monitors, and their user ID is used to keep a record of their actions. When a user is disabled, any application keys they had generated are automatically revoked.
+Only users with the Access Management permission, such as users with the Datadog Admin Role, can disable members. You cannot permanently remove users, as they might have authored dashboards or monitors, and their user ID is used to keep a record of their actions. When a user is disabled, any application keys and personal access tokens (PATs) they had generated are automatically revoked.
+
+<div class="alert alert-warning">Disabling a user revokes all of their application keys and personal access tokens (PATs). Any workflows or integrations that rely on these keys stop working immediately. To avoid disruptions, use keys that belong to <a href="/account_management/org_settings/service_accounts/">service accounts</a> for long-running integrations and automated workflows.</div>
 
 1. Go to the {{< ui >}}Users{{< /ui >}} tab of {{< ui >}}Organization Settings{{< /ui >}}.
 2. Select the {{< ui >}}Edit{{< /ui >}} button on the right of the user line.
