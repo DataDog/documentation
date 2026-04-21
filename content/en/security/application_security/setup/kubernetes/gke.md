@@ -238,12 +238,10 @@ spec:
 ```
 
 <div class="alert alert-info">
-  <strong>Note:</strong> The <code>Gateway</code>, the <code>GCPTrafficExtension</code>, and the security processor <code>Service</code> referenced by <code>backendRef</code> must all reside in the same namespace. Unlike the generic Gateway API, GKE's <code>GCPTrafficExtension</code> does not support cross-namespace Service references through <code>ReferenceGrant</code>. See the <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gke-service-extensions">GKE Service Extensions restrictions</a> for the full list of constraints on the extension's backend <code>Service</code>.
+  <strong>Note:</strong> The <code>Gateway</code>, the <code>GCPTrafficExtension</code>, and the security processor <code>Service</code> referenced by <code>backendRef</code> must all reside in the same namespace. See the <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gke-service-extensions">GKE Service Extensions restrictions</a> for the full list of constraints on the extension's backend <code>Service</code>.
 </div>
 
 ### Validate
-
-After you apply the three manifests, traffic through the targeted Gateway is inspected by App and API Protection.
 
 {{% appsec-getstarted-2-plusrisk %}}
 
