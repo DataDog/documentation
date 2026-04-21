@@ -31,6 +31,10 @@ To enable APM on a Linux host:
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
 
+<div class="alert alert-warning">
+<strong>.NET prerequisite:</strong> If a .NET profiler is already configured on the host (whether Datadog or another APM agent), remove the following environment variables before enabling SSI: <code>CORECLR_ENABLE_PROFILING</code>, <code>CORECLR_PROFILER</code>, <code>CORECLR_PROFILER_PATH</code>, and any values in <code>LD_PRELOAD</code> that reference the pre-existing profiler. The <a href="/tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started">.NET CLR Profiling API loads only one profiler per process</a>, so if these variables remain set when SSI runs, SSI installs successfully but the pre-existing profiler is loaded at runtime instead of the Datadog tracer.
+</div>
+
 ## Set SDK tracer versions
 
 By default, Single Step Instrumentation installs the latest versions of Datadog APM SDKs.

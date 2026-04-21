@@ -48,6 +48,10 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
 
+<div class="alert alert-warning">
+<strong>Conflicts with an existing .NET profiler:</strong> <code>CORECLR_*</code> environment variables injected by another vendor's operator, init container, or pod template are not overwritten by the SSI admission webhook. If another profiler is already present in the pod spec, SSI cannot take precedence. Remove the conflicting environment variables from the source (operator custom resource, init container, pod template, Helm values) and re-roll the pods. For background, see the <a href="/tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started">.NET CLR Profiling API one-subscriber constraint</a>.
+</div>
+
 ## Configure Unified Service Tags
 
 Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. You can configure USTs through automatic label extraction (recommended), through explicit configuration with `ddTraceConfigs`, or in deployment manifests.
