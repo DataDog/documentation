@@ -1,4 +1,3 @@
 node_modules/
 dist/
 .astro/
-src/data/api/examples/

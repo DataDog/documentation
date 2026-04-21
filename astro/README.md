@@ -37,10 +37,10 @@ The API reference pages are generated at build time from OpenAPI spec files thro
 
 Two OpenAPI 3.x spec files are the source of truth for all API data:
 
-- [`src/data/api/v1/full_spec.yaml`](src/data/api/v1/full_spec.yaml) — v1 endpoints
-- [`src/data/api/v2/full_spec.yaml`](src/data/api/v2/full_spec.yaml) — v2 endpoints
+- [`src/mocked_dependencies/api/v1/full_spec.yaml`](src/mocked_dependencies/api/v1/full_spec.yaml) — v1 endpoints
+- [`src/mocked_dependencies/api/v2/full_spec.yaml`](src/mocked_dependencies/api/v2/full_spec.yaml) — v2 endpoints
 
-Each spec contains `tags` (which map to page categories), `paths` (endpoint definitions), `components/schemas` (reusable data models), and `servers` (region-specific base URLs). These files are imported at build time as raw strings using Vite's `?raw` import syntax, so no runtime file I/O is needed.
+Each spec contains `tags` (which map to page categories), `paths` (endpoint definitions), `components/schemas` (reusable data models), and `servers` (region-specific base URLs). These files are imported at build time as raw strings using Vite's `?raw` import syntax, so no runtime file I/O is needed. They live under [`mocked_dependencies/`](src/mocked_dependencies/) until the live spec feed is wired up.
 
 ### 2. Data extraction and transformation
 
@@ -66,7 +66,7 @@ A set of TypeScript modules in [`src/data/api/`](src/data/api/) parse and transf
 
 5. **[`regions.ts`](src/data/api/regions.ts)** — Reads the `servers[0].variables.site.enum` from the spec to discover supported Datadog regions (us1, us3, us5, eu, ap1, ap2, gov) and builds region-specific API URLs.
 
-6. **[`examples.ts`](src/data/api/examples.ts)** — Reads `CodeExamples.json` manifests and loads SDK example files (`.py`, `.rb`, `.go`, `.java`, `.ts`) from the [`src/data/api/v1/examples/`](src/data/api/v1/examples/) and [`src/data/api/v2/examples/`](src/data/api/v2/examples/) directories.
+6. **[`examples.ts`](src/data/api/examples.ts)** — Reads `CodeExamples.json` manifests from [`src/mocked_dependencies/api/v{1,2}/`](src/mocked_dependencies/api/) and loads SDK example files (`.py`, `.rb`, `.go`, `.java`, `.ts`) from a sibling `examples/` directory. The mocked inventory does not yet ship the SDK source files, so until a live feed is wired up only curl snippets render.
 
 7. **[`curl.ts`](src/data/api/curl.ts)** — Generates curl command snippets with auth headers, path parameter interpolation, and request body payloads.
 

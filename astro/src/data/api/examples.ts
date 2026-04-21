@@ -4,6 +4,10 @@
  * Reads code example metadata from CodeExamples.json and loads the
  * corresponding source files (Python, Ruby, Go, Java, TypeScript) from
  * the examples directory. Runs at build time using synchronous fs reads.
+ *
+ * Data currently sourced from src/mocked_dependencies/api/. The mocked
+ * inventory includes CodeExamples.json but not the SDK source files, so
+ * only curl examples render until a live feed is wired up.
  */
 
 import fs from 'node:fs';
@@ -47,6 +51,9 @@ interface CodeExampleMeta {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+/** Root of the mocked_dependencies API data (relative to this module). */
+const MOCKED_API_ROOT = path.resolve(__dirname, '../../mocked_dependencies/api');
+
 /** Language configuration: file extensions and display metadata */
 const LANGUAGES = [
   { id: 'python',     label: 'Python',     ext: '.py',   syntax: 'python' },
@@ -75,7 +82,7 @@ function loadCodeExamplesMetadata(version: 'v1' | 'v2'): Record<string, CodeExam
     return metadataCache.get(version)!;
   }
 
-  const filePath = path.resolve(__dirname, version, 'CodeExamples.json');
+  const filePath = path.resolve(MOCKED_API_ROOT, version, 'CodeExamples.json');
   try {
     const raw = fs.readFileSync(filePath, 'utf-8');
     const parsed = JSON.parse(raw) as Record<string, CodeExampleMeta[]>;
@@ -107,7 +114,7 @@ function buildExampleFilename(operationId: string, suffix: string, ext: string):
  * if the file doesn't exist.
  */
 function readExampleFile(version: 'v1' | 'v2', filename: string): string | null {
-  const filePath = path.resolve(__dirname, 'examples', version, filename);
+  const filePath = path.resolve(MOCKED_API_ROOT, version, 'examples', filename);
   try {
     return fs.readFileSync(filePath, 'utf-8');
   } catch {

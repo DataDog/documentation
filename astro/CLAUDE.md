@@ -27,6 +27,12 @@ The scope of this new Astro site is just the API docs. In Hugo, the HTML for the
 
 Render as much content at build time as possible. Light rehydration on the client is fine, but all of the content should be rendered at build time as well, even if it's not visible yet. For example, the content of all tabs should be rendered, not just the active tab.
 
+## Mocked dependencies
+
+The [mocked_dependencies folder](./src/mocked_dependencies/) contains any external resources that are not yet available to us. For example, [mocked_dependencies/api](./src/mocked_dependencies/api/) contains a copy of the API data available to Hugo ([folder in the Hugo site](../data/api)).
+
+Anytime you're building a feature that depends on some external resource, add a mock/snapshot of that external resource to the `mocked_dependencies` folder, and update the inventory section of the [README](./src/mocked_dependencies/README.md).
+
 ## CSS architecture
 
 ### Tokenized design

@@ -8,10 +8,11 @@
 
 import { parse as parseYaml } from 'yaml';
 
+// Sourced from mocked_dependencies until the live spec feed is wired up.
 // @ts-ignore — Vite raw import
-import v1Raw from './v1/full_spec.yaml?raw';
+import v1Raw from '../../mocked_dependencies/api/v1/full_spec.yaml?raw';
 // @ts-ignore — Vite raw import
-import v2Raw from './v2/full_spec.yaml?raw';
+import v2Raw from '../../mocked_dependencies/api/v2/full_spec.yaml?raw';
 
 import { resolveRef, schemaToFields, paramsToFields } from './resolver';
 import type { SchemaField } from './resolver';

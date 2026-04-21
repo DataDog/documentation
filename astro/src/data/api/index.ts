@@ -2,11 +2,12 @@ import { parse as parseYaml } from 'yaml';
 import { z } from 'astro/zod';
 import { renderMarkdown } from './markdown';
 
-// Import spec files as raw strings so Vite bundles them correctly
+// Import spec files as raw strings so Vite bundles them correctly.
+// Sourced from mocked_dependencies until the live spec feed is wired up.
 // @ts-ignore — Vite raw import
-import v1Raw from './v1/full_spec.yaml?raw';
+import v1Raw from '../../mocked_dependencies/api/v1/full_spec.yaml?raw';
 // @ts-ignore — Vite raw import
-import v2Raw from './v2/full_spec.yaml?raw';
+import v2Raw from '../../mocked_dependencies/api/v2/full_spec.yaml?raw';
 
 /* ------------------------------------------------------------------ */
 /*  Zod schemas — only the subset of OpenAPI fields we actually need  */
