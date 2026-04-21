@@ -20,16 +20,18 @@ Private Link monitoring is built on the Private Action Runner's [polling archite
 
 The request flow works as follows:
 
-1. The [Private Action Runner][2] reaches out to the Datadog backend through the [VPC Endpoint][3] to query for pending requests. If a request is found, details are returned to the runner.
-1. Databricks credentials (client ID and secret) are retrieved from secret storage. A token is generated for the session by calling the Databricks API over the VPC Endpoint using those credentials.
-1. The runner executes the fetched query against the Databricks API over the VPC Endpoint. The results are returned to the runner.
+1. The [Private Action Runner][2] reaches out to the Datadog backend through the [VPC Endpoint][3] or over the public internet to query for pending requests. If a request is found, details are returned to the runner.
+1. Databricks credentials (client ID and secret) are retrieved from secret storage. A token is generated for the session by calling the Databricks API from the runner using those credentials.
+1. The runner executes the fetched query against the Databricks API. The results are returned to the runner.
 1. The runner forwards the results back to the Datadog backend for processing.
 
-All authentication to Datadog is handled by the underlying Private Action Runner, and an allowlist restricts the actions that can be performed to only those that are necessary.
+All authentication to Datadog is handled by the underlying Private Action Runner. A locally configured allowlist is set on the runner during installation to restrict the actions that can be performed to only those that are necessary. You can also configure access controls within Datadog to manage which users and teams can use the runner. See [Manage access to Private Action Runners][16] for more information.
 
-## Prerequisites
+## Installation instructions
 
-### Datadog prerequisites
+### Prerequisites
+
+#### Datadog prerequisites
 
 1. Establish connectivity to Datadog API endpoints from within the VPC, using **one** of the following methods:
    - Egress to the public internet (through NAT gateway or other)
@@ -45,7 +47,7 @@ All authentication to Datadog is handled by the underlying Private Action Runner
    1. Under **Assign Roles**, select the **Datadog Standard Role**. Alternatively, select a custom role that has the `Connections Resolve` permission.
    1. Click **Create Service Account**.
 
-### Databricks prerequisites
+#### Databricks prerequisites
 
 1. Create a Databricks service principal ([Databricks documentation][9]):
    1. As a workspace admin, log in to the Databricks workspace.
@@ -75,9 +77,9 @@ All authentication to Datadog is handled by the underlying Private Action Runner
    1. Click **Add members** and select the service principal added above.
    1. Click **Add**.
 
-## Setup
+### Setup
 
-### Step 1: Set up the Private Action Runner
+#### Step 1: Set up the Private Action Runner
 
 Set up your Private Action Runner using **one** of the following options.
 
@@ -138,7 +140,7 @@ Set up your Private Action Runner using **one** of the following options.
 - `datadoghq.azurecr.io/dd-data-observability-par`
 - `asia-docker.pkg.dev/datadoghq/asia.gcr.io/dd-data-observability-par`
 
-### Step 2: Configure Datadog
+#### Step 2: Configure Datadog
 
 1. Attach a connection to the Private Action Runner:
    1. Go to the [Private Action Runners][12] page.
@@ -188,3 +190,4 @@ After completing the setup, jobs and schema information should appear in [Data O
 [13]: https://app.datadoghq.com/integrations?search=databr&configPage=new&integrationId=databricks
 [14]: /data_observability/jobs_monitoring/databricks/#configure-the-datadog-databricks-integration
 [15]: https://app.datadoghq.com/data-jobs/
+[16]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=docker#manage-access
