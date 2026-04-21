@@ -5416,6 +5416,27 @@ menu:
       parent: llm_obs
       identifier: llm_obs_guide
       weight: 9
+    - name: GPU Monitoring
+      url: gpu_monitoring/
+      pre: gpu-monitoring-wui
+      identifier: gpu_monitoring
+      parent: ai_observability_heading
+      weight: 20000
+    - name: Setup
+      url: gpu_monitoring/setup/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_setup
+      weight: 1
+    - name: Summary Page
+      url: gpu_monitoring/summary/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_summary
+      weight: 2
+    - name: Fleet Page
+      url: gpu_monitoring/fleet/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_fleet
+      weight: 3
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
