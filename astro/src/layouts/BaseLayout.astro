@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+import AnnouncementBannerPlaceholder from '../components/AnnouncementBannerPlaceholder/AnnouncementBannerPlaceholder.astro';
+import HeaderPlaceholder from '../components/HeaderPlaceholder/HeaderPlaceholder.astro';
+import FooterPlaceholder from '../components/FooterPlaceholder/FooterPlaceholder.astro';
 
 interface Props {
   title: string;
@@ -36,6 +39,35 @@ const { title } = Astro.props;
     </script>
   </head>
   <body>
+    <AnnouncementBannerPlaceholder />
+    <HeaderPlaceholder />
+    <div class="base-layout__body">
+      <slot />
+    </div>
+    <FooterPlaceholder />
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var DESKTOP_MIN_WIDTH = 992;
+        var MAX_SHRINK = 65;
+        var ticking = false;
+        function update() {
+          var shrink = window.innerWidth >= DESKTOP_MIN_WIDTH
+            ? Math.min(window.scrollY, MAX_SHRINK)
+            : 0;
+          root.style.setProperty('--hugo-header-shrink', shrink + 'px');
+          ticking = false;
+        }
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+        update();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+      })();
+    </script>
     <div id="theme-toggles">
       <button
         id="theme-toggle"
@@ -52,7 +84,6 @@ const { title } = Astro.props;
       </button>
       <!-- SCROLL MODE — end -->
     </div>
-    <slot />
     <script is:inline>
       (function () {
         var btn = document.getElementById('theme-toggle');
@@ -92,13 +123,23 @@ const { title } = Astro.props;
       // SCROLL MODE — end
     </script>
     <style>
+      .base-layout__body {
+        padding-top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
+      }
+
+      @media (min-width: 992px) {
+        .base-layout__body {
+          padding-top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop));
+        }
+      }
+
       #theme-toggles {
         position: fixed;
         top: 0;
         right: 0;
         display: flex;
         gap: var(--space-xs);
-        z-index: 1000;
+        z-index: 2000;
         padding: var(--space-sm);
         opacity: 0;
         transition: opacity 0.2s ease;

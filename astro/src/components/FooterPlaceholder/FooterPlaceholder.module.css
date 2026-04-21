@@ -1,0 +1,24 @@
+.footer {
+  width: 100%;
+  padding-top: var(--hugo-footer-padding-y);
+  padding-bottom: var(--hugo-footer-padding-y);
+}
+
+.footer__inner {
+  min-height: 4rem;
+  font-size: var(--font-size-base);
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding-top: var(--hugo-footer-padding-y-tablet);
+    padding-bottom: var(--hugo-footer-padding-y-tablet);
+  }
+}
+
+@media (min-width: 992px) {
+  .footer {
+    padding-top: var(--hugo-footer-padding-top-desktop);
+    padding-bottom: var(--hugo-footer-padding-bottom-desktop);
+  }
+}

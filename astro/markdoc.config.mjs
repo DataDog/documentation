@@ -130,5 +130,18 @@ export default defineMarkdocConfig({
         },
       },
     },
+    placeholder: {
+      render: component('./src/components/Placeholder/Placeholder.astro'),
+      selfClosing: true,
+      attributes: {
+        name: {
+          type: String,
+          required: true,
+        },
+        class: {
+          type: String,
+        },
+      },
+    },
   },
 });

@@ -86,9 +86,8 @@ An index page at [`src/pages/api/latest/index.astro`](src/pages/api/latest/index
 
 ### 4. Layout and navigation
 
-[`ApiLayout.astro`](src/layouts/ApiLayout.astro) provides the page shell:
+[`ApiLayout.astro`](src/layouts/ApiLayout.astro) composes [`BaseLayout.astro`](src/layouts/BaseLayout.astro), which supplies the shared announcement banner, header, and footer placeholders. It then provides the API-specific page shell:
 
-- [`ApiHeader.astro`](src/components/ApiHeader/ApiHeader.astro) — Top bar with the Datadog logo
 - [`ApiSideNav.astro`](src/components/ApiSideNav/ApiSideNav.astro) — Left sidebar listing all categories; the active category expands to show its operations as anchor links
 - [`RegionSelector`](src/components/RegionSelector/RegionSelector.tsx) — A Preact island that lets users switch between Datadog regions, updating displayed URLs
 - [`Breadcrumbs.astro`](src/components/Breadcrumbs/Breadcrumbs.astro) — Breadcrumb navigation
@@ -132,8 +131,8 @@ v2/full_spec.yaml ──┘         │
                           [category].astro (getStaticPaths)
                                        │
                                  ApiLayout.astro
-                              ┌────────┴────────┐
-                        ApiHeader          ApiSideNav
+                                       │
+                                 BaseLayout.astro + ApiSideNav
                                                 │
                                          ApiEndpoint ×N
                                   ┌──────────┼──────────┐

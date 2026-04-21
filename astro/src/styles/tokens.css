@@ -122,6 +122,29 @@
   /* Layout */
   --content-max-width: 1440px;
   --sidebar-width: 25%;
+
+  /* Colors — Placeholder (for work-in-progress layout slots) */
+  --color-placeholder-bg: #e9d8f4;
+  --color-placeholder-outline: #632ca6;
+  --color-placeholder-text: var(--color-placeholder-outline);
+
+  /* Hugo-identical tokens — these replicate exact pixel values from the Hugo
+     site so users can't tell when they switch frameworks. Deprecate these
+     once Hugo itself is deprecated. */
+  --hugo-banner-height: 30px;
+  --hugo-header-height: 60px;                  /* <992px */
+  --hugo-header-height-desktop: 130px;         /* ≥992px, top of page */
+  --hugo-header-height-desktop-min: 65px;      /* ≥992px, after shrink-on-scroll */
+  --hugo-header-shrink: 0px;                   /* set by BaseLayout scroll listener: min(scrollY, 65px) */
+  --hugo-breakpoint-desktop: 992px;            /* header height changes here */
+  --hugo-breakpoint-tablet: 768px;             /* footer padding changes here */
+  --hugo-footer-padding-y: 1rem;               /* <768px (pt-3 pb-3) */
+  --hugo-footer-padding-y-tablet: 9rem;        /* ≥768px (pt-md-36 pb-md-36) */
+  --hugo-footer-padding-top-desktop: 3rem;     /* ≥992px (pt-lg-5) */
+  --hugo-footer-padding-bottom-desktop: 4rem;  /* ≥992px (pb-lg-16) */
+  --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.07);
+  --hugo-header-z: 200;
+  --hugo-banner-z: 1080;
 }
 
 /* Dark mode tokens */
@@ -202,6 +225,11 @@
   --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.5);
   --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.7);
   --shadow-brand: 0 -4px 12px rgba(155, 109, 215, 0.15);
+
+  /* Colors — Placeholder (swap the two purples for dark mode) */
+  --color-placeholder-bg: #632ca6;
+  --color-placeholder-outline: #e9d8f4;
+  --color-placeholder-text: var(--color-placeholder-outline);
 }
 
 /* SCROLL MODE — start */

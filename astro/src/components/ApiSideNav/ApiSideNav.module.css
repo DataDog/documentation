@@ -1,7 +1,10 @@
 .nav {
   width: var(--sidebar-width);
   flex-shrink: 0;
-  height: 100%;
+  position: sticky;
+  top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
+  align-self: flex-start;
+  max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height));
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
@@ -12,6 +15,13 @@
 
 .nav::-webkit-scrollbar {
   display: none;
+}
+
+@media (min-width: 992px) {
+  .nav {
+    top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop));
+    max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height-desktop));
+  }
 }
 
 .title {

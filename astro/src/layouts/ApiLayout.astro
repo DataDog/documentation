@@ -1,6 +1,5 @@
 ---
-import '../styles/global.css';
-import ApiHeader from '../components/ApiHeader/ApiHeader.astro';
+import BaseLayout from './BaseLayout.astro';
 import ApiSideNav from '../components/ApiSideNav/ApiSideNav.astro';
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs.astro';
 import type { BreadcrumbItem } from '../components/Breadcrumbs/Breadcrumbs.astro';
@@ -19,170 +18,54 @@ const { title, categories, currentSlug, breadcrumbs } = Astro.props;
 const regions = getDefaultRegions();
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <link rel="preload" href="/fonts/NationalWeb-Light.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/NationalWeb-Semibold.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/RobotoMono-Regular.woff" as="font" type="font/woff" crossorigin />
-    <!-- SCROLL MODE — start (Google Fonts) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Pinyon+Script&display=swap" rel="stylesheet" />
-    <!-- SCROLL MODE — end -->
-    <script is:inline>
-      (function () {
-        const saved = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = saved || (prefersDark ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
-        // SCROLL MODE — start
-        if (localStorage.getItem('scroll-mode') === 'on') {
-          document.documentElement.setAttribute('data-scroll', 'on');
-        }
-        // SCROLL MODE — end
-      })();
-    </script>
-  </head>
-  <body>
-    <ApiHeader />
-    <div class="api-shell">
-      <ApiSideNav categories={categories} currentSlug={currentSlug} />
-      <main class="api-main">
-        <div class="api-toolbar">
-          {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
-          <RegionSelector client:load regions={regions} />
-        </div>
-        <slot />
-      </main>
-    </div>
-    <div id="theme-toggles">
-      <button
-        id="theme-toggle"
-        type="button"
-        aria-label="Toggle dark mode"
-      >
-      </button>
-      <!-- SCROLL MODE — start (toggle button) -->
-      <button
-        id="scroll-toggle"
-        type="button"
-        aria-label="Toggle scroll mode"
-      >
-      </button>
-      <!-- SCROLL MODE — end -->
-    </div>
-    <script is:inline>
-      (function () {
-        var btn = document.getElementById('theme-toggle');
-        function update() {
-          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-          btn.textContent = isDark ? '\u2600\uFE0F' : '\uD83C\uDF19';
-        }
-        update();
-        btn.addEventListener('click', function () {
-          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-          var next = isDark ? 'light' : 'dark';
-          document.documentElement.setAttribute('data-theme', next);
-          localStorage.setItem('theme', next);
-          update();
-        });
-      })();
-      // SCROLL MODE — start (toggle script)
-      (function () {
-        var btn = document.getElementById('scroll-toggle');
-        function update() {
-          var isScroll = document.documentElement.getAttribute('data-scroll') === 'on';
-          btn.textContent = isScroll ? '\uD83D\uDCD6' : '\uD83D\uDCDC';
-        }
-        update();
-        btn.addEventListener('click', function () {
-          var isScroll = document.documentElement.getAttribute('data-scroll') === 'on';
-          var next = isScroll ? 'off' : 'on';
-          if (next === 'on') {
-            document.documentElement.setAttribute('data-scroll', 'on');
-          } else {
-            document.documentElement.removeAttribute('data-scroll');
-          }
-          localStorage.setItem('scroll-mode', next);
-          update();
-        });
-      })();
-      // SCROLL MODE — end
-    </script>
-    <style>
-      .api-shell {
-        display: flex;
-        height: calc(100vh - 70px);
-        max-width: var(--content-max-width);
-        margin: 0 auto;
-      }
+<BaseLayout title={title}>
+  <div class="api-shell">
+    <ApiSideNav categories={categories} currentSlug={currentSlug} />
+    <main class="api-main">
+      <div class="api-toolbar">
+        {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
+        <RegionSelector client:load regions={regions} />
+      </div>
+      <slot />
+    </main>
+  </div>
+</BaseLayout>
 
-      .api-main {
-        flex: 1;
-        min-width: 0;
-        overflow-y: auto;
-        padding: var(--space-xl) var(--space-xl) var(--space-xl) 29px;
-      }
+<style>
+  .api-shell {
+    display: flex;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
 
-      .api-toolbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: var(--space-md);
-      }
+  .api-main {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-xl) var(--space-xl) var(--space-xl) 29px;
+  }
 
-      #theme-toggles {
-        position: fixed;
-        top: 0;
-        right: 0;
-        display: flex;
-        gap: var(--space-xs);
-        z-index: 1000;
-        padding: var(--space-sm);
-        opacity: 0;
-        transition: opacity 0.2s ease;
-      }
+  .api-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+  }
 
-      #theme-toggles:hover {
-        opacity: 1;
-      }
+  @media (max-width: 768px) {
+    .api-shell {
+      flex-direction: column;
+    }
 
-      #theme-toggle,
-      #scroll-toggle {
-        background: none;
-        border: var(--border-width) solid var(--color-border);
-        border-radius: var(--border-radius);
-        font-size: var(--font-size-lg);
-        cursor: pointer;
-        padding: var(--space-xs) var(--space-sm);
-        line-height: 1;
-      }
+    .api-main {
+      padding: var(--space-md);
+    }
 
-      #theme-toggle:hover,
-      #scroll-toggle:hover {
-        border-color: var(--color-brand);
-      }
-
-      @media (max-width: 768px) {
-        .api-shell {
-          flex-direction: column;
-        }
-
-        .api-main {
-          padding: var(--space-md);
-        }
-
-        .api-shell > :global(nav) {
-          width: 100%;
-          height: auto;
-          max-height: 300px;
-          border-right: none;
-          border-bottom: var(--border-width) solid var(--color-border);
-        }
-      }
-    </style>
-  </body>
-</html>
+    .api-shell > :global(nav) {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      border-right: none;
+      border-bottom: var(--border-width) solid var(--color-border);
+    }
+  }
+</style>

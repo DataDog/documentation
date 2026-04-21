@@ -1,0 +1,46 @@
+---
+title: "Placeholder Component"
+---
+
+# Placeholder
+
+A light-purple box with a dark-purple outline and a centered label. Used to stand in for layout elements (header, footer, announcement banner) while their real implementations are under construction. Dark mode swaps the two purples.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `name` | `string` | (required) | The label text rendered inside the placeholder |
+| `class` | `string` | — | Optional extra class applied to the root element, used by the layout wrappers (`AnnouncementBannerPlaceholder`, `HeaderPlaceholder`, `FooterPlaceholder`) to set dimensions and positioning |
+
+## Examples
+
+### Named label
+
+{% placeholder name="HEADER" class="placeholder-demo--short" /%}
+
+{% placeholder name="ANNOUNCEMENT BANNER" class="placeholder-demo--short" /%}
+
+{% placeholder name="FOOTER" class="placeholder-demo--tall" /%}
+
+## Layout wrappers
+
+The primitive is consumed by three thin wrappers that take care of positioning and sizing with Hugo-identical dimensions. All three are rendered automatically by `BaseLayout`, so you can see them right now on this page:
+
+- **`AnnouncementBannerPlaceholder`** — fixed to the top, 30px tall, above the header.
+- **`HeaderPlaceholder`** — fixed below the banner, 60px tall below 992px and 130px tall at 992px and up.
+- **`FooterPlaceholder`** — in normal flow at the bottom of the page, with Hugo-matching responsive vertical padding.
+
+<style>
+  .placeholder-demo--short {
+    height: 40px;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .placeholder-demo--tall {
+    height: 120px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+</style>
