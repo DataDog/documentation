@@ -36,9 +36,9 @@ Use secure embedded dashboards when you need to:
 5. Configure name, default time frame, and theme options.
 6. Click **Share Dashboard**.
 
-After creating the secure embed, Datadog displays your **share token** and **credential**. Copy and store the credential securely on your backend; it is only shown once. Treat the credential like an API key: anyone with access to it can generate valid embed URLs for this dashboard.
+After creating the secure embed, Datadog displays your **base URL** and **credential**. Copy and store the credential securely on your backend; it is only shown once. Treat the credential like an API key: anyone with access to it can generate valid embed URLs for this dashboard.
 
-The share token is visible in the sharing modal at any time, but the credential is masked after initial creation.
+The base URL is visible in the sharing modal at any time, but the credential is masked after initial creation.
 
 <div class="alert alert-info">You cannot change the share type of an existing shared dashboard to or from Secure Embed. To switch share types, delete the current shared dashboard and create a new one.</div>
 
@@ -51,13 +51,12 @@ Each time a browser user loads a page that includes the embedded dashboard, your
 ### URL format
 
 ```
-https://<DOMAIN>/sb/secure-embed/<SHARE_TOKEN>?token=<LOGIN_TOKEN>&nonce=<NONCE>&ts=<TIMESTAMP>
+<BASE_URL>?token=<LOGIN_TOKEN>&nonce=<NONCE>&ts=<TIMESTAMP>
 ```
 
 | Parameter     | Description                                                                   |
 |---------------|-------------------------------------------------------------------------------|
-| `DOMAIN`      | Your Datadog site (for example, `app.datadoghq.com` or `app.datadoghq.eu`).   |
-| `SHARE_TOKEN` | The share token from your secure embed configuration.                         |
+| `BASE_URL`    | The base URL from your secure embed configuration.                            |
 | `LOGIN_TOKEN` | An HMAC-SHA256 hex digest of `NONCE\|TIMESTAMP`, signed with your credential. |
 | `NONCE`       | A unique, randomly generated value for each request.                          |
 | `TIMESTAMP`   | The current UNIX timestamp in seconds.                                        |
@@ -66,7 +65,7 @@ Datadog validates the login token on each request. A token is valid for 30 minut
 
 ### Backend code examples
 
-The following examples show how to generate a secure embed URL on your backend server. Provide the credential from your secure credential store, your share token, and your Datadog site domain.
+The following examples show how to generate a secure embed URL on your backend server. Provide the credential from your secure credential store and the base URL from your secure embed configuration.
 
 {{< programming-lang-wrapper langs="python,javascript,ruby,go" >}}
 
@@ -80,8 +79,7 @@ from urllib.parse import urlencode
 
 def generate_secure_embed_url(
     credential: str,
-    share_token: str,
-    domain: str,
+    base_url: str,
 ) -> str:
     nonce = secrets.token_hex(16)
     timestamp = int(time.time())
@@ -101,7 +99,7 @@ def generate_secure_embed_url(
         "ts": str(timestamp),
     })
 
-    return f"https://{domain}/sb/secure-embed/{share_token}?{query}"
+    return f"{base_url}?{query}"
 ```
 {{< /programming-lang >}}
 
@@ -110,7 +108,7 @@ def generate_secure_embed_url(
 const crypto = require('crypto');
 const querystring = require('querystring');
 
-function generateSecureEmbedUrl(credential, shareToken, domain) {
+function generateSecureEmbedUrl(credential, baseUrl) {
   const nonce = crypto.randomBytes(16).toString('hex');
   const timestamp = Math.floor(Date.now() / 1000);
   const msg = `${nonce}|${timestamp}`;
@@ -123,7 +121,7 @@ function generateSecureEmbedUrl(credential, shareToken, domain) {
     nonce: nonce,
     ts: String(timestamp),
   });
-  return `https://${domain}/sb/secure-embed/${shareToken}?${query}`;
+  return `${baseUrl}?${query}`;
 }
 ```
 {{< /programming-lang >}}
@@ -134,13 +132,13 @@ require 'openssl'
 require 'securerandom'
 require 'uri'
 
-def generate_secure_embed_url(credential, share_token, domain)
+def generate_secure_embed_url(credential, base_url)
   nonce = SecureRandom.hex(16)
   timestamp = Time.now.to_i
   msg = "#{nonce}|#{timestamp}"
   login_token = OpenSSL::HMAC.hexdigest('SHA256', credential, msg)
   query = URI.encode_www_form(token: login_token, nonce: nonce, ts: timestamp.to_s)
-  "https://#{domain}/sb/secure-embed/#{share_token}?#{query}"
+  "#{base_url}?#{query}"
 end
 ```
 {{< /programming-lang >}}
@@ -160,7 +158,7 @@ import (
     "time"
 )
 
-func generateSecureEmbedURL(credential, shareToken, domain string) string {
+func generateSecureEmbedURL(credential, baseURL string) string {
     nonceBytes := make([]byte, 16)
     rand.Read(nonceBytes)
     nonce := hex.EncodeToString(nonceBytes)
@@ -176,7 +174,7 @@ func generateSecureEmbedURL(credential, shareToken, domain string) string {
     params.Set("nonce", nonce)
     params.Set("ts", strconv.FormatInt(timestamp, 10))
 
-    return fmt.Sprintf("https://%s/sb/secure-embed/%s?%s", domain, shareToken, params.Encode())
+    return fmt.Sprintf("%s?%s", baseURL, params.Encode())
 }
 ```
 {{< /programming-lang >}}
@@ -196,7 +194,8 @@ Backend API endpoint (Python/Flask example):
 @cross_origin(origins="*", methods=["GET", "OPTIONS"], allow_headers=["Content-Type"])
 def embed_url():
     credential = get_credential_from_secure_store()
-    iframe_url = generate_secure_embed_url(credential, SHARE_TOKEN, DOMAIN)
+    base_url = get_base_url_from_secure_store()
+    iframe_url = generate_secure_embed_url(credential, base_url)
     return jsonify({"iframeUrl": iframe_url})
 ```
 
@@ -239,7 +238,8 @@ Backend (Python/Flask example):
 @app.get("/dashboard")
 def dashboard():
     credential = get_credential_from_secure_store()
-    iframe_url = generate_secure_embed_url(credential, SHARE_TOKEN, DOMAIN)
+    base_url = get_base_url_from_secure_store()
+    iframe_url = generate_secure_embed_url(credential, base_url)
     return render_template("dashboard.html", iframe_url=iframe_url)
 ```
 
@@ -253,6 +253,144 @@ HTML template:
   allow="fullscreen"
 ></iframe>
 ```
+
+## Multi-tenancy
+
+To serve multiple tenants from a single source dashboard, create one secure embed per tenant. Use `selectable_template_vars` to scope each tenant's default template variable values to their own resources. Each tenant gets a unique credential and base URL, which your backend stores and retrieves when generating iFrame URLs.
+
+```text
+Dashboard
+  └── Secure Embed 1: Tenant A  →  default_values scoped to Tenant A
+  └── Secure Embed 2: Tenant B  →  default_values scoped to Tenant B
+  └── Secure Embed 3: Tenant C  →  default_values scoped to Tenant C
+```
+
+### Manage tenant embeds
+
+The following example uses the [Secure Embed API][5] to create, update, and delete embeds per tenant.
+
+Before using this code, implement the following helper functions for your environment:
+
+- `get_template_var_value_for_tenant(tenant_id)`: returns the template variable values for the tenant
+- `is_new_tenant(tenant_id)`, `is_existing_tenant(tenant_id)`, `is_offboarding_tenant(tenant_id)`: tenant life cycle checks
+- `save_tenant_credentials(tenant_id, token, base_url, credential)`: stores the tenant's share token, base URL, and credential in your secret store
+- `get_secure_embed_token_for_tenant(tenant_id)`: retrieves the share token for a tenant from your secret store
+- `get_base_url_for_tenant(tenant_id)`: retrieves the base URL for a tenant from your secret store
+- `get_credential_for_tenant(tenant_id)`: retrieves the credential for a tenant from your secret store
+- `get_tenant_id_for_user(user_id)`: maps an authenticated user to their tenant ID
+- `delete_tenant_credentials(tenant_id)`: removes the tenant's credentials from your secret store
+
+```python
+import requests
+
+DD_API_URL = "https://api.datadoghq.com"
+DASHBOARD_ID = "abc-def-ghi"
+TEMPLATE_VAR_NAME = "<TEMPLATE_VAR_NAME>"      # Template variable name as defined on the dashboard
+TEMPLATE_VAR_PREFIX = "<TEMPLATE_VAR_PREFIX>"  # Template variable prefix as defined on the dashboard
+HEADERS = {
+    "Content-Type": "application/vnd.api+json",
+    "DD-API-KEY": DD_API_KEY,
+    "DD-APPLICATION-KEY": DD_APP_KEY,
+}
+
+
+def build_selectable_template_vars(tenant_id: str) -> list[dict]:
+    return [
+        {
+            "name": TEMPLATE_VAR_NAME,
+            "prefix": TEMPLATE_VAR_PREFIX,
+            "default_values": get_template_var_value_for_tenant(tenant_id),
+        },
+    ]
+
+
+def onboard_tenant(tenant_id: str) -> dict:
+    resp = requests.post(
+        f"{DD_API_URL}/api/v2/dashboard/{DASHBOARD_ID}/shared/secure-embed",
+        headers=HEADERS,
+        json={
+            "data": {
+                "type": "secure_embed_request",
+                "attributes": {
+                    "status": "active",
+                    "title": f"Dashboard - Tenant {tenant_id}",
+                    "global_time_selectable": False,
+                    "selectable_template_vars": build_selectable_template_vars(tenant_id),
+                    "viewing_preferences": {"high_density": False, "theme": "system"},
+                    "global_time": {"live_span": "1h"},
+                },
+            }
+        },
+    )
+    resp.raise_for_status()
+    data = resp.json()["data"]["attributes"]
+
+    # The credential is only returned on creation. Store it in a secret store.
+    return {
+        "token": data["token"],
+        "base_url": data["url"],
+        "credential": data["credential"],
+    }
+
+
+def update_tenant(tenant_id: str, share_token: str):
+    resp = requests.patch(
+        f"{DD_API_URL}/api/v2/dashboard/{DASHBOARD_ID}/shared/secure-embed/{share_token}",
+        headers=HEADERS,
+        json={
+            "data": {
+                "type": "secure_embed_update_request",
+                "attributes": {
+                    "selectable_template_vars": build_selectable_template_vars(tenant_id),
+                },
+            }
+        },
+    )
+    resp.raise_for_status()
+
+
+def offboard_tenant(share_token: str):
+    resp = requests.delete(
+        f"{DD_API_URL}/api/v2/dashboard/{DASHBOARD_ID}/shared/secure-embed/{share_token}",
+        headers=HEADERS,
+    )
+    resp.raise_for_status()
+
+
+def manage_tenant(tenant_id: str):
+    if is_new_tenant(tenant_id):
+        result = onboard_tenant(tenant_id)
+        save_tenant_credentials(
+            tenant_id, result["token"], result["base_url"], result["credential"]
+        )
+
+    elif is_existing_tenant(tenant_id):
+        token = get_secure_embed_token_for_tenant(tenant_id)
+        update_tenant(tenant_id, token)
+
+    elif is_offboarding_tenant(tenant_id):
+        token = get_secure_embed_token_for_tenant(tenant_id)
+        offboard_tenant(token)
+        delete_tenant_credentials(tenant_id)
+```
+
+### Generate the iFrame URL
+
+The iFrame URL generation follows the same pattern as single-tenant setups. The difference is that your backend looks up the correct credential and base URL for the requesting user's tenant.
+
+```python
+@app.get("/api/embed-url")
+@cross_origin(origins="*", methods=["GET", "OPTIONS"], allow_headers=["Content-Type"])
+def embed_url():
+    user_id = get_authenticated_user_id()
+    tenant_id = get_tenant_id_for_user(user_id)
+    credential = get_credential_for_tenant(tenant_id)
+    base_url = get_base_url_for_tenant(tenant_id)
+    iframe_url = generate_secure_embed_url(credential, base_url)
+    return jsonify({"iframeUrl": iframe_url})
+```
+
+Because `default_values` are scoped to each tenant at embed creation time, each tenant sees only their own data when the dashboard loads.
 
 ## Limitations
 
@@ -282,3 +420,4 @@ If you are using client-side rendering and see CORS errors when your frontend fe
 [2]: https://app.datadoghq.com/organization-settings/public-sharing
 [3]: https://app.datadoghq.com/organization-settings/public-sharing/settings
 [4]: https://app.datadoghq.com/organization-settings/roles
+[5]: /api/latest/dashboard-secure-embed/

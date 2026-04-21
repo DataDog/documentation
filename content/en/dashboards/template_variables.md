@@ -6,6 +6,15 @@ aliases:
     - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
     - /graphing/dashboards/template_variables/
 further_reading:
+- link: "/dashboards/"
+  tag: "Documentation"
+  text: "Create Dashboards in Datadog"
+- link: "/dashboards/sharing/"
+  tag: "Documentation"
+  text: "Share your Graphs outside of Datadog"
+- link: "/dashboards/widgets/"
+  tag: "Documentation"
+  text: "Discover Widgets for your Dashboard"
 - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
   tag: "Blog"
   text: "Design effective executive dashboards with Datadog"
@@ -21,15 +30,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/template-variable-available-values/"
   tag: "Blog"
   text: "Filter dashboards faster with template variable available values"
-- link: "/dashboards/"
-  tag: "Documentation"
-  text: "Create Dashboards in Datadog"
-- link: "/dashboards/sharing/"
-  tag: "Documentation"
-  text: "Share your Graphs outside of Datadog"
-- link: "/dashboards/widgets/"
-  tag: "Documentation"
-  text: "Discover Widgets for your Dashboard"
 ---
 
 ## Overview
@@ -38,12 +38,12 @@ Template variables allow you to dynamically filter or group widgets in a dashboa
 
 A template variable is defined by:
 
-* **Tag or Attribute**:
+* {{< ui >}}Tag or Attribute{{< /ui >}}:
     * Tag: If you follow the recommended [tagging format][1] (`<KEY>:<VALUE>`), the *Tag* is the `<KEY>`.
     * Attribute: Use a [facet or measure as the template variable](#logs-apm-and-rum-queries).
-* **Name**: A unique name for the template variable that appears in queries on the dashboard. Template variables are automatically named after the selected tag or attribute.
-* **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
-* **Available Values**: The tag or attribute values available for selection in the dropdown menu. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
+* {{< ui >}}Name{{< /ui >}}: A unique name for the template variable that appears in queries on the dashboard. Template variables are automatically named after the selected tag or attribute.
+* {{< ui >}}Default Value{{< /ui >}}: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
+* {{< ui >}}Available Values{{< /ui >}}: The tag or attribute values available for selection in the dropdown menu. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
 ### Template variable values
 Template variable values (values available using the template variable dropdown menus) are populated based on the sources that widgets in the dashboard are using. For example, if your dashboard has widgets querying logs, only values from logs are shown. If your dashboard has widgets querying logs, metrics, and RUM, values from logs, metrics, and RUM are shown.
@@ -69,15 +69,15 @@ If you need to see all variables at once as you scroll, click **Expand template 
 
 ## Add a template variable
 To add a template variable in a dashboard:
-1. Click **Add Variable** (or **+** if there are existing template variables)
+1. Click {{< ui >}}Add Variable{{< /ui >}} (or {{< ui >}}+{{< /ui >}} if there are existing template variables)
 2. Select from a list of recommended template variables or search for the specific tag you have in mind.
 4. Select the widgets to apply this template variable to.
-6. Click **Save**.
+6. Click {{< ui >}}Save{{< /ui >}}.
 
 
 ### Configure template variable
 When the template variable side panel is open, you can:
-* Apply (or remove) this variable to selected widgets (note the **Select All** or **Deselect All** options)
+* Apply (or remove) this variable to selected widgets (note the {{< ui >}}Select All{{< /ui >}} or {{< ui >}}Deselect All{{< /ui >}} options)
 * Switch between filtering and grouping
 * Change the display name of the variable (displayed in the header and widget query)
 * Select a default dropdown value
@@ -93,10 +93,10 @@ When the template variable side panel is open, you can:
 
 ### Create
 
-1. Click on the **Saved Views** dropdown menu to the left of the template variables in your dashboard. When you update a template variable value, the value does not automatically save to a view.
-1. To save your current template variables' values in a view, select **Save selections as view** from the **Saved Views** dropdown menu.
+1. Click on the {{< ui >}}Saved Views{{< /ui >}} dropdown menu to the left of the template variables in your dashboard. When you update a template variable value, the value does not automatically save to a view.
+1. To save your current template variables' values in a view, select {{< ui >}}Save selections as view{{< /ui >}} from the {{< ui >}}Saved Views{{< /ui >}} dropdown menu.
 1. Enter a unique name for the view with an optional description.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="/dashboards/template_variables/saved_view_create.png" alt="Create saved views by selecting save selections as view" style="width:100%;" >}}
 
@@ -105,28 +105,28 @@ Your saved view appears in the dropdown menu. Click on the view to retrieve your
 ### Delete
 
 1. Click on the saved views dropdown menu and hover over the desired saved view.
-1. Click **Delete View**.
+1. Click {{< ui >}}Delete View{{< /ui >}}.
 
 ### Modify
 
-The **Default view** can only be edited by changing the default values of the template variables. To edit the Default View:
+The {{< ui >}}Default view{{< /ui >}} can only be edited by changing the default values of the template variables. To edit the Default View:
 1. Hover over the templates.
-1. Click **Edit** when the button appears.
-1. Click **Done** to save.
+1. Click {{< ui >}}Edit{{< /ui >}} when the button appears.
+1. Click {{< ui >}}Done{{< /ui >}} to save.
 
 To modify template variables values for other saved views:
 1. Select the desired saved view from the dropdown menu.
 1. Edit the template variables to have the new desired models.
 1. Open the dropdown menu again.
-1. Click **Save Changes**.
+1. Click {{< ui >}}Save Changes{{< /ui >}}.
 
 {{< img src="/dashboards/template_variables/saved_views_update_template_variable.png" alt="Modify the template variables of your saved views" style="width:100%;" >}}
 
 To edit the title and description:
 1. Hover over the desired saved view from the dropdown menu.
-1. Click **Edit**.
+1. Click {{< ui >}}Edit{{< /ui >}}.
 1. Modify the title or description.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Usage
 
@@ -138,7 +138,7 @@ Template variables work with log, APM, and RUM widgets because they share the sa
 
 On log, APM, and RUM widgets, you can use wildcards in the middle of a value (for example, `eng*@example.com`) or use multiple wildcards in a value (for example, `*prod*`).
 
-**Note**: Using **Add to all** for this type of template variable adds the variable to all log, APM, and RUM widgets.
+**Note**: Using {{< ui >}}Add to all{{< /ui >}} for this type of template variable adds the variable to all log, APM, and RUM widgets.
 
 ### Widgets
 

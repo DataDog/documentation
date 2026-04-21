@@ -1,4 +1,5 @@
 ---
+id: serverless
 core_product:
 - monitorización serverless
 title: serverless

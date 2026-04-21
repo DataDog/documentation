@@ -21,7 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/iam_access_analyzer/README.md
 display_on_public_website: true
@@ -60,7 +60,7 @@ tile:
 
 ## 概要
 
-Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon account to continuously analyze IAM permissions granted with any of your account policies. Datadog integrates with Amazon IAM Access Analyzer using a Lambda function that ships its findings as logs to Datadog.
+Amazon アカウント全体で AWS Identity and Access Management (IAM) Access Analyzer を使用して、アカウント内のいずれかのポリシーによって付与された IAM アクセス許可を継続的に分析します。Datadog は、検出結果をログとして Datadog に送信する Lambda 関数を使用して、Amazon IAM Access Analyzer と統合します。
 
 ## セットアップ
 
@@ -68,9 +68,9 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
 
 1. [Datadog Forwarder][1] Lambda 関数をまだセットアップしていない場合は、セットアップします。
 
-2. Create a new rule with type `Rule with an event pattern` in AWS EventBridge.
+2. Amazon EventBridge で、タイプ `Rule with an event pattern` を指定して新しいルールを作成します。
 
-3. For the event source configuration, select `Other`. For `Creation method`, select `Custom pattern (JSON editor)`. For `Event pattern`, copy and paste the following JSON:
+3. イベント ソースの設定では、`Other` を選択します。`Creation method` では、`Custom pattern (JSON editor)` を選択します。`Event pattern` には、次の JSON をコピーして貼り付けます:
 
     ```json
     {
@@ -78,7 +78,7 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
     }
     ```
 
-4. Select `AWS service` to use as the target type. Select `Lambda function` as the target and select the Datadog Forwarder Lambda or enter the ARN.
+4. ターゲット タイプとして `AWS service` を選択します。ターゲットとして `Lambda function` を選択し、Datadog Forwarder Lambda を選択するか、ARN を入力します。
 
 5. 規則を保存します。
 
@@ -96,7 +96,7 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
 
 ### Logs
 
-This integration can be configured to send logs.
+このインテグレーションは、ログを送信するように構成できます。
 
 ### イベント
 
@@ -106,6 +106,6 @@ This integration can be configured to send logs.
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: /ja/logs/guide/forwarder/
+[1]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [2]: https://app.datadoghq.com/logs?query=source%3Aaccess-analyzer
 [3]: https://docs.datadoghq.com/ja/help

@@ -11,10 +11,10 @@ Use the Redshift component to represent data warehouses from your Amazon Web Ser
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Nodes**: Enter the number of nodes for the Redshift cluster.
-- **Instance type**: Select the Redshift instance type. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **Size**: Select the size of the Redshift instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Nodes{{< /ui >}}: Enter the number of nodes for the Redshift cluster.
+- {{< ui >}}Instance type{{< /ui >}}: Select the Redshift instance type. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- {{< ui >}}Size{{< /ui >}}: Select the size of the Redshift instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
 
 ## API
 
