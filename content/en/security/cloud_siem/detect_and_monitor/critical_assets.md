@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-You can identify critical assets to customize the security signals associated with them. You can customize severity levels, apply custom tags, and isolate changes to specific rules, so you can get the information you need from the signals you see.
+Identify critical assets to customize the security signals associated with them. For each asset, you can adjust severity levels, apply custom tags, and isolate changes to specific rules.
 
 ### How it works
 
@@ -42,15 +42,15 @@ You can identify critical assets to customize the security signals associated wi
 ## View the signals a critical asset affected
 
 1. In Datadog, go to **Security** > **Settings** > [**Critical Assets**][1].
-1. Beside a critical asset, click the **More Options** icon {{< img src="icons/kebab.png" inline="true" style="height:1em" >}}, then click **Signals affected**. The Signals Explorer, pre-populated with a query to show the affected signals, opens in a new tab.
+1. Beside a critical asset, click the **More Options** icon {{< img src="icons/kebab.png" inline="true" style="height:1em" >}}, then click **Signals affected**. The Signals Explorer, prepopulated with a query to show the affected signals, opens in a new tab.
 
 ## View critical asset data in security signals
  
 In every security signal that a critical asset has modified, an **Adjusted Severity** pill indicates both the original and adjusted severity levels. You can hover over that pill to see what adjustment the critical asset applied:
-{{< img src="security/security_monitoring/critical_assets_pill.png" alt="Adjusted Severity pill and pop-up, indicating that a Cloudtrail signal's severity was increased from Low to Medium" style="width:50%;" >}}
+{{< img src="security/security_monitoring/critical_assets_pill.png" alt="Adjusted Severity pill and pop-up, indicating that a CloudTrail signal's severity was increased from Low to Medium" style="width:50%;" >}}
 
-On the **JSON** tab of a security signal, you can also scroll down to the `critical_assets_data` object, which includes information on critical assets associated with it, and how they affected the signal's severity.
-<div class="alert alert-info">If a critical asset's severity score was overridden by a higher severity score, it may not appear in the <code>critical_assets_data</code> object.</div>
+On the **JSON** tab of a security signal, you can also find the `critical_assets_data` object, which includes information about the critical assets associated with it, and how they affected the signal's severity.
+<div class="alert alert-info">If a critical asset's severity level was overridden by a higher severity level, it may not appear in the <code>critical_assets_data</code> object.</div>
 
 ## Further reading
 
