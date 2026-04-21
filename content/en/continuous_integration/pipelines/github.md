@@ -127,28 +127,28 @@ For a full explanation, see the guide on [using CI jobs failure analysis][23].
 
 <div class="alert alert-info">Automatic job retries are in Preview. To request access, contact your Datadog account team.</div>
 
-Automatic job retries save developer time by re-running only the failures that are likely transient—such as network timeouts, infrastructure hiccups, or flaky tests—while leaving genuine code defects untouched. Datadog classifies each failed job with an AI-powered error model and, when the failure is determined retriable, triggers a retry through the GitHub Actions API without manual intervention.
+Automatic job retries save developer time by re-running failures that are likely transient, such as network timeouts, infrastructure failures, or flaky tests. Genuine code defects are left alone. Datadog runs each failed job through an AI-powered error classifier. When the failure is identified as retriable, Datadog triggers a retry through the GitHub Actions API without manual intervention.
 
 ### How it works
 
 1. A job fails in your workflow.
 2. Datadog's AI error classifier inspects the job's logs and error context to determine whether the failure is transient.
 3. If the failure is classified as retriable, Datadog requests a retry through the GitHub Actions API.
-4. Datadog retries each job up to a configurable maximum to prevent infinite retry loops.
-5. The retry outcome is reflected on the original pipeline in CI Visibility.
+4. Datadog retries each job up to a maximum number of attempts to prevent infinite retry loops.
+5. Datadog records the retry outcome on the original pipeline in CI Visibility.
 
 ### Requirements
 
 - CI Visibility enabled for your GitHub Actions integration (see [Configure the Datadog integration](#configure-the-datadog-integration)).
 - [Datadog Source Code Integration][27] configured for the repositories where you want automatic retries.
-- Automatic job retries enabled for your organization. Because this feature is in Preview, access is gated—contact your Datadog account team to request enablement.
+- Automatic job retries enabled for your organization. Because this feature is in Preview, access is gated. Contact your Datadog account team to request enablement.
 
 ### GitHub-specific behavior
 
 GitHub Actions imposes two provider-level limitations that shape how retries work:
 
 - **Retries happen after the workflow finishes.** The GitHub API does not allow retrying an individual job while the rest of the workflow is still running. Datadog waits for the workflow to reach a final state before issuing retries.
-- **All failed jobs are retried together.** The GitHub API does not support retrying a single job when other jobs in the workflow have also failed. Datadog uses the "rerun failed jobs" endpoint, which re-runs every failed job in the workflow. This may increase the GitHub Actions compute minutes consumed by your pipelines.
+- **All failed jobs are retried together.** The GitHub API does not support retrying a single job when other jobs in the workflow have also failed. Datadog reruns every failed job in the workflow through a single GitHub API call. This may increase your GitHub Actions compute usage.
 
 ### Protected branches
 
