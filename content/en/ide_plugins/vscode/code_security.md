@@ -17,11 +17,11 @@ further_reading:
 
 ## Overview
 
-The Code Security features in the Datadog extension for VS Code and Cursor help you detect and fix security issues in your code before you commit your changes. The extension runs [Static Code Analysis](#static-code-analysis) to catch vulnerabilities, bugs, and maintainability issues, and [Secret Scanning](#secret-scanning) to find exposed credentials such as API keys, tokens, and passwords.
+The Datadog extension for VS Code and Cursor helps you detect and fix security issues before you commit your changes. [Static Code Analysis](#static-code-analysis) catches vulnerabilities, bugs, and maintainability issues. [Secret Scanning](#secret-scanning) finds exposed credentials such as API keys, tokens, and passwords.
 
 ## Static Code Analysis
 
-The extension runs [Static Code Analysis][1] rules on the source files in your workspace, detecting and fixing security vulnerabilities, bugs, and maintainability issues before you commit your changes.
+The extension runs [Static Code Analysis][1] rules on the source files in your workspace. It flags security vulnerabilities, bugs, and maintainability issues before you commit your changes.
 
 Static Code Analysis supports many programming languages. For a complete list, see [Static Code Analysis Rules][2]. Issues are shown in the source code editor, and you can apply suggested fixes directly.
 
@@ -41,7 +41,7 @@ To analyze an entire folder or workspace, right-click a folder in the file explo
 
 ## Secret Scanning
 
-The extension runs [Secret Scanning][4] on the source files in your workspace to detect exposed credentials, such as API keys, tokens, and passwords, before you commit your changes. File contents are scanned locally, and findings are shown in the editor as you type.
+The extension runs [Secret Scanning][4] on the source files in your workspace. It flags exposed credentials such as API keys, tokens, and passwords before you commit your changes. File contents are scanned locally, and findings are shown in the editor as you type.
 
 {{< img src="/ide_plugins/vscode/secret_scanning.mp4" alt="Preview of Secret Scanning" style="width:100%" video=true >}}
 
@@ -67,7 +67,7 @@ Detected secrets are shown in three places:
 
 ### Suppress a finding
 
-To suppress an individual detection, use the code action on the flagged secret to insert a `no-dd-secrets` comment on the line above. The comment suppresses all secret findings on the following line.
+To suppress an individual detection, use the code action for the flagged secret to insert a `no-dd-secrets` comment on the line above. The comment suppresses all secret findings on the following line.
 
 ### Turn Secret Scanning on or off
 
