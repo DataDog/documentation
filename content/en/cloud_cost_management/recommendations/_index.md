@@ -725,7 +725,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
   - `-@jira_issues.issue_key:*` - Show only recommendations without a Jira issue
   - `jira_issues.issue_key:ABC*` - Filter by specific Jira project prefix
 
-- **Bits AI Dev Agent code fixes**: Code fixes are available for all S3 recommendations. In these situations, the Bits AI Dev Agent (in Preview) creates production-ready pull requests to implement cloud resource changes and cost optimizations. Join the Preview and [set up the Bits AI Dev Agent][13] to use this feature.
+- **Bits AI Dev Agent code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, the Bits AI Dev Agent (in Preview) creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. Join the Preview and [set up the Bits AI Dev Agent][13] to use this feature.
 
   {{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
   Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
