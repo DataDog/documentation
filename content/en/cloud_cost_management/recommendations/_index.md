@@ -692,9 +692,9 @@ For each cloud account that you would like to receive recommendations for:
 1. Configure [Cloud Cost Management][2] to send billing data to Datadog.
    - For Azure, this requires using the App Registration method to collect billing data.
 1. Enable [resource collection][3] for recommendations.
-   - For AWS, enable resource collection in the **Resource Collection** tab on the [AWS integration tile][4].
+   - For AWS, enable resource collection in the {{< ui >}}Resource Collection{{< /ui >}} tab on the [AWS integration tile][4].
    - For Azure, enable resource collection with the appropriate integration. If your organization is on the Datadog US3 site, the [Azure Native Integration][9] enables this automatically through metrics collection. For all other sites, enabling resource collection within the [Azure integration tile][8] is required.
-   - For GCP, enable resource collection in the **Resource Collection** tab on the [Google Cloud Platform integration tile][10].
+   - For GCP, enable resource collection in the {{< ui >}}Resource Collection{{< /ui >}} tab on the [Google Cloud Platform integration tile][10].
 1. Install the [Datadog Agent][5] (required for Downsize recommendations).
 
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
@@ -705,20 +705,20 @@ Assign a status to each recommendation to track cost optimization progress acros
 
 | Status | Description |
 |--------|-------------|
-| Open | (Default) The recommendation has not been triaged. |
-| In Progress | Work is underway to address this recommendation. |
-| Completed | The recommended action has been taken or is no longer relevant. |
-| Dismissed | No work is planned for this recommendation over the time frame specified when dismissing. |
+| {{< ui >}}Open{{< /ui >}} | (Default) The recommendation has not been triaged. |
+| {{< ui >}}In Progress{{< /ui >}} | Work is underway to address this recommendation. |
+| {{< ui >}}Completed{{< /ui >}} | The recommended action has been taken or is no longer relevant. |
+| {{< ui >}}Dismissed{{< /ui >}} | No work is planned for this recommendation over the time frame specified when dismissing. |
 
 ### Change a recommendation status
 
-1. Click a recommendation in the [**Cloud Cost Recommendations**][1] list to open the side panel.
+1. Click a recommendation in the [{{< ui >}}Cloud Cost Recommendations{{< /ui >}}][1] list to open the side panel.
 1. Use the status dropdown to select a new status.
 
 ## Recommendation action-taking
 You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
 
-- **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the "Active Recommendations" list and clicking "Create Jira issue." Created issues are tagged and link back to the recommendation in Datadog.
+- **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the {{< ui >}}Active Recommendations{{< /ui >}} list and clicking {{< ui >}}Create Jira issue{{< /ui >}}. Created issues are tagged and link back to the recommendation in Datadog.
 
   To filter recommendations by Jira status, use the following query options:
   - `@jira_issues.issue_key:*` - Show only recommendations with a Jira issue
@@ -731,9 +731,9 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
   Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
   {{< /callout >}}
 
-- **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking "Delete EBS Volume", directly within Cloud Cost Management.
-- **Datadog Case Management**: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations.
-- **Dismiss**: Use "Dismiss" in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the "Dismissed" tab.
+- **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking {{< ui >}}Delete EBS Volume{{< /ui >}}, directly within Cloud Cost Management.
+- **Datadog Case Management**: Users can go to the recommendation side panel and click {{< ui >}}Create Case{{< /ui >}} to generate a case to manage and take action on recommendations.
+- **Dismiss**: Use {{< ui >}}Dismiss{{< /ui >}} in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the {{< ui >}}Dismissed{{< /ui >}} tab.
 
 ## Recommendation and resource descriptions
 
