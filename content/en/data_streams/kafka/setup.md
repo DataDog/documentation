@@ -1,8 +1,6 @@
 ---
 title: Kafka Monitoring Setup
 description: Set up Data Streams Monitoring's Kafka Monitoring, including prerequisites, Agent configuration, and the additional steps required to inspect Kafka messages.
-aliases:
-  - /data_streams/kafka/setup
 ---
 
 This page covers the prerequisites and setup steps for Data Streams Monitoring's Kafka Monitoring.
