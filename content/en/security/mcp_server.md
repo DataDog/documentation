@@ -66,17 +66,6 @@ The `security` toolset exposes the following tools to your AI client. For genera
 : Retrieves full security finding objects. Use this when you need complete finding details or when SQL-based analysis is not sufficient. Prefer `analyze_security_findings` for most analysis tasks.
 : *Permissions required: `Security Monitoring Findings Read`*
 
-## Required permissions
-
-The Datadog role assigned to you must include the following permissions to use each tool:
-
-| Tool | Required permissions |
-|---|---|
-| `search_datadog_security_signals` | `Security Signals Read` |
-| `security_findings_schema` | `Security Monitoring Findings Read` |
-| `analyze_security_findings` | `Security Monitoring Findings Read`, `Timeseries` |
-| `search_security_findings` | `Security Monitoring Findings Read` |
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
