@@ -1,0 +1,41 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('ApiStatusAlert component — visual', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/docs/components/api-status-alert');
+    // Wait for all Tabs islands to finish hydrating and hiding their pre-hydration source.
+    await expect(page.locator('[data-tabs-source]').first()).toBeHidden();
+  });
+
+  test('deprecated api status alert matches screenshot', async ({ page }) => {
+    const alert = page
+      .locator('[data-testid="tabs-panel"]')
+      .locator('[data-api-alert-type="deprecated"]')
+      .first();
+    await expect(alert).toHaveScreenshot('api-status-alert-deprecated.png');
+  });
+
+  test('deprecated with newer version link api status alert matches screenshot', async ({ page }) => {
+    const alert = page
+      .locator('[data-testid="tabs-panel"]')
+      .locator('[data-api-alert-type="deprecated"]')
+      .nth(1);
+    await expect(alert).toHaveScreenshot('api-status-alert-deprecated-newer-version.png');
+  });
+
+  test('unstable api status alert matches screenshot', async ({ page }) => {
+    const alert = page
+      .locator('[data-testid="tabs-panel"]')
+      .locator('[data-api-alert-type="unstable"]')
+      .first();
+    await expect(alert).toHaveScreenshot('api-status-alert-unstable.png');
+  });
+
+  test('beta api status alert matches screenshot', async ({ page }) => {
+    const alert = page
+      .locator('[data-testid="tabs-panel"]')
+      .locator('[data-api-alert-type="beta"]')
+      .first();
+    await expect(alert).toHaveScreenshot('api-status-alert-beta.png');
+  });
+});

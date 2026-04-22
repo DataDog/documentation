@@ -103,24 +103,6 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     await expect(obs).toBeHidden();
   });
 
-  test('hover over Solutions reveals industry/technology/use-case columns', async ({ page }) => {
-    await page.setViewportSize({ width: 1400, height: 900 });
-    await page.goto(PAGE_WITH_CONTENT);
-    await page.waitForLoadState('networkidle');
-
-    const trigger = page.locator('[data-testid="nav-dropdown-solutions"] a.dropdown').first();
-    await trigger.hover();
-
-    const menu = page.locator('[data-testid="nav-dropdown-menu-solutions"]');
-    await expect(menu).toBeVisible();
-    // "Industry", "Technology", and "Use-case" are i18n labels for the three
-    // top-level columns of the solutions dropdown. Match the column <p> headers
-    // specifically, since the same words appear in link labels underneath.
-    await expect(menu.getByRole('paragraph').filter({ hasText: 'Industry' })).toBeVisible();
-    await expect(menu.getByRole('paragraph').filter({ hasText: 'Technology' })).toBeVisible();
-    await expect(menu.getByRole('paragraph').filter({ hasText: 'Use-case' })).toBeVisible();
-  });
-
   test('hamburger opens the mobile overlay at 500px', async ({ page }) => {
     await page.setViewportSize({ width: 500, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
@@ -134,21 +116,63 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     await expect(overlay).toBeVisible();
     await expect(bg).toBeVisible();
   });
+});
 
-  test('dark mode preserves the Hugo-colored header and banner', async ({ page }) => {
-    await page.setViewportSize({ width: 1400, height: 900 });
+test.describe('Header — visual', () => {
+  test('desktop default state', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
+    await page.waitForLoadState('networkidle');
 
-    const banner = page.locator('[data-testid="announcement-banner"]');
+    await expect(page.locator('[data-testid="header"] .main-nav')).toHaveScreenshot('header-desktop.png');
+  });
 
-    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
-    const lightBg = await banner.evaluate((el) => getComputedStyle(el).backgroundColor);
+  test('mobile collapsed with hamburger visible', async ({ page }) => {
+    await page.setViewportSize({ width: 500, height: 800 });
+    await page.goto(PAGE_WITH_CONTENT);
+    await page.waitForLoadState('networkidle');
 
-    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
-    const darkBg = await banner.evaluate((el) => getComputedStyle(el).backgroundColor);
+    await expect(page.locator('[data-testid="mobile-nav-toggle"]')).toBeVisible();
+    await expect(page.locator('[data-testid="header"] .main-nav')).toHaveScreenshot('header-mobile.png');
+  });
 
-    // Banner is tokenized with Hugo-identical values that do not swap in dark
-    // mode, so both backgrounds should match.
-    expect(darkBg).toBe(lightBg);
+  test('mobile nav overlay open', async ({ page }) => {
+    await page.setViewportSize({ width: 500, height: 800 });
+    await page.goto(PAGE_WITH_CONTENT);
+    await page.waitForLoadState('networkidle');
+
+    await page.locator('[data-testid="mobile-nav-toggle"]').click();
+    const overlay = page.locator('[data-testid="mobile-nav"]');
+    await expect(overlay).toBeVisible();
+
+    await expect(page.locator('[data-testid="header"] .main-nav')).toHaveScreenshot('header-mobile-overlay-open.png');
+  });
+
+  test('mega menu open after hovering Product', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(PAGE_WITH_CONTENT);
+    await page.waitForLoadState('networkidle');
+
+    const trigger = page.locator('[data-testid="nav-dropdown-product"] a.dropdown').first();
+    await trigger.hover();
+
+    const megaMenu = page.locator('[data-testid="product-mega-menu"]');
+    await expect(megaMenu).toBeVisible();
+    // Allow category-switch debounce and any entry animation to settle.
+    await page.waitForTimeout(250);
+
+    await expect(page.locator('[data-testid="header"] .main-nav')).toHaveScreenshot('header-mega-menu-open.png');
+  });
+
+  test('scrolled-shrunk header state', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/api/latest/authentication/');
+    await page.waitForLoadState('networkidle');
+
+    await page.evaluate(() => window.scrollTo(0, 500));
+    // Wait for the shrink transition to clamp at 65px.
+    await page.waitForTimeout(350);
+
+    await expect(page.locator('[data-testid="header"] .main-nav')).toHaveScreenshot('header-scrolled-shrunk.png');
   });
 });

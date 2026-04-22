@@ -9,13 +9,23 @@ const components = docs
 ---
 
 <BaseLayout title="Components">
-  <nav><a href="/">&larr; Home</a></nav>
-  <div class="prose">
-    <h1>Components</h1>
-    <ul>
-      {components.map((entry) => (
-        <li><a href={`/docs/${entry.id}/`}>{entry.data.title}</a></li>
-      ))}
-    </ul>
+  <div class="docs-page">
+    <nav><a href="/">&larr; Home</a></nav>
+    <div class="prose">
+      <h1>Components</h1>
+      <ul>
+        {components.map((entry) => (
+          <li><a href={`/docs/${entry.id}/`}>{entry.data.title}</a></li>
+        ))}
+      </ul>
+    </div>
   </div>
 </BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+</style>

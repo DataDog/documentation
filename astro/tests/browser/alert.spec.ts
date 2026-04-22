@@ -1,23 +1,21 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Alert component', () => {
+test.describe('Alert component — visual', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/docs/components/alert');
+    // Wait for all Tabs islands to finish hydrating and hiding their pre-hydration source.
+    await expect(page.locator('[data-tabs-source]').first()).toBeHidden();
   });
 
-  test('renders all alert types', async ({ page }) => {
-    const types = ['info', 'danger', 'warning', 'tip'];
+  const types: Array<'info' | 'danger' | 'warning' | 'tip'> = ['info', 'danger', 'warning', 'tip'];
 
-    for (const type of types) {
-      const alert = page.locator(`[data-alert-type="${type}"]`).first();
-      await expect(alert).toBeVisible();
-    }
-  });
-
-  test('each alert displays its label', async ({ page }) => {
-    await expect(page.getByText('Note')).toBeVisible();
-    await expect(page.getByText('Caution')).toBeVisible();
-    await expect(page.getByText('Warning')).toBeVisible();
-    await expect(page.getByText('Tip')).toBeVisible();
-  });
+  for (const type of types) {
+    test(`${type} alert matches screenshot`, async ({ page }) => {
+      const alert = page
+        .locator('[data-testid="tabs-panel"]')
+        .locator(`[data-alert-type="${type}"]`)
+        .first();
+      await expect(alert).toHaveScreenshot(`alert-${type}.png`);
+    });
+  }
 });

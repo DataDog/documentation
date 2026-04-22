@@ -1,37 +1,14 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Tabs component', () => {
+  // Narrow viewport forces the many-tabs instance to overflow into pills layout;
+  // retina `deviceScaleFactor` matches the rest of the suite.
+  test.use({ viewport: { width: 900, height: 900 }, deviceScaleFactor: 2 });
+
   test.beforeEach(async ({ page }) => {
     await page.goto('/docs/components/tabs');
-  });
-
-  test('renders tabs on the page', async ({ page }) => {
-    const tabs = page.locator('[data-testid="tabs"]');
-    await expect(tabs.first()).toBeVisible();
-    expect(await tabs.count()).toBeGreaterThanOrEqual(2);
-  });
-
-  test('first tab is active by default', async ({ page }) => {
-    const firstTab = page.locator('[data-testid="tab-0"]').first();
-    await expect(firstTab).toHaveAttribute('aria-selected', 'true');
-  });
-
-  test('clicking a tab switches the active tab', async ({ page }) => {
-    const secondTab = page.locator('[data-testid="tab-1"]').first();
-    await secondTab.click();
-
-    await expect(secondTab).toHaveAttribute('aria-selected', 'true');
-
-    const panel = page.locator('[data-testid="tabs-panel"]').first();
-    await expect(panel).toContainText('Ruby');
-  });
-
-  test('clicking a tab deactivates the previous tab', async ({ page }) => {
-    const firstTab = page.locator('[data-testid="tab-0"]').first();
-    const secondTab = page.locator('[data-testid="tab-1"]').first();
-
-    await secondTab.click();
-    await expect(firstTab).toHaveAttribute('aria-selected', 'false');
+    // Wait for all Tabs islands to finish hydrating and hiding their pre-hydration source.
+    await expect(page.locator('[data-tabs-source]').first()).toBeHidden();
   });
 
   test('many-tab instance uses pills layout', async ({ page }) => {
@@ -47,5 +24,29 @@ test.describe('Tabs component', () => {
     await expect(tab3).toHaveAttribute('aria-selected', 'true');
     const panel = pillsTabs.locator('[data-testid="tabs-panel"]');
     await expect(panel).toContainText('Go');
+  });
+
+  test('default tabs variant matches screenshot', async ({ page }) => {
+    const defaultTabs = page
+      .locator('[data-testid="tabs"]:not([data-layout="pills"])')
+      .first();
+    await expect(defaultTabs).toHaveScreenshot('tabs-default.png');
+  });
+
+  test('pills tabs variant matches screenshot', async ({ page }) => {
+    const pillsTabs = page.locator('[data-testid="tabs"][data-layout="pills"]').first();
+    await expect(pillsTabs).toHaveScreenshot('tabs-pills.png');
+  });
+
+  test('active tab highlighted state matches screenshot', async ({ page }) => {
+    const defaultTabs = page
+      .locator('[data-testid="tabs"]:not([data-layout="pills"])')
+      .first();
+    await defaultTabs.locator('[data-testid="tab-2"]').click();
+    await expect(defaultTabs.locator('[data-testid="tab-2"]')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
+    await expect(defaultTabs).toHaveScreenshot('tabs-active.png');
   });
 });

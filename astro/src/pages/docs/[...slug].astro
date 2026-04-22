@@ -16,13 +16,21 @@ const { Content } = await render(entry);
 ---
 
 <BaseLayout title={entry.data.title}>
-  <nav><a href="/">&larr; Home</a></nav>
-  <div class="prose">
-    <Content />
+  <div class="docs-page">
+    <nav><a href="/">&larr; Home</a></nav>
+    <div class="prose">
+      <Content />
+    </div>
   </div>
 </BaseLayout>
 
 <style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
   h1 {
     border-bottom: var(--border-width-thick) solid var(--color-border-strong);
     padding-bottom: var(--space-sm);

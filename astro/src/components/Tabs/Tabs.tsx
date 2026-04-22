@@ -65,7 +65,11 @@ export function Tabs({ labels, children, onTabChange, variant }: TabsProps) {
     checkOverflow();
     window.addEventListener('resize', checkOverflow);
     return () => window.removeEventListener('resize', checkOverflow);
-  }, [tabLabels, variant]);
+    // Depend on a stable string form of the labels instead of the array
+    // identity; `domTabs.map(...)` produces a new array each render, and
+    // Preact doesn't bail out of renders when `setUsePills` is called with an
+    // unchanged value, so the effect would otherwise loop.
+  }, [tabLabels.join('\u0000'), variant]);
 
   if (tabLabels.length === 0) {
     return <div ref={containerRef} data-testid="tabs" />;
