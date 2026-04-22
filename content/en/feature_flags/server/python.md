@@ -221,6 +221,51 @@ When your application exits, shut down the OpenFeature API to clean up resources
 api.shutdown()
 {{< /code-block >}}
 
+## Testing
+
+Do not use the Datadog provider in unit tests: it requires a running Agent and Remote Configuration. Use OpenFeature's `InMemoryProvider` instead. It is bundled with `openfeature-sdk`, so no additional dependency is required.
+
+The OpenFeature API is a global singleton (`openfeature.api.set_provider` mutates module-level state). Use a `function`-scoped pytest fixture and call `api.shutdown()` in teardown so tests do not leak flag state into each other.
+
+{{< code-block lang="python" filename="test_flags.py" >}}
+import pytest
+from openfeature import api
+from openfeature.evaluation_context import EvaluationContext
+from openfeature.provider.in_memory_provider import InMemoryProvider, InMemoryFlag
+
+
+@pytest.fixture
+def client():
+    flags = {
+        "new-checkout-flow": InMemoryFlag(
+            default_variant="off",
+            variants={"on": True, "off": False},
+        ),
+        "ui-theme": InMemoryFlag(
+            default_variant="light",
+            variants={"light": "light", "dark": "dark"},
+        ),
+    }
+    api.set_provider(InMemoryProvider(flags))
+    yield api.get_client()
+    api.shutdown()
+
+
+def test_boolean_flag_returns_default_variant(client):
+    assert client.get_boolean_value("new-checkout-flow", True) is False
+
+
+def test_string_flag_with_context(client):
+    ctx = EvaluationContext(targeting_key="user-123")
+    assert client.get_string_value("ui-theme", "dark", ctx) == "light"
+
+
+def test_missing_flag_returns_default(client):
+    assert client.get_boolean_value("does-not-exist", True) is True
+{{< /code-block >}}
+
+`InMemoryFlag` takes `default_variant` (a string variant name) and `variants` (a dict mapping variant names to typed values). Passing a value as `default_variant` instead of a variant name is a common mistake. For targeting logic, pass a `context_evaluator` callback that receives an `EvaluationContext` and returns a variant name.
+
 ## Troubleshooting
 
 ### Provider not enabled
