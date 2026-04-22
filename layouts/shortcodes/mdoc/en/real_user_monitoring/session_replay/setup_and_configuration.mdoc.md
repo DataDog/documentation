@@ -93,7 +93,7 @@ To set up Mobile Session Replay for Kotlin Multiplatform:
 
 Make sure you've [set up and initialized the Datadog Kotlin Multiplatform RUM SDK][11] with views instrumentation enabled.
 
-### Step 2 - Add the `DatadogSessionReplay` iOS library as a link-only dependency 
+### Step 2 - Add the `DatadogSessionReplay` iOS library as a link-only dependency
 
 For instructions, see the [guide][12].
 
@@ -124,7 +124,7 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 SessionReplay.enable(sessionReplayConfig)
 ```
 
-### Step 5 - Set up Material support on Android (Optional) 
+### Step 5 - Set up Material support on Android (Optional)
 
 If your app uses Material on Android, add:
 
@@ -242,7 +242,7 @@ During this step, you can also configure multiple [privacy levels][17] that appl
 cd ios && pod install
 ```
 
-### Step 5 - Rebuild your app 
+### Step 5 - Rebuild your app
 
 Rebuild your iOS and Android apps
 
@@ -326,6 +326,13 @@ class _MyAppState extends State<MyApp> {
   }
 }
 ```
+
+### Step 5 - Set Symbol Strip Style (iOS Only)
+
+Flutter Session Replay relies on FFI, and some symbols may be stripped when building an iOS Archive or IPA. To prevent this, you
+will need to set the `Strip Style` setting in your XCode project to `Non-Global Symbols`.
+
+This setting is under the `Runner` target, under `Build Settings`, `Deployment`.
 
 {% /if %}
 <!-- end Flutter -->
