@@ -304,7 +304,7 @@ import XCTest
 final class InMemoryTestProvider: FeatureProvider {
     var hooks: [any Hook] = []
     var metadata: ProviderMetadata = Metadata(name: "in-memory-test")
-    private let subject = CurrentValueSubject<ProviderEvent, Never>(.ready(nil))
+    private let subject = CurrentValueSubject<ProviderEvent?, Never>(.ready)
     private let bools: [String: Bool]
     private let strings: [String: String]
 
@@ -313,42 +313,38 @@ final class InMemoryTestProvider: FeatureProvider {
         self.strings = strings
     }
 
-    func observe() -> AnyPublisher<ProviderEvent, Never> { subject.eraseToAnyPublisher() }
+    func observe() -> AnyPublisher<ProviderEvent?, Never> { subject.eraseToAnyPublisher() }
 
-    func initialize(initialContext: EvaluationContext?) -> Future<Void, Never> {
-        Future { $0(.success(())) }
-    }
+    func initialize(initialContext: EvaluationContext?) async throws {}
 
-    func onContextSet(oldContext: EvaluationContext?, newContext: EvaluationContext) -> Future<Void, Never> {
-        Future { $0(.success(())) }
-    }
+    func onContextSet(oldContext: EvaluationContext?, newContext: EvaluationContext) async throws {}
 
     func getBooleanEvaluation(key: String, defaultValue: Bool, context: EvaluationContext?) throws -> ProviderEvaluation<Bool> {
-        ProviderEvaluation(value: bools[key] ?? defaultValue, variant: bools[key] == nil ? "default" : "static", reason: Reason.static.rawValue)
+        ProviderEvaluation(value: bools[key] ?? defaultValue, variant: bools[key] == nil ? "default" : "static", reason: Reason.staticReason.rawValue)
     }
 
     func getStringEvaluation(key: String, defaultValue: String, context: EvaluationContext?) throws -> ProviderEvaluation<String> {
-        ProviderEvaluation(value: strings[key] ?? defaultValue, variant: strings[key] == nil ? "default" : "static", reason: Reason.static.rawValue)
+        ProviderEvaluation(value: strings[key] ?? defaultValue, variant: strings[key] == nil ? "default" : "static", reason: Reason.staticReason.rawValue)
     }
 
     func getIntegerEvaluation(key: String, defaultValue: Int64, context: EvaluationContext?) throws -> ProviderEvaluation<Int64> {
-        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.static.rawValue)
+        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.staticReason.rawValue)
     }
 
     func getDoubleEvaluation(key: String, defaultValue: Double, context: EvaluationContext?) throws -> ProviderEvaluation<Double> {
-        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.static.rawValue)
+        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.staticReason.rawValue)
     }
 
     func getObjectEvaluation(key: String, defaultValue: Value, context: EvaluationContext?) throws -> ProviderEvaluation<Value> {
-        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.static.rawValue)
+        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.staticReason.rawValue)
     }
 
     private struct Metadata: ProviderMetadata { var name: String? }
 }
 
 final class CheckoutFlagTests: XCTestCase {
-    override func tearDown() async throws {
-        await OpenFeatureAPI.shared.clearProviderAndWait()
+    override func tearDown() {
+        OpenFeatureAPI.shared.clearProvider()
     }
 
     func testNewCheckoutEnabled() async throws {
@@ -361,7 +357,7 @@ final class CheckoutFlagTests: XCTestCase {
 }
 {{< /code-block >}}
 
-`OpenFeatureAPI.shared` is a global singleton, so call `clearProviderAndWait()` in `tearDown` to prevent one test's flags from leaking into another. `setProviderAndWait(provider:)` is `async` and does not throw, so no `try` is required.
+`OpenFeatureAPI.shared` is a global singleton, so call `clearProvider()` in `tearDown` to prevent one test's flags from leaking into another. `setProviderAndWait(provider:)` is `async` and does not throw, so no `try` is required.
 
 ## Further reading
 
