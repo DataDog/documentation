@@ -47,4 +47,3 @@ content_filters:
 {% partial file="sdk/troubleshooting/unity.mdoc.md" /%}
 {% /if %}
 
-[1]: /help
