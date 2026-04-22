@@ -27,7 +27,7 @@ The Datadog Feature Flags SDK for Java requires:
 - **Datadog Java APM Tracer**: Version **1.57.0** or later
 - **OpenFeature SDK**: Version **1.18.2** or later
 - **Datadog Agent**: Version **7.x or later** with [Remote Configuration][1] enabled
-- **Datadog API Key**: Required for Remote Configuration
+- **Datadog [API Key](/account_management/api-app-keys/#api-keys)**: Required for Remote Configuration
 
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
 

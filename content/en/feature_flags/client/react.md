@@ -45,7 +45,7 @@ pnpm add @datadog/openfeature-browser @openfeature/react-sdk @openfeature/core
 
 ## Initialize the provider
 
-Create a `DatadogProvider` instance and register it with OpenFeature. Do this as early as possible in your application, before rendering your React components.
+Create a `DatadogProvider` instance and register it with OpenFeature. Do this as early as possible in your application, before rendering your React components. To create a client token, see [Client tokens][2].
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
@@ -298,3 +298,4 @@ await OpenFeature.setContext({
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/
+[2]: /account_management/api-app-keys/#client-tokens
