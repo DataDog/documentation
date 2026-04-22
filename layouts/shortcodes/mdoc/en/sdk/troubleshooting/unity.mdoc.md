@@ -5,7 +5,7 @@ It can be included in the Unity SDK troubleshooting page or in the unified clien
 
 ## Overview
 
-If you experience unexpected behavior with Datadog RUM, use this guide to resolve those issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
+If you experience unexpected behavior with Datadog RUM, use this guide to resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
 ## Set sdkVerbosity for easier debugging
 
