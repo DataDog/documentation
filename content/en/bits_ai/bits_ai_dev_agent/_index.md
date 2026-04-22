@@ -19,7 +19,26 @@ Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</stron
 
 Bits AI Dev Agent is a generative AI coding assistant that uses observability data from Datadog to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and draws on multiple Datadog products to generate contextual fixes.
 
-Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][7], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][19], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+
+To get started with Bits AI Dev Agent, [set up the GitHub integration][6] and complete any additional configuration. Then, [start your first code session][18].
+
+## Code sessions
+A code session captures a segment of work with the Bits AI Dev Agent, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Dev Agent** > [**Code Sessions**][7].
+
+{{< img src="bits_ai/dev_agent/code_sessions_overview.png" alt="A tab titled 'Code Sessions' shows a text field with suggestions underneath" style="width:100%;" >}}
+
+### Start a code session
+After [completing setup][6], do one of the following to start a code session:
+- Enter a freeform prompt at [**Code Sessions**][7]: enter a custom prompt or generate one by clicking a **Suggestions** or **Proactive Fixes** card
+- Invoke Bits AI Dev Agent in a [supported Datadog product][9]
+
+A code session can also be created when another Bits AI agent (like [Bits Assistant][16] or [Bits AI SRE][17]) hands off a coding task to the Dev Agent.
+
+### View and manage code sessions
+On **[Code Sessions][7]**, view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR.
+
+Click a session to view its details and continue working with the Dev Agent. To remove a session from your **My Sessions** list, click <i class="icon-archive-wui"></i> (**Archive for everyone**) or <i class="icon-eye-slashed-wui"></i> (**Unwatch session**).
 
 ## Supported Datadog products
 
@@ -49,7 +68,7 @@ Bits AI Dev Agent integrates with GitHub to create pull requests, respond to com
   
   **Note**: Comment `@Datadog` to prompt Bits for updates to the PR. Bits Dev never auto-merges PRs.
 
-Go to {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Dev Agent{{< /ui >}} > [{{< ui >}}Code sessions{{< /ui >}}][7] to see all Dev Agent code sessions and generated PRs. You can search sessions and filter by service, product source, and status.
+See all PRs the Dev Agent is working on in **Bits AI** > **Dev Agent** > **[Code Sessions][7]**.
 
 ### Auto-push
 
@@ -96,10 +115,6 @@ Bits AI Dev Agent remediates vulnerabilities at scale, from single issues to lar
 
 Datadog Code Security uses Bits AI to enhance static analysis and generate remediation suggestions, which can be reviewed and applied through the Bits AI Dev Agent. Learn more about [AI-Enhanced Static Code Analysis][15].
 
-## Get started
-
-To enable Bits AI Dev Agent, see [Setup][6].
-
 ## Limitations
 
 - Bits Dev is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.  
@@ -117,8 +132,13 @@ To enable Bits AI Dev Agent, see [Setup][6].
 [6]: /bits_ai/bits_ai_dev_agent/setup/
 [7]: https://app.datadoghq.com/code
 [8]: /bits_ai/bits_ai_sre/
+[9]: #supported-datadog-products
 [10]: /profiler/automated_analysis/
 [12]: /containers/
 [13]: /containers/bits_ai_kubernetes_remediation
 [14]: https://app.datadoghq.com/code/settings
 [15]: /security/code_security/static_analysis/ai_enhanced_sast/
+[16]: /bits_ai/bits_assistant/
+[17]: /bits_ai/bits_ai_sre/
+[18]: #start-a-code-session
+[19]: #code-sessions

@@ -59,24 +59,24 @@ To view more details about a table variant, click its row to open the table vari
 
 This panel shows you information about the variant (version), such as:
 
-- **Definition**: Includes columns, indexes, and foreign keys for this table variant.
-- **Table Instances**: All instances associated with this table variant.
-- **Metrics**: Table size, sequential scans, and other related metrics (last 7 days by default).
-- **Queries**: Queries involving this table variant (last 7 days by default).
-- **Changes**: Schema changes affecting this table variant (last 7 days by default).
+- {{< ui >}}Definition{{< /ui >}}: Includes columns, indexes, and foreign keys for this table variant.
+- {{< ui >}}Table Instances{{< /ui >}}: All instances associated with this table variant.
+- {{< ui >}}Metrics{{< /ui >}}: Table size, sequential scans, and other related metrics (last 7 days by default).
+- {{< ui >}}Queries{{< /ui >}}: Queries involving this table variant (last 7 days by default).
+- {{< ui >}}Changes{{< /ui >}}: Schema changes affecting this table variant (last 7 days by default).
 
 ### Viewing table instance details
 
-To view details for a specific table instance, go to the **Table Instances** tab in the table variant panel and click on a row.
+To view details for a specific table instance, go to the {{< ui >}}Table Instances{{< /ui >}} tab in the table variant panel and click on a row.
 
 {{< img src="database_monitoring/table-instance-details.png" alt="Table instance panel displaying column and index details for the inventory table." style="width:100%;" >}}
 
 This opens a view similar to the table variant panel, showing the following information for the selected table instance:
 
-- **Definition**: Includes columns, indexes, and foreign keys for this table instance.
-- **Metrics**: Table size, sequential scans, and other related metrics (last 7 days by default).
-- **Queries**: Queries involving this table instance (last 7 days by default).
-- **Changes**: Schema changes affecting this table instance (last 7 days by default).
+- {{< ui >}}Definition{{< /ui >}}: Includes columns, indexes, and foreign keys for this table instance.
+- {{< ui >}}Metrics{{< /ui >}}: Table size, sequential scans, and other related metrics (last 7 days by default).
+- {{< ui >}}Queries{{< /ui >}}: Queries involving this table instance (last 7 days by default).
+- {{< ui >}}Changes{{< /ui >}}: Schema changes affecting this table instance (last 7 days by default).
 
 ## Recommendations
 
