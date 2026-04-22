@@ -340,7 +340,7 @@ let config = client.getObjectValue(
 )
 {{< /code-block >}}
 
-Evaluations are synchronous and safe to perform on the main thread — they read from the SDK's local cache and do not make network requests.
+Evaluations are synchronous and safe to perform on the main thread — they read from the SDK's local cache and do not make network requests. Note that `getIntegerValue` returns `Int64`; cast to `Int` at the call site if needed.
 
 ### Flag evaluation details
 
