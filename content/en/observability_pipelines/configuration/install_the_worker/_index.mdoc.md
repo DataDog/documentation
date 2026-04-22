@@ -284,9 +284,34 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 {% /if %}
 {% /if %}
 
+<!-- UI -->
 {% if equals($interface, "ui") %}
-### Pipeline UI setup
-... same platform/secrets branching ...
+
+<!-- UI - Docker -->
+{% if equals($platform, "docker") %}
+{% if equals($secrets_source, "secrets_manager") %} ... {% /if %}
+{% if equals($secrets_source, "environment_variables") %} ... {% /if %}
+{% /if %}
+
+<!-- UI - Kubernetes -->
+{% if equals($platform, "kubernetes") %}
+{% if equals($secrets_source, "secrets_manager") %} ... {% /if %}
+{% if equals($secrets_source, "environment_variables") %} ... {% /if %}
+{% if equals($secrets_source, "environment_variables") %} ... {% /if %}
+{% /if %}
+
+<!-- UI - Linux -->
+{% if equals($platform, "linux") %}
+{% if equals($secrets_source, "secrets_manager") %} ... {% /if %}
+{% if equals($secrets_source, "environment_variables") %} ... {% /if %}
+{% /if %}
+
+<!-- UI - Cloudformation -->
+{% if equals($platform, "cloudformation") %}
+{% if equals($secrets_source, "secrets_manager") %} ... {% /if %}
+{% if equals($secrets_source, "environment_variables") %} ... {% /if %}
+{% /if %}
+
 {% /if %}
 
 ### Pipeline UI setup
