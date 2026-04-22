@@ -35,7 +35,7 @@ When you open a source file, the extension looks for [`static-analysis.datadog.y
 
 After you create the configuration file, the analyzer runs automatically in the background when you open a file. To enable Static Code Analysis for a specific language, run the `Datadog: Configure Static Analysis Languages` command from the command palette (`Shift` + `Cmd/Ctrl` + `P`).
 
-To analyze an entire folder or workspace, right-click a folder in the file explorer and select **Datadog Static Analysis > Analyze Folder** or **Analyze Workspace**.
+To analyze an entire folder or workspace, right-click a folder in the file explorer and select **Datadog Code Security > Analyze Folder** or **Analyze Workspace**.
 
 <div class="alert alert-info">Static Code Analysis does not require a Datadog account, as source files are analyzed locally.</div>
 
@@ -62,11 +62,11 @@ The extension runs [Secret Scanning][5] on the source files in your workspace. I
 
 ### Get started with Secret Scanning
 
-Secret Scanning is enabled by default and runs in the background whenever you open a source file. To scan an entire folder or workspace, right-click a folder in the file explorer and select **Datadog Static Analysis > Analyze Folder** or **Analyze Workspace**.
+Secret Scanning is enabled by default and runs in the background whenever you open a source file. To scan an entire folder or workspace, right-click a folder in the file explorer and select **Datadog Code Security > Analyze Folder** or **Analyze Workspace**.
 
 {{< img src="/ide_plugins/vscode/secret-scanning-batch-analysis.png" alt="Batch analysis report with a Secret Scanning section listing findings per file" style="width:100%;" >}}
 
-Unlike Static Code Analysis, Secret Scanning does not require a [`static-analysis.datadog.yml`][3] file in your repository, and it scans all text files regardless of programming language. Likely-binary files are skipped automatically.
+Unlike Static Code Analysis, Secret Scanning does not require a [`static-analysis.datadog.yml`][3] file in your repository, and it scans all text files regardless of programming language. Likely binary files are skipped automatically.
 
 <div class="alert alert-info">Secret Scanning requires you to be signed in to Datadog, because detection rules are fetched from your Datadog organization.</div>
 
