@@ -1,0 +1,24 @@
+:root {
+  --font-family: 'NationalWeb', Helvetica, Arial, sans-serif;
+  --font-family-mono: 'RobotoMono-Regular', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --font-size-root: 18px;
+  --font-size-xs: 0.778rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-h1: 2.222rem;
+  --font-size-h2: 2rem;
+  --font-size-h3: 1.333rem;
+  --font-size-h4: 1rem;
+  --font-size-h5: 0.889rem;
+  --font-size-h6: 0.889rem;
+  --font-weight-light: 200;
+  --font-weight-semibold: 600;
+  --line-height: 1.6;
+  --line-height-code: 27px;
+}
+
+[data-scroll='on'] {
+  --font-family: 'EB Garamond', 'Georgia', serif;
+  --line-height: 1.7;
+}

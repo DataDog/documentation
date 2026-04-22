@@ -36,39 +36,13 @@
   --color-highlight-bg: #f2f2f2;
   --color-highlight-text: #555;
 
-  /* Spacing */
-  --space-2xs: 0.125rem;
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-
-  /* Typography */
-  --font-family: 'NationalWeb', Helvetica, Arial, sans-serif;
-  --font-family-mono: 'RobotoMono-Regular', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-  --font-size-root: 18px;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.25rem;
-  --font-size-xs: 0.778rem;
-  --font-size-h1: 2.222rem;
-  --font-size-h2: 2rem;
-  --font-size-h3: 1.333rem;
-  --font-size-h4: 1rem;
-  --font-size-h5: 0.889rem;
-  --font-size-h6: 0.889rem;
-  --font-weight-light: 200;
-  --font-weight-semibold: 600;
-  --line-height: 1.6;
-  --line-height-code: 27px;
-
-  /* Colors — Surface */
+  /* Colors — Surface variants */
   --color-surface-border: #ebebeb;
   --color-surface-header: #f3edff;
   --color-surface-header-text: #000;
   --color-surface-alt: #fdfcff;
   --color-surface-bg: #fdfcff;
+  --color-bg-hover: rgba(0, 0, 0, 0.02);
 
   /* Colors — Named (badge/indicator pairs) */
   --color-teal: #26759c;
@@ -95,150 +69,12 @@
   --color-red: #c62828;
   --color-red-tint: rgba(198, 40, 40, 0.1);
 
-  /* Colors — Surface variants */
-  --color-bg-hover: rgba(0, 0, 0, 0.02);
-
-  /* Borders */
-  --border-width: 1px;
-  --border-width-thick: 2px;
-  --border-width-highlight: 3px;
-  --border-width-accent: 4px;
-  --border-radius-sm: 2px;
-  --border-radius: 4px;
-  --border-radius-md: 6px;
-
-  /* Shadows */
-  --shadow-sm: 0 0 20px rgba(0, 0, 0, 0.05);
-  --shadow-pill: 2px 5px 12px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.25);
-  --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.45);
-  --shadow-brand: 0 -4px 12px rgba(99, 44, 166, 0.08);
-
-  /* Code */
-  --code-max-height: 350px;
-
-  /* Controls */
-  --control-height-sm: 2rem;
-
-  /* Layout */
-  --content-max-width: 1440px;
-  --sidebar-width: 25%;
-
   /* Colors — Placeholder (for work-in-progress layout slots) */
   --color-placeholder-bg: #e9d8f4;
   --color-placeholder-outline: #632ca6;
   --color-placeholder-text: var(--color-placeholder-outline);
-
-  /* Hugo-identical tokens — these replicate exact pixel values from the Hugo
-     site so users can't tell when they switch frameworks. Deprecate these
-     once Hugo itself is deprecated. */
-  --hugo-banner-height: 30px;
-  --hugo-header-height: 60px;                  /* <992px */
-  --hugo-header-height-desktop: 130px;         /* ≥992px, top of page */
-  --hugo-header-height-desktop-min: 65px;      /* ≥992px, after shrink-on-scroll */
-  --hugo-header-shrink: 0px;                   /* set by BaseLayout scroll listener: min(scrollY, 65px) */
-  --hugo-breakpoint-desktop: 992px;            /* header height changes here */
-  --hugo-breakpoint-tablet: 768px;             /* footer padding changes here */
-  --hugo-footer-padding-y: 1rem;               /* <768px (pt-3 pb-3) */
-  --hugo-footer-padding-y-tablet: 9rem;        /* ≥768px (pt-md-36 pb-md-36) */
-  --hugo-footer-padding-top-desktop: 3rem;     /* ≥992px (pt-lg-5) */
-  --hugo-footer-padding-bottom-desktop: 4rem;  /* ≥992px (pb-lg-16) */
-  --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.07);
-  --hugo-header-z: 200;
-  --hugo-banner-z: 1080;
-  --hugo-mobile-nav-z: 99;
-  --hugo-mobile-nav-bg-z: 8;
-
-  /* Hugo-identical breakpoints (Bootstrap 5).
-     CSS custom properties can't be used inside @media queries, so the same
-     pixel values are duplicated in the media query itself — update both. */
-  --hugo-breakpoint-xl: 1200px;
-  --hugo-breakpoint-xxl: 1400px;
-  --hugo-breakpoint-xs: 480px;
-
-  /* Hugo nav colors (resolved from Bootstrap variables in _main-nav.scss).
-     $gray-dark is #555555 (see websites-modules/assets/styles/base/_colors.scss);
-     $gray-darker (#333333) is a different, unused color in the nav. */
-  --hugo-nav-text: #555555;
-  --hugo-nav-text-hover: #7700ff;
-  --hugo-nav-brand-primary: #632ca6;
-  --hugo-nav-border: #e2e2e2;
-  --hugo-nav-btn-hover-bg: rgba(0, 0, 0, 0.05);
-  --hugo-nav-dropdown-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --hugo-nav-gray-light: #dddddd;
-
-  /* Hugo nav typography */
-  --hugo-nav-item-font-size: 18px;
-  --hugo-nav-item-font-weight: 600;
-  --hugo-nav-item-padding: 8.5px 8px 9.5px;
-  --hugo-nav-item-padding-xxl: 8.5px 12px 9.5px;
-
-  /* Hugo product mega-menu */
-  --hugo-mega-menu-width: 1300px;
-  --hugo-mega-menu-width-xxl-down: 1200px;
-  --hugo-mega-menu-width-xl-down: 1000px;
-  --hugo-mega-menu-width-lg-down: 820px;
-  --hugo-mega-menu-min-height: 630px;
-  --hugo-mega-menu-offset-left: 13px;
-  --hugo-mega-menu-offset-left-xxl-down: -25px;
-
-  /* Hugo announcement banner */
-  --hugo-banner-text-color: #ffffff;
-  --hugo-banner-font-size: 20px;
-  --hugo-banner-gradient-start: #632ca6;
-  --hugo-banner-gradient-end: #2f80ed;
-
-  /* Hugo mobile-nav overlay */
-  --hugo-mobile-nav-bg-opacity: 0.5;
-  --hugo-mobile-nav-width-md: 400px;
-  --hugo-mobile-nav-padding-top: 90px;
-
-  /* Hugo button gradient (GET STARTED FREE) */
-  --hugo-btn-gradient-start: #3023ae;
-  --hugo-btn-gradient-end: #c024b6;
-
-  /* Hugo footer colors */
-  --hugo-footer-bg: #110617;
-  --hugo-footer-text: rgba(255, 255, 255, 0.5);
-  --hugo-footer-text-strong: #ffffff;
-  --hugo-footer-border-gray: #616161;
-  --hugo-footer-border-gray-darker: #2a1f30;
-  --hugo-footer-popup-bg: #323232;
-  --hugo-footer-popup-hover: #616161;
-  --hugo-footer-popup-secondary: #c7c7c7;
-  --hugo-footer-cta-primary-bg: #632ca6;
-  --hugo-footer-cta-primary-border: #632ca6;
-
-  /* Hugo footer typography */
-  --hugo-footer-link-font-size: 16px;
-  --hugo-footer-link-line-height: 16px;
-  --hugo-footer-section-header-font-size: 18px;
-  --hugo-footer-section-header-font-size-desktop: 16px;
-  --hugo-footer-copyright-font-size: 14px;
-  --hugo-footer-copyright-font-size-desktop: 16px;
-
-  /* Hugo footer column widths (custom Bootstrap grid overrides from _footer.scss) */
-  --hugo-footer-col-about: 14.583%;
-  --hugo-footer-col-blog: 10.417%;
-
-  /* Hugo language selector */
-  --hugo-lang-toggle-height: 32px;
-  --hugo-lang-toggle-min-width: 120px;
-  --hugo-lang-toggle-max-width: 166px;
-
-  /* Hugo footer CTA button */
-  --hugo-footer-btn-height: 42px;
-  --hugo-footer-btn-min-height-tablet: 50px;
-  --hugo-footer-btn-min-width-desktop: 165px;
-
-  /* Hugo footer modal */
-  --hugo-modal-bg: #ffffff;
-  --hugo-modal-overlay: rgba(0, 0, 0, 0.5);
-  --hugo-modal-border-radius: 6px;
-  --hugo-modal-max-width: 500px;
 }
 
-/* Dark mode tokens */
 [data-theme='dark'] {
   /* Colors — Brand */
   --color-brand: #9b6dd7;
@@ -277,12 +113,13 @@
   --color-highlight-bg: #2a2a3e;
   --color-highlight-text: #ccc;
 
-  /* Colors — Surface */
+  /* Colors — Surface variants */
   --color-surface-border: #444;
   --color-surface-header: #2a2040;
   --color-surface-header-text: #e0e0e0;
   --color-surface-alt: #1e1a30;
   --color-surface-bg: #1e1a30;
+  --color-bg-hover: rgba(255, 255, 255, 0.04);
 
   /* Colors — Named (badge/indicator pairs) */
   --color-teal: #5baed4;
@@ -309,37 +146,13 @@
   --color-red: #ef5350;
   --color-red-tint: rgba(239, 83, 80, 0.15);
 
-  /* Colors — Surface variants */
-  --color-bg-hover: rgba(255, 255, 255, 0.04);
-
-  /* Shadows */
-  --shadow-sm: 0 0 20px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.5);
-  --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.7);
-  --shadow-brand: 0 -4px 12px rgba(155, 109, 215, 0.15);
-
   /* Colors — Placeholder (swap the two purples for dark mode) */
   --color-placeholder-bg: #632ca6;
   --color-placeholder-outline: #e9d8f4;
   --color-placeholder-text: var(--color-placeholder-outline);
-
-  /* Hugo nav — dark overrides */
-  --hugo-nav-text: #b0b0c0;
-  --hugo-nav-text-hover: #b388e0;
-  --hugo-nav-brand-primary: #9b6dd7;
-  --hugo-nav-border: #2a2a3e;
-  --hugo-nav-btn-hover-bg: rgba(255, 255, 255, 0.05);
-  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  --hugo-nav-gray-light: #333;
-  --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* SCROLL MODE — start */
 [data-scroll='on'] {
-  /* Typography */
-  --font-family: 'EB Garamond', 'Georgia', serif;
-  --line-height: 1.7;
-
   /* Colors — Brand */
   --color-brand: #8b4513;
   --color-brand-hover: #a0522d;
@@ -377,12 +190,13 @@
   --color-highlight-bg: #e8d5b0;
   --color-highlight-text: #5a3a28;
 
-  /* Colors — Surface */
+  /* Colors — Surface variants */
   --color-surface-border: #c4a97d;
   --color-surface-header: #e8d5b0;
   --color-surface-header-text: #3c2415;
   --color-surface-alt: #f0dfc0;
   --color-surface-bg: #f0dfc0;
+  --color-bg-hover: rgba(60, 36, 21, 0.05);
 
   /* Colors — Named (badge pairs) */
   --color-teal: #5a7a6a;
@@ -408,28 +222,8 @@
   --color-yellow-tint: rgba(176, 138, 16, 0.15);
   --color-red: #8b3020;
   --color-red-tint: rgba(139, 48, 32, 0.12);
-
-  /* Colors — Surface variants */
-  --color-bg-hover: rgba(60, 36, 21, 0.05);
-
-  /* Shadows */
-  --shadow-sm: 0 0 20px rgba(60, 36, 21, 0.1);
-  --shadow-md: 0 4px 15px rgba(60, 36, 21, 0.2);
-  --shadow-md-hover: 0 4px 15px rgba(60, 36, 21, 0.3);
-  --shadow-brand: 0 -4px 12px rgba(139, 69, 19, 0.1);
-
-  /* Hugo nav — scroll overrides */
-  --hugo-nav-text: #3c2415;
-  --hugo-nav-text-hover: #a0522d;
-  --hugo-nav-brand-primary: #8b4513;
-  --hugo-nav-border: #c4a97d;
-  --hugo-nav-btn-hover-bg: rgba(60, 36, 21, 0.06);
-  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(60, 36, 21, 0.2);
-  --hugo-nav-gray-light: #c4a97d;
-  --hugo-header-shadow: 0 0 8px 8px rgba(60, 36, 21, 0.1);
 }
 
-/* Dark scroll — ancient scroll by candlelight */
 [data-theme='dark'][data-scroll='on'] {
   /* Colors — Brand */
   --color-brand: #c4943a;
@@ -468,12 +262,13 @@
   --color-highlight-bg: #3a2a1e;
   --color-highlight-text: #baa880;
 
-  /* Colors — Surface */
+  /* Colors — Surface variants */
   --color-surface-border: #5a4530;
   --color-surface-header: #3a2a1e;
   --color-surface-header-text: #d4c4a0;
   --color-surface-alt: #241a10;
   --color-surface-bg: #241a10;
+  --color-bg-hover: rgba(212, 196, 160, 0.05);
 
   /* Colors — Named (badge pairs) */
   --color-teal: #6aaa8a;
@@ -499,31 +294,4 @@
   --color-yellow-tint: rgba(212, 176, 96, 0.15);
   --color-red: #c47050;
   --color-red-tint: rgba(196, 112, 80, 0.15);
-
-  /* Colors — Surface variants */
-  --color-bg-hover: rgba(212, 196, 160, 0.05);
-
-  /* Shadows */
-  --shadow-sm: 0 0 20px rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.5);
-  --shadow-md-hover: 0 4px 15px rgba(0, 0, 0, 0.65);
-  --shadow-brand: 0 -4px 12px rgba(196, 148, 58, 0.12);
-
-  /* Hugo nav — dark+scroll overrides */
-  --hugo-nav-text: #d4c4a0;
-  --hugo-nav-text-hover: #d4a84f;
-  --hugo-nav-brand-primary: #c4943a;
-  --hugo-nav-border: #5a4530;
-  --hugo-nav-btn-hover-bg: rgba(212, 196, 160, 0.08);
-  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  --hugo-nav-gray-light: #5a4530;
-  --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.4);
-}
-/* SCROLL MODE — end */
-
-/* Shiki dual-theme: activate dark token colors in dark mode */
-[data-theme='dark'] .shiki,
-[data-theme='dark'] .shiki span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
 }

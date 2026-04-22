@@ -1,0 +1,142 @@
+/* Hugo-identical tokens — these replicate exact pixel values from the Hugo
+   site so users can't tell when they switch frameworks. Deprecate these
+   once Hugo itself is deprecated. */
+:root {
+  --hugo-banner-height: 30px;
+  --hugo-header-height: 60px;                  /* <992px */
+  --hugo-header-height-desktop: 130px;         /* ≥992px, top of page */
+  --hugo-header-height-desktop-min: 65px;      /* ≥992px, after shrink-on-scroll */
+  --hugo-header-shrink: 0px;                   /* set by BaseLayout scroll listener: min(scrollY, 65px) */
+  --hugo-breakpoint-desktop: 992px;            /* header height changes here */
+  --hugo-breakpoint-tablet: 768px;             /* footer padding changes here */
+  --hugo-footer-padding-y: 1rem;               /* <768px (pt-3 pb-3) */
+  --hugo-footer-padding-y-tablet: 9rem;        /* ≥768px (pt-md-36 pb-md-36) */
+  --hugo-footer-padding-top-desktop: 3rem;     /* ≥992px (pt-lg-5) */
+  --hugo-footer-padding-bottom-desktop: 4rem;  /* ≥992px (pb-lg-16) */
+  --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.07);
+  --hugo-header-z: 200;
+  --hugo-banner-z: 1080;
+  --hugo-mobile-nav-z: 99;
+  --hugo-mobile-nav-bg-z: 8;
+
+  /* Hugo-identical breakpoints (Bootstrap 5).
+     CSS custom properties can't be used inside @media queries, so the same
+     pixel values are duplicated in the media query itself — update both. */
+  --hugo-breakpoint-xl: 1200px;
+  --hugo-breakpoint-xxl: 1400px;
+  --hugo-breakpoint-xs: 480px;
+
+  /* Hugo nav colors (resolved from Bootstrap variables in _main-nav.scss).
+     $gray-dark is #555555 (see websites-modules/assets/styles/base/_colors.scss);
+     $gray-darker (#333333) is a different, unused color in the nav. */
+  --hugo-nav-text: #555555;
+  --hugo-nav-text-hover: #7700ff;
+  --hugo-nav-brand-primary: #632ca6;
+  --hugo-nav-border: #e2e2e2;
+  --hugo-nav-btn-hover-bg: rgba(0, 0, 0, 0.05);
+  --hugo-nav-dropdown-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --hugo-nav-gray-light: #dddddd;
+
+  /* Hugo nav typography */
+  --hugo-nav-item-font-size: 18px;
+  --hugo-nav-item-font-weight: 600;
+  --hugo-nav-item-padding: 8.5px 8px 9.5px;
+  --hugo-nav-item-padding-xxl: 8.5px 12px 9.5px;
+
+  /* Hugo product mega-menu */
+  --hugo-mega-menu-width: 1300px;
+  --hugo-mega-menu-width-xxl-down: 1200px;
+  --hugo-mega-menu-width-xl-down: 1000px;
+  --hugo-mega-menu-width-lg-down: 820px;
+  --hugo-mega-menu-min-height: 630px;
+  --hugo-mega-menu-offset-left: 13px;
+  --hugo-mega-menu-offset-left-xxl-down: -25px;
+
+  /* Hugo announcement banner */
+  --hugo-banner-text-color: #ffffff;
+  --hugo-banner-font-size: 20px;
+  --hugo-banner-gradient-start: #632ca6;
+  --hugo-banner-gradient-end: #2f80ed;
+
+  /* Hugo mobile-nav overlay */
+  --hugo-mobile-nav-bg-opacity: 0.5;
+  --hugo-mobile-nav-width-md: 400px;
+  --hugo-mobile-nav-padding-top: 90px;
+
+  /* Hugo button gradient (GET STARTED FREE) */
+  --hugo-btn-gradient-start: #3023ae;
+  --hugo-btn-gradient-end: #c024b6;
+
+  /* Hugo footer colors */
+  --hugo-footer-bg: #110617;
+  --hugo-footer-text: rgba(255, 255, 255, 0.5);
+  --hugo-footer-text-strong: #ffffff;
+  --hugo-footer-border-gray: #616161;
+  --hugo-footer-border-gray-darker: #2a1f30;
+  --hugo-footer-popup-bg: #323232;
+  --hugo-footer-popup-hover: #616161;
+  --hugo-footer-popup-secondary: #c7c7c7;
+  --hugo-footer-cta-primary-bg: #632ca6;
+  --hugo-footer-cta-primary-border: #632ca6;
+
+  /* Hugo footer typography */
+  --hugo-footer-link-font-size: 16px;
+  --hugo-footer-link-line-height: 16px;
+  --hugo-footer-section-header-font-size: 18px;
+  --hugo-footer-section-header-font-size-desktop: 16px;
+  --hugo-footer-copyright-font-size: 14px;
+  --hugo-footer-copyright-font-size-desktop: 16px;
+
+  /* Hugo footer column widths (custom Bootstrap grid overrides from _footer.scss) */
+  --hugo-footer-col-about: 14.583%;
+  --hugo-footer-col-blog: 10.417%;
+
+  /* Hugo language selector */
+  --hugo-lang-toggle-height: 32px;
+  --hugo-lang-toggle-min-width: 120px;
+  --hugo-lang-toggle-max-width: 166px;
+
+  /* Hugo footer CTA button */
+  --hugo-footer-btn-height: 42px;
+  --hugo-footer-btn-min-height-tablet: 50px;
+  --hugo-footer-btn-min-width-desktop: 165px;
+
+  /* Hugo footer modal */
+  --hugo-modal-bg: #ffffff;
+  --hugo-modal-overlay: rgba(0, 0, 0, 0.5);
+  --hugo-modal-border-radius: 6px;
+  --hugo-modal-max-width: 500px;
+}
+
+[data-theme='dark'] {
+  --hugo-nav-text: #b0b0c0;
+  --hugo-nav-text-hover: #b388e0;
+  --hugo-nav-brand-primary: #9b6dd7;
+  --hugo-nav-border: #2a2a3e;
+  --hugo-nav-btn-hover-bg: rgba(255, 255, 255, 0.05);
+  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --hugo-nav-gray-light: #333;
+  --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-scroll='on'] {
+  --hugo-nav-text: #3c2415;
+  --hugo-nav-text-hover: #a0522d;
+  --hugo-nav-brand-primary: #8b4513;
+  --hugo-nav-border: #c4a97d;
+  --hugo-nav-btn-hover-bg: rgba(60, 36, 21, 0.06);
+  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(60, 36, 21, 0.2);
+  --hugo-nav-gray-light: #c4a97d;
+  --hugo-header-shadow: 0 0 8px 8px rgba(60, 36, 21, 0.1);
+}
+
+[data-theme='dark'][data-scroll='on'] {
+  --hugo-nav-text: #d4c4a0;
+  --hugo-nav-text-hover: #d4a84f;
+  --hugo-nav-brand-primary: #c4943a;
+  --hugo-nav-border: #5a4530;
+  --hugo-nav-btn-hover-bg: rgba(212, 196, 160, 0.08);
+  --hugo-nav-dropdown-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  --hugo-nav-gray-light: #5a4530;
+  --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.4);
+}
