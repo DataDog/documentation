@@ -13,5 +13,7 @@ meta_title: Empezando con Datadog
 site_name: Monitorización de la infraestructura y las aplicaciones de Datadog
 site_support_banner: Este producto no es compatible con el <a href="/getting_started/site">sitio
   Datadog</a> seleccionado.
+us2_fed_integration_banner_availability: "To find out if this integration is available in your organization, see your <a href=\"https://app.datadoghq.com/integrations\">Datadog Integrations</a> page or ask your organization administrator."
+us2_fed_integration_banner_exception: "If you want to initiate an exception request to enable this integration for your organization, please email <a href=\"mailto:support@ddog-gov.com\">support@ddog-gov.com</a>."
 translate_status_banner: Esta traducción no está actualizada. Para consultar la última
   versión en inglés, haz clic aquí
