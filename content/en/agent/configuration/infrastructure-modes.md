@@ -94,7 +94,7 @@ In the following command, replace `<API_KEY>` with your organization's [Datadog 
 ```shell
 # Replace <MODE> with the mode for the host: `full`, `basic`, `end_user_device`, or `none`.
 DD_API_KEY="<API_KEY>" \
-DD_SITE="<DD_SITE>}" \
+DD_SITE="<DD_SITE>" \
 DD_INFRASTRUCTURE_MODE="<MODE>" \
 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
