@@ -92,7 +92,6 @@ To configure the infrastructure mode when installing the Agent for the first tim
 In the following command, replace `<API_KEY>` with your organization's [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys), `<DD_SITE>` with `{{< region-param key="dd_site" >}}`, and `<MODE>` with `full`, `basic`, `end_user_device`, or `none`:
 
 ```shell
-# Replace <MODE> with the mode for the host: `full`, `basic`, `end_user_device`, or `none`.
 DD_API_KEY="<API_KEY>" \
 DD_SITE="<DD_SITE>" \
 DD_INFRASTRUCTURE_MODE="<MODE>" \
@@ -102,7 +101,6 @@ bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.s
 {{% tab "Windows" %}}
 In the following command, replace `<API_KEY>` with your organization's [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys), `<DD_SITE>` with {{< region-param key="dd_site" >}}, and `<MODE>` with `full`, `basic`, `end_user_device`, or `none`:
 ```powershell
-# Replace <MODE> with the mode for the host: `full`, `basic`, `end_user_device`, or `none`.
 $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<API_KEY>" SITE="<DD_SITE>" DD_INFRASTRUCTRURE_MODE="<MODE>"'
 if ($p.ExitCode -ne 0) {
   Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
