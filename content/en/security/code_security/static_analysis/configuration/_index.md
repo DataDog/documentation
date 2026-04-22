@@ -1,15 +1,13 @@
 ---
 title: Static Code Analysis (SAST) Configuration
-description: Learn how to customize Datadog Static Code Analysis for your repositories.
+description: Reference documentation for Datadog Static Code Analysis (SAST) configuration, covering ruleset selection, rule customization, severities, and paths.
 ---
 
-## Customize your configuration
+By default, Datadog Static Code Analysis (SAST) scans your repositories with [Datadog's default rulesets][6] for each programming language. You can customize which rulesets and rules run, along with severities, paths, and other parameters. Configure these settings under the `sast` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
 
-By default, Datadog Static Code Analysis (SAST) scans your repositories with [Datadog's default rulesets][6] for your programming language(s). You can customize which rulesets or rules to run or ignore, in addition to other parameters. You can customize these settings locally in your repository or within the Datadog App.
+For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][26].
 
-For information on configuration locations, precedence, and merging, see [Code Security configuration file][26].
-
-### Default rulesets
+## Default rulesets
 
 By default, Datadog enables the default rulesets for your repository's programming languages (`use-default-rulesets: true`). To modify the enabled rulesets:
 
@@ -19,7 +17,7 @@ By default, Datadog enables the default rulesets for your repository's programmi
 
 For the full list of default rulesets, see [Static Code Analysis (SAST) Rules][6].
 
-### Configuration format
+## Configuration format
 
 The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
 
@@ -277,4 +275,4 @@ myBar = 2
 
 [6]: /security/code_security/static_analysis/static_analysis_rules
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
-[26]: /security/code_security/configuration/
+[26]: /security/code_security/guides/configuration/

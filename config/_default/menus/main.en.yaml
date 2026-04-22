@@ -7537,11 +7537,6 @@ menu:
       url: /security/code_security/guides/
       parent: code_security
       weight: 8
-    - name: Code Security configuration file
-      identifier: sec_code_security_configuration
-      url: /security/code_security/configuration/
-      parent: code_security_guides
-      weight: 1
     - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading

@@ -92,7 +92,7 @@ You **must** run an analysis of your repository on the default branch before res
 
 ## Customize your configuration
 
-By default, Datadog Static Code Analysis (SAST) scans your repositories with [Datadog’s default rulesets][6] for your programming language(s). Configure which rulesets or rules to run or ignore, and other parameters, locally in your repository or within the Datadog App. For the full configuration reference, see [Static Code Analysis (SAST) Configuration][27].
+By default, Datadog Static Code Analysis (SAST) scans your repositories with [Datadog's default rulesets][6] for each programming language. You can customize which rulesets or rules run, along with other parameters, in Datadog or in a `code-security.datadog.yaml` file. For the full configuration reference, see [Static Code Analysis (SAST) Configuration][27].
 
 ## Link findings to Datadog services and teams
 
@@ -273,7 +273,6 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [22]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
 [24]: https://docs.datadoghq.com/account_management/teams/
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
-[26]: /security/code_security/configuration/
 [27]: /security/code_security/static_analysis/configuration/
 [101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
