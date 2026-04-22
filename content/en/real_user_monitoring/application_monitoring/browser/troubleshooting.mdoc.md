@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting
+title: Troubleshooting Browser SDK Issues
 description: "Troubleshoot common issues with RUM Browser SDK including missing data, ad blockers, network restrictions, and configuration problems."
 aliases:
   - /real_user_monitoring/browser/troubleshooting/
