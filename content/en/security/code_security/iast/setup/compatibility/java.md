@@ -49,7 +49,7 @@ Datadog does not officially support any early-access versions of Java.
 
 Versions 22 and above are supported as in Preview.
 
-**Kotlin support**: Kotlin is supported via the Java tracer. Because Kotlin compiles to JVM bytecode, it runs on the same JVM runtimes listed above, with no additional configuration required beyond the standard Java setup.
+**Kotlin support**: Kotlin is supported through the Java tracer. Because Kotlin compiles to JVM bytecode, it runs on the same JVM runtimes listed above, with no additional configuration required beyond the standard Java setup.
 
 ### Web framework compatibility
 
