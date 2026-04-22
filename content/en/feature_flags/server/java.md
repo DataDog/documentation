@@ -486,6 +486,63 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 );
 {{< /code-block >}}
 
+## Testing
+
+Do not use the Datadog provider in unit tests: it requires a running Agent and Remote Configuration. Use OpenFeature's `InMemoryProvider` instead. It ships in `dev.openfeature:sdk` (already a test-scope dependency), so no additional library is required. Add `dev.openfeature:sdk` to your test configuration if it is not already present.
+
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.Client;
+import dev.openfeature.sdk.OpenFeatureAPI;
+import dev.openfeature.sdk.providers.memory.Flag;
+import dev.openfeature.sdk.providers.memory.InMemoryProvider;
+import java.util.Map;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class CheckoutFlagTest {
+    private Client client;
+
+    @BeforeEach
+    void setUp() {
+        Map<String, Flag<?>> flags = Map.of(
+            "new-checkout-flow", Flag.<Boolean>builder()
+                .variant("on", true)
+                .variant("off", false)
+                .defaultVariant("on")
+                .build(),
+            "ui-theme", Flag.<String>builder()
+                .variant("dark", "dark")
+                .variant("light", "light")
+                .defaultVariant("light")
+                .build()
+        );
+
+        OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+        api.setProviderAndWait(new InMemoryProvider(flags));
+        client = api.getClient();
+    }
+
+    @AfterEach
+    void tearDown() {
+        OpenFeatureAPI.getInstance().shutdown();
+    }
+
+    @Test
+    void newCheckoutEnabledByDefault() {
+        assertTrue(client.getBooleanValue("new-checkout-flow", false));
+    }
+
+    @Test
+    void missingFlagReturnsDefault() {
+        assertFalse(client.getBooleanValue("does-not-exist", false));
+    }
+}
+{{< /code-block >}}
+
+`OpenFeatureAPI.getInstance()` is a singleton. Always call `shutdown()` in `@AfterEach` (or equivalent), otherwise provider state leaks between test classes and causes flaky suites.
+
+In Spring Boot tests, register the `InMemoryProvider` through a `@TestConfiguration` bean or in a `@BeforeAll` hook on an `@SpringBootTest` class — the OpenFeature API singleton persists for the lifetime of the Spring context, so initialization only needs to run once.
+
 ## Troubleshooting
 
 ### Start here: verify prerequisites
