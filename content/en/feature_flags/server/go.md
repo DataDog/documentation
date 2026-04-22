@@ -267,6 +267,74 @@ fmt.Printf("Error: %v\n", details.Error())
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+## Testing
+
+Do not use the Datadog provider in unit tests: it requires a running Agent and Remote Configuration. Use OpenFeature's in-memory provider instead. It ships in the upstream `go-sdk` module under `github.com/open-feature/go-sdk/openfeature/memprovider`, so no additional dependency is required.
+
+Register the in-memory provider under a **named client** rather than the default global provider. The default provider is process-global, which breaks `t.Parallel()` and leaks flag state between tests. A named client scopes the provider to each test.
+
+{{< code-block lang="go" >}}
+package checkout
+
+import (
+    "context"
+    "testing"
+
+    "github.com/open-feature/go-sdk/openfeature"
+    "github.com/open-feature/go-sdk/openfeature/memprovider"
+)
+
+func TestNewCheckoutFlow(t *testing.T) {
+    cases := []struct {
+        name string
+        tier string
+        want bool
+    }{
+        {"premium user sees new flow", "premium", true},
+        {"free user sees legacy", "free", false},
+    }
+
+    for _, tc := range cases {
+        t.Run(tc.name, func(t *testing.T) {
+            evalByTier := func(flag memprovider.InMemoryFlag, flatCtx openfeature.FlattenedContext) (any, openfeature.ProviderResolutionDetail) {
+                if flatCtx["tier"] == "premium" {
+                    return flag.Variants["on"], openfeature.ProviderResolutionDetail{Reason: openfeature.TargetingMatchReason, Variant: "on"}
+                }
+                return flag.Variants[flag.DefaultVariant], openfeature.ProviderResolutionDetail{Reason: openfeature.DefaultReason, Variant: flag.DefaultVariant}
+            }
+
+            provider := memprovider.NewInMemoryProvider(map[string]memprovider.InMemoryFlag{
+                "new-checkout-flow": {
+                    State:            memprovider.Enabled,
+                    DefaultVariant:   "off",
+                    Variants:         map[string]any{"on": true, "off": false},
+                    ContextEvaluator: (*memprovider.ContextEvaluator)(&evalByTier),
+                },
+            })
+
+            name := "test-" + t.Name()
+            if err := openfeature.SetNamedProviderAndWait(name, provider); err != nil {
+                t.Fatal(err)
+            }
+            t.Cleanup(func() {
+                _ = openfeature.SetNamedProviderAndWait(name, openfeature.NoopProvider{})
+            })
+
+            client := openfeature.NewClient(name)
+            got, err := client.BooleanValue(context.Background(), "new-checkout-flow", false, openfeature.NewEvaluationContext("user-1", map[string]any{"tier": tc.tier}))
+            if err != nil {
+                t.Fatal(err)
+            }
+            if got != tc.want {
+                t.Errorf("got %v, want %v", got, tc.want)
+            }
+        })
+    }
+}
+{{< /code-block >}}
+
+`ContextEvaluator` is a **pointer to a function** (`*func(...)`), not a plain function. Define the evaluator in a local variable and pass its address, as shown above. Omit `ContextEvaluator` entirely to always return `DefaultVariant`.
+
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
 
