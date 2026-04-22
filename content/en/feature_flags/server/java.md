@@ -488,7 +488,7 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 ## Testing
 
-Do not use the Datadog provider in unit tests: it requires a running Agent and Remote Configuration. Use OpenFeature's `InMemoryProvider` instead. It ships in `dev.openfeature:sdk` (already a test-scope dependency), so no additional library is required. Add `dev.openfeature:sdk` to your test configuration if it is not already present.
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships in `dev.openfeature:sdk` (already a test-scope dependency), so no additional library is required. Add `dev.openfeature:sdk` to your test configuration if it is not already present.
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.Client;

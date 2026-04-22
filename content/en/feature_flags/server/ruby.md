@@ -206,7 +206,7 @@ end
 
 ## Testing
 
-Do not use the Datadog provider in unit tests: it requires a running Agent and Remote Configuration. Use OpenFeature's `InMemoryProvider` instead. It ships with `openfeature-sdk`, so no additional gem is required.
+You can test against a dedicated Datadog test environment with the real `Datadog::OpenFeature::Provider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships with `openfeature-sdk`, so no additional gem is required.
 
 The Ruby SDK's `InMemoryProvider` takes a plain hash of flag keys to values — variants and targeting rules are not supported. The OpenFeature provider is set on a process-global singleton, so tests that swap the provider must restore it in teardown to avoid leaking flag state across examples. An `around` hook handles setup, restoration, and exceptions cleanly in a single block.
 

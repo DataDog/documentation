@@ -237,9 +237,9 @@ console.log(details.flagMetadata); // Additional information about the evaluatio
 
 ## Testing
 
-Do not use the Datadog provider in unit tests: it requires `tracer.init()` and a running Agent with Remote Configuration. Use OpenFeature's `TypedInMemoryProvider` instead. It ships with `@openfeature/server-sdk`, so no additional dependency is required.
+You can test against a dedicated Datadog test environment with the real `tracer.openfeature` provider, or swap it for OpenFeature's `TypedInMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `TypedInMemoryProvider` ships with `@openfeature/server-sdk`, so no additional dependency is required.
 
-Do **not** call `tracer.init()` or set `tracer.openfeature` as the provider in tests — that is the behavior the test is trying to replace.
+When using the in-memory provider, do not call `tracer.init()` or set `tracer.openfeature` as the provider — that is the behavior being replaced.
 
 The OpenFeature API is a singleton per Node.js process. Reset it in `afterAll` with `OpenFeature.close()` (or `OpenFeature.clearProviders()`) to prevent state from one test file leaking into the next.
 

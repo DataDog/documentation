@@ -433,7 +433,7 @@ This table highlights key differences between the OpenFeature and `FlagsClient` 
 
 ## Testing
 
-Do not use the Datadog provider in unit tests: it requires network access to Datadog's CDN to fetch flag assignments. The upstream OpenFeature Kotlin SDK does not ship an `InMemoryProvider`, so tests use a small custom `FeatureProvider` instead. The example below replaces `OpenFeatureAPI`'s provider — if your production code uses the Datadog `FlagsClient` wrapper directly, your test should assert through the same `OpenFeatureAPI` client the wrapper uses, not `FlagsClient`.
+You can test against a dedicated Datadog test environment with the real Datadog provider, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The upstream OpenFeature Kotlin SDK does not ship an `InMemoryProvider`, so tests use a small custom `FeatureProvider`. The example below replaces `OpenFeatureAPI`'s provider — if your production code uses the Datadog `FlagsClient` wrapper directly, your test should assert through the same `OpenFeatureAPI` client the wrapper uses, not `FlagsClient`.
 
 Add `kotlinx-coroutines-test` to your test configuration (the SDK's `initialize` is a `suspend` function):
 

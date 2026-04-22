@@ -223,7 +223,7 @@ api.shutdown()
 
 ## Testing
 
-Do not use the Datadog provider in unit tests: it requires a running Agent and Remote Configuration. Use OpenFeature's `InMemoryProvider` instead. It is bundled with `openfeature-sdk`, so no additional dependency is required.
+You can test against a dedicated Datadog test environment with the real Datadog provider, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` is bundled with `openfeature-sdk`, so no additional dependency is required.
 
 The OpenFeature API is a global singleton (`openfeature.api.set_provider` mutates module-level state). Use a `function`-scoped pytest fixture and call `api.shutdown()` in teardown so tests do not leak flag state into each other.
 

@@ -72,9 +72,12 @@ DD_METRICS_OTEL_ENABLED=true
 
 ## Testing with in-memory providers
 
-The Datadog OpenFeature provider is designed for production use: it requires a running Datadog Agent and Remote Configuration to receive flag definitions. It is **not suitable for unit tests**, which should be hermetic, fast, and offline.
+Datadog supports two testing approaches:
 
-For tests, swap the Datadog provider for OpenFeature's standard `InMemoryProvider` (or an equivalent test stub, where no in-memory provider is available in the language). Because the OpenFeature API is designed to make providers swappable at runtime, your application code does not change — only the provider registered during test setup.
+- **Integration tests**: Point `DatadogProvider` at a dedicated test environment and control flag values from the Datadog UI. This exercises the real provider end-to-end, including Remote Configuration delivery.
+- **Unit tests**: Swap `DatadogProvider` for OpenFeature's standard `InMemoryProvider` (or an equivalent test stub, where no in-memory provider is available in the language) and set flag values directly in test code. This keeps tests hermetic, fast, and offline.
+
+This page covers the in-memory approach. Because the OpenFeature API is designed to make providers swappable at runtime, your application code does not change — only the provider registered during test setup.
 
 A typical test follows this pattern:
 

@@ -264,7 +264,7 @@ await Api.Instance.ShutdownAsync();
 
 ## Testing
 
-Do not use the Datadog provider in unit tests: it requires a running Agent and Remote Configuration. Use OpenFeature's `InMemoryProvider` instead. It ships in the `OpenFeature` NuGet package (namespace `OpenFeature.Providers.Memory`), so no additional dependency is required beyond what is already installed for production.
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships in the `OpenFeature` NuGet package (namespace `OpenFeature.Providers.Memory`), so no additional dependency is required beyond what is already installed for production.
 
 `Api.Instance` is a singleton. Use xUnit's `IAsyncLifetime` to set the provider per test and tear it down in `DisposeAsync`, which avoids ordering-dependent tests. For faster suites that share setup, use `InMemoryProvider.UpdateFlagsAsync(...)` to mutate flag state between tests without re-registering the provider.
 
@@ -318,7 +318,7 @@ public class CheckoutFlagTests : IAsyncLifetime
 
 The same pattern applies to NUnit (`[SetUp]`/`[TearDown]`) and MSTest (`[TestInitialize]`/`[TestCleanup]`). For ASP.NET Core integration tests, register the `InMemoryProvider` inside `WebApplicationFactory.ConfigureTestServices` before the application boots.
 
-Avoid mocking the Datadog provider directly with Moq or similar libraries. The `InMemoryProvider` is the canonical test seam; mocking private provider internals couples your tests to Datadog SDK implementation details.
+If you want to avoid coupling tests to SDK internals, prefer swapping in `InMemoryProvider` over mocking the Datadog provider with Moq or similar libraries.
 
 ## Troubleshooting
 
