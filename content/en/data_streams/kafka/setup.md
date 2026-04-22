@@ -7,8 +7,6 @@ aliases:
 
 This page covers the prerequisites and setup steps for Data Streams Monitoring's Kafka Monitoring.
 
-Message inspection is an optional capability. The [Prerequisites](#prerequisites) and [Setup](#setup) sections apply to everyone. If you want to retrieve message payloads in the {{< ui >}}Messages{{< /ui >}} section, also complete [Enable message inspection](#enable-message-inspection).
-
 ## Prerequisites
 
 ### Datadog Agent version
