@@ -5547,6 +5547,19 @@ menu:
           - SendInvitations
         unstable: []
         order: 8
+    - name: Anonymize users
+      url: '#anonymize-users'
+      identifier: users-anonymize-users
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AnonymizeUsers
+        unstable:
+          - v2
+        order: 10
     - name: Update a user
       url: '#update-a-user'
       identifier: users-update-a-user
