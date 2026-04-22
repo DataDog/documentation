@@ -54,7 +54,7 @@ You can select from the following monitor types:
 | Changes      | Yes               | Detect daily, weekly, or monthly cost changes.                                                                                                                                                                                                            | Alert when the difference between today's cost and the week before is over 5%.                     |
 | Anomalies    | Yes               | Identify unusual or unexpected cost patterns. <br> <br> Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
 | Threshold    | Yes               | Alert when costs exceed a set value.                                                                                                                                                                                                                      | Set alerts when today's total cost exceeds $10,000.                                                |
-| Forecast     | Yes               | Alert if forecasted costs will exceed a threshold.                                                                                                                                                                                                        | Alert daily if the forecasted cost for this month is projected to exceed $500.                     |
+| Forecast     | Yes               | Alert if forecasted costs exceeds a threshold.                                                                                                                                                                                                        | Alert daily if the forecasted cost for this month is projected to exceed $500.                     |
 | Budget       | No                | Alert if actual or forecasted costs exceed your [budget][7].                                                                                                                                                                                              | Alert if the forecasted month cost is projected to exceed 90% of the assigned $10,000 budget.      |
 
 ### Specify which cost to track
@@ -120,7 +120,7 @@ If you are using the **Cost Forecast** monitor type, you can trigger an alert wh
 {{% /tab %}}
 
 {{% tab "Budget" %}}
-If you are using the **Budget** monitor type, you can trigger an alert when either the actual or the forecasted cloud cost exceeds a percentage of the budget you selected in the previous step.
+If you are using the **Budget** monitor type, you can trigger an alert when the actual or the forecasted cloud cost exceeds a percentage of the budget you selected in the previous step.
 
 | Step             | Purpose                                                                           | Values                            |
 | ---------------- | --------------------------------------------------------------------------------- | --------------------------------- |
@@ -129,7 +129,7 @@ If you are using the **Budget** monitor type, you can trigger an alert when eith
 | Threshold        | Percentage of budget that is utilized to trigger the alert.                       | Number between 0 and 100 (%)      |
 | Timeframe        | Evaluation window used to assess if the threshold is breached.                    | `all_months`, `current_month`     |
 
-When you select **is forecasted to reach**, the monitor uses the same forecasting model as budget cards and budget status page Forecasts require at least 64 consecutive days of cost data — see [Forecasting][8] for details.
+When you select **is forecasted to reach**, the monitor uses the same forecasting model as budget cards and the budget status page. Forecasts require at least 64 consecutive days of cost data — see [Forecasting][8] for details.
 
 {{% /tab %}}
 {{< /tabs >}}
