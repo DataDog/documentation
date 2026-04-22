@@ -20,9 +20,9 @@ Datadog partners see a tailored version of the Plan & Usage page designed for ma
 
 ## Prerequisites
 
-To access the partner Plan & Usage experience, your organization must be a partner admin organization, which is the top-level organization that Datadog provisions for partners to manage their customer accounts. If your organization was set up through the Datadog Partner Program and you manage customer organizations under it, you are using a partner admin organization. You can confirm your status by validating that you have multiple contracts with Datadog and can view consolidated cost and usage data across all of them in Plan & Usage.
+To access the partner Plan & Usage experience, your organization must be a partner admin organization, which is the top-level organization that Datadog provisions for partners to manage their customer accounts. If your organization was set up through the Datadog Partner Program and you manage customer organizations under it, you are using a partner admin organization. To verify, check that you have multiple contracts with Datadog and can view consolidated cost and usage data across all of them in Plan & Usage.
 
-**Note**: If you are a *customer* of a Datadog partner (rather than the partner themselves), you have the standard Plan & Usage experience. Depending on your pricing arrangement with your partner, you may see only usage data and no cost data. See [Plan & Usage][1] for details.
+**Note**: If you are a *customer* of a Datadog partner (rather than the partner itself), you have the standard Plan & Usage experience. Depending on your pricing arrangement with your partner, you may see only usage data and no cost data. See [Plan & Usage][1] for details.
 
 Partners must have the **Datadog Admin** role, or a custom role with `billing_read` and `usage_read` permissions, to view Plan & Usage data. These are the same permissions required for direct customers.
 
