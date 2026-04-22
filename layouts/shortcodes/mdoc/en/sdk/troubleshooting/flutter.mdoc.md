@@ -1,22 +1,11 @@
----
-title: Troubleshooting Flutter SDK issues
-description: Learn how to troubleshoot issues with Flutter Monitoring.
-aliases:
-- /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/flutter
-- /real_user_monitoring/mobile_and_tv_monitoring/flutter/troubleshooting
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-flutter
-  tag: "Source Code"
-  text: Source code for dd-sdk-flutter
-- link: real_user_monitoring/flutter/
-  tag: Documentation
-  text: Learn about Flutter Monitoring
-
----
+<!--
+This partial contains troubleshooting content for the Flutter SDK.
+It can be included in the Flutter SDK troubleshooting page or in the unified client_sdks view.
+-->
 
 ## Overview
 
-If you experience unexpected behavior with Datadog RUM, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
+If you experience unexpected behavior with Datadog RUM, use this guide to resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
 ## Duplicate interface (iOS)
 
@@ -43,9 +32,9 @@ Execution failed for task ':app:checkDebugDuplicateClasses'.
 
 Make sure that you've updated your version of Kotlin to at least 1.8 in your `build.gradle` file.
 
-## Cocoapods issues
+## CocoaPods issues
 
-If you have trouble building your iOS application after adding the Datadog SDK because of errors being thrown by Cocoapods, check which error you are getting. The most common error is an issue getting the most up-to-date native library from Cocoapods, which can be solved by running the following in your `ios` directory:
+If you have trouble building your iOS application after adding the Datadog SDK because of errors being thrown by CocoaPods, check which error you are getting. The most common error is an issue getting the most up-to-date native library from CocoaPods, which can be solved by running the following in your `ios` directory:
 
 ```bash
 pod install --repo-update
@@ -86,7 +75,7 @@ DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
 
 This causes the SDK to output additional information about what it's doing and what errors it's encountering, which may help you and Datadog Support narrow down your issue.
 
-## Not seeing Errors
+## Not seeing errors
 
 If you do not see any errors in RUM, it's likely no view has been started. Make sure you have started a view with `DatadogSdk.instance.rum?.startView` or, if you are using `DatadogRouteObserver` make sure your current Route has a name.
 
@@ -115,10 +104,6 @@ If you are still having issues, check that your `firstPartyHosts` property is se
 ## "Deobfuscation failed" warning
 
 A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][6] to view all your uploaded symbol files, dSYMs, and mapping files. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][7].
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
 [2]: https://github.com/flutter/flutter/wiki/Developing-with-Flutter-on-Apple-Silicon

@@ -15,7 +15,7 @@ further_reading:
 Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-To explore your Deployment Gates and rules evaluations, navigate to [**Software Delivery > Deployment Gates > Evaluations**][1]. 
+To explore your Deployment Gates and rules evaluations, navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Deployment Gates{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][1]. 
 
 On this page you can:
 * View recently completed gate evaluations and failure reasons

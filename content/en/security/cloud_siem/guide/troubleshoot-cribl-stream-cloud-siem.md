@@ -1,6 +1,8 @@
 ---
-title: Troubleshoot the Cribl Stream integration with Cloud SIEM
+title: Troubleshoot using Cribl Stream with Cloud SIEM
 description: Investigate issues with sending out-of-the-box Cloud SIEM content with Cribl, and explore options on how to fix your configuration so your dashboards and detection rules work as expected.
+aliases:
+  - /security/guide/troubleshoot-cribl-stream-cloud-siem/
 further_reading:
 - link: "/security/cloud_siem/"
   tag: "Documentation"
