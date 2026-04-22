@@ -35,7 +35,7 @@ Navigate to [Setup & Configuration][3], add a Google Cloud Platform account and 
 
 <div class="alert alert-danger">
 The Datadog Google Cloud Platform integration allows Cloud Costs to automatically monitor all projects this service account has access to.
-To limit infrastructure monitoring hosts for these projects, apply tags to the hosts. Then define whether the tags should be included or excluded from monitoring in the <strong>Limit Metric Collection Filters</strong> section of the integration page.
+To limit infrastructure monitoring hosts for these projects, apply tags to the hosts. Then define whether the tags should be included or excluded from monitoring in the {{< ui >}}Limit Metric Collection Filters{{< /ui >}} section of the integration page.
 </div>
 
 {{< img src="cloud_cost/gcp_integration_limit_metric_collection.png" alt="Limit metric collection filters section configured in the Google Cloud Platform integration page" >}}
@@ -47,7 +47,7 @@ The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-t
 
  1. Navigate to [Billing Export][1] under Google Cloud console *Billing*.
  2. Enable the [Detailed Usage cost][2] export (select or create a project and a BigQuery dataset).
- 3. Document the `Billing Account ID` for the billing account where the export was configured, as well as the export `Project ID` and `Dataset Name`.
+ 3. Document the {{< ui >}}Billing Account ID{{< /ui >}} for the billing account where the export was configured, as well as the export {{< ui >}}Project ID{{< /ui >}} and {{< ui >}}Dataset Name{{< /ui >}}.
 
 {{< img src="cloud_cost/billing_export.png" alt="Google Cloud project and dataset info highlighted" >}}
 
@@ -63,7 +63,7 @@ The following permissions allow Datadog to access and transfer the billing expor
 - Enable the [BigQuery Data Transfer Service][5].
   1. Open the BigQuery Data Transfer API page in the API library.
   2. From the dropdown menu, select the project that contains the service account.
-  3. Click the ENABLE button.
+  3. Click the {{< ui >}}ENABLE{{< /ui >}} button.
 
   **Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.
 
@@ -115,7 +115,7 @@ In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform 
 #### Configure export BigQuery dataset access
 [Add the service account as a principal on the export BigQuery dataset resource][8]:
 1. In the Explorer pane on the BigQuery page, expand your project and select the export BigQuery dataset.
-2. Click **Sharing > Permissions** and then **add principal**.
+2. Click {{< ui >}}Sharing{{< /ui >}} > {{< ui >}}Permissions{{< /ui >}} and then {{< ui >}}add principal{{< /ui >}}.
 3. In the new principals field, enter the service account.
 4. Using the select a role list, assign a role with the following permissions:
   * `bigquery.datasets.get`
@@ -133,7 +133,7 @@ In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform 
 #### Configure bucket access
 [Add the service account as a principal on the GCS bucket resource][6]:
 1. Navigate to the Cloud Storage Buckets page in the Google Cloud console, and select your bucket.
-2. Select the permissions tab and click the **grant access** button.
+2. Select the permissions tab and click the {{< ui >}}grant access{{< /ui >}} button.
 3. In the new principals field, enter the service account.
 4. Assign a role with the following permissions:
    * `storage.buckets.get`
