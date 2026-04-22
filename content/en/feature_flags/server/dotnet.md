@@ -21,7 +21,7 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 Before setting up the .NET Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
-- **Datadog [API key](/account_management/api-app-keys/#api-keys)** configured on the Agent
+- **Datadog [API key][5]** configured on the Agent
 - **Datadog .NET tracer** (`dd-trace-dotnet`):
   - Version 3.36.0 or later for .NET 6+
   - Version 3.38.0 or later for .NET Framework 4.6.2+
@@ -306,6 +306,7 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [2]: /agent/remote_config/
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: https://www.nuget.org/packages/Datadog.FeatureFlags.OpenFeature
+[5]: /account_management/api-app-keys/#api-keys
 
 ## Further reading
 
