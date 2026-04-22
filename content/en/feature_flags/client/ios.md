@@ -253,6 +253,108 @@ print(details.error)    // The error that occurred during evaluation, if any
 
 Flag details may help you debug evaluation behavior and understand why a user received a given value.
 
+## Use via OpenFeature
+
+The examples above use Datadog's `FlagsClient` API directly. If you prefer the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature provider for iOS that wraps `FlagsClient` and exposes it through `OpenFeatureAPI.shared`. The same flag data is served through either surface; pick whichever API fits your app.
+
+<div class="alert alert-warning">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift"><code>dd-openfeature-provider-swift</code></a>) is currently in development and not yet recommended for production use. Use the <code>FlagsClient</code> API shown above for production workloads; use this section to prototype OpenFeature integrations or to structure tests around the OpenFeature API.</div>
+
+### Install the OpenFeature provider
+
+Add `dd-openfeature-provider-swift` to your `Package.swift`:
+
+{{< code-block lang="swift" filename="Package.swift" >}}
+.package(url: "https://github.com/DataDog/dd-openfeature-provider-swift.git", .upToNextMajor(from: "0.1.0"))
+{{< /code-block >}}
+
+Link the `DatadogOpenFeatureProvider` product to your app target. The bridge depends on OpenFeature Swift SDK 0.3.0.
+
+### Initialize OpenFeature
+
+Initialize Datadog and enable Flags as shown in [Initialize the SDK](#initialize-the-sdk). Then create a `DatadogProvider` and register it with `OpenFeatureAPI.shared`:
+
+{{< code-block lang="swift" >}}
+import DatadogCore
+import DatadogFlags
+import DatadogOpenFeatureProvider
+import OpenFeature
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .{{< region-param key="dd_datacenter_lowercase" code="true" >}},
+        service: "<service name>"
+    ),
+    trackingConsent: .granted
+)
+
+Flags.enable()
+
+let context = MutableContext(targetingKey: "user-123")
+let provider = DatadogProvider()
+await OpenFeatureAPI.shared.setProviderAndWait(provider: provider, initialContext: context)
+{{< /code-block >}}
+
+`setProviderAndWait` is `async` and does not throw. After it returns, the provider is ready and flag evaluations use cached values.
+
+### Set the evaluation context
+
+The evaluation context identifies who or what the flag evaluation applies to. Pass it at provider registration, as shown above, or update it later:
+
+{{< code-block lang="swift" >}}
+let updatedContext = MutableContext(
+    targetingKey: "user-123",
+    structure: MutableStructure(attributes: [
+        "email": Value.string("user@example.com"),
+        "tier":  Value.string("premium")
+    ])
+)
+
+await OpenFeatureAPI.shared.setEvaluationContextAndWait(evaluationContext: updatedContext)
+{{< /code-block >}}
+
+The `targetingKey` is the randomization subject for percentage rollouts — the same key always receives the same variant for a given flag.
+
+### Evaluate flags
+
+Retrieve the global OpenFeature client and call the typed getters:
+
+{{< code-block lang="swift" >}}
+let client = OpenFeatureAPI.shared.getClient()
+
+let isNewCheckoutEnabled = client.getBooleanValue(key: "checkout.new", defaultValue: false)
+
+let theme = client.getStringValue(key: "ui.theme", defaultValue: "light")
+
+let maxItems = client.getIntegerValue(key: "cart.items.max", defaultValue: 20)
+
+let priceMultiplier = client.getDoubleValue(key: "pricing.multiplier", defaultValue: 1.0)
+
+let config = client.getObjectValue(
+    key: "ui.config",
+    defaultValue: Value.structure([
+        "color": Value.string("#00A3FF"),
+        "fontSize": Value.integer(14)
+    ])
+)
+{{< /code-block >}}
+
+Evaluations are synchronous and safe to perform on the main thread — they read from the SDK's local cache and do not make network requests.
+
+### Flag evaluation details
+
+Use the `get<Type>Details` methods when you need the reason, variant, or any evaluation error in addition to the value:
+
+{{< code-block lang="swift" >}}
+let details = client.getStringDetails(key: "paywall.layout", defaultValue: "control")
+
+print(details.value)    // Evaluated value
+print(details.variant)  // Variant name, if applicable
+print(details.reason)   // Reason (for example: "TARGETING_MATCH" or "DEFAULT")
+print(details.errorCode) // Error code, if evaluation failed
+{{< /code-block >}}
+
 ## Advanced configuration
 
 The `Flags.enable()` API accepts optional configuration with options listed below.
