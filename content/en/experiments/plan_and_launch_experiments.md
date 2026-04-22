@@ -18,13 +18,13 @@ Plan and launch [experiments][8] to measure how new features affect business out
 
 ## Prerequisites
 
-<div class="alert alert-info">If your organization uses custom roles, you must have the appropriate <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">Product Analytics</a> and <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#feature-flags">Feature Flags</a> permissions to create and launch experiments.</div>
+<div class="alert alert-info">You must have the appropriate <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">Product Analytics</a> and <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#feature-flags">Feature Flags</a> permissions to create and launch experiments.</div>
 
 Before you begin, make sure you have:
 
 - A [feature flag][4] for deploying and managing the experiment variants you want to test.
 - At least one [experiment metric][2] for measuring the outcome of your experiment.
-- A [subject type][6] for setting the level at which Datadog randomizes your experiment (default is **User**).
+- A [subject type][6] for setting the level at which Datadog randomizes your experiment.
 
 ## Plan your experiment
 
@@ -59,7 +59,7 @@ After creating your experiment, define the metrics, feature flag, and randomizat
 
 To define the metrics that measure the outcome of your experiment:
 
-1. Use the **Calculate metrics by** dropdown to select the subject type (default is **User (@usr.id)**).
+1. Use the **Calculate metrics by** dropdown to select the subject type.
    - To define a custom subject type, select **Create subject type** from the dropdown.
 1. Click the **Primary metric** button to open the picker:
    1. Select a primary metric for the outcome you want to measure.
@@ -80,13 +80,12 @@ To run the calculation:
 1. Expand **Calculation details**. Your primary and secondary metrics appear under **Metrics**.
 1. Use the **Entry point** dropdown to select the event that assigns users to the experiment, such as viewing a checkout page or clicking an add-to-cart button. Datadog uses this event to estimate traffic volume.
 1. (Optional) Under **Filter entry point**, narrow the entry point's audience:
-   1. Click **Filter** and select a property from the picker. If you do not see the property you need, type the property name in the **Custom property** field and click **Add**.
-   1. In the filter row that appears, modify the operator as needed and select a value from the dropdown. The default operator is **= (is)**.
-   1. (Optional) Click **Filter** to add more rows. Between rows, use the dropdown to select **or** or **and** to set how filters combine.
-1. Set the **Number of variants** (default is 2) and **Traffic exposure** percentage (default is 100%).
-1. Expand **Additional inputs**, then choose the statistical **Power** (default is 80%) and enter a **Target experiment duration** in weeks.
+   1. Click **+ Filter** and select a property from the picker. If you do not see the property you need, type the property name in the **Custom property** field and click **Add**.
+   1. In the filter row that appears, modify the operator as needed and select a value from the dropdown.
+   1. (Optional) Click **+ Filter** to add more rows. Between rows, use the dropdown to select **or** or **and** to set how filters combine.
+1. Set the **Number of variants** and **Traffic exposure**.
+1. Expand **Additional inputs**, then choose the statistical **Power** and enter a **Target experiment duration** in weeks.
    - The **Target experiment duration** value must be 1 or an even number because the calculator estimates MDE values and expected user counts at 1-, 2-, 4-, 6-, and 8-week intervals.
-   - For longer intervals, enter a higher even value.
 1. Click **Run Calculation** to see an estimate of the **[Minimum detectable effect (MDE)][3] over time** for your metrics.
 1. Close the side panel and continue to [Add a feature flag](#add-a-feature-flag).
 
@@ -113,9 +112,9 @@ After you select a feature flag, Datadog pre-populates the randomization setting
 
 To configure randomization:
 
-1. Select the **Environment** for your experiment from the dropdown. The default is **prod**.
+1. Select the **Environment** for your experiment from the dropdown.
 1. Under **Targeting rules**, configure a filter to target users based on custom attributes (for example, user role or subscription tier) that you set in your [evaluation context][10]:
-   1. Click **Add Filter**. For the `IF` row, enter an attribute and value, and select an operator from the dropdown. The default is **is one of**.
+   1. Click **Add Filter**. For the `IF` row, enter an attribute and value, and select an operator from the dropdown.
    1. (Optional) Refine your targeting rule:
       - To add an `AND` row within the same filter, click **Add Condition**.
       - To add another filter joined by `OR`, click **Add Filter**.
@@ -154,9 +153,9 @@ If your organization has configured default settings, a **COMPANY DEFAULT** badg
 To modify the statistical analysis plan:
 
 1. Expand the **Statistical analysis plan** section.
-1. Select a method from the **Confidence interval method** dropdown. The default is **Sequential**.
-   - If you select **Bayesian**, choose a **Standard Deviation of Prior** from the dropdown. The default is **Medium (5.00%)**.
-1. Select a percentage from the **Confidence level** dropdown. The default is **95%**.
+1. Select a method from the **Confidence interval method** dropdown.
+   - If you select **Bayesian**, choose a **Standard Deviation of Prior** from the dropdown.
+1. Select a percentage from the **Confidence level** dropdown.
 1. To disable CUPED, toggle off **CUPED calculation**. CUPED is enabled by default and uses pre-experiment data from each subject to reduce the variance of the metrics and improve experiment sensitivity.
 1. To reduce the risk of false positives, toggle on **Multiple testing correction**. This setting adjusts for the increased risk across multiple metric comparisons, producing more conservative results.
    - This setting is not available when you use the **Bayesian** method.
@@ -173,7 +172,7 @@ To configure split-by dimensions:
 1. If you do not see the property you need:
    1. Type the property name in the dropdown field, prefixed with `context.` (for example, `context.team`). Then, click **Add custom property** to open the **Split-by exploration dimensions** dialog.
    1. Verify the **Column Name** matches the property name you entered.
-   1. Select the property **Type** from the dropdown. The default is **String**.
+   1. Select the property **Type** from the dropdown.
    1. Click **Save**. The custom property appears in the **Properties to compute for dimensional analysis** dropdown.
 
 {{% /collapse-content %}}
