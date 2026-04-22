@@ -16,7 +16,7 @@ The `sca` key requires `schema-version: v1.1` and supports the following field:
 
 | **Property** | **Type** | **Description** | **Default** |
 | --- | --- | --- | --- |
-| `ignore-paths` | Array | File paths or glob patterns to exclude from SCA analysis. | None |
+| `ignore-paths` | Array | File paths or glob patterns to exclude from Static SCA analysis. | None |
 
 Example:
 

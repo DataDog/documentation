@@ -175,7 +175,7 @@ Software Composition Analysis (SCA) supports the following languages:
 
 ## Customize your configuration
 
-You can exclude paths from SCA analysis by configuring `ignore-paths` in Datadog or in a `code-security.datadog.yaml` file. For the full SCA configuration reference, see [Software Composition Analysis (SCA) Configuration][27]. For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][28].
+You can exclude paths from Static SCA analysis by configuring `ignore-paths` in Datadog or in a `code-security.datadog.yaml` file. For the full SCA configuration reference, see [Software Composition Analysis (SCA) Configuration][27]. For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][28].
 
 ## Next steps
 

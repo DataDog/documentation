@@ -51,7 +51,7 @@ Repository-level configurations apply only to the selected repository and take p
 
 ### Repository-level configuration (file)
 
-The `code-security.datadog.yaml` file stores configuration at the root of a repository. It takes precedence over org-level and repository-level configurations defined in Datadog. Use this file to customize rule configurations and iterate on setup and testing.
+The `code-security.datadog.yaml` file stores configuration at the root of a repository. It takes precedence over org-level and repository-level configurations defined in Datadog.
 
 ## How configurations merge
 
