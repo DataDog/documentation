@@ -287,6 +287,10 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 <!-- UI -->
 {% if equals($interface, "ui") %}
 
+{% img src="observability_pipelines/install_page_secrets.png"
+alt="The install page in the UI with a dropdown menu to choose your installation platform and fields to enter environment variables"
+style="width:100%;" /%}
+
 <!-- UI - Docker -->
 {% if equals($platform, "docker") %}
 {% if equals($secrets_source, "secrets_manager") %} ... {% /if %}
@@ -315,10 +319,6 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 {% /if %}
 
 ### Pipeline UI setup
-
-{% img src="observability_pipelines/install_page_secrets.png"
-alt="The install page in the UI with a dropdown menu to choose your installation platform and fields to enter environment variables"
-style="width:100%;" /%}
 
 After you set up your source, destinations, and processors on the Build page of the pipeline UI, follow the steps on the Install page to install the Worker.
 
