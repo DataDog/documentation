@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-In your Datadog account, AWS Application Load Balancer (ALB) metrics are reported under both the `aws.applicationelb.*` and `aws.elb.*` namespaces. Datadog is removing this legacy dual-reporting so that ALB metrics are reported only under `aws.applicationelb.*`, which is the correct and intended namespace.
+This guide applies only to Datadog customers contacted by [Datadog Support][2] about a legacy behavior in the Datadog AWS integration. In your account, AWS Application Load Balancer (ALB) metrics are reported under both the `aws.applicationelb.*` and `aws.elb.*` namespaces. Datadog is removing this legacy dual-reporting so that ALB metrics are reported only under `aws.applicationelb.*`, which is the correct and intended namespace.
 
 **Classic ELB metrics are not affected.** They continue to report under `aws.elb.*` as they do today.
 
@@ -37,6 +37,8 @@ You are affected if all of the following are true:
 - You collect metrics from the `AWS/ApplicationELB` namespace.
 - You use Application Load Balancers in one or more integrated AWS accounts.
 - Your organization is in the US1 Datadog site.
+
+**Note**: Datadog Support contacts all impacted customers directly. If you haven't been contacted, this deprecation doesn't apply to your account.
 
 ## How to identify affected queries
 
@@ -69,9 +71,7 @@ Review your monitors, dashboards, and notebooks for queries that reference the `
 | Monitor Application Load Balancer | Update queries to use the `aws.applicationelb.*` namespace instead of `aws.elb.*`. |
 | Monitor both Classic ELB and Application Load Balancer | Separate the queries. Keep `aws.elb.*` for Classic ELB, and create new queries that use `aws.applicationelb.*` for Application Load Balancer. |
 
-**Note**: Replacing `aws.elb.*` with `aws.applicationelb.*` isn't always a direct one-to-one swap. Some metrics have different names between the two namespaces, and some have different Datadog metric types (gauge or count) or post-processing applied. Verify the behavior of each updated query before relying on it for alerting.
-
-<!-- DRAFT NOTE: Doug to confirm specifics for the "not-one-to-one" cases (divide-by-60 and gauge-vs-count). Fill in concrete examples once available. -->
+**Note**: Replacement metric names under `aws.applicationelb.*` match the legacy `aws.elb.*` names exactly, except for the two JWT metrics listed in the table. Those metrics have an added underscore between `jwt` and `validation` in the new name.
 
 ## Affected metrics
 
@@ -119,8 +119,8 @@ Today, these ALB metrics are reported under `aws.elb.*`. After the change, they 
 | `aws.elb.httpredirect_url_limit_exceeded` | `aws.applicationelb.httpredirect_url_limit_exceeded` |
 | `aws.elb.ipv_6processed_bytes` | `aws.applicationelb.ipv_6processed_bytes` |
 | `aws.elb.ipv_6request_count` | `aws.applicationelb.ipv_6request_count` |
-| `aws.elb.jwt_validation_failure_count` | `aws.applicationelb.jwt_validation_failure_count` |
-| `aws.elb.jwt_validation_success_count` | `aws.applicationelb.jwt_validation_success_count` |
+| `aws.elb.jwtvalidation_failure_count` | `aws.applicationelb.jwt_validation_failure_count` |
+| `aws.elb.jwtvalidation_success_count` | `aws.applicationelb.jwt_validation_success_count` |
 | `aws.elb.lambda_internal_error` | `aws.applicationelb.lambda_internal_error` |
 | `aws.elb.lambda_target_processed_bytes` | `aws.applicationelb.lambda_target_processed_bytes` |
 | `aws.elb.lambda_user_error` | `aws.applicationelb.lambda_user_error` |
@@ -162,6 +162,11 @@ Today, these ALB metrics are reported under `aws.elb.*`. After the change, they 
 ### Metrics to verify (may be affected)
 
 These metric names exist in both Classic ELB and Application Load Balancer. Whether they are affected depends on which type of load balancer they originate from. Use the tag logic in [How to identify affected queries](#how-to-identify-affected-queries) to determine the source.
+
+**Note**: Three of the overlap metrics change behavior when migrated, beyond the namespace swap:
+
+- **`aws.elb.request_count`** → `aws.applicationelb.request_count`: the legacy metric is a rate (divided by 60); the replacement is a count. After migrating, add `.as_rate()` or adjust the query to treat the metric as a count.
+- **`aws.elb.httpcode_elb_4xx`** and **`aws.elb.httpcode_elb_5xx`** → `aws.applicationelb.httpcode_elb_4xx` and `aws.applicationelb.httpcode_elb_5xx`: when sourced from an ALB today, the legacy metrics report values 60 times higher than the true rate. Datadog divides by 60 only for Classic ELB. The replacement metrics report correctly as counts. After migrating, expect different numbers; add `.as_rate()` or keep the query as a count.
 
 | Metric name | Affected when source is |
 | --- | --- |
