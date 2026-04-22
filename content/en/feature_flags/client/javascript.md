@@ -207,7 +207,7 @@ Unlike the server-side SDK, the Web SDK evaluates flags synchronously after init
 
 {{< code-block lang="javascript" >}}
 import { beforeEach, afterAll, expect, test } from 'vitest';
-import { OpenFeature, InMemoryProvider } from '@openfeature/web-sdk';
+import { OpenFeature, TypedInMemoryProvider } from '@openfeature/web-sdk';
 
 const flags = {
   new_checkout_button: {
@@ -223,7 +223,7 @@ const flags = {
 };
 
 beforeEach(async () => {
-  await OpenFeature.setProviderAndWait(new InMemoryProvider(flags));
+  await OpenFeature.setProviderAndWait(new TypedInMemoryProvider(flags));
 });
 
 afterAll(async () => {
@@ -241,7 +241,7 @@ test('missing flag returns default', () => {
 });
 {{< /code-block >}}
 
-The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Missing any of these throws `VariantNotFoundError` during evaluation. The same test pattern works with Jest + jsdom; swap the `vitest` imports for `@jest/globals` and add `jest-environment-jsdom` to your project.
+The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Omitting any of these fails TypeScript compilation; at runtime, evaluating an unknown flag key returns the supplied default. Prefer `TypedInMemoryProvider` over the deprecated `InMemoryProvider` for type-checked flag configurations. The same test pattern works with Jest + jsdom; swap the `vitest` imports for `@jest/globals` and add `jest-environment-jsdom` to your project.
 
 ## Further reading
 

@@ -295,13 +295,13 @@ await OpenFeature.setContext({
 
 ## Testing
 
-Do not use `DatadogProvider` in unit tests: it requires network access to Datadog's Remote Configuration backend. Use OpenFeature's `InMemoryProvider` from `@openfeature/web-sdk` instead. Install it as a dev dependency and register it before rendering components under test:
+Do not use `DatadogProvider` in unit tests: it requires network access to Datadog's Remote Configuration backend. Use OpenFeature's `TypedInMemoryProvider` from `@openfeature/web-sdk` instead. Install it as a dev dependency and register it before rendering components under test:
 
 {{< code-block lang="javascript" >}}
 import { OpenFeature } from '@openfeature/react-sdk';
-import { InMemoryProvider } from '@openfeature/web-sdk';
+import { TypedInMemoryProvider } from '@openfeature/web-sdk';
 
-await OpenFeature.setProviderAndWait(new InMemoryProvider({
+await OpenFeature.setProviderAndWait(new TypedInMemoryProvider({
   new_checkout_button: {
     variants: { on: true, off: false },
     defaultVariant: 'on',
@@ -310,7 +310,7 @@ await OpenFeature.setProviderAndWait(new InMemoryProvider({
 }));
 {{< /code-block >}}
 
-The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Use `setProviderAndWait` (not `setProvider`) to avoid suspense races when the test renders flag-gated components immediately.
+The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Use `setProviderAndWait` (not `setProvider`) to avoid suspense races when the test renders flag-gated components immediately. For component tests that mount a React tree, `@openfeature/react-sdk` also exports an `OpenFeatureTestProvider` component that wraps children with an in-memory provider — see the [OpenFeature React SDK docs](https://openfeature.dev/docs/reference/technologies/client/web/react) for details.
 
 ## Further reading
 

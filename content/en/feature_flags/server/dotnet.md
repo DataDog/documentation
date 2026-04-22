@@ -266,7 +266,7 @@ await Api.Instance.ShutdownAsync();
 
 Do not use the Datadog provider in unit tests: it requires a running Agent and Remote Configuration. Use OpenFeature's `InMemoryProvider` instead. It ships in the `OpenFeature` NuGet package (namespace `OpenFeature.Providers.Memory`), so no additional dependency is required beyond what is already installed for production.
 
-`Api.Instance` is a singleton. Use xUnit's `IAsyncLifetime` to set the provider per test and tear it down in `DisposeAsync`, which avoids ordering-dependent tests. For faster suites that share setup, use `InMemoryProvider.UpdateFlags(...)` to mutate flag state between tests without re-registering the provider.
+`Api.Instance` is a singleton. Use xUnit's `IAsyncLifetime` to set the provider per test and tear it down in `DisposeAsync`, which avoids ordering-dependent tests. For faster suites that share setup, use `InMemoryProvider.UpdateFlagsAsync(...)` to mutate flag state between tests without re-registering the provider.
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;

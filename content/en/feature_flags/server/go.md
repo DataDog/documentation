@@ -308,7 +308,7 @@ func TestNewCheckoutFlow(t *testing.T) {
                     State:            memprovider.Enabled,
                     DefaultVariant:   "off",
                     Variants:         map[string]any{"on": true, "off": false},
-                    ContextEvaluator: (*memprovider.ContextEvaluator)(&evalByTier),
+                    ContextEvaluator: &evalByTier,
                 },
             })
 
@@ -333,7 +333,7 @@ func TestNewCheckoutFlow(t *testing.T) {
 }
 {{< /code-block >}}
 
-`ContextEvaluator` is a **pointer to a function** (`*func(...)`), not a plain function. Define the evaluator in a local variable and pass its address, as shown above. Omit `ContextEvaluator` entirely to always return `DefaultVariant`.
+`ContextEvaluator` is defined as `*func(...)` — a pointer to a function. Define the evaluator in a local variable and pass its address with `&`, as shown above. Omit `ContextEvaluator` entirely to always return `DefaultVariant`.
 
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/

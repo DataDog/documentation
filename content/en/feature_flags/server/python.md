@@ -264,7 +264,7 @@ def test_missing_flag_returns_default(client):
     assert client.get_boolean_value("does-not-exist", True) is True
 {{< /code-block >}}
 
-`InMemoryFlag` takes `default_variant` (a string variant name) and `variants` (a dict mapping variant names to typed values). Passing a value as `default_variant` instead of a variant name is a common mistake. For targeting logic, pass a `context_evaluator` callback that receives an `EvaluationContext` and returns a variant name.
+`InMemoryFlag` takes `default_variant` (a string variant name) and `variants` (a dict mapping variant names to typed values). Passing a value as `default_variant` instead of a variant name is a common mistake. For targeting logic, pass a `context_evaluator` callback that receives the flag and an `EvaluationContext` and returns a `FlagResolutionDetails` object carrying the chosen variant.
 
 ## Troubleshooting
 
