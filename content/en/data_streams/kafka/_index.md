@@ -40,12 +40,11 @@ To retrieve messages in the {{< ui >}}Messages{{< /ui >}} section, the Agent use
 
 ### Remote configuration
 
-[Remote configuration][3] must be enabled for the Agent to retrieve Kafka messages in the {{< ui >}}Messages{{< /ui >}} section.
+[Remote configuration][3] must be enabled at three levels:
 
-To validate:
-
-1. In Datadog, under [{{< ui >}}Remote Configuration{{< /ui >}}][5], check that remote configuration is enabled at the organization level.
-2. Check that the Agent has remote configuration enabled, and is using an API key with remote configuration enabled.
+1. At the [organization level][5].
+2. At the [Agent level][10].
+3. At the [API key level][11].
 
 ## Setup
 
@@ -59,19 +58,19 @@ The setup page provides environment-specific configuration instructions. You can
 
 To view Kafka messages, a user must have the `Data Streams Monitoring Capture Messages` permission.
 
-You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} page][7]. To enable permissions, edit an existing role or create a new one on the [{{< ui >}}Roles{{< /ui >}} page][8]. If you do not have permission to modify roles, contact your organization's administrator.
+You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} page][7]. To enable permissions, edit an existing role or create a role on the [{{< ui >}}Roles{{< /ui >}} page][8]. If you do not have permission to modify roles, contact your organization's administrator.
 
 <details>
-<summary><strong>Create a new role and assign it to users</strong></summary>
+<summary><strong>Create a role and assign it to users</strong></summary>
 
-#### 1. Create a new role
+#### 1. Create a role
 
 1. Navigate to the [{{< ui >}}Roles{{< /ui >}} page][8] in Datadog.
 2. Click {{< ui >}}+ New Role{{< /ui >}} in the top-right corner.
    <div class="alert alert-info">
    If you see "Read Only" instead of the "+ New Role button", you don't have permission to create roles. Contact your Datadog administrator for assistance.
    </div>
-3. Enter a descriptive name for your new role (for example, "Data Streams Messages Access").
+3. Enter a descriptive name for your role (for example, "Data Streams Messages Access").
 4. In the {{< ui >}}Search Permissions{{< /ui >}} field, type `Data Streams Monitoring Capture Messages`.
 5. Select the permission from the search results to enable it for this role.
 6. Click {{< ui >}}Save{{< /ui >}}.
@@ -133,8 +132,10 @@ The {{< ui >}}Messages{{< /ui >}} section lets you retrieve messages by partitio
 {{< img src="data_streams/kafka_schema_messages.png" alt="Topic schema and messages view showing a Protobuf schema definition and a table of recent messages with date, partition, offset, and message value" >}}
 
 [1]: https://app.datadoghq.com/data-streams/kafka/setup
-[3]: /agent/remote_config
+[3]: /remote_configuration/
 [5]: https://app.datadoghq.com/organization-settings/remote-config
 [7]: https://app.datadoghq.com/personal-settings/profile
 [8]: https://app.datadoghq.com/organization-settings/roles
 [9]: https://app.datadoghq.com/organization-settings/users
+[10]: /remote_configuration/#enable-remote-configuration
+[11]: /account_management/api-app-keys/
