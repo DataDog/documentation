@@ -38,16 +38,16 @@ Product Analytics uses the same SDKs and configuration as Real User Monitoring (
 To create a metric for your experiment:
 
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
-1. Select the **Metrics** tab and click **Create Metric** at the top right corner.
-1. Add a **Metric name** and, optionally, a **Description**.
-1. Under the **Metric definition** section, click **Select an event** to open the event picker. The chart on the right updates in real time as you configure your metric.
-   1. Search for a specific event, or use the **By Type** filter to browse by event type.
-1. Select an [aggregation method](#aggregation-methods) from the dropdown. The default is **Count of events**.
-1. Click **Add Filter** to [filter your metric](#add-filters) by additional properties.
-1. (Optional) Under the **Additional settings** section:
-   1. Toggle on **Mark as certified** to indicate that this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
-   1. Adjust the [**Experiment settings**](#advanced-options) and **Units** as needed. The defaults work for most use cases.
-1. Click **Save**.
+1. Select the {{< ui >}}Metrics{{< /ui >}} tab and click {{< ui >}}Create Metric{{< /ui >}} at the top right corner.
+1. Add a {{< ui >}}Metric name{{< /ui >}} and, optionally, a {{< ui >}}Description{{< /ui >}}.
+1. Under the {{< ui >}}Metric definition{{< /ui >}} section, click {{< ui >}}Select an event{{< /ui >}} to open the event picker. The chart on the right updates in real time as you configure your metric.
+   1. Search for a specific event, or use the {{< ui >}}By Type{{< /ui >}} filter to browse by event type.
+1. Select an [aggregation method](#aggregation-methods) from the dropdown. The default is {{< ui >}}Count of events{{< /ui >}}.
+1. Click {{< ui >}}Add Filter{{< /ui >}} to [filter your metric](#add-filters) by additional properties.
+1. (Optional) Under the {{< ui >}}Additional settings{{< /ui >}} section:
+   1. Toggle on {{< ui >}}Mark as certified{{< /ui >}} to indicate that this metric is approved for important decision-making. This requires the Product Analytics Certified Metrics Write permission.
+   1. Adjust the [{{< ui >}}Experiment settings{{< /ui >}}](#advanced-options) and {{< ui >}}Units{{< /ui >}} as needed. The defaults work for most use cases.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="/product_analytics/experiment/exp_create_new_metric.png" alt="The Create Metric page with the Metric name set to 'Example metric', the 'click on ADD TO CART' event selected, the aggregation method dropdown set to Count of events, the Additional settings section, a bar chart preview on the right, and the Save button highlighted." style="width:90%;" >}}
 
@@ -60,9 +60,9 @@ To create a metric for your experiment:
 
 ### Add filters
 
-You can filter your metric by selecting an **Event properties** filter, such as Service, Country, or Device Type. Use the **By Data Type** filter to narrow the list of available properties by type (for example, String or Boolean).
+You can filter your metric by selecting an {{< ui >}}Event properties{{< /ui >}} filter, such as Service, Country, or Device Type. Use the {{< ui >}}By Data Type{{< /ui >}} filter to narrow the list of available properties by type (for example, String or Boolean).
 
-If you do not see the property you need, type the property name in the **Custom property** field (for example, `@context.tracking`) and click **Add**.
+If you do not see the property you need, type the property name in the {{< ui >}}Custom property{{< /ui >}} field (for example, `@context.tracking`) and click {{< ui >}}Add{{< /ui >}}.
 
 {{< img src="/product_analytics/experiment/exp_filter_by_2.png" alt="The Filter by panel open within the Metric definition section, showing All Properties selected, Event properties such as Application Id, Service, Browser Name, and Country in the center, a By Data Type filter with Numerical, String, and Boolean options on the left, and a Custom property section at the bottom with a text field showing the placeholder 'e.g. @context.tracking' and an Add button." style="width:90%;" >}}
 
@@ -89,29 +89,29 @@ Write your SQL query to define and preview your data, then configure your model 
 Start by writing a query to retrieve your data:
 
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
-1. Select the **Metric SQL Models** tab and click **Create SQL Model**.
-1. In the **Write SQL** section, enter a SQL query that returns your data of interest. The SQL editor supports `SELECT * FROM` and more advanced SQL statements.
-1. Click **Run** to preview your data.
+1. Select the {{< ui >}}Metric SQL Models{{< /ui >}} tab and click {{< ui >}}Create SQL Model{{< /ui >}}.
+1. In the {{< ui >}}Write SQL{{< /ui >}} section, enter a SQL query that returns your data of interest. The SQL editor supports `SELECT * FROM` and more advanced SQL statements.
+1. Click {{< ui >}}Run{{< /ui >}} to preview your data.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query for user_id, revenue_timestamp, and amount from a revenue orders table, with a successful query preview below displaying USER_ID, REVENUE_TIMESTAMP, and AMOUNT columns." style="width:80%;" >}}
 
 #### Map your warehouse data to Datadog
 
-After previewing your data, map it to Datadog. In the **Structure your model** section:
+After previewing your data, map it to Datadog. In the {{< ui >}}Structure your model{{< /ui >}} section:
 
-1. Add a **Metric SQL Model Name** (for example, **Revenue Orders**).
-1. (Optional) Toggle on **Mark as certified** to indicate that this SQL model is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
+1. Add a {{< ui >}}Metric SQL Model Name{{< /ui >}} (for example, **Revenue Orders**).
+1. (Optional) Toggle on {{< ui >}}Mark as certified{{< /ui >}} to indicate that this SQL model is approved for important decision-making. This requires the Product Analytics Certified Metrics Write permission.
 1. Map the columns in your warehouse table to the following:
-   - **Timestamp column**
+   - {{< ui >}}Timestamp column{{< /ui >}}
      - The column that lists the timestamp associated with the metric event.
      - The analysis only includes rows created after the subject enrolls in the experiment.
-   - **Subject Type**
+   - {{< ui >}}Subject Type{{< /ui >}}
      - The attribute that Datadog uses to randomly assign experiment groups.
      - You can define the subject type and its default warehouse column on the [Subject Types][12] page. For example, you can use `user_id` for an individual user or `org_id` for an organization account.
-   - **Measures** (optional)
+   - {{< ui >}}Measures{{< /ui >}} (optional)
      - The numeric columns from your warehouse table that Datadog can aggregate into metrics (for example, a `revenue` or `amount` column).
-     - Each SQL model automatically includes an **each record** measure. Use this measure to count the number of relevant rows in the table for a specific experiment subject.
-1. Click **Create Metric SQL Model** to save your SQL model.
+     - Each SQL model automatically includes an {{< ui >}}each record{{< /ui >}} measure. Use this measure to count the number of relevant rows in the table for a specific experiment subject.
+1. Click {{< ui >}}Create Metric SQL Model{{< /ui >}} to save your SQL model.
 
 {{< img src="/product_analytics/experiment/exp_create_metrics_sql_model_structure4.png" alt="The Structure your model panel with the Metric SQL Model Name field set to 'Revenue Orders' and highlighted, a Mark as certified toggle, Timestamp column set to REVENUE_TIMESTAMP, Subject Type set to User (@usr.id) with USER_ID selected in the column selector, a Measures dropdown showing 'Revenue Orders (each record)', and the Create Metric SQL Model button highlighted." style="width:80%;" >}}
 
@@ -120,15 +120,15 @@ After previewing your data, map it to Datadog. In the **Structure your model** s
 After you create your SQL model, use it to create a metric:
 
 1. Navigate to the [Metrics page][1] in Datadog Product Analytics.
-1. Select the **Metrics** tab and click **Create Metric** at the top right corner.
-1. Add a **Metric name** and, optionally, a **Description**.
-1. Under the **Metric definition** section, click **Select an event** to open the event picker. The chart on the right updates in real time as you configure your metric.
+1. Select the {{< ui >}}Metrics{{< /ui >}} tab and click {{< ui >}}Create Metric{{< /ui >}} at the top right corner.
+1. Add a {{< ui >}}Metric name{{< /ui >}} and, optionally, a {{< ui >}}Description{{< /ui >}}.
+1. Under the {{< ui >}}Metric definition{{< /ui >}} section, click {{< ui >}}Select an event{{< /ui >}} to open the event picker. The chart on the right updates in real time as you configure your metric.
    1. Select the relevant SQL model. Your SQL models appear under their data source (for example, **Revenue Orders** under **Snowflake**).
 1. Select an [aggregation method](#aggregation-methods) from the dropdown.
-1. (Optional) Under the **Additional settings** section:
-   1. Toggle on **Mark as certified** to indicate this metric is approved for important decision-making. This requires the **Product Analytics Certified Metrics Write** permission.
-   1. Adjust the [**Experiment settings**](#advanced-options) and **Units** as needed. The defaults work for most use cases.
-1. Click **Save**.
+1. (Optional) Under the {{< ui >}}Additional settings{{< /ui >}} section:
+   1. Toggle on {{< ui >}}Mark as certified{{< /ui >}} to indicate this metric is approved for important decision-making. This requires the Product Analytics Certified Metrics Write permission.
+   1. Adjust the [{{< ui >}}Experiment settings{{< /ui >}}](#advanced-options) and {{< ui >}}Units{{< /ui >}} as needed. The defaults work for most use cases.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="/product_analytics/experiment/exp_create_metric_from_sqlmodel_2.png" alt="The Create Metric event picker showing All Events selected, with event types including Snowflake, Actions, Views, Sessions, Errors, and Long Tasks on the left, and the Revenue Orders SQL model highlighted under Snowflake on the right, showing Measures: amount and Filterable dimensions: N/A." style="width:80%;" >}}
 
@@ -148,20 +148,20 @@ Aggregation methods determine how Datadog summarizes data for each experiment su
 
 Datadog Experiments supports the following aggregation methods:
 
-- **Count of events** (default)
-- **Count of unique users** (useful for conversion metrics)
-- **Sum of** an event property (useful for revenue metrics)
-- **Distinct values of** an event property (useful for unique pages viewed metrics)
-- **Percentile** of an event property (useful for latency metrics)
-- **Average of** an event property (useful for satisfaction metrics)
+- {{< ui >}}Count of events{{< /ui >}} (default)
+- {{< ui >}}Count of unique users{{< /ui >}} (useful for conversion metrics)
+- {{< ui >}}Sum of{{< /ui >}} an event property (useful for revenue metrics)
+- {{< ui >}}Distinct values of{{< /ui >}} an event property (useful for unique pages viewed metrics)
+- {{< ui >}}Percentile{{< /ui >}} of an event property (useful for latency metrics)
+- {{< ui >}}Average of{{< /ui >}} an event property (useful for satisfaction metrics)
 
 {{< img src="/product_analytics/experiment/exp_default_metric_agg_1.png" alt="The aggregation method dropdown showing Count of unique users (selected) and Count of events at the top, followed by a SELECT A MEASURE section with Sum of, Distinct values of, Percentile, and Average of options, with a description reading 'The number of users who performed the event' on the right." style="width:90%;" >}}
 
-Datadog computes metrics for each experiment subject. For example, a **Count of events** metric on an experiment randomized by user calculates the total number of events for all users in the variant (experiment group) divided by the number of users in that variant.
+Datadog computes metrics for each experiment subject. For example, a {{< ui >}}Count of events{{< /ui >}} metric on an experiment randomized by user calculates the total number of events for all users in the variant (experiment group) divided by the number of users in that variant.
 
 ### Ratio metrics
 
-Click **Create Ratio** to divide your metric by a value other than the default number of experiment subjects. The denominator can use any of the [aggregation methods](#aggregation-methods). For example, divide purchases by product page views to measure conversion at a specific step in the funnel, rather than across all enrolled users.
+Click {{< ui >}}Create Ratio{{< /ui >}} to divide your metric by a value other than the default number of experiment subjects. The denominator can use any of the [aggregation methods](#aggregation-methods). For example, divide purchases by product page views to measure conversion at a specific step in the funnel, rather than across all enrolled users.
 
 Datadog accounts for correlations between the numerator and denominator using the [delta method][2].
 
@@ -169,7 +169,7 @@ Datadog accounts for correlations between the numerator and denominator using th
 
 ## Advanced options
 
-Datadog Experiments supports the following advanced options. These can be modified under **Additional settings > Experiment settings** when creating a metric.
+Datadog Experiments supports the following advanced options. These can be modified under {{< ui >}}Additional settings{{< /ui >}} > {{< ui >}}Experiment settings{{< /ui >}} when creating a metric.
 
 Time frame filters
 : By default, Datadog includes all events between a user's first exposure and the end of the experiment. Use this setting to measure a time-boxed value such as "sessions within 7 days". If you add a time frame filter, the metric only includes events from the specified time window, starting at the moment the experiment first enrolls the user.

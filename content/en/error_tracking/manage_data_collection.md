@@ -19,7 +19,7 @@ You can define what data is included in Error Tracking in two ways:
 - [Rules](#rules-inclusion)
 - [Rate limits](#rate-limits)
 
-You can configure both rules and rate limits on the [**Error Tracking** > **Settings**][1] page.
+You can configure both rules and rate limits on the [{{< ui >}}Error Tracking{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1] page.
 
 ## Rules
 
@@ -80,11 +80,11 @@ By default, Error Tracking includes an `*` inclusion filter with no exclusion fi
 
 To add a rule (inclusion filter):
 1. Navigate to [Error Tracking Settings][1].
-2. Click **Add New Rule**.
-3. Choose the **Error Tracking source** the rule should be applied to.
-4. Enter a search query in the **Define scope** field.
-5. Optionally, **Add Exclusion** filters and a description to the rule.
-6. Click **Save Changes**
+2. Click {{< ui >}}Add New Rule{{< /ui >}}.
+3. Choose the {{< ui >}}Error Tracking source{{< /ui >}} the rule should be applied to.
+4. Enter a search query in the {{< ui >}}Define scope{{< /ui >}} field.
+5. Optionally, {{< ui >}}Add Exclusion{{< /ui >}} filters and a description to the rule.
+6. Click {{< ui >}}Save Changes{{< /ui >}}
 7. Optionally, reorder the rules to change their [evaluation order](#how-rules-are-evaluated). Click and drag the six-dot icon on a given rule to move the rule up or down in the list.
 
 {{< img src="error_tracking/reorder-filters.png" alt="On the right side of each rule is a six-dot icon, which you can drag vertically to reorder rules." style="width:80%;">}}
@@ -99,10 +99,10 @@ After the daily cap is reached, ingestion stops until the next day. You can modi
 ### Set a rate limit
 
 To set a rate limit:
-1. Navigate to [**Error Tracking** > **Settings**][1].
-1. Click **Rate Limits**.
-1. Edit the **errors/day** field.
-1. Click **Save Rate Limit**.
+1. Navigate to [{{< ui >}}Error Tracking{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1].
+1. Click {{< ui >}}Rate Limits{{< /ui >}}.
+1. Edit the {{< ui >}}errors/day{{< /ui >}} field.
+1. Click {{< ui >}}Save Rate Limit{{< /ui >}}.
 
 {{< img src="error_tracking/rate-limit.png" alt="On the left side of this page, under 'Set your Rate Limit below,' is a drop-down menu where you can set your rate limit." style="width:70%;">}}
 
@@ -124,7 +124,7 @@ Because Error Tracking billing is based on the number of errors, large increases
 
 Dynamic Sampling is automatically enabled with Error Tracking with a default intake threshold based on your daily rate limit and historical volume.
 
-For best results, set up a daily rate limit on the [Error Tracking Rate Limits page][5]: Click **Edit Rate Limit** and enter a new value.
+For best results, set up a daily rate limit on the [Error Tracking Rate Limits page][5]: Click {{< ui >}}Edit Rate Limit{{< /ui >}} and enter a new value.
 
 {{< img src="error_tracking/dynamic-sampling-rate-limit.png" alt="Error Tracking Rate Limit" style="width:90%" >}}
 

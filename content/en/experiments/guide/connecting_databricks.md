@@ -28,27 +28,27 @@ Datadog Experiments connects to Databricks through the [Datadog Databricks integ
 
 **In your Databricks Workspace**:
 
-1. Click your profile in the top right corner and select **Settings**.
-1. In the **Settings** menu, click **Identity and access**.
-1. On the **Service principals** row, click **Manage**, then:
-   1. Click **Add service principal**, then **Add new**.
-   1. Enter a service principal name and click **Add**.
+1. Click your profile in the top right corner and select {{< ui >}}Settings{{< /ui >}}.
+1. In the {{< ui >}}Settings{{< /ui >}} menu, click {{< ui >}}Identity and access{{< /ui >}}.
+1. On the {{< ui >}}Service principals{{< /ui >}} row, click {{< ui >}}Manage{{< /ui >}}, then:
+   1. Click {{< ui >}}Add service principal{{< /ui >}}, then {{< ui >}}Add new{{< /ui >}}.
+   1. Enter a service principal name and click {{< ui >}}Add{{< /ui >}}.
 1. Click the name of the new service principal to open its details page.
-1. Select the **Permissions** tab, then:
-   1. Click **Grant access**.
-   1. Under **User, Group or Service Principal**, enter the service principal name.
-   1. Using the **Permission** dropdown, select **Manage**.
-   1. Click **Save**.
-1. Select the **Secrets** tab, then:
-   1. Click **Generate secret**.
-   1. Set the **Lifetime (days)** value to the maximum allowed (for example, 730).
-   1. Click **Generate**.
-   1. Note your **Secret** and **Client ID**.
-   1. Click **Done**.
-1. In the **Settings** menu, click **Identity and access**.
-1. On the **Groups** row, click **Manage**, then:
-   1. Click **admins**, then **Add members**.
-   1. Enter the service principal name and click **Add**.
+1. Select the {{< ui >}}Permissions{{< /ui >}} tab, then:
+   1. Click {{< ui >}}Grant access{{< /ui >}}.
+   1. Under {{< ui >}}User, Group or Service Principal{{< /ui >}}, enter the service principal name.
+   1. Using the {{< ui >}}Permission{{< /ui >}} dropdown, select {{< ui >}}Manage{{< /ui >}}.
+   1. Click {{< ui >}}Save{{< /ui >}}.
+1. Select the {{< ui >}}Secrets{{< /ui >}} tab, then:
+   1. Click {{< ui >}}Generate secret{{< /ui >}}.
+   1. Set the {{< ui >}}Lifetime (days){{< /ui >}} value to the maximum allowed (for example, 730).
+   1. Click {{< ui >}}Generate{{< /ui >}}.
+   1. Note your {{< ui >}}Secret{{< /ui >}} and {{< ui >}}Client ID{{< /ui >}}.
+   1. Click {{< ui >}}Done{{< /ui >}}.
+1. In the {{< ui >}}Settings{{< /ui >}} menu, click {{< ui >}}Identity and access{{< /ui >}}.
+1. On the {{< ui >}}Groups{{< /ui >}} row, click {{< ui >}}Manage{{< /ui >}}, then:
+   1. Click {{< ui >}}admins{{< /ui >}}, then {{< ui >}}Add members{{< /ui >}}.
+   1. Enter the service principal name and click {{< ui >}}Add{{< /ui >}}.
 
 After you create the service principal, continue to [Step 1](#step-1-grant-permissions-to-the-service-principal) to grant the required permissions.
 
@@ -60,7 +60,7 @@ After you create the service principal, continue to [Step 1](#step-1-grant-permi
 
 <div class="alert alert-info">You must be an account admin to grant these permissions.</div>
 
-In your Databricks Workspace, open the **SQL Editor** to run the following commands and grant the service principal permissions for warehouse-native experiment analysis.
+In your Databricks Workspace, open the {{< ui >}}SQL Editor{{< /ui >}} to run the following commands and grant the service principal permissions for warehouse-native experiment analysis.
 
 {{< img src="/product_analytics/experiment/guide/databricks_experiments_sql_editor.png" alt="The Databricks Workspace with SQL Editor highlighted in the left navigation under the SQL section, Queries listed below it, a New Query tab open with the New SQL editor: ON toggle at the top, an empty query editor, and a Run all (1000) button with a dropdown arrow." style="width:90%;" >}}
 
@@ -103,28 +103,28 @@ GRANT WRITE VOLUME ON VOLUME <catalog>.datadog_experiments_output.datadog_experi
 
 Grant the service principal access to the SQL warehouse that Datadog Experiments uses to run queries.
 
-1. Navigate to **SQL Warehouses** in your Databricks Workspace.
+1. Navigate to {{< ui >}}SQL Warehouses{{< /ui >}} in your Databricks Workspace.
 1. Select the warehouse for Datadog Experiments.
-1. At the top right corner, click **Permissions**.
-1. Grant the service principal the **Can use** permission.
-1. Close the **Manage permissions** modal.
+1. At the top right corner, click {{< ui >}}Permissions{{< /ui >}}.
+1. Grant the service principal the {{< ui >}}Can use{{< /ui >}} permission.
+1. Close the {{< ui >}}Manage permissions{{< /ui >}} modal.
 
 ## Step 2: Connect Databricks to Datadog
 
 To connect your Databricks Workspace to Datadog for warehouse-native experiment analysis:
 
-1. Navigate to [Datadog's integrations page][6] and search for **Databricks**.
-1. Click the **Databricks** tile to open its modal.
-1. Select the **Configure** tab and click **Add Databricks Workspace**. If this is your first Databricks account, the setup form appears automatically.
-1. Under the **Connect a new Databricks Workspace** section, enter:
-   - **Workspace Name**.
-   - **Workspace URL**.
-   - **Client ID**.
-   - **Client Secret**.
-   - **System Tables SQL Warehouse ID**.
-1. Toggle off **Jobs Monitoring** and all other products.
-1. Toggle off the **Metrics - Model Serving** resource.
-1. Click **Save Databricks Workspace**.
+1. Navigate to [Datadog's integrations page][6] and search for {{< ui >}}Databricks{{< /ui >}}.
+1. Click the {{< ui >}}Databricks{{< /ui >}} tile to open its modal.
+1. Select the {{< ui >}}Configure{{< /ui >}} tab and click {{< ui >}}Add Databricks Workspace{{< /ui >}}. If this is your first Databricks account, the setup form appears automatically.
+1. Under the {{< ui >}}Connect a new Databricks Workspace{{< /ui >}} section, enter:
+   - {{< ui >}}Workspace Name{{< /ui >}}.
+   - {{< ui >}}Workspace URL{{< /ui >}}.
+   - {{< ui >}}Client ID{{< /ui >}}.
+   - {{< ui >}}Client Secret{{< /ui >}}.
+   - {{< ui >}}System Tables SQL Warehouse ID{{< /ui >}}.
+1. Toggle off {{< ui >}}Jobs Monitoring{{< /ui >}} and all other products.
+1. Toggle off the {{< ui >}}Metrics - Model Serving{{< /ui >}} resource.
+1. Click {{< ui >}}Save Databricks Workspace{{< /ui >}}.
 
 ## Step 3: Configure experiment settings
 
@@ -133,13 +133,13 @@ To connect your Databricks Workspace to Datadog for warehouse-native experiment 
 After you set up your Databricks integration and workspace, configure the experiment settings in Datadog:
 
 1. Open [Datadog Product Analytics][5].
-1. In the left navigation, hover over **Settings** and click **Experiments**.
-1. Select the **Warehouse Connections** tab.
-1. Click **Connect a data warehouse**. If you already have a warehouse connected, click **Edit** instead.
-1. Select the **Databricks** tile.
-1. Using the **Account** dropdown, select the Databricks Workspace you configured in [Step 2](#step-2-connect-databricks-to-datadog).
-1. Enter the **Catalog**, **Schema**, and **Volume name** you configured in [Step 1](#step-1-grant-permissions-to-the-service-principal). If your catalog and schema do not appear in the dropdown, enter them manually to add them to the list.
-1. Click **Save**.
+1. In the left navigation, hover over {{< ui >}}Settings{{< /ui >}} and click {{< ui >}}Experiments{{< /ui >}}.
+1. Select the {{< ui >}}Warehouse Connections{{< /ui >}} tab.
+1. Click {{< ui >}}Connect a data warehouse{{< /ui >}}. If you already have a warehouse connected, click {{< ui >}}Edit{{< /ui >}} instead.
+1. Select the {{< ui >}}Databricks{{< /ui >}} tile.
+1. Using the {{< ui >}}Account{{< /ui >}} dropdown, select the Databricks Workspace you configured in [Step 2](#step-2-connect-databricks-to-datadog).
+1. Enter the {{< ui >}}Catalog{{< /ui >}}, {{< ui >}}Schema{{< /ui >}}, and {{< ui >}}Volume name{{< /ui >}} you configured in [Step 1](#step-1-grant-permissions-to-the-service-principal). If your catalog and schema do not appear in the dropdown, enter them manually to add them to the list.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="/product_analytics/experiment/guide/databricks_experiment_setup_1.png" alt="The Edit Data Warehouse modal with Databricks selected, showing input fields for Account, Catalog, Schema, and Volume Name." style="width:90%;" >}}
 

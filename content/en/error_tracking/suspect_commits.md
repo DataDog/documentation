@@ -16,7 +16,7 @@ Once a suspect commit has been identified, it is displayed on the issue panel, a
 
 {{< img src="logs/error_tracking/suspect_commit_in_context.png" alt="A suspect commit shown in the context of the issue panel" style="width:90%" >}}
 
-To view a suspect commit on GitHub, click the **View Commit** button.
+To view a suspect commit on GitHub, click the {{< ui >}}View Commit{{< /ui >}} button.
 
 ### Suspect commit criteria
 A commit becomes a suspect commit if:
@@ -35,7 +35,7 @@ Once the setup requirements are met, suspect commits automatically appear on iss
 
 The Suspect Commits feature requires [Source Code Integration][1]. To enable Source Code Integration:
 
-1. On the [**Integrations** page][3] in Datadog, choose **Link Source Code** in the top navbar.
+1. On the [{{< ui >}}Integrations{{< /ui >}} page][3] in Datadog, choose {{< ui >}}Link Source Code{{< /ui >}} in the top navbar.
 2. Follow the steps to associate a commit with your telemetry and configure your GitHub repository.
 
 ### Install the GitHub integration
