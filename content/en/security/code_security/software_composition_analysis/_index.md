@@ -20,6 +20,9 @@ further_reading:
   - link: /security/code_security/software_composition_analysis/library_inventory
     tag: Documentation
     text: Library Inventory
+  - link: /security/code_security/software_composition_analysis/cve_explorer
+    tag: Documentation
+    text: CVE Explorer
   - link: /pr_gates/
     tag: Documentation
     text: PR Gates
@@ -116,6 +119,14 @@ Use the Library Inventory to understand which dependencies you rely on, where th
 
 To learn more about how the inventory is generated, how Static and Runtime data differ, and how to interpret the library details (usage, vulnerabilities, licenses, versions, and OpenSSF score), see [Library Inventory][14].
 
+### Explore the full CVE catalog
+
+The [CVE Explorer][15] gives you a searchable catalog of every CVE and security advisory tracked by Datadog, regardless of whether it affects your environment. Use it to proactively assess exposure to newly published vulnerabilities before they appear in your findings.
+
+For CVEs that affect packages detected in your scanned repositories and services, Datadog automatically marks them as impacted. Assets that have not been scanned will not reflect an impacted status.
+
+For each CVE, you can view the severity score, exploit availability, EPSS score, CISA KEV status, impacted packages, and fix versions. See [CVE Explorer][27] for more details.
+
 ### Create tickets from findings
 
 You can create a bidirectional ticket in Jira or ServiceNow directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and your ticketing tool. For more information, see [Ticketing integrations][19].
@@ -179,6 +190,7 @@ Software Composition Analysis (SCA) supports the following languages:
 2. [Set up Runtime SCA][2] to detect libraries loaded by your running services.
 3. Review and triage findings in the [Vulnerabilities Explorer][11].
 4. Configure [PR Gates][16] to block risky changes before they are merged.
+5. Use the [CVE Explorer][15] to proactively assess exposure to newly published vulnerabilities.
 
 ## Further Reading
 
@@ -206,3 +218,5 @@ Software Composition Analysis (SCA) supports the following languages:
 [24]: https://github.com/pypa/advisory-database
 [25]: https://github.com/cloudsecurityalliance/gsd-database
 [26]: https://github.com/DataDog/guarddog
+[27]: /security/code_security/software_composition_analysis/cve_explorer/
+[15]: https://app.datadoghq.com/security/code-security/detection-coverage/advisories
