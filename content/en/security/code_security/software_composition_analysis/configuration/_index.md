@@ -10,7 +10,7 @@ further_reading:
   text: Code Security Configuration Reference
 ---
 
-Datadog Software Composition Analysis (SCA) detects open source libraries and their vulnerabilities in your code. You can exclude specific paths from analysis. Configure this setting under the `sca` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
+Datadog Software Composition Analysis (SCA) detects open source libraries and their vulnerabilities in your code. You can exclude specific paths from Static SCA analysis. Configure this setting under the `sca` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
 
 The `sca` key requires `schema-version: v1.1` and supports the following field:
 
