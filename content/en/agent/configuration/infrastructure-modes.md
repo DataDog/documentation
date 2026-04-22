@@ -89,7 +89,7 @@ To configure the infrastructure mode when installing the Agent for the first tim
 
 {{< tabs >}}
 {{% tab "Linux" %}}
-In the following command, replace `<API_KEY>` with your organization's [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys), `<DD_SITE>` with `{{< region-param key="dd_site" >}}`, and `<MODE>` with `full`, `basic`, `end_user_device`, or `none`:
+In the following command, replace `<API_KEY>` with your organization's [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys), `<DD_SITE>` with **{{< region-param key="dd_site" >}}**, and `<MODE>` with `full`, `basic`, `end_user_device`, or `none`:
 
 ```shell
 DD_API_KEY="<API_KEY>" \
