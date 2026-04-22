@@ -5,6 +5,7 @@ type: multi-code-lang
 code_lang_weight: 50
 aliases:
   - /security/application_security/threats/setup/compatibility/nodejs
+  - /security/application_security/enabling/compatibility/nodejs
 ---
 
 ## App and API Protection capabilities

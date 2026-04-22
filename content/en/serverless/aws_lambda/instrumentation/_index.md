@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Instrument your AWS Lambda applications with a Datadog Lambda Library to collect traces, enhanced metrics, and custom metrics.
+Instrument your AWS Lambda applications with a Datadog Lambda Extension to collect traces, enhanced metrics, and custom metrics. The Datadog Lambda Extension is analogous to using the Datadog Agent and Datadog tracing libraries for host-based infrastructure and applications.
 
 {{< img src="serverless/serverless_tracing_installation_instructions.png" alt="A diagram that shows how Datadog receives telemetry from your instrumented AWS Lambda application. Your Lambda application, instrumented with a Datadog Lambda Library, sends logs, traces, enhanced metrics, and custom metrics to the Datadog Lambda Extension, which then pushes this data to Datadog." style="width:100%;" >}}
 
@@ -28,10 +28,6 @@ A sample application is [available on GitHub][6] with instructions on how to dep
 The quick start process configures your Lambda functions on the fly. To instrument Lambda functions permanently, see the detailed instructions in the next section.
 
 ## Instrumentation instructions
-
-For Node.js and Python runtimes, you can use [remote instrumentation][5] to add instrumentation to your AWS Lambda functions and keep them instrumented securely. See [Remote instrumentation for AWS Lambda][5].
-
-For other Lambda runtimes (or to instrument your Node.js or Python functions without remote instrumentation) see detailed instrumentation instructions:
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 

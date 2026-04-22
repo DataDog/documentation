@@ -7,9 +7,6 @@ further_reading:
       tag: 'Documentation'
       text: 'Reducing Data Related Risks'
 ---
-{{< callout url="#" header="false" btn_hidden="true">}}
-  Data Access Control is in Limited Availability
-{{< /callout >}}
 
 ## Overview
 
@@ -31,7 +28,7 @@ Data Access Control relies on tags and attributes in your data that can be used 
 
 Data Access Control allows you to create a Restricted Dataset, specifying data that only users in designated teams or roles can access.
 
-To view all of your Restricted Datasets, navigate to [Organization Settings][6], and select [Data Access Controls][7] on the left, under the **Access** heading.
+To view all of your Restricted Datasets, navigate to [Organization Settings][6], and select [Data Access Controls][7] on the left, under the {{< ui >}}Access{{< /ui >}} heading.
 
 ### Datadog site
 
@@ -39,11 +36,11 @@ Log in as a user assigned the Datadog Admin role, or any user with a role in you
 
 1. Navigate to [Organization Settings][6].
 1. On the left side of the page, select [Data Access Controls][7].
-1. Click **New Restricted Dataset**.
+1. Click {{< ui >}}New Restricted Dataset{{< /ui >}}.
 
 In order to create a Restricted Dataset, identify the data to be restricted with a query.
 
-{{< img src="/account_management/rbac/restricted_dataset-2.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
+{{< img src="/account_management/rbac/restricted_dataset-3.png" alt="Create a Restricted Dataset dialog. Selects data in RUM, APM, Logs, and Metrics matching the tag service:hr. Grants access to a Privileged access team.">}}
 
 Name Dataset
 : A descriptive name to help users understand what data is contained in the dataset.
@@ -56,26 +53,23 @@ Grant access
 
 You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider defining an additional Restricted Dataset if you need additional pairs.
 
-After completing all the fields to define the dataset, click **Create Restricted Dataset** to apply it to your organization.
+After completing all the fields to define the dataset, click {{< ui >}}Create Restricted Dataset{{< /ui >}} to apply it to your organization.
 
 You may create a maximum of 100 Restricted Datasets under the Enterprise plan, and a maximum of 10 datasets otherwise. If you need a higher limit, reach out to Support.
-
-### API
-The Data Access Control API is under development and should be considered unstable. Future versions may be backward incompatible.
-
-Terraform support will be announced after Data Access Control is generally available.
 
 ### Supported telemetry types {#supported-telemetry}
 
 - APM traces
-- Software Delivery repository info (CI Visibility pipelines)
+- Logs
+- RUM sessions
+- LLM Observability
+
+The following are available as a Preview upon request:
 - Cloud costs
 - Custom metrics
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Error Tracking issues
-- Logs
-- RUM sessions
-- LLM Observability
+- Software Delivery repository info (in CI Visibility pipelines, Test Optimization, and Code Coverage products)
 
 ## Usage constraints
 
@@ -84,14 +78,19 @@ After you turn on Data Access Control, Datadog disables or limits other features
 ### Real User Monitoring (RUM)
 
 #### Session Replay: Extended Retention
-By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. When you enroll in the Preview for Data Access Control, Datadog disables the option for Extended Retention. Extended Retention does not work with Data Access Control because the data store that holds the extended data does not support access restrictions.
+By default, Session Replay data is retained for 30 days. To extend retention to 15 months, you can enable Extended Retention on individual session replays. When you create a restricted dataset for RUM, Datadog disables the option for Extended Retention.
 
 #### Session Replay: Playlists
 
-Playlists are collections of Session Replays you can aggregate in a folder-like structure. Playlists can allow a user to unintentionally escape access controls. When a customer enrolls in the Preview for Data Access Control, Datadog disables Session Replay Playlists.
+Playlists are collections of Session Replays you can aggregate in a folder-like structure. When you create a restricted dataset for RUM, Datadog disables Session Replay Playlists.
 
 ### Logs
-Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. To use Data Access Control with Log Management, first request access to Data Access Control. Next, manually migrate your configuration from Log Management permissions to Data Access Control.
+Data Access Control is separate from the existing [Logs RBAC permissions][11] feature, also known as log restriction queries. Datadog recommends using a single solution to restrict logs data. If you limit user access using both Data Access Control and log restriction queries, both sets of restrictions apply.
+
+### Monitors
+Users can create monitors that query and alert on active telemetry. While the user can only directly query data they're allowed to access, the monitor operates as a system user with full access to data.
+
+If you are concerned about unauthorized data access through monitors, Datadog recommends that you track the monitors your users create. Then, restrict access to the creation of monitors that read sensitive data.
 
 ### Software Delivery repository info (CI Visibility pipelines)
 
@@ -101,6 +100,10 @@ Data Access Control is separate from the existing [Logs RBAC permissions][11] fe
   * `@git.repository_url`
   * `@git.repository.id`
   * `@gitlab.groups`
+
+### LLM Observability
+
+When using [OpenTelemetry instrumentation][13], some data sent to LLM Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on LLM Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 
 
 ## Select tags for access
@@ -118,7 +121,7 @@ If you have too many combinations of tags or attributes to fit within these cons
 #### Restricted Dataset 2
 * Telemetry type: RUM
     * Filters: `@application.id:EFGH`
-* Telemetry type: Metrics
+* Telemetry type: Custom Metrics
     * Filters: `env:prod`
 
 ### Not supported example
@@ -156,11 +159,11 @@ Before configuring Data Access Control, it's important to evaluate your access s
 If you have already identified which data needs to be protected, you can build your Data Access Control configuration around only this specific data. This ensures that non-sensitive data is generally available to your users, allowing them to collaborate and understand ongoing issues or incidents.
 
 For example, if you have a single application that is instrumented with Real User Monitoring (RUM) and captures sensitive inputs from users, consider creating a Restricted Dataset only for that application:
-* **Name dataset:** Restricted RUM data
-* **Select data to be included in this Dataset:**
+* {{< ui >}}Name dataset:{{< /ui >}} Restricted RUM data
+* {{< ui >}}Select data to be included in this Dataset:{{< /ui >}}
     * Telemetry type: RUM
         * Filters: `@application.id:<rum-app-id>`
-* **Grant access:**
+* {{< ui >}}Grant access:{{< /ui >}}
     * Teams or roles of users who can see this RUM data
 
 This configuration example would protect the RUM data from this application, and keep other data from this application available to existing users in your organization.
@@ -171,17 +174,17 @@ If you are instead looking to protect data from a specific service, you can buil
 
 For example, if you have a service `NewService` that is instrumented with Real User Monitoring (RUM) and capturing sensitive inputs from users, consider creating a Restricted Dataset only for that application:
 
-* **Name Dataset:** Restricted NewService data
-* **Select data to be included in this Dataset:**
+* {{< ui >}}Name Dataset:{{< /ui >}} Restricted NewService data
+* {{< ui >}}Select data to be included in this Dataset:{{< /ui >}}
     * Telemetry type: RUM
         * Filters: `@service:NewService`
-    * Telemetry type: Metrics
+    * Telemetry type: Custom Metrics
         * Filters: `@service:NewService`
     * Telemetry type: APM
         * Filters: `@service:NewService`
     * Telemetry type: Logs
         * Filters: `@service:NewService`
-* **Grant access:**
+* {{< ui >}}Grant access:{{< /ui >}}
     * Team who owns the service
 
 This configuration example protects all supported data from `NewService`.
@@ -226,3 +229,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [10]: /account_management/rbac/data_access/#supported-telemetry
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
 [12]: /dashboards/sharing/shared_dashboards/
+[13]: /llm_observability/instrumentation/otel_instrumentation/

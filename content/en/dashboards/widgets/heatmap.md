@@ -17,6 +17,11 @@ further_reading:
   text: "Visualize user behavior with Datadog Heatmaps"
 ---
 
+{{< callout url=https://www.datadoghq.com/product-preview/hostmap
+ btn_hidden="false" header="Join the Preview!">}}
+A new Host Map experience is in Preview. Use this form to request early access to the new features.
+{{< /callout >}}
+
 {{< img src="dashboards/widgets/heatmap/heatmap.png" alt="Example heatmap graph visualization" style="width:100%;">}}
 
 The heatmap widget shows metrics aggregated across multiple tags. Use heatmap widgets to visualize OpenTelemetry histograms, distribution metrics, high resolution and data display.
@@ -41,7 +46,7 @@ They allow you to:
 * Automatically change y-axis bounds based on an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) to remove the "outlier" series.
 * Change the y-axis scale from linear to log, pow, or sqrt.
 
-Change the Y-axis scale by expanding the *Y-Axis Controls* button.
+Change the Y-axis scale by expanding the {{< ui >}}Y-Axis Controls{{< /ui >}} button.
 
 The following configuration options are available:
 

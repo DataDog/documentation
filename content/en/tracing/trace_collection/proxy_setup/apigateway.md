@@ -65,7 +65,8 @@ Datadog APM can create **inferred spans** for requests that pass through Amazon 
 | Go | `dd-trace-go` | v[1.72.1][3]+ | chi, httptreemux, echo, go-restful, fiber, gin, gorilla mux, httprouter, fasthttp, goji |
 | Python | `dd-trace-py` | v[3.1.0][4]+ | aiohttp, asgi, bottle, cherrypy, django, djangorestframework, falcon, fastapi, flask, molten, pyramid, sanic, starlette, tornado, wsgi |
 | PHP | `dd-trace-php` | v[1.8.0][7]+ | CakePHP, CodeIgniter, Drupal, FuelPHP, Laminas, Laravel, Lumen, Magento, Neos Flow, Phalcon, Roadrunner, Slim, Symfony, WordPress, Zend Framework |
-| .NET | `dd-trace-dotnet` | v[3.15.0][8]+ | CakePHP, CodeIgniter, Drupal, FuelPHP, Laminas, Laravel, Lumen, Magento, Neos Flow, Phalcon, Roadrunner, Slim, Symfony, WordPress, Zend Framework |
+| .NET | `dd-trace-dotnet` | v[3.15.0][8]+ | ASP.NET, ASP.NET Core |
+| Java | `dd-trace-java` | v[1.56.0][9]+ | akka-http, axway-api, azure-functions, finatra, grizzly, jetty, liberty, micronaut, netty, pekko-http, play, ratpack, restlet, servlet, spring-web, spray, synapse, tomcat, undertow, vertx |
 
 ## Setup
 
@@ -206,3 +207,4 @@ Update the rule in one of the following ways:
 [6]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html
 [7]: https://github.com/DataDog/dd-trace-php/releases/tag/1.8.0
 [8]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.15.0
+[9]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.56.0

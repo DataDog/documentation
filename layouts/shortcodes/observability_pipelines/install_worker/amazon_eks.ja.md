@@ -28,4 +28,4 @@
 パイプラインの構成を変更したい場合は、[既存のパイプラインの更新][602]を参照してください。
 
 [601]: /resources/yaml/observability_pipelines/v2/setup/aws_eks.yaml
-[602]: /ja/observability_pipelines/update_existing_pipelines
+[602]: /ja/observability_pipelines/configuration/update_existing_pipelines

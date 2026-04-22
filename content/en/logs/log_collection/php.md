@@ -533,7 +533,7 @@ Add the following:
   return $app;
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading

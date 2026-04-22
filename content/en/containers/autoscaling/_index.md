@@ -4,9 +4,6 @@ description: Automatically scale Kubernetes workloads using Datadog metrics and 
 aliases:
 - /containers/monitoring/autoscaling
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
-  tag: "Blog"
-  text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 - link: "/infrastructure/containers/kubernetes_resource_utilization"
   tag: "Documentation"
   text: "Kubernetes Resource Utilization"
@@ -16,11 +13,23 @@ further_reading:
 - link: "/agent/remote_config/"
   tag: "Documentation"
   text: "Remote Configuration"
+- link: "https://www.datadoghq.com/blog/autoscaling-custom-metrics"
+  tag: "Blog"
+  text: "Scaling Kubernetes workloads on custom metrics"
+- link: https://www.datadoghq.com/blog/kubernetes-custom-query-autoscaling
+  tag: Blog
+  text: Optimize Kubernetes workloads with Custom Query Scaling
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
+- link: "https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/"
+  tag: "Blog"
+  text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-  This feature is not available for the Datadog for Government (US1-FED) site.  
+  This feature is not available for the Datadog for Government (US1-FED) site.
 </div>
 {{< /site-region >}}
 
@@ -46,11 +55,18 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
 - [Remote Configuration][1] must be enabled both at the organization level and on the Agents in your target cluster. See [Enabling Remote Configuration][2] for setup instructions.
 - [Helm][3], for updating your Datadog Agent.
 - (For Datadog Operator users) [`kubectl` CLI][4], for updating the Datadog Agent.
-- Scaling recommendations are available for workloads monitored with Datadog Agent v7.50+, with the [Kubernetes State Core][9] integration enabled. Datadog recommends upgrading to the latest Datadog Agent version to deploy live Kubernetes Autoscaling.
+- When you are using live autoscaling, Datadog recommends using the latest Datadog Agent version. This helps ensure access to the latest improvements and optimizations. Scaling recommendations require the [Kubernetes State Core][9] integration to be enabled. <br/><br/>
+
+   | Feature | Minimum Agent Version |
+   |---------|----------------------|
+   | In-app workload scaling recommendations | 7.50+ |
+   | Live workload scaling | 7.66.1+ |
+   | Argo Rollout recommendations and autoscaling | 7.71+ |
+   | Cluster autoscaling ([preview sign-up][10]) | 7.72+ |
+
 - The following user permissions:
    - Org Management (required for Remote Configuration)
    - API Keys Write (required for Remote Configuration)
-   - Workload Scaling Read
    - Workload Scaling Write
    - Autoscaling Manage
 - (Recommended) Linux kernel v5.19+ and cgroup v2
@@ -63,7 +79,7 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
 1. Ensure you are using Datadog Operator v1.16.0+. To upgrade your Datadog Operator:
 
 ```shell
-helm upgrade datadog-operator datadog/datadog-operator 
+helm upgrade datadog-operator datadog/datadog-operator
 ```
 
 2. Add the following to your `datadog-agent.yaml` configuration file:
@@ -192,60 +208,235 @@ _Fixed cost values are subject to refinement over time._
 
 The [Autoscaling Summary page][6] provides a starting point for platform teams to understand the total Kubernetes Resource savings opportunities across an organization, and filter down to key clusters and namespaces. The [Cluster Scaling view][7] provides per-cluster information about total idle CPU, total idle memory, and costs. Click on a cluster for detailed information and a table of the cluster's workloads. If you are an individual application or service owner, you can also filter by your team or service name directly from the [Workload Scaling list view][8].
 
-Click **Optimize** on any workload to see its scaling recommendation.
+Click {{< ui >}}Optimize{{< /ui >}} on any workload to see its scaling recommendation.
 
 ### Enable Autoscaling for a workload
 
-After you identify a workload to optimize, Datadog recommends inspecting its **Scaling Recommendation**. You can also click **Configure Recommendation** to add constraints or adjust target utilization levels.
+After you identify a workload to optimize, Datadog recommends inspecting its {{< ui >}}Scaling Recommendation{{< /ui >}}. You can also click {{< ui >}}Configure Recommendation{{< /ui >}} to add constraints or adjust target utilization levels.
 
 When you are ready to proceed with enabling Autoscaling for a workload, you have two options for deployment:
 
-- Click **Enable Autoscaling**. (Requires Workload Scaling Write permission.) 
+- Click {{< ui >}}Enable Autoscaling{{< /ui >}}. (Requires Workload Scaling Write permission.)
 
    Datadog automatically installs and configures autoscaling for this workload on your behalf.
 
-- Deploy a `DatadogPodAutoscaler` custom resource. 
-   
-   Use your existing deploy process to target and configure Autoscaling for your workload. 
+- Deploy a `DatadogPodAutoscaler` custom resource.
 
-   {{% collapse-content title="Example DatadogPodAutoscaler CRD" level="h4" expanded=false id="id-for-anchoring" %}}
-   ```yaml
-   apiVersion: datadoghq.com/v1alpha2
-   kind: DatadogPodAutoscaler
-   metadata:
-     name: <name, usually same as Deployment object name>
-   spec:
-     targetRef:
-       apiVersion: apps/v1
-       kind: Deployment
-       name: <your Deployment name>
-     constraints:
-       # Adjust constraints as safeguards
-       maxReplicas: 50
-       minReplicas: 1
-     owner: Local
-     applyPolicy:
-       mode: Apply
-     objectives:
-       - type: PodResource
-         podResource:
-           name: cpu
-           value:
-             type: Utilization
-             utilization: 75
-   ```
-   {{% /collapse-content %}}
+   Use your existing deploy process to target and configure Autoscaling for your workload. See the [example configurations](#example-datadogpodautoscaler-configurations) below.
+
+### Example DatadogPodAutoscaler configurations
+
+The following examples demonstrate common `DatadogPodAutoscaler` configurations for different scaling strategies. You can use these as starting points and adjust the values to match your workload's requirements.
+
+{{< tabs >}}
+{{% tab "Optimize Cost" %}}
+
+The {{< ui >}}Optimize Cost{{< /ui >}} profile uses multidimensional scaling to aggressively reduce resource waste. It sets a high CPU utilization target (85%), allows scaling down to a single replica, and uses aggressive scale-down rules for fast response to reduced load.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha2
+kind: DatadogPodAutoscaler
+metadata:
+    name: <WORKLOAD_NAME>
+    namespace: <NAMESPACE>
+spec:
+    targetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: <WORKLOAD_NAME>
+    owner: Local
+    applyPolicy:
+        mode: Apply
+        scaleDown:
+            rules:
+                # Aggressive: allow 50% reduction every 2 minutes
+                - periodSeconds: 120
+                  type: Percent
+                  value: 50
+            stabilizationWindowSeconds: 300
+        scaleUp:
+            rules:
+                - periodSeconds: 120
+                  type: Percent
+                  value: 50
+            stabilizationWindowSeconds: 300
+        update:
+            strategy: Auto
+    constraints:
+        maxReplicas: 100
+        # Allow scaling down to 1 replica for maximum savings
+        minReplicas: 1
+    objectives:
+        # High utilization target to maximize cost efficiency
+        - type: PodResource
+          podResource:
+            name: cpu
+            value:
+                type: Utilization
+                utilization: 85
+```
+
+{{% /tab %}}
+{{% tab "Optimize Balance" %}}
+
+The {{< ui >}}Optimize Balance{{< /ui >}} profile provides a middle ground between cost optimization and stability. It uses a moderate CPU utilization target (70%), maintains at least 2 replicas, and applies conservative scale-down rules to avoid disruptive scaling events.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha2
+kind: DatadogPodAutoscaler
+metadata:
+    name: <WORKLOAD_NAME>
+    namespace: <NAMESPACE>
+spec:
+    targetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: <WORKLOAD_NAME>
+    owner: Local
+    applyPolicy:
+        mode: Apply
+        scaleDown:
+            rules:
+                # Conservative: allow only 20% reduction every 20 minutes
+                - periodSeconds: 1200
+                  type: Percent
+                  value: 20
+            stabilizationWindowSeconds: 600
+        scaleUp:
+            rules:
+                - periodSeconds: 120
+                  type: Percent
+                  value: 50
+            stabilizationWindowSeconds: 600
+        update:
+            strategy: Auto
+    constraints:
+        maxReplicas: 100
+        # Maintain at least 2 replicas for availability
+        minReplicas: 2
+    objectives:
+        # Moderate utilization target balances cost and performance
+        - type: PodResource
+          podResource:
+            name: cpu
+            value:
+                type: Utilization
+                utilization: 70
+```
+
+{{% /tab %}}
+{{% tab "Vertical CPU and Memory" %}}
+
+The **Vertical only** profile scales by adjusting CPU and memory requests and limits on existing pods, without changing the replica count. This is useful for workloads that cannot be horizontally scaled, or where you want to rightsize individual pods.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha2
+kind: DatadogPodAutoscaler
+metadata:
+    name: <WORKLOAD_NAME>
+    namespace: <NAMESPACE>
+spec:
+    targetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: <WORKLOAD_NAME>
+    owner: Local
+    applyPolicy:
+        mode: Apply
+        # Horizontal scaling disabled; only vertical resizing
+        scaleDown:
+            strategy: Disabled
+        scaleUp:
+            strategy: Disabled
+        update:
+            strategy: Auto
+    constraints:
+        maxReplicas: 100
+```
+
+{{% /tab %}}
+{{% tab "Horizontal Custom Query" %}}
+
+The **Horizontal only with Custom Query** profile scales replica count based on a custom Datadog metric query instead of CPU or memory utilization. This is useful for workloads where application-level metrics (such as queue depth, request latency, or throughput) are better indicators of scaling need.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha2
+kind: DatadogPodAutoscaler
+metadata:
+    name: <WORKLOAD_NAME>
+    namespace: <NAMESPACE>
+spec:
+    targetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: <WORKLOAD_NAME>
+    owner: Local
+    applyPolicy:
+        mode: Apply
+        scaleDown:
+            rules:
+                - periodSeconds: 1200
+                  type: Percent
+                  value: 20
+            stabilizationWindowSeconds: 600
+        scaleUp:
+            rules:
+                - periodSeconds: 120
+                  type: Percent
+                  value: 50
+            stabilizationWindowSeconds: 600
+        # Vertical updates disabled — horizontal only
+        update:
+            strategy: Disabled
+    constraints:
+        maxReplicas: 100
+        minReplicas: 2
+    objectives:
+        - type: CustomQuery
+          customQuery:
+            # Replace with your own Datadog metric query
+            request:
+                formula: usage
+                queries:
+                    - name: usage
+                      source: Metrics
+                      metrics:
+                        query: avg:redis.info.latency_ms{kube_cluster_name:<CLUSTER_NAME>,kube_namespace:<NAMESPACE>,kube_deployment:<WORKLOAD_NAME>}
+            value:
+                type: AbsoluteValue
+                absoluteValue: 500M
+            window: 5m0s
+    fallback:
+        horizontal:
+            # With custom queries, local fallback is not activated by default
+            enabled: false
+            # Direction can be ScaleUp, ScaleDown or All
+            direction: ScaleUp
+            # When using custom queries, a CPU or Memory fallback objective is required
+            objectives:
+                - type: PodResource
+                  podResource:
+                    name: cpu
+                    value:
+                        type: Utilization
+                        utilization: 70
+            triggers:
+                staleRecommendationThresholdSeconds: 600
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Deploy recommendations manually
 
-As an alternative to Autoscaling, you can also deploy Datadog's scaling recommendations manually. When you configure resources for your Kubernetes deployments, use the values suggested in the scaling recommendations. You can also click **Export Recommendation** to see a generated `kubectl patch` command.
+As an alternative to Autoscaling, you can also deploy Datadog's scaling recommendations manually. When you configure resources for your Kubernetes deployments, use the values suggested in the scaling recommendations. You can also click {{< ui >}}Export Recommendation{{< /ui >}} to see a generated `kubectl patch` command.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config
-[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[2]: /agent/remote_config/?tab=configurationyamlfile#enable-remote-configuration
 [3]: https://helm.sh/
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [5]: /containers/kubernetes/distributions
@@ -253,3 +444,4 @@ As an alternative to Autoscaling, you can also deploy Datadog's scaling recommen
 [7]: https://app.datadoghq.com/orchestration/scaling/cluster
 [8]: https://app.datadoghq.com/orchestration/scaling/workload
 [9]: /integrations/kubernetes_state_core/
+[10]: https://www.datadoghq.com/product-preview/kubernetes-cluster-autoscaling/

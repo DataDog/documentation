@@ -35,7 +35,7 @@ For more information about IoT billing, see the [Datadog Pricing page][7].
 
 ## Plan details
 
-To manage your **Payment Method** and view **Subscription Details**, you must be a Datadog Admin user.
+To manage your {{< ui >}}Payment Method{{< /ui >}} and view {{< ui >}}Subscription Details{{< /ui >}}, you must be a Datadog Admin user.
 
 Alternately, roles with Billing Read (`billing_read`) and Billing Edit (`billing_edit`) [permissions][8] can access this data.
 
@@ -45,7 +45,7 @@ The [**Payment Method**][9] section contains details on your payment options.
 
 {{< img src="account_management/billing/PaymentMethodOverview.png" alt="Payment method on the Plan page" style="width:90%;" >}}
 
-**Edit Payment** provides options to manage payment methods. You can edit or remove cards, and request to change your payment method from card to invoice and vice versa. 
+{{< ui >}}Edit Payment{{< /ui >}} provides options to manage payment methods. You can edit or remove cards, and request to change your payment method from card to invoice and vice versa. 
 
 {{< img src="account_management/billing/PaymentSettingsDetails.png" alt="Payment settings on the Plan page" style="width:90%;" >}}
 
@@ -55,7 +55,7 @@ You can view your billing contact details on the [**Billing Contact Details**][9
 
 {{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Billing contact details on the Plan page" style="width:90%;" >}}
 
-**Edit Details** to add, edit, or remove your billing address. You can also specify the email addresses where invoices should be sent.
+{{< ui >}}Edit Details{{< /ui >}} to add, edit, or remove your billing address. You can also specify the email addresses where invoices should be sent.
 
 {{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="Editing billing contact details on the Plan page" style="width:90%;" >}}
 

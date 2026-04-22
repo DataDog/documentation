@@ -5,6 +5,9 @@ aliases:
     - /llm_observability/submit_evaluations
     - /llm_observability/evaluations/submit_evaluations
 further_reading:
+    - link: '/llm_observability/guide/evaluation_developer_guide'
+      tag: 'Documentation'
+      text: 'Learn about building custom evaluators'
     - link: '/llm_observability/setup/sdk'
       tag: 'Documentation'
       text: 'Learn about the LLM Observability SDK for Python'
@@ -27,11 +30,17 @@ While LLM Observability provides a few out-of-the-box evaluations for your trace
   * Unicode is not supported.
 * Evaluation labels must not exceed 200 characters. Fewer than 100 is preferred from a UI perspective.
 
-<div class="alert alert-info">Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.</div>
+<div class="alert alert-info">
+
+Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.
+
+</div>
 
 ## Submitting external evaluations with the SDK
 
 The LLM Observability SDK provides the methods `LLMObs.submit_evaluation()` and `LLMObs.export_span()` to help your traced LLM application submit external evaluations to LLM Observability. See the [Python][3] or [Node.js][4] SDK documentation for more details.
+
+<div class="alert alert-info">For building reusable, class-based evaluators with rich result metadata, see the <a href="/llm_observability/guide/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
 ### Example
 
@@ -56,14 +65,19 @@ def llm_call():
         label="harmfulness",
         metric_type="score", # can be score or categorical
         value=my_harmfulness_eval(completion),
-        tags={"reasoning": "it makes sense", "type": "custom"},
+        tags={"type": "custom"},
+        timestamp_ms=1765990800016, # optional, unix timestamp in milliseconds
+        assessment="pass", # optional, "pass" or "fail"
+        reasoning="it makes sense", # optional, judge llm reasoning
     )
 {{< /code-block >}}
 
 
 ## Submitting external evaluations with the API
 
-You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][2] for more details on the API specifications.
+You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][2] for more details on the API specifications. For building reusable evaluators, see the [Evaluation Developer Guide][5].
+
+To submit evaluations for <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry spans</a> directly to the Evaluations API, you must include the <code>source:otel</code> tag in the evaluation. Additionally, <code>span_id</code> and <code>trace_id</code> values must be provided as **decimal** strings. If your OpenTelemetry instrumentation produces hexadecimal IDs, convert them to decimal before submitting. For example, in Python: <code>str(int(hex_span_id, 16))</code>.
 
 ### Example
 
@@ -88,7 +102,12 @@ You can use the evaluations API provided by LLM Observability to send evaluation
           "timestamp_ms": 1609479200,
           "metric_type": "score",
           "label": "Accuracy",
-          "score_value": 3
+          "score_value": 3,
+          // source:otel required only for OpenTelemetry spans
+          "tags": ["source:otel"],
+          "timestamp_ms": 1765990800016,
+          "assessment": "pass",
+          "reasoning": "it makes sense"
         }
       ]
     }
@@ -104,3 +123,4 @@ You can use the evaluations API provided by LLM Observability to send evaluation
 [2]: /llm_observability/setup/api/?tab=model#evaluations-api
 [3]: /llm_observability/setup/sdk/python/#evaluations
 [4]: /llm_observability/setup/sdk/nodejs/#evaluations
+[5]: /llm_observability/guide/evaluation_developer_guide

@@ -23,7 +23,7 @@ author:
 categories:
 - メトリクス
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -64,26 +64,26 @@ tile:
 
 Pingdom V3 インテグレーションは [Datadog Pingdom インテグレーション (非推奨)][1] と同様の動作をしますが、[Pingdom API][2] のバージョン 3.1 を使用します。
 
-{{< img src="integrations/pingdom/pingdom_dashboard.png" alt="Datadog ダッシュボード上の Pingdom グラフ" popup="true">}}
+![Datadog ダッシュボード上の Pingdom グラフ][3]
 
 ## セットアップ
 
 ### API トークンの生成
 
-1. [Pingdom アカウント][3]にログインします。
+1. お使いの [Pingdom アカウント][4] にログインします。
 2. _Settings_ > _Pingdom API_ に移動します。
 3. _Add API token_ をクリックします。トークンに名前を付け、_Read-Write_ 権限を与えます。トークンは二度とアクセスできないので、どこかに保存してください。
 
 ### インストールと構成
 
-1. [Pingdom V3 インテグレーションタイル][4]を開きます。
+1. [Pingdom V3 Integration Tile][5] を開きます。
 2. 名前と API トークンを対応するフィールドに入力します。Pingdom で構成したメトリクスやチェックは、Datadog に収集されます。
 3. Pingdom のチェックのタグを管理します。Pingdom のチェックに追加されたタグは、Datadog のチェックにも自動的に追加されます。`datadog-exclude` タグを追加して、チェックを除外します。
 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "pingdom-v3" >}}
+{{< get-metrics-from-git "pingdom_v3" >}}
 
 
 ### イベント
@@ -105,11 +105,12 @@ Pingdom インテグレーションは、トランザクションチェックを
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/pingdom/
 [2]: https://docs.pingdom.com/api/
-[3]: https://my.pingdom.com/
-[4]: https://app.datadoghq.com/account/settings#integrations/pingdom-v3
-[5]: https://github.com/DataDog/integrations-internal-core/blob/main/pingdom/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help
+[3]: images/pingdom_dashboard.png
+[4]: https://my.pingdom.com/
+[5]: https://app.datadoghq.com/account/settings#integrations/pingdom-v3
+[6]: https://github.com/DataDog/integrations-internal-core/blob/main/pingdom/metadata.csv
+[7]: https://docs.datadoghq.com/ja/help

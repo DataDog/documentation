@@ -1,23 +1,64 @@
 ---
 title: Amazon S3 Source
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
-Use Observability Pipelines' Amazon S3 source to receive logs from Amazon S3. Select and set up this source when you [set up a pipeline][1].
+{{< product-availability >}}
+
+## Overview
+
+Use Observability Pipelines' Amazon S3 source to receive logs from Amazon S3.
 
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/amazon_s3 %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-{{% observability_pipelines/source_settings/amazon_s3 %}}
+<div class="alert alert-danger">Only enter the identifiers for the Amazon S3 URL and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-## Set the environment variables
+1. Enter the identifier for your Amazon S3 URL. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the AWS region.
+
+### Optional settings
+
+#### AWS authentication
+
+Select an **AWS authentication** option. If you select **Assume role**:
+1. Enter the ARN of the IAM role you want to assume.
+1. Optionally, enter the assumed role session name and external ID.
+
+#### Enable TLS
+
+{{% observability_pipelines/tls_settings %}}
+
+## Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Amazon S3 URL identifier:
+	- References the URL of the SQS queue to which the S3 bucket sends the notification events.
+	- The default identifier is `SOURCE_AWS_S3_SQS_URL`.
+- Amazon S3 TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `SOURCE_AWS_S3_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_s3 %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## AWS Authentication
 
@@ -29,3 +70,6 @@ Select and set up this source when you [set up a pipeline][1]. The information b
 
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
+[3]: https://app.datadoghq.com/observability-pipelines
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

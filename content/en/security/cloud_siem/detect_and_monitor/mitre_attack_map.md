@@ -47,14 +47,21 @@ To view more information about a technique and the rules monitoring the techniqu
 
 ### Add attacker technique and tactic tags to custom rules
 
-Custom rules only show up in the map if they are tagged in the rule editor with the correct MITRE tactic and technique. The tactic and technique must also be paired correctly. If the correct format and pairing are not used, the rule does not show up in the map when you use the search bar to filter for that rule.
+Custom rules only show up in the map if they are tagged in the rule editor with both the correct MITRE tactic and technique. The tactic and technique must also be paired correctly. If the correct format and pairing are not used, the rule does not show up in the map when you use the search bar to filter for that rule.
 
 This is an example of the format you need to use for tagging custom rules and the correct pairing of tactic and technique tags:
 
-- `tactic: <tactic number>-<tactic name>`
+- `tactic:<tactic number>-<tactic name>`
     - For example: `tactic:TA0001-Initial-Access`
-- `technique: <technique number>-<technique name>`
+- `technique:<technique number>-<technique name>`
     - For example: `technique:T1566-Phishing`
+
+Note the following formatting details:
+- The tag prefix (`tactic` or `technique`) **must be lowercase**
+- The technique number is case insensitive
+    - For example: `TA0001` or `ta0001`
+- Dashes and underscores are interchangeable
+    - For example: `technique:T1566-Phishing` or `technique:T1566_Phishing`
 
 **Note**: The tactic and technique need to be based on the MITRE ATT&CK version stated on the [MITRE ATT&CK Map][3] page.
 
@@ -62,7 +69,7 @@ This is an example of the format you need to use for tagging custom rules and th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/rules
+[1]: https://app.datadoghq.com/security/siem/rules
 [2]: https://docs.datadoghq.com/security/cloud_siem/guide/how-to-setup-security-filters-using-cloud-siem-api/
-[3]: https://app.datadoghq.com/security/rules?query=product=siem&sort=date&viz=attck-map
+[3]: https://app.datadoghq.com/security/siem/rules?query=product=siem&sort=date&viz=attck-map
 [4]: https://docs.datadoghq.com/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold

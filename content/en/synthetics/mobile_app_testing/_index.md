@@ -6,15 +6,6 @@ aliases:
 - /mobile_app_testing
 - /mobile_app_testing/mobile_app_tests/
 further_reading:
-- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
-  tag: "Blog"
-  text: "Best practices for creating end-to-end tests"
-- link: "/synthetics/guide/version_history/"
-  tag: "Guide"
-  text: "Version History for Synthetic Monitoring"
-- link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
-  tag: "Blog"
-  text: "How to build reliable and accurate synthetic tests for your mobile apps"
 - link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn how to create Synthetic mobile app tests"
@@ -24,6 +15,15 @@ further_reading:
 - link: "/continuous_testing/"
   tag: "Documentation"
   text: "Learn about Continuous Testing & CI/CD"
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
+  tag: "Blog"
+  text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
+  tag: "Blog"
+  text: "Best practices for creating end-to-end tests"
 - link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
   tag: "Blog"
   text: "How to build reliable and accurate synthetic tests for your mobile apps"
@@ -178,6 +178,12 @@ By default, mobile app tests are set up for on-demand testing, meaning these tes
 You can customize alert conditions to define how often you want to send an alert and the circumstances under which you want a test to send a notification alert.
 
 * An alert is triggered if any assertion fails for `X` minutes.
+
+<div class="alert alert-info">
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see <a href="/synthetics/guide/how-synthetics-monitors-trigger-alerts/">Understanding Synthetic Monitor Alerting</a>.
+</div>
+
+{{% synthetics-downtimes %}}
 
 ### Configure the test monitor
 

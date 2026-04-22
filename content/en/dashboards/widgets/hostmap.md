@@ -22,13 +22,13 @@ The host map widget graphs any metric across your hosts using the same visualiza
 
 Configuration of the host map widget is similar to the main [host map][1] page:
 
-1. **Type**: Choose to display `hosts` or `containers`.
-2. **Filter by**: Choose the hosts or containers to display.
-3. **Group by**: Aggregate your hosts or containers by one or several tags.
-4. **Fill by**: Choose a metric to fill your host or container map elements.
-5. **Size by** (optional): Choose a metric to size your host or container map elements.
-6. **Palette** (optional): Choose a color palette.
-7. **Values** (optional): Define the min and max color palette fill values.
+1. {{< ui >}}Type{{< /ui >}}: Choose to display `hosts` or `containers`.
+2. {{< ui >}}Filter by{{< /ui >}}: Choose the hosts or containers to display.
+3. {{< ui >}}Group by{{< /ui >}}: Aggregate your hosts or containers by one or several tags.
+4. {{< ui >}}Fill by{{< /ui >}}: Choose a metric to fill your host or container map elements.
+5. {{< ui >}}Size by{{< /ui >}} (optional): Choose a metric to size your host or container map elements.
+6. {{< ui >}}Palette{{< /ui >}} (optional): Choose a color palette.
+7. {{< ui >}}Values{{< /ui >}} (optional): Define the min and max color palette fill values.
 
 **Note**: Free text search is not available for the host map widget.
 

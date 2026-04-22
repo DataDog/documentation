@@ -1,13 +1,13 @@
 ---
 title: Incident Response Billing
 further_reading:
-- link: "/service_management/incident_management/"
+- link: "/incident_response/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
-- link: "/service_management/on-call/"
+- link: "/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call"
-- link: "/service_management/status_pages/"
+- link: "/incident_response/status_pages/"
   tag: "Documentation"
   text: "Status Pages"
 ---
@@ -39,11 +39,20 @@ In the On-Call product, a user does not need a seat to view existing pages, esca
 
 A user needs an **Incident Management seat** if they perform any of the following actions. These actions require a seat whether they are performed in the Datadog UI or through integrations such as Microsoft Teams or Slack.
 - Modify an incident (for example, update severity)
-- Add a comment, graph, or link to an [incident timeline][8]
+- Delete an incident
+- Add a comment, graph, or link to an incident timeline
+- Assign a task to a user within an incident (the assignee does not need a seat)
+- Assign a responder to a user-defined role within an incident (the assignee must have a seat) 
 
-In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement. 
+In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement.
 
 If your organization has committed to the Incident Response SKU, any user who meets the On-Call or Incident Management criteria can claim or be assigned an **Incident Response seat**.
+
+### Status Pages usage
+
+All paid Datadog customers can use Status Pages. Access depends on whether your organization has a committed Incident Management or Incident Response seat:
+- **With at least one committed seat**: Full access, including unlimited pages and custom domains.
+- **Without a committed seat**: Limited to one Status Page and no custom domain support.
 
 ## Manage seats
 
@@ -68,14 +77,18 @@ Removing a user's notification preferences does not unassign their seat. If a us
 
 ### Assign seats
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Seat assignment is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Billing admins, or users with the `billing_edit` permission, can manually assign seats so team members have access before they need it.
 
 To assign a seat:
-1. Go to **Plan & Usage** → **Seat Management**.
-2. Select the relevant product tab: **Incident Management**, **On-Call**, or **Incident Response**.
-3. Click **Assign Seats**.
+1. Go to {{< ui >}}Plan & Usage{{< /ui >}} → {{< ui >}}Seat Management{{< /ui >}}.
+2. Select the relevant product tab: {{< ui >}}Incident Management{{< /ui >}}, {{< ui >}}On-Call{{< /ui >}}, or {{< ui >}}Incident Response{{< /ui >}}.
+3. Click {{< ui >}}Assign Seats{{< /ui >}}.
 4. Search for users by name or email, and select them.
-5. Click **Assign Seats**.
+5. Click {{< ui >}}Assign Seats{{< /ui >}}.
 
 Assigned users immediately appear in the Seats table and can access the product's features. 
 
@@ -83,7 +96,7 @@ Assigned users immediately appear in the Seats table and can access the product'
 
 To remove users and free up seats: 
 1. In the Seats table, check the box next to one or more users.
-2. Click **Unassign Seats**.
+2. Click {{< ui >}}Unassign Seats{{< /ui >}}.
 3. Confirm your selection.
 
 After they are unassigned, the user loses access to features that require a seat. They can still perform the following actions:
@@ -126,12 +139,12 @@ Your monthly bill contains the following:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/
-[2]: /service_management/on-call/
+[1]: /incident_response/incident_management/
+[2]: /incident_response/on-call/
 [3]: https://www.datadoghq.com/pricing/?product=incident-response#products
 [4]: https://app.datadoghq.com/billing/seats
-[5]: /service_management/on-call/schedules/
-[6]: /service_management/on-call/escalation_policies/
-[7]: /service_management/on-call/profile_settings/#notification-preferences
-[8]: /service_management/incident_management/investigate/timeline
+[5]: /incident_response/on-call/schedules/
+[6]: /incident_response/on-call/escalation_policies/
+[7]: /incident_response/on-call/profile_settings/#notification-preferences
+[8]: /incident_response/incident_management/investigate/timeline
 [9]: https://app.datadoghq.com/on-call/settings/notifications-preferences-admin

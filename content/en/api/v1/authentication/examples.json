@@ -5,7 +5,7 @@
         "json": {
           "valid": true
         },
-        "html": "<div class=\"\"><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">valid</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Return <code>true</code> if the authentication response is valid.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">valid</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">boolean</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Return <code>true</code> if the authentication response is valid.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "403": {
         "json": {
@@ -13,7 +13,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "429": {
         "json": {
@@ -21,7 +21,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       }
     },
     "request": {

@@ -17,8 +17,8 @@ further_reading:
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-jobs/go">available on GitHub</a>.</div>
 <div class="alert alert-info">
 For full visibility and access to all Datadog features in Cloud Run Jobs,
-ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
-and are using <a href="https://hub.docker.com/r/datadog/serverless-init#180">serverless-init version 1.8.0 or later</a>.
+ensure you’ve <a href="/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
+and are using <a href="https://hub.docker.com/r/datadog/serverless-init">serverless-init version 1.9.0 or later</a>.
 </div>
 
 1. **Install the Datadog Go tracer**.
@@ -50,7 +50,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 2. **Install serverless-init**.
 
-   {{% serverless-init-install mode="in-container" cmd="./your-binary" %}}
+   {{% serverless-init-install mode="in-container" cmd="./your-binary" cloudservice="jobs" %}}
 
 3. **Set up logs**.
 
@@ -70,15 +70,19 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 4. **Configure your application**.
 
-{{% serverless-init-configure %}}
+{{% serverless-init-configure cloudrun_jobs="true" %}}
 
 5. {{% gcr-service-label %}}
 
-6. **Send custom metrics**.
+6. {{% gcr-jobs-retention-filter %}}
+
+7. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 
 {{% serverless-init-env-vars-in-container language="go" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 
@@ -92,5 +96,5 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
 [3]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
 [4]: /tracing/other_telemetry/connect_logs_and_traces/go/
-[5]: /developers/dogstatsd/?tab=go#install-the-dogstatsd-client
+[5]: /extend/dogstatsd/?tab=go#install-the-dogstatsd-client
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples-5

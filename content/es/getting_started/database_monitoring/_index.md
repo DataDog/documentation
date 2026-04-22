@@ -1,4 +1,6 @@
 ---
+description: Monitoriza la salud y el rendimiento de las bases de datos, soluciona
+  las consultas lentas y crea dashboards para el análisis y la optimización de consultas.
 further_reading:
 - link: /database_monitoring/
   tag: Documentación
@@ -10,15 +12,11 @@ further_reading:
   tag: Blog
   text: Monitorización del rendimiento de las bases de datos con Datadog
 - link: https://dtdg.co/fe
-  tag: Habilitar los fundamentos
-  text: Participa en una sesión interactiva para mejorar la monitorización de bases
+  tag: Habilitación de los fundamentos
+  text: Participar en una sesión interactiva para mejorar tu monitorización de base
     de datos
 title: Empezando con la monitorización de bases de datos
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">La monitorización de bases de datos no está disponible para el sitio de Datadog que has seleccionado ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
 
 ## Información general
 
@@ -132,7 +130,7 @@ Para acceder a los dashboards, desde la página [Monitorización de base de dato
 
 Puedes clonar y modificar los dashboards predefinidos en función de tus necesidades.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

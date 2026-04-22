@@ -4,10 +4,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/historical-metrics/"
   tag: "Blog"
   text: "Monitor system performance across longer time frames with historical metrics"
-- link: "/developers/dogstatsd/"
+- link: "/extend/dogstatsd/"
   tag: "Documentation"
   text: "Learn more about DogStatsD"
-- link: "/developers/community/libraries/"
+- link: "/extend/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
 - link: "https://www.datadoghq.com/blog/historical-metrics/"
@@ -460,7 +460,7 @@ The following example assumes:
 - 720 hours in the month (30 days)
 - Custom metric cost of $5 per 100 metrics
 
-$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21$
+$(1500/ 720) ⋅ (5 / 100) + $(1500/ 720) ⋅ (5 / 100) = \\$0.21
 
 Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4].
 

@@ -28,4 +28,4 @@
 パイプラインの構成を変更したい場合は、[既存のパイプラインの更新][702]を参照してください。
 
 [701]: /resources/yaml/observability_pipelines/v2/setup/azure_aks.yaml
-[702]: /ja/observability_pipelines/update_existing_pipelines
+[702]: /ja/observability_pipelines/configuration/update_existing_pipelines

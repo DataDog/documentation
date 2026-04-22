@@ -128,25 +128,7 @@ Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
 
 Un test se considera `FAILED` si no satisface una o más aserciones o si la solicitud ha fallado prematuramente. En algunos casos, el test puede fallar sin comprobar las aserciones respecto al endpoint.
 
-Entre las razones figuran las siguientes:
-
-`CONNRESET`
-: El servidor remoto ha cerrado bruscamente la conexión. Entre las posibles causas se incluyen que el servidor web haya encontrado un error o falla al responder, o que se haya perdido la conectividad del servidor web.
-
-`DNS`:
-No se ha encontrado la entrada DNS para la URL del test. Entre las posibles causas se incluyen una URL de test mal configurada o una configuración incorrecta de las entradas DNS.
-
-`INVALID_REQUEST` 
-: La configuración del test no es válida (por ejemplo, un error tipográfico en la URL).
-
-`SSL`
-: No se ha podido realizar la conexión SSL. [Para obtener más información, consulta la página de errores específica][10].
-
-`TIMEOUT`
-: La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se establece en 60s).
-  Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración del test (solicitud + aserciones) alcanza la duración máxima (60,5 segundos).
+Para obtener una lista completa de los códigos de error SSL, consulta [Errores de test de la API][10].
 
 ## Permisos
 
@@ -171,6 +153,6 @@ Si estás utilizando la [función de rol personalizado][12], añade tu usuario a
 [7]: /es/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /es/synthetics/guide/synthetic-test-monitors
 [9]: /es/synthetics/settings/#global-variables
-[10]: /es/synthetics/api_tests/errors/#ssl-errors
+[10]: /es/synthetics/api_tests/errors/
 [11]: /es/account_management/rbac/
 [12]: /es/account_management/rbac#custom-roles

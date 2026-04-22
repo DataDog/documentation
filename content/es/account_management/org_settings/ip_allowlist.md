@@ -1,4 +1,7 @@
 ---
+description: Controla el acceso de red a Datadog restringiendo el acceso a la API
+  y a la interfaz de usuario a direcciones IP o rangos CIDR específicos para la seguridad
+  de la empresa.
 title: Lista de IP permitidas
 ---
 

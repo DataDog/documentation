@@ -131,17 +131,16 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
    - App Service Plans
    - Container Apps
 
-You can also click to enable custom metric collection from [Azure Application Insights][101], and disable the collection of usage metrics.
-
+   You can also click to enable custom metric collection from [Azure Application Insights][101], and disable the collection of usage metrics.
 4. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
 5. Configure log collection:
-   a. If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
-   b. If you're creating a new log forwarder:
-      a. Enter a resource group name to store the log forwarder control plane.
-      b. Select a control plane subscription for the log-forwarding orchestration (LFO).
-      c. Select a region for the control plane.
-   See the [Architecture section][102] of the automated log forwarding guide for more information about this architecture.
+   - If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
+   - If you're creating a new log forwarder:
+     1. Enter a resource group name to store the log forwarder control plane.
+     1. Select a control plane subscription for the log-forwarding orchestration (LFO).
+     1. Select a region for the control plane.
 
+   See the [Architecture section][102] of the automated log forwarding guide for more information about this architecture.
 6. Copy and run the command under **Initialize and apply the Terraform**.
 
 [100]: https://app.datadoghq.com/integrations/azure/
@@ -237,11 +236,27 @@ You can find your Azure metrics in the metrics summary page in the Datadog platf
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_metricExplorer.png" alt="Metric summary image" style="width:100%;" >}}
 
+### Resource tag filtering for metrics
+
+Use tag filters to control which Azure resources have their metrics collected by Datadog. Configure tag filters in the **Configuration** tab of the [Azure integration tile][20]. A tag filter is a comma-separated list of tags in the form `key:value`. Only resources that match at least one tag in the filter have their metrics collected.
+
+You can use wildcards in your tag filters:
+- `?` matches a single character.
+- `*` matches multiple characters.
+
+To exclude resources with a given tag, prefix the tag with `!`. Exclusion takes precedence over inclusion. A resource matches the filter if it matches any tag in the list.
+
+For example: `datadog:monitored,env:production,!plan_tier:basic,instance-type:c1.*`
+
+This filter collects metrics from resources tagged with `datadog:monitored` or `env:production`, excludes resources tagged with `plan_tier:basic`, and includes resources with an `instance-type` tag matching `c1.*`.
+
+If no tag filter is set, Datadog collects metrics from all Azure resources.
+
 ## Enable log collection
 
 You can use the automated log forwarding feature to setup and configure the services and diagnostic settings needed to forward logs to Datadog. If an automated log forwarding control plane already exists in the tenant, this flow modifies it and extends its scope to include the selected subscriptions or management groups. For more detail, see [Azure Automated Log Forwarding Setup][19].
 
-Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, you can use an Azure Resource Manager (ARM) template to [automate log forwarding setup][19] across your Azure environment with no manual configuration. This feature automatically manages and scales log forwarding services.
+Datadog recommends using the Agent or DaemonSet to send logs from Azure. If direct streaming isn't possible, use the **Configure Log Forwarding** flow in the [Azure integration][20] to set up and manage automated log forwarding directly in Datadog. You can also deploy log forwarding with an [Azure Resource Manager (ARM) template][19]. Both methods automatically manage and scale log forwarding services.
 
 {{% collapse-content title="Automated (recommended)" level="h4" expanded=false id="automated-log-forwarding-setup" %}}
 
@@ -253,11 +268,28 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 
 ### Instructions
 
+#### Configure Log Forwarding (recommended)
+
+Use the **Configure Log Forwarding** flow to set up new or manage existing log forwarders directly in Datadog:
+
+1. In Datadog, navigate to [**Integrations > Azure**][20].
+1. Click **Configure Log Forwarding**.
+1. Copy the provided command and paste it in your Azure Cloud Shell.
+1. Select the subscriptions to forward logs from.
+1. Optionally, add or remove log filters.
+1. Click **Confirm**.
+
+For more details, see [Azure Automated Log Forwarding Setup][19].
+
+#### ARM template
+
+Alternatively, deploy log forwarding with an Azure Resource Manager (ARM) template:
+
 1. Open the [Automated Log Forwarding ARM template][29] in Azure.
-2. Configure your Azure project and instance details on the [Basics tab][30].
-3. Enter your Datadog credentials on the [Datadog Configuration tab][31].
-4. Acknowledge deployment warnings on the [Deployment tab][32].
-5. Start the deployment process on the [Review + create tab][33].
+1. Configure your Azure project and instance details on the [Basics tab][30].
+1. Enter your Datadog credentials on the [Datadog Configuration tab][31].
+1. Acknowledge deployment warnings on the [Deployment tab][32].
+1. Start the deployment process on the [Review + create tab][33].
 
 {{< site-region region="us3" >}}
 
@@ -289,6 +321,22 @@ See [Azure Automated Log Forwarding Architecture][34] for more details.
 {{% /collapse-content %}}
 
 {{% azure-log-archiving %}}
+
+### Resource tag filtering for logs
+
+Use tag filters to control which Azure resources have their logs forwarded to Datadog. To configure tag filters for logs, click **Configure Log Forwarding** in the [Azure integration tile][20] and follow the flow. A tag filter is a comma-separated list of tags in the form `key:value`. Only resources that match at least one tag in the filter have their logs forwarded.
+
+You can use wildcards in your tag filters:
+- `?` matches a single character.
+- `*` matches multiple characters.
+
+To exclude resources with a given tag, prefix the tag with `!`. Exclusion takes precedence over inclusion. A resource matches the filter if it matches any tag in the list.
+
+For example: `datadog:monitored,env:production,!plan_tier:basic,instance-type:c1.*`
+
+This filter forwards logs from resources tagged with `datadog:monitored` or `env:production`, excludes resources tagged with `plan_tier:basic`, and includes resources with an `instance-type` tag matching `c1.*`.
+
+If no tag filter is set, Datadog forwards logs from all Azure resources.
 
 ## Get more from the Datadog Platform
 
@@ -385,5 +433,5 @@ Still need help? Contact [Datadog support][17].
 [48]: https://learn.microsoft.com/azure/azure-functions/functions-get-started
 [49]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
 [51]: https://app.datadoghq.com/logs
-[52]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json
+[52]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fforwarder.json
 [53]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings

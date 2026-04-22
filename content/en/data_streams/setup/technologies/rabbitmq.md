@@ -4,7 +4,7 @@ title: Data Streams Monitoring for RabbitMQ
 
 ### Prerequisites
 
-* [Datadog Agent v7.34.0 or later][1]
+-   [Datadog Agent v7.34.0 or later][1]
 
 <table>
   <thead>
@@ -29,6 +29,12 @@ title: Data Streams Monitoring for RabbitMQ
       <td>{{< dsm-tracer-version lang="nodejs" lib="amqplib" type="recommended" >}}</td>
     </tr>
     <tr>
+      <td><a href="/data_streams/nodejs">Node.js</a></td>
+      <td><a href="https://www.npmjs.com/package/rhea">rhea</a></td>
+      <td>{{< dsm-tracer-version lang="nodejs" lib="rhea" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="nodejs" lib="rhea" type="recommended" >}}</td>
+    </tr>
+    <tr>
       <td><a href="/data_streams/python">Python</a></td>
       <td><a href="https://pypi.org/project/kombu/">Kombu</a></td>
       <td>{{< dsm-tracer-version lang="python" lib="kombu" type="minimal" >}}</td>
@@ -44,10 +50,10 @@ title: Data Streams Monitoring for RabbitMQ
 </table>
 
 ### Setting up Data Streams Monitoring
-See setup instructions for [Java][2], [Node.js][3], [Python][4],  or [.NET][5].
+
+See setup instructions for [Java][2], [Node.js][3], [Python][4], or [.NET][5].
 
 {{% data_streams/monitoring-rabbitmq-pipelines %}}
-
 
 [1]: /agent
 [2]: /data_streams/setup/language/java

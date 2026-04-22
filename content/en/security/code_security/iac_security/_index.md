@@ -18,6 +18,9 @@ further_reading:
   - link: "/pr_gates/"
     tag: "Documentation"
     text: "PR Gates"
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
 ---
 
 Datadog Infrastructure as Code (IaC) Security detects misconfigurations in Terraform and Kubernetes configurations before they're deployed. It flags issues such as missing encryption or overly permissive access in files stored in your connected GitHub, GitLab, or Azure DevOps repositories. Supported file types include standalone Terraform files, local modules, and Kubernetes manifests.
@@ -26,7 +29,7 @@ Datadog Infrastructure as Code (IaC) Security detects misconfigurations in Terra
 
 ## How it works
 
-IaC Security integrates with your repositories to continuously scan for misconfigurations. It analyzes every commit across all branches and performs a full daily scan of each configured repository. When violations are detected, findings are surfaced and linked to the relevant repository, branch, and file path. This helps you identify, prioritize, and fix misconfigurations directly at the source.
+IaC Security integrates with your repositories to continuously scan for misconfigurations, and scans every commit across all branches for each configured repository. When violations are detected, findings are surfaced and linked to the relevant repository, branch, and file path. This helps you identify, prioritize, and fix misconfigurations directly at the source.
 
 ## Key capabilities
 

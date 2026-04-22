@@ -1,5 +1,5 @@
 - rsyslog or syslog-ng address:
     - The Observability Pipelines Worker listens on this bind address to receive logs from the Syslog forwarder. For example, `0.0.0.0:9997`.
-    - Stored in the environment variable `DD_OP_SOURCE_SYSLOG_ADDRESS`.
+    - The default environment variable is `DD_OP_SOURCE_SYSLOG_ADDRESS`.
 - rsyslog or syslog-ng TLS passphrase (when enabled):
-    - Stored in the environment variable `DD_OP_SOURCE_SYSLOG_KEY_PASS`.
+    - The default environment variable is `DD_OP_SOURCE_SYSLOG_KEY_PASS`.

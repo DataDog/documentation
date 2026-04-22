@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/security/application_security/setup/go/sdk"
   tag: "Documentation"
-  text: "App & API Protecion SDK for Go"
+  text: "App & API Protection SDK for Go"
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Adding user information to traces"
@@ -73,7 +73,7 @@ Add the following environment variable value to your Docker command line:
 $ docker run -e DD_APPSEC_ENABLED=true [...]
 ```
 
-For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App and API Protection for Go</a>.
 
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
@@ -84,7 +84,7 @@ Add the following environment variable value to your application container's Doc
 ENV DD_APPSEC_ENABLED=true
 ```
 
-For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App & API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App & API Protection for Go</a>.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -103,7 +103,7 @@ spec:
               value: "true"
 ```
 
-For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App and API Protection for Go</a>.
 
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
@@ -120,7 +120,7 @@ Update your application's ECS task definition JSON file using this environment s
 ]
 ```
 
-For more information on how to create a fitting docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App and API Protection for Go</a>.
 
 {{% /tab %}}
 
@@ -131,8 +131,15 @@ For more information on how to create a fitting docker image, See [Creating a Do
 To verify that App and API Protection is working correctly:
    
 To see App and API Protection threat detection in action, send known attack patterns to your application. For example, trigger the [Security Scanner Detected][15] rule by running a file that contains the following curl script:
-<div>
-<pre><code>for ((i=1;i<=250;i++)); <br>do<br># Target existing service’s routes<br>curl https://your-application-url/existing-route -A Arachni/v1.0;<br># Target non existing service’s routes<br>curl https://your-application-url/non-existing-route -A Arachni/v1.0;<br>done</code></pre></div>
+```bash
+for ((i=1;i<=250;i++));
+do
+  # Target existing service’s routes
+  curl https://your-application-url/existing-route -A Arachni/v1.0;
+  # Target non existing service’s routes
+  curl https://your-application-url/non-existing-route -A Arachni/v1.0;
+done
+```
 
 A few minutes after you enable your application and exercise it, **threat information appears in the [Application Trace and Signals Explorer][14] in Datadog**.
 

@@ -25,13 +25,15 @@ The following allocation methods are available:
  | Proportional by spend | Split costs based on each destination's share of total spend. | Scenarios where teams should pay in proportion to their actual spend. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
  | Dynamic by metric  | Split costs based on each destination's share of total usage. | Scenarios where teams should pay in proportion to their actual usage. | Shared PostgreSQL costs are allocated by total query execution time per team. |
 
-Custom allocation rules run after [Tag Pipelines][1], enabling cost allocations on the latest user-defined tags. Costs are allocated on a daily basis. Cost allocations can be applied to AWS, Google Cloud, and Azure costs.
+Custom allocation rules run after [Tag Pipelines][1], enabling cost allocations on the latest user-defined tags. Costs are allocated on a daily basis. Cost allocations can be applied to AWS, Google Cloud, and Azure costs, as well as any SaaS providers you have set up.
+
+You can manage custom allocation rules using the [API][4], [Terraform][5], or directly in Datadog by following the instructions below.
 
 ## Create a custom allocation rule
 
 ### Step 1 - Define the source
 
-1. Navigate to [Cloud Cost > Settings > Custom Allocation Rules][2] and click **Add New Rule** to start.
+1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Custom Allocation Rules{{< /ui >}}][2] and click {{< ui >}}Add New Rule{{< /ui >}} to start.
 2. From the dropdown, select the shared costs you want to allocate.
 
    _Example: Untagged support costs, shared database costs._
@@ -72,11 +74,11 @@ In the preceding diagram, the pink bar represents a filter on the cost allocatio
 
 To create a rule for this allocation, you can:
 
-- Define the costs to allocate (source): **EC2 support fees** (`aws_product:support`).
-- Choose the allocation method: **Proportional by spend**.
-- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **User** (`User A`, `User B`, `User C`).
-- Refine the allocation by applying [filters](#step-4---optional-apply-filters): **EC2** (`aws_product:ec2`).
-- Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: **environment** (`env`).
+- Define the costs to allocate (source): EC2 support fees (`aws_product:support`).
+- Choose the allocation method: {{< ui >}}Proportional by spend{{< /ui >}}.
+- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: User (`User A`, `User B`, `User C`).
+- Refine the allocation by applying [filters](#step-4---optional-apply-filters): EC2 (`aws_product:ec2`).
+- Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: environment (`env`).
 
 You can also specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, if you partition your costs by environment using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
 
@@ -94,11 +96,11 @@ For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {u
 
 To create a rule for this allocation, you could:
 
-- Define the costs to allocate (source): **PostgreSQL costs** (`azure_product_family:dbforpostgresql`).
-- Choose the allocation method: **Dynamic by metric**
-- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **User** (`User A`, `User B`, `User C`).
-- Define the metric query used to split the source costs: **Query execution time per user** (`sum:postgresql.queries.time{*}` by `{user}.as_count`).
-- Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: **environment** (`env`).
+- Define the costs to allocate (source): PostgreSQL costs (`azure_product_family:dbforpostgresql`).
+- Choose the allocation method: {{< ui >}}Dynamic by metric{{< /ui >}}
+- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: User (`User A`, `User B`, `User C`).
+- Define the metric query used to split the source costs: Query execution time per user (`sum:postgresql.queries.time{*}` by `{user}.as_count`).
+- Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: environment (`env`).
 
 {{< img src="cloud_cost/custom_allocation_rules/ui-dynamic-by-metric.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:90%;" >}}
 
@@ -120,8 +122,8 @@ Apply a filter across the entire allocation rule. Filters help you target the al
 
 _Example: Only apply cost allocation where environment is production._
 
-- **Proportional by spend**: Let's say you allocate shared costs to the team tag, proportional to how much each team spends. You can add a filter, creating a cost allocation that is proportional to how much team spends on `aws_product` is `ec2`.
-- **Dynamic by metric**: Let's say you allocate shared PostgreSQL costs to the service tag, proportional to the query execution time of each service. You can add a filter, creating a cost allocation that only applies where `environment` is `production`.
+- {{< ui >}}Proportional by spend{{< /ui >}}: Let's say you allocate shared costs to the team tag, proportional to how much each team spends. You can add a filter, creating a cost allocation that is proportional to how much team spends on `aws_product` is `ec2`.
+- {{< ui >}}Dynamic by metric{{< /ui >}}: Let's say you allocate shared PostgreSQL costs to the service tag, proportional to the query execution time of each service. You can add a filter, creating a cost allocation that only applies where `environment` is `production`.
 
 ### Step 5 - (optional) Apply a partition
 
@@ -174,6 +176,8 @@ Changes to custom allocation rules may take up to 24 hours to be applied. After 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloud_cost_management/tags/tag_pipelines
+[1]: /cloud_cost_management/allocation/tag_pipelines/
 [2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
 [3]: https://www.datadoghq.com/support/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/custom_allocation_rule
+[5]: /api/latest/cloud-cost-management/#create-custom-allocation-rule

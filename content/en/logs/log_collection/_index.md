@@ -146,101 +146,12 @@ Datadog provides logging endpoints for both SSL-encrypted connections and unencr
 
 Use the [site][13] selector dropdown on the right side of the page to see supported endpoints by Datadog site.
 
-{{< site-region region="us" >}}
-
-| Site | Type        | Endpoint                                                                  | Port         | Description                                                                                                                                                                 |
-|------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1].                                                    |
-| US   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].                                                             |
-| US   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
-| US   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                                                                             |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-| Site | Type        | Endpoint                                                                  | Port | Description                                                                                                                                                                 |
-|------|-------------|---------------------------------------------------------------------------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| EU   | HTTPS       | `http-intake.logs.datadoghq.eu`                                           | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation.][1]                                                    |
-| EU   | HTTPS       | `agent-http-intake.logs.datadoghq.eu`                                     | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].                                                             |
-| EU   | HTTPS       | `lambda-http-intake.logs.datadoghq.eu`                                    | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
-| EU   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                                                                             |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
-|------|-------|---------------------------------------------                              |------|--------------------------------------------------------------------------------------------------------------------------|
-| US3  | HTTPS | `http-intake.logs.us3.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
-| US3  | HTTPS | `lambda-http-intake.logs.us3.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
-| US3  | HTTPS | `agent-http-intake.logs.us3.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| US3  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
-|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| US5  | HTTPS | `http-intake.logs.us5.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
-| US5  | HTTPS | `lambda-http-intake.logs.us5.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
-| US5  | HTTPS | `agent-http-intake.logs.us5.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| US5  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
-| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
-|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
-| AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
-| AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| AP1  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
-
-{{< site-region region="ap2" >}}
-
-| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
-|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| AP2  | HTTPS | `http-intake.logs.ap2.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
-| AP2  | HTTPS | `lambda-http-intake.logs.ap2.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
-| AP2  | HTTPS | `agent-http-intake.logs.ap2.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| AP2  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-| Site    | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
-|---------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| US1-FED | HTTPS | `http-intake.logs.ddog-gov.com`                                          | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
-| US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.com`                                   | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
-| US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.com`                                    | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| US1-FED | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
+| Site | Type  | Endpoint | Port | Description |
+|------|-------|----------|------|-------------|
+| {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=http_endpoint >}}</code> | 443 | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][16]. |
+| {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=agent_http_endpoint >}}</code> | 443 | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][17]. |
+| {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=lambda_http_endpoint >}}</code> | 443 | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS. |
+| {{< region-param key=dd_datacenter >}} | HTTPS | <code>logs.{{< region-param key=browser_sdk_endpoint_domain >}}</code> | 443 | Used by the Browser SDK to send logs in JSON format over HTTPS. |
 
 ### Custom log forwarding
 
@@ -332,4 +243,6 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [13]: /getting_started/site/
 [14]: /logs/log_configuration/pipelines/?tab=date#date-attribute
 [15]: /api/latest/logs/#send-logs
+[16]: /api/latest/logs/#send-logs
+[17]: /agent/logs/#send-logs-over-https
 

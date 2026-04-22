@@ -1,5 +1,7 @@
 ---
 title: Configuring Deadlock Monitoring on SQL Server
+aliases:
+- /database_monitoring/sql_deadlock
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
@@ -42,6 +44,9 @@ Supported Agent versions
   ON SERVER
   ADD EVENT sqlserver.xml_deadlock_report
   ADD TARGET package0.ring_buffer
+  (
+    SET MAX_MEMORY = 1024
+  )
   WITH (
       MAX_MEMORY = 1024 KB,
       EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
@@ -74,6 +79,9 @@ Supported Agent versions
   ON database
   ADD EVENT sqlserver.database_xml_deadlock_report
   ADD TARGET package0.ring_buffer
+  (
+    SET MAX_MEMORY = 1024
+  )
   WITH (
       MAX_MEMORY = 1024 KB,
       EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
@@ -98,7 +106,7 @@ Supported Agent versions
 
 ## Exploring deadlock events
 
-To access the deadlock view, navigate to the **APM** > **Database Monitoring** > **Databases** tab, then select a SQL Server host. Next, select the **Queries** tab, then select the **Deadlocks** tab.
+To access the deadlock view, navigate to the {{< ui >}}APM{{< /ui >}} > {{< ui >}}Database Monitoring{{< /ui >}} > {{< ui >}}Databases{{< /ui >}} tab, then select a SQL Server host. Next, select the {{< ui >}}Queries{{< /ui >}} tab, then select the {{< ui >}}Deadlocks{{< /ui >}} tab.
 The Deadlocks tab displays details about the victim and survivor processes, and includes a link to the deadlock diagram.
 
 **Note**: Because deadlocks occur infrequently, it's unlikely that any deadlock information will be visible right away.

@@ -1,94 +1,36 @@
 ---
 app_id: anecdote
-app_uuid: 35d64545-cee9-4eb6-98be-65cb9fdd944a
-assets:
-  dashboards:
-    'Anecdote: Bug Reports': assets/dashboards/anecdote_bug_reports.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check: anecdote.feedback.App_Store
-      metadata_path: metadata.csv
-      prefix: anecdote.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 27474989
-    source_type_name: Anecdote
-  oauth: assets/oauth_clients.json
-author:
-  homepage: https://anecdoteai.com/
-  name: Anecdote
-  sales_email: abed@anec.app
-  support_email: hello@anec.app
 categories:
 - ia/ml
 - métricas
 - recopilación de logs
 - gestión de eventos
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/anecdote/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: anecdote
-integration_id: anecdote
-integration_title: Anecdote
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: anecdote
-public_title: Anecdote
-short_description: Monitoriza los errores informados por tus clientes mediante comentarios
+description: Monitoriza los errores informados por tus clientes mediante comentarios
   en tu dashboard de Datadog.
+integration_version: 1.0.0
+media:
+- caption: Resumen de los errores informados por los clientes.
+  image_url: images/1.png
+  media_type: imagen
+- caption: Prioriza la resolución de errores.
+  image_url: images/2.png
+  media_type: imagen
+- caption: Metadatos sobre los comentarios de los clientes.
+  image_url: images/4.png
+  media_type: imagen
+- caption: Alertas de comentarios en tiempo real.
+  image_url: images/3.png
+  media_type: imagen
 supported_os:
 - linux
 - Windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::AI/ML
-  - Categoría::Métricas
-  - Category::Log Collection
-  - Tipo de datos enviados::Métricas
-  - Category::Event Management
-  - Submitted Data Type::Logs
-  - Tipo de datos enviados::Eventos
-  - Supported OS::Linux
-  - Sistema operativo compatible::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Configuración
-  description: Monitoriza los errores informados por tus clientes mediante comentarios
-    en tu dashboard de Datadog.
-  media:
-  - caption: Resumen de los errores informados por los clientes.
-    image_url: images/1.png
-    media_type: imagen
-  - caption: Prioriza la resolución de errores.
-    image_url: images/2.png
-    media_type: imagen
-  - caption: Metadatos sobre los comentarios de los clientes.
-    image_url: images/4.png
-    media_type: imagen
-  - caption: Alertas de comentarios en tiempo real.
-    image_url: images/3.png
-    media_type: imagen
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Anecdote
-  uninstallation: README.md#Desinstalación
+title: Anecdote
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
-
-
 ## Información general
 
-Anecdote monitoriza continuamente los comentarios de los clientes procedentes de fuentes como las reseñas de las tiendas de aplicaciones y los tickets de asistencia al cliente. A través de esta integración, Anecdote envía cualquier comentario clasificado como error a Datadog, además de la metainformación disponible (versión, sistema operativo, etc.).
+Anecdote monitoriza continuamente los reseñas de los clientes procedentes de fuentes como las reseñas de las tiendas de aplicaciones y los tickets de asistencia al cliente. A través de esta integración, Anecdote envía cualquier comentario clasificado como error a Datadog, además de la metainformación disponible (versión, sistema operativo, etc.).
 
 Por cada nuevo fallo informado, Anecdote envía un evento a Datadog para que puedas crear un caso o un incidente. Además, esta solución permite analizar la correlación de las señales de máquinas (como el uso de CPU) con las señales notificadas por los usuarios.
 Utilizando los logs con datos de los comentarios de los clientes se puede acortar significativamente el tiempo medio de respuesta (MTTR) y detectar sistemáticamente problemas difíciles de replicar.
@@ -108,25 +50,25 @@ Al agregar y analizar los errores notificados por los usuarios en un dashboard u
 
 1. En Datadog, ve a **Integraciones** y busca Anecdote.
 
-2. En la página de la integración Anecdote, haz clic en **Install** (Instalar) para instalar la integración.
+1. En la página de la integración Anecdote, haz clic en **Install** (Instalar) para instalar la integración.
 
-3. Una vez finalizada la instalación, haz clic en **Connect Accounts** (Conectar cuentas) para conectar tus cuentas de Anecdote y Datadog.
+1. Una vez finalizada la instalación, haz clic en **Connect Accounts** (Conectar cuentas) para conectar tus cuentas de Anecdote y Datadog.
 
-4. Se te redirigirá a la página de inicio de sesión de Anecdote. Inicia sesión con tus credenciales de Anecdote.
+1. Se te redirigirá a la página de inicio de sesión de Anecdote. Inicia sesión con tus credenciales de Anecdote.
 
-5. Una vez que hayas iniciado sesión en Anecdote, ve a la sección Integraciones.
+1. Una vez que hayas iniciado sesión en Anecdote, ve a la sección Integraciones.
 
-6. En la sección Integraciones, busca y selecciona la integración Datadog.
+1. En la sección Integraciones, busca y selecciona la integración Datadog.
 
-7. Introduce la región en la que se encuentra tu espacio de trabajo Datadog. Esto garantiza que la integración apunte al servidor Datadog correcto.
+1. Introduce la región en la que se encuentra tu espacio de trabajo Datadog. Esto garantiza que la integración apunte al servidor Datadog correcto.
 
-8. Se te redirigirá a Datadog para autenticar tu cuenta. Inicia sesión con tus credenciales de Datadog.
+1. Se te redirigirá a Datadog para autenticar tu cuenta. Inicia sesión con tus credenciales de Datadog.
 
-9. Luego de conectarte a Datadog, instala la aplicación Anecdote. Esto añade "Anecdote: Informes de errores" a tu lista de dashboards en Datadog.
+1. Luego de conectarte a Datadog, instala la aplicación Anecdote. Esto añade "Anecdote: Informes de errores" a tu lista de dashboards en Datadog.
 
-10. En Anecdote, comprueba que la integración se ha conectado correctamente. Deberías ver un mensaje de confirmación o el estado de la integración.
+1. En Anecdote, comprueba que la integración se ha conectado correctamente. Deberías ver un mensaje de confirmación o el estado de la integración.
 
-11. Una vez verificada la integración, puedes empezar a utilizar Anecdote para enviar informes de errores directamente a Datadog y monitorizarlos en la página Dashboards.
+1. Una vez verificada la integración, puedes empezar a utilizar Anecdote para enviar informes de errores directamente a Datadog y monitorizarlos en la página Dashboards.
 
 ### Validación
 
@@ -134,21 +76,48 @@ Para validar el estado de la conexión, puedes comprobar el dashboard de Anecdot
 
 ## Desinstalación
 
-- Inicia sesión en tu [cuenta Anecdote][1].
+- Conéctate a tu [cuenta Anecdote](https://app.anecdoteai.com).
 - Ve a la sección Integraciones.
 - Busca la integración Datadog y haz clic en el icono de suprimir para eliminar la integración.
-- Además, asegúrate de que todas las claves de API asociadas a esta integración se hayan desactivado buscando el nombre de la integración en la [página Claves de API][2].
+- Además, asegúrate de que todas las claves de API asociadas a esta integración se han desactivado, buscando el nombre de la integración en la [página de claves de API](https://app.datadoghq.com/organization-settings/api-keys).
 
 ## Datos recopilados
 
 ### Métricas
-Consulta `metadata.csv` para ver una lista de las métricas proporcionadas por esta integración.
 
-## Asistencia
+| | |
+| --- | --- |
+| **anecdote.feedback.App_Store** <br>(count) | Cuenta el número total de entradas de comentarios del Apple Store.|
+| **anecdote.feedback.Google_Play** <br>(count) | Cuenta el número total de entradas de comentarios de Google Play Store.|
+| **anecdote.feedback.custom_csv** <br>(count) | Cuenta el número total de entradas de comentarios de fuentes CSV personalizadas.|
+| **anecdote.feedback.custom_parquet** <br>(count) | Cuenta el número total de entradas de comentarios de fuentes de Parquet personalizadas.|
+| **anecdote.feedback.Twitter** <br>(count) | Cuenta el número total de tweets con comentarios de Twitter.|
+| **anecdote.feedback.Intercom** <br>(count) | Cuenta el número total de interacciones de clientes desde Intercom.|
+| **anecdote.feedback.SendBird** <br>(count) | Cuenta el número total de mensajes de las plataformas SendBird.|
+| **anecdote.feedback.gorgias** <br>(count) | Cuenta el número total de tickets de asistencia al cliente de Gorgias.|
+| **anecdote.feedback.Zendesk_Support** <br>(count) | Cuenta el número total de tickets de asistencia de Zendesk Support.|
+| **anecdote.feedback.Freshdesk** <br>(count) | Cuenta el número total de tickets de asistencia de Freshdesk.|
+| **anecdote.feedback.Google_Maps** <br>(count) | Cuenta el número total de reseñas de Google Maps.|
+| **anecdote.feedback.G2** <br>(count) | Cuenta el número total de reseñas de G2.|
+| **anecdote.feedback.Trustpilot** <br>(count) | Cuenta el número total de reseñas de Trustpilot.|
+| **anecdote.feedback.Reddit** <br>(count) | Cuenta el número total de menciones de Reddit.|
+| **anecdote.feedback.hubspot** <br>(count) | Cuenta el número total de entradas de comentarios de clientes de HubSpot.|
+| **anecdote.feedback.typeform** <br>(count) | Cuenta el número total de respuestas a encuestas de Typeform.|
+| **anecdote.feedback.Delighted** <br>(count) | Cuenta el número total de entradas de comentarios de Delighted.|
+| **anecdote.feedback.Discord** <br>(count) | Cuenta el número total de mensajes de Discord.|
+| **anecdote.feedback.SurveyMonkey** <br>(count) | Cuenta el número total de respuestas de SurveyMonkey.|
+| **anecdote.feedback.Steam** <br>(count) | Cuenta el número total de reseñas de Steam.|
+| **anecdote.feedback.App_Store.bug** <br>(count) | Cuenta el número total de entradas de comentarios relacionados con errores de Apple Store.|
+| **anecdote.feedback.Google_Play.bug** <br>(count) | Cuenta el número total de entradas de comentarios relacionados con errores de Google Play Store.|
+| **anecdote.feedback.custom_csv.bug** <br>(count) | Cuenta el número total de entradas de comentarios relacionadas con errores desde fuentes CSV personalizadas.|
+| **anecdote.feedback.custom_parquet.bug** <br>(count) | Cuenta el número total de entradas de comentarios relacionados con errores de fuentes de Parquet personalizadas.|
+| **anecdote.feedback.Twitter.bug** <br>(count) | Cuenta el número total de tweets de Twitter relacionados con errores.|
+| **anecdote.feedback.Intercom.bug** <br>(count) | Cuenta el número total de interacciones de clientes relacionadas con errores de Intercom.|
+| **anecdote.feedback.SendBird.bug** <br>(count) | Cuenta el número total de mensajes relacionados con errores de plataformas SendBird.|
+| **anecdote.feedback.gorgias.bug** <br>(count) | Cuenta el número total de tickets de asistencia al cliente de Gorgias relacionados con errores.|
+| **anecdote.feedback.Zendesk_Support.bug** <br>(count) | Cuenta el número total de tickets de asistencia relacionados con errores de Zendesk Support.|
+| **anecdote.feedback.Freshdesk.bug** <br>(count) | Cuenta el número total de tickets de asistencia relacionados con errores de Freshdesk.|
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Anecdote][3].
+## Soporte
 
-
-[1]: https://app.anecdoteai.com
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: mailto:hello@anec.app
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Anecdote](mailto:hello@anec.app).

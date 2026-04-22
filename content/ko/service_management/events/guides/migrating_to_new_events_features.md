@@ -5,14 +5,12 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-events/
   tag: 블로그
-  text: 개선된 Datadog Events로 더 빠르게 문제 해결
-
+  text: 개선된 Datadog 이벤트로 더 빠르게 문제 해결
 title: 새로운 이벤트 기능으로 마이그레이션
 ---
 
 <div class="alert alert-danger">
-Datadog의 기존 이벤트 스트림(Event Stream) 및 이벤트 모니터링이 <strong>2022년 6월 30일</strong>에 중단됩니다. Datadog은 모든 고객을 새롭고 향상된 이벤트 경험으로 마이그레이션하고 있습니다. 이 페이지에는 이번 마이그레이션에 대한 중요한 정보가 포함되어 있습니다. 중단일 전에 이 페이지의 단계에 따라 기존 이벤트 시각화 및 모니터가 계속해서 제대로 작동하는지 확인하세요.</div>
-
+Datadog의 레거시 이벤트 스트림 및 이벤트 모니터는 <strong>2022년 6월 30일에</strong> 종료됩니다. Datadog 모든 고객은 새롭게 향상된 이벤트 환경으로 마이그레이션됩니다. 이 페이지에는 마이그레이션에 관한 중요한 정보가 포함되어 있습니다. 서비스 종료일 전에 이 페이지의 단계를 따라 기존 이벤트 시각화 및 모니터가 계속 제대로 작동하는지 확인하세요.</div>
 
 
 ## 이벤트 기능을 변경하는 이유는 무엇인가요?
@@ -78,7 +76,7 @@ Events Explorer에서 이벤트를 보고 검색하는 것 외에도 이제 시�
 
 Datadog은 JSON 형식의 이벤트를 자동으로 구문 분석합니다. 이벤트가 JSON 형식이 아닌 경우 처리 파이프라인을 통해 순차적으로 연결한 뒤 구문 분석 및 보강이 이루어집니다. 프로세서는 반구조화된 텍스트에서 유의미한 정보나 속성을 추출하여 패싯으로 재사용합니다. 파이프라인을 통해 전달된 각 이벤트는 모든 파이프라인 필터를 대상으로 테스트를 거칩니다. 필터와 일치하면 모든 프로세서가 다음 파이프라인으로 이동하기 전에 순차적으로 적용됩니다.
 
-## 예약 속성
+## 예약된 속성
 
 이 목록은 이벤트와 함께 자동으로 수집된 예약 속성을 설명합니다.
 
@@ -198,7 +196,7 @@ Zabbix 또는 Prometheus가 오늘 서비스에 대한 경고를 트리거했습
 
 [1]: /ko/service_management/events/explorer
 [2]: /ko/service_management/events/explorer/analytics
-[3]: service_management/events/usage/#custom-metrics
+[3]: /ko/service_management/events/usage/#custom-metrics
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [5]: /ko/service_management/events/guides/new_events_sources/
 [6]: /ko/help/

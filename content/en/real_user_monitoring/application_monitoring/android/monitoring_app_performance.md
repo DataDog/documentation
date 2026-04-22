@@ -59,18 +59,18 @@ through the `GlobalRumMonitor` instance. Call this method when your view is full
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       @OptIn(ExperimentalRumApi::class)
-       fun onViewLoaded() {
-            GlobalRumMonitor.get().addViewLoadingTime(override = false)
-       }
+   @OptIn(ExperimentalRumApi::class)
+   fun onViewLoaded() {
+      GlobalRumMonitor.get().addViewLoadingTime(override = false)
+   }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       @OptIn(markerClass = ExperimentalRumApi.class)
-       public void onViewLoaded() {
-            GlobalRumMonitor.get().addViewLoadingTime(override);
-       }
+   @OptIn(markerClass = ExperimentalRumApi.class)
+   public void onViewLoaded() {
+      GlobalRumMonitor.get().addViewLoadingTime(override);
+   }
    ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -87,16 +87,16 @@ In addition to RUM's default attributes, you can measure where your application 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-      fun onHeroImageLoaded() {
-            GlobalRumMonitor.get().addTiming("hero_image")
-      } 
+   fun onHeroImageLoaded() {
+         GlobalRumMonitor.get().addTiming("hero_image")
+   } 
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       public void onHeroImageLoaded() {
-            GlobalRumMonitor.get().addTiming("hero_image");
-       }
+   public void onHeroImageLoaded() {
+      GlobalRumMonitor.get().addTiming("hero_image");
+   }
    ```
 {{% /tab %}}
 {{< /tabs >}}

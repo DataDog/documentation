@@ -49,7 +49,7 @@ El widget geomap visualiza datos geográficos con regiones o puntos sombreados. 
   [4]: /logs/logs_to_metrics/
   [5]: /dashboards/querying/
   [6]: /real_user_monitoring/explorer/search_syntax/
-  [7]: /service_management/service_level_objectives/#searching-slos
+  [7]: /service_level_objectives/#searching-slos
   {{% /tab %}}
 
   {{% tab "Puntos" %}}

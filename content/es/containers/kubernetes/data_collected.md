@@ -80,7 +80,7 @@ Para obtener más información, consulta la documentación de la integración de
 
 Para obtener más información, consulta la documentación de la integración del [servidor de métricas Kubernetes][4].
 
-{{< get-metrics-from-git "kubernetes_state_core" >}}
+{{< get-metrics-from-git "kube-metrics-server" >}}
 
 ### Programador Kubernetes
 
@@ -136,7 +136,7 @@ Para obtener más información, consulta la documentación de la integración de
 
 Para obtener más información, consulta la documentación de la integración del [servidor de métricas Kubernetes][4].
 
-{{< get-service-checks-from-git "kubernetes_state_core" >}}
+{{< get-service-checks-from-git "kube-metrics-server" >}}
 
 ### Programador Kubernetes
 

@@ -56,10 +56,6 @@ Si utilizas una clave de aplicación vinculada a un usuario para habilitar el SC
 
 Para evitar perder el acceso a tus datos, Datadog te recomienda encarecidamente que crees una [cuenta de servicio][6] exclusiva del SCIM. Dentro de esa cuenta de servicio, crea una clave de aplicación para utilizarla en la integración del SCIM.
 
-## Verificación del correo electrónico
-
-Al crear un nuevo usuario con SCIM, se le envía un correo electrónico. Para acceder por primera vez, se requiere loguear a través del enlace de invitación compartido por correo electrónico. El enlace está activo durante 2 días. Si caduca, ve a la [página de configuración de usuarios][7] y selecciona un usuario para volver a enviarle un enlace de invitación.
-
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

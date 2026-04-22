@@ -1,0 +1,18 @@
+# OpenTelemetry API Support option groups
+
+otel_api_support_language_options:
+  - id: java
+    default: true
+  - id: python
+  - id: node_js
+  - id: go
+  - id: ruby
+  - id: dot_net
+  - id: php
+  - id: rust
+
+otel_api_support_signal_options:
+  - id: traces
+    default: true
+  - id: metrics
+  - id: logs

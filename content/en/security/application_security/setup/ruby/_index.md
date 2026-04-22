@@ -7,6 +7,9 @@ aliases:
   - /security/application_security/threats/setup/threat_detection/ruby
   - /security/application_security/threats_detection/ruby
   - /security/application_security/setup/aws/fargate/ruby
+  - /security/application_security/setup/standalone/ruby
+  - /security/application_security/setup/threat_detection/ruby
+  - /security/application_security/enabling/ruby
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -26,12 +29,14 @@ further_reading:
 
 ## Environments
 
+### Hosts
+
 {{< appsec-integrations >}}
   {{< appsec-integration name="Linux" avatar="linux" link="./linux" >}}
   {{< appsec-integration name="macOS" avatar="apple" link="./macos" >}}
 {{< /appsec-integrations >}}
 
-### Cloud and Container Platforms
+### Container Platforms
 
 {{< appsec-integrations >}}
 {{< appsec-integration name="Docker" avatar="docker" link="./docker" >}}
@@ -41,7 +46,20 @@ further_reading:
 ### AWS
 
 {{< appsec-integrations >}}
+{{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="../aws/lambda/ruby" >}}
 {{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws-fargate" >}}
+{{< /appsec-integrations >}}
+
+### Google Cloud Platform
+
+{{< appsec-integrations >}}
+{{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="../gcp/cloud-run/ruby" >}}
+{{< /appsec-integrations >}}
+
+### Microsoft Azure
+
+{{< appsec-integrations >}}
+{{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="../azure/app-service" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources

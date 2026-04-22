@@ -37,7 +37,7 @@ Supported SQL Server versions
 
 ## Configure the AWS integration
 
-Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][2].
+Enable {{< ui >}}Standard Collection{{< /ui >}} in the {{< ui >}}Resource Collection{{< /ui >}} section of your [Amazon Web Services integration tile][2].
 
 ## Grant the Agent access
 
@@ -227,7 +227,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "instance_endpoint": "<INSTANCE_ENDPOINT>"
     }
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][4] on how these tags are used throughout Datadog.

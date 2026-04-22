@@ -86,6 +86,7 @@ Puedes establecer sistemas de control tanto para los volúmenes de tramos indexa
     * Enviar notificaciones del incidente
     * Añadir respondedores o asignar tipos de respondedores
     * Crear, modificar o asignar seguimientos del incidente)
+    * Generar un informe retrospectivo
   * _No_ te conviertes en usuario activo cuando:
     * Declarar, visualizar o buscar incidentes
     * Unirse a canales, reuniones o llamadas de terceros que estén conectados al incidente

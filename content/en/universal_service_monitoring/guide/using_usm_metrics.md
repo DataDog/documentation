@@ -86,7 +86,7 @@ To create an SLO from the Software Catalog:
 
 Optionally, to create an SLO manually using USM metrics:
  
-1. Navigate to [**Service Management > SLOs**][15] and click [**New SLO**][13].
+1. Navigate to [**SLOs**][15] and click [**New SLO**][13].
 2. Select **Metric Based** and create two queries in the **Good events (numerator)** section:
    
    * Query A: Enter a USM metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field. 
@@ -120,7 +120,7 @@ For more information, see the [Dashboards documentation][16].
 [1]: /universal_service_monitoring
 [2]: /tracing/software_catalog
 [3]: /tracing/services/deployment_tracking/
-[4]: /service_management/service_level_objectives
+[4]: /service_level_objectives
 [5]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
 [6]: /tracing/metrics/metrics_namespace
 [7]: /tracing/guide/ddsketch_trace_metrics/
@@ -133,4 +133,4 @@ For more information, see the [Dashboards documentation][16].
 [14]: /api/latest/service-level-objectives/
 [15]: https://app.datadoghq.com/slo/manage
 [16]: /dashboards
-[17]: /service_management/service_level_objectives/
+[17]: /service_level_objectives/

@@ -31,12 +31,12 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
     <th>Support level</th>
   </thead>
   <tr>
-    <td>from 26 and upward</td>
+    <td>from 27 and upward</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">Preview</a></td>
   </tr>
   <tr>
-    <td>from 18 to 25</td>
+    <td>from 18 to 26</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">GA</a></td>
   </tr>
@@ -218,6 +218,11 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Vert.x Redis Client     | 3.9-4.x  | Fully Supported | `vertx-redis-client`                                                                       |
 | Vert.x MySQL Client     | 3.9-4.x  | Fully Supported | `vertx-sql-client`																		                                                       |
 
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
+
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
 - Apache Derby
@@ -246,25 +251,25 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 `dd-java-agent` includes support for automatically tracing the following frameworks.
 
-| Framework           | Versions   | Support Type                                           | Instrumentation Names (used for configuration) |
-|---------------------|------------|--------------------------------------------------------|------------------------------------------------|
-| Apache CXF (Jax-WS) | 3.0+       | [OpenTelemetry Extension][10]                          | `cxf`                                          |
-| Datanucleus JDO     | 4.0+       | Fully Supported                                        | `datanucleus`                                  |
-| Dropwizard Views    | 0.7+       | Fully Supported                                        | `dropwizard`, `dropwizard-view`                |
-| GraphQL             | 14.0+      | Fully Supported                                        | `graphql-java`                                 |
-| Hazelcast (client)  | 3.6+       | [Preview](#framework-integrations-disabled-by-default) | `hazelcast`, `hazelcast_legacy`                |
-| Hibernate           | 3.5+       | Fully Supported                                        | `hibernate`, `hibernate-core`                  |
-| Hystrix             | 1.4+       | Fully Supported                                        | `hystrix`                                      |
-| JSP Rendering       | 2.3+       | Fully Supported                                        | `jsp`, `jsp-render`, `jsp-compile`             |
-| JUnit               | 4.1+, 5.3+ | Fully Supported                                        | `junit`, `junit-4`, `junit-5`                  |
-| Kotlin Coroutines   | 1.3+       | Fully Supported                                        | `kotlin_coroutine`                             |
-| Project Reactor     | 3.1+       | Fully Supported                                        | `reactor-core`                                 |
-| Quartz              | 2.x        | Fully Supported                                        | `quartz`                                       |
-| RxJava              | 2.x        | Fully Supported                                        | `rxjava`                                       |
-| Spring Data         | 1.8+       | Fully Supported                                        | `spring-data`                                  |
-| Spring Scheduling   | 3.1+       | Fully Supported                                        | `spring-scheduling`                            |
-| TIBCO BusinessWorks | 5.14.0+    | [Preview](#framework-integrations-disabled-by-default) | `tibco`, `tibco_bw`                            |
-| Twilio SDK          | < 8.0      | Fully Supported                                        | `twilio-sdk`                                   |
+| Framework           | Versions         | Support Type                                           | Instrumentation Names (used for configuration) |
+|---------------------|------------------|--------------------------------------------------------|------------------------------------------------|
+| Apache CXF (Jax-WS) | 3.0+             | [OpenTelemetry Extension][10]                          | `cxf`                                          |
+| Datanucleus JDO     | 4.0+             | Fully Supported                                        | `datanucleus`                                  |
+| Dropwizard Views    | 0.7+             | Fully Supported                                        | `dropwizard`, `dropwizard-view`                |
+| GraphQL             | 14.0+            | Fully Supported                                        | `graphql-java`                                 |
+| Hazelcast (client)  | 3.6+             | [Preview](#framework-integrations-disabled-by-default) | `hazelcast`, `hazelcast_legacy`                |
+| Hibernate           | 3.5+             | Fully Supported                                        | `hibernate`, `hibernate-core`                  |
+| Hystrix             | 1.4+             | Fully Supported                                        | `hystrix`                                      |
+| JSP Rendering       | 2.3+             | Fully Supported                                        | `jsp`, `jsp-render`, `jsp-compile`             |
+| JUnit               | 4.1+, 5.3+       | Fully Supported                                        | `junit`, `junit-4`, `junit-5`                  |
+| Kotlin Coroutines   | 1.3+             | Fully Supported                                        | `kotlin_coroutine`                             |
+| Project Reactor     | 3.1+             | Fully Supported                                        | `reactor-core`                                 |
+| Quartz              | 2.x              | Fully Supported                                        | `quartz`                                       |
+| RxJava              | 2.x              | Fully Supported                                        | `rxjava`                                       |
+| Spring Data         | 1.8+             | Fully Supported                                        | `spring-data`                                  |
+| Spring Scheduling   | 3.1+             | Fully Supported                                        | `spring-scheduling`                            |
+| TIBCO BusinessWorks | 5.14.0 - 6.11.0  | [Preview](#framework-integrations-disabled-by-default) | `tibco`, `tibco_bw`                            |
+| Twilio SDK          | < 8.0            | Fully Supported                                        | `twilio-sdk`                                   |
 
 Don't see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
 
@@ -292,7 +297,45 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 - Running the Java tracer in Bitbucket is not supported.
 - Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
-- When enabling the tracer for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. Suppress these warnings by adding the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables right before the `-javaagent:/path/to/dd-java-agent.jar` argument. See [JEP 472][13] and [JEP 498][14] for more information.
+- When running the tracer with Java 24+, you may see warnings related to JNI native access. Suppress these warnings by adding the `--enable-native-access=ALL-UNNAMED` flag. See [JEP 472][13] for more information.
+
+## Ahead-of-time (AOT) class loading & linking support
+
+To improve startup time, Ahead-of-time (AOT) class loading & linking makes application classes instantly available in a loaded and linked state when the JVM starts. See [JEP 483][14] and [JEP 514][15] for more information.
+
+### Requirements
+
+Use:
+
+- Java 25 or later
+- [Datadog Java tracer][1] 1.57.0 or later
+
+### Setup
+
+To set up AOT class loading & linking for APM, add the Datadog Java tracer during the training run:
+```shell
+java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCacheOutput=app.aot -jar App.jar
+```
+
+#### Usage
+
+During production, add the same Datadog Java tracer along with the previously cached training data:
+```shell
+java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCache=app.aot -jar App.jar
+```
+
+You can view traces using the [Trace Explorer][9].
+
+{{% collapse-content title="Troubleshooting" level="h4" %}}
+##### Not attaching the Datadog Java tracer during the training run
+
+If you see this warning in production, it means the Datadog Java tracer wasn't attached during training:
+```
+Mismatched values for property jdk.module.addmods: java.instrument specified during runtime but not during dump time
+```
+The JVM cannot then use the AOT cache to improve startup time. The solution is to attach the tracer during training.
+
+{{% /collapse-content %}}
 
 ## GraalVM Native Image support
 
@@ -486,4 +529,5 @@ For more information, see [Configure APM and DogstatsD communication mode][11]. 
 [11]: /containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
 [12]: /tracing/trace_collection/library_config/#agent
 [13]: https://openjdk.org/jeps/472
-[14]: https://openjdk.org/jeps/498
+[14]: https://openjdk.org/jeps/483
+[15]: https://openjdk.org/jeps/514

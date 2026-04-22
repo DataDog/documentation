@@ -1,8 +1,6 @@
 ---
 title: IaC Security Rules
 type: iac_security
-cascade:
-  - disable_edit: true
 further_reading:
   - link: "/security/code_security/iac_security/setup"
     tag: "Documentation"
@@ -21,3 +19,7 @@ further_reading:
 <div class="alert alert-info">For Helm resolution to work correctly, each chart directory must include the charts it depends on. For details, see <a href="https://helm.sh/docs/topics/charts/#the-chart-file-structure">Chart File Structure</a> in the Helm documentation.</div>
 
 [1]: /security/code_security/iac_security/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

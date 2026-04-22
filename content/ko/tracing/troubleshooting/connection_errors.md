@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ko/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
+description: 다양한 배포 환경에서 추적 라이브러리와 Datadog Agent 사이의 연결 오류를 진단하고 해결합니다.
 title: 애플리케이션 성능 모니터링(APM) 연결 오류
 ---
 

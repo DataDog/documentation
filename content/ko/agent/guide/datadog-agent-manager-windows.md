@@ -1,4 +1,6 @@
 ---
+description: 브라우저 기반 Datadog Agent 관리자 GUI를 사용하여 지원되는 브라우저 및 인증을 통해 Windows Agent를
+  구성하고 관리할 수 있습니다.
 further_reading:
 - link: /agent/basic_agent_usage/windows/
   tag: 설명서
@@ -10,7 +12,7 @@ title: 윈도우즈(Windows)용 Datadog Agent Manager
 
 Datadog Agent Manager GUI는 브라우저 기반입니다. GUI 실행 포트는  `datadog.yaml` 파일로 설정할 수 있습니다. 포트를 `-1`로 설정하면 GUI가 비활성화됩니다. 기본적으로 윈도우즈와 맥에서는 포트 5002에서 활성화되며, 리눅스(Linux)에서는 비활성화되어 있습니다.
 
-### 요건
+### 필수 조건
 
 1. 브라우저에서 쿠키를 활성화한 상태여야 합니다. GUI는 브라우저에서 토큰을 생성하고 저장하는데, 이를 활용해 GUI 서버와의 모든 커뮤니케이션을 인증합니다.
 
@@ -66,7 +68,7 @@ Datadog Agent Manager를 부팅했을 때 일반 상태 페이지가 기본으�
 | JMX 상태  | JMX 점검 및 상태 목록을 보여줍니다.                                         |
 | 포워더(Forwarder)   | API 키 상태를 비롯해 Agent 포워더와 관련된 정보를 보여줍니다.      |
 | 엔드포인트   | Agent에서 사용 중인 엔드포인트입니다.                                                  |
-| 로그 Agent  | 로그 Agent 정보입니다(활성화된 경우).                                     |
+| Logs Agent  | 로그 Agent 정보입니다(활성화된 경우).                                     |
 | 애그리게이터(aggregator)  | Agent의 데이터 애그리게이터 정보입니다.                                     |
 | DogStatsD   | DogStatsD로 전송된 데이터 통계입니다.                                         |
 

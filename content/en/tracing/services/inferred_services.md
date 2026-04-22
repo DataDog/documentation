@@ -142,7 +142,7 @@ Peer Tag | Source Attributes
 `peer.rpc.system` | `rpc.system`
 `peer.service` | `peer.service`
 
-**Note**: Peer attribute values that match IP address formats (for example, 127.0.0.1) are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
+**Note**: Peer attribute values that match IP address formats are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
 
 #### Precedence of peer tags
 
@@ -156,7 +156,7 @@ Inferred service | `peer.service` > `peer.rpc.service` > `peer.hostname`
 
 If the highest priority tag, such as `peer.db.name`, is not captured as part of the instrumentation, Datadog uses the second highest priority tag, like `peer.hostname`, and continue in that order.
 
-**Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it take precedence over all other attributes.
+**Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it takes precedence over all other attributes.
 
 ## Migrate to global default service naming
 

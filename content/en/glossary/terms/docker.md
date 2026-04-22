@@ -1,4 +1,5 @@
 ---
+id: docker
 title: Docker
 core_product:
   - infrastructure monitoring

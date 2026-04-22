@@ -30,8 +30,8 @@ Datadog CloudFormation StackSet は、以下のステップを実行します。
 1. AWS 組織または組織単位の下にあるすべてのアカウントで Datadog AWS CloudFormation Stack をデプロイします。
 2. 対象アカウントに必要な IAM ロールとポリシーを自動作成します。
 3. アカウント内の AWS リソースから、AWS CloudWatch のメトリクスやイベントの取り込みを自動的に開始します。
-4. オプションで、AWS インフラストラクチャーのメトリクス収集を無効にします。これは、Cloud Cost Management (CCM) または Cloud Security Management Misconfigurations (CSM Misconfigurations) 固有のユースケースに有用です。
-5. オプションで、CSM Misconfigurations を構成して、AWS アカウントのリソース誤構成を監視します。
+4. (任意) AWS インフラストラクチャーのメトリクス収集を無効化します。Cloud Cost Management (CCM) または Cloud Security Misconfigurations の特定のユース ケースで役立ちます。
+5. (任意) AWS アカウント内のリソース誤構成を監視するよう、Cloud Security Misconfigurations を構成します。
 
 **注**: StackSet では、AWS アカウントでのログ転送は設定されません。ログを設定するには、[ログ収集][2]のガイドの手順に従ってください。
 
@@ -58,8 +58,8 @@ Datadog AWS インテグレーション構成ページから Template URL をコ
     - Datadog AWS インテグレーション構成ページで Datadog APP キーを選択し、StackSet の `DatadogAppKey` パラメーターに使用します。
 
     - *オプションで:*  
-       a. [Cloud Security Management Misconfigurations][5] (CSM Misconfigurations) を有効にして、クラウド環境、ホスト、コンテナをスキャンし、誤構成やセキュリティリスクを検出します。
-        b. AWS インフラストラクチャーを監視したくない場合は、メトリクス収集を無効にします。これは、[Cloud Cost Management][6] (CCM) または [CSM Misconfigurations][5] 固有のユースケースにのみ推奨されます。
+        a. [Cloud Security Misconfigurations][5] を有効化し、クラウド環境、ホスト、コンテナをスキャンして設定不備とセキュリティ リスクを検出します。
+        b. AWS インフラストラクチャーを監視しない場合は、メトリクス収集を無効化します。これは [Cloud Cost Management][6] (CCM) または [Cloud Security Misconfigurations][5] の特定のユース ケースでのみ推奨されます。
 
 3. **StackSet オプションを構成する**
 StackSet が一度に 1 つの操作を実行するように、**Execution configuration** オプションを `Inactive` にしておきます。
@@ -79,6 +79,11 @@ StackSet が一度に 1 つの操作を実行するように、**Execution confi
    **Review** ページに移動し、**Submit** をクリックします。これで、Datadog StackSet の作成プロセスが開始されます。これは、インテグレーションが必要なアカウントの数に応じて、数分かかる場合があります。StackSet がすべてのリソースを正常に作成したことを確認してから次に進みます。
 
    &nbsp;スタックが作成されたら、Datadog の AWS インテグレーション構成ページに戻り、**Done** をクリックします。新しくインテグレーションされた AWS アカウントからのメトリクスやイベントレポートが表示されるまで、数分かかる場合があります。
+
+6. *(任意)* **AWS 管理アカウントを統合**
+
+   AWS の [Service-managed permissions][10] による制約のため、この StackSet 設定の後も AWS 管理アカウントは自動デプロイされません。
+   [Datadog-Amazon Cloudformation][9] の手順に従って AWS 管理アカウントを統合してください。
 
 
 ## 個々の AWS サービスに対するインテグレーションを有効にする
@@ -105,3 +110,5 @@ StackSet では、AWS アカウントでのログ転送は設定されません�
 [6]: https://docs.datadoghq.com/ja/cloud_cost_management/?tab=aws
 [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-delete.html
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[9]: https://docs.datadoghq.com/ja/integrations/guide/amazon_cloudformation/
+[10]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html

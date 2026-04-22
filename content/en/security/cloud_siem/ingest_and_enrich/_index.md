@@ -47,7 +47,7 @@ Datadog provides built-in [Threat Intelligence][5] for Cloud SIEM logs and also 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_siem/content_packs/
-[2]: https://app.datadoghq.com/security/content-packs
+[2]: https://app.datadoghq.com/security/siem/content-packs
 [3]: /integrations/
 [4]: /logs/log_collection/
 [5]: /security/threat_intelligence/#threat-intelligence-sources

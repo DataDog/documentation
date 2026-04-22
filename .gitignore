@@ -9,6 +9,7 @@ _vendor/
 
 # htmltest tmp files
 bin/htmltest
+htmltest_report.txt
 tmp
 
 # Ignore generated examples
@@ -156,14 +157,18 @@ content/en/static_analysis/github_actions.md
 content/en/static_analysis/circleci_orbs.md
 content/en/static_analysis/rules/
 
+# containers - kubernetes
+content/en/containers/kubernetes/kubectl_plugin.md
+
 # containers - datadog-operator
 content/en/containers/datadog_operator/advanced_install.md
 content/en/containers/datadog_operator/configuration.md
 content/en/containers/datadog_operator/custom_check.md
 content/en/containers/datadog_operator/data_collected.md
-content/en/containers/datadog_operator/kubectl_plugin.md
 content/en/containers/datadog_operator/secret_management.md
 content/en/containers/guide/v2alpha1_migration.md
+content/en/containers/datadog_operator/kubectl_plugin.md
+content/en/containers/datadog_operator/migration.md
 
 # serverless
 content/en/serverless/libraries_integrations/plugin.md
@@ -179,9 +184,6 @@ data/workflows/
 !content/en/service_management/workflows/actions_catalog/_index.md
 !content/en/service_management/workflows/actions_catalog/generic_actions.md
 !content/en/service_management/workflows/actions_catalog/logic_actions.md
-
-# semantic tag colors
-layouts/shortcodes/semantic-color.md
 
 # Runtime data
 pids
@@ -265,6 +267,7 @@ Makefile.config
 data/permissions.json
 data/agent_config.json
 data/workflow_bundles.json
+data/python_action_libs.json
 
 agent_config_types_list.txt
 
@@ -311,9 +314,18 @@ static/cdocs
 content/en/**/*.ast.json
 layouts/shortcodes/mdoc/en/**/*.ast.json
 *.tempAst.json
+.cdocs_temp
 
 # Cursor editor configuration
 .cursor/
 
-# Generated file for LLMs
+
+# Deprecated generated file for LLMs (keep so it's not merged back in)
 static/llms.txt
+
+# Playwright
+test-results/
+playwright-report/
+
+# AI
+.claude/*local*

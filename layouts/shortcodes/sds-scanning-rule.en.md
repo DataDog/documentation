@@ -1,4 +1,4 @@
-1. In the **Action on Match** section, select if you want to scan the **Entire Event** or **Specific Attributes**.
+1. In the **Action on Match** section, select if you want to scan the **Entire Event** or **Specific Attributes**. See [Scan or exclude specific-attributes](#scan-or-exclude-specific-attributes) on how to make pattern matching more precise.
     - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned.
     - If you are scanning specific attributes, specify which attributes you want to scan.
 1. For **Define actions on match**, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.

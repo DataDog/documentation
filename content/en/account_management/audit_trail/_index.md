@@ -49,7 +49,7 @@ You can also analyze Audit Trail events with [Cloud SIEM][15] to detect threats 
 
 ## Setup
 
-To enable Datadog Audit Trail, navigate to your [Organization Settings][3] and select *Audit Trail Settings* under *COMPLIANCE*. Click the **Enable** button.
+To enable Datadog Audit Trail, navigate to your [Organization Settings][3] and select {{< ui >}}Audit Trail Settings{{< /ui >}} under {{< ui >}}COMPLIANCE{{< /ui >}}. Click the {{< ui >}}Enable{{< /ui >}} button.
 
 {{< img src="account_management/audit_logs/audit_trail_settings.png" alt="The Audit Trail Settings page showing it disabled" style="width:85%;">}}
 
@@ -62,17 +62,17 @@ To see who enabled Audit Trail:
 
 
 ### Permissions
-Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer. 
+Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer.
 
 ### Archiving
 
 Archiving is an optional feature for Audit Trail. You can use archiving to write to Amazon S3, Google Cloud Storage, or Azure Storage and have your SIEM system read events from it. After creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Events are uploaded to the archive every 15 minutes, so check back on your storage bucket in 15 minutes to make sure the archives are successfully being uploaded from your Datadog account.
 
-To enable archiving for Audit Trail, navigate to your [Organization Settings][3] and select *Audit Trail Settings* under *Compliance*. Scroll down to Archiving and click the Store Events toggle to enable.
+To enable archiving for Audit Trail, navigate to your [Organization Settings][3] and select {{< ui >}}Audit Trail Settings{{< /ui >}} under {{< ui >}}Compliance{{< /ui >}}. Scroll down to Archiving and click the {{< ui >}}Store Events{{< /ui >}} toggle to enable.
 
 ### Retention
 
-Retaining events is an optional feature for Audit Trail. In the **Retention Period** section, click the **Change retention period** to select a retention length appropriate for your use case.
+Retaining events is an optional feature for Audit Trail. In the {{< ui >}}Retention Period{{< /ui >}} section, click the {{< ui >}}Change retention period{{< /ui >}} to select a retention length appropriate for your use case.
 
 When Audit Trail is enabled, the default retention period for an audit trail event is 90 days. You can set the retention period to: 3, 7, 15, 30, or 90 days.
 
@@ -95,22 +95,36 @@ Audit Trail events have the same functionality as logs within the [Log Explorer]
 {{< img src="account_management/audit_logs/attributes.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
 
 
+### Natural language queries
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+This feature is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).
+</div>
+{{< /site-region >}}
+
+Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured audit trail query, making it easier to explore audit events without needing to write complex syntax.
+
+The system translates natural language input into Datadog queries and understands context such as users, actions, resources, and time ranges. It also detects relevant fields automatically, for example, "Who modified the payment dashboard last week" or "Show all role changes in the past 24 hours."
+
+{{< img src="account_management/audit_logs/audit_trail_nlq_light.mp4" alt="Natural language query in Audit Trail showing how to search for audit events using plain English phrases" video=true >}}
+
 ### Saved views
 
 Efficient troubleshooting requires your data to be in the proper scope to permit exploration, have access to visualization options to surface meaningful information, and have relevant facets listed to enable analysis. Troubleshooting is contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the Audit Trail explorer.
 
 All saved views, that are not your default view, are shared across your organization:
 
-* **Integration saved views** come out-of-the-box with Audit Trail. These views are read-only, and identified by the Datadog logo.
-* **Custom saved views** are created by users. They are editable by any user in your organization (except [read only users][6]), and identified with the avatar of the user who created them Click the **Save** button to create a new custom saved view from the current content of your explorer.
+* {{< ui >}}Integration saved views{{< /ui >}} come out-of-the-box with Audit Trail. These views are read-only, and identified by the Datadog logo.
+* {{< ui >}}Custom saved views{{< /ui >}} are created by users. They are editable by any user in your organization (except [read only users][6]), and identified with the avatar of the user who created them Click the {{< ui >}}Save{{< /ui >}} button to create a new custom saved view from the current content of your explorer.
 
 At any moment, from the saved view entry in the Views panel:
 
-* **Load** or **reload** a saved view.
-* **Update** a saved view with the configuration of the current view.
-* **Rename** or **delete** a saved view.
-* **Share** a saved view through a short-link.
-* **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
+* {{< ui >}}Load{{< /ui >}} or {{< ui >}}reload{{< /ui >}} a saved view.
+* {{< ui >}}Update{{< /ui >}} a saved view with the configuration of the current view.
+* {{< ui >}}Rename{{< /ui >}} or {{< ui >}}delete{{< /ui >}} a saved view.
+* {{< ui >}}Share{{< /ui >}} a saved view through a short-link.
+* {{< ui >}}Star{{< /ui >}} (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
 
 **Note:** Update, rename, and delete actions are disabled for integration saved views and [read only users][6].
 
@@ -125,9 +139,9 @@ Your existing Audit Trail explorer view is your default saved view. This configu
 
 At any moment, from the default view entry in the Views panel:
 
-* **Reload** your default view by clicking on the entry.
-* **Update** your default view with the current parameters.
-* **Reset** your default view to Datadog's defaults for a fresh restart.
+* {{< ui >}}Reload{{< /ui >}} your default view by clicking on the entry.
+* {{< ui >}}Update{{< /ui >}} your default view with the current parameters.
+* {{< ui >}}Reset{{< /ui >}} your default view to Datadog's defaults for a fresh restart.
 
 ### Notable Events
 
@@ -135,7 +149,7 @@ Notable events are a subset of audit events that show potential critical configu
 
 {{< img src="account_management/audit_logs/notable_events.png" alt="The audit event facet panel showing notable events checked" style="width:30%;">}}
 
-Events that match the following queries are marked as notable.
+Events that match the following queries are marked as notable. You can also retrieve all notable events using the query `is_notable_event:true`.
 
 | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------------------------------------------------- | --------------------------------------------------|
@@ -148,6 +162,7 @@ Events that match the following queries are marked as notable.
 | Creations and deletion of RUM applications | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
 | Changes to Sensitive Data Scanner scanning groups | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
 | Creation or deletion of Synthetic tests | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+| Activation, deactivation, and modification of Product Analytics for applications | `@evt.name:"Product Analytics" @asset.type:product_analytics @action:(enabled OR disabled OR modified)` |
 
 ### Inspect Changes (Diff)
 
@@ -161,7 +176,7 @@ The Inspect Changes (Diff) tab in the audit event details panel compares the con
 
 Reference Tables allow you to combine metadata with audit events, providing more information to investigate Datadog user behavior. Add a query filter based on a Reference Table to perform lookup queries. For more information on activating and managing this feature, see the [Reference Tables][2] guide.
 
-To apply a query filter with Reference Tables, click on the `+ Add` button next to the query editor and select **Join with Reference Table**. In the following example, the Reference Table query filter is used to search for dashboards modified by users who are accessing Datadog from non-authorized IP addresses:
+To apply a query filter with Reference Tables, click on the {{< ui >}}+ Add{{< /ui >}} button next to the query editor and select {{< ui >}}Join with Reference Table{{< /ui >}}. In the following example, the Reference Table query filter is used to search for dashboards modified by users who are accessing Datadog from non-authorized IP addresses:
 
 {{< img src="account_management/audit_logs/reference_tables.png" alt="The Datadog Audit Trail explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 
@@ -173,7 +188,7 @@ Log management users can audit API key usage with Audit Trail. For API key audit
 
 ## Create a monitor
 
-To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][7]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
+To create a monitor on a type of audit trail event or by specific Audit Trail attributes, see the [Audit Trail Monitor documentation][7]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
 
 ## Create a dashboard or a graph
 
@@ -185,23 +200,17 @@ Give more visual context to your audit trail events with dashboards. To create a
 {{< img src="account_management/audit_logs/audit_graphing.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
-## Create a scheduled report
+## Send out a scheduled report
 
-Datadog Audit Trail allows you to send out audit analytics views as routinely scheduled emails. These reports are useful for regular monitoring of the Datadog platform usage. For example, you can choose to get a weekly report of the number of unique Datadog user logins by country. This query allows you to monitor anomalous login activity or receive automated insight on usage.
+You can save your Audit Trail query as a dashboard and send out a scheduled report. These reports can be useful for regular monitoring of the Datadog platform usage. For example, you can send out a weekly email of the number of unique Datadog user logins by country. This query allows you to monitor anomalous login activity or receive automated insight on usage.
 
-To export an audit analytics query as a report, create a timeseries, top list, or a table query and click **More...** > **Export as scheduled report** to start exporting your query as a scheduled report.
+To create a scheduled report:
 
-**Note**: The **List** view does not have the option to export to a scheduled report.
-
-{{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Export as scheduled report function in the More... dropdown menu" style="width:90%;" >}}
-
-1. Enter a name for the dashboard, which is created with the query widget. A new dashboard is created for every scheduled report. This dashboard can be referenced and changed later if you need to change the report content or schedule.
-2. Schedule the email report by customizing the report frequency and time frame.
-3. Add recipients that you want to send the email to.
-4. Add any additional customized messages that needs to be part of the email report.
-5. Click **Create Dashboard and Schedule Report**.
-
-{{< img src="account_management/audit_logs/export_workflow.png" alt="Exporting a audit analytics view into a scheduled email" style="width:80%;" >}}
+1. Navigate to [Audit Trail][1], enter your query to filter your audit events.
+1. Click {{< ui >}}More{{< /ui >}} and select {{< ui >}}Save to dashboard{{< /ui >}}.
+    - You can either save to an existing dashboard or create a new dashboard.
+1. On your dashboard, click {{< ui >}}Share{{< /ui >}} and select {{< ui >}}Schedule report{{< /ui >}}.
+1. Follow the instructions in [Schedule a Report][17] to set up your report.
 
 ## Download Audit Events as CSV
 
@@ -210,7 +219,7 @@ Datadog Audit Trail allows you to download up to 100K audit events as a CSV file
 To export audit events as CSV:
 1. Run the appropriate search query that captures the events you are interested in
 2. Add event fields as columns in the view that you want as part of CSV
-3. Click on Download as CSV
+3. Click on {{< ui >}}Download as CSV{{< /ui >}}
 4. Select the number of events to export and export as CSV
 
 ## Out-of-the-box dashboard
@@ -244,3 +253,5 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 [14]: /coterm
 [15]: /security/cloud_siem/
 [16]: /getting_started/cloud_siem/
+[17]: /dashboards/sharing/scheduled_reports/#schedule-a-report
+

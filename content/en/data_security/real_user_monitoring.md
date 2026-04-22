@@ -9,7 +9,7 @@ further_reading:
 - link: "/data_security/synthetics/"
   tag: "Documentation"
   text: "Synthetic Monitoring Data Security"
-- link: "/real_user_monitoring/session_replay/browser/privacy_options/"
+- link: "/session_replay/browser/privacy_options/"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
 - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
@@ -119,17 +119,17 @@ With respect to URLs, you have the option to track pageviews manually to remove 
 You can also transmit all RUM events through your own (proxy) server so that end user devices never directly communicate with Datadog.
 
 #### IP address
-After you've initialized your RUM application, you can choose whether or not you want to include IP or geolocation data from the **User Data Collection** tab:
+After you've initialized your RUM application, you can choose whether or not you want to include IP or geolocation data from the {{< ui >}}User Data Collection{{< /ui >}} tab:
 
 {{< img src="data_security/data-security-rum-privacy-compliance-user-data-collection-1.png" alt="You can include or exclude geolocation and client IP data from the RUM application management page" style="width:100%;" >}}
 
 After you disable the collection of IP data, the change is applied immediately. Any events collected prior to disabling does not remove the IP data. It is performed on the backend, which means the Browser SDK is still sending data, but IP addresses are omitted by Datadog backend pipelines and dropped at processing time.
 
 #### Geolocation
-In addition to removing client IPs, you can also choose to disable the collection of geolocation (country, city, county), or GeoIP, from all future collected data. If you uncheck the **Collect geolocation data** box, the change is applied immediately. Any events collected prior to disabling does not remove corresponding geolocation data. Data omission is done at the backend level, which means the Browser SDK is still sending data, but geolocation data is omitted by Datadog backend pipelines and dropped at processing time.
+In addition to removing client IPs, you can also choose to disable the collection of geolocation (country, city, county), or GeoIP, from all future collected data. If you uncheck the {{< ui >}}Collect geolocation data{{< /ui >}} box, the change is applied immediately. Any events collected prior to disabling does not remove corresponding geolocation data. Data omission is done at the backend level, which means the Browser SDK is still sending data, but geolocation data is omitted by Datadog backend pipelines and dropped at processing time.
 
 ### Proactively search for sensitive data with Sensitive Data Scanner
-[Sensitive Data Scanner][17] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules. If you've enabled this feature, you can find it on the [**Manage Sensitive Data** page][18].
+[Sensitive Data Scanner][17] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules. If you've enabled this feature, you can find it on the [{{< ui >}}Manage Sensitive Data{{< /ui >}} page][18].
 
 ## Session Replay-specific privacy options
 See [privacy options specific to Session Replay][19].
@@ -153,8 +153,8 @@ See [privacy options specific to Session Replay][19].
 [13]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [14]: /help/
 [15]: /account_management/rbac/permissions/#real-user-monitoring
-[16]: /real_user_monitoring/session_replay/privacy_options#override-an-html-element
+[16]: /session_replay/browser/privacy_options/#override-an-html-element
 [17]: /security/sensitive_data_scanner/
 [18]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[19]: /real_user_monitoring/session_replay/browser/privacy_options
+[19]: /session_replay/browser/privacy_options
 [20]: https://www.datadoghq.com/private-beta/product-analytics/

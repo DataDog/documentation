@@ -113,14 +113,7 @@ El código del ejemplo crea el siguiente evento de acción:
 }
 ```
 
-Si un evento o una solicitud supera alguna de las siguientes limitaciones, la ingesta de Datadog lo rechaza.
-
-| Propiedad                                 | Limitación   |
-| ---------------------------------------- | ------------ |
-| Número máximo de atributos por evento   | 256          |
-| Profundidad máxima de atributos por evento        | 20           |
-| Tamaño máximo del evento                       | 256 KB       |
-| Tamaño máximo de la carga útil de ingesta              | 5 MB         |
+Si un evento o una solicitud supera las [limitaciones técnicas del RUM enumeradas][16], es rechazado por la admisión de Datadog.
 
 ## Advertencia "Customer data exceeds the recommended threshold"
 
@@ -161,3 +154,4 @@ Aparece una advertencia cuando falla el desenmascaramiento de un stack trace. Si
 [13]: /es/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/source-code/setup/rum
 [15]: /es/real_user_monitoring/guide/debug-symbols
+[16]: /es/real_user_monitoring/#technical-limitations

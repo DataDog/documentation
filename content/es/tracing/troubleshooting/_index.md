@@ -38,6 +38,9 @@ further_reading:
 - link: /tracing/services/inferred_services
   tag: Documentación
   text: Dependencias de servicio inferidas
+- link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
+  tag: Centro de aprendizaje
+  text: Solución de problemas de instrumentación de APM en un host
 title: Solucionar problemas de APM
 ---
 
@@ -341,7 +344,7 @@ Cuando abres un [tique de soporte][1], el equipo de soporte de Datadog puede ped
 
 6. **Código de rastreo personalizado**: la instrumentación personalizada, la configuración y añadir etiquetas de tramo puede afectar significativamente a las visualizaciones de trazas en Datadog.
 
-7. **Información sobre la versión**: saber qué versiones de lenguaje, marco, Datadog Agent y rastreador de Datadog estás utilizando permite al servicio de asistencia verificar los [requisitos de compatibilidad][15], comprobar problemas conocidos o recomendar una actualización de versión. Por ejemplo:
+7. **Información sobre la versión**: saber qué versiones de lenguaje, framework, Datadog Agent y rastreador de Datadog estás utilizando permite al servicio de asistencia verificar los [requisitos de compatibilidad][15], comprobar problemas conocidos o recomendar una actualización de versión. Por ejemplo:
 
 {{% /collapse-content %}}
 

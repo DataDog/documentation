@@ -22,8 +22,12 @@ further_reading:
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
-Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. For more information on using JavaScript in App Builder, see [JavaScript Expressions][7].
-<br><br>
+Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click {{< ui >}}&lt;/&gt;{{< /ui >}} next to the property to use the code editor. 
+
+Any component that can trigger an event has a list of available reactions in [events and reactions][13]. These components can also use [custom reactions][14].
+
+For more information on using JavaScript in App Builder, see [JavaScript Expressions][7]. For more information about saving your components as a template, see [Reusable Modules][12].
+<br><br> 
 
 {{% collapse-content title="Button" level="h3" %}}
 Button components have the following properties.
@@ -66,13 +70,8 @@ Event
 : **Value**: click
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file, set state variable value
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -182,13 +181,8 @@ Event
 : **Value**: change<br>
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -250,6 +244,52 @@ For an example showing how to use this component, see [Custom charts][10].
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Date picker" level="h3" %}}
+Date picker components have the following properties.
+
+### General
+
+Label
+: The label displayed at the top of the date picker.<br>
+**Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
+Default Value
+: The default date of the date picker, displayed as a UNIX timestamp in milliseconds.<br>
+**Value**: integer
+
+Allow Future Dates
+: Determines whether the date can be set after the current day's date.<br>
+**Provided values**: on, off
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
+State Function
+: setValue<br>
+**Example**: See [State functions][9].
+
+### Inspect data
+
+Displays properties and values in JSON format. Values are displayed both as a UNIX timestamp in milliseconds and ISO (year, month, day, hour, minutes, seconds, and milliseconds).
+
+{{% /collapse-content %}}
+
 
 {{% collapse-content title="Date range picker" level="h3" %}}
 Date range picker components have the following properties.
@@ -272,13 +312,8 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -287,6 +322,22 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Divider" level="h3" %}}
+Divider components have the following properties.
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays properties in JSON format.
+
 {{% /collapse-content %}}
 
 
@@ -311,17 +362,62 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
 Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Image" level="h3" %}}
+Image components have the following properties.
+
+### General 
+
+Source
+: The image to display. The supported formats are JPG, PNG, and GIF. The maximum upload size is 4 MB.<br>
+**Values**: URL or file
+
+### Appearance
+
+Fit
+: Determines the dimensions of the image within the bounds of the image component.<br>
+**Provided values**: fill, contain, cover, none
+
+Padding
+: Determines the width of space between the bounds of the image and the bounds of the image component.<br>
+**Provided values**: none, small, medium, large
+
+Vertical Alignment
+: Determines the vertical position of the image within the bounds of the image component.<br>
+**Provided values**: align top, align center, align bottom
+
+Horizontal Alignment 
+: Determines the horizontal position of the image within the bounds of the image component.<br>
+**Provided values**: align left, align center, align right
+
+Border
+: Determines whether the image component has a visual border around its edges.<br>
+**Provided values**: on, off
+
+Transparent Background
+: Determines whether the background inside the image component is transparent.<br>
+**Provided values**: on, off
+
+Is Loading
+: Determines whether a loading icon is displayed while the image is being loaded.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays properties in JSON format.
 
 {{% /collapse-content %}}
 
@@ -394,7 +490,7 @@ Content
 
 Options
 : The options available in a `select` field. Options must be an array of objects, with a `const` key for the option value and an optional `title` key for the option label.<br>**Value**: Each object's `label` and `value` can be a string or expression.<br>
-You can populate each object using the GUI (default), or toggle **Raw** to use raw JSON input to provide the entire array of objects.
+You can populate each object using the GUI (default), or toggle {{< ui >}}Raw{{< /ui >}} to use raw JSON input to provide the entire array of objects.
 
 Placeholder text
 : The text that displays in a `textInput` or `textArea` field when no value is entered.<br>
@@ -428,13 +524,13 @@ Event
 : **Value**: submit, change, validate
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 State Function
 : setValue<br>
-**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
-
-For more information on events, see [Events][1].
+**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -470,13 +566,8 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
 ### Inspect data
 
@@ -510,15 +601,13 @@ Event
 : **Values**: toggleOpen, close, open
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setIsOpen<br>
-**Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.
-
-For more information on events, see [Events][1].
+**Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -572,15 +661,13 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
-**Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.
-
-For more information on events, see [Events][1].
+**Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -640,19 +727,64 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
-**Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.
-
-For more information on events, see [Events][1].
+**Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
 Displays property and value pairs in JSON format.
+{{% /collapse-content %}}
+
+
+
+{{% collapse-content title="React renderer" level="h3" %}}
+React renderer components have the following properties.
+
+### General
+
+React Component Definition
+: The code that is executed to create a React component.<br>
+
+Component Input Props
+: The props that are passed to the React component and can be accessed in the props object of the component.
+
+Initial Component State
+: Sets the initial state values for your component. This state is used when the component first renders or if no state has been set yet. The component can access this data through <code>props.state</code>.<br>
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+Event
+: **Values**: set component state, callback function
+
+Function Name
+: **Value**: <code>props.customFunctionName</code>
+
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+### Relationships
+
+Displays data dependencies between React renderer and components in the app.
+
+### Example
+
+For an example showing how to use this component, see [React renderer][11].
+
 {{% /collapse-content %}}
 
 
@@ -690,13 +822,13 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
-**Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.
+**Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.<br>
+See [State functions][9] for more information.
 
 For more information on events, see [Events][1].
 
@@ -763,15 +895,13 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
-**Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.
-
-For more information on events, see [Events][1].
+**Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -783,13 +913,53 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Side panel" level="h3" %}}
+Side panel components have the following properties.
+
+### General 
+
+Title
+: The title for the side panel.<br>
+**Value**: string
+
+### Appearance
+
+Width
+: Determines the width of the side panel. A percent sign (`%`) must be included after the value.<br>
+**Value**: integer
+
+Hide Close Button
+: Determines whether side panel displays an X to close the panel.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Values**: toggle open, close, open
+
+Reaction
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
+
+State Function
+: setIsOpen<br>
+**Example**: `sidePanel0.setIsOpen(true)` sets the state of `sidePanel0` to open.<br>
+See [State functions][9] for more information.
+
+### Inspect data
+
+Displays properties and values in JSON format.
+
+{{% /collapse-content %}}
+
+
 {{% collapse-content title="Tab" level="h3" %}}
 
 Tab components have the following properties.
 
 ### Tabs
 
-A list of tab views. Use the **+ (plus)** to add additional views.
+A list of tab views. Use the ({{< ui >}}+{{< /ui >}}) to add additional views.
 
 
 ### Style
@@ -827,15 +997,13 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setTabIndex<br>
-**Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.
-
-For more information on events, see [Events][1].
+**Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -850,7 +1018,7 @@ Table components have the following properties.
 ### General
 
 Title
-: A title for the table. Select **Markdown** for custom formatting.<br>
+: A title for the table. Select {{< ui >}}Markdown{{< /ui >}} for custom formatting.<br>
 **Value**: string
 
 Data source
@@ -884,7 +1052,7 @@ Filterable
 : Determines whether a filter option is available for the column.<br>
 **Provided values**: on, off
 
-Some columns have additional properties based on their **Formatting** property.
+Some columns have additional properties based on their {{< ui >}}Formatting{{< /ui >}} property.
 
 ### Pagination
 
@@ -917,7 +1085,7 @@ Direction
 
 ### Row actions
 
-Adding a row action adds an **Actions** column to the table, which contains user-defined action buttons. Rows can have multiple actions. Actions have the following properties:
+Adding a row action adds an {{< ui >}}Actions{{< /ui >}} column to the table, which contains user-defined action buttons. Rows can have multiple actions. Actions have the following properties:
 
 Label
 : The text that displays on the action button.<br>
@@ -944,10 +1112,6 @@ Reactions
 **Provided values**: download file, open modal, close modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action, custom<br>
 Some reaction types have additional properties.
 
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
 ### Appearance
 
 Scrollable
@@ -971,11 +1135,11 @@ Is searchable
 **Provided values**: on, off
 
 Show sort options
-: Adds a **Sort** button to the table that gives users sorting options.<br>
+: Adds a {{< ui >}}Sort{{< /ui >}} button to the table that gives users sorting options.<br>
 **Provided values**: on, off
 
 Show column options
-: Adds a **Columns** button to the table for displaying, hiding, or reorganizing table columns.<br>
+: Adds a {{< ui >}}Columns{{< /ui >}} button to the table for displaying, hiding, or reorganizing table columns.<br>
 **Provided values**: on, off
 
 Has date range filter
@@ -992,17 +1156,15 @@ Event
 : **Values**: pageChange, tableRowClick
 
 Reaction
-: **Values**: download file, open modal, close modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action, custom
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setSelectedRow<br>
 **Examples**: <ul><li>`table0.setSelectedRow(0)` sets the `selectedRow` property of `table0` to the first row.</li><li>`table0.setSelectedRow(null)` clears the `selectedRow` property.</li></ul>
 : setPageIndex<br>
-**Example**: `table0.setPageIndex(0)` sets the `pageIndex` property of `table0` to the first page.
-
-For more information on events, see [Events][1].
+**Example**: `table0.setPageIndex(0)` sets the `pageIndex` property of `table0` to the first page.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -1028,7 +1190,7 @@ Content
 **Value**: string or expression
 
 Content type
-: Determines how to render the text. When **Markdown** is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
+: Determines how to render the text. When {{< ui >}}Markdown{{< /ui >}} is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
 **Provided values**: plain text, Markdown
 
 ### Appearance
@@ -1090,15 +1252,13 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
-**Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.
-
-For more information on events, see [Events][1].
+**Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.<br>
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -1137,15 +1297,13 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: examples include open modal, trigger action, and set component state<br>
+See [Events][1] for the full list of available reactions.
 
-State Functions
-: fetch<br>
-**Example**: See [events][9].
+State Function
 : setValue<br>
 **Example**: `textInput0.setValue("text")` sets the value of the `textInput0` component to `"text"`.
-
-For more information on events, see [Events][1].
+See [State functions][9] for more information.
 
 ### Inspect data
 
@@ -1161,7 +1319,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][5].
+<br>Do you have questions or feedback? Join the {{< ui >}}#app-builder{{< /ui >}} channel on the [Datadog Community Slack][5].
 
 
 [1]: /service_management/app_builder/events
@@ -1174,3 +1332,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /service_management/app_builder/events/#state-functions
 [10]: /service_management/app_builder/components/custom_charts/
+[11]: /actions/app_builder/components/react_renderer/
+[12]: /actions/app_builder/components/reusable_modules/
+[13]: /actions/app_builder/events/#events-and-reactions
+[14]: /actions/app_builder/events/#custom-reactions

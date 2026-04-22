@@ -452,8 +452,4 @@ Rsyslog を構成して、ホスト、コンテナ、サービスからログを
 
 ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
-## 参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /ja/help/

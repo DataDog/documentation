@@ -120,10 +120,10 @@ Apply the role to the running Observability Pipelines process. You can do this b
 ## Configure the Worker to receive notifications from the SQS queue
 
 1. Use the below source configuration example to set up the Worker to:  
-      a. Receive the SQS event notifications.   
-      b. Read the associated logs in the S3 bucket.  
-      c. Emit the logs to the console.
-    ```yaml
+   1. Receive the SQS event notifications.   
+   1. Read the associated logs in the S3 bucket.  
+   1. Emit the logs to the console.
+      ```yaml
         sources:
           cloudtrail:
             type: aws_s3

@@ -1,4 +1,5 @@
 ---
+description: Datadog 製品の料金体系を、請求サイクル、支払い方法、使用量の計算方法、ホスト数のカウント方法などの詳細情報とともに把握できます。
 title: 課金
 ---
 
@@ -93,7 +94,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 | 送金                                                                                                                                                                                | remittances@datadoghq.com    |
 | 注文書のコピー                                                                                                                                                                             | purchaseorders@datadoghq.com |
 
-## その他の参考資料
+## 参考資料
 
 {{< whatsnext desc="請求に関する特定のトピック:" >}}
     {{< nextlink href="account_management/billing/pricing/" >}}料金{{< /nextlink >}}

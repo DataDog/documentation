@@ -33,7 +33,19 @@ Datadog SDKs implement the OpenTelemetry APIs for traces, metrics, and logs. Thi
 
 This page describes the environment variables Datadog supports for OpenTelemetry interoperability.
 
-<div class="alert alert-info">If both Datadog and OpenTelemetry environment variables are set, Datadog takes precedence. Datadog defaults also override OpenTelemetry defaults. See the relevant <a href="/tracing/trace_collection/library_config/">SDK Configuration page</a> for default values and more information.</div>
+The precedence rules on this page describe how *Datadog SDKs* resolve configuration into OpenTelemetry resource attributes (for example, `service.name`, `deployment.environment.name`, `service.version`).
+
+<div class="alert alert-danger">
+  To avoid duplicate values appearing in Datadog for the same tag key, don't set both Datadog (<code>DD_*</code>) and OpenTelemetry (<code>OTEL_*</code>) environment variables for the same concept. Choose one convention.
+  <br>
+  See the relevant <a href="/tracing/trace_collection/library_config/">SDK Configuration page</a> for default values and more information.
+</div>
+
+## Network requirements
+
+{{% otel-network-requirements %}}
+
+**Note**: Even when `DD_METRICS_OTEL_ENABLED=true`, standard Runtime Metrics are still emitted through DogStatsD.
 
 ## Datadog SDK configuration
 These environment variables enable the Datadog SDK to ingest OpenTelemetry Metrics and Logs API data. For guides on how to instrument your application, see the [language-specific instrumentation documentation][14].
@@ -48,10 +60,6 @@ These environment variables enable the Datadog SDK to ingest OpenTelemetry Metri
 **Default**: `false`
 
 `DD_LOGS_OTEL_ENABLED`
-: **Description**: Enables the Datadog SDK's native OpenTelemetry Logs API implementation, allowing logs to be collected and exported in OTLP format. <br>
-**Default**: `false`
-
-`DD_LOGS_OTEL_ENABLED`
 : **Description**: Enables the Datadog SDK to collect and export logs in the OTLP format. <br>
 **Notes**: For most languages, this enables support for the OTel Logs API. For .NET, this enables interception of built-in loggers. <br>
 **Default**: `false`
@@ -62,7 +70,7 @@ Datadog SDKs support the following general OpenTelemetry SDK options. For more i
 `OTEL_SERVICE_NAME`
 : **Datadog convention**: `DD_SERVICE`<br>
 Sets the `service.name` resource attribute<br>
-**Notes**: This variable is one of several used to determine the final service name. See the `service.name` notes under `OTEL_RESOURCE_ATTRIBUTES` for the complete precedence order.<br>
+**Notes**: When determining the final `service.name` resource attribute, the SDK uses this variable as an input to determine the final `service.name`. See the `service.name` notes under `OTEL_RESOURCE_ATTRIBUTES` for the complete precedence order.<br>
 
 `OTEL_LOG_LEVEL`
 : **Datadog convention**: `DD_LOG_LEVEL`<br>
@@ -104,27 +112,32 @@ Trace exporter to be used<br>
 
 `OTEL_RESOURCE_ATTRIBUTES`
 : **Datadog convention**: `DD_TAGS` <br>
-**Description**: Key-value pairs to be used as resource attributes. <br>
-**Notes**: Datadog-defined configurations take precedence.
-    - `service.name` (maps to `DD_SERVICE`): Resolved with the following precedence: <br>
+**Description**: Key-value pairs to be used as OpenTelemetry resource attributes. <br>
+**Notes**: The SDK resolves overlapping settings using Datadog (`DD_*`) configuration first.
+    - `service.name` (maps to `DD_SERVICE`): The SDK resolves the value with the following precedence: <br>
         1. Value of `DD_SERVICE` <br>
         2. Value of `service` key in `DD_TAGS` <br>
         3. Value of `OTEL_SERVICE_NAME` <br>
         4. Value of `service.name` key in `OTEL_RESOURCE_ATTRIBUTES`
-    - `deployment.environment.name` (maps to `DD_ENV`): Resolved with the following precedence: <br>
+    - `deployment.environment.name` (maps to `DD_ENV`): The SDK resolves the value with the following precedence: <br>
         1. Value of `DD_ENV` <br>
         2. Value of `env` key in `DD_TAGS` <br>
         3. Value of `deployment.environment.name` key in `OTEL_RESOURCE_ATTRIBUTES` <br>
         4. Value of `deployment.environment` in `OTEL_RESOURCE_ATTRIBUTES`
-    - `service.version` (maps to `DD_VERSION`): Resolved with the following precedence: <br>
+    - `service.version` (maps to `DD_VERSION`): The SDK resolves the value with the following precedence: <br>
         1. Value of `DD_VERSION` <br>
         2. Value of `version` key in `DD_TAGS` <br>
         3. Value of `service.version` key in `OTEL_RESOURCE_ATTRIBUTES`
     - **Additional Attributes**: May be added through the `DD_TAGS` configuration, or `OTEL_RESOURCE_ATTRIBUTES` if `DD_TAGS` is not set.
 
+  <div class="alert alert-danger">
+    Although the SDK resolves these settings internally for emitted telemetry, the Datadog Agent collects tags from all configured sources without overriding. Configuring service/environment/version using multiple inputs (for example, both <code>DD_ENV</code> and <code>OTEL_RESOURCE_ATTRIBUTES</code>) can result in multiple values appearing in Datadog (for example, <code>env:prod</code> and <code>env:dev</code>).
+    To avoid duplicates, configure each concept using only one convention.
+  </div>
+
 `OTEL_SDK_DISABLED`
 : **Description**: Disables the Datadog SDK's OpenTelemetry interoperability for all signals. <br>
-**Notes**: **Notes**: When set to `true`, this effectively sets `DD_TRACE_OTEL_ENABLED=false`, `DD_LOGS_OTEL_ENABLED=false`, and `DD_METRICS_OTEL_ENABLED=false`.<br>
+**Notes**: When set to `true`, this effectively sets `DD_TRACE_OTEL_ENABLED=false`, `DD_LOGS_OTEL_ENABLED=false`, and `DD_METRICS_OTEL_ENABLED=false`.<br>
 **Ruby & Go SDKs**: The OpenTelemetry SDK activates automatically upon import and configuration, so this setting is not applicable.
 
 ## OTLP Exporter configuration

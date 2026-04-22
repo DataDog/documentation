@@ -29,6 +29,15 @@ further_reading:
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session to boost your APM understanding"
+  - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+    tag: "Blog"
+    text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
+  - link: "https://www.datadoghq.com/blog/pubsub-cloud-run-tracing"
+    tag: "Blog"
+    text: "Trace Google Pub/Sub workloads in Cloud Run with Datadog"
+  - link: "https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency"
+    tag: "Blog"
+    text: "Analyzing round trip query latency"
 
 aliases:
   - /tracing/faq/terminology

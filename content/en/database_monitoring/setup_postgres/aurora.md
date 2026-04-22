@@ -129,6 +129,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -261,7 +263,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]
     }]
   }}' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -276,7 +278,7 @@ For Postgres 9.6, add the following settings to the instance config where host a
 You can also specify labels in a `Dockerfile`, allowing you to build and deploy a custom Agent without modifying your infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
+FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'

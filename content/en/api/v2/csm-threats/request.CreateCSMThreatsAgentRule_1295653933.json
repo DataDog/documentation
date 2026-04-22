@@ -18,7 +18,9 @@
           }
         },
         {
-          "hash": {}
+          "hash": {
+            "field": "exec.file"
+          }
         }
       ]
     },

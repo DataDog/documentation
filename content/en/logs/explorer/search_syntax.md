@@ -44,7 +44,7 @@ To combine multiple terms into a complex query, you can use any of the following
 | `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)                                                  | authentication AND -password |
 
-## Full-text search 
+## Full-text search
 
 <div class="alert alert-danger">The full-text search feature is only available in Log Management and works in monitor, dashboard, and notebook queries. The full-text search syntax cannot be used to define index filters, archive filters, log pipeline filters, rehydration filters, or in Live Tail. </div>
 
@@ -73,14 +73,13 @@ Use the syntax `*:search_term` to perform a full-text search across all log attr
 
 ## Escape special characters and spaces
 
-The following characters are considered special and require escaping with the `\` character: `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `\` `#`, and spaces. 
+The following characters are considered special and require escaping with the `\` character: `=` `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `\` `#`, and spaces.
 - `/` is not considered a special character and doesn't need to be escaped.
 - `@` cannot be used in search queries within Logs Explorer because it is reserved for [Attribute Search](#attributes-search).
 
 You cannot search for special characters in a log message. You can search for special characters when they are inside of an attribute.
 
 To search for special characters, parse them into an attribute with the [Grok Parser][1], and search for logs that contain that attribute.
-
 
 ## Attributes search
 
@@ -92,6 +91,15 @@ For instance, if your attribute name is **url** and you want to filter on the **
 @url:www.datadoghq.com
 ```
 
+### Reserved attributes
+
+[Reserved attributes][8] such as `host`, `source`, `status`, `service`, `trace_id`, and `message` do not require the `@` prefix. You can search these attributes directly:
+
+```
+service:web-app
+status:error
+host:i-1234567890abcdef0
+```
 
 **Notes**:
 
@@ -115,7 +123,7 @@ Examples:
 ### Search using CIDR notation
 Classless Inter Domain Routing (CIDR) is a notation that allows users to define a range of IP addresses (also called CIDR blocks) succinctly. CIDR is most commonly used to define a network (such as a VPC) or a subnetwork (such as public/private subnet within a VPC).
 
-Users can use the `CIDR()` function to query attributes in logs using CIDR notation. The `CIDR()` function needs to be passed in a log attribute as a parameter to filter against, followed by one or multiple CIDR blocks. 
+Users can use the `CIDR()` function to query attributes in logs using CIDR notation. The `CIDR()` function needs to be passed in a log attribute as a parameter to filter against, followed by one or multiple CIDR blocks.
 
 #### Examples
 - `CIDR(@network.client.ip,13.0.0.0/8)` matches and filters logs that have IP addresses in the field `network.client.ip` that fall under the 13.0.0.0/8 CIDR block.
@@ -190,7 +198,7 @@ If your tags don't follow [tags best practices][5] and don't use the `key:value`
 
 ## Arrays
 
-In the below example, clicking on the `Peter` value in the facet returns all the logs that contains a `users.names` attribute, whose value is either `Peter` or an array that contains `Peter`:
+In the following example, clicking on the `Peter` value in the facet returns all the logs that contains a `users.names` attribute, whose value is either `Peter` or an array that contains `Peter`:
 
 {{< img src="logs/explorer/search/array_search.png" alt="Array and Facets" style="width:80%;">}}
 
@@ -201,7 +209,20 @@ In the following example, CloudWatch logs for Windows contain an array of JSON o
 * `@Event.EventData.Data.Name:ObjectServer` matches all logs with the key `Name` and value `ObjectServer`.
 
 {{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Facetless query on array of JSON objects" style="width:80%;">}}
-<p> </p>
+
+### Nested array search
+
+To search a nested field in an array attribute, use the `@` prefix with the full attribute path. Log Explorer matches any item in the array:
+
+* `@network.ip.attributes.ip:2a02\:1810*` matches all logs where at least one item in the `network.ip.attributes` array has an `ip` field starting with `2a02:1810`.
+
+To match logs where an array contains multiple specific values, list the values in parentheses:
+
+* `@user_perms:(4 6)` matches all logs where the `user_perms` array contains both `4` and `6`.
+
+To match logs where an array contains any value within a range, use a range query:
+
+* `@user_perms:[2 TO 6]` matches all logs where the `user_perms` array contains at least one value between `2` and `6`.
 
 ## Calculated fields
 
@@ -224,3 +245,4 @@ Calculated fields function like log attributes and can be used for search, aggre
 [5]: /getting_started/tagging/#tags-best-practices
 [6]: /logs/explorer/saved_views/
 [7]: /logs/explorer/facets/#facet-panel
+[8]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes

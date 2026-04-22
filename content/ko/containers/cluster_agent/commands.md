@@ -1,13 +1,14 @@
 ---
 aliases:
 - /ko/agent/cluster_agent/commands
+description: Datadog 클러스터 Agent 명령줄 인터페이스 및 환경 변수에 관한 참조 가이드
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: 블로그
   text: Datadog Cluster Agent 소개
 - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: 블로그
-  text: Datadog 메트릭으로 Kubernetes 작업량 오토스케일링
+  text: Datadog 메트릭으로 쿠버네티스(Kubernetes) 워크로드 자동 확장
 - link: /agent/cluster_agent/clusterchecks/
   tag: 설명서
   text: Autodiscovery로 클러스터 검사 실행

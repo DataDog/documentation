@@ -8,6 +8,9 @@ aliases:
     - /agent/prometheus
     - /agent/kubernetes/prometheus
 further_reading:
+- link: https://www.datadoghq.com/blog/kubernetes-operator-performance
+  tag: Blog
+  text: Monitor your Kubernetes operators to keep applications running smoothly
 - link: "/agent/kubernetes/log/"
   tag: "Documentation"
   text: "Collect your application logs"
@@ -424,7 +427,7 @@ Official integrations have their own dedicated directories. There's a default in
 [2]: /integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /developers/custom_checks/prometheus/
+[5]: /extend/custom_checks/prometheus/
 [6]: /integrations/guide/prometheus-metrics
 [7]: /agent/kubernetes/#installation
 [8]: /getting_started/tagging/

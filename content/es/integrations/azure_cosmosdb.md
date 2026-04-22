@@ -3,7 +3,7 @@ app_id: azure-cosmosdb
 app_uuid: 57c2e89b-5ad8-4bef-8012-96087b66b6bb
 assets:
   dashboards:
-    azure_cosmosdb: assets/dashboard/azure_cosmosdb.json
+    azure_cosmosdb: assets/dashboards/azure_cosmosdb.json
   integration:
     auto_install: true
     events:
@@ -11,7 +11,7 @@ assets:
     metrics:
       check: azure.cosmosdb.data_usage
       metadata_path: metadata.csv
-      prefix: azur.
+      prefix: azure.
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 285
@@ -37,7 +37,7 @@ is_public: true
 manifest_version: 2.0.0
 name: azure_cosmosdb
 public_title: Azure CosmosDB
-short_description: Realice un seguimiento de las métricas clave de Azure CosmosDB.
+short_description: Rastrea las métricas clave de Azure CosmosDB.
 supported_os: []
 tile:
   changelog: CHANGELOG.md
@@ -47,7 +47,7 @@ tile:
   - Category::Data Stores
   - Offering::Integration
   configuration: README.md#Setup
-  description: Realice un seguimiento de las métricas clave de Azure CosmosDB.
+  description: Rastrea las métricas clave de Azure CosmosDB.
   media: []
   overview: README.md#Overview
   resources:
@@ -68,12 +68,12 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Cosmos 
 
 ### Instalación
 
-Si aún no lo ha hecho, configure [Microsoft Azure integración][1]. No se requieren pasos adicionales.
+Si aún no lo has hecho, configura la [integración de Microsoft Azure][1]. No se requieren pasos adicionales.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure-cosmosdb" >}}
+{{< get-metrics-from-git "azure_cosmosdb" >}}
 
 
 ### Eventos

@@ -3,6 +3,10 @@
     "name": "Gestión de API",
     "description": "Configura tus endpoints de API a través de la API Datadog."
   },
+  "apm": {
+    "name": "APM",
+    "description": "Observar, solucionar problemas y mejorar las aplicaciones a escala de la nube con toda la telemetría en contexto"
+  },
   "apm-retention-filters": {
     "name": "Filtros de retención APM",
     "description": "Gestiona la configuración de [filtros de retención APM](https://app.datadoghq.com/apm/traces/retention-filters) para tu organización. Para interactuar con este endpoint, necesitas una clave de API y de aplicación con derechos de administrador. Para obtener más información, consulta los [filtros de retención](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) en la página de retención de trazas (traces)."
@@ -110,6 +114,10 @@
   "datasets": {
     "name": "Conjuntos de datos",
     "description": "Data Access Controls en Datadog es una función que permite a los administradores y gestores de acceso regular\nel acceso a datos confidenciales. Mediante la definición de conjuntos de datos restringidos, puedes asegurarte de que sólo determinados roles o equipos puedan\nver determinados tipos de telemetría (por ejemplo, logs, trazas, métricas y datos RUM)."
+  },
+  "deployment-gates": {
+    "name": "Puertas de despliegue",
+    "description": "Gestiona las puertas de despliegue mediante esta API para reducir la probabilidad y el impacto de los incidentes causados por los despliegues. Consulta la [Documentación sobre puertas de despliegue](https://docs.datadoghq.com/deployment_gates/) para obtener más información."
   },
   "domain-allowlist": {
     "name": "Lista de dominios permitidos",
@@ -231,6 +239,10 @@
     "name": "Procesos",
     "description": "La API de procesos te permite consultar datos de los procesos de tu organización. Para obtener más información, consulta la [página de procesos en directo](https://docs.datadoghq.com/infrastructure/process/)."
   },
+  "product-analytics": {
+    "name": "Product Analytics",
+    "description": "Envia eventos del lado del servidor a Product Analytics. La ingesta de eventos del lado del servidor permite recopilar eventos personalizados\nde cualquier servidor fuente, y los conserva durante 15 meses. Los eventos del lado del servidor son útiles para comprender\nlas causas de los cuellos de botella que son externas al lado del cliente (por ejemplo, un error en el procesamiento del pago).\nConsulta la [página de Product Analytics](https://docs.datadoghq.com/product_analytics/) para obtener más información."
+  },
   "rum": {
     "name": "RUM",
     "description": "Gestiona tus aplicaciones Real User Monitoring (RUM) y busca o agrega tus eventos RUM a través de HTTP. Para obtener más información, consulta la [página de RUM y Session Replay](https://docs.datadoghq.com/real_user_monitoring/)."
@@ -281,7 +293,7 @@
   },
   "service-level-objectives": {
     "name": "Objetivos de nivel de servicio (SLOs)",
-    "description": "[Objetivos de nivel de servicio (SLOs)](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\nLos (SLOs) son una parte fundamental del conjunto de herramientas de ingeniería de fiabilidad de los sitios web.\nLos SLOs proporcionan un marco para definir objetivos claros en torno al rendimiento de las aplicaciones,\nlo que, en última instancia, ayuda a los equipos a ofrecer una experiencia coherente al cliente,\na equilibrar el desarrollo de funciones con la estabilidad de la plataforma\ny a mejorar la comunicación con los usuarios internos y externos."
+    "description": "[Objetivos de nivel de servicio (SLOs)](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\nLos (SLOs) son una parte fundamental del conjunto de herramientas de ingeniería de fiabilidad de los sitios web.\nLos SLOs proporcionan un framework para definir objetivos claros en torno al rendimiento de las aplicaciones,\nlo que, en última instancia, ayuda a los equipos a ofrecer una experiencia coherente al cliente,\na equilibrar el desarrollo de funciones con la estabilidad de la plataforma\ny a mejorar la comunicación con los usuarios internos y externos."
   },
   "service-scorecards": {
     "name": "Cuadros de mando de servicio",
@@ -310,10 +322,6 @@
   "synthetics": {
     "name": "Synthetics",
     "description": "Datadog Synthetics utiliza solicitudes de usuario simuladas y la renderización del navegador para ayudarte a garantizar el tiempo de actividad,\nidentificar problemas regionales y realizar un seguimiento del rendimiento de tu aplicación. Los tests Datadog Synthetics vienen\nen dos formatos diferentes, [tests de API](https://docs.datadoghq.com/synthetics/api_tests/)\ny [tests de navegador](https://docs.datadoghq.com/synthetics/browser_tests). Puedes utilizar la API Datadog para\ngestionar ambos tipos de tests mediante programación.\n\nPara obtener más información sobre Synthetics, consulta la [descripción general de Synthetics](https://docs.datadoghq.com/synthetics/)."
-  },
-  "team-connections": {
-    "name": "Conexiones de equipo",
-    "description": "Visualiza y gestiona las relaciones entre equipos de Datadog y equipos externos, como GitHub."
   },
   "teams": {
     "name": "Equipos",

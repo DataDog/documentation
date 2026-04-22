@@ -19,6 +19,9 @@ aliases:
 - /ja/tracing/trace_explorer/trace_groups
 description: タグを使用したすべてのトレースのグローバル検索
 further_reading:
+- link: /getting_started/search/
+  tag: ドキュメント
+  text: Datadog で検索を始める
 - link: /tracing/trace_collection/
   tag: ドキュメント
   text: アプリケーションで APM トレースをセットアップする方法
@@ -27,7 +30,7 @@ further_reading:
   text: Datadog トレースの読み方を理解する
 - link: /tracing/software_catalog/
   tag: ドキュメント
-  text: Datadog に報告するサービスの発見とカタログ化
+  text: Datadog に送信しているサービスを検出してカタログ化する
 - link: /tracing/services/service_page/
   tag: ドキュメント
   text: Datadog のサービスについて
@@ -209,35 +212,35 @@ Span テーブルは、選択されたコンテキスト ([検索バー](#search
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="列を含むトレースリスト" style="width:80%;">}}
 
-### Trace Groups
+### トレース グループ
 
-Group the query by any span tag or attribute to observe request counts, error rates and latency distributions in the list view. You can select up to four dimensions in the **Group by** clause.
+任意のスパン タグまたは属性でクエリをグループ化し、リクエスト数、エラー レート、レイテンシー分布をリスト ビューで確認できます。**Group by** 句では、最大 4 つのディメンションを選択できます。
 
-{{< img src="/tracing/trace_explorer/trace_groups/group_by_clause.png" alt="Group by clause" style="width:90%;" >}}
+{{< img src="/tracing/trace_explorer/trace_groups/group_by_clause.png" alt="Group by 句" style="width:90%;" >}}
 
-#### Advanced 'Group By' queries
+#### 高度な 'Group By' クエリ
 
-After selecting a dimension to group by, you can specify where to get the dimension's values from using the **from** dropdown: 
-- **Span**: Group by the dimension of the queried span (default). For example, `a`.
-- **Parent of span**: Group by the specified dimension from the parent span of spans matching the query. For example, to visualize how an API endpoint performs based on the service calling it, group by `service` from `parent(a)`.
-- **Root span**: Group by the specified dimension from the root span of the trace. For example, to analyze backend request patterns based on the frontend pages requests originate from, group by `@view.name` from `root`.
+グループ化するディメンションを選択した後、**from** ドロップダウンを使用して、ディメンションの値の取得先を指定できます: 
+- **スパン**: クエリ対象のスパンのディメンションでグループ化します (デフォルト)。例: `a`。
+- **スパンの親**: クエリに一致するスパンの親スパンから、指定したディメンションの値を取得してグループ化します。たとえば、API エンドポイントのパフォーマンスを呼び出し元のサービスを基準に視覚化するには、`parent(a)` から `service` でグループ化します。
+- **ルート スパン**: トレースのルート スパンから、指定したディメンションでグループ化します。たとえば、リクエストの発生元であるフロントエンド ページを基準にバックエンドのリクエスト パターンを分析するには、`root` から `@view.name` でグループ化します。
 
-{{< img src="/tracing/trace_explorer/trace_groups/group_by_root.png" alt="Group by from root" style="width:90%;" >}}
+{{< img src="/tracing/trace_explorer/trace_groups/group_by_root.png" alt="ルートからグループ化" style="width:90%;" >}}
 
-#### View trace groups in the group list
+#### グループ リストでトレース グループを表示する
 
-Trace groups are displayed as unique values of the selected dimension. Each group is shown with three key metrics:
-- **REQUESTS**: Count of spans within the group.
-- **ERRORS**: Error rate and count of errors.
-- **P95 Latency**: p95 latency of spans.
+トレース グループは、選択したディメンションの一意の値として表示されます。各グループは、次の 3 つの主要なメトリクスと共に表示されます:
+- **REQUESTS**: グループ内のスパンの数。
+- **ERRORS**: エラー レートとエラー数。
+- **P95 Latency**: スパンの p95 レイテンシー。
 
-To view these metrics aggregated over the parent or root span instead of the queried span, select `parent(a)` or `root` in the **Show metrics from** statement.
+これらのメトリクスを、クエリ対象のスパンではなく親スパンまたはルート スパンに集約して表示するには、**Show metrics from** 文で `parent(a)` または `root` を選択します。
 
-Additionally, the `Latency Breakdown` surfaces how time is spent between different services within requests from each group, allowing you to visually spot latency bottlenecks for given groups.
+また、`Latency Breakdown` により、各グループからのリクエスト内で、異なるサービス間でどのように時間が費やされるかが表示されるため、指定したグループについてレイテンシーのボトルネックを可視化することができます。
 
-{{< img src="/tracing/trace_explorer/trace_groups/group_list.png" alt="Group list" style="width:90%;" >}}
+{{< img src="/tracing/trace_explorer/trace_groups/group_list.png" alt="グループ リスト" style="width:90%;" >}}
 
-For deeper analysis, click any group to examine the individual span events that make up the aggregated metrics.
+より詳細な分析を行うには、任意のグループをクリックして、集計されたメトリクスを構成する個々のスパン イベントを調べます。
 
 ## ファセット
 
@@ -338,7 +341,7 @@ For deeper analysis, click any group to examine the individual span events that 
 
 **注**: ダッシュボードおよびノートブック内の APM クエリは、すべての[インデックス化されたスパン][14]に基づきます。一方、モニター内の APM クエリは、[カスタム保持フィルター][19]でインデックス化されたスパンにのみ基づきます。
 
-## 参考情報
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

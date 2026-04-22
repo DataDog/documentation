@@ -2,11 +2,13 @@
 aliases:
 - /es/graphing/faq/timeboard-api-doc
 - /es/graphing/guide/timeboard-api-doc
+description: 'OBSOLETO: API para el endpoint obsoleto Timeboard. En su lugar, utiliza
+  el endpoint Dashboard para las operaciones del panel de dashboard.'
 title: API de timeboard
 ---
 
 <div class="alert alert-warning">
-Este endpoint está obsoleto. En su lugar, utiliza el <a href="https://docs.datadoghq.com/api/v1/dashboards/">nuevo endpoint del dashboard </a>.
+Este endpoint está obsoleto. En su lugar, utiliza el <a href="https://docs.datadoghq.com/api/v1/dashboards/"> nuevo endpoint Dashboard</a>.
 </div>
 
 El endpoint `timeboard` permite crear, actualizar, eliminar y consultar timeboards mediante programación.
@@ -36,13 +38,13 @@ El endpoint `timeboard` permite crear, actualizar, eliminar y consultar timeboar
           Tipo de visualización.
 
 * **`template_variables`** [*optional*, *default*=**None**]:
-    Lista de Variables de plantilla para el uso de plantillas de dashboards. Las definiciones de variables de plantilla siguen el siguiente formato:
+    Lista de variables de plantilla para el uso de plantillas de dashboard. Las definiciones de variables de plantilla siguen el siguiente formato:
     * **`name`** [*required*]:
         Nombre de la variable.
     * **`prefix`** [*optional*, *default*=**None**]:
         Prefijo de etiqueta (tag) asociado a la variable. Sólo las etiquetas con este prefijo aparecen en el menú desplegable de variables.
     * **`default`** [*optional*, *default*=**None**]:
-        Valor por defecto de la variable de plantilla al cargar el dashboard.
+        Valor por defecto de la variable de plantilla al cargar un dashboard.
 
 ### Ejemplos
 
@@ -313,7 +315,7 @@ curl  -X PUT -H "Content-type: application/json" \
 
 ## Eliminar un timeboard
 
-Eliminar un timeboard existente .
+Elimina un timeboard existente.
 *Este endpoint no acepta argumentos JSON.*
 
 ### Firma
@@ -421,7 +423,7 @@ curl -X DELETE "https://api.datadoghq.com/api/v1/dash/${dash_id}?api_key=${api_k
 
 ## Obtener un timeboard
 
-Recupera una definición existente de dashboard.
+Recupera una definición de dashboard existente.
 
 ### Firma
 

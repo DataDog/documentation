@@ -72,7 +72,6 @@ For some secret types, Datadog uses static validation methods, such as computing
 |`sentry_personal_token`|✗|✓|
 |`shippo_api_key`|✗|✓|
 |`shippo_jwt`|✓|✓|
-|`slack_access_token`|✗|✓|
 |`snowflake_personal_access_token`|✓|✗|
 |`square_access_token`|✗|✓|
 |`typeform_personal_access_token`|✗|✓|

@@ -7,6 +7,9 @@ aliases:
   - /security/application_security/threats_detection/gcp-service-extensions
   - /security/application_security/setup/gcp-service-extensions
   - /security/application_security/setup/gcp/alb
+  - /security/application_security/setup/standalone/gcp-service-extensions
+  - /security/application_security/threats/setup/standalone/gcp-service-extensions
+  - /security/application_security/setup/threat_detection/gcp-service-extensions
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"

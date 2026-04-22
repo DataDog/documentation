@@ -1,17 +1,19 @@
 ---
+description: Crea diagramas de flujo, diagramas de secuencia y otros diagramas visuales
+  en notebooks utilizando la sintaxis Mermaid JS en celdas Markdown.
 disable_toc: false
 title: Crear diagramas con Mermaid JS
 ---
 
 ## Información general
 
-Los notebooks de Datadog son compatibles con Mermaid JS en celdas de Markdown.
+Los notebooks de Datadog son compatibles con Mermaid JS en cualquier celda de Markdown.
 Mermaid es una herramienta basada en JavaScript que sirve para crear gráficos y diagramas de flujo en Markdown. Puedes obtener más información sobre Mermaid en la [documentación oficial][1] o utilizando el [editor dinámico Mermaid][2].
 
 ## Configuración
 
 Para crear un nuevo diagrama en tu notebook:
-1. Añade una nueva celda de texto.
+1. Añade una nueva celda Markdown, con `/markdown` o el menú **Add Cell** (Añadir celda).
 1. Selecciona **Code Block** (Bloque de código) dentro del editor de Markdown.
 1. Selecciona **Mermaid-JS**.
 

@@ -24,8 +24,6 @@ aliases:
 
 ## Setup
 
-If your application is deployed as a container image, use the _Container Image_ method.
-
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
@@ -192,7 +190,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
     ```
 
     Note that the minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
-   
+
     You cannot install the Datadog Lambda Library as a layer if you are deploying your Lambda function as a container image.
 
 2. Install the Datadog Lambda Extension
@@ -313,7 +311,7 @@ To configure Datadog using SST v3, follow these steps:
   1. Configure the Datadog Lambda Library and Datadog Lambda Extension layers
 
      - The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="node-versions" >}}.
-  
+
   2. Add `dd-trace` and `datadog-lambda-js` to the `nodejs.install` list
 
   3. Fill in the environment variable placeholders:
@@ -323,7 +321,7 @@ To configure Datadog using SST v3, follow these steps:
      - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
      - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][1] is selected on this page)
      - Replace `<VERSION>` with the version number of the Lambda function
-    
+
   4. [Apply the Datadog wrapper in your function code][2]
 
 [1]: /getting_started/site/
@@ -394,6 +392,8 @@ To configure Datadog using SST v3, follow these steps:
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% svl-tracing-env %}}
 
 <div class="alert alert-danger">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
 

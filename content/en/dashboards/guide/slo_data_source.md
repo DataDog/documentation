@@ -2,7 +2,7 @@
 title: Graph historical SLO data on Dashboards
 description: Display historical SLO data on dashboards using SLO widgets and timeseries visualizations for performance tracking.
 further_reading:
-- link: "/service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Learn more about Service Level Objectives"
 - link: "/dashboards/widgets/slo"
@@ -21,9 +21,9 @@ Graph Metric-based and Time Slice SLOs on dashboards and track trends over 15 mo
 
 {{< img src="dashboards/guide/slo_data_type/slo-data-good-bad-events.png" alt="Graph editor configuration with the slo data type selected and the good events measure selected" style="width:100%;" >}}
 
-To get started, pick one of the standard visualization types from the dashboard widget tray and select *SLOs* as the data source in the query dropdown menu. 
+To get started, pick one of the standard visualization types from the dashboard widget tray and select {{< ui >}}SLOs{{< /ui >}} as the data source in the query dropdown menu. 
 
-For the *Measure* parameter, see the table below for more information on what each measure visualizes. The *Display* parameter allows you to break out the query by the groups that are already configured for the SLO. 
+For the {{< ui >}}Measure{{< /ui >}} parameter, see the table below for more information on what each measure visualizes. The {{< ui >}}Display{{< /ui >}} parameter allows you to break out the query by the groups that are already configured for the SLO. 
 
 {{< callout url="#" btn_hidden="true" header="Key Information">}}
   When using an SLO data source measures in the Timeseries widget, the value shown at each point is based on the default rollup in the widget, not rolling time period of the SLO. 
@@ -51,5 +51,5 @@ For SLOs that have [status corrections][2], you can enable or disable correction
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/sharing/scheduled_reports/
-[2]: /service_management/service_level_objectives/#slo-status-corrections
-[3]: /service_management/service_level_objectives/#configuration
+[2]: /service_level_objectives/#slo-status-corrections
+[3]: /service_level_objectives/#configuration

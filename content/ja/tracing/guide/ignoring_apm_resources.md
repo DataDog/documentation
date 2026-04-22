@@ -177,7 +177,7 @@ agents:
 | `rpc.grpc.kind`                | `grpc.method.kind` - Python、Node.js、Go、.NET                                                          |
 | `rpc.grpc.path`                | `rpc.grpc.path` - Python、Node.js、Go、.NET                                                             |
 | `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python、Node.js<br>`rpc.grpc.request.metadata` - Go                         |
-| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python、Node.js
+| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python、Node.js |
 
 #### エラー
 
@@ -217,7 +217,7 @@ apm_config:
 - リソース名: `Api::HealthchecksController#index`
 - Http.url: `/api/healthcheck`
 
-ignore resource オプションを正しく使用するためには、記述された正規表現ルールがリソース名 `Api::HealthchecksController#index` に一致している必要があります。いくつかの正規表現オプションが利用できますが、このリソースからのトレースをそのままフィルタリングする場合は `Api::HealthchecksController#index{TX-PL-LABEL}#x60; を使用するのが良いでしょう。
+ignore resource オプションを正しく使用するためには、記述された正規表現ルールがリソース名 `Api::HealthchecksController#index` に一致している必要があります。いくつかの正規表現オプションが利用できますが、このリソースからのトレースをそのままフィルタリングする場合は `Api::HealthchecksController#index$` を使用するのが良いでしょう。
 
 デプロイ方法に応じて、構文は少しずつ異なります。
 
@@ -388,7 +388,7 @@ Amazon ECS を使用している場合 (例えば、EC2 上で)、Datadog Agent 
 
 言語固有のトレーサーの中には、Datadog Agent に送信する前にスパンを修正するオプションがあります。アプリケーション固有の要件があり、以下の言語を使用している場合にはこのオプションを使用してください。
 
-<div class="alert alert-warning"><strong>重要</strong>: リクエストが分散されたトレースに関連付けられている場合、これらのフィルタリングルールを通じて部分的に除外すると、結果として得られるトレースのサンプリングが不正確になる場合があります。
+<div class="alert alert-warning"><strong>重要</strong>: リクエストが分散されたトレースに関連付けられている場合、これらのフィルタリングルールを通じて部分的に除外すると、結果として得られるトレースのサンプリングが不正確になる場合があります。</div>
 
 
 {{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
@@ -486,8 +486,6 @@ public class GreetingController {
 [1]: /ja/tracing/trace_collection/custom_instrumentation/java/#extending-tracers
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
-
-<div class="alert alert-danger"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
 
 [1]: /ja/help/
 [2]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/

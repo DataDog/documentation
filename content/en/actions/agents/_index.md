@@ -1,5 +1,5 @@
 ---
-title: Agents
+title: Agent Builder
 description: Build custom AI agents that can access the Action Catalog. 
 disable_toc: false
 further_reading:
@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/agent-builder/" btn_hidden="false" header="Join the Preview!" >}}
-Agents are in Preview. Click <b>Request Access</b> and fill in the Datadog Product Preview Program form.
+Agent Builder is in Preview. Click {{< ui >}}Request Access{{< /ui >}} and fill in the Datadog Product Preview Program form.
 {{< /callout >}}
 
 ## Overview
@@ -31,7 +31,7 @@ You can create a new agent from the [Agents][1] page. The page lists information
 - Author
 - Creation date
 
-Hover over an agent for options to clone or delete it. You can also enable the **My agents** toggle to see only agents that you've created:
+Hover over an agent for options to clone or delete it. You can also enable the {{< ui >}}My agents{{< /ui >}} toggle to see only agents that you've created:
 
 {{< img src="/actions/agents/agent-dashboard.png" alt="The Agents page, filtered to show only 'My agents'" style="width:100%;" >}}
 
@@ -44,8 +44,8 @@ Blueprints are starter agents that cover common use cases. They come loaded with
 To build an agent from a blueprint:
 
 1. Navigate to the [Agents][1] page. 
-1. In **Agent Blueprints**, click the blueprint you want to use. Alternatively, you can click **New Agent** and browse the full list of blueprints.
-1. Click **Create From Blueprint**.
+1. In {{< ui >}}Agent Blueprints{{< /ui >}}, click the blueprint you want to use. Alternatively, you can click {{< ui >}}New Agent{{< /ui >}} and browse the full list of blueprints.
+1. Click {{< ui >}}Create From Blueprint{{< /ui >}}.
 1. Your new agent has pre-populated settings and tools. You can immediately start chatting with the agent or [further customize it](#customize-your-agent). 
 
 ### Create a custom agent
@@ -53,17 +53,23 @@ To build an agent from a blueprint:
 To build an agent from scratch: 
 
 1. Navigate to the [Agents][1] page. 
-1. Click **New Agent**. 
+1. Click {{< ui >}}New Agent{{< /ui >}}. 
 1. [Customize your agent](#customize-your-agent). Changes are saved automatically.
 1. Start chatting with your agent. 
 
 ## Customize your agent
 
-When configuring your agent, you have the following options for customization. 
+When configuring your agent, you have the following options for customization.
+
+### Automation
+
+Set up your agent to run automatically with a [schedule][13], or trigger it from a Datadog [monitor][14], [incident][15], or [security signal][16]. These automations use [Workflow Automation][9].
+
+**Note**: If a [monitor][14] triggers the workflow, update the monitor's configuration to trigger the workflow upon alert, warning, or recovery.
 
 ### Instructions
 
-Enter the instructions for your agent to follow when performing tasks. You can describe the agent as if it were a person, including its role, specialties, and steps to follow. Click **Suggest With AI** to get help with writing and refining your instructions. 
+Enter the instructions for your agent to follow when performing tasks. You can describe the agent as if it were a person, including its role, specialties, and steps to follow. Click {{< ui >}}Suggest With AI{{< /ui >}} to get help with writing and refining your instructions. 
 
 Below is a sample set of instructions for an agent acting as an incident responder.
 
@@ -89,15 +95,15 @@ Focus on clear communication, structured processes, and continuous improvement o
 
 ### Model
 
-By default, new custom agents run on the latest GPT model. 
+By default, new custom agents run on Claude Sonnet.
 
-To change your agent's model, click **Auto** in the chatbox to open a dropdown menu and choose another model. You can compare these models using [OpenAI's comparison tool][6] and [Anthropic's models comparison][5].
+To change your agent's model, click the model name in the chatbox to open a dropdown menu and choose another model. You can compare these models using [OpenAI's comparison tool][6] and [Anthropic's models comparison][5].
 
 ### Self Improve
 
-By default, the **Self Improve** feature is not enabled. Self improvement allows the agent to read its own configuration and update it when requested or when it determines its configuration can be changed to improve.
+By default, the {{< ui >}}Self Improve{{< /ui >}} feature is not enabled. Self improvement allows the agent to read its own configuration and update it when requested or when it determines its configuration can be changed to improve.
 
-To enable this feature, click the settings  **<i class="icon-sliders"></i>**  icon, then the toggle button next to **Self Improve**.
+To enable this feature, click the settings  **<i class="icon-sliders"></i>**  icon, then the toggle button next to {{< ui >}}Self Improve{{< /ui >}}.
 
 ### Actions
 
@@ -105,7 +111,9 @@ Click the plus **<i class="icon-plus-circled-wui"></i>** icon to add actions fro
 
 ### MCP Server
 
-Click the toggle button to enable the [Datadog MCP Server][8]. MCP servers use the Model Context Protocol to provide additional tools and capabilities that the agent can use to interact with external systems.
+In the {{< ui >}}MCP Servers{{< /ui >}} section, the [Datadog MCP Server][8] is enabled by default. You can also connect third-party MCP servers. MCP servers use the Model Context Protocol to provide additional tools and capabilities that the agent can use to interact with external systems.
+
+Third-party MCP servers use OAuth for authentication, allowing your agent to integrate with popular tools such as Atlassian, Notion, GitHub, PagerDuty, Asana, and Linear.
 
 ## Add an agent action
 
@@ -114,30 +122,30 @@ After you create an agent, you can add it to a workflow or app.
 ### Add to a workflow 
 
 To invoke an agent in a workflow step:
-1. In [Workflow Automation][9], navigate to a workflow and click **Edit**. 
+1. In [Workflow Automation][9], navigate to a workflow and click {{< ui >}}Edit{{< /ui >}}. 
 1. Click the plus **<i class="icon-plus-circled-wui"></i>** icon. 
-1. Select the **Execute Custom Agent** action. 
+1. Select the {{< ui >}}Execute Custom Agent{{< /ui >}} action. 
 1. Configure the action:
-    1. Enter a **Step name**.
-    1. Selection a **Connection**.
-    1. Select a **Custom Agent ID**.
-    1. Enter a **User Prompt**.
+    1. Enter a {{< ui >}}Step name{{< /ui >}}.
+    1. Selection a {{< ui >}}Connection{{< /ui >}}.
+    1. Select a {{< ui >}}Custom Agent ID{{< /ui >}}.
+    1. Enter a {{< ui >}}User Prompt{{< /ui >}}.
     1. Optionally, add a [**Wait until condition**][11]. 
     1. Optionally, add [**Retries**][12].
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Add to an app
 
 To invoke an agent in an app:
-1. In [App Builder][10], navigate to an app and click **Edit**. 
-1. Click the plus **<i class="icon-plus-2"></i>** icon, then click **Actions**. 
-1. Select the **Execute Custom Agent** action. 
+1. In [App Builder][10], navigate to an app and click {{< ui >}}Edit{{< /ui >}}. 
+1. Click the plus **<i class="icon-plus-2"></i>** icon, then click {{< ui >}}Actions{{< /ui >}}. 
+1. Select the {{< ui >}}Execute Custom Agent{{< /ui >}} action. 
 1. Configure the action:
-    1. Select the **Run Settings**.
-    1. Selection a **Connection**.
-    1. Select a **Custom Agent ID**.
-    1. Enter a **User Prompt**.
-1. Click **Save**.
+    1. Select the {{< ui >}}Run Settings{{< /ui >}}.
+    1. Selection a {{< ui >}}Connection{{< /ui >}}.
+    1. Select a {{< ui >}}Custom Agent ID{{< /ui >}}.
+    1. Enter a {{< ui >}}User Prompt{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Further Reading
 
@@ -152,3 +160,7 @@ To invoke an agent in an app:
 [10]: https://app.datadoghq.com/app-builder/apps/list
 [11]: /actions/workflows/build/#wait-until-condition
 [12]: /actions/workflows/build/#retries
+[13]: /actions/workflows/trigger/#scheduled-triggers
+[14]: /actions/workflows/trigger/#monitor-triggers
+[15]: /actions/workflows/trigger/#incident-triggers
+[16]: /actions/workflows/trigger/#security-triggers

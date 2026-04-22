@@ -34,6 +34,20 @@ The migration from v2 to v3 focuses on streamlining modules, refining defaults, 
 All SDK products (RUM, Trace, Logs, Session Replay, and so on) remain modular and separated into distinct libraries. The main change is that the `DatadogObjc` module has been removed, with its contents integrated into the corresponding product modules.
 
 {{% /tab %}}
+
+{{% tab "React Native" %}}
+
+The migration from v2 to v3 focuses on aligning configuration with the v3 modular SDK behavior and consolidating configuration ownership across `CoreConfiguration`, `RumConfiguration`, `LogsConfiguration`, and `TraceConfiguration`.
+
+Please read [the MIGRATION.md guide][1] in the official React Native repository for the full list of changes.
+
+<div class="alert alert-warning">
+<strong>Important:</strong> Unlike v2.x (which would always enable all feature modules when initializing the SDK), v3 does <strong>not</strong> initialize or enable a feature module unless you explicitly pass configuration for it.
+</div>
+
+[1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/MIGRATION.md
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Modules
@@ -121,7 +135,7 @@ In Xcode, you **must** link the following frameworks:
 
 Then, you can select the modules you want to use:
   ```
-  DatadogCrashReporting.xcframework + CrashReporter.xcframework
+  DatadogCrashReporting.xcframework
   DatadogLogs.xcframework
   DatadogRUM.xcframework
   DatadogSessionReplay.xcframework
@@ -131,6 +145,19 @@ Then, you can select the modules you want to use:
 </details>
 
 {{% /tab %}}
+
+{{% tab "React Native" %}}
+
+See [the MIGRATION.md guide][1] in the official React Native repository for the recommended upgrade steps and any required dependency updates.
+
+<div class="alert alert-warning">
+<strong>Important:</strong> In v3, feature modules are only enabled if you pass their configuration during initialization (for example, RUM / Logs / Trace). If you omit a feature configuration, that feature is not initialized or enabled.
+</div>
+
+[1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/MIGRATION.md
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Required changes and API updates
@@ -432,9 +459,72 @@ Legacy delegate types have been replaced by a unified instrumentation API:
 |`DDURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
 |`DDNSURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
 
-[1]: /real_user_monitoring/session_replay/mobile/privacy_options?platform=ios
+[1]: /session_replay/mobile/privacy_options?platform=ios
 
 {{% /tab %}}
+
+{{% tab "React Native" %}}
+
+Please read [the MIGRATION.md guide][1] in the official React Native repository.
+
+<div class="alert alert-warning">
+<strong>Important:</strong> Unlike v2.x (which would always enable all feature modules when initializing the SDK), v3 does <strong>not</strong> initialize or enable a feature module unless you explicitly pass configuration for it.
+</div>
+
+### Configuration changes
+
+Certain configuration properties have been moved, renamed, removed, or split:
+
+| Property | New Location | Changes |
+| :--- | :--- | :--- |
+| `sampleRate` | *Removed* | Deprecated property removed. |
+| `sessionSamplingRate` | `RumConfiguration` | Moved and renamed to `sessionSampleRate`. |
+| `resourceTracingSamplingRate` | `RumConfiguration` | Moved and renamed to `resourceTraceSampleRate`. |
+| `proxyConfig` | `CoreConfiguration` | Renamed to `proxyConfiguration`. |
+| `serviceName` | `CoreConfiguration` | Renamed to `service`. |
+| `customEndpoints` | *Split* | Split into `customEndpoint` within `RumConfiguration`, `LogsConfiguration`, and `TraceConfiguration`. |
+| *(New property)* | `CoreConfiguration` | `attributeEncoders` added. |
+| *(New property)* | `RumConfiguration` | `trackMemoryWarnings` added. |
+| `nativeCrashReportEnabled` | `RumConfiguration` | Moved. |
+| `nativeViewTracking` | `RumConfiguration` | Moved. |
+| `nativeInteractionTracking` | `RumConfiguration` | Moved. |
+| `firstPartyHosts` | `RumConfiguration` | Enforced usage of `FirstPartyHost[]` type and moved. |
+| `telemetrySampleRate` | `RumConfiguration` | Moved. |
+| `nativeLongTaskThresholdMs` | `RumConfiguration` | Moved. |
+| `longTaskThresholdMs` | `RumConfiguration` | Moved. |
+| `vitalsUpdateFrequency` | `RumConfiguration` | Moved. |
+| `trackFrustrations` | `RumConfiguration` | Moved. |
+| `trackBackgroundEvents` | `RumConfiguration` | Moved. |
+| `bundleLogsWithRum` | `LogsConfiguration` | Moved. |
+| `bundleLogsWithTraces` | `LogsConfiguration` | Moved. |
+| `trackNonFatalAnrs` | `RumConfiguration` | Moved. |
+| `appHangThreshold` | `RumConfiguration` | Moved. |
+| `initialResourceThreshold` | `RumConfiguration` | Moved. |
+| `trackWatchdogTerminations` | `RumConfiguration` | Moved. |
+| `actionNameAttribute` | `RumConfiguration` | Moved. |
+| `logEventMapper` | `LogsConfiguration` | Moved. |
+| `errorEventMapper` | `RumConfiguration` | Moved. |
+| `resourceEventMapper` | `RumConfiguration` | Moved. |
+| `actionEventMapper` | `RumConfiguration` | Moved. |
+| `useAccessibilityLabel` | `RumConfiguration` | Moved. |
+| `trackInteractions` | `RumConfiguration` | Moved. |
+| `trackResources` | `RumConfiguration` | Moved. |
+| `trackErrors` | `RumConfiguration` | Moved. |
+
+### Renamed structures
+
+| `2.x` | `3.x` |
+|---|---|
+| `DdSdkConfiguration` | `CoreConfiguration` |
+
+### API updates
+
+In addition to configuration ownership changes (Core vs feature configs), several public types and APIs were renamed or relocated to match the v3 modular design. See [the MIGRATION.md guide][1] for the authoritative list and code examples.
+
+[1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/MIGRATION.md
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## From v1 to v2
@@ -447,7 +537,7 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][2] on Android and iOS applications.
 
-[2]: /real_user_monitoring/session_replay/mobile/
+[2]: /session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -458,7 +548,7 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][3] on Android and iOS applications.
 
-[3]: /real_user_monitoring/session_replay/mobile/
+[3]: /session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -987,7 +1077,7 @@ To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-k
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][6].
 
-[6]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
+[6]: /session_replay/mobile/setup_and_configuration/?tab=android
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -1182,7 +1272,7 @@ WebViewTracking.enable(webView: webView)
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][7].
 
-[7]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
+[7]: /session_replay/mobile/setup_and_configuration/?tab=ios
 
 {{% /tab %}}
 {{% tab "React Native" %}}

@@ -18,7 +18,7 @@ further_reading:
 - link: /continuous_delivery/deployments
   tag: Documentación
   text: Más información sobre la visibilidad de despliegues
-- link: /service_management/events
+- link: /events
   tag: Documentación
   text: Más información sobre la Gestión de eventos
 - link: /monitors/types/metric

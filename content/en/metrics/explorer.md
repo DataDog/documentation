@@ -13,6 +13,9 @@ further_reading:
   - link: "/dashboards/guide/quick-graphs/"
     tag: "Documentation"
     text: "Quick Graphs"
+  - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
+    tag: Blog
+    text: Manage metric volume and tags in your environment with Observability Pipelines
     
 ---
 
@@ -22,10 +25,9 @@ The [Metrics Explorer][1] is a basic interface for examining your metrics in Dat
 
 ## Natural language queries
 
-{{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/">}}
-Natural Language Querying (NLQ) on the Metrics Explorer is in Preview. If you're interested in this feature, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}}
-
+{{< site-region region="gov" >}}
+<div class="alert alert-info">Natural Language Queries for Metrics Explorer are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured metric query, understanding context such as your services, attributes, and tags. This makes it easier to explore metrics without needing to write complex syntax.
 
@@ -97,7 +99,7 @@ For more information, see the [Quick Graphs][7] documentation.
 [5]: /metrics/introduction/#space-aggregation
 [6]: /dashboards/querying/#advanced-graphing
 [7]: /dashboards/guide/quick-graphs/
-[8]: /service_management/incident_management/
+[8]: /incident_response/incident_management/
 [9]: /monitors/
 [10]: /dashboards/
 [11]: /account_management/rbac/permissions/#access-management

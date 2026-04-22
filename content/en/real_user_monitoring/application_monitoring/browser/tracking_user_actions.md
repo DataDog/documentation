@@ -32,15 +32,40 @@ You can accomplish the following objectives:
 
 While there is no explicit cap on the total number of actions that can be collected by the RUM Browser SDK during a session, there are technical limitations on individual event sizes and the payload sent. For further details about limitations on actions, see [RUM Browser Troubleshooting documentation][1].
 
+## Track user interactions
+
+To enable automatic click tracking, set `trackUserInteractions: true` in your SDK initialization:
+
+```javascript
+window.DD_RUM.init({
+    ...
+    trackUserInteractions: true,
+});
+```
+
+The RUM Browser SDK automatically tracks clicks to generate click actions. A one-click action generally represents one user click, except when the same element is clicked multiple times in a row, which is considered a single action (see [Frustration Signals "rage clicks"][4]).
+
 ## Manage information being collected
 
-The `trackUserInteractions` initialization parameter enables the collection of user clicks in your application, which means sensitive and private data contained in your pages may be included to identify elements that a user interacted with.
+When user interaction tracking is enabled, sensitive, and private data contained in your pages may be included to identify elements that a user interacted with.
 
 To control which information is sent to Datadog, you can [mask action names with privacy options][2], [manually set an action name](#declare-a-name-for-click-actions), or [implement a global scrubbing rule in the Datadog Browser SDK for RUM][3].
 
-## Track user interactions
+### Mask all action names
 
-The RUM Browser SDK automatically tracks clicks to generate click actions. A one-click action generally represents one user click, except when the same element is clicked multiple times in a row, which is considered a single action (see [Frustration Signals "rage clicks"][4]).
+To mask all action names by default, use the `enablePrivacyForActionName` initialization parameter:
+
+```javascript
+window.DD_RUM.init({
+    ...
+    trackUserInteractions: true,
+    enablePrivacyForActionName: true,
+});
+```
+
+When enabled, all action names are replaced with `Masked Element`. Action names explicitly set with the `data-dd-action-name` attribute are still displayed, allowing you to selectively expose specific action names while keeping others masked.
+
+<div class="alert alert-info">If your application uses a JavaScript bundler, the <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation">Action Name Deobfuscation build plugin</a> automatically restores readable action names in minified builds.</div>
 
 ## Action timing telemetry
 
@@ -103,11 +128,13 @@ For example:
 
 ### How action names are computed
 
-The Datadog Browser SDK uses different strategies to compute click action names:
+The Datadog Browser SDK uses the following strategies to compute click action names:
 
 1. If the `data-dd-action-name` attribute or a custom attribute (as explained above) is explicitly set by the user on the clicked element (or one of its parents), its value is used as the action name.
 
-2. If `data-dd-action-name` attribute or its equivalent is not set, depending on the element type, the sdk uses other attributes such as `label`, `placeholder`, `aria-label` from the element or its parents to construct the action name. If none of these attributes is found, the sdk uses the inner text as name for the action.
+2. If no explicit action name attribute is set and `enablePrivacyForActionName` is enabled, the action name is set to `Masked Element`.
+
+3. Otherwise, depending on the element type, the SDK uses other attributes such as `label`, `placeholder`, or `aria-label` from the element or its parents to construct the action name. If none of these attributes is found, the SDK uses the inner text as the action name.
 
 ## Send custom actions
 

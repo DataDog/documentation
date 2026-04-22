@@ -83,7 +83,21 @@ logger.info('Hello world!')
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
+6. **Enable profiling (preview)**.
+
+   To enable the [Continuous Profiler][6], set the environment variable `DD_PROFILING_ENABLED=true` in your application container and add `import ddtrace.auto` at the top of your function file:
+
+   {{< code-block lang="python" disable_copy="false" >}}
+import ddtrace.auto
+
+# ... rest of your function code
+{{< /code-block >}}
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for 2nd gen Cloud Run functions.</div>
+
 {{% serverless-init-env-vars-sidecar language="python" function="true" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 
@@ -96,5 +110,6 @@ logger.info('Hello world!')
 [1]: https://pypi.org/project/ddtrace/
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [3]: /tracing/other_telemetry/connect_logs_and_traces/python/
-[4]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
+[4]: /extend/dogstatsd/?tab=python#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5
+[6]: /profiler/

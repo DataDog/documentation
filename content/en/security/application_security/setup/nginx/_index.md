@@ -1,5 +1,8 @@
 ---
 title: Enabling App and API Protection for Nginx
+aliases:
+  - /security/application_security/setup/standalone/nginx
+  - /security/application_security/setup/threat_detection/nginx
 further_reading:
     - link: 'https://github.com/DataDog/nginx-datadog/'
       tag: "Source Code"
@@ -14,7 +17,7 @@ further_reading:
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 ## Overview
-App and API Protection leverages the [Datadog Nginx Integration][1] to monitor and secure your reverse proxy.
+Learn how to set up App and API Protection (AAP) on your NGINX proxy by selecting the integration that suits you best.
 
 ## Environments
 
@@ -23,9 +26,9 @@ App and API Protection leverages the [Datadog Nginx Integration][1] to monitor a
   {{< appsec-integration name="Linux" avatar="linux" link="./linux" >}}
 {{< /appsec-integrations >}}
 
-### Cloud and Container Platforms
+### Kubernetes
 {{< appsec-integrations >}}
-{{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
+{{< appsec-integration name="Ingress Controller" avatar="kubernetes" link="./ingress-controller" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources

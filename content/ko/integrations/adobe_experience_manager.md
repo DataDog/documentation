@@ -12,7 +12,7 @@ doc_link: /integrations/adobe_experience_manager/
 further_reading:
 - link: logs/
   tag: 설명서
-  text: 로그 관리
+  text: Log Management
 has_logo: true
 integration_id: adobe
 integration_title: Adobe Experience Manager
@@ -21,9 +21,9 @@ name: adobe_experience_manager
 public_title: Datadog-Adobe Experience Manager
 short_description: 오류 추적, 응답 시간 요청 등을 위해 로그를 수집합니다.
 supported_os:
-- linux
+- Linux
 - mac_os
-- 윈도우즈(Windows)
+- Windows
 title: Adobe Experience Manager
 ---
 
@@ -64,10 +64,6 @@ _Agent 버전 6.0 이상에서 사용 가능_
 ## 트러블슈팅
 
 도움이 필요하신가요? [Datadog 지원 팀][4]에 문의하세요.
-
-## 참고 자료
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ko/agent/guide/agent-configuration-files/#agent-configuration-directory
