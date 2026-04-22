@@ -57,7 +57,7 @@ The setup page provides environment-specific configuration instructions. You can
 
 ## Required permissions
 
-To view Kafka messages in the {{< ui >}}Messages{{< /ui >}} section, a user must have the `Data Streams Monitoring Capture Messages` permission.
+To view Kafka messages, a user must have the `Data Streams Monitoring Capture Messages` permission.
 
 You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} page][7]. To enable permissions, edit an existing role or create a new one on the [{{< ui >}}Roles{{< /ui >}} page][8]. If you do not have permission to modify roles, contact your organization's administrator.
 
@@ -132,10 +132,7 @@ The {{< ui >}}Messages{{< /ui >}} section lets you retrieve messages by partitio
 
 {{< img src="data_streams/kafka_schema_messages.png" alt="Topic schema and messages view showing a Protobuf schema definition and a table of recent messages with date, partition, offset, and message value" >}}
 
-**Note**: Message viewing is not enabled by default and requires additional setup. Access is controlled by [per-user permissions][2], so you can roll out Kafka Monitoring without exposing message content. Configure message viewing separately after completing the initial setup.
-
 [1]: https://app.datadoghq.com/data-streams/kafka/setup
-[2]: #required-permissions
 [3]: /agent/remote_config
 [5]: https://app.datadoghq.com/organization-settings/remote-config
 [7]: https://app.datadoghq.com/personal-settings/profile
