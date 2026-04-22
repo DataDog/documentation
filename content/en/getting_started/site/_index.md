@@ -41,7 +41,7 @@ You can identify which site you are on by matching your Datadog website URL to t
 | US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
 | EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU (Germany) |
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
-| US2-FED | `https://us2.ddog-gov.com`  | `us2.ddog-gov.com`  | US       |
+| US2-FED | `https://app.ddog-gov.com`  | `us2.ddog-gov.com`  | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
 | AP2     | `https://ap2.datadoghq.com` | `ap2.datadoghq.com` | Australia |
 
@@ -57,16 +57,17 @@ Different Datadog sites may support different functionalities depending on the i
 
 {{< img src="getting_started/site/site-selector-gs-with-tags.png" alt="The site selector dropdown menu on the right hand side of the Documentation site" style="width:100%" >}}
 
-For example, to see the documentation for the Datadog for Government site, select **US1-FED** or **US2-FED**.
+For example, to see the documentation for the Datadog for Government site, select **US1-FED**.
 
 ## Access the Datadog for Government site
 
-Datadog's sites for US government agencies and partners allow them to monitor their applications and infrastructure:
+### US1-FED
 
-- **US1-FED** (`ddog-gov.com`): FedRAMP Moderate Authorized site.
-- **US2-FED** (`us2.ddog-gov.com`): IL5 (DoD Impact Level 5) site.
+The Datadog for Government site (US1-FED) is Datadog's FedRAMP Moderate Authorized site. US1-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure. For information about US1-FED security and compliance controls and frameworks, as well as how it supports FedRAMP, see the [Security page][1].
 
-For information about security and compliance controls and frameworks for these sites, and how they support FedRAMP, see the [Security page][1].
+### US2-FED
+
+The Datadog for Government site (US2-FED) is In Process for IL5 Authorization. US2-FED is meant to allow US government agencies and partners to monitor their applications and infrastructure. For more information, email [fedramp@datadoghq.com][4].
 
 ## Further Reading
 
@@ -75,3 +76,4 @@ For information about security and compliance controls and frameworks for these 
 [1]: https://www.datadoghq.com/security/
 [2]: /agent/configuration/dual-shipping/
 [3]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
+[4]: mailto:fedramp@datadoghq.com
