@@ -85,14 +85,14 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 
 ### New hosts
 
-To configure the infrastructure mode when installing the agent for the first time, set the `DD_INFRASTRUCTURE_MODE=<MODE>` environment variable before the installation script is invoked:
+To configure the infrastructure mode when installing the Agent for the first time, set the `DD_INFRASTRUCTURE_MODE=<MODE>` environment variable before the installation script is invoked:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 ```shell
 # Replace <MODE> with the mode for the host: `full`, `basic`, `end_user_device`, or `none`.
 DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
-DD_SITE="datadoghq.com" \
+DD_SITE="{{< region-param key="dd_site" >}}" \
 DD_INFRASTRUCTURE_MODE="<MODE>" \
 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
@@ -100,7 +100,7 @@ bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.s
 {{% tab "Windows" %}}
 ```powershell
 # Replace <MODE> with the mode for the host: `full`, `basic`, `end_user_device`, or `none`.
-$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" SITE="datadoghq.com" DD_INFRASTRUCTRURE_MODE="<MODE>"'
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" SITE="{{< region-param key="dd_site" >}}" DD_INFRASTRUCTRURE_MODE="<MODE>"'
 if ($p.ExitCode -ne 0) {
   Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
 }
