@@ -20,8 +20,17 @@ Complete the following steps to set up AI Guard:
 Before you set up AI Guard, ensure you have everything you need:
 - While AI Guard is in Preview, Datadog needs to enable a backend feature flag for each organization in the Preview. Contact [Datadog support][1] with one or more Datadog organization names and regions to enable it.
 - Certain setup steps require specific Datadog permissions. An admin may need to create a new role with the required permissions and assign it to you.
-  - To create an application key, you need the **AI Guard Evaluate** permission.
-  - To make a restricted dataset that [limits access to AI Guard spans](#limit-access), you need the **User Access Manage** permission.
+
+### Required permissions {#required-permissions}
+
+AI Guard uses the following permissions to control access to its features:
+
+| Permission | Type | Description |
+|------------|------|-------------|
+| **AI Guard Evaluate** (`ai_guard_evaluate`) | Write | Required to call the AI Guard evaluate API and to create an application key with the `ai_guard_evaluate` scope. |
+| **AI Guard View** (`ai_guard_view`) | Read | Required to view the AI Guard UI, including signals, spans, and read-only settings (service blocking policies, evaluation sensitivity, tool policies, tool allowlist). Also required to report false positives. |
+| **AI Guard Write** (`ai_guard_write`) | Write | Required to modify AI Guard configuration, including blocking policies, sensitive data scanning, tool policies, tool blocking, tool allowlist, and evaluation sensitivity thresholds. |
+| **User Access Manage** (`user_access_manage`) | Write | Required to create a restricted dataset that [limits access to AI Guard spans](#limit-access) with Data Access Control. |
 
 ### Usage limits
 
@@ -35,7 +44,7 @@ If you exceed these limits, or expect to exceed them soon, contact [Datadog supp
 
 To use AI Guard, you need at least one API key and one application key set in your Agent services, usually using environment variables. Follow the instructions at [API and Application Keys][2] to create both.
 
-When adding [scopes][3] for the **application key**, add the `ai_guard_evaluate` scope.
+When adding [scopes][3] for the **application key**, add the `ai_guard_evaluate` scope. The user creating the application key must have the [AI Guard Evaluate permission](#required-permissions).
 
 ## 3. Instrument your application {#instrumentation}
 
