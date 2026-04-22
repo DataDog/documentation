@@ -433,7 +433,7 @@ This table highlights key differences between the OpenFeature and `FlagsClient` 
 
 ## Testing
 
-You can test against a dedicated Datadog test environment with the real Datadog provider, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The upstream OpenFeature Kotlin SDK does not ship an `InMemoryProvider`, so tests use a small custom `FeatureProvider`. The example below replaces `OpenFeatureAPI`'s provider — if your production code uses the Datadog `FlagsClient` wrapper directly, your test should assert through the same `OpenFeatureAPI` client the wrapper uses, not `FlagsClient`.
+You can test against a dedicated Datadog test environment with the real Datadog provider, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The upstream OpenFeature Kotlin SDK does not yet ship an `InMemoryProvider` (tracked in [kotlin-sdk#226][2]), so tests use a small custom `FeatureProvider` until that upstream support lands. The example below replaces `OpenFeatureAPI`'s provider — if your production code uses the Datadog `FlagsClient` wrapper directly, your test should assert through the same `OpenFeatureAPI` client the wrapper uses, not `FlagsClient`.
 
 Add `kotlinx-coroutines-test` to your test configuration (the SDK's `initialize` is a `suspend` function):
 
@@ -459,7 +459,7 @@ class FakeProvider(private val flags: Map<String, Any>) : FeatureProvider {
     private val events = MutableSharedFlow<OpenFeatureProviderEvents>(replay = 1)
 
     override suspend fun initialize(initialContext: EvaluationContext?) {
-        events.emit(OpenFeatureProviderEvents.ProviderReady())
+        // No-op. The SDK emits ProviderReady after initialize returns.
     }
     override fun shutdown() {}
     override suspend fun onContextSet(old: EvaluationContext?, new: EvaluationContext) {}
@@ -503,3 +503,4 @@ class CheckoutFlagsTest {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/
+[2]: https://github.com/open-feature/kotlin-sdk/pull/226
