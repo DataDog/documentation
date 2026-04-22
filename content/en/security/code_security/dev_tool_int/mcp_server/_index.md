@@ -4,6 +4,9 @@ description: Use the Datadog Code Security MCP server to run SAST, secrets detec
 is_beta: true
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/introducing-datadog-code-security-mcp/"
+  tag: "Blog"
+  text: "Introducing the Datadog Code Security MCP Server"
 - link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
   tag: "Blog"
   text: "Identify common security risks in MCP servers"
@@ -53,7 +56,7 @@ The MCP server is available on the following platforms:
 
 ```shell
 brew update
-brew install --cask datadog-labs/pack/datadog-code-security-mcp
+brew install datadog-labs/pack/datadog-code-security-mcp
 ```
 
 #### GitHub releases

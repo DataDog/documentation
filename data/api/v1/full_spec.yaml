@@ -481,6 +481,9 @@ components:
           description: ID of the alert to use in the widget.
           example: ""
           type: string
+        description:
+          description: The description of the widget.
+          type: string
         time:
           $ref: "#/components/schemas/WidgetTime"
         title:
@@ -515,6 +518,9 @@ components:
         alert_id:
           description: ID of the alert to use in the widget.
           example: ""
+          type: string
+        description:
+          description: The description of the widget.
           type: string
         precision:
           description: Number of decimal to show. If not defined, will use the raw value.
@@ -808,6 +814,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: List of bar chart widget requests.
           example: ["q": "system.load.1"]
@@ -982,6 +991,48 @@ components:
         scaling:
           $ref: "#/components/schemas/BarChartWidgetScaling"
       type: object
+    CalendarInterval:
+      additionalProperties: false
+      description: Calendar interval definition.
+      properties:
+        alignment:
+          description: Alignment of the interval. Valid values depend on the interval type. For `day`, use hours (for example, `1am`, `2pm`, or `14`). For `week`, use day names (for example, `monday`). For `month`, use day-of-month ordinals (for example, `1st`, `15th`). For `year` or `quarter`, use month names (for example, `january`).
+          example: "monday"
+          type: string
+        quantity:
+          description: Quantity of the interval.
+          example: 1
+          format: int64
+          type: integer
+        timezone:
+          description: Timezone for the interval.
+          example: "UTC"
+          type: string
+        type:
+          $ref: "#/components/schemas/CalendarIntervalType"
+      required:
+        - type
+      type: object
+    CalendarIntervalType:
+      description: Type of calendar interval.
+      enum:
+        - day
+        - week
+        - month
+        - year
+        - quarter
+        - minute
+        - hour
+      example: week
+      type: string
+      x-enum-varnames:
+        - DAY
+        - WEEK
+        - MONTH
+        - YEAR
+        - QUARTER
+        - MINUTE
+        - HOUR
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -1015,6 +1066,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: |-
             Array of one request object to display in the widget.
@@ -1177,6 +1231,9 @@ components:
           description: Name of the check to use in the widget.
           example: ""
           type: string
+        description:
+          description: The description of the widget.
+          type: string
         group:
           description: Group reporting a single check.
           type: string
@@ -1220,6 +1277,69 @@ components:
       type: string
       x-enum-varnames:
         - CHECK_STATUS
+    CohortWidgetDefinition:
+      additionalProperties: false
+      description: The cohort widget visualizes user retention over time.
+      properties:
+        description:
+          description: The description of the widget.
+          type: string
+        requests:
+          description: List of Cohort widget requests.
+          example:
+            - query:
+                compute:
+                  aggregation: count
+                  metric: __dd.retention_rate
+                data_source: product_analytics_retention
+                search:
+                  cohort_criteria:
+                    base_query:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/home"
+                    time_interval:
+                      type: calendar
+                      value:
+                        type: week
+                  retention_entity: "@usr.id"
+                  return_condition: conversion_on_or_after
+                  return_criteria:
+                    base_query:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/checkout"
+              request_type: retention_grid
+          items:
+            $ref: "#/components/schemas/RetentionGridRequest"
+            description: A cohort widget request.
+          minItems: 1
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/CohortWidgetDefinitionType"
+      required:
+        - type
+        - requests
+      type: object
+    CohortWidgetDefinitionType:
+      default: cohort
+      description: Type of the Cohort widget.
+      enum:
+        - cohort
+      example: cohort
+      type: string
+      x-enum-varnames:
+        - COHORT
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
@@ -1815,6 +1935,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         legend_size:
           deprecated: true
           description: (Deprecated) The widget legend was replaced by a tooltip and sidebar.
@@ -2608,6 +2731,9 @@ components:
         The event stream is a widget version of the stream of events
         on the Event Stream view. Only available on FREE layout dashboards.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         event_size:
           $ref: "#/components/schemas/WidgetEventSize"
         query:
@@ -2645,6 +2771,9 @@ components:
     EventTimelineWidgetDefinition:
       description: The event timeline is a widget version of the timeline that appears at the top of the Event Stream view. Only available on FREE layout dashboards.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         query:
           description: Query to filter the event timeline with.
           example: ""
@@ -2677,6 +2806,43 @@ components:
       type: string
       x-enum-varnames:
         - EVENT_TIMELINE
+    EventsAggregation:
+      description: The type of aggregation that can be performed on events-based queries.
+      example: avg
+      oneOf:
+        - $ref: "#/components/schemas/EventsAggregationValue"
+        - $ref: "#/components/schemas/EventsAggregationPercentile"
+    EventsAggregationPercentile:
+      description: Percentile aggregation.
+      pattern: '^pc[0-9]+(\.[0-9]+)?$'
+      type: string
+    EventsAggregationValue:
+      description: Standard aggregation types for events-based queries.
+      enum:
+        - avg
+        - cardinality
+        - count
+        - delta
+        - earliest
+        - latest
+        - max
+        - median
+        - min
+        - most_frequent
+        - sum
+      type: string
+      x-enum-varnames:
+        - AVG
+        - CARDINALITY
+        - COUNT
+        - DELTA
+        - EARLIEST
+        - LATEST
+        - MAX
+        - MEDIAN
+        - MIN
+        - MOST_FREQUENT
+        - SUM
     FormulaAndFunctionApmDependencyStatName:
       description: APM statistic.
       enum:
@@ -2755,6 +2921,124 @@ components:
         - service
         - name
       type: object
+    FormulaAndFunctionApmMetricStatName:
+      description: APM metric stat name.
+      enum:
+        - errors
+        - error_rate
+        - errors_per_second
+        - latency_avg
+        - latency_max
+        - latency_p50
+        - latency_p75
+        - latency_p90
+        - latency_p95
+        - latency_p99
+        - latency_p999
+        - latency_distribution
+        - hits
+        - hits_per_second
+        - total_time
+        - apdex
+      example: "hits"
+      type: string
+      x-enum-varnames:
+        - ERRORS
+        - ERROR_RATE
+        - ERRORS_PER_SECOND
+        - LATENCY_AVG
+        - LATENCY_MAX
+        - LATENCY_P50
+        - LATENCY_P75
+        - LATENCY_P90
+        - LATENCY_P95
+        - LATENCY_P99
+        - LATENCY_P999
+        - LATENCY_DISTRIBUTION
+        - HITS
+        - HITS_PER_SECOND
+        - TOTAL_TIME
+        - APDEX
+    FormulaAndFunctionApmMetricsDataSource:
+      description: Data source for APM metrics queries.
+      enum:
+        - apm_metrics
+      example: apm_metrics
+      type: string
+      x-enum-varnames:
+        - APM_METRICS
+    FormulaAndFunctionApmMetricsQueryDefinition:
+      description: A formula and functions APM metrics query.
+      properties:
+        data_source:
+          $ref: "#/components/schemas/FormulaAndFunctionApmMetricsDataSource"
+        group_by:
+          description: Optional fields to group the query results by.
+          items:
+            description: A field to group results by.
+            example: "resource_name"
+            type: string
+          type: array
+        name:
+          description: Name of this query to use in formulas.
+          example: "query_errors"
+          type: string
+        operation_mode:
+          description: Optional operation mode to aggregate across operation names.
+          example: "primary"
+          type: string
+        operation_name:
+          description: Name of operation on service. If not provided, the primary operation name is used.
+          example: "web.request"
+          type: string
+        peer_tags:
+          description: Tags to query for a specific downstream entity (peer.service, peer.db_instance, peer.s3, peer.s3.bucket, etc.).
+          items:
+            description: "A tag identifying a specific downstream entity (for example: peer.service, peer.db_instance)."
+            example: "peer.service:my-service"
+            type: string
+          type: array
+        query_filter:
+          description: Additional filters for the query using metrics query syntax (e.g., env, primary_tag).
+          example: "env:prod"
+          type: string
+        resource_hash:
+          description: The hash of a specific resource to filter by.
+          example: "abc123"
+          type: string
+        resource_name:
+          description: The full name of a specific resource to filter by.
+          example: "GET /api/v1/users"
+          type: string
+        service:
+          description: APM service name.
+          example: "web-store"
+          type: string
+        span_kind:
+          $ref: "#/components/schemas/FormulaAndFunctionApmMetricsSpanKind"
+        stat:
+          $ref: "#/components/schemas/FormulaAndFunctionApmMetricStatName"
+      required:
+        - data_source
+        - name
+        - stat
+      type: object
+    FormulaAndFunctionApmMetricsSpanKind:
+      description: Describes the relationship between the span, its parents, and its children in a trace.
+      enum:
+        - consumer
+        - server
+        - client
+        - producer
+        - internal
+      example: "server"
+      type: string
+      x-enum-varnames:
+        - CONSUMER
+        - SERVER
+        - CLIENT
+        - PRODUCER
+        - INTERNAL
     FormulaAndFunctionApmResourceStatName:
       description: APM resource stat name.
       enum:
@@ -3176,6 +3460,54 @@ components:
         - metric
         - name
       type: object
+    FormulaAndFunctionProductAnalyticsExtendedDataSource:
+      description: Data source for Product Analytics Extended queries.
+      enum:
+        - product_analytics_extended
+      example: product_analytics_extended
+      type: string
+      x-enum-varnames:
+        - PRODUCT_ANALYTICS_EXTENDED
+    FormulaAndFunctionProductAnalyticsExtendedQueryDefinition:
+      description: A formula and functions Product Analytics Extended query for advanced analytics features.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
+        compute:
+          $ref: "#/components/schemas/ProductAnalyticsExtendedCompute"
+        data_source:
+          $ref: "#/components/schemas/FormulaAndFunctionProductAnalyticsExtendedDataSource"
+        group_by:
+          description: Group by configuration.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsExtendedGroupBy"
+            description: A Product Analytics Extended group by configuration.
+          type: array
+        indexes:
+          description: Event indexes to query.
+          example: ["*"]
+          items:
+            $ref: "#/components/schemas/FormulaAndFunctionProductAnalyticsExtendedQueryDefinitionIndexesItems"
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: "query1"
+          type: string
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+      required:
+        - data_source
+        - name
+        - query
+        - compute
+      type: object
+    FormulaAndFunctionProductAnalyticsExtendedQueryDefinitionIndexesItems:
+      description: Use `"*"` to query all indexes.
+      enum:
+        - "*"
+      type: string
+      x-enum-varnames:
+        - ALL
     FormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -3184,8 +3516,12 @@ components:
         - $ref: "#/components/schemas/FormulaAndFunctionProcessQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionApmDependencyStatsQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition"
+        - $ref: "#/components/schemas/FormulaAndFunctionApmMetricsQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionSLOQueryDefinition"
         - $ref: "#/components/schemas/FormulaAndFunctionCloudCostQueryDefinition"
+        - $ref: "#/components/schemas/FormulaAndFunctionProductAnalyticsExtendedQueryDefinition"
+        - $ref: "#/components/schemas/FormulaAndFunctionUserJourneyQueryDefinition"
+        - $ref: "#/components/schemas/FormulaAndFunctionRetentionQueryDefinition"
     FormulaAndFunctionResponseFormat:
       description: Timeseries, scalar, or event list response. Event list response formats are supported by Geomap widgets.
       enum:
@@ -3198,6 +3534,31 @@ components:
         - TIMESERIES
         - SCALAR
         - EVENT_LIST
+    FormulaAndFunctionRetentionQueryDefinition:
+      description: A formula and functions Retention query for defining timeseries and scalar visualizations.
+      properties:
+        compute:
+          $ref: "#/components/schemas/RetentionCompute"
+        data_source:
+          $ref: "#/components/schemas/RetentionDataSource"
+        group_by:
+          description: Group by configuration.
+          items:
+            $ref: "#/components/schemas/RetentionGroupBy"
+            description: A Retention group by configuration.
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: "query1"
+          type: string
+        search:
+          $ref: "#/components/schemas/RetentionSearch"
+      required:
+        - data_source
+        - name
+        - search
+        - compute
+      type: object
     FormulaAndFunctionSLODataSource:
       description: Data source for SLO measures queries.
       enum:
@@ -3288,6 +3649,31 @@ components:
         - METRIC
         - MONITOR
         - TIME_SLICE
+    FormulaAndFunctionUserJourneyQueryDefinition:
+      description: A formula and functions User Journey query for defining funnel, timeseries, and scalar visualizations over journey data.
+      properties:
+        compute:
+          $ref: "#/components/schemas/UserJourneyFormulaCompute"
+        data_source:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelDataSource"
+        group_by:
+          description: Group by configuration.
+          items:
+            $ref: "#/components/schemas/UserJourneyFormulaGroupBy"
+            description: A User Journey group by configuration.
+          type: array
+        name:
+          description: Name of the query for use in formulas.
+          example: "query1"
+          type: string
+        search:
+          $ref: "#/components/schemas/UserJourneySearch"
+      required:
+        - data_source
+        - name
+        - search
+        - compute
+      type: object
     FormulaType:
       description: Set the sort type to formula.
       enum: ["formula"]
@@ -3296,8 +3682,10 @@ components:
       x-enum-varnames:
         - FORMULA
     FreeTextWidgetDefinition:
-      description: Free text is a widget that allows you to add headings to your screenboard. Commonly used to state the overall purpose of the dashboard. Only available on FREE layout dashboards.
+      description: Free text is a widget that allows you to add headings to your dashboard. Commonly used to state the overall purpose of the dashboard.
       properties:
+        background_color:
+          $ref: "#/components/schemas/WidgetBackgroundColor"
         color:
           description: Color of the text.
           type: string
@@ -3325,6 +3713,61 @@ components:
       type: string
       x-enum-varnames:
         - FREE_TEXT
+    FunnelComparisonCustomTimeframe:
+      additionalProperties: false
+      description: Custom timeframe for funnel comparison.
+      properties:
+        from:
+          description: Start of the custom timeframe.
+          example: 0.0
+          format: double
+          type: number
+        to:
+          description: End of the custom timeframe.
+          example: 0.0
+          format: double
+          type: number
+      required:
+        - from
+        - to
+      type: object
+    FunnelComparisonDuration:
+      additionalProperties: false
+      description: Comparison time configuration for funnel widgets.
+      properties:
+        custom_timeframe:
+          $ref: "#/components/schemas/FunnelComparisonCustomTimeframe"
+        type:
+          $ref: "#/components/schemas/FunnelComparisonDurationType"
+      required:
+        - type
+      type: object
+    FunnelComparisonDurationType:
+      description: Type of comparison duration.
+      enum:
+        - previous_timeframe
+        - custom_timeframe
+        - previous_day
+        - previous_week
+        - previous_month
+      example: previous_timeframe
+      type: string
+      x-enum-varnames:
+        - PREVIOUS_TIMEFRAME
+        - CUSTOM_TIMEFRAME
+        - PREVIOUS_DAY
+        - PREVIOUS_WEEK
+        - PREVIOUS_MONTH
+    FunnelGroupedDisplay:
+      description: Display mode for grouped funnel results.
+      enum:
+        - stacked
+        - side_by_side
+      example: stacked
+      type: string
+      x-enum-varnames:
+        - STACKED
+        - SIDE_BY_SIDE
     FunnelQuery:
       description: Updated funnel widget.
       properties:
@@ -3380,12 +3823,16 @@ components:
       description: |-
         The funnel visualization displays a funnel of user sessions that maps a sequence of view navigation and user interaction in your application.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
+        grouped_display:
+          $ref: "#/components/schemas/FunnelGroupedDisplay"
         requests:
           description: Request payload used to query items.
           example: [{"query": {"data_source": "rum", "query_string": "@browser.name:Chrome", "steps": [{"facet": "@view.name", "value": "/logs"}, {"facet": "@view.name", "value": "/apm/home"}]}, "request_type": "funnel"}]
           items:
             $ref: "#/components/schemas/FunnelWidgetRequest"
-          maxItems: 1
           minItems: 1
           type: array
         time:
@@ -3575,6 +4022,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: |-
             Array of request objects to display in the widget. May include an optional request for the region layer and/or an optional request for the points layer. Region layer requests must contain a `group-by` tag whose value is a country ISO code.
@@ -3732,11 +4182,10 @@ components:
       x-enum-varnames:
         - GROUP
     GroupWidgetDefinition:
-      description: The groups widget allows you to keep similar graphs together on your timeboard. Each group has a custom header, can hold one to many graphs, and is collapsible.
+      description: The group widget allows you to keep similar graphs together on your dashboard. Each group has a custom header, can hold one to many graphs, and is collapsible.
       properties:
         background_color:
-          description: Background color of the group title.
-          type: string
+          $ref: "#/components/schemas/WidgetBackgroundColor"
         banner_img:
           description: URL of image to display as a banner for the group.
           type: string
@@ -3841,6 +4290,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         events:
           deprecated: true
           description: List of widget events. Deprecated - Use `overlay` request type instead.
@@ -4106,6 +4558,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         group:
           description: List of tag prefixes to group by.
           items:
@@ -4494,6 +4949,7 @@ components:
         - sca_fargate_usage
         - sds_scanned_bytes_usage
         - serverless_apps_usage
+        - serverless_apps_apm_usage
         - siem_analyzed_logs_add_on_usage
         - siem_ingested_bytes_usage
         - snmp_usage
@@ -4581,6 +5037,7 @@ components:
         - SCA_FARGATE_USAGE
         - SDS_SCANNED_BYTES_USAGE
         - SERVERLESS_APPS_USAGE
+        - SERVERLESS_APPS_APM_USAGE
         - SIEM_ANALYZED_LOGS_ADD_ON_USAGE
         - SIEM_INGESTED_BYTES_USAGE
         - SNMP_USAGE
@@ -4588,7 +5045,7 @@ components:
         - VULN_MANAGEMENT_HOSTS_USAGE
         - WORKFLOW_EXECUTIONS_USAGE
     IFrameWidgetDefinition:
-      description: The iframe widget allows you to embed a portion of any other web page on your dashboard. Only available on FREE layout dashboards.
+      description: The iframe widget allows you to embed a portion of any other web page on your dashboard.
       properties:
         type:
           $ref: "#/components/schemas/IFrameWidgetDefinitionType"
@@ -4860,7 +5317,7 @@ components:
         - message
       type: object
     ImageWidgetDefinition:
-      description: The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF. Only available on FREE layout dashboards.
+      description: The image widget allows you to embed an image on your dashboard. An image can be a PNG, JPG, or animated GIF.
       properties:
         has_background:
           default: true
@@ -5085,6 +5542,9 @@ components:
         The list stream visualization displays a table of recent events in your application that
         match a search criteria using user-defined columns.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         legend_size:
           $ref: "#/components/schemas/WidgetLegendSize"
         requests:
@@ -5258,7 +5718,7 @@ components:
         - query
       type: object
     LogStreamWidgetDefinition:
-      description: The Log Stream displays a log flow matching the defined query. Only available on FREE layout dashboards.
+      description: The Log Stream displays a log flow matching the defined query.
       properties:
         columns:
           description: Which columns to display on the widget.
@@ -5266,6 +5726,9 @@ components:
             description: Column name.
             type: string
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         indexes:
           description: An array of index names to query in the stream. Use [] to query all indexes at once.
           example: ["days-3", "days-7"]
@@ -5840,6 +6303,12 @@ components:
             Default query is `*`, meaning all logs flowing in the index would be excluded.
             Scope down exclusion filter to only a subset of logs with a log query.
           example: "*"
+          type: string
+        sample_attribute:
+          description: |-
+            Sample attribute to use for the sampling of logs going through this exclusion filter.
+            When set, only the logs with the specified attribute are sampled.
+          example: "@ci.job_id"
           type: string
         sample_rate:
           description: |-
@@ -6548,6 +7017,7 @@ components:
         sources:
           additionalProperties:
             items:
+              description: A fallback source attribute name.
               type: string
             type: array
           description: Fallback sources used to populate value of field.
@@ -6596,6 +7066,7 @@ components:
           description: Optional list of profiles to modify the schema.
           example: ["security_control", "host"]
           items:
+            description: A profile name that modifies the schema behavior.
             type: string
           type: array
         schema_type:
@@ -7709,6 +8180,7 @@ components:
           description: Columns to group results by.
           example: ["col1", "col2"]
           items:
+            description: A column name to group results by.
             type: string
           type: array
         model_type_override:
@@ -7728,6 +8200,7 @@ components:
           description: Optional grouping fields for aggregation.
           example: ["entity_id"]
           items:
+            description: A field name to group results by.
             type: string
           type: array
         measure:
@@ -8670,7 +9143,7 @@ components:
           $ref: "#/components/schemas/MonitorOverallStates"
       type: object
     MonitorSummaryWidgetDefinition:
-      description: The monitor summary widget displays a summary view of all your Datadog monitors, or a subset based on a query. Only available on FREE layout dashboards.
+      description: The monitor summary widget displays a summary view of all your Datadog monitors, or a subset based on a query.
       properties:
         color_preference:
           $ref: "#/components/schemas/WidgetColorPreference"
@@ -8679,6 +9152,9 @@ components:
           description: The number of monitors to display.
           format: int64
           type: integer
+        description:
+          description: The description of the widget.
+          type: string
         display_format:
           $ref: "#/components/schemas/WidgetMonitorSummaryDisplayFormat"
         hide_zero_counts:
@@ -9056,6 +9532,8 @@ components:
         - published_app_percentage
         - serverless_apps_usage
         - serverless_apps_percentage
+        - serverless_apps_apm_usage
+        - serverless_apps_apm_percentage
         - snmp_usage
         - snmp_percentage
         - universal_service_monitoring_usage
@@ -9221,6 +9699,8 @@ components:
         - PUBLISHED_APP_PERCENTAGE
         - SERVERLESS_APPS_USAGE
         - SERVERLESS_APPS_PERCENTAGE
+        - SERVERLESS_APPS_APM_USAGE
+        - SERVERLESS_APPS_APM_PERCENTAGE
         - SNMP_USAGE
         - SNMP_PERCENTAGE
         - UNIVERSAL_SERVICE_MONITORING_USAGE
@@ -9876,6 +10356,14 @@ components:
           type: number
         sds_scanned_bytes_usage:
           description: The total Sensitive Data Scanner usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_apm_percentage:
+          description: The percentage of Serverless Apps APM usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_apm_usage:
+          description: The total Serverless Apps APM usage by tag(s).
           format: double
           type: number
         serverless_apps_percentage:
@@ -11043,6 +11531,328 @@ components:
       required:
         - metric
       type: object
+    ProductAnalyticsAudienceAccountSubquery:
+      description: Product Analytics audience account subquery.
+      properties:
+        name:
+          description: The name of the account subquery.
+          type: string
+        query:
+          description: The query string for the account subquery.
+          type: string
+      type: object
+    ProductAnalyticsAudienceFilters:
+      description: Product Analytics/RUM audience filters.
+      properties:
+        accounts:
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsAudienceAccountSubquery"
+          type: array
+        filter_condition:
+          description: An optional filter condition applied to the audience subquery.
+          type: string
+        segments:
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsAudienceSegmentSubquery"
+          type: array
+        users:
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsAudienceUserSubquery"
+          type: array
+      type: object
+    ProductAnalyticsAudienceOccurrenceFilter:
+      description: Filter applied to occurrence counts when building a Product Analytics audience.
+      properties:
+        operator:
+          description: "The comparison operator used for the occurrence filter (for example: `gt`, `lt`, `eq`)."
+          type: string
+        value:
+          description: The threshold value to compare occurrence counts against.
+          type: string
+      type: object
+    ProductAnalyticsAudienceSegmentSubquery:
+      description: Product Analytics audience segment subquery.
+      properties:
+        name:
+          description: The name of the segment subquery.
+          type: string
+        segment_id:
+          description: The unique identifier of the segment.
+          type: string
+      type: object
+    ProductAnalyticsAudienceUserSubquery:
+      description: Product Analytics audience user subquery.
+      properties:
+        name:
+          description: The name of the user subquery.
+          type: string
+        query:
+          description: The query string for the user subquery.
+          type: string
+      type: object
+    ProductAnalyticsBaseQuery:
+      $ref: "#/components/schemas/ProductAnalyticsEventQuery"
+      description: Base query for Product Analytics.
+    ProductAnalyticsEventDataSource:
+      description: Data source for Product Analytics event queries.
+      enum:
+        - product_analytics
+      example: product_analytics
+      type: string
+      x-enum-varnames:
+        - PRODUCT_ANALYTICS
+    ProductAnalyticsEventQuery:
+      additionalProperties: false
+      description: Product Analytics event query.
+      properties:
+        data_source:
+          $ref: "#/components/schemas/ProductAnalyticsEventDataSource"
+        search:
+          $ref: "#/components/schemas/ProductAnalyticsEventQuerySearch"
+      required:
+        - data_source
+        - search
+      type: object
+    ProductAnalyticsEventQuerySearch:
+      additionalProperties: false
+      description: Search configuration for Product Analytics event query.
+      properties:
+        query:
+          description: RUM event search query used to filter views or actions.
+          example: "@type:view @view.name:/home"
+          type: string
+      required:
+        - query
+      type: object
+    ProductAnalyticsExtendedCompute:
+      additionalProperties: false
+      description: Compute configuration for Product Analytics Extended queries.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/FormulaAndFunctionEventAggregation"
+        interval:
+          description: Fixed-width time bucket interval in milliseconds for time series queries. Mutually exclusive with `rollup`.
+          example: 60000
+          format: double
+          type: number
+        metric:
+          description: Measurable attribute to compute.
+          example: "@usr.id"
+          type: string
+        name:
+          description: Name of the compute for use in formulas.
+          example: "query1"
+          type: string
+        rollup:
+          $ref: "#/components/schemas/CalendarInterval"
+          description: Calendar-aligned time bucket for time series queries (for example, day, week, or month boundaries). Mutually exclusive with `interval`.
+      required:
+        - aggregation
+      type: object
+    ProductAnalyticsExtendedGroupBy:
+      description: Group by configuration for Product Analytics Extended queries.
+      properties:
+        facet:
+          description: Facet name to group by.
+          example: "@geo.country"
+          type: string
+        limit:
+          description: Maximum number of groups to return.
+          example: 10
+          format: int32
+          maximum: 10000
+          type: integer
+        should_exclude_missing:
+          description: Whether to exclude events missing the group-by facet.
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/FormulaAndFunctionEventQueryGroupBySort"
+      required:
+        - facet
+      type: object
+    ProductAnalyticsFunnelCompute:
+      additionalProperties: false
+      description: Compute configuration for user journey funnel.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelComputeAggregation"
+        metric:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelComputeMetric"
+      required:
+        - aggregation
+        - metric
+      type: object
+    ProductAnalyticsFunnelComputeAggregation:
+      description: Aggregation type for user journey funnel compute.
+      enum:
+        - cardinality
+        - count
+      example: count
+      type: string
+      x-enum-varnames:
+        - CARDINALITY
+        - COUNT
+    ProductAnalyticsFunnelComputeMetric:
+      description: Metric for user journey funnel compute. `__dd.conversion` and `__dd.conversion_rate` accept `count` (unique users/sessions) and `cardinality` (total users/sessions) as aggregations.
+      enum:
+        - __dd.conversion
+        - __dd.conversion_rate
+      example: __dd.conversion_rate
+      type: string
+      x-enum-varnames:
+        - CONVERSION
+        - CONVERSION_RATE
+    ProductAnalyticsFunnelDataSource:
+      description: Data source for user journey funnel queries.
+      enum:
+        - product_analytics_journey
+      example: product_analytics_journey
+      type: string
+      x-enum-varnames:
+        - PRODUCT_ANALYTICS_JOURNEY
+    ProductAnalyticsFunnelGroupBy:
+      description: Group by configuration for user journey funnel.
+      properties:
+        facet:
+          description: Facet to group by.
+          example: "@usr.email"
+          type: string
+        limit:
+          description: Maximum number of groups.
+          format: int64
+          type: integer
+        should_exclude_missing:
+          description: Whether to exclude missing values.
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelGroupBySort"
+        target:
+          $ref: "#/components/schemas/UserJourneySearchTarget"
+      required:
+        - facet
+      type: object
+    ProductAnalyticsFunnelGroupBySort:
+      additionalProperties: false
+      description: Sort configuration for user journey funnel group by.
+      properties:
+        aggregation:
+          description: Aggregation type.
+          example: "count"
+          type: string
+        metric:
+          description: Metric to sort by.
+          example: "@session.id"
+          type: string
+        order:
+          $ref: "#/components/schemas/WidgetSort"
+      required:
+        - aggregation
+      type: object
+    ProductAnalyticsFunnelQuery:
+      additionalProperties: false
+      description: User journey funnel query definition.
+      properties:
+        compute:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelCompute"
+        data_source:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelDataSource"
+        group_by:
+          description: Group by configuration.
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsFunnelGroupBy"
+            description: A user journey funnel group by configuration.
+          type: array
+        search:
+          $ref: "#/components/schemas/UserJourneySearch"
+        subquery_id:
+          description: Subquery ID.
+          type: string
+      required:
+        - data_source
+        - search
+      type: object
+    ProductAnalyticsFunnelRequest:
+      additionalProperties: false
+      description: User journey funnel widget request.
+      properties:
+        comparison_segments:
+          description: Comparison segments.
+          items:
+            description: Segment identifier.
+            minLength: 1
+            type: string
+          minItems: 1
+          type: array
+        comparison_time:
+          $ref: "#/components/schemas/FunnelComparisonDuration"
+        query:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelQuery"
+        request_type:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelRequestType"
+      required:
+        - query
+        - request_type
+      type: object
+    ProductAnalyticsFunnelRequestType:
+      description: Request type for user journey funnel widget.
+      enum:
+        - user_journey_funnel
+      example: user_journey_funnel
+      type: string
+      x-enum-varnames:
+        - USER_JOURNEY_FUNNEL
+    ProductAnalyticsFunnelWidgetDefinition:
+      additionalProperties: false
+      description: The user journey funnel visualization displays conversion funnels based on user journey data from Product Analytics.
+      properties:
+        description:
+          description: The description of the widget.
+          type: string
+        grouped_display:
+          $ref: "#/components/schemas/FunnelGroupedDisplay"
+        requests:
+          description: Request payload used to query items.
+          example:
+            - query:
+                compute:
+                  aggregation: cardinality
+                  metric: __dd.conversion
+                data_source: product_analytics_journey
+                search:
+                  expression: "step1 -> step2"
+                  filters:
+                    string_filter: "@application.id:xxx @geo.country:France"
+                  node_objects:
+                    step1:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/home"
+                    step2:
+                      data_source: product_analytics
+                      search:
+                        query: '@type:action @action.name:"add to cart"'
+              request_type: user_journey_funnel
+          items:
+            $ref: "#/components/schemas/ProductAnalyticsFunnelRequest"
+            description: A user journey funnel widget request.
+          minItems: 1
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: The title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: The size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/FunnelWidgetDefinitionType"
+      required:
+        - type
+        - requests
+      type: object
     QuerySortOrder:
       default: desc
       description: Direction of sort.
@@ -11066,6 +11876,9 @@ components:
           type: array
         custom_unit:
           description: Display a unit of your choice on the widget.
+          type: string
+        description:
+          description: The description of the widget.
           type: string
         precision:
           description: Number of decimals to show. If not defined, the widget uses the raw value.
@@ -11228,6 +12041,354 @@ components:
         page:
           $ref: "#/components/schemas/Pagination"
       type: object
+    RetentionCohortCriteria:
+      additionalProperties: false
+      description: Cohort criteria for retention queries.
+      properties:
+        base_query:
+          $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+        time_interval:
+          $ref: "#/components/schemas/RetentionCohortCriteriaTimeInterval"
+      required:
+        - base_query
+        - time_interval
+      type: object
+    RetentionCohortCriteriaTimeInterval:
+      additionalProperties: false
+      description: Time interval for cohort criteria.
+      properties:
+        type:
+          $ref: "#/components/schemas/RetentionCohortCriteriaTimeIntervalType"
+        value:
+          $ref: "#/components/schemas/CalendarInterval"
+      required:
+        - type
+        - value
+      type: object
+    RetentionCohortCriteriaTimeIntervalType:
+      description: Type of time interval for cohort criteria.
+      enum:
+        - calendar
+      example: calendar
+      type: string
+      x-enum-varnames:
+        - CALENDAR
+    RetentionCompute:
+      additionalProperties: false
+      description: Compute configuration for retention queries.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/EventsAggregation"
+        metric:
+          $ref: "#/components/schemas/RetentionComputeMetric"
+      required:
+        - aggregation
+        - metric
+      type: object
+    RetentionComputeMetric:
+      description: Metric for retention compute.
+      enum:
+        - __dd.retention
+        - __dd.retention_rate
+      example: __dd.retention_rate
+      type: string
+      x-enum-varnames:
+        - RETENTION
+        - RETENTION_RATE
+    RetentionCurveRequestType:
+      description: Request type for retention curve widget.
+      enum:
+        - retention_curve
+      example: retention_curve
+      type: string
+      x-enum-varnames:
+        - RETENTION_CURVE
+    RetentionCurveStyle:
+      additionalProperties: false
+      description: Style configuration for retention curve.
+      properties:
+        palette:
+          description: Color palette for the retention curve.
+          example: "dog_classic"
+          type: string
+      type: object
+    RetentionCurveWidgetDefinition:
+      additionalProperties: false
+      description: The retention curve widget visualizes user retention rates over time.
+      properties:
+        description:
+          description: The description of the widget.
+          type: string
+        requests:
+          description: List of Retention Curve widget requests.
+          example:
+            - query:
+                compute:
+                  aggregation: count
+                  metric: __dd.retention_rate
+                data_source: product_analytics_retention
+                search:
+                  cohort_criteria:
+                    base_query:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/home"
+                    time_interval:
+                      type: calendar
+                      value:
+                        type: week
+                  retention_entity: "@usr.id"
+                  return_condition: conversion_on_or_after
+                  return_criteria:
+                    base_query:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/checkout"
+              request_type: retention_curve
+          items:
+            $ref: "#/components/schemas/RetentionCurveWidgetRequest"
+            description: A retention curve widget request.
+          minItems: 1
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/RetentionCurveWidgetDefinitionType"
+      required:
+        - type
+        - requests
+      type: object
+    RetentionCurveWidgetDefinitionType:
+      default: retention_curve
+      description: Type of the Retention Curve widget.
+      enum:
+        - retention_curve
+      example: retention_curve
+      type: string
+      x-enum-varnames:
+        - RETENTION_CURVE
+    RetentionCurveWidgetRequest:
+      additionalProperties: false
+      description: Retention curve widget request.
+      properties:
+        query:
+          $ref: "#/components/schemas/RetentionQuery"
+        request_type:
+          $ref: "#/components/schemas/RetentionCurveRequestType"
+        style:
+          $ref: "#/components/schemas/RetentionCurveStyle"
+      required:
+        - request_type
+        - query
+      type: object
+    RetentionDataSource:
+      description: Data source for retention queries.
+      enum:
+        - product_analytics_retention
+      example: product_analytics_retention
+      type: string
+      x-enum-varnames:
+        - PRODUCT_ANALYTICS_RETENTION
+    RetentionEntity:
+      description: Entity to track for retention.
+      enum:
+        - "@usr.id"
+        - "@account.id"
+      example: "@usr.id"
+      type: string
+      x-enum-varnames:
+        - USER_ID
+        - ACCOUNT_ID
+    RetentionFilters:
+      additionalProperties: false
+      description: Filters for retention queries.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
+        string_filter:
+          description: String filter.
+          example: "@session.type:user"
+          type: string
+      type: object
+    RetentionGridRequest:
+      additionalProperties: false
+      description: Retention grid widget request.
+      properties:
+        query:
+          $ref: "#/components/schemas/RetentionQuery"
+        request_type:
+          $ref: "#/components/schemas/RetentionGridRequestType"
+      required:
+        - request_type
+        - query
+      type: object
+    RetentionGridRequestType:
+      description: Request type for retention grid widget.
+      enum:
+        - retention_grid
+      example: retention_grid
+      type: string
+      x-enum-varnames:
+        - RETENTION_GRID
+    RetentionGroupBy:
+      additionalProperties: false
+      description: Group by configuration for retention queries.
+      properties:
+        facet:
+          description: Facet to group by.
+          example: "@geo.country"
+          type: string
+        limit:
+          description: Maximum number of groups.
+          example: 10
+          format: int64
+          type: integer
+        should_exclude_missing:
+          description: Whether to exclude missing values.
+          example: false
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/RetentionGroupBySort"
+        source:
+          description: Source field.
+          example: "@geo.country"
+          type: string
+        target:
+          $ref: "#/components/schemas/RetentionGroupByTarget"
+      required:
+        - target
+        - facet
+      type: object
+    RetentionGroupBySort:
+      additionalProperties: false
+      description: Sort configuration for retention group by.
+      properties:
+        order:
+          $ref: "#/components/schemas/WidgetSort"
+      type: object
+    RetentionGroupByTarget:
+      description: Target for retention group by.
+      enum:
+        - cohort
+        - return_period
+      example: cohort
+      type: string
+      x-enum-varnames:
+        - COHORT
+        - RETURN_PERIOD
+    RetentionQuery:
+      additionalProperties: false
+      description: Retention query definition.
+      properties:
+        compute:
+          $ref: "#/components/schemas/RetentionCompute"
+        data_source:
+          $ref: "#/components/schemas/RetentionDataSource"
+        filters:
+          $ref: "#/components/schemas/RetentionFilters"
+        group_by:
+          description: Group by configuration.
+          items:
+            $ref: "#/components/schemas/RetentionGroupBy"
+            description: A retention group by configuration.
+          type: array
+        name:
+          description: Name of the query.
+          example: "retention_query"
+          type: string
+        search:
+          $ref: "#/components/schemas/RetentionSearch"
+      required:
+        - data_source
+        - search
+        - compute
+      type: object
+    RetentionReturnCondition:
+      description: Condition for counting user return.
+      enum:
+        - conversion_on
+        - conversion_on_or_after
+      example: conversion_on_or_after
+      type: string
+      x-enum-varnames:
+        - CONVERSION_ON
+        - CONVERSION_ON_OR_AFTER
+    RetentionReturnCriteria:
+      additionalProperties: false
+      description: Return criteria for retention queries.
+      properties:
+        base_query:
+          $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+        time_interval:
+          $ref: "#/components/schemas/RetentionReturnCriteriaTimeInterval"
+      required:
+        - base_query
+      type: object
+    RetentionReturnCriteriaTimeInterval:
+      additionalProperties: false
+      description: Time interval for return criteria.
+      properties:
+        type:
+          $ref: "#/components/schemas/RetentionReturnCriteriaTimeIntervalType"
+        unit:
+          $ref: "#/components/schemas/RetentionReturnCriteriaTimeIntervalUnit"
+        value:
+          description: Value of the time interval.
+          example: 0.0
+          format: double
+          type: number
+      required:
+        - type
+        - value
+        - unit
+      type: object
+    RetentionReturnCriteriaTimeIntervalType:
+      description: Type of time interval for return criteria.
+      enum:
+        - fixed
+      example: fixed
+      type: string
+      x-enum-varnames:
+        - FIXED
+    RetentionReturnCriteriaTimeIntervalUnit:
+      description: Unit of time for retention return criteria interval.
+      enum:
+        - day
+        - week
+        - month
+      example: day
+      type: string
+      x-enum-varnames:
+        - DAY
+        - WEEK
+        - MONTH
+    RetentionSearch:
+      additionalProperties: false
+      description: Search configuration for retention queries.
+      properties:
+        cohort_criteria:
+          $ref: "#/components/schemas/RetentionCohortCriteria"
+        filters:
+          $ref: "#/components/schemas/RetentionFilters"
+        retention_entity:
+          $ref: "#/components/schemas/RetentionEntity"
+        return_condition:
+          $ref: "#/components/schemas/RetentionReturnCondition"
+        return_criteria:
+          $ref: "#/components/schemas/RetentionReturnCriteria"
+      required:
+        - cohort_criteria
+        - retention_entity
+        - return_condition
+      type: object
     RunWorkflowWidgetDefinition:
       description: Run workflow is widget that allows you to run a workflow from a dashboard.
       properties:
@@ -11236,6 +12397,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         inputs:
           description: Array of workflow inputs to map to dashboard template variables.
           items:
@@ -11603,6 +12767,7 @@ components:
         - $ref: "#/components/schemas/SLOCountDefinitionWithBadEventsFormula"
     SLOCountDefinitionWithBadEventsFormula:
       additionalProperties: false
+      description: SLO count definition using a bad events formula alongside a good events formula.
       properties:
         bad_events_formula:
           $ref: "#/components/schemas/SLOFormula"
@@ -11629,6 +12794,7 @@ components:
       type: object
     SLOCountDefinitionWithTotalEventsFormula:
       additionalProperties: false
+      description: SLO count definition using a total events formula alongside a good events formula.
       properties:
         good_events_formula:
           $ref: "#/components/schemas/SLOFormula"
@@ -12198,6 +13364,9 @@ components:
     SLOListWidgetDefinition:
       description: Use the SLO List widget to track your SLOs (Service Level Objectives) on dashboards.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: Array of one request object to display in the widget.
           items:
@@ -12740,10 +13909,13 @@ components:
         - METRIC
         - TIME_SLICE
     SLOWidgetDefinition:
-      description: Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on screenboards and timeboards.
+      description: Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and uptime on dashboards.
       properties:
         additional_query_filters:
           description: Additional filters applied to the SLO query.
+          type: string
+        description:
+          description: The description of the widget.
           type: string
         global_time_target:
           description: Defined global time target.
@@ -12789,6 +13961,250 @@ components:
       type: string
       x-enum-varnames:
         - SLO
+    SankeyJoinKeys:
+      additionalProperties: false
+      description: Join keys.
+      properties:
+        primary:
+          description: Primary join key.
+          example: "session.id"
+          type: string
+        secondary:
+          description: Secondary join keys.
+          items:
+            description: Secondary join key.
+            type: string
+          type: array
+      required:
+        - primary
+      type: object
+    SankeyNetworkDataSource:
+      default: network
+      description: Network data source type.
+      enum:
+        - network_device_flows
+        - network
+      example: network
+      type: string
+      x-enum-varnames:
+        - NETWORK_DEVICE_FLOWS
+        - NETWORK
+    SankeyNetworkQuery:
+      additionalProperties: false
+      description: Query configuration for Sankey network widget.
+      properties:
+        compute:
+          $ref: "#/components/schemas/SankeyNetworkQueryCompute"
+        data_source:
+          $ref: "#/components/schemas/SankeyNetworkDataSource"
+        group_by:
+          description: Fields to group by.
+          example: ["source", "destination"]
+          items:
+            description: A field name to group by.
+            type: string
+          type: array
+        limit:
+          description: Maximum number of results.
+          example: 100
+          format: int64
+          type: integer
+        mode:
+          $ref: "#/components/schemas/SankeyNetworkQueryMode"
+        query_string:
+          description: Query string for filtering network data.
+          example: "*"
+          type: string
+        should_exclude_missing:
+          description: Whether to exclude missing values.
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/SankeyNetworkQuerySort"
+      required:
+        - data_source
+        - query_string
+        - group_by
+        - limit
+      type: object
+    SankeyNetworkQueryCompute:
+      additionalProperties: false
+      description: Compute aggregation for network queries.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/EventsAggregation"
+        metric:
+          description: Metric to aggregate.
+          example: ""
+          type: string
+      required:
+        - aggregation
+        - metric
+      type: object
+    SankeyNetworkQueryMode:
+      default: target
+      description: Sankey mode for network queries.
+      enum:
+        - target
+      example: target
+      type: string
+      x-enum-varnames:
+        - TARGET
+    SankeyNetworkQuerySort:
+      description: Sort configuration for network queries.
+      properties:
+        field:
+          description: Field to sort by.
+          type: string
+        order:
+          $ref: "#/components/schemas/WidgetSort"
+      type: object
+    SankeyNetworkRequest:
+      additionalProperties: false
+      description: Sankey widget request for network data source.
+      properties:
+        query:
+          $ref: "#/components/schemas/SankeyNetworkQuery"
+        request_type:
+          $ref: "#/components/schemas/SankeyNetworkRequestType"
+      required:
+        - query
+        - request_type
+      type: object
+    SankeyNetworkRequestType:
+      default: netflow_sankey
+      description: Type of request for network Sankey widget.
+      enum:
+        - netflow_sankey
+      example: netflow_sankey
+      type: string
+      x-enum-varnames:
+        - NETFLOW_SANKEY
+    SankeyRumDataSource:
+      default: rum
+      description: Sankey widget with RUM data source.
+      enum:
+        - rum
+        - product_analytics
+      example: rum
+      type: string
+      x-enum-varnames:
+        - RUM
+        - PRODUCT_ANALYTICS
+    SankeyRumQuery:
+      additionalProperties: false
+      description: Sankey widget with RUM data source query.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
+        data_source:
+          $ref: "#/components/schemas/SankeyRumDataSource"
+        entries_per_step:
+          description: Entries per step.
+          format: int64
+          type: integer
+        join_keys:
+          $ref: "#/components/schemas/SankeyJoinKeys"
+        mode:
+          $ref: "#/components/schemas/SankeyRumQueryMode"
+        number_of_steps:
+          description: Number of steps.
+          format: int64
+          type: integer
+        occurrences:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceOccurrenceFilter"
+        query_string:
+          description: RUM event search query used to filter views or actions.
+          example: "@type:view"
+          type: string
+        source:
+          description: Source.
+          type: string
+        subquery_id:
+          description: Subquery ID.
+          type: string
+        target:
+          description: Target.
+          type: string
+      required:
+        - data_source
+        - query_string
+        - mode
+      type: object
+    SankeyRumQueryMode:
+      default: source
+      description: Sankey mode for RUM queries.
+      enum:
+        - source
+        - target
+      example: source
+      type: string
+      x-enum-varnames:
+        - SOURCE
+        - TARGET
+    SankeyRumRequest:
+      additionalProperties: false
+      description: Sankey widget with RUM data source.
+      properties:
+        query:
+          $ref: "#/components/schemas/SankeyRumQuery"
+        request_type:
+          $ref: "#/components/schemas/SankeyWidgetDefinitionType"
+      required:
+        - query
+        - request_type
+      type: object
+    SankeyWidgetDefinition:
+      additionalProperties: false
+      description: The Sankey diagram visualizes the flow of data between categories, stages or sets of values.
+      properties:
+        requests:
+          description: List of Sankey widget requests.
+          example:
+            - query:
+                data_source: rum
+                mode: source
+                query_string: "@type:view"
+              request_type: sankey
+          items:
+            $ref: "#/components/schemas/SankeyWidgetRequest"
+          minItems: 1
+          type: array
+        show_other_links:
+          description: Whether to show links for "other" category.
+          type: boolean
+        sort_nodes:
+          description: Whether to sort nodes in the Sankey diagram.
+          type: boolean
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/SankeyWidgetDefinitionType"
+      required:
+        - type
+        - requests
+      type: object
+    SankeyWidgetDefinitionType:
+      default: sankey
+      description: Type of the Sankey widget.
+      enum:
+        - sankey
+      example: sankey
+      type: string
+      x-enum-varnames:
+        - SANKEY
+    SankeyWidgetRequest:
+      description: Request definition for Sankey widget.
+      oneOf:
+        - $ref: "#/components/schemas/SankeyRumRequest"
+        - $ref: "#/components/schemas/SankeyNetworkRequest"
     ScatterPlotRequest:
       description: Updated scatter plot.
       properties:
@@ -12844,6 +14260,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           $ref: "#/components/schemas/ScatterPlotWidgetDefinitionRequests"
         time:
@@ -13205,6 +14624,7 @@ components:
             Always included in service level objective responses (but may be empty).
           example: ["env:prod", "app:core"]
           items:
+            description: A tag associated with the service level objective.
             type: string
           type: array
         created_at:
@@ -13228,6 +14648,7 @@ components:
         env_tags:
           description: Tags with the `env` tag key.
           items:
+            description: A tag with the `env` tag key.
             type: string
           type: array
         groups:
@@ -13272,6 +14693,7 @@ components:
         service_tags:
           description: Tags with the `service` tag key.
           items:
+            description: A tag with the `service` tag key.
             type: string
           type: array
         slo_type:
@@ -13281,6 +14703,7 @@ components:
         team_tags:
           description: Tags with the `team` tag key.
           items:
+            description: A tag with the `team` tag key.
             type: string
           type: array
         thresholds:
@@ -13682,6 +15105,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         filters:
           description: Your environment and primary tag (or * if enabled for your account).
           example: ["*"]
@@ -13719,8 +15145,11 @@ components:
       x-enum-varnames:
         - SERVICEMAP
     ServiceSummaryWidgetDefinition:
-      description: The service summary displays the graphs of a chosen service in your screenboard. Only available on FREE layout dashboards.
+      description: The service summary displays the graphs of a chosen service in your dashboard.
       properties:
+        description:
+          description: The description of the widget.
+          type: string
         display_format:
           $ref: "#/components/schemas/WidgetServiceSummaryDisplayFormat"
         env:
@@ -14386,6 +15815,7 @@ components:
           description: The tag values.
           example: ["env"]
           items:
+            description: A tag value string.
             minLength: 1
             type: string
           type: array
@@ -14408,6 +15838,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         hide_total:
           description: Show the total value in this widget.
           type: boolean
@@ -17383,6 +18816,8 @@ components:
         - assertPageLacks
         - assertRequests
         - click
+        - drag
+        - drop
         - extractFromJavascript
         - extractFromEmailBody
         - extractVariable
@@ -17413,6 +18848,8 @@ components:
         - ASSERT_PAGE_LACKS
         - ASSERT_REQUESTS
         - CLICK
+        - DRAG
+        - DROP
         - EXTRACT_FROM_JAVASCRIPT
         - EXTRACT_FROM_EMAIL_BODY
         - EXTRACT_VARIABLE
@@ -17656,6 +19093,7 @@ components:
         blockedRequestPatterns:
           description: Array of URL patterns to block.
           items:
+            description: A URL pattern to block during the Synthetic test.
             type: string
           type: array
         checkCertificateRevocation:
@@ -18343,13 +19781,16 @@ components:
         - BAR
         - TREND
     TableWidgetDefinition:
-      description: The table visualization is available on timeboards and screenboards. It displays columns of metrics grouped by tag key.
+      description: The table visualization is available on dashboards. It displays columns of metrics grouped by tag key.
       properties:
         custom_links:
           description: List of custom links.
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         has_search_bar:
           $ref: "#/components/schemas/TableWidgetHasSearchBar"
         requests:
@@ -18695,6 +20136,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         events:
           deprecated: true
           description: List of widget events. Deprecated - Use `overlay` request type instead.
@@ -18869,6 +20313,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: List of top list widget requests.
           example: ["q": "system.load.1"]
@@ -19050,6 +20497,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         requests:
           description: One or more Topology requests.
           items:
@@ -19165,6 +20615,9 @@ components:
           items:
             $ref: "#/components/schemas/WidgetCustomLink"
           type: array
+        description:
+          description: The description of the widget.
+          type: string
         group_by:
           $ref: "#/components/schemas/TreeMapGroupBy"
         requests:
@@ -20733,12 +22186,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last:
+          description: Shows the last value of Anthropic cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_aws_spend_last:
+          description: Shows the last value of AWS cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_azure_spend_last:
+          description: Shows the last value of Azure cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last:
+          description: Shows the last value of Confluent cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last:
+          description: Shows the last value of Databricks cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last:
+          description: Shows the last value of Elastic cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last:
+          description: Shows the last value of Fastly cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last:
+          description: Shows the last value of GCP cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_github_spend_last:
+          description: Shows the last value of GitHub cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last:
+          description: Shows the last value of MongoDB cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_oci_spend_last:
+          description: Shows the last value of OCI cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_openai_spend_last:
+          description: Shows the last value of OpenAI cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last:
+          description: Shows the last value of Snowflake cloud spend monitored over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last:
           description: Shows the last value of the amount of cloud spend monitored for Enterprise over all hours in the current date for all organizations.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last:
           description: Shows the last value of the amount of cloud spend monitored for Pro over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last:
+          description: Shows the last value of Twilio cloud spend monitored over all hours in the current date for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -21622,12 +23131,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last:
+          description: Shows the last value of Anthropic cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_aws_spend_last:
+          description: Shows the last value of AWS cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_azure_spend_last:
+          description: Shows the last value of Azure cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last:
+          description: Shows the last value of Confluent cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last:
+          description: Shows the last value of Databricks cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last:
+          description: Shows the last value of Elastic cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last:
+          description: Shows the last value of Fastly cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last:
+          description: Shows the last value of GCP cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_github_spend_last:
+          description: Shows the last value of GitHub cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last:
+          description: Shows the last value of MongoDB cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_oci_spend_last:
+          description: Shows the last value of OCI cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_openai_spend_last:
+          description: Shows the last value of OpenAI cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last:
+          description: Shows the last value of Snowflake cloud spend monitored over all hours in the current date for the given org.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last:
           description: Shows the last value of the amount of cloud spend monitored for Enterprise over all hours in the current date for the given org.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last:
           description: Shows the last value of the amount of cloud spend monitored for Pro over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last:
+          description: Shows the last value of Twilio cloud spend monitored over all hours in the current date for the given org.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -22521,12 +24086,68 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the current month for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_anthropic_spend_last_sum:
+          description: Shows the sum of the last value of Anthropic cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_aws_spend_last_sum:
+          description: Shows the sum of the last value of AWS cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_azure_spend_last_sum:
+          description: Shows the sum of the last value of Azure cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_confluent_spend_last_sum:
+          description: Shows the sum of the last value of Confluent cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_databricks_spend_last_sum:
+          description: Shows the sum of the last value of Databricks cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_elastic_spend_last_sum:
+          description: Shows the sum of the last value of Elastic cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_fastly_spend_last_sum:
+          description: Shows the sum of the last value of Fastly cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_gcp_spend_last_sum:
+          description: Shows the sum of the last value of GCP cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_github_spend_last_sum:
+          description: Shows the sum of the last value of GitHub cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_mongodb_spend_last_sum:
+          description: Shows the sum of the last value of MongoDB cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_oci_spend_last_sum:
+          description: Shows the sum of the last value of OCI cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_openai_spend_last_sum:
+          description: Shows the sum of the last value of OpenAI cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_snowflake_spend_last_sum:
+          description: Shows the sum of the last value of Snowflake cloud spend monitored in the current month for all organizations.
+          format: int64
+          type: integer
         ccm_spend_monitored_ent_last_sum:
           description: Shows the sum of the last value of the amount of cloud spend monitored for Enterprise in the current month for all organizations.
           format: int64
           type: integer
         ccm_spend_monitored_pro_last_sum:
           description: Shows the sum of the last value of the amount of cloud spend monitored for Pro in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_twilio_spend_last_sum:
+          description: Shows the sum of the last value of Twilio cloud spend monitored in the current month for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:
@@ -23571,6 +25192,158 @@ components:
           description: Information pertaining to a user disabled for a given organization.
           type: string
       type: object
+    UserJourneyFormulaCompute:
+      additionalProperties: false
+      description: Compute configuration for User Journey formula queries.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/FormulaAndFunctionEventAggregation"
+        interval:
+          description: Time bucket interval in milliseconds for time series queries.
+          example: 60000
+          format: double
+          type: number
+        metric:
+          $ref: "#/components/schemas/UserJourneyFormulaComputeMetric"
+        target:
+          $ref: "#/components/schemas/UserJourneySearchTarget"
+      required:
+        - aggregation
+      type: object
+    UserJourneyFormulaComputeMetric:
+      description: Metric for User Journey formula compute. `__dd.conversion` and `__dd.conversion_rate` accept `count` and `cardinality` as aggregations. `__dd.time_to_convert` accepts `avg`, `median`, `pc75`, `pc95`, `pc98`, `pc99`, `min`, and `max`.
+      enum:
+        - __dd.conversion
+        - __dd.conversion_rate
+        - __dd.time_to_convert
+      example: __dd.conversion_rate
+      type: string
+      x-enum-varnames:
+        - CONVERSION
+        - CONVERSION_RATE
+        - TIME_TO_CONVERT
+    UserJourneyFormulaGroupBy:
+      description: Group by configuration for User Journey formula queries.
+      properties:
+        facet:
+          description: Facet name to group by.
+          example: "@usr.email"
+          type: string
+        limit:
+          description: Maximum number of groups to return.
+          example: 10
+          format: int32
+          maximum: 10000
+          type: integer
+        should_exclude_missing:
+          description: Whether to exclude events missing the group-by facet.
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/FormulaAndFunctionEventQueryGroupBySort"
+        target:
+          $ref: "#/components/schemas/UserJourneySearchTarget"
+      required:
+        - facet
+      type: object
+    UserJourneyJoinKeys:
+      description: Join keys for user journey queries.
+      properties:
+        primary:
+          description: Primary join key.
+          example: "@session.id"
+          type: string
+        secondary:
+          description: Secondary join keys.
+          items:
+            description: A secondary join key.
+            type: string
+          type: array
+      required:
+        - primary
+      type: object
+    UserJourneySearch:
+      additionalProperties: false
+      description: User journey search configuration.
+      properties:
+        expression:
+          description: Expression string.
+          example: "node_0 -> node_1"
+          type: string
+        filters:
+          $ref: "#/components/schemas/UserJourneySearchFilters"
+        join_keys:
+          $ref: "#/components/schemas/UserJourneyJoinKeys"
+        node_objects:
+          additionalProperties:
+            $ref: "#/components/schemas/ProductAnalyticsBaseQuery"
+          description: Node objects mapping.
+          type: object
+        step_aliases:
+          additionalProperties:
+            type: string
+          description: Step aliases mapping.
+          type: object
+      required:
+        - node_objects
+        - expression
+      type: object
+    UserJourneySearchFilters:
+      description: Filters for user journey search.
+      properties:
+        audience_filters:
+          $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
+        graph_filters:
+          description: Graph filters.
+          items:
+            $ref: "#/components/schemas/UserJourneySearchGraphFilter"
+            description: A graph filter for user journey search.
+          type: array
+        string_filter:
+          description: String filter.
+          example: "@session.type:user"
+          type: string
+      type: object
+    UserJourneySearchGraphFilter:
+      description: Graph filter for user journey search.
+      properties:
+        name:
+          description: Filter name.
+          example: "count"
+          type: string
+        operator:
+          description: Filter operator.
+          example: "gt"
+          type: string
+        target:
+          $ref: "#/components/schemas/UserJourneySearchTarget"
+        value:
+          description: Filter value.
+          example: 1
+          format: int64
+          type: integer
+      type: object
+    UserJourneySearchTarget:
+      description: Target for user journey search.
+      properties:
+        end:
+          description: End value.
+          example: "node_1"
+          type: string
+        start:
+          description: Start value.
+          example: "node_0"
+          type: string
+        type:
+          description: Target type.
+          example: "step"
+          type: string
+        value:
+          description: Target value.
+          example: "node_0"
+          type: string
+      required:
+        - type
+      type: object
     UserListResponse:
       description: Array of Datadog users for a given organization.
       properties:
@@ -23810,6 +25583,9 @@ components:
           description: Specifies the scale type. Possible values are `linear`, `log`, `sqrt`, and `pow##` (for example `pow2` or `pow0.5`).
           type: string
       type: object
+    WidgetBackgroundColor:
+      description: "Background color of the widget. Supported values are `white`, `blue`, `purple`, `pink`, `orange`, `yellow`, `green`, `gray`, `vivid_blue`, `vivid_purple`, `vivid_pink`, `vivid_orange`, `vivid_yellow`, `vivid_green`, and `transparent`."
+      type: string
     WidgetChangeType:
       description: Show the absolute or the relative change.
       enum:
@@ -23920,11 +25696,13 @@ components:
         - $ref: "#/components/schemas/BarChartWidgetDefinition"
         - $ref: "#/components/schemas/ChangeWidgetDefinition"
         - $ref: "#/components/schemas/CheckStatusWidgetDefinition"
+        - $ref: "#/components/schemas/CohortWidgetDefinition"
         - $ref: "#/components/schemas/DistributionWidgetDefinition"
         - $ref: "#/components/schemas/EventStreamWidgetDefinition"
         - $ref: "#/components/schemas/EventTimelineWidgetDefinition"
         - $ref: "#/components/schemas/FreeTextWidgetDefinition"
         - $ref: "#/components/schemas/FunnelWidgetDefinition"
+        - $ref: "#/components/schemas/ProductAnalyticsFunnelWidgetDefinition"
         - $ref: "#/components/schemas/GeomapWidgetDefinition"
         - $ref: "#/components/schemas/GroupWidgetDefinition"
         - $ref: "#/components/schemas/HeatMapWidgetDefinition"
@@ -23937,10 +25715,12 @@ components:
         - $ref: "#/components/schemas/NoteWidgetDefinition"
         - $ref: "#/components/schemas/PowerpackWidgetDefinition"
         - $ref: "#/components/schemas/QueryValueWidgetDefinition"
+        - $ref: "#/components/schemas/RetentionCurveWidgetDefinition"
         - $ref: "#/components/schemas/RunWorkflowWidgetDefinition"
         - $ref: "#/components/schemas/SLOListWidgetDefinition"
         - $ref: "#/components/schemas/SLOWidgetDefinition"
         - $ref: "#/components/schemas/ScatterPlotWidgetDefinition"
+        - $ref: "#/components/schemas/SankeyWidgetDefinition"
         - $ref: "#/components/schemas/ServiceMapWidgetDefinition"
         - $ref: "#/components/schemas/ServiceSummaryWidgetDefinition"
         - $ref: "#/components/schemas/SplitGraphWidgetDefinition"
@@ -23950,6 +25730,7 @@ components:
         - $ref: "#/components/schemas/ToplistWidgetDefinition"
         - $ref: "#/components/schemas/TopologyMapWidgetDefinition"
         - $ref: "#/components/schemas/TreeMapWidgetDefinition"
+        - $ref: "#/components/schemas/WildcardWidgetDefinition"
     WidgetDisplayType:
       description: Type of display to use for the request.
       enum:
@@ -24721,6 +26502,81 @@ components:
       x-enum-varnames:
         - TIMESERIES
         - TOPLIST
+    WildcardWidgetDefinition:
+      description: >-
+        Custom visualization widget using Vega or Vega-Lite specifications. Combines standard Datadog data requests with a Vega or Vega-Lite JSON specification for flexible, custom visualizations.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        requests:
+          description: List of data requests for the wildcard widget.
+          example: [{"formulas": ["formula": "query1"], "queries": [{"aggregator": "avg", "data_source": "metrics", "name": "query1", "query": "avg:system.cpu.user{*} by {env}"}], "response_format": "scalar"}]
+          items:
+            $ref: "#/components/schemas/WildcardWidgetRequest"
+          type: array
+        specification:
+          $ref: "#/components/schemas/WildcardWidgetSpecification"
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/WildcardWidgetDefinitionType"
+      required:
+        - type
+        - requests
+        - specification
+      type: object
+    WildcardWidgetDefinitionType:
+      default: wildcard
+      description: Type of the wildcard widget.
+      enum:
+        - wildcard
+      example: wildcard
+      type: string
+      x-enum-varnames:
+        - WILDCARD
+    WildcardWidgetRequest:
+      description: >-
+        Request object for the wildcard widget. Each variant represents a distinct data-fetching pattern: scalar formulas, timeseries formulas, list streams, and histograms.
+      oneOf:
+        - $ref: "#/components/schemas/TreeMapWidgetRequest"
+        - $ref: "#/components/schemas/TimeseriesWidgetRequest"
+        - $ref: "#/components/schemas/ListStreamWidgetRequest"
+        - $ref: "#/components/schemas/DistributionWidgetRequest"
+    WildcardWidgetSpecification:
+      description: >-
+        Vega or Vega-Lite specification for custom visualization rendering. See https://vega.github.io/vega-lite/ for the full grammar reference.
+      properties:
+        contents:
+          description: The Vega or Vega-Lite JSON specification object.
+          example: {"$schema": "https://vega.github.io/schema/vega-lite/v5.json", "data": {"name": "table1"}, "description": "A simple bar chart", "encoding": {"x": {"field": "env", "sort": "-y", "type": "nominal"}, "y": {"field": "query1", "type": "quantitative"}}, "mark": "bar"}
+          type: object
+        type:
+          $ref: "#/components/schemas/WildcardWidgetSpecificationType"
+      required:
+        - type
+        - contents
+      type: object
+    WildcardWidgetSpecificationType:
+      description: Type of specification used by the wildcard widget.
+      enum:
+        - vega
+        - vega-lite
+      example: vega-lite
+      type: string
+      x-enum-varnames:
+        - VEGA
+        - VEGA_LITE
   securitySchemes:
     AuthZ:
       description: This API uses OAuth 2 with the implicit grant flow.
@@ -24918,6 +26774,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: example key
             schema:
               $ref: "#/components/schemas/ApiKey"
         required: true
@@ -25049,6 +26909,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: example key
             schema:
               $ref: "#/components/schemas/ApiKey"
         required: true
@@ -25126,6 +26990,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: example key
             schema:
               $ref: "#/components/schemas/ApplicationKey"
         required: true
@@ -25265,6 +27133,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: example key
             schema:
               $ref: "#/components/schemas/ApplicationKey"
         required: true
@@ -25323,6 +27195,15 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  - check: app.ok
+                    host_name: app.host1
+                    message: app is running
+                    status: 0
+                    tags:
+                      - "environment:test"
             schema:
               $ref: "#/components/schemas/ServiceChecks"
         description: Service Check request body.
@@ -25424,7 +27305,7 @@ paths:
       summary: Get the list of available daily custom reports
       tags:
         - Usage Metering
-      x-menu-order: 41
+      x-menu-order: 34
       "x-permission":
         operator: OR
         permissions:
@@ -25472,7 +27353,7 @@ paths:
       summary: Get specified daily custom reports
       tags:
         - Usage Metering
-      x-menu-order: 42
+      x-menu-order: 35
       "x-permission":
         operator: OR
         permissions:
@@ -25485,6 +27366,13 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    - id: 123-abc-456
+                      type: dashboard
+                    - id: 789-def-101
+                      type: dashboard
               json-request-body:
                 value: {"data": [{"id": "123-abc-456", "type": "dashboard"}, {"id": "789-def-101", "type": "dashboard"}]}
             schema:
@@ -25606,6 +27494,13 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    - id: 123-abc-456
+                      type: dashboard
+                    - id: 789-def-101
+                      type: dashboard
               json-request-body:
                 value: {"data": [{"id": "123-abc-456", "type": "dashboard"}, {"id": "789-def-101", "type": "dashboard"}]}
             schema:
@@ -25657,6 +27552,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: An example dashboard for monitoring infrastructure.
+                  layout_type: ordered
+                  title: Example Dashboard
+                  widgets:
+                    - definition:
+                        requests:
+                          - q: avg:system.cpu.user{*}
+                        title: CPU Usage
+                        type: timeseries
             schema:
               $ref: "#/components/schemas/Dashboard"
         description: Create a dashboard request body.
@@ -25736,6 +27643,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: My Dashboard List
             schema:
               $ref: "#/components/schemas/DashboardList"
         description: Create a dashboard list request body.
@@ -25883,6 +27794,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: My Dashboard List
             schema:
               $ref: "#/components/schemas/DashboardList"
         description: Update a dashboard list request body.
@@ -25937,6 +27852,13 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  dashboard_id: 123-abc-456
+                  dashboard_type: custom_timeboard
+                  global_time:
+                    live_span: 1h
+                  share_type: open
               json-request-body:
                 value: {"dashboard_id": "123-abc-456", "dashboard_type": "custom_timeboard", "share_type": "open"}
             schema:
@@ -26101,6 +28023,21 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  global_time:
+                    live_span: 1h
+                  selectable_template_vars:
+                    - default_value: "*"
+                      name: exampleVar
+                      prefix: test
+                      visible_tags:
+                        - selectableValue1
+                        - selectableValue2
+                  share_list:
+                    - test@datadoghq.com
+                    - test2@datadoghq.com
+                  share_type: invite
               json-request-body:
                 value: {"global_time": {"live_span": "1h"}, "selectable_template_vars": [{"default_value": "*", "name": "exampleVar", "prefix": "test", "visible_tags": ["selectableValue1", "selectableValue2"]}], "share_list": ["test@datadoghq.com", "test2@datadoghq.com"], "share_type": "invite"}
             schema:
@@ -26170,6 +28107,12 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      email: test@datadoghq.com
+                    type: public_dashboard_invitation
               json-request-body:
                 value: {"data": {"attributes": {"email": "test@datadoghq.com"}, "type": "public_dashboard_invitation"}}
             schema:
@@ -26281,6 +28224,12 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    - attributes:
+                        email: test@datadoghq.com
+                      type: public_dashboard_invitation
               json-request-body:
                 value: {"data": [{"attributes": {"email": "test@datadoghq.com"}, "type": "public_dashboard_invitation"}]}
             schema:
@@ -26430,6 +28379,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: An example dashboard for monitoring infrastructure.
+                  layout_type: ordered
+                  title: Example Dashboard
+                  widgets:
+                    - definition:
+                        requests:
+                          - q: avg:system.cpu.user{*}
+                        title: CPU Usage
+                        type: timeseries
             schema:
               $ref: "#/components/schemas/Dashboard"
         description: Update Dashboard request body.
@@ -26490,6 +28451,16 @@ paths:
         content:
           text/json:
             examples:
+              default:
+                value:
+                  series:
+                    - host: test.example.com
+                      metric: system.load.1
+                      points:
+                        - [1636629071, [1.0, 2.0]]
+                      tags:
+                        - "environment:test"
+                      type: distribution
               dynamic-points:
                 description: Post time-series data that can be graphed on Datadog’s dashboards.
                 externalValue: examples/metrics/distribution-points.json.sh
@@ -26538,7 +28509,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 7
   /api/v1/downtime:
     get:
       deprecated: true
@@ -26596,6 +28567,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  end: 1412793983
+                  message: Scheduling downtime for a database maintenance window.
+                  monitor_tags:
+                    - "*"
+                  scope:
+                    - env:staging
+                  start: 1412792983
+                  timezone: America/New_York
             schema:
               $ref: "#/components/schemas/Downtime"
         description: Schedule a downtime request body.
@@ -26644,6 +28626,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  scope: host:myserver
             schema:
               $ref: "#/components/schemas/CancelDowntimesByScopeRequest"
         description: Scope to cancel downtimes for.
@@ -26800,6 +28786,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  end: 1412793983
+                  message: Updating downtime end time.
+                  monitor_tags:
+                    - "*"
+                  scope:
+                    - env:staging
+                  start: 1412792983
+                  timezone: America/New_York
             schema:
               $ref: "#/components/schemas/Downtime"
         description: Update a downtime request body.
@@ -26961,6 +28958,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  priority: normal
+                  tags:
+                    - environment:test
+                  text: Oh boy!
+                  title: Did you hear the news today?
             schema:
               $ref: "#/components/schemas/EventCreateRequest"
         description: Event request object
@@ -26986,7 +28991,7 @@ paths:
       tags:
         - Events
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 3
   /api/v1/events/{event_id}:
     get:
       description: |-
@@ -27077,6 +29082,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  graph_json: '{"viz":"timeseries","requests":[{"q":"avg:system.load.1{*}","type":"line"}]}'
+                  legend: "yes"
+                  size: "medium"
+                  timeframe: "1_hour"
+                  title: "System Load Average"
             schema:
               $ref: "#/components/schemas/EmbeddableGraphPayload"
         description: Embeddable Graph body
@@ -27342,6 +29355,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  end: 1579098130
+                  message: Muting this host for a test!
+                  override: false
             schema:
               $ref: "#/components/schemas/HostMuteSettings"
         description: Mute a host request body.
@@ -27561,6 +29580,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  role_name: "DatadogAWSIntegrationRole"
             schema:
               $ref: "#/components/schemas/AWSAccountDeleteRequest"
         description: AWS request object
@@ -27664,6 +29688,24 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  account_specific_namespace_rules:
+                    auto_scaling: false
+                    opswork: false
+                  cspm_resource_collection_enabled: true
+                  excluded_regions:
+                    - us-east-1
+                    - us-west-2
+                  extended_resource_collection_enabled: true
+                  filter_tags:
+                    - "$KEY:$VALUE"
+                  host_tags:
+                    - "$KEY:$VALUE"
+                  metrics_collection_enabled: false
+                  role_name: "DatadogAWSIntegrationRole"
             schema:
               $ref: "#/components/schemas/AWSAccount"
         description: AWS Request Object
@@ -27734,6 +29776,24 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  account_specific_namespace_rules:
+                    auto_scaling: false
+                    opswork: false
+                  cspm_resource_collection_enabled: true
+                  excluded_regions:
+                    - us-east-1
+                    - us-west-2
+                  extended_resource_collection_enabled: true
+                  filter_tags:
+                    - "$KEY:$VALUE"
+                  host_tags:
+                    - "$KEY:$VALUE"
+                  metrics_collection_enabled: false
+                  role_name: "DatadogAWSIntegrationRole"
             schema:
               $ref: "#/components/schemas/AWSAccount"
         description: AWS request object
@@ -27813,6 +29873,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  event_generator_name: app-alerts-zyxw3210
+                  region: us-east-1
             schema:
               $ref: "#/components/schemas/AWSEventBridgeDeleteRequest"
         description: Delete the Amazon EventBridge source with the given name, region, and associated AWS account.
@@ -27887,6 +29953,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  create_event_bus: true
+                  event_generator_name: app-alerts
+                  region: us-east-1
             schema:
               $ref: "#/components/schemas/AWSEventBridgeCreateRequest"
         description: Create an Amazon EventBridge source for an AWS account with a given name and region.
@@ -27929,6 +30002,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "FAKEAC0FAKEAC2FAKEAC"
+                  namespace: elb
             schema:
               $ref: "#/components/schemas/AWSTagFilterDeleteRequest"
         description: Delete a tag filtering entry for a given AWS account and `dd-aws` namespace.
@@ -28011,6 +30089,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  namespace: elb
+                  tag_filter_str: "prod*"
             schema:
               $ref: "#/components/schemas/AWSTagFilterCreateRequest"
         description: |-
@@ -28056,6 +30140,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  role_name: "DatadogAWSIntegrationRole"
             schema:
               $ref: "#/components/schemas/AWSAccount"
         description: |-
@@ -28101,6 +30190,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "1234567"
+                  lambda_arn: "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
             schema:
               $ref: "#/components/schemas/AWSAccountAndLambdaRequest"
         description: Delete AWS Lambda ARN request body.
@@ -28179,6 +30273,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "1234567"
+                  lambda_arn: "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
             schema:
               $ref: "#/components/schemas/AWSAccountAndLambdaRequest"
         description: AWS Log Lambda Async request body.
@@ -28228,6 +30327,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "1234567"
+                  lambda_arn: "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
             schema:
               $ref: "#/components/schemas/AWSAccountAndLambdaRequest"
         description: Check AWS Log Lambda Async request body.
@@ -28302,6 +30406,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "1234567"
+                  services:
+                    - s3
+                    - elb
+                    - elbv2
+                    - cloudfront
+                    - redshift
+                    - lambda
             schema:
               $ref: "#/components/schemas/AWSLogsServicesRequest"
         description: Enable AWS Log Services request body.
@@ -28353,6 +30468,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "1234567"
+                  services:
+                    - s3
+                    - elb
+                    - elbv2
+                    - cloudfront
+                    - redshift
+                    - lambda
             schema:
               $ref: "#/components/schemas/AWSLogsServicesRequest"
         description: Check AWS Logs Async Services request body.
@@ -28395,6 +30521,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  client_id: "testc7f6-1234-5678-9101-3fcbf464test"
+                  tenant_name: "testc44-1234-5678-9101-cc00736ftest"
             schema:
               $ref: "#/components/schemas/AzureAccount"
         description: Delete a given Datadog-Azure integration request body.
@@ -28476,6 +30607,20 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  app_service_plan_filters: "key:value,filter:example"
+                  automute: true
+                  client_id: "testc7f6-1234-5678-9101-3fcbf464test"
+                  client_secret: "TestingRh2nx664kUy5dIApvM54T4AtO"
+                  container_app_filters: "key:value,filter:example"
+                  cspm_enabled: true
+                  custom_metrics_enabled: true
+                  host_filters: "key:value,filter:example"
+                  metrics_enabled: true
+                  resource_collection_enabled: true
+                  tenant_name: "testc44-1234-5678-9101-cc00736ftest"
             schema:
               $ref: "#/components/schemas/AzureAccount"
         description: Create a Datadog-Azure integration for your Datadog account request body.
@@ -28520,6 +30665,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  automute: true
+                  client_id: "testc7f6-1234-5678-9101-3fcbf464test"
+                  client_secret: "TestingRh2nx664kUy5dIApvM54T4AtO"
+                  cspm_enabled: true
+                  host_filters: "key:value,filter:example"
+                  metrics_enabled: true
+                  new_client_id: "new1c7f6-1234-5678-9101-3fcbf464test"
+                  new_tenant_name: "new1c44-1234-5678-9101-cc00736ftest"
+                  resource_collection_enabled: true
+                  tenant_name: "testc44-1234-5678-9101-cc00736ftest"
             schema:
               $ref: "#/components/schemas/AzureAccount"
         description: Update a Datadog-Azure integration request body.
@@ -28563,6 +30721,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  client_id: "testc7f6-1234-5678-9101-3fcbf464test"
+                  host_filters: "key:value,filter:example"
+                  tenant_name: "testc44-1234-5678-9101-cc00736ftest"
             schema:
               $ref: "#/components/schemas/AzureAccount"
         description: Update a Datadog-Azure integration's host filters request body.
@@ -28607,6 +30771,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  client_email: "test@sandbox.iam.gserviceaccount.com"
+                  client_id: "123456712345671234567"
+                  project_id: "datadog-apitest"
             schema:
               $ref: "#/components/schemas/GCPAccount"
         description: Delete a given Datadog-GCP integration.
@@ -28684,6 +30854,22 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
+                  auth_uri: "https://accounts.google.com/o/oauth2/auth"
+                  client_email: "test@sandbox.iam.gserviceaccount.com"
+                  client_id: "123456712345671234567"
+                  client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL"
+                  host_filters: "$KEY1:$VALUE1,$KEY2:$VALUE2"
+                  is_cspm_enabled: true
+                  private_key: "private_key"
+                  private_key_id: "123456789abcdefghi123456789abcdefghijklm"
+                  project_id: "datadog-apitest"
+                  resource_collection_enabled: true
+                  token_uri: "https://accounts.google.com/o/oauth2/token"
+                  type: "service_account"
             schema:
               $ref: "#/components/schemas/GCPAccount"
         description: Create a Datadog-GCP integration.
@@ -28730,6 +30916,15 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  client_email: "test@sandbox.iam.gserviceaccount.com"
+                  client_id: "123456712345671234567"
+                  host_filters: "$KEY1:$VALUE1,$KEY2:$VALUE2"
+                  is_cspm_enabled: true
+                  project_id: "datadog-apitest"
+                  resource_collection_enabled: true
             schema:
               $ref: "#/components/schemas/GCPAccount"
         description: Update a Datadog-GCP integration.
@@ -28772,6 +30967,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  service_key: "your-pagerduty-service-key"
+                  service_name: "my-pagerduty-service"
             schema:
               $ref: "#/components/schemas/PagerDutyService"
         description: Create a new service object request body.
@@ -28895,6 +31095,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  service_key: "updated-pagerduty-service-key"
             schema:
               $ref: "#/components/schemas/PagerDutyServiceKey"
         description: Update an existing service object request body.
@@ -28950,7 +31154,7 @@ paths:
       summary: Delete a Slack integration
       tags:
         - Slack Integration
-      x-menu-order: 1
+      x-menu-order: 6
     get:
       deprecated: true
       description: Get all information about your Datadog-Slack integration.
@@ -28985,7 +31189,7 @@ paths:
       summary: Get info about a Slack integration
       tags:
         - Slack Integration
-      x-menu-order: 4
+      x-menu-order: 9
     post:
       deprecated: true
       description: |-
@@ -28998,6 +31202,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  service_hooks:
+                    - account: Main_Account
+                      url: "https://hooks.slack.com/services/1/1/1"
             schema:
               $ref: "#/components/schemas/SlackIntegration"
         description: Create Datadog-Slack integration request body.
@@ -29023,7 +31233,7 @@ paths:
       tags:
         - Slack Integration
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 8
     put:
       deprecated: true
       description: |-
@@ -29037,6 +31247,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  channels:
+                    - account: Main_Account
+                      channel_name: "#channel_name_main_account"
+                      transfer_all_user_comments: false
             schema:
               $ref: "#/components/schemas/SlackChannels"
         description: Update an existing Datadog-Slack integration request body.
@@ -29062,7 +31279,7 @@ paths:
       tags:
         - Slack Integration
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 7
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels:
     get:
       description: Get a list of all channels configured for your Datadog-Slack integration.
@@ -29112,6 +31329,16 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  display:
+                    message: true
+                    mute_buttons: false
+                    notified: true
+                    snapshot: true
+                    tags: true
+                  name: "#general"
             schema:
               $ref: "#/components/schemas/SlackIntegrationChannel"
         description: Payload describing Slack channel to be created
@@ -29240,6 +31467,16 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  display:
+                    message: true
+                    mute_buttons: false
+                    notified: true
+                    snapshot: true
+                    tags: true
+                  name: "#general"
             schema:
               $ref: "#/components/schemas/SlackIntegrationChannel"
         description: Payload describing fields and values to be updated.
@@ -29287,6 +31524,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  is_secret: true
+                  name: CUSTOM_VARIABLE_NAME
+                  value: CUSTOM_VARIABLE_VALUE
             schema:
               $ref: "#/components/schemas/WebhooksIntegrationCustomVariable"
         description: Define a custom variable request body.
@@ -29419,6 +31662,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  is_secret: true
+                  name: CUSTOM_VARIABLE_NAME
+                  value: CUSTOM_VARIABLE_VALUE
             schema:
               $ref: "#/components/schemas/WebhooksIntegrationCustomVariableUpdateRequest"
         description: Update an existing custom variable request body.
@@ -29466,6 +31715,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  encode_as: json
+                  name: WEBHOOK_NAME
+                  url: https://example.com/webhook
             schema:
               $ref: "#/components/schemas/WebhooksIntegration"
         description: Create a webhooks integration request body.
@@ -29599,6 +31854,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  encode_as: json
+                  name: WEBHOOK_NAME
+                  url: https://example.com/webhook
             schema:
               $ref: "#/components/schemas/WebhooksIntegrationUpdateRequest"
         description: Update an existing Datadog-Webhooks integration.
@@ -29649,12 +31910,24 @@ paths:
         consider use of the Datadog archive capabilities instead of the log list API.
         See [Datadog Logs Archive documentation][2].**
 
+        **Note**: This endpoint is enabled by default for logs customers. To disable it, contact [Datadog support](https://docs.datadoghq.com/help/).
+
         [1]: /logs/guide/collect-multiple-logs-with-pagination
         [2]: https://docs.datadoghq.com/logs/archives
       operationId: ListLogs
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  index: "retention-3,retention-15"
+                  limit: 25
+                  query: "service:web* AND @http.status_code:[200 TO 299]"
+                  sort: desc
+                  time:
+                    from: "2020-02-02T02:02:02.202Z"
+                    to: "2020-02-20T02:02:02.202Z"
             schema:
               $ref: "#/components/schemas/LogsListRequest"
         description: Logs filter
@@ -29688,7 +31961,7 @@ paths:
       tags:
         - Logs
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -29716,7 +31989,7 @@ paths:
       summary: Get indexes order
       tags:
         - Logs Indexes
-      x-menu-order: 5
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -29729,6 +32002,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  index_names:
+                    - main
+                    - payments
+                    - web
             schema:
               $ref: "#/components/schemas/LogsIndexesOrder"
         description: Object containing the new ordered list of index names
@@ -29758,7 +32038,7 @@ paths:
       tags:
         - Logs Indexes
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -29799,6 +32079,21 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  daily_limit: 300000000
+                  daily_limit_warning_threshold_percentage: 70
+                  exclusion_filters:
+                    - filter:
+                        query: "*"
+                        sample_rate: 1.0
+                      is_enabled: true
+                      name: payment
+                  filter:
+                    query: source:python
+                  name: main
+                  num_retention_days: 15
             schema:
               $ref: "#/components/schemas/LogsIndex"
         description: Object containing the new index.
@@ -29922,7 +32217,7 @@ paths:
         Update an index as identified by its name.
         Returns the Index object passed in the request body when the request is successful.
 
-        Using the `PUT` method updates your index’s configuration by **replacing**
+        Using the `PUT` method updates your index's configuration by **replacing**
         your current configuration with the new one sent to your Datadog organization.
       operationId: UpdateLogsIndex
       parameters:
@@ -29935,6 +32230,21 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  daily_limit: 300000000
+                  daily_limit_warning_threshold_percentage: 70
+                  disable_daily_limit: false
+                  exclusion_filters:
+                    - filter:
+                        query: "*"
+                        sample_rate: 1.0
+                      is_enabled: true
+                      name: payment
+                  filter:
+                    query: source:python
+                  num_retention_days: 15
             schema:
               $ref: "#/components/schemas/LogsIndexUpdateRequest"
         description: Object containing the new `LogsIndexUpdateRequest`.
@@ -30009,6 +32319,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  pipeline_ids:
+                    - tags
+                    - org_ids
+                    - products
             schema:
               $ref: "#/components/schemas/LogsPipelinesOrder"
         description: Object containing the new ordered list of pipeline IDs.
@@ -30084,6 +32401,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  filter:
+                    query: source:python
+                  is_enabled: true
+                  name: My Pipeline
+                  processors: []
             schema:
               $ref: "#/components/schemas/LogsPipeline"
         description: Definition of the new pipeline.
@@ -30214,6 +32539,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  filter:
+                    query: source:python
+                  is_enabled: true
+                  name: My Pipeline
+                  processors: []
             schema:
               $ref: "#/components/schemas/LogsPipeline"
         description: New definition of the pipeline.
@@ -30370,6 +32703,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: Number of requests received.
+                  per_unit: second
+                  type: count
+                  unit: byte
             schema:
               $ref: "#/components/schemas/MetricMetadata"
         description: New metadata.
@@ -30758,15 +33098,18 @@ paths:
         content:
           application/json:
             examples:
-              json-request-body:
+              default:
                 value:
                   message: "You may need to add web hosts if this is consistently high."
                   name: "Bytes received on host0"
                   options:
                     no_data_timeframe: 20
                     notify_no_data: true
+                  priority: 3
                   query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
-                  tags: ["app:webserver", "frontend"]
+                  tags:
+                    - "app:webserver"
+                    - "frontend"
                   type: "query alert"
             schema:
               $ref: "#/components/schemas/Monitor"
@@ -30939,7 +33282,7 @@ paths:
       summary: Monitors group search
       tags:
         - Monitors
-      x-menu-order: 2
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -31020,7 +33363,7 @@ paths:
       summary: Monitors search
       tags:
         - Monitors
-      x-menu-order: 1
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -31035,6 +33378,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  message: "You may need to add web hosts if this is consistently high."
+                  name: "My monitor"
+                  options:
+                    no_data_timeframe: 20
+                    notify_no_data: true
+                  query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
+                  tags:
+                    - "app:webserver"
+                    - "frontend"
+                  type: "query alert"
             schema:
               $ref: "#/components/schemas/Monitor"
         description: Monitor request object
@@ -31226,6 +33582,20 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  message: "Updated notification message for this monitor."
+                  name: "Updated monitor name"
+                  options:
+                    no_data_timeframe: 20
+                    notify_no_data: true
+                  priority: 3
+                  query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
+                  tags:
+                    - "app:webserver"
+                    - "frontend"
+                  type: "query alert"
             schema:
               $ref: "#/components/schemas/MonitorUpdateRequest"
         description: Edit a monitor request body.
@@ -31391,7 +33761,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -31459,7 +33829,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -31480,6 +33850,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  message: "You may need to add web hosts if this is consistently high."
+                  name: "My monitor"
+                  options:
+                    no_data_timeframe: 20
+                    notify_no_data: true
+                  query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
+                  tags:
+                    - "app:webserver"
+                    - "frontend"
+                  type: "query alert"
             schema:
               $ref: "#/components/schemas/Monitor"
         description: Monitor request object
@@ -31577,7 +33960,7 @@ paths:
       summary: Get the list of available monthly custom reports
       tags:
         - Usage Metering
-      x-menu-order: 43
+      x-menu-order: 36
       "x-permission":
         operator: OR
         permissions:
@@ -31631,7 +34014,7 @@ paths:
       summary: Get specified monthly custom reports
       tags:
         - Usage Metering
-      x-menu-order: 44
+      x-menu-order: 37
       "x-permission":
         operator: OR
         permissions:
@@ -31770,6 +34153,39 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      cells:
+                        - attributes:
+                            definition:
+                              text: "## Some test markdown\n\nWith some example content."
+                              type: markdown
+                          type: notebook_cells
+                        - attributes:
+                            definition:
+                              requests:
+                                - display_type: line
+                                  q: "avg:system.load.1{*}"
+                                  style:
+                                    line_type: solid
+                                    line_width: normal
+                                    palette: dog_classic
+                              show_legend: true
+                              type: timeseries
+                              yaxis:
+                                scale: linear
+                            graph_size: m
+                            split_by:
+                              keys: []
+                              tags: []
+                            time:
+                          type: notebook_cells
+                      name: "Example Notebook"
+                      time:
+                        live_span: 1h
+                    type: notebooks
               json-request-body:
                 value: {"data": {"attributes": {"cells": [{"attributes": {"definition": {"text": "## Some test markdown\n\nWith some example content.", "type": "markdown"}}, "type": "notebook_cells"}, {"attributes": {"definition": {"requests": [{"display_type": "line", "q": "avg:system.load.1{*}", "style": {"line_type": "solid", "line_width": "normal", "palette": "dog_classic"}}], "show_legend": true, "type": "timeseries", "yaxis": {"scale": "linear"}}, "graph_size": "m", "split_by": {"keys": [], "tags": []}, "time": null}, "type": "notebook_cells"}], "name": "Example Notebook", "time": {"live_span": "1h"}}, "type": "notebooks"}}
             schema:
@@ -31910,6 +34326,40 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      cells:
+                        - attributes:
+                            definition:
+                              text: "## Some updated test markdown\n\nWith some example content."
+                              type: markdown
+                          type: notebook_cells
+                        - attributes:
+                            definition:
+                              requests:
+                                - display_type: bars
+                                  q: "avg:system.load.1{*}"
+                                  style:
+                                    line_type: solid
+                                    line_width: normal
+                                    palette: warm
+                              show_legend: true
+                              type: timeseries
+                              yaxis:
+                                scale: linear
+                            graph_size: m
+                            split_by:
+                              keys: []
+                              tags: []
+                            time:
+                          id: "abcd1234"
+                          type: notebook_cells
+                      name: "Example Notebook"
+                      time:
+                        live_span: 1h
+                    type: notebooks
               json-request-body:
                 value: {"data": {"attributes": {"cells": [{"attributes": {"definition": {"text": "## Some updated test markdown\n\nWith some example content.", "type": "markdown"}}, "type": "notebook_cells"}, {"attributes": {"definition": {"requests": [{"display_type": "bars", "q": "avg:system.load.1{*}", "style": {"line_type": "solid", "line_width": "normal", "palette": "warm"}}], "show_legend": true, "type": "timeseries", "yaxis": {"scale": "linear"}}, "graph_size": "m", "split_by": {"keys": [], "tags": []}, "time": null}, "id": "abcd1234", "type": "notebook_cells"}], "name": "Example Notebook", "time": {"live_span": "1h"}}, "type": "notebooks"}}
             schema:
@@ -32001,6 +34451,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  billing:
+                    type: parent_billing
+                  name: "New child org"
+                  subscription:
+                    type: pro
             schema:
               $ref: "#/components/schemas/OrganizationCreateBody"
         description: Organization object that needs to be created
@@ -32086,6 +34544,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  billing:
+                    type: parent_billing
+                  name: "New child org"
+                  settings:
+                    saml:
+                      enabled: false
+                    saml_idp_initiated_login:
+                      enabled: false
+                    saml_strict_mode:
+                      enabled: false
             schema:
               $ref: "#/components/schemas/Organization"
         required: true
@@ -32173,6 +34644,10 @@ paths:
       requestBody:
         content:
           multipart/form-data:
+            examples:
+              default:
+                value:
+                  idp_file: "@/path/to/idp_metadata.xml"
             schema:
               $ref: "#/components/schemas/IdpFormData"
         required: true
@@ -32326,6 +34801,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  incident_id: 2066
+                  version: 0
             schema:
               $ref: "#/components/schemas/AddSignalToIncidentRequest"
         description: Attributes describing the signal update.
@@ -32360,7 +34840,7 @@ paths:
       summary: Add a security signal to an incident
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -32376,6 +34856,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  assignee: "773b045d-ccf8-4808-bd3b-955ef6a8c940"
+                  version: 0
             schema:
               $ref: "#/components/schemas/SignalAssigneeUpdateRequest"
         description: Attributes describing the signal update.
@@ -32410,7 +34895,7 @@ paths:
       summary: Modify the triage assignee of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -32426,6 +34911,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  archiveReason: none
+                  state: open
+                  version: 0
             schema:
               $ref: "#/components/schemas/SignalStateUpdateRequest"
         description: Attributes describing the signal update.
@@ -32460,7 +34951,7 @@ paths:
       summary: Change the triage state of a security signal
       tags: ["Security Monitoring"]
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 1
       "x-permission":
         operator: OR
         permissions:
@@ -32491,6 +34982,16 @@ paths:
         content:
           text/json:
             examples:
+              default:
+                value:
+                  series:
+                    - host: test.example.com
+                      metric: system.load.1
+                      points:
+                        - [1636629071, 0.7]
+                      tags:
+                        - "environment:test"
+                      type: gauge
               dynamic-points:
                 description: Post time-series data that can be graphed on Datadog’s dashboards.
                 externalValue: examples/metrics/dynamic-points.json.sh
@@ -32539,7 +35040,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 6
   /api/v1/service_dependencies:
     get:
       description: |-
@@ -32779,6 +35280,24 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: "Track the availability of our custom metric."
+                  name: "Custom Metric SLO"
+                  query:
+                    denominator: "sum:my.custom.metric{*}.as_count()"
+                    numerator: "sum:my.custom.metric{type:good}.as_count()"
+                  tags:
+                    - "env:prod"
+                    - "app:core"
+                  thresholds:
+                    - target: 95
+                      timeframe: 7d
+                    - target: 95
+                      timeframe: 30d
+                      warning: 97
+                  type: metric
             schema:
               $ref: "#/components/schemas/ServiceLevelObjectiveRequest"
         description: Service level objective request object.
@@ -32830,6 +35349,15 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  id1:
+                    - "7d"
+                    - "30d"
+                  id2:
+                    - "7d"
+                    - "30d"
             schema:
               $ref: "#/components/schemas/SLOBulkDelete"
         description: Delete multiple service level objective objects request body.
@@ -32864,7 +35392,7 @@ paths:
       tags:
         - Service Level Objectives
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -32919,7 +35447,7 @@ paths:
       summary: Check if SLOs can be safely deleted
       tags:
         - Service Level Objectives
-      x-menu-order: 7
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -32986,6 +35514,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      category: "Scheduled Maintenance"
+                      description: "Planned maintenance window for database upgrade."
+                      end: 1600003600
+                      slo_id: sloId
+                      start: 1600000000
+                      timezone: UTC
+                    type: correction
             schema:
               $ref: "#/components/schemas/SLOCorrectionCreateRequest"
         description: Create an SLO Correction
@@ -33113,6 +35653,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      category: "Scheduled Maintenance"
+                      description: "Updated correction for maintenance window."
+                      end: 1600003600
+                      start: 1600000000
+                      timezone: UTC
+                    type: correction
             schema:
               $ref: "#/components/schemas/SLOCorrectionUpdateRequest"
         description: The edited SLO correction object.
@@ -33212,7 +35763,7 @@ paths:
       summary: Search for SLOs
       tags:
         - Service Level Objectives
-      x-menu-order: 1
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -33342,6 +35893,24 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: "Updated description for the SLO."
+                  name: "Custom Metric SLO"
+                  query:
+                    denominator: "sum:my.custom.metric{*}.as_count()"
+                    numerator: "sum:my.custom.metric{type:good}.as_count()"
+                  tags:
+                    - "env:prod"
+                    - "app:core"
+                  thresholds:
+                    - target: 95
+                      timeframe: 7d
+                    - target: 95
+                      timeframe: 30d
+                      warning: 97
+                  type: metric
             schema:
               $ref: "#/components/schemas/ServiceLevelObjective"
         description: The edited service level objective request object.
@@ -33525,7 +36094,7 @@ paths:
       summary: Get an SLO's history
       tags:
         - Service Level Objectives
-      x-menu-order: 6
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -33564,7 +36133,7 @@ paths:
       summary: Get details of batch
       tags:
         - Synthetics
-      x-menu-order: 12
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -33592,7 +36161,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
         - Synthetics
-      x-menu-order: 24
+      x-menu-order: 30
       "x-permission":
         operator: OR
         permissions:
@@ -33604,6 +36173,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: Description of private location
+                  name: New private location
+                  tags:
+                    - "team:front"
             schema:
               $ref: "#/components/schemas/SyntheticsPrivateLocation"
         description: Details of the private location to create.
@@ -33638,7 +36214,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 23
+      x-menu-order: 29
       "x-permission":
         operator: OR
         permissions:
@@ -33675,7 +36251,7 @@ paths:
       summary: Delete a private location
       tags:
         - Synthetics
-      x-menu-order: 27
+      x-menu-order: 33
       "x-permission":
         operator: OR
         permissions:
@@ -33715,7 +36291,7 @@ paths:
       summary: Get a private location
       tags:
         - Synthetics
-      x-menu-order: 25
+      x-menu-order: 31
       "x-permission":
         operator: OR
         permissions:
@@ -33733,6 +36309,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: Description of private location
+                  name: New private location
+                  tags:
+                    - "team:front"
             schema:
               $ref: "#/components/schemas/SyntheticsPrivateLocation"
         description: Details of the private location to be updated.
@@ -33763,7 +36346,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 26
+      x-menu-order: 32
       "x-permission":
         operator: OR
         permissions:
@@ -33784,7 +36367,7 @@ paths:
       summary: Get the default locations
       tags:
         - Synthetics
-      x-menu-order: 29
+      x-menu-order: 34
       "x-permission":
         operator: OR
         permissions:
@@ -33838,7 +36421,7 @@ paths:
       summary: Get the list of all Synthetic tests
       tags:
         - Synthetics
-      x-menu-order: 3
+      x-menu-order: 4
       x-pagination:
         limitParam: page_size
         pageParam: page_number
@@ -33854,6 +36437,25 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    assertions:
+                      - operator: is
+                        target: 200
+                        type: statusCode
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: Notification message
+                  name: Example API test
+                  options:
+                    tick_every: 60
+                  status: live
+                  type: api
             schema:
               $ref: "#/components/schemas/SyntheticsTestDetails"
         description: Details of the test to create.
@@ -34031,6 +36633,29 @@ paths:
                   tags:
                     - "env:prod"
                   type: api
+              default:
+                value:
+                  config:
+                    assertions:
+                      - operator: is
+                        target: 200
+                        type: statusCode
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: Notification message
+                  name: Example API test
+                  options:
+                    min_failure_duration: 0
+                    min_location_failed: 1
+                    tick_every: 60
+                  status: live
+                  subtype: http
+                  tags:
+                    - "env:production"
+                  type: api
             schema:
               $ref: "#/components/schemas/SyntheticsAPITest"
         description: Details of the test to create.
@@ -34122,7 +36747,7 @@ paths:
       summary: Get an API test
       tags:
         - Synthetics
-      x-menu-order: 6
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -34140,6 +36765,30 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    assertions:
+                      - operator: is
+                        target: 200
+                        type: statusCode
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: Notification message
+                  name: Example API test
+                  options:
+                    min_failure_duration: 0
+                    min_location_failed: 1
+                    tick_every: 60
+                  status: live
+                  subtype: http
+                  tags:
+                    - "env:production"
+                  type: api
             schema:
               $ref: "#/components/schemas/SyntheticsAPITest"
         description: New test details to be saved.
@@ -34185,7 +36834,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 21
       "x-permission":
         operator: OR
         permissions:
@@ -34197,6 +36846,32 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    assertions: []
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: ""
+                  name: Example browser test
+                  options:
+                    device_ids:
+                      - chrome.laptop_large
+                    tick_every: 3600
+                  status: live
+                  steps:
+                    - name: Check current URL
+                      params:
+                        check: contains
+                        value: example
+                      type: assertCurrentUrl
+                  tags:
+                    - "env:production"
+                  type: browser
             schema:
               $ref: "#/components/schemas/SyntheticsBrowserTest"
         description: Details of the test to create.
@@ -34288,7 +36963,7 @@ paths:
       summary: Get a browser test
       tags:
         - Synthetics
-      x-menu-order: 6
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -34306,6 +36981,32 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    assertions: []
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: ""
+                  name: Example browser test
+                  options:
+                    device_ids:
+                      - chrome.laptop_large
+                    tick_every: 3600
+                  status: live
+                  steps:
+                    - name: Check current URL
+                      params:
+                        check: contains
+                        value: example
+                      type: assertCurrentUrl
+                  tags:
+                    - "env:production"
+                  type: browser
             schema:
               $ref: "#/components/schemas/SyntheticsBrowserTest"
         description: New test details to be saved.
@@ -34351,7 +37052,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -34424,7 +37125,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -34479,7 +37180,7 @@ paths:
       summary: Get a browser test result
       tags:
         - Synthetics
-      x-menu-order: 11
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -34491,6 +37192,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  public_ids:
+                    - "abc-def-123"
             schema:
               $ref: "#/components/schemas/SyntheticsDeleteTestsPayload"
         description: Public ID list of the Synthetic tests to be deleted.
@@ -34536,7 +37242,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 17
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -34548,6 +37254,22 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    variables: []
+                  device_ids:
+                    - "synthetics:mobile:device:apple_iphone_14_ios_16"
+                  message: Notification message
+                  name: Example mobile test
+                  options:
+                    min_failure_duration: 0
+                    min_location_failed: 1
+                    tick_every: 3600
+                  tags:
+                    - "env:production"
+                  type: mobile
             schema:
               $ref: "#/components/schemas/SyntheticsMobileTest"
         description: Details of the test to create.
@@ -34590,7 +37312,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -34639,7 +37361,7 @@ paths:
       summary: Get a mobile test
       tags:
         - Synthetics
-      x-menu-order: 7
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -34657,6 +37379,22 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    variables: []
+                  device_ids:
+                    - "synthetics:mobile:device:apple_iphone_14_ios_16"
+                  message: Notification message
+                  name: Example mobile test
+                  options:
+                    min_failure_duration: 0
+                    min_location_failed: 1
+                    tick_every: 3600
+                  tags:
+                    - "env:production"
+                  type: mobile
             schema:
               $ref: "#/components/schemas/SyntheticsMobileTest"
         description: New test details to be saved.
@@ -34702,7 +37440,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 22
       "x-permission":
         operator: OR
         permissions:
@@ -34783,7 +37521,7 @@ paths:
       summary: Search Synthetic tests
       tags:
         - Synthetics
-      x-menu-order: 5
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -34795,6 +37533,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  tests:
+                    - public_id: aaa-aaa-aaa
             schema:
               $ref: "#/components/schemas/SyntheticsTriggerBody"
         description: The identifiers of the tests to trigger.
@@ -34823,7 +37566,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 14
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -34835,6 +37578,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  tests:
+                    - public_id: aaa-aaa-aaa
             schema:
               $ref: "#/components/schemas/SyntheticsCITestBody"
         description: Details of the test to trigger.
@@ -34863,7 +37611,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -34875,6 +37623,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  from_ts: 1726041488
+                  public_ids:
+                    - "abc-def-123"
+                  to_ts: 1726127888
             schema:
               $ref: "#/components/schemas/SyntheticsFetchUptimesPayload"
         description: Public ID list of the Synthetic tests and timeframe.
@@ -34912,7 +37667,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -34959,7 +37714,7 @@ paths:
       summary: Get a test configuration
       tags:
         - Synthetics
-      x-menu-order: 4
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -34977,6 +37732,15 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - op: replace
+                      path: /name
+                      value: New test name
+                    - op: remove
+                      path: /config/assertions/0
             schema:
               $ref: "#/components/schemas/SyntheticsPatchTestBody"
         description: "[JSON Patch](https://jsonpatch.com/) compliant list of operations"
@@ -35022,7 +37786,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -35041,6 +37805,25 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    assertions:
+                      - operator: is
+                        target: 200
+                        type: statusCode
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: Notification message
+                  name: Example API test
+                  options:
+                    tick_every: 60
+                  status: live
+                  type: api
             schema:
               $ref: "#/components/schemas/SyntheticsTestDetails"
         description: New test details to be saved.
@@ -35157,7 +37940,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -35210,7 +37993,7 @@ paths:
       summary: Get an API test result
       tags:
         - Synthetics
-      x-menu-order: 9
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -35229,6 +38012,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  new_status: live
             schema:
               $ref: "#/components/schemas/SyntheticsUpdateTestPauseStatusPayload"
         description: Status to set the given Synthetic test to.
@@ -35271,7 +38058,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -35305,7 +38092,7 @@ paths:
       summary: Get all global variables
       tags:
         - Synthetics
-      x-menu-order: 19
+      x-menu-order: 25
       "x-permission":
         operator: OR
         permissions:
@@ -35317,6 +38104,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: Example description
+                  name: MY_VARIABLE
+                  tags:
+                    - "team:front"
+                    - "test:workflow-1"
+                  value:
+                    secure: false
+                    value: variable-value
             schema:
               $ref: "#/components/schemas/SyntheticsGlobalVariableRequest"
         description: Details of the global variable to create.
@@ -35357,7 +38155,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 18
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -35404,7 +38202,7 @@ paths:
       summary: Delete a global variable
       tags:
         - Synthetics
-      x-menu-order: 22
+      x-menu-order: 28
       "x-permission":
         operator: OR
         permissions:
@@ -35448,7 +38246,7 @@ paths:
       summary: Get a global variable
       tags:
         - Synthetics
-      x-menu-order: 20
+      x-menu-order: 26
     put:
       description: Edit a Synthetic global variable.
       operationId: EditGlobalVariable
@@ -35462,6 +38260,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: Example description
+                  name: MY_VARIABLE
+                  tags:
+                    - "team:front"
+                    - "test:workflow-1"
+                  value:
+                    secure: false
+                    value: variable-value
             schema:
               $ref: "#/components/schemas/SyntheticsGlobalVariableRequest"
         description: Details of the global variable to update.
@@ -35496,7 +38305,7 @@ paths:
       tags:
         - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 21
+      x-menu-order: 27
       "x-permission":
         operator: OR
         permissions:
@@ -35649,6 +38458,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  host: test.host
+                  tags:
+                    - "environment:production"
             schema:
               $ref: "#/components/schemas/HostTags"
         description: Update host tags request body.
@@ -35701,6 +38516,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  host: test.host
+                  tags:
+                    - "environment:production"
             schema:
               $ref: "#/components/schemas/HostTags"
         description: Add tags to host
@@ -35788,7 +38609,7 @@ paths:
       summary: Get hourly usage for analyzed logs
       tags:
         - Usage Metering
-      x-menu-order: 23
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -35850,7 +38671,7 @@ paths:
       summary: Get hourly usage for audit logs
       tags:
         - Usage Metering
-      x-menu-order: 40
+      x-menu-order: 33
       "x-permission":
         operator: OR
         permissions:
@@ -35910,7 +38731,7 @@ paths:
       summary: Get hourly usage for Lambda
       tags:
         - Usage Metering
-      x-menu-order: 19
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -35970,7 +38791,7 @@ paths:
       summary: Get billable usage across your account
       tags:
         - Usage Metering
-      x-menu-order: 5
+      x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
@@ -36032,7 +38853,7 @@ paths:
       summary: Get hourly usage for CI visibility
       tags:
         - Usage Metering
-      x-menu-order: 35
+      x-menu-order: 31
       "x-permission":
         operator: OR
         permissions:
@@ -36094,7 +38915,7 @@ paths:
       summary: Get hourly usage for CSM Pro
       tags:
         - Usage Metering
-      x-menu-order: 28
+      x-menu-order: 25
       "x-permission":
         operator: OR
         permissions:
@@ -36156,7 +38977,7 @@ paths:
       summary: Get hourly usage for cloud workload security
       tags:
         - Usage Metering
-      x-menu-order: 30
+      x-menu-order: 26
       "x-permission":
         operator: OR
         permissions:
@@ -36218,7 +39039,7 @@ paths:
       summary: Get hourly usage for database monitoring
       tags:
         - Usage Metering
-      x-menu-order: 31
+      x-menu-order: 27
       "x-permission":
         operator: OR
         permissions:
@@ -36278,7 +39099,7 @@ paths:
       summary: Get hourly usage for Fargate
       tags:
         - Usage Metering
-      x-menu-order: 18
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -36338,7 +39159,7 @@ paths:
       summary: Get hourly usage for hosts and containers
       tags:
         - Usage Metering
-      x-menu-order: 11
+      x-menu-order: 8
       "x-permission":
         operator: OR
         permissions:
@@ -36438,7 +39259,7 @@ paths:
       summary: Get hourly usage attribution
       tags:
         - Usage Metering
-      x-menu-order: 2
+      x-menu-order: 1
       "x-permission":
         operator: OR
         permissions:
@@ -36500,7 +39321,7 @@ paths:
       summary: Get hourly usage for incident management
       tags:
         - Usage Metering
-      x-menu-order: 26
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -36561,7 +39382,7 @@ paths:
       summary: Get hourly usage for indexed spans
       tags:
         - Usage Metering
-      x-menu-order: 14
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -36623,7 +39444,7 @@ paths:
       summary: Get hourly usage for ingested spans
       tags:
         - Usage Metering
-      x-menu-order: 25
+      x-menu-order: 22
       "x-permission":
         operator: OR
         permissions:
@@ -36685,7 +39506,7 @@ paths:
       summary: Get hourly usage for IoT
       tags:
         - Usage Metering
-      x-menu-order: 27
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -36745,7 +39566,7 @@ paths:
       summary: Get hourly usage for logs
       tags:
         - Usage Metering
-      x-menu-order: 12
+      x-menu-order: 9
       "x-permission":
         operator: OR
         permissions:
@@ -36807,7 +39628,7 @@ paths:
       summary: Get hourly logs usage by retention
       tags:
         - Usage Metering
-      x-menu-order: 10
+      x-menu-order: 7
       "x-permission":
         operator: OR
         permissions:
@@ -36873,7 +39694,7 @@ paths:
       summary: Get hourly usage for logs by index
       tags:
         - Usage Metering
-      x-menu-order: 9
+      x-menu-order: 6
       "x-permission":
         operator: OR
         permissions:
@@ -36990,7 +39811,7 @@ paths:
       summary: Get monthly usage attribution
       tags:
         - Usage Metering
-      x-menu-order: 3
+      x-menu-order: 2
       "x-permission":
         operator: OR
         permissions:
@@ -37052,7 +39873,7 @@ paths:
       summary: get hourly usage for network flows
       tags:
         - Usage Metering
-      x-menu-order: 22
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -37112,7 +39933,7 @@ paths:
       summary: Get hourly usage for network hosts
       tags:
         - Usage Metering
-      x-menu-order: 21
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -37174,7 +39995,7 @@ paths:
       summary: Get hourly usage for online archive
       tags:
         - Usage Metering
-      x-menu-order: 36
+      x-menu-order: 32
       "x-permission":
         operator: OR
         permissions:
@@ -37236,7 +40057,7 @@ paths:
       summary: Get hourly usage for profiled hosts
       tags:
         - Usage Metering
-      x-menu-order: 34
+      x-menu-order: 30
       "x-permission":
         operator: OR
         permissions:
@@ -37296,7 +40117,7 @@ paths:
       summary: Get hourly usage for RUM units
       tags:
         - Usage Metering
-      x-menu-order: 33
+      x-menu-order: 29
       "x-permission":
         operator: OR
         permissions:
@@ -37362,7 +40183,7 @@ paths:
       summary: Get hourly usage for RUM sessions
       tags:
         - Usage Metering
-      x-menu-order: 20
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -37425,7 +40246,7 @@ paths:
       summary: Get hourly usage for sensitive data scanner
       tags:
         - Usage Metering
-      x-menu-order: 32
+      x-menu-order: 28
       "x-permission":
         operator: OR
         permissions:
@@ -37487,7 +40308,7 @@ paths:
       summary: Get hourly usage for SNMP devices
       tags:
         - Usage Metering
-      x-menu-order: 24
+      x-menu-order: 21
       "x-permission":
         operator: OR
         permissions:
@@ -37562,7 +40383,7 @@ paths:
       summary: Get usage across your account
       tags:
         - Usage Metering
-      x-menu-order: 8
+      x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
@@ -37622,7 +40443,7 @@ paths:
       summary: Get hourly usage for synthetics checks
       tags:
         - Usage Metering
-      x-menu-order: 15
+      x-menu-order: 12
       "x-permission":
         operator: OR
         permissions:
@@ -37682,7 +40503,7 @@ paths:
       summary: Get hourly usage for synthetics API checks
       tags:
         - Usage Metering
-      x-menu-order: 16
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -37742,7 +40563,7 @@ paths:
       summary: Get hourly usage for synthetics browser checks
       tags:
         - Usage Metering
-      x-menu-order: 17
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -37802,7 +40623,7 @@ paths:
       summary: Get hourly usage for custom metrics
       tags:
         - Usage Metering
-      x-menu-order: 13
+      x-menu-order: 10
       "x-permission":
         operator: OR
         permissions:
@@ -37881,7 +40702,7 @@ paths:
       summary: Get all custom metrics by hourly average
       tags:
         - Usage Metering
-      x-menu-order: 7
+      x-menu-order: 4
       "x-permission":
         operator: OR
         permissions:
@@ -37928,6 +40749,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  email: test@datadoghq.com
+                  handle: test@datadoghq.com
+                  name: test user
             schema:
               $ref: "#/components/schemas/User"
         description: User object that needs to be created.
@@ -38068,6 +40895,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  disabled: false
+                  email: test@datadoghq.com
+                  name: test user
             schema:
               $ref: "#/components/schemas/User"
         description: Description of the update.
@@ -38174,6 +41007,13 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  - ddsource: nginx
+                    ddtags: "env:staging,version:5.1"
+                    hostname: i-012345678
+                    message: "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
+                    service: payment
               multi-json-messages:
                 description: Pass multiple log objects at once.
                 summary: Multi JSON Messages
@@ -38184,6 +41024,13 @@ paths:
               $ref: "#/components/schemas/HTTPLog"
           application/json;simple:
             examples:
+              default:
+                value:
+                  ddsource: nginx
+                  ddtags: "env:staging,version:5.1"
+                  hostname: i-012345678
+                  message: "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
+                  service: payment
               simple-json-message:
                 description: Log attributes can be passed as `key:value` pairs in valid JSON messages.
                 summary: Simple JSON Message
@@ -38196,6 +41043,8 @@ paths:
               $ref: "#/components/schemas/HTTPLogItem"
           application/logplex-1:
             examples:
+              default:
+                value: "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
               multi-raw-message:
                 description: Submit log messages.
                 summary: Multi Logplex Messages
@@ -38210,6 +41059,8 @@ paths:
               type: string
           text/plain:
             examples:
+              default:
+                value: "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
               multi-raw-message:
                 description: Submit log string.
                 summary: Multi Raw Messages
@@ -38313,7 +41164,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 14
   /v1/monitor/unmute_all:
     post:
       deprecated: true
@@ -38338,7 +41189,7 @@ paths:
       tags:
         - Monitors
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 13
 security:
   - apiKeyAuth: []
     appKeyAuth: []

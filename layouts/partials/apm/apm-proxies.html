@@ -3,47 +3,54 @@
   <div class="container cards-dd">
     <div class="row row-cols-2 row-cols-sm-3 g-3 justify-content-center">
       <div class="col">
-        <a class="card h-100" href="httpd">
+        <a class="card h-100" href="{{ .Page.Permalink }}httpd/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/apache.png" "class" "img-fluid" "alt" "httpd" "width" "400") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="envoy">
+        <a class="card h-100" href="{{ .Page.Permalink }}envoy/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/envoy.png" "class" "img-fluid" "alt" "envoy" "width" "400") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="istio">
+        <a class="card h-100" href="{{ .Page.Permalink }}istio/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/istio.png" "class" "img-fluid" "alt" "istio" "width" "400") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="kong">
+        <a class="card h-100" href="{{ .Page.Permalink }}kong/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/kong.png" "class" "img-fluid" "alt" "kong" "width" "400") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="nginx">
+        <a class="card h-100" href="{{ .Page.Permalink }}nginx/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/nginx.png" "class" "img-fluid" "alt" "nginx" "width" "400") }}
           </div>
         </a>
       </div>
       <div class="col">
-       <a class="card h-100" href="apigateway">
+       <a class="card h-100" href="{{ .Page.Permalink }}apigateway/">
          <div class="card-body text-center py-2 px-1">
            {{ partial "img.html" (dict "root" . "src" "integrations_logos/amazon_api_gateway.png" "class" "img-fluid" "alt" "apigateway" "width" "400") }}
          </div>
        </a>
      </div>
+      <div class="col">
+        <a class="card h-100" href="{{ .Page.Permalink }}azure_apim/">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/azure_api_management.png" "class" "img-fluid" "alt" "Azure API Management" "width" "400") }}
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </div>

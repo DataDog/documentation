@@ -1,4 +1,5 @@
 ---
+id: forwarder_agent
 core_product:
 - datadog agent
 title: 포워더 (Agent)

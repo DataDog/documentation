@@ -1,4 +1,5 @@
 ---
+id: trace_context_propagation
 core_product:
 - apm
 short_definition: La propagación del contexto de trazas (traces) es el método de pasar

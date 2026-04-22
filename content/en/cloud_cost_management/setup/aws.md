@@ -37,9 +37,9 @@ Navigate to [Setup & Configuration][7], add an AWS account and follow the steps 
 **Note**: Datadog recommends configuring a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**.
 
 If you send a Cost and Usage Report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
-- **Linked Account Access**
-- **Linked Account Refunds and Credits**
-- **Linked Account Discounts**
+- {{< ui >}}Linked Account Access{{< /ui >}}
+- {{< ui >}}Linked Account Refunds and Credits{{< /ui >}}
+- {{< ui >}}Linked Account Discounts{{< /ui >}}
 
 These settings ensure complete cost accuracy by allowing periodic cost calculations against the AWS Cost Explorer.
 
@@ -53,19 +53,19 @@ These settings ensure complete cost accuracy by allowing periodic cost calculati
 
 The CloudFormation stack can be configured in three ways depending on your existing AWS resources:
 
-* **New setup**: Select **Create Cost and Usage Report** to create both the report and its S3 bucket
-* **Existing bucket**: Select **Create Cost and Usage Report** and unselect **Create S3 Bucket** to use an existing S3 bucket
-* **Existing report**: Unselect **Create Cost and Usage Report** to import an existing Cost and Usage Report
+* **New setup**: Select {{< ui >}}Create Cost and Usage Report{{< /ui >}} to create both the report and its S3 bucket
+* **Existing bucket**: Select {{< ui >}}Create Cost and Usage Report{{< /ui >}} and unselect {{< ui >}}Create S3 Bucket{{< /ui >}} to use an existing S3 bucket
+* **Existing report**: Unselect {{< ui >}}Create Cost and Usage Report{{< /ui >}} to import an existing Cost and Usage Report
 
 ### Configure the Cost and Usage Report settings
 
 Enter the following details for your Cost and Usage Report:
 
-* **Bucket Name**: The S3 bucket name where the report files are stored.
-* **Bucket Region**: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
-* **Export Path Prefix**: The S3 path prefix where report files are stored.
+* {{< ui >}}Bucket Name{{< /ui >}}: The S3 bucket name where the report files are stored.
+* {{< ui >}}Bucket Region{{< /ui >}}: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
+* {{< ui >}}Export Path Prefix{{< /ui >}}: The S3 path prefix where report files are stored.
   * **Note:** The following prefix formats are not supported: empty, starting with `/` (such as `/` or `/cost`), or ending with `/` (such as `cost/`). Prefixes containing `/` in the middle are supported (such as `cost/hourly`).
-* **Export Name**: The name of your Cost and Usage Report.
+* {{< ui >}}Export Name{{< /ui >}}: The name of your Cost and Usage Report.
 
 **Note**:
 - These values either locate your existing Cost and Usage Report, or define the settings for newly created resources.
@@ -78,15 +78,15 @@ Enter the following details for your Cost and Usage Report:
 
 {{% tab "Terraform" %}}
 
-{{< img src="cloud_cost/setup/aws_terraform_setup.png" alt="CCM setup page with the Terraform selected, showing Step 1 expanded to configure Cost and Usage Report settings including bucket name, region, and export details" style="width:100%" >}}
+{{< img src="cloud_cost/setup/aws_terraform_setup.png" alt="CCM setup page with the Terraform option selected, showing Step 1 expanded to configure Cost and Usage Report settings including bucket name, region, and export details" style="width:100%" >}}
 
 ### Select the resources to create
 
 The Terraform configuration supports three setups depending on your existing AWS resources:
 
-* **New setup**: Select **Create Cost and Usage Report** to create both the report and its S3 bucket
-* **Existing bucket**: Select **Create Cost and Usage Report** and unselect **Create S3 Bucket** to use an existing S3 bucket
-* **Existing bucket and report**: Unselect **Create Cost and Usage Report** and **Create S3 Bucket** to use an existing report and S3 bucket
+* **New setup**: Select {{< ui >}}Create Cost and Usage Report{{< /ui >}} to create both the report and its S3 bucket
+* **Existing bucket**: Select {{< ui >}}Create Cost and Usage Report{{< /ui >}} and unselect {{< ui >}}Create S3 Bucket{{< /ui >}} to use an existing S3 bucket
+* **Existing bucket and report**: Unselect {{< ui >}}Create Cost and Usage Report{{< /ui >}} and {{< ui >}}Create S3 Bucket{{< /ui >}} to use an existing report and S3 bucket
 
 **Note**: If using an existing bucket, verify that AWS has permission to write CURs to it. If not, you may need to update your bucket's policy.
 
@@ -94,11 +94,11 @@ The Terraform configuration supports three setups depending on your existing AWS
 
 Enter the following details for your Cost and Usage Report:
 
-* **Bucket Name**: The S3 bucket name where the report files are stored.
-* **Bucket Region**: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
-* **Export Path Prefix**: The S3 path prefix where report files are stored.
+* {{< ui >}}Bucket Name{{< /ui >}}: The S3 bucket name where the report files are stored.
+* {{< ui >}}Bucket Region{{< /ui >}}: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
+* {{< ui >}}Export Path Prefix{{< /ui >}}: The S3 path prefix where report files are stored.
   * **Note:** The following prefix formats are not supported: empty, starting with `/` (such as `/` or `/cost`), or ending with `/` (such as `cost/`). Prefixes containing `/` in the middle are supported (such as `cost/hourly`).
-* **Export Name**: The name of your Cost and Usage Report.
+* {{< ui >}}Export Name{{< /ui >}}: The name of your Cost and Usage Report.
 
 **Note**:
 - These values either locate your existing Cost and Usage Report, or define the settings for newly created resources.
@@ -109,7 +109,7 @@ Enter the following details for your Cost and Usage Report:
 
 ### Copy generated Terraform HCL and apply changes
 
-In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform Configuration** step. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
+In the CCM Terraform setup UI, follow the instructions in the {{< ui >}}Apply Terraform Configuration{{< /ui >}} step. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
 
 {{% /tab %}}
 
@@ -119,34 +119,34 @@ In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform 
 
 ### Prerequisite: generate a Cost and Usage Report
 
-[Create a Legacy Cost and Usage Report][201] in AWS under the **Data Exports** section.
+[Create a Legacy Cost and Usage Report][201] in AWS under the {{< ui >}}Data Exports{{< /ui >}} section.
 
-Select the Export type **Legacy CUR export**.
+Select the Export type {{< ui >}}Legacy CUR export{{< /ui >}}.
 
 Select the following content options:
 
-* Export type: **Legacy CUR export**
-* **Include resource IDs**
-* **Split cost allocation data** (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][210] in Cost Explorer preferences).
-* **"Refresh automatically"**
+* Export type: {{< ui >}}Legacy CUR export{{< /ui >}}
+* {{< ui >}}Include resource IDs{{< /ui >}}
+* {{< ui >}}Split cost allocation data{{< /ui >}} (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][210] in Cost Explorer preferences).
+* {{< ui >}}Refresh automatically{{< /ui >}}
 
 Select the following delivery options:
 
-* Time granularity: **Hourly**
-* Report versioning: **Create new report version**
-* Compression type: **GZIP** or **Parquet**
+* Time granularity: {{< ui >}}Hourly{{< /ui >}}
+* Report versioning: {{< ui >}}Create new report version{{< /ui >}}
+* Compression type: {{< ui >}}GZIP{{< /ui >}} or {{< ui >}}Parquet{{< /ui >}}
 
 ### Locate the Cost and Usage Report
 
-If you have navigated away from the report that you created in the prerequisites section, follow AWS documentation to [view your Data Exports][204]. Select the legacy CUR export that you created, then select **Edit** to see the details of the export.
+If you have navigated away from the report that you created in the prerequisites section, follow AWS documentation to [view your Data Exports][204]. Select the legacy CUR export that you created, then select {{< ui >}}Edit{{< /ui >}} to see the details of the export.
 
 To enable Datadog to locate the Cost and Usage Report, complete the fields with their corresponding details:
 
-* **Bucket Name**: This is the name of the **S3 bucket** in the Data export storage settings section.
-* **Bucket Region**: This is the region your bucket is located. For example, `us-east-1`.
-* **Export Path Prefix**: This is the **S3 path prefix** in the Data export storage settings section.
+* {{< ui >}}Bucket Name{{< /ui >}}: This is the name of the S3 bucket in the Data export storage settings section.
+* {{< ui >}}Bucket Region{{< /ui >}}: This is the region your bucket is located. For example, `us-east-1`.
+* {{< ui >}}Export Path Prefix{{< /ui >}}: This is the S3 path prefix in the Data export storage settings section.
   * **Note:** The following prefix formats are not supported: empty, starting with `/` (such as `/` or `/cost`), or ending with `/` (such as `cost/`). Prefixes containing `/` in the middle are supported (such as `cost/hourly`).
-* **Export Name**: This is the **Export name** in the Export name section.
+* {{< ui >}}Export Name{{< /ui >}}: This is the Export name in the Export name section.
 
 **Note**: Datadog only supports legacy Cost and Usage Reports (CURs) generated by AWS. Do not modify or move the files generated by AWS, or attempt to provide access to files generated by a third party.
 
@@ -213,11 +213,11 @@ To enable Datadog to locate the Cost and Usage Report, complete the fields with 
 
 Attach the new S3 policy to the Datadog integration role.
 
-1. Navigate to **Roles** in the AWS IAM console.
+1. Navigate to {{< ui >}}Roles{{< /ui >}} in the AWS IAM console.
 2. Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.
-3. Click **Attach policies**.
+3. Click {{< ui >}}Attach policies{{< /ui >}}.
 4. Enter the name of the S3 bucket policy created above.
-5. Click **Attach policy**.
+5. Click {{< ui >}}Attach policy{{< /ui >}}.
 
 **Note**: It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 72 hours have passed and the data has still not yet populated, contact [Datadog Support][18].
 
@@ -240,11 +240,11 @@ Using Account Filtering requires an AWS management account. You can configure ac
 
 #### Configure account filters for an existing account
 
-Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][17], and then click **Manage Account** for the management account you want to filter.
+Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][17], and then click {{< ui >}}Manage Account{{< /ui >}} for the management account you want to filter.
 
 {{< img src="cloud_cost/account_filtering/manage_account.png" alt="Manage Account button on account card" style="width:100%;" >}}
 
-Click **Billing dataset** to access the Account Filtering UI.
+Click {{< ui >}}Billing dataset{{< /ui >}} to access the Account Filtering UI.
 
 {{< img src="cloud_cost/account_filtering/account_filtering.png" alt="Account Filtering UI to filter AWS member accounts" style="width:100%;" >}}
 

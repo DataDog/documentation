@@ -1,4 +1,5 @@
 ---
+id: new
 short_definition: NEW は、最近リリースされた、完全に開発され本番運用に適した製品または機能を示します。
 title: new
 ---

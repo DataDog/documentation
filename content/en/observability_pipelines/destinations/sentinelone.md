@@ -26,9 +26,7 @@ Set up the SentinelOne destination and its environment variables when you [set u
 1. Enter the identifier for your token. If you leave it blank, the [default](#set-secrets) is used.
 1. Select your SentinelOne logs environment in the dropdown menu.
 
-#### Optional settings
-
-##### Buffering options
+#### Optional buffering
 
 {{% observability_pipelines/destination_buffer %}}
 

@@ -68,12 +68,16 @@ Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must m
     - (For tags on logs [ingested via HTTP][28] only) at signs (@)
 
     All other characters (including, but not limited to, commas, emoji, back slashes, and spaces) are converted to underscores.
+    
+    **Notes**:
+    - A tag that starts with a digit may be accepted in some contexts, such as `env` tags set at the Agent level. However, tags that don't follow standard naming rules may not work consistently across all Datadog products and can increase tag cardinality. Start tags with a letter unless a specific product explicitly supports otherwise.
+    - The `DD_TAGS` environment variable uses whitespace as a separator between tags. Whitespace in `DD_TAGS` values is **not** converted to underscores. For example, `DD_TAGS="test:this is a test"` produces four separate tags: `test:this`, `is`, `a`, and `test`. To set a tag value that contains spaces, use a YAML configuration file or integration annotations, where whitespace is converted to underscores.
 
 - Tags can be **up to 200 characters** long. If the tag has the format `<key>:<value>`, the `<key>`, `:`, and `<value>` all count toward the character limit.
 - [Span tags][26] and metric tags are normalized to lowercase. Because of this, using `CamelCase` is not recommended. Authentication (crawler) based integrations also convert camel case tags to underscores before lowercasing, for example `TestTag` --> `test_tag`.
     - Separate from tags, [span attributes][27] and log attributes are case-sensitive, and are not normalized.
 - When using the format `<key>:<value>`, the key always precedes the first colon of the global tag definition. For example:
-
+    
     | Tag                | Key           | Value          |
     | ------------------ | ------------- | -------------- |
     | `env:staging:east` | `env`         | `staging:east` |

@@ -39,7 +39,7 @@ Set up the Google Cloud Storage destination and its environment variables when y
 
 #### Optional settings
 
-##### Prefix
+##### Prefix to apply to all key objects
 
 Enter a prefix that you want to apply to all key objects.
 
@@ -52,7 +52,7 @@ Enter a prefix that you want to apply to all key objects.
 1. Click **Add Header** to add metadata.
 1. Enter values for the header name and value.
 
-##### Buffering options
+##### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 

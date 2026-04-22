@@ -11,10 +11,10 @@ Use the SQS component to represent message queues from your Amazon Web Services 
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Rotate item**: Rotate the component and change its direction.
-- **Type**: Select the message queue type for the SQS instance.
-- **Req./month (M)**: Enter the number of requests sent per month, in millions.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Rotate item{{< /ui >}}: Rotate the component and change its direction.
+- {{< ui >}}Type{{< /ui >}}: Select the message queue type for the SQS instance.
+- {{< ui >}}Req./month (M){{< /ui >}}: Enter the number of requests sent per month, in millions.
 
 ## API
 

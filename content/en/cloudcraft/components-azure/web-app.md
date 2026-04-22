@@ -12,10 +12,10 @@ You can use the Web App component to represent and visualize web applications fr
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Platform**: Select the platform for your web application. Supported options are Windows and Linux.
-- **Tier**: Select the service level tier for your web application.
-- **Instance**: Select an instance type for your web application.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Platform{{< /ui >}}: Select the platform for your web application. Supported options are Windows and Linux.
+- {{< ui >}}Tier{{< /ui >}}: Select the service level tier for your web application.
+- {{< ui >}}Instance{{< /ui >}}: Select an instance type for your web application.
 
 ## API
 

@@ -1,4 +1,5 @@
 ---
+id: service
 core_product:
 - apm
 - monitorización serverless

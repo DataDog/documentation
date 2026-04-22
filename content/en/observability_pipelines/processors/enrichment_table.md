@@ -5,14 +5,13 @@ products:
 - name: Logs
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-servicenow-cmdb-enrichment"
+  tag: "Blog"
+  text: "Enrich logs with ServiceNow CMDB context before routing to any SIEM or logging tool"
 ---
 
 {{< product-availability >}}
-
-{{< callout url=https://www.datadoghq.com/product-preview/use-reference-tables-in-stream-with-op-to-control-costs/
- btn_hidden="false" header="Join the Preview!">}}
- The Enrichment Table processor using Reference Tables is in Preview. Use this form to request access.
-{{< /callout >}}
 
 ## Overview
 
@@ -181,11 +180,33 @@ To see buffer metrics for your Enrichment Table processor, add these tags to buf
 - `component_id=<processor_id>`
 - `buffer_id=enrichment_table_buffer`
 
-{{% observability_pipelines/metrics/buffer/processors %}}
+`pipelines.buffer_events`
+: **Description**: Number of events in the processor's buffer.
+: **Metric type**: gauge
+
+`pipelines.buffer_size_bytes`
+: **Description**: Number of bytes in the processor's buffer.
+: **Metric type**: gauge
+
+`pipelines.buffer_received_events_total`
+: **Description**: Events received by the processor's buffer.
+: **Metric type**: counter
+
+`pipelines.buffer_received_bytes_total`
+: **Description**: Bytes received by the processor's buffer.
+: **Metric type**: counter
+
+`pipelines.buffer_sent_events_total`
+: **Description**: Events sent downstream by the processor's buffer.
+: **Metric type**: counter
+
+`pipelines.buffer_sent_bytes_total`
+: **Description**: Bytes sent downstream by the processor's buffer.
+: **Metric type**: counter
 
 #### Reference Table metrics
 
-To see metrics about your Enrichment Table processor using a Reference Table, add the tags `component_type:enrichment_table` and `component_id=<processor_id>` to the metrics below. The tag `reference_table:<table_uuid>` can also be used to aggregate across all processors using the same Reference Table.
+To see metrics about your Enrichment Table processor using a Reference Table, add the tags `component_type:enrichment_table` and `component_id=<processor_id>` to the metrics below. The tag `reference_table_id:<table_uuid>` can also be used to aggregate across all processors using the same Reference Table.
 
 `pipelines.enrichment_rows_not_found_total`
 : This counter is incremented for each processed log that does not have a corresponding row in the table.
@@ -211,6 +232,10 @@ The metrics below are common to all processors consuming the same Reference Tabl
 
 `pipelines.reference_table_fetched_keys_total`
 : For each request sent to the Reference Tables API, this counter is incremented with the number of rows fetched in that request.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /reference_tables/?tab=cloudstorage
 [2]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
