@@ -79,7 +79,7 @@ The sections below list every metric under `aws.elb.*`: 68 to update, 9 to verif
 
 ### Metrics to update (Application Load Balancer)
 
-Today, these ALB metrics are reported under `aws.elb.*`. After the change, they are no longer reported in that namespace. Update your queries to the equivalent `aws.applicationelb.*` metric.
+These metrics always originate from Application Load Balancers and never from Classic Load Balancers. They are duplicates of metrics already reported under `aws.applicationelb.*`. Today they are reported under both namespaces. After the change, they are reported only under `aws.applicationelb.*`. Update your queries to use the equivalent `aws.applicationelb.*` metric.
 
 {{% collapse-content title="View all 68 metrics" level="h4" expanded=false %}}
 
