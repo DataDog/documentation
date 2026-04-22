@@ -6404,10 +6404,10 @@ menu:
       url: observability_pipelines/destinations/datadog_archives/
       parent: observability_pipelines_destinations
       weight: 406
-    - name: Datadog CloudPrem
-      url: observability_pipelines/destinations/cloudprem/
+    - name: Datadog BYOC Logs
+      url: observability_pipelines/destinations/datadog_byoc_logs/
       parent: observability_pipelines_destinations
-      identifier: observability_pipelines_datadog_cloudprem
+      identifier: observability_pipelines_datadog_byoc_logs
       weight: 407
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
