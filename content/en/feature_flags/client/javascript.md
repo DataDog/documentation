@@ -199,6 +199,50 @@ await OpenFeature.setContext({
 });
 {{< /code-block >}}
 
+## Testing
+
+Do not use `DatadogProvider` in unit tests: it requires network access to Datadog's Remote Configuration backend. Use OpenFeature's `InMemoryProvider` instead. It is exported directly from `@openfeature/web-sdk`, so no additional dependency is required.
+
+Unlike the server-side SDK, the Web SDK evaluates flags synchronously after initialization. Still `await` `setProviderAndWait` once in `beforeEach` to ensure the provider is ready.
+
+{{< code-block lang="javascript" >}}
+import { beforeEach, afterAll, expect, test } from 'vitest';
+import { OpenFeature, InMemoryProvider } from '@openfeature/web-sdk';
+
+const flags = {
+  new_checkout_button: {
+    variants: { on: true, off: false },
+    defaultVariant: 'on',
+    disabled: false,
+  },
+  ui_theme: {
+    variants: { dark: 'dark', light: 'light' },
+    defaultVariant: 'light',
+    disabled: false,
+  },
+};
+
+beforeEach(async () => {
+  await OpenFeature.setProviderAndWait(new InMemoryProvider(flags));
+});
+
+afterAll(async () => {
+  await OpenFeature.close();
+});
+
+test('new checkout button is enabled by default', () => {
+  const client = OpenFeature.getClient();
+  expect(client.getBooleanValue('new_checkout_button', false)).toBe(true);
+});
+
+test('missing flag returns default', () => {
+  const client = OpenFeature.getClient();
+  expect(client.getBooleanValue('does-not-exist', false)).toBe(false);
+});
+{{< /code-block >}}
+
+The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Missing any of these throws `VariantNotFoundError` during evaluation. The same test pattern works with Jest + jsdom; swap the `vitest` imports for `@jest/globals` and add `jest-environment-jsdom` to your project.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
