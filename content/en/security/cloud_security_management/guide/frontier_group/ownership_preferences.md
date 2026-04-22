@@ -21,7 +21,7 @@ With preferences you can:
 
 ## Quick start
 
-1. Create a CSV file following the format described below.
+1. Create a CSV file following the format described below. Optionally, use the [Ownership Agent AI skill][5] with your AI coding assistant to generate the CSV interactively.
 2. Upload it as a reference table named `k9_ownership_preferences`. See [How to upload](#how-to-upload).
 3. Preferences take effect within 24 hours.
 
@@ -402,3 +402,4 @@ prompt_text,,,,,,,,For container images the repository owner in GitHub is a reli
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [3]: /api/latest/reference-tables/
 [4]: /getting_started/site/
+[5]: https://github.com/datadog-labs/agent-skills/tree/main/dd-security/csm/ownership-agent
