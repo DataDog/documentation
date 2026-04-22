@@ -714,6 +714,15 @@ Assign a status to each recommendation to track cost optimization progress acros
 
 Use the status tabs at the top of the [{{< ui >}}Cloud Cost Recommendations{{< /ui >}}][1] page to filter the list by status. The available tabs are {{< ui >}}Open{{< /ui >}}, {{< ui >}}In Progress{{< /ui >}}, {{< ui >}}Completed{{< /ui >}}, and {{< ui >}}Dismissed{{< /ui >}}. Each tab displays the total estimated savings for recommendations in that status.
 
+### Track savings by status
+
+Each status tab displays the total estimated savings for recommendations in that status:
+
+- {{< ui >}}Open{{< /ui >}}: Potential savings from recommendations that have not been triaged.
+- {{< ui >}}In Progress{{< /ui >}}: Estimated savings from recommendations with work underway.
+- {{< ui >}}Completed{{< /ui >}}: Realized savings from recommendations where the recommended action has been taken.
+- {{< ui >}}Dismissed{{< /ui >}}: Estimated savings from recommendations that have been dismissed.
+
 ### Change a recommendation status
 
 You can change a recommendation status in two ways:
