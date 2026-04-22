@@ -1,133 +1,172 @@
-import { describe, it, expect } from 'vitest';
-import { render } from 'preact-render-to-string';
+// @vitest-environment happy-dom
+import { describe, it, expect, afterEach, vi } from 'vitest';
+import { render, cleanup, screen } from '@testing-library/preact';
+import userEvent from '@testing-library/user-event';
 import { h } from 'preact';
+import type { ComponentType } from 'preact';
 import { CodeBlock } from './CodeBlock';
 
-describe('CodeBlock component', () => {
-  it('renders with data-testid attribute', () => {
-    const html = render(h(CodeBlock, { content: 'const x = 1;' }));
+const CodeBlockComponent = CodeBlock as ComponentType<any>;
 
-    expect(html).toContain('data-testid="code-block"');
+afterEach(cleanup);
+
+const renderCodeBlock = (props: Partial<Parameters<typeof CodeBlock>[0]> = {}) =>
+  render(h(CodeBlockComponent, { content: 'const x = 1;', ...props }));
+
+describe('CodeBlock — static render', () => {
+  it('renders with data-testid attribute', () => {
+    renderCodeBlock();
+    expect(screen.getByTestId('code-block')).toBeTruthy();
   });
 
   it('sets data-language attribute when language is provided', () => {
-    const html = render(h(CodeBlock, { content: 'const x = 1;', language: 'javascript' }));
-
-    expect(html).toContain('data-language="javascript"');
+    renderCodeBlock({ language: 'javascript' });
+    expect(screen.getByTestId('code-block').getAttribute('data-language')).toBe('javascript');
   });
 
-  it('omits language label when no language specified', () => {
-    const html = render(h(CodeBlock, { content: 'plain text' }));
-
-    expect(html).not.toContain('data-language');
+  it('omits data-language attribute when no language specified', () => {
+    renderCodeBlock();
+    expect(screen.getByTestId('code-block').hasAttribute('data-language')).toBe(false);
   });
 
-  it('renders a copy button with text by default', () => {
-    const html = render(h(CodeBlock, { content: 'test' }));
-
-    expect(html).toContain('data-testid="code-block-copy"');
-    expect(html).toContain('Copy');
+  it('renders a copy button with default text by default', () => {
+    renderCodeBlock();
+    const copyButton = screen.getByTestId('code-block-copy');
+    expect(copyButton).toBeTruthy();
+    expect(copyButton.textContent).toBe('Copy');
   });
 
   it('renders highlighted HTML when highlightedCode is provided', () => {
     const highlighted = '<pre class="shiki"><code><span style="color:#D73A49">const</span> x = 1;</code></pre>';
-    const html = render(h(CodeBlock, { content: 'const x = 1;', highlightedCode: highlighted }));
-
-    expect(html).toContain('shiki');
-    expect(html).toContain('color:#D73A49');
+    const { container } = renderCodeBlock({ highlightedCode: highlighted });
+    expect(container.innerHTML).toContain('shiki');
+    expect(container.innerHTML).toContain('color:#D73A49');
   });
 
   it('falls back to plain pre/code when no highlightedCode', () => {
-    const html = render(h(CodeBlock, { content: 'plain text' }));
-
-    expect(html).toContain('<pre');
-    expect(html).toContain('<code');
-    expect(html).toContain('plain text');
+    const { container } = renderCodeBlock({ content: 'plain text' });
+    expect(container.querySelector('pre')).toBeTruthy();
+    expect(container.querySelector('code')).toBeTruthy();
+    expect(container.querySelector('code')?.textContent).toBe('plain text');
   });
-
-  it('always renders header even without language', () => {
-    const html = render(h(CodeBlock, { content: 'test' }));
-    const buttonCount = (html.match(/<button/g) || []).length;
-
-    expect(buttonCount).toBe(1);
-  });
-
-  // === Filename ===
 
   it('renders filename in header when provided', () => {
-    const html = render(h(CodeBlock, { content: 'code', filename: 'app.py' }));
-
-    expect(html).toContain('data-testid="code-block-filename"');
-    expect(html).toContain('app.py');
+    renderCodeBlock({ filename: 'app.py' });
+    const filename = screen.getByTestId('code-block-filename');
+    expect(filename).toBeTruthy();
+    expect(filename.textContent).toBe('app.py');
   });
 
   it('does not render filename element when not provided', () => {
-    const html = render(h(CodeBlock, { content: 'code', language: 'python' }));
-
-    expect(html).not.toContain('data-testid="code-block-filename"');
+    renderCodeBlock({ language: 'python' });
+    expect(screen.queryByTestId('code-block-filename')).toBeNull();
   });
 
   it('shows filename when both language and filename are provided', () => {
-    const html = render(h(CodeBlock, { content: 'code', language: 'python', filename: 'app.py' }));
-
-    expect(html).toContain('app.py');
-    expect(html).toContain('data-language="python"');
-    expect(html).toContain('data-testid="code-block-filename"');
+    renderCodeBlock({ language: 'python', filename: 'app.py' });
+    expect(screen.getByTestId('code-block').getAttribute('data-language')).toBe('python');
+    expect(screen.getByTestId('code-block-filename').textContent).toBe('app.py');
   });
-
-  // === Disable copy ===
 
   it('hides copy button when disableCopy is true', () => {
-    const html = render(h(CodeBlock, { content: 'code', disableCopy: true }));
-
-    expect(html).not.toContain('data-testid="code-block-copy"');
+    renderCodeBlock({ disableCopy: true });
+    expect(screen.queryByTestId('code-block-copy')).toBeNull();
+    expect(screen.getByTestId('code-block').hasAttribute('data-disable-copy')).toBe(true);
   });
 
-  it('adds data-disable-copy attribute when disableCopy is true', () => {
-    const html = render(h(CodeBlock, { content: 'code', disableCopy: true }));
+  it('renders toggle button when collapsible is true, content visible by default', () => {
+    renderCodeBlock({ collapsible: true });
+    const toggle = screen.getByTestId('code-block-toggle');
+    expect(toggle).toBeTruthy();
+    expect(toggle.getAttribute('aria-expanded')).toBe('true');
+    expect(screen.getByTestId('code-block').hasAttribute('data-collapsible')).toBe(true);
 
-    expect(html).toContain('data-disable-copy');
-  });
-
-  // === Collapsible ===
-
-  it('renders toggle button when collapsible is true', () => {
-    const html = render(h(CodeBlock, { content: 'code', collapsible: true }));
-
-    expect(html).toContain('data-testid="code-block-toggle"');
-    expect(html).toContain('aria-expanded="true"');
+    const content = screen.getByTestId('code-block-content');
+    expect(content.classList.contains('code-block__content--hidden')).toBe(false);
   });
 
   it('does not render toggle button by default', () => {
-    const html = render(h(CodeBlock, { content: 'code' }));
-
-    expect(html).not.toContain('data-testid="code-block-toggle"');
+    renderCodeBlock();
+    expect(screen.queryByTestId('code-block-toggle')).toBeNull();
   });
 
-  it('renders content visible by default when collapsible', () => {
-    const html = render(h(CodeBlock, { content: 'code', collapsible: true }));
-
-    expect(html).toContain('data-testid="code-block-content"');
-    expect(html).not.toContain('content--hidden');
+  it('applies data-wrap attribute and BEM wrap modifier when wrap is true', () => {
+    renderCodeBlock({ wrap: true });
+    const container = screen.getByTestId('code-block');
+    expect(container.hasAttribute('data-wrap')).toBe(true);
+    expect(container.classList.contains('code-block--wrap')).toBe(true);
   });
 
-  it('adds data-collapsible attribute when collapsible', () => {
-    const html = render(h(CodeBlock, { content: 'code', collapsible: true }));
+  it('does not add data-wrap or wrap modifier by default', () => {
+    renderCodeBlock();
+    const container = screen.getByTestId('code-block');
+    expect(container.hasAttribute('data-wrap')).toBe(false);
+    expect(container.classList.contains('code-block--wrap')).toBe(false);
+  });
+});
 
-    expect(html).toContain('data-collapsible');
+describe('CodeBlock — copy interactivity', () => {
+  it('clicking copy writes content to clipboard and updates button text', async () => {
+    const user = userEvent.setup();
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText },
+      configurable: true,
+      writable: true,
+    });
+
+    renderCodeBlock({ content: 'hello world' });
+
+    const copyButton = screen.getByTestId('code-block-copy');
+    expect(copyButton.textContent).toBe('Copy');
+
+    await user.click(copyButton);
+
+    expect(writeText).toHaveBeenCalledWith('hello world');
+    expect(screen.getByTestId('code-block-copy').textContent).toBe('Copied!');
+  });
+});
+
+describe('CodeBlock — collapsible interactivity', () => {
+  it('toggle button hides content and updates BEM modifier + aria when clicked', async () => {
+    const user = userEvent.setup();
+    renderCodeBlock({ collapsible: true });
+
+    const toggle = screen.getByTestId('code-block-toggle');
+    const content = screen.getByTestId('code-block-content');
+    const chevron = toggle.querySelector('.code-block__chevron') as HTMLElement;
+
+    // Initial state: expanded, chevron up, content not hidden
+    expect(toggle.getAttribute('aria-expanded')).toBe('true');
+    expect(toggle.getAttribute('aria-label')).toBe('Collapse code');
+    expect(content.classList.contains('code-block__content--hidden')).toBe(false);
+    expect(chevron.classList.contains('code-block__chevron--up')).toBe(true);
+    expect(chevron.classList.contains('code-block__chevron--down')).toBe(false);
+
+    await user.click(toggle);
+
+    // Collapsed: hidden class applied, aria flipped, chevron down
+    const toggleAfter = screen.getByTestId('code-block-toggle');
+    const contentAfter = screen.getByTestId('code-block-content');
+    const chevronAfter = toggleAfter.querySelector('.code-block__chevron') as HTMLElement;
+
+    expect(toggleAfter.getAttribute('aria-expanded')).toBe('false');
+    expect(toggleAfter.getAttribute('aria-label')).toBe('Expand code');
+    expect(contentAfter.classList.contains('code-block__content--hidden')).toBe(true);
+    expect(chevronAfter.classList.contains('code-block__chevron--down')).toBe(true);
+    expect(chevronAfter.classList.contains('code-block__chevron--up')).toBe(false);
   });
 
-  // === Wrap ===
+  it('clicking toggle a second time re-expands the content', async () => {
+    const user = userEvent.setup();
+    renderCodeBlock({ collapsible: true });
 
-  it('adds data-wrap attribute when wrap is true', () => {
-    const html = render(h(CodeBlock, { content: 'code', wrap: true }));
+    const toggle = screen.getByTestId('code-block-toggle');
+    await user.click(toggle);
+    await user.click(screen.getByTestId('code-block-toggle'));
 
-    expect(html).toContain('data-wrap');
-  });
-
-  it('does not add data-wrap attribute by default', () => {
-    const html = render(h(CodeBlock, { content: 'code' }));
-
-    expect(html).not.toContain('data-wrap');
+    const content = screen.getByTestId('code-block-content');
+    expect(content.classList.contains('code-block__content--hidden')).toBe(false);
+    expect(screen.getByTestId('code-block-toggle').getAttribute('aria-expanded')).toBe('true');
   });
 });

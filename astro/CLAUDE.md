@@ -73,7 +73,27 @@ Regardless of whether CSS modules or BEM is used for the CSS rules themselves, g
 
 ## Component design and testing
 
-Verify components both headlessly (by rendering it to an HTML string using the appropriate library) and in Chrome (using Playwright).
+Verify components both headlessly (in vitest) and in Chrome (using Playwright).
+
+### Headless tests (vitest)
+
+- **Non-interactive components** (`.astro`, or Preact components that are pure render): render to an HTML string with `preact-render-to-string` or equivalent and assert on the output. Runs in node env — fast.
+- **Interactive components** (Preact components with state, effects, or event handlers): render with `@testing-library/preact`, drive interactions with `@testing-library/user-event`, and assert on resulting DOM state. Every interactive component's headless test must cover:
+  1. **Interactivity** — simulate the key user interactions (click, type, keyboard navigation) and verify the DOM updates.
+  2. **Visibility** — assert the correct element becomes visible / hidden after interaction.
+  3. **BEM class state** — assert the correct BEM modifier classes (e.g. `tabs__button--active`) are applied after interaction. These classes are the stable DOM hook for identifying component state; CSS-module hashes are not.
+
+Opt a test file into the happy-dom environment with a docblock at the top:
+
+```ts
+// @vitest-environment happy-dom
+```
+
+Call `cleanup()` from `@testing-library/preact` in an `afterEach` to prevent DOM leakage between tests.
+
+### Browser tests (Playwright)
+
+Keep Playwright coverage focused on what happy-dom can't verify: cross-browser rendering, visual layout, overflow/resize behavior, and end-to-end integration across islands. Don't duplicate every interactivity assertion in both layers — pick the one the interaction actually depends on.
 
 ## Component documentation
 
@@ -83,11 +103,9 @@ The test page should include a table of all of the component's properties, and t
 
 ### Components not requiring client-side interactivity
 
-Use `.astro` components.
-
-Add tests that verify it both headlessly (by rendering it to HTML) and in Chrome (using Playwright).
+Use `.astro` components. Test per the "Non-interactive components" section above.
 
 ### Components requiring client-side interactivity
 
-Use Preact.
+Use Preact. Test per the "Interactive components" section above.
 
