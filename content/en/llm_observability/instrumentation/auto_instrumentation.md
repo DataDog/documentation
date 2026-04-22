@@ -945,10 +945,6 @@ For more specific control over library patching and the integration that starts 
 : A comma-separated list of modules to enable or disable patching for. Overrides the default patching behavior. Use the format `module:true,module:false`. Available in version 2.17.4+.<br>
 **Example**: `DD_PATCH_MODULES=openai:false,langchain:false`
 
-`DD_TRACE_<INTEGRATION>_ENABLED`
-: Set to `false` to disable tracing for a specific integration. Replace `<INTEGRATION>` with the uppercase integration name. Available in version 2.17.4+.<br>
-**Example**: `DD_TRACE_OPENAI_ENABLED=false`
-
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -956,14 +952,6 @@ For more specific control over library patching and the integration that starts 
 `DD_TRACE_DISABLED_PLUGINS`
 : A comma-separated string of integration names that are automatically disabled when the tracer is initialized.<br>
 **Example**: `DD_TRACE_DISABLED_PLUGINS=openai,http`
-
-`DD_TRACE_DISABLED_INSTRUMENTATIONS`
-: A comma-separated string of library names that are not patched when the tracer is initialized.<br>
-**Example**: `DD_TRACE_DISABLED_INSTRUMENTATIONS=openai,http`
-
-`DD_TRACE_<INTEGRATION>_ENABLED`
-: Set to `false` to disable tracing for a specific integration. Replace `<INTEGRATION>` with the uppercase integration name.<br>
-**Example**: `DD_TRACE_GOOGLE_GENAI_ENABLED=false` (the `google-genai` integration name becomes `GOOGLE_GENAI`)
 
 {{% /tab %}}
 {{< /tabs >}}
