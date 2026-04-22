@@ -129,7 +129,7 @@
   },
   "dashboard-secure-embed": {
     "name": "Dashboard Secure Embed",
-    "description": "Manage securely embedded Datadog dashboards. Secure embeds use HMAC-SHA256 signed sessions for authentication, enabling customers to embed dashboards in their own applications with server-side auth control. Unlike public dashboards (open URL) or invite dashboards (email-based access), secure embeds provide programmatic access control.\n**Requirements:** - Org setting: SharedDashboards > Embed sharing must be enabled. - AuthN: Datadog API key and application key. - Read operations require `dashboards_read` permission. - Write operations require `dashboards_embed_share` permission."
+    "description": "Manage securely embedded Datadog dashboards. Secure embeds use HMAC-SHA256 signed sessions\nfor authentication, enabling customers to embed dashboards in their own applications with\nserver-side auth control. Unlike public dashboards (open URL) or invite dashboards\n(email-based access), secure embeds provide programmatic access control.\n\n**Requirements:**\n- **Embed** sharing must be enabled under **Organization Settings** > **Public Sharing** > **Shared Dashboards**.\n- You need [an API key and an application key](https://docs.datadoghq.com/account_management/api-app-keys/) to interact with these endpoints."
   },
   "datasets": {
     "name": "Datasets",

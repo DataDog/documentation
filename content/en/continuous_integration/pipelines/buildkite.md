@@ -46,14 +46,14 @@ This table shows the mapping of concepts between Datadog CI Visibility and Build
 
 To set up the Datadog integration for [Buildkite][1]:
 
-1. Go to **Settings > Notification Services** in Buildkite and click the **Add** button next to **Datadog Pipeline Visibility**.
+1. Go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notification Services{{< /ui >}} in Buildkite and click the {{< ui >}}Add{{< /ui >}} button next to {{< ui >}}Datadog Pipeline Visibility{{< /ui >}}.
 2. Fill in the form with the following information:
-   * **Description**: A description to help identify the integration in the future, such as `Datadog CI Visibility integration`.
-   * **API key**: Your [Datadog API Key][2].
-   * **Datadog site**: `{{< region-param key="dd_site" code="true" >}}`
-   * **Pipelines**: Select all pipelines or the subset of pipelines you want to trace.
-   * **Branch filtering**: Leave empty to trace all branches or select the subset of branches you want to trace.
-3. Click **Add Datadog Pipeline Visibility Notification** to save the integration.
+   * {{< ui >}}Description{{< /ui >}}: A description to help identify the integration in the future, such as `Datadog CI Visibility integration`.
+   * {{< ui >}}API key{{< /ui >}}: Your [Datadog API Key][2].
+   * {{< ui >}}Datadog site{{< /ui >}}: `{{< region-param key="dd_site" code="true" >}}`
+   * {{< ui >}}Pipelines{{< /ui >}}: Select all pipelines or the subset of pipelines you want to trace.
+   * {{< ui >}}Branch filtering{{< /ui >}}: Leave empty to trace all branches or select the subset of branches you want to trace.
+3. Click {{< ui >}}Add Datadog Pipeline Visibility Notification{{< /ui >}} to save the integration.
 
 ## Advanced configuration
 
@@ -130,7 +130,7 @@ You can also apply these filters using the facet panel on the left hand side of 
 
 The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines finish.
 
-The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][16].
+The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][16].
 
 ## Further reading
 

@@ -80,7 +80,7 @@ When creating a [dashboard][8] or a [notebook][9], you can use CI pipeline data 
 
 ## Alert on pipeline data
 
-You can export your search query to a [CI Pipeline monitor][12] on the [**Executions** page][6] or the [**Test Runs** page][13] by clicking the **Export** button.
+You can export your search query to a [CI Pipeline monitor][12] on the [{{< ui >}}Executions{{< /ui >}} page][6] or the [{{< ui >}}Test Runs{{< /ui >}} page][13] by clicking the {{< ui >}}Export{{< /ui >}} button.
 
 ## Further reading
 
