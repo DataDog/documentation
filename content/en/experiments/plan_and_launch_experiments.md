@@ -135,7 +135,7 @@ To gradually ramp up experiment traffic instead of launching to all users at onc
 
 1. In the **Randomization** section, click **Add Rollout Steps** and select a preset step configuration from the dropdown (for example, 3 steps from 5% to 100%).
 1. Adjust the **Traffic exposure** percentage for each step as needed.
-1. Set the hold duration between steps using the **Scheduled rollout by holding between steps for** dropdowns.
+1. Next to **Scheduled rollout by holding between steps for**, use the two dropdowns to select a number and a time unit (for example, **1** and **days**). This sets how long each step runs before advancing.
 
 At each rollout step, Datadog samples a percentage of eligible users to include in the experiment. Users outside the sample still see the default (control) experience, but Datadog does not include them in experiment results.
 
@@ -158,7 +158,7 @@ To modify the statistical analysis plan:
    - If you select **Bayesian**, choose a **Standard Deviation of Prior** from the dropdown. The default is **Medium (5.00%)**.
 1. Select a percentage from the **Confidence level** dropdown. The default is **95%**.
 1. To disable CUPED, toggle off **CUPED calculation**. CUPED is enabled by default and uses pre-experiment data from each subject to reduce the variance of the metrics and improve experiment sensitivity.
-1. To correct for multiple metric comparisons, toggle on **Multiple testing correction**. This setting adjusts for the increased risk of false positives across multiple metric comparisons, producing more conservative results.
+1. To reduce the risk of false positives, toggle on **Multiple testing correction**. This setting adjusts for the increased risk across multiple metric comparisons, producing more conservative results.
    - This setting is not available when you use the **Bayesian** method.
 1. Click **Reset to Default** to restore the default settings. If your organization has configured a company default, Datadog restores those settings instead.
 
@@ -187,9 +187,9 @@ To launch your experiment:
    - If multiple experiments share the same flag, use the up and down arrows on each targeting rule to reorder them.
 1. Click **Start Experiment & Enable Flag** to launch the experiment.
 
-Launching the experiment opens the **Flag & Exposures** page. Do a quick check that your configuration is live:
-- The **Exposure balance check** lists your variants with the expected split percentages you configured.
-- Click **View Exposures Log** to start monitoring real-time user enrollment.
+Launching the experiment opens the **Flag & Exposures** page. Verify your configuration is live:
+- Review the **Exposure balance check** to confirm your variants are split at the percentages you configured.
+- Click **View Exposures Log** to monitor real-time user enrollment.
 
 See [Reading Experiment Results][5] to review your data.
 
