@@ -2464,6 +2464,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - ListOrgs
         unstable: []
@@ -5523,6 +5524,18 @@ menu:
           - ListUserOrganizations
         unstable: []
         order: 6
+    - name: Delete a pending user's invitations
+      url: '#delete-a-pending-users-invitations'
+      identifier: users-delete-a-pending-users-invitations
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserInvitations
+        unstable: []
+        order: 10
     - name: Get a user invitation
       url: '#get-a-user-invitation'
       identifier: users-get-a-user-invitation
