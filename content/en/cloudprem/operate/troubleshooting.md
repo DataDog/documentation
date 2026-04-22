@@ -6,6 +6,9 @@ further_reading:
 - link: "/cloudprem/architecture/"
   tag: "Documentation"
   text: "CloudPrem Architecture"
+- link: "/observability_pipelines/scaling_and_performance/"
+  tag: "Documentation"
+  text: "Observability Pipelines Scaling and Performance"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
@@ -175,22 +178,9 @@ gcloud iam service-accounts add-iam-policy-binding \
 - **Disk full:** Check `disk.available_space.gauge`. If the write-ahead log (WAL) fills up, indexers stop accepting new data. Increase persistent volume size or add more indexer pods.
 - **Rate limiting:** On initial deployment or after a restart, you may see `429 Too Many Requests` errors. This is typically transient while the cluster stabilizes. If it persists, check that your indexer count matches your ingestion volume.
 
-### OP Worker backpressure
+### Observability Pipelines Worker
 
-**Symptom:** OP Worker logs show buffer full errors or dropped events. The `component_sent_event_bytes_total` metric shows drops.
-
-**Solution:**
-- Verify that the OP Worker HPA (Horizontal Pod Autoscaler) is configured. The default of 2 replicas is often insufficient for production volumes.
-- Remove CPU limits on OP Worker pods to avoid CFS throttling during traffic spikes. Keep CPU requests for scheduling.
-
-### Monitoring log loss at the collector level
-
-To detect log loss before it reaches CloudPrem, monitor these Datadog Agent metrics:
-
-- **`datadog.logs_client_http_destination.payloads_dropped`**: Number of log payloads dropped by the Agent when the destination is unreachable or returning errors. This is the primary metric to watch for data loss.
-- **`datadog.logs.bytes_missed`**: Number of bytes from logs that could not be tailed after a file rotation (before the Agent finished reading the file).
-
-Configure the Datadog Agent to report these metrics, and set up alerts to detect log loss early.
+For troubleshooting OP Worker backpressure and log loss at the collector level, see [Scaling and Performance][2].
 
 ## Search performance
 
@@ -208,3 +198,4 @@ Configure the Datadog Agent to report these metrics, and set up alerts to detect
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
+[2]: /observability_pipelines/scaling_and_performance/
