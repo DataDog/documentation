@@ -36,19 +36,9 @@ The `security` toolset is not enabled by default. You can enable it by adding a 
 
 <div class="alert alert-warning">Without <code>?toolsets=security</code> in the URL, the security tools are not available to your AI client — even if the MCP Server is otherwise connected and working.</div>
 
-## Use cases
-
-You can use the `security` toolset to:
-
-- **Triage security signals**: Ask your AI agent to surface recent high-severity Cloud SIEM signals, App & API Protection alerts, or Workload Protection threats, and get a summary of patterns and affected resources.
-- **Analyze your security posture**: Query findings across Cloud Security with SQL to understand the distribution of misconfigurations, vulnerabilities, and identity risks across your environment.
-- **Investigate specific findings**: Retrieve full details for a set of findings to understand scope, affected resources, and remediation context.
-- **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
-- **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
-
 ## Available tools
 
-The `security` toolset exposes the following tools to your AI client. For general information on how to use MCP tools, see the [Datadog MCP Server Overview][1].
+The `security` toolset exposes the following tools to your AI client. Each tool performs a specific action on your security data, such as searching for signals or analyzing findings. When you ask a question in natural language, your AI client calls these tools on your behalf to retrieve the information it needs. For general information on how to use MCP tools, see the [Datadog MCP Server Overview][1].
 
 `search_datadog_security_signals`
 : Searches and retrieves security signals from Datadog, including Cloud SIEM signals, App & API Protection signals, and Workload Protection signals. Use this to surface and investigate suspicious activity.
@@ -65,6 +55,16 @@ The `security` toolset exposes the following tools to your AI client. For genera
 `search_security_findings`
 : Retrieves full security finding objects. Use this when you need complete finding details or when SQL-based analysis is not sufficient. Prefer `analyze_security_findings` for most analysis tasks.
 : *Permissions required: `Security Monitoring Findings Read`*
+
+## Use cases
+
+You can use the `security` toolset to:
+
+- **Triage security signals**: Ask your AI agent to surface recent high-severity Cloud SIEM signals, App & API Protection alerts, or Workload Protection threats, and get a summary of patterns and affected resources.
+- **Analyze your security posture**: Query findings across Cloud Security with SQL to understand the distribution of misconfigurations, vulnerabilities, and identity risks across your environment.
+- **Investigate specific findings**: Retrieve full details for a set of findings to understand scope, affected resources, and remediation context.
+- **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
+- **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
 
 ## Further reading
 
