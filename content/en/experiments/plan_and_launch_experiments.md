@@ -60,10 +60,10 @@ After creating your experiment, define the metrics, feature flag, and randomizat
 To define the metrics that measure the outcome of your experiment:
 
 1. Use the **Calculate metrics by** dropdown to select the subject type (default is **User (@usr.id)**).
-   - To define a custom subject type, click **Create subject type** from the dropdown.
+   - To define a custom subject type, select **Create subject type** from the dropdown.
 1. Click the **Primary metric** button to open the picker:
    1. Select a primary metric for the outcome you want to measure.
-   1. (Optional) Scope the list to **Certified** or **Non-certified** metrics.
+   1. (Optional) Click the **Certified** or **Non-certified** tab to filter the list.
    1. (Optional) Click **Create Metric** to define a new metric. For setup instructions, see [Create Experiment Metrics][2].
 1. (Optional) Click the **Secondary metrics** button to add guardrail metrics, which monitor unintended effects of the experiment on other areas such as performance, engagement, or revenue.
 1. Proceed to [Run a sample size calculation (optional)](#run-a-sample-size-calculation-optional) or skip to [Add a feature flag](#add-a-feature-flag).
@@ -74,7 +74,7 @@ To define the metrics that measure the outcome of your experiment:
 
 The sample size calculator estimates the number of users and the duration needed to detect a meaningful effect. You choose an entry point, the event that assigns users to the experiment, and Datadog uses the volume of traffic to that event to produce the estimate.
 
-To estimate the sample size and duration needed to detect a meaningful effect:
+To run the calculation:
 
 1. In the **Run a sample size calculation (optional)** section, click the **sample size calculator** link to open the side panel.
 1. Expand **Calculation details**. Your primary and secondary metrics appear under **Metrics**.
@@ -114,12 +114,12 @@ After you select a feature flag, Datadog pre-populates the randomization setting
 To configure randomization:
 
 1. Select the **Environment** for your experiment from the dropdown. The default is **prod**.
-1. Under **Targeting rules**, configure a filter to target users based on custom attributes (for example, user role or subscription tier) that you set on your [SDK's evaluation context][10]:
+1. Under **Targeting rules**, configure a filter to target users based on custom attributes (for example, user role or subscription tier) that you set in your [evaluation context][10]:
    1. Click **Add Filter**. For the `IF` row, enter an attribute and value, and select an operator from the dropdown. The default is **is one of**.
    1. (Optional) Refine your targeting rule:
       - To add an `AND` row within the same filter, click **Add Condition**.
       - To add another filter joined by `OR`, click **Add Filter**.
-1. Under **Variants**, use the **Randomize users and split traffic** dropdown to choose **Equally (recommended)** or **Custom**. This sets how Datadog splits traffic between your experiment groups. Each user sees only their assigned variant throughout the experiment.
+1. Under **Variants**, use the **Randomize users and split traffic** dropdown to choose **Equally (recommended)** or **Custom**. This sets how Datadog splits traffic between your variants. Each user sees only their assigned variant throughout the experiment.
    - If you select **Custom**, enter a percentage for each variant. Percentages must sum to 100%.
 1. Under **Traffic exposure**, set the percentage of users matching your targeting rules to include in the experiment.
 1. (Optional) [Schedule a staged rollout](#schedule-a-staged-rollout), [configure additional settings](#additional-configs), or both.
@@ -157,15 +157,14 @@ To modify the statistical analysis plan:
 1. Select a method from the **Confidence interval method** dropdown. The default is **Sequential**.
    - If you select **Bayesian**, choose a **Standard Deviation of Prior** from the dropdown. The default is **Medium (5.00%)**.
 1. Select a percentage from the **Confidence level** dropdown. The default is **95%**.
-1. **CUPED calculation** is enabled by default. CUPED uses pre-experiment data from each subject to reduce the variance of the metrics and improve experiment sensitivity.
-   - To turn this setting off, toggle off **CUPED calculation**.
-1. Toggle on **Multiple testing correction**. This setting adjusts for the increased risk of false positives across multiple metric comparisons, producing more conservative results.
+1. To disable CUPED, toggle off **CUPED calculation**. CUPED is enabled by default and uses pre-experiment data from each subject to reduce the variance of the metrics and improve experiment sensitivity.
+1. To correct for multiple metric comparisons, toggle on **Multiple testing correction**. This setting adjusts for the increased risk of false positives across multiple metric comparisons, producing more conservative results.
    - This setting is not available when you use the **Bayesian** method.
-1. Click **Reset to Default** to restore the Datadog default, or your company default if your organization has one configured.
+1. Click **Reset to Default** to restore the default settings. If your organization has configured a company default, Datadog restores those settings instead.
 
 ##### Add split-by exploration dimensions
 
-Segment your experiment results by properties (also called attributes) from your [SDK evaluation context][10].
+Segment your experiment results by properties (also called attributes) from your [evaluation context][10].
 
 To configure split-by dimensions:
 
@@ -188,11 +187,11 @@ To launch your experiment:
    - If multiple experiments share the same flag, use the up and down arrows on each targeting rule to reorder them.
 1. Click **Start Experiment & Enable Flag** to launch the experiment.
 
-Launching the experiment opens the **Flag & Exposures** page. Verify that the experiment is running correctly:
-- Review the **Exposure balance check** to confirm that Datadog splits users across variants to your configured percentages.
-- Click **View Exposures Log** to see a real-time list of users enrolling in your experiment.
+Launching the experiment opens the **Flag & Exposures** page. Do a quick check that your configuration is live:
+- The **Exposure balance check** lists your variants with the expected split percentages you configured.
+- Click **View Exposures Log** to start monitoring real-time user enrollment.
 
-After launching your experiment, see [Reading Experiment Results][5] to review your data.
+See [Reading Experiment Results][5] to review your data.
 
 ## Further reading
 
