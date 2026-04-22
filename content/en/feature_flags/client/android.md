@@ -431,6 +431,73 @@ This table highlights key differences between the OpenFeature and `FlagsClient` 
 | **Vendor Lock-in** | Low (vendor-neutral) | Higher (Datadog-specific) |
 | **State Management** | Flow-based observation | Manual listener registration |
 
+## Testing
+
+Do not use the Datadog provider in unit tests: it requires network access to Datadog's Remote Configuration backend. The upstream OpenFeature Kotlin SDK does not ship an `InMemoryProvider`, so tests use a small custom `FeatureProvider` instead. The example below replaces `OpenFeatureAPI`'s provider — if your production code uses the Datadog `FlagsClient` wrapper directly, your test should assert through the same `OpenFeatureAPI` client the wrapper uses, not `FlagsClient`.
+
+Add `kotlinx-coroutines-test` to your test configuration (the SDK's `initialize` is a `suspend` function):
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+dependencies {
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1'
+}
+{{< /code-block >}}
+
+{{< code-block lang="kotlin" >}}
+import dev.openfeature.kotlin.sdk.*
+import dev.openfeature.kotlin.sdk.events.OpenFeatureProviderEvents
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.test.runTest
+import org.junit.Before
+import org.junit.Test
+import kotlin.test.assertTrue
+
+class FakeProvider(private val flags: Map<String, Any>) : FeatureProvider {
+    override val hooks = emptyList<Hook<*>>()
+    override val metadata = object : ProviderMetadata { override val name = "fake" }
+    private val events = MutableSharedFlow<OpenFeatureProviderEvents>(replay = 1)
+
+    override suspend fun initialize(initialContext: EvaluationContext?) {
+        events.emit(OpenFeatureProviderEvents.ProviderReady())
+    }
+    override fun shutdown() {}
+    override suspend fun onContextSet(old: EvaluationContext?, new: EvaluationContext) {}
+
+    override fun getBooleanEvaluation(key: String, defaultValue: Boolean, context: EvaluationContext?) =
+        ProviderEvaluation(value = (flags[key] as? Boolean) ?: defaultValue)
+    override fun getStringEvaluation(key: String, defaultValue: String, context: EvaluationContext?) =
+        ProviderEvaluation(value = (flags[key] as? String) ?: defaultValue)
+    override fun getIntegerEvaluation(key: String, defaultValue: Int, context: EvaluationContext?) =
+        ProviderEvaluation(value = (flags[key] as? Int) ?: defaultValue)
+    override fun getDoubleEvaluation(key: String, defaultValue: Double, context: EvaluationContext?) =
+        ProviderEvaluation(value = (flags[key] as? Double) ?: defaultValue)
+    override fun getObjectEvaluation(key: String, defaultValue: Value, context: EvaluationContext?) =
+        ProviderEvaluation(value = (flags[key] as? Value) ?: defaultValue)
+
+    override fun observe(): Flow<OpenFeatureProviderEvents> = events
+}
+
+class CheckoutFlagsTest {
+    private lateinit var client: Client
+
+    @Before
+    fun setUp() = runTest {
+        OpenFeatureAPI.setProviderAndWait(
+            FakeProvider(mapOf("new-checkout-flow" to true))
+        )
+        client = OpenFeatureAPI.getClient()
+    }
+
+    @Test
+    fun newCheckoutEnabled() {
+        assertTrue(client.getBooleanValue("new-checkout-flow", false))
+    }
+}
+{{< /code-block >}}
+
+`OpenFeatureAPI` is a process-wide singleton, so reset it between test classes if tests share a JVM. Wrap `setProviderAndWait` in `runTest { ... }` — it cannot be called from a plain `@Before` method because it is `suspend`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
