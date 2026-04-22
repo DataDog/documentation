@@ -39,7 +39,6 @@ All Datadog APIs have a usage limit for a given period of time. APIs can have un
 {{% site-region region="us5" %}}[Datadog API Rate Limit Usage Dashboard](https://us5.datadoghq.com/dash/integration/1421/datadog-api-rate-limit-usage){{% /site-region %}}
 {{% site-region region="ap1" %}}[Datadog API Rate Limit Usage Dashboard](https://ap1.datadoghq.com/dash/integration/2698/datadog-api-rate-limit-usage){{% /site-region %}}
 {{% site-region region="gov" %}}[Datadog API Rate Limit Usage Dashboard](https://app.ddog-gov.com/dash/integration/1330/datadog-api-rate-limit-usage){{% /site-region %}}
-{{% site-region region="gov2" %}}[Datadog API Rate Limit Usage Dashboard](https://us2.ddog-gov.com/dash/integration/TODO/datadog-api-rate-limit-usage){{% /site-region %}}
 
 #### Available metrics
 
