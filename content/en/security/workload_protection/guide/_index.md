@@ -1,6 +1,11 @@
 ---
 title: Workload Protection Guides
 disable_toc: true
+further_reading:
+- link: "https://learn.datadoghq.com/courses/workload-protection-enable-manage"
+  tag: "Learning Center"
+  text: "Enable and Manage Workload Protection"
+
 ---
 
 

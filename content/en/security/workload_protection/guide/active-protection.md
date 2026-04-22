@@ -7,6 +7,10 @@ further_reading:
 - link: "security/workload_protection/workload_security_rules"
   tag: "Documentation"
   text: "Workload Protection Detection Rules"
+- link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
+  tag: "Learning Center"
+  text: "Detect Host and Container Compromises with Workload Protection"
+
 ---
 
 <div class="alert alert-danger">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>

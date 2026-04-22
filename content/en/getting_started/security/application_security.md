@@ -17,6 +17,10 @@ further_reading:
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
+- link: "https://learn.datadoghq.com/courses/app-protection-block-attacks"
+  tag: "Learning Center"
+  text: "Block Application Attacks with Application & API Protection"
+
 ---
 
 ## Overview

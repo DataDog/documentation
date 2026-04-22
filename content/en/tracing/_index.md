@@ -39,6 +39,9 @@ further_reading:
     tag: "Blog"
     text: "Analyzing round trip query latency"
 
+  - link: "https://learn.datadoghq.com/courses/apm-getting-started"
+    tag: "Learning Center"
+    text: "Getting Started with APM Metrics and Traces"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology

@@ -16,6 +16,10 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Guide"
   text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://learn.datadoghq.com/courses/send-aws-logs"
+  tag: "Learning Center"
+  text: "Send AWS Logs"
+
 ---
 
 ## Overview

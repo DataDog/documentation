@@ -5,6 +5,10 @@ further_reading:
     - link: 'getting_started/tagging/unified_service_tagging/'
       tag: "Documentation"
       text: 'Learn about Unified Service Tagging and reserved tags'
+    - link: "https://learn.datadoghq.com/courses/apm-getting-started"
+      tag: "Learning Center"
+      text: "Getting Started with APM Metrics and Traces"
+
 ---
 
 {{< img src="tracing/apm_lifecycle/stats_pipeline2.png" style="width:75%; background:none; border:none; box-shadow:none;" alt="Service stats Pipeline" >}}

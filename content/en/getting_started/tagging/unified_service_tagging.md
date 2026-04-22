@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
+- link: "https://learn.datadoghq.com/courses/getting-started-usm-01"
+  tag: "Learning Center"
+  text: "Getting Started with Universal Service Monitoring (USM)"
 algolia:
   tags: ['unified service tags','unified','unified service','service tags']
 ---

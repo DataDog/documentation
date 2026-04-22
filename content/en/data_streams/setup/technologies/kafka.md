@@ -1,5 +1,10 @@
 ---
 title: Data Streams Monitoring for Kafka
+further_reading:
+- link: "https://learn.datadoghq.com/courses/monitor-a-kafka-pipeline-with-dsm"
+  tag: "Learning Center"
+  text: "Monitor a Kafka Pipeline with Data Streams Monitoring"
+
 ---
 
 ### Prerequisites

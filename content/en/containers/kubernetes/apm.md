@@ -19,6 +19,10 @@ further_reading:
 - link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
+- link: "https://learn.datadoghq.com/courses/configuring-ssi-k8s"
+  tag: "Learning Center"
+  text: "Configuring Single Step Instrumentation on Kubernetes"
+
 ---
 
 {{< learning-center-callout header="Try Introduction to Monitoring Kubernetes in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes">}}

@@ -3,6 +3,11 @@ title: Getting Started with Code Security
 description: Secure applications with SAST, SCA, and IAST tools to detect vulnerabilities in first-party code and open source libraries.
 aliases:
 - /getting_started/code_analysis/
+further_reading:
+- link: "https://learn.datadoghq.com/courses/code-security-SAST"
+  tag: "Learning Center"
+  text: "Write secure code with Datadog Code Security"
+
 ---
 
 ## Overview

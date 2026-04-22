@@ -16,6 +16,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
   tag: "Blog"
   text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
+- link: "https://learn.datadoghq.com/courses/monitoring-k8s-cluster-agent"
+  tag: "Learning Center"
+  text: "Monitoring a Kubernetes Cluster: Installing the Agent"
+
 ---
 
 ## Overview

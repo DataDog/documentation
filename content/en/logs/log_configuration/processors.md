@@ -16,6 +16,12 @@ further_reading:
 - link: "https://www.youtube.com/watch?v=OztSU3JzfC8&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=4&t=245s"
   tag: "Video"
   text: "Tips and tricks: Add business data to logs from retail endpoints"
+- link: "https://learn.datadoghq.com/courses/log-pipelines"
+  tag: "Learning Center"
+  text: "Build and Manage Log Pipelines"
+- link: "https://learn.datadoghq.com/courses/integration-pipelines"
+  tag: "Learning Center"
+  text: "Process Logs Out of the Box with Integration Pipelines"
 algolia:
   tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---

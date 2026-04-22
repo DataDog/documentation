@@ -16,6 +16,9 @@ further_reading:
 - link: "/internal_developer_portal/use_cases"
   tag: "Documentation"
   text: "Learn about Software Catalog Use Cases"
+- link: "https://learn.datadoghq.com/courses/managing-software-catalog"
+  tag: "Learning Center"
+  text: "Managing Services with the Software Catalog"
 algolia:
   tags: ['software catalog']
 ---

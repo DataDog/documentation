@@ -13,6 +13,10 @@ further_reading:
     - link: '/logs/explorer/export'
       tag: 'Documentation'
       text: 'Export views from the Log Explorer'
+    - link: "https://learn.datadoghq.com/courses/log-queries-aggregations"
+      tag: "Learning Center"
+      text: "Dive Deeper into Log Queries and Aggregations"
+
 ---
 
 ## Overview

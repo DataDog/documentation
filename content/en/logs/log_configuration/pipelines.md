@@ -34,6 +34,10 @@ further_reading:
 - link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
   tag: Blog
   text: "How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system"
+- link: "https://learn.datadoghq.com/courses/log-pipelines"
+  tag: "Learning Center"
+  text: "Build and Manage Log Pipelines"
+
 ---
 
 ## Overview

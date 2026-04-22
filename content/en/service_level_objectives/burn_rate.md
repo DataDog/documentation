@@ -8,6 +8,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/"
   tag: "Blog"
   text: "Burn rate is a better error rate"
+- link: "https://learn.datadoghq.com/courses/understanding-slos"
+  tag: "Learning Center"
+  text: "Understanding Service Level Objectives (SLOs)"
+
 ---
 {{< jqmath-vanilla >}}
 

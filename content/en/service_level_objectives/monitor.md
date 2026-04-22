@@ -14,6 +14,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-synthetic-monitoring/"
   tag: "Blog"
   text: "Improve SLO accuracy and performance with Datadog Synthetic Monitoring"
+- link: "https://learn.datadoghq.com/courses/intro-to-slo"
+  tag: "Learning Center"
+  text: "Introduction to Service Level Objectives"
+
 ---
 
 ## Overview

@@ -32,6 +32,10 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/how-datadog-manages-incidents/'
       tag: 'Blog'
       text: 'How we manage incidents at Datadog'
+    - link: "https://learn.datadoghq.com/courses/getting-started-incident-management"
+      tag: "Learning Center"
+      text: "Getting Started with Incident Management"
+
 ---
 
 ## Overview

@@ -5,6 +5,10 @@ further_reading:
 - link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"
   tag: "Documentation"
   text: "Set up pipelines"
+- link: "https://learn.datadoghq.com/courses/getting-started-observability-pipelines"
+  tag: "Learning Center"
+  text: "Getting Started with Observability Pipelines"
+
 ---
 
 ## Overview

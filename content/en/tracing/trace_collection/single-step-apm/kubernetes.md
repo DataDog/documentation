@@ -15,6 +15,10 @@ further_reading:
   - link: /tracing/guide/local_sdk_injection
     tag: Documentation
     text: Instrument your applications using local SDK injection
+  - link: "https://learn.datadoghq.com/courses/configuring-ssi-k8s"
+    tag: "Learning Center"
+    text: "Configuring Single Step Instrumentation on Kubernetes"
+
 ---
 
 ## Overview

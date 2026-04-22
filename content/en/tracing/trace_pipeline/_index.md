@@ -5,6 +5,11 @@ aliases:
     - /tracing/trace_ingestion/
     - /tracing/trace_retention_and_ingestion/
 description: "Learn how to control span ingestion"
+further_reading:
+- link: "https://learn.datadoghq.com/courses/apm-custom-tagging"
+  tag: "Learning Center"
+  text: "Create Custom Spans and Span Tags with APM"
+
 ---
 
 {{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Pipeline" >}}

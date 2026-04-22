@@ -29,6 +29,10 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
       tag: 'Blog'
       text: 'Monitor your Graviton3-powered EC2 instances with Datadog'
+    - link: "https://learn.datadoghq.com/courses/introduction-to-monitoring-aws"
+      tag: "Learning Center"
+      text: "Introduction to Monitoring AWS"
+
 ---
 
 ## Overview

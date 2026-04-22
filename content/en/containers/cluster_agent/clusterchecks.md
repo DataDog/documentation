@@ -15,6 +15,10 @@ further_reading:
     - link: '/containers/guide/clustercheckrunners'
       text: 'Cluster Check Runners'
       tag: 'Documentation'
+    - link: "https://learn.datadoghq.com/courses/cluster-checks-lab"
+      tag: "Learning Center"
+      text: "Introduction to Cluster Checks and Endpoint Checks"
+
 ---
 
 ## Overview

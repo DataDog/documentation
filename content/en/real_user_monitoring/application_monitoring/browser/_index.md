@@ -10,6 +10,10 @@ further_reading:
 - link: '/logs/log_collection/javascript/'
   tag: 'Documentation'
   text: 'Learn about the Datadog Browser SDK for Logs'
+- link: "https://learn.datadoghq.com/courses/intro-to-rum"
+  tag: "Learning Center"
+  text: "Intro to Real User Monitoring (RUM)"
+
 ---
 
 ## Overview

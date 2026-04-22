@@ -14,6 +14,10 @@ further_reading:
 - link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Limit data collection to a subset of containers only"
+- link: "https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes"
+  tag: "Learning Center"
+  text: "Introduction to Monitoring Kubernetes"
+
 ---
 
 The Datadog Agent can automatically assign tags to metrics, traces, and logs emitted by a pod (or an individual container within a pod) based on labels or annotations.

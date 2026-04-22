@@ -9,6 +9,11 @@ cascade:
     algolia:
         rank: 70
         tags: ["submit metrics", "metrics submission"]
+further_reading:
+- link: "https://learn.datadoghq.com/courses/getting-started-with-metrics"
+  tag: "Learning Center"
+  text: "Getting Started with Metrics"
+
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}

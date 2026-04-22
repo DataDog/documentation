@@ -20,6 +20,10 @@ further_reading:
 - link: "/synthetics/guide/export-tests-to-terraform"
   tag: "Guide"
   text: "Export Synthetic API tests to Terraform"
+- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
+  tag: "Learning Center"
+  text: "Introduction to Synthetic Tests"
+
 ---
 
 ## Overview

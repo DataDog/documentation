@@ -11,6 +11,10 @@ further_reading:
     - link: "/security/cloud_security_management/workflows/"
       tag: "Documentation"
       text: "Automate security workflows"
+    - link: "https://learn.datadoghq.com/courses/automated-workflows"
+      tag: "Learning Center"
+      text: "Remediating Issues with Workflow Automation"
+
 ---
 
 ## Overview
