@@ -76,7 +76,7 @@ If you set the wrong AWS/GKE/Azure credentials or region, you see this error mes
 Command failed: Another error occurred. `Metastore error`. Cause: `StorageError(kind=Unauthorized, source=failed to fetch object: s3://my-bucket/datadog-index/some-id.split)`
 ```
 
-Actinon: Check if your pod has access to the bucket.
+Action: Check if your pod has access to the bucket.
 
 ## Ingestion issues
 
@@ -89,7 +89,7 @@ Actinon: Check if your pod has access to the bucket.
 - **Disk full:** Check `disk.available_space.gauge`. If the write-ahead log (WAL) fills up, indexers stop accepting new data. Increase persistent volume size or add more indexer pods.
 - **Rate limiting:** On initial deployment or after a restart, you may see `429 Too Many Requests` errors. This is typically transient while the cluster stabilizes. If it persists, check that your indexer count matches your ingestion volume.
 
-In case you use Observability Pipelines in front of CloudPrem, you will need to check what's happing there, see OP [Scaling and Performance][2].
+In case you use Observability Pipelines in front of CloudPrem, you will need to check what's happening there, see OP [Scaling and Performance][2].
 
 ## Search performance
 
