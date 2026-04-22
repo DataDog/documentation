@@ -249,158 +249,17 @@ The following example manually tracks the pageviews on the `checkout` page in a 
 <!-- Version must meet 2.17.0 -->
 {% if semverIsAtLeast($rum_browser_sdk_version, "2.17.0") %}
 
-### React router instrumentation
+### Framework router instrumentation
 
-If you are using React, Angular, Vue, or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
+If you are using React, Angular, Vue, or Next.js, Datadog provides dedicated integrations that handle router instrumentation automatically:
 
-To override default RUM view names so that they are aligned with how you've defined them in your React application, you need to follow the below steps.
+- [React][24] for the `@datadog/browser-rum-react` plugin.
+- [Angular][25] for the `@datadog/browser-rum-angular` plugin.
+- [Vue][26] for the `@datadog/browser-rum-vue` plugin.
+- [Next.js][27] for the `@datadog/browser-rum-nextjs` plugin.
 
-**Note**: These instructions are specific to the **React Router v6** library.
+For any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
 
-1. Set `trackViewsManually` to `true` when initializing the RUM browser SDK as described [above](#override-default-rum-view-names).
-
-2. Start views for each route change.
-   <!-- NPM -->
-   {% if equals($lib_src, "npm") %}
-   ```javascript
-   import { matchRoutes, useLocation } from 'react-router-dom';
-   import { routes } from 'path/to/routes';
-   import { datadogRum } from "@datadog/browser-rum";
-
-   export default function App() {
-      // Track every route change with useLocation API
-      let location = useLocation();
-
-      useEffect(() => {
-      const routeMatches = matchRoutes(routes, location.pathname);
-      const viewName = routeMatches && computeViewName(routeMatches);
-      if (viewName) {
-         datadogRum.startView({name: viewName});
-      }
-      }, [location.pathname]);
-
-      ...
-   }
-
-   // Compute view name out of routeMatches
-   function computeViewName(routeMatches) {
-      let viewName = "";
-      for (let index = 0; index < routeMatches.length; index++) {
-      const routeMatch = routeMatches[index];
-      const path = routeMatch.route.path;
-      // Skip pathless routes
-      if (!path) {
-         continue;
-      }
-
-      if (path.startsWith("/")) {
-         // Handle absolute child route paths
-         viewName = path;
-      } else {
-         // Handle route paths ending with "/"
-         viewName += viewName.endsWith("/") ? path : `/${path}`;
-      }
-      }
-
-      return viewName || '/';
-   }
-   ```
-   {% /if %}
-
-   <!-- CDN async -->
-   {% if equals($lib_src, "cdn_async") %}
-   ```javascript
-   import { matchRoutes, useLocation } from 'react-router-dom';
-   import { routes } from 'path/to/routes';
-
-   export default function App() {
-      // Track every route change with useLocation API
-      let location = useLocation();
-
-      useEffect(() => {
-      const routeMatches = matchRoutes(routes, location.pathname);
-      const viewName = routeMatches && computeViewName(routeMatches);
-      if (viewName) {
-         DD_RUM.onReady(function() {
-            DD_RUM.startView({name: viewName});
-         });
-      }
-      }, [location.pathname]);
-
-      ...
-   }
-
-   // Compute view name out of routeMatches
-   function computeViewName(routeMatches) {
-      let viewName = "";
-      for (let index = 0; index < routeMatches.length; index++) {
-      const routeMatch = routeMatches[index];
-      const path = routeMatch.route.path;
-      // Skip pathless routes
-      if (!path) {
-         continue;
-      }
-
-      if (path.startsWith("/")) {
-         // Handle absolute child route paths
-         viewName = path;
-      } else {
-         // Handle route paths ending with "/"
-         viewName += viewName.endsWith("/") ? path : `/${path}`;
-      }
-      }
-
-      return viewName || '/';
-   }
-   ```
-   {% /if %}
-
-   <!-- CDN sync -->
-   {% if equals($lib_src, "cdn_sync") %}
-   ```javascript
-   import { matchRoutes, useLocation } from 'react-router-dom';
-   import { routes } from 'path/to/routes';
-
-   export default function App() {
-      // Track every route change with useLocation API
-      let location = useLocation();
-
-      useEffect(() => {
-      const routeMatches = matchRoutes(routes, location.pathname);
-      const viewName = routeMatches && computeViewName(routeMatches);
-      if (viewName) {
-         window.DD_RUM &&
-            window.DD_RUM.startView({name: viewName});
-      }
-      }, [location.pathname]);
-
-      ...
-   }
-
-   // Compute view name out of routeMatches
-   function computeViewName(routeMatches) {
-      let viewName = "";
-      for (let index = 0; index < routeMatches.length; index++) {
-      const routeMatch = routeMatches[index];
-      const path = routeMatch.route.path;
-      // Skip pathless routes
-      if (!path) {
-         continue;
-      }
-
-      if (path.startsWith("/")) {
-         // Handle absolute child route paths
-         viewName = path;
-      } else {
-         // Handle route paths ending with "/"
-         viewName += viewName.endsWith("/") ? path : `/${path}`;
-      }
-      }
-
-      return viewName || '/';
-   }
-   ```
-   {% /if %}
 {% /if %}
 <!-- Ends 2.17.0 -->
 
@@ -1807,3 +1666,7 @@ After setup, the `service` and `version` on RUM events identify which micro fron
 [21]: https://module-federation.io/
 [22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
 [23]: https://github.com/DataDog/build-plugins
+[24]: /integrations/rum-react/
+[25]: /integrations/rum-angular/
+[26]: /integrations/rum-vue/
+[27]: /integrations/rum-nextjs/
