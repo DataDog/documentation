@@ -70,6 +70,23 @@ DD_METRICS_OTEL_ENABLED=true
 
 <div class="alert alert-info">Set <code>DD_METRICS_OTEL_ENABLED=true</code> to enable flag evaluation metrics. Without this, the SDK does not emit metrics for flag evaluations. When enabled, each evaluation records a <code>feature_flag.evaluations</code> counter metric tagged with the flag key, result variant, and evaluation reason.</div>
 
+## Testing with in-memory providers
+
+The Datadog OpenFeature provider is designed for production use: it requires a running Datadog Agent and Remote Configuration to receive flag definitions. It is **not suitable for unit tests**, which should be hermetic, fast, and offline.
+
+For tests, swap the Datadog provider for OpenFeature's standard `InMemoryProvider` (or an equivalent test stub, where no in-memory provider is available in the language). Because the OpenFeature API is designed to make providers swappable at runtime, your application code does not change — only the provider registered during test setup.
+
+A typical test follows this pattern:
+
+1. Build a map of flag keys to variants in your test setup.
+2. Register an `InMemoryProvider` with that map through the OpenFeature API.
+3. Evaluate flags through the same OpenFeature client your application uses.
+4. Reset the provider in test teardown to avoid cross-test state leakage.
+
+See your language's SDK page for a concrete test example:
+
+{{< partial name="feature_flags/feature_flags_server.html" >}}
+
 ## Context attribute requirements
 
 <div class="alert alert-warning">
