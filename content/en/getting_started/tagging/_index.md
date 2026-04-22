@@ -65,6 +65,7 @@ Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must m
     - Colons
     - Periods
     - Forward slashes
+    - (For tags on logs [ingested via HTTP][28] only) at signs (@)
 
     All other characters (including, but not limited to, commas, emoji, back slashes, and spaces) are converted to underscores.
 
@@ -175,3 +176,4 @@ For more information, see [Using Tags][1].
 [25]: /containers/troubleshooting/log-collection?tab=datadogoperator#missing-host-level-tags-on-new-hosts-or-nodes
 [26]: /tracing/trace_collection/tracing_naming_convention/#span-tags
 [27]: /tracing/trace_collection/tracing_naming_convention/#span-attributes
+[28]: /api/latest/logs/#send-logs
