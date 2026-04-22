@@ -288,6 +288,79 @@ Flags.enable(with: config)
 `customFlagsHeaders`
 : Sets additional HTTP headers to attach to requests made to `customFlagsEndpoint`. It can be useful for authentication or routing when using your own flags service.
 
+## Testing
+
+Do not use the Datadog provider in unit tests: it requires network access to Datadog's Remote Configuration backend. The OpenFeature Swift SDK does not ship an `InMemoryProvider` (the contrib repositories that exist for other OpenFeature languages do not have a Swift equivalent), so tests use a small custom `FeatureProvider` instead.
+
+{{< code-block lang="swift" >}}
+import Combine
+import OpenFeature
+import XCTest
+@testable import MyApp
+
+// Minimal in-memory provider for tests. Copy into your test target.
+final class InMemoryTestProvider: FeatureProvider {
+    var hooks: [any Hook] = []
+    var metadata: ProviderMetadata = Metadata(name: "in-memory-test")
+    private let subject = CurrentValueSubject<ProviderEvent, Never>(.ready(nil))
+    private let bools: [String: Bool]
+    private let strings: [String: String]
+
+    init(bools: [String: Bool] = [:], strings: [String: String] = [:]) {
+        self.bools = bools
+        self.strings = strings
+    }
+
+    func observe() -> AnyPublisher<ProviderEvent, Never> { subject.eraseToAnyPublisher() }
+
+    func initialize(initialContext: EvaluationContext?) -> Future<Void, Never> {
+        Future { $0(.success(())) }
+    }
+
+    func onContextSet(oldContext: EvaluationContext?, newContext: EvaluationContext) -> Future<Void, Never> {
+        Future { $0(.success(())) }
+    }
+
+    func getBooleanEvaluation(key: String, defaultValue: Bool, context: EvaluationContext?) throws -> ProviderEvaluation<Bool> {
+        ProviderEvaluation(value: bools[key] ?? defaultValue, variant: bools[key] == nil ? "default" : "static", reason: Reason.static.rawValue)
+    }
+
+    func getStringEvaluation(key: String, defaultValue: String, context: EvaluationContext?) throws -> ProviderEvaluation<String> {
+        ProviderEvaluation(value: strings[key] ?? defaultValue, variant: strings[key] == nil ? "default" : "static", reason: Reason.static.rawValue)
+    }
+
+    func getIntegerEvaluation(key: String, defaultValue: Int64, context: EvaluationContext?) throws -> ProviderEvaluation<Int64> {
+        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.static.rawValue)
+    }
+
+    func getDoubleEvaluation(key: String, defaultValue: Double, context: EvaluationContext?) throws -> ProviderEvaluation<Double> {
+        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.static.rawValue)
+    }
+
+    func getObjectEvaluation(key: String, defaultValue: Value, context: EvaluationContext?) throws -> ProviderEvaluation<Value> {
+        ProviderEvaluation(value: defaultValue, variant: "default", reason: Reason.static.rawValue)
+    }
+
+    private struct Metadata: ProviderMetadata { var name: String? }
+}
+
+final class CheckoutFlagTests: XCTestCase {
+    override func tearDown() async throws {
+        await OpenFeatureAPI.shared.clearProviderAndWait()
+    }
+
+    func testNewCheckoutEnabled() async throws {
+        let provider = InMemoryTestProvider(bools: ["new-checkout-flow": true])
+        await OpenFeatureAPI.shared.setProviderAndWait(provider: provider)
+
+        let client = OpenFeatureAPI.shared.getClient()
+        XCTAssertTrue(client.getBooleanValue(key: "new-checkout-flow", defaultValue: false))
+    }
+}
+{{< /code-block >}}
+
+`OpenFeatureAPI.shared` is a global singleton, so call `clearProviderAndWait()` in `tearDown` to prevent one test's flags from leaking into another. `setProviderAndWait(provider:)` is `async` and does not throw, so no `try` is required.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
