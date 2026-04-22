@@ -1,5 +1,5 @@
 ---
-title: Build Code-Based Apps
+title: Datadog Apps
 description: Build and deploy custom Datadog apps locally using a code-based development workflow with React, backend functions, and a CLI.
 further_reading:
 - link: "/actions/app_builder/"
@@ -15,13 +15,13 @@ further_reading:
 
 ## Overview
 
-Code-based apps let you build Datadog apps locally as code, using a standard frontend development workflow. Unlike the [drag-and-drop App Builder][1], code-based apps give you full control over your app's UI and logic with React and TypeScript (or JavaScript).
+With Datadog Apps, you can build applications locally as code, using a standard frontend development workflow. Unlike the [drag-and-drop App Builder][1], Datadog Apps give you full control over your application's UI and logic with React and TypeScript (or JavaScript).
 
-Code-based apps use the same permissions model as drag-and-drop apps and can be [embedded in dashboards][2] in the same way. After you publish a code-based app, it appears in your [App Builder][1] app list alongside your other apps.
+Datadog Apps use the same permissions model as drag-and-drop apps and can be [embedded in dashboards][2] in the same way. After you publish a code-based app, it appears in your [App Builder][1] app list alongside your other apps.
 
 ## Prerequisites
-<!-- [TO CONFIRM, the internal guide uses older than v20.12.0, but troubleshooting says older than v22] -->
-- **Node.js version 22 or later**. If your version is older, upgrade Node.js using a version manager such as [nvm][3], [Volta][6], or [fnm][7], or download it from [nodejs.org][8]. Check your version:
+
+- **Node.js version v20.12.0 or later**. Check your version:
   ```shell
   node --version
   ```
@@ -43,12 +43,8 @@ Code-based apps use the same permissions model as drag-and-drop apps and can be 
    npm create @datadog/apps@0.0.1-dev.1
    ```
 
-2. Follow the interactive prompts to configure your app name and template. After scaffolding completes, install dependencies:
-
-   ```shell
-   cd <APP_NAME>
-   npm install
-   ```
+2. Follow the interactive prompts to configure your app name and template.
+3. (Optional) Set up the RUM integration for the app. This automatically sets up the Browser SDK so you can use RUM to report user metrics.
 
 ### App structure
 
@@ -57,7 +53,7 @@ The scaffolded project includes:
 | File or directory | Description |
 |---|---|
 | `src/App.tsx` | Root UI component (React) |
-| `src/*.backend.ts` | Backend functions that run server-side with access to API keys |
+| `src/**/*.backend.ts` | Backend functions that run server-side with access to API keys |
 | `vite.config.ts` | Build configuration with `@datadog/vite-plugin` pre-configured |
 | `package.json` | Dependencies and scripts (`dev`, `build`) |
 
@@ -80,37 +76,52 @@ The scaffolded project includes:
 
 ### Backend functions
 
-Files matching `*.backend.ts` (or `.js`, `.tsx`, `.jsx`) contain backend functions. These run server-side with access to your API keys and are never shipped to the browser. The frontend imports and calls them like standard ES modules.
+Files matching `*.backend.ts` or `.js` contain backend functions. These run server-side with access to your API keys and are never shipped to the browser. The frontend imports and calls them like standard ES modules.
+
+Backend functions can call any action in Datadog's [Actions Catalog][10] through the [`@datadog/action-catalog`][11] library. The Actions Catalog provides reusable, pre-built actions for interacting with cloud providers, SaaS tools, and the Datadog API, so you can build functionality on top of existing integrations instead of writing API clients from scratch.
+
+The library is a fully typed TypeScript client that wraps 50+ integrations, including AWS, Azure, GCP, the Datadog API, GitHub, GitLab, Slack, Jira, PagerDuty, ServiceNow, OpenAI, Anthropic, and generic HTTP. Importing actions from `@datadog/action-catalog` gives you typed inputs and responses for each action.
 
 {{% collapse-content title="Example backend function" level="h4" expanded=false %}}
 
-Create a backend function:
+Create a backend function that lists hosts through the Action Catalog:
 
-**src/greet.backend.ts**
+**src/listHosts.backend.ts**
 ```typescript
-export async function greet(name: string) {
-    return { message: `Hello, ${name}!` };
+import { listHosts, type ListHostsResponse } from '@datadog/action-catalog/dd/hosts';
+
+export async function getHosts(filter?: string): Promise<ListHostsResponse> {
+    const response = await listHosts({
+        inputs: {
+            filter: filter ?? '*',
+            count: 10,
+            include_hosts_metadata: true,
+        },
+    });
+    return response;
 }
 ```
 
-Then call it from your app's existing `App.tsx`:
+Then call it from your app's `App.tsx`:
 
 **src/App.tsx**
 ```tsx
 import { useState, useEffect } from 'react';
-import { greet } from './greet.backend';
+import { getHosts } from './listHosts.backend';
 
 function App() {
-    const [message, setMessage] = useState('Your Datadog App is ready!');
+    const [hostCount, setHostCount] = useState<number>(0);
 
     useEffect(() => {
-        greet('World').then((result) => setMessage(result.message));
+        getHosts().then((response) => {
+            setHostCount(response.host_list?.length ?? 0);
+        });
     }, []);
 
     return (
         <div style={{ padding: '2rem', textAlign: 'center' }}>
             <h1>Welcome to my-app</h1>
-            <p>{message}</p>
+            <p>Monitoring {hostCount} hosts</p>
         </div>
     );
 }
@@ -123,12 +134,19 @@ export default App;
 
 Run a production build to upload your app to Datadog:
 
-<!-- [TO CONFIRM, is it just npm run build or do you need to set the environment variable] -->
-
 ```shell
-DD_APPS_UPLOAD_ASSETS=1 npm run build
+npm run build
 ```
-<!-- [TO CONFIRM, is this part of the instructions or just the skill?] -->
+
+The following environment variables are available with `npm run build`:
+
+| Variable | Description |
+|---|---|
+| `DD_API_KEY` | Datadog API key. |
+| `DD_APP_KEY` | Datadog application key. |
+| `DD_APPS_VERSION_NAME` | Optional. The version name of the app version to be uploaded. Can be any string, but each app version must have a unique name (not duplicated for the same app). If unset, Datadog assigns a version name. |
+| `DD_APPS_UPLOAD_ASSETS` | If set and `dryRun` is `false`, uploads built assets to Datadog when `npm run build` is run. |
+
 By default, `npm run build` runs in dry run mode, which builds the app without uploading it to Datadog. You can enable uploading in two ways:
 
 - **Set the `DD_APPS_UPLOAD_ASSETS` environment variable:**
@@ -148,9 +166,7 @@ After a successful upload, the build output displays a URL where your app is acc
 
 ## Set up CI/CD with GitHub Actions
 
-You can automatically deploy your app on every push to the `main` branch with GitHub Actions.
-
-**Note**: This workflow uses [`dd-sts`][9] to provision temporary Datadog API and Application keys through GitHub OIDC token federation, so no long-lived secrets are stored in the repository.
+To automatically deploy your app on every push to the `main` branch, use the [`DataDog/apps-github-action`][9] GitHub Action. This action builds your app and deploys it to Datadog. For all available inputs and configuration options, see the [action's README][9].
 
 Create `.github/workflows/cd.yml` in your app's repository:
 
@@ -173,12 +189,6 @@ jobs:
       id-token: write
 
     steps:
-      - name: Get Datadog Credentials
-        id: dd-sts
-        uses: DataDog/dd-sts-action@2e8187910199bd93129520183c093e19aa585c75
-        with:
-          policy: datadog-apps-deploy
-
       - name: Checkout
         uses: actions/checkout@v6
 
@@ -188,8 +198,8 @@ jobs:
       - name: Deploy
         uses: DataDog/apps-github-action@v0.0.1
         with:
-          datadog-api-key: ${{ steps.dd-sts.outputs.api_key }}
-          datadog-app-key: ${{ steps.dd-sts.outputs.app_key }}
+          datadog-api-key: ${{ secrets.DATADOG_API_KEY }}
+          datadog-app-key: ${{ secrets.DATADOG_APP_KEY }}
           app-directory: .
 ```
 
@@ -223,4 +233,6 @@ The scaffolding tool requires Node.js v22 or later. Upgrade using a version mana
 [6]: https://volta.sh
 [7]: https://github.com/Schniz/fnm
 [8]: https://nodejs.org
-[9]: https://github.com/DataDog/dd-sts-action
+[9]: https://github.com/DataDog/apps-github-action
+[10]: /actions/actions_catalog/
+[11]: https://www.npmjs.com/package/@datadog/action-catalog
