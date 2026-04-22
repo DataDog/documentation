@@ -235,6 +235,66 @@ console.log(details.errorMessage); // A more detailed message of the error that 
 console.log(details.flagMetadata); // Additional information about the evaluation
 ```
 
+## Testing
+
+Do not use the Datadog provider in unit tests: it requires `tracer.init()` and a running Agent with Remote Configuration. Use OpenFeature's `TypedInMemoryProvider` instead. It ships with `@openfeature/server-sdk`, so no additional dependency is required.
+
+Do **not** call `tracer.init()` or set `tracer.openfeature` as the provider in tests — that is the behavior the test is trying to replace.
+
+The OpenFeature API is a singleton per Node.js process. Reset it in `afterAll` with `OpenFeature.close()` (or `OpenFeature.clearProviders()`) to prevent state from one test file leaking into the next.
+
+```javascript
+// flags.test.js
+import { beforeAll, beforeEach, afterAll, expect, test } from 'vitest';
+import { OpenFeature, TypedInMemoryProvider } from '@openfeature/server-sdk';
+
+const flags = {
+  'new-checkout-flow': {
+    variants: { on: true, off: false },
+    defaultVariant: 'off',
+    disabled: false,
+    contextEvaluator: (ctx) => (ctx.companyID === 'beta-co' ? 'on' : 'off'),
+  },
+};
+
+let provider;
+
+beforeAll(async () => {
+  provider = new TypedInMemoryProvider(flags);
+  await OpenFeature.setProviderAndWait(provider);
+});
+
+beforeEach(() => {
+  // Reset flag state between tests to prevent cross-test pollution.
+  provider.putConfiguration(flags);
+});
+
+afterAll(async () => {
+  await OpenFeature.close();
+});
+
+test('beta company sees new checkout', async () => {
+  const client = OpenFeature.getClient();
+  const value = await client.getBooleanValue('new-checkout-flow', false, {
+    targetingKey: 'user-1',
+    companyID: 'beta-co',
+  });
+  expect(value).toBe(true);
+});
+
+test('non-beta company falls back to default', async () => {
+  const client = OpenFeature.getClient();
+  const details = await client.getBooleanDetails('new-checkout-flow', false, {
+    targetingKey: 'user-2',
+    companyID: 'acme',
+  });
+  expect(details.value).toBe(false);
+  expect(details.variant).toBe('off');
+});
+```
+
+The snippet above uses Vitest for its first-class ESM support. The same pattern works with Jest; Jest users may need `--experimental-vm-modules` if their project is ESM. The non-generic `InMemoryProvider` export is deprecated — prefer `TypedInMemoryProvider`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
