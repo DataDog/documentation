@@ -11,26 +11,29 @@ test.describe('ApiCodeExample component', () => {
   });
 
   test('shows language tabs', async ({ page }) => {
-    const tabs = page.locator('[data-testid="api-code-example-tabs"]').first();
+    const codeExample = page.locator('[data-testid="api-code-example"]').first();
+    const tabs = codeExample.locator('[data-testid="tabs"]').first();
     await expect(tabs).toBeVisible();
   });
 
   test('first language tab is active by default', async ({ page }) => {
-    const firstTab = page.locator('[data-testid^="api-code-example-tab-"]').first();
+    const codeExample = page.locator('[data-testid="api-code-example"]').first();
+    const firstTab = codeExample.locator('[role="tab"]').first();
     await expect(firstTab).toHaveAttribute('aria-selected', 'true');
   });
 
   test('clicking a language tab switches the panel', async ({ page }) => {
-    const tabs = page.locator('[data-testid^="api-code-example-tab-"]');
-    const count = await tabs.count();
+    const codeExample = page.locator('[data-testid="api-code-example"]').first();
+    await expect(codeExample.locator('[data-testid="tabs"][data-hydrated="true"]').first()).toBeVisible();
+    const tabButtons = codeExample.locator('[role="tab"]');
+    const count = await tabButtons.count();
 
     if (count >= 2) {
-      const secondTab = tabs.nth(1);
+      const secondTab = tabButtons.nth(1);
       await secondTab.click();
       await expect(secondTab).toHaveAttribute('aria-selected', 'true');
 
-      // First tab deselected
-      const firstTab = tabs.first();
+      const firstTab = tabButtons.first();
       await expect(firstTab).toHaveAttribute('aria-selected', 'false');
     }
   });

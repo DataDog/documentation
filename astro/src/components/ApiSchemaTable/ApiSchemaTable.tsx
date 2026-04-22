@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import styles from './ApiSchemaTable.module.css';
 
@@ -165,6 +165,8 @@ function collectPaths(fields: SchemaField[], parentPath: string, result: string[
 
 export function ApiSchemaTable({ fields, title, showExpandAll = true }: ApiSchemaTableProps): JSX.Element {
   const [expandedPaths, setExpandedPaths] = useState<Set<string>>(new Set());
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => { setHydrated(true); }, []);
 
   const togglePath = (path: string) => {
     setExpandedPaths((prev) => {
@@ -191,7 +193,7 @@ export function ApiSchemaTable({ fields, title, showExpandAll = true }: ApiSchem
   };
 
   return (
-    <div class="schema-table" data-testid="schema-table">
+    <div class="schema-table" data-testid="schema-table" data-hydrated={hydrated ? 'true' : undefined}>
       {showExpandAll && allPaths.length > 0 && (
         <div class={`schema-table__toolbar ${styles.toolbar}`}>
           <button

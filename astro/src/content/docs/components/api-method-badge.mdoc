@@ -1,7 +1,106 @@
 ---
-title: "Test Badge"
+title: "ApiMethodBadge Component"
 ---
 
-# Test
+# ApiMethodBadge
 
+A small label showing the HTTP method of an API endpoint. The badge color is determined by the method.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `method` | `'get' \| 'post' \| 'put' \| 'patch' \| 'delete' \| 'head' \| 'options'` | — | HTTP method displayed on the badge |
+
+## Examples
+
+### GET
+
+{% tabs %}
+{% tab label="Result" %}
 {% apiMethodBadge method="get" /%}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% apiMethodBadge method="get" /%}
+```
+{% /tab %}
+{% /tabs %}
+
+### POST
+
+{% tabs %}
+{% tab label="Result" %}
+{% apiMethodBadge method="post" /%}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% apiMethodBadge method="post" /%}
+```
+{% /tab %}
+{% /tabs %}
+
+### PUT
+
+{% tabs %}
+{% tab label="Result" %}
+{% apiMethodBadge method="put" /%}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% apiMethodBadge method="put" /%}
+```
+{% /tab %}
+{% /tabs %}
+
+### PATCH
+
+{% tabs %}
+{% tab label="Result" %}
+{% apiMethodBadge method="patch" /%}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% apiMethodBadge method="patch" /%}
+```
+{% /tab %}
+{% /tabs %}
+
+### DELETE
+
+{% tabs %}
+{% tab label="Result" %}
+{% apiMethodBadge method="delete" /%}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% apiMethodBadge method="delete" /%}
+```
+{% /tab %}
+{% /tabs %}
+
+### HEAD
+
+{% tabs %}
+{% tab label="Result" %}
+{% apiMethodBadge method="head" /%}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% apiMethodBadge method="head" /%}
+```
+{% /tab %}
+{% /tabs %}
+
+### OPTIONS
+
+{% tabs %}
+{% tab label="Result" %}
+{% apiMethodBadge method="options" /%}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% apiMethodBadge method="options" /%}
+```
+{% /tab %}
+{% /tabs %}

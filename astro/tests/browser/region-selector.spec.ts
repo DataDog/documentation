@@ -26,6 +26,7 @@ test.describe('RegionSelector component', () => {
   });
 
   test('changes region, writes cookie, updates query param, and sets data-active-region', async ({ page }) => {
+    await expect(page.locator('[data-testid="region-selector"][data-hydrated="true"]')).toBeVisible();
     const select = page.locator('[data-testid="region-selector-select"]');
     await select.selectOption('eu');
     await expect(select).toHaveValue('eu');

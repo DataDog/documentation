@@ -37,7 +37,8 @@ test.describe('CodeBlock component', () => {
 
   test('copy button appears on hover and shows Copied! after click', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-    const firstBlock = page.locator('[data-testid="code-block"]').first();
+    const firstBlock = page.locator('[data-testid="code-block"][data-hydrated="true"]').first();
+    await expect(firstBlock).toBeVisible();
     const content = firstBlock.locator('[data-testid="code-block-content"]');
     const copyBtn = firstBlock.locator('[data-testid="code-block-copy"]');
 
@@ -66,7 +67,8 @@ test.describe('CodeBlock component', () => {
   });
 
   test('toggle button collapses and expands code', async ({ page }) => {
-    const collapsibleBlock = page.locator('[data-collapsible]').first();
+    const collapsibleBlock = page.locator('[data-collapsible][data-hydrated="true"]').first();
+    await expect(collapsibleBlock).toBeVisible();
     const toggle = collapsibleBlock.locator('[data-testid="code-block-toggle"]');
     const content = collapsibleBlock.locator('[data-testid="code-block-content"]');
 

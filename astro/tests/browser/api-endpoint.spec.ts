@@ -65,6 +65,7 @@ test.describe('ApiEndpoint region switching', () => {
     await context.clearCookies();
     await page.goto('/docs/components/api-endpoint');
 
+    await expect(page.locator('[data-testid="region-selector"][data-hydrated="true"]').first()).toBeVisible();
     await page.locator('[data-testid="region-selector-select"]').selectOption('eu');
 
     const endpoint = page.locator('[data-testid="api-endpoint"]').first();
@@ -80,6 +81,7 @@ test.describe('ApiEndpoint region switching', () => {
     await context.clearCookies();
     await page.goto('/docs/components/api-endpoint');
 
+    await expect(page.locator('[data-testid="region-selector"][data-hydrated="true"]').first()).toBeVisible();
     await page.locator('[data-testid="region-selector-select"]').selectOption('eu');
 
     const codeExample = page.locator('[data-testid="api-code-example"]').first();

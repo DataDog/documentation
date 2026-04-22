@@ -70,6 +70,8 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await trigger.click();
     await expect(modal).toBeVisible();
 
+    // Focus the close button so Escape isn't swallowed by the iframe.
+    await modal.getByRole('button', { name: 'close' }).focus();
     await page.keyboard.press('Escape');
     await expect(modal).toBeHidden();
   });

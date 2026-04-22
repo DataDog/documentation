@@ -17,10 +17,12 @@ import { getAllowedRegions, DEFAULT_REGION_KEY } from '../../data/api/regionConf
 export function RegionSelector(): JSX.Element {
   const regions = getAllowedRegions();
   const [selected, setSelected] = useState<string>(DEFAULT_REGION_KEY);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     syncRegionFromReferrer();
     setSelected(getActiveRegion());
+    setHydrated(true);
     const unsubscribe = onRegionChange((region) => setSelected(region));
     return unsubscribe;
   }, []);
@@ -30,7 +32,7 @@ export function RegionSelector(): JSX.Element {
   };
 
   return (
-    <div class={`region-selector ${styles.selector}`} data-testid="region-selector">
+    <div class={`region-selector ${styles.selector}`} data-testid="region-selector" data-hydrated={hydrated ? 'true' : undefined}>
       <label class={`region-selector__label ${styles.label}`} for="region-select">Datadog site</label>
       <select
         id="region-select"

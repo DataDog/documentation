@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import styles from './CodeBlock.module.css';
 
 interface CodeBlockProps {
@@ -22,12 +22,13 @@ export function CodeBlock({
 }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => { setHydrated(true); }, []);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(content).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1000);
-    });
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1000);
+    navigator.clipboard?.writeText(content).catch(() => {});
   };
 
   const containerClass = wrap
@@ -42,6 +43,7 @@ export function CodeBlock({
     <div
       class={containerClass}
       data-testid="code-block"
+      data-hydrated={hydrated ? 'true' : undefined}
       data-language={language || undefined}
       data-collapsible={collapsible || undefined}
       data-wrap={wrap || undefined}

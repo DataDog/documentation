@@ -17,6 +17,7 @@ test.describe('ApiSchemaTable component', () => {
   });
 
   test('expands nested rows when toggle is clicked', async ({ page }) => {
+    await expect(page.locator('[data-testid="schema-table"][data-hydrated="true"]').first()).toBeVisible();
     const toggle = page.locator('[data-testid="schema-table-toggle"]').first();
     const children = page.locator('[data-testid="schema-table-children"]').first();
 
@@ -33,11 +34,16 @@ test.describe('ApiSchemaTable component', () => {
   });
 
   test('expand all button shows all nested rows', async ({ page }) => {
-    const expandAll = page.locator('[data-testid="schema-table-expand-all"]').first();
+    const table = page
+      .locator('[data-testid="schema-table"][data-hydrated="true"]', { has: page.locator('[data-testid="schema-table-expand-all"]') })
+      .first();
+    await expect(table).toBeVisible();
+    const expandAll = table.locator('[data-testid="schema-table-expand-all"]').first();
     await expandAll.click();
 
-    const children = page.locator('[data-testid="schema-table-children"]');
+    const children = table.locator('[data-testid="schema-table-children"]');
     const count = await children.count();
+    expect(count).toBeGreaterThan(0);
 
     for (let i = 0; i < count; i++) {
       await expect(children.nth(i)).toBeVisible();

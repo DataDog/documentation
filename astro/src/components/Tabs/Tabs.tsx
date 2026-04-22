@@ -22,10 +22,13 @@ export function Tabs({ labels, children, onTabChange, variant }: TabsProps) {
   const [domTabs, setDomTabs] = useState<Tab[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [usePills, setUsePills] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
 
   const isControlled = labels != null;
+
+  useEffect(() => { setHydrated(true); }, []);
 
   // DOM extraction mode (original behavior for TabsIsland)
   useEffect(() => {
@@ -85,7 +88,7 @@ export function Tabs({ labels, children, onTabChange, variant }: TabsProps) {
     : `tabs ${styles.tabs}`;
 
   return (
-    <div ref={containerRef} class={containerClass} data-testid="tabs" data-layout={usePills ? 'pills' : 'tabs'}>
+    <div ref={containerRef} class={containerClass} data-testid="tabs" data-layout={usePills ? 'pills' : 'tabs'} data-hydrated={hydrated ? 'true' : undefined}>
       <div ref={navRef} class={`tabs__nav ${styles.tabs__nav}`} role="tablist" data-testid="tabs-nav">
         {tabLabels.map((label, i) => {
           const active = i === activeIndex;
