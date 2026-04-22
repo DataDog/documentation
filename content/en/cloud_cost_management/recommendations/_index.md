@@ -710,10 +710,22 @@ Assign a status to each recommendation to track cost optimization progress acros
 | {{< ui >}}Completed{{< /ui >}} | The recommended action has been taken or is no longer relevant. |
 | {{< ui >}}Dismissed{{< /ui >}} | No work is planned for this recommendation over the time frame specified when dismissing. |
 
+### Filter recommendations by status
+
+Use the filter tabs at the top of the [{{< ui >}}Cloud Cost Recommendations{{< /ui >}}][1] page to view recommendations grouped by status:
+
+| Tab | Description |
+|-----|-------------|
+| {{< ui >}}Top{{< /ui >}} | Displays the highest-value recommendations across all statuses. |
+| {{< ui >}}Active{{< /ui >}} | Displays recommendations with {{< ui >}}Open{{< /ui >}} or {{< ui >}}In Progress{{< /ui >}} status. |
+| {{< ui >}}Dismissed{{< /ui >}} | Displays recommendations that have been dismissed. |
+
 ### Change a recommendation status
 
-1. Click a recommendation in the [{{< ui >}}Cloud Cost Recommendations{{< /ui >}}][1] list to open the side panel.
-1. Use the status dropdown to select a new status.
+You can change a recommendation status in two ways:
+
+- **From the table**: Use the status dropdown in the {{< ui >}}Status{{< /ui >}} column to select a new status directly from the recommendation list.
+- **From the side panel**: Click a recommendation to open the side panel, then use the status dropdown to select a new status.
 
 ## Recommendation action-taking
 You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
