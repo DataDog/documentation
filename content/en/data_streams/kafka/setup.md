@@ -1,13 +1,13 @@
 ---
 title: Kafka Monitoring Setup
-description: Set up Data Streams Monitoring's Kafka Monitoring, including prerequisites, Agent configuration, and the permissions required to inspect Kafka messages.
+description: Set up Data Streams Monitoring's Kafka Monitoring, including prerequisites, Agent configuration, and the additional steps required to inspect Kafka messages.
 aliases:
   - /data_streams/kafka/setup
 ---
 
 This page covers the prerequisites and setup steps for Data Streams Monitoring's Kafka Monitoring.
 
-Message inspection is an optional capability. If you do not want to retrieve message payloads, you can skip the items marked **(Messages only)**.
+Message inspection is an optional capability. The [Prerequisites](#prerequisites) and [Setup](#setup) sections apply to everyone. If you want to retrieve message payloads in the {{< ui >}}Messages{{< /ui >}} section, also complete [Enable message inspection](#enable-message-inspection).
 
 ## Prerequisites
 
@@ -27,7 +27,21 @@ If your Kafka cluster uses ACLs, the Datadog Agent user requires the following m
 | `*`           | `TOPIC`       | `DescribeConfigs` |
 | `*`           | `GROUP`       | `Describe`       |
 
-**(Messages only)** To retrieve messages in the {{< ui >}}Messages{{< /ui >}} section, the Agent user also requires:
+## Setup
+
+Go to the [Kafka Monitoring setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions. To request assistance, choose {{< ui >}}Request a pairing session{{< /ui >}}.
+
+{{< img src="data_streams/kafka_setup-2.png" alt="The Kafka Monitoring setup dialog showing environment selection, security protocol, schema registry options, and Kubernetes configuration instructions" >}}
+
+The setup page provides environment-specific configuration instructions. You can copy the instructions directly to an AI agent with {{< ui >}}Copy for AI{{< /ui >}}.
+
+## Enable message inspection
+
+This section applies only if you want to view Kafka message payloads in the {{< ui >}}Messages{{< /ui >}} section. Skip it if you do not plan to use message inspection.
+
+### Additional ACL permission
+
+In addition to the ACL permissions listed in [Prerequisites](#acl-permissions), the Datadog Agent user requires:
 
 | Resource Name | Resource Type | Operation |
 |---------------|---------------|-----------|
@@ -41,17 +55,7 @@ If your Kafka cluster uses ACLs, the Datadog Agent user requires the following m
 2. At the [Agent level][10].
 3. At the [API key level][11].
 
-## Setup
-
-Go to the [Kafka Monitoring setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions. To request assistance, choose {{< ui >}}Request a pairing session{{< /ui >}}.
-
-{{< img src="data_streams/kafka_setup-2.png" alt="The Kafka Monitoring setup dialog showing environment selection, security protocol, schema registry options, and Kubernetes configuration instructions" >}}
-
-The setup page provides environment-specific configuration instructions. You can copy the instructions directly to an AI agent with {{< ui >}}Copy for AI{{< /ui >}}.
-
-## Required permissions for Messages
-
-This section applies only if you want to view Kafka message payloads. Skip it if you do not plan to use the {{< ui >}}Messages{{< /ui >}} section.
+### User permission
 
 To view Kafka messages, a user must have the `Data Streams Monitoring Capture Messages` permission.
 
