@@ -15,7 +15,7 @@ further_reading:
   text: "Observability Pipelines Overview"
 - link: "/observability_pipelines/destinations/datadog_byoc_logs/"
   tag: "Documentation"
-  text: "Datadog BYOC Logs Destination for Observability Pipelines"
+  text: "Datadog BYOC Logs destination for Observability Pipelines"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
