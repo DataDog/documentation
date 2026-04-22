@@ -73,7 +73,7 @@ After your application starts sending data, the traces automatically appear in t
 
 ## Tested frameworks and libraries
 
-The following frameworks and libraries emit [OpenTelemetry 1.37+ GenAI semantic convention][1]-compliant spans and have been tested with Datadog LLM Observability. Any framework that emits compliant spans is supported.
+These frameworks and libraries have been tested with Datadog LLM Observability. Any framework that emits [OpenTelemetry 1.37+ GenAI semantic convention][1]-compliant spans is supported.
 
 {{< tabs >}}
 {{% tab "Python" %}}
