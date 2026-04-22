@@ -23,10 +23,26 @@ further_reading:
 
 Proper cluster sizing ensures optimal performance, cost efficiency, and reliability for your CloudPrem deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, and the complexity of your log data.
 
-This guide provides baseline recommendations for dimensioning your CloudPrem cluster components—indexers, searchers, supporting services, and the PostgreSQL database.
+The [sizing examples](#sizing-examples) below provide starting-point configurations for common daily log volumes. For deeper guidance on each component, see the sections that follow.
 
 <div class="alert alert-tip">
 Use your expected daily log volume and peak ingestion rates as starting points, then monitor your cluster's performance and adjust sizing as needed.
+</div>
+
+## Sizing examples
+
+The following table provides starting-point configurations for common daily log volumes. These are baseline recommendations—adjust based on your observed performance.
+
+| Daily volume | Indexer pods | Indexer podSize | Searcher pods | Searcher podSize | Object storage (30-day retention, ~4x compression) |
+|-------------|-------------|-----------------|---------------|-------------------|-----------------------------------------------------|
+| **1 TB/day** | 2 | large | 2 | xlarge | ~7.5 TB |
+| **5 TB/day** | 4 | xlarge | 4 | 2xlarge | ~37.5 TB |
+| **10 TB/day** | 8 | xlarge | 8 | 4xlarge | ~75 TB |
+| **50 TB/day** | 16 | xlarge | 20 | 8xlarge | ~375 TB |
+| **100 TB/day** | 32 | xlarge | 40 | 8xlarge | ~750 TB |
+
+<div class="alert alert-info">
+Searcher vCPUs in this table assume a mixed workload (searches and some dashboards). For dashboard-heavy use cases, increase searcher vCPUs by 2-3x. For search-only use cases (incident response, grep), you may be able to reduce them.
 </div>
 
 ## Indexers
@@ -136,22 +152,6 @@ The CloudPrem Helm chart provides predefined sizing tiers through the `indexer.p
 | 8xlarge | 32 | 128 GB |
 
 Values defining the ingest queue sizes and search cache sizes are automatically applied when you set `indexer.podSize` in the [Helm chart](https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/sizing-map.yaml). For more details on each parameter, you can check the Quickwit documentation for [indexer parameters][2], [ingest api parameters][3] and [searcher parameters][3].
-
-## Sizing examples
-
-The following table provides starting-point configurations for common daily log volumes. These are baseline recommendations—adjust based on your observed performance.
-
-| Daily volume | Indexer pods | Indexer podSize | Searcher pods | Searcher podSize | Object storage (30-day retention, ~4x compression) |
-|-------------|-------------|-----------------|---------------|-------------------|-----------------------------------------------------|
-| **1 TB/day** | 2 | large | 2 | xlarge | ~7.5 TB |
-| **5 TB/day** | 4 | xlarge | 4 | 2xlarge | ~37.5 TB |
-| **10 TB/day** | 8 | xlarge | 8 | 4xlarge | ~75 TB |
-| **50 TB/day** | 16 | xlarge | 20 | 8xlarge | ~375 TB |
-| **100 TB/day** | 32 | xlarge | 40 | 8xlarge | ~750 TB |
-
-<div class="alert alert-info">
-Searcher vCPUs in this table assume a mixed workload (searches and some dashboards). For dashboard-heavy use cases, increase searcher vCPUs by 2-3x. For search-only use cases (incident response, grep), you may be able to reduce them.
-</div>
 
 ## Further reading
 
