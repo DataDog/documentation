@@ -1,6 +1,10 @@
 ---
 title: Kafka Monitoring
 description: Monitor Kafka cluster health, connect services to topics, and inspect schemas and messages with Data Streams Monitoring's Kafka Monitoring.
+aliases:
+  - /data_streams/live_messages
+  - /data_streams/messages
+  - /data_streams/kafka/messages
 ---
 
 With Data Streams Monitoring's Kafka Monitoring, a Datadog Agent check connects to your Kafka cluster and starts collecting health and performance metrics. Kafka Monitoring allows you to:
@@ -11,6 +15,12 @@ With Data Streams Monitoring's Kafka Monitoring, a Datadog Agent check connects 
 - **Inspect topic schemas and messages**: View schemas, compare versions, and access messages to debug poison payloads or explore the topic
 
 ## Prerequisites
+
+### Datadog Agent version
+
+Datadog Agent version 7.78 or later is required.
+
+### ACL permissions
 
 If your Kafka cluster uses ACLs, the Datadog Agent user requires the following minimum permissions:
 
@@ -28,6 +38,15 @@ To retrieve messages in the {{< ui >}}Messages{{< /ui >}} section, the Agent use
 |---------------|---------------|-----------|
 | `*`           | `TOPIC`       | `Read`    |
 
+### Remote configuration
+
+[Remote configuration][3] must be enabled for the Agent to retrieve Kafka messages in the {{< ui >}}Messages{{< /ui >}} section.
+
+To validate:
+
+1. In Datadog, under [{{< ui >}}Remote Configuration{{< /ui >}}][5], check that remote configuration is enabled at the organization level.
+2. Check that the Agent has remote configuration enabled, and is using an API key with remote configuration enabled.
+
 ## Setup
 
 Go to the [Kafka Monitoring setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions. To request assistance, choose {{< ui >}}Request a pairing session{{< /ui >}}.
@@ -36,6 +55,42 @@ Go to the [Kafka Monitoring setup page][1] and click {{< ui >}}Get Started{{< / 
 
 The setup page provides environment-specific configuration instructions. You can copy the instructions directly to an AI agent with {{< ui >}}Copy for AI{{< /ui >}}.
 
+## Required permissions
+
+To view Kafka messages in the {{< ui >}}Messages{{< /ui >}} section, a user must have the `Data Streams Monitoring Capture Messages` permission.
+
+You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} page][7]. To enable permissions, edit an existing role or create a new one on the [{{< ui >}}Roles{{< /ui >}} page][8]. If you do not have permission to modify roles, contact your organization's administrator.
+
+<details>
+<summary><strong>Create a new role and assign it to users</strong></summary>
+
+#### 1. Create a new role
+
+1. Navigate to the [{{< ui >}}Roles{{< /ui >}} page][8] in Datadog.
+2. Click {{< ui >}}+ New Role{{< /ui >}} in the top-right corner.
+   <div class="alert alert-info">
+   If you see "Read Only" instead of the "+ New Role button", you don't have permission to create roles. Contact your Datadog administrator for assistance.
+   </div>
+3. Enter a descriptive name for your new role (for example, "Data Streams Messages Access").
+4. In the {{< ui >}}Search Permissions{{< /ui >}} field, type `Data Streams Monitoring Capture Messages`.
+5. Select the permission from the search results to enable it for this role.
+6. Click {{< ui >}}Save{{< /ui >}}.
+7. Confirm your role was created successfully by searching for it in the roles list.
+
+#### 2. Assign the role to users
+
+1. Go to the [{{< ui >}}Users{{< /ui >}} page][9] in Datadog.
+2. Find and click on the user you want to assign the role to.
+3. In the user details panel, click {{< ui >}}Edit{{< /ui >}} next to their name.
+   <div class="alert alert-info">
+   If you don't see an {{< ui >}}Edit{{< /ui >}} button, you need administrator privileges to modify user roles. Contact your Datadog administrator.
+   </div>
+4. In the modal that opens, locate the {{< ui >}}Roles{{< /ui >}} section.
+5. Add your newly created role to the user.
+6. Click {{< ui >}}Save{{< /ui >}}.
+7. Look for a {{< ui >}}User updated{{< /ui >}} confirmation message to verify the change was successful.
+
+</details>
 
 ## Workflows
 
@@ -77,7 +132,12 @@ The {{< ui >}}Messages{{< /ui >}} section lets you retrieve messages by partitio
 
 {{< img src="data_streams/kafka_schema_messages.png" alt="Topic schema and messages view showing a Protobuf schema definition and a table of recent messages with date, partition, offset, and message value" >}}
 
-**Note**: [Message viewing][2] is not enabled by default and requires additional setup. Access is controlled by per-user permissions, so you can roll out Kafka Monitoring without exposing message content. Configure message viewing separately after completing the initial setup.
+**Note**: Message viewing is not enabled by default and requires additional setup. Access is controlled by [per-user permissions][2], so you can roll out Kafka Monitoring without exposing message content. Configure message viewing separately after completing the initial setup.
 
 [1]: https://app.datadoghq.com/data-streams/kafka/setup
-[2]: /data_streams/kafka/messages
+[2]: #required-permissions
+[3]: /agent/remote_config
+[5]: https://app.datadoghq.com/organization-settings/remote-config
+[7]: https://app.datadoghq.com/personal-settings/profile
+[8]: https://app.datadoghq.com/organization-settings/roles
+[9]: https://app.datadoghq.com/organization-settings/users
