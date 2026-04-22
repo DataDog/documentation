@@ -327,12 +327,11 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
-### Step 5 - Set Symbol Strip Style (iOS Only)
+### Step 5 - Set Strip Style (iOS only)
 
-Flutter Session Replay relies on FFI, and some symbols may be stripped when building an iOS Archive or IPA. To prevent this, you
-will need to set the `Strip Style` setting in your XCode project to `Non-Global Symbols`.
+Flutter Session Replay relies on FFI, and some symbols may be stripped when building an iOS Archive or IPA. To prevent this, set the `Strip Style` setting in your XCode project to `Non-Global Symbols`.
 
-This setting is under the `Runner` target, under `Build Settings`, `Deployment`.
+This setting is under the **Runner** target > **Build Settings** > **Deployment**.
 
 {% /if %}
 <!-- end Flutter -->
