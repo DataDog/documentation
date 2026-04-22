@@ -712,13 +712,7 @@ Assign a status to each recommendation to track cost optimization progress acros
 
 ### Filter recommendations by status
 
-Use the filter tabs at the top of the [{{< ui >}}Cloud Cost Recommendations{{< /ui >}}][1] page to view recommendations grouped by status:
-
-| Tab | Description |
-|-----|-------------|
-| {{< ui >}}Top{{< /ui >}} | Displays the highest-value recommendations across all statuses. |
-| {{< ui >}}Active{{< /ui >}} | Displays recommendations with {{< ui >}}Open{{< /ui >}} or {{< ui >}}In Progress{{< /ui >}} status. |
-| {{< ui >}}Dismissed{{< /ui >}} | Displays recommendations that have been dismissed. |
+Use the status tabs at the top of the [{{< ui >}}Cloud Cost Recommendations{{< /ui >}}][1] page to filter the list by status. Each tab displays the total estimated savings for recommendations in that status: {{< ui >}}Open{{< /ui >}}, {{< ui >}}In Progress{{< /ui >}}, {{< ui >}}Completed{{< /ui >}}, and {{< ui >}}Dismissed{{< /ui >}}.
 
 ### Change a recommendation status
 
