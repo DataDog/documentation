@@ -23,7 +23,7 @@ Set up Datadog Feature Flags for your applications. Follow the platform-specific
 
 ## Testing with in-memory providers
 
-The Datadog OpenFeature provider is designed for production use: it requires network connectivity to Datadog's Remote Configuration backend to receive flag definitions. It is **not suitable for unit tests**, which should be hermetic, fast, and offline.
+The Datadog OpenFeature provider is designed for production use: it requires network connectivity to Datadog's CDN to fetch flag assignments. It is **not suitable for unit tests**, which should be hermetic, fast, and offline.
 
 For tests, swap the Datadog provider for OpenFeature's standard `InMemoryProvider` (or an equivalent test stub, where no in-memory provider is available in the language). Because the OpenFeature API is designed to make providers swappable at runtime, your application code does not change — only the provider registered during test setup.
 

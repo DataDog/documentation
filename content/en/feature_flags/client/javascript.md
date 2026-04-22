@@ -201,7 +201,7 @@ await OpenFeature.setContext({
 
 ## Testing
 
-Do not use `DatadogProvider` in unit tests: it requires network access to Datadog's Remote Configuration backend. Use OpenFeature's `InMemoryProvider` instead. It is exported directly from `@openfeature/web-sdk`, so no additional dependency is required.
+Do not use `DatadogProvider` in unit tests: it requires network access to Datadog's CDN to fetch flag assignments. Use OpenFeature's `InMemoryProvider` instead. It is exported directly from `@openfeature/web-sdk`, so no additional dependency is required.
 
 Unlike the server-side SDK, the Web SDK evaluates flags synchronously after initialization. Still `await` `setProviderAndWait` once in `beforeEach` to ensure the provider is ready.
 

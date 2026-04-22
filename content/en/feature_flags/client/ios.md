@@ -292,7 +292,7 @@ Flags.enable(with: config)
 
 The examples above use Datadog's `FlagsClient` API directly. For unit tests, Datadog recommends driving feature flags through the [OpenFeature](https://openfeature.dev/) standard API instead, so tests can swap in an in-memory provider without touching Datadog's SDK. Datadog ships an OpenFeature bridge for iOS at [dd-openfeature-provider-swift](https://github.com/DataDog/dd-openfeature-provider-swift); use the bridge's `DatadogProvider` in production code, then substitute an in-memory provider in tests.
 
-Do not use `DatadogProvider` in unit tests: it requires network access to Datadog's Remote Configuration backend. The OpenFeature Swift SDK does not ship an `InMemoryProvider` (no contrib repository for Swift exists), so tests use a small custom `FeatureProvider` instead.
+Do not use `DatadogProvider` in unit tests: it requires network access to Datadog's CDN to fetch flag assignments. The OpenFeature Swift SDK does not ship an `InMemoryProvider` (no contrib repository for Swift exists), so tests use a small custom `FeatureProvider` instead.
 
 {{< code-block lang="swift" >}}
 import Combine

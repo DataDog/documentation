@@ -295,7 +295,7 @@ await OpenFeature.setContext({
 
 ## Testing
 
-Do not use `DatadogProvider` in unit tests: it requires network access to Datadog's Remote Configuration backend. Use OpenFeature's `TypedInMemoryProvider` from `@openfeature/web-sdk` instead. Install it as a dev dependency and register it before rendering components under test:
+Do not use `DatadogProvider` in unit tests: it requires network access to Datadog's CDN to fetch flag assignments. Use OpenFeature's `TypedInMemoryProvider` from `@openfeature/web-sdk` instead. Install it as a dev dependency and register it before rendering components under test:
 
 {{< code-block lang="javascript" >}}
 import { OpenFeature } from '@openfeature/react-sdk';
