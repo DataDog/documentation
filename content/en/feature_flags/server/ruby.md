@@ -204,6 +204,51 @@ if maintenance_mode
 end
 ```
 
+## Testing
+
+Do not use the Datadog provider in unit tests: it requires a running Agent and Remote Configuration. Use OpenFeature's `InMemoryProvider` instead. It ships with `openfeature-sdk`, so no additional gem is required.
+
+The Ruby SDK's `InMemoryProvider` takes a plain hash of flag keys to values — variants and targeting rules are not supported. The OpenFeature provider is set on a process-global singleton, so tests that swap the provider must restore it in teardown to avoid leaking flag state across examples. An `around` hook handles setup, restoration, and exceptions cleanly in a single block.
+
+```ruby
+# spec/support/feature_flags.rb
+require 'open_feature/sdk'
+require 'open_feature/sdk/provider/in_memory_provider'
+
+RSpec.configure do |config|
+  config.around(:each, :feature_flags) do |example|
+    original = OpenFeature::SDK::API.instance.provider
+    OpenFeature::SDK.configure do |c|
+      c.set_provider(OpenFeature::SDK::Provider::InMemoryProvider.new(
+        'new-checkout-flow' => true,
+        'ui-theme' => 'dark',
+        'discount-rate' => 0.15
+      ))
+    end
+    example.run
+  ensure
+    OpenFeature::SDK.configure { |c| c.set_provider(original) } if original
+  end
+end
+
+# spec/checkout_spec.rb
+require 'spec_helper'
+
+RSpec.describe Checkout, :feature_flags do
+  let(:client) { OpenFeature::SDK.build_client }
+
+  it 'returns the in-memory flag value' do
+    expect(client.fetch_boolean_value(flag_key: 'new-checkout-flow', default_value: false)).to be true
+  end
+
+  it 'falls back to the default for unknown flags' do
+    expect(client.fetch_boolean_value(flag_key: 'does-not-exist', default_value: false)).to be false
+  end
+end
+```
+
+To mutate flag state during a test, call `add_flag(flag_key:, value:)` on the provider instance. The same pattern applies to Minitest — replace the `around` hook with `setup`/`teardown` methods.
+
 ## Troubleshooting
 
 ### Feature flags always return default values
