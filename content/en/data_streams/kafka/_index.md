@@ -52,8 +52,9 @@ Use this information to contact the right team when a consumer is lagging or a p
 
 The {{< ui >}}Schema{{< /ui >}} section shows the current schema for a topic's key or value, with version history. Use the version selector to compare schemas across versions.
 
-The {{< ui >}}Messages{{< /ui >}} section lets you retrieve messages by partition and offset to inspect payloads directly. This is useful for debugging poison payloads or verifying message structure after a schema change. See [Kafka Monitoring Setup][2] for the additional prerequisites and permissions required to retrieve messages.
+The {{< ui >}}Messages{{< /ui >}} section lets you retrieve messages by partition and offset to inspect payloads directly. This is useful for debugging poison payloads or verifying message structure after a schema change. See [Enable message inspection][3] for the additional prerequisites and permissions required to retrieve messages.
 
 {{< img src="data_streams/kafka_schema_messages.png" alt="Topic schema and messages view showing a Protobuf schema definition and a table of recent messages with date, partition, offset, and message value" >}}
 
 [2]: /data_streams/kafka/setup/
+[3]: /data_streams/kafka/setup/#enable-message-inspection
