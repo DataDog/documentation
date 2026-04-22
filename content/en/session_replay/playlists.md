@@ -43,6 +43,16 @@ To create it from an individual Session Replay:
       {{< img src="real_user_monitoring/session_replay/playlists/share-playlist.png" alt="Build a new playlist from the individual recording" style="width:90%;">}}
 3. Add the recording to an existing playlist, or create a new one.
 
+## Default playlists
+
+Three default playlists help you review session replays:
+
+- **My Watch History**: Replays you've previously watched.
+- **All mentions to me**: Replays where a teammate @mentioned you in a comment, so you can see which investigations need your input.
+- **Commented replays**: Every replay in your organization that has at least one comment, so you can review noteworthy sessions you or your team has flagged.
+
+All three playlists are available under [**Digital Experience > Session Replay > Playlists**][1].
+
 ## Use cases
 
 Your team can use playlists in many different ways. Here are some ideas to get started:
