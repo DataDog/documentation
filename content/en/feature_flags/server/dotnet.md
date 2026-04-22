@@ -262,6 +262,64 @@ When your application exits, shut down the OpenFeature API to clean up resources
 await Api.Instance.ShutdownAsync();
 {{< /code-block >}}
 
+## Testing
+
+Do not use the Datadog provider in unit tests: it requires a running Agent and Remote Configuration. Use OpenFeature's `InMemoryProvider` instead. It ships in the `OpenFeature` NuGet package (namespace `OpenFeature.Providers.Memory`), so no additional dependency is required beyond what is already installed for production.
+
+`Api.Instance` is a singleton. Use xUnit's `IAsyncLifetime` to set the provider per test and tear it down in `DisposeAsync`, which avoids ordering-dependent tests. For faster suites that share setup, use `InMemoryProvider.UpdateFlags(...)` to mutate flag state between tests without re-registering the provider.
+
+{{< code-block lang="csharp" >}}
+using OpenFeature;
+using OpenFeature.Model;
+using OpenFeature.Providers.Memory;
+using Xunit;
+
+public class CheckoutFlagTests : IAsyncLifetime
+{
+    private FeatureClient _client = null!;
+
+    public async Task InitializeAsync()
+    {
+        var flags = new Dictionary<string, Flag>
+        {
+            ["new-checkout-flow"] = new Flag<bool>(
+                variants: new Dictionary<string, bool> { ["on"] = true, ["off"] = false },
+                defaultVariant: "on"),
+            ["ui-theme"] = new Flag<string>(
+                variants: new Dictionary<string, string> { ["dark"] = "dark", ["light"] = "light" },
+                defaultVariant: "light",
+                contextEvaluator: ctx =>
+                    ctx.GetValue("tier")?.AsString == "premium" ? "dark" : "light"),
+        };
+
+        await Api.Instance.SetProviderAsync(new InMemoryProvider(flags));
+        _client = Api.Instance.GetClient("test");
+    }
+
+    public Task DisposeAsync() => Api.Instance.ShutdownAsync();
+
+    [Fact]
+    public async Task NewCheckoutEnabledByDefault()
+    {
+        Assert.True(await _client.GetBooleanValueAsync("new-checkout-flow", false));
+    }
+
+    [Fact]
+    public async Task PremiumUserGetsDarkTheme()
+    {
+        var ctx = EvaluationContext.Builder()
+            .SetTargetingKey("u1")
+            .Set("tier", "premium")
+            .Build();
+        Assert.Equal("dark", await _client.GetStringValueAsync("ui-theme", "light", ctx));
+    }
+}
+{{< /code-block >}}
+
+The same pattern applies to NUnit (`[SetUp]`/`[TearDown]`) and MSTest (`[TestInitialize]`/`[TestCleanup]`). For ASP.NET Core integration tests, register the `InMemoryProvider` inside `WebApplicationFactory.ConfigureTestServices` before the application boots.
+
+Avoid mocking the Datadog provider directly with Moq or similar libraries. The `InMemoryProvider` is the canonical test seam; mocking private provider internals couples your tests to Datadog SDK implementation details.
+
 ## Troubleshooting
 
 ### Provider not enabled
