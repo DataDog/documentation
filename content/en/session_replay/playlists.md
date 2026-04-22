@@ -45,11 +45,11 @@ To create it from an individual Session Replay:
 
 ## Default playlists
 
-Three default playlists help you review session replays:
+Three default playlists help you review Session Replays:
 
 - **My Watch History**: Replays you've previously watched.
 - **All mentions to me**: Replays where a teammate @mentioned you in a comment, so you can see which investigations need your input.
-- **Commented replays**: Every replay in your organization that has at least one comment, so you can review noteworthy sessions you or your team has flagged.
+- **Commented replays**: Every replay in your organization that has at least one comment, so you can review sessions you or your team has commented on.
 
 All three playlists are available under [**Digital Experience > Session Replay > Playlists**][1].
 
