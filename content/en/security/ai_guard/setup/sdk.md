@@ -1,6 +1,5 @@
 ---
 title: SDK
-private: true
 further_reading:
 - link: /security/ai_guard/
   tag: Documentation
