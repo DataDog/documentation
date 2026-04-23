@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/knowledge-center/flaky-tests/"
   tag: "Knowledge Center"
   text: "Flaky Tests Overview"
+- link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
+  tag: "Learning Center"
+  text: "Getting Started with Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
@@ -153,10 +156,6 @@ This method avoids unnecessary CI failures and saves developer time.
 If a test inside the grace period flakes and the commit doesn't contain the fix, Datadog tags the test run event with `@test.test_management.flaky_fix_missing:true`.
 
 ## AI-powered flaky test fixes
-
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}}
 
 Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been detected by Test Optimization. When a flaky test is identified, Bits AI analyzes the test failure patterns and generates production-ready fixes that can be submitted as GitHub pull requests.
 

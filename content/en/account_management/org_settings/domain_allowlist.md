@@ -27,16 +27,16 @@ This document describes how to access and modify your allowlist by using the UI.
 
 ## Usage
 
-Access your [**Domain Allowlist**][1] under **Organization Settings**. To read or edit your Domain Allowlist, you need the **Org Management** permission.
+Access your [**Domain Allowlist**][1] under {{< ui >}}Organization Settings{{< /ui >}}. To read or edit your Domain Allowlist, you need the {{< ui >}}Org Management{{< /ui >}} permission.
 
 {{< img src="account_management/org_settings/domain_allowlist/enabled.png" alt="Screenshot showing the Domain Allowlist UI, with the allowlist containing one email domain." >}}
 
-The **Domains Currently In Use** section displays the email domains of all emails mentioned in your **monitor** notifications, not including domains in use for other types of notifications. You can still configure sending notifications in scope to email domains that are not in your allowlist, but if Domain Allowlist is enabled, email domains that are not in your allowlist do not receive notifications for the products in scope.
+The {{< ui >}}Domains Currently In Use{{< /ui >}} section displays the email domains of all emails mentioned in your **monitor** notifications, not including domains in use for other types of notifications. You can still configure sending notifications in scope to email domains that are not in your allowlist, but if Domain Allowlist is enabled, email domains that are not in your allowlist do not receive notifications for the products in scope.
 
 
 ### Enable or disable Domain Allowlist
 
-Use the **Enable** or **Disable** button.
+Use the {{< ui >}}Enable{{< /ui >}} or {{< ui >}}Disable{{< /ui >}} button.
 
 To enable Domain Allowlist, you must add one or more domains to the allowlist. If you remove all domains from the allowlist, Domain Allowlist is automatically disabled.
 

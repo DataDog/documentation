@@ -14,7 +14,7 @@ Every metric query is inherently aggregated. However, appending the `.rollup()` 
 * The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
 * The rollup `<aggregator>`: How your datapoints are aggregated within a given rollup time interval.
 
-To apply a rollup, navigate to the **Add function** (Σ) button of the graphing editor: 
+To apply a rollup, navigate to the {{< ui >}}Add function{{< /ui >}} (Σ) button of the graphing editor: 
 
 {{< img src="dashboards/functions/rollup/rollup_option_1.mp4" alt="Select the Rollup average option from the Add function button" video=true >}}
 
@@ -80,7 +80,7 @@ You can customize how your metrics data is bucketed over time when using the `.r
 
 Rollups should usually be avoided in monitor queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
 
-If your monitor queries are unexpectedly showing "No Data", consider reviewing your settings for rollups and evaluation windows. For more information, see [Troubleshooting No Data in Monitors][6].
+If your monitor queries are unexpectedly showing {{< ui >}}No Data{{< /ui >}}, consider reviewing your settings for rollups and evaluation windows. For more information, see [Troubleshooting No Data in Monitors][6].
 
 ## Further reading
 

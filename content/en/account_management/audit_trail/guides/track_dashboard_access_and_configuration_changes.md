@@ -35,7 +35,7 @@ To see usage information for the dashboard, use Audit Trail to search for all AP
 `@http.status_code:200` narrows down the results to successful requests only.
 <br>**Note**: You can also use the facet panel on the left side of the page to formulate the search query.
 3. Select the timeframe in the upper right side of the page to see the events for a specific time period.
-4. You can configure the **Group into fields** section and select different visualization tools to break down and analyze the data based on your use case. For example, if you set the `group by` field to `User Email` and click **Top List** in the **Visualize as** section, you get a top list of users who accessed the dashboard.
+4. You can configure the {{< ui >}}Group into fields{{< /ui >}} section and select different visualization tools to break down and analyze the data based on your use case. For example, if you set the `group by` field to `User Email` and click {{< ui >}}Top List{{< /ui >}} in the {{< ui >}}Visualize as{{< /ui >}} section, you get a top list of users who accessed the dashboard.
 5. See [Create a dashboard or a graph][3] if you want to put this information into a dashboard or graph.
 
 ## View recent dashboard configuration changes
@@ -43,7 +43,7 @@ To see usage information for the dashboard, use Audit Trail to search for all AP
 You can use [event queries][7] in Audit Trail to see a list of dashboards that have had recent changes to their configurations.
 
 1. Navigate to [Audit Trail][2].
-1. In the **Search for** field, paste a query to filter for the kind of changes you want to see. Here are some common examples:
+1. In the {{< ui >}}Search for{{< /ui >}} field, paste a query to filter for the kind of changes you want to see. Here are some common examples:
    
    | Audit event                       | Query in audit explorer                                      |
    |-----------------------------------|--------------------------------------------------------------|
@@ -51,10 +51,10 @@ You can use [event queries][7] in Audit Trail to see a list of dashboards that h
    | [Recently modified dashboards][5] | `@evt.name:Dashboard @asset.type:dashboard @action:modified` |
    | [Recently deleted dashboards][6]  | `@evt.name:Dashboard @asset.type:dashboard @action:deleted`  |
 
-1. Optionally, on the facet panel, use filters like **Asset ID** or **Asset Name** to narrow your results down to a specific dashboard.
+1. Optionally, on the facet panel, use filters like {{< ui >}}Asset ID{{< /ui >}} or {{< ui >}}Asset Name{{< /ui >}} to narrow your results down to a specific dashboard.
 1. For each event in the table, you can see the email address of the user who performed the last change, and a summary of what happened. 
 
-   To see additional information about a specific change, click the row in the table. Then, click the **Inspect Changes (Diff)** tab to see the changes that were made to the dashboard's configuration:
+   To see additional information about a specific change, click the row in the table. Then, click the {{< ui >}}Inspect Changes (Diff){{< /ui >}} tab to see the changes that were made to the dashboard's configuration:
 
    {{< img src="account_management/audit_logs/dashboard_change_diff.png" alt="A text diff showing a new widget being added to the dashboard" style="width:100%;" >}}
 

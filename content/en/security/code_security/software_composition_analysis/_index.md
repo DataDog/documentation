@@ -23,6 +23,12 @@ further_reading:
   - link: /pr_gates/
     tag: Documentation
     text: PR Gates
+  - link: "https://www.datadoghq.com/blog/remediate-faster-code-security"
+    tag: "Blog"
+    text: "Remediate transitive vulnerabilities faster with Datadog Software Composition Analysis"
+  - link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
+    tag: "Blog"
+    text: "Key learnings from the 2026 State of DevSecOps study"
 
 ---
 ## Overview
@@ -46,7 +52,7 @@ When Datadog ingests a new advisory, it is matched against your last known libra
 
 Datadog SCA draws from multiple public and private sources to build a curated proprietary database. These sources include the [National Vulnerability Database (NVD)][21], the [GitHub Advisory Database][22], [osv.dev][23], ecosystem-specific advisories such as [PyPA's Advisory Database][24] and the [Global Security Database][25], [Datadog GuardDog][26], and Datadog Security Research. 
 
-Datadog uses these sources to identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 1 hour between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
+Datadog uses these sources to identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 1 hour between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes. Malicious packages are reported in Datadog within 6 hours.
 
 ## Public exploit sources
 
@@ -67,7 +73,7 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 | Risk factor                       | How it is evaluated                                                  | Impact on the score                                    |
 |-----------------------------------|----------------------------------------------------------------------|--------------------------------------------------------|
 | Base CVSS score                   | Published CVSS score for the vulnerability.                          | Starting point for the severity score.                 |
-| Reachability                      | Whether the vulnerable code path is actually executed.               | Increased when the vulnerable code is invoked.         |
+| Reachability                      | Whether the vulnerable function is referenced in the source code (detected statically at the repository level). | Increased when the vulnerable function is found to be reachable in the code. |
 | Production runtime context        | Whether the affected service is running in a production environment. | Decreased if the service is not running in production. |
 | Under attack                      | Evidence of active attack activity targeting the service.            | Decreased if there is no observed attack activity.     |
 | Exploit availability              | Availability of public exploits for the vulnerability.               | Decreased if no exploit is available.                  |
@@ -167,6 +173,10 @@ Software Composition Analysis (SCA) supports the following languages:
 
 {{< partial name="code_security/sca-lang-support.html" >}}
 
+## Customize your configuration
+
+You can exclude paths from Static SCA analysis by configuring `ignore-paths` in Datadog or in a `code-security.datadog.yaml` file. For the full SCA configuration reference, see [Software Composition Analysis (SCA) Configuration][27]. For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][28].
+
 ## Next steps
 
 1. [Set up Static SCA][1] to scan your repositories.
@@ -200,3 +210,5 @@ Software Composition Analysis (SCA) supports the following languages:
 [24]: https://github.com/pypa/advisory-database
 [25]: https://github.com/cloudsecurityalliance/gsd-database
 [26]: https://github.com/DataDog/guarddog
+[27]: /security/code_security/software_composition_analysis/configuration/
+[28]: /security/code_security/guides/configuration/

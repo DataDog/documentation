@@ -13,9 +13,9 @@ further_reading:
 - link: "/observability_pipelines/"
   tag: "Documentation"
   text: "Observability Pipelines Overview"
-- link: "/observability_pipelines/destinations/cloudprem/"
+- link: "/observability_pipelines/destinations/datadog_byoc_logs/"
   tag: "Documentation"
-  text: "CloudPrem Destination for Observability Pipelines"
+  text: "Datadog BYOC Logs destination for Observability Pipelines"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
@@ -36,7 +36,7 @@ Observability Pipelines provides a flexible intermediary layer between your Data
 1. Set up your pipeline:
     1. Choose the [**Datadog Agent** source][3].
     1. Remove any default processors from the pipeline.
-    1. Select the [**Datadog CloudPrem** destination][4] to forward logs to your CloudPrem instance. Leave the configuration empty.
+    1. Select the [**Datadog BYOC Logs** destination][4] to forward logs to your CloudPrem instance. Leave the configuration empty.
 
 <!-- This image shows an example with dual shipping when the instructions say log volume control -->
 <!-- {{< img src="/cloudprem/ingest/observability-pipelines-cloudprem-setup.png" alt="Screenshot of the Logs Explorer interface showing how to filter logs by selecting the cloudprem index in the facets panel" style="width:80%;" >}} -->
@@ -116,5 +116,5 @@ kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://l
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/explore_templates/?tab=logs#log-volume-control
 [3]: /observability_pipelines/sources/datadog_agent/
-[4]: /observability_pipelines/destinations/cloudprem/
+[4]: /observability_pipelines/destinations/datadog_byoc_logs/
 [5]: /observability_pipelines/sources/datadog_agent/?tab=agenthelmvaluesfile#connect-the-datadog-agent-to-the-observability-pipelines-worker

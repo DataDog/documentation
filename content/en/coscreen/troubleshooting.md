@@ -39,9 +39,9 @@ You may encounter a problem where the UI is stuck in the grayed out joining phas
 
 To resolve this issue:
 
-1. Right-click on the CoScreen application icon and go to _Options_.
-2. Ensure that _Assign To_ is set to _None_.
-3. Exist _Options_ and rejoin the CoScreen.
+1. Right-click on the CoScreen application icon and go to {{< ui >}}Options{{< /ui >}}.
+2. Ensure that {{< ui >}}Assign To{{< /ui >}} is set to {{< ui >}}None{{< /ui >}}.
+3. Exist {{< ui >}}Options{{< /ui >}} and rejoin the CoScreen.
 
 {{< img src="coscreen/assign-to-none.png" alt="Screenshot of macOS dock. Right-clicking on the CoScreen brings up a menu, and hovering over 'Options' opens up a second menu. Under 'Assign To', the user has selected 'None.'" style="width:60%;" >}}
 
@@ -57,7 +57,7 @@ If the CoScreen UI appears to be smaller than other apps on your Windows compute
 
 #### My voice is hard to understand, or sounds robotic
 
-Some devices use a Realtek voice recognition feature that may cause your voice to sound robotic when using CoScreen. If you are experiencing issues with the audibility of your voice, open the Realtek Audio Console and untick the option **Voice Recognition** to see if the situation improves.
+Some devices use a Realtek voice recognition feature that may cause your voice to sound robotic when using CoScreen. If you are experiencing issues with the audibility of your voice, open the Realtek Audio Console and untick the option {{< ui >}}Voice Recognition{{< /ui >}} to see if the situation improves.
 
 {{< img src="coscreen/windows_screenshot.png" alt="Screenshot of Windows dialog for Realtek Audio Console. The 'Voice Recognition' toggle is set to off." style="width:70%;" >}}
 

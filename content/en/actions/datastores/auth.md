@@ -46,18 +46,18 @@ None
 During the datastore creation process, you're asked to set the organization access level for the datastore. You can choose either `Contributor`, `Viewer`, or `None`. Contributor is the default access level.
 
 To restrict access to an existing datastore for either an organization or individual:
-1. Hover over the datastore on the [Datastores page][6] and click the padlock (**Permissions**) icon.
+1. Hover over the datastore on the [Datastores page][6] and click the padlock ({{< ui >}}Permissions{{< /ui >}}) icon.
 1. Use the drop-down menus to edit the permissions for a user or organization.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Elevate access
 
 The `user_access_manage` [permission][1] is required to elevate your access to datastores.
 
 To elevate your access:
-1. Hover over the datastore on the [Datastores page][6] and click the padlock (**Permissions**) icon.
-1. Click **Elevate Access**.
-1. Click **Save**.
+1. Hover over the datastore on the [Datastores page][6] and click the padlock ({{< ui >}}Permissions{{< /ui >}}) icon.
+1. Click {{< ui >}}Elevate Access{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Further reading
 
