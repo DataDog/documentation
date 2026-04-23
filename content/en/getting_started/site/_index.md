@@ -57,7 +57,7 @@ Different Datadog sites may support different functionalities depending on the i
 
 {{< img src="getting_started/site/site-selector-gs-with-tags.png" alt="The site selector dropdown menu on the right hand side of the Documentation site" style="width:100%" >}}
 
-For example, to see the documentation for the Datadog for Government site, select **US1-FED**.
+For example, to see the documentation for the Datadog for Government sites, select **US1-FED** or **US2-FED**.
 
 ## Access the Datadog for Government site
 
