@@ -304,7 +304,7 @@ This section explains how to use debug and startup logs to identify and resolve 
 
 {{% collapse-content title="Debug logs" level="h4" %}}
 
-To capture full details on the Datadog SDK, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or if Datadog support has recommended it for triage purposes. However, be sure to disable debug logging when you are finished testing to avoid the logging overhead it introduces.
+To capture full details on the Datadog SDK, enable debug mode on your SDK by using the `DD_TRACE_DEBUG` environment variable.
 
 These logs can surface instrumentation errors or integration-specific errors. For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][5].
 
@@ -332,9 +332,9 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 
 1. **Links to a trace or screenshots of the issue**: This helps reproduce your issues for troubleshooting purposes.
 
-2. **Tracer startup logs**: Startup logs help identify tracer misconfiguration or communication issues between the SDK and the Datadog Agent. By comparing the SDK's configuration with the application or container settings, support teams can pinpoint improperly applied settings.
+2. **SDK startup logs**: Startup logs help identify tracer misconfiguration or communication issues between the SDK and the Datadog Agent. By comparing the SDK's configuration with the application or container settings, support teams can pinpoint improperly applied settings.
 
-3. **Tracer debug logs**: Tracer debug logs provide deeper insights than startup logs, revealing:
+3. **SDK debug logs**: SDK debug logs provide deeper insights than startup logs, revealing:
    - Proper integration instrumentation during application traffic flow
    - Contents of spans created by the SDK
    - Connection errors when sending spans to the Agent

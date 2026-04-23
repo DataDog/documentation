@@ -203,7 +203,7 @@ Run your tests as you normally do.
 
 Default configuration values work well in most cases.
 
-However, if there is a need to fine-tune the SDK's behavior, [Datadog Tracer configuration][3] options can be used.
+However, to customize the SDK's behavior, [Datadog SDK configuration][3] options can be used.
 
 ### Collecting Git metadata
 

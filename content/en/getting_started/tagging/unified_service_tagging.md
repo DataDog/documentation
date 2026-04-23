@@ -40,7 +40,7 @@ With these three tags, you can:
 - Unified service tagging requires an SDK version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][4].
 
 
-| Language         | Minimum Tracer Version |
+| Language         | Minimum SDK Version |
 |--------------|------------|
 | .NET    |  1.17.0+       |
 | C++    |  0.1.0+       |
