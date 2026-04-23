@@ -14,6 +14,157 @@ further_reading:
 
 Follow this guide to migrate between major versions of the Browser RUM and Browser Logs SDKs. See [the SDK documentation][26] for details on its features and capabilities.
 
+## From v6 to v7
+
+V7 improves privacy defaults, removes deprecated options, and modernizes the SDK internals. Most changes require configuration updates.
+
+Take notice of the below breaking changes as you upgrade your SDK. Changes are grouped by area of impact.
+
+### Core
+
+#### Session manager rewrite
+
+The system that tracks sessions has been rewritten to improve data reliability and reduce billing discrepancies. Depending on your setup, you may notice changes in session counts.
+
+#### Deterministic sampling decisions
+
+Previously, the sampling decision was made once at session creation and persisted. It is now computed on demand from the session ID and sample rate, making it consistent regardless of which page initializes the SDK. If you use different sampling rates across pages, those rates are now applied consistently.
+
+#### Session store key renamed
+
+The session storage key has changed from `_dd_s` to `_dd_s_v2` because the new session manager uses an incompatible storage format. On upgrade, existing sessions are automatically migrated from `_dd_s`.
+
+**Note**: Rolling back to v6 after migration starts a new session, because the v6 SDK does not read the `_dd_s_v2` key. If you have CSP or cookie policies that allowlist specific cookie names, add `_dd_s_v2`.
+
+#### CDN bundles use ESM dynamic imports
+
+CDN bundles now use ESM dynamic imports instead of CommonJS, significantly reducing webpack overhead and overall bundle size. If you use the CDN snippet, add the `crossorigin` attribute:
+
+```html
+<script src="https://www.datadoghq-browser-agent.com/..." crossorigin="anonymous"></script>
+```
+
+See the [setup documentation][26] for full snippet examples.
+
+#### ES2020 browser baseline
+
+Support for pre-ES2020 browsers has been dropped to remove compatibility shims and polyfills, reducing bundle size. Minimum supported versions are Chrome 80+, Firefox 78+, and Safari 14+. Estimated impact: ~0.048% less coverage.
+
+To continue supporting older browsers, keep using Browser SDK v6 or earlier.
+
+#### Removed options
+
+| Deprecated option (v6 or earlier) | Replacement (v7)                                       |
+| --------------------------------- | ------------------------------------------------------ |
+| `betaEncodeCookieOptions`         | Cookie encoding is always enabled.                     |
+| `allowFallbackToLocalStorage`     | Use `sessionPersistence: ['cookie', 'local-storage']`. |
+
+### RUM
+
+#### `propagateTraceBaggage` enabled by default
+
+The `propagateTraceBaggage` [initialization parameter][28] now defaults to `true`. Propagating baggage enables tail-based sampling and gives traces access to user and account context.
+
+If you use distributed tracing on cross-origin requests, either set `propagateTraceBaggage: false` or add `baggage` to your `Access-Control-Allow-Headers` response headers:
+
+```
+Access-Control-Allow-Headers: traceparent, tracestate, baggage
+```
+
+#### New default for `defaultPrivacyLevel`
+
+`defaultPrivacyLevel` now defaults to `mask-user-input` (previously `mask`). This provides better out-of-the-box privacy without the restrictions of full masking. The new default masks user input while other content is collected.
+
+To preserve full masking, explicitly set `defaultPrivacyLevel: "mask"`.
+
+#### `enablePrivacyForActionName` enabled by default
+
+`enablePrivacyForActionName` now defaults to `true`. Click action names follow the `defaultPrivacyLevel` setting by default. Use the [Datadog build plugin][36] or set `enablePrivacyForActionName: false` to opt out.
+
+#### `startDurationVital` and `stopDurationVital` API change
+
+The `DurationVitalReference` object has been replaced by a `vitalKey` string option. This aligns the API with `startResource`/`stopResource` and `startAction`/`stopAction`, and with the Mobile SDK, while still allowing multiple concurrent vitals with the same name:
+
+```js
+// Before
+const ref = datadogRum.startDurationVital('myVital')
+datadogRum.stopDurationVital(ref)
+
+// After
+datadogRum.startDurationVital('myVital', { vitalKey: 'uniqueKey' })
+datadogRum.stopDurationVital('myVital', { vitalKey: 'uniqueKey' })
+```
+
+#### New `session_renewal` view loading type
+
+When a session expires and is renewed, the new view is created with `@view.loading_type:session_renewal` instead of `route_change`. Update any dashboards or monitors that filter on `@view.loading_type` if they should also include session-renewed views.
+
+#### Document resource uses `PerformanceNavigationTiming`
+
+The initial document resource event previously used a synthetic timing entry. It now uses the browser's native `PerformanceNavigationTiming` directly, which may produce slightly different `resource.duration` values for the document resource. The `initiatorType` for the document resource changes from `initial_document` to `navigation`.
+
+If you use plugins or domain context handlers that inspect `performanceEntry` for document resources, update them to expect a `PerformanceNavigationTiming` instead of `PerformanceResourceTiming`.
+
+#### First Input Delay (FID) removed
+
+Google replaced FID with Interaction to Next Paint (INP) as a Core Web Vital. FID has been removed from the SDK to reduce bundle size. Use INP instead.
+
+#### Plugin API: `strategy` removed
+
+The `strategy` field has been removed from the plugin API. If you use `rum-react` or other integrations, upgrade them to v7 alongside the core SDK.
+
+#### Improved action name computation
+
+The SDK always uses the tree walker strategy to compute action names, including in shadow DOM and Web Components. This was required to support the privacy build plugin. Action names may change slightly. The `betaTrackActionsInShadowDom` option has been removed.
+
+#### BFCache navigations always tracked
+
+Back/Forward Cache restores are tracked as distinct views with `@view.loading_type:bf_cache`, including accurate loading time and Core Web Vitals. The `trackBfCacheViews` option has been removed.
+
+#### Early requests always collected
+
+Resources and requests that occurred before the SDK initialized are automatically captured. Some of those early resources may be missing properties such as status code. The `trackEarlyRequests` option has been removed.
+
+#### Async chunk file names prefixed with `datadog`
+
+Async chunk file names include a `datadog` prefix (for example, `datadog-rum-recorder.js`). If you have CSP or caching rules matching the old names, update them accordingly.
+
+### Logs
+
+#### Logs require a session manager
+
+Logs always use a session manager, so Logs events are consistently associated with a session ID. When neither cookies nor local storage are available, the SDK does not send data and logs a warning. Previously, Logs would still start without storage.
+
+To explicitly enable memory-backed sessions, use `sessionPersistence: 'memory'`. In worker environments, this fallback is automatic.
+
+#### `forwardErrorsToLogs` and `forwardConsoleLogs` are independent
+
+Previously, enabling `forwardErrorsToLogs` also silently forwarded `console.error` calls. These options are now fully independent, giving you precise control over what gets forwarded. `forwardErrorsToLogs` controls unhandled errors only.
+
+To preserve the previous behavior, add `error` to your `forwardConsoleLogs` array:
+
+```js
+DD_LOGS.init({
+  forwardConsoleLogs: ['error', 'warn'],
+})
+```
+
+#### Network errors for cancelled requests are dropped
+
+Requests cancelled by the application (aborted fetch or XHR) no longer generate a network error log. This reduces noise in error tracking.
+
+#### Removed options
+
+| Deprecated option (v6 or earlier) | Replacement (v7)                                                           |
+| --------------------------------- | -------------------------------------------------------------------------- |
+| `usePciIntake`                    | The standard intake is now PCI compliant. Update your [CSP][18] if needed. |
+
+### Session Replay
+
+#### New serialization algorithm
+
+The new DOM mutation serialization algorithm (Change Records) is the default. It produces more accurate recordings and significantly reduces bandwidth usage. The segment format has changed; if you depend on the raw segment format, update your integration.
+
 ## From v5 to v6
 
 The main improvement v6 offers is the bundle size reduction. By dropping support for IE11 and leveraging lazy loading, the size of the RUM bundle has been reduced by 10% and the Logs bundle by nearly 9%.
@@ -414,3 +565,4 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [33]: https://rollupjs.org/tutorial/#code-splitting
 [34]: https://parceljs.org/features/code-splitting
 [35]: https://developer.chrome.com/docs/web-platform/long-animation-frames#long-frames-api
+[36]: https://github.com/DataDog/build-plugins
