@@ -5037,16 +5037,16 @@ menu:
       identifier: data_streams_setup
       parent: data_streams
       weight: 1
-    - name: Kafka 
+    - name: Kafka
       url: data_streams/kafka
       identifier: data_streams_kafka
       parent: data_streams
       weight: 2
-    - name: Messages 
-      url: data_streams/kafka/messages 
-      identifier: data_streams_kafka_messages
-      parent: data_streams_kafka 
-      weight: 201
+    - name: Setup
+      url: data_streams/kafka/setup
+      identifier: data_streams_kafka_setup
+      parent: data_streams_kafka
+      weight: 1
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -6409,10 +6409,10 @@ menu:
       url: observability_pipelines/destinations/datadog_archives/
       parent: observability_pipelines_destinations
       weight: 406
-    - name: Datadog CloudPrem
-      url: observability_pipelines/destinations/cloudprem/
+    - name: Datadog BYOC Logs
+      url: observability_pipelines/destinations/datadog_byoc_logs/
       parent: observability_pipelines_destinations
-      identifier: observability_pipelines_datadog_cloudprem
+      identifier: observability_pipelines_datadog_byoc_logs
       weight: 407
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
