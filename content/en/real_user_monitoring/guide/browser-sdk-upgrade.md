@@ -36,9 +36,21 @@ The session storage key has changed from `_dd_s` to `_dd_s_v2` because the new s
 
 **Note**: Rolling back to v6 after migration starts a new session, because the v6 SDK does not read the `_dd_s_v2` key. If you have CSP or cookie policies that allowlist specific cookie names, add `_dd_s_v2`.
 
+#### Update the CDN bundle URL
+
+If you load the SDK from the Datadog CDN, update the version segment of the bundle URL from `v6` to `v7`. This applies to all bundles:
+
+| Bundle   | URL                                                                     |
+| -------- | ----------------------------------------------------------------------- |
+| RUM      | `https://www.datadoghq-browser-agent.com/<SITE>/v7/datadog-rum.js`      |
+| RUM Slim | `https://www.datadoghq-browser-agent.com/<SITE>/v7/datadog-rum-slim.js` |
+| Logs     | `https://www.datadoghq-browser-agent.com/<SITE>/v7/datadog-logs.js`     |
+
+Replace `<SITE>` with your Datadog site (for example, `us1`, `us3`, `us5`, `eu1`, `ap1`, or `ap2`). See the [setup documentation][26] for the URL for your site.
+
 #### CDN bundles use ESM dynamic imports
 
-CDN bundles now use ESM dynamic imports instead of CommonJS, significantly reducing webpack overhead and overall bundle size. If you use the CDN snippet, add the `crossorigin` attribute:
+CDN bundles now use ESM dynamic imports instead of CommonJS, significantly reducing webpack overhead and overall bundle size. If you use the CDN snippet, add the `crossorigin` attribute to the script tag:
 
 ```html
 <script src="https://www.datadoghq-browser-agent.com/..." crossorigin="anonymous"></script>
