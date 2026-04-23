@@ -61,7 +61,7 @@ To set up the Datadog integration for [Buildkite][1]:
 
 The Datadog Buildkite integration collects logs from your finished Buildkite jobs and forwards them to Datadog. To install and configure this integration, see the [Buildkite integration documentation][11].
 
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for Buildkite jobs can be identified by the `datadog.product:cipipeline` and `source:buildkite` tags.
+Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][19]. Logs for Buildkite jobs can be identified by the `datadog.product:cipipeline` and `source:buildkite` tags.
 
 ## Advanced configuration
 
