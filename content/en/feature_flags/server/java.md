@@ -207,7 +207,7 @@ public class App {
 }
 {{< /code-block >}}
 
-Use `setProviderAndWait()` to block evaluation until the initial flag configuration is received from Remote Configuration. This ensures flags are ready before the application starts serving traffic. The default timeout is 30 seconds.
+Use `setProviderAndWait()` to block evaluation until the initial flag configuration is received from Remote Configuration. This helps ensure flags are ready before the application starts serving traffic. The default timeout is 30 seconds.
 
 `ProviderNotReadyError` is an OpenFeature SDK exception thrown when the provider times out during initialization. Catching it allows the application to start with default flag values if Remote Configuration is unavailable. If not caught, the exception propagates and may prevent application startup. Handle this based on your availability requirements.
 
@@ -422,7 +422,7 @@ The `Provider` instance is shared globally. Client names are for organizational 
 ## Best practices
 
 ### Initialize early
-Initialize the OpenFeature provider as early as possible in your application lifecycle (for example, in `main()` or application startup). This ensures flags are ready before business logic executes.
+Initialize the OpenFeature provider as early as possible in your application lifecycle (for example, in `main()` or application startup). This helps ensure flags are ready before business logic executes.
 
 ### Use meaningful default values
 Always provide sensible default values that maintain safe behavior if flag evaluation fails:
@@ -488,37 +488,62 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 
 ## Troubleshooting
 
-### Start here: verify prerequisites
+This guide follows the flag data path from the **Flagging Platform** (where flags are configured) through **Remote Configuration** and the **Datadog Agent** to the **Java SDK**, and back to the **Flagging Platform** (where evaluations and exposures appear). Work through each step in sequence to isolate where a problem originates.
 
-Before investigating specific errors, confirm these prerequisites are in place:
+### 1. Flagging platform: Verify flag configuration
 
-1. **The Datadog Agent is healthy and reachable**: See [APM Connection Errors][2] to verify Agent connectivity.
-2. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
-3. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
-4. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
+Before checking infrastructure, confirm the flag itself is set up correctly:
 
-After confirming all prerequisites, continue with the following sections if feature flags still aren't working.
+1. The flag is **published**, not saved as a draft.
+2. The flag targets the **correct service** (`DD_SERVICE`) and **environment** (`DD_ENV`).
+3. Your `DD_ENV` value appears in [Feature Flag Environments][5]. If it is absent, the environment has not received any flag traffic yet.
 
-### Debug flag evaluations
+### 2. Remote Configuration: Verify the path
 
-If flags evaluate but return unexpected values, use `getBooleanDetails()` instead of `getBooleanValue()`. The `Details` variant of each evaluation method returns a `FlagEvaluationDetails` object that exposes the provider's internal state, including the reason, variant, and any error code.
+Remote Configuration delivers flag configurations from the Datadog backend to the Agent.
 
-{{< code-block lang="java" >}}
-FlagEvaluationDetails<Boolean> details =
-    client.getBooleanDetails("your.flag.key", false, context);
+1. **RC is enabled on the Agent**: Set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIG_ENABLED=true`. See [Remote Configuration][1].
+2. **`DD_API_KEY` is valid** and belongs to the target organization.
+3. **`DD_SITE` is set correctly** on the Agent (`site` in `datadog.yaml` or `DD_SITE` env var). See [Agent Site Issues][3].
+4. **Fleet Automation**: Open [Fleet Automation][4], select the Agent your application connects to, and confirm Remote Configuration is active.
+5. **Agent CLI**: Run `datadog-agent status` and review the Remote Configuration section of the output. See [Agent Commands][6].
 
-logger.info("Flag evaluation details: value={}, variant={}, reason={}, errorCode={}",
-    details.getValue(),
-    details.getVariant(),
-    details.getReason(),
-    details.getErrorCode());
-{{< /code-block >}}
+### 3. Agent: Verify Agent health and connectivity
 
-Review the logged output to understand why the provider returned a particular result.
+1. **Agent is running and reachable**: See [APM Connection Errors][2] for steps to verify Agent connectivity from the tracer.
+2. **Agent version**: Feature flagging requires Agent 7.x or later with EVP Proxy support.
+3. **EVP proxy is available**: Query the Agent's info endpoint and confirm the response includes `evp_proxy/v4/` and `v0.7/config` in the `endpoints` array:
+   ```bash
+   curl http://localhost:8126/info
+   ```
 
-### Monitor provider state changes
+   If the Agent logs show the following error, the Agent either started after the tracer connected or does not support EVP Proxy. In this case, check the Agent version and restart order.
+   ```
+   Cannot create backend API client since Agentless mode is disabled, and agent does not support EVP proxy
+   ```
 
-Add event listeners early in your application startup to observe provider life cycle transitions:
+### 4. SDK: Verify Java SDK state
+
+#### Enable debug logging
+
+All feature flagging startup messages are emitted at DEBUG level. Set `DD_TRACE_DEBUG=true` and look for the startup sequence:
+
+```
+[dd.trace] Feature Flagging system starting
+[dd.trace] Feature Flagging system started
+```
+
+Then confirm the EVP Proxy and config endpoints were discovered:
+
+```
+discovered ... evpProxyEndpoint=evp_proxy/v4/ configEndpoint=v0.7/config
+```
+
+If these messages are absent, verify `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set and the tracer started correctly.
+
+#### Monitor provider state changes
+
+Add event listeners early in application startup to observe provider life cycle transitions. These are the fastest way to detect connectivity changes after initialization:
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.ProviderEvent;
@@ -540,39 +565,51 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-A `PROVIDER_STALE` or `PROVIDER_ERROR` event after a period of normal operation indicates a loss of connectivity to the Agent or a Remote Configuration disruption.
+A `PROVIDER_ERROR` or `PROVIDER_STALE` event after a period of normal operation indicates a loss of connectivity to the Agent or a Remote Configuration disruption.
 
-### Provider not ready
-
-**Problem**: `PROVIDER_NOT_READY` errors when evaluating flags
+#### Provider not ready
 
 `PROVIDER_NOT_READY` is returned when flag evaluation is attempted before the provider has received its first configuration from Remote Configuration. This state persists until the tracer receives its initial flag configuration payload from the Agent.
 
-**Common causes**:
-1. **Async initialization**: `setProvider()` was used instead of `setProviderAndWait()`. Evaluations that happen before the first Remote Configuration payload arrives return `PROVIDER_NOT_READY`.
-2. **Initialization timeout**: `setProviderAndWait()` timed out (default 30 seconds) and threw `ProviderNotReadyError`, which was caught. The application continues evaluating flags while still waiting for the first configuration.
+Common causes:
+- **Async initialization**: `setProvider()` was used instead of `setProviderAndWait()`. Evaluations that happen before the first Remote Configuration payload arrives return `PROVIDER_NOT_READY`.
+- **Initialization timeout**: `setProviderAndWait()` timed out (default 30 seconds) and threw `ProviderNotReadyError`, which was caught. The application continues evaluating flags while still waiting for the first configuration.
 
-**Solutions**:
-1. **Enable debug logging** to see the feature flagging system startup sequence. These messages are emitted at DEBUG level—set `DD_TRACE_DEBUG=true` to see them:
-   ```
-   [dd.trace] Feature Flagging system starting
-   [dd.trace] Feature Flagging system started
-   ```
-2. **Wait for Remote Configuration sync** (can take 30-60 seconds after publishing flags)
-3. **Verify flags are published** in Datadog UI to the correct service and environment
-4. If none of these apply, verify the Datadog Agent is healthy and reachable. See [APM Connection Errors][2].
+Remote Configuration sync can take 30-60 seconds after publishing flags. If `PROVIDER_NOT_READY` persists beyond that, re-check steps 2 and 3.
 
-### EVP proxy not available error
+#### Debug flag evaluations
 
-**Problem**: Logs show `Cannot create backend API client since agentless mode is disabled, and agent does not support EVP proxy`.
+If flags return unexpected values, use `getBooleanDetails()` instead of `getBooleanValue()`. The `Details` variant returns a `FlagEvaluationDetails` object exposing the provider's internal state:
 
-Verify the Datadog Agent is healthy and reachable. See [APM Connection Errors][2].
+{{< code-block lang="java" >}}
+FlagEvaluationDetails<Boolean> details =
+    client.getBooleanDetails("your.flag.key", false, context);
 
-### No exposures in Datadog
+logger.info("Flag evaluation details: value={}, variant={}, reason={}, errorCode={}",
+    details.getValue(),
+    details.getVariant(),
+    details.getReason(),
+    details.getErrorCode());
+{{< /code-block >}}
 
-**Problem**: Experiment exposures aren't appearing in Datadog
+Review `reason` and `errorCode` to understand why the provider returned a given result.
 
-**Solution**: Verify the flag is associated with an experiment in the Datadog UI. Exposures are only recorded for flags that are part of an experiment—standard feature flags without an experiment association do not generate exposure events.
+#### Type mismatch errors
+
+`TYPE_MISMATCH` is returned when the evaluation method does not match the flag's configured type. Use the correct method for each flag type: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`.
+
+### 5. Flagging platform: verify data appears in Datadog
+
+#### Flag evaluation metrics
+
+Flag evaluation counts appear in Datadog when `DD_METRICS_OTEL_ENABLED=true` is set on the tracer. Each evaluation emits a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. If this metric does not appear, verify the setting is enabled and the tracer version supports it.
+
+#### Experiment exposures
+
+Exposures appear in Datadog only for flags associated with an experiment. Standard feature flags without an experiment association do not generate exposure events. If exposures are missing:
+
+1. Verify the flag is associated with an experiment in the Datadog UI.
+2. Verify `DD_API_KEY` is correct and the Agent is receiving events.
 
 ## Further reading
 
@@ -580,4 +617,7 @@ Verify the Datadog Agent is healthy and reachable. See [APM Connection Errors][2
 
 [1]: /remote_configuration/
 [2]: /tracing/troubleshooting/connection_errors/
+[3]: /agent/troubleshooting/site/
+[4]: https://app.datadoghq.com/fleet
 [5]: https://app.datadoghq.com/feature-flags/settings/environments
+[6]: /agent/configuration/agent-commands/
