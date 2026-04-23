@@ -3,7 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import ApiSideNav from '../components/ApiSideNav/ApiSideNav.astro';
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs.astro';
 import type { BreadcrumbItem } from '../components/Breadcrumbs/Breadcrumbs.astro';
-import { RegionSelector } from '../components/RegionSelector/RegionSelector';
+import RegionSelectorIsland from '../components/RegionSelector/RegionSelectorIsland.astro';
 import type { ApiCategory } from '../data/api/index';
 
 interface Props {
@@ -22,7 +22,7 @@ const { title, categories, currentSlug, breadcrumbs } = Astro.props;
     <main class="api-main">
       <div class="api-toolbar">
         {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
-        <RegionSelector client:load />
+        <RegionSelectorIsland />
       </div>
       <div class="prose">
         <slot />

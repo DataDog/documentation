@@ -26,6 +26,7 @@
     "cheerio": "^1.2.0",
     "happy-dom": "^20.9.0",
     "preact-render-to-string": "^6.6.7",
+    "rollup-plugin-visualizer": "^5.14.0",
     "typescript": "^5.7.0",
     "vitest": "^4.1.4"
   }

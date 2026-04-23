@@ -13,20 +13,34 @@
  * The initial region is resolved by an inline script in `BaseLayout.astro`
  * before first paint (cookie → query → default). This module picks up from
  * there, handling referrer sync and user-driven changes.
+ *
+ * Region data (allowed keys, app-host lookups) is injected via
+ * `initRegionState` from the RegionSelector island's frontmatter — that way
+ * this module (client-bundled) never imports the build-time `regionConfig`.
  */
 
-import {
-  getAllowedRegions,
-  isAllowedRegionKey,
-  appHost,
-  DEFAULT_REGION_KEY,
-} from '../../data/api/regionConfig';
+import type { ClientRegion } from '../../config/regions';
 
 const COOKIE_NAME = 'site';
 const QUERY_PARAM = 'site';
 const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
 
 export const REGION_CHANGE_EVENT = 'regionchange';
+export const DEFAULT_REGION_KEY = 'us';
+
+let _regions: ClientRegion[] = [];
+let _allowedKeys: Set<string> = new Set();
+let _appHostByKey: Map<string, string> = new Map();
+
+/**
+ * Seed the module with the region list. Called from `RegionSelector` on mount,
+ * using the data passed in by its `.astro` island wrapper. Idempotent.
+ */
+export function initRegionState(regions: ClientRegion[]): void {
+  _regions = regions;
+  _allowedKeys = new Set(regions.map((r) => r.key));
+  _appHostByKey = new Map(regions.map((r) => [r.key, r.appHost]));
+}
 
 /** Current region key, read from the `<html data-active-region>` attribute. */
 export function getActiveRegion(): string {
@@ -42,7 +56,7 @@ export function getActiveRegion(): string {
  * No-op if `key` isn't a known region.
  */
 export function setActiveRegion(key: string): void {
-  if (!isAllowedRegionKey(key)) return;
+  if (!_allowedKeys.has(key)) return;
   if (typeof document === 'undefined') return;
 
   document.cookie = `${COOKIE_NAME}=${encodeURIComponent(key)}; path=/; max-age=${COOKIE_MAX_AGE_SECONDS}; SameSite=Lax`;
@@ -73,8 +87,8 @@ export function syncRegionFromReferrer(): boolean {
   }
 
   const current = getActiveRegion();
-  for (const region of getAllowedRegions()) {
-    if (appHost(region.key) === referrerHost && region.key !== current) {
+  for (const region of _regions) {
+    if (region.appHost === referrerHost && region.key !== current) {
       setActiveRegion(region.key);
       return true;
     }
@@ -92,7 +106,7 @@ export function readRegionCookie(): string | undefined {
   if (!match) return undefined;
   try {
     const value = decodeURIComponent(match[1]);
-    return isAllowedRegionKey(value) ? value : undefined;
+    return _allowedKeys.has(value) ? value : undefined;
   } catch {
     return undefined;
   }

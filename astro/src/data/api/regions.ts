@@ -8,7 +8,7 @@
  * message in the UI.
  */
 
-import { getAllowedRegions } from './regionConfig';
+import { getAllowedRegions } from '../../config/regions';
 
 export interface Region {
   /** Region key, e.g. `us`, `eu`, `ap1`. Matches Hugo's `site` cookie value. */

@@ -11,14 +11,20 @@
  * Keeping both sources mocked under `mocked_dependencies/hugo_site/` means the
  * Astro site uses the same region keys (`us`, `eu`, `ap1`, …) as Hugo so the
  * `site` cookie and `?site=` query param transfer seamlessly between sites.
+ *
+ * ⚠️ This module is build-time-only. It pulls in the `yaml` parser and the
+ * full `regions.config.js` data object (~680 lines). Do not import it from
+ * client-bundled code (Preact components, anything in the hydration graph).
+ * Client code should receive the slim `ClientRegion[]` shape via props —
+ * `.astro` islands read the data here in frontmatter and pass it through.
  */
 
 import { parse as parseYaml } from 'yaml';
 
 // @ts-ignore — Vite raw import
-import paramsRaw from '../../mocked_dependencies/hugo_site/config/_default/params.yaml?raw';
+import paramsRaw from '../mocked_dependencies/hugo_site/config/_default/params.yaml?raw';
 // @ts-ignore — plain ES module import
-import regionsConfig from '../../mocked_dependencies/hugo_site/assets/scripts/config/regions.config.js';
+import regionsConfig from '../mocked_dependencies/hugo_site/assets/scripts/config/regions.config.js';
 
 export interface AllowedRegion {
   /** Region key used in the `site` cookie / `?site=` query param. E.g. `us`, `eu`, `ap1`. */
@@ -96,3 +102,27 @@ export function isAllowedRegionKey(key: string | null | undefined): boolean {
 
 /** Fallback region when nothing else resolves. Matches Hugo's default. */
 export const DEFAULT_REGION_KEY = 'us';
+
+/**
+ * Slim region shape for client code. Contains only what `RegionSelector` and
+ * `regionState` need — no OTLP endpoints, AWS PrivateLink service names,
+ * Cursor deeplinks, etc. Built in `.astro` frontmatter and passed as a prop
+ * so the client bundle never imports this module (or `yaml`) directly.
+ */
+export interface ClientRegion {
+  key: string;
+  label: string;
+  domain: string;
+  /** App host used to detect navigations from a Datadog app subdomain. */
+  appHost: string;
+}
+
+/** Build the slim client-facing region list from the full build-time data. */
+export function buildClientRegions(): ClientRegion[] {
+  return getAllowedRegions().map((r) => ({
+    key: r.key,
+    label: r.label,
+    domain: r.domain,
+    appHost: appHost(r.key) ?? '',
+  }));
+}

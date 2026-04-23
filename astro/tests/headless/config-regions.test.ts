@@ -6,9 +6,9 @@ import {
   appHost,
   isAllowedRegionKey,
   DEFAULT_REGION_KEY,
-} from '../../src/data/api/regionConfig';
+} from '../../src/config/regions';
 
-describe('regionConfig', () => {
+describe('config/regions', () => {
   it('reads allowedRegions from the Hugo params.yaml snapshot', () => {
     const regions = getAllowedRegions();
     const keys = regions.map((r) => r.key);

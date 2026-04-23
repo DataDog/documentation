@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useMemo, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import styles from './RegionSelector.module.css';
 import {
@@ -6,16 +6,25 @@ import {
   setActiveRegion,
   syncRegionFromReferrer,
   onRegionChange,
+  initRegionState,
+  DEFAULT_REGION_KEY,
 } from './regionState';
-import { getAllowedRegions, DEFAULT_REGION_KEY } from '../../data/api/regionConfig';
+import type { ClientRegion } from '../../config/regions';
+
+export interface RegionSelectorProps {
+  /** Allowed Datadog sites. Supplied by `RegionSelectorIsland.astro` at build time. */
+  regions: ClientRegion[];
+}
 
 /**
- * Dropdown for picking the active Datadog site. Population, persistence, and
- * DOM sync all go through `regionState` — there are no props because the full
- * list of sites is a global (Hugo's `allowedRegions` snapshot).
+ * Dropdown for picking the active Datadog site. Persistence and DOM sync go
+ * through `regionState`. The region list is passed in by the `.astro` island
+ * wrapper so this component (and its client bundle) never imports the
+ * build-time region config or the `yaml` parser.
  */
-export function RegionSelector(): JSX.Element {
-  const regions = getAllowedRegions();
+export function RegionSelector({ regions }: RegionSelectorProps): JSX.Element {
+  useMemo(() => initRegionState(regions), [regions]);
+
   const [selected, setSelected] = useState<string>(DEFAULT_REGION_KEY);
   const [hydrated, setHydrated] = useState(false);
 

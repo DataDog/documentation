@@ -5,9 +5,11 @@ import userEvent from '@testing-library/user-event';
 import { h } from 'preact';
 import type { ComponentType } from 'preact';
 import { RegionSelector } from './RegionSelector';
-import { getAllowedRegions } from '../../data/api/regionConfig';
+import { buildClientRegions } from '../../config/regions';
 
 const RegionSelectorComponent = RegionSelector as ComponentType<any>;
+const regions = buildClientRegions();
+const regionProps = { regions };
 
 beforeEach(() => {
   // Reset DOM state between tests so region persistence (cookie, URL, html attr)
@@ -21,27 +23,27 @@ afterEach(cleanup);
 
 describe('RegionSelector — static render', () => {
   it('renders the container and select with data-testid attributes', () => {
-    render(h(RegionSelectorComponent, {}));
+    render(h(RegionSelectorComponent, regionProps));
 
     expect(screen.getByTestId('region-selector')).toBeTruthy();
     expect(screen.getByTestId('region-selector-select')).toBeTruthy();
   });
 
   it('renders an option for every allowed region', () => {
-    render(h(RegionSelectorComponent, {}));
+    render(h(RegionSelectorComponent, regionProps));
 
     const select = screen.getByTestId('region-selector-select') as HTMLSelectElement;
     const optionValues = Array.from(select.options).map((o) => o.value);
     const optionLabels = Array.from(select.options).map((o) => o.textContent);
 
-    for (const r of getAllowedRegions()) {
+    for (const r of regions) {
       expect(optionValues).toContain(r.key);
       expect(optionLabels).toContain(r.label);
     }
   });
 
   it('binds the "Datadog site" label to the select', () => {
-    render(h(RegionSelectorComponent, {}));
+    render(h(RegionSelectorComponent, regionProps));
 
     const label = screen.getByText('Datadog site') as HTMLLabelElement;
     const select = screen.getByTestId('region-selector-select');
@@ -53,7 +55,7 @@ describe('RegionSelector — static render', () => {
 
 describe('RegionSelector — BEM class state', () => {
   it('applies BEM classes to container, label, and select', () => {
-    render(h(RegionSelectorComponent, {}));
+    render(h(RegionSelectorComponent, regionProps));
 
     const container = screen.getByTestId('region-selector');
     const select = screen.getByTestId('region-selector-select');
@@ -67,7 +69,7 @@ describe('RegionSelector — BEM class state', () => {
 
 describe('RegionSelector — interactivity', () => {
   it('defaults to the US region on initial render', () => {
-    render(h(RegionSelectorComponent, {}));
+    render(h(RegionSelectorComponent, regionProps));
 
     const select = screen.getByTestId('region-selector-select') as HTMLSelectElement;
     expect(select.value).toBe('us');
@@ -75,10 +77,10 @@ describe('RegionSelector — interactivity', () => {
 
   it('selecting a region updates the select value and the BEM-identified element reflects it', async () => {
     const user = userEvent.setup();
-    render(h(RegionSelectorComponent, {}));
+    render(h(RegionSelectorComponent, regionProps));
 
     const select = screen.getByTestId('region-selector-select') as HTMLSelectElement;
-    const targetRegion = getAllowedRegions().find((r) => r.key !== 'us');
+    const targetRegion = regions.find((r) => r.key !== 'us');
     expect(targetRegion).toBeTruthy();
 
     await user.selectOptions(select, targetRegion!.key);
@@ -90,10 +92,10 @@ describe('RegionSelector — interactivity', () => {
 
   it('selecting a region syncs the active region to the <html> data attribute', async () => {
     const user = userEvent.setup();
-    render(h(RegionSelectorComponent, {}));
+    render(h(RegionSelectorComponent, regionProps));
 
     const select = screen.getByTestId('region-selector-select') as HTMLSelectElement;
-    const targetRegion = getAllowedRegions().find((r) => r.key !== 'us');
+    const targetRegion = regions.find((r) => r.key !== 'us');
 
     await user.selectOptions(select, targetRegion!.key);
 
@@ -103,10 +105,10 @@ describe('RegionSelector — interactivity', () => {
   });
 
   it('reacts to external region changes dispatched on document', async () => {
-    render(h(RegionSelectorComponent, {}));
+    render(h(RegionSelectorComponent, regionProps));
 
     const select = screen.getByTestId('region-selector-select') as HTMLSelectElement;
-    const targetRegion = getAllowedRegions().find((r) => r.key !== 'us')!;
+    const targetRegion = regions.find((r) => r.key !== 'us')!;
 
     // Simulate another island changing the region
     document.documentElement.setAttribute('data-active-region', targetRegion.key);
@@ -122,7 +124,7 @@ describe('RegionSelector — interactivity', () => {
 
 describe('RegionSelector — visibility', () => {
   it('the select and label are present and visible in the DOM', () => {
-    render(h(RegionSelectorComponent, {}));
+    render(h(RegionSelectorComponent, regionProps));
 
     const container = screen.getByTestId('region-selector');
     const select = screen.getByTestId('region-selector-select');
