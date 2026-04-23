@@ -390,6 +390,140 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 [3]: /getting_started/site/
 {{% /tab %}}
 
+{{% tab "Devin" %}}
+
+Connect Devin to the Datadog MCP Server by enabling it from Devin's MCP Marketplace. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+1. In Devin, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}MCP Marketplace{{< /ui >}} and search for `Datadog`.
+1. Select your Datadog site for the {{< ui >}}Server URL{{< /ui >}}; for example, your selected site is {{< region-param key="dd_site_name" code="true" >}}.
+1. Enter your Datadog API and application keys.
+1. Install and enable the server, and complete the OAuth login flow when prompted.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+<div class="alert alert-info">To use product-specific toolsets, set up a <a href="https://docs.devin.ai/work-with-devin/mcp#setting-up-a-custom-mcp-server">custom MCP server</a> in Devin and include the <code>toolsets</code> query at the end of the endpoint URL. See <a href="#toolsets">Toolsets</a> for more information.
+</div>
+
+[1]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+[1]: /getting_started/site/
+{{% /tab %}}
+
+{{% tab "Goose" %}}
+
+Connect Goose to the Datadog MCP Server by adding it as a {{< ui >}}remote extension{{< /ui >}} with the remote MCP URL.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+1. Follow the Goose guide on [setting up MCP server extensions][1] to add a new extension.
+
+1. Run the following command:
+   ```shell
+   goose configure
+   ```
+1. Select {{< ui >}}Add Extension{{< /ui >}} and add a remote extension using streamable HTTP.
+
+1. When prompted for a URL, enter the Datadog MCP Server endpoint for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
+   <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
+
+   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+
+   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+1. Complete the OAuth login flow when prompted.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: https://goose-docs.ai/docs/getting-started/using-extensions#mcp-servers
+[2]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+[1]: /getting_started/site/
+{{% /tab %}}
+
+{{% tab "OpenCode" %}}
+
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+
+1. Add the following to your `opencode.json` configuration file:
+    <pre><code>{
+     "mcp": {
+       "datadog": {
+         "type": "remote",
+         "url": "{{< region-param key="mcp_server_endpoint" >}}",
+         "enabled": true
+       }
+     }
+   }</code></pre>
+
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+
+   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+[1]: /getting_started/site/
+{{% /tab %}}
+
+{{% tab "GitHub Copilot" %}}
+
+<div class="alert alert-info">These instructions are for GitHub Copilot in VS Code. Similar instructions are available for GitHub Copilot in <a href="?tab=jetbrainsides#github-copilot">JetBrains IDEs</a>.</div>
+
+
+
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+
+1. Open `.vscode/mcp.json` in your project (create it if it doesn't exist), or run {{< ui >}}MCP: Open User Configuration{{< /ui >}} from the command palette for a user-scoped configuration. Add the following:
+
+    <pre><code>{
+      "servers": {
+        "datadog": {
+          "type": "http",
+          "url": "{{< region-param key="mcp_server_endpoint" >}}"
+        }
+      }
+   }</code></pre>
+
+    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+
+    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+
+1. Save the file, and click the {{< ui >}}Start{{< /ui >}} button at the top to initialize the server and complete the OAuth login flow.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: /getting_started/site/
+[2]: /bits_ai/mcp_server/setup/?tab=jetbrainsides
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+[1]: /getting_started/site/
+[2]: /bits_ai/mcp_server/setup/?tab=jetbrainsides
+{{% /tab %}}
+
 {{% tab "Other" %}}
 
 For most other [supported clients](#supported-clients), use these instructions for remote authentication. For Cline or when remote authentication is unreliable or not available, use [local binary authentication](#local-binary-authentication).
