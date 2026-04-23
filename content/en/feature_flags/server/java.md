@@ -24,7 +24,7 @@ The Java SDK integrates feature flags directly into the Datadog APM tracer and i
 
 The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
-- **Datadog Java APM Tracer**: Version **1.57.0** or later
+- **Datadog Java APM Tracer**: Version **1.61.0** or later
 - **OpenFeature SDK**: Version **1.18.2** or later
 - **Datadog Agent**: Version **7.x or later** with [Remote Configuration][1] enabled
 - **Datadog API Key**: Required for Remote Configuration
@@ -49,7 +49,7 @@ dependencies {
     implementation 'dev.openfeature:sdk:1.18.2'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:1.57.0'
+    implementation 'com.datadoghq:dd-openfeature:1.61.0'
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -63,7 +63,7 @@ dependencies {
     implementation("dev.openfeature:sdk:1.18.2")
 
     // Datadog OpenFeature Provider
-    implementation("com.datadoghq:dd-openfeature:1.57.0")
+    implementation("com.datadoghq:dd-openfeature:1.61.0")
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -84,7 +84,7 @@ Add the following dependencies to your `pom.xml`:
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-openfeature</artifactId>
-        <version>1.57.0</version>
+        <version>1.61.0</version>
     </dependency>
 </dependencies>
 {{< /code-block >}}
@@ -207,7 +207,7 @@ public class App {
 }
 {{< /code-block >}}
 
-Use `setProviderAndWait()` to block evaluation until the initial flag configuration is received from Remote Configuration. This ensures flags are ready before the application starts serving traffic. The default timeout is 30 seconds.
+Use `setProviderAndWait()` to block evaluation until the initial flag configuration is received from Remote Configuration. This helps ensure flags are ready before the application starts serving traffic. The default timeout is 30 seconds.
 
 `ProviderNotReadyError` is an OpenFeature SDK exception thrown when the provider times out during initialization. Catching it allows the application to start with default flag values if Remote Configuration is unavailable. If not caught, the exception propagates and may prevent application startup. Handle this based on your availability requirements.
 
@@ -323,6 +323,89 @@ if (config.isStructure()) {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Evaluation metrics
+
+The Datadog OpenFeature Provider records a `feature_flag.evaluations` OTel counter metric on every flag evaluation. Use this metric to track how often flags are evaluated, which variants are served, and evaluation reasons across your application.
+
+Evaluation metrics are available from `dd-openfeature` version 1.61.0.
+
+### Add the required dependencies
+
+Evaluation metrics require the OpenTelemetry SDK on the application classpath. These dependencies are optional — the provider operates without them, but no evaluation metrics are emitted.
+
+{{< tabs >}}
+{{% tab "Gradle (Groovy)" %}}
+Add the following dependencies to your `build.gradle`:
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+dependencies {
+    implementation 'io.opentelemetry:opentelemetry-sdk-metrics:1.47.0'
+    implementation 'io.opentelemetry:opentelemetry-exporter-otlp:1.47.0'
+}
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Gradle (Kotlin)" %}}
+Add the following dependencies to your `build.gradle.kts`:
+
+{{< code-block lang="kotlin" filename="build.gradle.kts" >}}
+dependencies {
+    implementation("io.opentelemetry:opentelemetry-sdk-metrics:1.47.0")
+    implementation("io.opentelemetry:opentelemetry-exporter-otlp:1.47.0")
+}
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Maven" %}}
+Add the following dependencies to your `pom.xml`:
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<dependencies>
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-sdk-metrics</artifactId>
+        <version>1.47.0</version>
+    </dependency>
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-exporter-otlp</artifactId>
+        <version>1.47.0</version>
+    </dependency>
+</dependencies>
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+Any OpenTelemetry API 1.x version is compatible. The `opentelemetry-api` artifact is included as a transitive dependency of `dd-openfeature`.
+
+### Configure the OTLP endpoint
+
+Metrics are exported to the Datadog Agent's OTLP receiver through OTLP HTTP/protobuf. The endpoint is resolved in the following order:
+
+| Priority | Environment variable | Behavior |
+|---|---|---|
+| 1 | `OTEL_EXPORTER_OTLP_METRICS_ENDPOINT` | Used as-is (must include the full path, for example, `http://agent:4318/v1/metrics`) |
+| 2 | `OTEL_EXPORTER_OTLP_ENDPOINT` | Base URL; `/v1/metrics` is appended automatically |
+| 3 | (none set) | Defaults to `http://localhost:4318/v1/metrics` |
+
+The Datadog Agent must have its OTLP receiver enabled on port 4318.
+
+### Metric reference
+
+**Metric name:** `feature_flag.evaluations`
+**Type:** Monotonic counter (cumulative temporality)
+**Export interval:** Every 10 seconds
+
+| Attribute | When present | Description | Example |
+|---|---|---|---|
+| `feature_flag.key` | Always | Flag key | `my-feature` |
+| `feature_flag.result.variant` | Always | Resolved variant key (empty string if null) | `on`, `variant-a` |
+| `feature_flag.result.reason` | Always | Evaluation reason (lowercased) | `targeting_match`, `static`, `split`, `error`, `disabled`, `default` |
+| `error.type` | On error only | Error code (lowercased) | `flag_not_found`, `type_mismatch`, `provider_not_ready` |
+| `feature_flag.result.allocation_key` | When allocation matched | Allocation key from flag config | `default-allocation` |
+
+If the OTel SDK dependencies are absent from the classpath, the provider logs a warning at startup and continues without emitting metrics. Flag evaluation is not affected.
+
 ## Error handling
 
 The OpenFeature SDK uses a default value pattern. If evaluation fails for any reason, the default value you provide is returned.
@@ -422,7 +505,7 @@ The `Provider` instance is shared globally. Client names are for organizational 
 ## Best practices
 
 ### Initialize early
-Initialize the OpenFeature provider as early as possible in your application lifecycle (for example, in `main()` or application startup). This ensures flags are ready before business logic executes.
+Initialize the OpenFeature provider as early as possible in your application lifecycle (for example, in `main()` or application startup). This helps ensure flags are ready before business logic executes.
 
 ### Use meaningful default values
 Always provide sensible default values that maintain safe behavior if flag evaluation fails:
