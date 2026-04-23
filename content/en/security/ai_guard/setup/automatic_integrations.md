@@ -36,7 +36,6 @@ AI Guard can automatically evaluate LLM calls made through supported AI ecosyste
 
 ## Integrations
 
-{{% collapse-content title="LangChain" level="h3" expanded=false id="langchain" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
 <!-- TODO: confirm traced methods and add details specific to AI Guard -->
@@ -58,11 +57,6 @@ AI Guard automatically evaluates the following LangChain operations:
 [3]: https://docs.langchain.com/oss/python/langchain/models
 [4]: https://docs.langchain.com/oss/python/langchain/tools
 {{% /tab %}}
-{{< /tabs >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="AI SDK" level="h3" expanded=false id="vercel-ai-sdk" %}}
-{{< tabs >}}
 {{% tab "Node.js" %}}
 The [AI SDK][1] integration automatically applies AI Guard evaluations to text and object generation, embeddings, and tool calls.
 
@@ -83,7 +77,6 @@ The [AI SDK][1] integration automatically applies AI Guard evaluations to text a
 [4]: https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling
 {{% /tab %}}
 {{< /tabs >}}
-{{% /collapse-content %}}
 
 ## Further reading
 
