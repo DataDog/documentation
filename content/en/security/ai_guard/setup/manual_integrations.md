@@ -15,24 +15,19 @@ further_reading:
 Manual integrations require additional configuration to enable AI Guard protection. Follow the instructions for each framework to set up AI Guard evaluations.
 
 ## Supported frameworks and libraries
+### Python
 
-{{< tabs >}}
-{{% tab "Python" %}}
-| Framework                                     | Supported Versions | Tracer Version |
-|-----------------------------------------------|--------------------|----------------|
-| [Amazon Strands](#amazon-strands)             | >= 1.29.0          | >= 4.7.0       |
-| [LiteLLM Proxy](#litellm-proxy)               | >= 1.78.5          | >= 4.8.0       |
-
-{{% /tab %}}
-{{< /tabs >}}
+| Framework                         | Supported Versions | Tracer Version |
+| --------------------------------- | ------------------ | -------------- |
+| [Amazon Strands](#amazon-strands) | >= 1.29.0          | >= 4.7.0       |
+| [LiteLLM Proxy](#litellm-proxy)   | >= 1.78.5          | >= 4.8.0       |
 
 {{< partial name="security-platform/aiguard-sdk-setup.md" markdown="true" target="manual" >}}
 
 ## Integrations
 
 ### Amazon Strands
-{{< tabs >}}
-{{% tab "Python" %}}
+#### Python
 
 The Amazon Strands integration enables AI Guard evaluations for applications built with the [Amazon Strands Agents SDK][1].
 
@@ -69,12 +64,9 @@ agent = Agent(
 ```
 
 [1]: https://github.com/strands-agents/sdk-python
-{{% /tab %}}
-{{< /tabs >}}
 
 ### LiteLLM Proxy
-{{< tabs >}}
-{{% tab "Python" %}}
+#### Python
 
 The LiteLLM Proxy integration enables AI Guard evaluations for applications using the [LiteLLM Proxy][1].
 
@@ -114,9 +106,6 @@ By default, the guardrail follows the blocking configuration set in the AI Guard
 [1]: https://docs.litellm.ai/docs/simple_proxy
 [2]: /security/ai_guard/setup/sdk/
 [3]: /security/ai_guard/setup/http_api/
-{{% /tab %}}
-{{< /tabs >}}
-{{% /collapse-content %}}
 
 ## Further reading
 
