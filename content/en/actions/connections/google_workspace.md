@@ -61,7 +61,7 @@ Enable the Google APIs you plan to use in your workflows:
 
 ## Create the connection in Datadog
 
-1. From the [Workflow Automation page][2] or the [App Builder page][3], click the **Connections** tab.
+1. From the [Action Catalog page][2], click the **Connections** tab.
 1. Click **New Connection**.
 1. Select the **Google Workspace** icon.
 1. Enter a **Connection Name**.
@@ -164,8 +164,7 @@ Select only the scopes required by the actions you intend to use.
 <br>Do you have questions or feedback? Join the **#workflows** or **#app-builder** channel on the [Datadog Community Slack][4].
 
 [1]: https://console.cloud.google.com/
-[2]: https://app.datadoghq.com/workflow
-[3]: https://app.datadoghq.com/app-builder
+[2]: https://app.datadoghq.com/actions/action-catalog
 [4]: https://chat.datadoghq.com/
 [5]: https://console.cloud.google.com/apis/library
 [6]: https://console.cloud.google.com/apis/credentials/consent
