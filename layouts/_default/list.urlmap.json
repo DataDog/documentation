@@ -1,4 +1,4 @@
-{{- if ne hugo.Environment "development" -}}
+{{- if eq hugo.Environment "live" -}}
 {{- $urlmap := dict -}}
 {{- range where .Site.AllPages "Kind" "!=" "home" -}}
     {{- $page := . -}}
