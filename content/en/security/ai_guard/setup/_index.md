@@ -85,10 +85,10 @@ AI Guard provides settings to control how evaluations are enforced, how sensitiv
 By default, AI Guard evaluates conversations and returns an action (`ALLOW`, `DENY`, or `ABORT`) but does not block requests. To enable blocking so that `DENY` and `ABORT` actions actively prevent unsafe interactions from proceeding, configure the [blocking policy][6] for your services.
 
 You can configure blocking at different levels of granularity, with more specific settings taking priority:
-1. **Organization-wide**: Apply a default blocking policy to all services and environments.
-2. **Per environment**: Override the organization default for a specific environment.
-3. **Per service**: Override the organization default for a specific service.
-4. **Per service and environment**: Override all of the above for a specific service in a specific environment (for example, enable blocking in production but not in staging).
+- **Organization-wide**: Apply a default blocking policy to all services and environments.
+- **Per environment**: Override the organization default for a specific environment.
+- **Per service**: Override the organization default for a specific service.
+- **Per service and environment**: Override all of the above for a specific service in a specific environment (for example, enable blocking in production but not in staging).
 
 ### Evaluation sensitivity {#evaluation-sensitivity}
 
