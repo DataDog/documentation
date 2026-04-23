@@ -27,7 +27,7 @@ For Cursor, Datadog recommends installing the [**Datadog plugin**](https://curso
 1. Install the Datadog plugin from the [Cursor plugin marketplace](https://cursor.com/marketplace/datadog).
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-<div class="alert alert-info">The Datadog plugin for Cursor is in Preview. The Datadog extension for Cursor no longer installs the Datadog MCP Server — use the Datadog plugin for MCP Server access. Install the <a href="/ide_plugins/vscode/?tab=cursor">Datadog extension</a> separately for other features such as Exception Replay, Code Insights, View in Cursor, Log Annotations, Static Code Analysis, and Fix in Chat.</div>
+<div class="alert alert-info">The Datadog plugin for Cursor is in Preview. The Datadog extension for Cursor no longer installs the Datadog MCP Server. Use the Datadog plugin for MCP Server access. Install the <a href="/ide_plugins/vscode/?tab=cursor">Datadog extension</a> separately for other features such as Exception Replay, Code Insights, View in Cursor, Log Annotations, Static Code Analysis, and Fix in Chat.</div>
 
 {{< /site-region >}}
 
