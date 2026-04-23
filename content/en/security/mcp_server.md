@@ -24,6 +24,16 @@ The [Datadog MCP Server][1] lets AI agents query your security data through the 
 
 <div class="alert alert-info">This page covers the <code>security</code> toolset of the remote Datadog MCP Server. For the Code Security MCP Server, which runs locally and scans source code during development, see <a href="/security/code_security/dev_tool_int/mcp_server/">Code Security MCP Server</a>.</div>
 
+### Use cases
+
+You can use the `security` toolset to:
+
+- **Triage security signals**: Ask your AI agent to surface recent high-severity Cloud SIEM signals, App & API Protection alerts, or Workload Protection threats, and get a summary of patterns and affected resources.
+- **Analyze your security posture**: Query findings across Cloud Security with SQL to understand the distribution of misconfigurations, vulnerabilities, and identity risks across your environment.
+- **Investigate specific findings**: Retrieve full details for a set of findings to understand scope, affected resources, and remediation context.
+- **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
+- **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
+
 ## Quickstart
 
 The `security` toolset is not enabled by default. You can enable it by adding a parameter to your URL, which allows security tools to interact with your AI client.
@@ -34,7 +44,7 @@ The `security` toolset is not enabled by default. You can enable it by adding a 
    https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?toolsets=core,security
    ```
 
-<div class="alert alert-warning">Without <code>?toolsets=security</code> in the URL, the security tools are not available to your AI client — even if the MCP Server is otherwise connected and working.</div>
+<div class="alert alert-warning"><code>?toolsets=security</code> must be in the URL. Otherwise, security tools are not available to your AI client, even if the MCP Server is otherwise connected and working.</div>
 
 ## Available tools
 
@@ -55,16 +65,6 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 `search_security_findings`
 : Retrieves full security finding objects. Use this when you need complete finding details or when SQL-based analysis is not sufficient. Prefer `analyze_security_findings` for most analysis tasks.
 : *Permissions required: `Security Monitoring Findings Read`*
-
-## Use cases
-
-You can use the `security` toolset to:
-
-- **Triage security signals**: Ask your AI agent to surface recent high-severity Cloud SIEM signals, App & API Protection alerts, or Workload Protection threats, and get a summary of patterns and affected resources.
-- **Analyze your security posture**: Query findings across Cloud Security with SQL to understand the distribution of misconfigurations, vulnerabilities, and identity risks across your environment.
-- **Investigate specific findings**: Retrieve full details for a set of findings to understand scope, affected resources, and remediation context.
-- **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
-- **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
 
 ## Further reading
 
