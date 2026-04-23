@@ -96,14 +96,23 @@ Q2: Is cross-region data transfer prohibited for some
     |
     +-- NO
         |
-Q3: Are you an MSP serving external customers who need
+Q3: Does your security policy require complete data firewalling
+    between teams, with zero tolerance for any data co-mingling --
+    even with RBAC, Data Access Control, and Granular Access Control
+    in place?
+    |
+    +-- YES -> Multi-org (complete data firewall -- Pattern B)
+    |
+    +-- NO
+        |
+Q4: Are you an MSP serving external customers who need
     independent billing, data, and user management?
     |
     +-- YES -> Multi-org (MSP multi-tenancy -- Pattern C)
     |
     +-- NO
         |
-Q4: Are you integrating an acquisition that has its own
+Q5: Are you integrating an acquisition that has its own
     Datadog org?
     |
     +-- YES -> Temporary multi-org with consolidation target
@@ -113,6 +122,8 @@ Q4: Are you integrating an acquisition that has its own
               Use RBAC, DAC, Granular Access Control, and Teams
               for isolation.
 ```
+
+**Before choosing multi-org for a data firewall requirement:** Confirm that [Teams][7], [Data Access Control][4], [Granular Access Control][6], and [RBAC][3] within a single org cannot meet the separation requirement. Multi-org carries real operational cost—monitors and SLOs do not span orgs, configuration must be duplicated, and user and billing management become separate surfaces per org. Pick multi-org when in-org controls genuinely cannot satisfy the policy, not as a precaution.
 
 ### Capability comparison
 
