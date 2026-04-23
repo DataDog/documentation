@@ -32,7 +32,7 @@ Set up CI Visibility for Buildkite to optimize your resource usage, reduce overh
 | [Custom spans][14] | Custom spans | Configure custom spans for your pipelines. |
 | [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
-| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][10]. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][20]. |
 
 
 ### Terminology
@@ -59,9 +59,9 @@ To set up the Datadog integration for [Buildkite][1]:
 
 ### Collect job logs
 
-The Datadog Buildkite integration collects logs from your finished Buildkite jobs and forwards them to Datadog. To install and configure this integration, see the [Buildkite integration documentation][11].
+The Datadog Buildkite integration collects logs from your finished Buildkite jobs and forwards them to Datadog. To install and configure this integration, see the [Buildkite integration documentation][19].
 
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][19]. Logs for Buildkite jobs can be identified by the `datadog.product:cipipeline` and `source:buildkite` tags.
+Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][21]. Logs for Buildkite jobs can be identified by the `datadog.product:cipipeline` and `source:buildkite` tags.
 
 ## Advanced configuration
 
@@ -162,4 +162,6 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [16]: /continuous_integration/search/#search-for-pipelines
 [17]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [18]: /glossary/#pipeline-execution-time
-[19]: /integrations/buildkite/#setup
+[19]: /integrations/buildkite/
+[20]: /continuous_integration/pipelines/buildkite/#collect-job-logs
+[21]: /logs/
