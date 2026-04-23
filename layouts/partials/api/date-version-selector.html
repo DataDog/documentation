@@ -1,5 +1,5 @@
 {{/*
-  Renders date-based API version selector tabs for a versioned operation.
+  Renders a date-based API version selector dropdown for a versioned operation.
   Params:
     operationId  - string, the endpoint's operationId
     versions     - slice of dicts: {date string, isBase bool}
@@ -9,21 +9,27 @@
 {{ $versions    := .versions }}
 {{ $baseVersion := .baseVersion }}
 
-<ul class="nav nav-tabs response-toggle border-none justify-content-md-end mb-0"
-    role="tablist"
-    aria-label="API date version">
-  {{ range $versions }}
-    <li class="nav-item">
-      <button type="button"
-              class="nav-link me-1 js-api-date-version-tab {{ if eq .date $baseVersion }}active{{ end }}"
-              data-api-date-version="{{ .date }}"
-              data-operation-id="{{ $operationId }}">
+<div class="dropdown d-inline-block js-api-date-version-dropdown"
+     data-operation-id="{{ $operationId }}">
+  <button class="btn btn-sm dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          style="min-width: 130px;">
+    <span class="js-api-date-version-label">{{ $baseVersion }}</span>
+  </button>
+  <div class="dropdown-menu dropdown-menu-end" style="min-width: 130px;">
+    {{ range $versions }}
+      <a class="dropdown-item js-api-date-version-item {{ if eq .date $baseVersion }}active{{ end }}"
+         href="#"
+         data-api-date-version="{{ .date }}"
+         data-operation-id="{{ $operationId }}">
         {{- .date -}}
         {{- if .isBase }}
-          <span class="badge bg-secondary ms-1 api-version-default-badge"
-                title="Default — non-versioned requests use this version">default</span>
+          <small class="text-muted ms-1">(default)</small>
         {{- end }}
-      </button>
-    </li>
-  {{ end }}
-</ul>
+      </a>
+    {{ end }}
+  </div>
+</div>

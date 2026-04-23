@@ -262,3 +262,41 @@ $ddpurple: #632ca6;
         }
     }
 }
+
+// Date-based API version selector dropdown
+.js-api-date-version-dropdown {
+    .dropdown-toggle {
+        color: #333;
+        background: #fff;
+        border: 1px solid #c4c4c4;
+
+        &:hover,
+        &:focus,
+        &.show {
+            color: #fff;
+            background: $ddpurple;
+            border-color: $ddpurple;
+        }
+    }
+
+    .dropdown-item {
+        &:hover,
+        &:focus {
+            color: #fff;
+            background: $ddpurple;
+
+            .text-muted {
+                color: rgba(255, 255, 255, 0.7) !important;
+            }
+        }
+
+        &.active {
+            color: #fff;
+            background: $ddpurple;
+
+            .text-muted {
+                color: rgba(255, 255, 255, 0.7) !important;
+            }
+        }
+    }
+}

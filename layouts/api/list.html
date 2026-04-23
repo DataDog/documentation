@@ -72,6 +72,71 @@
 
     {{ $anchorStr := $menuChild.Name }}
     {{ $versionCount := (len $menuChild.Params.versions) }}
+
+    {{/* ---- Pre-scan: detect date-based API versioning for this operation ---- */}}
+    {{ $topDvScratch := newScratch }}
+    {{ $topDvScratch.Set "isDateVersioned" false }}
+    {{ $topDvScratch.Set "apiVersionsList" slice }}
+    {{ $topDvScratch.Set "baseVersion" "" }}
+    {{ $topDvScratch.Set "dateVersionOperationId" "" }}
+    {{ range $versionNum := $menuChild.Params.versions }}
+      {{ $specData := partial "api/load-specs.html" (dict "version" $versionNum) }}
+      {{ if $specData }}
+        {{ $gr := partial "api/regions.html" (dict "servers" $specData.servers) }}
+        {{ $ep := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $specData "generalRegions" $gr) }}
+        {{ if $ep }}
+          {{ range $respCode, $resp := $ep.action.responses }}
+            {{ range $mt, $content := $resp.content }}
+              {{ if index $content.schema "x-datadog-api-versioned" }}
+                {{ $topDvScratch.Set "isDateVersioned" true }}
+                {{ $topDvScratch.Set "dateVersionOperationId" $ep.action.operationId }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          {{ with $ep.action.requestBody }}
+            {{ range $mt, $content := .content }}
+              {{ if index $content.schema "x-datadog-api-versioned" }}
+                {{ $topDvScratch.Set "isDateVersioned" true }}
+                {{ $topDvScratch.Set "dateVersionOperationId" $ep.action.operationId }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+          {{ if $topDvScratch.Get "isDateVersioned" }}
+            {{ $apiVersioningData := index $specData "x-datadog-api-versioning" | default dict }}
+            {{ $versionMap := $apiVersioningData.versions | default dict }}
+            {{ $dateKeys := slice }}
+            {{ range $dk, $_ := $versionMap }}
+              {{ $dateKeys = append $dk $dateKeys }}
+            {{ end }}
+            {{ $dateKeys = sort $dateKeys }}
+            {{ $bvs := newScratch }}
+            {{ $bvs.Set "bv" "" }}
+            {{ range $dateKeys }}
+              {{ if (index $versionMap .).base }}
+                {{ $bvs.Set "bv" . }}
+              {{ end }}
+            {{ end }}
+            {{ $bv := $bvs.Get "bv" }}
+            {{ if and (eq $bv "") (gt (len $dateKeys) 0) }}
+              {{ $bv = index $dateKeys 0 }}
+            {{ end }}
+            {{ $topDvScratch.Set "baseVersion" $bv }}
+            {{ $vList := slice }}
+            {{ range $dateKeys }}
+              {{ $vd := index $versionMap . }}
+              {{ $vList = append (dict "date" . "isBase" ($vd.base | default false)) $vList }}
+            {{ end }}
+            {{ $topDvScratch.Set "apiVersionsList" $vList }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ $topIsDateVersioned := $topDvScratch.Get "isDateVersioned" }}
+    {{ $topApiVersionsList := $topDvScratch.Get "apiVersionsList" }}
+    {{ $topBaseVersion := $topDvScratch.Get "baseVersion" }}
+    {{ $topDateVersionOpId := $topDvScratch.Get "dateVersionOperationId" }}
+    {{/* ---- End pre-scan ---- */}}
+
     <div class="row">
       <div class="col-12 {{ if gt (len $menuChild.Params.versions) 0 }}col-md-6{{ end }}">
           <h2 class="mb-2 api-task-description" id="{{ $anchorStr | anchorize }}">
@@ -82,6 +147,12 @@
       </div>
       {{ if gt (len $menuChild.Params.versions) 0 }}
       <div class="col-12 col-md-6 api-version-label-wrapper">
+          {{/* If date-versioned, show a dropdown instead of v1/v2 tabs */}}
+          {{ if $topIsDateVersioned }}
+            <div class="d-flex justify-content-md-end align-items-center gap-2">
+              {{ partial "api/date-version-selector.html" (dict "operationId" $topDateVersionOpId "versions" $topApiVersionsList "baseVersion" $topBaseVersion) }}
+            </div>
+          {{ else }}
           <ul class="nav nav-tabs response-toggle border-none justify-content-md-end">
             {{ range $versionIndex, $versionNum := $menuChild.Params.versions }}
               {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
@@ -93,6 +164,7 @@
               </li>
             {{ end }}
           </ul>
+          {{ end }}
       </div>
       {{ end }}
     </div>
@@ -110,7 +182,7 @@
         {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
         {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
 
-        <div data-title="{{ $versionNum }}" id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="{{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}collapse{{- else -}}tab-pane{{- end -}} {{ if $endpointVisibility.isVisibleVersion }} active{{ end }}" role="tabpanel">
+        <div data-title="{{ $versionNum }}" id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="{{- if $topIsDateVersioned -}}{{/* no tab-pane — content always visible when date-versioned */}}{{- else if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}collapse{{- else -}}tab-pane{{- end -}} {{ if or $topIsDateVersioned $endpointVisibility.isVisibleVersion }} active{{ end }}" {{ if not $topIsDateVersioned }}role="tabpanel"{{ end }}>
 
         <!-- for accessing v1/v2 resources from latest -->
         {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" $baseDir "") }}
@@ -208,13 +280,7 @@
                         {{- end -}}
                       </p>
 
-                      {{ if $isDateVersioned }}
-                      <!-- Date-based API version selector -->
-                      <div class="d-flex justify-content-end align-items-center gap-2 mt-1 mb-2">
-                        <small class="text-muted fw-semibold">API version:</small>
-                        {{ partial "api/date-version-selector.html" (dict "operationId" $endpoint.action.operationId "versions" $apiVersionsList "baseVersion" $baseVersion) }}
-                      </div>
-                      {{ end }}
+                      {{/* Date-based API version dropdown is rendered in the top-level version label area */}}
 
                       <h3 class="mt-2">{{ i18n "overview" }}</h3>
                       <p>
@@ -233,7 +299,7 @@
                       {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum "isDateVersioned" $isDateVersioned "apiVersionsList" $apiVersionsList "baseVersion" $baseVersion "spec" $adat) }}
 
                       <!-- code example -->
-                      {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint "version" $versionNum) }}
+                      {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint "version" $versionNum "isDateVersioned" $isDateVersioned "baseVersion" $baseVersion) }}
                   </div>
               </div>
           </div>
