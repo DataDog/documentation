@@ -123,7 +123,7 @@ To learn more about how the inventory is generated, how Static and Runtime data 
 
 Use the [CVE Explorer][15] to search every CVE and security advisory tracked by Datadog, including those that do not affect your environment. This helps you assess exposure to newly published vulnerabilities before they appear in your findings.
 
-For CVEs that affect packages detected in your scanned repositories and services, Datadog automatically marks them as impacted. Assets that have not been scanned will not reflect an impacted status.
+For CVEs that affect packages detected in your scanned repositories and services, Datadog automatically marks them as impacted. Assets that have not been scanned do not show an impacted status.
 
 For each CVE, you can view the severity score, exploit availability, EPSS score, CISA KEV status, impacted packages, and fix versions. See [CVE Explorer][27] for more details.
 
