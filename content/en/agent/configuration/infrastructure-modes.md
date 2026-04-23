@@ -99,7 +99,7 @@ bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.s
 ```
 {{% /tab %}}
 {{% tab "Windows" %}}
-In the following command, replace `<API_KEY>` with your organization's [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys), `<DD_SITE>` with {{< region-param key="dd_site" >}}, and `<MODE>` with `full`, `basic`, `end_user_device`, or `none`:
+In the following command, replace `<API_KEY>` with your organization's [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys), `<DD_SITE>` with **{{< region-param key="dd_site" >}}**, and `<MODE>` with `full`, `basic`, `end_user_device`, or `none`:
 ```powershell
 $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<API_KEY>" SITE="<DD_SITE>" DD_INFRASTRUCTRURE_MODE="<MODE>"'
 if ($p.ExitCode -ne 0) {
@@ -113,11 +113,11 @@ if ($p.ExitCode -ne 0) {
 
 To set the infrastructure mode for an existing host:
 
-1. Open the [Agent configuration file][18] and add `infrastructure_mode` at the root level:
+1. Open the [Agent configuration file][18] and add `infrastructure_mode` at the root level. Replace `<MODE>` with `full`, `basic`, `end_user_device`, or `none`.
 
     {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true"
       collapsible="true" >}}
-infrastructure_mode: <MODE>  # Replace <MODE> with the mode for the host: `full`, `basic`, `end_user_device`, or `none`.
+infrastructure_mode: <MODE>
     {{< /code-block >}}
 
 2. [Restart the Datadog Agent][19].
