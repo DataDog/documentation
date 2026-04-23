@@ -4,7 +4,7 @@ description: The CVE Explorer provides a unified view of all CVEs and security a
 disable_toc: false
 ---
 
-The CVE Explorer gives you a searchable catalog of every CVE and security advisory tracked by Datadog, including detailed information about affected packages, exploit availability, and fix guidance. Unlike the [Vulnerabilities explorer][1], which shows findings scoped to your repositories and services, the CVE Explorer shows the full universe of CVEs Datadog tracks — so you can proactively assess exposure to newly published vulnerabilities before they appear in your findings.
+The CVE Explorer gives you a searchable catalog of every CVE and security advisory tracked by Datadog, including detailed information about affected packages, exploit availability, and fix guidance. Unlike the [Vulnerabilities explorer][1], which shows findings scoped to your repositories and services, CVE Explorer shows the full set of CVEs Datadog tracks, so you can proactively assess exposure to newly published vulnerabilities before they appear in your findings.
 
 For CVEs that affect packages detected in your scanned repositories and services, Datadog automatically marks them as impacted. Assets that have not been scanned will not reflect an impacted status.
 
