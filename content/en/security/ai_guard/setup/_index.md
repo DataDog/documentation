@@ -119,7 +119,7 @@ To restrict access to AI Guard spans for specific users, you can use [Data Acces
 [5]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 [6]: https://app.datadoghq.com/security/ai-guard/settings/services
 [7]: https://app.datadoghq.com/security/ai-guard/settings/evaluation-sensitivity
-[8]: https://app.datadoghq.com/security/ai-guard/settings/sensitive-data-scanning
+[8]: https://app.datadoghq.com/security/ai-guard/settings/services
 [9]: https://app.datadoghq.com/organization-settings/data-access-controls/
 [10]: /security/ai_guard/setup/automatic_integrations/
 [11]: /security/ai_guard/setup/manual_integrations/
