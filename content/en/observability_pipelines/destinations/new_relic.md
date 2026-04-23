@@ -23,9 +23,7 @@ Set up the New Relic destination and its environment variables when you [set up 
 1.  Enter the identifier for your license. If you leave it blank, the [default](#set-secrets) is used.
 1. Select the data center region (**US** or **EU**) of your New Relic account.
 
-#### Optional settings
-
-##### Buffering options
+#### Optional buffering
 
 {{% observability_pipelines/destination_buffer %}}
 

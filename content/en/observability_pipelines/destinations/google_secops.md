@@ -30,9 +30,7 @@ To set up the Worker's Google SecOps destination:
 1. Select **JSON** or **Raw** encoding in the dropdown menu.
 1. Enter the log type. See [template syntax][4] if you want to route logs to different log types based on specific fields in your logs.
 
-#### Optional settings
-
-##### Buffering options
+#### Optional buffering
 
 {{% observability_pipelines/destination_buffer %}}
 

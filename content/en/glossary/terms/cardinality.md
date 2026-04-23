@@ -1,4 +1,5 @@
 ---
+id: cardinality
 title: cardinality
 core_product:
   - metrics

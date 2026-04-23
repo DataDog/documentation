@@ -38,7 +38,7 @@ Learn more about the [compatibility requirements][6].
 ### Configure the prompt
 
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
-   {{< img src="llm_observability/evaluations/custom_llm_judge_1-3.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
+   {{< img src="llm_observability/evaluations/EvalConfig_LLMO.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened." style="width:100%;" >}}
 1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
     - If you select an **Amazon Bedrock** account, choose a region the account is configured for.
@@ -277,13 +277,17 @@ Assessment Criteria is not currently available for JSON evaluations.
 
 ### Define the evaluation scope: Filtering and sampling
 
+<div class="alert alert-info">Span fields used in evaluations are limited to 250 KB each. Fields exceeding this size are truncated before being sent to the LLM judge.</div>
+
 Under **Evaluation Scope**, define where and how your evaluation runs. This helps control coverage (which spans are included) and cost (how many spans are sampled).
    - **Application**: Select the application you want to evaluate.
    - **Evaluate On**: Choose one of the following:
       - **Traces**: Evaluate only root spans
       - **All Spans**: Evaluate both root and child spans
-   - **Span Names**: (Optional) Limit evaluation to spans with certain names.
-   - **Tags**: (Optional) Limit evaluation to spans with certain tags.
+   - **Query**: (Optional) Enter a query using Datadog query syntax to filter which spans are evaluated. For example:
+      - `@name:agent.workflow` to filter by span name
+      - `env:prod` to filter by tag
+      - `@name:agent.workflow AND env:prod` to filter by span name and tag
    - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
 {{< img src="llm_observability/evaluations/evaluation_scope.png" alt="Configuring the evaluation scope." style="width:100%;" >}}
@@ -325,6 +329,26 @@ You can:
 - View aggregate results in the LLM Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
 
+## Using in experiments
+
+To reuse a custom LLM-as-a-judge evaluation in a local [LLM Experiment][8], reference it by name using `RemoteEvaluator` from the SDK:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs, RemoteEvaluator
+
+evaluator = RemoteEvaluator(eval_name="quality-assessment")
+
+experiment = LLMObs.experiment(
+    name="my-experiment",
+    task=my_task,
+    dataset=dataset,
+    evaluators=[evaluator],
+)
+experiment.run()
+{{< /code-block >}}
+
+You can mix `RemoteEvaluator` with other local evaluators in the same experiment. For custom input mapping, error handling, and more options, see [RemoteEvaluator][9] in the Evaluation Developer Guide.
+
 ## Best practices for reliable custom evaluations
 
 - **Start small**: Target a single, well-defined failure mode before scaling.
@@ -336,7 +360,7 @@ You can:
 
 ## Estimated token usage
 
-You can monitor the token usage of your LLM evaluations using the [LLM Evaluations Token Usage dashboard][8].
+You can monitor the token usage of your LLM evaluations using the [LLM Evaluations Token Usage dashboard][10].
 
 If you need more details, the following metrics allow you to track the LLM resources consumed to power evaluations:
 
@@ -345,6 +369,14 @@ If you need more details, the following metrics allow you to track the LLM resou
 - `ml_obs.estimated_usage.llm.total.tokens`
 
 Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
+
+## Configure LLM-as-a-judge evaluations from the API
+
+You can use basic CRUD operations to manipluate managed evaluation configs, one you have the `DD_API_KEY` [API key][14] specified in your environment.
+
+ - [GET][11] existing evaluation configurations
+ - [PUT][12] existing evaluation configurations
+ - [DELETE][13] existing evaluation configurations
 
 ## Further Reading
 
@@ -357,5 +389,11 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility
 [7]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations/
-[8]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
+[8]: /llm_observability/experiments
+[9]: /llm_observability/guide/evaluation_developer_guide/#using-managed-evaluators
+[10]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
+[11]: /api/latest/llm-observability/#get-a-custom-evaluator-configuration
+[12]: /api/latest/llm-observability/#create-or-update-a-custom-evaluator-configuration
+[13]: /api/latest/llm-observability/#delete-a-custom-evaluator-configuration
+[14]: /account_management/api-app-keys
 

@@ -21,7 +21,7 @@ further_reading:
 {{% tab "Kubernetes" %}}
 ### Requirements
 
-* [Apache Airflow 2.7][1] or later
+* [Apache Airflow 2.7][1] or later, including Airflow 3
 * [apache-airflow-providers-openlineage][2]
 
 ### Setup
@@ -144,7 +144,7 @@ Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` along with the other environment var
 {{% tab "Amazon MWAA" %}}
 ### Requirements
 
-* [Apache Airflow 2.7.0][1] or later
+* [Apache Airflow 2.7.0][1] or later, including Airflow 3
 * [apache-airflow-providers-openlineage][2]
 
 ### Setup
@@ -288,7 +288,7 @@ Data Observability: Jobs Monitoring for Airflow is not yet compatible with <a hr
 To get started, follow the instructions below.
 
 
-In the Advanced Configuration tab, under **Airflow configuration override**, click **Add Airflow configuration override** and configure these settings:
+In the {{< ui >}}Advanced Configuration{{< /ui >}} tab, under {{< ui >}}Airflow configuration override{{< /ui >}}, click {{< ui >}}Add Airflow configuration override{{< /ui >}} and configure these settings:
 
    - In Section 1, enter `openlineage`.
    - In Key 1, enter `disabled`.
@@ -335,7 +335,7 @@ In Datadog, view the [Data Observability: Jobs Monitoring][7] page to see a list
 
 ### Troubleshooting
 
-Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the Environment variables tab of the Composer page for OpenLineage client and its child modules. This can be useful in troubleshooting as you configure the `openlineage` provider.
+Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the {{< ui >}}Environment variables{{< /ui >}} tab of the Composer page for OpenLineage client and its child modules. This can be useful in troubleshooting as you configure the `openlineage` provider.
 
 {{% /tab %}}
 {{< /tabs >}}

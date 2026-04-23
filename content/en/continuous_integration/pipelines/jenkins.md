@@ -77,10 +77,10 @@ If your Agent runs in a container, add the `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`
 
 Install and enable the [Datadog Jenkins plugin][3] v3.1.0 or later:
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
-2. In the [Update Center][4] on the **Available** tab, search for `Datadog Plugin`.
+1. In your Jenkins instance web interface, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Manage Plugins{{< /ui >}}.
+2. In the [Update Center][4] on the {{< ui >}}Available{{< /ui >}} tab, search for {{< ui >}}Datadog Plugin{{< /ui >}}.
 3. Select the checkbox next to the plugin, and install using one of the two install buttons at the bottom of the screen.
-4. To verify that the plugin is installed, search for `Datadog Plugin` on the **Installed** tab.
+4. To verify that the plugin is installed, search for {{< ui >}}Datadog Plugin{{< /ui >}} on the {{< ui >}}Installed{{< /ui >}} tab.
 
 ## Configure the Datadog Jenkins plugin
 
@@ -90,20 +90,20 @@ There are several ways you can configure the Datadog Jenkins plugin.
 
 #### Report through the Datadog Agent (recommended)
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
-2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the mode `Use the Datadog Agent to report to Datadog`.
-4. Configure the `Agent` host.
+1. In your Jenkins instance web interface, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Configure System{{< /ui >}}.
+2. Go to the {{< ui >}}Datadog Plugin{{< /ui >}} section, scrolling down the configuration screen.
+3. Select the mode {{< ui >}}Use the Datadog Agent to report to Datadog{{< /ui >}}.
+4. Configure the {{< ui >}}Agent{{< /ui >}} host.
 5. Configure CI Visibility:
-   1. Configure the `Traces Collection Port` if not using the default port `8126`.
-   2. Click the `Test traces connection` button to verify that your configuration is valid.
-   3. Enable the `Enable CI Visibility` checkbox.
+   1. Configure the {{< ui >}}Traces Collection Port{{< /ui >}} if not using the default port `8126`.
+   2. Click the {{< ui >}}Test traces connection{{< /ui >}} button to verify that your configuration is valid.
+   3. Enable the {{< ui >}}Enable CI Visibility{{< /ui >}} checkbox.
    4. (Optional) Configure your CI Instance name.
 6. (Optional) Configure logs collection:
-   1. Configure the `Log Collection` port as configured in the Datadog Agent.
-   2. Click the `Test logs connection` button to verify that your configuration is valid.
-   3. Enable the `Enable Log Collection` checkbox.
-7. (Optional) Enter the name of the host that you use to access Datadog UI (for example, `app.datadoghq.com`) in the `Datadog App hostname` field.
+   1. Configure the {{< ui >}}Log Collection{{< /ui >}} port as configured in the Datadog Agent.
+   2. Click the {{< ui >}}Test logs connection{{< /ui >}} button to verify that your configuration is valid.
+   3. Enable the {{< ui >}}Enable Log Collection{{< /ui >}} checkbox.
+7. (Optional) Enter the name of the host that you use to access Datadog UI (for example, `app.datadoghq.com`) in the {{< ui >}}Datadog App hostname{{< /ui >}} field.
 8. Save your configuration.
 
 {{< img src="ci/ci-jenkins-plugin-config-agentful-app-hostname.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
@@ -112,18 +112,18 @@ There are several ways you can configure the Datadog Jenkins plugin.
 
 Use this option to make the Jenkins plugin report directly to Datadog without using the Datadog Agent. It requires an API Key.
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
-2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the mode `Use Datadog site and API key to report to Datadog`.
-4. Select your [Datadog site][1] in the `Pick a site` dropdown.
-5. Enter a valid `Datadog API Key` (or use `Select from credentials` option).
-6. Click the `Test Key` button to verify that your API key is valid.
+1. In your Jenkins instance web interface, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Configure System{{< /ui >}}.
+2. Go to the {{< ui >}}Datadog Plugin{{< /ui >}} section, scrolling down the configuration screen.
+3. Select the mode {{< ui >}}Use Datadog site and API key to report to Datadog{{< /ui >}}.
+4. Select your [Datadog site][1] in the {{< ui >}}Pick a site{{< /ui >}} dropdown.
+5. Enter a valid {{< ui >}}Datadog API Key{{< /ui >}} (or use {{< ui >}}Select from credentials{{< /ui >}} option).
+6. Click the {{< ui >}}Test Key{{< /ui >}} button to verify that your API key is valid.
 7. Configure CI Visibility:
-   1. Enable the `Enable CI Visibility` checkbox.
+   1. Enable the {{< ui >}}Enable CI Visibility{{< /ui >}} checkbox.
    2. (Optional) Configure your CI Instance name.
 8. (Optional) Configure logs collection:
-   1. Enable the `Enable Log Collection` checkbox.
-9. (Optional) Enter the name of the host that you use to access Datadog UI (for example, `app.datadoghq.com`) in the `Datadog App hostname` field.
+   1. Enable the {{< ui >}}Enable Log Collection{{< /ui >}} checkbox.
+9. (Optional) Enter the name of the host that you use to access Datadog UI (for example, `app.datadoghq.com`) in the {{< ui >}}Datadog App hostname{{< /ui >}} field.
 10. Save your configuration.
 
 {{< img src="ci/ci-jenkins-plugin-config-agentless-app-hostname.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
@@ -162,9 +162,9 @@ unclassified:
     collectBuildLogs: true
 ```
 
-2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
+2. In your Jenkins instance web interface, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Configuration as Code{{< /ui >}}.
 3. Apply or reload the configuration.
-4. Check the configuration using the `View Configuration` button.
+4. Check the configuration using the {{< ui >}}View Configuration{{< /ui >}} button.
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 
@@ -198,9 +198,9 @@ unclassified:
     collectBuildLogs: true
 ```
 
-2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
+2. In your Jenkins instance web interface, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Configuration as Code{{< /ui >}}.
 3. Apply or reload the configuration.
-4. Check the configuration using the `View Configuration` button.
+4. Check the configuration using the {{< ui >}}View Configuration{{< /ui >}} button.
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 
@@ -208,7 +208,7 @@ unclassified:
 
 #### Report through the Datadog Agent (recommended)
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
+1. In your Jenkins instance web interface, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Script Console{{< /ui >}}.
 2. Run the configuration script:
 
 ```groovy
@@ -237,7 +237,7 @@ datadog.save()
 
 #### Agentless (using an API key)
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
+1. In your Jenkins instance web interface, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Script Console{{< /ui >}}.
 2. Run the configuration script:
 
 ```groovy
@@ -378,12 +378,12 @@ This option is not suitable for pipelines that are configured entirely in `Jenki
 For these pipelines use declarative configuration with the `datadog` step (described in the next section).
 
 To enable Test Optimization through the UI do the following:
-1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the **Configure** option.
-2. In the **General** configuration section, tick the **Enable Datadog Test Optimization** checkbox.
-3. Enter the name of the service or library being tested into the **Service Name** input. You can choose any value that makes sense to you.
+1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the {{< ui >}}Configure{{< /ui >}} option.
+2. In the {{< ui >}}General{{< /ui >}} configuration section, tick the {{< ui >}}Enable Datadog Test Optimization{{< /ui >}} checkbox.
+3. Enter the name of the service or library being tested into the {{< ui >}}Service Name{{< /ui >}} input. You can choose any value that makes sense to you.
 4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Optimization for these languages, follow the manual [configuration instructions][18].
 5. Optionally, provide [additional configuration settings][18].
-6. Click **Save**.
+6. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="ci/ci-jenkins-plugin-tests-config-2.png" alt="Datadog Test Optimization configuration for Jenkins" style="width:100%;">}}
 
@@ -595,19 +595,19 @@ pipeline {
 
 You can configure the Jenkins Plugin to include or exclude specific pipelines:
 
-1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
-2. Go to the `Datadog Plugin` section by scrolling down the configuration screen.
-3. Click on the `Advanced` button.
-4. Configure the `Excluded Jobs`.
-5. Configure the `Included Jobs`.
+1. In the web interface of your Jenkins instance, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Configure System{{< /ui >}}.
+2. Go to the {{< ui >}}Datadog Plugin{{< /ui >}} section by scrolling down the configuration screen.
+3. Click on the {{< ui >}}Advanced{{< /ui >}} button.
+4. Configure the {{< ui >}}Excluded Jobs{{< /ui >}}.
+5. Configure the {{< ui >}}Included Jobs{{< /ui >}}.
 6. Save your configuration.
 
-**Excluded jobs**
+{{< ui >}}Excluded jobs{{< /ui >}}
 : A comma-separated list of Jenkins jobs that should not be monitored. The exclusion applies to all metrics, traces, events, and service checks. Excluded jobs can use regular expressions to reference multiple jobs.<br/>
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_EXCLUDED`<br/>
 **Example**: `susans-job,johns-.*,prod_folder/prod_release`
 
-**Included jobs**
+{{< ui >}}Included jobs{{< /ui >}}
 : A comma-separated list of Jenkins job names that should be monitored. If the included jobs list is empty, all jobs that are not excluded explicitly are monitored. The inclusion applies to all metrics, traces, events, and service checks. Included jobs can use regular expressions to reference multiple jobs.<br/>
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_INCLUDED`<br/>
 **Example**: `susans-job,johns-.*,prod_folder/prod_release`
@@ -678,19 +678,19 @@ To display and filter the teams associated with your pipelines, add `team:<your-
 
 You can configure the Jenkins Plugin to send custom tags (like global tags and global job tags) in all pipeline traces:
 
-1. In the web interface of your Jenkins instance, go to **Manage Jenkins > Configure System**.
-2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Click on the `Advanced` button.
-4. Configure the `Global Tags`.
-5. Configure the `Global Job Tags`.
+1. In the web interface of your Jenkins instance, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Configure System{{< /ui >}}.
+2. Go to the {{< ui >}}Datadog Plugin{{< /ui >}} section, scrolling down the configuration screen.
+3. Click on the {{< ui >}}Advanced{{< /ui >}} button.
+4. Configure the {{< ui >}}Global Tags{{< /ui >}}.
+5. Configure the {{< ui >}}Global Job Tags{{< /ui >}}.
 6. Save your configuration.
 
-**Global tags**
+{{< ui >}}Global tags{{< /ui >}}
 : A comma-separated list of tags to apply to all metrics, traces, events, and service checks. Tags can include environment variables that are defined in the Jenkins controller instance.<br/>
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`<br/>
 **Example**: `key1:value1,key2:${SOME_ENVVAR},${OTHER_ENVVAR}:value3`
 
-**Global job tags**
+{{< ui >}}Global job tags{{< /ui >}}
 : A comma-separated list of regexes to match a job and a list of tags to apply to that job. Tags can include environment variables that are defined in the Jenkins controller instance. Tags can reference match groups in the regex using the `$` symbol.<br/>
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`<br/>
 **Example**: `(.*?)_job_(.*?)_release, owner:$1, release_env:$2, optional:Tag3`
@@ -699,7 +699,7 @@ You can configure the Jenkins Plugin to send custom tags (like global tags and g
 
 Once the integration is successfully configured, both the [**CI Pipeline List**][7] and [**Executions**][8] pages populate with data after pipelines finish.
 
-The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][28].
+The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][28].
 
 ## Troubleshooting
 
@@ -709,16 +709,16 @@ When reporting an issue to the Datadog support team, generate a plugin diagnosti
 
 To generate the flare do the following:
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Troubleshooting > Datadog**.
+1. In your Jenkins instance web interface, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Troubleshooting{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}}.
 2. In the Diagnostic Flare form, check which information you want to include in the flare. The default selection works best. The more information you provide, the easier it is to diagnose your issue.
-3. Click **Download** to generate and download the flare archive.
+3. Click {{< ui >}}Download{{< /ui >}} to generate and download the flare archive.
 
 ### Enable DEBUG log level for the Datadog Plugin
 
 If you have any issues with the Datadog Plugin, you can set the logs for the plugin in `DEBUG` level. Using this level you are able to see stacktrace details if an exception is thrown.
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > System log**.
-2. Click on `Add new log recorder` button.
+1. In your Jenkins instance web interface, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}System log{{< /ui >}}.
+2. Click on {{< ui >}}Add new log recorder{{< /ui >}} button.
 3. Type the log recorder name. E.g: **Datadog Plugin Logs**.
 4. Add the following loggers to the list:
     - Logger: `org.datadog.jenkins.plugins.datadog.clients` -> Log Level `ALL`
@@ -730,9 +730,9 @@ If you have any issues with the Datadog Plugin, you can set the logs for the plu
 
 You may also want to split the loggers into different log recorders.
 
-Once the log recorders are successfully configured, you can check the logs in the `DEBUG` mode by accessing the desired log recorder through **Manage Jenkins > System log**.
+Once the log recorders are successfully configured, you can check the logs in the `DEBUG` mode by accessing the desired log recorder through {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}System log{{< /ui >}}.
 
-If you trigger a Jenkins pipeline, you can search for the message `Send pipeline traces` in the **Datadog Plugin Logs**. This message indicates that the plugin is sending **CI Visibility** data to the **Datadog Agent**.
+If you trigger a Jenkins pipeline, you can search for the message `Send pipeline traces` in the {{< ui >}}Datadog Plugin Logs{{< /ui >}}. This message indicates that the plugin is sending CI Visibility data to the Datadog Agent.
 
 {{< code-block lang="text" >}}
 Send pipeline traces.
@@ -745,9 +745,9 @@ Send pipeline traces.
 
 #### HTTP connectivity check
 
-If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **Manage Plugins** > **Advanced tab** and make sure the proxy configuration is correct:
-- If the Datadog plugin is configured to send data to a Datadog Agent, check that the Agent host has been added to the `No Proxy Hosts` section.
-- If the Datadog plugin is configured to send data directly to Datadog (Agentless mode), check that Datadog host has been added to the `No Proxy Hosts` section. The table below shows the supported Datadog sites and their corresponding host values:
+If your Jenkins instance is behind an HTTP proxy, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Manage Plugins{{< /ui >}} > {{< ui >}}Advanced tab{{< /ui >}} and make sure the proxy configuration is correct:
+- If the Datadog plugin is configured to send data to a Datadog Agent, check that the Agent host has been added to the {{< ui >}}No Proxy Hosts{{< /ui >}} section.
+- If the Datadog plugin is configured to send data directly to Datadog (Agentless mode), check that Datadog host has been added to the {{< ui >}}No Proxy Hosts{{< /ui >}} section. The table below shows the supported Datadog sites and their corresponding host values:
 
 | Datadog site | Host value |
 | ------------ | ----------------------- |
@@ -759,7 +759,7 @@ If your Jenkins instance is behind an HTTP proxy, go to **Manage Jenkins** > **M
 
 #### The Datadog Plugin cannot write payloads to the server
 
-If the following error message appears in the **Jenkins Log**, make sure that the plugin configuration is correct.
+If the following error message appears in the {{< ui >}}Jenkins Log{{< /ui >}}, make sure that the plugin configuration is correct.
 
 {{< code-block lang="text" >}}
 Error writing to server
@@ -771,23 +771,23 @@ If you are using `localhost` as the hostname, change it to the server hostname i
 
 If the Datadog plugin is configured to send data to a Datadog Agent, do the following:
 - Make sure that custom logs collection over TCP is [enabled and configured][29] in the Agent.
-- Go to the plugin configuration UI and click **Test logs connection** to verify logs connectivity.
+- Go to the plugin configuration UI and click {{< ui >}}Test logs connection{{< /ui >}} to verify logs connectivity.
 
 ### The Datadog Plugin section does not appear in the Jenkins configuration
 
 If the Datadog Plugin section does not appear in Jenkins configuration section, make sure that the plugin is enabled. To do so:
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
-2. Search for `Datadog Plugin` in the **Installed** tab.
-3. Check that the `Enabled` checkbox is marked.
+1. In your Jenkins instance web interface, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Manage Plugins{{< /ui >}}.
+2. Search for {{< ui >}}Datadog Plugin{{< /ui >}} in the {{< ui >}}Installed{{< /ui >}} tab.
+3. Check that the {{< ui >}}Enabled{{< /ui >}} checkbox is marked.
 4. If you enable the plugin here, restart your Jenkins instance using the `/safeRestart` URL path.
 
 ### The CI Visibility option does not appear in the Datadog Plugin section.
 
 If the CI Visibility option does not appear in the Datadog Plugin section, make sure that the correct version is installed and restart the Jenkins instance. To do so:
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
-2. Search for `Datadog Plugin` in the **Installed** tab.
+1. In your Jenkins instance web interface, go to {{< ui >}}Manage Jenkins{{< /ui >}} > {{< ui >}}Manage Plugins{{< /ui >}}.
+2. Search for {{< ui >}}Datadog Plugin{{< /ui >}} in the {{< ui >}}Installed{{< /ui >}} tab.
 3. Check that the installed version is correct.
 4. Restart your Jenkins instance using the `/safeRestart` URL path.
 

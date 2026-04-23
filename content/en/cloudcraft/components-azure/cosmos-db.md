@@ -12,16 +12,16 @@ You can use the Cosmos DB component to represent and visualize serverless databa
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **API**: Select your database API.
-- **Capacity mode**: Select the capacity mode for your database operations. No available for PostgreSQL.
-- **Replicate mode**: Select the replication mode for your database. Not available for PostgreSQL.
-- **Request units**: Enter the number of request units per second. Not available for PostgreSQL.
-- **Storage (GiB)**: Enter the total volume of transactional storage for your database in gibibytes. Not available for PostgreSQL.
-- **Node Count**: Select the number of worker nodes available for your workload. Only available for PostgreSQL.
-- **Node vCores**: Select the number of virtual cores available for each node. Only available for PostgreSQL.
-- **Node Storage**: Select the amount of storage available for each node. Only available for PostgreSQL.
-- **HA**: Choose whether the database runs in high availability mode. Only available for PostgreSQL.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}API{{< /ui >}}: Select your database API.
+- {{< ui >}}Capacity mode{{< /ui >}}: Select the capacity mode for your database operations. No available for PostgreSQL.
+- {{< ui >}}Replicate mode{{< /ui >}}: Select the replication mode for your database. Not available for PostgreSQL.
+- {{< ui >}}Request units{{< /ui >}}: Enter the number of request units per second. Not available for PostgreSQL.
+- {{< ui >}}Storage (GiB){{< /ui >}}: Enter the total volume of transactional storage for your database in gibibytes. Not available for PostgreSQL.
+- {{< ui >}}Node Count{{< /ui >}}: Select the number of worker nodes available for your workload. Only available for PostgreSQL.
+- {{< ui >}}Node vCores{{< /ui >}}: Select the number of virtual cores available for each node. Only available for PostgreSQL.
+- {{< ui >}}Node Storage{{< /ui >}}: Select the amount of storage available for each node. Only available for PostgreSQL.
+- {{< ui >}}HA{{< /ui >}}: Choose whether the database runs in high availability mode. Only available for PostgreSQL.
 
 ## API
 

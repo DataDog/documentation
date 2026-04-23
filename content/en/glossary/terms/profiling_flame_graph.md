@@ -1,4 +1,5 @@
 ---
+id: profiling_flame_graph
 title: profiling flame graph
 core_product:
   - dashboards

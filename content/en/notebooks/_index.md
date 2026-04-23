@@ -24,6 +24,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
   tag: "Blog"
   text: "How we've created a successful FinOps practice at Datadog"
+- link: "https://learn.datadoghq.com/courses/getting-started-with-notebooks"
+  tag: "Learning Center"
+  text: "Getting Started with Notebooks"
 ---
 
 ## Overview
@@ -291,7 +294,7 @@ You can sort notebooks by selecting the ⭐, details, or modified headers to sor
 
 
 [1]: https://app.datadoghq.com/notebook/list
-[2]: https://app.datadoghq.com/notebook/template-gallery
+[2]: https://app.datadoghq.com/notebook/list?location=templates
 [3]: /dashboards/querying/#graphing-editor
 [4]: https://www.markdownguide.org/basic-syntax/#images-1
 [5]: /dashboards/template_variables/

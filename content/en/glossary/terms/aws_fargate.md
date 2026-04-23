@@ -1,4 +1,5 @@
 ---
+id: aws_fargate
 title: AWS Fargate
 synonyms:
   - Fargate

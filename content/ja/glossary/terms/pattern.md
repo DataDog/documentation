@@ -1,4 +1,5 @@
 ---
+id: pattern
 core_product:
 - log management
 title: パターン

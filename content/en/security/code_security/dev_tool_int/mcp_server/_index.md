@@ -4,6 +4,9 @@ description: Use the Datadog Code Security MCP server to run SAST, secrets detec
 is_beta: true
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/introducing-datadog-code-security-mcp/"
+  tag: "Blog"
+  text: "Introducing the Datadog Code Security MCP Server"
 - link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
   tag: "Blog"
   text: "Identify common security risks in MCP servers"
@@ -53,7 +56,7 @@ The MCP server is available on the following platforms:
 
 ```shell
 brew update
-brew install --cask datadog-labs/pack/datadog-code-security-mcp
+brew install datadog-labs/pack/datadog-code-security-mcp
 ```
 
 #### GitHub releases
@@ -90,96 +93,115 @@ Each client configuration requires the following environment variables:
 | ------------ | :------: | ------------------------------------------ |
 | `DD_API_KEY` |  Yes\*   | Your [Datadog API key][3]                  |
 | `DD_APP_KEY` |  Yes\*   | Your [Datadog application key][3]          |
-| `DD_SITE`    |    No    | Your [Datadog site][13] (defaults to `datadoghq.com`) |
+| `DD_SITE`    |    No    | Your [Datadog site][13] domain (defaults to `datadoghq.com` for US1) |
 
 \*Required for SAST, Secrets, SCA, and IaC scanning. SBOM generation works without authentication.
 
 {{< tabs >}}
 {{% tab "Claude Code" %}}
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Use the Claude CLI to add the MCP server:
 
-```shell
-claude mcp add datadog-code-security \
-  -e DD_API_KEY=<your-api-key> \
-  -e DD_APP_KEY=<your-app-key> \
-  -e DD_SITE=datadoghq.com \
-  -- datadog-code-security-mcp start
-```
+<pre><code>claude mcp add datadog-code-security \
+  -e DD_API_KEY=&lt;your-api-key&gt; \
+  -e DD_APP_KEY=&lt;your-app-key&gt; \
+  -e DD_SITE={{< region-param key="dd_site" >}} \
+  -- datadog-code-security-mcp start</code></pre>
 
 Verify the configuration:
 
 ```shell
 claude mcp list | grep datadog-code-security
 ```
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{% /tab %}}
 {{% tab "Claude Desktop" %}}
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Add the following to your Claude Desktop configuration file:
 
 - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
 
-```json
-{
+<pre><code>{
     "mcpServers": {
         "datadog-code-security": {
             "command": "datadog-code-security-mcp",
             "args": ["start"],
             "env": {
-                "DD_API_KEY": "<your-api-key>",
-                "DD_APP_KEY": "<your-app-key>",
-                "DD_SITE": "datadoghq.com"
+                "DD_API_KEY": "&lt;your-api-key&gt;",
+                "DD_APP_KEY": "&lt;your-app-key&gt;",
+                "DD_SITE": "{{< region-param key="dd_site" >}}"
             }
         }
     }
 }
-```
+</code></pre>
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{% /tab %}}
 {{% tab "Cursor" %}}
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Add the following to your Cursor MCP settings (`~/.cursor/mcp.json`):
 
-```json
-{
+<pre><code>{
     "mcpServers": {
         "datadog-code-security": {
             "command": "datadog-code-security-mcp",
             "args": ["start"],
             "env": {
-                "DD_API_KEY": "<your-api-key>",
-                "DD_APP_KEY": "<your-app-key>",
-                "DD_SITE": "datadoghq.com"
+                "DD_API_KEY": "&lt;your-api-key&gt;",
+                "DD_APP_KEY": "&lt;your-app-key&gt;",
+                "DD_SITE": "{{< region-param key="dd_site" >}}"
             }
         }
     }
 }
-```
+</code></pre>
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{% /tab %}}
 {{% tab "VS Code" %}}
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Add the following to your VS Code settings (`.vscode/settings.json` or user settings):
 
-```json
-{
+<pre><code>{
     "mcp": {
         "servers": {
             "datadog-code-security": {
                 "command": "datadog-code-security-mcp",
                 "args": ["start"],
                 "env": {
-                    "DD_API_KEY": "<your-api-key>",
-                    "DD_APP_KEY": "<your-app-key>",
-                    "DD_SITE": "datadoghq.com"
+                    "DD_API_KEY": "&lt;your-api-key&gt;",
+                    "DD_APP_KEY": "&lt;your-app-key&gt;",
+                    "DD_SITE": "{{< region-param key="dd_site" >}}"
                 }
             }
         }
     }
 }
-```
+</code></pre>
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{% /tab %}}
 {{% tab "Other" %}}
