@@ -5,61 +5,47 @@ import { classListFactory } from '../../utils/classListFactory';
 
 const cl = classListFactory(styles);
 
-export interface Tab {
-  label: string;
-  content: string;
-}
-
-interface TabsProps {
-  /** Pass labels directly instead of extracting from the DOM. */
-  labels?: string[];
-  /** Render custom panel content for the active tab index. */
-  children?: (activeIndex: number) => ComponentChildren;
+interface CommonProps {
+  /** Tab labels, in order. */
+  labels: string[];
   /** Called when the active tab changes. */
   onTabChange?: (index: number) => void;
   /** Force a specific variant instead of auto-detecting from overflow. */
   variant?: 'tabs' | 'pills';
 }
 
-export function Tabs({ labels, children, onTabChange, variant }: TabsProps) {
-  const [domTabs, setDomTabs] = useState<Tab[]>([]);
+interface RenderPropProps extends CommonProps {
+  /** Render function for the active panel. One panel is mounted at a time. */
+  children: (activeIndex: number) => ComponentChildren;
+  panelsHtml?: never;
+}
+
+interface HtmlPanelsProps extends CommonProps {
+  /**
+   * Pre-rendered HTML per panel. All panels are rendered into the DOM so
+   * nested islands can hydrate; only the active one is visible. The string
+   * reference must be stable across renders so Preact's diff skips the
+   * innerHTML write and leaves nested islands untouched on tab switches.
+   */
+  panelsHtml: string[];
+  children?: never;
+}
+
+export type TabsProps = RenderPropProps | HtmlPanelsProps;
+
+export function Tabs(props: TabsProps) {
+  const { labels, onTabChange, variant } = props;
   const [activeIndex, setActiveIndex] = useState(0);
-  const [usePills, setUsePills] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [usePills, setUsePills] = useState(variant === 'pills');
   const navRef = useRef<HTMLDivElement>(null);
 
-  const isControlled = labels != null;
-
-  useEffect(() => { setHydrated(true); }, []);
-
-  // DOM extraction mode (original behavior for TabsIsland)
-  useEffect(() => {
-    if (isControlled) return;
-    const wrapper = containerRef.current?.closest('[data-tabs-wrapper]');
-    const source = wrapper?.querySelector('[data-tabs-source]');
-    if (!source) return;
-
-    const tabEls = source.querySelectorAll<HTMLElement>('[data-tab-label]');
-    const extracted: Tab[] = Array.from(tabEls).map((el) => ({
-      label: el.getAttribute('data-tab-label') ?? '',
-      content: el.innerHTML.trim(),
-    }));
-
-    (source as HTMLElement).hidden = true;
-    setDomTabs(extracted);
-  }, [isControlled]);
-
-  const tabLabels = isControlled ? labels : domTabs.map((t) => t.label);
-
-  // Overflow detection for pills variant (skipped when variant is forced)
   useEffect(() => {
     if (variant) {
       setUsePills(variant === 'pills');
       return;
     }
     const nav = navRef.current;
-    if (!nav || tabLabels.length === 0) return;
+    if (!nav || labels.length === 0) return;
 
     const checkOverflow = () => {
       nav.style.flexWrap = 'nowrap';
@@ -72,13 +58,13 @@ export function Tabs({ labels, children, onTabChange, variant }: TabsProps) {
     window.addEventListener('resize', checkOverflow);
     return () => window.removeEventListener('resize', checkOverflow);
     // Depend on a stable string form of the labels instead of the array
-    // identity; `domTabs.map(...)` produces a new array each render, and
+    // identity; callers often pass a fresh `map()` array each render, and
     // Preact doesn't bail out of renders when `setUsePills` is called with an
     // unchanged value, so the effect would otherwise loop.
-  }, [tabLabels.join('\u0000'), variant]);
+  }, [labels.join('\u0000'), variant]);
 
-  if (tabLabels.length === 0) {
-    return <div ref={containerRef} data-testid="tabs" />;
+  if (labels.length === 0) {
+    return <div data-testid="tabs" />;
   }
 
   const handleTabClick = (index: number) => {
@@ -87,11 +73,12 @@ export function Tabs({ labels, children, onTabChange, variant }: TabsProps) {
   };
 
   const containerClass = usePills ? cl('tabs', 'tabs--pills') : cl('tabs');
+  const panelsHtml = 'panelsHtml' in props ? props.panelsHtml : undefined;
 
   return (
-    <div ref={containerRef} class={containerClass} data-testid="tabs" data-hydrated={hydrated ? 'true' : undefined}>
+    <div class={containerClass} data-testid="tabs">
       <div ref={navRef} class={cl('tabs__nav')} role="tablist" data-testid="tabs-nav">
-        {tabLabels.map((label, i) => {
+        {labels.map((label, i) => {
           const active = i === activeIndex;
           const btnClass = active ? cl('tabs__button', 'tabs__button--active') : cl('tabs__button');
 
@@ -109,12 +96,23 @@ export function Tabs({ labels, children, onTabChange, variant }: TabsProps) {
           );
         })}
       </div>
-      <div role="tabpanel" class={cl('tabs__panel')} data-testid="tabs-panel">
-        {children
-          ? children(activeIndex)
-          : <span dangerouslySetInnerHTML={{ __html: domTabs[activeIndex]?.content ?? '' }} />
-        }
-      </div>
+      {panelsHtml
+        ? panelsHtml.map((html, i) => (
+            <div
+              key={i}
+              role="tabpanel"
+              class={cl('tabs__panel')}
+              data-tab-panel
+              data-testid={i === activeIndex ? 'tabs-panel' : undefined}
+              hidden={i !== activeIndex}
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          ))
+        : (
+          <div role="tabpanel" class={cl('tabs__panel')} data-testid="tabs-panel">
+            {(props as RenderPropProps).children(activeIndex)}
+          </div>
+        )}
     </div>
   );
 }

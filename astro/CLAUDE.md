@@ -107,7 +107,7 @@ npx playwright test --update-snapshots
 
 Baselines are currently Mac-only (`*-chromium-darwin.png`) because this project is in early stages and CI isn't wired up for Playwright yet. When CI comes online, baselines will need to be regenerated on the CI platform; Playwright's per-platform suffix lets Mac and CI baselines coexist.
 
-When asserting a screenshot on an element rendered inside a Tabs island, scope the locator to `[data-testid="tabs-panel"]` (or similar) and wait for `[data-tabs-source]` to become hidden in a `beforeEach` — otherwise the locator may match the pre-hydration scaffold copy that Tabs hides after mount.
+When asserting a screenshot on an element rendered inside a Tabs island, scope the locator to `[data-testid="tabs-panel"]` (or similar). Tabs renders every panel server-side in its final position; only the active panel carries `data-testid="tabs-panel"` and inactive panels are `hidden`.
 
 ## Component documentation
 

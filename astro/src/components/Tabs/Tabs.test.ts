@@ -33,8 +33,8 @@ describe('Tabs — static render', () => {
     });
   });
 
-  it('renders placeholder when no labels and no DOM source', () => {
-    const { container } = render(h(TabsComponent, {}));
+  it('renders placeholder when labels is empty', () => {
+    const { container } = render(h(TabsComponent, { labels: [], children: () => null }));
     expect(container.innerHTML).toBe('<div data-testid="tabs"></div>');
   });
 });
@@ -82,6 +82,48 @@ describe('Tabs — interactivity', () => {
     await user.click(screen.getByTestId('tab-2'));
 
     expect(onTabChange).toHaveBeenCalledWith(2);
+  });
+});
+
+describe('Tabs — panelsHtml mode', () => {
+  const panelsHtml = [
+    '<p data-testid="py-content">python html</p>',
+    '<p data-testid="rb-content">ruby html</p>',
+    '<p data-testid="go-content">go html</p>',
+  ];
+
+  it('renders every panel into the DOM; only the active one is visible', () => {
+    render(h(TabsComponent, { labels, panelsHtml }));
+
+    const allPanels = document.querySelectorAll<HTMLElement>('[data-tab-panel]');
+    expect(allPanels.length).toBe(3);
+    expect(allPanels[0].hidden).toBe(false);
+    expect(allPanels[1].hidden).toBe(true);
+    expect(allPanels[2].hidden).toBe(true);
+
+    // All panel contents are present in the DOM (SEO: nothing deferred).
+    expect(screen.getByTestId('py-content').textContent).toBe('python html');
+    expect(screen.getByTestId('rb-content').textContent).toBe('ruby html');
+    expect(screen.getByTestId('go-content').textContent).toBe('go html');
+  });
+
+  it('moves visibility + tabs-panel testid to the clicked panel without rewriting innerHTML', async () => {
+    const user = userEvent.setup();
+    render(h(TabsComponent, { labels, panelsHtml }));
+
+    const goNode = screen.getByTestId('go-content');
+
+    await user.click(screen.getByTestId('tab-2'));
+
+    const allPanels = document.querySelectorAll<HTMLElement>('[data-tab-panel]');
+    expect(allPanels[0].hidden).toBe(true);
+    expect(allPanels[2].hidden).toBe(false);
+    expect(allPanels[2].getAttribute('data-testid')).toBe('tabs-panel');
+    expect(allPanels[0].hasAttribute('data-testid')).toBe(false);
+
+    // Same DOM node instance — inner nodes were not re-parsed. This is what
+    // keeps nested `<astro-island>` children from tearing down on tab switch.
+    expect(screen.getByTestId('go-content')).toBe(goNode);
   });
 });
 

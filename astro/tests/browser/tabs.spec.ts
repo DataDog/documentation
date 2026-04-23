@@ -7,8 +7,6 @@ test.describe('Tabs component', () => {
 
   test.beforeEach(async ({ page }) => {
     await page.goto('/docs/components/tabs');
-    // Wait for all Tabs islands to finish hydrating and hiding their pre-hydration source.
-    await expect(page.locator('[data-tabs-source]').first()).toBeHidden();
   });
 
   test('many-tab instance uses pills layout', async ({ page }) => {

@@ -1,10 +1,19 @@
 ---
+import * as cheerio from 'cheerio';
 import { Tabs } from './Tabs';
+
+const slotHtml = await Astro.slots.render('default');
+const $ = cheerio.load(slotHtml, null, false);
+
+const tabs = $('[data-tab-label]')
+  .map((_, el) => ({
+    label: $(el).attr('data-tab-label') ?? '',
+    content: $(el).html() ?? '',
+  }))
+  .get();
+
+const labels = tabs.map((t) => t.label);
+const panelsHtml = tabs.map((t) => t.content);
 ---
 
-<div data-tabs-wrapper>
-  <div data-tabs-source>
-    <slot />
-  </div>
-  <Tabs client:load />
-</div>
+<Tabs labels={labels} panelsHtml={panelsHtml} client:load />

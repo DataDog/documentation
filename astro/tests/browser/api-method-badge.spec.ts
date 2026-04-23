@@ -3,8 +3,6 @@ import { test, expect } from '@playwright/test';
 test.describe('API Method Badge component — visual', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/docs/components/api-method-badge');
-    // Wait for all Tabs islands to finish hydrating and hiding their pre-hydration source.
-    await expect(page.locator('[data-tabs-source]').first()).toBeHidden();
   });
 
   const methods: Array<'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' | 'options'> = [

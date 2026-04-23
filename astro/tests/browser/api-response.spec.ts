@@ -3,8 +3,6 @@ import { test, expect } from '@playwright/test';
 test.describe('ApiResponse component — visual', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/docs/components/api-response');
-    // Wait for all Tabs islands to finish hydrating and hiding their pre-hydration source.
-    await expect(page.locator('[data-tabs-source]').first()).toBeHidden();
   });
 
   test('full response section matches screenshot', async ({ page }) => {
