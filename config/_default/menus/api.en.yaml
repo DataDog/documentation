@@ -4163,6 +4163,30 @@ menu:
           - ListSyntheticsTestVersions
         unstable: []
         order: 57
+    - name: Get a test result
+      url: '#get-a-test-result'
+      identifier: synthetics-get-a-test-result
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsTestResult
+        unstable: []
+        order: 63
+    - name: Get a test's latest results
+      url: '#get-a-tests-latest-results'
+      identifier: synthetics-get-a-tests-latest-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsTestLatestResults
+        unstable: []
+        order: 65
     - name: Get parent suites for a test
       url: '#get-parent-suites-for-a-test'
       identifier: synthetics-get-parent-suites-for-a-test
@@ -4223,6 +4247,18 @@ menu:
           - GetTestFileDownloadUrl
         unstable: []
         order: 59
+    - name: Poll for test results
+      url: '#poll-for-test-results'
+      identifier: synthetics-poll-for-test-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PollSyntheticsTestResults
+        unstable: []
+        order: 67
     - name: Edit a Network Path test
       url: '#edit-a-network-path-test'
       identifier: synthetics-edit-a-network-path-test
@@ -4283,6 +4319,18 @@ menu:
           - DeleteSyntheticsTests
         unstable: []
         order: 50
+    - name: Get a browser test's latest results
+      url: '#get-a-browser-tests-latest-results'
+      identifier: synthetics-get-a-browser-tests-latest-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsBrowserTestLatestResults
+        unstable: []
+        order: 66
     - name: Patch a test suite
       url: '#patch-a-test-suite'
       identifier: synthetics-patch-a-test-suite
@@ -4639,8 +4687,10 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - GetBrowserTestResult
+          - GetSyntheticsBrowserTestResult
         unstable: []
         order: 13
     - name: Get a browser test's latest results summaries
