@@ -91,6 +91,6 @@ This manual approach allows you to create more targeted blocking rules when the 
 
 [1]: /security/application_security/how-it-works/threat-intelligence/
 [2]: /security/application_security/security_signals/attacker_fingerprint
-[3]: /security/application_security/security_signals/
+[3]: /security/application_security/policies/inapp_waf_rules/
 [4]: /security/workload_protection/security_signals/
 [5]: /tracing/trace_collection/library_config/

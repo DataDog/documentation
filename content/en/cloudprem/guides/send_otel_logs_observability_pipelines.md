@@ -203,7 +203,7 @@ docker logs opw --tail 20
 ## Step 5: View logs in Datadog
 
 1. Go to the [Datadog Log Explorer][5].
-2. In the left facet panel, select your CloudPrem index under **CLOUDPREM INDEXES**.
+2. In the left facet panel, select your CloudPrem index under {{< ui >}}CLOUDPREM INDEXES{{< /ui >}}.
 3. You should see your OpenTelemetry logs from the `otel-demo` service with custom tags: `pipeline:observability-pipelines` and `source:opentelemetry`.
 
 {{< img src="/cloudprem/guides/otel-op-cloudprem/cloudprem_logs.png" alt="CloudPrem logs available in the Datadog Log Explorer" style="width:100%;" >}}

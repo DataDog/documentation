@@ -107,7 +107,7 @@ The license table in this section is based on the **Choose a License Appendix**:
 It summarizes the license's:
 
 * **Permissions**  
-  **Conditions**  
+* **Conditions**  
 * **Limitations**
 
 Additionally, Datadog identifies **license risks**, including:

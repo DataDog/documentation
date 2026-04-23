@@ -10,11 +10,11 @@ further_reading:
       text: "User management"
 ---
 ## Overview
-The Organization Settings section is available to [Administrators][1] by clicking **Organization Settings** from the account menu in the bottom of the left side navigation or by selecting **Organization Settings** from the header dropdown at the top of the Personal Settings page.
+The Organization Settings section is available to [Administrators][1] by clicking {{< ui >}}Organization Settings{{< /ui >}} from the account menu in the bottom of the left side navigation or by selecting {{< ui >}}Organization Settings{{< /ui >}} from the header dropdown at the top of the Personal Settings page.
 
 {{< img src="account_management/org_settings/nav.png" alt="Navigate to your Organization Settings in Datadog" style="width:80%;" >}}
 
-Organization Settings allow you to manage users, groups, RBAC, keys, and tokens. This page outlines every section and where in the documentation you can learn about specific tasks in **Organization Settings**.
+Organization Settings allow you to manage users, groups, RBAC, keys, and tokens. This page outlines every section and where in the documentation you can learn about specific tasks in {{< ui >}}Organization Settings{{< /ui >}}.
 
 ## Identity & Accounts
 
@@ -36,7 +36,7 @@ Read the [Teams][3] documentation to manage teams for organizing your assets wit
 ### Login methods
 
 
-The **Login Methods** tab shows password, Google, and SAML authentication settings. You can toggle each with the **Enabled by Default** dropdowns. In order to be "SAML Strict" or strict for any other type of login, disable the other login method types. You can allow per-user overrides in the User Management tab to allow users to login with another login method if needed.
+The {{< ui >}}Login Methods{{< /ui >}} tab shows password, Google, and SAML authentication settings. You can toggle each with the {{< ui >}}Enabled by Default{{< /ui >}} dropdowns. In order to be "SAML Strict" or strict for any other type of login, disable the other login method types. You can allow per-user overrides in the User Management tab to allow users to login with another login method if needed.
 
 Read the [Configuring Login Methods][5] documentation to authenticate users to log into your Datadog organization.
 
@@ -59,7 +59,7 @@ This section allows you to view, copy, and revoke any API key in the list. Your 
 
 ### Application keys
 
-You can filter application keys by name, ID, or owner, or click the **Only My Keys** toggle to only view application keys you own. Read the [Application keys documentation][8] for more information on adding and removing keys.
+You can filter application keys by name, ID, or owner, or click the {{< ui >}}Only My Keys{{< /ui >}} toggle to only view application keys you own. Read the [Application keys documentation][8] for more information on adding and removing keys.
 
 ### Roles
 
@@ -89,7 +89,7 @@ The [**Safety Center**][14] page contains security alerts, warnings, and recomme
 
 ### Public sharing
 
-The **Public Sharing** tab includes org-wide settings for sharing, along with lists of shared dashboards and graphs. You can enable sharing features granularly and configure additional security options, such as setting a maximum invite duration.
+The {{< ui >}}Public Sharing{{< /ui >}} tab includes org-wide settings for sharing, along with lists of shared dashboards and graphs. You can enable sharing features granularly and configure additional security options, such as setting a maximum invite duration.
 
 To apply sharing settings across all your orgs, reach out to [Datadog Support][16].
 
@@ -103,11 +103,11 @@ The [**Mobile and Third-Party Access**][15] page allows you to view and manage m
 
 ### Audit trail
 
-The **Audit Trail** tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
+The {{< ui >}}Audit Trail{{< /ui >}} tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
 
 ### Audit trail settings
 
-The **Audit Trail Settings** tab allows you to set the retention period of audit trails and enable archiving to other cloud storage services.
+The {{< ui >}}Audit Trail Settings{{< /ui >}} tab allows you to set the retention period of audit trails and enable archiving to other cloud storage services.
 
 ## General
 
@@ -115,7 +115,7 @@ The **Audit Trail Settings** tab allows you to set the retention period of audit
 
 #### Organization name
 
-To rename your organization, click the **Edit** button in the **Preferences** tab of **Organization Settings**, enter the new name, then click the **Save** button.
+To rename your organization, click the {{< ui >}}Edit{{< /ui >}} button in the {{< ui >}}Preferences{{< /ui >}} tab of {{< ui >}}Organization Settings{{< /ui >}}, enter the new name, then click the {{< ui >}}Save{{< /ui >}} button.
 
 **Note**: Your organization name must not exceed 32 characters.
 

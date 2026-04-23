@@ -1,31 +1,32 @@
 ---
 title: Cloud Cost Monitor
-description: "Monitor cost changes, thresholds, forecasts, and anomalies in your cloud costs."
+description: 'Monitor cost changes, thresholds, forecasts, and anomalies in your cloud costs.'
 further_reading:
-- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
-  tag: Blog
-  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
-- link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
-  tag: "Documentation"
-  text: "Cloud Cost Management"
-- link: "/monitors/notify/"
-  tag: "Documentation"
-  text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
-  tag: "Documentation"
-  text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/status/"
-  tag: "Documentation"
-  text: "Consult your monitor status"
-- link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"
-  tag: "Blog"
-  text: "React quickly to cost overruns with Cost Monitors for Datadog Cloud Cost Management"
-- link: "https://www.datadoghq.com/blog/google-cloud-cost-management/"
-  tag: "Blog"
-  text: "Empower engineers to take ownership of Google Cloud costs with Datadog"
+    - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+      tag: Blog
+      text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
+    - link: 'https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview'
+      tag: 'Documentation'
+      text: 'Cloud Cost Management'
+    - link: '/monitors/notify/'
+      tag: 'Documentation'
+      text: 'Configure your monitor notifications'
+    - link: '/monitors/downtimes/'
+      tag: 'Documentation'
+      text: 'Schedule a downtime to mute a monitor'
+    - link: '/monitors/status/'
+      tag: 'Documentation'
+      text: 'Consult your monitor status'
+    - link: 'https://www.datadoghq.com/blog/ccm-cost-monitors/'
+      tag: 'Blog'
+      text: 'React quickly to cost overruns with Cost Monitors for Datadog Cloud Cost Management'
+    - link: 'https://www.datadoghq.com/blog/google-cloud-cost-management/'
+      tag: 'Blog'
+      text: 'Empower engineers to take ownership of Google Cloud costs with Datadog'
 ---
 
 ## Overview
+
 Cloud Cost Monitors help you proactively identify cost changes, and understand if you're projected to go over budget, so you can investigate the cause.
 
 - Instantly view all your cost monitors and filter or search by team, service, tag, provider, or alert status.
@@ -48,13 +49,13 @@ Alternatively, you can set one up from [**Monitors** --> **New Monitor** --> **C
 
 You can select from the following monitor types:
 
-| Monitor Type | Cost Metric-based | Purpose                                                                                                                                                                                                                                                   | Example |
-|--------------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
-| Changes      | Yes               | Detect daily, weekly, or monthly cost changes.                                                                                                                                                                                                            | Alert when the difference between today's cost and the week before is over 5%.                                                                                                                                                             |
+| Monitor Type | Cost Metric-based | Purpose                                                                                                                                                                                                                                                   | Example                                                                                            |
+| ------------ | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Changes      | Yes               | Detect daily, weekly, or monthly cost changes.                                                                                                                                                                                                            | Alert when the difference between today's cost and the week before is over 5%.                     |
 | Anomalies    | Yes               | Identify unusual or unexpected cost patterns. <br> <br> Incomplete days are excluded from analysis to ensure accuracy. Anomaly monitors require at least 1 month of cloud cost data to evaluate since historical data is required to train the algorithm. | Alert if 3 days from the past 30 days show significant cost anomalies compared to historical data. |
-| Threshold    | Yes               | Alert when costs exceed a set value.                                                                                                                                                                                                                      | Set alerts when today's total cost exceeds $10,000.                                                                                                                                                                                                       |
-| Forecast     | Yes               | Alert if forecasted costs will exceed a threshold.                                                                                                                                                                                                        | Alert daily if the forecasted cost for this month is projected to exceed $500.                                                                                                                                                                            |
-| Budget       | No                | Alert if costs exceed your [budget][7].                                                                                                                                                                                                                   | Alert if the total cost for the month exceeds the budget of $10,000.                                                                                                                                                                                      |
+| Threshold    | Yes               | Alert when costs exceed a set value.                                                                                                                                                                                                                      | Set alerts when today's total cost exceeds $10,000.                                                |
+| Forecast     | Yes               | Alert if forecasted costs exceeds a threshold.                                                                                                                                                                                                        | Alert daily if the forecasted cost for this month is projected to exceed $500.                     |
+| Budget       | No                | Alert if actual or forecasted costs exceed your [budget][7].                                                                                                                                                                                              | Alert if the forecasted month cost is projected to exceed 90% of the assigned $10,000 budget.      |
 
 ### Specify which cost to track
 
@@ -63,12 +64,12 @@ You can select from the following monitor types:
 
 Any cost type or metric reporting to Datadog is available for monitors. You can use custom metrics or observability metrics alongside a cost metric to monitor unit economics.
 
-| Step                              | Required | Default              | Example             |
-|-----------------------------------|----------|----------------------|---------------------|
-| Select the cost metric            | Yes      | All providers | `azure.cost.actual` |
-| Define the `filter by`            | No       | Nothing           | `aws_product:s3`    |
-| Group by                          | No       | Nothing           | `aws_availability_zone` |
-| Add observability metric          | No       | `system.cpu.user`    | `aws.s3.all_requests` |
+| Step                     | Required | Default           | Example                 |
+| ------------------------ | -------- | ----------------- | ----------------------- |
+| Select the cost metric   | Yes      | All providers     | `azure.cost.actual`     |
+| Define the `filter by`   | No       | Nothing           | `aws_product:s3`        |
+| Group by                 | No       | Nothing           | `aws_availability_zone` |
+| Add observability metric | No       | `system.cpu.user` | `aws.s3.all_requests`   |
 
 Use the editor to define the cost types or exports.
 
@@ -104,6 +105,7 @@ For the **Cost Anomalies** monitor type, you can trigger an alert if the observe
 The `agile` [anomaly algorithm][101] is used with two bounds and monthly seasonality.
 
 [101]: /dashboards/functions/algorithms/
+
 {{% /tab %}}
 
 {{% tab "Threshold" %}}
@@ -118,14 +120,16 @@ If you are using the **Cost Forecast** monitor type, you can trigger an alert wh
 {{% /tab %}}
 
 {{% tab "Budget" %}}
-If you are using the **Budget** monitor type, you can trigger an alert when the cloud cost exceeds the budget you selected in the previous step.
+If you are using the **Budget** monitor type, you can trigger an alert when the actual or the forecasted cloud cost exceeds a percentage of the budget you selected in the previous step.
 
-| Step               | Purpose                                                        | Values                            |
-|--------------------|----------------------------------------------------------------|-----------------------------------|
-| Granularity        | Level of detail at which the cost is evaluated.                | `overall` (total cost), `per_row` |
-| Threshold          | Percentage of budget that is utilized to trigger the alert.    | Number between 0 and 100 (%)      |
-| Timeframe          | Evaluation window used to assess if the threshold is breached. | `all_months`, `current_month`     |
+| Step             | Purpose                                                                           | Values                            |
+| ---------------- | --------------------------------------------------------------------------------- | --------------------------------- |
+| Evaluation basis | Whether the monitor compares actual spend or forecasted spend against the budget. | `actual`, `forecasted`            |
+| Granularity      | Level of detail at which the cost is evaluated.                                   | `overall` (total cost), `per_row` |
+| Threshold        | Percentage of budget that is utilized to trigger the alert.                       | Number between 0 and 100 (%)      |
+| Timeframe        | Evaluation window used to assess if the threshold is breached.                    | `all_months`, `current_month`     |
 
+When you select **is forecasted to reach**, the monitor uses the same forecasting model as budget cards and the budget status page. Forecasts require at least 64 consecutive days of cost data — see [Forecasting][8] for details.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -163,3 +167,4 @@ You can also turn on **Audit Notifications** to alert the monitor creator and re
 [5]: https://app.datadoghq.com/cost/explorer
 [6]: /monitors/notify/
 [7]: /cloud_cost_management/planning/budgets/
+[8]: /cloud_cost_management/planning/forecasting/

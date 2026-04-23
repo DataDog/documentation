@@ -352,5 +352,11 @@
         "prefix": ";;ui",
         "body": ["{{< ui >}}${1:UI element name}{{< /ui >}}"],
         "description": "Wrap UI element names (buttons, menu items, field labels) in the ui shortcode"
+    },
+    "Agent-only": {
+        "scope": "markdown",
+        "prefix": ";;agent-only",
+        "body": ["{{< agent-only >}}", "${1:...}", "{{< /agent-only >}}"],
+        "description": "Content hidden from humans but accessible to AI agents"
     }
 }

@@ -145,7 +145,7 @@ java -javaagent:dd-java-agent.jar \
 
 ## Data Retention
 
-Datadog stores findings in accordance with our [Data Rentention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
+Datadog stores findings in accordance with our [Data Retention Periods](https://docs.datadoghq.com/data_security/data_retention_periods/). Datadog does not store or retain customer source code.
 
 [1]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/java
 [2]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/

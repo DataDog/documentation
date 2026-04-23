@@ -307,7 +307,15 @@ To resolve this, restore the original `Gemfile`. If you still want to use APM af
 ### Python
 
 Versions <=2.7.5 contain a pre-packaged protobuf dependency that can conflict with system libraries.
- 
+
+### .NET
+
+#### SSI is applied but no .NET traces reach the Agent
+
+If SSI annotations and init containers are present on the pod but no .NET traces arrive, another profiler may have precedence. Check `CORECLR_PROFILER` on the main container. If the value is not `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` (the Datadog .NET tracer CLSID), another profiler is loaded instead of Datadog.
+
+Remove the conflicting `CORECLR_*` environment variables (and any `LD_PRELOAD` entries that reference the other profiler) from the source that injected them: another vendor's operator, init container, pod template, or Helm values. Then roll the pods. The [.NET CLR Profiling API allows only one subscriber per process][10].
+
 ## Collect diagnostic information for support
 
 When contacting support about injection issues, collect the following information to assist troubleshooting:
@@ -370,3 +378,4 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [7]: https://datatracker.ietf.org/doc/html/rfc1035
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: https://app.datadoghq.com/fleet
+[10]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
