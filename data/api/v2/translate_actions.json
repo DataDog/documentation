@@ -1394,6 +1394,26 @@
     "description": "Stops a progressive rollout and marks it as aborted.",
     "summary": "Stop a progressive rollout"
   },
+  "DeleteFlagSuggestion": {
+    "description": "Delete a pending flag change suggestion. Approved suggestions cannot be deleted.",
+    "summary": "Delete a flag suggestion"
+  },
+  "GetFlagSuggestion": {
+    "description": "Get a flag change suggestion by ID.",
+    "summary": "Get a flag suggestion"
+  },
+  "ApproveFlagSuggestion": {
+    "description": "Approve a pending flag change suggestion. The change is applied immediately\nupon approval. A user cannot approve their own suggestion.",
+    "summary": "Approve a flag suggestion",
+    "request_description": "",
+    "request_schema_description": "Request to approve or reject a flag suggestion."
+  },
+  "RejectFlagSuggestion": {
+    "description": "Reject a pending flag change suggestion. The suggested change is not applied.",
+    "summary": "Reject a flag suggestion",
+    "request_description": "",
+    "request_schema_description": "Request to approve or reject a flag suggestion."
+  },
   "GetFeatureFlag": {
     "description": "Returns the details of a specific feature flag\nincluding variants and environment status.",
     "summary": "Get a feature flag"
@@ -1427,6 +1447,12 @@
   "EnableFeatureFlagEnvironment": {
     "description": "Enable a feature flag in a specific environment.",
     "summary": "Enable a feature flag in an environment"
+  },
+  "CreateFlagSuggestion": {
+    "description": "Create a change suggestion for a feature flag. Suggestions require approval\nbefore the change is applied. The request must include at least one\nnotification_rule_targets handle to receive approval or rejection notifications.",
+    "summary": "Create a flag suggestion",
+    "request_description": "",
+    "request_schema_description": "Request to create a flag suggestion."
   },
   "UnarchiveFeatureFlag": {
     "description": "Unarchives a previously archived feature flag,\nmaking it visible in the main list again.",
