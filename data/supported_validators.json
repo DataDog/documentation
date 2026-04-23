@@ -1,0 +1,342 @@
+{
+  "multifiltersearch": {
+    "headers": [
+      {
+        "id": "secret_type",
+        "name": "Secret type"
+      },
+      {
+        "id": "static_validator",
+        "name": "Static validator available",
+        "filter_by": true
+      },
+      {
+        "id": "live_validator",
+        "name": "Live validator available",
+        "filter_by": true
+      }
+    ],
+    "data": [
+      {
+        "secret_type": "`adobe_access_token`",
+        "static_validator": "✓",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`adobe_refresh_token`",
+        "static_validator": "✓",
+        "live_validator": "✗"
+      },
+      {
+        "secret_type": "`adafruit_io_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`aiven_personal_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`anthropic's_claude_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`asana_oauth_token`",
+        "static_validator": "✓",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`asana_personal_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`atlassian_access_token`",
+        "static_validator": "✓",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`atlassian_refresh_token`",
+        "static_validator": "✓",
+        "live_validator": "✗"
+      },
+      {
+        "secret_type": "`aws_access_key_id`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`aws_secret_access_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`azure_container_registry_key`",
+        "static_validator": "✓",
+        "live_validator": "✗"
+      },
+      {
+        "secret_type": "`azure_entra_id_token`",
+        "static_validator": "✓",
+        "live_validator": "✗"
+      },
+      {
+        "secret_type": "`beamer_api_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`bitbucket_oauth_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`buildkite_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`circleci_personal_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`circleci_project_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`cloudflare_api_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`cloudflare_origin_ca_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`contentful_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`datadog_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`datadog_nonce_session_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`datadog_personal_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`discord_application_oauth_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`discord_application_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`discord_bot_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`docker_access_token`",
+        "static_validator": "✓",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`doppler_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`dropbox_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`duffel_test_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`fastly_api_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`flutterwave_api_secret_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`frame_io_developer_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`frame_io_oauth_session_secret`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`github_access_token`",
+        "static_validator": "✓",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`github_fine-grained_personal_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`heroku_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`hugging_face_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`intercom_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`launchdarkly_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`lichess_personal_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`non_expired_json_web_token`",
+        "static_validator": "✓",
+        "live_validator": "✗"
+      },
+      {
+        "secret_type": "`notion_integration_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`npm_access_token`",
+        "static_validator": "✓",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`openai_project_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`openai_user_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`oracle_access_token`",
+        "static_validator": "✓",
+        "live_validator": "✗"
+      },
+      {
+        "secret_type": "`pagerduty_api_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`perfect_cloud_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`postman_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`pulumi_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`rubygems_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`sendgrid_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`sentry_organization_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`sentry_personal_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`shippo_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`shippo_jwt`",
+        "static_validator": "✓",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`snowflake_personal_access_token`",
+        "static_validator": "✓",
+        "live_validator": "✗"
+      },
+      {
+        "secret_type": "`square_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`typeform_personal_access_token`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`twilio_access_token`",
+        "static_validator": "✓",
+        "live_validator": "✗"
+      },
+      {
+        "secret_type": "`workos_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      },
+      {
+        "secret_type": "`xai_(grok)_api_key`",
+        "static_validator": "✗",
+        "live_validator": "✓"
+      }
+    ]
+  }
+}

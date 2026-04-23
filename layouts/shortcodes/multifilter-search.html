@@ -29,11 +29,10 @@
   {{ $headers = $.Page.Params.multifiltersearch.headers}}
   {{ $data = $.Page.Params.multifiltersearch.data}}
 {{ else if $resource_path}}
-  {{/*  Get JSON dataset */}}
   {{ $resource_asset := resources.Get $resource_path }}
   {{ $resource_data := index .Site.Data $resource_path }}
   {{ if $resource_asset }}
-    {{/*  Get JSON dataset from assets directory */}}
+    {{/*  Get dataset from assets directory */}}
     {{ $resource := unmarshal $resource_asset}}
     {{ $headers = (index $resource "multifiltersearch" "headers")}}
     {{ $data = (index $resource "multifiltersearch" "data")}}
@@ -101,6 +100,7 @@ x-data="{
     
     this.filterTypes[filterType] = this.filterTypes[filterType].filter(s => s !== filterOption)
     this.pushState(filterType, filterOption)
+    this.resetFilteredSet()
   },
   deleteAllSelections (filterType) {
     // delete all selections of a filter type from filter toggler and url params
@@ -111,6 +111,7 @@ x-data="{
 
     url.searchParams.delete(filterType)
     window.history.pushState(null,'', url.toString())
+    this.resetFilteredSet()
   },
   initFilterSearchValues () {
       // Initializes and Updates x-data filter and search properties with url param values, if any
@@ -134,35 +135,29 @@ x-data="{
   },
   pushState (filterType=undefined, filterOption=undefined) {
       // Updates url with new query params for filter type and search without refreshing the page
-
       const url = new URL(window.location.href)
-      let newURL = ''
-      if(filterType){
-          if(!url.searchParams.getAll(filterType).includes(filterOption)){
+      if (filterType) {
+          const current = url.searchParams.getAll(filterType)
+          if (!current.includes(filterOption)) {
               // add one key:value param
               url.searchParams.append(filterType, filterOption)
-            }else{
-              // remove one key:value param
-
-              function encode (match) {
-                // callback function to encode some special characters. 
-                // accounting for how the toString url method encodes characters
-                return match === ' ' ? '\\+': '%'+ match.charCodeAt(0).toString(16).toUpperCase()
-              }
-              const regex = new RegExp(`([\\&\\?])${filterType}=${filterOption.replace(/[\s()!*\[\]%,]/g, encode)}(?=\&|$)`, 'g');
-              newURL = url.toString().replaceAll(regex, '').replace('/&', '/?')
+          } else {
+              const i = current.indexOf(filterOption)
+              if (i !== -1) current.splice(i, 1)
+              url.searchParams.delete(filterType)
+              current.forEach((v) => url.searchParams.append(filterType, v))
           }
-          if(!this.filterTypes[filterType].length) {
-             url.searchParams.delete(filterType)
+          if (!this.filterTypes[filterType]?.length) {
+              url.searchParams.delete(filterType)
           }
-      }else {
+      } else {
           url.searchParams.set('search', this.searchValue)
-          if(!this.searchValue) {
+          if (!this.searchValue) {
               url.searchParams.delete('search')
-          } 
+          }
       }
 
-      window.history.pushState(null,'', newURL || url.toString())
+      window.history.pushState(null, '', url.toString())
   },
   emptyResultsMsg () {
       // Determine and return the appropriate empty results message
@@ -255,85 +250,87 @@ x-init="initFilterSearchValues()">
   {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
   <nav id="multifilter-search-nav" class="container px-0">
     <div class="filters__multifilter row">
-        {{ range $k, $h := (where $headers "filter_by" true)}}
+      {{ $filtered_headers := where $headers "filter_by" true}}
+      {{ $even_num_headers := modBool (len $filtered_headers) 2 }}
+      {{ range $k, $h := $filtered_headers}}
         {{ $filter_type := $h.id }}
-        <div class='filter-type flex-column col-12 col-md-{{cond (not $k) "12" "6" }}' data-id="{{$filter_type}}" >
-            <p class="filter-type-name fw-semibold">{{ $h.name }}</p>
-            <div class="filter-component position-relative">
-                {{/*  FILTER TOGGLER  */}}
-                <button 
-                data-id="{{$filter_type}}"
-                class="toggler w-100 rounded position-relative"
-                @click.stop="toggleFilterForm($el)">
-                    <div class="selections d-flex">
-                        {{/*  All  */}}
-                        <template x-if="!filterTypes['{{$filter_type}}'].length">
-                            <span class="all fw-semibold">All</span>
-                        </template>
-                        
-                        {{/*  Show filter selections from `filterTypes` data in button as they are selected */}}
-                        <template x-for="(filter, idx) in filterTypes['{{$filter_type}}']" :key="idx">
+        <div class='filter-type flex-column col-12 col-md-{{cond (or (not $k) $even_num_headers) "12" "6" }}' data-id="{{$filter_type}}" >
+          <p class="filter-type-name fw-semibold">{{ $h.name }}</p>
+          <div class="filter-component position-relative">
+            {{/*  FILTER TOGGLER  */}}
+            <button 
+            data-id="{{$filter_type}}"
+            class="toggler w-100 rounded position-relative"
+            @click.stop="toggleFilterForm($el)">
+                <div class="selections d-flex">
+                    {{/*  All  */}}
+                    <template x-if="!filterTypes['{{$filter_type}}'].length">
+                        <span class="all fw-semibold">All</span>
+                    </template>
+                    
+                    {{/*  Show filter selections from `filterTypes` data in button as they are selected */}}
+                    <template x-for="(filter, idx) in filterTypes['{{$filter_type}}']" :key="idx">
+                        <div 
+                        :data-id="filter.toLowerCase().replaceAll(' ', '-')" 
+                        class="selection-container rounded d-flex align-items-center">
+                            <span class="selection-name" x-text="filter"></span>
+                            {{/*  Delete one selection (x) */}}
                             <div 
                             :data-id="filter.toLowerCase().replaceAll(' ', '-')" 
-                            class="selection-container rounded d-flex align-items-center">
-                                <span class="selection-name" x-text="filter"></span>
-                                {{/*  Delete one selection (x) */}}
-                                <div 
-                                :data-id="filter.toLowerCase().replaceAll(' ', '-')" 
-                                class="close-light-wrapper" @click.stop="resetFilteredSet; deleteOneSelection('{{ $filter_type }}', filter )">
-                                    {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
-                                </div>
+                            class="close-light-wrapper" @click.stop="deleteOneSelection('{{ $filter_type }}', filter )">
+                                {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
                             </div>
-                        </template>
+                        </div>
+                    </template>
 
-                    </div>
-                    {{/*  Delete all selections for a filter type  */}}
-                    <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
-                        <template x-if="filterTypes['{{$filter_type}}'].length">
-                            <span class="cancel-circle-wrapper" @click.stop="resetFilteredSet; deleteAllSelections('{{ $filter_type }}')">
-                                {{ partial "icon" (dict "name" "x-circle-solid" "title" "delete all" ) }}
-                            </span>
-                        </template>
-                        <span class="chevron-wrapper d-flex align-items-center justify-content-center position-relative h-100">
-                            <div class="chevron chevron-down"></div>
+                </div>
+                {{/*  Delete all selections for a filter type  */}}
+                <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
+                    <template x-if="filterTypes['{{$filter_type}}'].length">
+                        <span class="cancel-circle-wrapper" @click.stop="deleteAllSelections('{{ $filter_type }}')">
+                            {{ partial "icon" (dict "name" "x-circle-solid" "title" "delete all" ) }}
                         </span>
-                    </div>
-                </button>
-                {{/*  FILTER FORM  */}}
-                <form 
-                data-id="{{$filter_type}}"
-                class="d-flex flex-column bg-white rounded position-absolute w-100"
-                x-cloak x-show.important="openedFilterForm === '{{$filter_type}}'"
-                @click.outside="openedFilterForm = null"
-                >
-                    <div class="filter-selection-container">
-                        <span>All</span>
-                    </div>
+                    </template>
+                    <span class="chevron-wrapper d-flex align-items-center justify-content-center position-relative h-100">
+                        <div class="chevron chevron-down"></div>
+                    </span>
+                </div>
+            </button>
+            {{/*  FILTER FORM  */}}
+            <form 
+            data-id="{{$filter_type}}"
+            class="d-flex flex-column bg-white rounded position-absolute w-100"
+            x-cloak x-show.important="openedFilterForm === '{{$filter_type}}'"
+            @click.outside="openedFilterForm = null"
+            >
+                <div class="filter-selection-container">
+                    <span>All</span>
+                </div>
 
-                    {{ range (index ($navigation.Get "dropdown") $h.name) | sort  }}
-                      {{/*  Removes markdown link syntax if it exists  */}}
-                      {{ $clean_value := replaceRE `\[(.*)\]\(.*\)` "$1" . }}
-                      {{ $id := (printf "%s-%s" $clean_value $filter_type) | anchorize }}
-                      <div class="filter-selection-container">
-                          <input 
-                          id='{{ $id }}' 
-                          type="checkbox" 
-                          value='{{ $clean_value }}' 
-                          x-model="filterTypes['{{$filter_type}}']"
-                          @change="resetFilteredSet"
-                          @change.debounce="pushState('{{ $filter_type }}', '{{ $clean_value }}')"
-                          >  
-                          
-                          <label for="{{ $id }}" class="d-flex align-items-center">
-                              {{$clean_value}}
-                          </label>
-                      </div>
-                    {{ end }}
-                </form>
-            </div>                      
-          
+                {{ $sorted_filter_options := sort (index ($navigation.Get "dropdown") $h.name) }}
+                {{ range $idx, $item := $sorted_filter_options }}
+                  {{/*  Removes markdown link syntax if it exists  */}}
+                  {{ $clean_value := replaceRE `\[(.*)\]\(.*\)` "$1" $item }}
+                  {{ $id := printf "%s-%d" $filter_type $idx }}
+                  <div class="filter-selection-container">
+                      <input 
+                      id='{{ $id }}' 
+                      type="checkbox" 
+                      value='{{ $clean_value }}' 
+                      x-model="filterTypes['{{$filter_type}}']"
+                      @change="resetFilteredSet"
+                      @change.debounce="pushState('{{ $filter_type }}', '{{ $clean_value }}')"
+                      >  
+                      
+                      <label for="{{ $id }}" class="d-flex align-items-center">
+                          {{$clean_value}}
+                      </label>
+                  </div>
+                {{ end }}
+            </form>
+          </div>                      
         </div>
-        {{ end }}
+      {{ end }}
     </div>
     {{/*  SEARCH FORM */}}
     <form class="search__multifilter" @submit.prevent="">
