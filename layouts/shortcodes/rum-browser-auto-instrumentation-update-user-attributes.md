@@ -38,7 +38,14 @@ When a user's browser makes a request to an allowed URL, the RUM SDK injects tra
 
 #### Configuration
 
-Add the URLs of your backend services that you want to connect to RUM:
+To add the URLs of your backend services that you want to connect to RUM:
+1. Go to your application configuration page in [**RUM > Manage Application**][1]
+2. Select the RUM application you want to configure.
+3. Navigate to Configuration section and click **+ Add Attribute** button.
+4. Select **Allowed Tracing URLs** and enter the URL to connect to APM traces.
+5. Repeat for any additional URLs.
+
+[1]: https://app.datadoghq.com/rum/list
 
 | Field | Description |
 |-------|-------------|
