@@ -67,7 +67,7 @@ The [AI Guard SDK][12] provides language-specific libraries (Python, JavaScript,
 
 ### HTTP API
 
-The [AI Guard HTTP API][13] lets you call the AI Guard JSON:API endpoint directly with any HTTP client, for languages or environments not covered by the SDK.
+The [AI Guard HTTP API][13] lets you call the AI Guard JSON:API endpoint directly with any HTTP client, for languages or environments the SDK doesn't cover.
 
 ## 4. Create a custom retention filter {#retention-filter}
 
