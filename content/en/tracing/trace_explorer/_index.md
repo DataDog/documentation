@@ -1,5 +1,5 @@
 ---
-title: Trace Explorer
+title: Trace Explorerm
 aliases:
     - /tracing/tracing_without_limits/
     - /tracing/livesearch/
