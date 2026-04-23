@@ -39,11 +39,10 @@ The following table shows additional example features and their associated featu
   - [Android (3.1.0)][2]
   - [iOS (3.1.0)][3]
   - [Flutter (3.0.0)][7]
+      - On Flutter Web, operations route through the Browser SDK and require the `feature_operation_vital` experimental feature enabled.
   - [Kotlin Multiplatform (1.4.0)][4]
   - [React Native (3.0.0)][5]
   - [Roku (1.4.0)][6]
-
-On Flutter Web, operations route through the Browser SDK. Enable the `feature_operation_vital` experimental feature on the Browser SDK (see the Browser tab).
 
 ## Setup
 
@@ -115,7 +114,7 @@ DatadogSdk.instance.rum?.startFeatureOperation(
   }
 )
 ```
-On Flutter Web, the underlying Browser SDK must have the `feature_operation_vital` experimental feature enabled.
+On Flutter Web, the Browser SDK must have the `feature_operation_vital` experimental feature enabled.
 {{% /tab %}}
 
 {{% tab "Roku" %}}
@@ -201,7 +200,7 @@ DatadogSdk.instance.rum?.succeedFeatureOperation(
   }
 )
 ```
-On Flutter Web, the underlying Browser SDK must have the `feature_operation_vital` experimental feature enabled.
+On Flutter Web, the Browser SDK must have the `feature_operation_vital` experimental feature enabled.
 
 {{% /tab %}}
 
@@ -304,7 +303,7 @@ DatadogSdk.instance.rum?.failFeatureOperation(
   }
 )
 ```
-On Flutter Web, the underlying Browser SDK must have the `feature_operation_vital` experimental feature enabled.
+On Flutter Web, the Browser SDK must have the `feature_operation_vital` experimental feature enabled.
 
 {{% /tab %}}
 
