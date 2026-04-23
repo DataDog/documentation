@@ -25,9 +25,9 @@ Journey Monitoring is in Preview.
 ## Overview
 
 Teams monitoring critical user flows — such as login, checkout, or media streaming — often need to switch between multiple tools to answer basic questions:
-- Is this experience available to my users?
-- How quickly and reliably does it perform?
-- Where is the issue coming from — frontend, network, or backend?
+- Are users experiencing friction?
+- How quick and reliable is performance?
+- Are issues coming from the frontend, network, or backend?
 
 **Journey Monitoring** addresses this by visualizing the performance of critical user flows in your applications. It brings together data from [Real User Monitoring][1], [Synthetic Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each user journey in one place. This gives engineering, product, and operations teams a shared view of journey health.
 
@@ -36,7 +36,7 @@ Teams monitoring critical user flows — such as login, checkout, or media strea
 ## What you can do
 
 For each journey you can:
-- See how many users start and complete the journey, and how long it takes
+- Measure the journey's traffic, conversion rate, and time to completion
 - Identify where users drop off and investigate individual sessions with [Session Replay][4]
 - Track the uptime of the journey using a [Synthetic test suite][10]
 - Measure the performance of critical journey steps with [RUM operations][13]
@@ -48,7 +48,6 @@ Journey Monitoring requires the following products for frontend applications, ea
 
 - **[RUM without Limits][5]** and **[Product Analytics][8]**: Traffic, conversion rate, and time-to-convert metrics
 - **[Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]**: Uptime tracking through the journey's automatically created test suite
-- **[Session Replay][4]**: Session replay links for users who dropped off
 
 ### Step 1 - Create a journey
 
@@ -87,9 +86,9 @@ Each journey can have one or more [variants][9]. A variant is a specific sequenc
 ## Metrics
 
 Each journey and its variants have the following performance metrics:
-- **Traffic**: Number of sessions that began the journey. Based on the `rum.measure.feature` metric.
-- **Conversion**: Percentage of sessions that completed the journey. Based on the `rum.measure.feature` metric.
-- **Time to convert**: Average time for a session to complete the journey. Based on the `rum.measure.feature.duration` metric.
+- **Traffic**: Total number of journey attempts across user sessions. Based on the `rum.measure.feature` metric.
+- **Conversion**: Percentage of journey attempts that were completed. Based on the `rum.measure.feature` metric.
+- **Time to convert**: Average time to complete the journey across all user sessions. Based on the `rum.measure.feature.duration` metric.
 - **Uptime**: Availability of the journey based on its [Synthetic test suite][10] performance.
 
 ## Further reading
