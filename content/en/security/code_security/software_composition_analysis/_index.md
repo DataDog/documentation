@@ -121,7 +121,7 @@ To learn more about how the inventory is generated, how Static and Runtime data 
 
 ### Explore the full CVE catalog
 
-The [CVE Explorer][15] gives you a searchable catalog of every CVE and security advisory tracked by Datadog, regardless of whether it affects your environment. Use it to proactively assess exposure to newly published vulnerabilities before they appear in your findings.
+Use the [CVE Explorer][15] to search every CVE and security advisory tracked by Datadog, including those that do not affect your environment. This helps you assess exposure to newly published vulnerabilities before they appear in your findings.
 
 For CVEs that affect packages detected in your scanned repositories and services, Datadog automatically marks them as impacted. Assets that have not been scanned will not reflect an impacted status.
 
