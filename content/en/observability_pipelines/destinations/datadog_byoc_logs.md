@@ -1,6 +1,8 @@
 ---
 title: Datadog BYOC Logs Destination
 disable_toc: false
+aliases:
+- /observability_pipelines/destinations/cloudprem/
 products:
 - name: Logs
   icon: logs

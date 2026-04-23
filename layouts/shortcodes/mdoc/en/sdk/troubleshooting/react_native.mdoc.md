@@ -1,22 +1,11 @@
----
-title: Troubleshooting React Native SDK issues
-description: Learn how to troubleshoot issues with React Native Monitoring.
-aliases:
-  - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/reactnative
-  - /real_user_monitoring/mobile_and_tv_monitoring/react_native/troubleshooting
-further_reading:
-  - link: "https://github.com/DataDog/dd-sdk-reactnative"
-    tag: "Source Code"
-    text: "Source code for dd-sdk-reactnative"
-  - link: "/real_user_monitoring"
-    tag: "Documentation"
-    text: "Datadog Real User Monitoring"
-
----
+<!--
+This partial contains troubleshooting content for the React Native SDK.
+It can be included in the React Native SDK troubleshooting page or in the unified client_sdks view.
+-->
 
 ## Overview
 
-If you experience unexpected behavior with Datadog React Native RUM, use this guide to resolve issues quickly. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
+If you experience unexpected behavior with Datadog React Native RUM, use this guide to resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance.
 
 ## No data is being sent to Datadog
 
@@ -28,7 +17,7 @@ Sometimes, no data is sent due to a small misstep in the configuration.
 
 Here are some common things to check for:
 
-- Ensure your `clientToken` and `applicationId` are correct.
+- Make sure your `clientToken` and `applicationId` are correct.
 - Make sure you have not set `sessionSamplingRate` to something other than 100 (100 is the default value), or else your session might not be sent.
 - If you've set up a `Proxy` in the Datadog configuration, check that it has been correctly configured.
 - Check that you are **tracking views** (all events must be attached to a view) and **sending events**.
@@ -57,22 +46,20 @@ You cannot send events before initialization, and attempting to do so puts the S
 
 #### Solution
 
-{{< tabs >}}
-{{% tab "DdSdkReactNative.initialize" %}}
+{% tabs %}
+{% tab label="DdSdkReactNative.initialize" %}
 
 If you use `DdSdkReactNative.initialize` to start the Datadog SDK, call this function in your top-level `index.js` file so that the SDK is initialized before your other events are sent.
 
-{{% /tab %}}
-{{% tab "DatadogProvider" %}}
+{% /tab %}
+{% tab label="DatadogProvider" %}
 
 Starting from SDK version `1.2.0`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this issue from happening.
 
-To use it, see the [Migrate to the Datadog Provider guide][1].
+To use it, see the [Migrate to the Datadog Provider guide][10].
 
-[1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md
-
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 ### Review native logs
 
@@ -84,7 +71,7 @@ Reviewing native logs can give you more input on what could be going wrong.
 - Build your project for a simulator or a device.
 - Native logs start appearing on the bottom right corner:
 
-  {{< img src="real_user_monitoring/react_native/troubleshooting-xcode-logs.png" alt="Reviewing native logs can help you figure out why no data is being sent" >}}
+  {% img src="real_user_monitoring/react_native/troubleshooting-xcode-logs.png" alt="Reviewing native logs can help you determine why no data is being sent" /%}
 
 You can filter logs by "DATADOG" and look for any error.
 
@@ -107,23 +94,20 @@ If you see the log below, it means that you have called a RUM method before init
 
 ##### Solution
 
-{{< tabs >}}
-{{% tab "DdSdkReactNative.initialize" %}}
+{% tabs %}
+{% tab label="DdSdkReactNative.initialize" %}
 
 If you use `DdSdkReactNative.initialize` to start the Datadog SDK, call this function in your top-level `index.js` file so the SDK is initialized before your other events are sent.
 
-{{% /tab %}}
-{{% tab "DatadogProvider" %}}
+{% /tab %}
+{% tab label="DatadogProvider" %}
 
 Starting from SDK version `1.2.0`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this issue from happening.
 
-To use it, see the [Migrate to the Datadog Provider guide][1].
+To use it, see the [Migrate to the Datadog Provider guide][10].
 
-
-[1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md
-
-{{% /tab %}}
-{{< /tabs >}}
+{% /tab %}
+{% /tabs %}
 
 #### On Android
 
@@ -149,7 +133,7 @@ To use it, see the [Migrate to the Datadog Provider guide][1].
 
 Pidcat output looks like this:
 
-{{< img src="real_user_monitoring/react_native/troubleshooting-pidcat-logs.png" alt="This is an example of a pidcat output" >}}
+{% img src="real_user_monitoring/react_native/troubleshooting-pidcat-logs.png" alt="This is an example of a pidcat output" /%}
 
 In this example, the last log indicates that the batch of RUM data was sent successfully.
 
@@ -283,10 +267,6 @@ dependencies {
 
 A warning appears when deobfuscation fails for a stack trace. If the stack trace is not obfuscated to begin with, you can ignore this warning. Otherwise, use the [RUM Debug Symbols page][6] to view all your uploaded source maps, dSYMs, and mapping files. See [Investigate Obfuscated Stack Traces with RUM Debug Symbols][7].
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /help
 [2]: https://github.com/JakeWharton/pidcat
 [3]: https://github.com/JakeWharton/pidcat/issues/180#issuecomment-1124019329
@@ -294,3 +274,4 @@ A warning appears when deobfuscation fails for a stack trace. If the stack trace
 [5]: https://github.com/facebook/react-native/issues/28801
 [6]: https://app.datadoghq.com/source-code/setup/rum
 [7]: /real_user_monitoring/guide/debug-symbols
+[10]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md

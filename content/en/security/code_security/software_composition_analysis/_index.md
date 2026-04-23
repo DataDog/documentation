@@ -173,6 +173,10 @@ Software Composition Analysis (SCA) supports the following languages:
 
 {{< partial name="code_security/sca-lang-support.html" >}}
 
+## Customize your configuration
+
+You can exclude paths from Static SCA analysis by configuring `ignore-paths` in Datadog or in a `code-security.datadog.yaml` file. For the full SCA configuration reference, see [Software Composition Analysis (SCA) Configuration][27]. For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][28].
+
 ## Next steps
 
 1. [Set up Static SCA][1] to scan your repositories.
@@ -206,3 +210,5 @@ Software Composition Analysis (SCA) supports the following languages:
 [24]: https://github.com/pypa/advisory-database
 [25]: https://github.com/cloudsecurityalliance/gsd-database
 [26]: https://github.com/DataDog/guarddog
+[27]: /security/code_security/software_composition_analysis/configuration/
+[28]: /security/code_security/guides/configuration/
