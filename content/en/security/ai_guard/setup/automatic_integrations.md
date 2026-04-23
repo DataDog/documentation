@@ -1,6 +1,5 @@
 ---
 title: Automatic Integrations
-private: true
 further_reading:
 - link: /security/ai_guard/setup/manual_integrations/
   tag: Documentation
