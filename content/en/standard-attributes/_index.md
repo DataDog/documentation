@@ -1536,12 +1536,6 @@ attributes:
       - icon-apm
     type: string
     domain: HTTP requests
-  - name: http.client_ip_details.ipAddress
-    description: The client IP address that was enriched. Mirrors `http.client_ip` and is populated when geolocation and network metadata lookup succeeds.
-    product_source:
-      - icon-apm
-    type: string
-    domain: HTTP Client IP Details
   - name: http.client_ip_details.type
     description: The type of IP address, such as `public`, `private`, or `reserved`.
     product_source:
