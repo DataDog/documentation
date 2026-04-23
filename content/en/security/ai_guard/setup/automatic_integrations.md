@@ -53,10 +53,10 @@ AI Guard automatically evaluates the following LangChain operations:
 - [Tools][4]:
   - `BaseTool.invoke()`, `BaseTool.ainvoke()`
 
-[1]: https://python.langchain.com/docs/introduction/
+[1]: https://docs.langchain.com/oss/python/langchain/overview
 [2]: https://python.langchain.com/v0.2/docs/concepts/#llms
-[3]: https://python.langchain.com/docs/concepts/chat_models/
-[4]: https://python.langchain.com/docs/concepts/tools/
+[3]: https://docs.langchain.com/oss/python/langchain/models
+[4]: https://docs.langchain.com/oss/python/langchain/tools
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
