@@ -444,7 +444,7 @@ Once the pipeline is active, new NGINX logs are automatically correlated with th
 [7]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 [8]: /logs/guide/ease-troubleshooting-with-cross-product-correlation
 [9]: https://app.datadoghq.com/logs/pipelines
-[10]: /logs/log_configuration/processors/?tab=ui#trace-remapper
-[11]: /logs/log_configuration/processors/?tab=ui#grok-parser
-[12]: /logs/log_configuration/processors/?tab=ui#span-remapper
+[10]: /logs/log_configuration/processors/trace_remapper/
+[11]: /logs/log_configuration/processors/grok_parser/
+[12]: /logs/log_configuration/processors/span_remapper/
 

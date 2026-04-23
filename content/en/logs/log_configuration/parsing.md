@@ -81,7 +81,7 @@ After processing, the following structured log is generated:
 ### Matcher and filter
 
 <div class="alert alert-danger">Grok parsing features available at <em>query-time</em> (in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>).<br><br>
-The following full set of matchers and filters are specific to <em>ingest-time</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">Grok Parser</a> functionality.</div>
+The following full set of matchers and filters are specific to <em>ingest-time</em> <a href="/logs/log_configuration/processors/grok_parser/">Grok Parser</a> functionality.</div>
 
 Here is a list of all the matchers and filters natively implemented by Datadog:
 
@@ -233,8 +233,8 @@ The following filters are only available for ingest-time parsing with the Grok P
 `url`
 : Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].
 
-[1]: /logs/log_configuration/processors/#user-agent-parser
-[2]: /logs/log_configuration/processors/#url-parser
+[1]: /logs/log_configuration/processors/user_agent_parser/
+[2]: /logs/log_configuration/processors/url_parser/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -765,5 +765,5 @@ If your logs contain ASCII control characters, they are serialized upon ingestio
 
 [1]: https://github.com/google/re2/wiki/Syntax
 [2]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[3]: /logs/log_configuration/processors/#log-date-remapper
+[3]: /logs/log_configuration/processors/log_date_remapper/
 [4]: /logs/log_configuration/parsing/?tab=filters&tabs=filters#matcher-and-filter
