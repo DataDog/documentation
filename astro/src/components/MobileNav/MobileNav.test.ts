@@ -25,7 +25,21 @@ const classes = {
   hamburgerBar: 'hamburger__bar',
 };
 
-const renderMobileNav = () => render(h(MobileNavComponent, { classes }));
+const quicknav = { home: 'Home', docs: 'Docs', api: 'API' };
+const search = { placeholder: 'Search', ariaLabel: 'Search' };
+const items = [
+  { identifier: 'product', label: 'Product', url: 'https://www.datadoghq.com/product/' },
+];
+const categories = [
+  {
+    identifier: 'infra',
+    label: 'Infrastructure',
+    products: [{ identifier: 'apm', label: 'APM', url: 'https://www.datadoghq.com/product/apm/' }],
+  },
+];
+
+const renderMobileNav = () =>
+  render(h(MobileNavComponent, { classes, quicknav, search, items, categories }));
 
 describe('MobileNav — static render', () => {
   it('renders the hamburger toggle with accessible label', () => {

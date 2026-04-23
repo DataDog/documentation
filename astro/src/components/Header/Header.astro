@@ -15,6 +15,7 @@ import {
   getMainLeft,
   getMainRight,
   getDesktopCategories,
+  getMobileCategories,
   getProduct,
   isDisabledForDocs,
   resolveUrl,
@@ -25,6 +26,7 @@ import { i18n } from '../../lib/i18n';
 const mainLeft = getMainLeft();
 const mainRight = getMainRight();
 const categories = getDesktopCategories();
+const mobileCategoriesRaw = getMobileCategories();
 
 // Raw SVG import for the carrot icon used in the mega-menu's pricing link.
 const carrotSvgModule = await import('../../mocked_dependencies/websites_modules/static/icons/right-carrot-normal-2.svg?raw');
@@ -115,6 +117,34 @@ function simpleChildren(item: MenuItem | undefined) {
 
 const aboutChildren = simpleChildren(aboutItem);
 const blogChildren = simpleChildren(blogItem);
+
+// Mobile nav data — pre-shaped so MobileNav.tsx doesn't need to import
+// menuData/i18n/yaml on the client (was adding ~130KB to the island bundle).
+const mobileItems = mainLeft
+  .filter((m) => !isDisabledForDocs(m))
+  .map((item) => ({
+    identifier: item.identifier,
+    label: i18n(item.lang_key),
+    url: resolveUrl(item.url),
+  }));
+
+const mobileCategoriesData = mobileCategoriesRaw.map((cat) => ({
+  identifier: cat.identifier,
+  label: i18n(cat.lang_key),
+  products: (cat.mobile_products ?? [])
+    .map((id) => {
+      const p = getProduct(id);
+      return p ? { identifier: p.identifier, label: i18n(p.lang_key), url: resolveUrl(p.url) } : null;
+    })
+    .filter((p): p is { identifier: string; label: string; url: string } => p !== null),
+}));
+
+const mobileNavQuicknav = {
+  home: i18n('home'),
+  docs: i18n('docs') || 'Docs',
+  api: i18n('api'),
+};
+const mobileNavSearch = { placeholder: 'Search', ariaLabel: 'Search' };
 
 const bitsLogoUrl = 'https://imgix.datadoghq.com/img/dd_logo_n_70x75.png?ch=Width,DPR&fit=max&auto=format&w=70&h=75';
 const textLogoUrl = 'https://imgix.datadoghq.com/img/dd-logo-n-200.png?ch=Width,DPR&fit=max&auto=format&h=14&auto=format&w=807';
@@ -286,7 +316,14 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
             height="40"
           />
         </a>
-        <MobileNav client:load classes={{ hamburger: styles.hamburger, hamburgerOpen: styles['hamburger--open'], hamburgerBar: styles.hamburgerBar }} />
+        <MobileNav
+          client:load
+          classes={{ hamburger: styles.hamburger, hamburgerOpen: styles['hamburger--open'], hamburgerBar: styles.hamburgerBar }}
+          quicknav={mobileNavQuicknav}
+          search={mobileNavSearch}
+          items={mobileItems}
+          categories={mobileCategoriesData}
+        />
       </div>
     </div>
   </nav>

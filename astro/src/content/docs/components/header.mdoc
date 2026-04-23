@@ -15,7 +15,7 @@ Site-wide header rendered at the top of every page by `BaseLayout`. Ported from 
 | `ProductMegaMenu.tsx` | Preact island | The Product dropdown. Holds `openCategory` state with a 160ms hover debounce; resets to the first category when the dropdown closes. |
 | `LogoDownloadPanel.astro` | Static + tiny `<script is:inline>` | Hidden "Looking for Datadog logos?" popover. Click-toggle behavior mirrors Hugo's `.js-logo-download`. |
 | `HeaderScroll.astro` | `<script is:inline>` | Sets `--hugo-header-shrink` to `min(scrollY, 65px)` at ≥992px, and adds/removes the `.main-nav-scrolled` class on `<html>`. |
-| `MobileNav.tsx` | Preact island | Hamburger-triggered right-side overlay. Renders the docs mobile nav variant with home/docs/api quick-links, search stub, and full menu tree. |
+| `MobileNav.tsx` | Preact island | Hamburger-triggered right-side overlay. Renders the docs mobile nav variant with home/docs/api quick-links, search stub, and full menu tree. Receives already-resolved labels and URLs as props so the client bundle doesn't pull in `menuData` / `i18n` / `yaml`. |
 | `NavIcon.astro` | Static | Inlines SVG icons from `mocked_dependencies/websites_modules/static/icons/` and colors them via `currentColor`. |
 
 ## Data flow

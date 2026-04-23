@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'preact/hooks';
 import styles from './MobileNav.module.css';
-import {
-  getMainLeft,
-  getMobileCategories,
-  getProduct,
-  isDisabledForDocs,
-  resolveUrl,
-} from '../../lib/menuData';
-import { i18n } from '../../lib/i18n';
+
+interface NavLink {
+  identifier?: string;
+  label: string;
+  url: string;
+}
+
+interface MobileCategory {
+  identifier: string;
+  label: string;
+  products: NavLink[];
+}
 
 interface Props {
   classes: {
@@ -15,17 +19,14 @@ interface Props {
     hamburgerOpen: string;
     hamburgerBar: string;
   };
+  quicknav: { home: string; docs: string; api: string };
+  search: { placeholder: string; ariaLabel: string };
+  items: NavLink[];
+  categories: MobileCategory[];
 }
 
-/**
- * Mobile nav overlay — hamburger-triggered side panel for docs. Ports
- * ~/dd/websites-modules/layouts/partials/nav/mobile-documentation.html,
- * minus live Algolia search (stubbed input for now, per plan).
- */
-export default function MobileNav({ classes }: Props) {
+export default function MobileNav({ classes, quicknav, search, items, categories }: Props) {
   const [open, setOpen] = useState(false);
-  const mainLeft = getMainLeft().filter((m) => !isDisabledForDocs(m));
-  const categories = getMobileCategories();
 
   useEffect(() => {
     if (open) document.documentElement.style.overflow = 'hidden';
@@ -64,26 +65,26 @@ export default function MobileNav({ classes }: Props) {
         data-testid="mobile-nav"
       >
         <div class={styles.quicknav}>
-          <a href="https://www.datadoghq.com">{i18n('home')}</a>
-          <a href="/">{i18n('docs') || 'Docs'}</a>
-          <a href="/api/">{i18n('api')}</a>
+          <a href="https://www.datadoghq.com">{quicknav.home}</a>
+          <a href="/">{quicknav.docs}</a>
+          <a href="/api/">{quicknav.api}</a>
         </div>
 
         <div class={styles.searchWrap}>
           <input
             class={styles.searchInput}
             type="search"
-            placeholder="Search"
-            aria-label="Search"
+            placeholder={search.placeholder}
+            aria-label={search.ariaLabel}
             data-testid="mobile-nav-search"
           />
         </div>
 
         <ul class={styles.list}>
-          {mainLeft.map((item) => (
-            <li key={item.identifier}>
-              <a class={styles.itemLink} href={resolveUrl(item.url)}>
-                {i18n(item.lang_key)}
+          {items.map((item) => (
+            <li key={item.identifier ?? item.url}>
+              <a class={styles.itemLink} href={item.url}>
+                {item.label}
               </a>
             </li>
           ))}
@@ -93,17 +94,13 @@ export default function MobileNav({ classes }: Props) {
             <div id="product-mobile-menu">
               {categories.map((cat) => (
                 <div key={cat.identifier}>
-                  <p class={styles.productCategory}>{i18n(cat.lang_key)}</p>
+                  <p class={styles.productCategory}>{cat.label}</p>
                   <ul class={styles.productSublist}>
-                    {(cat.mobile_products ?? []).map((id) => {
-                      const p = getProduct(id);
-                      if (!p) return null;
-                      return (
-                        <li key={id}>
-                          <a href={resolveUrl(p.url)}>{i18n(p.lang_key)}</a>
-                        </li>
-                      );
-                    })}
+                    {cat.products.map((p) => (
+                      <li key={p.identifier ?? p.url}>
+                        <a href={p.url}>{p.label}</a>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               ))}
