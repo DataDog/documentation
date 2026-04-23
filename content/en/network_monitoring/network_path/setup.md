@@ -348,6 +348,19 @@ Agent `v7.73+` is required.
         # The TTL is reset each time the connection is seen again.
         # pathtest_ttl: 35m
 
+        ## @param filters - list - optional
+        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+        ## Filters are applied sequentially, with later filters taking precedence.
+        ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+        #
+        # filters:
+        #   - match_domain: '*.example.com'
+        #     type: exclude
+        #   - match_ip: 10.0.0.0/8
+        #     type: exclude
+        #   - match_domain: 'api.datadoghq.com'
+        #     type: include
+
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
@@ -401,6 +414,19 @@ Agent `v7.73+` is required.
         # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
         # The TTL is reset each time the connection is seen again.
         # pathtest_ttl: 35m
+
+        ## @param filters - list - optional
+        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+        ## Filters are applied sequentially, with later filters taking precedence.
+        ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+        #
+        # filters:
+        #   - match_domain: '*.example.com'
+        #     type: exclude
+        #   - match_ip: 10.0.0.0/8
+        #     type: exclude
+        #   - match_domain: 'api.datadoghq.com'
+        #     type: include
     ```
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
@@ -446,6 +472,19 @@ datadog:
     ## The TTL is reset each time the connection is seen again.
     #
     # pathtest_ttl: 35m
+
+    ## @param filters - list - optional
+    ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+    ## Filters are applied sequentially, with later filters taking precedence.
+    ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+    #
+    # filters:
+    #   - match_domain: '*.example.com'
+    #     type: exclude
+    #   - match_ip: 10.0.0.0/8
+    #     type: exclude
+    #   - match_domain: 'api.datadoghq.com'
+    #     type: include
 
 ```
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
@@ -512,6 +551,26 @@ network_path:
       - match_domain: 'api.datadoghq.com'
         type: include
 ```
+
+### Source public IP resolution
+
+<div class="alert alert-info">Source public IP resolution is available in Agent v7.75+.</div>
+
+Network Path resolves the source host's public IP address to provide accurate path visualization for internet-bound traffic. The Agent contacts external IP check services over HTTPS to determine the public IP of the host.
+
+This feature is **not required** for Network Path to function. If these services are unreachable, Network Path continues to operate normally, but the source public IP is not resolved and path visualizations do not display source IP metadata.
+
+If your network restricts outbound traffic and you want source public IP resolution, add the following URLs to your firewall allowlist:
+
+| URL | Provider |
+|-----|----------|
+| `https://icanhazip.com` | Cloudflare |
+| `https://ipinfo.io/ip` | IPinfo |
+| `https://checkip.amazonaws.com` | Amazon |
+| `https://api.ipify.org` | ipify |
+| `https://whatismyip.akamai.com` | Akamai |
+
+The Agent tries each service in order and uses the first successful response. All requests are made over HTTPS (port 443).
 
 ## Troubleshooting
 

@@ -44,7 +44,7 @@ Data security considerations
 
 ## Configure the AWS integration
 
-Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][10].
+Enable {{< ui >}}Standard Collection{{< /ui >}} in the {{< ui >}}Resource Collection{{< /ui >}} section of your [Amazon Web Services integration tile][10].
 
 ## Configure MySQL settings
 

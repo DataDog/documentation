@@ -145,10 +145,6 @@ Each finding includes a section with an explanation of the assessment. You can p
 
 ## Remediation
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-AI-suggested remediation for SAST is powered by the Bits AI Dev Agent and is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}}
-
 Datadog SAST uses the [Bits AI Dev Agent][10] to generate code fixes for vulnerabilities. You can remediate individual vulnerabilities or fix multiple vulnerabilities using bulk remediation campaigns.
 
 To view and remediate vulnerabilities:
