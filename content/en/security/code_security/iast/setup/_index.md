@@ -13,7 +13,7 @@ Before setting up Runtime Code Analysis (IAST), ensure the following prerequisit
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
 
-**Note**: The Datadog Agent and tracing library are the only requirements for IAST. APM tracing and Log Management are not required — IAST findings are reported independently. You can optionally keep APM and Logs enabled alongside IAST, or disable them explicitly. See [Disable APM and Logs](#disable-apm-and-logs) for instructions.
+**Note**: The Datadog Agent and tracing library are the only requirements for IAST. APM tracing and Infrastructure Monitoring are not required — IAST findings are reported independently. You can optionally keep APM and Infrastructure Monitoring enabled alongside IAST, or disable them explicitly. See [Disable APM and Infrastructure Monitoring](#disable-apm-and-infrastructure-monitoring) for instructions.
 
 ## Using Datadog Tracing Libraries
 
@@ -455,9 +455,9 @@ If you need additional assistance, contact [Datadog support][5].
 [5]: /help
 [7]: /logs/guide/how-to-set-up-only-logs/
 
-## Disable APM and Logs
+## Disable APM and Infrastructure Monitoring
 
-IAST requires the Datadog Agent and tracing library, but does not require APM tracing or Log Management. If you want to run IAST without sending APM traces or infrastructure metrics and logs to Datadog, you can disable them explicitly.
+IAST requires the Datadog Agent and tracing library, but does not require APM tracing or Infrastructure Monitoring. If you want to run IAST without sending APM traces or infrastructure metrics to Datadog, you can disable them explicitly.
 
 ### Disable APM tracing
 
