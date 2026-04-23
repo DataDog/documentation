@@ -9,7 +9,7 @@ Datadog AAP is built on top of [APM][3]. While Datadog recommends using AAP with
 
 This guide assumes you have the following:
 
-- **Datadog Agent:** [Install the Datadog Agent][6] and configure it for your application's operating system, container, cloud, or virtual environment.
+- **Datadog Agent:** [Install the Datadog Agent][6] and configure it for your application's operating system, container, cloud, or virtual environment. [Infrastructure Monitoring][7] is enabled by default in the Datadog Agent; disabling it requires version 7.77.0 or newer.
 - **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports App and API Protection. For more details, see the guide for [App and API Protection][4].
 
 ## Compatibility
@@ -28,12 +28,22 @@ Standalone App and API Protection is supported for the following tracing library
 
 ## Setup
 
+### Agent configuration
 
-Set up the Datadog Agent using the standard method for APM or App and API Protection setup, but set up the Tracing Library by adding the `DD_APM_TRACING_ENABLED=false` environment variable to the service that runs the Tracing Library.
+Standalone App and API Protection uses the same Datadog Agent setup as APM. For more details, see the guide for [installing the Datadog Agent][6].
 
-This environment variable will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products. The environment variable can then be combined with environment variables to enable App and API Protection.
+To disable Infrastructure Monitoring, set the Datadog Agent to `none` infrastructure mode using either:
 
-For App and API Protection, add the `DD_APM_TRACING_ENABLED=false DD_APPSEC_ENABLED=true` environment variable.
+- The `DD_INFRASTRUCTURE_MODE=none` environment variable, or
+- The `infrastructure_mode: none` setting in the `datadog.yaml` configuration file.
+
+For more details, see the configuration page for [the Datadog Agent infrastructure mode][8].
+
+### Tracing library configuration
+
+Standalone App and API Protection is configured at the tracing library level using the following environment variables on the instrumented service: `DD_APM_TRACING_ENABLED=false DD_APPSEC_ENABLED=true`.
+
+`DD_APM_TRACING_ENABLED=false` limits the amount of APM data sent to the minimum required by App and API Protection. The environment variable can be combined with other [App and API Protection configuration options][4].
 
 
 [1]: /security/workload_protection/
@@ -42,3 +52,5 @@ For App and API Protection, add the `DD_APM_TRACING_ENABLED=false DD_APPSEC_ENAB
 [4]: /security/application_security/setup/
 [5]: /security/application_security/code_security/setup/
 [6]: /agent/
+[7]: /infrastructure/
+[8]: /agent/configuration/infrastructure-modes/
