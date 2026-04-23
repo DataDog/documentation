@@ -171,6 +171,31 @@ if (dataVersionToggles.length) {
     });
 }
 
+// Date-based API version selector (x-datadog-api-versioning / x-datadog-api-versioned)
+// Uses event delegation so it works regardless of DOM load order or collapsed sections.
+document.addEventListener('click', (e) => {
+    const tab = e.target.closest('.js-api-date-version-tab');
+    if (!tab) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const selectedVersion = tab.dataset.apiDateVersion;
+    const operationId = tab.dataset.operationId;
+
+    if (!selectedVersion || !operationId) return;
+
+    // Update active state on all tabs for this operation
+    document.querySelectorAll(`.js-api-date-version-tab[data-operation-id="${operationId}"]`).forEach((t) => {
+        t.classList.toggle('active', t === tab);
+    });
+
+    // Show the matching version pane, hide all others for this operation
+    document.querySelectorAll(`.api-versioned-schema-pane[data-operation-id="${operationId}"]`).forEach((pane) => {
+        pane.classList.toggle('d-none', pane.dataset.apiDateVersion !== selectedVersion);
+    });
+});
+
 // Scroll the active top level nav item into view below Docs search input
 if (bodyClassContains('api')) {
     setSidenavMaxHeight();
