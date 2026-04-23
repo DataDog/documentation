@@ -13,7 +13,7 @@ Before setting up Runtime Code Analysis (IAST), ensure the following prerequisit
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
 
-**Note**: The Datadog Agent and tracing library are the only requirements for IAST. APM tracing and Infrastructure Monitoring are not required — IAST findings are reported independently. You can optionally keep APM and Infrastructure Monitoring enabled alongside IAST, or disable them explicitly. See [Disable APM and Infrastructure Monitoring](#disable-apm-and-infrastructure-monitoring) for instructions.
+<div class="alert alert-info">The Datadog Agent and tracing library are the only requirements for IAST. APM tracing and Infrastructure Monitoring are not required; IAST reports findings independently of both. To disable APM or Infrastructure Monitoring, see <a href="#disable-apm-and-infrastructure-monitoring">Disable APM and Infrastructure Monitoring</a>.</div>
 
 ## Using Datadog Tracing Libraries
 
@@ -456,26 +456,26 @@ If you need additional assistance, contact [Datadog support][5].
 
 ## Disable APM and Infrastructure Monitoring
 
-IAST requires the Datadog Agent and tracing library, but does not require APM tracing or Infrastructure Monitoring. If you want to run IAST without sending APM traces or infrastructure metrics to Datadog, you can disable them explicitly.
+To run IAST without APM traces or infrastructure metrics, disable them with the environment variables below.
 
 ### Disable APM tracing
 
 To disable APM tracing on the tracer while keeping IAST enabled, set `DD_APM_TRACING_ENABLED=false`:
 
-```shell
+{{< code-block lang="bash" >}}
 DD_IAST_ENABLED=true
 DD_APM_TRACING_ENABLED=false
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
-```
+{{< /code-block >}}
 
 ### Disable infrastructure monitoring
 
 To disable infrastructure metrics collection on the Datadog Agent, set `DD_INFRASTRUCTURE_MODE=none` in your Agent configuration:
 
-```shell
+{{< code-block lang="bash" >}}
 DD_INFRASTRUCTURE_MODE=none
-```
+{{< /code-block >}}
 
 ## Compatibility Requirements
 
