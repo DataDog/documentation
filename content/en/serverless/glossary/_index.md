@@ -55,7 +55,7 @@ AWS Lambda is the FaaS platform provided by Amazon Web Services. See the [AWS La
 | [Serverless Macro][9] | The Datadog Serverless CloudFormation macro automatically enables instrumentation for serverless applications by transforming the CloudFormation template.|
 | [Serverless Plugin][10] | The Serverless plugin automatically enables instrumentation for your applications managed by the [Serverless Framework][11] by modifying the Lambda functions' configuration. |
 | [Serverless CDK Construct][12] | The Serverless plugin automatically enables instrumentation for your applications managed by the [AWS CDK][13] by modifying the Lambda functions' configuration. |
-| [Trace merging][14] | Serverless trace merging is required to see a single, connected trace when you configure both Datadog SDKs (`dd-trace`) and AWS X-Ray tracing libraries in your application. |
+| [Trace merging][14] | Serverless trace merging is required to see a single, connected trace when you configure both the Datadog (`dd-trace`) and AWS X-Ray SDKs in your application. |
 | [Trace propagation][15] | The Datadog trace context needs to be propagated over AWS managed services, such as SQS, Kinesis and Lambda functions, to generate a single, connected trace for serverless applications. |
 | [Serverless Insights][16] | Datadog automatically generates suggestions to resolve errors and performance problems and optimizes cost for your serverless applications. |
 
