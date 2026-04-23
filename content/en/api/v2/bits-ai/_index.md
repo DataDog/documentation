@@ -1,4 +1,4 @@
 ---
-title: Bits AI
+title: Bits AI SRE
 headless: true
 ---

@@ -1,3 +1,3 @@
 ---
-title: Bits AI
+title: Bits AI SRE
 ---
