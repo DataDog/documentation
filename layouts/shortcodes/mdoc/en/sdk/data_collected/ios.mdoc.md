@@ -92,7 +92,9 @@ The following OS-related attributes are attached automatically to all events col
 
 ### Geolocation
 
-The following attributes are related to the geolocation of IP addresses.
+The following attributes are related to the geolocation of IP addresses. Datadog resolves these attributes server-side from the client IP address on the intake connection. The SDK does not access the device's GPS or OS location.
+
+**Note**: On mobile networks, the IP address may resolve to the carrier's gateway rather than the device's physical location.
 
 **Note:** If you want to stop collecting geolocation attributes, change the setting in your [application details][8].
 
