@@ -28,7 +28,7 @@ The system that tracks sessions has been rewritten to improve data reliability a
 
 #### Deterministic sampling decisions
 
-Previously, the sampling decision was made once at session creation and persisted. It is now computed on demand from the session ID and sample rate, making it consistent regardless of which page initializes the SDK. If you use different sampling rates across pages, those rates are now applied consistently.
+Previously, the sampling decision was made once at session creation and persisted. In v7, it is computed on demand from the session ID and sample rate, making it consistent regardless of which page initializes the SDK. If you use different sampling rates across pages, those rates are applied consistently.
 
 #### Session store key renamed
 
@@ -50,7 +50,7 @@ Replace `<SITE>` with your Datadog site (for example, `us1`, `us3`, `us5`, `eu1`
 
 #### CDN bundles use ESM dynamic imports
 
-CDN bundles now use ESM dynamic imports instead of CommonJS, significantly reducing webpack overhead and overall bundle size. If you use the CDN snippet, add the `crossorigin` attribute to the script tag:
+CDN bundles use ESM dynamic imports instead of CommonJS, significantly reducing webpack overhead and overall bundle size. If you use the CDN snippet, add the `crossorigin` attribute to the script tag:
 
 ```html
 <script src="https://www.datadoghq-browser-agent.com/..." crossorigin="anonymous"></script>
@@ -75,7 +75,7 @@ To continue supporting older browsers, keep using Browser SDK v6 or earlier.
 
 #### `propagateTraceBaggage` enabled by default
 
-The `propagateTraceBaggage` [initialization parameter][28] now defaults to `true`. Propagating baggage enables tail-based sampling and gives traces access to user and account context.
+The `propagateTraceBaggage` [initialization parameter][28] defaults to `true` in v7. Propagating baggage enables tail-based sampling and gives traces access to user and account context.
 
 If you use distributed tracing on cross-origin requests, either set `propagateTraceBaggage: false` or add `baggage` to your `Access-Control-Allow-Headers` response headers:
 
@@ -85,13 +85,13 @@ Access-Control-Allow-Headers: traceparent, tracestate, baggage
 
 #### New default for `defaultPrivacyLevel`
 
-`defaultPrivacyLevel` now defaults to `mask-user-input` (previously `mask`). This provides better out-of-the-box privacy without the restrictions of full masking. The new default masks user input while other content is collected.
+`defaultPrivacyLevel` defaults to `mask-user-input` in v7 (previously `mask`). This provides better out-of-the-box privacy without the restrictions of full masking. The new default masks user input while other content is collected.
 
 To preserve full masking, explicitly set `defaultPrivacyLevel: "mask"`.
 
 #### `enablePrivacyForActionName` enabled by default
 
-`enablePrivacyForActionName` now defaults to `true`. Click action names follow the `defaultPrivacyLevel` setting by default. Use the [Datadog build plugin][36] or set `enablePrivacyForActionName: false` to opt out.
+`enablePrivacyForActionName` defaults to `true` in v7. Click action names follow the `defaultPrivacyLevel` setting by default. Use the [Datadog build plugin][36] or set `enablePrivacyForActionName: false` to opt out.
 
 #### `startDurationVital` and `stopDurationVital` API change
 
@@ -113,7 +113,7 @@ When a session expires and is renewed, the new view is created with `@view.loadi
 
 #### Document resource uses `PerformanceNavigationTiming`
 
-The initial document resource event previously used a synthetic timing entry. It now uses the browser's native `PerformanceNavigationTiming` directly, which may produce slightly different `resource.duration` values for the document resource. The `initiatorType` for the document resource changes from `initial_document` to `navigation`.
+The initial document resource event previously used a synthetic timing entry. It uses the browser's native `PerformanceNavigationTiming` directly in v7, which may produce slightly different `resource.duration` values for the document resource. The `initiatorType` for the document resource changes from `initial_document` to `navigation`.
 
 If you use plugins or domain context handlers that inspect `performanceEntry` for document resources, update them to expect a `PerformanceNavigationTiming` instead of `PerformanceResourceTiming`.
 
@@ -127,7 +127,7 @@ The `strategy` field has been removed from the plugin API. If you use `rum-react
 
 #### Improved action name computation
 
-The SDK always uses the tree walker strategy to compute action names, including in shadow DOM and Web Components. This was required to support the privacy build plugin. Action names may change slightly. The `betaTrackActionsInShadowDom` option has been removed.
+In v7, the SDK uses a new strategy for computing action names that takes into account the structure of the DOM to apply element privacy levels more precisely and improve handling of shadow DOM content. Action names may change slightly. The `betaTrackActionsInShadowDom` option has been removed.
 
 #### BFCache navigations always tracked
 
@@ -173,9 +173,9 @@ Requests cancelled by the application (aborted fetch or XHR) no longer generate 
 
 ### Session Replay
 
-#### New serialization algorithm
+#### New data format
 
-The new DOM mutation serialization algorithm (Change Records) is the default. It produces more accurate recordings and significantly reduces bandwidth usage. The segment format has changed; if you depend on the raw segment format, update your integration.
+In v7, session replay uses a new, more compact data format which significantly reduces bandwidth usage. Session replay data is not exposed directly through browser SDK APIs, so no action is required to adopt this change.
 
 ## From v5 to v6
 
