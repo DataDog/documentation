@@ -289,6 +289,9 @@ The Anthropic integration instruments the following methods:
 {{% tab "Python" %}}
 The Claude Agent SDK integration provides automatic tracing for agent queries made through the [Claude Agent SDK for Python][1].
 
+**Package name:** `claude-agent-sdk`
+**Integration name:** `claude_agent_sdk`
+
 ### Traced methods
 
 The Claude Agent SDK integration instruments the following methods:
@@ -876,7 +879,10 @@ The Vertex AI integration instruments the following methods:
 {{% collapse-content title="vLLM" level="h3" expanded=false id="vllm" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-The vLLM integration automatically traces request processing and token generation in the [vLLM][1] inference engine, capturing model name, input and output tokens, and latency metrics (time to first token, queue time, prefill time, decode time, inference time).
+The vLLM integration automatically traces request processing and token generation in the [vLLM][1] inference engine. It captures model name, input and output tokens, and latency metrics (time to first token, queue time, prefill time, decode time, and inference time).
+
+**Package name:** `vllm`
+**Integration name:** `vllm`
 
 ### Traced methods
 
