@@ -80,3 +80,34 @@
 .collapsible-content {
     padding: 16px;
 }
+
+// Registry copy-link anchors
+.registry-copy-link {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 6px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: inherit;
+    vertical-align: middle;
+    text-decoration: none;
+
+    &:hover {
+        opacity: 1 !important;
+    }
+
+    &--copied svg {
+        color: #632CA5;
+    }
+}
+
+// Show link icon on hover of the parent dt or header-content
+dt:hover .registry-copy-link,
+.header-content:hover .registry-copy-link {
+    opacity: 0.5;
+}
+
+// Config entry anchors need scroll-margin for sticky header
+dt[id] {
+    scroll-margin-top: 100px;
+}

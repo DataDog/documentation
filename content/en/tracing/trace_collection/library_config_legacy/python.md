@@ -28,8 +28,6 @@ After you set up the tracing library with your code and configure the Agent to c
 
 {{% apm-config-visibility %}}
 
-<!-- Python does not yet support the Feature Parity Registry. This page uses a manual config list. -->
-
 When using **ddtrace-run**, the following [environment variable options][2] can be used:
 
 ## Unified service tagging
@@ -67,7 +65,7 @@ Enable debug logging in the tracer.
 Comma-separated list of header names that are reported on the root span as tags. For example, `DD_TRACE_HEADER_TAGS="User-Agent:http.user_agent,Referer:http.referer,Content-Type:http.content_type,Etag:http.etag"`.
 
 `DD_TRACE_AGENT_URL`
-: The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
+: The URL of the Trace Agent that the tracer submits to. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `apm_config.receiver_socket` configuration in your `datadog.yaml` file or the `DD_APM_RECEIVER_SOCKET` environment variable set on the Datadog Agent. For example, `DD_TRACE_AGENT_URL=http://localhost:8126` for HTTP URL and `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket` for UDS. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. 
 
 ## Agent
 
@@ -83,7 +81,7 @@ Override the address of the trace Agent host that the default tracer attempts to
 
 `DD_AGENT_PORT`
 : **Default**: `8126`<br>
-Overrides the port that the default tracer submit traces to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
+Overrides the port that the default tracer submit traces to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. 
 
 `DD_DOGSTATSD_URL`
 : The URL used to connect to the Datadog Agent for DogStatsD metrics. If set, this takes priority over hostname and port. Supports Unix Domain Sockets (UDS) in combination with the `dogstatsd_socket` configuration in your `datadog.yaml` file or the `DD_DOGSTATSD_SOCKET` environment variable set on the Datadog Agent. For example, `DD_DOGSTATSD_URL=udp://localhost:8126` for UDP URL and `DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket` for UDS. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_URL` or `DD_DOGSTATSD_PORT` must match it.
@@ -124,4 +122,4 @@ Propagation styles to use when extracting tracing headers. When multiple values 
 [6]: /tracing/other_telemetry/connect_logs_and_traces/python/
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
-[15]: /tracing/trace_collection/library_config_legacy/#traces
+[15]: /tracing/trace_collection/library_config/#traces

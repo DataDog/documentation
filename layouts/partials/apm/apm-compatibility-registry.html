@@ -3,93 +3,68 @@
   <div class="container cards-dd">
     <div class="row row-cols-2 row-cols-sm-3 g-3 justify-content-center">
       <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}java/">
+        <a class="card h-100" href="java">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/java.png" "class" "img-fluid" "alt" "Java" "width" "400") }}
           </div>
         </a>
       </div>
-      <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}python/">
+      <!-- <div class="col">
+        <a class="card h-100" href="python">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/python.png" "class" "img-fluid" "alt" "Python" "width" "400") }}
           </div>
         </a>
-      </div>
+      </div> -->
       <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}ruby/">
+        <a class="card h-100" href="ruby">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/ruby.png" "class" "img-fluid" "alt" "Ruby" "width" "400") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}go/">
+        <a class="card h-100" href="go">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/go-metro.png" "class" "img-fluid" "alt" "Go" "width" "400") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}nodejs/">
+        <a class="card h-100" href="nodejs">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/nodejs.png" "class" "img-fluid" "alt" "Node.js" "width" "400") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}php/">
+        <a class="card h-100" href="php">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/php.png" "class" "img-fluid" "alt" "PHP" "width" "400") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}cpp/">
+        <a class="card h-100" href="cpp">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/cpp.png" "class" "img-fluid" "alt" "C++" "width" "400") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}dotnet-core/">
+        <a class="card h-100" href="dotnet">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/dotnet-core.png" "class" "img-fluid" "alt" ".Net" "width" "400") }}
           </div>
         </a>
       </div>
       <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}dotnet-framework/">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/dotnet-framework.png" "class" "img-fluid" "alt" ".Net" "width" "400") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}rust/">
+        <a class="card h-100" href="rust">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/rust.png" "class" "img-fluid" "alt" "Rust" "width" "400") }}
           </div>
         </a>
       </div>
-      <!-- Conditional Android and iOS cards (no compatibility or library_config pages for these as of 12/22/23) -->
-      {{ $currentURL := .Page.Permalink }}
-      {{ if and (not (in $currentURL "/compatibility/")) (not (in $currentURL "/library_config")) }}
-      <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}android/">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/android.png" "class" "img-fluid" "alt" "Android" "width" "400") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a class="card h-100" href="{{ .Page.Permalink }}ios/">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/ios_large.svg" "class" "img-fluid" "alt" "iOS" "width" "400") }}
-          </div>
-        </a>
-      </div>
-      {{ end }}
     </div>
   </div>
 </div>
