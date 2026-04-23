@@ -64,15 +64,17 @@ cascade:
 
 ## Overview
 
-Datadog Application Performance Monitoring (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services. With distributed tracing, out-of-the-box dashboards, and seamless correlation with other telemetry data, Datadog APM helps ensure the best possible performance and user experience for your applications.
+Datadog Application Performance Monitoring (APM) provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services. With distributed tracing, out-of-the-box dashboards, and correlation with other telemetry data, Datadog APM helps you maintain performance and improve user experience.
 
 For an introduction to terminology used in Datadog APM, see [APM Terms and Concepts][1].
 
 ## Getting started
 
-The simplest way to start with Datadog APM is with Single Step Instrumentation. This approach installs the Datadog Agent and instruments your application in one step, with no additional configuration steps required. To learn more, read [Single Step Instrumentation][27].
+To get started with APM, use [Single Step Instrumentation][27]. This installs the Datadog Agent and instruments your application in one step, enabling full distributed tracing with no additional configuration required.
 
-For setups that require more customization, Datadog supports custom instrumentation with Datadog tracing libraries and [Dynamic Instrumentation][30] in the Datadog UI. To learn more, read [Application Instrumentation][2].
+For more control, Datadog supports custom instrumentation with Datadog tracing libraries and [Dynamic Instrumentation][30] in the Datadog UI. To learn more, read [Application Instrumentation][2].
+
+If some parts of your system are not instrumented—such as legacy systems, third-party services, or environments where instrumentation is impractical or unnecessary—[APM Basic][31] provides baseline service visibility by collecting RED metrics from network traffic. It is also suitable for staging or other environments where full instrumentation is not required.
 
 <div class="alert alert-info">If you're new to Datadog APM, read <a href="https://docs.datadoghq.com/getting_started/tracing/">Getting Started with APM</a> to learn how to send your first trace to Datadog.</div>
 
@@ -84,6 +86,7 @@ Discover some ways Datadog APM can help support your use cases:
 | ----------- | ----------- |
 | Understand how requests flow through your system. | Use the [Trace Explorer][21] to query and visualize end-to-end traces across distributed services. |
 | Monitor service health and performance of individual services. | Use the [service][26] and [resource pages][28] to assess service health by analyzing performance metrics, tracking deployments, and identifying problematic resources. |
+| Get baseline visibility for uninstrumented services. | [APM Basic][31] provides RED metrics for services not instrumented with tracing libraries, with no code changes required. |
 | Correlate traces with DBM, RUM, logs, synthetics, and profiles. | [Correlate APM Data with Other Telemetry][20] to give context to your data for more comprehensive analysis. |
 | Control how data flows into Datadog. | Use [Ingestion Controls][6] to adjust ingestion configuration and sampling rates by service and resource. Use [Retention filters][7] to choose which spans to retain for 15 days. |
 
@@ -155,3 +158,4 @@ For troubleshooting assistance, read the [APM Troubleshooting][29] guide.
 [28]: /tracing/services/resource_page/
 [29]: /tracing/troubleshooting/
 [30]: /tracing/dynamic_instrumentation/
+[31]: /tracing/apm_basic/

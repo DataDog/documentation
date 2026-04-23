@@ -3044,22 +3044,6 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_changes
       weight: 10003
-    - name: Universal Service Monitoring
-      url: universal_service_monitoring/
-      pre: usm
-      identifier: usm_parent
-      parent: infrastructure_heading
-      weight: 30000
-    - name: Setup
-      url: universal_service_monitoring/setup/
-      parent: usm_parent
-      identifier: universal_service_monitoring_setup
-      weight: 1
-    - name: Guides
-      url: universal_service_monitoring/guide/
-      parent: usm_parent
-      identifier: universal_service_monitoring_guides
-      weight: 2
     - name: End User Device Monitoring
       url: infrastructure/end_user_device_monitoring/
       pre: desktop-wui
@@ -4049,6 +4033,21 @@ menu:
       parent: tracing
       identifier: tracing_glossary
       weight: 1
+    - name: APM Basic
+      url: tracing/apm_basic/
+      parent: tracing
+      identifier: tracing_apm_basic
+      weight: 14.5
+    - name: Setup
+      url: tracing/apm_basic/setup/
+      parent: tracing_apm_basic
+      identifier: tracing_apm_basic_setup
+      weight: 1
+    - name: Metrics
+      url: tracing/apm_basic/metrics/
+      parent: tracing_apm_basic
+      identifier: tracing_apm_basic_metrics_guide
+      weight: 2
     - name: Application Instrumentation
       url: tracing/trace_collection/
       parent: tracing
