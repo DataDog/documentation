@@ -92,7 +92,7 @@ You can configure blocking at different levels of granularity, with more specifi
 
 ### Evaluation sensitivity {#evaluation-sensitivity}
 
-AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). You can control the minimum confidence score required for AI Guard to flag a threat by going to **AI Guard** > **Settings** [**Evaluation Sensitivity**][7].
+AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). You can control the minimum confidence score required for AI Guard to flag a threat by going to **Security** > **AI Guard** > **Settings** > [**Evaluation Sensitivity**][7].
 
 Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
 - A **lower** value **increases** sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives.
