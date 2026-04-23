@@ -28,7 +28,7 @@ You can create two types of budgets:
 To create a basic budget:
 
 1. Navigate to [**Cloud Cost > Plan > Budgets**][1], or create a budget through the [API][2] or [Terraform][3].
-1. Click the {{< ui >}}Create a New Budget{{< /ui >}} button.
+1. Click {{< ui >}}New Budget{{< /ui >}}.
 1. Click {{< ui >}}Basic{{< /ui >}} to create a basic budget.
 1. You can either add budget information by {{< ui >}}uploading a CSV{{< /ui >}} using the provided template in the UI, or {{< ui >}}enter your budget directly{{< /ui >}} using the details below.
 
@@ -57,7 +57,7 @@ To create a basic budget:
 To create a hierarchical budget:
 
 1. Navigate to [**Cloud Cost > Plan > Budgets**][1], or create a budget through the [API][2].
-1. Click the {{< ui >}}Create a New Budget{{< /ui >}} button.
+1. Click {{< ui >}}New Budget{{< /ui >}}.
 1. Click {{< ui >}}Hierarchical{{< /ui >}} to create a hierarchical budget.
 1. Enter your budget information using the details below.
 
