@@ -41,6 +41,9 @@ OS Settings
 Debugging information
 : Symbols should be available. The profiler cannot provide human-readable function names if the symbol table is stripped.
 
+Temporary Folder
+: A temporary folder must be available when the library is not present in `../lib` (relative to the ddprof executable).
+
 ## Installation
 
 The profiler can be used either as a standalone executable or as a library. Skip to [library installation instructions](#library) if you want to use it as a library.
