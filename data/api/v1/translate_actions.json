@@ -622,7 +622,7 @@
     "summary": "Monitors search"
   },
   "ValidateMonitor": {
-    "description": "Validate the monitor provided in the request.\n\n**Note**: Log monitors require an unscoped App Key.",
+    "description": "Validate the monitor provided in the request.\n\n**Note**: The logs_read_data and logs_read_index_data scopes are also required for log monitors.",
     "summary": "Validate a monitor",
     "request_description": "Monitor request object",
     "request_schema_description": "Object describing a monitor."
