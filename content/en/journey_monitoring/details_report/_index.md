@@ -1,7 +1,7 @@
 ---
 title: Journey Details Report
 private: true
-description: Inspect each journey's performance with detailed report combining Product Analytics, Real User Monitoring, Synthetic Testing, and Session Replay data.  
+description: Inspect each journey's performance with detailed report combining Product Analytics, Real User Monitoring, Synthetic Monitoring & Testing, and Session Replay data.  
 further_reading:
 - link: "/journey_monitoring/"
   tag: "Documentation"
@@ -23,7 +23,7 @@ Journey Monitoring is in Preview.
 
 ## Overview
 
-Each created journey has a details report federating metrics and telemetry from [Real User Monitoring][1], [Synthetic Testing][2], [Product Analytics][3], and [Session Replay][4]. The report shows data about the journey's user behavior patterns and technical performance.
+Each created journey has a details report federating metrics and telemetry from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4]. The report shows data about the journey's user behavior patterns and technical performance.
 
 [INSERT IMAGE HERE]
 
@@ -81,7 +81,7 @@ The error count chart shows a timeseries of errors that occurred while users wer
 
 
 
-## Synthetic testing
+## Synthetic Monitoring & Testing
 
 ### Tests table
 

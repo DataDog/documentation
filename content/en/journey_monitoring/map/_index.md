@@ -27,7 +27,7 @@ The **journey map** displays all created and suggested journeys in a frontend ap
 
 [INSERT IMAGE HERE]
 
-<div class="alert alert-warning"><p>Only frontend applications that are instrumented with RUM without Limits, Synthetic Testing, and Product Analytics are eligible for Journey Monitoring.</p></div>
+<div class="alert alert-warning"><p>Only frontend applications that are instrumented with RUM without Limits, Synthetic Monitoring & Testing, and Product Analytics are eligible for Journey Monitoring.</p></div>
 
 ## What you can do in the journey map
 
@@ -43,6 +43,7 @@ Use the map to explore and manage your journeys:
 Journeys in the map and catalog may be color-coded based on their configuration and performance:
 - Suggested journeys are **purple** and tagged with a "Suggestion" pill
 - Journeys with a dropping conversion rate are **orange** and contain a red chevron
+- Journeys with failing tests are **red**
 - Journeys with no tests in their Synthetic test suite will contain a **warning** in their tooltip
 
 [INSERT IMAGE HERE]

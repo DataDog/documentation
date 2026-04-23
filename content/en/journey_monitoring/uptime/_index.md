@@ -27,22 +27,22 @@ Journey Monitoring is in Preview.
 
 ## Overview
 
-Each created user journey will have an automatically [test suite][1] created. Each test suite can contain one or more tests that cover the journey and its [variants][2]. 
+Each created user journey will have an automatically created [test suite][1]. Each test suite can contain one or more tests that cover the journey and its [variants][2]. 
 
 [INSERT DIAGRAM]
 
+## Journey coverage
+
+A journey is considered to be covered if at least one Synthetic [Browser test][4] or [Mobile test][5] converted at least once on the journey over the past 7 days. I.e. the test goes through the start event(s) and end event(s) of the Journey in order at leasst once over the past 7 days.
+
 ## Configuring the journey's test suite
 
-By default, each journey's test suite will have the same name as the journey.
+By default, each journey's test suite will have the same name as the journey. When the journey is created, the test suite is automatically populated with all of its covering tests, according to the definition above.
+The automatically created [Test Suite][1] is editable, meaning tests can be added and/or removed. Datadog continually scans your test collection to list new tests that cover the journey that aren't part of the test suite, for you to optionally add to the test suite.
 
 ## Journey uptime
 
-As long as the journey's test suite has at least one active test in it, each suite automatically has:
-- A monitor 
-
-Datadog automatically starts calculating an uptime SLO on the test suite as long as the test suite has at least one active test in it. By default, the SLO is evaluated at a 99.99% availability rate.
-
-You can add and remove tests from the test suite. Each added test is automatically marked as **critical**, meaning the test suite 
+Datadog automatically starts calculating an [uptime SLO][3] on the test suite. By default, the SLO is evaluated at a 99.9% uptime, and the threshold is editable.
 
 ## Further reading
 
@@ -50,3 +50,6 @@ You can add and remove tests from the test suite. Each added test is automatical
 
 [1]: /synthetics/test_suite/
 [2]: /journey_monitoring/details_report/variants/
+[3]: /synthetics/test_suites/#service-level-objectives
+[4]: /synthetics/browser_tests/
+[5]: /synthetics/mobile_app_testing/

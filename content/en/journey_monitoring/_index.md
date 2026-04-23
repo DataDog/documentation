@@ -29,16 +29,16 @@ Teams monitoring critical user flows — such as login, checkout, or media strea
 - How quick and reliable is performance?
 - Are issues coming from the frontend, network, or backend?
 
-**Journey Monitoring** addresses this by visualizing the performance of critical user flows in your applications. It brings together data from [Real User Monitoring][1], [Synthetic Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each user journey in one place. This gives engineering, product, and operations teams a shared view of journey health.
+**Journey Monitoring** addresses this by visualizing the performance of critical user flows in your applications. It brings together data from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each user journey in one place. This gives engineering, product, and operations teams a shared view of journey health.
 
 {{< img src="journey_monitoring/journey-monitoring-temp.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
 ## What you can do
 
 For each journey you can:
-- Measure the journey's traffic, conversion rate, and time to completion
+- Measure the journey's inbound traffic, conversion rate, and time to completion
+- Track the availability of the journey using an uptime SLO based a [Synthetic test suite][10]
 - Identify where users drop off and investigate individual sessions with [Session Replay][4]
-- Track the uptime of the journey using a [Synthetic test suite][10]
 - Measure the performance of critical journey steps with [RUM operations][13]
 - Share a unified view of journey health across engineering, product, and operations teams
 
@@ -70,10 +70,10 @@ You can optionally add a description, attribute filters, team ownership, tags, a
 
 ### Step 3 - Add coverage from other products
 
-In the journey's details report, you can extend coverage based on the products you have:
+In the journey's details report, you can extend monitoring coverage based on the products you have:
 
 - Create [RUM operations][13] to measure and monitor the performance of critical steps in the journey in your real user environment.
-- Add Synthetic tests to the journey's [test suite][14] to start tracking uptime.
+- Add Synthetic tests to the journey's [test suite][15] to start tracking uptime.
 
 ## Journey structure
 
@@ -89,7 +89,7 @@ Each journey and its variants have the following performance metrics:
 - **Traffic**: Total number of journey attempts across user sessions. Based on the `rum.measure.feature` metric.
 - **Conversion**: Percentage of journey attempts that were completed. Based on the `rum.measure.feature` metric.
 - **Time to convert**: Average time to complete the journey across all user sessions. Based on the `rum.measure.feature.duration` metric.
-- **Uptime**: Availability of the journey based on its [Synthetic test suite][10] performance.
+- **Uptime**: Availability of the journey based on its [Synthetic test suite][15] uptime.
 
 ## Further reading
 
@@ -109,3 +109,4 @@ Each journey and its variants have the following performance metrics:
 [12]: /journey_monitoring/details_report/
 [13]: /real_user_monitoring/operations_monitoring/
 [14]: /journey_monitoring/map/
+[15]: /synthetics/test_suites/#service-level-objectives
