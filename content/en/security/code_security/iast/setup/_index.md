@@ -13,6 +13,8 @@ Before setting up Runtime Code Analysis (IAST), ensure the following prerequisit
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
 2. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
 
+**Note**: The Datadog Agent and tracing library are the only requirements for IAST. APM tracing and Log Management are not required — IAST findings are reported independently. You can optionally keep APM and Logs enabled alongside IAST, or disable them explicitly. See [Disable APM and Logs](#disable-apm-and-logs) for instructions.
+
 ## Using Datadog Tracing Libraries
 
 Select your application language for details on how to enable Runtime Code Analysis (IAST) for your language and infrastructure types.
@@ -451,6 +453,32 @@ If you need additional assistance, contact [Datadog support][5].
 [1]: /security/code_security/iast/setup/
 [4]: https://app.datadoghq.com/security/code-security/iast
 [5]: /help
+[7]: /logs/guide/how-to-set-up-only-logs/
+
+## Disable APM and Logs
+
+IAST requires the Datadog Agent and tracing library, but does not require APM tracing or Log Management. If you want to run IAST without sending APM traces or infrastructure metrics and logs to Datadog, you can disable them explicitly.
+
+### Disable APM tracing
+
+To disable APM tracing on the tracer while keeping IAST enabled, set `DD_APM_TRACING_ENABLED=false`:
+
+```shell
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+
+### Disable infrastructure monitoring and logs
+
+To disable infrastructure metrics and log collection on the Datadog Agent, set `DD_INFRASTRUCTURE_MODE=none` in your Agent configuration:
+
+```shell
+DD_INFRASTRUCTURE_MODE=none
+```
+
+For more details on configuring the Agent to collect only specific data, see [How to set up only logs][7].
 
 ## Compatibility Requirements
 
