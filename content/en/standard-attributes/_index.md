@@ -1541,97 +1541,97 @@ attributes:
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.country.name
     description: The name of the country the client IP resolves to.
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.country.iso_code
-    description: "[ISO Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (for example, `US` for the United States, `FR` for France)."
+    description: "[ISO code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (for example, `US` for the United States, `FR` for France)."
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.continent.code
-    description: ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).
+    description: The ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.continent.name
-    description: Name of the continent the client IP resolves to.
+    description: The name of the continent the client IP resolves to.
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.subdivision.name
-    description: Name of the first-level subdivision (such as a state or region) the client IP resolves to.
+    description: The name of the first-level subdivision (such as a state or region) the client IP resolves to.
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.subdivision.iso_code
-    description: "[ISO code](https://en.wikipedia.org/wiki/ISO_3166-2) of the first-level subdivision (for example, `CA-ON` for Ontario, Canada)."
+    description: "The [ISO code](https://en.wikipedia.org/wiki/ISO_3166-2) of the first-level subdivision (for example, `CA-ON` for Ontario, Canada)."
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.city.name
     description: Name of the city the client IP resolves to.
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.location.latitude
     description: The latitude of the location the client IP resolves to.
     product_source:
       - icon-apm
     type: number
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.location.longitude
     description: The longitude of the location the client IP resolves to.
     product_source:
       - icon-apm
     type: number
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.timezone
     description: The IANA timezone identifier (for example, `America/Toronto`) associated with the client IP.
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.as.number
     description: The autonomous system number (ASN) the client IP belongs to (for example, `AS577`).
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.as.name
     description: The name of the organization that operates the autonomous system (for example, `Bell Canada`).
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.as.domain
     description: The primary domain associated with the autonomous system (for example, `bell.ca`).
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.as.route
     description: The IP prefix announced by the autonomous system (for example, `65.95.0.0/16`).
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.client_ip_details.as.type
     description: The classification of the autonomous system (for example, `isp`, `hosting`, `business`, `education`).
     product_source:
       - icon-apm
     type: string
-    domain: HTTP Client IP Details
+    domain: HTTP client IP details
   - name: http.useragent
     description: The `User-Agent` header received with the request.
     product_source:
