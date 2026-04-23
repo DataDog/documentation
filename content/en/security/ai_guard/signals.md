@@ -1,6 +1,5 @@
 ---
 title: AI Guard Security Signals
-private: true
 further_reading:
 - link: /security/ai_guard/
   tag: Documentation
