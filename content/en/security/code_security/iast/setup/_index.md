@@ -453,7 +453,6 @@ If you need additional assistance, contact [Datadog support][5].
 [1]: /security/code_security/iast/setup/
 [4]: https://app.datadoghq.com/security/code-security/iast
 [5]: /help
-[7]: /logs/guide/how-to-set-up-only-logs/
 
 ## Disable APM and Infrastructure Monitoring
 
@@ -470,15 +469,13 @@ DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
-### Disable infrastructure monitoring and logs
+### Disable infrastructure monitoring
 
-To disable infrastructure metrics and log collection on the Datadog Agent, set `DD_INFRASTRUCTURE_MODE=none` in your Agent configuration:
+To disable infrastructure metrics collection on the Datadog Agent, set `DD_INFRASTRUCTURE_MODE=none` in your Agent configuration:
 
 ```shell
 DD_INFRASTRUCTURE_MODE=none
 ```
-
-For more details on configuring the Agent to collect only specific data, see [How to set up only logs][7].
 
 ## Compatibility Requirements
 
