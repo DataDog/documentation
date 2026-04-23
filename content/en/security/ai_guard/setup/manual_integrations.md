@@ -31,7 +31,7 @@ Manual integrations require additional configuration to enable AI Guard protecti
 
 The Amazon Strands integration enables AI Guard evaluations for applications built with the [Amazon Strands Agents SDK][1].
 
-#### Setup
+##### Setup
 
 Install dd-trace-py v4.7.0 or later:
 
@@ -70,7 +70,7 @@ agent = Agent(
 
 The LiteLLM Proxy integration enables AI Guard evaluations for applications using the [LiteLLM Proxy][1].
 
-#### Setup
+##### Setup
 
 Install dd-trace-py v4.8.0 or later:
 
