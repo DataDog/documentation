@@ -225,7 +225,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 {{% tab "VS Code" %}}
 
-Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server.
+Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server. GitHub Copilot can also access the Datadog MCP Server in VS Code (requires an active GitHub Copilot subscription).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Install the extension (omit `--profile` and profile name to install to the default VS Code profile):
@@ -481,47 +481,6 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{< /site-region >}}
 
 [1]: /getting_started/site/
-{{% /tab %}}
-
-{{% tab "GitHub Copilot" %}}
-
-<div class="alert alert-info">These instructions are for GitHub Copilot in VS Code. Similar instructions are available for GitHub Copilot in <a href="?tab=jetbrainsides#github-copilot">JetBrains IDEs</a>.</div>
-
-
-
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
-
-1. Open `.vscode/mcp.json` in your project (create it if it doesn't exist), or run {{< ui >}}MCP: Open User Configuration{{< /ui >}} from the command palette for a user-scoped configuration. Add the following:
-
-    <pre><code>{
-      "servers": {
-        "datadog": {
-          "type": "http",
-          "url": "{{< region-param key="mcp_server_endpoint" >}}"
-        }
-      }
-   }</code></pre>
-
-    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
-
-    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
-
-1. Save the file, and click the {{< ui >}}Start{{< /ui >}} button at the top to initialize the server and complete the OAuth login flow.
-1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
-
-[1]: /getting_started/site/
-[2]: /bits_ai/mcp_server/setup/?tab=jetbrainsides
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-[1]: /getting_started/site/
-[2]: /bits_ai/mcp_server/setup/?tab=jetbrainsides
 {{% /tab %}}
 
 {{% tab "Other" %}}
