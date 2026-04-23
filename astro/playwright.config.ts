@@ -17,6 +17,7 @@ export default defineConfig({
       maxDiffPixelRatio: 0.01,
       animations: 'disabled',
       caret: 'hide',
+      scale: 'device',
     },
   },
   projects: [

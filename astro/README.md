@@ -29,6 +29,42 @@ Each component has a dedicated page showing its properties and visual permutatio
 | `npm run test`       | Run unit tests (Vitest)              |
 | `npm run test:browser` | Run browser tests (Playwright)     |
 
+## Testing
+
+### Unit tests (Vitest)
+
+Fast, runs in Node with happy-dom. No dev server required.
+
+```bash
+npm test
+```
+
+### Browser tests (Playwright)
+
+Runs against a dev server. Playwright starts one automatically via the config's `webServer`; if you already have `npm run dev` on port 4321, it reuses it.
+
+```bash
+npm run test:browser
+```
+
+Useful flags (pass them after `--`):
+
+| Flag | Purpose |
+|------|---------|
+| `-- tabs.spec.ts` | Run a single spec file |
+| `-- --ui` | Interactive UI mode — time-travel, re-run individual tests, inspect DOM |
+| `-- --headed` | Watch tests run in a real Chromium window |
+| `-- --debug` | Step through with the Playwright Inspector |
+| `-- --update-snapshots` | Regenerate screenshot baselines after an intentional visual change |
+
+After a failed run, open the HTML report for side-by-side diffs of expected vs. actual PNGs:
+
+```bash
+npx playwright show-report
+```
+
+Screenshot baselines are captured at 2x retina (1440×900 viewport, `deviceScaleFactor: 2`, `scale: 'device'`) and currently live under `tests/browser/*-snapshots/` with a `-chromium-darwin.png` suffix. They need to be regenerated on the CI platform once CI is wired up; Playwright's per-platform suffix lets Mac and CI baselines coexist.
+
 ## How API docs are rendered from YAML
 
 The API reference pages are generated at build time from OpenAPI spec files through a multi-stage pipeline. Here is the step-by-step process:

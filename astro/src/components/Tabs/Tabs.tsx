@@ -37,7 +37,10 @@ export function Tabs(props: TabsProps) {
   const { labels, onTabChange, variant } = props;
   const [activeIndex, setActiveIndex] = useState(0);
   const [usePills, setUsePills] = useState(variant === 'pills');
+  const [hydrated, setHydrated] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => { setHydrated(true); }, []);
 
   useEffect(() => {
     if (variant) {
@@ -76,8 +79,8 @@ export function Tabs(props: TabsProps) {
   const panelsHtml = 'panelsHtml' in props ? props.panelsHtml : undefined;
 
   return (
-    <div class={containerClass} data-testid="tabs">
-      <div ref={navRef} class={cl('tabs__nav')} role="tablist" data-testid="tabs-nav">
+    <div class={containerClass} data-testid="tabs" data-hydrated={hydrated ? 'true' : undefined}>
+      <div ref={navRef} class={cl('tabs__nav')} role="tablist">
         {labels.map((label, i) => {
           const active = i === activeIndex;
           const btnClass = active ? cl('tabs__button', 'tabs__button--active') : cl('tabs__button');
