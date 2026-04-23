@@ -18,18 +18,13 @@ Complete the following steps to set up AI Guard:
 
 Before you set up AI Guard, ensure you have everything you need:
 - While AI Guard is in Preview, Datadog needs to enable a backend feature flag for each organization in the Preview. Contact [Datadog support][1] with one or more Datadog organization names and regions to enable it.
-- Certain setup steps require specific Datadog permissions. An admin may need to create a new role with the required permissions and assign it to you.
-
-### Required permissions {#required-permissions}
-
-AI Guard uses the following permissions to control access to its features:
-
-| Permission | Type | Description |
-|------------|------|-------------|
-| **AI Guard Evaluate** (`ai_guard_evaluate`) | Write | Required to call the AI Guard evaluate API and to create an application key with the `ai_guard_evaluate` scope. |
-| **AI Guard View** (`ai_guard_view`) | Read | Required to view the AI Guard UI, including signals, spans, and read-only settings (service blocking policies, evaluation sensitivity, tool policies, tool allowlist). Also required to report false positives. |
-| **AI Guard Write** (`ai_guard_write`) | Write | Required to modify AI Guard configuration, including blocking policies, sensitive data scanning, tool policies, tool blocking, tool allowlist, and evaluation sensitivity thresholds. |
-| **User Access Manage** (`user_access_manage`) | Write | Required to create a restricted dataset that [limits access to AI Guard spans](#limit-access) with Data Access Control. |
+- Certain setup steps require specific Datadog permissions. An admin may need to create a new role with the required permissions and assign it to you:
+  | Permission                                    | Type  | Description                                                                                                                                                                                                     |
+  |-----------------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  | **AI Guard Evaluate** (`ai_guard_evaluate`)   | Write | Required to call the AI Guard evaluate API and to create an application key with the `ai_guard_evaluate` scope.                                                                                                 |
+  | **AI Guard View** (`ai_guard_view`)           | Read  | Required to view the AI Guard UI, including signals, spans, and read-only settings (service blocking policies, evaluation sensitivity, tool policies, tool allowlist). Also required to report false positives. |
+  | **AI Guard Write** (`ai_guard_write`)         | Write | Required to modify AI Guard configuration, including blocking policies, sensitive data scanning, tool policies, tool blocking, tool allowlist, and evaluation sensitivity thresholds.                           |
+  | **User Access Manage** (`user_access_manage`) | Write | Required to create a restricted dataset that [limits access to AI Guard spans](#limit-access) with Data Access Control.                                                                                         |
 
 ### Usage limits
 
