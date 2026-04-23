@@ -52,7 +52,7 @@ gem 'datadog'
 
    Then, update your logging library. For example, you can use Ruby's native `logger` library:
    {{< code-block lang="ruby" disable_copy="false" >}}
-LOG_FILE = "/shared-logs/logs/app.log"
+LOG_FILE = "/shared-volume/logs/app.log"
 FileUtils.mkdir_p(File.dirname(LOG_FILE))
 
 logger = Logger.new(LOG_FILE)

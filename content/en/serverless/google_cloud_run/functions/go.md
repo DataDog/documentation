@@ -69,6 +69,9 @@ const LOG_FILE = "/shared-volume/logs/app.log"
 
 os.MkdirAll(filepath.Dir(LOG_FILE), 0755)
 logFile, err := os.OpenFile(LOG_FILE, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+if err != nil {
+    panic(err) // Replace with proper error handling for your application
+}
 defer logFile.Close()
 
 logrus.SetOutput(logFile)
