@@ -104,11 +104,9 @@ Use the extension in Cursor for features such as [Log Annotations](#log-annotati
 
 <div class="alert alert-info">The Datadog extension for Cursor no longer installs the Datadog MCP Server. To connect Cursor to the Datadog MCP Server, install the <a href="https://cursor.com/marketplace/datadog">Datadog plugin from the Cursor plugin marketplace</a>.</div>
 
-For MCP Server access in Cursor, Datadog recommends the [**Datadog plugin**][20] from the Cursor plugin marketplace. See [Set up the Datadog MCP Server][3] for more details. You can use the plugin and this extension side by side: the plugin provides MCP Server access, and the extension provides the features listed above.
+For MCP Server access in Cursor, Datadog recommends the [**Datadog plugin**](https://cursor.com/marketplace/datadog) from the Cursor plugin marketplace. See [Set up the Datadog MCP Server](/bits_ai/mcp_server/setup/?tab=cursor) for more details. You can use the plugin and this extension side by side: the plugin provides MCP Server access, and the extension provides the features listed above.
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
-[3]: /bits_ai/mcp_server/setup/?tab=cursor
-[20]: https://cursor.com/marketplace/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
