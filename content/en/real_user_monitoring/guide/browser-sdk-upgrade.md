@@ -569,7 +569,7 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [26]: /real_user_monitoring/application_monitoring/browser/
 [25]: /real_user_monitoring/correlate_with_other_telemetry/apm#opentelemetry-support
 [27]: /real_user_monitoring/guide/proxy-rum-data
-[28]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
+[28]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
 [29]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#:~:text=configure%20the%20traceContextInjection
 [30]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
 [31]: https://webpack.js.org/guides/code-splitting/#dynamic-imports
