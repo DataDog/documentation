@@ -38,7 +38,7 @@ To create a basic budget:
    - {{< ui >}}Start Date{{< /ui >}}: Enter a start date for the budget (this can be a past month). Budgets are set at the month level.
    - {{< ui >}}End Date{{< /ui >}}: Set an end date for the budget (can be in the future).
    - {{< ui >}}Provider(s){{< /ui >}}: Budget on any combination of AWS, Azure, Google Cloud, Oracle Cloud, or other SaaS (including Datadog or custom costs).
-   - {{< ui >}}Dimension to budget by{{< /ui >}}: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
+   - {{< ui >}}Dimension to budget by{{< /ui >}}: Specify the dimension to track (such as team, service, or environment). Then, define the specific values directly in the budget table. For example, to create budgets for the top four teams, select "team" as the dimension, and add the teams as rows in the table. You can select an existing tag value or add a new one to track future spend.
 
 1. Fill in all budgets in the table. To apply the same values from the first month to the rest of the months, enter a value in the first column of a row and click the {{< ui >}}copy{{< /ui >}} button.
 
@@ -67,7 +67,7 @@ To create a hierarchical budget:
    - {{< ui >}}Scope to Provider(s){{< /ui >}}: Budget on any combination of AWS, Azure, Google Cloud, Oracle Cloud, or other SaaS (including Datadog or custom costs).
    - {{< ui >}}Parent Level{{< /ui >}}: Select the parent-level tag.
    - {{< ui >}}Child Level{{< /ui >}}: Select child-level tag.
-   - {{< ui >}}Dimension to budget by{{< /ui >}}: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
+   - {{< ui >}}Dimension to budget by{{< /ui >}}: Specify the dimension to track (such as team, service, or environment). Then, define the specific values directly in the budget table. For example, to create budgets for the top four teams, select "team" as the dimension, and add the teams as rows in the table. You can select an existing tag value or add a new one to track future spend.
 
 1. Fill in all budgets in the table. To apply the same values from the first month to the rest of the months, enter a value in the first column of a row and click the {{< ui >}}copy{{< /ui >}} button.
 
