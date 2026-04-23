@@ -42,6 +42,6 @@ This content is only visible in the **AP1** region.
 
 ### Gov
 
-{% site-region region="gov,gov2" %}
+{% site-region region="gov" %}
 This content is only visible in the **Gov** region.
 {% /site-region %}
