@@ -21,7 +21,7 @@ test.describe('API Method Badge component — visual', () => {
     test(`${method} badge matches screenshot`, async ({ page }) => {
       const badge = page
         .locator('[data-testid="tabs-panel"]')
-        .locator(`[data-testid="api-method-badge"][data-method="${method}"]`)
+        .locator(`.api-method-badge--${method}`)
         .first();
       await expect(badge).toHaveScreenshot(`api-method-badge-${method}.png`);
     });

@@ -2,6 +2,7 @@
 import styles from './AnnouncementBanner.module.css';
 import GeoTargetScript from './GeoTargetScript.astro';
 import { getBannerParams, type BannerParams } from '../../lib/bannerData';
+import { classListFactory } from '../../utils/classListFactory';
 
 interface Props {
   /** Optional override, mirroring Hugo's page-level `announcement_banner` param. */
@@ -12,8 +13,6 @@ const { override } = Astro.props;
 const site = getBannerParams();
 const params: BannerParams = override ?? site;
 const isCustomBanner = Boolean(override);
-
-const iconColor = params.icon_color || '#9C43FE';
 
 let backgroundStyle = '';
 if (params.gradient_color_one && params.gradient_color_two) {
@@ -32,31 +31,31 @@ const href_resolved = isExternal
     ? `${href.startsWith('/') ? '' : '/'}${href}?ref=announcement-banner`
     : '';
 const wrapInLink = Boolean(href_resolved);
-const classes = [styles.banner, params.custom_classes].filter(Boolean).join(' ');
+const cl = classListFactory(styles);
 ---
 
 <div
-  class={`announcement-banner ${classes}`}
+  class:list={[cl('announcement-banner'), params.custom_classes]}
   style={backgroundStyle || undefined}
   data-testid="announcement-banner"
 >
   {params.custom_event_banner ? (
     <p
-      class={styles.banner__customEvent}
+      class={cl('announcement-banner__custom-event')}
       set:html={desktopMessage}
     />
   ) : (
     <>
       {wrapInLink && (
         <a href={href_resolved}>
-          <span class={`banner-title-desktop ${styles.banner__titleDesktop}`} set:html={desktopMessage} />
-          <span class={`banner-title-mobile ${styles.banner__titleMobile}`} set:html={mobileMessage} />
+          <span class={cl('announcement-banner__title-desktop')} set:html={desktopMessage} />
+          <span class={cl('announcement-banner__title-mobile')} set:html={mobileMessage} />
         </a>
       )}
       {!wrapInLink && (
         <>
-          <span class={`banner-title-desktop ${styles.banner__titleDesktop}`} set:html={desktopMessage} />
-          <span class={`banner-title-mobile ${styles.banner__titleMobile}`} set:html={mobileMessage} />
+          <span class={cl('announcement-banner__title-desktop')} set:html={desktopMessage} />
+          <span class={cl('announcement-banner__title-mobile')} set:html={mobileMessage} />
         </>
       )}
     </>

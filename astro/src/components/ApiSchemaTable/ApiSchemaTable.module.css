@@ -1,4 +1,4 @@
-.table {
+.schema-table__table {
   border: var(--border-width) solid var(--color-surface-border);
   border-radius: var(--border-radius);
   margin-bottom: var(--space-lg);
@@ -8,19 +8,19 @@
   box-sizing: border-box;
 }
 
-.table *,
-.table *::before,
-.table *::after {
+.schema-table__table *,
+.schema-table__table *::before,
+.schema-table__table *::after {
   box-sizing: border-box;
 }
 
-.toolbar {
+.schema-table__toolbar {
   display: flex;
   justify-content: flex-end;
   padding-bottom: var(--space-xs);
 }
 
-.expandAll {
+.schema-table__expand-all {
   background: none;
   border: none;
   color: var(--color-brand);
@@ -30,12 +30,12 @@
   padding: 0;
 }
 
-.expandAll:hover {
+.schema-table__expand-all:hover {
   color: var(--color-brand-hover);
   text-decoration: underline;
 }
 
-.columns {
+.schema-table__columns {
   display: flex;
   border-bottom: var(--border-width) solid var(--color-surface-border);
   background: var(--color-surface-header);
@@ -45,45 +45,45 @@
   text-transform: uppercase;
 }
 
-.columns__name {
+.schema-table__columns-name {
   flex: 0 0 33.33%;
   padding: 4px var(--space-md);
 }
 
-.columns__type {
+.schema-table__columns-type {
   flex: 0 0 16.67%;
   padding: 4px var(--space-md);
 }
 
-.columns__description {
+.schema-table__columns-description {
   flex: 1;
   padding: 4px var(--space-md);
 }
 
-.row {
+.schema-table__row {
   display: flex;
   border-bottom: var(--border-width) solid var(--color-surface-border);
   line-height: 1.5;
 }
 
-.row:last-child {
+.schema-table__row:last-child {
   border-bottom: none;
 }
 
-.row:hover {
+.schema-table__row:hover {
   background: var(--color-bg-hover);
 }
 
-.row--readonly {
+.schema-table__row--readonly {
   opacity: 0.7;
   font-style: italic;
 }
 
-.row--deprecated {
+.schema-table__row--deprecated {
   opacity: 0.6;
 }
 
-.cell__name {
+.schema-table__cell-name {
   flex: 0 0 33.33%;
   display: flex;
   align-items: baseline;
@@ -93,21 +93,21 @@
   min-width: 0;
 }
 
-.cell__type {
+.schema-table__cell-type {
   flex: 0 0 16.67%;
   padding: 4px var(--space-md);
   border-right: var(--border-width) solid var(--color-surface-border);
   color: var(--color-text-muted);
 }
 
-.cell__description {
+.schema-table__cell-description {
   flex: 1;
   padding: 4px var(--space-md);
   min-width: 0;
   word-break: break-word;
 }
 
-.toggle {
+.schema-table__toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -123,15 +123,15 @@
   transition: transform 0.15s ease;
 }
 
-.toggle--expanded {
+.schema-table__toggle--expanded {
   transform: rotate(90deg);
 }
 
-.toggle:hover {
+.schema-table__toggle:hover {
   color: var(--color-brand);
 }
 
-.name {
+.schema-table__name {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   font-weight: 600;
@@ -139,62 +139,62 @@
   padding: 0;
 }
 
-.required {
+.schema-table__required {
   font-size: var(--font-size-xs);
   color: var(--color-text);
 }
 
-.type {
+.schema-table__type {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
 }
 
-.deprecated__label {
+.schema-table__deprecated-label {
   color: var(--color-red);
   font-size: var(--font-size-xs);
   margin-right: var(--space-xs);
 }
 
-.default {
+.schema-table__default {
   display: block;
   margin-top: var(--space-xs);
   color: var(--color-text-muted);
   font-size: var(--font-size-xs);
 }
 
-.default code {
+.schema-table__default code {
   background: var(--color-highlight-bg);
   padding: 0 0.25em;
   border-radius: 2px;
 }
 
-.enum {
+.schema-table__enum {
   margin-top: var(--space-xs);
   font-size: var(--font-size-xs);
   color: var(--color-text-muted);
 }
 
-.enum code {
+.schema-table__enum code {
   background: var(--color-highlight-bg);
   padding: 0 0.25em;
   border-radius: 2px;
   word-break: break-all;
 }
 
-.enum__details {
+.schema-table__enum-details {
   margin-top: var(--space-xs);
 }
 
-.enum__details summary {
+.schema-table__enum-details summary {
   cursor: pointer;
   color: var(--color-brand);
 }
 
-.children {
+.schema-table__children {
   /* Container for nested rows — display toggled by component */
 }
 
-.union__label {
+.schema-table__union-label {
   padding: 4px var(--space-md);
   font-weight: 600;
   font-size: var(--font-size-xs);

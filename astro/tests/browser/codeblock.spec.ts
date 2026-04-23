@@ -99,7 +99,7 @@ test.describe('CodeBlock component', () => {
   // === Wrap ===
 
   test('wrapped code block applies word-wrap styling', async ({ page }) => {
-    const wrapBlock = page.locator('[data-wrap]').first();
+    const wrapBlock = page.locator('.code-block--wrap').first();
     await expect(wrapBlock).toBeVisible();
 
     const codeEl = wrapBlock.locator('code').first();

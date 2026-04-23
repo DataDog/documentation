@@ -8,8 +8,8 @@ describe('AnnouncementBanner', () => {
     const html = await container.renderToString(AnnouncementBanner);
 
     expect(html).toContain('data-testid="announcement-banner"');
-    expect(html).toContain('banner-title-desktop');
-    expect(html).toContain('banner-title-mobile');
+    expect(html).toContain('announcement-banner__title-desktop');
+    expect(html).toContain('announcement-banner__title-mobile');
     // Site params currently point at DASH — assert the message text is included.
     expect(html).toMatch(/DASH|Datadog|Observability/i);
   });
@@ -85,7 +85,7 @@ describe('AnnouncementBanner', () => {
 
     expect(html).toContain('Custom event announcement');
     // The custom-event variant should not wrap the message in an <a>.
-    const customEventP = html.match(/<p[^>]*banner__customEvent[^>]*>.*?<\/p>/s);
+    const customEventP = html.match(/<p[^>]*announcement-banner__custom-event[^>]*>.*?<\/p>/s);
     expect(customEventP).not.toBeNull();
   });
 });

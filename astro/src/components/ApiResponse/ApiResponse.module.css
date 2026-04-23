@@ -1,22 +1,21 @@
-.response {
+.api-response {
   margin-bottom: var(--space-lg);
 }
 
-.heading {
+.api-response__heading {
   margin: 0 0 var(--space-sm);
 }
 
-.description {
+.api-response__description {
   margin: 0 0 var(--space-md);
   font-size: var(--font-size-sm);
 }
 
-
-.example {
+.api-response__example {
   margin-bottom: var(--space-sm);
 }
 
-.examplePre {
+.api-response__example-pre {
   background: var(--color-panel-bg);
   border: var(--border-width) solid var(--color-panel-border);
   border-top: var(--border-width-highlight) solid var(--color-panel-accent);
@@ -28,7 +27,7 @@
   max-height: var(--code-max-height);
 }
 
-.examplePre code {
+.api-response__example-pre code {
   font-family: var(--font-family-mono);
   background: none;
   padding: 0;

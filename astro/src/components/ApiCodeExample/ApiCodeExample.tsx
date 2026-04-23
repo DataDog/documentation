@@ -3,6 +3,9 @@ import type { JSX } from 'preact';
 import { Tabs } from '../Tabs/Tabs';
 import { CodeBlock } from '../CodeBlock/CodeBlock';
 import styles from './ApiCodeExample.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+const cl = classListFactory(styles);
 
 export interface CodeExampleEntry {
   description: string;
@@ -47,7 +50,7 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
               key={regionKey}
               data-region={regionKey}
               data-testid={`api-code-example-region-${regionKey}`}
-              class={`api-code-example__code-block ${styles.codeBlock}`}
+              class={cl('api-code-example__code-block')}
             >
               <CodeBlock content={variant.code} language={entry.syntax} highlightedCode={variant.highlightedCode} />
             </div>
@@ -56,7 +59,7 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
       );
     }
     return (
-      <div class={`api-code-example__code-block ${styles.codeBlock}`}>
+      <div class={cl('api-code-example__code-block')}>
         <CodeBlock content={entry.code} language={entry.syntax} highlightedCode={entry.highlightedCode} />
       </div>
     );
@@ -72,15 +75,20 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
         {ex.entries.map((entry, i) => {
           const key = String(i);
           const isOpen = expandedEntries.has(key);
+          const headerClass = [
+            cl('api-code-example__accordion-header'),
+            isOpen && cl('api-code-example__accordion-header--open'),
+          ].filter(Boolean).join(' ');
+
           return (
-            <div key={key} class={`api-code-example__accordion ${styles.accordion}`} data-testid="api-code-example-accordion">
+            <div key={key} class={cl('api-code-example__accordion')} data-testid="api-code-example-accordion">
               <button
-                class={`api-code-example__accordion-header ${styles.accordionHeader} ${isOpen ? `api-code-example__accordion-header--open ${styles['accordionHeader--open']}` : ''}`}
+                class={headerClass}
                 onClick={() => toggleEntry(key)}
                 aria-expanded={isOpen}
                 data-testid="api-code-example-accordion-toggle"
               >
-                <svg class={`api-code-example__accordion-icon ${styles.accordionIcon}`} width="10" height="10" viewBox="0 0 10 10">
+                <svg class={cl('api-code-example__accordion-icon')} width="10" height="10" viewBox="0 0 10 10">
                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5" />
                 </svg>
                 <span>{entry.description}</span>
@@ -94,8 +102,8 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
   };
 
   return (
-    <div class={`api-code-example ${styles.codeExample}`} data-testid="api-code-example">
-      <h3 class={`api-code-example__heading ${styles.heading}`}>Code Example</h3>
+    <div class={cl('api-code-example')} data-testid="api-code-example">
+      <h3 class={cl('api-code-example__heading')}>Code Example</h3>
 
       <Tabs
         labels={examples.map((ex) => ex.label)}

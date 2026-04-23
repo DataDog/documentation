@@ -13,7 +13,7 @@ test.describe('Alert component — visual', () => {
     test(`${type} alert matches screenshot`, async ({ page }) => {
       const alert = page
         .locator('[data-testid="tabs-panel"]')
-        .locator(`[data-alert-type="${type}"]`)
+        .locator(`.alert--${type}`)
         .first();
       await expect(alert).toHaveScreenshot(`alert-${type}.png`);
     });

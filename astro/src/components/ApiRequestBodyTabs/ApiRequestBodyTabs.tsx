@@ -3,6 +3,9 @@ import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
 import { CodeBlock } from '../CodeBlock/CodeBlock';
 import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
 import styles from '../ApiEndpoint/ApiEndpoint.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+const cl = classListFactory(styles);
 
 interface ApiRequestBodyTabsProps {
   schema: SchemaField[];
@@ -19,7 +22,7 @@ export function ApiRequestBodyTabs({ schema, examples }: ApiRequestBodyTabsProps
   }
   if (!hasSchema && hasExamples) {
     return (
-      <div class={`request-body-tabs__examples ${styles.requestExamples}`}>
+      <div class={cl('request-body-tabs__examples')}>
         {examples.map((ex) => (
           <CodeBlock key={ex.name} content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
         ))}
@@ -34,7 +37,7 @@ export function ApiRequestBodyTabs({ schema, examples }: ApiRequestBodyTabsProps
         activeIndex === 0 ? (
           <ApiSchemaTable fields={schema} />
         ) : (
-          <div class={`request-body-tabs__examples ${styles.requestExamples}`}>
+          <div class={cl('request-body-tabs__examples')}>
             {examples.map((ex) => (
               <div key={ex.name}>
                 {examples.length > 1 && <strong>{ex.name}</strong>}

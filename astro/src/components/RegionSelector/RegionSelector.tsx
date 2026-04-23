@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import styles from './RegionSelector.module.css';
+import { classListFactory } from '../../utils/classListFactory';
 import {
   getActiveRegion,
   setActiveRegion,
@@ -10,6 +11,8 @@ import {
   DEFAULT_REGION_KEY,
 } from './regionState';
 import type { ClientRegion } from '../../config/regions';
+
+const cl = classListFactory(styles);
 
 export interface RegionSelectorProps {
   /** Allowed Datadog sites. Supplied by `RegionSelectorIsland.astro` at build time. */
@@ -41,11 +44,11 @@ export function RegionSelector({ regions }: RegionSelectorProps): JSX.Element {
   };
 
   return (
-    <div class={`region-selector ${styles.selector}`} data-testid="region-selector" data-hydrated={hydrated ? 'true' : undefined}>
-      <label class={`region-selector__label ${styles.label}`} for="region-select">Datadog site</label>
+    <div class={cl('region-selector')} data-testid="region-selector" data-hydrated={hydrated ? 'true' : undefined}>
+      <label class={cl('region-selector__label')} for="region-select">Datadog site</label>
       <select
         id="region-select"
-        class={`region-selector__select ${styles.select}`}
+        class={cl('region-selector__select')}
         value={selected}
         onChange={handleChange}
         data-testid="region-selector-select"

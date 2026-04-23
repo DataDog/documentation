@@ -12,12 +12,12 @@ test.describe('Tabs component', () => {
   });
 
   test('many-tab instance uses pills layout', async ({ page }) => {
-    const pillsTabs = page.locator('[data-testid="tabs"][data-layout="pills"]');
+    const pillsTabs = page.locator('[data-testid="tabs"].tabs--pills');
     await expect(pillsTabs).toBeVisible();
   });
 
   test('pills layout switches tabs on click', async ({ page }) => {
-    const pillsTabs = page.locator('[data-testid="tabs"][data-layout="pills"]');
+    const pillsTabs = page.locator('[data-testid="tabs"].tabs--pills');
     const tab3 = pillsTabs.locator('[data-testid="tab-2"]');
     await tab3.click();
 
@@ -28,19 +28,19 @@ test.describe('Tabs component', () => {
 
   test('default tabs variant matches screenshot', async ({ page }) => {
     const defaultTabs = page
-      .locator('[data-testid="tabs"]:not([data-layout="pills"])')
+      .locator('[data-testid="tabs"]:not(.tabs--pills)')
       .first();
     await expect(defaultTabs).toHaveScreenshot('tabs-default.png');
   });
 
   test('pills tabs variant matches screenshot', async ({ page }) => {
-    const pillsTabs = page.locator('[data-testid="tabs"][data-layout="pills"]').first();
+    const pillsTabs = page.locator('[data-testid="tabs"].tabs--pills').first();
     await expect(pillsTabs).toHaveScreenshot('tabs-pills.png');
   });
 
   test('active tab highlighted state matches screenshot', async ({ page }) => {
     const defaultTabs = page
-      .locator('[data-testid="tabs"]:not([data-layout="pills"])')
+      .locator('[data-testid="tabs"]:not(.tabs--pills)')
       .first();
     await defaultTabs.locator('[data-testid="tab-2"]').click();
     await expect(defaultTabs.locator('[data-testid="tab-2"]')).toHaveAttribute(

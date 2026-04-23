@@ -10,7 +10,7 @@ describe('ApiStatusAlert component', () => {
     });
 
     expect(html).toContain('Deprecated');
-    expect(html).toContain('data-api-alert-type="deprecated"');
+    expect(html).toContain('api-status-alert--deprecated');
     expect(html).toContain('data-testid="api-status-alert"');
     expect(html).toContain('This endpoint is deprecated.');
   });
@@ -22,7 +22,7 @@ describe('ApiStatusAlert component', () => {
     });
 
     expect(html).toContain('Unstable');
-    expect(html).toContain('data-api-alert-type="unstable"');
+    expect(html).toContain('api-status-alert--unstable');
     expect(html).toContain('unstable and may change');
   });
 
@@ -33,7 +33,7 @@ describe('ApiStatusAlert component', () => {
     });
 
     expect(html).toContain('Beta');
-    expect(html).toContain('data-api-alert-type="beta"');
+    expect(html).toContain('api-status-alert--beta');
     expect(html).toContain('in beta');
   });
 

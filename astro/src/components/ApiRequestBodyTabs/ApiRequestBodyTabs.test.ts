@@ -126,6 +126,5 @@ describe('ApiRequestBodyTabs — interactivity', () => {
 
     const container = screen.getByTestId('tabs');
     expect(container.classList.contains('tabs--pills')).toBe(true);
-    expect(container.getAttribute('data-layout')).toBe('pills');
   });
 });

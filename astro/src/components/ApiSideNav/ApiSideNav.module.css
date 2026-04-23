@@ -1,4 +1,4 @@
-.nav {
+.api-side-nav {
   width: var(--sidebar-width);
   flex-shrink: 0;
   position: sticky;
@@ -18,18 +18,18 @@
   clip-path: inset(0 -100vw);
 }
 
-.nav::-webkit-scrollbar {
+.api-side-nav::-webkit-scrollbar {
   display: none;
 }
 
 @media (min-width: 992px) {
-  .nav {
+  .api-side-nav {
     top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop) - var(--hugo-header-shrink));
     max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height-desktop) + var(--hugo-header-shrink));
   }
 }
 
-.title {
+.api-side-nav__title {
   display: block;
   padding: 0 0 10px var(--space-md);
   margin-top: 14px;
@@ -40,21 +40,21 @@
   line-height: 1;
 }
 
-.title:hover {
+.api-side-nav__title:hover {
   color: var(--color-brand-hover);
 }
 
-.title__api {
+.api-side-nav__title-api {
   font-weight: var(--font-weight-semibold);
 }
 
-.list {
+.api-side-nav__list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.category {
+.api-side-nav__category {
   display: block;
   padding: var(--space-xs) var(--space-md);
   color: var(--color-text);
@@ -64,26 +64,26 @@
   line-height: 1.4;
 }
 
-.category:hover {
+.api-side-nav__category:hover {
   color: var(--color-brand);
 }
 
-.category--active {
+.api-side-nav__category--active {
   color: var(--color-brand);
 }
 
-.operations {
+.api-side-nav__operations {
   list-style: none;
   margin: 0;
   padding: 0;
   display: none;
 }
 
-.operations--expanded {
+.api-side-nav__operations--expanded {
   display: block;
 }
 
-.operation {
+.api-side-nav__operation {
   display: block;
   padding: 0 var(--space-md) 0 var(--space-xl);
   color: var(--color-text);
@@ -93,6 +93,6 @@
   line-height: 1.5;
 }
 
-.operation:hover {
+.api-side-nav__operation:hover {
   color: var(--color-brand);
 }

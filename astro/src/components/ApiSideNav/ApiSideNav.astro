@@ -1,6 +1,7 @@
 ---
 import type { ApiCategory } from '../../data/api/index';
 import styles from './ApiSideNav.module.css';
+import { classListFactory } from '../../utils/classListFactory';
 
 interface Props {
   categories: ApiCategory[];
@@ -8,13 +9,14 @@ interface Props {
 }
 
 const { categories, currentSlug } = Astro.props;
+const cl = classListFactory(styles);
 ---
 
-<nav class={`api-side-nav ${styles.nav}`}>
-  <a href="/" class={`api-side-nav__title ${styles.title}`}>
-    Datadog Docs&nbsp;&nbsp;<span class={`api-side-nav__title-api ${styles['title__api']}`}>API</span>
+<nav class={cl('api-side-nav')}>
+  <a href="/" class={cl('api-side-nav__title')}>
+    Datadog Docs&nbsp;&nbsp;<span class={cl('api-side-nav__title-api')}>API</span>
   </a>
-  <ul class={`api-side-nav__list ${styles.list}`}>
+  <ul class={cl('api-side-nav__list')}>
     {categories.map((cat) => {
       const isActive = cat.slug === currentSlug;
       const categoryHref = `/api/latest/${cat.slug}/`;
@@ -22,14 +24,14 @@ const { categories, currentSlug } = Astro.props;
         <li>
           <a
             href={categoryHref}
-            class:list={['api-side-nav__category', { 'api-side-nav__category--active': isActive }, styles.category, { [styles['category--active']]: isActive }]}
+            class:list={[cl('api-side-nav__category'), isActive && cl('api-side-nav__category--active')]}
           >
             {cat.name}
           </a>
-          <ul class:list={['api-side-nav__operations', { 'api-side-nav__operations--expanded': isActive }, styles.operations, { [styles['operations--expanded']]: isActive }]}>
+          <ul class:list={[cl('api-side-nav__operations'), isActive && cl('api-side-nav__operations--expanded')]}>
             {cat.operations.map((op) => (
               <li>
-                <a href={`${categoryHref}#${op.slug}`} class={`api-side-nav__operation ${styles.operation}`}>
+                <a href={`${categoryHref}#${op.slug}`} class={cl('api-side-nav__operation')}>
                   {op.summary}
                 </a>
               </li>

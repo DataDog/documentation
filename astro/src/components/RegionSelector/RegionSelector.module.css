@@ -1,18 +1,18 @@
-.selector {
+.region-selector {
   display: inline-flex;
   align-items: center;
   gap: var(--space-sm);
   font-size: var(--font-size-xs);
 }
 
-.label {
+.region-selector__label {
   color: var(--color-text);
   font-weight: 600;
   white-space: nowrap;
   text-transform: uppercase;
 }
 
-.select {
+.region-selector__select {
   appearance: none;
   background: var(--color-gray-lightest);
   border: var(--border-width) solid var(--color-border-dark);
@@ -28,16 +28,16 @@
   background-position: right 0.5rem center;
 }
 
-.select:hover {
+.region-selector__select:hover {
   border-color: var(--color-brand);
 }
 
-.select:focus {
+.region-selector__select:focus {
   outline: 2px solid var(--color-brand);
   outline-offset: 1px;
 }
 
-.select option {
+.region-selector__select option {
   color: var(--color-text);
   background: var(--color-bg);
 }

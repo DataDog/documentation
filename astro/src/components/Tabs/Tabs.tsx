@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'preact/hooks';
 import type { ComponentChildren } from 'preact';
 import styles from './Tabs.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+const cl = classListFactory(styles);
 
 export interface Tab {
   label: string;
@@ -83,18 +86,14 @@ export function Tabs({ labels, children, onTabChange, variant }: TabsProps) {
     onTabChange?.(index);
   };
 
-  const containerClass = usePills
-    ? `tabs tabs--pills ${styles.tabs} ${styles['tabs--pills']}`
-    : `tabs ${styles.tabs}`;
+  const containerClass = usePills ? cl('tabs', 'tabs--pills') : cl('tabs');
 
   return (
-    <div ref={containerRef} class={containerClass} data-testid="tabs" data-layout={usePills ? 'pills' : 'tabs'} data-hydrated={hydrated ? 'true' : undefined}>
-      <div ref={navRef} class={`tabs__nav ${styles.tabs__nav}`} role="tablist" data-testid="tabs-nav">
+    <div ref={containerRef} class={containerClass} data-testid="tabs" data-hydrated={hydrated ? 'true' : undefined}>
+      <div ref={navRef} class={cl('tabs__nav')} role="tablist" data-testid="tabs-nav">
         {tabLabels.map((label, i) => {
           const active = i === activeIndex;
-          const btnClass = active
-            ? `tabs__button tabs__button--active ${styles.tabs__button} ${styles['tabs__button--active']}`
-            : `tabs__button ${styles.tabs__button}`;
+          const btnClass = active ? cl('tabs__button', 'tabs__button--active') : cl('tabs__button');
 
           return (
             <button
@@ -110,7 +109,7 @@ export function Tabs({ labels, children, onTabChange, variant }: TabsProps) {
           );
         })}
       </div>
-      <div role="tabpanel" class={`tabs__panel ${styles.tabs__panel}`} data-testid="tabs-panel">
+      <div role="tabpanel" class={cl('tabs__panel')} data-testid="tabs-panel">
         {children
           ? children(activeIndex)
           : <span dangerouslySetInnerHTML={{ __html: domTabs[activeIndex]?.content ?? '' }} />

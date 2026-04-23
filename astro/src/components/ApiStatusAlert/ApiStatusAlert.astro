@@ -26,19 +26,20 @@ const config = defaults[type];
 const displayMessage = message || config.defaultMessage;
 
 import styles from './ApiStatusAlert.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+const cl = classListFactory(styles);
 ---
 
 <div
-  class:list={['api-status-alert', `api-status-alert--${type}`, styles.alert, styles[`alert--${type}`]]}
-  data-api-alert-type={type}
+  class={cl('api-status-alert', `api-status-alert--${type}`)}
   data-testid="api-status-alert"
   role="alert"
 >
-  <span class={`api-status-alert__label ${styles['alert__label']}`}>{config.label}</span>
-  <span class={`api-status-alert__message ${styles['alert__message']}`}>
+  <span class={cl('api-status-alert__label')}>{config.label}</span>
+  <span class={cl('api-status-alert__message')}>
     <Fragment set:html={displayMessage} />
     {newerVersionUrl && type === 'deprecated' && (
-      <a href={newerVersionUrl} class={`api-status-alert__link ${styles['alert__link']}`}>Use the newer version.</a>
+      <a href={newerVersionUrl} class={cl('api-status-alert__link')}>Use the newer version.</a>
     )}
   </span>
 </div>

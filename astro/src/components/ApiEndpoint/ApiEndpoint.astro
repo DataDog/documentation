@@ -10,8 +10,10 @@ import type { ResponseData } from '../ApiResponse/ApiResponse';
 import type { CodeExampleSet } from '../ApiCodeExample/ApiCodeExample';
 import { getDefaultRegions } from '../../data/api/regions';
 import styles from './ApiEndpoint.module.css';
+import { classListFactory } from '../../utils/classListFactory';
 
 const allRegions = getDefaultRegions();
+const cl = classListFactory(styles);
 
 interface EndpointData {
   operationId: string;
@@ -62,7 +64,7 @@ const hasParams = ep && (
 ---
 
 {ep && (
-  <section class={`api-endpoint ${styles.endpoint}`} data-testid="api-endpoint" data-operation-id={ep.operationId}>
+  <section class={cl('api-endpoint')} data-testid="api-endpoint" data-operation-id={ep.operationId}>
     {/* Status alerts */}
     {ep.deprecated && (
       <ApiStatusAlert type="deprecated" newerVersionUrl={ep.newerVersionUrl} />
@@ -72,18 +74,18 @@ const hasParams = ep && (
     )}
 
     {/* Heading + method badge + path */}
-    <h2 id={ep.slug} class={`api-endpoint__heading ${styles.heading}`}>
+    <h2 id={ep.slug} class={cl('api-endpoint__heading')}>
       {ep.summary}
-      {ep.version && <span class={`api-endpoint__version-badge ${styles.versionBadge}`}>{ep.version === 'v2' ? 'v2 (latest)' : ep.version}</span>}
+      {ep.version && <span class={cl('api-endpoint__version-badge')}>{ep.version === 'v2' ? 'v2 (latest)' : ep.version}</span>}
     </h2>
-    <div class={`api-endpoint__url-line ${styles.urlLine}`}>
+    <div class={cl('api-endpoint__url-line')}>
       <ApiMethodBadge method={ep.method} />
       {allRegions.map((region) => {
         const url = ep.regionUrls?.[region.key];
         return url ? (
-          <code class={`api-endpoint__path ${styles.path}`} data-region={region.key}>{url}</code>
+          <code class={cl('api-endpoint__path')} data-region={region.key}>{url}</code>
         ) : (
-          <code class={`api-endpoint__path api-endpoint__path--unsupported ${styles.path} ${styles.pathUnsupported}`} data-region={region.key}>Not supported in the {region.label} region</code>
+          <code class={cl('api-endpoint__path', 'api-endpoint__path--unsupported')} data-region={region.key}>Not supported in the {region.label} region</code>
         );
       })}
     </div>
@@ -94,7 +96,7 @@ const hasParams = ep && (
 
     {/* Permissions */}
     {ep.permissions && ep.permissions.length > 0 && (
-      <div class={`api-endpoint__permissions ${styles.permissions}`}>
+      <div class={cl('api-endpoint__permissions')}>
         <strong>Permissions: </strong>
         <code>{ep.permissions.join(', ')}</code>
       </div>
@@ -102,14 +104,14 @@ const hasParams = ep && (
 
     {/* OAuth scopes */}
     {ep.oauthScopes && ep.oauthScopes.length > 0 && (
-      <div class={`api-endpoint__permissions ${styles.permissions}`}>
+      <div class={cl('api-endpoint__permissions')}>
         <p>OAuth apps require the <code>{ep.oauthScopes.join(', ')}</code> authorization scope to access this endpoint.</p>
       </div>
     )}
 
     {/* Arguments */}
     {hasParams && (
-      <div class={`api-endpoint__section ${styles.section}`}>
+      <div class={cl('api-endpoint__section')}>
         <h3>Arguments</h3>
         {ep.pathParams && ep.pathParams.length > 0 && (
           <ApiSchemaTable client:load fields={ep.pathParams} />
@@ -125,7 +127,7 @@ const hasParams = ep && (
 
     {/* Request Body */}
     {ep.requestBody && (
-      <div class={`api-endpoint__section ${styles.section}`}>
+      <div class={cl('api-endpoint__section')}>
         <h3>Request Body {ep.requestBody.required ? '(required)' : '(optional)'}</h3>
         {ep.requestBody.description && (
           <p set:html={ep.requestBody.description} />
@@ -148,6 +150,6 @@ const hasParams = ep && (
       <ApiCodeExample client:load examples={ep.codeExamples} />
     )}
 
-    <hr class={`api-endpoint__divider ${styles.divider}`} />
+    <hr class={cl('api-endpoint__divider')} />
   </section>
 )}

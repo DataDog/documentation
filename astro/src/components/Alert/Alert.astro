@@ -1,5 +1,6 @@
 ---
 import styles from './Alert.module.css';
+import { classListFactory } from '../../utils/classListFactory';
 
 interface Props {
   type?: 'info' | 'danger' | 'warning' | 'tip';
@@ -14,9 +15,10 @@ const labels: Record<string, string> = {
 
 const { type = 'info' } = Astro.props;
 const label = labels[type] ?? type;
+const cl = classListFactory(styles);
 ---
 
-<div class:list={['alert', `alert--${type}`, styles.alert, styles[`alert--${type}`]]} data-alert-type={type}>
-  <strong class={`alert__label ${styles['alert__label']}`}>{label}</strong>
+<div class={cl('alert', `alert--${type}`)}>
+  <strong class={cl('alert__label')}>{label}</strong>
   <slot />
 </div>

@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'preact/hooks';
 import styles from './CodeBlock.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+const cl = classListFactory(styles);
 
 interface CodeBlockProps {
   content: string;
@@ -31,13 +34,9 @@ export function CodeBlock({
     navigator.clipboard?.writeText(content).catch(() => {});
   };
 
-  const containerClass = wrap
-    ? `code-block code-block--wrap ${styles['code-block']} ${styles['code-block--wrap']}`
-    : `code-block ${styles['code-block']}`;
-
-  const contentClass = collapsed
-    ? `code-block__content code-block__content--hidden ${styles['code-block__content']} ${styles['code-block__content--hidden']}`
-    : `code-block__content ${styles['code-block__content']}`;
+  const containerClass = wrap ? cl('code-block', 'code-block--wrap') : cl('code-block');
+  const contentClass = collapsed ? cl('code-block__content', 'code-block__content--hidden') : cl('code-block__content');
+  const chevronClass = collapsed ? cl('code-block__chevron', 'code-block__chevron--down') : cl('code-block__chevron', 'code-block__chevron--up');
 
   return (
     <div
@@ -46,32 +45,25 @@ export function CodeBlock({
       data-hydrated={hydrated ? 'true' : undefined}
       data-language={language || undefined}
       data-collapsible={collapsible || undefined}
-      data-wrap={wrap || undefined}
       data-disable-copy={disableCopy || undefined}
     >
       {(filename || collapsible) && (
-        <div class={`code-block__header ${styles['code-block__header']}`}>
+        <div class={cl('code-block__header')}>
           {filename ? (
-            <span class={`code-block__filename ${styles['code-block__filename']}`} data-testid="code-block-filename">
+            <span class={cl('code-block__filename')} data-testid="code-block-filename">
               {filename}
             </span>
           ) : null}
-          <div class={`code-block__header-actions ${styles['code-block__header-actions']}`}>
+          <div class={cl('code-block__header-actions')}>
             {collapsible && (
               <button
-                class={`code-block__toggle ${styles['code-block__toggle']}`}
+                class={cl('code-block__toggle')}
                 onClick={() => setCollapsed((prev) => !prev)}
                 data-testid="code-block-toggle"
                 aria-expanded={!collapsed}
                 aria-label={collapsed ? 'Expand code' : 'Collapse code'}
               >
-                <span
-                  class={`code-block__chevron ${styles['code-block__chevron']} ${
-                    collapsed
-                      ? `code-block__chevron--down ${styles['code-block__chevron--down']}`
-                      : `code-block__chevron--up ${styles['code-block__chevron--up']}`
-                  }`}
-                />
+                <span class={chevronClass} />
               </button>
             )}
           </div>
@@ -80,7 +72,7 @@ export function CodeBlock({
       <div class={contentClass} data-testid="code-block-content">
         {!disableCopy && (
           <button
-            class={`code-block__copy ${styles['code-block__copy']}`}
+            class={cl('code-block__copy')}
             onClick={handleCopy}
             data-testid="code-block-copy"
             aria-label="Copy code"
@@ -90,12 +82,12 @@ export function CodeBlock({
         )}
         {highlightedCode ? (
           <div
-            class={`code-block__highlighted ${styles['code-block__highlighted']}`}
+            class={cl('code-block__highlighted')}
             dangerouslySetInnerHTML={{ __html: highlightedCode }}
           />
         ) : (
-          <pre class={`code-block__pre ${styles['code-block__pre']}`}>
-            <code class={`code-block__code ${styles['code-block__code']}`}>{content}</code>
+          <pre class={cl('code-block__pre')}>
+            <code class={cl('code-block__code')}>{content}</code>
           </pre>
         )}
       </div>

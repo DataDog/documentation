@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import styles from './ApiSchemaTable.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+const cl = classListFactory(styles);
 
 export interface SchemaField {
   name: string;
@@ -42,18 +45,29 @@ function FieldRow({
   const isExpanded = expandedPaths.has(path);
   const indent = depth * 20;
 
+  const rowClass = [
+    cl('schema-table__row'),
+    field.readOnly && cl('schema-table__row--readonly'),
+    field.deprecated && cl('schema-table__row--deprecated'),
+  ].filter(Boolean).join(' ');
+
+  const toggleClass = [
+    cl('schema-table__toggle'),
+    isExpanded && cl('schema-table__toggle--expanded'),
+  ].filter(Boolean).join(' ');
+
   return (
     <>
       <div
-        class={`schema-table__row ${styles.row} ${field.readOnly ? `schema-table__row--readonly ${styles['row--readonly']}` : ''} ${field.deprecated ? `schema-table__row--deprecated ${styles['row--deprecated']}` : ''}`}
+        class={rowClass}
         data-testid="schema-table-row"
         data-field-name={field.name}
         data-depth={depth}
       >
-        <div class={`schema-table__cell-name ${styles.cell__name}`} style={indent > 0 ? { paddingLeft: `calc(var(--space-md) + ${indent}px)` } : undefined}>
+        <div class={cl('schema-table__cell-name')} style={indent > 0 ? { paddingLeft: `calc(var(--space-md) + ${indent}px)` } : undefined}>
           {hasChildren && (
             <button
-              class={`schema-table__toggle ${styles.toggle} ${isExpanded ? `schema-table__toggle--expanded ${styles['toggle--expanded']}` : ''}`}
+              class={toggleClass}
               onClick={() => togglePath(path)}
               aria-expanded={isExpanded}
               aria-label={`Toggle ${field.name}`}
@@ -64,21 +78,21 @@ function FieldRow({
               </svg>
             </button>
           )}
-          <code class={`schema-table__name ${styles.name}`}>{field.name}</code>
+          <code class={cl('schema-table__name')}>{field.name}</code>
           {field.required && (
-            <span class={`schema-table__required ${styles.required}`} data-testid="schema-field-required">{' '}[required]</span>
+            <span class={cl('schema-table__required')} data-testid="schema-field-required">{' '}[required]</span>
           )}
         </div>{' '}
-        <div class={`schema-table__cell-type ${styles.cell__type}`}>
-          <span class={`schema-table__type ${styles.type}`}>{field.type}</span>
+        <div class={cl('schema-table__cell-type')}>
+          <span class={cl('schema-table__type')}>{field.type}</span>
         </div>{' '}
-        <div class={`schema-table__cell-description ${styles.cell__description}`}>
+        <div class={cl('schema-table__cell-description')}>
           {field.deprecated && (
-            <><strong class={`schema-table__deprecated-label ${styles.deprecated__label}`}>DEPRECATED</strong>{' '}</>
+            <><strong class={cl('schema-table__deprecated-label')}>DEPRECATED</strong>{' '}</>
           )}
           <span dangerouslySetInnerHTML={{ __html: field.description }} />
           {field.defaultValue !== undefined && (
-            <span class={`schema-table__default ${styles.default}`}> Default: <code>{field.defaultValue}</code></span>
+            <span class={cl('schema-table__default')}> Default: <code>{field.defaultValue}</code></span>
           )}
           {field.enumValues && field.enumValues.length > 0 && (
             <EnumValues values={field.enumValues} />
@@ -89,7 +103,7 @@ function FieldRow({
       {/* Render children if expanded */}
       {hasChildren && (
         <div
-          class={`schema-table__children ${styles.children}`}
+          class={cl('schema-table__children')}
           style={{ display: isExpanded ? 'block' : 'none' }}
           data-testid="schema-table-children"
         >
@@ -105,7 +119,7 @@ function FieldRow({
           ))}
           {field.unionOptions?.map((option, i) => (
             <div key={`${path}__union_${i}`}>
-              <div class={`schema-table__union-label ${styles.union__label}`} style={{ paddingLeft: `${(depth + 1) * 20 + 8}px` }}>
+              <div class={cl('schema-table__union-label')} style={{ paddingLeft: `${(depth + 1) * 20 + 8}px` }}>
                 {option.label}
               </div>
               {option.fields.map((child) => (
@@ -129,7 +143,7 @@ function FieldRow({
 function EnumValues({ values }: { values: string[] }): JSX.Element {
   if (values.length <= ENUM_INLINE_LIMIT) {
     return (
-      <div class={`schema-table__enum ${styles.enum}`}>
+      <div class={cl('schema-table__enum')}>
         Allowed enum values: <code>{values.join(', ')}</code>
       </div>
     );
@@ -137,9 +151,9 @@ function EnumValues({ values }: { values: string[] }): JSX.Element {
   const visible = values.slice(0, ENUM_INLINE_LIMIT);
   const rest = values.slice(ENUM_INLINE_LIMIT);
   return (
-    <div class={`schema-table__enum ${styles.enum}`}>
+    <div class={cl('schema-table__enum')}>
       Allowed enum values: <code>{visible.join(', ')}</code>
-      <details class={`schema-table__enum-details ${styles.enum__details}`}>
+      <details class={cl('schema-table__enum-details')}>
         <summary>Show {rest.length} more</summary>
         <code>{rest.join(', ')}</code>
       </details>
@@ -195,9 +209,9 @@ export function ApiSchemaTable({ fields, title, showExpandAll = true }: ApiSchem
   return (
     <div class="schema-table" data-testid="schema-table" data-hydrated={hydrated ? 'true' : undefined}>
       {showExpandAll && allPaths.length > 0 && (
-        <div class={`schema-table__toolbar ${styles.toolbar}`}>
+        <div class={cl('schema-table__toolbar')}>
           <button
-            class={`schema-table__expand-all ${styles.expandAll}`}
+            class={cl('schema-table__expand-all')}
             onClick={toggleAll}
             data-testid="schema-table-expand-all"
           >
@@ -205,11 +219,11 @@ export function ApiSchemaTable({ fields, title, showExpandAll = true }: ApiSchem
           </button>
         </div>
       )}
-      <div class={`schema-table__table ${styles.table}`}>
-      <div class={`schema-table__columns ${styles.columns}`}>
-        <div class={`schema-table__columns-name ${styles.columns__name}`}>Name</div>{' '}
-        <div class={`schema-table__columns-type ${styles.columns__type}`}>Type</div>{' '}
-        <div class={`schema-table__columns-description ${styles.columns__description}`}>Description</div>
+      <div class={cl('schema-table__table')}>
+      <div class={cl('schema-table__columns')}>
+        <div class={cl('schema-table__columns-name')}>Name</div>{' '}
+        <div class={cl('schema-table__columns-type')}>Type</div>{' '}
+        <div class={cl('schema-table__columns-description')}>Description</div>
       </div>
       {fields.map((field) => (
         <FieldRow

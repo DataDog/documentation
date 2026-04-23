@@ -10,7 +10,7 @@ test.describe('ApiStatusAlert component — visual', () => {
   test('deprecated api status alert matches screenshot', async ({ page }) => {
     const alert = page
       .locator('[data-testid="tabs-panel"]')
-      .locator('[data-api-alert-type="deprecated"]')
+      .locator('.api-status-alert--deprecated')
       .first();
     await expect(alert).toHaveScreenshot('api-status-alert-deprecated.png');
   });
@@ -18,7 +18,7 @@ test.describe('ApiStatusAlert component — visual', () => {
   test('deprecated with newer version link api status alert matches screenshot', async ({ page }) => {
     const alert = page
       .locator('[data-testid="tabs-panel"]')
-      .locator('[data-api-alert-type="deprecated"]')
+      .locator('.api-status-alert--deprecated')
       .nth(1);
     await expect(alert).toHaveScreenshot('api-status-alert-deprecated-newer-version.png');
   });
@@ -26,7 +26,7 @@ test.describe('ApiStatusAlert component — visual', () => {
   test('unstable api status alert matches screenshot', async ({ page }) => {
     const alert = page
       .locator('[data-testid="tabs-panel"]')
-      .locator('[data-api-alert-type="unstable"]')
+      .locator('.api-status-alert--unstable')
       .first();
     await expect(alert).toHaveScreenshot('api-status-alert-unstable.png');
   });
@@ -34,7 +34,7 @@ test.describe('ApiStatusAlert component — visual', () => {
   test('beta api status alert matches screenshot', async ({ page }) => {
     const alert = page
       .locator('[data-testid="tabs-panel"]')
-      .locator('[data-api-alert-type="beta"]')
+      .locator('.api-status-alert--beta')
       .first();
     await expect(alert).toHaveScreenshot('api-status-alert-beta.png');
   });

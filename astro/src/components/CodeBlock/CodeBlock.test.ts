@@ -71,7 +71,6 @@ describe('CodeBlock — static render', () => {
   it('hides copy button when disableCopy is true', () => {
     renderCodeBlock({ disableCopy: true });
     expect(screen.queryByTestId('code-block-copy')).toBeNull();
-    expect(screen.getByTestId('code-block').hasAttribute('data-disable-copy')).toBe(true);
   });
 
   it('renders toggle button when collapsible is true, content visible by default', () => {
@@ -79,7 +78,6 @@ describe('CodeBlock — static render', () => {
     const toggle = screen.getByTestId('code-block-toggle');
     expect(toggle).toBeTruthy();
     expect(toggle.getAttribute('aria-expanded')).toBe('true');
-    expect(screen.getByTestId('code-block').hasAttribute('data-collapsible')).toBe(true);
 
     const content = screen.getByTestId('code-block-content');
     expect(content.classList.contains('code-block__content--hidden')).toBe(false);
@@ -90,17 +88,15 @@ describe('CodeBlock — static render', () => {
     expect(screen.queryByTestId('code-block-toggle')).toBeNull();
   });
 
-  it('applies data-wrap attribute and BEM wrap modifier when wrap is true', () => {
+  it('applies BEM wrap modifier when wrap is true', () => {
     renderCodeBlock({ wrap: true });
     const container = screen.getByTestId('code-block');
-    expect(container.hasAttribute('data-wrap')).toBe(true);
     expect(container.classList.contains('code-block--wrap')).toBe(true);
   });
 
-  it('does not add data-wrap or wrap modifier by default', () => {
+  it('does not apply wrap modifier by default', () => {
     renderCodeBlock();
     const container = screen.getByTestId('code-block');
-    expect(container.hasAttribute('data-wrap')).toBe(false);
     expect(container.classList.contains('code-block--wrap')).toBe(false);
   });
 });

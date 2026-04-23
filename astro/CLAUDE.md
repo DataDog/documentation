@@ -69,7 +69,9 @@ Use the design tokens instead of hard-coding values for spacing etc.
 
 Use CSS modules for component CSS unless specifically directed to use BEM. When directed to use BEM, use the same file structure you would use for CSS modules (one CSS file per component, colocated).
 
-Regardless of whether CSS modules or BEM is used for the CSS rules themselves, give the HTML of each component a BEM class, such as (`tabs__tab--active`), just for DOM identification purposes.
+CSS module class names must use the full BEM name including the block prefix (e.g. `.api-method-badge--get`, not `.badge--get`). This is required for the `classListFactory` / `cl()` helper (in `src/utils/classListFactory.ts`) to work: it derives the module class from the BEM name automatically, which only works when they match exactly.
+
+Give every HTML element in a component a BEM class (e.g. `tabs__button--active`) for stable DOM identification. Tests and Playwright selectors must use these BEM classes, not CSS-module hashes.
 
 ## Component design and testing
 

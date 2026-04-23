@@ -11,7 +11,7 @@ describe('Alert component', () => {
 
     expect(html).toContain('Test message');
     expect(html).toContain('Note');
-    expect(html).toContain('data-alert-type="info"');
+    expect(html).toContain('alert--info');
   });
 
   it('renders each alert type with correct label and attributes', async () => {
@@ -32,7 +32,7 @@ describe('Alert component', () => {
 
       expect(html).toContain(labels[type]);
       expect(html).toContain(`${type} message`);
-      expect(html).toContain(`data-alert-type="${type}"`);
+      expect(html).toContain(`alert--${type}`);
     }
   });
 
