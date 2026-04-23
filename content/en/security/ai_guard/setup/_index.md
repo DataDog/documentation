@@ -38,7 +38,7 @@ If you exceed these limits, or expect to exceed them soon, contact [Datadog supp
 
 To use AI Guard, you need at least one API key and one application key set in your Agent services, usually using environment variables. Follow the instructions at [API and Application Keys][2] to create both.
 
-When adding [scopes][3] for the **application key**, add the `ai_guard_evaluate` scope. The user creating the application key must have the [AI Guard Evaluate permission](#required-permissions).
+When adding [scopes][3] for the **application key**, add the `ai_guard_evaluate` scope. The user creating the application key must have the [AI Guard Evaluate permission](#1-check-prerequisites).
 
 ## 3. Instrument your application {#instrumentation}
 
