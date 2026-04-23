@@ -69,6 +69,7 @@ content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/apigee.md
 !content/en/integrations/snyk.md
 !content/en/integrations/content_security_policy_logs.md
+!content/en/integrations/nebius_cloud.md
 
 # Ignore the marketplace images that get pulled
 static/images/marketplace
