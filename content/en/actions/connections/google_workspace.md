@@ -26,7 +26,7 @@ If you don't already have a Google Cloud project:
 
 Enable the Google APIs you plan to use in your workflows:
 
-1. In the Google Cloud Console, navigate to **APIs & Services** > **Library**.
+1. Navigate to [**APIs & Services** > **Library**][5] in the Google Cloud Console.
 1. Search for and enable the APIs for the Google Workspace services you intend to use:
 
 | Google Workspace service | API to enable |
@@ -41,7 +41,7 @@ Enable the Google APIs you plan to use in your workflows:
 
 ### 3. Configure the OAuth consent screen
 
-1. In the Google Cloud Console, navigate to **APIs & Services** > **OAuth consent screen**.
+1. Navigate to [**APIs & Services** > **OAuth consent screen**][6] in the Google Cloud Console.
 1. Select a user type:
    - **Internal**: Limits access to users in your Google Workspace organization. Recommended for most enterprise use cases.
    - **External**: Allows any Google account to authorize. Requires app verification for production use.
@@ -51,10 +51,11 @@ Enable the Google APIs you plan to use in your workflows:
 
 ### 4. Create OAuth2 credentials
 
-1. In the Google Cloud Console, navigate to **APIs & Services** > **Credentials**.
+1. Navigate to [**APIs & Services** > **Credentials**][7] in the Google Cloud Console.
 1. Click **Create Credentials** > **OAuth client ID**.
 1. For **Application type**, select **Web application**.
-1. Under **Authorized redirect URIs**, add the Datadog OAuth callback URL. This URL is displayed in the Datadog connection creation dialog when you select **Google Workspace**.
+1. Under **Authorized JavaScript origins**, add the Datadog origin URL. This URL is displayed in the Datadog connection creation dialog when you select **Google Workspace**.
+1. Under **Authorized redirect URIs**, add the Datadog OAuth callback URL. This URL is also displayed in the Datadog connection creation dialog when you select **Google Workspace**.
 1. Click **Create**.
 1. Copy the **Client ID** and **Client Secret** — you need these when creating the connection in Datadog.
 
@@ -166,3 +167,6 @@ Select only the scopes required by the actions you intend to use.
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/app-builder
 [4]: https://chat.datadoghq.com/
+[5]: https://console.cloud.google.com/apis/library
+[6]: https://console.cloud.google.com/apis/credentials/consent
+[7]: https://console.cloud.google.com/apis/credentials
