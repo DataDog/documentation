@@ -32,7 +32,7 @@ To create a basic budget:
 1. Click {{< ui >}}Basic{{< /ui >}} to create a basic budget.
 1. You can either add budget information by {{< ui >}}uploading a CSV{{< /ui >}} using the provided template in the UI, or {{< ui >}}enter your budget directly{{< /ui >}} using the details below.
 
-   {{< img src="cloud_cost/budgets/budget-upload-your-csv.mp4" alt="Choose whether to add budget information by uploading a CSV or enter it directly within the UI" video="true">}}
+   {{< img src="cloud_cost/budgets/budget-create-basic-1.mp4" alt="Choose whether to add budget information by uploading a CSV or enter it directly within the UI" video="true">}}
 
    - {{< ui >}}Budget Name{{< /ui >}}: Enter a name for your budget.
    - {{< ui >}}Start Date{{< /ui >}}: Enter a start date for the budget (this can be a past month). Budgets are set at the month level.
