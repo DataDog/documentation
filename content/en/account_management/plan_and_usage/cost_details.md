@@ -80,6 +80,8 @@ To query estimated cost data through the API, see [Get estimated cost across you
 
 As a sub-organization, you can view the costs for your organization only. This restriction allows for more distributed ownership and removes the need to grant broader Admin permissions to the parent organization.
 
+**Note**: Activating Cost Summary (Sub-Org) allows Admins in the Sub-Org to see the costs of their own organization in Plan & Usage.
+
 {{< img src="account_management/plan_and_usage/suborg-cost-trends.png" alt="Screenshot of the current month's Cost Summary for a sub-organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes.">}}
 
 View historical costs by toggling back to previous months, or use the date dropdown to view costs over 1,3, 6 or 12 months.
