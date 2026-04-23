@@ -2723,6 +2723,18 @@ menu:
         unstable:
           - v2
         order: 92
+    - name: Update security signal triage state or assignee
+      url: '#update-security-signal-triage-state-or-assignee'
+      identifier: security-monitoring-update-security-signal-triage-state-or-assignee
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EditSecurityMonitoringSignal
+        unstable: []
+        order: 94
     - name: Get suggested actions for a signal
       url: '#get-suggested-actions-for-a-signal'
       identifier: security-monitoring-get-suggested-actions-for-a-signal
@@ -2783,6 +2795,18 @@ menu:
           - SearchSecurityMonitoringSignals
         unstable: []
         order: 72
+    - name: Bulk update security signals
+      url: '#bulk-update-security-signals'
+      identifier: security-monitoring-bulk-update-security-signals
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkEditSecurityMonitoringSignals
+        unstable: []
+        order: 95
     - name: Bulk update triage state of security signals
       url: '#bulk-update-triage-state-of-security-signals'
       identifier: security-monitoring-bulk-update-triage-state-of-security-signals
@@ -4139,6 +4163,30 @@ menu:
           - ListSyntheticsTestVersions
         unstable: []
         order: 57
+    - name: Get a test result
+      url: '#get-a-test-result'
+      identifier: synthetics-get-a-test-result
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsTestResult
+        unstable: []
+        order: 63
+    - name: Get a test's latest results
+      url: '#get-a-tests-latest-results'
+      identifier: synthetics-get-a-tests-latest-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsTestLatestResults
+        unstable: []
+        order: 65
     - name: Get parent suites for a test
       url: '#get-parent-suites-for-a-test'
       identifier: synthetics-get-parent-suites-for-a-test
@@ -4199,6 +4247,18 @@ menu:
           - GetTestFileDownloadUrl
         unstable: []
         order: 59
+    - name: Poll for test results
+      url: '#poll-for-test-results'
+      identifier: synthetics-poll-for-test-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PollSyntheticsTestResults
+        unstable: []
+        order: 67
     - name: Edit a Network Path test
       url: '#edit-a-network-path-test'
       identifier: synthetics-edit-a-network-path-test
@@ -4259,6 +4319,18 @@ menu:
           - DeleteSyntheticsTests
         unstable: []
         order: 50
+    - name: Get a browser test's latest results
+      url: '#get-a-browser-tests-latest-results'
+      identifier: synthetics-get-a-browser-tests-latest-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsBrowserTestLatestResults
+        unstable: []
+        order: 66
     - name: Patch a test suite
       url: '#patch-a-test-suite'
       identifier: synthetics-patch-a-test-suite
@@ -4615,8 +4687,10 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - GetBrowserTestResult
+          - GetSyntheticsBrowserTestResult
         unstable: []
         order: 13
     - name: Get a browser test's latest results summaries
@@ -5523,6 +5597,19 @@ menu:
           - SendInvitations
         unstable: []
         order: 8
+    - name: Anonymize users
+      url: '#anonymize-users'
+      identifier: users-anonymize-users
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AnonymizeUsers
+        unstable:
+          - v2
+        order: 10
     - name: Update a user
       url: '#update-a-user'
       identifier: users-update-a-user
@@ -10923,6 +11010,45 @@ menu:
         unstable:
           - v2
         order: 18
+    - name: Create or update a custom evaluator configuration
+      url: '#create-or-update-a-custom-evaluator-configuration'
+      identifier: llm-observability-create-or-update-a-custom-evaluator-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 26
+    - name: Get a custom evaluator configuration
+      url: '#get-a-custom-evaluator-configuration'
+      identifier: llm-observability-get-a-custom-evaluator-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 25
+    - name: Delete a custom evaluator configuration
+      url: '#delete-a-custom-evaluator-configuration'
+      identifier: llm-observability-delete-a-custom-evaluator-configuration
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsCustomEvalConfig
+        unstable:
+          - v2
+        order: 27
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives

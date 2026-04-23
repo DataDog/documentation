@@ -65,7 +65,7 @@ The application may lack necessary file system access:
 Not all Go frameworks and libraries are supported:
 
 - **Error**: No instrumentation despite proper setup
-- **Solution**: Review the [Go compatibility requirements][1] to ensure your framework and libraries are supported
+- **Solution**: Review the [Go compatibility requirements][9] to ensure your framework and libraries are supported
 - **Alternative**: Consider switching to a supported framework or adding manual instrumentation.
 
 ### Application fails to start
@@ -130,4 +130,4 @@ If you're still experiencing problems:
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/?tab=manualinstrumentation#add-the-tracer-library-to-your-application
 [7]: /security/application_security/setup/go/setup#building-with-bazel
 [8]: https://go.dev/doc/devel/release#policy
-[8]: https://go.dev/doc/devel/release#policy
+[9]: /security/application_security/setup/compatibility/go

@@ -938,13 +938,23 @@ tracer.use('langchain', true);
 
 For more specific control over library patching and the integration that starts the span, you can set the following environment variables:
 
-`DD_TRACE_DISABLED_PLUGINS`
-: A comma-separated string of integration names that are automatically disabled when the tracer is initialized.<br>
-**Example**: `DD_TRACE_DISABLED_PLUGINS=openai,http`
+{{< tabs >}}
+{{% tab "Python" %}}
+
+`DD_PATCH_MODULES`
+: A comma-separated list of modules to enable or disable patching for. Overrides the default patching behavior. Use the format `module:true,module:false`. Available in version 2.17.4+.<br>
+**Example**: `DD_PATCH_MODULES=openai:false,langchain:false`
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
 
 `DD_TRACE_DISABLED_INSTRUMENTATIONS`
 : A comma-separated string of library names that are not patched when the tracer is initialized.<br>
 **Example**: `DD_TRACE_DISABLED_INSTRUMENTATIONS=openai,http`
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

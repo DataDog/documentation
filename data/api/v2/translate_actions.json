@@ -79,6 +79,20 @@
     "description": "Retrieve a paginated list of all fleet tracers.\n\nThis endpoint returns telemetry-derived service names from the SDK telemetry pipeline.\nThese names may differ from span-derived names in APM and are useful for querying\nservice library configurations.\nUse the `page_number` and `page_size` query parameters to paginate through results.",
     "summary": "List all fleet tracers"
   },
+  "DeleteLLMObsCustomEvalConfig": {
+    "description": "Delete a custom LLM Observability evaluator configuration by its name.",
+    "summary": "Delete a custom evaluator configuration"
+  },
+  "GetLLMObsCustomEvalConfig": {
+    "description": "Retrieve a custom LLM Observability evaluator configuration by its name.",
+    "summary": "Get a custom evaluator configuration"
+  },
+  "UpdateLLMObsCustomEvalConfig": {
+    "description": "Create or update a custom LLM Observability evaluator configuration by its name.",
+    "summary": "Create or update a custom evaluator configuration",
+    "request_description": "Custom evaluator configuration payload.",
+    "request_schema_description": "Request to create or update a custom LLM Observability evaluator configuration."
+  },
   "ListDatastores": {
     "description": "Lists all datastores for the organization.",
     "summary": "List datastores"
@@ -252,6 +266,12 @@
   "GetAwsOnDemandTask": {
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
+  },
+  "AnonymizeUsers": {
+    "description": "Anonymize a list of users, removing their personal data. This operation is irreversible.\nRequires the `user_access_manage` permission.",
+    "summary": "Anonymize users",
+    "request_description": "",
+    "request_schema_description": "Request body for anonymizing users."
   },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
@@ -3884,15 +3904,15 @@
     "summary": "Get a suppression's version history"
   },
   "GetContentPacksStates": {
-    "description": "Get the activation and configuration states for all security monitoring content packs.\nThis endpoint returns status information about each content pack including activation state,\nintegration status, and log collection status.",
+    "description": "Get the activation state, integration status, and log collection status\nfor all Cloud SIEM content packs.",
     "summary": "Get content pack states"
   },
   "ActivateContentPack": {
-    "description": "Activate a security monitoring content pack. This operation configures the necessary\nlog filters or security filters depending on the pricing model and updates the content\npack activation state.",
+    "description": "Activate a Cloud SIEM content pack. This operation configures the necessary\nlog filters or security filters depending on the pricing model and updates the content\npack activation state.",
     "summary": "Activate content pack"
   },
   "DeactivateContentPack": {
-    "description": "Deactivate a security monitoring content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
+    "description": "Deactivate a Cloud SIEM content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
     "summary": "Deactivate content pack"
   },
   "ListSecurityMonitoringRules": {
@@ -3973,6 +3993,12 @@
     "request_description": "Attributes describing the signal state updates.",
     "request_schema_description": "Request body for updating the triage states of multiple security signals."
   },
+  "BulkEditSecurityMonitoringSignals": {
+    "description": "Update the triage state or assignee of multiple security signals at once.\nThe maximum number of signals that can be updated in a single request is 199.",
+    "summary": "Bulk update security signals",
+    "request_description": "Attributes describing the signal updates.",
+    "request_schema_description": "Request body for updating multiple attributes of multiple security signals."
+  },
   "SearchSecurityMonitoringSignals": {
     "description": "Returns security signals that match a search query.\nBoth this endpoint and the GET endpoint can be used interchangeably for listing\nsecurity signals.",
     "summary": "Get a list of security signals",
@@ -4008,6 +4034,12 @@
   "GetSuggestedActionsMatchingSignal": {
     "description": "Get the list of suggested actions for a given security signal.",
     "summary": "Get suggested actions for a signal"
+  },
+  "EditSecurityMonitoringSignal": {
+    "description": "Update the triage state or assignee of a security signal.",
+    "summary": "Update security signal triage state or assignee",
+    "request_description": "Attributes describing the signal triage state or assignee update.",
+    "request_schema_description": "Request body for updating the triage state or assignee of a security signal."
   },
   "BulkExportSecurityMonitoringTerraformResources": {
     "description": "Export multiple security monitoring resources to Terraform, packaged as a zip archive.\nThe `resource_type` path parameter specifies the type of resources to export\nand must be one of `suppressions` or `critical_assets`.\nA maximum of 1000 resources can be exported in a single request.",
@@ -4479,6 +4511,14 @@
     "request_description": "JSON Patch document with operations to apply.",
     "request_schema_description": "JSON Patch request for a Synthetic test suite."
   },
+  "ListSyntheticsBrowserTestLatestResults": {
+    "description": "Get the latest result summaries for a given Synthetic browser test.",
+    "summary": "Get a browser test's latest results"
+  },
+  "GetSyntheticsBrowserTestResult": {
+    "description": "Get a specific full result from a given Synthetic browser test.",
+    "summary": "Get a browser test result"
+  },
   "DeleteSyntheticsTests": {
     "summary": "Bulk delete tests",
     "request_description": "",
@@ -4499,6 +4539,10 @@
     "summary": "Edit a Network Path test",
     "request_description": "New Network Path test details to be saved.",
     "request_schema_description": "Network Path test request."
+  },
+  "PollSyntheticsTestResults": {
+    "description": "Poll for test results given a list of result IDs. This is typically used after\ntriggering tests with CI/CD to retrieve results once they are available.",
+    "summary": "Poll for test results"
   },
   "GetTestFileDownloadUrl": {
     "description": "Get a presigned URL to download a file attached to a Synthetic test.\nThe returned URL is temporary and expires after a short period.",
@@ -4527,6 +4571,14 @@
   "GetTestParentSuites": {
     "description": "Get the list of parent suites and their status for a given Synthetic test.",
     "summary": "Get parent suites for a test"
+  },
+  "ListSyntheticsTestLatestResults": {
+    "description": "Get the latest result summaries for a given Synthetic test.",
+    "summary": "Get a test's latest results"
+  },
+  "GetSyntheticsTestResult": {
+    "description": "Get a specific full result from a given Synthetic test.",
+    "summary": "Get a test result"
   },
   "ListSyntheticsTestVersions": {
     "description": "Get the paginated version history for a Synthetic test.",
