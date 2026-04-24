@@ -81,26 +81,26 @@ The `owner_type` field tells the agent what kind of entity the owner is. This he
 **Example: mapping cost centers to teams**
 
 ```text
-preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
-tag_mapping,cost-center,CC-100,team-platform,team,high,,,,,
-tag_mapping,cost-center,CC-200,team-data-eng,team,high,,,,,
-tag_mapping,cost-center,CC-300,team-security,team,high,,,,,
+id,preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
+1,tag_mapping,cost-center,CC-100,team-platform,team,high,,,,,
+2,tag_mapping,cost-center,CC-200,team-data-eng,team,high,,,,,
+3,tag_mapping,cost-center,CC-300,team-security,team,high,,,,,
 ```
 
 **Example: mapping projects to owners**
 
 ```text
-preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
-tag_mapping,project,atlas,team-atlas,team,medium,,,,,
-tag_mapping,project,hermes,alice@example.com,user,medium,,,,,
-tag_mapping,project,payments,team-fintech,team,high,,,,,
+id,preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
+1,tag_mapping,project,atlas,team-atlas,team,medium,,,,,
+2,tag_mapping,project,hermes,alice@example.com,user,medium,,,,,
+3,tag_mapping,project,payments,team-fintech,team,high,,,,,
 ```
 
 **Example: wildcard matching any resource with a `managed-by` tag**
 
 ```text
-preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
-tag_mapping,managed-by,,team-infra,team,low,,,,,
+id,preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
+1,tag_mapping,managed-by,,team-infra,team,low,,,,,
 ```
 
 This matches any value of the `managed-by` tag and assigns it to `team-infra` with low confidence. Because the confidence is low, stronger data sources take priority.
@@ -129,19 +129,19 @@ Bot accounts, CI runners, and shared service accounts often appear in cloud reso
 **Example: exclude common bot accounts from all results**
 
 ```text
-preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
-exclusion,,,,,,deploy-bot,,,,
-exclusion,,,,,,ci-runner,,,,
-exclusion,,,,,,github-actions,,,,
-exclusion,,,,,,terraform-automation,,,,
+id,preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
+1,exclusion,,,,,,deploy-bot,,,,
+2,exclusion,,,,,,ci-runner,,,,
+3,exclusion,,,,,,github-actions,,,,
+4,exclusion,,,,,,terraform-automation,,,,
 ```
 
 **Example: exclude a service account only for specific resource types**
 
 ```text
-preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
-exclusion,,,,,,k8s-node-controller,service,aws_ec2_instance,,
-exclusion,,,,,,autoscaler-svc,service,aws_ec2_instance,,
+id,preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
+1,exclusion,,,,,,k8s-node-controller,service,aws_ec2_instance,,
+2,exclusion,,,,,,autoscaler-svc,service,aws_ec2_instance,,
 ```
 
 These exclusions only apply to EC2 instances. The same handles are still eligible as owners for other resource types.
@@ -149,8 +149,8 @@ These exclusions only apply to EC2 instances. The same handles are still eligibl
 **Example: exclude a team handle for a specific resource type**
 
 ```text
-preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
-exclusion,,,,,,legacy-ops,team,aws_ec2_instance,,
+id,preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
+1,exclusion,,,,,,legacy-ops,team,aws_ec2_instance,,
 ```
 
 This excludes `legacy-ops` only when it appears as a team candidate for EC2 instances. It is still considered for S3 buckets or other resource types.
@@ -179,10 +179,10 @@ You can provide up to **three** prompt text entries, one for each priority level
 **Example: organization-specific context split by priority**
 
 ```text
-preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
-prompt_text,,,,,,,,Our organization assigns ownership by cost center. The cost-center tag is the primary ownership signal for all cloud resources. Team identifiers always use the team- prefix followed by the team name (e.g. team-platform team-data-eng).,high
-prompt_text,,,,,,,,Shared infrastructure accounts (deploy-bot ci-runner github-actions terraform-automation) are automation accounts and should never be assigned as resource owners. Look for the human or team that configured the automation instead.,medium
-prompt_text,,,,,,,,For container images the repository owner in our GitHub organization is a reliable secondary signal when cost-center tags are missing.,low
+id,preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
+1,prompt_text,,,,,,,,Our organization assigns ownership by cost center. The cost-center tag is the primary ownership signal for all cloud resources. Team identifiers always use the team- prefix followed by the team name (e.g. team-platform team-data-eng).,high
+2,prompt_text,,,,,,,,Shared infrastructure accounts (deploy-bot ci-runner github-actions terraform-automation) are automation accounts and should never be assigned as resource owners. Look for the human or team that configured the automation instead.,medium
+3,prompt_text,,,,,,,,For container images the repository owner in our GitHub organization is a reliable secondary signal when cost-center tags are missing.,low
 ```
 
 ## Validation rules
@@ -252,10 +252,11 @@ Prompt text is processed by the AI engine as organizational context. To help ens
 
 ### Column schema
 
-Your reference table must be named `k9_ownership_preferences` and contain these 11 columns:
+Your reference table must be named `k9_ownership_preferences` and contain these 12 columns:
 
 | Column | Type | Description |
 | --- | --- | --- |
+| `id` | STRING | **Required for all rows.** Unique identifier for the row. Used as the primary key |
 | `preference_type` | STRING | **Required for all rows.** Row type: `tag_mapping`, `exclusion`, or `prompt_text` |
 | `tag_key` | STRING | Tag key to match (tag mappings only) |
 | `tag_value` | STRING | Tag value to match; empty means wildcard (tag mappings only) |
@@ -274,6 +275,7 @@ Each row uses a subset of columns depending on `preference_type`. Leave unused c
 
 | Column | `tag_mapping` | `exclusion` | `prompt_text` |
 | --- | --- | --- | --- |
+| `id` | required | required | required |
 | `preference_type` | `"tag_mapping"` | `"exclusion"` | `"prompt_text"` |
 | `tag_key` | required | — | — |
 | `tag_value` | optional (empty means wildcard) | — | — |
@@ -288,7 +290,7 @@ Each row uses a subset of columns depending on `preference_type`. Leave unused c
 
 ## How to upload
 
-Your preferences are stored as a Datadog [reference table][1]. The table must be named `k9_ownership_preferences` and contain all 11 column headers, even if some rows leave them empty.
+Your preferences are stored as a Datadog [reference table][1]. The table must be named `k9_ownership_preferences` and contain all 12 column headers, even if some rows leave them empty.
 
 There are several ways to create and update the table:
 
@@ -301,7 +303,7 @@ Best for getting started or making occasional updates.
 3. Click **New Reference Table**.
 4. Upload your CSV file.
 5. Set the table name to `k9_ownership_preferences`.
-6. Choose a primary key. `preference_type`, `tag_key`, `tag_value`, and `handle` is the recommended combination.
+6. Choose `id` as the primary key.
 7. Click **Save**.
 
 To update, upload a new CSV to the same table. The contents are fully replaced.
@@ -359,7 +361,7 @@ Validation is all-or-nothing. If any row has an issue, the entire preference set
 | Problem | Likely cause | Fix |
 | --- | --- | --- |
 | Preferences not taking effect after 24 hours | Table name is wrong | Must be exactly `k9_ownership_preferences` |
-| Preferences not taking effect after 24 hours | Missing column headers | All 11 columns must exist as CSV headers, even if rows leave them empty |
+| Preferences not taking effect after 24 hours | Missing column headers | All 12 columns must exist as CSV headers, even if rows leave them empty |
 | Preferences not taking effect after 24 hours | Feature not enabled for your org | Contact support to enable ownership preferences |
 | All preferences rejected | Invalid characters in any field | See [Allowed characters](#allowed-characters). Angle brackets, curly braces, and pipe characters are not permitted |
 | All preferences rejected | Missing required field in any row | Check that `tag_key`, `owner`, `owner_type`, and `confidence` are populated for tag mappings; `handle` for exclusions; `prompt_text` for prompt text entries |
@@ -377,21 +379,21 @@ Validation is all-or-nothing. If any row has an issue, the entire preference set
 A ready-to-use CSV with all three preference types:
 
 ```text
-preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
-tag_mapping,cost-center,CC-100,team-platform,team,high,,,,,
-tag_mapping,cost-center,CC-200,team-data-eng,team,high,,,,,
-tag_mapping,cost-center,CC-300,team-security,team,high,,,,,
-tag_mapping,project,atlas,team-atlas,team,medium,,,,,
-tag_mapping,project,hermes,alice@example.com,user,medium,,,,,
-tag_mapping,env,production,sre-team,team,low,,,,,
-tag_mapping,managed-by,,team-infra,team,low,,,,,
-exclusion,,,,,,deploy-bot,,,,
-exclusion,,,,,,ci-runner,service,,,
-exclusion,,,,,,github-actions,service,,,
-exclusion,,,,,,legacy-ops,team,aws_ec2_instance,,
-prompt_text,,,,,,,,Our organization assigns ownership by cost center. The cost-center tag is the primary ownership signal for all cloud resources. Team identifiers always use the team- prefix followed by the team name (e.g. team-platform team-data-eng).,high
-prompt_text,,,,,,,,Shared infrastructure accounts (deploy-bot ci-runner github-actions) are automation accounts and should never be assigned as resource owners. Look for the human or team that configured the automation instead.,medium
-prompt_text,,,,,,,,For container images the repository owner in GitHub is a reliable secondary signal when cost-center tags are missing.,low
+id,preference_type,tag_key,tag_value,owner,owner_type,confidence,handle,exclusion_type,exclusion_resource_type,prompt_text,priority
+1,tag_mapping,cost-center,CC-100,team-platform,team,high,,,,,
+2,tag_mapping,cost-center,CC-200,team-data-eng,team,high,,,,,
+3,tag_mapping,cost-center,CC-300,team-security,team,high,,,,,
+4,tag_mapping,project,atlas,team-atlas,team,medium,,,,,
+5,tag_mapping,project,hermes,alice@example.com,user,medium,,,,,
+6,tag_mapping,env,production,sre-team,team,low,,,,,
+7,tag_mapping,managed-by,,team-infra,team,low,,,,,
+8,exclusion,,,,,,deploy-bot,,,,
+9,exclusion,,,,,,ci-runner,service,,,
+10,exclusion,,,,,,github-actions,service,,,
+11,exclusion,,,,,,legacy-ops,team,aws_ec2_instance,,
+12,prompt_text,,,,,,,,Our organization assigns ownership by cost center. The cost-center tag is the primary ownership signal for all cloud resources. Team identifiers always use the team- prefix followed by the team name (e.g. team-platform team-data-eng).,high
+13,prompt_text,,,,,,,,Shared infrastructure accounts (deploy-bot ci-runner github-actions) are automation accounts and should never be assigned as resource owners. Look for the human or team that configured the automation instead.,medium
+14,prompt_text,,,,,,,,For container images the repository owner in GitHub is a reliable secondary signal when cost-center tags are missing.,low
 ```
 
 ## Further reading
