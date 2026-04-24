@@ -46,6 +46,7 @@
                             {{ $s.Set "json" "" }}
                             {{ $s.Set "html" "" }}
                             {{ $s.Set "versionedHtml" slice }}
+                            {{ $s.Set "versionedJson" slice }}
                             {{ with $resourcePage.Resources.Match "examples.json" }}
                                 {{ range . }}
                                     {{ $data := . | unmarshal}}
@@ -59,6 +60,15 @@
                                                 {{ $s.Set "html" (index $res "html") }}
                                                 {{ with (index $res "versionedHtml") }}
                                                     {{ $s.Set "versionedHtml" . }}
+                                                {{ end }}
+                                                {{ with (index $res "versionedJson") }}
+                                                    {{ $highlightedList := slice }}
+                                                    {{ range . }}
+                                                        {{ $jd := . | jsonify (dict "indent" "  ") }}
+                                                        {{ $jd = replace (replace $jd "\\u003c" "<") "\\u003e" ">" }}
+                                                        {{ $highlightedList = append (highlight $jd "json" "") $highlightedList }}
+                                                    {{ end }}
+                                                    {{ $s.Set "versionedJson" $highlightedList }}
                                                 {{ end }}
                                             {{ else }}
                                                 {{ warnf "Could not load html/json response code %q in %q" $response_code $operationid }}
@@ -74,6 +84,7 @@
                             {{ $json := ($s.Get "json") }}
                             {{ $html := ($s.Get "html") }}
                             {{ $versionedHtml := ($s.Get "versionedHtml") }}
+                            {{ $versionedJson := ($s.Get "versionedJson") }}
 
                             {{/*
                                 If we are missing json/html lets build from an examples entry in data if it exists
@@ -128,7 +139,7 @@
                                         {{ range $vIdx, $vHtml := $versionedHtml }}
                                             {{ $vInfo := index $apiVersionsList $vIdx | default (dict "date" (printf "variant-%d" $vIdx) "isBase" (eq $vIdx 0)) }}
                                             {{ $vDate := $vInfo.date }}
-                                            <div class="api-versioned-schema-pane {{ if ne $vDate $baseVersion }}d-none{{ end }}"
+                                            <div class="api-versioned-pane {{ if ne $vDate $baseVersion }}d-none{{ end }}"
                                                  data-api-date-version="{{ $vDate }}"
                                                  data-operation-id="{{ $operationid }}">
                                                 {{ if in $vHtml "schema-table" }}
@@ -175,10 +186,24 @@
 
                                 </div>
                                 <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid }}-{{ $response_code }}-example" data-title="{{ i18n "example" }}">
-                                    <div class="code-snippet-wrapper append-copy-btn">
-                                        {{/*  $json is a highlight hugo function  */}}
-                                        {{ $json }}
-                                    </div>
+                                    {{ if and $isVersionedSchema $isDateVersioned (gt (len $apiVersionsList) 0) (gt (len $versionedJson) 0) }}
+                                        {{ range $vIdx, $vJson := $versionedJson }}
+                                            {{ $vInfo := index $apiVersionsList $vIdx | default (dict "date" (printf "variant-%d" $vIdx) "isBase" (eq $vIdx 0)) }}
+                                            {{ $vDate := $vInfo.date }}
+                                            <div class="api-versioned-pane {{ if ne $vDate $baseVersion }}d-none{{ end }}"
+                                                 data-api-date-version="{{ $vDate }}"
+                                                 data-operation-id="{{ $operationid }}">
+                                                <div class="code-snippet-wrapper append-copy-btn">
+                                                    {{ $vJson }}
+                                                </div>
+                                            </div>
+                                        {{ end }}
+                                    {{ else }}
+                                        <div class="code-snippet-wrapper append-copy-btn">
+                                            {{/*  $json is a highlight hugo function  */}}
+                                            {{ $json }}
+                                        </div>
+                                    {{ end }}
                                 </div>
                             </div>
 

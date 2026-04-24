@@ -209,10 +209,12 @@ const createResources = (apiYaml, deref, apiVersion) => {
               const responseHtml = schemaTable("response", responseSchema);
               const responseEntry = {"json": responseJson, "html": responseHtml};
               // Date-based API versioning: when the schema is marked versioned with a oneOf,
-              // render each variant separately so the schema pane can swap with the version dropdown.
+              // render each variant separately so the schema + example panes can swap with the dropdown.
               // Large shared oneOf subtrees (e.g. WidgetDefinition) are stubbed so the file doesn't blow up.
               if (responseSchema && responseSchema["x-datadog-api-versioned"] && Array.isArray(responseSchema.oneOf)) {
-                responseEntry.versionedHtml = responseSchema.oneOf.map((variant) => schemaTable("response", pruneLargeOneOf(variant)));
+                const pruned = responseSchema.oneOf.map((variant) => pruneLargeOneOf(variant));
+                responseEntry.versionedHtml = pruned.map((variant) => schemaTable("response", variant));
+                responseEntry.versionedJson = pruned.map((variant) => filterExampleJson("response", variant));
               }
               responses[responseCode] = responseEntry;
               console.log(`successfully wrote ${pageDir}${action.operationId}_response_${responseCode} html`);

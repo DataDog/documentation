@@ -198,8 +198,8 @@ document.addEventListener('click', (e) => {
         }
     }
 
-    // Show the matching version pane, hide all others for this operation
-    document.querySelectorAll(`.api-versioned-schema-pane[data-operation-id="${operationId}"]`).forEach((pane) => {
+    // Show the matching version pane (schema + example), hide all others for this operation
+    document.querySelectorAll(`.api-versioned-pane[data-operation-id="${operationId}"]`).forEach((pane) => {
         pane.classList.toggle('d-none', pane.dataset.apiDateVersion !== selectedVersion);
     });
 
