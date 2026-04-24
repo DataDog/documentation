@@ -28,7 +28,7 @@ You can create service remapping rules only for services instrumented with suppo
 | Dotnet     | [3.4.0][3]                       |
 | Go         | [1.55.0][6]                      |
 | Java       | [1.20.0][2]                      |
-| JavaScript | [4.16.0][4]                      |
+| JavaScript | [3.37.0][16]-3.x or [4.16.0][4]  |
 | PHP        | [0.94.1][7]                      |
 | Python     | [1.19.0][5]                      |
 | Ruby       | [1.15.0][8]                      |
@@ -89,3 +89,4 @@ Remapping rules are applied across APM, Logs, Metrics, USM, DSM, DJM, DBM, Profi
 [13]: https://app.datadoghq.com/software/settings/service-rename
 [14]: https://app.datadoghq.com/software
 [15]: /tracing/services/service_override_removal
+[16]: https://github.com/DataDog/dd-trace-js/releases/tag/v3.37.0
