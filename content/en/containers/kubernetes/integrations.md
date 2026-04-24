@@ -418,7 +418,7 @@ Configurations set with Kubernetes annotations take precedence over auto-configu
 
 Integrations often need to read configuration files, certificates, or other resources from the filesystem. When file paths come from untrusted configuration providers (for example, pod annotations or external service autodiscovery), there is a risk of path traversal or unauthorized file access.
 
-To control filesystem access based on the trust level of a configuration provider, set the following parameters in the Agent's `datadog.yaml`:
+Starting with Datadog Agent version 7.78.0, you can set the following parameters in the Agent's `datadog.yaml` to control filesystem access based on the trust level of a configuration provider.
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
