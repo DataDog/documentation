@@ -145,7 +145,7 @@ if ($p.ExitCode -ne 0) {
    {{< img src="/agent/fips-powershell.png" alt="Agent status command output with FIPS Mode enabled - Windows" style="width:100%;" >}}
 
 
-**Note**: The program name for the FIPS Agent in **Add or Remove Programs** is "Datadog FIPS Agent."
+**Note**: The program name for the FIPS Agent in {{< ui >}}Add or Remove Programs{{< /ui >}} is "Datadog FIPS Agent."
 
 [1]: /agent/basic_agent_usage/windows/#uninstall-the-agent
 

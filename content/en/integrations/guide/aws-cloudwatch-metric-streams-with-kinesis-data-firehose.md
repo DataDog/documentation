@@ -62,7 +62,7 @@ EC2 or Lambda metrics in the stream could increase the number of billable hosts 
 
 Datadog recommends using CloudFormation because it's automatic and easier if you are using multiple AWS regions.
 
-**Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
+**Note**: Metric streaming only supports OpenTelemetry output format. Latest version is v1.0; v0.7 is supported but may result in missing metrics.
 
 1. On your Datadog site, go to the **Configuration** tab of the [AWS integration page][1].
 2. Click on the AWS account to set up metric streaming.
@@ -93,7 +93,7 @@ Once the stack is successfully created, wait five minutes for Datadog to recogni
 
 To set up metric streams using the AWS Console, create a [CloudWatch Metric Stream][1] for each AWS region.
 
-**Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
+**Note**: Metric streaming only supports OpenTelemetry output format. Latest version is v1.0; v0.7 is supported but may result in missing metrics.
 
 1. Choose the **Quick AWS Partner Setup** and select **Datadog** as the AWS Partner destination from the dropdown menu.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-partner-setup.png" alt="Cloudwatch metric stream quick partner setup" responsive="true" style="width:60%;">}}

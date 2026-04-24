@@ -27,7 +27,7 @@ Static data updates on every repository scan.
 
 The **Runtime** view lists only the libraries actively used by your services in production or other monitored environments, as detected by **Runtime SCA**.
 
-Runtime SCA observes loaded dependencies through the Datadog tracing library, enabling you to:
+Runtime SCA observes loaded dependencies through the Datadog SDK, enabling you to:
 
 * Prioritize vulnerabilities in libraries that are actually executed  
 * Reduce noise by filtering out unused dependencies  
@@ -107,7 +107,7 @@ The license table in this section is based on the **Choose a License Appendix**:
 It summarizes the license's:
 
 * **Permissions**  
-  **Conditions**  
+* **Conditions**  
 * **Limitations**
 
 Additionally, Datadog identifies **license risks**, including:

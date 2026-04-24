@@ -185,7 +185,7 @@ data/workflows/
 !content/en/service_management/workflows/actions_catalog/generic_actions.md
 !content/en/service_management/workflows/actions_catalog/logic_actions.md
 
-# semantic tag colors
+# semantic tag colors (keep so we don't accidentally re-add it to repo)
 layouts/shortcodes/semantic-color.md
 
 # Runtime data

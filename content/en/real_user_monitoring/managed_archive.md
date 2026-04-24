@@ -10,6 +10,10 @@ further_reading:
   text: RUM without Limits
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/rum-managed-archive/" btn_hidden="false" header="Join the Preview!">}}
+Managed Archive is in Preview.
+{{< /callout >}}
+
 ## Overview
 
 Datadog's [RUM without Limits][1] provides an accurate, long-term overview of application health and performance, even if only a fraction of session data is retained by retention filters. But any session can be useful to solve an unexpected support ticket, perform a compliance audit, or conduct a retroactive investigation.
@@ -55,9 +59,9 @@ Access to Managed Archive and Recovery is controlled through role-based access c
 
 | Permission | Capability | Default Role |
 |---|---|---|
-| `rum_recovery_read` | View the Managed Archive configuration and stored sessions, but cannot edit the configuration or recover sessions | Admin |
-| `rum_recovery_write` | Turn session storage on or off for an application | Admin |
-| `rum_recovery_index` | Recover sessions | Admin |
+| RUM Managed Archive Read | View the Managed Archive configuration and stored sessions, but cannot edit the configuration or recover sessions | Standard |
+| RUM Managed Archive Config Write | Turn session storage on or off for an application | Admin |
+| RUM Recovery Index | Recover sessions | Admin |
 
 ## Setup
 
