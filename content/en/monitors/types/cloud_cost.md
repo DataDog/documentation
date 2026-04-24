@@ -131,6 +131,7 @@ If you are using the **Budget** monitor type, you can trigger an alert when the 
 
 When you select **is forecasted to reach**, the monitor uses the same [forecasting model][8] as budget cards and the budget status page.
 
+[8]: /cloud_cost_management/planning/forecasting/
 {{% /tab %}}
 {{< /tabs >}}
 
