@@ -82,7 +82,7 @@ These frameworks and libraries have been tested with Datadog LLM Observability. 
 | [OpenAI][20] | [`opentelemetry-instrumentation-openai-v2`][21] | >= 1.26.0 |
 | [Anthropic][22] | [`opentelemetry-instrumentation-anthropic`][23] | >= 0.51.0 |
 | [Google GenAI][24] | [`opentelemetry-instrumentation-google-genai`][25] | >= 1.32.0 |
-| [Google Vertex AI][26] | [`opentelemetry-instrumentation-vertexai`][27] | >= 1.64 |
+| [Google Vertex AI][26] | [`opentelemetry-instrumentation-vertexai`][27] | >= 1.64.0 |
 | [AWS Bedrock][28] | [`opentelemetry-instrumentation-botocore`][29] | >= 1.31.57 |
 | [LangChain][30] | [`opentelemetry-instrumentation-langchain`][31] | >= 0.3.21 |
 | [LlamaIndex][32] | [`opentelemetry-instrumentation-llamaindex`][33] | >= 0.14.12 |
