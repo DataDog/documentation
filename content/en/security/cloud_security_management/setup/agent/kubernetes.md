@@ -48,10 +48,14 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
           # Enables Container Vulnerability Management
           containerImage:
             enabled: true
-    
+            # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
+            analyzers: ["os", "languages"]
+
           # Enables Host Vulnerability Management
           host:
             enabled: true
+            # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
+            analyzers: ["os", "languages"]
     ```
 
 2. Apply the changes and restart the Agent.
@@ -79,10 +83,14 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
         # Enables Container Vulnerability Management
         containerImage:
           enabled: true
+          # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
+          analyzers: ["os", "languages"]
 
         # Enables Host Vulnerability Management
         host:
           enabled: true
+          # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
+          analyzers: ["os", "languages"]
     ```
 
 2. Restart the Agent.
@@ -90,6 +98,28 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 {{% /tab %}}
 
 {{< /tabs >}}
+
+**Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by package managers such as npm, pip, Maven/Gradle, NuGet, Go modules, Cargo, and Bundler, in addition to OS packages. When the `analyzers` field is omitted, only OS packages are scanned for container images. See [Supported application library package managers](#supported-application-library-package-managers) for the full list.
+
+### Supported application library package managers
+
+The `languages` analyzer covers the following package ecosystems:
+
+| Ecosystem | Package manager / format |
+|-----------|--------------------------|
+| Ruby | Bundler, GemSpec |
+| Rust | Cargo, Rust binary |
+| PHP | Composer |
+| Java | Jar, Maven (pom.xml), Gradle lock, Sbt lock |
+| JavaScript | npm (package-lock.json), Yarn, pnpm, Node package |
+| .NET | NuGet, .NET Core, PackagesProps |
+| Python | Python package (egg), pip, Pipenv, Poetry, uv, Conda package, Conda environment |
+| Go | Go binary, Go modules |
+| C/C++ | Conan lock |
+| Swift / Objective-C | CocoaPods, Swift |
+| Dart | PubSpec lock |
+| Elixir | Mix lock |
+| Julia | Julia |
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
