@@ -404,7 +404,6 @@ Connect Devin to the Datadog MCP Server by enabling it from Devin's MCP Marketpl
 <div class="alert alert-info">To use product-specific toolsets, set up a <a href="https://docs.devin.ai/work-with-devin/mcp#setting-up-a-custom-mcp-server">custom MCP server</a> in Devin and include the <code>toolsets</code> query at the end of the endpoint URL. See <a href="#toolsets">Toolsets</a> for more information.
 </div>
 
-[1]: /getting_started/site/
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
@@ -430,10 +429,11 @@ Connect Goose to the Datadog MCP Server by adding it as a {{< ui >}}remote exten
 1. When prompted for a URL, enter the Datadog MCP Server endpoint for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
-   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
+To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
 1. Complete the OAuth login flow when prompted.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
@@ -467,9 +467,11 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
      }
    }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+   
+To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
