@@ -13,11 +13,22 @@ const components = docs
     <nav><a href="/">&larr; Home</a></nav>
     <div class="prose">
       <h1>Components</h1>
-      <ul>
-        {components.map((entry) => (
-          <li><a href={`/docs/${entry.id}/`}>{entry.data.title}</a></li>
-        ))}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Architecture</th>
+          </tr>
+        </thead>
+        <tbody>
+          {components.map((entry) => (
+            <tr>
+              <td><a href={`/docs/${entry.id}/`}>{entry.data.title}</a></td>
+              <td>{entry.data.description ?? ''}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   </div>
 </BaseLayout>
@@ -27,5 +38,30 @@ const components = docs
     max-width: 960px;
     margin: 0 auto;
     padding: var(--space-lg);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    text-align: left;
+    padding: var(--space-xs) var(--space-sm);
+    border-bottom: 1px solid var(--color-surface-border);
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: 600;
+    border-bottom-width: 2px;
+  }
+
+  td:first-child {
+    white-space: nowrap;
+  }
+
+  table a {
+    text-decoration: none;
   }
 </style>
