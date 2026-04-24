@@ -22,7 +22,7 @@ Tag enrichment rules let you define which services to target, where tag values c
 
 ## Prerequisites
 
-You must have admin permissions to create tag enrichment rules.
+You must have the Datadog Admin Role to create tag enrichment rules. See [Role-based access control][2] for details.
 
 ## Create a tag enrichment rule
 
@@ -68,3 +68,4 @@ On any service page that is missing a `team` or `system` tag, click **Add Tags**
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/software/settings/tag-enrichment
+[2]: /account_management/rbac/
