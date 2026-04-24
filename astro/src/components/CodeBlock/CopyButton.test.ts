@@ -29,14 +29,8 @@ describe('CopyButton', () => {
     expect(document.querySelector('.code-block__copy')!.textContent).toBe('Copied!');
   });
 
-  it('tags its ancestor code-block container with data-hydrated on mount', () => {
-    const container = document.createElement('div');
-    container.className = 'code-block';
-    document.body.appendChild(container);
-
-    render(h(CopyButton, { content: 'x' }), { container });
-
-    expect(container.getAttribute('data-hydrated')).toBe('true');
-    document.body.removeChild(container);
+  it('sets data-hydrated on itself on mount', () => {
+    render(h(CopyButton, { content: 'x' }));
+    expect(document.querySelector('.code-block__copy')!.getAttribute('data-hydrated')).toBe('true');
   });
 });

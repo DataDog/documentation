@@ -61,9 +61,9 @@ describe('CollapseToggle', () => {
     expect(document.querySelector('.code-block__toggle')!.getAttribute('aria-expanded')).toBe('true');
   });
 
-  it('tags ancestor code-block with data-hydrated on mount', () => {
-    const { shell } = setupShell('t4');
-    render(h(CollapseToggle, { targetId: 't4' }), { container: shell });
-    expect(shell.getAttribute('data-hydrated')).toBe('true');
+  it('sets data-hydrated on itself on mount', () => {
+    setupShell('t4');
+    render(h(CollapseToggle, { targetId: 't4' }));
+    expect(document.querySelector('.code-block__toggle')!.getAttribute('data-hydrated')).toBe('true');
   });
 });

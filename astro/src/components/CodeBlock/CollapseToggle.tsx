@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import styles from './CodeBlock.module.css';
 import { classListFactory } from '../../utils/classListFactory';
+import { markSelfAsHydrated } from '../../utils/markSelfAsHydrated';
 
 const cl = classListFactory(styles);
 
@@ -12,11 +13,7 @@ export function CollapseToggle({ targetId }: CollapseToggleProps) {
   const [collapsed, setCollapsed] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    ref.current
-      ?.closest('.code-block')
-      ?.setAttribute('data-hydrated', 'true');
-  }, []);
+  useEffect(() => { markSelfAsHydrated(ref); }, []);
 
   // Collapse state lives in this island, but the hidden content lives in
   // the Astro shell — toggle the BEM class and its CSS-module hash on the

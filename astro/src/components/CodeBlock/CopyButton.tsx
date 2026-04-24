@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 import styles from './CodeBlock.module.css';
 import { classListFactory } from '../../utils/classListFactory';
+import { markSelfAsHydrated } from '../../utils/markSelfAsHydrated';
 
 const cl = classListFactory(styles);
 
@@ -12,10 +13,7 @@ export function CopyButton({ content }: CopyButtonProps) {
     const [copied, setCopied] = useState(false);
     const ref = useRef<HTMLButtonElement>(null);
 
-    // Nothing uses this signal today
-    useEffect(() => {
-        ref.current?.closest('.code-block')?.setAttribute('data-hydrated', 'true');
-    }, []);
+    useEffect(() => { markSelfAsHydrated(ref); }, []);
 
     const handleCopy = () => {
         setCopied(true);
