@@ -40,6 +40,8 @@ For details about host and container metrics mapping, see [OpenTelemetry Metrics
 
 Select your language to see instructions for configuring the OpenTelemetry SDK to send runtime metrics:
 
+**Note**: Runtime metrics are only exported if a `MeterProvider` and metric exporter are configured. Set the `OTEL_METRICS_EXPORTER` environment variable or programmatically configure a `metricReader` in your SDK initialization. For Go, Node.js, and Python, the MeterProvider must be configured manually; Java and .NET auto-configure it via their auto-instrumentation agents.
+
 {{< tabs >}}
 {{% tab "Java" %}}
 
