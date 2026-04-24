@@ -22,7 +22,7 @@ Manual integrations require additional configuration to enable AI Guard protecti
 | [Amazon Strands](#amazon-strands) | >= 1.29.0          | >= 4.7.0       |
 | [LiteLLM Proxy](#litellm-proxy)   | >= 1.78.5          | >= 4.8.0       |
 
-{{< partial name="security-platform/aiguard-sdk-setup.md" markdown="true" target="manual" >}}
+{{< partial name="security-platform/aiguard-sdk-setup.md" target="manual" >}}
 
 ## Integrations
 
