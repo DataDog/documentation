@@ -33,11 +33,11 @@ You can enable Datadog [App and API Protection][1] on a Google Kubernetes Engine
 
 ## Prerequisites
 
-- A GKE cluster running **version 1.33 or later** with the [Gateway API enabled][2].
-- A `Gateway` resource using a [GatewayClass][3] that supports traffic extensions, for example `gke-l7-global-external-managed` or `gke-l7-regional-external-managed`. For the full list, see [supported GatewayClasses for `GCPTrafficExtension`][12].
+- A GKE cluster running **version 1.33 or later**, with the [Gateway API enabled][2].
+- A `Gateway` resource that uses a [GatewayClass][3] supporting traffic extensions, such as `gke-l7-global-external-managed` or `gke-l7-regional-external-managed`. For the full list, see [supported `GatewayClasses` for `GCPTrafficExtension`][12].
 - The [Datadog Agent is installed and configured][4] in your Kubernetes cluster.
-  - Enable and configure [Remote Configuration][5] to block attackers through the Datadog UI.
-  - Enable [APM][6] in the Agent so the security processor can send its own traces to the Agent.
+  - [Remote Configuration][5] is enabled and configured in the Datadog UI to block attackers.
+  - [APM][6] is enabled in the Agent so the security processor can send its own traces to the Agent.
 
 ## Enabling threat detection
 
