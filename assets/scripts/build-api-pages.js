@@ -207,7 +207,14 @@ const createResources = (apiYaml, deref, apiVersion) => {
               const responseSchema = getSchema(response.content);
               const responseJson = filterExampleJson("response", responseSchema);
               const responseHtml = schemaTable("response", responseSchema);
-              responses[responseCode] = {"json": responseJson, "html": responseHtml};
+              const responseEntry = {"json": responseJson, "html": responseHtml};
+              // Date-based API versioning: when the schema is marked versioned with a oneOf,
+              // render each variant separately so the schema pane can swap with the version dropdown.
+              // Large shared oneOf subtrees (e.g. WidgetDefinition) are stubbed so the file doesn't blow up.
+              if (responseSchema && responseSchema["x-datadog-api-versioned"] && Array.isArray(responseSchema.oneOf)) {
+                responseEntry.versionedHtml = responseSchema.oneOf.map((variant) => schemaTable("response", pruneLargeOneOf(variant)));
+              }
+              responses[responseCode] = responseEntry;
               console.log(`successfully wrote ${pageDir}${action.operationId}_response_${responseCode} html`);
             }
         });
@@ -896,6 +903,25 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
       html += `<div class="primitive">${data || ''}</div>`;
     }
     return html;
+};
+
+/**
+ * Deep-clone a schema while replacing any oneOf whose length exceeds a threshold
+ * with a single-line stub. Used when pre-rendering versioned schema variants to
+ * avoid re-expanding large shared subtrees (e.g. WidgetDefinition) per variant.
+ */
+const pruneLargeOneOf = (schema, threshold = 5, depth = 0) => {
+  if (depth > 20) return schema;
+  if (!schema || typeof schema !== 'object') return schema;
+  if (Array.isArray(schema)) return schema.map((s) => pruneLargeOneOf(s, threshold, depth + 1));
+  if (Array.isArray(schema.oneOf) && schema.oneOf.length > threshold) {
+    return { type: schema.type || 'object', description: schema.description || '' };
+  }
+  const out = {};
+  for (const [k, v] of Object.entries(schema)) {
+    out[k] = pruneLargeOneOf(v, threshold, depth + 1);
+  }
+  return out;
 };
 
 /**
