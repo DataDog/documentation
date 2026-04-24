@@ -88,7 +88,7 @@ Type "help" for help.
 BYOC Logs uses Azure Blob Storage to persist logs. Create a dedicated container for this purpose.
 
 #### Create a Blob Storage container
-Use a dedicated container per environment (for example, `cloudprem-prod`, `cloudprem-staging`), and assign least-privilege RBAC roles at the container level, rather than at the storage account scope.
+Use a dedicated container per environment (for example, `byoc-logs-prod`, `byoc-logs-staging`), and assign least-privilege RBAC roles at the container level, rather than at the storage account scope.
 
 - [Create an Blob Storage container using the Azure CLI][6]
 - [Create a Blob Storage container using Terraform][7]
