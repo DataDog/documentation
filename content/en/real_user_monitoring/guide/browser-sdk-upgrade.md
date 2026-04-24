@@ -20,6 +20,8 @@ V7 improves privacy defaults, removes deprecated options, and modernizes the SDK
 
 Take notice of the below breaking changes as you upgrade your SDK. Changes are grouped by area of impact.
 
+**Tip**: If you use an AI coding assistant that supports agent skills, you can apply the [`upgrade-browser-sdk-v7` skill][37] to automate most of the migration steps below.
+
 ### Core
 
 #### Session manager rewrite
@@ -578,3 +580,4 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [34]: https://parceljs.org/features/code-splitting
 [35]: https://developer.chrome.com/docs/web-platform/long-animation-frames#long-frames-api
 [36]: https://github.com/DataDog/build-plugins
+[37]: https://github.com/DataDog/browser-sdk/blob/main/.claude/skills/upgrade-browser-sdk-v7/SKILL.md
