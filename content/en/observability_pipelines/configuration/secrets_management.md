@@ -362,9 +362,7 @@ bootstrap:
 
 ## Refresh secrets at runtime
 
-The Observability Pipelines Worker resolves secrets on startup and when its configuration is reloaded. To pick up rotated secret values without restarting the Worker, send a `SIGHUP` signal to trigger a topology reload. On reload, the Worker re-resolves all secret identifiers against the configured backend and applies the new values to the running topology.
-
-**Note**: If a rotated secret has an invalid value, the reload fails. To limit the blast radius, Datadog recommends rolling the reload one node at a time and verifying Worker health before continuing.
+The Observability Pipelines Worker resolves secrets on startup and when its configuration is reloaded. To pick up rotated secret values without restarting the Worker, send a `SIGHUP` signal.
 
 {{< tabs >}}
 {{% tab "Docker or Linux" %}}
@@ -382,7 +380,7 @@ Send `SIGHUP` to the Worker process inside each pod:
 kubectl exec <pod_name> -- kill -HUP 1
 ```
 
-Repeat for each Worker pod, one at a time, and verify Worker health between pods.
+**Note**: If a rotated secret has an invalid value, the reload fails. Datadog recommends rolling the reload one node at a time and verifying Worker health before continuing.
 
 {{% /tab %}}
 {{< /tabs >}}
