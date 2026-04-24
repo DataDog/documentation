@@ -1,5 +1,5 @@
 ---
-title: Connect a Data Warehouse for Warehouse-Native Experiment Analysis
+title: Connect your Data Warehouse for Warehouse-Native Experiment Analysis
 description: Connect a data warehouse to Datadog to enable warehouse-native experiment analysis.
 aliases:
   - /experiments/guide/connecting_bigquery/
