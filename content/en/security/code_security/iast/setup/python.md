@@ -21,14 +21,14 @@ further_reading:
       text: "Troubleshooting Application Security"
 ---
 
-You can detect code-level vulnerabilities and monitor application security in Python applicationss running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
+You can detect code-level vulnerabilities and monitor application security in Python applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 NOTE: Code-Level Vulnerability detection in Python is in Preview.
 
 Follow these steps to enable Code Security in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:

@@ -3,18 +3,21 @@ title: Network Path Testing
 description: Analyze global Network Paths with managed locations and private environments.
 aliases:
 further_reading:
+- link: "/synthetics/network_path_tests/glossary/"
+  tag: "Documentation"
+  text: "Network Path terms and concepts"
 - link: "/network_monitoring/network_path/"
-  tag: "Doc"
+  tag: "Documentation"
   text: "Learn more about Network Path"
+- link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
+  tag: "Blog"
+  text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/network-path/"
   tag: "Blog"
   text: "Identify slowdowns across your entire network with Datadog Network Path"
 - link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
-- link: "/synthetics/network_path_tests/glossary/"
-  tag: "Doc"
-  text: "Network Path terms and concepts"
 ---
 
 ## Overview
@@ -23,7 +26,7 @@ Network Path Testing in Synthetic Monitoring gives you complete visibility into 
 
 Running Network Path tests from managed locations lets you perform TCP, UDP, and ICMP checks on your application. Visualize the Network Path packets follow when executing queries from different global locations and private environments.
 
-<div class="alert alert-info">For information on billing for Network Path Testing in Synthetic Monitoring, see the <a href="https://www.datadoghq.com/pricing/?product=network-monitoring#products">pricing page</a>.</div>
+<div class="alert alert-info">For information on billing for Network Path Testing in Synthetic Monitoring, see the <a href="https://www.datadoghq.com/pricing/?product=synthetic-monitoring#products">pricing page</a>.</div>
 
 ## Test creation
 

@@ -45,8 +45,8 @@ Install the [Datadog IDE plugins][5] to run Static Code Analysis (SAST) scans lo
 To start running code scans in your IDE, see the respective documentation for your code editor of choice.
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
-    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Customize your repository settings
@@ -68,7 +68,7 @@ In the side panel for a single library vulnerability in SCA, in addition to deta
 
 - A **Severity breakdown** of the highest severity instance of this vulnerability seen across your repositories and your services. For each detected location of the vulnerability in your repositories and/or services, Datadog adjusts the base severity score of the vulnerability based on environmental factors. To learn more, see [Datadog severity score][8].
 - A **Repositories** table of all instances where the vulnerability was detected in your repositories. For each instance, Datadog shows whether the dependency is classified as direct or transitive, the remediation status of the vulnerability, as well as specific remediation steps.
-- An **Impacted Services** table of all running services affected by this library vulnerability. A service is affected by a library vulnerability if the library was loaded at runtime and detected by Datadog’s application tracing libraries.
+- An **Impacted Services** table of all running services affected by this library vulnerability. A service is affected by a library vulnerability if the library was loaded at runtime and detected by Datadog’s application SDKs.
 
  Severities are scored by the following:
 | CVSS Score    | Qualitative Rating

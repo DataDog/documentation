@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog APM SDKs. SSI works for applications running on Linux hosts, in container environments such as Kubernetes and Docker, and for .NET applications served by Windows IIS—without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
+Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog SDKs. SSI works for applications running on Linux hosts, in container environments such as Kubernetes and Docker, and for .NET applications served by Windows IIS—without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
 
 ## Troubleshooting methods
 
@@ -89,7 +89,7 @@ To enable debug logs:
  
    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
    env:
-     - name: DD_TRACE_DEBUG    # debug logging for the tracer
+     - name: DD_TRACE_DEBUG    # debug logging for the SDK
        value: "true"
      - name: DD_APM_INSTRUMENTATION_DEBUG    # debug logging for the injector
        value: "true"
@@ -103,7 +103,7 @@ There are several configuration mechanisms that can block or alter injection beh
 
 ### Storage requirements
 
-SSI downloads language tracing libraries and an injector package onto each host. The amount of disk space required depends on the number of languages in use and the number of pods being instrumented. A rough estimate is:
+SSI downloads language SDKs and an injector package onto each host. The amount of disk space required depends on the number of languages in use and the number of pods being instrumented. A rough estimate is:
 
 <div style="text-align:center;">
   <pre><code>[sum of the language library sizes]
@@ -133,15 +133,15 @@ For host or Docker injection, modifying the `auto_inject` version is not recomme
 
 Datadog maintains an internal deny list to prevent injection into certain processes (for example, IDEs or databases). If a process command or entrypoint is on this list, the injector skips the injection process.  
 
-#### Linux workload selection
+#### Linux instrumentation rules
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSdMu6WAsUCD3djkl_oN0Qh7fQmBCiKYyUvuqlYWRyObebAc6Q/viewform" header="Join the Preview!">}}
-Workload selection is available for Linux-based apps through a limited availability preview. To configure allow or deny rules for process injection, sign up for preview access.
+Instrumentation rules are available for Linux-based apps through a limited availability preview. To configure allow or deny rules for process injection, sign up for preview access.
 {{< /callout >}}
 
-#### Kubernetes workload selection  
+#### Kubernetes instrumentation rules
 
-Workload selection enables injection based on Kubernetes labels and selectors. Rules to consider:
+Instrumentation rules enable injection based on Kubernetes labels and selectors. Rules to consider:
 
 1. `disabledNamespaces` always takes precedence.
 2. When a pod initializes, the target list is checked from top to bottom. Only the first matching rule applies per pod.
@@ -169,7 +169,7 @@ The value should be a JSON string that applies the necessary security context to
 
 ### Custom instrumentation
 
-Custom instrumentation still requires you to import the tracing library. Configuration variables like .NET's `DD_TRACE_METHODS` remain available for defining custom spans.
+Custom instrumentation still requires you to import the SDK. Configuration variables like .NET's `DD_TRACE_METHODS` remain available for defining custom spans.
 
 ## Environment-specific troubleshooting
 
@@ -268,7 +268,7 @@ String limit violations are common if service tags are not explicitly set throug
 If logs show no issues but traces are missing, there may be an application-side misconfiguration. Verify that:
 - Required annotations and labels are present.
 - [Unified Service Tagging][8] is set up correctly.
-- Allow/deny lists for workload selection are properly defined.
+- Allow/deny lists for instrumentation rules are properly defined.
 
 ## Language-specific troubleshooting
 
@@ -300,14 +300,22 @@ SSI does not inject into applications that already use a `-javaagent` option or 
 
 ### Ruby
 
-Ruby injection modifies the `Gemfile` to add the Datadog tracing library. If injection support is later removed, the application may fail to start due to the missing dependency.
+Ruby injection modifies the `Gemfile` to add the Datadog SDK. If injection support is later removed, the application may fail to start due to the missing dependency.
 
 To resolve this, restore the original `Gemfile`. If you still want to use APM after removing injection, run `bundle install` to download the gem.
 
 ### Python
 
 Versions <=2.7.5 contain a pre-packaged protobuf dependency that can conflict with system libraries.
- 
+
+### .NET
+
+#### SSI is applied but no .NET traces reach the Agent
+
+If SSI annotations and init containers are present on the pod but no .NET traces arrive, another profiler may have precedence. Check `CORECLR_PROFILER` on the main container. If the value is not `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` (the Datadog .NET tracer CLSID), another profiler is loaded instead of Datadog.
+
+Remove the conflicting `CORECLR_*` environment variables (and any `LD_PRELOAD` entries that reference the other profiler) from the source that injected them: another vendor's operator, init container, pod template, or Helm values. Then roll the pods. The [.NET CLR Profiling API allows only one subscriber per process][10].
+
 ## Collect diagnostic information for support
 
 When contacting support about injection issues, collect the following information to assist troubleshooting:
@@ -370,3 +378,4 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [7]: https://datatracker.ietf.org/doc/html/rfc1035
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: https://app.datadoghq.com/fleet
+[10]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started

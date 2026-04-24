@@ -33,13 +33,6 @@ cascade:
         rank: 70
 ---
 
-
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">
-    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
-
 {{< img src="data_streams/map_view2.png" alt="Data Streams Monitoring page in Datadog, showing the Map view. Highlights a service called 'authenticator'. A topology map visualization of left-to-right data flow, where the authenticator service is displayed in the center with its upstream and downstream services and queues." style="width:100%;" >}}
 
 Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:
@@ -62,7 +55,7 @@ Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If yo
 | IBM MQ | {{< X >}} | | {{< X >}} | | | |
 | RabbitMQ | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | | |
 
-Data Streams Monitoring requires minimum Datadog tracer versions. See each setup page for details.
+Data Streams Monitoring requires minimum Datadog SDK versions. See each setup page for details.
 
 #### Support for OpenTelemetry
 Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM to work with OpenTelemetry, no additional setup is required to use Data Streams Monitoring. See [OpenTelemetry Compatibility][11].
@@ -105,9 +98,9 @@ You can also graph and visualize these metrics on any dashboard or notebook:
 
 ### Monitor end-to-end latency of any pathway
 
-Depending on how events traverse through your system, different paths can lead to increased latency. With the [**Measure** tab][7], you can select a start service and end service for end-to-end latency information to identify bottlenecks and optimize performance. Easily create a monitor for that pathway, or export to a dashboard.
+Depending on how events traverse through your system, different paths can lead to increased latency. With the [{{< ui >}}Measure{{< /ui >}} tab][7], you can select a start service and end service for end-to-end latency information to identify bottlenecks and optimize performance. Easily create a monitor for that pathway, or export to a dashboard.
 
-Alternatively, click a service to open a detailed side panel and view the **Pathways** tab for latency between the service and upstream services.
+Alternatively, click a service to open a detailed side panel and view the {{< ui >}}Pathways{{< /ui >}} tab for latency between the service and upstream services.
 
 ### Alert on slowdowns in event-driven applications
 
@@ -121,13 +114,13 @@ Through Data Stream Monitoring's out-of-the-box monitor templates, you can setup
 
 High lag on a consuming service, increased resource use on a Kafka broker, and increased RabbitMQ or Amazon SQS queue size are frequently explained by changes in the way adjacent services are producing to or consuming from these entities.
 
-Click on the **Throughput** tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Software Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
+Click on the {{< ui >}}Throughput{{< /ui >}} tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Software Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
 
 By filtering to a single Kafka, RabbitMQ, or Amazon SQS cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
 
 ### Quickly pivot to identify root causes in infrastructure, logs, or traces
 
-Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click the **Infra**, **Logs** or **Traces** tabs to further troubleshoot why pathway latency or consumer lag has increased.
+Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click the {{< ui >}}Infra{{< /ui >}}, {{< ui >}}Logs{{< /ui >}} or {{< ui >}}Traces{{< /ui >}} tabs to further troubleshoot why pathway latency or consumer lag has increased.
 
 ### Monitor connector throughput and status
 {{< img src="data_streams/connectors_topology.png" alt="A DSM topology map, showing a connector called 'analytics-sink'. The visualization indicates that the connector has a status of FAILED." style="width:100%;" >}}

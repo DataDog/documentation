@@ -31,6 +31,8 @@ This page describes how to set up and configure [Application Performance Monitor
 
 You can send traces over Unix Domain Socket (UDS), TCP (`IP:Port`), or Kubernetes service. Datadog recommends that you use UDS, but it is possible to use all three at the same time, if necessary.
 
+**Note**: For automatic instrumentation without manual configuration, see [Single Step Instrumentation for Kubernetes][13].
+
 ## Setup
 1. If you haven't already, [install the Datadog Agent][1] in your Kubernetes environment.
 2. [Configure the Datadog Agent](#configure-the-datadog-agent-to-collect-traces) to collect traces.
@@ -138,8 +140,8 @@ kind: Deployment
           name: apmsocketpath
 ```
 
-### Configure your application tracers to emit traces:
-After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer sends the traces to the appropriate `DD_TRACE_AGENT_URL` endpoint.
+### Configure your application SDKs to emit traces:
+After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog SDK into your applications to emit the traces. Once this is done, the SDK sends the traces to the appropriate `DD_TRACE_AGENT_URL` endpoint.
 
 {{% /tab %}}
 
@@ -163,8 +165,8 @@ kind: Deployment
 ```
 **Note:** This configuration requires the Agent to be configured to accept traces over TCP
 
-### Configure your application tracers to emit traces:
-After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the appropriate `DD_AGENT_HOST` endpoint.
+### Configure your application SDKs to emit traces:
+After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog SDK into your applications to emit the traces. Once this is done, the SDK automatically sends the traces to the appropriate `DD_AGENT_HOST` endpoint.
 
 [1]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}
@@ -323,3 +325,4 @@ List of environment variables available for configuring APM:
 [10]: /tracing
 [11]: /tracing/guide/ignoring_apm_resources/?tab=kubernetes
 [12]: /agent/configuration/dual-shipping/
+[13]: /tracing/trace_collection/single-step-apm/kubernetes/

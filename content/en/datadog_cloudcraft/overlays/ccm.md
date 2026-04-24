@@ -18,7 +18,9 @@ further_reading:
 
 ## Overview
 
-The Cloud Cost overlay helps you visualize resource-level costs and identify savings opportunities within your AWS architecture diagrams. This overlay provides two views: **[Cost](#cost-view)** and **[Recommendations](#recommendations-view)**.
+The Cloud Cost overlay helps you visualize resource-level costs and identify savings opportunities within your cloud architecture diagrams. This overlay provides two views: [{{< ui >}}Cost{{< /ui >}}](#cost-view) and [{{< ui >}}Recommendations{{< /ui >}}](#recommendations-view).
+
+**Note**: The Cost view is not available for GCP accounts. The Recommendations view is supported for GCP.
 
 ## Cost view
 
@@ -36,11 +38,11 @@ Click a resource to open the side panel, which displays:
 
 - Cost breakdown for the last 30 days
 - Tag information associated with the resource
-- **Top Cost Changes** section (when applicable) highlighting significant cost fluctuations
+- {{< ui >}}Top Cost Changes{{< /ui >}} section (when applicable) highlighting significant cost fluctuations
 
 **Note**: The time range defaults to the last 30 days and is not configurable.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_cost_view.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Cost view with resource-level costs." style="width:100%;" >}} 
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_cost_view_2.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Cost view with resource-level costs." style="width:100%;" >}} 
 
 ## Recommendations view
 
@@ -49,7 +51,7 @@ The Recommendations view shows savings opportunities directly on resources with 
 Use the filter at the bottom of the screen to narrow recommendations by:
 
 - Potential monthly savings range
-- Recommendation type: **Terminate**, **Migrate**, **Downsize**, or **Purchase**
+- Recommendation type: {{< ui >}}Terminate{{< /ui >}}, {{< ui >}}Migrate{{< /ui >}}, {{< ui >}}Downsize{{< /ui >}}, or {{< ui >}}Purchase{{< /ui >}}
 
 ### Resource details
 
@@ -62,7 +64,7 @@ Clicking a resource opens a detailed side panel with:
 
 This enables faster, in-context cost optimization without switching views.
 
-{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_overlay_5.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Recommendations view with savings opportunities highlighted." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/overlays/cloudcraft_ccm_overlay_6.png" alt="Cloud Cost Management overlay in Cloudcraft showing the Recommendations view with savings opportunities highlighted." style="width:100%;" >}}
 
 ## Further reading
 

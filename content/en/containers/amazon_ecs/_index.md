@@ -124,9 +124,9 @@ aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-
 {{% tab "Web UI" %}}
 After you have your task definition file, use the AWS Console to register the file.
 1. Log in to your AWS Console and navigate to the Elastic Container Service section.
-2. Select **Task Definitions** in the navigation pane. On the **Create new task definition** menu, select **Create new task definition with JSON**.
+2. Select {{< ui >}}Task Definitions{{< /ui >}} in the navigation pane. On the {{< ui >}}Create new task definition{{< /ui >}} menu, select {{< ui >}}Create new task definition with JSON{{< /ui >}}.
 3. In the JSON editor box, paste the contents of your task definition file.
-4. Select **Create**.
+4. Select {{< ui >}}Create{{< /ui >}}.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -138,11 +138,11 @@ To have one Datadog Agent container running on each EC2 instance, run the Datado
 
 #### Schedule a daemon service in AWS using Datadog's ECS task
 
-1. Log in to the AWS Console and navigate to the ECS section. On the **Clusters** page, choose the cluster you run the Agent on.
-2. On your cluster's **Services** tab, select **Create**.
-3. Under **Deployment configuration**, for **Service type**, select **Daemon**.
+1. Log in to the AWS Console and navigate to the ECS section. On the {{< ui >}}Clusters{{< /ui >}} page, choose the cluster you run the Agent on.
+2. On your cluster's {{< ui >}}Services{{< /ui >}} tab, select {{< ui >}}Create{{< /ui >}}.
+3. Under {{< ui >}}Deployment configuration{{< /ui >}}, for {{< ui >}}Service type{{< /ui >}}, select {{< ui >}}Daemon{{< /ui >}}.
 3. You do not need to configure load balancing or autoscaling.
-4. Click **Next Step**, and then **Create Service**.
+4. Click {{< ui >}}Next Step{{< /ui >}}, and then {{< ui >}}Create Service{{< /ui >}}.
 
 ### Set up additional Agent features
 
@@ -151,7 +151,7 @@ The task definition files provided in the previous section are minimal. These fi
 For additional features:
 
 #### APM
-Consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm.json][23].
+Consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm-uds.json][23].
 
 #### Log Management
 Consult the [Log collection documentation][7] and the sample [datadog-agent-ecs-logs.json][24]
@@ -348,7 +348,7 @@ Need help? Contact [Datadog support][11].
 [5]: https://docs.datadoghq.com/agent/autodiscovery/
 [6]: /containers/amazon_ecs/apm/
 [7]: /containers/amazon_ecs/logs/
-[8]: /developers/dogstatsd/?tab=containeragent
+[8]: /extend/dogstatsd/?tab=containeragent
 [9]: https://aws.amazon.com/cli
 [10]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
 [11]: https://docs.datadoghq.com/help/

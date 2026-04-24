@@ -16,6 +16,9 @@ further_reading:
   text: "Cloud Cost Management"
 ---
 
+{{< site-region region="gov" >}}<div class="alert alert-danger"> Governance Console is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Governance Console provides centralized configuration and governance for multi-team Datadog accounts. It offers a unified view of usage, adoption, and configuration across your Datadog deployment. Governance Console enforces policies, applies default configurations, and transforms your organization's activity into insights for optimization. 
@@ -36,7 +39,7 @@ The [Summary page][1] displays an overview of your organization's usage of Datad
 
 ### Products
 
-The [Products page][2] displays the Datadog products used by your organization, with relevant metrics for each product. Select **View Details** to see more information about your organization's usage of a particular product, including limits and quotas.
+The [Products page][2] displays the Datadog products used by your organization, with relevant metrics for each product. Select {{< ui >}}View Details{{< /ui >}} to see more information about your organization's usage of a particular product, including limits and quotas.
 
 ### Controls
 

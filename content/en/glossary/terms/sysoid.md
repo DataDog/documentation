@@ -1,4 +1,5 @@
 ---
+id: sysoid
 title: system object identifier (sysOID)
 core_product:
   - network device monitoring

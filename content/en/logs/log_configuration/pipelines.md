@@ -4,12 +4,6 @@ description: "Parse, enrich, and manage your logs with Datadog pipelines and pro
 aliases:
   - /logs/processing/pipelines/
 further_reading:
-- link: "https://www.datadoghq.com/blog/cloud-siem-ocsf-processor"
-  tag: "Blog"
-  text: "Normalize any logs for Cloud SIEM with Datadog's OCSF processor"
-- link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
-  tag: Blog
-  text: How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Consult the full list of available Processors"
@@ -34,6 +28,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ocsf-common-data-model/"
   tag: "Blog"
   text: "Normalize your data with the OCSF Common Data Model in Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/cloud-siem-ocsf-processor"
+  tag: "Blog"
+  text: "Normalize any logs for Cloud SIEM with Datadog's OCSF processor"
+- link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
+  tag: Blog
+  text: "How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system"
 ---
 
 ## Overview
@@ -178,7 +178,7 @@ Specify alternate attributes to use as the source of a log's service by setting 
 
 #### Trace ID attribute
 
-By default, [Datadog tracers can automatically inject trace and span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
+By default, [Datadog SDKs can automatically inject trace and span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
@@ -196,7 +196,7 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
 #### Span ID attribute
 
-By default, Datadog tracers can [automatically inject span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `span_id`:
+By default, Datadog SDKs can [automatically inject span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `span_id`:
 
 * `dd.span_id`
 * `contextMap.dd.span_id`

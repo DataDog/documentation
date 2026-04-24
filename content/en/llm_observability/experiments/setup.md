@@ -30,6 +30,22 @@ If you have not already set up LLM Observability:
 
    <div class="alert alert-warning">You must supply both an <code>api_key</code> and <code>app_key</code>.</div>
 
+### APM Trace correlation
+
+To correlate your Experiment spans with [APM Traces][5], run LLM Observability through a Datadog Agent and keep `agentless_enabled` set to `False` (the default). The Agent forwards trace data to APM, which is what enables Experiment ↔ APM Trace correlation.
+
+   ```python
+   LLMObs.enable(
+       api_key="<YOUR_API_KEY>",
+       app_key="<YOUR_APP_KEY>",
+       site="datadoghq.com",
+       agentless_enabled=False,  # default — required for APM Trace correlation
+       project_name="<YOUR_PROJECT>",
+   )
+   ```
+
+If you are running without an Agent (for example, in a notebook or CI environment), you can set `agentless_enabled=True`, but corresponding APM spans are not generated for Experiment spans from agentless runs.
+
 ## Create a project
 _Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project.
 You can create a project manually in the Datadog console, API, or SDK by specifying a project name that does not already exist in `LLMObs.enable`.
@@ -104,8 +120,57 @@ To create an experiment:
    A task can take any non-null type as `input_data` (string, number, Boolean, object, array). The output that will be used in the Evaluators can be of any type.
    This example generates a string, but a dict can be generated as output to store any intermediary information and compare in the Evaluators.
 
+   Optionally, your task function can accept a third `metadata` parameter to receive the dataset record's metadata:
+   ```python
+   def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None, metadata: Optional[Dict[str, Any]] = None) -> str:
+       difficulty = metadata.get("difficulty", "unknown") if metadata else "unknown"
+       question = input_data["question"]
+       return "Beijing" if "China" in question else "Unknown"
+   ```
+
    You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][2] you use in production.
    If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
+
+   #### Using OpenTelemetry spans inside experiments
+
+   If your application uses [OpenTelemetry instrumentation][6], you can create OTel spans inside your experiment task. With `DD_TRACE_OTEL_ENABLED=1`, ddtrace acts as the OpenTelemetry TracerProvider, so OTel spans appear as children of the experiment span automatically.
+
+   ```python
+   import json
+   from opentelemetry import trace
+
+   tracer = trace.get_tracer(__name__)
+
+   def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
+       question = input_data["question"]
+
+       # OTel gen_ai span — automatically becomes a child of the experiment span
+       with tracer.start_as_current_span("my-llm-call") as span:
+           span.set_attribute("gen_ai.operation.name", "chat")
+           span.set_attribute("gen_ai.system", "openai")
+           span.set_attribute("gen_ai.request.model", "gpt-4o")
+           span.set_attribute("gen_ai.usage.input_tokens", 25)
+           span.set_attribute("gen_ai.usage.output_tokens", 8)
+           span.set_attribute(
+               "gen_ai.input.messages",
+               json.dumps([{"role": "user", "parts": [{"type": "text", "content": question}]}]),
+           )
+
+           result = call_my_llm(question)
+
+           span.set_attribute(
+               "gen_ai.output.messages",
+               json.dumps([{"role": "assistant", "parts": [{"type": "text", "content": result}]}]),
+           )
+
+       return result
+   ```
+
+   To enable this, set the `DD_TRACE_OTEL_ENABLED` environment variable:
+
+   ```shell
+   DD_TRACE_OTEL_ENABLED=1 python my_experiment.py
+   ```
 
 
 ### 3. Define evaluators
@@ -262,3 +327,5 @@ Note: LLM Experiments traces are retained for 90 days.
 [2]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
 [3]: /llm_observability/instrumentation/auto_instrumentation?tab=python
 [4]: /llm_observability/guide/evaluation_developer_guide
+[5]: /llm_observability/monitoring/llm_observability_and_apm/
+[6]: /llm_observability/instrumentation/otel_instrumentation

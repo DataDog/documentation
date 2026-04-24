@@ -19,7 +19,7 @@ Datadog supports OpenTelemetry-compatible instrumentations which provides observ
 
 ## Prerequisites
 
-1. **Enable OpenTelemetry support**: Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`. This step isn't required for the Datadog Go and Ruby APM SDKs.
+1. **Enable OpenTelemetry support**: Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true`. This step isn't required for the Datadog Go and Ruby SDKs.
 
 1. **Run the Datadog Agent**: Datadog SDKs provide an implementation of the OpenTelemetry API and submit spans to a Datadog Agent. Ensure the Datadog Agent is [running][24] to use OpenTelemetry instrumentation with Datadog SDKs.
 

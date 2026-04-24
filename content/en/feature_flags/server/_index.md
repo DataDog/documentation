@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog APM tracer and use Remote Configuration to receive flag updates in real time.
+Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog SDK and use Remote Configuration to receive flag updates in real time.
 
 This guide covers the common setup required for all server-side SDKs, including Agent configuration and application environment variables. Select your language or framework to view SDK-specific setup instructions:
 
@@ -56,14 +56,19 @@ DD_VERSION=<YOUR_APP_VERSION>
 DD_AGENT_HOST=localhost
 DD_TRACE_AGENT_PORT=8126
 
-# Enable Remote Configuration in the tracer
+# Enable Remote Configuration in the SDK
 DD_REMOTE_CONFIG_ENABLED=true
 
 # Enable the feature flagging provider (required for most SDKs)
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+
+# Enable flag evaluation metrics (required for flag evaluation tracking)
+DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
 
 <div class="alert alert-warning">The <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> environment variable is required to enable the feature flagging provider. Java also supports the system property <code>-Ddd.experimental.flagging.provider.enabled=true</code>, and Ruby and Node.js support code-based configuration as an alternative. See the SDK-specific documentation for details.</div>
+
+<div class="alert alert-info">Set <code>DD_METRICS_OTEL_ENABLED=true</code> to enable flag evaluation metrics. Without this, the SDK does not emit metrics for flag evaluations. When enabled, each evaluation records a <code>feature_flag.evaluations</code> counter metric tagged with the flag key, result variant, and evaluation reason.</div>
 
 ## Context attribute requirements
 

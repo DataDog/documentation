@@ -63,15 +63,26 @@ The DDOT Collector offers:
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see the following  <a href="#opentelemetry-collector-components">OpenTelemetry Collector components</a> section.
 </div>
 
+### OpenTelemetry Collector versions
+
+The following table shows which OpenTelemetry Collector versions are included in each DDOT release:
+
+| DDOT version | Beta version | Stable version |
+|---|---|---|
+| 7.78.0 | v0.147.0 | v1.53.0 |
+| 7.77.0 | v0.145.0 | v1.51.1-0.20260205185216-81bc641f26c0 |
+| 7.76.0 | v0.144.0 | v1.50.0 |
+| 7.75.0 | v0.142.0 | v1.48.0 |
+| 7.74.0 | v0.140.0 | v1.46.0 |
+| 7.73.0 | v0.138.0 | v1.44.0 |
+| 7.72.0 | v0.136.0 | v1.42.0 |
+| 7.71.0 | v0.133.0 | v1.39.0 |
+| 7.70.0 | v0.131.0 | v1.37.0 |
+| 7.69.0 | v0.129.0 | v1.35.0 |
+
 ### Support levels
 
-Datadog provides different levels of support depending on the type of component:
-
-- **Datadog Supported Components**: Datadog-owned components such as the [Datadog Connector][44], [Datadog Exporter][38], and [Infra Attribute Processor][50]. These components are maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements within OpenTelemetry community guidelines.
-
-- **Community Supported Components**: [OpenTelemetry components](#opentelemetry-collector-components) included with the Agent by default. Datadog ensures these components are secure, stable, and compatible with the Agent.
-
-- **Custom Components**: OpenTelemetry components that are not included with the Agent by default and are added through the [custom components process][2]. Datadog provides guidance on the integration process but does not provide direct support for these components' functionality. For issues with custom components, Datadog recommends engaging with the OpenTelemetry community or the component maintainers.
+For details on Datadog, community, and custom component support, see [Support levels][57] on the Compatibility page.
 
 ### OpenTelemetry Collector components
 
@@ -233,3 +244,4 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [54]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
 [56]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/routingconnector/README.md
+[57]: /opentelemetry/compatibility/#support-levels

@@ -37,7 +37,7 @@ The following table shows how OpsGenie resources map to Datadog On-Call resource
 | Rotation participants (user-type) | Schedule layer members | Only user-type participants are migrated. |
 | Time restrictions | Layer restrictions | Both daily and weekday-and-time-of-day restriction types are migrated. |
 | Repeat count | Policy retries | Repeat count maps directly to policy retries with no conversion. |
-| Close alert after all | Resolve page on policy end | Close alert after all maps directly to resolve page on policy end with no conversion. |
+| Close alert after all | Resolve Page on policy end | Close alert after all maps directly to resolve Page on policy end with no conversion. |
 
 ## Migration steps
 
@@ -49,7 +49,7 @@ The migration follows a six-step wizard-style process in Datadog. Complete all s
 1. If you have multiple regions configured, select your OpsGenie account's region from the dropdown. 
 1. Datadog loads all your OpsGenie teams in a searchable, paginated list. Select the team to migrate, then select **Next**. A preview pane shows the team's members and settings.
 
-{{< img src="service_management/oncall/import-opsgenie-team.png" alt="OpsGenie team list with a preview pane showing the selected team's members and settings" style="width:95%;" >}}
+{{< img src="service_management/oncall/import-opsgenie-team-2.png" alt="OpsGenie team list with a preview pane showing the selected team's members and settings" style="width:95%;" >}}
 
 **Note**: If a team was previously imported, Datadog indicates this.
 
@@ -61,7 +61,7 @@ The migration follows a six-step wizard-style process in Datadog. Complete all s
    - Map to a different Datadog team that you select.
    - Create a new team. Enter a team name to create a Datadog team based on the structure and members of the OpsGenie team.
 
-   {{< img src="service_management/oncall/map-opsgenie-team-to-datadog-team.png" alt="Mapping options for assigning an OpsGenie team to an existing or new Datadog team" style="width:95%;" >}}
+   {{< img src="service_management/oncall/map-opsgenie-team-to-datadog-team-2.png" alt="Mapping options for assigning an OpsGenie team to an existing or new Datadog team" style="width:95%;" >}}
 
 1. When the mapping is correct, select **Next**.
 
@@ -99,7 +99,7 @@ If the escalation policy references OpsGenie schedules, Datadog automatically mi
    - Retry behavior
    - Auto-resolution settings
 
-1. When all fields are complete and all users, teams, and schedules are mapped, select **Save**. Datadog creates the escalation policy under your On-Call team.
+1. When all fields are complete and all users, teams, and schedules are mapped, select **Save**. Datadog creates the escalation policy under your On-Call Team.
 
 ## Known limitations
 
@@ -111,7 +111,7 @@ If the escalation policy references OpsGenie schedules, Datadog automatically mi
 Before relying on migrated resources for production incidents:
 
 - **Verify schedule coverage**: Check that all migrated schedules have proper coverage with no gaps. Go to [On-Call Schedules][3] and review each schedule's timeline.
-- **Test escalation policies**: Use the [Manual Page][4] feature to send a test page and verify that escalation policies escalate correctly and notify the right people.
+- **Test escalation policies**: Use the [Manual Page][4] feature to send a test Page and verify that escalation policies escalate correctly and notify the right people.
 - **Check user mappings**: Verify that all users are correctly mapped and can receive notifications through their preferred channels (email, SMS, push, voice).
 - **Review team ownership**: Confirm that each escalation policy is owned by the correct Datadog team.
 - **Validate time restrictions**: If your schedules use time restrictions, verify that they apply correctly by checking on-call coverage during restricted and unrestricted periods.

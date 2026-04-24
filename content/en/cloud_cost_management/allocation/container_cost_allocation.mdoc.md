@@ -23,7 +23,7 @@ Clouds
 Resources
 : CCM allocates costs for Kubernetes clusters and includes cost analysis for many associated resources such as Kubernetes persistent volumes used by your pods.
 
-CCM displays costs for resources including CPU, memory, and more depending on the cloud and orchestrator you are using on the [**Containers** page][1].
+CCM displays costs for resources including CPU, memory, and more depending on the cloud and orchestrator you are using on the [{% ui %}Containers{% /ui %} page][1].
 
 {% img src="cloud_cost/container_cost_allocation/container_allocation.png" alt="Cloud cost allocation table showing requests and idle costs over the past month on the Containers page" style="width:100%;" /%}
 
@@ -44,8 +44,8 @@ The following table presents the list of collected features and the minimal Agen
 | Data Transfer Cost Allocation    | 7.58.0 | 7.58.0 |
 
 1. Configure the AWS Cloud Cost Management integration on the [Cloud Cost Setup page][2].
-1. For Kubernetes support, install the [**Datadog Agent**][3] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][4] in your Agent configuration.
-1. For Amazon ECS support, set up [**Datadog Container Monitoring**][5] in ECS tasks.
+1. For Kubernetes support, install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
+1. For Amazon ECS support, set up [Datadog Container Monitoring][5] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][6] for usage-based ECS allocation.
 1. To enable storage cost allocation, set up [EBS metric collection][7].
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][8].
@@ -68,7 +68,7 @@ The following table presents the list of collected features and the minimal Agen
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
 1. Configure the Azure Cost Management integration on the [Cloud Cost Setup page][2].
-1. Install the [**Datadog Agent**][3] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][4] in your Agent configuration.
+1. Install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][10].
 
 **Note**: GPU Container Cost Allocation only supports pod requests in the format `nvidia.com/gpu`.
@@ -88,7 +88,7 @@ The following table presents the list of collected features and the minimal Agen
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][2].
-1. Install the [**Datadog Agent**][3] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][4] in your Agent configuration.
+1. Install the [Datadog Agent][3] in a Kubernetes environment and ensure that you enable the [Orchestrator Explorer][4] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][10].
 
 **Note**: GPU Container Cost Allocation only supports pod requests in the format `nvidia.com/gpu`.
@@ -229,7 +229,7 @@ The cost of an EBS volume has three components: IOPS, throughput, and storage. E
 | Spend type | Description    |
 | -----------| -----------    |
 | Usage | Cost of provisioned IOPS, throughput, or storage used by workloads. Storage cost is based on the maximum amount of volume storage used that day, while IOPS and throughput costs are based on the average amount of volume storage used that day. |
-| Workload idle | Cost of provisioned IOPS, throughput, or storage that are reserved and allocated but not used by workloads. Storage cost is based on the maximum amount of volume storage used that day, while IOPS and throughput costs are based on the average amount of volume storage used that day. This is the difference between the total resources requested and the average usage. **Note:** This tag is only available if you have enabled `Resource Collection` in your [**AWS Integration**][21]. To prevent being charged for `Cloud Security Posture Management`, ensure that during the `Resource Collection` setup, the `Cloud Security Posture Management` box is unchecked. |
+| Workload idle | Cost of provisioned IOPS, throughput, or storage that are reserved and allocated but not used by workloads. Storage cost is based on the maximum amount of volume storage used that day, while IOPS and throughput costs are based on the average amount of volume storage used that day. This is the difference between the total resources requested and the average usage. **Note:** This tag is only available if you have enabled {% ui %}Resource Collection{% /ui %} in your [AWS Integration][21]. To prevent being charged for {% ui %}Cloud Security Posture Management{% /ui %}, ensure that during the {% ui %}Resource Collection{% /ui %} setup, the {% ui %}Cloud Security Posture Management{% /ui %} box is unchecked. |
 | Cluster idle | Cost of provisioned IOPS, throughput, or storage that are not reserved by any pods that day. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
 **Note**: Persistent volume allocation is only supported in Kubernetes clusters, and is only available for pods that are part of a Kubernetes StatefulSet.
@@ -279,6 +279,54 @@ Costs are allocated into the following spend types:
 | Not monitored | Cost of resources where the spend type is unknown. To resolve this, install the Datadog Agent on these clusters or nodes. |
 
 {% /if %}
+
+## Cluster idle allocation
+
+Cluster idle costs (identified by `allocated_spend_type:cluster_idle`) represent the cost of resources not reserved by any workload in a cluster. By default, cluster idle allocation is disabled and these costs are not redistributed. After you enable this feature, idle costs are redistributed to workloads proportionally based on their usage costs (`allocated_spend_type:usage`), using the following destination tags:
+
+- `kube_cluster_name`
+- `kube_namespace`
+- `kube_deployment`
+- `kube_replica_set`
+- `kube_stateful_set`
+- `kube_cronjob`
+- `kube_daemon_set`
+
+To configure cluster idle allocation, go to the [Cluster Idle Allocation settings][22] page and follow these steps:
+
+1. Click {% ui %}Enable cluster idle allocation{% /ui %}.
+1. Select a redistribution level:
+
+   {% ui %}Cluster{% /ui %}
+   : Redistributes idle costs at the cluster level.
+
+   {% ui %}Node{% /ui %}
+   : Redistributes idle costs at the node level. Datadog also allocates to the `kube_node_name` tag.
+
+   {% ui %}Nodepool{% /ui %}
+   : Redistributes idle costs at the nodepool level. Select a nodepool tag.
+
+1. Optionally, select up to two additional destination tags.
+1. Click {% ui %}Save{% /ui %}.
+
+To disable cluster idle allocation, return to the [Cluster Idle Allocation settings][22] page and click {% ui %}Disable{% /ui %}.
+
+**Note**: Any settings change, including disabling, re-enabling, or modifying the redistribution level, re-backfills the last 3 months of data with the latest settings.
+
+After redistribution, the following tags are available on your dataset:
+
+| Tag | Description |
+|-----|-------------|
+| `cluster_idle_redistribution_grain` | The redistribution grain used: `NODE`, `NODEPOOL`, or `CLUSTER`. |
+| `cluster_idle_source` | How the idle cost was redistributed. |
+
+Possible values for `cluster_idle_source`:
+
+| Value | Description |
+|-------|-------------|
+| `proportional_usage` | Redistributed to a specific workload based on its usage proportion. |
+| `aggregated_minor_usage` | Redistributed to aggregated minor workloads based on their combined usage proportion. |
+| `unmatched_usage` | Could not redistribute because no usage was found in the pool. |
 
 ## Understanding resources
 
@@ -396,7 +444,7 @@ In addition, some Kubernetes pod tags that are common between all pods on the sa
 
 {% /if %}
 
-{% if or(equals($platform, "google"), equals($platform, "azure")) %}
+{% if includes($platform, ["google", "azure"]) %}
 ### Kubernetes
 
 In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaustive list of out-of-the-box tags are applied to cost metrics:
@@ -457,3 +505,4 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 [19]: https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#limitations
 [20]: https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#enable_breakdown
 [21]: https://app.datadoghq.com/integrations/amazon-web-services
+[22]: https://app.datadoghq.com/cost/settings/cluster-idle-allocation

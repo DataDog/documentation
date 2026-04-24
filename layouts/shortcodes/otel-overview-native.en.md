@@ -18,4 +18,4 @@ The Datadog SDK provides a native implementation of the OpenTelemetry API. This 
 
 <div class="alert alert-info">You should not install the official OpenTelemetry SDK or any OTLP Exporter packages. The Datadog SDK provides this functionality. Installing both can lead to runtime conflicts and duplicate data.</div>
 
-[100]: /developers/dogstatsd/
+[100]: /extend/dogstatsd/

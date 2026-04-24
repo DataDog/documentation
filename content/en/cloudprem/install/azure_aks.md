@@ -233,7 +233,7 @@ Optionally, you can add a DNS entry pointing to the IP of the public load balanc
    ```
 
 1. Store the PostgreSQL database connection string as a Kubernetes secret:
-   To retrieve your PostgreSQL connection details, go the Azure Portal, navigate to **All resources**, then click on your _Azure Database for PostgreSQL flexible server_ instance. Finally, in the **Getting started** tab, click on the _View connection strings_ link in the **Connect card**.
+   To retrieve your PostgreSQL connection details, go the Azure Portal, navigate to {{< ui >}}All resources{{< /ui >}}, then click on your _Azure Database for PostgreSQL flexible server_ instance. Finally, in the {{< ui >}}Getting started{{< /ui >}} tab, click on the {{< ui >}}View connection strings{{< /ui >}} link in the {{< ui >}}Connect{{< /ui >}} card.
 
    ```shell
    kubectl create secret generic cloudprem-metastore-uri \
@@ -338,19 +338,15 @@ metastore:
 # and transforms it into searchable files called "splits" stored in S3.
 #
 # The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput.
-# Resource requests and limits should be tuned based on your indexing workload.
-#
-# The default values are suitable for moderate indexing loads of up to 20 MB/s per indexer pod.
+# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
+# See the sizing guide for available tiers and their configurations.
 indexer:
   replicaCount: 2
-
-  resources:
-    requests:
-      cpu: "4"
-      memory: "8Gi"
-    limits:
-      cpu: "4"
-      memory: "8Gi"
+  podSize: xlarge
+  persistentVolume:
+    enabled: true
+    storage: 250Gi
+    storageClass: managed-csi
 
    # Searcher configuration
    # The searcher is responsible for executing search queries against the indexed data stored in S3.
@@ -367,14 +363,7 @@ indexer:
    # Memory is particularly important for searchers as they cache frequently accessed index data in memory.
    searcher:
      replicaCount: 2
-
-     resources:
-       requests:
-         cpu: "4"
-         memory: "16Gi"
-       limits:
-         cpu: "4"
-         memory: "16Gi"
+     podSize: xlarge
 {{< /code-block >}}
 
 1. Install or upgrade the Helm chart

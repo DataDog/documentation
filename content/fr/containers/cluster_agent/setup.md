@@ -25,7 +25,7 @@ further_reading:
 title: Configurer l'Agent de cluster Datadog
 ---
 
-Si vous déployez l'Agent Datadog à l'aide du chart Helm v2.7.0+ ou de l'Operator Datadog v0.7.0+, l'Agent de cluster est désactivé par défaut.
+Si vous déployez l'Agent Datadog à l'aide du chart Helm v2.7.0+ ou de l'Operator Datadog v0.7.0+, l'Agent de cluster est activé par défaut.
 
 {{< tabs >}}
 {{% tab "Operator Datadog" %}}

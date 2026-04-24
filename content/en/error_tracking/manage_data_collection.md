@@ -29,46 +29,52 @@ Each rule consists of:
 - A scope: an inclusion filter, which contains a search query, such as `service:my-web-store`.
 - Optionally, one or more nested exclusion filters to further refine the rule and ignore some of the matching events. For example, an exclusion filter might use the `env:staging` query to exclude staging errors.
 
-A given rule can be toggled on or off. An error event is included if it matches a query in one of the active inclusion filters _and_ it does not match any active nested exclusion queries.
+An event is included if it matches a rule's inclusion filter and does not match any of that rule's exclusion filters. Rules can be toggled on or off.
 
-Each error event is checked against the rules in order. The event is processed only by the first active rule it matches, and all subsequent rules are ignored. If the matched rule has an exclusion filter, the event is excluded; otherwise, the event is included.
+Events are checked against rules in order. Evaluation stops at the first matching active rule, and subsequent rules are ignored.
 
 **Note:** Error events that get accepted by a rule might still be excluded from Error Tracking if they lack the [required attributes][2].
 
-### Evaluation order
+### How rules are evaluated
 
-Rules are evaluated in order, with the evaluation stopping at the first matching rule. The priority of the rules and their nested filters depends on their order in the list.
+The order of your rules determines which rule an event matches. For example, with these two rules:
 
-{{% collapse-content title="Example" level="p" %}}
+| Rule | Inclusion filter | Exclusion filter |
+|------|-----------------|------------------|
+| 1 | `env:prod` | `service:internal-tools` |
+| 2 | `env:staging` | (none) |
+
+| Event | Outcome |
+|-------|---------|
+| `env:prod service:checkout` | Rule 1, no exclusion → **included** |
+| `env:prod service:internal-tools` | Rule 1, exclusion matches → **excluded** |
+| `env:staging service:payments` | Rule 2 → **included** |
+| `env:dev service:checkout` | No match → [default rule](#default-rules) applies |
+
+{{% collapse-content title="Example: multiple exclusion filters" level="p" %}}
 Given a list of rules:
 - Rule 1: `env:prod`
     - Exclusion filter 1-1: `service:api`
     - Exclusion filter 1-2: `status:warn`
 - Rule 2: `service:web`
-- Rule 3 (this rule is disabled): `team:security`
+- Rule 3 (disabled): `team:security`
 - Rule 4: `service:foo`
-
 
 {{< img src="error_tracking/error-tracking-filters-example.png" alt="Error Tracking Filters example of setup" style="width:75%;" >}}
 
 The processing flow is as follows:
 {{< img src="error_tracking/error-tracking-filters-diagram-brand-design.png" alt="Error Tracking Filters" style="width:90%;" >}}
 
-
-An event with `env:prod service:my-service status:warn` 
-- will match rule 1 and go to its exclusion filters 
-- will not match exclusion 1-1 so will go to exclusion 1-2
-- at exclusion 1-2, it will be a match, so the event will be discarded
-
-An event with `env:staging service:web` 
-- will not match rule 1, so will go to rule 2 
-- at rule 2, it will be a match, so the event will be kept
+| Event | Outcome |
+|-------|---------|
+| `env:prod service:my-service status:warn` | Rule 1, exclusion filter 1-2 matches → **excluded** |
+| `env:staging service:web` | Rule 2 → **included** |
 
 {{% /collapse-content %}}
 
 ### Default rules
 
-By default, Error Tracking has an `*` inclusion filter and no exclusion filters. This means all error with the [requirements][2] to be fingerprinted are ingested into Error Tracking.
+By default, Error Tracking includes an `*` inclusion filter with no exclusion filters. This catch-all means any event that does not match your other rules is still ingested. To restrict ingestion to specific sources, add exclusion filters to the default rule, or remove it and replace it with explicit inclusion rules.
 
 ### Add a rule
 
@@ -79,7 +85,7 @@ To add a rule (inclusion filter):
 4. Enter a search query in the **Define scope** field.
 5. Optionally, **Add Exclusion** filters and a description to the rule.
 6. Click **Save Changes**
-7. Optionally, reorder the rules to change their [evaluation order](#evaluation-order). Click and drag the six-dot icon on a given rule to move the rule up or down in the list.
+7. Optionally, reorder the rules to change their [evaluation order](#how-rules-are-evaluated). Click and drag the six-dot icon on a given rule to move the rule up or down in the list.
 
 {{< img src="error_tracking/reorder-filters.png" alt="On the right side of each rule is a six-dot icon, which you can drag vertically to reorder rules." style="width:80%;">}}
 

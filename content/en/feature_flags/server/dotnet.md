@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
@@ -21,8 +21,9 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 Before setting up the .NET Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
-- **Datadog .NET tracer** `dd-trace-dotnet` version 3.36.0 or later
-- **.NET runtime** version 6.0 or later
+- **Datadog .NET SDK** (`dd-trace-dotnet`):
+  - Version 3.36.0 or later for .NET 6+
+  - Version 3.38.0 or later for .NET Framework 4.6.2+
 
 Set the following environment variables:
 
@@ -37,10 +38,10 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 ## Installation
 
-Install the Datadog .NET tracer and OpenFeature SDK using NuGet:
+Install the Datadog [.NET SDK][3] and [OpenFeature SDK][4] using NuGet:
 
 {{< code-block lang="bash" >}}
-dotnet add package Datadog.Trace
+dotnet add package Datadog.FeatureFlags.OpenFeature
 dotnet add package OpenFeature
 {{< /code-block >}}
 
@@ -48,14 +49,14 @@ Or add them to your `.csproj` file:
 
 {{< code-block lang="xml" filename="MyProject.csproj" >}}
 <ItemGroup>
-  <PackageReference Include="Datadog.Trace" Version="3.36.0" />
-  <PackageReference Include="OpenFeature" Version="2.0.0" />
+  <PackageReference Include="Datadog.FeatureFlags.OpenFeature" />
+  <PackageReference Include="OpenFeature" />
 </ItemGroup>
 {{< /code-block >}}
 
 ## Initialize the SDK
 
-Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog tracer's Remote Configuration system to receive flag configurations.
+Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog SDK's Remote Configuration system to receive flag configurations.
 
 ### Blocking initialization
 
@@ -63,7 +64,7 @@ Use `SetProviderAsync` with `await` to block evaluation until the initial flag c
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
-using Datadog.Trace.FeatureFlags.OpenFeature;
+using Datadog.FeatureFlags.OpenFeature;
 
 // Create and register the Datadog provider
 var provider = new DatadogProvider();
@@ -81,7 +82,7 @@ Use `SetProvider` to register the provider without waiting. Flag evaluations ret
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
-using Datadog.Trace.FeatureFlags.OpenFeature;
+using Datadog.FeatureFlags.OpenFeature;
 
 // Create and register the Datadog provider
 var provider = new DatadogProvider();
@@ -286,7 +287,7 @@ Verify the following to ensure that Remote Configuration is working:
 - Datadog Agent is the [required version](#prerequisites)
 - Remote Configuration is enabled on the Agent
 - `DD_SERVICE` and `DD_ENV` environment variables are set
-- The tracer can communicate with the Agent
+- The SDK can communicate with the Agent
 
 ### Async evaluation errors
 
@@ -302,6 +303,8 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
+[3]: https://www.nuget.org/packages/Datadog.Trace
+[4]: https://www.nuget.org/packages/Datadog.FeatureFlags.OpenFeature
 
 ## Further reading
 

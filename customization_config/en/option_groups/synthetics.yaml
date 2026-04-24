@@ -1,0 +1,19 @@
+# Protocol options for the template variables API page
+synthetics_protocol_options:
+  - id: http
+    default: true
+  - id: dns
+  - id: ssl
+  - id: websocket
+  - id: udp
+  - id: tcp
+  - id: icmp
+  - id: grpc
+
+# Variable options used on the API template variables page
+synthetics_variables_options:
+  - id: test_results
+    default: true
+  - id: test_info
+  - id: step_details
+  - id: local_and_global

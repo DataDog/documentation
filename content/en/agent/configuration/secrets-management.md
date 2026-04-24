@@ -47,6 +47,7 @@ secret_backend_config:
   <KEY_1>: <VALUE_1>
 ```
 
+**Note**: If you are running Datadog in a containerized environment, the [Cluster Agent](/containers/cluster_agent/) requires Agent 7.77 or later to support native secrets fetching. For earlier versions, use [Option 2](#option-2-using-the-built-in-script-for-kubernetes-and-docker) or [Option 3](#option-3-creating-a-custom-executable) instead.
 
 More specific setup instructions depend on the backend type used. See the appropriate section below for further information:
 
@@ -203,6 +204,8 @@ clusterChecksRunner:
 
 ```
 
+**Alternatively**, with Helm chart v3.171.0+ and Agent v7.70+, you can use native `secretBackend.type` and `secretBackend.config` fields instead of environment variables. For example: `datadog.secretBackend.type: "aws.secrets"` and `datadog.secretBackend.config.aws_session.aws_region: "<AWS_REGION>"`.
+
 {{% /tab %}}
 
 {{% tab "Operator" %}}
@@ -314,6 +317,8 @@ spec:
 
 ```
 
+**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use native `secretBackend.type` and `secretBackend.config` fields instead of environment variables. For example: `spec.global.secretBackend.type: "aws.secrets"` and `spec.global.secretBackend.config` with `aws_session.aws_region: "<AWS_REGION>"`.
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -412,7 +417,7 @@ The GCP Secret Manager implementation uses [Application Default Credentials (ADC
 
 To interact with GCP Secret Manager, the service account used by the Datadog Agent (such as the VM's service account, a workload identity, or locally activated credentials) requires the `secretmanager.versions.access` permission.
 
-This can be granted with the predefined role **Secret Manager Secret Accessor** (`roles/secretmanager.secretAccessor`) or a custom role with equivalent [access][5002].
+This can be granted with the predefined role {{< ui >}}Secret Manager Secret Accessor{{< /ui >}} (`roles/secretmanager.secretAccessor`) or a custom role with equivalent [access][5002].
 
 On GCE or GKE runtimes, ADC is configured automatically through the instance or pod's attached service account. The attached service account needs to have the proper roles to access GCP Secret Manager. In addition, the GCE or GKE runtime requires the `cloud-platform` [OAuth access scope][5003].
 
@@ -672,7 +677,7 @@ datadog:
 
 **Note:** A placeholder `apiKey` is required for Helm chart validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. For more information, see the [RBAC setup](#rbac-setup) section.
 
-<div class="alert alert-info"> Helm does not have native <code>secretBackend.type</code> configuration. Use environment variables. </div>
+**Alternatively**, with Helm chart v3.171.0+ and Agent v7.70+, you can use the native `datadog.secretBackend.type` field instead of environment variables.
 
 {{% /tab %}}
 
@@ -701,7 +706,7 @@ spec:
 
 **Note:** A placeholder API key satisfies Operator validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. For more information, see the [RBAC setup](#rbac-setup) section.
 
-<div class="alert alert-info"> The Operator does not have native <code>secretBackend.type</code> configuration. Use environment variables in <code>override.nodeAgent.env</code>. </div>
+**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use the native `spec.global.secretBackend.type` field instead of environment variables.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -728,6 +733,9 @@ datadog:
   - name: DD_SECRET_BACKEND_CONFIG
     value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
 ```
+
+**Alternatively**, with Helm chart v3.171.0+, you can use: `datadog.secretBackend.type: "k8s.secrets"` and `datadog.secretBackend.config` with `token_path` and `ca_path` keys.
+
 {{% /tab %}}
 
 {{% tab "Operator" %}}
@@ -740,6 +748,9 @@ override:
     - name: DD_SECRET_BACKEND_CONFIG
       value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
 ```
+
+**Alternatively**, with Datadog Operator v1.25.0+, you can use: `spec.global.secretBackend.type: "k8s.secrets"` and `spec.global.secretBackend.config` with `token_path` and `ca_path` keys.
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -765,6 +776,9 @@ datadog:
   - name: DD_SECRET_BACKEND_CONFIG
     value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
 ```
+
+**Alternatively**, with Helm chart v3.171.0+, you can use: `datadog.secretBackend.type: "k8s.secrets"` and `datadog.secretBackend.config` with the `api_server` key.
+
 {{% /tab %}}
 
 {{% tab "Operator" %}}
@@ -777,6 +791,9 @@ override:
     - name: DD_SECRET_BACKEND_CONFIG
       value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
 ```
+
+**Alternatively**, with Datadog Operator v1.25.0+, you can use: `spec.global.secretBackend.type: "k8s.secrets"` and `spec.global.secretBackend.config` with the `api_server` key.
+
 {{% /tab %}}
 {{< /tabs >}}
 
