@@ -21,15 +21,15 @@ Infrastructure modes determine which infrastructure monitoring capabilities the 
 
 The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates the capability is available in that mode.
 
-| Capability | [Full](#full) (default) | [Basic](#basic) | [None](#none) | [End User Device](#end-user-device) |
-|------------|-------------------------|-----------------|---------------|--------------------------------------|
-| System resource metrics | {{< X >}} | {{< X >}} | | {{< X >}} |
-| Infrastructure integrations | {{< X >}} (all) | {{< X >}} ([limited set](#basic)) | | {{< X >}} |
+| Capability | [Full](#full) (default) | [Basic](#basic) | [End User Device](#end-user-device) | [None](#none) |
+|------------|-------------------------|-----------------|-------------------------------------|---------------|
+| System resource metrics | {{< X >}} | {{< X >}} | {{< X >}} | |
+| Infrastructure integrations | {{< X >}} (all) | {{< X >}} ([limited set](#basic)) | {{< X >}} | |
 | Container Monitoring | {{< X >}} | | | |
-| Live Processes | {{< X >}} | | | {{< X >}} |
+| Live Processes | {{< X >}} | | {{< X >}} | |
 | Custom checks and logs-only integrations | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Custom metrics | {{< X >}} | | {{< X >}} | {{< X >}} |
-| Visible in infrastructure dashboards | {{< X >}} | {{< X >}} | | {{< X >}} |
+| Custom metrics | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| Visible in infrastructure dashboards | {{< X >}} | {{< X >}} | | |
 
 ### Full
 
@@ -57,14 +57,6 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
   - [Custom checks][10] prefixed with `custom_`
   - Logs-only integrations (for example, [journald][11] or [Windows Event Log][12])
 
-### None
-
-`none`
-: **Minimum Agent version**: 7.77.0<br>
-**Recommended for**: Hosts configured only for [Log Management][13], [APM][14], or [Error Tracking][15]<br>
-: The Agent does not collect any infrastructure metrics or run infrastructure integrations. You can still use custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations such as [journald][11] or [Windows Event Log][12].
-: Hosts in `none` mode appear in [Fleet Automation][17] under the {{< ui >}}View Agents{{< /ui >}} tab because the Agent continues to send metadata to Datadog. However, these hosts do not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
-
 ### End User Device
 
 <div class="alert alert-info">End User Device mode is in Preview. For configuration steps and to request access, see <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring</a>.</div>
@@ -78,18 +70,54 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
   - Wi-Fi Monitoring
   - Windows Crash Detection
   - Network Path Monitoring
- 
+
 : For full descriptions, see [Key capabilities][20].
+
+### None
+
+`none`
+: **Minimum Agent version**: 7.77.0<br>
+**Recommended for**: Hosts configured only for [Log Management][13], [APM][14], or [Error Tracking][15]<br>
+: The Agent does not collect any infrastructure metrics or run infrastructure integrations. You can still use custom metrics, [custom checks][10] prefixed with `custom_`, and logs-only integrations such as [journald][11] or [Windows Event Log][12].
+: Hosts in `none` mode appear in [Fleet Automation][17] under the {{< ui >}}View Agents{{< /ui >}} tab because the Agent continues to send metadata to Datadog. However, these hosts do not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
 
 ## Configure Agent infrastructure mode
 
-To set the infrastructure mode for a host:
+### New hosts
 
-1. Open the [Agent configuration file][18] and add `infrastructure_mode` at the root level:
+To configure the infrastructure mode when installing the Agent for the first time, set the `DD_INFRASTRUCTURE_MODE=<MODE>` environment variable before the installation script is invoked:
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+In the following command, replace `<API_KEY>` with your organization's [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys), `<DD_SITE>` with **{{< region-param key="dd_site" >}}**, and `<MODE>` with `full`, `basic`, `end_user_device`, or `none`:
+
+```shell
+DD_API_KEY="<API_KEY>" \
+DD_SITE="<DD_SITE>" \
+DD_INFRASTRUCTURE_MODE="<MODE>" \
+bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+```
+{{% /tab %}}
+{{% tab "Windows" %}}
+In the following command, replace `<API_KEY>` with your organization's [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys), `<DD_SITE>` with **{{< region-param key="dd_site" >}}**, and `<MODE>` with `full`, `basic`, `end_user_device`, or `none`:
+```powershell
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<API_KEY>" SITE="<DD_SITE>" DD_INFRASTRUCTRURE_MODE="<MODE>"'
+if ($p.ExitCode -ne 0) {
+  Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
+}
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Existing hosts
+
+To set the infrastructure mode for an existing host:
+
+1. Open the [Agent configuration file][18] and add `infrastructure_mode` at the root level. Replace `<MODE>` with `full`, `basic`, `end_user_device`, or `none`.
 
     {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true"
       collapsible="true" >}}
-infrastructure_mode: <MODE>  # Replace <MODE> with the mode for the host: `full`, `basic`, `none`, or `end_user_device`.
+infrastructure_mode: <MODE>
     {{< /code-block >}}
 
 2. [Restart the Datadog Agent][19].
