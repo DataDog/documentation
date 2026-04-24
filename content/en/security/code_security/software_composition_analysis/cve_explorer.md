@@ -73,8 +73,7 @@ External references associated with the CVE, including NVD advisories, GitHub Se
 
 ## Further reading
 
-- [Software Composition Analysis][3]
-- [Library Inventory][4]
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/code-security/detection-coverage/advisories
