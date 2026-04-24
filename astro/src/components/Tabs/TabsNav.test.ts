@@ -10,17 +10,17 @@ afterEach(() => {
   document.body.innerHTML = '';
 });
 
-// TabsNav renders the nav + buttons; panels live in the Astro shell, so tests
-// render the nav into a stubbed .tabs root, then append panels as siblings so
-// the effect's `closest('.tabs')` lookup resolves on mount.
+// TabsNav renders the nav + buttons; panels live in the Astro shell. Tests
+// mirror production ordering: the .tabs root with panels exists before the
+// nav mounts, so `closest('.tabs')` and `getElementById` both resolve during
+// TabsNav's mount effect. Rendering happens into a dedicated child container
+// (not the .tabs root itself) so the panels aren't wiped.
 const mountNav = (groupId: string, labels: string[]) => {
   const root = document.createElement('div');
   root.className = 'tabs';
   document.body.appendChild(root);
 
   const panelIds = labels.map((_, i) => `${groupId}-panel-${i}`);
-  render(h(TabsNav, { labels, panelIds }), { container: root });
-
   panelIds.forEach((id, i) => {
     const panel = document.createElement('div');
     panel.id = id;
@@ -30,6 +30,10 @@ const mountNav = (groupId: string, labels: string[]) => {
     panel.textContent = `Panel ${i}`;
     root.appendChild(panel);
   });
+
+  const navContainer = document.createElement('div');
+  root.prepend(navContainer);
+  render(h(TabsNav, { labels, panelIds }), { container: navContainer });
 
   return { root, panelIds };
 };
