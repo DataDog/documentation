@@ -1036,56 +1036,6 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
-## Workflows
-
-Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use.
-
-### `list_datadog_workflows`
-*Toolset: **workflows***\
-*Permissions Required: `Workflows Read`*\
-Lists and searches [Workflow Automation][39] workflows. Supports filtering by name, tags, owner, handle, and trigger type (such as `monitor`, `schedule`, `api`, or `incident`). Results can be sorted by fields like `name` or `updatedAt`.
-
-- Show me all published workflows tagged with `team:platform`.
-- List workflows that have an agent trigger configured.
-- Find all workflows related to incident response owned by Alice Smith.
-
-### `get_datadog_workflow`
-*Toolset: **workflows***\
-*Permissions Required: `Workflows Read`*\
-Retrieves detailed information about a specific workflow, including its triggers, steps, connections, and input schema.
-
-- Get the full details for workflow `00000000-0000-0000-0000-000000000000`.
-- Show me the input parameters and steps for the deployment rollback workflow.
-- What triggers are configured for this workflow?
-
-### `execute_datadog_workflow`
-*Toolset: **workflows***\
-*Permissions Required: `Workflows Run`*\
-Executes a published workflow that has an agent trigger, with optional input parameters matching the workflow's input schema.
-
-- Run the incident escalation workflow for service `checkout-api` with severity `high`.
-- Execute the deployment rollback workflow for the payments service.
-- Trigger the On-Call notification workflow with the context from this investigation.
-
-**Note**: The workflow must be published and have an agent trigger configured. Use `update_datadog_workflow_with_agent_trigger` to add one if needed.
-
-### `get_datadog_workflow_instance`
-*Toolset: **workflows***\
-*Permissions Required: `Workflows Read`*\
-Retrieves the status and details of a workflow execution instance, including step results and outputs.
-
-- What's the status of the workflow execution I triggered?
-- Did the incident escalation workflow complete successfully?
-- Show me the detailed outputs from workflow instance `00000000-0000-0000-0000-000000000000`.
-
-### `update_datadog_workflow_with_agent_trigger`
-*Toolset: **workflows***\
-*Permissions Required: `Workflows Write`*\
-Adds an agent trigger to a workflow and publishes it, enabling the workflow to be executed by AI agents.
-
-- Add an agent trigger to the deployment rollback workflow so I can run it from here.
-- Configure the incident response workflow to be triggerable by an agent.
-
 ## Widgets
 
 Tools for [dashboard][46] and [notebook][55] widget visualization, validation, and type conversion.
@@ -1154,6 +1104,56 @@ Renders tabular data as an interactive visualization (sunburst, treemap, or top 
 
 - Visualize this grouped metric data as a sunburst chart.
 - Show this aggregated data as a treemap breakdown.
+
+## Workflows
+
+Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use.
+
+### `list_datadog_workflows`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Lists and searches [Workflow Automation][39] workflows. Supports filtering by name, tags, owner, handle, and trigger type (such as `monitor`, `schedule`, `api`, or `incident`). Results can be sorted by fields like `name` or `updatedAt`.
+
+- Show me all published workflows tagged with `team:platform`.
+- List workflows that have an agent trigger configured.
+- Find all workflows related to incident response owned by Alice Smith.
+
+### `get_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Retrieves detailed information about a specific workflow, including its triggers, steps, connections, and input schema.
+
+- Get the full details for workflow `00000000-0000-0000-0000-000000000000`.
+- Show me the input parameters and steps for the deployment rollback workflow.
+- What triggers are configured for this workflow?
+
+### `execute_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Run`*\
+Executes a published workflow that has an agent trigger, with optional input parameters matching the workflow's input schema.
+
+- Run the incident escalation workflow for service `checkout-api` with severity `high`.
+- Execute the deployment rollback workflow for the payments service.
+- Trigger the On-Call notification workflow with the context from this investigation.
+
+**Note**: The workflow must be published and have an agent trigger configured. Use `update_datadog_workflow_with_agent_trigger` to add one if needed.
+
+### `get_datadog_workflow_instance`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Retrieves the status and details of a workflow execution instance, including step results and outputs.
+
+- What's the status of the workflow execution I triggered?
+- Did the incident escalation workflow complete successfully?
+- Show me the detailed outputs from workflow instance `00000000-0000-0000-0000-000000000000`.
+
+### `update_datadog_workflow_with_agent_trigger`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
+Adds an agent trigger to a workflow and publishes it, enabling the workflow to be executed by AI agents.
+
+- Add an agent trigger to the deployment rollback workflow so I can run it from here.
+- Configure the incident response workflow to be triggerable by an agent.
 
 [1]: /bits_ai/mcp_server/setup#toolsets
 [15]: /api/latest/events/
