@@ -86,6 +86,74 @@ After SSI loads the Datadog SDK into your applications and enables distributed t
 
 To enable products, [set environment variables][3] in your application configuration.
 
+## Advanced options
+
+### Define instrumentation rules
+
+<div class="alert alert-info">Instrumentation rules (available for Agent v7.73+) apply only to host-wide instrumentation. They are not supported for IIS-only installation.</div>
+
+Instrumentation rules let you control which processes are automatically instrumented by SSI on Windows hosts.
+
+To configure instrumentation rules:
+
+1. In Datadog, go to **APM** > **Service Setup** > [**Manage Instrumentation Rules**][5].
+1. Click **Add or Edit Rules**.
+1. Define instrumentation rules:
+   1. Click **Add New Rule**, then choose **Allow Rule** or **Block Rule** to specify whether matching processes should be instrumented.
+   1. Name your rule.
+   1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
+
+     {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="The instrumentation rules UI, showing configuration options for defining a rule" style="width:100%;" >}}
+
+1. (Optional) Drag and drop rules to reorder them.
+
+   **Note**: Rules are evaluated in order. After a process matches a rule, subsequent rules are ignored.
+
+1. Set the default behavior (allow or block) for processes that do not match any rule.
+1. Click **Next** to preview your rules.
+1. Click **Deploy Rules**.
+
+If Remote Configuration is enabled, rules are deployed to every host and applied on those with SSI enabled within 50 seconds. Alternatively, click **Export** to export the configuration file and apply it manually to your hosts.
+
+#### Define rule conditions
+
+Each rule consists of one or more conditions. A condition includes the following elements:
+- **Attribute**: The process property that the rule evaluates.
+- **Operator**: The comparison logic (`equals`, `not equals`, `prefix`, or `contains`).
+- **Value**: The text or pattern to match, such as a process name or command-line flag.
+
+Supported attributes include:
+| Attribute | Description | Example |
+| --------- | ----------- | ------- |
+| Operating System | OS of the host. | `windows` |
+| Executable | Executable name of the process. | `w3wp.exe` |
+| Executable Full Path | Full path of the executable. | `C:\Windows\System32\inetsrv\w3wp.exe` |
+| Arguments | Command-line arguments used to start the process. | `--env=production` |
+| Working Directory | Working directory of the process. | `C:\inetpub\wwwroot` |
+| Language | Programming language detected for the process. | `dotnet` |
+| Entry Point File | The specific file used to launch the application. | `MyService.dll`, `app.py` |
+| IIS Application Pool | The IIS application pool hosting the worker process. Because all IIS workers share the `w3wp.exe` executable, this is the most reliable way to target a specific .NET app on IIS. | `DefaultAppPool`, `MyWebApp` |
+
+#### Example use cases
+
+Review the following examples demonstrating how to apply instrumentation rules:
+
+{{< collapse-content title="Example 1: Instrument all processes except specific ones" level="h5" >}}
+
+Instrument all processes by default. Add block rules to exclude services that would add noise without value, such as analytics cron jobs and Java batch processors.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Two block instrumentation rules targeting Working Directory and Entry Point File conditions, with a default of allow instrumentation" style="width:100%;" >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Example 2: Instrument only specific IIS applications" level="h5" >}}
+
+Block all instrumentation by default. Add allow rules to opt specific IIS applications into APM. Because all IIS workers share the <code>w3wp.exe</code> executable, use <strong>IIS Application Pool</strong> to identify target applications. This approach is useful for gradual rollouts.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-example-2.png" alt="Two allow instrumentation rules targeting specific IIS application pools by name, with a default of block instrumentation" style="width:100%;" >}}
+
+{{< /collapse-content >}}
+
 ## Remove Single Step APM instrumentation from your Agent
 
 To disable SSI for .NET on your host, run:
@@ -106,3 +174,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [2]: /integrations/windows-service/#tags
 [3]: /tracing/trace_collection/library_config/
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[5]: https://app.datadoghq.com/apm/service-setup/workload-selection

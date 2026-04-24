@@ -7,6 +7,9 @@ is_beta: false
 algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
 further_reading:
+- link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
+  tag: "Blog"
+  text: "Introducing Bits AI Dev Agent for Code Security"
 - link: https://www.datadoghq.com/blog/code-security-secret-scanning
   tag: Blog
   text: Detect and block exposed credentials with Datadog Secret Scanning

@@ -88,23 +88,40 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 {{< tabs >}}
 {{% tab "Matchers" %}}
 
+**Query-time and ingest-time matchers:**
+
+The following matchers are available for both query-time parsing (Log Explorer) and ingest-time parsing (Grok Parser):
+
+`word`
+: Matches a _word_, which starts with a word boundary; contains characters from a-z, A-Z, 0-9, including the `_` (underscore) character; and ends with a word boundary. Equivalent to `\b\w+\b` in regex.
+
+`notSpace`
+: Matches any string until the next space.
+
+`number`
+: Matches a decimal floating point number and parses it as a double precision number.
+
+`integer`
+: Matches an integer number and parses it as an integer number.
+
+`data`
+: Matches any string including spaces and newlines. Equivalent to `.*` in regex. Use when none of above patterns is appropriate.
+
+**Ingest-time only matchers:**
+
+The following matchers are only available for ingest-time parsing with the Grok Parser processor and cannot be used in the Log Explorer:
+
 `date("pattern"[, "timezoneId"[, "localeId"]])`
 : Matches a date with the specified pattern and parses to produce a Unix timestamp. [See the date Matcher examples](#parsing-dates).
 
 `regex("pattern")`
 : Matches a regex. [Check the regex Matcher examples](#regex).
 
-`notSpace`
-: Matches any string until the next space.
-
 `boolean("truePattern", "falsePattern")`
 : Matches and parses a Boolean, optionally defining the true and false patterns (defaults to `true` and `false`, ignoring case).
 
 `numberStr`
 : Matches a decimal floating point number and parses it as a string.
-
-`number`
-: Matches a decimal floating point number and parses it as a double precision number.
 
 `numberExtStr`
 : Matches a floating point number (with scientific notation support) and parses it as a string.
@@ -115,17 +132,11 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 `integerStr`
 : Matches an integer number and parses it as a string.
 
-`integer`
-: Matches an integer number and parses it as an integer number.
-
 `integerExtStr`
 : Matches an integer number (with scientific notation support) and parses it as a string.
 
 `integerExt`
 : Matches an integer number (with scientific notation support) and parses it as an integer number.
-
-`word`
-: Matches a _word_, which starts with a word boundary; contains characters from a-z, A-Z, 0-9, including the `_` (underscore) character; and ends with a word boundary. Equivalent to `\b\w+\b` in regex.
 
 `doubleQuotedString`
 : Matches a double-quoted string.
@@ -160,17 +171,22 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 `port`
 : Matches a port number.
 
-`data`
-: Matches any string including spaces and newlines. Equivalent to `.*` in regex. Use when none of above patterns is appropriate.
-
 {{% /tab %}}
 {{% tab "Filters" %}}
+
+**Query-time and ingest-time filters:**
+
+The following filters are available for both query-time parsing (Log Explorer) and ingest-time parsing (Grok Parser):
 
 `number`
 : Parses a match as double precision number.
 
 `integer`
 : Parses a match as an integer number.
+
+**Ingest-time only filters:**
+
+The following filters are only available for ingest-time parsing with the Grok Parser processor and cannot be used in the Log Explorer:
 
 `boolean`
 : Parses 'true' and 'false' strings as booleans ignoring case.

@@ -11,9 +11,9 @@ Use the SNS Subscription component to visualize SNS subscriptions from your Amaz
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
-- **Notifications/mo (K)**: Enter the number of notifications per month, in thousands.
-- **Notification type**: Select the type of notification for the SNS component.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
+- {{< ui >}}Notifications/mo (K){{< /ui >}}: Enter the number of notifications per month, in thousands.
+- {{< ui >}}Notification type{{< /ui >}}: Select the type of notification for the SNS component.
 
 ## API
 

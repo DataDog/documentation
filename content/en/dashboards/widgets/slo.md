@@ -41,27 +41,27 @@ Use the SLO widget to visualize a [Service Level Objective (SLO)][1] on a dashbo
 #### Set the time windows
 
 Select up to three different time windows from the following:
-- **Rolling time windows**: 7, 30, or 90 days
-- **Calendar time windows**: week to date, previous week, month to date, or previous month
-- **Global time**: This option allows you to display your SLO's status and error budget over arbitrary time periods. You can view up to 3 months of historical info for monitor-based SLOs. For Time Slice and metric-based SLOs, the supported historical view matches your account's metrics retention duration (by default, this is 15 months).
+- {{< ui >}}Rolling time windows{{< /ui >}}: 7, 30, or 90 days
+- {{< ui >}}Calendar time windows{{< /ui >}}: week to date, previous week, month to date, or previous month
+- {{< ui >}}Global time{{< /ui >}}: This option allows you to display your SLO's status and error budget over arbitrary time periods. You can view up to 3 months of historical info for monitor-based SLOs. For Time Slice and metric-based SLOs, the supported historical view matches your account's metrics retention duration (by default, this is 15 months).
 
 #### Display preferences
 
-Select whether to show or hide remaining error budget by toggling the `Show error budget` option. 
+Select whether to show or hide remaining error budget by toggling the {{< ui >}}Show error budget{{< /ui >}} option.
 
-If you are visualizing an SLO with multiple groups or a monitor-based SLO with multiple monitors, select your `View mode`:
+If you are visualizing an SLO with multiple groups or a monitor-based SLO with multiple monitors, select your {{< ui >}}View mode{{< /ui >}}:
 
 - For SLOs with groups (metric-based or Time Slice SLO with groups, or monitor-based SLOs with a single monitor broken into groups), there are the following three view modes:
-  - `Overall`: displays the overall SLO status percentages and targets
-  - `Groups`: displays a table of status percentages for each group
-  - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each group
+  - {{< ui >}}Overall{{< /ui >}}: displays the overall SLO status percentages and targets
+  - {{< ui >}}Groups{{< /ui >}}: displays a table of status percentages for each group
+  - {{< ui >}}Both{{< /ui >}}: displays both the overall SLO status percentages and targets and table of status percentages for each group
 
 - For monitor-based SLOs configured with multiple monitors, there are the following three view modes:
-  - `Overall`: displays the overall SLO status percentages and targets
-  - `Monitors`: displays a table of status percentages for each monitor
-  - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
+  - {{< ui >}}Overall{{< /ui >}}: displays the overall SLO status percentages and targets
+  - {{< ui >}}Monitors{{< /ui >}}: displays a table of status percentages for each monitor
+  - {{< ui >}}Both{{< /ui >}}: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
 
-When you set the `View mode` to `Groups`, `Monitors`, or `Both`:
+When you set the {{< ui >}}View mode{{< /ui >}} to {{< ui >}}Groups{{< /ui >}}, {{< ui >}}Monitors{{< /ui >}}, or {{< ui >}}Both{{< /ui >}}:
 - The groups are sorted by ascending status in the smallest time window by default. After adding the widget to a dashboard, you have the ability to sort by status for any of the configured time windows through the widget UI.
 - The widget displays the following:
   + For metric-based and Time Slice SLOs, *all* underlying groups of the SLO are displayed. 
