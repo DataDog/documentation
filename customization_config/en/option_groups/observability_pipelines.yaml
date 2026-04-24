@@ -4,6 +4,7 @@ op_platform_options:
   - id: kubernetes
   - id: linux
   - id: cloudformation
+  - id: ecs_fargate
 
 op_pipelines_setup_method_options:
   - id: ui

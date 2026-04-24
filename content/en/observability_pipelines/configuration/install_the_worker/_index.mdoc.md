@@ -45,7 +45,11 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 - Rancher
 {% /if %}
 
-See [Set Up the Worker in ECS Fargate][ecs-1] for instructions on how to configure the Worker in ECS Fargate.
+{% if equals($platform, "ecs_fargate") %}
+
+This document goes over one of the ways you can set up the Observability Pipelines Worker in ECS Fargate.
+
+{% /if %}
 
 **Note**: If you are using a proxy, see the `proxy` option in [Bootstrap options][1].
 
@@ -269,14 +273,10 @@ See [Update Existing Pipelines][linux-4] if you want to make changes to your pip
 
 {% if equals($interface, "ui") %}
 
-{% img src="observability_pipelines/install_page_secrets.png"
-alt="The install page in the UI with a dropdown menu to choose your installation platform and fields to enter environment variables"
-style="width:100%;" /%}
-
-After you set up your source, destinations, and processors on the Build page of the pipeline UI, follow the steps on the Install page to install the Worker.
-
 <!-- UI - Docker -->
 {% if equals($platform, "docker") %}
+
+{% partial file="/observability_pipelines/install-worker-ui-intro.mdoc.md" /%}
 
 1. Select **Docker** as your installation platform.
 
@@ -325,6 +325,8 @@ See [Update Existing Pipelines][docker-ui-2] if you want to make changes to your
 <!-- UI - Kubernetes -->
 
 {% if equals($platform, "kubernetes") %}
+
+{% partial file="/observability_pipelines/install-worker-ui-intro.mdoc.md" /%}
 
 1. Select **Kubernetes** as your installation platform.
 
@@ -393,6 +395,8 @@ See [Update Existing Pipelines][docker-ui-2] if you want to make changes to your
 <!-- UI - Linux -->
 {% if equals($platform, "linux") %}
 
+{% partial file="/observability_pipelines/install-worker-ui-intro.mdoc.md" /%}
+
 The steps below use the one-line installation script to install the Worker. 
 
 1. Select **Linux** as your installation platform.
@@ -441,6 +445,8 @@ See [Update Existing Pipelines][linux-ui-1] if you want to make changes to your 
 <!-- UI - Cloudformation -->
 {% if equals($platform, "cloudformation") %}
 
+{% partial file="/observability_pipelines/install-worker-ui-intro.mdoc.md" /%}
+
 1. Select **Cloudformation** as your installation platform.
 
 <!-- UI - Cloudformation - Secrets Management -->
@@ -481,6 +487,112 @@ See [Update Existing Pipelines][linux-ui-1] if you want to make changes to your 
 See [Update Existing Pipelines][cf-ui-1] if you want to make changes to your pipeline's configuration
 
 {% /if %}
+{% /if %}
+
+<!-- UI, API, Terraform - ECS Fargate -->
+{% if equals($platform, "ecs_fargate") %}
+
+### Configuration setup
+
+The setup configuration for this example consists of a Fargate task, Fargate service, and a load balancer.
+
+{% img src="observability_pipelines/worker_fargate_architecture.png" alt="An architecture diagram with logs going to an application load balancer, a OP Worker task, and the Fargate service" style="width:100%;" /%}
+
+### Configure the task definition
+
+[Create a task definition][ecs_fargate-1]. The task definition describes which containers to run, the configuration (such as the environment variables and ports), and the CPU and memory resources allocated for the task.
+
+The tasks should be deployed as a replica with auto scaling enabled, where the minimum number of containers should be based on your log volume and the maximum number of containers should be able to absorb any spikes or growth in log volume. See [Best Practices for Scaling Observability Pipelines][ecs_fargate-5] to help determine how much CPU and memory resources to allocate.
+
+**Notes**:
+- The guidance for CPU and memory allocation is not for a single instance of the task, but for the total number of tasks. For example, if you want to send 3 TB of logs to the Worker, you could either deploy three replicas with one vCPU each or deploy one replica with three vCPUs.
+- Datadog recommends enabling load balancers for the pool of replica tasks.
+
+Set the `DD_OP_SOURCE_*` environment variable according to the configuration of the pipeline and port mappings. `DD_OP_API_ENABLED` and `DD_OP_API_ADDRESS` allow the load balancer to do health checks on the Observability Pipelines Worker.
+
+An example task definition:
+
+```json
+{
+  "family": "my-opw",
+  "containerDefinitions": [
+    {
+      "name": "my-opw",
+      "image": "datadog/observability-pipelines-worker",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "name": "my-opw-80-tcp",
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "command": [
+        "run"
+      ],
+      "environment": [
+        {
+          "name": "DD_OP_API_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_API_KEY",
+          "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        {
+          "name": "DD_SITE",
+          "value": "datadoghq.com"
+        },
+        {
+          "name": "DD_OP_API_ADDRESS",
+          "value": "0.0.0.0:8181"
+        },
+        {
+          "name": "DD_OP_SOURCE_HTTP_SERVER_ADDRESS",
+          "value": "0.0.0.0:80"
+        },
+        {
+          "name": "DD_OP_PIPELINE_ID",
+          "value": "xxxxxxx-xxxx-xxxx-xxxx-xxxx"
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "systemControls": []
+    }
+  ],
+  "tags": [
+    {
+      "key": "PrincipalId",
+      "value": "AROAYYB64AB3JW3TEST"
+    },
+    {
+      "key": "User",
+      "value": "username@test.com"
+    }
+  ],
+  "executionRoleArn": "arn:aws:iam::60142xxxxxx:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "xxx",
+  "memory": "xxx"
+}
+```
+
+### Configure the ECS service
+
+[Create an ECS service][ecs_fargate-2]. The service configuration sets the number of Worker replicas to run and the scaling policy. In this example, the scaling policy is set to target an average CPU utilization of 70% with a minimum of two replicas and a maximum of five replicas.
+
+### Set up load balancing
+
+Depending on your use case, configure either an [Application Load Balancer][ecs_fargate-3] or a [Network Load Balancer][ecs_fargate-4] to target the group of Fargate tasks you defined earlier. Configure the health check against the Observability Pipelines' API port that was set in the task definition.
+
 {% /if %}
 
 <!-- UI, API, Terraform - Kubernetes -->
@@ -734,11 +846,7 @@ If you are using a firewall, these domains must be added to the allowlist:
 {% /tab %}
 {% /tabs %}
 
-Replace `<DD_SITE>` with `{{< region-param key="dd_site" >}}`.
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+Replace `<DD_SITE>` with {% region-param key="dd_site" code=true link=false text="Datadog site" /%}.
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
 [2]: /observability_pipelines/sources/
@@ -792,4 +900,8 @@ Replace `<DD_SITE>` with `{{< region-param key="dd_site" >}}`.
 
 [101]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
 
-[ecs-1]: /observability_pipelines/guide/set_up_the_worker_in_ecs_fargate/
+[ecs_fargate-1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-task-definition.html
+[ecs_fargate-2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-service-console-v2.html
+[ecs_fargate-3]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-application-load-balancer.html
+[ecs_fargate-4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html
+[ecs_fargate-5]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/

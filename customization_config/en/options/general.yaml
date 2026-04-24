@@ -516,3 +516,6 @@ options:
 
 - label: Environment Variables
   id: environment_variables
+
+- label: ECS Fargate
+  id: ecs_fargate
