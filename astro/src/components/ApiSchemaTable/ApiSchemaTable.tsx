@@ -60,7 +60,6 @@ function FieldRow({
     <>
       <div
         class={rowClass}
-        data-testid="schema-table-row"
         data-field-name={field.name}
         data-depth={depth}
       >
@@ -71,7 +70,6 @@ function FieldRow({
               onClick={() => togglePath(path)}
               aria-expanded={isExpanded}
               aria-label={`Toggle ${field.name}`}
-              data-testid="schema-table-toggle"
             >
               <svg width="10" height="10" viewBox="0 0 10 10">
                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5" />
@@ -80,7 +78,7 @@ function FieldRow({
           )}
           <code class={cl('schema-table__name')}>{field.name}</code>
           {field.required && (
-            <span class={cl('schema-table__required')} data-testid="schema-field-required">{' '}[required]</span>
+            <span class={cl('schema-table__required')}>{' '}[required]</span>
           )}
         </div>{' '}
         <div class={cl('schema-table__cell-type')}>
@@ -105,7 +103,6 @@ function FieldRow({
         <div
           class={cl('schema-table__children')}
           style={{ display: isExpanded ? 'block' : 'none' }}
-          data-testid="schema-table-children"
         >
           {field.children?.map((child) => (
             <FieldRow
@@ -207,13 +204,12 @@ export function ApiSchemaTable({ fields, title, showExpandAll = true }: ApiSchem
   };
 
   return (
-    <div class="schema-table" data-testid="schema-table" data-hydrated={hydrated ? 'true' : undefined}>
+    <div class="schema-table" data-hydrated={hydrated ? 'true' : undefined}>
       {showExpandAll && allPaths.length > 0 && (
         <div class={cl('schema-table__toolbar')}>
           <button
             class={cl('schema-table__expand-all')}
             onClick={toggleAll}
-            data-testid="schema-table-expand-all"
           >
             {allExpanded ? 'Collapse All' : 'Expand All'}
           </button>

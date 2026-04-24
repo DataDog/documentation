@@ -76,12 +76,28 @@ const nestedFields: SchemaField[] = [
   },
 ];
 
+function getTable() {
+  return document.querySelector<HTMLElement>('.schema-table')!;
+}
+function getRows() {
+  return Array.from(document.querySelectorAll<HTMLElement>('.schema-table__row'));
+}
+function getToggles() {
+  return Array.from(document.querySelectorAll<HTMLButtonElement>('.schema-table__toggle'));
+}
+function getChildren() {
+  return Array.from(document.querySelectorAll<HTMLElement>('.schema-table__children'));
+}
+function getExpandAll() {
+  return document.querySelector<HTMLButtonElement>('.schema-table__expand-all');
+}
+
 describe('ApiSchemaTable — static render', () => {
-  it('renders with data-testid and column headers', () => {
+  it('renders the table root and column headers', () => {
     render(h(ApiSchemaTableComponent, { fields: flatFields }));
 
-    expect(screen.getByTestId('schema-table')).toBeTruthy();
-    const table = screen.getByTestId('schema-table');
+    const table = getTable();
+    expect(table).toBeTruthy();
     expect(table.textContent).toContain('Name');
     expect(table.textContent).toContain('Type');
     expect(table.textContent).toContain('Description');
@@ -90,10 +106,9 @@ describe('ApiSchemaTable — static render', () => {
   it('renders a row for every top-level field', () => {
     render(h(ApiSchemaTableComponent, { fields: flatFields }));
 
-    const rows = screen.getAllByTestId('schema-table-row');
-    expect(rows.length).toBe(2);
+    expect(getRows().length).toBe(2);
 
-    const table = screen.getByTestId('schema-table');
+    const table = getTable();
     expect(table.textContent).toContain('Unique identifier');
     expect(table.textContent).toContain('List of tags');
   });
@@ -101,16 +116,16 @@ describe('ApiSchemaTable — static render', () => {
   it('flags required fields with a [required] marker', () => {
     render(h(ApiSchemaTableComponent, { fields: flatFields }));
 
-    const required = screen.getByTestId('schema-field-required');
+    const required = document.querySelector<HTMLElement>('.schema-table__required');
     expect(required).toBeTruthy();
-    expect(required.textContent).toContain('[required]');
+    expect(required!.textContent).toContain('[required]');
   });
 
   it('renders toggle controls for fields with children', () => {
     render(h(ApiSchemaTableComponent, { fields: nestedFields }));
 
-    expect(screen.getAllByTestId('schema-table-toggle').length).toBe(2);
-    expect(screen.getByTestId('schema-table-expand-all')).toBeTruthy();
+    expect(getToggles().length).toBe(2);
+    expect(getExpandAll()).toBeTruthy();
   });
 });
 
@@ -118,14 +133,13 @@ describe('ApiSchemaTable — row expand/collapse interactivity', () => {
   it('children container is hidden by default (BEM + visibility)', () => {
     render(h(ApiSchemaTableComponent, { fields: nestedFields }));
 
-    const children = screen.getAllByTestId('schema-table-children');
+    const children = getChildren();
     expect(children.length).toBe(2);
     children.forEach((c) => {
-      expect((c as HTMLElement).style.display).toBe('none');
+      expect(c.style.display).toBe('none');
     });
 
-    const toggles = screen.getAllByTestId('schema-table-toggle');
-    toggles.forEach((t) => {
+    getToggles().forEach((t) => {
       expect(t.classList.contains('schema-table__toggle')).toBe(true);
       expect(t.classList.contains('schema-table__toggle--expanded')).toBe(false);
       expect(t.getAttribute('aria-expanded')).toBe('false');
@@ -136,17 +150,16 @@ describe('ApiSchemaTable — row expand/collapse interactivity', () => {
     const user = userEvent.setup();
     render(h(ApiSchemaTableComponent, { fields: nestedFields }));
 
-    const toggles = screen.getAllByTestId('schema-table-toggle');
-    await user.click(toggles[0]);
+    await user.click(getToggles()[0]);
 
-    const firstToggle = screen.getAllByTestId('schema-table-toggle')[0];
+    const firstToggle = getToggles()[0];
     expect(firstToggle.classList.contains('schema-table__toggle--expanded')).toBe(true);
     expect(firstToggle.getAttribute('aria-expanded')).toBe('true');
 
-    const childrenContainers = screen.getAllByTestId('schema-table-children');
-    expect((childrenContainers[0] as HTMLElement).style.display).toBe('block');
+    const childrenContainers = getChildren();
+    expect(childrenContainers[0].style.display).toBe('block');
     // Second parent remains collapsed
-    expect((childrenContainers[1] as HTMLElement).style.display).toBe('none');
+    expect(childrenContainers[1].style.display).toBe('none');
 
     // Child rows are rendered in the DOM
     expect(screen.getByText('A child field')).toBeTruthy();
@@ -157,16 +170,14 @@ describe('ApiSchemaTable — row expand/collapse interactivity', () => {
     const user = userEvent.setup();
     render(h(ApiSchemaTableComponent, { fields: nestedFields }));
 
-    const firstToggle = screen.getAllByTestId('schema-table-toggle')[0];
-    await user.click(firstToggle);
-    await user.click(screen.getAllByTestId('schema-table-toggle')[0]);
+    await user.click(getToggles()[0]);
+    await user.click(getToggles()[0]);
 
-    const afterToggle = screen.getAllByTestId('schema-table-toggle')[0];
+    const afterToggle = getToggles()[0];
     expect(afterToggle.classList.contains('schema-table__toggle--expanded')).toBe(false);
     expect(afterToggle.getAttribute('aria-expanded')).toBe('false');
 
-    const childrenContainers = screen.getAllByTestId('schema-table-children');
-    expect((childrenContainers[0] as HTMLElement).style.display).toBe('none');
+    expect(getChildren()[0].style.display).toBe('none');
   });
 });
 
@@ -174,7 +185,7 @@ describe('ApiSchemaTable — expand-all toggle', () => {
   it('shows "Expand All" label by default', () => {
     render(h(ApiSchemaTableComponent, { fields: nestedFields }));
 
-    const button = screen.getByTestId('schema-table-expand-all');
+    const button = getExpandAll()!;
     expect(button.classList.contains('schema-table__expand-all')).toBe(true);
     expect(button.textContent).toBe('Expand All');
   });
@@ -183,48 +194,43 @@ describe('ApiSchemaTable — expand-all toggle', () => {
     const user = userEvent.setup();
     render(h(ApiSchemaTableComponent, { fields: nestedFields }));
 
-    await user.click(screen.getByTestId('schema-table-expand-all'));
+    await user.click(getExpandAll()!);
 
-    const toggles = screen.getAllByTestId('schema-table-toggle');
-    toggles.forEach((t) => {
+    getToggles().forEach((t) => {
       expect(t.classList.contains('schema-table__toggle--expanded')).toBe(true);
       expect(t.getAttribute('aria-expanded')).toBe('true');
     });
 
-    const childrenContainers = screen.getAllByTestId('schema-table-children');
-    childrenContainers.forEach((c) => {
-      expect((c as HTMLElement).style.display).toBe('block');
+    getChildren().forEach((c) => {
+      expect(c.style.display).toBe('block');
     });
 
-    expect(screen.getByTestId('schema-table-expand-all').textContent).toBe('Collapse All');
+    expect(getExpandAll()!.textContent).toBe('Collapse All');
   });
 
   it('clicking Collapse All collapses every row (visibility + BEM)', async () => {
     const user = userEvent.setup();
     render(h(ApiSchemaTableComponent, { fields: nestedFields }));
 
-    const expandAll = screen.getByTestId('schema-table-expand-all');
-    await user.click(expandAll);
-    await user.click(screen.getByTestId('schema-table-expand-all'));
+    await user.click(getExpandAll()!);
+    await user.click(getExpandAll()!);
 
-    const toggles = screen.getAllByTestId('schema-table-toggle');
-    toggles.forEach((t) => {
+    getToggles().forEach((t) => {
       expect(t.classList.contains('schema-table__toggle--expanded')).toBe(false);
       expect(t.getAttribute('aria-expanded')).toBe('false');
     });
 
-    const childrenContainers = screen.getAllByTestId('schema-table-children');
-    childrenContainers.forEach((c) => {
-      expect((c as HTMLElement).style.display).toBe('none');
+    getChildren().forEach((c) => {
+      expect(c.style.display).toBe('none');
     });
 
-    expect(screen.getByTestId('schema-table-expand-all').textContent).toBe('Expand All');
+    expect(getExpandAll()!.textContent).toBe('Expand All');
   });
 
   it('hides the expand-all button when showExpandAll is false', () => {
     render(h(ApiSchemaTableComponent, { fields: nestedFields, showExpandAll: false }));
 
-    expect(screen.queryByTestId('schema-table-expand-all')).toBeNull();
+    expect(getExpandAll()).toBeNull();
   });
 });
 
@@ -258,7 +264,7 @@ describe('ApiSchemaTable — row modifier BEM classes', () => {
     ];
 
     render(h(ApiSchemaTableComponent, { fields }));
-    const rows = screen.getAllByTestId('schema-table-row');
+    const rows = getRows();
 
     expect(rows[0].classList.contains('schema-table__row--readonly')).toBe(true);
     expect(rows[0].classList.contains('schema-table__row--deprecated')).toBe(false);

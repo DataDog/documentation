@@ -8,7 +8,7 @@ The scope of this new Astro site is just the API docs. In Hugo, the HTML for the
 
 - Never assume I know what I'm talking about. If you have a better idea, raise it. If there is a security concern or other concern with what I'm doing, raise it. If I left gaps in my instructions, ask questions.
 - When you update a component, be sure to update its tests and documentation page.
-- After you implement something, list any best practices you used that aren't well known, such as using `data-testid` as a flexible ID for Playwright tests.
+- After you implement something, list any best practices you used that aren't well known.
 
 ## Commands
 
@@ -107,7 +107,9 @@ npx playwright test --update-snapshots
 
 Baselines are currently Mac-only (`*-chromium-darwin.png`) because this project is in early stages and CI isn't wired up for Playwright yet. When CI comes online, baselines will need to be regenerated on the CI platform; Playwright's per-platform suffix lets Mac and CI baselines coexist.
 
-When asserting a screenshot on an element rendered inside a Tabs island, scope the locator to `[data-testid="tabs-panel"]` (or similar). Tabs renders every panel server-side in its final position; only the active panel carries `data-testid="tabs-panel"` and inactive panels are `hidden`.
+When asserting a screenshot on an element rendered inside a Tabs island, scope the locator to `.tabs__panel--active`. Tabs renders every panel server-side in its final position; only the active panel carries the `tabs__panel--active` BEM modifier and inactive panels are `hidden`.
+
+Prefer BEM class selectors (e.g. `.code-block__toggle`) over `data-testid` attributes. BEM classes are already required for stable DOM identification (see the CSS architecture section), so `data-testid` is redundant most of the time. Use `data-testid` only where no stable class exists and adding one would be awkward (e.g. purely structural fixtures inside tests).
 
 ## Component documentation
 

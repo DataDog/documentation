@@ -46,7 +46,6 @@ export function CodeBlockBloated({
   return (
     <div
       class={containerClass}
-      data-testid="code-block"
       data-hydrated={hydrated ? 'true' : undefined}
       data-language={language || undefined}
       data-collapsible={collapsible || undefined}
@@ -55,7 +54,7 @@ export function CodeBlockBloated({
       {(filename || collapsible) && (
         <div class={cl('code-block__header')}>
           {filename ? (
-            <span class={cl('code-block__filename')} data-testid="code-block-filename">
+            <span class={cl('code-block__filename')}>
               {filename}
             </span>
           ) : null}
@@ -64,7 +63,6 @@ export function CodeBlockBloated({
               <button
                 class={cl('code-block__toggle')}
                 onClick={() => setCollapsed((prev) => !prev)}
-                data-testid="code-block-toggle"
                 aria-expanded={!collapsed}
                 aria-label={collapsed ? 'Expand code' : 'Collapse code'}
               >
@@ -74,12 +72,11 @@ export function CodeBlockBloated({
           </div>
         </div>
       )}
-      <div class={contentClass} data-testid="code-block-content">
+      <div class={contentClass}>
         {!disableCopy && (
           <button
             class={cl('code-block__copy')}
             onClick={handleCopy}
-            data-testid="code-block-copy"
             aria-label="Copy code"
           >
             <span>{copied ? 'Copied!' : 'Copy'}</span>

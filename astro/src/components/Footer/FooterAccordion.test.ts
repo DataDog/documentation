@@ -92,16 +92,16 @@ describe('FooterAccordion — default state', () => {
   it('renders all section headers', () => {
     renderAccordion();
 
-    expect(screen.getByTestId('footer-section-product')).toBeTruthy();
-    expect(screen.getByTestId('footer-section-resources')).toBeTruthy();
-    expect(screen.getByTestId('footer-section-about')).toBeTruthy();
-    expect(screen.getByTestId('footer-section-blog')).toBeTruthy();
+    expect(document.querySelector<HTMLElement>('.footer-section--product')!).toBeTruthy();
+    expect(document.querySelector<HTMLElement>('.footer-section--resources')!).toBeTruthy();
+    expect(document.querySelector<HTMLElement>('.footer-section--about')!).toBeTruthy();
+    expect(document.querySelector<HTMLElement>('.footer-section--blog')!).toBeTruthy();
   });
 
   it('opens the resources section by default (BEM + aria)', () => {
     renderAccordion();
 
-    const resourcesSection = screen.getByTestId('footer-section-resources');
+    const resourcesSection = document.querySelector<HTMLElement>('.footer-section--resources')!;
     const resourcesBody = resourcesSection.querySelector('.footer-accordion__body')!;
     const resourcesHeader = resourcesSection.querySelector('.footer-accordion__header')!;
 
@@ -113,7 +113,7 @@ describe('FooterAccordion — default state', () => {
     renderAccordion();
 
     for (const id of ['product', 'about', 'blog']) {
-      const section = screen.getByTestId(`footer-section-${id}`);
+      const section = document.querySelector<HTMLElement>(`.footer-section--${id}`)!;
       const body = section.querySelector('.footer-accordion__body')!;
       const header = section.querySelector('.footer-accordion__header')!;
 
@@ -128,11 +128,11 @@ describe('FooterAccordion — interactivity', () => {
     const user = userEvent.setup();
     renderAccordion();
 
-    const productSection = screen.getByTestId('footer-section-product');
+    const productSection = document.querySelector<HTMLElement>('.footer-section--product')!;
     const productHeader = productSection.querySelector('.footer-accordion__header')! as HTMLElement;
     const productBody = productSection.querySelector('.footer-accordion__body')!;
 
-    const resourcesSection = screen.getByTestId('footer-section-resources');
+    const resourcesSection = document.querySelector<HTMLElement>('.footer-section--resources')!;
     const resourcesHeader = resourcesSection.querySelector('.footer-accordion__header')!;
     const resourcesBody = resourcesSection.querySelector('.footer-accordion__body')!;
 
@@ -149,7 +149,7 @@ describe('FooterAccordion — interactivity', () => {
     const user = userEvent.setup();
     renderAccordion();
 
-    const resourcesSection = screen.getByTestId('footer-section-resources');
+    const resourcesSection = document.querySelector<HTMLElement>('.footer-section--resources')!;
     const resourcesHeader = resourcesSection.querySelector('.footer-accordion__header')! as HTMLElement;
     const resourcesBody = resourcesSection.querySelector('.footer-accordion__body')!;
 
@@ -163,7 +163,7 @@ describe('FooterAccordion — interactivity', () => {
     const user = userEvent.setup();
     renderAccordion();
 
-    const aboutSection = screen.getByTestId('footer-section-about');
+    const aboutSection = document.querySelector<HTMLElement>('.footer-section--about')!;
     const aboutHeader = aboutSection.querySelector('.footer-accordion__header')! as HTMLElement;
     const aboutBody = aboutSection.querySelector('.footer-accordion__body')!;
 
@@ -178,7 +178,7 @@ describe('FooterAccordion — interactivity', () => {
     const user = userEvent.setup();
     renderAccordion();
 
-    const blogSection = screen.getByTestId('footer-section-blog');
+    const blogSection = document.querySelector<HTMLElement>('.footer-section--blog')!;
     const blogHeader = blogSection.querySelector('.footer-accordion__header')! as HTMLElement;
     const blogBody = blogSection.querySelector('.footer-accordion__body')!;
 

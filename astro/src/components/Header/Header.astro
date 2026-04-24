@@ -152,7 +152,7 @@ const mobileLogoUrl = 'https://imgix.datadoghq.com/img/datadog_rbg_n_2x.png';
 const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
 ---
 
-<div class="main-nav-wrapper" data-testid="header">
+<div class="main-nav-wrapper">
   <nav class={`${styles.nav} main-nav`}>
     <div class={styles.container}>
       {/* Desktop layout */}
@@ -224,7 +224,7 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
 
         {/* Logo */}
         <div class="header__logoSlot">
-          <a href="/" class={`${styles.logoColumn} js-logo-download`} data-testid="header-logo">
+          <a href="/" class={`${styles.logoColumn} js-logo-download`}>
             <img
               height="75"
               class={styles.logoBits}

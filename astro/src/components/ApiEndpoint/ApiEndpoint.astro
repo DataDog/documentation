@@ -64,7 +64,7 @@ const hasParams = ep && (
 ---
 
 {ep && (
-  <section class={cl('api-endpoint')} data-testid="api-endpoint" data-operation-id={ep.operationId}>
+  <section class={cl('api-endpoint')} data-operation-id={ep.operationId}>
     {/* Status alerts */}
     {ep.deprecated && (
       <ApiStatusAlert type="deprecated" newerVersionUrl={ep.newerVersionUrl} />

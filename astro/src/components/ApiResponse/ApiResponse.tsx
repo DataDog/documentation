@@ -21,7 +21,7 @@ export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
   const labels = responses.map((r) => r.statusCode);
 
   return (
-    <div class={cl('api-response')} data-testid="api-response">
+    <div class={cl('api-response')}>
       <h3 class={cl('api-response__heading')}>Response</h3>
 
       <TabsBloated labels={labels} variant="pills">
@@ -34,7 +34,7 @@ export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
           if (r.examples && r.examples.length > 0) toggleLabels.push('Example');
 
           return (
-            <div data-testid={`api-response-panel-${r.statusCode}`}>
+            <div class={`api-response__panel api-response__panel--${r.statusCode}`}>
               {r.description && (
                 <p class={cl('api-response__description')} dangerouslySetInnerHTML={{ __html: r.description }} />
               )}

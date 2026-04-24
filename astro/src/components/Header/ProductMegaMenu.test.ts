@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 import { describe, it, expect, afterEach } from 'vitest';
-import { render, cleanup, screen } from '@testing-library/preact';
+import { render, cleanup } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { h } from 'preact';
 import type { ComponentType } from 'preact';
@@ -79,24 +79,34 @@ const renderMenu = (props: Partial<Parameters<typeof ProductMegaMenu>[0]> = {}) 
     }),
   );
 
+function getTrigger() {
+  return document.querySelector<HTMLLIElement>('.product-dropdown')!;
+}
+function getDropdown() {
+  return document.querySelector<HTMLElement>('.product-menu')!;
+}
+function getToggle(identifier: string) {
+  return document.querySelector<HTMLButtonElement>(`.category-toggle--${identifier}`)!;
+}
+function getDetail(identifier: string) {
+  return document.querySelector<HTMLElement>(`.product-category--${identifier}`)!;
+}
+
 describe('ProductMegaMenu — static render', () => {
   it('renders the trigger and dropdown with all categories', () => {
     renderMenu();
 
-    expect(screen.getByTestId('nav-dropdown-product')).toBeTruthy();
-    expect(screen.getByTestId('product-mega-menu')).toBeTruthy();
-    expect(screen.getByTestId('product-category-toggle-observability')).toBeTruthy();
-    expect(screen.getByTestId('product-category-toggle-security')).toBeTruthy();
+    expect(getTrigger()).toBeTruthy();
+    expect(getDropdown()).toBeTruthy();
+    expect(getToggle('observability')).toBeTruthy();
+    expect(getToggle('security')).toBeTruthy();
   });
 
   it('is closed by default (no open BEM modifiers applied)', () => {
     renderMenu();
 
-    const trigger = screen.getByTestId('nav-dropdown-product');
-    const dropdown = screen.getByTestId('product-mega-menu');
-
-    expect(trigger.classList.contains('menu-item--open')).toBe(false);
-    expect(dropdown.classList.contains('dropdown-menu--open')).toBe(false);
+    expect(getTrigger().classList.contains('menu-item--open')).toBe(false);
+    expect(getDropdown().classList.contains('dropdown-menu--open')).toBe(false);
   });
 });
 
@@ -105,23 +115,21 @@ describe('ProductMegaMenu — interactivity (open/close)', () => {
     const user = userEvent.setup();
     renderMenu();
 
-    const trigger = screen.getByTestId('nav-dropdown-product');
+    const trigger = getTrigger();
     await user.hover(trigger);
 
     expect(trigger.classList.contains('menu-item--open')).toBe(true);
-    expect(screen.getByTestId('product-mega-menu').classList.contains('dropdown-menu--open')).toBe(
-      true,
-    );
+    expect(getDropdown().classList.contains('dropdown-menu--open')).toBe(true);
   });
 
   it('first category detail is visible on open; others are hidden', async () => {
     const user = userEvent.setup();
     renderMenu();
 
-    await user.hover(screen.getByTestId('nav-dropdown-product'));
+    await user.hover(getTrigger());
 
-    const obsDetail = screen.getByTestId('product-category-detail-observability') as HTMLElement;
-    const secDetail = screen.getByTestId('product-category-detail-security') as HTMLElement;
+    const obsDetail = getDetail('observability');
+    const secDetail = getDetail('security');
 
     expect(obsDetail.style.display).toBe('flex');
     expect(secDetail.style.display).toBe('none');
@@ -133,14 +141,14 @@ describe('ProductMegaMenu — interactivity (category switching)', () => {
     const user = userEvent.setup();
     renderMenu();
 
-    await user.hover(screen.getByTestId('nav-dropdown-product'));
-    await user.hover(screen.getByTestId('product-category-toggle-security'));
+    await user.hover(getTrigger());
+    await user.hover(getToggle('security'));
 
     // Wait out the 160ms debounce used by scheduleCategory.
     await new Promise((r) => setTimeout(r, 200));
 
-    const obsDetail = screen.getByTestId('product-category-detail-observability') as HTMLElement;
-    const secDetail = screen.getByTestId('product-category-detail-security') as HTMLElement;
+    const obsDetail = getDetail('observability');
+    const secDetail = getDetail('security');
 
     expect(secDetail.style.display).toBe('flex');
     expect(obsDetail.style.display).toBe('none');
@@ -150,14 +158,14 @@ describe('ProductMegaMenu — interactivity (category switching)', () => {
     const user = userEvent.setup();
     renderMenu();
 
-    const obsToggle = screen.getByTestId('product-category-toggle-observability');
-    const secToggle = screen.getByTestId('product-category-toggle-security');
+    const obsToggle = getToggle('observability');
+    const secToggle = getToggle('security');
 
     // On mount, the first category is active.
     expect(obsToggle.classList.contains('text-primary')).toBe(true);
     expect(secToggle.classList.contains('text-primary')).toBe(false);
 
-    await user.hover(screen.getByTestId('nav-dropdown-product'));
+    await user.hover(getTrigger());
     await user.hover(secToggle);
     await new Promise((r) => setTimeout(r, 200));
 

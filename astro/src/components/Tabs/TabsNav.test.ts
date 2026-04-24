@@ -20,7 +20,6 @@ const setupShell = (groupId: string, labels: string[]) => {
     const btn = document.createElement('button');
     btn.setAttribute('role', 'tab');
     btn.setAttribute('data-tab-index', String(i));
-    btn.setAttribute('data-testid', `tab-${i}`);
     btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
     btn.className = i === 0 ? 'tabs__button tabs__button--active' : 'tabs__button';
     btn.textContent = label;
@@ -33,7 +32,7 @@ const setupShell = (groupId: string, labels: string[]) => {
     panel.setAttribute('role', 'tabpanel');
     panel.setAttribute('data-tab-panel', '');
     panel.setAttribute('data-tab-index', String(i));
-    if (i === 0) panel.setAttribute('data-testid', 'tabs-panel');
+    panel.className = i === 0 ? 'tabs__panel tabs__panel--active' : 'tabs__panel';
     panel.hidden = i !== 0;
     panel.textContent = `Panel ${i}`;
     root.appendChild(panel);
@@ -66,8 +65,8 @@ describe('TabsNav', () => {
     expect(buttons[1].getAttribute('aria-selected')).toBe('true');
     expect(panels[0].hidden).toBe(true);
     expect(panels[1].hidden).toBe(false);
-    expect(panels[1].getAttribute('data-testid')).toBe('tabs-panel');
-    expect(panels[0].hasAttribute('data-testid')).toBe(false);
+    expect(panels[1].classList.contains('tabs__panel--active')).toBe(true);
+    expect(panels[0].classList.contains('tabs__panel--active')).toBe(false);
   });
 
   it('clicking back to the first tab restores original visibility', async () => {

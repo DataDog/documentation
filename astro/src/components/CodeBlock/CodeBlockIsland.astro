@@ -51,7 +51,6 @@ const containerClass = wrap
 
 <div
   class={containerClass}
-  data-testid="code-block"
   data-language={language || undefined}
   data-collapsible={collapsible || undefined}
   data-disable-copy={disable_copy || undefined}
@@ -59,7 +58,7 @@ const containerClass = wrap
   {(filename || collapsible) && (
     <div class={cl('code-block__header')}>
       {filename && (
-        <span class={cl('code-block__filename')} data-testid="code-block-filename">
+        <span class={cl('code-block__filename')}>
           {filename}
         </span>
       )}
@@ -71,7 +70,6 @@ const containerClass = wrap
   <div
     id={contentId}
     class={cl('code-block__content')}
-    data-testid="code-block-content"
   >
     {!disable_copy && <CopyButton client:idle content={content} />}
     {highlightedCode ? (

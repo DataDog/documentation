@@ -23,19 +23,27 @@ const renderTabs = (props: Partial<Parameters<typeof TabsBloated>[0]> = {}) =>
     }),
   );
 
+function getTabs() {
+  return document.querySelector<HTMLElement>('.tabs')!;
+}
+function getTab(i: number) {
+  return document.querySelector<HTMLButtonElement>(`.tabs__button[data-tab-index="${i}"]`)!;
+}
+
 describe('Tabs — static render', () => {
   it('renders the tablist with all labels', () => {
     renderTabs();
 
-    expect(screen.getByTestId('tabs')).toBeTruthy();
+    expect(getTabs()).toBeTruthy();
     labels.forEach((label, i) => {
-      expect(screen.getByTestId(`tab-${i}`).textContent).toBe(label);
+      expect(getTab(i).textContent).toBe(label);
     });
   });
 
   it('renders placeholder when labels is empty', () => {
     const { container } = render(h(TabsComponent, { labels: [], children: () => null }));
-    expect(container.innerHTML).toBe('<div data-testid="tabs"></div>');
+    expect(container.querySelector('.tabs')).toBeTruthy();
+    expect(container.querySelector('.tabs__nav')).toBeNull();
   });
 });
 
@@ -43,7 +51,7 @@ describe('Tabs — interactivity', () => {
   it('first tab is active by default (BEM + aria)', () => {
     renderTabs();
 
-    const first = screen.getByTestId('tab-0');
+    const first = getTab(0);
     expect(first.classList.contains('tabs__button--active')).toBe(true);
     expect(first.getAttribute('aria-selected')).toBe('true');
     expect(screen.getByTestId('panel-content').textContent).toBe('Python');
@@ -53,10 +61,10 @@ describe('Tabs — interactivity', () => {
     const user = userEvent.setup();
     renderTabs();
 
-    await user.click(screen.getByTestId('tab-1'));
+    await user.click(getTab(1));
 
-    const first = screen.getByTestId('tab-0');
-    const second = screen.getByTestId('tab-1');
+    const first = getTab(0);
+    const second = getTab(1);
 
     expect(second.classList.contains('tabs__button--active')).toBe(true);
     expect(second.getAttribute('aria-selected')).toBe('true');
@@ -69,7 +77,7 @@ describe('Tabs — interactivity', () => {
     const user = userEvent.setup();
     renderTabs();
 
-    await user.click(screen.getByTestId('tab-2'));
+    await user.click(getTab(2));
 
     expect(screen.getByTestId('panel-content').textContent).toBe('Go');
   });
@@ -79,7 +87,7 @@ describe('Tabs — interactivity', () => {
     const onTabChange = vi.fn();
     renderTabs({ onTabChange });
 
-    await user.click(screen.getByTestId('tab-2'));
+    await user.click(getTab(2));
 
     expect(onTabChange).toHaveBeenCalledWith(2);
   });
@@ -107,19 +115,19 @@ describe('Tabs — panelsHtml mode', () => {
     expect(screen.getByTestId('go-content').textContent).toBe('go html');
   });
 
-  it('moves visibility + tabs-panel testid to the clicked panel without rewriting innerHTML', async () => {
+  it('moves visibility + tabs__panel--active class to the clicked panel without rewriting innerHTML', async () => {
     const user = userEvent.setup();
     render(h(TabsComponent, { labels, panelsHtml }));
 
     const goNode = screen.getByTestId('go-content');
 
-    await user.click(screen.getByTestId('tab-2'));
+    await user.click(getTab(2));
 
     const allPanels = document.querySelectorAll<HTMLElement>('[data-tab-panel]');
     expect(allPanels[0].hidden).toBe(true);
     expect(allPanels[2].hidden).toBe(false);
-    expect(allPanels[2].getAttribute('data-testid')).toBe('tabs-panel');
-    expect(allPanels[0].hasAttribute('data-testid')).toBe(false);
+    expect(allPanels[2].classList.contains('tabs__panel--active')).toBe(true);
+    expect(allPanels[0].classList.contains('tabs__panel--active')).toBe(false);
 
     // Same DOM node instance — inner nodes were not re-parsed. This is what
     // keeps nested `<astro-island>` children from tearing down on tab switch.
@@ -131,17 +139,16 @@ describe('Tabs — pills variant', () => {
   it('applies BEM modifier tabs--pills when variant is forced', () => {
     renderTabs({ variant: 'pills' });
 
-    const container = screen.getByTestId('tabs');
-    expect(container.classList.contains('tabs--pills')).toBe(true);
+    expect(getTabs().classList.contains('tabs--pills')).toBe(true);
   });
 
   it('switches active tab in pills variant', async () => {
     const user = userEvent.setup();
     renderTabs({ variant: 'pills' });
 
-    await user.click(screen.getByTestId('tab-1'));
+    await user.click(getTab(1));
 
-    expect(screen.getByTestId('tab-1').classList.contains('tabs__button--active')).toBe(true);
-    expect(screen.getByTestId('tab-0').classList.contains('tabs__button--active')).toBe(false);
+    expect(getTab(1).classList.contains('tabs__button--active')).toBe(true);
+    expect(getTab(0).classList.contains('tabs__button--active')).toBe(false);
   });
 });

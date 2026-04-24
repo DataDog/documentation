@@ -61,11 +61,11 @@ const isCustomBannerJson = JSON.stringify(isCustomBanner);
     }
 
     function populateBanner(webinar) {
-      var desktop = document.querySelector('[data-testid="announcement-banner"] .banner-title-desktop');
-      var mobile = document.querySelector('[data-testid="announcement-banner"] .banner-title-mobile');
+      var desktop = document.querySelector('.announcement-banner .banner-title-desktop');
+      var mobile = document.querySelector('.announcement-banner .banner-title-mobile');
       if (desktop) desktop.innerHTML = webinar.desktop_title;
       if (mobile) mobile.innerHTML = webinar.mobile_title;
-      var link = document.querySelector('[data-testid="announcement-banner"] > a');
+      var link = document.querySelector('.announcement-banner > a');
       if (link && webinar.link) link.href = webinar.link;
     }
 

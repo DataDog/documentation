@@ -10,6 +10,6 @@ const { name, class: className } = Astro.props;
 const rootClass = ['placeholder', styles.placeholder, className].filter(Boolean).join(' ');
 ---
 
-<div class={rootClass} data-testid="placeholder" data-placeholder-name={name}>
+<div class={rootClass} data-placeholder-name={name}>
   <span>{name}</span>
 </div>

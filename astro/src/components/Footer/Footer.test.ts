@@ -31,12 +31,11 @@ async function createContainer() {
 }
 
 describe('Footer', () => {
-  it('renders a <footer> tagged with the expected testid', async () => {
+  it('renders a <footer> element', async () => {
     const container = await createContainer();
     const html = await container.renderToString(Footer);
 
     expect(html).toMatch(/<footer[\s>]/);
-    expect(html).toContain('data-testid="footer"');
   });
 
   it('renders every resources, about, blog, and sub link from menus.en.yaml', async () => {
@@ -68,10 +67,10 @@ describe('Footer', () => {
     const container = await createContainer();
     const html = await container.renderToString(Footer);
 
-    expect(html).toContain('data-testid="footer-section-product"');
-    expect(html).toContain('data-testid="footer-section-resources"');
-    expect(html).toContain('data-testid="footer-section-about"');
-    expect(html).toContain('data-testid="footer-section-blog"');
+    expect(html).toContain('footer-section--product');
+    expect(html).toContain('footer-section--resources');
+    expect(html).toContain('footer-section--about');
+    expect(html).toContain('footer-section--blog');
   });
 
   it('renders the copyright with the current year', async () => {
@@ -95,7 +94,7 @@ describe('Footer', () => {
     const container = await createContainer();
     const html = await container.renderToString(Footer);
 
-    expect(html).toContain('data-testid="footer-language-selector"');
+    expect(html).toContain('footer-lang-toggle');
     // Current language label in its own language — English.
     expect(html).toContain('English');
   });

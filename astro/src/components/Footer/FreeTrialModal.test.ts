@@ -40,7 +40,7 @@ describe('FreeTrialModal — initial render', () => {
   it('renders closed by default (hidden, no open BEM modifier, no iframe)', () => {
     renderModal();
 
-    const overlay = screen.getByTestId('free-trial-modal');
+    const overlay = document.querySelector<HTMLElement>('.free-trial-modal__overlay')!;
     expect(overlay.classList.contains('free-trial-modal__overlay')).toBe(true);
     expect(overlay.classList.contains('free-trial-modal__overlay--open')).toBe(false);
     expect(overlay.hasAttribute('hidden')).toBe(true);
@@ -54,8 +54,8 @@ describe('FreeTrialModal — initial render', () => {
     const heading = screen.getByText('Start a free trial');
     expect(heading.tagName).toBe('H6');
     expect(heading.classList.contains('free-trial-modal__title')).toBe(true);
-    const closeBtn = screen
-      .getByTestId('free-trial-modal')
+    const closeBtn = document
+      .querySelector<HTMLElement>('.free-trial-modal__overlay')!
       .querySelector('button[aria-label="close"]');
     expect(closeBtn).not.toBeNull();
   });
@@ -73,7 +73,7 @@ describe('FreeTrialModal — opens via trigger', () => {
 
     await user.click(trigger);
 
-    const overlay = screen.getByTestId('free-trial-modal');
+    const overlay = document.querySelector<HTMLElement>('.free-trial-modal__overlay')!;
     expect(overlay.classList.contains('free-trial-modal__overlay--open')).toBe(true);
     expect(overlay.hasAttribute('hidden')).toBe(false);
     expect(overlay.getAttribute('aria-hidden')).toBe('false');
@@ -98,7 +98,7 @@ describe('FreeTrialModal — opens via trigger', () => {
 
     await user.click(inner);
 
-    const overlay = screen.getByTestId('free-trial-modal');
+    const overlay = document.querySelector<HTMLElement>('.free-trial-modal__overlay')!;
     expect(overlay.classList.contains('free-trial-modal__overlay--open')).toBe(true);
   });
 });
@@ -116,7 +116,7 @@ describe('FreeTrialModal — closing', () => {
     renderModal();
     await openModal(user);
 
-    const overlay = screen.getByTestId('free-trial-modal');
+    const overlay = document.querySelector<HTMLElement>('.free-trial-modal__overlay')!;
     expect(overlay.classList.contains('free-trial-modal__overlay--open')).toBe(true);
 
     await user.click(screen.getByRole('button', { name: 'close' }));
@@ -132,7 +132,7 @@ describe('FreeTrialModal — closing', () => {
     renderModal();
     await openModal(user);
 
-    const overlay = screen.getByTestId('free-trial-modal');
+    const overlay = document.querySelector<HTMLElement>('.free-trial-modal__overlay')!;
     expect(overlay.classList.contains('free-trial-modal__overlay--open')).toBe(true);
 
     await user.keyboard('{Escape}');
@@ -146,7 +146,7 @@ describe('FreeTrialModal — closing', () => {
     renderModal();
     await openModal(user);
 
-    const overlay = screen.getByTestId('free-trial-modal');
+    const overlay = document.querySelector<HTMLElement>('.free-trial-modal__overlay')!;
     const dialog = overlay.querySelector('.free-trial-modal__dialog') as HTMLElement;
     expect(dialog).not.toBeNull();
 
@@ -173,7 +173,7 @@ describe('FreeTrialModal — body scroll lock', () => {
     document.body.appendChild(trigger);
     await user.click(trigger);
 
-    const overlay = screen.getByTestId('free-trial-modal');
+    const overlay = document.querySelector<HTMLElement>('.free-trial-modal__overlay')!;
     expect(overlay.classList.contains('free-trial-modal__overlay--open')).toBe(true);
     await waitFor(() => expect(document.body.style.overflow).toBe('hidden'));
 

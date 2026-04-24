@@ -68,7 +68,6 @@ export default function FreeTrialModal({ title, iframeSrc, classes }: Props) {
       aria-modal="true"
       aria-label={title}
       aria-hidden={!open}
-      data-testid="free-trial-modal"
       hidden={!open}
       onClick={handleOverlayClick}
     >

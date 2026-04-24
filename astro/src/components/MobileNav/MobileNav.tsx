@@ -44,7 +44,6 @@ export default function MobileNav({ classes, quicknav, search, items, categories
         aria-expanded={open}
         aria-label="Toggle navigation"
         onClick={() => setOpen((o) => !o)}
-        data-testid="mobile-nav-toggle"
       >
         <span class={classes.hamburgerBar}></span>
         <span class={classes.hamburgerBar}></span>
@@ -56,13 +55,11 @@ export default function MobileNav({ classes, quicknav, search, items, categories
         id="mobile-nav-bg"
         class={`${styles.bg} ${open ? styles['bg--open'] : ''}`}
         onClick={() => setOpen(false)}
-        data-testid="mobile-nav-bg"
       />
 
       <div
         id="mobile-nav"
         class={`${styles.mobileNav} ${open ? styles['mobileNav--open'] : ''}`}
-        data-testid="mobile-nav"
       >
         <div class={styles.quicknav}>
           <a href="https://www.datadoghq.com">{quicknav.home}</a>
@@ -72,11 +69,10 @@ export default function MobileNav({ classes, quicknav, search, items, categories
 
         <div class={styles.searchWrap}>
           <input
-            class={styles.searchInput}
+            class={`${styles.searchInput} mobile-nav__search`}
             type="search"
             placeholder={search.placeholder}
             aria-label={search.ariaLabel}
-            data-testid="mobile-nav-search"
           />
         </div>
 

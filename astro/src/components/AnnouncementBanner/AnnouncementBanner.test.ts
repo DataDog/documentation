@@ -7,7 +7,6 @@ describe('AnnouncementBanner', () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(AnnouncementBanner);
 
-    expect(html).toContain('data-testid="announcement-banner"');
     expect(html).toContain('announcement-banner__title-desktop');
     expect(html).toContain('announcement-banner__title-mobile');
     // Site params currently point at DASH — assert the message text is included.
@@ -22,7 +21,7 @@ describe('AnnouncementBanner', () => {
     const html = await container.renderToString(AnnouncementBanner);
 
     expect(html).toMatch(
-      /<div[^>]*class="[^"]*\bdash-announcement-banner\b[^"]*"[^>]*data-testid="announcement-banner"/,
+      /<div[^>]*class="[^"]*\bannouncement-banner\b[^"]*\bdash-announcement-banner\b/,
     );
   });
 

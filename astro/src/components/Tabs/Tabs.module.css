@@ -101,6 +101,9 @@
   border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
+/* Stable DOM hook for the currently-visible panel; no visual overrides. */
+.tabs__panel--active {}
+
 /* ── Pills variant (applied when tabs overflow) ── */
 
 .tabs--pills .tabs__nav {

@@ -49,7 +49,6 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
             <div
               key={regionKey}
               data-region={regionKey}
-              data-testid={`api-code-example-region-${regionKey}`}
               class={cl('api-code-example__code-block')}
             >
               <CodeBlockBloated content={variant.code} language={entry.syntax} highlightedCode={variant.highlightedCode} />
@@ -81,12 +80,11 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
           ].filter(Boolean).join(' ');
 
           return (
-            <div key={key} class={cl('api-code-example__accordion')} data-testid="api-code-example-accordion">
+            <div key={key} class={cl('api-code-example__accordion')}>
               <button
                 class={headerClass}
                 onClick={() => toggleEntry(key)}
                 aria-expanded={isOpen}
-                data-testid="api-code-example-accordion-toggle"
               >
                 <svg class={cl('api-code-example__accordion-icon')} width="10" height="10" viewBox="0 0 10 10">
                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5" />
@@ -102,7 +100,7 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
   };
 
   return (
-    <div class={cl('api-code-example')} data-testid="api-code-example">
+    <div class={cl('api-code-example')}>
       <h3 class={cl('api-code-example__heading')}>Code Example</h3>
 
       <TabsBloated

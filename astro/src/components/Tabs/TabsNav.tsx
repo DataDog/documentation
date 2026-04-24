@@ -28,12 +28,11 @@ export function TabsNav({ groupId }: TabsNavProps) {
         btn.setAttribute('aria-selected', String(active));
       });
       panels.forEach((panel, i) => {
-        panel.hidden = i !== index;
-        if (i === index) {
-          panel.setAttribute('data-testid', 'tabs-panel');
-        } else {
-          panel.removeAttribute('data-testid');
-        }
+        const active = i === index;
+        panel.hidden = !active;
+        panel.classList.toggle('tabs__panel--active', active);
+        const hashed = styles['tabs__panel--active'];
+        if (hashed) panel.classList.toggle(hashed, active);
       });
     };
 

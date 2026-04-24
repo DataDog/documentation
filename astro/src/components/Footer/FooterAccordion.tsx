@@ -79,7 +79,7 @@ export default function FooterAccordion({ sections, classes }: Props) {
           : classes.columnBodyFlex;
         const halfClass = s.stackOnDesktop ? classes.menuLinksHalfLg100 : classes.menuLinksHalf;
         return (
-          <div class={`${classes.column} ${classes.columnByKey[s.id]}`} data-testid={`footer-section-${s.id}`}>
+          <div class={`${classes.column} ${classes.columnByKey[s.id]} footer-section footer-section--${s.id}`}>
             <p
               class={classes.header}
               role="button"

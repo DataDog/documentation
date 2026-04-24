@@ -19,14 +19,13 @@ const tabs = $('[data-tab-label]')
 const groupId = `tabs-${crypto.randomUUID().slice(0, 8)}`;
 ---
 
-<div class={cl('tabs')} data-testid="tabs" data-tabs-group={groupId}>
+<div class={cl('tabs')} data-tabs-group={groupId}>
   <div class={cl('tabs__nav')} role="tablist">
     {tabs.map((tab, i) => (
       <button
         role="tab"
         class={i === 0 ? cl('tabs__button', 'tabs__button--active') : cl('tabs__button')}
         aria-selected={i === 0 ? 'true' : 'false'}
-        data-testid={`tab-${i}`}
         data-tab-index={i}
       >
         {tab.label}
@@ -37,10 +36,9 @@ const groupId = `tabs-${crypto.randomUUID().slice(0, 8)}`;
   {tabs.map((tab, i) => (
     <div
       role="tabpanel"
-      class={cl('tabs__panel')}
+      class={i === 0 ? cl('tabs__panel', 'tabs__panel--active') : cl('tabs__panel')}
       data-tab-panel
       data-tab-index={i}
-      data-testid={i === 0 ? 'tabs-panel' : undefined}
       hidden={i !== 0}
       set:html={tab.content}
     />

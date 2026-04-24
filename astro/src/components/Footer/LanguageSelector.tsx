@@ -70,7 +70,6 @@ export default function LanguageSelector({
     <div
       ref={wrapperRef}
       class={`${classes.wrapper} footer-lang-toggle`}
-      data-testid="footer-language-selector"
     >
       <button
         type="button"

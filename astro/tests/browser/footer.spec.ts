@@ -7,7 +7,7 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await page.setViewportSize({ width: 1400, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
 
-    const footer = page.locator('[data-testid="footer"]');
+    const footer = page.locator('footer');
     const bg = await footer.evaluate((el) => getComputedStyle(el).backgroundColor);
     // #110617 as rgb.
     expect(bg).toBe('rgb(17, 6, 23)');
@@ -18,10 +18,10 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await page.goto(PAGE_WITH_CONTENT);
 
     // The trial block + the four accordion sections are all visible at desktop.
-    await expect(page.locator('[data-testid="footer-section-product"]')).toBeVisible();
-    await expect(page.locator('[data-testid="footer-section-resources"]')).toBeVisible();
-    await expect(page.locator('[data-testid="footer-section-about"]')).toBeVisible();
-    await expect(page.locator('[data-testid="footer-section-blog"]')).toBeVisible();
+    await expect(page.locator('.footer-section--product')).toBeVisible();
+    await expect(page.locator('.footer-section--resources')).toBeVisible();
+    await expect(page.locator('.footer-section--about')).toBeVisible();
+    await expect(page.locator('.footer-section--blog')).toBeVisible();
   });
 
   test('mobile accordion keeps only one section open at a time', async ({ page }) => {
@@ -30,8 +30,8 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await page.waitForLoadState('networkidle');
 
     // Default open section is resources.
-    const productHeader = page.locator('[data-testid="footer-section-product"] [role="button"]');
-    const resourcesHeader = page.locator('[data-testid="footer-section-resources"] [role="button"]');
+    const productHeader = page.locator('.footer-section--product [role="button"]');
+    const resourcesHeader = page.locator('.footer-section--resources [role="button"]');
 
     await expect(resourcesHeader).toHaveAttribute('aria-expanded', 'true');
     await expect(productHeader).toHaveAttribute('aria-expanded', 'false');
@@ -47,7 +47,7 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await page.goto(PAGE_WITH_CONTENT);
     await page.waitForLoadState('networkidle');
 
-    const selector = page.locator('[data-testid="footer-language-selector"]');
+    const selector = page.locator('.footer-lang-toggle');
     const button = selector.locator('button').first();
     const popup = selector.locator('[role="listbox"]');
 
@@ -63,7 +63,7 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await page.goto(PAGE_WITH_CONTENT);
     await page.waitForLoadState('networkidle');
 
-    const modal = page.locator('[data-testid="free-trial-modal"]');
+    const modal = page.locator('.free-trial-modal__overlay');
     const trigger = page.locator('a[data-trigger="free-trial"]').first();
 
     await expect(modal).toBeHidden();
@@ -87,7 +87,7 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await expect(twitter.locator('svg')).toHaveCount(1);
 
     // No <i class="icon-..."> icon-font glyphs anywhere in the footer.
-    const footer = page.locator('[data-testid="footer"]');
+    const footer = page.locator('footer');
     await expect(footer.locator('i[class*="icon-"]')).toHaveCount(0);
   });
 
@@ -96,7 +96,7 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await page.goto(PAGE_WITH_CONTENT);
 
     const year = new Date().getFullYear().toString();
-    await expect(page.locator('[data-testid="footer"]')).toContainText(`© Datadog ${year}`);
+    await expect(page.locator('footer')).toContainText(`© Datadog ${year}`);
   });
 
   test('dark mode keeps the footer on its Hugo palette', async ({ page }) => {
@@ -106,7 +106,7 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
       document.documentElement.setAttribute('data-theme', 'dark');
     });
 
-    const footer = page.locator('[data-testid="footer"]');
+    const footer = page.locator('footer');
     const bg = await footer.evaluate((el) => getComputedStyle(el).backgroundColor);
     // Token is Hugo-identical with no dark-mode override — stays #110617.
     expect(bg).toBe('rgb(17, 6, 23)');

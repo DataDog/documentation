@@ -51,9 +51,8 @@ describe('LanguageSelector — static render', () => {
   it('renders the toggle button with current language', () => {
     renderSelector();
 
-    const wrapper = screen.getByTestId('footer-language-selector');
+    const wrapper = document.querySelector<HTMLElement>('.footer-lang-toggle')!;
     expect(wrapper).toBeTruthy();
-    expect(wrapper.classList.contains('footer-lang-toggle')).toBe(true);
 
     const button = wrapper.querySelector('button')!;
     expect(button.textContent).toContain('English');

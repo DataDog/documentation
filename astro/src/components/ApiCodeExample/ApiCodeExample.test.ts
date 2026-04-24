@@ -31,11 +31,20 @@ const examples = [
 const renderComponent = () =>
   render(h(ApiCodeExampleComponent, { examples }));
 
+function getTab(i: number) {
+  return document.querySelector<HTMLButtonElement>(`.tabs__button[data-tab-index="${i}"]`)!;
+}
+function getToggles() {
+  return Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.api-code-example__accordion-header'),
+  );
+}
+
 describe('ApiCodeExample — static render', () => {
-  it('renders with data-testid and a heading', () => {
+  it('renders the component root and a heading', () => {
     renderComponent();
 
-    expect(screen.getByTestId('api-code-example')).toBeTruthy();
+    expect(document.querySelector('.api-code-example')).toBeTruthy();
     expect(screen.getByText('Code Example')).toBeTruthy();
   });
 
@@ -59,9 +68,9 @@ describe('ApiCodeExample — multi-entry accordion interactivity', () => {
     renderComponent();
 
     // Switch to the Python tab which has 2 entries.
-    await user.click(screen.getByTestId('tab-1'));
+    await user.click(getTab(1));
 
-    const toggles = screen.getAllByTestId('api-code-example-accordion-toggle');
+    const toggles = getToggles();
     expect(toggles).toHaveLength(2);
 
     // First entry open by default.
@@ -79,9 +88,9 @@ describe('ApiCodeExample — multi-entry accordion interactivity', () => {
     const user = userEvent.setup();
     renderComponent();
 
-    await user.click(screen.getByTestId('tab-1'));
+    await user.click(getTab(1));
 
-    const toggles = screen.getAllByTestId('api-code-example-accordion-toggle');
+    const toggles = getToggles();
     await user.click(toggles[1]);
 
     expect(toggles[1].classList.contains('api-code-example__accordion-header--open')).toBe(true);
@@ -93,9 +102,9 @@ describe('ApiCodeExample — multi-entry accordion interactivity', () => {
     const user = userEvent.setup();
     renderComponent();
 
-    await user.click(screen.getByTestId('tab-1'));
+    await user.click(getTab(1));
 
-    const toggles = screen.getAllByTestId('api-code-example-accordion-toggle');
+    const toggles = getToggles();
     await user.click(toggles[0]);
 
     expect(toggles[0].classList.contains('api-code-example__accordion-header--open')).toBe(false);
@@ -110,16 +119,16 @@ describe('ApiCodeExample — tab change resets accordion state', () => {
     renderComponent();
 
     // Go to Python tab, expand the second entry.
-    await user.click(screen.getByTestId('tab-1'));
-    let toggles = screen.getAllByTestId('api-code-example-accordion-toggle');
+    await user.click(getTab(1));
+    let toggles = getToggles();
     await user.click(toggles[1]);
     expect(toggles[1].classList.contains('api-code-example__accordion-header--open')).toBe(true);
 
     // Switch to cURL and back to Python.
-    await user.click(screen.getByTestId('tab-0'));
-    await user.click(screen.getByTestId('tab-1'));
+    await user.click(getTab(0));
+    await user.click(getTab(1));
 
-    toggles = screen.getAllByTestId('api-code-example-accordion-toggle');
+    toggles = getToggles();
     expect(toggles[0].classList.contains('api-code-example__accordion-header--open')).toBe(true);
     expect(toggles[0].getAttribute('aria-expanded')).toBe('true');
     expect(toggles[1].classList.contains('api-code-example__accordion-header--open')).toBe(false);

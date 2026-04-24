@@ -11,7 +11,6 @@ describe('ApiStatusAlert component', () => {
 
     expect(html).toContain('Deprecated');
     expect(html).toContain('api-status-alert--deprecated');
-    expect(html).toContain('data-testid="api-status-alert"');
     expect(html).toContain('This endpoint is deprecated.');
   });
 

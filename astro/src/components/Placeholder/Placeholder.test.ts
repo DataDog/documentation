@@ -10,7 +10,7 @@ describe('Placeholder primitive', () => {
     });
 
     expect(html).toContain('HEADER');
-    expect(html).toContain('data-testid="placeholder"');
+    expect(html).toContain('class="placeholder');
     expect(html).toContain('data-placeholder-name="HEADER"');
   });
 

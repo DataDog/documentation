@@ -66,12 +66,11 @@ export default function NavDropdown({ label, href, identifier, classes, isSoluti
         setOpen(true);
       }}
       onMouseLeave={scheduleClose}
-      data-testid={`nav-dropdown-${identifier}`}
     >
       <a class={`${classes.menuLink} dropdown`} href={href}>
         <span class="menu-text">{label}</span>
       </a>
-      <div class={menuClass} data-testid={`nav-dropdown-menu-${identifier}`}>
+      <div class={`${menuClass} ${identifier}-dropdown-menu`}>
         {children}
       </div>
     </li>

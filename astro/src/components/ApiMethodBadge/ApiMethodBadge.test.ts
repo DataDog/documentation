@@ -15,7 +15,6 @@ describe('ApiMethodBadge component', () => {
 
       expect(html).toContain(method.toUpperCase());
       expect(html).toContain(`api-method-badge--${method}`);
-      expect(html).toContain('data-testid="api-method-badge"');
     }
   });
 

@@ -6,7 +6,7 @@ test.describe('ApiResponse component — visual', () => {
   });
 
   test('full response section matches screenshot', async ({ page }) => {
-    const response = page.locator('[data-testid="api-response"]').first();
+    const response = page.locator('.api-response').first();
     await expect(response).toBeVisible();
     await expect(response).toHaveScreenshot('api-response-full.png');
   });
@@ -15,8 +15,8 @@ test.describe('ApiResponse component — visual', () => {
 
   for (const code of statusCodes) {
     test(`status ${code} tab matches screenshot`, async ({ page }) => {
-      const response = page.locator('[data-testid="api-response"]').first();
-      await expect(response.locator('[data-testid="tabs"][data-hydrated="true"]').first()).toBeVisible();
+      const response = page.locator('.api-response').first();
+      await expect(response.locator('.tabs[data-hydrated="true"]').first()).toBeVisible();
       await response.getByRole('tab', { name: code, exact: true }).click();
       await expect(response.getByRole('tab', { name: code, exact: true })).toHaveAttribute(
         'aria-selected',
@@ -27,9 +27,9 @@ test.describe('ApiResponse component — visual', () => {
   }
 
   test('Model view matches screenshot', async ({ page }) => {
-    const response = page.locator('[data-testid="api-response"]').first();
+    const response = page.locator('.api-response').first();
     // Ensure both outer and inner Tabs islands are hydrated.
-    await expect(response.locator('[data-testid="tabs"][data-hydrated="true"]')).toHaveCount(2);
+    await expect(response.locator('.tabs[data-hydrated="true"]')).toHaveCount(2);
     await response.getByRole('tab', { name: '200', exact: true }).click();
     await expect(response.getByRole('tab', { name: 'Model', exact: true })).toHaveAttribute(
       'aria-selected',
@@ -39,8 +39,8 @@ test.describe('ApiResponse component — visual', () => {
   });
 
   test('Example view matches screenshot', async ({ page }) => {
-    const response = page.locator('[data-testid="api-response"]').first();
-    await expect(response.locator('[data-testid="tabs"][data-hydrated="true"]')).toHaveCount(2);
+    const response = page.locator('.api-response').first();
+    await expect(response.locator('.tabs[data-hydrated="true"]')).toHaveCount(2);
     await response.getByRole('tab', { name: '200', exact: true }).click();
     await response.getByRole('tab', { name: 'Example', exact: true }).click();
     await expect(response.getByRole('tab', { name: 'Example', exact: true })).toHaveAttribute(

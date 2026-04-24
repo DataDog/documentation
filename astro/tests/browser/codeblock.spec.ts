@@ -6,13 +6,13 @@ test.describe('CodeBlock component', () => {
   });
 
   test('renders all code blocks on the page', async ({ page }) => {
-    const codeBlocks = page.locator('[data-testid="code-block"]');
+    const codeBlocks = page.locator('.code-block');
     await expect(codeBlocks.first()).toBeVisible();
     expect(await codeBlocks.count()).toBeGreaterThanOrEqual(11);
   });
 
   test('renders code block without language label', async ({ page }) => {
-    const plainBlock = page.locator('[data-testid="code-block"]:not([data-language])').first();
+    const plainBlock = page.locator('.code-block:not([data-language])').first();
     await expect(plainBlock).toBeVisible();
     await expect(plainBlock.locator('code')).toContainText('This is a plain code block');
   });
@@ -24,12 +24,12 @@ test.describe('CodeBlock component', () => {
   });
 
   test('each code block without disable_copy has a copy button', async ({ page }) => {
-    const codeBlocks = page.locator('[data-testid="code-block"]:not([data-disable-copy])');
+    const codeBlocks = page.locator('.code-block:not([data-disable-copy])');
     const count = await codeBlocks.count();
 
     for (let i = 0; i < count; i++) {
       // Copy button is hidden by default (opacity: 0); verify it exists in the DOM
-      const copyBtn = codeBlocks.nth(i).locator('[data-testid="code-block-copy"]');
+      const copyBtn = codeBlocks.nth(i).locator('.code-block__copy');
       await expect(copyBtn).toBeAttached();
       await expect(copyBtn).toContainText('Copy');
     }
@@ -37,10 +37,10 @@ test.describe('CodeBlock component', () => {
 
   test('copy button appears on hover and shows Copied! after click', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-    const firstBlock = page.locator('[data-testid="code-block"][data-hydrated="true"]').first();
+    const firstBlock = page.locator('.code-block[data-hydrated="true"]').first();
     await expect(firstBlock).toBeVisible();
-    const content = firstBlock.locator('[data-testid="code-block-content"]');
-    const copyBtn = firstBlock.locator('[data-testid="code-block-copy"]');
+    const content = firstBlock.locator('.code-block__content');
+    const copyBtn = firstBlock.locator('.code-block__copy');
 
     // Hover over code content to reveal button
     await content.hover();
@@ -53,7 +53,7 @@ test.describe('CodeBlock component', () => {
   // === Filename ===
 
   test('renders filename in header', async ({ page }) => {
-    const filename = page.locator('[data-testid="code-block-filename"]').first();
+    const filename = page.locator('.code-block__filename').first();
     await expect(filename).toBeVisible();
     await expect(filename).toHaveText('app.py');
   });
@@ -62,15 +62,15 @@ test.describe('CodeBlock component', () => {
 
   test('collapsible code block has toggle button', async ({ page }) => {
     const collapsibleBlock = page.locator('[data-collapsible]').first();
-    const toggle = collapsibleBlock.locator('[data-testid="code-block-toggle"]');
+    const toggle = collapsibleBlock.locator('.code-block__toggle');
     await expect(toggle).toBeVisible();
   });
 
   test('toggle button collapses and expands code', async ({ page }) => {
     const collapsibleBlock = page.locator('[data-collapsible][data-hydrated="true"]').first();
     await expect(collapsibleBlock).toBeVisible();
-    const toggle = collapsibleBlock.locator('[data-testid="code-block-toggle"]');
-    const content = collapsibleBlock.locator('[data-testid="code-block-content"]');
+    const toggle = collapsibleBlock.locator('.code-block__toggle');
+    const content = collapsibleBlock.locator('.code-block__content');
 
     // Initially expanded
     await expect(content).toBeVisible();
@@ -92,7 +92,7 @@ test.describe('CodeBlock component', () => {
   test('disable_copy block has no copy button', async ({ page }) => {
     const disabledBlock = page.locator('[data-disable-copy]').first();
     await expect(disabledBlock).toBeVisible();
-    const copyBtn = disabledBlock.locator('[data-testid="code-block-copy"]');
+    const copyBtn = disabledBlock.locator('.code-block__copy');
     expect(await copyBtn.count()).toBe(0);
   });
 

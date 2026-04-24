@@ -31,10 +31,10 @@ const renderApiResponse = (props: Partial<Parameters<typeof ApiResponse>[0]> = {
   render(h(ApiResponseComponent, { responses, ...props }));
 
 describe('ApiResponse — static render', () => {
-  it('renders wrapper with data-testid and a heading', () => {
+  it('renders wrapper with the BEM root class and a heading', () => {
     renderApiResponse();
 
-    expect(screen.getByTestId('api-response')).toBeTruthy();
+    expect(document.querySelector('.api-response')).toBeTruthy();
     expect(screen.getByText('Response')).toBeTruthy();
   });
 
@@ -50,14 +50,14 @@ describe('ApiResponse — static render', () => {
   it('renders the active response panel and description on first load', () => {
     renderApiResponse();
 
-    expect(screen.getByTestId('api-response-panel-200')).toBeTruthy();
+    expect(document.querySelector<HTMLElement>('.api-response__panel--200')!).toBeTruthy();
     expect(screen.getByText('OK response')).toBeTruthy();
   });
 
   it('applies BEM classes to wrapper, heading, and description', () => {
     renderApiResponse();
 
-    expect(screen.getByTestId('api-response').classList.contains('api-response')).toBe(true);
+    expect(document.querySelector('.api-response')).toBeTruthy();
     expect(screen.getByText('Response').classList.contains('api-response__heading')).toBe(true);
     expect(screen.getByText('OK response').classList.contains('api-response__description')).toBe(true);
   });
@@ -87,8 +87,8 @@ describe('ApiResponse — status code tab interactivity', () => {
     expect(tab200.getAttribute('aria-selected')).toBe('false');
 
     // Panel visibility: 404 panel mounted, 200 panel unmounted
-    expect(screen.getByTestId('api-response-panel-404')).toBeTruthy();
-    expect(screen.queryByTestId('api-response-panel-200')).toBeNull();
+    expect(document.querySelector<HTMLElement>('.api-response__panel--404')!).toBeTruthy();
+    expect(document.querySelector('.api-response__panel--200')).toBeNull();
     expect(screen.getByText('Not found response')).toBeTruthy();
   });
 });
@@ -128,7 +128,7 @@ describe('ApiResponse — Model/Example toggle interactivity', () => {
     expect(modelTab.getAttribute('aria-selected')).toBe('false');
 
     // Example wrapper uses the api-response__example BEM class
-    const panel = screen.getByTestId('api-response-panel-200');
+    const panel = document.querySelector<HTMLElement>('.api-response__panel--200')!;
     const exampleEl = panel.querySelector('.api-response__example');
     expect(exampleEl).not.toBeNull();
   });

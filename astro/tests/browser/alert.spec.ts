@@ -10,7 +10,7 @@ test.describe('Alert component — visual', () => {
   for (const type of types) {
     test(`${type} alert matches screenshot`, async ({ page }) => {
       const alert = page
-        .locator('[data-testid="tabs-panel"]')
+        .locator('.tabs__panel--active')
         .locator(`.alert--${type}`)
         .first();
       await expect(alert).toHaveScreenshot(`alert-${type}.png`);

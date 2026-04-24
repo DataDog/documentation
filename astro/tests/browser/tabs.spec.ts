@@ -10,38 +10,38 @@ test.describe('Tabs component', () => {
   });
 
   test('many-tab instance uses pills layout', async ({ page }) => {
-    const pillsTabs = page.locator('[data-testid="tabs"].tabs--pills');
+    const pillsTabs = page.locator('.tabs.tabs--pills');
     await expect(pillsTabs).toBeVisible();
   });
 
   test('pills layout switches tabs on click', async ({ page }) => {
-    const pillsTabs = page.locator('[data-testid="tabs"].tabs--pills');
-    const tab3 = pillsTabs.locator('[data-testid="tab-2"]');
+    const pillsTabs = page.locator('.tabs.tabs--pills');
+    const tab3 = pillsTabs.locator('.tabs__button[data-tab-index="2"]');
     await tab3.click();
 
     await expect(tab3).toHaveAttribute('aria-selected', 'true');
-    const panel = pillsTabs.locator('[data-testid="tabs-panel"]');
+    const panel = pillsTabs.locator('.tabs__panel--active');
     await expect(panel).toContainText('Go');
   });
 
   test('default tabs variant matches screenshot', async ({ page }) => {
     const defaultTabs = page
-      .locator('[data-testid="tabs"]:not(.tabs--pills)')
+      .locator('.tabs:not(.tabs--pills)')
       .first();
     await expect(defaultTabs).toHaveScreenshot('tabs-default.png');
   });
 
   test('pills tabs variant matches screenshot', async ({ page }) => {
-    const pillsTabs = page.locator('[data-testid="tabs"].tabs--pills').first();
+    const pillsTabs = page.locator('.tabs.tabs--pills').first();
     await expect(pillsTabs).toHaveScreenshot('tabs-pills.png');
   });
 
   test('active tab highlighted state matches screenshot', async ({ page }) => {
     const defaultTabs = page
-      .locator('[data-testid="tabs"]:not(.tabs--pills)')
+      .locator('.tabs:not(.tabs--pills)')
       .first();
-    await defaultTabs.locator('[data-testid="tab-2"]').click();
-    await expect(defaultTabs.locator('[data-testid="tab-2"]')).toHaveAttribute(
+    await defaultTabs.locator('.tabs__button[data-tab-index="2"]').click();
+    await expect(defaultTabs.locator('.tabs__button[data-tab-index="2"]')).toHaveAttribute(
       'aria-selected',
       'true'
     );

@@ -71,7 +71,7 @@ export function TabsBloated(props: TabsBloatedProps) {
   }, [labels.join('\u0000'), variant]);
 
   if (labels.length === 0) {
-    return <div data-testid="tabs" />;
+    return <div class={cl('tabs')} />;
   }
 
   const handleTabClick = (index: number) => {
@@ -83,7 +83,7 @@ export function TabsBloated(props: TabsBloatedProps) {
   const panelsHtml = 'panelsHtml' in props ? props.panelsHtml : undefined;
 
   return (
-    <div class={containerClass} data-testid="tabs" data-hydrated={hydrated ? 'true' : undefined}>
+    <div class={containerClass} data-hydrated={hydrated ? 'true' : undefined}>
       <div ref={navRef} class={cl('tabs__nav')} role="tablist">
         {labels.map((label, i) => {
           const active = i === activeIndex;
@@ -96,7 +96,7 @@ export function TabsBloated(props: TabsBloatedProps) {
               aria-selected={active}
               class={btnClass}
               onClick={() => handleTabClick(i)}
-              data-testid={`tab-${i}`}
+              data-tab-index={i}
             >
               {label}
             </button>
@@ -108,15 +108,14 @@ export function TabsBloated(props: TabsBloatedProps) {
             <div
               key={i}
               role="tabpanel"
-              class={cl('tabs__panel')}
+              class={i === activeIndex ? cl('tabs__panel', 'tabs__panel--active') : cl('tabs__panel')}
               data-tab-panel
-              data-testid={i === activeIndex ? 'tabs-panel' : undefined}
               hidden={i !== activeIndex}
               dangerouslySetInnerHTML={{ __html: html }}
             />
           ))
         : (
-          <div role="tabpanel" class={cl('tabs__panel')} data-testid="tabs-panel">
+          <div role="tabpanel" class={cl('tabs__panel', 'tabs__panel--active')}>
             {(props as RenderPropProps).children(activeIndex)}
           </div>
         )}

@@ -106,14 +106,12 @@ export default function ProductMegaMenu({
         setOpen(true);
       }}
       onMouseLeave={scheduleClose}
-      data-testid="nav-dropdown-product"
     >
       <a class={`${classes.menuLink} dropdown`} href={href}>
         <span class="menu-text">{label}</span>
       </a>
       <div
         class={`${classes.dropdownMenu} ${open ? classes.dropdownMenuOpen : ''} product-menu dropdown-menu`}
-        data-testid="product-mega-menu"
       >
         <div class="product-menu__row">
           <div class="product-menu__toggleColumn">
@@ -123,10 +121,9 @@ export default function ProductMegaMenu({
                 <li key={cat.identifier}>
                   <button
                     type="button"
-                    class={openCategory === cat.identifier ? 'text-primary' : ''}
+                    class={`category-toggle category-toggle--${cat.identifier}${openCategory === cat.identifier ? ' text-primary' : ''}`}
                     onMouseOver={() => scheduleCategory(cat.identifier)}
                     onMouseOut={clearCategoryTimer}
-                    data-testid={`product-category-toggle-${cat.identifier}`}
                   >
                     <span class="category-icon" dangerouslySetInnerHTML={{ __html: cat.iconHtml }} />
                     {cat.label}
@@ -143,10 +140,9 @@ export default function ProductMegaMenu({
             {categories.map((cat) => (
               <div
                 key={cat.identifier}
-                class="product-category"
+                class={`product-category product-category--${cat.identifier}`}
                 id={`${cat.identifier}-detail`}
                 style={{ display: openCategory === cat.identifier ? 'flex' : 'none' }}
-                data-testid={`product-category-detail-${cat.identifier}`}
               >
                 <div
                   class="category-description"

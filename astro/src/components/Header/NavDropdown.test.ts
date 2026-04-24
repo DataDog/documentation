@@ -38,11 +38,18 @@ const renderDropdown = (props: Partial<Parameters<typeof NavDropdown>[0]> = {}) 
     }),
   );
 
+function getTrigger() {
+  return document.querySelector<HTMLLIElement>('.product-dropdown')!;
+}
+function getMenu() {
+  return document.querySelector<HTMLElement>('.product-dropdown-menu')!;
+}
+
 describe('NavDropdown — static render', () => {
   it('renders the trigger label and pre-rendered children (SEO)', () => {
     renderDropdown();
 
-    expect(screen.getByTestId('nav-dropdown-product')).toBeTruthy();
+    expect(getTrigger()).toBeTruthy();
     expect(screen.getByText('Product')).toBeTruthy();
     // Children must render at build time regardless of open state.
     expect(screen.getByTestId('dropdown-child')).toBeTruthy();
@@ -51,7 +58,7 @@ describe('NavDropdown — static render', () => {
   it('applies the identifier BEM class and dropdown hook class', () => {
     renderDropdown();
 
-    const li = screen.getByTestId('nav-dropdown-product');
+    const li = getTrigger();
     expect(li.classList.contains('dropdown')).toBe(true);
     expect(li.classList.contains('product-dropdown')).toBe(true);
   });
@@ -59,15 +66,13 @@ describe('NavDropdown — static render', () => {
   it('applies the solutions-menu BEM class only when isSolutions is true', () => {
     renderDropdown({ isSolutions: true });
 
-    const menu = screen.getByTestId('nav-dropdown-menu-product');
-    expect(menu.classList.contains('solutions-menu')).toBe(true);
+    expect(getMenu().classList.contains('solutions-menu')).toBe(true);
   });
 
   it('omits the solutions-menu class by default', () => {
     renderDropdown();
 
-    const menu = screen.getByTestId('nav-dropdown-menu-product');
-    expect(menu.classList.contains('solutions-menu')).toBe(false);
+    expect(getMenu().classList.contains('solutions-menu')).toBe(false);
   });
 });
 
@@ -75,19 +80,16 @@ describe('NavDropdown — interactivity', () => {
   it('is closed by default (no open modifier classes)', () => {
     renderDropdown();
 
-    const li = screen.getByTestId('nav-dropdown-product');
-    const menu = screen.getByTestId('nav-dropdown-menu-product');
-
-    expect(li.classList.contains('menu-item--open')).toBe(false);
-    expect(menu.classList.contains('dropdown-menu--open')).toBe(false);
+    expect(getTrigger().classList.contains('menu-item--open')).toBe(false);
+    expect(getMenu().classList.contains('dropdown-menu--open')).toBe(false);
   });
 
   it('opens on mouse enter: adds open modifier classes to trigger and menu', async () => {
     const user = userEvent.setup();
     renderDropdown();
 
-    const li = screen.getByTestId('nav-dropdown-product');
-    const menu = screen.getByTestId('nav-dropdown-menu-product');
+    const li = getTrigger();
+    const menu = getMenu();
 
     await user.hover(li);
 
@@ -99,8 +101,8 @@ describe('NavDropdown — interactivity', () => {
     const user = userEvent.setup();
     renderDropdown();
 
-    const li = screen.getByTestId('nav-dropdown-product');
-    const menu = screen.getByTestId('nav-dropdown-menu-product');
+    const li = getTrigger();
+    const menu = getMenu();
 
     await user.hover(li);
     expect(li.classList.contains('menu-item--open')).toBe(true);
@@ -118,8 +120,8 @@ describe('NavDropdown — interactivity', () => {
     const user = userEvent.setup();
     renderDropdown();
 
-    const li = screen.getByTestId('nav-dropdown-product');
-    const menu = screen.getByTestId('nav-dropdown-menu-product');
+    const li = getTrigger();
+    const menu = getMenu();
 
     await user.hover(li);
     await user.unhover(li);

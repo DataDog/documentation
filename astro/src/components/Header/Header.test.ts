@@ -31,10 +31,10 @@ describe('Header', () => {
     const container = await createContainer();
     const html = await container.renderToString(Header);
 
-    // The logo anchor carries data-testid="header-logo" and href="/". Attribute
-    // order is implementation-defined, so accept either ordering.
+    // The logo anchor carries the js-logo-download behavior class and href="/".
+    // Attribute order is implementation-defined, so accept either ordering.
     expect(html).toMatch(
-      /<a[^>]*(data-testid="header-logo"[^>]*href="\/"|href="\/"[^>]*data-testid="header-logo")/,
+      /<a[^>]*(class="[^"]*js-logo-download[^"]*"[^>]*href="\/"|href="\/"[^>]*class="[^"]*js-logo-download)/,
     );
   });
 

@@ -44,14 +44,13 @@ export function RegionSelector({ regions }: RegionSelectorProps): JSX.Element {
   };
 
   return (
-    <div class={cl('region-selector')} data-testid="region-selector" data-hydrated={hydrated ? 'true' : undefined}>
+    <div class={cl('region-selector')} data-hydrated={hydrated ? 'true' : undefined}>
       <label class={cl('region-selector__label')} for="region-select">Datadog site</label>
       <select
         id="region-select"
         class={cl('region-selector__select')}
         value={selected}
         onChange={handleChange}
-        data-testid="region-selector-select"
       >
         {regions.map((r) => (
           <option key={r.key} value={r.key}>
