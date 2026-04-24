@@ -2506,6 +2506,20 @@ public class MyJavaClass {
 {{% /tab %}}
 {{< /tabs >}}
 
+### Automatic tagging from RUM baggage
+
+When the [RUM Browser SDK][11] has `propagateTraceBaggage` enabled, it injects OTel baggage (`session.id`, `user.id`, `account.id`) on outbound HTTP requests. The Python and Node.js LLMObs SDKs automatically read these baggage values from the active trace context and apply them to LLMObs spans using Datadog standard attribute names:
+
+| OTel baggage key | LLMObs span tag |
+|---|---|
+| `session.id` | `session_id` |
+| `user.id` | `usr.id` |
+| `account.id` | `usr.account_id` |
+
+This links every LLMObs trace back to the originating RUM session and user without any manual tagging. Explicit values set through `LLMObs.annotate()` (or `session_id` on the root span decorator) take precedence over baggage-derived values.
+
+[11]: /real_user_monitoring/browser/
+
 ## Distributed tracing
 
 The SDK supports tracing across distributed services or hosts. Distributed tracing works by propagating span information across web requests.
