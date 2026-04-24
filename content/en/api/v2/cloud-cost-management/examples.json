@@ -278,47 +278,54 @@
           "attributes": {
             "costs_to_allocate": [
               {
-                "condition": "",
-                "tag": ""
+                "condition": "is",
+                "tag": "account_id",
+                "value": "123456789",
+                "values": null
+              },
+              {
+                "condition": "in",
+                "tag": "environment",
+                "value": "",
+                "values": [
+                  "production",
+                  "staging"
+                ]
               }
             ],
+            "enabled": true,
+            "order_id": 1,
             "provider": [
-              ""
+              "aws",
+              "gcp"
             ],
-            "rule_name": "",
+            "rule_name": "example-arbitrary-cost-rule",
             "strategy": {
-              "allocated_by": [
-                {
-                  "allocated_tags": [
-                    {
-                      "key": "",
-                      "value": ""
-                    }
-                  ],
-                  "percentage": 0
-                }
-              ],
-              "allocated_by_filters": [
-                {
-                  "condition": "",
-                  "tag": ""
-                }
+              "allocated_by_tag_keys": [
+                "team",
+                "environment"
               ],
               "based_on_costs": [
                 {
-                  "condition": "",
-                  "tag": ""
-                }
-              ],
-              "evaluate_grouped_by_filters": [
+                  "condition": "is",
+                  "tag": "service",
+                  "value": "web-api",
+                  "values": null
+                },
                 {
-                  "condition": "",
-                  "tag": ""
+                  "condition": "not in",
+                  "tag": "team",
+                  "value": "",
+                  "values": [
+                    "legacy",
+                    "deprecated"
+                  ]
                 }
               ],
-              "method": ""
+              "granularity": "daily",
+              "method": "proportional"
             },
-            "type": ""
+            "type": "shared"
           },
           "type": "upsert_arbitrary_rule"
         }
@@ -328,64 +335,55 @@
           "attributes": {
             "costs_to_allocate": [
               {
-                "condition": "",
-                "tag": "",
-                "value": "string",
-                "values": []
+                "condition": "is",
+                "tag": "account_id",
+                "value": "123456789",
+                "values": null
+              },
+              {
+                "condition": "in",
+                "tag": "environment",
+                "value": "",
+                "values": [
+                  "production",
+                  "staging"
+                ]
               }
             ],
-            "enabled": false,
-            "order_id": "integer",
+            "enabled": true,
+            "order_id": 1,
             "provider": [
-              ""
+              "aws",
+              "gcp"
             ],
-            "rejected": false,
-            "rule_name": "",
+            "rule_name": "example-arbitrary-cost-rule",
             "strategy": {
-              "allocated_by": [
-                {
-                  "allocated_tags": [
-                    {
-                      "key": "",
-                      "value": ""
-                    }
-                  ],
-                  "percentage": 0
-                }
+              "allocated_by_tag_keys": [
+                "team",
+                "environment"
               ],
-              "allocated_by_filters": [
-                {
-                  "condition": "",
-                  "tag": "",
-                  "value": "string",
-                  "values": []
-                }
-              ],
-              "allocated_by_tag_keys": [],
               "based_on_costs": [
                 {
-                  "condition": "",
-                  "tag": "",
-                  "value": "string",
-                  "values": []
-                }
-              ],
-              "based_on_timeseries": {},
-              "evaluate_grouped_by_filters": [
+                  "condition": "is",
+                  "tag": "service",
+                  "value": "web-api",
+                  "values": null
+                },
                 {
-                  "condition": "",
-                  "tag": "",
-                  "value": "string",
-                  "values": []
+                  "condition": "not in",
+                  "tag": "team",
+                  "value": "",
+                  "values": [
+                    "legacy",
+                    "deprecated"
+                  ]
                 }
               ],
-              "evaluate_grouped_by_tag_keys": [],
-              "granularity": "string",
-              "method": ""
+              "granularity": "daily",
+              "method": "proportional"
             },
-            "type": ""
+            "type": "shared"
           },
-          "id": "string",
           "type": "upsert_arbitrary_rule"
         }
       },
@@ -407,6 +405,15 @@
       "json_curl": {
         "data": [
           {
+            "id": "456",
+            "type": "arbitrary_rule"
+          },
+          {
+            "id": "123",
+            "type": "arbitrary_rule"
+          },
+          {
+            "id": "789",
             "type": "arbitrary_rule"
           }
         ]
@@ -414,7 +421,15 @@
       "json": {
         "data": [
           {
-            "id": "string",
+            "id": "456",
+            "type": "arbitrary_rule"
+          },
+          {
+            "id": "123",
+            "type": "arbitrary_rule"
+          },
+          {
+            "id": "789",
             "type": "arbitrary_rule"
           }
         ]
@@ -603,47 +618,54 @@
           "attributes": {
             "costs_to_allocate": [
               {
-                "condition": "",
-                "tag": ""
+                "condition": "is",
+                "tag": "account_id",
+                "value": "123456789",
+                "values": null
+              },
+              {
+                "condition": "in",
+                "tag": "environment",
+                "value": "",
+                "values": [
+                  "production",
+                  "staging"
+                ]
               }
             ],
+            "enabled": true,
+            "order_id": 1,
             "provider": [
-              ""
+              "aws",
+              "gcp"
             ],
-            "rule_name": "",
+            "rule_name": "example-arbitrary-cost-rule",
             "strategy": {
-              "allocated_by": [
-                {
-                  "allocated_tags": [
-                    {
-                      "key": "",
-                      "value": ""
-                    }
-                  ],
-                  "percentage": 0
-                }
-              ],
-              "allocated_by_filters": [
-                {
-                  "condition": "",
-                  "tag": ""
-                }
+              "allocated_by_tag_keys": [
+                "team",
+                "environment"
               ],
               "based_on_costs": [
                 {
-                  "condition": "",
-                  "tag": ""
-                }
-              ],
-              "evaluate_grouped_by_filters": [
+                  "condition": "is",
+                  "tag": "service",
+                  "value": "web-api",
+                  "values": null
+                },
                 {
-                  "condition": "",
-                  "tag": ""
+                  "condition": "not in",
+                  "tag": "team",
+                  "value": "",
+                  "values": [
+                    "legacy",
+                    "deprecated"
+                  ]
                 }
               ],
-              "method": ""
+              "granularity": "daily",
+              "method": "proportional"
             },
-            "type": ""
+            "type": "shared"
           },
           "type": "upsert_arbitrary_rule"
         }
@@ -653,64 +675,55 @@
           "attributes": {
             "costs_to_allocate": [
               {
-                "condition": "",
-                "tag": "",
-                "value": "string",
-                "values": []
+                "condition": "is",
+                "tag": "account_id",
+                "value": "123456789",
+                "values": null
+              },
+              {
+                "condition": "in",
+                "tag": "environment",
+                "value": "",
+                "values": [
+                  "production",
+                  "staging"
+                ]
               }
             ],
-            "enabled": false,
-            "order_id": "integer",
+            "enabled": true,
+            "order_id": 1,
             "provider": [
-              ""
+              "aws",
+              "gcp"
             ],
-            "rejected": false,
-            "rule_name": "",
+            "rule_name": "example-arbitrary-cost-rule",
             "strategy": {
-              "allocated_by": [
-                {
-                  "allocated_tags": [
-                    {
-                      "key": "",
-                      "value": ""
-                    }
-                  ],
-                  "percentage": 0
-                }
+              "allocated_by_tag_keys": [
+                "team",
+                "environment"
               ],
-              "allocated_by_filters": [
-                {
-                  "condition": "",
-                  "tag": "",
-                  "value": "string",
-                  "values": []
-                }
-              ],
-              "allocated_by_tag_keys": [],
               "based_on_costs": [
                 {
-                  "condition": "",
-                  "tag": "",
-                  "value": "string",
-                  "values": []
-                }
-              ],
-              "based_on_timeseries": {},
-              "evaluate_grouped_by_filters": [
+                  "condition": "is",
+                  "tag": "service",
+                  "value": "web-api",
+                  "values": null
+                },
                 {
-                  "condition": "",
-                  "tag": "",
-                  "value": "string",
-                  "values": []
+                  "condition": "not in",
+                  "tag": "team",
+                  "value": "",
+                  "values": [
+                    "legacy",
+                    "deprecated"
+                  ]
                 }
               ],
-              "evaluate_grouped_by_tag_keys": [],
-              "granularity": "string",
-              "method": ""
+              "granularity": "daily",
+              "method": "proportional"
             },
-            "type": ""
+            "type": "shared"
           },
-          "id": "string",
           "type": "upsert_arbitrary_rule"
         }
       },
@@ -1526,36 +1539,81 @@
     "request": {
       "json_curl": {
         "data": {
+          "attributes": {
+            "created_at": 1738258683590,
+            "created_by": "00000000-0a0a-0a0a-aaa0-00000000000a",
+            "end_month": 202502,
+            "entries": [
+              {
+                "amount": 500,
+                "month": 202501,
+                "tag_filters": [
+                  {
+                    "tag_key": "service",
+                    "tag_value": "ec2"
+                  }
+                ]
+              },
+              {
+                "amount": 500,
+                "month": 202502,
+                "tag_filters": [
+                  {
+                    "tag_key": "service",
+                    "tag_value": "ec2"
+                  }
+                ]
+              }
+            ],
+            "metrics_query": "aws.cost.amortized{service:ec2} by {service}",
+            "name": "my budget",
+            "org_id": 123,
+            "start_month": 202501,
+            "total_amount": 1000,
+            "updated_at": 1738258683590,
+            "updated_by": "00000000-0a0a-0a0a-aaa0-00000000000a"
+          },
+          "id": "1",
           "type": "budget"
         }
       },
       "json": {
         "data": {
           "attributes": {
-            "created_at": "integer",
-            "created_by": "string",
-            "end_month": "integer",
+            "created_at": 1738258683590,
+            "created_by": "00000000-0a0a-0a0a-aaa0-00000000000a",
+            "end_month": 202502,
             "entries": [
               {
-                "amount": "number",
-                "month": "integer",
+                "amount": 500,
+                "month": 202501,
                 "tag_filters": [
                   {
-                    "tag_key": "string",
-                    "tag_value": "string"
+                    "tag_key": "service",
+                    "tag_value": "ec2"
+                  }
+                ]
+              },
+              {
+                "amount": 500,
+                "month": 202502,
+                "tag_filters": [
+                  {
+                    "tag_key": "service",
+                    "tag_value": "ec2"
                   }
                 ]
               }
             ],
-            "metrics_query": "string",
-            "name": "string",
-            "org_id": "integer",
-            "start_month": "integer",
-            "total_amount": "number",
-            "updated_at": "integer",
-            "updated_by": "string"
+            "metrics_query": "aws.cost.amortized{service:ec2} by {service}",
+            "name": "my budget",
+            "org_id": 123,
+            "start_month": 202501,
+            "total_amount": 1000,
+            "updated_at": 1738258683590,
+            "updated_by": "00000000-0a0a-0a0a-aaa0-00000000000a"
           },
-          "id": "string",
+          "id": "1",
           "type": "budget"
         }
       },
@@ -2427,89 +2485,54 @@
       "json_curl": {
         "data": {
           "attributes": {
+            "enabled": true,
             "rules": [
               {
-                "enabled": false,
-                "mapping": {
-                  "destination_key": "",
-                  "source_keys": [
-                    ""
-                  ]
-                },
-                "name": "",
+                "enabled": true,
+                "mapping": null,
+                "metadata": null,
+                "name": "Add Cost Center Tag",
                 "query": {
                   "addition": {
-                    "key": "",
-                    "value": ""
+                    "key": "cost_center",
+                    "value": "engineering"
                   },
-                  "query": ""
+                  "case_insensitivity": false,
+                  "if_tag_exists": "do_not_apply",
+                  "query": "account_id:\"123456789\" AND service:\"web-api\""
                 },
-                "reference_table": {
-                  "field_pairs": [
-                    {
-                      "input_column": "",
-                      "output_key": ""
-                    }
-                  ],
-                  "source_keys": [
-                    ""
-                  ],
-                  "table_name": ""
-                }
+                "reference_table": null
               }
             ]
           },
+          "id": "New Ruleset",
           "type": "create_ruleset"
         }
       },
       "json": {
         "data": {
           "attributes": {
-            "enabled": false,
+            "enabled": true,
             "rules": [
               {
-                "enabled": false,
-                "mapping": {
-                  "destination_key": "",
-                  "if_not_exists": false,
-                  "if_tag_exists": "string",
-                  "source_keys": [
-                    ""
-                  ]
-                },
-                "metadata": {
-                  "<any-key>": "string"
-                },
-                "name": "",
+                "enabled": true,
+                "mapping": null,
+                "metadata": null,
+                "name": "Add Cost Center Tag",
                 "query": {
                   "addition": {
-                    "key": "",
-                    "value": ""
+                    "key": "cost_center",
+                    "value": "engineering"
                   },
                   "case_insensitivity": false,
-                  "if_not_exists": false,
-                  "if_tag_exists": "string",
-                  "query": ""
+                  "if_tag_exists": "do_not_apply",
+                  "query": "account_id:\"123456789\" AND service:\"web-api\""
                 },
-                "reference_table": {
-                  "case_insensitivity": false,
-                  "field_pairs": [
-                    {
-                      "input_column": "",
-                      "output_key": ""
-                    }
-                  ],
-                  "if_not_exists": false,
-                  "if_tag_exists": "string",
-                  "source_keys": [
-                    ""
-                  ],
-                  "table_name": ""
-                }
+                "reference_table": null
               }
             ]
           },
-          "id": "string",
+          "id": "New Ruleset",
           "type": "create_ruleset"
         }
       },
@@ -2531,6 +2554,15 @@
       "json_curl": {
         "data": [
           {
+            "id": "55ef2385-9ae1-4410-90c4-5ac1b60fec10",
+            "type": "ruleset"
+          },
+          {
+            "id": "a7b8c9d0-1234-5678-9abc-def012345678",
+            "type": "ruleset"
+          },
+          {
+            "id": "f1e2d3c4-b5a6-9780-1234-567890abcdef",
             "type": "ruleset"
           }
         ]
@@ -2538,7 +2570,15 @@
       "json": {
         "data": [
           {
-            "id": "string",
+            "id": "55ef2385-9ae1-4410-90c4-5ac1b60fec10",
+            "type": "ruleset"
+          },
+          {
+            "id": "a7b8c9d0-1234-5678-9abc-def012345678",
+            "type": "ruleset"
+          },
+          {
+            "id": "f1e2d3c4-b5a6-9780-1234-567890abcdef",
             "type": "ruleset"
           }
         ]
@@ -2572,7 +2612,7 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "Query": ""
+            "Query": "example:query AND test:true"
           },
           "type": "validate_query"
         }
@@ -2580,9 +2620,8 @@
       "json": {
         "data": {
           "attributes": {
-            "Query": ""
+            "Query": "example:query AND test:true"
           },
-          "id": "string",
           "type": "validate_query"
         }
       },
@@ -2792,35 +2831,65 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "enabled": false,
+            "enabled": true,
+            "last_version": 1,
+            "name": "Updated Ruleset",
             "rules": [
               {
-                "enabled": false,
-                "mapping": {
-                  "destination_key": "",
-                  "source_keys": [
-                    ""
-                  ]
-                },
-                "name": "",
+                "enabled": true,
+                "mapping": null,
+                "metadata": null,
+                "name": "Add Cost Center Tag",
                 "query": {
                   "addition": {
-                    "key": "",
-                    "value": ""
+                    "key": "cost_center",
+                    "value": "engineering"
                   },
-                  "query": ""
+                  "case_insensitivity": false,
+                  "if_tag_exists": "do_not_apply",
+                  "query": "account_id:\"123456789\" AND service:\"web-api\""
                 },
+                "reference_table": null
+              },
+              {
+                "enabled": true,
+                "mapping": {
+                  "destination_key": "team_owner",
+                  "if_tag_exists": "do_not_apply",
+                  "source_keys": [
+                    "account_name",
+                    "account_id"
+                  ]
+                },
+                "metadata": null,
+                "name": "Account Name Mapping",
+                "query": null,
+                "reference_table": null
+              },
+              {
+                "enabled": true,
+                "mapping": null,
+                "metadata": null,
+                "name": "New table rule with new UI",
+                "query": null,
                 "reference_table": {
+                  "case_insensitivity": true,
                   "field_pairs": [
                     {
-                      "input_column": "",
-                      "output_key": ""
+                      "input_column": "status_type",
+                      "output_key": "status"
+                    },
+                    {
+                      "input_column": "status_description",
+                      "output_key": "dess"
                     }
                   ],
+                  "if_tag_exists": "append",
                   "source_keys": [
-                    ""
+                    "http_status",
+                    "status_description"
                   ],
-                  "table_name": ""
+                  "table_name": "http_status_codes"
                 }
               }
             ]
@@ -2831,52 +2900,69 @@
       "json": {
         "data": {
           "attributes": {
-            "enabled": false,
-            "last_version": "integer",
+            "enabled": true,
+            "last_version": 1,
+            "name": "Updated Ruleset",
             "rules": [
               {
-                "enabled": false,
-                "mapping": {
-                  "destination_key": "",
-                  "if_not_exists": false,
-                  "if_tag_exists": "string",
-                  "source_keys": [
-                    ""
-                  ]
-                },
-                "metadata": {
-                  "<any-key>": "string"
-                },
-                "name": "",
+                "enabled": true,
+                "mapping": null,
+                "metadata": null,
+                "name": "Add Cost Center Tag",
                 "query": {
                   "addition": {
-                    "key": "",
-                    "value": ""
+                    "key": "cost_center",
+                    "value": "engineering"
                   },
                   "case_insensitivity": false,
-                  "if_not_exists": false,
-                  "if_tag_exists": "string",
-                  "query": ""
+                  "if_tag_exists": "do_not_apply",
+                  "query": "account_id:\"123456789\" AND service:\"web-api\""
                 },
+                "reference_table": null
+              },
+              {
+                "enabled": true,
+                "mapping": {
+                  "destination_key": "team_owner",
+                  "if_tag_exists": "do_not_apply",
+                  "source_keys": [
+                    "account_name",
+                    "account_id"
+                  ]
+                },
+                "metadata": null,
+                "name": "Account Name Mapping",
+                "query": null,
+                "reference_table": null
+              },
+              {
+                "enabled": true,
+                "mapping": null,
+                "metadata": null,
+                "name": "New table rule with new UI",
+                "query": null,
                 "reference_table": {
-                  "case_insensitivity": false,
+                  "case_insensitivity": true,
                   "field_pairs": [
                     {
-                      "input_column": "",
-                      "output_key": ""
+                      "input_column": "status_type",
+                      "output_key": "status"
+                    },
+                    {
+                      "input_column": "status_description",
+                      "output_key": "dess"
                     }
                   ],
-                  "if_not_exists": false,
-                  "if_tag_exists": "string",
+                  "if_tag_exists": "append",
                   "source_keys": [
-                    ""
+                    "http_status",
+                    "status_description"
                   ],
-                  "table_name": ""
+                  "table_name": "http_status_codes"
                 }
               }
             ]
           },
-          "id": "string",
           "type": "update_ruleset"
         }
       },

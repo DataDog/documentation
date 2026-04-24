@@ -223,39 +223,43 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "name": "",
+            "description": "A sample workflow.",
+            "name": "Example Workflow",
+            "published": true,
             "spec": {
               "annotations": [
                 {
-                  "display": {},
-                  "id": "",
-                  "markdownTextAnnotation": {}
+                  "display": {
+                    "bounds": {
+                      "height": 150,
+                      "width": 300,
+                      "x": -375,
+                      "y": -0.5
+                    }
+                  },
+                  "id": "99999999-9999-9999-9999-999999999999",
+                  "markdownTextAnnotation": {
+                    "text": "Example annotation."
+                  }
                 }
               ],
               "connectionEnvs": [
                 {
-                  "connectionGroups": [
-                    {
-                      "connectionGroupId": "",
-                      "label": "",
-                      "tags": [
-                        ""
-                      ]
-                    }
-                  ],
                   "connections": [
                     {
-                      "connectionId": "",
-                      "label": ""
+                      "connectionId": "11111111-1111-1111-1111-111111111111",
+                      "label": "INTEGRATION_DATADOG"
                     }
                   ],
                   "env": "default"
                 }
               ],
+              "handle": "my-handle",
               "inputSchema": {
                 "parameters": [
                   {
-                    "name": "",
+                    "defaultValue": "default",
+                    "name": "input",
                     "type": "STRING"
                   }
                 ]
@@ -263,58 +267,60 @@
               "outputSchema": {
                 "parameters": [
                   {
-                    "name": "",
-                    "type": "STRING"
+                    "name": "output",
+                    "type": "ARRAY_OBJECT",
+                    "value": "{{ Steps.Step1 }}"
                   }
                 ]
               },
               "steps": [
                 {
-                  "actionId": "",
-                  "completionGate": {
-                    "completionCondition": {
-                      "operand1": null,
-                      "operator": "OPERATOR_EQUAL"
-                    },
-                    "retryStrategy": {
-                      "kind": "RETRY_STRATEGY_LINEAR",
-                      "linear": {
-                        "interval": "",
-                        "maxRetries": 0
-                      }
-                    }
-                  },
-                  "errorHandlers": [
-                    {
-                      "fallbackStepName": "",
-                      "retryStrategy": {
-                        "kind": "RETRY_STRATEGY_LINEAR",
-                        "linear": {
-                          "interval": "",
-                          "maxRetries": 0
-                        }
-                      }
-                    }
-                  ],
-                  "name": "",
+                  "actionId": "com.datadoghq.dd.monitor.listMonitors",
+                  "connectionLabel": "INTEGRATION_DATADOG",
+                  "name": "Step1",
                   "outboundEdges": [
                     {
-                      "branchName": "",
-                      "nextStepName": ""
+                      "branchName": "main",
+                      "nextStepName": "Step2"
                     }
                   ],
                   "parameters": [
                     {
-                      "name": "",
-                      "value": null
+                      "name": "tags",
+                      "value": "service:monitoring"
                     }
-                  ],
-                  "readinessGate": {
-                    "thresholdType": "ANY"
-                  }
+                  ]
+                },
+                {
+                  "actionId": "com.datadoghq.core.noop",
+                  "name": "Step2"
+                }
+              ],
+              "triggers": [
+                {
+                  "monitorTrigger": {
+                    "rateLimit": {
+                      "count": 1,
+                      "interval": "3600s"
+                    }
+                  },
+                  "startStepNames": [
+                    "Step1"
+                  ]
+                },
+                {
+                  "githubWebhookTrigger": {},
+                  "startStepNames": [
+                    "Step1"
+                  ]
                 }
               ]
-            }
+            },
+            "tags": [
+              "team:infra",
+              "service:monitoring",
+              "foo:bar"
+            ]
           },
           "type": "workflows"
         }
@@ -322,56 +328,43 @@
       "json": {
         "data": {
           "attributes": {
-            "description": "string",
-            "name": "",
-            "published": false,
+            "description": "A sample workflow.",
+            "name": "Example Workflow",
+            "published": true,
             "spec": {
               "annotations": [
                 {
                   "display": {
                     "bounds": {
-                      "height": "number",
-                      "width": "number",
-                      "x": "number",
-                      "y": "number"
+                      "height": 150,
+                      "width": 300,
+                      "x": -375,
+                      "y": -0.5
                     }
                   },
-                  "id": "",
+                  "id": "99999999-9999-9999-9999-999999999999",
                   "markdownTextAnnotation": {
-                    "text": "string"
+                    "text": "Example annotation."
                   }
                 }
               ],
               "connectionEnvs": [
                 {
-                  "connectionGroups": [
-                    {
-                      "connectionGroupId": "",
-                      "label": "",
-                      "tags": [
-                        ""
-                      ]
-                    }
-                  ],
                   "connections": [
                     {
-                      "connectionId": "",
-                      "label": ""
+                      "connectionId": "11111111-1111-1111-1111-111111111111",
+                      "label": "INTEGRATION_DATADOG"
                     }
                   ],
                   "env": "default"
                 }
               ],
-              "handle": "string",
+              "handle": "my-handle",
               "inputSchema": {
                 "parameters": [
                   {
-                    "allowExtraValues": false,
-                    "allowedValues": "undefined",
-                    "defaultValue": "undefined",
-                    "description": "string",
-                    "label": "string",
-                    "name": "",
+                    "defaultValue": "default",
+                    "name": "input",
                     "type": "STRING"
                   }
                 ]
@@ -379,85 +372,60 @@
               "outputSchema": {
                 "parameters": [
                   {
-                    "defaultValue": "undefined",
-                    "description": "string",
-                    "label": "string",
-                    "name": "",
-                    "type": "STRING",
-                    "value": "undefined"
+                    "name": "output",
+                    "type": "ARRAY_OBJECT",
+                    "value": "{{ Steps.Step1 }}"
                   }
                 ]
               },
               "steps": [
                 {
-                  "actionId": "",
-                  "completionGate": {
-                    "completionCondition": {
-                      "operand1": "undefined",
-                      "operand2": "undefined",
-                      "operator": "OPERATOR_EQUAL"
-                    },
-                    "retryStrategy": {
-                      "kind": "RETRY_STRATEGY_LINEAR",
-                      "linear": {
-                        "interval": "",
-                        "maxRetries": 0
-                      }
-                    }
-                  },
-                  "connectionLabel": "string",
-                  "display": {
-                    "bounds": {
-                      "x": "number",
-                      "y": "number"
-                    }
-                  },
-                  "errorHandlers": [
-                    {
-                      "fallbackStepName": "",
-                      "retryStrategy": {
-                        "kind": "RETRY_STRATEGY_LINEAR",
-                        "linear": {
-                          "interval": "",
-                          "maxRetries": 0
-                        }
-                      }
-                    }
-                  ],
-                  "name": "",
+                  "actionId": "com.datadoghq.dd.monitor.listMonitors",
+                  "connectionLabel": "INTEGRATION_DATADOG",
+                  "name": "Step1",
                   "outboundEdges": [
                     {
-                      "branchName": "",
-                      "nextStepName": ""
+                      "branchName": "main",
+                      "nextStepName": "Step2"
                     }
                   ],
                   "parameters": [
                     {
-                      "name": "",
-                      "value": "undefined"
+                      "name": "tags",
+                      "value": "service:monitoring"
                     }
-                  ],
-                  "readinessGate": {
-                    "thresholdType": "ANY"
-                  }
+                  ]
+                },
+                {
+                  "actionId": "com.datadoghq.core.noop",
+                  "name": "Step2"
                 }
               ],
               "triggers": [
                 {
-                  "apiTrigger": {
+                  "monitorTrigger": {
                     "rateLimit": {
-                      "count": "integer",
-                      "interval": "string"
+                      "count": 1,
+                      "interval": "3600s"
                     }
                   },
                   "startStepNames": [
-                    ""
+                    "Step1"
+                  ]
+                },
+                {
+                  "githubWebhookTrigger": {},
+                  "startStepNames": [
+                    "Step1"
                   ]
                 }
               ]
             },
-            "tags": [],
-            "webhookSecret": "string"
+            "tags": [
+              "team:infra",
+              "service:monitoring",
+              "foo:bar"
+            ]
           },
           "type": "workflows"
         }
@@ -1014,38 +982,43 @@
       "json_curl": {
         "data": {
           "attributes": {
+            "description": "A sample workflow.",
+            "name": "Example Workflow",
+            "published": true,
             "spec": {
               "annotations": [
                 {
-                  "display": {},
-                  "id": "",
-                  "markdownTextAnnotation": {}
+                  "display": {
+                    "bounds": {
+                      "height": 150,
+                      "width": 300,
+                      "x": -375,
+                      "y": -0.5
+                    }
+                  },
+                  "id": "99999999-9999-9999-9999-999999999999",
+                  "markdownTextAnnotation": {
+                    "text": "Example annotation."
+                  }
                 }
               ],
               "connectionEnvs": [
                 {
-                  "connectionGroups": [
-                    {
-                      "connectionGroupId": "",
-                      "label": "",
-                      "tags": [
-                        ""
-                      ]
-                    }
-                  ],
                   "connections": [
                     {
-                      "connectionId": "",
-                      "label": ""
+                      "connectionId": "11111111-1111-1111-1111-111111111111",
+                      "label": "INTEGRATION_DATADOG"
                     }
                   ],
                   "env": "default"
                 }
               ],
+              "handle": "my-handle",
               "inputSchema": {
                 "parameters": [
                   {
-                    "name": "",
+                    "defaultValue": "default",
+                    "name": "input",
                     "type": "STRING"
                   }
                 ]
@@ -1053,115 +1026,105 @@
               "outputSchema": {
                 "parameters": [
                   {
-                    "name": "",
-                    "type": "STRING"
+                    "name": "output",
+                    "type": "ARRAY_OBJECT",
+                    "value": "{{ Steps.Step1 }}"
                   }
                 ]
               },
               "steps": [
                 {
-                  "actionId": "",
-                  "completionGate": {
-                    "completionCondition": {
-                      "operand1": null,
-                      "operator": "OPERATOR_EQUAL"
-                    },
-                    "retryStrategy": {
-                      "kind": "RETRY_STRATEGY_LINEAR",
-                      "linear": {
-                        "interval": "",
-                        "maxRetries": 0
-                      }
-                    }
-                  },
-                  "errorHandlers": [
-                    {
-                      "fallbackStepName": "",
-                      "retryStrategy": {
-                        "kind": "RETRY_STRATEGY_LINEAR",
-                        "linear": {
-                          "interval": "",
-                          "maxRetries": 0
-                        }
-                      }
-                    }
-                  ],
-                  "name": "",
+                  "actionId": "com.datadoghq.dd.monitor.listMonitors",
+                  "connectionLabel": "INTEGRATION_DATADOG",
+                  "name": "Step1",
                   "outboundEdges": [
                     {
-                      "branchName": "",
-                      "nextStepName": ""
+                      "branchName": "main",
+                      "nextStepName": "Step2"
                     }
                   ],
                   "parameters": [
                     {
-                      "name": "",
-                      "value": null
+                      "name": "tags",
+                      "value": "service:monitoring"
                     }
-                  ],
-                  "readinessGate": {
-                    "thresholdType": "ANY"
-                  }
+                  ]
+                },
+                {
+                  "actionId": "com.datadoghq.core.noop",
+                  "name": "Step2"
+                }
+              ],
+              "triggers": [
+                {
+                  "monitorTrigger": {
+                    "rateLimit": {
+                      "count": 1,
+                      "interval": "3600s"
+                    }
+                  },
+                  "startStepNames": [
+                    "Step1"
+                  ]
+                },
+                {
+                  "githubWebhookTrigger": {},
+                  "startStepNames": [
+                    "Step1"
+                  ]
                 }
               ]
-            }
+            },
+            "tags": [
+              "team:infra",
+              "service:monitoring",
+              "foo:bar"
+            ]
           },
+          "id": "22222222-2222-2222-2222-222222222222",
           "type": "workflows"
         }
       },
       "json": {
         "data": {
           "attributes": {
-            "description": "string",
-            "name": "string",
-            "published": false,
+            "description": "A sample workflow.",
+            "name": "Example Workflow",
+            "published": true,
             "spec": {
               "annotations": [
                 {
                   "display": {
                     "bounds": {
-                      "height": "number",
-                      "width": "number",
-                      "x": "number",
-                      "y": "number"
+                      "height": 150,
+                      "width": 300,
+                      "x": -375,
+                      "y": -0.5
                     }
                   },
-                  "id": "",
+                  "id": "99999999-9999-9999-9999-999999999999",
                   "markdownTextAnnotation": {
-                    "text": "string"
+                    "text": "Example annotation."
                   }
                 }
               ],
               "connectionEnvs": [
                 {
-                  "connectionGroups": [
-                    {
-                      "connectionGroupId": "",
-                      "label": "",
-                      "tags": [
-                        ""
-                      ]
-                    }
-                  ],
                   "connections": [
                     {
-                      "connectionId": "",
-                      "label": ""
+                      "connectionId": "11111111-1111-1111-1111-111111111111",
+                      "label": "INTEGRATION_DATADOG"
                     }
                   ],
                   "env": "default"
                 }
               ],
-              "handle": "string",
+              "handle": "my-handle",
               "inputSchema": {
                 "parameters": [
                   {
-                    "allowExtraValues": false,
-                    "allowedValues": "undefined",
-                    "defaultValue": "undefined",
-                    "description": "string",
-                    "label": "string",
-                    "name": "",
+                    "defaultValue": "default",
+                    "name": "input",
                     "type": "STRING"
                   }
                 ]
@@ -1169,87 +1132,62 @@
               "outputSchema": {
                 "parameters": [
                   {
-                    "defaultValue": "undefined",
-                    "description": "string",
-                    "label": "string",
-                    "name": "",
-                    "type": "STRING",
-                    "value": "undefined"
+                    "name": "output",
+                    "type": "ARRAY_OBJECT",
+                    "value": "{{ Steps.Step1 }}"
                   }
                 ]
               },
               "steps": [
                 {
-                  "actionId": "",
-                  "completionGate": {
-                    "completionCondition": {
-                      "operand1": "undefined",
-                      "operand2": "undefined",
-                      "operator": "OPERATOR_EQUAL"
-                    },
-                    "retryStrategy": {
-                      "kind": "RETRY_STRATEGY_LINEAR",
-                      "linear": {
-                        "interval": "",
-                        "maxRetries": 0
-                      }
-                    }
-                  },
-                  "connectionLabel": "string",
-                  "display": {
-                    "bounds": {
-                      "x": "number",
-                      "y": "number"
-                    }
-                  },
-                  "errorHandlers": [
-                    {
-                      "fallbackStepName": "",
-                      "retryStrategy": {
-                        "kind": "RETRY_STRATEGY_LINEAR",
-                        "linear": {
-                          "interval": "",
-                          "maxRetries": 0
-                        }
-                      }
-                    }
-                  ],
-                  "name": "",
+                  "actionId": "com.datadoghq.dd.monitor.listMonitors",
+                  "connectionLabel": "INTEGRATION_DATADOG",
+                  "name": "Step1",
                   "outboundEdges": [
                     {
-                      "branchName": "",
-                      "nextStepName": ""
+                      "branchName": "main",
+                      "nextStepName": "Step2"
                     }
                   ],
                   "parameters": [
                     {
-                      "name": "",
-                      "value": "undefined"
+                      "name": "tags",
+                      "value": "service:monitoring"
                     }
-                  ],
-                  "readinessGate": {
-                    "thresholdType": "ANY"
-                  }
+                  ]
+                },
+                {
+                  "actionId": "com.datadoghq.core.noop",
+                  "name": "Step2"
                 }
               ],
               "triggers": [
                 {
-                  "apiTrigger": {
+                  "monitorTrigger": {
                     "rateLimit": {
-                      "count": "integer",
-                      "interval": "string"
+                      "count": 1,
+                      "interval": "3600s"
                     }
                   },
                   "startStepNames": [
-                    ""
+                    "Step1"
+                  ]
+                },
+                {
+                  "githubWebhookTrigger": {},
+                  "startStepNames": [
+                    "Step1"
                   ]
                 }
               ]
             },
-            "tags": [],
-            "webhookSecret": "string"
+            "tags": [
+              "team:infra",
+              "service:monitoring",
+              "foo:bar"
+            ]
           },
-          "id": "string",
+          "id": "22222222-2222-2222-2222-222222222222",
           "type": "workflows"
         }
       },

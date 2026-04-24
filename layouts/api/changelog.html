@@ -1,0 +1,110 @@
+{{ define "api-main" }}
+
+{{ $dot := . }}
+
+{{ $d2 := partial "api/load-specs.html" (dict "version" "v2") }}
+{{ $d1 := partial "api/load-specs.html" (dict "version" "v1") }}
+
+{{/* Prefer v2 versioning data, fall back to v1 */}}
+{{ $apiVersioning := index $d2 "x-datadog-api-versioning" | default (index $d1 "x-datadog-api-versioning") | default dict }}
+{{ $versionMap    := $apiVersioning.versions | default dict }}
+
+{{/* Sort version dates chronologically — ISO format sorts correctly as strings */}}
+{{ $dateKeys := slice }}
+{{ range $d, $_ := $versionMap }}
+  {{ $dateKeys = append $d $dateKeys }}
+{{ end }}
+{{ $dateKeys = sort $dateKeys }}
+
+<div class="col-12 api-changelog py-3">
+
+  <h1>{{ .Title }}</h1>
+
+  <p>The Datadog API uses date-based versioning to manage breaking changes.
+  Specify the API version by sending a <code>DD-API-VERSION</code> header with a version date.
+  When no version header is provided, the <strong>default version</strong> is used.</p>
+
+  {{ if not $dateKeys }}
+    <div class="alert alert-info">
+      No versioning information found in the API spec. Make sure the <code>x-datadog-api-versioning</code>
+      extension is present in the OpenAPI spec.
+    </div>
+  {{ end }}
+
+  {{ range $dateKeys }}
+    {{ $vdata  := index $versionMap . }}
+    {{ $isBase := $vdata.base | default false }}
+
+    <div class="api-changelog-version mb-5 pt-3" id="version-{{ . | replaceRE "-" "" }}">
+
+      <div class="d-flex align-items-center flex-wrap gap-2 mb-3">
+        <h2 class="mb-0">{{ . }}</h2>
+        {{ if $isBase }}
+          <span class="badge bg-primary fs-6">Default</span>
+        {{ end }}
+      </div>
+
+      {{ if $isBase }}
+        <div class="alert alert-info">
+          <strong>Default Datadog API version.</strong>
+          Non-versioned requests (those without a <code>DD-API-VERSION</code> header) use this version.
+          This is the stable baseline from which all subsequent versions are derived.
+        </div>
+      {{ end }}
+
+      {{ with $vdata.breaking_changes }}
+        <h3 class="text-danger mt-3">
+          Breaking Changes
+        </h3>
+        <div class="api-changelog-entries">
+          {{ range . }}
+            <div class="api-changelog-entry api-changelog-entry--breaking mb-3 p-3 border-start border-danger border-3 bg-light">
+              <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                {{ with .tag }}
+                  <span class="badge bg-danger">Tag: {{ . }}</span>
+                {{ end }}
+                {{ with .operationId }}
+                  <span class="badge bg-warning text-dark"><code>{{ . }}</code></span>
+                {{ end }}
+              </div>
+              <div class="api-changelog-entry-description">{{ .description | markdownify }}</div>
+            </div>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      {{ with $vdata.changes }}
+        <h3 class="mt-4">Changes</h3>
+        <div class="api-changelog-entries">
+          {{ range . }}
+            <div class="api-changelog-entry api-changelog-entry--change mb-3 p-3 border-start border-secondary border-3 bg-light">
+              <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                {{/* handle both operationId and the typo operationdId */}}
+                {{ with (index . "operationId") }}
+                  <span class="badge bg-info text-dark"><code>{{ . }}</code></span>
+                {{ end }}
+                {{ with (index . "operationdId") }}
+                  <span class="badge bg-info text-dark"><code>{{ . }}</code></span>
+                {{ end }}
+              </div>
+              <div class="api-changelog-entry-description">{{ .description | markdownify }}</div>
+            </div>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      {{ if and (not $vdata.breaking_changes) (not $vdata.changes) (not $isBase) }}
+        <p class="text-muted fst-italic">No changes documented for this version.</p>
+      {{ end }}
+
+    </div>
+
+    {{ if ne . (index $dateKeys (sub (len $dateKeys) 1)) }}
+      <hr class="mt-0 mb-2" style="border-top: 2px solid #DADADA"/>
+    {{ end }}
+
+  {{ end }}
+
+</div>
+
+{{ end }}

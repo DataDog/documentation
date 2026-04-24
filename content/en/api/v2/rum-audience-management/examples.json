@@ -49,25 +49,32 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "facet_id": "",
-            "limit": 0
+            "facet_id": "first_browser_name",
+            "limit": 10,
+            "search": {
+              "query": "user_org_id:5001 AND first_country_code:US"
+            },
+            "term_search": {
+              "value": "Chrome"
+            }
           },
+          "id": "facet_info_request",
           "type": "users_facet_info_request"
         }
       },
       "json": {
         "data": {
           "attributes": {
-            "facet_id": "",
-            "limit": 0,
+            "facet_id": "first_browser_name",
+            "limit": 10,
             "search": {
-              "query": "string"
+              "query": "user_org_id:5001 AND first_country_code:US"
             },
             "term_search": {
-              "value": "string"
+              "value": "Chrome"
             }
           },
-          "id": "string",
+          "id": "facet_info_request",
           "type": "users_facet_info_request"
         }
       },
@@ -141,22 +148,51 @@
     "request": {
       "json_curl": {
         "data": {
+          "attributes": {
+            "limit": 20,
+            "query": "plan_type:enterprise AND user_count:>100 AND subscription_status:active",
+            "select_columns": [
+              "account_id",
+              "account_name",
+              "user_count",
+              "plan_type",
+              "subscription_status",
+              "created_at",
+              "mrr",
+              "industry"
+            ],
+            "sort": {
+              "field": "user_count",
+              "order": "DESC"
+            },
+            "wildcard_search_term": "tech"
+          },
+          "id": "query_account_request",
           "type": "query_account_request"
         }
       },
       "json": {
         "data": {
           "attributes": {
-            "limit": "integer",
-            "query": "string",
-            "select_columns": [],
+            "limit": 20,
+            "query": "plan_type:enterprise AND user_count:>100 AND subscription_status:active",
+            "select_columns": [
+              "account_id",
+              "account_name",
+              "user_count",
+              "plan_type",
+              "subscription_status",
+              "created_at",
+              "mrr",
+              "industry"
+            ],
             "sort": {
-              "field": "string",
-              "order": "string"
+              "field": "user_count",
+              "order": "DESC"
             },
-            "wildcard_search_term": "string"
+            "wildcard_search_term": "tech"
           },
-          "id": "string",
+          "id": "query_account_request",
           "type": "query_account_request"
         }
       },
@@ -230,6 +266,29 @@
     "request": {
       "json_curl": {
         "data": {
+          "attributes": {
+            "event_query": {
+              "query": "@type:view AND @view.loading_time:>3000 AND @application.name:ecommerce-platform",
+              "time_frame": {
+                "end": 1761309676,
+                "start": 1760100076
+              }
+            },
+            "include_row_count": true,
+            "limit": 25,
+            "query": "user_org_id:5001 AND first_country_code:US AND first_browser_name:Chrome",
+            "select_columns": [
+              "user_id",
+              "user_email",
+              "first_country_code",
+              "first_browser_name",
+              "events_count",
+              "session_count",
+              "error_count",
+              "avg_loading_time"
+            ]
+          },
+          "id": "query_event_filtered_users_request",
           "type": "query_event_filtered_users_request"
         }
       },
@@ -237,18 +296,27 @@
         "data": {
           "attributes": {
             "event_query": {
-              "query": "string",
+              "query": "@type:view AND @view.loading_time:>3000 AND @application.name:ecommerce-platform",
               "time_frame": {
-                "end": "integer",
-                "start": "integer"
+                "end": 1761309676,
+                "start": 1760100076
               }
             },
-            "include_row_count": false,
-            "limit": "integer",
-            "query": "string",
-            "select_columns": []
+            "include_row_count": true,
+            "limit": 25,
+            "query": "user_org_id:5001 AND first_country_code:US AND first_browser_name:Chrome",
+            "select_columns": [
+              "user_id",
+              "user_email",
+              "first_country_code",
+              "first_browser_name",
+              "events_count",
+              "session_count",
+              "error_count",
+              "avg_loading_time"
+            ]
           },
-          "id": "string",
+          "id": "query_event_filtered_users_request",
           "type": "query_event_filtered_users_request"
         }
       },
@@ -305,25 +373,32 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "facet_id": "",
-            "limit": 0
+            "facet_id": "first_browser_name",
+            "limit": 10,
+            "search": {
+              "query": "user_org_id:5001 AND first_country_code:US"
+            },
+            "term_search": {
+              "value": "Chrome"
+            }
           },
+          "id": "facet_info_request",
           "type": "users_facet_info_request"
         }
       },
       "json": {
         "data": {
           "attributes": {
-            "facet_id": "",
-            "limit": 0,
+            "facet_id": "first_browser_name",
+            "limit": 10,
             "search": {
-              "query": "string"
+              "query": "user_org_id:5001 AND first_country_code:US"
             },
             "term_search": {
-              "value": "string"
+              "value": "Chrome"
             }
           },
-          "id": "string",
+          "id": "facet_info_request",
           "type": "users_facet_info_request"
         }
       },
@@ -397,22 +472,51 @@
     "request": {
       "json_curl": {
         "data": {
+          "attributes": {
+            "limit": 25,
+            "query": "user_email:*@techcorp.com AND first_country_code:US AND first_browser_name:Chrome",
+            "select_columns": [
+              "user_id",
+              "user_email",
+              "user_name",
+              "user_org_id",
+              "first_country_code",
+              "first_browser_name",
+              "first_device_type",
+              "last_seen"
+            ],
+            "sort": {
+              "field": "first_seen",
+              "order": "DESC"
+            },
+            "wildcard_search_term": "john"
+          },
+          "id": "query_users_request",
           "type": "query_users_request"
         }
       },
       "json": {
         "data": {
           "attributes": {
-            "limit": "integer",
-            "query": "string",
-            "select_columns": [],
+            "limit": 25,
+            "query": "user_email:*@techcorp.com AND first_country_code:US AND first_browser_name:Chrome",
+            "select_columns": [
+              "user_id",
+              "user_email",
+              "user_name",
+              "user_org_id",
+              "first_country_code",
+              "first_browser_name",
+              "first_device_type",
+              "last_seen"
+            ],
             "sort": {
-              "field": "string",
-              "order": "string"
+              "field": "first_seen",
+              "order": "DESC"
             },
-            "wildcard_search_term": "string"
+            "wildcard_search_term": "john"
           },
-          "id": "string",
+          "id": "query_users_request",
           "type": "query_users_request"
         }
       },
@@ -507,15 +611,25 @@
           "attributes": {
             "fields": [
               {
-                "id": "",
-                "source_name": "",
-                "type": ""
+                "description": "Customer subscription tier from `CRM`",
+                "display_name": "Customer Tier",
+                "id": "customer_tier",
+                "source_name": "subscription_tier",
+                "type": "string"
+              },
+              {
+                "description": "Customer lifetime value in `USD`",
+                "display_name": "Lifetime Value",
+                "id": "lifetime_value",
+                "source_name": "ltv",
+                "type": "number"
               }
             ],
-            "join_attribute": "",
-            "join_type": "",
-            "type": ""
+            "join_attribute": "user_email",
+            "join_type": "email",
+            "type": "ref_table"
           },
+          "id": "crm-integration",
           "type": "connection_id"
         }
       },
@@ -524,22 +638,25 @@
           "attributes": {
             "fields": [
               {
-                "description": "string",
-                "display_name": "string",
-                "groups": [],
-                "id": "",
-                "source_name": "",
-                "type": ""
+                "description": "Customer subscription tier from `CRM`",
+                "display_name": "Customer Tier",
+                "id": "customer_tier",
+                "source_name": "subscription_tier",
+                "type": "string"
+              },
+              {
+                "description": "Customer lifetime value in `USD`",
+                "display_name": "Lifetime Value",
+                "id": "lifetime_value",
+                "source_name": "ltv",
+                "type": "number"
               }
             ],
-            "join_attribute": "",
-            "join_type": "",
-            "metadata": {
-              "<any-key>": "string"
-            },
-            "type": ""
+            "join_attribute": "user_email",
+            "join_type": "email",
+            "type": "ref_table"
           },
-          "id": "string",
+          "id": "crm-integration",
           "type": "connection_id"
         }
       },
@@ -563,18 +680,32 @@
           "attributes": {
             "fields_to_add": [
               {
-                "id": "",
-                "source_name": "",
-                "type": ""
+                "description": "Net Promoter Score from customer surveys",
+                "display_name": "NPS Score",
+                "groups": [
+                  "Satisfaction",
+                  "Metrics"
+                ],
+                "id": "nps_score",
+                "source_name": "net_promoter_score",
+                "type": "number"
               }
+            ],
+            "fields_to_delete": [
+              "old_revenue_field"
             ],
             "fields_to_update": [
               {
-                "field_id": ""
+                "field_id": "lifetime_value",
+                "updated_display_name": "Customer Lifetime Value (`USD`)",
+                "updated_groups": [
+                  "Financial",
+                  "Metrics"
+                ]
               }
             ]
           },
-          "id": "",
+          "id": "crm-integration",
           "type": "connection_id"
         }
       },
@@ -583,26 +714,32 @@
           "attributes": {
             "fields_to_add": [
               {
-                "description": "string",
-                "display_name": "string",
-                "groups": [],
-                "id": "",
-                "source_name": "",
-                "type": ""
+                "description": "Net Promoter Score from customer surveys",
+                "display_name": "NPS Score",
+                "groups": [
+                  "Satisfaction",
+                  "Metrics"
+                ],
+                "id": "nps_score",
+                "source_name": "net_promoter_score",
+                "type": "number"
               }
             ],
-            "fields_to_delete": [],
+            "fields_to_delete": [
+              "old_revenue_field"
+            ],
             "fields_to_update": [
               {
-                "field_id": "",
-                "updated_description": "string",
-                "updated_display_name": "string",
-                "updated_field_id": "string",
-                "updated_groups": []
+                "field_id": "lifetime_value",
+                "updated_display_name": "Customer Lifetime Value (`USD`)",
+                "updated_groups": [
+                  "Financial",
+                  "Metrics"
+                ]
               }
             ]
           },
-          "id": "",
+          "id": "crm-integration",
           "type": "connection_id"
         }
       },

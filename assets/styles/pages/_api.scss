@@ -262,3 +262,56 @@ $ddpurple: #632ca6;
         }
     }
 }
+
+// Date-based API version pane — small pill at the top of each pane so the
+// reader always knows which version's schema/example they're looking at
+// without scrolling back to the dropdown.
+.api-versioned-pane::before {
+    content: "API version " attr(data-api-date-version);
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    margin-bottom: 0.5rem;
+    background: #eee;
+    color: #333;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+}
+
+// Date-based API version selector dropdown
+.js-api-date-version-dropdown {
+    .dropdown-toggle {
+        color: #333;
+        background: #fff;
+        border: 1px solid #c4c4c4;
+
+        &:hover,
+        &:focus,
+        &.show {
+            color: #fff;
+            background: $ddpurple;
+            border-color: $ddpurple;
+        }
+    }
+
+    .dropdown-item {
+        &:hover,
+        &:focus {
+            color: #fff;
+            background: $ddpurple;
+
+            .text-muted {
+                color: rgba(255, 255, 255, 0.7) !important;
+            }
+        }
+
+        &.active {
+            color: #fff;
+            background: $ddpurple;
+
+            .text-muted {
+                color: rgba(255, 255, 255, 0.7) !important;
+            }
+        }
+    }
+}
