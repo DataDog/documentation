@@ -28,7 +28,7 @@ You must have admin permissions to create tag enrichment rules.
 
 ### Default tag enrichment rules
 
-To enable a default rule, navigate to **IDP** > **Manage** > **Tag Enrichment** and toggle on the default rule for `team` or `system` at the bottom of the page.
+To enable a default rule, navigate to **IDP** > **Manage** > [**Tag Enrichment**][1] and toggle on the default rule for `team` or `system` at the bottom of the page.
 
 Enabling a default rule applies `team` or `system` to all telemetry of services based on the Entity Metadata defined in IDP. Only services with Entity Metadata populated are enriched. Tags are added only when the service's telemetry does not already have a value for that tag.
 
@@ -36,7 +36,7 @@ Enabling a default rule applies `team` or `system` to all telemetry of services 
 
 Custom rules let you target a specific set of services and configure exactly how each tag value is sourced and applied.
 
-1. In Datadog, navigate to **IDP** > **Manage** > **Tag Enrichment** and click **+ Add Rule**.
+1. In Datadog, navigate to **IDP** > **Manage** > [**Tag Enrichment**][1] and click **+ Add Rule**.
 1. Select entities to enrich. As you select entities, a query is built in the background. To edit the query, select **Build Advanced Query**.
    - Select **Add Condition** to add an `AND` condition to your query.
    - Add multiple values in the **Value** section to create an `OR` condition.
@@ -63,3 +63,5 @@ On any service page that is missing a `team` or `system` tag, click **Add Tags**
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/software/settings/tag-enrichment
