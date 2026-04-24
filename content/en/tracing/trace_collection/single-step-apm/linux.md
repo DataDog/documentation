@@ -24,36 +24,39 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 If you don't yet have a Datadog Agent installed, follow these steps to install the Agent and enable SSI simultaneously.
 
 1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
-1. In the **Customize your Agent coverage** section, go to **Core Observability** and turn on **Application Performance Monitoring**.
+2. In the **Customize your Agent coverage** section, go to **Core Observability** and turn on **Application Performance Monitoring**.
    
    {{< img src="tracing/trace_collection/enable_apm.png" alt="The 'Customize your Agent coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 
-By default, SSI installs the latest SDK versions. To use specific versions instead:
-
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-Click **Customize Library Versions**, then select your desired version for each language from the dropdowns. You can select an exact version or a major version, which uses the latest minor release available when the installation command is run.
+3. (Optional) By default, SSI installs the latest SDK versions. To use specific versions instead:
 
-{{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
+   Click **Customize Library Versions**, then select your desired version for each language from the dropdowns. You can select an exact version or a major version, which uses the latest minor release available when the installation command is run.
 
-Available versions are listed in source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
+   {{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
+
+   Available versions are listed in source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
+
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
-Set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
 
-```shell
-DD_API_KEY=<YOUR_DD_API_KEY>
-DD_SITE="US1-FED"
-DD_APM_INSTRUMENTATION_ENABLED=host
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1"
-bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-```
+3. (Optional) By default, SSI installs the latest SDK versions. To use specific versions instead, set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
 
-Available versions are listed in source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
+   ```shell
+   DD_API_KEY=<YOUR_DD_API_KEY>
+   DD_SITE="US1-FED"
+   DD_APM_INSTRUMENTATION_ENABLED=host
+   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1"
+   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   ```
+
+   Available versions are listed in source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
+
 {{< /site-region >}}
 
-3. Copy and run the Agent installation command on your Linux host or VM.
-4. Restart your applications.
+4. Copy and run the Agent installation command on your Linux host or VM.
+5. Restart your applications.
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
 
@@ -197,8 +200,3 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
 [21]: https://app.datadoghq.com/fleet/agent-management
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
