@@ -218,7 +218,7 @@ const modalClasses = {
       </div>
 
       <FooterAccordion
-        client:load
+        client:idle
         classes={accordionClasses}
         sections={accordionSections}
       />
@@ -269,4 +269,4 @@ const modalClasses = {
   </div>
 </footer>
 
-<FreeTrialModal client:load title={freeTrialLabel} iframeSrc={freeTrialHref} classes={modalClasses} />
+<FreeTrialModal client:idle title={freeTrialLabel} iframeSrc={freeTrialHref} classes={modalClasses} />
