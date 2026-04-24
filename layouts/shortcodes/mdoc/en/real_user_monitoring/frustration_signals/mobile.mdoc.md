@@ -12,8 +12,6 @@ Error Taps
 
 Frustration signals are automatically detected by the Mobile RUM SDK with no additional configuration.
 
-Supported platforms: Android, iOS, Flutter, React Native, and Kotlin Multiplatform.
-
 ## Usage
 
 Frustration signals appear in the [RUM Explorer][1] as action attributes. Search through your RUM data to surface trends on frustration signals and analyze patterns of user friction.
