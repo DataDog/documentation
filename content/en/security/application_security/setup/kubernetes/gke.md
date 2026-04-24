@@ -236,7 +236,7 @@ spec:
 ```
 
 <div class="alert alert-info">
-  <strong>Note:</strong> The <code>Gateway</code>, the <code>GCPTrafficExtension</code>, and the security processor <code>Service</code> referenced by <code>backendRef</code> must all reside in the same namespace. See the <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gke-service-extensions">GKE Service Extensions restrictions</a> for the full list of constraints on the extension's backend <code>Service</code>.
+  The <code>Gateway</code>, the <code>GCPTrafficExtension</code>, and the security processor <code>Service</code> referenced by <code>backendRef</code> must all reside in the same namespace. See the <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gke-service-extensions">GKE Service Extensions restrictions</a> for the full list of constraints on the extension's backend <code>Service</code>.
 </div>
 
 ### Validate
