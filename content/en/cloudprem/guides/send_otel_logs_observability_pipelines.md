@@ -22,7 +22,7 @@ further_reading:
 BYOC Logs supports log ingestion from OTEL collectors by using Observability Pipelines as the ingestion layer. This guide provides step-by-step instructions to connect OTEL logs to BYOC Logs—without disrupting your existing OTEL configuration.
 
 By the end of this guide, you will be able to:
-1. [Start BYOC Logs locally](#step-1-start-cloudprem).
+1. [Start BYOC Logs locally](#step-1-start-byoc-logs).
 2. [Create an Observability Pipeline with a custom processor to add tags](#step-2-create-an-observability-pipeline-with-the-api).
 3. [Run the Observability Pipelines Worker](#step-3-run-the-observability-pipelines-worker).
 4. [Send OpenTelemetry logs using the Python SDK](#step-4-send-opentelemetry-logs-using-the-python-sdk).

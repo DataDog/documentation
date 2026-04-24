@@ -198,7 +198,7 @@ Optionally, you can add a DNS entry pointing to the IP of the public load balanc
 
 ## Installation steps
 
-1. [Install the BYOC Logs Helm chart](#install-the-cloudprem-helm-chart)
+1. [Install the BYOC Logs Helm chart](#install-the-byoc-logs-helm-chart)
 2. [Verify installation](#verification)
 
 ## Install the BYOC Logs Helm chart
@@ -214,14 +214,14 @@ Optionally, you can add a DNS entry pointing to the IP of the public load balanc
    kubectl create namespace <NAMESPACE_NAME>
    ```
 
-   For example, to create a `cloudprem` namespace:
+   For example, to create a `byoc-logs` namespace:
    ```shell
-   kubectl create namespace cloudprem
+   kubectl create namespace byoc-logs
    ```
 
    **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
    ```shell
-   kubectl config set-context --current --namespace=cloudprem
+   kubectl config set-context --current --namespace=byoc-logs
    ```
 
 1. Store your Datadog API key as a Kubernetes secret:
@@ -236,20 +236,20 @@ Optionally, you can add a DNS entry pointing to the IP of the public load balanc
    To retrieve your PostgreSQL connection details, go the Azure Portal, navigate to {{< ui >}}All resources{{< /ui >}}, then click on your _Azure Database for PostgreSQL flexible server_ instance. Finally, in the {{< ui >}}Getting started{{< /ui >}} tab, click on the {{< ui >}}View connection strings{{< /ui >}} link in the {{< ui >}}Connect{{< /ui >}} card.
 
    ```shell
-   kubectl create secret generic cloudprem-metastore-uri \
+   kubectl create secret generic byoc-logs-metastore-uri \
      -n <NAMESPACE_NAME> \
      --from-literal QW_METASTORE_URI=postgres://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>
    ```
 
-   For example, to store a `metastore-uri` secret in the `cloudprem` namespace:
+   For example, to store a `metastore-uri` secret in the `byoc-logs` namespace:
    ```shell
-   USERNAME=cloudprem-prod
+   USERNAME=byoc-logs-prod
    PASSWORD=1234567890
-   HOST=cloudprem-prod.postgres.database.azure.com
+   HOST=byoc-logs-prod.postgres.database.azure.com
    PORT=5432
-   DATABASE=cloudprem_prod
+   DATABASE=byoc_logs_prod
    kubectl create secret generic metastore-uri \
-     -n cloudprem \
+     -n byoc-logs \
      --from-literal QW_METASTORE_URI="postgres://$USERNAME:$PASSWORD@$HOST:$PORT/$DATABASE"
    ```
 
@@ -300,7 +300,7 @@ azure:
    # Additional annotations can be added using serviceAccount.extraAnnotations.
    serviceAccount:
      create: true
-     name: cloudprem
+     name: byoc-logs
 
 # BYOC Logs node configuration
 config:
@@ -318,7 +318,7 @@ ingress:
   internal:
     enabled: true
     ingressClassName: nginx-internal
-    host: cloudprem.acme.internal
+    host: byoc-logs.acme.internal
     extraAnnotations: {}
 
 # Metastore configuration
@@ -331,7 +331,7 @@ ingress:
 metastore:
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-metastore-uri
+        name: byoc-logs-metastore-uri
 
 # Indexer configuration
 # The indexer is responsible for processing and indexing incoming data it receives data from various sources (for example, Datadog Agents, log collectors)

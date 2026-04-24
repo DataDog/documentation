@@ -84,7 +84,7 @@ If successful, the command lists the contents of your MinIO bucket.
 
 ## Installation steps
 
-1. [Install the BYOC Logs Helm chart](#install-the-cloudprem-helm-chart)
+1. [Install the BYOC Logs Helm chart](#install-the-byoc-logs-helm-chart)
 2. [Verify installation](#verification)
 
 ## Install the BYOC Logs Helm chart
@@ -100,14 +100,14 @@ If successful, the command lists the contents of your MinIO bucket.
    kubectl create namespace <NAMESPACE_NAME>
    ```
 
-   For example, to create a `cloudprem` namespace:
+   For example, to create a `byoc-logs` namespace:
    ```shell
-   kubectl create namespace cloudprem
+   kubectl create namespace byoc-logs
    ```
 
    **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
    ```shell
-   kubectl config set-context --current --namespace=cloudprem
+   kubectl config set-context --current --namespace=byoc-logs
    ```
 
 1. Store your Datadog API key as a Kubernetes secret:
@@ -123,7 +123,7 @@ If successful, the command lists the contents of your MinIO bucket.
    <div class="alert alert-danger">If your password contains special characters, URL-encode them first. For example: <code>/</code> → <code>%2F</code>, <code>+</code> → <code>%2B</code>, <code>=</code> → <code>%3D</code>.</div>
 
    ```shell
-   kubectl create secret generic cloudprem-metastore-uri \
+   kubectl create secret generic byoc-logs-metastore-uri \
    -n <NAMESPACE_NAME> \
    --from-literal QW_METASTORE_URI="postgres://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
    ```
@@ -131,7 +131,7 @@ If successful, the command lists the contents of your MinIO bucket.
 1. Store the MinIO credentials as a Kubernetes secret:
 
    ```shell
-   kubectl create secret generic cloudprem-minio-credentials \
+   kubectl create secret generic byoc-logs-minio-credentials \
    -n <NAMESPACE_NAME> \
    --from-literal AWS_ACCESS_KEY_ID="<MINIO_ACCESS_KEY>" \
    --from-literal AWS_SECRET_ACCESS_KEY="<MINIO_SECRET_KEY>"
@@ -167,7 +167,7 @@ environment:
 # Service account configuration
 serviceAccount:
   create: true
-  name: cloudprem
+  name: byoc-logs
 
 # BYOC Logs node configuration
 config:
@@ -190,9 +190,9 @@ config:
 metastore:
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-metastore-uri
+        name: byoc-logs-metastore-uri
     - secretRef:
-        name: cloudprem-minio-credentials
+        name: byoc-logs-minio-credentials
 
 # Indexer configuration
 # The indexer is responsible for processing and indexing incoming data it receives data from various sources
@@ -211,7 +211,7 @@ indexer:
     storageClass: <storage class>
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-minio-credentials
+        name: byoc-logs-minio-credentials
 
 # Searcher configuration
 # The searcher is responsible for executing search queries against the indexed data stored in MinIO.
@@ -231,23 +231,23 @@ searcher:
   podSize: xlarge
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-minio-credentials
+        name: byoc-logs-minio-credentials
 
 # Control plane configuration
 controlPlane:
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-minio-credentials
+        name: byoc-logs-minio-credentials
 
 # Janitor configuration
 janitor:
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-minio-credentials
+        name: byoc-logs-minio-credentials
 {{< /code-block >}}
 
    Replace the following placeholders with your actual values:
-   - `<BUCKET_NAME>`: The name of your MinIO bucket (for example, `cloudprem`)
+   - `<BUCKET_NAME>`: The name of your MinIO bucket (for example, `byoc-logs`)
    - `<MINIO_ENDPOINT>`: The MinIO endpoint URL (for example, `http://minio.minio.svc.cluster.local:9000`)
 
 1. Install or upgrade the Helm chart:
@@ -273,14 +273,14 @@ kubectl get services -n <NAMESPACE_NAME>
 All pods should be in `Running` state:
 ```
 NAME                                   READY   STATUS    RESTARTS   AGE
-cloudprem-control-plane-xxx            1/1     Running   0          5m
-cloudprem-indexer-0                    1/1     Running   0          5m
-cloudprem-indexer-1                    1/1     Running   0          5m
-cloudprem-janitor-xxx                  1/1     Running   0          5m
-cloudprem-metastore-xxx                1/1     Running   0          5m
-cloudprem-metastore-yyy                1/1     Running   0          5m
-cloudprem-searcher-0                   1/1     Running   0          5m
-cloudprem-searcher-1                   1/1     Running   0          5m
+byoc-logs-control-plane-xxx            1/1     Running   0          5m
+byoc-logs-indexer-0                    1/1     Running   0          5m
+byoc-logs-indexer-1                    1/1     Running   0          5m
+byoc-logs-janitor-xxx                  1/1     Running   0          5m
+byoc-logs-metastore-xxx                1/1     Running   0          5m
+byoc-logs-metastore-yyy                1/1     Running   0          5m
+byoc-logs-searcher-0                   1/1     Running   0          5m
+byoc-logs-searcher-1                   1/1     Running   0          5m
 ```
 
 ### Check metastore connectivity
