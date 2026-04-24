@@ -1487,21 +1487,21 @@ components:
         Widgets use the `layout` field with `x`, `y`, `width`, and `height` integer coordinates for grid positioning.
       properties:
         id:
-          description: ID of the dashboard.
+          description: The ID of the dashboard.
           example: "123-abc-456"
           readOnly: true
           type: string
         layout_type:
           $ref: "#/components/schemas/DashboardLayoutType"
         title:
-          description: Title of the dashboard.
+          description: The title of the dashboard.
           type: string
         url:
           description: The URL of the dashboard.
           readOnly: true
           type: string
         widgets:
-          description: List of widgets to display on the dashboard.
+          description: The list of widgets to display on the dashboard.
           items:
             $ref: "#/components/schemas/Widget_Version20260601"
           type: array
@@ -1517,21 +1517,21 @@ components:
         with `column`, `row`, `span_columns`, and `span_rows` for named grid-slot positioning.
       properties:
         id:
-          description: ID of the dashboard.
+          description: The ID of the dashboard.
           example: "123-abc-456"
           readOnly: true
           type: string
         layout_type:
           $ref: "#/components/schemas/DashboardLayoutType"
         title:
-          description: Title of the dashboard.
+          description: The title of the dashboard.
           type: string
         url:
           description: The URL of the dashboard.
           readOnly: true
           type: string
         widgets:
-          description: List of widgets to display on the dashboard.
+          description: The list of widgets to display on the dashboard.
           items:
             $ref: "#/components/schemas/Widget_Version20260701"
           type: array
@@ -25611,7 +25611,7 @@ components:
         definition:
           $ref: "#/components/schemas/WidgetDefinition"
         id:
-          description: ID of the widget.
+          description: The ID of the widget.
           format: int64
           type: integer
         layout:
@@ -25661,7 +25661,7 @@ components:
         definition:
           $ref: "#/components/schemas/WidgetDefinition"
         id:
-          description: ID of the widget.
+          description: The ID of the widget.
           format: int64
           type: integer
         position:
@@ -25670,24 +25670,24 @@ components:
             Widgets are placed using zero-based column and row slot indices with optional span counts.
           properties:
             column:
-              description: Zero-based column slot index where the widget starts.
+              description: The zero-based column slot index where the widget starts.
               format: int64
               minimum: 0
               type: integer
             row:
-              description: Zero-based row slot index where the widget starts.
+              description: The zero-based row slot index where the widget starts.
               format: int64
               minimum: 0
               type: integer
             span_columns:
               default: 1
-              description: Number of column slots the widget spans. Defaults to 1.
+              description: The number of column slots the widget spans. Defaults to 1.
               format: int64
               minimum: 1
               type: integer
             span_rows:
               default: 1
-              description: Number of row slots the widget spans. Defaults to 1.
+              description: The number of row slots the widget spans. Defaults to 1.
               format: int64
               minimum: 1
               type: integer
