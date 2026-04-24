@@ -171,7 +171,8 @@ AI failure summaries appear on the test run details page for any failing browser
 
 To share feedback on the accuracy or usefulness of a summary, click the feedback button in the summary panel.
 
-<!-- TODO: add screenshot at static/images/synthetics/browser_tests/test_results/ai_failure_summary.png showing the summary panel on a failing run -->
+<!-- PLACEHOLDER IMAGE — replace ai_failure_summary.png with a real screenshot of the summary panel on a failing browser test run before release. -->
+{{< img src="synthetics/browser_tests/test_results/ai_failure_summary.png" alt="AI failure summary panel on a failing browser test run" style="width:100%" >}}
 
 ### Compare screenshots
 
