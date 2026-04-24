@@ -37,7 +37,7 @@ export DD_API_KEY="<YOUR_API_KEY>"
 export DD_SITE="datadoghq.com"
 
 docker run -d \
-  --name cloudprem \
+  --name byoc-logs \
   -v $(pwd)/qwdata:/quickwit/qwdata \
   -e DD_SITE=${DD_SITE} \
   -e DD_API_KEY=${DD_API_KEY} \

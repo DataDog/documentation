@@ -45,7 +45,7 @@ export DD_API_KEY="<YOUR_API_KEY>"
 export DD_SITE="datadoghq.com"
 
 docker run -d \
-  --name cloudprem \
+  --name byoc-logs \
   -v $(pwd)/qwdata:/quickwit/qwdata \
   -e DD_SITE=${DD_SITE} \
   -e DD_API_KEY=${DD_API_KEY} \
@@ -194,7 +194,7 @@ Check that all components are running:
 
 ```shell
 # Check BYOC Logs status
-docker logs cloudprem --tail 20
+docker logs byoc-logs --tail 20
 
 # Check Observability Pipelines Worker status
 docker logs opw --tail 20
@@ -220,8 +220,8 @@ docker logs opw --tail 20
 To stop and remove the containers:
 
 ```shell
-docker stop cloudprem opw
-docker rm cloudprem opw
+docker stop byoc-logs opw
+docker rm byoc-logs opw
 ```
 
 ## Further reading

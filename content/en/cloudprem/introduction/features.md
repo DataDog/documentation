@@ -22,7 +22,7 @@ The following log features are supported:
 - Download CSV
 
 **Dashboards and monitors**
-- Dashboards with BYOC Logs log data
+- Dashboards with BYOC Logs data
 - Log monitors on BYOC Logs indexes
 - Bits AI SRE
 
@@ -33,8 +33,8 @@ The following log features are supported:
 - RBAC through [Log Restriction Queries][1]
 
 **Correlation**
-- Correlation from a BYOC Logs log to metrics sent to Datadog SaaS
-- Correlation from a BYOC Logs log to traces sent to Datadog SaaS
+- Correlation from a log in BYOC Logs to metrics sent to Datadog SaaS
+- Correlation from a log in BYOC Logs to traces sent to Datadog SaaS
 
 ## Unsupported features
 
