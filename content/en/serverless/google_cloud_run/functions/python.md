@@ -54,7 +54,7 @@ ddtrace==<VERSION>
 
    Then, update your logging library. For example, you can use Python's native `logging` library:
    {{< code-block lang="python" disable_copy="false" >}}
-LOG_FILE = "/shared-logs/logs/app.log"
+LOG_FILE = "/shared-volume/logs/app.log"
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 
 FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
