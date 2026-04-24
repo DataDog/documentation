@@ -28,7 +28,7 @@ Automatic retries reduce the number of pipelines that developers re-run by hand,
 1. A CI job fails in your pipeline.
 2. Datadog's AI error classifier inspects the job's logs and error context to determine whether the failure is transient.
 3. If the failure is classified as retriable, Datadog requests a retry through the provider's API.
-4. Datadog retries each job up to a maximum number of attempts to prevent infinite retry loops.
+4. Datadog retries each failing job up to a maximum number of attempts to prevent infinite retry loops. Retries are counted per job per commit—if the same job fails again on a new commit, the counter resets.
 5. Datadog records the retry outcome on the original pipeline in CI Visibility.
 
 ## Requirements
@@ -61,14 +61,13 @@ GitHub Actions imposes two provider-level limitations that shape how retries wor
 
 ### Protected branches
 
-The Datadog GitHub App's default permissions do not allow retries on protected branches. To enable automatic retries on a protected branch (for example, your default branch), grant the app Maintainer-level access. Review your organization's policies before expanding permissions.
+The Datadog GitHub App's default permissions do not allow retries on protected branches. To enable automatic retries on a protected branch (for example, your default branch), grant the app org-wide Maintainer-level access. Review your organization's policies before expanding permissions.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Limitations
 
-- Each logical job is retried at most one time.
 - Jobs classified as non-retriable (for example, compilation errors or asserted test failures) are never retried.
 - If a job has already been retried manually or by provider-native retry rules, Datadog does not issue an additional retry.
 
