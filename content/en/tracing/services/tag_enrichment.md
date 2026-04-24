@@ -30,6 +30,8 @@ You must have admin permissions to create tag enrichment rules.
 
 To enable a default rule, navigate to **IDP** > **Manage** > [**Tag Enrichment**][1] and toggle on the default rule for `team` or `system` at the bottom of the page.
 
+{{< img src="tracing/services/tag_enrichment/tag-enrichment-landing.png" alt="The Tag Enrichment page showing the Suggested rules panel, with options to create enrichment rules for system and team tags for all services." >}}
+
 Enabling a default rule applies `team` or `system` to all telemetry of services based on the Entity Metadata defined in IDP. Only services with Entity Metadata populated are enriched. Tags are added only when the service's telemetry does not already have a value for that tag.
 
 ### Custom tag enrichment rules
@@ -38,6 +40,7 @@ Custom rules let you target a specific set of services and configure exactly how
 
 1. In Datadog, navigate to **IDP** > **Manage** > [**Tag Enrichment**][1] and click **+ Add Rule**.
 1. Select entities to enrich. As you select entities, a query is built in the background. To edit the query, select **Build Advanced Query**.
+   {{< img src="tracing/services/tag_enrichment/tag-enrichment-adv-query.png" alt="The Add IDP tag enrichment rule modal with the Build Advanced Query tab selected, showing fields for tag key, operator, and value, with an Add Condition option." >}}
    - Select **Add Condition** to add an `AND` condition to your query.
    - Add multiple values in the **Value** section to create an `OR` condition.
 1. Choose tags and enrichment methods:
@@ -46,7 +49,7 @@ Custom rules let you target a specific set of services and configure exactly how
    - Choose whether the value is applied only when it doesn't already exist, or is appended to the current list of values for that tag.
 1. By default, tags are added to all telemetry. Select which telemetry types to enrich.
 1. Optionally, enter a descriptive name for the rule.
-1. Review and save your rule. After you save the rule, it may take a minute for it to take effect.
+1. Review and save your rule. After you save the rule, it can take up to an hour for enrichment to be fully applied to incoming telemetry.
 
 ### Add a tag enrichment rule from a service page
 
