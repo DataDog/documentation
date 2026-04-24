@@ -91,7 +91,7 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
 1. In the **Configure SDKs Installation** screen, click **Yes** to automatically install the SDKs. Select **Use latest version**, or uncheck to specify individual SDK versions.
 
-   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:100%;" >}}
+   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:60%;" >}}
 
 1. Click **Next**.
 1. Review your configuration and click **Deploy Configuration**.
