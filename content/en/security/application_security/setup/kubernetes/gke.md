@@ -41,8 +41,6 @@ You can enable Datadog [App and API Protection][1] on a Google Kubernetes Engine
 
 ## Enabling threat detection
 
-### Overview
-
 To enable App and API Protection on a GKE Gateway, do the following:
 
 1. Deploy the Datadog security processor service in your cluster.
