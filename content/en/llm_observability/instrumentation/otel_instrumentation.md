@@ -120,7 +120,7 @@ These frameworks and libraries have been tested with Datadog LLM Observability. 
 |-----------|----------------|--------------------|
 | [Spring AI][50] | Native (through [Micrometer][51]) | >= 1.0.0 |
 | [LangChain4j][52] | Native (OpenTelemetry module) | >= 0.31.0 |
-| [AWS Bedrock][53] | [OTel Java Agent][54] | AWS SDK >= 2.2 |
+| [AWS Bedrock][53] | [OpenTelemetry Java Agent][54] | AWS SDK >= 2.2 |
 
 [50]: https://docs.spring.io/spring-ai/reference/
 [51]: https://micrometer.io/
