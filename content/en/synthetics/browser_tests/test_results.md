@@ -40,8 +40,8 @@ In the **History** section, you can see three graphs:
 - The **Time-to-interactive by location and device** graph displays the amount of time until a page can be interacted with in seconds. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
 - The **Test duration by location and device** graph displays the amount of time in minutes each location and device takes to complete in a given time interval. 
 
-<!-- PLACEHOLDER IMAGE — replace history.png with a new screenshot of the Test History section on the redesigned Test Details Page before release. Tracked in DOCS-13939. -->
-{{< img src="synthetics/browser_tests/history.png" alt="The History and Sample Runs section in the Test Details page" style="width=80%" >}}
+<!-- PLACEHOLDER IMAGE — replace history_2.png with a new screenshot of the Test History section on the redesigned Test Details Page before release. Tracked in DOCS-13939. -->
+{{< img src="synthetics/browser_tests/history_2.png" alt="The History and Sample Runs section in the Test Details page" style="width=80%" >}}
 
 ## Sample results
 
