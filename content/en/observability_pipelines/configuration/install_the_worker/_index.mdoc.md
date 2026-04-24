@@ -442,32 +442,43 @@ See [Update Existing Pipelines][linux-ui-1] if you want to make changes to your 
 {% if equals($platform, "cloudformation") %}
 
 1. Select **Cloudformation** as your installation platform.
+
+<!-- UI - Cloudformation - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
+
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
+
 {% /if %}
+
+<!-- UI - Linux - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
+
 2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
+
 {% /if %}
-1. Select one of the options in the dropdown to provide the expected log or metrics (in Preview) volume for the pipeline:
-|   Option   | Description |
-| ---------- | ----------- |
-| Unsure | Use this option if you are not able to project the data volume or you want to test the Worker. This option provisions the EC2 Auto Scaling group with a maximum of 2 general purpose `t4g.large` instances. |
-| 1-5 TB/day | This option provisions the EC2 Auto Scaling group with a maximum of 2 compute optimized instances `c6g.large`. |
-| 5-10 TB/day | This option provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 5 compute optimized `c6g.large` instances. |
-| >10 TB/day | Datadog recommends this option for large-scale production deployments. It provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 10 compute optimized `c6g.xlarge` instances. |
+
+3. Select one of the options in the dropdown to provide the expected log or metrics (in Preview) volume for the pipeline:
+
+    |   Option   | Description |
+    | ---------- | ----------- |
+    | Unsure | Use this option if you are not able to project the data volume or you want to test the Worker. This option provisions the EC2 Auto Scaling group with a maximum of 2 general purpose `t4g.large` instances. |
+    | 1-5 TB/day | This option provisions the EC2 Auto Scaling group with a maximum of 2 compute optimized instances `c6g.large`. |
+    | 5-10 TB/day | This option provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 5 compute optimized `c6g.large` instances. |
+    | >10 TB/day | Datadog recommends this option for large-scale production deployments. It provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 10 compute optimized `c6g.xlarge` instances. |
 
     **Note**: All other parameters are set to reasonable defaults for a Worker deployment, but you can adjust them for your use case as needed in the AWS Console before creating the stack.
-1. Select the AWS region you want to use to install the Worker.
-1. Click **Select API key** to choose the Datadog API key you want to use.
-    - **Note**: The API key must be [enabled for Remote Configuration][cf-ui-2].
-1. Click **Launch CloudFormation Template** to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
-1. Select the VPC and subnet you want to use to install the Worker.
-1. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
-1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
-See [Update Existing Pipelines][cf-ui-1] if you want to make changes to your pipeline's configuration.
+4. Select the AWS region you want to use to install the Worker.
+5. Click **Select API key** to choose the Datadog API key you want to use.
+    - **Note**: The API key must be [enabled for Remote Configuration][cf-ui-2].
+6. Click **Launch CloudFormation Template** to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
+7. Select the VPC and subnet you want to use to install the Worker.
+8. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
+9. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 **Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
+See [Update Existing Pipelines][cf-ui-1] if you want to make changes to your pipeline's configuration
 
 {% /if %}
 {% /if %}
