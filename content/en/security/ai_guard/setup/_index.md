@@ -100,7 +100,7 @@ Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
 
 ### Sensitive data scanning {#sensitive-data-scanning}
 
-AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. To enable sensitive data scanning, go to **AI Guard** > **Settings** > [**Sensitive Data Scanning**][8] for your services.
+AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. To enable sensitive data scanning, go to **Security** > **AI Guard** > **Settings** > [**Services**][8], then configure sensitive data detection for your services.
 
 When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. Sensitive data scanning is detection-only — findings do not independently trigger blocking.
 
