@@ -11,10 +11,10 @@ The Block is the most basic of the available components. Along with Images and I
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value for the color you want. You can use the same color for both 2D and 3D view, or choose different colors for each.
-- **Width**: Choose the width of your block component.
-- **Height**: Choose the height of your block component.
-- **Depth**: Choose the depth of your block component.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value for the color you want. You can use the same color for both 2D and 3D view, or choose different colors for each.
+- {{< ui >}}Width{{< /ui >}}: Choose the width of your block component.
+- {{< ui >}}Height{{< /ui >}}: Choose the height of your block component.
+- {{< ui >}}Depth{{< /ui >}}: Choose the depth of your block component.
 
 ## API
 

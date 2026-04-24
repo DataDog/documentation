@@ -1,0 +1,13 @@
+{{- if eq hugo.Environment "live" -}}
+{{- $urlmap := dict -}}
+{{- range where .Site.AllPages "Kind" "!=" "home" -}}
+    {{- $page := . -}}
+    {{- if eq $page.Language.Lang "en" -}}
+        {{- with $page.File -}}
+            {{- $filepath := print "content/en/" .Path -}}
+            {{- $urlmap = merge $urlmap (dict $filepath $page.RelPermalink) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- $urlmap | jsonify -}}
+{{- end -}}

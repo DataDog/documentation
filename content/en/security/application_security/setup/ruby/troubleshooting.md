@@ -37,7 +37,7 @@ title: Troubleshooting Ruby App and API Protection
 2. High memory usage:
    - Adjust Agent resource limits if needed.
 
-If you suspect performance issues with the Ruby tracer, please create an issue in the [Datadog Ruby tracer GitHub repository][4] with details about your environment and the issue you're facing.
+If you suspect performance issues with the Ruby tracer, please create an issue in the [Datadog Ruby SDK GitHub repository][4] with details about your environment and the issue you're facing.
 
 ### Still having issues?
 

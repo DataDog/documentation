@@ -8,6 +8,12 @@ further_reading:
   - link: /llm_observability/experiments
     tag: Documentation
     text: Run experiments to test improvements
+  - link: "https://www.datadoghq.com/blog/automations-annotation-queues"
+    tag: "Blog"
+    text: "Annotate traces to improve LLM quality with Datadog LLM Observability"
+  - link: /api/latest/llm-observability/
+    tag: API
+    text: LLM Observability API reference
 ---
 
 ## Overview
@@ -169,6 +175,16 @@ To delete a queue:
 
 <div class="alert alert-info">Deleting a queue removes the queue and label associations, but does not delete the underlying traces from LLM Observability. Traces remain accessible in Trace Explorer.</div>
 
+## Using the API
+
+You can manage annotation queues programmatically with the LLM Observability API. Use the API to:
+
+- Create, list, update, and delete annotation queues
+- Add interactions to a queue
+- Retrieve annotated interactions from a queue
+
+For endpoints, request schemas, and examples, see the [LLM Observability API reference][4].
+
 ## Data retention
 
 
@@ -239,3 +255,4 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [1]: https://app.datadoghq.com/llm/traces
 [2]: https://app.datadoghq.com/llm/annotations/queues
 [3]: /llm_observability/experiments/datasets
+[4]: /api/latest/llm-observability/

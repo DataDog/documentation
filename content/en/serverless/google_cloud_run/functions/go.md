@@ -16,9 +16,9 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Go tracer**.
+1. **Install the Datadog Go SDK**.
 
-   1. In your main application, add the tracing library from `dd-trace-go`.
+   1. In your main application, add the SDK from `dd-trace-go`.
 
       {{< code-block lang="shell" disable_copy="false" >}}
 go get github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
@@ -69,6 +69,9 @@ const LOG_FILE = "/shared-volume/logs/app.log"
 
 os.MkdirAll(filepath.Dir(LOG_FILE), 0755)
 logFile, err := os.OpenFile(LOG_FILE, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+if err != nil {
+    panic(err) // Replace with proper error handling for your application
+}
 defer logFile.Close()
 
 logrus.SetOutput(logFile)

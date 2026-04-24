@@ -38,6 +38,29 @@ The CloudPrem cluster, typically deployed on Kubernetes (EKS), consists of sever
 : Performs maintenance tasks, applying retention policies, garbage collecting expired splits, and running delete query jobs.
 
 
+## Data flow
+
+### Ingestion path (logs entering CloudPrem)
+
+Logs are ingested into CloudPrem within your infrastructure. The typical flow is:
+
+1. Your applications emit logs to the **Datadog Agent** or **Observability Pipelines Worker**.
+2. Logs are forwarded to CloudPrem **indexers** running in your cluster.
+3. Indexers process and store logs as splits in your **object storage** (for example, Amazon S3 or Google Cloud Storage).
+
+**No log data leaves your environment during ingestion.** Logs are stored exclusively in your own object storage.
+
+### Query path (searching logs from Datadog UI)
+
+When you search CloudPrem logs from the Datadog UI (for example, in the Log Explorer), the query flows through a secure connection between Datadog and your cluster:
+
+1. The Datadog UI sends the search query to Datadog's backend.
+2. Datadog's backend forwards the query to your CloudPrem cluster through the established connection (reverse connection or ingress).
+3. **Searchers** in your cluster execute the query against your object storage.
+4. Only the **matching log results** are sent back to Datadog for display in the UI.
+
+**Only query results travel between your cluster and Datadog.** The full dataset remains in your object storage and is never transferred to Datadog.
+
 ## Connection to Datadog UI
 
 There are two ways to connect the Datadog UI to CloudPrem:

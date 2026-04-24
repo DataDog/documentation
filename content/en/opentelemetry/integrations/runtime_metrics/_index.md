@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Runtime metrics provide insights into application performance, including memory usage, garbage collection, and parallelization. Datadog tracing libraries offer [runtime metrics collection][5] for each supported language, and OpenTelemetry (OTel) also collects compatible runtime metrics that can be sent to Datadog through the OpenTelemetry SDKs.
+Runtime metrics provide insights into application performance, including memory usage, garbage collection, and parallelization. Datadog SDKs offer [runtime metrics collection][5] for each supported language, and OpenTelemetry (OTel) also collects compatible runtime metrics that can be sent to Datadog through the OpenTelemetry SDKs.
 
 ## Compatibility
 
@@ -24,6 +24,8 @@ Datadog supports OpenTelemetry runtime metrics for the following languages:
 - Java
 - .NET
 - Go
+- Node.js
+- Python
 
 For details about host and container metrics mapping, see [OpenTelemetry Metrics Mapping][1].
 
@@ -38,6 +40,8 @@ For details about host and container metrics mapping, see [OpenTelemetry Metrics
 
 Select your language to see instructions for configuring the OpenTelemetry SDK to send runtime metrics:
 
+**Note**: Runtime metrics are only exported if a `MeterProvider` and metric exporter are configured. Set the `OTEL_METRICS_EXPORTER` environment variable or programmatically configure a `metricReader` in your SDK initialization. For Go, Node.js, and Python, the MeterProvider must be configured manually; Java and .NET auto-configure it via their auto-instrumentation agents.
+
 {{< tabs >}}
 {{% tab "Java" %}}
 
@@ -51,25 +55,82 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 - [Java 8][5]
 - [Java 17][6]
 
+#### Experimental telemetry
+
+Enabling experimental OpenTelemetry runtime telemetry may provide additional metric mappings between Datadog and OpenTelemetry for Java. To enable it, set the following environment variable:
+
+```
+OTEL_INSTRUMENTATION_RUNTIME_TELEMETRY_EMIT_EXPERIMENTAL_TELEMETRY=true
+```
+
+#### Additional JMX metrics
+
+To collect additional JVM metrics beyond the default runtime instrumentation, install the [OpenTelemetry JMX Metric Scraper][9]. The scraper scrapes MBeans over JMX and emits them as OpenTelemetry metrics, which Datadog then maps to runtime metrics (see the [JVM Contrib table](#jvm-contrib) in [Data collected](#data-collected)).
+
+Configure the scraper with `otel.jmx.target.source=legacy` to collect these additional metrics. The scraper's `instrumentation` source emits the same semantic-convention metrics already produced natively by the OpenTelemetry Java SDK, so it does not provide additional coverage.
+
+#### Collector configuration
+
+The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` processor.
+
+```yaml
+processors:
+  deltatorate:
+    metrics:
+      - jvm.gc.collections.count
+      - jvm.gc.collections.elapsed
+```
+
+**Note**: The minimum supported version of the OpenTelemetry Java agent is [2.0.0](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/tag/v2.0.0).
+
 [3]: https://opentelemetry.io/docs/instrumentation/java/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/java/manual/
 [5]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java8/library
 [6]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java17/library
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatorateprocessor
+[9]: https://github.com/open-telemetry/opentelemetry-java-contrib/tree/main/jmx-scraper
 
 {{% /tab %}}
 
 {{% tab "Go" %}}
 
+#### Manual instrumentation
+
 OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime metrics, see the documentation for the [runtime package][4].
+
+#### Collector configuration
+
+Some Go runtime metrics are reported as monotonic sums, but Datadog expects them as gauges. The [Transform Processor][8] converts these sums to gauges, and the [Cumulative-to-Delta Processor][9] excludes them from delta conversion. Verify that `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` is not set to `delta`. Otherwise, metrics excluded by `cumulativetodelta` are ignored.
+
+```yaml
+processors:
+  transform/go-runtime:
+    error_mode: ignore
+    metric_statements:
+      - context: metric
+        statements:
+          - convert_sum_to_gauge() where name == "process.runtime.go.gc.pause_total_ns" or name == "process.runtime.go.gc.count" or name == "go.memory.allocated" or name == "go.memory.allocations"
+
+  cumulativetodelta:
+    exclude:
+      metrics:
+        - process.runtime.go.gc.pause_total_ns
+        - process.runtime.go.gc.count
+        - go.memory.allocated
+        - go.memory.allocations
+      match_type: strict
+```
+
+**Note**: The minimum supported version of [`go.opentelemetry.io/contrib/instrumentation/runtime`][4] is v0.46.0, which also requires Go 1.20+ and [OpenTelemetry Go SDK v1.21.0+](https://github.com/open-telemetry/opentelemetry-go/releases/tag/v1.21.0).
 
 [3]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [4]: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
+[9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/cumulativetodeltaprocessor
 
 {{% /tab %}}
 
 {{% tab ".NET" %}}
-
-<div class="alert alert-danger">The minimum supported version of the .NET OpenTelemetry SDK is <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a></div>
 
 #### Automatic instrumentation
 
@@ -87,10 +148,97 @@ The default metric export interval for the .NET OTel SDK differs from the defaul
 OTEL_METRIC_EXPORT_INTERVAL=10000
 ```
 
+#### Collector configuration
+
+The `dotnet.process.cpu.time` and `process.cpu.time` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` processor.
+
+```yaml
+processors:
+  deltatorate:
+    metrics:
+      - dotnet.process.cpu.time
+      - process.cpu.time
+```
+
+**Note**: The minimum supported version of the .NET OpenTelemetry SDK is [1.5.0](https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0).
+
 [3]: https://opentelemetry.io/docs/instrumentation/net/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/net/manual/
 [5]: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime
 [7]: https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#periodic-exporting-metricreader
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatorateprocessor
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+#### Automatic instrumentation
+
+If you use [OpenTelemetry automatic instrumentation][3] for Node.js applications, runtime metrics are enabled by default through the [`@opentelemetry/instrumentation-runtime-node`][5] package.
+
+#### Manual instrumentation
+
+If you use [OpenTelemetry manual instrumentation][4], see the documentation for the [`@opentelemetry/instrumentation-runtime-node`][5] library.
+
+#### Host metrics
+
+Host-level metrics such as system CPU and memory usage are not included in OpenTelemetry automatic instrumentation. To collect these metrics:
+
+1. Install and configure the [`@opentelemetry/host-metrics`][6] package:
+   
+   ```shell
+   npm install @opentelemetry/host-metrics
+   ```
+
+2. Initialize the package with your existing `MeterProvider`:
+
+   ```javascript
+   const { HostMetrics } = require('@opentelemetry/host-metrics');
+   const { metrics } = require('@opentelemetry/api');
+   const hostMetrics = new HostMetrics({
+     meterProvider: metrics.getMeterProvider(),
+   });
+   hostMetrics.start();
+   ```
+
+For the list of metrics collected by this package, see the [Node.js Contrib Host table](#nodejs-contrib-host).
+
+**Note**: The minimum supported version of [`@opentelemetry/instrumentation-runtime-node`][5] is [0.9.0](https://github.com/open-telemetry/opentelemetry-js-contrib/releases/tag/instrumentation-runtime-node-v0.9.0).
+
+[3]: https://opentelemetry.io/docs/zero-code/js/
+[4]: https://opentelemetry.io/docs/languages/js/instrumentation/
+[5]: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-runtime-node
+[6]: https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/host-metrics
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+#### Installation
+
+Runtime metrics are not enabled by default for Python applications. Install the [`opentelemetry-instrumentation-system-metrics`][5] package:
+
+```shell
+pip install opentelemetry-instrumentation-system-metrics
+```
+
+#### Automatic instrumentation
+
+If you use [OpenTelemetry automatic instrumentation][3] for Python applications, `opentelemetry-instrument` discovers and enables the package after installation.
+
+#### Manual instrumentation
+
+If you use [OpenTelemetry manual instrumentation][4], enable the package in your application:
+
+```python
+from opentelemetry.instrumentation.system_metrics import SystemMetricsInstrumentor
+
+SystemMetricsInstrumentor().instrument()
+```
+
+[3]: https://opentelemetry.io/docs/zero-code/python/
+[4]: https://opentelemetry.io/docs/languages/python/instrumentation/
+[5]: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-system-metrics
 
 {{% /tab %}}
 
@@ -101,142 +249,99 @@ OTEL_METRIC_EXPORT_INTERVAL=10000
 After setup is complete, you can view runtime metrics in:
 - The service's details page (see Java example below)
 - The flame graph metrics tab
-- Default [runtime dashboards][7]
+- Default runtime dashboards ([Java Example][7])
 
 {{< img src="opentelemetry/otel_runtime_metrics_service_page.png" alt="Service page showing OpenTelemetry runtime metrics on the JVM Metrics tab" style="width:100%;" >}}
 
 ## Data collected
 
-When using OpenTelemetry runtime metrics with Datadog, you receive both:
-- Original OpenTelemetry runtime metrics
-- Mapped Datadog runtime metrics for equivalent metrics
+The following tables list the OpenTelemetry runtime metrics used in Datadog's out-of-the-box in-app experiences. Each row maps an OpenTelemetry metric to the equivalent Datadog metric name, along with a description and any attribute conditions Datadog uses to identify the correct data point:
 
-The OpenTelemetry runtime metrics have the following prefixes based on their source:
+- **Transform**: shown when both the OpenTelemetry metric and the Datadog metric require attribute filters to uniquely identify the data point.
+- **Filter**: shown when only the OpenTelemetry metric requires an attribute filter.
 
-| Source | Prefix |
-| --- | --- |
-| [OTel Collector Datadog Exporter][100] | `otel.process.runtime.*` |
-| [Datadog Agent OTLP Ingest][101] | `process.runtime.*` |
-
-The following tables list the Datadog runtime metrics that are supported through OpenTelemetry mapping. "N/A" indicates that there is no OpenTelemetry equivalent metric available.
-
-<div class="alert alert-danger"> OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.</div>
-
-[100]: /opentelemetry/setup/collector_exporter/
-[101]: /opentelemetry/setup/otlp_ingest_in_the_agent
+For Collector processor configuration required to make these metrics compatible with Datadog, see the [Collector configuration](#2-configure-your-application) instructions above.
 
 {{< tabs >}}
-{{% tab "Java" %}}
+{{< tab "Java" >}}
 
-| Datadog metric | Description |  OpenTelemetry metric |
-| --- | --- | --- |
-| `jvm.heap_memory` | The total Java heap memory used. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.heap_memory_committed` | The total Java heap memory committed to be used. | `process.runtime.jvm.memory.committed` <br> `jvm.memory.committed` |
-| `jvm.heap_memory_init` | The initial Java heap memory allocated. | `process.runtime.jvm.memory.init` <br> `jvm.memory.init` |
-| `jvm.heap_memory_max` | The maximum Java heap memory available. | `process.runtime.jvm.memory.limit` <br> `jvm.memory.limit` |
-| `jvm.non_heap_memory` | The total Java non-heap memory used. Non-heap memory is: `Metaspace + CompressedClassSpace + CodeCache`. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.non_heap_memory_committed` | The total Java non-heap memory committed to be used. | `process.runtime.jvm.memory.committed` <br> `jvm.memory.committed` |
-| `jvm.non_heap_memory_init` | The initial Java non-heap memory allocated. | `process.runtime.jvm.memory.init` <br> `jvm.memory.init` |
-| `jvm.non_heap_memory_max` | The maximum Java non-heap memory available. | `process.runtime.jvm.memory.limit` <br> `jvm.memory.limit` |
-| `jvm.gc.old_gen_size` | The current Java heap memory usage of the Old Generation memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.gc.eden_size` | The current Java heap memory usage of the Eden memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.gc.survivor_size` | The current Java heap memory usage of the Survivor memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.gc.metaspace_size` | The current Java non-heap memory usage of the Metaspace memory pool. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
-| `jvm.thread_count` | The number of live threads. | `process.runtime.jvm.threads.count` <br> `jvm.thread.count` |
-| `jvm.loaded_classes` | Number of classes currently loaded. | `process.runtime.jvm.classes.current_loaded` <br> `jvm.class.count` |
-| `jvm.cpu_load.system` | Recent CPU utilization for the whole system. | `process.runtime.jvm.system.cpu.utilization` <br> `jvm.system.cpu.utilization` |
-| `jvm.cpu_load.process` | Recent CPU utilization for the process. | `process.runtime.jvm.cpu.utilization` <br> `jvm.cpu.recent_utilization` |
-| `jvm.buffer_pool.direct.used` | Measure of memory used by direct buffers. | `process.runtime.jvm.buffer.usage` <br> `jvm.buffer.memory.usage` |
-| `jvm.buffer_pool.direct.count` | Number of direct buffers in the pool. | `process.runtime.jvm.buffer.count`<br> `jvm.buffer.count` |
-| `jvm.buffer_pool.direct.limit` | Measure of total memory capacity of direct buffers. | `process.runtime.jvm.buffer.limit` <br> `jvm.buffer.memory.limit` |
-| `jvm.buffer_pool.mapped.used` | Measure of memory used by mapped buffers. | `process.runtime.jvm.buffer.usage`<br> `jvm.buffer.memory.usage` |
-| `jvm.buffer_pool.mapped.count` | Number of mapped buffers in the pool. | `process.runtime.jvm.buffer.count`<br> `jvm.buffer.count` |
-| `jvm.buffer_pool.mapped.limit` | Measure of total memory capacity of mapped buffers. | `process.runtime.jvm.buffer.limit` <br> `jvm.buffer.memory.limit` |
-| `jvm.gc.parnew.time` | The approximate accumulated garbage collection time elapsed. | N/A |
-| `jvm.gc.cms.count` | The total number of garbage collections that have occurred. | N/A |
-| `jvm.gc.major_collection_count` | The rate of major garbage collections. Set `new_gc_metrics: true` to receive this metric. | N/A |
-| `jvm.gc.minor_collection_count` | The rate of minor garbage collections. Set `new_gc_metrics: true` to receive this metric. | N/A |
-| `jvm.gc.major_collection_time` | The fraction of time spent in major garbage collection. Set `new_gc_metrics: true` to receive this metric. | N/A |
-| `jvm.gc.minor_collection_time` | The fraction of time spent in minor garbage collection. Set `new_gc_metrics: true` to receive this metric. | N/A |
-| `jvm.os.open_file_descriptors` | The number of open file descriptors. | N/A |
+<h3>JVM Instrumentation</h3>
+<p>These metrics are collected when using the latest version of the OpenTelemetry Java SDK.</p>
+{{< mapping-table resource="jvm-instrumentation.csv">}}
 
-{{% /tab %}}
+<h3>JVM Contrib</h3>
+<p>These metrics are collected when using the OpenTelemetry JMX Metric Scraper.</p>
+{{< mapping-table resource="jvm-contrib.csv">}}
 
-{{% tab "Go" %}}
+<h3>Deprecated JVM Metrics</h3>
+<p>These metrics are collected when using OpenTelemetry Java SDK versions 1.32.0 and earlier.</p>
+{{< mapping-table resource="jvm-deprecated.csv">}}
 
-| Datadog metric | Description |  OpenTelemetry metric |
-| --- | --- | --- |
-| `runtime.go.num_goroutine` | Number of goroutines spawned. | `process.runtime.go.goroutines` |
-| `runtime.go.num_cgo_call` | Number of CGO calls made. |`process.runtime.go.cgo.calls` |
-| `runtime.go.mem_stats.lookups` | Number of pointer lookups performed by the runtime. | `process.runtime.go.mem.lookups` |
-| `runtime.go.mem_stats.heap_alloc` | Bytes of allocated heap objects. | `process.runtime.go.mem.heap_alloc` |
-| `runtime.go.mem_stats.heap_sys` | Bytes of heap memory obtained from the operating system. | `process.runtime.go.mem.heap_sys` |
-| `runtime.go.mem_stats.heap_idle` | Bytes in idle (unused) spans. | `process.runtime.go.mem.heap_idle` |
-| `runtime.go.mem_stats.heap_inuse` | Bytes in in-use spans. | `process.runtime.go.mem.heap_inuse` |
-| `runtime.go.mem_stats.heap_released` | Bytes of physical memory returned to the operating system. | `process.runtime.go.mem.heap_released` |
-| `runtime.go.mem_stats.heap_objects` | Number of allocated heap objects. | `process.runtime.go.mem.heap_objects` |
-| `runtime.go.mem_stats.pause_total_ns` | Cumulative nanoseconds in garbage collection (GC). | `process.runtime.go.gc.pause_total_ns` |
-| `runtime.go.mem_stats.num_gc` | Number of completed GC cycles. | `process.runtime.go.gc.count` |
-| `runtime.go.num_cpu` | Number of CPUs detected by the runtime. | N/A |
-| `runtime.go.mem_stats.alloc` | Bytes of allocated heap objects. | N/A |
-| `runtime.go.mem_stats.total_alloc` | Cumulative bytes allocated for heap objects. | N/A |
-| `runtime.go.mem_stats.sys` | Total bytes of memory obtained from the operating system. | N/A |
-| `runtime.go.mem_stats.mallocs` | Cumulative count of heap objects allocated. | N/A |
-| `runtime.go.mem_stats.frees` | Cumulative count of heap objects freed. | N/A |
-| `runtime.go.mem_stats.stack_inuse` | Bytes in stack spans. | N/A |
-| `runtime.go.mem_stats.stack_sys` | Bytes of stack memory obtained from the operating system. | N/A |
-| `runtime.go.mem_stats.m_span_inuse` | Bytes of allocated mspan structures. | N/A |
-| `runtime.go.mem_stats.m_span_sys` | Bytes of memory obtained from the operating system for mspan structures. | N/A |
-| `runtime.go.mem_stats.m_cache_inuse` | Bytes of allocated mcache structures. | N/A |
-| `runtime.go.mem_stats.m_cache_sys` | Bytes of memory obtained from the operating system for mcache structures. | N/A |
-| `runtime.go.mem_stats.buck_hash_sys` | Bytes of memory in profiling bucket hash tables. | N/A |
-| `runtime.go.mem_stats.gc_sys` | Bytes of memory in garbage collection metadata. | N/A |
-| `runtime.go.mem_stats.other_sys` | Bytes of memory in miscellaneous off-heap. | N/A |
-| `runtime.go.mem_stats.next_gc` | Target heap size of the next GC cycle. | N/A |
-| `runtime.go.mem_stats.last_gc` | Last garbage collection finished, as nanoseconds since the UNIX epoch. | N/A |
-| `runtime.go.mem_stats.num_forced_gc` | Number of GC cycles that were forced by the application calling the GC function. | N/A |
-| `runtime.go.mem_stats.gc_cpu_fraction` | Fraction of this program's available CPU time used by the GC since the program started. | N/A |
-| `runtime.go.gc_stats.pause_quantiles.min` | Distribution of GC pause times: minimum values. | N/A |
-| `runtime.go.gc_stats.pause_quantiles.25p` | Distribution of GC pause times: 25th percentile. | N/A |
-| `runtime.go.gc_stats.pause_quantiles.50p` | Distribution of GC pause times: 50th percentile. | N/A |
-| `runtime.go.gc_stats.pause_quantiles.75p` | Distribution of GC pause times: 75th percentile. | N/A |
-| `runtime.go.gc_stats.pause_quantiles.max` | Distribution of GC pause times: maximum values. | N/A |
+{{< /tab >}}
 
-{{% /tab %}}
+{{< tab "Go" >}}
 
-{{% tab ".NET" %}}
+<h3>Go Runtime Metrics</h3>
+<p>These metrics are collected by the OpenTelemetry Go <a href="https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime">runtime instrumentation package</a>.</p>
+{{< mapping-table resource="go-contrib-runtime.csv">}}
 
-| Datadog metric | Description |  OpenTelemetry metric |
-| --- | --- | --- |
-| `runtime.dotnet.threads.contention_count` | The number of times a thread stopped to wait on a lock. | `process.runtime.dotnet.`<br>`monitor.lock_contention.count` |
-| `runtime.dotnet.exceptions.count` | The number of first-chance exceptions. | `process.runtime.dotnet.`<br>`exceptions.count` |
-| `runtime.dotnet.gc.size.gen0` | The size of the gen 0 heap. | `process.runtime.dotnet.`<br>`gc.heap.size` |
-| `runtime.dotnet.gc.size.gen1` | The size of the gen 1 heap. | `process.runtime.dotnet.`<br>`gc.heap.size` |
-| `runtime.dotnet.gc.size.gen2` | The size of the gen 2 heap. | `process.runtime.dotnet.`<br>`gc.heap.size` |
-| `runtime.dotnet.gc.size.loh` | The size of the large object heap. | `process.runtime.dotnet.`<br>`gc.heap.size` |
-| `runtime.dotnet.gc.count.gen0` | The number of gen 0 garbage collections. | `process.runtime.dotnet.`<br>`gc.collections.count` |
-| `runtime.dotnet.gc.count.gen1` | The number of gen 1 garbage collections. | `process.runtime.dotnet.`<br>`gc.collections.count` |
-| `runtime.dotnet.gc.count.gen2` | The number of gen 2 garbage collections. | `process.runtime.dotnet.`<br>`gc.collections.count` |
-| `runtime.dotnet.cpu.system` | The number of milliseconds executing in the kernel. | N/A |
-| `runtime.dotnet.cpu.user` | The number of milliseconds executing outside the kernel. | N/A |
-| `runtime.dotnet.cpu.percent` | The percentage of total CPU used by the application. | N/A |
-| `runtime.dotnet.mem.committed` | Memory usage. | N/A |
-| `runtime.dotnet.threads.count` | The number of threads. | N/A |
-| `runtime.dotnet.threads.workers_count` | The number of workers in the threadpool. (.NET Core only) | N/A |
-| `runtime.dotnet.threads.contention_time` | The cumulated time spent by threads waiting on a lock. (.NET Core only) | N/A |
-| `runtime.dotnet.gc.memory_load` | The percentage of the total memory used by the process. The garbage collection (GC) changes its behavior when this value gets above 85. (.NET Core only) | N/A |
-| `runtime.dotnet.gc.pause_time` | The amount of time the GC paused the application threads. (.NET Core only) | N/A |
-| `runtime.dotnet.aspnetcore.`<br>`requests.total` | The total number of HTTP requests received by the server. (.NET Core only) | N/A |
-| `runtime.dotnet.aspnetcore.`<br>`requests.failed` | The number of failed HTTP requests received by the server. (.NET Core only) | N/A |
-| `runtime.dotnet.aspnetcore.`<br>`requests.current` | The total number of HTTP requests that have started but not yet stopped. (.NET Core only) | N/A |
-| `runtime.dotnet.aspnetcore.`<br>`requests.queue_length` | The current length of the server HTTP request queue. (.NET Core only) | N/A |
-| `runtime.dotnet.aspnetcore.`<br>`connections.total` | The total number of HTTP connections established to the server. (.NET Core only) | N/A |
-| `runtime.dotnet.aspnetcore.`<br>`connections.current` | The current number of active HTTP connections to the server. (.NET Core only) | N/A |
-| `runtime.dotnet.aspnetcore.`<br>`connections.queue_length` | The current length of the HTTP server connection queue. (.NET Core only) | N/A |
+{{< /tab >}}
+
+{{< tab ".NET" >}}
+
+<h3>.NET System.Runtime</h3>
+<p>These metrics are emitted by the .NET runtime's built-in <code>System.Runtime</code> meter on .NET 9.0 and later. The OpenTelemetry SDK collects and exports them automatically.</p>
+{{< mapping-table resource="dotnet.csv">}}
+
+<h3>.NET Contrib Runtime</h3>
+<p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime">OpenTelemetry.Instrumentation.Runtime</a> package. On .NET 9.0 and later, these overlap with the System.Runtime metrics above.</p>
+{{< mapping-table resource="dotnet-contrib-runtime.csv">}}
+
+<h3>.NET Contrib Process</h3>
+<p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Process">OpenTelemetry.Instrumentation.Process</a> package.</p>
+{{< mapping-table resource="dotnet-contrib-process.csv">}}
+
+{{< /tab >}}
+
+{{< tab "Node.js" >}}
+
+<h3>Node.js Contrib Runtime</h3>
+<p>These metrics are emitted from auto-instrumentation with the latest version of the OpenTelemetry Node.js SDK.</p>
+{{< mapping-table resource="node-contrib-runtime.csv">}}
+
+<h3>Node.js Contrib Host</h3>
+<p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/host-metrics">@opentelemetry/host-metrics</a> package. This package is not included in OpenTelemetry automatic instrumentation and must be installed and configured manually.</p>
+{{< mapping-table resource="node-contrib-host.csv">}}
+
+{{< /tab >}}
+
+{{% tab "Python" %}}
+
+<h3>Python Runtime Metrics</h3>
+<p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-system-metrics"><code>opentelemetry-instrumentation-system-metrics</code></a> package. The following table lists the conceptual equivalences between OpenTelemetry and Datadog Python runtime metrics. There are no direct metric-name mappings because the metric types differ between the two systems.</p>
+
+| OTEL | Datadog | Description | Filter |
+| --- | --- | --- | --- |
+| `process.cpu.time` | `runtime.python.cpu.time.sys` | Number of seconds executing in the kernel. | `type`: `system` |
+| `process.cpu.time` | `runtime.python.cpu.time.user` | Number of seconds executing outside the kernel. | `type`: `user` |
+| `process.cpu.utilization` | `runtime.python.cpu.percent` | CPU utilization percentage. OTel divides the raw value by 100 times the number of CPU cores. | |
+| `process.context_switches` | `runtime.python.cpu.ctx_switch.voluntary` | Number of voluntary context switches. | `type`: `voluntary` |
+| `process.context_switches` | `runtime.python.cpu.ctx_switch.involuntary` | Number of involuntary context switches. | `type`: `involuntary` |
+| `process.runtime.{python_implementation}.gc_count` | `runtime.python.gc.count.gen0` | Number of generation 0 objects. | `count`: `0` |
+| `process.runtime.{python_implementation}.gc_count` | `runtime.python.gc.count.gen1` | Number of generation 1 objects. | `count`: `1` |
+| `process.runtime.{python_implementation}.gc_count` | `runtime.python.gc.count.gen2` | Number of generation 2 objects. | `count`: `2` |
+| `process.memory.usage` | `runtime.python.mem.rss` | Resident set memory. | |
+| `process.thread.count` | `runtime.python.thread_count` | Number of threads. | |
 
 {{% /tab %}}
 
 {{< /tabs >}}
+
+## Troubleshooting
+
+### Metric name mapping
+
+OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.
 
 ## Further reading
 
