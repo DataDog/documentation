@@ -16,9 +16,9 @@ Tag enrichment is in Preview.
 
 ## Overview
 
-Automatically enrich your telemetry with `team` and `system` tags sourced from your service definitions in Software Catalog, without changing tracer configuration or redeploying code.
+Use tag enrichment to add `team` and `system` tags to your APM spans without code changes or redeployment. Datadog automatically pulls tag values from service metadata you've already defined in Software Catalog.
 
-Tag enrichment rules let you define which services to target, where tag values come from, and how they are applied to telemetry.
+Tag enrichment rules let you control which services are enriched, where each tag value comes from, and how it's applied.
 
 ## Prerequisites
 
