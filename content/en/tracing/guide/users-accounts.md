@@ -36,9 +36,9 @@ If you're already collecting Real User Monitoring data, you can propagate user a
 
 The user and account information is automatically remapped in the backend to the [`usr.id` and `account.id` standard attributes][4], making it consistent across all your traces. Standard attributes allow you to filter and search your trace data consistently across all your services.
 
-### From APM SDKs
+### From Datadog SDKs
 
-For backend services or applications without RUM, you can tag spans directly using APM SDKs:
+For backend services or applications without RUM, you can tag spans directly using Datadog SDKs:
 
 1. Use the [span tagging API][5] (`set_tag`, `SetTag`, or `setTag` depending on your language) to add `usr.id` and `account.id` attributes to your spans.
 

@@ -413,7 +413,7 @@
             file_name: 'agent_config.yaml'
             output_content: false
         - action: pull-and-push-folder
-          branch: 7.76.x
+          branch: 7.78.x
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend_linux.md'
@@ -423,17 +423,6 @@
           options:
             dest_dir: '/security/workload_protection/'
             path_to_remove: 'docs/cloud-workload-security/'
-
-      - repo_name: web-ui
-        contents:
-          - action: pull-and-push-file
-            branch: prod
-            globs:
-              - "generated/md/external/semantic-color-documentation.md"
-            options:
-              base_path: ""
-              dest_path: "/layouts/shortcodes/"
-              file_name: "semantic-color.md"
 
       - repo_name: datadog-operator
         contents:

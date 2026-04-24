@@ -25,6 +25,109 @@ on how rules are organized within a ruleset. For example, some users might want 
 A ruleset must have a unique name with only letters, numbers, and hyphens (`-`). Examples of valid
 ruleset names are `python-security`, `cobra-team-checks`, or `my-company-security-checks`.
 
+## Write rules with the VS Code extension
+
+The [Datadog VS Code Extension][6] includes the DDSA Rule Editor for interactively writing and testing custom rules.
+
+### Prerequisites
+
+Install the [Datadog VS Code Extension][6] from the VS Code marketplace and keep it up to date.
+
+### Open the editor
+
+**To create a new rule**, open the command palette (**Cmd+Shift+P** / **Ctrl+Shift+P**) and run:
+
+```
+Datadog: New DDSA Rule
+```
+
+**To edit an existing rule**, right-click any `.yaml` rule file in the explorer and select **Datadog Code Security > Open in DDSA Rule Editor**.
+
+The [template repository](#manage-rules-with-the-template-repository) includes a `.ddsainclude` file that automatically opens matching rule YAML files in the editor.
+
+### Editor panels
+
+The editor has four panels:
+
+| Panel | Description |
+|-------|-------------|
+| Top-left | Tree-sitter query |
+| Top-right | Code sample and scan results |
+| Bottom-left | JavaScript rule logic |
+| Bottom-right | AST viewer and console output |
+
+### Test your rule
+
+As you write, violations appear as squiggly underlines in the code sample panel in real-time. To run your rule against an entire directory, switch to the **Scan results** tab in the top-right panel.
+
+### Rule metadata
+
+The collapsible sidebar lets you set rule metadata such as name, description, category, severity, and language before exporting.
+
+### Save your rule
+
+- **Cmd/Ctrl+S**: Save to the current file
+- **Shift+Cmd/Ctrl+S**: Save as a new file
+- **Export button**: Validates required fields and saves as a YAML file
+
+## Manage rules with the template repository
+
+As an alternative to managing custom rules in Datadog, the [datadog-custom-rules-template][5] GitHub repository provides a Git-based workflow for managing custom rules as code. It works alongside the [VS Code extension](#write-rules-with-the-vs-code-extension): write and test rules in the extension, then push to `main` to sync them to Datadog automatically.
+
+### Get started
+
+1. Click **Use this template** on the [datadog-custom-rules-template][5] repository to create your own copy.
+2. Add your Datadog credentials as GitHub secrets. See [Authentication](#authentication).
+3. Rename `rulesets/my-custom-rules/` or add new ruleset directories under `rulesets/`.
+4. Push to `main`. The GitHub Action uploads your rules automatically.
+
+### Authentication
+
+1. In your GitHub repository, go to **Settings → Secrets and variables → Actions**.
+2. Add three secrets:
+   - `DD_API_KEY` — your Datadog API key
+   - `DD_APP_KEY` — your Datadog Application key
+   - `DD_SITE` — your [Datadog site][7] hostname (for example, `datadoghq.com`, `datadoghq.eu`, or `us3.datadoghq.com`)
+
+### How sync works
+
+On every push to `main`, the GitHub Action runs `upload.py`, which:
+- **Creates** rulesets and rules that are new in the repository
+- **Updates** rulesets and rules whose content has changed
+- **Deletes** rulesets and rules that have been removed the repository
+
+Only changed rules trigger API calls—unchanged rules are skipped.
+
+To run a sync manually, in to your GitHub repository, go to the **Actions** tab, select **Upload Custom Rules**, and click **Run workflow**.
+
+### Rule file format
+
+Each ruleset directory contains a `ruleset.yaml` and a separate `.yaml` file for each rule.
+
+**`ruleset.yaml`**
+
+```yaml
+name: my-org-custom-rules
+short_description: One-line summary
+description: Longer description of what this ruleset covers.
+```
+
+**Rule file**
+
+```yaml
+name: your-rule-name
+short_description: One-line summary
+description: Detailed description.
+category: BEST_PRACTICES     # SECURITY | BEST_PRACTICES | CODE_STYLE | ERROR_PRONE | PERFORMANCE
+severity: ERROR              # ERROR | WARNING | NOTICE | INFO
+language: JAVASCRIPT
+tree_sitter_query: <TREE_SITTER_QUERY>    # See Anatomy of a custom rule
+code: |-                                  # See Anatomy of a custom rule
+  function visit(node, filename, code) { <RULE_LOGIC> }
+tests: []
+is_published: false          # Set to true when the rule is ready for scans
+```
+
 ## Anatomy of a custom rule
 
 A custom rule is composed of three main components:
@@ -85,3 +188,6 @@ All Datadog default rules are available in [Code Security][4]. You can easily an
 [2]: https://tree-sitter.github.io/
 [3]: https://tree-sitter.github.io/tree-sitter/using-parsers/queries/index.html
 [4]: https://app.datadoghq.com/ci/code-analysis/static-analysis/default-rulesets
+[5]: https://github.com/DataDog/datadog-custom-rules-template
+[6]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
+[7]: /getting_started/site/
