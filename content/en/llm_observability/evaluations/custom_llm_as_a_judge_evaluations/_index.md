@@ -324,7 +324,7 @@ For example:
 
 You can:
 - Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
-- Filter by pass/fail assessment status (example, `@evaluations.assessment.custom.helpfulness-check:fail`)
+- Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
 - Use evaluation results as [facets][3]
 - View aggregate results in the LLM Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
