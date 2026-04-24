@@ -20,7 +20,7 @@ further_reading:
 ## Explore BYOC Logs in the Logs Explorer
 
 1. Go to the [Datadog Log Explorer][1].
-2. On the left facet panel, under {{< ui >}}CLOUDPREM INDEXES{{< /ui >}}, select one or more indexes to search.
+2. On the left facet panel, under {{< ui >}}BYOC INDEXES{{< /ui >}}, select one or more indexes to search.
 
 You can select a specific index to narrow your search, or select all indexes in a cluster to search across them.
 
