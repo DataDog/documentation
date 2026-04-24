@@ -49,12 +49,15 @@ See [Set Up the Worker in ECS Fargate][ecs-1] for instructions on how to configu
 
 **Note**: If you are using a proxy, see the `proxy` option in [Bootstrap options][1].
 
+## Install the Worker
+
 <!-- API or Terraform -->
 {% if includes($interface, ["api","terraform"]) %}
 
-## Install the Worker
-<!-- Docker -->
+<!-- API or Terraform - Docker -->
 {% if equals($platform, "docker") %}
+
+<!-- API/TF - Docker - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
 Run this command to install the Worker:
 ```
@@ -66,6 +69,8 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
 ```
 
 {% /if %}
+
+<!-- API/TF - Docker - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
 Run this command to install the Worker:
@@ -99,7 +104,7 @@ You must replace the placeholders with the following values, if applicable:
 - Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you identify the Worker.
 - See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
-<!-- Docker - secrets_management -->
+<!-- API/TF - Docker - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
 ### Connect the Worker to your secrets manager
 
@@ -113,7 +118,7 @@ See [Update Existing Pipelines][docker-api-tf-5] if you want to make changes to 
 
 {% /if %}
 
-<!-- Kubernetes -->
+<!-- API or Terraform - Kubernetes -->
 {% if equals($platform, "kubernetes") %}
 
 1. Download the [Helm chart values file][k8s-api-tf-1]. See the [full list of configuration options][k8s-api-tf-5] available.
@@ -127,7 +132,7 @@ See [Update Existing Pipelines][docker-api-tf-5] if you want to make changes to 
     helm repo update
     ```
 
-<!-- Kubernetes - secrets_management -->
+<!-- API/TF - Kubernetes - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
 
 3. See [Secrets Management][k8s-api-tf-8] on how to configure your `values.yaml` file for your secrets manager.
@@ -139,10 +144,12 @@ See [Update Existing Pipelines][docker-api-tf-5] if you want to make changes to 
     --set datadog.pipelineId=<PIPELINE_ID> \
     datadog/observability-pipelines-worker
     ```
+
 {% /if %}
 
-<!-- Kubernetes - environment variables -->
+<!-- API/TF - Kubernetes - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
+
 3. Run this command to install the Worker:
 
     ```shell
@@ -174,7 +181,7 @@ See [Update Existing Pipelines][docker-api-tf-5] if you want to make changes to 
 {% /if %}
 {% /if %}
 
-<!-- Linux -->
+<!-- API or Terraform - Linux -->
 {% if equals($platform, "linux") %}
 
 {% alert level="warning" %}
@@ -183,7 +190,7 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
 
 Follow the steps below if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker](#manually-install-the-worker).
 
-<!-- Linux - secrets_management -->
+<!-- API/TF - Linux - Secrets Management -->
 
 {% if equals($secrets_source, "secrets_manager") %}
 1. Run this one-step command to install the Worker.
@@ -203,7 +210,7 @@ Follow the steps below if you want to use the one-line installation script to in
 
 {% /if %}
 
-<!-- Linux - environment_variables -->
+<!-- API/TF - Kubernetes - Environment variables -->
 
 {% if equals($secrets_source, "environment_variables") %}
 
@@ -231,7 +238,7 @@ See [Update Existing Pipelines][linux-4] if you want to make changes to your pip
 {% /if %}
 {% /if %}
 
-<!-- Cloudformation -->
+<!-- API or Terraform - Cloudformation -->
 {% if equals($platform, "cloudformation") %}
 
 1. Select one of the options in the dropdown to provide the expected log or metrics ({% glossary-tooltip term="preview" case="title" /%}) volume for the pipeline:
@@ -262,8 +269,6 @@ See [Update Existing Pipelines][linux-4] if you want to make changes to your pip
 
 {% if equals($interface, "ui") %}
 
-## Install the Worker
-
 {% img src="observability_pipelines/install_page_secrets.png"
 alt="The install page in the UI with a dropdown menu to choose your installation platform and fields to enter environment variables"
 style="width:100%;" /%}
@@ -274,17 +279,13 @@ After you set up your source, destinations, and processors on the Build page of 
 {% if equals($platform, "docker") %}
 
 1. Select **Docker** as your installation platform.
+
+<!-- UI - Docker - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
+
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
-{% /if %}
-{% if equals($secrets_source, "environment_variables") %}
-2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
-{% /if %}
 3. Click **Select API key** to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][docker-ui-1].
-
-{% if equals($secrets_source, "secrets_manager") %}
-
 4. Run the command provided in the UI to install the Worker. The command points to the Worker bootstrap file that you configure to resolve secrets using your secrets manager.
 
 5. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][docker-ui-3] for more information.
@@ -298,7 +299,12 @@ After you set up your source, destinations, and processors on the Build page of 
 
 {% /if %}
 
+<!-- UI - Docker - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
+
+2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
+3. Click **Select API key** to choose the Datadog API key you want to use.
+    - **Note**: The API key must be [enabled for Remote Configuration][docker-ui-1].
 4. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
 
 5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
@@ -321,12 +327,19 @@ See [Update Existing Pipelines][docker-ui-2] if you want to make changes to your
 {% if equals($platform, "kubernetes") %}
 
 1. Select **Kubernetes** as your installation platform.
+
+<!-- UI - Kubernetes - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
 {% /if %}
+
+<!-- UI - Kubernetes - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
+
 2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
+
 {% /if %}
+
 3. Download the [Helm chart values file][k8s-ui-1]. See the [full list of configuration options][k8s-ui-3] available.
     - If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
 4. Click **Select API key** to choose the Datadog API key you want to use.
@@ -353,6 +366,8 @@ See [Update Existing Pipelines][docker-ui-2] if you want to make changes to your
 8. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 {% /if %}
+
+<!-- UI - Kubernetes - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
 6. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
@@ -381,13 +396,19 @@ See [Update Existing Pipelines][docker-ui-2] if you want to make changes to your
 The steps below use the one-line installation script to install the Worker. 
 
 1. Select **Linux** as your installation platform.
+
+<!-- UI - Linux - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
 {% /if %}
+
+<!-- UI - Linux - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
 2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
+
 {% /if %}
+
 3. Click **Select API key** to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][linux-ui-2].
 
@@ -420,7 +441,6 @@ See [Update Existing Pipelines][linux-ui-1] if you want to make changes to your 
 <!-- UI - Cloudformation -->
 {% if equals($platform, "cloudformation") %}
 
-
 1. Select **Cloudformation** as your installation platform.
 {% if equals($secrets_source, "secrets_manager") %}
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
@@ -452,7 +472,7 @@ See [Update Existing Pipelines][cf-ui-1] if you want to make changes to your pip
 {% /if %}
 {% /if %}
 
-<!-- Kubernetes - UI, API, Terraform -->
+<!-- UI, API, Terraform - Kubernetes -->
 {% if equals($platform, "kubernetes") %}
 
 **Notes**:
@@ -515,7 +535,7 @@ In the Helm chart:
     ```
 {% /if %}
 
-<!-- Linux -->
+<!-- UI, API, Terraform - Linux -->
 {% if equals($platform, "linux") %}
 ### Manually install the Worker
 
