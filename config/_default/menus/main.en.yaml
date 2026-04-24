@@ -952,32 +952,37 @@ menu:
       identifier: otel_otlp_metric_types
       parent: otel_reference
       weight: 1104
-    # - name: Client SDKs
-    #   url: client_sdks/
-    #   pre: building-block
-    #   identifier: sdk
-    #   parent: essentials_heading
-    #   weight: 60000
-    # - name: Setup
-    #   url: client_sdks/setup/
-    #   parent: sdk
-    #   identifier: sdk_setup
-    #   weight: 1
-    # - name: Advanced Configuration
-    #   url: client_sdks/advanced_configuration/
-    #   parent: sdk
-    #   identifier: sdk_advanced_configuration
-    #   weight: 2
-    # - name: Data Collected
-    #   url: client_sdks/data_collected/
-    #   parent: sdk
-    #   identifier: sdk_data_collected
-    #   weight: 3
-    # - name: Integrated Libraries
-    #   url: client_sdks/integrated_libraries/
-    #   parent: sdk
-    #   identifier: sdk_integrated_libraries
-    #   weight: 4
+    - name: Client SDKs
+      url: client_sdks/
+      pre: building-block
+      identifier: sdk
+      parent: essentials_heading
+      weight: 60000
+    - name: Setup
+      url: client_sdks/setup/
+      parent: sdk
+      identifier: sdk_setup
+      weight: 1
+    - name: Advanced Configuration
+      url: client_sdks/advanced_configuration/
+      parent: sdk
+      identifier: sdk_advanced_configuration
+      weight: 2
+    - name: Data Collected
+      url: client_sdks/data_collected/
+      parent: sdk
+      identifier: sdk_data_collected
+      weight: 3
+    - name: Integrated Libraries
+      url: client_sdks/integrated_libraries/
+      parent: sdk
+      identifier: sdk_integrated_libraries
+      weight: 4
+    - name: Troubleshooting
+      url: client_sdks/troubleshooting/
+      parent: sdk
+      identifier: sdk_troubleshooting
+      weight: 5
     - name: Extend Datadog
       url: extend/
       pre: dev-code
@@ -5032,16 +5037,16 @@ menu:
       identifier: data_streams_setup
       parent: data_streams
       weight: 1
-    - name: Kafka 
+    - name: Kafka
       url: data_streams/kafka
       identifier: data_streams_kafka
       parent: data_streams
       weight: 2
-    - name: Messages 
-      url: data_streams/kafka/messages 
-      identifier: data_streams_kafka_messages
-      parent: data_streams_kafka 
-      weight: 201
+    - name: Setup
+      url: data_streams/kafka/setup
+      identifier: data_streams_kafka_setup
+      parent: data_streams_kafka
+      weight: 1
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -6404,10 +6409,10 @@ menu:
       url: observability_pipelines/destinations/datadog_archives/
       parent: observability_pipelines_destinations
       weight: 406
-    - name: BYOC Logs
-      url: observability_pipelines/destinations/cloudprem/
+    - name: Datadog BYOC Logs
+      url: observability_pipelines/destinations/datadog_byoc_logs/
       parent: observability_pipelines_destinations
-      identifier: observability_pipelines_datadog_cloudprem
+      identifier: observability_pipelines_datadog_byoc_logs
       weight: 407
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
@@ -6830,6 +6835,11 @@ menu:
       url: logs/log_configuration/forwarding_custom_destinations/
       parent: log_configuration
       weight: 212
+    - name: Log Optimizer
+      url: logs/log_configuration/log_optimizer/
+      parent: log_configuration
+      identifier: log_optimizer
+      weight: 213
     - name: Log Explorer
       url: logs/explorer/
       parent: log_management
@@ -7222,11 +7232,16 @@ menu:
       parent: security_platform
       identifier: security_research_feed
       weight: 12
+    - name: Security MCP Tools
+      url: security/mcp_server
+      parent: security_platform
+      identifier: security_mcp_server
+      weight: 13
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 13
+      weight: 14
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
@@ -7384,16 +7399,21 @@ menu:
       url: /security/code_security/static_analysis/setup/
       parent: sec_static_analysis
       weight: 1
+    - name: Configuration
+      identifier: sec_static_analysis_configuration
+      url: /security/code_security/static_analysis/configuration/
+      parent: sec_static_analysis
+      weight: 2
     - name: GitHub Actions
       identifier: sec_static_analysis_github_actions
       url: /security/code_security/static_analysis/github_actions/
       parent: sec_static_analysis
-      weight: 2
+      weight: 3
     - name: Generic CI Providers
       identifier: sec_static_analysis_generic_ci_providers
       url: /security/code_security/static_analysis/generic_ci_providers/
       parent: sec_static_analysis
-      weight: 3
+      weight: 4
     - name: AI-Enhanced Static Code Analysis
       identifier: sec_static_analysis_ai
       url: /security/code_security/static_analysis/ai_enhanced_sast/
@@ -7439,11 +7459,16 @@ menu:
       url: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
       parent: sca_setup_runtime
       weight: 1
+    - name: Configuration
+      identifier: sca_configuration
+      url: /security/code_security/software_composition_analysis/configuration/
+      parent: software_composition_analysis
+      weight: 3
     - name: Library Inventory
       identifier: sca_library_inventory
       url: /security/code_security/software_composition_analysis/library_inventory/
       parent: software_composition_analysis
-      weight: 3
+      weight: 4
     - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
@@ -9084,15 +9109,15 @@ menu:
       parent: digital_experience_heading
       identifier: pa_experiments
       weight: 50000
-    - name: Plan and Launch Experiments
-      url: experiments/plan_and_launch_experiments
-      parent: pa_experiments
-      identifier: pa_experiments_plan
-      weight: 1
     - name: Create Experiment Metrics
       url: experiments/defining_metrics
       parent: pa_experiments
       identifier: pa_experiments_metrics
+      weight: 1
+    - name: Plan and Launch Experiments
+      url: experiments/plan_and_launch_experiments
+      parent: pa_experiments
+      identifier: pa_experiments_plan
       weight: 2
     - name: Read Experiment Results
       url: experiments/reading_results
@@ -9436,6 +9461,11 @@ menu:
       url: account_management/plan_and_usage/usage_details/
       parent: account_management_plan_and_usage
       weight: 1302
+    - name: Partner Experience
+      identifier: account_management_partner_experience
+      url: account_management/plan_and_usage/partner_experience/
+      parent: account_management_plan_and_usage
+      weight: 1303
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/

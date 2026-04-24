@@ -25,7 +25,7 @@ These are the available destinations:
 - [Amazon Security Lake][3]
 - [Azure Storage][4]
 - [Datadog Archives][2]
-- [BYOC Logs][5]
+- [Datadog BYOC Logs][5]
 - [CrowdStrike Next-Gen SIEM][6]
 - [Datadog Logs][7]
 - [Elasticsearch][8]
@@ -47,7 +47,7 @@ These are the available destinations:
 [2]: /observability_pipelines/destinations/datadog_archives/
 [3]: /observability_pipelines/destinations/amazon_security_lake/
 [4]: /observability_pipelines/destinations/azure_storage/
-[5]: /observability_pipelines/destinations/cloudprem/
+[5]: /observability_pipelines/destinations/datadog_byoc_logs/
 [6]: /observability_pipelines/destinations/crowdstrike_ng_siem/
 [7]: /observability_pipelines/destinations/datadog_logs/
 [8]: /observability_pipelines/destinations/elasticsearch/

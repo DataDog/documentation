@@ -323,7 +323,7 @@ Worker version 2.9.0 gives you access to the following:
 #### New features
 
 - [OpenTelemetry Collector source][10]: Ingest logs from your OpenTelemetry Collector into Observability Pipelines.
-- [BYOC Logs destination][11]: Route logs to the BYOC Logs destination.
+- [Datadog BYOC Logs destination][11]: Route logs to the Datadog BYOC Logs destination.
 - [Google Pub/Sub destination][12]: Send logs from Observability Pipelines to the Google Pub/Sub messaging system.
 - The `haversine` custom function to calculate haversine distance and bearing.
 
@@ -421,7 +421,7 @@ Worker version 2.7.0 gives you access to the following:
 [8]: https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#logs-ingestion-api
 [9]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.9.0
 [10]: /observability_pipelines/sources/opentelemetry/
-[11]: /observability_pipelines/destinations/cloudprem/
+[11]: /observability_pipelines/destinations/datadog_byoc_logs/
 [12]: /observability_pipelines/destinations/google_pubsub/
 [13]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.8.1
 [14]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.8.0

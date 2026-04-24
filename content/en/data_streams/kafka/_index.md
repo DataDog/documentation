@@ -1,6 +1,10 @@
 ---
 title: Kafka Monitoring
 description: Monitor Kafka cluster health, connect services to topics, and inspect schemas and messages with Data Streams Monitoring's Kafka Monitoring.
+aliases:
+  - /data_streams/live_messages
+  - /data_streams/messages
+  - /data_streams/kafka/messages
 ---
 
 With Data Streams Monitoring's Kafka Monitoring, a Datadog Agent check connects to your Kafka cluster and starts collecting health and performance metrics. Kafka Monitoring allows you to:
@@ -10,32 +14,7 @@ With Data Streams Monitoring's Kafka Monitoring, a Datadog Agent check connects 
 - **Connect services to topics**: See which producers and consumers interact with each topic, with linked owners, repos, on-call rotations, traces, and error logs
 - **Inspect topic schemas and messages**: View schemas, compare versions, and access messages to debug poison payloads or explore the topic
 
-## Prerequisites
-
-If your Kafka cluster uses ACLs, the Datadog Agent user requires the following minimum permissions:
-
-| Resource Name | Resource Type | Operation        |
-|---------------|---------------|------------------|
-| `kafka-cluster` | `CLUSTER`   | `Describe`       |
-| `kafka-cluster` | `CLUSTER`   | `DescribeConfigs` |
-| `*`           | `TOPIC`       | `Describe`       |
-| `*`           | `TOPIC`       | `DescribeConfigs` |
-| `*`           | `GROUP`       | `Describe`       |
-
-To retrieve messages in the {{< ui >}}Messages{{< /ui >}} section, the Agent user also requires:
-
-| Resource Name | Resource Type | Operation |
-|---------------|---------------|-----------|
-| `*`           | `TOPIC`       | `Read`    |
-
-## Setup
-
-Go to the [Kafka Monitoring setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions. To request assistance, choose {{< ui >}}Request a pairing session{{< /ui >}}.
-
-{{< img src="data_streams/kafka_setup-2.png" alt="The Kafka Monitoring setup dialog showing environment selection, security protocol, schema registry options, and Kubernetes configuration instructions" >}}
-
-The setup page provides environment-specific configuration instructions. You can copy the instructions directly to an AI agent with {{< ui >}}Copy for AI{{< /ui >}}.
-
+To get started, see [Kafka Monitoring Setup][2].
 
 ## Workflows
 
@@ -73,11 +52,9 @@ Use this information to contact the right team when a consumer is lagging or a p
 
 The {{< ui >}}Schema{{< /ui >}} section shows the current schema for a topic's key or value, with version history. Use the version selector to compare schemas across versions.
 
-The {{< ui >}}Messages{{< /ui >}} section lets you retrieve messages by partition and offset to inspect payloads directly. This is useful for debugging poison payloads or verifying message structure after a schema change.
+The {{< ui >}}Messages{{< /ui >}} section lets you retrieve messages by partition and offset to inspect payloads directly. This is useful for debugging poison payloads or verifying message structure after a schema change. See [Enable message inspection][3] for the additional prerequisites and permissions required to retrieve messages.
 
 {{< img src="data_streams/kafka_schema_messages.png" alt="Topic schema and messages view showing a Protobuf schema definition and a table of recent messages with date, partition, offset, and message value" >}}
 
-**Note**: [Message viewing][2] is not enabled by default and requires additional setup. Access is controlled by per-user permissions, so you can roll out Kafka Monitoring without exposing message content. Configure message viewing separately after completing the initial setup.
-
-[1]: https://app.datadoghq.com/data-streams/kafka/setup
-[2]: /data_streams/kafka/messages
+[2]: /data_streams/kafka/setup/
+[3]: /data_streams/kafka/setup/#enable-message-inspection

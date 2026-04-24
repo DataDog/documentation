@@ -60,7 +60,7 @@ Traffic Breakdown
 : A detailed breakdown of traffic sampled and unsampled for traces starting from the service. See [Traffic breakdown](#traffic-breakdown) for more information.
 
 Ingestion Configuration
-: Shows `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies. If the ingestion was configured with [trace sampling rules][8], the service is marked as `Configured`; a `Local` label is set when the sampling rule is applied from configuration in the tracing library, a `Remote` label is set when the sampling rule is applied remotely, from the UI. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
+: Shows `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies. If the ingestion was configured with [trace sampling rules][8], the service is marked as `Configured`; a `Local` label is set when the sampling rule is applied from configuration in the SDK, a `Remote` label is set when the sampling rule is applied remotely, from the UI. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
 
 Infrastructure
 : Hosts, containers, and functions on which the service is running.
@@ -86,7 +86,7 @@ The breakdown is composed of the following parts:
     1. By default, the [Agent automatically sets a sampling rate][4] on services, depending on service traffic.
     2. The service is configured to ingest a certain percentage of traces using [sampling rules][8].
 
-- **Complete traces dropped by the tracer rate limiter** (orange): When you choose to manually set the service ingestion rate as a percentage with trace sampling rules, a rate limiter is automatically enabled, set to 100 traces per second by default. See the [rate limiter][8] documentation to change this rate.
+- **Complete traces dropped by the SDK rate limiter** (orange): When you choose to manually set the service ingestion rate as a percentage with trace sampling rules, a rate limiter is automatically enabled, set to 100 traces per second by default. See the [rate limiter][8] documentation to change this rate.
 
 - **Traces dropped due to the Agent CPU or RAM limit** (red): This mechanism may drop spans and create incomplete traces. To fix this, increase the CPU and memory allocation for the infrastructure that the Agent runs on.
 
@@ -105,7 +105,7 @@ The table lists the applied sampling rates by resource of the service.
 - The `Ingested bytes` column surfaces the ingested bytes from spans of the service and resource, while the `Downstream bytes` column surfaces the ingested bytes from spans where the sampling decision is made starting from that service and resource, including bytes from downstream services in the call chain.
 - The `Configuration` column surfaces where the resource sampling rate is being applied from: 
   - `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies.
-  - `Local Configured` if a [sampling rule][8] was set locally in the tracing library.
+  - `Local Configured` if a [sampling rule][8] was set locally in the SDK.
   - `Remote Configured` if a remote sampling rule was set from the Datadog UI. To learn how to configure sampling rules from the Ingestion Control page, read the section on [remotely configuring sampling rules](#configure-the-service-ingestion-rates-by-resource).
 
 **Note**: If the service is not making sampling decisions, the service's resources will be collapsed under the `Resources not making sampling decisions` row.
@@ -120,11 +120,11 @@ If most of your service ingestion volume is due to decisions taken by upstream s
 
 For further investigations, use the [APM Trace - Estimated Usage Dashboard][12], which provides global ingestion information as well as breakdown graphs by `service`, `env` and `ingestion reason`.
 
-#### Agent and tracing library versions
+#### Agent and SDK versions
 
-See the **Datadog Agent and tracing library versions** your service is using. Compare the versions in use to the latest released versions to make sure you are running recent and up-to-date Agents and libraries.
+See the **Datadog Agent and SDK versions** your service is using. Compare the versions in use to the latest released versions to make sure you are running recent and up-to-date Agents and libraries.
 
-{{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Agent and tracing library versions" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Agent and SDK versions" >}}
 
 ### Managing services' sampling rates
 
@@ -142,7 +142,7 @@ Using **Remote Configuration** for service ingestion rates has specific requirem
 - [Remote Configuration][3]  enabled for your Agent.
 - `APM Remote Configuration Write` [permissions][20]. If you don't have these permissions, ask your Datadog admin to update your permissions from your organization settings.
 
-Find below the minimum tracing library version required for the feature:
+Find below the minimum SDK version required for the feature:
 
 | Language | Minimum version required |
 |----------|--------------------------|

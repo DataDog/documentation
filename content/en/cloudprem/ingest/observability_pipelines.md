@@ -13,9 +13,9 @@ further_reading:
 - link: "/observability_pipelines/"
   tag: "Documentation"
   text: "Observability Pipelines Overview"
-- link: "/observability_pipelines/destinations/cloudprem/"
+- link: "/observability_pipelines/destinations/datadog_byoc_logs/"
   tag: "Documentation"
-  text: "BYOC Logs Destination for Observability Pipelines"
+  text: "Datadog BYOC Logs destination for Observability Pipelines"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
@@ -116,5 +116,5 @@ kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://l
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/explore_templates/?tab=logs#log-volume-control
 [3]: /observability_pipelines/sources/datadog_agent/
-[4]: /observability_pipelines/destinations/cloudprem/
+[4]: /observability_pipelines/destinations/datadog_byoc_logs/
 [5]: /observability_pipelines/sources/datadog_agent/?tab=agenthelmvaluesfile#connect-the-datadog-agent-to-the-observability-pipelines-worker
