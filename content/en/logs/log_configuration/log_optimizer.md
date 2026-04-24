@@ -10,8 +10,8 @@ further_reading:
   text: "Logs to Metrics"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/log-optimizer/" btn_hidden="false" header="Join the Preview!">}}
-Log Optimizer is in Preview. Request access to optimize your log volumes and reduce noise in your environment.
+{{< callout btn_hidden="true" header="Join the Preview!" >}}
+Log Optimizer is in Preview. To optimize your log volumes and reduce noise in your environment, reach out to your account manager.
 {{< /callout >}}
 
 ## Overview

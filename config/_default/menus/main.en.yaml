@@ -5037,16 +5037,16 @@ menu:
       identifier: data_streams_setup
       parent: data_streams
       weight: 1
-    - name: Kafka 
+    - name: Kafka
       url: data_streams/kafka
       identifier: data_streams_kafka
       parent: data_streams
       weight: 2
-    - name: Messages 
-      url: data_streams/kafka/messages 
-      identifier: data_streams_kafka_messages
-      parent: data_streams_kafka 
-      weight: 201
+    - name: Setup
+      url: data_streams/kafka/setup
+      identifier: data_streams_kafka_setup
+      parent: data_streams_kafka
+      weight: 1
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -6409,10 +6409,10 @@ menu:
       url: observability_pipelines/destinations/datadog_archives/
       parent: observability_pipelines_destinations
       weight: 406
-    - name: Datadog CloudPrem
-      url: observability_pipelines/destinations/cloudprem/
+    - name: Datadog BYOC Logs
+      url: observability_pipelines/destinations/datadog_byoc_logs/
       parent: observability_pipelines_destinations
-      identifier: observability_pipelines_datadog_cloudprem
+      identifier: observability_pipelines_datadog_byoc_logs
       weight: 407
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
@@ -7232,11 +7232,16 @@ menu:
       parent: security_platform
       identifier: security_research_feed
       weight: 12
+    - name: Security MCP Tools
+      url: security/mcp_server
+      parent: security_platform
+      identifier: security_mcp_server
+      weight: 13
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 13
+      weight: 14
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
@@ -7394,16 +7399,21 @@ menu:
       url: /security/code_security/static_analysis/setup/
       parent: sec_static_analysis
       weight: 1
+    - name: Configuration
+      identifier: sec_static_analysis_configuration
+      url: /security/code_security/static_analysis/configuration/
+      parent: sec_static_analysis
+      weight: 2
     - name: GitHub Actions
       identifier: sec_static_analysis_github_actions
       url: /security/code_security/static_analysis/github_actions/
       parent: sec_static_analysis
-      weight: 2
+      weight: 3
     - name: Generic CI Providers
       identifier: sec_static_analysis_generic_ci_providers
       url: /security/code_security/static_analysis/generic_ci_providers/
       parent: sec_static_analysis
-      weight: 3
+      weight: 4
     - name: AI-Enhanced Static Code Analysis
       identifier: sec_static_analysis_ai
       url: /security/code_security/static_analysis/ai_enhanced_sast/
@@ -7449,11 +7459,16 @@ menu:
       url: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
       parent: sca_setup_runtime
       weight: 1
+    - name: Configuration
+      identifier: sca_configuration
+      url: /security/code_security/software_composition_analysis/configuration/
+      parent: software_composition_analysis
+      weight: 3
     - name: Library Inventory
       identifier: sca_library_inventory
       url: /security/code_security/software_composition_analysis/library_inventory/
       parent: software_composition_analysis
-      weight: 3
+      weight: 4
     - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
@@ -9446,6 +9461,11 @@ menu:
       url: account_management/plan_and_usage/usage_details/
       parent: account_management_plan_and_usage
       weight: 1302
+    - name: Partner Experience
+      identifier: account_management_partner_experience
+      url: account_management/plan_and_usage/partner_experience/
+      parent: account_management_plan_and_usage
+      weight: 1303
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/

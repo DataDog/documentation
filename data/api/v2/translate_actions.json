@@ -2895,12 +2895,8 @@
     "description": "Delete an organization group policy by its ID.",
     "summary": "Delete an org group policy"
   },
-  "GetOrgGroupPolicy": {
-    "description": "Get a specific organization group policy by its ID.",
-    "summary": "Get an org group policy"
-  },
   "UpdateOrgGroupPolicy": {
-    "description": "Update an existing organization group policy.",
+    "description": "Update the content of an existing organization group policy.",
     "summary": "Update an org group policy",
     "request_description": "",
     "request_schema_description": "Request to update an org group policy."
@@ -2922,10 +2918,6 @@
   "DeleteOrgGroupPolicyOverride": {
     "description": "Delete an organization group policy override by its ID.",
     "summary": "Delete an org group policy override"
-  },
-  "GetOrgGroupPolicyOverride": {
-    "description": "Get a specific organization group policy override by its ID.",
-    "summary": "Get an org group policy override"
   },
   "UpdateOrgGroupPolicyOverride": {
     "description": "Update an existing organization group policy override.",
@@ -4519,6 +4511,14 @@
     "request_description": "JSON Patch document with operations to apply.",
     "request_schema_description": "JSON Patch request for a Synthetic test suite."
   },
+  "ListSyntheticsBrowserTestLatestResults": {
+    "description": "Get the latest result summaries for a given Synthetic browser test.",
+    "summary": "Get a browser test's latest results"
+  },
+  "GetSyntheticsBrowserTestResult": {
+    "description": "Get a specific full result from a given Synthetic browser test.",
+    "summary": "Get a browser test result"
+  },
   "DeleteSyntheticsTests": {
     "summary": "Bulk delete tests",
     "request_description": "",
@@ -4539,6 +4539,10 @@
     "summary": "Edit a Network Path test",
     "request_description": "New Network Path test details to be saved.",
     "request_schema_description": "Network Path test request."
+  },
+  "PollSyntheticsTestResults": {
+    "description": "Poll for test results given a list of result IDs. This is typically used after\ntriggering tests with CI/CD to retrieve results once they are available.",
+    "summary": "Poll for test results"
   },
   "GetTestFileDownloadUrl": {
     "description": "Get a presigned URL to download a file attached to a Synthetic test.\nThe returned URL is temporary and expires after a short period.",
@@ -4567,6 +4571,14 @@
   "GetTestParentSuites": {
     "description": "Get the list of parent suites and their status for a given Synthetic test.",
     "summary": "Get parent suites for a test"
+  },
+  "ListSyntheticsTestLatestResults": {
+    "description": "Get the latest result summaries for a given Synthetic test.",
+    "summary": "Get a test's latest results"
+  },
+  "GetSyntheticsTestResult": {
+    "description": "Get a specific full result from a given Synthetic test.",
+    "summary": "Get a test result"
   },
   "ListSyntheticsTestVersions": {
     "description": "Get the paginated version history for a Synthetic test.",
