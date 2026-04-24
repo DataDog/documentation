@@ -1,6 +1,6 @@
 ---
-import { ApiResponse } from './ApiResponse';
-import type { ResponseData } from './ApiResponse';
+import ApiResponse from './ApiResponse.astro';
+import type { ResponseData } from './ApiResponse.astro';
 
 interface Props {
   responses: string; // JSON string of ResponseData[]
@@ -16,7 +16,4 @@ try {
 }
 ---
 
-<ApiResponse
-  client:load
-  responses={parsedResponses}
-/>
+<ApiResponse responses={parsedResponses} />

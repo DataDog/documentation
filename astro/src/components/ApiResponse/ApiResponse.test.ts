@@ -1,25 +1,17 @@
-// @vitest-environment happy-dom
-import { describe, it, expect, afterEach } from 'vitest';
-import { render, cleanup, screen } from '@testing-library/preact';
-import userEvent from '@testing-library/user-event';
-import { h } from 'preact';
-import type { ComponentType } from 'preact';
-import { ApiResponse } from './ApiResponse';
-
-const ApiResponseComponent = ApiResponse as ComponentType<any>;
-
-afterEach(cleanup);
+import { describe, it, expect } from 'vitest';
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+// @ts-ignore — Preact renderer is registered for SSR of nested ApiSchemaTable islands.
+import preactRenderer from '@astrojs/preact/server.js';
+import ApiResponse from './ApiResponse.astro';
 
 const responses = [
   {
     statusCode: '200',
     description: 'OK response',
     schema: [
-      { name: 'id', type: 'string', description: 'Identifier' },
+      { name: 'id', type: 'string', required: true, deprecated: false, readOnly: false, description: 'Identifier' },
     ],
-    examples: [
-      { name: 'Example 1', value: '{"ok": true}' },
-    ],
+    examples: [{ name: 'Example 1', value: '{"ok": true}' }],
   },
   {
     statusCode: '404',
@@ -27,122 +19,90 @@ const responses = [
   },
 ];
 
-const renderApiResponse = (props: Partial<Parameters<typeof ApiResponse>[0]> = {}) =>
-  render(h(ApiResponseComponent, { responses, ...props }));
+async function createContainer() {
+  const container = await AstroContainer.create();
+  container.addServerRenderer({ renderer: preactRenderer, name: '@astrojs/preact' });
+  return container;
+}
 
-describe('ApiResponse — static render', () => {
-  it('renders wrapper with the BEM root class and a heading', () => {
-    renderApiResponse();
+async function renderComponent(props: { responses: typeof responses }) {
+  const container = await createContainer();
+  return container.renderToString(ApiResponse, { props });
+}
 
-    expect(document.querySelector('.api-response')).toBeTruthy();
-    expect(screen.getByText('Response')).toBeTruthy();
+describe('ApiResponse (astro)', () => {
+  it('renders nothing when responses is empty', async () => {
+    const html = await renderComponent({ responses: [] });
+
+    expect(html).not.toContain('api-response__heading');
+    expect(html).not.toContain('role="tablist"');
   });
 
-  it('renders a tab for each status code', () => {
-    renderApiResponse();
+  it('renders the BEM root, heading, and an outer tab per status code', async () => {
+    const html = await renderComponent({ responses });
 
-    const statusTabs = screen.getAllByRole('tab').filter((el) =>
-      ['200', '404'].includes(el.textContent ?? ''),
-    );
-    expect(statusTabs.map((t) => t.textContent)).toEqual(['200', '404']);
+    expect(html).toContain('api-response');
+    expect(html).toMatch(/api-response__heading[^>]*>Response</);
+    expect(html).toMatch(/data-tab-index="0"[^>]*>200</);
+    expect(html).toMatch(/data-tab-index="1"[^>]*>404</);
   });
 
-  it('renders the active response panel and description on first load', () => {
-    renderApiResponse();
+  it('renders a status-scoped panel wrapper for each response', async () => {
+    const html = await renderComponent({ responses });
 
-    expect(document.querySelector<HTMLElement>('.api-response__panel--200')!).toBeTruthy();
-    expect(screen.getByText('OK response')).toBeTruthy();
+    expect(html).toContain('api-response__panel--200');
+    expect(html).toContain('api-response__panel--404');
   });
 
-  it('applies BEM classes to wrapper, heading, and description', () => {
-    renderApiResponse();
+  it('renders descriptions with the BEM description class', async () => {
+    const html = await renderComponent({ responses });
 
-    expect(document.querySelector('.api-response')).toBeTruthy();
-    expect(screen.getByText('Response').classList.contains('api-response__heading')).toBe(true);
-    expect(screen.getByText('OK response').classList.contains('api-response__description')).toBe(true);
-  });
-});
-
-describe('ApiResponse — status code tab interactivity', () => {
-  it('first status tab is active by default with BEM modifier + aria', () => {
-    renderApiResponse();
-
-    const firstStatusTab = screen.getAllByRole('tab').find((el) => el.textContent === '200')!;
-    expect(firstStatusTab.classList.contains('tabs__button--active')).toBe(true);
-    expect(firstStatusTab.getAttribute('aria-selected')).toBe('true');
+    expect(html).toMatch(/api-response__description[^>]*>OK response</);
+    expect(html).toMatch(/api-response__description[^>]*>Not found response</);
   });
 
-  it('clicking a different status tab swaps the active BEM modifier and visible panel', async () => {
-    const user = userEvent.setup();
-    renderApiResponse();
+  it('renders Model/Example inner tabs when a response has both schema and examples', async () => {
+    const html = await renderComponent({ responses });
 
-    const tab200 = screen.getAllByRole('tab').find((el) => el.textContent === '200')!;
-    const tab404 = screen.getAllByRole('tab').find((el) => el.textContent === '404')!;
-
-    await user.click(tab404);
-
-    expect(tab404.classList.contains('tabs__button--active')).toBe(true);
-    expect(tab404.getAttribute('aria-selected')).toBe('true');
-    expect(tab200.classList.contains('tabs__button--active')).toBe(false);
-    expect(tab200.getAttribute('aria-selected')).toBe('false');
-
-    // Panel visibility: 404 panel mounted, 200 panel unmounted
-    expect(document.querySelector<HTMLElement>('.api-response__panel--404')!).toBeTruthy();
-    expect(document.querySelector('.api-response__panel--200')).toBeNull();
-    expect(screen.getByText('Not found response')).toBeTruthy();
-  });
-});
-
-describe('ApiResponse — Model/Example toggle interactivity', () => {
-  it('renders Model and Example toggle tabs when the active response has both', () => {
-    renderApiResponse();
-
-    expect(screen.getByRole('tab', { name: 'Model' })).toBeTruthy();
-    expect(screen.getByRole('tab', { name: 'Example' })).toBeTruthy();
+    expect(html).toMatch(/data-tab-index="0"[^>]*>Model</);
+    expect(html).toMatch(/data-tab-index="1"[^>]*>Example</);
+    expect(html).toContain('schema-table');
+    expect(html).toContain('code-block');
+    expect(html).toContain('api-response__example');
   });
 
-  it('Model toggle is active by default with BEM modifier applied', () => {
-    renderApiResponse();
+  it('omits the Model/Example inner tabs when a response has neither schema nor examples', async () => {
+    const html = await renderComponent({ responses: [responses[1]] });
 
-    const modelTab = screen.getByRole('tab', { name: 'Model' });
-    const exampleTab = screen.getByRole('tab', { name: 'Example' });
-
-    expect(modelTab.classList.contains('tabs__button--active')).toBe(true);
-    expect(modelTab.getAttribute('aria-selected')).toBe('true');
-    expect(exampleTab.classList.contains('tabs__button--active')).toBe(false);
-    expect(exampleTab.getAttribute('aria-selected')).toBe('false');
+    expect(html).toMatch(/data-tab-index="0"[^>]*>404</);
+    expect(html).not.toMatch(/data-tab-index="[^"]+"[^>]*>Model</);
+    expect(html).not.toMatch(/data-tab-index="[^"]+"[^>]*>Example</);
   });
 
-  it('clicking Example activates it, deactivates Model, and shows example content', async () => {
-    const user = userEvent.setup();
-    renderApiResponse();
+  it('renders a schema table without inner tabs when a response has only a schema', async () => {
+    const html = await renderComponent({
+      responses: [{ statusCode: '200', schema: responses[0].schema }],
+    });
 
-    const modelTab = screen.getByRole('tab', { name: 'Model' });
-    const exampleTab = screen.getByRole('tab', { name: 'Example' });
-
-    await user.click(exampleTab);
-
-    expect(exampleTab.classList.contains('tabs__button--active')).toBe(true);
-    expect(exampleTab.getAttribute('aria-selected')).toBe('true');
-    expect(modelTab.classList.contains('tabs__button--active')).toBe(false);
-    expect(modelTab.getAttribute('aria-selected')).toBe('false');
-
-    // Example wrapper uses the api-response__example BEM class
-    const panel = document.querySelector<HTMLElement>('.api-response__panel--200')!;
-    const exampleEl = panel.querySelector('.api-response__example');
-    expect(exampleEl).not.toBeNull();
+    expect(html).toContain('schema-table');
+    expect(html).not.toMatch(/data-tab-index="[^"]+"[^>]*>Model</);
   });
 
-  it('hides the Model/Example toggle when the active response has neither schema nor examples', async () => {
-    const user = userEvent.setup();
-    renderApiResponse();
+  it('renders code blocks without inner tabs when a response has only examples', async () => {
+    const html = await renderComponent({
+      responses: [{ statusCode: '200', examples: responses[0].examples }],
+    });
 
-    const tab404 = screen.getAllByRole('tab').find((el) => el.textContent === '404')!;
-    await user.click(tab404);
+    expect(html).toContain('code-block');
+    expect(html).toContain('api-response__example');
+    expect(html).not.toMatch(/data-tab-index="[^"]+"[^>]*>Model</);
+  });
 
-    // The only remaining tabs should be the outer status-code tabs (200, 404).
-    const remainingTabLabels = screen.getAllByRole('tab').map((t) => t.textContent);
-    expect(remainingTabLabels).not.toContain('Model');
-    expect(remainingTabLabels).not.toContain('Example');
+  it('interprets the description as HTML (allows markup passthrough)', async () => {
+    const html = await renderComponent({
+      responses: [{ statusCode: '200', description: 'Hello <em>world</em>' }],
+    });
+
+    expect(html).toContain('Hello <em>world</em>');
   });
 });

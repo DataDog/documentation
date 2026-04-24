@@ -1,14 +1,8 @@
-// @vitest-environment happy-dom
-import { describe, it, expect, afterEach } from 'vitest';
-import { render, cleanup, screen } from '@testing-library/preact';
-import userEvent from '@testing-library/user-event';
-import { h } from 'preact';
-import type { ComponentType } from 'preact';
-import { ApiCodeExample } from './ApiCodeExample';
-
-const ApiCodeExampleComponent = ApiCodeExample as ComponentType<any>;
-
-afterEach(cleanup);
+import { describe, it, expect } from 'vitest';
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+// @ts-ignore — Preact renderer is registered for SSR of nested islands (CopyButton, etc.).
+import preactRenderer from '@astrojs/preact/server.js';
+import ApiCodeExample from './ApiCodeExample.astro';
 
 const examples = [
   {
@@ -28,110 +22,83 @@ const examples = [
   },
 ];
 
-const renderComponent = () =>
-  render(h(ApiCodeExampleComponent, { examples }));
-
-function getTab(i: number) {
-  return document.querySelector<HTMLButtonElement>(`.tabs__button[data-tab-index="${i}"]`)!;
-}
-function getToggles() {
-  return Array.from(
-    document.querySelectorAll<HTMLButtonElement>('.api-code-example__accordion-header'),
-  );
+async function createContainer() {
+  const container = await AstroContainer.create();
+  container.addServerRenderer({ renderer: preactRenderer, name: '@astrojs/preact' });
+  return container;
 }
 
-describe('ApiCodeExample — static render', () => {
-  it('renders the component root and a heading', () => {
-    renderComponent();
+async function renderComponent(props: { examples: typeof examples }) {
+  const container = await createContainer();
+  return container.renderToString(ApiCodeExample, { props });
+}
 
-    expect(document.querySelector('.api-code-example')).toBeTruthy();
-    expect(screen.getByText('Code Example')).toBeTruthy();
+describe('ApiCodeExample (astro)', () => {
+  it('renders nothing when examples is empty', async () => {
+    const html = await renderComponent({ examples: [] });
+    expect(html).not.toContain('api-code-example__heading');
+    expect(html).not.toContain('role="tablist"');
   });
 
-  it('renders a tab label for every example set', () => {
-    renderComponent();
-
-    expect(screen.getByText('cURL')).toBeTruthy();
-    expect(screen.getByText('Python')).toBeTruthy();
+  it('renders the BEM root and heading', async () => {
+    const html = await renderComponent({ examples });
+    expect(html).toContain('api-code-example');
+    expect(html).toMatch(/api-code-example__heading[^>]*>Code Example</);
   });
 
-  it('renders the active tab\'s single-entry code inline', () => {
-    renderComponent();
-
-    expect(screen.getByText('curl https://api.example.com')).toBeTruthy();
-  });
-});
-
-describe('ApiCodeExample — multi-entry accordion interactivity', () => {
-  it('first entry is expanded by default; second is collapsed (BEM + aria + visibility)', async () => {
-    const user = userEvent.setup();
-    renderComponent();
-
-    // Switch to the Python tab which has 2 entries.
-    await user.click(getTab(1));
-
-    const toggles = getToggles();
-    expect(toggles).toHaveLength(2);
-
-    // First entry open by default.
-    expect(toggles[0].classList.contains('api-code-example__accordion-header--open')).toBe(true);
-    expect(toggles[0].getAttribute('aria-expanded')).toBe('true');
-    expect(screen.getByText('print("hi")')).toBeTruthy();
-
-    // Second entry collapsed by default.
-    expect(toggles[1].classList.contains('api-code-example__accordion-header--open')).toBe(false);
-    expect(toggles[1].getAttribute('aria-expanded')).toBe('false');
-    expect(screen.queryByText('print("bye")')).toBeNull();
+  it('renders a language tab for each example set', async () => {
+    const html = await renderComponent({ examples });
+    expect(html).toMatch(/data-tab-index="0"[^>]*>cURL</);
+    expect(html).toMatch(/data-tab-index="1"[^>]*>Python</);
   });
 
-  it('clicking a collapsed entry expands it and makes its body visible (BEM + aria)', async () => {
-    const user = userEvent.setup();
-    renderComponent();
-
-    await user.click(getTab(1));
-
-    const toggles = getToggles();
-    await user.click(toggles[1]);
-
-    expect(toggles[1].classList.contains('api-code-example__accordion-header--open')).toBe(true);
-    expect(toggles[1].getAttribute('aria-expanded')).toBe('true');
-    expect(screen.getByText('print("bye")')).toBeTruthy();
+  it('inlines a single-entry language tab (no accordion)', async () => {
+    const html = await renderComponent({ examples: [examples[0]] });
+    expect(html).toContain('code-block');
+    expect(html).not.toContain('api-code-example__accordion');
   });
 
-  it('clicking an expanded entry collapses it and hides its body (BEM + aria)', async () => {
-    const user = userEvent.setup();
-    renderComponent();
-
-    await user.click(getTab(1));
-
-    const toggles = getToggles();
-    await user.click(toggles[0]);
-
-    expect(toggles[0].classList.contains('api-code-example__accordion-header--open')).toBe(false);
-    expect(toggles[0].getAttribute('aria-expanded')).toBe('false');
-    expect(screen.queryByText('print("hi")')).toBeNull();
+  it('renders an accordion <details> per entry when a language has multiple entries', async () => {
+    const html = await renderComponent({ examples: [examples[1]] });
+    const detailsMatches = html.match(/<details[^>]*api-code-example__accordion/g) ?? [];
+    expect(detailsMatches.length).toBe(2);
+    expect(html).toMatch(/<span[^>]*>First<\/span>/);
+    expect(html).toMatch(/<span[^>]*>Second<\/span>/);
   });
-});
 
-describe('ApiCodeExample — tab change resets accordion state', () => {
-  it('expanding a non-default entry then switching tabs and back resets to default (first open)', async () => {
-    const user = userEvent.setup();
-    renderComponent();
+  it('expands only the first accordion entry by default', async () => {
+    const html = await renderComponent({ examples: [examples[1]] });
+    // First <details> has open, second does not.
+    const details = [...html.matchAll(/<details([^>]*)>/g)].map((m) => m[1]);
+    expect(details[0]).toMatch(/\bopen\b/);
+    expect(details[1]).not.toMatch(/\bopen\b/);
+  });
 
-    // Go to Python tab, expand the second entry.
-    await user.click(getTab(1));
-    let toggles = getToggles();
-    await user.click(toggles[1]);
-    expect(toggles[1].classList.contains('api-code-example__accordion-header--open')).toBe(true);
+  it('renders per-region code blocks with data-region when an entry has regionVariants', async () => {
+    const html = await renderComponent({
+      examples: [
+        {
+          language: 'curl',
+          label: 'cURL',
+          entries: [
+            {
+              description: 'Regional',
+              code: 'fallback',
+              syntax: 'shell',
+              regionVariants: {
+                us: { code: 'curl us.example.com' },
+                eu: { code: 'curl eu.example.com' },
+              },
+            },
+          ],
+        },
+      ],
+    });
 
-    // Switch to cURL and back to Python.
-    await user.click(getTab(0));
-    await user.click(getTab(1));
-
-    toggles = getToggles();
-    expect(toggles[0].classList.contains('api-code-example__accordion-header--open')).toBe(true);
-    expect(toggles[0].getAttribute('aria-expanded')).toBe('true');
-    expect(toggles[1].classList.contains('api-code-example__accordion-header--open')).toBe(false);
-    expect(toggles[1].getAttribute('aria-expanded')).toBe('false');
+    expect(html).toContain('data-region="us"');
+    expect(html).toContain('data-region="eu"');
+    // Shiki wraps the code in syntax-highlighted spans, so match the unique hostname only.
+    expect(html).toContain('us.example.com');
+    expect(html).toContain('eu.example.com');
   });
 });

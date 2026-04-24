@@ -2,12 +2,12 @@
 import ApiMethodBadge from '../ApiMethodBadge/ApiMethodBadge.astro';
 import ApiStatusAlert from '../ApiStatusAlert/ApiStatusAlert.astro';
 import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
-import { ApiResponse } from '../ApiResponse/ApiResponse';
-import { ApiCodeExample } from '../ApiCodeExample/ApiCodeExample';
-import { ApiRequestBodyTabs } from '../ApiRequestBodyTabs/ApiRequestBodyTabs';
+import ApiResponse from '../ApiResponse/ApiResponse.astro';
+import ApiCodeExample from '../ApiCodeExample/ApiCodeExample.astro';
+import ApiRequestBodyTabs from '../ApiRequestBodyTabs/ApiRequestBodyTabs.astro';
 import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
-import type { ResponseData } from '../ApiResponse/ApiResponse';
-import type { CodeExampleSet } from '../ApiCodeExample/ApiCodeExample';
+import type { ResponseData } from '../ApiResponse/ApiResponse.astro';
+import type { CodeExampleSet } from '../ApiCodeExample/ApiCodeExample.astro';
 import { getDefaultRegions } from '../../data/api/regions';
 import styles from './ApiEndpoint.module.css';
 import { classListFactory } from '../../utils/classListFactory';
@@ -133,7 +133,6 @@ const hasParams = ep && (
           <p set:html={ep.requestBody.description} />
         )}
         <ApiRequestBodyTabs
-          client:load
           schema={ep.requestBody.schema}
           examples={ep.requestBody.examples}
         />
@@ -142,12 +141,12 @@ const hasParams = ep && (
 
     {/* Response */}
     {ep.responses.length > 0 && (
-      <ApiResponse client:load responses={ep.responses} />
+      <ApiResponse responses={ep.responses} />
     )}
 
     {/* Code Examples */}
     {ep.codeExamples.length > 0 && (
-      <ApiCodeExample client:load examples={ep.codeExamples} />
+      <ApiCodeExample examples={ep.codeExamples} />
     )}
 
     <hr class={cl('api-endpoint__divider')} />

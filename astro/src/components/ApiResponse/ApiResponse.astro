@@ -1,0 +1,77 @@
+---
+import TabsIsland from '../Tabs/TabsIsland.astro';
+import Tab from '../Tab/Tab.astro';
+import CodeBlockIsland from '../CodeBlock/CodeBlockIsland.astro';
+import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
+import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
+import styles from './ApiResponse.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+const cl = classListFactory(styles);
+
+interface Example {
+  name: string;
+  value: string;
+}
+
+export interface ResponseData {
+  statusCode: string;
+  description?: string;
+  schema?: SchemaField[];
+  examples?: Example[];
+}
+
+interface Props {
+  responses: ResponseData[];
+}
+
+const { responses } = Astro.props;
+---
+
+{responses.length > 0 && (
+  <div class={cl('api-response')}>
+    <h3 class={cl('api-response__heading')}>Response</h3>
+
+    <TabsIsland variant="pills">
+      {responses.map((r) => {
+        const hasSchema = (r.schema?.length ?? 0) > 0;
+        const hasExamples = (r.examples?.length ?? 0) > 0;
+        const showInnerTabs = hasSchema && hasExamples;
+        return (
+          <Tab label={r.statusCode}>
+            <div class={`api-response__panel api-response__panel--${r.statusCode}`}>
+              {r.description && (
+                <p class={cl('api-response__description')} set:html={r.description} />
+              )}
+
+              {showInnerTabs && (
+                <TabsIsland variant="pills">
+                  <Tab label="Model">
+                    <ApiSchemaTable client:load fields={r.schema!} />
+                  </Tab>
+                  <Tab label="Example">
+                    {r.examples!.map((ex) => (
+                      <div class={cl('api-response__example')}>
+                        <CodeBlockIsland content={ex.value} language="json" />
+                      </div>
+                    ))}
+                  </Tab>
+                </TabsIsland>
+              )}
+
+              {!showInnerTabs && hasSchema && (
+                <ApiSchemaTable client:load fields={r.schema!} />
+              )}
+
+              {!showInnerTabs && hasExamples && r.examples!.map((ex) => (
+                <div class={cl('api-response__example')}>
+                  <CodeBlockIsland content={ex.value} language="json" />
+                </div>
+              ))}
+            </div>
+          </Tab>
+        );
+      })}
+    </TabsIsland>
+  </div>
+)}

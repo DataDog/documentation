@@ -6,6 +6,13 @@ import { classListFactory } from '../../utils/classListFactory';
 
 const cl = classListFactory(styles);
 
+interface Props {
+  /** Force a variant. Default auto-detects pills on overflow. */
+  variant?: 'tabs' | 'pills';
+}
+
+const { variant } = Astro.props;
+
 const slotHtml = await Astro.slots.render('default');
 const $ = cheerio.load(slotHtml, null, false);
 
@@ -18,10 +25,12 @@ const tabs = $('[data-tab-label]')
 
 const groupId = `tabs-${crypto.randomUUID().slice(0, 8)}`;
 const panelIds = tabs.map((_, i) => `${groupId}-panel-${i}`);
+
+const rootClass = variant === 'pills' ? cl('tabs', 'tabs--pills') : cl('tabs');
 ---
 
-<div class={cl('tabs')}>
-  <TabsNav client:load labels={tabs.map(t => t.label)} panelIds={panelIds} />
+<div class={rootClass}>
+  <TabsNav client:load labels={tabs.map(t => t.label)} panelIds={panelIds} variant={variant} />
 
   {tabs.map((tab, i) => (
     <div

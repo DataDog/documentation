@@ -1,14 +1,8 @@
-// @vitest-environment happy-dom
-import { describe, it, expect, afterEach } from 'vitest';
-import { render, cleanup, screen } from '@testing-library/preact';
-import userEvent from '@testing-library/user-event';
-import { h } from 'preact';
-import type { ComponentType } from 'preact';
-import { ApiRequestBodyTabs } from './ApiRequestBodyTabs';
-
-const ApiRequestBodyTabsComponent = ApiRequestBodyTabs as ComponentType<any>;
-
-afterEach(cleanup);
+import { describe, it, expect } from 'vitest';
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+// @ts-ignore — Preact renderer is registered for SSR of islands in headless tests.
+import preactRenderer from '@astrojs/preact/server.js';
+import ApiRequestBodyTabs from './ApiRequestBodyTabs.astro';
 
 const schema = [
   {
@@ -26,118 +20,57 @@ const multipleExamples = [
   { name: 'Second', value: '{"id": "xyz"}' },
 ];
 
-function getTabs() {
-  return document.querySelector<HTMLElement>('.tabs');
-}
-function getTab(i: number) {
-  return document.querySelector<HTMLButtonElement>(`.tabs__button[data-tab-index="${i}"]`)!;
-}
-function getSchemaTable() {
-  return document.querySelector<HTMLElement>('.schema-table');
-}
-function getCodeBlocks() {
-  return Array.from(document.querySelectorAll<HTMLElement>('.code-block'));
+async function createContainer() {
+  const container = await AstroContainer.create();
+  container.addServerRenderer({ renderer: preactRenderer, name: '@astrojs/preact' });
+  return container;
 }
 
-describe('ApiRequestBodyTabs — static render', () => {
-  it('renders only the schema table when no examples are provided', () => {
-    render(h(ApiRequestBodyTabsComponent, { schema, examples: [] }));
+async function renderComponent(props: { schema: typeof schema; examples: typeof examples }) {
+  const container = await createContainer();
+  return container.renderToString(ApiRequestBodyTabs, { props });
+}
 
-    expect(getSchemaTable()).toBeTruthy();
-    expect(getTabs()).toBeNull();
+describe('ApiRequestBodyTabs (astro)', () => {
+  it('renders only the schema table when no examples are provided', async () => {
+    const html = await renderComponent({ schema, examples: [] });
+
+    expect(html).toContain('schema-table');
+    expect(html).not.toContain('role="tablist"');
+    expect(html).not.toContain('code-block');
   });
 
-  it('renders only code blocks when no schema is provided', () => {
-    render(h(ApiRequestBodyTabsComponent, { schema: [], examples }));
+  it('renders only code blocks when no schema is provided', async () => {
+    const html = await renderComponent({ schema: [], examples });
 
-    expect(getCodeBlocks().length).toBeGreaterThan(0);
-    expect(getSchemaTable()).toBeNull();
-    expect(getTabs()).toBeNull();
+    expect(html).toContain('code-block');
+    expect(html).not.toContain('schema-table');
+    expect(html).not.toContain('role="tablist"');
   });
 
-  it('renders nothing when both schema and examples are empty', () => {
-    const { container } = render(h(ApiRequestBodyTabsComponent, { schema: [], examples: [] }));
+  it('renders nothing meaningful when both schema and examples are empty', async () => {
+    const html = await renderComponent({ schema: [], examples: [] });
 
-    expect(container.innerHTML).toBe('');
+    expect(html).not.toContain('schema-table');
+    expect(html).not.toContain('code-block');
+    expect(html).not.toContain('role="tablist"');
   });
 
-  it('renders a Model/Example tab pair when both are provided', () => {
-    render(h(ApiRequestBodyTabsComponent, { schema, examples }));
+  it('renders a Model/Example tab pair when both are provided', async () => {
+    const html = await renderComponent({ schema, examples });
 
-    expect(getTabs()).toBeTruthy();
-    expect(getTab(0).textContent).toBe('Model');
-    expect(getTab(1).textContent).toBe('Example');
-  });
-});
-
-describe('ApiRequestBodyTabs — interactivity', () => {
-  it('shows the schema table and active Model tab by default (BEM + visibility)', () => {
-    render(h(ApiRequestBodyTabsComponent, { schema, examples }));
-
-    const modelTab = getTab(0);
-    const exampleTab = getTab(1);
-
-    expect(modelTab.classList.contains('tabs__button--active')).toBe(true);
-    expect(modelTab.getAttribute('aria-selected')).toBe('true');
-
-    expect(exampleTab.classList.contains('tabs__button--active')).toBe(false);
-    expect(exampleTab.getAttribute('aria-selected')).toBe('false');
-
-    expect(getSchemaTable()).toBeTruthy();
-    expect(getCodeBlocks().length).toBe(0);
+    expect(html).toMatch(/data-tab-index="0"[^>]*>Model</);
+    expect(html).toMatch(/data-tab-index="1"[^>]*>Example</);
+    expect(html).toContain('schema-table');
+    expect(html).toContain('code-block');
   });
 
-  it('clicking Example swaps the visible panel to the code block and updates BEM state', async () => {
-    const user = userEvent.setup();
-    render(h(ApiRequestBodyTabsComponent, { schema, examples }));
+  it('renders example labels only when multiple examples are provided', async () => {
+    const htmlMultiple = await renderComponent({ schema, examples: multipleExamples });
+    expect(htmlMultiple).toMatch(/<strong[^>]*>First<\/strong>/);
+    expect(htmlMultiple).toMatch(/<strong[^>]*>Second<\/strong>/);
 
-    await user.click(getTab(1));
-
-    const modelTab = getTab(0);
-    const exampleTab = getTab(1);
-
-    expect(exampleTab.classList.contains('tabs__button--active')).toBe(true);
-    expect(exampleTab.getAttribute('aria-selected')).toBe('true');
-
-    expect(modelTab.classList.contains('tabs__button--active')).toBe(false);
-    expect(modelTab.getAttribute('aria-selected')).toBe('false');
-
-    expect(getCodeBlocks().length).toBeGreaterThan(0);
-    expect(getSchemaTable()).toBeNull();
-  });
-
-  it('clicking back to Model restores the schema table and deactivates Example', async () => {
-    const user = userEvent.setup();
-    render(h(ApiRequestBodyTabsComponent, { schema, examples }));
-
-    await user.click(getTab(1));
-    await user.click(getTab(0));
-
-    const modelTab = getTab(0);
-    const exampleTab = getTab(1);
-
-    expect(modelTab.classList.contains('tabs__button--active')).toBe(true);
-    expect(exampleTab.classList.contains('tabs__button--active')).toBe(false);
-
-    expect(getSchemaTable()).toBeTruthy();
-    expect(getCodeBlocks().length).toBe(0);
-  });
-
-  it('renders example labels only when multiple examples are provided (Example tab active)', async () => {
-    const user = userEvent.setup();
-    render(h(ApiRequestBodyTabsComponent, { schema, examples: multipleExamples }));
-
-    await user.click(getTab(1));
-
-    expect(screen.getByText('First')).toBeTruthy();
-    expect(screen.getByText('Second')).toBeTruthy();
-    expect(getCodeBlocks().length).toBe(2);
-  });
-
-  it('uses the pills variant on the Tabs container (BEM modifier)', () => {
-    render(h(ApiRequestBodyTabsComponent, { schema, examples }));
-
-    const container = getTabs()!;
-    expect(container.classList.contains('tabs--pills')).toBe(true);
+    const htmlSingle = await renderComponent({ schema, examples });
+    expect(htmlSingle).not.toMatch(/<strong[^>]*>Example<\/strong>/);
   });
 });

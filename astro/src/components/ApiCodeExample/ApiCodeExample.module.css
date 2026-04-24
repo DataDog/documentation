@@ -48,13 +48,18 @@
   padding: var(--space-sm) var(--space-md);
   text-align: left;
   color: var(--color-text);
+  list-style: none;
+}
+
+.api-code-example__accordion-header::-webkit-details-marker {
+  display: none;
 }
 
 .api-code-example__accordion-header:hover {
   background: var(--color-border-strong);
 }
 
-.api-code-example__accordion-header--open .api-code-example__accordion-icon {
+.api-code-example__accordion[open] > .api-code-example__accordion-header .api-code-example__accordion-icon {
   transform: rotate(90deg);
 }
 

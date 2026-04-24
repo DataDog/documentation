@@ -1,6 +1,6 @@
 ---
-import { ApiCodeExample } from './ApiCodeExample';
-import type { CodeExampleSet } from './ApiCodeExample';
+import ApiCodeExample from './ApiCodeExample.astro';
+import type { CodeExampleSet } from './ApiCodeExample.astro';
 
 interface Props {
   examples: string; // JSON string of CodeExampleSet[]
@@ -16,7 +16,4 @@ try {
 }
 ---
 
-<ApiCodeExample
-  client:load
-  examples={parsedExamples}
-/>
+<ApiCodeExample examples={parsedExamples} />

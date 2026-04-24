@@ -12,13 +12,15 @@ const removeStyle = removeStyleFactory(styles);
 interface TabsNavProps {
     labels: string[];
     panelIds: string[];
+    /** If set, skips overflow detection and trusts the SSR-applied variant. */
+    variant?: 'tabs' | 'pills';
 }
 
 // Renders the nav and buttons for a tabs group, manages active-tab state, and
 // toggles visibility on the panels rendered server-side by TabsIsland.astro.
 // Panels stay in the Astro shell because their content is arbitrary HTML that
 // shouldn't cross the island prop boundary (nested islands would break).
-export function TabsNav({ labels, panelIds }: TabsNavProps) {
+export function TabsNav({ labels, panelIds, variant }: TabsNavProps) {
     const [activeIndex, setActiveIndex] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
     const panelsRef = useRef<HTMLElement[]>([]);
@@ -46,6 +48,10 @@ export function TabsNav({ labels, panelIds }: TabsNavProps) {
             .map((id) => document.getElementById(id))
             .filter((el): el is HTMLElement => el !== null);
 
+        markSelfAsHydrated(ref);
+
+        if (variant) return;
+
         const checkOverflow = () => {
             addStyle(thisElement.classList, 'tabs__nav--measuring');
             const overflows = thisElement.scrollWidth > thisElement.clientWidth;
@@ -59,8 +65,6 @@ export function TabsNav({ labels, panelIds }: TabsNavProps) {
 
         checkOverflow();
         window.addEventListener('resize', checkOverflow);
-
-        markSelfAsHydrated(ref);
 
         return () => window.removeEventListener('resize', checkOverflow);
     }, []);

@@ -138,9 +138,9 @@ An index page at [`src/pages/api/latest/index.astro`](src/pages/api/latest/index
 | Deprecated/unstable alerts | [`ApiStatusAlert.astro`](src/components/ApiStatusAlert/ApiStatusAlert.astro) | Static |
 | HTTP method + path | [`ApiMethodBadge.astro`](src/components/ApiMethodBadge/ApiMethodBadge.astro) | Static |
 | Parameters (path, query, header) | [`ApiSchemaTable.tsx`](src/components/ApiSchemaTable/ApiSchemaTable.tsx) | Preact island |
-| Request body (schema + examples) | [`ApiRequestBodyTabs.tsx`](src/components/ApiRequestBodyTabs/ApiRequestBodyTabs.tsx) | Preact island |
-| Responses (status codes + bodies) | [`ApiResponse.tsx`](src/components/ApiResponse/ApiResponse.tsx) | Preact island |
-| SDK code examples | [`ApiCodeExample.tsx`](src/components/ApiCodeExample/ApiCodeExample.tsx) | Preact island |
+| Request body (schema + examples) | [`ApiRequestBodyTabs.astro`](src/components/ApiRequestBodyTabs/ApiRequestBodyTabs.astro) | Astro shell + nested islands |
+| Responses (status codes + bodies) | [`ApiResponse.astro`](src/components/ApiResponse/ApiResponse.astro) | Astro shell + nested islands |
+| SDK code examples | [`ApiCodeExample.astro`](src/components/ApiCodeExample/ApiCodeExample.astro) | Astro shell + nested islands |
 
 Interactive components (schema expansion, tab switching) use Preact islands via Astro's `client:load` directive, meaning they hydrate on the client while the rest of the page is static HTML.
 
