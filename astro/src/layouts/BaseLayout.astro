@@ -65,6 +65,9 @@ const { title } = Astro.props;
       <slot />
     </div>
     <Footer />
+    <div id="dev-nav">
+      <a id="components-link" href="/docs/components/" aria-label="Components index">🔧</a>
+    </div>
     <div id="theme-toggles">
       <button
         id="theme-toggle"
@@ -130,6 +133,32 @@ const { title } = Astro.props;
         }
       }
 
+      #dev-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 2000;
+        padding: var(--space-sm);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      #dev-nav:hover {
+        opacity: 1;
+      }
+      #components-link {
+        display: inline-block;
+        background: none;
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--border-radius);
+        font-size: var(--font-size-lg);
+        cursor: pointer;
+        padding: var(--space-xs) var(--space-sm);
+        line-height: 1;
+        text-decoration: none;
+      }
+      #components-link:hover {
+        border-color: var(--color-brand);
+      }
       #theme-toggles {
         position: fixed;
         bottom: 0;
