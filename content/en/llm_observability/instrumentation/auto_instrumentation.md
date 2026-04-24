@@ -32,18 +32,20 @@ Datadog's LLM Observability can automatically trace and annotate calls to suppor
 | [Amazon Bedrock](#amazon-bedrock)               | >= 1.31.57         | >= 2.9.0       |
 | [Amazon Bedrock Agents](#amazon-bedrock-agents) | >= 1.38.26         | >= 3.10.0      |
 | [Anthropic](#anthropic)                         | >= 0.28.0          | >= 2.10.0      |
+| [Claude Agent SDK](#claude-agent-sdk)           | >= 0.0.23          | >= 4.5.0       |
 | [CrewAI](#crewai)                               | >= 0.105.0         | >= 3.5.0       |
 | [Google ADK](#google-adk)                       | >= 1.0.0           | >= 3.15.0      |
 | [Google GenAI](#google-genai)                   | >= 1.21.1          | >= 3.11.0      |
-| [LangChain](#langchain)                         | >= 0.0.192         | >= 2.9.0       |
+| [LangChain](#langchain)                         | >= 0.1.0           | >= 2.9.0       |
 | [LangGraph](#langgraph)                         | >= 0.2.23          | >= 3.10.1      |
-| [LiteLLM](#litellm)                             | >= 1.70.0          | >= 3.9.0       |
+| [LiteLLM](#litellm)                             | >= 1.65.4          | >= 3.9.0       |
 | [MCP](#mcp)                                     | >= 1.10.0          | >= 3.11.0      |
-| [OpenAI](#openai), [Azure OpenAI](#openai)      | >= 0.26.5          | >= 2.9.0       |
+| [OpenAI](#openai), [Azure OpenAI](#openai)      | >= 1.0.0           | >= 2.9.0       |
 | [OpenAI Agents](#openai-agents)                 | >= 0.0.2           | >= 3.5.0       |
 | [Pydantic AI](#pydantic-ai)                     | >= 0.3.0           | >= 3.11.0      |
 | [Strands Agents](#strands-agents)               | >= 1.11.0          | Any            |
 | [Vertex AI](#vertex-ai)                         | >= 1.71.1          | >= 2.18.0      |
+| [vLLM](#vllm)                                   | >= 0.10.2          | >= 4.2.0       |
 
 
 {{% /tab %}}
@@ -278,6 +280,30 @@ The Anthropic integration instruments the following methods:
 [2]: https://docs.claude.com/en/api/client-sdks#typescript
 [3]: https://docs.anthropic.com/en/api/messages
 [4]: https://docs.anthropic.com/en/api/messages-streaming
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Claude Agent SDK" level="h3" expanded=false id="claude-agent-sdk" %}}
+{{< tabs >}}
+{{% tab "Python" %}}
+The Claude Agent SDK integration provides automatic tracing for agent queries made through the [Claude Agent SDK for Python][1].
+
+**Package name:** `claude-agent-sdk`
+**Integration name:** `claude_agent_sdk`
+
+### Traced methods
+
+The Claude Agent SDK integration instruments the following methods:
+
+- [One-shot queries][2]:
+  - `claude_agent_sdk.query()`
+- [Interactive client queries][3]:
+  - `ClaudeSDKClient.query()` (finished by `ClaudeSDKClient.receive_messages()`)
+
+[1]: https://github.com/anthropics/claude-agent-sdk-python
+[2]: https://github.com/anthropics/claude-agent-sdk-python?tab=readme-ov-file#basic-usage
+[3]: https://github.com/anthropics/claude-agent-sdk-python?tab=readme-ov-file#with-claudesdkclient-continuous-conversation
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
@@ -846,6 +872,28 @@ The Vertex AI integration instruments the following methods:
 [2]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest
 [3]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-text-prompt-requests
 [4]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-multiturn-chat-requests
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="vLLM" level="h3" expanded=false id="vllm" %}}
+{{< tabs >}}
+{{% tab "Python" %}}
+The vLLM integration automatically traces request processing and token generation in the [vLLM][1] inference engine. It captures model name, input and output tokens, and latency metrics (time to first token, queue time, prefill time, decode time, and inference time).
+
+**Package name:** `vllm`
+**Integration name:** `vllm`
+
+### Traced methods
+
+The vLLM integration instruments the following methods on both `LLMEngine` (offline) and `AsyncLLM` (online):
+
+- Input processing:
+  - `Processor.process_inputs`
+- Output processing:
+  - `OutputProcessor.process_outputs`
+
+[1]: https://docs.vllm.ai/
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
