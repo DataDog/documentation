@@ -14,9 +14,17 @@ export const getStaticPaths: GetStaticPaths = () => {
 };
 
 const { category: slug } = Astro.params;
+if (!slug || typeof slug !== 'string') {
+  return new Response(null, { status: 404 });
+}
+
 const categories = getApiCategories();
-const current = getCategoryBySlug(slug as string)!;
-const endpoints = getEndpointsForCategory(slug as string);
+const current = getCategoryBySlug(slug);
+if (!current) {
+  return new Response(null, { status: 404 });
+}
+
+const endpoints = getEndpointsForCategory(slug);
 await highlightEndpoints(endpoints);
 ---
 
