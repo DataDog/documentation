@@ -209,33 +209,15 @@
           "attributes": {
             "from": 1771232048460,
             "query": {
-              "audience_filters": {
-                "accounts": [
-                  {
-                    "name": ""
-                  }
-                ],
-                "segments": [
-                  {
-                    "name": "",
-                    "segment_id": ""
-                  }
-                ],
-                "users": [
-                  {
-                    "name": "u"
-                  }
-                ]
-              },
               "compute": {
                 "aggregation": "count"
               },
-              "group_by": [
-                {
-                  "facet": "@view.name"
+              "query": {
+                "data_source": "product_analytics",
+                "search": {
+                  "query": "@type:view"
                 }
-              ],
-              "query": {}
+              }
             },
             "to": 1771836848262
           },
@@ -245,49 +227,11 @@
       "json": {
         "data": {
           "attributes": {
-            "enforced_execution_type": "string",
             "from": 1771232048460,
             "query": {
-              "audience_filters": {
-                "accounts": [
-                  {
-                    "name": "",
-                    "query": "string"
-                  }
-                ],
-                "formula": "u",
-                "segments": [
-                  {
-                    "name": "",
-                    "segment_id": ""
-                  }
-                ],
-                "users": [
-                  {
-                    "name": "u",
-                    "query": "*"
-                  }
-                ]
-              },
               "compute": {
-                "aggregation": "count",
-                "interval": 3600000,
-                "metric": "@session.time_spent"
+                "aggregation": "count"
               },
-              "group_by": [
-                {
-                  "facet": "@view.name",
-                  "limit": 10,
-                  "should_exclude_missing": false,
-                  "sort": {
-                    "aggregation": "count",
-                    "metric": "string",
-                    "order": "string"
-                  },
-                  "source": "string"
-                }
-              ],
-              "indexes": [],
               "query": {
                 "data_source": "product_analytics",
                 "search": {
@@ -295,7 +239,6 @@
                 }
               }
             },
-            "request_id": "string",
             "to": 1771836848262
           },
           "type": "formula_analytics_extended_request"
@@ -378,33 +321,15 @@
           "attributes": {
             "from": 1771232048460,
             "query": {
-              "audience_filters": {
-                "accounts": [
-                  {
-                    "name": ""
-                  }
-                ],
-                "segments": [
-                  {
-                    "name": "",
-                    "segment_id": ""
-                  }
-                ],
-                "users": [
-                  {
-                    "name": "u"
-                  }
-                ]
-              },
               "compute": {
                 "aggregation": "count"
               },
-              "group_by": [
-                {
-                  "facet": "@view.name"
+              "query": {
+                "data_source": "product_analytics",
+                "search": {
+                  "query": "@type:view"
                 }
-              ],
-              "query": {}
+              }
             },
             "to": 1771836848262
           },
@@ -414,49 +339,11 @@
       "json": {
         "data": {
           "attributes": {
-            "enforced_execution_type": "string",
             "from": 1771232048460,
             "query": {
-              "audience_filters": {
-                "accounts": [
-                  {
-                    "name": "",
-                    "query": "string"
-                  }
-                ],
-                "formula": "u",
-                "segments": [
-                  {
-                    "name": "",
-                    "segment_id": ""
-                  }
-                ],
-                "users": [
-                  {
-                    "name": "u",
-                    "query": "*"
-                  }
-                ]
-              },
               "compute": {
-                "aggregation": "count",
-                "interval": 3600000,
-                "metric": "@session.time_spent"
+                "aggregation": "count"
               },
-              "group_by": [
-                {
-                  "facet": "@view.name",
-                  "limit": 10,
-                  "should_exclude_missing": false,
-                  "sort": {
-                    "aggregation": "count",
-                    "metric": "string",
-                    "order": "string"
-                  },
-                  "source": "string"
-                }
-              ],
-              "indexes": [],
               "query": {
                 "data_source": "product_analytics",
                 "search": {
@@ -464,7 +351,6 @@
                 }
               }
             },
-            "request_id": "string",
             "to": 1771836848262
           },
           "type": "formula_analytics_extended_request"

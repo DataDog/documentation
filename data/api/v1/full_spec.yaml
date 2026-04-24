@@ -1485,6 +1485,36 @@ components:
       description: |-
         Dashboard object for API version 2026-06-01 (default).
         Widgets use the `layout` field with `x`, `y`, `width`, and `height` integer coordinates for grid positioning.
+      example:
+        id: "abc-123-def"
+        title: "Infrastructure Overview"
+        layout_type: "free"
+        url: "/dashboard/abc-123-def/infrastructure-overview"
+        widgets:
+          - id: 1001
+            definition:
+              type: "timeseries"
+              title: "CPU Usage"
+              requests:
+                - q: "avg:system.cpu.user{*}"
+            layout:
+              x: 0
+              "y": 0
+              width: 6
+              height: 4
+              is_column_break: false
+          - id: 1002
+            definition:
+              type: "query_value"
+              title: "Active Hosts"
+              requests:
+                - q: "sum:system.up{*}"
+            layout:
+              x: 6
+              "y": 0
+              width: 3
+              height: 2
+              is_column_break: false
       properties:
         id:
           description: The ID of the dashboard.
@@ -1515,6 +1545,34 @@ components:
         Dashboard object for API version 2026-07-01.
         The widget `layout` field has been removed. Widgets now use the required `position` field
         with `column`, `row`, `span_columns`, and `span_rows` for named grid-slot positioning.
+      example:
+        id: "abc-123-def"
+        title: "Infrastructure Overview"
+        layout_type: "free"
+        url: "/dashboard/abc-123-def/infrastructure-overview"
+        widgets:
+          - id: 1001
+            definition:
+              type: "timeseries"
+              title: "CPU Usage"
+              requests:
+                - q: "avg:system.cpu.user{*}"
+            position:
+              column: 0
+              row: 0
+              span_columns: 6
+              span_rows: 4
+          - id: 1002
+            definition:
+              type: "query_value"
+              title: "Active Hosts"
+              requests:
+                - q: "sum:system.up{*}"
+            position:
+              column: 6
+              row: 0
+              span_columns: 3
+              span_rows: 2
       properties:
         id:
           description: The ID of the dashboard.
@@ -27721,7 +27779,10 @@ paths:
                         title: CPU Usage
                         type: timeseries
             schema:
-              $ref: "#/components/schemas/Dashboard"
+              oneOf:
+                - $ref: "#/components/schemas/Dashboard_Version20260601"
+                - $ref: "#/components/schemas/Dashboard_Version20260701"
+              x-datadog-api-versioned: true
         description: Create a dashboard request body.
         required: true
       responses:

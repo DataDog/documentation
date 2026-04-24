@@ -197,6 +197,11 @@ const createResources = (apiYaml, deref, apiVersion) => {
           const requestCurlJson = filterExampleJson("curl", requestSchema);
           const requestHtml = schemaTable("request", requestSchema);
           request = {"json_curl": requestCurlJson, "json": requestJson, "html": requestHtml};
+          if (requestSchema && requestSchema["x-datadog-api-versioned"] && Array.isArray(requestSchema.oneOf)) {
+            const pruned = requestSchema.oneOf.map((variant) => pruneLargeOneOf(variant));
+            request.versionedHtml = pruned.map((variant) => schemaTable("request", variant));
+            request.versionedJson = pruned.map((variant) => filterExampleJson("request", variant));
+          }
           console.log(`successfully wrote ${pageDir}${action.operationId} html`);
         }
 
@@ -645,8 +650,8 @@ const filterExampleJson = (actionType, data) => {
   const requiredKeys = getInitialRequiredData(data);
 
   // just return the example in additionalProperties cases with example
-  // just return the example if theres a top-level example and its response
-  if(data.additionalProperties && data.example || data.example && actionType === 'response') {
+  // just return the example if theres a top-level example (any actionType)
+  if(data.additionalProperties && data.example || data.example) {
     return data.example;
   }
 

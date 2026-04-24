@@ -995,14 +995,6 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "selection_state": [
-              {
-                "external_id": {
-                  "type": "team",
-                  "value": "1"
-                }
-              }
-            ],
             "source": "github",
             "type": "link"
           },
@@ -1012,22 +1004,9 @@
       "json": {
         "data": {
           "attributes": {
-            "frequency": "once",
-            "selection_state": [
-              {
-                "external_id": {
-                  "type": "team",
-                  "value": "1"
-                },
-                "operation": "include",
-                "scope": "subtree"
-              }
-            ],
             "source": "github",
-            "sync_membership": true,
             "type": "link"
           },
-          "id": "aeadc05e-98a8-11ec-ac2c-da7ad0900001",
           "type": "team_sync_bulk"
         }
       },

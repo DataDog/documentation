@@ -23,9 +23,16 @@
       "json_curl": {
         "data": {
           "attributes": {
-            "target": {},
-            "title": "Service: Test is down",
-            "urgency": "high"
+            "description": "Page details.",
+            "tags": [
+              "service:test"
+            ],
+            "target": {
+              "identifier": "my-team",
+              "type": "team_handle"
+            },
+            "title": "Page title",
+            "urgency": "low"
           },
           "type": "pages"
         }
@@ -33,14 +40,16 @@
       "json": {
         "data": {
           "attributes": {
-            "description": "string",
-            "tags": [],
+            "description": "Page details.",
+            "tags": [
+              "service:test"
+            ],
             "target": {
-              "identifier": "string",
-              "type": "team_id"
+              "identifier": "my-team",
+              "type": "team_handle"
             },
-            "title": "Service: Test is down",
-            "urgency": "high"
+            "title": "Page title",
+            "urgency": "low"
           },
           "type": "pages"
         }
