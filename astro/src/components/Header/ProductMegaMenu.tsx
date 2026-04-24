@@ -114,7 +114,7 @@ export default function ProductMegaMenu({
         class={`${classes.dropdownMenu} ${open ? classes.dropdownMenuOpen : ''} product-menu dropdown-menu`}
       >
         <div class="product-menu__row">
-          <div class="product-menu__toggleColumn">
+          <div class="product-menu__toggle-column">
             <p class="product-hype">{hype}</p>
             <ul class="category-toggle-list">
               {categories.map((cat) => (
@@ -136,52 +136,63 @@ export default function ProductMegaMenu({
               <span class="pricing-carrot" dangerouslySetInnerHTML={{ __html: carrotSvg }} />
             </a>
           </div>
-          <div class="product-menu__detailColumn">
+          <div class="product-menu__detail-column">
             {categories.map((cat) => (
-              <div
+              <CategoryDetail
                 key={cat.identifier}
-                class={`product-category product-category--${cat.identifier}`}
-                id={`${cat.identifier}-detail`}
-                style={{ display: openCategory === cat.identifier ? 'flex' : 'none' }}
-              >
-                <div
-                  class="category-description"
-                  style={{
-                    background: `linear-gradient(90deg, ${cat.gradient[0]} 0%, ${cat.gradient[1]} 100%)`,
-                  }}
-                >
-                  <span class="category-description__icon" dangerouslySetInnerHTML={{ __html: cat.iconHtml }} />
-                  <div class="info">
-                    <p class="category-header">{cat.label}</p>
-                    <p class="category-description-text">{cat.descriptionLabel}</p>
-                  </div>
-                </div>
-                <div class="category-details">
-                  {cat.subcategories.map((sub) => (
-                    <div
-                      key={sub.identifier}
-                      class={`product-subcategory${sub.related ? ' related' : ''}`}
-                    >
-                      {sub.sections.map((section, idx) => (
-                        <div key={`${sub.identifier}-${idx}`}>
-                          <p class="subcategory-header">{section.label}</p>
-                          <ul class="product-list">
-                            {section.products.map((p) => (
-                              <li key={p.identifier}>
-                                <a href={p.url}>{p.label}</a>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </div>
+                category={cat}
+                open={openCategory === cat.identifier}
+              />
             ))}
           </div>
         </div>
       </div>
     </li>
+  );
+}
+
+interface CategoryDetailProps {
+  category: MegaCategory;
+  open: boolean;
+}
+
+function CategoryDetail({ category: cat, open }: CategoryDetailProps) {
+  return (
+    <div
+      class={`product-category product-category--${cat.identifier}${open ? ' product-category--active' : ''}`}
+      id={`${cat.identifier}-detail`}
+    >
+      <div
+        class="category-description"
+        style={{ background: `linear-gradient(90deg, ${cat.gradient[0]} 0%, ${cat.gradient[1]} 100%)` }}
+      >
+        <span class="category-description__icon" dangerouslySetInnerHTML={{ __html: cat.iconHtml }} />
+        <div class="info">
+          <p class="category-header">{cat.label}</p>
+          <p class="category-description-text">{cat.descriptionLabel}</p>
+        </div>
+      </div>
+      <div class="category-details">
+        {cat.subcategories.map((sub) => (
+          <div
+            key={sub.identifier}
+            class={`product-subcategory${sub.related ? ' related' : ''}`}
+          >
+            {sub.sections.map((section, idx) => (
+              <div key={`${sub.identifier}-${idx}`}>
+                <p class="subcategory-header">{section.label}</p>
+                <ul class="product-list">
+                  {section.products.map((p) => (
+                    <li key={p.identifier}>
+                      <a href={p.url}>{p.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

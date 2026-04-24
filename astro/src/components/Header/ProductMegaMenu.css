@@ -36,13 +36,13 @@
   min-height: var(--hugo-mega-menu-min-height);
 }
 
-.product-menu .product-menu__toggleColumn {
+.product-menu .product-menu__toggle-column {
   padding: 1rem 1rem 1rem 2rem;
   border-right: 1px solid var(--hugo-nav-border);
   position: relative;
 }
 
-.product-menu .product-menu__detailColumn {
+.product-menu .product-menu__detail-column {
   position: relative;
 }
 
@@ -146,7 +146,11 @@
 }
 
 .product-menu .product-category {
+  display: none;
   height: 100%;
+}
+
+.product-menu .product-category--active {
   display: flex;
   flex-direction: column;
   padding: 40px 40px 40px 25px;

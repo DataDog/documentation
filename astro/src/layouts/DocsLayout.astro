@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <script is:inline>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+    <div id="theme-toggles">
+      <button id="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
+    </div>
+    <script is:inline>
+      (function () {
+        var btn = document.getElementById('theme-toggle');
+        function update() {
+          btn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '\u2600\uFE0F' : '\uD83C\uDF19';
+        }
+        update();
+        btn.addEventListener('click', function () {
+          var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          update();
+        });
+      })();
+    </script>
+    <style>
+      #theme-toggles {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        z-index: 2000;
+        padding: var(--space-sm);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      #theme-toggles:hover {
+        opacity: 1;
+      }
+      #theme-toggle {
+        background: none;
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--border-radius);
+        font-size: var(--font-size-lg);
+        cursor: pointer;
+        padding: var(--space-xs) var(--space-sm);
+        line-height: 1;
+      }
+      #theme-toggle:hover {
+        border-color: var(--color-brand);
+      }
+    </style>
+  </body>
+</html>
