@@ -424,7 +424,7 @@ To control filesystem access based on the trust level of a configuration provide
 |-----------|------|---------|-------------|
 | `integration_ignore_untrusted_file_params` | bool | `false` | When enabled, integrations ignore configuration parameters that refer to file paths if the configuration provider is not trusted. |
 | `integration_file_paths_allowlist` | list | `[]` | List of file paths that integrations are allowed to access, even when provided by an untrusted configuration provider. An empty list means all file paths are allowed. |
-| `integration_trusted_providers` | list | `["file", "remote-config"]` | List of configuration providers considered trusted. Any provider not in this list is considered untrusted. By default, local configuration files (`file`) and Datadog Remote Configuration (`remote-config`) are trusted. |
+| `integration_trusted_providers` | list | `["file", "remote-config"]` | List of configuration providers considered trusted. Any provider not in this list is considered untrusted. By default, local configuration files (`file`) and Datadog Remote Configuration (`remote-config`) are trusted. For the full list of supported providers, see [datadog-agent provider names](https://github.com/DataDog/datadog-agent/blob/main/comp/core/autodiscovery/providers/names/provider_names.go#L10-L38). |
 | `integration_security_excluded_checks` | list | `[]` | List of integration names that are excluded from the above security restrictions. |
 
 These options are backwards compatible: the default values preserve existing behavior. To opt in, enable `integration_ignore_untrusted_file_params` and adjust the remaining parameters to match your environment.
