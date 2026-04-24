@@ -16,9 +16,7 @@ Tag enrichment is in Preview.
 
 ## Overview
 
-Use tag enrichment to add `team` and `system` tags to your APM spans without code changes or redeployment. Datadog automatically pulls tag values from service metadata you've already defined in Software Catalog.
-
-Tag enrichment rules let you control which services are enriched, where each tag value comes from, and how it's applied.
+Use tag enrichment rules to add `team` and `system` tags to your APM spans without code changes or redeployment. Datadog automatically pulls tag values from service metadata you've already defined in Software Catalog.
 
 ## Prerequisites
 
