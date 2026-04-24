@@ -50,6 +50,8 @@ To browse connections, navigate to the [cross-organization visibility page][6] i
 
 Creating a cross-organization connection allows you to query metrics from the source organization in the destination organization.
 
+<div class="alert alert-info">Datadog recommends using a <a href="/account_management/org_settings/service_accounts/">service account</a> to create and manage cross-organization connections. Connections are tied to their creator's account: if the creator's account is deactivated, the connection is deleted, which can interrupt data flow. Service accounts are not tied to individual users and avoid this operational risk. Service account application keys can also be used with the <a href="/account_management/org_settings/cross_org_visibility_api/">Cross-Org Connections API</a> to create and manage connections programmatically.</div>
+
 1. Make sure you are signed in to the _source_ organization that contains the data you want to expose.
 1. On the [cross-organization visibility page][6], click {{< ui >}}New Connection{{< /ui >}}. The {{< ui >}}New Connection{{< /ui >}} dialog box appears.
 1. In the drop-down menu, select the _destination_ organization where you want to see the data.
@@ -161,7 +163,7 @@ Use [granular access controls][12] to limit the teams, roles, or users that can 
 - From the source organization: who can edit the connection.
 - From the destination organization: who can view the shared data, and who can edit the connection.
 
-Connections from the source org inherit the data access permissions of the connection's creator. If the creator is restricted from seeing any data by [Data Access Control][13] or [Log Restriction Queries][14], this data is not accessible from the destination org.
+Connections from the source org inherit the data access permissions of the connection's creator. If the creator is restricted from seeing any data by [Data Access Control][13] or [Log Restriction Queries][14], this data is not accessible from the destination org. If the creator's account is deactivated, the connection is deleted. This interrupts data flow but does not create a security risk: deleting a connection does not lift access restrictions.
 
 **Note:** Connections created from HIPAA-enabled organizations may allow the sharing of protected health information (PHI) to destination organizations. Customers are responsible for any sensitive data transferred, including PHI.
 

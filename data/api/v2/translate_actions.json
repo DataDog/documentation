@@ -267,6 +267,12 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "AnonymizeUsers": {
+    "description": "Anonymize a list of users, removing their personal data. This operation is irreversible.\nRequires the `user_access_manage` permission.",
+    "summary": "Anonymize users",
+    "request_description": "",
+    "request_schema_description": "Request body for anonymizing users."
+  },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
     "summary": "Get all API keys"
@@ -888,7 +894,7 @@
     "summary": "List custom allocation rules"
   },
   "CreateCustomAllocationRule": {
-    "description": "Create a new custom allocation rule with the specified filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "description": "Create a new custom allocation rule with the specified filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"=\", \"!=\", \"like\", \"not like\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, contains, in, not in, =, !=, like, not like",
     "summary": "Create custom allocation rule",
     "request_description": "",
     "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
@@ -908,7 +914,7 @@
     "summary": "Get custom allocation rule"
   },
   "UpdateCustomAllocationRule": {
-    "description": "Update an existing custom allocation rule with new filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n- **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "description": "Update an existing custom allocation rule with new filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n- **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"=\", \"!=\", \"like\", \"not like\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, contains, in, not in, =, !=, like, not like",
     "summary": "Update custom allocation rule",
     "request_description": "",
     "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
@@ -2889,8 +2895,12 @@
     "description": "Delete an organization group policy by its ID.",
     "summary": "Delete an org group policy"
   },
+  "GetOrgGroupPolicy": {
+    "description": "Get a specific organization group policy by its ID.",
+    "summary": "Get an org group policy"
+  },
   "UpdateOrgGroupPolicy": {
-    "description": "Update the content of an existing organization group policy.",
+    "description": "Update an existing organization group policy.",
     "summary": "Update an org group policy",
     "request_description": "",
     "request_schema_description": "Request to update an org group policy."
@@ -2912,6 +2922,10 @@
   "DeleteOrgGroupPolicyOverride": {
     "description": "Delete an organization group policy override by its ID.",
     "summary": "Delete an org group policy override"
+  },
+  "GetOrgGroupPolicyOverride": {
+    "description": "Get a specific organization group policy override by its ID.",
+    "summary": "Get an org group policy override"
   },
   "UpdateOrgGroupPolicyOverride": {
     "description": "Update an existing organization group policy override.",
@@ -3898,15 +3912,15 @@
     "summary": "Get a suppression's version history"
   },
   "GetContentPacksStates": {
-    "description": "Get the activation and configuration states for all security monitoring content packs.\nThis endpoint returns status information about each content pack including activation state,\nintegration status, and log collection status.",
+    "description": "Get the activation state, integration status, and log collection status\nfor all Cloud SIEM content packs.",
     "summary": "Get content pack states"
   },
   "ActivateContentPack": {
-    "description": "Activate a security monitoring content pack. This operation configures the necessary\nlog filters or security filters depending on the pricing model and updates the content\npack activation state.",
+    "description": "Activate a Cloud SIEM content pack. This operation configures the necessary\nlog filters or security filters depending on the pricing model and updates the content\npack activation state.",
     "summary": "Activate content pack"
   },
   "DeactivateContentPack": {
-    "description": "Deactivate a security monitoring content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
+    "description": "Deactivate a Cloud SIEM content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
     "summary": "Deactivate content pack"
   },
   "ListSecurityMonitoringRules": {

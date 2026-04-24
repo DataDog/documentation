@@ -6,7 +6,7 @@ further_reading:
   text: "Tracing Go Applications"
 - link: "https://docs.datadoghq.com/tracing/trace_collection/library_config/go/"
   tag: "Documentation"
-  text: "Configuring the Go Tracing Library"
+  text: "Configuring the Go SDK"
 - link: "/tracing/troubleshooting/go_compile_time/"
   tag: "Documentation"
   text: "Troubleshooting Go Compile-Time Instrumentation"

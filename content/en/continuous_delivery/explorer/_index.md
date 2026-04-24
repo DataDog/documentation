@@ -30,7 +30,7 @@ The metrics shown include the number of executions and failures, the failure rat
 
 If you have different ways of deploying a service to an environment, you can expand the deployment rows to see stats further filtered by deployment name.
 
-The **Deployment** page provides you high-level information, including:
+The {{< ui >}}Deployment{{< /ui >}} page provides you high-level information, including:
 
 - An overview of the health of the different services and environments, with aggregated stats.
 - A window for spotting and fixing immediate, urgent issues like broken deployments in production.
@@ -38,7 +38,7 @@ The **Deployment** page provides you high-level information, including:
 
 ### Deployment details
 
-Click into a specific service deployment to see the **Deployment Details** page, which provides views of the data for the service deployment you selected over a specified time frame.
+Click into a specific service deployment to see the {{< ui >}}Deployment Details{{< /ui >}} page, which provides views of the data for the service deployment you selected over a specified time frame.
 
 {{< img src="continuous_delivery/search/deployments_page_2.png" alt="Deployment page for a single deployment" style="width:100%;">}}
 
@@ -50,7 +50,7 @@ The [**Deployment Executions** page][4] shows all the times that a deployment ra
 
 {{< img src="continuous_delivery/search/details_side_panel.png" alt="Deployment Details side panel on the Deployments page" style="width:100%;">}}
 
-When a deployment is correctly associated to a pipeline in CI Visibility, the deployment executions panel contains a new **Pipeline** tab from which the pipeline trace is visible. From this tab, you can navigate to CI Visibility by clicking the **View Full Pipeline** link at the top:
+When a deployment is correctly associated to a pipeline in CI Visibility, the deployment executions panel contains a new {{< ui >}}Pipeline{{< /ui >}} tab from which the pipeline trace is visible. From this tab, you can navigate to CI Visibility by clicking the {{< ui >}}View Full Pipeline{{< /ui >}} link at the top:
 
 {{< img src="ci/cd-ci-correlation-pipeline-tab.png" alt="Deployment executions panel with Pipeline tab" style="width:100%;">}}
 

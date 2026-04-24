@@ -5,9 +5,9 @@ aliases:
 disable_toc: false
 ---
 
-If your service is running [an Agent with Remote Configuration enabled and a tracing library version that supports it][2], you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.
+If your service is running [an Agent with Remote Configuration enabled and an SDK version that supports it][2], you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or SDKs.
 
-App and API Protection (AAP) Protect enables you to slow down attacks and attackers by _blocking_ them. Security traces are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
+App and API Protection (AAP) Protect enables you to slow down attacks and attackers by _blocking_ them. Security traces are blocked in real-time by the Datadog SDKs. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ To use protection capabilities with your service:
 - [Update your Datadog Agent][3] to at least version 7.41.1.
 - [Enable AAP][1].
 - [Enable Remote Configuration][2].
-- Update your tracing library to at least the minimum version needed to turn on protection. For details, see the AAP capabilities support section of [Compatibility][12] for your service's language.
+- Update your SDK to at least the minimum version needed to turn on protection. For details, see the AAP capabilities support section of [Compatibility][12] for your service's language.
 - If you plan to use authenticated user blocking, [add user information to traces][4].
 
 ## Blocking attackers (IPs and authenticated users)
@@ -70,7 +70,7 @@ View blocked security traces in the [Trace Explorer][11] by filtering on the fac
 
 ### Configure In-App WAF
 
-1. [**Enable Remote Configuration**][2] so that your AAP-enabled services show up under In-App WAF. This is required to securely push In-App WAF configuration from your Datadog backend to the tracing library in your infrastructure.
+1. [**Enable Remote Configuration**][2] so that your AAP-enabled services show up under In-App WAF. This is required to securely push In-App WAF configuration from your Datadog backend to the SDK in your infrastructure.
 
 2. **Associate your AAP/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, navigate to **Security > App and API Protection > Protection > [In-App WAF][9]**. The service appears under the _Datadog Monitoring-only_ policy by default. Datadog Monitoring-only is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
 
