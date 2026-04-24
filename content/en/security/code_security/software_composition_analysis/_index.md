@@ -156,14 +156,14 @@ Datadog continuously matches newly published advisories against the stored libra
 
 Datadog tracks SCA vulnerabilities differently depending on where they are detected. **Static SCA** findings are scoped to a **repository** and are based on repository scans. **Runtime SCA** findings are scoped to a **service** and are based on libraries that are loaded and used by running services.
 
-A vulnerability is opened when Datadog detects a vulnerable library in the relevant scope. A vulnerability is closed when Datadog no longer detects it according to the lifecycle rules for that product.
+A vulnerability is opened when Datadog detects a vulnerable library in the relevant scope. A vulnerability is closed when Datadog no longer detects it according to the life cycle rules for that product.
 
 | Product | Scope | Scenario | When a vulnerability is opened | When a vulnerability is closed |
 |---|---|---|---|---|
-| Static SCA | Repository | Repository scan | When Datadog detects a vulnerable library in a scanned repository. | When it was last seen more than 3 hours ago and is not detected in the latest scanned commit. |
-| Runtime SCA | Service | Long-running service | When Datadog detects a vulnerable library in a running service. | After 1 day, if the vulnerability is not detected again and the service is running in all environments where the vulnerability was detected. |
-| Runtime SCA | Service | Library loaded later in the service lifecycle | When Datadog detects a vulnerable library in a running service. | After 5 days, if the vulnerability is not detected again during that period. |
-| Runtime SCA | Service | Short-lived service or job | When Datadog detects a vulnerable library in a running service. | After 5 days, if the vulnerability is not detected again during that period. |
+| Static SCA | Repository | Repository scan | Datadog detects a vulnerable library in a scanned repository. | The vulnerability was last seen more than three hours ago and is not detected in the latest scanned commit. |
+| Runtime SCA | Service | Long-running service | Datadog detects a vulnerable library in a running service. | After one day, if the vulnerability is not detected again and the service is running in all environments where the vulnerability was detected. |
+| Runtime SCA | Service | Library loaded later in the service life cycle | Datadog detects a vulnerable library in a running service. | After five days, if the vulnerability is not detected again during that period. |
+| Runtime SCA | Service | Short-lived service or job | Datadog detects a vulnerable library in a running service. | After five days, if the vulnerability is not detected again during that period. |
 
 ## SCA language support
 
