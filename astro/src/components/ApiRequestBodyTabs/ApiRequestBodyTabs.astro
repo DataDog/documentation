@@ -1,7 +1,7 @@
 ---
-import TabsIsland from '../Tabs/TabsIsland.astro';
+import Tabs from '../Tabs/Tabs.astro';
 import TabPanel from '../Tab/TabPanel.astro';
-import CodeBlockIsland from '../CodeBlock/CodeBlockIsland.astro';
+import CodeBlock from '../CodeBlock/CodeBlock.astro';
 import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
 import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
 import styles from '../ApiEndpoint/ApiEndpoint.module.css';
@@ -35,13 +35,13 @@ const panelIds = [`${groupId}-panel-0`, `${groupId}-panel-1`];
 {!hasSchema && hasExamples && (
   <div class={cl('request-body-tabs__examples')}>
     {examples.map((ex) => (
-      <CodeBlockIsland content={ex.value} language="json" />
+      <CodeBlock content={ex.value} language="json" />
     ))}
   </div>
 )}
 
 {hasSchema && hasExamples && (
-  <TabsIsland variant="pills" labels={["Model", "Example"]} panelIds={panelIds}>
+  <Tabs variant="pills" labels={["Model", "Example"]} panelIds={panelIds}>
     <TabPanel id={panelIds[0]} isActive>
       <ApiSchemaTable client:load fields={schema} />
     </TabPanel>
@@ -50,10 +50,10 @@ const panelIds = [`${groupId}-panel-0`, `${groupId}-panel-1`];
         {examples.map((ex) => (
           <div>
             {examples.length > 1 && <strong>{ex.name}</strong>}
-            <CodeBlockIsland content={ex.value} language="json" />
+            <CodeBlock content={ex.value} language="json" />
           </div>
         ))}
       </div>
     </TabPanel>
-  </TabsIsland>
+  </Tabs>
 )}

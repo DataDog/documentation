@@ -3,7 +3,7 @@ import { defineMarkdocConfig, component, nodes, Markdoc } from '@astrojs/markdoc
 export default defineMarkdocConfig({
   nodes: {
     fence: {
-      render: component('./src/components/CodeBlock/CodeBlockIsland.astro'),
+      render: component('./src/components/CodeBlock/CodeBlock.astro'),
       attributes: {
         ...nodes.fence.attributes,
         content: { type: String, render: true },
@@ -26,8 +26,8 @@ export default defineMarkdocConfig({
       },
     },
     tabs: {
-      render: component('./src/components/Tabs/TabsIsland.astro'),
-      // Build labels + panel wrappers here instead of letting TabsIsland
+      render: component('./src/components/Tabs/Tabs.astro'),
+      // Build labels + panel wrappers here instead of letting Tabs
       // do it by eager-rendering its slot. Calling Astro.slots.render()
       // and then extracting innerHTML with cheerio silently drops the
       // hydration-script prefix Astro emits on first island — leaving

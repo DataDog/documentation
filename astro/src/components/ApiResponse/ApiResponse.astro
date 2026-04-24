@@ -1,7 +1,7 @@
 ---
-import TabsIsland from '../Tabs/TabsIsland.astro';
+import Tabs from '../Tabs/Tabs.astro';
 import TabPanel from '../Tab/TabPanel.astro';
-import CodeBlockIsland from '../CodeBlock/CodeBlockIsland.astro';
+import CodeBlock from '../CodeBlock/CodeBlock.astro';
 import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
 import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
 import styles from './ApiResponse.module.css';
@@ -40,7 +40,7 @@ const innerPanelIds = responses.map((_, i) => [
   <div class={cl('api-response')}>
     <h3 class={cl('api-response__heading')}>Response</h3>
 
-    <TabsIsland variant="pills" labels={outerLabels} panelIds={outerPanelIds}>
+    <Tabs variant="pills" labels={outerLabels} panelIds={outerPanelIds}>
       {responses.map((r, i) => {
         const hasSchema = (r.schema?.length ?? 0) > 0;
         const hasExamples = (r.examples?.length ?? 0) > 0;
@@ -53,18 +53,18 @@ const innerPanelIds = responses.map((_, i) => [
               )}
 
               {showInnerTabs && (
-                <TabsIsland variant="pills" labels={["Model", "Example"]} panelIds={innerPanelIds[i]}>
+                <Tabs variant="pills" labels={["Model", "Example"]} panelIds={innerPanelIds[i]}>
                   <TabPanel id={innerPanelIds[i][0]} isActive>
                     <ApiSchemaTable client:load fields={r.schema!} />
                   </TabPanel>
                   <TabPanel id={innerPanelIds[i][1]}>
                     {r.examples!.map((ex) => (
                       <div class={cl('api-response__example')}>
-                        <CodeBlockIsland content={ex.value} language="json" />
+                        <CodeBlock content={ex.value} language="json" />
                       </div>
                     ))}
                   </TabPanel>
-                </TabsIsland>
+                </Tabs>
               )}
 
               {!showInnerTabs && hasSchema && (
@@ -73,13 +73,13 @@ const innerPanelIds = responses.map((_, i) => [
 
               {!showInnerTabs && hasExamples && r.examples!.map((ex) => (
                 <div class={cl('api-response__example')}>
-                  <CodeBlockIsland content={ex.value} language="json" />
+                  <CodeBlock content={ex.value} language="json" />
                 </div>
               ))}
             </div>
           </TabPanel>
         );
       })}
-    </TabsIsland>
+    </Tabs>
   </div>
 )}

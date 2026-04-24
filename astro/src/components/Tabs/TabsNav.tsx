@@ -17,7 +17,7 @@ interface TabsNavProps {
 }
 
 // Renders the nav and buttons for a tabs group, manages active-tab state, and
-// toggles visibility on the panels rendered server-side by TabsIsland.astro.
+// toggles visibility on the panels rendered server-side by Tabs.astro.
 // Panels stay in the Astro shell because their content is arbitrary HTML that
 // shouldn't cross the island prop boundary (nested islands would break).
 export function TabsNav({ labels, panelIds, variant }: TabsNavProps) {

@@ -1,7 +1,7 @@
 ---
-import TabsIsland from '../Tabs/TabsIsland.astro';
+import Tabs from '../Tabs/Tabs.astro';
 import TabPanel from '../Tab/TabPanel.astro';
-import CodeBlockIsland from '../CodeBlock/CodeBlockIsland.astro';
+import CodeBlock from '../CodeBlock/CodeBlock.astro';
 import styles from './ApiCodeExample.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 
@@ -36,19 +36,19 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
   <div class={cl('api-code-example')}>
     <h3 class={cl('api-code-example__heading')}>Code Example</h3>
 
-    <TabsIsland variant="pills" labels={labels} panelIds={panelIds}>
+    <Tabs variant="pills" labels={labels} panelIds={panelIds}>
       {examples.map((ex, tabIdx) => (
         <TabPanel id={panelIds[tabIdx]} isActive={tabIdx === 0}>
           {ex.entries.length === 1 ? (
             ex.entries[0].regionVariants ? (
               Object.entries(ex.entries[0].regionVariants).map(([regionKey, variant]) => (
                 <div data-region={regionKey} class={cl('api-code-example__code-block')}>
-                  <CodeBlockIsland content={variant.code} language={ex.entries[0].syntax} />
+                  <CodeBlock content={variant.code} language={ex.entries[0].syntax} />
                 </div>
               ))
             ) : (
               <div class={cl('api-code-example__code-block')}>
-                <CodeBlockIsland content={ex.entries[0].code} language={ex.entries[0].syntax} />
+                <CodeBlock content={ex.entries[0].code} language={ex.entries[0].syntax} />
               </div>
             )
           ) : (
@@ -63,12 +63,12 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
                 {entry.regionVariants ? (
                   Object.entries(entry.regionVariants).map(([regionKey, variant]) => (
                     <div data-region={regionKey} class={cl('api-code-example__code-block')}>
-                      <CodeBlockIsland content={variant.code} language={entry.syntax} />
+                      <CodeBlock content={variant.code} language={entry.syntax} />
                     </div>
                   ))
                 ) : (
                   <div class={cl('api-code-example__code-block')}>
-                    <CodeBlockIsland content={entry.code} language={entry.syntax} />
+                    <CodeBlock content={entry.code} language={entry.syntax} />
                   </div>
                 )}
               </details>
@@ -76,6 +76,6 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
           )}
         </TabPanel>
       ))}
-    </TabsIsland>
+    </Tabs>
   </div>
 )}
