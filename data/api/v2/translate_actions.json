@@ -2208,11 +2208,11 @@
     "request_schema_description": "Request to update an LLM Observability annotation queue."
   },
   "GetLLMObsAnnotatedInteractions": {
-    "description": "Retrieve all interactions and their annotations for a given annotation queue.",
+    "description": "Retrieve all interactions (traces and sessions) and their annotations for a given annotation queue.",
     "summary": "Get annotated queue interactions"
   },
   "CreateLLMObsAnnotationQueueInteractions": {
-    "description": "Add one or more interactions (traces) to an annotation queue.\nAt least one interaction must be provided.",
+    "description": "Add one or more interactions (traces or sessions) to an annotation queue.\nAt least one interaction must be provided.",
     "summary": "Add annotation queue interactions",
     "request_description": "Add interactions payload.",
     "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
@@ -3912,15 +3912,15 @@
     "summary": "Get a suppression's version history"
   },
   "GetContentPacksStates": {
-    "description": "Get the activation state, integration status, and log collection status\nfor all Cloud SIEM content packs.",
+    "description": "Get the activation and configuration states for all security monitoring content packs.\nThis endpoint returns status information about each content pack including activation state,\nintegration status, and log collection status.",
     "summary": "Get content pack states"
   },
   "ActivateContentPack": {
-    "description": "Activate a Cloud SIEM content pack. This operation configures the necessary\nlog filters or security filters depending on the pricing model and updates the content\npack activation state.",
+    "description": "Activate a security monitoring content pack. This operation configures the necessary\nlog filters or security filters depending on the pricing model and updates the content\npack activation state.",
     "summary": "Activate content pack"
   },
   "DeactivateContentPack": {
-    "description": "Deactivate a Cloud SIEM content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
+    "description": "Deactivate a security monitoring content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
     "summary": "Deactivate content pack"
   },
   "ListSecurityMonitoringRules": {
