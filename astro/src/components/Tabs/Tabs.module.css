@@ -19,6 +19,12 @@
   scrollbar-color: var(--color-scrollbar) transparent;
 }
 
+/* Transient state used by TabsNav to measure natural width unwrapped,
+   so overflow detection works even when .tabs--pills is applied. */
+.tabs__nav--measuring {
+  flex-wrap: nowrap !important;
+}
+
 /* Full-width bottom border behind tabs */
 .tabs__nav::after {
   content: "";

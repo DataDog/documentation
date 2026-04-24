@@ -17,32 +17,19 @@ const tabs = $('[data-tab-label]')
   .get();
 
 const groupId = `tabs-${crypto.randomUUID().slice(0, 8)}`;
+const panelIds = tabs.map((_, i) => `${groupId}-panel-${i}`);
 ---
 
-<div class={cl('tabs')} data-tabs-group={groupId}>
-  <div class={cl('tabs__nav')} role="tablist">
-    {tabs.map((tab, i) => (
-      <button
-        role="tab"
-        class={i === 0 ? cl('tabs__button', 'tabs__button--active') : cl('tabs__button')}
-        aria-selected={i === 0 ? 'true' : 'false'}
-        data-tab-index={i}
-      >
-        {tab.label}
-      </button>
-    ))}
-  </div>
+<div class={cl('tabs')}>
+  <TabsNav client:load labels={tabs.map(t => t.label)} panelIds={panelIds} />
 
   {tabs.map((tab, i) => (
     <div
+      id={panelIds[i]}
       role="tabpanel"
       class={i === 0 ? cl('tabs__panel', 'tabs__panel--active') : cl('tabs__panel')}
-      data-tab-panel
-      data-tab-index={i}
       hidden={i !== 0}
       set:html={tab.content}
     />
   ))}
-
-  <TabsNav client:idle groupId={groupId} />
 </div>
