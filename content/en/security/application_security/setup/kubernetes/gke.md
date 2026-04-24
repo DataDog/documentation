@@ -26,7 +26,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="App and API Protection for GKE is in Preview" >}}
-To try the preview of App and API Protection for GKE, use the following setup instructions.
+To try the Preview of App and API Protection for GKE, use the following setup instructions.
 {{< /callout >}}
 
 You can enable Datadog [App and API Protection][1] on a Google Kubernetes Engine (GKE) Gateway to inspect and protect traffic at the cluster edge. The integration uses the GKE Gateway controller and the `GCPTrafficExtension` custom resource to attach the Datadog security processor to the GCP Cloud Load Balancer.
