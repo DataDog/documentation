@@ -86,7 +86,13 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 1. Click **Configure Agents**.
 1. Apply filters to select the agents you want to configure, then click **Next**.
 1. Click the **Application Performance Monitoring (APM)** tile, then click **Next**.
+
+   {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="The product selection screen in Fleet Automation, showing the Application Performance Monitoring (APM) tile" style="width:100%;" >}}
+
 1. In the **Configure SDKs Installation** screen, click **Yes** to automatically install the SDKs. Select **Use latest version**, or uncheck to specify individual SDK versions.
+
+   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:100%;" >}}
+
 1. Click **Next**.
 1. Review your configuration and click **Deploy Configuration**.
 
