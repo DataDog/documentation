@@ -73,6 +73,17 @@ CSS module class names must use the full BEM name including the block prefix (e.
 
 Give every HTML element in a component a BEM class (e.g. `tabs__button--active`) for stable DOM identification. Tests and Playwright selectors must use these BEM classes, not CSS-module hashes.
 
+## Astro/Preact island pattern
+
+Wrapper components like `CodeBlock` and `Tabs` render their content in the Astro parent, not inside the Preact island. The Preact island is kept small and interacts with already-rendered DOM elements via IDs or refs — it does not receive rendered content as a prop.
+
+**Why**: If rendered HTML were passed as a prop to a Preact component, the browser would receive that HTML twice: once serialized into the component's prop attributes and once in the static DOM. This doubles page weight for content-heavy components. It also forces Preact to re-render content that Astro already produced at build time.
+
+**In practice**:
+- Pass only minimal coordination data as props: IDs, labels, flags (e.g. `targetId`, `panelIds`, `labels`).
+- Render the actual content in the `.astro` file using `<slot />` or `set:html`.
+- The Preact island reads and manipulates the already-rendered DOM nodes (show/hide, copy text, toggle classes).
+
 ## Component design and testing
 
 Verify components both headlessly (in vitest) and in Chrome (using Playwright).
