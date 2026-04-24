@@ -59,7 +59,7 @@ Access to Managed Archive and Recovery is controlled through role-based access c
 
 | Permission | Capability | Default Role |
 |---|---|---|
-| `rum_recovery_read` | View the Managed Archive configuration and stored sessions, but cannot edit the configuration or recover sessions | Admin |
+| `rum_recovery_read` | View the Managed Archive configuration and stored sessions, but cannot edit the configuration or recover sessions | Standard |
 | `rum_recovery_write` | Turn session storage on or off for an application | Admin |
 | `rum_recovery_index` | Recover sessions | Admin |
 
