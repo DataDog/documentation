@@ -129,7 +129,7 @@ If you are using the **Budget** monitor type, you can trigger an alert when the 
 | Threshold        | Percentage of budget that is utilized to trigger the alert.                       | Number between 0 and 100 (%)      |
 | Timeframe        | Evaluation window used to assess if the threshold is breached.                    | `all_months`, `current_month`     |
 
-When you select **is forecasted to reach**, the monitor uses the same [forecasting model][8] as budget cards and the budget status page.
+When you select **is forecasted to reach**, the monitor uses the same [forecasting model](/cloud_cost_management/planning/forecasting/) as budget cards and the budget status page.
 
 {{% /tab %}}
 {{< /tabs >}}
