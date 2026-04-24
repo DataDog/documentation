@@ -8542,31 +8542,36 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_mobile_vitals
       weight: 107
+    - name: Frustration Signals
+      url: real_user_monitoring/application_monitoring/android/frustration_signals/
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_frustration_signals
+      weight: 108
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/android/web_view_tracking
       parent: rum_mobile_android
       identifier: rum_mobile_android_web_view_tracking
-      weight: 108
+      weight: 109
     - name: Integrated Libraries
       url: real_user_monitoring/application_monitoring/android/integrated_libraries
       parent: rum_mobile_android
       identifier: rum_mobile_android_integrated_libraries
-      weight: 109
+      weight: 110
     - name: Jetpack Compose Instrumentation
       url: real_user_monitoring/application_monitoring/android/jetpack_compose_instrumentation
       parent: rum_mobile_android
       identifier: rum_mobile_android_jetpack_compose_instrumentation
-      weight: 110
+      weight: 111
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/android/troubleshooting
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
-      weight: 111
+      weight: 112
     - name: SDK Performance Impact
       url: real_user_monitoring/application_monitoring/android/sdk_performance_impact
       parent: rum_mobile_android
       identifier: rum_mobile_android_performance_overhead
-      weight: 112
+      weight: 113
     - name: iOS and tvOS
       url: real_user_monitoring/application_monitoring/ios
       parent: application_monitoring
@@ -8607,31 +8612,36 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_mobile_vitals
       weight: 107
+    - name: Frustration Signals
+      url: real_user_monitoring/application_monitoring/ios/frustration_signals/
+      parent: rum_mobile_ios
+      identifier: rum_mobile_ios_frustration_signals
+      weight: 108
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/ios/web_view_tracking?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_web_view_tracking
-      weight: 108
+      weight: 109
     - name: Integrated Libraries
       url: real_user_monitoring/application_monitoring/ios/integrated_libraries
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_integrated_libraries
-      weight: 109
+      weight: 110
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/ios/troubleshooting
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_troubleshooting
-      weight: 110
+      weight: 111
     - name: Supported Versions
       url: real_user_monitoring/application_monitoring/ios/supported_versions
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_supported_versions
-      weight: 111
+      weight: 112
     - name: SDK Performance Impact
       url: real_user_monitoring/application_monitoring/ios/sdk_performance_impact
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_performance_overhead
-      weight: 112
+      weight: 113
     - name: Flutter
       url: real_user_monitoring/application_monitoring/flutter
       parent: application_monitoring
@@ -8662,21 +8672,26 @@ menu:
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_mobile_vitals
       weight: 105
+    - name: Frustration Signals
+      url: real_user_monitoring/application_monitoring/flutter/frustration_signals/
+      parent: rum_mobile_flutter
+      identifier: rum_mobile_flutter_frustration_signals
+      weight: 106
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/flutter/web_view_tracking?tab=flutter
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_web_view_tracking
-      weight: 106
+      weight: 107
     - name: Integrated Libraries
       url: real_user_monitoring/application_monitoring/flutter/integrated_libraries
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_integrated_libraries
-      weight: 107
+      weight: 108
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/flutter/troubleshooting
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_troubleshooting
-      weight: 108
+      weight: 109
     - name: Kotlin Multiplatform
       url: real_user_monitoring/application_monitoring/kotlin_multiplatform
       parent: application_monitoring
@@ -8707,21 +8722,26 @@ menu:
       parent: rum_mobile_kotlin
       identifier: rum_mobile_kotlin_mobile_vitals
       weight: 105
+    - name: Frustration Signals
+      url: real_user_monitoring/application_monitoring/kotlin_multiplatform/frustration_signals/
+      parent: rum_mobile_kotlin
+      identifier: rum_mobile_kotlin_frustration_signals
+      weight: 106
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/kotlin_multiplatform/web_view_tracking
       parent: rum_mobile_kotlin
       identifier: rum_mobile_kotlin_web_view_tracking
-      weight: 106
+      weight: 107
     - name: Integrated Libraries
       url: real_user_monitoring/application_monitoring/kotlin_multiplatform/integrated_libraries
       parent: rum_mobile_kotlin
       identifier: rum_mobile_kotlin_integrated_libraries
-      weight: 107
+      weight: 108
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/kotlin_multiplatform/troubleshooting
       parent: rum_mobile_kotlin
       identifier: rum_mobile_kotlin_troubleshooting
-      weight: 108
+      weight: 109
     - name: React Native
       url: real_user_monitoring/application_monitoring/react_native
       parent: application_monitoring
@@ -8752,21 +8772,26 @@ menu:
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_mobile_vitals
       weight: 105
+    - name: Frustration Signals
+      url: real_user_monitoring/application_monitoring/react_native/frustration_signals/
+      parent: rum_mobile_react_native
+      identifier: rum_mobile_react_frustration_signals
+      weight: 106
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/react_native/web_view_tracking?tab=reactnative
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_web_view_tracking
-      weight: 106
+      weight: 107
     - name: Integrated Libraries
       url: real_user_monitoring/application_monitoring/react_native/integrated_libraries
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_integrated_libraries
-      weight: 107
+      weight: 108
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/react_native/troubleshooting
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_troubleshooting
-      weight: 108
+      weight: 109
     - name: Roku
       url: real_user_monitoring/application_monitoring/roku
       parent: application_monitoring
