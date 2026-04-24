@@ -44,7 +44,7 @@ The LangChain integration automatically applies AI Guard evaluations to calls ma
 
 AI Guard automatically evaluates the following LangChain operations:
 
-- [LLMs][2]:
+- LLMs:
   - `llm.invoke()`, `llm.ainvoke()`
 - [Chat models][3]:
   - `chat_model.invoke()`, `chat_model.ainvoke()`
@@ -52,9 +52,8 @@ AI Guard automatically evaluates the following LangChain operations:
   - `BaseTool.invoke()`, `BaseTool.ainvoke()`
 
 [1]: https://docs.langchain.com/oss/python/langchain/overview
-[2]: https://python.langchain.com/v0.2/docs/concepts/#llms
-[3]: https://docs.langchain.com/oss/python/langchain/models
-[4]: https://docs.langchain.com/oss/python/langchain/tools
+[2]: https://docs.langchain.com/oss/python/langchain/models
+[3]: https://docs.langchain.com/oss/python/langchain/tools
 {{% /tab %}}
 {{% tab "Node.js" %}}
 The [AI SDK][1] integration automatically applies AI Guard evaluations to text and object generation, embeddings, and tool calls.
