@@ -20,7 +20,7 @@ Use the search bar to find a specific CVE or advisory ID (for example, `CVE-2025
 |--------|-------------|
 | **Severity** | Base severity score: critical, high, medium, low |
 | **Impacted** | Indicates whether any asset in your environment is affected |
-| **Exploit Available** | Whether a public exploit has been published |
+| **Exploit Available** | Indicates whether a public exploit has been published |
 | **CISA Known Exploit** | Whether the CVE appears in the CISA KEV catalog |
 | **EPSS Score** | Exploit Prediction Scoring System probability |
 | **Ecosystem** | Package ecosystem: Maven, npm, PyPI, Go, and others |
