@@ -16,6 +16,7 @@ const components = docs
         <thead>
           <tr>
             <th>Component</th>
+            <th>Type</th>
             <th>Architecture</th>
           </tr>
         </thead>
@@ -23,6 +24,7 @@ const components = docs
           {components.map((entry) => (
             <tr>
               <td><a href={`/docs/${entry.id}/`}>{entry.data.title}</a></td>
+              <td>{entry.data.type ?? ''}</td>
               <td>{entry.data.description ?? ''}</td>
             </tr>
           ))}
