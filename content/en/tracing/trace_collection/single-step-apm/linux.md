@@ -28,63 +28,32 @@ If you don't yet have a Datadog Agent installed, follow these steps to install t
    
    {{< img src="tracing/trace_collection/enable_apm.png" alt="The 'Customize your Agent coverage' section of in-app instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 
+1. (Optional) To use specific SDK versions instead of the latest:
+
+   {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+   Click **Customize Library Versions**, then select your desired version for each language from the dropdowns. You can select an exact version or a major version, which uses the latest minor release available when the installation command is run.
+
+   {{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
+   {{< /site-region >}}
+
+   {{< site-region region="gov" >}}
+   Set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
+
+   ```
+   DD_API_KEY=<YOUR_DD_API_KEY>
+   DD_SITE="US1-FED"
+   DD_APM_INSTRUMENTATION_ENABLED=host
+   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1"
+   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   ```
+   {{< /site-region >}}
+
+   Available versions are listed in source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
+
 1. Copy and run the Agent installation command on your Linux host or VM.
 1. Restart your applications.
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
-
-#### Set SDK tracer versions
-
-By default, Single Step Instrumentation installs the latest versions of Datadog SDKs.
-
-You may want to choose specific SDK versions for compatibility with your application's language version or specific environment requirements.
-
-To customize SDK versions:
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
-1. After you turn on **APM Instrumentation**, click **Customize Library Versions**.
-
-   {{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
-
-1. Find your language(s) and use the dropdown to either:
-   - Select an exact SDK version, or
-   - Select the major version, which uses the latest minor release available when the Agent installation command is run.
-1. Copy and run the updated installation command.
-
-[15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
-1. After you turn on **APM Instrumentation**, set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
-   
-   ```
-   DD_API_KEY=<YOUR_DD_API_KEY> 
-   DD_SITE="US1-FED" 
-   DD_APM_INSTRUMENTATION_ENABLED=host 
-   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" 
-   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-   ```
-
-1. Find your language(s) and use the dropdown to either:
-   - Select an exact SDK version, or
-   - Select the major version, which uses the latest minor release available when the Agent installation command is run.
-1. Copy and run the updated installation command.
-
-[15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
-
-{{< /site-region >}}
-
-Available versions are listed in source repositories for each language:
-
-- [Java][8] (`java`)
-- [Node.js][9] (`js`)
-- [Python][10] (`python`)
-- [.NET][11] (`dotnet`)
-- [Ruby][12] (`ruby`)
-- [PHP][13] (`php`)
 
 ### Existing Agent installation
 
