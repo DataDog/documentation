@@ -19,7 +19,9 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 
 <div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
 
-To enable APM on a Linux host:
+### New Agent installation
+
+If you don't yet have a Datadog Agent installed, follow these steps to install the Agent and enable SSI simultaneously.
 
 1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
 1. In the **Customize your Agent coverage** section, go to **Core Observability** and turn on **Application Performance Monitoring**.
@@ -31,7 +33,7 @@ To enable APM on a Linux host:
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
 
-## Set SDK tracer versions
+#### Set SDK tracer versions
 
 By default, Single Step Instrumentation installs the latest versions of Datadog SDKs.
 
@@ -83,6 +85,18 @@ Available versions are listed in source repositories for each language:
 - [.NET][11] (`dotnet`)
 - [Ruby][12] (`ruby`)
 - [PHP][13] (`php`)
+
+### Existing Agent installation
+
+If you already have a Datadog Agent installed, use Fleet Automation to enable SSI.
+
+1. In Datadog, go to [Fleet Automation > Configuration][21].
+1. Click **Configure Agents**.
+1. Apply filters to select the agents you want to configure, then click **Next**.
+1. Click the **Application Performance Monitoring (APM)** tile, then click **Next**.
+1. In the **Configure SDKs Installation** screen, click **Yes** to automatically install the SDKs. Select **Use latest version**, or uncheck to specify individual library versions.
+1. Click **Next**.
+1. Review your configuration and click **Deploy Configuration**.
 
 ## Configure Unified Service Tags
 
@@ -211,5 +225,6 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [18]: /tracing/trace_collection/library_config/application_monitoring_yaml/
 [19]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
+[21]: https://app.datadoghq.com/fleet/agent-management
 
 

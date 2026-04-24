@@ -19,6 +19,10 @@ With Single Step Instrumentation (SSI), you can enable APM for your Java and .NE
 
 <div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
 
+### New Agent installation
+
+If you don't yet have a Datadog Agent installed, follow these steps to install the Agent and enable SSI simultaneously.
+
 You can enable APM on Windows in the following ways:
 * Instrument only .NET applications on IIS
 * Instrument all Java and .NET applications across your entire Windows host
@@ -73,6 +77,18 @@ To instrument Java and .NET applications across your entire Windows host:
 {{< /tabs >}}
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
+
+### Existing Agent installation
+
+If you already have a Datadog Agent installed, use Fleet Automation to enable SSI.
+
+1. In Datadog, go to [Fleet Automation > Configuration][6].
+1. Click **Configure Agents**.
+1. Apply filters to select the agents you want to configure, then click **Next**.
+1. Click the **Application Performance Monitoring (APM)** tile, then click **Next**.
+1. In the **Configure SDKs Installation** screen, click **Yes** to automatically install the SDKs. Select **Use latest version**, or uncheck to specify individual library versions.
+1. Click **Next**.
+1. Review your configuration and click **Deploy Configuration**.
 
 ## Configure Unified Service Tags
 
@@ -175,3 +191,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [3]: /tracing/trace_collection/library_config/
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [5]: https://app.datadoghq.com/apm/service-setup/workload-selection
+[6]: https://app.datadoghq.com/fleet/agent-management
