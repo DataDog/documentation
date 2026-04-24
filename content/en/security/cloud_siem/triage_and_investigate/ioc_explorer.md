@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Indicators of Compromise (IOC) are evidence that your systems have experienced a security breach. The [IOC Explorer][1] is a searchable, filterable investigation surface where you can investigate, sort, and prioritize compromises. You can also view related matches in Signals Explorer and Logs Explorer, so you can investigate potential compromises in more detail.
+Indicators of Compromise (IOCs) are reputation data associated with entities such as IP addresses, file hashes, and domains that help responders make informed decisions about attacks and potential compromises. The [IOC Explorer][1] is a searchable, filterable investigation surface where you can investigate, sort, and prioritize compromises. You can also view related matches in Signals Explorer and Logs Explorer, so you can investigate potential compromises in more detail.
 
 {{< img src="security/security_monitoring/ioc_explorer_2.png" alt="The IOC Explorer, showing an IP address that has been flagged as an indicator of compromise" style="width:100%;" >}}
 
@@ -24,7 +24,6 @@ To view data in the IOC Explorer, all of the following must be true:
 - Your organization must subscribe to Cloud SIEM.
 - The indicator of compromise must be in a threat feed that was available to Datadog at the time of the log acquisition.
   - For more information on the threat intelligence feeds the IOC Explorer displays content from, see [Threat intelligence sources][2].
-- A log that has a matching entity in threat intelligence must be acquired.
 - The time frame for the Explorer is fixed to the last 30 days. The log must be from within that time frame. If your organization has recently onboarded, the Explorer shows data from when you onboarded.
 
 ## Use the IOC Explorer
@@ -56,9 +55,9 @@ You can turn the **OCSF Matching** toggle on or off to have more control over ho
 
 #### Example
 
-Alice sends Bob an email, with the message body mentioning `192.0.2.100` as part of a discussion about an emerging threat.
-- If the OCSF Matching toggle is **on**, Datadog only matches IOCs found in the relevant mapped OCSF fields, such as Alice or Bob's IP addresses, if those are captured in normalized network fields. It doesn't match `192.0.2.100` because it only appears in the email body, not in a mapped OCSF field. The IOC doesn't appear in the IOC Explorer.
-- If the OCSF Matching toggle is **off**, Datadog matches `192.0.2.100` from the message body, because it searches across the entire payload, rather than structured OCSF fields only. The IOC appears in the IOC Explorer.
+Alice sends Bob an email whose message body mentions `192.0.2.100`, an IP address that is an IOC.
+- If the OCSF Matching toggle is **on**, Datadog only matches IOCs found in relevant mapped OCSF fields, such as normalized source or destination IP address fields in the email event. Because `192.0.2.100` appears only in the message body and not in a mapped OCSF field, it does not appear in the IOC Explorer.
+- If the OCSF Matching toggle is **off**, Datadog matches `192.0.2.100` because it searches the full event payload, including unstructured text such as the message body. The IOC appears in the IOC Explorer.
 
 ### Get more context on an indicator of compromise
 
