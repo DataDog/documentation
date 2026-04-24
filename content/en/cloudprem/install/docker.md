@@ -58,7 +58,7 @@ Create the data directory and start the BYOC Logs container:
 ```shell
 # Start BYOC Logs
 docker run -d \
-  --name cloudprem \
+  --name byoc-logs \
   -v $(pwd)/qwdata:/quickwit/qwdata \
   -e DD_SITE=${DD_SITE} \
   -e DD_API_KEY=${DD_API_KEY} \
@@ -99,7 +99,7 @@ Create a `docker-compose.yml` file in your working directory:
 
 ```yaml
 services:
-  cloudprem:
+  byoc-logs:
     image: datadog/cloudprem:edge
     command: ["run"]
     ports:
@@ -118,7 +118,7 @@ services:
       - DD_SITE=${DD_SITE:-datadoghq.com}
       - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
       - DD_LOGS_ENABLED=true
-      - DD_LOGS_CONFIG_LOGS_DD_URL=http://cloudprem:7280
+      - DD_LOGS_CONFIG_LOGS_DD_URL=http://byoc-logs:7280
       - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
       - DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION=100000
       - DD_CONTAINER_EXCLUDE="name:datadog-agent"
@@ -129,7 +129,7 @@ services:
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
     depends_on:
-      cloudprem:
+      byoc-logs:
         condition: service_healthy
     restart: unless-stopped
 ```

@@ -54,7 +54,7 @@ Before you begin, confirm you have:
   - Password
 
 - A **MinIO instance** accessible from your Kubernetes cluster, with:
-  - A bucket created for BYOC Logs data (for example, `cloudprem`)
+  - A bucket created for BYOC Logs data (for example, `byoc-logs`)
   - An access key and secret key with read/write permissions on the bucket
   - The MinIO endpoint URL (for example, `http://minio.minio.svc.cluster.local:9000`)
 

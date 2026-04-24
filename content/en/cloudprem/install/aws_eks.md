@@ -98,14 +98,14 @@ You can create a micro RDS instance with the following command. For production e
 
 ```shell
 # Micro RDS instance for testing purposes. Takes around 5 min.
-aws rds create-db-instance --db-instance-identifier cloudprem-postgres --db-instance-class db.t3.micro --engine postgres --engine-version 16.3 --master-username cloudprem --master-user-password 'FixMeBYOC Logs' --allocated-storage 20 --storage-type gp2 --db-subnet-group-name <VPC-ID> --vpc-security-group-ids <VPC-SECURITY-GROUP-ID> --db-name cloudprem --backup-retention-period 0 --no-multi-az
+aws rds create-db-instance --db-instance-identifier byoc-logs-postgres --db-instance-class db.t3.micro --engine postgres --engine-version 16.3 --master-username byoc-logs --master-user-password 'FixMeBYOC_Logs' --allocated-storage 20 --storage-type gp2 --db-subnet-group-name <VPC-ID> --vpc-security-group-ids <VPC-SECURITY-GROUP-ID> --db-name byoc-logs --backup-retention-period 0 --no-multi-az
 ```
 
 You can retrieve RDS info by executing the following shell commmands:
 
 ```shell
 # Get RDS instance details
-RDS_INFO=$(aws rds describe-db-instances --db-instance-identifier cloudprem-demo-postgres --query 'DBInstances[0].{Status:DBInstanceStatus,Endpoint:Endpoint.Address,Port:Endpoint.Port,Database:DBName}' --output json 2>/dev/null)
+RDS_INFO=$(aws rds describe-db-instances --db-instance-identifier byoc-logs-demo-postgres --query 'DBInstances[0].{Status:DBInstanceStatus,Endpoint:Endpoint.Address,Port:Endpoint.Port,Database:DBName}' --output json 2>/dev/null)
 
 STATUS=$(echo $RDS_INFO | jq -r '.Status')
 ENDPOINT=$(echo $RDS_INFO | jq -r '.Endpoint')
@@ -114,13 +114,13 @@ DATABASE=$(echo $RDS_INFO | jq -r '.Database')
 
 echo ""
 echo "🔗 Full URI:"
-echo "postgres://cloudprem:FixMeBYOC Logs@$ENDPOINT:$PORT/$DATABASE"
+echo "postgres://byoc-logs:FixMeBYOC_Logs@$ENDPOINT:$PORT/$DATABASE"
 echo ""
 ```
 
 ## Installation steps
 
-1. [Install the BYOC Logs Helm chart](#install-the-cloudprem-helm-chart)
+1. [Install the BYOC Logs Helm chart](#install-the-byoc-logs-helm-chart)
 2. [Verify installation](#verification)
 
 ## Install the BYOC Logs Helm chart
@@ -136,14 +136,14 @@ echo ""
    kubectl create namespace <NAMESPACE_NAME>
    ```
 
-   For example, to create a `cloudprem` namespace:
+   For example, to create a `byoc-logs` namespace:
    ```shell
-   kubectl create namespace cloudprem
+   kubectl create namespace byoc-logs
    ```
 
    **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
    ```shell
-   kubectl config set-context --current --namespace=cloudprem
+   kubectl config set-context --current --namespace=byoc-logs
    ```
 
 1. Store your Datadog API key as a Kubernetes secret:
@@ -156,7 +156,7 @@ echo ""
 
 1. Store the PostgreSQL database connection string as a Kubernetes secret:
    ```shell
-   kubectl create secret generic cloudprem-metastore-uri \
+   kubectl create secret generic byoc-logs-metastore-uri \
    -n <NAMESPACE_NAME> \
    --from-literal QW_METASTORE_URI="postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE>"
    ```
@@ -196,11 +196,11 @@ echo ""
    # Additional annotations can be added using serviceAccount.extraAnnotations.
    serviceAccount:
      create: true
-     name: cloudprem
+     name: byoc-logs
      # The name of the IAM role to use for the service account. If set, the following annotations will be added to the service account:
      # - eks.amazonaws.com/role-arn: arn:aws:iam::<aws.accountId>:role/<serviceAccount.eksRoleName>
      # - eks.amazonaws.com/sts-regional-endpoints: "true"
-     eksRoleName: cloudprem
+     eksRoleName: byoc-logs
      extraAnnotations: {}
 
    # BYOC Logs node configuration
@@ -216,10 +216,10 @@ echo ""
    ingress:
      internal:
        enabled: true
-       name: cloudprem-internal
-       host: cloudprem.acme.internal
+       name: byoc-logs-internal
+       host: byoc-logs.acme.internal
        extraAnnotations:
-         alb.ingress.kubernetes.io/load-balancer-name: cloudprem-internal
+         alb.ingress.kubernetes.io/load-balancer-name: byoc-logs-internal
 
    # Metastore configuration
    # The metastore is responsible for storing and managing index metadata.
@@ -231,7 +231,7 @@ echo ""
    metastore:
      extraEnvFrom:
        - secretRef:
-           name: cloudprem-metastore-uri
+           name: byoc-logs-metastore-uri
 
    # Indexer configuration
    # The indexer is responsible for processing and indexing incoming data it receives data from various sources (for example, Datadog Agents, log collectors)
