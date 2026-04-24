@@ -21,8 +21,8 @@ AI Guard provides a single JSON:API endpoint:
 <div class="alert alert-warning">HTTP API requests do not send traces to Datadog. AI Guard evaluations performed through the HTTP API do not appear in the Datadog UI. To view AI Guard activity in Datadog, use the <a href="/security/ai_guard/setup/sdk/">SDK</a> instead.</div>
 
 ## Examples {#api-examples}
-{{% collapse-content title="Generic API example" level="h3" expanded=false id="generic-api-example" %}}
-### Request {#api-example-generic-request}
+### Generic API example
+#### Request {#api-example-generic-request}
 
 ```shell
 curl -s -XPOST \
@@ -61,7 +61,7 @@ curl -s -XPOST \
   https://app.datadoghq.com/api/v2/ai-guard/evaluate
 ```
 
-### Response {#api-example-generic-response}
+#### Response {#api-example-generic-response}
 
 ```json
 {
@@ -76,7 +76,7 @@ curl -s -XPOST \
 }
 ```
 
-### Explanation {#api-example-generic-explanation}
+#### Explanation {#api-example-generic-explanation}
 
 1. The request contains one attribute: `messages`. This attribute contains the full sequence of messages in the LLM call. AI Guard evaluates the last message in the sequence. See the [Request message format](#request-message-format) section for more details.
 2. The response has two attributes: `action` and `reason`.
@@ -86,11 +86,11 @@ curl -s -XPOST \
       - `ABORT`: Interaction is malicious. Terminate the entire agent workflow/HTTP request immediately.
    - `reason` is a natural language summary of the decision. This rationale is only provided for auditing and logging, and should not be passed back to the LLM or the end user.
 
-{{% /collapse-content %}}
-{{% collapse-content title="Evaluate user prompt" level="h3" expanded=false id="example-evaluate-user-prompt" %}}
+### Evaluate user prompt
+
 In the initial example, AI Guard evaluated a tool call in the context of its system and user prompt. It can also evaluate user prompts.
 
-### Request {#api-example-evaluate-user-prompt-request}
+#### Request {#api-example-evaluate-user-prompt-request}
 
 ```json
 {
@@ -111,7 +111,7 @@ In the initial example, AI Guard evaluated a tool call in the context of its sys
   }
 ```
 
-### Response {#api-example-evaluate-user-prompt-response}
+#### Response {#api-example-evaluate-user-prompt-response}
 
 ```json
 {
@@ -125,11 +125,12 @@ In the initial example, AI Guard evaluated a tool call in the context of its sys
   }
 }
 ```
-{{% /collapse-content %}}
-{{% collapse-content title="Evaluate tool call output" level="h3" expanded=false id="example-evaluate-tool-call-output" %}}
+
+### Evaluate tool call output
+
 As a best practice, evaluate a tool call before running the tool. However, you can include the message with the tool output to evaluate the result of the tool call.
 
-### Request example {#api-example-evaluate-tool-call-request}
+#### Request example {#api-example-evaluate-tool-call-request}
 
 ```json
 {
@@ -167,7 +168,6 @@ As a best practice, evaluate a tool call before running the tool. However, you c
     }
   }
 ```
-{{% /collapse-content %}}
 
 
 ## Further reading
