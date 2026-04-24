@@ -4,13 +4,13 @@ import { render, cleanup, screen } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { h } from 'preact';
 import type { ComponentType } from 'preact';
-import { CodeBlock } from './CodeBlock';
+import { CodeBlockBloated } from './CodeBlockBloated';
 
-const CodeBlockComponent = CodeBlock as ComponentType<any>;
+const CodeBlockComponent = CodeBlockBloated as ComponentType<any>;
 
 afterEach(cleanup);
 
-const renderCodeBlock = (props: Partial<Parameters<typeof CodeBlock>[0]> = {}) =>
+const renderCodeBlock = (props: Partial<Parameters<typeof CodeBlockBloated>[0]> = {}) =>
   render(h(CodeBlockComponent, { content: 'const x = 1;', ...props }));
 
 describe('CodeBlock — static render', () => {

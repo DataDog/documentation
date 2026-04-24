@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
-import { Tabs } from '../Tabs/Tabs';
-import { CodeBlock } from '../CodeBlock/CodeBlock';
+import { TabsBloated } from '../TabsBloated/TabsBloated';
+import { CodeBlockBloated } from '../CodeBlockBloated/CodeBlockBloated';
 import styles from './ApiCodeExample.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 
@@ -52,7 +52,7 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
               data-testid={`api-code-example-region-${regionKey}`}
               class={cl('api-code-example__code-block')}
             >
-              <CodeBlock content={variant.code} language={entry.syntax} highlightedCode={variant.highlightedCode} />
+              <CodeBlockBloated content={variant.code} language={entry.syntax} highlightedCode={variant.highlightedCode} />
             </div>
           ))}
         </>
@@ -60,7 +60,7 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
     }
     return (
       <div class={cl('api-code-example__code-block')}>
-        <CodeBlock content={entry.code} language={entry.syntax} highlightedCode={entry.highlightedCode} />
+        <CodeBlockBloated content={entry.code} language={entry.syntax} highlightedCode={entry.highlightedCode} />
       </div>
     );
   };
@@ -105,7 +105,7 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
     <div class={cl('api-code-example')} data-testid="api-code-example">
       <h3 class={cl('api-code-example__heading')}>Code Example</h3>
 
-      <Tabs
+      <TabsBloated
         labels={examples.map((ex) => ex.label)}
         variant="pills"
         onTabChange={() => setExpandedEntries(new Set(['0']))}
@@ -114,7 +114,7 @@ export function ApiCodeExample({ examples }: ApiCodeExampleProps): JSX.Element {
           const ex = examples[activeIndex];
           return ex ? renderPanel(ex) : null;
         }}
-      </Tabs>
+      </TabsBloated>
     </div>
   );
 }

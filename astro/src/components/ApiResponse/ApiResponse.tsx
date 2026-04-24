@@ -1,8 +1,8 @@
 import styles from './ApiResponse.module.css';
 import { classListFactory } from '../../utils/classListFactory';
-import { Tabs } from '../Tabs/Tabs';
+import { TabsBloated } from '../TabsBloated/TabsBloated';
 import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
-import { CodeBlock } from '../CodeBlock/CodeBlock';
+import { CodeBlockBloated } from '../CodeBlockBloated/CodeBlockBloated';
 
 const cl = classListFactory(styles);
 
@@ -24,7 +24,7 @@ export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
     <div class={cl('api-response')} data-testid="api-response">
       <h3 class={cl('api-response__heading')}>Response</h3>
 
-      <Tabs labels={labels} variant="pills">
+      <TabsBloated labels={labels} variant="pills">
         {(activeIndex) => {
           const r = responses[activeIndex];
           if (!r) return null;
@@ -40,7 +40,7 @@ export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
               )}
 
               {toggleLabels.length > 0 ? (
-                <Tabs labels={toggleLabels} variant="pills">
+                <TabsBloated labels={toggleLabels} variant="pills">
                   {(activeToggleIndex) => {
                     const activeLabel = toggleLabels[activeToggleIndex];
 
@@ -53,7 +53,7 @@ export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
                         <>
                           {r.examples.map((ex) => (
                             <div key={ex.name} class={cl('api-response__example')}>
-                              <CodeBlock content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
+                              <CodeBlockBloated content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
                             </div>
                           ))}
                         </>
@@ -62,12 +62,12 @@ export function ApiResponse({ responses }: ApiResponseProps): JSX.Element {
 
                     return null;
                   }}
-                </Tabs>
+                </TabsBloated>
               ) : null}
             </div>
           );
         }}
-      </Tabs>
+      </TabsBloated>
     </div>
   );
 }

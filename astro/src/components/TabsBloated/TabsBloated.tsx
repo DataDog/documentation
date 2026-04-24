@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'preact/hooks';
 import type { ComponentChildren } from 'preact';
-import styles from './Tabs.module.css';
+import styles from '../Tabs/Tabs.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 
 const cl = classListFactory(styles);
@@ -31,9 +31,13 @@ interface HtmlPanelsProps extends CommonProps {
   children?: never;
 }
 
-export type TabsProps = RenderPropProps | HtmlPanelsProps;
+export type TabsBloatedProps = RenderPropProps | HtmlPanelsProps;
 
-export function Tabs(props: TabsProps) {
+// Legacy variant used inside other Preact islands (ApiResponse, ApiCodeExample,
+// ApiRequestBodyTabs). Those islands serialize this component's props — including
+// all panel content — into their parent data-props JSON, hence the "bloat".
+// To be deleted once those parents are split into astro shells + TabsNav islands.
+export function TabsBloated(props: TabsBloatedProps) {
   const { labels, onTabChange, variant } = props;
   const [activeIndex, setActiveIndex] = useState(0);
   const [usePills, setUsePills] = useState(variant === 'pills');

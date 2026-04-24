@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'preact/hooks';
-import styles from './CodeBlock.module.css';
+import styles from '../CodeBlock/CodeBlock.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 
 const cl = classListFactory(styles);
 
-interface CodeBlockProps {
+// Legacy variant that still accepts a pre-highlighted HTML string as a prop.
+// Consumed from within other Preact islands (ApiCodeExample, ApiResponse,
+// ApiRequestBodyTabs) which serialize its props into their parent island's
+// data-props — hence the "bloat". To be deleted once those parents are split
+// into astro shells + small visibility-toggle islands (see CodeBlockIsland).
+interface CodeBlockBloatedProps {
   content: string;
   language?: string;
   highlightedCode?: string;
@@ -14,7 +19,7 @@ interface CodeBlockProps {
   disableCopy?: boolean;
 }
 
-export function CodeBlock({
+export function CodeBlockBloated({
   content,
   language,
   highlightedCode,
@@ -22,7 +27,7 @@ export function CodeBlock({
   wrap = false,
   collapsible = false,
   disableCopy = false,
-}: CodeBlockProps) {
+}: CodeBlockBloatedProps) {
   const [copied, setCopied] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const [hydrated, setHydrated] = useState(false);

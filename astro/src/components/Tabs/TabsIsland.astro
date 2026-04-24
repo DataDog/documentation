@@ -1,6 +1,10 @@
 ---
 import * as cheerio from 'cheerio';
-import { Tabs } from './Tabs';
+import { TabsNav } from './TabsNav';
+import styles from './Tabs.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+const cl = classListFactory(styles);
 
 const slotHtml = await Astro.slots.render('default');
 const $ = cheerio.load(slotHtml, null, false);
@@ -12,8 +16,35 @@ const tabs = $('[data-tab-label]')
   }))
   .get();
 
-const labels = tabs.map((t) => t.label);
-const panelsHtml = tabs.map((t) => t.content);
+const groupId = `tabs-${crypto.randomUUID().slice(0, 8)}`;
 ---
 
-<Tabs labels={labels} panelsHtml={panelsHtml} client:load />
+<div class={cl('tabs')} data-testid="tabs" data-tabs-group={groupId}>
+  <div class={cl('tabs__nav')} role="tablist">
+    {tabs.map((tab, i) => (
+      <button
+        role="tab"
+        class={i === 0 ? cl('tabs__button', 'tabs__button--active') : cl('tabs__button')}
+        aria-selected={i === 0 ? 'true' : 'false'}
+        data-testid={`tab-${i}`}
+        data-tab-index={i}
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+
+  {tabs.map((tab, i) => (
+    <div
+      role="tabpanel"
+      class={cl('tabs__panel')}
+      data-tab-panel
+      data-tab-index={i}
+      data-testid={i === 0 ? 'tabs-panel' : undefined}
+      hidden={i !== 0}
+      set:html={tab.content}
+    />
+  ))}
+
+  <TabsNav client:idle groupId={groupId} />
+</div>

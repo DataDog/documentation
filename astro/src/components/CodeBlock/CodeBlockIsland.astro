@@ -1,8 +1,13 @@
 ---
-import { CodeBlock } from './CodeBlock';
 import { codeToHtml } from 'shiki';
 import datadogLight from '../../styles/shiki-light';
 import datadogDark from '../../styles/shiki-dark';
+import { CopyButton } from './CopyButton';
+import { CollapseToggle } from './CollapseToggle';
+import styles from './CodeBlock.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+const cl = classListFactory(styles);
 
 interface Props {
   content: string;
@@ -37,15 +42,44 @@ if (content) {
     // Unknown language — fall back to plain text display
   }
 }
+
+const contentId = `cb-${crypto.randomUUID().slice(0, 8)}`;
+const containerClass = wrap
+  ? cl('code-block', 'code-block--wrap')
+  : cl('code-block');
 ---
 
-<CodeBlock
-  client:load
-  content={content}
-  language={language}
-  highlightedCode={highlightedCode}
-  filename={filename}
-  wrap={wrap}
-  collapsible={collapsible}
-  disableCopy={disable_copy}
-/>
+<div
+  class={containerClass}
+  data-testid="code-block"
+  data-language={language || undefined}
+  data-collapsible={collapsible || undefined}
+  data-disable-copy={disable_copy || undefined}
+>
+  {(filename || collapsible) && (
+    <div class={cl('code-block__header')}>
+      {filename && (
+        <span class={cl('code-block__filename')} data-testid="code-block-filename">
+          {filename}
+        </span>
+      )}
+      <div class={cl('code-block__header-actions')}>
+        {collapsible && <CollapseToggle client:idle targetId={contentId} />}
+      </div>
+    </div>
+  )}
+  <div
+    id={contentId}
+    class={cl('code-block__content')}
+    data-testid="code-block-content"
+  >
+    {!disable_copy && <CopyButton client:idle content={content} />}
+    {highlightedCode ? (
+      <div class={cl('code-block__highlighted')} set:html={highlightedCode} />
+    ) : (
+      <pre class={cl('code-block__pre')}>
+        <code class={cl('code-block__code')}>{content}</code>
+      </pre>
+    )}
+  </div>
+</div>

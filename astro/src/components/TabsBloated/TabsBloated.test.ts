@@ -4,17 +4,17 @@ import { render, cleanup, screen } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { h } from 'preact';
 import type { ComponentType } from 'preact';
-import { Tabs } from './Tabs';
+import { TabsBloated } from './TabsBloated';
 
 // Cast needed because Preact's h() expects children?: ComponentChildren but
 // Tabs.children is typed as a render-prop function, causing a contravariance error.
-const TabsComponent = Tabs as ComponentType<any>;
+const TabsComponent = TabsBloated as ComponentType<any>;
 
 afterEach(cleanup);
 
 const labels = ['Python', 'Ruby', 'Go'];
 
-const renderTabs = (props: Partial<Parameters<typeof Tabs>[0]> = {}) =>
+const renderTabs = (props: Partial<Parameters<typeof TabsBloated>[0]> = {}) =>
   render(
     h(TabsComponent, {
       labels,

@@ -1,6 +1,6 @@
-import { Tabs } from '../Tabs/Tabs';
+import { TabsBloated } from '../TabsBloated/TabsBloated';
 import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
-import { CodeBlock } from '../CodeBlock/CodeBlock';
+import { CodeBlockBloated } from '../CodeBlockBloated/CodeBlockBloated';
 import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
 import styles from '../ApiEndpoint/ApiEndpoint.module.css';
 import { classListFactory } from '../../utils/classListFactory';
@@ -24,7 +24,7 @@ export function ApiRequestBodyTabs({ schema, examples }: ApiRequestBodyTabsProps
     return (
       <div class={cl('request-body-tabs__examples')}>
         {examples.map((ex) => (
-          <CodeBlock key={ex.name} content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
+          <CodeBlockBloated key={ex.name} content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
         ))}
       </div>
     );
@@ -32,7 +32,7 @@ export function ApiRequestBodyTabs({ schema, examples }: ApiRequestBodyTabsProps
   if (!hasSchema && !hasExamples) return null;
 
   return (
-    <Tabs labels={['Model', 'Example']} variant="pills">
+    <TabsBloated labels={['Model', 'Example']} variant="pills">
       {(activeIndex: number) =>
         activeIndex === 0 ? (
           <ApiSchemaTable fields={schema} />
@@ -41,12 +41,12 @@ export function ApiRequestBodyTabs({ schema, examples }: ApiRequestBodyTabsProps
             {examples.map((ex) => (
               <div key={ex.name}>
                 {examples.length > 1 && <strong>{ex.name}</strong>}
-                <CodeBlock content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
+                <CodeBlockBloated content={ex.value} language="json" highlightedCode={ex.highlightedValue} />
               </div>
             ))}
           </div>
         )
       }
-    </Tabs>
+    </TabsBloated>
   );
 }
