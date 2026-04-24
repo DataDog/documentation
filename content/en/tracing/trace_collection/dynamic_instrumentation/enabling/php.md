@@ -16,7 +16,7 @@ further_reading:
 
 {{< partial name="dynamic_instrumentation/beta-callout.html" language="PHP" limitations_anchor="unsupported-features" >}}
 
-Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for PHP.
+Dynamic Instrumentation is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for PHP.
 
 ## Prerequisites
 

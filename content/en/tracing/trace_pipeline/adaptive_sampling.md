@@ -35,7 +35,7 @@ To configure services to use adaptive sampling, follow the instructions listed b
 
 ### Tracing library versions
 
-The following table lists minimum tracing library versions required for adaptive sampling:
+The following table lists minimum SDK versions required for adaptive sampling:
 
 | Language    | Minimum version required |
 |-------------|--------------------------|
@@ -109,7 +109,7 @@ That monthly target volume is recomputed every 30 minutes.
 {{< img src="/tracing/guide/adaptive_sampling/volume_based_target_setting.png" alt="Volume based target setting" style="width:100%;">}}
 
 If you are configuring the first service to adaptive sampling, ensure that the ingestion volume target is `>0`. For subsequent services, you should increase the allocated budget after the new service is onboarded to account for the new volume.  
-  <div class="alert alert-info">The configured budget is only allocated to services enrolled in adaptive sampling. It does not include ingested volume from services not enrolled in adaptive sampling, local sampling rules, or other <a href="/tracing/trace_pipeline/ingestion_mechanisms#in-the-agent">sampling mechanisms</a> configured locally in the Agent or tracing libraries.</div>
+  <div class="alert alert-info">The configured budget is only allocated to services enrolled in adaptive sampling. It does not include ingested volume from services not enrolled in adaptive sampling, local sampling rules, or other <a href="/tracing/trace_pipeline/ingestion_mechanisms#in-the-agent">sampling mechanisms</a> configured locally in the Agent or SDKs.</div>
 
 ## Configure adaptive sampling for a service
 
@@ -130,7 +130,7 @@ The table includes:
 - **Downstream bytes**: Ingested bytes from spans where the sampling decision starts from that service and resource, including downstream services.
 - **Configuration**: Source of the resource sampling rate:
   - `AUTOMATIC`: [Default head-based sampling mechanism][8] from the Agent.
-  - `CONFIGURED LOCAL`: [Sampling rule][7] set locally in the tracing library.
+  - `CONFIGURED LOCAL`: [Sampling rule][7] set locally in the SDK.
   - `CONFIGURED REMOTE`: Remote sampling rule set from the Datadog UI.
   - `ADAPTIVE REMOTE`: Adaptive sampling rules set by Datadog.
 

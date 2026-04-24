@@ -17,7 +17,7 @@ Before you begin, make sure you have the following:
 - A basic understanding of the command-line interface.
 - A basic understanding of how to use APIs.
 
-You must also have the **Application ID**, **Directory ID**, **Subscription ID**, and **Client secret** for your Azure account. For help locating these values, see [Connect your Azure account with Cloudcraft][4].
+You must also have the {{< ui >}}Application ID{{< /ui >}}, {{< ui >}}Directory ID{{< /ui >}}, {{< ui >}}Subscription ID{{< /ui >}}, and {{< ui >}}Client secret{{< /ui >}} for your Azure account. For help locating these values, see [Connect your Azure account with Cloudcraft][4].
 
 ## Adding an Azure account
 

@@ -7,7 +7,7 @@ further_reading:
   text: "Learn about APM"
 - link: "/tracing/trace_collection/dd_libraries/"
   tag: "Documentation"
-  text: "Learn about Datadog Tracing Libraries"
+  text: "Learn about Datadog SDKs"
 ---
 
 ## Overview
@@ -18,13 +18,13 @@ If you have [APM][6] set up already, navigate to [**Integrations** > **Link Sour
 
 Your telemetry must be tagged with Git information that ties the running application version with a particular repository and commit.
 
-For supported languages, Datadog recommends [embedding Git information](#embed-git-information-in-your-build-artifacts) in the deployed artifacts, which is then extracted by the [Datadog Tracing Libraries][9] automatically.
+For supported languages, Datadog recommends [embedding Git information](#embed-git-information-in-your-build-artifacts) in the deployed artifacts, which is then extracted by the [Datadog SDKs][9] automatically.
 
 For other languages and configurations, you can [configure telemetry tagging](#configure-telemetry-tagging) yourself.
 
 ## Embed Git information in your build artifacts
 
-You can embed the repository URL and commit hash in your build artifact. The [Datadog Tracing Libraries][9] use this information to automatically add the right tags to your APM service telemetry.
+You can embed the repository URL and commit hash in your build artifact. The [Datadog SDKs][9] use this information to automatically add the right tags to your APM service telemetry.
 
 Select one of the following languages that supports embedding git information:
 
@@ -35,13 +35,13 @@ Select one of the following languages that supports embedding git information:
 
 ### Containers
 
-If you are using Docker containers, you have three options: using Docker, using the Datadog tracing library, or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have three options: using Docker, using the Datadog SDK, or configuring your application with `DD_GIT_*` environment variables.
 
 #### Option 1: Docker
 
 {{% sci-docker %}}
 
-#### Option 2: Datadog tracing library
+#### Option 2: Datadog SDK
 
 {{% sci-dd-tracing-library %}}
 
@@ -57,7 +57,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 {{% sci-dd-serverless %}}
 
-#### Option 2: Datadog tracing library
+#### Option 2: Datadog SDK
 
 {{% sci-dd-tracing-library %}}
 
@@ -69,7 +69,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 If you are using a host, you have two options.
 
-#### Option 1: Datadog tracing library
+#### Option 1: Datadog SDK
 
 {{% sci-dd-tracing-library %}}
 

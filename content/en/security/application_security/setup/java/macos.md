@@ -23,7 +23,7 @@ further_reading:
 - Homebrew (recommended for Agent installation)
 - Administrator privileges for some configuration steps
 - Your Datadog API key
-- Datadog Java tracing library (see version requirements [here][1])
+- Datadog Java SDK (see version requirements [here][1])
 
 ## 1. Installing the Datadog Agent
 

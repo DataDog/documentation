@@ -23,7 +23,7 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 
 {{% tracing-go-v2 %}}
 
-Data Streams Monitoring has not been changed between v1 and v2 of the tracer.
+Data Streams Monitoring has not been changed between v1 and v2 of the SDK.
 
 ### Supported libraries
 
