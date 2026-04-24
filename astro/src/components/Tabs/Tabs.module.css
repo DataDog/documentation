@@ -95,9 +95,13 @@
   background: var(--color-bg);
 }
 
-/* ── Panel (bordered content area) ── */
+/* ── Panel (bordered content area) ──
+   Globalized so Markdoc-rendered panels (plain <div class="tabs__panel">
+   emitted by the tabs transform) get these styles without relying on the
+   CSS-module hash. Astro callers using cl('tabs__panel') also match since
+   classListFactory emits the raw BEM class alongside the hashed one. */
 
-.tabs__panel {
+:global(.tabs__panel) {
   background: var(--color-bg);
   border: var(--border-width) solid var(--color-border);
   padding: var(--space-lg);
@@ -108,7 +112,7 @@
 }
 
 /* Stable DOM hook for the currently-visible panel; no visual overrides. */
-.tabs__panel--active {}
+:global(.tabs__panel--active) {}
 
 /* ── Pills variant (applied when tabs overflow) ── */
 
@@ -160,7 +164,7 @@
   color: var(--color-text-inverse);
 }
 
-.tabs--pills .tabs__panel {
+.tabs--pills :global(.tabs__panel) {
   border: none;
   box-shadow: none;
   border-radius: 0;

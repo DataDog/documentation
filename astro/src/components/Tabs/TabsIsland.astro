@@ -1,5 +1,4 @@
 ---
-import * as cheerio from 'cheerio';
 import { TabsNav } from './TabsNav';
 import styles from './Tabs.module.css';
 import { classListFactory } from '../../utils/classListFactory';
@@ -7,38 +6,18 @@ import { classListFactory } from '../../utils/classListFactory';
 const cl = classListFactory(styles);
 
 interface Props {
+  labels: string[];
+  panelIds: string[];
   /** Force a variant. Default auto-detects pills on overflow. */
   variant?: 'tabs' | 'pills';
 }
 
-const { variant } = Astro.props;
-
-const slotHtml = await Astro.slots.render('default');
-const $ = cheerio.load(slotHtml, null, false);
-
-const tabs = $('[data-tab-label]')
-  .map((_, el) => ({
-    label: $(el).attr('data-tab-label') ?? '',
-    content: $(el).html() ?? '',
-  }))
-  .get();
-
-const groupId = `tabs-${crypto.randomUUID().slice(0, 8)}`;
-const panelIds = tabs.map((_, i) => `${groupId}-panel-${i}`);
+const { labels, panelIds, variant } = Astro.props;
 
 const rootClass = variant === 'pills' ? cl('tabs', 'tabs--pills') : cl('tabs');
 ---
 
 <div class={rootClass}>
-  <TabsNav client:load labels={tabs.map(t => t.label)} panelIds={panelIds} variant={variant} />
-
-  {tabs.map((tab, i) => (
-    <div
-      id={panelIds[i]}
-      role="tabpanel"
-      class={i === 0 ? cl('tabs__panel', 'tabs__panel--active') : cl('tabs__panel')}
-      hidden={i !== 0}
-      set:html={tab.content}
-    />
-  ))}
+  <TabsNav client:load labels={labels} panelIds={panelIds} variant={variant} />
+  <slot />
 </div>

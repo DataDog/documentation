@@ -1,0 +1,21 @@
+---
+import styles from '../Tabs/Tabs.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+const cl = classListFactory(styles);
+
+interface Props {
+  id: string;
+  isActive?: boolean;
+}
+
+const { id, isActive = false } = Astro.props;
+
+const panelClass = isActive
+  ? cl('tabs__panel', 'tabs__panel--active')
+  : cl('tabs__panel');
+---
+
+<div id={id} role="tabpanel" class={panelClass} hidden={!isActive}>
+  <slot />
+</div>

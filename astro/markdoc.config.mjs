@@ -1,4 +1,4 @@
-import { defineMarkdocConfig, component, nodes } from '@astrojs/markdoc/config';
+import { defineMarkdocConfig, component, nodes, Markdoc } from '@astrojs/markdoc/config';
 
 export default defineMarkdocConfig({
   nodes: {
@@ -27,9 +27,54 @@ export default defineMarkdocConfig({
     },
     tabs: {
       render: component('./src/components/Tabs/TabsIsland.astro'),
+      // Build labels + panel wrappers here instead of letting TabsIsland
+      // do it by eager-rendering its slot. Calling Astro.slots.render()
+      // and then extracting innerHTML with cheerio silently drops the
+      // hydration-script prefix Astro emits on first island — leaving
+      // <astro-island> custom elements unregistered in the prod build.
+      //
+      // The @astrojs/markdoc integration only resolves component imports
+      // for tags that appear in the .mdoc AST. A wrapper component used
+      // only by this transform wouldn't qualify, so emit panels as plain
+      // divs and match them via :global(.tabs__panel) in Tabs.module.css.
+      transform(node, config) {
+        const tabsRender = config.tags.tabs.render;
+        const groupId = `tabs-${crypto.randomUUID().slice(0, 8)}`;
+        const labels = [];
+        const panelIds = [];
+        const panels = [];
+
+        for (const child of node.children) {
+          if (child.type !== 'tag' || child.tag !== 'tab') continue;
+          const label = child.attributes.label ?? '';
+          const panelId = `${groupId}-panel-${panels.length}`;
+          const isActive = panels.length === 0;
+          labels.push(label);
+          panelIds.push(panelId);
+          panels.push(
+            new Markdoc.Tag(
+              'div',
+              {
+                id: panelId,
+                role: 'tabpanel',
+                class: isActive ? 'tabs__panel tabs__panel--active' : 'tabs__panel',
+                hidden: !isActive,
+              },
+              child.transformChildren(config),
+            ),
+          );
+        }
+
+        return new Markdoc.Tag(
+          tabsRender,
+          { ...node.transformAttributes(config), labels, panelIds },
+          panels,
+        );
+      },
     },
     tab: {
-      render: component('./src/components/Tab/Tab.astro'),
+      // Consumed by the `tabs` transform; this schema only declares the
+      // attribute shape for validation.
       attributes: {
         label: {
           type: String,

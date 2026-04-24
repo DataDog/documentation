@@ -1,6 +1,6 @@
 ---
 import TabsIsland from '../Tabs/TabsIsland.astro';
-import Tab from '../Tab/Tab.astro';
+import TabPanel from '../Tab/TabPanel.astro';
 import CodeBlockIsland from '../CodeBlock/CodeBlockIsland.astro';
 import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
 import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
@@ -23,6 +23,9 @@ const { schema, examples } = Astro.props;
 
 const hasSchema = schema.length > 0;
 const hasExamples = examples.length > 0;
+
+const groupId = `reqbody-${crypto.randomUUID().slice(0, 8)}`;
+const panelIds = [`${groupId}-panel-0`, `${groupId}-panel-1`];
 ---
 
 {hasSchema && !hasExamples && (
@@ -38,11 +41,11 @@ const hasExamples = examples.length > 0;
 )}
 
 {hasSchema && hasExamples && (
-  <TabsIsland variant="pills">
-    <Tab label="Model">
+  <TabsIsland variant="pills" labels={["Model", "Example"]} panelIds={panelIds}>
+    <TabPanel id={panelIds[0]} isActive>
       <ApiSchemaTable client:load fields={schema} />
-    </Tab>
-    <Tab label="Example">
+    </TabPanel>
+    <TabPanel id={panelIds[1]}>
       <div class={cl('request-body-tabs__examples')}>
         {examples.map((ex) => (
           <div>
@@ -51,6 +54,6 @@ const hasExamples = examples.length > 0;
           </div>
         ))}
       </div>
-    </Tab>
+    </TabPanel>
   </TabsIsland>
 )}

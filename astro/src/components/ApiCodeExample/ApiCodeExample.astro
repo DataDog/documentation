@@ -1,6 +1,6 @@
 ---
 import TabsIsland from '../Tabs/TabsIsland.astro';
-import Tab from '../Tab/Tab.astro';
+import TabPanel from '../Tab/TabPanel.astro';
 import CodeBlockIsland from '../CodeBlock/CodeBlockIsland.astro';
 import styles from './ApiCodeExample.module.css';
 import { classListFactory } from '../../utils/classListFactory';
@@ -26,15 +26,19 @@ interface Props {
 }
 
 const { examples } = Astro.props;
+
+const groupId = `code-example-${crypto.randomUUID().slice(0, 8)}`;
+const labels = examples.map((ex) => ex.label);
+const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
 ---
 
 {examples.length > 0 && (
   <div class={cl('api-code-example')}>
     <h3 class={cl('api-code-example__heading')}>Code Example</h3>
 
-    <TabsIsland variant="pills">
-      {examples.map((ex) => (
-        <Tab label={ex.label}>
+    <TabsIsland variant="pills" labels={labels} panelIds={panelIds}>
+      {examples.map((ex, tabIdx) => (
+        <TabPanel id={panelIds[tabIdx]} isActive={tabIdx === 0}>
           {ex.entries.length === 1 ? (
             ex.entries[0].regionVariants ? (
               Object.entries(ex.entries[0].regionVariants).map(([regionKey, variant]) => (
@@ -70,7 +74,7 @@ const { examples } = Astro.props;
               </details>
             ))
           )}
-        </Tab>
+        </TabPanel>
       ))}
     </TabsIsland>
   </div>

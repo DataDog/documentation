@@ -1,6 +1,6 @@
 ---
 import TabsIsland from '../Tabs/TabsIsland.astro';
-import Tab from '../Tab/Tab.astro';
+import TabPanel from '../Tab/TabPanel.astro';
 import CodeBlockIsland from '../CodeBlock/CodeBlockIsland.astro';
 import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
 import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
@@ -26,36 +26,44 @@ interface Props {
 }
 
 const { responses } = Astro.props;
+
+const outerGroupId = `response-${crypto.randomUUID().slice(0, 8)}`;
+const outerLabels = responses.map((r) => r.statusCode);
+const outerPanelIds = responses.map((_, i) => `${outerGroupId}-panel-${i}`);
+const innerPanelIds = responses.map((_, i) => [
+  `${outerGroupId}-model-${i}`,
+  `${outerGroupId}-example-${i}`,
+]);
 ---
 
 {responses.length > 0 && (
   <div class={cl('api-response')}>
     <h3 class={cl('api-response__heading')}>Response</h3>
 
-    <TabsIsland variant="pills">
-      {responses.map((r) => {
+    <TabsIsland variant="pills" labels={outerLabels} panelIds={outerPanelIds}>
+      {responses.map((r, i) => {
         const hasSchema = (r.schema?.length ?? 0) > 0;
         const hasExamples = (r.examples?.length ?? 0) > 0;
         const showInnerTabs = hasSchema && hasExamples;
         return (
-          <Tab label={r.statusCode}>
+          <TabPanel id={outerPanelIds[i]} isActive={i === 0}>
             <div class={`api-response__panel api-response__panel--${r.statusCode}`}>
               {r.description && (
                 <p class={cl('api-response__description')} set:html={r.description} />
               )}
 
               {showInnerTabs && (
-                <TabsIsland variant="pills">
-                  <Tab label="Model">
+                <TabsIsland variant="pills" labels={["Model", "Example"]} panelIds={innerPanelIds[i]}>
+                  <TabPanel id={innerPanelIds[i][0]} isActive>
                     <ApiSchemaTable client:load fields={r.schema!} />
-                  </Tab>
-                  <Tab label="Example">
+                  </TabPanel>
+                  <TabPanel id={innerPanelIds[i][1]}>
                     {r.examples!.map((ex) => (
                       <div class={cl('api-response__example')}>
                         <CodeBlockIsland content={ex.value} language="json" />
                       </div>
                     ))}
-                  </Tab>
+                  </TabPanel>
                 </TabsIsland>
               )}
 
@@ -69,7 +77,7 @@ const { responses } = Astro.props;
                 </div>
               ))}
             </div>
-          </Tab>
+          </TabPanel>
         );
       })}
     </TabsIsland>
