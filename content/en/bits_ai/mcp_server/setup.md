@@ -410,7 +410,6 @@ Connect Devin to the Datadog MCP Server by enabling it from Devin's MCP Marketpl
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-[1]: /getting_started/site/
 {{% /tab %}}
 
 {{% tab "Goose" %}}
@@ -433,7 +432,8 @@ Connect Goose to the Datadog MCP Server by adding it as a {{< ui >}}remote exten
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
+   To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
+
 1. Complete the OAuth login flow when prompted.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
@@ -471,7 +471,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
    
-To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
+   To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
