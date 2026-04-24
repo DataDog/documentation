@@ -121,7 +121,7 @@ spec:
 ```
 
 <div class="alert alert-info">
-  <strong>Note:</strong> On GKE, backends used as Service Extension callouts must speak HTTP/2. The <code>appProtocol: HTTP2</code> field on the <code>grpc</code> Service port tells the GKE Gateway controller to use HTTP/2 when forwarding traffic. Without it, the load balancer cannot talk gRPC to the security processor.
+  On GKE, backends used for Service Extension callouts must support HTTP/2. Setting <code>appProtocol: HTTP2</code> on the <code>gRPC</code> Service port tells the GKE Gateway controller to forward traffic over HTTP/2. Without it, the load balancer can't send gRPC traffic to the security processor.
 </div>
 
 #### Configuration options for the security processor
