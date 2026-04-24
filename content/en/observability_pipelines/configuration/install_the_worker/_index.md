@@ -600,27 +600,103 @@ sudo yum install --only-upgrade observability-pipelines-worker
 {{% /tab %}}
 {{< /tabs >}}
 
-## Uninstall the Worker
+## Installation artifacts
 
-If you want to uninstall the Worker, run the following commands:
+When you install the Observability Pipelines Worker, these files and system changes are made to your infrastructure:
 
 {{< tabs >}}
 {{% tab "APT" %}}
 
-```
-sudo apt-get remove --purge observability-pipelines-worker
-```
+| Artifact                | Path                                                                  | Notes                                                                                 |
+|-------------------------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| APT repository list     | `/etc/apt/sources.list.d/datadog-observability-pipelines-worker.list` | Added during manual repo setup                                                        |
+| Bootstrap config        | `/etc/observability-pipelines-worker/bootstrap.yaml`                  | Installed by the Worker package. File owned by `observability-pipelines-worker` user with `640` permissions. |
+| Data directory          | `/var/lib/observability-pipelines-worker/`                            | Created post-install. Stores the Worker state.                                             |
+| Datadog signing keyring | `/usr/share/keyrings/datadog-archive-keyring.gpg`                     | Shared with other Datadog packages                                                    |
+| Environment file        | `/etc/default/observability-pipelines-worker`                         | Created by you during setup and is not installed by the Worker package.                             |
+| Secret connector binary | `/opt/datadog/observability-pipelines-worker/bin/sgc`                 | Installed by the Worker package.                                                                  |
+| System user             | `observability-pipelines-worker`                                      | No login shell. Home directory is the data directory.                                  |
+| systemd service unit    | `/lib/systemd/system/observability-pipelines-worker.service`          | Installed by the Worker package.                                                                  |
+| Worker binary           | `/usr/bin/observability-pipelines-worker`                             | Installed by the Worker package.                                                                  |
 
 {{% /tab %}}
 {{% tab "RPM" %}}
 
-1.
+| Artifact                | Path                                                                  | Notes                                                                                 |
+|-------------------------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| Bootstrap config        | `/etc/observability-pipelines-worker/bootstrap.yaml`                  | Installed by the Worker package and owned by `observability-pipelines-worker` user with `640` permissions. |
+| Data directory          | `/var/lib/observability-pipelines-worker/`                            | Created post-install. Stores the Worker state.                                             |
+| Environment file        | `/etc/default/observability-pipelines-worker`                         | Created by you during setup and is not installed by the Worker package.                             |
+| Secret connector binary | `/opt/datadog/observability-pipelines-worker/bin/sgc`                 | Installed by the Worker package.                                                                  |
+| System user             | `observability-pipelines-worker`                                      | No login shell. Home directory is the data directory.                                  |
+| systemd service unit    | `/lib/systemd/system/observability-pipelines-worker.service`          | Installed by the Worker package.                                                                  |
+| Worker binary           | `/usr/bin/observability-pipelines-worker`                             | Installed by the Worker package.                                                                  |
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Uninstall the Worker
+
+If you want to fully uninstall the Worker, run these commands:
+
+{{< tabs >}}
+{{% tab "APT" %}}
+
+1. Stop and disable the service:
+    ```shell
+    sudo systemctl stop observability-pipelines-worker
+    sudo systemctl disable observability-pipelines-worker
     ```
-    yum remove observability-pipelines-worker
+1. Remove the package and its configuration files:
+    ```shell
+    sudo apt-get remove --purge observability-pipelines-worker
     ```
-1.
+1. Remove the environment file (if you created one):
+    ```shell
+    sudo rm -f /etc/default/observability-pipelines-worker
     ```
-    rpm -q --configfiles observability-pipelines-worker
+1. Remove the data directory:
+    ```shell
+    sudo rm -rf /var/lib/observability-pipelines-worker
+    ```
+1. Remove the system user:
+    ```shell
+    sudo userdel observability-pipelines-worker
+    ```
+1. Remove the Datadog APT repository entry:
+    ```shell
+    sudo rm -f /etc/apt/sources.list.d/datadog-observability-pipelines-worker.list
+    sudo apt-get update
+    ```
+1. (Optional) Remove the Datadog signing keyring, only if you have no other Datadog packages installed:
+    ```shell
+    sudo rm -f /usr/share/keyrings/datadog-archive-keyring.gpg
+    ```
+
+{{% /tab %}}
+{{% tab "RPM" %}}
+
+1. Stop and disable the service:
+    ```shell
+    sudo systemctl stop observability-pipelines-worker
+    sudo systemctl disable observability-pipelines-worker
+    ```
+1. Remove the package:
+    ```shell
+    sudo rpm -e observability-pipelines-worker
+    ```
+1. Remove the environment file (if you created one):
+    ```shell
+    sudo rm -f /etc/default/observability-pipelines-worker
+    ```
+1. Remove the data directory:
+    ```shell
+    sudo rm -rf /var/lib/observability-pipelines-worker
+    ```
+1. Remove the system user:
+    ```shell
+    sudo userdel observability-pipelines-worker
     ```
 
 {{% /tab %}}
