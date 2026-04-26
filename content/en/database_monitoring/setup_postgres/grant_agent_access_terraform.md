@@ -245,31 +245,6 @@ PGPASSWORD='your-datadog-password' psql \
 
 Both commands should return without errors. The second returns a JSON execution plan.
 
-## Step 6 - Configure the Agent
-
-Set the `datadog` user and password in the Agent's `postgres.d/conf.yaml`:
-
-```yaml
-init_config:
-instances:
-  - dbm: true
-    host: <pg_host>
-    port: <pg_port>
-    username: datadog
-    password: <datadog_password>
-    dbname: <pg_database>
-```
-
-Restart the Agent and run the diagnostic command:
-
-```bash
-sudo datadog-agent diagnose --include check-datadog
-```
-
-A clean diagnose helps confirm the Agent has every prerequisite for Database Monitoring. If it flags a missing item — a `postgresql.conf` setting, an extension, or a network issue — the output points to exact remediation.
-
-After a few minutes, the database appears at [Databases][2].
-
 ## Tear down
 
 ```bash
@@ -300,4 +275,3 @@ SSL handshake errors against managed clouds
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /database_monitoring/setup_postgres/selfhosted/#configure-postgres-settings
-[2]: https://app.datadoghq.com/databases
