@@ -64,6 +64,8 @@ Configure the following [parameters][4] in the `postgresql.conf` file and then *
 
 ## Grant the Agent access
 
+<div class="alert alert-info">Manage your databases with Terraform? See <a href="/database_monitoring/setup_postgres/grant_agent_access_terraform/">Grant the Agent Access with Terraform</a> for the same setup expressed as Terraform resources.</div>
+
 The Datadog Agent requires read-only access to the database server to collect statistics and queries.
 
 Run the following SQL commands on the **primary** database server (the writer) in the cluster if Postgres is replicated. The Agent can collect telemetry from all databases on the server regardless of which database it connects to. Use the default `postgres` database unless you need the Agent to run [custom queries against data unique to a different database][6].
