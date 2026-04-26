@@ -39,6 +39,48 @@ Restart behavior
 What this page does not cover
 : Provisioning the database itself. Granting the `datadog` user. Installing the Datadog Agent. Configuring `postgresql.conf` on a self-hosted instance — see the [self-hosted section](#self-hosted-postgres) below for the recommended approach.
 
+## How to apply these snippets
+
+The snippets below extend an existing Terraform configuration that already manages your Postgres instance — for example, an `aws_db_instance` for RDS or a `google_sql_database_instance` for Cloud SQL. Set up the standard cloud-provider Terraform first if you are not yet managing the database with Terraform.
+
+You need Terraform 1.3 or later, plus the Terraform plugin for your cloud.
+
+### Declare the provider
+
+Add the provider for your cloud alongside your existing `terraform { ... }` block:
+
+| Cloud | Provider source | Version |
+|---|---|---|
+| AWS RDS, Aurora | `hashicorp/aws` | `>= 5.0` |
+| GCP Cloud SQL, AlloyDB | `hashicorp/google` | `>= 5.0` |
+| Azure Flexible Server | `hashicorp/azurerm` | `>= 3.0` |
+
+For example, on AWS:
+
+```hcl
+terraform {
+  required_version = ">= 1.3.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 5.0"
+    }
+  }
+}
+```
+
+### Apply
+
+Add the snippet for your cloud to your existing configuration, then run:
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+Review the plan, then type `yes` when prompted. Each cloud's restart behavior is described in its section below.
+
 ## AWS RDS
 
 RDS exposes server parameters through DB parameter groups. Define a parameter group and attach it to the instance.
