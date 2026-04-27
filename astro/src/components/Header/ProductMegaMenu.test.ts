@@ -131,8 +131,8 @@ describe('ProductMegaMenu — interactivity (open/close)', () => {
     const obsDetail = getDetail('observability');
     const secDetail = getDetail('security');
 
-    expect(obsDetail.style.display).toBe('flex');
-    expect(secDetail.style.display).toBe('none');
+    expect(obsDetail.classList.contains('product-category--active')).toBe(true);
+    expect(secDetail.classList.contains('product-category--active')).toBe(false);
   });
 });
 
@@ -150,8 +150,8 @@ describe('ProductMegaMenu — interactivity (category switching)', () => {
     const obsDetail = getDetail('observability');
     const secDetail = getDetail('security');
 
-    expect(secDetail.style.display).toBe('flex');
-    expect(obsDetail.style.display).toBe('none');
+    expect(secDetail.classList.contains('product-category--active')).toBe(true);
+    expect(obsDetail.classList.contains('product-category--active')).toBe(false);
   });
 
   it('active category toggle receives the text-primary BEM-style state class', async () => {
