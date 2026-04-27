@@ -114,7 +114,7 @@ DatadogSdk.instance.rum?.startFeatureOperation(
   }
 )
 ```
-On Flutter Web, the Browser SDK must have the `feature_operation_vital` experimental feature enabled.
+To use operations on Flutter Web, enable the `feature_operation_vital` experimental feature in the Browser SDK.
 {{% /tab %}}
 
 {{% tab "Roku" %}}
@@ -200,7 +200,7 @@ DatadogSdk.instance.rum?.succeedFeatureOperation(
   }
 )
 ```
-On Flutter Web, the Browser SDK must have the `feature_operation_vital` experimental feature enabled.
+To use operations on Flutter Web, enable the `feature_operation_vital` experimental feature in the Browser SDK.
 
 {{% /tab %}}
 
