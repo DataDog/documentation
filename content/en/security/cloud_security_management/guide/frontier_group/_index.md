@@ -21,7 +21,7 @@ The frontier group is an opt-in program where you get access to the newest AI fe
 ### Ownership agent
 
 ***Status:*** *available for frontier partners*<br>
-Automated inference on who owns a particular resource and should be responsible for remediating it. See [Setting Up Ownership Preferences][1] to customize ownership rules with your own data.
+Automated inference on who owns a particular resource and should be responsible for remediating it. See [Set Up Ownership Preferences][1] to customize ownership rules with your own data.
 
 [1]: /security/cloud_security_management/guide/frontier_group/ownership_preferences/
 
