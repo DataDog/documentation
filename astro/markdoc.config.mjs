@@ -1,4 +1,5 @@
 import { defineMarkdocConfig, component, nodes, Markdoc } from '@astrojs/markdoc/config';
+import schema from './markdoc.schema.mjs';
 
 export default defineMarkdocConfig({
   nodes: {
@@ -18,15 +19,11 @@ export default defineMarkdocConfig({
   tags: {
     alert: {
       render: component('./src/components/Alert/Alert.astro'),
-      attributes: {
-        type: {
-          type: String,
-          default: 'info',
-        },
-      },
+      ...schema.tags.alert,
     },
     tabs: {
       render: component('./src/components/Tabs/Tabs.astro'),
+      ...schema.tags.tabs,
       // Build labels + panel wrappers here instead of letting Tabs
       // do it by eager-rendering its slot. Calling Astro.slots.render()
       // and then extracting innerHTML with cheerio silently drops the
@@ -75,54 +72,21 @@ export default defineMarkdocConfig({
     tab: {
       // Consumed by the `tabs` transform; this schema only declares the
       // attribute shape for validation.
-      attributes: {
-        label: {
-          type: String,
-          required: true,
-        },
-      },
+      ...schema.tags.tab,
     },
     apiMethodBadge: {
       render: component('./src/components/ApiMethodBadge/ApiMethodBadge.astro'),
       selfClosing: true,
-      attributes: {
-        method: {
-          type: String,
-          required: true,
-        },
-      },
+      ...schema.tags.apiMethodBadge,
     },
     apiStatusAlert: {
       render: component('./src/components/ApiStatusAlert/ApiStatusAlert.astro'),
-      attributes: {
-        type: {
-          type: String,
-          required: true,
-        },
-        newerVersionUrl: {
-          type: String,
-        },
-        message: {
-          type: String,
-        },
-      },
+      ...schema.tags.apiStatusAlert,
     },
     schemaTable: {
       render: component('./src/components/ApiSchemaTable/ApiSchemaTableIsland.astro'),
       selfClosing: true,
-      attributes: {
-        fields: {
-          type: String,
-          required: true,
-        },
-        title: {
-          type: String,
-        },
-        showExpandAll: {
-          type: Boolean,
-          default: true,
-        },
-      },
+      ...schema.tags.schemaTable,
     },
     regionSelector: {
       render: component('./src/components/RegionSelector/RegionSelectorIsland.astro'),
@@ -131,44 +95,21 @@ export default defineMarkdocConfig({
     apiResponse: {
       render: component('./src/components/ApiResponse/ApiResponseIsland.astro'),
       selfClosing: true,
-      attributes: {
-        responses: {
-          type: String,
-          required: true,
-        },
-      },
+      ...schema.tags.apiResponse,
     },
     apiCodeExample: {
       render: component('./src/components/ApiCodeExample/ApiCodeExampleIsland.astro'),
       selfClosing: true,
-      attributes: {
-        examples: {
-          type: String,
-          required: true,
-        },
-      },
+      ...schema.tags.apiCodeExample,
     },
     apiEndpoint: {
       render: component('./src/components/ApiEndpoint/ApiEndpoint.astro'),
-      attributes: {
-        data: {
-          type: String,
-          required: true,
-        },
-      },
+      ...schema.tags.apiEndpoint,
     },
     placeholder: {
       render: component('./src/components/Placeholder/Placeholder.astro'),
       selfClosing: true,
-      attributes: {
-        name: {
-          type: String,
-          required: true,
-        },
-        class: {
-          type: String,
-        },
-      },
+      ...schema.tags.placeholder,
     },
   },
 });

@@ -60,7 +60,9 @@
   border-color: transparent;
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
-  transition: color 0.2s ease, background-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 /* Active tab — card style with border merging into content panel */
@@ -80,13 +82,17 @@
 
 /* Purple gradient line on top of active tab */
 .tabs__button--active::after {
-  content: '';
+  content: "";
   position: absolute;
   top: calc(-1 * var(--border-width));
   left: calc(-1 * var(--border-width));
   width: calc(100% + 2 * var(--border-width));
   height: var(--border-width-highlight);
-  background: linear-gradient(90deg, var(--color-brand), var(--color-brand-hover));
+  background: linear-gradient(
+    90deg,
+    var(--color-brand),
+    var(--color-brand-hover)
+  );
   border-radius: var(--border-width-highlight) var(--border-width-highlight) 0 0;
 }
 
@@ -112,7 +118,8 @@
 }
 
 /* Stable DOM hook for the currently-visible panel; no visual overrides. */
-:global(.tabs__panel--active) {}
+:global(.tabs__panel--active) {
+}
 
 /* ── Pills variant (applied when tabs overflow) ── */
 
