@@ -303,7 +303,7 @@ DatadogSdk.instance.rum?.failFeatureOperation(
   }
 )
 ```
-On Flutter Web, the Browser SDK must have the `feature_operation_vital` experimental feature enabled.
+To use operations on Flutter Web, enable the `feature_operation_vital` experimental feature in the Browser SDK.
 
 {{% /tab %}}
 
