@@ -31,7 +31,7 @@ AI Guard can automatically evaluate LLM calls made through supported AI ecosyste
 {{% /tab %}}
 {{< /tabs >}}
 
-{{< partial name="security-platform/aiguard-sdk-setup.md" target="automatic" >}}
+{{% partial name="security-platform/aiguard-sdk-setup.md" target="automatic" %}}
 
 ## Integrations
 
@@ -46,9 +46,9 @@ AI Guard automatically evaluates the following LangChain operations:
 
 - LLMs:
   - `llm.invoke()`, `llm.ainvoke()`
-- [Chat models][3]:
+- [Chat models][2]:
   - `chat_model.invoke()`, `chat_model.ainvoke()`
-- [Tools][4]:
+- [Tools][3]:
   - `BaseTool.invoke()`, `BaseTool.ainvoke()`
 
 [1]: https://docs.langchain.com/oss/python/langchain/overview

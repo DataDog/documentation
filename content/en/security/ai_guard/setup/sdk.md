@@ -14,7 +14,7 @@ further_reading:
 
 Use an SDK to call the AI Guard REST API and monitor AI Guard activity in real time in Datadog.
 
-{{< partial name="security-platform/aiguard-sdk-setup.md" target="manual" >}}
+{{% partial name="security-platform/aiguard-sdk-setup.md" target="manual" %}}
 
 ## Install the SDK
 
