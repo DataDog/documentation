@@ -24,7 +24,7 @@ const rootClass = variant === 'pills' ? cl('tabs', 'tabs--pills') : cl('tabs');
     labels={labels}
     externalContext={{
       scope: id,
-      entries: { tabsComponent: id, tabPanelComponents: panelIds },
+      entries: { tabsEl: id, tabPanelEls: panelIds },
     }}
     variant={variant}
   />

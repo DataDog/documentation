@@ -16,8 +16,8 @@ const removeStyle = removeStyleFactory(styles);
 interface TabsNavProps {
   labels: string[];
   externalContext: ExternalContext<{
-    tabsComponent: string;
-    tabPanelComponents: string[];
+    tabsEl: string;
+    tabPanelEls: string[];
   }>;
   /** If set, skips overflow detection and trusts the SSR-applied variant. */
   variant?: "tabs" | "pills";
@@ -39,9 +39,9 @@ export function TabsNav({ labels, externalContext, variant }: TabsNavProps) {
     const loaded = loadExternalContext(externalContext);
     if (!loaded) return;
 
-    const { tabsComponent, tabPanelComponents } = loaded;
+    const { tabsEl, tabPanelEls } = loaded;
 
-    tabPanelsRef.current = tabPanelComponents;
+    tabPanelsRef.current = tabPanelEls;
 
     if (variant) {
       markSelfAsHydrated(ref);
@@ -54,9 +54,9 @@ export function TabsNav({ labels, externalContext, variant }: TabsNavProps) {
       const overflows = thisElement.scrollWidth > thisElement.clientWidth;
       removeStyle(thisElement.classList, "tabs__nav--measuring");
       if (overflows) {
-        addStyle(tabsComponent.classList, "tabs--pills");
+        addStyle(tabsEl.classList, "tabs--pills");
       } else {
-        removeStyle(tabsComponent.classList, "tabs--pills");
+        removeStyle(tabsEl.classList, "tabs--pills");
       }
     };
 
@@ -92,7 +92,7 @@ export function TabsNav({ labels, externalContext, variant }: TabsNavProps) {
               : cl("tabs__button")
           }
           aria-selected={i === activeIndex ? "true" : "false"}
-          aria-controls={externalContext.entries.tabPanelComponents[i]}
+          aria-controls={externalContext.entries.tabPanelEls[i]}
           data-tab-index={i}
           onClick={() => setActiveTab(i)}
         >

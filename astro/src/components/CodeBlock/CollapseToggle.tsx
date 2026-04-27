@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from 'preact/hooks';
-import styles from './CodeBlock.module.css';
-import { classListFactory } from '../../utils/classListFactory';
-import { markSelfAsHydrated } from '../../utils/markSelfAsHydrated';
+import { useEffect, useRef, useState } from "preact/hooks";
+import styles from "./CodeBlock.module.css";
+import { classListFactory } from "../../utils/classListFactory";
+import { markSelfAsHydrated } from "../../utils/markSelfAsHydrated";
 import {
   loadExternalContext,
   type ExternalContext,
-} from '../../utils/loadExternalContext';
+} from "../../utils/loadExternalContext";
 
 const cl = classListFactory(styles);
 
 interface CollapseToggleProps {
-  externalContext: ExternalContext<{ contentDiv: string }>;
+  externalContext: ExternalContext<{ contentEl: string }>;
 }
 
 export function CollapseToggle({ externalContext }: CollapseToggleProps) {
@@ -21,7 +21,7 @@ export function CollapseToggle({ externalContext }: CollapseToggleProps) {
   useEffect(() => {
     const loaded = loadExternalContext(externalContext);
     if (!loaded) return;
-    targetRef.current = loaded.contentDiv;
+    targetRef.current = loaded.contentEl;
     markSelfAsHydrated(ref);
   }, []);
 
@@ -31,8 +31,8 @@ export function CollapseToggle({ externalContext }: CollapseToggleProps) {
   const applyCollapsed = (next: boolean) => {
     const target = targetRef.current;
     if (!target) return;
-    target.classList.toggle('code-block__content--hidden', next);
-    const hashed = styles['code-block__content--hidden'];
+    target.classList.toggle("code-block__content--hidden", next);
+    const hashed = styles["code-block__content--hidden"];
     if (hashed) target.classList.toggle(hashed, next);
   };
 
@@ -43,16 +43,16 @@ export function CollapseToggle({ externalContext }: CollapseToggleProps) {
   };
 
   const chevronClass = collapsed
-    ? cl('code-block__chevron', 'code-block__chevron--down')
-    : cl('code-block__chevron', 'code-block__chevron--up');
+    ? cl("code-block__chevron", "code-block__chevron--down")
+    : cl("code-block__chevron", "code-block__chevron--up");
 
   return (
     <button
       ref={ref}
-      class={cl('code-block__toggle')}
+      class={cl("code-block__toggle")}
       onClick={handleToggle}
       aria-expanded={!collapsed}
-      aria-label={collapsed ? 'Expand code' : 'Collapse code'}
+      aria-label={collapsed ? "Expand code" : "Collapse code"}
     >
       <span class={chevronClass} />
     </button>
