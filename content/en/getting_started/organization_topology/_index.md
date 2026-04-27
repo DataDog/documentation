@@ -121,7 +121,7 @@ Mergers and acquisitions often create temporary multi-organization states. The a
 
 ### Compare org capabilities
 
-In the following chart, "no change" indicates that Organization Groups will not introduce new capabilities. 
+In the following chart, "no change" indicates that Organization Groups do not introduce new capabilities. 
 
 **Note**: Organization Groups is in preview. Contact your account team to learn more.
 
