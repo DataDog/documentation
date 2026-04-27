@@ -147,7 +147,7 @@ On this same page, you can select the [Custom Attributes][5] tab to view importe
 
 {{< img src="product_analytics/integration_page5.png" alt="See the integrations that are compatible with Product Analytics." style="width:80%;" >}}
 
-To import attibutes from a reference table or from an integration such as Salesforce or Snowflake, select the **Add Attributes** button and choose whether the attributes are for user or account profiles. Then, follow the prompts to:
+To import attributes from a reference table or from an integration such as Salesforce or Snowflake, select the **Add Attributes** button and choose whether the attributes are for user or account profiles. Then, follow the prompts to:
 
 
 {{< img src="product_analytics/add_attribute2_button.png" alt="Add new attributes using to enrich your profiles." style="width:80%;" >}}
