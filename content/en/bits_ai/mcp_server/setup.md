@@ -460,6 +460,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
 - `dbm`: Tools for interacting with [Database Monitoring][33]
+- `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments
 - `llmobs`: Tools for searching and analyzing [LLM Observability][36] spans and experiments
@@ -476,7 +477,6 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 These toolsets are in Preview. Sign up for a toolset by completing the Product Preview form or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
-- `ddsql`: ([Request access][47]) Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 
 ## Supported clients
 

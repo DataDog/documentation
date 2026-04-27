@@ -14,12 +14,6 @@ further_reading:
   text: "Unify OpenTelemetry and Datadog with the DDOT Collector"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning"><strong>The Datadog Distribution of OpenTelemetry Collector (DDOT) is not yet FedRAMP/FIPS compliant.</strong><br>
-&bull; If you require a FedRAMP or FIPS-compliant data collection pipeline, use the <a href="/agent/configuration/fips-compliance/?tab=linux">FIPS-enabled Datadog Agent</a>.<br>
-&bull; If you are a GovCloud customer whose only requirement is data residency in the GovCloud (US1-FED) data center, you <strong>may</strong> use the DDOT Collector.</div>
-{{< /site-region >}}
-
 {{< callout btn_hidden="true" >}}
 The DDOT Collector for Kubernetes is <strong>Generally Available</strong>. You can get started by following the <a href="#get-started">instructions below</a>.
 <br><br>
@@ -62,6 +56,23 @@ The DDOT Collector offers:
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see the following  <a href="#opentelemetry-collector-components">OpenTelemetry Collector components</a> section.
 </div>
+
+### OpenTelemetry Collector versions
+
+The following table shows which OpenTelemetry Collector versions are included in each DDOT release:
+
+| DDOT version | Beta version | Stable version |
+|---|---|---|
+| 7.78.0 | v0.147.0 | v1.53.0 |
+| 7.77.0 | v0.145.0 | v1.51.1-0.20260205185216-81bc641f26c0 |
+| 7.76.0 | v0.144.0 | v1.50.0 |
+| 7.75.0 | v0.142.0 | v1.48.0 |
+| 7.74.0 | v0.140.0 | v1.46.0 |
+| 7.73.0 | v0.138.0 | v1.44.0 |
+| 7.72.0 | v0.136.0 | v1.42.0 |
+| 7.71.0 | v0.133.0 | v1.39.0 |
+| 7.70.0 | v0.131.0 | v1.37.0 |
+| 7.69.0 | v0.129.0 | v1.35.0 |
 
 ### Support levels
 
