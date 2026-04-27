@@ -2,7 +2,11 @@ export default {
   tags: {
     alert: {
       attributes: {
-        type: { type: String, default: 'info' },
+        level: {
+          type: String,
+          default: "info",
+          matches: ["info", "danger", "warning", "tip"],
+        },
       },
     },
     tabs: {
@@ -15,12 +19,20 @@ export default {
     },
     apiMethodBadge: {
       attributes: {
-        method: { type: String, required: true },
+        method: {
+          type: String,
+          required: true,
+          matches: ["get", "post", "put", "patch", "delete", "head", "options"],
+        },
       },
     },
     apiStatusAlert: {
       attributes: {
-        type: { type: String, required: true },
+        type: {
+          type: String,
+          required: true,
+          matches: ["deprecated", "unstable", "beta"],
+        },
         newerVersionUrl: { type: String },
         message: { type: String },
       },

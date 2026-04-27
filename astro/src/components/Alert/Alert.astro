@@ -3,7 +3,7 @@ import styles from './Alert.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 
 interface Props {
-  type?: 'info' | 'danger' | 'warning' | 'tip';
+  level?: 'info' | 'danger' | 'warning' | 'tip';
 }
 
 const labels: Record<string, string> = {
@@ -13,12 +13,12 @@ const labels: Record<string, string> = {
   tip: 'Tip',
 };
 
-const { type = 'info' } = Astro.props;
-const label = labels[type] ?? type;
+const { level = 'info' } = Astro.props;
+const label = labels[level] ?? level;
 const cl = classListFactory(styles);
 ---
 
-<div class={cl('alert', `alert--${type}`)}>
+<div class={cl('alert', `alert--${level}`)}>
   <strong class={cl('alert__label')}>{label}</strong>
   <slot />
 </div>

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import DocsLayout from '../../../layouts/DocsLayout.astro';
+import Alert from '../../../components/Alert/Alert.astro';
 
 const docs = await getCollection('docs');
 const components = docs
@@ -12,6 +13,10 @@ const components = docs
   <div class="docs-page">
     <div class="prose">
       <h1>Test Pages</h1>
+
+      <Alert level="warning">
+        To verify component hydration, <strong>you must build these pages with <code>npm run build</code>, not <code>npm run dev</code>!</strong>
+      </Alert>
 
       <h2>Integration</h2>
       <table>
@@ -25,6 +30,10 @@ const components = docs
           <tr>
             <td><a href="/docs/test_pages/integration/typography/">Typography</a></td>
             <td>Verify vanilla Markdown elements such as headings and links.</td>
+          </tr>
+          <tr>
+            <td><a href="/docs/test_pages/integration/nested-content/">Nested content</a></td>
+            <td>Verify the rendering and hydration of components nested inside other components, such as a code block inside a tab.</td>
           </tr>
         </tbody>
       </table>

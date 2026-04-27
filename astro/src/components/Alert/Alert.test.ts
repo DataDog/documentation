@@ -3,7 +3,7 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import Alert from './Alert.astro';
 
 describe('Alert component', () => {
-  it('renders with default type (info)', async () => {
+  it('renders with default level (info)', async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Alert, {
       slots: { default: 'Test message' },
@@ -14,8 +14,8 @@ describe('Alert component', () => {
     expect(html).toContain('alert--info');
   });
 
-  it('renders each alert type with correct label and attributes', async () => {
-    const types = ['info', 'danger', 'warning', 'tip'] as const;
+  it('renders each alert level with correct label and attributes', async () => {
+    const levels = ['info', 'danger', 'warning', 'tip'] as const;
     const labels: Record<string, string> = {
       info: 'Note',
       danger: 'Caution',
@@ -24,22 +24,22 @@ describe('Alert component', () => {
     };
     const container = await AstroContainer.create();
 
-    for (const type of types) {
+    for (const level of levels) {
       const html = await container.renderToString(Alert, {
-        props: { type },
-        slots: { default: `${type} message` },
+        props: { level },
+        slots: { default: `${level} message` },
       });
 
-      expect(html).toContain(labels[type]);
-      expect(html).toContain(`${type} message`);
-      expect(html).toContain(`alert--${type}`);
+      expect(html).toContain(labels[level]);
+      expect(html).toContain(`${level} message`);
+      expect(html).toContain(`alert--${level}`);
     }
   });
 
   it('renders slot content', async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Alert, {
-      props: { type: 'warning' },
+      props: { level: 'warning' },
       slots: { default: '<strong>Bold warning</strong>' },
     });
 

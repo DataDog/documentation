@@ -12,7 +12,7 @@ A static alert banner for displaying contextual messages.
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `type` | `'info' \| 'danger' \| 'warning' \| 'tip'` | `info` | Controls the bar color and label |
+| `level` | `'info' \| 'danger' \| 'warning' \| 'tip'` | `info` | Controls the bar color and label |
 
 ## Examples
 
@@ -20,13 +20,13 @@ A static alert banner for displaying contextual messages.
 
 {% tabs %}
 {% tab label="Result" %}
-{% alert type="info" %}
+{% alert level="info" %}
 This is an informational alert. Use it to surface neutral context.
 {% /alert %}
 {% /tab %}
 {% tab label="Markdoc" %}
 ```markdoc
-{% alert type="info" %}
+{% alert level="info" %}
 This is an informational alert. Use it to surface neutral context.
 {% /alert %}
 ```
@@ -37,13 +37,13 @@ This is an informational alert. Use it to surface neutral context.
 
 {% tabs %}
 {% tab label="Result" %}
-{% alert type="danger" %}
+{% alert level="danger" %}
 This is a caution alert. Proceed carefully.
 {% /alert %}
 {% /tab %}
 {% tab label="Markdoc" %}
 ```markdoc
-{% alert type="danger" %}
+{% alert level="danger" %}
 This is a caution alert. Proceed carefully.
 {% /alert %}
 ```
@@ -54,13 +54,13 @@ This is a caution alert. Proceed carefully.
 
 {% tabs %}
 {% tab label="Result" %}
-{% alert type="warning" %}
+{% alert level="warning" %}
 This is a warning alert. Something needs your attention.
 {% /alert %}
 {% /tab %}
 {% tab label="Markdoc" %}
 ```markdoc
-{% alert type="warning" %}
+{% alert level="warning" %}
 This is a warning alert. Something needs your attention.
 {% /alert %}
 ```
@@ -71,13 +71,13 @@ This is a warning alert. Something needs your attention.
 
 {% tabs %}
 {% tab label="Result" %}
-{% alert type="tip" %}
+{% alert level="tip" %}
 This is a tip alert. Here's a helpful suggestion.
 {% /alert %}
 {% /tab %}
 {% tab label="Markdoc" %}
 ```markdoc
-{% alert type="tip" %}
+{% alert level="tip" %}
 This is a tip alert. Here's a helpful suggestion.
 {% /alert %}
 ```
