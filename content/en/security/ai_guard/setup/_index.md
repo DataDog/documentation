@@ -50,7 +50,7 @@ The [AI Guard SDK][12] provides language-specific libraries (Python, JavaScript,
 
 ### Automatic integrations
 
-[Automatic integrations][10] provide out-of-the-box AI Guard protection for supported frameworks. When you run your application with the Datadog tracer, AI Guard evaluations are automatically performed without requiring any code changes.
+[Automatic integrations][10] provide out-of-the-box AI Guard protection for supported frameworks. When you run your application with the Datadog SDK, AI Guard evaluations are automatically performed without requiring any code changes.
 
 | Language   | Supported Frameworks |
 |------------|---------------------|

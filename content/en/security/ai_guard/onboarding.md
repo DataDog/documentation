@@ -27,7 +27,7 @@ For an overview on AI Guard, see [AI Guard][13].
 
 ## Setup
 
-To set up AI Guard, you need to create API keys, install a tracer library, configure retention filters, and set AI Guard policies including blocking, evaluation sensitivity, and sensitive data scanning.
+To set up AI Guard, you need to create API keys, install an SDK, configure retention filters, and set AI Guard policies including blocking, evaluation sensitivity, and sensitive data scanning.
 
 For full setup instructions, see [Set Up AI Guard][15].
 

@@ -17,7 +17,7 @@ Manual integrations require additional configuration to enable AI Guard protecti
 ## Supported frameworks and libraries
 ### Python
 
-| Framework                         | Supported Versions | Tracer Version |
+| Framework                         | Supported Versions | SDK Version |
 | --------------------------------- | ------------------ | -------------- |
 | [Amazon Strands](#amazon-strands) | >= 1.29.0          | >= 4.7.0       |
 | [LiteLLM Proxy](#litellm-proxy)   | >= 1.78.5          | >= 4.8.0       |

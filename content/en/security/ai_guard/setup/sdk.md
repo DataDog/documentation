@@ -16,9 +16,9 @@ Use an SDK to call the AI Guard REST API and monitor AI Guard activity in real t
 
 {{< partial name="security-platform/aiguard-sdk-setup.md" target="manual" >}}
 
-## Install the tracer library
+## Install the SDK
 
-To use AI Guard with the SDK and see AI Guard activity in Datadog, install the appropriate tracer library for your language. The tracer library requires the Datadog Agent to send data to Datadog.
+To use AI Guard and see AI Guard activity in Datadog, install the appropriate SDK for your language. The SDK requires the Datadog Agent to send data to Datadog.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -37,7 +37,7 @@ npm install dd-trace@^5.69.0
 
 {{% /tab %}}
 {{% tab "Java" %}}
-Install dd-trace-java v1.54.0 or later. Follow the [Java installation instructions][2] to add the tracer to your application.
+Install dd-trace-java v1.54.0 or later. Follow the [Java installation instructions][2] to add the SDK to your application.
 
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 {{% /tab %}}
