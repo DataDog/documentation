@@ -10,7 +10,7 @@ further_reading:
     text: "Troubleshoot Serverless Monitoring for Azure Logic Apps"
 ---
 
-{{< callout url="#"
+{{< callout url="https://www.datadoghq.com/product-preview/serverless-monitoring-for-azure-logic-apps/"
  btn_hidden="false" header="Join the Preview!">}}
 Serverless Monitoring for Azure Logic Apps is in Preview. Complete the form to request access.
 {{< /callout >}}
