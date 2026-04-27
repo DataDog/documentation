@@ -6,18 +6,27 @@ import { classListFactory } from '../../utils/classListFactory';
 const cl = classListFactory(styles);
 
 interface Props {
+  id: string;
   labels: string[];
   panelIds: string[];
   /** Force a variant. Default auto-detects pills on overflow. */
   variant?: 'tabs' | 'pills';
 }
 
-const { labels, panelIds, variant } = Astro.props;
+const { id, labels, panelIds, variant } = Astro.props;
 
 const rootClass = variant === 'pills' ? cl('tabs', 'tabs--pills') : cl('tabs');
 ---
 
-<div class={rootClass}>
-  <TabsNav client:load labels={labels} panelIds={panelIds} variant={variant} />
+<div id={id} class={rootClass}>
+  <TabsNav
+    client:load
+    labels={labels}
+    externalContext={{
+      scope: id,
+      entries: { tabsComponent: id, tabPanelComponents: panelIds },
+    }}
+    variant={variant}
+  />
   <slot />
 </div>

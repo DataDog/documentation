@@ -1,5 +1,6 @@
 import { defineMarkdocConfig, component, nodes, Markdoc } from '@astrojs/markdoc/config';
 import schema from './markdoc.schema.mjs';
+import { generateElementId } from './src/utils/generateElementId.ts';
 
 export default defineMarkdocConfig({
   nodes: {
@@ -7,12 +8,7 @@ export default defineMarkdocConfig({
       render: component('./src/components/CodeBlock/CodeBlock.astro'),
       attributes: {
         ...nodes.fence.attributes,
-        content: { type: String, render: true },
-        language: { type: String, render: true },
-        filename: { type: String, render: true },
-        wrap: { type: Boolean, default: false, render: true },
-        collapsible: { type: Boolean, default: false, render: true },
-        disable_copy: { type: Boolean, default: false, render: true },
+        ...schema.nodes.fence.attributes,
       },
     },
   },
@@ -36,7 +32,7 @@ export default defineMarkdocConfig({
       // divs and match them via :global(.tabs__panel) in Tabs.module.css.
       transform(node, config) {
         const tabsRender = config.tags.tabs.render;
-        const groupId = `tabs-${crypto.randomUUID().slice(0, 8)}`;
+        const groupId = generateElementId('tabs');
         const labels = [];
         const panelIds = [];
         const panels = [];
@@ -64,7 +60,7 @@ export default defineMarkdocConfig({
 
         return new Markdoc.Tag(
           tabsRender,
-          { ...node.transformAttributes(config), labels, panelIds },
+          { ...node.transformAttributes(config), id: groupId, labels, panelIds },
           panels,
         );
       },

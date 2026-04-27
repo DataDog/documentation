@@ -4,6 +4,10 @@ import { classListFactory } from "../../utils/classListFactory";
 import { addStyleFactory } from "../../utils/addStyleFactory";
 import { removeStyleFactory } from "../../utils/removeStyleFactory";
 import { markSelfAsHydrated } from "../../utils/markSelfAsHydrated";
+import {
+  loadExternalContext,
+  type ExternalContext,
+} from "../../utils/loadExternalContext";
 
 const cl = classListFactory(styles);
 const addStyle = addStyleFactory(styles);
@@ -11,7 +15,10 @@ const removeStyle = removeStyleFactory(styles);
 
 interface TabsNavProps {
   labels: string[];
-  panelIds: string[];
+  externalContext: ExternalContext<{
+    tabsComponent: string;
+    tabPanelComponents: string[];
+  }>;
   /** If set, skips overflow detection and trusts the SSR-applied variant. */
   variant?: "tabs" | "pills";
 }
@@ -20,38 +27,28 @@ interface TabsNavProps {
 // toggles visibility on the panels rendered server-side by Tabs.astro.
 // Panels stay in the Astro shell because their content is arbitrary HTML that
 // shouldn't cross the island prop boundary (nested islands would break).
-export function TabsNav({ labels, panelIds, variant }: TabsNavProps) {
+export function TabsNav({ labels, externalContext, variant }: TabsNavProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const panelsRef = useRef<HTMLElement[]>([]);
-
-  const setActiveTab = (index: number) => {
-    setActiveIndex(index);
-    panelsRef.current.forEach((panel, i) => {
-      const active = i === index;
-      panel.hidden = !active;
-      if (active) {
-        addStyle(panel.classList, "tabs__panel--active");
-      } else {
-        removeStyle(panel.classList, "tabs__panel--active");
-      }
-    });
-  };
+  const tabPanelsRef = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
     const thisElement = ref.current;
     if (!thisElement) return;
-    const tabsComponent = thisElement.closest<HTMLElement>(".tabs");
-    if (!tabsComponent) return;
 
-    panelsRef.current = panelIds
-      .map((id) => tabsComponent.querySelector<HTMLElement>(`#${id}`))
-      .filter((el): el is HTMLElement => el !== null);
+    const loaded = loadExternalContext(externalContext);
+    if (!loaded) return;
 
-    markSelfAsHydrated(ref);
+    const { tabsComponent, tabPanelComponents } = loaded;
 
-    if (variant) return;
+    tabPanelsRef.current = tabPanelComponents;
 
+    if (variant) {
+      markSelfAsHydrated(ref);
+      return;
+    }
+
+    // Use pills if tabs won't fit
     const checkOverflow = () => {
       addStyle(thisElement.classList, "tabs__nav--measuring");
       const overflows = thisElement.scrollWidth > thisElement.clientWidth;
@@ -66,8 +63,23 @@ export function TabsNav({ labels, panelIds, variant }: TabsNavProps) {
     checkOverflow();
     window.addEventListener("resize", checkOverflow);
 
+    markSelfAsHydrated(ref);
+
     return () => window.removeEventListener("resize", checkOverflow);
   }, []);
+
+  const setActiveTab = (index: number) => {
+    setActiveIndex(index);
+    tabPanelsRef.current.forEach((panel, i) => {
+      const active = i === index;
+      panel.hidden = !active;
+      if (active) {
+        addStyle(panel.classList, "tabs__panel--active");
+      } else {
+        removeStyle(panel.classList, "tabs__panel--active");
+      }
+    });
+  };
 
   return (
     <div ref={ref} class={cl("tabs__nav")} role="tablist">
@@ -80,7 +92,7 @@ export function TabsNav({ labels, panelIds, variant }: TabsNavProps) {
               : cl("tabs__button")
           }
           aria-selected={i === activeIndex ? "true" : "false"}
-          aria-controls={panelIds[i]}
+          aria-controls={externalContext.entries.tabPanelComponents[i]}
           data-tab-index={i}
           onClick={() => setActiveTab(i)}
         >

@@ -2,24 +2,34 @@ import { useEffect, useRef, useState } from 'preact/hooks';
 import styles from './CodeBlock.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 import { markSelfAsHydrated } from '../../utils/markSelfAsHydrated';
+import {
+  loadExternalContext,
+  type ExternalContext,
+} from '../../utils/loadExternalContext';
 
 const cl = classListFactory(styles);
 
 interface CollapseToggleProps {
-  targetId: string;
+  externalContext: ExternalContext<{ contentDiv: string }>;
 }
 
-export function CollapseToggle({ targetId }: CollapseToggleProps) {
+export function CollapseToggle({ externalContext }: CollapseToggleProps) {
   const [collapsed, setCollapsed] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
+  const targetRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => { markSelfAsHydrated(ref); }, []);
+  useEffect(() => {
+    const loaded = loadExternalContext(externalContext);
+    if (!loaded) return;
+    targetRef.current = loaded.contentDiv;
+    markSelfAsHydrated(ref);
+  }, []);
 
   // Collapse state lives in this island, but the hidden content lives in
   // the Astro shell — toggle the BEM class and its CSS-module hash on the
   // shell's content wrapper imperatively so component styles still apply.
   const applyCollapsed = (next: boolean) => {
-    const target = document.getElementById(targetId);
+    const target = targetRef.current;
     if (!target) return;
     target.classList.toggle('code-block__content--hidden', next);
     const hashed = styles['code-block__content--hidden'];

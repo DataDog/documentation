@@ -6,6 +6,7 @@ import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
 import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
 import styles from './ApiResponse.module.css';
 import { classListFactory } from '../../utils/classListFactory';
+import { generateElementId } from '../../utils/generateElementId';
 
 const cl = classListFactory(styles);
 
@@ -27,7 +28,7 @@ interface Props {
 
 const { responses } = Astro.props;
 
-const outerGroupId = `response-${crypto.randomUUID().slice(0, 8)}`;
+const outerGroupId = generateElementId('api-response');
 const outerLabels = responses.map((r) => r.statusCode);
 const outerPanelIds = responses.map((_, i) => `${outerGroupId}-panel-${i}`);
 const innerPanelIds = responses.map((_, i) => [
@@ -40,7 +41,7 @@ const innerPanelIds = responses.map((_, i) => [
   <div class={cl('api-response')}>
     <h3 class={cl('api-response__heading')}>Response</h3>
 
-    <Tabs variant="pills" labels={outerLabels} panelIds={outerPanelIds}>
+    <Tabs id={outerGroupId} variant="pills" labels={outerLabels} panelIds={outerPanelIds}>
       {responses.map((r, i) => {
         const hasSchema = (r.schema?.length ?? 0) > 0;
         const hasExamples = (r.examples?.length ?? 0) > 0;
@@ -53,7 +54,7 @@ const innerPanelIds = responses.map((_, i) => [
               )}
 
               {showInnerTabs && (
-                <Tabs variant="pills" labels={["Model", "Example"]} panelIds={innerPanelIds[i]}>
+                <Tabs id={`${outerGroupId}-inner-${i}`} variant="pills" labels={["Model", "Example"]} panelIds={innerPanelIds[i]}>
                   <TabPanel id={innerPanelIds[i][0]} isActive>
                     <ApiSchemaTable client:load fields={r.schema!} />
                   </TabPanel>

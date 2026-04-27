@@ -6,6 +6,7 @@ import { CopyButton } from './CopyButton';
 import { CollapseToggle } from './CollapseToggle';
 import styles from './CodeBlock.module.css';
 import { classListFactory } from '../../utils/classListFactory';
+import { generateElementId } from '../../utils/generateElementId';
 
 const cl = classListFactory(styles);
 
@@ -43,13 +44,15 @@ if (content) {
   }
 }
 
-const contentId = `cb-${crypto.randomUUID().slice(0, 8)}`;
+const codeBlockId = generateElementId('code-block');
+const contentId = `${codeBlockId}-content`;
 const containerClass = wrap
   ? cl('code-block', 'code-block--wrap')
   : cl('code-block');
 ---
 
 <div
+  id={codeBlockId}
   class={containerClass}
   data-language={language || undefined}
   data-collapsible={collapsible || undefined}
@@ -63,7 +66,15 @@ const containerClass = wrap
         </span>
       )}
       <div class={cl('code-block__header-actions')}>
-        {collapsible && <CollapseToggle client:idle targetId={contentId} />}
+        {collapsible && (
+          <CollapseToggle
+            client:idle
+            externalContext={{
+              scope: codeBlockId,
+              entries: { contentDiv: contentId },
+            }}
+          />
+        )}
       </div>
     </div>
   )}

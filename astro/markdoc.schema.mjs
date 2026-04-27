@@ -1,4 +1,16 @@
 export default {
+  nodes: {
+    fence: {
+      attributes: {
+        content: { type: String, render: true },
+        language: { type: String, render: true },
+        filename: { type: String, render: true },
+        wrap: { type: Boolean, default: false, render: true },
+        collapsible: { type: Boolean, default: false, render: true },
+        disable_copy: { type: Boolean, default: false, render: true },
+      },
+    },
+  },
   tags: {
     alert: {
       attributes: {

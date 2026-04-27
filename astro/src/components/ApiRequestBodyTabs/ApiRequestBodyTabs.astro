@@ -6,6 +6,7 @@ import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
 import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
 import styles from '../ApiEndpoint/ApiEndpoint.module.css';
 import { classListFactory } from '../../utils/classListFactory';
+import { generateElementId } from '../../utils/generateElementId';
 
 const cl = classListFactory(styles);
 
@@ -24,7 +25,7 @@ const { schema, examples } = Astro.props;
 const hasSchema = schema.length > 0;
 const hasExamples = examples.length > 0;
 
-const groupId = `reqbody-${crypto.randomUUID().slice(0, 8)}`;
+const groupId = generateElementId('request-body-tabs');
 const panelIds = [`${groupId}-panel-0`, `${groupId}-panel-1`];
 ---
 
@@ -41,7 +42,7 @@ const panelIds = [`${groupId}-panel-0`, `${groupId}-panel-1`];
 )}
 
 {hasSchema && hasExamples && (
-  <Tabs variant="pills" labels={["Model", "Example"]} panelIds={panelIds}>
+  <Tabs id={groupId} variant="pills" labels={["Model", "Example"]} panelIds={panelIds}>
     <TabPanel id={panelIds[0]} isActive>
       <ApiSchemaTable client:load fields={schema} />
     </TabPanel>

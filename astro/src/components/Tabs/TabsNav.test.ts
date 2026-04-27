@@ -12,11 +12,12 @@ afterEach(() => {
 
 // TabsNav renders the nav + buttons; panels live in the Astro shell. Tests
 // mirror production ordering: the .tabs root with panels exists before the
-// nav mounts, so `closest('.tabs')` and `querySelector` both resolve during
-// TabsNav's mount effect. Rendering happens into a dedicated child container
-// (not the .tabs root itself) so the panels aren't wiped.
+// nav mounts, so loadContext can resolve scope and panel IDs during the mount
+// effect. Rendering happens into a dedicated child container (not the .tabs
+// root itself) so the panels aren't wiped.
 const mountNav = (groupId: string, labels: string[]) => {
   const root = document.createElement("div");
+  root.id = groupId;
   root.className = "tabs";
   document.body.appendChild(root);
 
@@ -34,7 +35,16 @@ const mountNav = (groupId: string, labels: string[]) => {
 
   const navContainer = document.createElement("div");
   root.prepend(navContainer);
-  render(h(TabsNav, { labels, panelIds }), { container: navContainer });
+  render(
+    h(TabsNav, {
+      labels,
+      externalContext: {
+        scope: groupId,
+        entries: { tabsComponent: groupId, tabPanelComponents: panelIds },
+      },
+    }),
+    { container: navContainer },
+  );
 
   return { root, panelIds };
 };
@@ -53,7 +63,9 @@ describe("TabsNav", () => {
     const buttons = root.querySelectorAll<HTMLButtonElement>(
       '[data-tab-index][role="tab"]',
     );
-    const panels = panelIds.map((id) => root.querySelector<HTMLElement>(`#${id}`)!);
+    const panels = panelIds.map(
+      (id) => root.querySelector<HTMLElement>(`#${id}`)!,
+    );
 
     await user.click(buttons[1]);
 
@@ -74,7 +86,9 @@ describe("TabsNav", () => {
     const buttons = root.querySelectorAll<HTMLButtonElement>(
       '[data-tab-index][role="tab"]',
     );
-    const panels = panelIds.map((id) => root.querySelector<HTMLElement>(`#${id}`)!);
+    const panels = panelIds.map(
+      (id) => root.querySelector<HTMLElement>(`#${id}`)!,
+    );
 
     await user.click(buttons[1]);
     await user.click(buttons[0]);

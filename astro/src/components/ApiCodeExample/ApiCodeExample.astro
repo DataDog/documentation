@@ -4,6 +4,7 @@ import TabPanel from '../Tab/TabPanel.astro';
 import CodeBlock from '../CodeBlock/CodeBlock.astro';
 import styles from './ApiCodeExample.module.css';
 import { classListFactory } from '../../utils/classListFactory';
+import { generateElementId } from '../../utils/generateElementId';
 
 const cl = classListFactory(styles);
 
@@ -27,7 +28,7 @@ interface Props {
 
 const { examples } = Astro.props;
 
-const groupId = `code-example-${crypto.randomUUID().slice(0, 8)}`;
+const groupId = generateElementId('api-code-example');
 const labels = examples.map((ex) => ex.label);
 const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
 ---
@@ -36,7 +37,7 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
   <div class={cl('api-code-example')}>
     <h3 class={cl('api-code-example__heading')}>Code Example</h3>
 
-    <Tabs variant="pills" labels={labels} panelIds={panelIds}>
+    <Tabs id={groupId} variant="pills" labels={labels} panelIds={panelIds}>
       {examples.map((ex, tabIdx) => (
         <TabPanel id={panelIds[tabIdx]} isActive={tabIdx === 0}>
           {ex.entries.length === 1 ? (

@@ -10,20 +10,28 @@ afterEach(() => {
   document.body.innerHTML = '';
 });
 
-const setupShell = (targetId: string) => {
+const setupShell = (shellId: string, contentId: string) => {
   const shell = document.createElement('div');
+  shell.id = shellId;
   shell.className = 'code-block';
   const target = document.createElement('div');
-  target.id = targetId;
+  target.id = contentId;
   shell.appendChild(target);
   document.body.appendChild(shell);
   return { shell, target };
 };
 
+const mountToggle = (shellId: string, contentId: string) =>
+  render(
+    h(CollapseToggle, {
+      externalContext: { scope: shellId, entries: { contentDiv: contentId } },
+    }),
+  );
+
 describe('CollapseToggle', () => {
   it('renders expanded by default', () => {
-    setupShell('t1');
-    render(h(CollapseToggle, { targetId: 't1' }));
+    setupShell('s1', 't1');
+    mountToggle('s1', 't1');
     const toggle = document.querySelector('.code-block__toggle')!;
     expect(toggle.getAttribute('aria-expanded')).toBe('true');
     expect(toggle.getAttribute('aria-label')).toBe('Collapse code');
@@ -33,8 +41,8 @@ describe('CollapseToggle', () => {
 
   it('toggles target hidden class + aria + chevron on click', async () => {
     const user = userEvent.setup();
-    const { target } = setupShell('t2');
-    render(h(CollapseToggle, { targetId: 't2' }));
+    const { target } = setupShell('s2', 't2');
+    mountToggle('s2', 't2');
 
     const toggle = document.querySelector('.code-block__toggle')!;
     expect(target.classList.contains('code-block__content--hidden')).toBe(false);
@@ -51,8 +59,8 @@ describe('CollapseToggle', () => {
 
   it('second click re-expands', async () => {
     const user = userEvent.setup();
-    const { target } = setupShell('t3');
-    render(h(CollapseToggle, { targetId: 't3' }));
+    const { target } = setupShell('s3', 't3');
+    mountToggle('s3', 't3');
 
     await user.click(document.querySelector('.code-block__toggle')!);
     await user.click(document.querySelector('.code-block__toggle')!);
@@ -62,8 +70,8 @@ describe('CollapseToggle', () => {
   });
 
   it('sets data-hydrated on itself on mount', () => {
-    setupShell('t4');
-    render(h(CollapseToggle, { targetId: 't4' }));
+    setupShell('s4', 't4');
+    mountToggle('s4', 't4');
     expect(document.querySelector('.code-block__toggle')!.getAttribute('data-hydrated')).toBe('true');
   });
 });
