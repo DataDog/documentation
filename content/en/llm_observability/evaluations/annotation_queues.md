@@ -154,7 +154,7 @@ Export annotated traces for analysis or use in other workflows:
 
 The file downloads as `annotations_<queue-id>.csv`. You can also retrieve span data programmatically using the [Export API][5].
 
-#### CSV format
+{{% collapse-content title="CSV format" level="h4" expanded=false id="csv-format" %}}
 
 Each row represents one annotated interaction. The file begins with these fixed columns:
 
@@ -181,6 +181,8 @@ If a reviewer has not annotated a given row, those cells are empty.
 ```
 Content ID,Type,Input,Output,Alice_Johnson_quality,Alice_Johnson_quality_assessment,Alice_Johnson_quality_reasoning,Alice_Johnson_failure_type,Alice_Johnson_failure_type_assessment,Alice_Johnson_failure_type_reasoning,Bob_Smith_quality,...
 ```
+
+{{% /collapse-content %}}
 
 #### Retrieve spans by trace ID or session ID
 
