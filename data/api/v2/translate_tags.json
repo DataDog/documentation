@@ -343,6 +343,10 @@
     "name": "Rum Retention Filters",
     "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization."
   },
+  "rum-permanent-retention-filters": {
+    "name": "Rum Permanent Retention Filters",
+    "description": "Manage permanent retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization.\n\nPermanent retention filters are preconfigured filters that each RUM application ships with.\nThey cannot be created, deleted, or reordered. Their identity (`name`, `event_type`, `query`, `sample_rate`, `enabled`)\nand their cross-product enabled flags (`session_replay_enabled`, `trace_enabled`) are fixed.\nYou can only adjust the cross-product sample rates (`session_replay_sample_rate`, `trace_sample_rate`),\nand only for the rates whose editability flag is `true`."
+  },
   "scim": {
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."

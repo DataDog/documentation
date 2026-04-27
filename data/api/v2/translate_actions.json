@@ -3401,6 +3401,20 @@
     "request_description": "New definition of the RUM retention filter.",
     "request_schema_description": "The RUM retention filter body to update."
   },
+  "ListPermanentRetentionFilters": {
+    "description": "Get the list of permanent retention filters for a RUM application.",
+    "summary": "Get all permanent retention filters"
+  },
+  "GetPermanentRetentionFilter": {
+    "description": "Get a single permanent retention filter for a RUM application.",
+    "summary": "Get a permanent retention filter"
+  },
+  "UpdatePermanentRetentionFilter": {
+    "description": "Update the cross-product sample rates of a permanent retention filter for a RUM application.\nOnly `cross_product_sampling.session_replay_sample_rate` and `cross_product_sampling.trace_sample_rate` can be updated,\nand only when the matching flag in `cross_product_sampling_editability` is `true` on the filter.\nAny other field, including `name`, `event_type`, `query`, `sample_rate`, `enabled`, `session_replay_enabled`,\n`trace_enabled`, and `cross_product_sampling_editability`, is read-only and cannot be sent in the payload.\nReturns the updated permanent retention filter when the request is successful.",
+    "summary": "Update a permanent retention filter",
+    "request_description": "New cross-product sample rates for the permanent retention filter.",
+    "request_schema_description": "The permanent retention filter body to update."
+  },
   "DeleteRUMApplication": {
     "description": "Delete an existing RUM application in your organization.",
     "summary": "Delete a RUM application"
