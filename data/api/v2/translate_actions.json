@@ -894,7 +894,7 @@
     "summary": "List custom allocation rules"
   },
   "CreateCustomAllocationRule": {
-    "description": "Create a new custom allocation rule with the specified filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "description": "Create a new custom allocation rule with the specified filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"=\", \"!=\", \"like\", \"not like\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, contains, in, not in, =, !=, like, not like",
     "summary": "Create custom allocation rule",
     "request_description": "",
     "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
@@ -914,7 +914,7 @@
     "summary": "Get custom allocation rule"
   },
   "UpdateCustomAllocationRule": {
-    "description": "Update an existing custom allocation rule with new filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n- **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "description": "Update an existing custom allocation rule with new filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n- **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"=\", \"!=\", \"like\", \"not like\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, contains, in, not in, =, !=, like, not like",
     "summary": "Update custom allocation rule",
     "request_description": "",
     "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
@@ -4519,6 +4519,14 @@
     "request_description": "JSON Patch document with operations to apply.",
     "request_schema_description": "JSON Patch request for a Synthetic test suite."
   },
+  "ListSyntheticsBrowserTestLatestResults": {
+    "description": "Get the latest result summaries for a given Synthetic browser test.",
+    "summary": "Get a browser test's latest results"
+  },
+  "GetSyntheticsBrowserTestResult": {
+    "description": "Get a specific full result from a given Synthetic browser test.",
+    "summary": "Get a browser test result"
+  },
   "DeleteSyntheticsTests": {
     "summary": "Bulk delete tests",
     "request_description": "",
@@ -4539,6 +4547,10 @@
     "summary": "Edit a Network Path test",
     "request_description": "New Network Path test details to be saved.",
     "request_schema_description": "Network Path test request."
+  },
+  "PollSyntheticsTestResults": {
+    "description": "Poll for test results given a list of result IDs. This is typically used after\ntriggering tests with CI/CD to retrieve results once they are available.",
+    "summary": "Poll for test results"
   },
   "GetTestFileDownloadUrl": {
     "description": "Get a presigned URL to download a file attached to a Synthetic test.\nThe returned URL is temporary and expires after a short period.",
@@ -4567,6 +4579,14 @@
   "GetTestParentSuites": {
     "description": "Get the list of parent suites and their status for a given Synthetic test.",
     "summary": "Get parent suites for a test"
+  },
+  "ListSyntheticsTestLatestResults": {
+    "description": "Get the latest result summaries for a given Synthetic test.",
+    "summary": "Get a test's latest results"
+  },
+  "GetSyntheticsTestResult": {
+    "description": "Get a specific full result from a given Synthetic test.",
+    "summary": "Get a test result"
   },
   "ListSyntheticsTestVersions": {
     "description": "Get the paginated version history for a Synthetic test.",

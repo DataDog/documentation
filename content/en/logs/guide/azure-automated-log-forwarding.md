@@ -48,7 +48,6 @@ Use the **Configure Log Forwarding** flow to set up new or manage existing log f
 Alternatively, you can deploy automated log forwarding with an Azure Resource Manager (ARM) template. Open the ARM template corresponding to your Azure environment:
 
   - [Azure Public][1]
-  - [Azure Government][6]
   - [Azure China][7]
 
 The sections below provide instructions for completing each page of the template.
@@ -206,7 +205,6 @@ The script first discovers any instances running in each subscription, then prom
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /getting_started/site/
 [5]: https://learn.microsoft.com/en-us/azure/cloud-shell/overview
-[6]: https://portal.azure.us/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2FcreateUiDefinition.json
 [7]: https://portal.azure.cn/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2FcreateUiDefinition.json
 [8]: https://azure.microsoft.com/products/container-apps
 [9]: https://learn.microsoft.com/azure/storage/common/storage-account-overview

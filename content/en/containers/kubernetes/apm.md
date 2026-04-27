@@ -140,8 +140,8 @@ kind: Deployment
           name: apmsocketpath
 ```
 
-### Configure your application tracers to emit traces:
-After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer sends the traces to the appropriate `DD_TRACE_AGENT_URL` endpoint.
+### Configure your application SDKs to emit traces:
+After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog SDK into your applications to emit the traces. Once this is done, the SDK sends the traces to the appropriate `DD_TRACE_AGENT_URL` endpoint.
 
 {{% /tab %}}
 
@@ -165,8 +165,8 @@ kind: Deployment
 ```
 **Note:** This configuration requires the Agent to be configured to accept traces over TCP
 
-### Configure your application tracers to emit traces:
-After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the appropriate `DD_AGENT_HOST` endpoint.
+### Configure your application SDKs to emit traces:
+After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog SDK into your applications to emit the traces. Once this is done, the SDK automatically sends the traces to the appropriate `DD_AGENT_HOST` endpoint.
 
 [1]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}

@@ -37,6 +37,9 @@ This folder contains a collection of pages used for e2e tests. These pages are n
 * Page
 * Test objective
 ---
+* [Agent only](/dd_e2e/cdocs/components/agent_only)
+* Agent-only content is hidden from human users.
+---
 * [Alert box](/dd_e2e/cdocs/components/alert_box)
 * Variations of the alert box component render as expected on initial page load.
 ---
