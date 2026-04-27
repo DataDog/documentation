@@ -70,6 +70,35 @@ RUM reports the element that is associated with each Core Web Vital instance:
 - For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
 - For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
 
+### Diagnose Core Web Vitals with subparts
+
+Largest Contentful Paint and Interaction to Next Paint are broken down into subparts. Each subpart isolates a specific phase of the metric, helping you pinpoint where time is spent and where to focus optimization work.
+
+#### Largest Contentful Paint subparts
+
+LCP is decomposed into four phases. Time to First Byte is reported separately as `view.first_byte`. The other three are nested under `view.performance.lcp.sub_parts`:
+
+| Phase                  | Attribute                                              | What it represents                                                                                                                                                                |
+|------------------------|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Time to First Byte     | `view.first_byte`                                      | Time until the browser receives the first byte of the HTML response. Reflects server, CDN, and redirect time.                                                                     |
+| Resource load delay    | `view.performance.lcp.sub_parts.load_delay`            | Time between TTFB and the start of the LCP resource load. Reflects priority hints, preloads, and render-blocking resources. `0` when the LCP element does not require a resource. |
+| Resource load time     | `view.performance.lcp.sub_parts.load_time`             | Time to load the LCP resource. Reflects image format, compression, and network conditions. `0` when the LCP element does not require a resource.                                  |
+| Render delay           | `view.performance.lcp.sub_parts.render_delay`          | Time between the LCP resource finishing loading and the LCP element being painted. Reflects long tasks and blocking JavaScript or CSS.                                            |
+
+**Note**: Requires Browser SDK v6.32.0 or later.
+
+#### Interaction to Next Paint subparts
+
+INP is decomposed into three phases nested under `view.performance.inp.sub_parts`:
+
+| Phase                  | Attribute                                              | What it represents                                                                                                                                                                |
+|------------------------|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Input delay            | `view.performance.inp.sub_parts.input_delay`           | Time from the user input until the event handler starts running. Reflects main-thread contention and long tasks.                                                                  |
+| Processing duration    | `view.performance.inp.sub_parts.processing_duration`   | Duration of the event handler execution. Reflects handler complexity and synchronous work.                                                                                        |
+| Presentation delay     | `view.performance.inp.sub_parts.presentation_delay`    | Time the browser took to render the next frame. Reflects style, layout, paint, and composite cost.                                                                                |
+
+**Note**: Requires Browser SDK v6.33.0 or later.
+
 ## All performance telemetry
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                                      |
