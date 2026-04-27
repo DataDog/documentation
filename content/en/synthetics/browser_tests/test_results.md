@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Test runs appear in a test details page after a Synthetic test executes. [Sample results](#sample-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
+Test runs appear in a test details page after a Synthetic test executes. [Test runs](#test-runs) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
 
 ## Test properties
 
@@ -32,22 +32,35 @@ In the **Properties** section, you can see the test ID, test creation and edit d
 **CI/CD Execution**
 : This section contains a dropdown menu to change the [execution rule][12] for this test running as part of a [Continuous Testing CI pipeline][19].
 
-## Test history
+{{< img src="synthetics/browser_tests/synthetics_properties_tab.png" alt="The Properties tab on a browser Test Details page showing Ownership, Execution, and Monitor sections, with left navigation for Continuous Testing, Parent Tests, and other configuration" style="width=80%" >}}
 
-In the **History** section, you can see three graphs:
+## Test activity
 
-- The **Global Uptime** graph displays the total uptime of all test locations in a given time interval. The global uptime visualization displays red only if the [alert conditions][20] configured for a test are triggered in the given time interval. Since location uptime is computed based on the final test result after retries complete, [fast retry][24] intervals directly impact what appears in your total uptime graph.
-- The **Time-to-interactive by location and device** graph displays the amount of time until a page can be interacted with in seconds. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
-- The **Test duration by location and device** graph displays the amount of time in minutes each location and device takes to complete in a given time interval. 
+On the **Activity** tab, you can see:
 
-<!-- PLACEHOLDER IMAGE — replace history_2.png with a new screenshot of the Test History section on the redesigned Test Details Page before release. Tracked in DOCS-13939. -->
-{{< img src="synthetics/browser_tests/history_2.png" alt="The History and Sample Runs section in the Test Details page" style="width=80%" >}}
+- The **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime visualization displays red only if the [alert conditions][20] configured for a test are triggered in the given time interval. Since location uptime is computed based on the final test result after retries complete, [fast retry][24] intervals directly impact what appears in your total uptime graph. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
+- A **Timeline** of alert triggers, recoveries, and summary periods.
+- A detail panel for the selected alert showing what happened, the failing result, and suggested next steps for investigation.
 
-## Sample results
+{{< img src="synthetics/browser_tests/synthetics_test_details_sre.png" alt="The Activity tab on a browser Test Details page showing Global Uptime, an alert timeline, and a failure detail panel" style="width=80%" >}}
+
+## Test performance
+
+On the **Performance** tab, you can see aggregate performance metrics across all runs of your test:
+
+- **Browser success rate** cards for each browser type (Chrome, Firefox, Edge), displaying the percentage of passing runs in the selected time interval.
+- **Average Test duration by browser type** and **Average Test duration by location & device** graphs, which display the time each browser, location, and device takes to complete the test in a given time interval.
+- **p75 Largest Contentful Paint** and **p75 Cumulative Layout Shift** graphs, which display the 75th percentile of these [Core Web Vital metrics][6] aggregated across runs. For more information, see [Monitoring Page Performance][6].
+
+{{< img src="synthetics/browser_tests/synthetics_performance_tab.png" alt="The Performance tab on a browser Test Details page showing browser success rate, test duration graphs, and p75 LCP and CLS Core Web Vital metrics" style="width=80%" >}}
+
+## Test runs
+
+On the **Test Runs** tab, you can see all individual runs of your test. Filter by status (passed or failed), run type, location, or device, and click any row to inspect that run in detail.
+
+{{< img src="synthetics/browser_tests/synthetics_test_runs.png" alt="The Test Runs tab on a browser Test Details page showing a filterable table of test runs with status, date, run type, steps, duration, location, device, browser, and test version columns" style="width:100%" >}}
 
 Browser test runs include components such as [screenshots](#screenshots-and-actions), [page performance data](#page-performance), [errors](#errors-and-warnings), [resources](#resources), and [backend traces](#backend-traces) to help troubleshoot your [test failure](#failed-results).
-
-In the **Sample Runs** section, you can examine the latest failed test runs and compare them to recent successful test runs.
 
 ### Overview attributes
 
@@ -160,8 +173,6 @@ A test result is considered `FAILED` if it does not satisfy its assertions or if
 
 ### AI failure summaries
 
-<!-- DRAFT — feature not yet publicly available. Do not merge until release. Tracked in DOCS-13939. -->
-
 When a browser test run fails, Datadog generates an AI failure summary to help you identify the cause and next steps for investigation. Each summary includes:
 
 - A short explanation of what failed, grounded in run data such as network errors, assertions, and screenshots.
@@ -172,8 +183,7 @@ AI failure summaries appear on the test run details page for any failing browser
 
 To share feedback on the accuracy or usefulness of a summary, click the feedback button in the summary panel.
 
-<!-- PLACEHOLDER IMAGE — replace ai_failure_summary.png with a real screenshot of the summary panel on a failing browser test run before release. -->
-{{< img src="synthetics/browser_tests/test_results/ai_failure_summary.png" alt="AI failure summary panel on a failing browser test run" style="width:100%" >}}
+{{< img src="synthetics/browser_tests/test_results/synthetics_ai_summaries.png" alt="AI failure summary panel on a failing browser test run" style="width:100%" >}}
 
 ### Compare screenshots
 

@@ -337,6 +337,8 @@ To display your list of variables, type `{{` in your desired field:
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
+{{< img src="synthetics/api_tests/synthetics_api_test_new.png" alt="HTTP API test details page showing the Activity tab with global uptime, alert timeline, and a list of recent test runs in alert state" style="width:100%;">}}
+
 For a complete list of HTTP and SSL error codes, see [API Testing Errors][12].
 
 ## Permissions

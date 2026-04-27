@@ -15,10 +15,9 @@ further_reading:
 
 ## Overview
 
-Click on a mobile app test on the [**Synthetic Tests** page][11] to see the Test Details page. The Test Details page contains all the information relating to your test, including test properties, test history, sample runs, and test runs.
+Click on a mobile app test on the [**Synthetic Tests** page][11] to see the Test Details page. The Test Details page contains all the information relating to your test, including test properties, test activity, sample runs, and test runs.
 
-<!-- PLACEHOLDER IMAGE — replace test_details_3.png with a new screenshot of the redesigned Mobile App Test Details page before release. Tracked in DOCS-13939. -->
-{{< img src="mobile_app_testing/test_details_3.png" alt="The Mobile App Test Details page" style="width=80%" >}}
+{{< img src="mobile_app_testing/mobile_app_results_new.png" alt="The Mobile App Test Details page" style="width=80%" >}}
 
 Test runs appear in a test details page after a Synthetic mobile app test executes. [Sample results](#sample-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
 
@@ -35,12 +34,11 @@ In the **Properties** section, you can see the test ID, test creation and edit d
 **CI/CD Execution**
 : This section contains a dropdown menu to change the [execution rule][2] for this test running as part of a [CI pipeline][3].
 
-## Test history
+## Test activity
 
-In the **History** section, you can see the **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][4] configured for a test.
+On the **Activity** tab, you can see the **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][4] configured for a test.
 
-<!-- PLACEHOLDER IMAGE — replace history_2.png with a new screenshot of the History graph on the redesigned Test Details Page before release. Tracked in DOCS-13939. -->
-{{< img src="mobile_app_testing/history_2.png" alt="The History graph displays global uptime" style="width=80%" >}}
+{{< img src="mobile_app_testing/mobile_activity_global_uptime.png" alt="The Activity tab displays the Global Uptime graph" style="width=80%" >}}
 
 ## Sample results
 
@@ -81,8 +79,7 @@ Video replay
 
 Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration. 
 
-<!-- PLACEHOLDER IMAGE — replace screenshot-and-action_2.png with a new screenshot of the Sample Runs screenshots and actions on the redesigned Test Details Page before release. Tracked in DOCS-13939. -->
-{{< img src="mobile_app_testing/screenshot-and-action_2.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width:100%" >}}
+{{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width:100%" >}}
 
 Screenshots can be disabled by checking "Do not capture screenshot for this step" in the **Advanced Options** section.
 
@@ -103,8 +100,7 @@ Click the video icon ▶️ for a failed test run on the [Mobile Application tes
 Results of steps contain the XML representation of the screen being tested, as well as the ability to hover over the screenshot or the XML to highlight specific elements of the app. 
 Click an element to view additional attributes:
 
-<!-- PLACEHOLDER IMAGE — replace xml_inspector_2.png with a new screenshot of the XML inspector on the redesigned Test Details Page before release. Tracked in DOCS-13939. -->
-{{< img src="mobile_app_testing/xml_inspector_2.png" alt="Screenshot of a test result under the Sample Runs section, showing the XML inspector" style="width=80%" >}}
+{{< img src="mobile_app_testing/xml_inspector.png" alt="Screenshot of a test result under the Sample Runs section, showing the XML inspector" style="width=80%" >}}
 
 ## Crash reports
 
