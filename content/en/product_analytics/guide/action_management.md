@@ -15,13 +15,13 @@ further_reading:
 ## Overview
 Action Management is a no-code way to label autocaptured actions from your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page describes how to get started with Action Management.
 
-## Setup 
+## Setup
 
-### Step 1 - Install the browser extension 
+### Step 1 - Install the browser extension
 
-Action Management requires [The Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2]. 
+Action Management requires [The Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2].
 
-### Step 2 - Label your actions 
+### Step 2 - Label your actions
 
 1. Go to the [Actions][3] page in the Datadog UI, and click on **Label New Action**. This takes you to the point-and-click interface where you can select your actions.
 
@@ -48,7 +48,7 @@ Action Management requires [The Datadog test recorder Chrome extension][1]. If y
 {{< img src="product_analytics/action_management/pana-name-action.png" alt="Give a name and description to your action." style="width:90%;">}}
 
 
-### Step 3 - Retrieve your actions 
+### Step 3 - Retrieve your actions
 
 After you define an action, you can find it in the [list of labeled actions][4]. From this list, you can:
 - Filter to only see your actions
@@ -59,9 +59,9 @@ After you define an action, you can find it in the [list of labeled actions][4].
 
 
 
-## Known limitations 
+## Known limitations
 - Action Management only works for web pages at this time.
-- You cannot label Actions that are hidden behind a hover. If this limitation impacts your use cases, share examples of these with your Customer Success Manager to inform future improvements. 
+- You cannot label Actions that are hidden behind a hover. If this limitation impacts your use cases, share examples of these with your Customer Success Manager to inform future improvements.
 - Labeled actions can only be used in Funnels and Retention graphs at this time.
 - Deleting a labeled action also deletes it from the dashboards where it is being used.
 
