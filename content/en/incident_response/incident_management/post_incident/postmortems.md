@@ -89,14 +89,7 @@ The incident card variable (`{{incident.card}}`) embeds a summary card that refl
 {{% collapse-content title="AI variables" level="h4" %}}
 AI variables use Bits AI to generate suggested content based on incident data. When you generate a postmortem that includes an AI variable, Datadog provides a suggested value that you can accept, edit, or reject before it is saved.
 
-| Variable | Description |
-|---|---|
-| `{{incident.ai_summary}}` | Executive summary |
-| `{{incident.ai_system_overview}}` | System context and dependencies |
-| `{{incident.ai_key_timeline}}` | Key event timeline |
-| `{{incident.ai_customer_impact}}` | Summary of customer impact |
-| `{{incident.ai_action_items}}` | Follow-up actions |
-| `{{incident.ai_lessons_learned}}` | Key takeaways for future prevention |
+{{% incident-ai-postmortem-variables %}}
 
 To use these variables:
 1. Create or edit a postmortem template in [**Incident Management Settings > Post-Mortem Templates**][4].
