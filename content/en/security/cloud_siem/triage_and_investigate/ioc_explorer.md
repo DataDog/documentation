@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Indicators of Compromise (IOCs) are reputation data associated with entities such as IP addresses, file hashes, and domains that help responders make informed decisions about attacks and potential compromises. The [IOC Explorer][1] is a searchable, filterable investigation surface where you can investigate, sort, and prioritize compromises. You can also view related matches in Signals Explorer and Logs Explorer, so you can investigate potential compromises in more detail.
+Indicators of Compromise (IOCs) are reputation data associated with entities such as IP addresses, file hashes, and domains that help responders make informed decisions about attacks and potential compromises. The [IOC Explorer][1] is a searchable, filterable investigation surface where you can analyze, sort, and prioritize compromises. You can also view related matches in Signals Explorer and Logs Explorer, so you can investigate potential compromises in more detail.
 
 {{< img src="security/security_monitoring/ioc_explorer_2.png" alt="The IOC Explorer, showing an IP address that has been flagged as an indicator of compromise" style="width:100%;" >}}
 
@@ -40,7 +40,7 @@ You can write custom queries or apply filters to determine which indicators of c
 - Indicator
 - [Indicator type][3]
 - [Threat intelligence category][4]
-- AS type
+- Autonomous system (AS) type
 - [Matched OCSF fields](#understand-ocsf-matching)
 
 Additionally, you can click a column heading in the Explorer to sort by that column's values.
@@ -48,10 +48,12 @@ Additionally, you can click a column heading in the Explorer to sort by that col
 ### Understand OCSF matching
 
 You can turn the **OCSF Matching** toggle on or off to have more control over how Datadog identifies IOC matches.
-- Turn the toggle **on** if you want **higher-confidence matches** tied to normalized security attributes:
-  - When the toggle is on, IOC matches only appear in the Explorer if values appear in mapped OCSF fields, such as the source IP, destination IP, or client IP. This helps ensure the match reflects the structured meaning of the data, rather than just the presence of the IOC somewhere in the raw log.
-- Turn the toggle **off** if you want **broader threat hunting** across the full event payload:
-  - When the toggle is off, IOC matches appear in the Explorer if IOCs appear anywhere in the event, including unstructured text like a message body, or other freeform fields.
+- Turn the toggle **on** if you want **higher-confidence matches** tied to normalized security attributes.
+  
+  When the toggle is on, IOC matches only appear in the Explorer if values appear in mapped OCSF fields, such as the source IP, destination IP, or client IP. This helps ensure the match reflects the structured meaning of the data, rather than just the presence of the IOC somewhere in the raw log.
+- Turn the toggle **off** if you want **broader threat hunting** across the full event payload.
+  
+  When the toggle is off, IOC matches appear in the Explorer if IOCs appear anywhere in the event, including unstructured text like a message body, or other freeform fields.
 
 #### Example
 
@@ -68,8 +70,8 @@ In the IOC Explorer, click an indicator of compromise to view additional informa
 - The environment associated with the indicator, including related sources and services
 - Related items the indicator can have an impact on
 - Links to related investigation surfaces:
-  - Signal matches, which you can view in Signals Explorer
-  - Related logs, which you can view in Log Explorer
+  - Signal matches, which you can view in [Signals Explorer][6]
+  - Related logs, which you can view in [Log Explorer][7]
 
 ## Understand severity scoring
 
@@ -91,3 +93,5 @@ In the IOC Explorer side panel, you can see the factors that contribute to the s
 [3]: /security/threat_intelligence/#entity-types
 [4]: /security/threat_intelligence/#threat-intelligence-categories
 [5]: /security/threat_intelligence/#ip-addresses-dynamic-and-transient
+[6]: /security/cloud_siem/triage_and_investigate/investigate_security_signals/#signals-explorer
+[7]: /logs/explorer/
