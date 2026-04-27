@@ -5,7 +5,7 @@
     {{- if eq $page.Language.Lang "en" -}}
         {{- with $page.File -}}
             {{- $filepath := print "content/en/" .Path -}}
-            {{- $urlmap = merge $urlmap (dict $filepath $page.RelPermalink) -}}
+            {{- $urlmap = merge $urlmap (dict $page.RelPermalink $filepath) -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}
