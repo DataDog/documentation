@@ -23,13 +23,6 @@ further_reading:
 - link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
-- link: "https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes"
-  tag: "Learning Center"
-  text: "Introduction to Monitoring Kubernetes"
-- link: "https://learn.datadoghq.com/courses/monitoring-workloads-on-k8s"
-  tag: "Learning Center"
-  text: "Monitoring Workloads on Kubernetes"
-
 ---
 
 This page lists data collected by the Datadog Agent when deployed on a Kubernetes cluster. The set of metrics collected may vary depending on the version of Kubernetes in use.

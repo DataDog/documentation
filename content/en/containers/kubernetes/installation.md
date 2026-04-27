@@ -15,13 +15,6 @@ further_reading:
     - link: 'https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading'
       tag: "Source Code"
       text: 'Upgrading Datadog Helm'
-    - link: "https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes"
-      tag: "Learning Center"
-      text: "Introduction to Monitoring Kubernetes"
-    - link: "https://learn.datadoghq.com/courses/monitoring-k8s-cluster-agent"
-      tag: "Learning Center"
-      text: "Monitoring a Kubernetes Cluster: Installing the Agent"
-
 ---
 
 ## Overview

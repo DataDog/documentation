@@ -11,10 +11,6 @@ further_reading:
     - link: 'tracing/app_analytics'
       tag: "Documentation"
       text: 'Use version as a dimension in your App Analytics queries'
-    - link: "https://learn.datadoghq.com/courses/canary-deployment-tracking-lab"
-      tag: "Learning Center"
-      text: "Tracking Canary Deployments with Datadog"
-
 ---
 ## The version tag
 

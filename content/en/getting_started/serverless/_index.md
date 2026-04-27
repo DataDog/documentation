@@ -8,10 +8,6 @@ further_reading:
     - link: "https://dtdg.co/fe"
       tag: "Foundation Enablement"
       text: "Join an interactive session to learn more about serverless monitoring"
-    - link: "https://learn.datadoghq.com/courses/get-started-serverless-aws"
-      tag: "Learning Center"
-      text: "Getting Started with Serverless Monitoring on AWS"
-
 ---
 
 ## Overview

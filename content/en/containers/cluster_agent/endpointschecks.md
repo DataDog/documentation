@@ -14,10 +14,6 @@ further_reading:
     - link: '/containers/troubleshooting/cluster-and-endpoint-checks'
       tag: 'Documentation'
       text: 'Troubleshooting Endpoint Checks'
-    - link: "https://learn.datadoghq.com/courses/cluster-checks-lab"
-      tag: "Learning Center"
-      text: "Introduction to Cluster Checks and Endpoint Checks"
-
 ---
 
 ## Overview

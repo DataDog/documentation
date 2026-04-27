@@ -7,13 +7,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
   tag: "Blog"
   text: "Practical tips for rightsizing your Kubernetes workloads"
-- link: "https://learn.datadoghq.com/courses/monitoring-a-kubernetes-cluster-troubleshooting-workloads"
-  tag: "Learning Center"
-  text: "Monitoring a Kubernetes Cluster: Troubleshooting Workloads"
-- link: "https://learn.datadoghq.com/courses/monitoring-workloads-on-k8s"
-  tag: "Learning Center"
-  text: "Monitoring Workloads on Kubernetes"
-
 ---
 
 {{< img src="infrastructure/livecontainers/kubernetes_resource_utilization.png" alt="Kubernetes resource utilization view" >}}

@@ -10,10 +10,6 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/getting-started-k8s"
   tag: "Learning Center"
   text: "Getting Started with Kubernetes Observability"
-- link: "https://learn.datadoghq.com/courses/monitoring-a-kubernetes-cluster-troubleshooting-workloads"
-  tag: "Learning Center"
-  text: "Monitoring a Kubernetes Cluster: Troubleshooting Workloads"
-
 ---
 
 {{< img src="infrastructure/livecontainers/orch_ex.png" alt="Kubernetes Explorer, showing Kubernetes Pods." style="width:80%;">}}

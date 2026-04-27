@@ -6,9 +6,9 @@ aliases:
     - /tracing/trace_retention_and_ingestion/
 description: "Learn how to control span ingestion"
 further_reading:
-- link: "https://learn.datadoghq.com/courses/apm-custom-tagging"
+- link: "https://learn.datadoghq.com/courses/apm-rate-limit-retention"
   tag: "Learning Center"
-  text: "Create Custom Spans and Span Tags with APM"
+  text: "APM Rate Limiting and Retention"
 
 ---
 

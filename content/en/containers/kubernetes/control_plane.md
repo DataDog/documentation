@@ -22,10 +22,6 @@ further_reading:
     - link: '/agent/kubernetes/tag'
       tag: 'Documentation'
       text: 'Assign tags to all data emitted by a container'
-    - link: "https://learn.datadoghq.com/courses/k8s-cluster-control-plane"
-      tag: "Learning Center"
-      text: "Monitoring a Kubernetes Cluster: The Control Plane"
-
 ---
 
 ## Overview
