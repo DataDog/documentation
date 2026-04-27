@@ -5,8 +5,7 @@ further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'
       text: 'Introduction to Incident Management'
-further_reading:
-- link: 'https://www.youtube.com/watch?v=QIambwILy_M'
+    - link: 'https://www.youtube.com/watch?v=QIambwILy_M'
       tag: 'Video'
       text: 'Datadog on Incident Management'
     - link: '/monitors/incident_management'
