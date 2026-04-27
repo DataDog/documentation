@@ -47,7 +47,7 @@ The weighted average cohort summarizes overall cohort behavior by accounting for
 
 This weighted average calculation is applied across all [visualization types](#visualization-types). For example, in the retention grid, the weighted average is used to populate the summary cell for each time interval.
 
-### How to calculate a weighted average cohort
+### Calculate a weighted average cohort
 To compute the value for a specific interval (such as Week 1 in the retention grid), multiply each cohort's value by its size, sum the results, and divide by the total cohort size. The formula is:
 
 ```
@@ -78,11 +78,11 @@ Use the `group by` function to break down retention based on events' attributes.
 
 To build a retention graph, navigate to **[Product Analytics > Charts][1]**, click the **Retention** tab, then follow the steps below.
 
-### 1. Define the starting and return events
+### Step 1 - Define the starting and return events
 1. Select the view or action to act as the starting event for defining a group of users.<br>
 2. Select the view or action to act as the return event.
 
-### 2. Define the measures
+### Step 2 - Define the measures
 1. Select `Retention rate` to see the data in percentages, or `Unique users` to see the absolute number of users.
 2. Scope the retention measure `Return on or after` or `Return on` based on when the return event occurs.
 3. Choose the time frame for which you want to analyze user retention. Select a period size (day, week, or month) to define how return events are grouped in the analysis. Consider the following when selecting a period size:
@@ -93,11 +93,11 @@ To build a retention graph, navigate to **[Product Analytics > Charts][1]**, cli
 {{< img src="product_analytics/retention/pana_retention_timeframes_ui.png" alt="Example Retention Analysis graph" style="width:100%;" >}}
 
 
-### 3. Define users and add filters
+### Step 3 - Define users and add filters
 Optionally, select a specific [segment][6] to measure the retention of its users. This defaults to all users. You can also add any desired filter criteria, such as `user country`, `device type`, or `operating system`.
 
 
-### 4. Group by
+### Step 4 - Group by
 Optionally, `group by` event attributes to compare retention by device type, for example.
 
 ## Analyze the graph
