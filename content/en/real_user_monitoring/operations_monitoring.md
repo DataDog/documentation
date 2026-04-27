@@ -39,7 +39,7 @@ The following table shows additional example features and their associated featu
   - [Android (3.1.0)][2]
   - [iOS (3.1.0)][3]
   - [Flutter (3.0.0)][7]
-      - On Flutter Web, operations route through the Browser SDK and require the `feature_operation_vital` experimental feature enabled.
+      - **Note**: On Flutter Web, operations route through the Browser SDK, which requires the `feature_operation_vital` experimental feature to be enabled.
   - [Kotlin Multiplatform (1.4.0)][4]
   - [React Native (3.0.0)][5]
   - [Roku (1.4.0)][6]
