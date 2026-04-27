@@ -72,7 +72,13 @@ Datadog ingests the most granular raw values from Google Cloud. All aggregation 
    Change the alignment function to `delta`, `min`, `max`, `sum`, or `mean`. Assuming you are using the most granular dimensions, the value in Google Cloud should match the value in Datadog.
 
    {{< img src="integrations/guide/gcp-metric-discrepancy/gcp_delta.png" alt="gcp delta" >}}
-   
+
+## Latency
+
+Google Cloud emits metrics with one-minute granularity, and Datadog pulls them through the Google Cloud Monitoring API. Expect a steady-state delay of approximately 7-8 minutes between when Google Cloud records a metric and when it appears in Datadog. See [Cloud Metric Delay][7] for the full breakdown across cloud providers.
+
+When troubleshooting a metric that appears delayed but not missing, wait at least 10-15 minutes before assuming it is missing. For initial integration setup, the first metrics appear in Datadog approximately 15 minutes after the integration is configured.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -83,3 +89,4 @@ Datadog ingests the most granular raw values from Google Cloud. All aggregation 
 [4]: https://cloud.google.com/monitoring/api/resources#tag_redis_instance
 [5]: https://cloud.google.com/monitoring/api/resources#tag_redis.googleapis.com/ClusterNode
 [6]: https://cloud.google.com/monitoring/api/v3/aggregation#alignment-intro
+[7]: /integrations/guide/cloud-metric-delay/
