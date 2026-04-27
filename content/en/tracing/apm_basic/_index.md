@@ -37,7 +37,7 @@ cascade:
 
 ## Overview
 
-APM Basic provides baseline service visibility for services that are not instrumented. APM Basic automatically discovers services and collects request, error, and duration (RED) metrics from network traffic, without requiring code changes or instrumentation. APM Basic relies solely on a configured Datadog Agent and [Unified Service Tagging][6].
+APM Basic provides baseline service visibility for services that are not instrumented. APM Basic automatically discovers services and collects request, error, and duration (RED) metrics from network traffic, without requiring code changes or instrumentation. It works regardless of programming language or framework, and relies solely on a configured Datadog Agent and [Unified Service Tagging][6].
 
 For full APM with distributed tracing and request-level debugging, use [Single Step Instrumentation][1]. APM Basic does not replace instrumentation. Use it for services where instrumentation is not available or not needed.
 
@@ -75,12 +75,6 @@ An operation name of `universal.http.server` or `universal.http.client` on a ser
 | HTTPS/TLS (Windows, IIS only) | Generally available |
 | HTTPS/TLS (Windows, non-IIS) | Not supported |
 | Additional protocols | [Preview][4] |
-
-## How APM Basic works (eBPF)
-
-The Datadog Agent uses eBPF to observe network traffic at the kernel level, so APM Basic works regardless of the programming language or framework your services use.
-
-**Note**: On Windows, APM Basic uses Event Tracing for Windows (ETW) instead of eBPF. ETW is only available for IIS-based services. Non-IIS services on Windows support HTTP monitoring only, not HTTPS.
 
 ## APM Basic and full APM
 

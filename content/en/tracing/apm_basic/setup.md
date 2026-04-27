@@ -42,7 +42,7 @@ Additional protocols and traffic encryption methods are in <a href="#additional-
 
 ## How APM Basic detects service names
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 APM Basic detects service names from environment variables that exist when a process starts. APM Basic reads these values from the operating system: from <code>/proc/PID/environ</code> on Linux, or through system APIs on Windows.
 </div>
 
