@@ -23,6 +23,18 @@ The scope of this new Astro site is just the API docs. In Hugo, the HTML for the
 - **Preact** — UI components (TSX)
 - **TypeScript** — Strict mode
 
+## BEM classes
+
+Always use BEM classes to 
+
+- label the component in the HTML
+- style the component in the CSS module file
+- access the component in tests, where possible
+
+The `cl` function returned by `classListFactory` provides both static and hashed BEM classes, so a static BEM class will be available as long as it's declared on the component with `cl`: `cl(['some-class'])` will inject both the hashed and static version of `some-class`.
+
+If you think you can't or should not use a BEM class, ask.
+
 ## SEO
 
 Render as much content at build time as possible. Light rehydration on the client is fine, but all of the content should be rendered at build time as well, even if it's not visible yet. For example, the content of all tabs should be rendered, not just the active tab.
@@ -67,22 +79,24 @@ In designing the global styles, assume the component will only have access to th
 
 Use the design tokens instead of hard-coding values for spacing etc.
 
-Use CSS modules for component CSS unless specifically directed to use BEM. When directed to use BEM, use the same file structure you would use for CSS modules (one CSS file per component, colocated).
+Use CSS modules for component CSS where possible. CSS module class names must use the full BEM name including the block prefix (e.g. `.api-method-badge--get`, not `.badge--get`). This is required for the `classListFactory` / `cl()` helper (in `src/utils/classListFactory.ts`) to work: it derives the module class from the BEM name automatically, which only works when they match exactly.
 
-CSS module class names must use the full BEM name including the block prefix (e.g. `.api-method-badge--get`, not `.badge--get`). This is required for the `classListFactory` / `cl()` helper (in `src/utils/classListFactory.ts`) to work: it derives the module class from the BEM name automatically, which only works when they match exactly.
-
-Give every HTML element in a component a BEM class (e.g. `tabs__button--active`) for stable DOM identification. Tests and Playwright selectors must use these BEM classes, not CSS-module hashes.
+Give every HTML element in a component a BEM class (e.g. `tabs__button--active`) for stable DOM identification. Tests and Playwright selectors should use these stable BEM classes for identification where possible.
 
 ## Astro/Preact island pattern
 
-Wrapper components like `CodeBlock` and `Tabs` render their content in the Astro parent, not inside the Preact island. The Preact island is kept small and interacts with already-rendered DOM elements via IDs or refs — it does not receive rendered content as a prop.
+NOTE: This island pattern **only** applies to elements that would otherwise need to be passed large chunks of rendered HTML in their props. It **does not** apply to all large serialized props. Large data props are fine.
 
-**Why**: If rendered HTML were passed as a prop to a Preact component, the browser would receive that HTML twice: once serialized into the component's prop attributes and once in the static DOM. This doubles page weight for content-heavy components. It also forces Preact to re-render content that Astro already produced at build time.
+Avoid design patterns that require large chunks of rendered HTML to be serialized as props.
+
+If rendered HTML were passed as a prop to a Preact component, the browser would receive that HTML twice: once serialized into the component's prop attributes and once in the static DOM. This doubles page weight for content-heavy components. It also forces Preact to re-render content that Astro already produced at build time.
+
+Instead, wrapper components like `CodeBlock` and `Tabs` render their content in the Astro parent, not inside the Preact island. The Preact island is kept small and interacts with already-rendered DOM elements via IDs — it does not receive rendered content as a prop.
 
 **In practice**:
-- Pass only minimal coordination data as props: IDs, labels, flags (e.g. `targetId`, `panelIds`, `labels`).
 - Render the actual content in the `.astro` file using `<slot />` or `set:html`.
-- The Preact island reads and manipulates the already-rendered DOM nodes (show/hide, copy text, toggle classes).
+- Pass DOM references to the Preact island using the `externalContext` prop (typed as `ExternalContext<E>` from `src/utils/loadExternalContext.ts`). This prop carries a `scope` ID (the root element) and an `entries` map of named element IDs. Call `loadExternalContext(externalContext)` inside the island to resolve them to `HTMLElement` references at runtime.
+- The Preact island reads and manipulates the already-rendered DOM nodes (show/hide, copy text, toggle classes) using those references.
 
 ## Component design and testing
 
