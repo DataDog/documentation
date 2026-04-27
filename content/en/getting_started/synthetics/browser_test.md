@@ -139,11 +139,9 @@ The example website regularly throws an error causing it to intentionally fail. 
 
 The **Browser Test** details page displays an overview of your test configuration, the global and per location uptime, graphs about time-to-interactive and test duration, sample successful and failed test results, and the list of all test results. Depending on the length of your test, you might have to wait for a few minutes to see the first test results come in.
 
-To troubleshoot a [failed test][10], select a failed test result and review the screenshots leading up to the failed step. You can also review potential **[Errors & Warnings][11]**, **[Resources][12]**, and **[Core Web Vitals][13]** to diagnose the issue. 
+To troubleshoot a [failed test][10], review the failures on the **Activity** tab or the **Test Runs** tab. Select an alert from the timeline to see a **What happened?** summary describing the failing step and error message. From the **Next Steps** panel, you can investigate with Bits AI SRE, view the recovery, pause scheduling, or declare an incident. You can also review potential **[Errors & Warnings][11]**, **[Resources][12]**, and **[Core Web Vitals][13]** to diagnose the issue.
 
-In the example below, the test failed as the result of a server timeout.
-
-{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Browser test failure" video="true" >}}
+{{< img src="synthetics/browser_tests/synthetics_test_details_sre.png" alt="Browser test details page showing the Activity tab with an alert timeline, failure summary, and Next Steps panel" style="width:100%;">}}
 
 Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces generated from your backend by the test runs from the **Traces** tab.
 
@@ -164,5 +162,5 @@ Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces gen
 [10]: /synthetics/browser_tests/test_results#test-failure
 [11]: /synthetics/browser_tests/test_results#errors
 [12]: /synthetics/browser_tests/test_results#resources
-[13]: /synthetics/browser_tests/test_results#page-performance
+[13]: /synthetics/browser_tests/test_results#test-performance
 [14]: /synthetics/apm/

@@ -17,22 +17,7 @@ further_reading:
 
 ## Overview
 
-Test runs appear in a test details page after a Synthetic test executes. [Test runs](#test-runs) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
-
-## Test properties
-
-In the **Properties** section, you can see the test ID, test creation and edit date, a list of tags, test priority, and a link to an out-of-the-box Synthetic [browser test dashboard][11].
-
-**Overview** 
-: This section describes the test URL, number of locations, number of devices, test interval, and the number of test steps, including custom steps.
-
-**Monitor**
-: This section contains the name of the [Synthetic test's monitor][13] and the configured notification message.
-
-**CI/CD Execution**
-: This section contains a dropdown menu to change the [execution rule][12] for this test running as part of a [Continuous Testing CI pipeline][19].
-
-{{< img src="synthetics/browser_tests/synthetics_properties_tab.png" alt="The Properties tab on a browser Test Details page showing Ownership, Execution, and Monitor sections, with left navigation for Continuous Testing, Parent Tests, and other configuration" style="width=80%" >}}
+The test details page opens after a Synthetic browser test executes and is organized into four tabs: [Activity](#test-activity), [Test Runs](#test-runs), [Performance](#test-performance), and [Properties](#test-properties). Use these tabs to monitor uptime, inspect individual runs, review aggregate performance metrics, and manage test configuration. When a run fails, see [Failed results](#failed-results) for troubleshooting tools such as AI failure summaries and screenshot comparison.
 
 ## Test activity
 
@@ -44,52 +29,44 @@ On the **Activity** tab, you can see:
 
 {{< img src="synthetics/browser_tests/synthetics_test_details_sre.png" alt="The Activity tab on a browser Test Details page showing Global Uptime, an alert timeline, and a failure detail panel" style="width=80%" >}}
 
-## Test performance
-
-On the **Performance** tab, you can see aggregate performance metrics across all runs of your test:
-
-- **Browser success rate** cards for each browser type (Chrome, Firefox, Edge), displaying the percentage of passing runs in the selected time interval.
-- **Average Test duration by browser type** and **Average Test duration by location & device** graphs, which display the time each browser, location, and device takes to complete the test in a given time interval.
-- **p75 Largest Contentful Paint** and **p75 Cumulative Layout Shift** graphs, which display the 75th percentile of these [Core Web Vital metrics][6] aggregated across runs. For more information, see [Monitoring Page Performance][6].
-
-{{< img src="synthetics/browser_tests/synthetics_performance_tab.png" alt="The Performance tab on a browser Test Details page showing browser success rate, test duration graphs, and p75 LCP and CLS Core Web Vital metrics" style="width=80%" >}}
-
 ## Test runs
 
 On the **Test Runs** tab, you can see all individual runs of your test. Filter by status (passed or failed), run type, location, or device, and click any row to inspect that run in detail.
 
 {{< img src="synthetics/browser_tests/synthetics_test_runs.png" alt="The Test Runs tab on a browser Test Details page showing a filterable table of test runs with status, date, run type, steps, duration, location, device, browser, and test version columns" style="width:100%" >}}
 
-Browser test runs include components such as [screenshots](#screenshots-and-actions), [page performance data](#page-performance), [errors](#errors-and-warnings), [resources](#resources), and [backend traces](#backend-traces) to help troubleshoot your [test failure](#failed-results).
+Browser test runs include components such as [screenshots](#screenshots-and-actions), [page performance data](#test-performance), [errors](#errors-and-warnings), [resources](#resources), and [backend traces](#backend-traces) to help troubleshoot your [test failure](#failed-results).
 
-### Overview attributes
+### Test run columns
+
+The following describes each column in the **Test Runs** table:
 
 Status
-: The status of your test run (`PASSED` or `FAILED`).
+: The status of the test run (`PASSED` or `FAILED`).
 
-Starting URL
-: The URL of your browser test scenario.
+Date
+: The relative time and timestamp when the run executed.
+
+Run Type
+: The type of test run (scheduled, CI, fast retry, or manually triggered).
 
 Steps
-: The number of test steps completed in your sample run.
+: The number of test steps completed out of the total configured for the run.
 
 Duration
-: The amount of time it took your test to run.
+: The amount of time the test run took to complete.
 
 Location
-: The managed or private location your test was executed from.
+: The managed or private location the test was executed from.
 
 Device
-: The type of device your test was executed from.
+: The type of device the test was executed from.
 
 Browser
-: The type of browser your test was executed from.
+: The type of browser the test was executed from.
 
-Time ran
-: The amount of time that has passed since your test ran.
-
-Run type
-: The type of test run (CI, fast retry, manually triggered, or scheduled).
+Test Version
+: The version of the test configuration used for the run.
 
 ### RUM sessions
 
@@ -99,19 +76,11 @@ To view related sessions and available replays in the [RUM Explorer][22], click 
 
 Every executed test step contains a screenshot of the step action, a link to the session in Session Replay, the step description, starting URL for a given step, step ID, step duration, and page performance information.
 
-### Page performance
-
-Synthetic Monitoring includes two [Core Web Vital metrics][6] ([Largest Contentful Paint][2] and [Cumulative Layout Shift][3]) as lab metrics and displays them as pills to the right of each step URL. 
-
-{{< img src="synthetics/browser_tests/test_results/page_performance_lab_metrics.png" alt="Synthetic lab metrics" style="width:100%" >}}
-
-[First Input Delay][4] is available as a real metric if you are using [Real User Monitoring][5] to collect real user data. For more information, see [Monitoring Page Performance][6].
-
 ### Errors and warnings
 
 Click the **Errors** pill to access the **Errors & Warnings** tab and examine a list of errors separated by error type (`js` or `network`) and status (the network status code).
 
-{{< img src="synthetics/browser_tests/test_results/errors_pill.png" alt="Errors pill" style="width:100%" >}}
+{{< img src="synthetics/browser_tests/test_results/synthetics_errors.png" alt="Browser test run details with the Errors pill highlighted on each step, indicating where to click to open the Errors & Warnings tab" style="width:100%" >}}
 
 The error type is logged when the browser test interacts with the page. It corresponds to the errors collected between the time the page is opened and the time the page can be interacted with. The maximum number of errors that can be displayed is 8, for example: 2 `network` + 6 `js` errors.
 
@@ -119,11 +88,13 @@ The error type is logged when the browser test interacts with the page. It corre
 
 Click the **Resources** pill to access the **Resources** tab and examine the combination of requests and assets, including the total step duration time under **Fully Loaded** and the CDN provider serving the resources. 
 
-{{< img src="synthetics/browser_tests/test_results/resources_pill.png" alt="Resources pill" style="width:100%" >}}
+{{< img src="synthetics/browser_tests/test_results/synthetics_resources.png" alt="Browser test run details with the Resources pill highlighted on each step, indicating where to click to open the Resources tab" style="width:100%" >}}
 
 You can filter resources by type and search by name in the search bar. The maximum number of resources that can be displayed is 100. Resources are ordered by the time when they start and display the first 100 in Datadog.
 
-{{< img src="synthetics/browser_tests/test_results/resources_panel_2.png" alt="Resources Panel, with test types HTML, Image, and JavaScript checked." style="width:100%" >}}
+{{< img src="synthetics/browser_tests/test_results/browser_resources_list.png" alt="Resources tab showing a filterable list of resources with CDN providers, type filters, and columns for relative time, CDN, resource URL, type, method, protocol, status, duration, and size" style="width:100%" >}}
+
+The following describes the column headers on the **Resources** tab:
 
 Relative Time 
 : The point in time when the resource began to load during the test step.
@@ -166,6 +137,50 @@ Step duration represents the time a step takes to be considered fully loaded usi
 If your test reaches the maximum execution time, the timeout message indicates that the total duration includes both test steps and system overhead. As a result, the reported test duration may differ from the sum of individual step durations.
 
 {{< img src="synthetics/browser_tests/test_results/test_execution_error.png" alt="Test duration execution error message stating 'Maximum test execution time reached. This includes test steps and system overhead, so reported test durations may vary'." style="width:90%;" >}}
+
+## Test performance
+
+On the **Performance** tab, you can see aggregate performance metrics across all runs of your test:
+
+- **Browser success rate** cards for each browser type (Chrome, Firefox, Edge), displaying the percentage of passing runs in the selected time interval.
+- **Average Test duration by browser type** and **Average Test duration by location & device** graphs, which display the time each browser, location, and device takes to complete the test in a given time interval.
+- **p75 Largest Contentful Paint** and **p75 Cumulative Layout Shift** graphs, which display the 75th percentile of these [Core Web Vital metrics][6] aggregated across runs.
+
+{{< img src="synthetics/browser_tests/synthetics_performance_tab.png" alt="The Performance tab on a browser Test Details page showing browser success rate, test duration graphs, and p75 LCP and CLS Core Web Vital metrics" style="width=80%" >}}
+
+Within an individual test run, [Largest Contentful Paint][2] and [Cumulative Layout Shift][3] are displayed as pills to the right of each step URL. [First Input Delay][4] is available as a real metric if you are using [Real User Monitoring][5] to collect real user data. For more information, see [Monitoring Page Performance][6].
+
+{{< img src="synthetics/browser_tests/test_results/page_performance_lab_metrics.png" alt="Synthetic lab metrics" style="width:100%" >}}
+
+## Test properties
+
+The **Properties** tab contains the configuration details, ownership information, and integrations associated with your test. Use the left navigation to switch between sections.
+
+{{< img src="synthetics/browser_tests/synthetics_properties_tab.png" alt="The Properties tab on a browser Test Details page showing Ownership, Execution, and Monitor sections, with left navigation for Continuous Testing, Parent Tests, and other configuration" style="width=80%" >}}
+
+**Ownership**
+: Displays the test owner, editor, creation date, last modified date, environments, teams, and tags. Tests also link to an out-of-the-box Synthetic [browser test dashboard][11].
+
+**Execution**
+: Shows the test frequency, alert conditions, and retry behavior.
+
+**Monitor**
+: Contains the [Synthetic test monitor][13] name, priority, configured recipients, and notification message.
+
+**Continuous Testing**
+: Sets the [execution rule][12] used when this test runs as part of a [Continuous Testing CI pipeline][19].
+
+**Parent Tests**
+: Lists tests that reference this test, such as multistep tests that include it as a subtest.
+
+**Parent Suites**
+: Lists the [test suites][26] this test belongs to.
+
+**Downtimes**
+: Lists [scheduled downtimes][27] that pause execution of this test, for example during planned maintenance windows.
+
+**Configuration as Code**
+: Exports the test configuration in formats such as Terraform for managing tests as code.
 
 ## Failed results
 
@@ -242,3 +257,5 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [23]: /real_user_monitoring/session_replay
 [24]: /synthetics/browser_tests/?tab=requestoptions#fast-retry
 [25]: /synthetics/guide/step-duration/
+[26]: /synthetics/test_suites/
+[27]: /synthetics/platform/downtime/

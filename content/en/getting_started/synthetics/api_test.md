@@ -223,7 +223,7 @@ For more information, see [Using Synthetic Test Monitors][13].
 
 The **API test** and **Multistep API test detail** pages display an overview of the test configuration, the global uptime associated with the tested endpoints by location, graphs about response time and network timings, and a list of test results and events.
 
-To troubleshoot a failed test, scroll down to **Test Results** and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
+To troubleshoot a failed test, review the failures on the **Activity** tab or the **Test Runs** tab and click on a failing test result. Review failed assertions and response details such as status code, response time, and associated headers and body to diagnose the issue.
 
 {{< img src="synthetics/api_tests/synthetics_api_test_new.png" alt="API test details page showing the Activity tab with global uptime, alert timeline, and a list of recent test runs" style="width:100%;">}}
 
