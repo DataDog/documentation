@@ -31,7 +31,7 @@ AI Guard can automatically evaluate LLM calls made through supported AI ecosyste
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% partial name="security-platform/aiguard-sdk-setup.md" target="automatic" %}}
+{{< partial name="security-platform/aiguard-sdk-setup.html" target="automatic" >}}
 
 ## Integrations
 
