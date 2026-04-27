@@ -101,9 +101,9 @@ To set up the Enrichment Table processor:
   1. Enter the file path.
       - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
   1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value. See the [Enrichment example](#enrichment-example) for more information.
-  1. If you are using a secret as a source attribute, toggle **Use Secret as source attribute** to enable it. See [Use a secret as a source attribute example](#use-a-secret-as-a-source-attribute) for more information.
-      1. Select the type of secret (**Datadog API Key**, **Splunk HEC token**, or **Custom**).
-          - If you select **Custom**, enter the name of the secret that is in the event metadata. **Note**: Do **not** enter the actual secret values.
+  1. ({{< tooltip glossary="preview" case="title" >}}) If you are using a secret as a source attribute, toggle **Use Secret as source attribute** to enable it.
+      - Select the type of secret (**Datadog API Key** or **Splunk HEC token**).
+      - See [Use a secret as a source attribute example](#use-a-secret-as-a-source-attribute) for more information.
   1. If you are not using a secret, enter the source attribute of the log. The source attribute's value is used as the key to match against the column name in your local file.
   1. Enter the target attribute. The target attribute's value stores the information found in the file as a JSON object.
   1. Click **Save**.
