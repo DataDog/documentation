@@ -12,7 +12,7 @@ aliases:
   - /cloudprem/configure/
 ---
 
-{{< callout btn_hidden="true" header="BYOC Logs is in Preview" >}}
+{{< callout btn_hidden="true" header="Join the Preview!" >}}
   BYOC Logs is in Preview.
 {{< /callout >}}
 
