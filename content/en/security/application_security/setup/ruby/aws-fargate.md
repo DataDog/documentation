@@ -23,7 +23,7 @@ further_reading:
 - Ruby application containerized with Docker
 - AWS CLI configured with appropriate permissions
 - Your Datadog API key
-- Datadog Ruby tracing library (see [version requirements][1])
+- Datadog Ruby SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 

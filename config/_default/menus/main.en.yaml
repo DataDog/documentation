@@ -7005,7 +7005,7 @@ menu:
       parent: log_troubleshooting
       identifier: log_troubleshooting_live_tail
       weight: 1101
-    - name: CloudPrem
+    - name: BYOC Logs
       pre: upload-wui
       url: cloudprem/
       parent: log_management_heading

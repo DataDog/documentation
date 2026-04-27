@@ -1,18 +1,18 @@
 ---
 title: Setting up Remote Configuration for Tracing
-description: Learn how to set up and use Remote Configuration to dynamically manage tracing library settings without restarting applications.
+description: Learn how to set up and use Remote Configuration to dynamically manage SDK settings without restarting applications.
 further_reading:
 - link: "remote_configuration"
   tag: "Documentation"
   text: "Remote Configuration"
 ---
 
-This guide covers setting up and using Remote Configuration with your tracing libraries. For more information on how Remote Configuration works, see [Remote Configuration][1].
+This guide covers setting up and using Remote Configuration with your SDKs. For more information on how Remote Configuration works, see [Remote Configuration][1].
 
 ## Prerequisites
 
 - [Datadog Agent][2] 7.47.0 or higher installed on your hosts or containers.
-- Upgrade your tracing libraries to a Remote Configuration-compatible version. For more information, see the [Supported configuration options][7] section.
+- Upgrade your SDKs to a Remote Configuration-compatible version. For more information, see the [Supported configuration options][7] section.
 - Ensure your RBAC permissions include [`org_management`][3], so you can enable Remote Configuration for your organization.
 - Ensure your RBAC permissions include [`api_keys_write`][4], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
 - Ensure you have the `APM Remote Configuration Read` and `APM Remote Configuration Write` [permissions][3].
@@ -26,22 +26,22 @@ This guide covers setting up and using Remote Configuration with your tracing li
    {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
 1. Restart your Agent.
 
-## Review Remote Configuration status of tracing libraries
+## Review Remote Configuration status of SDKs
 
-You can gain visibility into the Remote Configuration status of your Tracer libraries through the [Remote Configuration UI][5].
+You can gain visibility into the Remote Configuration status of your SDKs through the [Remote Configuration UI][5].
 
-The following table describes the meaning of each tracing library status:
+The following table describes the meaning of each SDK status:
 
-  | Tracing library Status| Description                                      |
+  | SDK Status| Description                                      |
   |------------------|--------------------------------------------------|
-  | CONNECTED      | The tracing library is successfully connected to the Remote Configuration service through the associated Agent. This is the optimal state you want your tracing library to be in for Remote Configuration.                                               |
-  | UNAUTHORIZED          | The tracing library is associated with an Agent which doesn't have `APM Remote Configuration Read` permission on its API key. To fix the issue, you need to enable Remote Configuration capability on the API Key used by the Agent associated with the tracing library.|
-  | CONNECTION ERROR        |   The tracing library deployed in your environment is associated with an Agent that has `remote_config.enabled` set to true in its `datadog.yaml` configuration file, however, the Agent cannot be found in the Remote Configuration service. The most likely cause of this is that the associated Agent is unable to reach Remote Configuration [endpoints][6]. To fix the issue, you need to allow outbound HTTPS access to Remote Configuration endpoints from your environment.
-  | DISABLED       |   The tracing library deployed in your environment is associated with an Agent that has `remote_config.enabled` set to false in its `datadog.yaml` configuration file. This could be set deliberately or mistakenly. To enable Remote Configuration on the associated Agent, set `remote_config.enabled` to true.  |
-  | NOT CONNECTED       | The tracing library cannot be found in the Remote Configuration service and is associated with an Agent that could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings.|
-  | UNSUPPORTED AGENT   | The tracing library is associated with an Agent which is not Remote Configuration capable. To fix this issue, update the associated Agent software to the latest available version. |
-  | NOT DETECTED   | The tracing library does not support Remote Configuration. To fix this issue, update the tracing library software to the latest available version. |
-  | UNKNOWN   | The tracing library status is unknown, and it can't be determined if an Agent is associated with the tracing library. For example, this could be because the Agent is deployed on a fully managed serverless container service like AWS Fargate. |
+  | CONNECTED      | The SDK is successfully connected to the Remote Configuration service through the associated Agent. This is the optimal state you want your SDK to be in for Remote Configuration.                                               |
+  | UNAUTHORIZED          | The SDK is associated with an Agent which doesn't have `APM Remote Configuration Read` permission on its API key. To fix the issue, you need to enable Remote Configuration capability on the API Key used by the Agent associated with the SDK.|
+  | CONNECTION ERROR        |   The SDK deployed in your environment is associated with an Agent that has `remote_config.enabled` set to true in its `datadog.yaml` configuration file, however, the Agent cannot be found in the Remote Configuration service. The most likely cause of this is that the associated Agent is unable to reach Remote Configuration [endpoints][6]. To fix the issue, you need to allow outbound HTTPS access to Remote Configuration endpoints from your environment.
+  | DISABLED       |   The SDK deployed in your environment is associated with an Agent that has `remote_config.enabled` set to false in its `datadog.yaml` configuration file. This could be set deliberately or mistakenly. To enable Remote Configuration on the associated Agent, set `remote_config.enabled` to true.  |
+  | NOT CONNECTED       | The SDK cannot be found in the Remote Configuration service and is associated with an Agent that could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings.|
+  | UNSUPPORTED AGENT   | The SDK is associated with an Agent which is not Remote Configuration capable. To fix this issue, update the associated Agent software to the latest available version. |
+  | NOT DETECTED   | The SDK does not support Remote Configuration. To fix this issue, update the SDK software to the latest available version. |
+  | UNKNOWN   | The SDK status is unknown, and it can't be determined if an Agent is associated with the SDK. For example, this could be because the Agent is deployed on a fully managed serverless container service like AWS Fargate. |
 
 ## Opting out of Remote Configuration for Fleet Automation
 
