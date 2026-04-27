@@ -24,7 +24,7 @@ const setupShell = (shellId: string, contentId: string) => {
 const mountToggle = (shellId: string, contentId: string) =>
   render(
     h(CollapseToggle, {
-      externalContext: { scope: shellId, entries: { contentDiv: contentId } },
+      externalContext: { scope: shellId, entries: { contentEl: contentId } },
     }),
   );
 
