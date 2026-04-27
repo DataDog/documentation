@@ -1,0 +1,12 @@
+{
+  "data": {
+    "id": "4b95d361-f65d-4515-9824-c9aaeba5ac2a",
+    "type": "permanent_retention_filters",
+    "attributes": {
+      "cross_product_sampling": {
+        "session_replay_sample_rate": 75.0,
+        "trace_sample_rate": 25.0
+      }
+    }
+  }
+}

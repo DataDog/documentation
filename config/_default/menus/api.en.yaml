@@ -13615,6 +13615,46 @@ menu:
           - OrderRetentionFilters
         unstable: []
         order: 6
+    - name: Rum Permanent Retention Filters
+      url: /api/latest/rum-permanent-retention-filters/
+      identifier: rum-permanent-retention-filters
+      generated: true
+    - name: Get all permanent retention filters
+      url: '#get-all-permanent-retention-filters'
+      identifier: rum-permanent-retention-filters-get-all-permanent-retention-filters
+      parent: rum-permanent-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPermanentRetentionFilters
+        unstable: []
+        order: 1
+    - name: Get a permanent retention filter
+      url: '#get-a-permanent-retention-filter'
+      identifier: rum-permanent-retention-filters-get-a-permanent-retention-filter
+      parent: rum-permanent-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPermanentRetentionFilter
+        unstable: []
+        order: 2
+    - name: Update a permanent retention filter
+      url: '#update-a-permanent-retention-filter'
+      identifier: rum-permanent-retention-filters-update-a-permanent-retention-filter
+      parent: rum-permanent-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePermanentRetentionFilter
+        unstable: []
+        order: 3
     - name: SCIM
       url: /api/latest/scim/
       identifier: scim
