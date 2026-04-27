@@ -14,14 +14,10 @@ The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
-You also need either the [`pkg-config`][4] or the [`pkgconf`][5] system utility installed.
-This utility is available on the software repositories of most Linux distributions. For example:
+Versions of the `datadog` gem older than 2.30 also need either the [`pkg-config`][4] or the [`pkgconf`][5] system utility installed.
+This is no longer needed on modern versions.
 
-- The `pkg-config` package is available for [Homebrew][6], and [Debian][7]- and [Ubuntu][8]-based Linux
-- The `pkgconf` package is available for [Arch][9]- and [Alpine][10]-based Linux
-- The `pkgconf-pkg-config` package is available for [Fedora][11]- and [Red-Hat][12]-based Linux
-
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda. Additionally, [Single Step APM Instrumentation][13] cannot be used to set up the Ruby Profiler.
+Continuous Profiler is not supported on serverless platforms, such as AWS Lambda. Additionally, [Single Step APM Instrumentation][6] cannot be used to set up the Ruby Profiler.
 
 ## Installation
 
@@ -32,7 +28,7 @@ To begin profiling applications:
 2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file and install with `bundle install`:
 
     ```ruby
-    gem 'datadog', '~> 2.18'
+    gem 'datadog', '~> 2.30'
     ```
 
 3. Enable the profiler:
@@ -87,9 +83,9 @@ To begin profiling applications:
     ```
     {% /alert %}
 
-5. Optional: Set up [Source Code Integration][14] to connect your profiling data with your Git repositories.
+5. Optional: Set up [Source Code Integration][7] to connect your profiling data with your Git repositories.
 
-6. After a couple of minutes, your profiles appear on the [Datadog APM > Profiler page][15]. If they do not, see the [Troubleshooting][16] guide.
+6. After a couple of minutes, your profiles appear on the [Datadog APM > Profiler page][8]. If they do not, see the [Troubleshooting][9] guide.
 
 ## Configuration
 
@@ -104,11 +100,11 @@ You can configure the profiler using the following environment variables:
 | `DD_PROFILING_MAX_FRAMES`                     | Integer | Maximum backtrace (stack) depth gathered by the profiler. Stacks deeper than this value get truncated. Defaults to `400`.               |
 | `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
 | `DD_PROFILING_EXPERIMENTAL_HEAP_SIZE_ENABLED` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`. |
-| `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][17] for details. |
+| `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][10] for details. |
 | `DD_PROFILING_PREVIEW_OTEL_CONTEXT_ENABLED`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
-| `DD_ENV`                                      | String  | The [environment][18] name, for example: `production`.                                                                                  |
-| `DD_SERVICE`                                  | String  | The [service][18] name, for example, `web-backend`.                                                                                     |
-| `DD_VERSION`                                  | String  | The [version][18] of your service.                                                                                                      |
+| `DD_ENV`                                      | String  | The [environment][11] name, for example: `production`.                                                                                  |
+| `DD_SERVICE`                                  | String  | The [service][11] name, for example, `web-backend`.                                                                                     |
+| `DD_VERSION`                                  | String  | The [version][11] of your service.                                                                                                      |
 | `DD_TAGS`                                     | String  | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.          |
 
 Alternatively, you can set profiler parameters in code with these functions, inside a `Datadog.configure` block. Parameters provided in code take precedence over those provided as environment variables.
@@ -120,11 +116,11 @@ Alternatively, you can set profiler parameters in code with these functions, ins
 | `c.profiling.advanced.max_frames`                     | Integer | Maximum backtrace (stack) depth gathered by the profiler. Stacks deeper than this value get truncated. Defaults to `400`.               |
 | `c.profiling.advanced.experimental_heap_enabled`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
 | `c.profiling.advanced.experimental_heap_size_enabled` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `experimental_heap_size_enabled`. |
-| `c.profiling.advanced.no_signals_workaround_enabled`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][17] for details. |
+| `c.profiling.advanced.no_signals_workaround_enabled`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][10] for details. |
 | `c.profiling.advanced.preview_otel_context_enabled`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
-| `c.env`                                               | String  | The [environment][18] name, for example: `production`.                                                                                  |
-| `c.service`                                           | String  | The [service][18] name, for example, `web-backend`.                                                                                     |
-| `c.version`                                           | String  | The [version][18] of your service.                                                                                                      |
+| `c.env`                                               | String  | The [environment][11] name, for example: `production`.                                                                                  |
+| `c.service`                                           | String  | The [service][11] name, for example, `web-backend`.                                                                                     |
+| `c.version`                                           | String  | The [version][11] of your service.                                                                                                      |
 | `c.tags`                                              | Hash    | Tags to apply to an uploaded profile.                                                                                                   |
 
 [1]: /tracing/trace_collection/
@@ -132,16 +128,9 @@ Alternatively, you can set profiler parameters in code with these functions, ins
 [3]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [4]: https://www.freedesktop.org/wiki/Software/pkg-config/
 [5]: https://github.com/pkgconf/pkgconf
-[6]: https://formulae.brew.sh/formula/pkgconf
-[7]: https://packages.debian.org/search?keywords=pkg-config
-[8]: https://packages.ubuntu.com/search?keywords=pkg-config
-[9]: https://archlinux.org/packages/?q=pkgconf
-[10]: https://pkgs.alpinelinux.org/packages?name=pkgconf
-[11]: https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config
-[12]: https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config
-[13]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
-[14]: /integrations/guide/source-code-integration/?tab=ruby
-[15]: https://app.datadoghq.com/profiling
-[16]: /profiler/profiler_troubleshooting/ruby/
-[17]: /profiler/profiler_troubleshooting/ruby/#unexpected-failures-or-errors-from-ruby-gems-that-use-native-extensions
-[18]: /getting_started/tagging/unified_service_tagging
+[6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[7]: /integrations/guide/source-code-integration/?tab=ruby
+[8]: https://app.datadoghq.com/profiling
+[9]: /profiler/profiler_troubleshooting/ruby/
+[10]: /profiler/profiler_troubleshooting/ruby/#unexpected-failures-or-errors-from-ruby-gems-that-use-native-extensions
+[11]: /getting_started/tagging/unified_service_tagging

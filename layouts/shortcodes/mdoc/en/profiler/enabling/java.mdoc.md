@@ -3,7 +3,7 @@ Java profiler setup — self-contained.
 Runtime filter (jvm | graalvm_native_image) is declared by the parent page.
 -->
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+The profiler is shipped within Datadog SDKs. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 
@@ -82,7 +82,7 @@ Available profile types
 
 To begin profiling applications:
 
-1. Make sure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][3].
+1. Install and run Datadog Agent v6+. Datadog recommends using [Datadog Agent v7+][3]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 <!-- JVM -->
 {% if equals($runtime, "jvm") %}

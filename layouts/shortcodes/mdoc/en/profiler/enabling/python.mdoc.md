@@ -2,14 +2,14 @@
 Python profiler setup — self-contained.
 -->
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+The profiler is shipped within Datadog SDKs. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][2].
 
-- Verify your Python and tracing library versions are compatible by reviewing the [Python Compatibility Requirements][4].
-- Some features depend on newer Python versions than the minimum required version for the tracing library. For more details, read [Profile Types][5].
+- Verify your Python and SDK versions are compatible by reviewing the [Python Compatibility Requirements][4].
+- Some features depend on newer Python versions than the minimum required version for the SDK. For more details, read [Profile Types][5].
 - The installation requires pip version 18 or above.
 - Continuous Profiler support is in Preview for some serverless platforms, such as [AWS Lambda][6].
 

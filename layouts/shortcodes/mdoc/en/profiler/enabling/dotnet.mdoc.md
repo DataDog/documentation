@@ -3,7 +3,7 @@
 Includes its own Requirements, Installation, Enabling the Profiler, and Configuration sections.
 -->
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+The profiler is shipped within Datadog SDKs. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 
@@ -66,7 +66,7 @@ Unlike APM, Continuous Profiler is not activated by default when the APM package
 
 ## Installation
 
-Make sure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][7]. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to [Enabling the Profiler](#enabling-the-profiler).
+Make sure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][7]. The profiler ships together with the SDK (beginning with v2.8.0), so if you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to [Enabling the Profiler](#enabling-the-profiler).
 
 Otherwise, install the profiler using the following steps, depending on your operating system.
 
@@ -202,7 +202,7 @@ Set needed environment variables to configure and enable Profiler.
 To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry under `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` nodes.
 
 {% alert %}
-Starting v2.14.0, you don't need to set `CORECLR_PROFILER` or `COR_PROFILER` if you installed the tracer using the MSI.
+Starting v2.14.0, you don't need to set `CORECLR_PROFILER` or `COR_PROFILER` if you installed the SDK using the MSI.
 {% /alert %}
 
 **With the Registry Editor:**
@@ -254,10 +254,10 @@ A couple of minutes after you start your application, your profiles appear on th
 {% /tab %}
 
 {% tab label="Windows services" %}
-Set needed environment variables to configure and enable Profiler. To enable the Profiler for your service, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry key associated to the service. If the profiler is running alone (the tracer is deactivated), you can optionally add the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables.
+Set needed environment variables to configure and enable Profiler. To enable the Profiler for your service, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry key associated to the service. If the profiler is running alone (the SDK is deactivated), you can optionally add the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables.
 
 {% alert %}
-Starting v2.14.0, you don't need to set `CORECLR_PROFILER` or `COR_PROFILER` if you installed the tracer using the MSI.
+Starting v2.14.0, you don't need to set `CORECLR_PROFILER` or `COR_PROFILER` if you installed the SDK using the MSI.
 {% /alert %}
 
 **With the Registry Editor:**
@@ -327,10 +327,10 @@ A couple of minutes after you start your application, your profiles appear on th
 
 {% tab label="Windows Standalone applications" %}
 {% alert %}
-Starting v2.14.0, you don't need to set `CORECLR_PROFILER` or `COR_PROFILER` if you installed the tracer using the MSI.
+Starting v2.14.0, you don't need to set `CORECLR_PROFILER` or `COR_PROFILER` if you installed the SDK using the MSI.
 {% /alert %}
 
-Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. To enable the Profiler for Standalone applications, it is required to set the `DD_PROFILING_ENABLED` environment variable. If the profiler is running alone (the tracer is deactivated), you can optionally set the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables. The recommended approach is to create a batch file that sets these and starts the application, and run your application using the batch file.
+Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. To enable the Profiler for Standalone applications, it is required to set the `DD_PROFILING_ENABLED` environment variable. If the profiler is running alone (the SDK is deactivated), you can optionally set the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables. The recommended approach is to create a batch file that sets these and starts the application, and run your application using the batch file.
 
 For .NET Core and .NET 5+:
 ```shell
