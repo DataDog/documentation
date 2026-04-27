@@ -1,5 +1,5 @@
 ---
-title: Setting Up Ownership Preferences
+title: Set Up Ownership Preferences
 further_reading:
 - link: "/security/cloud_security_management/guide/frontier_group/"
   tag: "Documentation"
