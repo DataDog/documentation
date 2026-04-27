@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications with the Datadog APM SDKs in one step.
+In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications with the Datadog SDKs in one step.
 
 ## Requirements
 
@@ -250,7 +250,7 @@ Review the following examples demonstrating how to select specific services:
 This configuration:
 - enables APM for all namespaces except the `jenkins` namespace.
   - **Note**: use `enabledNamespaces` to disable for all namespaces except those listed.
-- instructs Datadog to instrument the Java applications with the default Java APM SDK and Python applications with `v.3.1.0` of the Python APM SDK.
+- instructs Datadog to instrument the Java applications with the default Java SDK and Python applications with `v.3.1.0` of the Python SDK.
 
 {{< highlight yaml "hl_lines=4-10" >}}
    apm:
@@ -273,11 +273,11 @@ This configuration creates two targets blocks:
 
 - The first block (named `login-service_namespace`):
   - enables APM for services in the namespace `login-service`.
-  - instructs Datadog to instrument services in this namespace with the default version of the Java APM SDK.
+  - instructs Datadog to instrument services in this namespace with the default version of the Java SDK.
   - sets environment variable `DD_PROFILING_ENABLED` for this target group
 - The second block (named `billing-service_apps`)
   - enables APM for services in the namespace(s) with label `app:billing-service`.
-  - instructs Datadog to instrument this set of services with `v3.1.0` of the Python APM SDK.
+  - instructs Datadog to instrument this set of services with `v3.1.0` of the Python SDK.
 
 {{< highlight yaml "hl_lines=4-28" >}}
   apm:
@@ -485,16 +485,16 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
 
 {{< /collapse-content >}}
 
-#### Specify tracing library versions
+#### Specify SDK versions
 
-<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can automatically instrument a subset of your applications, based on the tracing libraries you specify.</div>
+<div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can automatically instrument a subset of your applications, based on the SDKs you specify.</div>
 
-Specify Datadog tracing libraries and their versions to automatically instrument applications written in those languages. You can configure this in two ways, which are applied in the following order of precedence:
+Specify Datadog SDKs and their versions to automatically instrument applications written in those languages. You can configure this in two ways, which are applied in the following order of precedence:
 
 1. [Specify at the service level](#specify-at-the-service-level), or
 2. [Specify at the cluster level](#specify-at-the-cluster-level).
 
-**Default**: If you don't specify any library versions, applications written in supported languages are automatically instrumented using the latest tracing library versions.
+**Default**: If you don't specify any library versions, applications written in supported languages are automatically instrumented using the latest SDK versions.
 
 ##### Specify at the service level
 
@@ -605,7 +605,7 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Am
 
 The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
-You can pull the tracing library from a different registry by changing it to `docker.io/datadog`, `public.ecr.aws/datadog`, or another URL if you are hosting the images in a local container registry.
+You can pull the SDK from a different registry by changing it to `docker.io/datadog`, `public.ecr.aws/datadog`, or another URL if you are hosting the images in a local container registry.
 
 For instructions on changing your container registry, see [Changing Your Container Registry][33].
 
@@ -815,11 +815,11 @@ See [instrumentation rules][4] for additional examples.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Control which APM SDKs are loaded" level="h3" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Control which Datadog SDKs are loaded" level="h3" expanded=false id="id-for-anchoring" %}}
 
-Use `ddTraceVersions` in your Agent Helm config to control both the language and the version of the APM SDK. This prevents unnecessary SDKs from being downloaded, which minimizes init-container footprint, reduces image size, and allows for more deliberate tracer upgrades (for example, to meet compliance requirements or simplify debugging).
+Use `ddTraceVersions` in your Agent Helm config to control both the language and the version of the Datadog SDK. This prevents unnecessary SDKs from being downloaded, which minimizes init-container footprint, reduces image size, and allows for more deliberate tracer upgrades (for example, to meet compliance requirements or simplify debugging).
 
-#### Example: Specify a Java APM SDK for a namespace
+#### Example: Specify a Java SDK for a namespace
 
 Only Java applications run in the `login-service` namespace. To avoid downloading other SDKs, configure the Agent to target that namespace and inject only the Java SDK version 1.48.2.
 
@@ -891,3 +891,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [35]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 [37]: /containers/kubernetes/csi_driver/
+[41]: /tracing/guide/injectors/

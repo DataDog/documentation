@@ -25,7 +25,7 @@ further_reading:
 - Root or sudo privileges
 - Systemd (for service management)
 - Your Datadog API key
-- Datadog Java tracing library (see version requirements [here][1])
+- Datadog Java SDK (see version requirements [here][1])
 
 ## 1. Installing the Datadog Agent
 

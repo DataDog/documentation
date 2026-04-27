@@ -5,10 +5,10 @@ description: Step-by-step tutorial to enable distributed tracing for a Java appl
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/java/
   tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
@@ -106,7 +106,7 @@ Your application (without tracing enabled) is containerized and available for EC
 
 ### Deploy the application
 
-Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the tracing library and Datadog Agent.
+Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the SDK and Datadog Agent.
 
 To start, use a terraform script to deploy to Amazon ECS:
 
@@ -312,7 +312,7 @@ Now that you have a working Java application, configure it to enable tracing.
 
 ### Tracing configuration
 
-The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
+The Java SDK uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java SDK so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
 The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile sets its value to `1`, meaning that 100% of all service requests are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
 

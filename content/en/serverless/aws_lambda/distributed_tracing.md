@@ -32,13 +32,13 @@ further_reading:
 
 By connecting your serverless traces to metrics, Datadog provides a context-rich picture of your application's performance, allowing you to better troubleshoot performance issues given the distributed nature of serverless applications.
 
-The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda.
+The Datadog Python, Node.js, Ruby, Go, Java, and .NET SDKs support distributed tracing for AWS Lambda.
 
 ## Send traces from your serverless application
 
 {{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
 
-The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda. You can install the tracer using the [installation instructions][5].
+The Datadog Python, Node.js, Ruby, Go, Java, and .NET SDKs support distributed tracing for AWS Lambda. You can install the SDK using the [installation instructions][5].
 
 ### Runtime recommendations
 
@@ -46,7 +46,7 @@ The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support 
 
 #### Python and Node.js
 
-The Datadog Lambda Library and tracing libraries for Python and Node.js support:
+The Datadog Lambda Library and SDKs for Python and Node.js support:
 - Automatic correlation of Lambda logs and traces with trace ID and tag injection.
 - Installation without any code changes using Serverless Framework, AWS SAM and AWS CDK integrations.
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
@@ -64,50 +64,50 @@ The Datadog Lambda Library and tracing libraries for Python and Node.js support:
   - Step Functions
 - Tracing dozens of additional out-of-the-box [Python][3] and [Node.js][4] libraries.
 
-For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][5].
+For Python and Node.js serverless applications, Datadog recommends you [install Datadog SDKs][5].
 
 *Looking to trace through serverless resources not listed above? [Open a feature request][7].*
 
 #### Ruby
 
-The Datadog Lambda Library and tracing libraries for Ruby support:
+The Datadog Lambda Library and SDKs for Ruby support:
 - Automatic correlation of Lambda logs and traces with trace ID and tag injection.
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [Ruby][8] libraries.
 
-You can trace your serverless functions in Datadog with [Datadog's tracing libraries][5].
+You can trace your serverless functions in Datadog with [Datadog SDKs][5].
 
 *Looking to trace through serverless resources not listed above? [Open a feature request][7].*
 
 #### Go
 
-The Datadog Lambda Library and tracing libraries for Go support:
+The Datadog Lambda Library and SDKs for Go support:
 - Manual correlation of Lambda logs and traces with trace ID and tag injection.
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [Go][9] libraries.
 
-For Go serverless applications, Datadog recommends installing [Datadog's tracing libraries][5]. 
+For Go serverless applications, Datadog recommends installing [Datadog SDKs][5]. 
 
 *Looking to trace through serverless resources not listed above? [Open a feature request][7].*
 
 #### Java
 
-The Datadog Lambda Library and tracing libraries for Java support:
+The Datadog Lambda Library and SDKs for Java support:
 - Correlation of Lambda logs and traces with trace ID and tag injection. See [Connecting Java logs and traces][10] for more details.
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [Java][11] libraries.
 
-For Java serverless applications, Datadog recommends [installing Datadog's tracing libraries][5].
+For Java serverless applications, Datadog recommends [installing Datadog SDKs][5].
 
-*Have feedback on the Datadog's tracing libraries for Java Lambda functions? Make sure to check out discussions going on in the [#serverless][12] channel in the [Datadog Slack community][13].*
+*Have feedback on the Datadog SDKs for Java Lambda functions? Make sure to check out discussions going on in the [#serverless][12] channel in the [Datadog Slack community][13].*
 
 #### .NET
 
-The tracing library for .NET supports:
+The SDK for .NET supports:
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [.NET][14] libraries.
 
-For .NET serverless applications, Datadog recommends [installing Datadog's tracing libraries][5].
+For .NET serverless applications, Datadog recommends [installing Datadog SDKs][5].
 
 Learn more about [tracing through .NET Azure serverless applications][15].
 
@@ -154,7 +154,7 @@ For [S3 Change Notifications][28], Span Auto-linking supports the following oper
 
 ## Hybrid environments
 
-If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lambda functions and hosts, your traces automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
+If you have installed Datadog SDKs (`dd-trace`) on both your Lambda functions and hosts, your traces automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
 
 If `dd-trace` is installed on your hosts with the Datadog Agent, and your serverless functions are traced with AWS X-Ray, trace merging is required to see a single, connected trace across your infrastructure. See the [Serverless Trace Merging][6] documentation to learn more about merging traces from `dd-trace` and AWS X-Ray.
 
@@ -170,13 +170,13 @@ The Continuous Profiler works by spawning a thread that periodically wakes up an
 
 ### Use cases
 
-Datadog recommends using only the Datadog APM trace library (`dd-trace`), but in some advanced situations users can combine Datadog tracing and AWS X-Ray using trace merging. Trace merging is available for Node.js and Python AWS Lambda functions. If you aren't sure which tracing library to use, read about [choosing your tracing library][17].
+Datadog recommends using only the Datadog APM trace library (`dd-trace`), but in some advanced situations users can combine Datadog tracing and AWS X-Ray using trace merging. Trace merging is available for Node.js and Python AWS Lambda functions. If you aren't sure which SDK to use, read about [choosing your SDK][17].
 
 There are two primary reasons for instrumenting both `dd-trace` and AWS X-Ray tracing libraries:
 - In an AWS serverless environment, you are already tracing your Lambda functions with `dd-trace`, you require AWS X-Ray active tracing for AWS managed services such as AppSync and Step Functions, and you want to visualize the `dd-trace` and AWS X-Ray spans in one single trace.
 - In a hybrid environment with both Lambda functions and hosts, `dd-trace` instruments your hosts, AWS X-Ray instruments your Lambda functions, and you want to visualize connected traces for transactions across Lambda functions and hosts.
 
-**Note:** This may result in higher usage bills. X-Ray spans continue to be available in your merged traces after 2-5 minutes. In many cases, Datadog recommends only using a single tracing library. Learn more about [choosing your tracing library][17].
+**Note:** This may result in higher usage bills. X-Ray spans continue to be available in your merged traces after 2-5 minutes. In many cases, Datadog recommends only using a single SDK. Learn more about [choosing your SDK][17].
 
 You can find setup instructions for each of the above use cases below:
 
@@ -196,8 +196,8 @@ Both the AWS X-Ray SDK and Datadog APM client libraries (`dd-trace`) add metadat
 
 ### Tracing across AWS Lambda and hosts
 
-#### Context propagation with the Datadog tracing libraries
-If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lambda functions and hosts, your traces will automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
+#### Context propagation with the Datadog SDKs
+If you have installed Datadog SDKs (`dd-trace`) on both your Lambda functions and hosts, your traces will automatically show you the complete picture of requests that cross infrastructure boundaries, whether it be AWS Lambda, containers, on-prem hosts, or managed services.
 
 #### Context propagation with the X-Ray integration
 If `dd-trace` is installed on your hosts with the Datadog Agent, and your Node.js or Python serverless functions are traced with AWS X-Ray, your setup should be similar to the following:
@@ -217,7 +217,7 @@ Then, for X-Ray and Datadog APM traces to appear in the same flame graph, all se
 
 ### Required setup
 
-Additional instrumentation is sometimes required to see a single, connected trace in Node and Python serverless applications asynchronously triggering Lambda functions. If you are just getting started with monitoring serverless applications in Datadog, [follow our main installation steps][21] and [read this page on choosing your tracing library][22]. Once you are sending traces from your Lambda functions to Datadog using the [Datadog Lambda Library][23], you may want to follow these steps to connect traces between two Lambda functions in cases such as:
+Additional instrumentation is sometimes required to see a single, connected trace in Node and Python serverless applications asynchronously triggering Lambda functions. If you are just getting started with monitoring serverless applications in Datadog, [follow our main installation steps][21] and [read this page on choosing your SDK][22]. Once you are sending traces from your Lambda functions to Datadog using the [Datadog Lambda Library][23], you may want to follow these steps to connect traces between two Lambda functions in cases such as:
 - Triggering Lambda functions via Step Functions
 - Invoking Lambda functions via non-HTTP protocols such as MQTT
 

@@ -85,7 +85,7 @@ In this example, the coverage data is available under both the `unit-tests` and 
 
 ## View coverage by flag
 
-In the [Code Coverage UI][4], select a repository and use the **Flag** filter to view coverage data for a specific flag. This filter appears alongside the Code Owner and Service filters.
+In the [Code Coverage UI][4], select a repository and use the {{< ui >}}Flag{{< /ui >}} filter to view coverage data for a specific flag. This filter appears alongside the Code Owner and Service filters.
 
 {{< img src="/code_coverage/flags_filter.png" alt="Code Coverage UI showing the flag filter dropdown" style="width:100%" >}}
 
@@ -106,7 +106,7 @@ Rules from both sources are evaluated when a pull request is opened or updated. 
 
 1. Navigate to [PR Gates rule creation][2].
 2. Configure the coverage threshold (total or patch coverage).
-3. In the **per flag** field, select one or more flags the gate should apply to.
+3. In the {{< ui >}}per flag{{< /ui >}} field, select one or more flags the gate should apply to.
 4. Save the rule.
 
 {{< img src="/code_coverage/flags_gate.png" alt="PR Gates configuration showing the flags scope option" style="width:100%" >}}
@@ -120,23 +120,23 @@ Rules from both sources are evaluated when a pull request is opened or updated. 
 
 **Enforce high coverage for unit tests:**
 
-- Condition type: `Overall Code Coverage`
+- Condition type: {{< ui >}}Overall Code Coverage{{< /ui >}}
 - Threshold: `80%`
-- Scope: `Flags`
+- Scope: {{< ui >}}Flags{{< /ui >}}
 - Flags: `unit-tests`
 
 **Require all new code in integration tests to be tested:**
 
-- Condition type: `Patch Code Coverage`
+- Condition type: {{< ui >}}Patch Code Coverage{{< /ui >}}
 - Threshold: `100%`
-- Scope: `Flags`
+- Scope: {{< ui >}}Flags{{< /ui >}}
 - Flags: `integration-tests`
 
 **Enforce coverage for specific runtime versions:**
 
-- Condition type: `Overall Code Coverage`
+- Condition type: {{< ui >}}Overall Code Coverage{{< /ui >}}
 - Threshold: `75%`
-- Scope: `Flags`
+- Scope: {{< ui >}}Flags{{< /ui >}}
 - Flags: `python-3.11`, `python-3.12`
 
 ### Multiple gates per repository
