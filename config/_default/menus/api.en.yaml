@@ -2964,6 +2964,18 @@ menu:
           - BulkExportSecurityMonitoringRules
         unstable: []
         order: 60
+    - name: Bulk delete security monitoring rules
+      url: '#bulk-delete-security-monitoring-rules'
+      identifier: security-monitoring-bulk-delete-security-monitoring-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkDeleteSecurityMonitoringRules
+        unstable: []
+        order: 96
     - name: Create a detection rule
       url: '#create-a-detection-rule'
       identifier: security-monitoring-create-a-detection-rule
