@@ -5037,16 +5037,16 @@ menu:
       identifier: data_streams_setup
       parent: data_streams
       weight: 1
-    - name: Kafka 
+    - name: Kafka
       url: data_streams/kafka
       identifier: data_streams_kafka
       parent: data_streams
       weight: 2
-    - name: Messages 
-      url: data_streams/kafka/messages 
-      identifier: data_streams_kafka_messages
-      parent: data_streams_kafka 
-      weight: 201
+    - name: Setup
+      url: data_streams/kafka/setup
+      identifier: data_streams_kafka_setup
+      parent: data_streams_kafka
+      weight: 1
     - name: Schema Tracking
       url: data_streams/schema_tracking
       identifier: data_streams_schema_tracking
@@ -6409,10 +6409,10 @@ menu:
       url: observability_pipelines/destinations/datadog_archives/
       parent: observability_pipelines_destinations
       weight: 406
-    - name: Datadog CloudPrem
-      url: observability_pipelines/destinations/cloudprem/
+    - name: Datadog BYOC Logs
+      url: observability_pipelines/destinations/datadog_byoc_logs/
       parent: observability_pipelines_destinations
-      identifier: observability_pipelines_datadog_cloudprem
+      identifier: observability_pipelines_datadog_byoc_logs
       weight: 407
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
@@ -7005,7 +7005,7 @@ menu:
       parent: log_troubleshooting
       identifier: log_troubleshooting_live_tail
       weight: 1101
-    - name: CloudPrem
+    - name: BYOC Logs
       pre: upload-wui
       url: cloudprem/
       parent: log_management_heading
@@ -7232,11 +7232,16 @@ menu:
       parent: security_platform
       identifier: security_research_feed
       weight: 12
+    - name: Security MCP Tools
+      url: security/mcp_server
+      parent: security_platform
+      identifier: security_mcp_server
+      weight: 13
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 13
+      weight: 14
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
@@ -7877,6 +7882,36 @@ menu:
       identifier: ai_guard_onboarding
       parent: ai_guard
       weight: 1
+    - name: Set Up AI Guard
+      url: /security/ai_guard/setup/
+      identifier: ai_guard_setup
+      parent: ai_guard
+      weight: 2
+    - name: Automatic Integrations
+      url: /security/ai_guard/setup/automatic_integrations/
+      identifier: ai_guard_automatic_integrations
+      parent: ai_guard_setup
+      weight: 1
+    - name: Manual Integrations
+      url: /security/ai_guard/setup/manual_integrations/
+      identifier: ai_guard_manual_integrations
+      parent: ai_guard_setup
+      weight: 2
+    - name: SDK
+      url: /security/ai_guard/setup/sdk/
+      identifier: ai_guard_sdk
+      parent: ai_guard_setup
+      weight: 3
+    - name: HTTP API
+      url: /security/ai_guard/setup/http_api/
+      identifier: ai_guard_http_api
+      parent: ai_guard_setup
+      weight: 4
+    - name: Security Signals
+      url: /security/ai_guard/signals/
+      identifier: ai_guard_signals
+      parent: ai_guard
+      weight: 3
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security

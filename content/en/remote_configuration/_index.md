@@ -1,6 +1,6 @@
 ---
 title: Remote Configuration
-description: "Remotely configure and change behavior of Datadog components like Agents, tracing libraries, and Observability Pipelines Workers deployed in your infrastructure."
+description: "Remotely configure and change behavior of Datadog components like Agents, SDKs, and Observability Pipelines Workers deployed in your infrastructure."
 aliases:
 - /agent/guide/how_rc_works
 - /agent/guide/how_remote_config_works
@@ -27,9 +27,9 @@ algolia:
 
 ## Overview
 
-Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of select product features in Datadog components such as Agents, tracing libraries, and Observability Pipelines Workers deployed in your infrastructure. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
+Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of select product features in Datadog components such as Agents, SDKs, and Observability Pipelines Workers deployed in your infrastructure. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
-For Datadog security products, App and API Protection and Workload Protection, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
+For Datadog security products, App and API Protection and Workload Protection, Remote Configuration-enabled Agents and compatible SDKs provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
 
 ## How it works
 
