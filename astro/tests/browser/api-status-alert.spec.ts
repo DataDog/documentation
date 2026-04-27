@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('ApiStatusAlert component — visual', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/components/api-status-alert');
+    await page.goto('/docs/test_pages/components/api-status-alert');
   });
 
   test('deprecated api status alert matches screenshot', async ({ page }) => {

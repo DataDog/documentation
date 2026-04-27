@@ -6,7 +6,7 @@ test.describe('Tabs component', () => {
   test.use({ viewport: { width: 900, height: 900 }, deviceScaleFactor: 2 });
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/components/tabs');
+    await page.goto('/docs/test_pages/components/tabs');
   });
 
   test('many-tab instance uses pills layout', async ({ page }) => {

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('ApiCodeExample component', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/components/api-code-example');
+    await page.goto('/docs/test_pages/components/api-code-example');
   });
 
   test('renders the code example section', async ({ page }) => {

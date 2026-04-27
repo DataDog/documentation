@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const PAGE_WITH_CONTENT = '/docs/components/header/';
+const PAGE_WITH_CONTENT = '/docs/test_pages/components/header/';
 
 test.describe('Header — Hugo-identical dimensions and behavior', () => {
   test('banner is 30px tall, fixed, and spans the viewport', async ({ page }) => {

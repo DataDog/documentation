@@ -4,14 +4,32 @@ import DocsLayout from '../../../layouts/DocsLayout.astro';
 
 const docs = await getCollection('docs');
 const components = docs
-  .filter((entry) => entry.id.startsWith('components/'))
+  .filter((entry) => entry.id.startsWith('test_pages/components/'))
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 
-<DocsLayout title="Components">
+<DocsLayout title="Test Pages">
   <div class="docs-page">
     <div class="prose">
-      <h1>Components</h1>
+      <h1>Test Pages</h1>
+
+      <h2>Integration</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="/docs/test_pages/integration/typography/">Typography</a></td>
+            <td>Verify vanilla Markdown elements such as headings and links.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Components</h2>
       <p><a href="/api/latest/">&larr; API docs</a></p>
       <table>
         <thead>

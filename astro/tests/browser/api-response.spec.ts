@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('ApiResponse component — visual', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/components/api-response');
+    await page.goto('/docs/test_pages/components/api-response');
   });
 
   test('full response section matches screenshot', async ({ page }) => {

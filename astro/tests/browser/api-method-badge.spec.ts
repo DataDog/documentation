@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('API Method Badge component — visual', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/components/api-method-badge');
+    await page.goto('/docs/test_pages/components/api-method-badge');
   });
 
   const methods: Array<'get' | 'post' | 'put' | 'patch' | 'delete' | 'head' | 'options'> = [

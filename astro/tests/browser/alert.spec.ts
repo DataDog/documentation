@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Alert component — visual', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/components/alert');
+    await page.goto('/docs/test_pages/components/alert');
   });
 
   const types: Array<'info' | 'danger' | 'warning' | 'tip'> = ['info', 'danger', 'warning', 'tip'];

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const PAGE_WITH_CONTENT = '/docs/components/footer/';
+const PAGE_WITH_CONTENT = '/docs/test_pages/components/footer/';
 
 test.describe('Footer — Hugo-identical dimensions and behavior', () => {
   test('uses the Hugo dark-purple footer background', async ({ page }) => {

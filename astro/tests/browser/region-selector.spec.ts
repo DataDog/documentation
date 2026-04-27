@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('RegionSelector component', () => {
   test.beforeEach(async ({ page, context }) => {
     await context.clearCookies();
-    await page.goto('/docs/components/region-selector');
+    await page.goto('/docs/test_pages/components/region-selector');
   });
 
   test('renders the region selector', async ({ page }) => {
@@ -40,7 +40,7 @@ test.describe('RegionSelector component', () => {
   });
 
   test('reads the region from the `?site=` query param on load', async ({ page }) => {
-    await page.goto('/docs/components/region-selector?site=ap1');
+    await page.goto('/docs/test_pages/components/region-selector?site=ap1');
     const select = page.locator('.region-selector__select');
     await expect(select).toHaveValue('ap1');
     await expect(page.locator('html')).toHaveAttribute('data-active-region', 'ap1');

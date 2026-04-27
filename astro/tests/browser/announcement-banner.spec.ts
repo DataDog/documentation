@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('AnnouncementBanner component — visual', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/components/announcement-banner');
+    await page.goto('/docs/test_pages/components/announcement-banner');
   });
 
   test('default banner at desktop viewport', async ({ page }) => {

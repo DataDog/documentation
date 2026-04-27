@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Placeholder component — visual', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/components/placeholder');
+    await page.goto('/docs/test_pages/components/placeholder');
   });
 
   const variants: Array<{ name: string; slug: string }> = [
