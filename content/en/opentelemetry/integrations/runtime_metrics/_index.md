@@ -40,6 +40,8 @@ For details about host and container metrics mapping, see [OpenTelemetry Metrics
 
 Select your language to see instructions for configuring the OpenTelemetry SDK to send runtime metrics:
 
+**Note**: Runtime metrics are only exported if a `MeterProvider` and metric exporter are configured. Set the `OTEL_METRICS_EXPORTER` environment variable or programmatically configure a `metricReader` in your SDK initialization. For Go, Node.js, and Python, the MeterProvider must be configured manually; Java and .NET auto-configure it via their auto-instrumentation agents.
+
 {{< tabs >}}
 {{% tab "Java" %}}
 
@@ -53,6 +55,20 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 - [Java 8][5]
 - [Java 17][6]
 
+#### Experimental telemetry
+
+Enabling experimental OpenTelemetry runtime telemetry may provide additional metric mappings between Datadog and OpenTelemetry for Java. To enable it, set the following environment variable:
+
+```
+OTEL_INSTRUMENTATION_RUNTIME_TELEMETRY_EMIT_EXPERIMENTAL_TELEMETRY=true
+```
+
+#### Additional JMX metrics
+
+To collect additional JVM metrics beyond the default runtime instrumentation, install the [OpenTelemetry JMX Metric Scraper][9]. The scraper scrapes MBeans over JMX and emits them as OpenTelemetry metrics, which Datadog then maps to runtime metrics (see the [JVM Contrib table](#jvm-contrib) in [Data collected](#data-collected)).
+
+Configure the scraper with `otel.jmx.target.source=legacy` to collect these additional metrics. The scraper's `instrumentation` source emits the same semantic-convention metrics already produced natively by the OpenTelemetry Java SDK, so it does not provide additional coverage.
+
 #### Collector configuration
 
 The `jvm.gc.collections.count` and `jvm.gc.collections.elapsed` metrics require the [Delta-to-Rate Processor][8] in the OpenTelemetry Collector. Set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta` or use the `cumulativetodelta` processor.
@@ -65,15 +81,20 @@ processors:
       - jvm.gc.collections.elapsed
 ```
 
+**Note**: The minimum supported version of the OpenTelemetry Java agent is [2.0.0](https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/tag/v2.0.0).
+
 [3]: https://opentelemetry.io/docs/instrumentation/java/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/java/manual/
 [5]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java8/library
 [6]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java17/library
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/deltatorateprocessor
+[9]: https://github.com/open-telemetry/opentelemetry-java-contrib/tree/main/jmx-scraper
 
 {{% /tab %}}
 
 {{% tab "Go" %}}
+
+#### Manual instrumentation
 
 OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime metrics, see the documentation for the [runtime package][4].
 
@@ -100,6 +121,8 @@ processors:
       match_type: strict
 ```
 
+**Note**: The minimum supported version of [`go.opentelemetry.io/contrib/instrumentation/runtime`][4] is v0.46.0, which also requires Go 1.20+ and [OpenTelemetry Go SDK v1.21.0+](https://github.com/open-telemetry/opentelemetry-go/releases/tag/v1.21.0).
+
 [3]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [4]: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
@@ -108,8 +131,6 @@ processors:
 {{% /tab %}}
 
 {{% tab ".NET" %}}
-
-<div class="alert alert-danger">The minimum supported version of the .NET OpenTelemetry SDK is <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a></div>
 
 #### Automatic instrumentation
 
@@ -139,6 +160,8 @@ processors:
       - process.cpu.time
 ```
 
+**Note**: The minimum supported version of the .NET OpenTelemetry SDK is [1.5.0](https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0).
+
 [3]: https://opentelemetry.io/docs/instrumentation/net/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/net/manual/
 [5]: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime
@@ -152,8 +175,6 @@ processors:
 #### Automatic instrumentation
 
 If you use [OpenTelemetry automatic instrumentation][3] for Node.js applications, runtime metrics are enabled by default through the [`@opentelemetry/instrumentation-runtime-node`][5] package.
-
-**Note**: Runtime metrics are only exported if a `MeterProvider` and metric exporter are configured. Set the `OTEL_METRICS_EXPORTER` environment variable or programmatically configure a `metricReader` in your SDK initialization.
 
 #### Manual instrumentation
 
@@ -180,7 +201,9 @@ Host-level metrics such as system CPU and memory usage are not included in OpenT
    hostMetrics.start();
    ```
 
-For the list of metrics collected by this package, see the [Node Contrib Host table](#node-contrib-host).
+For the list of metrics collected by this package, see the [Node.js Contrib Host table](#nodejs-contrib-host).
+
+**Note**: The minimum supported version of [`@opentelemetry/instrumentation-runtime-node`][5] is [0.9.0](https://github.com/open-telemetry/opentelemetry-js-contrib/releases/tag/instrumentation-runtime-node-v0.9.0).
 
 [3]: https://opentelemetry.io/docs/zero-code/js/
 [4]: https://opentelemetry.io/docs/languages/js/instrumentation/
@@ -191,13 +214,21 @@ For the list of metrics collected by this package, see the [Node Contrib Host ta
 
 {{% tab "Python" %}}
 
+#### Installation
+
 Runtime metrics are not enabled by default for Python applications. Install the [`opentelemetry-instrumentation-system-metrics`][5] package:
 
 ```shell
 pip install opentelemetry-instrumentation-system-metrics
 ```
 
-If you use [automatic instrumentation][3], `opentelemetry-instrument` discovers and enables the package after installation. If you use [manual instrumentation][4], enable it in your application:
+#### Automatic instrumentation
+
+If you use [OpenTelemetry automatic instrumentation][3] for Python applications, `opentelemetry-instrument` discovers and enables the package after installation.
+
+#### Manual instrumentation
+
+If you use [OpenTelemetry manual instrumentation][4], enable the package in your application:
 
 ```python
 from opentelemetry.instrumentation.system_metrics import SystemMetricsInstrumentor
@@ -218,15 +249,18 @@ SystemMetricsInstrumentor().instrument()
 After setup is complete, you can view runtime metrics in:
 - The service's details page (see Java example below)
 - The flame graph metrics tab
-- Default [runtime dashboards][7]
+- Default runtime dashboards ([Java Example][7])
 
 {{< img src="opentelemetry/otel_runtime_metrics_service_page.png" alt="Service page showing OpenTelemetry runtime metrics on the JVM Metrics tab" style="width:100%;" >}}
 
 ## Data collected
 
-The following tables list the OpenTelemetry runtime metrics used in Datadog's out-of-the-box in-app experiences.
+The following tables list the OpenTelemetry runtime metrics used in Datadog's out-of-the-box in-app experiences. Each row maps an OpenTelemetry metric to the equivalent Datadog metric name, along with a description and any attribute conditions Datadog uses to identify the correct data point:
 
-<div class="alert alert-danger"> OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.</div>
+- **Transform**: shown when both the OpenTelemetry metric and the Datadog metric require attribute filters to uniquely identify the data point.
+- **Filter**: shown when only the OpenTelemetry metric requires an attribute filter.
+
+For Collector processor configuration required to make these metrics compatible with Datadog, see the [Collector configuration](#2-configure-your-application) instructions above.
 
 {{< tabs >}}
 {{< tab "Java" >}}
@@ -236,10 +270,10 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 {{< mapping-table resource="jvm-instrumentation.csv">}}
 
 <h3>JVM Contrib</h3>
-<p>These metrics are collected when using the OpenTelemetry JMX Metrics Gatherer.</p>
+<p>These metrics are collected when using the OpenTelemetry JMX Metric Scraper.</p>
 {{< mapping-table resource="jvm-contrib.csv">}}
 
-<h3>JVM Deprecated</h3>
+<h3>Deprecated JVM Metrics</h3>
 <p>These metrics are collected when using OpenTelemetry Java SDK versions 1.32.0 and earlier.</p>
 {{< mapping-table resource="jvm-deprecated.csv">}}
 
@@ -247,6 +281,8 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 
 {{< tab "Go" >}}
 
+<h3>Go Runtime Metrics</h3>
+<p>These metrics are collected by the OpenTelemetry Go <a href="https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime">runtime instrumentation package</a>.</p>
 {{< mapping-table resource="go-contrib-runtime.csv">}}
 
 {{< /tab >}}
@@ -269,11 +305,11 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 
 {{< tab "Node.js" >}}
 
-<h3>Node Contrib Runtime</h3>
+<h3>Node.js Contrib Runtime</h3>
 <p>These metrics are emitted from auto-instrumentation with the latest version of the OpenTelemetry Node.js SDK.</p>
 {{< mapping-table resource="node-contrib-runtime.csv">}}
 
-<h3>Node Contrib Host</h3>
+<h3>Node.js Contrib Host</h3>
 <p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/host-metrics">@opentelemetry/host-metrics</a> package. This package is not included in OpenTelemetry automatic instrumentation and must be installed and configured manually.</p>
 {{< mapping-table resource="node-contrib-host.csv">}}
 
@@ -281,24 +317,31 @@ The following tables list the OpenTelemetry runtime metrics used in Datadog's ou
 
 {{% tab "Python" %}}
 
-The following table lists the conceptual equivalences between OpenTelemetry and Datadog Python runtime metrics. There are no direct metric-name mappings because the metric types differ between the two systems.
+<h3>Python Runtime Metrics</h3>
+<p>These metrics are collected by the <a href="https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-system-metrics"><code>opentelemetry-instrumentation-system-metrics</code></a> package. The following table lists the conceptual equivalences between OpenTelemetry and Datadog Python runtime metrics. There are no direct metric-name mappings because the metric types differ between the two systems.</p>
 
-| Datadog metric | Description | OpenTelemetry metric |
-| --- | --- | --- |
-| `runtime.python.cpu.time.sys` | Number of seconds executing in the kernel. | `process.cpu.time` (`type: system`) |
-| `runtime.python.cpu.time.user` | Number of seconds executing outside the kernel. | `process.cpu.time` (`type: user`) |
-| `runtime.python.cpu.percent` | CPU utilization percentage. OTel divides the raw value by 100 times the number of CPU cores. | `process.cpu.utilization` |
-| `runtime.python.cpu.ctx_switch.voluntary` | Number of voluntary context switches. | `process.context_switches` (`type: voluntary`) |
-| `runtime.python.cpu.ctx_switch.involuntary` | Number of involuntary context switches. | `process.context_switches` (`type: involuntary`) |
-| `runtime.python.gc.count.gen0` | Number of generation 0 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 0`) |
-| `runtime.python.gc.count.gen1` | Number of generation 1 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 1`) |
-| `runtime.python.gc.count.gen2` | Number of generation 2 objects. | `process.runtime.{python_implementation}.gc_count` (`count: 2`) |
-| `runtime.python.mem.rss` | Resident set memory. | `process.memory.usage` |
-| `runtime.python.thread_count` | Number of threads. | `process.thread.count` |
+| OTEL | Datadog | Description | Filter |
+| --- | --- | --- | --- |
+| `process.cpu.time` | `runtime.python.cpu.time.sys` | Number of seconds executing in the kernel. | `type`: `system` |
+| `process.cpu.time` | `runtime.python.cpu.time.user` | Number of seconds executing outside the kernel. | `type`: `user` |
+| `process.cpu.utilization` | `runtime.python.cpu.percent` | CPU utilization percentage. OTel divides the raw value by 100 times the number of CPU cores. | |
+| `process.context_switches` | `runtime.python.cpu.ctx_switch.voluntary` | Number of voluntary context switches. | `type`: `voluntary` |
+| `process.context_switches` | `runtime.python.cpu.ctx_switch.involuntary` | Number of involuntary context switches. | `type`: `involuntary` |
+| `process.runtime.{python_implementation}.gc_count` | `runtime.python.gc.count.gen0` | Number of generation 0 objects. | `count`: `0` |
+| `process.runtime.{python_implementation}.gc_count` | `runtime.python.gc.count.gen1` | Number of generation 1 objects. | `count`: `1` |
+| `process.runtime.{python_implementation}.gc_count` | `runtime.python.gc.count.gen2` | Number of generation 2 objects. | `count`: `2` |
+| `process.memory.usage` | `runtime.python.mem.rss` | Resident set memory. | |
+| `process.thread.count` | `runtime.python.thread_count` | Number of threads. | |
 
 {{% /tab %}}
 
 {{< /tabs >}}
+
+## Troubleshooting
+
+### Metric name mapping
+
+OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.
 
 ## Further reading
 
