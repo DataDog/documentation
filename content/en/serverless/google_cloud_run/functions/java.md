@@ -16,9 +16,9 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Java tracer**.
+1. **Install the Datadog Java SDK**.
 
-   1. Download the Datadog Java tracer, and make sure it is deployed with your function:
+   1. Download the Datadog Java SDK, and make sure it is deployed with your function:
 
       {{< code-block lang="bash" disable_copy="false" >}}
 wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
@@ -26,7 +26,7 @@ wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 
       Add the `JAVA_TOOL_OPTIONS: -javaagent:/path/to/dd-java-agent.jar` environment variable to your app.
 
-   2. Add the tracer artifacts.
+   2. Add the SDK artifacts.
       {{< tabs >}}
       {{% tab "Maven" %}}
 {{< code-block lang="xml" disable_copy="false" >}}

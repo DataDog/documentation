@@ -11,9 +11,9 @@ Use the Availability Zone component to represent Availability Zones from your Am
 
 Use the toolbar to configure and customize your component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Raise**: Raise the availability zone component above other availability zones.
-- **Lower**: Lower the availability zone component below other availability zones.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Raise{{< /ui >}}: Raise the availability zone component above other availability zones.
+- {{< ui >}}Lower{{< /ui >}}: Lower the availability zone component below other availability zones.
 
 ## API
 

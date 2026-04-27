@@ -11,13 +11,13 @@ Use the Direct Connect Connection component to visualize connections between you
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on the 2D and 3D views or different colors for each.
-- **Location**: Select the Direct Connect location.
-- **Number of Ports**: Enter the number of ports used by Direct Connect. Only available for dedicated connections.
-- **Type**: Select the type of the connection.
-- **Capacity (bps)**: Select the connection capacity in bits per second.
-- **Transfer from**: Select the AWS region to transfer from.
-- **Data out (GB)**: Enter the total volume of outbound data in gigabytes.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on the 2D and 3D views or different colors for each.
+- {{< ui >}}Location{{< /ui >}}: Select the Direct Connect location.
+- {{< ui >}}Number of Ports{{< /ui >}}: Enter the number of ports used by Direct Connect. Only available for dedicated connections.
+- {{< ui >}}Type{{< /ui >}}: Select the type of the connection.
+- {{< ui >}}Capacity (bps){{< /ui >}}: Select the connection capacity in bits per second.
+- {{< ui >}}Transfer from{{< /ui >}}: Select the AWS region to transfer from.
+- {{< ui >}}Data out (GB){{< /ui >}}: Enter the total volume of outbound data in gigabytes.
 
 ## API
 
