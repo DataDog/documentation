@@ -16,7 +16,7 @@ test.describe('ApiResponse component — visual', () => {
   for (const code of statusCodes) {
     test(`status ${code} tab matches screenshot`, async ({ page }) => {
       const response = page.locator('.api-response').first();
-      await expect(response.locator('.tabs[data-hydrated="true"]').first()).toBeVisible();
+      await expect(response.locator('[role="tablist"][data-hydrated="true"]').first()).toBeVisible();
       await response.getByRole('tab', { name: code, exact: true }).click();
       await expect(response.getByRole('tab', { name: code, exact: true })).toHaveAttribute(
         'aria-selected',
@@ -28,8 +28,10 @@ test.describe('ApiResponse component — visual', () => {
 
   test('Model view matches screenshot', async ({ page }) => {
     const response = page.locator('.api-response').first();
-    // Ensure both outer and inner Tabs islands are hydrated.
-    await expect(response.locator('.tabs[data-hydrated="true"]')).toHaveCount(2);
+    // Wait for all Tabs islands inside this response to hydrate.
+    await expect(response.locator('[role="tablist"][data-hydrated="true"]')).toHaveCount(
+      await response.locator('[role="tablist"]').count()
+    );
     await response.getByRole('tab', { name: '200', exact: true }).click();
     await expect(response.getByRole('tab', { name: 'Model', exact: true })).toHaveAttribute(
       'aria-selected',
@@ -40,7 +42,9 @@ test.describe('ApiResponse component — visual', () => {
 
   test('Example view matches screenshot', async ({ page }) => {
     const response = page.locator('.api-response').first();
-    await expect(response.locator('.tabs[data-hydrated="true"]')).toHaveCount(2);
+    await expect(response.locator('[role="tablist"][data-hydrated="true"]')).toHaveCount(
+      await response.locator('[role="tablist"]').count()
+    );
     await response.getByRole('tab', { name: '200', exact: true }).click();
     await response.getByRole('tab', { name: 'Example', exact: true }).click();
     await expect(response.getByRole('tab', { name: 'Example', exact: true })).toHaveAttribute(

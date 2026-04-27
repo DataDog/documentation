@@ -24,7 +24,7 @@ test.describe('ApiCodeExample component', () => {
 
   test('clicking a language tab switches the panel', async ({ page }) => {
     const codeExample = page.locator('.api-code-example').first();
-    await expect(codeExample.locator('.tabs[data-hydrated="true"]').first()).toBeVisible();
+    await expect(codeExample.locator('[role="tablist"][data-hydrated="true"]').first()).toBeVisible();
     const tabButtons = codeExample.locator('[role="tab"]');
     const count = await tabButtons.count();
 

@@ -67,6 +67,10 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     const trigger = page.locator('a[data-trigger="free-trial"]').first();
 
     await expect(modal).toBeHidden();
+    // FreeTrialModal uses client:idle — wait for all islands to hydrate.
+    await page.waitForFunction(() =>
+      document.querySelectorAll('astro-island[ssr]').length === 0
+    );
     await trigger.click();
     await expect(modal).toBeVisible();
 

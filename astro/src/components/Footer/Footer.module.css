@@ -869,7 +869,7 @@
 
 /* --- Free-trial modal --------------------------------------------------- */
 
-.modalOverlay {
+.free-trial-modal__overlay {
   position: fixed;
   inset: 0;
   background: var(--hugo-modal-overlay);
@@ -881,11 +881,11 @@
   box-sizing: border-box;
 }
 
-.modalOverlay--open {
+.free-trial-modal__overlay--open {
   display: flex;
 }
 
-.modalDialog {
+.free-trial-modal__dialog {
   background: var(--hugo-modal-bg);
   border-radius: var(--hugo-modal-border-radius);
   width: 100%;
@@ -897,7 +897,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.modalHeader {
+.free-trial-modal__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -905,7 +905,7 @@
   border-bottom: 1px solid #eee;
 }
 
-.modalTitle {
+.free-trial-modal__title {
   margin: 0;
   flex: 1;
   font-size: 18px;
@@ -915,7 +915,7 @@
   letter-spacing: 0.4px;
 }
 
-.modalClose {
+.free-trial-modal__close {
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -925,18 +925,18 @@
   padding: 0 0.5rem;
 }
 
-.modalClose:hover {
+.free-trial-modal__close:hover {
   color: #000;
 }
 
-.modalBody {
+.free-trial-modal__body {
   flex: 1;
   overflow: auto;
   padding: 0;
   background: #ffffff;
 }
 
-.modalIframe {
+.free-trial-modal__iframe {
   display: block;
   border: 0;
   width: 100%;

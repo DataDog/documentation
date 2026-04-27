@@ -6,6 +6,7 @@
  * (footer-small, footer-nycactivities, aws-reinvent-2020, footer-slim).
  */
 import styles from './Footer.module.css';
+import { classListFactory } from '../../utils/classListFactory';
 import FooterBlurb from './FooterBlurb.astro';
 import FooterAccordion from './FooterAccordion.tsx';
 import LanguageSelector from './LanguageSelector.tsx';
@@ -161,15 +162,16 @@ const langClasses = {
   secondary: styles.langSecondary,
 };
 
+const cl = classListFactory(styles);
 const modalClasses = {
-  overlay: styles.modalOverlay,
-  overlayOpen: styles['modalOverlay--open'],
-  dialog: styles.modalDialog,
-  header: styles.modalHeader,
-  title: styles.modalTitle,
-  close: styles.modalClose,
-  body: styles.modalBody,
-  iframe: styles.modalIframe,
+  overlay: cl('free-trial-modal__overlay'),
+  overlayOpen: cl('free-trial-modal__overlay--open'),
+  dialog: cl('free-trial-modal__dialog'),
+  header: cl('free-trial-modal__header'),
+  title: cl('free-trial-modal__title'),
+  close: cl('free-trial-modal__close'),
+  body: cl('free-trial-modal__body'),
+  iframe: cl('free-trial-modal__iframe'),
 };
 ---
 

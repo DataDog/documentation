@@ -48,7 +48,7 @@ export function TabsNav({ labels, externalContext, variant }: TabsNavProps) {
       return;
     }
 
-    // Use pills if tabs won't fit
+    // Use pills if tabs won't fit (skipped if variant is explicitly set)
     const checkOverflow = () => {
       addStyle(thisElement.classList, "tabs__nav--measuring");
       const overflows = thisElement.scrollWidth > thisElement.clientWidth;
@@ -70,13 +70,13 @@ export function TabsNav({ labels, externalContext, variant }: TabsNavProps) {
 
   const setActiveTab = (index: number) => {
     setActiveIndex(index);
-    tabPanelsRef.current.forEach((panel, i) => {
+    tabPanelsRef.current.forEach((tabPanel, i) => {
       const active = i === index;
-      panel.hidden = !active;
+      tabPanel.hidden = !active;
       if (active) {
-        addStyle(panel.classList, "tabs__panel--active");
+        addStyle(tabPanel.classList, "tabs__panel--active");
       } else {
-        removeStyle(panel.classList, "tabs__panel--active");
+        removeStyle(tabPanel.classList, "tabs__panel--active");
       }
     });
   };
