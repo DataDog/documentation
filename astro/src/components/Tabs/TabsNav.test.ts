@@ -40,7 +40,7 @@ const mountNav = (groupId: string, labels: string[]) => {
       labels,
       externalContext: {
         scope: groupId,
-        entries: { tabsComponent: groupId, tabPanelComponents: panelIds },
+        entries: { tabsEl: groupId, tabPanelEls: panelIds },
       },
     }),
     { container: navContainer },
