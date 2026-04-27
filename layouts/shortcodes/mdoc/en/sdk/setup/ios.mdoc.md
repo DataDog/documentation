@@ -450,6 +450,23 @@ configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate al
 {% /tab %}
 {% /tabs %}
 
+#### Enable RUM on watchOS
+
+On watchOS, automatic view and action tracking is not available. Configure RUM without the UIKit and SwiftUI predicates:
+
+```swift
+import DatadogRUM
+
+RUM.enable(
+  with: RUM.Configuration(
+    applicationID: "<rum application id>",
+    urlSessionTracking: RUM.Configuration.URLSessionTracking()
+  )
+)
+```
+
+To track views and actions on watchOS, use the [manual tracking APIs][18].
+
 #### Enable `URLSessionInstrumentation`
 
 To monitor requests sent from the `URLSession` instance as resources, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the `URLSession`:
@@ -610,4 +627,5 @@ See [Supported versions][9] for a list of operating system versions and platform
 [15]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-actions
 [16]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
 [17]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-resources
+[18]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#manually-track-rum-views
 

@@ -445,7 +445,7 @@ For more information, see [dSYMs commands][11].
 ## Limitations
 
 - dSYM files are limited in size to **2 GB** each.
-- Symbols are not supported for simulators. Symbols are only available for crashes on physical iOS and tvOS devices.
+- Symbols are not supported for simulators. Symbols are only available for crashes on physical iOS, tvOS, watchOS, and visionOS devices.
 
 ## Test your implementation
 

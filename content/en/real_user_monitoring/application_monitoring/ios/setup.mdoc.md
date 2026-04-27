@@ -27,7 +27,7 @@ further_reading:
    text: "Learn about instrumenting SwiftUI applications"
  - link: "/real_user_monitoring/application_monitoring/ios/supported_versions"
    tag: "Documentation"
-   text: "RUM iOS and tvOS monitoring supported versions"
+   text: "RUM iOS, tvOS, watchOS, and visionOS monitoring supported versions"
  - link: "/real_user_monitoring/guide/mobile-sdk-upgrade"
    tag: "Documentation"
    text: "Upgrade RUM Mobile SDKs"
