@@ -37,7 +37,7 @@ Supported SQL Server versions
 
 ## Configure the AWS integration
 
-Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][2].
+Enable {{< ui >}}Standard Collection{{< /ui >}} in the {{< ui >}}Resource Collection{{< /ui >}} section of your [Amazon Web Services integration tile][2].
 
 ## Grant the Agent access
 

@@ -22,9 +22,9 @@ Using reference tables, you can accomplish the following:
 ## Setup
 
 1. Create any metric query with [space aggregation][2] (one or more tags are selected to group by).
-2. Select the **Join** button (next to the **Formulas** button) as shown below:
+2. Click **Modify**, then select **Join**, as shown below:
 
-   {{< img src="metrics/nested_queries/reference_table_joins_with_metrics/reference_table_join.png" alt="The Join with Reference Table option in a metrics query" style="width:100%" >}}
+   {{< img src="metrics/nested_queries/reference_table_joins_with_metrics/reference_table_join_04172026.png" alt="The Join with Reference Table option in the Modify menu of a metrics query." style="width:100%" >}}
 
 3. Specify the type of join and the reference table that you want to join with your metrics.
 4. Define the join condition with the existing tag from your query (for example, `team`) and the column in your reference table to be used for the join.

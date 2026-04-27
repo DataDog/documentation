@@ -25,7 +25,7 @@ further_reading:
 - kubectl configured to access your cluster
 - Helm (recommended for Agent installation)
 - Your Datadog API key
-- Datadog Python tracing library (see [version requirements][1])
+- Datadog Python SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -38,7 +38,7 @@ Install the Datadog Agent by following the [setup instructions for Kubernetes](/
 
 ### Manually enabling App and API Protection monitoring
 
-Install the Datadog Python tracing library using an init container or in your application's Dockerfile:
+Install the Datadog Python SDK using an init container or in your application's Dockerfile:
 
 ```dockerfile
 RUN pip install ddtrace
