@@ -54,7 +54,7 @@ Indexers use a write-ahead log (WAL) to temporarily buffer data before uploading
 - **Size:** At least 250 GB per indexer pod
 - **Storage class:** Network-attached block storage (for example, `gp3` on AWS, Persistent Disk on GCP, Managed Disks on Azure)
 
-Note: Local SSDs are not recommended because the WAL is not replicated. Ephemeral disks can result in data loss if the disk fails. Use network-attached storage for built-in redundancy.
+**Note**: Local SSDs are not recommended because the WAL is not replicated. Ephemeral disks can result in data loss if the disk fails. Use network-attached storage for built-in redundancy.
 
 Example Helm values:
 ```yaml
