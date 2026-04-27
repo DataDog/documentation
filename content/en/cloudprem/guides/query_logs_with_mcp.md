@@ -62,7 +62,7 @@ For examples of parameter and natural language queries, see [Advanced query exam
 To find your BYOC Logs index name:
 
 1. Navigate to the [Datadog Log Explorer][2].
-2. Look for the **BYOC INDEXES** section in the left facet panel.
+2. Look for the {{< ui >}}BYOC INDEXES{{< /ui >}} section in the left facet panel.
 3. Your CloudPrem indexes are listed there, in the format `cloudprem--<cluster_name>--<index_name>`.
 
 You can also find your index names in the [BYOC Logs console][3] by selecting a cluster and clicking {{< ui >}}View Indexes{{< /ui >}}.
