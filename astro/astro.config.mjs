@@ -4,6 +4,7 @@ import preact from '@astrojs/preact';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
+  site: 'https://docs.datadoghq.com',
   integrations: [markdoc(), preact()],
   vite: {
     plugins: [
