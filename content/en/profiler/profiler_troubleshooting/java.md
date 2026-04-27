@@ -80,41 +80,26 @@ jdk.ObjectAllocationSample#enabled=true
 
 ### Live heap profiling
 
-Live Heap Profiling is a Datadog profiler feature that helps identify memory leaks and understand heap usage by tracking which allocated objects survive garbage collection. Unlike standard allocation profiling (which shows what was allocated), live heap profiling shows what is still alive on the heap — making it more useful for diagnosing memory leaks.
+Live heap profiling tracks which allocated objects survive garbage collection, making it useful for diagnosing memory leaks and understanding overall heap usage. Starting with dd-trace-java **v1.61.0**, it is **enabled by default** on Linux. The profiler automatically selects the most accurate engine available for your JVM version.
 
-The live-heap profiler engine:
+The live-heap profiler:
 - Useful for investigating the overall memory usage of your service and identifying potential memory leaks
-- Samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle
-- Uses the number of surviving samples to estimate the number of live objects in the heap
-- Limits the number of tracked samples to avoid unbounded growth of the profiler's memory usage
-- Disabled by default
+- Samples allocations and tracks whether those samples survived the most recent garbage collection cycle
+- Automatically uses the Datadog profiler engine on JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+, and falls back to the JFR engine (`jdk.OldObjectSample`) on older supported JDK versions
 - Not available on Windows
-- For JMC users, the Datadog live-heap event is `datadog.HeapLiveObject`
+- For JMC users, the Datadog live-heap event is `datadog.HeapLiveObject`; the JFR fallback emits `jdk.OldObjectSample`
 
-| Configuration | Environment Variable | System Property |
-|---------------|---------------------|-----------------|
-| **Enable** (Requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+) | `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED=true` | `-Ddd.profiling.ddprof.liveheap.enabled=true` |
-
-**Note**: The live-heap engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
-
-
-### Heap profiling
-
-Heap profiling uses the JVM's built-in `jdk.OldObjectSample` JFR event to track objects that have been live in the heap for a sustained period of time. This helps identify potential memory leaks by showing which objects are accumulating over time. Unlike live heap profiling (which uses the Datadog profiler engine), heap profiling relies on JFR and is available on all platforms where JFR is supported.
-
-<div class="alert alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
-
-To enable the heap profiler, start your application with one of the following:
+To disable live heap profiling entirely (both Datadog engine and JFR fallback):
 
 | Environment Variable | System Property |
 |---------------------|-----------------|
-| `DD_PROFILING_HEAP_ENABLED=true` | `-Ddd.profiling.heap.enabled=true` |
+| `DD_PROFILING_HEAP_ENABLED=false` | `-Ddd.profiling.heap.enabled=false` |
 
-Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
+To disable only the Datadog native engine implementation (the JFR fallback `jdk.OldObjectSample` remains active on older JDKs):
 
-```
-jdk.OldObjectSample#enabled=true
-```
+| Environment Variable | System Property |
+|---------------------|-----------------|
+| `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED=false` | `-Ddd.profiling.ddprof.liveheap.enabled=false` |
 
 
 ### Heap histogram metrics
@@ -142,13 +127,18 @@ The [Trace to Profiling integration][3] identifies code hotspots in slow traces.
 
 The following settings allow fine-grained control over the profiler engines. These are typically not needed for standard use cases. For detailed information about each profiler type, see the corresponding sections above: [CPU profiling](#cpu-profiling), [Wallclock](#wallclock), [Allocation profiling](#allocation-profiling), and [Live heap profiling](#live-heap-profiling).
 
+**Note**:
+  - `DD_PROFILING_HEAP_ENABLED` controls all live heap profiling. Setting it to `false` disables both the Datadog native engine and the JFR `jdk.OldObjectSample` fallback.                                                        
+  - `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` only controls the Datadog native engine. The JFR fallback is unaffected by this setting.     
+
 | Environment variable | System property | Description |
 |---------------------|-----------------|-------------|
+| `DD_PROFILING_HEAP_ENABLED` | `-Ddd.profiling.heap.enabled` | Main toggle for all live heap profiling, including both the Datadog native engine and the JFR `jdk.OldObjectSample` fallback (default: true on supported platforms since v1.61.0) |
 | `DD_PROFILING_DDPROF_ENABLED` | `-Ddd.profiling.ddprof.enabled` | Enable the Datadog profiler engine (Linux only, default: true since v1.7.0) |
 | `DD_PROFILING_DDPROF_CPU_ENABLED` | `-Ddd.profiling.ddprof.cpu.enabled` | Enable CPU profiling with the Datadog engine |
 | `DD_PROFILING_DDPROF_WALL_ENABLED` | `-Ddd.profiling.ddprof.wall.enabled` | Enable wallclock profiling (default: true since v1.7.0) |
 | `DD_PROFILING_DDPROF_ALLOC_ENABLED` | `-Ddd.profiling.ddprof.alloc.enabled` | Enable allocation profiling with the Datadog engine |
-| `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` | `-Ddd.profiling.ddprof.liveheap.enabled` | Enable live heap profiling (requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+) |
+| `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` | `-Ddd.profiling.ddprof.liveheap.enabled` | Override for the Datadog native engine live heap implementation only; does not affect the JFR fallback (default: enabled on supported JDK versions (11.0.23+, 17.0.11+, 21.0.3+, or 22+), requires `DD_PROFILING_HEAP_ENABLED=true`) |
 | `DD_PROFILING_ENABLED_EVENTS` | `-Ddd.profiling.enabled.events` | Enable specific JFR events (for example: `jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB`) |
 
 ### JDK Mission Control (JMC) event reference
@@ -160,7 +150,7 @@ If you are analyzing profiles with JDK Mission Control, the following table prov
 | CPU | `jdk.ExecutionSample` | `datadog.ExecutionSample` |
 | Wallclock | - | `datadog.MethodSample` |
 | Allocation | `jdk.ObjectAllocationInNewTLAB`, `jdk.ObjectAllocationOutsideTLAB` | `datadog.ObjectAllocationInNewTLAB`, `datadog.ObjectAllocationOutsideTLAB` |
-| Live heap | - | `datadog.HeapLiveObject` |
+| Live heap | `jdk.OldObjectSample` | `datadog.HeapLiveObject` |
 
 
 ## Advanced configuration
@@ -303,7 +293,7 @@ java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.ddp
 
 The Datadog exception profiler has a small footprint and overhead under normal conditions. If a lot of exceptions are created and thrown, it can cause significant overhead for the profiler. This can happen when you use exceptions for control flow. If you have an unusually high exception rate, turn off exception profiling temporarily until you fix the cause.
 
-To disable exception profiling, start the tracer with the `-Ddd.integration.throwables.enabled=false` JVM setting.
+To disable exception profiling, start the SDK with the `-Ddd.integration.throwables.enabled=false` JVM setting.
 
 Note: Turn this setting back on after you've returned to a more typical rate of exceptions.
 

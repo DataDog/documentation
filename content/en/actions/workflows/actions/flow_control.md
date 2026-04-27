@@ -20,7 +20,7 @@ Use [Logic actions][1] to add control logic to your workflow. For example, you c
 
 ## If condition
 
-You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. In the screenshot below, an **If condition** action determines the next step in the workflow based on whether the status code of a previous HTTP request action returns `200`.
+You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. In the screenshot below, an {{< ui >}}If condition{{< /ui >}} action determines the next step in the workflow based on whether the status code of a previous HTTP request action returns `200`.
 
 {{< img src="service_management/workflows/if-condition.png" alt="The workflow canvas with a if condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200." >}}
 
@@ -32,45 +32,45 @@ Use the Switch statement action to handle multiple branching paths in a single s
 
 ## Sleep
 
-The **Sleep** action pauses the execution of the workflow for a specified duration. Select a predefined duration from the **Duration** drop-down, or enter a custom variable in seconds.
+The {{< ui >}}Sleep{{< /ui >}} action pauses the execution of the workflow for a specified duration. Select a predefined duration from the {{< ui >}}Duration{{< /ui >}} drop-down, or enter a custom variable in seconds.
 
 ## For loop
 
-The **For loop** action allows you to execute a set of actions iteratively for each item in a given input list. For loops accept an input list of up to 2000 items. You can perform many different operations within a for loop, including configuring error paths and updating variables.
+The {{< ui >}}For loop{{< /ui >}} action allows you to execute a set of actions iteratively for each item in a given input list. For loops accept an input list of up to 2000 items. You can perform many different operations within a for loop, including configuring error paths and updating variables.
 
 In the example below, a for loop iterates over a list of incidents and sends a Slack message for any incident that is more than a week old.
 
 {{< img src="service_management/workflows/iteration2.png" alt="A workflow with a for loop. The loop iterates over a list of incidents and sends a message to a slack channel if the incident is more than a week old." style="width:100%;" >}}
 
 To add a for loop to your workflow:
-1. Click the plus (**+**) icon on your workflow canvas to open the action catalog.
-1. Search for and select the **For loop** step.
-1. Click the loop step and enter an **Input list** for the step to iterate over. You can enter a custom list or use a workflow variable.
-1. Inside the loop frame, click the (**+**) icon to add a step to the loop.
+1. Click the plus ({{< ui >}}+{{< /ui >}}) icon on your workflow canvas to open the action catalog.
+1. Search for and select the {{< ui >}}For loop{{< /ui >}} step.
+1. Click the loop step and enter an {{< ui >}}Input list{{< /ui >}} for the step to iterate over. You can enter a custom list or use a workflow variable.
+1. Inside the loop frame, click the ({{< ui >}}+{{< /ui >}}) icon to add a step to the loop.
 1. Configure the looped action. To access the current value in the input list, use the `{{Current.Value}}` variable. To access the index of the current value, use `{{Current.Index}}`.
-1. Add and configure any additional steps you need to loop. You can use an **if statement** and a **break** to exit your loop early.
-1. **Save** and **Publish** the workflow.
+1. Add and configure any additional steps you need to loop. You can use an {{< ui >}}if statement{{< /ui >}} and a {{< ui >}}break{{< /ui >}} to exit your loop early.
+1. {{< ui >}}Save{{< /ui >}} and {{< ui >}}Publish{{< /ui >}} the workflow.
 
-When a run completes, the workflow enters **Debug** mode. Select a step within the loop to see a list of **All**, **Failed**, or **Successful** iterations for that step. Select an iteration to see the output or the error message.
+When a run completes, the workflow enters {{< ui >}}Debug{{< /ui >}} mode. Select a step within the loop to see a list of {{< ui >}}All{{< /ui >}}, {{< ui >}}Failed{{< /ui >}}, or {{< ui >}}Successful{{< /ui >}} iterations for that step. Select an iteration to see the output or the error message.
 
 ## While loop
 
-The **While loop** action allows you to execute a set of actions iteratively based on a set of conditions and is recommended for automation patterns where the number of repetitions isn't known in advance. While loops run a maximum of 2000 iterations. You can perform different operations with a while loop, including pagination, polling for progress, and retrying until success.
+The {{< ui >}}While loop{{< /ui >}} action allows you to execute a set of actions iteratively based on a set of conditions and is recommended for automation patterns where the number of repetitions isn't known in advance. While loops run a maximum of 2000 iterations. You can perform different operations with a while loop, including pagination, polling for progress, and retrying until success.
 
 The following example uses a while loop to paginate the AWS S3 List Buckets API for an App.
 
 {{< img src="service_management/workflows/iteration3.png" alt="A workflow with a while loop. The workflow uses a while loop to paginate the AWS S3 List Buckets API for an App." style="width:100%;" >}}
 
 To add a while loop to your workflow:
-1. Click the plus (**+**) icon on your workflow canvas to open the action catalog.
-1. Search for and select the **While loop** step.
+1. Click the plus ({{< ui >}}+{{< /ui >}}) icon on your workflow canvas to open the action catalog.
+1. Search for and select the {{< ui >}}While loop{{< /ui >}} step.
 1. Click the loop step and define the condition that the While loop will evaluate before each iteration. The loop continues if the condition is true, and stops when it evaluates to false.
-1. Inside the loop frame, click the plus (**+**) icon to add a step to the loop.
+1. Inside the loop frame, click the plus ({{< ui >}}+{{< /ui >}}) icon to add a step to the loop.
 1. Configure the looped action. To access the index of the current value, use `{{Current.Index}}`.
-1. Add and configure any additional steps you need to loop. You can use an **if statement** and a **break** action to exit your loop early.
-1. **Save** and **Publish** the workflow.
+1. Add and configure any additional steps you need to loop. You can use an {{< ui >}}if statement{{< /ui >}} and a {{< ui >}}break{{< /ui >}} action to exit your loop early.
+1. {{< ui >}}Save{{< /ui >}} and {{< ui >}}Publish{{< /ui >}} the workflow.
 
-When a run completes, the workflow enters **Debug** mode. Select a step within the loop to see a list of **All**, **Failed**, or **Successful** iterations for that step. Select an iteration to see the output or the error message. Select the While Loop step and a specific index to see the evaluated condition at the index.
+When a run completes, the workflow enters {{< ui >}}Debug{{< /ui >}} mode. Select a step within the loop to see a list of {{< ui >}}All{{< /ui >}}, {{< ui >}}Failed{{< /ui >}}, or {{< ui >}}Successful{{< /ui >}} iterations for that step. Select an iteration to see the output or the error message. Select the While Loop step and a specific index to see the evaluated condition at the index.
 
 ## Further Reading
 

@@ -35,7 +35,7 @@ If you haven't already, install the [Datadog-Azure integration][3] to collect me
 Instrument your main application with the `dd-trace-js` library. See [Tracing Node.js applications][101] for instructions.
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][102].
+Custom metrics are also collected through the SDK. See the [code examples][102].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
@@ -54,7 +54,7 @@ To set up logging in your application, see [Node.js Log Collection][103]. To set
 Instrument your main application with the `dd-trace-py` library. See [Tracing Python applications][201] for instructions.
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][202].
+Custom metrics are also collected through the SDK. See the [code examples][202].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
@@ -73,7 +73,7 @@ To set up logging in your application, see [Node.js Log Collection][203]. To set
 Instrument your main application with the `dd-trace-java` library. See [Tracing Java applications][301] for instructions.
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][302].
+Custom metrics are also collected through the SDK. See the [code examples][302].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
@@ -91,7 +91,7 @@ To set up logging in your application, see [Node.js Log Collection][303]. To set
 #### Tracing
 Instrument your main application with the `dd-trace-dotnet` library.
 
-1. Add the following lines to the Dockerfile for your main application. This installs and configures the Datadog tracer within your application container.
+1. Add the following lines to the Dockerfile for your main application. This installs and configures the Datadog SDK within your application container.
    {{< code-block lang="dockerfile" >}}
    RUN mkdir -p /datadog/tracer
    RUN mkdir -p /home/LogFiles/dotnet
@@ -140,7 +140,7 @@ ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
 For more information, see [Tracing .NET Applications][401].
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][402].
+Custom metrics are also collected through the SDK. See the [code examples][402].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
@@ -160,7 +160,7 @@ To set up logging in your application, see [C# Log Collection][403]. To set up t
 Instrument your main application with the `dd-trace-go` library. See [Tracing Go applications][501] for instructions.
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][502].
+Custom metrics are also collected through the SDK. See the [code examples][502].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
@@ -179,7 +179,7 @@ To set up logging in your application, see [Node.js Log Collection][503]. To set
 Instrument your main application with the `dd-trace-php` library. See [Tracing PHP applications][601] for instructions.
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][602].
+Custom metrics are also collected through the SDK. See the [code examples][602].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.

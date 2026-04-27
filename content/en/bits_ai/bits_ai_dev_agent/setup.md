@@ -5,7 +5,7 @@ disable_toc: false
 
 ## Overview
 
-Bits AI Dev Agent integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog.  
+[Bits AI Dev Agent][8] integrates with GitHub to open, update, and iterate on pull requests based on issues detected in Datadog. After completing setup, you can [start using the Dev Agent][7].
 
 ## Prerequisites
 
@@ -17,22 +17,22 @@ If your organization uses custom roles, an admin must add this permission manual
 
 1. Install the [GitHub integration][2]. For full installation and configuration steps, see the [GitHub integration guide][3].
 
-1. In your GitHub account, navigate to **Settings** > **Apps** > **Datadog** to configure GitHub permissions.
+1. In your GitHub account, navigate to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Apps{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}} to configure GitHub permissions.
 
    1. To enable basic Dev Agent functionality, set the following permissions:
 
-      - **Repository permissions**
+      - {{< ui >}}Repository permissions{{< /ui >}}
         - Repository contents: Read & write
         - Pull requests: Read & write
-      - **Subscribe to events**
+      - {{< ui >}}Subscribe to events{{< /ui >}}
         - Push
 
    1. (Optional) To allow the Dev Agent to use CI logs when iterating on pull requests, you must send CI logs to Datadog and enable the [auto-push](#enable-auto-push) feature. This requires additional permissions:  
 
-       - **Repository permissions**  
+       - {{< ui >}}Repository permissions{{< /ui >}}
          - Checks: Read  
          - Commit statuses: Read only 
-       - **Subscribe to events**  
+       - {{< ui >}}Subscribe to events{{< /ui >}}
          - Check run
          - Check suite  
          - Issue comment  
@@ -48,43 +48,47 @@ Bits AI Dev Agent uses the `service` and `version` telemetry tags to match detec
 
 To configure telemetry tagging, see [Tag your APM telemetry with Git information][4]. 
 
-You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [**Repositories**][5] > **Service Repository Mapping**.
+You can also configure service-to-repository mapping manually in the Bits AI Dev Agent settings under [{{< ui >}}Repositories{{< /ui >}}][5] > {{< ui >}}Service Repository Mapping{{< /ui >}}.
 
 ### Enable auto-push
-To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to [**Bits AI Dev** > **Settings** > **General**][12] , and set the toggle to **Enable**.
+To enable auto-push, so the Dev Agent can push commits directly to a branch, navigate to **Bits AI Dev** > **Settings** > [**General**][6] , and set the toggle to **Enable**.
 
 **Note**: If auto-push is disabled, you must review and approve code in Datadog before the Dev Agent can push it.
 
+### Configure custom instructions
+
+The Dev Agent ingests custom instruction files from your repository, including:
+
+- `.cursorrules`
+- `.windsurfrules`
+- `copilot-instructions.md`
+- `CLAUDE.md`
+- `AGENTS.md`
+- `agent.md`
+
+
+You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI Dev** > **Settings** > [**General**][6], in the **Global Agent Instructions** section.
+
+## Environment setup
+
+Configure the Dev Agent's runtime environment, including network access policies and repository-specific tooling.
+
 ### Configure internet access
 
-To configure which external domains agents can reach during agent execution, navigate to **Bits AI Dev** > [**Settings**][12] > **General**, and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
+By default, the Dev Agent has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to **Bits AI Dev** > **Settings** > [**General**][6], and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
 
 The default allowlist includes the following domains:
 
 | Language | Domains |
 |---|---|
 | Clojure/JVM | `repo.clojars.org` |
-| Go | `pkg.go.dev`, `proxy.golang.org`, `vuln.go.dev` |
+| Go | `pkg.go.dev`, `proxy.golang.org`, `sum.golang.org`, `vuln.go.dev` |
 | Java/JVM | `repo1.maven.org` |
-| JavaScript/TypeScript | `registry.npmjs.org` |
+| JavaScript/TypeScript | `registry.npmjs.org`, `registry.yarnpkg.com` |
 | .NET/C# | `api.nuget.org` |
 | PHP | `packagist.org`, `repo.packagist.org` |
 | Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
 | Rust | `index.crates.io`, `static.crates.io` |
-
-### Configure custom instructions
-
-The Dev Agent ingests custom instruction files from your repository, including:  
-
-- `.cursorrules`  
-- `.windsurfrules`  
-- `copilot-instructions.md`  
-- `CLAUDE.md`  
-- `AGENTS.md`  
-- `agent.md`  
-
-
-You can also define global custom instructions, which apply to all Dev Agent sessions, in **Bits AI Dev** > [**Settings**][12] > **General**, in the **Global Agent Instructions** section. 
 
 ### Configure repository environment
 
@@ -92,10 +96,10 @@ Configure a custom environment for the Dev Agent to install dependencies, format
 
 To configure a repository environment:
 
-1. Go to **Bits AI Dev** > **Settings** > [**Repositories**][5], and find the **Environments** section.
-1. Click **Add Environment** to create a repository configuration:
+1. Go to {{< ui >}}Bits AI Dev{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Repositories{{< /ui >}}][5], and find the {{< ui >}}Environments{{< /ui >}} section.
+1. Click {{< ui >}}Add Environment{{< /ui >}} to create a repository configuration:
    1. Select a repository from the dropdown.
-   1. (Optional) Under **Pre-installed Languages**, click **Select Versions** to specify the language versions the sandbox should use.
+   1. (Optional) Under {{< ui >}}Pre-installed Languages{{< /ui >}}, click {{< ui >}}Select Versions{{< /ui >}} to specify the language versions the sandbox should use.
    1. (Optional) Define environment variables and secrets. Environment variables are available during both environment setup and Dev Agent execution. Secrets are available as environment variables only during environment setup.
    1. (Optional) Add a shell script with setup commands to execute (for example: `pip install -r requirements.txt`).
 1. Run the setup command to ensure it runs successfully.
@@ -119,3 +123,5 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [4]: /integrations/guide/source-code-integration/?tab=go#tag-your-apm-telemetry-with-git-information
 [5]: https://app.datadoghq.com/code/settings?tab=repositories
 [6]: https://app.datadoghq.com/code/settings
+[7]: /bits_ai/bits_ai_dev_agent/#start-a-code-session
+[8]: /bits_ai/bits_ai_dev_agent/

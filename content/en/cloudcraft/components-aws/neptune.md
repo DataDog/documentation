@@ -11,16 +11,16 @@ Use the Neptune component to visualize serverless graph databases from your Amaz
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
-- **Role**: Select the role of the Neptune database.
-- **Instance type**: Select the Neptune instance type. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **Size**: Select the size of the Neptune instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
-- **Storage (GB)**: Enter the total amount of storage available for the database in gigabytes. Not available for the reader role.
-- **Snapshot (GB)**: Enter the total amount of storage provisioned for snapshots in gigabytes. Not available for role reader.
-- **IOPS (Millions)**: Enter the monthly I/O limit for the instance, in millions. Not available for the reader role.
-- **Instances**: Enter the number of Neptune instances. Only available for role serverless.
-- **Min NCUs**: Enter the minimum amount of NCUs available for the database. Only available for the serverless role.
-- **Max NCUs**: Enter the maximum amount of NCUs available for the database. Only available for the serverless role .
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
+- {{< ui >}}Role{{< /ui >}}: Select the role of the Neptune database.
+- {{< ui >}}Instance type{{< /ui >}}: Select the Neptune instance type. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- {{< ui >}}Size{{< /ui >}}: Select the size of the Neptune instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
+- {{< ui >}}Storage (GB){{< /ui >}}: Enter the total amount of storage available for the database in gigabytes. Not available for the reader role.
+- {{< ui >}}Snapshot (GB){{< /ui >}}: Enter the total amount of storage provisioned for snapshots in gigabytes. Not available for role reader.
+- {{< ui >}}IOPS (Millions){{< /ui >}}: Enter the monthly I/O limit for the instance, in millions. Not available for the reader role.
+- {{< ui >}}Instances{{< /ui >}}: Enter the number of Neptune instances. Only available for role serverless.
+- {{< ui >}}Min NCUs{{< /ui >}}: Enter the minimum amount of NCUs available for the database. Only available for the serverless role.
+- {{< ui >}}Max NCUs{{< /ui >}}: Enter the maximum amount of NCUs available for the database. Only available for the serverless role .
 
 ## API
 

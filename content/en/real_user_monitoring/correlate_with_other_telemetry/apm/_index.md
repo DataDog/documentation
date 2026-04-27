@@ -26,6 +26,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
     tag: "Blog"
     text: "Correlate Datadog RUM events with traces from OpenTelemetry-instrumented applications"
+  - link: "https://www.datadoghq.com/blog/rum-apm-single-step"
+    tag: "Blog"
+    text: "Enable end-to-end visibility into your Java apps with a single command"
 algolia:
   tags: ['rum traces']
 ---
@@ -143,7 +146,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
   {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
 
-    - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
+    - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the SDK head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
 
     {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-3.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
 
@@ -193,7 +196,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 **Note**:
 * `traceSampler` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
-* If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
+* If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the SDK in use.
 
 [1]: /real_user_monitoring/android/
 [2]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin

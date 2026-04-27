@@ -499,7 +499,7 @@ options:
 - label: OpenTelemetry
   id: otel_api
 
-- label: Datadog
+- label: Datadog API
   id: dd_api
 
 - label: C++

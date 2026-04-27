@@ -29,7 +29,7 @@ algolia:
 Traffic is always initiated by the Agent to Datadog. No sessions are ever initiated from Datadog back to the Agent.
 </div>
 
-All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][11], click the `DATADOG SITE` selector on the right.
+All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][11], click the {{< ui >}}DATADOG SITE{{< /ui >}} selector on the right.
 
 ## Installation
 
@@ -67,7 +67,8 @@ This behavior can be disabled in version 7.72.0 and later by setting <code>conve
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Network Path][14]
-: `netpath-intake.`{{< region-param key="dd_site" code="true" >}}
+: `netpath-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+In Agent v7.75+, Network Path contacts external services over HTTPS to resolve the source host's public IP. This is optional and Network Path functions without it, but if your network restricts outbound traffic and you want source public IP resolution, add the following to your allowlist: `icanhazip.com`, `ipinfo.io`, `checkip.amazonaws.com`, `api.ipify.org`, `whatismyip.akamai.com`. See [Network Path Setup][33] for details.
 
 [Orchestrator][5]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -268,7 +269,7 @@ The APM receiver and the DogStatsD ports are located in the **Trace Collection C
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-danger">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
+<div class="alert alert-danger">If you change the DogStatsD port or APM receiver port value here, you must also change the Datadog SDK configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
 
 ## Using proxies
 
@@ -335,3 +336,4 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [30]: /logs/
 [31]: /data_security/logs/#hipaa-enabled-customers
 [32]: /logs/log_collection/#logging-endpoints
+[33]: /network_monitoring/network_path/setup/#source-public-ip-resolution
