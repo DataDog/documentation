@@ -1,15 +1,15 @@
 ---
-title: Monitor CloudPrem
-description: Learn how to monitor specific metrics for your CloudPrem deployment
+title: Monitor BYOC Logs
+description: Learn how to monitor specific metrics for your BYOC Logs deployment
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Dashboards
 
-CloudPrem provides an out-of-the-box dashboard that monitors CloudPrem's key metrics.
+BYOC Logs provides an out-of-the-box dashboard that monitors BYOC Logs' key metrics.
 
 ### Setup
 
@@ -18,7 +18,7 @@ These metrics are exported by [DogStatsD][1]. You can either:
 - Run DogStatsD as a standalone service, or
 - Run the Datadog Agent (which includes DogStatsD by default)
 
-Configure either option with your organization's API key to export these metrics. As soon as your CloudPrem cluster is connected to Datadog, the OOTB dashboard is automatically created, and you can access it from your [Dashboards list][2].
+Configure either option with your organization's API key to export these metrics. As soon as your BYOC Logs cluster is connected to Datadog, the OOTB dashboard is automatically created, and you can access it from your [Dashboards list][2].
 
 <div class="alert alert-info">To display distribution metrics on your dashboard, you must <a href="/metrics/distributions/#enabling-advanced-query-functionality">enable advanced query functionality</a>.</div>
 

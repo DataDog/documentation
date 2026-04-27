@@ -129,7 +129,7 @@ You can add a budget to dashboards in two ways:
 
 ## Create an alert for your budget
 
-Learn how to [create a budget-based monitor][2].
+Create a [budget-based monitor][2] to alert when actual spend or forecasted spend is projected to exceed a percentage of the budget.
 
 ## View forecasts in budgets
 

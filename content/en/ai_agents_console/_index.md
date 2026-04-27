@@ -1,6 +1,5 @@
 ---
 title: AI Agents Console
-private: true
 further_reading:
   - link: '/integrations/anthropic-usage-and-costs/'
     tag: 'Documentation'

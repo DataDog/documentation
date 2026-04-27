@@ -157,10 +157,6 @@ If a test inside the grace period flakes and the commit doesn't contain the fix,
 
 ## AI-powered flaky test fixes
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}}
-
 Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been detected by Test Optimization. When a flaky test is identified, Bits AI analyzes the test failure patterns and generates production-ready fixes that can be submitted as GitHub pull requests.
 
 For Bits AI to create a fix, the flaky test must meet the following criteria:
@@ -228,7 +224,7 @@ Notifications are bundled over a short period to reduce noise.
 
 ## Compatibility
 
-To use Flaky Tests Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
+To use Flaky Tests Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog SDK required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
 | Language        | Quarantine & Disable          | Attempt to fix               |
 | --------------- | ----------------------------- | ---------------------------- |

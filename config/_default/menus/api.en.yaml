@@ -4163,6 +4163,30 @@ menu:
           - ListSyntheticsTestVersions
         unstable: []
         order: 57
+    - name: Get a test result
+      url: '#get-a-test-result'
+      identifier: synthetics-get-a-test-result
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsTestResult
+        unstable: []
+        order: 63
+    - name: Get a test's latest results
+      url: '#get-a-tests-latest-results'
+      identifier: synthetics-get-a-tests-latest-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsTestLatestResults
+        unstable: []
+        order: 65
     - name: Get parent suites for a test
       url: '#get-parent-suites-for-a-test'
       identifier: synthetics-get-parent-suites-for-a-test
@@ -4223,6 +4247,18 @@ menu:
           - GetTestFileDownloadUrl
         unstable: []
         order: 59
+    - name: Poll for test results
+      url: '#poll-for-test-results'
+      identifier: synthetics-poll-for-test-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PollSyntheticsTestResults
+        unstable: []
+        order: 67
     - name: Edit a Network Path test
       url: '#edit-a-network-path-test'
       identifier: synthetics-edit-a-network-path-test
@@ -4283,6 +4319,18 @@ menu:
           - DeleteSyntheticsTests
         unstable: []
         order: 50
+    - name: Get a browser test's latest results
+      url: '#get-a-browser-tests-latest-results'
+      identifier: synthetics-get-a-browser-tests-latest-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsBrowserTestLatestResults
+        unstable: []
+        order: 66
     - name: Patch a test suite
       url: '#patch-a-test-suite'
       identifier: synthetics-patch-a-test-suite
@@ -4639,8 +4687,10 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - GetBrowserTestResult
+          - GetSyntheticsBrowserTestResult
         unstable: []
         order: 13
     - name: Get a browser test's latest results summaries
@@ -5547,6 +5597,19 @@ menu:
           - SendInvitations
         unstable: []
         order: 8
+    - name: Anonymize users
+      url: '#anonymize-users'
+      identifier: users-anonymize-users
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AnonymizeUsers
+        unstable:
+          - v2
+        order: 10
     - name: Update a user
       url: '#update-a-user'
       identifier: users-update-a-user
@@ -12332,6 +12395,19 @@ menu:
           - UpdateOrgGroupPolicyOverride
         unstable:
           - v2
+        order: 18
+    - name: Get an org group policy override
+      url: '#get-an-org-group-policy-override'
+      identifier: org-groups-get-an-org-group-policy-override
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgGroupPolicyOverride
+        unstable:
+          - v2
         order: 16
     - name: Delete an org group policy override
       url: '#delete-an-org-group-policy-override'
@@ -12345,7 +12421,7 @@ menu:
           - DeleteOrgGroupPolicyOverride
         unstable:
           - v2
-        order: 17
+        order: 19
     - name: Create an org group policy override
       url: '#create-an-org-group-policy-override'
       identifier: org-groups-create-an-org-group-policy-override
@@ -12358,7 +12434,7 @@ menu:
           - CreateOrgGroupPolicyOverride
         unstable:
           - v2
-        order: 15
+        order: 17
     - name: List org group policy overrides
       url: '#list-org-group-policy-overrides'
       identifier: org-groups-list-org-group-policy-overrides
@@ -12371,7 +12447,7 @@ menu:
           - ListOrgGroupPolicyOverrides
         unstable:
           - v2
-        order: 14
+        order: 15
     - name: List org group policy configs
       url: '#list-org-group-policy-configs'
       identifier: org-groups-list-org-group-policy-configs
@@ -12384,7 +12460,7 @@ menu:
           - ListOrgGroupPolicyConfigs
         unstable:
           - v2
-        order: 18
+        order: 20
     - name: Update an org group policy
       url: '#update-an-org-group-policy'
       identifier: org-groups-update-an-org-group-policy
@@ -12397,7 +12473,20 @@ menu:
           - UpdateOrgGroupPolicy
         unstable:
           - v2
-        order: 12
+        order: 13
+    - name: Get an org group policy
+      url: '#get-an-org-group-policy'
+      identifier: org-groups-get-an-org-group-policy
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgGroupPolicy
+        unstable:
+          - v2
+        order: 11
     - name: Delete an org group policy
       url: '#delete-an-org-group-policy'
       identifier: org-groups-delete-an-org-group-policy
@@ -12410,7 +12499,7 @@ menu:
           - DeleteOrgGroupPolicy
         unstable:
           - v2
-        order: 13
+        order: 14
     - name: Create an org group policy
       url: '#create-an-org-group-policy'
       identifier: org-groups-create-an-org-group-policy
@@ -12423,7 +12512,7 @@ menu:
           - CreateOrgGroupPolicy
         unstable:
           - v2
-        order: 11
+        order: 12
     - name: List org group policies
       url: '#list-org-group-policies'
       identifier: org-groups-list-org-group-policies
