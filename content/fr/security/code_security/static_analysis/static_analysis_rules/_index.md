@@ -1,269 +1,381 @@
 ---
-title: Règles SAST
-description: Afficher les règles pour plusieurs langages dans Static Code Analysis.
 aliases:
-- /continuous_integration/static_analysis/rules
-- /static_analysis/rules
-- /code_analysis/static_analysis_rules
-- /security/code_security/static_analysis_rules
-is_beta: false
-type: analyse-statique
-rulesets:
-  csharp-best-practices:
-    title: "Bonnes pratiques pour C#"
-    description: |
-      Règles pour appliquer les bonnes pratiques en C#.
-  csharp-code-style:
-    title: "Suivre les conventions de style de code C#"
-    description: |
-      Règles pour appliquer le style de code C#.
-  csharp-inclusive:
-    title: "Utiliser un langage inclusif en C#"
-    description: |
-      Règles pour rendre votre code C# plus inclusif.
-  csharp-security:
-    title: "Écrire un code en C# sûr et sécurisé"
-    description: |
-      Règles conçues pour identifier les vulnérabilités dans votre code C#.
-  docker-best-practices:
-    title: Suivre les bonnes pratiques avec Docker
-    description: |
-      Bonnes pratiques pour l'utilisation de Docker.
-  github-actions:
-    title: Sécuriser vos GitHub Actions
-    description: |
-      Règles pour vérifier vos GitHub Actions et détecter des schémas non sécurisés, tels que les permissions ou le verrouillage de version.
-  go-best-practices:
-    title: Bonnes pratiques pour Go
-    description: |
-      Règles destinées à faciliter et accélérer l'écriture de code Go. Allant des conventions de style à la prévention des bugs, ce jeu de règles aide les développeurs à produire du code Go performant, maintenable et optimisé.
-  go-inclusive:
-    title: Utiliser un langage inclusif en Go
-    description: |
-      Vérifiez que le code Go ne présente pas de problèmes de formulation.
-  go-security:
-    title: Veiller à ce que votre code Go soit sûr et sécurisé
-    description: |
-      Identifiez les vulnérabilités fréquentes (comme l'injection SQL, le XSS ou l'injection shell) dans votre code Go.
-  java-best-practices:
-    title: Suivre les bonnes pratiques avec Java
-    description: |
-      Règles pour appliquer les bonnes pratiques en Java.
-  java-code-style:
-    title: Suivre les conventions de style de code Java
-    description: |
-      Règles pour appliquer le style de code Java.
-  java-inclusive:
-    title: Utiliser un langage inclusif en Java
-    description: |
-      Règles pour Java afin d'éviter des formulations inappropriées dans le code et les commentaires.
-  java-security:
-    title: Veiller à ce que votre code Java soit sécurisé
-    description: |
-      Règles conçues pour identifier les vulnérabilités dans le code Java.
-  javascript-best-practices:
-    title: Suivre les bonnes pratiques pour écrire du code en JavaScript
-    description: |
-      Règles pour appliquer les bonnes pratiques en JavaScript.
-  javascript-browser-security:
-    title: Règles de sécurité pour les applications web JavaScript
-    description: |
-      Règles conçues pour identifier les vulnérabilités au sein de vos applications web JavaScript.
-  javascript-code-style:
-    title: Appliquer le style de code JavaScript
-    description: |
-      Règles pour appliquer le style de code JavaScript.
-  javascript-common-security:
-    title: Règles de sécurité courantes pour JavaScript
-    description: |
-      Règles conçues pour identifier les vulnérabilités dans votre code JavaScript.
-  javascript-express:
-    title: Vérifier les bonnes pratiques et la sécurité pour Express.js
-    description: |
-      Règles spécifiques aux bonnes pratiques et à la sécurité pour Express.js.
-  javascript-inclusive:
-    title: Vérifier les problèmes de formulation dans le code JavaScript
-    description: |
-      Règles pour JavaScript afin d'éviter des formulations inappropriées dans le code et les commentaires.
-  javascript-node-security:
-    title: Identifier les points sensibles de sécurité potentiels en Node
-    description: |
-      Règles pour identifier les points sensibles de sécurité potentiels en Node. Cela peut inclure de faux positifs nécessitant une analyse plus approfondie.
-  jsx-react:
-    title: Règles de linting spécifiques à React
-    description: |
-      Ce plugin fournit une configuration `recommended` destinée à faire respecter les bonnes pratiques en React.
-  kotlin-best-practices:
-    title: Suivre les bonnes pratiques pour écrire du code en Kotlin
-    description: |
-      Règles pour appliquer les bonnes pratiques en Kotlin.
-  kotlin-code-style:
-    title: Appliquer le style de code Kotlin
-    description: |
-      Règles pour appliquer le style de code Kotlin.
-  kotlin-security:
-    title: Appliquer des pratiques de codage sécurisées en Kotlin
-    description: |
-      Règles conçues pour identifier les vulnérabilités dans votre code Kotlin.
-  php-best-practices:
-    title: Suivre les bonnes pratiques pour écrire du code en PHP
-    description: |
-      Règles pour appliquer les bonnes pratiques en PHP, améliorer le style de code, prévenir les bugs et favoriser un code PHP performant, maintenable et efficace.
-  php-code-style:
-    title: Appliquer le style de code PHP
-    description: |
-      Règles pour appliquer le style de code PHP.
-  php-security:
-    title: Règles de sécurité pour PHP
-    description: |
-      Règles conçues pour identifier les vulnérabilités dans votre code PHP.
-  python-best-practices:
-    title: Suivre les bonnes pratiques pour écrire du code en Python
-    description: |
-      Bonnes pratiques pour Python afin d'écrire un code efficace et sans bug.
-  python-code-style:
-    title: Appliquer le style de code Python
-    description: |
-      Règles pour appliquer le style de code Python.
-  python-design:
-    title: Vérifier la structure des programmes en Python
-    description: |
-      Règles pour vérifier la structure de vos programmes en Python, y compris des éléments comme les boucles imbriquées.
-  python-django:
-    title: Vérifier les bonnes pratiques et la sécurité pour Django
-    description: |
-      Règles spécifiques aux bonnes pratiques et à la sécurité pour Django.
-  python-flask:
-    title: Vérifier les bonnes pratiques et la sécurité pour Flask
-    description: |
-      Règles spécifiques aux bonnes pratiques et à la sécurité pour Flask.
-  python-inclusive:
-    title: Vérifier que le code Python ne présente pas de problèmes de formulation
-    description: |
-      Règles pour Python afin d'éviter des formulations inappropriées dans le code et les commentaires.
-  python-pandas:
-    title: Bonnes pratiques pour la data science avec pandas
-    description: |
-      Un ensemble de règles pour vérifier que le code pandas est utilisé correctement.
-      
-       - Vérifie que les déclarations `import` respectent les directives de codage.
-       - Évite le code et les méthodes obsolètes.
-       - Évite le code inefficace autant que possible.
-  python-security:
-    title: Veiller à ce que votre code Python soit sûr et sécurisé
-    description: |
-      Règles destinées à identifier les problèmes de sécurité et vulnérabilités dans votre code Python, y compris celles figurant dans l'OWASP10 et le SANS25.
-      
-       - Usage de protocoles de chiffrement ou de hachage faibles
-       - Manque de contrôle d'accès
-       - Mauvaise configuration de sécurité
-       - Injections SQL
-       - Informations d'identification codées en dur
-       - Injection shell
-       - Désérialisation non sécurisée
-  rails-best-practices:
-    title: Modèles largement adoptés par la communauté Ruby on Rails
-    description: |
-      Meilleures pratiques pour écrire du code en Ruby on Rails.
-  ruby-best-practices:
-    title: Suivre les bonnes pratiques avec Ruby
-    description: |
-      Règles pour appliquer les bonnes pratiques en Ruby.
-  ruby-code-style:
-    title: Règles pour appliquer le style de code Ruby.
-    description: |
-      Règles Code Security pour écrire des règles Ruby qui suivent les standards de codage établis.
-  ruby-inclusive:
-    title: Règles pour un code en Ruby inclusif
-    description: |
-      Écrire du code en Ruby inclusif
-  ruby-security:
-    title: Règles de sécurité pour Ruby
-    description: |
-      Règles conçues pour identifier les vulnérabilités dans votre code Ruby.
-  terraform-aws:
-    title: Terraform AWS
-    description: |
-      Règles pour appliquer les bonnes pratiques avec Terraform pour AWS.
-  tsx-react:
-    title: Qualité du code TypeScript React
-    description: |
-      Ce plugin exporte une configuration `recommended` qui applique les bonnes pratiques de React.
-  typescript-best-practices:
-    title: Suivre les bonnes pratiques pour écrire du code en TypeScript
-    description: |
-      Règles pour appliquer les bonnes pratiques en TypeScript.
-  typescript-browser-security:
-    title: Règles de sécurité pour les applications web TypeScript
-    description: |
-      Règles conçues pour identifier les vulnérabilités au sein de vos applications web TypeScript.
-  typescript-code-style:
-    title: Modèles de code TypeScript prescriptifs
-    description: |
-      Règles reconnues comme de bonnes pratiques pour les bases de code TypeScript actuelles, sans effet sur la logique des programmes. Elles sont en général prescriptives et orientées vers l'application de schémas de code plus clairs.
-  typescript-common-security:
-    title: Règles de sécurité courantes pour TypeScript
-    description: |
-      Règles conçues pour identifier les vulnérabilités dans votre code TypeScript.
-  typescript-express:
-    title: Vérifier les bonnes pratiques et la sécurité pour TypeScript
-    description: |
-      Règles spécifiques aux bonnes pratiques et à la sécurité en TypeScript avec Express.js.
-  typescript-inclusive:
-    title: Vérifier les problèmes de formulation dans le code TypeScript
-    description: |
-      Règles pour TypeScript afin d'éviter des formulations inappropriées dans le code et les commentaires.
-  typescript-node-security:
-    title: Identifier les points sensibles de sécurité potentiels en Node
-    description: |
-      Règles pour identifier les points sensibles de sécurité potentiels en Node. Cela peut inclure de faux positifs nécessitant une analyse plus approfondie.
-      cascade:
-        modal:
-    title: Tester cette règle et utiliser Datadog Code Security pour analyser votre code
-    top_box:
-      title: Comment utiliser cette règle
-      steps:
-        - Créez un fichier static-analysis.datadog.yml avec le contenu ci-dessus à la racine de votre référentiel.
-        - Utilisez nos plugins IDE gratuits ou ajoutez des analyses Code Security à vos pipelines CI.
-        - Obtenir des retours sur votre code
-      footer: Pour plus d'informations, consultez la <a href="/security/code_security/">documentation de Code Security</a>.
-    bottom_boxes:
-      - title: Extension VS Code
-        icon: vscode
-        subtitle: Identifier les vulnérabilités de code directement dans votre éditeur VS Code</br>
-        cta_title: Télécharger l'extension
-        cta_url: "https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode"
-      - title: Plugin JetBrains
-        icon: jetbrains
-        subtitle: Identifier les vulnérabilités de code directement dans</br>les produits JetBrains
-        cta_title: Télécharger le plugin
-        cta_url: "https://plugins.jetbrains.com/plugin/19495-datadog"
-    footer:
-      text: Utiliser Datadog Code Security pour détecter les problèmes de code à chaque étape de votre processus de développement
-      link:
-        name: Datadog Code Security
-        url: "https://www.datadoghq.com/product/code-security/"
-
+- /fr/continuous_integration/static_analysis/rules
+- /fr/static_analysis/rules
+- /fr/code_analysis/static_analysis_rules
+- /fr/security/code_security/static_analysis_rules
+cascade:
   banner:
-    title: <span>Intégrations fluides.</span> Essayer Datadog Code Security
     link:
       name: Datadog Code Security
-      url: "https://www.datadoghq.com/product/code-security/"
-
+      url: https://www.datadoghq.com/product/code-security/
+    title: <span>Intégrations fluides.</span> Essayez Datadog Code Security
+  modal:
+    bottom_boxes:
+    - cta_title: Télécharger l'extension
+      cta_url: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
+      icon: vscode
+      subtitle: Identifiez les vulnérabilités du code directement dans votre</br>éditeur
+        VS Code
+      title: Extension VS Code
+    - cta_title: Télécharger le plugin
+      cta_url: https://plugins.jetbrains.com/plugin/19495-datadog
+      icon: jetbrains
+      subtitle: Identifiez les vulnérabilités du code directement dans</br>les produits
+        JetBrains
+      title: JetBrains Plugin
+    footer:
+      link:
+        name: Datadog Code Security
+        url: https://www.datadoghq.com/product/code-security/
+      text: Utilisez Datadog Code Security pour détecter les problèmes de code à chaque
+        étape de votre processus de développement
+    title: Essayez cette règle et analysez votre code avec Datadog Code Security
+    top_box:
+      footer: For more information, please read the <a href="/security/code_security/">Code
+        Security documentation</a>
+      steps:
+      - Create a static-analysis.datadog.yml with the content above at the root of
+        your repository
+      - Use our free IDE Plugins or add Code Security scans to your CI pipelines
+      - Get feedback on your code
+      title: Comment utiliser cette règle
+description: Consultez les règles pour plusieurs langages pour l'analyse statique
+  du code.
 further_reading:
-  - link: /security/code_security/
-    tag: Documentation
-    text: En savoir plus sur Datadog Code Security
----
+- link: /security/code_security/
+  tag: Documentation
+  text: Découvrez Datadog Code Security
+is_beta: false
+rulesets:
+  apex-code-style:
+    description: 'Règles de sécurité du code pour écrire des règles Apex qui respectent
+      les normes de codage établies.
 
+      '
+    title: Règles pour appliquer le style de code Apex et les meilleures pratiques.
+  apex-security:
+    description: 'Règles axées sur la détection des problèmes de sécurité dans votre
+      code Apex.
+
+      '
+    title: Règles de sécurité pour Apex
+  bash-code-quality:
+    description: 'Règles pour garantir la qualité du code pour les scripts Bash.
+
+      '
+    title: Règles de qualité du code pour les scripts Bash.
+  bash-security:
+    description: 'Règles pour appliquer les meilleures pratiques de sécurité pour
+      les scripts Bash.
+
+      '
+    title: Règles de sécurité pour les scripts Bash
+  csharp-best-practices:
+    description: 'Règles pour appliquer les meilleures pratiques en C#.
+
+      '
+    title: Meilleures pratiques pour C#
+  csharp-code-style:
+    description: 'Règles pour appliquer le style de code C#.
+
+      '
+    title: Suivez les modèles de style de code C#
+  csharp-inclusive:
+    description: 'Règles pour rendre votre code C# plus inclusif.
+
+      '
+    title: Utilisez un langage inclusif en C#
+  csharp-security:
+    description: 'Règles axées sur la détection des problèmes de sécurité dans votre
+      code C#.
+
+      '
+    title: Écrivez un code C# sûr et sécurisé
+  docker-best-practices:
+    description: 'Meilleures pratiques pour utiliser Docker.
+
+      '
+    title: Suivez les meilleures pratiques lors de l'utilisation de Docker
+  github-actions:
+    description: 'Règles pour vérifier vos GitHub Actions et détecter des modèles
+      non sécurisés, tels que les autorisations ou le verrouillage de version.
+
+      '
+    title: Sécurisez vos GitHub Actions
+  go-best-practices:
+    description: 'Règles pour rendre l''écriture de code Go plus rapide et plus facile.
+      Du style de code à la prévention des bogues, cet ensemble de règles aide les
+      développeurs à écrire un code Go performant, maintenable et efficace.
+
+      '
+    title: Meilleures pratiques pour Go
+  go-inclusive:
+    description: 'Vérifiez le code Go pour des problèmes de formulation.
+
+      '
+    title: Utilisez un langage inclusif en Go
+  go-security:
+    description: 'Détectez les problèmes de sécurité courants (tels que l''injection
+      SQL, XSS ou l''injection de shell) dans votre code Go.
+
+      '
+    title: Assurez-vous que votre code Go est sûr et sécurisé
+  java-best-practices:
+    description: 'Règles pour appliquer les meilleures pratiques en Java.
+
+      '
+    title: Suivez les meilleures pratiques en Java.
+  java-code-style:
+    description: 'Règles pour appliquer le style de code Java.
+
+      '
+    title: Suivez les modèles de style de code Java.
+  java-inclusive:
+    description: 'Règles pour Java afin d''éviter un langage inapproprié dans le code
+      et les commentaires.
+
+      '
+    title: Utilisez un langage inclusif en Java.
+  java-security:
+    description: 'Règles axées sur la détection des problèmes de sécurité dans le
+      code Java.
+
+      '
+    title: Assurez-vous que votre code Java est sécurisé.
+  javascript-best-practices:
+    description: 'Règles pour appliquer les meilleures pratiques en JavaScript.
+
+      '
+    title: Suivez les meilleures pratiques pour écrire du code JavaScript.
+  javascript-browser-security:
+    description: 'Règles axées sur la détection des problèmes de sécurité dans vos
+      applications web JavaScript.
+
+      '
+    title: Règles de sécurité pour les applications web JavaScript.
+  javascript-code-style:
+    description: 'Règles pour appliquer le style de code JavaScript.
+
+      '
+    title: Appliquez le style de code JavaScript.
+  javascript-common-security:
+    description: 'Règles axées sur la détection des problèmes de sécurité dans votre
+      code JavaScript.
+
+      '
+    title: Règles de sécurité courantes pour JavaScript.
+  javascript-express:
+    description: 'Règles spécifiquement pour les meilleures pratiques et la sécurité
+      d''Express.js.
+
+      '
+    title: Vérifier les meilleures pratiques et la sécurité d'Express.js.
+  javascript-inclusive:
+    description: 'Règles pour JavaScript afin d''éviter un langage inapproprié dans
+      le code et les commentaires.
+
+      '
+    title: Vérifier le code JavaScript pour des problèmes de formulation.
+  javascript-node-security:
+    description: 'Règles pour identifier les points chauds de sécurité potentiels
+      dans Node. Cela peut inclure des faux positifs nécessitant un tri supplémentaire.
+
+      '
+    title: Identifier les points chauds de sécurité potentiels dans Node.
+  jsx-react:
+    description: 'Ce plugin exporte une configuration `recommandée` qui impose de
+      bonnes pratiques React.
+
+      '
+    title: Règles de linting spécifiques à React
+  kotlin-best-practices:
+    description: 'Règles pour imposer les meilleures pratiques en Kotlin.
+
+      '
+    title: Suivez les meilleures pratiques pour écrire du code Kotlin
+  kotlin-code-style:
+    description: 'Règles pour imposer le style de code Kotlin.
+
+      '
+    title: Imposer le style de code Kotlin
+  kotlin-security:
+    description: 'Règles axées sur la détection des problèmes de sécurité dans votre
+      code Kotlin.
+
+      '
+    title: Imposer une programmation Kotlin sécurisée
+  php-best-practices:
+    description: 'Règles pour imposer les meilleures pratiques en PHP, améliorer le
+      style de code, prévenir les bogues et promouvoir un code PHP performant, maintenable
+      et efficace.
+
+      '
+    title: Suivez les meilleures pratiques pour écrire du code PHP
+  php-code-style:
+    description: 'Règles pour imposer le style de code PHP.
+
+      '
+    title: Imposez le style de code PHP
+  php-security:
+    description: 'Règles axées sur la détection des problèmes de sécurité dans votre
+      code PHP.
+
+      '
+    title: Règles de sécurité pour PHP
+  python-best-practices:
+    description: 'Meilleures pratiques pour Python afin d''écrire un code efficace
+      et sans bogues.
+
+      '
+    title: Suivez les meilleures pratiques pour écrire du code Python
+  python-code-style:
+    description: 'Règles pour imposer le style de code Python.
+
+      '
+    title: Imposez le style de code Python
+  python-design:
+    description: 'Règles pour vérifier la structure de votre programme Python, y compris
+      des éléments tels que les boucles imbriquées.
+
+      '
+    title: Vérifier la structure du programme Python
+  python-django:
+    description: 'Règles spécifiquement pour les meilleures pratiques et la sécurité
+      de Django.
+
+      '
+    title: Vérifier les meilleures pratiques et la sécurité de Django
+  python-flask:
+    description: 'Règles spécifiquement pour les meilleures pratiques et la sécurité
+      de Flask.
+
+      '
+    title: Vérifier les meilleures pratiques et la sécurité de Flask
+  python-inclusive:
+    description: 'Règles pour Python afin d''éviter un langage inapproprié dans le
+      code et les commentaires.
+
+      '
+    title: Vérifier le code Python pour des problèmes de formulation
+  python-pandas:
+    description: "Un ensemble de règles pour vérifier que le code pandas est utilisé\
+      \ de manière appropriée.\n\n - Assure que les déclarations `import` respectent\
+      \ les directives de codage.\n - Éviter le code et les méthodes obsolètes.\n\
+      \ - Éviter le code inefficace autant que possible.\n"
+    title: Bonnes pratiques pour la science des données avec pandas
+  python-security:
+    description: "Règles axées sur la détection des problèmes de sécurité et de vulnérabilité\
+      \ dans votre code Python, y compris ceux trouvés dans l'OWASP10 et le SANS25.\n\
+      \n - Utilisation de protocoles de chiffrement et de hachage inappropriés\n -\
+      \ Manque de contrôle d'accès\n - Mauvaise configuration de la sécurité\n - Injections\
+      \ SQL\n - Identifiants codés en dur\n - Injection de shell\n - Désérialisation\
+      \ non sécurisée\n"
+    title: Assurez-vous que votre code Python est sûr et sécurisé
+  rails-best-practices:
+    description: 'Meilleures pratiques pour écrire du code Ruby on Rails.
+
+      '
+    title: Modèles largement adoptés par la communauté Ruby on Rails
+  ruby-best-practices:
+    description: 'Règles pour appliquer les meilleures pratiques Ruby.
+
+      '
+    title: Suivez les meilleures pratiques en Ruby
+  ruby-code-style:
+    description: 'Règles de Datadog Code Security pour écrire des règles Ruby qui
+      respectent les normes de codage établies.
+
+      '
+    title: Règles pour appliquer le style de code Ruby.
+  ruby-inclusive:
+    description: 'Écrivez un code Ruby inclusif
+
+      '
+    title: Règles pour un code Ruby inclusif
+  ruby-security:
+    description: 'Règles axées sur la détection des problèmes de sécurité dans votre
+      code Ruby.
+
+      '
+    title: Règles de sécurité pour Ruby
+  swift-code-style:
+    description: 'Règles de Datadog Code Security pour écrire des règles Swift qui
+      respectent les normes de codage établies.
+
+      '
+    title: Règles pour appliquer le style de code Swift et les meilleures pratiques.
+  swift-security:
+    description: 'Règles axées sur la détection des problèmes de sécurité dans votre
+      code Swift.
+
+      '
+    title: Règles de sécurité pour Swift.
+  terraform-aws:
+    description: 'Règles pour appliquer les meilleures pratiques Terraform pour AWS.
+
+      '
+    title: Terraform AWS
+  tsx-react:
+    description: 'Ce plugin exporte une configuration `recommandée` qui impose de
+      bonnes pratiques React.
+
+      '
+    title: Qualité du code TypeScript React.
+  typescript-best-practices:
+    description: 'Règles pour appliquer les meilleures pratiques TypeScript.
+
+      '
+    title: Suivez les meilleures pratiques pour écrire du code TypeScript.
+  typescript-browser-security:
+    description: 'Règles axées sur la détection des problèmes de sécurité dans vos
+      applications web TypeScript.
+
+      '
+    title: Règles de sécurité pour les applications web TypeScript.
+  typescript-code-style:
+    description: 'Règles considérées comme meilleures pratiques pour les bases de
+      code TypeScript modernes, mais qui n''impactent pas la logique du programme.
+      Ces règles sont généralement orientées vers l''application de modèles de code
+      plus simples.
+
+      '
+    title: Modèles de code orientés TypeScript.
+  typescript-common-security:
+    description: 'Règles axées sur la détection des problèmes de sécurité dans votre
+      code TypeScript.
+
+      '
+    title: Règles de sécurité courantes pour TypeScript.
+  typescript-express:
+    description: 'Règles spécifiquement pour les meilleures pratiques et la sécurité
+      TypeScript d''Express.js.
+
+      '
+    title: Vérifiez les meilleures pratiques et la sécurité TypeScript d'Express.js.
+  typescript-inclusive:
+    description: 'Règles pour TypeScript afin d''éviter un langage inapproprié dans
+      le code et les commentaires.
+
+      '
+    title: Vérifiez le code TypeScript pour des problèmes de formulation.
+  typescript-node-security:
+    description: 'Règles pour identifier les points chauds de sécurité potentiels
+      dans Node. Cela peut inclure des faux positifs nécessitant un tri supplémentaire.
+
+      '
+    title: Identifier les points chauds de sécurité potentiels dans Node.
+title: Règles SAST.
+type: static-analysis
+---
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
-    Code Security n'est pas disponible pour le site {{< region-param key="dd_site_name" >}} site.
+    Datadog Code Security n'est pas disponible pour le {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
-## Section Overview
+## Aperçu {#overview}
 
-La fonctionnalité Static Code Analysis de Datadog propose des règles intégrées permettant d'identifier les vulnérabilités, les bugs et les problèmes de maintenabilité dans votre code. Pour en savoir plus, consultez la [documentation relative à la configuration][1].
+L'analyse statique de code Datadog fournit des règles prêtes à l'emploi pour aider à détecter les vulnérabilités de sécurité, les bogues et les problèmes de maintenabilité dans votre base de code. Pour plus d'informations, consultez la [documentation d'installation][1].
 
-[1]: /security/code_security/static_analysis/setup/
+[1]: /fr/security/code_security/static_analysis/setup/

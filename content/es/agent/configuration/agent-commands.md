@@ -1,89 +1,88 @@
 ---
 algolia:
   tags:
-  - comando del estado del Agent
+  - agent status command
 aliases:
 - /es/agent/faq/agent-status-and-information
 - /es/agent/faq/start-stop-restart-the-datadog-agent
 - /es/agent/faq/agent-commands
 - /es/agent/guide/agent-commands
-description: Referencia completa de los comandos del Datadog Agent para iniciar, detener,
-  solucionar problemas y gestionar el Agent.
+description: Referencia completa de los comandos del Agente de Datadog para iniciar,
+  detener, solucionar problemas y gestionar el Agente.
 further_reading:
 - link: /agent/troubleshooting/
-  tag: Documentación
-  text: Solucionar problemas del Agent
-title: Comandos del Agent
+  tag: Documentation
+  text: Solución de problemas del Agente
+title: Comandos del Agente
 ---
-
 <div class="alert alert-danger">
-Para sistemas basados en Linux en los que no esté disponible el comando del envoltorio de <code>servicios</code>, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consulta la lista de alternativas</a>.
+Para sistemas basados en Linux donde el comando envoltorio <code>service</code> no está disponible, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consulta la lista de alternativas</a>.
 </div>
 
-## Iniciar, detener y reiniciar el Agent
+## Iniciar, detener y reiniciar el Agente {#start-stop-and-restart-the-agent}
 
-### Iniciar el Agent
+### Iniciar el Agente {#start-the-agent}
 
-Lista de comandos para iniciar el Datadog Agent:
+Lista de comandos para iniciar el Agente de Datadog:
 
 | Plataforma   | Comando                                                            |
 |------------|--------------------------------------------------------------------|
 | AIX        | `startsrc -s datadog-agent`                                        |
-| Linux      | Consulta la [documentación sobre el Agent][1] correspondiente a tu sistema operativo.                      |
+| Linux      | Consulta la [documentación del Agente][1] para tu sistema operativo.                      |
 | Docker     | Utiliza el [comando de instalación][2].                                 |
 | Kubernetes | `kubectl create -f datadog-agent.yaml`                             |
-| macOS      | `launchctl start com.datadoghq.agent` *o* a través de la aplicación systray |
+| macOS      | `launchctl start com.datadoghq.agent` *o* a través de la aplicación de la bandeja del sistema |
 | Fuente     | `sudo service datadog-agent start`                                 |
-| Windows    | Consulta la [documentación sobre el Windows Agent][3].                          |
+| Windows    | Consulta la [documentación del Agente de Windows][3].                          |
 
-### Detener el Agent
+### Detener el Agente {#stop-the-agent}
 
-Lista de comandos para detener el Datadog Agent:
+Lista de comandos para detener el Agente de Datadog:
 
 | Plataforma   | Comando                                                                          |
 |------------|----------------------------------------------------------------------------------|
 | AIX        | `stopsrc -s datadog-agent`                                                       |
-| Linux      | Consulta la [documentación sobre el Agent][1] correspondiente a tu sistema operativo.                                    |
+| Linux      | Consulta la [documentación del Agente][1] para tu sistema operativo.                                    |
 | Docker     | `docker exec -it <CONTAINER_NAME> agent stop`                                    |
-| Kubernetes | `kubectl delete pod <AGENT POD NAME>`. Nota: El pod se reprograma automáticamente. |
-| macOS      | `launchctl stop com.datadoghq.agent` *o* a través de la aplicación systray                |
+| Kubernetes | `kubectl delete pod <AGENT POD NAME>`—nota: el pod se reprograma automáticamente |
+| macOS      | `launchctl stop com.datadoghq.agent` *o* a través de la aplicación de la bandeja del sistema                |
 | Fuente     | `sudo service datadog-agent stop`                                                |
-| Windows    | Consulta la [documentación sobre el Windows Agent][3].                                        |
+| Windows    | Consulta la [documentación del Agente de Windows][3].                                        |
 
-### Reinicio del Agent
+### Reiniciar el Agente {#restart-the-agent}
 
-Lista de comandos para reiniciar el Datadog Agent:
+Lista de comandos para reiniciar el Agente de Datadog:
 
 | Plataforma   | Comando                                                                          |
 |------------|----------------------------------------------------------------------------------|
-| Linux      | Consulta la [documentación sobre el Agent][1] correspondiente a tu sistema operativo.                                    |
+| Linux      | Consulta la [documentación del Agente][1] para tu sistema operativo.                                    |
 | Docker     | Utiliza el [comando de instalación][2].                                               |
-| Kubernetes | `kubectl delete pod <AGENT POD NAME>`. Nota: El pod se reprograma automáticamente. |
-| macOS      | Detener y luego iniciar el Agent con: <br>`launchctl stop com.datadoghq.agent`<br> `launchctl start com.datadoghq.agent`<br> o utilizar la aplicación systray |
-| Fuente     | *Plataforma no compatible*                                                           |
-| Windows    | Consulta la [documentación sobre el Windows Agent][3].                                        |
+| Kubernetes | `kubectl delete pod <AGENT POD NAME>`—nota: el pod se reprograma automáticamente |
+| macOS      | Detén y luego inicia el Agente con:<br>`launchctl stop com.datadoghq.agent`<br>`launchctl start com.datadoghq.agent`<br>O utiliza la aplicación de la bandeja del sistema |
+| Fuente     | *Plataforma no soportada*                                                           |
+| Windows    | Consulta la [documentación del Agente de Windows][3].                                        |
 
 
-## Estado e información del Agent
+## Estado e información del Agente {#agent-status-and-information}
 
-### Estado del servicio
+### Estado del servicio {#service-status}
 
-Lista de comandos para mostrar el estado del Datadog Agent:
+Lista de comandos para mostrar el estado del Agente de Datadog:
 
 | Plataforma        | Comando                                                                       |
 |-----------------|-------------------------------------------------------------------------------|
 | AIX             | `lssrc -s datadog-agent`                                                      |
-| Linux           | Consulta la [documentación sobre el Agent][1] correspondiente a tu sistema operativo.                                 |
+| Linux           | Consulta la [documentación del Agente][1] para tu sistema operativo.                                 |
 | Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> s6-svstat /var/run/s6/services/agent/` |
 | Kubernetes      | `kubectl exec -it <POD_NAME> -- s6-svstat /var/run/s6/services/agent/`        |
-| macOS           | `launchctl list com.datadoghq.agent` *o* a través de la aplicación systray             |
+| macOS           | `launchctl list com.datadoghq.agent` *o* a través de la aplicación de la bandeja del sistema             |
 | Fuente          | `sudo service datadog-agent status`                                           |
-| Windows         | Consulta la [documentación del Agent Windows][4].                                     |
-| [Cluster Agent (Kubernetes)][5] | `datadog-cluster-agent status`                                     |
+| Windows         | Consulta la [documentación del Agente de Windows][4].                                     |
+| [Agente de Clúster (Kubernetes)][5] | `datadog-cluster-agent status`                                     |
 
-### Información del Agent
+### Información del Agente {#agent-information}
 
-Lista de comandos para mostrar el estado del Datadog Agent y las integraciones habilitadas.
+Lista de comandos para mostrar el estado de tu Agente de Datadog y las integraciones habilitadas.
 
 | Plataforma   | Comando                                              |
 |------------|------------------------------------------------------|
@@ -91,12 +90,12 @@ Lista de comandos para mostrar el estado del Datadog Agent y las integraciones h
 | Linux      | `sudo datadog-agent status`                          |
 | Docker     | `sudo docker exec -it <CONTAINER_NAME> agent status` |
 | Kubernetes | `kubectl exec -it <POD_NAME> -- agent status`        |
-| macOS      | `datadog-agent status` o a través de la [GUI web][6]   |
+| macOS      | `datadog-agent status` o a través de la [interfaz gráfica web][6]   |
 | Fuente     | `sudo datadog-agent status`                          |
-| Windows    | Consulta la [documentación del Agent Windows][4].            |
-| [Cluster Agent (Kubernetes)][5] | `datadog-cluster-agent status`       |
+| Windows    | Consulta la [documentación del Agente de Windows][4].            |
+| [Agente de Clúster (Kubernetes)][5] | `datadog-cluster-agent status`       |
 
-Se mostrará una integración debidamente configurada en **Running Checks** (Checks en ejecución) sin que figuren avisos ni errores, tal y como aparece a continuación:
+Una integración correctamente configurada se muestra bajo **Verificaciones en Ejecución** sin advertencias ni errores, como se ve a continuación:
 
 ```text
 Running Checks
@@ -110,43 +109,46 @@ Running Checks
     Average Execution Time : 0ms
 ```
 
-## Otros comandos
+## Otros comandos {#other-commands}
 
-La interfaz de línea de comandos del Agent se basa en subcomandos. Para consultar la lista de subcomandos disponibles, ejecuta:
+La interfaz de línea de comandos del Agente se basa en subcomandos. Para ver la lista de subcomandos disponibles, ejecute:
+
 ```shell
 <AGENT_BINARY> --help
 ```
 
-Para ejecutar un subcomando, se debe invocar el archivo binario del Agent:
+Para ejecutar un subcomando, se debe invocar el binario del Agente:
+
 ```shell
 <AGENT_BINARY> <SUB_COMMAND> <OPTIONS>
 ```
 
-Algunas opciones tienen marcas y opciones detalladas en el subcomando `--help`. For example, use help with the `check`:
+Algunas opciones tienen banderas y opciones detalladas en `--help`. Por ejemplo, usa ayuda con el subcomando `check`:
+
 ```shell
 <AGENT_BINARY> check --help
 ```
 
 | Subcomando        | Notas                                                                       |
 |-------------------|-----------------------------------------------------------------------------|
-| `check`           | Ejecuta el check especificado.                                                    |
-| `config`          | [Gestión de la configuración del tiempo de ejecución][7].                                      |
-| `configcheck`     | Muestra todas las configuraciones cargadas y resueltas de un Agent en ejecución.              |
-| `diagnose`        | Realiza un diagnóstico de conectividad en tu sistema.                              |
-| `flare`           | [Recopila una bengala y envíala a Datadog][8].                                |
-| `health`          | Muestra el estado en que se encuentra el Agent en el momento de la ejecución del subcomando.                                             |
-| `help`            | Ofrece ayuda con cualquier comando.                                                     |
-| `hostname`        | Muestra el nombre de host que utiliza el Agent.                                       |
-| `import`          | Importa y convierte archivos de configuración de versiones anteriores del Agent. |
-| `jmx`             | Soluciona problemas de JMX.                                                        |
-| `launch-gui`      | Inicia la GUI del Datadog Agent.                                                |
-| `restart-service` | Reinicia el Agent en el administrador de control de servicios. Solo en Windows.         |
-| `start-service`   | Inicia el Agent en el administrador de control de servicios. Solo en Windows.           |
-| `stream-logs`     | Transmite los logs que procesa un Agent en ejecución.                         |
-| `stopservice`     | Detiene el Agent en el administrador de control de servicios. Solo en Windows.            |
-| `version`         | Muestra información acerca de la versión.                                                         |
+| `check`           | Ejecuta la verificación especificada.                                                    |
+| `config`          | [Gestión de configuración en tiempo de ejecución][7].                                      |
+| `configcheck`     | Imprime todas las configuraciones cargadas y resueltas de un Agente en ejecución.              |
+| `diagnose`        | Ejecuta un diagnóstico de conectividad en tu sistema.                              |
+| `flare`           | [Recoge un flare y envíalo a Datadog][8].                                |
+| `health`          | Imprime la salud actual del Agente.                                             |
+| `help`            | Ayuda sobre cualquier comando.                                                     |
+| `hostname`        | Imprime el nombre de host utilizado por el Agente.                                       |
+| `import`          | Importa y convierte archivos de configuración de versiones anteriores del Agente de Datadog. |
+| `jmx`             | Solución de problemas de JMX.                                                        |
+| `launch-gui`      | Inicie la GUI del Agente de Datadog.                                                |
+| `restart-service` | Reinicie el Agente de Datadog dentro del administrador de control de servicios. Solo en Windows.         |
+| `start-service`   | Inicie el Agente de Datadog dentro del administrador de control de servicios. Solo en Windows.           |
+| `stream-logs`     | Transmita los registros que está procesando un Agente en ejecución.                         |
+| `stopservice`     | Detenga el Agente de Datadog dentro del administrador de control de servicios. Solo en Windows.            |
+| `version`         | Imprima la información de versión.                                                         |
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

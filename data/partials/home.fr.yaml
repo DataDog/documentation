@@ -1,339 +1,302 @@
-guides:
-- desc: Recueillez des événements et des métriques à partir de vos hosts qui transmettent
-    des données à Datadog.
-  link: getting_started/agent/
-  link_text: Débuter avec l'Agent
-  title: Installer l'Agent
-- desc: Récupérez des métriques, des traces et des logs grâce à plus de 1 000 intégrations
-    afin de les envoyer à Datadog.
-  link: getting_started/integrations/
-  link_text: Débuter avec les intégrations
-  title: Configurer des intégrations
-- desc: Visualisez les données recueillies dans Datadog et créez des dashboards, des
-    alertes, des monitors, et plus encore.
-  link: getting_started/application/
-  link_text: Débuter avec Datadog
-  title: Débuter avec Datadog
 heading: Bienvenue dans la documentation de Datadog !
+
+guides:
+    # There can be only 3 guides in this section
+  - title: "Installation de l'Agent"
+    desc: Recueillez des événements et des métriques à partir de vos hosts qui transmettent des données à Datadog.
+    link_text: "Débuter avec l'Agent"
+    link: getting_started/agent/
+  - title: Configurer des intégrations
+    desc: "Rassemblez des métriques, des traces et des journaux avec plus de 1 000 intégrations natives à envoyer à Datadog."
+    link_text: Débuter avec les intégrations
+    link: getting_started/integrations/
+  - title: Débuter avec Datadog
+    desc: "Visualisez les données recueillies dans Datadog et créez des dashboards, des alertes, des monitors, et plus encore."
+    link_text: Débuter avec Datadog
+    link: getting_started/application/
+
 nav_sections:
-- nav_section:
-  - name: Observabilité
-  - navtiles:
-    - desc: Afficher l'état de santé et les performances de vos hosts et composants
-        d'infrastructure
-      icon: host-map
-      link: infrastructure/
-      title: Infrastructure
-    - desc: Explorez, recherchez et créez des distributions pour vos métriques.
-      icon: metric
-      link: metrics/
-      title: Métriques
-    - desc: Surveiller l'état de santé, les performances et la sécurité de vos environnements
-        conteneurisés
-      icon: container
-      link: containers/
-      title: Surveillance des conteneurs
-    - desc: Détectez et résolvez les problèmes de performance de vos applications
-        sans serveur.
-      icon: serverless
-      link: serverless/
-      title: Serverless
-    - desc: Utilisez des objets tagués pour recueillir et représenter des données
-        à propos de votre trafic réseau.
-      icon: network
-      link: network_monitoring/
-      title: Surveillance du réseau
-    - desc: Maîtrisez vos dépenses liées au cloud avec l'observabilité unifiée et
-        les données de coût.
-      icon: cloud-cost-management
-      link: cloud_cost_management/
-      title: Cloud Cost Management
-    - desc: Visualiser et représenter votre infrastructure cloud en temps réel
-      icon: cloudcraft
-      link: cloudcraft/
-      title: Cloudcraft
-    - desc: Optimisez et résolvez les problèmes liés aux coûts, à l'utilisation et
-        à la fraîcheur des données de votre stockage cloud.
-      icon: file-wui
-      link: infrastructure/storage_management/
-      title: Gestion du stockage
-    - desc: Explorez des dashboards prêts à l'emploi sur les performances et activez
-        le tracing distribué.
-      icon: apm
-      link: tracing/
-      title: APM
-    - desc: Découvrez, mappez et surveillez des services sans modification du code.
-      icon: usm
-      link: universal_service_monitoring/
-      title: Universal Service Monitoring
-    - desc: Comparez des snapshots des performances et analysez les goulots d'étranglement.
-      icon: profiling-1
-      link: profiler/
-      title: Profileur en continu
-    - desc: Parcourez des dashboards enrichis, des métriques de requête et des échantillons
-        de requêtes.
-      icon: database-2
-      link: database_monitoring/
-      title: Database Monitoring
-    - desc: Surveillez et optimisez les performances de vos pipelines de diffusion
-        de données.
-      icon: datastreams-monitoring
-      link: data_streams/
-      title: Data Streams Monitoring
-    - desc: Surveiller la qualité des données, les performances et les coûts pour
-        détecter les anomalies et éviter les problèmes en aval
-      icon: data-observability-wui
-      link: data_observability/
-      title: Observabilité des données
-    - desc: Traitez, surveillez et archivez vos logs ingérés.
-      icon: log
-      link: logs/
-      title: Log Management
-    - desc: Détecter et masquer les données sensibles telles que les informations
-        personnelles, les clés d'API et les numéros de carte de crédit dans vos données
-        de télémétrie
-      icon: sensitive-data-scanner
-      link: security/sensitive_data_scanner/
-      title: Scanner de données sensibles
-    - desc: Gérez et surveillez vos pipelines de télémétrie.
-      icon: pipelines
-      link: observability_pipelines/
-      title: Observability Pipelines
-    - desc: Identifier les erreurs critiques et accélérer leur résolution sur le web,
-        les applications mobiles et le backend
-      icon: error-tracking
-      link: error_tracking/
-      title: Error Tracking
-- nav_section:
-  - name: AI
-  - navtiles:
-    - desc: Votre coéquipier agentique qui automatise les workflows de développement,
-        de sécurité et opérationnels
-      icon: bits-ai
-      link: bits_ai/
-      title: Bits AI Agents
-    - desc: Détectez et visualisez des anomalies liées à vos applications et votre
-        infrastructure.
-      icon: watchdog
-      link: watchdog/
-      title: Watchdog
-    - desc: Tracer, surveiller et sécuriser vos applications LLM
-      icon: llm-observability
-      link: llm_observability/
-      title: LLM Observability
-- nav_section:
-  - name: Digital Experience
-  - navtiles:
-    - desc: Enregistrez, observez et analysez l'expérience utilisateur de vos applications.
-      icon: rum
-      link: real_user_monitoring/
-      title: Real User Monitoring
-    - desc: Obtenez des informations pertinentes sur le comportement de vos utilisateurs
-        et prenez des décisions éclairées pour vos produits.
-      icon: product-analytics
-      link: product_analytics/
-      title: Analyse des produits
-    - desc: Capturer et rejouer visuellement l'expérience utilisateur de vos utilisateurs
-      icon: session-replay
-      link: session_replay/
-      title: Session Replay
-    - desc: Vérifiez la disponibilité de vos services, identifiez les problèmes régionaux
-        et testez les performances de vos applications.
-      icon: synthetics
-      link: synthetics/
-      title: Surveillance Synthetic
-    - desc: Surveillez des parcours utilisateur et des transactions opérationnelles
-        dans des applications mobiles.
-      icon: mobile
-      link: mobile_app_testing/
-      title: Tests d'application mobile
-- nav_section:
-  - name: Software Delivery
-  - navtiles:
-    - desc: Unifier les données de télémétrie, les métadonnées et les workflows pour
-        accélérer la livraison
-      icon: internal-developer-portal-wui
-      link: internal_developer_portal/
-      title: Portail interne des développeurs
-    - desc: Surveillez les performances et la santé de vos pipelines de CI.
-      icon: ci
-      link: continuous_integration/
-      title: CI Visibility
-    - desc: Détecter les tests défaillants et identifier les commits introduisant
-        des tests défaillants
-      icon: flaky-test-wui
-      link: tests/
-      title: Test Optimization
-    - desc: Mettez en place des intégrations sans code et des tests en continu grâce
-        aux fournisseurs CI/CD.
-      icon: continuous-testing
-      link: continuous_testing/
-      title: Tests continus
-    - desc: Interagir avec les services Datadog directement depuis votre IDE pendant
-        le développement
-      icon: ide
-      link: ide_plugins/
-      title: Plugins IDE
-    - desc: Mesurer et améliorer les processus de livraison logicielle de votre organisation
-      icon: ci
-      link: dora_metrics/
-      title: Métriques DORA
-    - desc: Activer ou désactiver des fonctionnalités, exécuter des tests A/B et déployer
-        progressivement des fonctionnalités sans déploiement de code
-      icon: signpost
-      link: feature_flags/
-      title: Feature Flags
-    - desc: Visualiser les tendances des données de couverture et bloquer les fusions
-        de PR en fonction des seuils de couverture
-      icon: code-3
-      link: code_coverage/
-      title: Couverture du code
-- nav_section:
-  - name: Sécurité
-  - navtiles:
-    - desc: Détecter, investiguer et répondre aux menaces de sécurité sur vos systèmes
-        cloud et on-premises
-      icon: siem
-      link: security/cloud_siem/
-      title: Cloud SIEM
-    - desc: Détecter et corriger les vulnérabilités dans votre code, vos dépendances
-        et votre infrastructure as code
-      icon: security-code-security
-      link: security/code_security/
-      title: Sécurité du code
-    - desc: Auditer en continu les configurations, évaluer les risques d'identité
-        et détecter les menaces sur l'ensemble de votre infrastructure cloud
-      icon: cloud-security-management
-      link: security/cloud_security_management/
-      title: Cloud Security
-    - desc: Détecter et bloquer les menaces ciblant vos applications de production
-        et vos API en temps réel
-      icon: app-sec
-      link: security/application_security/
-      title: Protection des applications et des API
-    - desc: Surveiller l'activité des fichiers, du réseau et des processus pour détecter
-        les menaces en temps réel pesant sur votre infrastructure
-      icon: security-workload-security
-      link: security/workload_protection/
-      title: Workload Protection
-    - desc: Détecter et masquer les données sensibles telles que les informations
-        personnelles, les clés d'API et les numéros de carte de crédit dans vos données
-        de télémétrie
-      icon: sensitive-data-scanner
-      link: security/sensitive_data_scanner/
-      title: Scanner de données sensibles
-- nav_section:
-  - name: Gestion des services
-  - navtiles:
-    - desc: Identifier, analyser et atténuer les incidents perturbateurs dans votre
-        organisation
-      icon: incidents
-      link: service_management/incident_management
-      title: Incident Management
-    - desc: Acheminer et escalader les alertes vers les bons membres de l'équipe avec
-        des programmes d'astreinte et des notifications
-      icon: on-call
-      link: incident_response/on-call/
-      title: On-Call
-    - desc: Communiquer la disponibilité des services et les mises à jour d'incidents
-        à vos utilisateurs et parties prenantes
-      icon: status-page-wui
-      link: incident_response/status_pages/
-      title: Pages d'état
-    - desc: Définir et suivre les objectifs de performance pour offrir une expérience
-        client cohérente
-      icon: slos
-      link: service_level_objectives/
-      title: Service Level Objectives
-    - desc: Trier, suivre et corriger les problèmes avec une propriété centralisée
-        et la collaboration d'équipe
-      icon: case-management
-      link: incident_response/case_management/
-      title: Case Management
-    - desc: Automatisez et orchestrez des processus dans toute votre pile technologique.
-      icon: workflows
-      link: service_management/workflows/
-      title: Automatisation de workflows
-    - desc: Créer des applications low-code pour rationaliser vos outils internes
-      icon: app-builder
-      link: service_management/app_builder/
-      title: App Builder
-- nav_section:
-  - name: Fonctionnalités de la plateforme et extension de Datadog
-  - navtiles:
-    - desc: Créez, modifiez et gérez vos monitors et notifications.
-      icon: monitor
-      link: monitors/
-      title: Monitors et alertes
-    - desc: Visualisez, analysez et générez des insights à propos de vos données.
-      icon: dashboard
-      link: dashboards/
-      title: Dashboards
-    - desc: Créer des documents en texte enrichi avec des graphiques en direct pour
-        les investigations, les post-mortems et les runbooks
-      icon: notebook
-      link: notebooks/
-      title: Notebooks
-    - desc: Consultez les alertes, les incidents et d'autres insights Datadog depuis
-        votre appareil mobile.
-      icon: mobile
-      link: mobile/
-      title: Application mobile
-    - desc: Configurer, mettre à niveau et gérer vos Agents à distance et à grande
-        échelle
-      icon: fleet-automation-wui
-      link: agent/fleet_automation/
-      title: Fleet Automation
-    - desc: Gérer les paramètres organisationnels, la facturation et les contrôles
-        d'accès aux données
-      icon: cog-2
-      link: account_management/
-      title: Gestion de compte
-    - desc: Recevez une alerte en cas de changement important dans vos applications
-        et votre infrastructure.
-      icon: events
-      link: events/
-      title: Gestion des événements
-    - desc: Partager et interagir avec les fenêtres d'application pour le pair programming
-        et la gestion des incidents
-      icon: coscreen
-      link: coscreen/
-      title: CoScreen
-    - desc: Acheminez vos métriques, logs et traces OpenTelemetry vers Datadog.
-      icon: open-telemetry
-      link: opentelemetry/
-      title: OpenTelemetry
-    - desc: Recueillez des données à propos de vos applications, services et systèmes.
-      icon: integrations
-      link: integrations/
-      title: Intégrations
-    - desc: Testez l'API Datadog.
-      icon: api
-      link: api/latest/
-      title: API
-    - desc: Découvrez comment Datadog protège vos données.
-      icon: security-lock
-      link: data_security/
-      title: Sécurité des données
-    - desc: Étendre la plateforme Datadog
-      icon: dev-code
-      link: extend/
-      title: Étendre Datadog
-    - desc: Découvrez les meilleures pratiques et commencez à surveiller les environnements
-        de vos clients.
-      icon: colab
-      link: partners/
-      title: Partenaires
+    # For a better rendering, sections should include sub-sections with multiple of 4.
+  - nav_section:
+    - name: 'Observability'
+    - navtiles:
+      - title: Infrastructure
+        link: infrastructure/
+        icon: host-map
+        desc: "Visualisez la santé et la performance de vos hôtes et composants d'infrastructure."
+      - title: Metrics
+        link: metrics/
+        icon: metric
+        desc: "Explorez, recherchez et créez des distributions pour vos métriques."
+      - title: Surveillance des conteneurs
+        link: containers/
+        icon: container
+        desc: "Surveillez la santé, la performance et la sécurité de vos environnements conteneurisés."
+      - title: Environnement sans serveur
+        link: serverless/
+        icon: serverless
+        desc: Détectez et résolvez les problèmes de performance de vos applications sans serveur.
+      - title: Surveillance réseau
+        link: network_monitoring/
+        icon: network
+        desc: Utilisez des objets tagués pour recueillir et représenter des données à propos de votre trafic réseau.
+      - title: Cloud Cost Management
+        link: cloud_cost_management/
+        icon: cloud-cost-management
+        desc: "Maîtrisez vos dépenses liées au cloud avec l'observabilité unifiée et les données de coût."
+      - title: Cloudcraft
+        link: cloudcraft/
+        icon: cloudcraft
+        desc: Visualisez et schématisez votre infrastructure cloud en temps réel
+      - title: Gestion du stockage.
+        link: infrastructure/storage_management/
+        icon: file-wui
+        desc: "Optimisez et dépannez vos dépenses, votre utilisation et la fraîcheur des données de stockage cloud."
+      - title: APM
+        link: tracing/
+        icon: apm
+        desc: "Explorez des dashboards prêts à l'emploi sur les performances et activez le tracing distribué."
+      - title: Universal Service Monitoring
+        link: universal_service_monitoring/
+        icon: usm
+        desc: "Découvrez, mappez et surveillez des services sans modification du code."
+      - title: Profiler en continu
+        link: profiler/
+        icon: profiling-1
+        desc: "Comparez des snapshots des performances et analysez les goulots d'étranglement."
+      - title: Database Monitoring
+        link: database_monitoring/
+        icon: database-2
+        desc: "Parcourez des dashboards enrichis, des métriques de requête et des échantillons de requêtes."
+      - title: Data Streams Monitoring
+        link: data_streams/
+        icon: datastreams-monitoring
+        desc: Surveillez et optimisez les performances de vos pipelines de diffusion de données.
+      - title: Observabilité des données.
+        link: data_observability/
+        icon: data-observability-wui
+        desc: "Surveillez la qualité des données, la performance et le coût pour détecter les anomalies et prévenir les problèmes en aval."
+      - title: Log Management
+        link: logs/
+        icon: log
+        desc: "Traitez, surveillez et archivez vos logs ingérés."
+      - title: Scanner de données sensibles
+        link: security/sensitive_data_scanner/
+        icon: sensitive-data-scanner
+        desc: "Détectez et masquez les données sensibles telles que les informations personnelles identifiables, les clés API et les numéros de carte de crédit dans votre télémétrie."
+      - title: "Pipelines d'observabilité"
+        link: observability_pipelines/
+        icon: pipelines
+        desc: Gérez et surveillez vos pipelines de télémétrie.
+      - title: Suivi des erreurs
+        link: error_tracking/
+        icon: error-tracking
+        desc: "Identifiez les erreurs critiques et accélérez la résolution sur le web, mobile et backend."
+  - nav_section:
+    - name: 'AI'
+    - navtiles:
+      - title: Bits AI Agents
+        link: bits_ai/
+        icon: bits-ai
+        desc: "Votre collègue automatisé qui gère les flux de travail de développement, de sécurité et opérationnels"
+      - title: Watchdog
+        link: watchdog/
+        icon: watchdog
+        desc: Détectez et visualisez des anomalies liées à vos applications et votre infrastructure.
+      - title: LLM Observability
+        link: llm_observability/
+        icon: llm-observability
+        desc: "Tracez, surveillez et sécurisez vos applications LLM."
+  - nav_section:
+    - name: 'Digital Experience'
+    - navtiles:
+      - title: Real User Monitoring
+        link: real_user_monitoring/
+        icon: rum
+        desc: "Enregistrez, observez et analysez l'expérience utilisateur de vos applications."
+      - title: Analyse des produits
+        link: product_analytics/
+        icon: product-analytics
+        desc: Obtenez des informations pertinentes sur le comportement de vos utilisateurs et prenez des décisions éclairées pour vos produits.
+      - title: Session Replay
+        link: session_replay/
+        icon: session-replay
+        desc: "Capturez et rejouez visuellement l'expérience utilisateur"
+      - title: Surveillance Synthetics
+        link: synthetics/
+        icon: synthetics
+        desc: "Vérifiez la disponibilité de vos services, identifiez les problèmes régionaux et testez les performances de vos applications."
+      - title: "Tests d'application mobile"
+        link: mobile_app_testing/
+        icon: mobile
+        desc: Surveillez des parcours utilisateur et des transactions opérationnelles dans des applications mobiles.
+  - nav_section:
+    - name: 'Software Delivery'
+    - navtiles:
+      - title: Portail développeur interne.
+        link: internal_developer_portal/
+        icon: internal-developer-portal-wui
+        desc: "Unifiez la télémétrie, les métadonnées et les flux de travail pour accélérer la livraison."
+      - title: Visibilité CI
+        link: continuous_integration/
+        icon: ci
+        desc: Surveillez les performances et la santé de vos pipelines de CI.
+      - title: Optimisation des tests.
+        link: tests/
+        icon: flaky-test-wui
+        desc: Détecter les tests défaillants et identifier les commits introduisant des tests défaillants
+      - title: Tests continus
+        link: continuous_testing/
+        icon: continuous-testing
+        desc: Mettez en place des intégrations sans code et des tests en continu grâce aux fournisseurs CI/CD.
+      - title: Plugins IDE
+        link: ide_plugins/
+        icon: ide
+        desc: Interagissez avec les services Datadog directement depuis votre IDE pendant que vous codez.
+      - title: Métriques DORA
+        link: dora_metrics/
+        icon: ci
+        desc: Mesurez et améliorez les processus de livraison de logiciels de votre organisation.
+      - title: Feature Flags
+        link: feature_flags/
+        icon: signpost
+        desc: "Activez des fonctionnalités, effectuez des tests A/B et déployez progressivement des fonctionnalités sans déploiement de code"
+      - title: Couverture du code
+        link: code_coverage/
+        icon: code-3
+        desc: Visualisez les tendances des données de couverture et bloquez les fusions de PR en fonction des seuils de couverture
+  - nav_section:
+    - name: 'Security'
+    - navtiles:
+      - title: Cloud SIEM
+        link: security/cloud_siem/
+        icon: siem
+        desc: "Détectez, enquêtez et répondez aux menaces de sécurité sur vos systèmes cloud et sur site"
+      - title: Sécurité du code
+        link: security/code_security/
+        icon: security-code-security
+        desc: "Détectez et corrigez les vulnérabilités dans votre code, vos dépendances et votre infrastructure en tant que code"
+      - title: Cloud Security
+        link: security/cloud_security_management/
+        icon: cloud-security-management
+        desc: "Auditez en continu les configurations, évaluez les risques d'identité et détectez les menaces sur votre infrastructure cloud"
+      - title: Protection des applications et des API
+        link: security/application_security/
+        icon: app-sec
+        desc: Détectez et bloquez les menaces ciblant vos applications de production et vos API en temps réel
+      - title: Protection des charges de travail
+        link: security/workload_protection/
+        icon: security-workload-security
+        desc: "Surveillez l'activité des fichiers, du réseau et des processus pour détecter les menaces en temps réel sur votre infrastructure"
+      - title: Scanner de données sensibles
+        link: security/sensitive_data_scanner/
+        icon: sensitive-data-scanner
+        desc: "Détectez et masquez les données sensibles telles que les informations personnelles identifiables, les clés API et les numéros de carte de crédit dans votre télémétrie."
+  - nav_section:
+    - name: 'Service Management'
+    - navtiles:
+      - title: Gestion des incidents
+        link: service_management/incident_management
+        icon: incidents
+        desc: "Identifier, analyser et atténuer les incidents perturbateurs dans votre organisation"
+      - title: En astreinte
+        link: incident_response/on-call/
+        icon: on-call
+        desc: "Dirigez et escaladez les alertes vers les membres appropriés de l'équipe grâce aux plannings d'astreinte et au paging"
+      - title: Pages de statut
+        link: incident_response/status_pages/
+        icon: status-page-wui
+        desc: Communiquez la disponibilité des services et les mises à jour des incidents à vos utilisateurs et parties prenantes
+      - title: Service Level Objectives
+        link: service_level_objectives/
+        icon: slos
+        desc: Définissez et suivez les objectifs de performance pour offrir une expérience client cohérente
+      - title: Gestion des cas
+        link: incident_response/case_management/
+        icon: case-management
+        desc: "Priorisez, suivez et résolvez les problèmes grâce à une gestion centralisée et une collaboration d'équipe"
+      - title: Workflow Automation
+        link: service_management/workflows/
+        icon: workflows
+        desc: Automatisez et orchestrez des processus dans toute votre pile technologique.
+      - title: App Builder
+        link: service_management/app_builder/
+        icon: app-builder
+        desc: Créez des applications low-code pour rationaliser vos outils internes
+  - nav_section:
+    - name: 'Platform Capabilities and Extending Datadog'
+    - navtiles:
+      - title: Monitors et alertes
+        link: monitors/
+        icon: monitor
+        desc: "Créez, modifiez et gérez vos monitors et notifications."
+      - title: Dashboards
+        link: dashboards/
+        icon: dashboard
+        desc: "Visualisez, analysez et générez des insights à propos de vos données."
+      - title: Notebooks
+        link: notebooks/
+        icon: notebook
+        desc: "Créez des documents en texte enrichi avec des graphiques en direct pour les investigations, les postmortems et les runbooks"
+      - title: Application mobile
+        link: mobile/
+        icon: mobile
+        desc: "Consultez les alertes, les incidents et d'autres insights Datadog depuis votre appareil mobile."
+      - title: Fleet Automation
+        link: agent/fleet_automation/
+        icon: fleet-automation-wui
+        desc: "Configurez, mettez à niveau et gérez vos Agents à distance à grande échelle"
+      - title: Gestion de compte
+        link: account_management/
+        icon: cog-2
+        desc: "Gérez les paramètres basés sur l'organisation, la facturation et les contrôles d'accès aux données"
+      - title: Gestion des événements
+        link: events/
+        icon: events
+        desc: Recevez une alerte en cas de changement important dans vos applications et votre infrastructure.
+      - title: CoScreen
+        link: coscreen/
+        icon: coscreen
+        desc: "Partagez et interagissez avec les fenêtres d'application pour la programmation en binôme et la gestion des incidents"
+      - title: OpenTelemetry
+        link: opentelemetry/
+        icon: open-telemetry
+        desc: "Acheminez vos métriques, logs et traces OpenTelemetry vers Datadog."
+      - title: Les intégrations
+        link: integrations/
+        icon: integrations
+        desc: "Recueillez des données à propos de vos applications, services et systèmes."
+      - title: API
+        link: api/latest/
+        icon: api
+        desc: "Testez l'API Datadog."
+      - title: Sécurité des données
+        link: data_security/
+        icon: security-lock
+        desc: Découvrez comment Datadog protège vos données.
+      - title: Client SDKs
+        link: client_sdks/
+        icon: building-block
+        desc: Installez et configurez le SDK Datadog pour votre plateforme
+      - title: Étendez Datadog
+        link: extend/
+        icon: dev-code
+        desc: Étendez la plateforme Datadog
+      - title: Partenaires
+        link: partners/
+        icon: colab
+        desc: Découvrez les meilleures pratiques et commencez à surveiller les environnements de vos clients.
+
 popular_searches:
-- link: api/
-  title: Documentation sur l'API
-  weight: 10
-- link: getting_started/agent/
-  title: Installation de l'Agent
-  weight: 20
-- link: logs/log_collection/
-  title: Collecte de logs
-  weight: 30
-- link: integrations/
-  title: Configuration d'intégrations
-  weight: 40
+  - title: "Documentation sur l'API"
+    link: api/
+    weight: 10
+  - title: "Installation de l'Agent"
+    link: getting_started/agent/
+    weight: 20
+  - title: Collecte de logs
+    link: logs/log_collection/
+    weight: 30
+  - title: "Configuration d'intégrations"
+    link: integrations/
+    weight: 40
