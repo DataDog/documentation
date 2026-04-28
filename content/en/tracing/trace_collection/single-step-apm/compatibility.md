@@ -177,11 +177,12 @@ Recent Python SDK releases include partial fixes. See the [dd-trace-py releases 
 To mitigate:
 - Disable SSI for the affected service. See [your platform's SSI setup page][3] for removal steps.
 - Switch to a lazy-loading deployment pattern (for example, gunicorn without `--preload`, or uWSGI with lazy-apps mode).
-- Use manual tracer installation (`pip install ddtrace` + `ddtrace-run`) instead of SSI.
+- Install the [Python SDK][4] manually (`pip install ddtrace` + `ddtrace-run`) instead of using SSI.
 
 [1]: /tracing/trace_collection/compatibility/python
 [2]: https://github.com/DataDog/dd-trace-py/releases
 [3]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
+[4]: /tracing/trace_collection/dd_libraries/python/
 
 {{< /programming-lang >}}
 
