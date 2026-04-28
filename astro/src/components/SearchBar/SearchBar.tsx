@@ -366,9 +366,9 @@ export default function SearchBar({ env, search }: Props) {
         >
           <div
             class={[cl('search-bar__ai-suggestion', 'placeholder'), aiSelected ? cl('search-bar__ai-suggestion--selected') : ''].filter(Boolean).join(' ')}
-            data-placeholder-name="Ask AI"
+            data-placeholder-name={'"Ask AI" Button Goes Here'}
           >
-            <span>Ask AI</span>
+            <span>{'"Ask AI" Button Goes Here'}</span>
           </div>
 
           {totalHits === 0 ? (
