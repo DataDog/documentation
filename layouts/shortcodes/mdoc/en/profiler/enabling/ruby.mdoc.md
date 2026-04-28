@@ -73,8 +73,6 @@ To begin profiling applications:
     bundle exec ddprofrb exec bin/rails s
     ```
 
-    If you're running a version of the gem older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
-
     {% alert %}
     If starting the application with `ddprofrb exec` is not an option (for example, when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point (such as `config.ru`, for a web application):
 
