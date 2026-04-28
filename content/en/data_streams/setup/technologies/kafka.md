@@ -125,6 +125,10 @@ Data Streams Monitoring can collect information from your self-hosted Kafka conn
 2. Ensure that [`dd-trace-java`][16] is installed on your Kafka Connect workers.
 3. Modify your Java options to include `dd-trace-java` on your Kafka Connect worker nodes. For example, on Strimzi, modify `STRIMZI_JAVA_OPTS` to add `-javaagent:/path/to/dd-java-agent.jar`.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent
 [2]: /data_streams/setup/language/java
 [3]: /data_streams/setup/language/go
