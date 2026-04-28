@@ -2464,6 +2464,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - ListOrgs
         unstable: []
@@ -4427,6 +4428,90 @@ menu:
           - GetOnDemandConcurrencyCap
         unstable: []
         order: 41
+    - name: Add a test to a Synthetics downtime
+      url: '#add-a-test-to-a-synthetics-downtime'
+      identifier: synthetics-add-a-test-to-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddTestToSyntheticsDowntime
+        unstable: []
+        order: 73
+    - name: Remove a test from a Synthetics downtime
+      url: '#remove-a-test-from-a-synthetics-downtime'
+      identifier: synthetics-remove-a-test-from-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveTestFromSyntheticsDowntime
+        unstable: []
+        order: 74
+    - name: Update a Synthetics downtime
+      url: '#update-a-synthetics-downtime'
+      identifier: synthetics-update-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSyntheticsDowntime
+        unstable: []
+        order: 71
+    - name: Get a Synthetics downtime
+      url: '#get-a-synthetics-downtime'
+      identifier: synthetics-get-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsDowntime
+        unstable: []
+        order: 70
+    - name: Delete a Synthetics downtime
+      url: '#delete-a-synthetics-downtime'
+      identifier: synthetics-delete-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSyntheticsDowntime
+        unstable: []
+        order: 72
+    - name: Create a Synthetics downtime
+      url: '#create-a-synthetics-downtime'
+      identifier: synthetics-create-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSyntheticsDowntime
+        unstable: []
+        order: 69
+    - name: List Synthetics downtimes
+      url: '#list-synthetics-downtimes'
+      identifier: synthetics-list-synthetics-downtimes
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsDowntimes
+        unstable: []
+        order: 68
     - name: Get parent tests for a subtest
       url: '#get-parent-tests-for-a-subtest'
       identifier: synthetics-get-parent-tests-for-a-subtest
@@ -5573,6 +5658,18 @@ menu:
           - ListUserOrganizations
         unstable: []
         order: 6
+    - name: Delete a pending user's invitations
+      url: '#delete-a-pending-users-invitations'
+      identifier: users-delete-a-pending-users-invitations
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserInvitations
+        unstable: []
+        order: 11
     - name: Get a user invitation
       url: '#get-a-user-invitation'
       identifier: users-get-a-user-invitation
