@@ -362,7 +362,7 @@ export default function SearchBar({ env, search }: Props) {
         <div
           class={cl('search-bar__popup')}
           role="listbox"
-          style={popupRect ? { top: `${popupRect.top}px`, left: `${popupRect.left}px`, width: `${Math.max(popupRect.width, 480)}px` } : undefined}
+          style={popupRect ? { top: `${popupRect.top}px`, left: `${popupRect.left}px` } : undefined}
         >
           <div
             class={[cl('search-bar__ai-suggestion', 'placeholder'), aiSelected ? cl('search-bar__ai-suggestion--selected') : ''].filter(Boolean).join(' ')}

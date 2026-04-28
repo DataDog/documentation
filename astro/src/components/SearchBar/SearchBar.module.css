@@ -97,10 +97,13 @@
 
 /* `position: fixed` so the popup escapes the side nav's `overflow: auto` clip
    and isn't trapped inside an ancestor's stacking context. Coordinates are
-   computed from the input's bounding rect at runtime. */
+   computed from the input's bounding rect at runtime. Width matches Hugo's
+   `searchbar-sidenav.scss` (50vw, capped to keep the popup on screen). */
 .search-bar__popup {
   position: fixed;
   margin-top: var(--space-2xs);
+  width: 50vw;
+  max-width: calc(100vw - 2 * var(--space-md));
   max-height: 70vh;
   overflow-y: auto;
   background: var(--color-bg);
@@ -178,7 +181,7 @@
 
 .search-bar__hit-subcategory {
   margin: 0;
-  font-size: var(--font-size-sm, 0.875rem);
+  font-size: var(--font-size-xs, 0.75rem);
   color: var(--color-text-muted);
   line-height: 1.4;
 }
@@ -189,7 +192,7 @@
 
 .search-bar__hit-title {
   margin: 0;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-xs, 0.75rem);
   line-height: 1.4;
   font-weight: 400;
 }
@@ -208,7 +211,7 @@
 
 .search-bar__hit-snippet {
   margin: var(--space-2xs) 0 0;
-  font-size: var(--font-size-sm, 0.875rem);
+  font-size: var(--font-size-xs, 0.75rem);
   color: var(--color-text-muted);
   line-height: 1.5;
 }
