@@ -239,8 +239,20 @@ SSI supports both .NET Core and .NET Framework runtimes. For a complete list of 
 - [.NET Core SDK compatibility][1]
 - [.NET Framework SDK compatibility][2]
 
+### Known issues
+
+**Pre-existing .NET profilers**: The .NET CLR Profiling API loads only one profiler per process. If your application already has a .NET profiler (Datadog or another APM vendor), SSI installs successfully but the pre-existing profiler takes precedence at runtime. As a result, no Datadog traces reach the Agent.
+
+To resolve this, remove the conflicting `CORECLR_*` environment variables and any `LD_PRELOAD` entries that reference the pre-existing profiler before enabling SSI:
+
+- **Linux hosts and Docker**: Remove the variables from your application's startup environment, then restart the application.
+- **Kubernetes**: The SSI admission webhook does not overwrite `CORECLR_*` variables injected by another vendor's operator, init container, or pod template. Remove the variables from their source (operator CR, init container, pod template, or Helm values), then re-roll the pods.
+
+For details on the .NET CLR one-profiler constraint, see [.NET Core installation][3].
+
 [1]: /tracing/trace_collection/compatibility/dotnet-core
 [2]: /tracing/trace_collection/compatibility/dotnet-framework
+[3]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
 
 {{< /programming-lang >}}
 
