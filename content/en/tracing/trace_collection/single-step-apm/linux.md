@@ -182,8 +182,6 @@ For example, to instrument only a checkout service and a customer portal, create
 
 ## Remove Single Step APM instrumentation from your Agent
 
-<div class="alert alert-warning">SSI injects the Datadog tracer at the loader level, before the tracer evaluates its environment variables. Setting <code>DD_TRACE_ENABLED=false</code> does <strong>not</strong> prevent SSI from loading the tracer into your application processes. Use the steps below to remove SSI.</div>
-
 To stop producing traces for all services on your infrastructure:
 
 1. Run:

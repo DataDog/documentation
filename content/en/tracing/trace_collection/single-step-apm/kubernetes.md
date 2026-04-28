@@ -679,8 +679,6 @@ clusterAgent:
 
 ## Remove Single Step APM instrumentation from your Agent
 
-<div class="alert alert-warning">SSI injects the Datadog tracer at the loader level, before the tracer evaluates its environment variables. Setting <code>DD_TRACE_ENABLED=false</code> does <strong>not</strong> prevent SSI from loading the tracer into your application processes. Use the steps below to remove SSI.</div>
-
 If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:
 
 ### Remove instrumentation for specific services
