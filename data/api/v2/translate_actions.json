@@ -4309,6 +4309,12 @@
     "request_description": "",
     "request_schema_description": "The request for a spans list."
   },
+  "UploadSourceMap": {
+    "description": "Upload source maps, symbol files, and mapping files to Datadog for error deobfuscation.\nThis endpoint enables you to upload various types of debug symbols for RUM Error Tracking,\nallowing Datadog to display readable stack traces instead of minified or obfuscated code.\n\n**Request format:**\n\nEach request is a `multipart/form-data` upload containing two parts:\n\n1. `event` — a JSON-encoded string with the upload metadata (type, service, version, etc.)\n2. One or more binary file fields (for example, `source_map`, `symbols_archive`)\n\n**Supported upload types** (set via `event.type`):\n- `js_sourcemap`: JavaScript source maps for browser applications\n- `react_native_sourcemap`: React Native source maps for mobile applications\n- `jvm_mapping_file`: ProGuard/R8 mapping files for Android crash deobfuscation\n- `ios_symbols`: dSYM files for iOS crash symbolication\n- `flutter_symbol_file`: Flutter symbol files\n- `ndk_symbol_file`: Android NDK symbol files for native crashes\n- `il2cpp_mapping_file`: IL2CPP mapping files for Unity\n- `elf_symbol_file`: ELF symbol files for Linux/Unix\n- `pe_symbol_file`: PE/PDB symbol files for Windows\n- `repository`: Repository metadata for source code linking\n\n**Limits:**\n- Maximum file size: 500 MB\n\n**Note:** For most use cases, Datadog recommends using the\n[Datadog CLI (datadog-ci)](https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps)\nwhich provides a simplified interface for uploading source maps.",
+    "summary": "Upload source maps",
+    "request_description": "",
+    "request_schema_description": "Multipart form data for uploading a source map, symbol file, or mapping file."
+  },
   "CreateSCAResult": {
     "summary": "Post dependencies for analysis",
     "request_description": "",
