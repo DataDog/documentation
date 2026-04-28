@@ -178,6 +178,11 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 
 {{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role" style="width:75%;">}}
 
+The **Storage Object Viewer** role is Datadog's recommended configuration. If your organization requires a least-privilege custom role, rehydration requires the following individual permissions:
+
+- `storage.objects.get`
+- `storage.objects.list`
+
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
