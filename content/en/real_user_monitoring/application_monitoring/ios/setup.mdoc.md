@@ -1,5 +1,5 @@
 ---
-title: iOS and tvOS Monitoring Setup
+title: iOS, tvOS, watchOS, and visionOS Monitoring Setup
 description: "Collect RUM data from your iOS and tvOS applications."
 aliases:
   - /real_user_monitoring/ios
