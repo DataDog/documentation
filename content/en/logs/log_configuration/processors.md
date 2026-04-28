@@ -1048,6 +1048,10 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following array processo
 
 ## Decoder processor
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">The Decoder processor is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). Contact <a href="/help/">Datadog Support</a> if you need this capability.</div>
+{{< /site-region >}}
+
 The Decoder processor translates binary-to-text encoded string fields (such as Base64 or Hex/Base16) into their original representation. This allows the data to be interpreted in its native context, whether as a UTF-8 string, ASCII command, or a numeric value (for example, an integer derived from a hex string). The Decoder processor is especially useful for analyzing encoded commands, logs from specific systems, or evasion techniques used by threat actors.
 
 **Notes**:

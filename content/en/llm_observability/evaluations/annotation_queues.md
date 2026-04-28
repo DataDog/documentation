@@ -11,6 +11,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/automations-annotation-queues"
     tag: "Blog"
     text: "Annotate traces to improve LLM quality with Datadog LLM Observability"
+  - link: /api/latest/llm-observability/
+    tag: API
+    text: LLM Observability API reference
 ---
 
 ## Overview
@@ -149,6 +152,60 @@ Export annotated traces for analysis or use in other workflows:
 3. Select traces (or select all).
 4. Click **Export**.
 
+The file downloads as `annotations_<queue-id>.csv`. You can also retrieve span data programmatically using the [Export API][5].
+
+{{% collapse-content title="CSV format" level="h4" expanded=false id="csv-format" %}}
+
+Each row represents one annotated interaction. The file begins with these fixed columns:
+
+| Column | Description |
+|--------|-------------|
+| `Content ID` | ID of the annotated content (for example, a trace ID or session ID) |
+| `Type` | Interaction type: `trace`, `experiment_trace`, or `session` |
+| `Input` | Input summary (empty for session interactions) |
+| `Output` | Output summary (empty for session interactions) |
+| `Expected Output` | Only present when **Include Expected Output** is enabled; populated for experiment traces only |
+
+After the fixed columns, there is one set of columns per reviewer per label. Reviewers are sorted alphabetically by display name (spaces replaced with underscores). Labels follow the order defined in the queue schema:
+
+| Column | Description |
+|--------|-------------|
+| `{reviewer}_{label}` | Label value (string, number, boolean, or JSON array) |
+| `{reviewer}_{label}_assessment` | `pass` or `fail`, if assessment criteria is enabled for that label |
+| `{reviewer}_{label}_reasoning` | Free-text reasoning, if reasoning is enabled for that label |
+
+If a reviewer has not annotated a given row, those cells are empty.
+
+**Example**: A queue with reviewers Alice Johnson and Bob Smith and labels `quality` (score) and `failure_type` (categorical) produces these column headers:
+
+```
+Content ID,Type,Input,Output,Alice_Johnson_quality,Alice_Johnson_quality_assessment,Alice_Johnson_quality_reasoning,Alice_Johnson_failure_type,Alice_Johnson_failure_type_assessment,Alice_Johnson_failure_type_reasoning,Bob_Smith_quality,...
+```
+
+{{% /collapse-content %}}
+
+#### Retrieve spans by trace ID or session ID
+
+After exporting annotation data, use the [Export API][5] to retrieve the full span data for traces or sessions in the CSV and join it with your annotation labels.
+
+**By trace ID**:
+
+{{< code-block lang="bash" >}}
+curl -G "https://api.datadoghq.com/api/v2/llm-obs/v1/spans/events" \
+  -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+  --data-urlencode "filter[trace_id]=<TRACE_ID>"
+{{< /code-block >}}
+
+**By session ID**:
+
+{{< code-block lang="bash" >}}
+curl -G "https://api.datadoghq.com/api/v2/llm-obs/v1/spans/events" \
+  -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+  --data-urlencode "filter[query]=@session_id:<SESSION_ID>"
+{{< /code-block >}}
+
 ### Adding to datasets
 
 Transfer annotated traces to datasets for experiment evaluation:
@@ -171,6 +228,16 @@ To delete a queue:
 3. Click **Delete** in the Details panel.
 
 <div class="alert alert-info">Deleting a queue removes the queue and label associations, but does not delete the underlying traces from LLM Observability. Traces remain accessible in Trace Explorer.</div>
+
+## Using the API
+
+You can manage annotation queues programmatically with the LLM Observability API. Use the API to:
+
+- Create, list, update, and delete annotation queues
+- Add interactions to a queue
+- Retrieve annotated interactions from a queue
+
+For endpoints, request schemas, and examples, see the [LLM Observability API reference][4].
 
 ## Data retention
 
@@ -242,3 +309,5 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [1]: https://app.datadoghq.com/llm/traces
 [2]: https://app.datadoghq.com/llm/annotations/queues
 [3]: /llm_observability/experiments/datasets
+[4]: /api/latest/llm-observability/
+[5]: /llm_observability/evaluations/export_api/?tab=model#api-standards

@@ -238,6 +238,11 @@ outputFormats:
     isPlainText: true
     mediaType: "text/plain"
     notAlternative: true
+  URLMap:
+    baseName: "urlmap"
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
 
 timeout: 300s
 
