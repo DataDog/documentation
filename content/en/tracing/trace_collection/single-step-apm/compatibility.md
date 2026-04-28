@@ -170,7 +170,7 @@ For other distributions, you may need to install Python 3.7+ separately.
 
 ### Known issues
 
-**Preforking WSGI servers**: Python applications running under preforking WSGI servers can experience worker process crashes (SIGSEGV) on startup when SSI is enabled. This affects uWSGI in preforking mode, gunicorn with `--preload`, and Apache mod_wsgi in daemon mode with preload.
+**Preforking WSGI servers**: Python applications running under preforking WSGI servers can experience worker process crashes (SIGSEGV) on startup when SSI is enabled. This affects uWSGI in preforking mode, gunicorn with `--preload`, and Apache `mod_wsgi` in daemon mode with preload.
 
 Recent Python SDK releases include partial fixes. See the [dd-trace-py releases page][2] for the latest status.
 
