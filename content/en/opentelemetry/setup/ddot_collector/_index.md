@@ -14,12 +14,6 @@ further_reading:
   text: "Unify OpenTelemetry and Datadog with the DDOT Collector"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning"><strong>The Datadog Distribution of OpenTelemetry Collector (DDOT) is not yet FedRAMP/FIPS compliant.</strong><br>
-&bull; If you require a FedRAMP or FIPS-compliant data collection pipeline, use the <a href="/agent/configuration/fips-compliance/?tab=linux">FIPS-enabled Datadog Agent</a>.<br>
-&bull; If you are a GovCloud customer whose only requirement is data residency in the GovCloud (US1-FED) data center, you <strong>may</strong> use the DDOT Collector.</div>
-{{< /site-region >}}
-
 {{< callout btn_hidden="true" >}}
 The DDOT Collector for Kubernetes is <strong>Generally Available</strong>. You can get started by following the <a href="#get-started">instructions below</a>.
 <br><br>

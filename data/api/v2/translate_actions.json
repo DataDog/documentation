@@ -2827,6 +2827,10 @@
     "request_description": "",
     "request_schema_description": "A top-level wrapper for updating a notification rule for a user"
   },
+  "ListOrgs": {
+    "description": "Returns the current organization and its managed organizations in JSON:API format.",
+    "summary": "List your managed organizations"
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -4902,6 +4906,10 @@
     "summary": "Update a user",
     "request_description": "",
     "request_schema_description": "Update a user."
+  },
+  "DeleteUserInvitations": {
+    "description": "Cancel all pending invitations for a specified user.\nRequires the `user_access_invite` permission.",
+    "summary": "Delete a pending user's invitations"
   },
   "ListUserOrganizations": {
     "description": "Get a user organization. Returns the user information and all organizations\njoined by this user.",
