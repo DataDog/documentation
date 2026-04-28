@@ -102,6 +102,8 @@ The following tree map shows the percentage breakdown by **service**.
 
 {{< img src="logs/explorer/doc_tree_map.png" alt="Tree map example showing percentage breakdown by service" style="width:90%;">}}
 
+## Further reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/saved_views/

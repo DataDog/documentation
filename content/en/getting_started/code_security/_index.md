@@ -143,6 +143,10 @@ Code Security helps you set up workflows to track and manage remediation of find
 
 {{% security-products/link-findings-to-datadog-services-and-teams %}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /security/code_security/software_composition_analysis/
 [2]: /security/code_security/dev_tool_int/github_pull_requests/
 [3]: https://app.datadoghq.com/security/configuration/code-security/setup

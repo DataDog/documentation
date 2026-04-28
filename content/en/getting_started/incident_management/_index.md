@@ -2,9 +2,9 @@
 title: Getting Started with Incident Management
 description: Track and communicate issues from declaration through resolution with collaborative workflows, timelines, and postmortems.
 further_reading:
-    - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
-      tag: 'Learning Center'
-      text: 'Introduction to Incident Management'
+    - link: "https://learn.datadoghq.com/courses/getting-started-incident-management"
+      tag: "Learning Center"
+      text: "Getting Started with Incident Management"
     - link: 'https://www.youtube.com/watch?v=QIambwILy_M'
       tag: 'Video'
       text: 'Datadog on Incident Management'
@@ -32,10 +32,6 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/how-datadog-manages-incidents/'
       tag: 'Blog'
       text: 'How we manage incidents at Datadog'
-    - link: "https://learn.datadoghq.com/courses/getting-started-incident-management"
-      tag: "Learning Center"
-      text: "Getting Started with Incident Management"
-
 ---
 
 ## Overview

@@ -12,9 +12,9 @@ further_reading:
     - link: '/profiler/enabling/'
       tag: 'Documentation'
       text: 'Enabling the Profiler'
-    - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
+    - link: 'https://learn.datadoghq.com/courses/getting-started-apm'
       tag: 'Learning Center'
-      text: 'Introduction to Application Performance Monitoring'
+      text: 'Getting Started with APM Metrics & Traces'
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
       tag: 'Blog'
       text: "How we optimized our Akka application using Datadog's Continuous Profiler"

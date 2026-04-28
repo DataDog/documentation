@@ -16,9 +16,12 @@ further_reading:
 - link: "/logs/troubleshooting/"
   tag: "Documentation"
   text: "Logs troubleshooting"
-- link: "https://learn.datadoghq.com/courses/going-deeper-with-logs-processing"
+- link: "https://learn.datadoghq.com/courses/integration-pipelines"
   tag: "Learning Center"
-  text: "Going Deeper with Logs Processing"
+  text: "Process Logs Out of the Box with Integration Pipelines"
+- link: "https://learn.datadoghq.com/courses/log-pipelines"
+  tag: "Learning Center"
+  text: "Build and Manage Log Pipelines"
 - link: "https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/"
   tag: "Blog"
   text: "Monitor Cloudflare Zero Trust with Datadog Cloud SIEM"
@@ -34,10 +37,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
   tag: Blog
   text: "How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system"
-- link: "https://learn.datadoghq.com/courses/log-pipelines"
-  tag: "Learning Center"
-  text: "Build and Manage Log Pipelines"
-
 ---
 
 ## Overview
