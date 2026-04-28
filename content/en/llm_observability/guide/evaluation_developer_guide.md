@@ -285,8 +285,7 @@ Use `LLMObs.publish_evaluator()` to push a locally-defined `LLMJudge` configurat
 | `variable_mapping` | `dict[str, str]` | No | Remaps variable names in `user_prompt` to Datadog span field paths in the published evaluator. |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs._evaluators import BooleanStructuredOutput, LLMJudge
+from ddtrace.llmobs import BooleanStructuredOutput, LLMJudge, LLMObs
 
 LLMObs.enable(
     ml_app="my-ml-app",
