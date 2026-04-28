@@ -90,6 +90,10 @@ To enable products, [set environment variables][3] in your application configura
 
 ### Define instrumentation rules
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Instrumentation rules are not available on the US1-FED site.</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Instrumentation rules (available for Agent v7.73+) apply only to host-wide instrumentation. They are not supported for IIS-only installation.</div>
 
 Instrumentation rules let you control which processes are automatically instrumented by SSI on Windows hosts.
