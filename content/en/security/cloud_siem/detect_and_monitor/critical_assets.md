@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Identify critical assets to customize the security signals associated with them. For each asset, you can adjust severity levels, apply custom tags, and isolate changes to specific rules.
+Critical Assets lets you adjust the severity of security signals based on the assets they affect. This helps analysts prioritize signals according to the business importance of the impacted asset by increasing, decreasing, or maintaining the default severity. For each asset, you can adjust severity levels, apply custom tags, and isolate changes to specific rules.
 
 ### How it works
 
