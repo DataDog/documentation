@@ -9,7 +9,7 @@ further_reading:
 - link: 'tracing/trace_explorer/search'
   tag: 'Documentation'
   text: 'Search Spans'
-- link: "https://learn.datadoghq.com/courses/apm-getting-started"
+- link: "https://learn.datadoghq.com/courses/getting-started-apm"
   tag: "Learning Center"
   text: "Getting Started with APM Metrics and Traces"
 - link: "https://learn.datadoghq.com/courses/diagnosing-bugs-with-apm"

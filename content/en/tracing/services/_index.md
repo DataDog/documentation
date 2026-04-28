@@ -5,7 +5,7 @@ further_reading:
     - link: 'getting_started/tagging/unified_service_tagging/'
       tag: "Documentation"
       text: 'Learn about Unified Service Tagging and reserved tags'
-    - link: "https://learn.datadoghq.com/courses/apm-getting-started"
+    - link: "https://learn.datadoghq.com/courses/getting-started-apm"
       tag: "Learning Center"
       text: "Getting Started with APM Metrics and Traces"
 
@@ -26,3 +26,7 @@ Viewing span and trace data through the lens of your services can ease troublesh
     {{< nextlink href="tracing/services/services_map/" >}}Service Map{{< /nextlink >}}
     {{< nextlink href="monitors/create/types/apm/" >}}APM Monitors{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

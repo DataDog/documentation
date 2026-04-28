@@ -56,6 +56,10 @@ Learn about how to track and monitor your volume of ingested and indexed data, i
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
 
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /tracing/trace_explorer
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/
 [3]: /tracing/trace_pipeline/ingestion_controls

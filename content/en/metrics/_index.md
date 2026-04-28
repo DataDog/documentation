@@ -9,11 +9,6 @@ cascade:
     algolia:
         rank: 70
         tags: ["submit metrics", "metrics submission"]
-further_reading:
-- link: "https://learn.datadoghq.com/courses/getting-started-with-metrics"
-  tag: "Learning Center"
-  text: "Getting Started with Metrics"
-
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
@@ -203,6 +198,7 @@ Read the [metrics summary documentation][22] for more details.
     {{< nextlink href="/metrics/distributions" >}}<u>Distribution metrics</u> - Compute global percentiles across your entire dataset.{{< /nextlink >}}
     {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Learn how to control custom metrics volumes with tag configurations using Metrics without Limits™.{{< /nextlink >}}
     {{< nextlink href="https://dtdg.co/fe" >}}<u>Foundation Enablement</u> - Join an interactive session to unlock the full potential of metrics.{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/getting-started-metrics" >}}<u>Getting Started with Metrics</u> - Learn how to submit and visualize your first metrics with Datadog.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /logs

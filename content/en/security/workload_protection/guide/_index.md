@@ -15,3 +15,7 @@ further_reading:
     {{< nextlink href="/security/workload_protection/secl_auth_guide" >}}Writing custom rule expressions{{< /nextlink >}}
     {{< nextlink href="/security/workload_protection/guide/ebpf-free-agent" >}}Threat Detection for Linux Without eBPF Support{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

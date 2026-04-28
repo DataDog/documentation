@@ -71,11 +71,6 @@ cascade:
     category: Documentation
     subcategory: Integrations
     tags: ['event viewer']
-further_reading:
-- link: "https://learn.datadoghq.com/courses/getting-started-integrations"
-  tag: "Learning Center"
-  text: "Getting Started with Integrations"
-
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.

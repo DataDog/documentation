@@ -15,7 +15,7 @@ further_reading:
 - link: "/tracing/guide/"
   tag: ""
   text: "All guides"
-- link: "https://learn.datadoghq.com/courses/apm-custom-tagging"
+- link: "https://learn.datadoghq.com/courses/create-custom-spans-and-tags"
   tag: "Learning Center"
   text: "Create Custom Spans and Span Tags with APM"
 

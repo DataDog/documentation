@@ -39,3 +39,7 @@ To get started with RUM for Browser, create an application and configure the Bro
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/frustration_signals">}}<u>Frustration Signals</u>: Identify user friction points with RUM frustration signals (including rage clicks, dead clicks, and error clicks) to improve user experience and reduce abandonment.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/troubleshooting">}}<u>Troubleshooting</u>: Common troubleshooting Browser SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -5,7 +5,7 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=APM"
     tag: "Release Notes"
     text: "Check out the latest Datadog APM releases! (App login required)"
-  - link: "https://learn.datadoghq.com/courses/apm-getting-started"
+  - link: "https://learn.datadoghq.com/courses/getting-started-apm"
     tag: "Learning Center"
     text: "Getting Started with APM Metrics and Traces"
   - link: "https://www.datadoghq.com/blog/monitor-rust-otel/"

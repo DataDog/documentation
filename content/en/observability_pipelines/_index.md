@@ -62,7 +62,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
   tag: Blog
   text: Manage metric volume and tags in your environment with Observability Pipelines
-- link: "https://learn.datadoghq.com/courses/getting-started-observability-pipelines"
+- link: "https://learn.datadoghq.com/courses/course-getting-started-observability-pipelines"
   tag: "Learning Center"
   text: "Getting Started with Observability Pipelines"
 

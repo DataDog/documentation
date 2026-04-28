@@ -5,7 +5,6 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/enhance-log-querying"
   tag: "Learning Center"
   text: "Enhance Log Querying and Analytics with Reference Tables, Subqueries, and Calculated Fields"
-further_reading:
 - link: 'logs/explorer/analytics'
   tag: 'Documentation'
   text: 'Perform Log Analytics'

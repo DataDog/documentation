@@ -149,6 +149,10 @@ A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The
 {{< img src="security/cws/guide/active-protection-signal-messages.png" alt="Signal messages" style="width:100%;" >}}
 
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/security
 [2]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [3]: #scoping-the-agent-rule

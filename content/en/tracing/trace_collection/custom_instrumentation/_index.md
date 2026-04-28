@@ -23,7 +23,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
     - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
       text: 'Learn More about Datadog and the OpenTelemetry initiative'
-    - link: "https://learn.datadoghq.com/courses/apm-custom-tagging"
+    - link: "https://learn.datadoghq.com/courses/create-custom-spans-and-tags"
       tag: "Learning Center"
       text: "Create Custom Spans and Span Tags with APM"
 algolia:

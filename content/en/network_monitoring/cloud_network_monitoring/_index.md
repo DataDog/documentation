@@ -34,7 +34,7 @@ further_reading:
 - link: "/network_monitoring/cloud_network_monitoring/glossary"
   tag: "Doc"
   text: "CNM Terms and Concepts"
-- link: "https://learn.datadoghq.com/courses/intro-to-infra-cnm"
+- link: "https://learn.datadoghq.com/courses/getting-started-infra-cnm"
   tag: "Learning Center"
   text: "Getting Started with Infrastructure and Cloud Network Monitoring (CNM)"
 algolia:

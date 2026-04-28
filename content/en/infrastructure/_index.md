@@ -9,7 +9,7 @@ further_reading:
   - link: 'https://dtdg.co/fe'
     tag: 'Foundation Enablement'
     text: 'Join an interactive session to power up your Infrastructure monitoring'
-  - link: "https://learn.datadoghq.com/courses/intro-to-infra-cnm"
+  - link: "https://learn.datadoghq.com/courses/getting-started-infra-cnm"
     tag: "Learning Center"
     text: "Getting Started with Infrastructure and Cloud Network Monitoring (CNM)"
 cascade:

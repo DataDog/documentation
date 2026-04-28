@@ -174,6 +174,10 @@ resource "datadog_monitor" "metric-based-slo" {
 ```
 
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /service_level_objectives/metric/
 [2]: /service_level_objectives/monitor/
 [3]: https://sre.google/workbook/alerting-on-slos/
