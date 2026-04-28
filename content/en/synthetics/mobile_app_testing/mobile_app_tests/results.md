@@ -23,16 +23,33 @@ Test runs appear in a test details page after a Synthetic mobile app test execut
 
 ## Test properties
 
-In the **Properties** section, you can see the test ID, test creation and edit dates, test priority, environment tag, and additional tags.
+The **Properties** tab contains the configuration details, ownership information, and integrations associated with your test. Use the left navigation to switch between sections.
 
-**Overview**
-: This section describes the Synthetic test details, including the mobile application, version, location, number of devices, test interval, and the number of test steps.
+The following describes each section available on the **Properties** tab:
+
+**Ownership**
+: Displays the test owner, editor, creation date, last modified date, environments, teams, and tags.
+
+**Execution**
+: Shows the test frequency, alert conditions, and retry behavior.
 
 **Monitor**
-: This section contains the name of the [Synthetic test's monitor][1] and the configured notification message.
+: Contains the [Synthetic test monitor][1] name, priority, configured recipients, and notification message.
 
-**CI/CD Execution**
-: This section contains a dropdown menu to change the [execution rule][2] for this test running as part of a [CI pipeline][3].
+**Continuous Testing**
+: Sets the [execution rule][2] used when this test runs as part of a [Continuous Testing CI pipeline][3].
+
+**Parent Tests**
+: Lists tests that reference this test, such as multistep tests that include it as a subtest.
+
+**Parent Suites**
+: Lists the [test suites][13] this test belongs to.
+
+**Downtimes**
+: Lists [scheduled downtimes][14] that pause execution of this test, for example during planned maintenance windows.
+
+**Configuration as Code**
+: Exports the test configuration in formats such as Terraform for managing tests as code.
 
 ## Test activity
 
@@ -149,3 +166,5 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [10]: /mobile_app_testing/mobile_app_tests/steps
 [11]: https://app.datadoghq.com/synthetics/tests
 [12]: https://app.datadoghq.com/synthetics/explorer
+[13]: /synthetics/test_suites/
+[14]: /synthetics/platform/downtime/

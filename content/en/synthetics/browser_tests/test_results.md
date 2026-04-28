@@ -82,6 +82,8 @@ Click the **Errors** pill to access the **Errors & Warnings** tab and examine a 
 
 {{< img src="synthetics/browser_tests/test_results/synthetics_errors.png" alt="Browser test run details with the Errors pill highlighted on each step, indicating where to click to open the Errors & Warnings tab" style="width:100%" >}}
 
+The **Errors & Warnings** tab displays a list of errors separated by error type (`js` or `network`) and status (the network status code).
+
 The error type is logged when the browser test interacts with the page. It corresponds to the errors collected between the time the page is opened and the time the page can be interacted with. The maximum number of errors that can be displayed is 8, for example: 2 `network` + 6 `js` errors.
 
 ### Resources
@@ -91,8 +93,6 @@ Click the **Resources** pill to access the **Resources** tab and examine the com
 {{< img src="synthetics/browser_tests/test_results/synthetics_resources.png" alt="Browser test run details with the Resources pill highlighted on each step, indicating where to click to open the Resources tab" style="width:100%" >}}
 
 You can filter resources by type and search by name in the search bar. The maximum number of resources that can be displayed is 100. Resources are ordered by the time when they start and display the first 100 in Datadog.
-
-{{< img src="synthetics/browser_tests/test_results/browser_resources_list.png" alt="Resources tab showing a filterable list of resources with CDN providers, type filters, and columns for relative time, CDN, resource URL, type, method, protocol, status, duration, and size" style="width:100%" >}}
 
 The following describes the column headers on the **Resources** tab:
 
@@ -158,6 +158,8 @@ The **Properties** tab contains the configuration details, ownership information
 
 {{< img src="synthetics/browser_tests/synthetics_properties_tab.png" alt="The Properties tab on a browser Test Details page showing Ownership, Execution, and Monitor sections, with left navigation for Continuous Testing, Parent Tests, and other configuration" style="width=80%" >}}
 
+The following describes each section available on the **Properties** tab:
+
 **Ownership**
 : Displays the test owner, editor, creation date, last modified date, environments, teams, and tags. Tests also link to an out-of-the-box Synthetic [browser test dashboard][11].
 
@@ -196,8 +198,6 @@ When a browser test run fails, Datadog generates an AI failure summary to help y
 
 AI failure summaries appear on the test run details page for any failing browser test run. Treat them as a starting point for investigation, not as authoritative root cause analysis, because LLM-generated content can contain inaccuracies.
 
-To share feedback on the accuracy or usefulness of a summary, click the feedback button in the summary panel.
-
 {{< img src="synthetics/browser_tests/test_results/synthetics_ai_summaries.png" alt="AI failure summary panel on a failing browser test run" style="width:100%" >}}
 
 ### Compare screenshots
@@ -226,7 +226,7 @@ To help during the investigation, click **Compare Screenshots** to receive side-
 
 ## Test events
 
-Alerts from your Synthetic test monitors appear in the **Events** tab under **Test Runs**. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][18] and enter `Event Type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][13].
+Alerts from your Synthetic test monitors appear on the timeline in the [**Activity** tab](#test-activity), where you can review alert triggers, recoveries, and summary periods alongside the global uptime graph. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][18] and enter `Event Type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][13].
 
 ## Further Reading
 
