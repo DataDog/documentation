@@ -23,6 +23,8 @@ The Storage Management onboarding wizard guides you through three steps: configu
 
 To start, navigate to **Infrastructure** > [**Storage Management**][1] and click **Enable buckets**.
 
+[1]: https://app.datadoghq.com/storage-management
+
 {{% collapse-content title="1. Configure AWS account" level="h4" expanded=false id="datadog-ui-step1" %}}
 
 In this step, set up the Datadog AWS integration with metric and resource collection enabled.
@@ -34,7 +36,6 @@ In this step, set up the Datadog AWS integration with metric and resource collec
 
 For a list of S3-related permissions used by resource collection, see [AWS Resource Collection][2].
 
-[1]: https://app.datadoghq.com/storage-management
 [2]: /integrations/amazon-web-services/#resource-collection
 {{% /collapse-content %}}
 
