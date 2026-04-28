@@ -125,6 +125,10 @@ To update the SDK versions:
 
 ### Define instrumentation rules
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
 
 To configure instrumentation rules:
