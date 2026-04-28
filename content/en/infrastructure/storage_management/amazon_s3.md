@@ -48,7 +48,7 @@ In this step, select the buckets to monitor, set an inventory destination, and o
     - Destination bucket: The bucket that stores inventory reports (one per AWS region, can be reused cross-account).
 </div>
 
-1. **Select buckets**: Choose the S3 buckets you want to monitor with Storage Management.
+1. **Select buckets**: Choose the S3 buckets you want to monitor with Storage Management. Buckets already enabled for Storage Management are hidden. Buckets with existing S3 inventory are pre-selected and keep their current destination.
 
 2. **Set the inventory destination bucket**: For buckets without an existing inventory configuration, choose a destination bucket where daily inventory reports are delivered. You can pick an existing bucket or specify a new one. Datadog writes inventory files to the `datadog-inventories` prefix.
 
