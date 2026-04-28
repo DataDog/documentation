@@ -173,6 +173,10 @@ Custom instrumentation still requires you to import the SDK. Configuration varia
 
 ## Environment-specific troubleshooting
 
+### SSI continues running after setting `DD_TRACE_ENABLED=false`
+
+Setting `DD_TRACE_ENABLED=false` does not prevent SSI from loading the tracer. The [injector][11] runs before the tracer evaluates its environment variables, so tracer-level environment variables have no effect on SSI. To disable or remove SSI, see your platform's [SSI setup page][12].
+
 ### Host and Docker environments
 
 #### Host injection does not apply to existing processes
@@ -379,3 +383,5 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: https://app.datadoghq.com/fleet
 [10]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
+[11]: /tracing/guide/injectors/
+[12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
