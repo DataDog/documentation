@@ -290,7 +290,7 @@ See [Update Existing Pipelines][linux-4] if you want to make changes to your pip
 <!-- UI - Docker -->
 {% if equals($platform, "docker") %}
 
-{% partial file="/observability_pipelines/install-worker-ui-intro.mdoc.md" /%}
+{% partial file="/observability_pipelines/ui-intro.mdoc.md" /%}
 
 1. Select **Docker** as your installation platform.
 
@@ -340,7 +340,7 @@ See [Update Existing Pipelines][docker-ui-2] if you want to make changes to your
 
 {% if equals($platform, "kubernetes") %}
 
-{% partial file="/observability_pipelines/install-worker-ui-intro.mdoc.md" /%}
+{% partial file="/observability_pipelines/ui-intro.mdoc.md" /%}
 
 1. Select **Kubernetes** as your installation platform.
 
@@ -391,9 +391,9 @@ See [Update Existing Pipelines][docker-ui-2] if you want to make changes to your
 <!-- UI - Linux -->
 {% if equals($platform, "linux") %}
 
-{% partial file="/observability_pipelines/install-worker-ui-intro.mdoc.md" /%}
+{% partial file="/observability_pipelines/ui-intro.mdoc.md" /%}
 
-The steps below use the one-line installation script to install the Worker. 
+The steps below use the one-line installation script to install the Worker.
 
 1. Select **Linux** as your installation platform.
 
@@ -441,7 +441,7 @@ See [Update Existing Pipelines][linux-ui-1] if you want to make changes to your 
 <!-- UI - Cloudformation -->
 {% if equals($platform, "cloudformation") %}
 
-{% partial file="/observability_pipelines/install-worker-ui-intro.mdoc.md" /%}
+{% partial file="/observability_pipelines/ui-intro.mdoc.md" /%}
 
 1. Select **Cloudformation** as your installation platform.
 
