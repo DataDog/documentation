@@ -26,7 +26,7 @@ These optimizations require a [supported native library][13]. JUnit XML uploads 
 
 ## Prevention
 
-Prevention is achieved through [Early Flake Detection][1] and [New Flaky Test PR Gates][2], which help detect new flaky tests and blocking them from reaching your default branch.
+Prevention is achieved through [Early Flake Detection][1] and [New Flaky Test PR Gates][2], which help detect new flaky tests and block them from reaching your default branch.
 
 To validate prevention is working, follow these steps:
 
@@ -41,7 +41,77 @@ This test is flaky by design. **It is not intended to be committed to the defaul
 
 Here are some simple examples of flaky tests. The test name must include the string `flaky`:
 
-{{< include-markdown "tests/guides/validate_optimizations/flaky_test_examples" >}}
+{{< tabs >}}
+{{% tab "JavaScript" %}}
+
+```javascript
+test('flaky test', () => {
+    expect(Math.random()).toBeGreaterThan(0.5);
+});
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+import random
+
+def test_flaky():
+    assert random.random() > 0.5
+```
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+```java
+@Test
+public void flakyTest() {
+    assertTrue(Math.random() > 0.5);
+}
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+it 'is flaky' do
+  expect(rand).to be > 0.5
+end
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+```csharp
+[Fact]
+public void FlakyTest()
+{
+    Assert.True(new Random().NextDouble() > 0.5);
+}
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+func TestFlaky(t *testing.T) {
+    if rand.Float64() <= 0.5 {
+        t.Fail()
+    }
+}
+```
+
+{{% /tab %}}
+{{% tab "Swift" %}}
+
+```swift
+func testFlaky() {
+    XCTAssertTrue(Double.random(in: 0..<1) > 0.5)
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 4. Create a new branch `validate-test-optimization-prevention`, commit the changes to add a new flaky test, and push the changes to open a pull request.
 
@@ -83,7 +153,77 @@ This test is flaky by design. **It is not intended to be committed to the defaul
 
 Here are some simple examples of flaky tests. The test name must include the string `flaky`:
 
-{{< include-markdown "tests/guides/validate_optimizations/flaky_test_examples" >}}
+{{< tabs >}}
+{{% tab "JavaScript" %}}
+
+```javascript
+test('flaky test', () => {
+    expect(Math.random()).toBeGreaterThan(0.5);
+});
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+import random
+
+def test_flaky():
+    assert random.random() > 0.5
+```
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+```java
+@Test
+public void flakyTest() {
+    assertTrue(Math.random() > 0.5);
+}
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+it 'is flaky' do
+  expect(rand).to be > 0.5
+end
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+```csharp
+[Fact]
+public void FlakyTest()
+{
+    Assert.True(new Random().NextDouble() > 0.5);
+}
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+func TestFlaky(t *testing.T) {
+    if rand.Float64() <= 0.5 {
+        t.Fail()
+    }
+}
+```
+
+{{% /tab %}}
+{{% tab "Swift" %}}
+
+```swift
+func testFlaky() {
+    XCTAssertTrue(Double.random(in: 0..<1) > 0.5)
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 5. Create a new branch `validate-test-optimization-mitigation`, commit the changes to add a new flaky test, and push the changes to open a pull request.
 
@@ -119,7 +259,77 @@ This test is flaky by design. **It is not intended to be committed to the defaul
 
 Here are some simple examples of flaky tests. The test name must include the string `flaky`:
 
-{{< include-markdown "tests/guides/validate_optimizations/flaky_test_examples" >}}
+{{< tabs >}}
+{{% tab "JavaScript" %}}
+
+```javascript
+test('flaky test', () => {
+    expect(Math.random()).toBeGreaterThan(0.5);
+});
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+import random
+
+def test_flaky():
+    assert random.random() > 0.5
+```
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+```java
+@Test
+public void flakyTest() {
+    assertTrue(Math.random() > 0.5);
+}
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+it 'is flaky' do
+  expect(rand).to be > 0.5
+end
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+```csharp
+[Fact]
+public void FlakyTest()
+{
+    Assert.True(new Random().NextDouble() > 0.5);
+}
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+func TestFlaky(t *testing.T) {
+    if rand.Float64() <= 0.5 {
+        t.Fail()
+    }
+}
+```
+
+{{% /tab %}}
+{{% tab "Swift" %}}
+
+```swift
+func testFlaky() {
+    XCTAssertTrue(Double.random(in: 0..<1) > 0.5)
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 3. Create a new branch `validate-test-optimization-attempt-to-fix`, commit the changes to add a new flaky test, and push the changes to open a pull request.
 
@@ -220,7 +430,7 @@ git push origin validate-test-optimization-attempt-to-fix
 ```
 
 10. Wait for CI to finish.
-11. After CI has finished, go back to [Flaky Test Management][11]. The test should now show up as `Fix In Progress`. This means that attempt to fix has worked. The test will automatically move to `Fixed` once the PR is merged. 
+11. After CI has finished, go back to [Flaky Test Management][11]. The test should now show up as `Fix In Progress`. This means that attempt to fix has worked. The test will automatically move to `Fixed` once the PR is merged.
 
 **Important**: Do not merge the PR, as it was just purely for validation purposes. Close the pull request without merging.
 
