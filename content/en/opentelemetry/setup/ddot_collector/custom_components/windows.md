@@ -15,7 +15,7 @@ This guide explains how to build a DDOT Collector OCI package with additional Op
 
 To complete this guide, you need the following:
 
-- [Docker][2] (running on Linux or macOS — the cross-compilation runs inside the build container)
+- [Docker][2] (running on Linux or macOS—the cross-compilation runs inside the build container)
 - GitHub and access to the [Datadog Agent][3] source code that contains DDOT Collector.
 - A private OCI-compatible container registry to host your custom package.
 - The OpenTelemetry components you plan to include must be compatible with the DDOT Collector version.
