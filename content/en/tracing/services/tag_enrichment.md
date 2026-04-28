@@ -40,7 +40,7 @@ Custom rules let you target a specific set of services and configure exactly how
 1. Select entities to enrich. As you select entities, a query is built in the background. To edit the query, select **Build Advanced Query**.
    {{< img src="tracing/services/tag_enrichment/tag-enrichment-adv-query.png" alt="The Add IDP tag enrichment rule modal with the Build Advanced Query tab selected, showing fields for tag key, operator, and value, with an Add Condition option." >}}
    - Select **Add Condition** to add an `AND` condition to your query.
-   - Add multiple values in the **Value** section to create an `OR` condition.
+   - Add multiple values in the **Value** field to create an `OR` condition.
 1. Choose tags and enrichment methods:
    - Select the `team` tag, `system` tag, or both.
    - For each tag, select whether the tag value comes from Entity Metadata, the value of a different tag, or a fixed value.
