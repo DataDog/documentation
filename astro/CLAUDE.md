@@ -85,6 +85,8 @@ Give every HTML element in a component a BEM class (e.g. `tabs__button--active`)
 
 ## Astro/Preact island pattern
 
+We prefer that Preact islands do not reach outside their own scope to manipulate elements. Where you can, enclose everything inside of the Preact component so that the component can be fully isolated and contained. But sometimes this is not possible without bloating the HTML too severely, as described below.
+
 NOTE: This island pattern **only** applies to elements that would otherwise need to be passed large chunks of rendered HTML in their props. It **does not** apply to all large serialized props. Large data props are fine.
 
 Avoid design patterns that require large chunks of rendered HTML to be serialized as props.

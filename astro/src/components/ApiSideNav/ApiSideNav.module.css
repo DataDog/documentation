@@ -48,6 +48,10 @@
   font-weight: var(--font-weight-semibold);
 }
 
+.api-side-nav__search {
+  padding: var(--space-md) var(--space-md) var(--space-sm) var(--space-md);
+}
+
 .api-side-nav__list {
   list-style: none;
   margin: 0;

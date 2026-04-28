@@ -1,0 +1,208 @@
+.search-bar {
+  position: relative;
+  width: 100%;
+}
+
+.search-bar__form {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  border: none;
+  border-radius: 0;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.search-bar__input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-xs) var(--space-md) var(--space-xs) 0;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: var(--color-text);
+  background: transparent;
+}
+
+.search-bar__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Hide the browser-default clear button (Hugo strips it the same way in
+   `searchbar-with-dropdown.scss`) so the input behaves like a plain text box. */
+.search-bar__input::-webkit-search-decoration,
+.search-bar__input::-webkit-search-cancel-button,
+.search-bar__input::-webkit-search-results-button,
+.search-bar__input::-webkit-search-results-decoration {
+  display: none;
+}
+
+/* Submit button is positioned to the left of the input (matching Hugo's side
+   nav: `searchbar-sidenav.scss` uses `order: -1`) and styled as an icon-only
+   button. The inlined SVG inherits color from `currentColor`. */
+.search-bar__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 0 var(--space-sm) 0 var(--space-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.search-bar__submit:hover {
+  color: var(--color-brand);
+}
+
+.search-bar__submit svg {
+  display: block;
+}
+
+/* Visual hint that `/` focuses the input. Ported from Hugo's
+   `.ais-SearchBox::after` (with the side-nav `right: 10px` override). */
+.search-bar__shortcut {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%) scale(1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 24px;
+  padding-bottom: 2px;
+  border: 1px solid #787b7c;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7d8081;
+  background: var(--color-bg);
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.search-bar__form:focus-within .search-bar__shortcut {
+  opacity: 0;
+  transform: translateY(-50%) scale(0.8);
+}
+
+@media (max-width: 1280px) {
+  .search-bar__shortcut {
+    display: none;
+  }
+}
+
+/* `position: fixed` so the popup escapes the side nav's `overflow: auto` clip
+   and isn't trapped inside an ancestor's stacking context. Coordinates are
+   computed from the input's bounding rect at runtime. */
+.search-bar__popup {
+  position: fixed;
+  margin-top: var(--space-2xs);
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius, 4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  padding: var(--space-sm) 0;
+}
+
+.search-bar__ai-suggestion {
+  margin: 0 var(--space-sm) var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-placeholder-bg);
+  outline: 2px solid var(--color-placeholder-outline);
+  outline-offset: -2px;
+  color: var(--color-placeholder-text);
+  font-weight: var(--font-weight-semibold, 600);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  user-select: none;
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+.search-bar__ai-suggestion--selected {
+  filter: brightness(0.95);
+}
+
+.search-bar__no-hits {
+  padding: var(--space-md);
+  color: var(--color-text-muted);
+  text-align: center;
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+.search-bar__category {
+  padding: var(--space-xs) 0;
+}
+
+.search-bar__category-label {
+  margin: 0;
+  padding: var(--space-2xs) var(--space-md);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.search-bar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-bar__hit {
+  margin: 0;
+}
+
+.search-bar__hit-link {
+  display: block;
+  padding: var(--space-xs) var(--space-md);
+  color: var(--color-text);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+}
+
+.search-bar__hit-link:hover,
+.search-bar__hit--selected .search-bar__hit-link {
+  background: var(--color-bg-hover);
+  border-left-color: var(--color-brand);
+}
+
+.search-bar__hit-subcategory {
+  margin: 0;
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-muted);
+}
+
+.search-bar__hit-title {
+  margin: 0;
+  font-size: var(--font-size-sm, 0.875rem);
+  line-height: 1.3;
+}
+
+.search-bar__hit-section {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.search-bar__hit-snippet {
+  margin: var(--space-2xs) 0 0;
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.search-bar__hit-snippet :global(mark),
+.search-bar__hit-title :global(mark),
+.search-bar__hit-section :global(mark) {
+  background: var(--color-highlight-bg);
+  color: var(--color-highlight-text);
+  padding: 0 0.1em;
+}

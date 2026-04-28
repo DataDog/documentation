@@ -1,0 +1,36 @@
+---
+title: "SearchBar"
+description: "Preact island. Reads from Hugo's Typesense cluster, popup-only."
+type: interactive
+---
+
+# SearchBar
+
+Side-nav search bar for the Astro API docs. Mirrors Hugo's popup search (the one in [`layouts/partials/search.html`](https://github.com/DataDog/documentation/blob/master/layouts/partials/search.html), embedded in the API side nav) with a thinner, direct-to-Typesense client.
+
+## Behaviors
+
+| Behavior | Notes |
+|----------|-------|
+| Query input | Debounced ~200ms; closes the popup when blank |
+| Result groups | API, Getting Started, Documentation, Guides, Integrations, Partners — empty groups are hidden |
+| Group order | API pinned first (the whole Astro site is API), Partners last |
+| Cross-site link routing | API hits open same-origin in Astro; all other categories link to `https://docs.datadoghq.com${relpermalink}` (target=_blank) |
+| Ask AI placeholder | Rendered at the top of the popup as a `<Placeholder>`-styled stand-in until conversational search is wired up |
+| Keyboard shortcuts | `/` and `Cmd/Ctrl+K` focus the input; `Esc` clears + blurs |
+| Result navigation | `ArrowDown`/`ArrowUp` walk through Ask AI then hits; `Enter` opens the selected hit |
+| Outside click | Closes the popup |
+
+## Typesense plumbing
+
+Queries hit `POST /multi_search` against two collections — `docs_alias` (with the `docs_alias_api_view` preset) and `docs_partners_alias` (with `docs_partners_view`). Per-environment cluster details live in [`src/config/typesense.ts`](https://github.com/DataDog/documentation/blob/master/astro/src/config/typesense.ts) and mirror Hugo's `assets/scripts/config/config-docs.js`.
+
+## Live
+
+The component is mounted inside the API side nav on every API page; the box below shows it standalone for visual checks.
+
+{% searchBar /%}
+
+## Hit normalization
+
+Hit normalization (title/section/content with `<mark>` highlighting and snippet truncation around the first match) is ported from [`assets/scripts/components/instantsearch/getHitData.js`](https://github.com/DataDog/documentation/blob/master/assets/scripts/components/instantsearch/getHitData.js). The Typesense-native `highlights[]` array is folded into the same normalized shape Hugo produces from instantsearch.js's `_highlightResult`.

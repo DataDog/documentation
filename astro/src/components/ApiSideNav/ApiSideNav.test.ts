@@ -1,6 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+// @ts-ignore — Preact renderer is registered for SSR of islands in headless tests.
+import preactRenderer from '@astrojs/preact/server.js';
 import ApiSideNav from './ApiSideNav.astro';
+
+async function createContainer() {
+  const container = await AstroContainer.create();
+  container.addServerRenderer({ renderer: preactRenderer, name: '@astrojs/preact' });
+  return container;
+}
 
 const categories = [
   {
@@ -29,7 +37,7 @@ const categories = [
 
 describe('ApiSideNav component', () => {
   it('renders a link for every category', async () => {
-    const container = await AstroContainer.create();
+    const container = await createContainer();
     const html = await container.renderToString(ApiSideNav, { props: { categories } });
 
     expect(html).toContain('Dashboards');
@@ -39,7 +47,7 @@ describe('ApiSideNav component', () => {
   });
 
   it('renders operations under their parent category', async () => {
-    const container = await AstroContainer.create();
+    const container = await createContainer();
     const html = await container.renderToString(ApiSideNav, {
       props: { categories, currentSlug: 'dashboards' },
     });
@@ -49,11 +57,20 @@ describe('ApiSideNav component', () => {
   });
 
   it('flags the current category with the active modifier', async () => {
-    const container = await AstroContainer.create();
+    const container = await createContainer();
     const html = await container.renderToString(ApiSideNav, {
       props: { categories, currentSlug: 'dashboards' },
     });
 
     expect(html).toMatch(/api-side-nav__category--active/);
+  });
+
+  it('renders the SearchBar in the dedicated slot at the top of the nav', async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(ApiSideNav, { props: { categories } });
+
+    expect(html).toMatch(/api-side-nav__search/);
+    // The Preact island's input is server-rendered too, so the markup is present.
+    expect(html).toContain('search-bar__input');
   });
 });
