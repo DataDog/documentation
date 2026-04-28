@@ -290,6 +290,7 @@ unsupported_sites:
   backstage: [gov]
   bits_ai: [gov]
   bits_ai_sre: [gov]
+  byoti: [gov]
   case_management: [gov]
   ci_visibility: [gov]
   code_coverage: [gov]
