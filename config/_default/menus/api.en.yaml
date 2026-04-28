@@ -12799,6 +12799,18 @@ menu:
       url: /api/latest/rum/
       identifier: rum
       generated: true
+    - name: Upload source maps
+      url: '#upload-source-maps'
+      identifier: rum-upload-source-maps
+      parent: rum
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UploadSourceMap
+        unstable: []
+        order: 9
     - name: Search RUM events
       url: '#search-rum-events'
       identifier: rum-search-rum-events
