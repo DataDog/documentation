@@ -14,7 +14,7 @@ further_reading:
 - link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Limit data collection to a subset of containers only"
-- link: "https://learn.datadoghq.com/courses/intro-to-monitoring-kubernetes"
+- link: "https://learn.datadoghq.com/courses/getting-started-k8s"
   tag: "Learning Center"
   text: "Introduction to Monitoring Kubernetes"
 
