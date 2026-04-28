@@ -310,6 +310,15 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 {% /stepper %}
 
+#### Install a framework integration
+
+If your application uses React, Angular, Vue, or Next.js, Datadog provides dedicated integrations that handle router instrumentation, error tracking, and framework-specific setup:
+
+- [React][16] for the `@datadog/browser-rum-react` plugin.
+- [Angular][17] for the `@datadog/browser-rum-angular` plugin.
+- [Vue][18] for the `@datadog/browser-rum-vue` plugin.
+- [Next.js][19] for the `@datadog/browser-rum-nextjs` plugin.
+
 [1]: https://app.datadoghq.com/rum/list
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
 [3]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
@@ -321,4 +330,8 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 [13]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
 [14]: /session_replay/browser/
 [15]: /product_analytics/
+[16]: /integrations/rum-react/
+[17]: /integrations/rum-angular/
+[18]: /integrations/rum-vue/
+[19]: /integrations/rum-nextjs/
 
