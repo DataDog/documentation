@@ -397,7 +397,7 @@ Point your AI agent to the MCP Server endpoint for your regional [Datadog site][
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
-1. One-click install (recommended): Use this [deeplink](goose://extension?url={{< region-param key="mcp_server_endpoint" >}}&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server) to add the Datadog MCP Server to Goose.
+1. One-click install (recommended): Use this <a href="goose://extension?url={{< region-param key="mcp_server_endpoint" >}}&amp;type=streamable_http&amp;id=Datadog&amp;name=Datadog&amp;description=Datadog%20MCP%20Server">deeplink</a> to add the Datadog MCP Server to Goose.
 
 1. Alternatively, follow Goose's [Add an MCP server][2] instructions. Use the selected endpoint shown above as the remote Streamable HTTP server URL. You can also modify Goose's config directly for future updates at `~/.config/goose/config.yaml`.
 
