@@ -131,13 +131,13 @@ The Network Path visualization shows the routes packets take to complete queries
 
   {{< img src="synthetics/network_tests/network_path_test_updated.png" alt="Network Path test details page showing the Network Path tab with source, hops, and destination, plus the latency and reachability timeline" style="width:100%;">}}
 
-Click on a test run in the table at the bottom of the page to view details for that specific run. The side panel displays:
- 
+On the **Test Runs** tab, click a test run to open a side panel with details for that specific run. The side panel displays:
+
 - Run information
 - Network Path visualization, aggregated across all traceroute queries (based on your tests [advanced options](#test-configuration))
 - Assertion results, aggregated across all end-to-end queries (based on your tests [advanced options](#test-configuration)) <br></br>
 
-  {{< img src="synthetics/network_tests/network_path_synthetics.png" alt="A single test run from a network test, displaying the side panel" style="width:80%;">}}
+  {{< img src="synthetics/network_tests/network_path_details.png" alt="Side panel for a single Network Path test run showing run status, latency, hops, jitter, the Network Path visualization, and assertion results" style="width:100%;">}}
 
 ## Retention
 
