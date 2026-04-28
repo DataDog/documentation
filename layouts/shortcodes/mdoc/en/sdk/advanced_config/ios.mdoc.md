@@ -753,7 +753,7 @@ DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
 
 To add custom attributes to resources, use the `URLSessionTracking.resourceAttributesProvider` option when enabling the RUM. By setting attributes provider closure, you can return additional attributes to be attached to tracked resource.
 
-For instance, you may want to add HTTP request and response headers to the RUM resource:
+For instance, to surface a correlation ID from a response header as a custom attribute on the resource:
 
 ```swift
 RUM.enable(
@@ -762,14 +762,57 @@ RUM.enable(
     urlSessionTracking: RUM.Configuration.URLSessionTracking(
         resourceAttributesProvider: { request, response, data, error in
             return [
-                "request.headers" : redactedHeaders(from: request),
-                "response.headers" : redactedHeaders(from: response)
+                "correlation-id": response?.value(forHTTPHeaderField: "x-correlation-id") ?? ""
             ]
         }
     )
   )
 )
 ```
+
+#### Capture resource headers
+
+When [tracking network requests automatically](#automatically-track-network-requests), you can capture HTTP request and response headers on RUM Resources by setting `trackResourceHeaders` on `RUM.Configuration.URLSessionTracking`. This option is disabled by default.
+
+Captured headers appear on the RUM Resource event under `resource.request.headers` and `resource.response.headers` and are queryable in the RUM Explorer.
+
+Use `.defaults` to capture a predefined set of common headers:
+
+```swift
+RUM.enable(
+  with: RUM.Configuration(
+    applicationID: "<rum application id>",
+    urlSessionTracking: RUM.Configuration.URLSessionTracking(
+        trackResourceHeaders: .defaults
+    )
+  )
+)
+```
+
+The following headers are captured with `.defaults`:
+
+| Direction | Headers |
+|-----------|---------|
+| Request | `cache-control`, `content-type` |
+| Response | `age`, `cache-control`, `content-encoding`, `content-length`, `content-type`, `etag`, `expires`, `server-timing`, `vary`, `x-cache` |
+
+To capture additional headers on top of the defaults, use `.custom` with `.matchHeaders`. For example, to also capture `x-request-id` and `x-datadog-trace` on both request and response:
+
+```swift
+RUM.enable(
+  with: RUM.Configuration(
+    applicationID: "<rum application id>",
+    urlSessionTracking: RUM.Configuration.URLSessionTracking(
+        trackResourceHeaders: .custom([
+            .defaults,
+            .matchHeaders(["x-request-id", "x-datadog-trace"])
+        ])
+    )
+  )
+)
+```
+
+**Note**: Sensitive headers (such as tokens, API keys, and cookies) are filtered out automatically, even if listed explicitly.
 
 If you don't want to track requests, you can disable URLSessionInstrumentation for the delegate type:
 
