@@ -285,8 +285,7 @@ Use `LLMObs.publish_evaluator()` to push a locally-defined `LLMJudge` configurat
 | `variable_mapping` | `dict[str, str]` | No | Remaps variable names in `user_prompt` to Datadog span field paths in the published evaluator. |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs._evaluators import BooleanStructuredOutput, LLMJudge
+from ddtrace.llmobs import BooleanStructuredOutput, LLMJudge, LLMObs
 
 LLMObs.enable(
     ml_app="my-ml-app",
@@ -335,7 +334,7 @@ Performs string comparison operations between `output_data` and `expected_output
 | `icontains` | `output_data` contains `expected_output` (case-insensitive) |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import StringCheckEvaluator
+from ddtrace.llmobs.evaluators import StringCheckEvaluator
 
 # Perform an exact match (default)
 evaluator = StringCheckEvaluator(operation="eq", case_sensitive=True)
@@ -361,7 +360,7 @@ Validates output against a regex pattern.
 | `fullmatch` | Match entire string |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import RegexMatchEvaluator
+from ddtrace.llmobs.evaluators import RegexMatchEvaluator
 import re
 
 # Validate email format
@@ -388,7 +387,7 @@ Validates output length constraints.
 | `lines` | Count lines |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LengthEvaluator
+from ddtrace.llmobs.evaluators import LengthEvaluator
 
 # Ensure response is 50-200 characters
 evaluator = LengthEvaluator(min_length=50, max_length=200, count_type="characters")
@@ -402,7 +401,7 @@ evaluator = LengthEvaluator(min_length=10, max_length=100, count_type="words")
 Validates that output is valid JSON, and optionally checks for required keys.
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import JSONEvaluator
+from ddtrace.llmobs.evaluators import JSONEvaluator
 
 # Validate JSON syntax
 evaluator = JSONEvaluator()
@@ -416,7 +415,7 @@ evaluator = JSONEvaluator(required_keys=["name", "status", "data"])
 Measures semantic similarity between `output_data` and `expected_output` using embeddings. Returns a similarity score between 0.0 and 1.0.
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import SemanticSimilarityEvaluator
+from ddtrace.llmobs.evaluators import SemanticSimilarityEvaluator
 from openai import OpenAI
 
 client = OpenAI()

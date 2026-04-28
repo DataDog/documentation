@@ -6,7 +6,7 @@ Connecting your AWS account with Cloudcraft requires an AWS user with permission
 
 If you don't have the right permissions, ask your organization's administrator to create the role for you.
 
-Head to **User** → **AWS accounts** inside Cloudcraft and click **Add AWS account**.
+Head to {{< ui >}}User{{< /ui >}} > {{< ui >}}AWS accounts{{< /ui >}} inside Cloudcraft and click {{< ui >}}Add AWS account{{< /ui >}}.
 
 The next screen will provide step-by-step instructions and a link that configures the read-only IAM role for you. Copy the link and provide it to your organization's administrator, so they can create the role for you.
 

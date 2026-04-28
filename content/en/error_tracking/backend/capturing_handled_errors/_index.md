@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Datadog tracing libraries can automatically report handled errors. The errors are attached through span events to the span in which they are handled. They are also directly reported to Error Tracking.
+Datadog SDKs can automatically report handled errors. The errors are attached through span events to the span in which they are handled. They are also directly reported to Error Tracking.
 
 ## Requirements
 Supported languages
@@ -37,7 +37,7 @@ Capturing handled errors is only available in APM Error Tracking or Standalone B
 
 ## Setup
 
-Set up your application to capture handled errors using one of the following official Datadog tracing libraries:
+Set up your application to capture handled errors using one of the following official Datadog SDKs:
 
 {{< partial name="error_tracking/error-tracking-handled-errors.html" >}}
 <br />

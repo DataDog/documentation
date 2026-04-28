@@ -1,20 +1,24 @@
 ---
-title: Install CloudPrem
-description: Learn how to deploy CloudPrem on various platforms and environments
+title: Install BYOC Logs
+description: Learn how to deploy BYOC Logs on various platforms and environments
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
 
-CloudPrem can be deployed in various environments, from cloud-managed Kubernetes services to bare metal servers. The provided installation instructions are specific to **Kubernetes distributions**.
+BYOC Logs requires **Kubernetes** for production deployments. It is supported on cloud-managed Kubernetes services (EKS, GKE, AKS) and self-managed Kubernetes clusters. A [Docker installation][2] is also available for local evaluation and testing only.
+
+<div class="alert alert-warning">
+<strong>Docker is for evaluation only.</strong> The Docker installation method is designed for exploring BYOC Logs features locally. For production workloads, deploy on a supported Kubernetes platform.
+</div>
 
 ## Prerequisites
 
 <div class="alert alert-info">
-If you don't see the CloudPrem entry in the Logs menu, it means CloudPrem is not activated on your account. Join the <a href="https://www.datadoghq.com/product-preview/cloudprem/">CloudPrem Preview</a> to activate CloudPrem on your account.
+If you don't see the BYOC Logs entry in the Logs menu, it means BYOC Logs is not activated on your account. Join the <a href="https://www.datadoghq.com/product-preview/cloudprem/">BYOC Logs Preview</a> to activate BYOC Logs on your account.
 </div>
 
 ### Kubernetes cluster requirements
@@ -22,12 +26,12 @@ If you don't see the CloudPrem entry in the Logs menu, it means CloudPrem is not
 | Requirement            | Details                                                                                  |
 |------------------------|------------------------------------------------------------------------------------------|
 | **Kubernetes Version** | 1.25 or higher                                                                           |
-| **Recommended Platforms** | - AWS EKS<br>- Google GKE<br>- Azure AKS<br>- Self-managed Kubernetes (Nginx controller) |
+| **Supported Platforms** | - AWS EKS<br>- Google GKE<br>- Azure AKS<br>- Self-managed Kubernetes (Nginx controller)<br><br>OpenShift and OCI (Oracle Cloud) are not currently tested or supported. |
 | **Metadata Storage**   | PostgreSQL database                                                                      |
 | **Recommended PostgreSQL Options** | - AWS: RDS PostgreSQL<br>- GCP: Cloud SQL for PostgreSQL<br>- Azure: Azure Database for PostgreSQL<br>- Self-hosted: PostgreSQL with persistent storage |
 
 ### Object storage
-CloudPrem supports the following object storage types:
+BYOC Logs supports the following object storage types:
 - Amazon S3
 - Google Cloud Storage (GCS)
 - Azure Blob Storage
@@ -46,3 +50,4 @@ CloudPrem supports the following object storage types:
 {{< /whatsnext >}}
 
 [1]: https://www.datadoghq.com/product-preview/cloudprem/
+[2]: /cloudprem/install/docker/

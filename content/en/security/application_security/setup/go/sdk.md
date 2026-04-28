@@ -76,9 +76,9 @@ type LoginRequest struct {
 }
 
 type User struct {
-	Name     string `json:name`
-	Username string `json:username`
-	Email    string `json:email`
+	Name     string `json:"name"`
+	Username string `json:"username"`
+	Email    string `json:"email"`
 	password string
 }
 
@@ -132,13 +132,13 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Track failed login
-	appsec.TrackUserLoginFailure(r.Context(), req.Username, true, metadata)
+	appsec.TrackUserLoginFailure(r.Context(), req.Username, true, nil)
 	http.Error(w, "Invalid credentials", http.StatusUnauthorized)
 }
 
 func authMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		user := "<username>" // Do real authentification here
+		user := "<username>" // Do real authentication here
 
 		// Set user context on all authenticated requests
 		if err := appsec.SetUser(r.Context(), user); err != nil && events.IsSecurityError(err) {
@@ -155,7 +155,7 @@ func profileHandler(w http.ResponseWriter, r *http.Request) {
 		"data_type": "personal_info",
 	})
 
-	userAsked := r.Query().Get("user")
+	userAsked := r.URL.Query().Get("user")
 	user := users[0] // Search for the user
 
 	// Monitor response body

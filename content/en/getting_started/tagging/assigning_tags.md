@@ -161,6 +161,8 @@ For containerized environments, it is recommended to follow the [unified service
 
 After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agent's main configuration file. If you specify multiple tags, separate each one with a space.
 
+**Note**: The `DD_TAGS` environment variable uses whitespace to separate tags. For example, `DD_TAGS="key1:val1 key2:val2"` sets two tags. A value like `DD_TAGS="test:this is a test"` produces four separate tags (`test:this`, `is`, `a`, `test`) because each space-separated token is treated as its own tag. To include spaces in tag values, set tags through YAML configuration or integration annotations instead. Those methods convert whitespace to underscores (for example, `test:this is a test` becomes `test:this_is_a_test`).
+
 Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                                                                             |
@@ -254,9 +256,9 @@ Depending on the cardinality, there is a different set of out-of-the box tags fo
 
 #### Traces
 
-The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][9] documentation has information on tagging options and configuration for each tracer. You can also follow the [unified service tagging][2] documentation to configure your tracer for unified service tagging.
+The Datadog SDK can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][9] documentation has information on tagging options and configuration for each SDK. You can also follow the [unified service tagging][2] documentation to configure your SDK for unified service tagging.
 
-Regardless of the tracer used, span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and is of a single type.
+Regardless of the SDK used, span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and is of a single type.
 
 For instance, a node can't be both an object (with sub-nodes) and a string:
 

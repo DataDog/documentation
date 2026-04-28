@@ -23,36 +23,36 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
 
 ### Connect an endpoint
 
-1. In your Google Cloud console, navigate to **Network services** > **Private Service Connect**.
-2. Go to the **Endpoints** section. Click on **Connect endpoint**.
+1. In your Google Cloud console, navigate to {{< ui >}}Network services{{< /ui >}} > {{< ui >}}Private Service Connect{{< /ui >}}.
+2. Go to the {{< ui >}}Endpoints{{< /ui >}} section. Click on {{< ui >}}Connect endpoint{{< /ui >}}.
    {{< img src="agent/guide/psc/connect-endpoint1.png" alt="Screenshot of a 'Connect endpoint' page in the Google Cloud console" >}}
 
-   - Under **Target**, select _Published service_.
-   - For **Target service**, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services).
-   - For **Endpoint name**, enter a unique identifier to use for this endpoint. You can use `datadog-<SERVICE>`. For example: `datadog-api`.
-   - For **Network** and **Subnetwork**, choose the network and subnetwork where you want to publish your endpoint.
-   - For **IP address**, click the dropdown and select _Create IP address_ to create an internal IP from your subnet dedicated to the endpoint. Select this IP.
-   - Check **Enable global access** if you intend to connect the endpoint to virtual machines outside of the `us-central1` region.
+   - Under {{< ui >}}Target{{< /ui >}}, select _Published service_.
+   - For {{< ui >}}Target service{{< /ui >}}, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services).
+   - For {{< ui >}}Endpoint name{{< /ui >}}, enter a unique identifier to use for this endpoint. You can use `datadog-<SERVICE>`. For example: `datadog-api`.
+   - For {{< ui >}}Network{{< /ui >}} and {{< ui >}}Subnetwork{{< /ui >}}, choose the network and subnetwork where you want to publish your endpoint.
+   - For {{< ui >}}IP address{{< /ui >}}, click the dropdown and select _Create IP address_ to create an internal IP from your subnet dedicated to the endpoint. Select this IP.
+   - Check {{< ui >}}Enable global access{{< /ui >}} if you intend to connect the endpoint to virtual machines outside of the `us-central1` region.
 
    **Note**: Datadog exposes PSC producer endpoints from the `us-central1` region. These endpoints support global access, allowing services to connect from any region. However, the forwarding rule must be created in the `us-central1` region.
 
-3. Click **Add endpoint**. Verify that your status is _Accepted_. Take note of the IP address, as this is used in the next section.
+3. Click {{< ui >}}Add endpoint{{< /ui >}}. Verify that your status is _Accepted_. Take note of the IP address, as this is used in the next section.
    {{< img src="agent/guide/psc/connect-endpoint-success1.png" alt="Screenshot of a success message after adding an endpoint in the Google Cloud console. Includes an IP address" >}}
 
 ### Create a DNS zone
-1. In your Google Cloud console, navigate to **Network services** > **Cloud DNS**.
-2. Click on **Create zone**.
+1. In your Google Cloud console, navigate to {{< ui >}}Network services{{< /ui >}} > {{< ui >}}Cloud DNS{{< /ui >}}.
+2. Click on {{< ui >}}Create zone{{< /ui >}}.
    {{< img src="agent/guide/psc/create-a-dns-zone1.png" alt="Screenshot of a 'Create a DNS zone' page in the Google Cloud console" >}}
 
-   - Under **Zone type**, select _Private_.
-   - For **Zone name**, enter a descriptive name for your zone.
-   - For **DNS name**, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find your DNS name in the [table of published services](#published-services).
-3. Next, create an `A` record that points to the endpoint IP. On the _Zone details_ page of the zone you created, click on **Add record set**.
+   - Under {{< ui >}}Zone type{{< /ui >}}, select _Private_.
+   - For {{< ui >}}Zone name{{< /ui >}}, enter a descriptive name for your zone.
+   - For {{< ui >}}DNS name{{< /ui >}}, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find your DNS name in the [table of published services](#published-services).
+3. Next, create an `A` record that points to the endpoint IP. On the _Zone details_ page of the zone you created, click on {{< ui >}}Add record set{{< /ui >}}.
    {{< img src="agent/guide/psc/create-record1.png" alt="Screenshot of the 'Create record set' page in the Google Cloud console." >}}
 
-   - For **DNS name**, leave the field unmodified.
-   - For **Resource record type**, select `A`.
-   - Under **IPv4 Address**, enter the IP address that was displayed at the end of the previous section.
+   - For {{< ui >}}DNS name{{< /ui >}}, leave the field unmodified.
+   - For {{< ui >}}Resource record type{{< /ui >}}, select `A`.
+   - Under {{< ui >}}IPv4 Address{{< /ui >}}, enter the IP address that was displayed at the end of the previous section.
 
 ### Additional required steps for metrics and traces
 There are two Datadog Intake Services that are subdomains of the (`agent.`{{< region-param key="dd_site" code="true" >}}) domain. Because of this, the Private Hosted Zone is slightly different from other intakes.
@@ -127,36 +127,36 @@ You can configure a PSC endpoint to expose a private IP address for each Datadog
 
 ### Connect an endpoint
 
-1. In your GCP console, navigate to **Network services** > **Private Service Connect**.
-2. Go to the **Endpoints** section. Click on **Connect endpoint**.
+1. In your GCP console, navigate to {{< ui >}}Network services{{< /ui >}} > {{< ui >}}Private Service Connect{{< /ui >}}.
+2. Go to the {{< ui >}}Endpoints{{< /ui >}} section. Click on {{< ui >}}Connect endpoint{{< /ui >}}.
    {{< img src="agent/guide/psc/connect-endpoint-eu1.png" alt="Screenshot of a 'Connect endpoint' page in the Google Cloud console" >}}
 
-   - Under **Target**, select _Published service_.
-   - For **Target service**, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services-1).
-   - For **Endpoint name**, enter a unique identifier to use for this endpoint. You can use `datadog-<SERVICE>`. For example: `datadog-metrics`.
-   - For **Network** and **Subnetwork**, choose the network and subnetwork where you want to publish your endpoint.
-   - For **IP address**, click the dropdown and select _Create IP address_ to create an internal IP from your subnet dedicated to the endpoint. Select this IP.
-   - Check **Enable global access** if you intend to connect the endpoint to virtual machines outside of the `europe-west3` region.
+   - Under {{< ui >}}Target{{< /ui >}}, select _Published service_.
+   - For {{< ui >}}Target service{{< /ui >}}, enter the _PSC target name_ that corresponds to the Datadog intake service that you want to use. You can find your PSC target name in the [table of published services](#published-services-1).
+   - For {{< ui >}}Endpoint name{{< /ui >}}, enter a unique identifier to use for this endpoint. You can use `datadog-<SERVICE>`. For example: `datadog-metrics`.
+   - For {{< ui >}}Network{{< /ui >}} and {{< ui >}}Subnetwork{{< /ui >}}, choose the network and subnetwork where you want to publish your endpoint.
+   - For {{< ui >}}IP address{{< /ui >}}, click the dropdown and select _Create IP address_ to create an internal IP from your subnet dedicated to the endpoint. Select this IP.
+   - Check {{< ui >}}Enable global access{{< /ui >}} if you intend to connect the endpoint to virtual machines outside of the `europe-west3` region.
 
    **Note**: Datadog exposes PSC producer endpoints from the `europe-west3` region. These endpoints support global access, allowing services to connect from any region. However, the forwarding rule must be created in the `europe-west3` region.
 
-3. Click **Add endpoint**. Verify that your status is _Accepted_. Take note of the IP address, as this is used in the next section.
+3. Click {{< ui >}}Add endpoint{{< /ui >}}. Verify that your status is _Accepted_. Take note of the IP address, as this is used in the next section.
    {{< img src="agent/guide/psc/connect-endpoint-success-eu1.png" alt="Screenshot of a success message after adding an endpoint in the Google Cloud console. Includes an IP address" >}}
 
 ### Create a DNS zone
-1. In your Google Cloud console, navigate to **Network services** > **Cloud DNS**.
-2. Click on **Create zone**.
+1. In your Google Cloud console, navigate to {{< ui >}}Network services{{< /ui >}} > {{< ui >}}Cloud DNS{{< /ui >}}.
+2. Click on {{< ui >}}Create zone{{< /ui >}}.
    {{< img src="agent/guide/psc/create-a-dns-zone-eu1.png" alt="Screenshot of a 'Create a DNS zone' page in the Google Cloud console" >}}
 
-   - Under **Zone type**, select _Private_.
-   - For **Zone name**, enter a descriptive name for your zone.
-   - For **DNS name**, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find your DNS name in the [table of published services](#published-services-1).
-3. Next, create an `A` record that points to the endpoint IP. On the _Zone details_ page of the zone you created, click on **Add record set**.
+   - Under {{< ui >}}Zone type{{< /ui >}}, select _Private_.
+   - For {{< ui >}}Zone name{{< /ui >}}, enter a descriptive name for your zone.
+   - For {{< ui >}}DNS name{{< /ui >}}, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find your DNS name in the [table of published services](#published-services-1).
+3. Next, create an `A` record that points to the endpoint IP. On the _Zone details_ page of the zone you created, click on {{< ui >}}Add record set{{< /ui >}}.
    {{< img src="agent/guide/psc/create-record-eu1.png" alt="Screenshot of the 'Create record set' page in the Google Cloud console." >}}
 
-   - For **DNS name**, leave the field unmodified.
-   - For **Resource record type**, select `A`.
-   - Under **IPv4 Address**, enter the IP address that was displayed at the end of the previous section.
+   - For {{< ui >}}DNS name{{< /ui >}}, leave the field unmodified.
+   - For {{< ui >}}Resource record type{{< /ui >}}, select `A`.
+   - Under {{< ui >}}IPv4 Address{{< /ui >}}, enter the IP address that was displayed at the end of the previous section.
 
 ### Additional required steps for metrics and traces
 
