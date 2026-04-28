@@ -17,17 +17,36 @@ The ARM template deploys resources from a series of Azure services (storage acco
 
 **All sites**: Automated log forwarding is available to use on all [Datadog sites][4].
 
-## How to choose between automated and manual setup
+## Choose your Azure log ingestion method
 
-Choose the manual setup method if you want to:
-   - apply custom tags to your resources
+Selecting the right ingestion method depends on the type of Azure log you want to forward. It also depends on how you prefer to manage the forwarder infrastructure.
 
-Use the automated setup method if you want to:
+### Log type to ingestion path
+
+Different Azure log types support different ingestion paths. Use this table to identify a path that works for your source before choosing a setup method.
+
+| Azure log source | Supported ingestion paths | Notes |
+|---|---|---|
+| Activity logs | Diagnostic settings to the automated forwarder, Event Hub, or Blob Storage | |
+| Resource (diagnostic) logs | Diagnostic settings to the automated forwarder, Event Hub, or Blob Storage | |
+| Log Analytics Workspace tables | Data export rule to the automated forwarder Storage Account | See the [Log Analytics Workspaces](#log-analytics-workspaces) section below. |
+| VNet flow logs | **Blob Storage only** | Network Watcher writes flow logs directly to a Storage Account. Event Hub is not a supported destination. See [Forward VNet flow logs or NSG flow logs][23]. |
+| NSG flow logs | **Blob Storage only** | Same destination constraint as VNet flow logs. See [Forward VNet flow logs or NSG flow logs][23]. |
+| Microsoft Defender for Cloud | Continuous export to Event Hub, then to a Function App | Use the manual Event Hub setup. |
+| Microsoft Entra ID logs | Diagnostic settings to the Datadog Monitor resource (US3 native integration) or to Event Hub | For US3, see [Microsoft Entra ID logs in the Azure native integration guide][22]. |
+
+### Setup method
+
+Use the automated setup method (this guide) if you want to:
    - automate deployment through the Azure portal
    - manage your infrastructure through declarative templates
    - centrally control access, tags, and billing
    - redeploy your resources in the correct order and in a consistent way
    - save costs by using a storage account rather than an event hub
+
+Choose the [manual setup method][24] if you want to:
+   - apply custom tags to your resources
+   - forward logs from sources that only write to Blob Storage, such as VNet flow logs or NSG flow logs
 
 ## Setup
 
@@ -220,3 +239,6 @@ The script first discovers any instances running in each subscription, then prom
 [19]: https://portal.azure.com
 [20]: https://learn.microsoft.com/troubleshoot/azure/azure-monitor/log-analytics/workspaces/workspace-data-export-faq
 [21]: /getting_started/integrations/azure/#resource-tag-filtering-for-logs
+[22]: /integrations/guide/azure-native-integration/#microsoft-entra-id-logs
+[23]: /logs/guide/azure-manual-log-forwarding/?tab=blobstorage#forward-vnet-flow-logs-or-nsg-flow-logs
+[24]: /logs/guide/azure-manual-log-forwarding/

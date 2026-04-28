@@ -136,6 +136,26 @@ az functionapp deployment source config-zip \
 
 8. Verify the setup by checking the [Datadog Log Explorer][108] for logs from the source Storage Account.
 
+##### Forward VNet flow logs or NSG flow logs
+
+VNet flow logs and NSG flow logs cannot stream to Event Hub. Network Watcher writes them directly to a Storage Account, which the Datadog Blob log forwarder then polls.
+
+To enable the pipeline:
+
+1. Set up the Datadog Blob log forwarder using the steps above. Use a Storage Account that you intend Network Watcher to write to.
+2. In the Azure portal, navigate to **Network Watcher**, then **Flow logs**.
+3. Click **Create**, then select the virtual network or network security group you want to monitor.
+4. For **Target Storage Account**, select the source Storage Account from step 1.
+5. Configure the log version, retention, and traffic analytics settings as needed for your environment. For VNet flow logs, version 2 is recommended.
+6. Save the flow log configuration.
+
+The Function App's connection string for the source Storage Account must grant at least the **Storage Blob Data Reader** role on the source container. Network Watcher writes flow log blobs to predictable container paths:
+
+- VNet flow logs (version 2): `insights-logs-flowlogflowevent`
+- NSG flow logs: `insights-logs-networksecuritygroupflowevent`
+
+Update the `path` value in `function.json` to match the container that Network Watcher writes to, then redeploy the function. For more information, see [Manage VNet flow logs][111] and [Manage NSG flow logs][112].
+
 ##### Logs not appearing in Datadog
 
 If you completed the setup but do not see logs in Datadog:
@@ -171,6 +191,8 @@ The Azure portal Function App UI changes frequently. Use this path only if the C
 [108]: https://app.datadoghq.com/logs
 [109]: https://learn.microsoft.com/azure/azure-functions/create-first-function-vs-code-node
 [110]: https://learn.microsoft.com/azure/azure-functions/functions-run-local
+[111]: https://learn.microsoft.com/azure/network-watcher/vnet-flow-logs-overview
+[112]: https://learn.microsoft.com/azure/network-watcher/nsg-flow-logs-overview
 {{% /tab %}}
 
 {{< /tabs >}}
