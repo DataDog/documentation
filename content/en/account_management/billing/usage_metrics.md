@@ -35,7 +35,7 @@ Estimated usage metrics are generally available for the following usage types:
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | Total number of ingested events, including excluded logs. |
 | Logs Pipelines Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Number of logs matched by pipelines in bytes. |
-| Logs Pipelines Events          | `datadog.estimated_usage.logs.ingested_events` | Number of events matched by pipelines in bytes, including excluded logs|
+| Logs Pipelines Events          | `datadog.estimated_usage.logs.ingested_events` | Number of events matched by pipelines in bytes, including excluded logs. |
 | Logs Drop Count               | `datadog.estimated_usage.logs.drop_count` | Total number of events dropped during ingestion. |
 | Logs Truncated Count          | `datadog.estimated_usage.logs.truncated_count` | Total number of events truncated at ingestion. |
 | Logs Truncated Bytes          | `datadog.estimated_usage.logs.truncated_bytes` | Volume of truncated events in bytes. |
