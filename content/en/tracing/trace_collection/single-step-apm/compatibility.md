@@ -246,7 +246,7 @@ SSI supports both .NET Core and .NET Framework runtimes. For a complete list of 
 To resolve this, remove the conflicting `CORECLR_*` environment variables and any `LD_PRELOAD` entries that reference the pre-existing profiler before enabling SSI:
 
 - **Linux hosts and Docker**: Remove the variables from your application's startup environment, then restart the application.
-- **Kubernetes**: The SSI admission webhook does not overwrite `CORECLR_*` variables injected by another vendor's operator, init container, or pod template. Remove the variables from their source (operator CR, init container, pod template, or Helm values), then re-roll the pods.
+- **Kubernetes**: The SSI admission webhook does not overwrite `CORECLR_*` variables injected by another vendor's operator, init container, or pod template. Remove the variables from their source (the operator that injected them, an init container, the pod template, or Helm values), then restart the affected pods.
 
 For details on the .NET CLR one-profiler constraint, see [.NET Core installation][3].
 
