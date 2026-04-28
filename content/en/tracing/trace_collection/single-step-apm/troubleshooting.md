@@ -384,4 +384,4 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [9]: https://app.datadoghq.com/fleet
 [10]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
 [11]: /tracing/guide/injectors/
-[12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
