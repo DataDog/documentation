@@ -15,13 +15,9 @@ Use this guide to manually set up log forwarding from Azure to any Datadog site.
 
 **Note**: To collect logs from Azure Log Analytics workspaces, use the [automated ARM template][1] or [Azure Container App][2] process.
 
-<div class="alert alert-info">
-Starting April 30, 2025, Azure no longer supports Node.js 18. To ensure compatibility, update using the Azure Resource Manager (ARM) template with the same parameters.
-</div>
-
 ## Setup
 
-You can forward your logs through an [Azure Container App][4], or [Azure Blob Storage][3] account.
+You can forward your logs through an [Azure Container App][4] or an [Azure Blob Storage][3] account. The Container App path is the recommended setup. Use the Blob Storage path when the log source you want to forward writes only to a Storage Account.
 
 {{< tabs >}}
 
@@ -41,65 +37,140 @@ You can forward your logs through an [Azure Container App][4], or [Azure Blob St
 
 {{% tab "Blob Storage" %}}
 
-1. If you haven't already set up [Azure Blob Storage][100], use one of the following methods to get started:
-   - [Azure portal][101]
-   - [Azure Storage Explorer][102]
-   - [Azure CLI][103]
-   - [PowerShell][104]
-2. Set up the Datadog-Azure Function to forward logs from Blob Storage using the instructions below.
-3. Configure your Azure App Services to [forward their logs to Blob Storage][105].
+Use the Blob Storage path when the log source you want to forward writes to a Storage Account rather than to an Event Hub. For example, App Service application logs forwarded to Blob Storage.
 
-##### Create a function app
+The instructions below use the Azure CLI to create the Function App and deploy the [Datadog Blob log forwarder][105]. The CLI path is more stable than the Azure portal path because Azure regularly changes the Function App UI. A portal-based fallback is provided at the end of this section.
 
-If you already have a function app configured for this purpose, skip to [Add a new function to your Function App using the Event Hub trigger template](#add-a-new-function-to-your-function-app-using-the-azure-blob-storage-trigger-template).
+<div class="alert alert-info">
+<strong>Migrating an existing deployment from Node.js 18:</strong> Azure ended Node.js 18 support on April 30, 2025. If you previously deployed the manual log forwarder on Node.js 18, redeploy your Function App on Node.js 20 LTS or later. Follow the steps below.
+</div>
 
-1. In the Azure portal, navigate to the [Function App overview][106] and click **Create**.
-2. In the **Instance Details** section, configure the following settings:
-   1. Select the **Code** radio button.
-   1. For **Runtime stack**, select `Node.js`.
-   1. For **Version**, select `18 LTS`.
-   1. For **Operating System**, select `Windows`.
-3. Configure other settings as desired.
-4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
+##### Prerequisites
 
-##### Add a new function to your Function App using the Azure Blob Storage trigger template
+- The [Azure CLI][100] (`az`) installed locally, or use the [Azure Cloud Shell][101].
+- A source Storage Account that holds the logs you want to forward. To create one, see [Create a storage account][102]. To send App Service logs to Blob Storage, see [Configure App Service logs][103].
+- Your [Datadog API key][104].
 
-1. Select your new or existing function app from the [Function App overview][106].
-2. Under the **Functions** tab, click **Create**.
-3. For the **Development environment** field, select **Develop in portal**.
-4. Under **Select a template**, choose [Azure Blob storage trigger][107].
-5. Select your **Storage account connection**.
-   **Note**: See [Configure a connection string for an Azure storage account][108] for more information.
-6. Click **Create**.
+##### Set up the Datadog Blob log forwarder with the Azure CLI
 
-See [Getting started with Azure Functions][109] for more information.
+1. Sign in and select your subscription:
 
-##### Point your Blob Storage trigger to Datadog
+   {{< code-block lang="bash" >}}
+az login
+az account set --subscription <SUBSCRIPTION_ID>
+   {{< /code-block >}}
 
-1. On the detail page of your Event Hub trigger function, click **Code + Test** under the **Developer** side menu.
-2. Add the [Datadog-Azure Function code][110] to the function's `index.js` file.
-3. Add your Datadog API key with a `DD_API_KEY` environment variable, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 20.
-4. If you're not using the Datadog US1 site, set your [Datadog site][111] with a `DD_SITE` environment variable under the configuration tab of your function app, or copy the site parameter into the function code on line 21.
-5. **Save** the function.
-6. Click **Integration** under the **Developer** side menu.
-7. Click **Azure Blob Storage** under **Trigger and inputs**.
-8. Set the **Blob Parameter Name** to `blobContent` and click **Save**.
-9. Verify your setup is correct by checking the [Datadog Log Explorer][112] for logs from this resource.
+2. Set environment variables for the resources to be created. Replace the placeholders with your own values:
 
+   {{< code-block lang="bash" >}}
+RESOURCE_GROUP=<RESOURCE_GROUP_NAME>
+LOCATION=<AZURE_REGION>
+STORAGE_ACCOUNT=<STORAGE_ACCOUNT_FOR_FUNCTION_APP_RUNTIME>
+FUNCTION_APP=<FUNCTION_APP_NAME>
+DD_API_KEY=<DATADOG_API_KEY>
+DD_SITE=<DATADOG_SITE>
+   {{< /code-block >}}
 
-[100]: https://learn.microsoft.com/azure/storage/blobs/
-[101]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal
-[102]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-storage-explorer
-[103]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-cli
-[104]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-powershell
-[105]: https://learn.microsoft.com/training/modules/store-app-data-with-azure-blob-storage/
-[106]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
-[107]: https://learn.microsoft.com/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=python-v2%2Cisolated-process%2Cnodejs-v4%2Cextensionv5&pivots=programming-language-csharp
-[108]: https://learn.microsoft.com/azure/storage/common/storage-configure-connection-string#configure-a-connection-string-for-an-azure-storage-account
-[109]: https://learn.microsoft.com/azure/azure-functions/functions-get-started
-[110]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
-[111]: https://docs.datadoghq.com/getting_started/site/
-[112]: https://app.datadoghq.com/logs
+   For valid `DD_SITE` values, see [Datadog sites][106]. The Storage Account in this step is for the Function App's runtime state. It is separate from the source Storage Account that holds your logs.
+
+3. Create the resource group and the Function App's runtime Storage Account:
+
+   {{< code-block lang="bash" >}}
+az group create --name $RESOURCE_GROUP --location $LOCATION
+az storage account create --name $STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP --location $LOCATION --sku Standard_LRS
+   {{< /code-block >}}
+
+4. Create the Function App on Node.js 20 LTS with the Functions v4 runtime:
+
+   {{< code-block lang="bash" >}}
+az functionapp create \
+  --name $FUNCTION_APP \
+  --resource-group $RESOURCE_GROUP \
+  --consumption-plan-location $LOCATION \
+  --runtime node \
+  --runtime-version 20 \
+  --functions-version 4 \
+  --storage-account $STORAGE_ACCOUNT \
+  --os-type Windows
+   {{< /code-block >}}
+
+5. Set the Datadog environment variables on the Function App:
+
+   {{< code-block lang="bash" >}}
+az functionapp config appsettings set \
+  --name $FUNCTION_APP \
+  --resource-group $RESOURCE_GROUP \
+  --settings DD_API_KEY=$DD_API_KEY DD_SITE=$DD_SITE
+   {{< /code-block >}}
+
+6. Download the [Datadog Blob log forwarder code][105], update the Blob trigger binding to point at your source Storage Account container, and deploy:
+
+   {{< code-block lang="bash" >}}
+git clone --depth 1 https://github.com/DataDog/datadog-serverless-functions.git
+cd datadog-serverless-functions/azure/blobs_logs_monitoring
+   {{< /code-block >}}
+
+   Edit `function.json` to set the `path` and `connection` values to the source container and a connection name you define in the next step. See [Azure Blob storage trigger for Azure Functions][107] for the binding reference.
+
+7. Add the source Storage Account connection string to the Function App, then deploy the function:
+
+   {{< code-block lang="bash" >}}
+SOURCE_CONNECTION=$(az storage account show-connection-string \
+  --name <SOURCE_STORAGE_ACCOUNT> \
+  --resource-group <SOURCE_RESOURCE_GROUP> \
+  --query connectionString -o tsv)
+
+az functionapp config appsettings set \
+  --name $FUNCTION_APP \
+  --resource-group $RESOURCE_GROUP \
+  --settings <CONNECTION_NAME>=$SOURCE_CONNECTION
+
+zip function.zip index.js function.json
+az functionapp deployment source config-zip \
+  --name $FUNCTION_APP \
+  --resource-group $RESOURCE_GROUP \
+  --src function.zip
+   {{< /code-block >}}
+
+   Replace `<CONNECTION_NAME>` with the connection name you set in `function.json`.
+
+8. Verify the setup by checking the [Datadog Log Explorer][108] for logs from the source Storage Account.
+
+##### Logs not appearing in Datadog
+
+If you completed the setup but do not see logs in Datadog:
+
+1. **Verify blobs are being written.** In the Azure portal, open the source Storage Account, then **Containers**, and confirm that new blobs are arriving in the expected container.
+2. **Verify the Function App is invoking.** Open the Function App, then **Functions**, then the blob-trigger function, then **Invocations**. Recent invocations confirm the trigger is firing.
+3. **Verify the Function App can read the source container.** The connection string referenced in `function.json` must grant at least the **Storage Blob Data Reader** role on the source container.
+4. **Check the Function App logs for errors.** Open **Functions**, then the function, then **Monitor**, then **Logs**. Errors from the Datadog forwarder script appear here.
+5. **Confirm `DD_API_KEY` and `DD_SITE` are set correctly.** A wrong site value causes silent ingestion failures because logs are sent to the wrong Datadog region.
+6. **Confirm region alignment.** A Storage Account's diagnostic settings can only target Storage Accounts in the same Azure region.
+
+##### Set up using the Azure portal (fallback)
+
+The Azure portal Function App UI changes frequently. Use this path only if the CLI path is not available, and adapt the steps to whatever the current portal version exposes.
+
+1. In the Azure portal, navigate to **Function App** and click **Create**.
+2. Configure the runtime stack as **Node.js**, version **20 LTS** or later, with operating system **Windows**.
+3. Complete the create flow.
+4. After the Function App is created, deploy the [Datadog Blob log forwarder code][105] to it using one of:
+   - The [Azure Functions extension for VS Code][109]
+   - The [Azure Functions Core Tools CLI][110] (`func azure functionapp publish`)
+5. On the Function App, set the application settings `DD_API_KEY` and `DD_SITE`, and add the source Storage Account connection string under the connection name referenced in `function.json`.
+6. Confirm the Blob storage trigger points at the container that holds the logs you want to forward.
+
+[100]: https://learn.microsoft.com/cli/azure/install-azure-cli
+[101]: https://learn.microsoft.com/azure/cloud-shell/overview
+[102]: https://learn.microsoft.com/azure/storage/common/storage-account-create
+[103]: https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs
+[104]: https://app.datadoghq.com/organization-settings/api-keys
+[105]: https://github.com/DataDog/datadog-serverless-functions/tree/master/azure/blobs_logs_monitoring
+[106]: /getting_started/site/
+[107]: https://learn.microsoft.com/azure/azure-functions/functions-bindings-storage-blob-trigger
+[108]: https://app.datadoghq.com/logs
+[109]: https://learn.microsoft.com/azure/azure-functions/create-first-function-vs-code-node
+[110]: https://learn.microsoft.com/azure/azure-functions/functions-run-local
 {{% /tab %}}
 
 {{< /tabs >}}
