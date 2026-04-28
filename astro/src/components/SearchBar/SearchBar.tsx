@@ -397,18 +397,20 @@ export default function SearchBar({ env, search }: Props) {
                               rel={hit.isApi ? undefined : 'noopener noreferrer'}
                             >
                               <p class={cl('search-bar__hit-subcategory')}>{hit.subcategory}</p>
-                              <p class={cl('search-bar__hit-title')}>
-                                <strong dangerouslySetInnerHTML={{ __html: hit.title }} />
-                                {hit.sectionHeader && (
-                                  <span class={cl('search-bar__hit-section')}>
-                                    {' » '}
-                                    <strong dangerouslySetInnerHTML={{ __html: hit.sectionHeader }} />
-                                  </span>
+                              <div class={cl('search-bar__hit-body')}>
+                                <p class={cl('search-bar__hit-title')}>
+                                  <strong dangerouslySetInnerHTML={{ __html: hit.title }} />
+                                  {hit.sectionHeader && (
+                                    <span class={cl('search-bar__hit-section')}>
+                                      {' » '}
+                                      <strong dangerouslySetInnerHTML={{ __html: hit.sectionHeader }} />
+                                    </span>
+                                  )}
+                                </p>
+                                {hit.snippetHtml && (
+                                  <p class={cl('search-bar__hit-snippet')} dangerouslySetInnerHTML={{ __html: hit.snippetHtml }} />
                                 )}
-                              </p>
-                              {hit.snippetHtml && (
-                                <p class={cl('search-bar__hit-snippet')} dangerouslySetInnerHTML={{ __html: hit.snippetHtml }} />
-                              )}
+                              </div>
                             </a>
                           </li>
                         );
