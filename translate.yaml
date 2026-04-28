@@ -77,6 +77,10 @@ phrase:
       dst: "content/{lang}/bits_ai/mcp_server/setup.md"
     - src: "content/en/real_user_monitoring/guide/proxy-rum-data.mdoc.md"
       dst: "content/{lang}/real_user_monitoring/guide/proxy-rum-data.mdoc.md"
+    - src: "content/en/security/code_security/static_analysis/static_analysis_rules/_index.md"
+      dst: "content/{lang}/security/code_security/static_analysis/static_analysis_rules/_index.md"
+    - src: "content/en/standard-attributes/_index.md"
+      dst: "content/{lang}/standard-attributes/_index.md"
 
 # Legacy Transifex ignores (kept for reference)
 #   - "content/en/observability_pipelines/legacy/*.md"
