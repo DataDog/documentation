@@ -26721,6 +26721,7 @@ paths:
                 - ap2.datadoghq.com
                 - datadoghq.eu
                 - ddog-gov.com
+                - us2.ddog-gov.com
             subdomain:
               default: ip-ranges
               description: The subdomain where the API is deployed.
@@ -26774,6 +26775,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: example key
             schema:
               $ref: "#/components/schemas/ApiKey"
         required: true
@@ -26905,6 +26910,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: example key
             schema:
               $ref: "#/components/schemas/ApiKey"
         required: true
@@ -26982,6 +26991,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: example key
             schema:
               $ref: "#/components/schemas/ApplicationKey"
         required: true
@@ -27121,6 +27134,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: example key
             schema:
               $ref: "#/components/schemas/ApplicationKey"
         required: true
@@ -27179,6 +27196,15 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  - check: app.ok
+                    host_name: app.host1
+                    message: app is running
+                    status: 0
+                    tags:
+                      - "environment:test"
             schema:
               $ref: "#/components/schemas/ServiceChecks"
         description: Service Check request body.
@@ -27341,6 +27367,13 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    - id: 123-abc-456
+                      type: dashboard
+                    - id: 789-def-101
+                      type: dashboard
               json-request-body:
                 value: {"data": [{"id": "123-abc-456", "type": "dashboard"}, {"id": "789-def-101", "type": "dashboard"}]}
             schema:
@@ -27462,6 +27495,13 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    - id: 123-abc-456
+                      type: dashboard
+                    - id: 789-def-101
+                      type: dashboard
               json-request-body:
                 value: {"data": [{"id": "123-abc-456", "type": "dashboard"}, {"id": "789-def-101", "type": "dashboard"}]}
             schema:
@@ -27513,6 +27553,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: An example dashboard for monitoring infrastructure.
+                  layout_type: ordered
+                  title: Example Dashboard
+                  widgets:
+                    - definition:
+                        requests:
+                          - q: avg:system.cpu.user{*}
+                        title: CPU Usage
+                        type: timeseries
             schema:
               $ref: "#/components/schemas/Dashboard"
         description: Create a dashboard request body.
@@ -27592,6 +27644,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: My Dashboard List
             schema:
               $ref: "#/components/schemas/DashboardList"
         description: Create a dashboard list request body.
@@ -27739,6 +27795,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  name: My Dashboard List
             schema:
               $ref: "#/components/schemas/DashboardList"
         description: Update a dashboard list request body.
@@ -27793,6 +27853,13 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  dashboard_id: 123-abc-456
+                  dashboard_type: custom_timeboard
+                  global_time:
+                    live_span: 1h
+                  share_type: open
               json-request-body:
                 value: {"dashboard_id": "123-abc-456", "dashboard_type": "custom_timeboard", "share_type": "open"}
             schema:
@@ -27957,6 +28024,21 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  global_time:
+                    live_span: 1h
+                  selectable_template_vars:
+                    - default_value: "*"
+                      name: exampleVar
+                      prefix: test
+                      visible_tags:
+                        - selectableValue1
+                        - selectableValue2
+                  share_list:
+                    - test@datadoghq.com
+                    - test2@datadoghq.com
+                  share_type: invite
               json-request-body:
                 value: {"global_time": {"live_span": "1h"}, "selectable_template_vars": [{"default_value": "*", "name": "exampleVar", "prefix": "test", "visible_tags": ["selectableValue1", "selectableValue2"]}], "share_list": ["test@datadoghq.com", "test2@datadoghq.com"], "share_type": "invite"}
             schema:
@@ -28026,6 +28108,12 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      email: test@datadoghq.com
+                    type: public_dashboard_invitation
               json-request-body:
                 value: {"data": {"attributes": {"email": "test@datadoghq.com"}, "type": "public_dashboard_invitation"}}
             schema:
@@ -28137,6 +28225,12 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    - attributes:
+                        email: test@datadoghq.com
+                      type: public_dashboard_invitation
               json-request-body:
                 value: {"data": [{"attributes": {"email": "test@datadoghq.com"}, "type": "public_dashboard_invitation"}]}
             schema:
@@ -28286,6 +28380,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: An example dashboard for monitoring infrastructure.
+                  layout_type: ordered
+                  title: Example Dashboard
+                  widgets:
+                    - definition:
+                        requests:
+                          - q: avg:system.cpu.user{*}
+                        title: CPU Usage
+                        type: timeseries
             schema:
               $ref: "#/components/schemas/Dashboard"
         description: Update Dashboard request body.
@@ -28346,6 +28452,16 @@ paths:
         content:
           text/json:
             examples:
+              default:
+                value:
+                  series:
+                    - host: test.example.com
+                      metric: system.load.1
+                      points:
+                        - [1636629071, [1.0, 2.0]]
+                      tags:
+                        - "environment:test"
+                      type: distribution
               dynamic-points:
                 description: Post time-series data that can be graphed on Datadog’s dashboards.
                 externalValue: examples/metrics/distribution-points.json.sh
@@ -28452,6 +28568,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  end: 1412793983
+                  message: Scheduling downtime for a database maintenance window.
+                  monitor_tags:
+                    - "*"
+                  scope:
+                    - env:staging
+                  start: 1412792983
+                  timezone: America/New_York
             schema:
               $ref: "#/components/schemas/Downtime"
         description: Schedule a downtime request body.
@@ -28500,6 +28627,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  scope: host:myserver
             schema:
               $ref: "#/components/schemas/CancelDowntimesByScopeRequest"
         description: Scope to cancel downtimes for.
@@ -28656,6 +28787,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  end: 1412793983
+                  message: Updating downtime end time.
+                  monitor_tags:
+                    - "*"
+                  scope:
+                    - env:staging
+                  start: 1412792983
+                  timezone: America/New_York
             schema:
               $ref: "#/components/schemas/Downtime"
         description: Update a downtime request body.
@@ -28817,6 +28959,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  priority: normal
+                  tags:
+                    - environment:test
+                  text: Oh boy!
+                  title: Did you hear the news today?
             schema:
               $ref: "#/components/schemas/EventCreateRequest"
         description: Event request object
@@ -28933,6 +29083,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  graph_json: '{"viz":"timeseries","requests":[{"q":"avg:system.load.1{*}","type":"line"}]}'
+                  legend: "yes"
+                  size: "medium"
+                  timeframe: "1_hour"
+                  title: "System Load Average"
             schema:
               $ref: "#/components/schemas/EmbeddableGraphPayload"
         description: Embeddable Graph body
@@ -29198,6 +29356,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  end: 1579098130
+                  message: Muting this host for a test!
+                  override: false
             schema:
               $ref: "#/components/schemas/HostMuteSettings"
         description: Mute a host request body.
@@ -29417,6 +29581,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  role_name: "DatadogAWSIntegrationRole"
             schema:
               $ref: "#/components/schemas/AWSAccountDeleteRequest"
         description: AWS request object
@@ -29520,6 +29689,24 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  account_specific_namespace_rules:
+                    auto_scaling: false
+                    opswork: false
+                  cspm_resource_collection_enabled: true
+                  excluded_regions:
+                    - us-east-1
+                    - us-west-2
+                  extended_resource_collection_enabled: true
+                  filter_tags:
+                    - "$KEY:$VALUE"
+                  host_tags:
+                    - "$KEY:$VALUE"
+                  metrics_collection_enabled: false
+                  role_name: "DatadogAWSIntegrationRole"
             schema:
               $ref: "#/components/schemas/AWSAccount"
         description: AWS Request Object
@@ -29590,6 +29777,24 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  account_specific_namespace_rules:
+                    auto_scaling: false
+                    opswork: false
+                  cspm_resource_collection_enabled: true
+                  excluded_regions:
+                    - us-east-1
+                    - us-west-2
+                  extended_resource_collection_enabled: true
+                  filter_tags:
+                    - "$KEY:$VALUE"
+                  host_tags:
+                    - "$KEY:$VALUE"
+                  metrics_collection_enabled: false
+                  role_name: "DatadogAWSIntegrationRole"
             schema:
               $ref: "#/components/schemas/AWSAccount"
         description: AWS request object
@@ -29669,6 +29874,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  event_generator_name: app-alerts-zyxw3210
+                  region: us-east-1
             schema:
               $ref: "#/components/schemas/AWSEventBridgeDeleteRequest"
         description: Delete the Amazon EventBridge source with the given name, region, and associated AWS account.
@@ -29743,6 +29954,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  create_event_bus: true
+                  event_generator_name: app-alerts
+                  region: us-east-1
             schema:
               $ref: "#/components/schemas/AWSEventBridgeCreateRequest"
         description: Create an Amazon EventBridge source for an AWS account with a given name and region.
@@ -29785,6 +30003,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "FAKEAC0FAKEAC2FAKEAC"
+                  namespace: elb
             schema:
               $ref: "#/components/schemas/AWSTagFilterDeleteRequest"
         description: Delete a tag filtering entry for a given AWS account and `dd-aws` namespace.
@@ -29867,6 +30090,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  namespace: elb
+                  tag_filter_str: "prod*"
             schema:
               $ref: "#/components/schemas/AWSTagFilterCreateRequest"
         description: |-
@@ -29912,6 +30141,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "123456789012"
+                  role_name: "DatadogAWSIntegrationRole"
             schema:
               $ref: "#/components/schemas/AWSAccount"
         description: |-
@@ -29957,6 +30191,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "1234567"
+                  lambda_arn: "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
             schema:
               $ref: "#/components/schemas/AWSAccountAndLambdaRequest"
         description: Delete AWS Lambda ARN request body.
@@ -30035,6 +30274,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "1234567"
+                  lambda_arn: "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
             schema:
               $ref: "#/components/schemas/AWSAccountAndLambdaRequest"
         description: AWS Log Lambda Async request body.
@@ -30084,6 +30328,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "1234567"
+                  lambda_arn: "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
             schema:
               $ref: "#/components/schemas/AWSAccountAndLambdaRequest"
         description: Check AWS Log Lambda Async request body.
@@ -30158,6 +30407,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "1234567"
+                  services:
+                    - s3
+                    - elb
+                    - elbv2
+                    - cloudfront
+                    - redshift
+                    - lambda
             schema:
               $ref: "#/components/schemas/AWSLogsServicesRequest"
         description: Enable AWS Log Services request body.
@@ -30209,6 +30469,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  account_id: "1234567"
+                  services:
+                    - s3
+                    - elb
+                    - elbv2
+                    - cloudfront
+                    - redshift
+                    - lambda
             schema:
               $ref: "#/components/schemas/AWSLogsServicesRequest"
         description: Check AWS Logs Async Services request body.
@@ -30251,6 +30522,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  client_id: "testc7f6-1234-5678-9101-3fcbf464test"
+                  tenant_name: "testc44-1234-5678-9101-cc00736ftest"
             schema:
               $ref: "#/components/schemas/AzureAccount"
         description: Delete a given Datadog-Azure integration request body.
@@ -30332,6 +30608,20 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  app_service_plan_filters: "key:value,filter:example"
+                  automute: true
+                  client_id: "testc7f6-1234-5678-9101-3fcbf464test"
+                  client_secret: "TestingRh2nx664kUy5dIApvM54T4AtO"
+                  container_app_filters: "key:value,filter:example"
+                  cspm_enabled: true
+                  custom_metrics_enabled: true
+                  host_filters: "key:value,filter:example"
+                  metrics_enabled: true
+                  resource_collection_enabled: true
+                  tenant_name: "testc44-1234-5678-9101-cc00736ftest"
             schema:
               $ref: "#/components/schemas/AzureAccount"
         description: Create a Datadog-Azure integration for your Datadog account request body.
@@ -30376,6 +30666,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  automute: true
+                  client_id: "testc7f6-1234-5678-9101-3fcbf464test"
+                  client_secret: "TestingRh2nx664kUy5dIApvM54T4AtO"
+                  cspm_enabled: true
+                  host_filters: "key:value,filter:example"
+                  metrics_enabled: true
+                  new_client_id: "new1c7f6-1234-5678-9101-3fcbf464test"
+                  new_tenant_name: "new1c44-1234-5678-9101-cc00736ftest"
+                  resource_collection_enabled: true
+                  tenant_name: "testc44-1234-5678-9101-cc00736ftest"
             schema:
               $ref: "#/components/schemas/AzureAccount"
         description: Update a Datadog-Azure integration request body.
@@ -30419,6 +30722,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  client_id: "testc7f6-1234-5678-9101-3fcbf464test"
+                  host_filters: "key:value,filter:example"
+                  tenant_name: "testc44-1234-5678-9101-cc00736ftest"
             schema:
               $ref: "#/components/schemas/AzureAccount"
         description: Update a Datadog-Azure integration's host filters request body.
@@ -30463,6 +30772,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  client_email: "test@sandbox.iam.gserviceaccount.com"
+                  client_id: "123456712345671234567"
+                  project_id: "datadog-apitest"
             schema:
               $ref: "#/components/schemas/GCPAccount"
         description: Delete a given Datadog-GCP integration.
@@ -30540,6 +30855,22 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
+                  auth_uri: "https://accounts.google.com/o/oauth2/auth"
+                  client_email: "test@sandbox.iam.gserviceaccount.com"
+                  client_id: "123456712345671234567"
+                  client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL"
+                  host_filters: "$KEY1:$VALUE1,$KEY2:$VALUE2"
+                  is_cspm_enabled: true
+                  private_key: "private_key"
+                  private_key_id: "123456789abcdefghi123456789abcdefghijklm"
+                  project_id: "datadog-apitest"
+                  resource_collection_enabled: true
+                  token_uri: "https://accounts.google.com/o/oauth2/token"
+                  type: "service_account"
             schema:
               $ref: "#/components/schemas/GCPAccount"
         description: Create a Datadog-GCP integration.
@@ -30586,6 +30917,15 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  client_email: "test@sandbox.iam.gserviceaccount.com"
+                  client_id: "123456712345671234567"
+                  host_filters: "$KEY1:$VALUE1,$KEY2:$VALUE2"
+                  is_cspm_enabled: true
+                  project_id: "datadog-apitest"
+                  resource_collection_enabled: true
             schema:
               $ref: "#/components/schemas/GCPAccount"
         description: Update a Datadog-GCP integration.
@@ -30628,6 +30968,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  service_key: "your-pagerduty-service-key"
+                  service_name: "my-pagerduty-service"
             schema:
               $ref: "#/components/schemas/PagerDutyService"
         description: Create a new service object request body.
@@ -30751,6 +31096,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  service_key: "updated-pagerduty-service-key"
             schema:
               $ref: "#/components/schemas/PagerDutyServiceKey"
         description: Update an existing service object request body.
@@ -30854,6 +31203,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  service_hooks:
+                    - account: Main_Account
+                      url: "https://hooks.slack.com/services/1/1/1"
             schema:
               $ref: "#/components/schemas/SlackIntegration"
         description: Create Datadog-Slack integration request body.
@@ -30893,6 +31248,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  channels:
+                    - account: Main_Account
+                      channel_name: "#channel_name_main_account"
+                      transfer_all_user_comments: false
             schema:
               $ref: "#/components/schemas/SlackChannels"
         description: Update an existing Datadog-Slack integration request body.
@@ -30968,6 +31330,16 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  display:
+                    message: true
+                    mute_buttons: false
+                    notified: true
+                    snapshot: true
+                    tags: true
+                  name: "#general"
             schema:
               $ref: "#/components/schemas/SlackIntegrationChannel"
         description: Payload describing Slack channel to be created
@@ -31096,6 +31468,16 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  display:
+                    message: true
+                    mute_buttons: false
+                    notified: true
+                    snapshot: true
+                    tags: true
+                  name: "#general"
             schema:
               $ref: "#/components/schemas/SlackIntegrationChannel"
         description: Payload describing fields and values to be updated.
@@ -31143,6 +31525,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  is_secret: true
+                  name: CUSTOM_VARIABLE_NAME
+                  value: CUSTOM_VARIABLE_VALUE
             schema:
               $ref: "#/components/schemas/WebhooksIntegrationCustomVariable"
         description: Define a custom variable request body.
@@ -31275,6 +31663,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  is_secret: true
+                  name: CUSTOM_VARIABLE_NAME
+                  value: CUSTOM_VARIABLE_VALUE
             schema:
               $ref: "#/components/schemas/WebhooksIntegrationCustomVariableUpdateRequest"
         description: Update an existing custom variable request body.
@@ -31322,6 +31716,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  encode_as: json
+                  name: WEBHOOK_NAME
+                  url: https://example.com/webhook
             schema:
               $ref: "#/components/schemas/WebhooksIntegration"
         description: Create a webhooks integration request body.
@@ -31455,6 +31855,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  encode_as: json
+                  name: WEBHOOK_NAME
+                  url: https://example.com/webhook
             schema:
               $ref: "#/components/schemas/WebhooksIntegrationUpdateRequest"
         description: Update an existing Datadog-Webhooks integration.
@@ -31513,6 +31919,16 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  index: "retention-3,retention-15"
+                  limit: 25
+                  query: "service:web* AND @http.status_code:[200 TO 299]"
+                  sort: desc
+                  time:
+                    from: "2020-02-02T02:02:02.202Z"
+                    to: "2020-02-20T02:02:02.202Z"
             schema:
               $ref: "#/components/schemas/LogsListRequest"
         description: Logs filter
@@ -31587,6 +32003,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  index_names:
+                    - main
+                    - payments
+                    - web
             schema:
               $ref: "#/components/schemas/LogsIndexesOrder"
         description: Object containing the new ordered list of index names
@@ -31657,6 +32080,21 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  daily_limit: 300000000
+                  daily_limit_warning_threshold_percentage: 70
+                  exclusion_filters:
+                    - filter:
+                        query: "*"
+                        sample_rate: 1.0
+                      is_enabled: true
+                      name: payment
+                  filter:
+                    query: source:python
+                  name: main
+                  num_retention_days: 15
             schema:
               $ref: "#/components/schemas/LogsIndex"
         description: Object containing the new index.
@@ -31793,6 +32231,21 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  daily_limit: 300000000
+                  daily_limit_warning_threshold_percentage: 70
+                  disable_daily_limit: false
+                  exclusion_filters:
+                    - filter:
+                        query: "*"
+                        sample_rate: 1.0
+                      is_enabled: true
+                      name: payment
+                  filter:
+                    query: source:python
+                  num_retention_days: 15
             schema:
               $ref: "#/components/schemas/LogsIndexUpdateRequest"
         description: Object containing the new `LogsIndexUpdateRequest`.
@@ -31867,6 +32320,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  pipeline_ids:
+                    - tags
+                    - org_ids
+                    - products
             schema:
               $ref: "#/components/schemas/LogsPipelinesOrder"
         description: Object containing the new ordered list of pipeline IDs.
@@ -31942,6 +32402,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  filter:
+                    query: source:python
+                  is_enabled: true
+                  name: My Pipeline
+                  processors: []
             schema:
               $ref: "#/components/schemas/LogsPipeline"
         description: Definition of the new pipeline.
@@ -32072,6 +32540,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  filter:
+                    query: source:python
+                  is_enabled: true
+                  name: My Pipeline
+                  processors: []
             schema:
               $ref: "#/components/schemas/LogsPipeline"
         description: New definition of the pipeline.
@@ -32228,6 +32704,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: Number of requests received.
+                  per_unit: second
+                  type: count
+                  unit: byte
             schema:
               $ref: "#/components/schemas/MetricMetadata"
         description: New metadata.
@@ -32616,15 +33099,18 @@ paths:
         content:
           application/json:
             examples:
-              json-request-body:
+              default:
                 value:
                   message: "You may need to add web hosts if this is consistently high."
                   name: "Bytes received on host0"
                   options:
                     no_data_timeframe: 20
                     notify_no_data: true
+                  priority: 3
                   query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
-                  tags: ["app:webserver", "frontend"]
+                  tags:
+                    - "app:webserver"
+                    - "frontend"
                   type: "query alert"
             schema:
               $ref: "#/components/schemas/Monitor"
@@ -32893,6 +33379,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  message: "You may need to add web hosts if this is consistently high."
+                  name: "My monitor"
+                  options:
+                    no_data_timeframe: 20
+                    notify_no_data: true
+                  query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
+                  tags:
+                    - "app:webserver"
+                    - "frontend"
+                  type: "query alert"
             schema:
               $ref: "#/components/schemas/Monitor"
         description: Monitor request object
@@ -33084,6 +33583,20 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  message: "Updated notification message for this monitor."
+                  name: "Updated monitor name"
+                  options:
+                    no_data_timeframe: 20
+                    notify_no_data: true
+                  priority: 3
+                  query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
+                  tags:
+                    - "app:webserver"
+                    - "frontend"
+                  type: "query alert"
             schema:
               $ref: "#/components/schemas/MonitorUpdateRequest"
         description: Edit a monitor request body.
@@ -33338,6 +33851,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  message: "You may need to add web hosts if this is consistently high."
+                  name: "My monitor"
+                  options:
+                    no_data_timeframe: 20
+                    notify_no_data: true
+                  query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
+                  tags:
+                    - "app:webserver"
+                    - "frontend"
+                  type: "query alert"
             schema:
               $ref: "#/components/schemas/Monitor"
         description: Monitor request object
@@ -33628,6 +34154,39 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      cells:
+                        - attributes:
+                            definition:
+                              text: "## Some test markdown\n\nWith some example content."
+                              type: markdown
+                          type: notebook_cells
+                        - attributes:
+                            definition:
+                              requests:
+                                - display_type: line
+                                  q: "avg:system.load.1{*}"
+                                  style:
+                                    line_type: solid
+                                    line_width: normal
+                                    palette: dog_classic
+                              show_legend: true
+                              type: timeseries
+                              yaxis:
+                                scale: linear
+                            graph_size: m
+                            split_by:
+                              keys: []
+                              tags: []
+                            time:
+                          type: notebook_cells
+                      name: "Example Notebook"
+                      time:
+                        live_span: 1h
+                    type: notebooks
               json-request-body:
                 value: {"data": {"attributes": {"cells": [{"attributes": {"definition": {"text": "## Some test markdown\n\nWith some example content.", "type": "markdown"}}, "type": "notebook_cells"}, {"attributes": {"definition": {"requests": [{"display_type": "line", "q": "avg:system.load.1{*}", "style": {"line_type": "solid", "line_width": "normal", "palette": "dog_classic"}}], "show_legend": true, "type": "timeseries", "yaxis": {"scale": "linear"}}, "graph_size": "m", "split_by": {"keys": [], "tags": []}, "time": null}, "type": "notebook_cells"}], "name": "Example Notebook", "time": {"live_span": "1h"}}, "type": "notebooks"}}
             schema:
@@ -33768,6 +34327,40 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      cells:
+                        - attributes:
+                            definition:
+                              text: "## Some updated test markdown\n\nWith some example content."
+                              type: markdown
+                          type: notebook_cells
+                        - attributes:
+                            definition:
+                              requests:
+                                - display_type: bars
+                                  q: "avg:system.load.1{*}"
+                                  style:
+                                    line_type: solid
+                                    line_width: normal
+                                    palette: warm
+                              show_legend: true
+                              type: timeseries
+                              yaxis:
+                                scale: linear
+                            graph_size: m
+                            split_by:
+                              keys: []
+                              tags: []
+                            time:
+                          id: "abcd1234"
+                          type: notebook_cells
+                      name: "Example Notebook"
+                      time:
+                        live_span: 1h
+                    type: notebooks
               json-request-body:
                 value: {"data": {"attributes": {"cells": [{"attributes": {"definition": {"text": "## Some updated test markdown\n\nWith some example content.", "type": "markdown"}}, "type": "notebook_cells"}, {"attributes": {"definition": {"requests": [{"display_type": "bars", "q": "avg:system.load.1{*}", "style": {"line_type": "solid", "line_width": "normal", "palette": "warm"}}], "show_legend": true, "type": "timeseries", "yaxis": {"scale": "linear"}}, "graph_size": "m", "split_by": {"keys": [], "tags": []}, "time": null}, "id": "abcd1234", "type": "notebook_cells"}], "name": "Example Notebook", "time": {"live_span": "1h"}}, "type": "notebooks"}}
             schema:
@@ -33859,6 +34452,14 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  billing:
+                    type: parent_billing
+                  name: "New child org"
+                  subscription:
+                    type: pro
             schema:
               $ref: "#/components/schemas/OrganizationCreateBody"
         description: Organization object that needs to be created
@@ -33944,6 +34545,19 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  billing:
+                    type: parent_billing
+                  name: "New child org"
+                  settings:
+                    saml:
+                      enabled: false
+                    saml_idp_initiated_login:
+                      enabled: false
+                    saml_strict_mode:
+                      enabled: false
             schema:
               $ref: "#/components/schemas/Organization"
         required: true
@@ -34031,6 +34645,10 @@ paths:
       requestBody:
         content:
           multipart/form-data:
+            examples:
+              default:
+                value:
+                  idp_file: "@/path/to/idp_metadata.xml"
             schema:
               $ref: "#/components/schemas/IdpFormData"
         required: true
@@ -34184,6 +34802,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  incident_id: 2066
+                  version: 0
             schema:
               $ref: "#/components/schemas/AddSignalToIncidentRequest"
         description: Attributes describing the signal update.
@@ -34234,6 +34857,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  assignee: "773b045d-ccf8-4808-bd3b-955ef6a8c940"
+                  version: 0
             schema:
               $ref: "#/components/schemas/SignalAssigneeUpdateRequest"
         description: Attributes describing the signal update.
@@ -34284,6 +34912,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  archiveReason: none
+                  state: open
+                  version: 0
             schema:
               $ref: "#/components/schemas/SignalStateUpdateRequest"
         description: Attributes describing the signal update.
@@ -34349,6 +34983,16 @@ paths:
         content:
           text/json:
             examples:
+              default:
+                value:
+                  series:
+                    - host: test.example.com
+                      metric: system.load.1
+                      points:
+                        - [1636629071, 0.7]
+                      tags:
+                        - "environment:test"
+                      type: gauge
               dynamic-points:
                 description: Post time-series data that can be graphed on Datadog’s dashboards.
                 externalValue: examples/metrics/dynamic-points.json.sh
@@ -34637,6 +35281,24 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: "Track the availability of our custom metric."
+                  name: "Custom Metric SLO"
+                  query:
+                    denominator: "sum:my.custom.metric{*}.as_count()"
+                    numerator: "sum:my.custom.metric{type:good}.as_count()"
+                  tags:
+                    - "env:prod"
+                    - "app:core"
+                  thresholds:
+                    - target: 95
+                      timeframe: 7d
+                    - target: 95
+                      timeframe: 30d
+                      warning: 97
+                  type: metric
             schema:
               $ref: "#/components/schemas/ServiceLevelObjectiveRequest"
         description: Service level objective request object.
@@ -34688,6 +35350,15 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  id1:
+                    - "7d"
+                    - "30d"
+                  id2:
+                    - "7d"
+                    - "30d"
             schema:
               $ref: "#/components/schemas/SLOBulkDelete"
         description: Delete multiple service level objective objects request body.
@@ -34844,6 +35515,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      category: "Scheduled Maintenance"
+                      description: "Planned maintenance window for database upgrade."
+                      end: 1600003600
+                      slo_id: sloId
+                      start: 1600000000
+                      timezone: UTC
+                    type: correction
             schema:
               $ref: "#/components/schemas/SLOCorrectionCreateRequest"
         description: Create an SLO Correction
@@ -34971,6 +35654,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      category: "Scheduled Maintenance"
+                      description: "Updated correction for maintenance window."
+                      end: 1600003600
+                      start: 1600000000
+                      timezone: UTC
+                    type: correction
             schema:
               $ref: "#/components/schemas/SLOCorrectionUpdateRequest"
         description: The edited SLO correction object.
@@ -35200,6 +35894,24 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: "Updated description for the SLO."
+                  name: "Custom Metric SLO"
+                  query:
+                    denominator: "sum:my.custom.metric{*}.as_count()"
+                    numerator: "sum:my.custom.metric{type:good}.as_count()"
+                  tags:
+                    - "env:prod"
+                    - "app:core"
+                  thresholds:
+                    - target: 95
+                      timeframe: 7d
+                    - target: 95
+                      timeframe: 30d
+                      warning: 97
+                  type: metric
             schema:
               $ref: "#/components/schemas/ServiceLevelObjective"
         description: The edited service level objective request object.
@@ -35462,6 +36174,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: Description of private location
+                  name: New private location
+                  tags:
+                    - "team:front"
             schema:
               $ref: "#/components/schemas/SyntheticsPrivateLocation"
         description: Details of the private location to create.
@@ -35591,6 +36310,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: Description of private location
+                  name: New private location
+                  tags:
+                    - "team:front"
             schema:
               $ref: "#/components/schemas/SyntheticsPrivateLocation"
         description: Details of the private location to be updated.
@@ -35712,6 +36438,25 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    assertions:
+                      - operator: is
+                        target: 200
+                        type: statusCode
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: Notification message
+                  name: Example API test
+                  options:
+                    tick_every: 60
+                  status: live
+                  type: api
             schema:
               $ref: "#/components/schemas/SyntheticsTestDetails"
         description: Details of the test to create.
@@ -35889,6 +36634,29 @@ paths:
                   tags:
                     - "env:prod"
                   type: api
+              default:
+                value:
+                  config:
+                    assertions:
+                      - operator: is
+                        target: 200
+                        type: statusCode
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: Notification message
+                  name: Example API test
+                  options:
+                    min_failure_duration: 0
+                    min_location_failed: 1
+                    tick_every: 60
+                  status: live
+                  subtype: http
+                  tags:
+                    - "env:production"
+                  type: api
             schema:
               $ref: "#/components/schemas/SyntheticsAPITest"
         description: Details of the test to create.
@@ -35998,6 +36766,30 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    assertions:
+                      - operator: is
+                        target: 200
+                        type: statusCode
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: Notification message
+                  name: Example API test
+                  options:
+                    min_failure_duration: 0
+                    min_location_failed: 1
+                    tick_every: 60
+                  status: live
+                  subtype: http
+                  tags:
+                    - "env:production"
+                  type: api
             schema:
               $ref: "#/components/schemas/SyntheticsAPITest"
         description: New test details to be saved.
@@ -36055,6 +36847,32 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    assertions: []
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: ""
+                  name: Example browser test
+                  options:
+                    device_ids:
+                      - chrome.laptop_large
+                    tick_every: 3600
+                  status: live
+                  steps:
+                    - name: Check current URL
+                      params:
+                        check: contains
+                        value: example
+                      type: assertCurrentUrl
+                  tags:
+                    - "env:production"
+                  type: browser
             schema:
               $ref: "#/components/schemas/SyntheticsBrowserTest"
         description: Details of the test to create.
@@ -36164,6 +36982,32 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    assertions: []
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: ""
+                  name: Example browser test
+                  options:
+                    device_ids:
+                      - chrome.laptop_large
+                    tick_every: 3600
+                  status: live
+                  steps:
+                    - name: Check current URL
+                      params:
+                        check: contains
+                        value: example
+                      type: assertCurrentUrl
+                  tags:
+                    - "env:production"
+                  type: browser
             schema:
               $ref: "#/components/schemas/SyntheticsBrowserTest"
         description: New test details to be saved.
@@ -36349,6 +37193,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  public_ids:
+                    - "abc-def-123"
             schema:
               $ref: "#/components/schemas/SyntheticsDeleteTestsPayload"
         description: Public ID list of the Synthetic tests to be deleted.
@@ -36406,6 +37255,22 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    variables: []
+                  device_ids:
+                    - "synthetics:mobile:device:apple_iphone_14_ios_16"
+                  message: Notification message
+                  name: Example mobile test
+                  options:
+                    min_failure_duration: 0
+                    min_location_failed: 1
+                    tick_every: 3600
+                  tags:
+                    - "env:production"
+                  type: mobile
             schema:
               $ref: "#/components/schemas/SyntheticsMobileTest"
         description: Details of the test to create.
@@ -36515,6 +37380,22 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    variables: []
+                  device_ids:
+                    - "synthetics:mobile:device:apple_iphone_14_ios_16"
+                  message: Notification message
+                  name: Example mobile test
+                  options:
+                    min_failure_duration: 0
+                    min_location_failed: 1
+                    tick_every: 3600
+                  tags:
+                    - "env:production"
+                  type: mobile
             schema:
               $ref: "#/components/schemas/SyntheticsMobileTest"
         description: New test details to be saved.
@@ -36653,6 +37534,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  tests:
+                    - public_id: aaa-aaa-aaa
             schema:
               $ref: "#/components/schemas/SyntheticsTriggerBody"
         description: The identifiers of the tests to trigger.
@@ -36693,6 +37579,11 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  tests:
+                    - public_id: aaa-aaa-aaa
             schema:
               $ref: "#/components/schemas/SyntheticsCITestBody"
         description: Details of the test to trigger.
@@ -36733,6 +37624,13 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  from_ts: 1726041488
+                  public_ids:
+                    - "abc-def-123"
+                  to_ts: 1726127888
             schema:
               $ref: "#/components/schemas/SyntheticsFetchUptimesPayload"
         description: Public ID list of the Synthetic tests and timeframe.
@@ -36835,6 +37733,15 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - op: replace
+                      path: /name
+                      value: New test name
+                    - op: remove
+                      path: /config/assertions/0
             schema:
               $ref: "#/components/schemas/SyntheticsPatchTestBody"
         description: "[JSON Patch](https://jsonpatch.com/) compliant list of operations"
@@ -36899,6 +37806,25 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  config:
+                    assertions:
+                      - operator: is
+                        target: 200
+                        type: statusCode
+                    request:
+                      method: GET
+                      url: "https://example.com"
+                  locations:
+                    - "aws:eu-west-3"
+                  message: Notification message
+                  name: Example API test
+                  options:
+                    tick_every: 60
+                  status: live
+                  type: api
             schema:
               $ref: "#/components/schemas/SyntheticsTestDetails"
         description: New test details to be saved.
@@ -37087,6 +38013,10 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  new_status: live
             schema:
               $ref: "#/components/schemas/SyntheticsUpdateTestPauseStatusPayload"
         description: Status to set the given Synthetic test to.
@@ -37175,6 +38105,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: Example description
+                  name: MY_VARIABLE
+                  tags:
+                    - "team:front"
+                    - "test:workflow-1"
+                  value:
+                    secure: false
+                    value: variable-value
             schema:
               $ref: "#/components/schemas/SyntheticsGlobalVariableRequest"
         description: Details of the global variable to create.
@@ -37320,6 +38261,17 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  description: Example description
+                  name: MY_VARIABLE
+                  tags:
+                    - "team:front"
+                    - "test:workflow-1"
+                  value:
+                    secure: false
+                    value: variable-value
             schema:
               $ref: "#/components/schemas/SyntheticsGlobalVariableRequest"
         description: Details of the global variable to update.
@@ -37507,6 +38459,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  host: test.host
+                  tags:
+                    - "environment:production"
             schema:
               $ref: "#/components/schemas/HostTags"
         description: Update host tags request body.
@@ -37559,6 +38517,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  host: test.host
+                  tags:
+                    - "environment:production"
             schema:
               $ref: "#/components/schemas/HostTags"
         description: Add tags to host
@@ -39786,6 +40750,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  email: test@datadoghq.com
+                  handle: test@datadoghq.com
+                  name: test user
             schema:
               $ref: "#/components/schemas/User"
         description: User object that needs to be created.
@@ -39926,6 +40896,12 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              default:
+                value:
+                  disabled: false
+                  email: test@datadoghq.com
+                  name: test user
             schema:
               $ref: "#/components/schemas/User"
         description: Description of the update.
@@ -40032,6 +41008,13 @@ paths:
         content:
           application/json:
             examples:
+              default:
+                value:
+                  - ddsource: nginx
+                    ddtags: "env:staging,version:5.1"
+                    hostname: i-012345678
+                    message: "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
+                    service: payment
               multi-json-messages:
                 description: Pass multiple log objects at once.
                 summary: Multi JSON Messages
@@ -40042,6 +41025,13 @@ paths:
               $ref: "#/components/schemas/HTTPLog"
           application/json;simple:
             examples:
+              default:
+                value:
+                  ddsource: nginx
+                  ddtags: "env:staging,version:5.1"
+                  hostname: i-012345678
+                  message: "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
+                  service: payment
               simple-json-message:
                 description: Log attributes can be passed as `key:value` pairs in valid JSON messages.
                 summary: Simple JSON Message
@@ -40054,6 +41044,8 @@ paths:
               $ref: "#/components/schemas/HTTPLogItem"
           application/logplex-1:
             examples:
+              default:
+                value: "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
               multi-raw-message:
                 description: Submit log messages.
                 summary: Multi Logplex Messages
@@ -40068,6 +41060,8 @@ paths:
               type: string
           text/plain:
             examples:
+              default:
+                value: "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
               multi-raw-message:
                 description: Submit log string.
                 summary: Multi Raw Messages
@@ -40114,6 +41108,7 @@ paths:
                 - ap2.datadoghq.com
                 - datadoghq.eu
                 - ddog-gov.com
+                - us2.ddog-gov.com
             subdomain:
               default: http-intake.logs
               description: The subdomain where the API is deployed.
@@ -40214,6 +41209,7 @@ servers:
           - ap2.datadoghq.com
           - datadoghq.eu
           - ddog-gov.com
+          - us2.ddog-gov.com
       subdomain:
         default: api
         description: The subdomain where the API is deployed.

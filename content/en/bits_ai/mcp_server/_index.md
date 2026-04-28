@@ -33,7 +33,9 @@ algolia:
 
 The Datadog MCP Server acts as a bridge between your observability data in Datadog and any AI agents that support the [Model Context Protocol (MCP)][1]. Providing structured access to relevant Datadog contexts, features, and tools, the MCP Server lets you query and retrieve observability insights directly from AI-powered clients such as Cursor, OpenAI Codex, Claude Code, or your own AI agent.
 
-Ready to get started? See [Set Up the Datadog MCP Server][27] for connection instructions.
+**Ready to get started?** Select your agent below or see [Set Up the Datadog MCP Server][27] for connection instructions.
+
+{{< partial name="mcp_server/mcp_server_agents.html" >}}
 
 This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unmute for audio):
 
@@ -64,9 +66,15 @@ All tool calls are recorded in the Datadog [Audit Trail][16] with metadata ident
 Datadog also emits two standard metrics that you can use to monitor MCP Server activity:
 
 - `datadog.mcp.session.starts`: Emitted on each session initialization.
-- `datadog.mcp.tool.calls`: Emitted on each tool call, tagged with `tool_name`.
+- `datadog.mcp.tool.usage`: A distribution metric emitted on each tool call.
 
-Both metrics are tagged with `user_id`, `user_email`, and `client` (the MCP client name, such as `claude` or `cursor`).
+Both metrics are tagged with attributes such as `user_id`, `user_email`, and `client` (the MCP client name, such as `claude` or `cursor`).
+
+Because `datadog.mcp.tool.usage` is a distribution metric, use `count` (not `sum`) with `.as_count()` to get the number of tool calls. For example, to query the total number of tool calls grouped by user email:
+
+```
+count:datadog.mcp.tool.usage{*} by {user_email}.as_count()
+```
 
 ## Available tools
 

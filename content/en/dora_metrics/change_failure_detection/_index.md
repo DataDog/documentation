@@ -176,9 +176,9 @@ The `remediation` field is optional, but required to calculate failed deployment
 
 To update a deployment's status from the Datadog UI:
 
-1. Navigate to **Software Delivery** > **DORA Metrics** and click [**View Deployments**][5].
+1. Navigate to {{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}DORA Metrics{{< /ui >}} and click [{{< ui >}}View Deployments{{< /ui >}}][5].
 2. Click on a deployment to open the deployment details panel.
-3. In the deployment details panel, select the **Deployment status** from the dropdown to mark the deployment as failed or stable.
+3. In the deployment details panel, select the {{< ui >}}Deployment status{{< /ui >}} from the dropdown to mark the deployment as failed or stable.
 
 {{< img src="dora_metrics/deployment_status_update.mp4" alt="Updating a deployment's change failure status from the Datadog UI" video="true" >}}
 

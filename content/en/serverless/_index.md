@@ -50,7 +50,7 @@ Datadog provides solutions for monitoring [AWS Lambda](#aws-lambda), [Azure App 
 
 You can send [custom metrics][4] from a Lambda function by generating metrics from logs and traces, using the Datadog Lambda Extension, or using the Datadog Forwarder Lambda.
 
-With [Distributed Tracing][5], you can connect your serverless traces to metrics for a context-rich picture of your application's performance. The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda.
+With [Distributed Tracing][5], you can connect your serverless traces to metrics for a context-rich picture of your application's performance. The Datadog Python, Node.js, Ruby, Go, Java, and .NET SDKs support distributed tracing for AWS Lambda.
 
 [Deployment Tracking][6] helps you to correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
 
