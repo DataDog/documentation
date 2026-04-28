@@ -13,7 +13,7 @@ further_reading:
 
 ### Headers extraction and injection
 
-Datadog APM tracer supports [B3][6] and [W3C Trace Context][7] header extraction and injection for distributed tracing.
+Datadog SDK supports [B3][6] and [W3C Trace Context][7] header extraction and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection and extraction styles. The following styles are supported:
 
@@ -51,7 +51,7 @@ Datadog.configure do |c|
 end
 ```
 
-For more information about trace context propagation configuration, read [the Distributed Tracing section][1] in the Ruby Tracing Library Configuration docs.
+For more information about trace context propagation configuration, read [the Distributed Tracing section][1] in the Ruby SDK Configuration docs.
 
 ## Further Reading
 

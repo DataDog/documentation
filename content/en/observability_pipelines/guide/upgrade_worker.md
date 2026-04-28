@@ -37,6 +37,14 @@ Worker version 2.15.0 gives you access to the following:
 - The OpenTelemetry source now supports metrics pipelines.
 - The Elasticsearch destination is now available for metrics pipelines.
 - The `parse_yaml` function is now available for the Custom Processor. This function parses YAML according to the [YAML 1.1 spec][41].
+- The Enrichment Table file option now supports a `field` option that accepts an event field path or a metadata secret as the lookup key source. Plain text is supported for backwards compatibility.
+    - Explicit event path example:
+        - Observability Pipelines simplified syntax: `field: {event: "message"}`
+        - VRL syntax for the Custom Processor: `field: {vrl: ".message"}`
+    - Metadata secret reference example: `field: {secret: "splunk_hec_token"}`
+    - Plain string (for backwards compatibility):
+        - Observability Pipelines simplified syntax: `field: "message"`
+        - VRL syntax for the Custom Processor: `field: ".message"`
 
 #### Enhancements
 

@@ -635,8 +635,6 @@ Searches [Database Monitoring][26] query samples, which represent individual que
 
 Tools for querying Datadog data using [DDSQL][41], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources.
 
-<div class="alert alert-info">The <code>ddsql</code> toolset is in Preview.</div>
-
 ### `ddsql_get_spec`
 *Toolset: **ddsql***\
 Gets a compact DDSQL capability spec, including supported SQL functions, SQL keywords, and DDSQL-specific differences from standard PostgreSQL. Call this tool before composing queries to understand supported syntax.

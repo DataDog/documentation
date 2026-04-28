@@ -1,17 +1,17 @@
 ---
 title: Lambda Search Offloading
-description: Learn how to configure Lambda-based search offloading for CloudPrem on AWS
+description: Learn how to configure Lambda-based search offloading for BYOC Logs on AWS
 further_reading:
 - link: "/cloudprem/configure/"
   tag: "Documentation"
-  text: "Configure CloudPrem"
+  text: "Configure BYOC Logs"
 - link: "/cloudprem/operate/sizing/"
   tag: "Documentation"
   text: "Size your cluster"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 <div class="alert alert-warning">Lambda search offloading is an experimental feature.</div>
@@ -20,25 +20,25 @@ further_reading:
 
 ## Overview
 
-CloudPrem can offload leaf search operations to AWS Lambda for horizontal scaling. When the local search queue becomes saturated, overflow splits are automatically sent to Lambda functions for processing.
-This allows CloudPrem to handle traffic spikes without provisioning additional searcher nodes.
+BYOC Logs can offload leaf search operations to AWS Lambda for horizontal scaling. When the local search queue becomes saturated, overflow splits are automatically sent to Lambda functions for processing.
+This allows BYOC Logs to handle traffic spikes without provisioning additional searcher nodes.
 
 ## Startup validation
 
-When a Lambda configuration is defined, CloudPrem performs a dry run invocation at startup to verify that:
+When a Lambda configuration is defined, BYOC Logs performs a dry run invocation at startup to verify that:
 - The Lambda function exists
-- The function version matches the running CloudPrem binary
+- The function version matches the running BYOC Logs binary
 - The invoker has permission to call the function
 
 ## Prerequisite: IAM permissions
 
 Lambda search offloading requires specific permissions for two separate IAM roles:
-- **The CloudPrem node role**: the role attached to the Kubernetes nodes (or pod identity) running CloudPrem.  The role is defined in the `serviceAccount` section of your `values.yaml`. This role needs permissions to invoke and deploy the Lambda function.
+- **The BYOC Logs node role**: the role attached to the Kubernetes nodes (or pod identity) running BYOC Logs.  The role is defined in the `serviceAccount` section of your `values.yaml`. This role needs permissions to invoke and deploy the Lambda function.
 - **The Lambda execution role**: the role assumed by the Lambda function itself at runtime. This role needs read access to your index data in S3. Its ARN must be set in the `config.searcher.lambda.auto_deploy.execution_role_arn` key. For more details, see the [Configuration](#configuration) section.
 
-### CloudPrem node permissions
+### BYOC Logs node permissions
 
-The IAM role running CloudPrem needs the following permissions to invoke and deploy the Lambda function:
+The IAM role running BYOC Logs needs the following permissions to invoke and deploy the Lambda function:
 
 ```json
 {
@@ -129,7 +129,7 @@ Optionally, to capture Lambda logs in CloudWatch, add the following permissions 
 
 ## Configuration
 
-<div class="alert alert-warning">The Lambda configuration <strong>must be valid</strong> for the CloudPrem searcher to start.</div>
+<div class="alert alert-warning">The Lambda configuration <strong>must be valid</strong> for the BYOC Logs searcher to start.</div>
 
 After setting up the [IAM permissions](#prerequisite-iam-permissions), add a `lambda` section under `config.searcher` in your Helm chart values file to enable Lambda offloading:
 
