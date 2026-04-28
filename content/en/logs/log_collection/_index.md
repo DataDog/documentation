@@ -46,13 +46,24 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 
 1. Install the [Datadog Agent][1].
 2. To enable log collection, change `logs_enabled: false` to `logs_enabled: true` in your Agent's main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][5] for more information and examples.
-3. Once enabled, the Datadog Agent can be configured to [tail log files or listen for logs sent over UDP/TCP][2], [filter out logs or scrub sensitive data][3], and [aggregate multi-line logs][4].
+3. Configure log sources using one of the following options:
+
+   **Automatic collection from running processes**
+
+   <div class="alert alert-info">Requires Agent version 7.71 or later.</div>
+
+   Enable process-based log discovery to have the Agent automatically collect log files from processes running on the host. This removes the need to configure each log source individually. See [Host Agent Log collection - Automatic collection][6] for full configuration details, including privileged log access and workload filtering.
+
+   **Manual collection**
+
+   Configure the Agent to [tail specific log files or listen for logs sent over UDP/TCP][2], [filter out logs or scrub sensitive data][3], and [aggregate multi-line logs][4].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#multi-line-aggregation
 [5]: /agent/logs/
+[6]: /agent/logs/#automatic-collection-from-running-processes
 {{% /tab %}}
 
 {{% tab "Application" %}}
