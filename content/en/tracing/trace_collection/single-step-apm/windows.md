@@ -70,7 +70,7 @@ To instrument Java and .NET applications across your entire Windows host:
 
 1. (If needed) Configure instrumentation rules:
 
-   Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for more granular control over which Java applications on the host or .NET applications in IIS are instrumented.
+   Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
 1. Copy and run the provided MSI install command on your Windows host.
 1. Restart the services you want instrumented.
@@ -101,7 +101,7 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 1. Review your configuration and click **Deploy Configuration**.
 1. (If needed) Configure instrumentation rules:
 
-   If you're enabling host-wide SSI and you have .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) to instrument them. You can also use instrumentation rules for more granular control over which Java applications on the host or .NET applications in IIS are instrumented.
+   If you're enabling host-wide SSI and you have .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) to instrument them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
 ## Configure Unified Service Tags
 
@@ -127,7 +127,7 @@ To enable products, [set environment variables][3] in your application configura
 <div class="alert alert-info">Instrumentation rules (available for Agent v7.73+) apply only to host-wide instrumentation. They are not supported for IIS-only installation.</div>
 {{< /site-region >}}
 
-Instrumentation rules let you control which processes are automatically instrumented by SSI on Windows hosts. Rules are **required** to instrument .NET applications running outside of IIS, and are also useful for getting more granular control over which Java applications on the host or .NET applications in IIS are instrumented.
+Instrumentation rules let you control which processes are automatically instrumented by SSI on Windows hosts. Rules are required to instrument .NET applications running outside of IIS. They are also useful for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
 To configure instrumentation rules:
 
