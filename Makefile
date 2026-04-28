@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data websites_sources_data build-api-derefs
+.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data websites_sources_data build-api-derefs build-astro
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -82,15 +82,25 @@ watch-cdocs:
 build-api-derefs:
 	@node ./assets/scripts/build-api-derefs.js
 
+# Build the Astro site with base=/astro and copy output into Hugo's static dir
+# so it's served from /astro/ in the Hugo preview.
+build-astro:
+	@echo "Building Astro site for Hugo preview...";
+	@cd astro && npm install && npm run build:hugo
+	@rm -rf static/astro
+	@cp -r astro/dist static/astro
+
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
+	@make build-astro
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
 	@make setup-build-scripts
 	@make build-cdocs
+	@make build-astro
 	@make server
 
 # Leave build scripts as is for local testing

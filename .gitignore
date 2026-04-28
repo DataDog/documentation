@@ -1,6 +1,7 @@
 # Hugo
 public/*
 !public/.gitkeep
+static/astro/
 data/service_checks/
 data/npm
 integrations_data
