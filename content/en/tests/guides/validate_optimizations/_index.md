@@ -1,5 +1,6 @@
 ---
 title: Validate Optimizations
+description: Validate that Test Optimization features—including Early Flake Detection, Auto Test Retries, and Flaky Test Management—are working correctly in your repository.
 private: true
 further_reading:
     - link: '/tests/guides/setup_new_flaky_pr_gate'
@@ -16,17 +17,19 @@ further_reading:
       text: 'Learn about Flaky Test Management'
 ---
 
-This section explains how to check that the optimizations offered by Test Optimization are working as intended. The guide assumes that [Test Optimization][13] already works for the repository under validation. This guide shows the steps to validate optimizations for a **single repository**.
+This page explains how to check that the optimizations offered by Test Optimization are working as intended. The guide assumes that [Test Optimization][13] already works for the repository under validation, and it shows the steps to validate optimizations for a **single repository**.
 
-<div class="alert alert-warning">The validations run in a feature branch that should not be merged.</div>
+<div class="alert alert-warning">Run these validations in a feature branch only, and do not merge them into your default or main branch.</div>
 
-<div class="alert alert-info">These optimizations require a <a href="/tests/#setup">supported native library</a>. JUnit XML uploads are not supported.</div>
+## Prerequisites
+
+These optimizations require a [supported native library][13]. JUnit XML uploads are not supported.
 
 ## Prevention
 
-Prevention is achieved through [Early Flake Detection][1] and [New Flaky Test PR Gates][2], which help detecting new flaky tests and blocking them from reaching your default branch.
+Prevention is achieved through [Early Flake Detection][1] and [New Flaky Test PR Gates][2], which help detect new flaky tests and blocking them from reaching your default branch.
 
-The validate prevention is working, follow these steps:
+To validate prevention is working, follow these steps:
 
 1. Enable Early Flake Detection in the [settings page][3].
 2. Create a [New Flaky Test PR gate][12] and define its scope to evaluate in the repository under validation.
@@ -35,13 +38,13 @@ The validate prevention is working, follow these steps:
 
 3. Add a new flaky test.
 
-This test is flaky by design. **It is not intended to be committed to the default branch**. The validation runs in a feature branch that should not be merged.
+This test is flaky by design. **It is not intended to be committed to the default branch**. Run the validation in a feature branch, and do not merge it.
 
-Here are some simple examples of flaky tests. It is **important** that the test name includes the string `flaky`:
+Here are some simple examples of flaky tests. The test name must include the string `flaky`:
 
 {{< include-markdown "tests/guides/validate_optimizations/flaky_test_examples" >}}
 
-4. Create a new branch `validate-test-optimization-prevention`, commit the changes to add a new flaky test, push and open a Pull Request.
+4. Create a new branch `validate-test-optimization-prevention`, commit the changes to add a new flaky test, and push the changes to open a pull request.
 
 ```bash
 git checkout -b validate-test-optimization-prevention
@@ -51,7 +54,7 @@ git push origin validate-test-optimization-prevention
 ```
 
 5. Wait for CI to run.
-6. In the GitHub checks of your Pull Request, the New Flaky Test PR Gate should be failing:
+6. In the GitHub checks of your pull request, the New Flaky Test PR Gate should be failing:
 
 {{< img src="pr_gates/setup/failed_pr_gate.png" alt="GitHub Pull Request check failing because a new flaky test is detected" style="width:100%" >}}
 
@@ -59,13 +62,13 @@ git push origin validate-test-optimization-prevention
 
 {{< img src="pr_gates/setup/pr_gate_detail.png" alt="Datadog PR gate detail view" style="width:100%" >}}
 
-The test added on the previous step should show up in the list of new flaky tests. Click on it to be redirected to [Flaky Test Management][14].
+The test you added is included in the list of new flaky tests. Click it to be redirected to [Flaky Test Management][14].
 
 8. Additionally check that the test is detected as new flaky in [Test Runs][7]. Check that the filter parameters include `@test.name:*flaky*`, `@git.branch:validate-test-optimization-prevention` and `@test.test_management.is_new_flaky:true`.
 
 ## Mitigation
 
-Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5] and [Flaky Test Policies][6]. These optimizations allow you to automatically retry flaky tests and apply policies on them, such as quarantining or disabling.
+Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These optimizations allow you to automatically retry flaky tests and apply policies on them, such as quarantining or disabling.
 
 To validate mitigation is working, follow these steps:
 
@@ -77,13 +80,13 @@ To validate mitigation is working, follow these steps:
 
 4. Add a new flaky test.
 
-This test is flaky by design. **It is not intended to be committed to the default branch**. The validation runs in a feature branch that should not be merged.
+This test is flaky by design. **It is not intended to be committed to the default branch**. Run the validation in a feature branch, and do not merge it.
 
-Here are some simple examples of flaky tests (**it is important that the test name includes the string 'flaky'**):
+Here are some simple examples of flaky tests. The test name must include the string `flaky`:
 
 {{< include-markdown "tests/guides/validate_optimizations/flaky_test_examples" >}}
 
-5. Create a new branch `validate-test-optimization-mitigation`, commit the changes to add a new flaky test, push and open a Pull Request.
+5. Create a new branch `validate-test-optimization-mitigation`, commit the changes to add a new flaky test, and push the changes to open a pull request.
 
 ```bash
 git checkout -b validate-test-optimization-mitigation
@@ -93,12 +96,12 @@ git push origin validate-test-optimization-mitigation
 ```
 
 6. Wait for CI to run.
-7. The newly added flaky test shouldn't have caused the CI to be red.
+7. Confirm that the newly added flaky test does not cause CI to fail.
 8. Go to [Flaky Test Management][10] and check that the newly added flaky test shows up.
 
 **Important**: Check that the filter parameters include `@test.name:*flaky*`, `first_flaked_branch:validate-test-optimization-mitigation`.
 
-Click on the only test in the list and verify that it shows as `DISABLED`. This is because the flaky test policy kicked in.
+Click on the only test in the list and verify that it shows as `DISABLED`. This confirms that the flaky test policy was triggered.
 
 9. Go to [Test Runs][9] and check that the newly added flaky test shows up.
 
@@ -106,20 +109,20 @@ Click on the only test in the list and verify that it shows as `DISABLED`. This 
 
 ## Remediation
 
-Test Optimizations helps with the remediation of test flakiness with Attempt to fix and Bits AI auto fixes. This sections focuses on the validation of the Attempt to fix workflow.
+Test Optimization helps with the remediation of test flakiness with attempt to fix and Bits AI auto fixes. This section focuses on the validation of the attempt to fix workflow.
 
-To validate Attempt to fix follow these steps:
+To validate attempt to fix, follow these steps:
 
 1. Enable Auto Test Retries in the [settings page][3].
 2. Add a new flaky test.
 
-This test is flaky by design. **It is not intended to be committed to the default branch**. The validation runs in a feature branch that should not be merged.
+This test is flaky by design. **It is not intended to be committed to the default branch**. Run the validation in a feature branch, and do not merge it.
 
-Here are some simple examples of flaky tests (**it is important that the test name includes the string 'flaky'**):
+Here are some simple examples of flaky tests. The test name must include the string `flaky`:
 
 {{< include-markdown "tests/guides/validate_optimizations/flaky_test_examples" >}}
 
-3. Create a new branch `validate-test-optimization-attempt-to-fix`, commit the changes to add a new flaky test, push and open a Pull Request.
+3. Create a new branch `validate-test-optimization-attempt-to-fix`, commit the changes to add a new flaky test, and push the changes to open a pull request.
 
 ```bash
 git checkout -b validate-test-optimization-attempt-to-fix
@@ -129,7 +132,7 @@ git push origin validate-test-optimization-attempt-to-fix
 ```
 
 4. Wait for CI to run.
-5. The newly added flaky test shouldn't have caused the CI to be red.
+5. Confirm that the newly added flaky test does not cause CI to fail.
 6. Go to [Flaky Test Management][11] and check that the newly added flaky test shows up as **Active**.
 
 **Important**: Check that the filter parameters include `@test.name:*flaky*`, `first_flaked_branch:validate-test-optimization-attempt-to-fix`.
@@ -203,7 +206,7 @@ func testFlaky() {
 {{% /tab %}}
 {{< /tabs >}}
 
-8. In [Flaky Test Management][11], click on the flaky test and press on the `Actions` button followed by `Link commit to Flaky Test fix`. This will open a modal that looks like this:
+8. In [Flaky Test Management][11], click on the flaky test and press on the `Actions` button followed by `Link commit to Flaky Test fix`. This will open a modal that provides a test key and sample Git command:
 
 {{< img src="pr_gates/setup/attempt_to_fix_modal.png" alt="Attempt to fix modal" style="width:50%" >}}
 
@@ -218,7 +221,9 @@ git push origin validate-test-optimization-attempt-to-fix
 ```
 
 10. Wait for CI to finish.
-11. After CI has finished, go back to [Flaky Test Management][11]. The test should now show up as `Fix In Progress`. This means that attempt to fix has worked. The test will automatically move to `Fixed` once the PR is merged. **Important**: do not merge the PR in this case, as this was just purely for validation purposes.
+11. After CI has finished, go back to [Flaky Test Management][11]. The test should now show up as `Fix In Progress`. This means that attempt to fix has worked. The test will automatically move to `Fixed` once the PR is merged. 
+
+**Important**: Do not merge the PR, as it was just purely for validation purposes. Close the pull request without merging.
 
 ## Further Reading
 

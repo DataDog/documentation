@@ -5810,11 +5810,6 @@ menu:
       parent: tests
       identifier: tests_guides
       weight: 15
-    - name: Validate Optimizations
-      url: tests/guides/validate_optimizations/
-      parent: tests_guides
-      identifier: tests_guides_validate_optimizations
-      weight: 1501
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
