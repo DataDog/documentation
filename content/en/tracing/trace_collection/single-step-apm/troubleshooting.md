@@ -175,7 +175,7 @@ Custom instrumentation still requires you to import the SDK. Configuration varia
 
 ### SSI continues running after setting DD_TRACE_ENABLED=false
 
-Setting `DD_TRACE_ENABLED=false` does not prevent SSI from loading the tracer. The [injector][11] runs before the tracer evaluates its environment variables, so tracer-level environment variables have no effect on SSI. To disable or remove SSI, see your platform's [SSI setup page][12].
+Setting `DD_TRACE_ENABLED=false` does not prevent SSI from loading the SDK. The [injector][11] runs before the SDK evaluates its environment variables, so SDK-level environment variables have no effect on SSI. To disable or remove SSI, see your platform's [SSI setup page][12].
 
 ## Environment-specific troubleshooting
 
