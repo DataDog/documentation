@@ -3937,6 +3937,12 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "BulkDeleteSecurityMonitoringRules": {
+    "description": "Delete multiple security monitoring rules in a single request. Default rules cannot be deleted.",
+    "summary": "Bulk delete security monitoring rules",
+    "request_description": "",
+    "request_schema_description": "Payload for bulk deleting security monitoring rules."
+  },
   "BulkExportSecurityMonitoringRules": {
     "description": "Export a list of security monitoring rules as a ZIP file containing JSON rule definitions.\nThe endpoint accepts a list of rule IDs and returns a ZIP archive where each rule is\nsaved as a separate JSON file named after the rule.",
     "summary": "Bulk export security monitoring rules",
