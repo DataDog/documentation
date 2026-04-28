@@ -13,13 +13,13 @@ further_reading:
 
 Set up Storage Management for Amazon S3 with one of the following methods:
 
-- **Cloudformation**: A guided wizard that configures the AWS integration, enables S3 inventory on the buckets you select, and optionally enables S3 access logs. The wizard launches a CloudFormation stack to apply changes in your AWS account.
+- **Cloudformation**: A guided in-product setup that configures the AWS integration, enables S3 inventory on the buckets you select, and optionally enables S3 access logs. Setup launches a CloudFormation stack to apply changes in your AWS account.
 - **Terraform**: Use the official Datadog Storage Management Terraform module to configure inventory and access logs as code.
 
 {{< tabs >}}
 {{% tab "Cloudformation" %}}
 
-The Storage Management onboarding wizard guides you through three steps: configuring an AWS account, selecting buckets and enabling S3 inventory and access logs, and finishing setup. The wizard generates a CloudFormation stack that applies the required changes in your AWS account.
+In-product setup walks you through three steps: configuring an AWS account, selecting buckets and enabling S3 inventory and access logs, and finishing setup. A CloudFormation stack applies the required changes in your AWS account.
 
 To start, navigate to **Infrastructure** > [**Storage Management**][1] and click **Enable buckets**.
 
@@ -30,9 +30,9 @@ To start, navigate to **Infrastructure** > [**Storage Management**][1] and click
 In this step, set up the Datadog AWS integration with metric and resource collection enabled.
 
 1. Choose whether to use an **existing AWS account** already integrated with Datadog or to **add a new account**.
-   - For a new account, the wizard launches a CloudFormation stack that creates the Datadog integration role and configures both metric and resource collection.
+   - For a new account, a CloudFormation stack creates the Datadog integration role and configures both metric and resource collection.
    - For an existing account, confirm that **metric collection** and **resource collection** are enabled. Storage Management uses resource collection to discover S3 buckets and their existing inventory configurations.
-2. Select the AWS region you want to configure. The wizard configures one region per run; repeat the wizard for each additional region.
+2. Select the AWS region you want to configure. One region is configured per run; repeat the steps for each additional region.
 
 For a list of S3-related permissions used by resource collection, see [AWS Resource Collection][2].
 
@@ -48,25 +48,25 @@ In this step, select the buckets to monitor, set an inventory destination, and o
     - Destination bucket: The bucket that stores inventory reports (one per AWS region, can be reused cross-account).
 </div>
 
-1. **Select buckets**: The wizard lists every S3 bucket discovered through resource collection in the selected region. Buckets already enabled for Storage Management are hidden. Buckets with existing S3 inventory are pre-selected and keep their current destination.
+1. **Select buckets**: Choose the S3 buckets you want to monitor with Storage Management.
 
-2. **Set the inventory destination bucket**: For buckets without an existing inventory configuration, choose a destination bucket where new inventory reports are delivered. You can pick an existing bucket or specify a new one. Datadog writes inventory files to the `datadog-inventories` prefix.
+2. **Set the inventory destination bucket**: For buckets without an existing inventory configuration, choose a destination bucket where daily inventory reports are delivered. You can pick an existing bucket or specify a new one. Datadog writes inventory files to the `datadog-inventories` prefix.
 
    **Note**: Storage Management supports CSV inventory format only.
 
 3. **Enable S3 access logs (optional)**: Access logs surface cold data patterns, unusual access, and right-sizing opportunities for storage tiers. Toggle **Enable S3 access logs**, then:
 
    - Select a destination bucket for access logs. You can use the same bucket as the inventory destination.
-   - If a Datadog Log Forwarder is detected in the account, the wizard reuses it. Otherwise, the CloudFormation stack deploys a new forwarder.
+   - If a Datadog Log Forwarder is detected in the account, it is reused. Otherwise, the CloudFormation stack deploys a new forwarder.
    - Forwarded access logs can be ingested without indexing if used only for Storage Management. See [exclusion filters][3] for details.
 
    <div class="alert alert-warning">Forwarding S3 access logs to Datadog incurs Log Management ingestion costs. To minimize costs, use exclusion filters so logs are ingested but not indexed if used only for Storage Management. For details, see <a href="https://www.datadoghq.com/pricing/?product=log-management">Datadog Log Management pricing</a>.</div>
 
-4. Click **Launch CloudFormation Template**. The wizard opens an AWS Quick Create stack pre-filled with the bucket mappings, destination prefix, integration role name, and (if access logs are enabled) Datadog API key, application key, and log forwarder parameters.
+4. Click **Launch CloudFormation Template**. An AWS Quick Create stack opens, pre-filled with the bucket mappings, destination prefix, integration role name, and (if access logs are enabled) Datadog API key, application key, and log forwarder parameters.
 
 5. In AWS, review the stack parameters and create the stack. The stack:
 
-   - Configures S3 inventory on each selected source bucket.
+   - Enables daily S3 inventory on each selected source bucket.
    - Adds IAM permissions for Storage Management to read the S3 inventory reports from the destination buckets.
    - Adds the bucket policy to the inventory destination bucket so S3 can write inventory objects.
    - Enables S3 server access logging on selected buckets (if access logs are enabled).
@@ -77,7 +77,7 @@ In this step, select the buckets to monitor, set an inventory destination, and o
 
 {{% collapse-content title="3. Finish setup" level="h4" expanded=false id="datadog-ui-step3" %}}
 
-After the CloudFormation stack completes in AWS, return to the wizard and confirm setup.
+After the CloudFormation stack completes in AWS, return to Datadog and confirm setup.
 
 The first inventory report can take up to 24 hours to generate. After that, your buckets appear in **Infrastructure** > [**Storage Management**][1].
 
