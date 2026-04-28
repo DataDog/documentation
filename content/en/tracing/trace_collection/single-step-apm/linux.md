@@ -19,8 +19,6 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 
 <div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
 
-<div class="alert alert-warning"><strong>.NET applications with an existing profiler</strong>: The .NET CLR Profiling API loads only one profiler per process. If your application already has a .NET profiler configured (Datadog or another APM vendor), remove the existing <code>CORECLR_*</code> environment variables and any <code>LD_PRELOAD</code> entries that reference the profiler before enabling SSI. Otherwise, the pre-existing profiler silently takes precedence over the Datadog SDK. See <a href="/tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started">.NET Core installation</a> for details.</div>
-
 To enable APM on a Linux host:
 
 1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
