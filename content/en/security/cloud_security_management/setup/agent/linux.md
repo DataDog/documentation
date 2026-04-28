@@ -56,9 +56,11 @@ compliance_config:
     enabled: true
 {{< /code-block >}}
 
-**Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by package managers such as npm, pip, Maven/Gradle, NuGet, Go modules, Cargo, and Bundler, in addition to OS packages. When the `analyzers` field is omitted, only OS packages are scanned for container images. See [Supported application library package managers](#supported-application-library-package-managers) for the full list.
-
 ### Supported application library package managers
+
+The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages.
+
+When the `analyzers` field is omitted, Datadog only scans OS packages for container images.
 
 The `languages` analyzer covers the following package ecosystems:
 
