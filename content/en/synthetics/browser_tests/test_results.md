@@ -37,7 +37,7 @@ On the **Test Runs** tab, you can see all individual runs of your test. Filter b
 
 Browser test runs include components such as [screenshots](#screenshots-and-actions), [page performance data](#test-performance), [errors](#errors-and-warnings), [resources](#resources), and [backend traces](#backend-traces) to help troubleshoot your [test failure](#failed-results).
 
-### Test run columns
+{{% collapse-content title="Test run columns" level="h4" %}}
 
 The following describes each column in the **Test Runs** table:
 
@@ -68,6 +68,8 @@ Browser
 Test Version
 : The version of the test configuration used for the run.
 
+{{% /collapse-content %}}
+
 ### RUM sessions
 
 To view related sessions and available replays in the [RUM Explorer][22], click **View Session in RUM**. To access a user session for a particular action or step in [Session Replay][23], click **Replay Session**. For more information, see [Explore RUM & Session Replay in Synthetic Monitoring][16].
@@ -93,6 +95,8 @@ Click the **Resources** pill to access the **Resources** tab and examine the com
 {{< img src="synthetics/browser_tests/test_results/synthetics_resources.png" alt="Browser test run details with the Resources pill highlighted on each step, indicating where to click to open the Resources tab" style="width:100%" >}}
 
 You can filter resources by type and search by name in the search bar. The maximum number of resources that can be displayed is 100. Resources are ordered by the time when they start and display the first 100 in Datadog.
+
+{{% collapse-content title="Resources tab columns" level="h4" %}}
 
 The following describes the column headers on the **Resources** tab:
 
@@ -123,6 +127,8 @@ Duration
 
 Size
 : The size of the request response.
+
+{{% /collapse-content %}}
 
 ### Backend traces
 
@@ -158,6 +164,8 @@ The **Properties** tab contains the configuration details, ownership information
 
 {{< img src="synthetics/browser_tests/synthetics_properties_tab.png" alt="The Properties tab on a browser Test Details page showing Ownership, Execution, and Monitor sections, with left navigation for Continuous Testing, Parent Tests, and other configuration" style="width=80%" >}}
 
+{{% collapse-content title="Properties tab sections" level="h4" %}}
+
 The following describes each section available on the **Properties** tab:
 
 **Ownership**
@@ -183,6 +191,8 @@ The following describes each section available on the **Properties** tab:
 
 **Configuration as Code**
 : Exports the test configuration in formats such as Terraform for managing tests as code.
+
+{{% /collapse-content %}}
 
 ## Failed results
 

@@ -31,7 +31,11 @@ On the **Activity** tab, you can see the **Global Uptime** graph, which displays
 
 On the **Test Results** tab, you can examine the latest failed test runs and compare them to recent successful test runs. Mobile app test runs include components such as [screenshots](#screenshots-and-actions) to help troubleshoot your [test failure](#failed-results).
 
-### Overview attributes
+{{< img src="mobile_app_testing/mobile_app_test_runs.png" alt="The Test Runs tab on a mobile app Test Details page showing a filterable table of test runs with status, date, run type, steps, duration, location, device, app version, and test version columns" style="width:100%;">}}
+
+{{% collapse-content title="Test run columns" level="h4" %}}
+
+The following describes each column in the **Test Results** table:
 
 Status
 : The status of your test run (`PASSED` or `FAILED`).
@@ -59,6 +63,8 @@ Run type
 
 Video replay
 : A recording of the test execution available for diagnosing failures. See [Video replay](#video-replay).
+
+{{% /collapse-content %}}
 
 ### Screenshots and actions
 
@@ -100,6 +106,10 @@ On the **Performance** tab, you can see aggregate performance metrics across all
 
 The **Properties** tab contains the configuration details, ownership information, and integrations associated with your test. Use the left navigation to switch between sections.
 
+{{< img src="mobile_app_testing/mobile_app_properties.png" alt="The Properties tab on a mobile app Test Details page showing Ownership, Execution, and Monitor sections, with left navigation for Continuous Testing, Parent Tests, and other configuration" style="width:100%;">}}
+
+{{% collapse-content title="Properties tab sections" level="h4" %}}
+
 The following describes each section available on the **Properties** tab:
 
 **Ownership**
@@ -125,6 +135,8 @@ The following describes each section available on the **Properties** tab:
 
 **Configuration as Code**
 : Exports the test configuration in formats such as Terraform for managing tests as code.
+
+{{% /collapse-content %}}
 
 ## Crash reports
 
