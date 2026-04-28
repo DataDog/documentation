@@ -33,6 +33,8 @@ In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to in
 
 <div class="alert alert-info">Single Step Instrumentation does not instrument applications in the namespace where the Datadog Agent is installed. Install the Agent in a separate namespace where you do not run your applications.</div>
 
+<div class="alert alert-warning"><strong>.NET applications with an existing profiler</strong>: The .NET CLR Profiling API loads only one profiler per process. The SSI admission webhook does not overwrite <code>CORECLR_*</code> environment variables injected by another vendor's operator, init container, or pod template. Remove these variables (and any <code>LD_PRELOAD</code> entries that reference the pre-existing profiler) from their source, then re-roll the pods. See <a href="/tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started">.NET Core installation</a> for details.</div>
+
 Follow these steps to enable Single Step Instrumentation across your entire cluster. This automatically sends traces from all applications written in supported languages.
 
 **Note:** To instrument only specific namespaces or pods, see workload targeting in [Advanced options](#advanced-options).
