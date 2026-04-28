@@ -73,6 +73,10 @@ phrase:
       dst: "content/{lang}/real_user_monitoring/application_monitoring/browser/advanced_configuration.mdoc.md"
     - src: "content/en/opentelemetry/instrument/dd_sdks/api_support.mdoc.md"
       dst: "content/{lang}/opentelemetry/instrument/dd_sdks/api_support.mdoc.md"
+    - src: "content/en/bits_ai/mcp_server/setup.md"
+      dst: "content/{lang}/bits_ai/mcp_server/setup.md"
+    - src: "content/en/real_user_monitoring/guide/proxy-rum-data.mdoc.md"
+      dst: "content/{lang}/real_user_monitoring/guide/proxy-rum-data.mdoc.md"
 
 # Legacy Transifex ignores (kept for reference)
 #   - "content/en/observability_pipelines/legacy/*.md"
