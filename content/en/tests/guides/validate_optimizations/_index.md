@@ -1,7 +1,6 @@
 ---
 title: Validate Optimizations
 description: Validate that Test Optimization features—including Early Flake Detection, Auto Test Retries, and Flaky Test Management—are working correctly in your repository.
-private: true
 further_reading:
     - link: '/tests/guides/setup_new_flaky_pr_gate'
       tag: 'Documentation'
