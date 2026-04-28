@@ -4645,11 +4645,21 @@ menu:
       parent: profiler_enabling
       identifier: profiler_enabling_php
       weight: 108
-    - name: C/C++/Rust
+    - name: C
       url: "profiler/enabling/?prog_lang=c"
       parent: profiler_enabling
-      identifier: profiler_enabling_linux
+      identifier: profiler_enabling_c
       weight: 109
+    - name: C++
+      url: "profiler/enabling/?prog_lang=cpp"
+      parent: profiler_enabling
+      identifier: profiler_enabling_cpp
+      weight: 110
+    - name: Rust
+      url: "profiler/enabling/?prog_lang=rust"
+      parent: profiler_enabling
+      identifier: profiler_enabling_rust
+      weight: 111
     - name: Profile Types
       url: profiler/profile_types/
       parent: profiler
