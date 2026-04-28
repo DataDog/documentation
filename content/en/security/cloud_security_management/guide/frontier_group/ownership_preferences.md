@@ -289,7 +289,7 @@ If the Ownership Agent detects any conflict or duplicate, it rejects the entire 
 
 The AI engine processes prompt text as organizational context. To help ensure your guidance is effective:
 
-- **Use plain, declarative sentences**: Describe facts about your organization, not instructions to the AI.
+- **Use plain, declarative sentences**: Describe facts about your organization.
 - **Avoid special formatting**: Markdown headings, HTML tags, and XML-like tags are stripped during processing.
 - **Focus on ownership data sources**: Describe which tags, naming conventions, or team structures indicate ownership.
 
