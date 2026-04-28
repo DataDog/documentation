@@ -30,9 +30,5 @@ cascade:
     lang: en
   aliases:
     - /api/latest/service-scorecards
-further_reading:
-- link: "https://learn.datadoghq.com/courses/dd-api-automation-iac"
-  tag: "Learning Center"
-  text: "Datadog API: Automation and Infrastructure as Code"
 
 ---
