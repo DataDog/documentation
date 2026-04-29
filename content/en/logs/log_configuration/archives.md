@@ -194,6 +194,15 @@ Only Datadog users with the [`logs_write_archive` permission][5] can create, mod
 
    {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Add the Storage Object Admin role to your Datadog Google Cloud Service Account." style="width:75%;">}}
 
+The **Storage Object Admin** role is Datadog's recommended configuration. If your organization requires a least-privilege custom role, the following individual permissions are required for archive uploads:
+
+- `storage.objects.create`
+- `storage.objects.get`
+- `storage.objects.list`
+- `storage.objects.delete`
+
+`storage.objects.delete` is required to support archive write retries, where Datadog overwrites an existing object in the bucket. Multipart upload permissions (`storage.multipartUploads.*`) are not required.
+
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
