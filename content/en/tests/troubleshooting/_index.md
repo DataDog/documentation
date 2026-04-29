@@ -175,6 +175,12 @@ This is also caused by an unstable test session fingerprint. See the [Session hi
 
 When retrying a flaky test multiple times within a short span of time (less than a second), test run events might contain unexpected `@test.is_flaky`, `@test.is_known_flaky`, or `@test.is_new_flaky` tags. This is a known limitation that occurs due to a race condition in the flaky test detection system. In some cases, test run events might be processed out of order, causing the tags to not follow the logical order of events.
 
+## Vitest test duration overhead is high
+
+Wall-clock time is often dominated by Vitest's default suite isolation (`isolate: true`) and repeated ESM instrumentation startup, not only by how long the tests themselves take. For that interaction and when it matters most, read [Vitest's test duration overhead][18] in the JavaScript test setup guide.
+
+To reduce overhead, pass `--no-isolate` to your test command or set `isolate: false` in your `vitest.config` file. For Vitest's reference on the setting, see the [`isolate` option][17].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -195,3 +201,5 @@ When retrying a flaky test multiple times within a short span of time (less than
 [14]: /tests/#supported-features
 [15]: /agent/configuration/network/
 [16]: /tests/network/
+[17]: https://vitest.dev/config/isolate
+[18]: /tests/setup/javascript/#vitests-test-duration-overhead
