@@ -2828,6 +2828,12 @@ menu:
       parent: workflows
       identifier: workflows_limits
       weight: 11
+    - name: Datadog Apps
+      url: actions/datadog_apps/
+      pre: dev-code
+      identifier: datadog_apps
+      parent: actions_heading
+      weight: 35000
     - name: App Builder
       url: actions/app_builder/
       pre: app-builder
@@ -2839,11 +2845,6 @@ menu:
       parent: app_builder
       identifier: app_builder_build
       weight: 1
-    - name: Build Code-Based Apps
-      url: actions/app_builder/code_based_apps/
-      parent: app_builder
-      identifier: app_builder_code_based_apps
-      weight: 2
     - name: Access and Authentication
       url: actions/app_builder/access_and_auth/
       parent: app_builder
