@@ -37,9 +37,7 @@ A typical test follows this pattern:
 3. Units under test use OpenFeature Client backed by the `InMemoryProvider` returning the flag assignments configured at test setup
 4. Reset the provider in test teardown to avoid cross-test state leakage.
 
-See your platform's SDK page for a concrete test example:
-
-{{< partial name="feature_flags/feature_flags_client.html" >}}
+See your platform's SDK page (select from the top of this page) for a concrete test example.
 
 ## Context attribute requirements
 
