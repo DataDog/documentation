@@ -5,11 +5,11 @@ disable_toc: false
 weight: 20
 further_reading:
   - link: "/security/code_security/software_composition_analysis/"
-     tag: "Documentation"
-     text: "Software Composition Analysis"
+    tag: "Documentation"
+    text: "Software Composition Analysis"
   - link: "/security/code_security/software_composition_analysis/library_inventory/"
-     tag: "Documentation"
-     text: "Library Inventory"
+    tag: "Documentation"
+    text: "Library Inventory"
 ---
 
 The CVE Explorer gives you a searchable catalog of every CVE and security advisory tracked by Datadog, including detailed information about affected packages, exploit availability, and fix guidance. Unlike the [Vulnerabilities explorer][1], which shows findings scoped to your repositories and services, CVE Explorer shows the full set of CVEs Datadog tracks, so you can proactively assess exposure to newly published vulnerabilities before they appear in your findings.
