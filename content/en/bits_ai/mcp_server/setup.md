@@ -401,13 +401,13 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    - **One-click install (recommended):** Use the Datadog MCP Server {{< region-param key="goose_mcp_install_deeplink" link="true" text="install deeplink" >}}.
    - **Manual configuration:** Follow Goose's [Add an MCP server][2] instructions, using the endpoint listed in this section as the Streamable HTTP server URL. To edit the configuration directly, modify `~/.config/goose/config.yaml`.
 
-1. Alternatively, follow Goose's [Add an MCP server][2] instructions. Use the selected endpoint shown above as the remote Streamable HTTP server URL. You can also modify Goose's config directly for future updates at `~/.config/goose/config.yaml`.
-
 1. To enable [product-specific tools][1], include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. On first session launch, choose your Datadog account when prompted to authenticate.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [1]: /bits_ai/mcp_server#toolsets
 [2]: https://goose-docs.ai/docs/getting-started/using-extensions/#mcp-servers
