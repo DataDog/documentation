@@ -109,6 +109,18 @@ phrase:
       dst: "content/{lang}/standard-attributes/_index.md"
     - src: "content/en/real_user_monitoring/guide/proxy-rum-data.mdoc.md"
       dst: "content/{lang}/real_user_monitoring/guide/proxy-rum-data.mdoc.md"
+    - src: "data/partials/requests.yaml"
+      dst: "data/partials/requests.{lang}.yaml"
+    - src: "config/_default/params.en.yaml"
+      dst: "config/_default/params.{lang}.yaml"
+    - src: "customization_config/en/traits/general.yaml"
+      dst: "customization_config/{lang}/traits/general.yaml"
+    - src: "data/api/v1/translate_tags.json"
+      dst: "data/api/v1/translate_tags.{lang}.json"
+    - src: "data/api/v1/translate_actions.json"
+      dst: "data/api/v1/translate_actions.{lang}.json"
+    - src: "i18n/en.json"
+      dst: "i18n/{lang}.json"
 
 # Legacy Transifex ignores (kept for reference)
 #   - "content/en/observability_pipelines/legacy/*.md"
