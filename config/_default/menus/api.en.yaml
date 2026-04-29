@@ -7930,6 +7930,19 @@ menu:
           - ListTagPipelinesRulesets
         unstable: []
         order: 16
+    - name: List Cloud Cost Management OCI configs
+      url: '#list-cloud-cost-management-oci-configs'
+      identifier: cloud-cost-management-list-cloud-cost-management-oci-configs
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostOCIConfigs
+        unstable:
+          - v2
+        order: 39
     - name: Update Google Cloud Usage Cost config
       url: '#update-google-cloud-usage-cost-config'
       identifier: cloud-cost-management-update-google-cloud-usage-cost-config
