@@ -58,8 +58,6 @@ Use Experiments mode to test your prompt across a dataset, score results with ev
 
 Write your prompt using `{{variable_name}}` placeholders where dataset values will be substituted. Use dot notation to reference nested dataset fields—for example, `{{input.question}}` to reference a field named `question` in the input section of a record.
 
-<div class="alert alert-warning">If a variable references a path that does not exist in the dataset—for example, <code>{{question}}</code> instead of <code>{{input.question}}</code>—the model receives the literal template string. Verify that variable paths match the column mapping in the Add Variables step.</div>
-
 ### 1. Add a dataset
 
 Select a dataset from your project. The dataset provides the records the Playground runs your prompt against.
@@ -78,11 +76,15 @@ Map dataset columns to the sections available in your prompt:
 
 Click **Use this dataset** to proceed to the preview stage.
 
+<div class="alert alert-warning">If a variable references a path that does not exist in the dataset—for example, <code>{{question}}</code> instead of <code>{{input.question}}</code>—the model receives the literal template string. Go back to your prompt and correct the variable paths to match the columns shown in the table above.</div>
+
 ### 3. Add evaluators
 
 Evaluators score each row after a preview run. Click **Add Evaluators** in the toolbar to open the evaluator configuration modal.
 
-The Playground supports **String Check** evaluators:
+The Playground supports **String Check** evaluators. Add multiple evaluators to score different aspects of the output in one run.
+
+{{% collapse-content title="String Check evaluator options" level="h4" expanded=false %}}
 
 | Field | Description |
 |-------|-------------|
@@ -93,7 +95,7 @@ The Playground supports **String Check** evaluators:
 | **Right operand** | The value to compare against—defaults to the expected output. Supports dot notation for nested fields. |
 | **Name** | An alias displayed as the column header in the results table. |
 
-Add multiple evaluators to score different aspects of the output in one run.
+{{% /collapse-content %}}
 
 ### 4. Run a preview
 
