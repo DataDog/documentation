@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting Single Step APM
+description: "Diagnose and fix Single Step Instrumentation (SSI) issues on Kubernetes, Linux, Docker, and Windows. Covers missing traces, silent failure modes, injection verification, Fleet Automation diagnostics, and language-specific troubleshooting."
 aliases:
 - /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting/
 further_reading:

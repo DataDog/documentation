@@ -1,5 +1,6 @@
 ---
 title: Single Step APM Instrumentation
+description: "Automatically instrument applications with Datadog APM using Single Step Instrumentation (SSI). Install the Datadog Agent and enable tracing with no code changes on Kubernetes, Linux, Docker, or Windows."
 aliases:
 - /tracing/trace_collection/admission_controller/
 - /tracing/trace_collection/library_injection_local/

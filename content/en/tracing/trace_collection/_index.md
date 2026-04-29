@@ -1,6 +1,6 @@
 ---
 title: Set Up APM
-description: "Get Started with Datadog APM"
+description: "Set up Datadog APM to collect traces from your applications. Choose Single Step Instrumentation for automatic setup on Kubernetes, Linux, Docker, or Windows, or use manually managed SDKs for full configuration control."
 aliases:
     - /tracing/setup
     - /tracing/send_traces/
