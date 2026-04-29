@@ -23,7 +23,7 @@ Set up Datadog Feature Flags for your applications. Follow the platform-specific
 
 ## Testing with in-memory providers
 
-Datadog supports two testing approaches:
+Datadog supports these testing approaches:
 
 - **Integration tests**: Point `DatadogProvider` at a dedicated test environment and control flag values from the Datadog UI. This exercises the real provider end-to-end, including the CDN-delivered flag assignments.
 - **Unit tests**: Swap `DatadogProvider` for OpenFeature's standard `InMemoryProvider` (or an equivalent test stub, where no in-memory provider is available in the language) and set flag values directly in test code. This keeps tests hermetic and offline.
