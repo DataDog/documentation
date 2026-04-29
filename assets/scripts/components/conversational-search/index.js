@@ -168,20 +168,15 @@ class ConversationalSearch {
 
     renderSuggestions(container = this.messagesContainer) {
         const suggestionsContainer = container?.querySelector('.conv-search-suggestions');
-        if (!suggestionsContainer) return;
+        const template = document.getElementById('conv-search-suggestion-template');
+        if (!suggestionsContainer || !template) return;
 
-        suggestionsContainer.innerHTML = '';
-        pickQuestions().forEach((question) => {
-            const button = document.createElement('button');
-            button.className = 'conv-search-suggestion';
-            button.dataset.query = question;
-
-            const label = document.createElement('span');
-            label.textContent = question;
-            button.appendChild(label);
-
-            suggestionsContainer.appendChild(button);
-        });
+        suggestionsContainer.replaceChildren(...pickQuestions().map((q) => {
+            const btn = template.content.firstElementChild.cloneNode(true);
+            btn.dataset.query = q;
+            btn.querySelector('span').textContent = q;
+            return btn;
+        }));
     }
 
     // --- Events ------------------------------------------------------------------
