@@ -34,7 +34,7 @@ Consider an organization with multiple teams, such as the ACME team, which handl
 - **ACME Admin:** These users manage ACME log collection, pipelines, and exclusion filters.
 - **ACME User:** These users access ACME logs and create monitors or dashboards based on these logs.
 
-You can customize this setup to fit your organizational needs, either by consolidating permissions into a single role or creating multiple roles for more detailed access control. The principles outlined here can be adapted to other teams within your organization. 
+You can customize this setup to fit your organizational needs, either by consolidating permissions into a single role or creating multiple roles for more detailed access control. The principles outlined here can be adapted to other teams within your organization.
 
 In Datadog, permissions are additive; users belonging to multiple teams benefit from combined permissions across all assigned roles.
 
@@ -46,7 +46,7 @@ As a Datadog Admin, you can configure a secure environment for ACME team members
 
 ### Tagging incoming logs
 
-First, tag incoming ACME logs with a `team:acme` tag, which helps in categorizing logs as they pass through Datadog. For instance, when collecting Docker logs, apply the `team:acme` tag using [Docker labels as tags][2]. 
+First, tag incoming ACME logs with a `team:acme` tag, which helps in categorizing logs as they pass through Datadog. For instance, when collecting Docker logs, apply the `team:acme` tag using [Docker labels as tags][2].
 
 For a comprehensive overview of tagging, see [Getting Started with Tags][3].
 
@@ -56,7 +56,7 @@ For a comprehensive overview of tagging, see [Getting Started with Tags][3].
 
 To perform the actions in this guide, you must have Datadog Admin permissions. Ensure your user account can create roles, assign users, and manage Log Pipelines, Log Indexes, and Log Archives. For more information on permissions, see [Datadog Role Permissions][4]
 
-Navigate to the [Users list][8] to verify that you have all these permissions. If these permissions are missing, request them from a current Datadog Admin. 
+Navigate to the [Users list][8] to verify that you have all these permissions. If these permissions are missing, request them from a current Datadog Admin.
 
 ### Get an API key and an app key
 
@@ -110,7 +110,7 @@ For more information on creating roles, see [Access Control][3].
     "attributes": { "name": "ACME Admin", [...] }
     [...]
     ```
-1. Assign the necessary permissions using the [Grant Permissions API][3]. 
+1. Assign the necessary permissions using the [Grant Permissions API][3].
 
 
 [1]: /api/v2/roles/#create-role
@@ -134,7 +134,7 @@ For more information on creating roles, see [Access Control][3].
 {{% tab "API" %}}
 
 1. Retrieve user IDs using the [List Users API][1].
-1. Assign users to roles with the [Assign Role API][2]. 
+1. Assign users to roles with the [Assign Role API][2].
 
 [1]: /api/v2/users/#list-all-users
 [2]: /api/v2/roles/#add-a-user-to-a-role
@@ -152,7 +152,9 @@ This section details how to:
 1. Create a `team:acme` restriction query.
 2. Attach that restriction query to ACME roles.
 
-**Note**: Each role can have only one restriction query attached. Attaching a new restriction query to a role replaces any existing query for that role.
+**Note**:
+- Each role can have only one restriction query attached. Attaching a new restriction query to a role replaces any existing query for that role.
+- If a role is on the Unrestricted Access list, that role has access to all logs regardless of any restriction queries assigned to it.
 
 ### Defining a restriction query
 
@@ -199,7 +201,7 @@ Create a [pipeline][13] for `team:acme` logs. Grant the [`logs_write_processors`
 
 ### Log indexes
 
-Create [indexes][15] for `team:acme` logs for detailed budget control. Grant the [`logs_write_exclusion_filters`][16] permission to the `ACME Admin` role. 
+Create [indexes][15] for `team:acme` logs for detailed budget control. Grant the [`logs_write_exclusion_filters`][16] permission to the `ACME Admin` role.
 
 ### Log archives
 

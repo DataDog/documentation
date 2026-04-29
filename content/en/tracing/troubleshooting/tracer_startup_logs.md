@@ -174,7 +174,7 @@ The Go Tracer prints one of two possible diagnostic lines, one for when the Agen
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Startup logs are disabled by default starting in version 2.x of the tracer. They can be enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
+Startup logs are disabled by default starting in version 2.x of the SDK. They can be enabled using the environment variable `DD_TRACE_STARTUP_LOGS=true`.
 
 **Configuration:**
 
@@ -283,7 +283,7 @@ W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG ERROR -
 
 **Diagnostics:**
 
-For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, errors appear in your application logs. In Envoy there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
+For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, errors appear in your application logs. In Envoy, there is an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}

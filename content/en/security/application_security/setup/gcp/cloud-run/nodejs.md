@@ -55,13 +55,13 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Copy the Datadog Node.js tracer into your Docker image.
+2. Copy the Datadog Node.js SDK into your Docker image.
 
    ```dockerfile
    RUN npm install --prefix /dd_tracer/node dd-trace --save
    ```
 
-   If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
+   If you install the Datadog SDK directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
 
 3. (Optional) Add Datadog tags.
 

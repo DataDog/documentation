@@ -61,6 +61,12 @@ Security signals warn you about possible threats to your infrastructure, but fal
 
 See [Suppressions][4] for more information.
 
+## Critical assets
+
+You can identify critical assets to customize the security signals associated with them. You can customize severity levels, apply custom tags, and isolate changes to specific rules.
+
+See [Critical Assets][6] for more information.
+
 ## MITRE ATT&CK Map
 
 After setting up your detection rules, use the Cloud SIEM [MITRE ATT&CK Map][5] to explore and visualize your rules against the MITRE ATT&CK framework so you have visibility into attacker techniques.
@@ -74,3 +80,4 @@ After setting up your detection rules, use the Cloud SIEM [MITRE ATT&CK Map][5] 
 [3]: /security/detection_rules/#clone-a-rule
 [4]: /security/cloud_siem/detect_and_monitor/suppressions
 [5]: /security/cloud_siem/detection_rules/mitre_attack_map/
+[6]: /security/cloud_siem/detect_and_monitor/critical_assets

@@ -84,3 +84,13 @@
 /en/real_user_monitoring/application_monitoring/ios/integrated_libraries.md
 /en/real_user_monitoring/application_monitoring/kotlin_multiplatform/integrated_libraries.md
 /en/real_user_monitoring/application_monitoring/react_native/integrated_libraries.md
+/en/client_sdks/troubleshooting.md
+/en/real_user_monitoring/application_monitoring/android/troubleshooting.md
+/en/real_user_monitoring/application_monitoring/browser/troubleshooting.md
+/en/real_user_monitoring/application_monitoring/flutter/troubleshooting.md
+/en/real_user_monitoring/application_monitoring/ios/troubleshooting.md
+/en/real_user_monitoring/application_monitoring/kotlin_multiplatform/troubleshooting.md
+/en/real_user_monitoring/application_monitoring/react_native/troubleshooting.md
+/en/real_user_monitoring/application_monitoring/roku/troubleshooting.md
+/en/real_user_monitoring/application_monitoring/unity/troubleshooting.md
+/en/dd_e2e/cdocs/components/agent_only.md

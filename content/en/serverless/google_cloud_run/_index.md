@@ -19,6 +19,8 @@ Google Cloud Run is a fully managed compute platform that lets you run stateless
 
 Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1].
 
+Datadog also provides a solution for instrumenting your Cloud Run applications with a Serverless Agent to enable tracing, enhanced metrics, custom metrics, and direct log collection. [Enhanced metrics][2] are distinguished with the `gcp.run.container.enhanced.*` and `gcp.run.job.enhanced.*` namespaces.
+
 For instrumentation, select your workload below for instructions.
 
 ## Choose your workload
@@ -30,3 +32,4 @@ For instrumentation, select your workload below for instructions.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]:/integrations/google_cloud_platform/
+[2]:/integrations/google-cloud-run/#metrics
