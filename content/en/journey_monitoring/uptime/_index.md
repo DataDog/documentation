@@ -38,7 +38,7 @@ A journey is considered to be covered if one of its Synthetic [Browser][4] or [M
 
 By default, each journey's test suite will have the same name as the journey. When the journey is created, its test suite is automatically populated with all of its covering tests, according to the definition above.
 
-The automatically created [Test Suite][1] is editable, meaning tests can be added and/or removed. Datadog continually scans your test collection to list new tests that cover the journey that aren't part of the test suite, for you to optionally add to the test suite.
+The automatically created [test suite][1] is editable, meaning tests can be added and/or removed. Datadog continually scans your test collection to list new tests that cover the journey that aren't part of the test suite, for you to optionally add to the test suite.
 
 ## Journey uptime
 

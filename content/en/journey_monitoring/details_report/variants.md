@@ -23,14 +23,13 @@ Each journey can contain one or more **variants**. A variant is a version of a j
 
 Creating a variant requires:
 - A unique name
-- At least one action or view events between the journey's start and end events
+- At least one action or view event between the journey's start and end
 
 You can optionally include attribute filters for the variant. The funnel chart will automatically update based on the selected intermediate steps. The funnel contains data on the volume, conversion rate, and average to completion for each step.
 
 You can add one or more variants while creating or editing a new journey.
 
 {{< img src="journey_monitoring/journey-monitoring-details-report-variants.png" alt="The Journey Monitoring details report showing a specific journey's key performance indicators, user behavior insights, and technical performance measurements." style="width:100%;" >}}
-
 
 ## Analyzing variants
 

@@ -30,23 +30,25 @@ The **journey map** displays all created and suggested journeys in a frontend ap
 ## What you can do in the journey map
 
 Use the map to explore and manage your journeys:
-- Change zoom state in the map.
-- Hover over a journey to see its description, start, and end definition.
-- Click on a journey in the catalog to navigate to the journey's [details report][2].
-- Use the filters and search bar to narrow down the displayed journeys in the catalog and map.
-- Click on a journey's three-dot menu to edit or delete the journey.
+- Change zoom state in the map
+- Hover over a journey to see its description, start, and end definition
+- Click on a journey in the catalog to navigate to the journey's [details report][2]
+- Use the filters and search bar to narrow down the displayed journeys in the catalog and map
+- Click on a journey's three-dot menu to edit or delete the journey
 
 ## Journey states
 
 Journeys in the map and catalog may be color-coded based on their configuration and performance:
-- Suggested journeys are **purple** and tagged with a "Suggestion" pill.
-- Journeys with a dropping conversion rate are **orange** and contain a red chevron.
-- Journeys with failing tests are **red**.
-- Journeys with no tests in their Synthetic test suite will contain a **warning** in their tooltip.
+- Suggested journeys are **purple** and tagged with a "Suggestion" pill
+- Journeys with a dropping conversion rate are **orange** and contain a red chevron
+- Journeys with failing tests are **red**
+- Journeys with no tests in their Synthetic test suite will contain a **warning** in their tooltip
 
 ## User flows in the journey map
 
 The leftmost node in the journey map represents the starting point for all user sessions in your application. All other nodes in the map are either pages or journeys. A page node can represent a parent path that expands to show its nested pages.
+
+{{< img src="journey_monitoring/journey-monitoring-map-zoom.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
 All connections represent user traffic flowing between pages and journeys. The more thick the connection line, the more traffic flows between two nodes.
 

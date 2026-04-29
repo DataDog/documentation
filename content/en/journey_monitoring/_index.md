@@ -31,16 +31,16 @@ Teams monitoring critical user flows — such as login, checkout, or media strea
 
 **Journey Monitoring** addresses this by visualizing the performance of critical user flows in your applications. It brings together data from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each user journey in one place. This gives engineering, product, and operations teams a shared view of journey health.
 
-{{< img src="journey_monitoring/journey-monitoring-temp.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-map.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
 ## What you can do
 
 For each journey you can:
-- Measure the journey's inbound traffic, conversion rate, and time to completion.
-- Track the journey's availability using an uptime SLO based on its [Synthetic test suite][10].
-- Identify where users drop off and investigate individual sessions with [Session Replay][4].
-- Measure the performance of critical journey steps with [RUM operations][13].
-- Share a unified view of journey health across engineering, product, and operations teams.
+- Measure the journey's inbound traffic, conversion rate, and time to completion
+- Track the journey's availability using an uptime SLO based on its [Synthetic test suite][10]
+- Identify where users drop off and investigate individual sessions with [Session Replay][4]
+- Measure the performance of critical journey steps with [RUM operations][13]
+- Share a unified view of journey health across engineering, product, and operations teams
 
 ## Setup
 
@@ -66,20 +66,22 @@ The right-hand funnel chart updates automatically based on the selected start an
 
 **Note**: Mandatory fields are pre-populated if you start from a suggested journey.
 
-You can optionally add a description, attribute filters, team ownership, tags, and variants. Clicking **Save Journey** creates the journey and redirects you to the journey's [details report][12]. The details report is automatically populated with metrics on the journey's volume, conversion rate, and average time to completion.
+You can optionally add a description, attribute filters, team ownership, tags, and [variants][9]. Clicking **Save Journey** creates the journey and redirects you to the journey's [details report][12]. The details report is automatically populated with metrics on the journey's volume, conversion rate, and average time to completion.
 
 ### Step 3 - Add coverage from other products
 
 In the journey's details report, you can extend monitoring coverage based on the products you have:
 
-- Create [RUM operations][13] to measure and monitor the performance of critical steps in the journey in your real user environment.
-- Add Synthetic tests to the journey's [test suite][15] to start tracking uptime.
+- Create [RUM operations][13] to measure and monitor the performance of critical steps in the journey in your real user environment
+- Add Synthetic tests to the journey's [test suite][15] to start tracking uptime
+
+If you already have any pre-created RUM operations or Synthetics tests that cover the journey, Datadog will automatically surface the operation or test into the journey's details report.
 
 ## Journey structure
 
 A journey is defined as a start and an end. The start and end can either be action or view events.
 
-Each journey can have one or more [variants][9]. A variant is a specific sequence of intermediate steps a user takes between the journey's start and end. Different users naturally take different paths — for example, some may skip optional steps while others take detours before completing the journey.
+Each journey can have one or more variants. A variant is a specific sequence of intermediate steps a user takes between the journey's start and end. Different users naturally take different paths — for example, some may skip optional steps while others take detours before completing the journey.
 
 [INSERT DIAGRAM HERE]
 

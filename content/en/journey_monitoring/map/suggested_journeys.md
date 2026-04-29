@@ -23,10 +23,11 @@ Journey Monitoring is in Preview.
 
 ## Overview
 
-Every 24 hours, Datadog analyzes the past 30 days of page views and clicks in your frontend applications and automatically generates suggested journeys. Each suggested journey includes:
+Every Wednesday midnight UTC, Datadog analyzes the previous 30 days of page views and clicks in your frontend applications and automatically generates suggested journeys. Each suggested journey includes:
+- A journey name
+- A journey description
 - A start event
 - An end event
-- A journey description
 
 Suggested journeys are starting points to create new journeys. Clicking on a suggested journey from the [map][1] or catalog will take you to the journey creation page. The start event, end event, and description will be automatically populated from the suggestion.
 
