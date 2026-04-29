@@ -83,7 +83,7 @@ A typical test follows this pattern:
 
 1. Build a map of flag keys to variants in your test setup.
 2. Register an `InMemoryProvider` with that map through the OpenFeature API.
-3. Units under test use OpenFeature Client backed by the `InMemoryProvider` returning the flag assignments configured at test setup
+3. Call the OpenFeature client in the units being tested. The `InMemoryProvider` returns the flag assignments configured at test setup.
 4. Reset the provider in test teardown to avoid cross-test state leakage.
 
 See your language's SDK page (select from the top of this page) for a concrete test example.
