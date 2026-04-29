@@ -1,0 +1,65 @@
+---
+import ApiLayout from '../../../../layouts/ApiLayout.astro';
+import ApiEndpoint from '../../../../components/ApiEndpoint/ApiEndpoint.astro';
+import { getApiCategories, getCategoryBySlug } from '../../../../data/api/index';
+import { getEndpointsForCategory } from '../../../../data/api/endpoints';
+import { highlightEndpoints } from '../../../../data/api/highlight';
+import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/locale';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = () => {
+  const paths: ReturnType<GetStaticPaths> = [];
+  for (const lang of LOCALES) {
+    for (const cat of getApiCategories(lang)) {
+      paths.push({
+        params: {
+          lang: lang === 'en' ? undefined : lang,
+          category: cat.slug,
+        },
+      });
+    }
+  }
+  return paths;
+};
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+const slug = Astro.params.category;
+if (!slug || typeof slug !== 'string') {
+  return new Response(null, { status: 404 });
+}
+
+const categories = getApiCategories(lang);
+const current = getCategoryBySlug(slug, lang);
+if (!current) {
+  return new Response(null, { status: 404 });
+}
+
+const endpoints = getEndpointsForCategory(slug, lang);
+await highlightEndpoints(endpoints);
+---
+
+<ApiLayout
+  title={`${current.name} - Datadog API`}
+  categories={categories}
+  currentSlug={slug as string}
+  lang={lang}
+  breadcrumbs={[
+    { label: 'Docs', href: localizedHref(lang, '/') },
+    { label: 'API Reference', href: localizedHref(lang, '/api/latest/') },
+    { label: current.name },
+  ]}
+>
+  <h1>{current.name}</h1>
+  {current.description && (
+    <div set:html={current.description} />
+  )}
+  {endpoints.map((ep) => (
+    <ApiEndpoint data={JSON.stringify(ep)}>
+      <Fragment set:html={ep.description} />
+    </ApiEndpoint>
+  ))}
+</ApiLayout>

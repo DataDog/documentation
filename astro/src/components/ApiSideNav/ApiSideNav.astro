@@ -3,18 +3,20 @@ import type { ApiCategory } from '../../data/api/index';
 import styles from './ApiSideNav.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 import SearchBar from '../SearchBar/SearchBar';
+import { DEFAULT_LOCALE, localizedHref, type Locale } from '../../lib/locale';
 
 interface Props {
   categories: ApiCategory[];
   currentSlug?: string;
+  lang?: Locale;
 }
 
-const { categories, currentSlug } = Astro.props;
+const { categories, currentSlug, lang = DEFAULT_LOCALE } = Astro.props;
 const cl = classListFactory(styles);
 ---
 
 <nav class={cl('api-side-nav')}>
-  <a href="/" class={cl('api-side-nav__title')}>
+  <a href={localizedHref(lang, '/')} class={cl('api-side-nav__title')}>
     Datadog Docs&nbsp;&nbsp;<span class={cl('api-side-nav__title-api')}>API</span>
   </a>
   <div class={cl('api-side-nav__search')}>
@@ -23,7 +25,7 @@ const cl = classListFactory(styles);
   <ul class={cl('api-side-nav__list')}>
     {categories.map((cat) => {
       const isActive = cat.slug === currentSlug;
-      const categoryHref = `/api/latest/${cat.slug}/`;
+      const categoryHref = localizedHref(lang, `/api/latest/${cat.slug}/`);
       return (
         <li>
           <a

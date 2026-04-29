@@ -56,24 +56,27 @@ const blogHalves = splitHalves(blogItems);
 
 const year = new Date().getFullYear();
 
-// Language selector — English-only for now. When i18n lands, append alternates
-// to this array and the popup will reveal them automatically.
-const currentLang: LangCode = 'en';
-const availableLanguages: LangCode[] = ['en'];
+// Language selector — Astro's i18n routing handles the actual locale switch,
+// so each link is a real localized URL. The footer renders all supported
+// locales; the toolbar instance reuses the same Preact component.
+import { LOCALES, localizedHref, stripLocalePrefix } from '../../lib/locale';
+
+const { lang: footerLang, rest: footerLocaleless } = stripLocalePrefix(Astro.url.pathname);
+const currentLang: LangCode = footerLang;
 const translate = getTranslations(currentLang);
 const currentLangOption = {
   code: currentLang,
   primary: getNativeLabel(currentLang),
   secondary: translate(currentLang),
-  href: `/?lang_pref=${currentLang}`,
+  href: localizedHref(currentLang, footerLocaleless),
 };
-const alternates = availableLanguages
+const alternates = LOCALES
   .filter((c) => c !== currentLang)
   .map((code) => ({
     code,
     primary: getNativeLabel(code),
     secondary: translate(code),
-    href: `/${code}/?lang_pref=${code}`,
+    href: localizedHref(code, footerLocaleless),
   }));
 
 // Pre-resolve globe and caret SVGs for the language selector island.

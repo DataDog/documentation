@@ -1,0 +1,29 @@
+---
+import ApiLayout from '../../../../layouts/ApiLayout.astro';
+import { getApiCategories } from '../../../../data/api/index';
+import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/locale';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return LOCALES.map((lang) => ({
+    params: { lang: lang === 'en' ? undefined : lang },
+  }));
+};
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+const categories = getApiCategories(lang);
+---
+
+<ApiLayout
+  title="Datadog API Reference"
+  categories={categories}
+  lang={lang}
+  breadcrumbs={[{ label: 'Docs', href: localizedHref(lang, '/') }, { label: 'API Reference' }]}
+>
+  <h1>API Reference</h1>
+  <p>Welcome to the Datadog API Reference. Select a category from the navigation to get started.</p>
+</ApiLayout>

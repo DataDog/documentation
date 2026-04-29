@@ -1,0 +1,22 @@
+---
+import { LanguageSelector } from './LanguageSelector';
+import { LOCALES, localizedHref, stripLocalePrefix, type Locale } from '../../lib/locale';
+import { getNativeLabel } from '../../lib/languageNames';
+
+interface Props {
+  currentLang: Locale;
+  /** Pathname of the current page, e.g. `/api/latest/dashboards/`. */
+  pathname: string;
+}
+
+const { currentLang, pathname } = Astro.props;
+const { rest: pathWithoutLocale } = stripLocalePrefix(pathname);
+
+const options = LOCALES.map((code) => ({
+  code,
+  label: getNativeLabel(code),
+  href: localizedHref(code, pathWithoutLocale),
+}));
+---
+
+<LanguageSelector options={options} currentCode={currentLang} client:load />

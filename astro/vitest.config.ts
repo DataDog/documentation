@@ -8,6 +8,7 @@ export default getViteConfig({
       'src/components/**/*.test.ts',
       'src/utils/**/*.test.ts',
       'src/data/**/*.test.ts',
+      'src/lib/**/*.test.ts',
     ],
   },
 });

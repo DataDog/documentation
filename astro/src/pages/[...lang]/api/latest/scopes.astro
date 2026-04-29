@@ -1,11 +1,34 @@
 ---
-import ApiLayout from '../../../layouts/ApiLayout.astro';
-import { getApiCategories } from '../../../data/api/index';
+import ApiLayout from '../../../../layouts/ApiLayout.astro';
+import { getApiCategories } from '../../../../data/api/index';
+import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/locale';
+import type { GetStaticPaths } from 'astro';
 
-const categories = getApiCategories();
+export const getStaticPaths: GetStaticPaths = () => {
+  return LOCALES.map((lang) => ({
+    params: { lang: lang === 'en' ? undefined : lang },
+  }));
+};
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+const categories = getApiCategories(lang);
 ---
 
-<ApiLayout title="Authorization Scopes - Datadog API" categories={categories} currentSlug="scopes" breadcrumbs={[{ label: 'Docs', href: '/' }, { label: 'API Reference', href: '/api/latest/' }, { label: 'Authorization Scopes' }]}>
+<ApiLayout
+  title="Authorization Scopes - Datadog API"
+  categories={categories}
+  currentSlug="scopes"
+  lang={lang}
+  breadcrumbs={[
+    { label: 'Docs', href: localizedHref(lang, '/') },
+    { label: 'API Reference', href: localizedHref(lang, '/api/latest/') },
+    { label: 'Authorization Scopes' },
+  ]}
+>
   <h1>Authorization Scopes</h1>
 
   <h2>Authorization scopes for OAuth clients</h2>

@@ -6,6 +6,11 @@ import { visualizer } from 'rollup-plugin-visualizer';
 export default defineConfig({
   site: 'https://docs.datadoghq.com',
   integrations: [markdoc(), preact()],
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'fr', 'ja', 'ko', 'es'],
+    routing: { prefixDefaultLocale: false },
+  },
   vite: {
     plugins: [
       process.env.VISUALIZE && visualizer({
