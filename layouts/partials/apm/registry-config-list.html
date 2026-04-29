@@ -56,8 +56,9 @@
           <summary class="collapsible-header">
             <div class="header-content">
               <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
-              <div class="header-text">
-                <h3 class="header-text-inner">{{ $catTitle }} <small>({{ len $catConfigs }})</small></h3>
+              <div class="header-text flex-wrap">
+                <h3 class="header-text-inner me-1">{{ $catTitle }}</h3>
+                <small>({{ len $catConfigs }})</small>
               </div>
               <a class="registry-copy-link registry-copy-link--section" href="#registry-{{ $catId }}" title="Copy link" aria-label="Copy link to {{ $catTitle }}">{{ $linkIcon | safeHTML }}</a>
             </div>
@@ -173,8 +174,9 @@
                   <summary class="collapsible-header">
                     <div class="header-content">
                       <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
-                      <div class="header-text">
-                        <h4 class="header-text-inner">{{ $intName }} <small>({{ len $intConfigs }})</small></h4>
+                      <div class="header-text flex-wrap">
+                        <h4 class="header-text-inner me-1">{{ $intName }}</h4>
+                        <small>({{ len $intConfigs }})</small>
                       </div>
                       <a class="registry-copy-link registry-copy-link--section" href="#{{ $intAnchor }}" title="Copy link" aria-label="Copy link to {{ $intName }}">{{ $linkIcon | safeHTML }}</a>
                     </div>
@@ -216,8 +218,9 @@
         <summary class="collapsible-header">
           <div class="header-content">
             <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
-            <div class="header-text">
-              <h3 class="header-text-inner">Other <small>({{ len $otherConfigs }})</small></h3>
+            <div class="header-text flex-wrap">
+              <h3 class="header-text-inner me-1">Other</h3>
+              <small>({{ len $otherConfigs }})</small>
             </div>
             <a class="registry-copy-link registry-copy-link--section" href="#registry-other" title="Copy link" aria-label="Copy link to Other">{{ $linkIcon | safeHTML }}</a>
           </div>
