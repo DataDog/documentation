@@ -118,12 +118,12 @@ Mergers and acquisitions often create temporary multi-organization states. The a
 
 | Scenario | Organization topology |
 | :---- | :---- |
-| Does a regulation or contract require data to exist in a physically separate organization boundary? | Multi-organization |
-| Is cross-region data transfer prohibited for some of your telemetry? | Multi-organization |
-| Does your security policy require zero data co-mingling between teams, even with RBAC, Data Access Control, and Granular Access Control in place? | Multi-organization |
-| Do you serve external customers who need separate billing, data, and user pools? | Multi-organization (MSP) |
-| Are you integrating an acquired company that already has its own Datadog organization? | Temporary multi-organization |
-| None of the above? | Single organization |
+| A regulation or contract requires data to exist in a physically separate organization boundary. | Multi-organization |
+| Cross-region data transfer is prohibited for some of your telemetry. | Multi-organization |
+| Your security policy requires zero data co-mingling between teams, even with [RBAC][3], [Data Access Control][4], and [Granular Access Control][6] in place. | Multi-organization |
+| You serve external customers who need separate billing, data, and user pools. | Multi-organization (MSP) |
+| You're integrating an acquired company that already has its own Datadog organization. | Temporary multi-organization |
+| None of the above | Single organization |
 
 ### Compare org capabilities
 
