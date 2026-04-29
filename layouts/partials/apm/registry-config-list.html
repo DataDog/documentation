@@ -11,8 +11,6 @@
 {{- $lang := "" -}}
 {{- with .Page -}}
   {{- $lang = .Params.code_lang -}}
-{{- else -}}
-  {{- $lang = .Params.code_lang -}}
 {{- end -}}
 
 {{- $data := index site.Data.registry $lang -}}
