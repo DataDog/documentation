@@ -76,7 +76,7 @@ DatadogFlags.xcframework
 
 ## Initialize the SDK
 
-Initialize Datadog as early as possible in your app lifecycle—typically in `application(_:didFinishLaunchingWithOptions:)` (or with `@UIApplicationDelegateAdaptor` for SwiftUI apps). This ensures all feature flag evaluations and telemetry are captured correctly.
+Initialize Datadog as early as possible in your app lifecycle—typically in `application(_:didFinishLaunchingWithOptions:)` (or with `@UIApplicationDelegateAdaptor` for SwiftUI apps). This ensures all feature flag evaluations and telemetry are captured correctly. To create a client token, see [Client tokens][2].
 
 ```swift
 import DatadogCore
@@ -464,3 +464,5 @@ final class CheckoutFlagTests: XCTestCase {
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[2]: /account_management/api-app-keys/#client-tokens

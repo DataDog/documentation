@@ -78,7 +78,7 @@ dependencies {
 
 ## Initialize the SDK
 
-Initialize Datadog as early as possible in your app lifecycle—typically in your `Application` class's `onCreate()` method. This helps ensure all feature flag evaluations and telemetry are captured correctly.
+Initialize Datadog as early as possible in your app lifecycle—typically in your `Application` class's `onCreate()` method. This helps ensure all feature flag evaluations and telemetry are captured correctly. To create a client token, see [Client tokens][2].
 
 ```kotlin
 val configuration = Configuration.Builder(
@@ -433,7 +433,7 @@ This table highlights key differences between the OpenFeature and `FlagsClient` 
 
 ## Testing
 
-You can test against a dedicated Datadog test environment with the real Datadog provider, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The upstream OpenFeature Kotlin SDK does not ship an `InMemoryProvider`, so tests use a small custom `FeatureProvider`. The example below replaces `OpenFeatureAPI`'s provider — if your production code uses the Datadog `FlagsClient` wrapper directly, your test should assert through the same `OpenFeatureAPI` client the wrapper uses, not `FlagsClient`.
+You can test against a dedicated Datadog test environment with the real Datadog provider, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The upstream OpenFeature Kotlin SDK does not ship an [`InMemoryProvider`][3], so tests use a small custom `FeatureProvider`. The example below replaces `OpenFeatureAPI`'s provider — if your production code uses the Datadog `FlagsClient` wrapper directly, your test should assert through the same `OpenFeatureAPI` client the wrapper uses, not `FlagsClient`.
 
 Add `kotlinx-coroutines-test` to your test configuration (the SDK's `initialize` is a `suspend` function):
 
@@ -503,4 +503,5 @@ class CheckoutFlagsTest {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/
-[2]: https://github.com/open-feature/kotlin-sdk/pull/226
+[2]: /account_management/api-app-keys/#client-tokens
+[3]: https://github.com/open-feature/kotlin-sdk/pull/226

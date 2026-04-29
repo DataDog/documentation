@@ -37,9 +37,9 @@ Threat Detection is supported for the following deployment types:
 
 ### Supported Java versions
 
-The Datadog Java Tracing library is open source. View the [GitHub repository][2] for more information.
+The Datadog Java SDK is open source. View the [GitHub repository][2] for more information.
 
-The Datadog Java Tracing Library supports Java 8 and newer versions. For optimal performance and feature support, we recommend using the latest LTS version of Java.
+The Datadog Java SDK supports Java 8 and newer versions. For optimal performance and feature support, we recommend using the latest LTS version of Java.
 
 You must be running Datadog Agent v7.41.1+ for App and API Protection features.
 

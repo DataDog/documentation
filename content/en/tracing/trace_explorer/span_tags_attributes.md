@@ -25,7 +25,7 @@ Reserved attributes are a subset of span attributes that are present on every sp
 
 ### Span attributes
 
-Span attributes are the content of your span. These are collected out-of-the-box in tracing libraries using automatic instrumentation, manually using custom instrumentation, or remapped in the Datadog backend based on source attributes (see [peer attributes][11], remapped from some source attributes). To search on a specific span attribute, you must prepend an `@` character at the beginning of the attribute key.
+Span attributes are the content of your span. These are collected out-of-the-box in SDKs using automatic instrumentation, manually using custom instrumentation, or remapped in the Datadog backend based on source attributes (see [peer attributes][11], remapped from some source attributes). To search on a specific span attribute, you must prepend an `@` character at the beginning of the attribute key.
 
 For instance, to find spans representing calls to a `users` table from a postgres database, use the following query: `@peer.db.name:users @peer.db.system:postgres`.
 

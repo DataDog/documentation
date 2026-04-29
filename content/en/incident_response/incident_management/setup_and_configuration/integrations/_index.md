@@ -3,6 +3,7 @@ title: Incident Integrations
 description: "Learn how to connect Datadog Incident Management with third-party tools to automate workflows, sync communications, and streamline incident response."
 aliases:
 - /service_management/incident_management/integrations/
+- /service_management/incident_management/incident_settings/integrations/
 - /incident_response/incident_management/integrations
 ---
 

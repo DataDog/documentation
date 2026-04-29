@@ -15,14 +15,15 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
 
 ## Prerequisites
 
 Before setting up the Node.js Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
-- **Datadog Node.js tracer** `dd-trace` version 5.80.0 or later
+- **Datadog [API key][3]** configured on the Agent
+- **Datadog Node.js SDK** `dd-trace` version 5.80.0 or later
 - **@openfeature/server-sdk** version ~1.20.0
 
 ## Installing and initializing
@@ -301,3 +302,4 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: https://openfeature.dev/
+[3]: /account_management/api-app-keys/#api-keys
