@@ -47,7 +47,7 @@ This command installs both the core Datadog Agent package and the DDOT Collector
 
 **Note**: For Agent v7.78+, if the Datadog Agent is already installed on the host, you can install the DDOT Collector separately. Run from an **elevated PowerShell session**:
 ```powershell
-& "C:\Program Files\Datadog\Datadog Agent\bin\datadog-agent.exe" otel install
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" otel install
 ```
 
 ### Validation

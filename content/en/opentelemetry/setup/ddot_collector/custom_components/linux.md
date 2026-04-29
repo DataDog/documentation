@@ -157,9 +157,26 @@ The tool replaces the `otel-agent` binary inside the OCI package and pushes the 
 
 After the build completes, verify the custom `otel-agent` binary includes your additional components by installing the custom DDOT Collector package.
 
-1. If the DDOT Collector is not already installed on the host, [install the DDOT Collector][8] first.
+1. Prepare the host:
+   - If the Datadog Agent is **not** installed, install the Datadog Agent first:
+     ```shell
+     DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+     ```
+   - If the DDOT Collector is **already** installed, remove the existing package before proceeding:
+     ```shell
+     sudo datadog-agent otel remove
+     ```
 
-2. Edit the OpenTelemetry configuration file at `/etc/datadog-agent/otel-config.yaml` to include the additional components.
+2. Install the custom DDOT Collector package:
+   ```shell
+   sudo datadog-agent otel install --registry <YOUR-REGISTRY>
+   ```
+   If your registry requires authentication, set `DD_INSTALLER_REGISTRY_AUTH` inline to the appropriate value for your registry. Supported values:
+   - `gcr`: Google Cloud (GCR / Artifact Registry)
+   - `password`: Username and password (also set `DD_INSTALLER_REGISTRY_USERNAME` and `DD_INSTALLER_REGISTRY_PASSWORD`)
+   - `dockerconfig`: Docker config file (default, uses `~/.docker/config.json`)
+
+3. Edit the OpenTelemetry configuration file at `/etc/datadog-agent/otel-config.yaml` to include the additional components.
    The following example configures an additional [metrics transform processor][7]:
    ```yaml
    receivers:
@@ -216,19 +233,10 @@ After the build completes, verify the custom `otel-agent` binary includes your a
          exporters: [datadog]
    ```
 
-3. Remove the existing DDOT Collector package before proceeding:
+4. Restart the Datadog Agent to apply the configuration:
    ```shell
-   sudo datadog-agent otel remove
+   sudo systemctl restart datadog-agent
    ```
-
-4. Install the custom DDOT Collector package using the following command:
-   ```shell
-   sudo datadog-agent otel install --registry <YOUR-REGISTRY>
-   ```
-   If your registry requires authentication, set `DD_INSTALLER_REGISTRY_AUTH` inline to the appropriate value for your registry. Supported values:
-   - `gcr`: Google Cloud (GCR / Artifact Registry)
-   - `password`: Username and password (also set `DD_INSTALLER_REGISTRY_USERNAME` and `DD_INSTALLER_REGISTRY_PASSWORD`)
-   - `dockerconfig`: Docker config file (default, uses `~/.docker/config.json`)
 
 5. If the DDOT Collector (Agent) starts, then the build process was successful.
 

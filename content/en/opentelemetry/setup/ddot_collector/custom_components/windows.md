@@ -155,11 +155,31 @@ The tool cross-compiles the Windows binary, replaces the `otel-agent.exe` binary
 
 ## Install the DDOT Collector (Agent) package
 
-After the build completes, verify the custom `otel-agent.exe` binary includes your additional components by installing the custom DDOT Collector package.
+After the build completes, verify the custom `otel-agent.exe` binary includes your additional components by installing the custom DDOT Collector package. Run all commands from an **elevated PowerShell session**.
 
-1. If the DDOT Collector is not already installed on the host, [install the DDOT Collector][8] first.
+1. Prepare the host:
+   - If the Datadog Agent is **not** installed, install the Datadog Agent first:
+     ```powershell
+     $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="{{< region-param key="dd_site" >}}"'
+     if ($p.ExitCode -ne 0) {
+       Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
+     }
+     ```
+   - If the DDOT Collector is **already** installed, remove the existing package before proceeding:
+     ```powershell
+     & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" otel remove
+     ```
 
-2. Edit the OpenTelemetry configuration file at `C:\ProgramData\Datadog\otel-config.yaml` to include the additional components.
+2. Install the custom DDOT Collector package:
+   ```powershell
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" otel install --registry <YOUR-REGISTRY>
+   ```
+   If your registry requires authentication, set `DD_INSTALLER_REGISTRY_AUTH` to the appropriate value for your registry. Supported values:
+   - `gcr`: Google Cloud (GCR / Artifact Registry)
+   - `password`: Username and password (also set `DD_INSTALLER_REGISTRY_USERNAME` and `DD_INSTALLER_REGISTRY_PASSWORD`)
+   - `dockerconfig`: Docker config file (default, uses `~/.docker/config.json`)
+
+3. Edit the OpenTelemetry configuration file at `C:\ProgramData\Datadog\otel-config.yaml` to include the additional components.
    The following example configures an additional [metrics transform processor][7]:
    ```yaml
    receivers:
@@ -216,19 +236,10 @@ After the build completes, verify the custom `otel-agent.exe` binary includes yo
          exporters: [datadog]
    ```
 
-3. Remove the existing DDOT Collector package before proceeding. Run from an **elevated PowerShell session**:
+4. Restart the Datadog Agent to apply the configuration:
    ```powershell
-   & "C:\Program Files\Datadog\Datadog Agent\bin\datadog-agent.exe" otel remove
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
    ```
-
-4. Install the custom DDOT Collector package using the following command. Run from an **elevated PowerShell session**:
-   ```powershell
-   & "C:\Program Files\Datadog\Datadog Agent\bin\datadog-agent.exe" otel install --registry <YOUR-REGISTRY>
-   ```
-   If your registry requires authentication, set `DD_INSTALLER_REGISTRY_AUTH` to the appropriate value for your registry. Supported values:
-   - `gcr`: Google Cloud (GCR / Artifact Registry)
-   - `password`: Username and password (also set `DD_INSTALLER_REGISTRY_USERNAME` and `DD_INSTALLER_REGISTRY_PASSWORD`)
-   - `dockerconfig`: Docker config file (default, uses `~/.docker/config.json`)
 
 5. If the DDOT Collector (Agent) starts, then the build process was successful.
 
