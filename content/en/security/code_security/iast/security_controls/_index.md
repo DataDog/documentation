@@ -65,7 +65,7 @@ The injection-related vulnerabilities are:
 
 ## Compatibility requirements
 
-This feature is available starting from the following versions of each language's tracing library:
+This feature is available starting from the following versions of each language's SDK:
 
 * **Java**: 1.45.0+
 * **.NET**: 3.10.0+

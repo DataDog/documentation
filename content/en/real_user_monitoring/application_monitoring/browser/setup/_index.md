@@ -7,6 +7,10 @@ further_reading:
 - link: '/real_user_monitoring/application_monitoring/browser/'
   tag: 'Documentation'
   text: 'RUM Browser Monitoring'
+- link: "https://learn.datadoghq.com/courses/configure-rum-javascript"
+  tag: "Learning Center"
+  text: "Configure Real User Monitoring (RUM) for JavaScript web applications"
+
 ---
 
 {{< site-region region="gov" >}}

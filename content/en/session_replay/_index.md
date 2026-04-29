@@ -24,6 +24,10 @@ further_reading:
 - link: '/integrations/content_security_policy_logs'
   tag: 'Documentation'
   text: 'Detect and aggregate CSP violations with Datadog'
+- link: "https://learn.datadoghq.com/courses/intro-to-rum"
+  tag: "Learning Center"
+  text: "Intro to Real User Monitoring (RUM)"
+
 ---
 
 ## Overview
@@ -59,6 +63,21 @@ Summaries and smart chapters give you context about what happened in a session b
 {{< img src="real_user_monitoring/session_replay/session-replay-smart-chapters.png" alt="Smart chapter dropdown in the Session Replay player showing labeled stages of the user journey" style="width:100%;" >}}
 
 AI summaries and smart chapters are generated for sessions with at least four user actions and a duration of at least 45 seconds.
+
+## Comments
+
+Session Replay comments allow your team to collaborate on bugs, usability issues, and other observations directly within a replay.
+
+With comments, you can:
+
+- Add a comment at a specific timestamp on the replay timeline. Comment markers appear on the timeline and the **Comments** tab.
+- @mention a teammate or team in a comment. Tagged users receive an email notification with a link that opens the replay at the commented timestamp.
+- Copy a link to any comment and share it externally. The link opens the replay at the annotated moment with that comment thread open.
+- Reply in-thread to collaborate within a replay, and edit or delete your own comments as needed.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-comments.png" alt="Session Replay player with timestamped comments on the timeline and a Comments tab open with threaded replies." style="width:100%;" >}}
+
+To find replays that need your attention, use the **All mentions to me** and **Commented replays** default playlists. See [Session Replay Playlists][7] for details.
 
 ## Extend data retention
 

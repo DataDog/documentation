@@ -4,6 +4,9 @@ further_reading:
 - link: /security/ai_guard/onboarding/
   tag: Documentation
   text: Get Started with AI Guard
+- link: /security/ai_guard/signals/
+  tag: Documentation
+  text: AI Guard Security Signals
 - link: https://www.datadoghq.com/blog/ai-guard/
   tag: Blog
   text: Protect agentic AI applications with Datadog AI Guard

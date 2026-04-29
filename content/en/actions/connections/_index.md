@@ -8,6 +8,12 @@ further_reading:
 - link: "/service_management/app_builder/"
   tag: "Documentation"
   text: "App Builder documentation"
+- link: "https://learn.datadoghq.com/courses/automating-meaningful-actions"
+  tag: "Learning Center"
+  text: "Automating Meaningful Actions with Datadog Workflow Automation"
+- link: "https://learn.datadoghq.com/courses/app-builder-integration"
+  tag: "Learning Center"
+  text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
 aliases:
 - /workflows/connections
 - /workflows/setup

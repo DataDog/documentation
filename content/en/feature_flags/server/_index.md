@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog APM tracer and use Remote Configuration to receive flag updates in real time.
+Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog SDK and use Remote Configuration to receive flag updates in real time.
 
 This guide covers the common setup required for all server-side SDKs, including Agent configuration and application environment variables. Select your language or framework to view SDK-specific setup instructions:
 
@@ -56,7 +56,7 @@ DD_VERSION=<YOUR_APP_VERSION>
 DD_AGENT_HOST=localhost
 DD_TRACE_AGENT_PORT=8126
 
-# Enable Remote Configuration in the tracer
+# Enable Remote Configuration in the SDK
 DD_REMOTE_CONFIG_ENABLED=true
 
 # Enable the feature flagging provider (required for most SDKs)

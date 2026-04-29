@@ -34,6 +34,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/flex-logs/"
   tag: "Blog"
   text: "Store and analyze high-volume logs efficiently with Flex Logs"
+- link: "https://learn.datadoghq.com/courses/log-indexes"
+  tag: "Learning Center"
+  text: "Manage and Monitor Indexed Log Volumes"
+
 ---
 
 ## Overview
