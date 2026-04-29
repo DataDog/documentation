@@ -5406,26 +5406,31 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_prompt_optimization
       weight: 506
+    - name: Playground
+      url: llm_observability/playground
+      parent: llm_obs
+      identifier: llm_obs_playground
+      weight: 6
     - name: MCP Server
       url: llm_observability/mcp_server
       parent: llm_obs
       identifier: llm_obs_mcp_server
-      weight: 6
+      weight: 7
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
-      weight: 7
+      weight: 8
     - name: Terms and Concepts
       url: llm_observability/terms/
       parent: llm_obs
       identifier: llm_obs_terms
-      weight: 8
+      weight: 9
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 9
+      weight: 10
     - name: GPU Monitoring
       url: gpu_monitoring/
       pre: gpu-monitoring-wui
