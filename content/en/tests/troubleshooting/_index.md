@@ -177,7 +177,7 @@ When retrying a flaky test multiple times within a short span of time (less than
 
 ## Vitest test duration overhead is high
 
-Wall-clock time is often dominated by Vitest's default suite isolation (`isolate: true`) and repeated ESM instrumentation startup, not only by how long the tests themselves take. For that interaction and when it matters most, read [Vitest's test duration overhead][18] in the JavaScript test setup guide.
+High wall-clock time can show up when you have many small, fast suites: Vitest uses suite isolation by default (`isolate: true`), so ESM instrumentation startup repeats for every test file and that fixed cost adds up across files. Read [Vitest's test duration overhead][18] in the JavaScript test setup guide for the full explanation.
 
 To reduce overhead, pass `--no-isolate` to your test command or set `isolate: false` in your `vitest.config` file. For Vitest's reference on the setting, see the [`isolate` option][17].
 
