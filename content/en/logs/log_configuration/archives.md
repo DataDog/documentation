@@ -77,7 +77,7 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 
 ### Create a storage bucket
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Sending logs to an archive is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
 {{< /site-region >}}
 
@@ -86,7 +86,7 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to.
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger"> Datadog Archives do not support bucket names with dots (.) when integrated with an S3 FIPS endpoint which relies on virtual-host style addressing. Learn more from AWS documentation. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
@@ -206,7 +206,7 @@ Navigate to the [Log Archiving & Forwarding page][6] and select **Add a new arch
 * Only Datadog users with the [`logs_write_archive` permission][5] can complete this and the following step.
 * Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][7], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
 * If your bucket restricts network access to specified IPs, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
-* For the **US1-FED site**, you can configure Datadog to send logs to a destination outside the Datadog GovCloud environment. Datadog is not responsible for any logs that leave the Datadog GovCloud environment. Additionally, Datadog is not responsible for any obligations or requirements you might have concerning FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency, or similar regulations applicable to these logs after they leave the GovCloud environment.
+* For the **US1-FED and US2-FED sites**, you can configure Datadog to send logs to a destination outside the Datadog GovCloud environment. Datadog is not responsible for any logs that leave the Datadog GovCloud environment. Additionally, Datadog is not responsible for any obligations or requirements you might have concerning FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency, or similar regulations applicable to these logs after they leave the GovCloud environment.
 
 | Service                  | Steps                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
