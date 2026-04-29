@@ -51,7 +51,7 @@
       {{/* Skip empty categories */}}
       {{- if gt (len $catConfigs) 0 -}}
         <details class="collapsible-section" id="registry-{{ $catId }}">
-          <summary class="collapsible-header" tabindex="0" aria-expanded="false">
+          <summary class="collapsible-header">
             <div class="header-content">
               <div class="header-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
@@ -139,7 +139,7 @@
                     {{- $kindIntNames = sort $kindIntNames -}}
                     {{- if ge (len $kindIntNames) 5 -}}
                       <details class="collapsible-section" id="{{ $kindAnchor }}">
-                        <summary class="collapsible-header" tabindex="0" aria-expanded="false">
+                        <summary class="collapsible-header">
                           <div class="header-content">
                             <div class="header-icon">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
@@ -176,7 +176,7 @@
                 {{- $intAnchor := printf "integration-%s" (. | lower | replaceRE "[^a-z0-9]+" "-") -}}
                 {{- $intConfigs := index $byIntegration $intName -}}
                 <details class="collapsible-section" id="{{ $intAnchor }}">
-                  <summary class="collapsible-header" tabindex="0" aria-expanded="false">
+                  <summary class="collapsible-header">
                     <div class="header-content">
                       <div class="header-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
@@ -223,7 +223,7 @@
 
     {{- if gt (len $otherConfigs) 0 -}}
       <details class="collapsible-section" id="registry-other">
-        <summary class="collapsible-header" tabindex="0" aria-expanded="false">
+        <summary class="collapsible-header">
           <div class="header-content">
             <div class="header-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
