@@ -16,7 +16,7 @@ The OpenLineage validation DAG validates your Airflow OpenLineage configuration 
 
 Run this DAG when:
 
-- Airflow jobs do not appear in the [Data Observability: Jobs Monitoring][1] page after completing setup.
+- Airflow jobs do not appear on the [Data Observability: Jobs Monitoring][1] page after you complete setup.
 - You want to verify your configuration before running production workloads.
 
 The DAG checks the following:
@@ -36,10 +36,10 @@ The DAG checks the following:
 
 ### Prerequisites
 
-- Access to your Airflow DAGs directory (local path or cloud storage bucket for MWAA)
-- Airflow scheduler and worker pods or processes must be running
+- Access to your Airflow DAGs directory (a local path, or a cloud storage bucket for Amazon MWAA)
+- A running Airflow scheduler and workers (pods or processes)
 
-### Step 1: Add the DAG file
+### Add the DAG file
 
 Save the following code as `openlineage_preflight_check_dag.py` in your Airflow DAGs directory. For Amazon MWAA, upload the file to the S3 DAGs folder configured for your environment.
 
@@ -821,22 +821,22 @@ def check_configuration_conflicts():
     return conflicts
 ```
 
-### Step 2: Trigger the DAG
+### Trigger the DAG
 
 After the Airflow scheduler picks up the new file, trigger the DAG manually:
 
 1. In the Airflow UI, navigate to **DAGs** and find `openlineage_preflight_check_dag`.
 2. Toggle the DAG on if it is paused.
-3. Click the **Trigger DAG** button (play icon).
+3. Click **Trigger DAG** (play icon).
 
-### Step 3: View the logs
+### View the logs
 
 1. In the Airflow UI, navigate to **DAGs > openlineage_preflight_check_dag**.
 2. Click the most recent DAG run.
 3. Click the **validate_setup** task.
 4. Select the **Logs** tab.
 
-## Read the output
+## Understand the output
 
 The DAG logs two sections: an environment summary printed at the start, and a validation summary printed at the end.
 
@@ -855,13 +855,13 @@ This Airflow installation is running on Amazon MWAA
 
 ### Validation summary
 
-The validation summary appears at the end of the task log. Each line starts with `✓`, `✗`, or `!`:
+The validation summary appears at the end of the task log. Each line starts with one of three symbols:
 
-- `✓` — check passed
-- `✗` — check failed (events are not sent to Datadog)
-- `!` — warning (may indicate a configuration issue)
+- `✓`: Check passed.
+- `✗`: Check failed (events are not sent to Datadog).
+- `!`: Warning (may indicate a configuration issue).
 
-A healthy setup looks like this:
+The following output indicates a healthy setup:
 
 ```
 ===== OpenLineage Validation Summary =====
@@ -882,13 +882,13 @@ Use this table to resolve common failures:
 
 | Log message | Cause | Resolution |
 |---|---|---|
-| `✗ OpenLineage not installed properly` | The OpenLineage package is missing or corrupted | Confirm `apache-airflow-providers-openlineage` is included in your Airflow installation. For Amazon MWAA, see [Upgrade OpenLineage provider on Amazon MWAA][3]. |
-| `✗ OpenLineage is disabled` | `AIRFLOW__OPENLINEAGE__DISABLED=true` or `OPENLINEAGE_DISABLED=true` is set, or required transport configuration is missing | Remove or set the disable variable to `false`, and verify that the transport is configured properly |
-| `✗ OpenLineage listener is not accessible` | The provider plugin cannot be imported | Confirm the package is installed on **both scheduler and worker** pods/processes |
-| `✗ No transport configured` | No transport environment variables are set | Follow the [Airflow setup guide][2] to configure a transport |
-| `✗ Transport Type: Console (won't send events to Datadog)` | Transport is set to `console` | Change the transport to `datadog` or `http` pointing to the Datadog intake URL |
-| `✗ Network connectivity check failed` | Airflow workers cannot reach the Datadog intake endpoint | Check firewall or network policies; confirm the URL and port 443 are accessible |
-| `! Configuration conflicts detected` | Multiple transport or config file sources are active | Remove duplicate configurations and keep one authoritative source |
+| `✗ OpenLineage not installed properly` | The OpenLineage package is missing or corrupted. | Confirm `apache-airflow-providers-openlineage` is included in your Airflow installation. For Amazon MWAA, see [Upgrade OpenLineage provider on Amazon MWAA][3]. |
+| `✗ OpenLineage is disabled` | `AIRFLOW__OPENLINEAGE__DISABLED=true` or `OPENLINEAGE_DISABLED=true` is set, or required transport configuration is missing. | Remove or set the disable variable to `false`, and verify that the transport is configured properly. |
+| `✗ OpenLineage listener is not accessible` | The provider plugin cannot be imported. | Confirm the package is installed on **both scheduler and worker** pods/processes. |
+| `✗ No transport configured` | No transport environment variables are set. | Follow the [Airflow setup guide][2] to configure a transport. |
+| `✗ Transport Type: Console (won't send events to Datadog)` | Transport is set to `console`. | Change the transport to `datadog` or `http` pointing to the Datadog intake URL. |
+| `✗ Network connectivity check failed` | Airflow workers cannot reach the Datadog intake endpoint. | Check firewall or network policies; confirm the URL and port 443 are accessible. |
+| `! Configuration conflicts detected` | Multiple transport or config file sources are active. | Remove duplicate configurations and keep one authoritative source. |
 
 **Note**: If `✗ OpenLineage listener is not accessible` appears together with package installation failures, the package is likely installed only on the scheduler and not on the workers. OpenLineage requires the provider on both.
 
@@ -903,7 +903,7 @@ Installed version: `1.8.0`, Latest version: `2.7.3`
 
 Consider upgrading to the latest version to benefit from bug fixes and improved Datadog compatibility. For Amazon MWAA, see [Upgrade OpenLineage provider on Amazon MWAA][3] for version-specific instructions.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
