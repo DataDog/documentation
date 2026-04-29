@@ -275,7 +275,7 @@ export default {
     eu: 'N/A',
     ap1: 'ap-northeast-1',
     ap2: 'ap-southeast-2',
-    gov2: 'N/A',
+    gov2: 'us-gov-west-1',
     gov: 'N/A'
   },
   aws_private_link_cross_region: {
