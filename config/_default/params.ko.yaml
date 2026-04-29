@@ -12,5 +12,5 @@ site_name: Datadog 인프라스트럭처 및 응용 프로그램 모니터링
 site_support_banner: 이 제품은 선택한 <a href="/getting_started/site">Datadog 사이트</a>에서 지원되지
   않습니다.
 us2_fed_integration_banner_availability: "To find out if this integration is available in your organization, see your <a href=\"https://app.datadoghq.com/integrations\">Datadog Integrations</a> page or ask your organization administrator."
-us2_fed_integration_banner_exception: "If you want to initiate an exception request to enable this integration for your organization, please email <a href=\"mailto:support@ddog-gov.com\">support@ddog-gov.com</a>."
+us2_fed_integration_banner_exception: "To initiate an exception request to enable this integration for your organization, email <a href=\"mailto:support@ddog-gov.com\">support@ddog-gov.com</a>."
 translate_status_banner: 이 번역은 최신 버전이 아닙니다. 최신 영문 버전을 보려면 여기를 클릭하세요.
