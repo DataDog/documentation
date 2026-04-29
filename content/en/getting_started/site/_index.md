@@ -59,7 +59,7 @@ Different Datadog sites may support different functionalities depending on the i
 
 For example, to see the documentation for the Datadog for Government sites, select **US1-FED** or **US2-FED**.
 
-## Access the Datadog for Government site
+## Access the Datadog for Government sites
 
 ### US1-FED
 
