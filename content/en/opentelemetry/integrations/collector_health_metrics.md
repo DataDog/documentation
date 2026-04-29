@@ -12,9 +12,9 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/collector_health_metrics.png" alt="OpenTelemetry Collector health metrics dashboard" style="width:100%;" >}}
 
-The OpenTelemetry Collector exposes its own internal telemetry as metrics, which you can collect and send to Datadog to monitor Collector health and pipeline throughput.
+The OpenTelemetry Collector exposes internal telemetry as metrics. You can collect these metrics and send them to Datadog to monitor Collector health and pipeline throughput.
 
-You can collect Collector health metrics two ways:
+You can collect Collector health metrics in two ways:
 
 - **Prometheus**: Scrape the Collector's internal Prometheus endpoint with the [Prometheus receiver][1] and forward the metrics through a metrics pipeline to the Datadog Exporter.
 - **OTLP**: Configure the Collector's internal telemetry to export metrics directly to the [Datadog OTLP metrics intake endpoint][4] over OTLP HTTP.
@@ -24,7 +24,7 @@ You can collect Collector health metrics two ways:
 {{< tabs >}}
 {{% tab "Prometheus" %}}
 
-Configure the Collector to expose its internal metrics on a Prometheus pull endpoint, then scrape that endpoint with the [Prometheus receiver][101] and route the data through a metrics pipeline to the [Datadog Exporter][102].
+Configure the Collector to expose its internal metrics on a Prometheus pull endpoint. Then scrape that endpoint with the [Prometheus receiver][101] and route the data through a metrics pipeline to the [Datadog Exporter][102].
 
 ```yaml
 receivers:
@@ -86,7 +86,7 @@ The `service.telemetry.metrics` block exposes the Collector's internal metrics o
 : List of metric readers. At least one is required when `level` is not `none`. Each reader is either a `pull` reader (Prometheus) or a `periodic` reader (OTLP, console).
 
 `views`
-: Optional list of [SDK views][109] to drop, rename, filter attributes on, or change the aggregation of specific instruments. Only available when `level: detailed`.
+: Optional list of [SDK views][109] that drop, rename, filter, or re-aggregate specific instruments. Only available when `level: detailed`.
 
 **`pull.exporter.prometheus` options:**
 
@@ -103,13 +103,13 @@ The `service.telemetry.metrics` block exposes the Collector's internal metrics o
 : When `true`, suppresses the `otel_scope_info` metric and `otel_scope_*` labels.
 
 `with_resource_constant_labels.included` / `with_resource_constant_labels.excluded`
-: Allow- and deny-lists of resource attributes to copy onto every exported metric as constant labels.
+: Allowlist and denylist of resource attributes to copy onto every exported metric as constant labels.
 
 #### Optional: tag with resource attributes
 
 Use `service.telemetry.resource` to attach resource attributes (such as `k8s.cluster.name`, `service.instance.id`, or any [Datadog-mapped semantic convention][103]) to all telemetry the Collector emits about itself.
 
-The legacy inline map format is concise:
+Use the legacy inline map format for a concise definition:
 
 ```yaml
 service:
@@ -139,7 +139,7 @@ service:
           excluded: []
 ```
 
-`detectors.attributes.included` and `detectors.attributes.excluded` allow- or deny-list attributes contributed by SDK-side resource detectors. To set an attribute to a null value (suppressing a default such as `service.version`), specify it with a null value in the legacy inline format.
+Use `detectors.attributes.included` and `detectors.attributes.excluded` to allowlist or denylist attributes contributed by SDK-side resource detectors. To suppress a default attribute such as `service.version`, specify it with a null value in the legacy inline format.
 
 These attributes are mapped to Datadog tags and host metadata. For the full list of supported mappings, see [OpenTelemetry Semantic Conventions and Datadog Conventions][103] and [Mapping OpenTelemetry Semantic Conventions to Hostnames][104].
 
