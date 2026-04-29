@@ -34,6 +34,8 @@ Data security considerations
 
 ## Grant the Agent access
 
+<div class="alert alert-info">Manage your databases with Terraform? See <a href="/database_monitoring/setup_postgres/grant_agent_access_terraform/">Grant the Agent Access with Terraform</a> for the same setup expressed as Terraform resources.</div>
+
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
 The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Supabase is replicated. Choose a Supabase database on the database server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
