@@ -257,7 +257,7 @@ Flag details may help you debug evaluation behavior and understand why a user re
 
 The examples above use Datadog's `FlagsClient` API directly. If you prefer the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature provider for iOS that wraps `FlagsClient` and exposes it through `OpenFeatureAPI.shared`. The same flag data is served through either surface; pick whichever API fits your app.
 
-<div class="alert alert-warning">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift"><code>dd-openfeature-provider-swift</code></a>) is currently in development and not yet recommended for production use. Use the <code>FlagsClient</code> API shown above for production workloads; use this section to prototype OpenFeature integrations or to structure tests around the OpenFeature API.</div>
+<div class="alert alert-warning">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift"><code>dd-openfeature-provider-swift</code></a>) is in development and not recommended for production use. Use the <code>FlagsClient</code> API shown above for production workloads; use this section to prototype OpenFeature integrations or to structure tests around the OpenFeature API.</div>
 
 ### Install the OpenFeature provider
 
