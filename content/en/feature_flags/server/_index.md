@@ -23,9 +23,9 @@ This guide covers the common setup required for all server-side SDKs, including 
 Before setting up server-side feature flags, ensure you have:
 
 - **Datadog Agent 7.55 or later** installed and running
-- **Datadog API key** configured
-- **APM tracing** enabled in your application
-- **Remote Configuration** enabled for your organization. Verify this in [Organization Settings][2].
+- **Datadog [API key][2]** configured
+- **APM tracing** [enabled in your application][4]
+- **Remote Configuration** enabled for your organization. Verify this in [Organization Settings][3].
 
 ## Agent configuration
 
@@ -104,4 +104,6 @@ const evaluationContext = {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /remote_configuration
-[2]: https://app.datadoghq.com/organization-settings/remote-config
+[2]: /account_management/api-app-keys/#api-keys
+[3]: https://app.datadoghq.com/organization-settings/remote-config
+[4]: /tracing/guide/#tutorials-enabling-tracing

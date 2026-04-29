@@ -22,6 +22,7 @@ This page describes how to instrument your Ruby application with the Datadog Fea
 Before setting up the Ruby Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][1] enabled
+- **Datadog [API key][4]** configured on the Agent
 - **Datadog Ruby SDK** `datadog` version 2.23.0 or later
 - **OpenFeature Ruby SDK** `openfeature-sdk` version 0.4.1 or later
 - **Service and environment configured** - Feature flags are targeted by service and environment
@@ -241,3 +242,4 @@ Look for messages about:
 [1]: /agent/remote_config/
 [2]: /tracing/trace_collection/compatibility/ruby/#supported-operating-systems
 [3]: https://openfeature.dev/
+[4]: /account_management/api-app-keys/#api-keys

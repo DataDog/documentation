@@ -4454,16 +4454,21 @@ menu:
       parent: tracing_services
       identifier: tracing_service_remapping_rules
       weight: 908
+    - name: Tag Enrichment
+      url: tracing/services/tag_enrichment
+      parent: tracing_services
+      identifier: tracing_tag_enrichment
+      weight: 909
     - name: Integration Override Removal
       url: tracing/services/integration_override_removal
       parent: tracing_services
       identifier: tracing_service_override_removal
-      weight: 909
+      weight: 910
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 910
+      weight: 911
     - name: Endpoint Observability
       url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability

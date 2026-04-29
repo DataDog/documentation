@@ -679,14 +679,14 @@ export default {
     gov: '\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)'
   },
   flutter_web_logs_cdn_path: {
-    us: 'us1/v5/datadog-logs.js',
-    us3: 'us3/v5/datadog-logs.js',
-    us5: 'us5/v5/datadog-logs.js',
-    eu: 'eu1/v5/datadog-logs.js',
-    ap1: 'ap1/v5/datadog-logs.js',
-    ap2: 'ap2/v5/datadog-logs.js',
-    gov2: 'datadog-logs-v5.js',
-    gov: 'datadog-logs-v5.js'
+    us: 'us1/v6/datadog-logs.js',
+    us3: 'us3/v6/datadog-logs.js',
+    us5: 'us5/v6/datadog-logs.js',
+    eu: 'eu1/v6/datadog-logs.js',
+    ap1: 'ap1/v6/datadog-logs.js',
+    ap2: 'ap2/v6/datadog-logs.js',
+    gov2: 'datadog-logs-v6.js',
+    gov: 'datadog-logs-v6.js'
   },
   flutter_web_rum_cdn_path: {
     us: 'us1/v6/datadog-rum-slim.js',
@@ -746,6 +746,15 @@ export default {
     ap1: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap1&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDEuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
     ap2: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap2&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDIuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
     gov2: 'N/A',
+    gov: 'N/A'
+  },
+  goose_mcp_install_deeplink: {
+    us: 'goose://extension?url=https://mcp.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us3: 'goose://extension?url=https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us5: 'goose://extension?url=https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    eu: 'goose://extension?url=https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    ap1: 'goose://extension?url=https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    ap2: 'goose://extension?url=https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
     gov: 'N/A'
   },
   microsoft_teams_app_name: {

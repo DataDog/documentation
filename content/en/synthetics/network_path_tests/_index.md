@@ -98,6 +98,7 @@ Requires [Agent version][7] `7.72` or higher.
    synthetics:
      collector:
        enabled: true
+       workers: 4 # default
    ```
 
 3. Ensure the API key used for the Datadog Agent has [Remote Configuration][6] enabled. All newly created API keys have Remote Configuration enabled by default.

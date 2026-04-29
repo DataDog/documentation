@@ -45,7 +45,7 @@ pnpm add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 ## Initialize the provider
 
-Create a `DatadogProvider` instance with your Datadog credentials:
+Create a `DatadogProvider` instance with your Datadog credentials. To create a client token, see [Client tokens][2].
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
@@ -204,4 +204,5 @@ await OpenFeature.setContext({
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/
+[2]: /account_management/api-app-keys/#client-tokens
 
