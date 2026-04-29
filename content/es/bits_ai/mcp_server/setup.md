@@ -43,7 +43,7 @@ La [extensión de Cursor y VS Code de Datadog][1] incluye acceso integrado al Se
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">El servidor Datadog MCP no es compatible con el sitio seleccionado ("{{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">El servidor Datadog MCP no es compatible con el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [1]: /es/ide_plugins/vscode/
@@ -82,7 +82,7 @@ Punto de conexión seleccionado ({{< region-param key="dd_site_name" >}}): <code
 
 {{< site-region region="gov" >}}
 
-<div class="alert alert-danger">El servidor Datadog MCP no es compatible con el sitio seleccionado ("{{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">El servidor Datadog MCP no es compatible con el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 
 {{< /site-region >}}
 
@@ -147,7 +147,7 @@ Punto de conexión seleccionado ({{< region-param key="dd_site_name" >}}): <code
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">El Servidor MCP de Datadog no es compatible con tu sitio seleccionado ("{{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">El Servidor MCP de Datadog no es compatible con tu sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [1]: /es/getting_started/site/
@@ -184,7 +184,7 @@ Punto final seleccionado ({{< region-param key="dd_site_name" >}}): <code>{{< re
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">El Servidor MCP de Datadog no es compatible con tu sitio seleccionado ("{{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">El Servidor MCP de Datadog no es compatible con tu sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [1]: /es/getting_started/site/
@@ -213,7 +213,7 @@ Punto de conexión seleccionado ({{< region-param key="dd_site_name" >}}): <code
 
 1. Haz clic en {{< ui >}}Start{{< /ui >}} en el Servidor MCP de Datadog. Warp abre tu navegador para completar el flujo de inicio de sesión de OAuth. Las credenciales se almacenan de forma segura en tu dispositivo y se reutilizan para sesiones futuras.
 
-1. Verifica que tienes los [ permisos ](#required-permissions) requeridos para los recursos de Datadog a los que deseas acceder.
+1. Verifica que tienes los [permisos](#required-permissions) requeridos para los recursos de Datadog a los que deseas acceder.
 
 {{< /site-region >}}
 
@@ -240,7 +240,7 @@ La [extensión de Cursor y VS Code de Datadog][1] incluye acceso integrado al Se
 1. Confirma que el servidor MCP de Datadog está disponible y que las [herramientas][3] están listadas: Abre el panel de chat, selecciona el modo agente y haz clic en el botón {{< ui >}}Configure Tools{{< /ui >}}.
    {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Botón de Configurar Herramientas en VS Code" style="width:70%;" >}}
 1. Si instalaste previamente el servidor MCP de Datadog manualmente, elimínalo de la configuración del IDE para evitar conflictos. Abre la paleta de comandos (`Shift` + `Cmd/Ctrl` + `P`) y ejecuta `MCP: Open User Configuration`.
-1. Verifica que tienes los [ permisos ](#required-permissions) requeridos para los recursos de Datadog a los que deseas acceder.
+1. Verifica que tienes los [permisos](#required-permissions) requeridos para los recursos de Datadog a los que deseas acceder.
 
 [2]: /es/ide_plugins/vscode/?tab=vscode#installation
 [3]: /es/bits_ai/mcp_server/tools
@@ -386,7 +386,7 @@ Punto de conexión seleccionado ({{< region-param key="dd_site_name" >}}): <code
 {{< /site-region >}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger">El servidor Datadog MCP no es compatible con el sitio seleccionado ("{{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">El servidor Datadog MCP no es compatible con el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [3]: /es/getting_started/site/

@@ -40,7 +40,7 @@ Para reenviar una solicitud a Datadog con éxito, tu proxy debe
 - Asegúrate de que tu implementación de proxy no permita que un actor malicioso envíe solicitudes a un servidor diferente. Por ejemplo: `https://browser-intake-datadoghq.com.malicious.com`.
 {% /alert %}
 
-### Construye la URL de entrada de Datadog {% #build-the-datadog-intake-url %}.
+### Construye la URL de entrada de Datadog {% #build-the-datadog-intake-url %}
 
 Tu URL de entrada de Datadog debe tener el formato `<INTAKE_ORIGIN>/<PATH><PARAMETERS>` (por ejemplo, `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser&...`).
 

@@ -253,7 +253,7 @@ L'[extension Cursor et VS Code de Datadog][1] inclut un accès intégré au serv
 [1]: /fr/ide_plugins/vscode/
 {{% /tab %}}
 
-{{% tab "IDE JetBrain" %}}
+{{% tab "IDE JetBrains" %}}
 
 JetBrains propose les plugins [Junie][1] et [AI Assistant][2] pour sa gamme d'IDEs. GitHub propose le plugin [Copilot][4]. Alternativement, de nombreux développeurs utilisent un agent CLI, tel que Claude Code, Codex ou Gemini CLI, en complément de leur IDE.
 

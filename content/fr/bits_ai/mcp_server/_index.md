@@ -10,32 +10,31 @@ description: Connectez les agents IA aux données d'observabilité de Datadog en
 further_reading:
 - link: ide_plugins/vscode/?tab=cursor
   tag: Documentation
-  text: 'Extension Datadog pour Cursor :'
+  text: Extension Datadog pour Cursor
 - link: bits_ai/mcp_server/setup
   tag: Documentation
-  text: 'Configurer le serveur MCP de Datadog :'
+  text: Configurer le serveur MCP de Datadog
 - link: bits_ai/mcp_server/tools
   tag: Documentation
-  text: 'Outils du serveur MCP de Datadog :'
+  text: Outils du serveur MCP de Datadog
 - link: bits_ai/
   tag: Documentation
-  text: 'Aperçu de Bits AI :'
+  text: Aperçu de Bits AI
 - link: https://www.datadoghq.com/blog/datadog-mcp-server-use-cases
   tag: Blog
-  text: 'Quatre façons dont les équipes d''ingénierie utilisent le serveur MCP de
-    Datadog pour alimenter les agents IA :'
+  text: Quatre façons dont les équipes d'ingénierie utilisent le serveur MCP de Datadog
+    pour alimenter les agents IA
 - link: https://www.datadoghq.com/blog/datadog-remote-mcp-server/
   tag: Blog
-  text: 'Connectez vos agents IA aux outils et au contexte de Datadog en utilisant
-    le serveur MCP de Datadog :'
+  text: Connectez vos agents IA aux outils et au contexte de Datadog en utilisant
+    le serveur MCP de Datadog
 - link: https://www.datadoghq.com/blog/datadog-cursor-extension/
   tag: Blog
-  text: 'Déboguez les problèmes de production en direct avec l''extension Datadog
-    Cursor :'
+  text: Déboguez les problèmes de production en direct avec l'extension Datadog Cursor
 - link: https://www.datadoghq.com/blog/openai-datadog-ai-devops-agent/
   tag: Blog
   text: 'Datadog + OpenAI : intégration Codex CLI pour DevOps assisté par IA'
-title: 'Serveur MCP de Datadog :'
+title: Serveur MCP de Datadog
 ---
 Le serveur MCP de Datadog agit comme un pont entre vos données d'observabilité dans Datadog et tous les agents IA qui prennent en charge le [Modèle de Protocole de Contexte (MCP)][1]. En fournissant un accès structuré aux contextes, fonctionnalités et outils pertinents de Datadog, le serveur MCP vous permet d'interroger et de récupérer des informations d'observabilité directement depuis des clients utilisant l’IA tels que Cursor, OpenAI Codex, Claude Code ou votre propre agent IA.
 
@@ -45,7 +44,7 @@ Le serveur MCP de Datadog agit comme un pont entre vos données d'observabilité
 
 Cette démonstration montre le serveur MCP de Datadog utilisé dans Cursor et Claude Code (activez le son pour l'audio) :
 
-{{< img src="bits_ai/mcp_server/mcp_cursor_demo_3.mp4" alt="Démonstration du serveur MCP de Datadog dans Cursor et Claude Code :" video="true" >}}
+{{< img src="bits_ai/mcp_server/mcp_cursor_demo_3.mp4" alt="Démonstration du serveur MCP de Datadog dans Cursor et Claude Code" video="true" >}}
 
 
 ## Avertissements {#disclaimers}

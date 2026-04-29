@@ -21,11 +21,11 @@ title: Débuter avec l'Agent
 
 Ce guide présente l'Agent Datadog et couvre&nbsp;:
 
-  - [ Introduction à l'Agent ](#what-is-the-datadog-agent)
-  - [ Installation ](#installation)
-  - [ Données collectées par l'Agent ](#data-collected-by-the-agent)
-  - [ Configurations avancées et fonctionnalités ](#advanced-configurations-and-features)
-  - [ Dépannage ](#troubleshooting)
+  - [Introduction à l'Agent](#what-is-the-datadog-agent)
+  - [Installation](#installation)
+  - [Données collectées par l'Agent](#data-collected-by-the-agent)
+  - [Configurations avancées et fonctionnalités](#advanced-configurations-and-features)
+  - [Dépannage](#troubleshooting)
 
 
 ## Qu'est-ce que l'Agent Datadog&nbsp;? {#what-is-the-datadog-agent}
