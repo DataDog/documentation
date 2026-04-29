@@ -253,7 +253,7 @@ print(details.error)    // The error that occurred during evaluation, if any
 
 Flag details may help you debug evaluation behavior and understand why a user received a given value.
 
-## Use via OpenFeature
+## Use with OpenFeature
 
 The examples above use Datadog's `FlagsClient` API directly. If you prefer the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature provider for iOS that wraps `FlagsClient` and exposes it through `OpenFeatureAPI.shared`. The same flag data is served through either surface; pick whichever API fits your app.
 
