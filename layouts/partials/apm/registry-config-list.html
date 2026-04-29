@@ -26,8 +26,6 @@
   <p class="registry-config-total"><strong>{{ len $currentConfigs }}</strong> configuration keys available for this library.</p>
 
   {{- if $categories -}}
-    {{/* Inline SVG for copy-link icon (Material Design link icon) */}}
-    {{- $linkIcon := `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>` -}}
     {{/* Inline SVG for collapsible chevron icon */}}
     {{- $chevronIcon := `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right"><path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg>` -}}
 
@@ -58,7 +56,7 @@
                 <h3 class="header-text-inner me-1">{{ $catTitle }}</h3>
                 <small>({{ len $catConfigs }})</small>
               </div>
-              <a class="registry-copy-link registry-copy-link--section" href="#registry-{{ $catId }}" title="Copy link" aria-label="Copy link to {{ $catTitle }}">{{ $linkIcon | safeHTML }}</a>
+              <a class="registry-copy-link registry-copy-link--section" href="#registry-{{ $catId }}" title="Copy link" aria-label="Copy link to {{ $catTitle }}">{{ partial "icon" (dict "name" "click") }}</a>
             </div>
           </summary>
           <div class="collapsible-content">
@@ -143,7 +141,7 @@
                               <h4 class="header-text-inner me-1"><code>{{ $kindPattern }}</code></h4>
                               <small>({{ len $kindIntNames }} integrations)</small>
                             </div>
-                            <a class="registry-copy-link registry-copy-link--section" href="#{{ $kindAnchor }}" title="Copy link" aria-label="Copy link to {{ $kindPattern }}">{{ $linkIcon | safeHTML }}</a>
+                            <a class="registry-copy-link registry-copy-link--section" href="#{{ $kindAnchor }}" title="Copy link" aria-label="Copy link to {{ $kindPattern }}">{{ partial "icon" (dict "name" "click") }}</a>
                           </div>
                         </summary>
                         <div class="collapsible-content">
@@ -176,7 +174,7 @@
                         <h4 class="header-text-inner me-1">{{ $intName }}</h4>
                         <small>({{ len $intConfigs }})</small>
                       </div>
-                      <a class="registry-copy-link registry-copy-link--section" href="#{{ $intAnchor }}" title="Copy link" aria-label="Copy link to {{ $intName }}">{{ $linkIcon | safeHTML }}</a>
+                      <a class="registry-copy-link registry-copy-link--section" href="#{{ $intAnchor }}" title="Copy link" aria-label="Copy link to {{ $intName }}">{{ partial "icon" (dict "name" "click") }}</a>
                     </div>
                   </summary>
                   <div class="collapsible-content">
@@ -220,7 +218,7 @@
               <h3 class="header-text-inner me-1">Other</h3>
               <small>({{ len $otherConfigs }})</small>
             </div>
-            <a class="registry-copy-link registry-copy-link--section" href="#registry-other" title="Copy link" aria-label="Copy link to Other">{{ $linkIcon | safeHTML }}</a>
+            <a class="registry-copy-link registry-copy-link--section" href="#registry-other" title="Copy link" aria-label="Copy link to Other">{{ partial "icon" (dict "name" "click") }}</a>
           </div>
         </summary>
         <div class="collapsible-content">
