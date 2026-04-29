@@ -38,13 +38,14 @@ Supported providers:
 Use Prompts mode to iterate on a prompt with a fixed set of inputs.
 
 1. Navigate to [**AI Observability > Playground**][1].
-1. In the configuration panel, select a **Provider** and **Model**.
-1. (Optional) Click **Parameters** to adjust model settings such as temperature, max tokens, and top-p.
-1. Write your system and user prompts in the message editor.
-1. To parameterize inputs, use `{{variable_name}}` in any message. Enter values for each variable in the **Variables** section of the configuration panel.
+1. Write your system and user prompts in the message editor. To parameterize inputs, use `{{variable_name}}` in any message.
+1. Open the **Model configuration** panel using the top bar.
+1. In the configuration panel, select a **Provider**, an **Account** and a **Model**.
 1. (Optional) Click **Edit Response Structure** to request structured output from the model.
 1. (Optional) Click **Model Parameters** to specify the parameters of the model.
 1. (Optional) Click **Add New** next to **Tools** to add tool definitions in JSON function schema format. Use the provided examples (Weather, Web Search, Email, Stock Price) as starting points.
+1. You can enter values for each variable in the **Variables** section to substitute for the parameters you defined in your user and system prompts.
+1. Click **Done** to save the configuration and close the modal.
 1. Click **Run** to send the prompt and view the model response.
 
 Edit messages, variable values, or model settings, then click **Run** again to iterate.
