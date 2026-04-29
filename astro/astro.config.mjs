@@ -2,8 +2,12 @@ import { defineConfig } from 'astro/config';
 import markdoc from '@astrojs/markdoc';
 import preact from '@astrojs/preact';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { fileURLToPath } from 'node:url';
 
 import { LOCALES } from './src/lib/i18n/locale.ts';
+
+const websitesModules = fileURLToPath(new URL('../../../../../../dd/websites-modules', import.meta.url));
+const hugoSite = fileURLToPath(new URL('..', import.meta.url));
 
 export default defineConfig({
   site: 'https://docs.datadoghq.com',
@@ -14,6 +18,12 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   vite: {
+    resolve: {
+      alias: {
+        '@hugo-site': hugoSite,
+        '@websites-modules': websitesModules,
+      },
+    },
     plugins: [
       process.env.VISUALIZE && visualizer({
         open: true,

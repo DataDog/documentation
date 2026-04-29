@@ -3,6 +3,10 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
-    "plugins": [{ "name": "@astrojs/ts-plugin" }]
+    "plugins": [{ "name": "@astrojs/ts-plugin" }],
+    "paths": {
+      "@hugo-site/*": ["../*"],
+      "@websites-modules/*": ["../../../../../../dd/websites-modules/*"]
+    }
   }
 }

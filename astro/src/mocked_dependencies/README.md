@@ -23,13 +23,13 @@ Under each root, the subpath exactly matches the upstream path. To find the upst
 - `data/menu_data/products.yaml` — Per-product `lang_key`/`url`/`icon` (copied verbatim).
 - `data/language_names.yaml` — Per-language label dictionary for the footer language selector (copied verbatim).
 - `i18n/en.yaml` — English label translations (copied verbatim and extended with footer-specific keys: `footer_blurb_heading`, `footer_blurb_desc`, `contact_us`, `resources`, `personalized_demo`).
-- `static/icons/` — Subset of SVG icons referenced by the nav, banner, and footer social links (e.g. `twitter-x`, `linkedin-new`, `youtube-tetra`, `instagram`). See `static/icons/README.md` for the list and any gaps or fallbacks.
+- `static/icons/` — **Removed from mocked_dependencies.** Icons are now rendered via the websites-modules iconfont (`<i class="icon-{name}">`). Font files live in `astro/public/fonts/`; the iconfont SCSS is imported via the `@websites-modules` Vite alias defined in `astro.config.mjs`.
 
 ### `hugo_site/`
 
-- `config/_default/params.en.yaml` — Site-level params (copied whole). Code only reads the `announcement_banner:` block, but the rest is preserved to keep the snapshot traceable.
-- `config/_default/params.yaml` — Site-level params (copied whole). Code only reads the `allowedRegions:` block (the list of Datadog sites and their domains), but the rest is preserved to keep the snapshot traceable.
-- `assets/scripts/config/regions.config.js` — Per-region value map (`dd_site`, `dd_full_site`, `dd_datacenter`, etc.) that Hugo's `region-redirects.js` uses for runtime swaps. Copied verbatim; the Astro region state module reads the same map so values stay in sync.
-- `data/api/` — OpenAPI spec and SDK examples (moved here from the old flat `api/` folder so it fits the mirrored-path convention).
+- `config/_default/params.en.yaml` — **Removed from mocked_dependencies.** Now read directly from the Hugo repo root via `PARAMS_EN_YAML_PATH` in `src/externalDependencies.ts`.
+- `config/_default/params.yaml` — **Removed from mocked_dependencies.** Now read directly from the Hugo repo root via `PARAMS_YAML_PATH` in `src/externalDependencies.ts`.
+- `assets/scripts/config/regions.config.js` — **Removed from mocked_dependencies.** Now imported directly from the Hugo repo root via `src/externalDependencies.ts`.
+- `data/api/` — **Removed from mocked_dependencies.** Specs, translations, and code example metadata are now sourced directly from the Hugo repo root via `src/externalDependencies.ts`.
 - `data/en/webinars.yaml` — Geo-targeting data for the announcement banner. Currently seeded with `{ webinars: [] }`, which matches live behavior where the banner falls back to site params.
 - `static/images/svg-icons/` — Docs-repo SVGs referenced by the footer (`world`, `arrow`, `app-store-badge`, `google-play-badge`, `apple`, `google-play`). These files use Hugo's `default-size` / `default-fill` / `default-opacity` placeholder tokens; `SvgIcon.astro` substitutes them at render time.

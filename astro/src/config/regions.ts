@@ -20,11 +20,10 @@
  */
 
 import { parse as parseYaml } from 'yaml';
-
-// @ts-ignore — Vite raw import
-import paramsRaw from '../mocked_dependencies/hugo_site/config/_default/params.yaml?raw';
 // @ts-ignore — plain ES module import
-import regionsConfig from '../mocked_dependencies/hugo_site/assets/scripts/config/regions.config.js';
+import regionsConfig from '@hugo-site/assets/scripts/config/regions.config.js';
+// @ts-ignore — Vite raw import
+import PARAMS_YAML_RAW from '@hugo-site/config/_default/params.yaml?raw';
 
 export interface AllowedRegion {
   /** Region key used in the `site` cookie / `?site=` query param. E.g. `us`, `eu`, `ap1`. */
@@ -63,7 +62,7 @@ let _allowedRegions: AllowedRegion[] | null = null;
 export function getAllowedRegions(): AllowedRegion[] {
   if (_allowedRegions) return _allowedRegions;
 
-  const parsed = parseYaml(paramsRaw) as { allowedRegions?: RawAllowedRegion[] };
+  const parsed = parseYaml(PARAMS_YAML_RAW) as { allowedRegions?: RawAllowedRegion[] };
   const list = parsed.allowedRegions ?? [];
 
   _allowedRegions = list

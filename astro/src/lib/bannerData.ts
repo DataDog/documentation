@@ -5,7 +5,7 @@
  */
 import { parse as parseYaml } from 'yaml';
 // @ts-ignore — Vite raw import
-import paramsRaw from '../mocked_dependencies/hugo_site/config/_default/params.en.yaml?raw';
+import PARAMS_EN_YAML_RAW from '@hugo-site/config/_default/params.en.yaml?raw';
 // @ts-ignore — Vite raw import
 import webinarsRaw from '../mocked_dependencies/hugo_site/data/en/webinars.yaml?raw';
 
@@ -38,7 +38,7 @@ export type Webinar = {
 
 type WebinarFile = { webinars: Webinar[] };
 
-const siteParams = parseYaml(paramsRaw) as { announcement_banner?: BannerParams };
+const siteParams = parseYaml(PARAMS_EN_YAML_RAW) as { announcement_banner?: BannerParams };
 const webinarList = parseYaml(webinarsRaw) as WebinarFile;
 
 export function getBannerParams(): BannerParams {

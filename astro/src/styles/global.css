@@ -1,5 +1,13 @@
 @import './tokens/index.css';
 
+/* Font faces — iconfont from websites-modules */
+@font-face {
+  font-family: 'iconfont';
+  src: url('@websites-modules/static/fonts/iconfont.woff2') format('woff2'),
+       url('@websites-modules/static/fonts/iconfont.woff') format('woff');
+  font-display: block;
+}
+
 /* Font faces */
 @font-face {
   font-family: 'NationalWeb';

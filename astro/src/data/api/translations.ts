@@ -29,17 +29,12 @@ type ActionOverlay = Record<string, ActionTranslation>;
 
 type ApiVersion = 'v1' | 'v2';
 
-// Glob `*.json` rather than `??.json` because Vite's `import.meta.glob` does
-// not always honor the single-char-class pattern. We filter to the
-// `{lang}.json` shape via regex below, which also rejects locale-less files
-// like `translate_tags.json` (the upstream English source).
 const tagModules: Record<string, TagOverlay> = import.meta.glob<TagOverlay>(
-  '../../mocked_dependencies/hugo_site/data/api/v*/translate_tags.*.json',
+  '@hugo-site/data/api/v*/translate_tags.*.json',
   { eager: true, import: 'default' },
 );
-
 const actionModules: Record<string, ActionOverlay> = import.meta.glob<ActionOverlay>(
-  '../../mocked_dependencies/hugo_site/data/api/v*/translate_actions.*.json',
+  '@hugo-site/data/api/v*/translate_actions.*.json',
   { eager: true, import: 'default' },
 );
 

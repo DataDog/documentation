@@ -5,10 +5,10 @@ import { getApiCategories, getCategoryBySlug } from '../../../../data/api/index'
 import { getEndpointsForCategory } from '../../../../data/api/endpoints';
 import { highlightEndpoints } from '../../../../data/api/highlight';
 import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/i18n/locale';
-import type { GetStaticPaths } from 'astro';
+import type { GetStaticPaths, GetStaticPathsResult } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const paths: ReturnType<GetStaticPaths> = [];
+  const paths: GetStaticPathsResult = [];
   for (const lang of LOCALES) {
     for (const cat of getApiCategories(lang)) {
       paths.push({
@@ -45,8 +45,7 @@ await highlightEndpoints(endpoints);
 <ApiLayout
   title={`${current.name} - Datadog API`}
   categories={categories}
-  currentSlug={slug as string}
-  lang={lang}
+  currentSlug={slug}
   breadcrumbs={[
     { label: 'Docs', href: localizedHref(lang, '/') },
     { label: 'API Reference', href: localizedHref(lang, '/api/latest/') },

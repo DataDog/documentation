@@ -2,17 +2,18 @@
  * SDK code example loading for API documentation.
  *
  * Reads code example metadata from CodeExamples.json and loads the
- * corresponding source files (Python, Ruby, Go, Java, TypeScript) from
- * the examples directory. Runs at build time using synchronous fs reads.
- *
- * Data currently sourced from src/mocked_dependencies/hugo_site/data/api/. The mocked
- * inventory includes CodeExamples.json but not the SDK source files, so
- * only curl examples render until a live feed is wired up.
+ * corresponding source files from data/api via the @hugo-site alias.
+ * Currently only curl examples render because no SDK source files exist
+ * in data/api yet.
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import API_V1_CODE_EXAMPLES from '@hugo-site/data/api/v1/CodeExamples.json';
+import API_V2_CODE_EXAMPLES from '@hugo-site/data/api/v2/CodeExamples.json';
+
+const sdkExampleFiles: Record<string, string> = import.meta.glob(
+  '@hugo-site/data/api/v*/examples/*',
+  { eager: true, query: '?raw', import: 'default' },
+);
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -56,10 +57,10 @@ interface CodeExampleMeta {
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-/** Root of the mocked_dependencies API data (relative to this module). */
-const MOCKED_API_ROOT = path.resolve(__dirname, '../../mocked_dependencies/hugo_site/data/api');
+const CODE_EXAMPLES: Record<'v1' | 'v2', Record<string, CodeExampleMeta[]>> = {
+  v1: API_V1_CODE_EXAMPLES as Record<string, CodeExampleMeta[]>,
+  v2: API_V2_CODE_EXAMPLES as Record<string, CodeExampleMeta[]>,
+};
 
 /** Language configuration: file extensions and display metadata */
 const LANGUAGES = [
@@ -71,44 +72,9 @@ const LANGUAGES = [
 ] as const;
 
 /* ------------------------------------------------------------------ */
-/*  Caches                                                             */
-/* ------------------------------------------------------------------ */
-
-const metadataCache = new Map<string, Record<string, CodeExampleMeta[]>>();
-
-/* ------------------------------------------------------------------ */
 /*  Internal helpers                                                   */
 /* ------------------------------------------------------------------ */
 
-/**
- * Load and cache the CodeExamples.json metadata for a given API version.
- * Returns a record mapping operationId to its array of example metadata entries.
- */
-function loadCodeExamplesMetadata(version: 'v1' | 'v2'): Record<string, CodeExampleMeta[]> {
-  if (metadataCache.has(version)) {
-    return metadataCache.get(version)!;
-  }
-
-  const filePath = path.resolve(MOCKED_API_ROOT, version, 'CodeExamples.json');
-  try {
-    const raw = fs.readFileSync(filePath, 'utf-8');
-    const parsed = JSON.parse(raw) as Record<string, CodeExampleMeta[]>;
-    metadataCache.set(version, parsed);
-    return parsed;
-  } catch {
-    // File doesn't exist or is invalid — return empty
-    metadataCache.set(version, {});
-    return {};
-  }
-}
-
-/**
- * Build the filename for a code example.
- *
- * Naming convention:
- * - Default example (no suffix): `{OperationId}.{ext}`
- * - Numbered variant:            `{OperationId}_{suffix}.{ext}`
- */
 function buildExampleFilename(operationId: string, suffix: string, ext: string): string {
   if (suffix) {
     return `${operationId}_${suffix}${ext}`;
@@ -116,17 +82,8 @@ function buildExampleFilename(operationId: string, suffix: string, ext: string):
   return `${operationId}${ext}`;
 }
 
-/**
- * Try to read a code example file. Returns the file content, or null
- * if the file doesn't exist.
- */
 function readExampleFile(version: 'v1' | 'v2', filename: string): string | null {
-  const filePath = path.resolve(MOCKED_API_ROOT, version, 'examples', filename);
-  try {
-    return fs.readFileSync(filePath, 'utf-8');
-  } catch {
-    return null;
-  }
+  return sdkExampleFiles[`../../data/api/${version}/examples/${filename}`] ?? null;
 }
 
 /* ------------------------------------------------------------------ */
@@ -150,7 +107,7 @@ export function getCodeExamplesForOperation(
   version: 'v1' | 'v2',
   _tag: string
 ): CodeExampleSet[] {
-  const metadata = loadCodeExamplesMetadata(version);
+  const metadata = CODE_EXAMPLES[version];
   const exampleMetas = metadata[operationId];
 
   if (!exampleMetas || exampleMetas.length === 0) {

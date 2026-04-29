@@ -5,13 +5,15 @@
  * the root (`/api/latest/...`), other locales prefixed (`/{lang}/api/latest/...`).
  */
 
-export const LOCALES = ['en', 'fr', 'ja', 'ko', 'es'] as const;
+export const LOCALES = ["en" /*'fr', 'ja', 'ko', 'es'*/] as const;
 export type Locale = (typeof LOCALES)[number];
 
-export const DEFAULT_LOCALE: Locale = 'en';
+export const DEFAULT_LOCALE: Locale = "en";
 
 export function isLocale(value: unknown): value is Locale {
-  return typeof value === 'string' && (LOCALES as readonly string[]).includes(value);
+  return (
+    typeof value === "string" && (LOCALES as readonly string[]).includes(value)
+  );
 }
 
 /**
@@ -33,7 +35,7 @@ export function parseLangParam(param: string | undefined): Locale | undefined {
 /** `''` for English, `/{lang}` for everything else. */
 export function localePrefix(lang: Locale): string {
   if (lang === DEFAULT_LOCALE) {
-    return '';
+    return "";
   }
   return `/${lang}`;
 }
@@ -54,13 +56,16 @@ export function localizedHref(lang: Locale, path: string): string {
  * for another locale. Used by the language dropdown to keep the user on the
  * same page when switching languages.
  */
-export function stripLocalePrefix(pathname: string): { lang: Locale; rest: string } {
+export function stripLocalePrefix(pathname: string): {
+  lang: Locale;
+  rest: string;
+} {
   for (const lang of LOCALES) {
     if (lang === DEFAULT_LOCALE) {
       continue;
     }
     if (pathname === `/${lang}` || pathname.startsWith(`/${lang}/`)) {
-      return { lang, rest: pathname.slice(`/${lang}`.length) || '/' };
+      return { lang, rest: pathname.slice(`/${lang}`.length) || "/" };
     }
   }
   return { lang: DEFAULT_LOCALE, rest: pathname };
