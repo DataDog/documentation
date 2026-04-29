@@ -16,8 +16,8 @@ further_reading:
 The [Playground][1] is a browser-based interface for testing and evaluating LLM prompts. You can test a prompt with arbitrary input against any connected model provider, or load a dataset, attach evaluators, preview results, and save the configuration as a reproducible experiment—all without writing code.
 
 The Playground supports two flows:
-- **Arbitrary input**: Send a single prompt with custom input values and inspect the model response.
-- **Dataset experiment**: Run your prompt across a dataset, score each row with evaluators, and save the result as an [experiment][2].
+- **[Test a prompt with arbitrary input](#test-a-prompt-with-arbitrary-input)**: Send a single prompt with custom input values and inspect the model response.
+- **[Run an experiment from the Playground](#run-an-experiment-from-the-playground)**: Run your prompt across a dataset, score each row with evaluators, and save the result as an [experiment][2].
 
 ## Prerequisites
 
