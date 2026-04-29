@@ -1,5 +1,5 @@
 ---
-title: "Private Link Environments (Preview)"
+title: "Private Link Environments"
 description: "Set up Data Observability: Jobs Monitoring for Databricks workspaces deployed in Private Link environments using a Private Action Runner."
 further_reading:
     - link: '/data_observability/jobs_monitoring/databricks'
@@ -29,7 +29,7 @@ The request flow works as follows:
 
 All authentication to Datadog is handled by the underlying Private Action Runner. A locally configured allowlist is set on the runner during installation to restrict the actions that can be performed to only those that are necessary. You can also configure access controls within Datadog to manage which users and teams can use the runner. See [Manage access to Private Action Runners][16] for more information.
 
-## Installation Instructions
+## Installation
 
 ### Step 1: Datadog prerequisites
 

@@ -5176,7 +5176,7 @@ menu:
       identifier: jobs_monitoring_databricks
       parent: data_jobs
       weight: 100000
-    - name: Private Link Environments (Preview)
+    - name: Private Link Environments
       url: data_observability/jobs_monitoring/databricks/private_link
       identifier: jobs_monitoring_databricks_private_link
       parent: jobs_monitoring_databricks
