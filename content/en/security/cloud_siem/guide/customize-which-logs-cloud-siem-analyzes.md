@@ -54,13 +54,15 @@ Security Filters are **inclusive**: a log is analyzed if it matches at least one
 
 These enriched fields are not supported in Security Filter queries:
 
+- `network.ip.list`
+- `network.ip.attributes`
+- `network.client.is_private_network_ip`
+- `network.destination.is_private_network_ip`
 - `threat_intel.results`
 - `threat_intel.indicators_matched`
 - `network.client.geoip`
-- `network.client.is_private_network_ip`
-- `network.destination.is_private_network_ip`
-- `network.ip.list`
-- `network.ip.attributes`
+- `ocsf.observables`
+- `ocsf.type_uid`
 
 Security Filter queries must use attributes present on the log at ingestion time, such as `source`, `service`, `host`, tags, and parsed log attributes. If a Security Filter created before April 15, 2026, references any of these unsupported enriched fields, replace that field with an equivalent ingestion-time attribute. For example, replace a filter on `threat_intel.*` with a filter on `source:` for the log sources that produce the relevant events.
 
