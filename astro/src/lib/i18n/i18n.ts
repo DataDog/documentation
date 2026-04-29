@@ -7,15 +7,15 @@
  * the key itself. Translation completeness is owned upstream; this module
  * never warns or fails on gaps.
  */
-import { parse as parseYaml } from 'yaml';
-import { DEFAULT_LOCALE, type Locale } from './locale';
+import { parse as parseYaml } from "yaml";
+import { DEFAULT_LOCALE, type Locale } from "./locale";
 
 type I18nEntry = { one?: string; other?: string };
 type I18nTable = Record<string, I18nEntry>;
 
 const rawModules: Record<string, string> = import.meta.glob<string>(
-  '../mocked_dependencies/websites_modules/i18n/*.yaml',
-  { query: '?raw', import: 'default', eager: true },
+  "../../mocked_dependencies/websites_modules/i18n/*.yaml",
+  { query: "?raw", import: "default", eager: true },
 );
 
 const LOCALE_FILE_RE = /\/i18n\/([a-z]{2})\.yaml$/;
@@ -38,9 +38,12 @@ function lookup(lang: Locale, key: string): string | undefined {
   return entry.other ?? entry.one;
 }
 
-export function i18n(key: string | undefined, lang: Locale = DEFAULT_LOCALE): string {
+export function i18n(
+  key: string | undefined,
+  lang: Locale = DEFAULT_LOCALE,
+): string {
   if (!key) {
-    return '';
+    return "";
   }
   return lookup(lang, key) ?? lookup(DEFAULT_LOCALE, key) ?? key;
 }

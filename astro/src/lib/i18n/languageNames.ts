@@ -3,9 +3,9 @@
  * localized display name, e.g. languageNames('en')('ja') === 'Japanese',
  * languageNames('ja')('en') === '英語'.
  */
-import { parse as parseYaml } from 'yaml';
+import { parse as parseYaml } from "yaml";
 // @ts-ignore — Vite raw import
-import raw from '../mocked_dependencies/websites_modules/data/language_names.yaml?raw';
+import raw from "../../mocked_dependencies/websites_modules/data/language_names.yaml?raw";
 
 type LanguageNamesTable = Record<string, Record<string, string>>;
 
@@ -16,7 +16,7 @@ export type LangCode = string & keyof typeof table;
 export const LANG_CODES: readonly string[] = Object.keys(table);
 
 export function isLangCode(value: unknown): value is LangCode {
-  return typeof value === 'string' && value in table;
+  return typeof value === "string" && value in table;
 }
 
 /**
