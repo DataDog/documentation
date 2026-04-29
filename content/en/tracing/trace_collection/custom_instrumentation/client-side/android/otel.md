@@ -393,7 +393,7 @@ Trace.enable(traceConfig);
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Datadog tracer implements the [OpenTelemetry standard][18]. Create `OtelTracerProvider` and register `OpenTelemetrySdk` in `GlobalOpenTelemetry` in your `onCreate()` method:
+4. Datadog SDK implements the [OpenTelemetry standard][18]. Create `OtelTracerProvider` and register `OpenTelemetrySdk` in `GlobalOpenTelemetry` in your `onCreate()` method:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}

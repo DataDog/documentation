@@ -15,13 +15,16 @@ The Browser SDK supports all modern desktop and mobile browsers.
 - **[Agentic Onboarding (in Preview)][13]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your application with one prompt.
 - **Manual client-side setup** (below): Manually add the SDK to your application code.
 
-### Step 1 - Create the application in the UI
+### Manual client-side setup
 
+{% stepper %}
+
+{% step title="Create the application in the UI" %}
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][1] and select the JavaScript (JS) application type.
 2. Enter a name for your application, then click **Create Application**. This generates a `clientToken` and an `applicationId` for your application.
+{% /step %}
 
-### Step 2 - Install the Browser SDK
-
+{% step title="Install the Browser SDK" %}
 Choose the installation method for the Browser SDK.
 
 {% tabs %}
@@ -216,9 +219,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 {% /tab %}
 {% /tabs %}
+{% /step %}
 
-### Step 3 - Initialize the Browser SDK
-
+{% step title="Initialize the Browser SDK" %}
 The SDK should be initialized as early as possible in the app lifecycle. This ensures all measurements are captured correctly.
 
 In the initialization snippet, set an environment name, service name, and client token. See the full list of [initialization parameters][3].
@@ -303,6 +306,9 @@ To be compliant with GDPR, CCPA, and similar regulations, the Browser SDK lets y
 #### Configure Content Security Policy (CSP)
 
 If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the CSP documentation][6] for additional setup steps.
+{% /step %}
+
+{% /stepper %}
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: https://www.npmjs.com/package/@datadog/browser-rum

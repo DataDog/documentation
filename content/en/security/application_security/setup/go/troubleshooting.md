@@ -110,7 +110,7 @@ For detailed examples and best practices, see the [Building your Go application 
 
 If you're using Bazel with [rules_go][5], Orchestrion is not compatible with it. Instead:
 
-1. **Use manual instrumentation**: Follow the [manual instrumentation guide][6] with the Datadog Go Tracer library
+1. **Use manual instrumentation**: Follow the [manual instrumentation guide][6] with the Datadog Go SDK
 
 For complete Bazel setup instructions, see the [Building with Bazel section][7] in the setup guide.
 

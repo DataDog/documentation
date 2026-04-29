@@ -4912,6 +4912,7 @@ components:
         - incident_management_monthly_active_users_usage
         - indexed_spans_usage
         - infra_host_usage
+        - infra_host_basic_usage
         - ingested_logs_bytes_usage
         - ingested_spans_bytes_usage
         - invocations_usage
@@ -5000,6 +5001,7 @@ components:
         - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
         - INDEXED_SPANS_USAGE
         - INFRA_HOST_USAGE
+        - INFRA_HOST_BASIC_USAGE
         - INGESTED_LOGS_BYTES_USAGE
         - INGESTED_SPANS_BYTES_USAGE
         - INVOCATIONS_USAGE
@@ -9498,6 +9500,8 @@ components:
         - incident_management_monthly_active_users_percentage
         - infra_host_usage
         - infra_host_percentage
+        - infra_host_basic_usage
+        - infra_host_basic_percentage
         - invocations_usage
         - invocations_percentage
         - lambda_traced_invocations_usage
@@ -9665,6 +9669,8 @@ components:
         - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_PERCENTAGE
         - INFRA_HOST_USAGE
         - INFRA_HOST_PERCENTAGE
+        - INFRA_HOST_BASIC_USAGE
+        - INFRA_HOST_BASIC_PERCENTAGE
         - INVOCATIONS_USAGE
         - INVOCATIONS_PERCENTAGE
         - LAMBDA_TRACED_INVOCATIONS_USAGE
@@ -10060,6 +10066,14 @@ components:
           type: number
         indexed_spans_usage:
           description: The total APM Indexed Spans usage by tag(s).
+          format: double
+          type: number
+        infra_host_basic_percentage:
+          description: The percentage of infrastructure host Basic tier usage by tag(s).
+          format: double
+          type: number
+        infra_host_basic_usage:
+          description: The infrastructure host Basic tier usage by tag(s).
           format: double
           type: number
         infra_host_percentage:
@@ -22442,6 +22456,18 @@ components:
           description: Shows the sum of all ephemeral infrastructure hosts on Azure over all hours in the current date for the given org.
           format: int64
           type: integer
+        eph_infra_host_basic_infra_basic_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_basic_infra_basic_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier on vSphere over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_basic_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         eph_infra_host_ent_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Enterprise over all hours in the current date for the given org.
           format: int64
@@ -22588,6 +22614,18 @@ components:
           type: integer
         infra_edge_monitoring_devices_top99p:
           description: Shows the 99th percentile of all Edge Devices Monitoring devices over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_agent_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_vsphere_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier on vSphere over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier over all hours in the current date for all organizations.
           format: int64
           type: integer
         infra_host_top99p:
@@ -23391,6 +23429,18 @@ components:
           description: Shows the sum of all ephemeral infrastructure hosts on Azure over all hours in the current date for the given org.
           format: int64
           type: integer
+        eph_infra_host_basic_infra_basic_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_basic_infra_basic_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier on vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_basic_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier over all hours in the current date for the given org.
+          format: int64
+          type: integer
         eph_infra_host_ent_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Enterprise over all hours in the current date for the given org.
           format: int64
@@ -23541,6 +23591,18 @@ components:
           type: integer
         infra_edge_monitoring_devices_top99p:
           description: Shows the 99th percentile of all Edge Devices Monitoring devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_agent_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_vsphere_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier on vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_host_basic_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier over all hours in the current date for the given org.
           format: int64
           type: integer
         infra_host_top99p:
@@ -24350,6 +24412,18 @@ components:
           description: Shows the sum of all ephemeral infrastructure hosts on Azure over all hours in the current month for all organizations.
           format: int64
           type: integer
+        eph_infra_host_basic_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_basic_infra_basic_agent_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_basic_infra_basic_vsphere_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier on vSphere over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         eph_infra_host_ent_agg_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Enterprise over all hours in the current month for all organizations.
           format: int64
@@ -24497,6 +24571,18 @@ components:
           type: integer
         infra_edge_monitoring_devices_top99p_sum:
           description: Shows the 99th percentile of all Edge Devices Monitoring devices over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_agent_top99p_sum:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_vsphere_top99p_sum:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier on vSphere over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_top99p_sum:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier over all hours in the current month for all organizations.
           format: int64
           type: integer
         infra_host_top99p_sum:

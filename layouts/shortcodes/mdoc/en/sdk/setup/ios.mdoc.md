@@ -23,8 +23,9 @@ Before you begin, you need:
 
 To send RUM data from your iOS or tvOS application to Datadog, complete the following steps.
 
-### Step 1 - Add the iOS SDK as a dependency
+{% stepper %}
 
+{% step title="Add the iOS SDK as a dependency" %}
 Add the iOS SDK to your project using your preferred package manager. Datadog recommends using Swift Package Manager (SPM).
 
 {% tabs %}
@@ -86,14 +87,15 @@ DatadogRUM.xcframework
 
 {% /tab %}
 {% /tabs %}
+{% /step %}
 
-### Step 2 - Specify application details in the UI
-
+{% step title="Specify application details in the UI" %}
 1. Navigate to [**Digital Experience** > **Add an Application**][10].
 2. Select `iOS` as the application type and enter an application name to generate a unique application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][11].
+{% /step %}
 
-### Step 3 - Initialize the library
+{% step title="Initialize the library" %}
 
 In the initialization snippet, set an environment name, service name, and client token.
 
@@ -442,8 +444,9 @@ For example, if the current tracking consent is `.pending`:
 
 - If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
 - If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
+{% /step %}
 
-### Step 4 - Start sending data
+{% step title="Start sending data" %}
 
 #### Enable RUM
 
@@ -521,6 +524,9 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 
 {% /tab %}
 {% /tabs %}
+{% /step %}
+
+{% /stepper %}
 
 **Note**: `URLSessionInstrumentation` requires access to a `URLSession` delegate class. For third-party libraries that don't expose a session delegate, use the [Custom Resources API][17] to manually track those network calls.
 

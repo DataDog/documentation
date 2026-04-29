@@ -14,6 +14,9 @@ aliases:
   - /tracing/runtime_metrics/ruby
 description: "Gain additional insights into an application's performance with the runtime metrics associated with your traces."
 further_reading:
+    - link: '/opentelemetry/integrations/runtime_metrics/'
+      tag: 'Documentation'
+      text: 'OpenTelemetry Runtime Metrics'
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Correlate your logs and traces'
@@ -27,9 +30,11 @@ further_reading:
 
 ## Overview 
 
-Runtime metrics monitor your application's memory usage, garbage collection, and parallelization. Datadog tracing libraries automatically collect these metrics for supported environments and send them to the Datadog Agent.
+Runtime metrics monitor your application's memory usage, garbage collection, and parallelization. Datadog SDKs automatically collect these metrics for supported environments and send them to the Datadog Agent.
 
 These metrics help you identify bottlenecks, troubleshoot performance issues, and optimize resource utilization. By viewing runtime metrics alongside traces and logs, you gain comprehensive visibility into your application's health and performance.
+
+If you instrument your application with OpenTelemetry instead of Datadog tracing libraries, see [OpenTelemetry Runtime Metrics][10] for setup instructions.
 
 ## Compatibility
 
@@ -158,11 +163,11 @@ Use the following environment variables to configure runtime metrics in your app
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>
-**Description**: Sets the host address for the tracing library's metric submission. Can be a hostname or an IP address.
+**Description**: Sets the host address for the SDK's metric submission. Can be a hostname or an IP address.
 
 `DD_DOGSTATSD_PORT`
 : **Default**: `8125` <br>
-**Description**: Sets the port for the tracing library's metric submission.
+**Description**: Sets the port for the SDK's metric submission.
 
 `DD_RUNTIME_METRICS_DIAGNOSTICS_METRICS_API_ENABLED`
 : **Default**: `true` starting tracer v3.40.0+ on .NET 8+ and (.NET 6/7 when `DD_RUNTIME_METRICS_ENABLED` is not explicitly set), otherwise `false`. <br>
@@ -307,3 +312,4 @@ Each supported language collects a set of runtime metrics that provide insights 
 [7]: /extend/dogstatsd/unix_socket/
 [8]: /agent/configuration/agent-configuration-files/#main-configuration-file
 [9]: https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics
+[10]: /opentelemetry/integrations/runtime_metrics/

@@ -33,7 +33,7 @@ To enable APM on a Linux host:
 
 ## Set SDK tracer versions
 
-By default, Single Step Instrumentation installs the latest versions of Datadog APM SDKs.
+By default, Single Step Instrumentation installs the latest versions of Datadog SDKs.
 
 You may want to choose specific SDK versions for compatibility with your application's language version or specific environment requirements.
 
@@ -137,6 +137,10 @@ To update the SDK versions:
 1. Restart your applications.
 
 ### Define instrumentation rules
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
 
