@@ -392,12 +392,14 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 {{% tab "Goose" %}}
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the **Datadog Site** selector on the right side of this documentation page to select your site.
+Point your AI agent to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
-1. One-click install (recommended): Use this {{< region-param key="goose_mcp_install_deeplink" link="true" text="deeplink" >}} to add the Datadog MCP Server to Goose.
+1. Add the Datadog MCP Server to Goose using one of the following methods:
+   - **One-click install (recommended):** Use the Datadog MCP Server {{< region-param key="goose_mcp_install_deeplink" link="true" text="install deeplink" >}}.
+   - **Manual configuration:** Follow Goose's [Add an MCP server][2] instructions, using the endpoint listed in this section as the Streamable HTTP server URL. To edit the configuration directly, modify `~/.config/goose/config.yaml`.
 
 1. Alternatively, follow Goose's [Add an MCP server][2] instructions. Use the selected endpoint shown above as the remote Streamable HTTP server URL. You can also modify Goose's config directly for future updates at `~/.config/goose/config.yaml`.
 
@@ -405,7 +407,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-1. The first time you open a session with this extension activated, you are prompted to choose your Datadog account.
+1. On first session launch, choose your Datadog account when prompted to authenticate.
 
 [1]: /bits_ai/mcp_server#toolsets
 [2]: https://goose-docs.ai/docs/getting-started/using-extensions/#mcp-servers
