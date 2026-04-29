@@ -36,6 +36,7 @@ You need the following [permissions][1] to use the Jira integration for Error Tr
 - Error Tracking Issue Write
 - Cases Read
 - Cases Write
+- Integrations Read
 
 ## Create a ticket from an issue
 
