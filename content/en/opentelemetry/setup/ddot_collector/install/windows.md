@@ -9,10 +9,6 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< callout header="false" btn_hidden="true">}}
-  Support for deploying the DDOT Collector on Windows-based bare-metal hosts and virtual machines is currently in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector on Windows-based bare-metal hosts and virtual machines.
