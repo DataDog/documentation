@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
+import { createPortal } from 'preact/compat';
 import styles from './SearchBar.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 import { multiSearch, type MultiSearchResponse, type TypesenseHit } from '../../utils/typesense';
@@ -177,7 +178,11 @@ export default function SearchBar({ env, search }: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
+  const popupRef = useRef<HTMLDivElement | null>(null);
   const [popupRect, setPopupRect] = useState<{ top: number; left: number; width: number } | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const trimmedQuery = query.trim();
 
@@ -234,13 +239,16 @@ export default function SearchBar({ env, search }: Props) {
     return () => document.removeEventListener('keydown', onKey);
   }, []);
 
-  // Close popup on outside click.
+  // Close popup on outside click. The popup is portaled into document.body so
+  // it's no longer a descendant of `wrapperRef`; we have to check the popup
+  // node separately, otherwise hit clicks would close the popup before the
+  // navigation handler fires.
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      if (!wrapperRef.current) return;
-      if (!wrapperRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
+      const target = e.target as Node;
+      if (wrapperRef.current?.contains(target)) return;
+      if (popupRef.current?.contains(target)) return;
+      setOpen(false);
     };
     document.addEventListener('mousedown', onClick);
     return () => document.removeEventListener('mousedown', onClick);
@@ -358,8 +366,9 @@ export default function SearchBar({ env, search }: Props) {
         <span class={cl('search-bar__shortcut')} aria-hidden="true">/</span>
       </form>
 
-      {popupVisible && (
+      {popupVisible && mounted && createPortal(
         <div
+          ref={popupRef}
           class={cl('search-bar__popup')}
           role="listbox"
           style={popupRect ? { top: `${popupRect.top}px`, left: `${popupRect.left}px` } : undefined}
@@ -420,7 +429,8 @@ export default function SearchBar({ env, search }: Props) {
                 );
               })
           )}
-        </div>
+        </div>,
+        document.body,
       )}
     </div>
   );

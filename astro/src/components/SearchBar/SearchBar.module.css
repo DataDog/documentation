@@ -110,7 +110,9 @@
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius, 4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  z-index: 1000;
+  /* Above `--hugo-banner-z` (1080) and `--hugo-header-z` (200) so neither
+     can paint over the popup as the user scrolls. */
+  z-index: 1090;
   padding: var(--space-sm) 0;
 }
 
