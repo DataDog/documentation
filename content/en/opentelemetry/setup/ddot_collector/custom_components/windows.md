@@ -216,7 +216,7 @@ After the build completes, verify the custom `otel-agent.exe` binary includes yo
    ```powershell
    & "C:\Program Files\Datadog\Datadog Agent\bin\datadog-agent.exe" otel install --registry <YOUR-REGISTRY>
    ```
-   If your registry requires authentication, set the `DD_INSTALLER_REGISTRY_AUTH` environment variable before running the command. Supported values:
+   If your registry requires authentication, set `DD_INSTALLER_REGISTRY_AUTH` to the appropriate value for your registry. Supported values:
    - `gcr`: Google Cloud (GCR / Artifact Registry)
    - `password`: Username and password (also set `DD_INSTALLER_REGISTRY_USERNAME` and `DD_INSTALLER_REGISTRY_PASSWORD`)
    - `dockerconfig`: Docker config file (default, uses `~/.docker/config.json`)

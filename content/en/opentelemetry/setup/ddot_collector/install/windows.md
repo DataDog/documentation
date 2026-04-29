@@ -49,7 +49,7 @@ if ($p.ExitCode -ne 0) {
 
 This command installs both the core Datadog Agent package and the DDOT Collector that runs alongside it.
 
-**Note**: If the Datadog Agent is already installed on the host, you can install the DDOT Collector separately. Run from an **elevated PowerShell session**:
+**Note**: For Agent v7.78+, if the Datadog Agent is already installed on the host, you can install the DDOT Collector separately. Run from an **elevated PowerShell session**:
 ```powershell
 & "C:\Program Files\Datadog\Datadog Agent\bin\datadog-agent.exe" otel install
 ```
