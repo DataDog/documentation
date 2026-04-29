@@ -44,11 +44,11 @@ Supported products (Agent 7.65.0 and above):
 - Orchestrator Explorer
 - Runtime Security
 - Serverless Monitoring
+- Datadog [DDOT Collector][4]
 
 The Datadog FIPS Agent does **not** support the following:
 - Communication between Cluster Agent and Node Agents
 - Outbound communication to anything other than GovCloud
-- Datadog [DDOT Collector][4]
 
 
 ## Compliance guidelines
