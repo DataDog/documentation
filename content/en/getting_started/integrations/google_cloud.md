@@ -74,7 +74,7 @@ Use this guide to get started with monitoring your Google Cloud environment. Thi
 
 ### Metric collection
 
-{{% google-cloud-metric-collection-scope %}}
+{{% google-cloud-collection-scope %}}
 
 <div class="alert alert-info">If your Google Cloud organization uses <a href="https://cloud.google.com/vpc-service-controls/docs/overview">VPC Service Controls</a>, you must explicitly allow Datadog service accounts to access protected resources. If these service accounts are not permitted within your service perimeter, metric, resource, and metadata collection may fail. Contact <a href="/help/">Datadog Support</a> for the service account identifiers for your site or region.</div>
 
