@@ -59,7 +59,7 @@ Each finding is shown as a card with a title, a description of the issue, a seve
 
 A lightweight chat interface lets you follow up on the analysis: ask for more detail on a specific finding, request additional context, or explore related symptoms.
 
-When you're done, save the investigation to a [Notebook][1] for sharing with your team or for future reference.
+Investigations can be saved to a [Notebook][1] for sharing with your team or for future reference.
 
 ## Further reading
 
