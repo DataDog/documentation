@@ -51,13 +51,22 @@ Notification rules allow you to set general alerting preferences that span acros
 
 Notifications can be sent to individuals and teams through email, Slack, Jira, PagerDuty, webhooks, and more. You can also use [dynamic routing][6] to automatically deliver finding notifications to the responsible team based on the `team` tag attached to the finding.
 
+### Integrations
+
+{{% notifications-integrations %}}
+
+### Teams
+
+{{% notifications-teams %}}
+
+### Cases
+
+{{% notifications-cases %}}
+
 ### Email
 
 {{% notifications-email %}}
 
-### Integrations
-
-{{% notifications-integrations %}}
 
 #### Create a webhook for security automation
 
