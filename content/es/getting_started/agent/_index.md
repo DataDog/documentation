@@ -20,11 +20,11 @@ title: Introducción al Agente
 
 Esta guía presenta el Agente de Datadog y cubre:
 
-  - [Introducción al Agente](#what-is-the-datadog-agent)
-  - [Instalación](#installation)
-  - [Datos recopilados por el Agente](#data-collected-by-the-agent)
-  - [Configuraciones y características avanzadas](#advanced-configurations-and-features)
-  - [Solución de problemas](#troubleshooting)
+  - [ Introducción al Agente ](#what-is-the-datadog-agent)
+  - [ Instalación ](#installation)
+  - [ Datos recopilados por el Agente ](#data-collected-by-the-agent)
+  - [ Configuraciones y características avanzadas ](#advanced-configurations-and-features)
+  - [ Solución de problemas ](#troubleshooting)
 
 
 ## ¿Qué es el Agente de Datadog? {#what-is-the-datadog-agent}
