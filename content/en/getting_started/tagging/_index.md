@@ -73,8 +73,8 @@ Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must m
     - A tag that starts with a digit may be accepted in some contexts, such as `env` tags set at the Agent level. However, tags that don't follow standard naming rules may not work consistently across all Datadog products and can increase tag cardinality. Start tags with a letter unless a specific product explicitly supports otherwise.
     - The `DD_TAGS` environment variable uses whitespace as a separator between tags. Whitespace in `DD_TAGS` values is **not** converted to underscores. For example, `DD_TAGS="test:this is a test"` produces four separate tags: `test:this`, `is`, `a`, and `test`. To set a tag value that contains spaces, use a YAML configuration file or integration annotations, where whitespace is converted to underscores.
 
-- Tags can be **up to 200 characters** long. If the tag has the format `<key>:<value>`, the `<key>`, `:`, and `<value>` all count toward the character limit.
-- [Span tags][26] and metric tags are normalized to lowercase. Because of this, using `CamelCase` is not recommended. Authentication (crawler) based integrations also convert camel case tags to underscores before lowercasing, for example `TestTag` --> `test_tag`.
+- Tags can be **up to 200 characters** long. If the tag has the format `<key>:<value>`, the key, `:`, and value all count toward the character limit.
+- [Span tags][26] and metric tags are normalized to lowercase, so avoid using camel case. Authentication (crawler) based integrations also convert camel case tags to underscores before lowercasing. For example `testTag` becomes `test_tag`.
     - Unlike tags, [span attributes][27] and log attributes are case-sensitive, and are not normalized.
 - When using the format `<key>:<value>`, the key always precedes the first colon of the global tag definition. For example:
     
@@ -83,7 +83,7 @@ Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must m
     | `env:staging:east` | `env`         | `staging:east` |
     | `env_staging:east` | `env_staging` | `east`         |
 
-- Tags should not originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
+- Tags should not originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so can cause unbounded growth in your number of [metrics][2].
 
 
 ## Assign tags
