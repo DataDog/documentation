@@ -14,7 +14,6 @@ further_reading:
     - link: '/containers/troubleshooting/cluster-and-endpoint-checks'
       tag: 'Documentation'
       text: 'Troubleshooting Endpoint Checks'
-
 ---
 
 ## Overview

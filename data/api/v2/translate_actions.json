@@ -2192,7 +2192,7 @@
     "summary": "List LLM Observability annotation queues"
   },
   "CreateLLMObsAnnotationQueue": {
-    "description": "Create a new annotation queue. Only `name`, `project_id`, and `description` are accepted.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`, and `modified_at` are inferred by the backend.",
+    "description": "Create an annotation queue. The `name` and `project_id` fields are required.\nAn optional `annotation_schema` can be provided to define the labels for the queue.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`,\nand `modified_at` are inferred by the backend.",
     "summary": "Create an LLM Observability annotation queue",
     "request_description": "Create annotation queue payload.",
     "request_schema_description": "Request to create an LLM Observability annotation queue."
@@ -2202,7 +2202,7 @@
     "summary": "Delete an LLM Observability annotation queue"
   },
   "UpdateLLMObsAnnotationQueue": {
-    "description": "Partially update an annotation queue. Only `name` and `description` can be updated.",
+    "description": "Partially update an annotation queue. The `name`, `description`, and `annotation_schema` fields can be updated.",
     "summary": "Update an LLM Observability annotation queue",
     "request_description": "Update annotation queue payload.",
     "request_schema_description": "Request to update an LLM Observability annotation queue."
@@ -2222,6 +2222,16 @@
     "summary": "Delete annotation queue interactions",
     "request_description": "Delete interactions payload.",
     "request_schema_description": "Request to delete interactions from an LLM Observability annotation queue."
+  },
+  "GetLLMObsAnnotationQueueLabelSchema": {
+    "description": "Retrieve the label schema for a given annotation queue.",
+    "summary": "Get annotation queue label schema"
+  },
+  "UpdateLLMObsAnnotationQueueLabelSchema": {
+    "description": "Create or replace the label schema for a given annotation queue.\nThe label schema defines the labels annotators can apply to interactions in the queue.\nLabel names must be unique within the queue and match the pattern `^[a-zA-Z0-9_-]+$`.\nEach label must have a valid type: score, categorical, boolean, or text.",
+    "summary": "Update annotation queue label schema",
+    "request_description": "Update label schema payload.",
+    "request_schema_description": "Request to update the label schema of an annotation queue."
   },
   "ListLLMObsExperiments": {
     "description": "List all LLM Observability experiments sorted by creation date, newest first.",

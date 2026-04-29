@@ -50,7 +50,7 @@ pnpm add @datadog/openfeature-browser @openfeature/angular-sdk @openfeature/web-
 
 ## Initialize the provider
 
-Create a `DatadogProvider` instance with your Datadog credentials:
+Create a `DatadogProvider` instance with your Datadog credentials. To create a client token, see [Client tokens][2].
 
 ```typescript
 import { DatadogProvider } from '@datadog/openfeature-browser';
@@ -494,4 +494,5 @@ export class MyComponent {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/docs/reference/sdks/client/web/angular/
+[2]: /account_management/api-app-keys/#client-tokens
 

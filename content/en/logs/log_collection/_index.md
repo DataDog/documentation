@@ -27,6 +27,12 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging Without Limits*"
+- link: "https://learn.datadoghq.com/courses/advanced-log-configuration"
+  tag: "Learning Center"
+  text: "Advanced Log Configuration"
+- link: "https://learn.datadoghq.com/courses/log-config-docker"
+  tag: "Learning Center"
+  text: "Configure Log Collection for a Containerized Application"
 algolia:
   tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---

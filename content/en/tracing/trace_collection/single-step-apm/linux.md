@@ -75,6 +75,27 @@ To customize SDK versions:
 
 {{< /site-region >}}
 
+{{< site-region region="gov2" >}}
+1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
+1. After you turn on **APM Instrumentation**, set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
+   
+   ```
+   DD_API_KEY=<YOUR_DD_API_KEY> 
+   DD_SITE="US2-FED" 
+   DD_APM_INSTRUMENTATION_ENABLED=host 
+   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" 
+   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   ```
+
+1. Find your language(s) and use the dropdown to either:
+   - Select an exact SDK version, or
+   - Select the major version, which uses the latest minor release available when the Agent installation command is run.
+1. Copy and run the updated installation command.
+
+[15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+
+{{< /site-region >}}
+
 Available versions are listed in source repositories for each language:
 
 - [Java][8] (`java`)
