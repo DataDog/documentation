@@ -30,6 +30,8 @@
   {{- if $categories -}}
     {{/* Inline SVG for copy-link icon (Material Design link icon) */}}
     {{- $linkIcon := `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>` -}}
+    {{/* Inline SVG for collapsible chevron icon */}}
+    {{- $chevronIcon := `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right"><path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg>` -}}
 
     <div class="registry-config-sections">
     {{/* Render each category as a collapsible section */}}
@@ -53,11 +55,7 @@
         <details class="collapsible-section" id="registry-{{ $catId }}">
           <summary class="collapsible-header">
             <div class="header-content">
-              <div class="header-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
-                  <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-                </svg>
-              </div>
+              <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
               <div class="header-text">
                 <h3 class="header-text-inner">{{ $catTitle }} <small>({{ len $catConfigs }})</small></h3>
               </div>
@@ -141,11 +139,7 @@
                       <details class="collapsible-section" id="{{ $kindAnchor }}">
                         <summary class="collapsible-header">
                           <div class="header-content">
-                            <div class="header-icon">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
-                                <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-                              </svg>
-                            </div>
+                            <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
                             <div class="header-text flex-wrap">
                               <h4 class="header-text-inner me-1"><code>{{ $kindPattern }}</code></h4>
                               <small>({{ len $kindIntNames }} integrations)</small>
@@ -178,11 +172,7 @@
                 <details class="collapsible-section" id="{{ $intAnchor }}">
                   <summary class="collapsible-header">
                     <div class="header-content">
-                      <div class="header-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
-                          <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-                        </svg>
-                      </div>
+                      <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
                       <div class="header-text">
                         <h4 class="header-text-inner">{{ $intName }} <small>({{ len $intConfigs }})</small></h4>
                       </div>
@@ -225,11 +215,7 @@
       <details class="collapsible-section" id="registry-other">
         <summary class="collapsible-header">
           <div class="header-content">
-            <div class="header-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
-                <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-              </svg>
-            </div>
+            <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
             <div class="header-text">
               <h3 class="header-text-inner">Other <small>({{ len $otherConfigs }})</small></h3>
             </div>
