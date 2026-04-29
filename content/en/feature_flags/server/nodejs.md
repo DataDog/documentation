@@ -241,7 +241,7 @@ You can test against a dedicated Datadog test environment with the real `tracer.
 
 When using the in-memory provider, do not call `tracer.init()` or set `tracer.openfeature` as the provider — that is the behavior being replaced.
 
-The OpenFeature API is a singleton per Node.js process. Reset it in `afterAll` with `OpenFeature.close()` (or `OpenFeature.clearProviders()`) to prevent state from one test file leaking into the next.
+The OpenFeature API is a singleton per Node.js process. Reset it in `afterAll` with `OpenFeature.close()` or `OpenFeature.clearProviders()` to prevent state from one test file leaking into the next.
 
 ```javascript
 // flags.test.js
