@@ -42,7 +42,7 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
-      site: {{< region-param key="dd_site" >}}
+      site: <DATADOG_SITE>
     metrics:
       resource_attributes_as_tags: true
     sending_queue:
@@ -76,6 +76,8 @@ service:
       receivers: [prometheus/internal]
       exporters: [datadog]
 ```
+
+Replace `<DATADOG_SITE>` with your [Datadog site][106]. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 The `service.telemetry.metrics` block exposes the Collector's internal metrics on `0.0.0.0:8888`. The `prometheus/internal` receiver scrapes that same endpoint and the metrics pipeline forwards them to Datadog.
 
@@ -123,6 +125,7 @@ If you have a Datadog Agent running on the same host as an OpenTelemetry Collect
 [103]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
 [104]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
 [105]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
+[106]: /getting_started/site
 
 {{% /tab %}}
 {{% tab "OTLP" %}}
@@ -141,7 +144,7 @@ service:
             exporter:
               otlp:
                 protocol: http/protobuf
-                endpoint: {{< region-param key="otlp_metrics_endpoint" >}}
+                endpoint: <OTLP_METRICS_ENDPOINT>
                 temporality_preference: delta
                 compression: gzip
                 timeout: 5000
@@ -163,6 +166,8 @@ service:
       #       aggregation:
       #         drop: {}
 ```
+
+Replace `<OTLP_METRICS_ENDPOINT>` with the [Datadog OTLP metrics intake endpoint][201] for your [Datadog site][202]. Your endpoint is {{< region-param key="otlp_metrics_endpoint" code="true" >}}.
 
 The Datadog OTLP metrics intake endpoint accepts only delta metrics, so `temporality_preference: delta` is required. The `dd-api-key` header authenticates the request. For configuration options (including the `dd-otel-metric-config` header for customizing metric translation) and troubleshooting, see [Datadog OTLP Metrics Intake Endpoint][201].
 
@@ -204,6 +209,7 @@ The Datadog OTLP metrics intake endpoint accepts only delta metrics, so `tempora
 : Paths to PEM files for custom CA verification and mTLS client authentication.
 
 [201]: /opentelemetry/setup/otlp_ingest/metrics/
+[202]: /getting_started/site
 
 {{% /tab %}}
 {{< /tabs >}}
