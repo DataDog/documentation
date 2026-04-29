@@ -615,8 +615,7 @@ To upgrade the Worker, if you are:
             # image.tag -- Specify the image tag to use.
             tag: <WORKER_VERSION>
         ```
-    - **Note**:
-        - Your deployment continues using that image tag until you set `image.tag` in your `values.yaml` file to another version.
+    - **Note**: Your deployment continues using that image tag until you set `image.tag` in your `values.yaml` file to another version.
 - Using the chart's default image tag:
     - Run these commands to update the repo and upgrade the release, along with any overrides you were using, to get the latest chart's default image. Replace `<YOUR_VALUES_FILE>` with the name of your `values.yaml` file.
         
