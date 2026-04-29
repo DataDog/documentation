@@ -31,7 +31,7 @@ Prevention is achieved through [Early Flake Detection][1] and [New Flaky Test PR
 To validate prevention is working, follow these steps:
 
 1. Enable Early Flake Detection in the [settings page][3].
-2. Create a [New Flaky Test PR gate][12] and define its scope to evaluate in the repository under validation.
+2. Create a [New Flaky Test PR gate][12] and define its scope to the repository you are validating.
 
 {{< img src="pr_gates/setup/pr_gate_scope.png" alt="New flaky PR gate scope" style="width:100%" >}}
 
@@ -415,7 +415,7 @@ func testFlaky() {
 {{% /tab %}}
 {{< /tabs >}}
 
-8. In [Flaky Test Management][11], click on the flaky test and press on the `Actions` button followed by `Link commit to Flaky Test fix`. This will open a modal that provides a test key and sample Git command:
+8. In [Flaky Test Management][11], click the flaky test, then click on the `Actions` button and select `Link commit to Flaky Test fix`. This opens a modal that provides a test key and sample Git command:
 
 {{< img src="pr_gates/setup/attempt_to_fix_modal.png" alt="Attempt to fix modal" style="width:50%" >}}
 
@@ -430,11 +430,11 @@ git push origin validate-test-optimization-attempt-to-fix
 ```
 
 10. Wait for CI to finish.
-11. After CI has finished, go back to [Flaky Test Management][11]. The test should now show up as `Fix In Progress`. This means that attempt to fix has worked. The test will automatically move to `Fixed` once the PR is merged.
+11. After CI has finished, go back to [Flaky Test Management][11]. The test now shows up as `Fix In Progress`. This means that the attempt to fix has worked. The test automatically moves to `Fixed` when the PR is merged.
 
 **Important**: Do not merge the PR, as it was just purely for validation purposes. Close the pull request without merging.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
