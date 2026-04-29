@@ -539,7 +539,7 @@ class CheckoutFlagTest {
 }
 {{< /code-block >}}
 
-`OpenFeatureAPI.getInstance()` is a singleton. Always call `shutdown()` in `@AfterEach` (or equivalent), otherwise provider state leaks between test classes and causes flaky suites.
+`OpenFeatureAPI.getInstance()` is a singleton. Always call `shutdown()` in `@AfterEach` (or equivalent); otherwise, provider state leaks between test classes and causes flaky suites.
 
 In Spring Boot tests, register the `InMemoryProvider` through a `@TestConfiguration` bean or in a `@BeforeAll` hook on an `@SpringBootTest` class — the OpenFeature API singleton persists for the lifetime of the Spring context, so initialization only needs to run once.
 
