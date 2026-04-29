@@ -8930,11 +8930,21 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 809
+    - name: AI Investigations
+      url: real_user_monitoring/ai_investigations/
+      parent: rum
+      identifier: rum_ai_investigations
+      weight: 9
+    - name: Single-View AI Investigation
+      url: real_user_monitoring/ai_investigations/single_view_ai_investigation/
+      parent: rum_ai_investigations
+      identifier: rum_ai_investigations_single_view
+      weight: 901
     - name: RUM Without Limits
       url: real_user_monitoring/rum_without_limits/
       parent: rum
       identifier: rum_without_limits
-      weight: 9
+      weight: 10
     - name: Metrics
       url: real_user_monitoring/rum_without_limits/metrics
       parent: rum_without_limits
@@ -8949,27 +8959,27 @@ menu:
       url: real_user_monitoring/operations_monitoring/
       parent: rum
       identifier: rum_operations_monitoring
-      weight: 10
+      weight: 11
     - name: Managed Archive
       url: real_user_monitoring/managed_archive/
       parent: rum
       identifier: rum_managed_archive
-      weight: 11
+      weight: 12
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 12
+      weight: 13
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 13
+      weight: 14
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 14
+      weight: 15
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
