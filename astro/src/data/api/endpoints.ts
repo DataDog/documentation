@@ -22,6 +22,8 @@ import { getCodeExamplesForOperation } from './examples';
 import type { CodeExampleSet } from './examples';
 import { renderMarkdown, renderMarkdownInline } from './markdown';
 import { getRegions, buildApiUrlFromServers } from './regions';
+import { DEFAULT_LOCALE, type Locale } from '../../lib/locale';
+import { getOverlay, translateAction } from './translations';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -463,8 +465,12 @@ function buildCurlByRegion(
 /*  Main export                                                        */
 /* ------------------------------------------------------------------ */
 
-/** Cache of endpoint data per category slug. */
+/** Cache of endpoint data per (locale, category slug) pair. */
 const endpointCache = new Map<string, EndpointData[]>();
+
+function endpointCacheKey(lang: Locale, slug: string): string {
+  return `${lang}:${slug}`;
+}
 
 /**
  * Get all endpoint data for a given API category slug.
@@ -473,16 +479,18 @@ const endpointCache = new Map<string, EndpointData[]>();
  * (by first tag), resolves all schemas, loads code examples, and generates
  * curl commands.
  *
- * Results are cached after the first call for each slug.
+ * Results are cached after the first call for each (locale, slug) pair.
  */
-export function getEndpointsForCategory(slug: string): EndpointData[] {
-  if (endpointCache.has(slug)) return endpointCache.get(slug)!;
+export function getEndpointsForCategory(slug: string, lang: Locale = DEFAULT_LOCALE): EndpointData[] {
+  const cacheKey = endpointCacheKey(lang, slug);
+  if (endpointCache.has(cacheKey)) return endpointCache.get(cacheKey)!;
 
   const endpoints: EndpointData[] = [];
 
   for (const version of ['v1', 'v2'] as const) {
     const spec = getSpec(version);
     const paths = spec.paths;
+    const overlay = getOverlay(version, lang);
 
     if (!paths || typeof paths !== 'object') continue;
 
@@ -504,8 +512,9 @@ export function getEndpointsForCategory(slug: string): EndpointData[] {
 
         // --- Core fields ---
         const operationId: string = operation.operationId ?? '';
-        const summary: string = operation.summary ?? '';
-        const description: string = renderMarkdown(operation.description ?? '');
+        const action = translateAction(overlay, operationId);
+        const summary: string = action.summary ?? operation.summary ?? '';
+        const description: string = renderMarkdown(action.description ?? operation.description ?? '');
         const deprecated: boolean = operation.deprecated === true;
         const unstable: boolean = !!operation['x-unstable'];
         const unstableMessage: string | undefined =
@@ -527,6 +536,18 @@ export function getEndpointsForCategory(slug: string): EndpointData[] {
 
         // --- Request body ---
         const requestBody = extractRequestBody(spec, operation);
+        if (requestBody) {
+          if (action.request_description !== undefined) {
+            requestBody.description = action.request_description
+              ? renderMarkdownInline(action.request_description)
+              : undefined;
+          }
+          if (action.request_schema_description !== undefined && requestBody.schema.length > 0) {
+            // Hugo overrides the root request schema's description; the
+            // top-level field carries the schema-level description text.
+            requestBody.schema[0].description = action.request_schema_description;
+          }
+        }
 
         // --- Responses ---
         const responses = extractResponses(spec, operation);
@@ -610,7 +631,7 @@ export function getEndpointsForCategory(slug: string): EndpointData[] {
     return a.summary.localeCompare(b.summary);
   });
 
-  endpointCache.set(slug, endpoints);
+  endpointCache.set(cacheKey, endpoints);
   return endpoints;
 }
 

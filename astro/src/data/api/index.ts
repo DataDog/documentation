@@ -1,6 +1,8 @@
 import { parse as parseYaml } from 'yaml';
 import { z } from 'astro/zod';
 import { renderMarkdown } from './markdown';
+import { DEFAULT_LOCALE, type Locale } from '../../lib/locale';
+import { getOverlay, translateAction, translateTag } from './translations';
 
 // Import spec files as raw strings so Vite bundles them correctly.
 // Sourced from mocked_dependencies until the live spec feed is wired up.
@@ -103,25 +105,38 @@ function loadSpec(version: 'v1' | 'v2') {
   return SpecSchema.parse(parsed);
 }
 
-let _cache: ApiCategory[] | null = null;
+const _cache = new Map<Locale, ApiCategory[]>();
 
-export function getApiCategories(): ApiCategory[] {
-  if (_cache) return _cache;
+export function getApiCategories(lang: Locale = DEFAULT_LOCALE): ApiCategory[] {
+  const cached = _cache.get(lang);
+  if (cached) {
+    return cached;
+  }
 
   const v1 = loadSpec('v1');
   const v2 = loadSpec('v2');
 
+  const v1Overlay = getOverlay('v1', lang);
+  const v2Overlay = getOverlay('v2', lang);
+
   // Build a map of tag name → category metadata
   const categoryMap = new Map<string, { name: string; slug: string; description: string; deprecated: boolean }>();
 
-  for (const tag of [...v1.tags, ...v2.tags]) {
-    const rawSlug = toSlug(tag.name);
-    const slug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
-    if (!categoryMap.has(slug)) {
-      categoryMap.set(slug, {
+  for (const [tags, overlay] of [[v1.tags, v1Overlay], [v2.tags, v2Overlay]] as const) {
+    for (const tag of tags) {
+      const rawSlug = toSlug(tag.name);
+      const slug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
+      if (categoryMap.has(slug)) {
+        continue;
+      }
+      const translated = translateTag(overlay, slug, {
         name: tag.name,
+        description: tag.description,
+      });
+      categoryMap.set(slug, {
+        name: translated.name,
         slug,
-        description: tag.description ? renderMarkdown(tag.description) : '',
+        description: translated.description ? renderMarkdown(translated.description) : '',
         deprecated: tag['x-deprecated'] === true,
       });
     }
@@ -131,6 +146,7 @@ export function getApiCategories(): ApiCategory[] {
   const opsMap = new Map<string, ApiOperation[]>();
 
   function collectOps(spec: z.infer<typeof SpecSchema>, version: 'v1' | 'v2') {
+    const overlay = version === 'v1' ? v1Overlay : v2Overlay;
     for (const operations of Object.values(spec.paths)) {
       for (const op of operations) {
         const tagName = op.tags[0];
@@ -140,12 +156,16 @@ export function getApiCategories(): ApiCategory[] {
 
         // Ensure the tag is in categoryMap even if it wasn't in the tags list
         if (!categoryMap.has(slug)) {
-          categoryMap.set(slug, { name: tagName, slug, description: '', deprecated: false });
+          const translated = translateTag(overlay, slug, { name: tagName });
+          categoryMap.set(slug, { name: translated.name, slug, description: '', deprecated: false });
         }
 
+        // Anchor stays English (matching Hugo) — slug is derived from the
+        // untranslated summary so deep links survive locale switches.
+        const action = translateAction(overlay, op.operationId);
         opsMap.get(slug)!.push({
           operationId: op.operationId,
-          summary: op.summary,
+          summary: action.summary ?? op.summary,
           slug: operationSlug(op.summary),
           menuOrder: op['x-menu-order'] ?? 999,
           version,
@@ -167,10 +187,10 @@ export function getApiCategories(): ApiCategory[] {
 
   categories.sort((a, b) => a.name.localeCompare(b.name));
 
-  _cache = categories;
+  _cache.set(lang, categories);
   return categories;
 }
 
-export function getCategoryBySlug(slug: string): ApiCategory | undefined {
-  return getApiCategories().find((c) => c.slug === slug);
+export function getCategoryBySlug(slug: string, lang: Locale = DEFAULT_LOCALE): ApiCategory | undefined {
+  return getApiCategories(lang).find((c) => c.slug === slug);
 }
