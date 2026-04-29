@@ -201,35 +201,6 @@
       {{- end -}}
     {{- end -}}
 
-    {{/* "Other" section for uncategorized configs */}}
-    {{- $otherConfigs := slice -}}
-    {{- range $currentConfigs -}}
-      {{- if eq .category "other" -}}
-        {{- $otherConfigs = $otherConfigs | append . -}}
-      {{- end -}}
-    {{- end -}}
-
-    {{- if gt (len $otherConfigs) 0 -}}
-      <details class="collapsible-section" id="registry-other">
-        <summary class="collapsible-header">
-          <div class="header-content">
-            <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
-            <div class="header-text flex-wrap">
-              <h3 class="header-text-inner me-1">Other</h3>
-              <small>({{ len $otherConfigs }})</small>
-            </div>
-            <a class="registry-copy-link registry-copy-link--section" href="#registry-other" title="Copy link" aria-label="Copy link to Other">{{ partial "icon" (dict "name" "click") }}</a>
-          </div>
-        </summary>
-        <div class="collapsible-content">
-          <dl class="registry-config-list">
-            {{- range sort $otherConfigs "name" -}}
-              {{ partial "apm/registry-config-entry" . }}
-            {{- end -}}
-          </dl>
-        </div>
-      </details>
-    {{- end -}}
     </div>
 
     {{/* Copy-link behavior: copies the full URL with fragment to clipboard, auto-opens the target section on page load */}}
