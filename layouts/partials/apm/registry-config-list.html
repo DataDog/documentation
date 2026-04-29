@@ -146,8 +146,9 @@
                                 <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
                               </svg>
                             </div>
-                            <div class="header-text">
-                              <h4 class="header-text-inner"><code>{{ $kindPattern }}</code> <small>({{ len $kindIntNames }} integrations)</small></h4>
+                            <div class="header-text flex-wrap">
+                              <h4 class="header-text-inner me-1"><code>{{ $kindPattern }}</code></h4>
+                              <small>({{ len $kindIntNames }} integrations)</small>
                             </div>
                             <a class="registry-copy-link registry-copy-link--section" href="#{{ $kindAnchor }}" title="Copy link" aria-label="Copy link to {{ $kindPattern }}">{{ $linkIcon | safeHTML }}</a>
                           </div>
