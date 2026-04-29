@@ -179,7 +179,7 @@ When retrying a flaky test multiple times within a short span of time (less than
 
 By default, Vitest's [`isolate`][17] option is `true`, so each test file runs in its own fork or thread. Vitest is ESM-first and relies on [import-in-the-middle][18] for instrumentation, which incurs a setup cost every time a suite starts. With isolation, that setup cost is repeated for every file. The effect is largest when you have many small, fast suites, because setup time can dominate wall-clock time.
 
-To lower overhead, set `isolate: false` in your `vitest.config` file, or pass `--no-isolate` to the test command.
+To lower overhead, set `isolate: false` in your Vitest config file, or pass `--no-isolate` to the test command.
 
 ## Further reading
 
