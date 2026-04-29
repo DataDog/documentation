@@ -15,9 +15,9 @@ further_reading:
 
 The [Playground][1] is a browser-based interface for testing and evaluating LLM prompts. You can test a prompt with arbitrary input against any connected model provider, or load a dataset, attach evaluators, preview results, and save the configuration as a reproducible experiment—all without writing code.
 
-The Playground has two modes:
-- **Prompts mode**: Send a single prompt with arbitrary input values and inspect the model response.
-- **Experiments mode**: Run your prompt across a dataset, score each row with evaluators, and save the result as an [experiment][2].
+The Playground supports two flows:
+- **Arbitrary input**: Send a single prompt with custom input values and inspect the model response.
+- **Dataset experiment**: Run your prompt across a dataset, score each row with evaluators, and save the result as an [experiment][2].
 
 ## Prerequisites
 
@@ -33,16 +33,18 @@ Supported providers:
 
 ## Test a prompt with arbitrary input
 
+{{< img src="llm_observability/playground/playground-arbitrary-input.png" alt="LLM Observability Playground showing a user message with {{category}} and {{approach}} variable placeholders and the model response in the output panel." style="width:100%;" >}}
+
 Use Prompts mode to iterate on a prompt with a fixed set of inputs.
 
 1. Navigate to [**AI Observability > Playground**][1].
-2. In the configuration panel, select a **Provider** and **Model**.
-3. (Optional) Click **Parameters** to adjust model settings such as temperature, max tokens, and top-p.
-4. Write your prompt in the message editor. A user message is included by default. Click **Add system message** to add a system message.
-5. To parameterize inputs, use `{{variable_name}}` in any message. Enter values for each variable in the **Variables** section of the configuration panel.
-6. (Optional) Click **Tools** to add tool definitions in JSON function schema format. Use the provided examples (Weather, Web Search, Email, Stock Price) as starting points.
-7. (Optional) Click **Parameters > JSON Schema** to request structured output from the model.
-8. Click **Run** to send the prompt and view the model response.
+1. In the configuration panel, select a **Provider** and **Model**.
+1. (Optional) Click **Parameters** to adjust model settings such as temperature, max tokens, and top-p.
+1. Write your prompt in the message editor. A user message is included by default. Click **Add system message** to add a system message.
+1. To parameterize inputs, use `{{variable_name}}` in any message. Enter values for each variable in the **Variables** section of the configuration panel.
+1. (Optional) Click **Tools** to add tool definitions in JSON function schema format. Use the provided examples (Weather, Web Search, Email, Stock Price) as starting points.
+1. (Optional) Click **Parameters > JSON Schema** to request structured output from the model.
+1. Click **Run** to send the prompt and view the model response.
 
 Edit messages, variable values, or model settings, then click **Run** again to iterate.
 
@@ -54,31 +56,27 @@ Use Experiments mode to test your prompt across a dataset, score results with ev
 
 Write your prompt using `{{variable_name}}` placeholders where dataset values will be substituted. Use dot notation to reference nested dataset fields—for example, `{{input.question}}` to reference a field named `question` in the input section of a record.
 
-<div class="alert alert-warning">If a variable references a path that does not exist in the dataset—for example, <code>{{question}}</code> instead of <code>{{input.question}}</code>—the model receives the literal template string. Verify that variable paths match the column mapping you configure in step 4.</div>
+<div class="alert alert-warning">If a variable references a path that does not exist in the dataset—for example, <code>{{question}}</code> instead of <code>{{input.question}}</code>—the model receives the literal template string. Verify that variable paths match the column mapping you configure in step 3.</div>
 
-### 2. Switch to Experiments mode
-
-Click **Experiments** in the top toolbar to enter Experiments mode. The right pane switches to the experiment builder.
-
-### 3. Select a dataset
+### 2. Select a dataset
 
 Select a dataset from your project. The dataset provides the records the Playground runs your prompt against.
 
 To create a dataset, see [Datasets][4].
 
-### 4. Map dataset columns
+### 3. Map dataset columns
 
 Map dataset columns to the sections available in your prompt:
 
 | Section | Description |
 |---------|-------------|
-| **Input** | Columns from the input section of each record, used to fill `{{input.*}}` variables. |
-| **Expected Output** | Ground truth values used by evaluators to score model output. Available as `{{expected_output.*}}` in evaluator configuration. |
-| **Metadata** | Additional context columns, available as `{{metadata.*}}` variables. |
+| **Input** | Columns from the input section of each record, used to fill `{{input.*}}` variables. If the input value is a JSON object, its top-level keys are exposed as individual variables (for example, `{{input.question}}` and `{{input.category}}`). If the input value is a plain string or number, the whole field is available as `{{input}}`. |
+| **Expected Output** | Ground truth values used by evaluators to score model output. If the value is a JSON object, top-level keys are exposed individually (for example, `{{expected_output.answer}}`). Available as `{{expected_output}}` for plain values. |
+| **Metadata** | Additional context columns. Top-level keys of a JSON object are available as `{{metadata.*}}` variables. |
 
 Click **Confirm** to proceed to the preview stage.
 
-### 5. Add evaluators
+### 4. Add evaluators
 
 Evaluators score each row after a preview run. Click **Add Evaluators** in the toolbar to open the evaluator configuration modal.
 
@@ -95,7 +93,7 @@ The Playground supports **String Check** evaluators:
 
 Add multiple evaluators to score different aspects of the output in one run.
 
-### 6. Run a preview
+### 5. Run a preview
 
 Click **Run Preview** to execute the prompt on up to 20 dataset records.
 
@@ -106,7 +104,7 @@ After the preview completes:
 
 Click a **FAIL** badge to expand a popover showing the actual output, the operator, the expected value, and a contextual hint. For example, when an `equals` check fails because the output contains the expected value as a substring, the popover suggests switching to `contains`.
 
-### 7. Iterate on prompt and evaluator configuration
+### 6. Iterate on prompt and evaluator configuration
 
 After reviewing results, edit the prompt or evaluator configuration to improve scores. Any edit marks the preview results as stale. Click **Re-run Preview** to run again with the updated configuration.
 
@@ -115,15 +113,15 @@ Common iteration patterns:
 - If variable values appear as literals in the output (for example, `{{input.question}}`), correct the variable path in the prompt.
 - Adjust the prompt wording and re-run to observe the effect on pass rates.
 
-### 8. Save and run as an experiment
+### 7. Save and run as an experiment
 
 When the preview results meet your expectations, click **Save & Run as experiment** to run on the full dataset.
 
 In the dialog:
 
 1. Enter an **Experiment name**.
-2. Select a **Project**.
-3. Click **Save**.
+1. Select a **Project**.
+1. Click **Save**.
 
 The experiment runs across all records in the dataset—not only the 20-record preview sample. When complete, view results in [**AI Observability > Experiments**][2].
 
