@@ -392,9 +392,9 @@ Flags.enable(with: config)
 
 ## Testing
 
-The examples above use Datadog's `FlagsClient` API directly. If you prefer to drive feature flags through the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature bridge for iOS at [dd-openfeature-provider-swift](https://github.com/DataDog/dd-openfeature-provider-swift): use the bridge's `DatadogProvider` in production, and — if you want code-controlled flag values in tests — substitute an in-memory provider.
+The examples above use Datadog's `FlagsClient` API directly. If you prefer to drive feature flags through the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature bridge for iOS at [dd-openfeature-provider-swift](https://github.com/DataDog/dd-openfeature-provider-swift). Use the bridge's `DatadogProvider` in production, and for code-controlled flag values in tests, substitute an in-memory provider.
 
-You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The OpenFeature Swift SDK does not ship an `InMemoryProvider` (no contrib repository for Swift exists), so tests use a small custom `FeatureProvider` instead.
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The OpenFeature Swift SDK does not ship an `InMemoryProvider`, so tests use a small custom `FeatureProvider` instead.
 
 {{< code-block lang="swift" >}}
 import Combine

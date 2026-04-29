@@ -295,7 +295,7 @@ await OpenFeature.setContext({
 
 ## Testing
 
-You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `TypedInMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `TypedInMemoryProvider` is exported from `@openfeature/web-sdk`; install it as a dev dependency and register it before rendering components under test:
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `TypedInMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `TypedInMemoryProvider` is exported from `@openfeature/web-sdk`; install it as a development dependency and register it before rendering components under test:
 
 {{< code-block lang="javascript" >}}
 import { OpenFeature } from '@openfeature/react-sdk';
