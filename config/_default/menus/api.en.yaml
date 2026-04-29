@@ -6806,14 +6806,14 @@ menu:
           - ListAuthNMappings
         unstable: []
         order: 4
-    - name: Bits AI
-      url: /api/latest/bits-ai/
-      identifier: bits-ai
+    - name: Bits AI SRE
+      url: /api/latest/bits-ai-sre/
+      identifier: bits-ai-sre
       generated: true
-    - name: Get a Bits AI investigation
-      url: '#get-a-bits-ai-investigation'
-      identifier: bits-ai-get-a-bits-ai-investigation
-      parent: bits-ai
+    - name: Get a Bits AI SRE investigation
+      url: '#get-a-bits-ai-sre-investigation'
+      identifier: bits-ai-sre-get-a-bits-ai-sre-investigation
+      parent: bits-ai-sre
       generated: true
       params:
         versions:
@@ -6823,10 +6823,10 @@ menu:
         unstable:
           - v2
         order: 3
-    - name: Trigger a Bits AI investigation
-      url: '#trigger-a-bits-ai-investigation'
-      identifier: bits-ai-trigger-a-bits-ai-investigation
-      parent: bits-ai
+    - name: Trigger a Bits AI SRE investigation
+      url: '#trigger-a-bits-ai-sre-investigation'
+      identifier: bits-ai-sre-trigger-a-bits-ai-sre-investigation
+      parent: bits-ai-sre
       generated: true
       params:
         versions:
@@ -6836,10 +6836,10 @@ menu:
         unstable:
           - v2
         order: 1
-    - name: List Bits AI investigations
-      url: '#list-bits-ai-investigations'
-      identifier: bits-ai-list-bits-ai-investigations
-      parent: bits-ai
+    - name: List Bits AI SRE investigations
+      url: '#list-bits-ai-sre-investigations'
+      identifier: bits-ai-sre-list-bits-ai-sre-investigations
+      parent: bits-ai-sre
       generated: true
       params:
         versions:
