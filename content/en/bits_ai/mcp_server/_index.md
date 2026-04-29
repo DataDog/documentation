@@ -66,7 +66,7 @@ All tool calls are recorded in the Datadog [Audit Trail][16] with metadata ident
 Datadog also emits two standard metrics that you can use to monitor MCP Server activity:
 
 - `datadog.mcp.session.starts`: Emitted on each session initialization.
-- `datadog.mcp.tool.usage`: A distribution metric emitted on each tool call.
+- `datadog.mcp.tool.usage`: A distribution metric emitted on each tool call. Tagged with `tool_name` (the name of the tool invoked).
 
 Both metrics are tagged with attributes such as `user_id`, `user_email`, and `client` (the MCP client name, such as `claude` or `cursor`).
 
