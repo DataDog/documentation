@@ -48,6 +48,12 @@ To set up a retention quota for an application:
 
 Configuration is done at the application level, which means you can apply different retention strategies per application. Any configuration change (quota limit, retention behavior, reset time) is instantly applied.
 
+## Monitoring quota usage
+
+The `rum.measure.usage.quota_blocked_sessions` metric tracks the volume of sessions that were blocked after the quota was reached.
+
+{{< img src="real_user_monitoring/rum_without_limits/retention-quotas-blocked-metric.png" alt="The retention quota metric showing the volume of sessions blocked after the quota was reached." style="width:100%" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
