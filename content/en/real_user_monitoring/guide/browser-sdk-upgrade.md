@@ -87,13 +87,13 @@ Access-Control-Allow-Headers: traceparent, tracestate, baggage
 
 #### New default for `defaultPrivacyLevel`
 
-`defaultPrivacyLevel` defaults to `mask-user-input` in v7 (previously `mask`). This provides better out-of-the-box privacy without the restrictions of full masking. The new default masks user input while other content is collected.
+`defaultPrivacyLevel` defaults to `mask-user-input` in v7 (previously `mask`). This provides sensible out-of-the-box privacy without the restrictions of full masking. The new default masks user input while other content is collected.
 
 To preserve full masking, explicitly set `defaultPrivacyLevel: "mask"`.
 
 #### `enablePrivacyForActionName` enabled by default
 
-`enablePrivacyForActionName` defaults to `true` in v7. Click action names follow the `defaultPrivacyLevel` setting by default. Use the [Datadog build plugin][36] or set `enablePrivacyForActionName: false` to opt out.
+`enablePrivacyForActionName` defaults to `true` in v7. Click action names follow the `defaultPrivacyLevel` setting by default. Set `enablePrivacyForActionName: false` to opt out. New masking capabilities are planned for the [Datadog build plugin][36].
 
 #### `startDurationVital` and `stopDurationVital` API change
 
