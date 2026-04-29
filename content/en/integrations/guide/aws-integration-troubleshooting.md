@@ -59,9 +59,9 @@ See [Space aggregation][21] in the metric documentation for more information.
 
 #### 3. Per-dimension metrics
 
-Some AWS CloudWatch metrics are emitted once per dimension combination, which can produce values that appear inflated when aggregated in Datadog. For example, the Classic ELB metric `aws.elb.healthy_host_count` is reported separately for each Availability Zone. When cross-zone load balancing is enabled, summing this metric across all Availability Zones produces a total that is higher than the actual number of healthy hosts. See [Wrong count of aws.elb.healthy_host_count](#wrong-count-of-awselbhealthy_host_count) for details.
+Some AWS CloudWatch metrics are emitted once per dimension combination, which can produce values that appear inflated when aggregated in Datadog. For example, the Classic ELB metric `aws.elb.healthy_host_count` is reported separately for each availability zone. When cross-zone load balancing is enabled, summing this metric across all availability zones produces a total that is higher than the actual number of healthy hosts. See [Wrong count of aws.elb.healthy_host_count](#wrong-count-of-awselbhealthy_host_count) for details.
 
-To avoid inflated aggregation, use the `_deduped` metric variants when available, or scope your query to a specific dimension value such as a single Availability Zone. See the [ELB integration page][27] for a full list of load balancer types that support `_deduped` variants.
+To avoid inflated aggregation, use the `_deduped` metric variants when available, or scope your query to a specific dimension value such as a single availability zone. See the [ELB integration page][27] for a full list of load balancer types that support `_deduped` variants.
 
 #### Reconcile the discrepancy
 
@@ -95,15 +95,15 @@ The delay between when a metric is generated in AWS and when it appears in Datad
 
 | Collection method | Typical delay | Notes |
 |---|---|---|
-| API polling (default) | ~10 minutes | CloudWatch API rate limits and account size can increase delay. |
-| [CloudWatch Metric Streams][23] | 2-3 minutes | Requires separate setup with Amazon Data Firehose. |
+| API polling (default) | Approximately 10 minutes | CloudWatch API rate limits and account size can increase delay. |
+| [CloudWatch Metric Streams][23] | 2 to 3 minutes | Requires separate setup with Amazon Data Firehose. |
 | [Datadog Agent][3] | Real-time | Collects host-level metrics directly, without CloudWatch. |
 
 In addition to collection method delays, some AWS services introduce their own latency on the CloudWatch side:
 
 - **S3 Storage Lens** metrics are published daily, not continuously.
 - **AWS billing metrics** are delayed by several hours and update infrequently.
-- **Detailed monitoring** for EC2 provides one-minute metrics (instead of the default five-minute granularity) but requires enablement per-instance in AWS.
+- **Detailed monitoring** for EC2 provides one-minute metrics (instead of the default five-minute granularity) but requires enablement per instance in AWS.
 
 **Note**: Datadog does not backfill historical metric data. See [What to expect after setup][25] for details.
 
@@ -115,12 +115,12 @@ If you are not seeing expected AWS metrics in Datadog, work through the followin
 2. **Verify the AWS region is enabled.** In the [AWS integration page][16], confirm that the region where your resources are deployed is selected under the **General** tab. Metrics are only collected from enabled regions.
 3. **Verify the service is emitting metrics to CloudWatch.** Open the CloudWatch console in AWS and confirm that the expected metrics exist. CloudWatch's API returns only metrics with datapoints, so if a resource is idle or has no attached components (for example, an ELB with no attached instances), CloudWatch may not report metrics for it.
 4. **Check whether the service requires additional enablement.** Some AWS services do not emit metrics to CloudWatch by default and require extra configuration in the AWS console. See [Which AWS services require additional setup beyond the core integration?][26] for a full list.
-5. **Wait for the polling interval.** Allow at least one collection cycle before investigating further. See [Expected metric delays](#expected-metric-delays) above for timing by collection method.
-6. **Check for Service Control Policies (SCPs).** If your account is part of an AWS Organization, SCPs applied at the organization or OU level can override IAM permissions and block API calls. Verify that no SCP denies the required permissions.
+5. **Wait for the polling interval.** Allow at least one collection cycle before investigating further. See [Expected metric delays](#expected-metric-delays) for timing by collection method.
+6. **Check for Service Control Policies (SCPs).** If your account is part of an AWS Organization, SCPs applied at the organization or organizational unit (OU) level can override IAM permissions and block API calls. Verify that no SCP denies the required permissions.
 
 ### Wrong count of aws.elb.healthy_host_count
 
-When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch's side). For example, if you have two instances in `1a` and three instances in `ab`, the metric displays five instances per availability zone.
+When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch's side). For example, if you have two instances in `1a` and three instances in `1b`, the metric displays five instances per availability zone.
 As this can be counter intuitive, the metrics **aws.elb.healthy_host_count_deduped** and **aws.elb.un_healthy_host_count_deduped** display the count of healthy and unhealthy instances per availability zone, regardless of if this cross-zone load balancing option is enabled or not.
 
 ## Regions
@@ -134,7 +134,7 @@ Datadog collects metrics only from the AWS regions you select in the [AWS integr
 - **Global services**: Some AWS services (such as IAM, CloudFront, and Route 53) are global and not tied to a specific region. Metrics for these services typically appear under `us-east-1` regardless of the region configuration in Datadog.
 - **Regional services**: Most AWS services are regional. Datadog only collects metrics for regions explicitly enabled in the integration tile.
 - **Opt-in regions**: AWS opt-in regions (such as `af-south-1`, `ap-east-1`, and `me-south-1`) must be enabled in both your [AWS account settings][22] and the Datadog integration tile. If the region is not enabled on the AWS side, Datadog cannot collect data from it.
-- **New regions**: Recently launched AWS regions may be crawled automatically but might not yet appear in the Datadog integration UI or Terraform provider. Check the [AWS integration page][16] for the latest list of supported regions.
+- **New regions**: Recently launched AWS regions are crawled but may not appear immediately in the Datadog integration UI or Terraform provider. Check the [AWS integration page][16] for the latest list of supported regions.
 
 ## Datadog UI
 
@@ -173,7 +173,7 @@ See the [Transition to using Instance Metadata Service Version 2][7] documentati
 
 ### Tag collection and propagation delays
 
-AWS tags are collected as part of the integration's crawl cycle and may take additional time to appear in Datadog after you apply them in AWS. Expect tag propagation to take anywhere from 15 minutes to several hours, depending on the AWS service and the volume of resources in your account.
+AWS tags are collected as part of the integration's crawl cycle. Expect tag propagation to take 15 minutes to several hours after you apply tags in AWS, depending on the AWS service and the volume of resources in your account.
 
 If you recently added or changed tags in AWS and do not see them reflected in Datadog:
 1. Wait at least one full crawl cycle (approximately 10 minutes for API polling).
