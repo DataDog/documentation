@@ -679,14 +679,14 @@ export default {
     gov: '\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)'
   },
   flutter_web_logs_cdn_path: {
-    us: 'us1/v5/datadog-logs.js',
-    us3: 'us3/v5/datadog-logs.js',
-    us5: 'us5/v5/datadog-logs.js',
-    eu: 'eu1/v5/datadog-logs.js',
-    ap1: 'ap1/v5/datadog-logs.js',
-    ap2: 'ap2/v5/datadog-logs.js',
-    gov2: 'datadog-logs-v5.js',
-    gov: 'datadog-logs-v5.js'
+    us: 'us1/v6/datadog-logs.js',
+    us3: 'us3/v6/datadog-logs.js',
+    us5: 'us5/v6/datadog-logs.js',
+    eu: 'eu1/v6/datadog-logs.js',
+    ap1: 'ap1/v6/datadog-logs.js',
+    ap2: 'ap2/v6/datadog-logs.js',
+    gov2: 'datadog-logs-v6.js',
+    gov: 'datadog-logs-v6.js'
   },
   flutter_web_rum_cdn_path: {
     us: 'us1/v6/datadog-rum-slim.js',
