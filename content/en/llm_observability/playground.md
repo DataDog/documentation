@@ -112,6 +112,8 @@ Click a **FAIL** badge to expand a popover showing the actual output, the operat
 
 ### Iterate on prompt and evaluator configuration
 
+{{< img src="llm_observability/playground/playground-stale-preview.png" alt="LLM Observability Playground showing stale preview state after a prompt edit. A warning banner reads 'Prompt or settings changed since the last preview. Run the preview again before running the full dataset.' with a Re-run Preview button. The results table shows PASS and FAIL badges from the previous run." style="width:100%;" >}}
+
 After reviewing results, edit the prompt or evaluator configuration to improve scores. Any edit marks the preview results as stale. Click **Re-run Preview** to run again with the updated configuration.
 
 Common iteration patterns:
