@@ -1,7 +1,6 @@
 ---
 title: Set up SCA in your running services
 disable_toc: false
-weight: 2
 aliases:
 - /security/application_security/enabling/tracing_libraries/sca/
 ---

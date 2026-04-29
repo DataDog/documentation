@@ -7444,6 +7444,11 @@ menu:
       url: /security/code_security/software_composition_analysis/library_inventory/
       parent: software_composition_analysis
       weight: 3
+    - name: CVE Explorer
+      identifier: sca_cve_explorer
+      url: /security/code_security/software_composition_analysis/cve_explorer/
+      parent: software_composition_analysis
+      weight: 4
     - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/

@@ -2,7 +2,6 @@
 title: Set up SCA in your repositories
 description: Learn about Datadog Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
 disable_toc: false
-weight: 1
 aliases:
 - /code_analysis/software_composition_analysis/generic_ci_providers/
 - /code_analysis/software_composition_analysis/github_actions/
