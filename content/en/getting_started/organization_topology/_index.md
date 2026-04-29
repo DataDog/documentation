@@ -1,10 +1,15 @@
 ---
-title: Getting Started with Organization Topology
+title: Organization Topology
 description: Choose between single-org and multi-org Datadog deployments, achieve isolation with access controls, and manage multi-org environments.
+aliases:
+- /account_management/org_settings/organization_topology/
 further_reading:
 - link: "/account_management/multi_organization/"
   tag: "Documentation"
   text: "Managing Multiple-Organization Accounts"
+- link: "/account_management/organization_groups/"
+  tag: "Documentation"
+  text: "Organization Groups"
 - link: "/account_management/org_settings/cross_org_visibility/"
   tag: "Documentation"
   text: "Cross-Organization Visibility"
@@ -29,12 +34,13 @@ further_reading:
 
 Your Datadog organization topology (single-organization or multi-organization) shapes how you observe services, control access, manage users, and attribute cost.
 
-This guide covers:
+This page covers:
 - The capabilities of a single-organization topology
 - The scenarios that justify a multi-organization topology
-- Managing a multi-organization topology with Organization Groups
+- How to decide which topology fits your needs
 
-## Getting started 
+## Start with a single organization
+
 Datadog recommends a [single-organization topology](#single-organization-topology-recommended) for most deployments. You can manage a single organization by customizing the level of access to your Datadog resources. For example, large enterprises with thousands of users and multiple business units can use [Teams][7] and [granular access control][6] to satisfy strict compliance requirements.
 
 Use a [multi-organization topology](#multi-organization-topology) only when a single organization cannot satisfy a hard requirement.
@@ -50,7 +56,7 @@ A single organization gives you:
 - **One configuration surface:** Monitors, dashboards, pipelines, and SLOs live in one place, with no duplication and no drift.
 - **Simple user management:** You only need one SSO configuration, one [SCIM][11] integration, and one set of roles and teams.
 - **Per-team cost visibility:** Usage attribution breaks down spend by team, service, or business unit using tags, so you don't need separate organizations for separate billing views.
-- **Low operational cost:** Single orgs don't require Terraform modules per organization, cross-organization workarounds, or duplicated alert routing.
+- **Low operational cost:** A single organization doesn't require Terraform modules per organization, cross-organization workarounds, or duplicated alert routing.
 
 **Example:** A large technology company with 5,000 Datadog users across 12 business units uses one organization. Each business unit has a Team with discretionary access control restrictions on its telemetry. Platform admins have a global role. Business unit engineers see only their team's data.
 
@@ -68,7 +74,7 @@ All users within an organization can see core functionality such as infrastructu
 
 Use multi-organization when a single organization with access controls cannot satisfy a hard requirement, or when separate billing entities require independent invoicing. The following five scenarios qualify.
 
-### Scenario 1: Regulatory or contractual data isolation 
+### Scenario 1: Regulatory or contractual data isolation
 
 _Would co-locating this data in the same organization violate a regulation or contract, even with team-based access restrictions?_
 
@@ -121,9 +127,7 @@ Mergers and acquisitions often create temporary multi-organization states. The a
 
 ### Compare org capabilities
 
-In the following chart, "no change" indicates that Organization Groups do not introduce new capabilities. 
-
-**Note**: Organization Groups is in preview. Contact your account team to learn more.
+In the following chart, "no change" indicates that Organization Groups do not introduce new capabilities.
 
 | Capability | Single organization | Multi-organization | With Organization Groups |
 | :---- | :---- | :---- | :---- |
@@ -138,28 +142,7 @@ In the following chart, "no change" indicates that Organization Groups do not in
 | Billing and usage | Usage attribution per organization | Datadog aggregates usage across all child organizations and bills it at the parent organization level | No change |
 | Feature rollout | Immediate | Must enable per organization | Centralized from group |
 
-## Manage multi-organization with Organization Groups
-
-For organizations that remain multi-organization, Organization Groups introduces centralized governance across organizations, reducing the operational cost that makes multi-organization expensive.
-
-### Centralize governance across organizations
-
-Organization Groups lets administrators manage multiple Datadog organizations as a single unit. Instead of configuring roles, policies, and settings individually per organization, administrators define them once at the group level and push them to member organizations.
-
-- **View and manage organizations in a group.** See all member organizations from the group and navigate between them.
-- **Push roles and policies from group to member organizations.** Define custom roles, access policies, and session settings in the parent organization and apply them to child organizations.
-- **Manage users centrally.** Add or remove users across multiple organizations from the parent without per-organization invitations.
-- **Configure roles, teams, and Data Access Control policies across organizations.** Define access rules once and apply them across organizations.
-
-### Apply Organization Groups
-
-#### For new multi-organization deployments
-If your use case requires multi-organization, Organization Groups gives you centralized controls to manage it from a single parent organization.
-
-#### For existing multi-organization customers considering consolidation
-Organization Groups provides a middle path. If full consolidation is impractical, Organization Groups brings many of the benefits of a single organization without requiring migration, including centralized policy management, reduced configuration drift, and simpler user management. 
-
-Contact your account team to discuss early access to Organization Groups.
+If your use case requires multi-organization, see [Organization Groups][12] for centralized governance across organizations.
 
 ## Further reading
 
@@ -176,3 +159,4 @@ Contact your account team to discuss early access to Organization Groups.
 [9]: /dashboards/sharing/shared_dashboards/#invite-only-shared-dashboards
 [10]: /account_management/org_settings/ip_allowlist/
 [11]: /account_management/scim/
+[12]: /account_management/organization_groups/
