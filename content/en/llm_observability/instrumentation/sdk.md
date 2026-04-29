@@ -921,7 +921,7 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 
 {{< tabs >}}
 {{% tab "Python" %}}
-To trace a task span, use the function decorator `LLMObs.task()`.
+To trace a task span, use the function decorator `ddtrace.llmobs.decorators.task()`.
 
 {{% collapse-content title="Arguments" level="h4" expanded=false id="task-span-arguments" %}}
 
@@ -1014,7 +1014,7 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 
 {{< tabs >}}
 {{% tab "Python" %}}
-To trace an embedding operation, use the function decorator `LLMObs.embedding()`.
+To trace an embedding operation, use the function decorator `ddtrace.llmobs.decorators.embedding()`.
 
 **Note**: Annotating an embedding span's input requires different formatting than other span types. See [Enriching spans](#enriching-spans) for more details on how to specify embedding inputs.
 
@@ -1747,8 +1747,12 @@ The `llmobs.annotationContext()` method accepts the following options on the fir
 {{% collapse-content title="Options" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
 
 `name`
-: optional - _str_
+: optional - _string_
 <br />Name that overrides the span name for any auto-instrumented spans that are started within the annotation context.
+
+`prompt`
+: optional - _object_
+<br />An object that represents the prompt used for an LLM call. See the [Prompt object](#prompt-tracking-arguments) documentation for the complete schema and supported keys. **Note**: This argument only applies to LLM spans.
 
 `tags`
 : optional - _object_
@@ -1886,7 +1890,7 @@ function answerQuestion(text) {
       prompt: {
         id: "translation-template",
         version: "1.0.0",
-        chat_template: [{"role": "user", "content": "Translate to {{lang}}: {{text}}"}],
+        template: [{"role": "user", "content": "Translate to {{lang}}: {{text}}"}],
         variables: {"lang": "fr", "text": text},
         tags: {"team": "nlp"}
       }
