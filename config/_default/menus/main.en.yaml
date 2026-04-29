@@ -4615,7 +4615,7 @@ menu:
       parent: profiler
       identifier: profiler_enabling
       weight: 1
-    - name: Supported Language and Tracer Versions
+    - name: Supported Language and SDK Versions
       url: profiler/enabling/supported_versions/
       parent: profiler_enabling
       identifier: profiler_supported_langs
