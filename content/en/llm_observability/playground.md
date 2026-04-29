@@ -50,21 +50,23 @@ Edit messages, variable values, or model settings, then click **Run** again to i
 
 ## Run an experiment from the Playground
 
+{{< img src="llm_observability/playground/playground-experiment-preview.png" alt="LLM Observability Playground in experiment mode showing the step progress bar (Add Dataset, Add Variables, Add Evaluators, Run Preview, Save Experiment), a prompt with the {{input}} variable, and the Experiment Preview table with OUTPUT, INPUT, and EXPECTEDOUTPUT columns across 20 records." style="width:100%;" >}}
+
 Use Experiments mode to test your prompt across a dataset, score results with evaluators, and save the configuration as a reproducible experiment.
 
-### 1. Configure your prompt
+### Configure your prompt
 
 Write your prompt using `{{variable_name}}` placeholders where dataset values will be substituted. Use dot notation to reference nested dataset fields—for example, `{{input.question}}` to reference a field named `question` in the input section of a record.
 
-<div class="alert alert-warning">If a variable references a path that does not exist in the dataset—for example, <code>{{question}}</code> instead of <code>{{input.question}}</code>—the model receives the literal template string. Verify that variable paths match the column mapping you configure in step 3.</div>
+<div class="alert alert-warning">If a variable references a path that does not exist in the dataset—for example, <code>{{question}}</code> instead of <code>{{input.question}}</code>—the model receives the literal template string. Verify that variable paths match the column mapping in the Add Variables step.</div>
 
-### 2. Select a dataset
+### 1. Add a dataset
 
 Select a dataset from your project. The dataset provides the records the Playground runs your prompt against.
 
 To create a dataset, see [Datasets][4].
 
-### 3. Map dataset columns
+### 2. Add variables
 
 Map dataset columns to the sections available in your prompt:
 
@@ -74,9 +76,9 @@ Map dataset columns to the sections available in your prompt:
 | **Expected Output** | Ground truth values used by evaluators to score model output. If the value is a JSON object, top-level keys are exposed individually (for example, `{{expected_output.answer}}`). Available as `{{expected_output}}` for plain values. |
 | **Metadata** | Additional context columns. Top-level keys of a JSON object are available as `{{metadata.*}}` variables. |
 
-Click **Confirm** to proceed to the preview stage.
+Click **Use this dataset** to proceed to the preview stage.
 
-### 4. Add evaluators
+### 3. Add evaluators
 
 Evaluators score each row after a preview run. Click **Add Evaluators** in the toolbar to open the evaluator configuration modal.
 
@@ -93,7 +95,7 @@ The Playground supports **String Check** evaluators:
 
 Add multiple evaluators to score different aspects of the output in one run.
 
-### 5. Run a preview
+### 4. Run a preview
 
 Click **Run Preview** to execute the prompt on up to 20 dataset records.
 
@@ -104,7 +106,7 @@ After the preview completes:
 
 Click a **FAIL** badge to expand a popover showing the actual output, the operator, the expected value, and a contextual hint. For example, when an `equals` check fails because the output contains the expected value as a substring, the popover suggests switching to `contains`.
 
-### 6. Iterate on prompt and evaluator configuration
+### Iterate on prompt and evaluator configuration
 
 After reviewing results, edit the prompt or evaluator configuration to improve scores. Any edit marks the preview results as stale. Click **Re-run Preview** to run again with the updated configuration.
 
@@ -113,9 +115,9 @@ Common iteration patterns:
 - If variable values appear as literals in the output (for example, `{{input.question}}`), correct the variable path in the prompt.
 - Adjust the prompt wording and re-run to observe the effect on pass rates.
 
-### 7. Save and run as an experiment
+### 5. Save the experiment
 
-When the preview results meet your expectations, click **Save & Run as experiment** to run on the full dataset.
+When the preview results meet your expectations, click **Save & Run as experiment** in the top toolbar to run on the full dataset.
 
 In the dialog:
 
