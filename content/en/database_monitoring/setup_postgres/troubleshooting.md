@@ -250,6 +250,37 @@ The default Agent configuration for Database Monitoring is conservative, but you
 The recommended value for `pg_stat_statements.max` is `10000`. Setting this configuration to a higher value
 may cause the collection query to take longer to run, which can lead to query timeouts and gaps in query metric collection. If the Agent reports this warning, make sure that `pg_stat_statements.max` is set to `10000` on the database.
 
+#### Agent queries writing temporary files to disk {#agent-queries-temp-files}
+
+DBM collection queries perform sort and hash-join operations against `pg_stat_statements` and catalog tables such as `pg_attribute` and `pg_index`. On databases with high query diversity or large schemas, these operations can exceed the Datadog user's [`work_mem`][26] limit and spill to temporary disk files, causing elevated write IOPS on the database host. This symptom typically appears gradually after enabling DBM and temporarily resolves after a database restart, which resets `pg_stat_statements`.
+
+To confirm, open [Metrics Explorer][27] and query:
+
+```
+sum:postgresql.queries.temp_blks_written{user:datadog} by {database_instance,query}.as_count()
+```
+
+If the metric returns data, run the following query as a superuser on the affected database to estimate the minimum `work_mem` value needed:
+
+```sql
+SELECT pg_size_pretty(
+  ((SELECT count(*) FROM pg_attribute WHERE attnum > 0 AND NOT attisdropped) * 500
+  + (SELECT count(*) FROM pg_index) * 600
+  + (SELECT count(*) FROM pg_stat_statements) *
+      (SELECT setting::int FROM pg_settings WHERE name = 'track_activity_query_size')
+  + (SELECT count(*) FROM pg_inherits) * 200
+  ) * 2
+) AS recommended_min_work_mem;
+```
+
+Round the result up to the next power of 2 and apply it as a role-level default for the `datadog` user:
+
+```sql
+ALTER ROLE datadog SET work_mem = '<value>';
+```
+
+This setting applies only to the Datadog user's sessions and does not affect application queries. No database restart is required. The setting takes effect on the next Agent connection.
+
 
 [1]: /database_monitoring/setup_postgres/
 [2]: /agent/troubleshooting/
@@ -276,3 +307,5 @@ may cause the collection query to take longer to run, which can lead to query ti
 [23]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L281
 [24]: https://pkg.go.dev/github.com/jackc/pgx/v4#QuerySimpleProtocol
 [25]: https://www.postgresql.org/docs/current/predefined-roles.html#:~:text=a%20long%20time.-,pg_monitor,-Read/execute%20various
+[26]: https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-WORK-MEM
+[27]: https://app.datadoghq.com/metric/explorer
