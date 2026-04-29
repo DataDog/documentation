@@ -17,7 +17,7 @@ further_reading:
   text: 'Learn about journey variants'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="Join the Preview!">}}
 Journey Monitoring is in Preview.
 {{< /callout >}}
 
@@ -25,9 +25,7 @@ Journey Monitoring is in Preview.
 
 Each created journey has a details report federating metrics and telemetry from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4]. The report shows data about the journey's user behavior patterns and technical performance.
 
-[INSERT IMAGE HERE]
-
-
+{{< img src="journey_monitoring/journey-monitoring-details-report.png" alt="The Journey Monitoring details report showing a specific journey's key performance indicators, user behavior insights, and technical performance measurements." style="width:100%;" >}}
 
 ## Journey and variant filters
 
@@ -70,7 +68,6 @@ Click on an operation to open a side panel with details about its performance. D
 - The Operation's success rate, calculated using the `rum.measure.operation` metric
 - The Operation's latency, calculated using the `rum.measure.operation.duration` metric
 
-[INSERT IMAGE HERE]
 
 The side panel also includes a list of the backend services the Operation depends on. Each entry includes metrics on the backend service's performance. Clicking onto a backend service will redirect you to the service's entry in the APM [Software Catalog][8]. 
 
@@ -79,6 +76,8 @@ The side panel also includes a list of the backend services the Operation depend
 
 The error count chart shows a timeseries of errors that occurred while users were executing the journey. The data is imported from frontend issues in [Error Tracking][9]. You can click on the **Investigate** button to see the list of top issues. Clicking on any issue in the list will redirect you to the issue in Error Tracking.
 
+
+{{< img src="journey_monitoring/journey-monitoring-details-report-technical.png" alt="The Journey Monitoring details report showing a specific journey's key performance indicators, user behavior insights, and technical performance measurements." style="width:100%;" >}}
 
 
 ## Synthetic Monitoring & Testing

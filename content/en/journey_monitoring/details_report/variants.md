@@ -18,8 +18,6 @@ further_reading:
 
 Each journey can contain one or more **variants**. A variant is a version of a journey containing a unique sequence of intermediate steps between the journey's start and end.
 
-[INSERT DIAGRAM HERE]
-
 
 ## Creating variants
 
@@ -31,7 +29,7 @@ You can optionally include attribute filters for the variant. The funnel chart w
 
 You can add one or more variants while creating or editing a new journey.
 
-[INSERT IMAGE HERE]
+{{< img src="journey_monitoring/journey-monitoring-details-report-variants.png" alt="The Journey Monitoring details report showing a specific journey's key performance indicators, user behavior insights, and technical performance measurements." style="width:100%;" >}}
 
 
 ## Analyzing variants

@@ -20,24 +20,24 @@ further_reading:
   text: 'Learn about journey variants'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="Join the Preview!">}}
 Journey Monitoring is in Preview.
 {{< /callout >}}
 
 
 ## Overview
 
-Each created user journey will have an automatically created [test suite][1]. Each test suite can contain one or more tests that cover the journey and its [variants][2]. 
+All created journeys will automatically have an accompanying test suite created [test suite][1]. Each test suite contains one or more tests that cover the journey and its [variants][2]. 
 
-[INSERT DIAGRAM]
 
 ## Journey coverage
 
-A journey is considered to be covered if at least one Synthetic [Browser test][4] or [Mobile test][5] converted at least once on the journey over the past 7 days. I.e. the test goes through the start event(s) and end event(s) of the Journey in order at leasst once over the past 7 days.
+A journey is considered to be covered if one of its Synthetic [Browser][4] or [Mobile tests][5] ran at least once successfully in the past 7 days. 
 
 ## Configuring the journey's test suite
 
-By default, each journey's test suite will have the same name as the journey. When the journey is created, the test suite is automatically populated with all of its covering tests, according to the definition above.
+By default, each journey's test suite will have the same name as the journey. When the journey is created, its test suite is automatically populated with all of its covering tests, according to the definition above.
+
 The automatically created [Test Suite][1] is editable, meaning tests can be added and/or removed. Datadog continually scans your test collection to list new tests that cover the journey that aren't part of the test suite, for you to optionally add to the test suite.
 
 ## Journey uptime

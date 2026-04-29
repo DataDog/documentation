@@ -17,7 +17,7 @@ further_reading:
   text: 'Learn about journey variants'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="false" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="Join the Preview!">}}
 Journey Monitoring is in Preview.
 {{< /callout >}}
 
@@ -36,18 +36,18 @@ Teams monitoring critical user flows — such as login, checkout, or media strea
 ## What you can do
 
 For each journey you can:
-- Measure the journey's inbound traffic, conversion rate, and time to completion
-- Track the availability of the journey using an uptime SLO based a [Synthetic test suite][10]
-- Identify where users drop off and investigate individual sessions with [Session Replay][4]
-- Measure the performance of critical journey steps with [RUM operations][13]
-- Share a unified view of journey health across engineering, product, and operations teams
+- Measure the journey's inbound traffic, conversion rate, and time to completion.
+- Track the journey's availability using an uptime SLO based on its [Synthetic test suite][10].
+- Identify where users drop off and investigate individual sessions with [Session Replay][4].
+- Measure the performance of critical journey steps with [RUM operations][13].
+- Share a unified view of journey health across engineering, product, and operations teams.
 
 ## Setup
 
 Journey Monitoring requires the following products for frontend applications, each contributing different data to your journeys:
 
-- **[RUM without Limits][5]** and **[Product Analytics][8]**: Traffic, conversion rate, and time-to-convert metrics
-- **[Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]**: Uptime tracking through the journey's automatically created test suite
+- **[RUM without Limits][5]** and **[Product Analytics][8]**: Traffic, conversion rate, time-to-convert metrics, and performance.
+- **[Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]**: Uptime tracking through the journey's automatically created test suite.
 
 ### Step 1 - Create a journey
 
