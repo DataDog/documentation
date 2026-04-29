@@ -1036,6 +1036,75 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
+## Widgets
+
+Tools for [dashboard][46] and [notebook][55] widget visualization, validation, and type conversion.
+
+### `get_widget`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Timeseries` or `Monitors Read` or `APM Read` or `RUM Apps Read` (OR logic)*\
+Retrieves and visualizes Datadog metrics, traces, logs, and other data as interactive charts. Supports three modes: dashboard lookup, direct definition, or URL resolution.
+
+- Show the CPU usage timeseries for `service:api` over the last hour.
+- Fetch the widget data for widget `2228368921512806` on dashboard `abc-123-def`.
+- Visualize the data from this Datadog share link.
+
+### `get_widget_reference_compressed`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
+Returns compressed TypeScript schemas and building instructions for widget types. Call before generating widget JSON. When building group widgets, include both `group` and any intended child widget types in one call for deduplication.
+
+- Get the compressed schema for a timeseries widget.
+- Show the building instructions for top list and query table widgets.
+
+### `search_datadog_widgets`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
+Searches and retrieves information about widgets across Datadog dashboards, including their IDs, titles, and underlying queries.
+
+- Find all timeseries widgets that query the `system.cpu.user` metric.
+- Search for widgets related to error rates across all dashboards.
+
+### `swap_widget_type`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
+Converts a widget definition from one visualization type to another while preserving queries. Supports formula-request-based widget types: timeseries, query_value, top list, query_table, treemap, sunburst, distribution, heatmap, geomap, and list_stream.
+
+- Convert this timeseries widget to a top list.
+- Change the query table widget to a treemap visualization.
+
+### `validate_notebook_cell`
+*Toolset: **widgets***\
+*Permissions Required: `Timeseries`*\
+Validates notebook cell widget definitions, including SQL correctness for analysis_sql cells. When validating an analysis_sql cell, include its upstream data source widgets so the endpoint can check SQL expressions against their schemas.
+
+- Validate these notebook cell definitions before saving.
+- Check if the analysis SQL cell references valid columns from the upstream widget.
+
+### `validate_notebook_cells`
+*Toolset: **widgets***\
+*Permissions Required: `Timeseries`*\
+Validates multiple notebook cell widget definitions in a single call, including SQL correctness for analysis_sql cells.
+
+- Validate all the cells in this notebook before publishing.
+- Check these three analysis cells for SQL errors.
+
+### `verify_widget_data`
+*Toolset: **widgets***\
+*Permissions Required: `Dashboards Read` or `Timeseries` or `Monitors Read` or `APM Read` or `RUM Apps Read` (OR logic)*\
+Verifies whether widget definitions return data for the last hour. Call after adding widgets to a dashboard to confirm queries return real data. Returns one result per widget indicating whether data was found, with a reason if not.
+
+- Check if these widget definitions return data.
+- Verify the widgets added to the dashboard are showing real metrics.
+
+### `visualize_tabular_data`
+*Toolset: **widgets***\
+*Permissions Required: No specific permissions required.*\
+Renders tabular data as an interactive visualization (sunburst, treemap, or top list). Use after aggregating data from queries to visualize hierarchical relationships or rankings.
+
+- Visualize this grouped metric data as a sunburst chart.
+- Show this aggregated data as a treemap breakdown.
+
 ## Workflows
 
 Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use.
@@ -1105,3 +1174,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [51]: /feature_flags/
 [53]: /security/threats/security_signals/
 [54]: /security/misconfigurations/findings/
+[55]: /notebooks/
