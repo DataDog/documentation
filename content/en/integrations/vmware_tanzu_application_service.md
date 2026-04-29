@@ -69,7 +69,7 @@ Log collection is not supported for this site.
 
 {{% /site-region %}}
 
-{{% site-region region="us,us5,eu,gov,ap1" %}}
+{{% site-region region="us,us5,eu,gov,gov2,ap1" %}}
 
 ##### Enable log collection
 

@@ -22,6 +22,7 @@ This page describes how to instrument your Node.js application with the Datadog 
 Before setting up the Node.js Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
+- **Datadog [API key][3]** configured on the Agent
 - **Datadog Node.js SDK** `dd-trace` version 5.80.0 or later
 - **@openfeature/server-sdk** version ~1.20.0
 
@@ -241,3 +242,4 @@ console.log(details.flagMetadata); // Additional information about the evaluatio
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: https://openfeature.dev/
+[3]: /account_management/api-app-keys/#api-keys

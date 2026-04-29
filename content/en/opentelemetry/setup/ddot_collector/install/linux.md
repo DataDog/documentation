@@ -43,6 +43,11 @@ DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTE
 
 This command installs both the core Datadog Agent package and the DDOT Collector that runs alongside it.
 
+**Note**: For Agent v7.78+, if the Datadog Agent is already installed on the host, you can install the DDOT Collector separately using the following command:
+```shell
+sudo datadog-agent otel install
+```
+
 ### Validation
 
 
