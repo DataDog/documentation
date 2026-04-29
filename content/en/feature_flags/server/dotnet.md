@@ -318,7 +318,7 @@ public class CheckoutFlagTests : IAsyncLifetime
 
 The same pattern applies to NUnit (`[SetUp]`/`[TearDown]`) and MSTest (`[TestInitialize]`/`[TestCleanup]`). For ASP.NET Core integration tests, register the `InMemoryProvider` inside `WebApplicationFactory.ConfigureTestServices` before the application boots.
 
-If you want to avoid coupling tests to SDK internals, prefer swapping in `InMemoryProvider` over mocking the Datadog provider with Moq or similar libraries.
+To avoid coupling tests to SDK internals, prefer swapping in `InMemoryProvider` over mocking the Datadog provider with Moq or similar libraries.
 
 ## Troubleshooting
 
