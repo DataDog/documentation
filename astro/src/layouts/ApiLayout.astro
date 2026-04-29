@@ -4,6 +4,8 @@ import ApiSideNav from '../components/ApiSideNav/ApiSideNav.astro';
 import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs.astro';
 import type { BreadcrumbItem } from '../components/Breadcrumbs/Breadcrumbs.astro';
 import RegionSelectorIsland from '../components/RegionSelector/RegionSelectorIsland.astro';
+import LanguageSelectorIsland from '../components/LanguageSelector/LanguageSelectorIsland.astro';
+import { stripLocalePrefix } from '../lib/locale';
 import type { ApiCategory } from '../data/api/index';
 
 interface Props {
@@ -14,6 +16,7 @@ interface Props {
 }
 
 const { title, categories, currentSlug, breadcrumbs } = Astro.props;
+const { lang: currentLang } = stripLocalePrefix(Astro.url.pathname);
 ---
 
 <BaseLayout title={title}>
@@ -22,7 +25,10 @@ const { title, categories, currentSlug, breadcrumbs } = Astro.props;
     <main class="api-main">
       <div class="api-toolbar">
         {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
-        <RegionSelectorIsland />
+        <div class="api-toolbar__selectors">
+          <LanguageSelectorIsland currentLang={currentLang} pathname={Astro.url.pathname} />
+          <RegionSelectorIsland />
+        </div>
       </div>
       <div class="prose">
         <slot />
@@ -51,6 +57,12 @@ const { title, categories, currentSlug, breadcrumbs } = Astro.props;
     flex: 1;
     min-width: 0;
     padding: var(--space-xl) var(--space-xl) var(--space-xl) 29px;
+  }
+
+  .api-toolbar__selectors {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
   }
 
   .api-toolbar {
