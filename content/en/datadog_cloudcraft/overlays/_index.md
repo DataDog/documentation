@@ -22,6 +22,8 @@ Cloudcraft provides the following built-in overlays:
 - [Observability][2]: See where the Datadog Agent is installed and which features are enabled per host.
 - [Security][3]: Identify security exposures, misconfigurations, and vulnerabilities in your architecture.
 - [Cloud Cost Management (CCM)][4]: Discover savings opportunities with cost recommendations shown directly on resources.
+- [Monitors][5] (Preview): View monitor states for your resources and services, and investigate alerting monitors with Bits AI SRE.
+- [APM][6]: Visualize distributed APM traces between cloud resources on your diagram (AWS only, Preview).
 
 ## Further reading
 
@@ -31,4 +33,6 @@ Cloudcraft provides the following built-in overlays:
 [2]: /datadog_cloudcraft/overlays/observability/
 [3]: /datadog_cloudcraft/overlays/security/
 [4]: /datadog_cloudcraft/overlays/ccm/
+[5]: /datadog_cloudcraft/overlays/monitors/
+[6]: /datadog_cloudcraft/overlays/apm/
 

@@ -1,4 +1,5 @@
 ---
+id: median
 title: median
 core_product:
   - metrics

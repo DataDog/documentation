@@ -77,7 +77,7 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 
 ### Create a storage bucket
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Sending logs to an archive is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
 {{< /site-region >}}
 
@@ -86,7 +86,7 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to.
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger"> Datadog Archives do not support bucket names with dots (.) when integrated with an S3 FIPS endpoint which relies on virtual-host style addressing. Learn more from AWS documentation. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
@@ -206,7 +206,7 @@ Navigate to the [Log Archiving & Forwarding page][6] and select **Add a new arch
 * Only Datadog users with the [`logs_write_archive` permission][5] can complete this and the following step.
 * Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][7], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
 * If your bucket restricts network access to specified IPs, add the webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
-* For the **US1-FED site**, you can configure Datadog to send logs to a destination outside the Datadog GovCloud environment. Datadog is not responsible for any logs that leave the Datadog GovCloud environment. Additionally, Datadog is not responsible for any obligations or requirements you might have concerning FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency, or similar regulations applicable to these logs after they leave the GovCloud environment.
+* For the **US1-FED and US2-FED sites**, you can configure Datadog to send logs to a destination outside the Datadog GovCloud environment. Datadog is not responsible for any logs that leave the Datadog GovCloud environment. Additionally, Datadog is not responsible for any obligations or requirements you might have concerning FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency, or similar regulations applicable to these logs after they leave the GovCloud environment.
 
 | Service                  | Steps                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -231,17 +231,38 @@ Use this optional configuration step to define the maximum volume of log data (i
 
 For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start a Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range over which they are requesting the Rehydration. Reducing the time range will reduce the scan size and allow the user to start a Rehydration.
 
-#### Archive Search Indexed Attribute (Preview) {#archive-search-indexed-attribute}
+#### Archive Partition Attribute (Preview) {#archive-search-partition-attribute}
 
 {{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" header="Join the Preview!" >}}
 Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
 {{< /callout >}}
 
-To accelerate searches and investigations in your archives (with [Archive Search][16]), define specific attributes to be indexed directly in your storage bucket.
+To optimize how your archived logs are physically organized in storage (and accelerate [Archive Search][16]), configure partition attributes in your Datadog Archive.
 
-* **Indexed Attributes**: Add high-cardinality attributes such as `trace_id`, `container_id`, or `customer_id`.
+* **Partition Attributes**: Add low-cardinality attributes such as `service`, `source`, `env`, or `status` that you frequently use as search filters.
+* **Benefit**: Logs sharing the same partition attribute values are co-located in storage. When searching, Datadog can skip entire partitions that don't match your query, drastically reducing the volume of data scanned.
+
+#### Archive Lookup Attribute (Preview) {#archive-search-lookup-attribute}
+
+{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" header="Join the Preview!" >}}
+Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
+{{< /callout >}}
+
+To accelerate searches and investigations in your archives (with [Archive Search][16]), configure lookup attributes in your Datadog Archive.
+
+* **Lookup Attributes**: Add high-cardinality attributes such as `trace_id`, `container_id`, or `customer_id`.
 * **Benefit**: This allows you to pinpoint specific logs within your long-term storage much faster, reducing the time and data scanned during ad-hoc investigations.
 
+**Partition vs. Lookup attributes**
+
+| | Partition | Lookup |
+|---|---|---|
+| **Cardinality** | Low (tens to hundreds of values) | High (millions of values) |
+| **Typical attributes** | `service`, `source`, `env`, `status` | `trace_id`, `container_id`, `user_id`, `transaction_id` |
+| **How it helps** | Prunes entire partitions from scan | Pinpoints individual log entries within your archive |
+| **Best used for** | Broad filtering by environment or service | Ad-hoc investigations on specific identifiers |
+
+For maximum search performance, combine both: partition attributes narrow the search scope to the relevant data segments, while lookup attributes let you find specific logs within those segments instantly.
 
 {{< site-region region="us3" >}}
 

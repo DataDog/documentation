@@ -40,7 +40,7 @@ For a Datadog agent installed using the one-line installation command:
 3. [Restart the Agent][3].
    {{< /collapse-content >}}
 
-{{< collapse-content title="Using Datadog tracing libraries" level="h5" >}}
+{{< collapse-content title="Using Datadog SDKs" level="h5" >}}
 For a Datadog agent configured manually for Backend Error Tracking:
 
 1. Open the [datadog.yaml configuration file][2].

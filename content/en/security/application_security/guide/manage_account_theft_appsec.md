@@ -65,7 +65,7 @@ To enable AAP using a new deployment, use the `APPSEC_ENABLED` environment varia
 
 When you see traces from your service in [AAP Traces][6], move to [Step 1.3: Validating login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
 
-For more detailed instructions on using a new deployment, see [Enabling AAP Threat Detection using Datadog Tracing Libraries][7].
+For more detailed instructions on using a new deployment, see [Enabling AAP Threat Detection using Datadog SDKs][7].
 
 ### Step 1.3: Validating login information is automatically collected
 
@@ -117,7 +117,6 @@ To manually instrument your services, do the following:
 1. If auto-instrumentation is providing incorrect data (multiple events in a single trace), see [Disable auto-instrumentation][9].
 2. For detailed instrumentation instructions for each language, go to [Adding business logic information (login success, login failure, any business logic) to traces][10]. Make sure to add the following metadata:
    * `usr.login`: **Mandatory for login success and failure**. This field contains the *name* used to log into the account. The name might be an email address, a phone number, a username, or something else. The purpose of this field is to identify targeted accounts even if they don't exist in your systems because a user might be able to change those accounts. Also, this field provides information on the location of the database used by the attacker. This value shouldn't be confused with `usr.id`.
-   * `usr.exists`: **Mandatory for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
    * `usr.exists`: **Mandatory for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
 
 **After deploying the code, validate the instrumentation is correct by following the steps in** [Step 1.4: Validating login metadata is automatically collected](#step-1.4:-validating-login-metadata-is-automatically-collected).
@@ -182,7 +181,7 @@ In microservice environments, services are generally reached by internal hosts r
  
 * Source IPs (`@http.client_ip`) are varied and public IPs.  
   * **Problem:** If login attempts are coming from a few IPs only, this might be a proxy that you can't block without risking availability.  
-  * **Solution:** Forward the client IP of the initial request through a HTTP header, such as `X-Forwarded-For`. You can use a custom header for [better security][22] and configure the tracer to read it using the `DD_TRACE_CLIENT_IP_HEADER` environment variable.  
+  * **Solution:** Forward the client IP of the initial request through a HTTP header, such as `X-Forwarded-For`. You can use a custom header for [better security][22] and configure the SDK to read it using the `DD_TRACE_CLIENT_IP_HEADER` environment variable.  
 * The user agent (`@http.user_agent`) is consistent with the expected traffic (web browser, mobile app, etc.)  
   * **Problem:** The user agent could be replaced by the user agent in the calling microservice network library.  
   * **Solution:** Use the client user agent when calling subsequent services.
@@ -382,7 +381,7 @@ After confirming that the traits match the attackers, you can push an In-App WAF
 
 To create the rule, do the following:
 
-1. Go to **AAP** > **Policies** > **In-App WAF** > [Custom Rules][28]].
+1. Go to **AAP** > **Policies** > **In-App WAF** > [Custom Rules][33].
 2. Click **Create New Rule** and complete the configuration. 
 3. Follow the steps in **Define your custom rule**.   
 4. In **Select the services you want this rule to apply to**, select your login service, or the services where you want to block requests. You can also target blocking to the login route.
@@ -553,7 +552,7 @@ If the Denylist isn't sufficient, you can create a WAF rule. A WAF rule evaluate
 
 To create a new rule, do the following:
 
-1. Go to **AAP** > **Policies** > **In-App WAF** > [Custom Rules][28]].
+1. Go to **AAP** > **Policies** > **In-App WAF** > [Custom Rules][33].
 2. Click **Create New Rule** and complete the configuration. 
 3. Follow the steps in **Define your custom rule**.   
 4. In **Select the services you want this rule to apply to**, select your login service, or whichever services where you want to block requests. You can also target the blocking to the login route.
@@ -569,7 +568,7 @@ The response is pushed to tracers automatically and blocked traces appear in the
 
 Multiple blocking actions are available. Depending on the sophistication of the attackers, you might want a stealthier response so that attackers don't immediately realize they were blocked.
 
-For more information, see [In-App WAF Rules][30].
+For more information, see [In-App WAF Rules][34].
 
 #### Automated data export
 
@@ -640,7 +639,7 @@ If you configured permanent blocking, unblock users and IPs from the Denylist by
 
 #### Disable or delete any custom In-App WAF rule(s)
 
-To disable or delete In-App WAF rule(s), go to the [custom In-App WAF rules page][28] and disable the rules by clicking on **Monitoring** or **Blocking**, and selecting **Disable Rule**. 
+To disable or delete In-App WAF rule(s), go to the [custom In-App WAF rules page][33] and disable the rules by clicking on **Monitoring** or **Blocking**, and selecting **Disable Rule**. 
 
 If the rule is no longer relevant, you can delete it by clicking more options (**...**) and selecting **Delete**.
 
@@ -733,7 +732,7 @@ This is general guidance. Depending on your applications and environments, there
 [28]: /api/latest/webhooks-integration/
 [29]: /security/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 [30]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&mitreFilters=%7B%22visualize%22%3A%7B%22value%22%3A%5B%22all%22%5D%2C%22excluded%22%3Afalse%7D%2C%22ruleDensity%22%3A%7B%22value%22%3A%5B%5D%2C%22excluded%22%3Afalse%7D%7D&sort=date&viz=rules
-[28]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
-[30]: /security/application_security/policies/inapp_waf_rules/
 [31]: /api/latest/spans/#aggregate-spans
 [32]: https://haveibeenpwned.com/
+[33]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
+[34]: /security/application_security/policies/inapp_waf_rules/

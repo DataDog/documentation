@@ -25,7 +25,7 @@ further_reading:
       text: "Reduce costs and enhance security with cross-region Datadog connectivity using AWS PrivateLink"
 ---
 
-{{% site-region region="us3,us5,eu,gov" %}}
+{{% site-region region="us3,us5,eu,gov,gov2" %}}
 <div class="alert alert-danger">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{% /site-region %}}
 
@@ -44,10 +44,10 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 ## Connect from the same region
 
 1. Connect the AWS Management Console to the region of your choice.
-1. From the VPC Dashboard, under **PrivateLink and Lattice**, select **Endpoints**.
-1. Click **Create Endpoint**:
+1. From the VPC Dashboard, under {{< ui >}}PrivateLink and Lattice{{< /ui >}}, select {{< ui >}}Endpoints{{< /ui >}}.
+1. Click {{< ui >}}Create Endpoint{{< /ui >}}:
    {{< img src="agent/guide/private-link-vpc.png" alt="The endpoints page on the VPC dashboard" style="width:90%;" >}}
-1. Select **Find service by name**.
+1. Select {{< ui >}}Find service by name{{< /ui >}}.
 1. Fill the _Service Name_ text box according to which service you want to establish AWS PrivateLink for:
 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
@@ -65,9 +65,9 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
 
-4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][14].
+4. Click {{< ui >}}Verify{{< /ui >}}. If this does not return _Service name found_, reach out to [Datadog support][14].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
-6. Make sure that for **Enable DNS name**, _Enable for this endpoint_ is checked:
+6. Make sure that for {{< ui >}}Enable DNS name{{< /ui >}}, _Enable for this endpoint_ is checked:
 
    {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Enable DNS private" style="width:80%;" >}}
 
@@ -75,7 +75,7 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 
     **Note**: **The security group must accept inbound traffic on TCP port `443`**.
 
-8. Click **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
+8. Click {{< ui >}}Create endpoint{{< /ui >}} at the bottom of the screen. If successful, the following is displayed:
 
    {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:60%;" >}}
 
@@ -108,27 +108,27 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 {{< tabs >}}
 {{% tab "Cross-region PrivateLink endpoints" %}}
 1. Connect the AWS Management Console to the region of your choice.
-1. From the VPC Dashboard, under **PrivateLink and Lattice**, select **Endpoints**.
-1. Click **Create Endpoint**:
+1. From the VPC Dashboard, under {{< ui >}}PrivateLink and Lattice{{< /ui >}}, select {{< ui >}}Endpoints{{< /ui >}}.
+1. Click {{< ui >}}Create Endpoint{{< /ui >}}:
    {{< img src="agent/guide/private-link-vpc.png" alt="The endpoints page on the VPC dashboard" style="width:90%;" >}}
 1. Configure the VPC interface endpoint settings
-   1. Optionally, fill in the **Name tag**.
-   1. Under **Type**, select **PrivateLink Ready partner services**.
+   1. Optionally, fill in the {{< ui >}}Name tag{{< /ui >}}.
+   1. Under {{< ui >}}Type{{< /ui >}}, select {{< ui >}}PrivateLink Ready partner services{{< /ui >}}.
 1. Discover and configure the interface endpoint with cross-region support:
-   1. Under **Service name**, fill in the service name with a valid PrivateLink service name from the [table](#privatelink-service-names) below.
-   1. Under **Service region**, click **Enable Cross Region endpoint** and select **{{< region-param key="aws_private_link_cross_region" >}}**.
-   1. Click **Verify service** and wait for a _Service name verified_ notification.
+   1. Under {{< ui >}}Service name{{< /ui >}}, fill in the service name with a valid PrivateLink service name from the [table](#privatelink-service-names) below.
+   1. Under {{< ui >}}Service region{{< /ui >}}, click {{< ui >}}Enable Cross Region endpoint{{< /ui >}} and select **{{< region-param key="aws_private_link_cross_region" >}}**.
+   1. Click {{< ui >}}Verify service{{< /ui >}} and wait for a _Service name verified_ notification.
       **Note:** If you aren't able to verify the service after completing the steps above, reach out to [Datadog Support][1].
-1. Under **Network Settings**, select a VPC to deploy the VPC Interface endpoint with.
-1. Ensure the option to **Enable DNS name** is checked.
-1. Under **Subnets**, select one or more subnets in your VPC for the interface endpoint.
-1. Under **Security Groups**, select a security group to control what can send traffic to the VPC endpoint.
+1. Under {{< ui >}}Network Settings{{< /ui >}}, select a VPC to deploy the VPC Interface endpoint with.
+1. Ensure the option to {{< ui >}}Enable DNS name{{< /ui >}} is checked.
+1. Under {{< ui >}}Subnets{{< /ui >}}, select one or more subnets in your VPC for the interface endpoint.
+1. Under {{< ui >}}Security Groups{{< /ui >}}, select a security group to control what can send traffic to the VPC endpoint.
 
    **Note**: The security group must accept inbound traffic on TCP port 443.
-1. Optionally, provide a **Name tag** and click **Create endpoint**.
-1. Allow a few minutes for the endpoint status to update from **Pending** to **Available**. This may take up to 10 minutes. If it is taking longer than expected, reach out to [Datadog Support][1].
+1. Optionally, provide a {{< ui >}}Name tag{{< /ui >}} and click {{< ui >}}Create endpoint{{< /ui >}}.
+1. Allow a few minutes for the endpoint status to update from {{< ui >}}Pending{{< /ui >}} to {{< ui >}}Available{{< /ui >}}. This may take up to 10 minutes. If it is taking longer than expected, reach out to [Datadog Support][1].
 
-After the endpoint status is updated to **Available**, you can use this endpoint to send telemetry to Datadog using the cross-region AWS PrivateLink endpoint.
+After the endpoint status is updated to {{< ui >}}Available{{< /ui >}}, you can use this endpoint to send telemetry to Datadog using the cross-region AWS PrivateLink endpoint.
 
 ## PrivateLink service names
 
@@ -156,7 +156,7 @@ After the endpoint status is updated to **Available**, you can use this endpoint
 
 {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:80%;" >}}
 
-2. Select **Find service by name**.
+2. Select {{< ui >}}Find service by name{{< /ui >}}.
 3. Fill the _Service Name_ text box according to the service you want to establish AWS PrivateLink for:
 
 {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:90%;" >}}
@@ -174,15 +174,15 @@ After the endpoint status is updated to **Available**, you can use this endpoint
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     |
 
-4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
+4. Click {{< ui >}}Verify{{< /ui >}}. If this does not return _Service name found_, reach out to [Datadog support][1].
 
-5. Next, choose the VPC and subnets that should be peered with the Datadog VPC service endpoint. Do not select **Enable DNS name** as VPC peering requires DNS to be manually configured.
+5. Next, choose the VPC and subnets that should be peered with the Datadog VPC service endpoint. Do not select {{< ui >}}Enable DNS name{{< /ui >}} as VPC peering requires DNS to be manually configured.
 
 6. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
 
     **Note**: **The security group must accept inbound traffic on TCP port `443`**.
 
-7. Click **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
+7. Click {{< ui >}}Create endpoint{{< /ui >}} at the bottom of the screen. If successful, the following is displayed:
 
 {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:80%;" >}}
 
@@ -229,7 +229,7 @@ Use the list below to map service and DNS name to different parts of Datadog:
 
 This returns <code>metrics.agent.{{< region-param key="dd_site" >}}</code>, the private hosted zone name that you need in order to associate with the VPC which the Agent traffic originates in. Overriding this record grabs all Metrics-related intake hostnames.
 
-2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **{{< region-param key="aws_region" >}}**, and enter the DNS name of the VPC endpoint associated with the DNS name.
+2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the {{< ui >}}Alias{{< /ui >}} option, then under {{< ui >}}Route traffic to{{< /ui >}}, choose {{< ui >}}Alias to VPC endpoint{{< /ui >}}, **{{< region-param key="aws_region" >}}**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
    **Notes**:
       - To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][4]

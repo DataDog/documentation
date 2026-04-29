@@ -8,6 +8,12 @@ further_reading:
 - link: "/service_management/app_builder/"
   tag: "Documentation"
   text: "App Builder documentation"
+- link: "https://learn.datadoghq.com/courses/automating-meaningful-actions"
+  tag: "Learning Center"
+  text: "Automating Meaningful Actions with Datadog Workflow Automation"
+- link: "https://learn.datadoghq.com/courses/app-builder-integration"
+  tag: "Learning Center"
+  text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
 aliases:
 - /workflows/connections
 - /workflows/setup
@@ -15,6 +21,10 @@ aliases:
 - /service_management/app_builder/connections
 disable_toc: false
 ---
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Actions, Workflows, and Apps might use Connections that send customer data to third-party services outside the Datadog for Government region. See <a href="https://trust.datadoghq.com">Trust Center</a> for instructions to obtain the customer responsibility matrix and additional information about the Datadog for Government region.</div>
+{{< /site-region >}}
 
 Because actions connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. An app or workflow can run successfully only if every action that requires authentication can verify the identity of your Datadog account. When granting permissions to Datadog, ensure that you're following security best practice and only granting the permissions necessary for an app or workflow to run.
 
@@ -58,7 +68,7 @@ Where possible, use granular connections for different workflows or apps. For ex
 
 ### View connections
 
-1. From the [Workflow Automation page][2] or the [App Builder page][14], click the **Connections** tab. The connections list opens.
+1. From the [Workflow Automation page][2] or the [App Builder page][14], click the {{< ui >}}Connections{{< /ui >}} tab. The connections list opens.
 1. Click on a single line to view connection details.
 
 ### Create a connection
@@ -68,11 +78,11 @@ Establishing a connection requires the following information:
 - How to authenticate (for example, API key, username/password, oauth)
 
 To create a connection:
-1. From the [Workflow Automation page][2] or the [App Builder page][14], click the **Connections** tab. The connections list opens.
-1. Click the **New Connection** button in the upper right. The **New Connection** dialog box appears.
+1. From the [Workflow Automation page][2] or the [App Builder page][14], click the {{< ui >}}Connections{{< /ui >}} tab. The connections list opens.
+1. Click the {{< ui >}}New Connection{{< /ui >}} button in the upper right. The {{< ui >}}New Connection{{< /ui >}} dialog box appears.
 1. Click on an icon to choose an integration schema.
 1. Fill in the appropriate fields. <div class="alert alert-info">If you want to add the connection to a connection group in the future, add one or more [Identifier Tags](#connection-identifier-tags).</div>
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 Alternatively, add a connection from a workflow or app page:
 
@@ -82,9 +92,9 @@ Alternatively, add a connection from a workflow or app page:
 1. Navigate to the [Workflow Automation list][1].
 1. Select the workflow containing the action to which you need to add a credential. The workflow builder appears.
 1. In the workflow visualization, click the action to which you need to add a credential. The right side panel populates with the action details.
-1. Under the **Configure** tab, look for the **Connection** dropdown and click the **+** icon.
-1. In the **New Connection** dialog box, name the connection and enter the required authentication details.
-1. Click **Save**.
+1. Under the {{< ui >}}Configure{{< /ui >}} tab, look for the {{< ui >}}Connection{{< /ui >}} dropdown and click the {{< ui >}}+{{< /ui >}} icon.
+1. In the {{< ui >}}New Connection{{< /ui >}} dialog box, name the connection and enter the required authentication details.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/workflow
 {{% /tab %}}
@@ -92,34 +102,34 @@ Alternatively, add a connection from a workflow or app page:
 {{% tab "App Builder" %}}
 1. Navigate to the [App Builder app list][1].
 1. Select the app containing the action you need to add a credential to. The app canvas appears.
-1. Click **Edit** in the upper right.
-1. Under **Data** on the left-hand side, click the action to which you need to add a credential. The left side panel populates with the action details.
-1. Look for the **Connection** dropdown and click the **+** icon.
-1. In the **New Connection** dialog box, name the connection and enter the required authentication details.
-1. Click **Save**.
+1. Click {{< ui >}}Edit{{< /ui >}} in the upper right.
+1. Under {{< ui >}}Data{{< /ui >}} on the left-hand side, click the action to which you need to add a credential. The left side panel populates with the action details.
+1. Look for the {{< ui >}}Connection{{< /ui >}} dropdown and click the {{< ui >}}+{{< /ui >}} icon.
+1. In the {{< ui >}}New Connection{{< /ui >}} dialog box, name the connection and enter the required authentication details.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/app-builder
 {{% /tab %}}
 {{< /tabs >}}
 
-The example below shows the **New Connection** dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
+The example below shows the {{< ui >}}New Connection{{< /ui >}} dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
 
 {{< img src="service_management/new-connection-2.png" alt="The New Connection dialog box for the OpenAI connection" >}}
 
 ### Edit a connection
 
-1. From the [Workflow Automation page][2] or the [App Builder page][14], click the **Connections** tab. The connections list opens.
-1. Hover over the connection you would like to edit. **Edit**, **Permissions**, and **Delete** icons appear on the right.
-1. Click the pencil (**Edit**) icon. A dialog box appears.
+1. From the [Workflow Automation page][2] or the [App Builder page][14], click the {{< ui >}}Connections{{< /ui >}} tab. The connections list opens.
+1. Hover over the connection you would like to edit. {{< ui >}}Edit{{< /ui >}}, {{< ui >}}Permissions{{< /ui >}}, and {{< ui >}}Delete{{< /ui >}} icons appear on the right.
+1. Click the pencil ({{< ui >}}Edit{{< /ui >}}) icon. A dialog box appears.
 1. Update the fields you would like to change.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Delete a connection
 
 1. Navigate to the [connections list][3].
-1. Hover over the connection you would like to delete. **Edit**, **Permissions**, and **Delete** icons appear on the right.
-1. Click the trash can (**Delete**) icon. "Are you sure?" text appears.
-1. Select **Delete**.
+1. Hover over the connection you would like to delete. {{< ui >}}Edit{{< /ui >}}, {{< ui >}}Permissions{{< /ui >}}, and {{< ui >}}Delete{{< /ui >}} icons appear on the right.
+1. Click the trash can ({{< ui >}}Delete{{< /ui >}}) icon. "Are you sure?" text appears.
+1. Select {{< ui >}}Delete{{< /ui >}}.
 
 ### Restrict connection use
 
@@ -158,21 +168,21 @@ Each connection in the group must have a set of unique identifier tags so that a
 To create a connection group:
 
 1. Navigate to the [connections list][3].
-1. On the left, click **Groups**.
-1. Click **+ New Group**, then select an integration.
-1. Enter a group name, then enter a set of up to three **Identifier Tags** that the connections you want to include in your group all have.
-1. Under **Confirm Group**, use the checkboxes to select the specific members of your group.
-1. Click **Next, Confirm Access**, then choose your desired access level for the group.
-1. Click **Create**.
+1. On the left, click {{< ui >}}Groups{{< /ui >}}.
+1. Click {{< ui >}}+ New Group{{< /ui >}}, then select an integration.
+1. Enter a group name, then enter a set of up to three {{< ui >}}Identifier Tags{{< /ui >}} that the connections you want to include in your group all have.
+1. Under {{< ui >}}Confirm Group{{< /ui >}}, use the checkboxes to select the specific members of your group.
+1. Click {{< ui >}}Next, Confirm Access{{< /ui >}}, then choose your desired access level for the group.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 ### Use a connection group
 
 To use a connection group:
 
 1. In your workflow or app, select an action that requires a connection.
-1. In the **Connection** field, in the drop-down, select the desired connection group under **Groups**.
-1. Fill in the desired values for the connection group **Identifiers**. For example, if your connection group is defined using the `env` Identifier Tag, and you have two environments, `prod` and `staging`, you could use either of those values (or an expression that evaluates to one of those values).
-1. Fill in any other required step values, then click **Save**.
+1. In the {{< ui >}}Connection{{< /ui >}} field, in the drop-down, select the desired connection group under {{< ui >}}Groups{{< /ui >}}.
+1. Fill in the desired values for the connection group {{< ui >}}Identifiers{{< /ui >}}. For example, if your connection group is defined using the `env` Identifier Tag, and you have two environments, `prod` and `staging`, you could use either of those values (or an expression that evaluates to one of those values).
+1. Fill in any other required step values, then click {{< ui >}}Save{{< /ui >}}.
 
 **Note**: You can only use connections within a group if you have [Resolver permission][12] for those connections. If a workflow or app tries to use a connection you don't have Resolver permission for, it fails with a `403 Forbidden` error. To fix this issue, you can:
 - Configure the workflow or app so that it can't point to a connection that doesn't have a Resolver permission.
@@ -189,8 +199,8 @@ If you have edit access to a connection group, you can update the following attr
 
 To delete a connection group:
 
-1. Hover over the group you want to delete and click the **delete (trash can)** icon.
-1. Click **Delete**.
+1. Hover over the group you want to delete and click the {{< ui >}}delete (trash can){{< /ui >}} icon.
+1. Click {{< ui >}}Delete{{< /ui >}}.
 
 <div class="alert alert-danger">Deleting a connection group impacts any workflows and apps that are using that group.</div>
 

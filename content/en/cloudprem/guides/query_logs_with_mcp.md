@@ -1,6 +1,6 @@
 ---
-title: Query CloudPrem Logs with Datadog MCP Server
-description: Learn how to query logs stored in CloudPrem indexes using the Datadog MCP server
+title: Query BYOC Logs with the Datadog MCP Server
+description: Learn how to query logs stored in BYOC Logs indexes using the Datadog MCP server
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
   tag: "Blog"
@@ -10,34 +10,34 @@ further_reading:
   text: "Datadog Extension for VS Code & Cursor"
 - link: "/cloudprem/operate/search_logs/"
   tag: "Documentation"
-  text: "Search Logs in CloudPrem"
+  text: "Search Logs in BYOC Logs"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
 
-The [Datadog MCP (Model Context Protocol) server][1] allows you to query your Datadog logs, including logs stored in CloudPrem indexes, directly through AI-powered tools and integrations. Querying CloudPrem logs with the Datadog MCP server unlocks several valuable capabilities, including:
+The [Datadog MCP (Model Context Protocol) server][1] allows you to query your Datadog logs, including logs stored in BYOC Logs indexes, directly through AI-powered tools and integrations. Querying BYOC Logs with the Datadog MCP server unlocks several valuable capabilities, including:
 
 - **Unified, Context-Aware Troubleshooting**: Query and correlate logs, metrics, and traces from any environment in one place, and pivot across telemetry types to identify root causes faster.
 - **Natural Language Interaction**: Ask plain-language questions, and let AI generate the appropriate log queries without needing to remember syntax.
 
 ## Prerequisites
 
-- A running CloudPrem deployment with logs ingested.
+- A running BYOC Logs deployment with logs ingested.
 - Access to the [Datadog MCP server][1].
-- Your CloudPrem index name (visible in the [Datadog Log Explorer][2] under **CLOUDPREM INDEXES**).
+- Your BYOC Logs index name (visible in the [Datadog Log Explorer][2] under {{< ui >}}BYOC INDEXES{{< /ui >}}).
 
-## Querying CloudPrem logs
+## Querying BYOC Logs
 
-To query logs stored in CloudPrem indexes, you **must** specify two critical parameters in addition to your standard log query:
+To query logs stored in BYOC Logs indexes, you **must** specify two critical parameters in addition to your standard log query:
 
-- (Required) **`indexes`**: The name(s) of your CloudPrem index(es).
+- (Required) **`indexes`**: The name(s) of your BYOC Logs index(es).
 - (Required) **`storage_tier`**: Must be set to `"cloudprem"`.
 
-Without both parameters, queries will default to searching standard Datadog log indexes instead of CloudPrem.
+Without both parameters, queries will default to searching standard Datadog log indexes instead of BYOC Logs.
 
 For best results, your prompt **should also include**:
 - (Recommended) Time range (for example, "in the last hour", "from the last 24 hours").
@@ -49,37 +49,37 @@ The following table describes the key parameters used when querying logs with th
 | Parameter | Description | Example |
 |-----------|-------------|---------|
 | `query` | Log search query using Datadog query syntax | `"*"` (all logs), `"service:web"`, `"status:error"` |
-| `indexes` | Array of CloudPrem index names to search | `["cloudprem-dev"]` |
-| `storage_tier` | Storage tier to query (must be `"cloudprem"` for CloudPrem logs) | `"cloudprem"` |
+| `indexes` | Array of BYOC Logs index names to search | `["cloudprem--dev--main"]` |
+| `storage_tier` | Storage tier to query (must be `"cloudprem"` for BYOC Logs) | `"cloudprem"` |
 | `from` | Start time for the query | `"now-1h"`, `"now-24h"`, `"2024-01-15T00:00:00Z"` |
 | `to` | End time for the query | `"now"`, `"2024-01-15T23:59:59Z"` |
 | `sort` | Sort order for results | `"-timestamp"` (descending), `"timestamp"` (ascending) |
 
 For examples of parameter and natural language queries, see [Advanced query examples](#advanced-query-examples).
 
-### Finding your CloudPrem index name
+### Finding your BYOC Logs index name
 
-To find your CloudPrem index name:
+To find your BYOC Logs index name:
 
 1. Navigate to the [Datadog Log Explorer][2].
-2. Look for the **CLOUDPREM INDEXES** section in the left facet panel.
-3. Your CloudPrem indexes are listed there, typically in the format `cloudprem-<cluster_id>`.
+2. Look for the {{< ui >}}BYOC INDEXES{{< /ui >}} section in the left facet panel.
+3. Your CloudPrem indexes are listed there, in the format `cloudprem--<cluster_name>--<index_name>`.
 
-You can also find your index name in the [CloudPrem console][3], where your cluster ID is displayed.
+You can also find your index names in the [BYOC Logs console][3] by selecting a cluster and clicking {{< ui >}}View Indexes{{< /ui >}}.
 
 ## Advanced query examples
 
-When using AI-powered tools with the Datadog MCP server, you can ask questions in natural language. The MCP server will automatically translate these into properly formatted CloudPrem queries.
+When using AI-powered tools with the Datadog MCP server, you can ask questions in natural language. The MCP server will automatically translate these into properly formatted BYOC Logs queries.
 
 ### Error logs from a specific service
 **Prompt**:
-"Show me error logs from the nginx service in the cloudprem-dev index in the last hour."
+"Show me error logs from the nginx service in the cloudprem--dev--main index in the last hour."
 
 **Translates to**:
 ```json
 {
   "query": "service:nginx status:error",
-  "indexes": ["cloudprem-dev"],
+  "indexes": ["cloudprem--dev--main"],
   "storage_tier": "cloudprem",
   "from": "now-1h",
   "to": "now"
@@ -88,13 +88,13 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 
 ### Search for specific log content
 **Prompt**:
-"Find logs containing 'connection timeout' from the API service in cloudprem-prod from the last 24 hours."
+"Find logs containing 'connection timeout' from the API service in cloudprem--prod--main from the last 24 hours."
 
 **Translates to**:
 ```json
 {
   "query": "service:api \"connection timeout\"",
-  "indexes": ["cloudprem-prod"],
+  "indexes": ["cloudprem--prod--main"],
   "storage_tier": "cloudprem",
   "from": "now-24h",
   "to": "now"
@@ -103,13 +103,13 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 
 ### Filter by HTTP status code
 **Prompt**:
-"Get all 500 status code logs from the cloudprem-prod index in the last day."
+"Get all 500 status code logs from the cloudprem--prod--main index in the last day."
 
 **Translates to**:
 ```json
 {
   "query": "status:500",
-  "indexes": ["cloudprem-prod"],
+  "indexes": ["cloudprem--prod--main"],
   "storage_tier": "cloudprem",
   "from": "now-1d",
   "to": "now"
@@ -118,11 +118,11 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 
 ## Important notes
 
-- **Both `storage_tier` and `indexes` are required** when querying CloudPrem logs. Without these parameters, queries will search standard Datadog indexes instead.
+- **Both `storage_tier` and `indexes` are required** when querying BYOC Logs. Without these parameters, queries will search standard Datadog indexes instead.
 - `storage_tier` must always be set to `"cloudprem"`.
-- The `indexes` parameter must contain valid CloudPrem index names (typically in the format `cloudprem-<cluster_id>`).
-- When using natural language queries, explicitly mention your CloudPrem index name in your prompt.
-- CloudPrem logs are queryable in real-time as soon as they are indexed.
+- The `indexes` parameter must contain valid BYOC Logs index names (in the format `cloudprem--<cluster_name>--<index_name>`).
+- When using natural language queries, explicitly mention your BYOC Logs index name in your prompt.
+- BYOC Logs data is queryable in real-time as soon as it is indexed.
 - Query syntax follows standard [Datadog log search syntax][4].
 
 ## Further reading

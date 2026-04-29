@@ -9,7 +9,9 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' rsyslog or syslog-ng to receive logs sent to rsyslog or syslog-ng. Select and set up this source when you [set up a pipeline][1].
+## Overview
+
+Use Observability Pipelines' rsyslog or syslog-ng to receive logs sent to rsyslog or syslog-ng.
 
 You can also [forward third-party log to syslog](#forward-third-party-logs-to-syslog) and then send them to the Observability Pipelines Worker.
 
@@ -17,9 +19,9 @@ You can also [forward third-party log to syslog](#forward-third-party-logs-to-sy
 
 {{% observability_pipelines/prerequisites/syslog %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The instructions in this section are for setting up the source in the UI.
 
 To configure your Syslog source:
 
@@ -28,13 +30,9 @@ To configure your Syslog source:
 1. Enter the identifier for your syslog address. If you leave it blank, the [default](#set-secrets) is used.
 1. In the **Socket Type** dropdown menu, select the communication protocol you want to use: **TCP** or **UDP**.
 
-### Optional settings
+### Optional TLS settings
 
-Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][6] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- Enter the identifier for your syslog key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509) format.
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509) format.
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+{{% observability_pipelines/tls_settings %}}
 
 ## Set secrets
 
@@ -79,4 +77,6 @@ Syslog is a widely used logging protocol for sending network logs to a central s
 [3]: https://help.fortinet.com/fadc/4-5-1/olh/Content/FortiADC/handbook/log_remote.htm
 [4]: https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-admin/monitoring/configure-log-forwarding
 [5]: https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA10g000000ClRxCAK
-[6]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[7]: https://app.datadoghq.com/observability-pipelines
+[8]: /api/latest/observability-pipelines/
+[9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

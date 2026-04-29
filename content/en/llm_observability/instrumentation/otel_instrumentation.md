@@ -14,6 +14,10 @@ LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenT
 
 To send <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must include the <code>source:otel</code> tag in the evaluation. When referencing spans, provide <code>span_id</code> and <code>trace_id</code> as decimal strings. OpenTelemetry uses hexadecimal IDs natively, so convert them to decimal before submitting evaluations. For example, use Python's <code>int(hex_span_id, 16)</code> to convert a hex span ID to its decimal equivalent.
 
+For information on using Prompt Tracking with OpenTelemetry spans, see <a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Prompt Tracking - OpenTelemetry Instrumentation</a>.
+
+You can also use OpenTelemetry spans inside <a href="/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments">LLM Observability Experiments</a>. By setting <code>DD_TRACE_OTEL_ENABLED=1</code>, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+
 ## Setup
 
 To send OpenTelemetry traces to LLM Observability, configure your OpenTelemetry exporter with the following settings:
@@ -68,6 +72,65 @@ After your application starts sending data, the traces automatically appear in t
 <li/> There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
 </ul>
 </div>
+
+## Tested frameworks and libraries
+
+These frameworks and libraries have been tested with Datadog LLM Observability. Any framework that emits [OpenTelemetry 1.37+ GenAI semantic convention][1]-compliant spans is supported.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+| Framework | Instrumentation | Supported Versions |
+|-----------|----------------|--------------------|
+| [OpenAI][20] | [`opentelemetry-instrumentation-openai-v2`][21] | >= 1.26.0 |
+| [Anthropic][22] | [`opentelemetry-instrumentation-anthropic`][23] | >= 0.51.0 |
+| [Google GenAI][24] | [`opentelemetry-instrumentation-google-genai`][25] | >= 1.32.0 |
+| [Google Vertex AI][26] | [`opentelemetry-instrumentation-vertexai`][27] | >= 1.64.0 |
+| [AWS Bedrock][28] | [`opentelemetry-instrumentation-botocore`][29] | >= 1.31.57 |
+| [LangChain][30] | [`opentelemetry-instrumentation-langchain`][31] | >= 0.3.21 |
+| [LlamaIndex][32] | [`opentelemetry-instrumentation-llamaindex`][33] | >= 0.14.12 |
+| [Strands Agents][5] | Native | >= 1.11.0 |
+| [OpenLLMetry][34] | [`traceloop-sdk`][35] | >= 0.47.0 |
+
+[5]: https://pypi.org/project/strands-agents/
+[20]: https://platform.openai.com/docs/api-reference/introduction
+[21]: https://pypi.org/project/opentelemetry-instrumentation-openai-v2/
+[22]: https://docs.anthropic.com/en/api/
+[23]: https://pypi.org/project/opentelemetry-instrumentation-anthropic/
+[24]: https://ai.google.dev/gemini-api/docs
+[25]: https://pypi.org/project/opentelemetry-instrumentation-google-genai/
+[26]: https://cloud.google.com/vertex-ai/generative-ai/docs/overview
+[27]: https://pypi.org/project/opentelemetry-instrumentation-vertexai/
+[28]: https://docs.aws.amazon.com/bedrock/latest/userguide/
+[29]: https://pypi.org/project/opentelemetry-instrumentation-botocore/
+[30]: https://python.langchain.com/docs/introduction/
+[31]: https://pypi.org/project/opentelemetry-instrumentation-langchain/
+[32]: https://docs.llamaindex.ai/
+[33]: https://pypi.org/project/opentelemetry-instrumentation-llamaindex/
+[34]: https://www.traceloop.com/openllmetry
+[35]: https://pypi.org/project/traceloop-sdk/
+{{% /tab %}}
+{{% tab "Node.js" %}}
+| Framework | Instrumentation | Supported Versions |
+|-----------|----------------|--------------------|
+| [OpenAI][40] | [`@opentelemetry/instrumentation-openai`][41] | >= 4.19.0 |
+
+[40]: https://platform.openai.com/docs/api-reference/introduction
+[41]: https://www.npmjs.com/package/@opentelemetry/instrumentation-openai
+{{% /tab %}}
+{{% tab "Java" %}}
+| Framework | Instrumentation | Supported Versions |
+|-----------|----------------|--------------------|
+| [Spring AI][50] | Native (through [Micrometer][51]) | >= 1.0.0 |
+| [LangChain4j][52] | Native (OpenTelemetry module) | >= 0.31.0 |
+| [AWS Bedrock][53] | [OpenTelemetry Java Agent][54] | AWS SDK >= 2.2 |
+
+[50]: https://docs.spring.io/spring-ai/reference/
+[51]: https://micrometer.io/
+[52]: https://docs.langchain4j.dev/
+[53]: https://docs.aws.amazon.com/bedrock/latest/userguide/
+[54]: https://opentelemetry.io/docs/zero-code/java/agent/
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Examples
 

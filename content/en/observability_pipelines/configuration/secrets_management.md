@@ -22,7 +22,9 @@ The Observability Pipelines Worker helps you securely manage your secrets by int
 - JSON File
 - YAML File
 
-**Note**: When you set up a pipeline and install the Worker, if you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for a password identifier, the environment variable for that password is `DD_OP_PASSWORD_1`.
+**Notes**:
+- If you want to use Kubernetes Secrets, follow the instructions in [Configure all key-value pairs in a Secret as container environment variables][6] and set up the secret as an environment variable for the Observability Pipelines Worker.
+- When you set up a pipeline and install the Worker, if you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for a password identifier, the environment variable for that password is `DD_OP_PASSWORD_1`.
 
 ## Configure the Worker to retrieve secrets
 
@@ -358,6 +360,31 @@ bootstrap:
 
 {{% /collapse-content %}}
 
+## Refresh secrets at runtime
+
+The Observability Pipelines Worker resolves secrets on startup and when its configuration is reloaded. To pick up rotated secret values without restarting the Worker, send a `SIGHUP` signal.
+
+**Note**: If a rotated secret has an invalid value, the reload fails. Datadog recommends rolling the reload one Worker or node at a time and verifying Worker health before continuing.
+
+{{< tabs >}}
+{{% tab "Docker or Linux" %}}
+Send `SIGHUP` to the Worker process:
+
+```shell
+kill -HUP <worker_pid>
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+Send `SIGHUP` to the Worker process inside each pod:
+
+```shell
+kubectl exec <pod_name> -- kill -HUP 1
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -367,3 +394,4 @@ bootstrap:
 [3]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
 [4]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [5]: https://developer.hashicorp.com/
+[6]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#configure-all-key-value-pairs-in-a-secret-as-container-environment-variables

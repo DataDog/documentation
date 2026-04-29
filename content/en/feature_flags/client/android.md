@@ -78,7 +78,7 @@ dependencies {
 
 ## Initialize the SDK
 
-Initialize Datadog as early as possible in your app lifecycle—typically in your `Application` class's `onCreate()` method. This helps ensure all feature flag evaluations and telemetry are captured correctly.
+Initialize Datadog as early as possible in your app lifecycle—typically in your `Application` class's `onCreate()` method. This helps ensure all feature flag evaluations and telemetry are captured correctly. To create a client token, see [Client tokens][2].
 
 ```kotlin
 val configuration = Configuration.Builder(
@@ -436,3 +436,4 @@ This table highlights key differences between the OpenFeature and `FlagsClient` 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/
+[2]: /account_management/api-app-keys/#client-tokens

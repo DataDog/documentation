@@ -285,8 +285,7 @@ Use `LLMObs.publish_evaluator()` to push a locally-defined `LLMJudge` configurat
 | `variable_mapping` | `dict[str, str]` | No | Remaps variable names in `user_prompt` to Datadog span field paths in the published evaluator. |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs._evaluators import BooleanStructuredOutput, LLMJudge
+from ddtrace.llmobs import BooleanStructuredOutput, LLMJudge, LLMObs
 
 LLMObs.enable(
     ml_app="my-ml-app",
@@ -335,7 +334,7 @@ Performs string comparison operations between `output_data` and `expected_output
 | `icontains` | `output_data` contains `expected_output` (case-insensitive) |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import StringCheckEvaluator
+from ddtrace.llmobs.evaluators import StringCheckEvaluator
 
 # Perform an exact match (default)
 evaluator = StringCheckEvaluator(operation="eq", case_sensitive=True)
@@ -361,7 +360,7 @@ Validates output against a regex pattern.
 | `fullmatch` | Match entire string |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import RegexMatchEvaluator
+from ddtrace.llmobs.evaluators import RegexMatchEvaluator
 import re
 
 # Validate email format
@@ -388,7 +387,7 @@ Validates output length constraints.
 | `lines` | Count lines |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LengthEvaluator
+from ddtrace.llmobs.evaluators import LengthEvaluator
 
 # Ensure response is 50-200 characters
 evaluator = LengthEvaluator(min_length=50, max_length=200, count_type="characters")
@@ -402,7 +401,7 @@ evaluator = LengthEvaluator(min_length=10, max_length=100, count_type="words")
 Validates that output is valid JSON, and optionally checks for required keys.
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import JSONEvaluator
+from ddtrace.llmobs.evaluators import JSONEvaluator
 
 # Validate JSON syntax
 evaluator = JSONEvaluator()
@@ -416,7 +415,7 @@ evaluator = JSONEvaluator(required_keys=["name", "status", "data"])
 Measures semantic similarity between `output_data` and `expected_output` using embeddings. Returns a similarity score between 0.0 and 1.0.
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import SemanticSimilarityEvaluator
+from ddtrace.llmobs.evaluators import SemanticSimilarityEvaluator
 from openai import OpenAI
 
 client = OpenAI()
@@ -506,6 +505,72 @@ experiment = LLMObs.experiment(
 )
 
 experiment.run()
+{{< /code-block >}}
+
+### Using managed evaluators
+
+`RemoteEvaluator` lets you reference a [custom LLM-as-a-judge evaluation][5] configured in the Datadog UI by name, and run it as part of a local experiment. This allows you to reuse your production evaluators in offline experiments without reimplementing the evaluation logic in Python.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `eval_name` | `str` | The name of the LLM-as-a-judge evaluator as configured in Datadog. |
+| `transform_fn` | `Optional[Callable]` | A function that maps an `EvaluatorContext` to a dict of template variable values. |
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs, RemoteEvaluator
+
+evaluator = RemoteEvaluator(eval_name="quality-assessment")
+
+experiment = LLMObs.experiment(
+    name="my-experiment",
+    task=my_task,
+    dataset=dataset,
+    evaluators=[evaluator],
+)
+experiment.run()
+{{< /code-block >}}
+
+#### Mapping dataset data to prompt variables with `transform_fn`
+
+When you configure an LLM-as-a-judge in the Datadog UI, the [prompt template uses variables][7] such as `{{span_input}}` and `{{span_output}}`. By default, `RemoteEvaluator` maps the following:
+- `input_data` → `span_input`
+- `output_data` → `span_output`
+- `expected_output` → `meta.expected_output`
+
+If your dataset records have a different structure—for example, `input_data` is a dict with multiple keys—provide a `transform_fn` to control exactly which values are sent for each template variable:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import RemoteEvaluator, EvaluatorContext
+
+def my_transform(context: EvaluatorContext) -> dict:
+    # input_data is a dict: {"user_query": str, "retrieved_docs": list[str]}
+    return {
+        "span_input": context.input_data.get("user_query"),   # → {{span_input}} in the prompt
+        "span_output": context.output_data,                   # → {{span_output}} in the prompt
+        "meta": {
+            "retrieved_docs": context.input_data.get("retrieved_docs"),  # → {{meta.retrieved_docs}}
+        },
+    }
+
+evaluator = RemoteEvaluator(
+    eval_name="quality-assessment",
+    transform_fn=my_transform,
+)
+{{< /code-block >}}
+
+If the backend evaluator encounters an error, a `RemoteEvaluatorError` is raised. Inspect `backend_error` for details:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import RemoteEvaluator, RemoteEvaluatorError, EvaluatorContext
+
+evaluator = RemoteEvaluator(eval_name="quality-assessment")
+context = EvaluatorContext(input_data={"query": "What is the capital of France?"}, output_data="Paris")
+
+try:
+    result = evaluator.evaluate(context)
+except RemoteEvaluatorError as e:
+    print(e.backend_error)
+    # {"type": "...", "message": "...", "recommended_resolution": "..."}
 {{< /code-block >}}
 
 ## Using evaluators in production
@@ -635,3 +700,4 @@ When submitting evaluations for [OpenTelemetry-instrumented spans][3], include t
 [4]: /llm_observability/experiments
 [5]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
 [6]: /llm_observability/evaluations/deepeval_evaluations/
+[7]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations#configure-the-prompt

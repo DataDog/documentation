@@ -6,15 +6,9 @@ aliases:
   - /real_user_monitoring/installation
   - /real_user_monitoring/faq/
 further_reading:
-- link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards"
-  tag: "Blog"
-  text: "Building reliable dashboard agents with Datadog LLM Observability"
-- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
-  tag: "Blog"
-  text: "From performance to impact: Bridging frontend teams through shared context"
-- link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
-  tag: "Release Notes"
-  text: "Check out the latest Datadog RUM releases! (App login required)"
+- link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
+  tag: "Documentation"
+  text: "RUM Browser Data Collected"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to gain insights through Real User Monitoring"
@@ -48,15 +42,21 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
   tag: "Blog"
   text: "Best practices for monitoring static web applications"
-- link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
-  tag: "Documentation"
-  text: "RUM Browser Data Collected"
 - link: "https://www.datadoghq.com/blog/progressive-web-application-monitoring/"
   tag: "Blog"
   text: "Best practices for monitoring progressive web applications"
 - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
   tag: "Blog"
   text: "Design effective executive dashboards with Datadog"
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
+- link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog RUM releases! (App login required)"
+- link: "https://learn.datadoghq.com/courses/intro-to-rum"
+  tag: "Learning Center"
+  text: "Intro to Real User Monitoring (RUM)"
 algolia:
   tags: ['rum', 'real user monitoring']
 cascade:
@@ -150,6 +150,7 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 | US5  | `https://browser-intake-us5-datadoghq.com`    |
 | EU1  | `https://browser-intake-datadoghq.eu`         |
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
+| US2-FED  | `https://browser-intake-us2-ddog-gov.com` |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 | AP2  | `https://browser-intake-ap2-datadoghq.com`    |
 

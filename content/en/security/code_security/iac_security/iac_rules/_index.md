@@ -10,7 +10,7 @@ further_reading:
     text: "Configure IaC Security Exclusions"
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">This product is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 
@@ -19,3 +19,7 @@ further_reading:
 <div class="alert alert-info">For Helm resolution to work correctly, each chart directory must include the charts it depends on. For details, see <a href="https://helm.sh/docs/topics/charts/#the-chart-file-structure">Chart File Structure</a> in the Helm documentation.</div>
 
 [1]: /security/code_security/iac_security/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

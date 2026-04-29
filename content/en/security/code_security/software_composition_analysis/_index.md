@@ -23,6 +23,12 @@ further_reading:
   - link: /pr_gates/
     tag: Documentation
     text: PR Gates
+  - link: "https://www.datadoghq.com/blog/remediate-faster-code-security"
+    tag: "Blog"
+    text: "Remediate transitive vulnerabilities faster with Datadog Software Composition Analysis"
+  - link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
+    tag: "Blog"
+    text: "Key learnings from the 2026 State of DevSecOps study"
 
 ---
 ## Overview
@@ -40,9 +46,19 @@ SCA supports two complementary detection modes:
 - **Static detection** scans repositories by analyzing dependency files (lockfiles and manifests). By default, scans run when a commit updates a supported dependency manifest or lockfile in an enabled repository. You can also run SCA in your CI/CD pipeline (CI jobs are supported for `push` events). See [Set up Static SCA][1] to get started.
 - **Runtime detection** identifies libraries that are loaded and used by your services at runtime using instrumentation from Datadog APM. See [Set up Runtime SCA][2] to get started.
 
-Datadog SCA uses a curated proprietary database. The database is sourced from Open Source Vulnerabilities (OSV), National Vulnerability Database (NVD), GitHub advisories, and other language ecosystem advisories, as well as Datadog's own Security Research team's findings. There is a maximum of 2 hours between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
-
 When Datadog ingests a new advisory, it is matched against your last known library inventory and appears in the Vulnerabilities Explorer even if you have not rescanned the repository. The Repositories Explorer is commit-scoped and reflects what was known at the time the scan ran—so a scan that executed before Datadog ingested the advisory will not show that newly published advisory in the Repositories Explorer for that commit. See [Understanding SCA views](#understanding-sca-views) for more details.
+
+## Vulnerability database
+
+Datadog SCA draws from multiple public and private sources to build a curated proprietary database. These sources include the [National Vulnerability Database (NVD)][21], the [GitHub Advisory Database][22], [osv.dev][23], ecosystem-specific advisories such as [PyPA's Advisory Database][24] and the [Global Security Database][25], [Datadog GuardDog][26], and Datadog Security Research. 
+
+Datadog uses these sources to identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 1 hour between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes. Malicious packages are reported in Datadog within 6 hours.
+
+## Public exploit sources
+
+Datadog identifies whether a vulnerability has a known public exploit by aggregating data from multiple public sources, including CISA (Known Exploited Vulnerabilities Catalog), Exploit-DB, NIST (National Vulnerability Database), and GitHub (public exploit references).
+
+When Datadog identifies a public exploit for a vulnerability from any of these sources, it flags the finding to help you prioritize remediation.
 
 ## Key capabilities
 
@@ -57,7 +73,7 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 | Risk factor                       | How it is evaluated                                                  | Impact on the score                                    |
 |-----------------------------------|----------------------------------------------------------------------|--------------------------------------------------------|
 | Base CVSS score                   | Published CVSS score for the vulnerability.                          | Starting point for the severity score.                 |
-| Reachability                      | Whether the vulnerable code path is actually executed.               | Increased when the vulnerable code is invoked.         |
+| Reachability                      | Whether the vulnerable function is referenced in the source code (detected statically at the repository level). | Increased when the vulnerable function is found to be reachable in the code. |
 | Production runtime context        | Whether the affected service is running in a production environment. | Decreased if the service is not running in production. |
 | Under attack                      | Evidence of active attack activity targeting the service.            | Decreased if there is no observed attack activity.     |
 | Exploit availability              | Availability of public exploits for the vulnerability.               | Decreased if no exploit is available.                  |
@@ -100,6 +116,20 @@ Use the Library Inventory to understand which dependencies you rely on, where th
 
 To learn more about how the inventory is generated, how Static and Runtime data differ, and how to interpret the library details (usage, vulnerabilities, licenses, versions, and OpenSSF score), see [Library Inventory][14].
 
+### Create tickets from findings
+
+You can create a bidirectional ticket in Jira or ServiceNow directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and your ticketing tool. For more information, see [Ticketing integrations][19].
+
+<div class="alert alert-info">Ticket creation is only available for library vulnerability findings detected in repositories (Static SCA). Findings detected exclusively in running services do not support ticket creation.</div>
+
+### Mute findings
+
+To suppress a finding, click **Mute** in the finding details panel. This opens a workflow where you can [create an Automation Rule][20] for context-aware filtering by tag values (for example, by `repository`). Muting a finding hides it and excludes it from reports.
+
+<div class="alert alert-info">Muting is only available for library vulnerability findings detected in repositories (Static SCA). Findings detected exclusively in running services cannot be muted.</div>
+
+To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Vulnerabilities Explorer][11] to review muted findings.
+
 ### Library vulnerability context in APM
 
 SCA enriches the information that Application Performance Monitoring (APM) already collects by flagging libraries that match current vulnerability advisories. Potentially vulnerable services are highlighted directly in the Security view in the [APM Software Catalog][10].
@@ -123,25 +153,27 @@ Datadog continuously matches newly published advisories against the stored libra
 - The Repositories Explorer remains a fixed, point-in-time record of what was known at scan time and does not update when new advisories are published.
 
 ### Vulnerability lifecycle
-Vulnerabilities detected in libraries by SCA **at runtime** are closed by Datadog after a certain period, depending on the service's usage of the vulnerable library.
 
-- **Hot Libraries:**
-Libraries from services that are alive for more than 2 hours.
-  - **When vulnerabilities are auto-closed by Datadog:** After 1 day, if they are not detected again and the service is running on all environments where the vulnerability was detected.
+Datadog tracks SCA vulnerabilities differently depending on where they are detected. **Static SCA** findings are scoped to a **repository** and are based on repository scans. **Runtime SCA** findings are scoped to a **service** and are based on libraries that are loaded and used by running services.
 
-- **Lazy Libraries:**
-Libraries that are loaded more than 1 hour after the service has started.
-  - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
+A vulnerability is opened when Datadog detects a vulnerable library in the relevant scope. A vulnerability is closed when Datadog no longer detects it according to the life cycle rules for that product.
 
-- **Cold Libraries:**
-Libraries from services that are alive for less than 2 hours (such as jobs).
-  - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
+| Product | Scope | Scenario | When a vulnerability is opened | When a vulnerability is closed |
+|---|---|---|---|---|
+| Static SCA | Repository | Repository scan | Datadog detects a vulnerable library in a scanned repository. | The vulnerability was last seen more than three hours ago and is not detected in the latest scanned commit. |
+| Runtime SCA | Service | Long-running service | Datadog detects a vulnerable library in a running service. | After one day, if the vulnerability is not detected again and the service is running in all environments where the vulnerability was detected. |
+| Runtime SCA | Service | Library loaded later in the service life cycle | Datadog detects a vulnerable library in a running service. | After five days, if the vulnerability is not detected again during that period. |
+| Runtime SCA | Service | Short-lived service or job | Datadog detects a vulnerable library in a running service. | After five days, if the vulnerability is not detected again during that period. |
 
 ## SCA language support
 
 Software Composition Analysis (SCA) supports the following languages:
 
 {{< partial name="code_security/sca-lang-support.html" >}}
+
+## Customize your configuration
+
+You can exclude paths from Static SCA analysis by configuring `ignore-paths` in Datadog or in a `code-security.datadog.yaml` file. For the full SCA configuration reference, see [Software Composition Analysis (SCA) Configuration][27]. For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][28].
 
 ## Next steps
 
@@ -168,3 +200,13 @@ Software Composition Analysis (SCA) supports the following languages:
 [16]: /pr_gates/
 [17]: /pr_gates/setup
 [18]: /security/code_security/software_composition_analysis/setup_static/?tab=github#link-findings-to-datadog-services-and-teams
+[19]: /security/ticketing_integrations
+[20]: /security/automation_pipelines/mute
+[21]: https://nvd.nist.gov/
+[22]: https://docs.github.com/en/code-security/concepts/vulnerability-reporting-and-management/about-the-github-advisory-database
+[23]: https://google.github.io/osv.dev/data/
+[24]: https://github.com/pypa/advisory-database
+[25]: https://github.com/cloudsecurityalliance/gsd-database
+[26]: https://github.com/DataDog/guarddog
+[27]: /security/code_security/software_composition_analysis/configuration/
+[28]: /security/code_security/guides/configuration/

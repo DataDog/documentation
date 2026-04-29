@@ -1,4 +1,5 @@
 ---
+id: siem
 core_product:
 - seguridad
 - cloud siem

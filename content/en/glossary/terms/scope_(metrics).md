@@ -1,4 +1,5 @@
 ---
+id: scope_metrics
 title: scope
 core_product:
   - metrics

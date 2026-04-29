@@ -14,8 +14,11 @@ The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV.
 - **[Agentic Onboarding (in Preview)][19]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
 - **Manual setup** (below): Follow the step-by-step instructions to manually add and configure the SDK.
 
-### Step 1 - Declare the Android SDK as a dependency
+### Manual setup
 
+{% stepper %}
+
+{% step title="Declare the Android SDK as a dependency" %}
 Declare [dd-sdk-android-rum][4] and the [Gradle plugin][5] as dependencies in your **application module's** `build.gradle` file.
 
 ```groovy
@@ -37,9 +40,9 @@ dependencies {
 }
 
 ```
+{% /step %}
 
-### Step 2 - Specify application details in the UI
-
+{% step title="Specify application details in the UI" %}
 1. Navigate to [**Digital Experience** > **Add an Application**][6].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][7].
@@ -48,8 +51,9 @@ dependencies {
 {% img src="real_user_monitoring/android/android-new-application.png" alt="Create a RUM application for Android in Datadog" style="width:90%;" /%}
 
 For more information about setting up a client token, see the [Client Token documentation][9].
+{% /step %}
 
-### Step 3 - Initialize the Datadog SDK with application context
+{% step title="Initialize the Datadog SDK with application context" %}
 
 #### Update the initialization snippet
 
@@ -269,6 +273,49 @@ public class SampleApplication extends Application {
 {% /tabs %}
 {% /site-region %}
 
+{% site-region region="gov2" %}
+{% tabs %}
+{% tab label="Kotlin" %}
+
+```kotlin
+class SampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        val configuration = Configuration.Builder(
+                clientToken = "<CLIENT_TOKEN>",
+                env = "<ENV_NAME>",
+                variant = "<APP_VARIANT_NAME>"
+            )
+            .useSite(DatadogSite.US2_FED)
+            .build()
+
+        Datadog.initialize(this, configuration, trackingConsent)
+    }
+}
+```
+
+{% /tab %}
+{% tab label="Java" %}
+
+```java
+public class SampleApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Configuration configuration =
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
+                        .useSite(DatadogSite.US2_FED)
+                        .build();
+
+        Datadog.initialize(this, configuration, trackingConsent);
+    }
+}
+```
+
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
 {% site-region region="ap1" %}
 {% tabs %}
 {% tab label="Kotlin" %}
@@ -386,8 +433,9 @@ To **update the tracking consent** after the SDK is initialized, call `Datadog.s
 
 - `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
 - `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
+{% /step %}
 
-### Step 4 - Enable the feature to start sending data
+{% step title="Enable the feature to start sending data" %}
 
 To enable the Android SDK to start sending data:
 
@@ -420,8 +468,9 @@ Rum.enable(rumConfig);
 {% /tabs %}
 
 See [`ViewTrackingStrategy`][13] to enable automatic tracking of all your views (activities, fragments, and more).
+{% /step %}
 
-### Step 5 - Initialize the interceptor to track network events
+{% step title="Initialize the interceptor to track network events" %}
 
 To initialize an interceptor for tracking network events:
 
@@ -502,6 +551,69 @@ OkHttpClient okHttpClient = new OkHttpClient.Builder()
 
 You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][16] for third-party providers and network requests.
 
+#### Cronet
+
+If you use Cronet instead of OkHttp, you can instrument your `CronetEngine` for RUM resource tracking and distributed tracing.
+
+1. Add the Gradle dependencies in the module-level `build.gradle` file:
+
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-cronet:x.x.x"
+    }
+    ```
+
+2. Instrument the `CronetEngine.Builder`:
+
+   {% tabs %}
+   {% tab label="Kotlin" %}
+
+   ```kotlin
+   val tracedHostsWithHeaderType = mapOf(
+       "example.com" to setOf(
+           TracingHeaderType.DATADOG,
+           TracingHeaderType.TRACECONTEXT),
+       "example.eu" to setOf(
+           TracingHeaderType.DATADOG,
+           TracingHeaderType.TRACECONTEXT))
+   val cronetEngine = CronetEngine.Builder(context)
+       .configureDatadogInstrumentation(
+           rumInstrumentationConfiguration = RumNetworkInstrumentationConfiguration(),
+           apmInstrumentationConfiguration = ApmNetworkInstrumentationConfiguration(
+               tracedHostsWithHeaderType
+           )
+       )
+       .build()
+   ```
+
+    {% /tab %}
+
+   {% tab label="Java" %}
+
+   ```java
+   Map<String, Set<TracingHeaderType>> tracedHostsWithHeaderType = new HashMap<>();
+   Set<TracingHeaderType> headerTypes = new HashSet<>(Arrays.asList(
+       TracingHeaderType.DATADOG, TracingHeaderType.TRACECONTEXT));
+   tracedHostsWithHeaderType.put("example.com", headerTypes);
+   tracedHostsWithHeaderType.put("example.eu", headerTypes);
+   CronetEngine.Builder builder = new CronetEngine.Builder(context);
+   CronetEngine cronetEngine = CronetIntegrationPluginKt
+       .configureDatadogInstrumentation(
+           builder,
+           new RumNetworkInstrumentationConfiguration(),
+           new ApmNetworkInstrumentationConfiguration(tracedHostsWithHeaderType)
+       )
+       .build();
+   ```
+
+   {% /tab %}
+   {% /tabs %}
+
+**Known limitations**:
+
+- Tracing headers are not propagated for redirected requests due to Cronet API limitations.
+- Retries cannot be instrumented.
+
 To filter out specific errors reported by `DatadogInterceptor`, you can configure a custom `EventMapper` in your `RumConfiguration`:
 
 {% tabs %}
@@ -532,11 +644,14 @@ RumConfiguration rumConfig = new RumConfiguration.Builder("applicationId")
                  }
              })
              .build();
- 
+
 ```
 
 {% /tab %}
 {% /tabs %}
+{% /step %}
+
+{% /stepper %}
 
 ## Track background events
 
