@@ -52,7 +52,7 @@ Edit messages, variable values, or model settings, then click **Run** again to i
 
 ## Run an experiment from the Playground
 
-{{< img src="llm_observability/playground/playground-experiment-preview.png" alt="LLM Observability Playground in experiment mode with all four steps completed (Add Dataset, Add Variables, Add Evaluators, Run Preview). The Experiment Preview table shows OUTPUT, EVAL_EXPECTED_OUTPUT, INPUT, and EXPECTEDOUTPUT columns with PASS and FAIL badges per row and a summary banner reading 3 of 20 records passed." style="width:100%;" >}}
+{{< img src="llm_observability/playground/playground-experiment-preview.png" alt="LLM Observability Playground in experiment mode with all steps completed and Save and Run as experiment active. The Experiment Preview table shows OUTPUT, EVAL_EXPECTED_OUTPUT, INPUT, and EXPECTEDOUTPUT columns with PASS and FAIL badges per row and a summary banner reading 6 of 20 records passed." style="width:100%;" >}}
 
 Use Experiments mode to test your prompt across a dataset, score results with evaluators, and save the configuration as a reproducible experiment.
 
