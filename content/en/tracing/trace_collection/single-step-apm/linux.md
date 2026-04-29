@@ -33,7 +33,7 @@ To enable APM on a Linux host:
 
 ## Set SDK tracer versions
 
-By default, Single Step Instrumentation installs the latest versions of Datadog APM SDKs.
+By default, Single Step Instrumentation installs the latest versions of Datadog SDKs.
 
 You may want to choose specific SDK versions for compatibility with your application's language version or specific environment requirements.
 
@@ -61,6 +61,27 @@ To customize SDK versions:
    ```
    DD_API_KEY=<YOUR_DD_API_KEY> 
    DD_SITE="US1-FED" 
+   DD_APM_INSTRUMENTATION_ENABLED=host 
+   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" 
+   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   ```
+
+1. Find your language(s) and use the dropdown to either:
+   - Select an exact SDK version, or
+   - Select the major version, which uses the latest minor release available when the Agent installation command is run.
+1. Copy and run the updated installation command.
+
+[15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+
+{{< /site-region >}}
+
+{{< site-region region="gov2" >}}
+1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
+1. After you turn on **APM Instrumentation**, set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
+   
+   ```
+   DD_API_KEY=<YOUR_DD_API_KEY> 
+   DD_SITE="US2-FED" 
    DD_APM_INSTRUMENTATION_ENABLED=host 
    DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" 
    bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
@@ -116,6 +137,10 @@ To update the SDK versions:
 1. Restart your applications.
 
 ### Define instrumentation rules
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
 

@@ -894,7 +894,7 @@
     "summary": "List custom allocation rules"
   },
   "CreateCustomAllocationRule": {
-    "description": "Create a new custom allocation rule with the specified filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "description": "Create a new custom allocation rule with the specified filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"=\", \"!=\", \"like\", \"not like\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, contains, in, not in, =, !=, like, not like",
     "summary": "Create custom allocation rule",
     "request_description": "",
     "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
@@ -914,7 +914,7 @@
     "summary": "Get custom allocation rule"
   },
   "UpdateCustomAllocationRule": {
-    "description": "Update an existing custom allocation rule with new filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n- **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"does not contain\", \"=\", \"!=\", \"like\", \"not like\", \"is all values\", \"is untagged\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, is all values, is untagged, contains, does not contain, in, not in, =, !=, like, not like",
+    "description": "Update an existing custom allocation rule with new filters and allocation strategy.\n\n**Strategy Methods:**\n- **PROPORTIONAL/EVEN**: Allocates costs proportionally/evenly based on existing costs. Requires: granularity, allocated_by_tag_keys. Optional: based_on_costs, allocated_by_filters, evaluate_grouped_by_tag_keys, evaluate_grouped_by_filters.\n- **PROPORTIONAL_TIMESERIES/EVEN_TIMESERIES**: Allocates based on timeseries data. Requires: granularity, based_on_timeseries. Optional: evaluate_grouped_by_tag_keys.\n- **PERCENT**: Allocates fixed percentages to specific tags. Requires: allocated_by (array of percentage allocations).\n- **USAGE_METRIC**: Allocates based on usage metrics (implementation varies).\n\n**Filter Conditions:**\n- Use **value** for single-value conditions: \"is\", \"is not\", \"contains\", \"=\", \"!=\", \"like\", \"not like\"\n- Use **values** for multi-value conditions: \"in\", \"not in\"\n- Cannot use both value and values simultaneously.\n\n**Supported operators**: is, is not, contains, in, not in, =, !=, like, not like",
     "summary": "Update custom allocation rule",
     "request_description": "",
     "request_schema_description": "The definition of `ArbitraryCostUpsertRequest` object."
@@ -2192,7 +2192,7 @@
     "summary": "List LLM Observability annotation queues"
   },
   "CreateLLMObsAnnotationQueue": {
-    "description": "Create a new annotation queue. Only `name`, `project_id`, and `description` are accepted.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`, and `modified_at` are inferred by the backend.",
+    "description": "Create an annotation queue. The `name` and `project_id` fields are required.\nAn optional `annotation_schema` can be provided to define the labels for the queue.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`,\nand `modified_at` are inferred by the backend.",
     "summary": "Create an LLM Observability annotation queue",
     "request_description": "Create annotation queue payload.",
     "request_schema_description": "Request to create an LLM Observability annotation queue."
@@ -2202,7 +2202,7 @@
     "summary": "Delete an LLM Observability annotation queue"
   },
   "UpdateLLMObsAnnotationQueue": {
-    "description": "Partially update an annotation queue. Only `name` and `description` can be updated.",
+    "description": "Partially update an annotation queue. The `name`, `description`, and `annotation_schema` fields can be updated.",
     "summary": "Update an LLM Observability annotation queue",
     "request_description": "Update annotation queue payload.",
     "request_schema_description": "Request to update an LLM Observability annotation queue."
@@ -2222,6 +2222,16 @@
     "summary": "Delete annotation queue interactions",
     "request_description": "Delete interactions payload.",
     "request_schema_description": "Request to delete interactions from an LLM Observability annotation queue."
+  },
+  "GetLLMObsAnnotationQueueLabelSchema": {
+    "description": "Retrieve the label schema for a given annotation queue.",
+    "summary": "Get annotation queue label schema"
+  },
+  "UpdateLLMObsAnnotationQueueLabelSchema": {
+    "description": "Create or replace the label schema for a given annotation queue.\nThe label schema defines the labels annotators can apply to interactions in the queue.\nLabel names must be unique within the queue and match the pattern `^[a-zA-Z0-9_-]+$`.\nEach label must have a valid type: score, categorical, boolean, or text.",
+    "summary": "Update annotation queue label schema",
+    "request_description": "Update label schema payload.",
+    "request_schema_description": "Request to update the label schema of an annotation queue."
   },
   "ListLLMObsExperiments": {
     "description": "List all LLM Observability experiments sorted by creation date, newest first.",
@@ -2827,6 +2837,10 @@
     "request_description": "",
     "request_schema_description": "A top-level wrapper for updating a notification rule for a user"
   },
+  "ListOrgs": {
+    "description": "Returns the current organization and its managed organizations in JSON:API format.",
+    "summary": "List your managed organizations"
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -2895,8 +2909,12 @@
     "description": "Delete an organization group policy by its ID.",
     "summary": "Delete an org group policy"
   },
+  "GetOrgGroupPolicy": {
+    "description": "Get a specific organization group policy by its ID.",
+    "summary": "Get an org group policy"
+  },
   "UpdateOrgGroupPolicy": {
-    "description": "Update the content of an existing organization group policy.",
+    "description": "Update an existing organization group policy.",
     "summary": "Update an org group policy",
     "request_description": "",
     "request_schema_description": "Request to update an org group policy."
@@ -2918,6 +2936,10 @@
   "DeleteOrgGroupPolicyOverride": {
     "description": "Delete an organization group policy override by its ID.",
     "summary": "Delete an org group policy override"
+  },
+  "GetOrgGroupPolicyOverride": {
+    "description": "Get a specific organization group policy override by its ID.",
+    "summary": "Get an org group policy override"
   },
   "UpdateOrgGroupPolicyOverride": {
     "description": "Update an existing organization group policy override.",
@@ -3701,6 +3723,12 @@
     "request_description": "",
     "request_schema_description": "List of requests to create Jira issues for security findings."
   },
+  "MuteSecurityFindings": {
+    "description": "Mute or unmute security findings.\nYou can mute or unmute up to 100 security findings per request. The request body must include `is_muted` and `reason` attributes. The allowed reasons depend on whether the finding is being muted or unmuted:\n  - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `OTHER`, `NO_FIX`, `DUPLICATE`, `RISK_ACCEPTED`.\n  - To unmute a finding: `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.",
+    "summary": "Mute or unmute security findings",
+    "request_description": "",
+    "request_schema_description": "Request to mute or unmute security findings."
+  },
   "SearchSecurityFindings": {
     "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\n### Query Syntax\n\nThe API uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
     "summary": "Search security findings",
@@ -4473,6 +4501,38 @@
     "description": "Get the list of API multistep tests that include a given subtest,\nalong with their monitor status.",
     "summary": "Get parent tests for a subtest"
   },
+  "ListSyntheticsDowntimes": {
+    "description": "Get a list of all Synthetics downtimes for your organization.",
+    "summary": "List Synthetics downtimes"
+  },
+  "CreateSyntheticsDowntime": {
+    "description": "Create a new Synthetics downtime.",
+    "summary": "Create a Synthetics downtime",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a Synthetics downtime."
+  },
+  "DeleteSyntheticsDowntime": {
+    "description": "Delete a Synthetics downtime by its ID.",
+    "summary": "Delete a Synthetics downtime"
+  },
+  "GetSyntheticsDowntime": {
+    "description": "Get a Synthetics downtime by its ID.",
+    "summary": "Get a Synthetics downtime"
+  },
+  "UpdateSyntheticsDowntime": {
+    "description": "Update a Synthetics downtime by its ID.",
+    "summary": "Update a Synthetics downtime",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a Synthetics downtime."
+  },
+  "RemoveTestFromSyntheticsDowntime": {
+    "description": "Disassociate a Synthetics test from a downtime.",
+    "summary": "Remove a test from a Synthetics downtime"
+  },
+  "AddTestToSyntheticsDowntime": {
+    "description": "Associate a Synthetics test with a downtime.",
+    "summary": "Add a test to a Synthetics downtime"
+  },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
     "summary": "Get the on-demand concurrency cap"
@@ -4511,6 +4571,14 @@
     "request_description": "JSON Patch document with operations to apply.",
     "request_schema_description": "JSON Patch request for a Synthetic test suite."
   },
+  "ListSyntheticsBrowserTestLatestResults": {
+    "description": "Get the latest result summaries for a given Synthetic browser test.",
+    "summary": "Get a browser test's latest results"
+  },
+  "GetSyntheticsBrowserTestResult": {
+    "description": "Get a specific full result from a given Synthetic browser test.",
+    "summary": "Get a browser test result"
+  },
   "DeleteSyntheticsTests": {
     "summary": "Bulk delete tests",
     "request_description": "",
@@ -4531,6 +4599,10 @@
     "summary": "Edit a Network Path test",
     "request_description": "New Network Path test details to be saved.",
     "request_schema_description": "Network Path test request."
+  },
+  "PollSyntheticsTestResults": {
+    "description": "Poll for test results given a list of result IDs. This is typically used after\ntriggering tests with CI/CD to retrieve results once they are available.",
+    "summary": "Poll for test results"
   },
   "GetTestFileDownloadUrl": {
     "description": "Get a presigned URL to download a file attached to a Synthetic test.\nThe returned URL is temporary and expires after a short period.",
@@ -4559,6 +4631,14 @@
   "GetTestParentSuites": {
     "description": "Get the list of parent suites and their status for a given Synthetic test.",
     "summary": "Get parent suites for a test"
+  },
+  "ListSyntheticsTestLatestResults": {
+    "description": "Get the latest result summaries for a given Synthetic test.",
+    "summary": "Get a test's latest results"
+  },
+  "GetSyntheticsTestResult": {
+    "description": "Get a specific full result from a given Synthetic test.",
+    "summary": "Get a test result"
   },
   "ListSyntheticsTestVersions": {
     "description": "Get the paginated version history for a Synthetic test.",
@@ -4874,6 +4954,10 @@
     "summary": "Update a user",
     "request_description": "",
     "request_schema_description": "Update a user."
+  },
+  "DeleteUserInvitations": {
+    "description": "Cancel all pending invitations for a specified user.\nRequires the `user_access_invite` permission.",
+    "summary": "Delete a pending user's invitations"
   },
   "ListUserOrganizations": {
     "description": "Get a user organization. Returns the user information and all organizations\njoined by this user.",

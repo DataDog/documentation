@@ -192,7 +192,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov,ap1,ap2" %}}
+{{% site-region region="us3,us5,gov,gov2,ap1,ap2" %}}
 
 | Product/Functionality                                                                                               | Port | Protocol | Description                                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------------- | ---- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -269,7 +269,7 @@ The APM receiver and the DogStatsD ports are located in the **Trace Collection C
 # receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-danger">If you change the DogStatsD port or APM receiver port value here, you must also change the APM tracing library configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
+<div class="alert alert-danger">If you change the DogStatsD port or APM receiver port value here, you must also change the Datadog SDK configuration for the corresponding port. See the information about configuring ports in the <a href="/tracing/trace_collection/library_config/">Library Configuration docs for your language</a>.</div>
 
 ## Using proxies
 

@@ -4,6 +4,10 @@ further_reading:
   - link: "tracing/trace_explorer/query_syntax/"
     tag: "Documentation"
     text: "Trace Explorer Query Syntax"
+  - link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+    tag: "Learning Center"
+    text: "Investigate with LLM Observability"
+
 ---
 
 ## Overview

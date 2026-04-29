@@ -15,6 +15,9 @@ further_reading:
     - link: 'https://app.datadoghq.com/help/quick_start'
       tag: 'App'
       text: 'Explore the Quick Start Guide'
+    - link: "https://learn.datadoghq.com/courses/introduction-to-observability"
+      tag: "Learning Center"
+      text: "Introduction to Observability"
 cascade:
     algolia:
         rank: 50

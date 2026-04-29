@@ -139,7 +139,7 @@ For more information, see the [Azure integration documentation][4].
 
 ### Google Cloud storage
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">Reference Tables are not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}})</div>
 {{% /site-region %}}
 

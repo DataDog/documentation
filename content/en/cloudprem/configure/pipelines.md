@@ -2,25 +2,25 @@
 title: Processing Configuration
 aliases:
 - /cloudprem/configure/processing/
-description: Learn how to configure your processing pipelines in CloudPrem
+description: Learn how to configure your processing pipelines in BYOC Logs
 further_reading:
 - link: "/cloudprem/architecture/"
   tag: "Documentation"
-  text: "Learn more about CloudPrem Architecture"
+  text: "Learn more about BYOC Logs Architecture"
 - link: "/cloudprem/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
 
-CloudPrem includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations.
+BYOC Logs includes a processing feature that allows you to parse and enrich logs. It automatically parses logs formatted in JSON. You can define pipelines and processors to extract meaningful information or attributes from semi-structured text, which can then be used for aggregations.
 
-<div class="alert alert-info">CloudPrem log pipelines and processors are designed to be match the capabilities of Datadog's <a href="/logs/log_configuration/pipelines/?tab=source">cloud-based log pipelines and processors</a>. </div>
+<div class="alert alert-info">BYOC Logs pipelines and processors are designed to match the capabilities of Datadog's <a href="/logs/log_configuration/pipelines/?tab=source">cloud-based log pipelines and processors</a>. </div>
 
 For a list of supported and unsupported processors, see [Compatibility with cloud-based pipelines](#compatibility-with-cloud-based-pipelines).
 
@@ -37,16 +37,16 @@ You can configure log processing pipelines using a JSON file that adheres to the
     -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" > pipelines-config.json
    ```
 
-This JSON file can be used directly with CloudPrem.
+This JSON file can be used directly with BYOC Logs.
 
-2. To set the configuration in the Helm Chart, provide the path to your JSON configuration file using the `pipelinesConfig` parameter in the CloudPrem Helm chart:
+2. To set the configuration in the Helm Chart, provide the path to your JSON configuration file using the `pipelinesConfig` parameter in the BYOC Logs Helm chart:
 
    ```bash
    helm repo update
    helm upgrade <RELEASE_NAME> -n <NAMESPACE_NAME> --set-file pipelinesConfig=./pipelines-config.json -f datadog-values.yaml
    ```
 
-   CloudPrem logs an informational message (`Successfully read pipeline config file`) when it successfully reads the configuration file. Any processors defined in the file that are not supported by CloudPrem are ignored during startup.
+   BYOC Logs records an informational message (`Successfully read pipeline config file`) when it successfully reads the configuration file. Any processors defined in the file that are not supported by BYOC Logs are ignored during startup.
    **Note**: Helm imposes a 1 MB size limit on the configuration file due to its underlying etcd storage.
 
 ## Configuration file format
@@ -106,10 +106,10 @@ The order of elements in the array defines the sequential execution order of the
 
 ## Compatibility with cloud-based pipelines
 
-CloudPrem processing is designed to align closely with cloud-based [Datadog Log Management][3], allowing direct use of existing log pipeline configurations. It achieves this by ignoring unknown or unsupported processors. However, some differences exist:
+BYOC Logs processing is designed to align closely with cloud-based [Datadog Log Management][3], allowing direct use of existing log pipeline configurations. It achieves this by ignoring unknown or unsupported processors. However, some differences exist:
 - Some filter queries can't be parsed, such as filters with combined wildcards (for example, `@data.message:+*`).
 - Filter on `message` has a different matching behavior (it also affects the category processor).
-- CloudPrem uses a regex to grep the word, but it should tokenize the text and try to match the tokens. Phrases are also ignored.
+- BYOC Logs uses a regex to grep the word, but it should tokenize the text and try to match the tokens. Phrases are also ignored.
 - Groks use regular expressions internally. The regex engines may have slightly different matching behavior.
 - Some grok patterns can't be parsed (for example, `%{?>notSpace:db.severity}`).
 

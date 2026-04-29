@@ -256,7 +256,7 @@ Centrally administer and manage all of your Datadog Agents with [Fleet Automatio
 
 ### Remote Configuration
 
-Use Datadog's [Remote Configuration][35] (enabled by default), to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure. For more information, see [supported products and capabilities][36].
+Use Datadog's [Remote Configuration][35] (enabled by default), to remotely configure and change the behavior of Datadog components (for example, Agents, SDKs, and Observability Pipelines Worker) deployed in your infrastructure. For more information, see [supported products and capabilities][36].
 
 ### Notebooks 
 
