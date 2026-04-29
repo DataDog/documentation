@@ -76,7 +76,7 @@ To begin profiling applications:
       https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php
     ```
 
-3. Run the installer to install both the tracer and profiler. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
+3. Run the installer to install both the SDK and profiler. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
 
     ```shell
     php datadog-setup.php --enable-profiling --php-bin=all

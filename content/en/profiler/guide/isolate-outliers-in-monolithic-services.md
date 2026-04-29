@@ -78,7 +78,7 @@ In the previous image, notice that the `ModelTraining` operation is taking more 
 
 Endpoint and operation isolation is available in your profiles by default, but you may want to isolate a different piece of logic. For example, if the monolith is sensitive to specific customers, you can add a custom filter to the profiles:
 
-{{< programming-lang-wrapper langs="java,go" >}}
+{{< programming-lang-wrapper langs="java,go,nodejs" >}}
 {{< programming-lang lang="java">}}
 
 
@@ -124,6 +124,31 @@ Then, open CPU or goroutine profiles for your service and select the `customer_n
 [1]: https://pkg.go.dev/runtime/pprof#Do
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys
 [3]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithCustomProfilerLabelKeys
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs">}}
+
+The Node.js profiler supports custom labels for your business logic as of `dd-trace` version 5.97.0 on Node.js 24 or later.
+
+To add labels, use `tracer.profiling.runWithLabels()`:
+
+```javascript
+const tracer = require('dd-trace').init()
+
+tracer.profiling.runWithLabels({ customer_name: <value> }, () => {
+  /* customer-specific logic here */
+})
+```
+
+All wall time and CPU time samples taken during the function's execution, including across async continuations, carry the custom labels. Nested `runWithLabels` calls merge labels. Inner values take precedence for duplicate keys.
+
+To specify which label keys you want to use for filtering, call `setCustomLabelKeys()` one time before calling `runWithLabels()`:
+
+```javascript
+tracer.profiling.setCustomLabelKeys(['customer_name'])
+```
+
+Then, open wall time or CPU time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

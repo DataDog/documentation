@@ -23,6 +23,12 @@ further_reading:
   - link: /pr_gates/
     tag: Documentation
     text: PR Gates
+  - link: "https://www.datadoghq.com/blog/remediate-faster-code-security"
+    tag: "Blog"
+    text: "Remediate transitive vulnerabilities faster with Datadog Software Composition Analysis"
+  - link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
+    tag: "Blog"
+    text: "Key learnings from the 2026 State of DevSecOps study"
 
 ---
 ## Overview
@@ -46,7 +52,7 @@ When Datadog ingests a new advisory, it is matched against your last known libra
 
 Datadog SCA draws from multiple public and private sources to build a curated proprietary database. These sources include the [National Vulnerability Database (NVD)][21], the [GitHub Advisory Database][22], [osv.dev][23], ecosystem-specific advisories such as [PyPA's Advisory Database][24] and the [Global Security Database][25], [Datadog GuardDog][26], and Datadog Security Research. 
 
-Datadog uses these sources to identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 1 hour between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes.
+Datadog uses these sources to identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 1 hour between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes. Malicious packages are reported in Datadog within 6 hours.
 
 ## Public exploit sources
 
@@ -67,7 +73,7 @@ To assist in prioritizing remediation, Datadog modifies the base CVSS score into
 | Risk factor                       | How it is evaluated                                                  | Impact on the score                                    |
 |-----------------------------------|----------------------------------------------------------------------|--------------------------------------------------------|
 | Base CVSS score                   | Published CVSS score for the vulnerability.                          | Starting point for the severity score.                 |
-| Reachability                      | Whether the vulnerable code path is actually executed.               | Increased when the vulnerable code is invoked.         |
+| Reachability                      | Whether the vulnerable function is referenced in the source code (detected statically at the repository level). | Increased when the vulnerable function is found to be reachable in the code. |
 | Production runtime context        | Whether the affected service is running in a production environment. | Decreased if the service is not running in production. |
 | Under attack                      | Evidence of active attack activity targeting the service.            | Decreased if there is no observed attack activity.     |
 | Exploit availability              | Availability of public exploits for the vulnerability.               | Decreased if no exploit is available.                  |
@@ -147,25 +153,27 @@ Datadog continuously matches newly published advisories against the stored libra
 - The Repositories Explorer remains a fixed, point-in-time record of what was known at scan time and does not update when new advisories are published.
 
 ### Vulnerability lifecycle
-Vulnerabilities detected in libraries by SCA **at runtime** are closed by Datadog after a certain period, depending on the service's usage of the vulnerable library.
 
-- **Hot Libraries:**
-Libraries from services that are alive for more than 2 hours.
-  - **When vulnerabilities are auto-closed by Datadog:** After 1 day, if they are not detected again and the service is running on all environments where the vulnerability was detected.
+Datadog tracks SCA vulnerabilities differently depending on where they are detected. **Static SCA** findings are scoped to a **repository** and are based on repository scans. **Runtime SCA** findings are scoped to a **service** and are based on libraries that are loaded and used by running services.
 
-- **Lazy Libraries:**
-Libraries that are loaded more than 1 hour after the service has started.
-  - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
+A vulnerability is opened when Datadog detects a vulnerable library in the relevant scope. A vulnerability is closed when Datadog no longer detects it according to the life cycle rules for that product.
 
-- **Cold Libraries:**
-Libraries from services that are alive for less than 2 hours (such as jobs).
-  - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
+| Product | Scope | Scenario | When a vulnerability is opened | When a vulnerability is closed |
+|---|---|---|---|---|
+| Static SCA | Repository | Repository scan | Datadog detects a vulnerable library in a scanned repository. | The vulnerability was last seen more than three hours ago and is not detected in the latest scanned commit. |
+| Runtime SCA | Service | Long-running service | Datadog detects a vulnerable library in a running service. | After one day, if the vulnerability is not detected again and the service is running in all environments where the vulnerability was detected. |
+| Runtime SCA | Service | Library loaded later in the service life cycle | Datadog detects a vulnerable library in a running service. | After five days, if the vulnerability is not detected again during that period. |
+| Runtime SCA | Service | Short-lived service or job | Datadog detects a vulnerable library in a running service. | After five days, if the vulnerability is not detected again during that period. |
 
 ## SCA language support
 
 Software Composition Analysis (SCA) supports the following languages:
 
 {{< partial name="code_security/sca-lang-support.html" >}}
+
+## Customize your configuration
+
+You can exclude paths from Static SCA analysis by configuring `ignore-paths` in Datadog or in a `code-security.datadog.yaml` file. For the full SCA configuration reference, see [Software Composition Analysis (SCA) Configuration][27]. For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][28].
 
 ## Next steps
 
@@ -200,3 +208,5 @@ Software Composition Analysis (SCA) supports the following languages:
 [24]: https://github.com/pypa/advisory-database
 [25]: https://github.com/cloudsecurityalliance/gsd-database
 [26]: https://github.com/DataDog/guarddog
+[27]: /security/code_security/software_composition_analysis/configuration/
+[28]: /security/code_security/guides/configuration/

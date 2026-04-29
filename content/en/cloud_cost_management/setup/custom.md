@@ -237,7 +237,7 @@ After your data is formatted to the requirements above, upload your CSV and JSON
 In Datadog:
 
 1. Navigate to [**Cloud Cost > Settings > Custom Costs**][3].
-1. Click the **+ Upload Costs** button.
+1. Click the {{< ui >}}+ Upload Costs{{< /ui >}} button.
 
    {{< img src="cloud_cost/upload_file.png" alt="Upload a CSV or JSON file to Datadog" style="width:80%" >}}
 
