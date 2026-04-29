@@ -5181,6 +5181,11 @@ menu:
       identifier: jobs_monitoring_airflow
       parent: data_jobs
       weight: 200000
+    - name: Troubleshooting DAG
+      url: data_observability/jobs_monitoring/airflow_troubleshooting_dag
+      identifier: jobs_monitoring_airflow_troubleshooting_dag
+      parent: jobs_monitoring_airflow
+      weight: 100000
     - name: dbt
       url: data_observability/jobs_monitoring/dbt
       identifier: jobs_monitoring_dbt
