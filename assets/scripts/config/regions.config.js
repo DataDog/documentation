@@ -748,6 +748,15 @@ export default {
     gov2: 'N/A',
     gov: 'N/A'
   },
+  goose_mcp_install_deeplink: {
+    us: 'goose://extension?url=https://mcp.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us3: 'goose://extension?url=https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us5: 'goose://extension?url=https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    eu: 'goose://extension?url=https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    ap1: 'goose://extension?url=https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    ap2: 'goose://extension?url=https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    gov: 'N/A'
+  },
   microsoft_teams_app_name: {
     us: 'Datadog',
     us3: 'Datadog',
