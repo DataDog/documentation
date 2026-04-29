@@ -16,7 +16,7 @@ further_reading:
     text: Retention Filter Best Practices
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/rum-managed-archive/" btn_hidden="false" header="Join the Preview">}}
+{{< callout url="https://www.datadoghq.com/product-preview/rum-retention-quotas/" btn_hidden="false" header="Join the Preview">}}
 Retention Quotas are in Preview.
 {{< /callout >}}
 
