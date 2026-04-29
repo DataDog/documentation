@@ -68,7 +68,7 @@ Datadog also emits two standard metrics that you can use to monitor MCP Server a
 - `datadog.mcp.session.starts`: Emitted on each session initialization.
 - `datadog.mcp.tool.usage`: A distribution metric emitted on each tool call.
 
-Both metrics are tagged with attributes such as `user_id`, `user_email`, `client` (the MCP client name, such as `claude` or `cursor`), and `tool_name` (the name of the tool invoked).
+Both metrics are tagged with attributes such as `user_id`, `user_email`, `client` (the MCP client name, such as `claude` or `cursor`), and `tool_name`.
 
 Because `datadog.mcp.tool.usage` is a distribution metric, use `count` (not `sum`) with `.as_count()` to get the number of tool calls. For example, to query the total number of tool calls grouped by user email:
 
