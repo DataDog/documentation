@@ -334,6 +334,7 @@ unsupported_sites:
   internal_developer_portal: [gov]
   jira_error_tracking: [gov]
   linear: [gov]
+  linear_error_tracking: [gov]
   live_debugger: [gov]
   llm_observability: [gov]
   mcp_server: [gov]
