@@ -22,6 +22,10 @@ further_reading:
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
+- link: "https://learn.datadoghq.com/courses/csm-misconfigurations"
+  tag: "Learning Center"
+  text: "Find and Remediate Vulnerable Cloud Resources with Cloud Security Misconfigurations"
+
 ---
 
 ## Overview

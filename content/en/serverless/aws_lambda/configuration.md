@@ -10,6 +10,9 @@ further_reading:
   - link: '/integrations/github'
     tag: 'Documentation'
     text: 'Datadog GitHub integration'
+  - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+    tag: "Learning Center"
+    text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 aliases:
     - /serverless/distributed_tracing/collect_lambda_payloads
     - /serverless/libraries_integrations/lambda_code_signing
