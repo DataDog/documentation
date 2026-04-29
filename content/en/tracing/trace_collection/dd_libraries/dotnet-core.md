@@ -73,13 +73,13 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 
 Before you begin, make sure you've already [installed and configured the Agent][12].
 
-1. [Install the tracer.](#install-the-tracer)
-2. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
+1. [Install the SDK.](#install-the-sdk)
+2. [Enable the SDK for your service.](#enable-the-sdk-for-your-service)
 3. [View your live data.](#view-your-live-data)
 
-### Install the tracer
+### Install the SDK
 
-After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
+After you install and configure your Datadog Agent, the next step is to add the SDK directly in the application to instrument it. Read more about [compatibility information][1].
 
 You can install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the Windows or Linux tab. To see per-application installation instructions, click the NuGet tab.
 
@@ -122,7 +122,7 @@ To install the .NET Tracer machine-wide:
 
 To install the .NET Tracer in chiseled or distroless Docker images (without a shell), use the following Dockerfile commands:
 
-- Use `ADD` to put the tracer files in the container.
+- Use `ADD` to put the SDK files in the container.
 - Use `COPY --chown=$APP_UID` with an empty folder as source to create the logs path.
 
 For example, in your Dockerfile:
@@ -150,7 +150,7 @@ To install the .NET Tracer per-application:
 
 {{< /tabs >}}
 
-### Enable the tracer for your service
+### Enable the SDK for your service
 
 To enable the .NET Tracer for your service, set the required environment variables and restart the application.
 
@@ -177,7 +177,7 @@ For information about the different methods for setting environment variables, s
    ```
 
    <div class="alert alert-danger">
-     <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the tracer. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
+     <strong>Note:</strong> Always use the commands above to completely stop and restart IIS to enable the SDK. Avoid using the IIS Manager GUI application or <code>iisreset.exe</code>.
    </div>
 
 
@@ -230,7 +230,7 @@ After enabling the .NET Tracer for your service:
 
 ## Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
+If needed, configure the SDK to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
 
 ## Custom instrumentation
 
@@ -281,7 +281,7 @@ For more information on adding spans and tags for custom instrumentation, see th
 
 ## Configuring process environment variables
 
-To attach automatic instrumentation to your service, you must set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
+To attach automatic instrumentation to your service, you must set the required environment variables before starting the application. See [Enable the SDK for your service](#enable-the-sdk-for-your-service) section to identify which environment variables to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
 
 ### Windows
 

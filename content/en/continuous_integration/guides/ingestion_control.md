@@ -22,8 +22,8 @@ Exclusion filters are not required for setting up Pipeline Visibility. By defaul
 
 To create filters for your organization, your user account must have the `ci_ingestion_control_write` [permission][1].
 
-1. In Datadog, navigate to **CI** > **Settings** > **Ingestion Settings**.
-2. Select **Add an Exclusion Filter**.
+1. In Datadog, navigate to {{< ui >}}CI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Ingestion Settings{{< /ui >}}.
+2. Select {{< ui >}}Add an Exclusion Filter{{< /ui >}}.
 
 {{< img src="ci/add-ci-exclusion-filter.png" alt="Add an Exclusion Filter button" style="width:90%;">}}
 
@@ -32,8 +32,8 @@ To create filters for your organization, your user account must have the `ci_ing
 {{< img src="ci/exclusion-filter-pipeline.png" alt="Creating an exclusion filter for a specific pipeline" style="width:100%;">}}
 
 Once you have added a filter, each row in this page displays:
-- **Filter name** - the name of the filter
-- **Exclusion query** - the query that was defined for that filter
+- {{< ui >}}Filter name{{< /ui >}} - the name of the filter
+- {{< ui >}}Exclusion query{{< /ui >}} - the query that was defined for that filter
 - Toggle to [enable/disable the filter](#enabling-and-disabling-filters) - newly created filters are toggled on by default
 
 All spans matching one or more filters are neither ingested nor processed by Datadog.
@@ -68,7 +68,7 @@ A toggle on the right hand side of each filter allows you to enable and disable 
 **Note**: In most scenarios, filters are applied to ingested data within <1 second (p95) of being enabled. However, it is possible that an enabled filter takes up to a few minutes to take effect.
 
 ### Updating filters
-You can rename a filter or modify the query for an exclusion filter at any time within the **Ingestion Settings** page.
+You can rename a filter or modify the query for an exclusion filter at any time within the {{< ui >}}Ingestion Settings{{< /ui >}} page.
 
 {{< img src="ci/exclusion-filter-edit.png" alt="Ingestion control edit exclusion filter button" style="width:90%;">}}
 

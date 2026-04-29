@@ -38,6 +38,8 @@ The following table shows additional example features and their associated featu
   - [Browser (6.20.0)][1]
   - [Android (3.1.0)][2]
   - [iOS (3.1.0)][3]
+  - [Flutter (3.0.0)][7]
+      - **Note**: On Flutter Web, operations route through the Browser SDK, which requires the `feature_operation_vital` experimental feature to be enabled.
   - [Kotlin Multiplatform (1.4.0)][4]
   - [React Native (3.0.0)][5]
   - [Roku (1.4.0)][6]
@@ -101,6 +103,18 @@ DdRum.startFeatureOperation(
 )
 
 ```
+{{% /tab %}}
+
+{{% tab "Flutter" %}}
+```dart
+DatadogSdk.instance.rum?.startFeatureOperation(
+    String name, {
+    String? operationKey,
+    Map<String, Object?> attributes = const {},
+  }
+)
+```
+To use operations on Flutter Web, enable the `feature_operation_vital` experimental feature in the Browser SDK.
 {{% /tab %}}
 
 {{% tab "Roku" %}}
@@ -173,6 +187,20 @@ DdRum.succeedFeatureOperation(
 	attributes?: Record<string, any>
 )
 ```
+
+{{% /tab %}}
+
+{{% tab "Flutter" %}}
+
+```dart
+DatadogSdk.instance.rum?.succeedFeatureOperation(
+    String name, {
+    String? operationKey,
+    Map<String, Object?> attributes = const {},
+  }
+)
+```
+To use operations on Flutter Web, enable the `feature_operation_vital` experimental feature in the Browser SDK.
 
 {{% /tab %}}
 
@@ -263,6 +291,22 @@ DdRum.failFeatureOperation(
 ```
 {{% /tab %}}
 
+{{% tab "Flutter" %}}
+
+```dart
+DatadogSdk.instance.rum?.failFeatureOperation(
+    String name,
+    RumFeatureOperationFailureReason failureReason, // .error, .abandoned, .other
+    {
+    String? operationKey,
+    Map<String, Object?> attributes = const {},
+  }
+)
+```
+To use operations on Flutter Web, enable the `feature_operation_vital` experimental feature in the Browser SDK.
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Parallelization
@@ -317,3 +361,4 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [5]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/3.0.0
 
 [6]: https://github.com/DataDog/dd-sdk-roku/releases/tag/1.4.0
+[7]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_flutter_plugin%2Fv3.0.0
