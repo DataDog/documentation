@@ -4054,7 +4054,7 @@ menu:
       parent: tracing
       identifier: tracing_glossary
       weight: 1
-    - name: Application Instrumentation
+    - name: Set Up APM
       url: tracing/trace_collection/
       parent: tracing
       identifier: tracing_trace_collection

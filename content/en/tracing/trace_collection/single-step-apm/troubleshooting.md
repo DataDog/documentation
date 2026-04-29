@@ -15,6 +15,56 @@ further_reading:
 
 Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog SDKs. SSI works for applications running on Linux hosts, in container environments such as Kubernetes and Docker, and for .NET applications served by Windows IIS—without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
 
+## Triage: no traces after enabling SSI?
+
+If you enabled SSI but don't see traces, work through these checks in order:
+
+1. **Did you restart your pods or processes after enabling SSI?** SSI injects at startup. Existing pods and processes are not instrumented until restarted.
+
+2. **Does your application have existing tracer dependencies?** SSI silently disables itself if it detects `ddtrace`, `dd-trace`, OpenTelemetry SDK, or `-javaagent` in your application. Check your dependency manifests:
+   ```
+   grep -rn "ddtrace\|dd-trace\|opentelemetry" requirements.txt package.json Gemfile go.mod pom.xml 2>/dev/null
+   ```
+   Remove these dependencies and rebuild your application if found.
+
+3. **Is your application in the same namespace as the Datadog Agent?** SSI does not instrument pods in the Agent namespace.
+
+4. **Is a namespace or pod selector filtering your application out?** Check your SSI configuration for `enabledNamespaces`, `disabledNamespaces`, or `podSelector` targets that may not match your application's namespace or labels. Also check for the `admission.datadoghq.com/enabled: "false"` annotation on the pod, which tells the Admission Controller to skip it.
+
+5. **Is the runtime version supported?** Check the [SSI compatibility guide][13].
+
+6. **For Node.js: is your application using ECMAScript Modules (ESM)?** SSI does not support ESM. If your application uses `import` syntax or sets `"type": "module"` in `package.json`, use [manually managed SDKs][14] instead.
+
+If none of these apply, continue with the detailed troubleshooting methods below.
+
+{{< agent-only >}}
+When diagnosing missing traces after SSI enablement, run these diagnostic commands:
+
+Triage (run all simultaneously):
+- `kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.initContainers[*].name}'`
+- `kubectl describe pod <POD_NAME> -n <APP_NAMESPACE> | grep -A 10 "Events:"`
+- `kubectl get datadogagent datadog -n <AGENT_NAMESPACE> -o yaml | grep -A 15 instrumentation`
+- If pup CLI is available:
+  - `pup traces search --query "service:<SERVICE_NAME>" --from 1h --limit 5`
+  - `pup fleet instrumented-pods list <CLUSTER_NAME>`
+  - `pup apm troubleshooting list --hostname <NODE_HOSTNAME> --timeframe 1h`
+
+Diagnosis by signal:
+| Signal | Likely cause | Next step |
+|--------|-------------|-----------|
+| No init container on pod | Injection never happened | Check namespace targeting, pod-selector, opt-out annotation, webhook registration, pod not restarted |
+| Init container present, no traces | Injection attempted but tracer not reporting | Check for existing ddtrace/OTel dependencies, runtime version, Agent connectivity |
+| Pod events show CrashLoopBackOff | Init container failure | Check existing instrumentation conflicts, runtime version |
+| Traces arriving but wrong service/env | UST misconfiguration | Check Unified Service Tag labels on the Deployment |
+
+Key silent failure modes (SSI produces no error for these):
+- Existing ddtrace or OpenTelemetry instrumentation detected: SSI silently disables itself
+- Unsupported runtime version: silently skipped
+- `admission.datadoghq.com/enabled: "false"` annotation on pod: webhook skips the pod
+- Pod not restarted after SSI enabled: injection happens at pod startup only
+- Pod in the Datadog Agent namespace: SSI never instruments its own namespace
+{{< /agent-only >}}
+
 ## Troubleshooting methods
 
 You can troubleshoot injection issues in two ways: by using Fleet Automation in Datadog or by manually verifying at the container level.
@@ -387,3 +437,5 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [10]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
 [11]: /tracing/guide/injectors/
 [12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
+[13]: /tracing/trace_collection/single-step-apm/compatibility/
+[14]: /tracing/trace_collection/dd_libraries/nodejs/
