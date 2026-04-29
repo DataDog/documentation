@@ -1,6 +1,6 @@
 ---
 title: Google Workspace
-description: Connect Datadog Actions to Google Workspace services using OAuth2 to automate tasks in Gmail, Calendar, Drive, Docs, Sheets, Forms, and Chat.
+description: Connect Datadog Actions to Google Workspace services using OAuth 2.0 to automate tasks in Gmail, Calendar, Drive, Docs, Sheets, Forms, and Chat.
 disable_toc: false
 further_reading:
 - link: "/actions/connections/"
@@ -12,7 +12,7 @@ Use a Google Workspace connection to authenticate Datadog Actions against Google
 
 ## Prerequisites
 
-Before creating the connection in Datadog, you must set up an OAuth2 client in Google Cloud.
+Before creating the connection in Datadog, you must set up an OAuth 2.0 client in Google Cloud.
 
 ### Create a Google Cloud project
 
@@ -49,7 +49,7 @@ Enable the Google APIs you plan to use in your workflows:
 1. Under **Scopes**, add the OAuth scopes required for the actions you intend to use. See the [scopes reference](#scopes-reference).
 1. Complete the remaining steps and click **Back to Dashboard**.
 
-### Create OAuth2 credentials
+### Create OAuth 2.0 credentials
 
 1. Navigate to [**APIs & Services** > **Credentials**][5] in the Google Cloud Console.
 1. Click **Create Credentials** > **OAuth client ID**.
@@ -65,9 +65,9 @@ Enable the Google APIs you plan to use in your workflows:
 1. Click {{< ui >}}New Connection{{< /ui >}}.
 1. Select the {{< ui >}}Google Workspace{{< /ui >}} icon.
 1. Enter a {{< ui >}}Connection Name{{< /ui >}}.
-1. Enter the {{< ui >}}Client ID{{< /ui >}} and {{< ui >}}Client Secret{{< /ui >}} from your Google Cloud OAuth2 credentials.
+1. Enter the {{< ui >}}Client ID{{< /ui >}} and {{< ui >}}Client Secret{{< /ui >}} from your Google Cloud OAuth 2.0 credentials.
 1. Select the {{< ui >}}Scopes{{< /ui >}} required for the actions you plan to use. See the [scopes reference](#scopes-reference).
-1. The {{< ui >}}Authorize URL{{< /ui >}} and {{< ui >}}Token URL{{< /ui >}} fields are pre-populated with Google's default OAuth2 endpoints. Leave these as-is unless you have a specific reason to change them.
+1. The {{< ui >}}Authorize URL{{< /ui >}} and {{< ui >}}Token URL{{< /ui >}} fields are pre-populated with Google's default OAuth 2.0 endpoints. Leave these as-is unless you have a specific reason to change them.
 1. Click {{< ui >}}Create{{< /ui >}}.
 1. In the authorization window that opens, sign in with the Google account you want to use and grant the requested permissions.
 
