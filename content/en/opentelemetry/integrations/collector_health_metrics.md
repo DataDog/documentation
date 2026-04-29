@@ -21,6 +21,8 @@ You can collect Collector health metrics in two ways:
 
 ## Setup
 
+The two tabs below show alternative ways to configure the pipeline. Pick one based on whether you want a Prometheus-style scrape or a direct OTLP push. The [`service.telemetry.metrics` fields](#servicetelemetrymetrics-fields) and [resource attribute](#optional-tag-with-resource-attributes) sections that follow apply to both setups.
+
 {{< tabs >}}
 {{% tab "Prometheus" %}}
 
@@ -77,17 +79,6 @@ service:
 
 The `service.telemetry.metrics` block exposes the Collector's internal metrics on `0.0.0.0:8888`. The `prometheus/internal` receiver scrapes that same endpoint and the metrics pipeline forwards them to Datadog.
 
-**Top-level fields under `service.telemetry.metrics`:**
-
-`level`
-: Verbosity of the Collector's internal metrics. One of `none`, `basic`, `normal` (default), or `detailed`. `detailed` is required to enable `views`.
-
-`readers`
-: List of metric readers. At least one is required when `level` is not `none`. Each reader is either a `pull` reader (Prometheus) or a `periodic` reader (OTLP, console).
-
-`views`
-: Optional list of [SDK views][109] that drop, rename, filter, or re-aggregate specific instruments. Only available when `level: detailed`.
-
 **`pull.exporter.prometheus` options:**
 
 `host` / `port`
@@ -105,47 +96,9 @@ The `service.telemetry.metrics` block exposes the Collector's internal metrics o
 `with_resource_constant_labels.included` / `with_resource_constant_labels.excluded`
 : Allowlist and denylist of resource attributes to copy onto every exported metric as constant labels.
 
-#### Optional: tag with resource attributes
-
-Use `service.telemetry.resource` to attach resource attributes (such as `k8s.cluster.name`, `service.instance.id`, or any [Datadog-mapped semantic convention][103]) to all telemetry the Collector emits about itself.
-
-Use the legacy inline map format for a concise definition:
-
-```yaml
-service:
-  telemetry:
-    resource:
-      k8s.cluster.name: my-cluster
-      k8s.pod.name: ${env:HOSTNAME}
-      service.instance.id: ${env:HOSTNAME}
-      deployment.environment: prod
-```
-
-The declarative `attributes` format supports explicit typing and a `schema_url`:
-
-```yaml
-service:
-  telemetry:
-    resource:
-      schema_url: https://opentelemetry.io/schemas/1.27.0
-      attributes:
-        - name: k8s.cluster.name
-          value: my-cluster
-        - name: k8s.pod.name
-          value: ${env:HOSTNAME}
-      detectors:
-        attributes:
-          included: [host.id, host.name, cloud.provider, cloud.region]
-          excluded: []
-```
-
-Use `detectors.attributes.included` and `detectors.attributes.excluded` to allowlist or denylist attributes contributed by SDK-side resource detectors. To suppress a default attribute such as `service.version`, specify it with a null value in the legacy inline format.
-
-These attributes are mapped to Datadog tags and host metadata. For the full list of supported mappings, see [OpenTelemetry Semantic Conventions and Datadog Conventions][103] and [Mapping OpenTelemetry Semantic Conventions to Hostnames][104].
-
 #### Optional: enrich with processors
 
-Add the [resource detection processor][105] to the metrics pipeline to automatically populate cloud and host resource attributes (for example, `host.id`, `cloud.provider`, `cloud.region`). Other processors such as [`transform`][106] or [`k8sattributes`][107] can also be added to the pipeline to further enrich or transform Collector health metrics before they are exported.
+Add the [resource detection processor][103] to the metrics pipeline to automatically populate cloud and host resource attributes (for example, `host.id`, `cloud.provider`, `cloud.region`). Other processors such as [`transform`][104] or [`k8sattributes`][105] can also be added to the pipeline to further enrich or transform Collector health metrics before they are exported.
 
 ```yaml
 processors:
@@ -167,12 +120,9 @@ If you have a Datadog Agent running on the same host as an OpenTelemetry Collect
 
 [101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
 [102]: /opentelemetry/setup/collector_exporter/
-[103]: /opentelemetry/mapping/semantic_mapping/
-[104]: /opentelemetry/mapping/hostname/
-[105]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
-[106]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
-[107]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
-[109]: https://opentelemetry.io/docs/specs/otel/metrics/sdk/#view
+[103]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
+[104]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
+[105]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
 
 {{% /tab %}}
 {{% tab "OTLP" %}}
@@ -216,17 +166,6 @@ service:
 
 The Datadog OTLP metrics intake endpoint accepts only delta metrics, so `temporality_preference: delta` is required. The `dd-api-key` header authenticates the request. For configuration options (including the `dd-otel-metric-config` header for customizing metric translation) and troubleshooting, see [Datadog OTLP Metrics Intake Endpoint][201].
 
-**Top-level fields under `service.telemetry.metrics`:**
-
-`level`
-: Verbosity of the Collector's internal metrics. One of `none`, `basic`, `normal` (default), or `detailed`. `detailed` is required to enable `views`.
-
-`readers`
-: List of metric readers. At least one is required when `level` is not `none`. Each reader is either a `pull` reader (Prometheus) or a `periodic` reader (OTLP, console).
-
-`views`
-: Optional list of [SDK views][204] to drop, rename, filter attributes on, or change the aggregation of specific instruments. Only available when `level: detailed`.
-
 **`periodic` reader options:**
 
 `interval`
@@ -264,11 +203,29 @@ The Datadog OTLP metrics intake endpoint accepts only delta metrics, so `tempora
 `certificate`, `client_certificate`, `client_key`
 : Paths to PEM files for custom CA verification and mTLS client authentication.
 
-#### Optional: tag with resource attributes
+[201]: /opentelemetry/setup/otlp_ingest/metrics/
 
-Use `service.telemetry.resource` to attach resource attributes (such as `k8s.cluster.name`, `service.instance.id`, or any [Datadog-mapped semantic convention][202]) to all telemetry the Collector emits about itself.
+{{% /tab %}}
+{{< /tabs >}}
 
-The legacy inline map format is concise:
+### `service.telemetry.metrics` fields
+
+The following top-level fields apply to both setups:
+
+`level`
+: Verbosity of the Collector's internal metrics. One of `none`, `basic`, `normal` (default), or `detailed`. `detailed` is required to enable `views`.
+
+`readers`
+: List of metric readers. At least one is required when `level` is not `none`. Each reader is either a `pull` reader (Prometheus) or a `periodic` reader (OTLP, console).
+
+`views`
+: Optional list of [SDK views][5] that drop, rename, filter, or re-aggregate specific instruments. Only available when `level: detailed`.
+
+### Optional: tag with resource attributes
+
+Use `service.telemetry.resource` to attach resource attributes (such as `k8s.cluster.name`, `service.instance.id`, or any [Datadog-mapped semantic convention][6]) to all telemetry the Collector emits about itself.
+
+Use the legacy inline map format for a concise definition:
 
 ```yaml
 service:
@@ -298,17 +255,9 @@ service:
           excluded: []
 ```
 
-`detectors.attributes.included` and `detectors.attributes.excluded` allow- or deny-list attributes contributed by SDK-side resource detectors. To set an attribute to a null value (suppressing a default such as `service.version`), specify it with a null value in the legacy inline format.
+Use `detectors.attributes.included` and `detectors.attributes.excluded` to allowlist or denylist attributes contributed by SDK-side resource detectors. To suppress a default attribute such as `service.version`, specify it with a null value in the legacy inline format.
 
-These attributes are mapped to Datadog tags and host metadata. For the full list of supported mappings, see [OpenTelemetry Semantic Conventions and Datadog Conventions][202] and [Mapping OpenTelemetry Semantic Conventions to Hostnames][203].
-
-[201]: /opentelemetry/setup/otlp_ingest/metrics/
-[202]: /opentelemetry/mapping/semantic_mapping/
-[203]: /opentelemetry/mapping/hostname/
-[204]: https://opentelemetry.io/docs/specs/otel/metrics/sdk/#view
-
-{{% /tab %}}
-{{< /tabs >}}
+These attributes are mapped to Datadog tags and host metadata. For the full list of supported mappings, see [OpenTelemetry Semantic Conventions and Datadog Conventions][6] and [Mapping OpenTelemetry Semantic Conventions to Hostnames][7].
 
 ## Data collected
 
@@ -406,3 +355,6 @@ Descriptor:
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
 [3]: https://pkg.go.dev/runtime#MemStats.Sys
 [4]: /opentelemetry/setup/otlp_ingest/metrics/
+[5]: https://opentelemetry.io/docs/specs/otel/metrics/sdk/#view
+[6]: /opentelemetry/mapping/semantic_mapping/
+[7]: /opentelemetry/mapping/hostname/
