@@ -673,6 +673,15 @@ export default {
     ap2: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap2&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDIuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
     gov: 'N/A'
   },
+  goose_mcp_install_deeplink: {
+    us: 'goose://extension?url=https://mcp.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us3: 'goose://extension?url=https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    us5: 'goose://extension?url=https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    eu: 'goose://extension?url=https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    ap1: 'goose://extension?url=https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    ap2: 'goose://extension?url=https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server',
+    gov: 'N/A'
+  },
   microsoft_teams_app_name: {
     us: 'Datadog',
     us3: 'Datadog',
