@@ -21,6 +21,11 @@ Configure the Splunk HEC destination when you [set up a pipeline][5]. You can se
 
 After you select the Splunk HEC destination in the pipeline UI:
 
+1. For the **Token strategy** dropdown menu:
+	- Only select **From Source** if you are using a [Splunk HEC source][8] and have enabled **Store HEC token** on the source. Otherwise, an error occurs and you cannot proceed to install the Worker. This option forwards the token received by Observability Pipelines onto the Splunk HEC destination.
+	- If you use the default **Custom** token strategy, enter the identifier for your token. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+
 1. Enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 
@@ -88,3 +93,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [5]: /observability_pipelines/configuration/set_up_pipelines/
 [6]: /api/latest/observability-pipelines/
 [7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[8]: /observability_pipelines/sources/splunk_hec/

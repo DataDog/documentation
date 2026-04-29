@@ -154,14 +154,14 @@ To set up your account in Snowflake:
 
 To configure the Snowflake integration in Datadog:
 
-1. Navigate to [**Datadog Data Observability** > **Settings**][3].
-2. Click the **Configure** button for the Snowflake option.
+1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][3].
+2. Click the {{< ui >}}Configure{{< /ui >}} button for the Snowflake option.
 
    {{< img src="data_observability/data-obs-settings-integrations.png" alt="List of Data Observability integrations on the Settings page" style="width:100%;" >}}
 
 3. Follow the flow to enter your account details and upload a private key.
-4. Turn on **Enable Data Observability for Snowflake tables**.
-5. Click **Save & Test**.
+4. Turn on {{< ui >}}Enable Data Observability for Snowflake tables{{< /ui >}}.
+5. Click {{< ui >}}Save & Test{{< /ui >}}.
 
 ## Snowflake tasks and Snowpipes
 
@@ -174,7 +174,7 @@ Both features require the `GRANT MONITOR EXECUTION ON ACCOUNT` permission grante
 <div class="alert alert-info">Snowflake tasks traces are in preview. Contact your account representative to enable this feature.</div>
 
 When enabled, each task graph run appears as a trace in APM with individual tasks as spans, including execution details such as status, duration, and errors. To find them:
-1. In Datadog, go to **APM** > [**Trace Explorer**][4].
+1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > [{{< ui >}}Trace Explorer{{< /ui >}}][4].
 2. Filter the Explorer:
    - For the top-level task graph span, filter by `operation_name:snowflake.task_graph`
    - For individual task spans, filter by `operation_name:snowflake.task`

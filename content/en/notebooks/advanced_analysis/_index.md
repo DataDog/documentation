@@ -15,6 +15,10 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/log-analytics-with-notebooks
   tag: Learning Center
   text: Log Analytics with Notebooks
+- link: "https://learn.datadoghq.com/courses/using-datadog-notebooks-lab"
+  tag: "Learning Center"
+  text: "Using Datadog Notebooks for Centralized Reporting"
+
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}

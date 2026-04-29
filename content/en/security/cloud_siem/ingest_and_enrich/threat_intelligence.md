@@ -1,6 +1,7 @@
 ---
 title: Bring Your Own Threat Intelligence
 disable_toc: false
+site_support_id: byoti
 aliases:
   - /security/cloud_siem/threat_intelligence
 further_reading:

@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
@@ -21,7 +21,8 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 Before setting up the Go Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
-- **Datadog Go tracer** `dd-trace-go` version 2.4.0 or later
+- **Datadog [API key][3]** configured on the Agent
+- **Datadog Go SDK** `dd-trace-go` version 2.4.0 or later
 
 Set the following environment variables:
 
@@ -50,7 +51,7 @@ go get github.com/open-feature/go-sdk/openfeature
 
 ## Initialize the SDK
 
-Start the Datadog tracer and register the Datadog OpenFeature provider. The tracer must be started first because it enables Remote Configuration, which delivers flag configurations to your application.
+Start the Datadog SDK and register the Datadog OpenFeature provider. The SDK must be started first because it enables Remote Configuration, which delivers flag configurations to your application.
 
 ### Blocking initialization
 
@@ -269,6 +270,7 @@ Flag details help you debug evaluation behavior and understand why a user receiv
 
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
+[3]: /account_management/api-app-keys/#api-keys
 
 ## Further reading
 

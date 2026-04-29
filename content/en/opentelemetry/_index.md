@@ -44,6 +44,9 @@ further_reading:
   tag: "Learning Center"
   text: "Introduction to OpenTelemetry with Datadog"
 
+- link: "https://learn.datadoghq.com/courses/understanding-opentelemetry"
+  tag: "Learning Center"
+  text: "Understanding OpenTelemetry"
 algolia:
   tags: ['opentelemetry', 'open telemetry', 'otel']
 cascade:
