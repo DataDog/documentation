@@ -23,14 +23,14 @@ If you enabled SSI but don't see traces, work through these checks in order:
 1. **Did you restart your pods or processes after enabling SSI?** SSI injects at startup. Existing pods and processes are not instrumented until restarted.
 
 2. **Does your application have existing tracer dependencies?** SSI silently disables itself if it detects `ddtrace`, `dd-trace`, OpenTelemetry SDK, or `-javaagent` in your application. Check your dependency manifests:
-   ```
-   grep -rn "ddtrace\|dd-trace\|opentelemetry" requirements.txt package.json Gemfile go.mod pom.xml 2>/dev/null
+   ```shell
+   grep -rn "ddtrace\|dd-trace\|opentelemetry" requirements.txt package.json Gemfile go.mod pom.xml build.gradle 2>/dev/null
    ```
    Remove these dependencies and rebuild your application if found.
 
 3. **Is your application in the same namespace as the Datadog Agent?** SSI does not instrument pods in the Agent namespace.
 
-4. **Is a namespace or pod selector filtering your application out?** Check your SSI configuration for `enabledNamespaces`, `disabledNamespaces`, or `podSelector` targets that may not match your application's namespace or labels. Also check for the `admission.datadoghq.com/enabled: "false"` annotation on the pod, which tells the Admission Controller to skip it.
+4. **Is a namespace or pod selector filtering your application out?** Check your SSI configuration for `enabledNamespaces`, `disabledNamespaces`, or `podSelector` targets that may not match your application's namespace or labels. Also check for the `admission.datadoghq.com/enabled: "false"` label on the pod, which tells the Admission Controller to skip it.
 
 5. **Is the runtime version supported?** Check the [SSI compatibility guide][13].
 
@@ -61,7 +61,7 @@ Diagnosis by signal:
 Key silent failure modes (SSI produces no error for these):
 - Existing ddtrace or OpenTelemetry instrumentation detected: SSI silently disables itself
 - Unsupported runtime version: silently skipped
-- `admission.datadoghq.com/enabled: "false"` annotation on pod: webhook skips the pod
+- `admission.datadoghq.com/enabled: "false"` label on pod: webhook skips the pod
 - Pod not restarted after SSI enabled: injection happens at pod startup only
 - Pod in the Datadog Agent namespace: SSI never instruments its own namespace
 {{< /agent-only >}}

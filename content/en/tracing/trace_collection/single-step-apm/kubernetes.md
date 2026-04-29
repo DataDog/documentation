@@ -32,7 +32,7 @@ Single Step Instrumentation (SSI) installs the Datadog Agent and instruments you
 - [kubectl][2] for installing the Datadog Agent
 - A supported language runtime per the [SSI compatibility guide][36]
 - **No existing tracer dependencies.** SSI silently disables itself if it detects `ddtrace`, `dd-trace`, an OpenTelemetry SDK, or `-javaagent` in your application. Before enabling SSI, check your dependency manifests:
-  ```
+  ```shell
   grep -rn "ddtrace\|dd-trace\|opentelemetry" requirements.txt package.json Gemfile go.mod pom.xml build.gradle 2>/dev/null
   ```
   Remove any matches and rebuild your application image before proceeding.
@@ -84,7 +84,7 @@ These steps enable SSI across your entire cluster. To instrument specific namesp
 {{< tabs >}}
 {{% tab "In-app wizard" %}}
 
-The Datadog app generates a configuration file with SSI enabled:
+Datadog generates a configuration file with SSI enabled:
 
 1. Go to the [Install the Datadog Agent on Kubernetes][11] page.
 1. Choose your installation method, select an API key, and set up the Operator or Helm repository.
@@ -156,7 +156,7 @@ kubectl rollout restart deployment/<DEPLOYMENT_NAME> -n <APP_NAMESPACE>
 <div class="alert alert-warning">If your cluster enforces PodSecurity <code>restricted</code> policies, the Datadog init container may be blocked with: <code>allowPrivilegeEscalation is false</code> or <code>violates PodSecurity "restricted:latest"</code>. See the <a href="/tracing/trace_collection/single-step-apm/troubleshooting/#environments-with-strict-pod-security-settings">SSI troubleshooting guide</a> for the required security context configuration.</div>
 
 {{< agent-only >}}
-Use the Helm or Datadog Operator tab above. Add `instrumentation.enabled: true` to the user's existing manifest. Do not create a separate manifest.
+Use one of the three tabs (In-app wizard, Helm, or Datadog Operator). For agents helping users, prefer the Helm or Operator tab. Add `instrumentation.enabled: true` to the user's existing manifest. Do not create a separate manifest.
 
 If the user wants to pin SDK versions, recommend these defaults:
 `java: "1"`, `python: "2"`, `js: "5"`, `dotnet: "3"`, `ruby: "2"`, `php: "1"`
@@ -223,7 +223,7 @@ After the user restarts their pods, verify with these checks:
 
 No init container (injection never happened) — check:
 - Namespace targeting: `kubectl get datadogagent datadog -n <AGENT_NAMESPACE> -o yaml | grep -A 15 instrumentation`
-- Pod annotations: `kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o yaml | grep -A 5 annotations`
+- Opt-out label: `kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.metadata.labels.admission\.datadoghq\.com/enabled}'` — if "false", the Admission Controller skips this pod
 - Pod labels: `kubectl get pod <POD_NAME> -n <APP_NAMESPACE> --show-labels`
 - Admission webhook registered: `kubectl get mutatingwebhookconfigurations | grep datadog`
 - Cluster Agent running: `kubectl get pods -n <AGENT_NAMESPACE> -l app=datadog-cluster-agent`
@@ -267,7 +267,7 @@ datadog:
 
 Requires `datadog-agent` 7.69+, `datadog-operator` 1.16.0+, or `datadog-helm-chart` 3.120.0+.
 
-{{% collapse-content title="Configure USTs with ddTraceConfigs" level="h3" expanded=false %}}
+{{% collapse-content title="Configure Unified Service Tags with ddTraceConfigs" level="h3" expanded=false %}}
 
 For granular control over specific workloads, use `ddTraceConfigs` to map labels to service configurations:
 
@@ -297,7 +297,7 @@ datadog:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Configure USTs in deployment manifests" level="h3" expanded=false %}}
+{{% collapse-content title="Configure Unified Service Tags in deployment manifests" level="h3" expanded=false %}}
 
 If your labels are not suitable for automatic extraction, set USTs directly in your deployment manifests with environment variables. This requires modifying each deployment individually.
 
@@ -313,7 +313,7 @@ After traces are flowing:
     {{< nextlink href="/tracing/trace_explorer/" >}}Trace Explorer: search and analyze your traces{{< /nextlink >}}
     {{< nextlink href="/tracing/services/service_page/" >}}Service Page: monitor service health and performance{{< /nextlink >}}
     {{< nextlink href="/tracing/trace_collection/custom_instrumentation/" >}}Custom instrumentation: add application-specific spans{{< /nextlink >}}
-    {{< nextlink href="/dynamic_instrumentation/" >}}Dynamic Instrumentation: add custom spans without redeploying{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/dynamic_instrumentation/" >}}Dynamic Instrumentation: add custom spans without redeploying{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Advanced SSI configuration
