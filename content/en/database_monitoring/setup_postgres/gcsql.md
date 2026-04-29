@@ -39,6 +39,8 @@ Data security considerations
 
 ## Configure Postgres settings
 
+<div class="alert alert-info">Manage your databases with Terraform? See <a href="/database_monitoring/setup_postgres/configure_postgres_settings_terraform/">Configure Postgres Settings with Terraform</a> for the same setup expressed as Terraform resources.</div>
+
 Configure the following [parameters][3] in [Database flags][4] and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][5].
 
 | Parameter | Value | Description |
