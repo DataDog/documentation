@@ -111,8 +111,8 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
   - Replace `<CLUSTER_NAME>` with a name for your cluster.
   - Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
 
-{{% site-region region="gov" %}}
-<div class="alert alert-info">For US1-FED, also set <code>useFIPSAgent: true</code> under <code>spec.global</code> to use the FIPS-compliant Agent image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-info">For FED, also set <code>useFIPSAgent: true</code> under <code>spec.global</code> to use the FIPS-compliant Agent image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
 {{% /site-region %}}
 
 2. Enable the OpenTelemetry Collector:
@@ -178,8 +178,8 @@ datadog:
 
 Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 
-{{% site-region region="gov" %}}
-<div class="alert alert-info">For US1-FED, also set <code>useFIPSAgent: true</code> at the root of your <code>datadog-values.yaml</code> to use the FIPS-compliant Agent image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-info">For FED, also set <code>useFIPSAgent: true</code> at the root of your <code>datadog-values.yaml</code> to use the FIPS-compliant Agent image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
 {{% /site-region %}}
 
 3. Enable the OpenTelemetry Collector and configure the essential ports:
