@@ -2,6 +2,7 @@
 title: CVE Explorer
 description: The CVE Explorer provides a unified view of all CVEs and security advisories tracked by Datadog, with visibility into which ones affect your environment.
 disable_toc: false
+weight: 20
 further_reading:
   - link: "/security/code_security/software_composition_analysis/"
      tag: "Documentation"
