@@ -201,7 +201,7 @@ The **Storage Object Admin** role is Datadog's recommended configuration. If you
 - `storage.objects.list`
 - `storage.objects.delete`
 
-`storage.objects.delete` is required to support archive write retries, where Datadog overwrites an existing object in the bucket. Multipart upload permissions (`storage.multipartUploads.*`) are not required, although future product changes might add them.
+`storage.objects.delete` is required to support archive write retries, where Datadog overwrites an existing object in the bucket. Multipart upload permissions (`storage.multipartUploads.*`) are not required.
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
