@@ -90,7 +90,7 @@ The following metrics are deprecated, and are maintained only for backward compa
 
 {{< whatsnext desc="Make use of your LLM Observability metrics:" >}}
     {{< nextlink href="dashboards/" >}}Create a dashboard to track and correlate LLM Observability metrics{{< /nextlink >}}
-    {{< nextlink href="monitors/create/" >}}Create a monitor for alerts and notifications{{< /nextlink >}}
+    {{< nextlink href="monitors/types/llm_observability/" >}}Create an LLM Observability monitor for alerts and notifications{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
