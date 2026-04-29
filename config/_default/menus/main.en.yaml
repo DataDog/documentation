@@ -5411,6 +5411,11 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_prompt_optimization
       weight: 506
+    - name: Playground
+      url: llm_observability/playground
+      parent: llm_obs_experiments
+      identifier: llm_obs_playground
+      weight: 507
     - name: MCP Server
       url: llm_observability/mcp_server
       parent: llm_obs
