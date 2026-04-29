@@ -606,7 +606,7 @@ sudo yum install --only-upgrade observability-pipelines-worker
 
 To upgrade the Worker, if you are:
 
-- Setting `image.tag`  in your `values.yaml` file with the Worker version:
+- Setting `image.tag` in your `values.yaml` file with the Worker version:
     - Update the `image.tag` in your `values.yaml` file. Replace `<WORKER_VERSION>` with the Worker version you want to use, such as `2.15.0`.
         ```yaml
         image:
@@ -615,17 +615,17 @@ To upgrade the Worker, if you are:
             # image.tag -- Specify the image tag to use.
             tag: <WORKER_VERSION>
         ```
-    - **Notes**:
+    - **Note**:
         - Your deployment continues using that image tag until you set `image.tag` in your `values.yaml` file to another version.
 - Using the chart's default image tag:
-    - Run these commands to update the repo and upgrade the release, along with any overrides you were using, to get the latest chart's default image. Replace <YOUR_VALUE_FILE> with the name of your `values.yaml` file.
-        ```yaml
+    - Run these commands to update the repo and upgrade the release, along with any overrides you were using, to get the latest chart's default image. Replace `<YOUR_VALUES_FILE>` with the name of your `values.yaml` file.
+        
         helm repo update
         helm upgrade --install opw datadog/observability-pipelines-worker -f <YOUR_VALUES_FILE>.yaml
         ```
     - **Note**: To simplify upgrades, keep all of your custom settings in your own values file and override only the values you need. This makes it easier to re-run `helm upgrade` without having to reapply multiple manual overrides.
 
-After the `values.yaml` file has been updated to the new Worker version, new Worker pods are created with the updated image version and old pods are terminated only after the replacements are `Ready`. The update is a rolling update by default, so one pod is upgraded at a time. See the `updateStrategy` options in the `value.yaml` file if you want to change the default values.
+After you update the `values.yaml` file to the new Worker version, new Worker pods are created with the updated image. Old pods are terminated only after the replacements are `Ready`. The update is a rolling update by default, so one pod is upgraded at a time. To change the default values, see the `updateStrategy` options in the `values.yaml` file:
 
 ```yaml
 updateStrategy: {}
