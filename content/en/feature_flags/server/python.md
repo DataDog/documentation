@@ -21,6 +21,7 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 Before setting up the Python Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
+- **Datadog [API key][3]** configured on the Agent
 - **Datadog Python SDK** `ddtrace` version 3.19.0 or later
 - **OpenFeature Python SDK** `openfeature-sdk` version 0.5.0 or later
 
@@ -241,6 +242,7 @@ Verify the following to ensure that Remote Configuration is working:
 
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
+[3]: /account_management/api-app-keys/#api-keys
 
 ## Further reading
 
