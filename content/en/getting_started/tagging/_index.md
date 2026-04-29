@@ -32,7 +32,7 @@ algolia:
 
 Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across several hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate datapoints.
 
-A tag can be formatted as `<key>:<value>` or `<value>`. It is recommended to use the `<key>:<value>` format, as it is often semantically clearer and allows for richer querying capabilities (for example, grouping by key). When using a `<key>:<value>` pair:
+A tag can be formatted as `<key>:<value>` or `<value>`. Datadog recommends using the `<key>:<value>` format, as it is often semantically clearer and allows for richer querying capabilities (for example, grouping by key). When using a `<key>:<value>` pair:
 
 - The tag **key** is the identifier. Commonly used tag keys are `env`, `instance`, and `name`.
 - The tag **value** is the specific data or information associated with the key. Tag values are not unique per resource and can be used across many resources in a `<key>:<value>` pair.
@@ -58,16 +58,16 @@ Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must m
 
 - Tag strings must **start with a letter** (this applies regardless of whether the tag uses the format `<key>:<value>` or `<value>`). After the leading letter, the tag string may contain the characters listed below:
 
-    - Letters (all Unicode letters are supported---for example, a, ó, 気, 녕, ك, and ดี)
+    - Letters (all Unicode letters are supported—for example, a, ó, 気, 녕, ك, and ดี)
     - Numbers
-    - Underscores (leading/trailing underscores are stripped, and contiguous underscores are collapsed into one)
+    - Underscores (leading and trailing underscores are removed, and contiguous underscores are collapsed into one)
     - Minuses
     - Colons
     - Periods
     - Forward slashes
     - (For tags on logs [ingested via HTTP][28] only) at signs (@)
 
-    All other characters (including, but not limited to, commas, emoji, back slashes, and spaces) are converted to underscores.
+    All other characters (including commas, emoji, backslashes, and spaces) are converted to underscores.
     
     **Notes**:
     - A tag that starts with a digit may be accepted in some contexts, such as `env` tags set at the Agent level. However, tags that don't follow standard naming rules may not work consistently across all Datadog products and can increase tag cardinality. Start tags with a letter unless a specific product explicitly supports otherwise.
@@ -75,7 +75,7 @@ Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must m
 
 - Tags can be **up to 200 characters** long. If the tag has the format `<key>:<value>`, the `<key>`, `:`, and `<value>` all count toward the character limit.
 - [Span tags][26] and metric tags are normalized to lowercase. Because of this, using `CamelCase` is not recommended. Authentication (crawler) based integrations also convert camel case tags to underscores before lowercasing, for example `TestTag` --> `test_tag`.
-    - Separate from tags, [span attributes][27] and log attributes are case-sensitive, and are not normalized.
+    - Unlike tags, [span attributes][27] and log attributes are case-sensitive, and are not normalized.
 - When using the format `<key>:<value>`, the key always precedes the first colon of the global tag definition. For example:
     
     | Tag                | Key           | Value          |
