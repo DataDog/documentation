@@ -10,7 +10,7 @@
  * coverage is owned upstream — this site does not warn on gaps.
  */
 
-import type { Locale } from '../../lib/locale';
+import type { Locale } from '../../lib/i18n/locale';
 
 export interface TagTranslation {
   name?: string;

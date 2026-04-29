@@ -4,7 +4,7 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import preactRenderer from '@astrojs/preact/server.js';
 import Header from './Header.astro';
 import { getMainLeft, getMainRight, getDesktopCategories, isDisabledForDocs } from '../../lib/menuData';
-import { i18n } from '../../lib/i18n';
+import { i18n } from '../../lib/i18n/i18n';
 
 async function createContainer() {
   const container = await AstroContainer.create();

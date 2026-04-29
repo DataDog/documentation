@@ -11,17 +11,13 @@ type LanguageNamesTable = Record<string, Record<string, string>>;
 
 const table = parseYaml(raw) as LanguageNamesTable;
 
-export type LangCode = 'en' | 'ja' | 'ko' | 'fr' | 'pt' | 'es';
+export type LangCode = string & keyof typeof table;
 
-/** Language names keyed by the current language's own label of itself. */
-export const nativeLabels: Record<LangCode, string> = {
-  en: 'English',
-  ja: '日本語',
-  ko: '한국어',
-  fr: 'Français',
-  pt: 'Português',
-  es: 'Español',
-};
+export const LANG_CODES: readonly string[] = Object.keys(table);
+
+export function isLangCode(value: unknown): value is LangCode {
+  return typeof value === 'string' && value in table;
+}
 
 /**
  * For a given current language, return a function that maps target-language
@@ -32,6 +28,7 @@ export function getTranslations(currentLang: LangCode) {
   return (targetLang: string): string => dict[targetLang] ?? targetLang;
 }
 
+/** Returns the language's name as written in that language (the YAML diagonal). */
 export function getNativeLabel(lang: LangCode): string {
-  return nativeLabels[lang] ?? lang;
+  return table[lang]?.[lang] ?? lang;
 }

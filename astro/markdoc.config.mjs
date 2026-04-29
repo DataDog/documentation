@@ -107,9 +107,5 @@ export default defineMarkdocConfig({
       selfClosing: true,
       ...schema.tags.placeholder,
     },
-    searchBar: {
-      render: component('./src/components/SearchBar/SearchBarIsland.astro'),
-      selfClosing: true,
-    },
   },
 });

@@ -4,7 +4,7 @@ import ApiEndpoint from '../../../../components/ApiEndpoint/ApiEndpoint.astro';
 import { getApiCategories, getCategoryBySlug } from '../../../../data/api/index';
 import { getEndpointsForCategory } from '../../../../data/api/endpoints';
 import { highlightEndpoints } from '../../../../data/api/highlight';
-import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/locale';
+import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/i18n/locale';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = () => {

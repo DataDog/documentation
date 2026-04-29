@@ -3,12 +3,14 @@ import markdoc from '@astrojs/markdoc';
 import preact from '@astrojs/preact';
 import { visualizer } from 'rollup-plugin-visualizer';
 
+import { LOCALES } from './src/lib/i18n/locale.ts';
+
 export default defineConfig({
   site: 'https://docs.datadoghq.com',
   integrations: [markdoc(), preact()],
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'fr', 'ja', 'ko', 'es'],
+    locales: [...LOCALES],
     routing: { prefixDefaultLocale: false },
   },
   vite: {

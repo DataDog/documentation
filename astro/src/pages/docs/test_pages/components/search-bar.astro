@@ -1,0 +1,64 @@
+---
+import DocsLayout from '../../../../layouts/DocsLayout.astro';
+import SearchBar from '../../../../components/SearchBar/SearchBar';
+---
+
+<DocsLayout title="SearchBar">
+  <div class="docs-page">
+    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>SearchBar</h1>
+
+      <p>Side-nav search bar for the Astro API docs. Mirrors Hugo&rsquo;s popup search (the one in <a href="https://github.com/DataDog/documentation/blob/master/layouts/partials/search.html"><code>layouts/partials/search.html</code></a>, embedded in the API side nav) with a thinner, direct-to-Typesense client.</p>
+
+      <h2>Behaviors</h2>
+
+      <table>
+        <thead>
+          <tr><th>Behavior</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Query input</td><td>Debounced ~200ms; closes the popup when blank</td></tr>
+          <tr><td>Result groups</td><td>API, Getting Started, Documentation, Guides, Integrations, Partners &mdash; empty groups are hidden</td></tr>
+          <tr><td>Group order</td><td>API pinned first (the whole Astro site is API), Partners last</td></tr>
+          <tr><td>Cross-site link routing</td><td>API hits open same-origin in Astro; all other categories link to <code>https://docs.datadoghq.com{"${relpermalink}"}</code> (target=_blank)</td></tr>
+          <tr><td>Ask AI placeholder</td><td>Rendered at the top of the popup as a <code>&lt;Placeholder&gt;</code>-styled stand-in until conversational search is wired up</td></tr>
+          <tr><td>Keyboard shortcuts</td><td><code>/</code> and <code>Cmd/Ctrl+K</code> focus the input; <code>Esc</code> clears + blurs</td></tr>
+          <tr><td>Result navigation</td><td><code>ArrowDown</code>/<code>ArrowUp</code> walk through Ask AI then hits; <code>Enter</code> opens the selected hit</td></tr>
+          <tr><td>Outside click</td><td>Closes the popup</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Typesense plumbing</h2>
+
+      <p>Queries hit <code>POST /multi_search</code> against two collections &mdash; <code>docs_alias</code> (with the <code>docs_alias_api_view</code> preset) and <code>docs_partners_alias</code> (with <code>docs_partners_view</code>). Per-environment cluster details live in <a href="https://github.com/DataDog/documentation/blob/master/astro/src/config/typesense.ts"><code>src/config/typesense.ts</code></a> and mirror Hugo&rsquo;s <code>assets/scripts/config/config-docs.js</code>.</p>
+
+      <h2>Live</h2>
+
+      <p>The component is mounted inside the API side nav on every API page; the box below shows it standalone for visual checks.</p>
+
+      <SearchBar client:load />
+
+      <h2>Hit normalization</h2>
+
+      <p>Hit normalization (title/section/content with <code>&lt;mark&gt;</code> highlighting and snippet truncation around the first match) is ported from <a href="https://github.com/DataDog/documentation/blob/master/assets/scripts/components/instantsearch/getHitData.js"><code>assets/scripts/components/instantsearch/getHitData.js</code></a>. The Typesense-native <code>highlights[]</code> array is folded into the same normalized shape Hugo produces from instantsearch.js&rsquo;s <code>_highlightResult</code>.</p>
+    </div>
+  </div>
+</DocsLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

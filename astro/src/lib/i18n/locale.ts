@@ -3,8 +3,6 @@
  *
  * Mirrors Hugo's `defaultContentLanguageInSubdir: false` URL shape: English at
  * the root (`/api/latest/...`), other locales prefixed (`/{lang}/api/latest/...`).
- *
- * The supported set must stay in sync with `astro.config.mjs` `i18n.locales`.
  */
 
 export const LOCALES = ['en', 'fr', 'ja', 'ko', 'es'] as const;

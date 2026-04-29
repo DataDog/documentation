@@ -1,7 +1,7 @@
 import { parse as parseYaml } from 'yaml';
 import { z } from 'astro/zod';
 import { renderMarkdown } from './markdown';
-import { DEFAULT_LOCALE, type Locale } from '../../lib/locale';
+import { DEFAULT_LOCALE, type Locale } from '../../lib/i18n/locale';
 import { getOverlay, translateAction, translateTag } from './translations';
 
 // Import spec files as raw strings so Vite bundles them correctly.

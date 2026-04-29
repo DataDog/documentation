@@ -13,7 +13,7 @@ import {
   resolveFooterUrl,
   splitHalves,
 } from '../../lib/footerMenus';
-import { i18n } from '../../lib/i18n';
+import { i18n } from '../../lib/i18n/i18n';
 
 function decodeEntities(s: string): string {
   return s

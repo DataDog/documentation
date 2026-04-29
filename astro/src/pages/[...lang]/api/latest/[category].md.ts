@@ -2,7 +2,7 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { getApiCategories, getCategoryBySlug } from '../../../../data/api/index';
 import { getEndpointsForCategory } from '../../../../data/api/endpoints';
 import { renderCategoryMd } from '../../../../data/api/renderCategoryMd';
-import { LOCALES, parseLangParam } from '../../../../lib/locale';
+import { LOCALES, parseLangParam } from '../../../../lib/i18n/locale';
 
 export const getStaticPaths: GetStaticPaths = () => {
   const paths: ReturnType<GetStaticPaths> = [];

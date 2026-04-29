@@ -1,7 +1,7 @@
 ---
 import ApiLayout from '../../../../layouts/ApiLayout.astro';
 import { getApiCategories } from '../../../../data/api/index';
-import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/locale';
+import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/i18n/locale';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = () => {

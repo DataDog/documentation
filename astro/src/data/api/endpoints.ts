@@ -22,7 +22,7 @@ import { getCodeExamplesForOperation } from './examples';
 import type { CodeExampleSet } from './examples';
 import { renderMarkdown, renderMarkdownInline } from './markdown';
 import { getRegions, buildApiUrlFromServers } from './regions';
-import { DEFAULT_LOCALE, type Locale } from '../../lib/locale';
+import { DEFAULT_LOCALE, type Locale } from '../../lib/i18n/locale';
 import { getOverlay, translateAction } from './translations';
 
 /* ------------------------------------------------------------------ */
