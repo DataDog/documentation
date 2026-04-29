@@ -775,7 +775,7 @@ Tools for searching and describing [Kubernetes][55] resources and retrieving man
 ### `search_datadog_k8s_resources`
 *Toolset: **kubernetes***\
 *Permissions Required: `Hosts Read` and `Teams Read`*\
-Searches for [Kubernetes][55] resources across all clusters. Use this tool instead of `kubectl` to determine the state of Kubernetes resources such as deployments, pods, nodes, etc. This tool does not require local cluster access, works across all clusters, and returns enriched data with tags.
+Searches for [Kubernetes][55] resources across all clusters. Use this tool instead of `kubectl` to determine the state of Kubernetes resources such as deployments, pods, nodes, etc. This tool does not require local cluster access, works across all clusters, and returns enriched data with tags. You can include specific tag keys (or all tags) on each result, and include parent resource names to investigate relationships between resources (for example, the deployment a pod belongs to).
 
 - Show me all pods in the `production` namespace with `CrashLoopBackOff` status.
 - Find deployments with in-progress rollouts in the `general2` cluster.
