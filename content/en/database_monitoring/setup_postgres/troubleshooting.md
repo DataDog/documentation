@@ -279,7 +279,7 @@ Round the result up to the next power of 2 and apply it as a role-level default 
 ALTER ROLE datadog SET work_mem = '<value>';
 ```
 
-This setting applies only to the Datadog user's sessions and does not affect application queries. No database restart is required. The setting takes effect on the next Agent connection.
+This setting applies only to the Datadog user's sessions and does not affect application queries. No database restart is required. Restart the Datadog Agent to open new connections with the updated setting.
 
 
 [1]: /database_monitoring/setup_postgres/
@@ -308,4 +308,4 @@ This setting applies only to the Datadog user's sessions and does not affect app
 [24]: https://pkg.go.dev/github.com/jackc/pgx/v4#QuerySimpleProtocol
 [25]: https://www.postgresql.org/docs/current/predefined-roles.html#:~:text=a%20long%20time.-,pg_monitor,-Read/execute%20various
 [26]: https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-WORK-MEM
-[27]: https://app.datadoghq.com/metric/explorer
+[27]: /metrics/explorer/
