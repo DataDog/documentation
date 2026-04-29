@@ -353,12 +353,16 @@ The following metrics are not available for SQL Server 2012:
 - `sqlserver.fci.is_current_owner`
 - `sqlserver.latches.latch_wait_time`
 
+Deadlock collection (`collect_deadlocks: enabled: true`) is not supported on SQL Server 2012. The collection query uses `AT TIME ZONE`, a T-SQL operator introduced in SQL Server 2016. Enabling this feature on SQL Server 2012 causes a query syntax error on every check run. To avoid this error, set `collect_deadlocks: enabled: false` in your instance configuration.
+
 ### SQL Server 2014
 
 The following metrics are not available for SQL Server 2014:
 
 - `sqlserver.ao.secondary_lag_seconds`
 - `sqlserver.latches.latch_wait_time`
+
+Deadlock collection (`collect_deadlocks: enabled: true`) is not supported on SQL Server 2014. The collection query uses `AT TIME ZONE`, a T-SQL operator introduced in SQL Server 2016. Enabling this feature on SQL Server 2014 causes a query syntax error on every check run. To avoid this error, set `collect_deadlocks: enabled: false` in your instance configuration.
 
 [1]: /database_monitoring/setup_sql_server/
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-windows-authentication
