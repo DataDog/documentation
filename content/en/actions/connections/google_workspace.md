@@ -14,7 +14,7 @@ Use a Google Workspace connection to authenticate Datadog Actions against Google
 
 Before creating the connection in Datadog, you must set up an OAuth2 client in Google Cloud.
 
-### 1. Create a Google Cloud project
+### Create a Google Cloud project
 
 If you don't already have a Google Cloud project:
 
@@ -22,12 +22,12 @@ If you don't already have a Google Cloud project:
 1. Click **Select a project** > **New Project**.
 1. Enter a project name and click **Create**.
 
-### 2. Enable the required APIs
+### Enable the required APIs
 
 Enable the Google APIs you plan to use in your workflows:
 
-1. Navigate to [**APIs & Services** > **Library**][5] in the Google Cloud Console.
-1. Search for and enable the APIs for the Google Workspace services you intend to use:
+1. Navigate to [**APIs & Services** > **Library**][3] in the Google Cloud Console.
+1. Search for and enable the APIs for the Google Workspace services you intend to use, listed in the following table.
 
 | Google Workspace service | API to enable |
 |---|---|
@@ -39,36 +39,36 @@ Enable the Google APIs you plan to use in your workflows:
 | Google Forms | Google Forms API |
 | Google Chat | Google Chat API |
 
-### 3. Configure the OAuth consent screen
+### Configure the OAuth consent screen
 
-1. Navigate to [**APIs & Services** > **OAuth consent screen**][6] in the Google Cloud Console.
+1. Navigate to [**APIs & Services** > **OAuth consent screen**][4] in the Google Cloud Console.
 1. Select a user type:
    - **Internal**: Limits access to users in your Google Workspace organization. Recommended for most enterprise use cases.
    - **External**: Allows any Google account to authorize. Requires app verification for production use.
 1. Fill in the required app information fields and click **Save and Continue**.
-1. Under **Scopes**, add the OAuth scopes required for the actions you intend to use. See the [scopes reference](#scopes-reference) below.
+1. Under **Scopes**, add the OAuth scopes required for the actions you intend to use. See the [scopes reference](#scopes-reference).
 1. Complete the remaining steps and click **Back to Dashboard**.
 
-### 4. Create OAuth2 credentials
+### Create OAuth2 credentials
 
-1. Navigate to [**APIs & Services** > **Credentials**][7] in the Google Cloud Console.
+1. Navigate to [**APIs & Services** > **Credentials**][5] in the Google Cloud Console.
 1. Click **Create Credentials** > **OAuth client ID**.
 1. For **Application type**, select **Web application**.
 1. Under **Authorized JavaScript origins**, add the Datadog origin URL. This URL is displayed in the Datadog connection creation dialog when you select **Google Workspace**.
 1. Under **Authorized redirect URIs**, add the Datadog OAuth callback URL. This URL is also displayed in the Datadog connection creation dialog when you select **Google Workspace**.
 1. Click **Create**.
-1. Copy the **Client ID** and **Client Secret** — you need these when creating the connection in Datadog.
+1. Copy the **Client ID** and **Client Secret**—you need these when creating the connection in Datadog.
 
 ## Create the connection in Datadog
 
-1. From the [Action Catalog page][2], click the **Connections** tab.
-1. Click **New Connection**.
-1. Select the **Google Workspace** icon.
-1. Enter a **Connection Name**.
-1. Enter the **Client ID** and **Client Secret** from your Google Cloud OAuth2 credentials.
-1. Select the **Scopes** required for the actions you plan to use. See the [scopes reference](#scopes-reference) below.
-1. The **Authorize URL** and **Token URL** fields are pre-populated with Google's default OAuth2 endpoints. Leave these as-is unless you have a specific reason to change them.
-1. Click **Create**.
+1. From the [Action Catalog page][2], click the {{< ui >}}Connections{{< /ui >}} tab.
+1. Click {{< ui >}}New Connection{{< /ui >}}.
+1. Select the {{< ui >}}Google Workspace{{< /ui >}} icon.
+1. Enter a {{< ui >}}Connection Name{{< /ui >}}.
+1. Enter the {{< ui >}}Client ID{{< /ui >}} and {{< ui >}}Client Secret{{< /ui >}} from your Google Cloud OAuth2 credentials.
+1. Select the {{< ui >}}Scopes{{< /ui >}} required for the actions you plan to use. See the [scopes reference](#scopes-reference).
+1. The {{< ui >}}Authorize URL{{< /ui >}} and {{< ui >}}Token URL{{< /ui >}} fields are pre-populated with Google's default OAuth2 endpoints. Leave these as-is unless you have a specific reason to change them.
+1. Click {{< ui >}}Create{{< /ui >}}.
 1. In the authorization window that opens, sign in with the Google account you want to use and grant the requested permissions.
 
 ## Scopes reference
@@ -111,15 +111,15 @@ Select only the scopes required by the actions you intend to use.
 
 | Scope label | Scope value | Description |
 |---|---|---|
-| Docs: Full Access | `https://www.googleapis.com/auth/documents` | View and manage Google Docs documents |
-| Docs: Read Only | `https://www.googleapis.com/auth/documents.readonly` | View Google Docs documents |
+| Docs: Full Access | `https://www.googleapis.com/auth/documents` | View and manage documents in Google Docs |
+| Docs: Read Only | `https://www.googleapis.com/auth/documents.readonly` | View documents in Google Docs |
 
 ### Google Sheets
 
 | Scope label | Scope value | Description |
 |---|---|---|
-| Sheets: Full Access | `https://www.googleapis.com/auth/spreadsheets` | View and manage Google Sheets spreadsheets |
-| Sheets: Read Only | `https://www.googleapis.com/auth/spreadsheets.readonly` | View Google Sheets spreadsheets |
+| Sheets: Full Access | `https://www.googleapis.com/auth/spreadsheets` | View and manage spreadsheets in Google Sheets |
+| Sheets: Read Only | `https://www.googleapis.com/auth/spreadsheets.readonly` | View spreadsheets in Google Sheets |
 
 ### Google Forms
 
@@ -145,7 +145,7 @@ Select only the scopes required by the actions you intend to use.
 | Scope label | Scope value | Description |
 |---|---|---|
 | User Info: Email Address | `https://www.googleapis.com/auth/userinfo.email` | View the user's email address |
-| User Info: Basic Profile | `https://www.googleapis.com/auth/userinfo.profile` | View the user's basic profile info |
+| User Info: Basic Profile | `https://www.googleapis.com/auth/userinfo.profile` | View the user's basic profile information |
 | OpenID Connect | `openid` | Authenticate using OpenID Connect |
 
 ### Google Workspace Admin
@@ -161,11 +161,11 @@ Select only the scopes required by the actions you intend to use.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Do you have questions or feedback? Join the **#workflows** or **#app-builder** channel on the [Datadog Community Slack][4].
+<br>Do you have questions or feedback? Join the **#workflows** or **#app-builder** channel on the [Datadog Community Slack][6].
 
 [1]: https://console.cloud.google.com/
 [2]: https://app.datadoghq.com/actions/action-catalog
-[4]: https://chat.datadoghq.com/
-[5]: https://console.cloud.google.com/apis/library
-[6]: https://console.cloud.google.com/apis/credentials/consent
-[7]: https://console.cloud.google.com/apis/credentials
+[3]: https://console.cloud.google.com/apis/library
+[4]: https://console.cloud.google.com/apis/credentials/consent
+[5]: https://console.cloud.google.com/apis/credentials
+[6]: https://chat.datadoghq.com/
