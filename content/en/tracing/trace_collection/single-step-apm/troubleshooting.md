@@ -41,6 +41,9 @@ If none of these apply, continue with the detailed troubleshooting methods below
 {{< agent-only >}}
 When diagnosing missing traces after SSI enablement, run these diagnostic commands:
 
+First, resolve the node where the pod is running:
+- `kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.nodeName}'` → use this value as `NODE_HOSTNAME` below
+
 Triage (run all simultaneously):
 - `kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.initContainers[*].name}'`
 - `kubectl describe pod <POD_NAME> -n <APP_NAMESPACE> | grep -A 10 "Events:"`

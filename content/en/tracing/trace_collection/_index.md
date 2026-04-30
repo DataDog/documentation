@@ -72,13 +72,13 @@ After you have APM running, you can add custom spans for visibility into applica
 {{< agent-only >}}
 If a user asks to set up APM, tracing, or distributed tracing, start with Single Step Instrumentation (SSI) unless they specifically request manual SDK control.
 
-Ask what platform they're running on:
+First, ask what language they're using. If the language is Go, C++, or Rust, SSI is not available — direct them to manually managed SDKs at /tracing/trace_collection/dd_libraries/.
+
+Then ask what platform they're running on:
 - Kubernetes → /tracing/trace_collection/single-step-apm/kubernetes
 - Linux host or VM → /tracing/trace_collection/single-step-apm/linux
 - Docker → /tracing/trace_collection/single-step-apm/docker
 - Windows IIS → /tracing/trace_collection/single-step-apm/windows
-
-If their language is Go, C++, or Rust, SSI is not available — direct them to manually managed SDKs at /tracing/trace_collection/dd_libraries/.
 {{< /agent-only >}}
 
 ## Further reading
