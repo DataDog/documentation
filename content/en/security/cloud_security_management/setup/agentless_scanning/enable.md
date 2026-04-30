@@ -225,10 +225,30 @@ After completing any of the setup methods above, [verify your setup](#verify-you
 {{% tab "Azure" %}}
 
 ### Choose your setup
-- **New Azure subscription**: Use [Azure Resource Manager](#azure-resource-manager-setup) (recommended) or [Terraform](#azure-terraform-setup).
-- **Existing Azure subscription**: Use [Azure Resource Manager](#azure-resource-manager-setup) or [Terraform](#azure-terraform-setup).
-- **Multiple subscriptions**: Use [Terraform](#azure-terraform-setup) for repeatable, multi-subscription deployments.
 
+- **New Azure customer**: Set up the [Datadog Azure integration](https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=azure) first, then enable Agentless Scanning.
+- **Existing integrated Azure subscription**: Use [Cloud Shell](#azure-cloud-shell-setup) (recommended), [Azure Resource Manager](#azure-resource-manager-setup), or [Terraform](#azure-terraform-setup).
+- **Multiple subscriptions**: Use [Cloud Shell](#azure-cloud-shell-setup) for repeatable, multi-subscription deployments. [Terraform](#azure-terraform-setup) is also available if you prefer to manage your own infrastructure-as-code.
+
+<div class="alert alert-info">If you haven't connected your Azure subscription to Datadog yet, <a href="https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=azure">set up the Azure integration</a> first.</div>
+
+{{% collapse-content title="Cloud Shell" level="h3" id="azure-cloud-shell-setup" %}}
+Use Azure Cloud Shell to set up Agentless Scanning for your Azure subscriptions. This method downloads a [setup script](https://github.com/DataDog/integrations-management/tree/main/azure/agentless) that wraps the [Terraform Datadog Agentless Scanner module for Azure](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme), so you do not need to manage Terraform directly. You can review the script before running it.
+
+**Required Azure permissions:** The identity you use in Cloud Shell must have **Owner** (or a role granting role-assignment write and resource creation) on the scanner subscription. On each scanned subscription, you also need a role granting `Microsoft.Authorization/roleAssignments/write` (for example, **User Access Administrator** or **Owner**) so the scanner's managed identity can be granted the permissions it needs to snapshot and read disks. The script creates an Azure Storage Account in the scanner subscription for Terraform state. Alternatively, you can **reuse an existing storage account** by setting the `TF_STATE_STORAGE_ACCOUNT` environment variable to its name; the script will not create one in that case. The required resource providers (`Microsoft.Compute`, `Microsoft.Network`, `Microsoft.ManagedIdentity`, `Microsoft.Storage`, `Microsoft.KeyVault`, `Microsoft.Authorization`) are auto-registered in the scanner subscription when possible.
+
+1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **Azure**.
+1. Expand the Tenant containing the subscription where you want to deploy the Agentless scanner.
+1. Click the **Enable** button for the Azure subscription where you want to deploy the Agentless scanner. The **Vulnerability Scanning** modal opens.
+1. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
+1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
+1. Select the **Azure subscriptions** you want to scan.
+1. Configure the scanner:
+   - Select the **scanner subscription** (which must be one of the selected subscriptions).
+   - Select the **scanner locations** (Azure regions, up to four). We recommend deploying scanners in every region where you have more than 150 hosts.
+1. Click **Copy command** to copy the generated command, and click **Open Azure Cloud Shell** to open [Azure Cloud Shell](https://shell.azure.com). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for Azure](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme) to deploy and configure the scanner in your selected subscription and location(s).
+1. After the command completes, return to the Datadog setup page and click **Done**.
+{{% /collapse-content %}}
 {{% collapse-content title="Azure Resource Manager" level="h3" id="azure-resource-manager-setup" %}}
 Use the Azure Resource Manager template to deploy the Agentless Scanner. The template includes the role definitions required to deploy and manage Agentless scanners.
 
@@ -393,6 +413,25 @@ python3 gcp_agentless_setup.pyz destroy
 You can review the [setup script source][21] before running the command.
 
 [21]: https://github.com/DataDog/integrations-management/tree/main/gcp/agentless
+{{% /tab %}}
+
+{{% tab "Azure Cloud Shell" %}}
+To uninstall Agentless Scanning that was set up using Azure Cloud Shell, run the same setup command you used during installation, replacing `deploy` with `destroy` at the end. For example:
+
+```text
+curl -sSL "<CLOUD_SHELL_SCRIPT_URL>" -o azure_agentless_setup.pyz && \
+DD_API_KEY="<DD_API_KEY>" \
+DD_APP_KEY="<DD_APP_KEY>" \
+DD_SITE="<DD_SITE>" \
+SCANNER_SUBSCRIPTION="<SCANNER_SUBSCRIPTION>" \
+python3 azure_agentless_setup.pyz destroy
+```
+
+The destroy command runs `terraform destroy`, deactivates Agentless scan options in Datadog for each previously configured subscription, and prompts before deleting the Key Vault that holds the API key. The resource group and Terraform state storage account are kept by default; the script prints manual deletion instructions for them.
+
+You can review the [setup script source][22] before running the command.
+
+[22]: https://github.com/DataDog/integrations-management/tree/main/azure/agentless
 {{% /tab %}}
 
 {{% tab "Azure Resource Manager" %}}
