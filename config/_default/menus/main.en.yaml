@@ -7886,11 +7886,21 @@ menu:
       parent: application_security
       identifier: aws_waf_int
       weight: 8
+    - name: API Security
+      url: security/application_security/api_security/
+      parent: application_security
+      identifier: application_security_api_security
+      weight: 9
     - name: API Security Inventory
       url: security/application_security/api-inventory/
-      parent: application_security
+      parent: application_security_api_security
       identifier: asm_api_security
-      weight: 9
+      weight: 1
+    - name: Endpoint Scanning
+      url: security/application_security/api_security/endpoint-scanning/
+      parent: application_security_api_security
+      identifier: application_security_endpoint_scanning
+      weight: 2
     - name: Guides
       url: security/application_security/guide/
       parent: application_security

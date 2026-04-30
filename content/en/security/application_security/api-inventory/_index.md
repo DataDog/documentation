@@ -81,6 +81,8 @@ API Endpoints gathers security metadata about API traffic by leveraging the Data
 
 API Endpoints uses [Remote Configuration][1] to manage and configure scanning rules that detect sensitive data and authentication.
 
+To verify whether discovered endpoints are publicly accessible and require authentication, enable [Endpoint Scanning][19]. Endpoint Scanning actively probes eligible endpoints and enriches API Security Inventory with verified public accessibility, authentication status, HTTP response status, and last evaluation data.
+
 The following risks are calculated for each endpoint.
 
 ### Data sources
@@ -314,3 +316,4 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [16]: /integrations/guide/source-code-integration/
 [17]: /internal_developer_portal/software_catalog/set_up/create_entities/#through-the-datadog-ui
 [18]: /internal_developer_portal/software_catalog/entity_model/
+[19]: /security/application_security/api_security/endpoint-scanning/
