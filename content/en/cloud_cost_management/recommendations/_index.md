@@ -111,12 +111,6 @@ multifiltersearch:
       recommendation_type: Migrate DynamoDB to Standard Table Class
       recommendation_description: Migrating to the Standard table class offers potential savings from capacity rates compared to the additional costs from storage rates, or it uses the Standard table class' free tier for storage.
       recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: AWS
-      resource_type: DynamoDB Table
-      recommendation_type: Purchase Reserved Capacity
-      recommendation_description: Purchase reserved capacity for stable provisioned capacity units charged at standard rates.
-      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: EBS Snapshot
@@ -213,12 +207,6 @@ multifiltersearch:
       recommendation_type: Downsize ECS Task Size
       recommendation_description: An ECS task using less than 50% of its requested CPU or memory.
       recommendation_prerequisites: '[Container Monitoring](/containers/)'
-    - category: Purchase
-      cloud_provider: AWS
-      resource_type: ElastiCache Cluster
-      recommendation_type: Purchase Reserved ElastiCache Node
-      recommendation_description: An ElastiCache node older than 45 days is still charged with on-demand rates.
-      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: ElastiCache Cluster
@@ -230,12 +218,6 @@ multifiltersearch:
       resource_type: OpenSearch Domain
       recommendation_type: Delete OpenSearch Domain
       recommendation_description: OpenSearch domain with no request activity.
-      recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: AWS
-      resource_type: OpenSearch Domain
-      recommendation_type: Purchase Reserved OpenSearch Instance
-      recommendation_description: OpenSearch domain eligible for Reserved Instance purchase.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
@@ -297,23 +279,11 @@ multifiltersearch:
       recommendation_type: Migrate RDS Instance to Graviton
       recommendation_description: RDS Instances that can be migrated to an equivalent Graviton instance type.
       recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: AWS
-      resource_type: RDS Instance
-      recommendation_type: Purchase Reserved RDS Instance
-      recommendation_description: An RDS instance older than 45 days is still charged with on-demand rates.
-      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: RDS Instance
       recommendation_type: Terminate Unused RDS Instance
       recommendation_description: RDS instance with 0 database connections and 0 replica lag.
-      recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: AWS
-      resource_type: Redshift Cluster
-      recommendation_type: Purchase Reserved Redshift Cluster Node
-      recommendation_description: Redshift cluster node older than 45 days is still charged with on-demand rates.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
@@ -393,12 +363,6 @@ multifiltersearch:
       recommendation_type: Terminate AKS Cluster
       recommendation_description: An AKS cluster with less than 5% CPU usage.
       recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: Azure
-      resource_type: Azure App Service
-      recommendation_type: Purchase Reservation for App Service
-      recommendation_description: App Service older than 45 days is charged with on-demand rates.
-      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
       resource_type: Container App
@@ -435,23 +399,11 @@ multifiltersearch:
       recommendation_type: Downsize Managed Disk Throughput
       recommendation_description: Managed disk using less than the configured threshold of provisioned throughput.
       recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: Azure
-      resource_type: MySQL Database
-      recommendation_type: Purchase Reservation for MySQL
-      recommendation_description: Database for MySQL has no reservation coverage and is more than 45 days old.
-      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: MySQL Database
       recommendation_type: Terminate Database for MySQL
       recommendation_description: Database server with no connections, which can be terminated.
-      recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: Azure
-      resource_type: Database for PostgreSQL
-      recommendation_type: Purchase Reservation for PostgreSQL
-      recommendation_description: Database for PostgreSQL has no reservation coverage and is more than 45 days old.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -465,23 +417,11 @@ multifiltersearch:
       recommendation_type: Downsize SQL Server Database DTU
       recommendation_description: SQL Server database with low DTU usage that can be downsized.
       recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: Azure
-      resource_type: SQL Server Database
-      recommendation_type: Purchase Reservation for SQL Server Database
-      recommendation_description: SQL server database has no reservation coverage and is more than 45 days old.
-      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: SQL Server Database
       recommendation_type: Terminate SQL Server Database
       recommendation_description: SQL Server Database with no successful connections and very minimal CPU, which can be terminated.
-      recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: Azure
-      resource_type: SQL Server Managed Instance
-      recommendation_type: Purchase Reservation for SQL Server Managed Instance
-      recommendation_description: Purchase reservation for SQL Server Managed Instance with no reservation coverage and is more than 45 days old.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
@@ -531,12 +471,6 @@ multifiltersearch:
       recommendation_type: Downsize Databricks Job
       recommendation_description: Identifies overprovisioned Databricks jobs and suggests rightsizing to smaller instance types to reduce costs.
       recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: GCP
-      resource_type: Cloud Run Job
-      recommendation_type: Purchase Flexible CUD for Cloud Run Job
-      recommendation_description: Cloud Run Jobs that benefit from flexible committed use discounts.
-      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP
       resource_type: Compute Address
@@ -584,12 +518,6 @@ multifiltersearch:
       resource_type: CloudSQL Instance
       recommendation_type: Downsize CloudSQL Database
       recommendation_description: CloudSQL instances that are over-provisioned and can be downsized.
-      recommendation_prerequisites: ""
-    - category: Purchase
-      cloud_provider: GCP
-      resource_type: CloudSQL Instance
-      recommendation_type: Purchase CUD for Cloud SQL
-      recommendation_description: CloudSQL instances that benefit from committed use discounts.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP
@@ -692,9 +620,9 @@ For each cloud account that you would like to receive recommendations for:
 1. Configure [Cloud Cost Management][2] to send billing data to Datadog.
    - For Azure, this requires using the App Registration method to collect billing data.
 1. Enable [resource collection][3] for recommendations.
-   - For AWS, enable resource collection in the **Resource Collection** tab on the [AWS integration tile][4].
+   - For AWS, enable resource collection in the {{< ui >}}Resource Collection{{< /ui >}} tab on the [AWS integration tile][4].
    - For Azure, enable resource collection with the appropriate integration. If your organization is on the Datadog US3 site, the [Azure Native Integration][9] enables this automatically through metrics collection. For all other sites, enabling resource collection within the [Azure integration tile][8] is required.
-   - For GCP, enable resource collection in the **Resource Collection** tab on the [Google Cloud Platform integration tile][10].
+   - For GCP, enable resource collection in the {{< ui >}}Resource Collection{{< /ui >}} tab on the [Google Cloud Platform integration tile][10].
 1. Install the [Datadog Agent][5] (required for Downsize recommendations).
 
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
@@ -705,35 +633,30 @@ Assign a status to each recommendation to track cost optimization progress acros
 
 | Status | Description |
 |--------|-------------|
-| Open | (Default) The recommendation has not been triaged. |
-| In Progress | Work is underway to address this recommendation. |
-| Completed | The recommended action has been taken or is no longer relevant. |
-| Dismissed | No work is planned for this recommendation over the time frame specified when dismissing. |
+| {{< ui >}}Open{{< /ui >}} | (Default) The recommendation has not been triaged. |
+| {{< ui >}}In Progress{{< /ui >}} | Work is underway to address this recommendation. |
+| {{< ui >}}Completed{{< /ui >}} | The recommended action has been taken or is no longer relevant. |
+| {{< ui >}}Dismissed{{< /ui >}} | No work is planned for this recommendation over the time frame specified when dismissing. |
 
 ### Change a recommendation status
 
-1. Click a recommendation in the [**Cloud Cost Recommendations**][1] list to open the side panel.
+1. Click a recommendation in the [{{< ui >}}Cloud Cost Recommendations{{< /ui >}}][1] list to open the side panel.
 1. Use the status dropdown to select a new status.
 
 ## Recommendation action-taking
 You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
 
-- **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the "Active Recommendations" list and clicking "Create Jira issue." Created issues are tagged and link back to the recommendation in Datadog.
+- **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the {{< ui >}}Active Recommendations{{< /ui >}} list and clicking {{< ui >}}Create Jira issue{{< /ui >}}. Created issues are tagged and link back to the recommendation in Datadog.
 
   To filter recommendations by Jira status, use the following query options:
   - `@jira_issues.issue_key:*` - Show only recommendations with a Jira issue
   - `-@jira_issues.issue_key:*` - Show only recommendations without a Jira issue
   - `jira_issues.issue_key:ABC*` - Filter by specific Jira project prefix
 
-- **Bits AI Dev Agent code fixes**: Code fixes are available for all S3 recommendations. In these situations, the Bits AI Dev Agent (in Preview) creates production-ready pull requests to implement cloud resource changes and cost optimizations. Join the Preview and [set up the Bits AI Dev Agent][13] to use this feature.
-
-  {{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-  Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
-  {{< /callout >}}
-
-- **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking "Delete EBS Volume", directly within Cloud Cost Management.
-- **Datadog Case Management**: Users can go to the recommendation side panel and click "Create Case" to generate a case to manage and take action on recommendations.
-- **Dismiss**: Use "Dismiss" in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the "Dismissed" tab.
+- **[Bits AI Dev Agent][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, the Bits AI Dev Agent creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up the Bits AI Dev Agent][13] to use this feature.
+- **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking {{< ui >}}Delete EBS Volume{{< /ui >}}, directly within Cloud Cost Management.
+- **Datadog Case Management**: Users can go to the recommendation side panel and click {{< ui >}}Create Case{{< /ui >}} to generate a case to manage and take action on recommendations.
+- **Dismiss**: Use {{< ui >}}Dismiss{{< /ui >}} in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the {{< ui >}}Dismissed{{< /ui >}} tab.
 
 ## Recommendation and resource descriptions
 
@@ -756,3 +679,4 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [11]: /cloud_cost_management/allocation/tag_pipelines/
 [12]: /cloud_cost_management/tags/#how-tags-are-normalized
 [13]: /bits_ai/bits_ai_dev_agent/setup
+[14]: /bits_ai/bits_ai_dev_agent/

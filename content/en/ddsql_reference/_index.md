@@ -37,6 +37,7 @@ This documentation covers the SQL support available and includes:
 - [Regular expressions](#regular-expressions)
 - [Window functions](#window-functions)
 - [JSON functions](#json-functions-and-operators)
+- [Network address functions](#network-address-functions-and-operators)
 - [Table functions](#table-functions)
 - [Tags](#tags)
 
@@ -178,6 +179,7 @@ DDSQL supports the following data types:
 | `BIGINT` | 64-bit signed integers. |
 | `BOOLEAN` | `true` or `false` values. |
 | `DECIMAL` | Floating-point numbers. |
+| `INET` | Network address values (IPv4 and IPv6, with optional CIDR prefix length). |
 | `INTERVAL` | Time duration values. |
 | `JSON` | JSON data. |
 | `TIMESTAMP` | Date and time values. |
@@ -196,6 +198,7 @@ DDSQL supports explicit type literals using the syntax `[TYPE] [value]`.
 | `BIGINT` | `BIGINT 'value'` | `BIGINT '1234567'` |
 | `BOOLEAN` | `BOOLEAN 'value'` | `BOOLEAN 'true'` |
 | `DECIMAL` | `DECIMAL 'value'` | `DECIMAL '3.14159'` |
+| `INET` | `INET 'value'` | `INET '192.168.1.5/24'` |
 | `INTERVAL` | `INTERVAL 'value unit'` | `INTERVAL '30 minutes'` |
 | `JSON` | `JSON 'value'` | `JSON '{"key": "value", "count": 42}'` |
 | `TIMESTAMP` | `TIMESTAMP 'value'` | `TIMESTAMP '2023-12-25 10:30:00'` |
@@ -457,6 +460,7 @@ FROM users
 Supported cast target types:
 - `BIGINT`
 - `DECIMAL`
+- `INET`
 - `TIMESTAMP`
 - `VARCHAR`
 
@@ -854,8 +858,107 @@ This table provides an overview of the supported window functions. For comprehen
 | json_array_elements(text json)                | rows of JSON | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
 | json_array_elements_text(text json)           | rows of text | Expands a JSON array into a set of rows. This form is only allowed in a FROM clause.                                                                                                                                                                                                                           |
 
+## Network address functions and operators
+
+The `inet` type represents IPv4 and IPv6 network addresses with an optional CIDR prefix length (for example, `192.168.1.5/24` or `::1`). Create `inet` values with the type literal syntax `INET 'value'` or by casting a string with `CAST(column AS inet)`.
+
+### Functions
+
+| Function | Return Type | Description |
+|----------|-------------|-------------|
+| `host(inet addr)` | `VARCHAR` | Returns the IP address as text, without the prefix length. |
+| `network(inet addr)` | `INET` | Returns the network part of the address, with host bits zeroed. |
+| `netmask(inet addr)` | `INET` | Returns the network mask for the address. |
+| `masklen(inet addr)` | `BIGINT` | Returns the prefix length of the network mask. |
+| `broadcast(inet addr)` | `INET` | Returns the broadcast address of the network. |
+| `family(inet addr)` | `BIGINT` | Returns the address family: `4` for IPv4, `6` for IPv6. |
+
+### Operators
+
+| Operator | Return Type | Description |
+|----------|-------------|-------------|
+| `inet a << inet b` | `BOOLEAN` | Returns `true` if `a` is strictly contained within `b`. |
+| `inet a <<= inet b` | `BOOLEAN` | Returns `true` if `a` is contained within or equals `b`. |
+| `inet a >> inet b` | `BOOLEAN` | Returns `true` if `a` strictly contains `b`. |
+| `inet a >>= inet b` | `BOOLEAN` | Returns `true` if `a` contains or equals `b`. |
+| `inet a && inet b` | `BOOLEAN` | Returns `true` if the subnets of `a` and `b` overlap. |
+
+{{% collapse-content title="Examples" level="h3" %}}
+
+### `host`
+{{< code-block lang="sql" >}}
+SELECT host(INET '192.168.1.5/24')
+-- Returns: 192.168.1.5
+{{< /code-block >}}
+
+### `network`
+{{< code-block lang="sql" >}}
+SELECT network(INET '192.168.1.5/24')
+-- Returns: 192.168.1.0/24
+{{< /code-block >}}
+
+### `netmask`
+{{< code-block lang="sql" >}}
+SELECT netmask(INET '192.168.1.5/24')
+-- Returns: 255.255.255.0
+{{< /code-block >}}
+
+### `masklen`
+{{< code-block lang="sql" >}}
+SELECT masklen(INET '192.168.1.5/24')
+-- Returns: 24
+{{< /code-block >}}
+
+### `broadcast`
+{{< code-block lang="sql" >}}
+SELECT broadcast(INET '192.168.1.5/24')
+-- Returns: 192.168.1.255/24
+{{< /code-block >}}
+
+### `family`
+{{< code-block lang="sql" >}}
+SELECT family(INET '::1')
+-- Returns: 6
+
+SELECT family(INET '192.168.1.5')
+-- Returns: 4
+{{< /code-block >}}
+
+### Containment operators
+{{< code-block lang="sql" >}}
+-- Check if an IP is within a subnet
+SELECT INET '192.168.1.5' << INET '192.168.1.0/24'
+-- Returns: true
+
+-- Check containment or equality
+SELECT INET '192.168.1.0/24' <<= INET '192.168.1.0/24'
+-- Returns: true
+
+-- Check if a subnet contains an IP
+SELECT INET '10.0.0.0/8' >> INET '10.1.2.3'
+-- Returns: true
+
+-- Check if two subnets overlap
+SELECT INET '192.168.1.0/24' && INET '192.168.1.128/25'
+-- Returns: true
+{{< /code-block >}}
+
+### Combined usage
+{{< code-block lang="sql" >}}
+-- Find all IPs in a private subnet and extract network info
+SELECT
+  host(CAST(src_ip AS inet)) AS ip,
+  masklen(CAST(src_ip AS inet)) AS prefix_len,
+  network(CAST(src_ip AS inet)) AS network
+FROM connections
+WHERE CAST(src_ip AS inet) << INET '10.0.0.0/8'
+  AND family(CAST(src_ip AS inet)) = 4
+{{< /code-block >}}
+
+{{% /collapse-content %}}
+
 ## Table functions
-Table functions are used to query logs, metrics, and other unstructured data sources.
+Table functions are used to query logs, metrics, cloud costs, and other data sources.
 
 <table style="width: 100%; table-layout: fixed;">
   <thead>
@@ -922,12 +1025,56 @@ dd.metrics_timeseries(
     query varchar [, from_timestamp timestamp, to_timestamp timestamp]
 )</pre>
       </td>
-      <td>Returns metric data as a timeseries. The function accepts a metrics query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns data points over time rather than a single aggregated value.</td>
+      <td>Returns metric data as a timeseries. The function accepts a metrics query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns datapoints over time rather than a single aggregated value.</td>
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
 FROM dd.metrics_timeseries(
     'avg:system.cpu.user{*} by {service}',
+    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+)
+ORDER BY timestamp, service;{{< /code-block >}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre>
+dd.cloud_cost_scalar(
+    query varchar,
+    reducer varchar
+    [, from_timestamp timestamp,
+    to_timestamp timestamp]
+)</pre>
+      </td>
+      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a scalar value. The function accepts a cloud cost query (with optional grouping), an aggregation reducer (use <code>sum</code> for cost data; other reducers such as <code>avg</code>, <code>min</code>, and <code>max</code> are accepted but rarely applicable to cost queries), and optional timestamp parameters (default 1 hour) to define the time range. <strong>Note</strong>: Cloud cost data is typically delayed by 24-48 hours, so recent timestamps may return no results.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT *
+FROM dd.cloud_cost_scalar(
+    'sum:all.cost{*} by {service}',
+    'sum',
+    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+)
+ORDER BY value DESC;{{< /code-block >}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre>
+dd.cloud_cost_timeseries(
+    query varchar
+    [, from_timestamp timestamp,
+    to_timestamp timestamp]
+)</pre>
+      </td>
+      <td>Returns <a href="/cloud_cost_management/">Cloud Cost Management</a> data as a timeseries. The function accepts a cloud cost query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns cost datapoints over time rather than a single aggregated value. <strong>Note</strong>: Cloud cost data is typically delayed by 24-48 hours, so recent timestamps may return no results.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT *
+FROM dd.cloud_cost_timeseries(
+    'sum:all.cost{*} by {service}',
     TIMESTAMP '2025-07-10 00:00:00.000-04:00',
     TIMESTAMP '2025-07-17 00:00:00.000-04:00'
 )

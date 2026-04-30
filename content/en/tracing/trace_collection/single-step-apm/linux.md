@@ -33,7 +33,7 @@ To enable APM on a Linux host:
 
 ## Set SDK tracer versions
 
-By default, Single Step Instrumentation installs the latest versions of Datadog APM SDKs.
+By default, Single Step Instrumentation installs the latest versions of Datadog SDKs.
 
 You may want to choose specific SDK versions for compatibility with your application's language version or specific environment requirements.
 
@@ -61,6 +61,27 @@ To customize SDK versions:
    ```
    DD_API_KEY=<YOUR_DD_API_KEY> 
    DD_SITE="US1-FED" 
+   DD_APM_INSTRUMENTATION_ENABLED=host 
+   DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" 
+   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   ```
+
+1. Find your language(s) and use the dropdown to either:
+   - Select an exact SDK version, or
+   - Select the major version, which uses the latest minor release available when the Agent installation command is run.
+1. Copy and run the updated installation command.
+
+[15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
+
+{{< /site-region >}}
+
+{{< site-region region="gov2" >}}
+1. In Datadog, go to the [Install the Datadog Agent on Linux][15] page.
+1. After you turn on **APM Instrumentation**, set your desired library versions with the `DD_APM_INSTRUMENTATION_LIBRARIES` variable in your Agent installation command:
+   
+   ```
+   DD_API_KEY=<YOUR_DD_API_KEY> 
+   DD_SITE="US2-FED" 
    DD_APM_INSTRUMENTATION_ENABLED=host 
    DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" 
    bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
@@ -117,10 +138,9 @@ To update the SDK versions:
 
 ### Define instrumentation rules
 
-{{< callout url="https://www.datadoghq.com/product-preview/single-step-instrumentation-targeting-rules-on-linux/"
- btn_hidden="false" header="Join the Preview!">}}
-Instrumentation rules are in Preview.
-{{< /callout >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
 
@@ -153,14 +173,37 @@ Each rule consists of one or more conditions. A condition includes the following
 - **Value**: The text or pattern to match, such as a process name or command-line flag.
 
 Supported attributes include:
-| Attribute    | Description | Example |
-| ----------- | ----------- | --------- |
+| Attribute | Description | Example |
+| --------- | ----------- | ------- |
 | Operating System | OS of the host. | `linux` |
 | Executable | Executable name of the process. | `python3.11` |
-| Executable File Path | Full path of the executable. | `/usr/bin/python3.11` |
+| Executable Full Path | Full path of the executable. | `/usr/bin/python3.11` |
 | Arguments | Command-line arguments used to start the process. | `--env=production` |
 | Working Directory | Working directory of the process. | `/app` |
 | Language | Programming language detected for the process. | `python` |
+| Entry Point File | The specific file used to launch the application. | `app.py`, `server.js` |
+
+#### Example use cases
+
+Review the following examples demonstrating how to apply instrumentation rules:
+
+{{< collapse-content title="Example 1: Instrument all processes except specific ones" level="h5" >}}
+
+Instrument all processes by default. Add block rules to exclude services that would add noise without value, such as analytics cron jobs and Java batch processors.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Two block instrumentation rules targeting Working Directory and Entry Point File conditions, with a default of allow instrumentation" style="width:100%;" >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Example 2: Instrument only specific processes" level="h5" >}}
+
+Block all instrumentation by default. Add allow rules to opt specific processes into APM. This approach gives you precise control and works well for gradual rollouts.
+
+For example, to instrument only a checkout service and a customer portal, create allow rules using <strong>Working Directory</strong>, then set the default behavior to <strong>Block Instrumentation</strong>.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-linux-example-2.png" alt="Two allow instrumentation rules targeting services in specific working directories, with a default of block instrumentation" style="width:100%;" >}}
+
+{{< /collapse-content >}}
 
 ## Remove Single Step APM instrumentation from your Agent
 

@@ -39,6 +39,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
   tag: "Blog"
   text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
+- link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
+  tag: "Learning Center"
+  text: "Tracing LLM Applications"
+
 ---
 
 {{< learning-center-callout header="Try Getting Started with LLM Observability in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
@@ -75,9 +79,9 @@ Monitor the cost, latency, performance, and usage trends for all your LLM applic
 
 ## Evaluate the quality and effectiveness of your LLM applications
 
-Identify problematic clusters and monitor the quality of responses over time with topical clustering and checks like sentiment, failure to answer, and so on.
+Understand what users are asking your LLM application, identify coverage gaps, and monitor the quality of responses over time with [Patterns][10] — automated hierarchical topic clustering of your production traffic.
 
-{{< img src="llm_observability/cluster_map/QualityClusters_LLMO.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
+{{< img src="llm_observability/topic-detail.png" alt="Topic detail view showing scatter plot of interaction embeddings alongside a table of interactions with topic labels and confidence score" style="width:100%;" >}}
 
 ## Safeguard sensitive data and identify malicious users
 
@@ -92,7 +96,7 @@ LLM Observability Insights provides a monitoring experience that helps users ide
 Outlier detection is performed across key dimensions:
 - Span name
 - Workflow type
-- [Cluster input/output topics][10]
+- [Patterns input/output topics][10]
 
 These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
 
@@ -123,4 +127,4 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
 [8]: /llm_observability/setup/auto_instrumentation
 [9]: /llm_observability/evaluations/managed_evaluations
-[10]: /llm_observability/monitoring/cluster_map
+[10]: /llm_observability/monitoring/patterns

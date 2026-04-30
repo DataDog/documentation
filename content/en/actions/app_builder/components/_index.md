@@ -22,7 +22,7 @@ further_reading:
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
-Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. 
+Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click {{< ui >}}&lt;/&gt;{{< /ui >}} next to the property to use the code editor. 
 
 Any component that can trigger an event has a list of available reactions in [events and reactions][13]. These components can also use [custom reactions][14].
 
@@ -490,7 +490,7 @@ Content
 
 Options
 : The options available in a `select` field. Options must be an array of objects, with a `const` key for the option value and an optional `title` key for the option label.<br>**Value**: Each object's `label` and `value` can be a string or expression.<br>
-You can populate each object using the GUI (default), or toggle **Raw** to use raw JSON input to provide the entire array of objects.
+You can populate each object using the GUI (default), or toggle {{< ui >}}Raw{{< /ui >}} to use raw JSON input to provide the entire array of objects.
 
 Placeholder text
 : The text that displays in a `textInput` or `textArea` field when no value is entered.<br>
@@ -959,7 +959,7 @@ Tab components have the following properties.
 
 ### Tabs
 
-A list of tab views. Use the **+ (plus)** to add additional views.
+A list of tab views. Use the ({{< ui >}}+{{< /ui >}}) to add additional views.
 
 
 ### Style
@@ -1018,7 +1018,7 @@ Table components have the following properties.
 ### General
 
 Title
-: A title for the table. Select **Markdown** for custom formatting.<br>
+: A title for the table. Select {{< ui >}}Markdown{{< /ui >}} for custom formatting.<br>
 **Value**: string
 
 Data source
@@ -1052,7 +1052,7 @@ Filterable
 : Determines whether a filter option is available for the column.<br>
 **Provided values**: on, off
 
-Some columns have additional properties based on their **Formatting** property.
+Some columns have additional properties based on their {{< ui >}}Formatting{{< /ui >}} property.
 
 ### Pagination
 
@@ -1085,7 +1085,7 @@ Direction
 
 ### Row actions
 
-Adding a row action adds an **Actions** column to the table, which contains user-defined action buttons. Rows can have multiple actions. Actions have the following properties:
+Adding a row action adds an {{< ui >}}Actions{{< /ui >}} column to the table, which contains user-defined action buttons. Rows can have multiple actions. Actions have the following properties:
 
 Label
 : The text that displays on the action button.<br>
@@ -1135,11 +1135,11 @@ Is searchable
 **Provided values**: on, off
 
 Show sort options
-: Adds a **Sort** button to the table that gives users sorting options.<br>
+: Adds a {{< ui >}}Sort{{< /ui >}} button to the table that gives users sorting options.<br>
 **Provided values**: on, off
 
 Show column options
-: Adds a **Columns** button to the table for displaying, hiding, or reorganizing table columns.<br>
+: Adds a {{< ui >}}Columns{{< /ui >}} button to the table for displaying, hiding, or reorganizing table columns.<br>
 **Provided values**: on, off
 
 Has date range filter
@@ -1190,7 +1190,7 @@ Content
 **Value**: string or expression
 
 Content type
-: Determines how to render the text. When **Markdown** is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
+: Determines how to render the text. When {{< ui >}}Markdown{{< /ui >}} is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
 **Provided values**: plain text, Markdown
 
 ### Appearance
@@ -1319,7 +1319,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][5].
+<br>Do you have questions or feedback? Join the {{< ui >}}#app-builder{{< /ui >}} channel on the [Datadog Community Slack][5].
 
 
 [1]: /service_management/app_builder/events

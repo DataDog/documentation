@@ -8,12 +8,12 @@ When an account is deleted, Cloudcraft removes the account's data from its serve
 
 ## Delete a free Cloudcraft account
 
-1. Click the **User** icon in the upper-right corner of Cloudcraft and select **User settings** from the dropdown menu.
-2. Click **Delete account** at the bottom of the page.
-3. Confirm you want to _immediately_ delete your account by clicking the red **Delete** button.
+1. Click the {{< ui >}}User{{< /ui >}} icon in the upper-right corner of Cloudcraft and select {{< ui >}}User settings{{< /ui >}} from the dropdown menu.
+2. Click {{< ui >}}Delete account{{< /ui >}} at the bottom of the page.
+3. Confirm you want to _immediately_ delete your account by clicking the red {{< ui >}}Delete{{< /ui >}} button.
 4. [Fill out this form][1] to ensure your data is removed from Datadog's servers as well.
 
-If you do not see the **Delete account** option, you may have had a paid account in the past.
+If you do not see the {{< ui >}}Delete account{{< /ui >}} option, you may have had a paid account in the past.
 
 ## Delete a paid Cloudcraft account
 

@@ -21,7 +21,7 @@ attack attempt
 : Which security rule was triggered by the trace.
 
 Datadog library
-: _also_ tracer, tracing library
+: _also_ tracer, SDK
 : A programming language-specific library embedded in web applications. Datadog App and API Protection uses the library to monitor and protect. APM uses the same library to instrument code for tracing telemetry.
 
 detection rule
@@ -90,7 +90,7 @@ attacker cluster
 
 ## Attacks and known vulnerabilities terms
 
-Open Web App and API Protection Project (OWASP)
+Open Web Application Security Project (OWASP)
 : A nonprofit foundation with several projects to enhance web application security. OWASP is best known for the [OWASP Top 10][2], a broad consensus about the most critical security risks to web applications.
 
 Cross-Site Scripting (XSS)

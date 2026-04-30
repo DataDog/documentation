@@ -308,6 +308,8 @@ HTTP tests can run:
 
 {{% synthetics-alerting-monitoring %}}
 
+{{% synthetics-downtimes %}}
+
 ## One-click
 
 API test creation suggests endpoints from the [Software Catalog][17] and existing API tests to prefill your test form with relevant options.
