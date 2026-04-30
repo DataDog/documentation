@@ -37,7 +37,7 @@ Single Step Instrumentation (SSI) installs the Datadog Agent and instruments you
   ```
   Remove any matches and rebuild your application image before proceeding.
 - **Node.js: CommonJS only.** SSI does not support ECMAScript Modules (ESM). If your application uses `import` syntax or sets `"type": "module"` in `package.json`, use [manually managed SDKs][44] instead.
-- **Alpine and musl-based images:** Kubernetes SSI injects through the `LD_PRELOAD` environment variable, not `/etc/ld.so.preload`, so the Kubernetes injector supports musl-based images. Language and runtime compatibility still apply; for example, Ruby SSI requires glibc and is not compatible with Alpine or other musl-based images.
+- **Ruby: glibc only.** Ruby SSI requires glibc and is not compatible with Alpine or other musl-based images. Other SSI-supported languages work on musl-based images.
 
 {{< agent-only >}}
 Resolve these variables before starting:
@@ -93,9 +93,9 @@ Datadog generates a configuration file with SSI enabled:
    {{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="APM Instrumentation toggle in the Kubernetes Agent installation wizard" style="width:100%;" >}}
 
 1. Deploy the Agent with the generated configuration file.
-1. Coordinate a restart of your application pods.
+1. Restart your application pods.
 
-   <div class="alert alert-warning">Restarting application pods can cause a brief outage. Coordinate the restart with the application owner before running this command.</div>
+   <div class="alert alert-warning">Restarting pods can cause a brief service interruption. Coordinate with the application owner before proceeding.</div>
 
    ```shell
    kubectl rollout restart deployment/<DEPLOYMENT_NAME> -n <APP_NAMESPACE>
@@ -117,7 +117,9 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY 
 
 If you install the Agent in a different namespace, replace `datadog` with your Agent namespace.
 
-Create or update `datadog-values.yaml`:
+If the Agent is already installed, add `apm.instrumentation.enabled: true` to your existing `datadog-values.yaml` and skip to the `helm upgrade` step below.
+
+Create a `datadog-values.yaml`:
 
 ```yaml
 datadog:
@@ -131,17 +133,15 @@ datadog:
 
 Replace `<CLUSTER_NAME>` with your Kubernetes cluster name and `<DATADOG_SITE>` with your [Datadog site][46].
 
-If the Agent is already installed, add `apm.instrumentation.enabled: true` to your existing `datadog-values.yaml` and keep your existing API key, site, and cluster name configuration.
-
 Deploy or update the Agent:
 
 ```shell
 helm upgrade --install datadog-agent -f datadog-values.yaml datadog/datadog -n datadog
 ```
 
-Coordinate a restart of your application pods:
+Restart your application pods:
 
-<div class="alert alert-warning">Restarting application pods can cause a brief outage. Coordinate the restart with the application owner before running this command.</div>
+<div class="alert alert-warning">Restarting pods can cause a brief service interruption. Coordinate with the application owner before proceeding.</div>
 
 ```shell
 kubectl rollout restart deployment/<DEPLOYMENT_NAME> -n <APP_NAMESPACE>
@@ -161,7 +161,9 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY 
 
 If you install the Agent in a different namespace, replace `datadog` with your Agent namespace.
 
-Create or update `datadog-agent.yaml`:
+If the Agent is already installed with the Datadog Operator, add `features.apm.instrumentation.enabled: true` to your existing `DatadogAgent` manifest and skip to the `kubectl apply` step below.
+
+Create a `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -185,17 +187,15 @@ spec:
 
 Replace `<CLUSTER_NAME>` with your Kubernetes cluster name and `<DATADOG_SITE>` with your [Datadog site][46].
 
-If the Agent is already installed with the Datadog Operator, add `features.apm.instrumentation.enabled: true` to your existing `DatadogAgent` manifest and keep your existing site, credentials, and cluster name configuration.
-
 Apply the manifest:
 
 ```shell
 kubectl apply -f datadog-agent.yaml
 ```
 
-Coordinate a restart of your application pods:
+Restart your application pods:
 
-<div class="alert alert-warning">Restarting application pods can cause a brief outage. Coordinate the restart with the application owner before running this command.</div>
+<div class="alert alert-warning">Restarting pods can cause a brief service interruption. Coordinate with the application owner before proceeding.</div>
 
 ```shell
 kubectl rollout restart deployment/<DEPLOYMENT_NAME> -n <APP_NAMESPACE>
