@@ -133,7 +133,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
     d=o.createElement(u);d.async=1;d.src=n,d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v6.js','DD_RUM')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v7.js','DD_RUM')
 </script>
 ```
 
@@ -216,7 +216,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/datadog-rum-v6.js"
+    src="https://www.datadoghq-browser-agent.com/datadog-rum-v7.js"
     type="text/javascript">
 </script>
 ```
