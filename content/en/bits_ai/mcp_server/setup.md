@@ -33,7 +33,7 @@ In Cursor:
 1. Type `/ddsetup` in the agent to perform first-time setup.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-{{< img src="bits_ai/mcp_server/ide_sign_in.png" alt="Add the Datadog Plugin from Cursor Settings" style="width:70%;" >}}
+{{< img src="bits_ai/mcp_server/add-datadog-plugin-for-cursor.png" alt="Add the Datadog Plugin from Cursor Settings" style="width:70%;" >}}
 
 [2]: /ide_plugins/vscode/?tab=cursor#installation
 [3]: /bits_ai/mcp_server/tools
