@@ -278,6 +278,19 @@ Firewall rules are not supported.
 {{< /tabs >}}
 
 {{< /site-region >}}
+#### Compression
+
+By default, Datadog archives logs using **gzip** compression (`.json.gz`). You can also configure **zstd** (Zstandard) compression (`.json.zst`), which offers better compression ratios and faster decompression speeds compared to gzip.
+
+Zstd compression reduces the size of your archived files, which lowers storage costs and reduces the volume of data scanned during [Archive Search][16], resulting in faster queries and lower cloud egress costs.
+
+To configure compression, select **Compression Type** when creating or editing an archive in the [Log Archiving & Forwarding page][6]:
+
+- **Gzip** (default): Widely supported and compatible with most tools.
+- **Zstd**: Better compression ratio and decompression speed; recommended for new archives, especially if you plan to use [Archive Search][16].
+
+**Note**: Changing the compression format of an existing archive only affects new archive files. Files already stored in your bucket remain in their original format.
+
 #### Storage class
 
 {{< tabs >}}
@@ -441,7 +454,7 @@ It is important to order your archives carefully. For example, if you create a f
 
 ## Format of the archives
 
-The log archives that Datadog forwards to your storage bucket are in compressed JSON format (`.json.gz`). Using the prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, such as the following:
+The log archives that Datadog forwards to your storage bucket are in compressed JSON format. Depending on your [compression configuration](#compression), archive files use either gzip (`.json.gz`) or zstd (`.json.zst`) compression. Using the prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, such as the following:
 
 ```
 /my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.02aafad5-f525-4592-905e-e962d1a5b2f7.json.gz
