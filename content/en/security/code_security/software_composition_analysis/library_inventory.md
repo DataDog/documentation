@@ -2,6 +2,7 @@
 title: Library Inventory
 description: The Library Inventory provides a unified view of all third-party libraries detected across your codebase and services.
 disable_toc: false
+weight: 10
 ---
 
 The [Library Inventory][1] provides a unified view of all third-party libraries detected across your codebase and services. It helps you understand which components you depend on, which versions are in use, and where vulnerabilities or license risks might exist. The inventory is built from two complementary data sources:
