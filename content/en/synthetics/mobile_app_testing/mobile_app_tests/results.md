@@ -15,38 +15,27 @@ further_reading:
 
 ## Overview
 
-Click on a mobile app test on the [**Synthetic Tests** page][11] to see the Test Details page. The Test Details page contains all the information relating to your test, including test properties, test history, sample runs, and test runs.
+Click on a mobile app test on the [**Synthetic Tests** page][11] to see the Test Details page. The Test Details page contains all the information relating to your test, including test activity, test results, performance metrics, and test properties.
 
-{{< img src="mobile_app_testing/test_details_2.png" alt="The Mobile App Test Details page" style="width=80%" >}}
+{{< img src="mobile_app_testing/mobile_app_results_new.png" alt="The Mobile App Test Details page" style="width=80%" >}}
 
-Test runs appear in a test details page after a Synthetic mobile app test executes. [Sample results](#sample-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
+Test runs appear in a test details page after a Synthetic mobile app test executes. [Test results](#test-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
 
-## Test properties
+## Test activity
 
-In the **Properties** section, you can see the test ID, test creation and edit dates, test priority, environment tag, and additional tags.
+On the **Activity** tab, you can see the **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][4] configured for a test.
 
-**Overview**
-: This section describes the Synthetic test details, including the mobile application, version, location, number of devices, test interval, and the number of test steps.
+{{< img src="mobile_app_testing/mobile_activity_global_uptime.png" alt="The Activity tab displays the Global Uptime graph" style="width=80%" >}}
 
-**Monitor**
-: This section contains the name of the [Synthetic test's monitor][1] and the configured notification message.
+## Test results
 
-**CI/CD Execution**
-: This section contains a dropdown menu to change the [execution rule][2] for this test running as part of a [CI pipeline][3].
+On the **Test Results** tab, you can examine the latest failed test runs and compare them to recent successful test runs. Mobile app test runs include components such as [screenshots](#screenshots-and-actions) to help troubleshoot your [test failure](#failed-results).
 
-## Test history
+{{< img src="mobile_app_testing/mobile_app_test_runs.png" alt="The Test Runs tab on a mobile app Test Details page showing a filterable table of test runs with status, date, run type, steps, duration, location, device, app version, and test version columns" style="width:100%;">}}
 
-In the **History** section, you can see the **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][4] configured for a test.
+{{% collapse-content title="Test run columns" level="h4" %}}
 
-{{< img src="mobile_app_testing/history.png" alt="The History graph displays global uptime" style="width=80%" >}}
-
-## Sample results
-
-Mobile app test runs include components such as [screenshots](#screenshots-and-actions) to help troubleshoot your [test failure](#failed-results).
-
-In the **Sample Runs** section, you can examine the latest failed test runs and compare them to recent successful test runs.
-
-### Overview attributes
+The following describes each column in the **Test Results** table:
 
 Status
 : The status of your test run (`PASSED` or `FAILED`).
@@ -75,6 +64,8 @@ Run type
 Video replay
 : A recording of the test execution available for diagnosing failures. See [Video replay](#video-replay).
 
+{{% /collapse-content %}}
+
 ### Screenshots and actions
 
 Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration. 
@@ -101,6 +92,51 @@ Results of steps contain the XML representation of the screen being tested, as w
 Click an element to view additional attributes:
 
 {{< img src="mobile_app_testing/xml_inspector.png" alt="Screenshot of a test result under the Sample Runs section, showing the XML inspector" style="width=80%" >}}
+
+## Test performance
+
+On the **Performance** tab, you can see aggregate performance metrics across all runs of your test:
+
+- **Average Test duration by location**, which displays the time the test takes to complete in each location.
+- **Average Step duration**, which displays the time each step takes to complete across runs.
+
+{{< img src="mobile_app_testing/mobile_app_performance.png" alt="The Performance tab on a mobile app Test Details page showing Average Test duration by location and Average Step duration graphs" style="width=80%" >}}
+
+## Test properties
+
+The **Properties** tab contains the configuration details, ownership information, and integrations associated with your test. Use the left navigation to switch between sections.
+
+{{< img src="mobile_app_testing/mobile_app_properties.png" alt="The Properties tab on a mobile app Test Details page showing Ownership, Execution, and Monitor sections, with left navigation for Continuous Testing, Parent Tests, and other configuration" style="width:100%;">}}
+
+{{% collapse-content title="Properties tab sections" level="h4" %}}
+
+The following describes each section available on the **Properties** tab:
+
+**Ownership**
+: Displays the test owner, editor, creation date, last modified date, environments, teams, and tags.
+
+**Execution**
+: Shows the test frequency, alert conditions, and retry behavior.
+
+**Monitor**
+: Contains the [Synthetic test monitor][1] name, priority, configured recipients, and notification message.
+
+**Continuous Testing**
+: Sets the [execution rule][2] used when this test runs as part of a [Continuous Testing CI pipeline][3].
+
+**Parent Tests**
+: Lists tests that reference this test, such as multistep tests that include it as a subtest.
+
+**Parent Suites**
+: Lists the [test suites][13] this test belongs to.
+
+**Downtimes**
+: Lists [scheduled downtimes][14] that pause execution of this test, for example during planned maintenance windows.
+
+**Configuration as Code**
+: Exports the test configuration in formats such as Terraform for managing tests as code.
+
+{{% /collapse-content %}}
 
 ## Crash reports
 
@@ -131,7 +167,7 @@ Common mobile app test errors include:
 
 ## Test events
 
-Alerts from your Synthetic test monitors appear in the **Events** tab under **Test Runs**. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][7] and enter `@evt.type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][1].
+Alerts from your Synthetic test monitors appear on the timeline in the [**Activity** tab](#test-activity), where you can review alert triggers, recoveries, and summary periods alongside the global uptime graph. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][7] and enter `@evt.type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][1].
 
 ## Further reading
 
@@ -149,3 +185,5 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [10]: /mobile_app_testing/mobile_app_tests/steps
 [11]: https://app.datadoghq.com/synthetics/tests
 [12]: https://app.datadoghq.com/synthetics/explorer
+[13]: /synthetics/test_suites/
+[14]: /synthetics/platform/downtime/
