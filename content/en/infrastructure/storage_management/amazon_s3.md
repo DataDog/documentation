@@ -15,6 +15,7 @@ Set up Storage Management for Amazon S3 with one of the following methods:
 
 - **Cloudformation**: A guided in-product setup that configures the AWS integration, enables S3 inventory on the buckets you select, and optionally enables S3 access logs. Setup launches a CloudFormation stack to apply changes in your AWS account.
 - **Terraform**: Use the official Datadog Storage Management Terraform module to configure inventory and access logs as code.
+- **Manual**: Set up S3 inventory and the required permissions yourself in the AWS console, then register the inventory destination with Storage Management.
 
 {{< tabs >}}
 {{% tab "Cloudformation" %}}
@@ -133,6 +134,89 @@ After you confirm inventory files are present, verify Storage Management is enab
 
 [1]: https://registry.terraform.io/modules/DataDog/storage-management-datadog/aws/latest
 [2]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+To manually set up the required [Amazon S3 Inventory][206] and related configuration, follow these steps:
+
+[206]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html
+
+{{% collapse-content title="1. Create a destination bucket" level="h4" expanded=false id="manual-setup-step1" %}}
+
+1. [Create an S3 bucket][201] to store your inventory files. This bucket acts as the central location for inventory reports.
+   **Note**: Use only one destination bucket for all inventory files generated in an AWS account.
+2. Create a prefix within the destination bucket (optional).
+
+[201]: https://console.aws.amazon.com/s3/bucket/create
+{{% /collapse-content %}}
+
+{{% collapse-content title="2. Configure the bucket and integration role policies" level="h4" expanded=false id="manual-setup-step2" %}}
+
+1. Confirm the Datadog AWS integration role has `s3:GetObject` and `s3:ListBucket` permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files.
+
+2. Confirm the destination bucket policy allows S3 to write inventory files to your destination bucket.
+
+      Example bucket policy:
+      ```json
+      {
+        "Sid": "AllowS3InventoryWriteFromAccountBuckets",
+        "Effect": "Allow",
+        "Principal": { "Service": "s3.amazonaws.com" },
+        "Action": "s3:PutObject",
+        "Resource": "arn:aws:s3:::<DESTINATION_BUCKET>/<DESTINATION_PREFIX>/*",
+        "Condition": {
+          "ArnLike": {
+            "aws:SourceArn": "arn:aws:s3:::*"
+          },
+          "StringEquals": {
+            "aws:SourceAccount": "<ACCOUNT_ID>",
+            "s3:x-amz-acl": "bucket-owner-full-control"
+          }
+        }
+      }
+      ```
+
+3. Follow the steps in the [Amazon S3 User Guide][202] to add a bucket policy to your destination bucket that allows Amazon S3 to write inventory objects (`s3:PutObject`) from your source bucket or buckets.
+
+[202]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
+{{% /collapse-content %}}
+
+{{% collapse-content title="3. Configure inventory generation" level="h4" expanded=false id="manual-setup-step3" %}}
+
+For each bucket you want to monitor:
+1. Go to the [Amazon S3 buckets page][203] in the AWS console, and select the bucket.
+2. Navigate to the bucket's **Management** tab.
+3. Click **Create inventory configuration**.
+4. Configure the following settings:
+   - Set a configuration name
+   - (Optional) Specify a source bucket prefix
+   - **Object versions**: Datadog recommends selecting **Include all versions** (required to see non-current version metrics)
+
+     {{< img src="integrations/guide/storage_monitoring/all-versions.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
+   - **Destination**: Select the common destination bucket for inventory files in your AWS account. For example, if the bucket is named `destination-bucket`, enter `s3://your-destination-bucket`
+
+      **Note**: To use a prefix on the destination bucket, add this as well.
+   - **Frequency**: Datadog recommends choosing **Daily**. This setting determines how often your prefix-level metrics are updated in Datadog
+   - **Output format**: CSV
+   - **Status**: Enabled
+   - **Server-side encryption**: Don't specify an encryption key
+   - Select all the available **Additional metadata fields**. Minimally, the following fields are required:
+
+     {{< img src="integrations/guide/storage_monitoring/metadata.png" alt="Additional metadata fields. Size, Last modified, Multipart upload, Replication status, Encryption, Object ACL, Storage class, Intelligent-Tiering: Access tier, ETag, and Checksum function are all selected. Bucket key status, Object owner, and All Object Lock configurations are unselected." responsive="true">}}
+
+**Note**: Review [Amazon S3 pricing][204] for costs related to inventory generation.
+
+[203]: https://console.aws.amazon.com/s3/buckets
+[204]: https://aws.amazon.com/s3/pricing/
+{{% /collapse-content %}}
+
+### Post-setup steps
+
+<!-- TODO: Replace placeholder with the Storage Management API details for registering an inventory destination bucket. -->
+
+_Coming soon: API instructions for registering an inventory destination bucket with Storage Management._
 
 {{% /tab %}}
 
