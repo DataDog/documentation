@@ -47,6 +47,8 @@ After the injector is loaded into a process's memory space—regardless of platf
 - Emits telemetry to report status and aid in debugging.
 - Includes fallback logic to allow the application to continue running uninstrumented if injection fails.
 
+**Note**: Because the injector runs before the SDK evaluates its environment variables, setting `DD_TRACE_ENABLED=false` does not prevent SSI from loading the SDK. To disable or remove SSI, see the [Single Step APM Instrumentation][1] setup page for your platform.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

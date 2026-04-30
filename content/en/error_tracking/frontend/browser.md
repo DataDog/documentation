@@ -4,6 +4,9 @@ aliases:
 - /real_user_monitoring/error_tracking/browser_errors
 - /error_tracking/standalone_frontend/browser
 further_reading:
+- link: "https://learn.datadoghq.com/courses/tracking-errors-rum-javascript"
+  tag: "Learning Center"
+  text: "Tracking errors with RUM for JavaScript Web Applications"
 - link: "https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps"
   tag: "Source Code"
   text: "datadog-ci Source code"

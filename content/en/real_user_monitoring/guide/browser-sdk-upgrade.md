@@ -139,6 +139,7 @@ V5 sends data to different intake domains than previous versions.
 | US5 | `connect-src https://browser-intake-us5-datadoghq.com` |
 | EU1 | `connect-src https://browser-intake-datadoghq.eu` |
 | US1-FED | `connect-src https://browser-intake-ddog-gov.com` |
+| US2-FED | `connect-src https://browser-intake-us2-ddog-gov.com` |
 | AP1 | `connect-src https://browser-intake-ap1-datadoghq.com` |
 
 #### Trusted events

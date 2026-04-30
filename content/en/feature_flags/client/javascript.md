@@ -45,7 +45,7 @@ pnpm add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 ## Initialize the provider
 
-Create a `DatadogProvider` instance with your Datadog credentials:
+Create a `DatadogProvider` instance with your Datadog credentials. To create a client token, see [Client tokens][2].
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
@@ -199,9 +199,54 @@ await OpenFeature.setContext({
 });
 {{< /code-block >}}
 
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` is exported directly from `@openfeature/web-sdk`, so no additional dependency is required.
+
+Unlike the server-side SDK, the Web SDK evaluates flags synchronously after initialization. Still `await` `setProviderAndWait` once in `beforeEach` to ensure the provider is ready.
+
+{{< code-block lang="javascript" >}}
+import { beforeEach, afterAll, expect, test } from 'vitest';
+import { OpenFeature, TypedInMemoryProvider } from '@openfeature/web-sdk';
+
+const flags = {
+  new_checkout_button: {
+    variants: { on: true, off: false },
+    defaultVariant: 'on',
+    disabled: false,
+  },
+  ui_theme: {
+    variants: { dark: 'dark', light: 'light' },
+    defaultVariant: 'light',
+    disabled: false,
+  },
+};
+
+beforeEach(async () => {
+  await OpenFeature.setProviderAndWait(new TypedInMemoryProvider(flags));
+});
+
+afterAll(async () => {
+  await OpenFeature.close();
+});
+
+test('new checkout button is enabled by default', () => {
+  const client = OpenFeature.getClient();
+  expect(client.getBooleanValue('new_checkout_button', false)).toBe(true);
+});
+
+test('missing flag returns default', () => {
+  const client = OpenFeature.getClient();
+  expect(client.getBooleanValue('does-not-exist', false)).toBe(false);
+});
+{{< /code-block >}}
+
+The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Omitting any of these fails TypeScript compilation; at runtime, evaluating an unknown flag key returns the supplied default. Prefer `TypedInMemoryProvider` over the deprecated `InMemoryProvider` for type-checked flag configurations. The same test pattern works with Jest + jsdom; swap the `vitest` imports for `@jest/globals` and add `jest-environment-jsdom` to your project.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/
+[2]: /account_management/api-app-keys/#client-tokens
 

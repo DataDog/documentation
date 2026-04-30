@@ -10,6 +10,10 @@ further_reading:
 - link: '/logs/log_collection/javascript/'
   tag: 'Documentation'
   text: 'Learn about the Datadog Browser SDK for Logs'
+- link: "https://learn.datadoghq.com/courses/intro-to-rum"
+  tag: "Learning Center"
+  text: "Intro to Real User Monitoring (RUM)"
+
 ---
 
 ## Overview
@@ -35,3 +39,7 @@ To get started with RUM for Browser, create an application and configure the Bro
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/frustration_signals">}}<u>Frustration Signals</u>: Identify user friction points with RUM frustration signals (including rage clicks, dead clicks, and error clicks) to improve user experience and reduce abandonment.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/troubleshooting">}}<u>Troubleshooting</u>: Common troubleshooting Browser SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

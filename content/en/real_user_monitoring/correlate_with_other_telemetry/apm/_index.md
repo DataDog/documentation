@@ -314,8 +314,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 {{% tab "Roku RUM" %}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">RUM for Roku is not available on the US1-FED Datadog site.</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">RUM for Roku is not available on the {{< region-param key="dd_datacenter" >}} Datadog site.</div>
 {{< /site-region >}}
 
 1. Set up [RUM Roku Monitoring][1].
