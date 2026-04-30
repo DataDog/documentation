@@ -17,6 +17,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/calculated-fields-log-management-datadog/"
   tag: "Blog"
   text: "Transform and enrich your logs at query time with Calculated Fields"
+- link: "https://learn.datadoghq.com/courses/enhance-log-querying"
+  tag: "Learning Center"
+  text: "Enhance Log Querying and Analytics with Reference Tables, Subqueries, and Calculated Fields"
+
 ---
 
 

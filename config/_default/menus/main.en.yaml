@@ -1707,7 +1707,7 @@ menu:
       weight: 30000
     - name: Reference Tables
       url: reference_tables/
-      pre: inventories
+      pre: reference-table
       identifier: reference_tables
       parent: platform_heading
       weight: 40000
@@ -3580,11 +3580,16 @@ menu:
       parent: serverless
       identifier: serverless_azure_functions
       weight: 6
+    - name: Azure Logic Apps
+      url: serverless/logic_apps
+      parent: serverless
+      identifier: serverless_logic_apps
+      weight: 7
     - name: Google Cloud Run
       url: serverless/google_cloud_run
       parent: serverless
       identifier: serverless_gcr
-      weight: 7
+      weight: 8
     - name: Containers
       url: serverless/google_cloud_run/containers
       parent: serverless_gcr
@@ -3609,17 +3614,17 @@ menu:
       url: serverless/libraries_integrations
       parent: serverless
       identifier: libraries_integrations
-      weight: 8
+      weight: 9
     - name: Glossary
       url: serverless/glossary
       parent: serverless
       identifier: serverless_glossary
-      weight: 9
+      weight: 10
     - name: Guides
       url: serverless/guide/
       identifier: serverless_guides
       parent: serverless
-      weight: 10
+      weight: 11
     - name: Network Monitoring
       url: network_monitoring/
       pre: network
@@ -4454,16 +4459,21 @@ menu:
       parent: tracing_services
       identifier: tracing_service_remapping_rules
       weight: 908
-    - name: Service Override Removal
-      url: tracing/services/service_override_removal
+    - name: Tag Enrichment
+      url: tracing/services/tag_enrichment
+      parent: tracing_services
+      identifier: tracing_tag_enrichment
+      weight: 909
+    - name: Integration Override Removal
+      url: tracing/services/integration_override_removal
       parent: tracing_services
       identifier: tracing_service_override_removal
-      weight: 909
+      weight: 910
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 910
+      weight: 911
     - name: Endpoint Observability
       url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
@@ -4610,7 +4620,7 @@ menu:
       parent: profiler
       identifier: profiler_enabling
       weight: 1
-    - name: Supported Language and Tracer Versions
+    - name: Supported Language and SDK Versions
       url: profiler/enabling/supported_versions/
       parent: profiler_enabling
       identifier: profiler_supported_langs
@@ -5406,6 +5416,11 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_prompt_optimization
       weight: 506
+    - name: Playground
+      url: llm_observability/playground
+      parent: llm_obs_experiments
+      identifier: llm_obs_playground
+      weight: 507
     - name: MCP Server
       url: llm_observability/mcp_server
       parent: llm_obs
@@ -7010,7 +7025,7 @@ menu:
       parent: log_troubleshooting
       identifier: log_troubleshooting_live_tail
       weight: 1101
-    - name: CloudPrem
+    - name: BYOC Logs
       pre: upload-wui
       url: cloudprem/
       parent: log_management_heading
@@ -7333,16 +7348,21 @@ menu:
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_suppressions
       weight: 204
+    - name: Critical Assets
+      url: security/cloud_siem/detect_and_monitor/critical_assets
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_critical_assets
+      weight: 205
     - name: Historical Jobs
       url: security/cloud_siem/detect_and_monitor/historical_jobs
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_log_historical_jobs
-      weight: 205
+      weight: 206
     - name: MITRE ATT&CK Map
       url: security/cloud_siem/detect_and_monitor/mitre_attack_map
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_mitre_attack_map
-      weight: 205
+      weight: 207
     - name: Triage and Investigate
       url: security/cloud_siem/triage_and_investigate
       parent: cloud_siem
@@ -7887,6 +7907,36 @@ menu:
       identifier: ai_guard_onboarding
       parent: ai_guard
       weight: 1
+    - name: Set Up AI Guard
+      url: /security/ai_guard/setup/
+      identifier: ai_guard_setup
+      parent: ai_guard
+      weight: 2
+    - name: Automatic Integrations
+      url: /security/ai_guard/setup/automatic_integrations/
+      identifier: ai_guard_automatic_integrations
+      parent: ai_guard_setup
+      weight: 1
+    - name: Manual Integrations
+      url: /security/ai_guard/setup/manual_integrations/
+      identifier: ai_guard_manual_integrations
+      parent: ai_guard_setup
+      weight: 2
+    - name: SDK
+      url: /security/ai_guard/setup/sdk/
+      identifier: ai_guard_sdk
+      parent: ai_guard_setup
+      weight: 3
+    - name: HTTP API
+      url: /security/ai_guard/setup/http_api/
+      identifier: ai_guard_http_api
+      parent: ai_guard_setup
+      weight: 4
+    - name: Security Signals
+      url: /security/ai_guard/signals/
+      identifier: ai_guard_signals
+      parent: ai_guard
+      weight: 3
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security
@@ -9027,6 +9077,11 @@ menu:
       parent: rum_without_limits
       identifier: rum_without_limits_retention
       weight: 902
+    - name: Retention Quotas
+      url: real_user_monitoring/rum_without_limits/retention_quotas
+      parent: rum_without_limits
+      identifier: rum_without_limits_retention_quotas
+      weight: 903
     - name: Operations Monitoring
       url: real_user_monitoring/operations_monitoring/
       parent: rum

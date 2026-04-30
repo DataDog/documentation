@@ -41,7 +41,7 @@ Declare the Datadog Unity SDK as a dependency in your project. The Datadog Unity
 
 ## Initialize the SDK
 
-Initialize Datadog as early as possible in your app lifecycle. Navigate to your `Project Settings` and click on the `Datadog` section to configure your client token, environment, and other settings.
+Initialize Datadog as early as possible in your app lifecycle. Navigate to your `Project Settings` and click on the `Datadog` section to configure your client token, environment, and other settings. To create a client token, see [Client tokens][6].
 
 For more information about setting up the Unity SDK, see [Unity Monitoring Setup][5].
 
@@ -233,3 +233,4 @@ DdFlags.Enable(new FlagsConfiguration(
 [3]: https://github.com/DataDog/unity-package
 [4]: https://docs.unity3d.com/Manual/gradle-templates.html
 [5]: /real_user_monitoring/application_monitoring/unity/setup
+[6]: /account_management/api-app-keys/#client-tokens

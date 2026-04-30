@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
@@ -21,7 +21,8 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 Before setting up the Go Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
-- **Datadog Go tracer** `dd-trace-go` version 2.4.0 or later
+- **Datadog [API key][3]** configured on the Agent
+- **Datadog Go SDK** `dd-trace-go` version 2.4.0 or later
 
 Set the following environment variables:
 
@@ -50,7 +51,7 @@ go get github.com/open-feature/go-sdk/openfeature
 
 ## Initialize the SDK
 
-Start the Datadog tracer and register the Datadog OpenFeature provider. The tracer must be started first because it enables Remote Configuration, which delivers flag configurations to your application.
+Start the Datadog SDK and register the Datadog OpenFeature provider. The SDK must be started first because it enables Remote Configuration, which delivers flag configurations to your application.
 
 ### Blocking initialization
 
@@ -267,8 +268,77 @@ fmt.Printf("Error: %v\n", details.Error())
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's in-memory provider to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The in-memory provider ships in the upstream `go-sdk` module under `github.com/open-feature/go-sdk/openfeature/memprovider`, so no additional dependency is required.
+
+Register the in-memory provider under a **named client** rather than the default global provider. The default provider is process-global, which breaks `t.Parallel()` and leaks flag state between tests. A named client scopes the provider to each test.
+
+{{< code-block lang="go" >}}
+package checkout
+
+import (
+    "context"
+    "testing"
+
+    "github.com/open-feature/go-sdk/openfeature"
+    "github.com/open-feature/go-sdk/openfeature/memprovider"
+)
+
+func TestNewCheckoutFlow(t *testing.T) {
+    cases := []struct {
+        name string
+        tier string
+        want bool
+    }{
+        {"premium user sees new flow", "premium", true},
+        {"free user sees legacy", "free", false},
+    }
+
+    for _, tc := range cases {
+        t.Run(tc.name, func(t *testing.T) {
+            evalByTier := func(flag memprovider.InMemoryFlag, flatCtx openfeature.FlattenedContext) (any, openfeature.ProviderResolutionDetail) {
+                if flatCtx["tier"] == "premium" {
+                    return flag.Variants["on"], openfeature.ProviderResolutionDetail{Reason: openfeature.TargetingMatchReason, Variant: "on"}
+                }
+                return flag.Variants[flag.DefaultVariant], openfeature.ProviderResolutionDetail{Reason: openfeature.DefaultReason, Variant: flag.DefaultVariant}
+            }
+
+            provider := memprovider.NewInMemoryProvider(map[string]memprovider.InMemoryFlag{
+                "new-checkout-flow": {
+                    State:            memprovider.Enabled,
+                    DefaultVariant:   "off",
+                    Variants:         map[string]any{"on": true, "off": false},
+                    ContextEvaluator: &evalByTier,
+                },
+            })
+
+            name := "test-" + t.Name()
+            if err := openfeature.SetNamedProviderAndWait(name, provider); err != nil {
+                t.Fatal(err)
+            }
+            t.Cleanup(func() {
+                _ = openfeature.SetNamedProviderAndWait(name, openfeature.NoopProvider{})
+            })
+
+            client := openfeature.NewClient(name)
+            got, err := client.BooleanValue(context.Background(), "new-checkout-flow", false, openfeature.NewEvaluationContext("user-1", map[string]any{"tier": tc.tier}))
+            if err != nil {
+                t.Fatal(err)
+            }
+            if got != tc.want {
+                t.Errorf("got %v, want %v", got, tc.want)
+            }
+        })
+    }
+}
+{{< /code-block >}}
+
+`ContextEvaluator` is defined as `*func(...)` — a pointer to a function. Define the evaluator in a local variable and pass its address with `&`, as shown above. Omit `ContextEvaluator` entirely to always return `DefaultVariant`.
+
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
+[3]: /account_management/api-app-keys/#api-keys
 
 ## Further reading
 

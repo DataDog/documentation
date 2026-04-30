@@ -25,7 +25,7 @@ further_reading:
 - kubectl configured to access your cluster
 - Helm (recommended for Agent installation)
 - Your Datadog API key
-- Datadog PHP tracing library (see [version requirements][1])
+- Datadog PHP SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -38,7 +38,7 @@ Install the Datadog Agent by following the [setup instructions for Kubernetes](/
 
 ### Manually enabling App and API Protection monitoring
 
-Install the Datadog PHP tracing library using an init container or in your application's Dockerfile:
+Install the Datadog PHP SDK using an init container or in your application's Dockerfile:
 
 ```dockerfile
 RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php

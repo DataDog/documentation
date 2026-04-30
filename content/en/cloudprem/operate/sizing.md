@@ -2,28 +2,28 @@
 title: Cluster Sizing
 aliases:
 - /cloudprem/configure/cluster_sizing/
-description: Learn about cluster sizing for CloudPrem
+description: Learn about cluster sizing for BYOC Logs
 further_reading:
 - link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
-  text: "Configure CloudPrem Ingress"
+  text: "Configure BYOC Logs Ingress"
 - link: "/cloudprem/configure/pipelines/"
   tag: "Documentation"
-  text: "Configure CloudPrem Log Processing"
+  text: "Configure BYOC Logs Log Processing"
 - link: "/cloudprem/introduction/architecture/"
   tag: "Documentation"
-  text: "Learn more about CloudPrem Architecture"
+  text: "Learn more about BYOC Logs Architecture"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="true" header="In Preview" >}}
+  BYOC Logs is in Preview.
 {{< /callout >}}
 
 ## Overview
 
-Proper cluster sizing ensures optimal performance, cost efficiency, and reliability for your CloudPrem deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, and the complexity of your log data.
+Proper cluster sizing ensures optimal performance, cost efficiency, and reliability for your BYOC Logs deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, and the complexity of your log data.
 
-This guide provides baseline recommendations for dimensioning your CloudPrem cluster components—indexers, searchers, supporting services, and the PostgreSQL database.
+This guide provides baseline recommendations for dimensioning your BYOC Logs cluster components—indexers, searchers, supporting services, and the PostgreSQL database.
 
 <div class="alert alert-tip">
 Use your expected daily log volume and peak ingestion rates as starting points, then monitor your cluster's performance and adjust sizing as needed.
@@ -78,7 +78,7 @@ Allocate the following resources for these lightweight components:
 
 ## Helm chart sizing tiers
 
-The CloudPrem Helm chart provides predefined sizing tiers through the `indexer.podSize` and `searcher.podSize` parameters. Each tier sets the vCPU and memory resource limits for a pod, and automatically configures component-specific settings.
+The BYOC Logs Helm chart provides predefined sizing tiers through the `indexer.podSize` and `searcher.podSize` parameters. Each tier sets the vCPU and memory resource limits for a pod, and automatically configures component-specific settings.
 
 | Size | vCPUs | Memory |
 |------|-------|--------|

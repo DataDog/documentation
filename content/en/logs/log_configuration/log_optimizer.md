@@ -16,11 +16,11 @@ Log Optimizer is in Preview. To optimize your log volumes and reduce noise in yo
 
 ## Overview
 
-{{< img src="/logs/log_configuration/log_optimizer/log_optimizer_main.png" alt="Log Optimizer landing page in Datadog, view recommendations to reduce log volume and noise" style="width:100%;" >}}
-
 Log Optimizer helps you identify log patterns that generate high volumes of repetitive or noisy data. Datadog analyzes your indexed logs and recommends actions, such as excluding, sampling, or converting logs to metrics, so you can optimize log volumes and focus on the most relevant information for troubleshooting and analysis.
 
 This feature builds on [Logging without Limits™][1] and complements tools such as [Exclusion Filters][2] and [Logs to Metrics][3].
+
+{{< img src="/logs/log_configuration/log_optimizer/log_optimizer_main.png" alt="Log Optimizer landing page in Datadog, view recommendations to reduce log volume and noise" style="width:100%;" >}}
 
 ## How it works
 

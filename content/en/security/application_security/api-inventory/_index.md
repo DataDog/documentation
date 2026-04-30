@@ -77,7 +77,7 @@ For information on what library versions are compatible with API Security Invent
 
 ### How it works
 
-API Endpoints gathers security metadata about API traffic by leveraging the Datadog tracing library with App and API Protection enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, ensuring a comprehensive and up-to-date view of your entire API attack surface.
+API Endpoints gathers security metadata about API traffic by leveraging the Datadog SDK with App and API Protection enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, ensuring a comprehensive and up-to-date view of your entire API attack surface.
 
 API Endpoints uses [Remote Configuration][1] to manage and configure scanning rules that detect sensitive data and authentication.
 
@@ -116,7 +116,7 @@ What actions you take depend on each of the attack surfaces:
 
 <div class="alert alert-info">Static Endpoint Discovery is in Preview.</div>
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-warning">Static Endpoint Discovery is not available for the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 

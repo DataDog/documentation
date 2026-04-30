@@ -85,7 +85,9 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 
 ## Set up the destination for your pipeline
 
-Set up the Datadog Archives destination and its environment variables when you [set up an Archive Logs pipeline][4]. The information below is configured in the pipelines UI.
+Configure the Datadog Archives destination when you [set up an Archive Logs pipeline][4]. You can set up a pipeline in the [UI][13], using the [API][14], or with [Terraform][15]. The steps in this section are configured in the UI.
+
+After you select the Datadog Archives destination in the pipeline UI:
 
 1. Enter your S3 bucket name. If you configured Log Archives, it's the name of the bucket you created earlier.
 1. Enter the AWS region the S3 bucket is in.
@@ -132,7 +134,7 @@ Then these are the values you enter for configuring the S3 bucket for Log Archiv
 
 {{< img src="observability_pipelines/setup/amazon_s3_archive.png" alt="The log archive configuration with the example values" style="width:70%;" >}}
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -191,3 +193,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [10]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
 [11]: https://console.aws.amazon.com/iam/
 [12]: /observability_pipelines/destinations/amazon_s3/
+[13]: https://app.datadoghq.com/observability-pipelines
+[14]: /api/latest/observability-pipelines/
+[15]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

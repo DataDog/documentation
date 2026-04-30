@@ -1,11 +1,11 @@
-{{- if eq hugo.Environment "live" -}}
+{{- if ne hugo.Environment "development" -}}
 {{- $urlmap := dict -}}
 {{- range where .Site.AllPages "Kind" "!=" "home" -}}
     {{- $page := . -}}
     {{- if eq $page.Language.Lang "en" -}}
         {{- with $page.File -}}
             {{- $filepath := print "content/en/" .Path -}}
-            {{- $urlmap = merge $urlmap (dict $filepath $page.RelPermalink) -}}
+            {{- $urlmap = merge $urlmap (dict $page.RelPermalink $filepath) -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}
