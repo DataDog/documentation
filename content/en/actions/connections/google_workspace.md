@@ -12,21 +12,13 @@ Use a Google Workspace connection to authenticate Datadog Actions against Google
 
 ## Prerequisites
 
-Before creating the connection in Datadog, you must set up an OAuth 2.0 client in Google Cloud.
-
-### Create a Google Cloud project
-
-If you don't already have a Google Cloud project:
-
-1. Go to the [Google Cloud Console][1].
-1. Click **Select a project** > **New Project**.
-1. Enter a project name and click **Create**.
+You must have an OAuth 2.0 client in Google Cloud to create a connection in Datadog. If you don't already have a Google Cloud project, follow Google's [Create a Google Cloud project][1] guide.
 
 ### Enable the required APIs
 
-Enable the Google APIs you plan to use in your workflows:
+Enable the Google APIs you plan to use in your workflows and apps:
 
-1. Navigate to [**APIs & Services** > **Library**][3] in the Google Cloud Console.
+1. Navigate to [**APIs & Services** > **Library**][2] in the Google Cloud Console.
 1. Search for and enable the APIs for the Google Workspace services you intend to use, listed in the following table.
 
 | Google Workspace service | API to enable |
@@ -41,10 +33,10 @@ Enable the Google APIs you plan to use in your workflows:
 
 ### Configure the OAuth consent screen
 
-1. Navigate to [**APIs & Services** > **OAuth consent screen**][4] in the Google Cloud Console.
+1. Navigate to [**APIs & Services** > **OAuth consent screen**][3] in the Google Cloud Console.
 1. Select a user type:
    - **Internal**: Limits access to users in your Google Workspace organization. Recommended for most enterprise use cases.
-   - **External**: Allows any Google account to authorize. Requires app verification for production use.
+   - **External**: Allows any Google account to authorize the app. Requires [app verification][4] for production use.
 1. Fill in the required app information fields and click **Save and Continue**.
 1. Under **Scopes**, add the OAuth scopes required for the actions you intend to use. See the [scopes reference](#scopes-reference).
 1. Complete the remaining steps and click **Back to Dashboard**.
@@ -54,20 +46,19 @@ Enable the Google APIs you plan to use in your workflows:
 1. Navigate to [**APIs & Services** > **Credentials**][5] in the Google Cloud Console.
 1. Click **Create Credentials** > **OAuth client ID**.
 1. For **Application type**, select **Web application**.
-1. Under **Authorized JavaScript origins**, add the Datadog origin URL. This URL is displayed in the Datadog connection creation dialog when you select **Google Workspace**.
-1. Under **Authorized redirect URIs**, add the Datadog OAuth callback URL. This URL is also displayed in the Datadog connection creation dialog when you select **Google Workspace**.
+1. Under **Authorized JavaScript origins**, add the Datadog origin URL. Under **Authorized redirect URIs**, add the Datadog OAuth callback URL. Both URLs are displayed in the Datadog connection creation dialog when you select **Google Workspace**.
 1. Click **Create**.
 1. Copy the **Client ID** and **Client Secret**—you need these when creating the connection in Datadog.
 
 ## Create the connection in Datadog
 
-1. From the [Action Catalog page][2], click the {{< ui >}}Connections{{< /ui >}} tab.
+1. From the [Action Catalog page][6], click the {{< ui >}}Connections{{< /ui >}} tab.
 1. Click {{< ui >}}New Connection{{< /ui >}}.
 1. Select the {{< ui >}}Google Workspace{{< /ui >}} icon.
 1. Enter a {{< ui >}}Connection Name{{< /ui >}}.
 1. Enter the {{< ui >}}Client ID{{< /ui >}} and {{< ui >}}Client Secret{{< /ui >}} from your Google Cloud OAuth 2.0 credentials.
 1. Select the {{< ui >}}Scopes{{< /ui >}} required for the actions you plan to use. See the [scopes reference](#scopes-reference).
-1. The {{< ui >}}Authorize URL{{< /ui >}} and {{< ui >}}Token URL{{< /ui >}} fields are pre-populated with Google's default OAuth 2.0 endpoints. Leave these as-is unless you have a specific reason to change them.
+1. Leave the {{< ui >}}Authorize URL{{< /ui >}} and {{< ui >}}Token URL{{< /ui >}} fields as their pre-populated default values unless you have a specific reason to change them.
 1. Click {{< ui >}}Create{{< /ui >}}.
 1. In the authorization window that opens, sign in with the Google account you want to use and grant the requested permissions.
 
@@ -161,11 +152,12 @@ Select only the scopes required by the actions you intend to use.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Do you have questions or feedback? Join the **#workflows** or **#app-builder** channel on the [Datadog Community Slack][6].
+<br>Do you have questions or feedback? Join the **#workflows** or **#app-builder** channel on the [Datadog Community Slack][7].
 
-[1]: https://console.cloud.google.com/
-[2]: https://app.datadoghq.com/actions/action-catalog
-[3]: https://console.cloud.google.com/apis/library
-[4]: https://console.cloud.google.com/apis/credentials/consent
+[1]: https://developers.google.com/workspace/guides/create-project
+[2]: https://console.cloud.google.com/apis/library
+[3]: https://console.cloud.google.com/apis/credentials/consent
+[4]: https://developers.google.com/identity/protocols/oauth2/production-readiness/restricted-scope-verification
 [5]: https://console.cloud.google.com/apis/credentials
-[6]: https://chat.datadoghq.com/
+[6]: https://app.datadoghq.com/actions/action-catalog
+[7]: https://chat.datadoghq.com/
