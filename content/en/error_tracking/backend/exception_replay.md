@@ -94,14 +94,14 @@ their captured values.
 ## Sensitive data redaction
 
 Exception Replay applies automatic mode- and identifier-based redaction to ensure sensitive data is protected before
-snapshots becomes available.
+snapshots become available.
 
 ### Mode-based redaction
 
 Exception Replay has two redaction modes:
 
 - **Strict Mode:** Redacts all values except numbers and Booleans.
-- **Targeted Mode:** Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. Targeted Mode also includes a high-entropy secrets scanner that automatically redacts strings detected as having high entropy. These values appear as `[REDACTED:HIGH_ENTROPY]` in snapshots.
+- **Targeted Mode:** Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in snapshots.
 
 These redaction modes cannot be disabled, only switched, and Targeted Mode is applied automatically in common
 pre-production environments like `staging` or `preprod`.
