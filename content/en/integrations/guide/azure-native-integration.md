@@ -311,6 +311,11 @@ To start sending logs and metrics from Azure to Datadog, select **Enable** on th
 
 ### Delete
 
+Before deleting the Datadog resource:
+
+- Confirm the deleting principal still has the **Owner** role on the subscription that contains the Datadog resource. Removing this role before deletion can cause Azure to return `Forbidden` or `AuthorizationFailed`.
+- (Optional) Stop active log and metric forwarding by disabling the Datadog resource first (see [Disable](#disable)). This reduces the risk of in-flight operations interfering with deletion.
+
 To delete the Datadog resource, select **Delete** on the overview page. Confirm deletion by typing `yes`, then click **Delete**.
 
 {{< img src="integrations/guide/azure_portal/delete.png" alt="The Datadog resource page within the Azure portal, with Overview selected in the left nav bar, the Delete tab highlighted, and a field to confirm deletion" responsive="true" style="width:100%;">}}
@@ -320,6 +325,17 @@ For Datadog organizations billed through the Azure Marketplace:
 - If there are additional Datadog resources mapped to the associated Datadog organization, deleting a Datadog resource only stops sending logs and metrics for its associated Azure subscription.
 
 If your Datadog organization is **not** billed through the Azure Marketplace, deleting a Datadog resource only removes the integration for that Azure subscription.
+
+#### Known deletion errors
+
+The errors below typically originate from Azure-side limitations rather than Datadog. If you cannot resolve them with the steps below, contact Azure Support. Provide the resource ID, the full error code, and the deployment correlation ID from the Azure portal.
+
+| Error code | Likely cause | Action |
+|---|---|---|
+| `Forbidden` or `AuthorizationFailed` | The deleting principal lost the Owner role on the subscription before deletion completed. | Restore the Owner role on the subscription, then retry deletion. |
+| `ResourceOperationFailure` | Azure cannot tear down a downstream Datadog-managed resource (often a Container App or Function App in the log forwarder resource group). | Open the resource group in the Azure portal, manually delete any resources still listed under the Datadog resource group, then retry. If the failure persists, contact Azure Support. |
+
+Some Datadog-Azure resources cannot be deleted without Azure Support intervention. This is a known Azure platform limitation, not a Datadog bug.
 
 ### Change plan
 
