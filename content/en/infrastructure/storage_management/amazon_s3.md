@@ -181,6 +181,10 @@ If you have any questions, [contact Datadog][1].
 
   *`prefixN` refers to prefix levels such as `prefix0`, `prefix1`, `prefix2`, and so on.
 
+  **Note:** Use the right metric for the question you're answering:
+  - `aws.s3.inventory.prefix_object_count` and `aws.s3.inventory.total_prefix_size` (with the `prefix` tag) include everything inside a folder and all its subfolders. Use these when you want the total count or size for a specific folder (for example, "how much is in `logs/2024/`?").
+  - `aws.s3.inventory.prefix_object_count.levels` and `aws.s3.inventory.total_prefix_size.levels` (with `prefix1`, `prefix2`, `prefix3`, and so on) count or size objects only at that exact depth. Use these when you want to build a treemap or compare folder sizes across levels (for example, "which top-level folders are the biggest?").
+
   **Note:** For the most accurate monitoring and visualization, use CSV inventory format and include all object versions to see non-current object recommendations or metrics.
 
 An out-of-the-box [Storage Management S3 dashboard template][8] is available to help you visualize these metrics. You can clone and customize it to fit your needs.
