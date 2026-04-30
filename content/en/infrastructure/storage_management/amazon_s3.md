@@ -155,6 +155,10 @@ Follow these best practices to optimize Storage Management setup:
 
   **Note**: Before enabling automatic deletion, verify that there are no compliance or audit requirements in your organization that mandate retaining raw S3 access logs for a specific period.
 
+- **Create exclusion filters for S3 access logs**: If S3 access logs are forwarded to Datadog only for Storage Management and don't need to be indexed for search or analytics, add an [exclusion filter][10] to keep them out of indexed log volume.
+
+[10]: /logs/log_configuration/indexes/#exclusion-filters
+
 ### Troubleshooting
 
 If you don't see data for buckets you set up for Storage Management, use the [Storage Management Settings][9] page to view all configured buckets, their inventory status, and any configuration errors. The page surfaces issues with actionable remediation steps.
