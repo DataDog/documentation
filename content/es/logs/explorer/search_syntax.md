@@ -2,144 +2,151 @@
 aliases:
 - /es/logs/search-syntax
 - /es/logs/search_syntax/
-description: Busca a través de todos tus logs.
+description: Busca en todos tus registros.
 further_reading:
 - link: /getting_started/search/
-  tag: Documentación
+  tag: Documentation
   text: Introducción a la búsqueda en Datadog
 - link: /logs/explorer/#visualize
-  tag: Documentación
-  text: Aprende a visualizar logs
+  tag: Documentation
+  text: Aprende cómo visualizar registros
 - link: /logs/explorer/#patterns
-  tag: Documentación
-  text: Detecta patrones en tus logs
+  tag: Documentation
+  text: Detecta patrones dentro de tus registros
 - link: /logs/log_configuration/processors
-  tag: Documentación
-  text: Aprender a procesar tus logs
+  tag: Documentation
+  text: Aprende cómo procesar tus registros
 - link: /logs/explorer/saved_views/
-  tag: Documentación
-  text: Más información sobre las vistas guardadas
+  tag: Documentation
+  text: Conoce Saved Views
 - link: /logs/explorer/calculated_fields/formulas
-  tag: Documentación
-  text: Más información sobre fórmulas de campos calculados
-title: Sintaxis de búsqueda de logs
+  tag: Documentation
+  text: Aprende más sobre las Fórmulas de Campos Calculados
+title: Sintaxis de Búsqueda de Registros
 ---
-
-## Información general
+## Resumen {#overview}
 
 Un filtro de consulta se compone de términos y operadores.
 
-Existen dos tipos de términos:
+Hay dos tipos de términos:
 
 * Un **término único** es una sola palabra como `test` o `hello`.
 
-* Una **secuencia** es un grupo de palabras rodeadas de comillas dobles, como `"hello dolly"`.
+* Un **grupo de palabras** es un conjunto de palabras rodeadas por comillas dobles, como `"hello dolly"`.
 
-Para combinar varios términos en una consulta compleja, puedes utilizar cualquiera de los siguientes operadores booleanos que distinguen entre mayúsculas y minúsculas:
+Para combinar múltiples términos en una consulta compleja, puedes usar cualquiera de los siguientes operadores booleanos que son sensibles a mayúsculas y minúsculas:
 
 |              |                                                                                                        |                              |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
 | **Operador** | **Descripción**                                                                                        | **Ejemplo**                  |
-| `AND`        | **Intersección**: ambos términos están en los eventos seleccionados (si no se añade nada, se toma AND por defecto). | autenticación Y fallo   |
-| `OR`         | **Unión**: cualquiera de los dos términos está en los eventos seleccionados.                                             | autenticación O contraseña   |
-| `-`          | **Exclusión**: el siguiente término NO figura en el evento (se aplica a cada búsqueda de texto sin formato individual).                                                  | autenticación Y contraseña |
+| `AND`        | **Intersección**: ambos términos están en los eventos seleccionados (si no se agrega nada, se toma AND por defecto) | authentication AND failure   |
+| `OR`         | **Unión**: cualquiera de los términos está contenido en los eventos seleccionados                                             | authentication OR password   |
+| `-`          | **Exclusión**: el siguiente término NO está en el evento (aplica a cada búsqueda de texto en bruto individual) | authentication AND -contraseña |
 
-## Búsqueda de texto completo
+## Búsqueda de texto completo {#full-text-search}
 
-<div class="alert alert-danger">La función de búsqueda de texto completo solo está disponible en Log Management y funciona en las consultas de monitor, dashboard y notebook. La sintaxis de búsqueda de texto completo no puede utilizarse para definir filtros de índice, filtros de archivo, filtros de pipeline de log, filtros de rehidratación ni en Live tail. </div>
+<div class="alert alert-danger">La función de búsqueda de texto completo solo está disponible en Log Management y funciona en consultas de monitor, dashboard y notebook. La sintaxis de búsqueda de texto completo no se puede utilizar para definir filtros de índice, filtros de archivo, filtros de canalización, filtros de rehidratación, o en Live Tail. </div>
 
-Utiliza la sintaxis `*:search_term` para realizar una búsqueda de texto completo en todos los atributos de log, incluido el mensaje de log.
+Utiliza la sintaxis `*:search_term` para realizar una búsqueda de texto completo en todos los atributos de registros, incluyendo el mensaje del registro.
 
-### Ejemplo de término único
+### Ejemplo de término único {#single-term-example}
 
-| Sintaxis de búsqueda | Tipo de búsqueda | Descripción                                               |
+| Sintaxis de búsqueda | Tipo de búsqueda | Descripción |
 | ------------- | ----------- | --------------------------------------------------------- |
-| `*:hello`     | Texto completo   | Busca en todos los atributos de log la cadena exacta `hello`. |
-| `hello`       | Texto libre   | Busca la cadena exacta `hello` solo en los atributos `message`, `@title`, `@error.message` y `@error.stack`.       |
+| `*:hello`     | Texto completo | Busca en todos los atributos de registros la cadena exacta `hello`. |
+| `hello`       | Texto libre | Busca solo en los atributos `message`, `@title`, `@error.message` y `@error.stack` la cadena exacta `hello`.       |
 
-### Ejemplo de término de búsqueda con comodín
+### Ejemplo de término de búsqueda con comodín {#search-term-with-wildcard-example}
 
-| Sintaxis de búsqueda | Tipo de búsqueda | Descripción                                                                                 |
+| Sintaxis de búsqueda | Tipo de búsqueda | Descripción |
 | ------------- | ----------- | ------------------------------------------------------------------------------------------- |
-| `*:hello`     | Texto completo   | Busca en todos los atributos de log la cadena exacta `hello`.                                   |
-| `*:hello*`    | Texto completo   | Busca en todos los atributos de log las cadenas que empiecen por `hello`. Por ejemplo, `hello_world`.  |
+| `*:hello`     | Texto completo | Busca en todos los atributos de registros la cadena exacta `hello`.                                   |
+| `*:hello*`    | Texto completo | Busca en todos los atributos de registros cadenas que comienzan con `hello`. Por ejemplo, `hello_world`.  |
 
-### Ejemplo de términos múltiples con coincidencia exacta
+### Ejemplo de múltiples términos con coincidencia exacta {#multiple-terms-with-exact-match-example}
 
 | Sintaxis de búsqueda       | Tipo de búsqueda | Descripción                                                                                        |
 | ------------------- | ----------- |--------------------------------------------------------------------------------------------------- |
-| `*:"hello world"`   | Texto completo   | Busca en todos los atributos de log la cadena exacta `hello world`.                                    |
-| `hello world`       | Texto libre   | Busca sólo en el mensaje de log las palabras `hello` y `world`. Por ejemplo `hello beautiful world`.  |
+| `*:"hello world"`   | Texto completo   | Busca en todos los atributos de registros la cadena exacta `hello world`.                                    |
+| `hello world`       | Texto libre   | Busca solo en el mensaje del registro las palabras `hello` y `world`. Por ejemplo `hello beautiful world`.  |
 
-## Caracteres especiales de escape y espacios
+## Escapar caracteres especiales y espacios {#escape-special-characters-and-spaces}
 
-Los siguientes caracteres se consideran especiales y deben escaparse con el carácter `\`: `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `\` `#` y espacios.
-- `/` no se considera un carácter especial y no necesita escape.
-- `@` no puede utilizarse en las consultas de búsqueda dentro del Log Explorer porque está reservado para la [búsqueda de atributos](#attributes-search).
+Los siguientes caracteres se consideran especiales y requieren ser escapados con el carácter `\`: `=` `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `\` `#`, y espacios.
+- `/` no se considera un carácter especial y no necesita ser escapado.
+- `@` no se puede usar en consultas de búsqueda dentro de Logs Explorer porque está reservado para [Búsqueda de Atributos](#attributes-search).
 
-No se pueden buscar caracteres especiales en un mensaje de log. Puedes buscar caracteres especiales cuando están dentro de un atributo.
+No se puede buscar caracteres especiales en un mensaje de registro. Se pueden buscar caracteres especiales cuando están dentro de un atributo.
 
-Para buscar caracteres especiales, analízalos en un atributo con el [Analizador Grok][1] y busca los logs que contengan ese atributo.
+Para buscar caracteres especiales, conviértelos en un atributo con el [Grok Parser][1], y busca registros que contengan ese atributo.
 
+## Búsqueda de atributos {#attributes-search}
 
-## Búsqueda de atributos
+Para buscar en un atributo específico, agrega `@` para especificar que estás buscando en un atributo.
 
-Para buscar en un atributo específico, añade `@` para especificar que estás buscando en un atributo.
-
-Por ejemplo, si el nombre de tu atributo es **url** y quieres filtrar por el valor **url** `www.datadoghq.com`, introduce:
+Por ejemplo, si el nombre de tu atributo es **url** y deseas filtrar por el valor **url** `www.datadoghq.com`, ingresa:
 
 ```
 @url:www.datadoghq.com
 ```
 
+### Atributos reservados {#reserved-attributes}
+
+[Atributos reservados][8] como `host`, `source`, `status`, `service`, `trace_id` y `message` no requieren el prefijo `@`. Puedes buscar estos atributos directamente:
+
+```
+service:web-app
+status:error
+host:i-1234567890abcdef0
+```
 
 **Notas**:
 
-1. **No** es necesario definir una faceta para buscar en los atributos y etiquetas (tags).
+1. No es **necesario** definir una faceta para buscar en atributos y etiquetas.
 
-2. Las búsquedas por atributos distinguen entre mayúsculas y minúsculas. Utiliza [búsqueda de texto completo](#full-text-search) para obtener resultados que no distingan entre mayúsculas y minúsculas. Otra opción es utilizar el filtro `lowercase` con tu Analizador Grok mientras haces un análisis para obtener resultados que no distingan entre mayúsculas y minúsculas durante la búsqueda.
+2. Las búsquedas de atributos son sensibles a mayúsculas y minúsculas. Usa [full-text search](#full-text-search) para obtener resultados que no distingan entre mayúsculas y minúsculas. Otra opción es usar el filtro `lowercase` con tu analizador Grok mientras analizas para obtener resultados que no distingan entre mayúsculas y minúsculas durante la búsqueda.
 
-3. La búsqueda de un valor de atributo que contenga caracteres especiales requiere un carácter de escape o comillas dobles.
-    - Por ejemplo, para un atributo `my_attribute` con el valor `hello:world`, busca utilizando: `@my_attribute:hello\:world` o `@my_attribute:"hello:world"`.
-    - Para buscar una coincidencia con un único carácter especial o espacio, utiliza el comodín `?`. Por ejemplo, para un atributo `my_attribute` con los valores `hello world`, realiza la búsqueda utilizando: `@my_attribute:hello?world`.
+3. Buscar un valor de atributo que contenga caracteres especiales requiere escapar o usar comillas dobles.
+    - Por ejemplo, para un atributo `my_attribute` con el valor `hello:world`, busca usando: `@my_attribute:hello\:world` o `@my_attribute:"hello:world"`.
+    - Para coincidir con un solo carácter especial o espacio, usa el Wildcard `?`. Por ejemplo, para un atributo `my_attribute` con el valor `hello world`, busca usando: `@my_attribute:hello?world`.
 
 Ejemplos:
 
 | Consulta de búsqueda                                                         | Descripción                                                                                                                                                         |
 |----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `@http.url_details.path:"/api/v1/test"`                              | Busca todos los logs que coincidan con `/api/v1/test` en el atributo `http.url_details.path`.                                                                               |
-| `@http.url:/api\-v1/*`                                             | Busca todos los logs que contengan un valor en el atributo `http.url` que empiece por `/api-v1/`                                                                             |
-| `@http.status_code:[200 TO 299] @http.url_details.path:/api\-v1/*` | Busca todos los logs que contengan un valor `http.status_code` entre 200 y 299, y que contengan un valor en el atributo `http.url_details.path` que empiece por `/api-v1/` |
-| `-@http.status_code:*`                                                | Busca todos los logs que no contengan el atributo `http.status_code`  |
+| `@http.url_details.path:"/api/v1/test"`                              | Busca todos los registros que coincidan con `/api/v1/test` en el atributo `http.url_details.path`.                                                                               |
+| `@http.url:/api\-v1/*`                                             | Busca todos los registros que contengan un valor en el atributo `http.url` que comience con `/api-v1/`                                                                             |
+| `@http.status_code:[200 TO 299] @http.url_details.path:/api\-v1/*` | Busca todos los registros que contengan un valor `http.status_code` entre 200 y 299, y que contengan un valor en el atributo `http.url_details.path` que comience con `/api-v1/` |
+| `-@http.status_code:*`                                                | Busca todos los registros que no contengan el atributo `http.status_code` |
 
-### Buscar utilizando la notación CIDR
-Classless Inter Domain Routing (CIDR) es una notación que permite a los usuarios definir un rango de direcciones IP (también llamadas bloques de CIDR) de forma sucinta. CIDR se utiliza normalmente para definir una red (como una VPC) o una subred (como una subred pública/privada dentro de una VPC).
+### Busca utilizando notación CIDR {#search-using-cidr-notation}
+El Enrutamiento Inter-Dominio Sin Clase (CIDR) es una notación que permite a los usuarios definir un rango de direcciones IP (también llamadas bloques CIDR) de manera concisa. CIDR se utiliza comúnmente para definir una red (como una VPC) o una subred (como una subred pública/privada dentro de una VPC).
 
-Los usuarios pueden utilizar la función `CIDR()` para consultar atributos en logs utilizando la notación CIDR. La función `CIDR()` necesita que se le pase un atributo de log como parámetro por el que filtrar, seguido de uno o varios bloques de CIDR.
+Los usuarios pueden usar la función `CIDR()` para consultar atributos en registros utilizando notación CIDR. La función `CIDR()` necesita recibir un atributo de registro como parámetro para filtrar, seguido de uno o múltiples bloques CIDR.
 
-#### Ejemplos
-- `CIDR(@network.client.ip,13.0.0.0/8)` coincide y filtra logs que tengan direcciones IP en el campo `network.client.ip` que caen bajo el bloque de CIDR 13.0.0.0/8.
-- `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` coincide y filtra logs que tengan cualquier dirección IP en un atributo matriz `network.ip.list` que pertenezca a los bloques de CIDR 13.0.0.0/8 o 15.0.0.0/8.
-- `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` coincidiría y filtraría eventos de rechazo desde el firewall de palo alto que se originan en la subred 13.0.0.0/8
-- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` mostrará todos los logs de VPC que no se originan en la subred 13.0.0.0/8, pero que están designados para la subred de destino 15.0.0.0/8 porque deseas analizar el tráfico de red en tus entornos entre subredes.
+#### Ejemplos {#examples}
+- `CIDR(@network.client.ip,13.0.0.0/8)` coincide y filtra registros que tienen direcciones IP en el campo `network.client.ip` que caen bajo el bloque CIDR 13.0.0.0/8.
+- `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` coincide y filtra registros que tienen cualquier dirección IP en un atributo de arreglo `network.ip.list` que caen bajo los bloques CIDR 13.0.0.0/8 o 15.0.0.0/8.
+- `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` coincidiría y filtraría eventos de rechazo del firewall de Palo Alto que se originan en la subred 13.0.0.0/8
+- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` mostrará todos los registros de VPC que no se originan en la subred 13.0.0.0/8 pero están designados para la subred de destino 15.0.0.0/8 porque quieres analizar el tráfico de red en tus entornos entre subredes
 
-La función `CIDR()` es compatible con las notaciones CIDR de IPv4 e IPv6 y funciona en Log Explorer, Live Tail, widgets de log en dashboards, monitores de log y configuraciones de log.
+La función `CIDR()` admite tanto notaciones CIDR IPv4 como IPv6 y funciona en Log Explorer, Live Tail, log widgets en Dashboards, log monitors y log configurations.
 
-## Comodines
+## Wildcards {#wildcards}
 
-Puedes utilizar comodines con la búsqueda de texto libre. Sin embargo, solo busca términos en el mensaje de log, el texto de la columna `content` en Log Explorer. Consulta [búsqueda de texto completo](#full-text-search) si deseas buscar un valor en un atributo de log.
+Puedes usar Wildcards con free text search. Sin embargo, solo busca términos en el mensaje de registro, el texto en la columna `content` en Log Explorer. Vea [full-text search](#full-text-search) si deseas buscar un valor en un atributo de registro.
 
-### Comodín de varios caracteres
+### Multi-character Wildcard {#multi-character-wildcard}
 
-Para realizar una búsqueda de comodín de varios caracteres en el mensaje de log (la columna `content` en Log Explorer), utiliza el símbolo `*` como se indica a continuación:
+Para realizar una búsqueda con Wildcard de múltiples caracteres en el mensaje de registro (la columna `content` en Log Explorer), utiliza el símbolo `*` de la siguiente manera:
 
-* `service:web*` coincide con cada mensaje de log que tenga un servicio que empiece con `web`.
-* `web*` coincide con todos los mensajes de log que empiecen con `web`.
-* `*web` coincide con todos los mensajes de log que terminan con `web`.
+* `service:web*` coincide con cada mensaje de registro que tiene un servicio que comienza con `web`.
+* `web*` coincide con todos los mensajes de registro que comienzan con `web`.
+* `*web` coincide con todos los mensajes de registro que terminan con `web`.
 
-**Nota**: Los comodines solo funcionan fuera de las comillas dobles. Por ejemplo, `"*test*"` coincide con un log que tenga la cadena `*test*` en su mensaje. `*test*` coincide con un log que tenga el test de cadena en cualquier parte de su mensaje.
+**Nota**: Los Wildcards solo funcionan como wildcards fuera de las comillas dobles. Por ejemplo, `"*test*"` coincide con un registro que tiene la cadena `*test*` en su mensaje. `*test*` coincide con un registro que tiene la cadena test en cualquier parte de su mensaje.
 
-Las búsquedas con comodines funcionan dentro de etiquetas y atributos (con o sin facetas) con esta sintaxis. Esta consulta devuelve todos los servicios que terminan con la cadena `mongo`:
+Las búsquedas con Wildcards funcionan dentro de etiquetas y atributos (facetados o no) con esta sintaxis. Esta consulta devuelve todos los servicios que terminan con la cadena `mongo`:
 <p> </p>
 <p></p>
 
@@ -147,73 +154,86 @@ Las búsquedas con comodines funcionan dentro de etiquetas y atributos (con o si
 service:*mongo
 ```
 
-Las búsquedas con comodines también pueden utilizarse para buscar en el texto sin formato de un log que no forme parte de un atributo de log. Por ejemplo, esta consulta devuelve todos los logs con contenido (mensaje) que contengan la cadena `NETWORK`:
+Las búsquedas con comodines también se pueden utilizar para buscar en el texto plano de un registro que no es parte de un atributo de registro. Por ejemplo, esta consulta devuelve todos los registros con contenido (mensaje) que contienen la cadena `NETWORK`:
 
 ```
 *NETWORK*
 ```
 
-Sin embargo, este término de búsqueda no devuelve logs que contengan la cadena `NETWORK` si se encuentra en un atributo de log y no forma parte del mensaje de log.
+Sin embargo, este término de búsqueda no devuelve registros que contienen la cadena `NETWORK` si está en un atributo de registro y no es parte del mensaje de registro.
 
-### Buscar comodín
+### Buscar comodín {#search-wildcard}
 
-Cuando busques un valor de atributo o etiqueta que contenga caracteres especiales o requiera caracteres de escape o comillas dobles, utiliza el comodín `?` para que coincida con un único carácter especial o espacio. Por ejemplo, para buscar un atributo `my_attribute` con el valor `hello world`: `@my_attribute:hello?world`.
+Al buscar un valor de atributo o etiqueta que contenga caracteres especiales o que requiera escape o comillas dobles, utiliza el comodín `?` para coincidir con un solo carácter especial o espacio. Por ejemplo, para buscar un atributo `my_attribute` con el valor `hello world`: `@my_attribute:hello?world`.
 <p> </p>
 
-## Valores numéricos
+## Valores numéricos {#numerical-values}
 
-Para buscar en un atributo numérico, primero [añádelo como faceta][2]. A continuación, puedes utilizar operadores numéricos (`<`,`>`, `<=` o `>=`) para realizar una búsqueda sobre facetas numéricas.
-Por ejemplo, recupera todos los logs que tengan un tiempo de respuesta superior a 100ms con:
+Para buscar en un atributo numérico, primero [agrégalo como una faceta][2]. Luego puedes usar operadores numéricos (`<`,`>`, `<=` o `>=`) para realizar una búsqueda en facetas numéricas.
+Por ejemplo, recupera todos los registros que tienen un tiempo de respuesta superior a 100 ms con:
 <p> </p>
 
 ```
 @http.response_time:>100
 ```
 
-Puedes buscar atributos numéricos dentro de un rango específico. Por ejemplo, recupera todos tus errores 4xx con:
+Puedes buscar un atributo numérico dentro de un rango específico. Por ejemplo, recupera todos tus errores 4xx con:
 
 ```
 @http.status_code:[400 TO 499]
 ```
 
-## Etiquetas
+## Etiquetas {#tags}
 
-Tus logs heredan las etiquetas de los [hosts][3] y las [integraciones][4] que las generan. Pueden utilizarse para buscar y también como facetas:
+Tus registros heredan etiquetas de [hosts][3] y [integraciones][4] que las generan. Pueden ser utilizadas en la búsqueda y también como facetas:
 
 * `test` está buscando la cadena "test".
-* `env:(prod OR test)` coincide con todos los logs con la etiqueta `env:prod` o la etiqueta `env:test`
-* `(env:prod AND -version:beta)` coincide con todos los logs que contengan la etiqueta `env:prod` y que no contengan la etiqueta `version:beta`
+* `env:(prod OR test)` coincide con todos los registros con la etiqueta `env:prod` o la etiqueta `env:test`
+* `(env:prod AND -version:beta)` coincide con todos los registros que contienen la etiqueta `env:prod` y que no contienen la etiqueta `version:beta`
 
-Si tus etiquetas no siguen las [prácticas recomendadas de etiqueta][5] y no utilizan la sintaxis `key:value`, utiliza esta consulta de búsqueda:
+Si tus etiquetas no siguen [las mejores prácticas de etiquetas][5] y no utilizan la sintaxis `key:value`, usa esta consulta de búsqueda:
 
 * `tags:<MY_TAG>`
 
-## Matrices
+## Arreglos {#arrays}
 
-En el ejemplo siguiente, al hacer clic en el valor `Peter` de la faceta, se devuelven todos los logs que contiene un atributo `users.names`, cuyo valor es `Peter` o una matriz que contiene `Peter`:
+En el siguiente ejemplo, al hacer clic en el valor `Peter` en la faceta, se devuelven todos los registros que contienen un atributo `users.names`, cuyo valor es `Peter` o un arreglo que contiene `Peter`:
 
-{{< img src="logs/explorer/search/array_search.png" alt="Matriz y facetas" style="width:80%;">}}
+{{< img src="logs/explorer/search/array_search.png" alt="Arreglo y Facetas" style="width:80%;">}}
 
-**Nota**: Buscar también puede utilizarse en atributos de matriz sin facetas utilizando una sintaxis equivalente.
+**Nota**: La búsqueda también se puede utilizar en atributos de arreglo no facetados utilizando una sintaxis equivalente.
 
-En el siguiente ejemplo, los logs de CloudWatch para Windows contienen una matriz de objetos JSON bajo `@Event.EventData.Data`. No se puede crear una faceta sobre una matriz de objetos JSON, pero se puede buscar utilizando la siguiente sintaxis.
+En el siguiente ejemplo, los registros de CloudWatch para Windows contienen un arreglo de objetos JSON bajo `@Event.EventData.Data`. No puedes crear una faceta en un arreglo de objetos JSON, pero puedes buscar utilizando la siguiente sintaxis.
 
-* `@Event.EventData.Data.Name:ObjectServer` coincide con todos los logs con la clave `Name` y el valor `ObjectServer`.
+* `@Event.EventData.Data.Name:ObjectServer` coincide con todos los registros con la clave `Name` y el valor `ObjectServer`.
 
-{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Consulta sin facetas en una matriz de objetos JSON" style="width:80%;">}}
-<p> </p>
+{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Consulta sin facetas en un arreglo de objetos JSON" style="width:80%;">}}
 
-## Campos calculados
+### Búsqueda de arreglo anidado {#nested-array-search}
 
-Los campos calculados función como atributos de log y pueden utilizarse para la búsqueda, agregación, visualización y definición de otros campos calculados. Utiliza el prefijo `#` cuando hagas referencia a nombres de campos calculados.
+Para buscar un campo anidado en un atributo de arreglo, utiliza el prefijo `@` con la ruta completa del atributo. El Explorador de registros coincide con cualquier elemento en el arreglo:
 
-{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="Un campo calculado llamado request_duration que se utiliza para filtrar resultados en el Log Explorer" style="width:100%;" >}}
+* `@network.ip.attributes.ip:2a02\:1810*` coincide con todos los registros donde al menos un elemento en el arreglo `network.ip.attributes` tiene un campo `ip` que comienza con `2a02:1810`.
 
-## Búsquedas guardadas
+Para coincidir registros donde un arreglo contiene múltiples valores específicos, lista los valores entre paréntesis:
 
-Las [Vistas guardadas][6] contienen tu consulta de búsqueda, columnas, horizonte temporal y faceta.
+* `@user_perms:(4 6)` coincide con todos los registros donde el arreglo `user_perms` contiene tanto `4` como `6`.
 
-## Referencias adicionales
+Para coincidir registros donde un arreglo contiene cualquier valor dentro de un rango, utiliza una consulta de rango:
+
+* `@user_perms:[2 TO 6]` coincide con todos los registros donde el arreglo `user_perms` contiene al menos un valor entre `2` y `6`.
+
+## Campos calculados {#calculated-fields}
+
+Los campos calculados funcionan como atributos de registro y pueden ser utilizados para búsqueda, agregación, visualización y definición de otros campos calculados. Utiliza el prefijo `#` para referenciar nombres de campos calculados.
+
+{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="Un campo calculado llamado request_duration utilizado para filtrar resultados en el Explorador de registros" style="width:100%;" >}}
+
+## Búsquedas guardadas {#saved-searches}
+
+[Saved Views][6] contienen tu consulta de búsqueda, columnas, horizonte temporal y faceta.
+
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -224,3 +244,4 @@ Las [Vistas guardadas][6] contienen tu consulta de búsqueda, columnas, horizont
 [5]: /es/getting_started/tagging/#tags-best-practices
 [6]: /es/logs/explorer/saved_views/
 [7]: /es/logs/explorer/facets/#facet-panel
+[8]: /es/logs/log_configuration/attributes_naming_convention/#reserved-attributes
