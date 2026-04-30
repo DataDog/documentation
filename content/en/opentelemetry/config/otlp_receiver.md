@@ -39,7 +39,7 @@ Traces, metrics, and logs.
 
 ## Full example configuration
 
-For a full working example configuration with the Datadog exporter, see [`otlp.yaml`][2].
+For a full working example configuration, see the [recommended Collector configurations][2].
 
 ## Example logging output
 
@@ -198,4 +198,4 @@ Flags: 0
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/otlp.yaml
+[2]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector

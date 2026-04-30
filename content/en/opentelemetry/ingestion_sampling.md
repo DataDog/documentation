@@ -20,18 +20,18 @@ OpenTelemetry SDKs and the OpenTelemetry Collector provide sampling capabilities
 
 This document demonstrates two primary methods for sending traces to Datadog with OpenTelemetry:
 
-- Send traces to the **[OpenTelemetry Collector][1]**, and use the Datadog Exporter to forward them to Datadog.
+- Send traces to the **[OpenTelemetry Collector][1]**, which forwards them to Datadog.
 - Send traces to the **[Datadog Agent OTLP ingest][3]**, which forwards them to Datadog.
 
 **Note**: Datadog doesn't support running the OpenTelemetry Collector and the Datadog Agent on the same host.
 
 ### Using the OpenTelemetry Collector
 
-With this method, the OpenTelemetry Collector receives traces from OpenTelemetry SDKs and exports them to Datadog using the Datadog Exporter. In this scenario, [APM trace metrics][4] are computed by the Datadog Connector:
+With this method, the OpenTelemetry Collector receives traces from OpenTelemetry SDKs and exports them to Datadog. In this scenario, [APM trace metrics][4] are computed by the span metrics connector:
 
 {{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation_collector.png" alt="OpenTelemetry APM Metrics computation using the Collector" style="width:100%;" >}}
 
-Choose this method if you require the advanced processing capabilities of the OpenTelemetry Collector, such as tail-based sampling. To configure the Collector to receive traces, follow the instructions on [OpenTelemetry Collector and Datadog Exporter][1].
+Choose this method if you require the advanced processing capabilities of the OpenTelemetry Collector, such as tail-based sampling. To configure the Collector to receive traces, follow the instructions on [Set Up the OpenTelemetry Collector][1].
 
 ### Using Datadog Agent OTLP ingestion
 
@@ -78,9 +78,7 @@ To configure tail-based sampling, use the [Tail Sampling Processor][9] or [Proba
 
 A limitation of tail-based sampling is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If a trace is distributed across multiple collector instances, and tail-based sampling is used, some parts of that trace may not be sent to Datadog.
 
-To ensure that APM metrics are computed based on 100% of the applications' traffic while using collector-level tail-based sampling, use the [Datadog Connector][11].
-
-<div class="alert alert-info">The Datadog Connector is available starting v0.83.0. Read <a href="/opentelemetry/guide/switch_from_processor_to_connector">Switch from Datadog Processor to Datadog Connector for OpenTelemetry APM Metrics</a> if migrating from an older version.</div>
+To ensure that APM metrics are computed based on 100% of the applications' traffic while using collector-level tail-based sampling, configure the span metrics connector (or Datadog Connector) *before* the sampling processor in your pipeline. The [recommended Collector configuration][11] uses a `forward` connector to separate trace processing from sampling, so that span metrics are computed on all traces before any sampling is applied.
 
 See the [ingestion volume control guide][8] for information about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 

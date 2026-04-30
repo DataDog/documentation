@@ -139,7 +139,7 @@ For more information, see [Mapping OpenTelemetry Semantic Conventions to Infrast
 
 **Resolution**:
 
-Host tags configured in either the Datadog exporter configuration (`host_metadata::tags`) or the Datadog Agent's `tags` section are not immediately applied to telemetry data. The tags eventually appear after the backend resolves the host metadata.
+Host tags configured in your OpenTelemetry Collector or Datadog Agent configuration are not immediately applied to telemetry data. The tags eventually appear after the backend resolves the host metadata.
 
 Choose your setup for specific instructions:
 

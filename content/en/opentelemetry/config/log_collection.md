@@ -12,15 +12,16 @@ further_reading:
   text: "Correlate OpenTelemetry Traces and Logs"
 ---
 
-<div class="alert alert-info">
-The Datadog Agent logs pipeline is enabled by default in the Datadog Exporter in v0.108.0. This may cause a breaking change if <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/b52e760f184b77c6e1a9ccc5121ff7b88d2b8f75/exporter/datadogexporter/examples/collector.yaml#L456-L463"><code>logs::dump_payloads</code></a> is in use while upgrading, since this option is invalid when the Datadog Agent logs pipeline is enabled. To avoid this issue, remove the <code>logs::dump_payloads</code> config option or temporarily disable the <code>exporter.datadogexporter.UseLogsAgentExporter</code> feature gate.
-</div>
-
 ## Overview
 
 {{< img src="/opentelemetry/collector_exporter/log_collection.png" alt="An information log sent from OpenTelemetry" style="width:100%;" >}}
 
-To collect logs from files, configure the [filelog receiver][1] in your Datadog Exporter.
+The OpenTelemetry Collector can collect logs and forward them to Datadog in two ways:
+
+- **OTLP receiver**: Receives logs sent directly from your application using an OpenTelemetry SDK. This is the default approach in the [recommended Collector configuration](/opentelemetry/setup/collector_exporter/install/).
+- **Filelog receiver**: Reads log files from disk. Use this when your application writes logs to files rather than sending them through an OpenTelemetry SDK.
+
+To collect logs from files, configure the [filelog receiver][1] in your Collector.
 
 For more information, see the OpenTelemetry project documentation for the [filelog receiver][1].
 

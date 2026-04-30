@@ -26,7 +26,7 @@ This guide falls under the <strong>Custom Components</strong> <a href="/opentele
 
 ## Prerequisites
 
-- An OpenTelemetry-compatible backend configured to send data to Datadog. See [Send OpenTelemetry Data to Datadog][4] for setup options including the DDOT Collector, OSS Collector with Datadog Exporter, or direct OTLP ingest.
+- An OpenTelemetry-compatible backend configured to send data to Datadog. See [Send OpenTelemetry Data to Datadog][4] for setup options including the DDOT Collector, OpenTelemetry Collector, or direct OTLP ingest.
 - [Bun][2] installed (v1.0 or later).
 - A Bun application you want to instrument.
 

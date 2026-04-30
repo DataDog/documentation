@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-To extract the correct hostname and host tags, Datadog Exporter uses the [resource detection processor][2] and the [Kubernetes attributes processor][3]. These processors allow for extracting information from hosts and containers in the form of [resource semantic conventions][1], which is then used to build the hostname, host tags, and container tags. These tags enable automatic correlation among telemetry signals and tag-based navigation for filtering and grouping telemetry data within Datadog.
+To extract the correct hostname and host tags, configure the [resource detection processor][2] and the [Kubernetes attributes processor][3] in your OpenTelemetry Collector. These processors extract information from hosts and containers in the form of [resource semantic conventions][1], which is then used to build the hostname, host tags, and container tags. These tags enable automatic correlation among telemetry signals and tag-based navigation for filtering and grouping telemetry data within Datadog.
 
 For more information, see the OpenTelemetry project documentation for the [resource detection][2] and [Kubernetes attributes][3] processors.
 
@@ -354,7 +354,7 @@ processors:
 
 ## Full example configuration
 
-For a full working example configuration with the Datadog exporter, see [`k8s-values.yaml`][4]. This example is for Amazon EKS.
+For a full working example configuration, see the [recommended Collector configurations][4].
 
 ## Example logging output
 
@@ -433,20 +433,6 @@ Attributes:
 
 ### Custom host tags
 
-#### In the Datadog exporter
-
-Set custom hosts tags directly in the Datadog exporter:
-```
-      ## @param tags - list of strings - optional - default: empty list
-      ## List of host tags to be sent as part of the host metadata.
-      ## These tags will be attached to telemetry signals that have the host metadata hostname.
-      ##
-      ## To attach tags to telemetry signals regardless of the host, use a processor instead.
-      #
-      tags: ["team:infra", "<TAG_KEY>:<TAG_VALUE>"]
-```
-See all configurations options [here][6].
-
 #### As OTLP resource attributes
 
 Custom host tags can also be set as resource attributes that start with the namespace `datadog.host.tag`.
@@ -496,7 +482,7 @@ processors:
 [1]: https://opentelemetry.io/docs/specs/semconv/resource/
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/k8sattributesprocessor/README.md
-[4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/k8s-values.yaml
+[4]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 [5]: https://opentelemetry.io/docs/languages/js/resources/
-[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
+[6]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 [7]: https://docs.datadoghq.com/opentelemetry/schema_semantics/host_metadata/  

@@ -1,10 +1,10 @@
 ---
-title: Install and Configure the OpenTelemetry Collector
-description: 'Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter'
+title: OpenTelemetry Collector
+description: 'Send OpenTelemetry data to Datadog using the OpenTelemetry Collector'
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
-  text: "Install the DDOT Collector (Recommended)"
+  text: "Install the DDOT Collector"
 - link: "/opentelemetry/compatibility/"
   tag: "Documentation"
   text: "Feature Compatibility"
@@ -12,18 +12,20 @@ further_reading:
 
 ## Overview
 
-This page provides guides for installing and configuring a standalone OpenTelemetry Collector to send telemetry data to Datadog.
+You can use a standalone OpenTelemetry Collector to send traces, metrics, and logs to Datadog without the Datadog Exporter or Datadog Connector. This setup uses the [OpenTelemetry Collector Contrib][1] distribution with the OTLP HTTP exporter and the span metrics connector to send data directly to Datadog's OTLP intake endpoints.
 
-This method is best for users who prefer to use OTel Collector distributions from the OpenTelemetry open source community or require advanced processing capabilities not available in other setups. For most use cases the [Datadog Distribution of OTel Collector (DDOT)][1] is the recommended approach.
+This method is best for teams that want a vendor-neutral data pipeline using standard OpenTelemetry protocols and processors.
 
 ## Setup
-
-To begin, install the OpenTelemetry Collector and configure it with the Datadog Exporter. This guide walks you through the initial setup required before proceeding to more specific configuration topics.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/collector_exporter/install" >}}
     <h3>Install and Configure the Collector</h3>
-    Follow the initial setup steps to get a Collector running with the Datadog Exporter.
+    Set up the OpenTelemetry Collector with the recommended configuration for sending data to Datadog.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/collector_exporter/deploy" >}}
+    <h3>Deploy the Collector</h3>
+    Deploy the Collector on a host, in Docker, or as a DaemonSet in Kubernetes.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -32,17 +34,13 @@ To begin, install the OpenTelemetry Collector and configure it with the Datadog 
 After your Collector is running, use these guides to configure specific receivers and processors to collect and enrich your telemetry data.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/collector_exporter/deploy" >}}
-    <h3>Deploy the Collector</h3>
-    Learn how to run the Collector in various environments, including on a host, in Docker, or as a DaemonSet or Gateway in Kubernetes.
-    {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/config/hostname_tagging" >}}
     <h3>Configure Hostname and Tagging</h3>
     Use resource detection and Kubernetes attributes processors to ensure proper hostname resolution and apply critical tags for correlating telemetry in Datadog.
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/config/log_collection" >}}
     <h3>Set up Log Collection</h3>
-    Configure the filelog receiver to collect logs from files and forward them to Datadog, enabling unified logs, metrics, and traces.
+    Configure the filelog receiver to collect logs from files and forward them to Datadog.
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/config/otlp_receiver" >}}
     <h3>Enable the OTLP Receiver</h3>
@@ -58,4 +56,4 @@ After your Collector is running, use these guides to configure specific receiver
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/setup/ddot_collector/install/
+[1]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

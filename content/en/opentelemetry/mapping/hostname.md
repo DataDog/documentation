@@ -12,7 +12,7 @@ further_reading:
 
 OpenTelemetry defines certain semantic conventions for resource attributes related to hostnames. If an OpenTelemetry Protocol (OTLP) payload for any signal type has known hostname resource attributes, Datadog honors these conventions and tries to use its value as a hostname. The default hostname resolution algorithm is built with compatibility with the rest of Datadog products in mind, but you can override it if needed.
 
-This algorithm is used in the [Datadog exporter][3] as well as the [OTLP ingest pipeline in the Datadog Agent][2] and [DDOT Collector][5]. When using the [recommended configuration][4] for the Datadog exporter, the [resource detection processor][1] adds the necessary resource attributes to the payload to ensure accurate hostname resolution.
+This algorithm is used in the [OTLP ingest pipeline in the Datadog Agent][2], [DDOT Collector][5], and when sending data through the [OpenTelemetry Collector][4]. When using the [recommended Collector configuration][4], the [resource detection processor][1] adds the necessary resource attributes to the payload to ensure accurate hostname resolution.
 
 ## Conventions used to determine the hostname
 
@@ -106,18 +106,16 @@ processors:
 If no valid host names are found in the resource attributes, the behavior varies depending on the ingestion path. 
 
 {{< tabs >}}
-{{% tab "Datadog Exporter" %}}
+{{% tab "OpenTelemetry Collector" %}}
 
-The fallback hostname logic is used. This logic generates a hostname for the machine where 
-the Datadog Exporter is running, which is compatible with the rest of Datadog products, by checking the following sources:
+When using the OpenTelemetry Collector (with either the OTLP HTTP exporter or the Datadog Exporter), the fallback hostname logic generates a hostname for the machine where the Collector is running by checking the following sources:
 
-1. The `hostname` field in the Datadog Exporter configuration.
 1. Cloud provider API.
 1. Kubernetes host name.
 1. Fully qualified domain name.
 1. Operating system host name.
 
-This may lead to incorrect hostnames in [gateway deployments][1]. To avoid this, use the `resource detection` processor in your pipelines to ensure accurate hostname resolution.
+This may lead to incorrect hostnames in [gateway deployments][1]. To avoid this, use the `resourcedetection` processor in your pipelines to ensure accurate hostname resolution.
 
 [1]: https://opentelemetry.io/docs/collector/deployment/gateway/
 {{% /tab %}}

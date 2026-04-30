@@ -30,15 +30,15 @@ further_reading:
 
 ## Overview
 
-Datadog's OpenTelemetry Protocol (OTLP) metrics intake API endpoint allows you to send metrics directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
+Datadog's OpenTelemetry Protocol (OTLP) metrics intake API endpoint allows you to send metrics directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector][1].
 
 You might prefer this option if you're looking for a straightforward setup and want to send metrics directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
 
 This endpoint is particularly useful in the following scenarios:
 
-- **OpenTelemetry distributions without Datadog Exporter support**: Some OpenTelemetry distributions, such as the [AWS Distro for OpenTelemetry (ADOT)][8], have removed vendor-specific exporters in favor of a unified OTLP exporter. The OTLP metrics endpoint enables these distributions to send metrics directly to Datadog seamlessly.
+- **Lightweight deployments**: Some OpenTelemetry distributions, such as the [AWS Distro for OpenTelemetry (ADOT)][8], use a unified OTLP exporter. The OTLP metrics endpoint enables these distributions to send metrics directly to Datadog.
 
-- **Technical constraints using the Datadog Exporter or Agent**: Ideal for scenarios where installing additional software is impractical or restrictive, such as third-party managed services (for example, Vercel), applications on customer devices, or environments requiring streamlined, Agentless observability pipelines. The OTLP metrics endpoint enables direct OTLP metric ingestion in these scenarios.
+- **Environments where running a Collector or Agent is impractical**: Ideal for third-party managed services (for example, Vercel), applications on customer devices, or environments requiring streamlined, Agentless observability pipelines.
 
 <div class="alert alert-danger">Host metadata sent to this endpoint will not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 

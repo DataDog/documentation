@@ -26,6 +26,10 @@ These guides provide two hands-on ways to learn how to send OpenTelemetry data t
 ## Getting started tutorials
 
 {{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/getting_started/collector" >}}
+    <h3>Get Started with the OpenTelemetry Collector</h3>
+    Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector with standard open source components. No Datadog Exporter or Connector required.
+    {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/getting_started/datadog_example" >}}
     <h3>Explore OTel with a Datadog Example</h3>
     Follow a step-by-step guide using a simple, Datadog-provided Java application. This is the quickest way to see how the OTLP receiver and Datadog Exporter work together.
