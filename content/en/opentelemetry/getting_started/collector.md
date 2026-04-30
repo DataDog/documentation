@@ -18,7 +18,7 @@ algolia:
 
 This guide walks you through sending traces, metrics, and logs to Datadog using the OpenTelemetry Collector with standard open source components. After completing these steps, you can explore your telemetry data in the Datadog Service Catalog and Trace Explorer.
 
-This setup uses the OTLP HTTP exporter and span metrics connector — no Datadog Exporter or Datadog Connector required.
+This setup uses the OTLP HTTP exporter and span metrics connector. No Datadog Exporter or Datadog Connector required.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ This setup uses the OTLP HTTP exporter and span metrics connector — no Datadog
 - [OpenTelemetry Collector Contrib][3] v0.150.1 or later
 - An application instrumented with an [OpenTelemetry SDK][4]
 
-## Step 1: Configure the Collector
+## Step 1: Configure the collector
 
 Create a file named `collector.yaml`. This minimal configuration receives OTLP data from your application, collects host metrics, generates APM trace metrics, and exports everything to Datadog:
 
@@ -127,7 +127,7 @@ service:
 
 <div class="alert alert-info">This is a simplified configuration for getting started. For production deployments with the full span metrics dimensions list (required for all core APM features), see <a href="/opentelemetry/setup/collector_exporter/install/">Set Up the OpenTelemetry Collector</a>.</div>
 
-## Step 2: Run the Collector
+## Step 2: Run the collector
 
 Set your Datadog API key and [site][5], then start the Collector:
 
@@ -139,7 +139,7 @@ otelcol-contrib --config collector.yaml \
   --feature-gates connector.spanmetrics.includeCollectorInstanceID
 ```
 
-## Step 3: Point your application to the Collector
+## Step 3: Point your application to the collector
 
 Configure your OpenTelemetry-instrumented application to export data to the Collector by setting the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
 
@@ -160,7 +160,7 @@ Start your application. It sends traces, metrics, and logs to the Collector, whi
 
 After your application generates some traffic, your telemetry data appears in Datadog within a few seconds.
 
-### Service Catalog
+### Service catalog
 
 Go to [**APM** > **Service Catalog**][7] to see your service listed with performance metrics computed from your trace data.
 

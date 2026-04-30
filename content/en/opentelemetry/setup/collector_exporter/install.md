@@ -21,13 +21,13 @@ further_reading:
 
 ## Overview
 
-The OpenTelemetry Collector enables you to collect, process, and export telemetry data from your applications in a vendor-neutral way. Using the [OpenTelemetry Collector Contrib][1] distribution, you can send traces, metrics, and logs to Datadog through the OTLP HTTP exporter — no Datadog-specific exporter or connector required.
+The OpenTelemetry Collector collects, processes, and exports telemetry data from your applications in a vendor-neutral way. Using the [OpenTelemetry Collector Contrib][1] distribution, you can send traces, metrics, and logs to Datadog through the OTLP HTTP exporter. No Datadog Exporter or Connector required.
 
 This setup uses the following key components:
 
 - **OTLP HTTP exporter**: Sends traces, metrics, and logs to Datadog's OTLP intake endpoints.
 - **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data, which power APM features like the Service Catalog and Service Page.
-- **Resource detection processor**: Extracts host and cloud metadata to ensure proper hostname resolution and tagging in Datadog.
+- **Resource detection processor**: Extracts host and cloud metadata for proper hostname resolution and tagging in Datadog.
 
 {{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram showing the OpenTelemetry SDK sending data through OTLP to the OpenTelemetry Collector, which forwards telemetry to Datadog." style="width:100%;" >}}
 
@@ -248,7 +248,7 @@ service:
 ```
 
 For cloud-specific environments, add the appropriate resource detection detector:
-- **AWS EC2**: `detectors: [ec2, env, system]`
+- **Amazon EC2**: `detectors: [ec2, env, system]`
 - **Google Cloud**: `detectors: [gcp, env, system]`
 - **Azure**: `detectors: [azure, env, system]`
 
@@ -673,7 +673,7 @@ For a complete `values.yaml` file that configures the Collector as a DaemonSet w
 {{% /tab %}}
 {{< /tabs >}}
 
-### 3. Run the Collector
+### 3. Run the collector
 
 Start the Collector with the required feature gate:
 
