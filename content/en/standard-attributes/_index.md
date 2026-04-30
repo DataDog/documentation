@@ -1537,7 +1537,7 @@ attributes:
     type: string
     domain: HTTP requests
   - name: http.useragent
-    description: The `User-Agent` header received with the request.
+    description: The `User-Agent` header received with the request. This is collected by default.
     product_source:
       - icon-apm
       - icon-log
@@ -1568,7 +1568,7 @@ attributes:
     type: number
     domain: HTTP requests
   - name: http.request.headers.*
-    description: The request HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`. 
+    description: The request HTTP headers. The `Host` header is always collected as `http.request.headers.host`. Other request HTTP headers are not collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.
     product_source:
       - icon-apm
     type: string
