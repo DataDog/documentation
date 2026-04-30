@@ -1,5 +1,5 @@
 import { getConfig } from '../../helpers/getConfig';
-import { initializeFeatureFlags, getBooleanFlag, isDatadogEmployee, fetchDatadogUserStatus } from 'scripts/helpers/feature-flags';
+import { initializeFeatureFlags, getBooleanFlag, fetchDatadogUserStatus } from 'scripts/helpers/feature-flags';
 
 import { logAction, logError } from './logger';
 import { parseMarkdown, inlineRefChips, extractSources, renderMessageWithSources } from './markdown';
@@ -12,10 +12,13 @@ const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
 const docsAiConfig = docsConfig.docsAi;
 
-// --- Feature flag --------------------------------------------------------------
-
-let IS_DOCS_AI_ENABLED = false;
 const DOCS_AI_ENABLED_FLAG_KEY = 'docs-ai-enabled';
+
+// Optimistic render: default on so the UI mounts at DOMContentLoaded — no
+// layout shift. If the flag resolves to false we tear the UI down. Right
+// tradeoff for a default-on permanent kill switch: degraded UX during a rare
+// incident is fine; everyday layout shift is not.
+let IS_DOCS_AI_ENABLED = true;
 
 const INTERNAL_CONVERSATION_ID_PREFIX = 'dd_docsai_';
 
@@ -32,19 +35,14 @@ let isDatadogUser = false;
 
 initializeFeatureFlags().then(async (client) => {
     IS_DOCS_AI_ENABLED = getBooleanFlag(client, DOCS_AI_ENABLED_FLAG_KEY, true);
-
-    if (!IS_DOCS_AI_ENABLED && isDatadogEmployee()) {
-        IS_DOCS_AI_ENABLED = true;
-    }
-
     isDatadogUser = await fetchDatadogUserStatus();
 
     if (IS_DOCS_AI_ENABLED) {
-        document.body.classList.add('conv-search-enabled');
         logAction('Conversational Search Impression', {
             conversational_search: { action: 'impression', page: window.location.pathname }
         });
-        initConversationalSearch();
+    } else {
+        teardownConversationalSearch();
     }
 });
 
@@ -582,6 +580,9 @@ let conversationalSearchInstance = null;
 
 function initConversationalSearch() {
     if (!IS_DOCS_AI_ENABLED || conversationalSearchInstance) return;
+
+    document.body.classList.add('conv-search-enabled');
+
     const instance = new ConversationalSearch();
     if (instance.ready) conversationalSearchInstance = instance;
 
@@ -592,6 +593,17 @@ function initConversationalSearch() {
             const query = searchInput ? searchInput.value : '';
             askDocsAI(query, { source: 'home_hero' });
         });
+    }
+}
+
+function teardownConversationalSearch() {
+    document.body.classList.remove('conv-search-enabled');
+    const inst = conversationalSearchInstance;
+    if (inst) {
+        inst.floatButton?.remove();
+        inst.overlay?.remove();
+        inst.sidebar?.remove();
+        conversationalSearchInstance = null;
     }
 }
 

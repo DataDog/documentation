@@ -2,13 +2,14 @@ import { getHitData, getSnippetForDisplay } from './getHitData';
 import { bodyClassContains } from '../../helpers/helpers';
 import { DOCS_AI_ENABLED_FLAG_KEY } from '../../components/conversational-search';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
-import { initializeFeatureFlags, getBooleanFlag, isDatadogEmployee } from '../../helpers/feature-flags';
+import { initializeFeatureFlags, getBooleanFlag } from '../../helpers/feature-flags';
 
-let IS_DOCS_AI_ENABLED = false;
+// Optimistic render: assume on so the AI suggestion shows on first paint.
+let IS_DOCS_AI_ENABLED = true;
 const ASK_AI_ICON_SRC = '/images/svg-icons/spark-ai.svg';
 
 initializeFeatureFlags().then((client) => {
-    IS_DOCS_AI_ENABLED = getBooleanFlag(client, DOCS_AI_ENABLED_FLAG_KEY, true) || isDatadogEmployee();
+    IS_DOCS_AI_ENABLED = getBooleanFlag(client, DOCS_AI_ENABLED_FLAG_KEY, true);
 });
 
 const logDocsAIEvent = (message, payload) => {
