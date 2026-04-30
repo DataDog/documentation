@@ -212,6 +212,15 @@ For each bucket you want to monitor:
 [204]: https://aws.amazon.com/s3/pricing/
 {{% /collapse-content %}}
 
+{{% collapse-content title="4. Enable S3 access logs (optional)" level="h4" expanded=false id="manual-setup-step4" %}}
+
+To get prefix-level access metrics including request counts, server-side latency, and cold data identification, enable S3 server access logging on your source buckets and forward those logs to Datadog. For step-by-step instructions, see [Enable S3 access logs][208] in the Amazon S3 integration documentation.
+
+<div class="alert alert-warning">Forwarding S3 access logs to Datadog incurs Log Management ingestion costs. To minimize costs, use exclusion filters so logs are ingested but not indexed if used only for Storage Management. For details, see <a href="https://www.datadoghq.com/pricing/?product=log-management">Datadog Log Management pricing</a>.</div>
+
+[208]: /integrations/amazon-s3/#enable-s3-access-logs
+{{% /collapse-content %}}
+
 ### Post-setup steps
 
 <!-- TODO: Replace placeholder with the Storage Management API details for registering an inventory destination bucket. -->
