@@ -69,9 +69,11 @@ To instrument Java and .NET applications across your entire Windows host:
    1. Under .NET, choose the version you want to use.
 
 1. Copy and run the provided MSI install command on your Windows host.
-1. Restart the services you want instrumented.
+1. Configure instrumentation rules.
 
-Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
+   Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
+
+1. Restart the services you want instrumented.
 
 [1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
 
@@ -100,8 +102,9 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
 1. Click **Next**.
 1. Review your configuration and click **Deploy Configuration**.
+1. Configure instrumentation rules.
 
-If you're enabling host-wide SSI and you have .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) to instrument them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
+   Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
 ## Configure Unified Service Tags
 
