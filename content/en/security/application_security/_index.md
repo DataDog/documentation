@@ -134,4 +134,4 @@ For information on disabling AAP or its features, see the following:
 [14]: /security/application_security/exploit-prevention/
 [15]: /security/application_security/waf-integration/
 [16]: /security/application_security/setup/
-[17]: /security/application_security/api_security/endpoint-scanning/
+[17]: /security/application_security/api_security/endpoint_scanning/

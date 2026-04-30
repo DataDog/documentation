@@ -1,9 +1,6 @@
 ---
 title: Endpoint Scanning
 description: Verify whether discovered API endpoints are publicly accessible and require authentication.
-aliases:
-  - /security/application_security/endpoint-scanning/
-  - /security/application_security/api-inventory/endpoint-scanning/
 ---
 
 Endpoint Scanning is an opt-in App and API Protection (AAP) feature that actively tests discovered API endpoints and enriches the [API Security Inventory][1] with verified security posture data.
@@ -39,6 +36,6 @@ Endpoint Scanning is off by default. To enable it, go to [App and API Protection
 
 After you enable Endpoint Scanning, results appear in the [API Endpoints][3] explorer as Datadog scans eligible endpoints.
 
-[1]: /security/application_security/api-inventory/
+[1]: /security/application_security/api_security/api_inventory/
 [2]: https://app.datadoghq.com/security/configuration/asm/api-security-testing
 [3]: https://app.datadoghq.com/security/appsec/inventory/apis

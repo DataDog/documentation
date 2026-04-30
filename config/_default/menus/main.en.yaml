@@ -7892,12 +7892,12 @@ menu:
       identifier: application_security_api_security
       weight: 9
     - name: API Security Inventory
-      url: security/application_security/api-inventory/
+      url: security/application_security/api_security/api_inventory/
       parent: application_security_api_security
       identifier: asm_api_security
       weight: 1
     - name: Endpoint Scanning
-      url: security/application_security/api_security/endpoint-scanning/
+      url: security/application_security/api_security/endpoint_scanning/
       parent: application_security_api_security
       identifier: application_security_endpoint_scanning
       weight: 2

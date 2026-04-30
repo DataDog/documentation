@@ -1,5 +1,7 @@
 ---
 title: API Security Inventory
+aliases:
+  - /security/application_security/api-inventory/
 further_reading:
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
   tag: "Blog"
@@ -316,4 +318,4 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [16]: /integrations/guide/source-code-integration/
 [17]: /internal_developer_portal/software_catalog/set_up/create_entities/#through-the-datadog-ui
 [18]: /internal_developer_portal/software_catalog/entity_model/
-[19]: /security/application_security/api_security/endpoint-scanning/
+[19]: /security/application_security/api_security/endpoint_scanning/
