@@ -1,6 +1,7 @@
 ---
 title: Datadog Apps
 description: Build and deploy custom Datadog apps locally using a code-based development workflow with React, backend functions, and a CLI.
+site_support_id: app_builder #Site support banner for US1-FED and US2-FED
 further_reading:
 - link: "/actions/app_builder/"
   tag: "Documentation"
@@ -197,8 +198,7 @@ To automatically deploy your app on every push to the `main` branch, use the [`D
 
 **If your organization is not on US1** (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][9]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site: (`{{< region-param key="dd_site" >}}`)
 
-<!-- TODO: Confirm US1-FED support before GA. The @datadog/vite-plugin README documents auth.site values for datadoghq.com, datadoghq.eu, us3.datadoghq.com, us5.datadoghq.com, and ap1.datadoghq.com — it does not list a FED value. Verify with engineering whether FED is supported and, if so, what the correct site string is. -->
-{{< site-region region="us3,us5,eu,ap1,ap2,gov,gov2" >}}
+{{< site-region region="us3,us5,eu,ap1,ap2" >}}
 
 ```ts
 datadogVitePlugin({
