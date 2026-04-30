@@ -247,7 +247,7 @@ To optimize how your archived logs are physically organized in storage (and acce
 * **Partition Attributes**: Add low-cardinality attributes such as `service`, `source`, `env`, or `status` that you frequently use as search filters.
 * **Benefit**: Logs sharing the same partition attribute values are co-located in storage. When searching, Datadog can skip entire partitions that don't match your query, drastically reducing the volume of data scanned.
 
-#### Archive Lookup Attribute (Preview) {#archive-search-lookup-attribute}
+#### Archive Lookup Attribute
 
 To accelerate searches and investigations in your archives (with [Archive Search][16]), configure lookup attributes in your Datadog Archive.
 
@@ -278,16 +278,16 @@ Firewall rules are not supported.
 {{< /tabs >}}
 
 {{< /site-region >}}
+
 #### Compression
 
-By default, Datadog archives logs using **zstd** (Zstandard) compression (`.json.zst`), which offers better compression ratios and faster decompression speeds compared to gzip. You can also configure **gzip** compression (`.json.gz`) if needed.
+By default, Datadog archives logs using **zstd** (Zstandard) compression (`.json.zst`), which offers better compression ratios and faster decompression speeds compared to gzip. You can also configure **gzip** compression (`.json.gz`).
 
-Zstd compression reduces the size of your archived files, which lowers storage costs and reduces the volume of data scanned during [Archive Search][16], resulting in faster queries and lower cloud egress costs.
 
-To configure compression, select **Compression Type** when creating or editing an archive in the [Log Archiving & Forwarding page][6]:
+To configure compression, select **Compression Type** when creating or editing an archive on the [Log Archiving & Forwarding page][6]:
 
-- **Zstd** (default): Better compression ratio and decompression speed; recommended for new archives, especially if you plan to use [Archive Search][16].
-- **Gzip**: Widely supported and compatible with most tools.
+- **zstd** (default): Better compression ratio and decompression speed. Recommended for new archives, especially if you plan to use [Archive Search][16].
+- **gzip**: Widely supported and compatible with most tools.
 
 **Note**: Changing the compression format of an existing archive only affects new archive files. Files already stored in your bucket remain in their original format.
 
