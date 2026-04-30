@@ -62,7 +62,7 @@ In this step, select the buckets to monitor, set an inventory destination, and o
 
    <div class="alert alert-warning">Forwarding S3 access logs to Datadog incurs Log Management ingestion costs. To minimize costs, use exclusion filters so logs are ingested but not indexed if used only for Storage Management. For details, see <a href="https://www.datadoghq.com/pricing/?product=log-management">Datadog Log Management pricing</a>.</div>
 
-4. Click **Launch CloudFormation Template**. An AWS Quick Create stack opens, pre-filled with the bucket mappings, destination prefix, integration role name, and (if access logs are enabled) Datadog API key, application key, and log forwarder parameters.
+4. Click **Launch CloudFormation Template**. An AWS Quick Create stack opens, pre-filled with the bucket mappings, destination prefix, integration role name, and Datadog API key, application key, and log forwarder parameters.
 
 5. In AWS, review the stack parameters and create the stack. The stack:
 
