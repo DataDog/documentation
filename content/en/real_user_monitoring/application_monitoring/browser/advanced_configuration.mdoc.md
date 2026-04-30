@@ -1773,12 +1773,20 @@ The regular expression must match your application's file path structure. Adjust
 
 ### Limitations
 
+#### Events without an attributed origin
+
 Some events cannot be attributed to an origin because they do not have an associated handling stack:
 
 -   Action events collected automatically
 -   Resource events other than XHR and Fetch
 -   View events collected automatically
 -   CORS and CSP violations
+
+#### Source map resolution across micro frontends
+
+When a stack trace contains frames from multiple micro frontends (for example, an error thrown in one micro frontend that bubbles through code from another), the event is attributed to a single `service` and `version`: those of the throw-site (top) frame. Source maps are resolved for the entire event under that single service, so frames belonging to other micro frontends in the same stack remain minified, even when their source maps were correctly uploaded under their own `service`.
+
+To choose which micro frontend's source maps are used for unminification (for example, to attribute the event to the host application instead of the throw-site frame), use the [manual attribution](#manual-service-and-version-attribution) approach with `beforeSend` to set `event.service` and `event.version`. This still applies a single service per event: only frames belonging to the chosen micro frontend are unminified.
 
 ### Explore micro frontend data in Datadog
 
