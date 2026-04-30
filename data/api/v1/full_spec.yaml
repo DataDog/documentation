@@ -1823,6 +1823,38 @@ components:
       x-enum-varnames:
         - CUSTOM_TIMEBOARD
         - CUSTOM_SCREENBOARD
+    DataProjectionQuery:
+      description: Query configuration for a data projection request.
+      properties:
+        data_source:
+          description: Data source for the query.
+          example: logs
+          type: string
+        indexes:
+          description: List of indexes to query.
+          items:
+            description: Index name.
+            type: string
+          type: array
+        query_string:
+          description: The query string to filter events.
+          example: "service:web-store"
+          type: string
+        storage:
+          description: Storage location for the query.
+          type: string
+      required:
+        - query_string
+        - data_source
+      type: object
+    DataProjectionRequestType:
+      description: Type of a data projection request.
+      enum:
+        - data_projection
+      example: data_projection
+      type: string
+      x-enum-varnames:
+        - DATA_PROJECTION
     DeleteSharedDashboardResponse:
       description: Response containing token of deleted shared dashboard.
       properties:
@@ -11445,6 +11477,150 @@ components:
       maxItems: 2
       minItems: 2
       type: array
+    PointPlotDimension:
+      description: Dimension of the point plot.
+      enum:
+        - group
+        - time
+        - y
+        - radius
+      example: y
+      type: string
+      x-enum-varnames:
+        - GROUP
+        - TIME
+        - Y
+        - RADIUS
+    PointPlotProjection:
+      description: Projection configuration for the point plot widget.
+      properties:
+        dimensions:
+          description: List of dimension mappings for the projection.
+          items:
+            $ref: "#/components/schemas/PointPlotProjectionDimension"
+          type: array
+        extra_columns:
+          description: Additional columns to include in the projection.
+          items:
+            description: Column name.
+            type: string
+          type: array
+        type:
+          $ref: "#/components/schemas/PointPlotProjectionType"
+      required:
+        - type
+        - dimensions
+      type: object
+    PointPlotProjectionDimension:
+      description: Dimension mapping for the point plot projection.
+      properties:
+        alias:
+          description: Alias for the column.
+          type: string
+        column:
+          description: Source column name from the dataset.
+          example: duration
+          type: string
+        dimension:
+          $ref: "#/components/schemas/PointPlotDimension"
+      required:
+        - column
+        - dimension
+      type: object
+    PointPlotProjectionType:
+      description: Type of the projection.
+      enum:
+        - point_plot
+      example: point_plot
+      type: string
+      x-enum-varnames:
+        - POINT_PLOT
+    PointPlotWidgetDefinition:
+      description: The point plot displays individual data points over time.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        description:
+          description: The description of the widget.
+          type: string
+        legend:
+          $ref: "#/components/schemas/PointPlotWidgetLegend"
+        markers:
+          description: List of markers for the widget.
+          items:
+            $ref: "#/components/schemas/WidgetMarker"
+          type: array
+        requests:
+          description: List of request configurations for the widget.
+          items:
+            $ref: "#/components/schemas/PointPlotWidgetRequest"
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/PointPlotWidgetDefinitionType"
+        yaxis:
+          $ref: "#/components/schemas/WidgetAxis"
+      required:
+        - type
+        - requests
+      type: object
+    PointPlotWidgetDefinitionType:
+      default: point_plot
+      description: Type of the point plot widget.
+      enum:
+        - point_plot
+      example: point_plot
+      type: string
+      x-enum-varnames:
+        - POINT_PLOT
+    PointPlotWidgetLegend:
+      description: Legend configuration for the point plot widget.
+      properties:
+        type:
+          $ref: "#/components/schemas/PointPlotWidgetLegendType"
+      required:
+        - type
+      type: object
+    PointPlotWidgetLegendType:
+      description: Type of legend to show for the point plot widget.
+      enum:
+        - automatic
+        - none
+      example: automatic
+      type: string
+      x-enum-varnames:
+        - AUTOMATIC
+        - NONE
+    PointPlotWidgetRequest:
+      description: Request configuration for the point plot widget.
+      properties:
+        limit:
+          description: Maximum number of data points to return.
+          format: int64
+          type: integer
+        projection:
+          $ref: "#/components/schemas/PointPlotProjection"
+        query:
+          $ref: "#/components/schemas/DataProjectionQuery"
+        request_type:
+          $ref: "#/components/schemas/DataProjectionRequestType"
+      required:
+        - request_type
+        - query
+        - projection
+      type: object
     PowerpackTemplateVariableContents:
       description: Powerpack template variable contents.
       properties:
@@ -25812,6 +25988,7 @@ components:
         - $ref: "#/components/schemas/MonitorSummaryWidgetDefinition"
         - $ref: "#/components/schemas/NoteWidgetDefinition"
         - $ref: "#/components/schemas/PowerpackWidgetDefinition"
+        - $ref: "#/components/schemas/PointPlotWidgetDefinition"
         - $ref: "#/components/schemas/QueryValueWidgetDefinition"
         - $ref: "#/components/schemas/RetentionCurveWidgetDefinition"
         - $ref: "#/components/schemas/RunWorkflowWidgetDefinition"
