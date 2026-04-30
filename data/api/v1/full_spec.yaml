@@ -22552,6 +22552,10 @@ components:
           description: Shows the average of all Fargate tasks over all hours in the current date for all organizations.
           format: int64
           type: integer
+        feature_flags_config_requests_sum:
+          description: Shows the sum of all Feature Flags Client-Side SDK config requests over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         flex_logs_compute_large_avg:
           description: Shows the average number of Flex Logs Compute Large Instances over all hours in the current date for the given org.
           format: int64
@@ -23523,6 +23527,10 @@ components:
           type: integer
         fargate_tasks_count_hwm:
           description: Shows the high-water mark of all Fargate tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        feature_flags_config_requests_sum:
+          description: Shows the sum of all Feature Flags Client-Side SDK config requests over all hours in the current date for the given org.
           format: int64
           type: integer
         flex_logs_compute_large_avg:
@@ -24506,6 +24514,10 @@ components:
           type: integer
         fargate_tasks_count_hwm_sum:
           description: Shows the sum of the high-water marks of all Fargate tasks over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        feature_flags_config_requests_agg_sum:
+          description: Shows the sum of all Feature Flags Client-Side SDK config requests over all hours in the current month for all organizations.
           format: int64
           type: integer
         flex_logs_compute_large_avg_sum:
