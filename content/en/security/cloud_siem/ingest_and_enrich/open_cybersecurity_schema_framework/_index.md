@@ -18,6 +18,8 @@ further_reading:
   text: "Normalize your data with the OCSF Common Data Model in Datadog Cloud SIEM"
 ---
 
+<div class="alert alert-info">This feature is not available for the Legacy product.</a></div>
+
 ## Overview
 
 Cloud SIEM collects and analyzes data from a wide range of sources such as cloud services, firewalls, networks, applications, and IT systems. Since these services emit data in different formats, it often requires significant effort to normalize and prepare logs before meaningful threat analysis can occur.

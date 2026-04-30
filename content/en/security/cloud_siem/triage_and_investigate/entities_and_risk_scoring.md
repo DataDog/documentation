@@ -14,6 +14,8 @@ further_reading:
       text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
 ---
 
+<div class="alert alert-info">This feature is not available for the Legacy product.</a></div>
+
 ## Overview
 
 [Cloud SIEM's Risk Insights][4] consolidates multiple data sources, such as SIEM threats and Cloud Security insights, into a profile representing a single security entity, such as an IAM user.
