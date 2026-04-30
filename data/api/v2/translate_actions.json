@@ -1036,6 +1036,10 @@
     "request_description": "",
     "request_schema_description": "Google Cloud Usage Cost config patch request."
   },
+  "ListCostOCIConfigs": {
+    "description": "List the OCI configs.",
+    "summary": "List Cloud Cost Management OCI configs"
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
