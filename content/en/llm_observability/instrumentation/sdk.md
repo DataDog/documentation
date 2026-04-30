@@ -1312,7 +1312,7 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `cost_tags`
 : optional - _list of strings_
-<br />A list of tag keys (already set via `tags` or annotated previously on the same span) to propagate as dimensions on the generated LLM cost and token metrics. Entries that don't reference an existing tag key are skipped. See [Cost monitoring](#cost-monitoring) for details.
+<br />A list of tag keys (already set with `tags` or annotated previously on the same span) to propagate as dimensions on the generated LLM cost and token metrics. Entries that don't reference an existing tag key are skipped. See [Cost monitoring](#cost-monitoring) for details.
 
 {{% /collapse-content %}}
 
@@ -1410,7 +1410,7 @@ The `annotationOptions` object can contain the following:
 
 `costTags`
 : optional - _array of strings_
-<br />A list of tag keys (already set via `tags` or annotated previously on the same span) to propagate as dimensions on the generated LLM cost and token metrics. Entries that don't reference an existing tag key are skipped. See [Cost monitoring](#cost-monitoring) for details.
+<br />A list of tag keys (already set with `tags` or annotated previously on the same span) to propagate as dimensions on the generated LLM cost and token metrics. Entries that don't reference an existing tag key are skipped. See [Cost monitoring](#cost-monitoring) for details.
 
 {{% /collapse-content %}}
 
@@ -1732,7 +1732,7 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 
 `cost_tags`
 : optional - _list of strings_
-<br />A list of tag keys to propagate as dimensions on the generated LLM cost and token metrics. Each entry must reference a key present in `tags` at span start (supplied to the same context or a parent context); tag keys added later via `LLMObs.annotate()` are not retained. See [Cost monitoring](#cost-monitoring) for details.
+<br />A list of tag keys to propagate as dimensions on the generated LLM cost and token metrics. Each entry must reference a key present in `tags` at span start (supplied to the same context or a parent context); tag keys added later with `LLMObs.annotate()` are not retained. See [Cost monitoring](#cost-monitoring) for details.
 
 {{% /collapse-content %}}
 
@@ -1786,7 +1786,7 @@ The `llmobs.annotationContext()` method accepts the following options on the fir
 
 `costTags`
 : optional - _array of strings_
-<br />A list of tag keys to propagate as dimensions on the generated LLM cost and token metrics. Each entry must reference a key present in `tags` at span start (supplied to the same context or a parent context); tag keys added later via `llmobs.annotate()` are not retained. See [Cost monitoring](#cost-monitoring) for details.
+<br />A list of tag keys to propagate as dimensions on the generated LLM cost and token metrics. Each entry must reference a key present in `tags` at span start (supplied to the same context or a parent context); tag keys added later with `llmobs.annotate()` are not retained. See [Cost monitoring](#cost-monitoring) for details.
 
 {{% /collapse-content %}}
 
@@ -2070,7 +2070,7 @@ When annotating a span, you can mark a subset of its existing tag keys for propa
 
 Each entry must be a string and must reference a key already supplied through the span's `tags` parameter at the time the annotation is applied. When annotating a single span, the key can be supplied through `tags` in the same annotation call or in an earlier annotation on the same span. When using an annotation context, only keys present in `tags` at span start qualify — keys added later through individual span annotations are not retained. Entries that don't reference an existing tag key are skipped.
 
-<div class="alert alert-warning">Propagated keys are added only to LLM <strong>cost</strong> and <strong>token</strong> metrics. Other span metrics (such as <code>duration</code>) do not receive these dimensions.</div>
+<div class="alert alert-info">Propagated keys are added only to LLM <strong>cost</strong> and <strong>token</strong> metrics. Other span metrics (such as <code>duration</code>) do not receive these dimensions.</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}
