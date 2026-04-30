@@ -119,6 +119,15 @@ Detailed network timing data for the loading of an application's resources are c
 | `resource.provider.domain` | string | The resource provider domain.                                                                        |
 | `resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                |
 
+### Resource network headers
+
+For requests configured in `trackResourceHeaders`, additional network header metadata is automatically collected. See [`RumInitConfiguration.trackResourceHeaders`][16] for configuration details.
+
+| Attribute                   | Type   | Description                                                                                                              |
+|-----------------------------|--------|--------------------------------------------------------------------------------------------------------------------------|
+| `resource.request.headers`  | object | Request headers as key/value pairs (available only if `trackResourceHeaders` is enabled, for Fetch resources only).      |
+| `resource.response.headers` | object | Response headers as key/value pairs (available only if `trackResourceHeaders` is enabled, for Fetch and XHR resources).  |
+
 ### GraphQL attributes
 
 For GraphQL requests configured in `allowedGraphQlUrls`, additional metadata is automatically collected. See [Track GraphQL requests][15] for configuration details.
@@ -208,3 +217,4 @@ Source errors include code-level information about the error. For more informati
 [13]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-telemetry
 [14]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
 [15]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/#track-graphql-requests
+[16]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders
