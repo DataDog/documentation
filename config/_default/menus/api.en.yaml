@@ -15617,8 +15617,7 @@ menu:
           - v2
         operationids:
           - SearchFlakyTests
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Update flaky test states
       url: '#update-flaky-test-states'
@@ -15630,8 +15629,7 @@ menu:
           - v2
         operationids:
           - UpdateFlakyTests
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Get Test Optimization service settings
       url: '#get-test-optimization-service-settings'
@@ -15643,8 +15641,7 @@ menu:
           - v2
         operationids:
           - GetTestOptimizationServiceSettings
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Update Test Optimization service settings
       url: '#update-test-optimization-service-settings'
@@ -15656,8 +15653,7 @@ menu:
           - v2
         operationids:
           - UpdateTestOptimizationServiceSettings
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Delete Test Optimization service settings
       url: '#delete-test-optimization-service-settings'
@@ -15669,8 +15665,7 @@ menu:
           - v2
         operationids:
           - DeleteTestOptimizationServiceSettings
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get Flaky Tests Management policies
       url: '#get-flaky-tests-management-policies'
@@ -15682,8 +15677,7 @@ menu:
           - v2
         operationids:
           - GetFlakyTestsManagementPolicies
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Update Flaky Tests Management policies
       url: '#update-flaky-tests-management-policies'
@@ -15695,8 +15689,7 @@ menu:
           - v2
         operationids:
           - UpdateFlakyTestsManagementPolicies
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: Widgets
       url: /api/latest/widgets/

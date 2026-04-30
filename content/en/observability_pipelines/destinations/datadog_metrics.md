@@ -21,17 +21,17 @@ Use Observability Pipelines' Datadog Metrics destination ({{< tooltip glossary="
 
 ## Setup
 
-Set up the Datadog Metrics destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure the Datadog Metrics destination when you [set up a pipeline][5]. You can set up a pipeline in the [UI][1], using the [API][6], or with [Terraform][7]. The steps in this section are configured in the UI.
 
 {{< img src="observability_pipelines/destinations/datadog_metrics_settings.png" alt="The Datadog Metrics destination settings" style="width:40%;" >}}
 
-### Set up the destination
+### Optional buffering
 
-#### Optional settings
+After you select the Datadog Metrics destination in the pipeline UI, you can configure buffering.
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -70,3 +70,6 @@ To send metrics from Observability Pipelines to Datadog using AWS PrivateLink, s
 [2]: https://docs.datadoghq.com/observability_pipelines/destinations/#event-batching
 [3]: https://docs.datadoghq.com/agent/guide/private-link/?tab=crossregionprivatelinkendpoints
 [4]: http://config.datadoghq.com
+[5]: /observability_pipelines/configuration/set_up_pipelines/
+[6]: /api/latest/observability-pipelines/
+[7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
