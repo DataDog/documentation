@@ -37,7 +37,7 @@ Single Step Instrumentation (SSI) installs the Datadog Agent and instruments you
   ```
   Remove any matches and rebuild your application image before proceeding.
 - **Node.js: CommonJS only.** SSI does not support ECMAScript Modules (ESM). If your application uses `import` syntax or sets `"type": "module"` in `package.json`, use [manually managed SDKs][44] instead.
-- **Alpine and musl-based images are supported.** Kubernetes SSI injects through the `LD_PRELOAD` environment variable, not `/etc/ld.so.preload`, so musl libc images work without issues.
+- **Alpine and musl-based images:** Kubernetes SSI injects through the `LD_PRELOAD` environment variable, not `/etc/ld.so.preload`, so the Kubernetes injector supports musl-based images. Language and runtime compatibility still apply; for example, Ruby SSI requires glibc and is not compatible with Alpine or other musl-based images.
 
 {{< agent-only >}}
 Resolve these variables before starting:
@@ -93,7 +93,10 @@ Datadog generates a configuration file with SSI enabled:
    {{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="APM Instrumentation toggle in the Kubernetes Agent installation wizard" style="width:100%;" >}}
 
 1. Deploy the Agent with the generated configuration file.
-1. Restart your application pods:
+1. Coordinate a restart of your application pods.
+
+   <div class="alert alert-warning">Restarting application pods can cause a brief outage. Coordinate the restart with the application owner before running this command.</div>
+
    ```shell
    kubectl rollout restart deployment/<DEPLOYMENT_NAME> -n <APP_NAMESPACE>
    ```
@@ -103,22 +106,42 @@ Datadog generates a configuration file with SSI enabled:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Add the following to your `datadog-values.yaml`:
+If the Datadog Agent is not installed, set `DD_API_KEY` to your [Datadog API key][45]. Then, add the Datadog Helm repository and create a Kubernetes Secret:
+
+```shell
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+kubectl create namespace datadog --dry-run=client -o yaml | kubectl apply -f -
+kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY -n datadog --dry-run=client -o yaml | kubectl apply -f -
+```
+
+If you install the Agent in a different namespace, replace `datadog` with your Agent namespace.
+
+Create or update `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  apiKeyExistingSecret: datadog-secret
+  clusterName: <CLUSTER_NAME>
+  site: <DATADOG_SITE>
   apm:
     instrumentation:
       enabled: true
 ```
 
-Deploy the Agent:
+Replace `<CLUSTER_NAME>` with your Kubernetes cluster name and `<DATADOG_SITE>` with your [Datadog site][46].
+
+If the Agent is already installed, add `apm.instrumentation.enabled: true` to your existing `datadog-values.yaml` and keep your existing API key, site, and cluster name configuration.
+
+Deploy or update the Agent:
 
 ```shell
-helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
+helm upgrade --install datadog-agent -f datadog-values.yaml datadog/datadog -n datadog
 ```
 
-Restart your application pods:
+Coordinate a restart of your application pods:
+
+<div class="alert alert-warning">Restarting application pods can cause a brief outage. Coordinate the restart with the application owner before running this command.</div>
 
 ```shell
 kubectl rollout restart deployment/<DEPLOYMENT_NAME> -n <APP_NAMESPACE>
@@ -127,14 +150,42 @@ kubectl rollout restart deployment/<DEPLOYMENT_NAME> -n <APP_NAMESPACE>
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Add the following to your `datadog-agent.yaml`:
+If the Datadog Operator and Agent are not installed, set `DD_API_KEY` to your [Datadog API key][45]. Then, install the Operator and create a Kubernetes Secret:
+
+```shell
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+helm upgrade --install datadog-operator datadog/datadog-operator --namespace datadog --create-namespace
+kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY -n datadog --dry-run=client -o yaml | kubectl apply -f -
+```
+
+If you install the Agent in a different namespace, replace `datadog` with your Agent namespace.
+
+Create or update `datadog-agent.yaml`:
 
 ```yaml
-features:
-  apm:
-    instrumentation:
-      enabled: true
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  namespace: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    site: <DATADOG_SITE>
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+  features:
+    apm:
+      instrumentation:
+        enabled: true
 ```
+
+Replace `<CLUSTER_NAME>` with your Kubernetes cluster name and `<DATADOG_SITE>` with your [Datadog site][46].
+
+If the Agent is already installed with the Datadog Operator, add `features.apm.instrumentation.enabled: true` to your existing `DatadogAgent` manifest and keep your existing site, credentials, and cluster name configuration.
 
 Apply the manifest:
 
@@ -142,7 +193,9 @@ Apply the manifest:
 kubectl apply -f datadog-agent.yaml
 ```
 
-Restart your application pods:
+Coordinate a restart of your application pods:
+
+<div class="alert alert-warning">Restarting application pods can cause a brief outage. Coordinate the restart with the application owner before running this command.</div>
 
 ```shell
 kubectl rollout restart deployment/<DEPLOYMENT_NAME> -n <APP_NAMESPACE>
@@ -156,7 +209,15 @@ kubectl rollout restart deployment/<DEPLOYMENT_NAME> -n <APP_NAMESPACE>
 <div class="alert alert-warning">If your cluster enforces PodSecurity <code>restricted</code> policies, the Datadog init container may be blocked with: <code>allowPrivilegeEscalation is false</code> or <code>violates PodSecurity "restricted:latest"</code>. See the <a href="/tracing/trace_collection/single-step-apm/troubleshooting/#environments-with-strict-pod-security-settings">SSI troubleshooting guide</a> for the required security context configuration.</div>
 
 {{< agent-only >}}
-Use one of the three tabs (In-app wizard, Helm, or Datadog Operator). For agents helping users, prefer the Helm or Operator tab. Add `instrumentation.enabled: true` to the user's existing manifest. Do not create a separate manifest.
+Use one of the three tabs (In-app wizard, Helm, or Datadog Operator). For agents helping users, prefer the Helm or Operator tab.
+
+Before changing configuration, check whether the Datadog Agent is already installed:
+- `helm list -A | grep -i datadog`
+- `kubectl get datadogagent -A`
+
+If the Agent is not installed, follow the bootstrap steps in the selected tab: add the Datadog Helm repository, create the `datadog` namespace, create `datadog-secret`, set `site` and `clusterName`, and deploy the Agent.
+
+If the Agent is already installed, add `instrumentation.enabled: true` to the user's existing Helm values or `DatadogAgent` manifest. Do not create a separate manifest.
 
 If the user wants to pin SDK versions, recommend these defaults:
 `java: "1"`, `python: "2"`, `js: "5"`, `dotnet: "3"`, `ruby: "2"`, `php: "1"`
@@ -790,3 +851,5 @@ If you encounter problems with SSI, see the [SSI troubleshooting guide][35].
 [42]: https://app.datadoghq.com/apm/services
 [43]: https://app.datadoghq.com/apm/traces
 [44]: /tracing/trace_collection/dd_libraries/nodejs/
+[45]: https://app.datadoghq.com/organization-settings/api-keys
+[46]: /getting_started/site/
