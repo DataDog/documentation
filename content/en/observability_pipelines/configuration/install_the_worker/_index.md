@@ -581,7 +581,7 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 
 ## Upgrade the Worker
 
-To upgrade the Worker to the latest version:
+To upgrade the Worker:
 
 {{< tabs >}}
 {{% tab "APT" %}}
@@ -604,7 +604,6 @@ sudo yum install --only-upgrade observability-pipelines-worker
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To upgrade the Worker, if you are:
 
 - Setting `image.tag` in your `values.yaml` file with the Worker version:
     - Update the `image.tag` in your `values.yaml` file. Replace `<WORKER_VERSION>` with the Worker version you want to use, such as `2.15.0`.
