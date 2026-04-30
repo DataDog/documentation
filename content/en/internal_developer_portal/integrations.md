@@ -34,7 +34,7 @@ When you configure a service account for a [Datadog integration][1], you can inc
 | Integration  | Description    | Example actions (Action Catalog) |
 |--------------|----------------|----------------------------------|
 | [PagerDuty][2] | Add PagerDuty metadata to a service so that the Software Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service. | `Get current on-call`, `Trigger incident` <br> [See all available actions.][32] |
-| [OpsGenie][3] | Add OpsGenie metadata to a service so that the Software Catalog displays and links to information such as who is on-call for the service. | `Acknowledge alert`, `Get current on call` <br> [See all available actions.][33] |
+| [OpsGenie][3] (deprecated) | Add OpsGenie metadata to a service so that the Software Catalog displays and links to information such as who is on-call for the service. **Note**: This integration is deprecated in favor of Jira Service Management (JSM). | `Acknowledge alert`, `Get current on call` <br> [See all available actions.][33] |
 | [StatusPage][4] | Create, update, and retrieve details about incidents and components. | `Create an incident`, `Update component status` <br> [See all available actions.][34] |
 | [Freshservice][5] | Create, update, and query Freshservice tickets. | `List tickets`, `Update ticket` <br> [See all available actions.][35] |
 | [Slack][6] | Send incident alerts or updates to Slack channels, and perform channel management. | `Invite users to channel`, `Set channel topic` <br> [See all available actions.][36] |
@@ -66,6 +66,10 @@ You can connect any service in your [PagerDuty Service Directory][63]. You can m
 {{% /collapse-content %}}
 
 {{% collapse-content title="OpsGenie" level="h4" expanded=false id="id-for-anchoring" %}}
+
+<div class="alert alert-warning">
+The OpsGenie integration is deprecated in favor of the Jira Service Management (JSM) integration.
+</div>
 
 To add OpsGenie metadata to an entity definition: 
 
