@@ -14984,6 +14984,19 @@ menu:
           - GetMaintenance
         unstable: []
         order: 21
+    - name: Create backfilled maintenance
+      url: '#create-backfilled-maintenance'
+      identifier: status-pages-create-backfilled-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateBackfilledMaintenance
+        unstable:
+          - v2
+        order: 22
     - name: Schedule maintenance
       url: '#schedule-maintenance'
       identifier: status-pages-schedule-maintenance
@@ -15032,6 +15045,19 @@ menu:
           - DeleteDegradation
         unstable: []
         order: 17
+    - name: Create backfilled degradation
+      url: '#create-backfilled-degradation'
+      identifier: status-pages-create-backfilled-degradation
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateBackfilledDegradation
+        unstable:
+          - v2
+        order: 23
     - name: Create degradation
       url: '#create-degradation'
       identifier: status-pages-create-degradation
