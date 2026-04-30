@@ -602,8 +602,6 @@ let conversationalSearchInstance = null;
 function initConversationalSearch() {
     if (!IS_DOCS_AI_ENABLED || conversationalSearchInstance) return;
 
-    document.body.classList.add('conv-search-enabled');
-
     const instance = new ConversationalSearch();
     if (instance.ready) conversationalSearchInstance = instance;
 
@@ -618,7 +616,6 @@ function initConversationalSearch() {
 }
 
 function teardownConversationalSearch() {
-    document.body.classList.remove('conv-search-enabled');
     const inst = conversationalSearchInstance;
     if (inst) {
         inst.floatButton?.remove();
@@ -626,6 +623,8 @@ function teardownConversationalSearch() {
         inst.sidebar?.remove();
         conversationalSearchInstance = null;
     }
+    document.querySelector('.home-ai-btn')?.remove();
+    document.querySelector('.home-ai-divider')?.remove();
 }
 
 // The minimum length of the query to auto-submit the conversation.
