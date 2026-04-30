@@ -9,31 +9,33 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Socket destination to send logs to a socket endpoint.
 
 ## Setup
 
-Set up the Socket destination and its environment variables when you [set up a pipeline][1]. The following information is configured in the pipelines UI.
+Configure the Socket destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The steps in this section are configured in the UI.
 
-### Set up the destination
+After you select the Socket destination in the pipeline UI:
 
 <div class="alert alert-danger">Only enter the identifier for the socket address and, if appliable, the key pass. Do <b>not</b> enter the actual values.</a></div>
 
-1. Enter the identifier for your address. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your address. If you leave it blank, the [default](#secret-defaults) is used.
 1.  In the **Mode** dropdown menu, select the socket type to use.
 1.  In the **Encoding** dropdown menu, select either `JSON` or `Raw message` as the output format.
 
-#### Optional settings
+### Optional settings
 
-##### Enable TLS
+#### Enable TLS
 
 {{% observability_pipelines/tls_settings %}}
 
-##### Buffering
+#### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -62,3 +64,6 @@ Set up the Socket destination and its environment variables when you [set up a p
 The Socket destination does not batch events.
 
 [1]: https://app.datadoghq.com/observability-pipelines
+[2]: /observability_pipelines/configuration/set_up_pipelines/
+[3]: /api/latest/observability-pipelines/
+[4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

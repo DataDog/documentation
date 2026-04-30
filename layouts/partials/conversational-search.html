@@ -69,11 +69,13 @@
             <p class="conv-search-empty-subtitle">Ask me anything about Datadog documentation</p>
         </div>
         <div class="conv-search-suggestions">
-            <button class="conv-search-suggestion" data-query="What is the Datadog Agent?"><span>What is the Datadog Agent?</span></button>
-            <button class="conv-search-suggestion" data-query="How to define a Datadog monitor in Terraform (example)?"><span>How to define a Datadog monitor in Terraform (example)?</span></button>
-            <button class="conv-search-suggestion" data-query="Which OpenTelemetry semantic conventions should I use for LLM traces in Datadog?"><span>Which OpenTelemetry semantic conventions should I use for LLM traces in Datadog?</span></button>
         </div>
     </div>
+</template>
+
+{{/* Suggestion button shell — text + data-query are filled in by JS */}}
+<template id="conv-search-suggestion-template">
+    <button class="conv-search-suggestion"><span></span></button>
 </template>
 
 {{/* Reusable assistant message actions (thumbs/copy) */}}

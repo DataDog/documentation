@@ -11,6 +11,9 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/metrics'
     tag: Documentation
     text: Analyze Performance with Metrics
+  - link: '/real_user_monitoring/rum_without_limits/retention_quotas'
+    tag: Documentation
+    text: Control Costs with Retention Quotas
   - link: 'https://www.datadoghq.com/blog/rum-without-limits/'
     tag: Blog
     text: 'Introducing RUM without Limits™: Capture everything, keep what matters'

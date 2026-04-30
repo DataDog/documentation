@@ -14,6 +14,10 @@ further_reading:
 - link: "/dashboards/guide/slo_graph_query"
   tag: "Documentation"
   text: "Scope metric-based SLO queries"
+- link: "https://learn.datadoghq.com/courses/discovering-table-list-widgets"
+  tag: "Learning Center"
+  text: "Discovering Table, List, SLO, and Architecture Widgets"
+
 ---
 
 SLOs (service-level objectives) are an agreed-upon target that must be achieved for each activity, function, and process to provide the best opportunity for customer success. SLOs represent the performance or health of a service. The SLO widget visualizes the status, budget, and remaining error budget of the existing SLOs. It displays all underlying groups of the SLO and lets you sort the groups by any of the time windows in the widget. Use this widget to build out meaningful dashboards with the most critical SLO information:

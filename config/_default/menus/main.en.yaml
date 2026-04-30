@@ -4454,16 +4454,21 @@ menu:
       parent: tracing_services
       identifier: tracing_service_remapping_rules
       weight: 908
+    - name: Tag Enrichment
+      url: tracing/services/tag_enrichment
+      parent: tracing_services
+      identifier: tracing_tag_enrichment
+      weight: 909
     - name: Integration Override Removal
       url: tracing/services/integration_override_removal
       parent: tracing_services
       identifier: tracing_service_override_removal
-      weight: 909
+      weight: 910
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 910
+      weight: 911
     - name: Endpoint Observability
       url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
@@ -4610,7 +4615,7 @@ menu:
       parent: profiler
       identifier: profiler_enabling
       weight: 1
-    - name: Supported Language and Tracer Versions
+    - name: Supported Language and SDK Versions
       url: profiler/enabling/supported_versions/
       parent: profiler_enabling
       identifier: profiler_supported_langs
@@ -5406,6 +5411,11 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_prompt_optimization
       weight: 506
+    - name: Playground
+      url: llm_observability/playground
+      parent: llm_obs_experiments
+      identifier: llm_obs_playground
+      weight: 507
     - name: MCP Server
       url: llm_observability/mcp_server
       parent: llm_obs
@@ -9062,6 +9072,11 @@ menu:
       parent: rum_without_limits
       identifier: rum_without_limits_retention
       weight: 902
+    - name: Retention Quotas
+      url: real_user_monitoring/rum_without_limits/retention_quotas
+      parent: rum_without_limits
+      identifier: rum_without_limits_retention_quotas
+      weight: 903
     - name: Operations Monitoring
       url: real_user_monitoring/operations_monitoring/
       parent: rum

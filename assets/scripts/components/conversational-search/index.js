@@ -7,6 +7,7 @@ import { attachTooltips, buildSourceCards, showSourceTooltip, closeAllSourceTool
 import { addMessageActions, injectCodeCopyButtons } from './actions';
 import { streamConversation, fetchConversation, resetTypesenseClient } from './streaming';
 import { streamDocsAiChat } from './docsai-client';
+import { pickQuestions } from './suggested-questions';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
@@ -161,7 +162,21 @@ class ConversationalSearch {
         const emptyStateTemplate = document.getElementById('conv-search-empty-state');
         if (emptyStateTemplate) {
             container.appendChild(emptyStateTemplate.content.cloneNode(true));
+            this.renderSuggestions(container);
         }
+    }
+
+    renderSuggestions(container = this.messagesContainer) {
+        const suggestionsContainer = container?.querySelector('.conv-search-suggestions');
+        const template = document.getElementById('conv-search-suggestion-template');
+        if (!suggestionsContainer || !template) return;
+
+        suggestionsContainer.replaceChildren(...pickQuestions().map((q) => {
+            const btn = template.content.firstElementChild.cloneNode(true);
+            btn.dataset.query = q;
+            btn.querySelector('span').textContent = q;
+            return btn;
+        }));
     }
 
     // --- Events ------------------------------------------------------------------

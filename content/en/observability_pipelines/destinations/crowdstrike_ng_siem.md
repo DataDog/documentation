@@ -9,20 +9,24 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' CrowdStrike Next-Gen SIEM destination to send logs to CrowdStrike Next-Gen SIEM.
+
+## Prerequisites
+
+To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike data connector using the HEC/HTTP Event Connector. See [Step 1: Set up the HEC/HTTP event data connector][3] for instructions. When you set up the data connector, you are given a HEC API key and URL, which you use when you configure the Observability Pipelines Worker.
 
 ## Setup
 
-Set up the CrowdStrike NG-SIEM destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
-
-### Set up the destination
-
-To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike data connector using the HEC/HTTP Event Connector. See [Step 1: Set up the HEC/HTTP event data connector][3] for instructions. When you set up the data connector, you are given a HEC API key and URL, which you use when you configure the Observability Pipelines Worker later on.
+Configure the CrowdStrike NG-SIEM destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the CrowdStrike NG-SIEM endpoint URL, token, and if applicable, the TLS pass key. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your CrowdStrike NG-SIEM endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your CrowdStrike NG-SIEM token. If you leave it blank, the [default](#set-secrets) is used.
+After you select the CrowdStrike NG-SIEM destination in the pipeline UI:
+
+1. Enter the identifier for your CrowdStrike NG-SIEM endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your CrowdStrike NG-SIEM token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select **JSON** or **Raw** encoding in the dropdown menu.
 
 #### Optional settings
@@ -40,7 +44,7 @@ To use the CrowdStrike NG-SIEM destination, you need to set up a CrowdStrike dat
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -77,3 +81,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: https://falcon.us-2.crowdstrike.com/documentation/page/bdded008/hec-http-event-connector-guide
+[4]: /observability_pipelines/configuration/set_up_pipelines/
+[5]: /api/latest/observability-pipelines/
+[6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
