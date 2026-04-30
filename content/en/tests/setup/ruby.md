@@ -26,7 +26,6 @@ Supported languages:
 | Language | Version |
 | -------- | ------- |
 | Ruby     | >= 2.7  |
-| JRuby    | >= 9.4  |
 
 Supported test frameworks:
 
