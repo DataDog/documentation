@@ -24,6 +24,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
       tag: "Blog"
       text: "Design effective executive dashboards with Datadog"
+    - link: "https://learn.datadoghq.com/courses/tagging-best-practices"
+      tag: "Learning Center"
+      text: "Tagging Best Practices"
 algolia:
   tags: ["tagging"]
 ---

@@ -10,6 +10,10 @@ further_reading:
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable"
   tag: "External Site"
   text: "Create and manage Synthetic Global Variables with Terraform"
+- link: "https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing"
+  tag: "Learning Center"
+  text: "Getting Started with Synthetic Monitoring & Browser Testing"
+
 ---
 
 ## Overview

@@ -28,8 +28,7 @@ further_reading:
 
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
 
-{{% site-region region="gov" %}}
-
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">
     The Datadog extension for Visual Studio Code is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>

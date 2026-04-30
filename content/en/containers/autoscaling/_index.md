@@ -27,9 +27,9 @@ further_reading:
   text: "Rightsize workloads and reduce costs with Datadog Kubernetes Autoscaling"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">
-  This feature is not available for the Datadog for Government (US1-FED) site.
+  This feature is not available for the Datadog for Government ({{< region-param key="dd_datacenter" >}}) site.
 </div>
 {{< /site-region >}}
 

@@ -168,7 +168,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-1. Install the Datadog tracer by configuring the layer ARN that matches your deployment. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
+1. Install the Datadog SDK by configuring the layer ARN that matches your deployment. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
    ```sh
    # In AWS commercial regions
    arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}

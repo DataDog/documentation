@@ -1,8 +1,8 @@
 ---
-title: Send logs to CloudPrem with the Datadog Agent
+title: Send logs to BYOC Logs with the Datadog Agent
 aliases:
 - /cloudprem/ingest_logs/datadog_agent/
-description: Configure the Datadog Agent to send logs to your CloudPrem deployment
+description: Configure the Datadog Agent to send logs to your BYOC Logs deployment
 further_reading:
 - link: "/cloudprem/ingest_logs/observability_pipelines/"
   tag: "Documentation"
@@ -15,28 +15,28 @@ further_reading:
   text: "Datadog Operator Guide"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="true" header="In Preview" >}}
+  BYOC Logs is in Preview.
 {{< /callout >}}
 
 ## Overview
-This document provides configuration steps for using the Datadog Agent to send logs to a Datadog CloudPrem deployment. Unlike the Datadog SaaS platform, CloudPrem requires specific Agent configurations to ensure logs are enriched with necessary host-level tags and sent to the correct endpoint. This guide covers how to set these configurations for the most common deployment methods.
+This document provides configuration steps for using the Datadog Agent to send logs to a Datadog BYOC Logs deployment. Unlike the Datadog SaaS platform, BYOC Logs requires specific Agent configurations to ensure logs are enriched with necessary host-level tags and sent to the correct endpoint. This guide covers how to set these configurations for the most common deployment methods.
 
 ## Key requirements
-To send logs with the Datadog Agent to CloudPrem, you must configure two environment variables:
+To send logs with the Datadog Agent to BYOC Logs, you must configure two environment variables:
 
 `DD_LOGS_CONFIG_LOGS_DD_URL`
-: Set this to your CloudPrem indexer endpoint, usually `http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280`. This tells the Agent where to send the logs
+: Set this to your BYOC Logs indexer endpoint, usually `http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280`. This tells the Agent where to send the logs
 
 `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION`
-: (Optional) This is an optional but highly recommended variable. Set it to a large value, like "100000" (approximately 5 years). This ensures the Agent adds host-level tags to every log it sends. The Datadog SaaS platform automatically enriches logs with these tags after ingestion, but CloudPrem requires the Agent to add them upfront.
+: (Optional) This is an optional but highly recommended variable. Set it to a large value, like "100000" (approximately 5 years). This ensures the Agent adds host-level tags to every log it sends. The Datadog SaaS platform automatically enriches logs with these tags after ingestion, but BYOC Logs requires the Agent to add them upfront.
 
 ### Proxy
 
-If you have configured the Datadog Agent to use a proxy and CloudPrem is hosted in your internal network, you need to configure the `no_proxy` setting so the Agent can send logs directly to CloudPrem without passing through the proxy.
+If you have configured the Datadog Agent to use a proxy and BYOC Logs is hosted in your internal network, you need to configure the `no_proxy` setting so the Agent can send logs directly to BYOC Logs without passing through the proxy.
 
 ```yaml
-# In the no_proxy section, add the CloudPrem DNS
+# In the no_proxy section, add the BYOC Logs DNS
 no_proxy:
  - http://<RELEASE_NAME>-indexer.<NAMESPACE_NAME>.svc.cluster.local:7280
 ```
@@ -88,7 +88,7 @@ spec:
 
 ### Endpoint configuration
 
-The Datadog Agent can be configured to send logs to CloudPrem using different endpoints:
+The Datadog Agent can be configured to send logs to BYOC Logs using different endpoints:
 
 {{% collapse-content title="Internal cluster endpoint" level="h4" expanded=false %}}
 Recommended for in-cluster agents:
@@ -184,13 +184,13 @@ Use `kubectl exec` to check the Agent's status and confirm it is configured to s
 # Check Agent status and logs configuration
 kubectl exec -it <datadog-agent-pod> -- agent status | grep -A 10 "Logs Agent"
 
-# Check Agent logs for CloudPrem connection
+# Check Agent logs for BYOC Logs connection
 kubectl logs <datadog-agent-pod> | grep -i cloudprem
 ```
 
-### Check logs are indexed in CloudPrem
+### Check logs are indexed in BYOC Logs
 
-Run this command to query the CloudPrem searcher and verify that it's indexing the JSON logs.
+Run this command to query the BYOC Logs searcher and verify that it's indexing the JSON logs.
 
 ```shell
 kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://localhost:7280/api/v1/datadog/search?query='
@@ -203,10 +203,10 @@ kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://l
 - Check Agent pod logs: `kubectl logs <datadog-agent-pod>`
 - Ensure log collection is enabled: `DD_LOGS_ENABLED=true`
 
-**CloudPrem not receiving logs**:
-- Check CloudPrem indexer logs: `kubectl logs -n <NAMESPACE_NAME> -l app=<RELEASE_NAME>-indexer`
-- Verify network connectivity between Agent and CloudPrem indexer
-- Confirm CloudPrem service is running: `kubectl get pods -n <NAMESPACE_NAME>`
+**BYOC Logs not receiving logs**:
+- Check BYOC Logs indexer logs: `kubectl logs -n <NAMESPACE_NAME> -l app=<RELEASE_NAME>-indexer`
+- Verify network connectivity between Agent and BYOC Logs indexer
+- Confirm BYOC Logs service is running: `kubectl get pods -n <NAMESPACE_NAME>`
 
 ## Further reading
 

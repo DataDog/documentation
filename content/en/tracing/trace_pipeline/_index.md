@@ -5,6 +5,11 @@ aliases:
     - /tracing/trace_ingestion/
     - /tracing/trace_retention_and_ingestion/
 description: "Learn how to control span ingestion"
+further_reading:
+- link: "https://learn.datadoghq.com/courses/apm-rate-limit-retention"
+  tag: "Learning Center"
+  text: "APM Rate Limiting and Retention"
+
 ---
 
 {{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Pipeline" >}}
@@ -50,6 +55,10 @@ Learn about how to track and monitor your volume of ingested and indexed data, i
 
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
 
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_explorer
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/

@@ -2464,6 +2464,7 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - ListOrgs
         unstable: []
@@ -2566,7 +2567,7 @@ menu:
           - GetSecurityMonitoringHistsignalsByJobId
         unstable:
           - v2
-        order: 68
+        order: 69
     - name: Cancel a historical job
       url: '#cancel-a-historical-job'
       identifier: security-monitoring-cancel-a-historical-job
@@ -2579,7 +2580,7 @@ menu:
           - CancelHistoricalJob
         unstable:
           - v2
-        order: 66
+        order: 67
     - name: Get a job's details
       url: '#get-a-jobs-details'
       identifier: security-monitoring-get-a-jobs-details
@@ -2592,7 +2593,7 @@ menu:
           - GetHistoricalJob
         unstable:
           - v2
-        order: 64
+        order: 65
     - name: Delete an existing job
       url: '#delete-an-existing-job'
       identifier: security-monitoring-delete-an-existing-job
@@ -2605,7 +2606,7 @@ menu:
           - DeleteHistoricalJob
         unstable:
           - v2
-        order: 65
+        order: 66
     - name: Convert a job result to a signal
       url: '#convert-a-job-result-to-a-signal'
       identifier: security-monitoring-convert-a-job-result-to-a-signal
@@ -2618,7 +2619,7 @@ menu:
           - ConvertJobResultToSignal
         unstable:
           - v2
-        order: 67
+        order: 68
     - name: Run a historical job
       url: '#run-a-historical-job'
       identifier: security-monitoring-run-a-historical-job
@@ -2631,7 +2632,7 @@ menu:
           - RunHistoricalJob
         unstable:
           - v2
-        order: 62
+        order: 63
     - name: List historical jobs
       url: '#list-historical-jobs'
       identifier: security-monitoring-list-historical-jobs
@@ -2644,7 +2645,7 @@ menu:
           - ListHistoricalJobs
         unstable:
           - v2
-        order: 63
+        order: 64
     - name: Get a hist signal's details
       url: '#get-a-hist-signals-details'
       identifier: security-monitoring-get-a-hist-signals-details
@@ -2657,7 +2658,7 @@ menu:
           - GetSecurityMonitoringHistsignal
         unstable:
           - v2
-        order: 70
+        order: 71
     - name: Search hist signals
       url: '#search-hist-signals'
       identifier: security-monitoring-search-hist-signals
@@ -2670,7 +2671,7 @@ menu:
           - SearchSecurityMonitoringHistsignals
         unstable:
           - v2
-        order: 71
+        order: 72
     - name: List hist signals
       url: '#list-hist-signals'
       identifier: security-monitoring-list-hist-signals
@@ -2683,7 +2684,7 @@ menu:
           - ListSecurityMonitoringHistsignals
         unstable:
           - v2
-        order: 69
+        order: 70
     - name: Export security monitoring resource to Terraform
       url: '#export-security-monitoring-resource-to-terraform'
       identifier: security-monitoring-export-security-monitoring-resource-to-terraform
@@ -2696,7 +2697,7 @@ menu:
           - ExportSecurityMonitoringTerraformResource
         unstable:
           - v2
-        order: 91
+        order: 92
     - name: Convert security monitoring resource to Terraform
       url: '#convert-security-monitoring-resource-to-terraform'
       identifier: security-monitoring-convert-security-monitoring-resource-to-terraform
@@ -2709,7 +2710,7 @@ menu:
           - ConvertSecurityMonitoringTerraformResource
         unstable:
           - v2
-        order: 93
+        order: 94
     - name: Export security monitoring resources to Terraform
       url: '#export-security-monitoring-resources-to-terraform'
       identifier: security-monitoring-export-security-monitoring-resources-to-terraform
@@ -2722,7 +2723,7 @@ menu:
           - BulkExportSecurityMonitoringTerraformResources
         unstable:
           - v2
-        order: 92
+        order: 93
     - name: Update security signal triage state or assignee
       url: '#update-security-signal-triage-state-or-assignee'
       identifier: security-monitoring-update-security-signal-triage-state-or-assignee
@@ -2734,7 +2735,7 @@ menu:
         operationids:
           - EditSecurityMonitoringSignal
         unstable: []
-        order: 94
+        order: 95
     - name: Get suggested actions for a signal
       url: '#get-suggested-actions-for-a-signal'
       identifier: security-monitoring-get-suggested-actions-for-a-signal
@@ -2746,7 +2747,7 @@ menu:
         operationids:
           - GetSuggestedActionsMatchingSignal
         unstable: []
-        order: 88
+        order: 89
     - name: Get investigation queries for a signal
       url: '#get-investigation-queries-for-a-signal'
       identifier: security-monitoring-get-investigation-queries-for-a-signal
@@ -2758,7 +2759,7 @@ menu:
         operationids:
           - GetInvestigationLogQueriesMatchingSignal
         unstable: []
-        order: 87
+        order: 88
     - name: Change the related incidents of a security signal
       url: '#change-the-related-incidents-of-a-security-signal'
       identifier: security-monitoring-change-the-related-incidents-of-a-security-signal
@@ -2770,7 +2771,7 @@ menu:
         operationids:
           - EditSecurityMonitoringSignalIncidents
         unstable: []
-        order: 76
+        order: 77
     - name: Get a signal's details
       url: '#get-a-signals-details'
       identifier: security-monitoring-get-a-signals-details
@@ -2782,7 +2783,7 @@ menu:
         operationids:
           - GetSecurityMonitoringSignal
         unstable: []
-        order: 74
+        order: 75
     - name: Get a list of security signals
       url: '#get-a-list-of-security-signals'
       identifier: security-monitoring-get-a-list-of-security-signals
@@ -2794,7 +2795,7 @@ menu:
         operationids:
           - SearchSecurityMonitoringSignals
         unstable: []
-        order: 72
+        order: 73
     - name: Bulk update security signals
       url: '#bulk-update-security-signals'
       identifier: security-monitoring-bulk-update-security-signals
@@ -2806,7 +2807,7 @@ menu:
         operationids:
           - BulkEditSecurityMonitoringSignals
         unstable: []
-        order: 95
+        order: 96
     - name: Bulk update triage state of security signals
       url: '#bulk-update-triage-state-of-security-signals'
       identifier: security-monitoring-bulk-update-triage-state-of-security-signals
@@ -2818,7 +2819,7 @@ menu:
         operationids:
           - BulkEditSecurityMonitoringSignalsState
         unstable: []
-        order: 85
+        order: 86
     - name: Bulk update triage assignee of security signals
       url: '#bulk-update-triage-assignee-of-security-signals'
       identifier: security-monitoring-bulk-update-triage-assignee-of-security-signals
@@ -2830,7 +2831,7 @@ menu:
         operationids:
           - BulkEditSecurityMonitoringSignalsAssignee
         unstable: []
-        order: 86
+        order: 87
     - name: Get a quick list of security signals
       url: '#get-a-quick-list-of-security-signals'
       identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -2842,7 +2843,7 @@ menu:
         operationids:
           - ListSecurityMonitoringSignals
         unstable: []
-        order: 73
+        order: 74
     - name: Get a rule's version history
       url: '#get-a-rules-version-history'
       identifier: security-monitoring-get-a-rules-version-history
@@ -2855,7 +2856,7 @@ menu:
           - GetRuleVersionHistory
         unstable:
           - v2
-        order: 61
+        order: 62
     - name: Test an existing rule
       url: '#test-an-existing-rule'
       identifier: security-monitoring-test-an-existing-rule
@@ -2867,7 +2868,7 @@ menu:
         operationids:
           - TestExistingSecurityMonitoringRule
         unstable: []
-        order: 55
+        order: 56
     - name: Convert an existing rule from JSON to Terraform
       url: '#convert-an-existing-rule-from-json-to-terraform'
       identifier: security-monitoring-convert-an-existing-rule-from-json-to-terraform
@@ -2879,7 +2880,7 @@ menu:
         operationids:
           - ConvertExistingSecurityMonitoringRule
         unstable: []
-        order: 58
+        order: 59
     - name: Update an existing rule
       url: '#update-an-existing-rule'
       identifier: security-monitoring-update-an-existing-rule
@@ -2891,7 +2892,7 @@ menu:
         operationids:
           - UpdateSecurityMonitoringRule
         unstable: []
-        order: 53
+        order: 54
     - name: Get a rule's details
       url: '#get-a-rules-details'
       identifier: security-monitoring-get-a-rules-details
@@ -2903,7 +2904,7 @@ menu:
         operationids:
           - GetSecurityMonitoringRule
         unstable: []
-        order: 52
+        order: 53
     - name: Delete an existing rule
       url: '#delete-an-existing-rule'
       identifier: security-monitoring-delete-an-existing-rule
@@ -2915,7 +2916,7 @@ menu:
         operationids:
           - DeleteSecurityMonitoringRule
         unstable: []
-        order: 54
+        order: 55
     - name: Validate a detection rule
       url: '#validate-a-detection-rule'
       identifier: security-monitoring-validate-a-detection-rule
@@ -2927,7 +2928,7 @@ menu:
         operationids:
           - ValidateSecurityMonitoringRule
         unstable: []
-        order: 57
+        order: 58
     - name: Test a rule
       url: '#test-a-rule'
       identifier: security-monitoring-test-a-rule
@@ -2939,7 +2940,7 @@ menu:
         operationids:
           - TestSecurityMonitoringRule
         unstable: []
-        order: 56
+        order: 57
     - name: Convert a rule from JSON to Terraform
       url: '#convert-a-rule-from-json-to-terraform'
       identifier: security-monitoring-convert-a-rule-from-json-to-terraform
@@ -2951,7 +2952,7 @@ menu:
         operationids:
           - ConvertSecurityMonitoringRuleFromJSONToTerraform
         unstable: []
-        order: 59
+        order: 60
     - name: Bulk export security monitoring rules
       url: '#bulk-export-security-monitoring-rules'
       identifier: security-monitoring-bulk-export-security-monitoring-rules
@@ -2963,7 +2964,7 @@ menu:
         operationids:
           - BulkExportSecurityMonitoringRules
         unstable: []
-        order: 60
+        order: 61
     - name: Create a detection rule
       url: '#create-a-detection-rule'
       identifier: security-monitoring-create-a-detection-rule
@@ -2975,7 +2976,7 @@ menu:
         operationids:
           - CreateSecurityMonitoringRule
         unstable: []
-        order: 51
+        order: 52
     - name: List rules
       url: '#list-rules'
       identifier: security-monitoring-list-rules
@@ -2987,7 +2988,7 @@ menu:
         operationids:
           - ListSecurityMonitoringRules
         unstable: []
-        order: 50
+        order: 51
     - name: Deactivate content pack
       url: '#deactivate-content-pack'
       identifier: security-monitoring-deactivate-content-pack
@@ -3000,7 +3001,7 @@ menu:
           - DeactivateContentPack
         unstable:
           - v2
-        order: 49
+        order: 50
     - name: Activate content pack
       url: '#activate-content-pack'
       identifier: security-monitoring-activate-content-pack
@@ -3013,7 +3014,7 @@ menu:
           - ActivateContentPack
         unstable:
           - v2
-        order: 48
+        order: 49
     - name: Get content pack states
       url: '#get-content-pack-states'
       identifier: security-monitoring-get-content-pack-states
@@ -3026,7 +3027,7 @@ menu:
           - GetContentPacksStates
         unstable:
           - v2
-        order: 47
+        order: 48
     - name: Get a suppression's version history
       url: '#get-a-suppressions-version-history'
       identifier: security-monitoring-get-a-suppressions-version-history
@@ -3038,7 +3039,7 @@ menu:
         operationids:
           - GetSuppressionVersionHistory
         unstable: []
-        order: 40
+        order: 41
     - name: Update a suppression rule
       url: '#update-a-suppression-rule'
       identifier: security-monitoring-update-a-suppression-rule
@@ -3050,7 +3051,7 @@ menu:
         operationids:
           - UpdateSecurityMonitoringSuppression
         unstable: []
-        order: 35
+        order: 36
     - name: Get a suppression rule
       url: '#get-a-suppression-rule'
       identifier: security-monitoring-get-a-suppression-rule
@@ -3062,7 +3063,7 @@ menu:
         operationids:
           - GetSecurityMonitoringSuppression
         unstable: []
-        order: 34
+        order: 35
     - name: Delete a suppression rule
       url: '#delete-a-suppression-rule'
       identifier: security-monitoring-delete-a-suppression-rule
@@ -3074,7 +3075,7 @@ menu:
         operationids:
           - DeleteSecurityMonitoringSuppression
         unstable: []
-        order: 36
+        order: 37
     - name: Validate a suppression rule
       url: '#validate-a-suppression-rule'
       identifier: security-monitoring-validate-a-suppression-rule
@@ -3086,7 +3087,7 @@ menu:
         operationids:
           - ValidateSecurityMonitoringSuppression
         unstable: []
-        order: 37
+        order: 38
     - name: Get suppressions affecting a specific rule
       url: '#get-suppressions-affecting-a-specific-rule'
       identifier: security-monitoring-get-suppressions-affecting-a-specific-rule
@@ -3098,7 +3099,7 @@ menu:
         operationids:
           - GetSuppressionsAffectingRule
         unstable: []
-        order: 39
+        order: 40
     - name: Get suppressions affecting future rule
       url: '#get-suppressions-affecting-future-rule'
       identifier: security-monitoring-get-suppressions-affecting-future-rule
@@ -3110,7 +3111,7 @@ menu:
         operationids:
           - GetSuppressionsAffectingFutureRule
         unstable: []
-        order: 38
+        order: 39
     - name: Create a suppression rule
       url: '#create-a-suppression-rule'
       identifier: security-monitoring-create-a-suppression-rule
@@ -3122,7 +3123,7 @@ menu:
         operationids:
           - CreateSecurityMonitoringSuppression
         unstable: []
-        order: 33
+        order: 34
     - name: Get all suppression rules
       url: '#get-all-suppression-rules'
       identifier: security-monitoring-get-all-suppression-rules
@@ -3134,7 +3135,7 @@ menu:
         operationids:
           - ListSecurityMonitoringSuppressions
         unstable: []
-        order: 32
+        order: 33
     - name: Update a security filter
       url: '#update-a-security-filter'
       identifier: security-monitoring-update-a-security-filter
@@ -3146,7 +3147,7 @@ menu:
         operationids:
           - UpdateSecurityFilter
         unstable: []
-        order: 30
+        order: 31
     - name: Get a security filter
       url: '#get-a-security-filter'
       identifier: security-monitoring-get-a-security-filter
@@ -3158,7 +3159,7 @@ menu:
         operationids:
           - GetSecurityFilter
         unstable: []
-        order: 29
+        order: 30
     - name: Delete a security filter
       url: '#delete-a-security-filter'
       identifier: security-monitoring-delete-a-security-filter
@@ -3170,7 +3171,7 @@ menu:
         operationids:
           - DeleteSecurityFilter
         unstable: []
-        order: 31
+        order: 32
     - name: Create a security filter
       url: '#create-a-security-filter'
       identifier: security-monitoring-create-a-security-filter
@@ -3182,7 +3183,7 @@ menu:
         operationids:
           - CreateSecurityFilter
         unstable: []
-        order: 28
+        order: 29
     - name: Get all security filters
       url: '#get-all-security-filters'
       identifier: security-monitoring-get-all-security-filters
@@ -3194,7 +3195,7 @@ menu:
         operationids:
           - ListSecurityFilters
         unstable: []
-        order: 27
+        order: 28
     - name: Update a critical asset
       url: '#update-a-critical-asset'
       identifier: security-monitoring-update-a-critical-asset
@@ -3206,7 +3207,7 @@ menu:
         operationids:
           - UpdateSecurityMonitoringCriticalAsset
         unstable: []
-        order: 44
+        order: 45
     - name: Get a critical asset
       url: '#get-a-critical-asset'
       identifier: security-monitoring-get-a-critical-asset
@@ -3218,7 +3219,7 @@ menu:
         operationids:
           - GetSecurityMonitoringCriticalAsset
         unstable: []
-        order: 43
+        order: 44
     - name: Delete a critical asset
       url: '#delete-a-critical-asset'
       identifier: security-monitoring-delete-a-critical-asset
@@ -3230,7 +3231,7 @@ menu:
         operationids:
           - DeleteSecurityMonitoringCriticalAsset
         unstable: []
-        order: 45
+        order: 46
     - name: Get critical assets affecting a specific rule
       url: '#get-critical-assets-affecting-a-specific-rule'
       identifier: security-monitoring-get-critical-assets-affecting-a-specific-rule
@@ -3242,7 +3243,7 @@ menu:
         operationids:
           - GetCriticalAssetsAffectingRule
         unstable: []
-        order: 46
+        order: 47
     - name: Create a critical asset
       url: '#create-a-critical-asset'
       identifier: security-monitoring-create-a-critical-asset
@@ -3254,7 +3255,7 @@ menu:
         operationids:
           - CreateSecurityMonitoringCriticalAsset
         unstable: []
-        order: 42
+        order: 43
     - name: Get all critical assets
       url: '#get-all-critical-assets'
       identifier: security-monitoring-get-all-critical-assets
@@ -3266,7 +3267,7 @@ menu:
         operationids:
           - ListSecurityMonitoringCriticalAssets
         unstable: []
-        order: 41
+        order: 42
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
       identifier: security-monitoring-list-vulnerable-assets
@@ -3425,7 +3426,7 @@ menu:
           - GetIndicatorOfCompromise
         unstable:
           - v2
-        order: 90
+        order: 91
     - name: List indicators of compromise
       url: '#list-indicators-of-compromise'
       identifier: security-monitoring-list-indicators-of-compromise
@@ -3438,7 +3439,7 @@ menu:
           - ListIndicatorsOfCompromise
         unstable:
           - v2
-        order: 89
+        order: 90
     - name: List scanned assets metadata
       url: '#list-scanned-assets-metadata'
       identifier: security-monitoring-list-scanned-assets-metadata
@@ -3488,6 +3489,19 @@ menu:
           - SearchSecurityFindings
         unstable: []
         order: 15
+    - name: Mute or unmute security findings
+      url: '#mute-or-unmute-security-findings'
+      identifier: security-monitoring-mute-or-unmute-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - MuteSecurityFindings
+        unstable:
+          - v2
+        order: 21
     - name: Create Jira issues for security findings
       url: '#create-jira-issues-for-security-findings'
       identifier: security-monitoring-create-jira-issues-for-security-findings
@@ -3610,7 +3624,7 @@ menu:
         operationids:
           - UpdateResourceEvaluationFilters
         unstable: []
-        order: 25
+        order: 26
     - name: List resource filters
       url: '#list-resource-filters'
       identifier: security-monitoring-list-resource-filters
@@ -3622,7 +3636,7 @@ menu:
         operationids:
           - GetResourceEvaluationFilters
         unstable: []
-        order: 24
+        order: 25
     - name: Update a custom framework
       url: '#update-a-custom-framework'
       identifier: security-monitoring-update-a-custom-framework
@@ -3634,7 +3648,7 @@ menu:
         operationids:
           - UpdateCustomFramework
         unstable: []
-        order: 21
+        order: 22
     - name: Get a custom framework
       url: '#get-a-custom-framework'
       identifier: security-monitoring-get-a-custom-framework
@@ -3646,7 +3660,7 @@ menu:
         operationids:
           - GetCustomFramework
         unstable: []
-        order: 23
+        order: 24
     - name: Delete a custom framework
       url: '#delete-a-custom-framework'
       identifier: security-monitoring-delete-a-custom-framework
@@ -3658,7 +3672,7 @@ menu:
         operationids:
           - DeleteCustomFramework
         unstable: []
-        order: 22
+        order: 23
     - name: Create a custom framework
       url: '#create-a-custom-framework'
       identifier: security-monitoring-create-a-custom-framework
@@ -3670,7 +3684,7 @@ menu:
         operationids:
           - CreateCustomFramework
         unstable: []
-        order: 26
+        order: 27
     - name: Change the triage state of a security signal
       url: '#change-the-triage-state-of-a-security-signal'
       identifier: security-monitoring-change-the-triage-state-of-a-security-signal
@@ -4163,6 +4177,30 @@ menu:
           - ListSyntheticsTestVersions
         unstable: []
         order: 57
+    - name: Get a test result
+      url: '#get-a-test-result'
+      identifier: synthetics-get-a-test-result
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsTestResult
+        unstable: []
+        order: 63
+    - name: Get a test's latest results
+      url: '#get-a-tests-latest-results'
+      identifier: synthetics-get-a-tests-latest-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsTestLatestResults
+        unstable: []
+        order: 65
     - name: Get parent suites for a test
       url: '#get-parent-suites-for-a-test'
       identifier: synthetics-get-parent-suites-for-a-test
@@ -4223,6 +4261,18 @@ menu:
           - GetTestFileDownloadUrl
         unstable: []
         order: 59
+    - name: Poll for test results
+      url: '#poll-for-test-results'
+      identifier: synthetics-poll-for-test-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PollSyntheticsTestResults
+        unstable: []
+        order: 67
     - name: Edit a Network Path test
       url: '#edit-a-network-path-test'
       identifier: synthetics-edit-a-network-path-test
@@ -4283,6 +4333,18 @@ menu:
           - DeleteSyntheticsTests
         unstable: []
         order: 50
+    - name: Get a browser test's latest results
+      url: '#get-a-browser-tests-latest-results'
+      identifier: synthetics-get-a-browser-tests-latest-results
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsBrowserTestLatestResults
+        unstable: []
+        order: 66
     - name: Patch a test suite
       url: '#patch-a-test-suite'
       identifier: synthetics-patch-a-test-suite
@@ -4379,6 +4441,90 @@ menu:
           - GetOnDemandConcurrencyCap
         unstable: []
         order: 41
+    - name: Add a test to a Synthetics downtime
+      url: '#add-a-test-to-a-synthetics-downtime'
+      identifier: synthetics-add-a-test-to-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddTestToSyntheticsDowntime
+        unstable: []
+        order: 73
+    - name: Remove a test from a Synthetics downtime
+      url: '#remove-a-test-from-a-synthetics-downtime'
+      identifier: synthetics-remove-a-test-from-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveTestFromSyntheticsDowntime
+        unstable: []
+        order: 74
+    - name: Update a Synthetics downtime
+      url: '#update-a-synthetics-downtime'
+      identifier: synthetics-update-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSyntheticsDowntime
+        unstable: []
+        order: 71
+    - name: Get a Synthetics downtime
+      url: '#get-a-synthetics-downtime'
+      identifier: synthetics-get-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsDowntime
+        unstable: []
+        order: 70
+    - name: Delete a Synthetics downtime
+      url: '#delete-a-synthetics-downtime'
+      identifier: synthetics-delete-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSyntheticsDowntime
+        unstable: []
+        order: 72
+    - name: Create a Synthetics downtime
+      url: '#create-a-synthetics-downtime'
+      identifier: synthetics-create-a-synthetics-downtime
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSyntheticsDowntime
+        unstable: []
+        order: 69
+    - name: List Synthetics downtimes
+      url: '#list-synthetics-downtimes'
+      identifier: synthetics-list-synthetics-downtimes
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSyntheticsDowntimes
+        unstable: []
+        order: 68
     - name: Get parent tests for a subtest
       url: '#get-parent-tests-for-a-subtest'
       identifier: synthetics-get-parent-tests-for-a-subtest
@@ -4639,8 +4785,10 @@ menu:
       params:
         versions:
           - v1
+          - v2
         operationids:
           - GetBrowserTestResult
+          - GetSyntheticsBrowserTestResult
         unstable: []
         order: 13
     - name: Get a browser test's latest results summaries
@@ -5523,6 +5671,18 @@ menu:
           - ListUserOrganizations
         unstable: []
         order: 6
+    - name: Delete a pending user's invitations
+      url: '#delete-a-pending-users-invitations'
+      identifier: users-delete-a-pending-users-invitations
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserInvitations
+        unstable: []
+        order: 11
     - name: Get a user invitation
       url: '#get-a-user-invitation'
       identifier: users-get-a-user-invitation
@@ -10869,6 +11029,32 @@ menu:
         unstable:
           - v2
         order: 13
+    - name: Update annotation queue label schema
+      url: '#update-annotation-queue-label-schema'
+      identifier: llm-observability-update-annotation-queue-label-schema
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsAnnotationQueueLabelSchema
+        unstable:
+          - v2
+        order: 29
+    - name: Get annotation queue label schema
+      url: '#get-annotation-queue-label-schema'
+      identifier: llm-observability-get-annotation-queue-label-schema
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsAnnotationQueueLabelSchema
+        unstable:
+          - v2
+        order: 28
     - name: Delete annotation queue interactions
       url: '#delete-annotation-queue-interactions'
       identifier: llm-observability-delete-annotation-queue-interactions
@@ -15431,8 +15617,7 @@ menu:
           - v2
         operationids:
           - SearchFlakyTests
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Update flaky test states
       url: '#update-flaky-test-states'
@@ -15444,8 +15629,7 @@ menu:
           - v2
         operationids:
           - UpdateFlakyTests
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Get Test Optimization service settings
       url: '#get-test-optimization-service-settings'
@@ -15457,8 +15641,7 @@ menu:
           - v2
         operationids:
           - GetTestOptimizationServiceSettings
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Update Test Optimization service settings
       url: '#update-test-optimization-service-settings'
@@ -15470,8 +15653,7 @@ menu:
           - v2
         operationids:
           - UpdateTestOptimizationServiceSettings
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Delete Test Optimization service settings
       url: '#delete-test-optimization-service-settings'
@@ -15483,8 +15665,7 @@ menu:
           - v2
         operationids:
           - DeleteTestOptimizationServiceSettings
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get Flaky Tests Management policies
       url: '#get-flaky-tests-management-policies'
@@ -15496,8 +15677,7 @@ menu:
           - v2
         operationids:
           - GetFlakyTestsManagementPolicies
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Update Flaky Tests Management policies
       url: '#update-flaky-tests-management-policies'
@@ -15509,8 +15689,7 @@ menu:
           - v2
         operationids:
           - UpdateFlakyTestsManagementPolicies
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: Widgets
       url: /api/latest/widgets/

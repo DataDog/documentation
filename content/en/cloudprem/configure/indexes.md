@@ -1,6 +1,6 @@
 ---
 title: Indexes
-description: Learn how to configure multiple indexes with custom filters and retention policies for your CloudPrem cluster
+description: Learn how to configure multiple indexes with custom filters and retention policies for your BYOC Logs cluster
 aliases:
   - /cloudprem/configure/retention/
 further_reading:
@@ -12,19 +12,19 @@ further_reading:
   text: "Search Logs"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="true" header="In Preview" >}}
+  BYOC Logs is in Preview.
 {{< /callout >}}
 
-By default, a CloudPrem cluster stores all logs in a single index with a single retention policy. With multiple indexes, you can segment logs by defining filter queries and assigning a different retention period to each index. For example, you can retain audit logs for 1 year while keeping debug logs for only 3 days.
+By default, a BYOC Logs cluster stores all logs in a single index with a single retention policy. With multiple indexes, you can segment logs by defining filter queries and assigning a different retention period to each index. For example, you can retain audit logs for 1 year while keeping debug logs for only 3 days.
 
-To view and manage your CloudPrem indexes, navigate to the [CloudPrem page][1] in Datadog. Select a cluster and click {{< ui >}}View Indexes{{< /ui >}} to access the index configuration.
+To view and manage your BYOC Logs indexes, navigate to the [BYOC Logs page][1] in Datadog. Select a cluster and click {{< ui >}}View Indexes{{< /ui >}} to access the index configuration.
 
-{{< img src="cloudprem/indexes/indexes_configuration.png" alt="CloudPrem indexes configuration page showing three indexes with filters and retention periods" style="width:80%;">}}
+{{< img src="cloudprem/indexes/indexes_configuration.png" alt="BYOC Logs indexes configuration page showing three indexes with filters and retention periods" style="width:80%;">}}
 
 ## Indexes filters
 
-When a log is ingested, CloudPrem evaluates each index's filter from top to bottom and routes the log to the **first matching index**. This means index order matters:
+When a log is ingested, BYOC Logs evaluates each index's filter from top to bottom and routes the log to the **first matching index**. This means index order matters:
 
 - Place indexes with more specific filters above indexes with broader filters. For example, `source:security env:production` should appear above `source:security`.
 - A catch-all index with a `*` filter at the bottom ensures that no logs are dropped.
@@ -36,13 +36,13 @@ You can reorder indexes at any time by dragging rows or using the {{< ui >}}Move
 
 Each index has its own retention period, which determines how long logs are stored before automatic deletion.
 
-<div class="alert alert-info">If you are upgrading from a previous CloudPrem version, the index retention configured through the Datadog UI takes precedence over the global retention set in the Helm chart values.</div>
+<div class="alert alert-info">If you are upgrading from a previous BYOC Logs version, the index retention configured through the Datadog UI takes precedence over the global retention set in the Helm chart values.</div>
 
 ## Searching across indexes
 
-To query logs stored in CloudPrem, select one or more CloudPrem indexes in the [Log Explorer][2]. You can select a specific index to narrow your search, or select all indexes in a cluster to search across them. From the index configuration page, use {{< ui >}}View in Log Explorer{{< /ui >}} to open a filtered view for a given index.
+To query logs stored in BYOC Logs, select one or more BYOC Logs indexes in the [Log Explorer][2]. You can select a specific index to narrow your search, or select all indexes in a cluster to search across them. From the index configuration page, use {{< ui >}}View in Log Explorer{{< /ui >}} to open a filtered view for a given index.
 
-For more information, see [Search CloudPrem Logs][3].
+For more information, see [Search BYOC Logs][3].
 
 ## Further reading
 
