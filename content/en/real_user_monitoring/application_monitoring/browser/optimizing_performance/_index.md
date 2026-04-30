@@ -48,10 +48,10 @@ From this view, there are two ways to select a page or vital:
 Available vitals include:
 
 - **[Loading Time (LT)][2]**: Datadog's custom KPI that measures the time for a page to load from a user's perspective.
-- **[Largest Contentful Paint (LCP)][8]**: Measures how quickly the largest visual element on your page loads, which is a critical factor in both user experience and SEO rankings. A slow LCP can frustrate users, increase bounce rates, and hurt search visibility.
+- **[Largest Contentful Paint (LCP)][8]**: Measures how quickly the largest visual element on your page loads, which is a critical factor in both user experience and SEO rankings. A slow LCP can frustrate users, increase bounce rates, and hurt search visibility. The Optimization page breaks LCP down into subparts (TTFB, resource load delay, resource load time, render delay) so you can pinpoint which phase contributes most to the overall metric.
 - **[First Contentful Paint (FCP)][9]**: Measures the time from when the user first navigated to the page to when any part of the page's content is rendered on the screen. A fast FCP helps reassure the user that something is happening.
 - **[Cumulative Layout Shift (CLS)][10]**: Measures the largest burst of unexpected layout shifts that occur during a page's life cycle. A layout shift happens when a visible element moves from one rendered frame to the next without any user interaction, disrupting the visual stability of the page. An important KPI for measuring visual stability because it helps quantify how often users experience unexpected layout shifts. A low CLS helps ensure that the page is delightful.
-- **[Interaction to Next Paint (INP)][11]**: Measures how long it takes for a page to visually respond after a user interacts with the page.
+- **[Interaction to Next Paint (INP)][11]**: Measures how long it takes for a page to visually respond after a user interacts with the page. The Optimization page breaks INP down into subparts (input delay, processing duration, presentation delay) so you can identify whether the bottleneck is main-thread contention, handler execution, or rendering.
 
 ## Filter and evaluate
 
@@ -75,6 +75,8 @@ Based on the selected time period and traffic, the Optimization page highlights 
 For some vitals, you can also select other versions of the page to investigate by clicking "See a different element".
 
 {{< img src="real_user_monitoring/browser/optimizing_performance/vitals-visualize.png" alt="Select different elements to preview and visualize the user's experience." style="width:100%;" >}}
+
+For Largest Contentful Paint and Interaction to Next Paint, the Optimization page also displays a subparts breakdown that decomposes the metric into its constituent phases. Use the breakdown to identify which phase contributes most to the overall metric and direct optimization work to the relevant phase. For details on what each subpart represents, see [Diagnose Core Web Vitals with subparts][14].
 
 ## Troubleshoot resources and errors
 
@@ -114,3 +116,4 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 [11]: https://web.dev/articles/inp/
 [12]: /real_user_monitoring/correlate_with_other_telemetry/profiling
 [13]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
+[14]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#diagnose-core-web-vitals-with-subparts
