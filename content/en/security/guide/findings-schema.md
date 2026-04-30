@@ -5,7 +5,7 @@ disable_toc: true
 further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
-  text: "Cloud Security Management"
+  text: "Cloud Security"
 - link: "/security/code_security/"
   tag: "Documentation"
   text: "Code Security"
@@ -1788,8 +1788,8 @@ These attributes are present on all security findings and describe the fundament
     </tr>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@base_severity</code><br>Base severity level of the finding before any adjustments. Valid values: `critical`, `high`, `medium`, `low`, `info`, `none`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@base_severity</code><br>Base severity level of the finding before any adjustments. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>description</code></td>
@@ -1813,8 +1813,8 @@ These attributes are present on all security findings and describe the fundament
     </tr>
     <tr>
       <td><code>finding_type</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@finding_type</code><br>Category of the finding. Valid values: `api_security`, `attack_path`, `runtime_code_vulnerability`, `static_code_vulnerability`, `host_and_container_vulnerability`, `iac_misconfiguration`, `identity_risk`, `library_vulnerability`, `misconfiguration`, `secret`, `workload_activity`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@finding_type</code><br>Category of the finding. Valid values: <code>api_security</code>, <code>attack_path</code>, <code>runtime_code_vulnerability</code>, <code>static_code_vulnerability</code>, <code>host_and_container_vulnerability</code>, <code>iac_misconfiguration</code>, <code>identity_risk</code>, <code>library_vulnerability</code>, <code>misconfiguration</code>, <code>secret</code>, <code>workload_activity</code>, <code>sensitive_data</code>.</td>
     </tr>
     <tr>
       <td><code>first_seen_at</code></td>
@@ -1824,7 +1824,7 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>is_in_security_inbox</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@is_in_security_inbox</code><br>True if the finding appears in the Security Inbox; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@is_in_security_inbox</code><br><code>true</code> if the finding appears in the Security Inbox; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>last_detected_at</code></td>
@@ -1863,8 +1863,8 @@ These attributes are present on all security findings and describe the fundament
     </tr>
     <tr>
       <td><code>severity</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@severity</code><br>Datadog-adjusted severity level of the finding. Valid values: `critical`, `high`, `medium`, `low`, `info`, `none`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@severity</code><br>Datadog-adjusted severity level of the finding. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>source_finding_raw_data</code></td>
@@ -1873,8 +1873,8 @@ These attributes are present on all security findings and describe the fundament
     </tr>
     <tr>
       <td><code>status</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@status</code><br>Workflow status of the finding. Valid values: `open`, `muted`, `auto_closed`, `resolved`, `in-progress`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@status</code><br>Workflow status of the finding. Valid values: <code>open</code>, <code>muted</code>, <code>auto_closed</code>, <code>resolved</code>, <code>in-progress</code>.</td>
     </tr>
     <tr>
       <td><code>time_to_resolution</code></td>
@@ -1904,13 +1904,18 @@ Additional resources. For example, an AWS EC2 instance can have security groups 
   <tbody>
     <tr>
       <td><code>category</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@additional_resources.category</code><br>Category of the additional resource. Valid values: `cloud_resource`, `k8s`, `host`, `service`, `git`, `iac_resource`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@additional_resources.category</code><br>Category of the additional resource. Valid values: <code>cloud_resource</code>, <code>k8s</code>, <code>host</code>, <code>service</code>, <code>git</code>, <code>iac_resource</code>.</td>
     </tr>
     <tr>
       <td><code>configuration</code></td>
       <td>object</td>
       <td><strong>Path:</strong> <code>@additional_resources.configuration</code><br>Configuration of the additional resource.</td>
+    </tr>
+    <tr>
+      <td><code>key</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@additional_resources.key</code><br>Canonical Cloud Resource Identifier (CCRID) of the additional resource when the resource is cloud-backed (for example, when <code>category</code> is <code>cloud_resource</code>). This field may be omitted for non-cloud categories such as <code>k8s</code>, <code>host</code>, <code>service</code>, or <code>git</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -1938,7 +1943,12 @@ Ties a vulnerability to a set of specific software versions. Vulnerability findi
     <tr>
       <td><code>cve</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@advisory.cve</code><br>Primary globally recognized identifier for a security vulnerability, following the `CVE-YYYY-NNNN` format.</td>
+      <td><strong>Path:</strong> <code>@advisory.cve</code><br>Primary globally recognized identifier for a security vulnerability, following the <code>CVE-YYYY-NNNN</code> format.</td>
+    </tr>
+    <tr>
+      <td><code>first_remediation_available_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@advisory.first_remediation_available_at</code><br>Timestamp in milliseconds (UTC) when the first remediation for the advisory became available.</td>
     </tr>
     <tr>
       <td><code>id</code></td>
@@ -1963,14 +1973,14 @@ Ties a vulnerability to a set of specific software versions. Vulnerability findi
     <tr>
       <td><code>type</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@advisory.type</code><br>Type of the advisory. Valid values: `component_with_known_vulnerability`, `unmaintained`, `end_of_life`, `dangerous_workflows`, `risky_license`, `malicious_package`.</td>
+      <td><strong>Path:</strong> <code>@advisory.type</code><br>Type of the advisory. Valid values: <code>component_with_known_vulnerability</code>, <code>unmaintained</code>, <code>end_of_life</code>, <code>dangerous_workflows</code>, <code>risky_license</code>, <code>malicious_package</code>.</td>
     </tr>
   </tbody>
 </table>
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Api Endpoint" level="h3" id="api-endpoint" %}}
+{{% collapse-content title="API Endpoint" level="h3" id="api-endpoint" %}}
 
 HTTP endpoint representation.
 
@@ -1991,7 +2001,7 @@ HTTP endpoint representation.
     <tr>
       <td><code>operation_name</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@api_endpoint.operation_name</code><br>Name of the entry point into a service (for example, `http.request`, `grpc.server`).</td>
+      <td><strong>Path:</strong> <code>@api_endpoint.operation_name</code><br>Name of the entry point into a service (for example, <code>http.request</code>, <code>grpc.server</code>).</td>
     </tr>
     <tr>
       <td><code>path</code></td>
@@ -2006,7 +2016,7 @@ HTTP endpoint representation.
     <tr>
       <td><code>resource_name</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@api_endpoint.resource_name</code><br>Internal identification of the endpoint in the format `&lt;method&gt; &lt;path&gt;`.</td>
+      <td><strong>Path:</strong> <code>@api_endpoint.resource_name</code><br>Internal identification of the endpoint in the format <code>&lt;method&gt; &lt;path&gt;</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -2038,8 +2048,8 @@ Attributes identifying the cloud resource affected by the finding.
     </tr>
     <tr>
       <td><code>cloud_provider</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@cloud_resource.cloud_provider</code><br>Cloud provider hosting the resource. Valid values: `aws`, `azure`, `gcp`, `oci`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@cloud_resource.cloud_provider</code><br>Cloud provider hosting the resource. Valid values: <code>aws</code>, <code>azure</code>, <code>gcp</code>, <code>oci</code>.</td>
     </tr>
     <tr>
       <td><code>cloud_provider_url</code></td>
@@ -2143,7 +2153,7 @@ Attributes pinpointing the specific file and line numbers where the finding is l
     <tr>
       <td><code>is_test_file</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@code_location.is_test_file</code><br>True if the code file is a test file; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@code_location.is_test_file</code><br><code>true</code> if the code file is a test file; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>line_end</code></td>
@@ -2184,9 +2194,14 @@ Information specific to compliance findings, such as compliance rule or evaluati
   </thead>
   <tbody>
     <tr>
-      <td><code>evaluation</code></td>
+      <td><code>agent</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@compliance.evaluation</code><br>Compliance evaluation result. Valid values: `pass` (resource is properly configured), `fail` (resource is misconfigured).</td>
+      <td><strong>Path:</strong> <code>@compliance.agent</code><br>Metadata about the compliance agent that produced the finding.</td>
+    </tr>
+    <tr>
+      <td><code>evaluation</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@compliance.evaluation</code><br>Compliance evaluation result. Valid values: <code>pass</code> (resource is properly configured), <code>fail</code> (resource is misconfigured).</td>
     </tr>
     <tr>
       <td><code>frameworks</code></td>
@@ -2196,11 +2211,52 @@ Information specific to compliance findings, such as compliance rule or evaluati
   </tbody>
 </table>
 
+### Agent
+
+Metadata about the compliance agent that produced the finding.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>agent_framework_id</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@compliance.agent.agent_framework_id</code><br>Identifier of the compliance framework used by the agent.</td>
+    </tr>
+    <tr>
+      <td><code>agent_rule_id</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@compliance.agent.agent_rule_id</code><br>Identifier of the agent rule that triggered the finding.</td>
+    </tr>
+    <tr>
+      <td><code>agent_version</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@compliance.agent.agent_version</code><br>Version of the compliance agent that produced the finding.</td>
+    </tr>
+    <tr>
+      <td><code>data</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@compliance.agent.data</code><br>Additional data produced by the compliance agent evaluation.</td>
+    </tr>
+    <tr>
+      <td><code>evaluator</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@compliance.agent.evaluator</code><br>Name of the evaluator that assessed the compliance finding.</td>
+    </tr>
+  </tbody>
+</table>
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Container Image" level="h3" id="container-image" %}}
 
--
+Container image where the finding was detected, including registry, repository, and digest information.
 
 <table>
   <thead>
@@ -2224,12 +2280,12 @@ Information specific to compliance findings, such as compliance rule or evaluati
     <tr>
       <td><code>image_layer_diff_ids</code></td>
       <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@container_image.image_layer_diff_ids</code><br>-</td>
+      <td><strong>Path:</strong> <code>@container_image.image_layer_diff_ids</code><br>Diff IDs of the image layers, in the order they were applied. Each diff ID is the SHA256 of the uncompressed layer contents.</td>
     </tr>
     <tr>
       <td><code>image_layer_digests</code></td>
       <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@container_image.image_layer_digests</code><br>-</td>
+      <td><strong>Path:</strong> <code>@container_image.image_layer_digests</code><br>Digests of the image layers, in the order they were applied. Each digest is the SHA256 of the compressed layer blob.</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2259,7 +2315,7 @@ Information specific to compliance findings, such as compliance rule or evaluati
     <tr>
       <td><code>tags</code></td>
       <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@container_image.tags</code><br>Tag part of the container image name (for example, `latest` or `1.2.3`).</td>
+      <td><strong>Path:</strong> <code>@container_image.tags</code><br>Tag part of the container image name (for example, <code>latest</code> or <code>1.2.3</code>).</td>
     </tr>
     <tr>
       <td><code>versions</code></td>
@@ -2269,7 +2325,7 @@ Information specific to compliance findings, such as compliance rule or evaluati
   </tbody>
 </table>
 
-### Oses
+### Operating Systems
 
 Operating systems associated with the container image.
 
@@ -2366,7 +2422,7 @@ Git metadata linking a finding to source code context. Includes information abou
     <tr>
       <td><code>is_default_branch</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@git.is_default_branch</code><br>True if the current branch is the default branch for the repository; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@git.is_default_branch</code><br><code>true</code> if the current branch is the default branch for the repository; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>repository_id</code></td>
@@ -2380,8 +2436,8 @@ Git metadata linking a finding to source code context. Includes information abou
     </tr>
     <tr>
       <td><code>repository_visibility</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@git.repository_visibility</code><br>Visibility of the repository. Valid values: `public`, `private`, `not_detected`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@git.repository_visibility</code><br>Visibility of the repository. Valid values: <code>public</code>, <code>private</code>, <code>not_detected</code>.</td>
     </tr>
     <tr>
       <td><code>sha</code></td>
@@ -2457,7 +2513,7 @@ Details about the committer.
 
 {{% collapse-content title="Host" level="h3" id="host" %}}
 
-Host information.
+Information about the host machine where the finding was detected.
 
 <table>
   <thead>
@@ -2475,13 +2531,13 @@ Host information.
     </tr>
     <tr>
       <td><code>cloud_provider</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@host.cloud_provider</code><br>Cloud provider the host belongs to.</td>
     </tr>
     <tr>
       <td><code>image</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@host.image</code><br>Name of the host image used to build the host (for example, `ami-1234`).</td>
+      <td><strong>Path:</strong> <code>@host.image</code><br>Name of the host image used to build the host (for example, <code>ami-1234</code>).</td>
     </tr>
     <tr>
       <td><code>key</code></td>
@@ -2501,7 +2557,7 @@ Host information.
   </tbody>
 </table>
 
-### Os
+### Operating System
 
 Attributes of the operating system running on the host.
 
@@ -2529,7 +2585,7 @@ Attributes of the operating system running on the host.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Iac Resource" level="h3" id="iac-resource" %}}
+{{% collapse-content title="IaC Resource" level="h3" id="iac-resource" %}}
 
 Attributes identifying the Infrastructure as Code (IaC) resource related to the finding.
 
@@ -2544,20 +2600,20 @@ Attributes identifying the Infrastructure as Code (IaC) resource related to the 
   <tbody>
     <tr>
       <td><code>platform</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@iac_resource.platform</code><br>IaC (Infrastructure as Code) platform the vulnerability was found on (for example, `terraform`, `kubernetes`).</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.platform</code><br>IaC (Infrastructure as Code) platform the vulnerability was found on (for example, <code>terraform</code>, <code>kubernetes</code>).</td>
     </tr>
     <tr>
       <td><code>provider</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@iac_resource.provider</code><br>IaC (Infrastructure as Code) provider where the resource is defined (for example, `aws`, `gcp`, `azure`).</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.provider</code><br>IaC (Infrastructure as Code) provider where the resource is defined (for example, <code>aws</code>, <code>gcp</code>, <code>azure</code>).</td>
     </tr>
   </tbody>
 </table>
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="K8S" level="h3" id="k8s" %}}
+{{% collapse-content title="Kubernetes" level="h3" id="k8s" %}}
 
 Kubernetes information for findings generated against Kubernetes resources.
 
@@ -2596,7 +2652,7 @@ Additional metadata about the finding, such as schema version or source context.
     <tr>
       <td><code>schema_version</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@metadata.schema_version</code><br>Indicates the findings schema version used for the finding. Current version: `2`.</td>
+      <td><strong>Path:</strong> <code>@metadata.schema_version</code><br>Indicates the findings schema version used for the finding. Current version: <code>2</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -2633,32 +2689,32 @@ Package manager information. A package manager automates the installation, upgra
     </tr>
     <tr>
       <td><code>dependency_type</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@package.dependency_type</code><br>Whether the package is a direct dependency, transitive dependency, or not supported if the information cannot be retrieved.</td>
     </tr>
     <tr>
       <td><code>has_suid</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.has_suid</code><br>True if the package has the SUID bit set; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@package.has_suid</code><br><code>true</code> if the package has the SUID bit set; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_running</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.is_running</code><br>True if the package is currently running; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@package.is_running</code><br><code>true</code> if the package is currently running; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_running_as_root</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.is_running_as_root</code><br>True if the package is currently running as root; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@package.is_running_as_root</code><br><code>true</code> if the package is currently running as root; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>loading_type</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@package.loading_type</code><br>Whether the component is always loaded and running (`hot`), running infrequently (`cold`), or loaded on demand (`lazy`).</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@package.loading_type</code><br>Whether the component is always loaded and running (<code>hot</code>), running infrequently (<code>cold</code>), or loaded on demand (<code>lazy</code>).</td>
     </tr>
     <tr>
       <td><code>manager</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@package.manager</code><br>Package management ecosystem or source registry the vulnerable component originates from.</td>
     </tr>
     <tr>
@@ -2678,8 +2734,8 @@ Package manager information. A package manager automates the installation, upgra
     </tr>
     <tr>
       <td><code>scope</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@package.scope</code><br>Intended usage scope of the package (`production` or `development`).</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@package.scope</code><br>Intended usage scope of the package (<code>production</code> or <code>development</code>).</td>
     </tr>
     <tr>
       <td><code>version</code></td>
@@ -2751,7 +2807,7 @@ Location of the code that declares the whole dependency declaration.
     <tr>
       <td><code>is_test_file</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.declaration.block.is_test_file</code><br>True if the code file is a test file; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@package.declaration.block.is_test_file</code><br><code>true</code> if the code file is a test file; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>line_end</code></td>
@@ -2807,7 +2863,7 @@ Location of the code that declares the dependency name.
     <tr>
       <td><code>is_test_file</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.declaration.name.is_test_file</code><br>True if the code file is a test file; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@package.declaration.name.is_test_file</code><br><code>true</code> if the code file is a test file; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>line_end</code></td>
@@ -2863,7 +2919,7 @@ Version declared for the root parent.
     <tr>
       <td><code>is_test_file</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.declaration.version.is_test_file</code><br>True if the code file is a test file; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@package.declaration.version.is_test_file</code><br><code>true</code> if the code file is a test file; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>line_end</code></td>
@@ -2986,7 +3042,7 @@ Location of the code that declares the whole dependency declaration.
     <tr>
       <td><code>is_test_file</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.root_parents.declaration.block.is_test_file</code><br>True if the code file is a test file; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@package.root_parents.declaration.block.is_test_file</code><br><code>true</code> if the code file is a test file; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>line_end</code></td>
@@ -3042,7 +3098,7 @@ Location of the code that declares the dependency name.
     <tr>
       <td><code>is_test_file</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.root_parents.declaration.name.is_test_file</code><br>True if the code file is a test file; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@package.root_parents.declaration.name.is_test_file</code><br><code>true</code> if the code file is a test file; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>line_end</code></td>
@@ -3098,7 +3154,7 @@ Version declared for the root parent.
     <tr>
       <td><code>is_test_file</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@package.root_parents.declaration.version.is_test_file</code><br>True if the code file is a test file; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@package.root_parents.declaration.version.is_test_file</code><br><code>true</code> if the code file is a test file; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>line_end</code></td>
@@ -3166,7 +3222,7 @@ Information about the finding's remediation.
     <tr>
       <td><code>is_available</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.is_available</code><br>True if a remediation is currently available for the finding; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@remediation.is_available</code><br><code>true</code> if a remediation is currently available for the finding; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>microsoft_kb</code></td>
@@ -3185,7 +3241,7 @@ Information about the finding's remediation.
     </tr>
     <tr>
       <td><code>recommended_type</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.recommended_type</code><br>Recommended remediation type for the finding.</td>
     </tr>
     <tr>
@@ -3257,7 +3313,7 @@ Code changes required to remediate the finding.
     </tr>
     <tr>
       <td><code>type</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.code_update.edits.type</code><br>Nature of the code change.</td>
     </tr>
   </tbody>
@@ -3283,8 +3339,8 @@ Finding status for the code generation platform.
     </tr>
     <tr>
       <td><code>status</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.codegen.status</code><br>Status of the automated fix generation. Valid values: `generated`, `not_available_non_default_branch`, `not_available_unsupported_tool`, `not_available_unsupported_rule`, `not_available_disabled`, `not_available_git_provider_not_supported`, `not_available_confidence_too_low`, `error`, `not_available_has_deterministic_fixes`, `not_available_unknown_reason`, `not_available_org_not_onboarded`, `not_available_repository_disabled`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.codegen.status</code><br>Status of the automated fix generation. Valid values: <code>generated</code>, <code>not_available_non_default_branch</code>, <code>not_available_unsupported_tool</code>, <code>not_available_unsupported_rule</code>, <code>not_available_disabled</code>, <code>not_available_git_provider_not_supported</code>, <code>not_available_confidence_too_low</code>, <code>error</code>, <code>not_available_has_deterministic_fixes</code>, <code>not_available_unknown_reason</code>, <code>not_available_org_not_onboarded</code>, <code>not_available_repository_disabled</code>, <code>not_available_unsupported_resource_type</code>, <code>not_available_unsupported_ecosystem</code>, <code>not_available_severity_too_low</code>, <code>not_available_transitive_library</code>, <code>not_available_no_remediation</code>, <code>not_available_unsupported_vulnerability_type</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -3383,7 +3439,7 @@ Information about the latest Amazon Machine Image (AMI) that may remediate the v
     <tr>
       <td><code>name</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.host_image.latest_major.name</code><br>Name of the latest Amazon Machine Image (for example, `ami-12345678`) that may remediate the vulnerability.</td>
+      <td><strong>Path:</strong> <code>@remediation.host_image.latest_major.name</code><br>Name of the latest Amazon Machine Image (for example, <code>ami-12345678</code>) that may remediate the vulnerability.</td>
     </tr>
   </tbody>
 </table>
@@ -3542,7 +3598,7 @@ Advisories that the remediation will fix.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.base.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -3568,7 +3624,7 @@ Advisories that will appear if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.base.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -3594,7 +3650,7 @@ Advisories that will remain unfixed if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.base.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -3676,7 +3732,7 @@ Advisories that the remediation will fix.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -3702,7 +3758,7 @@ Advisories that will appear if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -3728,7 +3784,7 @@ Advisories that will remain unfixed if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -3810,7 +3866,7 @@ Advisories that the remediation will fix.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -3836,7 +3892,7 @@ Advisories that will appear if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -3862,7 +3918,7 @@ Advisories that will remain unfixed if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -3944,7 +4000,7 @@ Advisories that the remediation will fix.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -3970,7 +4026,7 @@ Advisories that will appear if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -3996,7 +4052,7 @@ Advisories that will remain unfixed if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4078,7 +4134,7 @@ Advisories that the remediation will fix.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4104,7 +4160,7 @@ Advisories that will appear if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4130,7 +4186,7 @@ Advisories that will remain unfixed if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4253,7 +4309,7 @@ Advisories that the remediation will fix.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.base.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4279,7 +4335,7 @@ Advisories that will appear if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.base.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4305,7 +4361,7 @@ Advisories that will remain unfixed if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.base.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4387,7 +4443,7 @@ Advisories that the remediation will fix.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4413,7 +4469,7 @@ Advisories that will appear if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4439,7 +4495,7 @@ Advisories that will remain unfixed if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4521,7 +4577,7 @@ Advisories that the remediation will fix.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4547,7 +4603,7 @@ Advisories that will appear if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4573,7 +4629,7 @@ Advisories that will remain unfixed if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4655,7 +4711,7 @@ Advisories that the remediation will fix.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4681,7 +4737,7 @@ Advisories that will appear if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4707,7 +4763,7 @@ Advisories that will remain unfixed if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4789,7 +4845,7 @@ Advisories that the remediation will fix.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.fixed_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4815,7 +4871,7 @@ Advisories that will appear if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.new_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4841,7 +4897,7 @@ Advisories that will remain unfixed if the remediation is applied.
   <tbody>
     <tr>
       <td><code>base_severity</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.remaining_advisories.base_severity</code><br>Base severity of the advisory that the remediation will fix.</td>
     </tr>
     <tr>
@@ -4870,92 +4926,92 @@ Risk-related attributes for the finding. Each key must have a matching key in th
     <tr>
       <td><code>has_exploit_available</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.has_exploit_available</code><br>True if known exploits exist for the finding; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.has_exploit_available</code><br><code>true</code> if known exploits exist for the finding; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>has_high_exploitability_chance</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.has_high_exploitability_chance</code><br>True if the EPSS (Exploit Prediction Scoring System) score is above 1%; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.has_high_exploitability_chance</code><br><code>true</code> if the EPSS (Exploit Prediction Scoring System) score is above 1%; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>has_privileged_access</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.has_privileged_access</code><br>True if the finding's resource is running with elevated privileges or has the ability to assume a privileged role; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.has_privileged_access</code><br><code>true</code> if the finding's resource is running with elevated privileges or has the ability to assume a privileged role; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>has_sensitive_data</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.has_sensitive_data</code><br>True if the finding has access to a resource that contains sensitive data; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.has_sensitive_data</code><br><code>true</code> if the finding has access to a resource that contains sensitive data; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_authenticated</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_authenticated</code><br>`true` if the API endpoint requires authentication to access, `false` if the endpoint does not require authentication. Omitted if authentication status is unknown.</td>
+      <td><strong>Path:</strong> <code>@risk.is_authenticated</code><br><code>true</code> if the API endpoint requires authentication to access, <code>false</code> if the endpoint does not require authentication. Omitted if authentication status is unknown.</td>
     </tr>
     <tr>
-      <td><code>is_critical_resource</code></td>
+      <td><code>is_crown_jewel</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_critical_resource</code><br>`true` if the affected resource is critical to your business; `false` otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_crown_jewel</code><br><code>true</code> if the affected resource is critical to your business; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_emerging</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_emerging</code><br>`true` if the vulnerability is linked to an advisory classified as an emerging vulnerability, `false` otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_emerging</code><br><code>true</code> if the vulnerability is linked to an advisory classified as an emerging vulnerability, <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_exposed_to_attacks</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_exposed_to_attacks</code><br>True if attacks have already been detected on the resource; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_exposed_to_attacks</code><br><code>true</code> if attacks have already been detected on the resource; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_function_reachable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_function_reachable</code><br>True if the vulnerable function can be executed; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_function_reachable</code><br><code>true</code> if the vulnerable function can be executed; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_image_running</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_image_running</code><br>True if the image of the finding's resource has running containers or hosts; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_image_running</code><br><code>true</code> if the image of the finding's resource has running containers or hosts; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_kernel_running</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_kernel_running</code><br>True if the vulnerability affects the kernel currently running on the host; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_kernel_running</code><br><code>true</code> if the vulnerability affects the kernel currently running on the host; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_package_running</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_package_running</code><br>True if the package of the finding's resource is running; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_package_running</code><br><code>true</code> if the package of the finding's resource is running; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_production</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_production</code><br>True if the finding's resource is running in production; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_production</code><br><code>true</code> if the finding's resource is running in production; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_publicly_accessible</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_publicly_accessible</code><br>True if the finding's resource is publicly accessible; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_publicly_accessible</code><br><code>true</code> if the finding's resource is publicly accessible; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_tainted_from_database</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_tainted_from_database</code><br>True if the string is tainted due to originating from an untrusted database source; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_tainted_from_database</code><br><code>true</code> if the string is tainted due to originating from an untrusted database source; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_tainted_from_query_string</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_tainted_from_query_string</code><br>True if the string is tainted with elements derived from an HTTP query string; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_tainted_from_query_string</code><br><code>true</code> if the string is tainted with elements derived from an HTTP query string; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_tainted_from_request_url</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_tainted_from_request_url</code><br>True if the final URL contains tainted parts originating from the request URL; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_tainted_from_request_url</code><br><code>true</code> if the final URL contains tainted parts originating from the request URL; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>is_using_sha1</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk.is_using_sha1</code><br>True if SHA1 is used in a weak hash; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk.is_using_sha1</code><br><code>true</code> if SHA1 is used in a weak hash; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5001,9 +5057,9 @@ Contextual risk factors that help assess the potential impact of a finding. Thes
       <td><strong>Path:</strong> <code>@risk_details.is_authenticated</code><br>Evidence and indicators about whether the API endpoint requires authentication.</td>
     </tr>
     <tr>
-      <td><code>is_critical_resource</code></td>
+      <td><code>is_crown_jewel</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_critical_resource</code><br>Evidence and indicators about whether the affected resource is critical.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel</code><br>Evidence and indicators about whether the affected resource is critical.</td>
     </tr>
     <tr>
       <td><code>is_emerging</code></td>
@@ -5088,13 +5144,13 @@ Information about whether a known exploit exists for the finding advisory.
     </tr>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.impact_cvss</code><br>How the availability of known exploits changes the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.impact_cvss</code><br>How the availability of known exploits changes the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.value</code><br>True if known exploits exist for the finding; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.value</code><br><code>true</code> if known exploits exist for the finding; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5115,7 +5171,7 @@ Evidence of exploit availability.
     <tr>
       <td><code>exploit_sources</code></td>
       <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.evidence.exploit_sources</code><br>Exploit sources associated with the finding (for example, `NIST`, `CISA`, `Exploit-DB`).</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.evidence.exploit_sources</code><br>Exploit sources associated with the finding (for example, <code>NIST</code>, <code>CISA</code>, <code>Exploit-DB</code>).</td>
     </tr>
     <tr>
       <td><code>exploit_urls</code></td>
@@ -5124,8 +5180,8 @@ Evidence of exploit availability.
     </tr>
     <tr>
       <td><code>type</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.evidence.type</code><br>Type of exploit availability evidence. Valid values: `production_ready`, `poc`, `unavailable`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_exploit_available.evidence.type</code><br>Type of exploit availability evidence. Valid values: <code>production_ready</code>, <code>poc</code>, <code>unavailable</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -5150,13 +5206,13 @@ Evidence and indicators about whether the vulnerability is likely to be exploite
     </tr>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.impact_cvss</code><br>How high exploitability chance affects the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.impact_cvss</code><br>How high exploitability chance affects the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.value</code><br>True if the EPSS score is above 1%; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.value</code><br><code>true</code> if the EPSS score is above 1%; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5181,8 +5237,8 @@ Evidence for the EPSS score.
     </tr>
     <tr>
       <td><code>epss_severity</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.evidence.epss_severity</code><br>EPSS score severity level. Valid values: `Critical`, `High`, `Medium`, `Low`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_high_exploitability_chance.evidence.epss_severity</code><br>EPSS score severity level. Valid values: <code>Critical</code>, <code>High</code>, <code>Medium</code>, <code>Low</code>.</td>
     </tr>
     <tr>
       <td><code>threshold</code></td>
@@ -5212,13 +5268,13 @@ Evidence and indicators about whether the resource has privileged access.
     </tr>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_privileged_access.impact_cvss</code><br>How privileged access changes the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_privileged_access.impact_cvss</code><br>How privileged access changes the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_privileged_access.value</code><br>True if the resource associated with the finding has privileged access; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_privileged_access.value</code><br><code>true</code> if the resource associated with the finding has privileged access; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5264,13 +5320,13 @@ Evidence and indicators about whether the affected resource has sensitive data.
     </tr>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data.impact_cvss</code><br>How sensitive data presence changes the CVSS score. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data.impact_cvss</code><br>How sensitive data presence changes the CVSS score. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data.value</code><br>Same as `risk.has_sensitive_data`.</td>
+      <td><strong>Path:</strong> <code>@risk_details.has_sensitive_data.value</code><br>Same as <code>risk.has_sensitive_data</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -5312,12 +5368,12 @@ Evidence and indicators about whether the API endpoint requires authentication.
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_authenticated.value</code><br>Same as `risk.is_authenticated`.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_authenticated.value</code><br>Same as <code>risk.is_authenticated</code>.</td>
     </tr>
   </tbody>
 </table>
 
-### Is Critical Resource
+### Is Crown Jewel
 
 Evidence and indicators about whether the affected resource is critical.
 
@@ -5333,17 +5389,17 @@ Evidence and indicators about whether the affected resource is critical.
     <tr>
       <td><code>evidence</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_critical_resource.evidence</code><br>Evidence used to identify the resource as being critical.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.evidence</code><br>Evidence used to identify the resource as being critical.</td>
     </tr>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_critical_resource.impact_cvss</code><br>How resource criticality changes the CVSS score. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.impact_cvss</code><br>How resource criticality changes the CVSS score. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_critical_resource.value</code><br>`true` if the resource is critical to your business; `false` otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.value</code><br><code>true</code> if the resource is critical to your business; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5364,12 +5420,12 @@ Evidence used to identify the resource as being critical.
     <tr>
       <td><code>explanation</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_critical_resource.evidence.explanation</code><br>Markdown-formatted explanation detailing why the resource or related resource is identified as critical.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.evidence.explanation</code><br>Markdown-formatted explanation detailing why the resource or related resource is identified as critical.</td>
     </tr>
     <tr>
       <td><code>related_resource_name</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_critical_resource.evidence.related_resource_name</code><br>Name of a long-lived critical asset, such as a critical service, that justifies why the affected resource is considered critical.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.evidence.related_resource_name</code><br>Name of a long-lived critical asset, such as a critical service, that justifies why the affected resource is considered critical.</td>
     </tr>
   </tbody>
 </table>
@@ -5389,13 +5445,13 @@ Evidence and indicators about whether the vulnerability is classified as an emer
   <tbody>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_emerging.impact_cvss</code><br>How emerging vulnerability status affects the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_emerging.impact_cvss</code><br>How emerging vulnerability status affects the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_emerging.value</code><br>Same as `risk.is_emerging`.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_emerging.value</code><br>Same as <code>risk.is_emerging</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -5420,13 +5476,13 @@ Evidence and indicators about whether the service where the finding was detected
     </tr>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_exposed_to_attacks.impact_cvss</code><br>How the resource's exposure affects the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_exposed_to_attacks.impact_cvss</code><br>How the resource's exposure affects the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_exposed_to_attacks.value</code><br>Same as `risk.is_exposed_to_attacks`.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_exposed_to_attacks.value</code><br>Same as <code>risk.is_exposed_to_attacks</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -5482,13 +5538,13 @@ Evidence and indicators about whether the vulnerable function or module is used 
     </tr>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.impact_cvss</code><br>How function reachability changes the CVSS risk assessment. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.impact_cvss</code><br>How function reachability changes the CVSS risk assessment. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.value</code><br>True if the function is reachable; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.value</code><br><code>true</code> if the function is reachable; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5513,8 +5569,8 @@ Evidence used to determine whether the function is reachable.
     </tr>
     <tr>
       <td><code>not_supported_reason</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.not_supported_reason</code><br>Reason why reachability analysis is not supported for this finding. Valid values: `language_not_supported`, `vulnerable_symbol_not_available`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.not_supported_reason</code><br>Reason why reachability analysis is not supported for this finding. Valid values: <code>language_not_supported</code>, <code>vulnerable_symbol_not_available</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -5550,7 +5606,7 @@ Array of code locations where the function is called.
     <tr>
       <td><code>is_test_file</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.is_test_file</code><br>True if the code file is a test file; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_function_reachable.evidence.locations.is_test_file</code><br><code>true</code> if the code file is a test file; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>line_end</code></td>
@@ -5595,13 +5651,13 @@ Evidence and indicators about whether the affected image has running containers 
     </tr>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_image_running.impact_cvss</code><br>How running containers or hosts affects the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_image_running.impact_cvss</code><br>How running containers or hosts affects the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_image_running.value</code><br>True if the image of the finding's resource has running containers or hosts; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_image_running.value</code><br><code>true</code> if the image of the finding's resource has running containers or hosts; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5648,7 +5704,7 @@ Evidence and indicators about whether the vulnerability affects the kernel curre
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_kernel_running.value</code><br>True if the vulnerability affects the kernel currently running on the host; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_kernel_running.value</code><br><code>true</code> if the vulnerability affects the kernel currently running on the host; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5689,13 +5745,13 @@ Evidence and indicators about whether the affected package is running.
   <tbody>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_package_running.impact_cvss</code><br>How a running package affects the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_package_running.impact_cvss</code><br>How a running package affects the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_package_running.value</code><br>True if the package of the finding's resource is running; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_package_running.value</code><br><code>true</code> if the package of the finding's resource is running; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5716,17 +5772,17 @@ Evidence and indicators about whether the resource associated with the finding i
     <tr>
       <td><code>evidence</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_production.evidence</code><br>The `env` tag value that determines whether the resource is in production.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_production.evidence</code><br>The <code>env</code> tag value that determines whether the resource is in production.</td>
     </tr>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_production.impact_cvss</code><br>How production environment status affects the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_production.impact_cvss</code><br>How production environment status affects the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_production.value</code><br>Same as `risk.is_production`.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_production.value</code><br>Same as <code>risk.is_production</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -5751,13 +5807,13 @@ Information about whether the affected resource is accessible from the public in
     </tr>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_publicly_accessible.impact_cvss</code><br>How public accessibility affects the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_publicly_accessible.impact_cvss</code><br>How public accessibility affects the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_publicly_accessible.value</code><br>Same as `risk.is_publicly_accessible`.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_publicly_accessible.value</code><br>Same as <code>risk.is_publicly_accessible</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -5798,13 +5854,13 @@ Information about whether tainted parts originate from a database.
   <tbody>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_database.impact_cvss</code><br>How database tainting changes the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_database.impact_cvss</code><br>How database tainting changes the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_database.value</code><br>True if the string is tainted due to originating from an untrusted database source; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_database.value</code><br><code>true</code> if the string is tainted due to originating from an untrusted database source; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5824,13 +5880,13 @@ Information about whether the tainted parts originated from a query string.
   <tbody>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_query_string.impact_cvss</code><br>How query string tainting changes the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_query_string.impact_cvss</code><br>How query string tainting changes the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_query_string.value</code><br>True if the string contains elements derived from an HTTP query string; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_query_string.value</code><br><code>true</code> if the string contains elements derived from an HTTP query string; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5850,13 +5906,13 @@ Information about whether the tainted parts originate from the request URL.
   <tbody>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_request_url.impact_cvss</code><br>How request URL tainting changes the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_request_url.impact_cvss</code><br>How request URL tainting changes the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_request_url.value</code><br>True if the final URL contains tainted parts originating from the request URL; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_tainted_from_request_url.value</code><br><code>true</code> if the final URL contains tainted parts originating from the request URL; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5876,13 +5932,13 @@ Information about whether SHA1 is used in a weak hash.
   <tbody>
     <tr>
       <td><code>impact_cvss</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_using_sha1.impact_cvss</code><br>How SHA1 usage changes the CVSS scoring. Valid values: `riskier`, `neutral`, `safer`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_using_sha1.impact_cvss</code><br>How SHA1 usage changes the CVSS scoring. Valid values: <code>riskier</code>, <code>neutral</code>, <code>safer</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@risk_details.is_using_sha1.value</code><br>True if SHA1 is used in a weak hash; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_using_sha1.value</code><br><code>true</code> if SHA1 is used in a weak hash; <code>false</code> otherwise.</td>
     </tr>
   </tbody>
 </table>
@@ -5946,6 +6002,11 @@ Groups attributes related to runtime context.
   </thead>
   <tbody>
     <tr>
+      <td><code>database_monitoring</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@runtime_context.database_monitoring</code><br>Contains database monitoring context associated with the finding.</td>
+    </tr>
+    <tr>
       <td><code>span_id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@runtime_context.span_id</code><br>Span identifier where the finding was detected. Available only for IAST (Interactive Application Security Testing).</td>
@@ -5959,6 +6020,32 @@ Groups attributes related to runtime context.
       <td><code>trace_id</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@runtime_context.trace_id</code><br>Trace identifier where the finding was detected. Available only for IAST (Interactive Application Security Testing).</td>
+    </tr>
+  </tbody>
+</table>
+
+### Database Monitoring
+
+Contains database monitoring context associated with the finding.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>database_instances</code></td>
+      <td>array (string)</td>
+      <td><strong>Path:</strong> <code>@runtime_context.database_monitoring.database_instances</code><br>Identifiers for the database instances affected by the finding.</td>
+    </tr>
+    <tr>
+      <td><code>query_signature</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@runtime_context.database_monitoring.query_signature</code><br>Hash of the normalized SQL query associated with the finding.</td>
     </tr>
   </tbody>
 </table>
@@ -5980,7 +6067,7 @@ Groups attributes related to runtime context.
   <tbody>
     <tr>
       <td><code>validation_status</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@secret.validation_status</code><br>Result of attempting to validate if the secret is active.</td>
     </tr>
   </tbody>
@@ -6067,13 +6154,13 @@ Adjusted severity of the finding after accounting for contextual or environmenta
     </tr>
     <tr>
       <td><code>value</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@severity_details.adjusted.value</code><br>Severity level. Valid values: `critical`, `high`, `medium`, `low`, `info`, `none`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@severity_details.adjusted.value</code><br>Severity level. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value_id</code></td>
       <td>integer</td>
-      <td><strong>Path:</strong> <code>@severity_details.adjusted.value_id</code><br>Numeric representation of the severity. Values: `critical` = `10`, `high` = `9`, `medium` = `7`, `low` = `4`, `none` = `0`.</td>
+      <td><strong>Path:</strong> <code>@severity_details.adjusted.value_id</code><br>Numeric representation of the severity. Values: <code>critical</code> = <code>10</code>, <code>high</code> = <code>9</code>, <code>medium</code> = <code>7</code>, <code>low</code> = <code>4</code>, <code>none</code> = <code>0</code>.</td>
     </tr>
     <tr>
       <td><code>vector</code></td>
@@ -6103,13 +6190,13 @@ Base severity of the finding as defined by the original rule, advisory, or scann
     </tr>
     <tr>
       <td><code>value</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@severity_details.base.value</code><br>Severity level. Valid values: `critical`, `high`, `medium`, `low`, `info`, `none`, `unknown`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@severity_details.base.value</code><br>Severity level. Valid values: <code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code>, <code>info</code>, <code>none</code>, <code>unknown</code>.</td>
     </tr>
     <tr>
       <td><code>value_id</code></td>
       <td>integer</td>
-      <td><strong>Path:</strong> <code>@severity_details.base.value_id</code><br>Numeric representation of the severity. Values: `critical` = `10`, `high` = `9`, `medium` = `7`, `low` = `4`, `none` = `0`.</td>
+      <td><strong>Path:</strong> <code>@severity_details.base.value_id</code><br>Numeric representation of the severity. Values: <code>critical</code> = <code>10</code>, <code>high</code> = <code>9</code>, <code>medium</code> = <code>7</code>, <code>low</code> = <code>4</code>, <code>none</code> = <code>0</code>.</td>
     </tr>
     <tr>
       <td><code>vector</code></td>
@@ -6136,7 +6223,7 @@ Information specific to vulnerabilities.
   <tbody>
     <tr>
       <td><code>confidence</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@vulnerability.confidence</code><br>The assessed likelihood of the vulnerability being a true positive.</td>
     </tr>
     <tr>
@@ -6147,7 +6234,7 @@ Information specific to vulnerabilities.
     <tr>
       <td><code>cwes</code></td>
       <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@vulnerability.cwes</code><br>CWE (Common Weakness Enumeration) identifier associated with the vulnerability. Each entry must use the `CWE-&lt;id&gt;` format (for example, `CWE-416`).</td>
+      <td><strong>Path:</strong> <code>@vulnerability.cwes</code><br>CWE (Common Weakness Enumeration) identifier associated with the vulnerability. Each entry must use the <code>CWE-&lt;id&gt;</code> format (for example, <code>CWE-416</code>).</td>
     </tr>
     <tr>
       <td><code>first_commit</code></td>
@@ -6162,7 +6249,7 @@ Information specific to vulnerabilities.
     <tr>
       <td><code>is_emerging</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@vulnerability.is_emerging</code><br>True if the vulnerability is classified as an emerging threat; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@vulnerability.is_emerging</code><br><code>true</code> if the vulnerability is classified as an emerging threat; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>last_commit</code></td>
@@ -6197,7 +6284,7 @@ The technological stack where the vulnerability was found.
   <tbody>
     <tr>
       <td><code>ecosystem</code></td>
-      <td>object</td>
+      <td>string</td>
       <td><strong>Path:</strong> <code>@vulnerability.stack.ecosystem</code><br>The package management ecosystem or source registry the vulnerable component originated from.</td>
     </tr>
     <tr>
@@ -6281,8 +6368,8 @@ Information about any automation rules that apply to the finding.
     </tr>
     <tr>
       <td><code>rule_type</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.automations.rule_type</code><br>Type of the automation rule applying to the finding. Valid values: `mute`, `due_date`, `security_inbox`, `ticket_creation`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@workflow.automations.rule_type</code><br>Type of the automation rule applying to the finding. Valid values: <code>mute</code>, <code>due_date</code>, <code>security_inbox</code>, <code>ticket_creation</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -6308,7 +6395,7 @@ Due date rule applied to the finding.
     <tr>
       <td><code>is_overdue</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@workflow.due_date.is_overdue</code><br>True if the due date has been reached; false otherwise.</td>
+      <td><strong>Path:</strong> <code>@workflow.due_date.is_overdue</code><br><code>true</code> if the due date has been reached; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>rule_id</code></td>
@@ -6339,7 +6426,7 @@ Integrations like Jira, Case Management, or ServiceNow used to triage and remedi
     <tr>
       <td><code>jira</code></td>
       <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.jira</code><br>Jira issue keys attached to the finding in the format `&lt;PROJECT&gt;-&lt;NUMBER&gt;` (for example, `PROJ-123`).</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.jira</code><br>Jira issue keys attached to the finding in the format <code>&lt;PROJECT&gt;-&lt;NUMBER&gt;</code> (for example, <code>PROJ-123</code>).</td>
     </tr>
   </tbody>
 </table>
@@ -6385,7 +6472,7 @@ Array of cases attached to the finding.
     <tr>
       <td><code>key</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.cases.key</code><br>Human-readable identifier for the case in the format `PROJECT-NUMBER` (for example, `CSMINV-66`).</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.cases.key</code><br>Human-readable identifier for the case in the format <code>PROJECT-NUMBER</code> (for example, <code>CSMINV-66</code>).</td>
     </tr>
     <tr>
       <td><code>servicenow_ticket</code></td>
@@ -6483,7 +6570,7 @@ Jira issue attached to the case.
     <tr>
       <td><code>key</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.cases.jira_issue.key</code><br>Jira issue identifier in the format `PROJECT-NUMBER` (for example, `CSMSEC-103991`).</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.cases.jira_issue.key</code><br>Jira issue identifier in the format <code>PROJECT-NUMBER</code> (for example, <code>CSMSEC-103991</code>).</td>
     </tr>
     <tr>
       <td><code>status</code></td>
@@ -6524,7 +6611,7 @@ ServiceNow ticket attached to the case.
     <tr>
       <td><code>table_name</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.integrations.cases.servicenow_ticket.table_name</code><br>The name of the table where the ticket is stored; accepted values are incident and em_event.</td>
+      <td><strong>Path:</strong> <code>@workflow.integrations.cases.servicenow_ticket.table_name</code><br>The name of the table where the ticket is stored; accepted values are <code>incident</code> and <code>em_event</code>.</td>
     </tr>
     <tr>
       <td><code>url</code></td>
@@ -6586,12 +6673,12 @@ Muting information and metadata.
     <tr>
       <td><code>is_muted</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.is_muted</code><br>True if the finding is muted; false if it is active.</td>
+      <td><strong>Path:</strong> <code>@workflow.mute.is_muted</code><br><code>true</code> if the finding is muted; <code>false</code> if it is active.</td>
     </tr>
     <tr>
       <td><code>is_muted_by_rule</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.is_muted_by_rule</code><br>True if the finding is muted by an automation rule; false otherwise. If true, the relevant automation rule is referenced in the workflow.automation section.</td>
+      <td><strong>Path:</strong> <code>@workflow.mute.is_muted_by_rule</code><br><code>true</code> if the finding is muted by an automation rule; <code>false</code> otherwise. If <code>true</code>, the relevant automation rule is referenced in the workflow.automations section.</td>
     </tr>
     <tr>
       <td><code>muted_at</code></td>
@@ -6605,18 +6692,18 @@ Muting information and metadata.
     </tr>
     <tr>
       <td><code>reason</code></td>
-      <td>object</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.reason</code><br>Reason provided for muting the finding. Valid values: `none`, `no_pending_fix`, `human_error`, `no_longer_accepted_risk`, `other`, `pending_fix`, `false_positive`, `accepted_risk`, `no_fix`, `duplicate`, `risk_accepted`.</td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@workflow.mute.reason</code><br>Reason provided for muting the finding. Valid values: <code>none</code>, <code>no_pending_fix</code>, <code>human_error</code>, <code>no_longer_accepted_risk</code>, <code>other</code>, <code>pending_fix</code>, <code>false_positive</code>, <code>accepted_risk</code>, <code>no_fix</code>, <code>duplicate</code>, <code>risk_accepted</code>, <code>muted_in_code</code>.</td>
     </tr>
     <tr>
       <td><code>rule_id</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.rule_id</code><br>Unique identifier for the automation rule that muted the finding. Only set when `is_muted_by_rule` is true.</td>
+      <td><strong>Path:</strong> <code>@workflow.mute.rule_id</code><br>Unique identifier for the automation rule that muted the finding. Only set when <code>is_muted_by_rule</code> is <code>true</code>.</td>
     </tr>
     <tr>
       <td><code>rule_name</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@workflow.mute.rule_name</code><br>Human-readable name of the automation rule that muted the finding. Only set when `is_muted_by_rule` is true.</td>
+      <td><strong>Path:</strong> <code>@workflow.mute.rule_name</code><br>Human-readable name of the automation rule that muted the finding. Only set when <code>is_muted_by_rule</code> is <code>true</code>.</td>
     </tr>
   </tbody>
 </table>
