@@ -77,14 +77,18 @@ Removing a user's notification preferences does not unassign their seat. If a us
 
 ### Assign seats
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Seat assignment is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Billing admins, or users with the `billing_edit` permission, can manually assign seats so team members have access before they need it.
 
 To assign a seat:
-1. Go to **Plan & Usage** → **Seat Management**.
-2. Select the relevant product tab: **Incident Management**, **On-Call**, or **Incident Response**.
-3. Click **Assign Seats**.
+1. Go to {{< ui >}}Plan & Usage{{< /ui >}} → {{< ui >}}Seat Management{{< /ui >}}.
+2. Select the relevant product tab: {{< ui >}}Incident Management{{< /ui >}}, {{< ui >}}On-Call{{< /ui >}}, or {{< ui >}}Incident Response{{< /ui >}}.
+3. Click {{< ui >}}Assign Seats{{< /ui >}}.
 4. Search for users by name or email, and select them.
-5. Click **Assign Seats**.
+5. Click {{< ui >}}Assign Seats{{< /ui >}}.
 
 Assigned users immediately appear in the Seats table and can access the product's features. 
 
@@ -92,7 +96,7 @@ Assigned users immediately appear in the Seats table and can access the product'
 
 To remove users and free up seats: 
 1. In the Seats table, check the box next to one or more users.
-2. Click **Unassign Seats**.
+2. Click {{< ui >}}Unassign Seats{{< /ui >}}.
 3. Confirm your selection.
 
 After they are unassigned, the user loses access to features that require a seat. They can still perform the following actions:

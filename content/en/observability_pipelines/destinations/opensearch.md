@@ -9,19 +9,21 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' OpenSearch destination to send logs to OpenSearch.
 
 ## Setup
 
-Set up the OpenSearch destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
-
-### Set up the destination
+Configure the OpenSearch destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The steps in this section are configured in the UI.
 
 <div class="alert alert-danger">Only enter the identifiers for the OpenSearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your OpenSearch endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your OpenSearch username. If you leave it blank, the [default](#set-secrets) is used.
-1. Enter the identifier for your OpenSearch password. If you leave it blank, the [default](#set-secrets) is used.
+After you select the OpenSearch destination in the pipeline UI:
+
+1. Enter the identifier for your OpenSearch endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your OpenSearch username. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your OpenSearch password. If you leave it blank, the [default](#secret-defaults) is used.
 1. In the **Mode** dropdown menu, select **Bulk** or **Data streams**.
 	- **Bulk** mode
 		- Uses OpenSearch's [Bulk API][4] to send batched events directly into a standard index.
@@ -36,10 +38,18 @@ Set up the OpenSearch destination and its environment variables when you [set up
 			- In the **Dataset** field, specify the format or data source that describes the structure, for example `apache`.
 			- In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
 			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production`.
-1. Optionally, Enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
-{{% observability_pipelines/destination_buffer_numbered %}}
 
-### Set secrets
+### Optional settings
+
+#### OpenSearch index
+
+Enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
+
+#### Buffering
+
+{{% observability_pipelines/destination_buffer %}}
+
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -68,12 +78,15 @@ Set up the OpenSearch destination and its environment variables when you [set up
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| None           | 10,000,000      | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 10                | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/destinations/#template-syntax
 [4]: https://docs.opensearch.org/latest/api-reference/document-apis/bulk/
 [5]: https://docs.opensearch.org/latest/im-plugin/data-streams/
+[6]: /observability_pipelines/configuration/set_up_pipelines/
+[7]: /api/latest/observability-pipelines/
+[8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

@@ -10,11 +10,11 @@ Datadog AAP is built on top of [APM][3]. While Datadog recommends using AAP with
 This guide assumes you have the following:
 
 - **Datadog Agent:** [Install the Datadog Agent][6] and configure it for your application's operating system, container, cloud, or virtual environment.
-- **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports App and API Protection. For more details, see the guide for [App and API Protection][4].
+- **Supported SDK:** The Datadog SDK used by your application or service supports App and API Protection. For more details, see the guide for [App and API Protection][4].
 
 ## Compatibility
 
-Standalone App and API Protection is supported for the following tracing library versions:
+Standalone App and API Protection is supported for the following SDK versions:
 
 | Language | Version |
 | -------- | ------- |
@@ -29,7 +29,7 @@ Standalone App and API Protection is supported for the following tracing library
 ## Setup
 
 
-Set up the Datadog Agent using the standard method for APM or App and API Protection setup, but set up the Tracing Library by adding the `DD_APM_TRACING_ENABLED=false` environment variable to the service that runs the Tracing Library.
+Set up the Datadog Agent using the standard method for APM or App and API Protection setup, but set up the SDK by adding the `DD_APM_TRACING_ENABLED=false` environment variable to the service that runs the SDK.
 
 This environment variable will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products. The environment variable can then be combined with environment variables to enable App and API Protection.
 

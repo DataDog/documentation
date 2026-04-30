@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][1], Cloud Cost Explorer, [reports][12], and [budgets][11], along with your entire organization's cloud provider and [SaaS costs][2].
+Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][1], Cloud Cost Explorer, [reports][12], [budgets][11], and [anomalies][13], along with your entire organization's cloud provider and [SaaS costs][2].
 
-You can view daily Datadog costs in [Cloud Cost Management][3](CCM), and access additional Datadog cost capabilities like [Cost Summary][5] and [Cost Chargebacks][6] on the [**Plan & Usage** page][7].
+You can view daily Datadog costs in [Cloud Cost Management][3](CCM), and access additional Datadog cost capabilities like [Cost Summary][5] and [Cost Chargebacks][6] on the [{{< ui >}}Plan & Usage{{< /ui >}} page][7].
 
 There is **no additional charge** for Datadog Costs, and it is available for both CCM and non-CCM customers with a direct contract through Datadog or an External Marketplace drawdown contract.
 
@@ -43,7 +43,7 @@ After Datadog Costs is enabled, users need the following permission to view the 
 
 ## Enabling Datadog Costs
 
-To activate Datadog Costs, navigate to the [**Plan & Usage** page][7] and click **Get Started** in the modal to "View Datadog Costs in Cloud Cost Management". Alternatively, you can contact your account representative or [Datadog Support][8].
+To activate Datadog Costs, navigate to the [{{< ui >}}Plan & Usage{{< /ui >}} page][7] and click {{< ui >}}Get Started{{< /ui >}} in the modal to "View Datadog Costs in Cloud Cost Management". Alternatively, you can contact your account representative or [Datadog Support][8].
 
 After opting in to Datadog Costs, a confirmation message appears and cost data starts populating in the CCM Explorer within 2-3 hours.
 
@@ -53,11 +53,11 @@ Daily Datadog cost data is available to sub-organizations with the [Sub Organiza
 
 ## Visualize and break down costs
 
-Costs in Cloud Cost Management may not match the estimated month-to-date (MTD) costs on the [**Plan & Usage** page][7] because Plan & Usage costs are cumulative and prorated monthly. Only Cloud Cost Management provides daily cost calculations.
+Costs in Cloud Cost Management may not match the estimated month-to-date (MTD) costs on the [{{< ui >}}Plan & Usage{{< /ui >}} page][7] because Plan & Usage costs are cumulative and prorated monthly. Only Cloud Cost Management provides daily cost calculations.
 
-Datadog cost data has an expected data delay of 48 hours and is available for the past 15 months. Prior month Datadog charges are finalized around the 16th of each month. Before costs are finalized, the **Usage Charges Only: Enabled** toggle represents estimated usage-based charges only. When charges are finalized, the **Usage Charges Only: Disabled** toggle also includes any adjustment records. These adjustments are applied to the prior month and reflect the finalized cost amounts.
+Datadog cost data has an expected data delay of 48 hours and is available for the past 15 months. Prior month Datadog charges are finalized around the 16th of each month. Before costs are finalized, the {{< ui >}}Usage Charges Only: Enabled{{< /ui >}} toggle represents estimated usage-based charges only. When charges are finalized, the {{< ui >}}Usage Charges Only: Disabled{{< /ui >}} toggle also includes any adjustment records. These adjustments are applied to the prior month and reflect the finalized cost amounts.
 
-Cost data can be used in dashboards and notebooks under the **Cloud Cost** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
+Cost data can be used in dashboards and notebooks under the {{< ui >}}Cloud Cost{{< /ui >}} data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
 
 {{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
 
@@ -88,3 +88,4 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [10]: /account_management/plan_and_usage/cost_details/#cost-summary-sub-organization
 [11]: /cloud_cost_management/planning/budgets?tab=basic
 [12]: /cloud_cost_management/reporting
+[13]: /cloud_cost_management/cost_changes/anomalies/

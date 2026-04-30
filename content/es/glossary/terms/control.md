@@ -1,4 +1,5 @@
 ---
+id: control
 core_product:
 - seguridad
 - csm

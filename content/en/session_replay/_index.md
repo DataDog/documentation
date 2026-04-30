@@ -24,6 +24,10 @@ further_reading:
 - link: '/integrations/content_security_policy_logs'
   tag: 'Documentation'
   text: 'Detect and aggregate CSP violations with Datadog'
+- link: "https://learn.datadoghq.com/courses/intro-to-rum"
+  tag: "Learning Center"
+  text: "Intro to Real User Monitoring (RUM)"
+
 ---
 
 ## Overview
@@ -43,6 +47,37 @@ Learn more about the [Session Replay for Browsers][5].
 Mobile Session Replay expands visibility into your mobile applications by visually replaying each user interaction, such as taps, swipes, and scrolls. It is available for native apps on both Android and iOS. Visually replaying user interactions on your applications makes it easier to reproduce crashes and errors, as well as understand the user journey for making UI improvements.
 
 Learn more about the [Session Replay for Mobile][6].
+
+## AI-powered summaries and smart chapters
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
+
+Summaries and smart chapters give you context about what happened in a session before you watch it.
+
+**Summaries** describe the user's intent, key actions, friction signals, and outcome. Specific moments in the summary are hyperlinked so you can jump directly to that point in the replay. In the session list, hover over a replay to preview the summary, or open the replay directly. If a session has been summarized before, the summary appears instantly when you open the replay.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-ai-summary.png" alt="AI-powered summary in the Session Replay player, showing user intent, key actions, friction signals, and hyperlinked moments" style="width:100%;" >}}
+
+**Smart chapters** automatically segment the replay timeline into labeled stages of the user journey. For example, in an ecommerce session, chapters might include "Browse lighting", "Shop bedding and chairs", and "Review cart and checkout". Chapters appear when you hover over the timeline and in the dropdown on the player controls, letting you jump directly between them.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-smart-chapters.png" alt="Smart chapter dropdown in the Session Replay player showing labeled stages of the user journey" style="width:100%;" >}}
+
+AI summaries and smart chapters are generated for sessions with at least four user actions and a duration of at least 45 seconds.
+
+## Comments
+
+Session Replay comments allow your team to collaborate on bugs, usability issues, and other observations directly within a replay.
+
+With comments, you can:
+
+- Add a comment at a specific timestamp on the replay timeline. Comment markers appear on the timeline and the **Comments** tab.
+- @mention a teammate or team in a comment. Tagged users receive an email notification with a link that opens the replay at the commented timestamp.
+- Copy a link to any comment and share it externally. The link opens the replay at the annotated moment with that comment thread open.
+- Reply in-thread to collaborate within a replay, and edit or delete your own comments as needed.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-comments.png" alt="Session Replay player with timestamped comments on the timeline and a Comments tab open with threaded replies." style="width:100%;" >}}
+
+To find replays that need your attention, use the **All mentions to me** and **Commented replays** default playlists. See [Session Replay Playlists][7] for details.
 
 ## Extend data retention
 

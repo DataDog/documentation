@@ -537,7 +537,7 @@ attributes:
       - ios
       - roku
     type: string
-    domain: Geo-location
+    domain: Geolocation
     
   - name: geo.country_iso_code
     description: The [ISO Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (for example, `US` for the United States or `FR` for France).
@@ -548,7 +548,7 @@ attributes:
       - ios
       - roku
     type: string
-    domain: Geo-location
+    domain: Geolocation
     
   - name: geo.country_subdivision
     description: Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France).
@@ -559,7 +559,7 @@ attributes:
       - ios
       - roku
     type: string
-    domain: Geo-location
+    domain: Geolocation
     
   - name: geo.continent_code
     description: ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, or `OC`).
@@ -570,7 +570,7 @@ attributes:
       - ios
       - roku
     type: string
-    domain: Geo-location
+    domain: Geolocation
     
   - name: geo.continent
     description: Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, or `Oceania`).
@@ -581,7 +581,7 @@ attributes:
       - ios
       - roku
     type: string
-    domain: Geo-location
+    domain: Geolocation
     
   - name: geo.city
     description: The name of the city (for example, `San Francisco`, `Paris`, or `New York`).
@@ -592,7 +592,7 @@ attributes:
       - ios
       - roku
     type: string
-    domain: Geo-location
+    domain: Geolocation
   
   - name: user.id
     description: Identifier of the user.

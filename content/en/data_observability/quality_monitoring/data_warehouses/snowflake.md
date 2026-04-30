@@ -154,14 +154,14 @@ To set up your account in Snowflake:
 
 To configure the Snowflake integration in Datadog:
 
-1. Navigate to [**Datadog Data Observability** > **Settings**][3].
-2. Click the **Configure** button for the Snowflake option.
+1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][3].
+2. Click the {{< ui >}}Configure{{< /ui >}} button for the Snowflake option.
 
    {{< img src="data_observability/data-obs-settings-integrations.png" alt="List of Data Observability integrations on the Settings page" style="width:100%;" >}}
 
 3. Follow the flow to enter your account details and upload a private key.
-4. Turn on **Enable Data Observability for Snowflake tables**.
-5. Click **Save & Test**.
+4. Turn on {{< ui >}}Enable Data Observability for Snowflake tables{{< /ui >}}.
+5. Click {{< ui >}}Save & Test{{< /ui >}}.
 
 ## Snowflake tasks and Snowpipes
 
@@ -174,7 +174,7 @@ Both features require the `GRANT MONITOR EXECUTION ON ACCOUNT` permission grante
 <div class="alert alert-info">Snowflake tasks traces are in preview. Contact your account representative to enable this feature.</div>
 
 When enabled, each task graph run appears as a trace in APM with individual tasks as spans, including execution details such as status, duration, and errors. To find them:
-1. In Datadog, go to **APM** > [**Trace Explorer**][4].
+1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > [{{< ui >}}Trace Explorer{{< /ui >}}][4].
 2. Filter the Explorer:
    - For the top-level task graph span, filter by `operation_name:snowflake.task_graph`
    - For individual task spans, filter by `operation_name:snowflake.task`
@@ -184,6 +184,38 @@ When enabled, each task graph run appears as a trace in APM with individual task
 After you save, Datadog begins syncing your information schema and query history in the background. Initial syncs can take up to several hours depending on the size of your Snowflake deployment.
 
 After the initial sync completes, create a [Data Observability monitor][5] to start alerting on freshness, row count, column-level metrics, and custom SQL metrics.
+
+## Troubleshoot permissions
+
+If Datadog is unable to see expected databases, schemas, or tables in your Snowflake account, follow these steps to verify that the Datadog role has the correct access.
+
+<div class="alert alert-info">The Snowflake console enables secondary roles by default, which can make it appear that a role has more access than it actually does. Step 2 below helps ensure you are testing with only the Datadog role's permissions.</div>
+
+1. Set the role and user to the same ones provisioned for Datadog:
+   ```sql
+   USE ROLE DATADOG_ROLE;
+   ```
+
+2. Disable secondary roles so that only the Datadog role's grants are active:
+   ```sql
+   USE SECONDARY ROLES NONE;
+   ```
+
+3. Check that the correct role is set and no secondary roles are in use:
+   ```sql
+   SELECT CURRENT_ROLE(), CURRENT_SECONDARY_ROLES();
+   ```
+
+4. List the databases the Datadog role can access:
+   ```sql
+   SELECT database_name FROM snowflake.information_schema.databases;
+   ```
+
+5. Check access to specific schemas or tables:
+   ```sql
+   SHOW SCHEMAS IN DATABASE "<DATABASE_NAME>";
+   SHOW TABLES IN SCHEMA "<DATABASE_NAME>"."<SCHEMA_NAME>";
+   ```
 
 ## Further reading
 

@@ -35,7 +35,7 @@ If you haven't already, install the [Datadog-Azure integration][3] to collect me
 Instrument your main application with the `dd-trace-js` library. See [Tracing Node.js applications][101] for instructions.
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][102].
+Custom metrics are also collected through the SDK. See the [code examples][102].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
@@ -54,7 +54,7 @@ To set up logging in your application, see [Node.js Log Collection][103]. To set
 Instrument your main application with the `dd-trace-py` library. See [Tracing Python applications][201] for instructions.
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][202].
+Custom metrics are also collected through the SDK. See the [code examples][202].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
@@ -73,7 +73,7 @@ To set up logging in your application, see [Node.js Log Collection][203]. To set
 Instrument your main application with the `dd-trace-java` library. See [Tracing Java applications][301] for instructions.
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][302].
+Custom metrics are also collected through the SDK. See the [code examples][302].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
@@ -91,7 +91,7 @@ To set up logging in your application, see [Node.js Log Collection][303]. To set
 #### Tracing
 Instrument your main application with the `dd-trace-dotnet` library.
 
-1. Add the following lines to the Dockerfile for your main application. This installs and configures the Datadog tracer within your application container.
+1. Add the following lines to the Dockerfile for your main application. This installs and configures the Datadog SDK within your application container.
    {{< code-block lang="dockerfile" >}}
    RUN mkdir -p /datadog/tracer
    RUN mkdir -p /home/LogFiles/dotnet
@@ -140,7 +140,7 @@ ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
 For more information, see [Tracing .NET Applications][401].
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][402].
+Custom metrics are also collected through the SDK. See the [code examples][402].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
@@ -160,7 +160,7 @@ To set up logging in your application, see [C# Log Collection][403]. To set up t
 Instrument your main application with the `dd-trace-go` library. See [Tracing Go applications][501] for instructions.
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][502].
+Custom metrics are also collected through the SDK. See the [code examples][502].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
@@ -179,7 +179,7 @@ To set up logging in your application, see [Node.js Log Collection][503]. To set
 Instrument your main application with the `dd-trace-php` library. See [Tracing PHP applications][601] for instructions.
 
 #### Metrics
-Custom metrics are also collected through the tracer. See the [code examples][602].
+Custom metrics are also collected through the SDK. See the [code examples][602].
 
 #### Logs
 The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
@@ -197,7 +197,7 @@ To set up logging in your application, see [Node.js Log Collection][603]. To set
 
 ### Instrumentation
 
-Instrumentation is done using a sidecar container. This sidecar container collects traces, metrics, and logs from your main application container and sends them to Datadog.
+Instrumentation is done using a sidecar container. This sidecar container collects traces, enhanced metrics, custom metrics, and logs from your main application container and sends them to Datadog. [Enhanced metrics][5] are distinguished with the `azure.app_services.enhanced.*` namespace.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -519,6 +519,256 @@ If you are setting up monitoring for a .NET application, configure the following
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
+### Deployment slots
+
+<div class="alert alert-info">Deployment slot instrumentation is in Preview. During the Preview, telemetry from slots appears under the main web app. To distinguish between slot and production telemetry, configure <a href="/getting_started/tagging/unified_service_tagging/">unified service tagging</a> with distinct values for each slot.</div>
+
+{{% collapse-content title="Instrument a deployment slot" level="h4" %}}
+
+To instrument a [deployment slot][901] instead of the main web app, use one of the following methods.
+
+[901]: https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+
+{{< tabs >}}
+{{% tab "Datadog CLI" %}}
+
+Using the [Datadog CLI][1] (v5.9.0+), add the `--slot` flag. Use `--env` to set a distinct environment tag for the slot:
+
+```shell
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> --slot <slot-name> --env <slot-env>
+```
+
+Alternatively, provide the full slot resource ID with the `--resource-id` flag:
+
+```shell
+datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> --env <slot-env>
+```
+
+[1]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
+
+{{% /tab %}}
+{{% tab "Terraform" %}}
+
+Use the [Datadog Linux Web App Slot module][1]:
+
+```tf
+module "my_web_app_slot" {
+  source  = "DataDog/web-app-datadog/azurerm//modules/linux-slot"
+  version = "~> 1.0"
+
+  name                = "staging"             // Replace with your slot name
+  app_service_id      = module.my_web_app.id  // Reference to your main web app
+  resource_group_name = "my-resource-group"   // Replace with your resource group name
+
+  datadog_api_key = var.datadog_api_key
+  datadog_service = "my-service" // Replace with your service name
+  datadog_env     = "staging"    // Set a distinct value for each slot
+  datadog_version = "0.0.0"      // Replace with your application version
+
+  site_config = {
+    application_stack = {
+      docker_registry_url = "https://index.docker.io" // Replace with your registry URL
+      docker_image_name   = "my-app:latest"           // Replace with your image name
+    }
+  }
+  app_settings = {
+    DD_TRACE_ENABLED = "true" // Example setting
+  }
+}
+```
+
+Run `terraform apply`, and follow any prompts.
+
+[1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux-slot
+
+{{% /tab %}}
+{{% tab "Bicep" %}}
+
+Update your template to target a deployment slot instead of the main web app:
+
+```bicep
+param webAppName string
+param slotName string
+
+resource webApp 'Microsoft.Web/sites@2025-03-01' existing = {
+  name: webAppName
+}
+
+resource slot 'Microsoft.Web/sites/slots@2025-03-01' = {
+  parent: webApp
+  name: slotName
+  kind: 'app,linux,container'
+  // ...
+  properties: {
+    // ...
+    siteConfig: {
+      // ...
+      linuxFxVersion: 'SITECONTAINERS'
+      appSettings: concat(datadogAppSettings, [
+        //... Your existing app settings
+      ])
+    }
+  }
+}
+
+resource mainContainer 'Microsoft.Web/sites/slots/sitecontainers@2025-03-01' = {
+  parent: slot
+  name: 'main'
+  properties: {
+    isMain: true
+    image: 'index.docker.io/your/image:tag' // Replace with your Application Image
+    targetPort: '8080'                      // Replace with your Application's Port
+  }
+}
+
+@secure()
+param datadogApiKey string
+
+var datadogAppSettings = [
+  { name: 'DD_API_KEY', value: datadogApiKey }
+  { name: 'DD_SITE', value: 'datadoghq.com' }  // Replace with your Datadog site
+  { name: 'DD_SERVICE', value: 'my-service' }  // Replace with your service name
+  { name: 'DD_ENV', value: 'staging' }          // Set a distinct value for each slot
+  { name: 'DD_VERSION', value: '0.0.0' }       // Replace with your application version
+  { name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE', value: 'true' }
+  // Uncomment for .NET applications
+  // { name: 'DD_DOTNET_TRACER_HOME', value: '/datadog/tracer' }
+  // { name: 'CORECLR_ENABLE_PROFILING', value: '1' }
+  // { name: 'CORECLR_PROFILER', value: '{846F5F1C-F9AE-4B07-969E-05C26BC060D8}' }
+  // { name: 'CORECLR_PROFILER_PATH', value: '/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so' }
+  { name: 'DD_LOGS_INJECTION', value: 'true' }
+  { name: 'DD_TRACE_ENABLED', value: 'true' }
+  // Add any additional options here
+]
+
+resource sidecar 'Microsoft.Web/sites/slots/sitecontainers@2025-03-01' = {
+  parent: slot
+  name: 'datadog-sidecar'
+  properties: {
+    image: 'index.docker.io/datadog/serverless-init:latest'
+    isMain: false
+    targetPort: '8126'
+    environmentVariables: [for v in datadogAppSettings: { name: v.name, value: v.name }]
+  }
+}
+```
+
+Redeploy your updated template:
+
+```bash
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+{{% /tab %}}
+{{% tab "ARM Template" %}}
+
+Update your template to target a deployment slot instead of the main web app:
+
+```jsonc
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webAppName": {
+      "type": "string"
+    },
+    "slotName": {
+      "type": "string"
+    },
+    // ...
+    "datadogApiKey": {
+      "type": "securestring"
+    }
+  },
+  "variables": {
+    "datadogAppSettings": [
+      { "name": "DD_API_KEY", "value": "[parameters('datadogApiKey')]" },
+      { "name": "DD_SITE", "value": "datadoghq.com" }, // Replace with your Datadog site
+      { "name": "DD_SERVICE", "value": "my-service" }, // Replace with your service name
+      { "name": "DD_ENV", "value": "staging" },        // Set a distinct value for each slot
+      { "name": "DD_VERSION", "value": "0.0.0" },      // Replace with your application version
+      { "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE", "value": "true" },
+      // Uncomment for .NET applications
+      // { "name": "DD_DOTNET_TRACER_HOME", "value": "/datadog/tracer" }
+      // { "name": "CORECLR_ENABLE_PROFILING", "value": "1" }
+      // { "name": "CORECLR_PROFILER", "value": "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}" }
+      // { "name": "CORECLR_PROFILER_PATH", "value": "/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so" }
+      { "name": "DD_LOGS_INJECTION", "value": "true" },
+      { "name": "DD_TRACE_ENABLED", "value": "true" }
+      // Add any additional options here
+    ],
+    "yourAppSettings": [
+      // Add your app settings here
+    ]
+  },
+  "resources": {
+    "slot": {
+      "type": "Microsoft.Web/sites/slots",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/', parameters('slotName'))]",
+      "kind": "app,linux,container",
+      // ...
+      "properties": {
+        // ...
+        "siteConfig": {
+          // ...
+          "linuxFxVersion": "SITECONTAINERS",
+          "appSettings": "[concat(variables('datadogAppSettings'), variables('yourAppSettings'))]"
+        }
+      }
+    },
+    "mainContainer": {
+      "type": "Microsoft.Web/sites/slots/sitecontainers",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/main')]",
+      "properties": {
+        "isMain": true,
+        "image": "index.docker.io/your/image:tag", // Replace with your Application Image
+        "targetPort": "8080"                       // Replace with your Application's Port
+      }
+    },
+    "sidecar": {
+      "type": "Microsoft.Web/sites/slots/sitecontainers",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/datadog-sidecar')]",
+      "properties": {
+        "image": "index.docker.io/datadog/serverless-init:latest",
+        "isMain": false,
+        "targetPort": "8126",
+        "copy": [{
+          "name": "environmentVariables", "count": "[length(variables('datadogAppSettings'))]",
+          "input": {
+            "name": "[variables('datadogAppSettings')[copyIndex('environmentVariables')].name]",
+            "value": "[variables('datadogAppSettings')[copyIndex('environmentVariables')].name]"
+          }
+        }]
+      }
+    }
+  }
+}
+```
+
+Redeploy your updated template:
+
+```shell
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
+
+## Profiling
+
+<div class="alert alert-info">
+Datadog's Continuous Profiler is available in preview for Python and Node.js on Linux Azure App Service.
+</div>
+
+To enable the [Continuous Profiler][4], set the environment variable `DD_PROFILING_ENABLED=true` in your application container.
+
 ## Example application
 The following example contains a single app with tracing, metrics, and logs set up.
 
@@ -751,3 +1001,5 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 [1]: https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container-sidecar
 [2]: /serverless/guide/azure_app_service_linux_containers_serverless_init
 [3]: https://app.datadoghq.com/integrations/azure
+[4]: /profiler/
+[5]: /integrations/azure-app-services/#metrics
