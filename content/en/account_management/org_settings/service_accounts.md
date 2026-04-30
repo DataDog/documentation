@@ -2,6 +2,9 @@
 title: Service Accounts
 description: Create and manage non-interactive service accounts for automated scripts and shared application keys across teams with secure access controls.
 further_reading:
+    - link: "/account_management/service-access-tokens/"
+      tag: "Documentation"
+      text: "Service Access Tokens"
     - link: "https://docs.datadoghq.com/api/latest/service-accounts/"
       tag: "Documentation"
       text: "Service accounts API reference"
@@ -61,6 +64,18 @@ To disable a service account, the user must have the User Manage Access permissi
 
 To disable a service account, follow the previous procedure to edit the service account and set the status to {{< ui >}}Disabled{{< /ui >}}.
 
+### Service Access Tokens
+
+[Service Access Tokens (SATs)][4] are the recommended way to authenticate Datadog API calls from
+a service account. SATs are scoped, optionally long-lived, and do not require pairing with an API
+key.
+
+To create a SAT for a service account:
+
+1. Click the service account in the list. The details panel appears.
+2. Under **Access Tokens**, click {{< ui >}}+ New Token{{< /ui >}}.
+3. Follow the steps in [Create a Service Access Token][5].
+
 ### Create or revoke application keys
 
 To create or revoke service account application keys, select an account from the service account list. The service account's side panel appears.
@@ -111,3 +126,5 @@ Datadog sends a notification to the email address associated with the service ac
 [1]: /account_management/org_settings/
 [2]: https://app.datadoghq.com/organization-settings/service-accounts
 [3]: /api/latest/service-accounts/
+[4]: /account_management/service-access-tokens/
+[5]: /account_management/service-access-tokens/#create-a-service-access-token
