@@ -81,6 +81,9 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 1. In Datadog, go to [Fleet Automation > Configuration][21].
 1. Click **Configure Agents**.
 1. Apply filters to select the agents you want to configure, then click **Next**.
+
+   {{< img src="tracing/trace_collection/filter-agents.png" alt="The agent filtering screen in Fleet Automation, with options to scope by environment, operating system, and hostname" style="width:100%;" >}}
+
 1. Click the **Application Performance Monitoring (APM)** tile, then click **Next**.
 
    {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="The product selection screen in Fleet Automation, showing the Application Performance Monitoring (APM) tile" style="width:100%;" >}}
