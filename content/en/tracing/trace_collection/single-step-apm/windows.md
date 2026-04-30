@@ -86,7 +86,7 @@ To instrument Java and .NET applications across your entire Windows host:
 
 If you already have a Datadog Agent installed, use Fleet Automation to enable SSI.
 
-1. In Datadog, go to [Fleet Automation > Configuration][6].
+1. In Datadog, go to [**Fleet Automation > Configuration**][6].
 1. Click **Configure Agents**.
 1. Apply filters to select the agents you want to configure, then click **Next**.
 

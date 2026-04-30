@@ -101,7 +101,7 @@ If you don't yet have a Datadog Agent installed, follow these steps to install t
 
 If you already have a Datadog Agent installed, use Fleet Automation to enable SSI.
 
-1. In Datadog, go to [Fleet Automation > Configuration][21].
+1. In Datadog, go to [**Fleet Automation > Configuration**][21].
 1. Click **Configure Agents**.
 1. Apply filters to select the agents you want to configure, then click **Next**.
 
