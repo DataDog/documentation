@@ -14,6 +14,171 @@ further_reading:
 
 Follow this guide to migrate between major versions of the Browser RUM and Browser Logs SDKs. See [the SDK documentation][26] for details on its features and capabilities.
 
+## From v6 to v7
+
+The v7 SDK improves privacy defaults, removes deprecated options, and modernizes the SDK internals. Most changes require configuration updates.
+
+Take notice of the below breaking changes as you upgrade your SDK. Changes are grouped by area of impact.
+
+<div class="alert alert-tip"> If you use an AI coding assistant that supports agent skills, you can apply the <a href="https://github.com/DataDog/browser-sdk/blob/main/.claude/skills/upgrade-browser-sdk-v7/SKILL.md"><code>upgrade-browser-sdk-v7</code> skill</a> to automate most of the migration steps below. </div>
+
+### Core
+
+#### Session manager rewrite
+
+The system that tracks sessions has been rewritten to improve data reliability and reduce billing discrepancies. Depending on your setup, you may notice changes in session counts.
+
+#### Deterministic sampling decisions
+
+Previously, the sampling decision was made once at session creation and persisted. In v7, it is computed on demand from the session ID and sample rate, making it consistent regardless of which page initializes the SDK. If you use different sampling rates across pages, those rates are applied consistently.
+
+#### Session store key renamed
+
+The session storage key has changed from `_dd_s` to `_dd_s_v2` because the new session manager uses an incompatible storage format. On upgrade, existing sessions are automatically migrated from `_dd_s`.
+
+**Note**: If you roll back to v6 after upgrading, the v6 SDK starts a new session because it does not read the `_dd_s_v2` key. If you have CSP or cookie policies that allowlist specific cookie names, add `_dd_s_v2`.
+
+#### Update the CDN bundle URL
+
+If you load the SDK from the Datadog CDN, update the version segment of the bundle URL from `v6` to `v7`. This applies to all bundles:
+
+| Bundle   | URL                                                                     |
+| -------- | ----------------------------------------------------------------------- |
+| RUM      | `https://www.datadoghq-browser-agent.com/<SITE>/v7/datadog-rum.js`      |
+| RUM Slim | `https://www.datadoghq-browser-agent.com/<SITE>/v7/datadog-rum-slim.js` |
+| Logs     | `https://www.datadoghq-browser-agent.com/<SITE>/v7/datadog-logs.js`     |
+
+Replace `<SITE>` with your Datadog site (for example, `us1`, `us3`, `us5`, `eu1`, `ap1`, or `ap2`). See the [setup documentation][26] for the URL for your site.
+
+#### CDN bundles use ESM dynamic imports
+
+CDN bundles use ESM dynamic imports instead of CommonJS, which reduces webpack overhead and overall bundle size. If you use the CDN snippet, add the `crossorigin` attribute to the script tag:
+
+```html
+<script src="https://www.datadoghq-browser-agent.com/..." crossorigin="anonymous"></script>
+```
+
+See the [setup documentation][26] for full snippet examples.
+
+#### ES2020 browser baseline
+
+Support for pre-ES2020 browsers has been dropped to remove compatibility shims and polyfills, which reduces bundle size. Minimum supported versions are Chrome 80+, Firefox 78+, and Safari 14+. Estimated impact: ~0.048% less coverage.
+
+To continue supporting older browsers, keep using Browser SDK v6 or earlier.
+
+#### Removed options
+
+| Deprecated option (v6 or earlier) | Replacement (v7)                                       |
+| --------------------------------- | ------------------------------------------------------ |
+| `betaEncodeCookieOptions`         | Cookie encoding is always enabled.                     |
+| `allowFallbackToLocalStorage`     | Use `sessionPersistence: ['cookie', 'local-storage']`. |
+
+### RUM
+
+#### `propagateTraceBaggage` enabled by default
+
+The `propagateTraceBaggage` [initialization parameter][28] defaults to `true` in v7. Propagating baggage enables tail-based sampling and gives traces access to user and account context.
+
+If you use distributed tracing on cross-origin requests, either set `propagateTraceBaggage: false` or add `baggage` to your `Access-Control-Allow-Headers` response headers:
+
+```
+Access-Control-Allow-Headers: traceparent, tracestate, baggage
+```
+
+#### New default for `defaultPrivacyLevel`
+
+`defaultPrivacyLevel` defaults to `mask-user-input` in v7 (previously `mask`). This provides a privacy default that masks user input without the restrictions of full masking. The new default masks user input while other content is collected.
+
+To preserve full masking, explicitly set `defaultPrivacyLevel: "mask"`.
+
+#### `enablePrivacyForActionName` enabled by default
+
+`enablePrivacyForActionName` defaults to `true` in v7. Click action names follow the `defaultPrivacyLevel` setting by default. Set `enablePrivacyForActionName: false` to opt out.
+
+#### `startDurationVital` and `stopDurationVital` API change
+
+The `DurationVitalReference` object has been replaced by a `vitalKey` string option. This aligns the API with `startResource`/`stopResource` and `startAction`/`stopAction`, and with the Mobile SDK. Multiple concurrent vitals with the same name are still supported:
+
+```js
+// Before
+const ref = datadogRum.startDurationVital('myVital')
+datadogRum.stopDurationVital(ref)
+
+// After
+datadogRum.startDurationVital('myVital', { vitalKey: 'uniqueKey' })
+datadogRum.stopDurationVital('myVital', { vitalKey: 'uniqueKey' })
+```
+
+#### New `session_renewal` view loading type
+
+When a session expires and is renewed, the new view is created with `@view.loading_type:session_renewal` instead of `route_change`. Update any dashboards or monitors that filter on `@view.loading_type` if they should also include session-renewed views.
+
+#### Document resource uses `PerformanceNavigationTiming`
+
+The initial document resource event previously used a synthetic timing entry. It uses the browser's native `PerformanceNavigationTiming` directly in v7, which may produce slightly different `resource.duration` values for the document resource. The `initiatorType` for the document resource changes from `initial_document` to `navigation`.
+
+If you use plugins or domain context handlers that inspect `performanceEntry` for document resources, update them to expect a `PerformanceNavigationTiming` instead of `PerformanceResourceTiming`.
+
+#### First Input Delay (FID) removed
+
+Google replaced FID with Interaction to Next Paint (INP) as a Core Web Vital. FID has been removed from the SDK to reduce bundle size. Use INP instead.
+
+#### Plugin API: `strategy` removed
+
+The `strategy` field has been removed from the plugin API. If you use `rum-react` or other integrations, upgrade them to v7 alongside the core SDK.
+
+#### Improved action name computation
+
+In v7, the SDK uses a new strategy for computing action names that considers the DOM structure to apply element privacy levels more precisely and improve handling of shadow DOM content. Action names may change slightly. The `betaTrackActionsInShadowDom` option has been removed.
+
+#### BFCache navigations always tracked
+
+Back/Forward Cache restores are tracked as distinct views with `@view.loading_type:bf_cache`, including accurate loading time and Core Web Vitals. The `trackBfCacheViews` option has been removed.
+
+#### Early requests always collected
+
+Resources and requests that occurred before the SDK initialized are automatically captured. Some of those early resources may be missing properties such as status code. The `trackEarlyRequests` option has been removed.
+
+#### Async chunk file names prefixed with `datadog`
+
+Async chunk file names include a `datadog` prefix (for example, `datadog-rum-recorder.js`). If you have CSP or caching rules matching the old names, update them accordingly.
+
+### Logs
+
+#### Logs require a session manager
+
+Logs always use a session manager, so Logs events are consistently associated with a session ID. When neither cookies nor local storage are available, the SDK does not send data and logs a warning. Previously, Logs would still start without storage.
+
+To explicitly enable memory-backed sessions, use `sessionPersistence: 'memory'`. In worker environments, this fallback is automatic.
+
+#### `forwardErrorsToLogs` and `forwardConsoleLogs` are independent
+
+Previously, enabling `forwardErrorsToLogs` also silently forwarded `console.error` calls. These options are now fully independent. You have precise control over what gets forwarded. `forwardErrorsToLogs` controls only unhandled errors.
+
+To preserve the previous behavior, add `error` to your `forwardConsoleLogs` array:
+
+```js
+DD_LOGS.init({
+  forwardConsoleLogs: ['error', 'warn'],
+})
+```
+
+#### Network errors for canceled requests are dropped
+
+Requests canceled by the application (aborted fetch or XHR) no longer generate a network error log. This reduces noise in error tracking.
+
+#### Removed options
+
+| Deprecated option (v6 or earlier) | Replacement (v7)                                                           |
+| --------------------------------- | -------------------------------------------------------------------------- |
+| `usePciIntake`                    | The standard intake is now PCI compliant. Update your [CSP][18] if needed. |
+
+### Session Replay
+
+#### New data format
+
+In v7, session replay uses a new, more compact data format which significantly reduces bandwidth usage. Session replay data is not exposed directly through browser SDK APIs, so no action is required to adopt this change.
+
 ## From v5 to v6
 
 The main improvement v6 offers is the bundle size reduction. By dropping support for IE11 and leveraging lazy loading, the size of the RUM bundle has been reduced by 10% and the Logs bundle by nearly 9%.
@@ -407,7 +572,7 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [26]: /real_user_monitoring/application_monitoring/browser/
 [25]: /real_user_monitoring/correlate_with_other_telemetry/apm#opentelemetry-support
 [27]: /real_user_monitoring/guide/proxy-rum-data
-[28]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
+[28]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
 [29]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#:~:text=configure%20the%20traceContextInjection
 [30]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
 [31]: https://webpack.js.org/guides/code-splitting/#dynamic-imports
