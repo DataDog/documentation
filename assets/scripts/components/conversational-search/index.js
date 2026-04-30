@@ -24,12 +24,32 @@ const INTERNAL_CONVERSATION_ID_PREFIX = 'dd_docsai_';
 
 const RENDER_THROTTLE = 50;
 
+// Auto-rotated client-side messages shown while we wait for the first server `thinking` event.
+// Aligned with the mapped server messages below so the user sees consistent copy either way.
 const LOADING_MESSAGES = [
-    'Searching documentation…',
-    'Reviewing relevant pages…',
-    'Analyzing content…',
-    'Generating answer…'
+    'Understanding your question…',
+    'Searching the docs…',
+    'Reading the most relevant pages…',
+    'Drafting your response…'
 ];
+
+// Maps backend `thinking` event content to user-facing copy.
+// `null` hides the event entirely (used for internal optimization steps the user shouldn't see).
+// Unknown keys fall through to the original message so new backend stages still surface something.
+const THINKING_MESSAGES = {
+    'Rewriting query...': 'Understanding your question…',
+    'Searching documentation...': 'Searching the docs…',
+    'Reviewing relevant pages': 'Reading the most relevant pages…',
+    'Generating answer...': 'Drafting your response…',
+    'Something went wrong. Please try again.': 'Something went wrong. Try asking again.'
+};
+
+function mapThinkingMessage(serverMessage) {
+    if (Object.prototype.hasOwnProperty.call(THINKING_MESSAGES, serverMessage)) {
+        return THINKING_MESSAGES[serverMessage];
+    }
+    return serverMessage;
+}
 
 let isDatadogUser = false;
 
@@ -521,7 +541,8 @@ class ConversationalSearch {
                 rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
                 signal: this.abortController.signal,
                 onThinking: (message) => {
-                    loadingIndicator.updateStatus(message);
+                    const mapped = mapThinkingMessage(message);
+                    if (mapped) loadingIndicator.updateStatus(mapped);
                 },
                 onToken: (_token, fullMessage) => {
                     if (!responseContainer) {
