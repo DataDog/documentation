@@ -13,9 +13,6 @@ further_reading:
   text: "Manage log retention and indexing"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" >}}
-Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
-{{< /callout >}}
 
 ## Overview
 
