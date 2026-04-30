@@ -493,7 +493,7 @@ To finish a span, call `finish()` on a span object instance. If possible, wrap t
 
 <div class="alert alert-info">If you are using any LLM providers or frameworks that are supported by <a href="/llm_observability/instrumentation/auto_instrumentation/">Datadog's LLM integrations</a>, you do not need to manually start an LLM span to trace these operations.</div>
 
-<div class="alert alert-info">When manually instrumenting an LLM span, token counts (<code>input_tokens</code>, <code>output_tokens</code>, <code>total_tokens</code>) are not captured automatically — you must record them yourself by annotating the span. See <a href="#enriching-spans">Enriching spans</a> for the full annotation API. The examples below show the typical pattern.</div>
+<div class="alert alert-info">If you are manually instrumenting an LLM span, you must record token counts (such as <code>input_tokens</code>, <code>output_tokens</code>, and <code>total_tokens</code>) yourself by annotating the span. See <a href="#enriching-spans">Enriching spans</a> for more information.</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -576,8 +576,8 @@ To trace an LLM call, specify the span kind as `llm`, and optionally specify the
 function llmCall (prompt) {
   const completion = ... // user application logic to invoke LLM
   llmobs.annotate({
-    inputData: [{ role: 'user', content: prompt }],
-    outputData: [{ role: 'assistant', content: completion }],
+    inputData: [{ role: "user", content: prompt }],
+    outputData: [{ role: "assistant", content: completion }],
     metrics: { input_tokens: 4, output_tokens: 6, total_tokens: 10 }
   })
   return completion
