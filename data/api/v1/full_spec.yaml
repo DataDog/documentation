@@ -7579,6 +7579,12 @@ components:
       type: object
     MetricsListResponse:
       description: Object listing all metric names stored by Datadog since a given time.
+      example:
+        from: "1571011200"
+        metrics:
+          - system.cpu.idle
+          - system.mem.free
+          - aws.ec2.cpuutilization
       properties:
         from:
           description: Time when the metrics were active, seconds since the Unix epoch.
