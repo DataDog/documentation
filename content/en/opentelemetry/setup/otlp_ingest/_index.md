@@ -21,7 +21,8 @@ You might prefer this option if you're looking for a straightforward setup and w
 
 - [OTLP logs intake endpoint][3]
 - [OTLP metrics intake endpoint][4]
-- OTLP traces intake endpoint (in Preview): To request access, contact your Customer Success Manager or if using for LLM Observability instead, follow steps [here][5].
+- OTLP traces intake endpoint (in Preview): To request access, contact your Customer Success Manager 
+- [Instrumenting for LLM Observability][5]
 
 ## Further reading
 
