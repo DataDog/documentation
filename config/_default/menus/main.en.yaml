@@ -2956,7 +2956,12 @@ menu:
       url: actions/connections/aws_integration/
       parent: actions_connections
       identifier: actions_aws_integration
-      weight: 101
+      weight: 102
+    - name: Google Workspace
+      url: actions/connections/google_workspace/
+      parent: actions_connections
+      identifier: actions_google_workspace
+      weight: 103
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
