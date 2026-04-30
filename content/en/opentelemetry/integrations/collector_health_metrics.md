@@ -52,7 +52,7 @@ exporters:
 service:
   telemetry:
     metrics:
-      level: detailed
+      level: normal
       readers:
         - pull:
             exporter:
@@ -136,7 +136,7 @@ Configure the Collector's internal telemetry to push metrics directly to the [Da
 service:
   telemetry:
     metrics:
-      level: detailed
+      level: normal
       readers:
         - periodic:
             interval: 10000
@@ -152,7 +152,7 @@ service:
                   - name: dd-api-key
                     value: ${env:DD_API_KEY}
                   - name: dd-otel-metric-config
-                    value: '{"resource_attributes_as_tags": true}'
+                    value: '{"resource_attributes_as_tags": true, "instrumentation_scope_metadata_as_tags": true}'
                 # default_histogram_aggregation: explicit_bucket_histogram
                 # headers_list: "dd-api-key=${env:DD_API_KEY}"
                 # insecure: false
@@ -170,6 +170,10 @@ service:
 Replace `<OTLP_METRICS_ENDPOINT>` with the [Datadog OTLP metrics intake endpoint][201] for your [Datadog site][202]. Your endpoint is {{< region-param key="otlp_metrics_endpoint" code="true" >}}.
 
 The Datadog OTLP metrics intake endpoint accepts only delta metrics, so `temporality_preference: delta` is required. The `dd-api-key` header authenticates the request. For configuration options (including the `dd-otel-metric-config` header for customizing metric translation) and troubleshooting, see [Datadog OTLP Metrics Intake Endpoint][201].
+
+<div class="alert alert-warning">
+This setup pushes metrics directly to the OTLP intake endpoint, bypassing any enrichment that pipeline processors (such as <code>resourcedetection</code> or <code>k8sattributes</code>) would otherwise apply. To populate Datadog tags and host metadata (which are needed for hostname resolution and the default Collector dashboard), set the relevant attributes explicitly under <a href="#optional-tag-with-resource-attributes"><code>service.telemetry.resource</code></a>. If you need automatic hostname and cloud-attribute detection, use the Prometheus tab instead.
+</div>
 
 **`periodic` reader options:**
 
@@ -243,7 +247,7 @@ service:
       deployment.environment: prod
 ```
 
-The declarative `attributes` format supports explicit typing and a `schema_url`:
+Alternatively, use the declarative `attributes` format, which supports explicit typing and a `schema_url`. This format requires Collector v0.151.0 or later:
 
 ```yaml
 service:
@@ -255,13 +259,9 @@ service:
           value: my-cluster
         - name: k8s.pod.name
           value: ${env:HOSTNAME}
-      detectors:
-        attributes:
-          included: [host.id, host.name, cloud.provider, cloud.region]
-          excluded: []
 ```
 
-Use `detectors.attributes.included` and `detectors.attributes.excluded` to allowlist or denylist attributes contributed by SDK-side resource detectors. To suppress a default attribute such as `service.version`, specify it with a null value in the legacy inline format.
+To suppress a default attribute such as `service.version`, specify it with a null value in the legacy inline format.
 
 These attributes are mapped to Datadog tags and host metadata. For the full list of supported mappings, see [OpenTelemetry Semantic Conventions and Datadog Conventions][6] and [Mapping OpenTelemetry Semantic Conventions to Hostnames][7].
 
