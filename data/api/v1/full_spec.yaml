@@ -1277,6 +1277,120 @@ components:
       type: string
       x-enum-varnames:
         - CHECK_STATUS
+    CloudcraftWidgetDefinition:
+      description: This widget displays a Cloudcraft topology of cloud resources for the selected provider.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        description:
+          description: The description of the widget.
+          type: string
+        group_by:
+          description: List of tags or attributes used to group the cloud resources in the widget.
+          example:
+            - ""
+          items:
+            description: Tag or attribute used to group cloud resources.
+            type: string
+          type: array
+        highlighted:
+          description: Search query that visually highlights matching resources in the diagram.
+          example: ""
+          type: string
+        overlay:
+          $ref: "#/components/schemas/CloudcraftWidgetDefinitionOverlay"
+        overlay_filter:
+          description: Filter applied to the selected overlay.
+          example: ""
+          type: string
+        projection:
+          $ref: "#/components/schemas/CloudcraftWidgetDefinitionProjection"
+        provider:
+          $ref: "#/components/schemas/CloudcraftWidgetDefinitionProvider"
+        query_string:
+          description: Query string used to filter the cloud resources displayed in the widget.
+          example: ""
+          type: string
+        show_empty_groups:
+          description: Whether to show empty outline groups in the diagram.
+          type: boolean
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/CloudcraftWidgetDefinitionType"
+      required:
+        - type
+        - query_string
+        - provider
+        - overlay
+        - overlay_filter
+        - group_by
+        - projection
+      type: object
+    CloudcraftWidgetDefinitionOverlay:
+      description: Overlay applied on top of the Cloudcraft topology.
+      enum:
+        - Observability
+        - CloudCost
+        - Security
+        - NDMReachability
+        - Monitors
+        - APM
+        - Default
+      example: Observability
+      type: string
+      x-enum-varnames:
+        - OBSERVABILITY
+        - CLOUD_COST
+        - SECURITY
+        - NDM_REACHABILITY
+        - MONITORS
+        - APM
+        - DEFAULT
+    CloudcraftWidgetDefinitionProjection:
+      description: Projection used to render the Cloudcraft topology.
+      enum:
+        - isometric
+        - 2d
+      example: isometric
+      type: string
+      x-enum-varnames:
+        - ISOMETRIC
+        - TWO_D
+    CloudcraftWidgetDefinitionProvider:
+      description: Cloud provider for the Cloudcraft widget.
+      enum:
+        - aws
+        - azure
+        - gcp
+        - ndm
+        - oci
+      example: aws
+      type: string
+      x-enum-varnames:
+        - AWS
+        - AZURE
+        - GCP
+        - NDM
+        - OCI
+    CloudcraftWidgetDefinitionType:
+      default: cloudcraft
+      description: Type of the Cloudcraft widget.
+      enum:
+        - cloudcraft
+      example: cloudcraft
+      type: string
+      x-enum-varnames:
+        - CLOUDCRAFT
     CohortWidgetDefinition:
       additionalProperties: false
       description: The cohort widget visualizes user retention over time.
@@ -25794,6 +25908,7 @@ components:
         - $ref: "#/components/schemas/BarChartWidgetDefinition"
         - $ref: "#/components/schemas/ChangeWidgetDefinition"
         - $ref: "#/components/schemas/CheckStatusWidgetDefinition"
+        - $ref: "#/components/schemas/CloudcraftWidgetDefinition"
         - $ref: "#/components/schemas/CohortWidgetDefinition"
         - $ref: "#/components/schemas/DistributionWidgetDefinition"
         - $ref: "#/components/schemas/EventStreamWidgetDefinition"
