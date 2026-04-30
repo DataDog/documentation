@@ -8597,7 +8597,7 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_performance_overhead
       weight: 112
-    - name: iOS, tvOS, watchOS, and visionOS
+    - name: Apple Platforms
       url: real_user_monitoring/application_monitoring/ios
       parent: application_monitoring
       identifier: rum_mobile_ios

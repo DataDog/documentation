@@ -1,6 +1,6 @@
 ---
-title: iOS, tvOS, watchOS, and visionOS Monitoring Setup
-description: "Collect RUM data from your iOS and tvOS applications."
+title: Apple Platform Monitoring Setup
+description: "Collect RUM data from your Apple platform applications."
 aliases:
   - /real_user_monitoring/ios
   - /real_user_monitoring/ios/getting_started
@@ -27,7 +27,7 @@ further_reading:
    text: "Learn about instrumenting SwiftUI applications"
  - link: "/real_user_monitoring/application_monitoring/ios/supported_versions"
    tag: "Documentation"
-   text: "RUM iOS, tvOS, watchOS, and visionOS monitoring supported versions"
+   text: "Apple platform monitoring supported versions"
  - link: "/real_user_monitoring/guide/mobile-sdk-upgrade"
    tag: "Documentation"
    text: "Upgrade RUM Mobile SDKs"

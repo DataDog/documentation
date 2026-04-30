@@ -14,7 +14,7 @@ further_reading:
     text: "RUM & Session Replay"
   - link: "/real_user_monitoring/application_monitoring/ios/supported_versions/"
     tag: "Documentation"
-    text: "RUM iOS, tvOS, watchOS, and visionOS monitoring supported versions"
+    text: "RUM iOS, iPadOS, tvOS, watchOS, and visionOS monitoring supported versions"
   - link: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor"
     tag: "Source Code"
     text: "Datadog Integration for Apollo iOS"

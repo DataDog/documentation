@@ -1,6 +1,5 @@
 ---
-title: iOS, tvOS, watchOS, and visionOS Monitoring Supported Versions
-beta: true
+title: Apple Platform Monitoring Supported Versions
 description: "List of supported operating systems and platforms for the RUM iOS SDK."
 aliases:
  - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios
@@ -27,7 +26,7 @@ further_reading:
 
 ## Supported versions
 
-The RUM iOS SDK supports the following iOS versions:
+The RUM iOS SDK supports the following platforms and versions:
 
 | Platform | Supported | Version | Notes |
 |--------|-------------|---------|-------|
