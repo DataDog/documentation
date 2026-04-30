@@ -16,11 +16,11 @@ Follow this guide to migrate between major versions of the Browser RUM and Brows
 
 ## From v6 to v7
 
-V7 improves privacy defaults, removes deprecated options, and modernizes the SDK internals. Most changes require configuration updates.
+The v7 SDK improves privacy defaults, removes deprecated options, and modernizes the SDK internals. Most changes require configuration updates.
 
 Take notice of the below breaking changes as you upgrade your SDK. Changes are grouped by area of impact.
 
-**Tip**: If you use an AI coding assistant that supports agent skills, you can apply the [`upgrade-browser-sdk-v7` skill][37] to automate most of the migration steps below.
+<div class="alert alert-tip"> If you use an AI coding assistant that supports agent skills, you can apply the <a href="https://github.com/DataDog/browser-sdk/blob/main/.claude/skills/upgrade-browser-sdk-v7/SKILL.md"><code>upgrade-browser-sdk-v7</code> skill</a> to automate most of the migration steps below. </div>
 
 ### Core
 
@@ -36,7 +36,7 @@ Previously, the sampling decision was made once at session creation and persiste
 
 The session storage key has changed from `_dd_s` to `_dd_s_v2` because the new session manager uses an incompatible storage format. On upgrade, existing sessions are automatically migrated from `_dd_s`.
 
-**Note**: Rolling back to v6 after migration starts a new session, because the v6 SDK does not read the `_dd_s_v2` key. If you have CSP or cookie policies that allowlist specific cookie names, add `_dd_s_v2`.
+**Note**: If you roll back to v6 after upgrading, the v6 SDK starts a new session because it does not read the `_dd_s_v2` key. If you have CSP or cookie policies that allowlist specific cookie names, add `_dd_s_v2`.
 
 #### Update the CDN bundle URL
 
@@ -52,7 +52,7 @@ Replace `<SITE>` with your Datadog site (for example, `us1`, `us3`, `us5`, `eu1`
 
 #### CDN bundles use ESM dynamic imports
 
-CDN bundles use ESM dynamic imports instead of CommonJS, significantly reducing webpack overhead and overall bundle size. If you use the CDN snippet, add the `crossorigin` attribute to the script tag:
+CDN bundles use ESM dynamic imports instead of CommonJS, which reduces webpack overhead and overall bundle size. If you use the CDN snippet, add the `crossorigin` attribute to the script tag:
 
 ```html
 <script src="https://www.datadoghq-browser-agent.com/..." crossorigin="anonymous"></script>
@@ -62,7 +62,7 @@ See the [setup documentation][26] for full snippet examples.
 
 #### ES2020 browser baseline
 
-Support for pre-ES2020 browsers has been dropped to remove compatibility shims and polyfills, reducing bundle size. Minimum supported versions are Chrome 80+, Firefox 78+, and Safari 14+. Estimated impact: ~0.048% less coverage.
+Support for pre-ES2020 browsers has been dropped to remove compatibility shims and polyfills, which reduces bundle size. Minimum supported versions are Chrome 80+, Firefox 78+, and Safari 14+. Estimated impact: ~0.048% less coverage.
 
 To continue supporting older browsers, keep using Browser SDK v6 or earlier.
 
@@ -87,17 +87,17 @@ Access-Control-Allow-Headers: traceparent, tracestate, baggage
 
 #### New default for `defaultPrivacyLevel`
 
-`defaultPrivacyLevel` defaults to `mask-user-input` in v7 (previously `mask`). This provides sensible out-of-the-box privacy without the restrictions of full masking. The new default masks user input while other content is collected.
+`defaultPrivacyLevel` defaults to `mask-user-input` in v7 (previously `mask`). This provides a privacy default that masks user input without the restrictions of full masking. The new default masks user input while other content is collected.
 
 To preserve full masking, explicitly set `defaultPrivacyLevel: "mask"`.
 
 #### `enablePrivacyForActionName` enabled by default
 
-`enablePrivacyForActionName` defaults to `true` in v7. Click action names follow the `defaultPrivacyLevel` setting by default. Set `enablePrivacyForActionName: false` to opt out. New masking capabilities are planned for the [Datadog build plugin][36].
+`enablePrivacyForActionName` defaults to `true` in v7. Click action names follow the `defaultPrivacyLevel` setting by default. Set `enablePrivacyForActionName: false` to opt out.
 
 #### `startDurationVital` and `stopDurationVital` API change
 
-The `DurationVitalReference` object has been replaced by a `vitalKey` string option. This aligns the API with `startResource`/`stopResource` and `startAction`/`stopAction`, and with the Mobile SDK, while still allowing multiple concurrent vitals with the same name:
+The `DurationVitalReference` object has been replaced by a `vitalKey` string option. This aligns the API with `startResource`/`stopResource` and `startAction`/`stopAction`, and with the Mobile SDK. Multiple concurrent vitals with the same name are still supported:
 
 ```js
 // Before
@@ -129,7 +129,7 @@ The `strategy` field has been removed from the plugin API. If you use `rum-react
 
 #### Improved action name computation
 
-In v7, the SDK uses a new strategy for computing action names that takes into account the structure of the DOM to apply element privacy levels more precisely and improve handling of shadow DOM content. Action names may change slightly. The `betaTrackActionsInShadowDom` option has been removed.
+In v7, the SDK uses a new strategy for computing action names that considers the DOM structure to apply element privacy levels more precisely and improve handling of shadow DOM content. Action names may change slightly. The `betaTrackActionsInShadowDom` option has been removed.
 
 #### BFCache navigations always tracked
 
@@ -153,7 +153,7 @@ To explicitly enable memory-backed sessions, use `sessionPersistence: 'memory'`.
 
 #### `forwardErrorsToLogs` and `forwardConsoleLogs` are independent
 
-Previously, enabling `forwardErrorsToLogs` also silently forwarded `console.error` calls. These options are now fully independent, giving you precise control over what gets forwarded. `forwardErrorsToLogs` controls unhandled errors only.
+Previously, enabling `forwardErrorsToLogs` also silently forwarded `console.error` calls. These options are now fully independent. You have precise control over what gets forwarded. `forwardErrorsToLogs` controls only unhandled errors.
 
 To preserve the previous behavior, add `error` to your `forwardConsoleLogs` array:
 
@@ -163,9 +163,9 @@ DD_LOGS.init({
 })
 ```
 
-#### Network errors for cancelled requests are dropped
+#### Network errors for canceled requests are dropped
 
-Requests cancelled by the application (aborted fetch or XHR) no longer generate a network error log. This reduces noise in error tracking.
+Requests canceled by the application (aborted fetch or XHR) no longer generate a network error log. This reduces noise in error tracking.
 
 #### Removed options
 
@@ -579,5 +579,3 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [33]: https://rollupjs.org/tutorial/#code-splitting
 [34]: https://parceljs.org/features/code-splitting
 [35]: https://developer.chrome.com/docs/web-platform/long-animation-frames#long-frames-api
-[36]: https://github.com/DataDog/build-plugins
-[37]: https://github.com/DataDog/browser-sdk/blob/main/.claude/skills/upgrade-browser-sdk-v7/SKILL.md
