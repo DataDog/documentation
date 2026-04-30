@@ -7,7 +7,7 @@ import { getTypesenseConfig, type TypesenseEnv } from '../../config/typesense';
 // Same magnifying-glass shape Hugo's side-nav search uses (Hugo loads it as an
 // icomoon font glyph; here we inline it as SVG so the icon scales freely and
 // inherits the input-bar text color via `currentColor`).
-import searchIconSvg from '../../mocked_dependencies/hugo_site/static/images/svg-icons/searchbar_search.svg?raw';
+import searchIconSvg from '../../assets/images/svg-icons/searchbar_search.svg?raw';
 
 interface Props {
   /**

@@ -8,7 +8,7 @@
  */
 import { parse as parseYaml } from 'yaml';
 // @ts-ignore — Vite raw import
-import menusRaw from '../mocked_dependencies/websites_modules/config/_default/menus/menus.en.yaml?raw';
+import menusRaw from '@websites-modules/config/_default/menus/menus.en.yaml?raw';
 
 export type FooterMenuItem = {
   name: string;

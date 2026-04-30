@@ -81,11 +81,11 @@ const alternates = LOCALES
 
 // Pre-resolve globe and caret SVGs for the language selector island.
 const svgIcons = import.meta.glob<string>(
-  '../../mocked_dependencies/hugo_site/static/images/svg-icons/*.svg',
+  '../../assets/images/svg-icons/*.svg',
   { query: '?raw', import: 'default', eager: true }
 );
 function inlineSvg(name: string, color: string, size: string): string {
-  const raw = svgIcons[`../../mocked_dependencies/hugo_site/static/images/svg-icons/${name}`];
+  const raw = svgIcons[`../../assets/images/svg-icons/${name}`];
   if (!raw) return '';
   return raw
     .replaceAll('default-size', size)

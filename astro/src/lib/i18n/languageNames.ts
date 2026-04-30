@@ -5,7 +5,7 @@
  */
 import { parse as parseYaml } from "yaml";
 // @ts-ignore — Vite raw import
-import raw from "../../mocked_dependencies/websites_modules/data/language_names.yaml?raw";
+import raw from "@websites-modules/data/language_names.yaml?raw";
 
 type LanguageNamesTable = Record<string, Record<string, string>>;
 

@@ -3,10 +3,11 @@ import markdoc from '@astrojs/markdoc';
 import preact from '@astrojs/preact';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { fileURLToPath } from 'node:url';
+import { realpathSync } from 'node:fs';
 
 import { LOCALES } from './src/lib/i18n/locale.ts';
 
-const websitesModules = fileURLToPath(new URL('../../../../../../dd/websites-modules', import.meta.url));
+const websitesModules = realpathSync(fileURLToPath(new URL('../../../../../../dd/websites-modules', import.meta.url)));
 const hugoSite = fileURLToPath(new URL('..', import.meta.url));
 
 export default defineConfig({
@@ -18,6 +19,11 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   vite: {
+    server: {
+      fs: {
+        allow: [hugoSite, websitesModules],
+      },
+    },
     resolve: {
       alias: {
         '@hugo-site': hugoSite,

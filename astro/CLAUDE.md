@@ -43,7 +43,7 @@ Render as much content at build time as possible. Light rehydration on the clien
 
 The [mocked_dependencies folder](./src/mocked_dependencies/) contains any external resources that are not yet available to us. For example, [mocked_dependencies/api](./src/mocked_dependencies/api/) contains a copy of the API data available to Hugo ([folder in the Hugo site](../data/api)).
 
-Anytime you're building a feature that depends on some external resource, add a mock/snapshot of that external resource to the `mocked_dependencies` folder, and update the inventory section of the [README](./src/mocked_dependencies/README.md).
+Anytime you're building a feature that depends on some external resource, add a mock/snapshot of that external resource to the `mocked_dependencies` folder.
 
 ## CSS architecture
 

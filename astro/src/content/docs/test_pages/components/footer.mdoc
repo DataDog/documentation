@@ -17,12 +17,12 @@ Site-wide footer rendered at the bottom of every page by `BaseLayout`. Ported fr
 | `FooterAccordion.tsx` | Preact island | Wraps the four menu columns (Product, Resources, About, Blog). Below 992px collapses them into a single-open accordion (default: Resources); above 992px all stay open. |
 | `LanguageSelector.tsx` | Preact island | Bottom-row globe/caret dropdown. Shows the current language plus alternates. English-only for now; add to `availableLanguages` in `Footer.astro` when more languages land. |
 | `FreeTrialModal.tsx` | Preact island | Opens when any element with `data-trigger="free-trial"` is clicked. Embeds the signup flow in an iframe (currently `app.datadoghq.com/signup`). Close on Escape, backdrop click, or the × button. |
-| `SocialIcon.astro` | Static | Inlines a social-network SVG from `mocked_dependencies/websites_modules/static/icons/` keyed by the `pre` field in `footer_social`. |
-| `SvgIcon.astro` | Static | Inlines a docs-repo SVG from `mocked_dependencies/hugo_site/static/images/svg-icons/`, performing Hugo's `default-*` placeholder substitutions for size/color/opacity. |
+| `SocialIcon.astro` | Static | Renders a social-network icon via the websites-modules iconfont (`<i class="icon-{name}">`) keyed by the `pre` field in `footer_social`. |
+| `SvgIcon.astro` | Static | Inlines an SVG from `src/assets/images/svg-icons/`, performing Hugo's `default-*` placeholder substitutions for size/color/opacity. |
 
 ## Data flow
 
-Footer menu data comes from `src/lib/footerMenus.ts`, which parses the copied `menus.en.yaml` snapshot in `mocked_dependencies/websites_modules/config/_default/menus/` and exposes the `footer_resources`, `footer_about`, `footer_blog`, `footer_sub`, and `footer_social` lists (sorted by `weight`). URLs are normalized with `resolveFooterUrl()`. The Product column pulls from the same `menuData.ts` used by the header mega-menu, flattened and deduped. The language selector reads from `src/lib/languageNames.ts`.
+Footer menu data comes from `src/lib/footerMenus.ts`, which reads `config/_default/menus/menus.en.yaml` directly from `@websites-modules` and exposes the `footer_resources`, `footer_about`, `footer_blog`, `footer_sub`, and `footer_social` lists (sorted by `weight`). URLs are normalized with `resolveFooterUrl()`. The Product column pulls from the same `menuData.ts` used by the header mega-menu, flattened and deduped. The language selector reads from `src/lib/languageNames.ts`.
 
 ## Properties (Free-trial modal)
 

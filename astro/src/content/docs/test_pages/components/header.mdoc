@@ -18,11 +18,11 @@ Site-wide header rendered at the top of every page by `BaseLayout`. Ported from 
 | `LogoDownloadPanel.astro` | Static + tiny `<script is:inline>` | Hidden "Looking for Datadog logos?" popover. Click-toggle behavior mirrors Hugo's `.js-logo-download`. |
 | `HeaderScroll.astro` | `<script is:inline>` | Sets `--hugo-header-shrink` to `min(scrollY, 65px)` at ≥992px, and adds/removes the `.main-nav-scrolled` class on `<html>`. |
 | `MobileNav.tsx` | Preact island | Hamburger-triggered right-side overlay. Renders the docs mobile nav variant with home/docs/api quick-links, search stub, and full menu tree. Receives already-resolved labels and URLs as props so the client bundle doesn't pull in `menuData` / `i18n` / `yaml`. |
-| `NavIcon.astro` | Static | Inlines SVG icons from `mocked_dependencies/websites_modules/static/icons/` and colors them via `currentColor`. |
+| `NavIcon.astro` | Static | Renders a websites-modules iconfont icon (`<i class="icon-{name}">`) and colors it via `currentColor`. |
 
 ## Data flow
 
-Menu data is loaded at build time via `src/lib/menuData.ts`, which parses the YAML snapshots in `mocked_dependencies/websites_modules/data/menu_data/`. Labels go through the `i18n(key)` helper in `src/lib/i18n.ts`, which reads `mocked_dependencies/websites_modules/i18n/en.yaml`. URLs are normalized with `resolveUrl()` so relative paths become `https://www.datadoghq.com/…`.
+Menu data is loaded at build time via `src/lib/menuData.ts`, which reads `data/menu_data/*.yaml` directly from `@websites-modules`. Labels go through the `i18n(key)` helper in `src/lib/i18n.ts`, which reads `i18n/*.yaml` from `@websites-modules`. URLs are normalized with `resolveUrl()` so relative paths become `https://www.datadoghq.com/…`.
 
 ## Dimensions (Hugo-identical)
 

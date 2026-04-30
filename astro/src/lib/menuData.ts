@@ -5,11 +5,11 @@
  */
 import { parse as parseYaml } from 'yaml';
 // @ts-ignore — Vite raw import
-import menusRaw from '../mocked_dependencies/websites_modules/data/menu_data/menus.yaml?raw';
+import menusRaw from '@websites-modules/data/menu_data/menus.yaml?raw';
 // @ts-ignore — Vite raw import
-import categoriesRaw from '../mocked_dependencies/websites_modules/data/menu_data/product_categories.yaml?raw';
+import categoriesRaw from '@websites-modules/data/menu_data/product_categories.yaml?raw';
 // @ts-ignore — Vite raw import
-import productsRaw from '../mocked_dependencies/websites_modules/data/menu_data/products.yaml?raw';
+import productsRaw from '@websites-modules/data/menu_data/products.yaml?raw';
 
 export type MenuChild = {
   identifier?: string;

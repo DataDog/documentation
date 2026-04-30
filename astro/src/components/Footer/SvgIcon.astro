@@ -6,7 +6,7 @@
  * behavior Hugo uses to color world.svg etc. at render time.
  */
 const icons = import.meta.glob<string>(
-  '../../mocked_dependencies/hugo_site/static/images/svg-icons/*.svg',
+  '../../assets/images/svg-icons/*.svg',
   { query: '?raw', import: 'default', eager: true }
 );
 
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const { src, size = '100%', color = '#000000', opacity = '1.0', class: className } = Astro.props;
-const key = `../../mocked_dependencies/hugo_site/static/images/svg-icons/${src}`;
+const key = `../../assets/images/svg-icons/${src}`;
 const rawOriginal: string | undefined = icons[key];
 
 const raw = rawOriginal

@@ -14,7 +14,7 @@ type I18nEntry = { one?: string; other?: string };
 type I18nTable = Record<string, I18nEntry>;
 
 const rawModules: Record<string, string> = import.meta.glob<string>(
-  "../../mocked_dependencies/websites_modules/i18n/*.yaml",
+  "@websites-modules/i18n/*.yaml",
   { query: "?raw", import: "default", eager: true },
 );
 
@@ -27,7 +27,8 @@ for (const [path, raw] of Object.entries(rawModules)) {
     continue;
   }
   const lang = match[1] as Locale;
-  tables[lang] = parseYaml(raw) as I18nTable;
+  // TODO: websites-modules/i18n/es.yaml has duplicate top-level keys (cloud_security, ai) — remove uniqueKeys:false once fixed upstream.
+  tables[lang] = parseYaml(raw, { uniqueKeys: false }) as I18nTable;
 }
 
 function lookup(lang: Locale, key: string): string | undefined {
