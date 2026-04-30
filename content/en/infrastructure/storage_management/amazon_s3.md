@@ -223,7 +223,7 @@ To get prefix-level access metrics including request counts, server-side latency
 
 ### Post-setup steps
 
-After inventory files begin appearing in the destination bucket, register the destination bucket with Storage Management by calling the cloud inventory sync configuration API. The `PUT /api/v2/cloudinventoryservice/syncconfigs` endpoint creates or updates a sync configuration that tells Datadog where to read inventory files from.
+After inventory files begin appearing in the destination bucket, enable Storage Management for that destination bucket by calling the following endpoint:
 
 ```bash
 curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
@@ -253,16 +253,7 @@ Replace the request body values with:
 - `destination_bucket_region`: The AWS region of the destination bucket.
 - `destination_prefix`: The prefix within the destination bucket where inventory files are written. Use an empty string if there is no prefix.
 
-A successful request returns the sync configuration ID:
-
-```json
-{
-  "data": {
-    "id": "abc123",
-    "type": "sync_configs"
-  }
-}
-```
+A `200` response confirms Storage Management is enabled for the destination bucket.
 
 {{% /tab %}}
 
