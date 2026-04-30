@@ -40,7 +40,7 @@ You can create a Linear issue directly from the issue panel to group investigati
 
 1. Navigate to the [Error Tracking Explorer][2].
 2. Click on an issue to open the issue panel.
-3. In the issue panel, in the **Actions** dropdown, click **Add Linear ticket**.
+3. In the issue panel, in the **Actions** dropdown, click **Add Linear issue**.
 4. Choose the Linear workspace and team in which the Linear issue should be created.
 5. Optionally, access Data Sync settings to configure how data should be synced between Datadog and Linear.
 6. Click **Create** to create the Linear issue.
@@ -57,7 +57,7 @@ You can attach multiple Error Tracking issues to a single Linear issue to group 
 
 1. Navigate to the [Error Tracking Explorer][2].
 2. Click on an issue to open the issue panel.
-3. In the issue panel, in the **Actions** dropdown, click **Add Linear ticket**.
+3. In the issue panel, in the **Actions** dropdown, click **Add Linear issue**.
 4. In the **Add to Existing** tab, paste the URL of the Linear issue in which you want to group your Error Tracking issues.
 5. Optionally, access Data Sync settings to configure how data should be synced between Datadog and Linear.
 6. Click **Link to Issue** to attach the Error Tracking issue to the Linear issue.
