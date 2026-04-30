@@ -223,9 +223,46 @@ To get prefix-level access metrics including request counts, server-side latency
 
 ### Post-setup steps
 
-<!-- TODO: Replace placeholder with the Storage Management API details for registering an inventory destination bucket. -->
+After inventory files begin appearing in the destination bucket, register the destination bucket with Storage Management by calling the cloud inventory sync configuration API. The `PUT /api/v2/cloudinventoryservice/syncconfigs` endpoint creates or updates a sync configuration that tells Datadog where to read inventory files from.
 
-_Coming soon: API instructions for registering an inventory destination bucket with Storage Management._
+```bash
+curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
+  -H "Accept: application/vnd.api+json" \
+  -H "Content-Type: application/vnd.api+json" \
+  -H "DD-API-KEY: ${DD_API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+  -d '{
+    "data": {
+      "id": "aws",
+      "type": "cloud_provider",
+      "attributes": {
+        "aws": {
+          "aws_account_id": "123456789012",
+          "destination_bucket_name": "my-inventory-bucket",
+          "destination_bucket_region": "us-east-1",
+          "destination_prefix": ""
+        }
+      }
+    }
+  }'
+```
+
+Replace the request body values with:
+- `aws_account_id`: The 12-digit AWS account ID that owns the destination bucket.
+- `destination_bucket_name`: The name of the destination bucket holding inventory reports.
+- `destination_bucket_region`: The AWS region of the destination bucket.
+- `destination_prefix`: The prefix within the destination bucket where inventory files are written. Use an empty string if there is no prefix.
+
+A successful request returns the sync configuration ID:
+
+```json
+{
+  "data": {
+    "id": "abc123",
+    "type": "sync_configs"
+  }
+}
+```
 
 {{% /tab %}}
 
