@@ -23,7 +23,8 @@ DORA Metrics generates events that have associated fields and tags.
 | Event Type | Description |
 | :--- | :--- |
 |Deployment | A single code deployment uniquely identified by env, service, and version tags.<br><br>Deployments can be [marked as failed][17] and are used to compute deployment frequency, change failure rate, and failed deployment recovery time.
-|Commit | An event generated for each individual commit included in a deployment. Contains metadata and is automatically linked to the corresponding deployment.<br><br>Commits are used to compute change lead time.
+|Pull Request | A pull request included in a deployment. Contains metadata such as author, reviewers, labels, and stage metrics. Commits are nested within their associated pull request.<br><br>Pull requests are used to analyze code review workflows and PR-level cycle time.
+|Commit | An event generated for each individual commit included in a deployment. Contains metadata and is automatically linked to the corresponding deployment. Commits are nested within their associated pull request.<br><br>Commits are used to compute change lead time.
 |Incident | An incident declared in production.<br><br>Tracking incidents provides a side-by-side view of how failed deployments translate into real-world incidents, including their severity and frequency.
 
 **Note**: DORA Metrics events have a 2-year retention period.
@@ -71,6 +72,18 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 | `Recovery Time` | Duration in seconds between a failed deployment's `finished_at` and its remediation's `finished_at`. Only available for deployments marked as failures. |
 | `Remediation Type` | The type of remediation applied (`rollback` or `rollforward`). Only available for deployments marked as failures. |
 
+### Pull request fields
+
+| Field  | Description                |
+|------------|----------------------------|
+| `PR Cycle Time`       | Total duration from the first commit to merge. |
+| `Time to PR Ready`       | Duration from the first commit to when the PR is marked as ready for review. |
+| `Review Time`       | Duration from PR being marked ready for review to approval. |
+| `Merge Time`       | Duration from PR approval to merging. |
+| `Time to Deploy`       | Duration from merging to the start of deployment. |
+| `Deploy Time`       | Duration from start of deployment to end of deployment. |
+| `Number of Commits`       | Count of commits included in the pull request. |
+| `Number of Reviewers`       | Count of reviewers who reviewed the pull request. |
 
 
 ### Commit fields

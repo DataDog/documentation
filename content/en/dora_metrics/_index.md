@@ -81,7 +81,7 @@ Click the {{< ui >}}Export{{< /ui >}} icon on any visualization to add it to an 
 
 ### Create custom dashboards
 
-DORA metrics are highly flexible and can be used in custom dashboards to fit your team’s specific needs.
+Build custom dashboards on top of DORA Metrics to analyze your delivery workflow end-to-end, from commits through pull requests to production deployments. For example, compare code review performance across teams to identify which teams are blocked by slow approvals and prioritize where to invest in workflow improvements.
 
 {{< img src="dora_metrics/dashboard.png" alt="An example of a custom DORA Metrics Dashboard" style="width:100%;" >}}
 
