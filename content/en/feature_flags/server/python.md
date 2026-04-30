@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Python application with the Datadog Feature Flags SDK. The Python SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your Python application with the Datadog Feature Flags SDK. The Python SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
@@ -21,7 +21,8 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 Before setting up the Python Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
-- **Datadog Python tracer** `ddtrace` version 3.19.0 or later
+- **Datadog [API key][3]** configured on the Agent
+- **Datadog Python SDK** `ddtrace` version 3.19.0 or later
 - **OpenFeature Python SDK** `openfeature-sdk` version 0.5.0 or later
 
 Set the following environment variables:
@@ -37,7 +38,7 @@ export DD_ENV=<YOUR_ENVIRONMENT>
 
 ## Installation
 
-Install the Datadog Python tracer and OpenFeature SDK:
+Install the Datadog Python SDK and OpenFeature SDK:
 
 {{< code-block lang="bash" >}}
 pip install ddtrace openfeature-sdk
@@ -52,11 +53,15 @@ openfeature-sdk>=0.5.0
 
 ## Initialize the SDK
 
-Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog tracer's Remote Configuration system to receive flag configurations.
+Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog SDK's Remote Configuration system to receive flag configurations.
 
 {{< code-block lang="python" >}}
+from ddtrace import tracer
 from openfeature import api
 from ddtrace.openfeature import DataDogProvider
+
+# Initialize the tracer (required for Remote Configuration)
+tracer.configure()
 
 # Create and register the Datadog provider
 provider = DataDogProvider()
@@ -217,6 +222,51 @@ When your application exits, shut down the OpenFeature API to clean up resources
 api.shutdown()
 {{< /code-block >}}
 
+## Testing
+
+You can test against a dedicated Datadog test environment with the real Datadog provider, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` is bundled with `openfeature-sdk`, so no additional dependency is required.
+
+The OpenFeature API is a global singleton (`openfeature.api.set_provider` mutates module-level state). Use a `function`-scoped pytest fixture and call `api.shutdown()` in teardown so tests do not leak flag state into each other.
+
+{{< code-block lang="python" filename="test_flags.py" >}}
+import pytest
+from openfeature import api
+from openfeature.evaluation_context import EvaluationContext
+from openfeature.provider.in_memory_provider import InMemoryProvider, InMemoryFlag
+
+
+@pytest.fixture
+def client():
+    flags = {
+        "new-checkout-flow": InMemoryFlag(
+            default_variant="off",
+            variants={"on": True, "off": False},
+        ),
+        "ui-theme": InMemoryFlag(
+            default_variant="light",
+            variants={"light": "light", "dark": "dark"},
+        ),
+    }
+    api.set_provider(InMemoryProvider(flags))
+    yield api.get_client()
+    api.shutdown()
+
+
+def test_boolean_flag_returns_default_variant(client):
+    assert client.get_boolean_value("new-checkout-flow", True) is False
+
+
+def test_string_flag_with_context(client):
+    ctx = EvaluationContext(targeting_key="user-123")
+    assert client.get_string_value("ui-theme", "dark", ctx) == "light"
+
+
+def test_missing_flag_returns_default(client):
+    assert client.get_boolean_value("does-not-exist", True) is True
+{{< /code-block >}}
+
+`InMemoryFlag` takes `default_variant` (a string variant name) and `variants` (a dict mapping variant names to typed values). Passing a value as `default_variant` instead of a variant name is a common mistake. For targeting logic, pass a `context_evaluator` callback that receives the flag and an `EvaluationContext` and returns a `FlagResolutionDetails` object carrying the chosen variant.
+
 ## Troubleshooting
 
 ### Provider not enabled
@@ -233,10 +283,11 @@ Verify the following to ensure that Remote Configuration is working:
 - Datadog Agent is version 7.55 or later
 - Remote Configuration is enabled on the Agent
 - `DD_SERVICE` and `DD_ENV` environment variables are set
-- The tracer can communicate with the Agent
+- The SDK can communicate with the Agent
 
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
+[3]: /account_management/api-app-keys/#api-keys
 
 ## Further reading
 

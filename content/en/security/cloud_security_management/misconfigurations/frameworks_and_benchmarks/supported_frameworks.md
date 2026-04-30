@@ -58,7 +58,7 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 | [HIPAA][9]                                      | 800-66-r2                      | `hipaa`                             | Cloud                    |
 | [ISO/IEC 27001][8]                              | 2022, 2013                     | `iso-27001`                         | Cloud                    |
 | [NIS2 Directive (EU)][14]                       | 2022/2555                      | `nis2`                              | Cloud                    |
-| [NIST 800-171][31]                              | v2                             | `nist-800-171`                      | Cloud                    |
+| [NIST 800-171][31]                              | v3                             | `nist-800-171`                      | Cloud                    |
 | [NIST 800-53][30]                               | v5                             | `nist-800-53`                       | Cloud                    |
 | [NIST AI Risk Management Framework][15]         | v1.0                           | `nist-ai-rmf`                       | Cloud                    |
 | [NIST Cybersecurity Framework][32]              | v2.0, v1.1                     | `nist-csf`                          | Cloud                    |
@@ -101,7 +101,7 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 [24]: https://www.cisecurity.org/benchmark/red_hat_linux
 [25]: https://www.cisecurity.org/benchmark/amazon_linux
 [30]: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
-[31]: https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final
+[31]: https://csrc.nist.gov/pubs/sp/800/171/r3/final
 [32]: https://www.nist.gov/cyberframework/framework
 [33]: https://www.datadoghq.com/blog/essential-cloud-security-controls-ruleset-v2/
 [34]: https://www.cisecurity.org/benchmark/kubernetes

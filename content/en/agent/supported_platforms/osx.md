@@ -61,7 +61,7 @@ The `launchctl` service manager controls the Agent lifecycle, while other comman
 The [Datadog Agent configuration file][7] is located in `/opt/datadog-agent`. This YAML file holds the host-wide connection details used to send data to Datadog including:
 
 - `api_key`: your organization's [Datadog API key][8]
-- `site`: target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`)
+- `site`: target Datadog region (for example `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`, `us2.ddog-gov.com`)
 - `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])
 - Default tags, log levels, and Datadog configurations.
 
@@ -125,7 +125,7 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=macos
 [2]: /agent/troubleshooting/
-[3]: /developers/guide/custom-python-package/
+[3]: /extend/guide/custom-python-package/
 [4]: /integrations/
 [5]: https://docs.datadoghq.com/agent/supported_platforms/?tab=macos
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=macos

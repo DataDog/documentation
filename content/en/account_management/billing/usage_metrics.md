@@ -34,6 +34,8 @@ Estimated usage metrics are generally available for the following usage types:
 | Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric`, `datadog.estimated_usage.metrics.custom.ingested.by_tag`  | Unique ingested Custom Metrics seen in the last hour. |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | Total number of ingested events, including excluded logs. |
+| Logs Pipelines Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Number of logs matched by pipelines in bytes. |
+| Logs Pipelines Events          | `datadog.estimated_usage.logs.ingested_events` | Number of events matched by pipelines in bytes, including excluded logs. |
 | Logs Drop Count               | `datadog.estimated_usage.logs.drop_count` | Total number of events dropped during ingestion. |
 | Logs Truncated Count          | `datadog.estimated_usage.logs.truncated_count` | Total number of events truncated at ingestion. |
 | Logs Truncated Bytes          | `datadog.estimated_usage.logs.truncated_bytes` | Volume of truncated events in bytes. |
@@ -64,6 +66,7 @@ Estimated usage metrics are generally available for the following usage types:
 | AAP Tasks                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | Unique AAP Fargate Tasks seen in the last 5 minutes. |
 | CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Pipeline committers seen from (calendar) month-to-date. |
 | CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |
+| Code Coverage Committers | `datadog.estimated_usage.code_coverage.committers` | Code coverage committers seen from (calendar) month-to-date. |
 | IOT devices                   | `datadog.estimated_usage.iot.devices`, `datadog.estimated_usage.iot.devices.by_tag` | Unique IoT devices seen in the last hour. |
 | Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
 | Custom Events                 | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
@@ -71,6 +74,8 @@ Estimated usage metrics are generally available for the following usage types:
 | Code Security SAST Committers | `datadog.estimated_usage.code_security.sast.committers` | SAST committers seen from (calendar) month-to-date. |
 | Code Security SCA Committers  | `datadog.estimated_usage.code_security.sca.committers`  | SCA committers seen from (calendar) month-to-date.  |
 | Code Security SCA Hosts       | `datadog.estimated_usage.asm.vulnerability_oss_host`, `datadog.estimated_usage.asm.vulnerability_oss_host.by_tag` | Unique SCA hosts seen in the last hour. |
+| Code Security Secret Scanning Committers  | `datadog.estimated_usage.code_security.secrets.committers`  | Secret Scanning committers seen from (calendar) month-to-date.  |
+| Code Security IaC Committers  | `datadog.estimated_usage.code_security.iac.committers`  | Infrastructure as Code (IaC) committers seen from (calendar) month-to-date.  |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 

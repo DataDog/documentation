@@ -1,4 +1,5 @@
 ---
+id: pipeline_execution_time
 title: pipeline execution time
 core_product:
   - ci-cd

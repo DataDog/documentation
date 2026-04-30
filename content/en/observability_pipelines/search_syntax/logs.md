@@ -52,9 +52,17 @@ The following are free text search examples:
 
 You can search attribute keys and values. For example, if your attribute key is `url` and you want to filter on the `url` value `www.datadoghq.com`, enter: `url:www.datadoghq.com`.
 
+**Note**: Attribute searches are case sensitive.
+
+#### Filter for events with a specific attribute key
+
 To filter for events that have a specific attribute key, use the `_exists_` syntax. For example, if you use the query `_exists_:service`, the event `{"service": "postgres"}` matches the query, but the event `{"env": "prod"}` does not match.
 
-**Note**: Attribute searches are case sensitive.
+#### Filter for events that do not have a specific attribute key
+
+To filter for events that do not have a specific attribute key, use the `_missing_` syntax. For example, if you use the query `_missing_:service`, the event `{"env": "prod"}` matches the query, but the event `{"service": "postgres"}` does not match.
+
+#### Attribute search syntax examples
 
 Here are some attribute search syntax examples and logs that match the syntax:
 
@@ -86,6 +94,9 @@ Here are some attribute search syntax examples and logs that match the syntax:
 `_exists_:service`
 : Matches logs with the attribute key `service`. For example, the query matches `{"service": "postgres"}`, but does not match `{"env": "prod"}`.
 
+`_missing_:service`
+: Matches logs that do not have the attribute key `service`. For example, the query matches `{"env": "prod"}`, but does not match `{"service": "postgres"}`.
+
 #### Path notation
 
 To understand path notation, let's look at the following log structure:
@@ -105,7 +116,7 @@ To understand path notation, let's look at the following log structure:
 ```
 In this example, use the following reference rules:
 - Use `outer_key.inner_key` to reference the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to reference the key with the value `double_inner_value`.
+- Use `outer_key.a.double_inner_key` to reference the key with the value `double_inner_value`.
 
 If you want to search for a literal `.` in the attribute key, wrap the key in escaped quotes in the search query. For example, the search query `"service.status":disabled` matches the event `{"service.status": "disabled"}`.
 

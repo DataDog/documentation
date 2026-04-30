@@ -26,7 +26,7 @@ further_reading:
 
 You can access Continuous Testing settings on the [Synthetic Monitoring & Testing Settings page][1].
 
-{{< img src="continuous_testing/settings/parallelization.png" alt="Set parallelization for your Continuous Testing tests on the Settings page" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization_2.png" alt="Set parallelization for your Continuous Testing tests on the Settings page" style="width:100%;">}}
 
 By default, all your tests running in CI/CD pipelines run sequentially (one after the other). To change this behavior, set a [parallelization value](#set-parallelization) and save your selection.
 
@@ -36,7 +36,7 @@ Parallel tests are tests that run simultaneously in your [continuous integration
 
 {{< img src="continuous_testing/parallelization_explained.png" alt="A diagram that explains the benefits of parallelization vs. sequential test runs" style="width:100%;">}}
 
-This ensures you can:
+Use parallelization to:
 
 * Reduce pipeline duration and ship new features faster
 * Increase development confidence and speed of delivery
@@ -44,19 +44,19 @@ This ensures you can:
 
 ### Estimate parallelization
 
-Click **Estimate Parallelization** to see how many tests Datadog recommends running in parallel based on your [Continuous Testing metrics][3]. 
+Click {{< ui >}}Estimate Parallelization{{< /ui >}} to see how many tests Datadog recommends running in parallel based on your [Continuous Testing metrics][3]. 
 
-{{< img src="continuous_testing/estimated_parallelization.png" alt="Completing the Estimate Parallelization wizard in Continuous Testing Settings" style="width:60%;">}}
+{{< img src="continuous_testing/settings/estimated_parallelization_2.png" alt="Completing the Estimate Parallelization wizard in Continuous Testing Settings" style="width:60%;">}}
 
-After specifying the expected duration for testing in your CI pipeline and, optionally, the average number of tests per CI batch, the **Estimated Parallelization** section calculates the amount of parallelization you want to set:
+After specifying the expected duration for testing in your CI pipeline and, optionally, the average number of tests per CI batch, the {{< ui >}}Estimated Parallelization{{< /ui >}} section calculates the amount of parallelization you want to set:
 
 $$\text"estimated parallelization" = {\text"average numbers of tests per CI batch" * \text"average test duration"} / \text"expected duration in your CI pipeline"$$
 
 ### Set parallelization
 
-1. Under **Set your preferences**, select the **Parallelization** option. 
+1. Under {{< ui >}}Set your preferences{{< /ui >}}, select the {{< ui >}}Parallelization{{< /ui >}} option. 
 2. Customize the parallelization you need based on how many tests you want to run in parallel.
-3. Click **Save Selection**.
+3. Click {{< ui >}}Save Selection{{< /ui >}}.
 4. Confirm your selection.
 
 {{< img src="continuous_testing/settings/parallelization.png" alt="Parallelization settings for 25 parallel Continuous Testing test runs" style="width:100%;">}}

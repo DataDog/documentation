@@ -9,10 +9,6 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< callout header="false" btn_hidden="true">}}
-  Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is currently in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector on Linux-based bare-metal hosts and virtual machines.
@@ -42,10 +38,15 @@ To complete this guide, you need the following:
 To install the DDOT Collector on a Linux host, use the following one-line installation command:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=75.0-1 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 This command installs both the core Datadog Agent package and the DDOT Collector that runs alongside it.
+
+**Note**: For Agent v7.78+, if the Datadog Agent is already installed on the host, you can install the DDOT Collector separately using the following command:
+```shell
+sudo datadog-agent otel install
+```
 
 ### Validation
 

@@ -33,9 +33,11 @@ In Kubernetes environments, injection is handled by the Datadog Admission Contro
 
 1. Evaluates whether the pod should be instrumented based on configured selectors (such as namespaces, labels, or specific pod properties).
 1. Mutates the pod spec to:
-   - Add init containers to download injector and tracer libraries
+   - Use the Datadog CSI driver to mount the injector and SDKs
    - Set environment variables (like `LD_PRELOAD`)
    - Mount volumes to persist injected libraries
+
+The default delivery method uses init containers, but SSI supports additional [injection modes][2] that may better suit your environment.
 
 ## Injector behavior
 
@@ -45,8 +47,11 @@ After the injector is loaded into a process's memory space—regardless of platf
 - Emits telemetry to report status and aid in debugging.
 - Includes fallback logic to allow the application to continue running uninstrumented if injection fails.
 
+**Note**: Because the injector runs before the SDK evaluates its environment variables, setting `DD_TRACE_ENABLED=false` does not prevent SSI from loading the SDK. To disable or remove SSI, see the [Single Step APM Instrumentation][1] setup page for your platform.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/automatic_instrumentation/single-step-apm
+[2]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes/#configure-injection-modes

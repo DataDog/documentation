@@ -4,6 +4,9 @@ description: "Customize Datadog Case Management with custom case types, attribut
 aliases:
 - /service_management/case_management/customization/
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-risk-management"
+  tag: "Blog"
+  text: "How we centralize and remediate risks with Datadog Case Management"
 - link: "/incident_response/case_management/"
   tag: "Documentation"
   text: "Case Management Overview"
@@ -89,26 +92,21 @@ You can add attributes that reflect your team's specific needs, such as escalati
 
 ## Custom statuses
 
-Case Management supports customizable case statuses. By default, cases move through Open, In Progress, and Closed. You can add additional statuses to represent reviews, handoffs, or other workflow steps.
+Case Management supports customizable case statuses. By default, cases move through Open, In Progress, and Closed. You can add additional statuses to represent reviews, handoffs, or other workflow steps. Custom statuses let you standardize case workflows and align status options with your team's processes to support reporting and automation.
 
-Custom statuses help you:
-- Standardize how work moves through each stage of a case lifecycle.
-- Reflect reviews, handoffs, and intermediate states.
-- Improve reporting and automation by aligning statuses with your processes.
+### Understanding custom statuses behavior
+* Each status group (Open, In Progress, Closed) must contain at least one status.
+* You can delete an existing status, but you must first migrate any cases currently using that status to another status in the same group.
+* Custom statuses behave exactly the same as Datadog's built-in statuses.
 
 ### Create a custom status
 
 1. Navigate to [**Settings > Shared Settings > Case Types**][2].
 2. Select the case type you want to update.
 3. Scroll to the **Statuses** section.
-4. Add a new status under one of the three existing status groups: **Open, In-Progress,** or **Closed**.
-5. (Optional) Set a new **default status** for each status group. Default Statuses are used in automations as the preferred statuses for the group when exact status names are not provided.
+4. Add a new status under one of the three existing status groups: **Open, In Progress,** or **Closed**.
+5. (Optional) Set a new **default status** for each status group. Default statuses are used in automations as the preferred statuses for the group when exact status names are not provided.
 
-<!-- \[Screenshot here\] -->
-
-* Each status group (Open, In-Progress, Closed) must contain at least one status.
-* You can delete an existing status, but you must first migrate any cases currently using that status to another status in the same group.
-* Custom statuses behave exactly the same as Datadog's built-in statuses.
 
 ## Further reading
 

@@ -16,9 +16,9 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Python tracer**.
+1. **Install the Datadog Python SDK**.
 
-   Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. This ensures the tracer is included in your container image when it is built and deployed. You can find the latest version on [PyPI][1]:
+   Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. This ensures the SDK is included in your container image when it is built and deployed. You can find the latest version on [PyPI][1]:
    {{< code-block lang="text" filename="requirements.txt" disable_copy="false" collapsible="true" >}}
 ddtrace==<VERSION>
 {{< /code-block >}}
@@ -54,7 +54,7 @@ ddtrace==<VERSION>
 
    Then, update your logging library. For example, you can use Python's native `logging` library:
    {{< code-block lang="python" disable_copy="false" >}}
-LOG_FILE = "/shared-logs/logs/app.log"
+LOG_FILE = "/shared-volume/logs/app.log"
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 
 FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
@@ -83,7 +83,21 @@ logger.info('Hello world!')
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
+6. **Enable profiling (preview)**.
+
+   To enable the [Continuous Profiler][6], set the environment variable `DD_PROFILING_ENABLED=true` in your application container and add `import ddtrace.auto` at the top of your function file:
+
+   {{< code-block lang="python" disable_copy="false" >}}
+import ddtrace.auto
+
+# ... rest of your function code
+{{< /code-block >}}
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for 2nd gen Cloud Run functions.</div>
+
 {{% serverless-init-env-vars-sidecar language="python" function="true" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 
@@ -96,5 +110,6 @@ logger.info('Hello world!')
 [1]: https://pypi.org/project/ddtrace/
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [3]: /tracing/other_telemetry/connect_logs_and_traces/python/
-[4]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
+[4]: /extend/dogstatsd/?tab=python#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5
+[6]: /profiler/

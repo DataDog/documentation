@@ -4,10 +4,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/historical-metrics/"
   tag: "Blog"
   text: "Monitor system performance across longer time frames with historical metrics"
-- link: "/developers/dogstatsd/"
+- link: "/extend/dogstatsd/"
   tag: "Documentation"
   text: "Learn more about DogStatsD"
-- link: "/developers/community/libraries/"
+- link: "/extend/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
 - link: "https://www.datadoghq.com/blog/historical-metrics/"
@@ -17,7 +17,7 @@ further_reading:
 
 {{< jqmath-vanilla >}}
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">Historical metrics ingestion is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{% /site-region %}}
 

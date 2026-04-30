@@ -17,9 +17,9 @@ further_reading:
   text: "Learn about CI Monitors"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
-This Test Optimization feature is being deprecated and replaced by a new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product. Sign up for the Preview!
-{{< /callout >}}
+<div class="alert alert-warning">
+This Test Optimization feature is legacy. Use the new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product instead.
+</div>
 
 ## Overview
 
@@ -230,7 +230,7 @@ When code coverage is available, the Datadog Tracer reports it under the `test.c
 
 If your project already has Jacoco configured, the Datadog Tracer instruments it and reports the coverage data to Datadog automatically.
 
-Otherwise, you can configure the tracer to add Jacoco to your test runs at runtime.
+Otherwise, you can configure the SDK to add Jacoco to your test runs at runtime.
 Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify which [version of Jacoco][2] you want to have injected (for example: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
 
 

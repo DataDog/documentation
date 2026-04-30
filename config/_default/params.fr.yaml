@@ -1,7 +1,9 @@
 announcement_banner:
-  desktop_message: Read the 2025 State of Containers and Serverless Report!
-  external_link: https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025
-  mobile_message: Read the State of Containers and Serverless Report!
+  desktop_message: "<span>Join Datadog at DASH in NYC, June 9-10. | The future of AI + Observability starts here.</span>"
+  mobile_message: "<span>DASH NYC, June 9-10 | AI + Observability</span>"
+  background_color: "#000000"
+  custom_classes: 'dash-announcement-banner'
+  external_link: https://dash.datadoghq.com/?utm_source=events&utm_medium=internal&utm_campaign=summit-202606dash&utm_term=HPbanner
 disclaimer: Cette page n'est pas encore disponible en français, sa traduction est
   en cours. <br> Si vous avez des questions ou des retours sur notre projet  de traduction
   actuel, <a href="https://docs.datadoghq.com/fr/help/">n'hésitez pas à nous contacter</a>.
@@ -11,5 +13,7 @@ meta_title: Débuter avec Datadog
 site_name: Surveillance d'applications et d'infrastructures avec Datadog
 site_support_banner: Ce produit n'est pas pris en charge par le <a href="/getting_started/site">site
   Datadog </a> que vous avez sélectionné.
+us2_fed_integration_banner_availability: "To find out if this integration is available in your organization, see your <a href=\"https://app.datadoghq.com/integrations\">Datadog Integrations</a> page or ask your organization administrator."
+us2_fed_integration_banner_exception: "To initiate an exception request to enable this integration for your organization, email <a href=\"mailto:support@ddog-gov.com\">support@ddog-gov.com</a>."
 translate_status_banner: Cette traduction n'est pas à jour. Pour consulter la dernière
   version en anglais, cliquez ici

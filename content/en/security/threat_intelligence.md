@@ -85,11 +85,11 @@ Sources, categories, and intents are available as facets and filters on relevant
 | Datadog Threat Research| scanners, Redis exploitation, Docker exploitation, malware, bruteforcer | Honeypots focused on software specific threats | AAP, CWS and Cloud SIEM |
 | [Datadog AAP](https://docs.datadoghq.com/security/application_security/) | scanner | List of IPs that have been observed attacking multiple AAP customers | AAP |
 | [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fraud | AAP and Cloud SIEM |
-| [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM |
+| [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM and Workload Protection |
 | [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
 | [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | cryptomining | Coinminer activity with known mining pools| Workload Protection and Cloud SIEM |
 | Tor | tor | Policy violations for user activity | App and API Protection, Cloud SIEM, and Workload Protection |
-| [Threatfox](https://threatfox.abuse.ch/) | malware | Identify hosts communicating with known malware infrastructure | Cloud SIEM, and Workload Protection |
+| [Threatfox](https://threatfox.abuse.ch/) | malware | Identify hosts communicating with known malware infrastructure | Cloud SIEM and Workload Protection |
 
 
 ### Threat intelligence categories
@@ -103,7 +103,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | AAP and Cloud SIEM |
 | tor | suspicious | IP addresses  | Corporate policy violations for user activity | App and API Protection, Workload Protection, and Cloud SIEM |
 | disposable_email | suspicious | Domain  | Detect product usage from disposable email addresses | AAP |
-| corp_vpn | benign | IP addresses | IPs associated to corporate VPNs | AAP and Client SIEM |
+| corp_vpn | benign | IP addresses | IPs associated to corporate VPNs | AAP and Cloud SIEM |
 | cryptomining | malicious | IP addresses | IP addresses associated with cryptomining activities | AAP, CWS, and Cloud SIEM |
 
 ### Threat intelligence intents

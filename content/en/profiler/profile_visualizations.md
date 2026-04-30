@@ -20,6 +20,13 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/profiling-visualizations/'
       tag: 'Blog'
       text: 'Accessible profiling visualizations'
+    - link: "https://learn.datadoghq.com/courses/continuous-profiler-course"
+      tag: "Learning Center"
+      text: "Diagnose Code Performance Issues with Continuous Profiler"
+    - link: "https://learn.datadoghq.com/courses/profiling-timeline"
+      tag: "Learning Center"
+      text: "Optimize Request Latency with Profiling Timeline"
+
 ---
 
 ## Search profiles
@@ -126,7 +133,7 @@ Lanes on the top are garbage collector **runtime activities** that may add extra
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-Each lane represents a **thread**. Threads with the same name are grouped together. You can expand a group to view details for each thread. Note that threads that are explicitely created by code are grouped under _Managed Threads_.
+Each lane represents a **thread**. Threads with the same name are grouped together. You can expand a group to view details for each thread. Note that threads that are explicitly created by code are grouped under _Managed Threads_.
 
 Lanes on top are runtime activities that may impact performance such as GC activity.
 

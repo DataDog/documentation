@@ -18,9 +18,9 @@ further_reading:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/go">available on GitHub</a>.</div>
 
-1. **Install the Datadog Go tracer**.
+1. **Install the Datadog Go SDK**.
 
-   1. In your main application, add the tracing library from `dd-trace-go`.
+   1. In your main application, add the SDK from `dd-trace-go`.
 
       {{< code-block lang="shell" disable_copy="false" >}}
 go get github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
@@ -75,6 +75,8 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 {{% serverless-init-env-vars-in-container language="go" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
@@ -86,6 +88,6 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
 [2]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
 [3]: /tracing/other_telemetry/connect_logs_and_traces/go/
-[4]: /developers/dogstatsd/?tab=go#install-the-dogstatsd-client
+[4]: /extend/dogstatsd/?tab=go#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples-5
 

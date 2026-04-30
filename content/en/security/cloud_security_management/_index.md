@@ -48,6 +48,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-cloud-security-compliance"
     tag: "Blog"
     text: "Scale compliance across global frameworks with Datadog Cloud Security"
+  - link: "https://www.datadoghq.com/blog/ec2-ami-risks"
+    tag: "Blog"
+    text: "AWS AMI security: How misconfigured and public AMIs expand your cloud attack surface"
+  - link: "https://www.datadoghq.com/blog/cloud-security-oci"
+    tag: "Blog"
+    text: "Protect your OCI resources with Datadog Cloud Security"
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:
@@ -63,7 +69,7 @@ Datadog Cloud Security delivers deep visibility, continuous configuration audits
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -81,15 +87,23 @@ Cloud Security also includes access to Datadog Security features, including:
 - [Audit Trail][20]
 - [Security Research Feed][16]
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  The new Cloud Security Summary shown below is in Preview. To get started, contact your Customer Success representative.
-{{< /callout >}} 
-
-{{< img src="security/csm/csm_overview_4.png" alt="Cloud Security Summary in Datadog" width="100%">}}
+{{< img src="security/csm/csm_overview_5.png" alt="Cloud Security Summary in Datadog" width="100%">}}
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
 ## Track your organization's health
+
+### Manage homepage dashboards
+
+You can customize the dashboards that you can access directly from the Cloud Security homepage, including setting a dashboard to your default homepage view. Use dashboards to prioritize remediation efforts, schedule reports, put security data next to observability and cost data, and embed apps and workflows you can start directly from your reporting view. 
+
+On the [Cloud Security homepage][4], in the **Dashboards** section, you can jump directly to dashboards for Identity Risks, Misconfigurations, or Vulnerabilities. You can also add existing dashboards or create one to keep on your Cloud Security homepage sidebar for convenient access.
+
+Additionally, you can click the **More Options** icon {{< img src="icons/kebab.png" inline="true" style="height:1em" >}} to manage your pinned dashboards, including setting one as your Cloud Security homepage default view. Click **Cloud Security** in the Datadog nav bar or **Summary** in the Cloud Security nav bar to go directly to your pinned dashboard.
+
+For more information, see [Dashboards][23].
+
+### Track your security posture score
 
 Available for [Cloud Security Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
 
@@ -110,7 +124,7 @@ To get more detail, use [Findings][7] to review and remediate your organization'
 - Use the [Security Graph][17] to model your cloud environment as a relationship graph, so you can visualize and query the connections between your cloud resources. You can write queries to search for specific relationships between resources, such as publicly accessible EC2 instances that can access S3 buckets containing sensitive data, so you can proactively mitigate those infrastructure risks.
   {{< img src="security/csm/security_graph.png" alt="Security Graph displaying an example EC2 instance" width="100%">}}
 - Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. For more information, see the [Resource Catalog][13] documentation.
-  {{< site-region region="gov" >}}
+  {{< site-region region="gov,gov2" >}}
   <div class="alert alert-danger">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
   {{< /site-region >}}
   {{< img src="infrastructure/resource_catalog/resource_catalog_infra_3.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
@@ -154,3 +168,4 @@ To get started with Cloud Security, navigate to the [**Cloud Security Setup**][3
 [20]: /security/audit_trail/
 [21]: https://app.datadoghq.com/security/map
 [22]: /datadog_cloudcraft/overlays/#security
+[23]: /dashboards/

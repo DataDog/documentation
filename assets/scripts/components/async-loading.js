@@ -2,6 +2,7 @@ import { updateTOC, buildTOCMap } from './table-of-contents';
 import initCodeTabs from './codetabs';
 import { redirectToRegion, hideTOCItems } from '../region-redirects';
 import { initCopyCode } from './copy-code';
+import { initCopyPageButton } from './copy-page-button';
 import { initializeIntegrations } from './integrations';
 import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
@@ -260,6 +261,7 @@ function loadPage(newUrl) {
             toggleMultiCodeLangNav(pageCodeLang);
             hideTOCItems(true)
             initCopyCode()
+            initCopyPageButton()
 
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });

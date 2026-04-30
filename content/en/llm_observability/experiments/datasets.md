@@ -5,17 +5,21 @@ description: Using datasets in LLM Observability Experiments, including how to c
 
 In LLM Observability Experiments, a _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ that represent scenarios you want to tests your agent on. Each dataset is associated with a _project_.  
 
+Each record in a dataset contains:
 - **input** (required): Represents all the information that the agent can access in a task.
 - **expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assesss. 
 - **metadata** (optional): Contains any useful information to categorize the record and use for further analysis. For example: topics, tags, descriptions, notes.
+- **id** (optional): A user-defined identifier for the record. Must be 128 characters or fewer and contain only letters, numbers, `_`, `-`, or `.`. If not provided, the SDK generates one automatically.
+
+Datasets enable systematic testing and regression detection by providing consistent evaluation scenarios across experiments.
 
 ### Creating a dataset
 
-You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or programmatically by using the SDK:
+You can create datasets from production data, CSV files, or manually construct them programmatically.
 
 {{< tabs >}}
 
-{{% tab "CSV" %}}
+{{% tab "From CSV files" %}}
 
 To create a dataset from a CSV file, use `LLMObs.create_dataset_from_csv()`:
 
@@ -29,25 +33,26 @@ dataset = LLMObs.create_dataset_from_csv(
     input_data_columns=["question", "category"],  # Columns to use as input
     expected_output_columns=["answer"],           # Optional: Columns to use as expected output
     metadata_columns=["difficulty"],              # Optional: Additional columns as metadata
+    id_column="record_id",                        # Optional: Column to use as record IDs
     csv_delimiter=","                             # Optional: Defaults to comma
 )
 
 # Example "questions.csv":
-# question,category,answer,difficulty
-# What is the capital of Japan?,geography,Tokyo,medium
-# What is the capital of Brazil?,geography,Brasília,medium
+# record_id,question,category,answer,difficulty
+# japan-capital,What is the capital of Japan?,geography,Tokyo,medium
+# brazil-capital,What is the capital of Brazil?,geography,Brasília,medium
 
 ```
 
 **Notes**:
 - CSV files must have a header row
 - Maximum field size is 10MB
-- All columns not specified in `input_data_columns` or `expected_output_columns` are automatically treated as metadata
+- All columns not specified in `input_data_columns`, `expected_output_columns`, or `id_column` are automatically treated as metadata
 - The dataset is automatically pushed to Datadog after creation
 
 {{% /tab %}}
 
-{{% tab "Manual" %}}
+{{% tab "Manual creation" %}}
 
 To manually create a dataset, use `LLMObs.create_dataset()`:
 
@@ -60,6 +65,7 @@ dataset = LLMObs.create_dataset(
     description="Questions about world capitals",
     records=[
         {
+            "id": "china-capital",                                             # optional, user-defined record ID
             "input_data": {"question": "What is the capital of China?"},       # required, JSON or string
             "expected_output": "Beijing",                                      # optional, JSON or string
             "metadata": {"difficulty": "easy"}                                 # optional, JSON
@@ -71,10 +77,52 @@ dataset = LLMObs.create_dataset(
         }
     ]
 )
-
 # View dataset in Datadog UI
 print(f"View dataset: {dataset.url}")
 ```
+{{% /tab %}}
+
+{{% tab "From production traces" %}}
+Add production traces to datasets manually through the UI or automatically with Automations.
+
+**Manual selection (UI)**:
+1. Navigate to [**AI Observability > Traces**][2]. You can also add a new Automation from [Settings > Automations][3].
+2. Find a trace you want to include in a dataset.
+3. Click **Add to Dataset**.
+4. Choose an existing dataset or create a dataset.
+5. The trace's input, output, and metadata are automatically extracted.
+
+**Automatic routing (Automations)**:
+
+Automations enable you to continuously route production traces to datasets based on configurable rules, keeping your datasets current with production behavior without manual intervention. Automation rules apply only to new traces generated after the rule is created, not to existing historical traces. 
+
+To set up automatic dataset updates:
+1. Navigate to [**AI Observability > Traces**][2].
+2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications). See the example queries in [Search Syntax][4].
+3. Click **Automate Query**.
+4. Configure sampling rate (for example, 10% of matching traces).
+5. Select **Add to Dataset** as the action.
+6. Choose an existing dataset or create a dataset.
+
+After creating an automation, manage it from [**AI Observability > Settings > Automations**][3]:
+- **Enable/disable**: Control whether new traces are added to the dataset.
+- **Edit**: Modify filters, sampling rates, or target datasets as your needs change.
+- **Delete**: Remove automations that are no longer needed.
+
+**Dataset limits:**
+- Datasets populated by automations are capped at 20,000 records.
+- These datasets are read-only to prevent accidental modification of automated data.
+- To modify records, clone the dataset first.
+
+**Example use cases for Automations:**
+- Sample 10% of traces with failed evaluations to build a failure dataset.
+- Collect edge cases where latency exceeds thresholds.
+- Maintain a diverse dataset with stratified sampling across user segments.
+- Automatically capture new failure patterns as they emerge in production.
+
+[2]: https://app.datadoghq.com/llm/traces
+[3]: https://app.datadoghq.com/llm/settings/automations
+[4]: https://docs.datadoghq.com/logs/explorer/search_syntax/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -129,10 +177,10 @@ Dataset versions start at `0`, and each new version increments the version by 1.
 
 A new dataset version is created when:
 - Adding records
-- Updating records (changes to `input` or `expected_output` fields)
+- Updating records (changes to `input`, `expected_output`, or `metadata` fields)
 - Deleting records
 
-Dataset versions are **NOT** created for changes to `metadata` fields, or when updating the dataset name or description.
+Dataset versions are **NOT** created when updating the dataset name or description.
 
 #### Version retention
 
@@ -166,6 +214,7 @@ The Dataset class provides methods to manage records: `append()`, `update()`, `d
 ```python
 # Add a new record
 dataset.append({
+    "id": "switzerland-capital",
     "input_data": {"question": "What is the capital of Switzerland?"},
     "expected_output": "Bern",
     "metadata": {"difficulty": "easy"}
@@ -185,4 +234,17 @@ dataset.delete(1)  # Deletes the second record
 dataset.push()
 ```
 
+### Customizing the dataset table
+
+When viewing a dataset's records, you can customize the table to quickly scan and compare records without expanding each one individually.
+
+#### Column picker
+
+Use the column picker to toggle columns on or off and drag to reorder them.
+
+#### Custom columns
+
+Extract specific fields from your dataset records and display them as dedicated table columns. To add a custom column, type a field path in the **Add Column** input at the top of the table. You can add multiple custom columns and reorder them with drag-and-drop. Column configuration is saved to your browser's local storage per project.
+
 [1]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
+

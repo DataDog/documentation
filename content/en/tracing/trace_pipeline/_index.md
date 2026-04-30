@@ -5,6 +5,11 @@ aliases:
     - /tracing/trace_ingestion/
     - /tracing/trace_retention_and_ingestion/
 description: "Learn how to control span ingestion"
+further_reading:
+- link: "https://learn.datadoghq.com/courses/apm-rate-limit-retention"
+  tag: "Learning Center"
+  text: "APM Rate Limiting and Retention"
+
 ---
 
 {{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Pipeline" >}}
@@ -26,6 +31,12 @@ The [Ingestion Control page][3] overviews ingestion volumes and configuration se
 
 {{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
 
+## Processing pipelines
+
+Transform, normalize, and enrich span attributes after ingestion with [Processing Pipelines][7]. Standardize attribute naming across services, consolidate inconsistent keys, and extract structured data from span values, without modifying application code.
+
+{{< img src="tracing/processing_pipelines/manage_pipelines.png" style="width:100%;" alt="Processing Pipelines" >}}
+
 ## Generating metrics from spans
 
 You can generate metrics from ingested spans, and use those custom metrics for queries and comparisons. Learn more in [Generating Metrics from Spans][4].
@@ -45,9 +56,14 @@ Learn about how to track and monitor your volume of ingested and indexed data, i
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
 
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /tracing/trace_explorer
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/
 [3]: /tracing/trace_pipeline/ingestion_controls
 [4]: /tracing/trace_pipeline/generate_metrics
 [5]: /tracing/trace_pipeline/trace_retention
 [6]: /tracing/trace_pipeline/metrics
+[7]: /tracing/trace_pipeline/processing_pipelines

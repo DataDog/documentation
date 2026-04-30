@@ -23,7 +23,7 @@ further_reading:
 - Node.js application containerized with Docker
 - AWS CLI configured with appropriate permissions
 - Your Datadog API key
-- Datadog Node.js tracing library (see [version requirements][1])
+- Datadog Node.js SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -75,7 +75,7 @@ COPY package*.json ./
 COPY . .
 RUN npm install
 
-# Start the application with the Datadog tracer
+# Start the application with the Datadog SDK
 CMD ["node", "--require", "dd-trace/init", "app.js"]
 ```
 

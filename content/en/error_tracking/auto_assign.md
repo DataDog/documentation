@@ -40,7 +40,7 @@ When an error occurs, Auto Assign:
 
 You can view assigned developers directly within each issue in Datadog. If needed, manual reassignment is always possible to override the automatic assignment.
 
-{{< img src="error_tracking/ownership-details.png" alt="Team ownership information on issue details" style="width:80%;" >}}
+{{< img src="error_tracking/ownership-details-2.png" alt="Team ownership information on issue details" style="width:80%;" >}}
 
 # Configuration
 

@@ -17,7 +17,7 @@ The Deduplicate processor removes copies of data to reduce volume and noise. It 
 
 To set up the Deduplicate processor:
 
-1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. Deduped logs and logs that do not match the filter query are sent to the next step in the pipeline.
+1. Define a **filter query**. Only logs that match the specified filter query are processed. Deduped logs and logs that do not match the filter query are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 1. In the **Type of deduplication** dropdown menu, select whether you want to `Match` on or `Ignore` the fields specified below.
     - If `Match` is selected, then after a log passes through, future logs that have the same values for all of the fields you specify below are removed.
     - If `Ignore` is selected, then after a log passes through, future logs that have the same values for all of their fields, *except* the ones you specify below, are removed.
@@ -29,7 +29,12 @@ To set up the Deduplicate processor:
 
 #### Cache size
 
-The default cache size is 5,000 messages (recommended). The cached messages are kept in memory to determine if the incoming messages are duplicates. You can increase the cache size to fit your needs. **Note**: Increasing the cache size increases memory usage.
+The default cache size is 5,000 messages (recommended). The cached messages are kept in memory to determine if the incoming messages are duplicates. You can increase the cache size to fit your needs.
+
+**Notes**:
+- Increasing the cache size increases memory usage.
+- The cache is backed by a LRU cache, where the LRU cache size is the same as the configured cache size.
+- Since the cache is not shared between Workers, only duplicated events processed by the same Worker are dropped.
 
 ### Path notation example
 
@@ -52,4 +57,4 @@ For the following message structure:
 - Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
-{{% observability_pipelines/processors/filter_syntax %}}
+[1]: /observability_pipelines/search_syntax/logs/

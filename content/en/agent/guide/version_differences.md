@@ -80,7 +80,7 @@ To see all changes to the Agent, consult the [Datadog Agent Changelog][4].
 
 [1]: /agent/#agent-architecture
 [2]: /agent/configuration/agent-commands/
-[3]: /developers/dogstatsd/unix_socket/
+[3]: /extend/dogstatsd/unix_socket/
 [4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
 [5]: /metrics/types/?tab=distribution#metric-types
 [6]: /infrastructure/process/

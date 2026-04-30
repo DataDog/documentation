@@ -18,7 +18,7 @@ further_reading:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/ruby">available on GitHub</a>.</div>
 
-1. **Install the Datadog Ruby tracer**.
+1. **Install the Datadog Ruby SDK**.
 
    Add the `datadog` gem to your Gemfile:
    {{< code-block lang="gemfile" disable_copy="false" >}}
@@ -26,7 +26,7 @@ source 'https://rubygems.org'
 gem 'datadog'
 {{< /code-block >}}
 
-   See [Tracing Ruby applications][1] for additional information on how to configure the tracer and enable auto instrumentation.
+   See [Tracing Ruby applications][1] for additional information on how to configure the SDK and enable auto instrumentation.
 
 2. **Install serverless-init**.
 
@@ -62,6 +62,8 @@ logger.info "Hello world!"
 
 {{% serverless-init-env-vars-in-container language="ruby" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
@@ -72,5 +74,5 @@ logger.info "Hello world!"
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#instrument-your-application
 [2]: /tracing/other_telemetry/connect_logs_and_traces/ruby/
-[3]: /developers/dogstatsd/?tab=ruby#install-the-dogstatsd-client
+[3]: /extend/dogstatsd/?tab=ruby#install-the-dogstatsd-client
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=ruby#code-examples-5

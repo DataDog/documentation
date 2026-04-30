@@ -55,13 +55,17 @@ After this is completed, data collection begins automatically. The app registrat
 
 ## Log collection
 
-The diagram below provides a reference architecture for forwarding logs from Azure to Datadog, as described in the [Event Hub log forwarding guide][5].
+The diagram below provides a reference architecture for forwarding logs from Azure to Datadog using [automated log forwarding][29]. A control plane deployed in your chosen subscription discovers resources and configures their diagnostic settings. Log forwarders, consisting of an Azure Container Apps job and a storage account, are deployed in each region where your resources generate logs, and they scale up or down to match log volume.
+
+{{<img src="/logs/guide/azure_automated_logs_architecture/detailed_architecture.png" alt="Workflow diagram showing Azure automated log forwarding: the Control Plane discovers resources, scales log forwarders across regions, configures diagnostic settings to send logs to storage accounts, and then Container Apps check for and forward new logs to Datadog Log Management." style="width:100%">}}
+
+For setup instructions, see the [Azure Automated Log Forwarding Setup guide][29].
+
+{{% collapse-content title="Event Hub log forwarding (legacy)" level="h4" expanded=false id="legacy-event-hub-log-forwarding" %}}
+
+The following reference architecture applies to existing Event Hub log forwarding setups. For new deployments, use [automated log forwarding][29] instead.
 
 {{< img src="integrations/guide/azure_architecture_and_configuration/manual_log_forwarding.png" alt="Architecture diagram showing manual Azure log forwarding setup across two regions where Azure resources use diagnostic settings to send logs through Event Hubs and Log Forwarding Functions to Datadog Logs Ingestion." >}}
-
-### Alternate configuration options for log forwarding
-
-The default architecture above is suitable for most users. Depending on the scale and composition of your Azure environment, as well as the methods your organization uses to implement this architecture, the sections below detail additional considerations that may be relevant.
 
 #### Using the provided templates
 
@@ -79,6 +83,8 @@ However, diagnostic settings are not limited to sending logs to Event Hubs in th
 
 As the volume of logs scales, you may see bottlenecks, typically arising in the Event Hubs. If you plan to submit high log volumes, you may want to consider adding additional partitions or using a Premium or Dedicated tier.
 For especially high log volumes, you may consider adding additional Event Hub and forwarder function pairs within the same region, and splitting traffic between them.
+
+{{% /collapse-content %}}
 
 {{% collapse-content title="Commands to install the Azure Datadog Extension" level="h4" expanded=false id="azure-datadog-extension-commands" %}}
 ## Install on Azure
@@ -111,8 +117,8 @@ The normal settings include:
 |----------|------|--------------|
 | `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
 | `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
-| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip file. |
-| `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
+| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a ZIP file. |
+| `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration ZIP file, mandatory if `agentConfiguration` is specified. |
 
 The protected settings include:
 
@@ -122,12 +128,29 @@ The protected settings include:
 
 **Note**: If `agentConfiguration` and `api_key` are specified at the same time, the API key found in the `agentConfiguration` takes precedence. Also note that if an API key is set on the target machine, it's not possible to change it with `Set-AzVMExtension`.
 
-### Specifying a configuration URI
+### Specify a configuration URI
 
 This example shows how to specify a configuration for the Datadog Agent to use.
 The Datadog Agent configuration URI must be an Azure blob storage URI.
 The Datadog Windows Agent Azure Extension checks that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
-The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder.
+The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder (see the [sample `config_template.yaml` file][101] for all available configuration options).
+
+<div class="alert alert-info">
+To reuse the configuration of an existing Agent:
+
+   1. Remove any extra installation artifacts or files from the existing Agent's <code>%ProgramData%\Datadog</code> folder so that it only contains the <code>datadog.yaml</code> file and <code>conf.d</code> folder with your integration configurations.
+   1. Save the sanitized <code>%ProgramData%\Datadog</code> folder as a ZIP file.
+</div>
+
+#### Generate a SHA256 checksum from the Agent configuration file
+
+{{< code-block lang="powershell" >}}
+Get-FileHash -Path "C:\path\to\yourfile.zip" -Algorithm SHA256
+{{< /code-block >}}
+
+#### Install the Agent with your custom configuration
+
+Reference the blob storage URL with the `agentConfiguration` parameter and the checksum with the `agentConfigurationChecksum` parameter to create the VM extension.
 
 {{< code-block lang="powershell" >}}
 Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "7.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
@@ -146,10 +169,11 @@ Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "Datadog
 {{< /code-block >}}
 
 [100]: https://learn.microsoft.com/powershell/module/az.compute/set-azvmextension
+[101]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 {{% /tab %}}
 {{% tab "Linux" %}}
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 7.0 --settings '{"site":"datadoghq.com", "agentVersion":"latest"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
 {{< /code-block >}}
 
@@ -164,7 +188,7 @@ The normal settings include:
 | `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
 | `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
 | `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip file. |
-| `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
+| `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration ZIP file, mandatory if `agentConfiguration` is specified. |
 
 The protected settings include:
 
@@ -174,18 +198,36 @@ The protected settings include:
 
 **Note**: If `agentConfiguration` and `api_key` are specified at the same time, the API key found in the `agentConfiguration` takes precedence. If an API key is set on the target machine, it's not possible to change it with the `api_key` setting.
 
-### Specifying a configuration URI
+### Specify a configuration URI
 
 This example shows how to specify a configuration for the Datadog Agent to use.
 - The Datadog Agent configuration URI must be an Azure blob storage URI.
 - The Datadog Linux Agent Azure Extension checks that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
-- The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder.
+- The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder (see the [sample `config_template.yaml` file][201] for all available configuration options).
 
-{{< code-block lang="bash" >}}
+<div class="alert alert-info">
+To reuse the configuration of an existing Agent by saving its <code>/etc/datadog-agent</code> folder as a ZIP file:
+
+<code>zip -r datadog_config.zip /etc/datadog-agent</code>.
+</div>
+
+#### Generate a SHA256 checksum from the Agent configuration file
+
+{{< code-block lang="shell" >}}
+sha256sum <YOUR_FILENAME>.zip
+{{< /code-block >}}
+
+#### Install the Agent with your custom configuration
+
+Reference the blob storage URL with the `agentConfiguration` parameter and the checksum with the `agentConfigurationChecksum` parameter to create the VM extension.
+
+{{< code-block lang="shell" >}}
 az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 7.0 --settings '{"site":"datadoghq.com", "agentVersion":"latest", "agentConfiguration":"https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip", "agentConfigurationChecksum":"<SHA256_CHECKSUM>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
 {{< /code-block >}}
 
+
 [200]: https://learn.microsoft.com/cli/azure/vm/extension
+[201]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -622,6 +664,7 @@ The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
 [26]: https://learn.microsoft.com/azure/event-hubs/event-hubs-scalability
 [27]: https://learn.microsoft.com/azure/azure-monitor/reference/metrics-index
 [28]: /metrics/#space-aggregation
+[29]: /logs/guide/azure-automated-log-forwarding/
 [30]: https://azure.microsoft.com/support
 [31]: https://app.datadoghq.com/metric/explorer
 [32]: https://learn.microsoft.com/azure/azure-monitor/reference/tables/containerappconsolelogs

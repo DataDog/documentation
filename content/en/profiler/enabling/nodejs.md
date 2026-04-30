@@ -17,7 +17,7 @@ aliases:
   - /tracing/profiler/enabling/nodejs/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+The profiler is shipped within Datadog SDKs. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 
@@ -37,7 +37,7 @@ To begin profiling applications:
 
 2. Run `npm install --save dd-trace@latest` to add a dependency on the `dd-trace` module which includes the profiler.
 
-3. Enable the profiler:
+3. Enable the profiler using **one** of the following approaches:
 
    {{< tabs >}}
 {{% tab "Environment variables" %}}
@@ -49,7 +49,7 @@ export DD_SERVICE=my-web-app
 export DD_VERSION=1.0.3
 ```
 
-**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the SDK and the profiler are loaded together:
 
 ```node
 node -r dd-trace/init app.js
@@ -67,7 +67,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the SDK and the profiler are loaded together:
 
 ```node
 const tracer = require('dd-trace/init')
@@ -76,9 +76,17 @@ const tracer = require('dd-trace/init')
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
+4. A couple of minutes after you start your application, your profiles appear on the [APM > Profiler page][5]. If they do not, see the [Troubleshooting][9] guide.
 
-5. A couple of minutes after you start your application, your profiles appear on the [APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][9] guide.
+5. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
+
+6. Optional: [Upload Source Maps][10] (Preview). 
+
+   {{< callout url="" btn_hidden="true" header="Join the Preview!">}} Profiler support for uploaded source maps is in Preview. {{< /callout >}}
+
+   If you deploy source maps with your application, the profiler reads them and produces mapped locations in profiles. Source maps in `.map` files and inline source maps are both supported. To reduce deployment sizes (for example, in serverless environments), you can choose not to deploy source maps and instead upload them to Datadog.
+
+   **Note**: Uploaded source maps require dd-trace version 5.93.0 or newer. Your deployed source files must also contain the `@sourceMappingURL` annotation so the profiler knows to use the uploaded maps.
 
 ## Not sure what to do next?
 
@@ -97,3 +105,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [7]: /profiler/enabling/supported_versions/
 [8]: /serverless/aws_lambda/profiling/
 [9]: /profiler/profiler_troubleshooting/nodejs/
+[10]: /real_user_monitoring/guide/upload-javascript-source-maps/

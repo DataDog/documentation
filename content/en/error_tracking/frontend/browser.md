@@ -4,6 +4,9 @@ aliases:
 - /real_user_monitoring/error_tracking/browser_errors
 - /error_tracking/standalone_frontend/browser
 further_reading:
+- link: "https://learn.datadoghq.com/courses/tracking-errors-rum-javascript"
+  tag: "Learning Center"
+  text: "Tracking errors with RUM for JavaScript Web Applications"
 - link: "https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps"
   tag: "Source Code"
   text: "datadog-ci Source code"
@@ -75,7 +78,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 <script>
   (function(h,o,u,n,d) {
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-    d=o.createElement(u);d.async=1;d.src=n
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
   window.DD_RUM.onReady(function() {
@@ -105,7 +108,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
-    type="text/javascript">
+    type="text/javascript"
+    crossorigin>
 </script>
 <script>
     window.DD_RUM && window.DD_RUM.init({

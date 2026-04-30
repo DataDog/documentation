@@ -16,7 +16,7 @@ further_reading:
   tag: Documentation
   text: Explore your services, resources, and traces
 ---
-Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-ios` client-side tracing library][2] and leverage the following features:
+Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-ios` client-side SDK][2] and leverage the following features:
 
 * Create custom [spans][3] for various operations in your app.
 * Send logs for each span individually.
@@ -217,6 +217,36 @@ configuration.site = [DDSite us1_fed];
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
+
+{{< site-region region="gov2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+    with: Datadog.Configuration(
+        clientToken: "<client token>",
+        env: "<environment>",
+        site: .us2_fed,
+        service: "<service name>"
+    ),
+    trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite us2_fed];
+
+[DDDatadog initializeWithConfiguration:configuration
+                        trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
 {{< site-region region="ap1" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -304,7 +334,7 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 ```
 {{% /tab %}}
 {{< /tabs >}}
-3. Datadog tracer implements both [OpenTracing][8] and [OpenTelemetry][12] standards. Configure and enable the shared an OpenTracing `Tracer` as `Tracer.shared()`:
+3. Datadog SDK implements both [OpenTracing][8] and [OpenTelemetry][12] standards. Configure and enable the shared an OpenTracing `Tracer` as `Tracer.shared()`:
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -476,7 +506,7 @@ for (NSString *key in headersWriter.traceHeaderFields) {
 {{< /tabs >}}
 This sets additional tracing headers on your request so your backend can extract the request and continue distributed tracing. Once the request is done, call `span.finish()` within a completion handler. If your backend is also instrumented with [Datadog APM & Distributed Tracing][10], the entire front-to-back trace appears in the Datadog dashboard.
 
-    * In order for the SDK to automatically trace all network requests made to the given hosts, specify the `firstPartyHosts` array in the Datadog initialization, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the URLSession:
+    * To automatically trace all network requests made to the given hosts, specify the `firstPartyHosts` array in the Trace configuration with `urlSessionTracking`:
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -488,18 +518,6 @@ Trace.enable(
             firstPartyHostsTracing: .trace(hosts: ["example.com", "api.yourdomain.com"])
         )
     )
-)
-
-URLSessionInstrumentation.enable(
-    with: .init(
-        delegateClass: <YourSessionDelegate>.self,
-    )
-)
-
-let session = URLSession(
-    configuration: .default,
-    delegate: <YourSessionDelegate>(),
-    delegateQueue: nil
 )
 ```
 {{% /tab %}}
@@ -515,16 +533,44 @@ DDTraceConfiguration *configuration = [[DDTraceConfiguration] alloc] init];
 [configuration setURLSessionTracking:urlSessionTracking];
 
 [DDTrace enableWith:configuration];
+```
+{{% /tab %}}
+{{< /tabs >}}
+This automatically traces all requests to `example.com` and `api.yourdomain.com` hosts (for example, `https://api.yourdomain.com/v2/users` or `https://subdomain.example.com/image.png`).
+
+    _(Optional)_ For **more accurate trace timings**, enable `URLSessionInstrumentation` for your delegate type:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+URLSessionInstrumentation.enableDurationBreakdown(
+    with: .init(
+        delegateClass: <YourSessionDelegate>.self
+    )
+)
+
+let session = URLSession(
+    configuration: .default,
+    delegate: <YourSessionDelegate>(),
+    delegateQueue: nil
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
+[DDURLSessionInstrumentation enableDurationBreakdownWithConfiguration:config];
 
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                        delegate:[[DDNSURLSessionDelegate alloc] init]
+                                                        delegate:[[<YourSessionDelegate> alloc] init]
                                                     delegateQueue:nil];
 ```
 {{% /tab %}}
 {{< /tabs >}}
-This traces all requests made with this `session` to `example.com` and `api.yourdomain.com` hosts (for example, `https://api.yourdomain.com/v2/users` or `https://subdomain.example.com/image.png`).
 
-    **Note**: Tracing auto-instrumentation uses `URLSession` swizzling and is opt-in. If you do not specify `firstPartyHosts`, swizzling is not applied.
+**Notes**:
+- Tracing auto-instrumentation uses `URLSession` swizzling and is opt-in. If you do not specify `urlSessionTracking` and `firstPartyHosts` configurations, swizzling is not applied.
+- Tracing works automatically without `URLSessionInstrumentation`, but trace timings are more accurate after enabling it.
 
 ## Batch collection
 
@@ -562,4 +608,4 @@ The following attributes in `Trace.Configuration` can be used when creating the 
 [9]: https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table
 [10]: https://docs.datadoghq.com/tracing/
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
-[12]: /tracing/trace_collection/custom_instrumentation/ios/otel
+[12]: /tracing/trace_collection/custom_instrumentation/client-side/ios/otel

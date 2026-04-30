@@ -17,6 +17,14 @@ rulesets:
     title: "Security rules for Apex"
     description: |
       Rules focused on finding security issues in your Apex code.
+  bash-code-quality:
+    title: "Code quality rules for Bash scripts."
+    description: |
+      Rules to enforce code quality for Bash scripts.
+  bash-security:
+    title: "Security rules for Bash scripts"
+    description: |
+      Rules to enforce security best practices for Bash scripts.
   csharp-best-practices:
     title: "Best Practices for C#"
     description: |
@@ -273,7 +281,7 @@ further_reading:
     text: "Learn about Datadog Code Security"
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>

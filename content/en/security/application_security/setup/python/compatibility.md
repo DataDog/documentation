@@ -21,7 +21,7 @@ The following App and API Protection capabilities are supported in the Python li
 
 {{< partial name="app_and_api_protection/python/capabilities.html" >}}
 
-<div class="alert alert-danger">Datadog strongly encourages you to always use the last stable release of the tracer.</div>
+<div class="alert alert-danger">Datadog strongly encourages you to always use the last stable release of the SDK.</div>
 
 <div class="alert alert-info">Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.</div>
 
@@ -58,11 +58,14 @@ And the library supports the following runtimes:
 
 ### Supported frameworks
 
+**Note:** Tornado support is available starting in ddtrace Python version 4.4.
+
 | Framework | Versions   | Threat Detection supported? | Threat Protection supported? |
 |-----------|------------|-----------------------------|------------------------------|
 | Django    | 2.2        | {{< X >}}                   | {{< X >}}                    |
 | FastAPI   | 0.86       | {{< X >}}                   | {{< X >}}                    |
 | Flask     | 1.1        | {{< X >}}                   | {{< X >}}                    |
+| Tornado   | 6.3        | {{< X >}}                   | {{< X >}}                    |
 
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
@@ -79,7 +82,7 @@ And the library supports the following runtimes:
 ##### App and API Protection Capability Notes
 
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
--
+
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, MySQL, PostgreSQL, and MariaDB.
 
 ### User Authentication Frameworks compatibility

@@ -2,6 +2,12 @@
 title: Feature Flags
 description: Learn about feature flags in Datadog.
 further_reading:
+- link: "https://www.datadoghq.com/blog/experiments"
+  tag: "Blog"
+  text: "Measure the business impact of every product change with Datadog Experiments"
+- link: "https://www.datadoghq.com/blog/guardrail-metrics"
+  tag: "Blog"
+  text: "Make use of guardrail metrics and stop babysitting your releases"
 - link: "/getting_started/feature_flags/"
   tag: "Documentation"
   text: "Getting started with Feature Flags"
@@ -11,6 +17,9 @@ further_reading:
 - link: "/feature_flags/server/"
   tag: "Documentation"
   text: "Set up Feature Flags for server-side applications"
+- link: "/feature_flags/guide/migrate_from_launchdarkly"
+  tag: "Guide"
+  text: "Migrate Your Feature Flags from LaunchDarkly"
 - link: "/feature_flags/guide/migrate_from_statsig"
   tag: "Guide"
   text: "Migrate Your Feature Flags from Statsig"

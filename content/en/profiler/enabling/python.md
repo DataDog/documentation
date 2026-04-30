@@ -17,14 +17,14 @@ aliases:
   - /tracing/profiler/enabling/python/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+The profiler is shipped within Datadog SDKs. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 
 To use profiling, ensure the following requirements are met:
-- Enable profiling through the Datadog tracing library. Using the latest stable release is recommended.
-- Verify your Python and tracing library versions are compatible by reviewing the [Python Compatibility Requirements][17].
-**Note**: Some features depend on newer Python versions than the minimum required version for the tracing library. For more details, read [Profile Types][8].
+- Enable profiling through the Datadog SDK. Using the latest stable release is recommended.
+- Verify your Python and SDK versions are compatible by reviewing the [Python Compatibility Requirements][17].
+**Note**: Some features depend on newer Python versions than the minimum required version for the SDK. For more details, read [Profile Types][8].
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 
@@ -80,21 +80,8 @@ prof.start()  # Should be as early as possible, eg before other imports, to ensu
 
 ## Caveats
 
-When your process forks using `os.fork`, the profiler needs to be started in
-the child process. In Python 3.7+, this is done automatically. In Python < 3.7,
-you need to manually start a new profiler in your child process:
-
-```python
-# For ddtrace-run users, call this in your child process
-ddtrace.profiling.auto.start_profiler()  # Should be as early as possible, eg before other imports, to ensure everything is profiled
-
-# Alternatively, for manual instrumentation,
-# create a new profiler in your child process:
-from ddtrace.profiling import Profiler
-
-prof = Profiler(...)
-prof.start()  # Should be as early as possible, eg before other imports, to ensure everything is profiled
-```
+When your process forks using `os.fork`, the profiler is automatically restarted
+in the child process on supported Python versions. No manual restart is required.
 
 ## Configuration
 
@@ -106,22 +93,6 @@ The Python profiler supports code provenance reporting, which provides
 insight into the library that is running the code. While this is
 enabled by default, you can turn it off by setting
 `DD_PROFILING_ENABLE_CODE_PROVENANCE=0`.
-
-
-### Stack V2
-
-Stack V2 is the new stack sampler implementation for 64-bit CPython 3.8+ on
-Linux and macOS. It enhances the performance, accuracy, and reliability of
-Python CPU profiling. The feature is enabled by default from `ddtrace` versions
-2.20+. It is recommended to use the most recent release of the library to
-benefit from latest improvements and bug fixes. This feature activates a new
-stack sampling, collection, and export system.
-
-Exception sampling is missing from Stack V2. If you find this as a blocker for
-enabling Stack V2 for your services, you can turn it off by setting
-`DD_PROFILING_STACK_V2_ENABLED=0`. If you find any other issue,
-escalate using appropriate support channels or file an issue on the
-[GitHub repository](https://github.com/DataDog/dd-trace-py).
 
 
 ## Not sure what to do next?

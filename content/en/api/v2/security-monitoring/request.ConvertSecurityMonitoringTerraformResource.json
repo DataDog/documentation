@@ -1,0 +1,14 @@
+{
+  "data": {
+    "type": "convert_resource",
+    "id": "abc-123",
+    "attributes": {
+      "resource_json": {
+        "enabled": true,
+        "name": "Example-Security-Monitoring",
+        "rule_query": "source:cloudtrail",
+        "suppression_query": "env:test"
+      }
+    }
+  }
+}

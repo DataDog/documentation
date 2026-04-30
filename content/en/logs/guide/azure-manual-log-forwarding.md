@@ -35,7 +35,7 @@ You can forward your logs through an [Azure Container App][4], or [Azure Blob St
 
 **Note**: Resources can only stream to a Storage Account in the same Azure region.
 
-[200]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json
+[200]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fforwarder.json
 [201]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings
 {{% /tab %}}
 

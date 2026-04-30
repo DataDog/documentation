@@ -11,6 +11,9 @@ further_reading:
 - link: "/cloud_cost_management/reporting/explorer"
   tag: "Documentation"
   text: "Cost Explorer"
+- link: "/cloud_cost_management/reporting/dashboards"
+  tag: "Documentation"
+  text: "Dashboards"
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
@@ -42,15 +45,16 @@ Use **[Cost Explorer][13]** for flexible investigation and **Cost Reports** for 
 ## Create a CCM report
 
 1. Go to [**Cloud Cost > Analyze > Reports**][5] in Datadog.
-1. Click **New Report** to start from scratch, or select a template from the gallery to accelerate your workflow.
+1. Click {{< ui >}}New Report{{< /ui >}} to start from scratch, or select a template from the gallery to accelerate your workflow.
 
    {{< img src="cloud_cost/cost_reports/create-new-report-1.png" alt="Create a new report or from a template" style="width:100%;" >}}
 
    **Available Templates:**
-   - **AWS Spend by Service Name**: Understand your EC2, S3, and Lambda costs.
-   - **Azure Spend by Service Name**: Break down costs by Azure services like Virtual Machines and Azure Monitor.
-   - **GCP Spend by Service Name**: Break down costs by GCP services like Compute Engine, BigQuery, and Kubernetes Engine.
-   - **Spend by Provider**: Compare costs across AWS, Azure, Google Cloud, Oracle Cloud, and more.
+   - {{< ui >}}AWS Spend by Service Name{{< /ui >}}: Understand your EC2, S3, and Lambda costs.
+   - {{< ui >}}Azure Spend by Service Name{{< /ui >}}: Break down costs by Azure services like Virtual Machines and Azure Monitor.
+   - {{< ui >}}GCP Spend by Service Name{{< /ui >}}: Break down costs by GCP services like Compute Engine, BigQuery, and Kubernetes Engine.
+   - {{< ui >}}Datadog Spend by Product{{< /ui >}}: Break down costs by Datadog products like Infrastructure Hosts, Custom Metrics, and Indexed Logs.
+   - {{< ui >}}Spend by Provider{{< /ui >}}: Compare costs across AWS, Azure, Google Cloud, Oracle Cloud, and more.
 
 ## Customizing your report
 
@@ -60,8 +64,8 @@ Use **[Cost Explorer][13]** for flexible investigation and **Cost Reports** for 
 
 Select the type of report you want to build:
 
-- **Cost**: Understand where your money is being spent across services, regions, teams, and so on.
-- **Budget**: Track spending against predefined budget targets and forecast future costs.
+- {{< ui >}}Cost{{< /ui >}}: Understand where your money is being spent across services, regions, teams, and so on.
+- {{< ui >}}Budget{{< /ui >}}: Track spending against predefined budget targets and forecast future costs.
 
 ### Apply filters
 
@@ -81,23 +85,23 @@ Use filters to include only the specific costs you want to allocate, such as by 
 
 ### Change how you see your data
 - Select a **visualization option**:
-  - **Bar chart**: Compare costs across multiple categories side by side, so you can identify top cost drivers.
-  - **Pie chart**: Shows the percentage share of each segment, ideal for understanding the relative proportion of costs among a small number of categories.
-  - **Treemap**: Displays hierarchical data and the relative size of many categories at once, so you can see both the overall structure and the largest contributors in a single view.
+  - {{< ui >}}Bar chart{{< /ui >}}: Compare costs across multiple categories side by side, so you can identify top cost drivers.
+  - {{< ui >}}Pie chart{{< /ui >}}: Shows the percentage share of each segment, ideal for understanding the relative proportion of costs among a small number of categories.
+  - {{< ui >}}Treemap{{< /ui >}}: Displays hierarchical data and the relative size of many categories at once, so you can see both the overall structure and the largest contributors in a single view.
 - Change the **table view**:
-  - **Summary**: A consolidated, overall picture of your costs.
-  - **Day over day**, **week over week** or **month over month**: Analyze how your costs change on a day to day, week to week, or month to month basis and identify trends or unusual fluctuations.
+  - {{< ui >}}Summary{{< /ui >}}: A consolidated, overall picture of your costs.
+  - {{< ui >}}Day over day{{< /ui >}}, {{< ui >}}week over week{{< /ui >}} or {{< ui >}}month over month{{< /ui >}}: Analyze how your costs change on a day to day, week to week, or month to month basis and identify trends or unusual fluctuations.
 - Update the **time frame** and **comparison time frame**:
   - Choose your time frame to set the reporting period you want to analyze.
   - Add a comparison period to spot cost changes:
-    - **Default comparison**: Automatically compares to the immediately preceding period (for example, this week vs. last week).
-    - **Flexible comparison**: Select any arbitrary period—like a year ago or a custom date range—to identify seasonal patterns. Both periods must be the same type (for example, week to week, month to month), though the actual number of days may vary when comparing months of different lengths.
+    - {{< ui >}}Default comparison{{< /ui >}}: Automatically compares to the immediately preceding period (for example, this week vs. last week).
+    - {{< ui >}}Flexible comparison{{< /ui >}}: Select any arbitrary period—like a year ago or a custom date range—to identify seasonal patterns. Both periods must be the same type (for example, week to week, month to month), though the actual number of days may vary when comparing months of different lengths.
       
 
 ### Advanced options (optional)
 
-- **Show usage charges only**: Choose to include all spend (fees, taxes, refunds) or focus on usage charges only.
-- **Cost type**: Choose a cost type that best matches your reporting, analysis, or financial management needs. Review the definitions for each cost type based on your provider: [AWS][7], [Azure][8], [Google Cloud][9], [Custom][10].
+- {{< ui >}}Show usage charges only{{< /ui >}}: Choose to include all spend (fees, taxes, refunds) or focus on usage charges only.
+- {{< ui >}}Cost type{{< /ui >}}: Choose a cost type that best matches your reporting, analysis, or financial management needs. Review the definitions for each cost type based on your provider: [AWS][7], [Azure][8], [Google Cloud][9], [Custom][10].
 
   **Note**: The availability of these options vary depending on the provider(s) selected.
 
@@ -108,7 +112,7 @@ After you've created and customized your report, you can save and share it from 
 - **Save your report** to make it available for personal or team use.
 - **Share your report** by copying the URL or exporting it to CSV or PNG.
 - **Schedule reports** to be automatically sent to your team. [Learn more about scheduling reports][11].
-- **Export report views to Dashboards** to track costs alongside other widgets.
+- **Export report views to Dashboards** to track costs alongside other widgets. [Learn more about monitoring cost on dashboards][14].
 - **Search saved reports** to find what you need (available from main reports page only).
 
 ## Further reading
@@ -128,3 +132,4 @@ After you've created and customized your report, you can save and share it from 
 [11]: /cloud_cost_management/reporting/scheduled_reports
 [12]: /cloud_cost_management/oracle/
 [13]: /cloud_cost_management/reporting/explorer
+[14]: /cloud_cost_management/reporting/dashboards

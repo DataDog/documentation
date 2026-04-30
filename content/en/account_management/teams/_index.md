@@ -24,12 +24,12 @@ Access the team directory page from [Organization Settings][1] or by navigating 
 
 ### Create team
 
-1. On the [team directory page][1], click **New Team** at the upper right.
-1. Choose a **Team Name**.
-1. The **Handle** populates based on your team name.
+1. On the [team directory page][1], click {{< ui >}}New Team{{< /ui >}} at the upper right.
+1. Choose a {{< ui >}}Team Name{{< /ui >}}.
+1. The {{< ui >}}Handle{{< /ui >}} populates based on your team name.
 1. Use the dropdown menu to select team members and team managers.
-1. Provide an optional **Description**.
-1. Click **Create**.
+1. Provide an optional {{< ui >}}Description{{< /ui >}}.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 **Notes**: 
 
@@ -39,9 +39,9 @@ Access the team directory page from [Organization Settings][1] or by navigating 
 ### Modify team
 
 1. On the [team directory page][1], click the team you wish to modify. The [team detail page][3] appears. 
-1. Click the **Settings** cog at the top of the screen. A pop-up window appears.
+1. Click the {{< ui >}}Settings{{< /ui >}} cog at the top of the screen. A pop-up window appears.
 1. Select the item you wish to modify.
-1. Make your changes, then click **Save**.
+1. Make your changes, then click {{< ui >}}Save{{< /ui >}}.
 
 ### Choose provisioning source
 
@@ -56,8 +56,8 @@ SAML
 All sources
 : Use SAML as a starting point, and allow overrides through the UI and API
 
-1. On the [team directory page][1], click **Teams Settings**.
-1. Select one of the options under **Team Provisioning Sources**.
+1. On the [team directory page][1], click {{< ui >}}Teams Settings{{< /ui >}}.
+1. Select one of the options under {{< ui >}}Team Provisioning Sources{{< /ui >}}.
 
 If you have teams with existing members, picking the SAML strict option overrides your settings and removes team members from those teams. Picking the All Sources option preserves existing memberships. To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][4].
 
@@ -90,13 +90,13 @@ Datadog supports associating the following resources with team handles:
 Add a notification channel to your Team to route alerts to communication channels such as Slack or Microsoft Teams. Monitor alerts targeting `@team-<handle>` are redirected to the selected channel. 
 
 1. On the [team directory page][1], click the team you wish to modify. 
-1. Click the **Settings** cog at the top of the screen. A pop-up window appears.
-1. Select **Notifications**.
-1. Add a channel, then click **Save**.
+1. Click the {{< ui >}}Settings{{< /ui >}} cog at the top of the screen. A pop-up window appears.
+1. Select {{< ui >}}Notifications{{< /ui >}}.
+1. Add a channel, then click {{< ui >}}Save{{< /ui >}}.
 
 ## Team filter
 
-The team filter tailors your experience across Datadog by showing you content associated with your teams. The **My Teams** list includes teams you are a member of and teams you selected as a favorite.
+The team filter tailors your experience across Datadog by showing you content associated with your teams. The {{< ui >}}My Teams{{< /ui >}} list includes teams you are a member of and teams you selected as a favorite.
 
 {{< img src="/account_management/teams/team-filter.png" alt="Monitor list page with red box around the team filter. Two out of three My Teams selected.">}}
 
@@ -116,15 +116,15 @@ You can add or remove a team from your favorites from the team directory page or
 
 From the [team directory page][1]:
 1. Click the team you wish to add as a favorite. The [team detail page][3] appears.
-1. Click **Add Favorite** or **Remove Favorite** in the upper right.
+1. Click {{< ui >}}Add Favorite{{< /ui >}} or {{< ui >}}Remove Favorite{{< /ui >}} in the upper right.
 
 Alternatively, also from the team directory page:
 1. Hover over the team you wish to add or remove. Inline icons appear to the right of the team name.
-1. Click the star (**Add to Favorites** or **Remove from Favorites**) icon.
+1. Click the star ({{< ui >}}Add to Favorites{{< /ui >}} or {{< ui >}}Remove from Favorites{{< /ui >}}) icon.
 
 From the team filter:
-1. If the filter is collapsed, click **My Teams** to expand it.
-1. Click **Add Favorites**. A search box and list of teams appear.
+1. If the filter is collapsed, click {{< ui >}}My Teams{{< /ui >}} to expand it.
+1. Click {{< ui >}}Add Favorites{{< /ui >}}. A search box and list of teams appear.
 1. To narrow the list of teams, start typing a team name in the search box.
 1. Click the star next to the desired team to add or remove it from your favorites.
 
@@ -132,19 +132,37 @@ From the team filter:
 
 The following table describes the products in which you can use the team filter:
 
-| Product List Page       | Filter basis                                                                     |
-|-------------------------|----------------------------------------------------------------------------------|
-| [Dashboards][11]         | Team handle                                                                      |
-| [Resource Catalog][8]   | Team handle                                                                      |
-| [Software Catalog][12]    | Team handle                                                                      |
-| [Incidents][13]          | Team handle                                                                      |
-| [Monitors][14]          | Team handle                                                                      |
-| [APM Error Tracking][15] | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
-| [Logs Error Tracking][16] | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
-| [Service Level Objectives][17] | Team handle                                                                 |
-| [Data Streams Monitoring][18]  | Team handle                                                                 |
-| [Synthetic Tests][19]          | Team handle                                                                 |
-| [Notebooks][20]          | Team handle                                                                      |
+| Product List Page              | Filter basis                                                                       |
+|--------------------------------|------------------------------------------------------------------------------------|
+| [APM Error Tracking][15]       | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [Apps][21]                     | Team handle                                                                        |
+| [Case Management projects][22] | Team handle                                                                        |
+| [Connections][23]              | Team handle                                                                        |
+| [Connection Groups][24]        | Team handle                                                                        |
+| [Cross Org Connections][25]    | Team handle                                                                        |
+| [Datastores][26]               | Team handle                                                                        |
+| [Data Streams Monitoring][18]  | Team handle                                                                        |
+| [Dashboards][11]               | Team handle                                                                        |
+| [Incidents][13]                | Team handle                                                                        |
+| [Integrations][27]             | Team handle                                                                        |
+| [Logs Error Tracking][16]      | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [Logs Pipelines][28]           | Team handle                                                                        |
+| [Monitors][14]                 | Team handle                                                                        |
+| [Notebooks][20]                | Team handle                                                                        |
+| [Observability Pipelines][29]  | Team handle                                                                        |
+| [On-Call][30]                  | Service owned by teams (determined by ownership inside the [Software Catalog][12]) |
+| [Powerpacks][32]               | Team handle                                                                        |
+| [Private Action Runner][31]    | Team handle                                                                        |
+| [Reference tables][33]         | Team handle                                                                        |
+| [Resource Catalog][8]          | Team handle                                                                        |
+| [RUM apps][34]                 | Team handle                                                                        |
+| [Security rules][35]           | Team handle                                                                        |
+| [Security suppressions][36]    | Team handle                                                                        |
+| [Service Level Objectives][17] | Team handle                                                                        |
+| [Sheets][37]                   | Team handle                                                                        |
+| [Software Catalog][12]         | Team handle                                                                        |
+| [Synthetic Tests][19]          | Team handle                                                                        |
+| [Workflows][38]                | Team handle                                                                        |
 
 
 ## Permissions
@@ -163,7 +181,7 @@ To customize your team, see [Team Management][3].
 [5]: /dashboards/#dashboard-details
 [6]: /incident_response/incident_management/
 [7]: /monitors/configuration/?tab=thresholdalert#add-metadata
-[8]: /infrastructure/resource_catalog/
+[8]: https://app.datadoghq.com/infrastructure/catalog
 [9]: /tracing/software_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
 [10]: /service_level_objectives/#slo-tags
 [11]: https://app.datadoghq.com/dashboard/lists
@@ -176,3 +194,21 @@ To customize your team, see [Team Management][3].
 [18]: https://app.datadoghq.com/data-streams
 [19]: https://app.datadoghq.com/synthetics
 [20]: https://app.datadoghq.com/notebook/list/
+[21]: https://app.datadoghq.com/app-builder/apps/list
+[22]: https://app.datadoghq.com/cases
+[23]: https://app.datadoghq.com/actions/connections
+[24]: https://app.datadoghq.com/actions/connections?sort=-updated_at&tab=groups
+[25]: https://app.datadoghq.com/organization-settings/cross-org-visibility
+[26]: https://app.datadoghq.com/actions/datastores
+[27]: https://app.datadoghq.com/integrations
+[28]: https://app.datadoghq.com/logs/pipelines
+[29]: https://app.datadoghq.com/observability-pipelines
+[30]: https://app.datadoghq.com/on-call/summary
+[31]: https://app.datadoghq.com/actions/private-action-runners
+[32]: /dashboards/widgets/powerpack/#powerpack-permissions
+[33]: https://app.datadoghq.com/reference-tables
+[34]: https://app.datadoghq.com/rum/list
+[35]: https://app.datadoghq.com/security/configuration/notification-rules
+[36]: https://app.datadoghq.com/security/configuration/suppressions
+[37]: https://app.datadoghq.com/sheets
+[38]: https://app.datadoghq.com/workflow

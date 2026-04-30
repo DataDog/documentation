@@ -45,7 +45,7 @@ You can filter the page by pipeline name to see the pipelines you're most concer
 
 ## Pipeline details and executions
 
-Click into a specific pipeline to see the _Pipeline Details_ page which provides views of the data for the pipeline you selected over a specified time frame.
+Click into a specific pipeline to see the {{< ui >}}Pipeline Details{{< /ui >}} page which provides views of the data for the pipeline you selected over a specified time frame.
 
 {{< img src="ci/pipeline_branch_overview_updated.png" alt="Pipeline Details page for a single pipeline" style="width:100%;">}}
 
@@ -55,7 +55,7 @@ The pipeline execution list shows all the times that pipeline (or its stages or 
 
 ### Highlight critical path
 
-To highlight the critical path on the trace, click on the `Critical path` checkbox on the pipeline execution page.
+To highlight the critical path on the trace, click on the {{< ui >}}Critical path{{< /ui >}} checkbox on the pipeline execution page.
 
 The critical path highlights the spans that you need to speed up if you want to reduce the overall execution time of your pipeline. If a CI job is on the critical path, it means it is part of the longest path through the trace in terms of execution time. Speeding up the CI Jobs on the critical path is strictly necessary to speed up the CI pipeline.
 
@@ -63,7 +63,7 @@ You can use [this guide][11] to identify the CI jobs on the critical path to hel
 
 ### Explore connections to services, resources, and network events
 
-Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
+Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The {{< ui >}}Executions (n){{< /ui >}} list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
 
 Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to investigate the Resource, Service, or Analytics page for the pipeline, stage, or job specifically. You can also find complete tags information and links to network monitoring events.
 
@@ -71,7 +71,7 @@ Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the f
 
 ### Explore connections to logs
 
-If job log collection is supported and enabled for the CI provider, related log events can be found in the _Logs_ tab of the pipeline execution view.
+If job log collection is supported and enabled for the CI provider, related log events can be found in the {{< ui >}}Logs{{< /ui >}} tab of the pipeline execution view.
 
 Job log collection is supported for the following providers:
 
@@ -99,7 +99,7 @@ Use [CI jobs failure analysis][12] to identify the most common root causes of fa
 [6]: /account_management/teams/
 [7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: /continuous_integration/pipelines/awscodepipeline/#collect-job-logs
-[9]: /continuous_integration/pipelines/azure/#enable-job-log-collection
+[9]: /continuous_integration/pipelines/azure/#collect-job-logs
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path
 [12]: /continuous_integration/guides/use_ci_jobs_failure_analysis/

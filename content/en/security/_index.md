@@ -81,6 +81,20 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-roundup-2025"
     tag: "Blog"
     text: "2025 cloud security roundup: How attackers abused identities, supply chains, and AI"
+  - link: "https://www.datadoghq.com/blog/nodejs-vulnerability-apm"
+    tag: "Blog"
+    text: "Mitigation for Node.js denial-of-service vulnerability affecting Datadog APM"
+  - link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
+    tag: "Blog"
+    text: "Key learnings from the 2026 State of DevSecOps study"
+  - link: "https://www.datadoghq.com/blog/datadog-observability-data-and-security"
+    tag: "Blog"
+    text: "How Datadog uses observability data to secure its platform"
+  - link: "https://www.datadoghq.com/blog/ai-powered-threat-analysis"
+    tag: "Blog"
+    text: "AI in cloud security investigations: The role of UEBA and better telemetry"
+algolia:
+  tags: ["security", "datadog security", "cloud siem", "cloud security", "application security", "threat detection"]
 cascade:
     algolia:
         rank: 70

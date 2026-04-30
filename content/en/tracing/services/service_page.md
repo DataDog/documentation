@@ -22,6 +22,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
+- link: "https://learn.datadoghq.com/courses/getting-started-apm"
+  tag: "Learning Center"
+  text: "Getting Started with APM Metrics and Traces"
+- link: "https://learn.datadoghq.com/courses/diagnosing-bugs-with-apm"
+  tag: "Learning Center"
+  text: "Diagnosing Application Bugs with Datadog APM"
 algolia:
   tags: ['service page']
 ---
@@ -207,10 +213,15 @@ The next section of the panel lists all the vulnerabilities and signals concerni
 {{< img src="tracing/visualization/service/security_tab_1.jpg" alt="Security" style="width:90%;">}}
 
 ### Databases
-View the list of downstream database dependencies identified by Database Monitoring and identify latency or load outliers.
-[Learn more about connecting DBM and APM][21].
+View host details, queries, recommendations, and downstream database dependencies, and identify latency and load outliers.
 
-{{< img src="tracing/visualization/service/databases_tab_1.png" alt="Databases" style="width:90%;">}}
+#### Queries
+The Queries tab includes a visualization of sampled span durations and a full list of queries from the selected time interval. Select a query from the table to open the query panel and view diagnostics, error details, and traces.
+
+#### Databases
+The Databases tab includes active connection and average query duration visualizations to help identify outliers, and a full list of database hosts for the selected service. Select a database host from the list to view it in Database Monitoring.
+
+[Learn more about connecting DBM and APM][21].
 
 ### Infrastructure
 If your service is running on Kubernetes, you can see an Infrastructure tab on the Service Page. The live Kubernetes Pods table displays detailed information on your pods, such as if memory usage is close to its limit, and allows you to improve resource allocation by seeing if provisioned compute resources exceed what is required for optimal application performance.

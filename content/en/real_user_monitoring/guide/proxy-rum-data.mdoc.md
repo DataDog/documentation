@@ -77,6 +77,10 @@ Your Datadog intake URL should have the format `<INTAKE_ORIGIN>/<PATH><PARAMETER
     {% site-region region="gov" %}
     The intake origin for your Datadog site is `https://browser-intake-ddog-gov.com`.
     {% /site-region %}
+
+    {% site-region region="gov2" %}
+    The intake origin for your Datadog site is `https://browser-intake-us2-ddog-gov.com`.
+    {% /site-region %}
 ---
 * path
 * 
@@ -93,7 +97,7 @@ Your Datadog intake URL should have the format `<INTAKE_ORIGIN>/<PATH><PARAMETER
 ## SDK setup
 
 <!-- SDK version >4.34.0 and up -->
-{% if or(equals($rum_browser_sdk_version, "gte_5_4_0"),equals($rum_browser_sdk_version, "gte_4_34_0")) %}
+{% if includes($rum_browser_sdk_version, ["gte_5_4_0", "gte_4_34_0"]) %}
 
 Configure the URL of the proxy in the `proxy` initialization parameter:
 

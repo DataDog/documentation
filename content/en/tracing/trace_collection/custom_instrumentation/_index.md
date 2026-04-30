@@ -1,6 +1,19 @@
 ---
 title: Code-Based Custom Instrumentation
 description: Add custom spans, tags, and instrumentation to capture application-specific observability data using Datadog APIs and OpenTelemetry.
+aliases:
+    - /tracing/setup/php/manual-installation
+    - /agent/apm/php/manual-installation
+    - /tracing/guide/distributed_tracing/
+    - /tracing/advanced/manual_instrumentation/
+    - /tracing/advanced/opentracing/
+    - /tracing/opentracing/
+    - /tracing/manual_instrumentation/
+    - /tracing/guide/adding_metadata_to_spans
+    - /tracing/advanced/adding_metadata_to_spans/
+    - /tracing/custom_instrumentation
+    - /tracing/setup_overview/custom_instrumentation/undefined
+    - /tracing/setup_overview/custom_instrumentation/
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
@@ -10,13 +23,16 @@ further_reading:
       text: 'Explore your services, resources, and traces'
     - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
       text: 'Learn More about Datadog and the OpenTelemetry initiative'
+    - link: "https://learn.datadoghq.com/courses/create-custom-spans-and-tags"
+      tag: "Learning Center"
+      text: "Create Custom Spans and Span Tags with APM"
 algolia:
   tags: ['apm custom instrumentation']
 ---
 
 ## Overview
 
-Code-based custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [Single Step Instrumentation][5] or using [Datadog tracing libraries][6].
+Code-based custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [Single Step Instrumentation][5] or using [Datadog SDKs][6].
 
 Code-based custom instrumentation involves embedding tracing code directly into your application code. This allows for the programmatic creation, modification, or deletion of traces to send to Datadog.
 
@@ -31,7 +47,7 @@ Follow the relevant documentation for your custom instrumentation approach to le
 {{< tabs >}}
 {{% tab "OpenTelemetry API (Recommended)" %}}
 
-Datadog tracing libraries provide an implementation of the OpenTelemetry API for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. You can configure it to generate Datadog-style spans and traces to be processed by the Datadog tracing library for your language, and send those to Datadog.
+Datadog SDKs provide an implementation of the OpenTelemetry API for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. You can configure it to generate Datadog-style spans and traces to be processed by the Datadog SDK for your language, and send those to Datadog.
 
 {{< partial name="apm/apm-otel-instrumentation-custom.html" >}}
 
@@ -68,10 +84,6 @@ If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-[2]: /tracing/trace_collection/custom_instrumentation/dd_libraries/
-[3]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation
-[4]: /tracing/trace_collection/custom_instrumentation/opentracing/
 [5]: /tracing/trace_collection/single-step-apm
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [7]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

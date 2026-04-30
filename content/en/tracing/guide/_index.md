@@ -21,7 +21,7 @@ cascade:
     {{< nextlink href="tracing/guide/apm_dashboard" >}}3. Create a Dashboard to track and correlate APM metrics{{< /nextlink >}}
     {{< nextlink href="tracing/guide/slowest_request_daily" >}}4. Debug the slowest trace on the slowest endpoint of a web service{{< /nextlink >}}
     <a id="enabling-tracing-tutorials">
-    {{< nextlink href="tracing/guide/add_span_md_and_graph_it" >}}5. Add span tags and filter and group your application performance{{< /nextlink >}}
+    {{< nextlink href="tracing/trace_collection/custom_instrumentation" >}}5. Add span tags and filter and group your application performance{{< /nextlink >}}
     {{< nextlink href="tracing/guide/instrument_custom_method" >}}6. Instrument a custom method to get deep visibility into your business logic.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -79,7 +79,7 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="/tracing/guide/send_traces_to_agent_by_api/" >}}Send Traces to the Agent by the Tracing API{{< /nextlink >}}
     {{< nextlink href="tracing/guide/span_and_trace_id_format" >}}Valid formats of span and trace IDs{{< /nextlink >}}
     {{< nextlink href="tracing/guide/trace-agent-from-source" >}}Installing the trace Agent from source{{< /nextlink >}}
-    {{< nextlink href="/developers/community/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
+    {{< nextlink href="/extend/community/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Decide When to Use Datadog APM and AWS X-Ray {{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}

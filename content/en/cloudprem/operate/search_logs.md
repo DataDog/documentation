@@ -1,36 +1,40 @@
 ---
-title: Search CloudPrem Logs
-description: Learn how to query and analyze your CloudPrem logs in Datadog
+title: Search BYOC Logs
+description: Learn how to query and analyze your BYOC Logs data in Datadog
 further_reading:
 - link: "/cloudprem/ingest/"
   tag: "Documentation"
-  text: "Ingest logs to CloudPrem"
+  text: "Ingest logs to BYOC Logs"
 - link: "/cloudprem/operate/troubleshooting/"
   tag: "Documentation"
-  text: "Troubleshooting CloudPrem"
+  text: "Troubleshooting BYOC Logs"
 - link: "/logs/explorer/search_syntax/"
   tag: "Documentation"
   text: "Log Search Syntax"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
-## Explore CloudPrem logs in the Logs Explorer
+## Explore BYOC Logs in the Logs Explorer
 
-1. Go to the Datadog Log Explorer.
-2. On the left facet panel, select the checkbox for your index under CLOUDPREM INDEXES.
+1. Go to the [Datadog Log Explorer][1].
+2. On the left facet panel, under {{< ui >}}BYOC INDEXES{{< /ui >}}, select one or more indexes to search.
 
-A CloudPrem index name is built with the following rule:
+You can select a specific index to narrow your search, or select all indexes in a cluster to search across them.
+
+BYOC Logs index names follow this format:
 
 ```
-index:cloudprem-<CLUSTER_NAME>
+cloudprem--<CLUSTER_NAME>--<INDEX_NAME>
 ```
 
 ## Search limitations
 
-You cannot query CloudPrem clusters alongside other Datadog log indexes. Additionally, Flex Logs are not supported with CloudPrem.
+You cannot query BYOC Logs indexes alongside other Datadog log indexes. Additionally, Flex Logs are not supported with BYOC Logs.
+
+[1]: https://app.datadoghq.com/logs
 
 ## Further reading
 

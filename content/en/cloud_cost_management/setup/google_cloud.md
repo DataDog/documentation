@@ -31,12 +31,11 @@ To use Google Cloud Cost Management in Datadog, follow these steps:
 You can setup using the [API][18], [Terraform][19], or directly in Datadog by following the instructions below.
 
 ### Configure the Google Cloud Platform integration
-Navigate to [Setup & Configuration][3], and select a Google Cloud Platform integration.
-If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to configure it.
+Navigate to [Setup & Configuration][3], add a Google Cloud Platform account and follow the steps to configure the Google Cloud Platform integration.
 
 <div class="alert alert-danger">
 The Datadog Google Cloud Platform integration allows Cloud Costs to automatically monitor all projects this service account has access to.
-To limit infrastructure monitoring hosts for these projects, apply tags to the hosts. Then define whether the tags should be included or excluded from monitoring in the <strong>Limit Metric Collection Filters</strong> section of the integration page.
+To limit infrastructure monitoring hosts for these projects, apply tags to the hosts. Then define whether the tags should be included or excluded from monitoring in the {{< ui >}}Limit Metric Collection Filters{{< /ui >}} section of the integration page.
 </div>
 
 {{< img src="cloud_cost/gcp_integration_limit_metric_collection.png" alt="Limit metric collection filters section configured in the Google Cloud Platform integration page" >}}
@@ -48,7 +47,7 @@ The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-t
 
  1. Navigate to [Billing Export][1] under Google Cloud console *Billing*.
  2. Enable the [Detailed Usage cost][2] export (select or create a project and a BigQuery dataset).
- 3. Document the `Billing Account ID` for the billing account where the export was configured, as well as the export `Project ID` and `Dataset Name`.
+ 3. Document the {{< ui >}}Billing Account ID{{< /ui >}} for the billing account where the export was configured, as well as the export {{< ui >}}Project ID{{< /ui >}} and {{< ui >}}Dataset Name{{< /ui >}}.
 
 {{< img src="cloud_cost/billing_export.png" alt="Google Cloud project and dataset info highlighted" >}}
 
@@ -64,10 +63,43 @@ The following permissions allow Datadog to access and transfer the billing expor
 - Enable the [BigQuery Data Transfer Service][5].
   1. Open the BigQuery Data Transfer API page in the API library.
   2. From the dropdown menu, select the project that contains the service account.
-  3. Click the ENABLE button.
+  3. Click the {{< ui >}}ENABLE{{< /ui >}} button.
 
   **Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.
 
+{{< tabs >}}
+
+{{% tab "Terraform" %}}
+
+{{< img src="cloud_cost/setup/gcp_terraform_setup.png" alt="Cloud Cost Management setup form in Terraform mode" style="width:100%" >}}
+
+### Define configuration details
+
+Enter the following details for your configuration:
+
+* **GCP Storage Bucket**: Select **Yes** to create a storage bucket, or select **No** to use an existing bucket.
+
+    **Note**: If using an existing bucket, verify that the bucket is co-located with the BigQuery export dataset.
+
+* **Bucket name**: The name of your new or existing GCP storage bucket.
+* **Region**: The GCP region of your bucket. For example, `northamerica-northeast1`.
+* **Billing account ID**: The ID of the billing account that your usage cost export reports costs for.
+* **Export project name and ID**: The name and ID of your export project.
+* **Export dataset name and ID**: The name and ID of your export dataset.
+
+### Create cost export and enable Google Service APIs
+
+Complete the [Enable detailed usage cost export](#enable-detailed-usage-cost-export) and [Enable Google Service APIs](#enable-google-service-apis) steps above, then return to CCM.
+
+### Copy generated Terraform HCL and apply changes
+
+In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform Configuration** step. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+{{< img src="cloud_cost/setup/gcp_manual_setup.png" alt="Cloud Cost Management setup form in manual mode" style="width:100%" >}}
 
 #### Configure export project access
 [Add the service account as a principal on the export dataset project resource][7]:
@@ -83,7 +115,7 @@ The following permissions allow Datadog to access and transfer the billing expor
 #### Configure export BigQuery dataset access
 [Add the service account as a principal on the export BigQuery dataset resource][8]:
 1. In the Explorer pane on the BigQuery page, expand your project and select the export BigQuery dataset.
-2. Click **Sharing > Permissions** and then **add principal**.
+2. Click {{< ui >}}Sharing{{< /ui >}} > {{< ui >}}Permissions{{< /ui >}} and then {{< ui >}}add principal{{< /ui >}}.
 3. In the new principals field, enter the service account.
 4. Using the select a role list, assign a role with the following permissions:
   * `bigquery.datasets.get`
@@ -98,16 +130,10 @@ The following permissions allow Datadog to access and transfer the billing expor
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud role `roles/bigquery.dataEditor`.
 
-### Create or select a Google Cloud Storage bucket
-Use an existing Google Cloud Storage bucket or create a new one.
-Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to the selected bucket and prefixed with `datadog_cloud_cost_detailed_usage_export`.
-
-**Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
-
 #### Configure bucket access
 [Add the service account as a principal on the GCS bucket resource][6]:
 1. Navigate to the Cloud Storage Buckets page in the Google Cloud console, and select your bucket.
-2. Select the permissions tab and click the **grant access** button.
+2. Select the permissions tab and click the {{< ui >}}grant access{{< /ui >}} button.
 3. In the new principals field, enter the service account.
 4. Assign a role with the following permissions:
    * `storage.buckets.get`
@@ -117,6 +143,19 @@ Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to th
    * `storage.objects.list`
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud roles `roles/storage.legacyObjectReader` and `roles/storage.legacyBucketWriter`.
+
+[6]: https://cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add
+[7]: https://cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role
+[8]: https://cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Create or select a Google Cloud Storage bucket
+Cloud Cost Management uses a GCP storage bucket to receive data extracted from your Detailed Usage Cost BigQuery dataset (prefixed with `datadog_cloud_cost_detailed_usage_export`). You can create a new bucket or use an existing one.
+
+**Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
 
 ### (Optional) Configure cross-project service authorization:
 If your integrated Service Account exists in a different Google Cloud Platform project than your billing export dataset, you need to [grant cross-project service account authorization][10]:
@@ -202,12 +241,9 @@ The following out-of-the-box tags are available:
 
 [1]: https://console.cloud.google.com/billing/export/
 [2]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-setup
-[3]: https://app.datadoghq.com/cost/setup?cloud=gcp
+[3]: https://app.datadoghq.com/cost/setup
 [4]: https://app.datadoghq.com/integrations/google-cloud-platform
 [5]: https://cloud.google.com/bigquery/docs/enable-transfer-service
-[6]: https://cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add
-[7]: https://cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role
-[8]: https://cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset
 [9]: https://cloud.google.com/bigquery/docs/exporting-data#data-locations
 [10]: https://cloud.google.com/bigquery/docs/enable-transfer-service#cross-project_service_account_authorization
 [11]: https://cloud.google.com/iam/docs/create-service-agents#create

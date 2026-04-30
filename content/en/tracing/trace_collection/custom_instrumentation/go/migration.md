@@ -4,14 +4,14 @@ description: 'Upgrade your Go tracer from v1 to v2.'
 aliases:
   - /tracing/trace_collection/custom_instrumentation/opentracing/go
 further_reading:
-    - link: 'tracing/trace_collection/custom_instrumentation/go/dd-api'
+    - link: 'tracing/trace_collection/custom_instrumentation/server-side'
       tag: 'Documentation'
-      text: 'Get started with v1 of the Go Tracer'
+      text: 'Custom Instrumentation for Go'
 ---
 
 ## Overview
 
-The Go tracer v2 introduces API improvements, better performance, and enhanced compatibility with modern Go practices. It represents the latest stable version of Datadog's Go tracing library.
+The Go tracer v2 introduces API improvements, better performance, and enhanced compatibility with modern Go practices. It represents the latest stable version of Datadog's Go SDK.
 
 ## Compatibility
 
@@ -236,7 +236,7 @@ ddtrace.Start(ddtrace.WithService("my-service"))
 ```
 #### WithDogstatsdAddress
 
-`tracer.WithDogstatsdAddress` has been renamed to `tracer.WithDogstatsdAddr`. Use this option to specify a different DogStatsD address when starting the tracer.
+`tracer.WithDogstatsdAddress` has been renamed to `tracer.WithDogstatsdAddr`. Use this option to specify a different DogStatsD address when starting the SDK.
 
 v1:
 ```go

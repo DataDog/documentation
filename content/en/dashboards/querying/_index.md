@@ -13,17 +13,17 @@ further_reading:
 
 Whether you are using metrics, logs, traces, monitors, dashboards, notebooks, etc., all graphs in Datadog have the same basic functionality. This page describes querying with the graphic editor. Advanced users can create and edit graphs with JSON. To learn more, see [Graphing with JSON][1].
 
-You can query using the graph editor on the Dashboards or Notebooks pages, or you can use **Quick Graphs** available on any page. Open Quick Graphs by pressing `G` on any page. To learn more, see the [Quick Graphs Guide][2].
+You can query using the graph editor on the Dashboards or Notebooks pages, or you can use {{< ui >}}Quick Graphs{{< /ui >}} available on any page. Open Quick Graphs by pressing `G` on any page. To learn more, see the [Quick Graphs Guide][2].
 
 ## Graphing editor
 
 On widgets, open the graphing editor by clicking on the pencil icon in the upper right corner. The graphing editor has the following tabs:
 
-* **Share**: Embed the graph on any external web page.
-* **JSON**: A more flexible editor, which requires knowledge of the graph definition language.
-* **Edit**: The default UI tab for graphing options.
+* {{< ui >}}Share{{< /ui >}}: Embed the graph on any external web page.
+* {{< ui >}}JSON{{< /ui >}}: A more flexible editor, which requires knowledge of the graph definition language.
+* {{< ui >}}Edit{{< /ui >}}: The default UI tab for graphing options.
 
-When you first open the graphing editor, you are on the **Edit** tab. Here, you can use the UI to choose most settings. Here is an example:
+When you first open the graphing editor, you are on the {{< ui >}}Edit{{< /ui >}} tab. Here, you can use the UI to choose most settings. Here is an example:
 
 {{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Graphing Edit Tab" style="width:100%;" >}}
 
@@ -45,9 +45,9 @@ Select your visualization from the available [widgets][3].
 
 ### Define the metric
 
-Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`. 
+Choose the metric to graph by searching or selecting it from the dropdown next to {{< ui >}}Metric{{< /ui >}}. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`.
 
-You may also see Datadog or OpenTelemetry source indicators. If your environment uses both, you can use Datadog's **Semantic Mode** selector to [Query Across Datadog and OpenTelemetry Metrics][18] in a single graph.
+You may also see Datadog or OpenTelemetry source indicators. If your environment uses both, you can use Datadog's {{< ui >}}Semantic Mode{{< /ui >}} selector to [Query Across Datadog and OpenTelemetry Metrics][18] in a single graph.
 
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:100%;">}}
 
@@ -55,7 +55,7 @@ Explore your metrics further with the [Metrics Explorer][4], a [Notebook][5], or
 
 ### Filter
 
-Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*.
+Your chosen metric can be filtered by host or tag using the {{< ui >}}from{{< /ui >}} dropdown to the right of the metric. The default filter is *(everywhere)*.
 
 {{< img src="dashboards/querying/filter-3.png" alt="Filter the graph with the 'from' field, using template variables and boolean logic" style="width:100%;" >}}
 
@@ -76,7 +76,7 @@ Regardless of the options chosen above, there is always some aggregation of data
 
 In practice, metrics are collected by the Agent every 15-20 seconds. So one day's worth of data is 4,320 data points. If you display a day's worth of data on single graph, Datadog automatically rolls up the data. For more details on time aggregation, see the [Metrics Introduction][10]. See the [Rollup][11] documentation to learn more about the rollup intervals and how Datadog automatically rolls up data points.
 
-To manually rollup the data, use the [rollup function][12]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds. 
+To manually rollup the data, use the [rollup function][12]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds.
 
 This query creates a single line that represents the total available disk space, on average, across all machines rolled up in one minute buckets:
 
@@ -133,7 +133,7 @@ For more about using the JSON view, see [Graphing with JSON][1].
 
 Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
 
-Additionally, you can click the tags in the metric dropdown used for [defining the metric](#define-the-metric) to group and aggregate your data. 
+Additionally, you can click the tags in the metric dropdown used for [defining the metric](#define-the-metric) to group and aggregate your data.
 
 ### Nested Queries
 
@@ -154,7 +154,7 @@ To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
 #### Metric arithmetic using an integer
 
-Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the **Advanced...** link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
+Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the {{< ui >}}Advanced...{{< /ui >}} link in the graph editor. Then enter your arithmetic in the `Formula` box, in this case: `a * 2`:
 
 {{< img src="dashboards/querying/arithmetic_4.png" alt="Formula example - multiply" style="width:75%;" >}}
 
@@ -166,7 +166,7 @@ Visualize the percentage of a metric by dividing one metric over another, for ex
 jvm.heap_memory / jvm.heap_memory_max
 ```
 
-Use the **Advanced...** option in the graph editor and select **Add Query**. Each query is assigned a letter in alphabetical order: the first metric is represented by `a`, the second metric is represented by `b`, etc.
+Use the {{< ui >}}Advanced...{{< /ui >}} option in the graph editor and select {{< ui >}}Add Query{{< /ui >}}. Each query is assigned a letter in alphabetical order: the first metric is represented by `a`, the second metric is represented by `b`, etc.
 
 Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To display only the formula on your graph, click on the check marks next to the metrics `a` and `b`.
 
@@ -183,10 +183,10 @@ status:error / status:info
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
 #### Minimum or Maximum between two queries
-Here is an example using the `max` operator to find the maximum CPU usage between two availability zones.  
+Here is an example using the `max` operator to find the maximum CPU usage between two availability zones.
 
 ```text
-max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
+max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
 ```
 
 {{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'max' showing max count value between two metric queries" style="width:75%;" >}}
@@ -198,24 +198,6 @@ min(status:error, status:warn)
 ```
 
 {{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
-
-#### Exponentiation
-
-You can now use the `pow()` function to raise a constant or a metric to the power of another constant or metric. This allows you to model exponential growth or decay. 
-
-Here is an example of how to forecast user growth by applying an exponential growth factor to a prior time window:
-
-```text
-users.sessions{*} * pow(1.1, timeshift(-1))
-```
-
-Here is an example of how to surface anomalies by amplifying value using exponentiation: 
-
-```text
-pow(ping{region:*}, 2)
-```
-
-To use `pow(a, b)`, `a`, and `b` can be constants or metrics. This function is only available on metrics.
 
 ### Create an alias
 
@@ -229,7 +211,7 @@ If you do not enter a title, one is automatically generated based on your select
 
 ### Save
 
-Click **Done** to save your work and exit the editor. You can always come back to the editor to change the graph. If you make changes you don't want to save, click **Cancel**.
+Click {{< ui >}}Done{{< /ui >}} to save your work and exit the editor. You can always come back to the editor to change the graph. If you make changes you don't want to save, click {{< ui >}}Cancel{{< /ui >}}.
 
 ## Additional options
 
@@ -237,9 +219,9 @@ Click **Done** to save your work and exit the editor. You can always come back t
 
 {{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
 
-View event correlations by using the **Event Overlays** section in the graphing editor for the [Timeseries][16] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][17].
+View event correlations by using the {{< ui >}}Event Overlays{{< /ui >}} section in the graphing editor for the [Timeseries][16] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][17].
 
-The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service. 
+The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service.
 
 With the event overlay, you can quickly see how actions within the organization impact application and infrastructure performance. Here are some example use cases:
 - RUM error rates with deployment events overlaid
@@ -250,13 +232,13 @@ With the event overlay, you can quickly see how actions within the organization 
 
 ### Split graph
 
-With split graphs, you can see your metric visualizations broken out by tags. 
+With split graphs, you can see your metric visualizations broken out by tags.
 
 {{< img src="dashboards/querying/split_graph_beta.png" alt="View split graphs of metric container.cpu.usage in the fullscreen widget" style="width:100%;" >}}
 
-1. Access this feature through the **Split Graph** tab when viewing graphs.
-1. You can change the *sort by* metric to see the relationship between the data you are graphing and other metrics. 
-1. Limit the number of graphs that are displayed by changing the *limit to* value.
+1. Access this feature through the {{< ui >}}Split Graph{{< /ui >}} tab when viewing graphs.
+1. You can change the {{< ui >}}sort by{{< /ui >}} metric to see the relationship between the data you are graphing and other metrics.
+1. Limit the number of graphs that are displayed by changing the {{< ui >}}limit to{{< /ui >}} value.
 
 ## Further Reading
 

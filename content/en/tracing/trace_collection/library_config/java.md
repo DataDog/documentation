@@ -1,5 +1,5 @@
 ---
-title: Configuring the Java Tracing Library
+title: Configuring the Java SDK
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -16,9 +16,15 @@ further_reading:
     - link: "/opentelemetry/interoperability/environment_variable_support"
       tag: "Documentation"
       text: "OpenTelemetry Environment Variable Configurations"
+    - link: "https://learn.datadoghq.com/courses/apm-java-host"
+      tag: "Learning Center"
+      text: "Set up APM for Java applications"
+
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the SDK with your code and configure the Agent to collect APM data, optionally configure the SDK as desired, including setting up [Unified Service Tagging][1].
+
+{{% apm-config-visibility %}}
 
 All configuration options below have system property and environment variable equivalents.
 If the same key type is set for both, the system property configuration takes priority.
@@ -148,7 +154,7 @@ List of class/interface and methods to trace. Similar to adding `@Trace`, but wi
 : **Environment Variable**: `DD_TRACE_CLASSES_EXCLUDE`<br>
 **Default**: `null`<br>
 **Example**: `package.ClassName,package.ClassName$Nested,package.Foo*,package.other.*`<br>
-A list of fully qualified classes (that may end with a wildcard to denote a prefix) which will be ignored (not modified) by the tracer. Must use the jvm internal representation for names (eg package.ClassName$Nested and not package.ClassName.Nested)
+A list of fully qualified classes (that may end with a wildcard to denote a prefix) which will be ignored (not modified) by the SDK. Must use the jvm internal representation for names (eg package.ClassName$Nested and not package.ClassName.Nested)
 
 `dd.trace.partial.flush.min.spans`
 : **Environment Variable**: `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`<br>
@@ -211,7 +217,7 @@ When `true`, debug mode for the Datadog Java Tracer is enabled.
 `datadog.slf4j.simpleLogger.jsonEnabled`
 : **Environment Variable**: Not available<br>
 **Default**: `false`<br>
-When `true`, Datadog Java tracer logs are written in JSON. Available for versions 1.48.0+.<br>
+When `true`, Datadog Java SDK logs are written in JSON. Available for versions 1.48.0+.<br>
 **Note**: This setting is specific to the embedded SLF4J simple logger and does not support environment variables. `dd.log.format.json` is the preferred configuration option.
 
 `dd.trace.servlet.principal.enabled`
@@ -262,12 +268,12 @@ By default, HTTP 404 responses use "404" as the span resource name. When `false`
 `dd.trace.128.bit.traceid.generation.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
 **Default**: `true`<br>
-When `true`, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+When `true`, the SDK generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
 
 `dd.trace.128.bit.traceid.logging.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
 **Default**: `false`<br>
-When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the tracer always injects Trace IDs as decimal numbers.
+When `true`, the SDK will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the SDK always injects Trace IDs as decimal numbers.
 
 `dd.trace.otel.enabled`
 : **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
@@ -332,6 +338,11 @@ When set to `true` db spans get assigned the instance name as the service name
 **Default**: `false`<br>
 When set to `true` db spans get assigned the remote database hostname as the service name
 
+`dd.dbm.propagation.mode`
+: **Environment Variable**: `DD_DBM_PROPAGATION_MODE` <br>
+**Default**: `null`<br>
+When set to `service` or `full`, enables Database Monitoring and APM correlation. For more information, see [Correlate Database Monitoring and Traces][23].
+
 ### AAP
 
 `dd.appsec.enabled`
@@ -347,7 +358,7 @@ For more information, see [Enabling AAP for Java][19].
 **Environment Variable**: `DD_TRACE_HTTP_CLIENT_TAG_QUERY_STRING`<br>
 **Environment Variable (Deprecated)**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
 **Default**: `true`<br>
-By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data. 
+By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data.
 
 `dd.trace.http.client.error.statuses`
 : **Environment Variable**: `DD_TRACE_HTTP_CLIENT_ERROR_STATUSES`<br>
@@ -673,9 +684,9 @@ Deprecated since version 1.9.0
 [6]: /agent/configuration/network/#configure-ports
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [8]: /tracing/configure_data_security/#telemetry-collection
-[9]: /developers/dogstatsd/#setup
+[9]: /extend/dogstatsd/#setup
 [10]: /agent/docker/#dogstatsd-custom-metrics
-[11]: /developers/dogstatsd/
+[11]: /extend/dogstatsd/
 [12]: /agent/amazon_ecs/#create-an-ecs-task
 [13]: /tracing/compatibility_requirements/java#disabling-integrations
 [14]: /integrations/java/?tab=host#metric-collection
@@ -687,3 +698,4 @@ Deprecated since version 1.9.0
 [20]: https://ant.apache.org/manual/dirtasks.html#patterns
 [21]: /tracing/trace_collection/library_config/#traces
 [22]: /profiler/
+[23]: /database_monitoring/connect_dbm_and_apm/?tab=java
