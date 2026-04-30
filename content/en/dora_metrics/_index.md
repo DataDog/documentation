@@ -8,15 +8,6 @@ further_reading:
 - link: "/dora_metrics/calculation/"
   tag: "Documentation"
   text: "Learn how Datadog calculates DORA metrics"
-- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-  tag: "Release Notes"
-  text: "Check out the latest Software Delivery releases! (App login required)"
-- link: "https://www.datadoghq.com/blog/dora-metrics-software-delivery/"
-  tag: "Blog"
-  text: "Best practices for using DORA metrics to improve software delivery"
-- link: "https://www.datadoghq.com/blog/datadog-dora-metrics/"
-  tag: "Blog"
-  text: "3 ways to drive software delivery success with Datadog DORA Metrics"
 - link: "/continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn about Deployment Visibility"
@@ -29,6 +20,18 @@ further_reading:
 - link: "/software_catalog"
   tag: "Documentation"
   text: "Learn about the Software Catalog"
+- link: "https://www.datadoghq.com/blog/dora-metrics-software-delivery/"
+  tag: "Blog"
+  text: "Best practices for using DORA metrics to improve software delivery"
+- link: "https://www.datadoghq.com/blog/datadog-dora-metrics/"
+  tag: "Blog"
+  text: "3 ways to drive software delivery success with Datadog DORA Metrics"
+- link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
+  tag: "Blog"
+  text: "Key learnings from the 2026 State of DevSecOps study"
+- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+  tag: "Release Notes"
+  text: "Check out the latest Software Delivery releases! (App login required)"
 ---
 
 ## Overview
@@ -55,15 +58,15 @@ To start configuring data sources to send deployment events to Datadog, see the 
 
 ## Analyze DORA Metrics
 
-After you've set up the data sources for your deployment and failure events, navigate to [**Software Delivery** > **DORA Metrics**][4] to identify improvements or regressions for each metric. You can also aggregate the metrics by team, service, repository, environment, time period, and [custom tags][8] to compare trends over time.
+After you've set up the data sources for your deployment and failure events, navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}DORA Metrics{{< /ui >}}][4] to identify improvements or regressions for each metric. You can also aggregate the metrics by team, service, repository, environment, time period, and [custom tags][8] to compare trends over time.
 
 {{< img src="dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:100%;" >}}
 
-Click **View Deployments** to open a new tab with the list of deployment events.
+Click {{< ui >}}View Deployments{{< /ui >}} to open a new tab with the list of deployment events.
 
 {{< img src="dora_metrics/deployments_list.png" alt="The Deployments Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 
-Click **View Change Failures** to open a side panel with the list of deployment events marked as change failures.
+Click {{< ui >}}View Change Failures{{< /ui >}} to open a side panel with the list of deployment events marked as change failures.
 
 {{< img src="dora_metrics/change_failures_list.png" alt="The Failures Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 
@@ -74,7 +77,7 @@ Export your visualization widgets to dashboards, notebooks, or add them to exist
 
 {{< img src="dora_metrics/dora_ui_2.png" alt="Click the Export icon to add the visualization widget to an incident or to a dashboard or notebook" style="width:100%;" >}}
 
-Click the **Export** icon on any visualization to add it to an incident, dashboard, or notebook. For more information about the metrics calculated by DORA Metrics, see the [Data Collected documentation][3].
+Click the {{< ui >}}Export{{< /ui >}} icon on any visualization to add it to an incident, dashboard, or notebook. For more information about the metrics calculated by DORA Metrics, see the [Data Collected documentation][3].
 
 ### Create custom dashboards
 

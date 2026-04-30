@@ -112,7 +112,7 @@ const config = new CoreConfiguration(
     '<ENVIRONMENT_NAME>',
     trackingConsent,
     {
-        site: 'US1', // Optional: Select your Datadog website ("US1", "US3", "US5", "EU1", or "US1_FED"). Default is "US1".
+        site: 'US1', // Optional: Select your Datadog website ("US1", "US3", "US5", "EU1", "AP1", "AP2", "US1_FED", or "US2_FED"). Default is "US1".
         rumConfiguration: {
             applicationId: '<APPLICATION_ID>', // RUM Application ID
             trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)

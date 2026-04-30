@@ -17,14 +17,14 @@ aliases:
   - /tracing/profiler/enabling/python/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+The profiler is shipped within Datadog SDKs. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 
 To use profiling, ensure the following requirements are met:
-- Enable profiling through the Datadog tracing library. Using the latest stable release is recommended.
-- Verify your Python and tracing library versions are compatible by reviewing the [Python Compatibility Requirements][17].
-**Note**: Some features depend on newer Python versions than the minimum required version for the tracing library. For more details, read [Profile Types][8].
+- Enable profiling through the Datadog SDK. Using the latest stable release is recommended.
+- Verify your Python and SDK versions are compatible by reviewing the [Python Compatibility Requirements][17].
+**Note**: Some features depend on newer Python versions than the minimum required version for the SDK. For more details, read [Profile Types][8].
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 

@@ -16,16 +16,16 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Java tracer**.
+1. **Install the Datadog Java SDK**.
 
-   1. Add the Datadog Java tracer to your Dockerfile:
+   1. Add the Datadog Java SDK to your Dockerfile:
 
       {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 ADD 'https://dtdg.co/latest-java-tracer' agent.jar
 ENV JAVA_TOOL_OPTIONS="-javaagent:agent.jar"
 {{< /code-block >}}
 
-   2. Add the tracer artifacts.
+   2. Add the SDK artifacts.
       {{< tabs >}}
       {{% tab "Maven" %}}
 {{< code-block lang="xml" disable_copy="false" >}}
@@ -108,6 +108,8 @@ logger.info("Hello World!");
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
 {{% serverless-init-env-vars-sidecar language="java" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 

@@ -1,4 +1,5 @@
 ---
+id: snmp
 title: Simple Network Management Protocol (SNMP)
 core_product:
   - network device monitoring

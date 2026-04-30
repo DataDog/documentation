@@ -64,7 +64,7 @@ DORA Metrics supports the following data sources for deployment events:
 
 ### Requirements
 
-- **APM Deployment Tracking** is enabled as a **Deployments** event data source in [DORA settings][2].
+- {{< ui >}}APM Deployment Tracking{{< /ui >}} is enabled as a {{< ui >}}Deployments{{< /ui >}} event data source in [DORA settings][2].
 - Your service has [metadata][3] defined in the Software Catalog.
 - Your service has [unified service tagging][4] enabled. Deployments are identified using the `version` tag.
 
@@ -82,7 +82,7 @@ To send your own deployment events, use the [DORA Metrics API][1] or the [`datad
 
 ### Requirements
 
-- **datadog-ci CLI / API** is enabled as a **Deployments** event data source in [DORA settings][3].
+- {{< ui >}}datadog-ci CLI / API{{< /ui >}} is enabled as a {{< ui >}}Deployments{{< /ui >}} event data source in [DORA settings][3].
 - The following attributes are required:
   - `started_at`: The time the deployment started.
   - `finished_at`: The time the deployment finished.
@@ -215,10 +215,10 @@ If you are using the <code>pull_request</code> trigger, use the alternative meth
 If the [GitHub integration][1] is not already installed, install it on the [GitHub integration tile][2].
 
 When configuring the GitHub application:
-1. Select at least **Read** repository permissions for **Contents** and **Pull Requests**.
-2. Subscribe at least to **Push**, **PullRequest** and **PullRequestReview** events.
+1. Select at least {{< ui >}}Read{{< /ui >}} repository permissions for {{< ui >}}Contents{{< /ui >}} and {{< ui >}}Pull Requests{{< /ui >}}.
+2. Subscribe at least to {{< ui >}}Push{{< /ui >}}, {{< ui >}}PullRequest{{< /ui >}} and {{< ui >}}PullRequestReview{{< /ui >}} events.
 
-To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that the **Datadog Features** table shows **Pull Request Information** meets all requirements.
+To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that the {{< ui >}}Datadog Features{{< /ui >}} table shows {{< ui >}}Pull Request Information{{< /ui >}} meets all requirements.
 
 [1]: /integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
@@ -252,6 +252,34 @@ extensions:
 [1]: /integrations/gitlab-source-code/
 [2]: https://app.datadoghq.com/integrations/gitlab-source-code?subPath=configuration
 [3]: https://docs.gitlab.com/user/group/
+
+{{% /tab %}}
+
+{{% tab "Azure DevOps" %}}
+
+<div class="alert alert-danger">
+If the integration was installed before March 10, 2026, run the <a href="https://github.com/DataDog/azdevops-sci-hooks">webhook installation setup script</a> again to help ensure all DORA metrics are calculated correctly. If you encounter errors, rerun the script before contacting support.
+</div>
+
+If the [Azure DevOps Source Code integration][1] is not already installed, install it on the [Azure DevOps Source Code integration tile][2].
+
+To set up the integration:
+
+1. Open the [Azure DevOps Source Code integration tile][2] in Datadog.
+
+2. Select the {{< ui >}}Configuration{{< /ui >}} tab and click {{< ui >}}Connect Microsoft Entra App{{< /ui >}}.
+
+3. Follow the setup instructions.
+
+4. Click {{< ui >}}Add Organizations{{< /ui >}}.
+
+5. Follow the repository installation steps and [**run the setup script**][3]. If the script is not run, commits made before a pull request is created will not be associated with that pull request.
+
+6. After the script completes, verify the integration status on the tile. The connected repositories and projects appear in the list.
+
+[1]: https://docs.datadoghq.com/integrations/azure-devops-source-code/#connect-microsoft-entra-app
+[2]: https://app.datadoghq.com/integrations?search=azure%20devops&integrationId=azure-devops-source-code&subPath=configuration
+[3]: https://github.com/DataDog/azdevops-sci-hooks
 
 {{% /tab %}}
 
@@ -306,6 +334,15 @@ links:
     url: https://gitlab.com/organization/example-repository/-/tree/main/src/apps/shopist?ref_type=heads
 ```
 {{% /tab %}}
+{{% tab "Azure DevOps" %}}
+```yaml
+links:
+  - name: shopist
+    type: repo
+    provider: azure
+    url: https://dev.azure.com/organization/project/_git/example-repository?path=/src/apps/shopist
+```
+{{% /tab %}}
 {{< /tabs >}}
 
 DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
@@ -355,20 +392,20 @@ DORA Metrics can automatically identify and track failures through [Datadog Inci
 
 ### Requirements
 
-- **Incidents** is enabled as a **Failures** event data source in [DORA settings][2].
+- {{< ui >}}Incidents{{< /ui >}} is enabled as a {{< ui >}}Failures{{< /ui >}} event data source in [DORA settings][2].
 
 To avoid having unlabeled failures, Datadog strongly recommends adding the following attributes to incidents:
-  - `Teams`
-  - `Services`
-  - `Envs`: The `Envs` attribute can be added in the [Incident Settings][3] if it doesn't already exist.
+  - {{< ui >}}Teams{{< /ui >}}
+  - {{< ui >}}Services{{< /ui >}}
+  - {{< ui >}}Envs{{< /ui >}}: The {{< ui >}}Envs{{< /ui >}} attribute can be added in the [Incident Settings][3] if it doesn't already exist.
 
 If provided with incidents, the `Severity` tag is added to failure events.
 
-**Recommended**: In the [Incident Settings][3], set attributes field `Prompted` to `At Resolution` to ensure you never forget to add these attributes to your incidents.
+**Recommended**: In the [Incident Settings][3], set attributes field {{< ui >}}Prompted{{< /ui >}} to {{< ui >}}At Resolution{{< /ui >}} to ensure you never forget to add these attributes to your incidents.
 
 ### Include historical incidents
 
-You can retroactively include incidents from the past two years by selecting **Backfill Data** in the [DORA settings][2], which creates failures from those incidents. Backfilling data can take up to an hour to complete.
+You can retroactively include incidents from the past two years by selecting {{< ui >}}Backfill Data{{< /ui >}} in the [DORA settings][2], which creates failures from those incidents. Backfilling data can take up to an hour to complete.
 
 [1]: /incident_response/incident_management/
 [2]: https://app.datadoghq.com/ci/settings/dora
@@ -381,11 +418,11 @@ You can retroactively include incidents from the past two years by selecting **B
 
 To integrate your PagerDuty account with DORA Metrics:
 
-1. Enable **PagerDuty** as a **Failures** event data source in [DORA settings][2].
+1. Enable {{< ui >}}PagerDuty{{< /ui >}} as a {{< ui >}}Failures{{< /ui >}} event data source in [DORA settings][2].
 
-1. Navigate to **Integrations > Developer Tools** in PagerDuty and click **Generic Webhooks (v3)**.
+1. Navigate to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Developer Tools{{< /ui >}} in PagerDuty and click {{< ui >}}Generic Webhooks (v3){{< /ui >}}.
 
-1. Click **+ New Webhook** and enter the following details:
+1. Click {{< ui >}}+ New Webhook{{< /ui >}} and enter the following details:
 
      <table>
       <thead>
@@ -401,7 +438,7 @@ To integrate your PagerDuty account with DORA Metrics:
         </tr>
         <tr>
           <td>Scope Type</td>
-          <td>Select the scope of which incidents you want to send. You can send incidents for a specific <strong>Service</strong> or <strong>Team</strong>, or all PagerDuty services in your <strong>Account</strong>. Depending on your environment and access level, some scope types may not be available.</td>
+          <td>Select the scope of which incidents you want to send. You can send incidents for a specific {{< ui >}}Service{{< /ui >}} or {{< ui >}}Team{{< /ui >}}, or all PagerDuty services in your {{< ui >}}Account{{< /ui >}}. Depending on your environment and access level, some scope types may not be available.</td>
         </tr>
         <tr>
           <td>Description</td>
@@ -413,12 +450,12 @@ To integrate your PagerDuty account with DORA Metrics:
         </tr>
         <tr>
           <td>Custom Headers</td>
-          <td>Click <strong>Add custom header</strong>, enter <code>DD-API-KEY</code> as the name, and input your <a href="https://docs.datadoghq.com/api/latest/authentication/#api-keys">Datadog API key</a> as the value.<br><br>Optionally, you can add an environment to all of the PagerDuty incidents sent from the webhook by creating an additional custom header with the name <code>dd_env</code> and the desired environment as the value.</td>
+          <td>Click {{< ui >}}Add custom header{{< /ui >}}, enter <code>DD-API-KEY</code> as the name, and input your <a href="https://docs.datadoghq.com/api/latest/authentication/#api-keys">Datadog API key</a> as the value.<br><br>Optionally, you can add an environment to all of the PagerDuty incidents sent from the webhook by creating an additional custom header with the name <code>dd_env</code> and the desired environment as the value.</td>
         </tr>
       </tbody>
     </table>
 
-1. To save the webhook, click **Add Webhook**.
+1. To save the webhook, click {{< ui >}}Add Webhook{{< /ui >}}.
 
 The severity of the failure in the DORA Metrics product is based on the [incident priority][3] in PagerDuty.
 
@@ -472,7 +509,7 @@ Include the `finished_at` attribute in a failure event to mark that the failure 
 
 ### Requirements
 
-- **datadog-ci CLI / API** is enabled as a **Failures** event data source in [DORA settings][2].
+- {{< ui >}}datadog-ci CLI / API{{< /ui >}} is enabled as a {{< ui >}}Failures{{< /ui >}} event data source in [DORA settings][2].
 - The following attributes are required:
   - `services` or `team` (at least one must be present)
   - `started_at`
@@ -482,11 +519,11 @@ You can optionally add the following attributes to the failure events:
 - `id` for identifying failures. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
 - `name` to describe the failure.
 - `severity`
-- `env` to filter your DORA metrics by environment on the [**DORA Metrics** page][3].
+- `env` to filter your DORA metrics by environment on the [{{< ui >}}DORA Metrics{{< /ui >}} page][3].
 - `repository_url`
 - `commit_sha`
 - `version`
-- `custom_tags`: Tags in the form `key:value` that can be used to filter events on the [**DORA Metrics** page][3].
+- `custom_tags`: Tags in the form `key:value` that can be used to filter events on the [{{< ui >}}DORA Metrics{{< /ui >}} page][3].
 
 See the [DORA Metrics API reference documentation][1] for the full spec and additional code samples.
 

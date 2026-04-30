@@ -17,26 +17,26 @@ further_reading:
   tag: "Documentation"
   text: "Manage your users with the USER API"
 ---
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">The Datadog for Government site only supports SAML login.</div>
 {{< /site-region >}}
 
-Datadog's **User** tab in **Organization Settings** allows you to manage your users and their associated roles. Switch between list and grid views by clicking **List View** or **Grid View** on the right.
+Datadog's {{< ui >}}User{{< /ui >}} tab in {{< ui >}}Organization Settings{{< /ui >}} allows you to manage your users and their associated roles. Switch between list and grid views by clicking {{< ui >}}List View{{< /ui >}} or {{< ui >}}Grid View{{< /ui >}} on the right.
 
 ## Add new members and manage invites
 
 To add members to your organization:
 
-1. Go to the Organization Settings page, then click the **Users** tab.
-2. Click **Invite Users** in the upper right corner of the page.
+1. Go to the Organization Settings page, then click the {{< ui >}}Users{{< /ui >}} tab.
+2. Click {{< ui >}}Invite Users{{< /ui >}} in the upper right corner of the page.
 3. Enter the email address of the user you wish to invite to your Datadog account.
 4. Assign one or more [user roles][1] to the users.
 **Note**: Users with the Invite User permission can invite a user to any role they have themselves. Users with both the Invite User and Access Management permissions can invite a user to any role.
-5. Click **Send Invites**.
+5. Click {{< ui >}}Send Invites{{< /ui >}}.
 
-The new user receives an email with a link to log in. This link is valid for 48 hours. The user is marked with the status `Invite Pending` until they log in. To cancel their invite before they log in, click the **Delete Invite** button on the right of the user line in list view, or on the user box in grid view. 
+The new user receives an email with a link to log in. This link is valid for 48 hours. The user is marked with the status `Invite Pending` until they log in. To cancel their invite before they log in, click the {{< ui >}}Delete Invite{{< /ui >}} button on the right of the user line in list view, or on the user box in grid view. 
 
-To resend an invite in list view, click the user to open the user side panel and click **Resend Invite**. Or in grid view, hover over the user box and click **Resend Invite**.
+To resend an invite in list view, click the user to open the user side panel and click {{< ui >}}Resend Invite{{< /ui >}}. Or in grid view, hover over the user box and click {{< ui >}}Resend Invite{{< /ui >}}.
 
 ## Edit a user's roles
 
@@ -44,10 +44,10 @@ Only users with the User Access Management permission, such as users with the Da
 
 To edit a user's roles:
 
-1. Go to the **Users** tab of **Organization Settings**.
-2. Select the **Edit** button on the right of the user line.
+1. Go to the {{< ui >}}Users{{< /ui >}} tab of {{< ui >}}Organization Settings{{< /ui >}}.
+2. Select the {{< ui >}}Edit{{< /ui >}} button on the right of the user line.
 3. Select the new [user roles][2] for this user, or click the 'X' next to an existing role to remove it.
-4. **Save** the new settings.
+4. {{< ui >}}Save{{< /ui >}} the new settings.
 
 {{< img src="account_management/users/user_role_update.png" alt="User role update" style="width:80%;">}}
 
@@ -61,23 +61,25 @@ Default login methods for an organization can be set through the Login Methods p
 
 To edit a user's login methods:
 
-1. Go to the **Users** tab of **Organization Settings**.
-2. Click **Edit** on the right of the user line.
-3. Switch the toggle beside **Override Default Login Methods** to enable or disable overrides for the user.
+1. Go to the {{< ui >}}Users{{< /ui >}} tab of {{< ui >}}Organization Settings{{< /ui >}}.
+2. Click {{< ui >}}Edit{{< /ui >}} on the right of the user line.
+3. Switch the toggle beside {{< ui >}}Override Default Login Methods{{< /ui >}} to enable or disable overrides for the user.
 4. If enabling overrides, choose a set of login methods that the user can use to access Datadog. This can be a single option or all options that are configured for your organization.
-5. Click **Save**.
+5. Click {{< ui >}}Save{{< /ui >}}.
 
 
 **Note**: Overrides can be set only to valid login methods. If you have not configured SAML, you cannot choose that login method as an override for a user.
 
 ## Disable existing members
 
-Only users with the Access Management permission, such as users with the Datadog Admin Role, can disable members. You cannot permanently remove users, as they might have authored dashboards or monitors, and their user ID is used to keep a record of their actions. When a user is disabled, any application keys they had generated are automatically revoked.
+Only users with the Access Management permission, such as users with the Datadog Admin Role, can disable members. You cannot permanently remove users, as they might have authored dashboards or monitors, and their user ID is used to keep a record of their actions.
 
-1. Go to the **Users** tab of **Organization Settings**.
-2. Select the **Edit** button on the right of the user line.
-3. Click on the **Disable** toggle.
-4. **Save** the changes.
+<div class="alert alert-warning">Disabling a user revokes all of their application keys and personal access tokens (PATs). Any workflows or integrations that rely on these keys stop working immediately. To avoid disruptions, use keys that belong to <a href="/account_management/org_settings/service_accounts/">service accounts</a> for long-running integrations and automated workflows.</div>
+
+1. Go to the {{< ui >}}Users{{< /ui >}} tab of {{< ui >}}Organization Settings{{< /ui >}}.
+2. Select the {{< ui >}}Edit{{< /ui >}} button on the right of the user line.
+3. Click on the {{< ui >}}Disable{{< /ui >}} toggle.
+4. {{< ui >}}Save{{< /ui >}} the changes.
 5. Confirm the action.
 
 **Note**: By default, disabled users are filtered out from the list of users in the User Management Page. If you have the correct permissions, you can filter by users with the status `Disabled` and re-enable them.
@@ -88,3 +90,4 @@ Only users with the Access Management permission, such as users with the Datadog
 
 [1]: /account_management/users/default_roles/
 [2]: /account_management/rbac/
+

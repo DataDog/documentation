@@ -211,6 +211,8 @@ For additional settings, [see the documentation on GitHub][2].
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 <div class="alert alert-info">Enhanced metrics are automatically enabled if you enable tracing. Therefore, if tracing is enabled, you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
 
 ## Additional options for instrumentation

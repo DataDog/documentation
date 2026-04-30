@@ -14,6 +14,10 @@ further_reading:
 - link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Limit data collection to a subset of containers only"
+- link: "https://learn.datadoghq.com/courses/getting-started-k8s"
+  tag: "Learning Center"
+  text: "Introduction to Monitoring Kubernetes"
+
 ---
 
 The Datadog Agent can automatically assign tags to metrics, traces, and logs emitted by a pod (or an individual container within a pod) based on labels or annotations.
@@ -80,9 +84,9 @@ The Agent can attach Kubernetes environment information as "host tags".
   |---------------------|-------------|--------------------------------------------------------|----------------------------------------------------------------|
   | `kube_cluster_name` | Low         | `DD_CLUSTER_NAME` envvar or cloud provider integration | `DD_CLUSTER_NAME` envvar or cloud provider integration enabled |
   | `kube_node_role`    | Low         | Node label `node-role.kubernetes.io/<role>`            | Node label must exist                                          |
-  | `kube_node`         | Low         | `NodeName` field in a pod's specifications               |                                                                |
-  | `orch_cluster_id`         | Low         | Orchestrator cluster metadata               |  Orchestrator environment                            |                                                              |
-
+  | `kube_node`         | Low         | `NodeName` field in a pod's specifications             |                                                              |
+  | `orch_cluster_id`   | Low         | Orchestrator cluster metadata                          |  Orchestrator environment                                    |
+  | `kube_distribution` | Low         | Node labels and NodeSystemInfo                         |  |
 </div>
 
 ## Tag Autodiscovery

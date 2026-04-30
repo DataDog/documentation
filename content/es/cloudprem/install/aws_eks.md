@@ -1,55 +1,96 @@
 ---
+aliases:
+- /es/cloudprem/configure/aws_config/
 description: Más información sobre cómo instalar y configurar CloudPrem en AWS EKS
 further_reading:
-- link: /cloudprem/configure/aws_config/
-  tag: Documentación
-  text: Configuración de AWS
 - link: /cloudprem/configure/ingress/
   tag: Documentación
   text: Configurar el ingreso a CloudPrem
-- link: /cloudprem/ingest_logs/
+- link: /cloudprem/ingest/
   tag: Documentación
   text: Configurar la ingesta de logs
 title: Instalar CloudPrem en AWS EKS
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem está en vista previa" >}}
-  Únete a la vista previa de CloudPrem para acceder a nuevas funciones de gestión de logs autoalojadas.
+  Únete a la vista previa de CloudPrem para acceder a las nuevas funciones de gestión de logs autoalojadas.
 {{< /callout >}}
 
 ## Información general
 
-Este documento te guiará a través del proceso de instalación de CloudPrem en AWS EKS.
+Este documento te guiará a través del proceso de configuración de tu entorno de AWS y la instalación de CloudPrem en AWS EKS.
 
 ## Requisitos previos
 
-Antes de empezar a utilizar CloudPrem, asegúrate de que dispones de:
+Para desplegar CloudPrem en AWS, es necesario configurar:
+- Credenciales y autenticación de AWS
+- Selección de regiones de AWS
+- Permisos IAM para el almacenamiento de objetos S3
+- Base de datos PostgreSQL RDS (recomendado)
+- Clúster EKS con el controlador del balanceador de carga AWS
 
-- Cuenta de AWS con los permisos necesarios
-- Kubernetes `1.25+` ([EKS][1] recomendado)
-- [Controlador del balanceador de carga AWS instalado][2] (opcional)
-- Base de datos PostgreSQL ([RDS][3] recomendado)
-- Bucket de S3 para el almacenamiento de logs
-- Datadog Agent
-- Herramienta de línea de comandos Kubernetes (`kubectl`)
-- Herramienta de línea de comandos Helm (`helm`)
+### Credenciales de AWS
 
-## Pasos de la instalación
+Al iniciar un nodo, CloudPrem intenta encontrar las credenciales de AWS utilizando la cadena de proveedores de credenciales implementada por [rusoto_core::ChainProvider][2] y busca las credenciales en este orden:
 
-1. [Preparar tu entorno AWS](#prepare-your-aws-environment)
-2. [Instalar el Helm chart de CloudPrem](#install-the-cloudprem-helm-chart)
-3. [Verificar la instalación](#verification)
-4. [Configurar tu cuenta de Datadog](#configure-your-datadog-account)
+1. Variables de entorno `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` o `AWS_SESSION_TOKEN` (opcional).
+2. Archivo de perfiles de credenciales, normalmente ubicado en `~/.aws/credentials` o especificado por las variables de entorno `AWS_SHARED_CREDENTIALS_FILE` y `AWS_PROFILE` si están definidas y no están vacías.
+3. Credenciales del contenedor de Amazon ECS, cargadas desde el contenedor de Amazon ECS si se define la variable de entorno `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI`.
+4. Credenciales de perfiles de instancias, utilizadas en instancias Amazon EC2 y entregadas a través del servicio de metadatos de Amazon EC2.
 
-## Preparar tu entorno AWS 
+Se devuelve un error si no se encuentran credenciales en la cadena.
 
-Antes de instalar CloudPrem en EKS, asegúrate de que tu entorno AWS está correctamente configurado. Para obtener instrucciones detalladas de configuración de AWS, consulta la [guía de configuración de AWS][7].
+### Región AWS
 
-Requisitos clave:
-- Credenciales de AWS configuradas (rol IAM o claves de acceso)
-- Permisos IAM adecuados para el acceso a S3
-- Clúster EKS con el controlador del balanceador de carga AWS instalado
-- Instancia PostgreSQL de RDS o base de datos compatible
+CloudPrem intenta encontrar la región AWS desde diversas fuentes, utilizando el siguiente orden de precedencia:
+
+1. **Variables de entorno**: Comprueba `AWS_REGION`, luego `AWS_DEFAULT_REGION`.
+2. **Archivo de configuración de AWS**: Normalmente se encuentra en `~/.aws/config` o en la ruta especificada por la variable de entorno `AWS_CONFIG_FILE` (si está configurada y no está vacía).
+3. **Metadatos de instancia EC2**: Utiliza la región de la instancia de Amazon EC2 que se está ejecutando actualmente.
+4. **Por defecto**: Vuelve a `us-east-1` si ningún otra fuente proporciona una región.
+
+### Permisos IAM para S3
+
+Acciones autorizadas requeridas:
+
+* `ListBucket` (en el bucket directamente)
+* `GetObject`
+* `PutObject`
+* `DeleteObject`
+* `ListMultipartUploadParts`
+* `AbortMultipartUpload`
+
+He aquí un ejemplo de política de bucket:
+
+```json
+{
+ "Version": "2012-10-17",
+ "Statement": [
+   {
+     "Effect": "Allow",
+     "Action": [
+       "s3:ListBucket"
+     ],
+     "Resource": [
+       "arn:aws:s3:::my-bucket"
+     ]
+   },
+   {
+     "Effect": "Allow",
+     "Action": [
+       "s3:GetObject",
+       "s3:PutObject",
+       "s3:DeleteObject",
+       "s3:ListMultipartUploadParts",
+       "s3:AbortMultipartUpload"
+     ],
+     "Resource": [
+       "arn:aws:s3:::my-bucket/*"
+     ]
+   }
+ ]
+}
+```
 
 ### Crear una base de datos RDS
 
@@ -77,15 +118,20 @@ echo "postgres://cloudprem:FixMeCloudPrem@$ENDPOINT:$PORT/$DATABASE"
 echo ""
 ```
 
+## Pasos de la instalación
+
+1. [Instalar el Helm chart de CloudPrem](#install-the-cloudprem-helm-chart)
+2. [Verificar instalación](#verification)
+
 ## Instalar el Helm chart de CloudPrem
 
-1. Añade y actualiza el repositorio Helm de Datadog:
+1. Añade y actualiza el repositorio de Datadog Helm:
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm repo update
    ```
 
-1. Crea un espacio de nombres Kubernetes para el gráfico:
+1. Crea un espacio de nombres de Kubernetes para el chart:
    ```shell
    kubectl create namespace <NAMESPACE_NAME>
    ```
@@ -95,12 +141,12 @@ echo ""
    kubectl create namespace cloudprem
    ```
 
-   **Nota**: Puedes configurar un espacio de nombres predeterminado para tu contexto actual para evitar tener que escribir `-n <NAMESPACE_NAME>` con cada comando:
+   **Nota**: Puedes establecer un espacio de nombres predeterminado para tu contexto actual para evitar tener que escribir `-n <NAMESPACE_NAME>` con cada comando:
    ```shell
    kubectl config set-context --current --namespace=cloudprem
    ```
 
-1. Guarda tu clave de API Datadog como secreto Kubernetes:
+1. Guarda tu clave de API de Datadog como secreto de Kubernetes:
 
    ```shell
    kubectl create secret generic datadog-secret \
@@ -108,7 +154,7 @@ echo ""
    --from-literal api-key="<DD_API_KEY>"
    ```
 
-1. Almacena la cadena de la conexión de bases de datos PostgreSQL como secreto Kubernetes:
+1. Almacena la cadena de conexión de la base de datos PostgreSQL como secreto de Kubernetes:
    ```shell
    kubectl create secret generic cloudprem-metastore-uri \
    -n <NAMESPACE_NAME> \
@@ -119,7 +165,7 @@ echo ""
 
    Crea un archivo `datadog-values.yaml` para sustituir los valores predeterminados por tu configuración personalizada. Aquí es donde se definen los parámetros específicos del entorno, como la etiqueta de imagen, el ID de cuenta de AWS, la cuenta de servicio, la configuración de entrada, las solicitudes y los límites de recursos, etc.
 
-   Cualquier parámetro que no se haya sobrescrito explícitamente en `datadog-values.yaml` vuelve a los valores por defecto definidos en el `values.yaml` del gráfico.
+   Cualquier parámetro que no se haya sobrescrito explícitamente en `datadog-values.yaml` vuelve a los valores por defecto definidos en el `values.yaml` del chart.
 
    ```shell
    # Show default values
@@ -168,8 +214,6 @@ echo ""
    #
    # Additional annotations can be added to customize the ALB behavior.
    ingress:
-     # The internal ingress is used by Datadog Agents and other collectors running outside
-     # the Kubernetes cluster to send their logs to CloudPrem.
      internal:
        enabled: true
        name: cloudprem-internal
@@ -194,19 +238,11 @@ echo ""
    # and transforms it into searchable files called "splits" stored in S3.
    #
    # The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput.
-   # Resource requests and limits should be tuned based on your indexing workload.
-   #
-   # The default values are suitable for moderate indexing loads of up to 20 MB/s per indexer pod.
+   # The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
+   # See the sizing guide for available tiers and their configurations.
    indexer:
      replicaCount: 2
-
-     resources:
-       requests:
-         cpu: "4"
-         memory: "8Gi"
-       limits:
-         cpu: "4"
-         memory: "8Gi"
+     podSize: xlarge
 
    # Searcher configuration
    # The searcher is responsible for executing search queries against the indexed data stored in S3.
@@ -223,14 +259,7 @@ echo ""
    # Memory is particularly important for searchers as they cache frequently accessed index data in memory.
    searcher:
      replicaCount: 2
-
-     resources:
-       requests:
-         cpu: "4"
-         memory: "16Gi"
-       limits:
-         cpu: "4"
-         memory: "16Gi"
+     podSize: xlarge
    ```
 
 1. Instalar o actualizar el Helm chart
@@ -270,10 +299,6 @@ helm uninstall <RELEASE_NAME>
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/eks/
-[2]: https://kubernetes-sigs.github.io/aws-load-balancer-controller
+[2]: https://docs.rs/rusoto_credential/latest/rusoto_credential/struct.ChainProvider.html
 [3]: https://aws.amazon.com/rds/
-[4]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
-[5]: /es/getting_started/containers/datadog_operator/#installation-and-deployment
-[6]: /es/help/
-[7]: /es/cloudprem/configure/aws_config
-[8]: /es/cloudprem/ingest_logs/datadog_agent/
+[8]: /es/cloudprem/ingest/agent/

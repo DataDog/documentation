@@ -51,7 +51,7 @@ Use this guide to manually set up the Datadog [AWS Integration][1].
 
 To set up the AWS integration manually, create an IAM policy and IAM role in your AWS account, and configure the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">
   <em>Setting up S3 Log Archives using Role Delegation is in limited availability. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request this feature in your Datadog for Government account</em>.
 </div>
@@ -59,14 +59,22 @@ To set up the AWS integration manually, create an IAM policy and IAM role in you
 
 ## Setup
 
+<div class="alert alert-info">
+Changing the access type on an existing AWS account is a destructive operation. To switch methods (for example, from Access Keys to Role Delegation), delete the existing account entry and re-add it with the new access type. Per-account settings are not preserved when you re-add an account. This includes metric collection filters, log collection configuration, and tag customizations. Reconfigure these settings after re-adding the account.
+</div>
+
 ### Generate an external ID
 
 1. In the [AWS integration configuration page][1], click **Add AWS Account(s)**, and then select **Manually**.
 2. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][2] in the AWS documentation for more information.
+
+   <div class="alert alert-info">
+   If your AWS account is in the <code>aws-us-gov</code> (GovCloud) partition, verify with your compliance team before connecting it to your Datadog site. Confirm that forwarding data from that account meets your organization's authorization boundary and data handling requirements. Applicable frameworks may include FedRAMP, ITAR, IL4, or IL5.
+   </div>
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial regions.
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial or AWS GovCloud regions.
 {{< /site-region >}}
 4. Copy the `AWS External ID`. For more information about the external ID, read the [IAM User Guide][3].
@@ -87,7 +95,7 @@ Datadog assumes this role to collect data on your behalf.
 {{< site-region region="ap2" >}}
 3. Enter `412381753143` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 3. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
 **Note**: Ensure that the **DATADOG SITE** selector on the right of this documentation page is set to your Datadog site before copying the account ID above.
@@ -139,6 +147,10 @@ This policy defines the permissions necessary for the Datadog integration role t
 
 ## Setup
 
+<div class="alert alert-info">
+Changing the access type on an existing AWS account is a destructive operation. To switch methods (for example, from Access Keys to Role Delegation), delete the existing account entry and re-add it with the new access type. Per-account settings are not preserved when you re-add an account. This includes metric collection filters, log collection configuration, and tag customizations. Reconfigure these settings after re-adding the account.
+</div>
+
 ### AWS
 
 1. In your AWS console, create an IAM user to be used by the Datadog integration with the [necessary permissions](#aws-integration-iam-policy).
@@ -149,10 +161,18 @@ This policy defines the permissions necessary for the Datadog integration role t
 3. In the [AWS integration tile][1], click **Add AWS Account**, and then select **Manually**.
 4. Select the **Access Keys** tab.
 5. Choose which AWS partition your AWS account is scoped to. The partition is either `aws` for commercial regions, `aws-cn` for China*, or `aws-us-gov` for GovCloud. See [Partitions][9] in the AWS documentation for more information.
-5. Click the **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account** checkbox.
-6. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`.
-7. Click **Save**.
-8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
+
+   <div class="alert alert-warning">
+   Access keys authentication is supported only for AWS accounts in the <code>aws-us-gov</code> (GovCloud) and <code>aws-cn</code> (China) partitions. For AWS accounts in the <code>aws</code> (commercial) partition, use Role Delegation instead.
+   </div>
+
+   <div class="alert alert-info">
+   If your AWS account is in the <code>aws-us-gov</code> (GovCloud) partition, verify with your compliance team before connecting it to your Datadog site. Confirm that forwarding data from that account meets your organization's authorization boundary and data handling requirements. Applicable frameworks may include FedRAMP, ITAR, IL4, or IL5.
+   </div>
+6. Click the **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account** checkbox.
+7. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`.
+8. Click **Save**.
+9. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
 \*{{% mainland-china-disclaimer %}}
 

@@ -12,9 +12,9 @@ You can use the Cache for Redis component to represent and visualize the Redis c
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Tier**: Select the performance tier for your Redis cache.
-- **Type**: Select the instance type of your Redis cache. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Tier{{< /ui >}}: Select the performance tier for your Redis cache.
+- {{< ui >}}Type{{< /ui >}}: Select the instance type of your Redis cache. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
 
 ## API
 

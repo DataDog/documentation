@@ -2,7 +2,9 @@
 title: Advanced Search
 disable_toc: false
 further_reading:
-further_reading:
+- link: "https://learn.datadoghq.com/courses/enhance-log-querying"
+  tag: "Learning Center"
+  text: "Enhance Log Querying and Analytics with Reference Tables, Subqueries, and Calculated Fields"
 - link: 'logs/explorer/analytics'
   tag: 'Documentation'
   text: 'Perform Log Analytics'

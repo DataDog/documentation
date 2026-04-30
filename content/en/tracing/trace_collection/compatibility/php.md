@@ -122,7 +122,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Zend Framework | 1.12, 1.21                              | All supported PHP versions  | Framework-level instrumentation |
 | Zend Framework | 2.x                                     | All supported PHP versions  | Generic web tracing             |
 
-Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
+Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the SDK.
 
 
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].
@@ -155,6 +155,11 @@ To request support for additional CLI libraries, contact our awesome [support te
 | PhpRedis                                                                | 3, 4, 5                    | All supported PHP versions |
 | Predis                                                                  | 1.1                        | All supported PHP versions |
 | SQLSRV                                                                  | *(Any Supported PHP)*      | All supported PHP versions |
+
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
 
 To request support for additional datastores, contact our awesome [support team][3].
 

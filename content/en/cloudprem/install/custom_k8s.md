@@ -1,25 +1,25 @@
 ---
-title: Install CloudPrem on Kubernetes with PostgreSQL and MinIO
-description: Learn how to install and configure CloudPrem on any Kubernetes cluster using PostgreSQL and MinIO for object storage
+title: Install BYOC Logs on Kubernetes with PostgreSQL and MinIO
+description: Learn how to install and configure BYOC Logs on any Kubernetes cluster using PostgreSQL and MinIO for object storage
 further_reading:
 - link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
-  text: "Configure CloudPrem Ingress"
+  text: "Configure BYOC Logs Ingress"
 - link: "/cloudprem/ingest/"
   tag: "Documentation"
   text: "Configure Log Ingestion"
 - link: "/cloudprem/operate/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshooting CloudPrem"
+  text: "Troubleshooting BYOC Logs"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
+  Join the BYOC Logs Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
 
-This documentation walks you through the process of installing CloudPrem on any Kubernetes cluster using PostgreSQL for metadata storage and MinIO for S3-compatible object storage.
+This documentation walks you through the process of installing BYOC Logs on any Kubernetes cluster using PostgreSQL for metadata storage and MinIO for S3-compatible object storage.
 
 This setup is ideal for environments where you manage your own infrastructure or don't use a major cloud provider's managed services.
 
@@ -42,7 +42,7 @@ Before you begin, confirm you have:
   kubectl get nodes
   ```
 
-- A **Datadog account** with the CloudPrem feature enabled
+- A **Datadog account** with the BYOC Logs feature enabled
 
 - A **[Datadog API key][1]**
 
@@ -54,7 +54,7 @@ Before you begin, confirm you have:
   - Password
 
 - A **MinIO instance** accessible from your Kubernetes cluster, with:
-  - A bucket created for CloudPrem data (for example, `cloudprem`)
+  - A bucket created for BYOC Logs data (for example, `byoc-logs`)
   - An access key and secret key with read/write permissions on the bucket
   - The MinIO endpoint URL (for example, `http://minio.minio.svc.cluster.local:9000`)
 
@@ -84,10 +84,10 @@ If successful, the command lists the contents of your MinIO bucket.
 
 ## Installation steps
 
-1. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart)
+1. [Install the BYOC Logs Helm chart](#install-the-byoc-logs-helm-chart)
 2. [Verify installation](#verification)
 
-## Install the CloudPrem Helm chart
+## Install the BYOC Logs Helm chart
 
 1. Add and update the Datadog Helm repository:
    ```shell
@@ -100,14 +100,14 @@ If successful, the command lists the contents of your MinIO bucket.
    kubectl create namespace <NAMESPACE_NAME>
    ```
 
-   For example, to create a `cloudprem` namespace:
+   For example, to create a `byoc-logs` namespace:
    ```shell
-   kubectl create namespace cloudprem
+   kubectl create namespace byoc-logs
    ```
 
    **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
    ```shell
-   kubectl config set-context --current --namespace=cloudprem
+   kubectl config set-context --current --namespace=byoc-logs
    ```
 
 1. Store your Datadog API key as a Kubernetes secret:
@@ -123,7 +123,7 @@ If successful, the command lists the contents of your MinIO bucket.
    <div class="alert alert-danger">If your password contains special characters, URL-encode them first. For example: <code>/</code> → <code>%2F</code>, <code>+</code> → <code>%2B</code>, <code>=</code> → <code>%3D</code>.</div>
 
    ```shell
-   kubectl create secret generic cloudprem-metastore-uri \
+   kubectl create secret generic byoc-logs-metastore-uri \
    -n <NAMESPACE_NAME> \
    --from-literal QW_METASTORE_URI="postgres://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE>"
    ```
@@ -131,7 +131,7 @@ If successful, the command lists the contents of your MinIO bucket.
 1. Store the MinIO credentials as a Kubernetes secret:
 
    ```shell
-   kubectl create secret generic cloudprem-minio-credentials \
+   kubectl create secret generic byoc-logs-minio-credentials \
    -n <NAMESPACE_NAME> \
    --from-literal AWS_ACCESS_KEY_ID="<MINIO_ACCESS_KEY>" \
    --from-literal AWS_SECRET_ACCESS_KEY="<MINIO_SECRET_KEY>"
@@ -167,12 +167,12 @@ environment:
 # Service account configuration
 serviceAccount:
   create: true
-  name: cloudprem
+  name: byoc-logs
 
-# CloudPrem node configuration
+# BYOC Logs node configuration
 config:
   # The root URI where index data is stored. This should be an S3-compatible path pointing to your MinIO bucket.
-  # All indexes created in CloudPrem are stored under this location.
+  # All indexes created in BYOC Logs are stored under this location.
   default_index_root_uri: s3://<BUCKET_NAME>/indexes
   storage:
     s3:
@@ -190,9 +190,9 @@ config:
 metastore:
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-metastore-uri
+        name: byoc-logs-metastore-uri
     - secretRef:
-        name: cloudprem-minio-credentials
+        name: byoc-logs-minio-credentials
 
 # Indexer configuration
 # The indexer is responsible for processing and indexing incoming data it receives data from various sources
@@ -200,22 +200,18 @@ metastore:
 # stored in MinIO.
 #
 # The indexer is horizontally scalable - you can increase `replicaCount` to handle higher indexing throughput.
-# Resource requests and limits should be tuned based on your indexing workload.
-#
-# The default values are suitable for moderate indexing loads of up to 20 MB/s per indexer pod.
+# The `podSize` parameter sets vCPU, memory, and component-specific settings automatically.
+# See the sizing guide for available tiers and their configurations.
 indexer:
   replicaCount: 2
+  podSize: xlarge
+  persistentVolume:
+    enabled: true
+    storage: 250Gi
+    storageClass: <storage class>
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-minio-credentials
-
-  resources:
-    requests:
-      cpu: "4"
-      memory: "8Gi"
-    limits:
-      cpu: "4"
-      memory: "8Gi"
+        name: byoc-logs-minio-credentials
 
 # Searcher configuration
 # The searcher is responsible for executing search queries against the indexed data stored in MinIO.
@@ -232,33 +228,26 @@ indexer:
 # Memory is particularly important for searchers as they cache frequently accessed index data in memory.
 searcher:
   replicaCount: 2
+  podSize: xlarge
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-minio-credentials
-
-  resources:
-    requests:
-      cpu: "4"
-      memory: "16Gi"
-    limits:
-      cpu: "4"
-      memory: "16Gi"
+        name: byoc-logs-minio-credentials
 
 # Control plane configuration
 controlPlane:
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-minio-credentials
+        name: byoc-logs-minio-credentials
 
 # Janitor configuration
 janitor:
   extraEnvFrom:
     - secretRef:
-        name: cloudprem-minio-credentials
+        name: byoc-logs-minio-credentials
 {{< /code-block >}}
 
    Replace the following placeholders with your actual values:
-   - `<BUCKET_NAME>`: The name of your MinIO bucket (for example, `cloudprem`)
+   - `<BUCKET_NAME>`: The name of your MinIO bucket (for example, `byoc-logs`)
    - `<MINIO_ENDPOINT>`: The MinIO endpoint URL (for example, `http://minio.minio.svc.cluster.local:9000`)
 
 1. Install or upgrade the Helm chart:
@@ -273,7 +262,7 @@ janitor:
 
 ### Check deployment status
 
-Verify that all CloudPrem components are running:
+Verify that all BYOC Logs components are running:
 
 ```shell
 kubectl get pods -n <NAMESPACE_NAME>
@@ -284,14 +273,14 @@ kubectl get services -n <NAMESPACE_NAME>
 All pods should be in `Running` state:
 ```
 NAME                                   READY   STATUS    RESTARTS   AGE
-cloudprem-control-plane-xxx            1/1     Running   0          5m
-cloudprem-indexer-0                    1/1     Running   0          5m
-cloudprem-indexer-1                    1/1     Running   0          5m
-cloudprem-janitor-xxx                  1/1     Running   0          5m
-cloudprem-metastore-xxx                1/1     Running   0          5m
-cloudprem-metastore-yyy                1/1     Running   0          5m
-cloudprem-searcher-0                   1/1     Running   0          5m
-cloudprem-searcher-1                   1/1     Running   0          5m
+byoc-logs-control-plane-xxx            1/1     Running   0          5m
+byoc-logs-indexer-0                    1/1     Running   0          5m
+byoc-logs-indexer-1                    1/1     Running   0          5m
+byoc-logs-janitor-xxx                  1/1     Running   0          5m
+byoc-logs-metastore-xxx                1/1     Running   0          5m
+byoc-logs-metastore-yyy                1/1     Running   0          5m
+byoc-logs-searcher-0                   1/1     Running   0          5m
+byoc-logs-searcher-1                   1/1     Running   0          5m
 ```
 
 ### Check metastore connectivity
@@ -312,7 +301,7 @@ kubectl logs -n <NAMESPACE_NAME> -l app.kubernetes.io/component=indexer --tail=5
 
 ## Uninstall
 
-To uninstall CloudPrem:
+To uninstall BYOC Logs:
 
 ```shell
 helm uninstall <RELEASE_NAME> -n <NAMESPACE_NAME>
@@ -326,7 +315,7 @@ kubectl delete namespace <NAMESPACE_NAME>
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent][2]** - Configure the Datadog Agent to send logs to CloudPrem
+**[Set up log ingestion with Datadog Agent][2]** - Configure the Datadog Agent to send logs to BYOC Logs
 
 ## Further reading
 
