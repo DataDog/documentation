@@ -43,6 +43,7 @@ After installation of the plugin:
 1. Type `/ddsetup` in the agent chat to perform first-time setup.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
+[1]: https://cursor.com/marketplace/datadog
 [2]: /ide_plugins/vscode/?tab=cursor#installation
 [3]: /bits_ai/mcp_server/tools
 {{< /site-region >}}
