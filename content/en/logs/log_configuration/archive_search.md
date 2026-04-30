@@ -125,7 +125,7 @@ To optimize performance and reduce costs:
 * **Set Scan Limits:** Admins with `Logs Write Archives` permissions can set a maximum scan size per Archive in the settings.
 * **Use Partition Attributes (Preview):** The most effective way to accelerate searches on low-cardinality data like `service`, `env`, or `status`. Datadog skips entire partitions that don't match your query.
 * **Use Lookup Attributes (Preview):** The most effective way to accelerate searches on high-cardinality data like `trace_id` or `user_id`.
-* **Use zstd compression:** Configure your archives to use zstd compression instead of gzip. Zstd offers better compression ratios, which reduces the volume of data scanned and lowers cloud egress costs. See [Log Archives][9] to configure compression.
+* **Use zstd compression:** Archives use zstd compression by default, which offers better compression ratios than gzip and reduces the volume of data scanned, lowering cloud egress costs. If your archive is configured to use gzip, consider switching to zstd. See [Log Archives][9] to configure compression.
 
 **Note**: Only logs archived after you configure Partition or Lookup attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
 
