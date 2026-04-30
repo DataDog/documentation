@@ -32,7 +32,9 @@ export const initializeFeatureFlags = () => {
             await OpenFeature.setProviderAndWait(new DatadogProvider({
                 applicationId: config.ddApplicationId,
                 clientToken: config.ddClientToken,
-                env
+                env,
+                // Sends exposure events to the FF dashboard. 
+                enableExposureLogging: true
             }));
             return OpenFeature.getClient();
         } catch (error) {
