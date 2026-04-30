@@ -1784,9 +1784,9 @@ Some events cannot be attributed to an origin because they do not have an associ
 
 #### Source map resolution across micro frontends
 
-Stack traces can contain frames from multiple micro frontends. For example, an error thrown in one micro frontend may bubble through code from another. In that case, the event receives a single `service` and `version` from the throw-site (top) frame. Source maps are resolved for the event under that single service. Frames from other micro frontends remain minified, even when their source maps were correctly uploaded under their own `service`.
+When a stack trace contains frames from multiple micro frontends, the event receives a single `service` and `version` from the topmost frame (where the error was thrown). Source maps are resolved for the event under that single service, so frames from other micro frontends remain minified, even when their source maps were correctly uploaded under their own `service`.
 
-To control which micro frontend's source maps are used, use the [manual attribution](#manual-service-and-version-attribution) approach with `beforeSend` to set `event.service` and `event.version`. For example, you can attribute the event to the host application rather than to the throw-site frame. This still applies a single service per event: only frames belonging to the chosen micro frontend are unminified.
+To control which micro frontend's source maps are used, use the [manual attribution](#manual-service-and-version-attribution) approach with `beforeSend` to set `event.service` and `event.version`. Only frames belonging to the chosen micro frontend are unminified.
 
 ### Explore micro frontend data in Datadog
 
