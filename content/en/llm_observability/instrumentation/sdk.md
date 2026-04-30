@@ -493,6 +493,8 @@ To finish a span, call `finish()` on a span object instance. If possible, wrap t
 
 <div class="alert alert-info">If you are using any LLM providers or frameworks that are supported by <a href="/llm_observability/instrumentation/auto_instrumentation/">Datadog's LLM integrations</a>, you do not need to manually start an LLM span to trace these operations.</div>
 
+<div class="alert alert-info">When manually instrumenting an LLM span, token counts (<code>input_tokens</code>, <code>output_tokens</code>, <code>total_tokens</code>) are not captured automatically — you must record them yourself by annotating the span. See <a href="#enriching-spans">Enriching spans</a> for the full annotation API. The examples below show the typical pattern.</div>
+
 {{< tabs >}}
 {{% tab "Python" %}}
 To trace an LLM call, use the function decorator `ddtrace.llmobs.decorators.llm()`.
@@ -525,11 +527,17 @@ To trace an LLM call, use the function decorator `ddtrace.llmobs.decorators.llm(
 #### Example
 
 {{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import llm
 
 @llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
-def llm_call():
+def llm_call(prompt):
     completion = ... # user application logic to invoke LLM
+    LLMObs.annotate(
+        input_data=[{"role": "user", "content": prompt}],
+        output_data=[{"role": "assistant", "content": completion}],
+        metrics={"input_tokens": 4, "output_tokens": 6, "total_tokens": 10},
+    )
     return completion
 {{< /code-block >}}
 {{% /tab %}}
@@ -565,8 +573,13 @@ To trace an LLM call, specify the span kind as `llm`, and optionally specify the
 #### Example
 
 {{< code-block lang="javascript" >}}
-function llmCall () {
+function llmCall (prompt) {
   const completion = ... // user application logic to invoke LLM
+  llmobs.annotate({
+    inputData: [{ role: 'user', content: prompt }],
+    outputData: [{ role: 'assistant', content: completion }],
+    metrics: { input_tokens: 4, output_tokens: 6, total_tokens: 10 }
+  })
   return completion
 }
 llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
@@ -616,6 +629,11 @@ public class MyJavaClass {
     LLMObsSpan llmSpan = LLMObs.startLLMSpan("my-llm-span-name", "my-llm-model", "my-company", "maybe-ml-app-override", "session-141");
     String inference = ... // user application logic to invoke LLM
     llmSpan.annotateIO(...); // record the input and output
+    llmSpan.setMetrics(Map.of(
+      "input_tokens", 617,
+      "output_tokens", 338,
+      "total_tokens", 955
+    ));
     llmSpan.finish();
     return inference;
   }
