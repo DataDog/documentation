@@ -412,6 +412,15 @@ attributes:
     type: string
     domain: RUM core attributes
 
+  - name: application.name
+    description: The Datadog application name.
+    product_source:
+      - icon-rum
+      - android
+      - browser
+      - ios
+    type: string
+    domain: RUM core attributes
 
   - name: device.type
     description: The device type as reported by the device (System User-Agent).
