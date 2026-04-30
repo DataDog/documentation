@@ -49,6 +49,8 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 
 **Note**: [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) is not supported for the .NET driver.
 
+**Note**: [PDO::prepare][39] statements will only use service mode for propagation.
+
 {{% /tab %}}
 
 {{% tab "MySQL" %}}
@@ -66,6 +68,8 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 **Note**: [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) is not supported for .NET drivers.
 
 **Note**: Full propagation mode on Aurora MySQL requires version 3.
+
+**Note**: [mysqli::prepare][38] statements will only use service mode for propagation.
 
 {{% /tab %}}
 
@@ -557,3 +561,5 @@ View historical performance of similar queries to those executed in your trace, 
 [35]: https://pymongo.readthedocs.io/en/stable/
 [36]: https://www.mongodb.com/docs/drivers/java/sync/current/
 [37]: /database_monitoring/query_samples/
+[38]: https://www.php.net/manual/en/mysqli.prepare.php
+[39]: https://www.php.net/manual/en/pdo.prepare.php
