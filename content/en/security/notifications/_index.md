@@ -55,19 +55,6 @@ Notifications can be sent to individuals and teams through email, Slack, Jira, P
 
 {{% notifications-integrations %}}
 
-### Teams
-
-{{% notifications-teams %}}
-
-### Cases
-
-{{% notifications-cases %}}
-
-### Email
-
-{{% notifications-email %}}
-
-
 #### Create a webhook for security automation
 
 You can use webhooks to send alerts to other platforms, such as SOAR. To set up a webhook:
@@ -82,6 +69,18 @@ You can use webhooks to send alerts to other platforms, such as SOAR. To set up 
 1. Click **Save**.
 
 To use the webhook, add `@webhook-<WEBHOOK_NAME>` to the rule's notification section.
+
+### Teams
+
+{{% notifications-teams %}}
+
+### Cases
+
+{{% notifications-cases %}}
+
+### Email
+
+{{% notifications-email %}}
 
 ## Further reading
 
