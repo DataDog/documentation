@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-With Datadog Apps, you build applications locally as code with React and TypeScript (or JavaScript), using a standard frontend development workflow.
+With Datadog Apps, you build applications locally as code with React and TypeScript (or JavaScript), using a standard development workflow.
 
 Datadog Apps use the same permissions model as the [drag-and-drop apps in App Builder][1] and can also be [embedded in dashboards][2].
 
@@ -156,7 +156,7 @@ The following environment variables are available with `npm run build`:
 
 By default, `npm run build` runs in dry run mode, which builds the app without uploading it to Datadog. This is the recommended default for local development, since you typically don't want every local build to publish.
 
-For production deployments, [set up CI/CD with GitHub Actions](#set-up-cicd-with-github-actions). The [`DataDog/apps-github-action`][7] handles the upload step on your behalf, so you don't need to change `dryRun` for this workflow.
+For production deployments, [set up CI/CD with GitHub Actions](#set-up-cicd-with-github-actions). [`DataDog/apps-github-action`][7] handles the upload step on your behalf, so you don't need to change `dryRun` for this workflow.
 
 To upload from your local environment as an end-to-end test — for example, to verify that the build pipeline works before a release — set `DD_APPS_UPLOAD_ASSETS`:
 
