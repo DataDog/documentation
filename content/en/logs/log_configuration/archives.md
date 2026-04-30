@@ -242,20 +242,12 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 #### Archive Partition Attribute (Preview) {#archive-search-partition-attribute}
 
-{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" header="Join the Preview!" >}}
-Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
-{{< /callout >}}
-
 To optimize how your archived logs are physically organized in storage (and accelerate [Archive Search][16]), configure partition attributes in your Datadog Archive.
 
 * **Partition Attributes**: Add low-cardinality attributes such as `service`, `source`, `env`, or `status` that you frequently use as search filters.
 * **Benefit**: Logs sharing the same partition attribute values are co-located in storage. When searching, Datadog can skip entire partitions that don't match your query, drastically reducing the volume of data scanned.
 
 #### Archive Lookup Attribute (Preview) {#archive-search-lookup-attribute}
-
-{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" header="Join the Preview!" >}}
-Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
-{{< /callout >}}
 
 To accelerate searches and investigations in your archives (with [Archive Search][16]), configure lookup attributes in your Datadog Archive.
 
