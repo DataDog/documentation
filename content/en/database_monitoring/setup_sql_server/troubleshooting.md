@@ -330,11 +330,13 @@ GRANT SELECT to datadog;
 
 ### Query Metrics or an Explain Plans are missing for infrequently ran queries
 
-If you're missing Query Metrics or Explain Plans for queries that run infrequently or take a long time to complete, increasing the `query_metrics.lookback_window` can increase the chances of capturing them.
+If Query Metrics or Explain Plans are missing for queries that run infrequently or take a long time to complete, increase the `query_metrics.lookback_window`. A larger lookback window improves the chances of capturing these queries.
 
-The agent needs two consecutive runs of a query to be able to calculate Query Metrics and the `query_metrics.lookback_window` parameter controls how far back the Agent looks for recently completed queries.
+The Agent needs two consecutive runs of a query to calculate Query Metrics, and the `query_metrics.lookback_window` parameter controls how far back the Agent looks for recently completed queries.
 
-It is important to note increasing this may increase the load on your database and increase the number of normalized queries per collection cycle. As such, you should increase this value gradually and monitor the impact. 
+**Note**: A larger lookback window can add load on your database and raise the number of normalized queries per collection cycle. Increase the value gradually and monitor the impact.
+
+For example, to extend the lookback window to 600 seconds, add the following to your instance configuration:
 
   ```yaml
   query_metrics:
