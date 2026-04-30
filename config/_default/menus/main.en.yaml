@@ -1707,7 +1707,7 @@ menu:
       weight: 30000
     - name: Reference Tables
       url: reference_tables/
-      pre: inventories
+      pre: reference-table
       identifier: reference_tables
       parent: platform_heading
       weight: 40000
