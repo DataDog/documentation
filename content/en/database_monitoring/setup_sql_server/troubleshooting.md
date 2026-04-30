@@ -328,7 +328,7 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT SELECT to datadog;
 ```
 
-### Query Metrics or an Explain Plans are missing for infrequently ran queries
+### Query Metrics or Explain Plans are missing for infrequently run queries
 
 If Query Metrics or Explain Plans are missing for queries that run infrequently or take a long time to complete, increase the `query_metrics.lookback_window`. A larger lookback window improves the chances of capturing these queries.
 
