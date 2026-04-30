@@ -21,13 +21,13 @@ The OpenTelemetry Collector supports sending system information about your hosts
 
 Datadog uses [OpenTelemetry semantic conventions][2] to recognize system information about your hosts. Follow the instructions for [setting up for host metrics][3] to send the necessary metrics and resource attributes to Datadog. Alternatively, you can manually send this information in the way that best fits your infrastructure.
 
-## Opting in to the feature
+## Host metadata resources
 
-To use this feature, set the `datadog.host.use_as_metadata` resource attribute to `true` in all OTLP payloads that contain information about hosts.
+The recommended OpenTelemetry Collector configurations collect host metrics and host-identifying resource attributes with the `hostmetrics` receiver and resource detection processor. If you build a custom Collector pipeline and send host information outside that recommended setup, explicitly mark the resources Datadog should use for host metadata.
 
-Resources populate the infrastructure list information if they have a [host-identifying attribute][10] and the `datadog.host.use_as_metadata` attribute set to `true`.
+To mark custom host metadata resources, set the `datadog.host.use_as_metadata` resource attribute to `true` on OTLP payloads that contain information about hosts.
 
-To explicitly declare what resources to use for metadata, add the Boolean resource attribute `datadog.host.use_as_metadata` to all resources that have relevant host information.
+Marked resources populate the infrastructure list information if they also have a [host-identifying attribute][10].
 
 For example, to set this for all resources in metrics, traces, and logs, use the [transform processor][7] with the following configuration:
 
@@ -48,9 +48,9 @@ processors:
           - set(attributes["datadog.host.use_as_metadata"], true)
 ```
 
-Add this processor to the `processors` list of all your pipelines.
+Add this processor to the `processors` list of all pipelines that carry custom host metadata.
 
-You must explicitly tag all your resources with a host-identifying attribute. This is done by default by the [recommended setup for host metrics][3].
+Custom host metadata resources must include a host-identifying attribute. This is done by default by the [recommended setup for host metrics][3].
 
 ## Supported conventions
 

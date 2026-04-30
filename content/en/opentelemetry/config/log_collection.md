@@ -109,7 +109,7 @@ Logs from the configured files.
 
 ## Full example configuration
 
-For a full working example configuration with the Datadog exporter, see [`logs.yaml`][2].
+For a full working example configuration, see the [recommended Collector configurations][2].
 
 ## Example logging output
 
@@ -164,5 +164,5 @@ Flags: 0
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/logs.yaml
+[2]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor

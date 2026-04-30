@@ -123,7 +123,7 @@ A DaemonSet is the recommended deployment pattern for collecting telemetry from 
 
 The `k8s_attributes` processor requires a ServiceAccount with permissions to read pod metadata. See [the Kubernetes Attributes Processor documentation][2] for RBAC setup instructions.
 
-[1]: /opentelemetry/setup/collector_exporter/install?tab=kubernetes-daemonset-
+[1]: /opentelemetry/setup/collector_exporter/install?tab=kubernetesdaemonset
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
 
 {{% /tab %}}
@@ -161,7 +161,7 @@ To use the OpenTelemetry Operator, follow the [official documentation for deploy
 Configure the Operator using the [recommended Collector configuration][2] for Kubernetes DaemonSet deployments.
 
 [1]: https://github.com/open-telemetry/opentelemetry-operator#readme
-[2]: /opentelemetry/setup/collector_exporter/install?tab=kubernetes-daemonset-
+[2]: /opentelemetry/setup/collector_exporter/install?tab=kubernetesdaemonset
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -549,19 +549,58 @@ connectors:
       - name: service.version
       - name: http.response.status_code
       - name: container.id
-      - name: host.name
+      - name: container.name
+      - name: container.image.name
+      - name: container.image.tag
+      - name: container.runtime
+      - name: cloud.provider
+      - name: cloud.region
+      - name: cloud.availability_zone
+      - name: aws.ecs.task.family
+      - name: aws.ecs.task.arn
+      - name: aws.ecs.cluster.arn
+      - name: aws.ecs.task.revision
+      - name: aws.ecs.container.arn
+      - name: k8s.container.name
       - name: k8s.cluster.name
-      - name: k8s.namespace.name
       - name: k8s.deployment.name
+      - name: k8s.replicaset.name
+      - name: k8s.statefulset.name
+      - name: k8s.daemonset.name
+      - name: k8s.job.name
+      - name: k8s.cronjob.name
+      - name: k8s.namespace.name
       - name: k8s.pod.name
-      - name: server.address
+      - name: aws.ecs.launchtype
+      - name: cloud.account.id
+      - name: host.id
+      - name: host.name
+      - name: k8s.node.name
+      - name: azure.resourcegroup.name
+      - name: aws.s3.bucket
       - name: db.namespace
       - name: messaging.destination.name
       - name: messaging.system
+      - name: server.address
+      - name: operation.name
       - name: http.request.method
+      - name: http.method
       - name: db.system
+      - name: messaging.operation
       - name: rpc.system
       - name: rpc.service
+      - name: faas.invoked_provider
+      - name: faas.invoked_name
+      - name: faas.trigger
+      - name: graphql.operation.type
+      - name: network.protocol.name
+      - name: resource.name
+      - name: http.route
+      - name: messaging.destination
+      - name: rpc.method
+      - name: graphql.operation.name
+      - name: db.statement
+      - name: db.query.text
 
 exporters:
   otlp_http:
