@@ -177,6 +177,8 @@ Use the [`datadog_reference_table`][9] resource to manage reference tables as in
 {{% /tab %}}
 {{% tab "API" %}}
 
+Create reference tables programmatically using the [Datadog API][8].
+
 Use the [Create Reference Table endpoint][10] to create reference tables from cloud storage or local files.
 - For cloud storage sources (S3, Azure, GCS), provide `access_details` in `file_metadata` pointing to a CSV file in cloud storage.
 - For local files, call `POST /api/latest/reference-tables/uploads` to get an upload ID and upload your CSV data. Then, call the Create Reference Table endpoint with the `upload_id` in `file_metadata`.
