@@ -2015,7 +2015,7 @@ llmCall = llmobs.wrap({ kind: 'llm', modelName: 'gpt-5.1', modelProvider: 'opena
 {{< /tabs >}}
 
 ### Use case: Using a custom model
-For custom or unsupported models, you must annotate the span manually with the cost data.
+For custom or unsupported models, you must annotate the span manually with the cost data in dollars.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2068,7 +2068,7 @@ llmCall = llmobs.wrap({ kind: 'llm', modelName: 'custom_model', modelProvider: '
 ### Use case: Propagating span tags as cost metric dimensions
 When annotating a span, you can mark a subset of its existing tag keys for propagation to the generated LLM cost and token metrics. The propagated keys become dimensions on the metrics, so you can break down spend by attributes such as team, customer, or feature.
 
-Each entry must be a string and must reference a tag key already present on the span's tags. Entries that don't reference an existing tag key are skipped.
+Each entry must be a string and must reference a key already supplied through the span's `tags` parameter at the time the annotation is applied. When annotating a single span, the key can be supplied through `tags` in the same annotation call or in an earlier annotation on the same span. When using an annotation context, only keys present in `tags` at span start qualify — keys added later through individual span annotations are not retained. Entries that don't reference an existing tag key are skipped.
 
 <div class="alert alert-warning">Propagated keys are added only to LLM <strong>cost</strong> and <strong>token</strong> metrics. Other span metrics (such as <code>duration</code>) do not receive these dimensions.</div>
 
@@ -2109,7 +2109,7 @@ llmCall = llmobs.wrap({ kind: 'llm', modelName: 'gpt-5.1', modelProvider: 'opena
 {{% /tab %}}
 {{< /tabs >}}
 
-You can also propagate tags this way through an annotation context to apply it to all auto-instrumented spans started inside the context. In that case, only tag keys present at span start (supplied to the same context or to a parent context) are propagated; tag keys added later are not retained.
+You can also propagate tags this way through an annotation context to apply it to all auto-instrumented spans started inside the context.
 
 {{< tabs >}}
 {{% tab "Python" %}}
