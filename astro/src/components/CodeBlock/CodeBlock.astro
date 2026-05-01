@@ -1,0 +1,94 @@
+---
+import { codeToHtml } from 'shiki';
+import datadogLight from '../../styles/shiki-light';
+import datadogDark from '../../styles/shiki-dark';
+import { CopyButton } from './CopyButton';
+import { CollapseToggle } from './CollapseToggle';
+import styles from './CodeBlock.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+import { generateElementId } from '../../utils/generateElementId';
+
+const cl = classListFactory(styles);
+
+interface Props {
+  content: string;
+  language?: string;
+  filename?: string;
+  wrap?: boolean;
+  collapsible?: boolean;
+  disable_copy?: boolean;
+}
+
+const {
+  content,
+  language,
+  filename,
+  wrap = false,
+  collapsible = false,
+  disable_copy = false,
+} = Astro.props;
+
+let highlightedCode = '';
+if (content) {
+  try {
+    highlightedCode = await codeToHtml(content, {
+      lang: language || 'text',
+      themes: {
+        light: datadogLight,
+        dark: datadogDark,
+      },
+      defaultColor: 'light',
+    });
+  } catch {
+    // Unknown language — fall back to plain text display
+  }
+}
+
+const codeBlockId = generateElementId('code-block');
+const contentId = `${codeBlockId}-content`;
+const containerClass = wrap
+  ? cl('code-block', 'code-block--wrap')
+  : cl('code-block');
+---
+
+<div
+  id={codeBlockId}
+  class={containerClass}
+  data-language={language || undefined}
+  data-collapsible={collapsible || undefined}
+  data-disable-copy={disable_copy || undefined}
+>
+  {(filename || collapsible) && (
+    <div class={cl('code-block__header')}>
+      {filename && (
+        <span class={cl('code-block__filename')}>
+          {filename}
+        </span>
+      )}
+      <div class={cl('code-block__header-actions')}>
+        {collapsible && (
+          <CollapseToggle
+            client:idle
+            externalContext={{
+              scope: codeBlockId,
+              entries: { contentEl: contentId },
+            }}
+          />
+        )}
+      </div>
+    </div>
+  )}
+  <div
+    id={contentId}
+    class={cl('code-block__content')}
+  >
+    {!disable_copy && <CopyButton client:idle content={content} />}
+    {highlightedCode ? (
+      <div class={cl('code-block__highlighted')} set:html={highlightedCode} />
+    ) : (
+      <pre class={cl('code-block__pre')}>
+        <code class={cl('code-block__code')}>{content}</code>
+      </pre>
+    )}
+  </div>
+</div>

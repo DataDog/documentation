@@ -1,0 +1,192 @@
+---
+import '../styles/global.css';
+import AnnouncementBanner from '../components/AnnouncementBanner/AnnouncementBanner.astro';
+import Header from '../components/Header/Header.astro';
+import Footer from '../components/Footer/Footer.astro';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+    <title>{title}</title>
+    <link rel="preload" href="/fonts/NationalWeb-Light.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/NationalWeb-Semibold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/RobotoMono-Regular.woff" as="font" type="font/woff" crossorigin />
+    <!-- SCROLL MODE — start (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Pinyon+Script&display=swap" rel="stylesheet" />
+    <!-- SCROLL MODE — end -->
+    <script is:inline>
+      (function () {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        // SCROLL MODE — start
+        if (localStorage.getItem('scroll-mode') === 'on') {
+          document.documentElement.setAttribute('data-scroll', 'on');
+        }
+        // SCROLL MODE — end
+      })();
+      (function () {
+        // Resolve the active Datadog region before first paint so region-scoped
+        // content (elements with `data-region`) renders in its final state and
+        // there's no flash of the wrong region. Precedence matches Hugo:
+        // ?site= query param → `site` cookie → default `us`. Referrer-based
+        // sync runs later in the regionState module.
+        var allowed = ['us', 'us3', 'us5', 'eu', 'ap1', 'ap2', 'gov'];
+        var params = new URLSearchParams(window.location.search);
+        var fromQuery = params.get('site');
+        var cookieMatch = document.cookie.match(/(?:^|; )site=([^;]*)/);
+        var fromCookie = cookieMatch ? decodeURIComponent(cookieMatch[1]) : null;
+        var region = 'us';
+        if (fromQuery && allowed.indexOf(fromQuery) !== -1) {
+          region = fromQuery;
+        } else if (fromCookie && allowed.indexOf(fromCookie) !== -1) {
+          region = fromCookie;
+        }
+        document.documentElement.setAttribute('data-active-region', region);
+      })();
+    </script>
+  </head>
+  <body>
+    <AnnouncementBanner />
+    <Header />
+    <div class="base-layout__body">
+      <slot />
+    </div>
+    <Footer />
+    <div id="dev-nav">
+      <a id="components-link" href="/docs/test_pages/" aria-label="Test pages index">🔧</a>
+    </div>
+    <div id="theme-toggles">
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Toggle dark mode"
+      >
+      </button>
+      <!-- SCROLL MODE — start (toggle button) -->
+      <button
+        id="scroll-toggle"
+        type="button"
+        aria-label="Toggle scroll mode"
+      >
+      </button>
+      <!-- SCROLL MODE — end -->
+    </div>
+    <script is:inline>
+      (function () {
+        var btn = document.getElementById('theme-toggle');
+        function update() {
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          btn.textContent = isDark ? '\u2600\uFE0F' : '\uD83C\uDF19';
+        }
+        update();
+        btn.addEventListener('click', function () {
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          var next = isDark ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          update();
+        });
+      })();
+      // SCROLL MODE — start (toggle script)
+      (function () {
+        var btn = document.getElementById('scroll-toggle');
+        function update() {
+          var isScroll = document.documentElement.getAttribute('data-scroll') === 'on';
+          btn.textContent = isScroll ? '\uD83D\uDCD6' : '\uD83D\uDCDC';
+        }
+        update();
+        btn.addEventListener('click', function () {
+          var isScroll = document.documentElement.getAttribute('data-scroll') === 'on';
+          var next = isScroll ? 'off' : 'on';
+          if (next === 'on') {
+            document.documentElement.setAttribute('data-scroll', 'on');
+          } else {
+            document.documentElement.removeAttribute('data-scroll');
+          }
+          localStorage.setItem('scroll-mode', next);
+          update();
+        });
+      })();
+      // SCROLL MODE — end
+    </script>
+    <style>
+      .base-layout__body {
+        padding-top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
+      }
+
+      @media (min-width: 992px) {
+        .base-layout__body {
+          padding-top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop));
+        }
+      }
+
+      #dev-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 2000;
+        padding: var(--space-sm);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      #dev-nav:hover {
+        opacity: 1;
+      }
+      #components-link {
+        display: inline-block;
+        background: none;
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--border-radius);
+        font-size: var(--font-size-lg);
+        cursor: pointer;
+        padding: var(--space-xs) var(--space-sm);
+        line-height: 1;
+        text-decoration: none;
+      }
+      #components-link:hover {
+        border-color: var(--color-brand);
+      }
+      #theme-toggles {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        gap: var(--space-xs);
+        z-index: 2000;
+        padding: var(--space-sm);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+      #theme-toggles:hover {
+        opacity: 1;
+      }
+      #theme-toggle,
+      #scroll-toggle {
+        background: none;
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--border-radius);
+        font-size: var(--font-size-lg);
+        cursor: pointer;
+        padding: var(--space-xs) var(--space-sm);
+        line-height: 1;
+      }
+      #theme-toggle:hover,
+      #scroll-toggle:hover {
+        border-color: var(--color-brand);
+      }
+    </style>
+  </body>
+</html>

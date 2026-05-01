@@ -1,0 +1,389 @@
+@import './tokens/index.css';
+
+/* Font faces */
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Light.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Light.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Book.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Book.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Medium.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Semibold.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Bold.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RobotoMono-Regular';
+  src: url('/fonts/RobotoMono-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Disallow old-style numbers everywhere */
+*, *::before, *::after {
+  font-variant-numeric: lining-nums;
+}
+
+/* Base */
+html {
+  font-size: var(--font-size-root);
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: 200;
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  margin: 0;
+  padding: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'lnum' 1, 'frac' 0, 'liga' 1, 'clig' 1;
+  font-variant-numeric: lining-nums;
+  word-wrap: break-word;
+}
+
+strong, b {
+  font-weight: 600;
+}
+
+a {
+  color: var(--color-brand);
+}
+
+a:hover {
+  color: var(--color-brand-hover);
+}
+
+/* Inline code */
+code {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-highlight-text);
+  background-color: var(--color-highlight-bg);
+  padding: 0 0.278rem;
+  border-radius: var(--border-radius);
+}
+
+pre code {
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  line-height: 1.05;
+  padding-bottom: var(--space-sm);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: 200;
+  line-height: 1;
+  padding-bottom: 0.167rem;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  margin-top: 0.778rem;
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  color: var(--color-brand);
+  margin-top: 0.778rem;
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+}
+
+/* Lists — opt-in via `.prose`. Wrap rendered docs/API prose in
+   <div class="prose"> (or add `prose` to the container) so lists in content
+   get the en-dash bullet; UI components like nav menus, tabs, and the side
+   nav stay unaffected. */
+.prose ul {
+  list-style: none;
+  padding-left: 1.222rem;
+}
+
+.prose ul li {
+  position: relative;
+  padding-left: 0;
+}
+
+.prose ul li::before {
+  content: '\2013';
+  position: absolute;
+  left: -1.111rem;
+}
+
+.prose ul ul {
+  padding-left: 1.111rem;
+}
+
+.prose ol ol {
+  list-style-type: lower-alpha;
+}
+
+.prose ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* Blockquote */
+blockquote {
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border-left: var(--border-width-accent) solid var(--color-border-dark);
+  color: var(--color-text-muted);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Horizontal rule */
+hr {
+  border: 0;
+  border-top: var(--border-width) solid var(--color-border);
+  opacity: 0.25;
+  margin: var(--space-md) 0;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: var(--space-lg);
+  border: var(--border-width) solid var(--color-surface-border);
+  border-collapse: collapse;
+  font-size: var(--font-size-base);
+  background-color: var(--color-surface-bg);
+}
+
+table th,
+table td {
+  padding: var(--space-sm) 0.65rem;
+  border-left: var(--border-width) solid var(--color-surface-border);
+  vertical-align: top;
+}
+
+table thead th {
+  vertical-align: bottom;
+  background: var(--color-surface-header);
+  border: none;
+  border-left: var(--border-width) solid var(--color-surface-border);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  color: var(--color-surface-header-text);
+}
+
+table tr:first-child td {
+  border-top: none;
+}
+
+table tbody tr:nth-child(2n) {
+  background: var(--color-surface-alt);
+}
+
+table a {
+  border-bottom: var(--border-width) solid var(--color-text-muted);
+}
+
+table a:hover {
+  border-bottom: var(--border-width) solid var(--color-brand);
+}
+
+tbody code {
+  word-wrap: normal;
+  word-break: break-word;
+}
+
+/* Region-scoped content — every element with `data-region="<key>"` renders
+   at build time (good for SEO) but is hidden unless `<html data-active-region>`
+   matches its key. The value on `<html>` is set by a pre-body inline script
+   before first paint so there's no flash of the wrong region. */
+[data-region] { display: none; }
+html[data-active-region='us'] [data-region='us'],
+html[data-active-region='us3'] [data-region='us3'],
+html[data-active-region='us5'] [data-region='us5'],
+html[data-active-region='eu'] [data-region='eu'],
+html[data-active-region='ap1'] [data-region='ap1'],
+html[data-active-region='ap2'] [data-region='ap2'],
+html[data-active-region='gov'] [data-region='gov'] {
+  display: revert;
+}
+
+/* SCROLL MODE — start */
+[data-scroll='on'] body {
+  font-weight: 400;
+  box-shadow: inset 0 0 120px rgba(100, 70, 30, 0.15);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(139, 100, 50, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(120, 80, 40, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 80%, rgba(100, 70, 30, 0.05) 0%, transparent 45%);
+}
+
+[data-scroll='on'] h1,
+[data-scroll='on'] h2,
+[data-scroll='on'] h3,
+[data-scroll='on'] h4,
+[data-scroll='on'] h5,
+[data-scroll='on'] h6 {
+  font-family: 'Pinyon Script', cursive;
+  font-weight: 400;
+}
+
+[data-scroll='on'] h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+}
+
+[data-scroll='on'] h2 {
+  font-size: 2.8rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+[data-scroll='on'] h3 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+[data-scroll='on'] strong,
+[data-scroll='on'] b {
+  font-weight: 700;
+}
+
+[data-scroll='on'] a {
+  text-decoration-style: wavy;
+}
+
+/* Burned edges — charred left/right borders with ember glow */
+[data-scroll='on'] body::before,
+[data-scroll='on'] body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  z-index: 999;
+  pointer-events: none;
+}
+
+[data-scroll='on'] body::before {
+  left: 0;
+  background:
+    /* Ember glow */
+    linear-gradient(to right, rgba(200, 90, 0, 0.12) 0%, transparent 60%),
+    /* Base char */
+    linear-gradient(to right, rgba(25, 12, 0, 0.8) 0%, rgba(50, 25, 8, 0.3) 45%, transparent 100%),
+    /* Irregular burn bites */
+    radial-gradient(ellipse 30px 90px at 0px 12%, rgba(10, 5, 0, 0.9) 0%, transparent 60%),
+    radial-gradient(ellipse 22px 55px at 6px 30%, rgba(10, 5, 0, 0.7) 0%, transparent 60%),
+    radial-gradient(ellipse 38px 45px at 0px 48%, rgba(10, 5, 0, 0.85) 0%, transparent 60%),
+    radial-gradient(ellipse 18px 75px at 10px 65%, rgba(10, 5, 0, 0.7) 0%, transparent 60%),
+    radial-gradient(ellipse 28px 50px at 0px 82%, rgba(10, 5, 0, 0.8) 0%, transparent 60%),
+    radial-gradient(ellipse 34px 35px at 3px 95%, rgba(10, 5, 0, 0.75) 0%, transparent 60%);
+}
+
+[data-scroll='on'] body::after {
+  right: 0;
+  background:
+    /* Ember glow */
+    linear-gradient(to left, rgba(200, 90, 0, 0.12) 0%, transparent 60%),
+    /* Base char */
+    linear-gradient(to left, rgba(25, 12, 0, 0.8) 0%, rgba(50, 25, 8, 0.3) 45%, transparent 100%),
+    /* Irregular burn bites (asymmetric to left side) */
+    radial-gradient(ellipse 28px 70px at 50px 8%, rgba(10, 5, 0, 0.85) 0%, transparent 60%),
+    radial-gradient(ellipse 35px 50px at 44px 25%, rgba(10, 5, 0, 0.75) 0%, transparent 60%),
+    radial-gradient(ellipse 20px 85px at 50px 42%, rgba(10, 5, 0, 0.9) 0%, transparent 60%),
+    radial-gradient(ellipse 32px 40px at 42px 58%, rgba(10, 5, 0, 0.7) 0%, transparent 60%),
+    radial-gradient(ellipse 24px 65px at 50px 75%, rgba(10, 5, 0, 0.8) 0%, transparent 60%),
+    radial-gradient(ellipse 30px 45px at 47px 92%, rgba(10, 5, 0, 0.85) 0%, transparent 60%);
+}
+
+/* Dark scroll — deeper vignette, warm ember glow */
+[data-theme='dark'][data-scroll='on'] body {
+  box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.4);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(196, 148, 58, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(180, 120, 40, 0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 80%, rgba(160, 100, 30, 0.03) 0%, transparent 45%);
+}
+
+/* Dark scroll — brighter ember glow on burned edges */
+[data-theme='dark'][data-scroll='on'] body::before {
+  background:
+    linear-gradient(to right, rgba(220, 100, 0, 0.2) 0%, transparent 55%),
+    linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(15, 8, 0, 0.25) 45%, transparent 100%),
+    radial-gradient(ellipse 30px 90px at 0px 12%, rgba(0, 0, 0, 0.85) 0%, transparent 60%),
+    radial-gradient(ellipse 22px 55px at 6px 30%, rgba(0, 0, 0, 0.65) 0%, transparent 60%),
+    radial-gradient(ellipse 38px 45px at 0px 48%, rgba(0, 0, 0, 0.8) 0%, transparent 60%),
+    radial-gradient(ellipse 18px 75px at 10px 65%, rgba(0, 0, 0, 0.65) 0%, transparent 60%),
+    radial-gradient(ellipse 28px 50px at 0px 82%, rgba(0, 0, 0, 0.75) 0%, transparent 60%),
+    radial-gradient(ellipse 34px 35px at 3px 95%, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
+}
+
+[data-theme='dark'][data-scroll='on'] body::after {
+  background:
+    linear-gradient(to left, rgba(220, 100, 0, 0.2) 0%, transparent 55%),
+    linear-gradient(to left, rgba(0, 0, 0, 0.7) 0%, rgba(15, 8, 0, 0.25) 45%, transparent 100%),
+    radial-gradient(ellipse 28px 70px at 50px 8%, rgba(0, 0, 0, 0.8) 0%, transparent 60%),
+    radial-gradient(ellipse 35px 50px at 44px 25%, rgba(0, 0, 0, 0.7) 0%, transparent 60%),
+    radial-gradient(ellipse 20px 85px at 50px 42%, rgba(0, 0, 0, 0.85) 0%, transparent 60%),
+    radial-gradient(ellipse 32px 40px at 42px 58%, rgba(0, 0, 0, 0.65) 0%, transparent 60%),
+    radial-gradient(ellipse 24px 65px at 50px 75%, rgba(0, 0, 0, 0.75) 0%, transparent 60%),
+    radial-gradient(ellipse 30px 45px at 47px 92%, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+}
+/* SCROLL MODE — end */

@@ -1,0 +1,102 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ApiSideNav from '../components/ApiSideNav/ApiSideNav.astro';
+import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs.astro';
+import type { BreadcrumbItem } from '../components/Breadcrumbs/Breadcrumbs.astro';
+import RegionSelectorIsland from '../components/RegionSelector/RegionSelectorIsland.astro';
+import LanguageSelectorIsland from '../components/LanguageSelector/LanguageSelectorIsland.astro';
+import { stripLocalePrefix } from '../lib/i18n/locale';
+import type { ApiCategory } from '../data/api/index';
+
+interface Props {
+  title: string;
+  categories: ApiCategory[];
+  currentSlug?: string;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const { title, categories, currentSlug, breadcrumbs } = Astro.props;
+const { lang: currentLang } = stripLocalePrefix(Astro.url.pathname);
+---
+
+<BaseLayout title={title}>
+  <div class="api-shell">
+    <ApiSideNav categories={categories} currentSlug={currentSlug} />
+    <main class="api-main">
+      <div class="api-toolbar">
+        {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
+        <div class="api-toolbar__selectors">
+          <LanguageSelectorIsland currentLang={currentLang} pathname={Astro.url.pathname} />
+          <RegionSelectorIsland />
+        </div>
+      </div>
+      <div class="prose">
+        <slot />
+      </div>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .api-shell {
+    display: flex;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
+
+  /* Hugo caps `.container.container__content` at 1336px from 1400px up
+     (the `.container` @1400px !important rule wins over the base 1440px).
+     Match that step so Astro's page body is never wider than Hugo's. */
+  @media (min-width: 1400px) {
+    .api-shell {
+      max-width: 1336px;
+    }
+  }
+
+  .api-main {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-xl) var(--space-xl) var(--space-xl) 29px;
+  }
+
+  .api-toolbar__selectors {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .api-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+    position: sticky;
+    top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
+    z-index: 5;
+    background: var(--color-bg);
+    padding: var(--space-sm) 0;
+  }
+
+  @media (min-width: 992px) {
+    .api-toolbar {
+      top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop) - var(--hugo-header-shrink));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .api-shell {
+      flex-direction: column;
+    }
+
+    .api-main {
+      padding: var(--space-md);
+    }
+
+    .api-shell > :global(nav) {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      border-bottom: var(--border-width) solid var(--color-border);
+    }
+  }
+</style>

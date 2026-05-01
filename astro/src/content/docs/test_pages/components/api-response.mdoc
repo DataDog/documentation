@@ -1,0 +1,21 @@
+---
+title: "ApiResponse"
+description: "Astro wrapper composing nested Tabs (Preact island for status code switching), ApiSchemaTable (Preact island for expand/collapse), and CodeBlock (Preact island for copy)."
+type: interactive
+---
+
+# ApiResponse
+
+A response section with status code tabs, each containing a Model/Example toggle. Model view uses ApiSchemaTable; Example view shows JSON.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `responses` | `string` (JSON) | — | JSON string of `ResponseData[]` |
+
+## Examples
+
+### Multi-status response
+
+{% apiResponse responses="[{\"statusCode\":\"200\",\"description\":\"OK\",\"schema\":[{\"name\":\"data\",\"type\":\"object\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"The response data.\",\"children\":[{\"name\":\"id\",\"type\":\"string\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"Unique identifier.\"},{\"name\":\"type\",\"type\":\"string\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"Resource type.\"}]}],\"examples\":[{\"name\":\"Example response\",\"value\":\"{ }\"}]},{\"statusCode\":\"403\",\"description\":\"Forbidden\",\"schema\":[{\"name\":\"errors\",\"type\":\"[string]\",\"required\":true,\"deprecated\":false,\"readOnly\":false,\"description\":\"A list of errors.\"}],\"examples\":[{\"name\":\"Error response\",\"value\":\"{ }\"}]},{\"statusCode\":\"404\",\"description\":\"Not Found\",\"examples\":[{\"name\":\"Not found\",\"value\":\"{ }\"}]}]" /%}

@@ -1,0 +1,42 @@
+---
+title: "Placeholder"
+description: "Pure Astro. Visual marker for unimplemented component slots during development."
+type: static
+---
+
+# Placeholder
+
+A light-purple box with a dark-purple outline and a centered label. Used to stand in for layout elements (header, footer, announcement banner) while their real implementations are under construction. Dark mode swaps the two purples.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `name` | `string` | (required) | The label text rendered inside the placeholder |
+| `class` | `string` | — | Optional extra class applied to the root element |
+
+## Examples
+
+### Named label
+
+{% placeholder name="HEADER" class="placeholder-demo--short" /%}
+
+{% placeholder name="ANNOUNCEMENT BANNER" class="placeholder-demo--short" /%}
+
+{% placeholder name="FOOTER" class="placeholder-demo--tall" /%}
+
+The announcement banner, header, and footer all have real implementations now under `src/components/AnnouncementBanner/`, `src/components/Header/`, and `src/components/Footer/`.
+
+<style>
+  .placeholder-demo--short {
+    height: 40px;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .placeholder-demo--tall {
+    height: 120px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+</style>

@@ -1,0 +1,34 @@
+---
+title: "RegionSelector"
+description: "Preact island (client:load). Astro wrapper resolves the region list at build time to keep config data off the client bundle. The Preact component renders the region picker UI."
+type: interactive
+---
+
+# RegionSelector
+
+A dropdown for picking the active Datadog site. The list of sites is resolved at build time from the Hugo config snapshot (`allowedRegions` in `params.yaml`) by `RegionSelectorIsland.astro` and passed to the Preact component as a `regions` prop. This keeps the `yaml` parser and the full `regions.config.js` data object out of the client bundle.
+
+The active region is persisted to the `site` cookie (path `/`) and the `?site=` URL query parameter, which keeps it in sync with the Hugo site if the user moves between them. The component also listens for navigations from Datadog app subdomains and updates the region to match.
+
+When the region changes, the component:
+- Writes the `site` cookie and updates `?site=` in the URL.
+- Sets `data-active-region` on the `<html>` element. CSS rules in [global.css](../styles/global.css) use this to show the matching variant among sibling elements tagged with `data-region="<key>"` (e.g. the per-region endpoint URLs and curl snippets on API pages).
+- Dispatches a `regionchange` `CustomEvent` on `document` for any components that need to react programmatically.
+
+## Region keys
+
+The keys below match Hugo's `site` cookie so a region chosen on either site applies on the other.
+
+| Key | Label |
+|-----|-------|
+| `us` | US1 |
+| `us3` | US3 |
+| `us5` | US5 |
+| `eu` | EU |
+| `ap1` | AP1 |
+| `ap2` | AP2 |
+| `gov` | US1-FED |
+
+## Example
+
+{% regionSelector /%}

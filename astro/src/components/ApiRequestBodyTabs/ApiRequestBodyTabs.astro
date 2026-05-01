@@ -1,0 +1,60 @@
+---
+import Tabs from '../Tabs/Tabs.astro';
+import TabPanel from '../Tab/TabPanel.astro';
+import CodeBlock from '../CodeBlock/CodeBlock.astro';
+import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
+import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
+import styles from '../ApiEndpoint/ApiEndpoint.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+import { generateElementId } from '../../utils/generateElementId';
+
+const cl = classListFactory(styles);
+
+interface Example {
+  name: string;
+  value: string;
+}
+
+interface Props {
+  schema: SchemaField[];
+  examples: Example[];
+}
+
+const { schema, examples } = Astro.props;
+
+const hasSchema = schema.length > 0;
+const hasExamples = examples.length > 0;
+
+const groupId = generateElementId('request-body-tabs');
+const panelIds = [`${groupId}-panel-0`, `${groupId}-panel-1`];
+---
+
+{hasSchema && !hasExamples && (
+  <ApiSchemaTable client:load fields={schema} />
+)}
+
+{!hasSchema && hasExamples && (
+  <div class={cl('request-body-tabs__examples')}>
+    {examples.map((ex) => (
+      <CodeBlock content={ex.value} language="json" />
+    ))}
+  </div>
+)}
+
+{hasSchema && hasExamples && (
+  <Tabs id={groupId} variant="pills" labels={["Model", "Example"]} panelIds={panelIds}>
+    <TabPanel id={panelIds[0]} isActive>
+      <ApiSchemaTable client:load fields={schema} />
+    </TabPanel>
+    <TabPanel id={panelIds[1]}>
+      <div class={cl('request-body-tabs__examples')}>
+        {examples.map((ex) => (
+          <div>
+            {examples.length > 1 && <strong>{ex.name}</strong>}
+            <CodeBlock content={ex.value} language="json" />
+          </div>
+        ))}
+      </div>
+    </TabPanel>
+  </Tabs>
+)}

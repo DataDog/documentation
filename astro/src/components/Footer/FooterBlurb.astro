@@ -1,0 +1,27 @@
+---
+/**
+ * Docs-only intro row that sits above the main footer columns. Hugo gates
+ * this on `repo_name == "documentation"`; since the Astro site IS the docs
+ * replacement, we always render it.
+ */
+import styles from './Footer.module.css';
+import { i18n } from '../../lib/i18n/i18n';
+import { resolveFooterUrl } from '../../lib/footerMenus';
+
+const heading = i18n('footer_blurb_heading');
+const desc = i18n('footer_blurb_desc');
+const ctaLabel = i18n('contact_us');
+const ctaHref = resolveFooterUrl('help/');
+---
+
+<div class={styles.blurbRow}>
+  <div class={styles.blurbCopy}>
+    <h2 class={styles.blurbHeading}>{heading}</h2>
+    <p class={styles.blurbDesc}>{desc}</p>
+  </div>
+  <div class={styles.blurbCta}>
+    <a class={styles.ctaPrimary} href={ctaHref}>
+      <span>{ctaLabel}</span>
+    </a>
+  </div>
+</div>

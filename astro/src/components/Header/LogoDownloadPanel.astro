@@ -1,0 +1,119 @@
+---
+// Hidden popover that appears when the Datadog bits logo is clicked. Mirrors
+// ~/dd/websites-modules/layouts/partials/nav/nav-logo-download.html.
+import NavIcon from './NavIcon.astro';
+---
+
+<div class="logo-download-div js-logo-download-div" style="display:none;">
+  <div class="logo-download__arrow">
+    <NavIcon name="modal-up-arrow" />
+  </div>
+  <p class="logo-download__eyebrow">Looking for Datadog logos?</p>
+  <p class="logo-download__body">You can find the logo assets on our press page.</p>
+  <a
+    href="https://www.datadoghq.com/about/resources/"
+    class="logo-download__btn"
+  >
+    Download Media Assets
+  </a>
+</div>
+
+<script is:inline>
+  (function () {
+    // Tiny toggle that mirrors Hugo's `.js-logo-download` click behavior: clicking
+    // the logo toggles the panel; clicking elsewhere closes it.
+    var trigger = document.querySelector('.js-logo-download');
+    var panel = document.querySelector('.js-logo-download-div');
+    if (!trigger || !panel) return;
+
+    trigger.addEventListener('click', function (e) {
+      // Allow the link to navigate if the panel was already open — otherwise
+      // just toggle the panel.
+      if (panel.style.display === 'none' || !panel.style.display) {
+        e.preventDefault();
+        panel.style.display = 'block';
+      } else {
+        panel.style.display = 'none';
+      }
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!trigger.contains(e.target) && !panel.contains(e.target)) {
+        panel.style.display = 'none';
+      }
+    });
+  })();
+</script>
+
+<style is:global>
+  .logo-download-div {
+    position: absolute;
+    top: 123px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    padding: 14px;
+    background: var(--color-bg);
+    border-radius: 4px;
+    box-shadow: var(--hugo-nav-dropdown-shadow);
+    font-size: 22px;
+    white-space: normal;
+    z-index: 9999;
+    text-align: start;
+    transition-duration: 200ms;
+  }
+
+  .main-nav-scrolled .logo-download-div {
+    top: 78px;
+  }
+
+  .logo-download__arrow {
+    position: absolute;
+    top: -22px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.1));
+    color: var(--color-bg);
+  }
+
+  .logo-download__arrow .nav-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+  }
+
+  .logo-download__eyebrow {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+
+  .logo-download__body {
+    font-size: 18px;
+    color: var(--color-text);
+    margin: 0 0 8px;
+  }
+
+  .logo-download__btn {
+    display: block;
+    border: 1px solid var(--hugo-nav-brand-primary);
+    color: var(--hugo-nav-brand-primary);
+    border-radius: 4px;
+    padding: 8px 12px;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+
+  .logo-download__btn:hover {
+    background: var(--hugo-nav-brand-primary);
+    color: #ffffff;
+  }
+</style>

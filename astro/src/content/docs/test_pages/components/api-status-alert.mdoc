@@ -1,0 +1,87 @@
+---
+title: "ApiStatusAlert"
+description: "Pure Astro. Renders a deprecated, unstable, or beta status banner for an endpoint."
+type: static
+---
+
+# ApiStatusAlert
+
+An alert banner for API endpoint status: deprecated, unstable, or beta. Supports slot content for the message body.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `type` | `string` | — | One of: deprecated, unstable, beta. Controls the label, color, and default message |
+| `newerVersionUrl` | `string` | — | Link to newer version (shown for deprecated type) |
+| `message` | `string` | Type-specific default | Custom message override |
+
+## Examples
+
+### Deprecated
+
+{% tabs %}
+{% tab label="Result" %}
+{% apiStatusAlert type="deprecated" %}
+This endpoint is deprecated.
+{% /apiStatusAlert %}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% apiStatusAlert type="deprecated" %}
+This endpoint is deprecated.
+{% /apiStatusAlert %}
+```
+{% /tab %}
+{% /tabs %}
+
+### Deprecated with newer version link
+
+{% tabs %}
+{% tab label="Result" %}
+{% apiStatusAlert type="deprecated" newerVersionUrl="/api/latest/dashboards/" %}
+This endpoint is deprecated.
+{% /apiStatusAlert %}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% apiStatusAlert type="deprecated" newerVersionUrl="/api/latest/dashboards/" %}
+This endpoint is deprecated.
+{% /apiStatusAlert %}
+```
+{% /tab %}
+{% /tabs %}
+
+### Unstable
+
+{% tabs %}
+{% tab label="Result" %}
+{% apiStatusAlert type="unstable" %}
+This endpoint is unstable and may change without notice.
+{% /apiStatusAlert %}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% apiStatusAlert type="unstable" %}
+This endpoint is unstable and may change without notice.
+{% /apiStatusAlert %}
+```
+{% /tab %}
+{% /tabs %}
+
+### Beta
+
+{% tabs %}
+{% tab label="Result" %}
+{% apiStatusAlert type="beta" %}
+This endpoint is in beta and may change.
+{% /apiStatusAlert %}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% apiStatusAlert type="beta" %}
+This endpoint is in beta and may change.
+{% /apiStatusAlert %}
+```
+{% /tab %}
+{% /tabs %}

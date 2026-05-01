@@ -1,0 +1,204 @@
+.schema-table__table {
+  border: var(--border-width) solid var(--color-surface-border);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--space-lg);
+  font-size: var(--font-size-sm);
+  overflow: hidden;
+  background-color: var(--color-surface-bg);
+  box-sizing: border-box;
+}
+
+.schema-table__table *,
+.schema-table__table *::before,
+.schema-table__table *::after {
+  box-sizing: border-box;
+}
+
+.schema-table__toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: var(--space-xs);
+}
+
+.schema-table__expand-all {
+  background: none;
+  border: none;
+  color: var(--color-brand);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  padding: 0;
+}
+
+.schema-table__expand-all:hover {
+  color: var(--color-brand-hover);
+  text-decoration: underline;
+}
+
+.schema-table__columns {
+  display: flex;
+  border-bottom: var(--border-width) solid var(--color-surface-border);
+  background: var(--color-surface-header);
+  font-weight: 600;
+  font-size: var(--font-size-xs);
+  color: var(--color-surface-header-text);
+  text-transform: uppercase;
+}
+
+.schema-table__columns-name {
+  flex: 0 0 33.33%;
+  padding: 4px var(--space-md);
+}
+
+.schema-table__columns-type {
+  flex: 0 0 16.67%;
+  padding: 4px var(--space-md);
+}
+
+.schema-table__columns-description {
+  flex: 1;
+  padding: 4px var(--space-md);
+}
+
+.schema-table__row {
+  display: flex;
+  border-bottom: var(--border-width) solid var(--color-surface-border);
+  line-height: 1.5;
+}
+
+.schema-table__row:last-child {
+  border-bottom: none;
+}
+
+.schema-table__row:hover {
+  background: var(--color-bg-hover);
+}
+
+.schema-table__row--readonly {
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.schema-table__row--deprecated {
+  opacity: 0.6;
+}
+
+.schema-table__cell-name {
+  flex: 0 0 33.33%;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+  padding: 4px var(--space-md);
+  border-right: var(--border-width) solid var(--color-surface-border);
+  min-width: 0;
+}
+
+.schema-table__cell-type {
+  flex: 0 0 16.67%;
+  padding: 4px var(--space-md);
+  border-right: var(--border-width) solid var(--color-surface-border);
+  color: var(--color-text-muted);
+}
+
+.schema-table__cell-description {
+  flex: 1;
+  padding: 4px var(--space-md);
+  min-width: 0;
+  word-break: break-word;
+}
+
+.schema-table__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  margin-left: -6px;
+  transition: transform 0.15s ease;
+}
+
+.schema-table__toggle--expanded {
+  transform: rotate(90deg);
+}
+
+.schema-table__toggle:hover {
+  color: var(--color-brand);
+}
+
+.schema-table__name {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  background: none;
+  padding: 0;
+}
+
+.schema-table__required {
+  font-size: var(--font-size-xs);
+  color: var(--color-text);
+}
+
+.schema-table__type {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+}
+
+.schema-table__deprecated-label {
+  color: var(--color-red);
+  font-size: var(--font-size-xs);
+  margin-right: var(--space-xs);
+}
+
+.schema-table__default {
+  display: block;
+  margin-top: var(--space-xs);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.schema-table__default code {
+  background: var(--color-highlight-bg);
+  padding: 0 0.25em;
+  border-radius: 2px;
+}
+
+.schema-table__enum {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.schema-table__enum code {
+  background: var(--color-highlight-bg);
+  padding: 0 0.25em;
+  border-radius: 2px;
+  word-break: break-all;
+}
+
+.schema-table__enum-details {
+  margin-top: var(--space-xs);
+}
+
+.schema-table__enum-details summary {
+  cursor: pointer;
+  color: var(--color-brand);
+}
+
+.schema-table__children {
+  /* Container for nested rows — display toggled by component */
+}
+
+.schema-table__union-label {
+  padding: 4px var(--space-md);
+  font-weight: 600;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  border-bottom: var(--border-width) solid var(--color-surface-border);
+  background: var(--color-surface-header);
+}

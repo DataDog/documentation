@@ -1,0 +1,26 @@
+---
+import { ApiSchemaTable } from './ApiSchemaTable';
+import type { SchemaField } from './ApiSchemaTable';
+
+interface Props {
+  fields: string;        // JSON string of SchemaField[]
+  title?: string;
+  showExpandAll?: boolean;
+}
+
+const { fields: fieldsJson, title, showExpandAll } = Astro.props;
+
+let parsedFields: SchemaField[] = [];
+try {
+  parsedFields = JSON.parse(fieldsJson);
+} catch {
+  // If parsing fails, render nothing
+}
+---
+
+<ApiSchemaTable
+  client:load
+  fields={parsedFields}
+  title={title}
+  showExpandAll={showExpandAll}
+/>

@@ -1,0 +1,361 @@
+- identifier: 'observability'
+  lang_key: 'observability'
+  description_key: 'observability_description'
+  gradient:
+    - '#8000FF'
+    - '#FF0080'
+  icon: 'eye-4'
+  children:
+    - identifier: 'obs:infra'
+      lang_key: infrastructure
+      products:
+        - 'infrastructure-monitoring'
+        - 'metrics'
+        - 'network-monitoring'
+        - 'container-monitoring'
+        - 'kubernetes-autoscaling'
+        - 'serverless'
+        - 'cloud-cost-management'
+        - 'cloudcraft'
+        - 'storage-management'
+    - identifier: 'obs:apps'
+      lang_key: 'applications'
+      sections:
+        - lang_key: applications
+          products:
+            - 'apm'
+            - 'universal-service-monitoring'
+            - 'profiler'
+            - 'dynamic-instrumentation'
+            - 'llm-observability'
+        - lang_key: data
+          products:
+            - 'database-monitoring'
+            - 'data-streams-monitoring'
+            - 'quality-monitoring'
+            - 'jobs-monitoring'
+    - identifier: 'obs:logs'
+      lang_key: 'logs'
+      products:
+        - 'log-management'
+        - 'sds'
+        - 'audit-trail'
+        - 'observability-pipelines'
+        - 'error-tracking'
+        - 'cloudprem'
+- identifier: 'infra'
+  lang_key: infrastructure
+  mobile: true
+  icon: 'host-map'
+  mobile_products:
+    - 'infrastructure-monitoring'
+    - 'metrics'
+    - 'container-monitoring'
+    - 'kubernetes-autoscaling'
+    - 'network-monitoring'
+    - 'serverless'
+    - 'cloud-cost-management'
+    - 'cloudcraft'
+    - 'storage-management'
+- identifier: 'apps'
+  lang_key: applications
+  mobile: true
+  icon: 'apm'
+  mobile_products:
+    - 'apm'
+    - 'universal-service-monitoring'
+    - 'profiler'
+    - 'dynamic-instrumentation'
+    - 'llm-observability'
+- identifier: 'data'
+  lang_key: data
+  mobile: true
+  icon: 'database-2'
+  mobile_products:
+    - 'database-monitoring'
+    - 'data-streams-monitoring'
+    - 'quality-monitoring'
+    - 'jobs-monitoring'
+- identifier: 'Logs'
+  lang_key: 'logs'
+  mobile: true
+  icon: 'log'
+  mobile_products:
+    - 'log-management'
+    - 'sds'
+    - 'audit-trail'
+    - 'observability-pipelines'
+- identifier: 'security'
+  lang_key: security
+  description_key: 'security_description'
+  gradient:
+    - '#0060FF'
+    - '#00CAFF'
+  icon: 'security-platform'
+  mobile_products:
+    - 'code-security'
+    - 'software-composition-analysis'
+    - 'sast'
+    - 'iast'
+    - 'iac-security'
+    - 'cloud-security'
+    - 'cloud-security-posture-management'
+    - 'identity-entitlement'
+    - 'vulnerability-management'
+    - 'compliance'
+    - 'cloud-siem'
+    - 'workload-protection'
+    - 'app-sec'
+    - 'sds'
+    - 'security-labs-research'
+    - 'open-source-projects'
+    - 'secret-scanning'
+  children:
+    - identifier: 'security:code'
+      lang_key: code_security
+      products:
+        - 'code-security'
+        - 'software-composition-analysis'
+        - 'sast'
+        - 'iast'
+        - 'iac-security'
+        - 'secret-scanning'
+    - identifier: 'security:cloud'
+      lang_key: cloud_security
+      products:
+        - 'cloud-security'
+        - 'cloud-security-posture-management'
+        - 'identity-entitlement'
+        - 'vulnerability-management'
+        - 'compliance'
+    - identifier: 'security:threat-management'
+      lang_key: threat_management
+      sections:
+        - lang_key: threat_management
+          products:
+            - 'cloud-siem'
+            - 'workload-protection'
+            - 'app-sec'
+            - 'sds'
+        - lang_key: security_labs
+          products:
+            - 'security-labs-research'
+            - 'open-source-projects'
+- identifier: 'digital-experience'
+  lang_key: digital_experience
+  description_key: 'digital_experience_description'
+  gradient:
+    - '#00B765'
+    - '#00BBED'
+  icon: 'rum'
+  mobile_products:
+    - 'rum'
+    - 'mobile-rum'
+    - 'product-analytics'
+    - 'experiments'
+    - 'session-replay'
+    - 'synthetics'
+    - 'mobile-app-testing'
+    - 'error-tracking'
+    - 'cloudprem'
+  children:
+    - identifier: 'de:digital-experience'
+      lang_key: digital_experience
+      products:
+        - 'rum'
+        - 'mobile-rum'
+        - 'product-analytics'
+        - 'experiments'
+        - 'session-replay'
+        - 'synthetics'
+        - 'mobile-app-testing'
+        - 'error-tracking'
+    - identifier: 'de:related'
+      lang_key: related_products
+      products:
+        - 'continuous-testing'
+        - 'dashboards'
+        - 'apm'
+- identifier: 'software-delivery'
+  lang_key: software_delivery
+  description_key: 'software_delivery_description'
+  gradient:
+    - '#6300D4'
+    - '#9C43FE'
+  icon: 'ci'
+  mobile_products:
+    - 'internal-developer-portal'
+    - 'ci-pipeline-visibility'
+    - 'test-optimization'
+    - 'continuous-testing'
+    - 'ide'
+    - 'feature-flags'
+    - 'code-coverage'
+  children:
+    - identifier: 'sd:software-delivery'
+      lang_key: software_delivery
+      products:
+        - 'internal-developer-portal'
+        - 'ci-pipeline-visibility'
+        - 'test-optimization'
+        - 'continuous-testing'
+        - 'ide'
+        - 'dora-metrics'
+        - 'feature-flags'
+        - 'code-coverage'
+    - identifier: 'sd:related'
+      lang_key: related_products
+      products:
+        - 'software-composition-analysis'
+        - 'apm'
+        - 'synthetics'
+        - 'rum'
+        - 'workflow-automation'
+        - 'integrations'
+- identifier: 'service-management'
+  lang_key: service_management
+  description_key: 'service_management_description'
+  gradient:
+    - '#FF0080'
+    - '#FF5E00'
+  icon: 'software-catalog'
+  mobile_products:
+    - 'events'
+    - 'software-catalog'
+    - 'slo'
+    - 'incident-response'
+    - 'case-management'
+    - 'workflow-automation'
+    - 'app-builder'
+    - 'bits-ai-sre'
+    - 'watchdog'
+  children:
+    - identifier: 'sm:service-management'
+      lang_key: service_management
+      products:
+        - 'incident-response'
+        - 'software-catalog'
+        - 'slo'
+        - 'case-management'
+    - identifier: 'sm:actions'
+      lang_key: actions
+      products:
+        - 'workflow-automation'
+        - 'app-builder'
+    - identifier: 'sm:agentic_and_embedded'
+      lang_key: agentic_and_embedded
+      products:
+        - 'bits-ai-sre'
+        - 'watchdog'
+        - 'events'
+- identifier: 'ai'
+  lang_key: ai
+  description_key: 'ai_description'
+  gradient:
+    - '#0060FF'
+    - '#8000FF'
+  icon: 'bits-ai'
+  mobile_products:
+    - 'llm-observability'
+    - 'ai-integrations'
+    - 'bits-ai-agents'
+    - 'bits-ai-sre'
+    - 'bits-ai-security-analyst'
+    - 'mcp-server'
+    - 'agent-directory'
+    - 'watchdog'
+    - 'events'
+  children:
+    - identifier: 'ai:observability'
+      lang_key: ai_observability
+      products:
+        - 'llm-observability'
+        - 'ai-integrations'
+    - identifier: 'ai:agentic_and_embedded'
+      lang_key: agentic_and_embedded
+      products:
+        - 'bits-ai-agents'
+        - 'bits-ai-sre'
+        - 'bits-ai-security-analyst'
+        - 'mcp-server'
+        - 'agent-directory'
+        - 'watchdog'
+        - 'events'
+    - identifier: 'ai:related'
+      lang_key: related_products
+      products:
+        - 'incident-response'
+        - 'workflow-automation'
+        - 'apm'
+        - 'universal-service-monitoring'
+        - 'log-management'
+- identifier: 'platform'
+  lang_key: platform_capabilities
+  description_key: 'platform_capabilities_description'
+  gradient:
+    - '#8000FF'
+    - '#4300B0'
+  icon: 'dashboard'
+  mobile_products:
+    - 'bits-ai-agents'
+    - 'metrics'
+    - 'watchdog'
+    - 'alerts'
+    - 'dashboards'
+    - 'notebooks'
+    - 'mobile-app'
+    - 'fleet-automation'
+    - 'governance-console'
+    - 'access-control'
+    - 'incident-response'
+    - 'case-management'
+    - 'events'
+    - 'workflow-automation'
+    - 'app-builder'
+    - 'cloudcraft'
+    - 'coscreen'
+    - 'teams'
+    - 'opentelemetry'
+    - 'integrations'
+    - 'ide'
+    - 'mcp-server'
+    - 'agent-directory'
+    - 'api'
+    - 'marketplace'
+    - 'dora-metrics'
+  children:
+    - identifier: 'platform:built-in'
+      lang_key: built_in_features
+      products:
+        - 'bits-ai-agents'
+        - 'metrics'
+        - 'watchdog'
+        - 'alerts'
+        - 'dashboards'
+        - 'notebooks'
+        - 'mobile-app'
+        - 'fleet-automation'
+        - 'governance-console'
+        - 'access-control'
+        - 'dora-metrics'
+    - identifier: 'platform:workflows'
+      lang_key: workflows_and_collaboration
+      products:
+        - 'incident-response'
+        - 'case-management'
+        - 'events'
+        - 'workflow-automation'
+        - 'app-builder'
+        - 'cloudcraft'
+        - 'coscreen'
+        - 'teams'
+    - identifier: 'platform:extensibility'
+      lang_key: extensibility
+      products:
+        - 'opentelemetry'
+        - 'integrations'
+        - 'ide'
+        - 'mcp-server'
+        - 'agent-directory'
+        - 'api'
+        - 'marketplace'

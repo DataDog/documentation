@@ -1,0 +1,42 @@
+en:
+  en: English
+  ja: Japanese
+  ko: Korean
+  fr: French
+  pt: Portuguese
+  es: Spanish
+ja:
+  en: 英語
+  ja: 日本語
+  ko: 韓国語
+  fr: フランス語
+  pt: ポルトガル語
+  es: スペイン語
+ko:
+  en: 영어
+  ja: 일본어
+  ko: 한국어
+  fr: 프랑스어
+  pt: 포르투갈어
+  es: 스페인어
+fr:
+  en: Anglais
+  ja: Japonais
+  ko: Coréen
+  fr: Français
+  pt: Portugais
+  es: Espagnol
+pt:
+  en: Inglês
+  ja: Japonês
+  ko: Coreano
+  fr: Francês
+  pt: Português
+  es: Espanhol
+es:
+  en: Inglés
+  ja: Japonés
+  ko: Coreano
+  fr: Francés
+  pt: Portugués
+  es: Español

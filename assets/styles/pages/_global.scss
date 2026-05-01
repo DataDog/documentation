@@ -5,6 +5,11 @@ $lightGreyGrey: #d6d6d6;
 $darkGreyGrey: #a1a1a1;
 $dimGreyGrey: #707070;
 
+// Disallow old-style numbers everywhere
+*, *::before, *::after {
+    font-variant-numeric: lining-nums;
+}
+
 :root {
     --bs-link-hover-color: #{$ddpurple};
 }
@@ -33,6 +38,7 @@ body {
     -o-font-feature-settings: 'lnum' 1, 'frac' 0, 'liga' 1, 'clig' 1;
     -webkit-font-feature-settings: 'lnum' 1, 'frac' 0, 'liga' 1, 'clig' 1;
     font-feature-settings: 'lnum' 1, 'frac' 0, 'liga' 1, 'clig' 1;
+    font-variant-numeric: lining-nums;
     /** "ss01" 1 is for the alternate 'a' character */
     /** "ss05" 1 is for alternate 'y' character */
     font-weight: 200;

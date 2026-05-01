@@ -1,0 +1,102 @@
+.api-side-nav {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  position: sticky;
+  top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
+  align-self: flex-start;
+  max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height));
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  padding: var(--space-md) var(--space-md) var(--space-md) 0;
+  /* box-shadow extends the rail color past the element's left edge so it
+     reaches the viewport edge without adding horizontal overflow.
+     clip-path trims the shadow's vertical overspill so it can't paint over
+     the footer (box-shadow spread inflates equally on all sides). */
+  background: var(--color-gray-lightest);
+  box-shadow: -100vw 0 0 100vw var(--color-gray-lightest);
+  clip-path: inset(0 -100vw);
+}
+
+.api-side-nav::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .api-side-nav {
+    top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop) - var(--hugo-header-shrink));
+    max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height-desktop) + var(--hugo-header-shrink));
+  }
+}
+
+.api-side-nav__title {
+  display: block;
+  padding: 0 0 10px var(--space-md);
+  margin-top: 14px;
+  color: var(--color-brand);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-light);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.api-side-nav__title:hover {
+  color: var(--color-brand-hover);
+}
+
+.api-side-nav__title-api {
+  font-weight: var(--font-weight-semibold);
+}
+
+.api-side-nav__search {
+  padding: var(--space-md) var(--space-md) var(--space-sm) var(--space-md);
+}
+
+.api-side-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.api-side-nav__category {
+  display: block;
+  padding: var(--space-xs) var(--space-md);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.api-side-nav__category:hover {
+  color: var(--color-brand);
+}
+
+.api-side-nav__category--active {
+  color: var(--color-brand);
+}
+
+.api-side-nav__operations {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: none;
+}
+
+.api-side-nav__operations--expanded {
+  display: block;
+}
+
+.api-side-nav__operation {
+  display: block;
+  padding: 0 var(--space-md) 0 var(--space-xl);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.api-side-nav__operation:hover {
+  color: var(--color-brand);
+}

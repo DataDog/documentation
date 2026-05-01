@@ -1,0 +1,429 @@
+/* Ported from ~/dd/websites-modules/assets/styles/components/_main-nav.scss.
+   Hugo-identical — pixel values and behaviors must match the Hugo site exactly. */
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: var(--hugo-header-z);
+}
+
+.nav {
+  height: var(--hugo-header-height);
+  display: flex;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: var(--hugo-banner-height);
+  align-items: center;
+  box-shadow: var(--hugo-header-shadow);
+  background-color: var(--color-bg);
+  z-index: var(--hugo-header-z);
+  transition: height 0.2s ease;
+}
+
+.container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding-right: 12px;
+  padding-left: 12px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 992px) {
+  .nav {
+    height: calc(var(--hugo-header-height-desktop) - var(--hugo-header-shrink));
+  }
+}
+
+/* Stepped container max-widths matching Hugo's Bootstrap `.container` with the
+   Datadog overrides. Without these, the container spans 100% of the viewport
+   below 1400px, which — because the left and right <ul>s use flex-grow:1 —
+   pushes the nav items away from the centered logo, so switching between the
+   Hugo and Astro sites produces a visible "jump". */
+@media (min-width: 768px) {
+  .container {
+    max-width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1170px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1336px;
+  }
+}
+
+/* Desktop layout — visible at ≥992px only */
+.desktop {
+  display: none;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .desktop {
+    display: flex;
+  }
+}
+
+.listReset {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-basis: 0;
+}
+
+.leftList {
+  composes: listReset;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.rightList {
+  composes: listReset;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.menuItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.menuLink {
+  display: block;
+  font-size: var(--hugo-nav-item-font-size);
+  font-weight: var(--hugo-nav-item-font-weight);
+  color: var(--hugo-nav-text);
+  padding: var(--hugo-nav-item-padding);
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  /* Hugo inherits body line-height (~1.4286) on nav items. Hard-code the
+     same value so the text block matches Hugo's 43.7px tall vs. the prior
+     36px, which left too much whitespace around each item in the 130px bar. */
+  line-height: 1.42857143;
+  font-family: inherit;
+}
+
+.menuLink:hover {
+  color: var(--hugo-nav-text-hover);
+}
+
+@media (min-width: 1400px) {
+  .menuLink {
+    padding: var(--hugo-nav-item-padding-xxl);
+  }
+}
+
+.menuItem--open > .menuLink {
+  color: var(--hugo-nav-brand-primary);
+}
+
+/* Logo column */
+.logoColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+}
+
+.logoBits {
+  height: 75px;
+  transition: height 200ms ease-in-out;
+  max-width: none;
+}
+
+.logoText {
+  width: 93px;
+  height: 14px;
+  margin-top: 5px;
+  transition: opacity 200ms ease-in-out;
+  font-size: 0;
+}
+
+/* Scroll-shrink: collapse the wordmark and shrink the bits logo once the
+   inline HeaderScroll listener has added `.main-nav-scrolled` to the root. */
+:global(.main-nav-scrolled) .logoText {
+  display: none;
+}
+
+:global(.main-nav-scrolled) .logoBits {
+  height: 50px;
+}
+
+/* Search toggle (not rendered on desktop docs; kept for parity / styling parent) */
+.searchToggle {
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 21px;
+  color: var(--hugo-nav-text);
+  line-height: 1;
+}
+
+.searchToggle svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+}
+
+@media (min-width: 1400px) {
+  .searchToggleWrap {
+    padding-right: 16px;
+  }
+}
+
+/* Button CTA — GET STARTED FREE. Text is gray (not brand purple): Hugo's
+   `.btn-gradient { color: #632ca6 }` is overridden by the higher-specificity
+   `.main-nav li a { color: #555 }`, so the resting button renders gray to
+   match the other nav items. */
+.btnGradient {
+  position: relative;
+  display: inline-block;
+  background: var(--color-bg);
+  color: var(--hugo-nav-text);
+  border: 0 solid transparent;
+  border-radius: 4px;
+  min-width: 120px;
+  margin-left: 10px;
+  padding: 8.5px 28px 9.5px;
+  font-size: var(--hugo-nav-item-font-size);
+  font-weight: var(--hugo-nav-item-font-weight);
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  /* Hugo's .btn-gradient inherits Bootstrap's .btn line-height of 1.5,
+     not the body's 1.428. Hard-code to keep the button the same 45px tall
+     regardless of what the rest of the nav inherits. */
+  line-height: 1.5;
+}
+
+.btnGradient::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, var(--hugo-btn-gradient-start), var(--hugo-btn-gradient-end));
+  z-index: -2;
+}
+
+.btnGradient:hover {
+  color: #ffffff;
+  /* Matches Hugo's hover: magenta at 0% → blue-purple at 100%, 45deg. The
+     tokens are named start/end for the resting ::before direction (left→right);
+     hover reverses the color order. */
+  background: linear-gradient(45deg, var(--hugo-btn-gradient-end) 0%, var(--hugo-btn-gradient-start) 100%);
+}
+
+/* Responsive label switch — Hugo shows "GET STARTED FREE" at ≥1200px and
+   the shorter "FREE TRIAL" below that (Bootstrap's .d-none.d-xl-block /
+   .d-block.d-xl-none pair). Both spans are in the DOM for SEO / server render;
+   CSS toggles which one is visible. */
+.btnGradient__full {
+  display: none;
+}
+
+.btnGradient__short {
+  display: block;
+}
+
+@media (min-width: 1200px) {
+  .btnGradient__full {
+    display: block;
+  }
+  .btnGradient__short {
+    display: none;
+  }
+}
+
+/* Mobile row — visible below 992px */
+.mobileRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 12px;
+}
+
+@media (min-width: 992px) {
+  .mobileRow {
+    display: none;
+  }
+}
+
+.mobileLogo {
+  display: inline-block;
+  width: 157px;
+  height: 40px;
+}
+
+.hamburger {
+  position: relative;
+  margin-left: auto;
+  margin-right: 0;
+  padding: 9px 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.hamburger:focus {
+  outline: 0;
+}
+
+.hamburgerBar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: var(--hugo-nav-text);
+}
+
+.hamburgerBar + .hamburgerBar {
+  margin-top: 4px;
+}
+
+.hamburger--open .hamburgerBar:nth-child(2) {
+  transform: rotate(45deg) translateY(2.5px) translateX(6px);
+}
+
+.hamburger--open .hamburgerBar:nth-child(3) {
+  opacity: 0;
+}
+
+.hamburger--open .hamburgerBar:nth-child(4) {
+  transform: rotate(-45deg) translateY(-2.5px) translateX(6px);
+}
+
+@media (min-width: 992px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+/* Dropdowns */
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 9px;
+  box-sizing: border-box;
+  z-index: 2;
+  box-shadow: var(--hugo-nav-dropdown-shadow);
+  border: 0;
+  border-top: 3px solid var(--hugo-nav-brand-primary);
+  border-radius: 0;
+  background-color: var(--color-bg);
+  padding: 0.5rem;
+  min-width: 200px;
+  overflow: auto;
+  max-height: 80vh;
+  overscroll-behavior: contain;
+  list-style: none;
+  margin: 0;
+  display: none;
+}
+
+.dropdownMenu--open {
+  display: block;
+}
+
+.dropdownMenu a {
+  display: block;
+  text-transform: capitalize;
+  font-weight: 300;
+  color: var(--color-text);
+  white-space: nowrap;
+  padding: 7px 11px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.dropdownMenu a:hover {
+  color: var(--hugo-nav-text-hover);
+  background: var(--hugo-nav-btn-hover-bg);
+}
+
+/* Solutions menu — 3-column layout */
+.solutionsMenu {
+  width: var(--hugo-mega-menu-width-lg-down);
+  padding: 0.5rem;
+}
+
+@media (min-width: 992px) {
+  .solutionsMenu {
+    left: -127px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .solutionsMenu {
+    left: 9px;
+  }
+}
+
+.solutionsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.solutionsColumn {
+  padding: 0 8px;
+  list-style: none;
+}
+
+.solutionsHeader {
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 8px 11px 8px;
+  margin: 0;
+}
+
+.solutionsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menuText {
+  display: inline-flex;
+}

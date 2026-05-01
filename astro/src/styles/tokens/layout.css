@@ -1,0 +1,6 @@
+:root {
+  --code-max-height: 350px;
+  --control-height-sm: 2rem;
+  --content-max-width: 1440px;
+  --sidebar-width: 25%;
+}

@@ -1,0 +1,86 @@
+---
+import Tabs from '../Tabs/Tabs.astro';
+import TabPanel from '../Tab/TabPanel.astro';
+import CodeBlock from '../CodeBlock/CodeBlock.astro';
+import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
+import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
+import styles from './ApiResponse.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+import { generateElementId } from '../../utils/generateElementId';
+
+const cl = classListFactory(styles);
+
+interface Example {
+  name: string;
+  value: string;
+}
+
+export interface ResponseData {
+  statusCode: string;
+  description?: string;
+  schema?: SchemaField[];
+  examples?: Example[];
+}
+
+interface Props {
+  responses: ResponseData[];
+}
+
+const { responses } = Astro.props;
+
+const outerGroupId = generateElementId('api-response');
+const outerLabels = responses.map((r) => r.statusCode);
+const outerPanelIds = responses.map((_, i) => `${outerGroupId}-panel-${i}`);
+const innerPanelIds = responses.map((_, i) => [
+  `${outerGroupId}-model-${i}`,
+  `${outerGroupId}-example-${i}`,
+]);
+---
+
+{responses.length > 0 && (
+  <div class={cl('api-response')}>
+    <h3 class={cl('api-response__heading')}>Response</h3>
+
+    <Tabs id={outerGroupId} variant="pills" labels={outerLabels} panelIds={outerPanelIds}>
+      {responses.map((r, i) => {
+        const hasSchema = (r.schema?.length ?? 0) > 0;
+        const hasExamples = (r.examples?.length ?? 0) > 0;
+        const showInnerTabs = hasSchema && hasExamples;
+        return (
+          <TabPanel id={outerPanelIds[i]} isActive={i === 0}>
+            <div class={`api-response__panel api-response__panel--${r.statusCode}`}>
+              {r.description && (
+                <p class={cl('api-response__description')} set:html={r.description} />
+              )}
+
+              {showInnerTabs && (
+                <Tabs id={`${outerGroupId}-inner-${i}`} variant="pills" labels={["Model", "Example"]} panelIds={innerPanelIds[i]}>
+                  <TabPanel id={innerPanelIds[i][0]} isActive>
+                    <ApiSchemaTable client:load fields={r.schema!} />
+                  </TabPanel>
+                  <TabPanel id={innerPanelIds[i][1]}>
+                    {r.examples!.map((ex) => (
+                      <div class={cl('api-response__example')}>
+                        <CodeBlock content={ex.value} language="json" />
+                      </div>
+                    ))}
+                  </TabPanel>
+                </Tabs>
+              )}
+
+              {!showInnerTabs && hasSchema && (
+                <ApiSchemaTable client:load fields={r.schema!} />
+              )}
+
+              {!showInnerTabs && hasExamples && r.examples!.map((ex) => (
+                <div class={cl('api-response__example')}>
+                  <CodeBlock content={ex.value} language="json" />
+                </div>
+              ))}
+            </div>
+          </TabPanel>
+        );
+      })}
+    </Tabs>
+  </div>
+)}

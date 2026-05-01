@@ -1,0 +1,403 @@
+author:
+    other: Author
+language:
+    other: Language
+library:
+    one: Library
+    other: Libraries
+official:
+    other: Official
+api:
+    other: API
+dogstatsd:
+    other: DogStatsD
+notes:
+    other: Notes
+get_started_free:
+  other: "GET STARTED FREE"
+get_started_free_short:
+  other: "Free Trial"
+get_started_with_datadog:
+  other: "Get Started with Datadog"
+free_trial:
+  other: "Free Trial"
+view_pricing:
+  other: "View Product Pricing"
+product_hype:
+  other: "The integrated platform for monitoring & security"
+# Product Categories
+observability:
+  other: Observability
+observability_description:
+  other: 'End-to-end, simplified visibility into your stack’s health & performance'
+infrastructure:
+  other: Infrastructure
+applications:
+  other: Applications
+data:
+  other: Data
+logs:
+  other: Logs
+security:
+  other: Security
+security_description:
+  other: 'Detect, prioritize, and respond to threats in real-time'
+cloud_security:
+  other: Cloud Security
+application_security:
+  other: Application Security
+threat_detection:
+  other: Threat Detection
+threat_management:
+  other: Threat Management
+cloud_siem:
+  other: Cloud SIEM
+digital_experience:
+  other: Digital Experience
+digital_experience_description:
+  other: 'Optimize front-end performance and enhance user experiences'
+related_products:
+  other: Related Products
+software_delivery:
+  other: Software Delivery
+software_delivery_description:
+  other: 'Build, test, secure and ship quality code faster'
+service_management:
+  other: Service Management
+actions:
+  other: Actions
+service_management_description:
+  other: 'Integrated, streamlined workflows for faster time-to-resolution'
+aiops:
+  other: AIOps
+agentic_and_embedded:
+  other: Agentic & Embedded
+ai:
+  other: AI
+ai_description:
+  other: 'Monitor and improve model performance. Pinpoint root causes and detect anomalies'
+ai_observability:
+  other: AI Observability
+platform_capabilities:
+  other: Platform Capabilities
+platform_capabilities_description:
+  other: 'Built-in features & integrations that power the Datadog platform'
+built_in_features:
+  other: Built-in Features
+workflows_and_collaboration:
+  other: Workflows & Collaboration
+extensibility:
+  other: Extensibility
+
+# Product Names
+
+infrastructure_monitoring:
+  other: Infrastructure Monitoring
+container_monitoring:
+  other: Container Monitoring
+network_monitoring:
+  other: Network Monitoring
+network_performance_monitoring:
+  other: Network Performance Monitoring
+network_device_monitoring:
+  other: Network Device Monitoring
+serverless:
+  other: Serverless
+cloud_cost_management:
+  other: Cloud Cost Management
+cloudcraft:
+  other: Cloudcraft
+kubernetes_autoscaling:
+  other: Kubernetes Autoscaling
+application_performance_monitoring:
+  other: Application Performance Monitoring
+service_catalog:
+  other: Service Catalog
+software_catalog:
+  other: Software Catalog
+universal_service_monitoring:
+  other: Universal Service Monitoring
+data_streams_monitoring:
+  other: Data Streams Monitoring
+data_jobs_monitoring:
+  other: Data Jobs Monitoring
+jobs_monitoring:
+  other: Jobs Monitoring
+quality_monitoring:
+  other: Quality Monitoring
+database_monitoring:
+  other: Database Monitoring
+continuous_profiler:
+  other: Continuous Profiler
+dynamic_instrumentation:
+  other: Dynamic Instrumentation
+log_management:
+  other: Log Management
+sensitive_data_scanner:
+  other: Sensitive Data Scanner
+audit_trail:
+  other: Audit Trail
+observability_pipelines:
+  other: Observability Pipelines
+cloud_security_posture_management:
+  other: Cloud Security Posture Management
+workload_protection:
+  other: Workload Protection
+identity_and_entitlement_management:
+  other: Cloud Infrastructure Entitlement Management
+vulnerability_management:
+  other: Vulnerability Management
+compliance:
+  other: Compliance
+app_and_api_protection:
+  other: App and API Protection
+software_composition_analysis:
+  other: Software Composition Analysis
+code_security:
+  other: Code Security
+sast:
+  other: Static Code Analysis (SAST)
+iast:
+  other: Runtime Code Analysis (IAST)
+iac_security:
+  other: IaC Security
+browser_real_user_monitoring:
+  other: Browser Real User Monitoring
+mobile_real_user_monitoring:
+  other: Mobile Real User Monitoring
+product_analytics:
+  other: Product Analytics
+experiments:
+  other: Experiments
+session_replay:
+  other: Session Replay
+synthetic_monitoring:
+  other: Synthetic Monitoring
+mobile_app_testing:
+  other: Mobile App Testing
+continuous_testing:
+  other: Continuous Testing
+feature_flags:
+  other: Feature Flags
+code_coverage:
+  other: Code Coverage
+error_tracking:
+  other: Error Tracking
+cloudprem:
+  other: CloudPrem
+internal_developer_portal:
+  other: Internal Developer Portal
+ci_visibility:
+  other: CI Visibility
+test_optimization:
+  other: Test Optimization
+service_level_objectives:
+  other: Service Level Objectives
+incident_response:
+  other: Incident Response
+incident_management:
+  other: Incident Management
+event_management:
+  other: Event Management
+case_management:
+  other: Case Management
+bits_ai:
+  other: Bits AI
+bits_ai_agents:
+  other: Bits AI Agents
+bits_ai_sre:
+  other: Bits AI SRE
+bits_ai_security_analyst:
+  other: Bits AI Security Analyst
+mcp_server:
+  other: MCP Server
+agent_directory:
+  other: Agent Directory
+metrics:
+  other: Metrics
+watchdog:
+  other: Watchdog
+llm_observability:
+  other: LLM Observability
+ai_integrations:
+  other: AI Integrations
+workflow_automation:
+  other: Workflow Automation
+app_builder:
+  other: App Builder
+coscreen:
+  other: CoScreen
+teams:
+  other: Teams
+dashboards:
+  other: Dashboards
+notebooks:
+  other: Notebooks
+mobile_app:
+  other: Mobile App
+download_mobile_app:
+  other: Download mobile app
+fleet_automation:
+  other: Fleet Automation
+access_control:
+  other: Access Control
+governance_console:
+  other: Governance Console
+opentelemetry:
+  other: OpenTelemetry
+alerts:
+  other: Alerts
+integrations:
+  other: Integrations
+ide_plugins:
+  other: IDE Plugins
+marketplace:
+  other: Marketplace
+dora_metrics:
+  other: DORA Metrics
+
+# Menus
+product:
+  other: Product
+customers:
+  other: Customers
+pricing:
+  other: Pricing
+solutions:
+  other: Solutions
+industry:
+  other: Industry
+financial_services:
+  other: Financial Services
+manufacturing_and_logistics:
+  other: Manufacturing & Logistics
+healthcare_and_life_sciences:
+  other: Healthcare/Life Sciences
+retail_and_ecommerce:
+  other: Retail/E-Commerce
+government:
+  other: Government
+education:
+  other: Education
+media_and_entertainment:
+  other: Media & Entertainment
+technology:
+  other: Technology
+gaming:
+  other: Gaming
+amazon_web_services_monitoring:
+  other: Amazon Web Services Monitoring
+azure_monitoring:
+  other: Azure Monitoring
+google_cloud_monitoring:
+  other: Google Cloud Monitoring
+kubernetes_monitoring:
+  other: Kubernetes Monitoring
+red_hat_openshift:
+  other: Red Hat OpenShift
+pivotal_platform:
+  other: Pivotal Platform
+openai:
+  other: OpenAI
+sap_monitoring:
+  other: SAP Monitoring
+use_case:
+  other: Use-case
+cloud_migration:
+  other: Cloud Migration
+monitoring_consolidation:
+  other: Monitoring Consolidation
+unified_commerce_monitoring:
+  other: Unified Commerce Monitoring
+devops:
+  other: DevOps
+finops:
+  other: FinOps
+shift_left_testing:
+  other: Shift-Left Testing
+digital_experience_monitoring:
+  other: Digital Experience Monitoring
+security_analytics:
+  other: Security Analytics
+compliance_for_cis_benchmarks:
+  other: Compliance for CIS Benchmarks
+hybrid_cloud_monitoring:
+  other: Hybrid Cloud Monitoring
+iot_monitoring:
+  other: Edge Device Monitoring
+machine_learning:
+  other: Machine Learning
+real_time_bi:
+  other: Real-Time BI
+oci_monitoring:
+  other: Oracle Cloud Monitoring
+on_premises_monitoring:
+  other: On-Premises Monitoring
+log_analysis_and_correlation:
+  other: Log Analysis & Correlation
+cnapp:
+  other: CNAPP
+soar:
+  other: SOAR
+docs:
+  other: Docs
+about:
+  other: About
+contact:
+  other: Contact
+partners:
+  other: Partners
+latest_news:
+  other: Latest News
+events_and_webinars:
+  other: Events & Webinars
+leadership:
+  other: Leadership
+careers:
+  other: Careers
+analyst_reports:
+  other: Analyst Reports
+investor_relations:
+  other: Investor Relations
+esg_report:
+  other: ESG Report
+trust_hub:
+  other: Trust Hub
+blog:
+  other: Blog
+the_monitor:
+  other: The Monitor
+engineering:
+  other: Engineering
+pup_culture:
+  other: Pup Culture
+security_labs:
+  other: Security Labs
+security_labs_research:
+  other: Security Labs Research
+open_source_projects:
+  other: Open Source Projects
+login:
+  other: Login
+search:
+  other: Search
+get_started:
+  other: Get Started
+start_free_datadog_trial:
+  other: 'Start Your Free Datadog Trial Now'
+storage_management:
+  other: 'Storage Management'
+secret_scanning:
+  other: 'Secret Scanning'
+
+# Footer
+footer_blurb_heading:
+  other: "Can't find something?"
+footer_blurb_desc:
+  other: "Our friendly, knowledgeable solutions engineers are here to help!"
+contact_us:
+  other: "Contact Us"
+resources:
+  other: "Resources"
+personalized_demo:
+  other: "Request a personalized demo"

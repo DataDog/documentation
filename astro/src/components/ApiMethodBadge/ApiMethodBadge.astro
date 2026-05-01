@@ -1,0 +1,17 @@
+---
+interface Props {
+  method: string;
+}
+
+const { method } = Astro.props;
+const normalized = method.toLowerCase();
+const label = method.toUpperCase();
+
+import styles from './ApiMethodBadge.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+const cl = classListFactory(styles);
+---
+
+<span class={cl('api-method-badge', `api-method-badge--${normalized}`)}>
+  {label}
+</span>

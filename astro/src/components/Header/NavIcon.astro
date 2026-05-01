@@ -1,0 +1,51 @@
+---
+/**
+ * Inlines an SVG icon from the mocked websites_modules static/icons folder.
+ * Matches Hugo's approach of dumping raw SVG into the page and letting CSS
+ * color it via `currentColor` — no icon font.
+ */
+const icons = import.meta.glob<string>(
+  '../../mocked_dependencies/websites_modules/static/icons/*.svg',
+  { query: '?raw', import: 'default', eager: true }
+);
+
+interface Props {
+  name: string;
+  class?: string;
+  size?: string;
+}
+
+const { name, class: className, size } = Astro.props;
+const key = `../../mocked_dependencies/websites_modules/static/icons/${name}.svg`;
+const raw: string | undefined = icons[key];
+const style = size ? `width:${size};height:${size}` : undefined;
+---
+
+{raw ? (
+  <span class={`nav-icon ${className ?? ''}`} style={style} set:html={raw} />
+) : (
+  <span class={`nav-icon nav-icon--missing ${className ?? ''}`} style={style} aria-hidden="true" />
+)}
+
+<style is:global>
+  .nav-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  .nav-icon svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+  }
+  .nav-icon--missing::before {
+    content: '';
+    display: inline-block;
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.4;
+  }
+</style>

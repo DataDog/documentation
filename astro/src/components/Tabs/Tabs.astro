@@ -1,0 +1,32 @@
+---
+import { TabsNav } from './TabsNav';
+import styles from './Tabs.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+const cl = classListFactory(styles);
+
+interface Props {
+  id: string;
+  labels: string[];
+  panelIds: string[];
+  /** Force a variant. Default auto-detects pills on overflow. */
+  variant?: 'tabs' | 'pills';
+}
+
+const { id, labels, panelIds, variant } = Astro.props;
+
+const rootClass = variant === 'pills' ? cl('tabs', 'tabs--pills') : cl('tabs');
+---
+
+<div id={id} class={rootClass}>
+  <TabsNav
+    client:load
+    labels={labels}
+    externalContext={{
+      scope: id,
+      entries: { tabsEl: id, tabPanelEls: panelIds },
+    }}
+    variant={variant}
+  />
+  <slot />
+</div>

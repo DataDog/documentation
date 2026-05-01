@@ -1,0 +1,154 @@
+---
+import ApiMethodBadge from '../ApiMethodBadge/ApiMethodBadge.astro';
+import ApiStatusAlert from '../ApiStatusAlert/ApiStatusAlert.astro';
+import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
+import ApiResponse from '../ApiResponse/ApiResponse.astro';
+import ApiCodeExample from '../ApiCodeExample/ApiCodeExample.astro';
+import ApiRequestBodyTabs from '../ApiRequestBodyTabs/ApiRequestBodyTabs.astro';
+import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
+import type { ResponseData } from '../ApiResponse/ApiResponse.astro';
+import type { CodeExampleSet } from '../ApiCodeExample/ApiCodeExample.astro';
+import { getDefaultRegions } from '../../data/api/regions';
+import styles from './ApiEndpoint.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+const allRegions = getDefaultRegions();
+const cl = classListFactory(styles);
+
+interface EndpointData {
+  operationId: string;
+  summary: string;
+  slug: string;
+  method: string;
+  path: string;
+  description: string;
+  version: 'v1' | 'v2';
+  deprecated: boolean;
+  unstable: boolean;
+  unstableMessage?: string;
+  newerVersionUrl?: string;
+  permissions?: string[];
+  oauthScopes?: string[];
+  regionUrls?: Record<string, string>;
+  pathParams?: SchemaField[];
+  queryParams?: SchemaField[];
+  headerParams?: SchemaField[];
+  requestBody?: {
+    required: boolean;
+    description?: string;
+    schema: SchemaField[];
+    examples: Array<{ name: string; value: string }>;
+  };
+  responses: ResponseData[];
+  codeExamples: CodeExampleSet[];
+}
+
+interface Props {
+  data: string; // JSON string of EndpointData
+}
+
+const { data: dataJson } = Astro.props;
+
+let ep: EndpointData | null = null;
+try {
+  ep = JSON.parse(dataJson);
+} catch {
+  // invalid JSON
+}
+
+const hasParams = ep && (
+  (ep.pathParams && ep.pathParams.length > 0) ||
+  (ep.queryParams && ep.queryParams.length > 0) ||
+  (ep.headerParams && ep.headerParams.length > 0)
+);
+---
+
+{ep && (
+  <section class={cl('api-endpoint')} data-operation-id={ep.operationId}>
+    {/* Status alerts */}
+    {ep.deprecated && (
+      <ApiStatusAlert type="deprecated" newerVersionUrl={ep.newerVersionUrl} />
+    )}
+    {ep.unstable && !ep.deprecated && (
+      <ApiStatusAlert type="unstable" message={ep.unstableMessage} />
+    )}
+
+    {/* Heading + method badge + path */}
+    <h2 id={ep.slug} class={cl('api-endpoint__heading')}>
+      {ep.summary}
+      {ep.version && <span class={cl('api-endpoint__version-badge')}>{ep.version === 'v2' ? 'v2 (latest)' : ep.version}</span>}
+    </h2>
+    <div class={cl('api-endpoint__url-line')}>
+      <ApiMethodBadge method={ep.method} />
+      {allRegions.map((region) => {
+        const url = ep.regionUrls?.[region.key];
+        return url ? (
+          <code class={cl('api-endpoint__path')} data-region={region.key}>{url}</code>
+        ) : (
+          <code class={cl('api-endpoint__path', 'api-endpoint__path--unsupported')} data-region={region.key}>Not supported in the {region.label} region</code>
+        );
+      })}
+    </div>
+
+    {/* Description — rendered as slot content from Markdoc */}
+    {ep.description && <h3>Overview</h3>}
+    <slot />
+
+    {/* Permissions */}
+    {ep.permissions && ep.permissions.length > 0 && (
+      <div class={cl('api-endpoint__permissions')}>
+        <strong>Permissions: </strong>
+        <code>{ep.permissions.join(', ')}</code>
+      </div>
+    )}
+
+    {/* OAuth scopes */}
+    {ep.oauthScopes && ep.oauthScopes.length > 0 && (
+      <div class={cl('api-endpoint__permissions')}>
+        <p>OAuth apps require the <code>{ep.oauthScopes.join(', ')}</code> authorization scope to access this endpoint.</p>
+      </div>
+    )}
+
+    {/* Arguments */}
+    {hasParams && (
+      <div class={cl('api-endpoint__section')}>
+        <h3>Arguments</h3>
+        {ep.pathParams && ep.pathParams.length > 0 && (
+          <ApiSchemaTable client:load fields={ep.pathParams} />
+        )}
+        {ep.queryParams && ep.queryParams.length > 0 && (
+          <ApiSchemaTable client:load fields={ep.queryParams} />
+        )}
+        {ep.headerParams && ep.headerParams.length > 0 && (
+          <ApiSchemaTable client:load fields={ep.headerParams} />
+        )}
+      </div>
+    )}
+
+    {/* Request Body */}
+    {ep.requestBody && (
+      <div class={cl('api-endpoint__section')}>
+        <h3>Request Body {ep.requestBody.required ? '(required)' : '(optional)'}</h3>
+        {ep.requestBody.description && (
+          <p set:html={ep.requestBody.description} />
+        )}
+        <ApiRequestBodyTabs
+          schema={ep.requestBody.schema}
+          examples={ep.requestBody.examples}
+        />
+      </div>
+    )}
+
+    {/* Response */}
+    {ep.responses.length > 0 && (
+      <ApiResponse responses={ep.responses} />
+    )}
+
+    {/* Code Examples */}
+    {ep.codeExamples.length > 0 && (
+      <ApiCodeExample examples={ep.codeExamples} />
+    )}
+
+    <hr class={cl('api-endpoint__divider')} />
+  </section>
+)}

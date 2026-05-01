@@ -1,0 +1,50 @@
+---
+import type { ApiCategory } from '../../data/api/index';
+import styles from './ApiSideNav.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+import SearchBar from '../SearchBar/SearchBar';
+import { DEFAULT_LOCALE, localizedHref, type Locale } from '../../lib/i18n/locale';
+
+interface Props {
+  categories: ApiCategory[];
+  currentSlug?: string;
+  lang?: Locale;
+}
+
+const { categories, currentSlug, lang = DEFAULT_LOCALE } = Astro.props;
+const cl = classListFactory(styles);
+---
+
+<nav class={cl('api-side-nav')}>
+  <a href={localizedHref(lang, '/')} class={cl('api-side-nav__title')}>
+    Datadog Docs&nbsp;&nbsp;<span class={cl('api-side-nav__title-api')}>API</span>
+  </a>
+  <div class={cl('api-side-nav__search')}>
+    <SearchBar client:load />
+  </div>
+  <ul class={cl('api-side-nav__list')}>
+    {categories.map((cat) => {
+      const isActive = cat.slug === currentSlug;
+      const categoryHref = localizedHref(lang, `/api/latest/${cat.slug}/`);
+      return (
+        <li>
+          <a
+            href={categoryHref}
+            class:list={[cl('api-side-nav__category'), isActive && cl('api-side-nav__category--active')]}
+          >
+            {cat.name}
+          </a>
+          <ul class:list={[cl('api-side-nav__operations'), isActive && cl('api-side-nav__operations--expanded')]}>
+            {cat.operations.map((op) => (
+              <li>
+                <a href={`${categoryHref}#${op.slug}`} class={cl('api-side-nav__operation')}>
+                  {op.summary}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

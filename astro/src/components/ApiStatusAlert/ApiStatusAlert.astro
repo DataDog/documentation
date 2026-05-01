@@ -1,0 +1,44 @@
+---
+interface Props {
+  type: 'deprecated' | 'unstable' | 'beta';
+  newerVersionUrl?: string;
+  message?: string;
+}
+
+const { type, newerVersionUrl, message } = Astro.props;
+
+const defaults: Record<string, { label: string; defaultMessage: string }> = {
+  deprecated: {
+    label: 'Deprecated',
+    defaultMessage: 'This endpoint is deprecated.',
+  },
+  unstable: {
+    label: 'Unstable',
+    defaultMessage: 'This endpoint is unstable and may change without notice.',
+  },
+  beta: {
+    label: 'Beta',
+    defaultMessage: 'This endpoint is in beta and may change.',
+  },
+};
+
+const config = defaults[type];
+const displayMessage = message || config.defaultMessage;
+
+import styles from './ApiStatusAlert.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+const cl = classListFactory(styles);
+---
+
+<div
+  class={cl('api-status-alert', `api-status-alert--${type}`)}
+  role="alert"
+>
+  <span class={cl('api-status-alert__label')}>{config.label}</span>
+  <span class={cl('api-status-alert__message')}>
+    <Fragment set:html={displayMessage} />
+    {newerVersionUrl && type === 'deprecated' && (
+      <a href={newerVersionUrl} class={cl('api-status-alert__link')}>Use the newer version.</a>
+    )}
+  </span>
+</div>

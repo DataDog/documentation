@@ -1,0 +1,127 @@
+footer_resources:
+    - name: 'Pricing'
+      url: 'pricing/'
+      weight: 100
+    - name: 'Documentation'
+      url: 'https://docs.datadoghq.com/'
+      target: '_blank'
+      weight: 105
+    - name: 'Support'
+      url: 'support/'
+      weight: 110
+    - name: 'Services & Enablement'
+      url: 'support-services/'
+      weight: 115
+    - name: 'Product Preview Program'
+      url: 'product-preview/'
+      weight: 116
+    # - name: 'Learning Center'
+    #   url: 'https://learn.datadoghq.com/'
+    #   target: '_blank'
+    #   weight: 115
+    - name: 'Certification'
+      url: 'certification/overview/'
+      weight: 120
+    - name: 'Open Source'
+      url: 'https://opensource.datadoghq.com/'
+      weight: 121
+    # - name: 'Resources'
+    #   url: 'resources/'
+    #   weight: 125
+    - name: 'Events and Webinars'
+      url: 'events-webinars/'
+      weight: 130
+    - name: 'Security'
+      url: 'security/'
+      weight: 135
+    - name: 'Privacy Center'
+      url: 'privacy/'
+      weight: 140
+    - name: 'Knowledge Center'
+      url: 'knowledge-center/'
+      weight: 145
+    - name: 'Learning Resources'
+      url: 'learn/'
+      weight: 150
+
+footer_about:
+    - name: 'Contact Us'
+      url: 'about/contact/'
+      weight: 100
+    - name: 'Partners'
+      url: 'partner/network/'
+      target: '_blank'
+      weight: 105
+    - name: 'Press'
+      url: 'about/latest-news/press-releases/'
+      weight: 110
+    - name: 'Leadership'
+      url: 'about/leadership/'
+      weight: 115
+    - name: 'Careers'
+      url: 'https://careers.datadoghq.com/'
+      target: '_blank'
+      weight: 120
+    - name: 'Legal'
+      url: 'legal/'
+      weight: 125
+    - name: 'Investor Relations'
+      url: 'https://investors.datadoghq.com/'
+      target: '_blank'
+      weight: 130
+    - name: 'Analyst Reports'
+      url: 'about/analyst/'
+      weight: 135
+    - name: 'ESG Report'
+      url: 'esg-report/'
+      weight: 140
+    - name: 'Vendor Help'
+      url: 'vendor-help/'
+      weight: 145
+    - name: 'Trust Hub'
+      url: 'trust/'
+      weight: 150
+
+footer_blog:
+    - name: 'The Monitor'
+      url: 'blog/'
+      weight: 100
+    - name: 'Engineering'
+      url: 'blog/engineering/'
+      weight: 105
+    - name: 'AI'
+      url: 'blog/ai/'
+      weight: 110
+    - name: 'Security Labs'
+      url: 'https://securitylabs.datadoghq.com/'
+      target: '_blank'
+      weight: 115
+
+footer_social:
+    - name: 'Twitter'
+      url: 'https://twitter.com/datadoghq'
+      weight: 100
+      pre: 'twitter-x'
+    - name: 'Instagram'
+      url: 'https://www.instagram.com/datadoghq/'
+      weight: 105
+      pre: 'instagram'
+    - name: 'Youtube'
+      url: 'https://www.youtube.com/user/DatadogHQ'
+      weight: 110
+      pre: 'youtube-tetra'
+    - name: 'LinkedIn'
+      url: 'https://www.LinkedIn.com/company/datadog/'
+      weight: 115
+      pre: 'linkedin-new'
+
+footer_sub:
+    - name: 'Terms'
+      url: 'legal/terms/'
+      weight: 100
+    - name: 'Privacy'
+      url: 'legal/privacy/'
+      weight: 105
+    - name: 'Cookies'
+      url: 'legal/cookies/'
+      weight: 110

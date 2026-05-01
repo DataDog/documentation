@@ -1,0 +1,190 @@
+---
+title: "Typography"
+---
+
+# Heading 1
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+
+## Heading 2
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+### Heading 3
+
+Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris.
+
+#### Heading 4
+
+Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit.
+
+##### Heading 5
+
+Fusce iaculis ligula nec est. Morbi euismod sagittis libero. Nullam sit amet magna in magna gravida vehicula.
+
+###### Heading 6
+
+Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+
+---
+
+## Paragraphs
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
+
+---
+
+## Inline styles
+
+This sentence has **bold text** and *italic text* and ***bold italic text***.
+
+This sentence has `inline code` mixed with regular text.
+
+This sentence has a [link to another page](/docs/test_pages/integration/typography) in it.
+
+---
+
+## Unordered lists
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit:
+
+- First item
+- Second item
+- Third item with a longer description that may wrap to multiple lines depending on viewport width
+- Fourth item
+  - Nested item one
+  - Nested item two
+    - Deeply nested item
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+---
+
+## Ordered lists
+
+Follow these steps to get started:
+
+1. First step
+2. Second step
+3. Third step
+   1. Sub-step one
+   2. Sub-step two
+      1. Sub-sub-step one
+
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.
+
+---
+
+## Mixed lists
+
+1. Install the agent
+   - Download the package
+   - Run the installer
+2. Configure your environment
+   - Set the API key
+   - Choose your site
+
+---
+
+## Blockquote
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+> This is a blockquote. It can be used to highlight a passage or quote from another source. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+> This is a multi-paragraph blockquote.
+>
+> It has two paragraphs inside it. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+---
+
+## Horizontal rule
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+---
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+
+---
+
+## Links
+
+A [standard link](/docs/test_pages/integration/typography) in a paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+A paragraph with [multiple](/docs/test_pages/integration/typography) different [links](/docs/test_pages/integration/typography) in it. Sed do eiusmod tempor incididunt ut labore.
+
+---
+
+## Code
+
+Inline `code` appears in a paragraph like this. Multiple `inline code` spans can appear in the `same sentence`. Lorem ipsum dolor sit amet.
+
+A fenced code block:
+
+```python
+def hello(name: str) -> str:
+    return f"Hello, {name}!"
+```
+
+---
+
+## Tables
+
+| Column A | Column B | Column C |
+|----------|----------|----------|
+| Row 1, Cell 1 | Row 1, Cell 2 | Row 1, Cell 3 |
+| Row 2, Cell 1 | Row 2, Cell 2 | Row 2, Cell 3 |
+| Row 3, Cell 1 | Row 3, Cell 2 | Row 3, Cell 3 |
+| Row 4, Cell 1 | Row 4, Cell 2 | Row 4, Cell 3 |
+
+A table with `inline code` and **bold**:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `api_key` | `string` | Your Datadog API key |
+| `site` | `string` | The Datadog site to use |
+| **required** | `boolean` | Whether the field is required |
+
+---
+
+## Combined elements
+
+### Code in a list
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit:
+
+- Use `pip install datadog` to install the Python library
+- Use `gem install dogapi` to install the Ruby library
+- Use `go get github.com/DataDog/datadog-api-client-go` for Go
+
+### Alerts in context
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+{% alert level="info" %}
+This is an info alert within a typography showcase. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+{% /alert %}
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+{% alert level="tip" %}
+Alerts can appear between any block-level elements. Excepteur sint occaecat cupidatat non proident.
+{% /alert %}
+
+Curabitur pretium tincidunt lacus. Nulla gravida orci a odio.
+
+### Heading after a list
+
+- Item one
+- Item two
+
+#### This heading follows a list
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

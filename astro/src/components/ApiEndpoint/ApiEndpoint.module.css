@@ -1,0 +1,103 @@
+.api-endpoint {
+  margin-bottom: var(--space-xl);
+}
+
+.api-endpoint__heading {
+  margin: 0 0 var(--space-sm);
+  display: flex;
+  align-items: center;
+}
+
+.api-endpoint__version-badge {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  padding: 0.1em 0.5em;
+  margin-left: auto;
+  border-radius: var(--border-radius);
+  background: var(--color-highlight-bg);
+  color: var(--color-text-muted);
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.api-endpoint__url-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.api-endpoint__path {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  background: var(--color-highlight-bg);
+  padding: 0.15rem var(--space-sm);
+  border-radius: var(--border-radius);
+  word-break: break-all;
+}
+
+.api-endpoint__path--unsupported {
+  color: var(--color-text-muted);
+  font-style: italic;
+  background: transparent;
+}
+
+.api-endpoint__permissions {
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-md);
+  color: var(--color-text-muted);
+}
+
+.api-endpoint__permissions code {
+  background: var(--color-highlight-bg);
+  padding: 0 0.25em;
+  border-radius: 2px;
+}
+
+.api-endpoint__section {
+  margin-bottom: var(--space-xl);
+}
+
+.api-endpoint__section h3 {
+  margin: 0 0 var(--space-sm);
+}
+
+.request-body-tabs__examples {
+  margin-top: var(--space-sm);
+}
+
+.request-body-tabs__examples details {
+  margin-bottom: var(--space-sm);
+}
+
+.request-body-tabs__examples summary {
+  cursor: pointer;
+  color: var(--color-brand);
+  font-size: var(--font-size-sm);
+}
+
+.api-endpoint__example-pre {
+  background: var(--color-panel-bg);
+  border: var(--border-width) solid var(--color-panel-border);
+  border-top: var(--border-width-highlight) solid var(--color-panel-accent);
+  border-radius: var(--border-radius);
+  padding: var(--space-sm);
+  overflow-x: auto;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-code);
+  max-height: var(--code-max-height);
+  margin: var(--space-sm) 0 0;
+}
+
+.api-endpoint__example-pre code {
+  font-family: var(--font-family-mono);
+  background: none;
+  padding: 0;
+}
+
+.api-endpoint__divider {
+  border: none;
+  border-top: var(--border-width) solid var(--color-border);
+  margin: 70px 0 var(--space-xl);
+}

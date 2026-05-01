@@ -1,0 +1,90 @@
+---
+title: "Tabs"
+description: "Astro wrapper with a Preact island (TabsNav, client:load) for active-tab management. All tab panels are rendered as static HTML at build time."
+type: interactive
+---
+
+# Tabs
+
+A tabbed interface for organizing content into switchable panels. Built with Preact for client-side interactivity with static HTML at build time. When there are too many tabs to fit on one line, the component switches to a pills layout that wraps.
+
+## Properties
+
+### `tabs` tag
+
+Container tag. No attributes.
+
+### `tab` tag (child of `tabs`)
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `label` | `string` | — | The tab label displayed in the navigation |
+
+## Examples
+
+### Basic tabs
+
+{% tabs %}
+{% tab label="Python" %}
+Install the Python client:
+
+```python
+pip install datadog
+```
+{% /tab %}
+{% tab label="Ruby" %}
+Install the Ruby client:
+
+```ruby
+gem install dogapi
+```
+{% /tab %}
+{% tab label="Go" %}
+Install the Go client:
+
+```go
+go get github.com/DataDog/datadog-api-client-go
+```
+{% /tab %}
+{% /tabs %}
+
+### Many tabs (pills layout)
+
+{% tabs %}
+{% tab label="Python" %}
+Python content
+{% /tab %}
+{% tab label="Ruby" %}
+Ruby content
+{% /tab %}
+{% tab label="Go" %}
+Go content
+{% /tab %}
+{% tab label="Java" %}
+Java content
+{% /tab %}
+{% tab label="JavaScript" %}
+JavaScript content
+{% /tab %}
+{% tab label="TypeScript" %}
+TypeScript content
+{% /tab %}
+{% tab label="PHP" %}
+PHP content
+{% /tab %}
+{% tab label="C#" %}
+C# content
+{% /tab %}
+{% tab label="Swift" %}
+Swift content
+{% /tab %}
+{% tab label="Kotlin" %}
+Kotlin content
+{% /tab %}
+{% tab label="Rust" %}
+Rust content
+{% /tab %}
+{% tab label="Scala" %}
+Scala content
+{% /tab %}
+{% /tabs %}

@@ -1,0 +1,11 @@
+---
+import { RegionSelector } from './RegionSelector';
+import { buildClientRegions } from '../../config/regions';
+
+// Resolve the region list at build time so the `yaml` parser and the full
+// `regions.config.js` data object never reach the client bundle. The slim
+// `ClientRegion[]` shape is serialized as the island's prop.
+const regions = buildClientRegions();
+---
+
+<RegionSelector regions={regions} client:load />

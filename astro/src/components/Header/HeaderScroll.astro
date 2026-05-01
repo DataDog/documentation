@@ -1,0 +1,39 @@
+---
+// Inline scroll listener that drives the --hugo-header-shrink token. Matches
+// the previous BaseLayout implementation verbatim; relocating the logic here
+// so the header owns its own scroll behavior.
+---
+
+<script is:inline>
+  (function () {
+    var root = document.documentElement;
+    var DESKTOP_MIN_WIDTH = 992;
+    var MAX_SHRINK = 65;
+    var ticking = false;
+
+    function update() {
+      var shrink = window.innerWidth >= DESKTOP_MIN_WIDTH
+        ? Math.min(window.scrollY, MAX_SHRINK)
+        : 0;
+      root.style.setProperty('--hugo-header-shrink', shrink + 'px');
+      // Toggle the legacy .main-nav-scrolled class so ported Hugo CSS rules
+      // that key off that class still apply (logo-download-div top, etc).
+      if (shrink >= MAX_SHRINK) {
+        root.classList.add('main-nav-scrolled');
+      } else {
+        root.classList.remove('main-nav-scrolled');
+      }
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  })();
+</script>

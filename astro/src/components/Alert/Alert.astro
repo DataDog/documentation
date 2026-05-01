@@ -1,0 +1,24 @@
+---
+import styles from './Alert.module.css';
+import { classListFactory } from '../../utils/classListFactory';
+
+interface Props {
+  level?: 'info' | 'danger' | 'warning' | 'tip';
+}
+
+const labels: Record<string, string> = {
+  info: 'Note',
+  danger: 'Caution',
+  warning: 'Warning',
+  tip: 'Tip',
+};
+
+const { level = 'info' } = Astro.props;
+const label = labels[level] ?? level;
+const cl = classListFactory(styles);
+---
+
+<div class={cl('alert', `alert--${level}`)}>
+  <strong class={cl('alert__label')}>{label}</strong>
+  <slot />
+</div>

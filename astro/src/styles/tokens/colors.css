@@ -1,0 +1,297 @@
+:root {
+  /* Colors — Brand */
+  --color-brand: #632ca6;
+  --color-brand-hover: #7b3fc4;
+  --color-brand-tint: rgba(99, 44, 166, 0.05);
+
+  /* Colors — Text */
+  --color-text: #333;
+  --color-text-muted: #666;
+  --color-text-inverse: #fff;
+
+  /* Colors — Surface */
+  --color-bg: #fff;
+  --color-border: #ddd;
+  --color-border-strong: #eee;
+  --color-border-dark: #c7c7c7;
+  --color-scrollbar: rgba(0, 0, 0, 0.2);
+
+  /* Colors — Status */
+  --color-status-text: #4a4a4a;
+  --color-info: #006bc2;
+  --color-info-emphasis: #004a8c;
+  --color-caution: #facc00;
+  --color-caution-emphasis: #7f4205;
+  --color-warning: #eb364b;
+  --color-warning-emphasis: #9b3908;
+  --color-accent: #9364cd;
+  --color-accent-emphasis: #4a2c6a;
+
+  /* Colors — Panel */
+  --color-panel-bg: #fff;
+  --color-panel-text: #000;
+  --color-panel-border: #ddd;
+  --color-panel-header: rgba(119, 0, 255, 0.15);
+  --color-panel-accent: rgba(119, 0, 255, 0.3);
+  --color-highlight-bg: #f2f2f2;
+  --color-highlight-text: #555;
+
+  /* Colors — Surface variants */
+  --color-surface-border: #ebebeb;
+  --color-surface-header: #f3edff;
+  --color-surface-header-text: #000;
+  --color-surface-alt: #fdfcff;
+  --color-surface-bg: #fdfcff;
+  --color-bg-hover: rgba(0, 0, 0, 0.02);
+
+  /* Colors — Named (badge/indicator pairs) */
+  --color-teal: #26759c;
+  --color-teal-tint: #ebf5fa;
+  --color-forest: #297a3f;
+  --color-forest-tint: #d9f3e0;
+  --color-plum: #5f3b83;
+  --color-plum-tint: #d6c9e3;
+  --color-amber: #906623;
+  --color-amber-tint: #fff0d4;
+  --color-crimson: #b72a3a;
+  --color-crimson-tint: #fbd6db;
+  --color-gray-lightest: #f6f6f6;
+
+  /* Colors — Semantic */
+  --color-blue: #1a73e8;
+  --color-blue-tint: rgba(26, 115, 232, 0.1);
+  --color-green: #2e7d32;
+  --color-green-tint: rgba(46, 125, 50, 0.1);
+  --color-orange: #e65100;
+  --color-orange-tint: rgba(230, 81, 0, 0.1);
+  --color-yellow: #f9a825;
+  --color-yellow-tint: rgba(249, 168, 37, 0.15);
+  --color-red: #c62828;
+  --color-red-tint: rgba(198, 40, 40, 0.1);
+
+  /* Colors — Placeholder (for work-in-progress layout slots) */
+  --color-placeholder-bg: #e9d8f4;
+  --color-placeholder-outline: #632ca6;
+  --color-placeholder-text: var(--color-placeholder-outline);
+}
+
+[data-theme='dark'] {
+  /* Colors — Brand */
+  --color-brand: #9b6dd7;
+  --color-brand-hover: #b388e0;
+  --color-brand-tint: rgba(155, 109, 215, 0.1);
+
+  /* Colors — Text */
+  --color-text: #e0e0e0;
+  --color-text-muted: #999;
+  --color-text-inverse: #1a1a2e;
+
+  /* Colors — Surface */
+  --color-bg: #1a1a2e;
+  --color-border: #333;
+  --color-border-strong: #2a2a3e;
+  --color-border-dark: #444;
+  --color-scrollbar: rgba(255, 255, 255, 0.2);
+
+  /* Colors — Status */
+  --color-status-text: #ccc;
+  --color-info: #4da6ff;
+  --color-info-emphasis: #7bbfff;
+  --color-caution: #ffe066;
+  --color-caution-emphasis: #ffe066;
+  --color-warning: #f06070;
+  --color-warning-emphasis: #f09090;
+  --color-accent: #b08ee6;
+  --color-accent-emphasis: #c9b0f0;
+
+  /* Colors — Panel */
+  --color-panel-bg: #0d1117;
+  --color-panel-text: #e0e0e0;
+  --color-panel-border: #333;
+  --color-panel-header: rgba(155, 109, 215, 0.15);
+  --color-panel-accent: rgba(155, 109, 215, 0.3);
+  --color-highlight-bg: #2a2a3e;
+  --color-highlight-text: #ccc;
+
+  /* Colors — Surface variants */
+  --color-surface-border: #444;
+  --color-surface-header: #2a2040;
+  --color-surface-header-text: #e0e0e0;
+  --color-surface-alt: #1e1a30;
+  --color-surface-bg: #1e1a30;
+  --color-bg-hover: rgba(255, 255, 255, 0.04);
+
+  /* Colors — Named (badge/indicator pairs) */
+  --color-teal: #5baed4;
+  --color-teal-tint: rgba(91, 174, 212, 0.15);
+  --color-forest: #5cc47a;
+  --color-forest-tint: rgba(92, 196, 122, 0.15);
+  --color-plum: #a07dd4;
+  --color-plum-tint: rgba(160, 125, 212, 0.15);
+  --color-amber: #d4a84f;
+  --color-amber-tint: rgba(212, 168, 79, 0.15);
+  --color-crimson: #e86070;
+  --color-crimson-tint: rgba(232, 96, 112, 0.15);
+  --color-gray-lightest: #242438;
+
+  /* Colors — Semantic */
+  --color-blue: #5b9cf5;
+  --color-blue-tint: rgba(91, 156, 245, 0.15);
+  --color-green: #66bb6a;
+  --color-green-tint: rgba(102, 187, 106, 0.15);
+  --color-orange: #ff8a50;
+  --color-orange-tint: rgba(255, 138, 80, 0.15);
+  --color-yellow: #fdd835;
+  --color-yellow-tint: rgba(253, 216, 53, 0.15);
+  --color-red: #ef5350;
+  --color-red-tint: rgba(239, 83, 80, 0.15);
+
+  /* Colors — Placeholder (swap the two purples for dark mode) */
+  --color-placeholder-bg: #632ca6;
+  --color-placeholder-outline: #e9d8f4;
+  --color-placeholder-text: var(--color-placeholder-outline);
+}
+
+[data-scroll='on'] {
+  /* Colors — Brand */
+  --color-brand: #8b4513;
+  --color-brand-hover: #a0522d;
+  --color-brand-tint: rgba(139, 69, 19, 0.08);
+
+  /* Colors — Text */
+  --color-text: #3c2415;
+  --color-text-muted: #6b4c3b;
+  --color-text-inverse: #f5e6c8;
+
+  /* Colors — Surface */
+  --color-bg: #f5e6c8;
+  --color-border: #c4a97d;
+  --color-border-strong: #d4b88a;
+  --color-border-dark: #a08060;
+  --color-scrollbar: rgba(60, 36, 21, 0.3);
+
+  /* Colors — Status */
+  --color-status-text: #5a3a28;
+  --color-info: #6b4c3b;
+  --color-info-emphasis: #4a3020;
+  --color-caution: #c4a030;
+  --color-caution-emphasis: #7f5a05;
+  --color-warning: #a03020;
+  --color-warning-emphasis: #7a2010;
+  --color-accent: #8b6914;
+  --color-accent-emphasis: #5a4010;
+
+  /* Colors — Panel */
+  --color-panel-bg: #efe0c4;
+  --color-panel-text: #3c2415;
+  --color-panel-border: #c4a97d;
+  --color-panel-header: rgba(139, 69, 19, 0.12);
+  --color-panel-accent: rgba(139, 69, 19, 0.2);
+  --color-highlight-bg: #e8d5b0;
+  --color-highlight-text: #5a3a28;
+
+  /* Colors — Surface variants */
+  --color-surface-border: #c4a97d;
+  --color-surface-header: #e8d5b0;
+  --color-surface-header-text: #3c2415;
+  --color-surface-alt: #f0dfc0;
+  --color-surface-bg: #f0dfc0;
+  --color-bg-hover: rgba(60, 36, 21, 0.05);
+
+  /* Colors — Named (badge pairs) */
+  --color-teal: #5a7a6a;
+  --color-teal-tint: rgba(90, 122, 106, 0.15);
+  --color-forest: #4a6a3a;
+  --color-forest-tint: rgba(74, 106, 58, 0.15);
+  --color-plum: #7a5a4a;
+  --color-plum-tint: rgba(122, 90, 74, 0.15);
+  --color-amber: #8b6914;
+  --color-amber-tint: rgba(139, 105, 20, 0.15);
+  --color-crimson: #8b3020;
+  --color-crimson-tint: rgba(139, 48, 32, 0.15);
+  --color-gray-lightest: #ebd9b2;
+
+  /* Colors — Semantic */
+  --color-blue: #4a6a8a;
+  --color-blue-tint: rgba(74, 106, 138, 0.12);
+  --color-green: #4a6a3a;
+  --color-green-tint: rgba(74, 106, 58, 0.12);
+  --color-orange: #a05a20;
+  --color-orange-tint: rgba(160, 90, 32, 0.12);
+  --color-yellow: #b08a10;
+  --color-yellow-tint: rgba(176, 138, 16, 0.15);
+  --color-red: #8b3020;
+  --color-red-tint: rgba(139, 48, 32, 0.12);
+}
+
+[data-theme='dark'][data-scroll='on'] {
+  /* Colors — Brand */
+  --color-brand: #c4943a;
+  --color-brand-hover: #d4a84f;
+  --color-brand-tint: rgba(196, 148, 58, 0.1);
+
+  /* Colors — Text */
+  --color-text: #d4c4a0;
+  --color-text-muted: #a08a6a;
+  --color-text-inverse: #2a1f14;
+
+  /* Colors — Surface */
+  --color-bg: #2a1f14;
+  --color-border: #5a4530;
+  --color-border-strong: #4a3a28;
+  --color-border-dark: #6a5540;
+  --color-scrollbar: rgba(212, 196, 160, 0.25);
+
+  /* Colors — Status */
+  --color-status-text: #baa880;
+  --color-info: #8aaa8a;
+  --color-info-emphasis: #a0c4a0;
+  --color-caution: #d4b060;
+  --color-caution-emphasis: #e0c478;
+  --color-warning: #c47050;
+  --color-warning-emphasis: #d48a70;
+  --color-accent: #c4a050;
+  --color-accent-emphasis: #d4b468;
+
+  /* Colors — Panel */
+  --color-panel-bg: #1e1610;
+  --color-panel-text: #d4c4a0;
+  --color-panel-border: #5a4530;
+  --color-panel-header: rgba(196, 148, 58, 0.15);
+  --color-panel-accent: rgba(196, 148, 58, 0.25);
+  --color-highlight-bg: #3a2a1e;
+  --color-highlight-text: #baa880;
+
+  /* Colors — Surface variants */
+  --color-surface-border: #5a4530;
+  --color-surface-header: #3a2a1e;
+  --color-surface-header-text: #d4c4a0;
+  --color-surface-alt: #241a10;
+  --color-surface-bg: #241a10;
+  --color-bg-hover: rgba(212, 196, 160, 0.05);
+
+  /* Colors — Named (badge pairs) */
+  --color-teal: #6aaa8a;
+  --color-teal-tint: rgba(106, 170, 138, 0.15);
+  --color-forest: #7aaa6a;
+  --color-forest-tint: rgba(122, 170, 106, 0.15);
+  --color-plum: #b09070;
+  --color-plum-tint: rgba(176, 144, 112, 0.15);
+  --color-amber: #d4a84f;
+  --color-amber-tint: rgba(212, 168, 79, 0.15);
+  --color-crimson: #c47050;
+  --color-crimson-tint: rgba(196, 112, 80, 0.15);
+  --color-gray-lightest: #362818;
+
+  /* Colors — Semantic */
+  --color-blue: #7a9aba;
+  --color-blue-tint: rgba(122, 154, 186, 0.15);
+  --color-green: #7aaa6a;
+  --color-green-tint: rgba(122, 170, 106, 0.15);
+  --color-orange: #c48a50;
+  --color-orange-tint: rgba(196, 138, 80, 0.15);
+  --color-yellow: #d4b060;
+  --color-yellow-tint: rgba(212, 176, 96, 0.15);
+  --color-red: #c47050;
+  --color-red-tint: rgba(196, 112, 80, 0.15);
+}
