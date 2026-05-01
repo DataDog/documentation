@@ -16,7 +16,7 @@ further_reading:
   text: "Cloud Cost Management"
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger"> Governance Console is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> Governance Console is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -39,7 +39,7 @@ The [Summary page][1] displays an overview of your organization's usage of Datad
 
 ### Products
 
-The [Products page][2] displays the Datadog products used by your organization, with relevant metrics for each product. Select **View Details** to see more information about your organization's usage of a particular product, including limits and quotas.
+The [Products page][2] displays the Datadog products used by your organization, with relevant metrics for each product. Select {{< ui >}}View Details{{< /ui >}} to see more information about your organization's usage of a particular product, including limits and quotas.
 
 ### Controls
 

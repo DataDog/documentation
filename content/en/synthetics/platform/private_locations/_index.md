@@ -50,7 +50,7 @@ To use private locations for [Continuous Testing tests][23], you need v1.27.0 or
 
 Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][101] on Docker hub. It can run on a Linux-based OS or Windows OS if the [Docker engine][102] is available on your host and can run in Linux containers mode.**\***
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 
 If you require FIPS support, use the [FIPS compliant image][26] on Docker hub.
 
@@ -110,7 +110,7 @@ To pull test configurations and push test results, the private location worker n
 
 | Port | Endpoint                               | Description                                                   |
 | ---- | -------------------------------------- | ------------------------------------------------------------- |
-| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov" >}} For versions `1.32.0` and later, requests from **Linux containerized Private Locations** are Federal Information Processing Standards (FIPS) compliant. For **Windows Private Locations**, FIPS-compliant encryption is supported in version `1.63.0` and later.{{< /site-region >}} |
+| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov,gov2" >}} For versions `1.32.0` and later, requests from **Linux containerized Private Locations** are Federal Information Processing Standards (FIPS) compliant. For **Windows Private Locations**, FIPS-compliant encryption is supported in version `1.63.0` and later.{{< /site-region >}} |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 

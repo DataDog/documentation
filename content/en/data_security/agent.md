@@ -73,7 +73,7 @@ Datadog's Vulnerability Management program includes regular assessments of suppo
 Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis on both its general availability (GA) and release candidate (RC) releases. The Datadog Container Agent can be found in public registries as mentioned in [Docker Agent][10], and additionally, Datadog Agent source code is open source. This empowers customers to perform vulnerability scanning with their preferred tooling based on a cadence that meets their unique needs. This provides the required visibility for customers inclined to monitor the Datadog Agent for potential vulnerabilities.
 
 If you believe you've discovered a bug in Datadog's security, see [Report An Issue][11]. 
-To check the status of a specific CVE, see the [Public Artifact Vulnerabilities page][19]. For additional information, contact [Datadog Support][12] through your standard support process. When submitting a support ticket through the Datadog website, set the `Product type` field to `Vulnerability Inquiry on Datadog Product`.
+To check the status of a specific CVE, see the [Public Artifact Vulnerabilities page][19]. For additional information, contact [Datadog Support][12] through your standard support process. When submitting a support ticket through the Datadog website, set the {{< ui >}}Product type{{< /ui >}} field to {{< ui >}}Vulnerability Inquiry on Datadog Product{{< /ui >}}.
 
 ## Running as an unprivileged user
 
@@ -91,7 +91,7 @@ For more information, see the [Secrets Management][14] documentation.
 
 ## Telemetry collection
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 
 The Agent on non-government sites collects environmental, performance, and feature usage information about the Datadog Agent. When the Agent detects a government site, or the [Datadog Agent FIPS Proxy][1] is used, the Agent automatically disables this telemetry collection. When such detection is impossible (for example, if a proxy is being used), Agent telemetry is emitted, but immediately dropped at Datadog's intake.
 
@@ -203,12 +203,30 @@ agent diagnose show-metadata agent-telemetry
 | synthetics_agent.error_test_config          | Number of test config errors                                                                                           |
 | synthetics_agent.traceroute_error           | Number of traceroute errors                                                                                            |
 | synthetics_agent.evp_send_result_failure    | Number of errors when sending results                                                                                  |
+| **Cluster Agent**                           |                                                                                                                        |
+| admission_webhooks.mutation_attempts        | Number of admission webhook mutation attempts                                                                          |
+| admission_webhooks.library_injection_attempts | Number of library injection attempts                                                                                 |
+| admission_webhooks.library_injection_errors | Number of library injection errors                                                                                     |
+| admission_webhooks.patcher_errors           | Number of admission webhook patcher errors                                                                             |
+| admission_webhooks.rc_provider_configs      | Number of remote configuration provider configs                                                                        |
+| admission_webhooks.rc_provider_configs_invalid | Number of invalid remote configuration provider configs                                                             |
+| admission_webhooks.image_resolution_attempts | Number of image resolution attempts                                                                                   |
+| autodiscovery.errors                        | Number of Autodiscovery errors                                                                                         |
+| autodiscovery.watched_resources             | Number of Autodiscovery watched resources                                                                              |
+| cluster_checks.configs_dispatched           | Number of cluster check configurations dispatched                                                                      |
+| cluster_checks.configs_dangling             | Number of dangling cluster check configurations                                                                        |
+| cluster_checks.configs_info                 | Names of dispatched cluster checks                                                                             |
+| cluster_checks.unscheduled_check            | Number of unscheduled cluster checks                                                                                   |
+| language_detection_patcher.patches          | Number of language detection patcher patches                                                                           |
+| tagger.stored_entities                      | Number of entities stored in the Tagger                                                                                |
+| workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta                                                                              |
+| workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/sender.go#L218-L221
-[2]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/config.go#L156
+[2]: https://github.com/search?q=repo%3ADataDog%2Fdatadog-agent+content%3A%2Fvar+defaultProfiles%2F+path%3Acomp%2Fcore%2Fagenttelemetry%2Fimpl%2Fconfig.go+content%3A%2Fprofiles%3A%2F+content%3A%2F-+name%3A+checks%2F+content%3A%2Fmetric%3A%2F+content%3A%2Fexclude%3A%2F&type=code
 
 {{< /site-region >}}
 

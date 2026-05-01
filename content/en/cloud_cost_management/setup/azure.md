@@ -55,20 +55,20 @@ Use the dropdown to select the scope type for your account. CCM supports the bil
 
 The Terraform configuration supports three setups depending on your existing Azure resources:
 
-* **New setup**: Select **Create storage account and container** to create a storage account, container, and cost exports.
-* **Existing storage account and container**: Unselect **Create storage account and container** and select **Create cost exports** to use existing storage but create new cost exports.
+* **New setup**: Select {{< ui >}}Create storage account and container{{< /ui >}} to create a storage account, container, and cost exports.
+* **Existing storage account and container**: Unselect {{< ui >}}Create storage account and container{{< /ui >}} and select {{< ui >}}Create cost exports{{< /ui >}} to use existing storage but create new cost exports.
 * **Existing storage account, container, and cost exports**: Unselect both options to use existing storage and cost exports.
 
 ### Configure the scope and export details
 
 Enter the following details for your configuration:
 
-* **Billing account or Subscription ID**: Depending on the scope selected in Step 1, the relevant billing account ID or subscription ID.
-* **Resource group name**: The name of your existing resource group in the selected scope. A pre-existing resource group is required for the Terraform setup.
-* **Location**: The Azure location of your resource group. For example, `East US 2`.
-* **Storage account and container name**: Depending on the resources you have selected to create, the names of your new or pre-existing storage account and container.
-* **Actual cost export name and path**: The name and path of your actual cost export.
-* **Amortized cost export name and path**: The name and path of your amortized cost export.
+* {{< ui >}}Billing account or Subscription ID{{< /ui >}}: Depending on the scope selected in Step 1, the relevant billing account ID or subscription ID.
+* {{< ui >}}Resource group name{{< /ui >}}: The name of your existing resource group in the selected scope. A pre-existing resource group is required for the Terraform setup.
+* {{< ui >}}Location{{< /ui >}}: The Azure location of your resource group. For example, `East US 2`.
+* {{< ui >}}Storage account and container name{{< /ui >}}: Depending on the resources you have selected to create, the names of your new or pre-existing storage account and container.
+* {{< ui >}}Actual cost export name and path{{< /ui >}}: The name and path of your actual cost export.
+* {{< ui >}}Amortized cost export name and path{{< /ui >}}: The name and path of your amortized cost export.
   * **Note:** The following prefix formats are not supported: empty, starting with `/` (such as `/` or `/cost`), or ending with `/` (such as `cost/`). Prefixes containing `/` in the middle are supported (such as `cost/hourly`).
 
 ### Copy generated Azure resource Terraform HCL and apply changes
@@ -79,15 +79,15 @@ After the fields in Step 2 are complete, Step 3 enables and displays the generat
 
 {{< img src="cloud_cost/setup/azure_toggle_file_partitioning.png" alt="Toggle on file partitioning for both exports" style="width:50%" >}}
 
-Open the Azure console link to locate your cost exports. If needed, change the current scope to the correct one for your exports. For both actual and amortized exports, select them and click **Edit** to toggle on File Partitioning if not already enabled.
+Open the Azure console link to locate your cost exports. If needed, change the current scope to the correct one for your exports. For both actual and amortized exports, select them and click {{< ui >}}Edit{{< /ui >}} to toggle on File Partitioning if not already enabled.
 
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" style="width:50%" >}}
 
-Save the File Partitioning changes and click **Run Now**. Return to CCM once both export runs have succeeded.
+Save the File Partitioning changes and click {{< ui >}}Run Now{{< /ui >}}. Return to CCM once both export runs have succeeded.
 
 ### Copy generated Datadog HCL and apply changes
 
-Follow the instructions in the **Apply Datadog Terraform HCL** step. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
+Follow the instructions in the {{< ui >}}Apply Datadog Terraform HCL{{< /ui >}} step. Resolve any issues that appear while running `terraform plan` or `terraform apply` before returning to CCM to confirm account creation.
 
 {{% /tab %}}
 
@@ -99,20 +99,20 @@ Follow the instructions in the **Apply Datadog Terraform HCL** step. Resolve any
 
 You need to generate exports for two data types: **actual** and **amortized**. Datadog recommends using the same storage container for both exports.
 
-1. Navigate to [Cost Management | Configuration][5] under Azure portal's **Tools** > **Cost Management** > **Settings** > **Configuration** and click **Exports**.
+1. Navigate to [Cost Management | Configuration][5] under Azure portal's {{< ui >}}Tools{{< /ui >}} > {{< ui >}}Cost Management{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} and click {{< ui >}}Exports{{< /ui >}}.
   {{< img src="cloud_cost/azure_export_path.png" alt="In Azure portal highlighting Exports option in navigation" style="width:100%" >}}
 2. Select the export scope located next to the search filter.
 
-   **Note:** The scope must be **billing account**, **subscription**, or **resource group**.
-3. After the scope is selected, click **Schedule export**.
+   **Note:** The scope must be {{< ui >}}billing account{{< /ui >}}, {{< ui >}}subscription{{< /ui >}}, or {{< ui >}}resource group{{< /ui >}}.
+3. After the scope is selected, click {{< ui >}}Schedule export{{< /ui >}}.
 
    {{< img src="cloud_cost/azure_exports_page.png" alt="In Azure portal highlighting the export scope and schedule button" style="width:100%" >}}
 
-4. Select the **Cost and usage (actual + amortized)** template
+4. Select the {{< ui >}}Cost and usage (actual + amortized){{< /ui >}} template
     {{< img src="cloud_cost/azure_new_export.png" alt="New export page with template and manual options highlighted" style="width:100%" >}}
 
-5. Click **Edit** on each export and confirm the following details:
-    - Frequency: **Daily export of month-to-date costs**
+5. Click {{< ui >}}Edit{{< /ui >}} on each export and confirm the following details:
+    - Frequency: {{< ui >}}Daily export of month-to-date costs{{< /ui >}}
     - Dataset version:
       - Supported versions: `2021-10-01`, `2021-01-01`, `2020-01-01`
       - Unsupported versions: `2019-10-01`
@@ -120,21 +120,21 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 6. Enter an "Export prefix" for the new exports. For example, enter `datadog` to avoid conflicts with existing exports.
 
-7. In the **Destination** tab, select the following details:
-    - Choose **Azure blob storage** as the storage type.
+7. In the {{< ui >}}Destination{{< /ui >}} tab, select the following details:
+    - Choose {{< ui >}}Azure blob storage{{< /ui >}} as the storage type.
     - Choose a storage account, container, and directory for the exports.
         - **Note:** Do not use special characters like `.` in these fields.
         - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-    - Choose **CSV** or **Parquet** as the format.
-    - Choose the compression type. For **CSV**: **Gzip** and **None** are supported. For **Parquet**: **Snappy** and **None** are supported.
-    - Ensure that **File partitioning** is checked.
-    - Ensure that **Overwrite data** is not checked.
-        - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously checked, make sure to clean the files in the directory or move them to another one.
+    - Choose {{< ui >}}CSV{{< /ui >}} or {{< ui >}}Parquet{{< /ui >}} as the format.
+    - Choose the compression type. For {{< ui >}}CSV{{< /ui >}}: {{< ui >}}Gzip{{< /ui >}} and {{< ui >}}None{{< /ui >}} are supported. For {{< ui >}}Parquet{{< /ui >}}: {{< ui >}}Snappy{{< /ui >}} and {{< ui >}}None{{< /ui >}} are supported.
+    - Ensure that {{< ui >}}File partitioning{{< /ui >}} is checked.
+    - Ensure that {{< ui >}}Overwrite data{{< /ui >}} is not checked.
+        - **Note:** Datadog does not support the {{< ui >}}Overwrite data{{< /ui >}} setting. If the setting was previously checked, make sure to clean the files in the directory or move them to another one.
 
    {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
-8. On the **Review + create** tab, select **Create**.
-9. For faster processing, generate the first exports manually by clicking **Run Now**.
+8. On the {{< ui >}}Review + create{{< /ui >}} tab, select {{< ui >}}Create{{< /ui >}}.
+9. Generate the first exports manually by clicking {{< ui >}}Run Now{{< /ui >}}. Wait for successful completion before continuing.
 
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" style="width:50%" >}}
 
@@ -146,12 +146,12 @@ Grant Datadog read access to the storage account where your exports are saved.
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
 3. Choose the storage container your bills are in.
-4. Select the Access Control (IAM) tab, and click **Add**.
-5. Choose **Add role assignment**.
-6. Choose **Storage Blob Data Reader**, then click Next.
+4. Select the {{< ui >}}Access Control (IAM){{< /ui >}} tab, and click {{< ui >}}Add{{< /ui >}}.
+5. Choose {{< ui >}}Add role assignment{{< /ui >}}.
+6. Choose {{< ui >}}Storage Blob Data Reader{{< /ui >}}, then click {{< ui >}}Next{{< /ui >}}.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
-    - Click **Select members**, pick the name of the App Registration, and click **Select**. **Note**: If you do not see your App Registration listed, start typing the name for the UI to update and show it, if it is available.
-    - Select **Review + assign**.
+    - Click {{< ui >}}Select members{{< /ui >}}, pick the name of the App Registration, and click {{< ui >}}Select{{< /ui >}}. **Note**: If you do not see your App Registration listed, start typing the name for the UI to update and show it, if it is available.
+    - Select {{< ui >}}Review + assign{{< /ui >}}.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 
@@ -160,23 +160,23 @@ If your exports are in different storage containers, repeat steps one to seven f
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
 3. Choose the storage container your bills are in.
-4. Select the Access Control (IAM) tab, and click **Add**.
-5. Choose **Add role assignment**.
-6. Choose **Storage Blob Data Reader**, then click Next.
+4. Select the {{< ui >}}Access Control (IAM){{< /ui >}} tab, and click {{< ui >}}Add{{< /ui >}}.
+5. Choose {{< ui >}}Add role assignment{{< /ui >}}.
+6. Choose {{< ui >}}Storage Blob Data Reader{{< /ui >}}, then click {{< ui >}}Next{{< /ui >}}.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
-    - Click **Select members**, pick the name of the App Registration, and click **Select**.
-    - Select **Review + assign**.
+    - Click {{< ui >}}Select members{{< /ui >}}, pick the name of the App Registration, and click {{< ui >}}Select{{< /ui >}}.
+    - Select {{< ui >}}Review + assign{{< /ui >}}.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 {{% /collapse-content %}}
 
 ### Configure Cost Management Reader access
-**Note:** You do not need to configure this access if your scope is **Billing Account**.
+**Note:** You do not need to configure this access if your scope is {{< ui >}}Billing Account{{< /ui >}}.
 
 1. Navigate to your [subscriptions][1] and click your subscription's name.
-2. Select the Access Control (IAM) tab.
-3. Click **Add**, then **Add role assignment**.
-4. Choose **Cost Management Reader**, then click Next.
+2. Select the {{< ui >}}Access Control (IAM){{< /ui >}} tab.
+3. Click {{< ui >}}Add{{< /ui >}}, then {{< ui >}}Add role assignment{{< /ui >}}.
+4. Choose {{< ui >}}Cost Management Reader{{< /ui >}}, then click {{< ui >}}Next{{< /ui >}}.
 5. Assign these permissions to the app registration.
 
 This helps ensure complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
@@ -205,14 +205,14 @@ Azure exports cost data starting from the month you created the export. Datadog 
 1. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. **Note:** If you have already completed setup, and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
 1. Manually export an **actual** and **amortized** report for each calendar month. For example, for June 2025:
     1. Edit the Export
-    2. Change Export Type to "One-time export"
-    3. Set From to 06-01-2025 **Note:** This must be the first day of the month.
-    4. Set End to 06-30-2025 **Note:** This must be the last day of the month.
+    2. Change Export Type to {{< ui >}}One-time export{{< /ui >}}
+    3. Set {{< ui >}}From{{< /ui >}} to 06-01-2025 **Note:** This must be the first day of the month.
+    4. Set {{< ui >}}End{{< /ui >}} to 06-30-2025 **Note:** This must be the last day of the month.
     5. Save the export **Note:** This automatically runs the export
     6. Wait for the export to finish running
 1. Revert both the **actual** and **amortized** exports to their original state to resume daily exports:
     1. Edit the Export
-    2. Change Export Type to "Daily export of month-to-date costs"
+    2. Change Export Type to {{< ui >}}Daily export of month-to-date costs{{< /ui >}}
     3. Save the export
 
 Datadog automatically discovers and ingests this data, and it should appear in Datadog within 24 hours.

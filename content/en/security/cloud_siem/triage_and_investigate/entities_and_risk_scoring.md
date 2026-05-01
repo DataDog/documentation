@@ -6,6 +6,12 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/risk-prioritization-entity-analytics/"
       tag: Blog
       text: "Accelerate investigations with Datadog Cloud SIEM Risk-based Insights and AWS Entity Analytics"
+    - link: "https://www.datadoghq.com/blog/ai-powered-threat-analysis"
+      tag: "Blog"
+      text: "AI in cloud security investigations: The role of UEBA and better telemetry"
+    - link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
+      tag: "Blog"
+      text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
 ---
 
 ## Overview
@@ -52,7 +58,7 @@ The **Next steps** section of the entity side panel includes the available mitig
 
 ## Configure notifications for Risk Insights
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">Notification rules are not supported for the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Notification rules are not supported for the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 You can configure Datadog to send you notifications as soon as it detects new threats that match your criteria.
@@ -63,7 +69,7 @@ You can configure Datadog to send you notifications as soon as it detects new th
 1. Under **Define entity attributes**, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside **Entities matching**, start typing entity attributes and values. As you type, the preview table dynamically displays risk insights that match your criteria.
    <div class="alert alert-info">This step is optional, but if you don't enter any attributes, the notification defaults to sending alerts for all entities.</div>
 1. Under **Set notification conditions**, specify the risk score threshold to trigger notifications for.
-1. Under **Configure notification**, enter a name for the notification, and recipients to send it to.
+1. Under **Configure notification**, enter a name for the notification, add a custom message body, and specify recipients to send it to.
    - Optionally, you can also turn on re-notifications, and specify the period of time that should pass before Datadog re-notifies the recipients that the risk insight still meets the criteria you specified.
 1. To verify your setup, click **Test Notification** to send a test notification to the configured recipients.
 1. Click **Save Notification**.

@@ -11,6 +11,9 @@ further_reading:
   - link: /api/latest/rate-limits/
     tag: Documentation
     text: Rate Limits
+  - link: "https://learn.datadoghq.com/courses/dd-api-automation-iac"
+    tag: "Learning Center"
+    text: "Datadog API: Automation and Infrastructure as Code"
 cascade:
     algolia:
         rank: 10

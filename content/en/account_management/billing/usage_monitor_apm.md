@@ -29,7 +29,7 @@ To ensure that your ingested spans usage remains within the allocation that APM 
 1. Create a [metric monitor][8].
 2. Enter `datadog.estimated_usage.apm.ingested_bytes`for the metric query.
 3. Define the monitor's evaluation window to `current month (MTD)`. This ensures that the monitor is looking at the month-to-date usage. Read more about cumulative time windows in the [monitors][9] documentation.
-4. Define the **Alert threshold** and an optional **Warning threshold** to alert when the ingested volume reaches 80% or 90% of your allotment. 
+4. Define the {{< ui >}}Alert threshold{{< /ui >}} and an optional {{< ui >}}Warning threshold{{< /ui >}} to alert when the ingested volume reaches 80% or 90% of your allotment. 
 5. Enter a name for the monitor. Define the notification to send an alert to your team when the ingested volumes are too high.
 
 {{< img src="account_management/billing/monitor_usage_apm.png" alt="A metric monitor configuration page showing the datadog.estimated_usage.apm.ingested_bytes as the metric query" width="80%" >}}

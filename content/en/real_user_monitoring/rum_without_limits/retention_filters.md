@@ -11,10 +11,21 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/metrics'
     tag: Documentation
     text: Analyze Performance with Metrics
+  - link: '/real_user_monitoring/rum_without_limits/retention_quotas'
+    tag: Documentation
+    text: Control Costs with Retention Quotas
   - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
     tag: "Blog"
     text: "Unify and correlate frontend and backend data with retention filters"
+  - link: 'https://learn.datadoghq.com/courses/rum-retention-filters'
+    tag: 'Learning Center'
+    text: 'Interactive Lab: RUM Retention Filters'
 ---
+
+{{< learning-center-callout header="Try RUM Retention Filters in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/rum-retention-filters" hide_image="false" >}}
+  Learn how to use RUM retention filters to control which session data is stored and optimize your observability budget.
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Retention filters are a set of queries, similar to those used in the RUM Session Explorer, that are executed against the RUM events (sessions, views, actions, resources, and so on) as they are ingested. These filters determine whether a session is stored for the standard 30-day RUM retention period or discarded.
@@ -122,6 +133,10 @@ For example, to exclude sessions from South Korea while retaining all other sess
 
 **Note**: There is no way to prevent a specific event from being retained. You can use negative queries (for instance, adding `-@error.message:"Script error."` to a retention filter targeting RUM Errors) to minimize the volume of undesired events, but other retention filters may still make a positive retention decision about a session that contains the event you tried to filter out.
 
+## Capping retention with quotas
+
+To cap the total number of sessions retained per day across your retention filters, see [Control Costs with Retention Quotas][9].
+
 ## Cross-product retention filters
 
 Cross-product retention filters allow you to optimize the correlation between different products to retain richer telemetry. When configuring a RUM retention filter, you can enable a cross-product retention filter for APM traces.
@@ -166,7 +181,7 @@ See [Retention Filter Best Practices][5].
 
 ## API
 
-Retention filters can be managed through [APIs][6] or Datadog's dedicated [Terraform modules][7].
+Retention filters and cross-product retention filters can be managed through [APIs][6] or Datadog's dedicated [Terraform modules][7].
 
 ## Next steps
 
@@ -184,3 +199,4 @@ Analyze performance with [metrics][8].
 [6]: /api/latest/rum-retention-filters/
 [7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/data-sources/rum_retention_filters
 [8]: /real_user_monitoring/rum_without_limits/metrics
+[9]: /real_user_monitoring/rum_without_limits/retention_quotas

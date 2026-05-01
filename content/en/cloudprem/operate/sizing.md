@@ -2,28 +2,28 @@
 title: Cluster Sizing
 aliases:
 - /cloudprem/configure/cluster_sizing/
-description: Learn about cluster sizing for CloudPrem
+description: Learn about cluster sizing for BYOC Logs
 further_reading:
 - link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
-  text: "Configure CloudPrem Ingress"
+  text: "Configure BYOC Logs Ingress"
 - link: "/cloudprem/configure/pipelines/"
   tag: "Documentation"
-  text: "Configure CloudPrem Log Processing"
+  text: "Configure BYOC Logs Log Processing"
 - link: "/cloudprem/introduction/architecture/"
   tag: "Documentation"
-  text: "Learn more about CloudPrem Architecture"
+  text: "Learn more about BYOC Logs Architecture"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="true" header="In Preview" >}}
+  BYOC Logs is in Preview.
 {{< /callout >}}
 
 ## Overview
 
-Proper cluster sizing ensures optimal performance, cost efficiency, and reliability for your CloudPrem deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, and the complexity of your log data.
+Proper cluster sizing ensures optimal performance, cost efficiency, and reliability for your BYOC Logs deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, and the complexity of your log data.
 
-This guide provides baseline recommendations for dimensioning your CloudPrem cluster components—indexers, searchers, supporting services, and the PostgreSQL database.
+This guide provides baseline recommendations for dimensioning your BYOC Logs cluster components—indexers, searchers, supporting services, and the PostgreSQL database.
 
 <div class="alert alert-tip">
 Use your expected daily log volume and peak ingestion rates as starting points, then monitor your cluster's performance and adjust sizing as needed.
@@ -39,7 +39,7 @@ Indexers receive logs from Datadog Agents, then process, index, and store them a
 | **Memory** | 4 GB RAM per vCPU | |
 | **Minimum Pod Size** | 2 vCPUs, 8 GB RAM | Recommended minimum for indexer pods |
 | **Storage Capacity** | At least 250 GB | Required for temporary data while creating and merging index files |
-| **Storage Type** | Local SSDs (preferred) | Local HDDs or network-attached block storage (Amazon EBS, Azure Managed Disks) can also be used |
+| **Storage Type** | Network-attached block storage | For example: Amazon EBS gp3, Azure Managed Disks, or GCP Persistent Disk. Data is temporarily stored in a write-ahead log (WAL) before being uploaded to object storage. The WAL is not replicated, so using local (ephemeral) SSDs increases the risk of losing a few minutes of data if the disk fails. Network-attached block storage provides built-in redundancy. |
 | **Disk I/O** | ~20 MB/s per vCPU | Equivalent to 320 IOPS per vCPU for Amazon EBS (assuming 64 KB IOPS) |
 
 
@@ -78,7 +78,7 @@ Allocate the following resources for these lightweight components:
 
 ## Helm chart sizing tiers
 
-The CloudPrem Helm chart provides predefined sizing tiers through the `indexer.podSize` and `searcher.podSize` parameters. Each tier sets the vCPU and memory resource limits for a pod, and automatically configures component-specific settings.
+The BYOC Logs Helm chart provides predefined sizing tiers through the `indexer.podSize` and `searcher.podSize` parameters. Each tier sets the vCPU and memory resource limits for a pod, and automatically configures component-specific settings.
 
 | Size | vCPUs | Memory |
 |------|-------|--------|

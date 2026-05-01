@@ -14,8 +14,8 @@ This page provides information to help you troubleshot issues with Test Optimiza
 
 1. Go to the [**Tests**][3] page for the language you're instrumenting and check that the testing framework you are using is supported in the **Compatibility** section.
 2. Check if you see any test results in the [**Test Runs**][4] section. If you do see results there, but not in [**Test Health**][5] when viewing the repositories list or an individual repository, Git information is missing. See [Data appears in Test Runs but not Test Health](#data-appears-in-test-runs-but-not-test-health) to troubleshoot it.
-3. If you are reporting the data through the Datadog Agent, make sure there is [network connectivity][15] from your test-running host to the Agent's host and port. Run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][6] in the tracer to verify connectivity to the Agent.
-4. If you are reporting the data directly to Datadog ("Agentless mode"), make sure there is [network connectivity][16] from the test-running hosts to Datadog's hosts. You can activate [debug mode][6] in the tracer to verify connectivity to Datadog.
+3. If you are reporting the data through the Datadog Agent, make sure there is [network connectivity][15] from your test-running host to the Agent's host and port. Run your tests with the appropriate Agent hostname set in the `DD_AGENT_HOST` and the appropriate port in `DD_TRACE_AGENT_PORT` environment variables. You can activate [debug mode][6] in the SDK to verify connectivity to the Agent.
+4. If you are reporting the data directly to Datadog ("Agentless mode"), make sure there is [network connectivity][16] from the test-running hosts to Datadog's hosts. You can activate [debug mode][6] in the SDK to verify connectivity to Datadog.
 5. If you still don't see any results, [contact Support][2] for troubleshooting help.
 
 ## You are uploading JUnit test reports with `datadog-ci` but some or all tests are missing
@@ -29,7 +29,7 @@ The following aspects make a JUnit test report incorrect:
 
 If you can see test results data in the **Test Runs** tab, but not in **Test Health** when viewing the repositories list or an individual repository, Git metadata (repository, commit, or branch) is probably missing. To confirm this is the case, open a test execution in the [**Test Runs**][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in repository sections of the [**Test Health**][5] page.
 
-1. Tracers first use the environment variables, if any, set by the CI provider to collect Git information. See [Running tests inside a container][7] for a list of environment variables that the tracer attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
+1. Tracers first use the environment variables, if any, set by the CI provider to collect Git information. See [Running tests inside a container][7] for a list of environment variables that the SDK attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
 2. Next, tracers fetch Git metadata using the local `.git` folder, if present, by executing `git` commands. This populates all Git metadata fields, including commit message, author, and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`. This information is used to populate attributes not detected in the previous step.
 3. You can also provide Git information manually using environment variables, which override information detected by any of the previous steps.
 
@@ -84,7 +84,7 @@ If you can see test results data in the **Test Runs** tab, but not in **Test Hea
 ### The total test time is empty
 If you cannot see the total test time, it is likely that test suite level visibility is not enabled. To confirm, check if your language supports test suite level visibility in [Supported features][14]. If test suite level visibility is supported, update your tracer to the latest version.
 
-If you still don't see the total time after updating the tracer version, contact [Datadog support][2] for help.
+If you still don't see the total time after updating the SDK version, contact [Datadog support][2] for help.
 
 ### The total test time is different than expected
 
@@ -175,6 +175,12 @@ This is also caused by an unstable test session fingerprint. See the [Session hi
 
 When retrying a flaky test multiple times within a short span of time (less than a second), test run events might contain unexpected `@test.is_flaky`, `@test.is_known_flaky`, or `@test.is_new_flaky` tags. This is a known limitation that occurs due to a race condition in the flaky test detection system. In some cases, test run events might be processed out of order, causing the tags to not follow the logical order of events.
 
+## Vitest test duration overhead is high
+
+By default, Vitest's [`isolate`][17] option is `true`, so each test file runs in its own fork or thread. Vitest is ESM-first and relies on [import-in-the-middle][18] for instrumentation, which incurs a setup cost every time a suite starts. With isolation, that setup cost is repeated for every file. The effect is largest when you have many small, fast suites, because setup time can dominate wall-clock time.
+
+To lower overhead, set `isolate: false` in your Vitest config file, or pass `--no-isolate` to the test command.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -195,3 +201,5 @@ When retrying a flaky test multiple times within a short span of time (less than
 [14]: /tests/#supported-features
 [15]: /agent/configuration/network/
 [16]: /tests/network/
+[17]: https://vitest.dev/config/isolate
+[18]: https://github.com/nodejs/import-in-the-middle

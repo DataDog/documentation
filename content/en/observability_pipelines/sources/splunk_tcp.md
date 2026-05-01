@@ -25,13 +25,9 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 - Enter the identifier for your Splunk TCP address. If you leave it blank, the [default](#set-secrets) is used.
 
-### Optional settings
+### Optional TLS settings
 
-Click the toggle to **Enable TLS**. If you enable TLS, the following certificate and key files are required:
-- Enter the identifier for your Splunk TCP key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in either DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+{{% observability_pipelines/tls_settings %}}
 
 ## Set secrets
 

@@ -25,6 +25,10 @@ The [Metrics Explorer][1] is a basic interface for examining your metrics in Dat
 
 ## Natural language queries
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">Natural Language Queries for Metrics Explorer are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured metric query, understanding context such as your services, attributes, and tags. This makes it easier to explore metrics without needing to write complex syntax.
 
 To access this feature, click **Ask** in the search field and type your query.

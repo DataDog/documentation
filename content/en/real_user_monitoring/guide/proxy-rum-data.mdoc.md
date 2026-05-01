@@ -77,6 +77,10 @@ Your Datadog intake URL should have the format `<INTAKE_ORIGIN>/<PATH><PARAMETER
     {% site-region region="gov" %}
     The intake origin for your Datadog site is `https://browser-intake-ddog-gov.com`.
     {% /site-region %}
+
+    {% site-region region="gov2" %}
+    The intake origin for your Datadog site is `https://browser-intake-us2-ddog-gov.com`.
+    {% /site-region %}
 ---
 * path
 * 

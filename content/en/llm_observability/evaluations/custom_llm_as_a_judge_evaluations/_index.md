@@ -277,6 +277,8 @@ Assessment Criteria is not currently available for JSON evaluations.
 
 ### Define the evaluation scope: Filtering and sampling
 
+<div class="alert alert-info">Span fields used in evaluations are limited to 250 KB each. Fields exceeding this size are truncated before being sent to the LLM judge.</div>
+
 Under **Evaluation Scope**, define where and how your evaluation runs. This helps control coverage (which spans are included) and cost (how many spans are sampled).
    - **Application**: Select the application you want to evaluate.
    - **Evaluate On**: Choose one of the following:
@@ -310,19 +312,19 @@ Each evaluation result includes:
 - The reasoning (when enabled)
 - The pass/fail indicator (based on your assessment criteria)
 
-Use the syntax `@evaluations.custom.<evaluation_name>` to query or visualize results.
+Use the syntax `@evaluation.<evaluation_name>.value` to query or visualize results.
 
 For example:
 ```
-@evaluations.custom.helpfulness-check
+@evaluation.helpfulness-check.value
 ```
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The LLM Observability Traces view. In the search box, the user has entered `@evaluations.custom.budget-guru-intent-classifier:budgeting_question` and results are populated below." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The LLM Observability Traces view. In the search box, the user has entered `@evaluation.budget-guru-intent-classifier.value:budgeting_question` and results are populated below." style="width:100%;" >}}
 
 
 You can:
-- Filter traces by evaluation results (example, `@evaluations.custom.helpfulness-check`)
-- Filter by pass/fail assessment status (example, `@evaluations.assessment.custom.helpfulness-check:fail`)
+- Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
+- Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
 - Use evaluation results as [facets][3]
 - View aggregate results in the LLM Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
@@ -368,6 +370,14 @@ If you need more details, the following metrics allow you to track the LLM resou
 
 Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_name`, and `evaluation_name` tags, allowing you to pinpoint specific applications, models, and evaluations contributing to your usage.
 
+## Configure LLM-as-a-judge evaluations from the API
+
+You can use basic CRUD operations to manipluate managed evaluation configs, one you have the `DD_API_KEY` [API key][14] specified in your environment.
+
+ - [GET][11] existing evaluation configurations
+ - [PUT][12] existing evaluation configurations
+ - [DELETE][13] existing evaluation configurations
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -382,3 +392,8 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 [8]: /llm_observability/experiments
 [9]: /llm_observability/guide/evaluation_developer_guide/#using-managed-evaluators
 [10]: https://app.datadoghq.com/dash/integration/llm_evaluations_token_usage
+[11]: /api/latest/llm-observability/#get-a-custom-evaluator-configuration
+[12]: /api/latest/llm-observability/#create-or-update-a-custom-evaluator-configuration
+[13]: /api/latest/llm-observability/#delete-a-custom-evaluator-configuration
+[14]: /account_management/api-app-keys
+

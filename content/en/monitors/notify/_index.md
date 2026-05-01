@@ -75,18 +75,20 @@ An @notification must have a space between it and the last line character:
 |------------------|-------------------|
 | `Disk space is low @ops-team@company.com` | `Disk space is low@ops-team@company.com` |
 
-{{% collapse-content title="Email" level="h4" expanded=false %}}
-{{% notifications-email %}}
+{{% collapse-content title="Integrations" level="h4" expanded=false %}}
+{{% notifications-integrations %}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="Teams" level="h4" expanded=false %}}
-If a notification channel is set, you can route notifications to a specific Team. Monitor alerts targeting @team-handle are redirected to the selected communication channel. For more information on setting a notification channel to your Team, see the [Teams][7] documentation.
+{{% notifications-teams %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Integrations" level="h4" expanded=false %}}
+{{% collapse-content title="Cases" level="h4" expanded=false %}}
+{{% notifications-cases %}}
+{{% /collapse-content %}}
 
-{{% notifications-integrations %}}
-
+{{% collapse-content title="Email" level="h4" expanded=false %}}
+{{% notifications-email %}}
 {{% /collapse-content %}}
 
 ### Bulk editing monitor @-handles
@@ -229,7 +231,6 @@ Message variables auto-populate with a randomly selected group based on the scop
 [4]: http://daringfireball.net/projects/markdown/syntax
 [5]: /monitors/notify/variables/
 [6]: /monitors/notify/variables/#conditional-variables
-[7]: /account_management/teams/#send-notifications-to-a-specific-communication-channel
 [8]: /service_management/workflows/
 [9]: /service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
 [10]: /service_management/workflows/trigger/#add-the-workflow-to-your-monitor

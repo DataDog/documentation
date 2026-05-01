@@ -22,6 +22,10 @@ further_reading:
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
+- link: "https://learn.datadoghq.com/courses/csm-misconfigurations"
+  tag: "Learning Center"
+  text: "Find and Remediate Vulnerable Cloud Resources with Cloud Security Misconfigurations"
+
 ---
 
 ## Overview
@@ -30,7 +34,7 @@ further_reading:
 
 With Cloud Security, Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues. This guide walks you through best practices for getting your team up and running with Cloud Security.
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

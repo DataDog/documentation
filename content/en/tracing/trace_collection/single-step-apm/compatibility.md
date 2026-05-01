@@ -168,7 +168,21 @@ Python 3.7+ is available by default only on:
 
 For other distributions, you may need to install Python 3.7+ separately.
 
+### Known issues
+
+**Preforking WSGI servers**: Python applications running under preforking WSGI servers can experience worker process crashes (SIGSEGV) on startup when SSI is enabled. This affects uWSGI in preforking mode, gunicorn with `--preload`, and Apache `mod_wsgi` in daemon mode with preload.
+
+Recent Python SDK releases include partial fixes. See the [dd-trace-py releases page][2] for the latest status.
+
+To mitigate:
+- Disable SSI for the affected service. See [your platform's SSI setup page][3] for removal steps.
+- Switch to a lazy-loading deployment pattern (for example, gunicorn without `--preload`, or uWSGI with lazy-apps mode).
+- Install the [Python SDK][4] manually (`pip install ddtrace` + `ddtrace-run`) instead of using SSI.
+
 [1]: /tracing/trace_collection/compatibility/python
+[2]: https://github.com/DataDog/dd-trace-py/releases
+[3]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
+[4]: /tracing/trace_collection/dd_libraries/python/
 
 {{< /programming-lang >}}
 

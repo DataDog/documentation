@@ -14,6 +14,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/workload-protection-investigation/"
     tag: "Blog"
     text: "Turn fragmented runtime signals into coherent attack stories with Datadog Workload Protection"
+  - link: "https://www.datadoghq.com/blog/workload-protection-findings"
+    tag: "Blog"
+    text: "Surface and remediate runtime posture issues with Workload Protection Findings"
+  - link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
+    tag: "Learning Center"
+    text: "Detect Host and Container Compromises with Workload Protection"
+  - link: "https://learn.datadoghq.com/courses/workload-protection-enable-manage"
+    tag: "Learning Center"
+    text: "Enable and Manage Workload Protection"
 cascade:
 - _target:
     path: /security/workload_protection/agent_expressions
