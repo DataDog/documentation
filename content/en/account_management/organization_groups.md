@@ -13,8 +13,8 @@ further_reading:
   text: "Role Based Access Control (RBAC)"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Organization Groups is in Preview">}}
-  Organization Groups is in preview. Contact your account team to learn more.
+{{< callout url="https://www.datadoghq.com/product-preview/organization-groups/" header="Organization Groups is in Preview">}}
+  Organization Groups is in preview. Request access to try it out.
 {{< /callout >}}
 
 ## Overview
