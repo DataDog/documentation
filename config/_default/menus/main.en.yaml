@@ -4626,50 +4626,55 @@ menu:
       identifier: profiler_supported_langs
       weight: 101
     - name: Java
-      url: profiler/enabling/java/
+      url: "profiler/enabling/?prog_lang=java"
       parent: profiler_enabling
       identifier: profiler_enabling_java
       weight: 102
-    - name: GraalVM
-      url: profiler/enabling/graalvm/
-      parent: profiler_enabling
-      identifier: profiler_enabling_graalvm
-      weight: 103
     - name: Python
-      url: profiler/enabling/python/
+      url: "profiler/enabling/?prog_lang=python"
       parent: profiler_enabling
       identifier: profiler_enabling_python
-      weight: 104
+      weight: 103
     - name: Go
-      url: profiler/enabling/go/
+      url: "profiler/enabling/?prog_lang=go"
       parent: profiler_enabling
       identifier: profiler_enabling_go
-      weight: 105
+      weight: 104
     - name: Ruby
-      url: profiler/enabling/ruby/
+      url: "profiler/enabling/?prog_lang=ruby"
       parent: profiler_enabling
       identifier: profiler_enabling_ruby
-      weight: 106
+      weight: 105
     - name: Node.js
-      url: profiler/enabling/nodejs/
+      url: "profiler/enabling/?prog_lang=node_js"
       parent: profiler_enabling
       identifier: profiler_enabling_nodejs
-      weight: 107
+      weight: 106
     - name: .NET
-      url: profiler/enabling/dotnet/
+      url: "profiler/enabling/?prog_lang=dot_net"
       parent: profiler_enabling
       identifier: profiler_enabling_dotnet
-      weight: 108
+      weight: 107
     - name: PHP
-      url: profiler/enabling/php/
+      url: "profiler/enabling/?prog_lang=php"
       parent: profiler_enabling
       identifier: profiler_enabling_php
-      weight: 109
-    - name: C/C++/Rust
-      url: profiler/enabling/ddprof/
+      weight: 108
+    - name: C
+      url: "profiler/enabling/?prog_lang=c"
       parent: profiler_enabling
-      identifier: profiler_enabling_linux
+      identifier: profiler_enabling_c
+      weight: 109
+    - name: C++
+      url: "profiler/enabling/?prog_lang=cpp"
+      parent: profiler_enabling
+      identifier: profiler_enabling_cpp
       weight: 110
+    - name: Rust
+      url: "profiler/enabling/?prog_lang=rust"
+      parent: profiler_enabling
+      identifier: profiler_enabling_rust
+      weight: 111
     - name: Profile Types
       url: profiler/profile_types/
       parent: profiler

@@ -507,3 +507,12 @@ options:
 
 - label: Elixir
   id: elixir
+
+- label: JVM
+  id: jvm
+
+- label: C
+  id: c
+
+- label: GraalVM Native Image
+  id: graalvm_native_image
