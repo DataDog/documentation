@@ -328,14 +328,14 @@ If your Datadog organization is **not** billed through the Azure Marketplace, de
 
 #### Known deletion errors
 
-The errors below typically originate from Azure-side limitations rather than Datadog. If you cannot resolve them with the steps below, contact Azure Support. Provide the resource ID, the full error code, and the deployment correlation ID from the Azure portal.
+The errors below typically originate from Azure-side limitations rather than Datadog. If you cannot resolve these errors with the steps below, contact Azure Support. Provide the resource ID, the full error code, and the deployment correlation ID from the Azure portal.
 
 | Error code | Likely cause | Action |
 |---|---|---|
 | `Forbidden` or `AuthorizationFailed` | The deleting principal lost the Owner role on the subscription before deletion completed. | Restore the Owner role on the subscription, then retry deletion. |
 | `ResourceOperationFailure` | Azure cannot tear down a downstream Datadog-managed resource (often a Container App or Function App in the log forwarder resource group). | Open the resource group in the Azure portal, manually delete any resources still listed under the Datadog resource group, then retry. If the failure persists, contact Azure Support. |
 
-Some Datadog-Azure resources cannot be deleted without Azure Support intervention. This is a known Azure platform limitation, not a Datadog bug.
+Some Datadog-Azure resources cannot be deleted without Azure Support intervention.
 
 ### Change plan
 
