@@ -8,6 +8,9 @@ aliases:
     - /developers/faq/ui_extensions
     - /service_management/app_builder/
 further_reading:
+- link: "/actions/datadog_apps/"
+  tag: "Documentation"
+  text: "Datadog Apps"
 - link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
   tag: "Blog"
   text: "Datadog Cloud SIEM: Driving innovation in security operations"
@@ -41,6 +44,8 @@ further_reading:
 ## Overview 
 
 Datadog App Builder is a low-code application building platform. It streamlines the development of your internal tools with a user-friendly drag-and-drop interface and built-in support for JavaScript. App Builder integrates with popular services such as AWS and GitHub, allowing you to leverage data and seamlessly connect with external APIs and data stores. By integrating with Datadog's existing capabilities, App Builder provides a centralized context that enables you to take preventive actions or respond to ongoing incidents, all from within the same view that you use for troubleshooting.
+
+For more complex applications that require a local development workflow, source control, or collaboration across multiple engineers, see [Datadog Apps][10] to build apps as code with React and TypeScript.
 
 {{< img src="/service_management/app_builder/app-builder-app.png" alt="An app in App Builder" caption="An app in App Builder" style="width:100%;" >}}
 
@@ -96,3 +101,4 @@ The App Builder Overview dashboard provides a high-level overview of your Datado
 [7]: https://app.datadoghq.com/dash/integration/60
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/app-builder/apps/list
+[10]: /actions/datadog_apps/
