@@ -61,7 +61,7 @@ Whether you're defending public-facing APIs, internal services, or user-facing a
 * Identify unprotected, undocumented, or overly permissive endpoints.  
 * Get detailed, contextual findings tied to specific endpoints, misconfigurations, and observed behavior.  
 * Evaluate API configurations against posture rules based on security best practices and compliance frameworks (e.g., OWASP API Top 10).
-* Actively verify endpoint reachability and authentication posture with [Endpoint Scanning][17].
+* Actively verify endpoint reachability and authentication with [Endpoint Scanning][17].
 
 ### Runtime threat detection and protection
 

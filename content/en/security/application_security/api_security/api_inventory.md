@@ -1,5 +1,6 @@
 ---
 title: API Security Inventory
+description: Catalog API endpoints, services, and findings, and assess API security risk across your environment.
 aliases:
   - /security/application_security/api-inventory/
 further_reading:
@@ -83,7 +84,7 @@ API Endpoints gathers security metadata about API traffic by leveraging the Data
 
 API Endpoints uses [Remote Configuration][1] to manage and configure scanning rules that detect sensitive data and authentication.
 
-To verify whether discovered endpoints are publicly accessible and require authentication, enable [Endpoint Scanning][19]. Endpoint Scanning actively probes eligible endpoints and enriches API Security Inventory with verified public accessibility, authentication status, HTTP response status, and last evaluation data.
+To verify whether discovered endpoints are publicly accessible and require authentication, enable [Endpoint Scanning][19]. Endpoint Scanning actively scans eligible endpoints and enriches API Security Inventory with verified public accessibility, authentication status, HTTP response status, and last evaluation data.
 
 The following risks are calculated for each endpoint.
 
