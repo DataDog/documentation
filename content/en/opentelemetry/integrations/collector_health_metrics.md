@@ -156,13 +156,12 @@ service:
 
 Replace `<OTLP_METRICS_ENDPOINT>` with the [Datadog OTLP metrics intake endpoint][201] for your [Datadog site][202]: {{< region-param key="otlp_metrics_endpoint" code="true" >}}.
 
-The Datadog OTLP metrics intake endpoint accepts only delta metrics, so `temporality_preference: delta` is required. The `dd-api-key` header authenticates the request. For configuration options (including the `dd-otel-metric-config` header for customizing metric translation) and troubleshooting, see [Datadog OTLP Metrics Intake Endpoint][201].
+The Datadog OTLP metrics intake endpoint accepts only delta metrics, so `temporality_preference: delta` is required. The `dd-api-key` header authenticates the request, and the `dd-otel-metric-config` header customizes how metrics are translated to Datadog. For all the YAML fields available under the `periodic` reader, see [`periodic.exporter.otlp` options](#periodicexporterotlp-options); for the full list of metric-translation options and troubleshooting, see [Datadog OTLP Metrics Intake Endpoint][201].
 
 <div class="alert alert-warning">
 This setup pushes metrics directly to the OTLP intake endpoint, bypassing any enrichment that pipeline processors (such as <code>resourcedetection</code> or <code>k8sattributes</code>) would otherwise apply. To populate Datadog tags and host metadata (which are needed for hostname resolution and the default Collector dashboard), set the relevant attributes explicitly under <a href="#tag-with-resource-attributes-optional"><code>service.telemetry.resource</code></a>. If you need automatic hostname and cloud-attribute detection, use the Prometheus tab instead.
 </div>
 
-For all available options, see [`periodic.exporter.otlp` options](#periodicexporterotlp-options).
 
 [201]: /opentelemetry/setup/otlp_ingest/metrics/
 [202]: /getting_started/site
