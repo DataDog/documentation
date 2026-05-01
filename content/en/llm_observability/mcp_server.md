@@ -78,7 +78,7 @@ The `llmobs` toolset includes the following tools:
 ### Evaluator tools
 
 `list_llmobs_evals`
-: List every LLM-judge evaluator configured for the caller's organization, across all ML applications. Returns each evaluator's name, ml_app, and enabled status.
+: List every LLM-judge evaluator configured across all ML applications. Returns each evaluator's name, ml_app, and enabled status.
 
 `list_llmobs_evals_by_ml_app`
 : List all LLM-judge evaluators configured for a specific ML application.
