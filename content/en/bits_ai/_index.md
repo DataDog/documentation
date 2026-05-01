@@ -6,15 +6,21 @@ is_beta: true
 aliases:
     - /bits_ai/query_examples/
 further_reading:
-    - link: "https://www.datadoghq.com/product/platform/bits-ai/"
+    - link: "https://www.datadoghq.com/product/platform/bits-ai-agents/"
       tag: "Product page"
-      text: "Bits AI"
+      text: "Bits AI Agents"
     - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
       tag: "Blog"
       text: "Introducing Bits AI SRE, your AI on-call teammate"
+    - link: "https://www.datadoghq.com/blog/bits-ai-dev-agent/"
+      tag: "Blog"
+      text: "Automatically identify issues and generate fixes with Bits AI Dev"
     - link: "https://www.datadoghq.com/blog/bits-ai-security-analyst/"
       tag: "Blog"
       text: "Automate Cloud SIEM investigations with Bits AI Security Analyst"
+    - link: "https://www.datadoghq.com/blog/introducing-bits-assistant/"
+      tag: "Blog"
+      text: "Search and act across Datadog to resolve issues faster with Bits Assistant"
     - link: "https://www.datadoghq.com/blog/how-to-use-ai-more-effectively/"
       tag: "Blog"
       text: "How to use AI tools more effectively: Tips from Datadog Engineers"
