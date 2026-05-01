@@ -79,7 +79,7 @@ service:
 
 Replace `<DATADOG_SITE>` with your [Datadog site][106]. Your site is {{< region-param key="dd_site" code="true" >}}.
 
-The `service.telemetry.metrics` block exposes the Collector's internal metrics on `0.0.0.0:8888`. The `prometheus/internal` receiver scrapes that same endpoint and the metrics pipeline forwards them to Datadog.
+The `service.telemetry.metrics` block exposes the Collector's internal metrics on `0.0.0.0:8888`. The `prometheus/internal` receiver scrapes that same endpoint, and the metrics pipeline forwards them to Datadog.
 
 **`pull.exporter.prometheus` options:**
 
@@ -87,7 +87,7 @@ The `service.telemetry.metrics` block exposes the Collector's internal metrics o
 : Address to expose the Prometheus endpoint on. Defaults to `localhost:8888`. Use `0.0.0.0` to expose outside the loopback interface.
 
 `without_type_suffix`
-: When `true`, drops the type suffix (for example, `_total` for counters) from metric names. The Collector defaults to `true`, which produces names such as `otelcol_exporter_sent_metric_points` instead of `otelcol_exporter_sent_metric_points_total`.
+: When `true` (the Collector default), drops the type suffix (for example, `_total` for counters) from metric names. Names appear as `otelcol_exporter_sent_metric_points` instead of `otelcol_exporter_sent_metric_points_total`.
 
 `without_units`
 : When `true`, drops the unit suffix (for example, `_seconds`, `_bytes`) from metric names.
@@ -100,7 +100,7 @@ The `service.telemetry.metrics` block exposes the Collector's internal metrics o
 
 #### Optional: enrich with processors
 
-Add the [resource detection processor][103] to the metrics pipeline to automatically populate cloud and host resource attributes (for example, `host.id`, `cloud.provider`, `cloud.region`). Other processors such as [`transform`][104] or [`k8sattributes`][105] can also be added to the pipeline to further enrich or transform Collector health metrics before they are exported.
+Add the [resource detection processor][103] to the metrics pipeline to automatically populate cloud and host resource attributes (for example, `host.id`, `cloud.provider`, `cloud.region`). You can also add other processors such as [`transform`][104] or [`k8sattributes`][105] to enrich or transform Collector health metrics before export.
 
 ```yaml
 processors:
@@ -210,7 +210,7 @@ This setup pushes metrics directly to the OTLP intake endpoint, bypassing any en
 : When `true`, disables TLS. Defaults to `false`.
 
 `certificate`, `client_certificate`, `client_key`
-: Paths to PEM files for custom CA verification and mTLS client authentication.
+: Paths to PEM files for custom CA verification and mutual TLS (mTLS) client authentication.
 
 [201]: /opentelemetry/setup/otlp_ingest/metrics/
 [202]: /getting_started/site
@@ -223,7 +223,7 @@ This setup pushes metrics directly to the OTLP intake endpoint, bypassing any en
 The following top-level fields apply to both setups:
 
 `level`
-: Verbosity of the Collector's internal metrics. One of `none`, `basic`, `normal` (default), or `detailed`. `detailed` is required to enable `views`.
+: Verbosity of the Collector's internal metrics. One of `none`, `basic`, `normal` (default), or `detailed`. Set `level: detailed` to enable `views`.
 
 `readers`
 : List of metric readers. At least one is required when `level` is not `none`. Each reader is either a `pull` reader (Prometheus) or a `periodic` reader (OTLP, console).
@@ -263,7 +263,7 @@ service:
 
 To suppress a default attribute such as `service.version`, specify it with a null value in the legacy inline format.
 
-These attributes are mapped to Datadog tags and host metadata. For the full list of supported mappings, see [OpenTelemetry Semantic Conventions and Datadog Conventions][6] and [Mapping OpenTelemetry Semantic Conventions to Hostnames][7].
+Datadog maps these attributes to tags and host metadata. For the full list of supported mappings, see [OpenTelemetry Semantic Conventions and Datadog Conventions][6] and [Mapping OpenTelemetry Semantic Conventions to Hostnames][7].
 
 ## Data collected
 
