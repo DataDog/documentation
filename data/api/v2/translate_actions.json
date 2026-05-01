@@ -2502,7 +2502,7 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.",
+    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
     "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
