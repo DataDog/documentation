@@ -791,6 +791,11 @@ components:
           items:
             $ref: "#/components/schemas/ResourceProviderConfig"
           type: array
+        secretless_auth_enabled:
+          description: |-
+            When enabled, Datadog authenticates with this app registration using federated workload identity credentials instead of a client secret.
+          example: true
+          type: boolean
         tenant_name:
           description: Your Azure Active Directory ID.
           example: "testc44-1234-5678-9101-cc00736ftest"
