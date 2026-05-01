@@ -52,7 +52,7 @@ Configure the following products to automatically create cases:
 
 ## Case types
 
-Add case types when you are creating a case. Not all case types are available for configuration between manual and automativ creation. For example, only `Standard`, `Security` and `Change Request`, `Event Management` types are available when creating cases manually.
+Add case types when you are creating a case. Not all case types are available for configuration between manual and automatic creation. For example, only `Standard`, `Security` and `Change Request`, `Event Management` types are available when creating cases manually.
 
 To add and enable custom case types, see [Case Customization][7].
 
