@@ -49,14 +49,13 @@
       {{/* Skip empty categories */}}
       {{- if gt (len $catConfigs) 0 -}}
         <details class="collapsible-section" id="registry-{{ $catId }}">
-          <summary class="collapsible-header">
+          <summary class="collapsible-header registry-copy-link" data-href="#registry-{{ $catId }}">
             <div class="header-content">
               <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
               <div class="header-text flex-wrap">
                 <h3 class="header-text-inner me-1">{{ $catTitle }}</h3>
                 <small>({{ len $catConfigs }})</small>
               </div>
-              <span class="registry-copy-link registry-copy-link--section" data-href="#registry-{{ $catId }}" title="Copy link" aria-label="Copy link to {{ $catTitle }}">{{ partial "icon" (dict "name" "click") }}</span>
             </div>
           </summary>
           <div class="collapsible-content">
@@ -134,14 +133,13 @@
                     {{- $kindIntNames = sort $kindIntNames -}}
                     {{- if ge (len $kindIntNames) 5 -}}
                       <details class="collapsible-section" id="{{ $kindAnchor }}">
-                        <summary class="collapsible-header">
+                        <summary class="collapsible-header registry-copy-link" data-href="#{{ $kindAnchor }}">
                           <div class="header-content">
                             <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
                             <div class="header-text flex-wrap">
                               <h4 class="header-text-inner me-1"><code>{{ $kindPattern }}</code></h4>
                               <small>({{ len $kindIntNames }} integrations)</small>
                             </div>
-                            <span class="registry-copy-link registry-copy-link--section" data-href="#{{ $kindAnchor }}" title="Copy link" aria-label="Copy link to {{ $kindPattern }}">{{ partial "icon" (dict "name" "click") }}</span>
                           </div>
                         </summary>
                         <div class="collapsible-content">
@@ -167,14 +165,13 @@
                 {{- $intAnchor := printf "integration-%s" (. | lower | replaceRE "[^a-z0-9]+" "-") -}}
                 {{- $intConfigs := index $byIntegration $intName -}}
                 <details class="collapsible-section" id="{{ $intAnchor }}">
-                  <summary class="collapsible-header">
+                  <summary class="collapsible-header registry-copy-link" data-href="#{{ $intAnchor }}">
                     <div class="header-content">
                       <div class="header-icon">{{ $chevronIcon | safeHTML }}</div>
                       <div class="header-text flex-wrap">
                         <h4 class="header-text-inner me-1">{{ $intName }}</h4>
                         <small>({{ len $intConfigs }})</small>
                       </div>
-                      <span class="registry-copy-link registry-copy-link--section" data-href="#{{ $intAnchor }}" title="Copy link" aria-label="Copy link to {{ $intName }}">{{ partial "icon" (dict "name" "click") }}</span>
                     </div>
                   </summary>
                   <div class="collapsible-content">
@@ -206,18 +203,18 @@
     {{/* Copy-link behavior: copies the full URL with fragment to clipboard, auto-opens the target section on page load */}}
     <script>
     (function() {
-      // Copy link button: copy full URL to clipboard
+      // Copy full URL to clipboard and update URL hash without scrolling
       document.querySelectorAll('.registry-copy-link').forEach(function(link) {
         link.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          var url = window.location.origin + window.location.pathname + link.getAttribute('data-href');
-          navigator.clipboard.writeText(url).then(function() {
-            link.classList.add('registry-copy-link--copied');
-            setTimeout(function() { link.classList.remove('registry-copy-link--copied'); }, 1500);
-          });
-          // Update URL hash without scrolling
-          history.replaceState(null, '', link.getAttribute('data-href'));
+          if (!link.parentElement.open) {
+            var url = window.location.origin + window.location.pathname + link.getAttribute('data-href');
+            navigator.clipboard.writeText(url).then(function() {
+              link.classList.add('registry-copy-link--copied');
+              setTimeout(function() { link.classList.remove('registry-copy-link--copied'); }, 1500);
+            });
+            
+            history.replaceState(null, '', link.getAttribute('data-href'));
+          }
         });
       });
 
