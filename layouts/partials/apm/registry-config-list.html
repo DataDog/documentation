@@ -209,7 +209,7 @@
           if (!link.parentElement.open) {
             var url = window.location.origin + window.location.pathname + link.getAttribute('data-href');
             navigator.clipboard.writeText(url).then(function() {
-              if (link.matches('button')) {
+              if (link.matches('a')) {
                 link.classList.add('registry-copy-link--copied');
                 setTimeout(function() { link.classList.remove('registry-copy-link--copied'); }, 1500);
               }
