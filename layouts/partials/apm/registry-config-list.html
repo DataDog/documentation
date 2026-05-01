@@ -56,7 +56,7 @@
                 <h3 class="header-text-inner me-1">{{ $catTitle }}</h3>
                 <small>({{ len $catConfigs }})</small>
               </div>
-              <span class="registry-copy-link registry-copy-link--section" data-href="#registry-{{ $catId }}" title="Copy link" aria-label="Copy link to {{ $catTitle }}">{{ partial "icon" (dict "name" "click") }}</a>
+              <span class="registry-copy-link registry-copy-link--section" data-href="#registry-{{ $catId }}" title="Copy link" aria-label="Copy link to {{ $catTitle }}">{{ partial "icon" (dict "name" "click") }}</span>
             </div>
           </summary>
           <div class="collapsible-content">
@@ -141,7 +141,7 @@
                               <h4 class="header-text-inner me-1"><code>{{ $kindPattern }}</code></h4>
                               <small>({{ len $kindIntNames }} integrations)</small>
                             </div>
-                            <span class="registry-copy-link registry-copy-link--section" data-href="#{{ $kindAnchor }}" title="Copy link" aria-label="Copy link to {{ $kindPattern }}">{{ partial "icon" (dict "name" "click") }}</a>
+                            <span class="registry-copy-link registry-copy-link--section" data-href="#{{ $kindAnchor }}" title="Copy link" aria-label="Copy link to {{ $kindPattern }}">{{ partial "icon" (dict "name" "click") }}</span>
                           </div>
                         </summary>
                         <div class="collapsible-content">
@@ -174,7 +174,7 @@
                         <h4 class="header-text-inner me-1">{{ $intName }}</h4>
                         <small>({{ len $intConfigs }})</small>
                       </div>
-                      <span class="registry-copy-link registry-copy-link--section" data-href="#{{ $intAnchor }}" title="Copy link" aria-label="Copy link to {{ $intName }}">{{ partial "icon" (dict "name" "click") }}</a>
+                      <span class="registry-copy-link registry-copy-link--section" data-href="#{{ $intAnchor }}" title="Copy link" aria-label="Copy link to {{ $intName }}">{{ partial "icon" (dict "name" "click") }}</span>
                     </div>
                   </summary>
                   <div class="collapsible-content">
