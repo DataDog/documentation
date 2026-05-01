@@ -24,23 +24,15 @@ Learn how to set up and configure the Datadog MCP Server, which lets you retriev
 Install the [Datadog Plugin][1] from the Cursor Marketplace which includes the Datadog MCP Server and other resources. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. 
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-From the Cursor Marketplace:
+Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. 
 
-1. Open the [Datadog Plugin][1] in the marketplace.
-1. Click the **Add to Cursor*** button.
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 
-From within Cursor:
+1. You can install the plugin from the Cursor Marketplace or from within Cursor:
+   - From the Cursor Marketplace, open the [Datadog Plugin][1] and click **Add to Cursor**.
+   - In Cursor, navigate to **Cursor Settings** > **Plugins**, then search for the Datadog plugin and click **Add to Cursor**.
 
-1. Open **Cursor Settings**.
-1. Choose **Plugins**.
-1. Find the Datadog plugin.
-1. Click **Add to Cursor**.
-
-{{< img src="bits_ai/mcp_server/add-datadog-plugin-for-cursor.png" alt="Add the Datadog Plugin from Cursor Settings" style="width:90%;" >}}
-
-After installation of the plugin:
-
-1. Type `/ddsetup` in the agent chat to perform first-time setup.
+1. After installation of the plugin, type `/ddsetup` in the agent chat to perform first-time setup.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 [1]: https://cursor.com/marketplace/datadog
