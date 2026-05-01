@@ -225,14 +225,14 @@ When **expected output** is built from annotation labels, the exported value is 
 
 When multiple annotators have annotated the same trace, the value for each label is aggregated across them by consensus:
 
-| Label type  | Aggregation                               |
-| ----------- | ----------------------------------------- |
-| Boolean     | Majority vote                             |
-| Categorical | Plurality vote (a list when multi-select) |
-| Score       | Average                                   |
-| Text        | List of responses                         |
+| Label type  | Aggregation                              |
+| ----------- | ---------------------------------------- |
+| Boolean     | Majority vote                            |
+| Categorical | Plurality vote (most-picked option wins) |
+| Score       | Average                                  |
+| Text        | List of responses                        |
 
-For single-select categorical labels, the option with the most votes wins, even without a strict majority. Ties break alphabetically (the option that comes first wins). For multi-select, the resulting list is sorted alphabetically. For boolean labels, ties break in favor of `true`.
+For categorical labels (both single-select and multi-select), the option picked by the most annotators wins. With multi-select, each option an annotator selects counts as one vote. Ties break alphabetically. For boolean labels, ties break in favor of `true`.
 
 **Example: categorical (single-select).** Three annotators rate `tone`:
 
@@ -242,13 +242,13 @@ For single-select categorical labels, the option with the most votes wins, even 
 
 Aggregated: `"polite"` (2 of 3 votes).
 
-**Example: categorical (multi-select).** Three annotators tag `topics`:
+**Example: categorical (multi-select).** Three annotators tag `topics` (each can pick multiple options):
 
 - Annotator A: `["safety", "policy"]`
 - Annotator B: `["safety", "billing"]`
 - Annotator C: `["safety", "policy"]`
 
-Aggregated: `["policy", "safety"]`. `safety` (3 of 3) and `policy` (2 of 3) make it in; `billing` (1 of 3) does not. The list is sorted alphabetically.
+Each option an annotator selects counts as one vote: `safety` gets 3, `policy` gets 2, `billing` gets 1. Aggregated: `"safety"` (most votes).
 
 **Example: text.** Two annotators leave notes:
 
