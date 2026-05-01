@@ -21,7 +21,9 @@ You can collect Collector health metrics in two ways:
 
 ## Setup
 
-The two tabs below show alternative ways to configure the pipeline. Pick one based on whether you want a Prometheus-style scrape or a direct OTLP push. The [`service.telemetry.metrics` fields](#servicetelemetrymetrics-fields) and [resource attribute](#optional-tag-with-resource-attributes) sections that follow apply to both setups.
+### Configure the pipeline
+
+Pick a tab based on whether you want a Prometheus-style scrape or a direct OTLP push. After configuring the pipeline, see the [Configuration reference](#configuration-reference) for all available options.
 
 {{< tabs >}}
 {{% tab "Prometheus" %}}
@@ -81,22 +83,7 @@ Replace `<DATADOG_SITE>` with your [Datadog site][106]. Your site is {{< region-
 
 The `service.telemetry.metrics` block exposes the Collector's internal metrics on `0.0.0.0:8888`. The `prometheus/internal` receiver scrapes that same endpoint, and the metrics pipeline forwards them to Datadog.
 
-**`pull.exporter.prometheus` options:**
-
-`host` / `port`
-: Address to expose the Prometheus endpoint on. Defaults to `localhost:8888`. Use `0.0.0.0` to expose outside the loopback interface.
-
-`without_type_suffix`
-: When `true` (the Collector default), drops the type suffix (for example, `_total` for counters) from metric names. Names appear as `otelcol_exporter_sent_metric_points` instead of `otelcol_exporter_sent_metric_points_total`.
-
-`without_units`
-: When `true`, drops the unit suffix (for example, `_seconds`, `_bytes`) from metric names.
-
-`without_scope_info`
-: When `true`, suppresses the `otel_scope_info` metric and `otel_scope_*` labels.
-
-`with_resource_constant_labels.included` / `with_resource_constant_labels.excluded`
-: Allowlist and denylist of resource attributes to copy onto every exported metric as constant labels.
+For all available options, see [`pull.exporter.prometheus` options](#pullexporterprometheus-options) in the [Configuration reference](#configuration-reference).
 
 #### Optional: enrich with processors
 
@@ -172,45 +159,10 @@ Replace `<OTLP_METRICS_ENDPOINT>` with the [Datadog OTLP metrics intake endpoint
 The Datadog OTLP metrics intake endpoint accepts only delta metrics, so `temporality_preference: delta` is required. The `dd-api-key` header authenticates the request. For configuration options (including the `dd-otel-metric-config` header for customizing metric translation) and troubleshooting, see [Datadog OTLP Metrics Intake Endpoint][201].
 
 <div class="alert alert-warning">
-This setup pushes metrics directly to the OTLP intake endpoint, bypassing any enrichment that pipeline processors (such as <code>resourcedetection</code> or <code>k8sattributes</code>) would otherwise apply. To populate Datadog tags and host metadata (which are needed for hostname resolution and the default Collector dashboard), set the relevant attributes explicitly under <a href="#optional-tag-with-resource-attributes"><code>service.telemetry.resource</code></a>. If you need automatic hostname and cloud-attribute detection, use the Prometheus tab instead.
+This setup pushes metrics directly to the OTLP intake endpoint, bypassing any enrichment that pipeline processors (such as <code>resourcedetection</code> or <code>k8sattributes</code>) would otherwise apply. To populate Datadog tags and host metadata (which are needed for hostname resolution and the default Collector dashboard), set the relevant attributes explicitly under <a href="#tag-with-resource-attributes-optional"><code>service.telemetry.resource</code></a>. If you need automatic hostname and cloud-attribute detection, use the Prometheus tab instead.
 </div>
 
-**`periodic` reader options:**
-
-`interval`
-: Time in milliseconds between exports. Defaults to `60000` (60 seconds).
-
-`timeout`
-: Maximum time in milliseconds to wait for an export to complete. Defaults to `30000` (30 seconds).
-
-**`periodic.exporter.otlp` options:**
-
-`protocol`
-: One of `grpc`, `http/protobuf`, or `http/json`. Use `http/protobuf` for the Datadog OTLP metrics intake endpoint.
-
-`endpoint`
-: URL of the OTLP receiver. For Datadog, use {{< region-param key="otlp_metrics_endpoint" code="true" >}}.
-
-`headers` / `headers_list`
-: Headers to add to every export request. Use the structured `headers` list (each entry is a `{name, value}` pair) or `headers_list` as a URL-encoded string (for example, `dd-api-key=${env:DD_API_KEY}`).
-
-`compression`
-: Compression algorithm. One of `gzip` or `none`.
-
-`timeout`
-: Per-request timeout in milliseconds. Distinct from the reader-level `timeout`.
-
-`temporality_preference`
-: One of `cumulative`, `delta`, or `lowmemory`. The Datadog OTLP metrics intake endpoint requires `delta`.
-
-`default_histogram_aggregation`
-: One of `explicit_bucket_histogram` (default) or `base2_exponential_bucket_histogram`.
-
-`insecure`
-: When `true`, disables TLS. Defaults to `false`.
-
-`certificate`, `client_certificate`, `client_key`
-: Paths to PEM files for custom CA verification and mutual TLS (mTLS) client authentication.
+For all available options, see [`periodic.exporter.otlp` options](#periodicexporterotlp-options) in the [Configuration reference](#configuration-reference).
 
 [201]: /opentelemetry/setup/otlp_ingest/metrics/
 [202]: /getting_started/site
@@ -218,20 +170,7 @@ This setup pushes metrics directly to the OTLP intake endpoint, bypassing any en
 {{% /tab %}}
 {{< /tabs >}}
 
-### `service.telemetry.metrics` fields
-
-The following top-level fields apply to both setups:
-
-`level`
-: Verbosity of the Collector's internal metrics. One of `none`, `basic`, `normal` (default), or `detailed`. Set `level: detailed` to enable `views`.
-
-`readers`
-: List of metric readers. At least one is required when `level` is not `none`. Each reader is either a `pull` reader (Prometheus) or a `periodic` reader (OTLP, console).
-
-`views`
-: Optional list of [SDK views][5] that drop, rename, filter, or re-aggregate specific instruments. Only available when `level: detailed`.
-
-### Optional: tag with resource attributes
+### Tag with resource attributes (optional)
 
 Use `service.telemetry.resource` to attach resource attributes (such as `k8s.cluster.name`, `service.instance.id`, or any [Datadog-mapped semantic convention][6]) to all telemetry the Collector emits about itself.
 
@@ -264,6 +203,77 @@ service:
 To suppress a default attribute such as `service.version`, specify it with a null value in the legacy inline format.
 
 Datadog maps these attributes to tags and host metadata. For the full list of supported mappings, see [OpenTelemetry Semantic Conventions and Datadog Conventions][6] and [Mapping OpenTelemetry Semantic Conventions to Hostnames][7].
+
+## Configuration reference
+
+### `service.telemetry.metrics` fields
+
+The following top-level fields apply to both setups:
+
+`level`
+: Verbosity of the Collector's internal metrics. One of `none`, `basic`, `normal` (default), or `detailed`. Set `level: detailed` to enable `views`.
+
+`readers`
+: List of metric readers. At least one is required when `level` is not `none`. Each reader is either a `pull` reader (Prometheus) or a `periodic` reader (OTLP, console).
+
+`views`
+: Optional list of [SDK views][5] that drop, rename, filter, or re-aggregate specific instruments. Only available when `level: detailed`.
+
+### `pull.exporter.prometheus` options
+
+`host` / `port`
+: Address to expose the Prometheus endpoint on. Defaults to `localhost:8888`. Use `0.0.0.0` to expose outside the loopback interface.
+
+`without_type_suffix`
+: When `true` (the Collector default), drops the type suffix (for example, `_total` for counters) from metric names. Names appear as `otelcol_exporter_sent_metric_points` instead of `otelcol_exporter_sent_metric_points_total`.
+
+`without_units`
+: When `true`, drops the unit suffix (for example, `_seconds`, `_bytes`) from metric names.
+
+`without_scope_info`
+: When `true`, suppresses the `otel_scope_info` metric and `otel_scope_*` labels.
+
+`with_resource_constant_labels.included` / `with_resource_constant_labels.excluded`
+: Allowlist and denylist of resource attributes to copy onto every exported metric as constant labels.
+
+### `periodic.exporter.otlp` options
+
+The `periodic` reader (which contains the OTLP exporter) accepts these top-level options:
+
+`interval`
+: Time in milliseconds between exports. Defaults to `60000` (60 seconds).
+
+`timeout`
+: Maximum time in milliseconds to wait for an export to complete. Defaults to `30000` (30 seconds).
+
+The `otlp` block inside `periodic.exporter` accepts these options:
+
+`protocol`
+: One of `grpc`, `http/protobuf`, or `http/json`. Use `http/protobuf` for the Datadog OTLP metrics intake endpoint.
+
+`endpoint`
+: URL of the OTLP receiver. For Datadog, use {{< region-param key="otlp_metrics_endpoint" code="true" >}}.
+
+`headers` / `headers_list`
+: Headers to add to every export request. Use the structured `headers` list (each entry is a `{name, value}` pair) or `headers_list` as a URL-encoded string (for example, `dd-api-key=${env:DD_API_KEY}`).
+
+`compression`
+: Compression algorithm. One of `gzip` or `none`.
+
+`timeout`
+: Per-request timeout in milliseconds. Distinct from the reader-level `timeout`.
+
+`temporality_preference`
+: One of `cumulative`, `delta`, or `lowmemory`. The Datadog OTLP metrics intake endpoint requires `delta`.
+
+`default_histogram_aggregation`
+: One of `explicit_bucket_histogram` (default) or `base2_exponential_bucket_histogram`.
+
+`insecure`
+: When `true`, disables TLS. Defaults to `false`.
+
+`certificate`, `client_certificate`, `client_key`
+: Paths to PEM files for custom CA verification and mutual TLS (mTLS) client authentication.
 
 ## Data collected
 
