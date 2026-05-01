@@ -122,7 +122,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Zend Framework | 1.12, 1.21                              | All supported PHP versions  | Framework-level instrumentation |
 | Zend Framework | 2.x                                     | All supported PHP versions  | Generic web tracing             |
 
-Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
+Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the SDK.
 
 
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].

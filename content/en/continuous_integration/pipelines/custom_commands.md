@@ -54,7 +54,7 @@ echo "Hello World"
 </code>
 </pre>
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -125,7 +125,7 @@ DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} data
 </code>
 </pre>
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

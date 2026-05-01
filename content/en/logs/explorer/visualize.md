@@ -13,6 +13,10 @@ further_reading:
     - link: '/logs/explorer/export'
       tag: 'Documentation'
       text: 'Export views from the Log Explorer'
+    - link: "https://learn.datadoghq.com/courses/log-queries-aggregations"
+      tag: "Learning Center"
+      text: "Dive Deeper into Log Queries and Aggregations"
+
 ---
 
 ## Overview
@@ -97,6 +101,8 @@ A tree map helps you organize and show data as a percentage of a whole in a visu
 The following tree map shows the percentage breakdown by **service**.
 
 {{< img src="logs/explorer/doc_tree_map.png" alt="Tree map example showing percentage breakdown by service" style="width:90%;">}}
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

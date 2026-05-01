@@ -5,16 +5,16 @@ aliases:
 further_reading:
 - link: "/cloudprem/architecture/"
   tag: "Documentation"
-  text: "CloudPrem Architecture"
+  text: "BYOC Logs Architecture"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="true" header="In Preview" >}}
+  BYOC Logs is in Preview.
 {{< /callout >}}
 
 ## Overview
 
-This page provides troubleshooting guidance for common issues you may encounter when deploying or operating Datadog CloudPrem. It includes typical error messages, diagnostic steps, and tips for resolving problems related to access permissions, storage configuration, and component health. Use this guide to quickly diagnose issues or to gather context before reaching out to [Datadog support][1].
+This page provides troubleshooting guidance for common issues you may encounter when deploying or operating Datadog BYOC Logs. It includes typical error messages, diagnostic steps, and tips for resolving problems related to access permissions, storage configuration, and component health. Use this guide to quickly diagnose issues or to gather context before reaching out to [Datadog support][1].
 
 
 ## Component health
@@ -23,17 +23,17 @@ This page provides troubleshooting guidance for common issues you may encounter 
 
 **Check pod events:**
 ```bash
-kubectl describe pod -n datadog-cloudprem <pod-name>
+kubectl describe pod -n datadog-byoc-logs <pod-name>
 ```
 
 **Common issues:**
 - Insufficient resources: Check node capacity with `kubectl describe nodes`
 - Image pull errors: Verify network connectivity and image availability
-- Secret not found: Verify secrets exist with `kubectl get secrets -n datadog-cloudprem`
+- Secret not found: Verify secrets exist with `kubectl get secrets -n datadog-byoc-logs`
 
 ## Access permissions
 
-The most common errors come from access permissions to the object storage or to the metastore. To troubleshoot, use `kubectl` and verify logs from CloudPrem components: indexer pods, metastore pods, and searcher pods.
+The most common errors come from access permissions to the object storage or to the metastore. To troubleshoot, use `kubectl` and verify logs from BYOC Logs components: indexer pods, metastore pods, and searcher pods.
 
 ## Metastore errors
 
@@ -52,17 +52,17 @@ kubectl run psql-client \
 Common causes:
 - PostgreSQL is not accessible from the cluster network
 - Firewall rules are blocking the connection
-- Incorrect host, port, or credentials in the `cloudprem-metastore-uri` secret
+- Incorrect host, port, or credentials in the `byoc-logs-metastore-uri` secret
 
 **Error**: `failed to connect to metastore: invalid port number`
 
 **Solution**: Confirm the password in the metastore URI is URL-encoded. Special characters must be escaped:
 ```
 # Correct format
-postgresql://user:abc%2Fdef%2Bghi%3D@host:5432/cloudprem
+postgresql://user:abc%2Fdef%2Bghi%3D@host:5432/byoc-logs
 
 # Incorrect format (fails)
-postgresql://user:abc/def+ghi=@host:5432/cloudprem
+postgresql://user:abc/def+ghi=@host:5432/byoc-logs
 ```
 
 ### Cloud SQL connection issues (GKE)
@@ -71,14 +71,14 @@ postgresql://user:abc/def+ghi=@host:5432/cloudprem
 
 **Solution**: Verify Cloud SQL authorized networks include GKE node IPs:
 ```bash
-gcloud sql instances describe cloudprem-postgres \
+gcloud sql instances describe byoc-logs-postgres \
   --format="value(settings.ipConfiguration.authorizedNetworks)"
 ```
 
 Update authorized networks if needed:
 ```bash
 export NODE_IPS=$(kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}' | tr ' ' ',')
-gcloud sql instances patch cloudprem-postgres \
+gcloud sql instances patch byoc-logs-postgres \
   --authorized-networks=${NODE_IPS} \
   --quiet
 ```
@@ -88,10 +88,10 @@ gcloud sql instances patch cloudprem-postgres \
 **Solution**: Confirm the password in the metastore URI is URL-encoded. Special characters must be escaped:
 ```
 # Correct format
-postgresql://postgres:abc%2Fdef%2Bghi%3D@IP:5432/cloudprem
+postgresql://postgres:abc%2Fdef%2Bghi%3D@IP:5432/byoc-logs
 
 # Incorrect format (fails)
-postgresql://postgres:abc/def+ghi=@IP:5432/cloudprem
+postgresql://postgres:abc/def+ghi=@IP:5432/byoc-logs
 ```
 
 ## Storage errors
@@ -149,7 +149,7 @@ Common causes:
 **Solution**: Verify the Workload Identity binding:
 ```bash
 # Check service account annotation
-kubectl get serviceaccount cloudprem-ksa -n datadog-cloudprem -o yaml | grep iam.gke.io
+kubectl get serviceaccount byoc-logs-ksa -n datadog-byoc-logs -o yaml | grep iam.gke.io
 
 # Verify IAM binding
 gcloud iam service-accounts get-iam-policy \
@@ -161,7 +161,7 @@ Re-create the binding if needed:
 gcloud iam service-accounts add-iam-policy-binding \
   ${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com \
   --role=roles/iam.workloadIdentityUser \
-  --member="serviceAccount:${PROJECT_ID}.svc.id.goog[datadog-cloudprem/cloudprem-ksa]"
+  --member="serviceAccount:${PROJECT_ID}.svc.id.goog[datadog-byoc-logs/byoc-logs-ksa]"
 ```
 
 ## Further reading

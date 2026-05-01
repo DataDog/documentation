@@ -23,6 +23,9 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Control the volume of logs indexed by Datadog"
+- link: "https://learn.datadoghq.com/courses/debugging-log-pipelines"
+  tag: "Learning Center"
+  text: "Debugging Logs Pipelines"
 algolia:
   tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---

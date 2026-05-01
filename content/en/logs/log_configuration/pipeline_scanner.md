@@ -11,6 +11,13 @@ further_reading:
     - link: "/logs/log_configuration/processors/"
       tag: "Documentation"
       text: "Learn more about log processors"
+    - link: "https://learn.datadoghq.com/courses/log-pipelines"
+      tag: "Learning Center"
+      text: "Build and Manage Log Pipelines"
+    - link: "https://learn.datadoghq.com/courses/debugging-log-pipelines"
+      tag: "Learning Center"
+      text: "Debugging Logs Pipelines"
+
 ---
 
 ## Overview
