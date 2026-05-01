@@ -154,7 +154,7 @@ service:
       #         drop: {}
 ```
 
-Replace `<OTLP_METRICS_ENDPOINT>` with the [Datadog OTLP metrics intake endpoint][201] for your [Datadog site][202]. Your endpoint is {{< region-param key="otlp_metrics_endpoint" code="true" >}}.
+Replace `<OTLP_METRICS_ENDPOINT>` with the [Datadog OTLP metrics intake endpoint][201] for your [Datadog site][202]: {{< region-param key="otlp_metrics_endpoint" code="true" >}}.
 
 The Datadog OTLP metrics intake endpoint accepts only delta metrics, so `temporality_preference: delta` is required. The `dd-api-key` header authenticates the request. For configuration options (including the `dd-otel-metric-config` header for customizing metric translation) and troubleshooting, see [Datadog OTLP Metrics Intake Endpoint][201].
 
