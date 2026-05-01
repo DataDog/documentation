@@ -6,7 +6,7 @@ is_beta: true
 aliases:
     - /bits_ai/query_examples/
 further_reading:
-    - link: "https://www.datadoghq.com/product/platform/bits-ai-agents/"
+    - link: "https://www.datadoghq.com/product/ai/bits-ai-agents/"
       tag: "Product page"
       text: "Bits AI Agents"
     - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
