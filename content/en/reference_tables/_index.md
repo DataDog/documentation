@@ -45,7 +45,7 @@ further_reading:
 
 Reference Tables allow you to combine custom metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata.
 
-{{< img src="reference_tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
+{{< img src="reference_tables/reference_table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
 
 For example, you can:
 
@@ -62,7 +62,7 @@ Datadog supports the following data sources, including integrations and manual C
 
 Click **New Reference Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
-{{< img src="reference_tables/enrichment-table-setup.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
+{{< img src="reference_tables/schema_setup.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
@@ -102,7 +102,7 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 
 Click **New Reference Table +**, then add a name, select Amazon S3, fill out all fields, click import, and define the primary key for lookups.
 
-{{< img src="reference_tables/configure-s3-reference-table.png" alt="The upload your data section with the Amazon S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
+{{< img src="reference_tables/s3_table.png" alt="The upload your data section with the Amazon S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
 
 **Note**: The upload from an S3 bucket method supports files up to 200MB.
 
@@ -122,7 +122,7 @@ Click **New Reference Table +**, then add a name, select Amazon S3, fill out all
 
 After reviewing and assigning the role, you can import into Reference Tables from Azure. It may take a few minutes for your Azure configuration to update in Datadog.
 
-{{< img src="reference_tables/azure_storage.png" alt="An Azure Storage tile in the Upload or import data section of a new reference table workflow" style="width:80%;">}}
+{{< img src="reference_tables/azure_table.png" alt="An Azure Storage tile in the Upload or import data section of a new reference table workflow" style="width:80%;">}}
 
 For more information, see the [Azure integration documentation][4].
 
@@ -156,7 +156,7 @@ For more information, see the [Azure integration documentation][4].
 
 After reviewing and assigning the role, you can import into Reference Tables from Google Cloud. It may take a few minutes for your configuration to update in Datadog.
 
-{{< img src="reference_tables/gcp_upload_import_ui.png" alt="Select GCP Storage in Upload or import data when creating a new reference table" style="width:100%;" >}}
+{{< img src="reference_tables/gcp_table.png" alt="Select GCP Storage in Upload or import data when creating a new reference table" style="width:100%;" >}}
 
 **Note**: The upload from cloud object storage supports files up to 200MB.
 
@@ -226,7 +226,7 @@ Once the table is saved, the upserted rows are processed asynchronously and upda
 
 To export a Reference Table, select a table and click **Query in DDSQL Editor**. From there, you can use the [DDSQL Editor][7] to export to CSV, Dashboard, and more.
 
-{{< img src="reference_tables/query_ddsql_editor.png" alt="Table preview with a blue button labeled Query in DDSQL Editor positioned above the results" style="width:100%;" >}}
+{{< img src="reference_tables/query_ddsql.png" alt="Table preview with a blue button labeled Query in DDSQL Editor positioned above the results" style="width:100%;" >}}
 
 ## Delete a Reference Table
 
@@ -284,7 +284,7 @@ For more information on permissions, see the [RBAC documentation][6].
 ### Granular access controls
 Restrict access to individual tables by specifying a list of teams, roles, or users that are allowed to view or edit them.
 
-{{< img src="reference_tables/granular_access_permissions.png" alt="The Permissions cog option that supports setting granular access permissions on a table" style="width:100%;">}}
+{{< img src="reference_tables/granular_permissions.png" alt="The Permissions cog option that supports setting granular access permissions on a table" style="width:100%;">}}
 
 1. Click on a table to open its detail page.
 2. Click the cog icon in the upper-right corner.
