@@ -100,6 +100,10 @@ An alternative to the GUI installation is the command line.
 To run the Datadog Agent in your Azure instances as an extension, use the command that matches your environment. Replace `<SITE_PARAMETER>` with your Datadog account **site parameter** value in the [Datadog sites page][33], and `<DATADOG_API_KEY>` with your [Datadog API key][9].
    **Note**: Python 3.9+ is required for installing Agent version 7+.
 
+<div class="alert alert-info">
+The Azure VM extension version (visible in the Azure portal as <code>5.0.0.0</code> or similar) is not the same as the Datadog Agent version. The portal may continue to display the extension version after the Agent is installed or upgraded. To confirm which Agent version is running, follow the <strong>Verify the installed Agent version</strong> steps in the tab below. You can also check the host on the <a href="https://app.datadoghq.com/infrastructure">Datadog Infrastructure list</a>. Manage the Agent version using PowerShell, the Azure CLI, or an ARM template rather than the Azure portal extension UI.
+</div>
+
 {{< tabs >}}
 {{% tab "Windows" %}}
 
@@ -168,8 +172,19 @@ This example shows how to specify a version of the Agent to install. By default 
 Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "7.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 {{< /code-block >}}
 
+### Verify the installed Agent version
+
+To check which Datadog Agent version is running on a Windows VM, run this PowerShell command on the host:
+
+{{< code-block lang="powershell" >}}
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" version
+{{< /code-block >}}
+
+You can also confirm the running version on the host's entry in the [Datadog Infrastructure list][102].
+
 [100]: https://learn.microsoft.com/powershell/module/az.compute/set-azvmextension
 [101]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[102]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{% tab "Linux" %}}
 
@@ -226,8 +241,19 @@ az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --ver
 {{< /code-block >}}
 
 
+### Verify the installed Agent version
+
+To check which Datadog Agent version is running on a Linux VM, run this command on the host:
+
+{{< code-block lang="shell" >}}
+datadog-agent version
+{{< /code-block >}}
+
+You can also confirm the running version on the host's entry in the [Datadog Infrastructure list][202].
+
 [200]: https://learn.microsoft.com/cli/azure/vm/extension
 [201]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[202]: https://app.datadoghq.com/infrastructure
 {{% /tab %}}
 {{< /tabs >}}
 
