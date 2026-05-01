@@ -215,7 +215,7 @@ Transfer annotated traces to datasets for experiment evaluation:
 3. Select traces to transfer.
 4. Click **Add to Dataset**.
 5. Set the dataset's **expected output**:
-   - **From interaction**: use each trace's actual output (or, if you're working from experiment traces, the original expected output).
+   - **From interaction**: use each trace's actual output. For experiment traces, you can also pick **Expected output** to use the original expected output from the experiment's source dataset.
    - **From annotation label**: use the values annotators applied. Pick one or more labels; the record's `expected_output` is built from your selection.
 6. Choose an existing dataset, or create a dataset.
 
