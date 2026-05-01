@@ -30,6 +30,7 @@ Set up CI Visibility for GitHub Actions to track the execution of your workflows
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [CI jobs failure analysis][23] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
+| [Automatic job retries][27] | Automatic job retries | Preview. Datadog retries failed jobs classified as transient by its AI error model. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][4] for GitHub jobs. |
 | [Custom tags][5] [and measures at runtime][6] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
@@ -158,3 +159,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [24]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [25]: /glossary/#pipeline-execution-time
 [26]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
+[27]: /continuous_integration/pipelines/automatic_retries/
