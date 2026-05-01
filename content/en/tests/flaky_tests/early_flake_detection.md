@@ -104,7 +104,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 {{< /tabs >}}
 
 <div class="alert alert-danger">
-Older tracer versions limit the number of known tests fetched to 500k. If you need to fetch more than 500k known tests, update to the latest tracer version.
+The known tests endpoint returns a maximum of 100,000 tests per non-paginated request. If your test service has more than 100,000 known tests and the Datadog library does not paginate, the request fails and the library cannot retrieve the list of known tests for that session. Recent tracer versions paginate automatically; update to a version that supports pagination if you are affected.
 </div>
 
 ## Explore results in the Test Optimization Explorer
@@ -125,7 +125,7 @@ This could be caused by a couple of reasons:
 * This test has ran previously.
 * This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
 
-Finally, older tracer versions limit the number of known tests fetched to 500k. If your repository has more than 500k known tests, no tests will be identified as new. To prevent this, update to the latest tracer version.
+Additionally, the known tests endpoint returns a maximum of 100,000 tests per non-paginated request. If your test service has more than 100,000 known tests and the Datadog library does not paginate, the library cannot retrieve the list of known tests and Early Flake Detection cannot identify new tests for that session. Update to a tracer version that supports pagination.
 
 ### A test was retried that is not new
 
