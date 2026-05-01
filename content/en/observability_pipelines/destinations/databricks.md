@@ -15,47 +15,48 @@ Use Observability Pipelines' Databricks (Zerobus) destination to send logs to a 
 
 ## Prerequisites
 
-Before you configure the Databricks (Zerobus) destination, set up the following in your Databricks workspace:
+Before you configure the Databricks (Zerobus) destination, you must:
 
-- A Unity Catalog schema and table that the Observability Pipelines Worker writes logs to.
-- A service principal that the Worker uses to authenticate to Databricks. The service principal needs permission to read and write to the table.
+- [Set up a Unity Catalog schema and table](#set-up-a-schema-and-table) that the Observability Pipelines Worker writes logs to.
+- [Set up a service principal](#set-up-a-service-principal) that the Worker uses to authenticate to Databricks. The service principal needs permission to read and write to the table.
 
-The setup steps in this section uses SQL. See the [Databricks documentation][6] for more information.
-
-### Set up the schema and table
+### Set up a schema and table
 
 The SQL examples in this section use the following placeholders:
 
 | Placeholder               | Description                                | Example                    |
 |---------------------------|--------------------------------------------|----------------------------|
-| `<ADMIN_USER>`            | The user who creates the schema and table. |                            |
+| `<USER>`                  | The user who creates the schema and table. |                            |
 | `<CATALOG_NAME>`          | The Unity Catalog name.                    | `main`                     |
 | `<SCHEMA_NAME>`           | The schema name.                           | `obs_pipelines`            |
 | `<TABLE_NAME>`            | The table name.                            | `apache_common_logs`       |
-| `<YOUR_MANAGED_LOCATION>` | The managed location URI.                  | `s3://your-bucket/managed` |
+| `<YOUR_MANAGED_LOCATION>` | (Optional) The managed location URI.       | `s3://your-bucket/managed` |
 
 **Note**: The `GRANT` commands must be run by a Databricks workspace admin.
 
-1. Grant your user permissions to create a schema:
+In the Databricks workspace:
+
+1. If you're not a Databricks Workspace admin user, have an admin run the following command to grant your user permission to create a schema.
     ```sql
-    GRANT CREATE SCHEMA ON CATALOG `<CATALOG_NAME>` TO `<ADMIN_USER>`;
+    GRANT CREATE SCHEMA ON CATALOG <CATALOG_NAME> TO <USER>;
     ```
 
 1. Create the schema:
     ```sql
-    CREATE SCHEMA IF NOT EXISTS `<CATALOG_NAME>`.`<SCHEMA_NAME>`
+    CREATE SCHEMA IF NOT EXISTS <CATALOG_NAME>.<SCHEMA_NAME>
     MANAGED LOCATION '<YOUR_MANAGED_LOCATION>';
     ```
-    **Note**: `MANAGED LOCATION` is optional. See the [Databricks documentation][6] for other options.
+    - **Note**: `MANAGED LOCATION` is optional. See the [Databricks documentation][6] for other options.
+    - See Databricks' [Create Schemas](https://docs.databricks.com/aws/en/schemas/create-schema) documentation for more information.
 
-1. Grant your user permissions to create a table on the schema:
+1. If you're not an admin user, have an admin run the following command to grant your user permission to create a table on the schema.
     ```sql
-    GRANT CREATE TABLE ON SCHEMA `<CATALOG_NAME>`.`<SCHEMA_NAME>` TO `<ADMIN_USER>`;
+    GRANT CREATE TABLE ON SCHEMA <CATALOG_NAME>.<SCHEMA_NAME> TO <USER>;
     ```
 
-1. Create the table that Observability Pipelines sends log data to:
+1. Run the following command to create the table that Observability Pipelines sends log data to.
     ```sql
-    CREATE TABLE `<CATALOG_NAME>`.`<SCHEMA_NAME>`.`<TABLE_NAME>` (
+    CREATE TABLE <CATALOG_NAME>.<SCHEMA_NAME>.<TABLE_NAME> (
       host STRING,
       message STRING,
       service STRING,
@@ -63,24 +64,28 @@ The SQL examples in this section use the following placeholders:
       timestamp TIMESTAMP
     );
     ```
+    - See Databricks' [Create a Unity Managed Table](https://docs.databricks.com/aws/en/tables/managed#create-a-managed-table) documentation for more information.
 
 The fully qualified table name is `catalog.schema.table`, for example `main.obs_pipelines.apache_common_logs`. This is the value you enter for **Table Name** when you set up the Observability Pipelines Databricks destination.
 
-### Set up the service principal
+### Set up a service principal
 
 The Databricks (Zerobus) API uses OAuth authentication. The OAuth client ID is the service principal's UUID, and the OAuth client secret is generated when you create the service principal.
 
 To create a service principal:
+
 1. In your Databricks workspace, navigate to **User Settings** > **Identity and access** > **Service principals**.
 1. Click **Add service principal**.
-1. After the service principal is created, generate an OAuth secret for it. Take note of the service principal's **Application ID** (client ID) and the OAuth client secret. You need both when you configure the Observability Pipelines Databricks destination.
-
+1. After the service principal is created, generate an OAuth secret for it.
+    - Take note of the service principal's **Application ID** (client ID) and the OAuth client secret. You need both of them when you configure the Observability Pipelines Databricks destination.
 1. Run this SQL in Databricks to grant the service principal access to the catalog, schema, and table. Replace `<SERVICE_PRINCIPAL_UUID>` with the service principal's application ID from the previous step.
     ```sql
     GRANT USE CATALOG ON CATALOG `<CATALOG_NAME>` TO `<SERVICE_PRINCIPAL_UUID>`;
     GRANT USE SCHEMA ON SCHEMA `<CATALOG_NAME>`.`<SCHEMA_NAME>` TO `<SERVICE_PRINCIPAL_UUID>`;
     GRANT SELECT, MODIFY ON TABLE `<CATALOG_NAME>`.`<SCHEMA_NAME>`.`<TABLE_NAME>` TO `<SERVICE_PRINCIPAL_UUID>`;
     ```
+
+See Databricks' [Add a service principal to your account](https://docs.databricks.com/aws/en/admin/users-groups/manage-service-principals#-add-service-principals-to-your-account) and [Grant permissions on an object](https://docs.databricks.com/aws/en/data-governance/unity-catalog/manage-privileges/?language=Catalog%C2%A0Explorer#-grant-permissions-on-an-object) documentation for more information.
 
 ## Setup
 
@@ -99,7 +104,6 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 1. For **Auth - Client Secret**, enter the identifier for your OAuth client secret. If you leave it blank, the [default](#secret-defaults) is used.
 
 ### Optional settings
-
 
 #### Buffering
 
