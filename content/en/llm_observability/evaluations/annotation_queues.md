@@ -63,11 +63,11 @@ Add traces to a queue manually from the Trace Explorer:
 {{% /tab %}}
 
 {{% tab "Using Automation Rules" %}}
-Instead of manually selecting traces, use Automation Rules to route traces into annotation queues automatically based on filters and sampling criteria. This enables continuous, hands-off queue population without requiring manual trace selection.
+Instead of manually selecting traces, use Automation Rules to route traces into annotation queues automatically based on filters and sampling criteria. This enables continuous, hands-off queue population without requiring manual trace selection. See [Automation Rules][5] for the full feature reference, including supported filter fields and limits.
 
 To add an annotation queue action to an Automation Rule:
 1. Navigate to  [**AI Observability > Traces**][1]
-2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications). See the example queries in [Search Syntax](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+2. Apply filters to identify traces you want to route (evaluation failures, latency thresholds, specific applications). See [Automation Rules > Supported filter fields][6] for what's allowed.
 3. Click **Automate Query**
 4. Configure sampling rate (for example, 10% of matching traces).
 5. Under **Actions**, select **Add to Annotation Queue**.
@@ -77,6 +77,8 @@ To add an annotation queue action to an Automation Rule:
 Traces matching the rule's filters are added to the queue automatically as they arrive.
 
 [1]: https://app.datadoghq.com/llm/traces
+[5]: /llm_observability/evaluations/automation_rules/
+[6]: /llm_observability/evaluations/automation_rules/#supported-filter-fields
 {{% /tab %}}
 {{< /tabs >}}
 
