@@ -35,10 +35,10 @@ algolia:
 
 Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across several hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate datapoints.
 
-Tags are `key:value` pairs containing two parts:
+A tag can be formatted as `<key>:<value>` or `<value>`. Datadog recommends using the `<key>:<value>` format, as it is often semantically clearer and allows for richer querying capabilities (for example, grouping by key). When using a `<key>:<value>` pair:
 
-- The tag **key** is the identifier. The tag key is case sensitive.
-- The tag **value** is the specific data or information associated with the key. Tag values are not unique per resource and can be used across many resources in a `key:value` pair.
+- The tag **key** is the identifier. Commonly used tag keys are `env`, `instance`, and `name`.
+- The tag **value** is the specific data or information associated with the key. Tag values are not unique per resource and can be used across many resources in a `<key>:<value>` pair.
 
 Tagging binds different data types in Datadog, allowing for correlation and calls to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys:
 | Tag key   | Allows for                                                             |
@@ -57,35 +57,37 @@ Because containers and cloud environments regularly churn through hosts, using t
 
 ## Define tags
 
-Below are Datadog's tagging requirements:
+Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must meet the following requirements:
 
-1. Tags must **start with a letter** and after that may contain the characters listed below:
+- Tag strings must **start with a letter** (this applies regardless of whether the tag uses the format `<key>:<value>` or `<value>`). After the leading letter, the tag string may contain the characters listed below:
 
-    - Alphanumerics
-    - Underscores
+    - Letters (all Unicode letters are supported—for example, a, ó, 気, 녕, ك, and ดี)
+    - Numbers
+    - Underscores (leading and trailing underscores are removed, and contiguous underscores are collapsed into one)
     - Minuses
     - Colons
-    - Commas
     - Periods
-    - Slashes
+    - Forward slashes
+    - (Only for tags on logs [ingested through HTTP][28]) at signs (`@`)
 
-    Other special characters are converted to underscores.
-
+    All other characters (including commas, emoji, backslashes, and spaces) are converted to underscores.
+    
     **Notes**:
     - A tag that starts with a digit may be accepted in some contexts, such as `env` tags set at the Agent level. However, tags that don't follow standard naming rules may not work consistently across all Datadog products and can increase tag cardinality. Start tags with a letter unless a specific product explicitly supports otherwise.
     - The `DD_TAGS` environment variable uses whitespace as a separator between tags. Whitespace in `DD_TAGS` values is **not** converted to underscores. For example, `DD_TAGS="test:this is a test"` produces four separate tags: `test:this`, `is`, `a`, and `test`. To set a tag value that contains spaces, use a YAML configuration file or integration annotations, where whitespace is converted to underscores.
 
-2. Tags can be **up to 200 characters** long and support Unicode letters (which includes most character sets, including languages such as Japanese).
-3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
-4. A tag can be in the format `value` or `<KEY>:<VALUE>`. Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
-
+- Tags can be **up to 200 characters** long. If the tag has the format `<key>:<value>`, the key, `:`, and value all count toward the character limit.
+- [Span tags][26] and metric tags are normalized to lowercase, so avoid using camel case. Authentication (crawler) based integrations also convert camel case tags to underscores before lowercasing. For example `testTag` becomes `test_tag`.
+    - Unlike tags, [span attributes][27] and log attributes are case-sensitive, and are not normalized.
+- When using the format `<key>:<value>`, the key always precedes the first colon of the global tag definition. For example:
+    
     | Tag                | Key           | Value          |
     | ------------------ | ------------- | -------------- |
     | `env:staging:east` | `env`         | `staging:east` |
     | `env_staging:east` | `env_staging` | `east`         |
 
-5. Tags should not originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
-6. Limitations (such as downcasing) only apply to metric tags, not log attributes or span tags.
+- Tags should not originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so can cause unbounded growth in your number of [metrics][2].
+
 
 ## Assign tags
 
@@ -179,3 +181,6 @@ For more information, see [Using Tags][1].
 [23]: /account_management/billing/usage_attribution/
 [24]: /getting_started/tagging/using_tags/#ci-visibility
 [25]: /containers/troubleshooting/log-collection?tab=datadogoperator#missing-host-level-tags-on-new-hosts-or-nodes
+[26]: /tracing/trace_collection/tracing_naming_convention/#span-tags
+[27]: /tracing/trace_collection/tracing_naming_convention/#span-attributes
+[28]: /api/latest/logs/#send-logs

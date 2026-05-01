@@ -12,28 +12,267 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/collector_health_metrics.png" alt="OpenTelemetry Collector health metrics dashboard" style="width:100%;" >}}
 
-To collect health metrics from the OpenTelemetry Collector itself, configure the [Prometheus receiver][1] in your Datadog Exporter.
+The OpenTelemetry Collector exposes internal telemetry as metrics. You can collect these metrics and send them to Datadog to monitor Collector health and pipeline throughput.
 
-For more information, see the OpenTelemetry project documentation for the [Prometheus receiver][1].
+You can send the Collector's health metrics to Datadog with two approaches:
+
+- **Prometheus**: Scrape the Collector's internal Prometheus endpoint with the [Prometheus receiver][1] and forward the metrics through a metrics pipeline to the Datadog Exporter.
+- **OTLP**: Configure the Collector's internal telemetry to export metrics directly to the [Datadog OTLP metrics intake endpoint][4] over OTLP HTTP.
 
 ## Setup
 
-Add the following lines to your Collector configuration:
+### Configure the pipeline
+
+The following tabs cover two approaches: a Prometheus-style scrape and a direct OTLP push. After configuring the pipeline, see the [Configuration reference](#configuration-reference) for all available options.
+
+{{< tabs >}}
+{{% tab "Prometheus" %}}
+
+Configure the Collector to expose its internal metrics on a Prometheus pull endpoint. Scrape that endpoint with the [Prometheus receiver][101] and route the data through a metrics pipeline to the [Datadog Exporter][102].
 
 ```yaml
 receivers:
-  prometheus:
+  prometheus/internal:
     config:
       scrape_configs:
-      - job_name: 'otelcol'
-        scrape_interval: 10s
-        static_configs:
-        - targets: ['0.0.0.0:8888']
+        - job_name: 'otelcol'
+          scrape_interval: 10s
+          static_configs:
+            - targets: ['0.0.0.0:8888']
+
+exporters:
+  datadog:
+    api:
+      key: ${env:DD_API_KEY}
+      site: <DATADOG_SITE>
+    metrics:
+      resource_attributes_as_tags: true
+    sending_queue:
+      batch:
+        flush_timeout: 10s
+
+service:
+  telemetry:
+    metrics:
+      level: normal
+      readers:
+        - pull:
+            exporter:
+              prometheus:
+                host: 0.0.0.0
+                port: 8888
+                without_type_suffix: true
+                without_units: true
+                without_scope_info: true
+                # with_resource_constant_labels:
+                #   included: ["service.name", "service.instance.id"]
+                #   excluded: []
+      # views:
+      #   - selector:
+      #       instrument_name: otelcol_processor_*
+      #     stream:
+      #       aggregation:
+      #         drop: {}
+  pipelines:
+    metrics:
+      receivers: [prometheus/internal]
+      exporters: [datadog]
+```
+
+Replace `<DATADOG_SITE>` with your [Datadog site][106]: {{< region-param key="dd_site" code="true" >}}.
+
+The `service.telemetry.metrics` block exposes the Collector's internal metrics on `0.0.0.0:8888`. The `prometheus/internal` receiver scrapes that same endpoint, and the metrics pipeline forwards the scraped metrics to Datadog.
+
+For all available options, see [`pull.exporter.prometheus` options](#pullexporterprometheus-options).
+
+#### Enrich with processors (optional)
+
+Add the [resource detection processor][103] to the metrics pipeline to automatically populate cloud and host resource attributes (for example, `host.id`, `cloud.provider`, `cloud.region`). You can also add other processors such as [`transform`][104] or [`k8sattributes`][105] to enrich or transform Collector health metrics before export.
+
+```yaml
+processors:
+  resourcedetection:
+    detectors: [env, system, ec2]
+    override: false
+
+service:
+  pipelines:
+    metrics:
+      receivers: [prometheus/internal]
+      processors: [resourcedetection]
+      exporters: [datadog]
 ```
 
 <div class="alert alert-warning">
 If you have a Datadog Agent running on the same host as an OpenTelemetry Collector or DDOT Collector that uses a Prometheus receiver to scrape Collector health metrics, make sure the Agent's <a href="/integrations/openmetrics/">OpenMetrics integration</a> is either turned off or scraping a different endpoint than the Collector health metrics endpoint. Otherwise, both the Agent and Collector scrape the same endpoint, resulting in duplicate Collector health metrics.
 </div>
+
+[101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
+[102]: /opentelemetry/setup/collector_exporter/
+[103]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
+[104]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/transformprocessor
+[105]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
+[106]: /getting_started/site
+
+{{% /tab %}}
+{{% tab "OTLP" %}}
+
+Configure the Collector's internal telemetry to push metrics directly to the [Datadog OTLP metrics intake endpoint][201] using a periodic OTLP HTTP reader. This approach does not require a Prometheus receiver or a metrics pipeline for Collector health metrics.
+
+```yaml
+service:
+  telemetry:
+    metrics:
+      level: normal
+      readers:
+        - periodic:
+            interval: 10000
+            timeout: 5000
+            exporter:
+              otlp:
+                protocol: http/protobuf
+                endpoint: <OTLP_METRICS_ENDPOINT>
+                temporality_preference: delta
+                compression: gzip
+                timeout: 5000
+                headers:
+                  - name: dd-api-key
+                    value: ${env:DD_API_KEY}
+                  - name: dd-otel-metric-config
+                    value: '{"resource_attributes_as_tags": true, "instrumentation_scope_metadata_as_tags": true}'
+                # default_histogram_aggregation: explicit_bucket_histogram
+                # headers_list: "dd-api-key=${env:DD_API_KEY}"
+                # insecure: false
+                # certificate: /path/to/ca.pem
+                # client_certificate: /path/to/client.pem
+                # client_key: /path/to/client.key
+      # views:
+      #   - selector:
+      #       instrument_name: otelcol_processor_*
+      #     stream:
+      #       aggregation:
+      #         drop: {}
+```
+
+Replace `<OTLP_METRICS_ENDPOINT>` with the [Datadog OTLP metrics intake endpoint][201] for your [Datadog site][202]: {{< region-param key="otlp_metrics_endpoint" code="true" >}}.
+
+The Datadog OTLP metrics intake endpoint accepts only delta metrics, so `temporality_preference: delta` is required. The `dd-api-key` header authenticates the request, and the `dd-otel-metric-config` header customizes how metrics are translated to Datadog. For all the YAML fields available under the `periodic` reader, see [`periodic.exporter.otlp` options](#periodicexporterotlp-options); for the full list of metric-translation options and troubleshooting, see [Datadog OTLP Metrics Intake Endpoint][201].
+
+<div class="alert alert-warning">
+This setup pushes metrics directly to the OTLP intake endpoint, bypassing any enrichment that pipeline processors (such as <code>resourcedetection</code> or <code>k8sattributes</code>) would otherwise apply. To populate Datadog tags and host metadata (which are needed for hostname resolution and the default Collector dashboard), set the relevant attributes explicitly under <a href="#tag-with-resource-attributes-optional"><code>service.telemetry.resource</code></a>. If you need automatic hostname and cloud-attribute detection, use the Prometheus tab instead.
+</div>
+
+
+[201]: /opentelemetry/setup/otlp_ingest/metrics/
+[202]: /getting_started/site
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Tag with resource attributes (optional)
+
+Use `service.telemetry.resource` to attach resource attributes (such as `k8s.cluster.name`, `service.instance.id`, or any [Datadog-mapped semantic convention][6]) to all telemetry the Collector emits about itself.
+
+Use the legacy inline map format for a concise definition:
+
+```yaml
+service:
+  telemetry:
+    resource:
+      k8s.cluster.name: my-cluster
+      k8s.pod.name: ${env:HOSTNAME}
+      service.instance.id: ${env:HOSTNAME}
+      deployment.environment: prod
+```
+
+Alternatively, use the declarative `attributes` format, which supports explicit typing and a `schema_url`. This format requires Collector v0.151.0 or later:
+
+```yaml
+service:
+  telemetry:
+    resource:
+      schema_url: https://opentelemetry.io/schemas/1.27.0
+      attributes:
+        - name: k8s.cluster.name
+          value: my-cluster
+        - name: k8s.pod.name
+          value: ${env:HOSTNAME}
+```
+
+To suppress a default attribute such as `service.version`, specify it with a null value in the legacy inline format.
+
+Datadog maps these attributes to tags and host metadata. For the full list of supported mappings, see [OpenTelemetry Semantic Conventions and Datadog Conventions][6] and [Mapping OpenTelemetry Semantic Conventions to Hostnames][7].
+
+## Configuration reference
+
+### `service.telemetry.metrics` fields
+
+The following top-level fields apply to both Prometheus and OTLP setups:
+
+`level`
+: Verbosity of the Collector's internal metrics. One of `none`, `basic`, `normal` (default), or `detailed`. Set `level: detailed` to enable `views`.
+
+`readers`
+: List of metric readers. At least one is required when `level` is not `none`. Each reader is either a `pull` reader (Prometheus) or a `periodic` reader (OTLP or console).
+
+`views`
+: Optional list of [SDK views][5] that drop, rename, filter, or re-aggregate specific instruments. Only available when `level: detailed`.
+
+### `pull.exporter.prometheus` options
+
+`host` / `port`
+: Address to expose the Prometheus endpoint on. Defaults to `localhost:8888`. Use `0.0.0.0` to expose outside the loopback interface.
+
+`without_type_suffix`
+: When `true` (the Collector default), drops the type suffix (for example, `_total` for counters) from metric names. Names appear as `otelcol_exporter_sent_metric_points` instead of `otelcol_exporter_sent_metric_points_total`.
+
+`without_units`
+: When `true`, drops the unit suffix (for example, `_seconds`, `_bytes`) from metric names.
+
+`without_scope_info`
+: When `true`, suppresses the `otel_scope_info` metric and `otel_scope_*` labels.
+
+`with_resource_constant_labels.included` / `with_resource_constant_labels.excluded`
+: Allowlist and denylist of resource attributes to copy onto every exported metric as constant labels.
+
+### `periodic.exporter.otlp` options
+
+The `periodic` reader (which contains the OTLP exporter) accepts these top-level options:
+
+`interval`
+: Time in milliseconds between exports. Defaults to `60000` (60 seconds).
+
+`timeout`
+: Maximum time in milliseconds to wait for an export to complete. Defaults to `30000` (30 seconds).
+
+The `otlp` block inside `periodic.exporter` accepts these options:
+
+`protocol`
+: One of `grpc`, `http/protobuf`, or `http/json`. Use `http/protobuf` for the Datadog OTLP metrics intake endpoint.
+
+`endpoint`
+: URL of the OTLP receiver. For Datadog, use {{< region-param key="otlp_metrics_endpoint" code="true" >}}.
+
+`headers` / `headers_list`
+: Headers to add to every export request. Use the structured `headers` list (each entry is a `{name, value}` pair) or `headers_list` as a URL-encoded string (for example, `dd-api-key=${env:DD_API_KEY}`).
+
+`compression`
+: Compression algorithm. One of `gzip` or `none`.
+
+`timeout`
+: Per-request timeout in milliseconds. Distinct from the reader-level `timeout`.
+
+`temporality_preference`
+: One of `cumulative`, `delta`, or `lowmemory`. The Datadog OTLP metrics intake endpoint requires `delta`.
+
+`default_histogram_aggregation`
+: One of `explicit_bucket_histogram` (default) or `base2_exponential_bucket_histogram`.
+
+`insecure`
+: When `true`, disables TLS. Defaults to `false`.
+
+`certificate`, `client_certificate`, `client_key`
+: Paths to PEM files for custom CA verification and mutual TLS (mTLS) client authentication.
 
 ## Data collected
 
@@ -66,10 +305,6 @@ If you have a Datadog Agent running on the same host as an OpenTelemetry Collect
 | `otelcol_receiver_refused_log_records` | Number of log records that could not be pushed into the pipeline |
 | `otelcol_receiver_accepted_log_records` | Number of log records successfully pushed into the pipeline |
 
-
-## Full example configuration
-
-For a full working example configuration with the Datadog exporter, see [`collector-metrics.yaml`][2].
 
 ## Example logging output
 
@@ -133,5 +368,8 @@ Descriptor:
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector-metrics.yaml
 [3]: https://pkg.go.dev/runtime#MemStats.Sys
+[4]: /opentelemetry/setup/otlp_ingest/metrics/
+[5]: https://opentelemetry.io/docs/specs/otel/metrics/sdk/#view
+[6]: /opentelemetry/mapping/semantic_mapping/
+[7]: /opentelemetry/mapping/hostname/

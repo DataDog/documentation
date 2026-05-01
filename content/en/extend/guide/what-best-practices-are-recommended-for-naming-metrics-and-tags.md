@@ -38,13 +38,7 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format, for ex
 
 As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see [Unified service tagging][1].
 
-* Tags must start with a letter.
-* May contain alphanumerics, underscores, minuses, colons, periods, and slashes. Other characters are converted to underscores.
-* A trailing underscore is removed, whether if it originated from a converted character or if it was in the original tag value.
-* Contiguous underscores are reduced to a single underscore.
-* Tags can be up to 200 characters long (including both key and value) and support Unicode. Additional characters beyond this limit are truncated.
-* Tags are converted to lowercase.
-* For optimal functionality, it is recommended to use the `key:value` syntax.
+For a full list of tag requirements, including allowed characters, length limits, and normalization behavior, see [Define tags][2].
 
 Examples of commonly used metric tag keys are `instance`, `name`, and `role`.
 
@@ -53,3 +47,4 @@ Examples of commonly used metric tag keys are `instance`, `name`, and `role`.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging
+[2]: /getting_started/tagging/#define-tags
