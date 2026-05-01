@@ -54,7 +54,7 @@ A single organization gives you:
 
 - **Connected observability:** Distributed traces flow end-to-end across services without gaps. Correlated views across metrics, logs, and traces work without additional customization.
 - **One configuration surface:** Monitors, dashboards, pipelines, and SLOs live in one place, with no duplication and no drift.
-- **Simple user management:** You only need one SSO configuration, one [SCIM][11] integration, and one set of roles and teams.
+- **Centralized user management:** You only need one SSO configuration, one [SCIM][11] integration, and one set of roles and teams.
 - **Per-team cost visibility:** Usage attribution breaks down spend by team, service, or business unit using tags, so you don't need separate organizations for separate billing views.
 - **Low operational cost:** A single organization doesn't require Terraform modules per organization, cross-organization workarounds, or duplicated alert routing.
 
@@ -94,7 +94,7 @@ When regulations prohibit telemetry from leaving a geographic region, you need o
 
 _Is it a risk if one team sees any trace of another team's data?_
 
-Datadog access controls restrict the most common sources of sensitive data, but they do not support complete firewalled separation of all telemetry data or asset metadata. If your requirements demand zero data co-mingling, use separate organizations.
+Datadog access controls restrict the most common sources of sensitive data. They do not support complete firewalled separation of all telemetry data or asset metadata. If your requirements demand zero data co-mingling, use separate organizations.
 
 ### Scenario 4: Isolate MSP customers
 
