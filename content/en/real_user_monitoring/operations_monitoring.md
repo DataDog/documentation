@@ -50,7 +50,7 @@ Use the SDK APIs to define your operations.
 
 ### Start an operation
 
-Every operation must be started by calling the `startFeatureOperation`.
+Every operation must be started by calling the `startOperation`.
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -75,9 +75,10 @@ options?: {
 {{% tab "Android" %}}
 
 ```kotlin
-GlobalRumMonitor.get().startFeatureOperation(
+GlobalRumMonitor.get().startOperation(
 	name: String,
 	operationKey: String?,
+	options: OperationOptions,
 	attributes: Map<String, Any?>
 )
 ```
@@ -86,10 +87,11 @@ GlobalRumMonitor.get().startFeatureOperation(
 
 {{% tab "iOS" %}}
 ```swift
-RUMMonitor.shared().startFeatureOperation(
+RUMMonitor.shared().startOperation(
 	name: String,
 	operationKey: String?,
-	attributes: [AttributeKey: AttributeValue]?
+	attributes: [AttributeKey: AttributeValue]?,
+	options: OperationOptions?
 )
 ```
 {{% /tab %}}
@@ -132,7 +134,7 @@ m.global.datadogRumAgent@.startOperation(
 
 ### Stop an operation with success
 
-Every started operation must have a stop. Use `succeedFeatureOperation` to stop an operation with a successful outcome.
+Every started operation must have a stop. Use `succeedOperation` to stop an operation with a successful outcome.
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -157,7 +159,7 @@ options?: {
 {{% tab "Android" %}}
 
 ```kotlin
-GlobalRumMonitor.get().succeedFeatureOperation(
+GlobalRumMonitor.get().succeedOperation(
 	name: String,
 	operationKey: String?,
 	attributes: Map<String, Any?>
@@ -169,7 +171,7 @@ GlobalRumMonitor.get().succeedFeatureOperation(
 {{% tab "iOS" %}}
 
 ```swift
-RUMMonitor.shared().succeedFeatureOperation(
+RUMMonitor.shared().succeedOperation(
 	name: String,
 	operationKey: String?,
 	attributes: [AttributeKey: AttributeValue]?
@@ -219,7 +221,7 @@ m.global.datadogRumAgent@.succeedOperation(
 
 ### Stop an operation with failure
 
-Every started operation must have a stop. Use `failFeatureOperation` to stop an operation with a failure outcome.
+Every started operation must have a stop. Use `failOperation` to stop an operation with a failure outcome.
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -230,7 +232,7 @@ DD_RUM.init({
 enableExperimentalFeatures: ["feature_operation_vital"], // this flag needs to be enabled for the API to work
 })
 
-GlobalRumMonitor.get().failFeatureOperation: (
+failFeatureOperation: (
 name: string, 
 failureReason: FailureReason, //'error' | 'abandoned' | 'other'
 options?: {
@@ -245,10 +247,10 @@ options?: {
 {{% tab "Android" %}}
 
 ```kotlin
-GlobalRumMonitor.get().failFeatureOperation(
+GlobalRumMonitor.get().failOperation(
 	name: String,
 	operationKey: String?,
-	failureReason: RUMFeatureOperationFailureReason,	// .error, .abandoned, .other
+	failureReason: FailureReason,	// ERROR, ABANDONED, OTHER
 	attributes: Map<String, Any?>
 )
 ```
@@ -258,7 +260,7 @@ GlobalRumMonitor.get().failFeatureOperation(
 {{% tab "iOS" %}}
 
 ```swift
-RUMMonitor.shared().failFeatureOperation(
+RUMMonitor.shared().failOperation(
 	name: String,
 	operationKey: String?,
     reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .other
@@ -310,7 +312,7 @@ To use operations on Flutter Web, enable the `feature_operation_vital` experimen
 {{< /tabs >}}
 
 ### Parallelization
-You may have cases where users are starting several feature operations in parallel. To individually track them, use the `operationKey` defined when calling `startFeatureOperation`. You must reuse the same `operationKey` later in other APIs, for example when calling `succeedFeatureOperation`.
+You may have cases where users are starting several feature operations in parallel. To individually track them, use the `operationKey` defined when calling `startOperation`. You must reuse the same `operationKey` later in other APIs, for example when calling `succeedOperation`.
 
 <div class="alert alert-warning">Operations that have been started but not explicitly stopped are automatically terminated when the RUM session expires. Those are marked as failed, with <code>@operation.failure_reason:timeout</code>. <br><br> If an operation stop API was called that was not started in the first place, the stop event emitted by the SDK is dropped upon ingestion.</div>
 
