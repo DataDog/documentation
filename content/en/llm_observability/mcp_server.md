@@ -29,7 +29,7 @@ The LLM Observability MCP tools enable AI-assisted workflows for:
 - **Investigating agent loops**: Review an agent's step-by-step execution loop to understand decision-making and tool invocation patterns.
 - **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
-- **Managing LLM-judge evaluators**: List, inspect, create, update, and delete LLM-judge evaluator configurations across an ML application or the entire organization.
+- **Managing evaluators**: List, inspect, create, update, and delete evaluator configurations across an ML application or the entire organization.
 
 ## Available tools
 
