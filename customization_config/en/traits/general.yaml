@@ -62,3 +62,13 @@ traits:
   label: Secrets source
   type: text
   internal_notes: The location of the user's sensitive information, such as API keys or other credentials. For example, Secrets Management or environment variables.
+
+- id: db_hosting
+  label: Database hosting
+  type: text
+  internal_notes: For Database Monitoring docs — where the customer's database lives. For example, RDS, Aurora, Cloud SQL, AlloyDB, Azure, or self-hosted.
+
+- id: agent_runtime
+  label: Agent runtime
+  type: text
+  internal_notes: For Database Monitoring docs — where the Datadog Agent process runs. For example, AWS Fargate, ECS on EC2, Amazon EKS, or an Amazon EC2 host.

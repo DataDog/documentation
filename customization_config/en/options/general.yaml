@@ -507,3 +507,18 @@ options:
 
 - label: Elixir
   id: elixir
+
+- label: AlloyDB
+  id: alloydb
+
+- label: Amazon Aurora
+  id: aurora
+
+- label: Amazon EC2
+  id: amazon_ec2
+
+- label: Cloud SQL
+  id: cloud_sql
+
+- label: ECS on EC2
+  id: ecs_ec2
