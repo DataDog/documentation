@@ -19,7 +19,7 @@ This guide goes over how to upgrade to a specific Worker version and the updates
 To upgrade to Worker version 2.15.0:
 
 - Docker: Run the `docker pull` command for the [2.15.0 image][40].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.15.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.15.0`.
 
@@ -68,7 +68,7 @@ Worker version 2.15.0 gives you access to the following:
 To upgrade to Worker version 2.14.1:
 
 - Docker: Run the `docker pull` command for the [2.14.1 image][42].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.14.1`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.14.1`.
 
@@ -85,7 +85,7 @@ Worker version 2.14.1 gives you access to the following:
 To upgrade to Worker version 2.14.0:
 
 - Docker: Run the `docker pull` command for the [2.14.0 image][38].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.14.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.14.0`.
 
@@ -126,7 +126,7 @@ Worker version 2.14.0 gives you access to the following:
 To upgrade to Worker version 2.13.2:
 
 - Docker: Run the `docker pull` command for the [2.13.2 image][39].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.13.2`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.13.2`.
 
