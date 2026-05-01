@@ -5031,16 +5031,21 @@ menu:
       parent: dbm
       identifier: dbm_recommendations
       weight: 16
+    - name: Database Investigator
+      url: database_monitoring/database_investigator/
+      parent: dbm
+      identifier: dbm_database_investigator
+      weight: 17
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 17
+      weight: 18
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 18
+      weight: 19
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
