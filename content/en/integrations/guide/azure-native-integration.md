@@ -29,6 +29,12 @@ This guide is for setting up and managing the Datadog Monitor resource in Azure,
 - Your Datadog account must be on the [US3 Site][1]
 - You must be an **Owner** on any Azure subscriptions you want to link, and **Admin** for the Datadog organization you are linking them to
 
+{{% collapse-content title="Enterprise environment considerations" level="h4" expanded=false id="enterprise-considerations" %}}
+
+{{% azure-enterprise-prerequisites %}}
+
+{{% /collapse-content %}}
+
 ## Overview
 
 The Datadog resource in Azure represents the connection between your Datadog organization and your Azure environment. You can configure a Datadog resource to link as many subscriptions as you wish to monitor. 
