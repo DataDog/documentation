@@ -77,8 +77,8 @@ Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must m
     - The `DD_TAGS` environment variable uses whitespace as a separator between tags. Whitespace in `DD_TAGS` values is **not** converted to underscores. For example, `DD_TAGS="test:this is a test"` produces four separate tags: `test:this`, `is`, `a`, and `test`. To set a tag value that contains spaces, use a YAML configuration file or integration annotations, where whitespace is converted to underscores.
 
 - Tags can be **up to 200 characters** long. If the tag has the format `<key>:<value>`, the key, `:`, and value all count toward the character limit.
-- [Span tags][26] and metric tags are normalized to lowercase, so avoid using camel case. Authentication (crawler) based integrations also convert camel case tags to underscores before lowercasing. For example `testTag` becomes `test_tag`.
-    - Unlike tags, [span attributes][27] and log attributes are case-sensitive, and are not normalized.
+- [Span tags][26] and metric tags are normalized to lowercase, so avoid using camel case. Authentication (crawler) based integrations also convert camel case tags to underscores before lowercasing. For example, `testTag` becomes `test_tag`.
+    - Unlike tags, [span attributes][27] and log attributes are case-sensitive and are not normalized.
 - When using the format `<key>:<value>`, the key always precedes the first colon of the global tag definition. For example:
     
     | Tag                | Key           | Value          |
