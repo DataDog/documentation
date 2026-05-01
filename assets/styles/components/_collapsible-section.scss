@@ -81,7 +81,7 @@
     padding: 16px;
 }
 
-// Registry copy-link
+// Registry copy-link button
 button.registry-copy-link {
     background: none;
     border: none;
@@ -94,16 +94,14 @@ button.registry-copy-link {
     cursor: pointer;
     opacity: .5;
 
-
     &.registry-copy-link--copied {
         color: $ddpurple;
         opacity: 1;
     }
 }
 
-// Show link icon on hover of the parent dt or header-content
-dt:hover .registry-copy-link,
-.header-content:hover .registry-copy-link {
+// Show link icon on hover of the parent dt
+dt:hover .registry-copy-link {
     opacity: 1;
 }
 

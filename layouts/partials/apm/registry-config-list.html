@@ -209,8 +209,10 @@
           if (!link.parentElement.open) {
             var url = window.location.origin + window.location.pathname + link.getAttribute('data-href');
             navigator.clipboard.writeText(url).then(function() {
-              link.classList.add('registry-copy-link--copied');
-              setTimeout(function() { link.classList.remove('registry-copy-link--copied'); }, 1500);
+              if (link.matches('button')) {
+                link.classList.add('registry-copy-link--copied');
+                setTimeout(function() { link.classList.remove('registry-copy-link--copied'); }, 1500);
+              }
             });
             
             history.replaceState(null, '', link.getAttribute('data-href'));
