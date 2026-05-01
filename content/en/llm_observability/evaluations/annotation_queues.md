@@ -232,7 +232,7 @@ When multiple annotators have annotated the same trace, the value for each label
 | Score       | Average                                   |
 | Text        | List of responses                         |
 
-For single-select categorical labels, the option with the most votes wins, even without a strict majority. Ties break alphabetically (the option that comes first wins).
+For single-select categorical labels, the option with the most votes wins, even without a strict majority. Ties break alphabetically (the option that comes first wins). For multi-select, the resulting list is sorted alphabetically.
 
 **Example: categorical (single-select).** Three annotators rate `tone`:
 
@@ -248,7 +248,7 @@ Aggregated: `"polite"` (2 of 3 votes).
 - Annotator B: `["safety", "billing"]`
 - Annotator C: `["safety", "policy"]`
 
-Aggregated: `["safety", "policy"]`. `safety` (3 of 3) and `policy` (2 of 3) make it in; `billing` (1 of 3) does not.
+Aggregated: `["policy", "safety"]`. `safety` (3 of 3) and `policy` (2 of 3) make it in; `billing` (1 of 3) does not. The list is sorted alphabetically.
 
 **Example: text.** Two annotators leave notes:
 
