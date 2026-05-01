@@ -424,6 +424,9 @@ options:
 - label: Traces
   id: traces
 
+- label: UI
+  id: ui
+  
 - label: Unity
   id: unity 
 
@@ -507,3 +510,12 @@ options:
 
 - label: Elixir
   id: elixir
+
+- label: Secrets Manager
+  id: secrets_manager
+
+- label: Environment Variables
+  id: environment_variables
+
+- label: ECS Fargate
+  id: ecs_fargate
