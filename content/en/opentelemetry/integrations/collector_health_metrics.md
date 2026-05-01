@@ -208,7 +208,7 @@ Datadog maps these attributes to tags and host metadata. For the full list of su
 
 ### `service.telemetry.metrics` fields
 
-The following top-level fields apply to both setups:
+The following top-level fields apply to both Prometheus and OTLP setups:
 
 `level`
 : Verbosity of the Collector's internal metrics. One of `none`, `basic`, `normal` (default), or `detailed`. Set `level: detailed` to enable `views`.
