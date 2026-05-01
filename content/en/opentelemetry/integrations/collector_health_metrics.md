@@ -14,7 +14,7 @@ further_reading:
 
 The OpenTelemetry Collector exposes internal telemetry as metrics. You can collect these metrics and send them to Datadog to monitor Collector health and pipeline throughput.
 
-You can collect Collector health metrics in two ways:
+You can send the Collector's health metrics to Datadog with two approaches:
 
 - **Prometheus**: Scrape the Collector's internal Prometheus endpoint with the [Prometheus receiver][1] and forward the metrics through a metrics pipeline to the Datadog Exporter.
 - **OTLP**: Configure the Collector's internal telemetry to export metrics directly to the [Datadog OTLP metrics intake endpoint][4] over OTLP HTTP.
@@ -23,12 +23,12 @@ You can collect Collector health metrics in two ways:
 
 ### Configure the pipeline
 
-Pick a tab based on whether you want a Prometheus-style scrape or a direct OTLP push. After configuring the pipeline, see the [Configuration reference](#configuration-reference) for all available options.
+The following tabs cover two approaches: a Prometheus-style scrape and a direct OTLP push. After configuring the pipeline, see the [Configuration reference](#configuration-reference) for all available options.
 
 {{< tabs >}}
 {{% tab "Prometheus" %}}
 
-Configure the Collector to expose its internal metrics on a Prometheus pull endpoint. Then scrape that endpoint with the [Prometheus receiver][101] and route the data through a metrics pipeline to the [Datadog Exporter][102].
+Configure the Collector to expose its internal metrics on a Prometheus pull endpoint. Scrape that endpoint with the [Prometheus receiver][101] and route the data through a metrics pipeline to the [Datadog Exporter][102].
 
 ```yaml
 receivers:
@@ -81,11 +81,11 @@ service:
 
 Replace `<DATADOG_SITE>` with your [Datadog site][106]: {{< region-param key="dd_site" code="true" >}}.
 
-The `service.telemetry.metrics` block exposes the Collector's internal metrics on `0.0.0.0:8888`. The `prometheus/internal` receiver scrapes that same endpoint, and the metrics pipeline forwards them to Datadog.
+The `service.telemetry.metrics` block exposes the Collector's internal metrics on `0.0.0.0:8888`. The `prometheus/internal` receiver scrapes that same endpoint, and the metrics pipeline forwards the scraped metrics to Datadog.
 
-For all available options, see [`pull.exporter.prometheus` options](#pullexporterprometheus-options) in the [Configuration reference](#configuration-reference).
+For all available options, see [`pull.exporter.prometheus` options](#pullexporterprometheus-options).
 
-#### Optional: enrich with processors
+#### Enrich with processors (optional)
 
 Add the [resource detection processor][103] to the metrics pipeline to automatically populate cloud and host resource attributes (for example, `host.id`, `cloud.provider`, `cloud.region`). You can also add other processors such as [`transform`][104] or [`k8sattributes`][105] to enrich or transform Collector health metrics before export.
 
@@ -162,7 +162,7 @@ The Datadog OTLP metrics intake endpoint accepts only delta metrics, so `tempora
 This setup pushes metrics directly to the OTLP intake endpoint, bypassing any enrichment that pipeline processors (such as <code>resourcedetection</code> or <code>k8sattributes</code>) would otherwise apply. To populate Datadog tags and host metadata (which are needed for hostname resolution and the default Collector dashboard), set the relevant attributes explicitly under <a href="#tag-with-resource-attributes-optional"><code>service.telemetry.resource</code></a>. If you need automatic hostname and cloud-attribute detection, use the Prometheus tab instead.
 </div>
 
-For all available options, see [`periodic.exporter.otlp` options](#periodicexporterotlp-options) in the [Configuration reference](#configuration-reference).
+For all available options, see [`periodic.exporter.otlp` options](#periodicexporterotlp-options).
 
 [201]: /opentelemetry/setup/otlp_ingest/metrics/
 [202]: /getting_started/site
@@ -214,7 +214,7 @@ The following top-level fields apply to both Prometheus and OTLP setups:
 : Verbosity of the Collector's internal metrics. One of `none`, `basic`, `normal` (default), or `detailed`. Set `level: detailed` to enable `views`.
 
 `readers`
-: List of metric readers. At least one is required when `level` is not `none`. Each reader is either a `pull` reader (Prometheus) or a `periodic` reader (OTLP, console).
+: List of metric readers. At least one is required when `level` is not `none`. Each reader is either a `pull` reader (Prometheus) or a `periodic` reader (OTLP or console).
 
 `views`
 : Optional list of [SDK views][5] that drop, rename, filter, or re-aggregate specific instruments. Only available when `level: detailed`.
