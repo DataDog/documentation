@@ -1,6 +1,5 @@
 ---
-title: iOS and tvOS Monitoring Supported Versions
-beta: true
+title: Apple Platform Monitoring Supported Versions
 description: "List of supported operating systems and platforms for the RUM iOS SDK."
 aliases:
  - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios
@@ -27,7 +26,7 @@ further_reading:
 
 ## Supported versions
 
-The RUM iOS SDK supports the following iOS versions:
+The RUM iOS SDK supports the following platforms and versions:
 
 | Platform | Supported | Version | Notes |
 |--------|-------------|---------|-------|
@@ -37,8 +36,8 @@ The RUM iOS SDK supports the following iOS versions:
 | macOS (Designed for iPad) | {{< X >}} | 11+ | |
 | macOS (Catalyst) | partially supported | 12+ | Catalyst is supported in build mode only, which means that macOS targets build, but functionalities for the SDK might not work for this target. |
 | macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**:  `DatadogRUM`, `DatadogSessionReplay`, and `DatadogObjc`, which heavily depend on `UIKit`, do not build on macOS. |
-| visionOS | | 1.0+ | visionOS is not officially supported by the Datadog SDK. Some features may not be fully functional. |
-| watchOS | | 7.0+ | watchOS is not officially supported by the Datadog SDK. Some features may not be fully functional. |
+| visionOS | {{< X >}} | 1.0+ | |
+| watchOS | {{< X >}} | 7.0+ | |
 | Linux | | n/a | |
 
 ### Module support by platform
