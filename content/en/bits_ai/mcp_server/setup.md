@@ -26,8 +26,6 @@ Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin include
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. 
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-
 1. You can install the plugin from the Cursor Marketplace or from within Cursor:
    - From the Cursor Marketplace, open the [Datadog Plugin][1] and click **Add to Cursor**.
    - In Cursor, navigate to **Cursor Settings** > **Plugins**, then search for the Datadog plugin and click **Add to Cursor**.
