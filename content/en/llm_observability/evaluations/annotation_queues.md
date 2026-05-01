@@ -232,6 +232,31 @@ When multiple annotators have annotated the same trace, the value for each label
 | Score       | Average                                             |
 | Text        | List of responses                                   |
 
+When a single-select categorical label ties (multiple options receive the same number of votes), the option that comes first alphabetically wins.
+
+**Example: categorical (single-select).** Three annotators rate `tone`:
+
+- Annotator A: `polite`
+- Annotator B: `rude`
+- Annotator C: `polite`
+
+Aggregated: `"polite"` (2 of 3 votes).
+
+**Example: categorical (multi-select).** Three annotators tag `topics`:
+
+- Annotator A: `["safety", "policy"]`
+- Annotator B: `["safety", "billing"]`
+- Annotator C: `["safety", "policy"]`
+
+Aggregated: `["safety", "policy"]` — `safety` (3 of 3) and `policy` (2 of 3) clear the majority; `billing` (1 of 3) is dropped.
+
+**Example: text.** Two annotators leave notes:
+
+- Annotator A: `"Confusing phrasing"`
+- Annotator B: `"Tone too casual"`
+
+Aggregated: `["Confusing phrasing", "Tone too casual"]` — every annotator's value is preserved.
+
 Raw per-annotator values are preserved in each record's metadata, along with annotator identity, so you can recompute with a different strategy (for example, median, weighted vote, or reviewer pick) if the default consensus doesn't fit your workflow.
 
 Labels not selected as expected output are also included with each trace as metadata.
