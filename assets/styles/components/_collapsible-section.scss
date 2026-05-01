@@ -81,13 +81,16 @@
     padding: 16px;
 }
 
-// Registry copy-link anchors
-.registry-copy-link {
-    margin: 10px 0 0 10px;
+// Registry copy-link
+button.registry-copy-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    margin-left: 10px;
+    position: relative;
+    top: 4px;
     color: inherit;
-    vertical-align: middle;
-    text-decoration: none;
-    border-bottom: 0;
     cursor: pointer;
     opacity: .5;
 
