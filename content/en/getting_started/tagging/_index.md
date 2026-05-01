@@ -65,7 +65,7 @@ Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must m
     - Colons
     - Periods
     - Forward slashes
-    - (For tags on logs [ingested via HTTP][28] only) at signs (@)
+    - (Only for tags on logs [ingested through HTTP][28]) at signs (`@`)
 
     All other characters (including commas, emoji, backslashes, and spaces) are converted to underscores.
     
