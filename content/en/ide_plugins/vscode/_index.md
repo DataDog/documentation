@@ -102,11 +102,11 @@ Install the extension either directly in the IDE, or from the web:
 
 ### Datadog MCP Server setup
 
-Install the [Datadog Plugin][4] to enable the [Datadog MCP Server][3].
+Install the Datadog Plugin to enable the [Datadog MCP Server][3]. You can install the plugin from the [Cursor Marketplace][4] or in **Cursor Settings** > **Plugins**.
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
-[3]: /bits_ai/mcp_server/
-[4]: /bits_ai/mcp_server/setup/?tab=cursor
+[3]: /bits_ai/mcp_server/setup/?tab=cursor
+[4]: https://cursor.com/marketplace/datadog
 
 {{% /tab %}}
 {{< /tabs >}}
