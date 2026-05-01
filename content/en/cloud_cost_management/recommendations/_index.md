@@ -638,10 +638,25 @@ Assign a status to each recommendation to track cost optimization progress acros
 | {{< ui >}}Completed{{< /ui >}} | The recommended action has been taken or is no longer relevant. |
 | {{< ui >}}Dismissed{{< /ui >}} | No work is planned for this recommendation over the time frame specified when dismissing. |
 
+### Filter recommendations by status
+
+Use the status tabs at the top of the [{{< ui >}}Cloud Cost Recommendations{{< /ui >}}][1] page to filter the list by status. The available tabs are {{< ui >}}Open{{< /ui >}}, {{< ui >}}In Progress{{< /ui >}}, {{< ui >}}Completed{{< /ui >}}, and {{< ui >}}Dismissed{{< /ui >}}. Each tab displays the total estimated savings for recommendations in that status.
+
+### Track savings by status
+
+Each status tab displays the total estimated savings for recommendations in that status:
+
+- {{< ui >}}Open{{< /ui >}}: Potential savings from recommendations that have not been triaged.
+- {{< ui >}}In Progress{{< /ui >}}: Estimated savings from recommendations with work underway.
+- {{< ui >}}Completed{{< /ui >}}: Realized savings from recommendations where the recommended action has been taken.
+- {{< ui >}}Dismissed{{< /ui >}}: Estimated savings from recommendations that have been dismissed.
+
 ### Change a recommendation status
 
-1. Click a recommendation in the [{{< ui >}}Cloud Cost Recommendations{{< /ui >}}][1] list to open the side panel.
-1. Use the status dropdown to select a new status.
+You can change a recommendation status in two ways:
+
+- **From the table**: Use the status dropdown in the {{< ui >}}Status{{< /ui >}} column to select a new status directly from the recommendation list.
+- **From the side panel**: Click a recommendation to open the side panel, then use the status dropdown to select a new status.
 
 ## Recommendation action-taking
 You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
