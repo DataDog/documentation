@@ -80,7 +80,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
     d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js','DD_RUM')
   window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
@@ -107,7 +107,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+    src="https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js"
     type="text/javascript"
     crossorigin>
 </script>
