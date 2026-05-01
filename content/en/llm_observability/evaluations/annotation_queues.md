@@ -219,20 +219,20 @@ Transfer annotated traces to datasets for experiment evaluation:
    - **From annotation label**: use the values annotators applied. Pick one or more labels; the record's `expected_output` is built from your selection.
 6. Choose an existing dataset, or create a dataset.
 
-#### How annotation values are aggregated
+When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": "neutral" }`. The same shape applies whether you select one label or many.
 
-When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": ["neutral"] }`. The same shape applies whether you select one label or many.
+{{% collapse-content title="How annotation values are aggregated across annotators" level="h4" expanded=false id="annotation-aggregation" %}}
 
 When multiple annotators have annotated the same trace, the value for each label is aggregated across them by consensus:
 
-| Label type  | Aggregation                                         |
-| ----------- | --------------------------------------------------- |
-| Boolean     | Majority vote                                       |
-| Categorical | Per-option majority vote (a list when multi-select) |
-| Score       | Average                                             |
-| Text        | List of responses                                   |
+| Label type  | Aggregation                               |
+| ----------- | ----------------------------------------- |
+| Boolean     | Majority vote                             |
+| Categorical | Plurality vote (a list when multi-select) |
+| Score       | Average                                   |
+| Text        | List of responses                         |
 
-When a single-select categorical label ties (multiple options receive the same number of votes), the option that comes first alphabetically wins.
+For single-select categorical labels, the option with the most votes wins, even without a strict majority. Ties break alphabetically (the option that comes first wins).
 
 **Example: categorical (single-select).** Three annotators rate `tone`:
 
@@ -248,7 +248,7 @@ Aggregated: `"polite"` (2 of 3 votes).
 - Annotator B: `["safety", "billing"]`
 - Annotator C: `["safety", "policy"]`
 
-Aggregated: `["safety", "policy"]`. `safety` (3 of 3) and `policy` (2 of 3) clear the majority; `billing` (1 of 3) is dropped.
+Aggregated: `["safety", "policy"]`. `safety` (3 of 3) and `policy` (2 of 3) make it in; `billing` (1 of 3) does not.
 
 **Example: text.** Two annotators leave notes:
 
@@ -258,6 +258,8 @@ Aggregated: `["safety", "policy"]`. `safety` (3 of 3) and `policy` (2 of 3) clea
 Aggregated: `["Confusing phrasing", "Tone too casual"]`. Every annotator's value is preserved.
 
 Raw per-annotator values are preserved in each record's metadata, along with annotator identity. If the default consensus doesn't fit your workflow, you can recompute with a different strategy (for example, median, weighted vote, or reviewer pick).
+
+{{% /collapse-content %}}
 
 Labels not selected as expected output are also included with each trace as metadata.
 
