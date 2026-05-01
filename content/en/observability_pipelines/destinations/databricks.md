@@ -91,7 +91,7 @@ See Databricks' [Add a service principal to your account][4] and [Grant permissi
 
 Configure the Databricks (Zerobus) destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 
-Log fields that are not present in the table schema are dropped. For example, if a log has the fields `id`, `name`, and `host`, and the table schema only contains the columns `name` and `host`, then the `id` field is dropped and is not written to the table.
+**Note**: Log fields that are not present in the table schema are dropped. For example, if a log has the fields `id`, `name`, and `host`, and the table schema only contains the columns `name` and `host`, then the `id` field is dropped and is not written to the table.
 
 After you select the Databricks (Zerobus) destination in the pipeline UI:
 
