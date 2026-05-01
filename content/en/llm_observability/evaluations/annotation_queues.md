@@ -216,7 +216,7 @@ Transfer annotated traces to datasets for experiment evaluation:
 4. Click **Add to Dataset**.
 5. Set the dataset's **expected output**:
    - **From interaction**: use each trace's actual output (or, if you're working from experiment traces, the original expected output).
-   - **From annotation label**: use the values annotators applied. Pick one or more labels — the record's `expected_output` is built from your selection.
+   - **From annotation label**: use the values annotators applied. Pick one or more labels; the record's `expected_output` is built from your selection.
 6. Choose an existing dataset, or create a dataset.
 
 #### How annotation values are aggregated
@@ -248,16 +248,16 @@ Aggregated: `"polite"` (2 of 3 votes).
 - Annotator B: `["safety", "billing"]`
 - Annotator C: `["safety", "policy"]`
 
-Aggregated: `["safety", "policy"]` — `safety` (3 of 3) and `policy` (2 of 3) clear the majority; `billing` (1 of 3) is dropped.
+Aggregated: `["safety", "policy"]`. `safety` (3 of 3) and `policy` (2 of 3) clear the majority; `billing` (1 of 3) is dropped.
 
 **Example: text.** Two annotators leave notes:
 
 - Annotator A: `"Confusing phrasing"`
 - Annotator B: `"Tone too casual"`
 
-Aggregated: `["Confusing phrasing", "Tone too casual"]` — every annotator's value is preserved.
+Aggregated: `["Confusing phrasing", "Tone too casual"]`. Every annotator's value is preserved.
 
-Raw per-annotator values are preserved in each record's metadata, along with annotator identity, so you can recompute with a different strategy (for example, median, weighted vote, or reviewer pick) if the default consensus doesn't fit your workflow.
+Raw per-annotator values are preserved in each record's metadata, along with annotator identity. If the default consensus doesn't fit your workflow, you can recompute with a different strategy (for example, median, weighted vote, or reviewer pick).
 
 Labels not selected as expected output are also included with each trace as metadata.
 
