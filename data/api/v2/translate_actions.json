@@ -869,6 +869,12 @@
     "request_description": "",
     "request_schema_description": "Request object to update a resource filter."
   },
+  "UpsertSyncConfig": {
+    "description": "Create or update a cloud inventory sync configuration. Specify the cloud provider in `data.id`\nand provider-specific settings under `data.attributes`. This endpoint uses an upsert model.",
+    "summary": "Create or update a sync configuration",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a cloud inventory sync configuration."
+  },
   "GetCodeCoverageBranchSummary": {
     "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
     "summary": "Get code coverage summary for a branch",
