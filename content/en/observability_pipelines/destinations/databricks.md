@@ -64,7 +64,7 @@ In the Databricks workspace:
       timestamp TIMESTAMP
     );
     ```
-    - See Databricks' [Create a Unity Managed Table][3] documentation for more information.
+    - See Databricks' [Create a Unity Catalog Managed Table][3] documentation for more information.
 
 The fully qualified table name is `catalog.schema.table`, for example `main.obs_pipelines.apache_common_logs`. This is the value you enter for **Table Name** when you set up the Observability Pipelines Databricks destination.
 
@@ -85,7 +85,7 @@ To create a service principal:
     GRANT SELECT, MODIFY ON TABLE <CATALOG_NAME>.<SCHEMA_NAME>.<TABLE_NAME> TO <SERVICE_PRINCIPAL_UUID>;
     ```
 
-See Databricks' [Add a service principal to your account][4] and [Grant permissions on an object][5] documentation for more information.
+See Databricks' [Add service principals to your account][4] and [Grant permissions on an object][5] documentation for more information.
 
 ## Setup
 
