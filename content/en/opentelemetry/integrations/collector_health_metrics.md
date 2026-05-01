@@ -79,7 +79,7 @@ service:
       exporters: [datadog]
 ```
 
-Replace `<DATADOG_SITE>` with your [Datadog site][106]. Your site is {{< region-param key="dd_site" code="true" >}}.
+Replace `<DATADOG_SITE>` with your [Datadog site][106]: {{< region-param key="dd_site" code="true" >}}.
 
 The `service.telemetry.metrics` block exposes the Collector's internal metrics on `0.0.0.0:8888`. The `prometheus/internal` receiver scrapes that same endpoint, and the metrics pipeline forwards them to Datadog.
 
