@@ -40,33 +40,19 @@ Manage your rules from [**AI Observability > Settings > Automations**][4]. You c
 
 ## Supported filter fields
 
-Automation filters use the same syntax as the Trace Explorer search bar, but the rule-matcher supports a narrower set of fields than ad hoc search. Filters using unsupported fields cause the **Automate Query** button to disable, with a tooltip naming the offending fields.
+Automation filters use a subset of the Trace Explorer search syntax. When a filter contains an unsupported field, the **Automate Query** button is disabled and the tooltip names the offending field.
 
-### Common categories
-
-| Category | Examples | Use for |
-|---|---|---|
-| Identity and timing | `@span_id`, `@trace_id`, `@parent_id`, `@start_ns`, `@duration` | Targeting root spans (`@parent_id:undefined`) or specific traces |
-| Application | `@ml_app`, `@ml_app_version` | Scoping to one application or version |
-| Status and errors | `@status`, `@error.message`, `@meta.error.type` | Capturing failed traces |
-| Inputs and outputs | `@input`, `@output`, `@expected_output`, `@meta.input.value`, `@meta.output.value` | Filtering by content |
-| Model | `@model_name`, `@model_provider`, `@meta.span.kind` | Targeting specific LLM calls |
-| Evaluations | `@evaluation.<NAME>.value`, `@evaluation.<NAME>.assessment`, `@evaluation.<NAME>.reasoning` | Routing based on judge or rubric scores |
-| Tags | bare keys (`env:prod`), `@tags` | User-defined tags on the trace |
-| Metrics | `@metrics.input_tokens`, `@metrics.<custom>` | Token usage and other per-span metrics |
-| Custom metadata | `@meta.metadata.<any_key>` | Catch-all for arbitrary user-supplied metadata |
-
-{{% collapse-content title="Full reference" level="h4" expanded=false id="full-reference" %}}
-
-The complete set of supported fields:
-
-**Exact field names**: `@span_id`, `@trace_id`, `@apm_trace_id`, `@parent_id`, `@session_id`, `@name`, `@status`, `@ml_app`, `@ml_app_version`, `@duration`, `@start_ns`, `@error`, `@collection_errors`, `@model_name`, `@model_provider`, `@kind`, `@input`, `@output`, `@expected_output`, `@error.message`, `@error.type`, `@error.stack`, `@meta.input.value`, `@meta.output.value`, `@meta.expected_output.value`, `@meta.input.messages`, `@meta.output.messages`, `@meta.input.documents`, `@meta.output.documents`, `@meta.span.kind`, `@meta.error.message`, `@meta.error.type`, `@meta.error.stack`, `@meta.input.prompt.name`, `@meta.input.prompt.version`, `@meta.input.prompt.template`, `@meta.input.prompt.id`, `@meta.output.prompt.name`, `@meta.output.prompt.version`, `@meta.output.prompt.template`, `@meta.output.prompt.id`, `@meta.evaluations.quality`, `@meta.evaluations.security`, `@meta.tool_definitions`, `@tags`.
-
-**Prefix patterns** (any key under each prefix): `@metrics.*`, `@meta.metadata.*`, `@evaluation.*`, `@meta.input.parameters.*`, `@meta.output.parameters.*`, `@meta.input.documents.*`, `@meta.output.documents.*`, `@meta.tool_definitions.*`, `@meta.input.messages.*`, `@meta.output.messages.*`.
-
-**Tag queries**: any non-`@` key (for example, `env:prod`, `customer_tier:enterprise`).
-
-{{% /collapse-content %}}
+| Filter for | Fields |
+|---|---|
+| Application and scope | `@ml_app`, `@ml_app_version`, `@parent_id` (use `:undefined` for root spans), `@span_id`, `@trace_id`, `@session_id`, `@duration`, `@start_ns`, `@kind`, `@name` |
+| Status and errors | `@status`, `@error`, `@error.message`, `@error.type`, `@error.stack`, `@meta.error.message`, `@meta.error.type`, `@meta.error.stack` |
+| Content | `@input`, `@output`, `@expected_output`, `@meta.input.value`, `@meta.output.value`, `@meta.input.messages.*`, `@meta.output.messages.*`, `@meta.input.documents.*`, `@meta.output.documents.*`, `@meta.input.parameters.*`, `@meta.output.parameters.*` |
+| Model and span kind | `@model_name`, `@model_provider`, `@meta.span.kind` |
+| Evaluations | `@evaluation.<NAME>.value`, `@evaluation.<NAME>.assessment`, `@evaluation.<NAME>.reasoning`, `@evaluation.<NAME>.metadata`, `@evaluation.<NAME>.tags` |
+| Metrics | `@metrics.*` (any custom metric, for example, `@metrics.input_tokens`) |
+| Tags | bare keys (`env:prod`), `@tags` |
+| Custom metadata | `@meta.metadata.*` (any key, for example, `@meta.metadata.user_id`) |
+| Prompts and tools | `@meta.input.prompt.*`, `@meta.output.prompt.*`, `@meta.tool_definitions.*` |
 
 ### Not supported
 
