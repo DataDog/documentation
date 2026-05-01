@@ -81,7 +81,7 @@
     padding: 16px;
 }
 
-// Registry copy-link anchor
+// Registry copy-link anchors
 a.registry-copy-link {
     border-bottom: none;
     margin-left: 10px;
@@ -91,7 +91,7 @@ a.registry-copy-link {
     cursor: pointer;
     opacity: .5;
 
-    &.registry-copy-link--copied {
+    &--copied {
         color: $ddpurple;
         opacity: 1;
     }

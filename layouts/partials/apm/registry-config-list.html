@@ -207,7 +207,7 @@
       document.querySelectorAll('.registry-copy-link').forEach(function(link) {
         link.addEventListener('click', function(e) {
           if (!link.parentElement.open) {
-            var url = window.location.origin + window.location.pathname + link.getAttribute('data-href');
+            const url = window.location.origin + window.location.pathname + link.getAttribute('data-href');
             navigator.clipboard.writeText(url).then(function() {
               if (link.matches('a')) {
                 link.classList.add('registry-copy-link--copied');
@@ -222,13 +222,13 @@
 
       // On page load, if URL has a hash, open the relevant details sections and scroll to the target
       function openAndScroll() {
-        var hash = window.location.hash;
+        const hash = window.location.hash;
         if (!hash) return;
-        var target = document.getElementById(hash.substring(1));
+        const target = document.getElementById(hash.substring(1));
         if (!target) return;
 
         // Open all ancestor <details> elements so the target is visible
-        var el = target;
+        let el = target;
         while (el) {
           if (el.tagName === 'DETAILS') el.open = true;
           el = el.parentElement;
