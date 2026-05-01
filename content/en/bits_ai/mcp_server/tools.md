@@ -62,6 +62,8 @@ Queries and analyzes historical or real-time metric data, supporting custom quer
 - Get Redis latency metrics for the production environment.
 - How much did my cloud costs change from January to February?
 
+**Cloud Cost Management**: For cost metrics such as `all.cost`, `aws.cost.*`, `azure.cost.*`, `gcp.cost.*`, `oci.cost.*`, `custom.cost.*`, or `datadog.cost.*`, ask your agent to set `use_cloud_cost` to `true`.
+
 ### `get_datadog_metric_context`
 *Toolset: **core***\
 *Permissions Required: `Cloud Cost Management Read` or `Metrics`*\
@@ -70,6 +72,8 @@ Retrieves detailed information about a metric including metadata, available tags
 - What tags are available for the `system.cpu.user` metric?
 - Show me all possible values for the `env` tag on `redis.info.latency_ms`.
 - Get metadata and dimensions for the `requests.count` metric.
+
+**Cloud Cost Management**: For cost metrics, ask your agent to set `use_cloud_cost` to `true` to discover CCM-specific tags and context.
 
 ### `search_datadog_monitors`
 *Toolset: **core***\
