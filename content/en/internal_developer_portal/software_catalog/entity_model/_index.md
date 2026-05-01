@@ -51,7 +51,7 @@ algolia:
   tags: [ "codeLocations" ]
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Entity Model schema v3.0 is not available in the selected site at this time.</div>
 
 {{< /site-region >}}

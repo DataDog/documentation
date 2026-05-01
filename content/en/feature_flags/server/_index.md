@@ -23,9 +23,9 @@ This guide covers the common setup required for all server-side SDKs, including 
 Before setting up server-side feature flags, ensure you have:
 
 - **Datadog Agent 7.55 or later** installed and running
-- **Datadog API key** configured
-- **APM tracing** enabled in your application
-- **Remote Configuration** enabled for your organization. Verify this in [Organization Settings][2].
+- **Datadog [API key][2]** configured
+- **APM tracing** [enabled in your application][4]
+- **Remote Configuration** enabled for your organization. Verify this in [Organization Settings][3].
 
 ## Agent configuration
 
@@ -70,6 +70,24 @@ DD_METRICS_OTEL_ENABLED=true
 
 <div class="alert alert-info">Set <code>DD_METRICS_OTEL_ENABLED=true</code> to enable flag evaluation metrics. Without this, the SDK does not emit metrics for flag evaluations. When enabled, each evaluation records a <code>feature_flag.evaluations</code> counter metric tagged with the flag key, result variant, and evaluation reason.</div>
 
+## Testing with in-memory providers
+
+Datadog supports these testing approaches:
+
+- **Integration tests**: Point `DatadogProvider` at a dedicated test environment and control flag values from the Datadog UI. This exercises the real provider end-to-end, including Remote Configuration delivery.
+- **Unit tests**: Swap `DatadogProvider` for OpenFeature's standard `InMemoryProvider` (or an equivalent test stub, where no in-memory provider is available in the language) and set flag values directly in test code. This keeps tests hermetic and offline.
+
+This section covers the in-memory approach. Because the OpenFeature API is designed to make providers swappable at runtime, your application code does not change — only the provider registered during test setup.
+
+A typical test follows this pattern:
+
+1. Build a map of flag keys to variants in your test setup.
+2. Register an `InMemoryProvider` with that map through the OpenFeature API.
+3. Call the OpenFeature client in the units being tested. The `InMemoryProvider` returns the flag assignments configured at test setup.
+4. Reset the provider in test teardown to avoid cross-test state leakage.
+
+See your language's SDK page (select from the top of this page) for a concrete test example.
+
 ## Context attribute requirements
 
 <div class="alert alert-warning">
@@ -104,4 +122,6 @@ const evaluationContext = {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /remote_configuration
-[2]: https://app.datadoghq.com/organization-settings/remote-config
+[2]: /account_management/api-app-keys/#api-keys
+[3]: https://app.datadoghq.com/organization-settings/remote-config
+[4]: /tracing/guide/#tutorials-enabling-tracing

@@ -20,7 +20,6 @@ Test Impact Analysis is only supported in the following versions and testing fra
 
 * `datadog-ci >= 1.0`
 * `Ruby >= 2.7`
-  * JRuby is not supported.
 * `rspec >= 3.0.0`
 * `minitest >= 5.0.0`
 * `cucumber >= 3.0.0`

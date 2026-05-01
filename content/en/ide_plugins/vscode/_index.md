@@ -28,8 +28,7 @@ further_reading:
 
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
 
-{{% site-region region="gov" %}}
-
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">
     The Datadog extension for Visual Studio Code is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
@@ -101,15 +100,13 @@ Install the extension either directly in the IDE, or from the web:
 
 -   **From the web**: Download the VSIX file from [Open VSX Registry][2], and install with `Extensions: Install from VSIX` in the command palette (`Shift` + `Cmd/Ctrl` + `P`).
 
-### MCP Server setup
+### Datadog MCP Server setup
 
-The extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Ensure the MCP Server is enabled to enhance the editor's AI capabilities with your specific Datadog environment:
-
-1. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP** tab.
-1. Find the Datadog server and turn on the toggle to enable it. A list of available tools is displayed (expand or refresh if necessary).
+Install the Datadog Plugin to enable the [Datadog MCP Server][3]. You can install the plugin from the [Cursor Marketplace][4] or in **Cursor Settings** > **Plugins**.
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
-[3]: /bits_ai/mcp_server/
+[3]: /bits_ai/mcp_server/setup/?tab=cursor
+[4]: https://cursor.com/marketplace/datadog
 
 {{% /tab %}}
 {{< /tabs >}}

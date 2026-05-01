@@ -13,8 +13,8 @@ further_reading:
   text: "Search Logs in BYOC Logs"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
-  Join the BYOC Logs Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="true" header="In Preview" >}}
+  BYOC Logs is in Preview.
 {{< /callout >}}
 
 ## Overview
@@ -28,11 +28,7 @@ The [Datadog MCP (Model Context Protocol) server][1] allows you to query your Da
 
 - A running BYOC Logs deployment with logs ingested.
 - Access to the [Datadog MCP server][1].
-<<<<<<< fmassot/byoc-indexes-rename
-- Your BYOC index name (visible in the [Datadog Log Explorer][2] under **BYOC INDEXES**).
-=======
-- Your BYOC Logs index name (visible in the [Datadog Log Explorer][2] under {{< ui >}}CLOUDPREM INDEXES{{< /ui >}}).
->>>>>>> master
+- Your BYOC Logs index name (visible in the [Datadog Log Explorer][2] under {{< ui >}}BYOC INDEXES{{< /ui >}}).
 
 ## Querying BYOC Logs
 
@@ -66,13 +62,8 @@ For examples of parameter and natural language queries, see [Advanced query exam
 To find your BYOC Logs index name:
 
 1. Navigate to the [Datadog Log Explorer][2].
-<<<<<<< fmassot/byoc-indexes-rename
-2. Look for the **BYOC INDEXES** section in the left facet panel.
+2. Look for the {{< ui >}}BYOC INDEXES{{< /ui >}} section in the left facet panel.
 3. Your CloudPrem indexes are listed there, in the format `cloudprem--<cluster_name>--<index_name>`.
-=======
-2. Look for the {{< ui >}}CLOUDPREM INDEXES{{< /ui >}} section in the left facet panel.
-3. Your BYOC Logs indexes are listed there, in the format `cloudprem--<cluster_name>--<index_name>`.
->>>>>>> master
 
 You can also find your index names in the [BYOC Logs console][3] by selecting a cluster and clicking {{< ui >}}View Indexes{{< /ui >}}.
 

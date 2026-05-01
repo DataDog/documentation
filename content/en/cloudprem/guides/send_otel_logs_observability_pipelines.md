@@ -13,8 +13,8 @@ further_reading:
   text: "Send logs to BYOC Logs with Observability Pipelines"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
-  Join the BYOC Logs Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="true" header="In Preview" >}}
+  BYOC Logs is in Preview.
 {{< /callout >}}
 
 ## Overview
@@ -203,11 +203,7 @@ docker logs opw --tail 20
 ## Step 5: View logs in Datadog
 
 1. Go to the [Datadog Log Explorer][5].
-<<<<<<< fmassot/byoc-indexes-rename
-2. In the left facet panel, select your CloudPrem index under **BYOC INDEXES**.
-=======
-2. In the left facet panel, select your BYOC Logs index under {{< ui >}}CLOUDPREM INDEXES{{< /ui >}}.
->>>>>>> master
+2. In the left facet panel, select your BYOC Logs index under {{< ui >}}BYOC INDEXES{{< /ui >}}.
 3. You should see your OpenTelemetry logs from the `otel-demo` service with custom tags: `pipeline:observability-pipelines` and `source:opentelemetry`.
 
 {{< img src="/cloudprem/guides/otel-op-cloudprem/cloudprem_logs.png" alt="BYOC Logs data available in the Datadog Log Explorer" style="width:100%;" >}}
