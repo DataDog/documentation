@@ -5,34 +5,42 @@ description: Set a custom dashboard as your organization's landing page to contr
 
 ## Overview
 
-The Datadog organization landing page is the first page your users see when they log on to Datadog or navigate to the Datadog root page. Datadog sets a default landing page for your organization. If you use APM, Datadog sets the APM root as the landing page. If you don't use APM, then the list of dashboards is the default landing page.
+The Datadog organization landing page is the first page your users see when they log in to Datadog or navigate to the Datadog root page. Organization administrators can set a custom default landing page. Individual users can override this by setting their own [personal home page][3].
 
-As an alternative to the default page, Datadog allows administrators to set a dashboard as the landing page for the organization. A custom landing page helps a large or small organization control the narrative for their users.
+The landing page a user sees is determined by the following priority:
 
-You can customize a dashboard with the information you want your users to see when they first log on to Datadog. Use [Organization settings][1] to set that dashboard as the custom landing page for your organization.
+1. **Personal home page**: The user's [personal home page][3], if set.
+2. **Custom organization home page**: The custom default set by an administrator.
+3. **APM Home**: The default for APM-enabled organizations.
+4. **Dashboard List**: The fallback default.
 
-## Set a custom landing page
+**Note**: Trial organizations default to the Quick Start guide. Studio organizations default to the Studio page unless an administrator sets a custom organization home page.
+
+## Set a custom landing page for your organization
 
 Only users with the Datadog Admin Role or the Org Management (`org_management`) permission can set the custom landing page for an organization. Custom landing pages are not available during free trial periods.
 
 To set a custom landing page, follow the steps below:
 
-1. Navigate to [Organization settings][1].
+1. Navigate to [**Organization Settings**][1].
 2. From the tabs on the left, select [**Preferences**][2].
 3. In the Datadog Homepage section, click {{< ui >}}Individual Dashboard{{< /ui >}}.
 4. Use the dropdown list to select a dashboard.
 5. Click the {{< ui >}}Save{{< /ui >}} button.
 
+As an administrator, you can also enforce a home page for your organization and prevent users from setting their own landing page.
+
 ## Use the default landing page
 
 Only users with the Datadog Admin Role or the Org Management (`org_management`) permission can change the landing page for an organization.
 
-To restore the default landing page of APM Home, follow the steps below:
+To restore the default landing page:
 
-1. Navigate to [Organization settings][1].
+1. Navigate to [**Organization Settings**][1].
 2. From the tabs on the left, select [**Preferences**][2].
 3. In the Datadog Homepage section, click {{< ui >}}Default: Dashboard List{{< /ui >}}.
 4. Click the {{< ui >}}Save{{< /ui >}} button.
 
 [1]: https://app.datadoghq.com/organization-settings/
 [2]: https://app.datadoghq.com/organization-settings/preferences
+[3]: /account_management/#home-page

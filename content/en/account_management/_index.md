@@ -64,6 +64,18 @@ The visual accessibility preference has five different settings to address color
 
 **Note**: Your visual accessibility preference is saved locally in your browser. If you use a different browser or clear your cache, the preference is set to the default setting.
 
+### Home page
+
+Set a personal home page to control which page you see when you log in to Datadog or navigate to the root URL. Your personal home page takes precedence over the [organization landing page][15], if allowed.
+
+To set a personal home page:
+
+1. Navigate to [**Personal Settings > Home Page**][16].
+2. Select the page you want as your home page.
+3. Click the **Save** button.
+
+To revert to the organization default, return to [**Personal Settings > Home Page**][16] and clear your selection.
+
 ### Organizations
 
 The [Organizations tab][12] in {{< ui >}}Personal Settings{{< /ui >}} lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.
@@ -154,3 +166,5 @@ To disable your Datadog organization account, contact [Datadog support][10].
 [12]: https://app.datadoghq.com/personal-settings/organizations
 [13]: https://app.datadoghq.com/personal-settings/application-keys
 [14]: https://app.datadoghq.com/personal-settings/apps
+[15]: /account_management/org_settings/custom_landing/
+[16]: https://app.datadoghq.com/personal-settings/home-page
