@@ -1,0 +1,24 @@
+# Database Monitoring option groups
+# Used by /database_monitoring/setup_agent_terraform/
+
+dbm_database_options:
+  - id: postgres
+    default: true
+  - id: mysql
+  - id: sql_server
+
+dbm_db_hosting_options:
+  - id: rds
+    default: true
+  - id: aurora
+  - id: cloud_sql
+  - id: alloydb
+  - id: azure
+  - id: self_hosted
+
+dbm_agent_runtime_options:
+  - id: aws_fargate
+    default: true
+  - id: ecs_ec2
+  - id: amazon_eks
+  - id: amazon_ec2
