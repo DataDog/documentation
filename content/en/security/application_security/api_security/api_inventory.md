@@ -1,5 +1,8 @@
 ---
 title: API Security Inventory
+description: Catalog API endpoints, services, and findings, and assess API security risk across your environment.
+aliases:
+  - /security/application_security/api-inventory/
 further_reading:
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
   tag: "Blog"
@@ -80,6 +83,8 @@ For information on what library versions are compatible with API Security Invent
 API Endpoints gathers security metadata about API traffic by leveraging the Datadog SDK with App and API Protection enabled, alongside configurations from Amazon API Gateway and uploaded API Definitions. This data includes the discovered API schema, the types of sensitive data (PII) processed, and the authentication scheme in use. The API information is continuously evaluated, ensuring a comprehensive and up-to-date view of your entire API attack surface.
 
 API Endpoints uses [Remote Configuration][1] to manage and configure scanning rules that detect sensitive data and authentication.
+
+To verify whether discovered endpoints are publicly accessible and require authentication, enable [Endpoint Scanning][19]. Endpoint Scanning actively scans eligible endpoints and enriches API Security Inventory with verified public accessibility, authentication status, HTTP response status, and last evaluation data.
 
 The following risks are calculated for each endpoint.
 
@@ -314,3 +319,4 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [16]: /integrations/guide/source-code-integration/
 [17]: /internal_developer_portal/software_catalog/set_up/create_entities/#through-the-datadog-ui
 [18]: /internal_developer_portal/software_catalog/entity_model/
+[19]: /security/application_security/api_security/endpoint_scanning/

@@ -150,7 +150,7 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
 [10]: /security/cloud_security_management/identity_risks/
 [11]: /security/security_inbox/?s=attack%20path#types-of-findings-in-security-inbox
 [12]: /security/code_security/iac_security/
-[13]: /security/application_security/api-inventory/#api-findings
+[13]: /security/application_security/api_security/api_inventory/#api-findings
 [14]: /help
 [15]: /api/latest/security-monitoring/#list-findings
 [16]: /api/latest/security-monitoring/#get-a-finding
