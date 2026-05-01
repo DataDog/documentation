@@ -3,16 +3,16 @@ title: Suggested Features
 private: true
 description: Create features (journeys) based on Datadog's automatically generated suggestions.
 further_reading:
-- link: '/real_user_monitoring/journey_monitoring/'
+- link: '/journey_monitoring/'
   tag: 'Documentation'
   text: 'Learn about Feature Monitoring'
-- link: '/real_user_monitoring/journey_monitoring/map/'
+- link: '/journey_monitoring/map/'
   tag: 'Documentation'
   text: 'Learn about the journey map'
-- link: '/real_user_monitoring/journey_monitoring/details_report/'
+- link: '/journey_monitoring/details_report/'
   tag: 'Documentation'
   text: 'Learn about journey reports'
-- link: '/real_user_monitoring/journey_monitoring/details_report/variants/'
+- link: '/journey_monitoring/details_report/variants/'
   tag: 'Documentation'
   text: 'Learn about journey variants'
 ---
@@ -41,4 +41,4 @@ Click the three-dot menu in the catalog to dismiss a suggested feature (or journ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/journey_monitoring/map/
+[1]: /journey_monitoring/map/

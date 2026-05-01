@@ -3,16 +3,16 @@ title: Feature Details Report
 private: true
 description: Inspect each feature's performance with detailed report combining Product Analytics, Real User Monitoring, Synthetic Monitoring & Testing, and Session Replay data.  
 further_reading:
-- link: "/real_user_monitoring/journey_monitoring/"
+- link: "/journey_monitoring/"
   tag: "Documentation"
   text: "Learn about Feature Monitoring"
-- link: "/real_user_monitoring/journey_monitoring/map/"
+- link: "/journey_monitoring/map/"
   tag: "Documentation"
   text: "Learn about the Journey Map"
-- link: '/real_user_monitoring/journey_monitoring/map/suggested_journeys/'
+- link: '/journey_monitoring/map/suggested_journeys/'
   tag: 'Documentation'
   text: 'Learn about suggested journeys'
-- link: '/real_user_monitoring/journey_monitoring/details_report/variants/'
+- link: '/journey_monitoring/details_report/variants/'
   tag: 'Documentation'
   text: 'Learn about journey variants'
 ---
@@ -94,10 +94,10 @@ Datadog automatically identifies Synthetic tests that cover the journey and surf
 [2]: /synthetics/
 [3]: /product_analytics/
 [4]: /session_replay/
-[5]: /real_user_monitoring/journey_monitoring/details_report/variants/
+[5]: /journey_monitoring/details_report/variants/
 [6]: /product_analytics/charts/funnel_analysis/
 [7]: /real_user_monitoring/operations_monitoring/
 [8]: /internal_developer_portal/software_catalog/
 [9]: /error_tracking/
-[10]: /real_user_monitoring/journey_monitoring/uptime/
+[10]: /journey_monitoring/uptime/
 [11]:/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum

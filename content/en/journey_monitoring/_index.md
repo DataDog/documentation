@@ -3,16 +3,16 @@ title: Feature Monitoring
 private: true
 description: "Monitor critical user flows through journeys and troubleshoot user experience and technical issues to improve journey performance."
 further_reading:
-- link: '/real_user_monitoring/journey_monitoring/map/'
+- link: '/journey_monitoring/map/'
   tag: 'Documentation'
   text: 'Learn about the journey map'
-- link: '/real_user_monitoring/journey_monitoring/map/suggested_journeys/'
+- link: '/journey_monitoring/map/suggested_journeys/'
   tag: 'Documentation'
   text: 'Learn about suggested journeys'
-- link: '/real_user_monitoring/journey_monitoring/details_report/'
+- link: '/journey_monitoring/details_report/'
   tag: 'Documentation'
   text: 'Learn about journey details reports'
-- link: '/real_user_monitoring/journey_monitoring/details_report/variants/'
+- link: '/journey_monitoring/details_report/variants/'
   tag: 'Documentation'
   text: 'Learn about journey variants'
 ---
@@ -95,11 +95,11 @@ Each journey and its variants have the following performance metrics:
 ## What's next
 
 {{< whatsnext desc="Explore Feature Monitoring:" >}}
-   {{< nextlink href="/real_user_monitoring/journey_monitoring/map/" >}}<strong>Map</strong>: Visualize all your features and their traffic and conversion metrics.{{< /nextlink >}}
-   {{< nextlink href="/real_user_monitoring/journey_monitoring/map/suggested_journeys/" >}}<strong>Suggested Journeys</strong>: Get automatically generated feature suggestions based on real user behavior in your application.{{< /nextlink >}}
-   {{< nextlink href="/real_user_monitoring/journey_monitoring/details_report/" >}}<strong>Details Report</strong>: Analyze a feature's traffic, conversion, errors, and uptime in a unified report.{{< /nextlink >}}
-   {{< nextlink href="/real_user_monitoring/journey_monitoring/details_report/variants/" >}}<strong>Variants</strong>: Track and compare different paths users take through a feature.{{< /nextlink >}}
-   {{< nextlink href="/real_user_monitoring/journey_monitoring/uptime/" >}}<strong>Uptime</strong>: Measure a feature's availability with an automatically created Synthetic test suite.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/map/" >}}<strong>Map</strong>: Visualize all your features and their traffic and conversion metrics.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/map/suggested_journeys/" >}}<strong>Suggested Journeys</strong>: Get automatically generated feature suggestions based on real user behavior in your application.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/details_report/" >}}<strong>Details Report</strong>: Analyze a feature's traffic, conversion, errors, and uptime in a unified report.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/details_report/variants/" >}}<strong>Variants</strong>: Track and compare different paths users take through a feature.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/uptime/" >}}<strong>Uptime</strong>: Measure a feature's availability with an automatically created Synthetic test suite.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
@@ -114,10 +114,10 @@ Each journey and its variants have the following performance metrics:
 [6]: /synthetics/browser_tests/
 [7]: /synthetics/mobile_app_testing/
 [8]: /product_analytics/
-[9]: /real_user_monitoring/journey_monitoring/details_report/variants/
-[10]: /real_user_monitoring/journey_monitoring/uptime/
-[11]: /real_user_monitoring/journey_monitoring/map/suggested_journeys/
-[12]: /real_user_monitoring/journey_monitoring/details_report/
+[9]: /journey_monitoring/details_report/variants/
+[10]: /journey_monitoring/uptime/
+[11]: /journey_monitoring/map/suggested_journeys/
+[12]: /journey_monitoring/details_report/
 [13]: /real_user_monitoring/operations_monitoring/
-[14]: /real_user_monitoring/journey_monitoring/map/
+[14]: /journey_monitoring/map/
 [15]: /synthetics/test_suites/#service-level-objectives

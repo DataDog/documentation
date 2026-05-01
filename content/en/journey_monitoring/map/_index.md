@@ -3,16 +3,16 @@ title: Map
 private: true
 description: Visualize and monitor the performance of your journeys in the Journey Map.
 further_reading:
-- link: "/real_user_monitoring/journey_monitoring"
+- link: "/journey_monitoring"
   tag: "Documentation"
   text: "Learn about Feature Monitoring"
-- link: '/real_user_monitoring/journey_monitoring/map/suggested_journeys/'
+- link: '/journey_monitoring/map/suggested_journeys/'
   tag: 'Documentation'
   text: 'Learn about suggested journeys'
-- link: '/real_user_monitoring/journey_monitoring/details_report/'
+- link: '/journey_monitoring/details_report/'
   tag: 'Documentation'
   text: 'Learn about journey details reports'
-- link: '/real_user_monitoring/journey_monitoring/details_report/variants/'
+- link: '/journey_monitoring/details_report/variants/'
   tag: 'Documentation'
   text: 'Learn about journey variants'
 ---
@@ -56,4 +56,4 @@ All connections represent user traffic flowing between pages and journeys. The m
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/test_suites/
-[2]: /real_user_monitoring/journey_monitoring/details_report/
+[2]: /journey_monitoring/details_report/

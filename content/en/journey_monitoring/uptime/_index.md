@@ -3,19 +3,19 @@ title: Feature Uptime
 private: true
 description: "Measure the availability of your user journey using the accompanying Synthetics test suite."
 further_reading:
-- link: '/real_user_monitoring/journey_monitoring/'
+- link: '/journey_monitoring/'
   tag: 'Documentation'
   text: 'Learn about Feature Monitoring'
-- link: '/real_user_monitoring/journey_monitoring/map/'
+- link: '/journey_monitoring/map/'
   tag: 'Documentation'
   text: 'Learn about the journey map'
-- link: '/real_user_monitoring/journey_monitoring/map/suggested_journeys/'
+- link: '/journey_monitoring/map/suggested_journeys/'
   tag: 'Documentation'
   text: 'Learn about suggested journeys'
-- link: '/real_user_monitoring/journey_monitoring/details_report/'
+- link: '/journey_monitoring/details_report/'
   tag: 'Documentation'
   text: 'Learn about journey details reports'
-- link: '/real_user_monitoring/journey_monitoring/details_report/variants/'
+- link: '/journey_monitoring/details_report/variants/'
   tag: 'Documentation'
   text: 'Learn about journey variants'
 ---
@@ -49,8 +49,8 @@ Datadog automatically starts calculating an [uptime SLO][3] on the test suite. B
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/test_suite/
-[2]: /real_user_monitoring/journey_monitoring/details_report/variants/
+[2]: /journey_monitoring/details_report/variants/
 [3]: /synthetics/test_suites/#service-level-objectives
 [4]: /synthetics/browser_tests/
 [5]: /synthetics/mobile_app_testing/
-[6]: /real_user_monitoring/journey_monitoring/
+[6]: /journey_monitoring/
