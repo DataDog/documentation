@@ -23,7 +23,7 @@ If you see this error, deploy the integration using the manual setup method. You
 | Error snippet | Likely cause | Action |
 |---|---|---|
 | `stop sell in offer` | Marketplace plan restriction | Switch to manual setup or contact Azure Marketplace support. |
-| `Forbidden` or `AuthorizationFailed` | Missing Owner role or App registration permissions | Verify the deploying principal has Owner on the subscription. |
+| `Forbidden` or `AuthorizationFailed` | Missing Owner role or App registration permissions | Verify the deploying principal has the Owner role on the subscription. |
 | `PolicyViolation` | Azure Policy blocking the deployment (commonly mandatory tags) | Use the CLI or Terraform path so required tags can be injected. |
 
 [1000]: https://github.com/DataDog/integrations-management
