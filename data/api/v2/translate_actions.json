@@ -4398,7 +4398,7 @@
     "summary": "List status pages"
   },
   "CreateStatusPage": {
-    "description": "Creates a new status page. **Note**: Publishing a status page on creation via the `enabled` property will be deprecated. Use the dedicated [publish](#publish-status-page) status page endpoint after creation instead.",
+    "description": "Creates a new status page in an unpublished state. Use the dedicated [publish](#publish-status-page) status page endpoint to publish the page after creation.",
     "summary": "Create status page",
     "request_description": "",
     "request_schema_description": "Request object for creating a status page."
