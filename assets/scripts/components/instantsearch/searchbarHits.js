@@ -1,14 +1,15 @@
 import { getHitData, getSnippetForDisplay } from './getHitData';
 import { bodyClassContains } from '../../helpers/helpers';
-import { CONVERSATIONAL_SEARCH_FLAG_KEY } from '../../components/conversational-search';
+import { DOCS_AI_ENABLED_FLAG_KEY } from '../../components/conversational-search';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
-import { initializeFeatureFlags, getBooleanFlag, isDatadogEmployee } from '../../helpers/feature-flags';
+import { initializeFeatureFlags, getBooleanFlag } from '../../helpers/feature-flags';
 
-let IS_CONVERSATIONAL_SEARCH_ENABLED = false;
+// Optimistic render: assume on so the AI suggestion shows on first paint.
+let IS_DOCS_AI_ENABLED = true;
 const ASK_AI_ICON_SRC = '/images/svg-icons/spark-ai.svg';
 
 initializeFeatureFlags().then((client) => {
-    IS_CONVERSATIONAL_SEARCH_ENABLED = getBooleanFlag(client, CONVERSATIONAL_SEARCH_FLAG_KEY) || isDatadogEmployee();
+    IS_DOCS_AI_ENABLED = getBooleanFlag(client, DOCS_AI_ENABLED_FLAG_KEY, true);
 });
 
 const logDocsAIEvent = (message, payload) => {
@@ -92,7 +93,7 @@ const updateNoHitsState = (container, numHits) => {
 
 // Kick off flag init once, update UI when ready
 const ensureConvSearchFlag = (state) => {
-    if (!IS_CONVERSATIONAL_SEARCH_ENABLED || !state?.isDocsContainer) return;
+    if (!IS_DOCS_AI_ENABLED || !state?.isDocsContainer) return;
     const aiList = state.container.querySelector('#ais-Hits-ai-list');
     renderAskAISuggestion(aiList, state.query);
     updateNoHitsState(state.container, state.numHits);
@@ -195,7 +196,7 @@ const renderHits = (renderOptions, isFirstRender) => {
             // Add AI suggestion first (only for docs container)
             if (isDocsContainer) {
                 const aiList = container.querySelector('#ais-Hits-ai-list');
-                if (IS_CONVERSATIONAL_SEARCH_ENABLED) {
+                if (IS_DOCS_AI_ENABLED) {
                     renderAskAISuggestion(aiList, currentQuery);
                 } else if (aiList) {
                     aiList.replaceChildren();

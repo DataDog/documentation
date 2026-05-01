@@ -125,21 +125,17 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 {{% tab "Cursor" %}}
 
-Datadog's [Cursor and VS Code extension][1] includes built-in access to the managed Datadog MCP Server.
+Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. 
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. Install the extension (omit `--profile` and profile name to install to the default Cursor profile):
-    ```shell
-    cursor --install-extension datadog.datadog-vscode --profile <PROFILE_NAME>
-    ```
-   Alternatively, install the [Datadog extension][2]. If you have the extension installed already, make sure it's the latest version.
-1. Sign in to your Datadog account.
-   {{< img src="bits_ai/mcp_server/ide_sign_in.png" alt="Sign in to Datadog from the IDE extension" style="width:70%;" >}}
-1. **Restart the IDE.**
-1. Confirm the Datadog MCP Server is available and the [tools][3] are listed: Go to {{< ui >}}Cursor Settings{{< /ui >}} (`Shift` + `Cmd/Ctrl` + `J`), select the {{< ui >}}Tools & MCP{{< /ui >}} tab, and expand the extension's tools list.
-1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
+1. You can install the plugin from the Cursor Marketplace or from within Cursor:
+   - From the Cursor Marketplace, open the [Datadog Plugin][1] and click **Add to Cursor**.
+   - In Cursor, navigate to **Cursor Settings** > **Plugins**, then search for the Datadog plugin and click **Add to Cursor**.
+
+1. After installation of the plugin, type `/ddsetup` in the agent chat to perform first-time setup.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
+[1]: https://cursor.com/marketplace/datadog
 [2]: /ide_plugins/vscode/?tab=cursor#installation
 [3]: /bits_ai/mcp_server/tools
 {{< /site-region >}}
@@ -148,7 +144,7 @@ Datadog's [Cursor and VS Code extension][1] includes built-in access to the mana
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-[1]: /ide_plugins/vscode/
+[1]: https://cursor.com/marketplace/datadog
 {{% /tab %}}
 
 {{% tab "Devin" %}}
@@ -553,6 +549,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments
+- `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters
 - `llmobs`: Tools for searching and analyzing [LLM Observability][36] spans and experiments
 - `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38]
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
@@ -741,3 +738,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [48]: /reference_tables/
 [49]: /bits_ai/mcp_server/tools
 [50]: https://github.com/google-gemini/gemini-cli
+[51]: /containers/monitoring/kubernetes_explorer/

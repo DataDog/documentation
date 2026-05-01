@@ -242,20 +242,12 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 #### Archive Partition Attribute (Preview) {#archive-search-partition-attribute}
 
-{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" header="Join the Preview!" >}}
-Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
-{{< /callout >}}
-
 To optimize how your archived logs are physically organized in storage (and accelerate [Archive Search][16]), configure partition attributes in your Datadog Archive.
 
 * **Partition Attributes**: Add low-cardinality attributes such as `service`, `source`, `env`, or `status` that you frequently use as search filters.
 * **Benefit**: Logs sharing the same partition attribute values are co-located in storage. When searching, Datadog can skip entire partitions that don't match your query, drastically reducing the volume of data scanned.
 
-#### Archive Lookup Attribute (Preview) {#archive-search-lookup-attribute}
-
-{{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" header="Join the Preview!" >}}
-Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
-{{< /callout >}}
+#### Archive Lookup Attribute
 
 To accelerate searches and investigations in your archives (with [Archive Search][16]), configure lookup attributes in your Datadog Archive.
 
@@ -286,6 +278,19 @@ Firewall rules are not supported.
 {{< /tabs >}}
 
 {{< /site-region >}}
+
+#### Compression
+
+By default, Datadog archives logs using **zstd** (Zstandard) compression (`.json.zst`), which offers better compression ratios and faster decompression speeds compared to gzip. You can also configure **gzip** compression (`.json.gz`).
+
+
+To configure compression, select **Compression Type** when creating or editing an archive on the [Log Archiving & Forwarding page][6]:
+
+- **zstd** (default): Better compression ratio and decompression speed. Recommended for new archives, especially if you plan to use [Archive Search][16].
+- **gzip**: Widely supported and compatible with most tools.
+
+**Note**: Changing the compression format of an existing archive only affects new archive files. Files already stored in your bucket remain in their original format.
+
 #### Storage class
 
 {{< tabs >}}
@@ -449,7 +454,7 @@ It is important to order your archives carefully. For example, if you create a f
 
 ## Format of the archives
 
-The log archives that Datadog forwards to your storage bucket are in compressed JSON format (`.json.gz`). Using the prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, such as the following:
+The log archives that Datadog forwards to your storage bucket are in compressed JSON format. Depending on your [compression configuration](#compression), archive files use either zstd (`.json.zst`, default) or gzip (`.json.gz`) compression. Using the prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, such as the following:
 
 ```
 /my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.02aafad5-f525-4592-905e-e962d1a5b2f7.json.gz
