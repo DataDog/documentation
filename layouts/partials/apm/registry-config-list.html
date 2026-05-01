@@ -56,7 +56,7 @@
                 <h3 class="header-text-inner me-1">{{ $catTitle }}</h3>
                 <small>({{ len $catConfigs }})</small>
               </div>
-              <a class="registry-copy-link registry-copy-link--section" href="#registry-{{ $catId }}" title="Copy link" aria-label="Copy link to {{ $catTitle }}">{{ partial "icon" (dict "name" "click") }}</a>
+              <span class="registry-copy-link registry-copy-link--section" data-href="#registry-{{ $catId }}" title="Copy link" aria-label="Copy link to {{ $catTitle }}">{{ partial "icon" (dict "name" "click") }}</a>
             </div>
           </summary>
           <div class="collapsible-content">
@@ -141,7 +141,7 @@
                               <h4 class="header-text-inner me-1"><code>{{ $kindPattern }}</code></h4>
                               <small>({{ len $kindIntNames }} integrations)</small>
                             </div>
-                            <a class="registry-copy-link registry-copy-link--section" href="#{{ $kindAnchor }}" title="Copy link" aria-label="Copy link to {{ $kindPattern }}">{{ partial "icon" (dict "name" "click") }}</a>
+                            <span class="registry-copy-link registry-copy-link--section" data-href="#{{ $kindAnchor }}" title="Copy link" aria-label="Copy link to {{ $kindPattern }}">{{ partial "icon" (dict "name" "click") }}</a>
                           </div>
                         </summary>
                         <div class="collapsible-content">
@@ -174,7 +174,7 @@
                         <h4 class="header-text-inner me-1">{{ $intName }}</h4>
                         <small>({{ len $intConfigs }})</small>
                       </div>
-                      <a class="registry-copy-link registry-copy-link--section" href="#{{ $intAnchor }}" title="Copy link" aria-label="Copy link to {{ $intName }}">{{ partial "icon" (dict "name" "click") }}</a>
+                      <span class="registry-copy-link registry-copy-link--section" data-href="#{{ $intAnchor }}" title="Copy link" aria-label="Copy link to {{ $intName }}">{{ partial "icon" (dict "name" "click") }}</a>
                     </div>
                   </summary>
                   <div class="collapsible-content">
@@ -211,13 +211,13 @@
         link.addEventListener('click', function(e) {
           e.preventDefault();
           e.stopPropagation();
-          var url = window.location.origin + window.location.pathname + link.getAttribute('href');
+          var url = window.location.origin + window.location.pathname + link.getAttribute('data-href');
           navigator.clipboard.writeText(url).then(function() {
             link.classList.add('registry-copy-link--copied');
             setTimeout(function() { link.classList.remove('registry-copy-link--copied'); }, 1500);
           });
           // Update URL hash without scrolling
-          history.replaceState(null, '', link.getAttribute('href'));
+          history.replaceState(null, '', link.getAttribute('data-href'));
         });
       });
 

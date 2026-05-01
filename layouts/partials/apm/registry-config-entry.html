@@ -4,7 +4,7 @@
   Expects a config object with: name, type, default_value, from_version, aliases, description.
 */}}
 {{- $anchor := .name | lower | replaceRE "[^a-z0-9]+" "-" -}}
-<dt id="{{ $anchor }}"><code>{{ .name }}</code><a class="registry-copy-link" href="#{{ $anchor }}" title="Copy link" aria-label="Copy link to {{ .name }}">{{ partial "icon" (dict "name" "click") }}</a></dt>
+<dt id="{{ $anchor }}"><code>{{ .name }}</code><span class="registry-copy-link" data-href="#{{ $anchor }}" title="Copy link" aria-label="Copy link to {{ .name }}">{{ partial "icon" (dict "name" "click") }}</span></dt>
 <dd>
   {{- with .type -}}<strong>Type</strong>: <code>{{ . }}</code><br>{{- end -}}
   {{- with .default_value -}}<strong>Default</strong>: <code>{{ . }}</code><br>{{- end -}}

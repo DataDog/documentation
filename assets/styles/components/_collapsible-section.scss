@@ -83,28 +83,25 @@
 
 // Registry copy-link anchors
 .registry-copy-link {
-    display: inline-flex;
-    align-items: center;
-    margin-left: 6px;
-    opacity: 0;
-    transition: opacity 0.2s;
+    margin: 10px 0 0 10px;
     color: inherit;
     vertical-align: middle;
     text-decoration: none;
+    border-bottom: 0;
+    cursor: pointer;
+    opacity: .5;
 
-    &:hover {
-        opacity: 1 !important;
-    }
 
-    &--copied svg {
-        color: #632CA5;
+    &.registry-copy-link--copied {
+        color: $ddpurple;
+        opacity: 1;
     }
 }
 
 // Show link icon on hover of the parent dt or header-content
 dt:hover .registry-copy-link,
 .header-content:hover .registry-copy-link {
-    opacity: 0.5;
+    opacity: 1;
 }
 
 // Config entry anchors need scroll-margin for sticky header
