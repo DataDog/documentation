@@ -594,22 +594,16 @@ attributes:
     type: string
     domain: Geolocation
   
-  - name: user.id
-    description: Identifier of the user.
-    product_source:
-      - icon-rum
-      - android
-      - roku
-    type: string
-    domain: RUM user attributes (Android, Roku)
   - name: usr.id
     description: Identifier of the user.
     product_source:
       - icon-rum
+      - android
       - ios
       - browser
+      - roku
     type: string
-    domain: RUM user attributes (iOS, Browser)
+    domain: RUM user attributes
   - name: usr.name
     description: Name of the user.
     product_source:
@@ -873,8 +867,8 @@ attributes:
     type: string
     domain: Error (Browser events, Android events, iOS events, Roku events)
   
-  - name: error.issue_id
-    description: The stack trace or complementary information about the error.
+  - name: error.id
+    description: UUID of the error.
     product_source:
       - icon-rum
       - android
@@ -963,18 +957,8 @@ attributes:
       - roku
     type: string
     domain: Action (Browser events, Android events, iOS events, Roku events)
-  - name: action.name
-    description: A user-friendly name (for example, `Click on checkout`). For [Custom Browser User Actions](/real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), the action name given in the API call.
-    product_source:
-      - icon-rum
-      - android
-      - browser
-      - ios
-      - roku
-    type: string
-    domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.target.name
-    description: Element that the user interacted with. Only for automatically collected actions.
+    description: The name of the element the user interacted with (for automatically collected actions) or the name provided in the API call (for custom actions, for example `Click on checkout`).
     product_source:
       - icon-rum
       - android
@@ -1342,24 +1326,8 @@ attributes:
     type: string
     domain: Resource (Browser events)
 
-  - name: action.frustration.type:dead_click
-    description: The dead clicks detected by the RUM Browser SDK.
-    product_source:
-      - icon-rum
-      - browser
-    type: string
-    domain: Frustration signals (Browser events)
-  
-  - name: action.frustration.type:rage_click
-    description: The rage clicks detected by the RUM Browser SDK.
-    product_source:
-      - icon-rum
-      - browser
-    type: string
-    domain: Frustration signals (Browser events)
-  
-  - name: action.frustration.type:error_click
-    description: The error clicks detected by the RUM Browser SDK.
+  - name: action.frustration.type
+    description: The type of frustration signal detected by the RUM Browser SDK (`rage_click`, `dead_click`, or `error_click`).
     product_source:
       - icon-rum
       - browser
