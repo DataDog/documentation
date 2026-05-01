@@ -40,7 +40,7 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 ### Create the Datadog user
 
-{{% dbm-create-oracle-user %}}
+{{% dbm-oracle-create-user-tabs %}}
 
 ### Securely store your password
 {{% dbm-secret %}}
@@ -53,13 +53,13 @@ For installation steps, see the [Agent installation instructions][9].
 
 ### Configure the Agent
 
-#### Multi-node Exadata
+Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][5] for all available configuration options.
 
-Configure the Agent for each node by following the instructions for [Oracle RAC][4].
+**Note:** The configuration subdirectory for the Agent releases between `7.50.1` and `7.53.0` is `oracle-dbm.d`. See [Configuring the Oracle Integration on Agent 7.50.1+][13] for more details.
 
-#### Single-node Exadata
+{{% dbm-oracle-agent-config-tabs %}}
 
-Configure the Agent by following the instructions for [self-hosted Oracle databases][3].
+{{% dbm-oracle-wallet-config %}}
 
 ### Validate the setup
 
@@ -83,6 +83,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [10]: https://app.datadoghq.com/integrations/oracle
 [11]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [12]: /database_monitoring/architecture/
+[13]: /integrations/guide/oracle-check-upgrade-7.50.1/
 
 ## Further reading
 

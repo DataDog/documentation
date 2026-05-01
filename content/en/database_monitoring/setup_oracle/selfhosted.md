@@ -41,31 +41,7 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 ### Create the Datadog user
 
-If you already have the legacy Oracle integration installed, skip this step, because the user already exists.
-
-Create a read-only login to connect to your server and grant the required permissions:
-
-{{< tabs >}}
-{{% tab "Multi-tenant" %}}
-```SQL
-CREATE USER c##datadog IDENTIFIED BY &password CONTAINER = ALL ;
-
-ALTER USER c##datadog SET CONTAINER_DATA=ALL CONTAINER=CURRENT;
-```
-{{% /tab %}}
-
-{{% tab "Non-CDB" %}}
-```SQL
-CREATE USER datadog IDENTIFIED BY &password ;
-```
-{{% /tab %}}
-
-{{% tab "Oracle 11" %}}
-```SQL
-CREATE USER datadog IDENTIFIED BY &password ;
-```
-{{% /tab %}}
-{{< /tabs >}}
+{{% dbm-oracle-create-user-tabs %}}
 
 ### Grant the user access to the database
 
@@ -120,43 +96,11 @@ Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`
 
 **Note:** The configuration subdirectory for the Agent releases between `7.50.1` and `7.53.0` is `oracle-dbm.d`. See [Configuring the Oracle Integration on Agent 7.50.1+][10] for more details.
 
-{{< tabs >}}
-{{% tab "Multi-tenant" %}}
-```yaml
-init_config:
-instances:
-  - server: '<HOSTNAME_1>:<PORT>'
-    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
-    username: 'c##datadog'
-    password: 'ENC[datadog_user_database_password]'
-    dbm: true
-    tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-  - server: '<HOSTNAME_2>:<PORT>'
-    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
-    username: 'c##datadog'
-    password: 'ENC[datadog_user_database_password]'
-    dbm: true
-    tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
-```
-
-The Agent connects only to the root multitenant container database (CDB). It queries the information about PDB while connected to the root CDB. Don't create connections to individual PDBs.
-{{% /tab %}}
-
-{{% tab "Non-CDB" %}}
-{{% dbm-oracle-selfhosted-config %}}
-{{% /tab %}}
-
-{{% tab "Oracle 11" %}}
-{{% dbm-oracle-selfhosted-config %}}
-
-{{% /tab %}}
-{{< /tabs >}}
+{{% dbm-oracle-agent-config-tabs %}}
 
 Once all Agent configuration is complete, [restart the Datadog Agent][9].
+
+{{% dbm-oracle-wallet-config %}}
 
 ### Validate the setup
 
