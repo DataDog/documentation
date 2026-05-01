@@ -20,63 +20,67 @@ Before you configure the Databricks (Zerobus) destination, set up the following 
 - A Unity Catalog schema and table that the Observability Pipelines Worker writes logs to.
 - A service principal that the Worker uses to authenticate to Databricks. The service principal needs permission to read and write to the table.
 
-The following examples use the catalog `main`, the schema `obs_pipelines`, and the table `apache_common_logs`. Replace these values with the names you want to use.
+The setup steps in this section uses SQL. See the [Databricks documentation][6] for more information.
 
-### 1. Grant your admin user permission to create the schema and table
+### Set up the schema and table
 
-The `GRANT` commands in the following steps must be run by a Databricks workspace admin. Run the following SQL in Databricks to grant your admin user the required permissions, replacing `<ADMIN_USER>` with the user who creates the schema and table:
+The SQL examples in this section use the following placeholders:
 
-```sql
-GRANT CREATE SCHEMA ON CATALOG main TO `<ADMIN_USER>`;
-GRANT CREATE TABLE ON SCHEMA main.obs_pipelines TO `<ADMIN_USER>`;
-```
+| Placeholder               | Description                                | Example                    |
+|---------------------------|--------------------------------------------|----------------------------|
+| `<ADMIN_USER>`            | The user who creates the schema and table. |                            |
+| `<CATALOG_NAME>`          | The Unity Catalog name.                    | `main`                     |
+| `<SCHEMA_NAME>`           | The schema name.                           | `obs_pipelines`            |
+| `<TABLE_NAME>`            | The table name.                            | `apache_common_logs`       |
+| `<YOUR_MANAGED_LOCATION>` | The managed location URI.                  | `s3://your-bucket/managed` |
 
-### 2. Create the schema
+**Note**: The `GRANT` commands must be run by a Databricks workspace admin.
 
-Run this SQL in Databricks to create the schema.
+1. Grant your user permissions to create a schema:
+    ```sql
+    GRANT CREATE SCHEMA ON CATALOG `<CATALOG_NAME>` TO `<ADMIN_USER>`;
+    ```
 
-```sql
-CREATE SCHEMA IF NOT EXISTS main.obs_pipelines
-MANAGED LOCATION 's3://<YOUR_BUCKET>/managed';
-```
+1. Create the schema:
+    ```sql
+    CREATE SCHEMA IF NOT EXISTS `<CATALOG_NAME>`.`<SCHEMA_NAME>`
+    MANAGED LOCATION '<YOUR_MANAGED_LOCATION>';
+    ```
+    **Note**: `MANAGED LOCATION` is optional. See the [Databricks documentation][6] for other options.
 
-**Note**: `MANAGED LOCATION` is optional. See the [Databricks documentation][6] for other options.
+1. Grant your user permissions to create a table on the schema:
+    ```sql
+    GRANT CREATE TABLE ON SCHEMA `<CATALOG_NAME>`.`<SCHEMA_NAME>` TO `<ADMIN_USER>`;
+    ```
 
-### 3. Create the table
+1. Create the table that Observability Pipelines sends log data to:
+    ```sql
+    CREATE TABLE `<CATALOG_NAME>`.`<SCHEMA_NAME>`.`<TABLE_NAME>` (
+      host STRING,
+      message STRING,
+      service STRING,
+      source_type STRING,
+      timestamp TIMESTAMP
+    );
+    ```
 
-Run this SQL in Databricks to create the table that log data is sent to:
+The fully qualified table name is `catalog.schema.table`, for example `main.obs_pipelines.apache_common_logs`. This is the value you enter for **Table Name** when you set up the Observability Pipelines Databricks destination.
 
-```sql
-CREATE TABLE main.obs_pipelines.apache_common_logs (
-  host STRING,
-  message STRING,
-  service STRING,
-  source_type STRING,
-  timestamp TIMESTAMP
-);
-```
-
-The fully qualified table name (`catalog.schema.table`, for example `main.obs_pipelines.apache_common_logs`) is the value you enter for **Table Name** when you set up the destination.
-
-### 4. Create a service principal
+### Set up the service principal
 
 The Databricks (Zerobus) API uses OAuth authentication. The OAuth client ID is the service principal's UUID, and the OAuth client secret is generated when you create the service principal.
 
 To create a service principal:
-
-1. In your Databricks workspace, go to **User Settings** > **Identity and access** > **Service principals**.
+1. In your Databricks workspace, navigate to **User Settings** > **Identity and access** > **Service principals**.
 1. Click **Add service principal**.
 1. After the service principal is created, generate an OAuth secret for it. Take note of the service principal's **Application ID** (client ID) and the OAuth client secret. You need both when you configure the Observability Pipelines Databricks destination.
 
-### 5. Grant the service principal access to the catalog, schema, and table
-
-Run this SQL in Databricks, replacing `<SERVICE_PRINCIPAL_UUID>` with the service principal's application ID from step 4.
-
-```sql
-GRANT USE CATALOG ON CATALOG main TO `<SERVICE_PRINCIPAL_UUID>`;
-GRANT USE SCHEMA ON SCHEMA main.obs_pipelines TO `<SERVICE_PRINCIPAL_UUID>`;
-GRANT SELECT, MODIFY ON TABLE main.obs_pipelines.apache_common_logs TO `<SERVICE_PRINCIPAL_UUID>`;
-```
+1. Run this SQL in Databricks to grant the service principal access to the catalog, schema, and table. Replace `<SERVICE_PRINCIPAL_UUID>` with the service principal's application ID from the previous step.
+    ```sql
+    GRANT USE CATALOG ON CATALOG `<CATALOG_NAME>` TO `<SERVICE_PRINCIPAL_UUID>`;
+    GRANT USE SCHEMA ON SCHEMA `<CATALOG_NAME>`.`<SCHEMA_NAME>` TO `<SERVICE_PRINCIPAL_UUID>`;
+    GRANT SELECT, MODIFY ON TABLE `<CATALOG_NAME>`.`<SCHEMA_NAME>`.`<TABLE_NAME>` TO `<SERVICE_PRINCIPAL_UUID>`;
+    ```
 
 ## Setup
 
@@ -93,7 +97,6 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 1. Enter the **Unity Catalog Endpoint** for your Databricks workspace, such as `https://<workspace>.cloud.databricks.com`. The Worker uses this endpoint to read the table's schema.
 1. For **Auth - Client ID**, enter the application ID of the service principal, such as `abcdefgh-1234-5678-abcd-ef0123456789`.
 1. For **Auth - Client Secret**, enter the identifier for your OAuth client secret. If you leave it blank, the [default](#secret-defaults) is used.
-
 
 ### Optional settings
 
