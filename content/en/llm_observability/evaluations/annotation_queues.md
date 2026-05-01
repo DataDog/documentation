@@ -214,9 +214,27 @@ Transfer annotated traces to datasets for experiment evaluation:
 2. Open the queue.
 3. Select traces to transfer.
 4. Click **Add to Dataset**.
-5. Choose an existing dataset, or create a dataset.
+5. Set the dataset's **expected output**:
+   - **From interaction**: use each trace's actual output (or, if you're working from experiment traces, the original expected output).
+   - **From annotation label**: use the values annotators applied. Pick one or more labels — the record's `expected_output` is built from your selection.
+6. Choose an existing dataset, or create a dataset.
 
-Labels are included with each trace as metadata.
+#### How annotation values are aggregated
+
+When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": ["neutral"] }`. The same shape applies whether you select one label or many.
+
+When multiple annotators have annotated the same trace, the value for each label is aggregated across them by consensus:
+
+| Label type  | Aggregation                                         |
+| ----------- | --------------------------------------------------- |
+| Boolean     | Majority vote                                       |
+| Categorical | Per-option majority vote (a list when multi-select) |
+| Score       | Average                                             |
+| Text        | List of responses                                   |
+
+Raw per-annotator values are preserved in each record's metadata, along with annotator identity, so you can recompute with a different strategy (for example, median, weighted vote, or reviewer pick) if the default consensus doesn't fit your workflow.
+
+Labels not selected as expected output are also included with each trace as metadata.
 
 See [Datasets][3] for more information about using datasets in experiments.
 
