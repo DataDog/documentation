@@ -221,6 +221,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
    instances:
      - dbm: true
        host: '<AWS_INSTANCE_ENDPOINT>'
+       ssl: allow
        port: 5432
        username: datadog
        password: 'ENC[datadog_user_database_password]'
