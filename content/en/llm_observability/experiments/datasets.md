@@ -94,7 +94,9 @@ Add production traces to datasets manually through the UI or automatically with 
 
 **Automatic routing (Automations)**:
 
-Automations enable you to continuously route production traces to datasets based on configurable rules, keeping your datasets current with production behavior without manual intervention. Automation rules apply only to new traces generated after the rule is created, not to existing historical traces. 
+<div class="alert alert-info">Automations apply going forward: new traces matching your rule are routed to the dataset as they arrive. Existing traces matching the filter are not added retroactively.</div>
+
+Automations enable you to continuously route production traces to datasets based on configurable rules, keeping your datasets current with production behavior without manual intervention.
 
 To set up automatic dataset updates:
 1. Navigate to [**AI Observability > Traces**][2].
