@@ -29,6 +29,7 @@ The LLM Observability MCP tools enable AI-assisted workflows for:
 - **Investigating agent loops**: Review an agent's step-by-step execution loop to understand decision-making and tool invocation patterns.
 - **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
+- **Managing evaluators**: List, inspect, create, update, and delete evaluator configurations across an ML application or the entire organization.
 
 ## Available tools
 
@@ -73,6 +74,23 @@ The `llmobs` toolset includes the following tools:
 
 `get_llmobs_experiment_dimension_values`
 : Get unique values for a dimension with counts, useful for discovering valid filter and segment values.
+
+### Evaluator tools
+
+`list_llmobs_evals`
+: List every LLM-judge evaluator configured across all ML applications. Returns each evaluator's name, ml_app, and enabled status.
+
+`list_llmobs_evals_by_ml_app`
+: List all LLM-judge evaluators configured for a specific ML application.
+
+`get_llmobs_evaluator`
+: Retrieve an LLM-judge evaluator configuration by name, including its target (ml_app, sampling, filter), LLM provider, and judge prompt template.
+
+`create_or_update_llmobs_evaluator`
+: Create or update an LLM-judge evaluator configuration. Targets a specific ML application and optionally a filter or sampling percentage; the judge's model and prompt template define how it scores each span.
+
+`delete_llmobs_evaluator`
+: Delete an LLM-judge evaluator configuration by name.
 
 ## Recommended workflows
 
