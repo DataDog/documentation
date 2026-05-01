@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' Databricks (Zerobus) destination to send logs to a Databricks Unity Catalog table. The destination streams logs to the [Zerobus][5] streaming ingestion API and authenticates to Databricks with an OAuth service principal.
+Use Observability Pipelines' Databricks (Zerobus) destination to send logs to a Databricks Unity Catalog table. The destination streams logs to the [Zerobus][1] streaming ingestion API and authenticates to Databricks with an OAuth service principal.
 
 ## Prerequisites
 
@@ -46,8 +46,8 @@ In the Databricks workspace:
     CREATE SCHEMA IF NOT EXISTS <CATALOG_NAME>.<SCHEMA_NAME>
     MANAGED LOCATION '<YOUR_MANAGED_LOCATION>';
     ```
-    - **Note**: `MANAGED LOCATION` is optional. See the [Databricks documentation][6] for other options.
-    - See Databricks' [Create Schemas](https://docs.databricks.com/aws/en/schemas/create-schema) documentation for more information.
+    - **Note**: `MANAGED LOCATION` is optional. See the [Databricks documentation][2] for other options.
+    - See Databricks' [Create Schemas][2] documentation for more information.
 
 1. If you're not an admin user, have an admin run the following command to grant your user permission to create a table on the schema.
     ```sql
@@ -64,7 +64,7 @@ In the Databricks workspace:
       timestamp TIMESTAMP
     );
     ```
-    - See Databricks' [Create a Unity Managed Table](https://docs.databricks.com/aws/en/tables/managed#create-a-managed-table) documentation for more information.
+    - See Databricks' [Create a Unity Managed Table][3] documentation for more information.
 
 The fully qualified table name is `catalog.schema.table`, for example `main.obs_pipelines.apache_common_logs`. This is the value you enter for **Table Name** when you set up the Observability Pipelines Databricks destination.
 
@@ -80,16 +80,16 @@ To create a service principal:
     - Take note of the service principal's **Application ID** (client ID) and the OAuth client secret. You need both of them when you configure the Observability Pipelines Databricks destination.
 1. Run this SQL in Databricks to grant the service principal access to the catalog, schema, and table. Replace `<SERVICE_PRINCIPAL_UUID>` with the service principal's application ID from the previous step.
     ```sql
-    GRANT USE CATALOG ON CATALOG `<CATALOG_NAME>` TO `<SERVICE_PRINCIPAL_UUID>`;
-    GRANT USE SCHEMA ON SCHEMA `<CATALOG_NAME>`.`<SCHEMA_NAME>` TO `<SERVICE_PRINCIPAL_UUID>`;
-    GRANT SELECT, MODIFY ON TABLE `<CATALOG_NAME>`.`<SCHEMA_NAME>`.`<TABLE_NAME>` TO `<SERVICE_PRINCIPAL_UUID>`;
+    GRANT USE CATALOG ON CATALOG <CATALOG_NAME> TO <SERVICE_PRINCIPAL_UUID>;
+    GRANT USE SCHEMA ON SCHEMA <CATALOG_NAME>.<SCHEMA_NAME> TO <SERVICE_PRINCIPAL_UUID>;
+    GRANT SELECT, MODIFY ON TABLE <CATALOG_NAME>.<SCHEMA_NAME>.<TABLE_NAME> TO <SERVICE_PRINCIPAL_UUID>;
     ```
 
-See Databricks' [Add a service principal to your account](https://docs.databricks.com/aws/en/admin/users-groups/manage-service-principals#-add-service-principals-to-your-account) and [Grant permissions on an object](https://docs.databricks.com/aws/en/data-governance/unity-catalog/manage-privileges/?language=Catalog%C2%A0Explorer#-grant-permissions-on-an-object) documentation for more information.
+See Databricks' [Add a service principal to your account][4] and [Grant permissions on an object][5] documentation for more information.
 
 ## Setup
 
-Configure the Databricks (Zerobus) destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The steps in this section are configured in the UI.
+Configure the Databricks (Zerobus) destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 
 Log fields that are not present in the table schema are dropped. For example, if a log has the fields `id`, `name`, and `host`, and the table schema only contains the columns `name` and `host`, then the `id` field is dropped and is not written to the table.
 
@@ -133,16 +133,19 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 
 #### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][7] for more information.
+A batch of events is flushed when one of these parameters is met. See [event batching][10] for more information.
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
 | None           | 10                | 1                   |
 
-[1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/configuration/set_up_pipelines/
-[3]: /api/latest/observability-pipelines/
-[4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[5]: https://docs.databricks.com/aws/en/ingestion/zerobus
-[6]: https://docs.databricks.com/aws/en/schemas/create-schema
-[7]: /observability_pipelines/destinations/#event-batching
+[1]: https://docs.databricks.com/aws/en/ingestion/zerobus
+[2]: https://docs.databricks.com/aws/en/schemas/create-schema
+[3]: https://docs.databricks.com/aws/en/tables/managed#create-a-managed-table
+[4]: https://docs.databricks.com/aws/en/admin/users-groups/manage-service-principals#-add-service-principals-to-your-account
+[5]: https://docs.databricks.com/aws/en/data-governance/unity-catalog/manage-privileges/?language=Catalog%C2%A0Explorer#-grant-permissions-on-an-object
+[6]: /observability_pipelines/configuration/set_up_pipelines/
+[7]: https://app.datadoghq.com/observability-pipelines
+[8]: /api/latest/observability-pipelines/
+[9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[10]: /observability_pipelines/destinations/#event-batching
