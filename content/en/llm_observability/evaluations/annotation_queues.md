@@ -214,9 +214,54 @@ Transfer annotated traces to datasets for experiment evaluation:
 2. Open the queue.
 3. Select traces to transfer.
 4. Click **Add to Dataset**.
-5. Choose an existing dataset, or create a dataset.
+5. Set the dataset's **expected output**:
+   - **From interaction**: use each trace's actual output. For experiment traces, you can also pick **Expected output** to use the original expected output from the experiment's source dataset.
+   - **From annotation label**: use the values annotators applied. Pick one or more labels; the record's `expected_output` is built from your selection.
+6. Choose an existing dataset, or create a dataset.
 
-Labels are included with each trace as metadata.
+When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": "neutral" }`. The same shape applies whether you select one label or many.
+
+{{% collapse-content title="How annotation values are aggregated across annotators" level="h4" expanded=false id="annotation-aggregation" %}}
+
+When multiple annotators have annotated the same trace, the value for each label is aggregated across them by consensus:
+
+| Label type  | Aggregation                              |
+| ----------- | ---------------------------------------- |
+| Boolean     | Majority vote                            |
+| Categorical | Plurality vote (most-picked option wins) |
+| Score       | Average                                  |
+| Text        | List of responses                        |
+
+For categorical labels (both single-select and multi-select), the option picked by the most annotators wins. With multi-select, each option an annotator selects counts as one vote. Ties break alphabetically. For boolean labels, ties break in favor of `true`.
+
+**Example: categorical (single-select).** Three annotators rate `tone`:
+
+- Annotator A: `polite`
+- Annotator B: `rude`
+- Annotator C: `polite`
+
+Aggregated: `"polite"` (2 of 3 votes).
+
+**Example: categorical (multi-select).** Three annotators tag `topics` (each can pick multiple options):
+
+- Annotator A: `["safety", "policy"]`
+- Annotator B: `["safety", "billing"]`
+- Annotator C: `["safety", "policy"]`
+
+Each option an annotator selects counts as one vote: `safety` gets 3, `policy` gets 2, `billing` gets 1. Aggregated: `"safety"` (most votes).
+
+**Example: text.** Two annotators leave notes:
+
+- Annotator A: `"Confusing phrasing"`
+- Annotator B: `"Tone too casual"`
+
+Aggregated: `["Confusing phrasing", "Tone too casual"]`. Every annotator's value is preserved.
+
+Raw per-annotator values are preserved in each record's metadata, along with annotator identity. If the default consensus doesn't fit your workflow, you can recompute with a different strategy (for example, median, weighted vote, or reviewer pick).
+
+{{% /collapse-content %}}
+
+Labels not selected as expected output are also included with each trace as metadata.
 
 See [Datasets][3] for more information about using datasets in experiments.
 
