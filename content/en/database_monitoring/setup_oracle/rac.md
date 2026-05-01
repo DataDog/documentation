@@ -40,6 +40,10 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 ### Create the Datadog user
 
+If you already have the legacy Oracle integration installed, skip this step, because the user already exists.
+
+Create a read-only login to connect to your server and grant the required permissions:
+
 {{< tabs >}}
 {{% tab "Multi-tenant" %}}
 ```SQL
@@ -73,7 +77,7 @@ For installation steps, see the [Agent installation instructions][9].
 
 ### Configure the Agent
 
-Configure the Agent for each RAC node. Use the tab that matches your Oracle deployment type (the `username` value must match the user created above).
+Configure the Agent for each RAC node. Use the tab that matches your Oracle deployment type. The `username` value must match the user you created previously.
 
 You must configure the Agent for each Real Application Cluster (RAC) node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic. The collected data from each RAC node is aggregated in the frontend.
 
