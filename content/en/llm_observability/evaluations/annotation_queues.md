@@ -232,7 +232,7 @@ When multiple annotators have annotated the same trace, the value for each label
 | Score       | Average                                   |
 | Text        | List of responses                         |
 
-For single-select categorical labels, the option with the most votes wins, even without a strict majority. Ties break alphabetically (the option that comes first wins). For multi-select, the resulting list is sorted alphabetically.
+For single-select categorical labels, the option with the most votes wins, even without a strict majority. Ties break alphabetically (the option that comes first wins). For multi-select, the resulting list is sorted alphabetically. For boolean labels, ties break in favor of `true`.
 
 **Example: categorical (single-select).** Three annotators rate `tone`:
 
