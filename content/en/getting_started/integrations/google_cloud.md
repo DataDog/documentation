@@ -151,9 +151,10 @@ If you have no configured projects, you are automatically redirected to this pag
 5. Click **Verify and Save Account**.
 {{% /collapse-content %}}
 
-Metrics appear in Datadog approximately **15 minutes** after setup.
+The first metrics appear in Datadog approximately **15 minutes** after setup. After the initial setup, expect a steady-state delay of approximately **7-8 minutes** for new metrics. See [Cloud Metric Delay][412] for details.
 
 [408]: https://cloud.google.com/identity/docs/overview
+[412]: /integrations/guide/cloud-metric-delay/
 
 {{% /tab %}}
 
