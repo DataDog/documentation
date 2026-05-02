@@ -184,6 +184,26 @@ Changing the access type on an existing AWS account is a destructive operation. 
 
 {{% aws-resource-collection %}}
 
+### All permissions used by the Datadog integration
+
+The permission policies shown above represent a baseline configuration. To use all available Datadog features, attach the following additional policies to the Datadog integration role:
+
+{{% collapse-content title="Datadog integration role managed policy 1" level="h4" %}}
+{{% aws-permissions-managed-policy-1 %}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Datadog integration role managed policy 2" level="h4" %}}
+{{% aws-permissions-managed-policy-2 %}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Datadog integration role managed policy 3" level="h4" %}}
+{{% aws-permissions-managed-policy-3 %}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Datadog integration role managed policy 4" level="h4" %}}
+{{% aws-permissions-managed-policy-4 %}}
+{{% /collapse-content %}}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_web_services/
