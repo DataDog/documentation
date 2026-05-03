@@ -112,7 +112,7 @@ Use [Container Cost Allocation metrics][4] to discover costs associated with clu
 
 ## Permissions
 
-Cloud Cost Management uses two permissions to control access: `cloud_cost_management_read` for viewing cost data and `cloud_cost_management_write` for modifying configurations. See the [Permissions documentation][9] for a detailed breakdown of requirements by page.
+Cloud Cost Management uses two main permissions, `cloud_cost_management_read` and `cloud_cost_management_write`, to control access to cost data and most CCM configurations. Additional permissions are available for specific use cases, such as editing budgets (`ccm_budget_write`) and managing report schedules. See the [Permissions documentation][9] for a detailed breakdown of requirements by page.
 
 ## Review data history
 
