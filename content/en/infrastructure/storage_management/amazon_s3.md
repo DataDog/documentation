@@ -22,7 +22,7 @@ Set up Storage Management for Amazon S3 with one of the following methods:
 
 The in-product setup walks you through three steps: configuring an AWS account, selecting buckets and enabling S3 Inventory and access logs, and finishing setup. A CloudFormation stack applies the required changes in your AWS account.
 
-To start, navigate to **Infrastructure** > [**Storage Management**][1] and click **Enable buckets**.
+To start, navigate to **Infrastructure** > [**Storage Management**][1] and click **Try Storage Management**.
 
 [1]: https://app.datadoghq.com/storage-management
 
@@ -53,7 +53,7 @@ In this step, select the buckets to monitor, set an inventory destination, and o
 
 2. **Set the inventory destination bucket**: For buckets without an existing inventory configuration, choose a destination bucket where daily inventory reports are delivered. You can pick an existing bucket or specify a new one. Datadog writes inventory files to the `datadog-inventories` prefix.
 
-   **Note**: Storage Management supports CSV inventory format only.
+   **Note**: Storage Management requires CSV inventory format. The CloudFormation stack configures this for you.
 
 3. **Enable S3 access logs (optional)**: Access logs surface cold data patterns, unusual access, and right-sizing opportunities for storage tiers. Toggle **Enable S3 access logs**, then:
 
@@ -78,11 +78,8 @@ In this step, select the buckets to monitor, set an inventory destination, and o
 
 {{% collapse-content title="3. Finish setup" level="h4" expanded=false id="datadog-ui-step3" %}}
 
-After the CloudFormation stack completes in AWS, return to Datadog and confirm setup.
+After the CloudFormation stack completes in AWS, return to Storage Management and click **Finish Setup**.
 
-The first inventory report can take up to 24 hours to generate. After that, your buckets appear in **Infrastructure** > [**Storage Management**][1].
-
-[1]: https://app.datadoghq.com/storage-management
 {{% /collapse-content %}}
 
 {{% /tab %}}
@@ -134,7 +131,7 @@ module "datadog_storage_management" {
 
 After enabling S3 Inventory, it can take up to 24 hours for the first inventory reports to be generated. To verify that inventories are being generated, go to your destination bucket in the AWS console and confirm that inventory files appear in the destination prefix you specified.
 
-After you confirm inventory files are present, verify Storage Management is enabled on your buckets by navigating to **Storage Management** > [**Enable Buckets**][2] and confirming that your destination bucket is listed and enabled.
+After you confirm inventory files are present, verify Storage Management is enabled on your buckets by navigating to [**Storage Management**][2] and confirming that your destination bucket is listed.
 
 [1]: https://registry.terraform.io/modules/DataDog/storage-management-datadog/aws/latest
 [2]: https://app.datadoghq.com/storage-management
@@ -241,21 +238,21 @@ curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
       "type": "cloud_provider",
       "attributes": {
         "aws": {
-          "aws_account_id": "123456789012",
-          "destination_bucket_name": "my-inventory-bucket",
-          "destination_bucket_region": "us-east-1",
-          "destination_prefix": ""
+          "aws_account_id": "<AWS_ACCOUNT_ID>",
+          "destination_bucket_name": "<DESTINATION_BUCKET_NAME>",
+          "destination_bucket_region": "<DESTINATION_BUCKET_REGION>",
+          "destination_prefix": "<DESTINATION_PREFIX>"
         }
       }
     }
   }'
 ```
 
-Replace the request body values with:
-- `aws_account_id`: The 12-digit AWS account ID that owns the destination bucket.
-- `destination_bucket_name`: The name of the destination bucket holding inventory reports.
-- `destination_bucket_region`: The AWS region of the destination bucket.
-- `destination_prefix`: The prefix within the destination bucket where inventory files are written. Use an empty string if there is no prefix.
+To use the example above:
+- Replace `<AWS_ACCOUNT_ID>` with the 12-digit AWS account ID that owns the destination bucket.
+- Replace `<DESTINATION_BUCKET_NAME>` with the name of the destination bucket holding inventory reports.
+- Replace `<DESTINATION_BUCKET_REGION>` with the AWS region of the destination bucket.
+- Replace `<DESTINATION_PREFIX>` with the prefix within the destination bucket where inventory files are written. Use an empty string if there is no prefix.
 
 A `200` response confirms Storage Management is enabled for the destination bucket.
 
