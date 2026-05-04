@@ -161,6 +161,25 @@ Navigate to the [Project Settings page][1], click **Integrations** > **Datadog I
 
 When enabled, any case that meets your specified query criteria (at any point in its lifecycle) automatically triggers an incident, enabling faster response times for your team.
 
+## Slack mirroring
+With the Slack integration, replies in Slack notification threads linked to a case are automatically mirrored to the case activity timeline. This keeps case context up to date without requiring manual updates in Datadog.
+
+**To configure Slack thread mirroring**:
+
+Ensure the [Slack integration](https://docs.datadoghq.com/integrations/slack/) is configured for your Datadog organization.
+
+Slack thread mirroring is enabled by default for all case management projects. To disable it for a specific project:
+1. Go to [**Project Settings**][1] and click on a project to expand its settings.
+1. In the expanded menu, click **Integrations** > **Slack**.
+1. Toggle off **Slack thread mirroring**
+
+**How it works**:
+
+- For any case notifications sent to Slack, activity in the notification thread is mirrored back to the case.
+- Mirrored activity includes any text replies (attachments are not supported). Each mirrored message shows the Slack user's name and Slack as the source.
+- Multiple Slack threads can mirror into a single case. 
+- Mirroring is one-directional: messages flow from Slack to the case, not from the case to Slack.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
