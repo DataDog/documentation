@@ -106,7 +106,7 @@ CloudPrem improvements and bug fixes are delivered through Helm chart updates.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/dashboard/lists?q=cloudprem&p=1
+[1]: https://app.datadoghq.com/dashboard/lists?q=byoc&p=1
 [2]: /cloudprem/operate/monitoring/
 [3]: /cloudprem/operate/sizing/#helm-chart-sizing-tiers
 [4]: /cloudprem/configure/lambda/
