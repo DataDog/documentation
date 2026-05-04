@@ -93,6 +93,6 @@ Move the custom data under `@meta.metadata.*`. The catch-all prefix accepts any 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/traces
-[2]: /llm_observability/evaluations/annotation_queues/
-[3]: /llm_observability/experiments/datasets/
+[2]: /llm_observability/evaluations/annotation_queues/?tab=usingautomationrules
+[3]: /llm_observability/experiments/datasets/?tab=fromproductiontraces
 [4]: https://app.datadoghq.com/llm/settings/automations
