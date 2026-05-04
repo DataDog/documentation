@@ -51,7 +51,7 @@ Choose Datadog Apps when you need:
    ```
 
 2. Follow the interactive prompts to configure your app name and template.
-3. (Optional) Set up the RUM integration for the app. This automatically sets up the Browser SDK to set up the following:
+3. (Optional) Set up Datadog RUM for the app. This automatically sets up the Browser SDK for:
 - RUM tracking
 - Error Tracking
 - Build metrics
