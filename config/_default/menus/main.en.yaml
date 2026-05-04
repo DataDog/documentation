@@ -7540,14 +7540,14 @@ menu:
       url: /security/code_security/iac_security/setup/
       parent: code_security_iac_security
       weight: 100000
+    - name: Configuration
+      identifier: code_security_iac_security_exclusions
+      url: /security/code_security/iac_security/configuration/
+      parent: code_security_iac_security
+      weight: 100001
     - name: GitHub Actions
       identifier: code_security_iac_security_github_actions
       url: /security/code_security/iac_security/github_actions/
-      parent: code_security_iac_security
-      weight: 100001
-    - name: Exclusions
-      identifier: code_security_iac_security_exclusions
-      url: /security/code_security/iac_security/exclusions/
       parent: code_security_iac_security
       weight: 100002
     - name: Rules
