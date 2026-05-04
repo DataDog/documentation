@@ -1707,7 +1707,7 @@ menu:
       weight: 30000
     - name: Reference Tables
       url: reference_tables/
-      pre: inventories
+      pre: reference-table
       identifier: reference_tables
       parent: platform_heading
       weight: 40000
@@ -2956,7 +2956,12 @@ menu:
       url: actions/connections/aws_integration/
       parent: actions_connections
       identifier: actions_aws_integration
-      weight: 101
+      weight: 102
+    - name: Google Workspace
+      url: actions/connections/google_workspace/
+      parent: actions_connections
+      identifier: actions_google_workspace
+      weight: 103
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
@@ -5361,6 +5366,11 @@ menu:
       parent: llm_obs_external_evaluations
       identifier: llm_obs_deepeval_evaluations
       weight: 40301
+    - name: Pydantic Evaluations
+      url: llm_observability/evaluations/pydantic_evaluations
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_pydantic_evaluations
+      weight: 40302
     - name: Annotation Queues
       url: llm_observability/evaluations/annotation_queues
       parent: llm_obs_evaluations

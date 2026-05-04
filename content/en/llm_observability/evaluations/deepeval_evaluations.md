@@ -1,6 +1,10 @@
 ---
 title: DeepEval Evaluations
 description: Use DeepEval evaluations with LLM Observability Experiments.
+further_reading:
+- link: "/llm_observability/evaluations/external_evaluations"
+  tag: "Documentation"
+  text: "Submit Evaluations"
 ---
 
 ## Overview
