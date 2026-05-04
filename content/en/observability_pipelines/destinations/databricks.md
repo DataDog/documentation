@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' Databricks (Zerobus) destination to send logs to a Databricks Unity Catalog table. The destination streams logs to the [Zerobus][1] streaming ingestion API and authenticates to Databricks with an OAuth service principal.
+Use Observability Pipelines' Databricks (Zerobus) destination to send logs to a Databricks Unity Catalog table. The destination streams logs to the [Zerobus Ingest][1] API and authenticates to Databricks with an OAuth service principal.
 
 ## Prerequisites
 
@@ -69,7 +69,7 @@ The fully qualified table name is `catalog.schema.table`, for example `main.obs_
 
 ### Set up a service principal
 
-The Databricks (Zerobus) API uses OAuth authentication. When you create the service principal, the OAuth client secret is generated and the OAuth client ID is the service principal's UUID.
+The Databricks Zerobus Ingest API uses OAuth authentication. When you create the service principal, the OAuth client secret is generated and the OAuth client ID is the service principal's UUID.
 
 To create a service principal:
 
