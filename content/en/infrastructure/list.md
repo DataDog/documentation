@@ -17,9 +17,9 @@ further_reading:
 
 ## Overview
 
-The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last two hours, but you can extend the view to cover up to one week. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
+The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last two hours, but you can extend the view to cover up to one week. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog. Don't use this list to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
 
-The Host List has two views: a legacy view and a new view. By default, the Host List displays the legacy view. To switch views, click the **Legacy** / **New** toggle in the upper-right corner. The sections that follow describe the new view.
+The Host List displays the legacy view by default. This page describes the new view. To switch to the new view, click the toggle in the upper-right corner.
 
 {{< img src="infrastructure/index/infra-list-overview.png" alt="The Host List with the new view selected, showing the filter panel on the left, a list of hosts with customizable columns, and the legacy and new toggle in the upper-right corner." style="width:100%;">}}
 
@@ -71,11 +71,11 @@ Integrations
 
 The Datadog Agent collects potential hostnames from several different sources. For more details, see [How does Datadog determine the Agent hostname?][1].
 
-**Note**: Hostnames should be unique within a Datadog account, otherwise you may experience some inconsistencies on your host graphs.
+**Note**: Hostnames should be unique within a Datadog account. Otherwise, you may experience inconsistencies on your host graphs.
 
 ### Inspect a host
 
-Click any host to open its details panel. The panel uses the [Resource Catalog][15] side panel and includes:
+Click any host to open its detail panel. The detail panel is the [Resource Catalog][15] side panel and includes:
 
 - [Aliases](#aliases)
 - [Tags][2]
@@ -85,7 +85,7 @@ Click any host to open its details panel. The panel uses the [Resource Catalog][
 - [Agent configuration](#agent-configuration) (if enabled)
 - [OpenTelemetry Collector configuration](#opentelemetry-collector-configuration) (if enabled)
 
-{{< img src="infrastructure/index/infra-list-side-panel.png" alt="The host details side panel with tabs for Host Summary, Metrics, Containers, Processes, and other host data." style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-side-panel.png" alt="The host detail side panel with tabs for Host Summary, Metrics, Containers, Processes, and other host data." style="width:100%;">}}
 
 #### Aliases
 
@@ -105,10 +105,10 @@ To view Agent configurations:
 
 #### OpenTelemetry Collector configuration
 
-When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the host details panel. The Datadog Extension provides visibility into your Collector fleet from within the Datadog interface, helping you manage and debug your OpenTelemetry Collector deployments.
+When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the host detail panel. The Datadog Extension provides visibility into your Collector fleet from within the Datadog interface, helping you manage and debug your OpenTelemetry Collector deployments.
 
 To view OpenTelemetry Collector configurations:
-1. Click on a host running the OpenTelemetry Collector in the Host List.
+1. Click a host running the OpenTelemetry Collector in the Host List.
 2. In the host detail panel, select the **OTel Collector** tab to view the build information and complete Collector configuration.
 
 For detailed setup instructions and requirements, such as hostname matching and pipeline configuration, see the main [Datadog Extension documentation][14].
@@ -117,10 +117,10 @@ For detailed setup instructions and requirements, such as hostname matching and 
 
 ## Export
 
-To export the host list, click **Export** above the host list. For a JSON-formatted list of your hosts reporting to Datadog, you can also use one of the following:
+Click **Export** above the host list to download a copy. For a JSON-formatted list of your hosts reporting to Datadog, you can also use one of the following:
 
 * The **JSON API permalink** at the top of the Host List.
-* The [search hosts API endpoint][7] - see the [developer guide][8] for an example.
+* The [search hosts API endpoint][7]. See the [developer guide][8] for an example.
 
 ### Agent version
 
