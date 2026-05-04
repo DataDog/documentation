@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' Databricks (Zerobus) destination to send logs to a Databricks Unity Catalog table. The destination streams logs to the [Zerobus Ingest][1] API and authenticates to Databricks with an OAuth service principal.
+Use Observability Pipelines' Databricks (Zerobus) destination to send logs to a Databricks Unity Catalog table. The destination streams logs to the [Zerobus Ingest API][1] and authenticates to Databricks with an OAuth service principal.
 
 ## Prerequisites
 
@@ -69,7 +69,7 @@ The fully qualified table name is `catalog.schema.table`, for example `main.obs_
 
 ### Set up a service principal
 
-The Databricks Zerobus Ingest API uses OAuth authentication. When you create the service principal, the OAuth client secret is generated and the OAuth client ID is the service principal's UUID.
+The Databricks [Zerobus Ingest API][1] uses OAuth authentication. When you create the service principal, the OAuth client secret is generated and the OAuth client ID is the service principal's UUID.
 
 To create a service principal:
 
@@ -90,17 +90,17 @@ See Databricks' [Add service principals to your account][4] and [Grant permissio
 
 Configure the Databricks (Zerobus) destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 
-**Note**: Log fields that are not present in the table schema are dropped. For example, if a log has the fields `id`, `name`, and `host`, and the table schema only contains the columns `name` and `host`, then the `id` field is dropped and is not written to the table.
+**Note**: Log fields that are not present in the table schema are dropped. For example, if a log has the fields `id`, `name`, and `host`, and the table schema only contains the columns `name` and `host`, then the `id` field is dropped and not written to the table.
 
 After you select the Databricks (Zerobus) destination in the pipeline UI:
 
 <div class="alert alert-danger">Only enter the identifier for the OAuth client secret. Do <b>not</b> enter the actual value.</div>
 
-1. Enter the **Ingestion Endpoint** for your Databricks workspace, such as `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`. The Worker streams logs to this endpoint.
+1. Enter the **Ingestion Endpoint** for your Databricks workspace, such as `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`. The Worker sends logs to this endpoint.
 1. Enter the **Table Name** in the format `catalog.schema.table`, such as `main.obs_pipelines.apache_common_logs`.
 1. Enter the **Unity Catalog Endpoint** for your Databricks workspace, such as `https://<workspace>.cloud.databricks.com`. The Worker uses this endpoint to read the table's schema.
-1. For **Auth - Client ID**, enter the application ID of the service principal, such as `abcdefgh-1234-5678-abcd-ef0123456789`.
-1. For **Auth - Client Secret**, enter the identifier for your OAuth client secret. If you leave it blank, the [default](#secret-defaults) is used.
+1. In the **Auth - Client ID** field, enter the application ID of the service principal, such as `abcdefgh-1234-5678-abcd-ef0123456789`.
+1. In the **Auth - Client Secret** field, enter the identifier for your OAuth client secret. If you leave it blank, the [default](#secret-defaults) is used.
 
 ### Optional settings
 
