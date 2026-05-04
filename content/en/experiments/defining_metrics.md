@@ -71,12 +71,7 @@ If you do not see the property you need, type the property name in the **Custom 
 
 ### Prerequisites
 
-To create a metric from your warehouse data, you must connect the warehouse to Datadog. Select your warehouse to get started:
-
-- [BigQuery][8]
-- [Databricks][9]
-- [Redshift][10]
-- [Snowflake][11]
+To create a metric from your warehouse data, you must [connect your warehouse to Datadog][8]. Datadog supports BigQuery, Databricks, Redshift, and Snowflake.
 
 After you connect your warehouse, create a SQL Model to map your data to Datadog, then use the model to create a metric.
 
@@ -133,10 +128,7 @@ After you create your SQL model, use it to create a metric:
 {{< img src="/product_analytics/experiment/exp_create_metric_from_sqlmodel_2.png" alt="The Create Metric event picker showing All Events selected, with event types including Snowflake, Actions, Views, Sessions, Errors, and Long Tasks on the left, and the Revenue Orders SQL model highlighted under Snowflake on the right, showing Measures: amount and Filterable dimensions: N/A." style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
-[8]: /experiments/guide/connecting_bigquery
-[9]: /experiments/guide/connecting_databricks
-[10]: /experiments/guide/connecting_redshift
-[11]: /experiments/guide/connecting_snowflake
+[8]: /experiments/guide/connecting_a_data_warehouse/
 [12]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
 
 {{% /tab %}}

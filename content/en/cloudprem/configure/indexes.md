@@ -12,8 +12,8 @@ further_reading:
   text: "Search Logs"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
-  Join the BYOC Logs Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="true" header="In Preview" >}}
+  BYOC Logs is in Preview.
 {{< /callout >}}
 
 By default, a BYOC Logs cluster stores all logs in a single index with a single retention policy. With multiple indexes, you can segment logs by defining filter queries and assigning a different retention period to each index. For example, you can retain audit logs for 1 year while keeping debug logs for only 3 days.
