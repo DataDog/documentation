@@ -5,6 +5,9 @@ further_reading:
   - link: /llm_observability/evaluations/evaluation_types
     tag: Documentation
     text: Learn about evaluation types
+  - link: /llm_observability/monitoring/automation_rules
+    tag: Documentation
+    text: Route traces into queues automatically with Automation Rules
   - link: /llm_observability/experiments
     tag: Documentation
     text: Run experiments to test improvements

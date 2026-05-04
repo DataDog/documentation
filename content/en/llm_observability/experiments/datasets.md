@@ -1,6 +1,10 @@
 ---
 title: Datasets
 description: Using datasets in LLM Observability Experiments, including how to create, retrieve, and manage datasets, as well as information about versioning.
+further_reading:
+  - link: /llm_observability/monitoring/automation_rules
+    tag: Documentation
+    text: Route traces into datasets automatically with Automation Rules
 ---
 
 In LLM Observability Experiments, a _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ that represent scenarios you want to tests your agent on. Each dataset is associated with a _project_.  

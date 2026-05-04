@@ -40,9 +40,9 @@ Manage your rules from [**AI Observability > Settings > Automations**][4]. You c
 
 ## Supported filter fields
 
-Automation filters use a subset of the Trace Explorer search syntax. When a filter contains an unsupported field, the **Automate Query** button is disabled and the tooltip names the offending field.
+Automation filters use a subset of the Trace Explorer search syntax. The table below shows commonly-used fields by category. It is illustrative, not exhaustive. The **Automate Query** button is disabled when a filter contains an unsupported field, and the tooltip names the offending field. Use the tooltip as the source of truth for what is accepted.
 
-| Filter for | Fields |
+| Filter for | Example fields |
 |---|---|
 | Application and scope | `@ml_app`, `@ml_app_version`, `@parent_id` (use `:undefined` for root spans), `@span_id`, `@trace_id`, `@session_id`, `@duration`, `@start_ns`, `@kind`, `@name` |
 | Status and errors | `@status`, `@error`, `@error.message`, `@error.type`, `@error.stack`, `@meta.error.message`, `@meta.error.type`, `@meta.error.stack` |
