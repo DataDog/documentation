@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-The OpenTelemetry Collector collects, processes, and exports telemetry data from your applications in a vendor-neutral way. Using the [OpenTelemetry Collector Contrib][1] distribution, you can send traces, metrics, and logs to Datadog through the OTLP HTTP exporter. No Datadog Exporter or Connector required.
+The OpenTelemetry Collector collects, processes, and exports telemetry data from your applications in a vendor-neutral way. You can send traces, metrics, and logs to Datadog through the OTLP HTTP exporter using the [OpenTelemetry Collector Contrib][1] distribution. No Datadog Exporter or Connector required.
 
 This setup uses the following key components:
 
@@ -24,9 +24,9 @@ This setup uses the following key components:
 - **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data, which power APM features like the Service Catalog and Service Page.
 - **Resource detection processor**: Extracts host and cloud metadata for proper hostname resolution and tagging in Datadog.
 
-{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram showing the OpenTelemetry SDK sending data through OTLP to the OpenTelemetry Collector, which forwards telemetry to Datadog." style="width:100%;" >}}
+<!-- TODO: Replace with updated diagram showing OTLP HTTP exporter flow (no Datadog Exporter) -->
 
-<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>Full OTel</b>.</div>
+<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel SDK + OSS Collector</b>.</div>
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ This setup uses the following key components:
 
 ### 1. Download the OpenTelemetry Collector
 
-Download the latest release of the OpenTelemetry Collector Contrib distribution from [the project's repository][1].
+Download the latest release of the OpenTelemetry Collector Contrib distribution from the [releases page][100].
 
 ### 2. Create the Collector configuration
 
@@ -436,6 +436,7 @@ docker run \
     -v /:/hostfs:ro \
     -v $(pwd)/collector.yaml:/etc/otelcol-contrib/config.yaml \
     otel/opentelemetry-collector-contrib:0.150.1 \
+    --config /etc/otelcol-contrib/config.yaml \
     --feature-gates connector.spanmetrics.includeCollectorInstanceID
 ```
 
@@ -671,15 +672,13 @@ processors:
       tags: ['^kubernetes\.io/cluster/.*$']
 ```
 
-The `k8s_attributes` processor requires a ServiceAccount with permissions to read pod metadata. See [the Kubernetes Attributes Processor documentation][1] for RBAC setup instructions.
-
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
+The `k8s_attributes` processor requires a ServiceAccount with permissions to read pod metadata. See the [Kubernetes Attributes Processor documentation][101] for RBAC setup instructions.
 
 {{% /tab %}}
 
 {{% tab "Kubernetes (Helm)" %}}
 
-You can deploy the Collector in Kubernetes using [the official OpenTelemetry Collector Helm chart][1].
+You can deploy the Collector in Kubernetes using the [official OpenTelemetry Collector Helm chart][102].
 
 1. Create a Kubernetes secret with your Datadog API key:
 
@@ -693,23 +692,22 @@ You can deploy the Collector in Kubernetes using [the official OpenTelemetry Col
    helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
    ```
 
-1. Install the Collector with the recommended `values.yaml`:
+1. Download the [example values file][103] and save it as `values.yaml`. This file configures the Collector as a DaemonSet with the recommended Datadog settings.
+
+1. Install the Collector:
 
    ```shell
    helm install otelcol open-telemetry/opentelemetry-collector --values values.yaml
    ```
-
-For a complete `values.yaml` file that configures the Collector as a DaemonSet with the recommended Datadog configuration, see the [example values file][2] in the `opentelemetry-examples` repository.
-
-[1]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector
-[2]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### 3. Run the collector
 
-Start the Collector with the required feature gate:
+Start the Collector with the required feature gate enabled. If you are using Docker or Kubernetes, the run command is included in the configuration tab above.
+
+For Host installations, run:
 
 ```shell
 DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
@@ -770,19 +768,27 @@ The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints
 
 ### Datadog extension
 
-The `datadog` extension sends Collector metadata to Datadog for enrichment. This extension is from the [OpenTelemetry Collector Contrib][1] project and handles API key validation and deployment type reporting.
+The `datadog` extension sends Collector metadata to Datadog for host enrichment. It does not export telemetry data—all telemetry flows through the OTLP HTTP exporter. This extension is part of the [OpenTelemetry Collector Contrib][1] project and handles API key validation and deployment type reporting.
 
 ### Cumulative-to-delta processor
 
 The `cumulativetodelta` processor converts cumulative metrics to delta temporality, which is [Datadog's recommended configuration][6] for OpenTelemetry metrics.
 
+### Self-monitoring telemetry
+
+The configuration sends the Collector's own metrics back to its local OTLP receiver (`http://localhost:4318`). This routes the Collector's internal metrics through its own pipelines so they are enriched with resource attributes before being exported to Datadog.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
+[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib
 [2]: /account_management/api-app-keys/
 [3]: /getting_started/site/
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 [6]: /opentelemetry/guide/otlp_delta_temporality/
+[100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
+[101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
+[102]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector
+[103]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-daemonset.yaml
