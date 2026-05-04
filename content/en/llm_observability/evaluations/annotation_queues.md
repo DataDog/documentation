@@ -235,7 +235,7 @@ When multiple annotators have annotated the same trace, the value for each label
 
 For Boolean labels, ties break in favor of `true`. For categorical single-select, ties break alphabetically.
 
-For categorical multi-select, each option is treated as an independent yes/no vote: keep the option if the number of annotators who selected it is greater than or equal to the number who did not. The aggregated value is the array of options that meet this threshold (and may be empty if no option does — in which case the value falls back to a plurality vote and a single option is picked, with alphabetical tie-break).
+For categorical multi-select, each option is treated as an independent yes/no vote. Keep the option if the number of annotators who selected it is greater than or equal to the number who did not. The aggregated value is the array of options that meet this threshold. If no option meets the threshold, the value falls back to a plurality vote, and a single option is picked with alphabetical tie-break.
 
 **Example: categorical (single-select).** Three annotators rate `tone`:
 
