@@ -216,10 +216,10 @@ Transfer annotated traces to datasets for experiment evaluation:
 4. Click **Add to Dataset**.
 5. Set the dataset's **expected output**:
    - **From interaction**: use each trace's actual output. For experiment traces, you can also pick **Expected output** to use the original expected output from the experiment's source dataset.
-   - **From annotation label**: use the values annotators applied. Pick one or more labels; the record's `expected_output` is built from your selection.
+   - **From annotation label**: use the values the annotators applied. Pick one or more labels. The record's `expected_output` is built from your selection.
 6. Choose an existing dataset, or create a dataset.
 
-When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": "neutral" }`. The same shape applies whether you select one label or many.
+When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": "neutral" }`. The same shape applies whether you select one label or multiple labels.
 
 {{% collapse-content title="How annotation values are aggregated across annotators" level="h4" expanded=false id="annotation-aggregation" %}}
 
@@ -232,7 +232,7 @@ When multiple annotators have annotated the same trace, the value for each label
 | Score       | Average                                  |
 | Text        | List of responses                        |
 
-For categorical labels (both single-select and multi-select), the option picked by the most annotators wins. With multi-select, each option an annotator selects counts as one vote. Ties break alphabetically. For boolean labels, ties break in favor of `true`.
+For categorical labels (both single-select and multi-select), the option picked by the most annotators wins. With multi-select, each option an annotator selects counts as one vote. Ties break alphabetically. For Boolean labels, ties break in favor of `true`.
 
 **Example: categorical (single-select).** Three annotators rate `tone`:
 
