@@ -1,0 +1,788 @@
+---
+title: Set Up the OpenTelemetry Collector (OSS)
+private: true
+description: 'Send OpenTelemetry data to Datadog using the OpenTelemetry Collector with standard OSS components'
+further_reading:
+- link: "https://opentelemetry.io/docs/collector/"
+  tag: "External Site"
+  text: "Collector documentation"
+- link: "/opentelemetry/setup/collector_exporter/deploy"
+  tag: "Documentation"
+  text: "Deploy the OpenTelemetry Collector"
+- link: "/opentelemetry/config/hostname_tagging"
+  tag: "Documentation"
+  text: "Configure Hostname and Tagging"
+---
+
+## Overview
+
+The OpenTelemetry Collector collects, processes, and exports telemetry data from your applications in a vendor-neutral way. Using the [OpenTelemetry Collector Contrib][1] distribution, you can send traces, metrics, and logs to Datadog through the OTLP HTTP exporter. No Datadog Exporter or Connector required.
+
+This setup uses the following key components:
+
+- **OTLP HTTP exporter**: Sends traces, metrics, and logs to Datadog's OTLP intake endpoints.
+- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data, which power APM features like the Service Catalog and Service Page.
+- **Resource detection processor**: Extracts host and cloud metadata for proper hostname resolution and tagging in Datadog.
+
+{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram showing the OpenTelemetry SDK sending data through OTLP to the OpenTelemetry Collector, which forwards telemetry to Datadog." style="width:100%;" >}}
+
+<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>Full OTel</b>.</div>
+
+## Prerequisites
+
+- [OpenTelemetry Collector Contrib][1] v0.150.1 or later
+- A [Datadog API key][2]
+- Your [Datadog site][3] (for example, `datadoghq.com` or `datadoghq.eu`)
+
+## Install and configure
+
+### 1. Download the OpenTelemetry Collector
+
+Download the latest release of the OpenTelemetry Collector Contrib distribution from [the project's repository][1].
+
+### 2. Create the Collector configuration
+
+Create a configuration file named `collector.yaml`. The configuration varies depending on your environment. Select the tab that matches your setup:
+
+{{< tabs >}}
+{{% tab "Host" %}}
+
+Use this configuration for an uncontainerized Collector running directly on a host (bare metal or VM).
+
+Set the `DD_API_KEY` and `DD_SITE` environment variables before starting the Collector.
+
+```yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  hostmetrics:
+    collection_interval: 10s
+    scrapers:
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+          system.cpu.physical.count:
+            enabled: true
+          system.cpu.logical.count:
+            enabled: true
+          system.cpu.frequency:
+            enabled: true
+      memory:
+        metrics:
+          system.memory.limit:
+            enabled: true
+      paging:
+        metrics:
+          system.paging.utilization:
+            enabled: true
+          system.paging.usage:
+            enabled: true
+      disk: {}
+      filesystem:
+        metrics:
+          system.filesystem.utilization:
+            enabled: true
+      load: {}
+      network: {}
+      processes: {}
+
+processors:
+  resourcedetection:
+    detectors: [env, system]
+    timeout: 2s
+    override: true
+    system:
+      resource_attributes:
+        host.arch:
+          enabled: true
+        host.cpu.cache.l2.size:
+          enabled: true
+        host.cpu.family:
+          enabled: true
+        host.cpu.model.id:
+          enabled: true
+        host.cpu.model.name:
+          enabled: true
+        host.cpu.stepping:
+          enabled: true
+        host.cpu.vendor.id:
+          enabled: true
+        host.ip:
+          enabled: true
+        host.mac:
+          enabled: true
+        os.description:
+          enabled: true
+  cumulativetodelta: {}
+
+connectors:
+  forward: {}
+  spanmetrics:
+    aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
+    add_resource_attributes: true
+    histogram:
+      exponential: {}
+      unit: s
+    dimensions:
+      - name: deployment.environment.name
+      - name: service.version
+      - name: http.response.status_code
+      - name: container.id
+      - name: container.name
+      - name: container.image.name
+      - name: container.image.tag
+      - name: container.runtime
+      - name: cloud.provider
+      - name: cloud.region
+      - name: cloud.availability_zone
+      - name: aws.ecs.task.family
+      - name: aws.ecs.task.arn
+      - name: aws.ecs.cluster.arn
+      - name: aws.ecs.task.revision
+      - name: aws.ecs.container.arn
+      - name: k8s.container.name
+      - name: k8s.cluster.name
+      - name: k8s.deployment.name
+      - name: k8s.replicaset.name
+      - name: k8s.statefulset.name
+      - name: k8s.daemonset.name
+      - name: k8s.job.name
+      - name: k8s.cronjob.name
+      - name: k8s.namespace.name
+      - name: k8s.pod.name
+      - name: aws.ecs.launchtype
+      - name: cloud.account.id
+      - name: host.id
+      - name: host.name
+      - name: k8s.node.name
+      - name: azure.resourcegroup.name
+      - name: aws.s3.bucket
+      - name: db.namespace
+      - name: messaging.destination.name
+      - name: messaging.system
+      - name: server.address
+      - name: operation.name
+      - name: http.request.method
+      - name: http.method
+      - name: db.system
+      - name: messaging.operation
+      - name: rpc.system
+      - name: rpc.service
+      - name: faas.invoked_provider
+      - name: faas.invoked_name
+      - name: faas.trigger
+      - name: graphql.operation.type
+      - name: network.protocol.name
+      - name: resource.name
+      - name: http.route
+      - name: messaging.destination
+      - name: rpc.method
+      - name: graphql.operation.name
+      - name: db.statement
+      - name: db.query.text
+
+exporters:
+  otlp_http:
+    endpoint: https://otlp.${env:DD_SITE}
+    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
+    headers:
+      dd-api-key: ${env:DD_API_KEY}
+      dd-otel-metric-config: >-
+        {
+        "resource_attributes_as_tags": true,
+        "instrumentation_scope_metadata_as_tags": true
+        }
+    compression: zstd
+    compression_params:
+      level: 3
+    sending_queue:
+      batch: {}
+
+extensions:
+  datadog:
+    api:
+      site: ${env:DD_SITE}
+      key: ${env:DD_API_KEY}
+    deployment_type: daemonset
+
+service:
+  extensions:
+    - datadog
+  pipelines:
+    logs:
+      receivers: [otlp]
+      processors: [resourcedetection]
+      exporters: [otlp_http]
+    metrics:
+      receivers: [otlp, hostmetrics]
+      processors: [resourcedetection, cumulativetodelta]
+      exporters: [otlp_http]
+    traces:
+      receivers: [otlp]
+      processors: [resourcedetection]
+      exporters: [forward, spanmetrics]
+    traces/sampling:
+      receivers: [forward]
+      exporters: [otlp_http]
+    metrics/spanmetrics:
+      receivers: [spanmetrics]
+      exporters: [otlp_http]
+  telemetry:
+    metrics:
+      readers:
+        - periodic:
+            exporter:
+              otlp:
+                protocol: http/protobuf
+                endpoint: http://localhost:4318
+```
+
+For cloud-specific environments, add the appropriate resource detection detector:
+- **Amazon EC2**: `detectors: [ec2, env, system]`
+- **Google Cloud**: `detectors: [gcp, env, system]`
+- **Azure**: `detectors: [azure, env, system]`
+
+{{% /tab %}}
+
+{{% tab "Docker" %}}
+
+Use this configuration for a containerized Collector. The `hostmetrics` receiver requires mounting the host filesystem at `/hostfs`.
+
+Set the `DD_API_KEY` and `DD_SITE` environment variables before starting the Collector.
+
+```yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  hostmetrics:
+    root_path: /hostfs
+    collection_interval: 10s
+    scrapers:
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+          system.cpu.physical.count:
+            enabled: true
+          system.cpu.logical.count:
+            enabled: true
+          system.cpu.frequency:
+            enabled: true
+      memory:
+        metrics:
+          system.memory.limit:
+            enabled: true
+      paging:
+        metrics:
+          system.paging.utilization:
+            enabled: true
+          system.paging.usage:
+            enabled: true
+      disk: {}
+      filesystem:
+        metrics:
+          system.filesystem.utilization:
+            enabled: true
+      load: {}
+      network: {}
+      processes: {}
+
+processors:
+  resourcedetection:
+    detectors: [env]
+    timeout: 2s
+    override: true
+  cumulativetodelta: {}
+
+connectors:
+  forward: {}
+  spanmetrics:
+    aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
+    add_resource_attributes: true
+    histogram:
+      exponential: {}
+      unit: s
+    dimensions:
+      - name: deployment.environment.name
+      - name: service.version
+      - name: http.response.status_code
+      - name: container.id
+      - name: container.name
+      - name: container.image.name
+      - name: container.image.tag
+      - name: container.runtime
+      - name: cloud.provider
+      - name: cloud.region
+      - name: cloud.availability_zone
+      - name: aws.ecs.task.family
+      - name: aws.ecs.task.arn
+      - name: aws.ecs.cluster.arn
+      - name: aws.ecs.task.revision
+      - name: aws.ecs.container.arn
+      - name: k8s.container.name
+      - name: k8s.cluster.name
+      - name: k8s.deployment.name
+      - name: k8s.replicaset.name
+      - name: k8s.statefulset.name
+      - name: k8s.daemonset.name
+      - name: k8s.job.name
+      - name: k8s.cronjob.name
+      - name: k8s.namespace.name
+      - name: k8s.pod.name
+      - name: aws.ecs.launchtype
+      - name: cloud.account.id
+      - name: host.id
+      - name: host.name
+      - name: k8s.node.name
+      - name: azure.resourcegroup.name
+      - name: aws.s3.bucket
+      - name: db.namespace
+      - name: messaging.destination.name
+      - name: messaging.system
+      - name: server.address
+      - name: operation.name
+      - name: http.request.method
+      - name: http.method
+      - name: db.system
+      - name: messaging.operation
+      - name: rpc.system
+      - name: rpc.service
+      - name: faas.invoked_provider
+      - name: faas.invoked_name
+      - name: faas.trigger
+      - name: graphql.operation.type
+      - name: network.protocol.name
+      - name: resource.name
+      - name: http.route
+      - name: messaging.destination
+      - name: rpc.method
+      - name: graphql.operation.name
+      - name: db.statement
+      - name: db.query.text
+
+exporters:
+  otlp_http:
+    endpoint: https://otlp.${env:DD_SITE}
+    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
+    headers:
+      dd-api-key: ${env:DD_API_KEY}
+      dd-otel-metric-config: >-
+        {
+        "resource_attributes_as_tags": true,
+        "instrumentation_scope_metadata_as_tags": true
+        }
+    compression: zstd
+    compression_params:
+      level: 3
+    sending_queue:
+      batch: {}
+
+extensions:
+  datadog:
+    api:
+      site: ${env:DD_SITE}
+      key: ${env:DD_API_KEY}
+    deployment_type: daemonset
+
+service:
+  extensions:
+    - datadog
+  pipelines:
+    logs:
+      receivers: [otlp]
+      processors: [resourcedetection]
+      exporters: [otlp_http]
+    metrics:
+      receivers: [otlp, hostmetrics]
+      processors: [resourcedetection, cumulativetodelta]
+      exporters: [otlp_http]
+    traces:
+      receivers: [otlp]
+      processors: [resourcedetection]
+      exporters: [forward, spanmetrics]
+    traces/sampling:
+      receivers: [forward]
+      exporters: [otlp_http]
+    metrics/spanmetrics:
+      receivers: [spanmetrics]
+      exporters: [otlp_http]
+  telemetry:
+    metrics:
+      readers:
+        - periodic:
+            exporter:
+              otlp:
+                protocol: http/protobuf
+                endpoint: http://localhost:4318
+```
+
+Run the Collector with the host filesystem mounted:
+
+```shell
+docker run \
+    -p 4317:4317 \
+    -p 4318:4318 \
+    -e DD_API_KEY \
+    -e DD_SITE \
+    -v /:/hostfs:ro \
+    -v $(pwd)/collector.yaml:/etc/otelcol-contrib/config.yaml \
+    otel/opentelemetry-collector-contrib:0.150.1 \
+    --feature-gates connector.spanmetrics.includeCollectorInstanceID
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (DaemonSet)" %}}
+
+Use this configuration for a Collector deployed as a Kubernetes DaemonSet. This includes the `k8s_attributes` processor for enriching telemetry with Kubernetes metadata.
+
+Set the `DD_API_KEY` and `DD_SITE` environment variables before starting the Collector.
+
+```yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  hostmetrics:
+    root_path: /hostfs
+    collection_interval: 10s
+    scrapers:
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+          system.cpu.physical.count:
+            enabled: true
+          system.cpu.logical.count:
+            enabled: true
+          system.cpu.frequency:
+            enabled: true
+      memory:
+        metrics:
+          system.memory.limit:
+            enabled: true
+      paging:
+        metrics:
+          system.paging.utilization:
+            enabled: true
+          system.paging.usage:
+            enabled: true
+      disk: {}
+      filesystem:
+        metrics:
+          system.filesystem.utilization:
+            enabled: true
+      load: {}
+      network: {}
+      processes: {}
+
+processors:
+  resourcedetection:
+    detectors: [env]
+    timeout: 2s
+    override: true
+  cumulativetodelta: {}
+  k8s_attributes:
+    extract:
+      otel_annotations: true
+      metadata:
+        - k8s.node.name
+        - k8s.namespace.name
+        - service.namespace
+        - service.name
+        - service.version
+        - service.instance.id
+        - k8s.deployment.name
+        - k8s.replicaset.name
+        - k8s.daemonset.name
+        - k8s.statefulset.name
+        - k8s.cronjob.name
+        - k8s.job.name
+        - k8s.pod.uid
+        - k8s.pod.name
+        - container.id
+        - k8s.container.name
+        - container.image.name
+        - container.image.tag
+    pod_association:
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.uid
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.ip
+      - sources:
+          - from: resource_attribute
+            name: k8s.pod.name
+          - from: resource_attribute
+            name: k8s.namespace.name
+      - sources:
+          - from: connection
+
+connectors:
+  forward: {}
+  spanmetrics:
+    aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
+    add_resource_attributes: true
+    histogram:
+      exponential: {}
+      unit: s
+    dimensions:
+      - name: deployment.environment.name
+      - name: service.version
+      - name: http.response.status_code
+      - name: container.id
+      - name: container.name
+      - name: container.image.name
+      - name: container.image.tag
+      - name: container.runtime
+      - name: cloud.provider
+      - name: cloud.region
+      - name: cloud.availability_zone
+      - name: aws.ecs.task.family
+      - name: aws.ecs.task.arn
+      - name: aws.ecs.cluster.arn
+      - name: aws.ecs.task.revision
+      - name: aws.ecs.container.arn
+      - name: k8s.container.name
+      - name: k8s.cluster.name
+      - name: k8s.deployment.name
+      - name: k8s.replicaset.name
+      - name: k8s.statefulset.name
+      - name: k8s.daemonset.name
+      - name: k8s.job.name
+      - name: k8s.cronjob.name
+      - name: k8s.namespace.name
+      - name: k8s.pod.name
+      - name: aws.ecs.launchtype
+      - name: cloud.account.id
+      - name: host.id
+      - name: host.name
+      - name: k8s.node.name
+      - name: azure.resourcegroup.name
+      - name: aws.s3.bucket
+      - name: db.namespace
+      - name: messaging.destination.name
+      - name: messaging.system
+      - name: server.address
+      - name: operation.name
+      - name: http.request.method
+      - name: http.method
+      - name: db.system
+      - name: messaging.operation
+      - name: rpc.system
+      - name: rpc.service
+      - name: faas.invoked_provider
+      - name: faas.invoked_name
+      - name: faas.trigger
+      - name: graphql.operation.type
+      - name: network.protocol.name
+      - name: resource.name
+      - name: http.route
+      - name: messaging.destination
+      - name: rpc.method
+      - name: graphql.operation.name
+      - name: db.statement
+      - name: db.query.text
+
+exporters:
+  otlp_http:
+    endpoint: https://otlp.${env:DD_SITE}
+    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
+    headers:
+      dd-api-key: ${env:DD_API_KEY}
+      dd-otel-metric-config: >-
+        {
+        "resource_attributes_as_tags": true,
+        "instrumentation_scope_metadata_as_tags": true
+        }
+    compression: zstd
+    compression_params:
+      level: 3
+    sending_queue:
+      batch: {}
+
+extensions:
+  health_check:
+    endpoint: ${env:MY_POD_IP}:13133
+  datadog:
+    api:
+      site: ${env:DD_SITE}
+      key: ${env:DD_API_KEY}
+    deployment_type: daemonset
+
+service:
+  extensions:
+    - health_check
+    - datadog
+  pipelines:
+    logs:
+      receivers: [otlp]
+      processors: [k8s_attributes, resourcedetection]
+      exporters: [otlp_http]
+    metrics:
+      receivers: [otlp, hostmetrics]
+      processors: [k8s_attributes, resourcedetection, cumulativetodelta]
+      exporters: [otlp_http]
+    traces:
+      receivers: [otlp]
+      processors: [k8s_attributes, resourcedetection]
+      exporters: [forward, spanmetrics]
+    traces/sampling:
+      receivers: [forward]
+      exporters: [otlp_http]
+    metrics/spanmetrics:
+      receivers: [spanmetrics]
+      exporters: [otlp_http]
+  telemetry:
+    metrics:
+      readers:
+        - periodic:
+            exporter:
+              otlp:
+                protocol: http/protobuf
+                endpoint: http://localhost:4318
+```
+
+For EKS environments, add the `eks` and `ec2` detectors to the `resourcedetection` processor:
+
+```yaml
+processors:
+  resourcedetection:
+    detectors: [eks, ec2, env]
+    timeout: 2s
+    override: true
+    eks:
+      resource_attributes:
+        k8s.cluster.name: { enabled: true }
+    ec2:
+      tags: ['^kubernetes\.io/cluster/.*$']
+```
+
+The `k8s_attributes` processor requires a ServiceAccount with permissions to read pod metadata. See [the Kubernetes Attributes Processor documentation][1] for RBAC setup instructions.
+
+[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm)" %}}
+
+You can deploy the Collector in Kubernetes using [the official OpenTelemetry Collector Helm chart][1].
+
+1. Create a Kubernetes secret with your Datadog API key:
+
+   ```shell
+   kubectl create secret generic datadog-secrets --from-literal=api-key='<YOUR_API_KEY>'
+   ```
+
+1. Add the OpenTelemetry Helm repository:
+
+   ```shell
+   helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+   ```
+
+1. Install the Collector with the recommended `values.yaml`:
+
+   ```shell
+   helm install otelcol open-telemetry/opentelemetry-collector --values values.yaml
+   ```
+
+For a complete `values.yaml` file that configures the Collector as a DaemonSet with the recommended Datadog configuration, see the [example values file][2] in the `opentelemetry-examples` repository.
+
+[1]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector
+[2]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### 3. Run the collector
+
+Start the Collector with the required feature gate:
+
+```shell
+DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
+  otelcol-contrib --config collector.yaml \
+  --feature-gates connector.spanmetrics.includeCollectorInstanceID
+```
+
+### 4. Configure your application
+
+Configure your OpenTelemetry-instrumented application to send data to the Collector. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Collector:
+
+{{< tabs >}}
+{{% tab "Host" %}}
+```shell
+export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318"
+```
+{{% /tab %}}
+
+{{% tab "Docker" %}}
+Set `OTEL_EXPORTER_OTLP_ENDPOINT` in your application container to point to the Collector container:
+```
+OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-hostname>:4318
+```
+Both containers must be on the same network. If you use Docker Compose, this is handled automatically.
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+In your application deployment manifest, configure the endpoint using the host IP:
+```yaml
+env:
+  - name: HOST_IP
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
+  - name: OTEL_EXPORTER_OTLP_ENDPOINT
+    value: "http://$(HOST_IP):4318"
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Apply [Unified Service Tagging][4] by setting the `service.name`, `deployment.environment.name`, and `service.version` resource attributes in your application's OpenTelemetry configuration.
+
+## Key components
+
+### Span metrics connector
+
+The `spanmetrics` connector generates RED metrics from trace data. These metrics power APM features including the Service Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
+
+For a complete list of dimensions included in the recommended configuration, see the [full configuration files][5] in the `opentelemetry-examples` repository.
+
+### OTLP HTTP exporter
+
+The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints. Key configuration details:
+
+- **Endpoint**: `https://otlp.{your_dd_site}` for traces and logs, `https://otlp.{your_dd_site}/api/v2/otlpmetrics` for metrics.
+- **Compression**: `zstd` is recommended for reduced bandwidth usage.
+- **Resource attributes as tags**: The `dd-otel-metric-config` header enables resource attributes and instrumentation scope metadata to be sent as metric tags.
+
+### Datadog extension
+
+The `datadog` extension sends Collector metadata to Datadog for enrichment. This extension is from the [OpenTelemetry Collector Contrib][1] project and handles API key validation and deployment type reporting.
+
+### Cumulative-to-delta processor
+
+The `cumulativetodelta` processor converts cumulative metrics to delta temporality, which is [Datadog's recommended configuration][6] for OpenTelemetry metrics.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
+[2]: /account_management/api-app-keys/
+[3]: /getting_started/site/
+[4]: /getting_started/tagging/unified_service_tagging/
+[5]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
+[6]: /opentelemetry/guide/otlp_delta_temporality/
