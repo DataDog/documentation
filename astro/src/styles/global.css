@@ -400,9 +400,28 @@ html[data-active-region='gov'] [data-region='gov'] {
   view-transition-name: announcement-banner;
 }
 
+.api-side-nav {
+  view-transition-name: sidenav;
+}
+
+::view-transition-group(main-nav),
+::view-transition-group(announcement-banner),
+::view-transition-group(sidenav),
+::view-transition-group(root),
 ::view-transition-old(main-nav),
 ::view-transition-new(main-nav),
 ::view-transition-old(announcement-banner),
-::view-transition-new(announcement-banner) {
+::view-transition-new(announcement-banner),
+::view-transition-old(sidenav),
+::view-transition-new(sidenav),
+::view-transition-old(root),
+::view-transition-new(root) {
   animation: none;
+}
+
+::view-transition-old(main-nav),
+::view-transition-old(announcement-banner),
+::view-transition-old(sidenav),
+::view-transition-old(root) {
+  display: none;
 }
