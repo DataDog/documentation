@@ -17,11 +17,9 @@ further_reading:
 
 ## Overview
 
-The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last two hours, but you can extend the view to cover up to one week. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
+The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last 15 minutes. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
 
-The Host List displays the legacy view by default. This page describes the new view. To switch to the new view, click the toggle in the upper-right corner.
-
-{{< img src="infrastructure/index/infra-list-overview.png" alt="The Host List with the new view selected, showing the filter panel on the left, a list of hosts with customizable columns, and the legacy and new toggle in the upper-right corner." style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-overview.png" alt="The Host List with a filter panel on the left and a list of hosts with customizable columns." style="width:100%;">}}
 
 ## View hosts
 
@@ -34,7 +32,7 @@ Use the filter panel on the left to narrow the list of hosts:
 - **Filter Metrics**: Select a metric and define a value range to filter hosts by metric value.
 - **Search facets**: Filter by any host property or tag, such as Cloud Provider, Env, Region, Resource Type, Instance Type, OS, OS Version, Agent, or Docker Version.
 
-You can also use the search box at the top of the list to filter hosts with the Datadog search syntax.
+You can also use the search box at the top of the list to filter hosts with the [Datadog search syntax][16].
 
 {{< img src="infrastructure/index/infra-list-filter-panel.png" alt="The Host List filter panel with quick filter checkboxes, a Filter Metrics section, and a search facets section." style="width:100%;">}}
 
@@ -175,3 +173,4 @@ for host in infra['rows']:
 [13]: /agent/fleet_automation
 [14]: /opentelemetry/integrations/datadog_extension/
 [15]: /infrastructure/resource_catalog/
+[16]: /getting_started/search/
