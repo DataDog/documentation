@@ -244,7 +244,26 @@ Define numerical thresholds to determine passing performance.
 Select the categories that should map to a passing state. For example, if you have the categories `Excellent`, `Good`, and `Poor`, where only `Poor` should correspond to a failing state, select `Excellent` and `Good`.
 {{% /tab %}}
 {{% tab "JSON" %}}
-Assessment Criteria is not currently available for JSON evaluations.
+Supply a JavaScript function to assign an assessment based on the output from the LLM-as-a-Judge evaluator. The function must return a json object of the following format
+```
+{
+    assessment: "pass", // "pass" | "fail" [REQUIRED],
+    value: "evaluation_label" // string [OPTIONAL],
+    reasoning: "explanation behind the assessment" // string [OPTIONAL]
+
+}
+```
+and the function signature must look lik
+```
+function __evalPostProcessing(input) {
+    // FUNCTION LOGIC
+    return {
+        assessment: "pass",
+        value: "label",
+        reasoning: "the reasoning"
+    }
+}
+```
 {{% /tab %}}
 {{< /tabs >}}
 
