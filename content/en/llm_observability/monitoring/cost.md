@@ -71,6 +71,47 @@ Alternatively, query the following span attributes directly:
 - `@metrics.cache_write_input_tokens` / `@metrics.estimated_cache_write_input_cost`
 - `@metrics.reasoning_output_tokens` / `@metrics.estimated_reasoning_output_cost`
 
+## FAQ
+
+### Why does my trace show "PARTIAL COST" or "COST UNAVAILABLE"?
+
+Each LLM span in a trace is priced independently. The warning appears when one or more LLM spans in the trace are missing a cost estimate:
+- **Partial cost** — some LLM spans in the trace have a cost, while others do not. The **Estimated Cost** value only reflects the priced spans.
+- **Cost unavailable** — none of the LLM spans in the trace have a cost.
+
+Hover over the warning to see how many spans are missing cost, the reason for each missing cost, and the names of the affected spans. The reasons fall into one of the categories below.
+
+### Unsupported model provider
+
+The LLM model provider on the span is not in the [list of supported providers](#supported-providers), so Datadog has no public pricing rates to apply.
+
+How to fix:
+- Switch to a [supported provider](#supported-providers).
+- Manually supply cost values on the span. See the [SDK Reference][2] or [API][3].
+
+### Unsupported model name
+
+The LLM provider is supported, but the `model_name` on the span does not match any entry in the provider's [pricing catalog][4]. This usually happens when the model name is misspelled, abbreviated, or uses an internal alias.
+
+How to fix:
+- Update the span's `model_name` to match the official name in the provider's [pricing catalog][4].
+- For privately deployed or customized variants of a supported model, manually supply cost values on the span. See the [SDK Reference][2] or [API][3].
+
+### Missing token counts
+
+The span has no `input_tokens` or `output_tokens` annotation, so Datadog has no token values to multiply by the per-token rate.
+
+How to fix:
+- For [auto-instrumentation][1], confirm your provider and SDK version are supported
+- For manual instrumentation, annotate input and output token counts on the span. See the [SDK Reference][2] or [API][3].
+
+### Unsupported pricing tier
+
+The provider charges different rates per region, context window size, or other pricing tier, and Datadog does not have a pricing entry for the tier this span hit.
+
+How to fix:
+- Manually supply input and output cost values on the span. See the [SDK Reference][2] or [API][3].
+
 [1]: /llm_observability/instrumentation/auto_instrumentation
 [2]: /llm_observability/instrumentation/sdk/?tab=python#monitoring-costs
 [3]: /llm_observability/instrumentation/api/#metrics
