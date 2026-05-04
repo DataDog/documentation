@@ -93,6 +93,177 @@ service:
 
 The Collector automatically attaches `service.name`, `service.version`, and `service.instance.id` (a randomly generated UUID) to its internal telemetry. You don't need to set these manually.
 
+### 5. (Optional) Configure gateway topology (preview)
+
+<div class="alert alert-info">
+The Gateway topology view in <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> is a preview feature. The Datadog Extension config fields below are available in OpenTelemetry Collector v0.150.0 and later.
+</div>
+
+When you have an OpenTelemetry Collector gateway setup that forwards telemetry through one or more gateway Collectors before reaching Datadog, the Datadog Extension can publish the topology so it appears as a connected pipeline graph in [Fleet Automation][7]:
+
+{{< img src="opentelemetry/integrations/datadog_extension_gateway_topology.png" alt="Gateway topology view in Fleet Automation showing DaemonSet Collectors forwarding through two layers of gateway Collectors to Datadog" style="width:100%;" >}}
+
+To enable this view, configure each Collector in the pipeline:
+
+- Set `deployment_type` to `daemonset` for agent or DaemonSet Collectors and `gateway` for gateway Collectors.
+- Set `gateway_destination` on Collectors that forward to a downstream gateway. The value is the Kubernetes Service of the receiving gateway, in `<namespace>/<service>` form.
+- Set `gateway_service` on gateway Collectors. The value is the Kubernetes Service that fronts the gateway pods.
+- A **middle** gateway in a multi-layer pipeline sets **both** `gateway_service` (its own service) and `gateway_destination` (the next gateway).
+- Set `k8s.cluster.name` under `service.telemetry.resource` on every Collector in the pipeline. This is **mandatory**: together with `gateway_service` and `gateway_destination`, it forms the join key that Fleet Automation uses to reconstruct the pipeline graph.
+- Enable Collector internal metrics so the extension can attribute logs, metrics or traces volume data to each edge in the graph with the **Show traffic** toggle. See [OpenTelemetry Collector Health Metrics][10].
+
+The example below covers the common two-layer case: a node-local DaemonSet forwards to a gateway Deployment, which sends to Datadog.
+
+Each Collector exposes its own health metrics on a Prometheus pull endpoint via `service.telemetry.metrics`, scrapes that endpoint with a `prometheus/internal` receiver, and routes the result through the same metrics pipeline as application telemetry. This is what populates each node and edge in the topology view.
+
+#### DaemonSet Collector
+
+```yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  prometheus/internal:
+    config:
+      scrape_configs:
+        - job_name: otelcol-internal
+          scrape_interval: 10s
+          static_configs:
+            - targets: ['localhost:8888']
+
+exporters:
+  otlp:
+    endpoint: otelcol-gateway.monitoring.svc.cluster.local:4317
+    tls:
+      insecure: true
+
+extensions:
+  datadog:
+    api:
+      key: ${env:DD_API_KEY}
+      site: {{< region-param key="dd_site" >}}
+    deployment_type: daemonset
+    gateway_destination: monitoring/otelcol-gateway
+
+service:
+  telemetry:
+    metrics:
+      level: normal
+      readers:
+        - pull:
+            exporter:
+              prometheus:
+                host: 0.0.0.0
+                port: 8888
+                without_type_suffix: true
+                without_units: true
+    resource:
+      k8s.cluster.name: my-cluster
+      k8s.node.name: ${env:K8S_NODE_NAME}
+      k8s.pod.name: ${env:K8S_POD_NAME}
+  extensions: [datadog]
+  pipelines:
+    metrics:
+      receivers: [otlp, prometheus/internal]
+      exporters: [otlp]
+    traces:
+      receivers: [otlp]
+      exporters: [otlp]
+    logs:
+      receivers: [otlp]
+      exporters: [otlp]
+```
+
+The DaemonSet's `metrics` pipeline includes `prometheus/internal` so the Collector's own health metrics travel over OTLP to the gateway alongside application telemetry, reaching Datadog through the gateway's Datadog Exporter.
+
+#### Gateway Collector
+
+```yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  prometheus/internal:
+    config:
+      scrape_configs:
+        - job_name: otelcol-internal
+          scrape_interval: 10s
+          static_configs:
+            - targets: ['localhost:8888']
+
+exporters:
+  datadog:
+    api:
+      key: ${env:DD_API_KEY}
+      site: {{< region-param key="dd_site" >}}
+    metrics:
+      resource_attributes_as_tags: true
+    sending_queue:
+      batch:
+        flush_timeout: 10s
+
+extensions:
+  datadog:
+    api:
+      key: ${env:DD_API_KEY}
+      site: {{< region-param key="dd_site" >}}
+    deployment_type: gateway
+    gateway_service: monitoring/otelcol-gateway
+
+service:
+  telemetry:
+    metrics:
+      level: normal
+      readers:
+        - pull:
+            exporter:
+              prometheus:
+                host: 0.0.0.0
+                port: 8888
+                without_type_suffix: true
+                without_units: true
+    resource:
+      k8s.cluster.name: my-cluster
+      k8s.node.name: ${env:K8S_NODE_NAME}
+      k8s.pod.name: ${env:K8S_POD_NAME}
+  extensions: [datadog]
+  pipelines:
+    metrics:
+      receivers: [otlp, prometheus/internal]
+      exporters: [datadog]
+    traces:
+      receivers: [otlp]
+      exporters: [datadog]
+    logs:
+      receivers: [otlp]
+      exporters: [datadog]
+```
+
+The gateway's `metrics` pipeline accepts both forwarded telemetry (from the DaemonSet over OTLP) and its own internal metrics from `prometheus/internal`, then exports everything to Datadog.
+
+#### Multi-layer gateway pipelines
+
+For pipelines with more than one gateway layer, set `gateway_service` and `gateway_destination` together on the middle layer. For example, in a three-layer topology with a Layer-2 gateway between the DaemonSet and a Layer-1 gateway, the Layer-2 gateway extension is configured as:
+
+```yaml
+extensions:
+  datadog:
+    api:
+      key: ${env:DD_API_KEY}
+      site: {{< region-param key="dd_site" >}}
+    deployment_type: gateway
+    gateway_service: monitoring/otelcol-gateway-l2
+    gateway_destination: monitoring/otelcol-gateway-l1
+```
+
+The DaemonSet forwards to `monitoring/otelcol-gateway-l2`, the Layer-2 gateway forwards to `monitoring/otelcol-gateway-l1`, and the Layer-1 gateway sends to Datadog. Each Collector reports the same `k8s.cluster.name`.
+
 ## Configuration options
 
 | Parameter | Description | Default |
@@ -219,3 +390,4 @@ This endpoint provides:
 [6]: https://opentelemetry.io/docs/collector/custom-collector/
 [7]: https://app.datadoghq.com/fleet
 [8]: /opentelemetry/setup/ddot_collector/
+[10]: /opentelemetry/integrations/collector_health_metrics/
