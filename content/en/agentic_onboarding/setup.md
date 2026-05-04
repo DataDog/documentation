@@ -131,6 +131,10 @@ To get started:
    {{% tab "Serverless Monitoring" %}}
    {{< code-block lang="text" >}}Instrument my AWS Lambda functions with Datadog{{< /code-block >}}
    {{% /tab %}}
+
+   {{% tab "Docker Monitoring" %}}
+   {{< code-block lang="text" >}}Add Datadog for Docker to my project{{< /code-block >}}
+   {{% /tab %}}
    {{< /tabs >}}
 
 2. Review and accept each action your AI agent proposes to complete the setup process.
