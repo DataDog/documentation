@@ -548,8 +548,8 @@ This guide follows the flag data path from the **Flagging Platform** (where flag
 
 Before checking infrastructure, confirm the flag itself is set up correctly:
 
-1. The flag is **published**, not saved as a draft.
-2. The flag targets the **correct service** (`DD_SERVICE`) and **environment** (`DD_ENV`).
+1. The flag is **enabled** for the target environment, not disabled. Flags are disabled by default in each environment.
+2. The flag targets the **correct environment** (`DD_ENV`). Flags do not target specific services—they apply to all services within the enabled environment.
 3. Your `DD_ENV` value appears in [Feature Flag Environments][5]. If it is absent, the environment has not received any flag traffic yet.
 
 ### 2. Remote Configuration: Verify the path
