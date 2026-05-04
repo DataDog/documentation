@@ -750,6 +750,15 @@ env:
 
 Apply [Unified Service Tagging][4] by setting the `service.name`, `deployment.environment.name`, and `service.version` resource attributes in your application's OpenTelemetry configuration.
 
+## Verify the setup
+
+After your application sends telemetry to the Collector, verify that data appears in Datadog:
+
+1. In Datadog, go to **APM > Services** and confirm that your `service.name` appears.
+2. Open **APM > Traces** and search for your service.
+3. Go to **Infrastructure > Host Map** and confirm that the host running the Collector appears.
+4. If you send logs through OTLP, go to **Logs Explorer** and search for your service name.
+
 ## Key components
 
 ### Span metrics connector
