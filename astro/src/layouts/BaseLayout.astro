@@ -1,30 +1,97 @@
 ---
-import '@websites-modules/assets/styles/base/_iconfont.scss';
 import '../styles/global.css';
 import AnnouncementBanner from '../components/AnnouncementBanner/AnnouncementBanner.astro';
 import Header from '../components/Header/Header.astro';
 import Footer from '../components/Footer/Footer.astro';
+import { stripLocalePrefix, type Locale } from '../lib/i18n/locale';
+import {
+  TWITTER_HANDLE,
+  THEME_COLOR,
+  DEFAULT_OG_IMAGE,
+  getLocaleDefaults,
+} from '../lib/seo';
 
 interface Props {
   title: string;
+  description?: string;
+  /** Full URL or absolute path. Defaults to `Astro.site + Astro.url.pathname`. */
+  canonical?: string;
+  /** Absolute URL of the social-share image. */
+  image?: string;
+  /** OpenGraph type; defaults to "article" to match Hugo. */
+  ogType?: 'website' | 'article';
+  /** Locale for `<html lang>` and per-locale defaults. Auto-detected from URL when omitted. */
+  lang?: Locale;
+  /** Per-locale URLs for `<link rel="alternate" hreflang>`. */
+  hreflang?: Array<{ hreflang: string; href: string }>;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description: descriptionProp,
+  canonical: canonicalProp,
+  image: imageProp,
+  ogType = 'article',
+  lang: langProp,
+  hreflang,
+} = Astro.props;
+
+const lang: Locale = langProp ?? stripLocalePrefix(Astro.url.pathname).lang;
+const localeDefaults = getLocaleDefaults(lang);
+const description = descriptionProp ?? localeDefaults.metaDescription;
+const siteName = localeDefaults.siteName;
+const image = imageProp ?? DEFAULT_OG_IMAGE;
+const siteOrigin = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonical = canonicalProp ?? `${siteOrigin}${Astro.url.pathname}`;
+const ogUrl = canonical;
+// Resolve any relative hreflang hrefs against the site origin.
+const hreflangResolved = hreflang?.map((h) => ({
+  hreflang: h.hreflang,
+  href: h.href.startsWith('http') ? h.href : `${siteOrigin}${h.href}`,
+}));
 ---
 
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="/favicon.ico" />
     <title>{title}</title>
+
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={THEME_COLOR} />
+    <link rel="canonical" href={canonical} />
+
+    {/* Schema.org */}
+    <meta itemprop="name" content={title} />
+    <meta itemprop="description" content={description} />
+
+    {/* Open Graph */}
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:image" content={image} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="article:author" content="Datadog" />
+
+    {/* Twitter Card */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={TWITTER_HANDLE} />
+    <meta name="twitter:creator" content={TWITTER_HANDLE} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    {hreflangResolved?.map((h) => (
+      <link rel="alternate" hreflang={h.hreflang} href={h.href} />
+    ))}
+
     <link rel="preload" href="/fonts/NationalWeb-Light.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/NationalWeb-Semibold.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/RobotoMono-Regular.woff" as="font" type="font/woff" crossorigin />
-    <!-- SCROLL MODE — start (Google Fonts) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Pinyon+Script&display=swap" rel="stylesheet" />
+    <!-- SCROLL MODE — start (Google Fonts: loaded on demand, not on every page load) -->
+    <noscript><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Pinyon+Script&display=swap" rel="stylesheet" /></noscript>
     <!-- SCROLL MODE — end -->
     <script is:inline>
       (function () {
@@ -33,8 +100,29 @@ const { title } = Astro.props;
         const theme = saved || (prefersDark ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', theme);
         // SCROLL MODE — start
+        window.__scrollFontsLoaded = false;
+        window.__loadScrollFonts = function () {
+          if (window.__scrollFontsLoaded) { return; }
+          window.__scrollFontsLoaded = true;
+          var gfonts = 'https://fonts.googleapis.com';
+          var gstatic = 'https://fonts.gstatic.com';
+          [[gfonts, false], [gstatic, true]].forEach(function (pair) {
+            var pc = document.createElement('link');
+            pc.rel = 'preconnect';
+            pc.href = pair[0];
+            if (pair[1]) { pc.crossOrigin = ''; }
+            document.head.appendChild(pc);
+          });
+          var l = document.createElement('link');
+          l.rel = 'preload';
+          l.as = 'style';
+          l.href = gfonts + '/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Pinyon+Script&display=swap';
+          l.onload = function () { this.rel = 'stylesheet'; };
+          document.head.appendChild(l);
+        };
         if (localStorage.getItem('scroll-mode') === 'on') {
           document.documentElement.setAttribute('data-scroll', 'on');
+          window.__loadScrollFonts();
         }
         // SCROLL MODE — end
       })();
@@ -114,6 +202,7 @@ const { title } = Astro.props;
           var next = isScroll ? 'off' : 'on';
           if (next === 'on') {
             document.documentElement.setAttribute('data-scroll', 'on');
+            window.__loadScrollFonts();
           } else {
             document.documentElement.removeAttribute('data-scroll');
           }

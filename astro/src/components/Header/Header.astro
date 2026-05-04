@@ -27,10 +27,19 @@ const mainRight = getMainRight();
 const categories = getDesktopCategories();
 const mobileCategoriesRaw = getMobileCategories();
 
-const carrotSvg = '<i class="icon-right-carrot-normal-2" aria-hidden="true"></i>';
+// Raw SVG import for the carrot icon used in the mega-menu's pricing link.
+const carrotSvgModule = await import('../../mocked_dependencies/websites_modules/static/icons/right-carrot-normal-2.svg?raw');
+const carrotSvg = carrotSvgModule.default as string;
+
+// Raw imports for each product-category icon, keyed by the category's `icon` field.
+const categoryIconMap: Record<string, string> = import.meta.glob<string>(
+  '../../mocked_dependencies/websites_modules/static/icons/*.svg',
+  { query: '?raw', import: 'default', eager: true }
+);
 
 function iconHtmlFor(name: string): string {
-  return `<i class="icon-${name}" aria-hidden="true"></i>`;
+  const key = `../../mocked_dependencies/websites_modules/static/icons/${name}.svg`;
+  return categoryIconMap[key] ?? '';
 }
 
 // Assemble the mega-menu data structure (translated, URL-resolved).

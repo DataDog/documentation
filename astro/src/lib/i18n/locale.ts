@@ -5,7 +5,7 @@
  * the root (`/api/latest/...`), other locales prefixed (`/{lang}/api/latest/...`).
  */
 
-export const LOCALES = ["en" /*'fr', 'ja', 'ko', 'es'*/] as const;
+export const LOCALES = ["en", "fr", "ja", "ko", "es"] as const;
 export type Locale = (typeof LOCALES)[number];
 
 export const DEFAULT_LOCALE: Locale = "en";
@@ -21,10 +21,18 @@ export function isLocale(value: unknown): value is Locale {
  * `undefined` if the segment is not a recognized non-default locale. The
  * caller is expected to 404 on `undefined` (since the English page lives at
  * the root and is reached via the empty-segment variant).
+ *
+ * Astro types rest params as `string | number | undefined`; non-string values
+ * are treated as invalid locales (caller 404s).
  */
-export function parseLangParam(param: string | undefined): Locale | undefined {
-  if (!param) {
+export function parseLangParam(
+  param: string | number | undefined,
+): Locale | undefined {
+  if (param === undefined || param === "") {
     return DEFAULT_LOCALE;
+  }
+  if (typeof param !== "string") {
+    return undefined;
   }
   if (isLocale(param) && param !== DEFAULT_LOCALE) {
     return param;

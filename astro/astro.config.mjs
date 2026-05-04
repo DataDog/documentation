@@ -13,6 +13,9 @@ const hugoSite = fileURLToPath(new URL('..', import.meta.url));
 export default defineConfig({
   site: 'https://docs.datadoghq.com',
   integrations: [markdoc(), preact()],
+  build: {
+    inlineStylesheets: 'always',
+  },
   i18n: {
     defaultLocale: 'en',
     locales: [...LOCALES],

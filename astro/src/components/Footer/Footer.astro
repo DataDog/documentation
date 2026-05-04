@@ -223,7 +223,7 @@ const modalClasses = {
       </div>
 
       <FooterAccordion
-        client:idle
+        client:visible={{ rootMargin: '500px' }}
         classes={accordionClasses}
         sections={accordionSections}
       />
@@ -237,7 +237,7 @@ const modalClasses = {
     <div class={styles.bottomRow}>
       <div class={styles.langCell}>
         <LanguageSelector
-          client:load
+          client:visible={{ rootMargin: '500px' }}
           currentLang={currentLangOption}
           alternates={alternates}
           worldIconHtml={worldIconHtml}
@@ -274,4 +274,4 @@ const modalClasses = {
   </div>
 </footer>
 
-<FreeTrialModal client:idle title={freeTrialLabel} iframeSrc={freeTrialHref} classes={modalClasses} />
+<FreeTrialModal client:visible title={freeTrialLabel} iframeSrc={freeTrialHref} classes={modalClasses} />

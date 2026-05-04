@@ -6,20 +6,23 @@ import type { BreadcrumbItem } from '../components/Breadcrumbs/Breadcrumbs.astro
 import RegionSelectorIsland from '../components/RegionSelector/RegionSelectorIsland.astro';
 import LanguageSelectorIsland from '../components/LanguageSelector/LanguageSelectorIsland.astro';
 import { stripLocalePrefix } from '../lib/i18n/locale';
+import { buildHreflangAlternates } from '../lib/seo';
 import type { ApiCategory } from '../data/api/index';
 
 interface Props {
   title: string;
+  description?: string;
   categories: ApiCategory[];
   currentSlug?: string;
   breadcrumbs?: BreadcrumbItem[];
 }
 
-const { title, categories, currentSlug, breadcrumbs } = Astro.props;
-const { lang: currentLang } = stripLocalePrefix(Astro.url.pathname);
+const { title, description, categories, currentSlug, breadcrumbs } = Astro.props;
+const { lang: currentLang, rest: unprefixedPath } = stripLocalePrefix(Astro.url.pathname);
+const hreflang = buildHreflangAlternates(unprefixedPath);
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} description={description} lang={currentLang} hreflang={hreflang}>
   <div class="api-shell">
     <ApiSideNav categories={categories} currentSlug={currentSlug} />
     <main class="api-main">

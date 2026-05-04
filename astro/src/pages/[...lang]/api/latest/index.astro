@@ -1,7 +1,9 @@
 ---
 import ApiLayout from '../../../../layouts/ApiLayout.astro';
 import { getApiCategories } from '../../../../data/api/index';
+import { getApiPageTitle } from '../../../../data/api/pageTitles';
 import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/i18n/locale';
+import { i18n } from '../../../../lib/i18n/i18n';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -20,9 +22,12 @@ const categories = getApiCategories(lang);
 
 <ApiLayout
   title="Datadog API Reference"
+  description="Browse the Datadog API reference: endpoints, schemas, request and response examples for managing dashboards, monitors, logs, metrics, and more."
   categories={categories}
-  lang={lang}
-  breadcrumbs={[{ label: 'Docs', href: localizedHref(lang, '/') }, { label: 'API Reference' }]}
+  breadcrumbs={[
+    { label: i18n('docs', lang), href: localizedHref(lang, '/') },
+    { label: getApiPageTitle('', lang) ?? 'API Reference' },
+  ]}
 >
   <h1>API Reference</h1>
   <p>Welcome to the Datadog API Reference. Select a category from the navigation to get started.</p>
