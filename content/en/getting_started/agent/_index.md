@@ -32,7 +32,7 @@ This guide introduces the Datadog Agent and covers:
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
 
 The Agent can run on:
-- Local hosts (Windows, macOS) 
+- Local hosts (Windows, Linux, macOS) 
 - Containerized environments (Docker, Kubernetes)
 - On-premises data centers 
 
