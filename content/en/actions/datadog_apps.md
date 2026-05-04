@@ -51,7 +51,10 @@ Choose Datadog Apps when you need:
    ```
 
 2. Follow the interactive prompts to configure your app name and template.
-3. (Optional) Set up the RUM integration for the app. This automatically sets up the Browser SDK so you can use RUM to report user metrics.
+3. (Optional) Set up the RUM integration for the app. This automatically sets up the Browser SDK to set up the following:
+- RUM tracking
+- Error Tracking
+- Build metrics
 
 ### App structure
 
@@ -61,7 +64,7 @@ The scaffolded project includes:
 |---|---|
 | `src/App.tsx` | Root UI component (React) |
 | `src/**/*.backend.ts` | Backend functions that run server-side with access to API keys |
-| `vite.config.ts` | Build configuration with `@datadog/vite-plugin` pre-configured |
+| `vite.config.ts` | Build configuration with [`@datadog/vite-plugin`][14] pre-configured |
 | `package.json` | Dependencies and scripts (`dev`, `build`) |
 
 ## Develop your app locally
@@ -164,14 +167,6 @@ To upload from your local environment as an end-to-end test — for example, to 
 DD_APPS_UPLOAD_ASSETS=1 npm run build
 ```
 
-If you run your own deployment pipeline without the official GitHub Action, set `dryRun` to `false` in `vite.config.ts` so every build uploads:
-
-```js
-apps: {
-    enable: true,
-    dryRun: false,
-},
-```
 
 After a successful upload, the build output displays a URL where your app is accessible in Datadog.
 
@@ -279,3 +274,4 @@ The scaffolding tool requires Node.js v20.12.0 or later. If you still encounter 
 [11]: https://volta.sh
 [12]: https://github.com/Schniz/fnm
 [13]: https://nodejs.org
+[14]: https://github.com/DataDog/build-plugin
