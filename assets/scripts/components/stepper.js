@@ -196,8 +196,13 @@ function initStepper(stepper) {
 }
 
 function initAllSteppers() {
-    const steppers = document.querySelectorAll('.stepper');
+    const steppers = document.querySelectorAll('.stepper:not(.stepper--initialized)');
     steppers.forEach(initStepper);
+}
+
+if (window.clientFiltersManager) {
+    clientFiltersManager.registerHook('afterReveal', initAllSteppers);
+    clientFiltersManager.registerHook('afterRerender', initAllSteppers);
 }
 
 if (document.readyState === 'loading') {

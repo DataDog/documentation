@@ -24,6 +24,9 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting"
 
+- link: "https://learn.datadoghq.com/courses/database-monitoring"
+  tag: "Learning Center"
+  text: "Monitoring a Postgres Database with Datadog DBM"
 
 ---
 

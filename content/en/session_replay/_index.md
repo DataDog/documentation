@@ -24,6 +24,10 @@ further_reading:
 - link: '/integrations/content_security_policy_logs'
   tag: 'Documentation'
   text: 'Detect and aggregate CSP violations with Datadog'
+- link: "https://learn.datadoghq.com/courses/intro-to-rum"
+  tag: "Learning Center"
+  text: "Intro to Real User Monitoring (RUM)"
+
 ---
 
 ## Overview
@@ -46,7 +50,7 @@ Learn more about the [Session Replay for Mobile][6].
 
 ## AI-powered summaries and smart chapters
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 Summaries and smart chapters give you context about what happened in a session before you watch it.
 

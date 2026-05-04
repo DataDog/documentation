@@ -34,6 +34,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mitigate-account-takeovers/"
   tag: "Blog"
   text: "Mitigate account takeovers with Datadog App and API Protection"
+- link: "https://learn.datadoghq.com/courses/app-protection-block-attacks"
+  tag: "Learning Center"
+  text: "Block Application Attacks with Application & API Protection"
 algolia:
   tags: ["asm", "App and API Protection"]
 ---

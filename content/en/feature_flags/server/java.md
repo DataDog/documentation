@@ -27,7 +27,7 @@ The Datadog Feature Flags SDK for Java requires:
 - **Datadog Java SDK**: Version **1.57.0** or later
 - **OpenFeature SDK**: Version **1.18.2** or later
 - **Datadog Agent**: Version **7.x or later** with [Remote Configuration][1] enabled
-- **Datadog API Key**: Required for Remote Configuration
+- **Datadog [API Key][6]**: Required for Remote Configuration
 
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
 
@@ -486,6 +486,63 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 );
 {{< /code-block >}}
 
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships in `dev.openfeature:sdk` (already a test-scope dependency), so no additional library is required. Add `dev.openfeature:sdk` to your test configuration if it is not already present.
+
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.Client;
+import dev.openfeature.sdk.OpenFeatureAPI;
+import dev.openfeature.sdk.providers.memory.Flag;
+import dev.openfeature.sdk.providers.memory.InMemoryProvider;
+import java.util.Map;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class CheckoutFlagTest {
+    private Client client;
+
+    @BeforeEach
+    void setUp() {
+        Map<String, Flag<?>> flags = Map.of(
+            "new-checkout-flow", Flag.<Boolean>builder()
+                .variant("on", true)
+                .variant("off", false)
+                .defaultVariant("on")
+                .build(),
+            "ui-theme", Flag.<String>builder()
+                .variant("dark", "dark")
+                .variant("light", "light")
+                .defaultVariant("light")
+                .build()
+        );
+
+        OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+        api.setProviderAndWait(new InMemoryProvider(flags));
+        client = api.getClient();
+    }
+
+    @AfterEach
+    void tearDown() {
+        OpenFeatureAPI.getInstance().shutdown();
+    }
+
+    @Test
+    void newCheckoutEnabledByDefault() {
+        assertTrue(client.getBooleanValue("new-checkout-flow", false));
+    }
+
+    @Test
+    void missingFlagReturnsDefault() {
+        assertFalse(client.getBooleanValue("does-not-exist", false));
+    }
+}
+{{< /code-block >}}
+
+`OpenFeatureAPI.getInstance()` is a singleton. Always call `shutdown()` in `@AfterEach` (or equivalent); otherwise, provider state leaks between test classes and causes flaky suites.
+
+In Spring Boot tests, register the `InMemoryProvider` through a `@TestConfiguration` bean or in a `@BeforeAll` hook on an `@SpringBootTest` class — the OpenFeature API singleton persists for the lifetime of the Spring context, so initialization only needs to run once.
+
 ## Troubleshooting
 
 ### Start here: verify prerequisites
@@ -581,3 +638,4 @@ Verify the Datadog Agent is healthy and reachable. See [APM Connection Errors][2
 [1]: /remote_configuration/
 [2]: /tracing/troubleshooting/connection_errors/
 [5]: https://app.datadoghq.com/feature-flags/settings/environments
+[6]: /account_management/api-app-keys/#api-keys

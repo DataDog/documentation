@@ -174,7 +174,7 @@ After adding the configuration, run `codex mcp login datadog` to complete the OA
 [1]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http
 {{< /site-region >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -239,7 +239,7 @@ The MCP Server uses OAuth 2.0 for authentication. If you cannot go through the O
 </code></pre>
 {{< /site-region >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
