@@ -958,7 +958,7 @@ attributes:
     type: string
     domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.target.name
-    description: The name of the element the user interacted with (for automatically collected actions) or the name provided in the API call (for custom actions, for example `Click on checkout`).
+    description: For automatically collected actions, the name of the element the user interacted with. For custom actions, the name provided in the API call (for example, `Click on checkout`).
     product_source:
       - icon-rum
       - android
