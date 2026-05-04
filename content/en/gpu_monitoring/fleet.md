@@ -82,16 +82,12 @@ After toggling Cluster, Host, or Device, the **Summary Graph** displays key reso
 {{% collapse-content title="See the full list of GPU metrics" level="h4" expanded=false id="gpu-metrics-table" %}}
 | Metric                | Definition                                                              | Metric Name                                    |
 | ----------------------| ------------------------------------------------------------------------| --------------------------------------------- |
-| Core Utilization      | (Only available with System Probe enabled for advanced eBPF metrics) `Cores Used/Cores Limit` for GPU processes. Measure of Temporal Core Utilization.| `gpu_core_utilization`  
-| Memory Utilization    | GPU Memory used / GPU Memory limit for GPU processes. | `gpu_memory_utilization`
-| PCIe Throughput       | Bytes received and bytes transmitted through PCI from the GPU device per second. | `gpu.pci.throughput.rx`,`gpu.pci.throughput.tx` 
+| Core Utilization      | (Only available with System Probe enabled for advanced eBPF metrics) `Cores Used/Cores Limit` for GPU processes. Measure of Temporal Core Utilization.| `gpu_core_utilization`
+| PCIe Throughput       | Bytes received and bytes transmitted through PCI from the GPU device per second. | `gpu.pci.throughput.rx`,`gpu.pci.throughput.tx`
 | Graphics Activity     | Percentage of time that the graphics engine was active. | `gpu.gr_engine_active`
 | SM Activity           | Percentage of time the streaming multiprocessor was active. | `gpu.sm_active`
 | Power                 | Power usage for the GPU device.<br>**Note**: On GA100 and previous architectures, this represents the instantaneous power at that moment.<br>For newer architectures, it represents the average power draw (Watts) over one second. | `gpu.power.usage`
 | Temperature           | Temperature of a GPU device. | `gpu.temperature`
-| Cores Used            | (Only emitted if processes are active) Average number of GPU cores that a process was using in the interval.  | `gpu.core.usage`
-| Memory Used           | (Only emitted if processes are active) The memory used by this process at the point the metric was queried. | `gpu.memory.usage`
-| Device Total          | Count of all devices sending data during this time frame. | `gpu.device.total`
 {{% /collapse-content %}} 
 
 If you've selected an additional tag to group by---for example, _team_---every unique timeseries in the Summary Graph corresponds to a team's value for the selected metric.
