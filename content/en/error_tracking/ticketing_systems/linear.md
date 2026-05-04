@@ -111,11 +111,11 @@ If you experience syncing issues between your Linear issues and the correspondin
 1. In the issue panel, make sure that the Error Tracking issue is correctly linked to the Linear issue.
 2. A Case Management case was automatically created by Datadog to act as a linking point for the Error Tracking issue and the Linear issue. You can access this case from the issue panel, to find the Case Management project in which it was created. In Case Management settings, make sure that the Linear integration is enabled for this project, and the correct Linear workspace and team are configured.
 
-{{< img src="error_tracking/enable-jira-for-case-management-project.png" alt="Enable Linear for your Case Management project" style="width:100%;" >}}
+{{< img src="error_tracking/enable-linear-for-case-management-project.png" alt="Enable Linear for your Case Management project" style="width:100%;" >}}
 
 3. In Case Management settings, make sure that sync between Case Management and Linear is enabled for this project. Check that the fields you want to sync are configured for two-way sync between Datadog and Linear.
 
-{{< img src="error_tracking/sync-data-between-case-management-and-jira.png" alt="Sync data between Case Management and Linear" style="width:100%;" >}}
+{{< img src="error_tracking/sync-data-between-case-management-and-linear.png" alt="Sync data between Case Management and Linear" style="width:100%;" >}}
 
 4. A webhook must be configured to automatically sync updates between Datadog and Linear. In your Linear settings, check for this webhook. If the webhook is missing, follow [these steps][6] to add it and fix the sync between Datadog and Linear.
 
