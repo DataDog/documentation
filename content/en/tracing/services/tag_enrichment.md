@@ -10,7 +10,7 @@ further_reading:
   text: "Software Catalog"
 ---
 
-{{< callout btn_hidden="true" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/tag-enrichment/" btn_hidden="false" header="Join the Preview!" >}}
 Tag enrichment is in Preview.
 {{< /callout >}}
 
