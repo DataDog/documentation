@@ -387,3 +387,22 @@ html[data-active-region='gov'] [data-region='gov'] {
     radial-gradient(ellipse 30px 45px at 47px 92%, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
 }
 /* SCROLL MODE — end */
+
+@view-transition {
+  navigation: auto;
+}
+
+.main-nav {
+  view-transition-name: main-nav;
+}
+
+.announcement-banner {
+  view-transition-name: announcement-banner;
+}
+
+::view-transition-old(main-nav),
+::view-transition-new(main-nav),
+::view-transition-old(announcement-banner),
+::view-transition-new(announcement-banner) {
+  animation: none;
+}

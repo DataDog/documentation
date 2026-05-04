@@ -1,0 +1,8 @@
+:1314 {
+	handle /api/* {
+		reverse_proxy localhost:4321
+	}
+	handle {
+		reverse_proxy localhost:1313
+	}
+}

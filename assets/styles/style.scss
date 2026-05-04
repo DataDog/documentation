@@ -106,3 +106,22 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 .alert-tip::after {
   content: '{{ i18n "alert_tip" }}';
 }
+
+@view-transition {
+  navigation: auto;
+}
+
+.main-nav {
+  view-transition-name: main-nav;
+}
+
+.announcement-banner {
+  view-transition-name: announcement-banner;
+}
+
+::view-transition-old(main-nav),
+::view-transition-new(main-nav),
+::view-transition-old(announcement-banner),
+::view-transition-new(announcement-banner) {
+  animation: none;
+}
