@@ -958,7 +958,7 @@ Analyzes security signals using SQL queries for aggregations, grouping, and tren
 *Permissions Required: `Security Signals Read`*\
 Retrieves the full details of a single security signal by ID, including attributes, rule information, triage state, tags, and case correlations. Use `search_datadog_security_signals` to find signal IDs first.
 
-- Get the full details of security signal `AwAAAZ27F1BUjY4rPQAAABhBWjI3...`.
+- Get the full details of security signal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu`.
 - Show me the rule, triage state, and linked cases for this signal.
 
 ### `security_findings_schema`
