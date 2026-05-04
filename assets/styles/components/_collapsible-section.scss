@@ -81,9 +81,11 @@
     padding: 16px;
 }
 
-// Registry copy-link anchors
-a.registry-copy-link {
-    border-bottom: none;
+// Registry copy-link button
+button.registry-copy-link {
+    background: none;
+    border: none;
+    padding: 0;
     margin-left: 10px;
     position: relative;
     top: 4px;
