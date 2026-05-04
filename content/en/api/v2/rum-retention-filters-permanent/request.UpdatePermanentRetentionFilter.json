@@ -1,0 +1,11 @@
+{
+  "data": {
+    "id": "default_replays",
+    "type": "permanent_retention_filters",
+    "attributes": {
+      "cross_product_sampling": {
+        "trace_sample_rate": 100
+      }
+    }
+  }
+}
