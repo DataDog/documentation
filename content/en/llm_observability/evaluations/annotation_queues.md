@@ -259,7 +259,7 @@ Per-option counts: `safety` 3 yes / 0 no (kept), `policy` 2 yes / 1 no (kept), `
 - Annotator B: `["billing"]`
 - Annotator C: `["safety"]`
 
-Each option has 1 yes / 2 no — none meets the threshold, so the aggregated set would be empty. The value falls back to a plurality vote: all three options are tied at 1 vote, so alphabetical tie-break picks `["billing"]`.
+Each option has 1 yes / 2 no: none meet the threshold, so the aggregated set would be empty. The value falls back to a plurality vote: all three options are tied at 1 vote, so alphabetical tie-break picks `["billing"]`.
 
 **Example: text.** Two annotators leave notes:
 
