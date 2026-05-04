@@ -224,12 +224,12 @@ To get prefix-level access metrics including request counts, server-side latency
 
 ### Post-setup steps
 
-After inventory files begin appearing in the destination bucket, enable Storage Management for that destination bucket by calling the following endpoint:
+After inventory files begin appearing in the destination bucket, enable Storage Management for that destination bucket by calling the [Cloud Inventory Sync Configs][209] endpoint:
 
 ```bash
 curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
-  -H "Accept: application/vnd.api+json" \
-  -H "Content-Type: application/vnd.api+json" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
   -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
   -d '{
@@ -255,6 +255,8 @@ To use the example above:
 - Replace `<DESTINATION_PREFIX>` with the prefix within the destination bucket where inventory files are written. Use an empty string if there is no prefix.
 
 A `200` response confirms Storage Management is enabled for the destination bucket.
+
+[209]: /api/latest/cloud-inventory-sync-configs/
 
 {{% /tab %}}
 
