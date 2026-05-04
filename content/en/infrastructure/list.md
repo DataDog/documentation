@@ -1,5 +1,5 @@
 ---
-title: Infrastructure List
+title: Host List
 aliases:
   - /hostnames
   - /graphing/infrastructure/list/
@@ -17,66 +17,75 @@ further_reading:
 
 ## Overview
 
-The Infrastructure List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last two hours, but you can extend the view to cover up to one week. Search your hosts or group them by tags. In Datadog, navigate to [**Infrastructure > Hosts**][10] to view the Infrastructure list. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
+The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last two hours, but you can extend the view to cover up to one week. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
 
-## Hosts
+The Host List has two views: a legacy view and a new view. By default, the Host List displays the legacy view. To switch views, click the **Legacy** / **New** toggle in the upper-right corner. The sections that follow describe the new view.
 
-The following information is displayed in the infrastructure list for your hosts:
+{{< img src="infrastructure/index/infra-list-overview.png" alt="The Host List with the new view selected, showing the filter panel on the left, a list of hosts with customizable columns, and the legacy and new toggle in the upper-right corner." style="width:100%;">}}
 
-Hostname
-: The preferred hostname [alias](#aliases) (use the Options menu to view Cloud Name or Instance ID).
+## View hosts
 
-Cloud Name
-: A hostname [alias](#aliases).
+### Filter and search
 
-Instance ID
-: A hostname [alias](#aliases).
+Use the filter panel on the left to narrow the list of hosts:
 
-Status
-: Displays `ACTIVE` when the expected metrics are received and displays `INACTIVE` if no metrics are received.
+- **My Teams**: Toggle on to show only hosts associated with your teams.
+- **Quick filters**: Use the checkboxes at the top of the panel to filter by cloud provider (AWS, Azure, Google Cloud, Oracle, or Alibaba Cloud), telemetry source (Datadog Agent or OpenTelemetry), operating system (Windows, Linux, or Darwin), or hardware (GPU).
+- **Filter Metrics**: Select a metric and define a value range to filter hosts by metric value.
+- **Search facets**: Filter by any host property or tag, such as Cloud Provider, Env, Region, Resource Type, Instance Type, OS, OS Version, Agent, or Docker Version.
 
-CPU
-: The percent of CPU used (everything but idle).
+You can also use the search box at the top of the list to filter hosts with the Datadog search syntax.
 
-IOWait
-: The percent of CPU spent waiting on the IO (not reported for all platforms).
+{{< img src="infrastructure/index/infra-list-filter-panel.png" alt="The Host List filter panel with quick filter checkboxes, a Filter Metrics section, and a search facets section." style="width:100%;">}}
 
-Load 15
-: The system load over the last 15 minutes.
+### Saved views
 
-Apps
-: The Datadog integrations reporting metrics for the host.
+To save your filter and column configuration as a view, click **My View** in the upper-left corner, and then click **Save as new view**. Saved views are accessible from the **My View** panel, where you can filter, sort, and edit them. Star a view to mark it as a favorite.
 
-Operating System
-: The tracked operating system.
+{{< img src="infrastructure/index/infra-list-views.png" alt="The My View panel with options to save, filter, sort, and edit saved views." style="width:100%;">}}
 
-Cloud Platform
-: Cloud platform the host is running on (for example, AWS, Google Cloud, or Azure).
+### Customize columns
 
-Datadog Agent
-: Agent version that is collecting data on the host.
+To add, remove, or reorder columns, click **Columns** above the host list. You can add any of the following as a column:
 
-OpenTelemetry
-: OpenTelemetry Collector version that is collecting data on the host.
+- **Host Attributes**: Properties of the host, such as hostname or status.
+- **Tags**: Any tag applied to the host.
+- **Metrics**: Any metric reported by the host.
 
-### Hostname
+Drag a column to reorder it. To resize a column, drag its right edge. To hide a column, toggle it off.
+
+{{< img src="infrastructure/index/infra-list-columns.png" alt="The column customization panel with sections for Host Attributes, Tags, and Metrics, and toggles to show or hide each column." style="width:100%;">}}
+
+The following columns combine multiple datapoints into a single column:
+
+Configurations
+: The cloud provider, operating system, and Datadog Agent installation status for each host.
+
+Software
+: The host's web server, database, cache, and container orchestrator (such as Docker or Kubernetes), if detected.
+
+Integrations
+: The Datadog Agent integrations enabled on the host. **Note**: This column is similar to the **Apps** column in the legacy view. However, it includes only Agent integrations, not custom metrics reported from the host.
+
+### Hostnames
 
 The Datadog Agent collects potential hostnames from several different sources. For more details, see [How does Datadog determine the Agent hostname?][1].
 
 **Note**: Hostnames should be unique within a Datadog account, otherwise you may experience some inconsistencies on your host graphs.
 
-### Inspect
+### Inspect a host
 
-Click on any host to view more details including:
-- [aliases](#aliases)
-- [tags][2]
-- [metrics][3]
-- [containers][4]
-- [logs][5] (if enabled)
+Click any host to open its details panel. The panel uses the [Resource Catalog][15] side panel and includes:
+
+- [Aliases](#aliases)
+- [Tags][2]
+- [Metrics][3]
+- [Containers][4]
+- [Logs][5] (if enabled)
 - [Agent configuration](#agent-configuration) (if enabled)
 - [OpenTelemetry Collector configuration](#opentelemetry-collector-configuration) (if enabled)
 
-{{< img src="infrastructure/index/infra-list2.png" alt="Infrastructure list host details" style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-side-panel.png" alt="The host details side panel with tabs for Host Summary, Metrics, Containers, Processes, and other host data." style="width:100%;">}}
 
 #### Aliases
 
@@ -96,31 +105,30 @@ To view Agent configurations:
 
 #### OpenTelemetry Collector configuration
 
-When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the Infrastructure list host detail panel. The Datadog Extension provides visibility into your Collector fleet from within the Datadog UI, helping you manage and debug your OpenTelemetry Collector deployments.
+When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the host details panel. The Datadog Extension provides visibility into your Collector fleet from within the Datadog interface, helping you manage and debug your OpenTelemetry Collector deployments.
 
 To view OpenTelemetry Collector configurations:
-1. Click on a host running the OpenTelemetry Collector in the Infrastructure list.
+1. Click on a host running the OpenTelemetry Collector in the Host List.
 2. In the host detail panel, select the **OTel Collector** tab to view the build information and complete Collector configuration.
 
 For detailed setup instructions and requirements, such as hostname matching and pipeline configuration, see the main [Datadog Extension documentation][14].
 
-{{< img src="infrastructure/index/infra-list-config-otel.png" alt="View OpenTelemetry Collector configurations in infrastructure list" style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-config-otel.png" alt="View OpenTelemetry Collector configurations in the Host List" style="width:100%;">}}
 
+## Export
 
-### Export
+To export the host list, click **Export** above the host list. For a JSON-formatted list of your hosts reporting to Datadog, you can also use one of the following:
 
-For a JSON formatted list of your hosts reporting to Datadog, use one of the following:
-
-* The **JSON API permalink** at the top of the infrastructure list.
+* The **JSON API permalink** at the top of the Host List.
 * The [search hosts API endpoint][7] - see the [developer guide][8] for an example.
 
-#### Agent version
+### Agent version
 
-It may be useful to audit your Agent versions to ensure you are running the latest version. To accomplish this, use the [get_host_agent_list script][9], which leverages the JSON permalink to output the current running Agents with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
+It may be useful to audit your Agent versions to confirm you are running the latest version. To do this, use the [get_host_agent_list script][9], which uses the JSON permalink to output the Agents that are running with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
 
-#### No Agent
+### No Agent
 
-Another use case of the JSON export would be to get a list of Amazon EC2 (excluding RDS) instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See the Python3 script below:
+Another use case of the JSON export would be to get a list of Amazon EC2 (excluding RDS) instances with no Agent installed. These instances appear in the Host List by setting up your AWS account in the Datadog AWS integration tile. See the Python3 script below:
 
 ```python
 # 3p
@@ -166,3 +174,4 @@ for host in infra['rows']:
 [12]: https://app.datadoghq.com/release-notes/fleet-automation-is-now-generally-available
 [13]: /agent/fleet_automation
 [14]: /opentelemetry/integrations/datadog_extension/
+[15]: /infrastructure/resource_catalog/
