@@ -65,7 +65,7 @@ This document goes over one of the ways you can set up the Observability Pipelin
 
 <!-- API/TF - Docker - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
-Run this command to install the Worker:
+Run the following command to install the Worker:
 ```
 docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
     -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
@@ -96,14 +96,11 @@ You must replace the placeholders with these values:
     sudo systemctl restart observability-pipelines-worker
     ```
 {% /if %}
-See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
-
-{% /if %}
 
 <!-- API/TF - Docker - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-Run this command to install the Worker:
+Run the following command to install the Worker:
 ```shell
 docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
     -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
@@ -136,12 +133,16 @@ You must replace the placeholders with these values:
 
 {% /if %}
 
+See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
+
+{% /if %}
+
 <!-- API/TF - Kubernetes -->
 {% if equals($platform, "kubernetes") %}
 
 1. Download the [Helm chart values file][14]. See the [full list of configuration options][15] available.
     - If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
-1. Add the Datadog chart repository to Helm:
+2. Add the Datadog chart repository to Helm:
     ```shell
     helm repo add datadog https://helm.datadoghq.com
     ```
@@ -154,7 +155,7 @@ You must replace the placeholders with these values:
 {% if equals($secrets_source, "secrets_manager") %}
 
 3. See [Secrets Management][18] on how to configure your `values.yaml` file for your secrets manager.
-4. Run this command to install the Worker:
+4. Run the following command to install the Worker:
     ```shell
     helm upgrade --install opw \
     -f values.yaml \
@@ -162,13 +163,12 @@ You must replace the placeholders with these values:
     --set datadog.pipelineId=<PIPELINE_ID> \
     datadog/observability-pipelines-worker
     ```
-
 {% /if %}
 
 <!-- API/TF - Kubernetes - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-3. Run this command to install the Worker:
+3. Run the following command to install the Worker:
 
     ```shell
     helm upgrade --install opw \
@@ -347,7 +347,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. See [Secrets Management][18] on how to configure your `values.yaml` file for your secrets manager.
-7. Run this command to install the Worker:
+7. Run the following command to install the Worker:
     ```shell
     helm upgrade --install opw \
     -f values.yaml \
@@ -737,7 +737,9 @@ Follow these steps to manually install the Worker, instead of running the one-li
 {% /tab %}
 {% tab label="RPM" %}
 
-<div class="alert alert-danger">For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.</div>
+{% alert level="danger" %}
+For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.
+{% /alert %}
 
 1. Set up the Datadog `rpm` repo on your system with the below command.<br>**Note**: If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration below.
     ```shell
@@ -840,10 +842,6 @@ sudo apt-get remove --purge observability-pipelines-worker
 
 {% /if %}
 
-## Index your Worker logs
-
-Make sure your Worker logs are [indexed][9] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
-
 ## Add domains to firewall allowlist
 
 If you are using a firewall, these domains must be added to the allowlist:
@@ -870,6 +868,10 @@ If you are using a firewall, these domains must be added to the allowlist:
 {% /tabs %}
 
 Replace `<DD_SITE>` with {% region-param key="dd_site" code=true link=false text="Datadog site" /%}.
+
+## Index your Worker logs
+
+Make sure your Worker logs are [indexed][9] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
 [2]: /observability_pipelines/sources/

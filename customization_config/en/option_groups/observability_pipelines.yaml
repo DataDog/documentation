@@ -7,10 +7,10 @@ op_platform_options:
   - id: ecs_fargate
 
 op_pipelines_setup_method_options:
-  - id: ui
-    default: true
   - id: api
+    default: true
   - id: terraform
+  - id: ui
 
 op_secrets_source_options:
   - id: secrets_manager
