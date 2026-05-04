@@ -141,7 +141,7 @@ Resources and requests that occurred before the SDK initialized are automaticall
 
 #### Async chunk file names prefixed with `datadog`
 
-Async chunk file names include a `datadog` prefix (for example, `datadog-rum-recorder.js`). If you have CSP or caching rules matching the old names, update them accordingly.
+Async chunk filenames include a `datadog` prefix (for example, `datadog-rum-recorder.js`). If you have CSP or caching rules matching the old names, update them accordingly.
 
 ### Logs
 
@@ -153,7 +153,7 @@ To explicitly enable memory-backed sessions, use `sessionPersistence: 'memory'`.
 
 #### `forwardErrorsToLogs` and `forwardConsoleLogs` are independent
 
-Previously, enabling `forwardErrorsToLogs` also silently forwarded `console.error` calls. These options are now fully independent. You have precise control over what gets forwarded. `forwardErrorsToLogs` controls only unhandled errors.
+Previously, enabling `forwardErrorsToLogs` also silently forwarded `console.error` calls. In v7, these options are fully independent. You have precise control over what gets forwarded. `forwardErrorsToLogs` controls only unhandled errors.
 
 To preserve the previous behavior, add `error` to your `forwardConsoleLogs` array:
 
@@ -171,7 +171,7 @@ Requests canceled by the application (aborted fetch or XHR) no longer generate a
 
 | Deprecated option (v6 or earlier) | Replacement (v7)                                                           |
 | --------------------------------- | -------------------------------------------------------------------------- |
-| `usePciIntake`                    | The standard intake is now PCI compliant. Update your [CSP][18] if needed. |
+| `usePciIntake`                    | The standard intake is PCI compliant. Update your [CSP][18] if needed. |
 
 ### Session Replay
 
