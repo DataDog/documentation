@@ -16,13 +16,11 @@ further_reading:
 
 ## Overview
 
-The OpenTelemetry Collector collects, processes, and exports telemetry data from your applications in a vendor-neutral way. You can send traces, metrics, and logs to Datadog through the OTLP HTTP exporter using the [OpenTelemetry Collector Contrib][1] distribution. No Datadog Exporter or Connector required.
+Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Contrib][1] distribution with standard OpenTelemetry components. This setup uses the following key components:
 
-This setup uses the following key components:
-
-- **OTLP HTTP exporter**: Sends traces, metrics, and logs to Datadog's OTLP intake endpoints.
-- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data, which power APM features like the Service Catalog and Service Page.
-- **Resource detection processor**: Extracts host and cloud metadata for proper hostname resolution and tagging in Datadog.
+- **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
+- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features like the Service Catalog and Service Page.
+- **Resource detection processor**: Extracts host and cloud metadata for hostname resolution and tagging in Datadog.
 
 <!-- TODO: Replace with updated diagram showing OTLP HTTP exporter flow (no Datadog Exporter) -->
 
