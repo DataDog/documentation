@@ -10,8 +10,8 @@ further_reading:
   text: "Software Catalog"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/tag-enrichment/" btn_hidden="false" header="Join the Preview!" >}}
-Tag enrichment is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/tag-enrichment/" >}}
+Tag enrichment is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
 ## Overview
