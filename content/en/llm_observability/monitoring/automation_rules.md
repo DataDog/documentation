@@ -29,14 +29,14 @@ Each rule is evaluated **per span**, in real time, as spans stream into LLM Obse
 
 You configure automations from the Trace Explorer's **Automate Query** button. The flow is the same regardless of destination:
 
-1. Apply a filter in [**AI Observability > Traces**][1] using [supported filter fields](#supported-filter-fields).
+1. Apply a filter in **AI Observability > Traces** using [supported filter fields](#supported-filter-fields).
 2. Click **Automate Query**.
 3. Configure the sampling rate (see [Sampling and limits](#sampling-and-limits)).
 4. Pick the destination action:
    - **Add to Annotation Queue**. See [Annotation Queues][2] for queue-specific setup.
    - **Add to Dataset**. See [Datasets][3] for dataset-specific setup.
 
-Manage your rules from [**AI Observability > Settings > Automations**][4]. You can enable, disable, edit, or delete rules at any time.
+Manage your rules from **AI Observability > Settings > Automations**. You can enable, disable, edit, or delete rules at any time.
 
 ## Supported filter fields
 
@@ -84,15 +84,9 @@ The Trace Explorer supports a wider field set than automations. The button's too
 - Cross-span references (`@child.*`): rephrase to filter on the span itself.
 - Aggregations and formulas (for example, `count:>5`, `avg(@metrics.input_tokens):>500`): use a monitor, or rephrase as a per-span condition.
 
-**My filter has a custom `@meta.*` path that isn't in the allowlist.**
-
-Move the custom data under `@meta.metadata.*`. The catch-all prefix accepts any key.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/llm/traces
 [2]: /llm_observability/evaluations/annotation_queues/?tab=usingautomationrules
 [3]: /llm_observability/experiments/datasets/?tab=fromproductiontraces
-[4]: https://app.datadoghq.com/llm/settings/automations
