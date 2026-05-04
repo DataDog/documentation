@@ -591,7 +591,7 @@ After you set up your Snowflake integration, configure the experiment settings i
 
 {% img src="/product_analytics/experiment/guide/snowflake_experiment_setup.png" alt="The Edit Data Warehouse modal with Snowflake selected, showing two sections: Select Snowflake Account with fields for Account, Role, and Warehouse, and Select Database and Schema with fields for Database and Schema." style="width:90%;" /%}
 
-After you save your warehouse connection, create experiment metrics using your Snowflake data. See [Create Experiment Metrics][1].
+After you save your warehouse connection, [create experiment metrics][1] using your Snowflake data.
 
 {% /if %}
 <!-- end Snowflake Step 3 -->
