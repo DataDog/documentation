@@ -219,20 +219,23 @@ Transfer annotated traces to datasets for experiment evaluation:
    - **From annotation label**: use the values the annotators applied. Pick one or more labels. The record's `expected_output` is built from your selection.
 6. Choose an existing dataset, or create a dataset.
 
-When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": "neutral" }`. The same shape applies whether you select one label or multiple labels.
+When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": "neutral", "topics": ["safety", "policy"] }`. The same shape applies whether you select one label or multiple labels. Multi-select categorical labels are exported as arrays.
 
 {{% collapse-content title="How annotation values are aggregated across annotators" level="h4" expanded=false id="annotation-aggregation" %}}
 
 When multiple annotators have annotated the same trace, the value for each label is aggregated across them by consensus:
 
-| Label type  | Aggregation                              |
-| ----------- | ---------------------------------------- |
-| Boolean     | Majority vote                            |
-| Categorical | Plurality vote (most-picked option wins) |
-| Score       | Average                                  |
-| Text        | List of responses                        |
+| Label type                 | Aggregation                                                                                  |
+| -------------------------- | -------------------------------------------------------------------------------------------- |
+| Boolean                    | Majority vote                                                                                |
+| Categorical (single-select)| Plurality vote (most-picked option wins)                                                     |
+| Categorical (multi-select) | Per-option majority (keep options where at least half the annotators selected it)            |
+| Score                      | Average                                                                                      |
+| Text                       | List of responses                                                                            |
 
-For categorical labels (both single-select and multi-select), the option picked by the most annotators wins. With multi-select, each option an annotator selects counts as one vote. Ties break alphabetically. For Boolean labels, ties break in favor of `true`.
+For Boolean labels, ties break in favor of `true`. For categorical single-select, ties break alphabetically.
+
+For categorical multi-select, each option is treated as an independent yes/no vote: keep the option if the number of annotators who selected it is greater than or equal to the number who did not. The aggregated value is the array of options that meet this threshold (and may be empty if no option does — in which case the value falls back to a plurality vote and a single option is picked, with alphabetical tie-break).
 
 **Example: categorical (single-select).** Three annotators rate `tone`:
 
@@ -248,7 +251,15 @@ Aggregated: `"polite"` (2 of 3 votes).
 - Annotator B: `["safety", "billing"]`
 - Annotator C: `["safety", "policy"]`
 
-Each option an annotator selects counts as one vote: `safety` gets 3, `policy` gets 2, `billing` gets 1. Aggregated: `"safety"` (most votes).
+Per-option counts: `safety` 3 yes / 0 no (kept), `policy` 2 yes / 1 no (kept), `billing` 1 yes / 2 no (dropped). Aggregated: `["safety", "policy"]`.
+
+**Example: categorical (multi-select), fallback.** Three annotators tag `topics` with no option appearing in more than one annotator's set:
+
+- Annotator A: `["policy"]`
+- Annotator B: `["billing"]`
+- Annotator C: `["safety"]`
+
+Each option has 1 yes / 2 no — none meets the threshold, so the aggregated set would be empty. The value falls back to a plurality vote: all three options are tied at 1 vote, so alphabetical tie-break picks `["billing"]`.
 
 **Example: text.** Two annotators leave notes:
 
