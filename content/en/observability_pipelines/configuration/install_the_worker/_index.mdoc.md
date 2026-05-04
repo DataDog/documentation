@@ -182,7 +182,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     ```
     You must replace the placeholders with the following values:
 
-    - `<DATADOG_API_KEY>`: Your Datadog API.
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
     - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
@@ -206,7 +206,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.
 {% /alert %}
 
-Follow the steps below if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker](#manually-install-the-worker).
+Follow these steps if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker](#manually-install-the-worker).
 
 <!-- API/TF - Linux - Secrets Management -->
 
@@ -400,13 +400,12 @@ The steps below use the one-line installation script to install the Worker.
 
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-linux.mdoc.md" /%}
-5. If you are using **Secrets Management**:
-    1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][12] for more information.
-    1. Restart the Worker to use the updated bootstrap file:
-        ```
-        sudo systemctl restart observability-pipelines-worker
-        ```
-6. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+5. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][12] for more information.
+6. Restart the Worker to use the updated bootstrap file:
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
+7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 {% /if %}
 
@@ -432,7 +431,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% partial file="observability_pipelines/install_the_worker/ui-intro.mdoc.md" /%}
 
-1. Select **Cloudformation** as your installation platform.
+1. Select **CloudFormation** as your installation platform.
 
 <!-- UI - Cloudformation - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
@@ -441,14 +440,14 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% /if %}
 
-<!-- UI - Linux - Environment variables -->
+<!-- UI - CloudFormation - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
 2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
 
 {% /if %}
 
-3. Select one of the options in the dropdown to provide the expected log or metrics (in Preview) volume for the pipeline:
+3. Select one of the options in the dropdown to provide the expected log or metrics ({% glossary-tooltip term="preview" case="title" /%}) volume for the pipeline:
 
     |   Option   | Description |
     | ---------- | ----------- |
@@ -469,7 +468,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 **Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
-See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration
+See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
 
 {% /if %}
 {% /if %}
@@ -684,6 +683,7 @@ helm upgrade --install opw datadog/observability-pipelines-worker -f <YOUR_VALUE
 
 <!-- UI, API, Terraform - Linux -->
 {% if equals($platform, "linux") %}
+
 ### Manually install the Worker
 
 Follow these steps to manually install the Worker, instead of running the one-line installation script.
@@ -711,29 +711,44 @@ Follow these steps to manually install the Worker, instead of running the one-li
     sudo apt-get update
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
-1. If you are using:
-    - **Secrets Management**: Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
-        ```shell
-        sudo cat <<EOF > /etc/default/observability-pipelines-worker
-        DD_API_KEY=<DATADOG_API_KEY>
-        DD_OP_PIPELINE_ID=<PIPELINE_ID>
-        DD_SITE=<DATADOG_SITE>
-        EOF
-        ```
-    - **Environment variables**: Add your API key, site (for example, `datadoghq.com` for US1), source, and destination environment variables to the Worker's environment file:
-        ```shell
-        sudo cat <<EOF > /etc/default/observability-pipelines-worker
-        DD_API_KEY=<DATADOG_API_KEY>
-        DD_OP_PIPELINE_ID=<PIPELINE_ID>
-        DD_SITE=<DATADOG_SITE>
-        <SOURCE_ENV_VARIABLES>
-        <DESTINATION_ENV_VARIABLES>
-        EOF
-        ```
-1. Start the worker:
+<!-- UI, API, Terraform - Linux - Secrets Management -->
+{% if equals($secrets_source, "secrets_manager") %}
+
+3. Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
+    ```shell
+    sudo cat <<EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY=<DATADOG_API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<DATADOG_SITE>
+    EOF
+    ```
+{% /if %}
+
+<!-- UI, API, Terraform - Linux - Environment variables -->
+{% if equals($secrets_source, "environment_variables") %}
+
+3. Add your API key, site (for example, `datadoghq.com` for US1), source, and destination environment variables to the Worker's environment file:
+    ```shell
+    sudo cat <<EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY=<DATADOG_API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<DATADOG_SITE>
+    <SOURCE_ENV_VARIABLES>
+    <DESTINATION_ENV_VARIABLES>
+    EOF
+    ```
+{% /if %}
+
+4. Start the worker:
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
+
+<!-- UI - Linux -->
+{% if includes($interface, ["ui"]) %}
+5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+{% /if %}
+
 {% /tab %}
 {% tab label="RPM" %}
 
@@ -741,7 +756,9 @@ Follow these steps to manually install the Worker, instead of running the one-li
 For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.
 {% /alert %}
 
-1. Set up the Datadog `rpm` repo on your system with the below command.<br>**Note**: If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration below.
+1. Set up the Datadog `rpm` repo on your system with the following command.
+
+    **Note**: If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration below.
     ```shell
     cat <<EOF > /etc/yum.repos.d/datadog-observability-pipelines-worker.repo
     [observability-pipelines-worker]
@@ -754,13 +771,15 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
         https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
     EOF
     ```
-1. Update your packages and install the Worker:
+2. Update your packages and install the Worker:
     ```shell
     sudo yum makecache
     sudo yum install observability-pipelines-worker
     ```
-1. If you are using:
-    - **Secrets Management**: Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
+
+<!-- UI, API, Terraform - Linux - Secrets Management -->
+{% if equals($secrets_source, "secrets_manager") %}
+3. Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
         ```shell
         sudo cat <<-EOF > /etc/default/observability-pipelines-worker
         DD_API_KEY=<API_KEY>
@@ -768,7 +787,12 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
         DD_SITE=<SITE>
         EOF
         ```
-    - **Environment variables**: Add your API key, site (for example, `datadoghq.com` for US1), source, and destination environment variables to the Worker's environment file:
+{% /if %}
+
+<!-- UI, API, Terraform - Linux - Environment variables -->
+{% if equals($secrets_source, "environment_variables") %}
+
+3. Add your API key, site (for example, `datadoghq.com` for US1), source, and destination environment variables to the Worker's environment file:
         ```shell
         sudo cat <<-EOF > /etc/default/observability-pipelines-worker
         DD_API_KEY=<API_KEY>
@@ -778,18 +802,33 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
         <DESTINATION_ENV_VARIABLES>
         EOF
         ```
-1. Start the worker:
+{% /if %}
+
+4. Start the worker:
     ```shell
     sudo systemctl restart observability-pipelines-worker
     ```
-1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
-{% /tab %}
-{% /tabs %}
+<!-- API/TF - Linux -->
+{% if includes($interface, ["api","terraform"]) %}
 
 **Notes**:
 - The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
 - See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
+{% /if %}
+
+<!-- UI - Linux -->
+{% if includes($interface, ["ui"]) %}
+5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
+{% /if %}
+
+{% /tab %}
+{% /tabs %}
+
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
 
@@ -874,13 +913,7 @@ Replace `<DD_SITE>` with {% region-param key="dd_site" code=true link=false text
 Make sure your Worker logs are [indexed][9] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#bootstrap-options
-[2]: /observability_pipelines/sources/
-[3]: /observability_pipelines/destinations/
-[4]: /observability_pipelines/processors/
-[5]: https://app.datadoghq.com/observability-pipelines
-[6]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [7]: /observability_pipelines/guide/environment_variables/
-[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
 [9]: /logs/log_configuration/indexes/
 [10]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [11]: /getting_started/site/
