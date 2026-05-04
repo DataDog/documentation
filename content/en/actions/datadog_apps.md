@@ -1,6 +1,6 @@
 ---
 title: Datadog Apps
-description: Build and deploy custom Datadog apps locally using a code-based development workflow with React, backend functions, and a CLI.
+description: Build and deploy custom Datadog Apps locally using a code-based development workflow with React, backend functions, and a CLI.
 site_support_id: app_builder #Site support banner for US1-FED and US2-FED
 further_reading:
 - link: "/actions/app_builder/"
@@ -16,25 +16,25 @@ further_reading:
 
 ## Overview
 
-With Datadog Apps, you build applications locally as code with React and TypeScript (or JavaScript), using a standard development workflow.
+With Datadog Apps, you build applications locally as code with React and TypeScript (or JavaScript), using your standard development workflow.
 
-Datadog Apps use the same permissions model as the [drag-and-drop apps in App Builder][1] and can also be [embedded in dashboards][2].
+Datadog Apps use the same [permissions model][1] as the drag-and-drop apps in App Builder and can also be [embedded in dashboards][2].
 
 Choose Datadog Apps when you need:
 
-- **Team collaboration**: multiple engineers contributing to the same app, with code review and version history through your existing source control
-- **Source control and CI/CD**: store your app in GitHub and deploy automatically on merge
-- **AI-assisted development**: use your preferred local tooling (such as Claude) to generate and refine code
-- **Custom cloud providers and APIs**: integrate with services beyond the [Action Catalog][3] using your own backend code
-- **Complex UI and logic**: full React and TypeScript control over components, state, and rendering
+- **Team collaboration**: Multiple engineers contributing to the same app, with code review and version history through your existing source control.
+- **Source control and CI/CD**: Store your app in GitHub and deploy automatically on merge.
+- **AI-assisted development**: Use your preferred local tooling (such as Claude) to generate and refine code.
+- **Custom cloud providers and APIs**: Integrate with services beyond the [Action Catalog][3] using your own backend code.
+- **Complex UI and logic**: Full React and TypeScript control over components, state, and rendering.
 
 ## Prerequisites
 
-- **Node.js version v20.12.0 or later**. Check your version:
+- **Node.js version 20.12.0 or later**. Check your version:
   ```shell
   node --version
   ```
-- A Datadog **API key** and an **Application key** with Actions API Access enabled. For instructions on creating keys, see [API and Application Keys][4].
+- A Datadog **API key** and an **application key** with Actions API Access enabled. For instructions on creating keys, see [API and Application Keys][4].
 
   To enable Actions API Access on an application key:
 
@@ -56,7 +56,7 @@ Choose Datadog Apps when you need:
 - Error Tracking
 - Build metrics
 
-### App structure
+### Generated app structure
 
 The scaffolded project includes:
 
@@ -86,9 +86,9 @@ The scaffolded project includes:
 
 ### Backend functions
 
-Files matching `*.backend.ts` or `.js` contain backend functions. These run server-side with access to your API keys and are never shipped to the browser. The frontend imports and calls them like standard ES modules.
+Files matching `*.backend.ts` or `*.js` contain backend functions. Backend functions run server-side with access to your API keys and are never shipped to the browser. The frontend imports and calls them like standard ES modules.
 
-Backend functions can call any action in Datadog's [Actions Catalog][3] through the [`@datadog/action-catalog`][6] library. The Actions Catalog provides reusable, pre-built actions for interacting with cloud providers, SaaS tools, and the Datadog API, so you can build functionality on top of existing integrations instead of writing API clients from scratch.
+Backend functions can call any action in Datadog's [Action Catalog][3] through the [`@datadog/action-catalog`][6] library. The Action Catalog provides reusable, pre-built actions for interacting with cloud providers, SaaS tools, and the Datadog API, so you can build functionality on top of existing integrations instead of writing API clients from scratch.
 
 The library is a fully typed TypeScript client that wraps 50+ integrations, including AWS, Azure, GCP, the Datadog API, GitHub, GitLab, Slack, Jira, PagerDuty, ServiceNow, OpenAI, Anthropic, and generic HTTP. Importing actions from `@datadog/action-catalog` gives you typed inputs and responses for each action.
 
@@ -157,11 +157,11 @@ The following environment variables are available with `npm run build`:
 | `DD_APPS_VERSION_NAME` | Optional. The version name of the app version to be uploaded. Can be any string, but each app version must have a unique name (not duplicated for the same app). If unset, Datadog assigns a version name. |
 | `DD_APPS_UPLOAD_ASSETS` | If set and `dryRun` is `false`, uploads built assets to Datadog when `npm run build` is run. |
 
-By default, `npm run build` runs in dry run mode, which builds the app without uploading it to Datadog. This is the recommended default for local development, since you typically don't want every local build to publish.
+By default, `npm run build` runs in dry run mode, which builds the app without uploading it to Datadog. Dry run mode is the recommended default for local development, where you typically don't want to upload every local build.
 
 For production deployments, [set up CI/CD with GitHub Actions](#set-up-cicd-with-github-actions). [`DataDog/apps-github-action`][7] handles the upload step on your behalf, so you don't need to change `dryRun` for this workflow.
 
-To upload from your local environment as an end-to-end test — for example, to verify that the build pipeline works before a release — set `DD_APPS_UPLOAD_ASSETS`:
+To upload from your local environment as an end-to-end test (for example, to verify that the build pipeline works before a release), set `DD_APPS_UPLOAD_ASSETS`:
 
 ```shell
 DD_APPS_UPLOAD_ASSETS=1 npm run build
@@ -189,9 +189,9 @@ To change an app's UI or logic, update the code in your local project and redepl
 
 ## Set up CI/CD with GitHub Actions
 
-To automatically deploy your app on every push to the `main` branch, use the [`DataDog/apps-github-action`][7] GitHub Action. This action builds your app and deploys it to Datadog. For all available inputs and configuration options, see the [action's README][7].
+To automatically deploy your app on every push to the `main` branch, use the [`DataDog/apps-github-action`][7] GitHub Action. This action builds your app and deploys it to Datadog. See the README for available inputs and configuration options.
 
-**If your organization is not on US1** (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][9]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site: (`{{< region-param key="dd_site" >}}`)
+**If your organization is not on US1** (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][9]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site is  `{{< region-param key="dd_site" >}}`.
 
 {{< site-region region="us3,us5,eu,ap1,ap2" >}}
 
@@ -241,7 +241,7 @@ jobs:
 
 ## Troubleshooting
 
-### 401 or "Missing authentication token" errors
+### 401 or `Missing authentication token` errors
 
 Verify that `DD_API_KEY` and `DD_APP_KEY` are set and that the application key has Actions API Access enabled.
 
