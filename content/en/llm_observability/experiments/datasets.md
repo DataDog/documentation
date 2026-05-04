@@ -124,7 +124,7 @@ After creating an automation, manage it from [**AI Observability > Settings > Au
 
 [2]: https://app.datadoghq.com/llm/traces
 [3]: https://app.datadoghq.com/llm/settings/automations
-[5]: /llm_observability/evaluations/automation_rules/#supported-filter-fields
+[5]: /llm_observability/monitoring/automation_rules/#supported-filter-fields
 {{% /tab %}}
 {{< /tabs >}}
 

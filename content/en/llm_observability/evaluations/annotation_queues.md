@@ -79,8 +79,8 @@ To add an annotation queue action to an Automation Rule:
 Traces matching the rule's filters are added to the queue as they arrive. Annotation queues hold up to 1,000 records; the automation pauses when the queue reaches that limit.
 
 [1]: https://app.datadoghq.com/llm/traces
-[5]: /llm_observability/evaluations/automation_rules/
-[6]: /llm_observability/evaluations/automation_rules/#supported-filter-fields
+[5]: /llm_observability/monitoring/automation_rules/
+[6]: /llm_observability/monitoring/automation_rules/#supported-filter-fields
 {{% /tab %}}
 {{< /tabs >}}
 
