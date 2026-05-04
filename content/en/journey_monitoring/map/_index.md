@@ -50,7 +50,7 @@ The leftmost node in the map represents the starting point for all user sessions
 
 {{< img src="journey_monitoring/journey-monitoring-map-zoom.png" alt="The Feature Monitoring map showing a catalog of features on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
-The thicker the connection line, the more traffic flows between two nodes.
+The thicker the connection line, the more traffic flows between two nodes. Features that are not connected to the Session start node are features that users navigate to only after a session has already begun, rather than as an entry point into the application.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
