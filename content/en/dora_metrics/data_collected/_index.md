@@ -23,7 +23,7 @@ DORA Metrics generates events that have associated fields and tags.
 | Event Type | Description |
 | :--- | :--- |
 |Deployment | A single code deployment uniquely identified by env, service, and version tags.<br><br>Deployments can be [marked as failed][17] and are used to compute deployment frequency, change failure rate, and failed deployment recovery time.
-|Pull Request | A pull request included in a deployment. Contains metadata such as author, reviewers, labels, and stage metrics. Commits are nested within their associated pull request.<br><br>Pull requests are used to analyze code review workflows and PR-level cycle time.
+|Pull Request | A pull request included in a deployment. Contains metadata such as author, reviewers, labels, and time spent drafting, reviewing, and merging. Commits are nested within their associated pull request.<br><br>Pull requests are used to analyze code review workflows and PR-level cycle time.
 |Commit | An event generated for each individual commit included in a deployment. Contains metadata and is automatically linked to the corresponding deployment. Commits are nested within their associated pull request.<br><br>Commits are used to compute change lead time.
 |Incident | An incident declared in production.<br><br>Tracking incidents provides a side-by-side view of how failed deployments translate into real-world incidents, including their severity and frequency.
 
