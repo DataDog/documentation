@@ -1,67 +1,53 @@
 requests:
-- description: Agent には、Prometheus のエンドポイントをスクレイピングできる OpenMetrics チェックが含まれています。このインテグレーションによって取得されたメトリクスは、[カスタムメトリクス](https://docs.datadoghq.com/metrics/custom_metrics/)とみなされます。
-  image: int_openmetrics.png
-  link: /integrations/openmetrics/
-  name: OpenMetrics
-- description: JMX インテグレーションは、JVM ベースのアプリケーションからメトリクス、ログ、トレースを収集することができます。例えば、Solr、Tomcat、Cassandra
-    などの公式インテグレーションでは、すでに JMX インテグレーションが使用されています。Datadog がネイティブでサポートしていない JMX ベースのインテグレーションを通じて生成されたメトリクスは、[カスタムメトリクス](https://docs.datadoghq.com/metrics/custom_metrics/)と見なされます。
-  image: int_jmx.png
-  link: /integrations/java
-  name: JMX Beans
-- description: '[DogStatsD](https://docs.datadoghq.com/extend/dogstatsd/) と [API](https://docs.datadoghq.com/api/latest/metrics/)
-    を使って、ビジネス統計のカスタムメトリクスの送信を行います。Datadog Agent インテグレーションは、Python ファイルによるメトリクスのクエリです。Agent
-    のコードはすべてオープンソースなので、独自の[カスタム Agent チェック](https://docs.datadoghq.com/extend/custom_checks/)や[カスタム
-    Agent インテグレーション](https://docs.datadoghq.com/extend/integrations/)を書くことが可能です。[integrations-extras
-    GitHub リポジトリ](https://github.com/DataDog/integrations-extras)には、コミュニティで開発されたカスタムインテグレーションが多数含まれています。'
-  image: int_custom_metrics.png
-  link: metrics/custom_metrics
-  name: カスタムメトリクスとインテグレーション
-- description: ログ管理を使用すると、アプリケーションやインフラストラクチャーからのログを表示、監視、分析することができます。[Datadog Agent](https://docs.datadoghq.com/agent/logs/)
-    は、Datadog アカウントにログを送信するための高度な機能を提供しますが、[Logs API](https://docs.datadoghq.com/api/latest/logs/)
-    に直接ログを送信することも可能です。
-  image: int_logs.png
-  link: /logs
-  name: ログ
-- description: APM と Continuous Profiler は、Web サービス、キュー、データベースに対してすぐに使えるパフォーマンスダッシュボードを提供し、リクエスト、エラー、レイテンシーをモニタリングします。自動インスツルメンテーション、dd-trace-api、[OpenTelemetry](https://docs.datadoghq.com/tracing/trace_collection/open_standards/)
-    を使用して、[プロキシをトレースする](https://docs.datadoghq.com/tracing/trace_collection/proxy_setup/)場合も、[AWS
-    Lambda 関数](https://docs.datadoghq.com/serverless/distributed_tracing/)とホストをまたいでトレースする場合も、環境や言語に応じて
-    [Datadog トレーシングライブラリ](https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/)を使用することができます。
-  image: int_apm.png
-  link: /tracing
-  name: APM
-- description: '[プロセスインテグレーション](https://docs.datadoghq.com/integrations/process/)は、CPU、メモリ、I/O
-    など、ホスト上の特定の実行プロセスのリソース使用メトリクスを収集します。[ライブプロセスモニタリング](https://docs.datadoghq.com/infrastructure/process/)
-    (SSH を使わない htop のようなもの) を使って、実行中のすべてのプロセスについてクエリを実行します。'
-  image: int_processes.png
-  link: /infrastructure/process
-  name: プロセス
-- description: ディレクトリチェックは、ファイルの年齢、ディレクトリ内のファイル数、またはディレクトリのサイズを測定します。"
-  image: int_files.png
-  link: /integrations/directory
-  name: ファイルとディレクトリ
-- description: Agent ベースの [HTTP チェック](https://docs.datadoghq.com/integrations/http_check/)を使用するか、Datadog
-    アプリケーションから [Synthetic モニタリング](https://docs.datadoghq.com/synthetics/)を構成して、エンドポイントまたは
-    URL が実行されていてアクセスできるかどうかを検証します。いずれのオプションも、パブリックとプライベートの両方のエンドポイントをテストするために使用します。サービスレベル目標
-    (SLO)](https://docs.datadoghq.com/service_management/service_level_objectives/)
-    と組み合わせて、パフォーマンスの明確な目標を定義します。
-  image: int_endpoint.png
-  link: /synthetics
-  name: エンドポイント
-- description: '[ネットワークデバイスモニタリング](https://docs.datadoghq.com/network_monitoring/devices/)では、ルーター、スイッチ、プリンターなどのネットワークデバイスから発せられる
-    [SNMP](https://docs.datadoghq.com/integrations/snmp/) (Simple Network Management
-    Protocol) メトリクスを収集することができます。[ネットワークパフォーマンスモニタリング](https://docs.datadoghq.com/network_monitoring/performance/)
-    は、ホストに出入りするすべてのネットワークトラフィックを追跡し、サービス、コンテナ、アベイラビリティゾーン、および Datadog の他のタグ間のネットワークトラフィックを可視化することができます。IP、ポート、PID
-    レベルの接続データは、意味のある `source` と `destination` のエンドポイント間のアプリケーションレイヤーの依存関係に集計されます。'
-  image: int_network.png
-  link: /network_monitoring
-  name: SNMP とネットワークトラフィック
-- description: すべての主要なクラウドプロバイダー ([AWS](https://docs.datadoghq.com/integrations/amazon_web_services/)、[Azure](https://docs.datadoghq.com/integrations/azure/)、[GCP](https://docs.datadoghq.com/integrations/google_cloud_platform/)、[Alibaba](https://docs.datadoghq.com/integrations/alibaba_cloud/))
-    は API を通じてメトリクスを発行しています。アカウント内の [Datadog インテグレーションタイル](https://app.datadoghq.com/integrations)を使用して、これらのインテグレーションを構成します。これらのインテグレーションは、Datadog
-    のサーバーを使用してメトリクスをクローリングします。
-  image: int_cloud.png
-  link: /integrations/#cat-cloud
-  name: クラウドプロバイダー
-- description: Windows パフォーマンスカウンターインテグレーションを使用して、Windows 環境のパフォーマンスと動作を監視します。
-  image: int_wpc.png
-  link: /integrations/windows_performance_counters/
-  name: Windows パフォーマンスカウンター
+  - name: "OpenMetrics"
+    description: "エージェントには、Prometheus エンドポイントをスクレイピングできる OpenMetrics チェックが含まれています。この統合によって取得されたメトリクスは、[カスタムメトリクス](https://docs.datadoghq.com/metrics/custom_metrics/)と見なされます。"
+    link: "/integrations/openmetrics/"
+    image: "int_openmetrics.png"
+  - name: "JMX Beans"
+    description: "JMX 統合は、JVM ベースのアプリケーションからメトリクス、ログ、およびトレースを収集することを可能にします。例えば、JMX 統合は、Solr、Tomcat、Cassandra などの公式統合で既に使用されています。Datadog にネイティブでサポートされていない JMX ベースの統合を通じて生成されたメトリクスは、[カスタムメトリクス](https://docs.datadoghq.com/metrics/custom_metrics/)と見なされます。"
+    link: "/integrations/java"
+    image: "int_jmx.png"
+  - name: "カスタムメトリクスとインテグレーション"
+    description: "[DogStatsD](https://docs.datadoghq.com/extend/dogstatsd/) と [API](https://docs.datadoghq.com/api/latest/metrics/) を使用して、ビジネス統計のためのカスタムメトリクスを送信します。Datadog エージェントの統合は、メトリクスをクエリする Python ファイルです。すべてのエージェントコードはオープンソースであるため、独自の [カスタムエージェントチェック](https://docs.datadoghq.com/extend/custom_checks/) または [カスタムエージェント統合](https://docs.datadoghq.com/extend/integrations/)を書くことが可能です。[integrations-extras GitHub リポジトリ](https://github.com/DataDog/integrations-extras) には、多くのコミュニティ開発のカスタム統合が含まれています。"
+    link: "metrics/custom_metrics"
+    image: "int_custom_metrics.png"
+  - name: "ログ"
+    description: "ログ管理を使用して、アプリケーションやインフラストラクチャからのログを表示、監視、分析します。[Datadog エージェント](https://docs.datadoghq.com/agent/logs/)は、Datadog アカウントにログを送信するための高度な機能を提供しますが、[Logs API](https://docs.datadoghq.com/api/latest/logs/) に直接ログを送信することもできます。"
+    link: "/logs"
+    image: "int_logs.png"
+  - name: "APM"
+    description: "APM と Continuous Profiler は、Web サービス、キュー、データベースに対してすぐに使えるパフォーマンスダッシュボードを提供し、リクエスト、エラー、レイテンシーをモニタリングします。自動インスツルメンテーション、dd-trace-api、または [OpenTelemetry](https://docs.datadoghq.com/tracing/trace_collection/open_standards/) を使用して、[プロキシをトレースする](https://docs.datadoghq.com/tracing/trace_collection/proxy_setup/)場合も、[AWS Lambda 関数](https://docs.datadoghq.com/serverless/distributed_tracing/)やホストをまたいでトレースする場合も、環境や言語に応じて [Datadog トレーシングライブラリ](https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/)を使用できます。"
+    link: "/tracing"
+    image: "int_apm.png"
+  - name: "プロセス"
+    description: "[Processes 統合](https://docs.datadoghq.com/integrations/process/)は、CPU、メモリ、I/O など、任意のホスト上で実行中の特定のプロセスのリソース使用メトリクスを収集します。[Live Process Monitoring](https://docs.datadoghq.com/infrastructure/process/)（SSH を使用せずに htop のようなもの）を使用して、すべての実行中のプロセスをクエリします。"
+    link: "/infrastructure/process"
+    image: "int_processes.png"
+  - name: "ファイルとディレクトリ"
+    description: "ディレクトリチェックは、ファイルの年齢、ディレクトリ内のファイル数、またはディレクトリのサイズを測定します。\""
+    link: "/integrations/directory"
+    image: "int_files.png"
+  - name: "エンドポイント"
+    description: "エージェントベースの [HTTP チェック](https://docs.datadoghq.com/integrations/http_check/)を使用するか、Datadog アプリケーションから [Synthetic Monitoring](https://docs.datadoghq.com/synthetics/) を構成して、エンドポイントまたは URL が実行中でアクセス可能かどうかを検証します。どちらのオプションを使用しても、パブリックおよびプライベートエンドポイントの両方をテストできます。[サービスレベル目標、または SLO](https://docs.datadoghq.com/service_management/service_level_objectives/)と組み合わせて、パフォーマンスの明確な目標を定義します。"
+    link: "/synthetics"
+    image: "int_endpoint.png"
+  - name: "SNMP とネットワークトラフィック"
+    description: "[ネットワークデバイス監視](https://docs.datadoghq.com/network_monitoring/devices/)を使用すると、ルーター、スイッチ、プリンターなどのネットワークデバイスから発信される [SNMP](https://docs.datadoghq.com/integrations/snmp/)（シンプルネットワーク管理プロトコル）メトリクスを収集できます。[ネットワークパフォーマンス監視](https://docs.datadoghq.com/network_monitoring/performance/)は、ホストの出入りするすべてのネットワークトラフィックを追跡し、サービス、コンテナ、可用性ゾーン、および Datadog の他のタグ間のネットワークトラフィックを可視化します。IP、ポート、およびPIDレベルでの接続データは、意味のある「ソース」と「デスティネーション」エンドポイント間のアプリケーション層の依存関係に集約されます。"
+    link: "/network_monitoring"
+    image: "int_network.png"
+  - name: "クラウドプロバイダー"
+    description: " 主要なクラウドプロバイダー（[AWS](https://docs.datadoghq.com/integrations/amazon_web_services/)、[Azure](https://docs.datadoghq.com/integrations/azure/)、[GCP](https://docs.datadoghq.com/integrations/google_cloud_platform/)、[Alibaba](https://docs.datadoghq.com/integrations/alibaba_cloud/)）は、APIを通じてメトリクスを発信します。アカウント内の[Datadog統合タイル](https://app.datadoghq.com/integrations)を使用して、メトリクスを取得するためにDatadogサーバーを使用するこれらの統合を構成してください。"
+    link: "/integrations/#cat-cloud"
+    image: "int_cloud.png"
+  - name: "Windows パフォーマンスカウンター"
+    description: "Windows パフォーマンスカウンターインテグレーションを使用して、Windows 環境のパフォーマンスと動作を監視します。"
+    link: "/integrations/windows_performance_counters/"
+    image: "int_wpc.png"
+
+
+
+
+
+
+
+

@@ -15,10 +15,10 @@
     "other": "with the ones for your account"
   },
   "install_agent_sentence": {
-    "other": "データを収集するためにエージェントをインストールし、設定"
+    "other": "Agent をインストールおよび構成してデータを収集する"
   },
   "integrations_sentence": {
-    "other": "すべてのシステム、アプリケーション、そしてサービスからデータを収集"
+    "other": "すべてのシステム、アプリケーション、およびサービスからデータを収集"
   },
   "graphing_sentence": {
     "other": "データを可視化して<br> インサイトを得る"
@@ -36,10 +36,10 @@
     "other": "知識豊富なエンジニアがサポートします。"
   },
   "email_support_sentence": {
-    "other": "サポートチームへのお問い合わせは、<a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog のサポート Web サイト</a>で受け付けています。(すべてのサイト)。<br><br>サポート Web サイトへのログイン方法の詳細については、<a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\">サポートチケットにアクセスする</a>を参照してください。"
+    "other": "サポートチームへのお問い合わせは、<a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog のサポート Web サイト</a>からお願いします。すべてのサイト<br><br>サポート Web サイトへのログイン方法の詳細については、<a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\">サポートチケットにアクセスする</a>をご覧ください。"
   },
   "live_chat_support_sentence": {
-    "other": "アプリ内チャットで Datadog サポートチームと月曜日から金曜日の 10:00 から 19:00 (東部標準時) にチャットできます。ベストプラクティスについては、<a href=\"https://docs.datadoghq.com/getting_started/support/#reaching-out-on-chat\" target=\"_blank\" rel=\"noopener\">チャットで連絡を取る</a>を参照してください。"
+    "other": "Datadog サポートチームと月曜日から金曜日の 10:00 から 19:00 (東部標準時間) までアプリ内チャットで会話することができます。最良の実践については、<a href=\"https://docs.datadoghq.com/getting_started/support/#reaching-out-on-chat\" target=\"_blank\" rel=\"noopener\">チャットでの連絡方法</a>をご覧ください。"
   },
   "event_stream_support_sentence": {
     "other": "<a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack Community プログラム</a>は、Datadog ユーザーが Datadog ユーザーのために構築したネットワークで、お互いに質問の答えを見つけたり、製品のヒントやトリックを共有したりすることができます。"
@@ -81,7 +81,7 @@
     "other": "StatsD チェック"
   },
   "crawler": {
-    "other": "Crawler"
+    "other": "クローラー"
   },
   "library_check": {
     "other": "ライブラリ"
@@ -105,19 +105,19 @@
     "other": "ドキュメンテーションサーチ"
   },
   "guides": {
-    "one": "ガイド",
+    "one": "Guide",
     "other": "ガイド"
   },
   "tags": {
-    "one": "タグ",
+    "one": "Tag",
     "other": "タグ"
   },
   "language": {
-    "one": "言語",
+    "one": "Language",
     "other": "言語"
   },
   "library": {
-    "one": "ライブラリ",
+    "one": "Library",
     "other": "ライブラリ"
   },
   "official": {
@@ -133,13 +133,13 @@
     "other": "Home"
   },
   "datadog_docs": {
-    "other": "Datadog 文書"
+    "other": "Datadog Docs"
   },
   "datadog_api": {
     "other": "Datadog API"
   },
   "dogstatsd": {
-    "other": "DogStatsD"
+    "other": "高スループットデータ"
   },
   "author": {
     "other": "Author"
@@ -148,14 +148,14 @@
     "other": "Notes"
   },
   "agent": {
-    "other": "Agent"
+    "other": "エージェント"
   },
   "integrations": {
     "one": "integration",
     "other": "integrations"
   },
   "graphing": {
-    "other": "グラフ"
+    "other": "グラフの作成方法"
   },
   "alerting": {
     "other": "アラート"
@@ -241,6 +241,9 @@
   "copy": {
     "other": "コピー"
   },
+  "copied": {
+    "other": "コピーしました"
+  },
   "response": {
     "other": "応答"
   },
@@ -248,7 +251,7 @@
     "other": "コード例"
   },
   "name": {
-    "other": "名前"
+    "other": "Name"
   },
   "description": {
     "other": "説明"
@@ -281,7 +284,7 @@
     "other": "クラウドとコンテナ"
   },
   "source": {
-    "other": "ソース"
+    "other": "Source"
   },
   "legacy": {
     "other": "レガシー"
@@ -292,16 +295,22 @@
   "available_for": {
     "other": "次で利用可能"
   },
+  "join_now": {
+    "other": "今すぐ参加"
+  },
+  "datadog_partner_network": {
+    "other": "Datadog パートナーネットワークのドキュメント"
+  },
   "alert_note": {
-    "other": "注"
+    "other": "**注**:"
   },
   "alert_warning": {
-    "other": "警告"
+    "other": "WARNING"
   },
   "alert_caution": {
-    "other": "注"
+    "other": "注意"
   },
   "alert_tip": {
-    "other": "ヒント"
+    "other": "ヒント:"
   }
 }

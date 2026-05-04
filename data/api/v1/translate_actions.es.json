@@ -1,630 +1,630 @@
 {
   "GetIPRanges": {
     "description": "Obtén información sobre los rangos de IP de Datadog.",
-    "summary": "Ver una clave de aplicación que pertenece al usuario actual"
+    "summary": "Lista de rangos de IP"
   },
   "ListAPIKeys": {
-    "description": "Obtén todas las claves de API disponibles para tu cuenta.",
-    "summary": "Mostrar todas las claves de API"
+    "description": "Obtén todas las claves API disponibles para tu cuenta.",
+    "summary": "Obtén todas las claves API"
   },
   "CreateAPIKey": {
-    "description": "Crea una clave de API con un nombre determinado.",
-    "summary": "Crear una clave de API",
+    "description": "Crea una clave API con un nombre dado.",
+    "summary": "Crea una clave API",
     "request_description": "",
-    "request_schema_description": "Clave de API Datadog."
+    "request_schema_description": "Clave API de Datadog."
   },
   "DeleteAPIKey": {
-    "description": "Elimina una clave de API determinada.",
-    "summary": "Eliminar una clave de API"
+    "description": "Elimina una clave API dada.",
+    "summary": "Elimina una clave API"
   },
   "GetAPIKey": {
-    "description": "Obtén una clave de API determinada.",
-    "summary": "Mostrar una clave de API"
+    "description": "Obtén una clave API dada.",
+    "summary": "Obtén clave API"
   },
   "UpdateAPIKey": {
-    "description": "Edita el nombre de una clave de API.",
-    "summary": "Editar una clave de API.",
+    "description": "Edita el nombre de una clave API.",
+    "summary": "Edita una clave API",
     "request_description": "",
-    "request_schema_description": "Clave de API Datadog."
+    "request_schema_description": "Clave API de Datadog."
   },
   "ListApplicationKeys": {
-    "description": "Obtén todas las claves de aplicación disponibles para tu cuenta de Datadog.\nEste endpoint está desactivado para las organizaciones en [modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
-    "summary": "Mostrar todas las claves de aplicación"
+    "description": "Obtén todas las claves de aplicación disponibles para tu cuenta de Datadog.\nEste endpoint está deshabilitado para organizaciones en [modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
+    "summary": "Obtén todas las claves de aplicación"
   },
   "CreateApplicationKey": {
-    "description": "Crea una clave de aplicación con un nombre determinado.\nEste endpoint está desactivado para las organizaciones en [Modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
-    "summary": "Crear una clave de aplicación",
+    "description": "Crea una clave de aplicación con un nombre dado.\nEste endpoint está deshabilitado para organizaciones en [modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
+    "summary": "Crea una clave de aplicación",
     "request_description": "",
-    "request_schema_description": "Clave de aplicación con sus metadatos asociados."
+    "request_schema_description": "Una clave de aplicación con sus metadatos asociados."
   },
   "DeleteApplicationKey": {
-    "description": "Elimina una clave de aplicación determinada.\nEste endpoint está desactivado para las organizaciones en [Modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
-    "summary": "Eliminar una clave de aplicación"
+    "description": "Elimina una clave de aplicación dada.\nEste endpoint está deshabilitado para organizaciones en [modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
+    "summary": "Elimina una clave de aplicación"
   },
   "GetApplicationKey": {
-    "description": "Obtén una clave de aplicación determinada.\nEste endpoint está desactivado para las organizaciones en [Modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
-    "summary": "Recibir una clave de aplicación"
+    "description": "Obtén una clave de aplicación dada.\nEste endpoint está deshabilitado para organizaciones en [modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
+    "summary": "Obtén una clave de aplicación"
   },
   "UpdateApplicationKey": {
-    "description": "Edita el nombre de una clave de aplicación.\nEste endpoint está desactivado para las organizaciones en [Modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
-    "summary": "Editar una clave de aplicación.",
+    "description": "Edita el nombre de una clave de aplicación.\nEste endpoint está deshabilitado para organizaciones en [modo de lectura única](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
+    "summary": "Edita una clave de aplicación",
     "request_description": "",
-    "request_schema_description": "Clave de aplicación con sus metadatos asociados."
+    "request_schema_description": "Una clave de aplicación con sus metadatos asociados."
   },
   "SubmitServiceCheck": {
-    "description": "Envía una lista de checks de servicio.\n\n**Notas**:\n- Se requiere una clave de API válida.\n- Los checks de servicio pueden enviarse hasta 10 minutos antes.",
-    "summary": "Enviar un check de servicio",
-    "request_description": "Cuerpo de una solicitud de check de servicio.",
-    "request_schema_description": "Checks de servicio."
+    "description": "Envía una lista de verificaciones de servicio.\n\n**Notas**:\n- Se requiere una clave API válida.\n- Las verificaciones de servicio se pueden enviar hasta 10 minutos en el pasado.",
+    "summary": "Envía una verificación de servicio",
+    "request_description": "Cuerpo de la solicitud de verificación de servicio.",
+    "request_schema_description": "Las verificaciones de servicio."
   },
   "GetDailyCustomReports": {
-    "description": "Obtén informes diarios personalizados.\n**Nota:** Este endpoint quedará totalmente obsoleto el 1 de diciembre de 2022.\nConsulta la [migración de v1 a v2 de la API de atribución de uso](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) para obtener la guía de migración asociada.",
-    "summary": "Acceder a la lista de informes personalizados diarios disponibles"
+    "description": "Obtén informes personalizados diarios.\n**Nota:** Este endpoint será completamente descontinuado el 1 de diciembre de 2022.\nConsulta [Migrando de v1 a v2 de la API de Atribución de Uso](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) para la guía de migración asociada.",
+    "summary": "Obtén la lista de informes personalizados diarios disponibles"
   },
   "GetSpecifiedDailyCustomReports": {
-    "description": "Obtén informes diarios personalizados.\n**Nota:** Este endpoint quedará totalmente obsoleto el 1 de diciembre de 2022.\nConsulta la [migración de v1 a v2 de la API de atribución de uso](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener informes diarios personalizados especficos"
+    "description": "Obtén informes personalizados diarios especificados.\n**Nota:** Este endpoint será completamente descontinuado el 1 de diciembre de 2022.\nConsulta [Migrando de v1 a v2 de la API de Atribución de Uso](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) para la guía de migración asociada.",
+    "summary": "Obtén informes personalizados diarios especificados."
   },
   "DeleteDashboards": {
-    "description": "Elimina dashboards utilizando los ID especificados. Si se produce algún fallo, no se eliminará ningún dashboard (no se permite el éxito parcial).",
-    "summary": "Eliminar dashboards",
-    "request_description": "Elimina el cuerpo de una solicitud de dashboards.",
-    "request_schema_description": "Eliminación masiva del cuerpo de una solicitud de dashboards."
+    "description": "Elimina tableros utilizando los IDs especificados. Si hay fallas, no se eliminarán tableros (no se permite el éxito parcial).",
+    "summary": "Eliminar tableros",
+    "request_description": "Cuerpo de la solicitud para eliminar tableros.",
+    "request_schema_description": "Cuerpo de la solicitud para eliminar tableros en masa."
   },
   "ListDashboards": {
-    "description": "Obtén todos los dashboards.\n\n**Nota**: Esta consulta sólo devolverá dashboards personalizados o clonados.\nEsta consulta no devolverá dashboards preconfigurados.",
-    "summary": "Obtener todos los dashboards"
+    "description": "Obtener todos los tableros.\n\n**Nota**: Esta consulta solo devolverá tableros creados o clonados de forma personalizada.\nEsta consulta no devolverá tableros preestablecidos.",
+    "summary": "Obtener todos los tableros"
   },
   "RestoreDashboards": {
-    "description": "Restaura dashboards utilizando los ID especificados. Si se produce algún fallo, no se restaurará ningún dashboard (no se permite el éxito parcial).",
-    "summary": "Restaurar dashboards eliminados",
-    "request_description": "Restaura el cuerpo de una solicitud de dashboards.",
-    "request_schema_description": "Restauración del cuerpo de una solicitud de dashboards."
+    "description": "Restaurar tableros utilizando los IDs especificados. Si hay fallas, no se restaurarán tableros (no se permite el éxito parcial).",
+    "summary": "Restaurar tableros eliminados",
+    "request_description": "Cuerpo de la solicitud para restaurar tableros.",
+    "request_schema_description": "Cuerpo de la solicitud para restaurar tableros."
   },
   "CreateDashboard": {
-    "description": "Crea un dashboard utilizando las opciones especificadas. Cuando definas consultas en tus widgets, ten en cuenta qué consultas deben tener los modificadores `as_count()` or `as_rate()` añadidos.\nPara obtener más información sobre estos modificadores, consulta la siguiente [documentación](https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#in-application-modifiers).",
-    "summary": "Crear un nuevo dashboard",
-    "request_description": "Crea el cuerpo de una solicitud de dashboards.",
-    "request_schema_description": "Un dashboard es una herramienta que usa Datadog para hacer un seguimiento, analizar y mostrar\nvisualmente métricas clave de rendimiento, que te permiten monitorizar el estado de tu infraestructura."
+    "description": "Crear un tablero utilizando las opciones especificadas. Al definir consultas en sus widgets, tenga en cuenta qué consultas deben tener los modificadores `as_count()` o `as_rate()` añadidos.\nConsulte la siguiente [documentación](https://docs.datadoghq.com/developers/metrics/type_modifiers/?tab=count#in-application-modifiers) para obtener más información sobre estos modificadores.",
+    "summary": "Crear un nuevo tablero",
+    "request_description": "Cuerpo de la solicitud para crear un tablero.",
+    "request_schema_description": "Un tablero es la herramienta de Datadog para rastrear, analizar y mostrar visualmente\nmétricas clave de rendimiento, que le permiten monitorear la salud de su infraestructura."
   },
   "ListDashboardLists": {
-    "description": "Obtén todas las definiciones existentes de listas de dashboards.",
-    "summary": "Obtener todas las listas de dashboards "
+    "description": "Obtener todas las definiciones de la lista de tableros existentes.",
+    "summary": "Obtener todas las listas de tableros"
   },
   "CreateDashboardList": {
-    "description": "Crea una lista de dashboards vacía.",
-    "summary": "Crear una lista de dashboards",
-    "request_description": "Crea el cuerpo de una solicitud de lista de dashboards.",
-    "request_schema_description": "Tus dashboards de Datadog."
+    "description": "Crear una lista de tableros vacía.",
+    "summary": "Crear una lista de tableros",
+    "request_description": "Crear el cuerpo de la solicitud para una lista de tableros.",
+    "request_schema_description": "Tus tableros de Datadog."
   },
   "DeleteDashboardList": {
-    "description": "Elimina una lista de dashboards.",
-    "summary": "Dashboards"
+    "description": "Eliminar una lista de tableros.",
+    "summary": "Eliminar una lista de tableros"
   },
   "GetDashboardList": {
-    "description": "Recupera una definición de lista de dashboards existentes.",
-    "summary": "Obtener una lista de dashboards"
+    "description": "Obtener la definición de una lista de tableros existente.",
+    "summary": "Obtener una lista de tableros"
   },
   "UpdateDashboardList": {
-    "description": "Actualiza el nombre de una lista de dashboards.",
-    "summary": "Actualizar una lista de dashboards",
-    "request_description": "Actualiza el cuerpo de una solicitud de lista de dashboards.",
-    "request_schema_description": "Tus dashboards de Datadog."
+    "description": "Actualizar el nombre de una lista de tableros.",
+    "summary": "Actualizar una lista de tableros",
+    "request_description": "Actualizar el cuerpo de la solicitud de una lista de tableros.",
+    "request_schema_description": "Tus tableros de Datadog."
   },
   "CreatePublicDashboard": {
-    "description": "Comparte un dashboard privado específico generando una URL en la que pueda verse públicamente.",
-    "summary": "Crear un dashboard compartido",
-    "request_description": "Crea el cuerpo de una solicitud de dashboards compartidos.",
-    "request_schema_description": "Objeto de metadatos asociado a la forma en que se compartirá un dashboard."
+    "description": "Compartir un tablero privado especificado, generando una URL en la que se puede ver públicamente.",
+    "summary": "Crear un tablero compartido",
+    "request_description": "Crear el cuerpo de la solicitud para un tablero compartido.",
+    "request_schema_description": "El objeto de metadatos asociado con cómo se ha compartido/se compartirá un tablero."
   },
   "DeletePublicDashboard": {
-    "description": "Revoca la URL pública del dashboard (haciéndola privada), asociada al token especificado.",
-    "summary": "Revocar la URL de un dashboard compartido"
+    "description": "Revocar la URL pública de un tablero (volviéndolo privado) asociada con el token especificado.",
+    "summary": "Revocar una URL de tablero compartido"
   },
   "GetPublicDashboard": {
-    "description": "Obtén los metadatos de un dashboard compartido, asociados al token especificado.",
-    "summary": "Obtener un dashboard compartido"
+    "description": "Obtener los metadatos de compartición de un tablero compartido existente asociado con el token especificado.",
+    "summary": "Obtener un tablero compartido"
   },
   "UpdatePublicDashboard": {
-    "description": "Actualiza un dashboard compartido asociado al token especificado.",
-    "summary": "Actualizar un dashboard compartido",
-    "request_description": "Actualiza el cuerpo de una solicitud de dashboards.",
-    "request_schema_description": "Actualiza la configuración de un dashboard compartido."
+    "description": "Actualiza un panel compartido asociado con el token especificado.",
+    "summary": "Actualiza un panel compartido.",
+    "request_description": "Actualiza el cuerpo de la solicitud del panel.",
+    "request_schema_description": "Actualiza la configuración de un panel compartido."
   },
   "DeletePublicDashboardInvitation": {
-    "description": "Revoca los correos electrónicos de invitación enviados anteriormente y las sesiones activas utilizadas para acceder a un dashboard determinado para direcciones de correo electrónico específicas.",
-    "summary": "Revocar invitaciones de dashboard compartido",
-    "request_description": "Cuerpo de una solicitud de eliminación de una invitación de dashboard compartido.",
-    "request_schema_description": "Datos y metadatos de invitaciones existentes para un dashboard compartido devuelto por la API."
+    "description": "Revoca los correos electrónicos de invitación enviados previamente y las sesiones activas utilizadas para acceder a un panel compartido dado para direcciones de correo electrónico específicas.",
+    "summary": "Revoca las invitaciones al panel compartido.",
+    "request_description": "Cuerpo de la solicitud de eliminación de invitación al panel compartido.",
+    "request_schema_description": "Datos y metadatos de invitaciones que existen para un panel compartido devueltos por la API."
   },
   "GetPublicDashboardInvitations": {
-    "description": "Describe las invitaciones existentes para el dashboard compartido (paginado).",
-    "summary": "Obtener todas las invitaciones para un dashboard compartido"
+    "description": "Describe las invitaciones que existen para el panel compartido dado (paginado).",
+    "summary": "Obtén todas las invitaciones para un panel compartido."
   },
   "SendPublicDashboardInvitation": {
-    "description": "Envía correos electrónicos a direcciones especificadas que contengan enlaces para acceder a un determinado dashboard compartido. Las direcciones de correo electrónico ya deben pertenecer a la lista de compartidos autenticada del dashboard compartido.",
-    "summary": "Enviar correos electrónicos de invitación al dashboard compartido",
-    "request_description": "Cuerpo de una solicitud de invitación al dashboard compartido.",
-    "request_schema_description": "Datos y metadatos de invitaciones existentes para un dashboard compartido devuelto por la API."
+    "description": "Envía correos electrónicos a las direcciones de correo electrónico especificadas que contengan enlaces para acceder a un panel compartido autenticado dado. Las direcciones de correo electrónico deben pertenecer ya a la lista de compartición del panel compartido autenticado.",
+    "summary": "Envía un correo electrónico de invitación al panel compartido.",
+    "request_description": "Cuerpo de la solicitud de invitación al panel compartido.",
+    "request_schema_description": "Datos y metadatos de invitaciones que existen para un panel compartido devueltos por la API."
   },
   "DeleteDashboard": {
-    "description": "Elimina un dashboard utilizando el ID especificado.",
-    "summary": "Eliminar un dashboard"
+    "description": "Elimina un panel utilizando el ID especificado.",
+    "summary": "Elimina un panel."
   },
   "GetDashboard": {
-    "description": "Obtén un dashboard utilizando el ID especificado.",
-    "summary": "Obtener un dashboard"
+    "description": "Obtén un panel utilizando el ID especificado.",
+    "summary": "Obtén un panel."
   },
   "UpdateDashboard": {
-    "description": "Actualiza un dashboard utilizando el ID especificado.",
-    "summary": "Actualizar un dashboard",
-    "request_description": "Actualiza el cuerpo de una solicitud de dashboard.",
-    "request_schema_description": "Un dashboard es una herramienta que usa Datadog para hacer un seguimiento, analizar y mostrar\nvisualmente métricas clave de rendimiento, que te permiten monitorizar el estado de tu infraestructura."
+    "description": "Actualiza un panel utilizando el ID especificado.",
+    "summary": "Actualiza un panel.",
+    "request_description": "Actualiza el cuerpo de la solicitud del panel.",
+    "request_schema_description": "Un tablero es la herramienta de Datadog para rastrear, analizar y mostrar visualmente\nmétricas clave de rendimiento, que le permiten monitorear la salud de su infraestructura."
   },
   "SubmitDistributionPoints": {
-    "description": "El endpoint de los puntos de distribución te permite publicar datos de distribución que se puedan representar gráficamente en dashboards de Datadog.",
+    "description": "El punto final de distribución permite publicar datos de distribución que se pueden graficar en los paneles de Datadog.",
     "summary": "Enviar puntos de distribución",
     "request_description": "",
-    "request_schema_description": "Carga útil de los puntos de distribución."
+    "request_schema_description": "La carga útil de los puntos de distribución."
   },
   "ListDowntimes": {
-    "description": "Obtén todos los tiempos de inactividad programados. **Nota:** Este endpoint ha quedado obsoleto. Utiliza endpoints v2.",
+    "description": "Obtener todos los tiempos de inactividad programados. **Nota:** Este punto final ha sido desaprobado. Por favor, utilice los puntos finales v2.",
     "summary": "Obtener todos los tiempos de inactividad"
   },
   "CreateDowntime": {
-    "description": "Programa un tiempo de inactividad. **Nota:** Este endpoint ha quedado obsoleto. Utiliza endpoints v2.",
+    "description": "Programar un tiempo de inactividad. **Nota:** Este punto final ha sido desaprobado. Por favor, utilice los puntos finales v2.",
     "summary": "Programar un tiempo de inactividad",
-    "request_description": "Cuerpo de una solicitud de programación de tiempo de inactividad.",
-    "request_schema_description": "El tiempo de inactividad te proporciona un mayor control sobre las notificaciones de monitores,\nya que te permite excluir globalmente contextos de alerta.\nLa configuración de tiempos de inactividad, que pueden programarse con horas de inicio y fin,\nevita todas las alertas relacionadas con etiquetas (tags) de Datadog."
+    "request_description": "Cuerpo de la solicitud para programar un tiempo de inactividad.",
+    "request_schema_description": "El tiempo de inactividad le brinda un mayor control sobre las notificaciones de los monitores al\npermitirle excluir globalmente ámbitos de las alertas.\nLas configuraciones de tiempo de inactividad, que se pueden programar con horas de inicio y fin,\nprevienen todas las alertas relacionadas con las etiquetas de Datadog especificadas."
   },
   "CancelDowntimesByScope": {
-    "description": "Elimina todos los tiempos de inactividad que coincidan con el contexto de `X`. **Nota:** Esta acción sólo interactúa con los tiempos de inactividad creados con endpoints v1. Este endpoint ha quedado obsoleto y no será reemplazado. Utiliza endpoints v2 para buscar y anular tiempos de inactividad.",
-    "summary": "Anular tiempos de inactividad por contexto",
-    "request_description": "Contexto para la anulación de tiempos de inactividad.",
-    "request_schema_description": "Anula tiempos de inactividad según el contexto."
+    "description": "Eliminar todos los tiempos de inactividad que coincidan con el ámbito de `X`. **Nota:** Esto solo interactúa con los tiempos de inactividad creados utilizando puntos finales v1. Este punto final ha sido desaprobado y no será reemplazado. Por favor, utilice los puntos finales v2 para encontrar y cancelar tiempos de inactividad.",
+    "summary": "Cancelar tiempos de inactividad por ámbito",
+    "request_description": "Ámbito para cancelar tiempos de inactividad.",
+    "request_schema_description": "Cancelar los tiempos de inactividad de acuerdo con el alcance."
   },
   "CancelDowntime": {
-    "description": "Anula un tiempo de inactividad. **Nota:** Este endpoint ha quedado obsoleto. Utiliza endpoints v2.",
-    "summary": "Anular un tiempo de inactividad"
+    "description": "Cancelar un tiempo de inactividad. **Nota:** Este punto final ha sido desaprobado. Por favor, utilice los puntos finales v2.",
+    "summary": "Cancelar un tiempo de inactividad."
   },
   "GetDowntime": {
-    "description": "Obtén información detallada de tiempos de inactividad por `id_de_tiempo_de_inactividad`. **Nota:** Este endpoint ha quedado obsoleto. Utiliza endpoints v2.",
-    "summary": "Obtener un tiempo de inactividad"
+    "description": "Obtener detalles del tiempo de inactividad por `downtime_id`. **Nota:** Este punto final ha sido desaprobado. Por favor, utilice los puntos finales v2.",
+    "summary": "Obtener un tiempo de inactividad."
   },
   "UpdateDowntime": {
-    "description": "Actualiza un tiempo de inactividad único por `id_de_tiempo_de_inactividad`. **Nota:** Este endpoint ha quedado obsoleto. Utiliza endpoints v2.",
-    "summary": "Actualizar un tiempo de inactividad",
-    "request_description": "Actualiza el cuerpo de una solicitud de tiempo de inactividad.",
-    "request_schema_description": "El tiempo de inactividad te proporciona un mayor control sobre las notificaciones de monitores,\nya que te permite excluir globalmente contextos de alerta.\nLa configuración de tiempos de inactividad, que pueden programarse con horas de inicio y fin,\nevita todas las alertas relacionadas con etiquetas de Datadog."
+    "description": "Actualizar un solo tiempo de inactividad por `downtime_id`. **Nota:** Este punto final ha sido desaprobado. Por favor, utilice los puntos finales v2.",
+    "summary": "Actualizar un tiempo de inactividad.",
+    "request_description": "Actualizar el cuerpo de la solicitud de tiempo de inactividad.",
+    "request_schema_description": "El tiempo de inactividad le brinda un mayor control sobre las notificaciones de los monitores al\npermitirle excluir globalmente ámbitos de las alertas.\nLas configuraciones de tiempo de inactividad, que se pueden programar con horas de inicio y fin,\nprevienen todas las alertas relacionadas con las etiquetas de Datadog especificadas."
   },
   "ListEvents": {
-    "description": "El flujo (stream) de eventos puede consultarse y filtrarse por hora, prioridad, fuentes y etiquetas.\n\n**Notas**:\n- Si el evento que estás consultando contiene un formato markdown de cualquier tipo,\nes posible que aparezcan caracteres como `%`,`\\`,`n` en el resultado.\n\n- Este endpoint devuelve un máximo de `1000` resultados más recientes. Para obtener resultados adicionales,\nidentifica la última marca de tiempo del último resultado y defínela como hora de consulta \"final\" para\npaginar los resultados. También puedes utilizar el parámetro page para especificar qué conjunto de `1000` resultados devolver.",
-    "summary": "Recibir una lista de eventos"
+    "description": "El flujo de eventos se puede consultar y filtrar por tiempo, prioridad, fuentes y etiquetas.\n\n**Notas**:\n- Si el evento que está consultando contiene formato markdown de cualquier tipo,\npuede ver caracteres como `%`, `\\`, `n` en su salida.\n\n- Este endpoint devuelve un máximo de `1000` resultados más recientes. Para devolver resultados adicionales,\nidentifique la última marca de tiempo del último resultado y configúrelo como el tiempo de consulta `end` para\npaginación de los resultados. También puede usar el parámetro de página para especificar qué conjunto de `1000` resultados devolver.",
+    "summary": "Obtener una lista de eventos."
   },
   "CreateEvent": {
-    "description": "Este endpoint te permite publicar eventos en el flujo.\nEtiquétalos, establece su prioridad y agrégalos con otros eventos.",
-    "summary": "Publicar un evento",
+    "description": "Este endpoint le permite publicar eventos en el flujo.\nEtiquételos, establezca prioridad y agréguelos con otros eventos.",
+    "summary": "Publicar un evento.",
     "request_description": "Objeto de solicitud de evento",
     "request_schema_description": "Objeto que representa un evento."
   },
   "GetEvent": {
-    "description": "Este endpoint te permite consultar información detallada de eventos.\n\n**Nota**: Si el evento que estás consultando contiene un formato markdown de cualquier tipo,\nes posible que aparezcan caracteres como `%`,`\\`,`n` en el resultado.",
+    "description": "Este punto final permite consultar los detalles del evento.\n\n**Nota**: Si el evento que está consultando contiene formato markdown de cualquier tipo,\npuede ver caracteres como `%`, `\\`, `n` en su salida.",
     "summary": "Obtener un evento"
   },
   "ListEmbeddableGraphs": {
-    "description": "Obtiene una lista de gráficos previamente creados que se pueden insertar.",
-    "summary": "Obtener todas las integraciones"
+    "description": "Obtiene una lista de gráficos embebibles creados previamente.",
+    "summary": "Obtener todos los embebidos"
   },
   "CreateEmbeddableGraph": {
-    "description": "Crea un nuevo gráfico integrable.\n\nNota: Si ya existe una integración para la misma consulta exacta en una organización determinada,\nse devuelve la integración más antigua, en lugar de crear una nueva.\n\nSi te interesa utilizar variables de plantilla, consulta\n[Gráficos integrables con variables de plantilla](https://docs.datadoghq.com/dashboards/FAQ/embeddable-graphs-with-template-variables).",
-    "summary": "Buscar eventos",
-    "request_description": "Cuerpo del gráfico integrable",
-    "request_schema_description": "Carga útil para crear un nuevo gráfico integrable."
+    "description": "Crea un nuevo gráfico embebible.\n\nNota: Si ya existe un embebido para la misma consulta en una organización dada,\nse devuelve el embebido más antiguo en lugar de crear un nuevo embebido.\n\nSi está interesado en usar variables de plantilla, consulte\n[Gráficos Embebibles con Variables de Plantilla](https://docs.datadoghq.com/dashboards/faq/embeddable-graphs-with-template-variables).",
+    "summary": "Crear embebido",
+    "request_description": "Cuerpo del gráfico embebible",
+    "request_schema_description": "Carga útil para crear un nuevo gráfico embebible."
   },
   "GetEmbeddableGraph": {
-    "description": "Obtener el fragmento HTML de un embed generado previamente con `embed_id`.",
-    "summary": "Eventos"
+    "description": "Obtener el fragmento HTML para un embebido generado previamente con `embed_id`.",
+    "summary": "Obtener embebido específico"
   },
   "EnableEmbeddableGraph": {
-    "description": "Habilita una integración específica.",
-    "summary": "Habilitar una integración"
+    "description": "Habilitar un embebido especificado.",
+    "summary": "Habilitar embebido"
   },
   "RevokeEmbeddableGraph": {
-    "description": "Revoca una integración específica.",
-    "summary": "Revocar una integración"
+    "description": "Revocar un embebido especificado.",
+    "summary": "Revocar incrustación"
   },
   "GetGraphSnapshot": {
-    "description": "Toma de gráficos. Los snapshots son imágenes PNG generadas reproduciendo un widget específico en una página web y capturándolo una vez que los datos están disponibles. Luego, la imagen se carga al almacenamiento en la nube.\n\n**Nota**: Cuando se crea un snapshot, hay un cierto retraso antes de que esté disponible.",
-    "summary": "Tomar snapshots de gráficos"
+    "description": "Tomar instantáneas del gráfico. Las instantáneas son imágenes PNG generadas al renderizar un widget específico en una página web y capturarlo una vez que los datos están disponibles. La imagen se carga en el almacenamiento en la nube.\n\n**Nota**: Cuando se crea una instantánea, hay un retraso antes de que esté disponible.",
+    "summary": "Tomar instantáneas del gráfico"
   },
   "MuteHost": {
-    "description": "Silencia un host. **Nota:** Esta acción crea un [tiempo de inactividad V2](https://docs.datadoghq.com/api/latest/downtimes/#schedule-a-downtime) para el host.",
-    "summary": "Silenciar un host",
-    "request_description": "Silencia el cuerpo de una solicitud de host.",
-    "request_schema_description": "Combinación de parámetros para silenciar un host."
+    "description": "Silenciar a un anfitrión. **Nota:** Esto crea un [Downtime V2](https://docs.datadoghq.com/api/latest/downtimes/#schedule-a-downtime) para el anfitrión.",
+    "summary": "Silenciar a un anfitrión",
+    "request_description": "Cuerpo de la solicitud para silenciar a un anfitrión.",
+    "request_schema_description": "Combinación de configuraciones para silenciar a un anfitrión."
   },
   "UnmuteHost": {
-    "description": "Desactiva el silenciamiento de un host. Este endpoint no recibe argumentos JSON.",
-    "summary": "Desactivar el silenciamiento de un host"
+    "description": "Desilencia a un anfitrión. Este endpoint no acepta argumentos JSON.",
+    "summary": "Desilenciar a un anfitrión"
   },
   "ListHosts": {
-    "description": "Este endpoint permite buscar hosts por nombre, alias o etiqueta.\nPor defecto, se incluyen los hosts activos en las últimas 3 horas.\nLa retención es de 7 días.\nLos resultados se paginan con un máximo de 1000 resultados a la vez.\n**Nota:** Si el host es una instancia de Amazon EC2, `id` se sustituye por `aws_id` en la respuesta.\n**Nota**: Para enriquecer los datos devueltos por este endpoint con escaneos de seguridad, consulta el nuevo endpoint [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata).",
-    "summary": "Obtener todos los hosts para tu organización"
+    "description": "Este endpoint permite buscar anfitriones por nombre, alias o etiqueta.\nLos anfitriones activos en las últimas 3 horas se incluyen por defecto.\nLa retención es de 7 días.\nLos resultados están paginados con un máximo de 1000 resultados a la vez.\n**Nota:** Si el anfitrión es una instancia de Amazon EC2, `id` se reemplaza con `aws_id` en la respuesta.\n**Nota**: Para enriquecer los datos devueltos por este endpoint con escaneos de seguridad, consulte el nuevo endpoint [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata).",
+    "summary": "Obtén todos los hosts para tu organización"
   },
   "GetHostTotals": {
-    "description": "Este endpoint devuelve el número total de hosts activos y actuales en tu cuenta de Datadog.\nActivo significa que el host ha informado en la última hora y actual significa que ha informado en las últimas dos horas.",
-    "summary": "Obtener el número total de hosts activos"
+    "description": "Este endpoint devuelve el número total de hosts activos y en funcionamiento en tu cuenta de Datadog.\nActivo significa que el host ha reportado en la última hora, y en funcionamiento significa que ha reportado en las últimas dos horas.",
+    "summary": "Obtén el número total de hosts activos"
   },
   "DeleteAWSAccount": {
-    "description": "**Este endpoint está obsoleto; utiliza en su lugar los endpoints V2.** Elimina una integración de Datadog y AWS que coincida con los parámetros especificados `account_id` y `role_name`.",
-    "summary": "Eliminar una integración AWS",
+    "description": "**Este endpoint está obsoleto - utiliza los endpoints V2 en su lugar.** Elimina una integración de Datadog-AWS que coincida con los parámetros `account_id` y `role_name` especificados.",
+    "summary": "Elimina una integración de AWS",
     "request_description": "Objeto de solicitud de AWS",
     "request_schema_description": "Lista de cuentas de AWS a eliminar."
   },
   "ListAWSAccounts": {
-    "description": "**Este endpoint está obsoleto; utiliza los endpoints V2 en su lugar.** Enumera todas las integraciones de Datadogy AWS disponibles en tu organización de Datadog.",
-    "summary": "Enumerar todas las integraciones AWS"
+    "description": "**Este endpoint está obsoleto - utiliza los endpoints V2 en su lugar.** Lista todas las integraciones de Datadog-AWS disponibles en tu organización de Datadog.",
+    "summary": "Lista todas las integraciones de AWS"
   },
   "CreateAWSAccount": {
-    "description": "**Este endpoint está obsoleto; utiliza los endpoints V2 en su lugar.** Crea una integración de Datadog y Amazon Web Services.\nEl uso del método `POST` actualiza la configuración de tu integración\nal añadir tu nueva configuración a la existente en tu organización de Datadog.\nUn ID de cuenta de AWS único para la autenticación basada en roles.",
-    "summary": "Crear una integración AWS",
+    "description": "**Este endpoint está obsoleto - utiliza los endpoints V2 en su lugar.** Crea una integración de Datadog-Amazon Web Services.\nUsar el método `POST` actualiza la configuración de tu integración\nagregando tu nueva configuración a la existente en tu organización de Datadog.\nUn ID de cuenta de AWS único para la autenticación basada en roles.",
+    "summary": "Crea una integración de AWS",
     "request_description": "Objeto de solicitud de AWS",
-    "request_schema_description": "Devuelve la cuenta de AWS asociada a esta integración."
+    "request_schema_description": "Devuelve la cuenta de AWS asociada con esta integración."
   },
   "UpdateAWSAccount": {
-    "description": "**Este endpoint está obsoleto; utiliza los endpoints V2 en su lugar.** Actualiza una integración de Datadog y Amazon Web Services.",
-    "summary": "Actualizar una integración AWS",
+    "description": "**Este endpoint está obsoleto - utiliza los endpoints V2 en su lugar.** Actualiza una integración de Datadog-Amazon Web Services.",
+    "summary": "Actualiza una integración de AWS",
     "request_description": "Objeto de solicitud de AWS",
-    "request_schema_description": "Devuelve la cuenta de AWS asociada a esta integración."
+    "request_schema_description": "Devuelve la cuenta de AWS asociada con esta integración."
   },
   "ListAvailableAWSNamespaces": {
-    "description": "**Este endpoint está obsoleto; utiliza los endpoints V2 en su lugar.** Enumera todas las reglas de espacio de nombres para una determinada integración de Datadog y AWS. Este endpoint no recibe argumentos.",
-    "summary": "Enumerar reglas de espacios de nombres"
+    "description": "**Este endpoint está obsoleto - utiliza los endpoints V2 en su lugar.** Lista todas las reglas de espacio de nombres para una integración de Datadog-AWS dada. Este endpoint no recibe argumentos.",
+    "summary": "Listar reglas de espacio de nombres"
   },
   "DeleteAWSEventBridgeSource": {
-    "description": "**Este endpoint está obsoleto; utiliza en su lugar los endpoints V2.** Elimina una fuente de Amazon EventBridge.",
-    "summary": "Eliminar una fuente Amazon EventBridge",
-    "request_description": "Elimina la fuente Amazon EventBridge con el nombre, la región y la cuenta de AWS asociados.",
-    "request_schema_description": "Objeto utilizado para eliminar una fuente EventBridge."
+    "description": "**Este endpoint está obsoleto - use los endpoints V2 en su lugar.** Eliminar una fuente de Amazon EventBridge.",
+    "summary": "Eliminar una fuente de Amazon EventBridge",
+    "request_description": "Eliminar la fuente de Amazon EventBridge con el nombre, región y cuenta de AWS asociada proporcionados.",
+    "request_schema_description": "Un objeto utilizado para eliminar una fuente de EventBridge."
   },
   "ListAWSEventBridgeSources": {
-    "description": "**Este endpoint está obsoleto; utiliza en su lugar los endpoints V2.** Obtén todas las fuentes de Amazon EventBridge.",
-    "summary": "Obtener todas las fuentes Amazon EventBridge"
+    "description": "**Este endpoint está obsoleto - use los endpoints V2 en su lugar.** Obtener todas las fuentes de Amazon EventBridge.",
+    "summary": "Obtener todas las fuentes de Amazon EventBridge"
   },
   "CreateAWSEventBridgeSource": {
-    "description": "**Este endpoint está obsoleto; utiliza los endpoints V2 en su lugar.** Crea una fuente de Amazon EventBridge.",
-    "summary": "Crear una fuente Amazon EventBridge",
-    "request_description": "Crea una fuente Amazon EventBridge para una cuenta de AWS con un nombre y una región determinados.",
-    "request_schema_description": "Objeto utilizado para crear una fuente EventBridge."
+    "description": "**Este endpoint está obsoleto - use los endpoints V2 en su lugar.** Crear una fuente de Amazon EventBridge.",
+    "summary": "Crear una fuente de Amazon EventBridge",
+    "request_description": "Crear una fuente de Amazon EventBridge para una cuenta de AWS con un nombre y región dados.",
+    "request_schema_description": "Un objeto utilizado para crear una fuente de EventBridge."
   },
   "DeleteAWSTagFilter": {
-    "description": "Elimina una entrada de filtrado por etiquetas.",
-    "summary": "Eliminar una entrada de filtrado por etiquetas",
-    "request_description": "Elimina una entrada de filtrado por etiquetas para una cuenta de AWS y un espacio de nombres `dd-aws` determinados.",
-    "request_schema_description": "Objetos utilizados para eliminar una entrada de filtrado por etiquetas de AWS."
+    "description": "Eliminar una entrada de filtrado de etiquetas.",
+    "summary": "Eliminar una entrada de filtrado de etiquetas",
+    "request_description": "Eliminar una entrada de filtrado de etiquetas para una cuenta de AWS dada y el espacio de nombres `dd-aws`.",
+    "request_schema_description": "Los objetos utilizados para eliminar una entrada de filtro de etiquetas de AWS."
   },
   "ListAWSTagFilters": {
-    "description": "Obtén todos los filtros de etiquetas de AWS.",
+    "description": "Obtener todos los filtros de etiquetas de AWS.",
     "summary": "Obtener todos los filtros de etiquetas de AWS"
   },
   "CreateAWSTagFilter": {
-    "description": "Define un filtro de etiquetas de AWS.",
-    "summary": "Definir un filtros de etiquetas de AWS",
-    "request_description": "Define un filtros de etiquetas de AWS utilizando un `identificador_de_cuenta_de_aws`, un `espacio de nombres` y una cadena de filtrado.\nLas opciones de espacio de nombres son `application_elb`, `elb`, `lambda`, `network_elb`, `rds`, `sqs` y `personalizado`.",
-    "request_schema_description": "Objetos utilizados para definir una etiqueta de filtrado de AWS."
+    "description": "Establecer un filtro de etiquetas de AWS.",
+    "summary": "Establecer un filtro de etiquetas de AWS",
+    "request_description": "Establezca un filtro de etiqueta de AWS utilizando un `aws_account_identifier`, `namespace` y una cadena de filtrado.\nLas opciones de namespace son `application_elb`, `elb`, `lambda`, `network_elb`, `rds`, `sqs` y `custom`.",
+    "request_schema_description": "Los objetos utilizados para establecer un filtro de etiqueta de AWS."
   },
   "CreateNewAWSExternalID": {
-    "description": "**Este endpoint está obsoleto; utiliza los endpoint V2 en su lugar.** Genera un nuevo ID externo de AWS para un par dado de ID de cuenta de AWS y nombre de rol.",
-    "summary": "Generar un nuevo ID externo",
-    "request_description": "Nombre de tu delegación de roles en Datadog.\nPara obtener más información sobre el nombre de rol de tu cuenta de AWS,\nconsulta la [información de configuración de una integración AWS en Datadog](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).",
-    "request_schema_description": "Devuelve la cuenta de AWS asociada a esta integración."
+    "description": "**Este endpoint está obsoleto - utilice los endpoints V2 en su lugar.** Genere un nuevo ID externo de AWS para un par de ID de cuenta de AWS y nombre de rol dados.",
+    "summary": "Genere un nuevo ID externo",
+    "request_description": "El nombre de delegación de su rol de Datadog.\nPara más información sobre el nombre de rol de su cuenta de AWS,\nconsulte la [información de configuración de integración de AWS de Datadog](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).",
+    "request_schema_description": "Devuelve la cuenta de AWS asociada con esta integración."
   },
   "DeleteAWSLambdaARN": {
-    "description": "Elimina la configuración de logs de AWS en Datadog eliminando el ARN Lambda específico asociado a una cuenta de AWS determinada.",
-    "summary": "Eliminar una integración de logs de AWS",
-    "request_description": "Elimina el cuerpo de una solicitud de ARN Lambda en AWS.",
-    "request_schema_description": "ID de cuenta y Lambda ARN en AWS."
+    "description": "Elimine una configuración de registros de Datadog-AWS eliminando el ARN de Lambda específico asociado con una cuenta de AWS dada.",
+    "summary": "Elimine una integración de registros de AWS",
+    "request_description": "Elimine el cuerpo de la solicitud del ARN de AWS Lambda.",
+    "request_schema_description": "ID de cuenta de AWS y ARN de Lambda."
   },
   "ListAWSLogsIntegrations": {
-    "description": "Enumera todas las integraciones de logs de AWS en Datadog, configuradas en tu cuenta de Datadog.",
-    "summary": "Enumerar todas las integraciones de logs de AWS"
+    "description": "Liste todas las integraciones de registros de Datadog-AWS configuradas en su cuenta de Datadog.",
+    "summary": "Liste todas las integraciones de registros de AWS"
   },
   "CreateAWSLambdaARN": {
-    "description": "Adjunta el ARN Lambda de la función Lambda creada para la recopilación de logs de AWS en Datadog en tu ID de cuenta de AWS para habilitar la recopilación de logs.",
-    "summary": "Autenticación",
-    "request_description": "Cuerpo de una solicitud de función Lambda asíncrona para logs de AWS.",
-    "request_schema_description": "ID de cuenta y Lambda ARN en AWS."
+    "description": "Adjunte el ARN de Lambda de la Lambda creada para la recolección de registros de Datadog-AWS a su ID de cuenta de AWS para habilitar la recolección de registros.",
+    "summary": "Agregue el ARN de Lambda de registros de AWS",
+    "request_description": "Cuerpo de solicitud asíncrono de Lambda de registros de AWS.",
+    "request_schema_description": "ID de cuenta de AWS y ARN de Lambda."
   },
   "CheckAWSLogsLambdaAsync": {
-    "description": "Comprueba si existen permisos para añadir activadores de reenvío de logs para servicios determinados y para la cuenta de AWS. La entrada\nes la misma que para habilitar la recopilación de servicios AWS. Las solicitudes posteriores siempre repetirán lo anterior, por lo que este\nendpoint puede ser sondeado intermitentemente en lugar de bloquearse.\n\n- Devuelve el estado \"creado\" cuando comprueba si la función Lambda existe en la cuenta.\n- Devuelve el estado \"en espera\" mientras realiza la comprobación.\n- Devuelve el estado 'comprobado y ok' si existe la función Lambda.\n- Devuelve el estado \"error\" si no existe la función Lambda.",
-    "summary": "Comprobar si existe una función AWS Lambda",
-    "request_description": "Comprueba el cuerpo de una solicitud de función Lambda asíncrona para logs de AWS.",
-    "request_schema_description": "ID de cuenta y Lambda ARN en AWS."
+    "description": "Pruebe si están presentes los permisos para agregar un desencadenador de reenvío de registros para los servicios y la cuenta de AWS dados. La entrada\nes la misma que para habilitar la recolección de registros de un servicio de AWS. Las solicitudes posteriores siempre repetirán lo anterior, así que esto\nel punto final se puede consultar intermitentemente en lugar de bloquear.\n\n- Devuelve un estado de 'creado' cuando está verificando si el Lambda existe en la cuenta.\n- Devuelve un estado de 'esperando' mientras verifica.\n- Devuelve un estado de 'verificado y ok' si el Lambda existe.\n- Devuelve un estado de 'error' si el Lambda no existe.",
+    "summary": "Verifique que exista una función de AWS Lambda",
+    "request_description": "Verifique el cuerpo de la solicitud asíncrona de AWS Log Lambda.",
+    "request_schema_description": "ID de cuenta de AWS y ARN de Lambda."
   },
   "ListAWSLogsServices": {
-    "description": "**Este endpoint está obsoleto; utiliza el endpoint V2 en su lugar.** Obtén la lista de servicios de AWS actuales para los que Datadog ofrece recopilación automática de logs. Utiliza los IDs de servicio devueltos con el parámetro services para el endpoint de la API Enable an AWS service log collection (Activar la recopilación de logs de servicio de AWS).",
-    "summary": "Obtener la lista de los servicios listos para logs de AWS"
+    "description": "**Este punto final está obsoleto - use el punto final V2 en su lugar.** Obtenga la lista de servicios actuales de AWS que Datadog ofrece para la recolección automática de registros. Utilice los ID de servicio devueltos con el parámetro de servicios para el punto final de la API de habilitación de recolección de registros de un servicio de AWS.",
+    "summary": "Obtenga la lista de servicios de AWS listos para registros"
   },
   "EnableAWSLogServices": {
-    "description": "Habilita la recopilación automática de logs para una lista de servicios. Debe ejecutarse después de la ejecución `CreateAWSLambdaARN` para guardar la configuración.",
-    "summary": "Habilitar una integración de logs de AWS",
-    "request_description": "Habilita el cuerpo de una solicitud de servicios de logs de AWS.",
-    "request_schema_description": "Lista de los servicios AWS actuales a los que Datadog ofrece la recopilación automática de logs."
+    "description": "Habilite la recolección automática de registros para una lista de servicios. Esto debe ejecutarse después de ejecutar `CreateAWSLambdaARN` para guardar la configuración.",
+    "summary": "Habilite una integración de AWS Logs",
+    "request_description": "Habilite el cuerpo de la solicitud de servicios de registro de AWS.",
+    "request_schema_description": "Una lista de servicios actuales de AWS para los cuales Datadog ofrece recolección automática de registros."
   },
   "CheckAWSLogsServicesAsync": {
-    "description": "Comprueba si existen permisos para añadir activadores de reenvío de logs para servicios determinados y para la cuenta de AWS. La entrada es la misma que para `EnableAWSLogServices`.\nde forma asíncrona, para que pueda ser sondeado repetidamente de forma no bloqueante hasta\nque se complete la solicitud asíncrona.\n\n- Devuelve el estado \"creado\" cuando comprueba si existen los permisos\nen la cuenta de AWS.\n- Devuelve el estado \"en espera\" mientras realiza la comprobación.\n- Devuelve el estado 'comprobado y ok' si existe la función Lambda.\n- Devuelve el estado \"error\" si no existe la función Lambda.",
-    "summary": "Comprobar permisos para servicios de logs",
-    "request_description": "Comprueba el cuerpo de una solicitud de servicios asíncronos para logs de AWS.",
-    "request_schema_description": "Lista de los servicios AWS actuales a los que Datadog ofrece la recopilación automática de logs."
+    "description": "Pruebe si están presentes los permisos para agregar desencadenadores de reenvío de registros para los\nservicios dados y la cuenta de AWS. La entrada es la misma que para `EnableAWSLogServices`.\nHecho de manera asíncrona, por lo que se puede consultar repetidamente de manera no bloqueante hasta\nla solicitud asíncrona se completa.\n\n- Devuelve un estado de `creado` cuando está verificando si existen los permisos.\n  en la cuenta de AWS.\n- Devuelve un estado de `esperando` mientras verifica.\n- Devuelve un estado de `verificado y ok` si la Lambda existe.\n- Devuelve un estado de `error` si la Lambda no existe.",
+    "summary": "Verifica los permisos para los servicios de registro.",
+    "request_description": "Verifica el cuerpo de la solicitud de servicios asíncronos de AWS Logs.",
+    "request_schema_description": "Una lista de servicios actuales de AWS para los cuales Datadog ofrece recolección automática de registros."
   },
   "DeleteAzureIntegration": {
-    "description": "Elimina una integración Azure en Datadog determinada de tu cuenta de AWS.",
-    "summary": "Añadir elementos a una lista de dashboards.",
-    "request_description": "Elimina el cuerpo de una solicitud de integración Azure en Datadog determinada.",
-    "request_schema_description": "Integraciones Azure en Datadog configuradas para tu organización."
+    "description": "Elimina una integración específica de Datadog-Azure de tu cuenta de Datadog.",
+    "summary": "Elimina una integración de Azure.",
+    "request_description": "Elimina el cuerpo de la solicitud de una integración específica de Datadog-Azure.",
+    "request_schema_description": "Integraciones de Datadog-Azure configuradas para tu organización."
   },
   "ListAzureIntegration": {
-    "description": "Enumera todas las integraciones Azure en Datadog, configuradas en tu cuenta de Datadog.",
-    "summary": "Modificar elementos de una lista de dashboards"
+    "description": "Lista todas las integraciones de Datadog-Azure configuradas en tu cuenta de Datadog.",
+    "summary": "Lista todas las integraciones de Azure."
   },
   "CreateAzureIntegration": {
-    "description": "Crea una integración Azure en Datadog.\n\nUtilizando el método `POST` actualiza la configuración de tu integración añadiendo tu nueva\nconfiguración a la que existe en tu organización Datadog.\n\nUtilizando el método `PUT` actualiza la configuración de tu integración sustituyendo tu\nconfiguración actual por la nueva, enviada a tu organización Datadog.",
-    "summary": "Crear una integración Azure",
-    "request_description": "Crea una integración Azure en Datadog para el cuerpo de una solicitud de tu cuenta de Datadog.",
-    "request_schema_description": "Integraciones Azure en Datadog configuradas para tu organización."
+    "description": "Crea una integración de Datadog-Azure.\n\nUsar el método `POST` actualiza la configuración de tu integración al agregar tu nueva\nconfiguración a la existente en tu organización de Datadog.\n\nUsar el método `PUT` actualiza la configuración de tu integración al reemplazar tu\nconfiguración actual con la nueva enviada a tu organización de Datadog.",
+    "summary": "Crea una integración de Azure.",
+    "request_description": "Cree un cuerpo de solicitud de integración de Datadog-Azure para su cuenta de Datadog.",
+    "request_schema_description": "Integraciones de Datadog-Azure configuradas para tu organización."
   },
   "UpdateAzureIntegration": {
-    "description": "Actualizar una integración Azure en Datadog requiere un `nombre_de_inquilino` y un `id_de_cliente` existentes.\nCualquier otro campo suministrado reemplazará los valores existentes. Para reemplazar un `nombre_de_inquilino` y un `id_de_cliente`,\nutiliza un `nuevo_nombre_de_inquilino` y un `nuevo_id_de_cliente`. Para no modificar un campo, no lo incluyas en la carga útil.",
-    "summary": "Actualizar una integración Azure",
-    "request_description": "Actualiza el cuerpo de una solicitud de integración Azure en Datadog.",
-    "request_schema_description": "Integraciones Azure en Datadog configuradas para tu organización."
+    "description": "Actualice una integración de Datadog-Azure. Requiere un `tenant_name` y un `client_id` existentes.\nCualquier otro campo proporcionado sobrescribirá los valores existentes. To overwrite `tenant_name` or `client_id`,\nuse `new_tenant_name` and `new_client_id`. Para dejar un campo sin cambios, no proporcione ese campo en la carga útil.",
+    "summary": "Actualice una integración de Azure.",
+    "request_description": "Actualice el cuerpo de solicitud de una integración de Datadog-Azure.",
+    "request_schema_description": "Integraciones de Datadog-Azure configuradas para tu organización."
   },
   "UpdateAzureHostFilters": {
-    "description": "Actualiza la lista definida de filtros de hosts para una determinada integración Azure en Datadog.",
-    "summary": "Actualizar los filtros de hosts de una integración Azure",
-    "request_description": "Actualiza el cuerpo de los filtros de hosts de una integración Azure en Datadog.",
-    "request_schema_description": "Integraciones Azure en Datadog configuradas para tu organización."
+    "description": "Actualice la lista definida de filtros de host para una integración de Datadog-Azure dada.",
+    "summary": "Actualice los filtros de host de la integración de Azure.",
+    "request_description": "Actualice el cuerpo de solicitud de los filtros de host de una integración de Datadog-Azure.",
+    "request_schema_description": "Integraciones de Datadog-Azure configuradas para tu organización."
   },
   "DeleteGCPIntegration": {
-    "description": "Este endpoint está obsoleto. Utiliza endpoints v2. Elimina una determinada integración GCP en Datadog.",
-    "summary": "Eliminar una integración GCP ",
-    "request_description": "Elimina una integración GCP en Datadog determinada.",
-    "request_schema_description": "Tu cuenta de Google Cloud Platform."
+    "description": "Este punto final está obsoleto; utilice los puntos finales V2 en su lugar. Elimine una integración de Datadog-GCP dada.",
+    "summary": "Elimine una integración de GCP.",
+    "request_description": "Elimine una integración de Datadog-GCP dada.",
+    "request_schema_description": "Su cuenta de Google Cloud Platform."
   },
   "ListGCPIntegration": {
-    "description": "Este endpoint está obsoleto. Utiliza endpoints v2. Enumera todas las integraciones GCP en Datadog, configuradas en tu cuenta de Datadog.",
-    "summary": "Enumerar todas las integraciones GCP"
+    "description": "Este punto final está obsoleto; utilice los puntos finales V2 en su lugar. Enumere todas las integraciones de Datadog-GCP configuradas en su cuenta de Datadog.",
+    "summary": "Enumere todas las integraciones de GCP."
   },
   "CreateGCPIntegration": {
-    "description": "Este endpoint está obsoleto. Utiliza endpoints v2. Crea una integración GCP en Datadog.",
-    "summary": "Hosts",
-    "request_description": "Crea una integración GCP en Datadog.",
-    "request_schema_description": "Tu cuenta de Google Cloud Platform."
+    "description": "Este punto final está obsoleto; utilice los puntos finales V2 en su lugar. Cree una integración de Datadog-GCP.",
+    "summary": "Cree una integración de GCP.",
+    "request_description": "Cree una integración de Datadog-GCP.",
+    "request_schema_description": "Su cuenta de Google Cloud Platform."
   },
   "UpdateGCPIntegration": {
-    "description": "Este endpoint está obsoleto. Utiliza endpoints v2. Actualiza filtros_de_hosts o el auto_silenciado de integraciones GCP en Datadog.\nSe requiere un `id_de_proyecto` y un `correo_electrónico_de_cliente`, pero estos campos no se pueden actualizar.\nSi necesitas actualizar estos campos, elimínalos y utiliza el endpoint de creación (`POST`).\nLos campos no especificados mantendrán sus valores originales.",
-    "summary": "Actualizar una integración GCP",
-    "request_description": "Actualiza una integración GCP en Datadog.",
-    "request_schema_description": "Tu cuenta de Google Cloud Platform."
+    "description": "Este punto final está obsoleto; utilice los puntos finales V2 en su lugar. Actualice los filtros de_host de las integraciones de Datadog-GCP y/o la auto-silenciación.\nRequiere un `project_id` y un `client_email`, sin embargo, estos campos no se pueden actualizar.\nSi necesita actualizar estos campos, elimínelos y utilice el endpoint de creación (`POST`).\nLos campos no especificados mantendrán sus valores originales.",
+    "summary": "Actualizar una integración de GCP",
+    "request_description": "Actualizar una integración de Datadog-GCP.",
+    "request_schema_description": "Su cuenta de Google Cloud Platform."
   },
   "CreatePagerDutyIntegrationService": {
-    "description": "Crea un nuevo objeto de servicio en la integración PagerDuty.",
-    "summary": "Crear un objeto de servicio",
-    "request_description": "Crea un nuevo cuerpo de solicitud de objeto de servicio.",
-    "request_schema_description": "Servicio PagerDuty, disponible para la integración con Datadog."
+    "description": "Crear un nuevo objeto de servicio en la integración de PagerDuty.",
+    "summary": "Crear un nuevo objeto de servicio",
+    "request_description": "Crear el cuerpo de la solicitud de un nuevo objeto de servicio.",
+    "request_schema_description": "El servicio de PagerDuty que está disponible para la integración con Datadog."
   },
   "DeletePagerDutyIntegrationService": {
-    "description": "Elimina un único objeto de servicio en la integración PagerDuty en Datadog.",
-    "summary": "Eliminar un único objeto de servicio"
+    "description": "Eliminar un solo objeto de servicio en la integración de Datadog-PagerDuty.",
+    "summary": "Eliminar un solo objeto de servicio"
   },
   "GetPagerDutyIntegrationService": {
-    "description": "Obtén el nombre de servicio en la integración PagerDuty en Datadog.",
-    "summary": "Recibir un único objeto de servicio"
+    "description": "Obtener el nombre del servicio en la integración de Datadog-PagerDuty.",
+    "summary": "Obtener un solo objeto de servicio"
   },
   "UpdatePagerDutyIntegrationService": {
-    "description": "Actualiza un único objeto de servicio en la integración PagerDuty en Datadog.",
-    "summary": "Modificar un único objeto de servicio",
-    "request_description": "Actualiza un cuerpo de solicitud de objeto de servicio existente.",
-    "request_schema_description": "Clave de objeto de servicio PagerDuty."
+    "description": "Actualizar un solo objeto de servicio en la integración de Datadog-PagerDuty.",
+    "summary": "Actualizar un solo objeto de servicio",
+    "request_description": "Actualizar el cuerpo de la solicitud de un objeto de servicio existente.",
+    "request_schema_description": "Clave del objeto de servicio de PagerDuty."
   },
   "DeleteSlackIntegration": {
-    "description": "Elimina una integración Slack en Datadog.",
-    "summary": "Eliminar una integración Slack"
+    "description": "Eliminar una integración de Datadog-Slack.",
+    "summary": "Eliminar una integración de Slack"
   },
   "GetSlackIntegration": {
-    "description": "Obtén toda la información sobre tu integración Slack en Datadog.",
-    "summary": "Obtener información sobre una integración Slack"
+    "description": "Obtener toda la información sobre su integración de Datadog-Slack.",
+    "summary": "Obtener información sobre una integración de Slack"
   },
   "CreateSlackIntegration": {
-    "description": "Crea una integración Slack en Datadog. Una vez creada, añádele un canal con la opción\n[Añadir canales al endpoint de la integración Slack](https://docs.datadoghq.com/api/?lang=bash#add-channels-to-slack-integration).\n\nEste método actualiza la configuración de tu integración **añadiendo**\ntu nueva configuración a la que ya existe en tu organización Datadog.",
-    "summary": "Crear una integración Slack",
-    "request_description": "Crea el cuerpo de una solicitud de integración Slack en Datadog.",
-    "request_schema_description": "Nueva integración Slack en Datadog."
+    "description": "Crea una integración de Datadog-Slack. Una vez creada, añade un canal a ella con el\n[Añadir canales al endpoint de integración de Slack](https://docs.datadoghq.com/api/?lang=bash#add-channels-to-slack-integration).\n\nEste método actualiza la configuración de tu integración al **agregar**\ntu nueva configuración a la existente en tu organización de Datadog.",
+    "summary": "Crea una integración de Slack",
+    "request_description": "Crea el cuerpo de la solicitud de integración de Datadog-Slack.",
+    "request_schema_description": "Una nueva integración de Datadog-Slack."
   },
   "UpdateSlackIntegration": {
-    "description": "Añade canales a tu integración Slack en Datadog actual.\n\nEste método actualiza la configuración de tu integración **sustituyendo**\ntu configuración actual por la nueva, enviada a tu organización Datadog.",
-    "summary": "Añadir canales a una integración Slack",
-    "request_description": "Actualiza el cuerpo de una solicitud de integración Slack en Datadog existente.",
+    "description": "**Obsoleto**: Este endpoint está obsoleto.\n\nEste método **reescribe completamente** la configuración de tu integración al **reemplazar**\ntu configuración actual con la nueva enviada a tu organización de Datadog.\nPor favor, asegúrate de que todos los campos—incluyendo la URL del webhook de Slack—sean válidos\nporque una URL inválida romperá tus notificaciones de Slack.",
+    "summary": "Añade canales a la integración de Slack",
+    "request_description": "Actualiza el cuerpo de la solicitud de una integración de Datadog-Slack existente.",
     "request_schema_description": "Configuración de tus canales de Slack."
   },
   "GetSlackIntegrationChannels": {
-    "description": "Obtén una lista de todos los canales configurados para tu integración Slack en Datadog.",
-    "summary": "Obtener todos los canales de una integración Slack"
+    "description": "Obtén una lista de todos los canales configurados para tu integración de Datadog-Slack.",
+    "summary": "Obtén todos los canales en una integración de Slack"
   },
   "CreateSlackIntegrationChannel": {
-    "description": "Añade un canal a tu integración Slack en Datadog.",
-    "summary": "Crear un canal de integración Slack",
-    "request_description": "Carga útil que describe el canal Slack que se va a crear",
-    "request_schema_description": "Configuración del canal Slack."
+    "description": "Añade un canal a tu integración de Datadog-Slack.",
+    "summary": "Crea un canal de integración de Slack",
+    "request_description": "Carga útil que describe el canal de Slack a crear",
+    "request_schema_description": "La configuración del canal de Slack."
   },
   "RemoveSlackIntegrationChannel": {
-    "description": "Elimina un canal de tu integración Slack en Datadog.",
-    "summary": "Eliminar un canal de una integración Slack"
+    "description": "Elimina un canal de tu integración de Datadog-Slack.",
+    "summary": "Elimina un canal de integración de Slack"
   },
   "GetSlackIntegrationChannel": {
-    "description": "Obtén un canal configurado para tu integración Slack en Datadog.",
-    "summary": "Obtener un canal de una integración Slack"
+    "description": "Obtén un canal configurado para tu integración de Datadog-Slack.",
+    "summary": "Obtén un canal de integración de Slack"
   },
   "UpdateSlackIntegrationChannel": {
-    "description": "Actualiza un canal utilizado en tu integración Slack en Datadog.",
-    "summary": "Actualizar un canal de una integración Slack",
-    "request_description": "Carga útil que describe los campos y valores que deben actualizarse.",
-    "request_schema_description": "Configuración del canal Slack."
+    "description": "Actualiza un canal utilizado en tu integración de Datadog-Slack.",
+    "summary": "Actualiza un canal de integración de Slack",
+    "request_description": "Carga útil que describe los campos y valores a actualizar.",
+    "request_schema_description": "La configuración del canal de Slack."
   },
   "CreateWebhooksIntegrationCustomVariable": {
-    "description": "Crea un endpoint con el nombre `<CUSTOM_VARIABLE_NAME>`.",
-    "summary": "Crear una variable personalizada",
-    "request_description": "Definir el cuerpo de una solicitud de variable personalizada.",
-    "request_schema_description": "Variable personalizada para una integración de webhooks."
+    "description": "Crea un punto final con el nombre `<CUSTOM_VARIABLE_NAME>`.",
+    "summary": "Crea una variable personalizada",
+    "request_description": "Define el cuerpo de la solicitud de variable personalizada.",
+    "request_schema_description": "Variable personalizada para la integración de Webhook."
   },
   "DeleteWebhooksIntegrationCustomVariable": {
-    "description": "Elimina el endpoint con el nombre `<CUSTOM_VARIABLE_NAME>`.",
-    "summary": "Eliminar una variable personalizada"
+    "description": "Elimina el punto final con el nombre `<CUSTOM_VARIABLE_NAME>`.",
+    "summary": "Elimina una variable personalizada"
   },
   "GetWebhooksIntegrationCustomVariable": {
-    "description": "Muestra el contenido de la variable personalizada con el nombre `<CUSTOM_VARIABLE_NAME>`.\n\nSi la variable personalizada es secreta, el valor no se devuelve en la\ncarga útil de la respuesta.",
-    "summary": "Obtener una variable personalizada"
+    "description": "Muestra el contenido de la variable personalizada con el nombre `<CUSTOM_VARIABLE_NAME>`.\n\nSi la variable personalizada es secreta, el valor no se devuelve en el\ncarga útil de respuesta.",
+    "summary": "Obtén una variable personalizada"
   },
   "UpdateWebhooksIntegrationCustomVariable": {
-    "description": "Actualiza el endpoint con el nombre `<CUSTOM_VARIABLE_NAME>`.",
+    "description": "Actualiza el punto final con el nombre `<CUSTOM_VARIABLE_NAME>`.",
     "summary": "Actualizar una variable personalizada",
-    "request_description": "Actualiza el cuerpo de una solicitud de variable personalizada existente.",
-    "request_schema_description": "Actualiza la solicitud de un objeto variable personalizado.\n\n*Todas las propiedades son opcionales.*"
+    "request_description": "Actualizar el cuerpo de la solicitud de una variable personalizada existente.",
+    "request_schema_description": "Actualizar la solicitud de un objeto de variable personalizada.\n\n*Todas las propiedades son opcionales.*"
   },
   "CreateWebhooksIntegration": {
     "description": "Crea un endpoint con el nombre `<WEBHOOK_NAME>`.",
     "summary": "Crear una integración de webhooks",
-    "request_description": "Crea el cuerpo de una solicitud de integración de webhooks.",
-    "request_schema_description": "Integración de webhooks en Datadog."
+    "request_description": "Crear el cuerpo de la solicitud de integración de webhooks.",
+    "request_schema_description": "Integración de Datadog-Webhooks."
   },
   "DeleteWebhooksIntegration": {
-    "description": "Elimina el endpoint con el nombre `<WEBHOOK NAME>`.",
+    "description": "Elimina el endpoint con el nombre `<WEBHOOK NAME>`. Esta acción no se puede deshacer.",
     "summary": "Eliminar un webhook"
   },
   "GetWebhooksIntegration": {
     "description": "Obtiene el contenido del webhook con el nombre `<WEBHOOK_NAME>`.",
-    "summary": "Obtener una integración de webhooks"
+    "summary": "Obtener una integración de webhook"
   },
   "UpdateWebhooksIntegration": {
     "description": "Actualiza el endpoint con el nombre `<WEBHOOK_NAME>`.",
     "summary": "Actualizar un webhook",
-    "request_description": "Actualiza una integración de webhooks en Datadog existente.",
-    "request_schema_description": "Solicitud de actualización de un objeto de integración de webhooks.\n\n*Todas las propiedades son opcionales.*"
+    "request_description": "Actualizar una integración de Datadog-Webhooks existente.",
+    "request_schema_description": "Actualizar la solicitud de un objeto de integración de Webhooks.\n\n*Todas las propiedades son opcionales.*"
   },
   "ListLogs": {
-    "description": "El endpoint de listas devuelve los logs que coinciden con una consulta de búsqueda de logs.\n[Los resultados están paginados][1].\n\n**Si estás pensando en archivar los logs de tu organización,\nconsidera utilizar las funciones de archivado de Datadog y no la API de listas de logs.\nConsulta la [documentación sobre archivado de logs de Datadog][2].**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "description": "La lista de endpoints devuelve registros que coinciden con una consulta de búsqueda de registros.\n[Los resultados están paginados][1].\n\n**Si está considerando archivar registros para su organización,\nconsidera el uso de las capacidades de archivo de Datadog en lugar de la API de lista de registros.\nConsulta la [documentación del archivo de registros de Datadog][2].**\n\n**Nota**: Este punto final está habilitado por defecto para los clientes de registros. Para desactivarlo, contacta al [soporte de Datadog](https://docs.datadoghq.com/help/).\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
     "summary": "Buscar registros",
-    "request_description": "Filtro de logs",
-    "request_schema_description": "Objeto para enviar con la solicitud para recuperar una lista de logs de tu organización."
+    "request_description": "Filtro de registros",
+    "request_schema_description": "Objeto a enviar con la solicitud para recuperar una lista de registros de tu Organización."
   },
   "GetLogsIndexOrder": {
-    "description": "Obtén el orden actual de tus índices de logs. Este endpoint no recibe argumentos JSON.",
-    "summary": "Obtener el orden de los índices"
+    "description": "Obtén el orden actual de tus índices de registro. Este endpoint no acepta argumentos JSON.",
+    "summary": "Obtén el orden de los índices"
   },
   "UpdateLogsIndexOrder": {
-    "description": "Este endpoint actualiza el orden de los índices de tu organización.\nDevuelve el objeto de orden de índice enviado en el cuerpo de la solicitud, cuando la solicitud se realiza correctamente.",
-    "summary": "Actualizar el orden de los índices",
+    "description": "Este punto final actualiza el orden de los índices de tu organización.\nDevuelve el objeto de orden de índice enviado en el cuerpo de la solicitud cuando la solicitud es exitosa.",
+    "summary": "Actualiza el orden de los índices",
     "request_description": "Objeto que contiene la nueva lista ordenada de nombres de índices",
-    "request_schema_description": "Objeto que contiene la lista ordenada de nombres de índices de logs."
+    "request_schema_description": "Objeto que contiene la lista ordenada de nombres de índices de registro."
   },
   "ListLogIndexes": {
-    "description": "El objeto Índice describe la configuración de un índice de logs.\nEste endpoint devuelve una matriz de objetos `LogIndex` de tu organización.",
-    "summary": "Obtener todos los índices"
+    "description": "El objeto de índice describe la configuración de un índice de registro.\nEste punto final devuelve un arreglo de los objetos `LogIndex` de tu organización.",
+    "summary": "Obtén todos los índices"
   },
   "CreateLogsIndex": {
-    "description": "Crea un nuevo índice. Devuelve el objeto Índice enviado en el cuerpo de la solicitud cuando la solicitud se realiza correctamente.",
-    "summary": "Crear un índice",
+    "description": "Crea un nuevo índice. Devuelve el objeto de índice enviado en el cuerpo de la solicitud cuando la solicitud es exitosa.",
+    "summary": "Crea un índice",
     "request_description": "Objeto que contiene el nuevo índice.",
-    "request_schema_description": "Objeto que describe un índice de logs de Datadog."
+    "request_schema_description": "Objeto que describe un índice de registro de Datadog."
   },
   "DeleteLogsIndex": {
-    "description": "Elimina un índice existente en tu organización. La eliminación de un índice es permanente y no se puede revertir.\nNo podrás volver a crear un índice con el mismo nombre que los índices eliminados.",
-    "summary": "Eliminar un índice"
+    "description": "Elimina un índice existente de tu organización. Las eliminaciones de índices son permanentes y no se pueden revertir.\nNo puedes recrear un índice con el mismo nombre que los eliminados.",
+    "summary": "Elimina un índice"
   },
   "GetLogsIndex": {
-    "description": "Obtén un índice de logs de tu organización. Este endpoint no recibe argumentos JSON.",
-    "summary": "Obtener un índice"
+    "description": "Obtén un índice de registro de tu organización. Este endpoint no acepta argumentos JSON.",
+    "summary": "Obtén un índice"
   },
   "UpdateLogsIndex": {
-    "description": "Actualiza un índice identificado por su nombre.\nDevuelve el objeto Index enviado en el cuerpo de la solicitud, cuando la solicitud se realiza correctamente.\n\nUtilizando el método `PUT` se actualiza la configuración del índice **sustituyendo**\ntu configuración actual por la nueva, enviada a tu organización Datadog.",
-    "summary": "Actualizar un índice",
+    "description": "Actualiza un índice según lo identificado por su nombre.\nDevuelve el objeto de índice enviado en el cuerpo de la solicitud cuando la solicitud es exitosa.\n\nUsar el método `PUT` actualiza la configuración de tu índice al **reemplazar**\ntu configuración actual con la nueva enviada a tu organización de Datadog.",
+    "summary": "Actualiza un índice",
     "request_description": "Objeto que contiene la nueva `LogsIndexUpdateRequest`.",
-    "request_schema_description": "Objeto para actualizar un índice de logs de Datadog."
+    "request_schema_description": "Objeto para actualizar un índice de registro de Datadog."
   },
   "GetLogsPipelineOrder": {
-    "description": "Obtén el orden actual de tus pipelines.\nEste endpoint no recibe argumentos JSON.",
-    "summary": "Obtener el orden de los pipelines"
+    "description": "Obtén el orden actual de tus pipelines.\nEste endpoint no acepta argumentos JSON.",
+    "summary": "Obtén el orden de los pipelines"
   },
   "UpdateLogsPipelineOrder": {
-    "description": "Actualiza el orden de tus pipelines. Dado que los logs se procesan en secuencias, la reordenación de un pipeline puede cambiar\nla estructura y el contenido de los datos procesados por otros pipelines y sus procesadores.\n\n**Nota**: Utilizando el método `PUT` se actualiza el orden de tus pipelines, sustituyendo tu orden actual\npor el nuevo, enviado a tu organización Datadog.",
-    "summary": "Actualizar el orden de los pipelines",
-    "request_description": "Objeto que contiene la nueva lista ordenada de los ID de pipelines.",
-    "request_schema_description": "Objeto que contiene la lista ordenada de los ID de pipelines."
+    "description": "Actualiza el orden de tus pipelines. Dado que los registros se procesan secuencialmente, reordenar un pipeline puede cambiar\nla estructura y el contenido de los datos procesados por otros pipelines y sus procesadores.\n\n**Nota**: Usar el método `PUT` actualiza el orden de tus pipelines al reemplazar tu orden actual.\ncon el nuevo enviado a tu organización de Datadog.",
+    "summary": "Actualizar el orden de la tubería",
+    "request_description": "Objeto que contiene la nueva lista ordenada de IDs de tuberías.",
+    "request_schema_description": "Objeto que contiene la lista ordenada de IDs de tuberías."
   },
   "ListLogsPipelines": {
-    "description": "Obtén todos los pipelines de tu organización.\nEste endpoint no recibe argumentos JSON.",
-    "summary": "Métricas"
+    "description": "Obtener todas las tuberías de tu organización.\nEste endpoint no acepta argumentos JSON.",
+    "summary": "Obtener todas las tuberías"
   },
   "CreateLogsPipeline": {
-    "description": "Crea un pipeline en tu organización.",
-    "summary": "Crear un pipeline",
-    "request_description": "Definición del nuevo pipeline.",
-    "request_schema_description": "Los pipelines y los procesadores operan sobre los logs entrantes,\nanalizándolos y transformándolos en atributos estructurados para facilitar su consulta.\n\n**Nota**: Estos endpoints sólo están disponibles para usuarios administradores.\nAsegúrate de utilizar una clave de aplicación creada por un administrador."
+    "description": "Crear una tubería en tu organización.",
+    "summary": "Crear una tubería",
+    "request_description": "Definición de la nueva tubería.",
+    "request_schema_description": "Las tuberías y procesadores operan sobre los registros entrantes,\nanalizando y transformándolos en atributos estructurados para facilitar las consultas.\n\n**Nota**: Estos puntos finales solo están disponibles para usuarios administradores.\nAsegúrate de usar una clave de aplicación creada por un administrador."
   },
   "DeleteLogsPipeline": {
-    "description": "Elimina un pipeline determinado de tu organización.\nEste endpoint no recibe argumentos JSON.",
-    "summary": "Eliminar un pipeline"
+    "description": "Eliminar una tubería dada de tu organización.\nEste endpoint no acepta argumentos JSON.",
+    "summary": "Eliminar una tubería"
   },
   "GetLogsPipeline": {
-    "description": "Obtén un pipeline específico de tu organización.\nEste endpoint no recibe argumentos JSON.",
-    "summary": "Obtener un pipeline"
+    "description": "Obtener una tubería específica de tu organización.\nEste endpoint no acepta argumentos JSON.",
+    "summary": "Obtener una tubería"
   },
   "UpdateLogsPipeline": {
-    "description": "Actualiza la configuración de un pipeline determinado para cambiar sus procesadores o su orden.\n\n**Nota**: Utilizando este método, se modifica la configuración de tu pipeline **sustituyendo**\nla configuración actual por la nueva, enviada a tu organización Datadog.",
-    "summary": "Actualizar un pipeline",
+    "description": "Actualizar la configuración de una tubería dada para cambiar sus procesadores o su orden.\n\n**Nota**: Usar este método actualiza la configuración de tu tubería **reemplazando**\ntu configuración actual con la nueva enviada a tu organización de Datadog.",
+    "summary": "Actualizar una tubería",
     "request_description": "Nueva definición del pipeline.",
-    "request_schema_description": "Los pipelines y los procesadores operan sobre los logs entrantes,\nanalizándolos y transformándolos en atributos estructurados para facilitar su consulta.\n\n**Nota**: Estos endpoints sólo están disponibles para usuarios administradores.\nAsegúrate de utilizar una clave de aplicación creada por un administrador."
+    "request_schema_description": "Las tuberías y procesadores operan sobre los registros entrantes,\nanalizando y transformándolos en atributos estructurados para facilitar las consultas.\n\n**Nota**: Estos puntos finales solo están disponibles para usuarios administradores.\nAsegúrate de usar una clave de aplicación creada por un administrador."
   },
   "ListActiveMetrics": {
-    "description": "Obtén la lista de las métricas de informes activas desde un momento dado hasta ahora.",
-    "summary": "Obtener una lista de métricas activas"
+    "description": "Obtén la lista de métricas que están reportando activamente desde un momento dado hasta ahora.",
+    "summary": "Obtén la lista de métricas activas"
   },
   "GetMetricMetadata": {
     "description": "Obtén metadatos sobre una métrica específica.",
-    "summary": "Monitores"
+    "summary": "Obtén metadatos de la métrica"
   },
   "UpdateMetricMetadata": {
-    "description": "Edita los metadatos de una métrica específica. Más información sobre [tipos admitidos](https://docs.datadoghq.com/developers/metrics).",
-    "summary": "Editar los metadatos de una métrica ",
+    "description": "Edita los metadatos de una métrica específica. Descubre más sobre [tipos soportados](https://docs.datadoghq.com/developers/metrics).",
+    "summary": "Edita los metadatos de la métrica",
     "request_description": "Nuevos metadatos.",
-    "request_schema_description": "Objeto con todos los metadatos relacionados con métricas."
+    "request_schema_description": "Objeto con todos los metadatos relacionados con la métrica."
   },
   "ListMonitors": {
     "description": "Obtén todos los monitores de tu organización.",
-    "summary": "Obtener todos los monitores"
+    "summary": "Obtén todos los monitores"
   },
   "CreateMonitor": {
-    "description": "Crea un monitor utilizando las opciones especificadas.\n\n#### Tipos de monitores\n\nEl tipo de monitor elegido a partir de:\n\n- anomalías: `query alert`\n- APM: `query alert` or `trace-analytics alert`\n- compuesto: `composite`\n- personalizado: `service check`\n- previsión: `query alert`\n- host: `service check`\n- integración: `query alert` or `service check`\n- proceso activo: `process alert`\n- logs: `log alert`\n- métricas: `query alert`\n- red: `service check`\n- outlier: `query alert`\n- proceso: `service check`\n- rum: `rum alert`\n- SLO: `slo alert`\n- watchdog: `event-v2 alert`\n- event-v2: `event-v2 alert`\n- auditorías: `audit alert`\n- seguimiento de errores: `error-tracking alert`\n- database-monitoring: `database-monitoring alert`\n- rendimiento de red: `network-performance alert`\n- coste de nube: `cost alert`\n\n**Notas**:\n- Los monitores Synthetic se crean a través de la API Synthetics. Para obtener más información, consulta la documentación de la [API Synthetics](https://docs.datadoghq.com/api/latest/synthetics/).\n- loguear monitor s requieren una Clave de Aplicación sin especificar.\n\n#### Tipos de consulta\n\n##### Consulta de alerta de métricas\n\nEjemplo: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- time_aggr: avg, sum, max, min, change o pct_change\n- time_window: last_#m (con # entre 1 y 10080 dependiendo del tipo de monitor) o last_#h(con# entre 1 y 168 dependiendo del tipo de monitor) o last_1d o last_1w\n- space_aggr: avg, sum, min, or max\n- tags: una o más etiquetas (separadas por comas) o *\n- key: a ‘key’ en sintaxis de etiqueta key:value; define una alerta individual para cada etiqueta del grupo (alertas múltiples)\n- operator: <, <=, >, >=, ==, or !=\n- #: número entero o decimal utilizado para definir el umbral\n\nSi estás utilizando el agregador de tiempo _change_ o _pct_change_, utiliza change_aggr(time_aggr(time_window) en su lugar, timeshift):space_aggr:metric{tags} [by {key}] operator # con:\n\n- change_aggr change, pct_change\n- time_aggr avg, sum, max, min Más información\n- time_window last_#m (entre 1 y 2880 dependiendo del tipo de monitor), last_#h (entre 1 y 48 dependiendo del tipo de monitor) o last_#d (1 or 2)\n- timeshift #m_ago (5, 10, 15 o 30), #h_ago (1, 2 o 4) o 1d_ago\n\nUtiliza esto para crear un monitor de outliers con la siguiente consulta: avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} por {host}, 'dbscan', 7) > 0`\n\n##### Consulta de checks de servicio\n\nEjemplo: \"check\".over(tags).last(count).by(group).count_by_status()`\n\n- 'check' nombre del check, por ejemplo datadog.agent.up`\n- 'tags' una o más etiquetas entre comillas (separadas por comas) o “*”. por ejemplo: .over(\"env:prod\", \"role:db\"); over no puede estar vacío.\n- 'count' debe ser mayor o igual que tu umbral máximo (definido en las opciones). Se limita a 100.\nPor ejemplo, si definiste la notificación de estados 1 crítico, 3 ok y 2 advertencia, count` debería ser al menos 3.\n- 'group' debe especificarse para monitores de checks. La agrupación por cada check ya es explícitamente conocida en algunos checks de servicio.\nPor ejemplo, los monitores de la integración Postgres están etiquetados como db, host y port, y los monitores de redes, como host, instance y url. Para obtener más información, consulta la documentación Checks de servicios (https://docs.datadoghq.com/api/latest/servicio-checks/).\n\n##### Consulta de alertas de eventos\n\nNota: La Consulta de alertas de eventos ha sido sustituida por la Consulta de alertas de eventos V2. Para obtener más información, consulta la guía [Migración de eventos].(https://docs.datadoghq.com/service_management/eventos/guides/migrating_to_new_events_features/).\n\n##### Consulta de alertas de eventos V2\n\nEjemplo: events(query).rollup(rollup_method[, measure]).last(time_window) operator #\n\n- 'query' Consulta de búsqueda que sigue la sintaxis de búsqueda de logs.\n- 'rollup_method' Las estadísticas roll-up method - admiten count, avg y cardinality.\n- 'measure' Para avg y cardinality rollup_method - especifica la medida o el nombre de faceta que quieres utilizar.\n- 'time_window' #m (entre 1 y 2880), #h (entre 1 y 48).\n- 'operator' <, <=, >, >=, ==, or !=.\n- '#' número entero o decimal utilizado para definir el umbral.\n\n##### Consulta de alertas de procesos\n\nEjemplo: processes(search).over(tags).rollup('count').last(timeframe) operator #\n\n- 'search' Cadena de búsqueda de texto libre para consultar procesos. Resultados del emparejamiento de procesos coincidentes en la página Procesos en directo.\n- 'tags' una o más etiquetas (separadas por comas)\n- 'timeframe' periodo de tiempo de los recuentos. Ejemplos: 10m, 4h. Periodos de tiempo compatibles: s, m, h, d\n- 'operator' <, <=, >, >=, == o !=\n- '#' número entero o decimal utilizado para definir el umbral\n\n##### Consulta de alertas de logs\n\nEjemplo: logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #\n\n- 'query' Consulta de búsqueda que sigue la sintaxis de búsqueda de logs.\n- 'rollup_method' Las estadísticas roll-up method - admiten count, avg y cardinality.\n- 'measure' Para avg y cardinality rollup_method - especifica la medida o el nombre de faceta que quieres utilizar.\n- 'time_window' #m (entre 1 y 2880), #h (entre 1 y 48).\n- 'operator' <, <=, >, >=, ==, or !=.\n- '#' número entero o decimal utilizado para definir el umbral.\n\n##### Consulta compuesta\n\nEjemplo: 12345 && 67890, donde 12345 y 67890 son los ID de los monitores no compuestos\n\n- `name' [required, default = dynamic, based on query]: Nombre de la alerta.\n- `message' [required, default = dynamic, based on query]: Mensaje a incluir con las notificaciones de este monitor. Se pueden enviar notificaciones por correo electrónico a usuarios específicos utilizando la misma notación ‘@username’ que en los eventos.\n- `tags' [optional, default = empty list]: Lista de etiquetas a asociar con tu monitor. Al obtener detalles de monitores a través de la API, utiliza el argumento monitor_tags para filtrar los resultados por esas etiquetas. Sólo está disponible a través de la API y no es visible ni editable en la interfaz de usuario de Datadog.\n\n##### Consulta de alertas de SLOs\n\nEjemplo: error_budget(\"slo_id\").over(\"time_window\") operator #\n\n- `slo_id': El ID alfanumérico del SLO para el que configuras la alerta.\n- `time_window': La ventana de tiempo del destino del SLO sobre el que quieres generar alertas. Opciones válidas: 7d, 30d, 90d.\n- `operator': >= or >\n\n##### Consulta de alertas de auditorías\n\nEjemplo: audits(query).rollup(rollup_method[, measure]).last(time_window) operator #\n\n- `query` La consulta de búsqueda que utiliza la sintaxis de búsqueda de logs.\n- `rollup_method` Las estadísticas roll-up method - admite count, avg y cardinality.\n- `measure` Para avg y cardinality rollup_method - especifica la medida o nombre de la faceta que quieres utilizar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` <, <=, >, >=, ==, or !=.\n- `#` número entero o decimal utilizado para definir el umbral.\n\n##### Consulta de alertas de pipelines CI\n\nEjemplo: ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window) operator #\n\n- `query` La consulta de búsqueda que utiliza la sintaxis de búsqueda de logs.\n- `rollup_method` Las estadísticas roll-up method - admite count, avg y cardinality.\n- `measure` Para avg y cardinality rollup_method - especifica la medida o nombre de la faceta que quieres utilizar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` <, <=, >, >=, ==, or !=.\n- `#` número entero o decimal utilizado para definir el umbral.\n\n##### Consulta de alertas de tests CI\n\nEjemplo: ci-tests(query).rollup(rollup_method[, measure]).last(time_window) operator #\n\n- `query` La consulta de búsqueda que utiliza la sintaxis de búsqueda de logs.\n- `rollup_method` Las estadísticas roll-up method - admite count, avg y cardinality.\n- `measure` Para avg y cardinality rollup_method - especifica la medida o nombre de la faceta que quieres utilizar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` <, <=, >, >=, ==, or !=.\n- `#` número entero o decimal utilizado para definir el umbral.\n\n##### Consulta de alertas de seguimiento de errores\n\n\"New issue\" example: `error-tracking(query).source(issue_source).new().rollup(rollup_method[, measure]).by(group_by).last(time_window) operator #`\n\"High impact issue\" example: `error-tracking(query).source(issue_source).impact().rollup(rollup_method[, measure]).by(group_by).last(time_window) operator #``\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n- `issue_source` The issue source - supports `all`, `browser`, `mobile` and `backend` and defaults to `all` if omitted.\n- `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality` and defaults to `count` if omitted.\n- `measure` For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.\n- `group by` Comma-separated list of attributes to group by - should contain at least `issue.id`.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n- `#` número entero o decimal utilizado para definir el umbral.\n\n\n**Consulta de alertas de la monitorización de bases de datos**\n\nEjemplo: database-monitoring(query).rollup(rollup_method[, measure]).last(time_window) operator #\n\n- `query` La consulta de búsqueda que utiliza la sintaxis de búsqueda de logs.\n- `rollup_method` Las estadísticas roll-up method - admite count, avg y cardinality.\n- `measure` Para avg y cardinality rollup_method - especifica la medida o nombre de la faceta que quieres utilizar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` <, <=, >, >=, ==, or !=.\n- `#` número entero o decimal utilizado para definir el umbral.\n\n**Consulta de alertas de rendimiento de redes**\n\nEjemplo: network-performance(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` La consulta de búsqueda que utiliza la sintaxis de búsqueda de logs.\n- `rollup_method` Las estadísticas roll-up method - admite count, avg y cardinality.\n- `measure` Para avg y cardinality rollup_method - especifica la medida o nombre de la faceta que quieres utilizar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` <, <=, >, >=, ==, or !=.\n- `#` número entero o decimal utilizado para definir el umbral.\n\n**Consulta de alerta de costes**\n\nEjemplo: `formula(query).timeframe_type(time_window).function(parameter) operator #``\n\n- `query` consulta de búsqueda- siguiendo la sintaxis de [búsqueda de logs](https://docs.datadoghq.com/Logs/search_syntax/).\n- `tipo_timeframe` El tipo de marco temporal para evaluar el coste\n        - para `previsión` admite `current`.\n        - para `cambio`, `anomalías`, `umbral` admite `last`\n- `time_window` - admite roll-up diario p.ej. `7d`\n-function` - [opcional, por defecto `threshold` monitor si se omite] admite `cambio`, `anomalías`, `previsión`\n- `parameter` Especifica el parámetro del tipo\n    - para `change`:\n        - admite `relative`, `absolute`\n        - para `opcional`: admite `#`, donde `#` es un número entero o decimal utilizado para definir el umbral\n    - para `anomalías`:\n        - admite `direction=both`, `direction=above`, `direction=below`\n        - [opcional] admite `threshold=#`, donde `#` es un número entero o decimal utilizado para definir el umbral\n- operador\n    - para `threshold` admite `<`, `<=`, `>`, `>=`, `==`, o `!=`\n    - para `cambio` admite `>`, `<`\n    - para `anomalías` admite `>=`\n    - para `previsión` admite `>`\n- `#` un número entero o decimal utilizado para definir el umbral.",
+    "description": "Crea un monitor utilizando las opciones especificadas.\n\n#### Tipos de Monitores\n\nEl tipo de monitor elegido de:\n\n- anomalía: `alerta de consulta`\n- APM: `alerta de consulta` o `alerta de análisis de trazas`\n- compuesto: `compuesto`\n- personalizado: `verificación de servicio`\n- pronóstico: `alerta de consulta`\n- anfitrión: `verificación de servicio`\n- integración: `alerta de consulta` o `verificación de servicio`\n- proceso en vivo: `alerta de proceso`\n- registros: `alerta de registro`\n- métrica: `alerta de consulta`\n- red: `verificación de servicio`\n- valor atípico: `alerta de consulta`\n- proceso: `verificación de servicio`\n- rum: `alerta de rum`\n- SLO: `slo alert`\n- vigilante: `alerta de evento-v2`\n- event-v2: `event-v2 alert`\n- auditoría: `alerta de auditoría`\n- seguimiento de errores: `alerta de seguimiento de errores`\n- monitoreo de base de datos: `alerta de monitoreo de base de datos`\n- rendimiento de red: `alerta de rendimiento de red`\n- costo en la nube: `alerta de costo`\n- ruta de red: `alerta de ruta de red`\n\n**Notas**:\n- Los monitores sintéticos se crean a través de la API de Synthetics. Consulte la documentación de la [API de Synthetics](https://docs.datadoghq.com/api/latest/synthetics/) para más información.\n- Los monitores de registro requieren una clave de aplicación sin alcance.\n\n#### Tipos de Consulta\n\n##### Consulta de Alerta Métrica\n\nEjemplo: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, o pct_change\n- `time_window`: `last_#m` (con `#` entre 1 y 10080 dependiendo del tipo de monitor) o `last_#h` (con `#` entre 1 y 168 dependiendo del tipo de monitor) o `last_1d`, o `last_1w`\n- `space_aggr`: avg, sum, min, o max\n- `tags`: una o más etiquetas (separadas por comas), o *\n- `key`: una 'clave' en la sintaxis de etiqueta key:value; define una alerta separada para cada etiqueta en el grupo (multi-alerta)\n- `operator`: <, <=, >, >=, ==, o !=\n- `#`: un número entero o decimal utilizado para establecer el umbral\n\nSi está utilizando el agregador de tiempo `_change_` o `_pct_change_`, utilice en su lugar `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags} [by {key}] operator #` con:\n\n- `change_aggr` change, pct_change\n- `time_aggr` avg, sum, max, min [Aprender más](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)\n- `time_window` last\\_#m (entre 1 y 2880 dependiendo del tipo de monitor), last\\_#h (entre 1 y 48 dependiendo del tipo de monitor), o last_#d (1 o 2)\n- `timeshift` #m_ago (5, 10, 15, o 30), #h_ago (1, 2, o 4), o 1d_ago\n\nUtilice esto para crear un monitor de valores atípicos utilizando la siguiente consulta:\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`\n\n##### Consulta de Verificación de Servicio\n\nEjemplo: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n- `verifique` el nombre de la verificación, por ejemplo `datadog.agent.up`\n- `etiquetas` una o más etiquetas entre comillas (separadas por comas), o \"*\". por ejemplo: `.over(\"env:prod\", \"role:db\")`; `over` no puede estar vacío.\n- `conteo` debe ser mayor o igual a su umbral máximo (definido en las `opciones`). Está limitado a 100.\nPor ejemplo, si ha especificado notificar sobre 1 crítico, 3 ok y 2 advertencias, `conteo` debe ser al menos 3.\n- `grupo` debe ser especificado para los monitores de verificación. El agrupamiento por verificación ya es explícitamente conocido para algunas verificaciones de servicio.\nPor ejemplo, los monitores de integración de Postgres están etiquetados por `db`, `host` y `port`, y los monitores de red por `host`, `instance` y `url`. Consulte la documentación de [Verificaciones de Servicio](https://docs.datadoghq.com/api/latest/service-checks/) para más información.\n\n##### Consulta de Alerta de Evento\n\n**Nota:** La Consulta de Alerta de Evento ha sido reemplazada por la Consulta de Alerta de Evento V2. Para más información, consulte la [guía de migración de eventos](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/).\n\n##### Consulta de Alerta de Evento V2\n\nEjemplo: `events(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` La consulta de búsqueda - siguiendo la [sintaxis de búsqueda de registros](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` El método de resumen de estadísticas - soporta `count`, `avg` y `cardinality`.\n- `measure` Para `avg` y `cardinality` `rollup_method` - especifique la medida o el nombre de la faceta que desea usar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, o `!=`.\n- `#` un número entero o decimal utilizado para establecer el umbral.\n\n##### Consulta de Alerta de Proceso\n\nEjemplo: `processes(search).over(tags).rollup('count').last(timeframe) operador #`\n\n- `search` cadena de búsqueda de texto libre para consultar procesos.\nLos procesos coincidentes coinciden con los resultados en la página de [Procesos en Vivo](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows).\n- `tags` una o más etiquetas (separadas por comas)\n- `timeframe` el período de tiempo para resumir los conteos. Ejemplos: 10m, 4h. Períodos de tiempo soportados: s, m, h y d\n- `operator` <, <=, >, >=, ==, o !=\n- `#` un número entero o decimal utilizado para establecer el umbral\n\n##### Consulta de Alerta de Registros\n\nEjemplo: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operador #`\n\n- `query` La consulta de búsqueda - siguiendo la [sintaxis de búsqueda de registros](https://docs.datadoghq.com/logs/search_syntax/).\n- `index_name` Para organizaciones de múltiples índices, el índice de registro en el que se realiza la solicitud.\n- `rollup_method` El método de resumen de estadísticas - soporta `count`, `avg` y `cardinality`.\n- `measure` Para `avg` y `cardinality` `rollup_method` - especifique la medida o el nombre de la faceta que desea usar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, o `!=`.\n- `#` un número entero o decimal utilizado para establecer el umbral.\n\n##### Consulta Compuesta\n\nEjemplo: `12345 && 67890`, donde `12345` y `67890` son los IDs de monitores no compuestos\n\n* `name` [*requerido*, *predeterminado* = **dinámico, basado en la consulta**]: El nombre de la alerta.\n* `message` [*requerido*, *predeterminado* = **dinámico, basado en la consulta**]: Un mensaje para incluir con las notificaciones para este monitor.\nLas notificaciones por correo electrónico pueden ser enviadas a usuarios específicos utilizando la misma notación '@username' que los eventos.\n* `tags` [*opcional*, *predeterminado* = **lista vacía**]: Una lista de etiquetas para asociar con su monitor.\nAl obtener todos los detalles del monitor a través de la API, utilice el argumento `monitor_tags` para filtrar los resultados por estas etiquetas.\nSolo está disponible a través de la API y no es visible ni editable en la interfaz de usuario de Datadog.\n\n##### Consulta de Alerta SLO\n\nExample: `error_budget(\"slo_id\").over(\"time_window\") operator #`\n\n- `slo_id`: El ID alfanumérico del SLO para el cual está configurando la alerta.\n- `time_window`: La ventana de tiempo del objetivo SLO sobre el cual desea alertar. Opciones válidas: `7d`, `30d`, `90d`.\n- `operator`: `>=` o `>`\n\n##### Consulta de Alerta de Auditoría\n\nEjemplo: `audits(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` La consulta de búsqueda - siguiendo la [sintaxis de búsqueda de registros](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method` El método de resumen de estadísticas - soporta `count`, `avg` y `cardinality`.\n- `measure` Para `avg` y `cardinality` `rollup_method` - especifique la medida o el nombre de la faceta que desea usar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, o `!=`.\n- `#` un número entero o decimal utilizado para establecer el umbral.\n\n##### Consulta de Alerta de Pipelines CI\n\nEjemplo: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` La consulta de búsqueda - siguiendo la [sintaxis de búsqueda de registros](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method`: El método de agregación de estadísticas - soporta `count`, `avg` y `cardinality`.\n- `measure` Para `avg` y `cardinality` `rollup_method` - especifique la medida o el nombre de la faceta que desea usar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, o `!=`.\n- `#` un número entero o decimal utilizado para establecer el umbral.\n\n##### Consulta de Alerta de Pruebas CI\n\nEjemplo: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` La consulta de búsqueda - siguiendo la [sintaxis de búsqueda de registros](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method`: El método de agregación de estadísticas - soporta `count`, `avg` y `cardinality`.\n- `measure` Para `avg` y `cardinality` `rollup_method` - especifique la medida o el nombre de la faceta que desea usar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, o `!=`.\n- `#` un número entero o decimal utilizado para establecer el umbral.\n\n##### Consulta de Alerta de Seguimiento de Errores\n\nEjemplo de \"Nuevo problema\": `error-tracking(query).source(issue_source).new().rollup(rollup_method[, measure]).by(group_by).last(time_window) operator #`\nEjemplo de \"Problema de alto impacto\": `error-tracking(query).source(issue_source).impact().rollup(rollup_method[, measure]).by(group_by).last(time_window) operator #`\n\n- `query` La consulta de búsqueda - siguiendo la [sintaxis de búsqueda de registros](https://docs.datadoghq.com/logs/search_syntax/).\n- `issue_source`: La fuente del problema - soporta `all`, `browser`, `mobile` y `backend`, y por defecto es `all` si se omite.\n- `rollup_method`: El método de agregación de estadísticas - soporta `count`, `avg` y `cardinality`, y por defecto es `count` si se omite.\n- `measure` Para `avg` y `cardinality` `rollup_method` - especifique la medida o el nombre de la faceta que desea usar.\n- `group by`: Lista de atributos separados por comas para agrupar - debe contener al menos `issue.id`.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, o `!=`.\n- `#` un número entero o decimal utilizado para establecer el umbral.\n\n**Consulta de Alerta de Monitoreo de Base de Datos**\n\nEjemplo: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` La consulta de búsqueda - siguiendo la [sintaxis de búsqueda de registros](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method`: El método de agregación de estadísticas - soporta `count`, `avg` y `cardinality`.\n- `measure` Para `avg` y `cardinality` `rollup_method` - especifique la medida o el nombre de la faceta que desea usar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, o `!=`.\n- `#` un número entero o decimal utilizado para establecer el umbral.\n\n**Consulta de Alerta de Rendimiento de Red**\n\nEjemplo: `network-performance(query).rollup(rollup_method[, measure]).last(time_window) operator #`\n\n- `query` La consulta de búsqueda - siguiendo la [sintaxis de búsqueda de registros](https://docs.datadoghq.com/logs/search_syntax/).\n- `rollup_method`: El método de agregación de estadísticas - soporta `count`, `avg` y `cardinality`.\n- `measure` Para `avg` y `cardinality` `rollup_method` - especifique la medida o el nombre de la faceta que desea usar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, o `!=`.\n- `#` un número entero o decimal utilizado para establecer el umbral.\n\n**Consulta de Alerta de Costo**\n\nEjemplo: `formula(query).timeframe_type(time_window).function(parameter) operator #`\n\n- `query` La consulta de búsqueda - siguiendo la [sintaxis de búsqueda de registros](https://docs.datadoghq.com/logs/search_syntax/).\n- `timeframe_type` El tipo de periodo a evaluar el costo\n        - para `forecast` soporta `current`\n        - para `change`, `anomaly`, `threshold` soporta `last`\n- `time_window` - soporta roll-up diario, por ejemplo, `7d`\n- `function` - [opcional, por defecto es `threshold` monitor si se omite] soporta `change`, `anomaly`, `forecast`\n- `parameter` Especificar el parámetro del tipo\n    - para `change`:\n        - soporta `relative`, `absolute`\n        - [opcional] soporta `#`, donde `#` es un número entero o decimal utilizado para establecer el umbral\n    - para `anomaly`:\n        - soporta `direction=both`, `direction=above`, `direction=below`\n        - [opcional] soporta `threshold=#`, donde `#` es un número entero o decimal utilizado para establecer el umbral\n- `operator`\n    - para `threshold` soporta `<`, `<=`, `>`, `>=`, `==`, o `!=`\n    - para `cambio` soporta `>`, `<`\n    - para `anomalía` soporta `>=`\n    - para `pronóstico` soporta `>`\n- `#` un número entero o decimal utilizado para establecer el umbral.\n\n**Consulta de Alerta de Ruta de Red**\n\nEjemplo: `network-path(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operador #`\n\n- `query` La consulta de búsqueda - siguiendo la [sintaxis de búsqueda de registros](https://docs.datadoghq.com/logs/search_syntax/).\n- `index_name` El tipo de dato a monitorear - soporta `netpath-path` y `netpath-hop`.\n- `rollup_method`: El método de agregación de estadísticas - soporta `count`, `avg` y `cardinality`.\n- `measure` Para `avg` y `cardinality` `rollup_method` - especifique la medida o el nombre de la faceta que desea usar.\n- `time_window` #m (entre 1 y 2880), #h (entre 1 y 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, o `!=`.\n- `#` un número entero o decimal utilizado para establecer el umbral.",
     "summary": "Crear un monitor",
-    "request_description": "Crea el cuerpo de una solicitud de monitor.",
+    "request_description": "Crear el cuerpo de la solicitud del monitor.",
     "request_schema_description": "Objeto que describe un monitor."
   },
   "CheckCanDeleteMonitor": {
-    "description": "Comprueba si se pueden eliminar los monitores determinados.",
-    "summary": "Notebooks"
+    "description": "Verificar si los monitores dados pueden ser eliminados.",
+    "summary": "Verificar si un monitor puede ser eliminado"
   },
   "SearchMonitorGroups": {
-    "description": "Busca y filtra información detallada de tus grupos de monitores.",
+    "description": "Buscar y filtrar los detalles de tus grupos de monitores.",
     "summary": "Búsqueda de grupos de monitores"
   },
   "SearchMonitors": {
-    "description": "Busca y filtra información detallada de tu monitor.",
-    "summary": "Crear un monitor"
+    "description": "Buscar y filtrar los detalles de tus monitores.",
+    "summary": "Búsqueda de monitores"
   },
   "ValidateMonitor": {
-    "description": "Confirma el monitor proporcionado en la solicitud.\n\n**Nota**: Los monitores de logs requieren una clave de aplicación sin contexto.",
-    "summary": "Confirmar un monitor",
-    "request_description": "Monitorizar el objeto de la solicitud",
+    "description": "Validar el monitor proporcionado en la solicitud.\n\n**Nota**: Los monitores de registro requieren una clave de aplicación sin alcance.",
+    "summary": "Validar un monitor",
+    "request_description": "Objeto de solicitud del monitor",
     "request_schema_description": "Objeto que describe un monitor."
   },
   "DeleteMonitor": {
@@ -632,581 +632,581 @@
     "summary": "Eliminar un monitor"
   },
   "GetMonitor": {
-    "description": "Obtén información detallada del monitor especificado de tu organización.",
-    "summary": "Obtener información detallada de un monitor"
+    "description": "Obtener detalles sobre el monitor especificado de su organización.",
+    "summary": "Obtener los detalles de un monitor"
   },
   "UpdateMonitor": {
-    "description": "Edita el monitor especificado.",
+    "description": "Editar el monitor especificado.",
     "summary": "Editar un monitor",
-    "request_description": "Edita el cuerpo de una solicitud de monitor.",
-    "request_schema_description": "Objeto que describe una solicitud de actualización de un monitor."
+    "request_description": "Editar el cuerpo de la solicitud de un monitor.",
+    "request_schema_description": "Objeto que describe una solicitud de actualización de monitor."
   },
   "ListMonitorDowntimes": {
-    "description": "Obtén todos los tiempos de inactividad v1 del monitor especificado. **Nota:** Este endpoint está obsoleto. Utiliza endpoints v2.",
-    "summary": "Obtener tiempos de inactividad activos de un monitor"
+    "description": "Obtener todos los tiempos de inactividad activos v1 para el monitor especificado. **Nota:** Este endpoint ha sido desaprobado. Por favor, utilice los endpoints v2.",
+    "summary": "Obtener tiempos de inactividad activos para un monitor"
   },
   "MuteMonitor": {
-    "description": "Silencia el monitor especificado.",
+    "description": "Silenciar el monitor especificado.",
     "summary": "Silenciar un monitor"
   },
   "UnmuteMonitor": {
-    "description": "Desactiva el silenciamiento del monitor especificado.",
-    "summary": "Desactivar el silenciamiento de un monitor"
+    "description": "Activar el sonido del monitor especificado.",
+    "summary": "Activar el sonido de un monitor"
   },
   "ValidateExistingMonitor": {
-    "description": "Confirma el monitor proporcionado en la solicitud.",
-    "summary": "Confirmar un monitor existente",
-    "request_description": "Monitorizar el objeto de la solicitud",
+    "description": "Validar el monitor proporcionado en la solicitud.",
+    "summary": "Validar un monitor existente",
+    "request_description": "Objeto de solicitud del monitor",
     "request_schema_description": "Objeto que describe un monitor."
   },
   "GetMonthlyCustomReports": {
-    "description": "Obtén informes mensuales personalizados.\n**Nota:** Este endpoint quedará totalmente obsoleto el 1 de diciembre de 2022.\nConsulta la [migración de v1 a v2 de la API de atribución de uso](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener una lista de los informes personalizados mensuales disponibles"
+    "description": "Obtener informes personalizados mensuales.\n**Nota:** Este endpoint será completamente desaprobado el 1 de diciembre de 2022.\nConsulte [Migrando de v1 a v2 de la API de Atribución de Uso](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) para la guía de migración asociada.",
+    "summary": "Obtener la lista de informes personalizados mensuales disponibles."
   },
   "GetSpecifiedMonthlyCustomReports": {
-    "description": "Obtén informes diarios personalizados.\n**Nota:** Este endpoint quedará totalmente obsoleto el 1 de diciembre de 2022.\nConsulta la [migración de v1 a v2 de la API de atribución de uso](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener informes mensuales personalizados"
+    "description": "Obtén informes personalizados mensuales especificados.\n**Nota:** Este endpoint será completamente desaprobado el 1 de diciembre de 2022.\nConsulte [Migrando de v1 a v2 de la API de Atribución de Uso](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/) para la guía de migración asociada.",
+    "summary": "Obtén informes personalizados mensuales especificados."
   },
   "ListNotebooks": {
-    "description": "Obtén todos los notebooks. Esta acción también se puede utilizar para buscar notebooks con una `solicitud` concreta\nen el `nombre` o `gestor` de creadores del notebook.",
-    "summary": "Obtener todos los notebooks"
+    "description": "Obtén todos los cuadernos. Esto también se puede usar para buscar cuadernos con una `consulta` particular en el cuaderno.\n`nombre` o autor `handle`.",
+    "summary": "Obtén todos los cuadernos."
   },
   "CreateNotebook": {
-    "description": "Crea un notebook utilizando las opciones especificadas.",
-    "summary": "Cargar metadatos de IdP",
-    "request_description": "Descripción JSON del notebook que quieres crear.",
-    "request_schema_description": "Descripción de una solicitud de creación de notebook."
+    "description": "Crea un cuaderno utilizando las opciones especificadas.",
+    "summary": "Crea un cuaderno.",
+    "request_description": "La descripción JSON del cuaderno que deseas crear.",
+    "request_schema_description": "La descripción de una solicitud de creación de cuaderno."
   },
   "DeleteNotebook": {
-    "description": "Elimina un notebook utilizando el ID especificado.",
-    "summary": "Organizaciones"
+    "description": "Elimina un cuaderno utilizando el ID especificado.",
+    "summary": "Elimina un cuaderno."
   },
   "GetNotebook": {
-    "description": "Obtén un notebook utilizando el ID de notebook especificado.",
-    "summary": "Obtener un notebook"
+    "description": "Obtén un cuaderno utilizando el ID de cuaderno especificado.",
+    "summary": "Obtén un cuaderno."
   },
   "UpdateNotebook": {
-    "description": "Actualiza un notebook utilizando el ID especificado.",
-    "summary": "Actualizar un notebook",
-    "request_description": "Actualiza el cuerpo de una solicitud de notebook.",
-    "request_schema_description": "Descripción de una solicitud de actualización de notebook."
+    "description": "Actualiza un cuaderno utilizando el ID especificado.",
+    "summary": "Actualiza un cuaderno.",
+    "request_description": "Cuerpo de la solicitud de actualización del cuaderno.",
+    "request_schema_description": "La descripción de una solicitud de actualización de cuaderno."
   },
   "ListOrgs": {
-    "description": "Este endpoint devuelve datos de nivel superior sobre tu organización.",
-    "summary": "Ver un único objeto de servicio"
+    "description": "Este endpoint devuelve datos sobre tu organización de nivel superior.",
+    "summary": "Lista tus organizaciones gestionadas."
   },
   "CreateChildOrg": {
-    "description": "Crea una organización secundaria.\n\nEste endpoint requiere la función de\n[cuenta multiorganización](https://docs.datadoghq.com/account_management/multi_organization/)\ny debe habilitarse\n[poniéndose en contacto con el servicio de asistencia](https://docs.datadoghq.com/help/).\n\nUna vez creada la nueva organización secundaria, puedes interactuar con ella\nutilizando `org.public_id`, `api_key.key` y\n`application_key.hash` proporcionados en la respuesta.",
-    "summary": "Modificar un único objeto de servicio",
-    "request_description": "Objeto de organización que debe crearse",
-    "request_schema_description": "Objeto que describe una organización por crear."
+    "description": "Crea una organización hija.\n\nEste endpoint requiere el\n[multi-organization account](https://docs.datadoghq.com/account_management/multi_organization/)\ncaracterística y debe ser habilitada por\n[contacting support](https://docs.datadoghq.com/help/).\n\nUna vez que se crea una nueva organización hija, puedes interactuar con ella\nutilizando el `org.public_id`, `api_key.key`, y\n`application_key.hash` proporcionados en la respuesta.",
+    "summary": "Crea una organización hija",
+    "request_description": "Objeto de organización que necesita ser creado",
+    "request_schema_description": "Objeto que describe una organización a crear."
   },
   "GetOrg": {
-    "description": "Obtén información sobre la organización.",
-    "summary": "Obtener información sobre la organización"
+    "description": "Obtén información de la organización.",
+    "summary": "Obtén información de la organización"
   },
   "UpdateOrg": {
     "description": "Actualiza tu organización.",
-    "summary": "Actualizar tu organización",
+    "summary": "Actualiza tu organización",
     "request_description": "",
     "request_schema_description": "Crea, edita y gestiona organizaciones."
   },
   "DowngradeOrg": {
-    "description": "Sólo disponible para clientes MSP. Elimina una organización secundaria de la jerarquía de la organización principal y coloca la organización secundaria en un periodo de prueba de 30 días.",
-    "summary": "Organización Spin-off secundaria"
+    "description": "Solo disponible para clientes de MSP. Elimina una organización hija de la jerarquía de la organización principal y coloca la organización hija en un período de prueba de 30 días.",
+    "summary": "Organización Hija Spin-off"
   },
   "UploadIdPForOrg": {
-    "description": "Existen un par de opciones para actualizar el proveedor de identidad (IdP)\nde tu IdP SAML.\n\n* **Multipart Form-Data**: Publica el archivo de metadatos IdP utilizando un formulario.\n\n* **Cuerpo XML:** Publica el archivo de metadatos IdP como cuerpo de la solicitud.",
-    "summary": "Cargar metadatos de IdP",
+    "description": "Hay un par de opciones para actualizar el Proveedor de Identidad (IdP)\nmetadatos de tu IdP SAML.\n\n* **Multipart Form-Data**: Publica el archivo de metadatos del IdP utilizando un formulario de publicación.\n\n* **Cuerpo XML:** Publica el archivo de metadatos del IdP como el cuerpo de la solicitud.",
+    "summary": "Sube los metadatos del IdP",
     "request_description": "",
-    "request_schema_description": "Objeto que describe la configuración de IdP."
+    "request_schema_description": "Objeto que describe la configuración del IdP."
   },
   "QueryMetrics": {
     "description": "Consulta puntos de series temporales.",
-    "summary": "Consultar puntos de series temporales"
+    "summary": "Consulta puntos de series temporales"
   },
   "ListMetrics": {
     "description": "**Nota**: Este endpoint está obsoleto. Utiliza `/api/v2/metrics` en su lugar.\n\nBusca métricas de las últimas 24 horas en Datadog.",
-    "summary": "Buscar métricas"
+    "summary": "Busca métricas"
   },
   "AddSecurityMonitoringSignalToIncident": {
-    "description": "Añade una señal de seguridad a un incidente. Esto permite buscar señales por incidente dentro del explorador de señales y ver las señales en la línea de tiempo del incidente.",
-    "summary": "Añadir una señal de seguridad a un incidente",
-    "request_description": "Atributos que describen la modificación de la señal.",
-    "request_schema_description": "Atributos que describen a qué incidente añadir la señal."
+    "description": "Agrega una señal de seguridad a un incidente. Esto permite buscar señales por incidente dentro del explorador de señales y ver las señales en la línea de tiempo del incidente.",
+    "summary": "Agrega una señal de seguridad a un incidente",
+    "request_description": "Atributos que describen la actualización de la señal.",
+    "request_schema_description": "Atributos que describen a qué incidente agregar la señal."
   },
   "EditSecurityMonitoringSignalAssignee": {
-    "description": "Este endpoint está obsoleto - Modifica el asignatario de triaje de una señal de seguridad.",
-    "summary": "Modificar el usuario que tiene asignada la evaluación de una señal de seguridad.",
-    "request_description": "Atributos que describen la modificación de la señal.",
-    "request_schema_description": "Atributos que describen una operación de actualización de asignatario a través de una señal de seguridad."
+    "description": "Este endpoint está obsoleto - Modifica el asignado de triage de una señal de seguridad.",
+    "summary": "Modifica el asignado de triage de una señal de seguridad",
+    "request_description": "Atributos que describen la actualización de la señal.",
+    "request_schema_description": "Atributos que describen una operación de actualización de asignado sobre una señal de seguridad."
   },
   "EditSecurityMonitoringSignalState": {
-    "description": "Este endpoint está obsoleto - Cambia el estado de triaje de una señal de seguridad.",
-    "summary": "Cambiar el estado que tiene la evaluación de una señal de seguridad",
-    "request_description": "Atributos que describen la modificación de la señal.",
-    "request_schema_description": "Atributos que describen el cambio de estado de un estado determinado."
+    "description": "Este endpoint está obsoleto - Cambia el estado de triage de una señal de seguridad.",
+    "summary": "Cambia el estado de triage de una señal de seguridad",
+    "request_description": "Atributos que describen la actualización de la señal.",
+    "request_schema_description": "Atributos que describen el cambio de estado para un estado dado."
   },
   "SubmitMetrics": {
-    "description": "El endpoint de métricas te permite publicar datos de series temporales que pueden representarse gráficamente en dashboards de Datadog.\nEl tamaño máximo de la carga útil es de 3,2 megabytes (3200000 bytes). Las cargas útiles comprimidas deben tener un tamaño descomprimido inferior a 62 megabytes (62914560 bytes).\n\nSi envías métricas directamente a la API Datadog sin utilizar DogStatsD, espera:\n\n- 64 bits para la marca de tiempo\n- 64 bits para el valor\n- 40 bytes para los nombres de métrica \n- 50 bytes para las series temporales\n- La carga útil completa es de aproximadamente 100 bytes. Sin embargo, con la API DogStatsD \nse aplica una compresión, lo que reduce el tamaño de la carga útil.",
+    "description": "El punto final de métricas permite publicar datos de series temporales que se pueden graficar en los paneles de Datadog.\nEl tamaño máximo de carga útil es de 3.2 megabytes (3200000 bytes). Las cargas útiles comprimidas deben tener un tamaño descomprimido de menos de 62 megabytes (62914560 bytes).\n\nSi está enviando métricas directamente a la API de Datadog sin usar DogStatsD, espere:\n\n- 64 bits para la marca de tiempo\n- 64 bits para el valor\n- 40 bytes para los nombres de las métricas\n- 50 bytes para las series temporales\n- La carga útil completa es de aproximadamente 100 bytes. Sin embargo, con la API de DogStatsD,\nse aplica compresión, lo que reduce el tamaño de la carga útil.",
     "summary": "Enviar métricas",
     "request_description": "",
-    "request_schema_description": "Carga útil de las métricas."
+    "request_schema_description": "La carga útil de las métricas."
   },
   "ListServiceDependencies": {
-    "description": "Obtén una lista de servicios APM y sus dependencias. Los servicios recuperados son filtrados por entorno y por\netiqueta primaria, si se ha definido una.",
-    "summary": "Obtener todas las dependencias de servicios APM"
+    "description": "Obtener una lista de servicios de APM y sus dependencias. Los servicios recuperados están filtrados por entorno y una\netiqueta principal, si se define una.",
+    "summary": "Obtener todas las dependencias de servicio de APM"
   },
   "ListSingleServiceDependencies": {
-    "description": "Obtén los servicios inmediatamente anteriores y posteriores de un servicio específico .\nLos servicios recuperados son filtrados por entorno y por etiqueta primaria, si se ha definido una.",
-    "summary": "Obtener una dependencia de servicio APM"
+    "description": "Obtener los servicios inmediatos aguas arriba y aguas abajo de un servicio específico.\nLos servicios recuperados están filtrados por entorno y una etiqueta principal, si se define una.",
+    "summary": "Obtener las dependencias de un servicio de APM"
   },
   "ListSLOs": {
-    "description": "Obtén una lista de objetos de objetivos de nivel de servicio (SLOs) para tu organización.",
-    "summary": "Obtener todos los SLOs"
+    "description": "Obtén una lista de objetos de objetivos de nivel de servicio para tu organización.",
+    "summary": "Obtén todos los SLOs"
   },
   "CreateSLO": {
-    "description": "Crea un objeto objetivo de nivel de servicio (SLO).",
-    "summary": "Crear un objeto SLO",
-    "request_description": "Objeto de solicitud de objetivos de nivel de servicio.",
-    "request_schema_description": "Un objeto de solicitud de objetivo de nivel de servicio incluye un indicador de nivel servicio, umbrales\npara uno o varios periodos de tiempo y metadatos (`nombre`, `descripción`, `etiquetas`, etc.)."
+    "description": "Crea un objeto de objetivo de nivel de servicio.",
+    "summary": "Crea un objeto SLO",
+    "request_description": "Objeto de solicitud de objetivo de nivel de servicio.",
+    "request_schema_description": "Un objeto de objetivo de nivel de servicio incluye un indicador de nivel de servicio, umbrales\npara uno o más períodos de tiempo, y metadatos (`nombre`, `descripción`, `etiquetas`, etc.)."
   },
   "DeleteSLOTimeframeInBulk": {
-    "description": "Elimina (o elimina parcialmente) varios objetos de objetivos de nivel de servicio.\n\nEste endpoint facilita la eliminación de uno o varios umbrales para uno o varios\nobjetos de objetivos de nivel de servicio. Si se eliminan todos los umbrales, el objeto de objetivos de nivel servicio \ntambién se elimina.",
-    "summary": "Eliminación masiva de periodos de tiempo de SLOs",
-    "request_description": "Elimina el cuerpo de una solicitud de varios objetos de objetivos de nivel de servicio.",
-    "request_schema_description": "Una asignación de ID de objeto de objetivos de nivel de servicio a matrices de periodos de tiempo,\nque indican los umbrales a eliminar para cada ID."
+    "description": "Elimina (o elimina parcialmente) múltiples objetos de objetivos de nivel de servicio.\n\nEste endpoint facilita la eliminación de uno o más umbrales para uno o más\nobjetos de objetivos de nivel de servicio. Si se eliminan todos los umbrales, el objetivo de nivel de servicio\ntambién se elimina.",
+    "summary": "Eliminación masiva de períodos de tiempo de SLO",
+    "request_description": "Cuerpo de solicitud para eliminar múltiples objetos de objetivos de nivel de servicio.",
+    "request_schema_description": "Un mapa de IDs de objetos de objetivos de nivel de servicio a arreglos de períodos de tiempo,\nque indican los umbrales a eliminar para cada ID."
   },
   "CheckCanDeleteSLO": {
-    "description": "Comprueba si un SLO puede eliminarse de forma segura. Por ejemplo,\nasegúrate de que un SLO puede eliminarse sin interrumpir un dashboard.",
-    "summary": "Comprobar si los SLOs pueden eliminarse de forma segura"
+    "description": "Verifica si un SLO puede ser eliminado de manera segura. Por ejemplo,\nasegúrate de que un SLO pueda ser eliminado sin interrumpir un panel de control.",
+    "summary": "Verifica si los SLOs pueden ser eliminados de manera segura."
   },
   "ListSLOCorrection": {
-    "description": "Obtén todas las correcciones del objetivo de nivel de servicio.",
-    "summary": "Obtener todas las correcciones de SLOs"
+    "description": "Obtén todas las correcciones de los Objetivos de Nivel de Servicio.",
+    "summary": "Obtén todas las correcciones de SLO."
   },
   "CreateSLOCorrection": {
-    "description": "Crea la corrección de un SLO.",
-    "summary": "Crear la corrección de un SLO",
-    "request_description": "Crear la corrección de un SLO",
-    "request_schema_description": "Objeto que define una corrección que debe aplicarse a un SLO."
+    "description": "Crea una corrección de SLO.",
+    "summary": "Crea una corrección de SLO.",
+    "request_description": "Crea una corrección de SLO.",
+    "request_schema_description": "Un objeto que define una corrección que se aplicará a un SLO."
   },
   "DeleteSLOCorrection": {
-    "description": "Elimina permanentemente el objeto de corrección de un SLO especificado.",
-    "summary": "Eliminar la corrección de un SLO"
+    "description": "Elimina permanentemente el objeto de corrección de SLO especificado.",
+    "summary": "Elimina una corrección de SLO."
   },
   "GetSLOCorrection": {
-    "description": "Obtén la corrección de un SLO.",
-    "summary": "Obtener la corrección de un SLO"
+    "description": "Obtén una corrección de SLO.",
+    "summary": "Obtén una corrección de SLO para un SLO."
   },
   "UpdateSLOCorrection": {
-    "description": "Actualiza el objeto de corrección de un SLO especificado.",
-    "summary": "Actualizar la corrección de un SLO",
-    "request_description": "Objeto de corrección de un SLO modificado.",
-    "request_schema_description": "Objeto que define una corrección que debe aplicarse a un SLO."
+    "description": "Actualiza el objeto de corrección de SLO especificado.",
+    "summary": "Actualiza una corrección de SLO.",
+    "request_description": "El objeto de corrección de SLO editado.",
+    "request_schema_description": "Un objeto que define una corrección que se aplicará a un SLO."
   },
   "SearchSLO": {
     "description": "Obtén una lista de objetos de objetivos de nivel de servicio para tu organización.",
-    "summary": "Buscar SLOs"
+    "summary": "Busca SLOs."
   },
   "DeleteSLO": {
-    "description": "Elimina permanentemente el objeto de objetivos de nivel de servicio especificado.\n\nSi se utiliza un SLO en un dashboard, el endpoint `DELETE /v1/slo/` devuelve\nun error de conflicto 409 porque se hace referencia al SLO en un dashboard.",
-    "summary": "Eliminar un SLO"
+    "description": "Elimina permanentemente el objeto de objetivo de nivel de servicio especificado.\n\nSi un SLO se utiliza en un panel, el endpoint `DELETE /v1/slo/` devuelve\nun error de conflicto 409 porque el SLO está referenciado en un panel.",
+    "summary": "Elimina un SLO."
   },
   "GetSLO": {
-    "description": "Obtén un objeto de objetivos de nivel servicio.",
-    "summary": "Obtener información detallada de un SLO"
+    "description": "Obtén un objeto de objetivo de nivel de servicio.",
+    "summary": "Obtén los detalles de un SLO."
   },
   "UpdateSLO": {
-    "description": "Actualiza el objeto de objetivos de nivel de servicio especificado.",
-    "summary": "Actualizar un SLO",
-    "request_description": "El objeto de solicitud de objetivos de nivel de servicio modificado.",
-    "request_schema_description": "Un objeto de solicitud de objetivo de nivel de servicio incluye un indicador de nivel de servicio, umbrales\npara uno o varios periodos de tiempo y metadatos (`nombre`, `descripción`, `etiquetas`, etc.)."
+    "description": "Actualiza el objeto del objetivo de nivel de servicio especificado.",
+    "summary": "Actualiza un SLO",
+    "request_description": "El objeto de solicitud del objetivo de nivel de servicio editado.",
+    "request_schema_description": "Un objeto de objetivo de nivel de servicio incluye un indicador de nivel de servicio, umbrales\npara uno o más períodos de tiempo, y metadatos (`nombre`, `descripción`, `etiquetas`, etc.)."
   },
   "GetSLOCorrections": {
-    "description": "Obtener correcciones aplicadas a un SLO",
-    "summary": "Obtener correcciones para un SLO"
+    "description": "Obtén las correcciones aplicadas a un SLO",
+    "summary": "Obtén correcciones para un SLO"
   },
   "GetSLOHistory": {
-    "description": "Obtén el historial de un SLO específico, independientemente de su tipo de SLO.\n\nLos datos detallados del historial se estructuran según el tipo de datos de origen.\nPor ejemplo, los datos de métricas se incluyen para los SLOs de evento que utilizan\nla fuente de métricas y los tipos de SLOs de monitor incluyen el historial de transición del monitor.\n\n**Nota:** Existen diferentes formatos de respuesta para los SLOs basados en eventos y en el tiempo.\nSe muestran ejemplos de ambos.",
-    "summary": "Obtener el historial de un SLO"
+    "description": "Obtén el historial de un SLO específico, independientemente de su tipo de SLO.\n\nLos datos del historial detallado están estructurados de acuerdo con el tipo de datos de origen.\nPor ejemplo, se incluye datos métricos para SLOs de eventos que utilizan\nla fuente métrica, y los tipos de SLO de monitoreo incluyen el historial de transición del monitoreo.\n\n**Nota:** Hay diferentes formatos de respuesta para SLOs basados en eventos y SLOs basados en tiempo.\nSe muestran ejemplos de ambos.",
+    "summary": "Obtén el historial de un SLO"
   },
   "GetSyntheticsCIBatch": {
-    "description": "Obtén información detallada actualizada de un lote.",
-    "summary": "Obtener información detallada del lote"
+    "description": "Obtén los detalles actualizados de un lote.",
+    "summary": "Obtén detalles del lote"
   },
   "ListLocations": {
-    "description": "Obtén la lista de ubicaciones públicas y privadas disponibles para tests Synthetic.\nNo se requieren argumentos.",
-    "summary": "Obtener todas las localizaciones (públicas y privadas)"
+    "description": "Obtén la lista de ubicaciones públicas y privadas disponibles para Synthetic\npruebas. No se requieren argumentos.",
+    "summary": "Obtén todas las ubicaciones (públicas y privadas)"
   },
   "CreatePrivateLocation": {
-    "description": "Crea una nueva localización Synthetic privada.",
-    "summary": "Crear una localización privada",
-    "request_description": "Información detallada de la localización privada por crear",
-    "request_schema_description": "Objeto que contiene información sobre la localización privada por crear"
+    "description": "Crea una nueva ubicación privada sintética.",
+    "summary": "Crea una ubicación privada",
+    "request_description": "Detalles de la ubicación privada a crear.",
+    "request_schema_description": "Objeto que contiene información sobre la ubicación privada a crear."
   },
   "DeletePrivateLocation": {
-    "description": "Elimina una localización Synthetic privada.",
-    "summary": "Eliminar una localización privada"
+    "description": "Eliminar una ubicación privada sintética.",
+    "summary": "Eliminar una ubicación privada."
   },
   "GetPrivateLocation": {
-    "description": "Obtén una localización Synthetic privada.",
-    "summary": "Obtener una localización privada"
+    "description": "Obtener una ubicación privada sintética.",
+    "summary": "Obtener una ubicación privada."
   },
   "UpdatePrivateLocation": {
-    "description": "Modifica una localización Synthetic privada.",
-    "summary": "Modificar una localización privada",
-    "request_description": "Información detallada de la localización privada a actualizar.",
-    "request_schema_description": "Objeto que contiene información sobre la localización privada por crear"
+    "description": "Editar una ubicación privada sintética.",
+    "summary": "Editar una ubicación privada.",
+    "request_description": "Detalles de la ubicación privada a actualizar.",
+    "request_schema_description": "Objeto que contiene información sobre la ubicación privada a crear."
   },
   "GetSyntheticsDefaultLocations": {
-    "description": "Obtenga la configuración de localizaciones predeterminadas.",
-    "summary": "Obtener localizaciones predeterminadas"
+    "description": "Obtener la configuración de ubicaciones predeterminadas.",
+    "summary": "Obtener las ubicaciones predeterminadas."
   },
   "ListTests": {
-    "description": "Obtén la lista de todos los tests Synthetic.",
-    "summary": "Obtener la lista de todos los tests Synthetic"
+    "description": "Obtener la lista de todas las pruebas sintéticas.",
+    "summary": "Obtener la lista de todas las pruebas sintéticas."
   },
   "CreateTest": {
-    "description": "Este endpoint está obsoleto. Para crear un test, utiliza [Crear un test de API](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test), o [Crear un test de navegador](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test).",
-    "summary": "Crear un test",
-    "request_description": "Información detallada del test a crear.",
-    "request_schema_description": "Objeto que contiene información detallada de tu test Synthetic."
+    "description": "Este endpoint está obsoleto. Para crear una prueba, utiliza [Crear una prueba de API](https://docs.datadoghq.com/api/latest/synthetics/#create-an-api-test), o [Crear una prueba de navegador](https://docs.datadoghq.com/api/latest/synthetics/#create-a-browser-test).",
+    "summary": "Crear una prueba.",
+    "request_description": "Detalles de la prueba a crear.",
+    "request_schema_description": "Objeto que contiene detalles sobre tu prueba sintética."
   },
   "CreateSyntheticsAPITest": {
-    "description": "Crea un test de API Synthetic.",
-    "summary": "Crear un test de API",
-    "request_description": "Información detallada del test a crear.",
-    "request_schema_description": "Objeto que contiene información detallada de un test de API Synthetic."
+    "description": "Crear una prueba de API sintética.",
+    "summary": "Crear una prueba de API.",
+    "request_description": "Detalles de la prueba a crear.",
+    "request_schema_description": "Objeto que contiene detalles sobre una prueba de API sintética."
   },
   "GetAPITest": {
-    "description": "Obtén la configuración detallada, asociada a\nun test de API Synthetic.",
-    "summary": "Obtener un test de API"
+    "description": "Obtenga la configuración detallada asociada con\nuna prueba de API sintética.",
+    "summary": "Obtenga una prueba de API"
   },
   "UpdateAPITest": {
-    "description": "Edita la configuración de un test de API Synthetic.",
-    "summary": "Editar un test de API",
-    "request_description": "Nueva información detallada del test que se va a guardar.",
-    "request_schema_description": "Objeto que contiene información detallada de un test de API Synthetic."
+    "description": "Edite la configuración de una prueba de API sintética.",
+    "summary": "Edite una prueba de API",
+    "request_description": "Nuevos detalles de prueba que se guardarán.",
+    "request_schema_description": "Objeto que contiene detalles sobre una prueba de API sintética."
   },
   "CreateSyntheticsBrowserTest": {
-    "description": "Crea un test de navegador Synthetic.",
-    "summary": "Crear un test de navegador",
-    "request_description": "Información detallada del test a crear.",
-    "request_schema_description": "Objeto que contiene información detallada de un test de navegador Synthetic."
+    "description": "Cree una prueba de navegador sintética.",
+    "summary": "Cree una prueba de navegador",
+    "request_description": "Detalles de la prueba a crear.",
+    "request_schema_description": "Objeto que contiene detalles sobre una prueba de navegador sintética."
   },
   "GetBrowserTest": {
-    "description": "Obtén la configuración detallada (incluyendo los pasos), asociada a\nun test de navegador Synthetic.",
-    "summary": "Obtener un test de navegador"
+    "description": "Obtenga la configuración detallada (incluidos los pasos) asociada con\nuna prueba de navegador sintética.",
+    "summary": "Obtenga una prueba de navegador"
   },
   "UpdateBrowserTest": {
-    "description": "Edita la configuración de un test de navegador Synthetic.",
-    "summary": "Editar un test de navegador",
-    "request_description": "Nueva información detallada del test que se va a guardar.",
-    "request_schema_description": "Objeto que contiene información detallada de un test de navegador Synthetic."
+    "description": "Edite la configuración de una prueba de navegador sintética.",
+    "summary": "Edite una prueba de navegador",
+    "request_description": "Nuevos detalles de prueba que se guardarán.",
+    "request_schema_description": "Objeto que contiene detalles sobre una prueba de navegador sintética."
   },
   "GetBrowserTestLatestResults": {
-    "description": "Obtén los últimos 150 resúmenes de los resultados de un determinado test de navegador Synthetic.",
-    "summary": "Obtén los resúmenes de los últimos resultados de un test de navegador"
+    "description": "Obtenga los últimos 150 resúmenes de resultados de prueba para una prueba de navegador sintética dada.",
+    "summary": "Obtenga los últimos resúmenes de resultados de una prueba de navegador"
   },
   "GetBrowserTestResult": {
-    "description": "Obtén un resultado completo específico de un test de navegador Synthetic determinado.",
-    "summary": "Obtener el resultado de un test de navegador"
+    "description": "Obtenga un resultado completo específico de una prueba de navegador sintética dada.",
+    "summary": "Obtenga un resultado de prueba de navegador"
   },
   "DeleteTests": {
-    "description": "Eliminar varios tests Synthetic por ID.",
-    "summary": "Eliminar tests",
-    "request_description": "Lista de ID públicos de los tests Synthetic a eliminar.",
-    "request_schema_description": "Lista JSON del o los ID de los tests Synthetic que quieres\neliminar."
+    "description": "Elimine múltiples pruebas sintéticas por ID.",
+    "summary": "Eliminar pruebas",
+    "request_description": "Lista de ID pública de las pruebas sintéticas que se eliminarán.",
+    "request_schema_description": "Una lista JSON de la o las ID de las pruebas sintéticas que desea\neliminar."
   },
   "CreateSyntheticsMobileTest": {
-    "description": "Cree un test móvil Synthetic.",
-    "summary": "Crear un test móvil",
-    "request_description": "Información detallada del test a crear.",
-    "request_schema_description": "Objeto que contiene información detallada de un test móvil Synthetic."
+    "description": "Crear una prueba móvil sintética.",
+    "summary": "Crear una prueba móvil",
+    "request_description": "Detalles de la prueba a crear.",
+    "request_schema_description": "Objeto que contiene detalles sobre una prueba móvil sintética."
   },
   "GetMobileTest": {
-    "description": "Obtén la configuración detallada asociada a\nun test móvil Synthetic.",
-    "summary": "Obtener un test móvil"
+    "description": "Obtenga la configuración detallada asociada con\nuna prueba móvil sintética.",
+    "summary": "Obtener una prueba móvil"
   },
   "UpdateMobileTest": {
-    "description": "Edita la configuración de un test móvil Synthetic.",
-    "summary": "Editar un test móvil",
-    "request_description": "Nueva información detallada del test que se va a guardar.",
-    "request_schema_description": "Objeto que contiene información detallada de un test móvil Synthetic."
+    "description": "Editar la configuración de una prueba móvil sintética.",
+    "summary": "Editar una prueba móvil",
+    "request_description": "Nuevos detalles de prueba que se guardarán.",
+    "request_schema_description": "Objeto que contiene detalles sobre una prueba móvil sintética."
   },
   "SearchTests": {
-    "description": "Busca los Synthetic tests.",
-    "summary": "Buscar Synthetic test"
+    "description": "Buscar pruebas sintéticas.",
+    "summary": "Buscar pruebas sintéticas"
   },
   "TriggerTests": {
-    "description": "Activa un conjunto de tests Synthetic.",
-    "summary": "Activador de tests Synthetic",
-    "request_description": "Identificadores de los tests a activar.",
-    "request_schema_description": "Objeto que describe los tests Synthetic a activar."
+    "description": "Activar un conjunto de pruebas sintéticas.",
+    "summary": "Activar pruebas sintéticas",
+    "request_description": "Los identificadores de las pruebas a activar.",
+    "request_schema_description": "Objeto que describe las pruebas sintéticas a activar."
   },
   "TriggerCITests": {
-    "description": "Activa un conjunto de tests Synthetic para la integración continua.",
-    "summary": "Activar tests a partir de procesos CI/CD",
-    "request_description": "Información detallada de los tests a activar.",
-    "request_schema_description": "Objeto que describe los tests Synthetic a activar."
+    "description": "Activar un conjunto de pruebas sintéticas para integración continua.",
+    "summary": "Activar pruebas desde pipelines de CI/CD",
+    "request_description": "Detalles de la prueba a activar.",
+    "request_schema_description": "Objeto que describe las pruebas sintéticas a activar."
   },
   "FetchUptimes": {
-    "description": "Obtén el tiempo de actividad de varios tests Synthetic por ID.",
-    "summary": "Obtener el tiempo de actividad de varios tests",
-    "request_description": "Lista de ID públicos de los tests Synthetic y los periodos de tiempo.",
-    "request_schema_description": "Objeto que contiene los ID de los tests Synthetic y un periodo de tiempo."
+    "description": "Obtener el tiempo de actividad de múltiples pruebas sintéticas por ID.",
+    "summary": "Obtener el tiempo de actividad de múltiples pruebas.",
+    "request_description": "Lista pública de ID de las pruebas sintéticas y el período de tiempo.",
+    "request_schema_description": "Objeto que contiene los ID de las pruebas sintéticas y un período de tiempo."
   },
   "GetTest": {
-    "description": "Obtén la configuración detallada, asociada a un test Synthetic.",
-    "summary": "Obtener la configuración de un test"
+    "description": "Obtener la configuración detallada asociada con una prueba sintética.",
+    "summary": "Obtener la configuración de una prueba."
   },
   "PatchTest": {
-    "description": "Parchea la configuración de un test Synthetic con datos parciales.",
-    "summary": "Parcheo de un test Synthetic",
-    "request_description": "Lista de operaciones compatible con [parches JSON](https://jsonpatch.com/)",
-    "request_schema_description": "Envuelve una matriz de operaciones de [parches JSON](https://jsonpatch.com) para realizar en el test"
+    "description": "Actualizar la configuración de una prueba sintética con datos parciales.",
+    "summary": "Actualizar una prueba sintética.",
+    "request_description": "Lista de operaciones conforme a [JSON Patch](https://jsonpatch.com/).",
+    "request_schema_description": "Contenedor alrededor de un arreglo de operaciones de [JSON Patch](https://jsonpatch.com) para realizar en la prueba."
   },
   "UpdateTest": {
-    "description": "Este endpoint está obsoleto. Para modificar un test, utiliza [Modificar un test de API](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test) o [Editar un test de navegador](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test).",
-    "summary": "Editar un test",
-    "request_description": "Nueva información detallada del test que se va a guardar.",
-    "request_schema_description": "Objeto que contiene información detallada de tu test Synthetic."
+    "description": "Este endpoint está obsoleto. Para editar una prueba, use [Editar una prueba de API](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test) o [Editar una prueba de navegador](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test).",
+    "summary": "Editar una prueba.",
+    "request_description": "Nuevos detalles de prueba que se guardarán.",
+    "request_schema_description": "Objeto que contiene detalles sobre tu prueba sintética."
   },
   "GetAPITestLatestResults": {
-    "description": "Obtén los últimos 150 resúmenes de los resultados de un determinado test de API Synthetic.",
-    "summary": "Obtener los resúmenes de los últimos resultados de un test de API"
+    "description": "Obtener los últimos 150 resúmenes de resultados de pruebas para una prueba de API sintética dada.",
+    "summary": "Obtener los últimos resúmenes de resultados de una prueba de API."
   },
   "GetAPITestResult": {
-    "description": "Obtén un resultado completo específico de un test de API Synthetic determinado.",
-    "summary": "Obtener el resultado de un test de API"
+    "description": "Obtener un resultado completo específico de una prueba de API sintética dada.",
+    "summary": "Obtener un resultado de prueba de API."
   },
   "UpdateTestPauseStatus": {
-    "description": "Pausa o inicia un test Synthetic cambiando el estado.",
-    "summary": "Pausar o iniciar un test",
-    "request_description": "Estado en el que se encuentra el test Synthetic.",
-    "request_schema_description": "Objeto para iniciar o pausar un test Synthetic existente."
+    "description": "Pausar o iniciar una prueba sintética cambiando el estado.",
+    "summary": "Pausar o iniciar una prueba.",
+    "request_description": "Estado para establecer la prueba sintética dada.",
+    "request_schema_description": "Objeto para iniciar o pausar una prueba sintética existente."
   },
   "ListGlobalVariables": {
-    "description": "Obtén la lista de todas las variables globales Synthetic.",
+    "description": "Obtener la lista de todas las variables globales sintéticas.",
     "summary": "Obtener todas las variables globales"
   },
   "CreateGlobalVariable": {
-    "description": "Crea una variable global Synthetic.",
+    "description": "Crear una variable global sintética.",
     "summary": "Crear una variable global",
-    "request_description": "Información detallada de la variable global por crear",
-    "request_schema_description": "Información detallada de la variable global por crear"
+    "request_description": "Detalles de la variable global a crear.",
+    "request_schema_description": "Detalles de la variable global a crear."
   },
   "DeleteGlobalVariable": {
-    "description": "Elimina una variable global Synthetic.",
+    "description": "Eliminar una variable global sintética.",
     "summary": "Eliminar una variable global"
   },
   "GetGlobalVariable": {
-    "description": "Obtén la configuración detallada de una variable global.",
+    "description": "Obtener la configuración detallada de una variable global.",
     "summary": "Obtener una variable global"
   },
   "EditGlobalVariable": {
-    "description": "Modifica una variable global Synthetic.",
-    "summary": "Modificar una variable global",
-    "request_description": "Información detallada de la variable global a actualizar.",
-    "request_schema_description": "Información detallada de la variable global por crear"
+    "description": "Editar una variable global sintética.",
+    "summary": "Editar una variable global",
+    "request_description": "Detalles de la variable global a actualizar.",
+    "request_schema_description": "Detalles de la variable global a crear."
   },
   "ListHostTags": {
-    "description": "Devuelve una asignación de etiquetas a hosts para toda tu infraestructura.",
-    "summary": "Obtener etiquetas"
+    "description": "Devuelve un mapeo de etiquetas a hosts. Para cada etiqueta, la respuesta devuelve una lista de nombres de host que contienen esta etiqueta. Hay una restricción de 10,000 nombres de host totales de la organización que pueden ser adjuntados a etiquetas y devueltos.",
+    "summary": "Obtener todas las etiquetas de host"
   },
   "DeleteHostTags": {
-    "description": "Este endpoint te permite eliminar todas las etiquetas asignadas a usuarios\npara un único host.",
-    "summary": "Eliminar etiquetas de hosts"
+    "description": "Este endpoint permite eliminar todas las etiquetas\npara un solo host. Si no se especifica una fuente, solo se elimina de la fuente \"Usuario\".",
+    "summary": "Eliminar etiquetas de host"
   },
   "GetHostTags": {
-    "description": "Devuelve la lista de etiquetas que se aplican a un host determinado.",
-    "summary": "Obtener etiquetas de hosts"
+    "description": "Devolver la lista de etiquetas que se aplican a un host dado.",
+    "summary": "Obtener etiquetas de host"
   },
   "CreateHostTags": {
-    "description": "Este endpoint permite añadir nuevas etiquetas a un host,\nespecificando opcionalmente de dónde proceden estas etiquetas).",
-    "summary": "Añadir etiquetas a un host",
-    "request_description": "Actualiza el cuerpo de una solicitud de etiquetas de hosts.",
-    "request_schema_description": "Conjunto de etiquetas para asociar a tu host."
+    "description": "Este punto final permite agregar nuevas etiquetas a un host,\nespecificando opcionalmente de qué fuente provienen estas etiquetas. Si las etiquetas ya existen, se añaden nuevas etiquetas a la lista de etiquetas. Si no se especifica una fuente, se predetermina a \"usuario\".",
+    "summary": "Agregar etiquetas a un host",
+    "request_description": "Actualizar el cuerpo de la solicitud de etiquetas de host.",
+    "request_schema_description": "Nombre del host y un arreglo de sus etiquetas"
   },
   "UpdateHostTags": {
-    "description": "Este endpoint te permite actualizar/sustituir todas las etiquetas en\nuna fuente de integraciones con aquellas proporcionadas en la solicitud.",
-    "summary": "Actualizar etiquetas de hosts",
-    "request_description": "Añadir etiquetas a hosts",
-    "request_schema_description": "Conjunto de etiquetas para asociar a tu host."
+    "description": "Este punto final permite actualizar/reemplazar todas las etiquetas en\nuna fuente de integración con las que se proporcionan en la solicitud.",
+    "summary": "Actualizar etiquetas de host",
+    "request_description": "Agregar etiquetas a un host",
+    "request_schema_description": "Nombre del host y un arreglo de sus etiquetas"
   },
   "GetUsageAnalyzedLogs": {
-    "description": "Obtén el uso por hora de logs analizados (Monitorización de seguridad).\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de la API de uso por hora de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de los logs analizados"
+    "description": "Obtener uso horario para registros analizados (Monitoreo de Seguridad).\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso horario para registros analizados"
   },
   "GetUsageAuditLogs": {
-    "description": "Obtén el uso por hora de logs de auditoría.\n**Nota:** Este endpoint ha quedado obsoleto.",
-    "summary": "Obtener el uso por hora de logs de auditoría"
+    "description": "Obtén el uso horario de los registros de auditoría.\n**Nota:** Este punto final ha sido desaprobado.",
+    "summary": "Obtén el uso horario de los registros de auditoría."
   },
   "GetUsageLambda": {
-    "description": "Obtén el uso por hora de Lambda.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de por hora de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de Lambda"
+    "description": "Obtén el uso horario de Lambda.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario de Lambda."
   },
   "GetUsageBillableSummary": {
-    "description": "Obtén el uso facturable de tu cuenta.\n\nEste endpoint sólo es accesible para [organizaciones de nivel superior](https://docs.datadoghq.com/account_management/multi_organization/).",
-    "summary": "Obtener el uso facturable de tu cuenta"
+    "description": "Obtén el uso facturable en tu cuenta.\n\nEste punto final solo es accesible para [organizaciones de nivel padre](https://docs.datadoghq.com/account_management/multi_organization/).",
+    "summary": "Obtén el uso facturable en tu cuenta."
   },
   "GetUsageCIApp": {
-    "description": "Obtén el uso por hora de CI Visibility.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de la API de por hora de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de CI Visibility"
+    "description": "Obtén el uso horario para la visibilidad de CI (pruebas, canalizaciones y spans).\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario para la visibilidad de CI."
   },
   "GetUsageCloudSecurityPostureManagement": {
-    "description": "Obtén el uso por hora de la gestión de seguridad de la nube (CSM).\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de la API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de CSM Pro"
+    "description": "Obtén el uso horario para la gestión de seguridad en la nube (CSM) Pro.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario para CSM Pro."
   },
   "GetUsageCWS": {
-    "description": "Obtén el uso por hora de la seguridad de cargas de trabajo en la nube.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de la seguridad de cargas de trabajo en la nube"
+    "description": "Obtén el uso horario para la seguridad de cargas de trabajo en la nube.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario para la seguridad de cargas de trabajo en la nube."
   },
   "GetUsageDBM": {
-    "description": "Obtén el uso por hora de la monitorización de bases de datos.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de la monitorización de bases de datos"
+    "description": "Obtén el uso horario para la monitorización de bases de datos.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario para la monitorización de bases de datos."
   },
   "GetUsageFargate": {
-    "description": "Obtén el uso por hora de [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/)\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de Fargate"
+    "description": "Obtén el uso horario para [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario para Fargate."
   },
   "GetUsageHosts": {
-    "description": "Obtén el uso por hora de hosts y contenedores.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de hosts y contenedores"
+    "description": "Obtén el uso horario para hosts y contenedores.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario para hosts y contenedores."
   },
   "GetHourlyUsageAttribution": {
-    "description": "Get hourly usage attribution. Multi-region data is available starting March 1, 2023.\n\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
-    "summary": "Obtener la atribución de uso por hora"
+    "description": "Obtén la atribución del uso horario. Los datos multirregión están disponibles a partir del 1 de marzo de 2023.\n\nEste punto final de la API está paginado. Para asegurarte de recibir todos los registros, verifica si el valor de `next_record_id` está\nestablecido en la respuesta. Si lo está, realiza otra solicitud y pasa `next_record_id` como un parámetro.\nEjemplo de pseudo código:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nMIENTRAS el cursor != nulo COMENZAR\n  dormir(5 segundos)  # Evitar alcanzar el límite de tasa\n  response := GetHourlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nFIN\n```",
+    "summary": "Obtener atribución de uso por hora"
   },
   "GetIncidentManagement": {
-    "description": "Obtén el uso por hora de la gestión de incidentes.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de la gestión de incidentes"
+    "description": "Obtener uso horario para la gestión de incidentes.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso horario para la gestión de incidentes"
   },
   "GetUsageIndexedSpans": {
-    "description": "Obtén el uso por hora de tramos (spans) indexados.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de tramos indexados"
+    "description": "Obtener uso horario para los spans indexados.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso horario para los spans indexados"
   },
   "GetIngestedSpans": {
-    "description": "Obtén el uso por hora de tramos ingeridos.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de tramos ingeridos"
+    "description": "Obtener uso horario para los spans ingeridos.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso horario para los spans ingeridos"
   },
   "GetUsageInternetOfThings": {
-    "description": "Obtén el uso por hora de IoT.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de IoT"
+    "description": "Obtener uso horario para IoT.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso horario para IoT"
   },
   "GetUsageLogs": {
-    "description": "Obtén el uso por hora de logs.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de logs"
+    "description": "Obtener uso horario para los registros.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso horario para los registros"
   },
   "GetUsageLogsByRetention": {
-    "description": "Obtén el uso por hora de logs indexados por periodo de conservación.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de logs por retención"
+    "description": "Obtener uso horario para los registros indexados por período de retención.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener registros de uso por hora según la retención"
   },
   "GetUsageLogsByIndex": {
-    "description": "Obtén el uso por hora de logs por índice.",
-    "summary": "Obtener el uso por hora de logs por índice"
+    "description": "Obtener uso por hora de los registros por índice.",
+    "summary": "Obtener uso por hora de los registros por índice"
   },
   "GetMonthlyUsageAttribution": {
-    "description": "Get monthly usage attribution. Multi-region data is available starting March 1, 2023.\n\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
-    "summary": "Obtenga la atribución de uso por mes"
+    "description": "Obtener atribución de uso mensual. Los datos multirregión están disponibles a partir del 1 de marzo de 2023.\n\nEste punto final de la API está paginado. Para asegurarte de recibir todos los registros, verifica si el valor de `next_record_id` está\nestablecido en la respuesta. Si lo está, realiza otra solicitud y pasa `next_record_id` como un parámetro.\nEjemplo de pseudo código:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nMIENTRAS el cursor != nulo COMENZAR\n  dormir(5 segundos)  # Evitar alcanzar el límite de tasa\n  response := GetMonthlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nFIN\n```",
+    "summary": "Obtener atribución de uso mensual"
   },
   "GetUsageNetworkFlows": {
-    "description": "Obtén el uso por hora de flujos de red.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de flujos de red"
+    "description": "Obtener uso por hora de los flujos de red.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso por hora de los flujos de red"
   },
   "GetUsageNetworkHosts": {
-    "description": "Obtén el uso por hora de hosts de red.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de hosts de red"
+    "description": "Obtener uso por hora de los hosts de red.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso por hora de los hosts de red"
   },
   "GetUsageOnlineArchive": {
-    "description": "Obtén el uso por hora de archivos en línea.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de archivos en línea"
+    "description": "Obtener uso por hora del archivo en línea.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso por hora del archivo en línea"
   },
   "GetUsageProfiling": {
-    "description": "Obtén el uso por hora de hosts con perfiles.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de hosts con perfiles"
+    "description": "Obtener uso por hora de los hosts perfilados.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso por hora de los hosts perfilados"
   },
   "GetUsageRumUnits": {
-    "description": "Obtén el uso por hora de unidades [RUM](https://docs.datadoghq.com/real_user_monitoring/).\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de unidades RUM"
+    "description": "Obtener uso por hora de las unidades de [RUM](https://docs.datadoghq.com/real_user_monitoring/).\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso por hora de las unidades de RUM"
   },
   "GetUsageRumSessions": {
-    "description": "Obtén el uso por hora de sesiones [RUM](https://docs.datadoghq.com/real_user_monitoring/).\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de sesiones RUM"
+    "description": "Obtener uso por hora de las sesiones de [RUM](https://docs.datadoghq.com/real_user_monitoring/).\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso por hora de las sesiones de RUM"
   },
   "GetUsageSDS": {
-    "description": "Obtén el uso por hora del Sensitive Data Scanner.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora del Sensitive Data Scanner"
+    "description": "Obtener uso por hora del escáner de datos sensibles.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtener uso por hora del escáner de datos sensibles"
   },
   "GetUsageSNMP": {
-    "description": "Obtén el uso por hora de dispositivos SNMP.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de dispositivos SNMP"
+    "description": "Obtener uso por hora de los dispositivos SNMP.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario para dispositivos SNMP"
   },
   "GetUsageSummary": {
-    "description": "Obtén el uso de tu cuenta.\n\nEste endpoint solo es accesible para [organizaciones de nivel superior](https://docs.datadoghq.com/account_management/multi_organization/).",
-    "summary": "Obtener el uso de tu cuenta"
+    "description": "Obtén todo el uso en tu cuenta.\n\nEste punto final solo es accesible para [organizaciones de nivel padre](https://docs.datadoghq.com/account_management/multi_organization/).",
+    "summary": "Obtén el uso en tu cuenta"
   },
   "GetUsageSynthetics": {
-    "description": "Obtén el uso por hora de [checks de Synthetic](https://docs.datadoghq.com/synthetics/)\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de checks de Synthetic"
+    "description": "Obtén el uso horario para [verificaciones sintéticas](https://docs.datadoghq.com/synthetics/).\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario para verificaciones sintéticas"
   },
   "GetUsageSyntheticsAPI": {
-    "description": "Obtén el uso por hora de [checks de API Synthetic](https://docs.datadoghq.com/synthetics/)\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de checks de API Synthetic"
+    "description": "Obtén el uso horario para [verificaciones de API sintéticas](https://docs.datadoghq.com/synthetics/).\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario para verificaciones de API sintéticas"
   },
   "GetUsageSyntheticsBrowser": {
-    "description": "Obtén el uso por hora de checks de navegador Synthetic.\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de checks de navegador Synthetic"
+    "description": "Obtén el uso horario para verificaciones de navegador sintéticas.\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario para verificaciones de navegador sintéticas"
   },
   "GetUsageTimeseries": {
-    "description": "Obtén el uso por hora de [métricas personalizadas].\n**Nota:** Este endpoint ha quedado obsoleto. Los datos de uso por hora de todos los productos están ahora disponibles en [Obtener el uso por hora por API de familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulta [Migración de las API de uso horario de la V1 a la V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para obtener la guía de migración asociada.",
-    "summary": "Obtener el uso por hora de métricas personalizadas"
+    "description": "Obtén el uso horario para [métricas personalizadas](https://docs.datadoghq.com/developers/metrics/custom_metrics/).\n**Nota:** Este punto final ha sido desaprobado. Los datos de uso horario para todos los productos ahora están disponibles en la [API de uso horario por familia de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Consulte [Migrando de las API de Uso Horario V1 a V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) para la guía de migración asociada.",
+    "summary": "Obtén el uso horario para métricas personalizadas"
   },
   "GetUsageTopAvgMetrics": {
-    "description": "Obtén todas las [métricas personalizadas](https://docs.datadoghq.com/developers/metrics/custom_metrics/) por media horaria. Utiliza el parámetro mes para obtener una resolución de los datos del mes hasta la fecha o utiliza el parámetro día para obtener una resolución diaria. Se requiere uno de los dos y sólo se permite uno de los dos.",
-    "summary": "Obtener todas las métricas personalizadas por media horaria"
+    "description": "Obtén todas las [métricas personalizadas](https://docs.datadoghq.com/developers/metrics/custom_metrics/) por promedio horario. Utiliza el parámetro de mes para obtener una resolución de datos hasta la fecha del mes o utiliza el parámetro de día para obtener una resolución diaria. Uno de los dos es requerido, y solo uno de los dos está permitido.",
+    "summary": "Obtén todas las métricas personalizadas por promedio horario"
   },
   "ListUsers": {
-    "description": "Enumera todos los usuarios de tu organización.",
-    "summary": "Mostrar una lista con todos los usuarios"
+    "description": "Lista todos los usuarios de tu organización.",
+    "summary": "Lista todos los usuarios"
   },
   "CreateUser": {
-    "description": "Crea un usuario para tu organización.\n\n**Nota**: Los usuarios sólo pueden crearse con el rol de acceso de administrador,\nsi las claves de la aplicación pertenecen a los administradores.",
+    "description": "Crea un usuario para tu organización.\n\n**Nota**: Los usuarios solo pueden ser creados con el rol de acceso de administrador\nsi las claves de aplicación pertenecen a administradores.",
     "summary": "Crear un usuario",
-    "request_description": "Objeto de usuario por crear",
-    "request_schema_description": "Crea, edita y desactiva usuarios."
+    "request_description": "Objeto de usuario que necesita ser creado.",
+    "request_schema_description": "Crear, editar y deshabilitar usuarios."
   },
   "DisableUser": {
-    "description": "Elimina un usuario de una organización.\n\n**Nota**: Este endpoint sólo puede utilizarse con claves de aplicación pertenecientes a\nadministradores.",
-    "summary": "Desactivar un usuario"
+    "description": "Eliminar un usuario de una organización.\n\n**Nota**: Este endpoint solo puede ser utilizado con claves de aplicación que pertenecen a\nadministradores.",
+    "summary": "Deshabilitar un usuario"
   },
   "GetUser": {
-    "description": "Obtén los datos de un usuario.",
-    "summary": "Recibir información detallada de un usuario"
+    "description": "Obtener los detalles de un usuario.",
+    "summary": "Obtener detalles del usuario"
   },
   "UpdateUser": {
-    "description": "Actualiza la información de un usuario.\n\n**Nota**: Sólo puede utilizarse con claves de aplicación pertenecientes a administradores.",
-    "summary": "Modificar un usuario",
+    "description": "Actualizar la información de un usuario.\n\n**Nota**: Solo puede ser utilizado con claves de aplicación que pertenecen a administradores.",
+    "summary": "Actualizar un usuario",
     "request_description": "Descripción de la actualización.",
-    "request_schema_description": "Crea, edita y desactiva usuarios."
+    "request_schema_description": "Crear, editar y deshabilitar usuarios."
   },
   "Validate": {
-    "description": "Comprueba si la clave de API (no la clave de aplicación) es válida. Si no es válida, se devuelve un 403.",
-    "summary": "Validar una clave de API"
+    "description": "Verificar si la clave API (no la clave APP) es válida. Si es inválida, se devuelve un 403.",
+    "summary": "Validar clave API"
   },
   "SubmitLog": {
-    "description": "Envía tus logs a tu plataforma Datadog a través de HTTP. Los límites por solicitud HTTP son:\n\n- Tamaño máximo de contenido por carga útil (sin comprimir): 5MB\n- Tamaño máximo para un único log: 1MB\n- Tamaño máximo de la matriz, si se envían varios logs en una matriz: 1000 entradas\n\nCualquier log que supere 1MB es aceptado y truncado por Datadog:\n- Para una única solicitud de log, la API trunca el log a 1MB y devuelve un 2xx.\n- Para una solicitud de varios logs, la API procesa todos los logs, trunca sólo los logs mayores a 1MB, y devuelve un 2xx.\n\nDatadog recomienda enviar tus logs comprimidos.\nAñade la cabecera `Content-Encoding: gzip` a la solicitud cuando envíes logs comprimidos.\n\nLos códigos de estado que responde la API HTTP son:\n- 200: OK\n- 400: Solicitud incorrecta (probablemente un problema en el formato de la carga útil)\n- 403: Problema de permisos (probablemente se ha utilizado una clave de API no válida)\n- 413: Carga demasiado grande (el lote supera los 5 MB sin comprimir)\n- 5xx: Error interno, la solicitud debe ser reintentada después de algún tiempo",
-    "summary": "Enviar logs",
-    "request_description": "Registro que hay que enviar (en formato JSON).",
+    "description": "Enviar sus registros a su plataforma Datadog a través de HTTP. Los límites por solicitud HTTP son:\n\n- Tamaño máximo del contenido por carga (sin comprimir): 5MB\n- Tamaño máximo para un solo registro: 1MB\n- Tamaño máximo del arreglo si se envían múltiples registros en un arreglo: 1000 entradas\n\nCualquier registro que exceda 1MB es aceptado y truncado por Datadog:\n- Para una solicitud de registro única, la API trunca el registro a 1MB y devuelve un 2xx.\n- Para una solicitud de múltiples registros, la API procesa todos los registros, trunca solo los registros mayores a 1MB y devuelve un 2xx.\n\nDatadog recomienda enviar sus registros comprimidos.\nAgregue el encabezado `Content-Encoding: gzip` a la solicitud al enviar registros comprimidos.\n\nLos códigos de estado respondidos por la API HTTP son:\n- 200: OK\n- 400: Solicitud incorrecta (probablemente un problema en el formato de la carga)\n- 403: Problema de permiso (probablemente utilizando una clave API inválida)\n- 413: Carga demasiado grande (el lote está por encima de 5MB sin comprimir)\n- 5xx: Error interno, la solicitud debe ser reintentada después de un tiempo",
+    "summary": "Enviar registros",
+    "request_description": "Registro a enviar (formato JSON).",
     "request_schema_description": "Mensaje de registro estructurado."
   },
   "MuteAllMonitors": {
-    "description": "El silenciado impide que todos los monitores envíen notificaciones a través de correo electrónico y mensajes al\n[flujo de eventos](https://docs.datadoghq.com/events).\nLos cambios de estado sólo son visibles si se controla la página de alertas.",
+    "description": "Silenciar evita que todos los monitores notifiquen a través de correo electrónico y publicaciones en el\n[flujo de eventos](https://docs.datadoghq.com/events).\nLos cambios de estado solo son visibles al verificar la página de alertas.",
     "summary": "Silenciar todos los monitores"
   },
   "UnmuteAllMonitors": {
-    "description": "Desactiva el silenciamiento de todos los monitores. Crea un error si el silenciamiento general\nno estaba activado previamente.",
-    "summary": "Desactivar el silenciamiento de todos los monitores"
+    "description": "Desactiva el silencio de todos los monitores. Lanza un error si se silencia todo\nno estaba habilitado anteriormente.",
+    "summary": "Desactivar el silencio de todos los monitores"
   }
 }

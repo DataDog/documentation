@@ -1,12 +1,12 @@
+site_name: "Datadog でインフラストラクチャーとアプリケーションのモニタリング"
+meta_title: Datadog を始めてみましょう
+meta_description: Datadog が大規模なクラウドのモニタリングサービスをリードします。
+disclaimer: "このページは日本語には対応しておりません。私たちはその翻訳に取り組んでいます。<br> 現在の翻訳プロジェクトについて質問やフィードバックがある場合は、<a href=\"https://docs.datadoghq.com/help/\">お気軽にご連絡ください！</a>"
 announcement_banner:
-  desktop_message: "<span>Join Datadog at DASH in NYC, June 9-10. | The future of AI + Observability starts here.</span>"
-  mobile_message: "<span>DASH NYC, June 9-10 | AI + Observability</span>"
+  desktop_message: "<span>ニューヨークで開催されるDASHにDatadogが参加します。6月9日から10日まで。 | AIと可観測性の未来はここから始まります。</span>"
+  mobile_message: "<span>DASH NYC、6月9日から10日 | AIと可観測性</span>"
   background_color: "#000000"
   custom_classes: 'dash-announcement-banner'
   external_link: https://dash.datadoghq.com/?utm_source=events&utm_medium=internal&utm_campaign=summit-202606dash&utm_term=HPbanner
-disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。<br>翻訳に関してご質問やご意見ございましたら、<a href="https://docs.datadoghq.com/ja/help/">お気軽にご連絡ください</a>。
-meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
-meta_title: Datadogを始めてみましょう
-site_name: Datadogでインフラストラクチャーとアプリケーションのモニタリング
-translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。
-site_support_banner: "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."
+translate_status_banner: "このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。"
+site_support_banner: "この製品は、選択した<a href=\"/getting_started/site\">Datadogサイト</a>ではサポートされていません。"
