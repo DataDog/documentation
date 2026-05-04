@@ -66,12 +66,12 @@ Depending on the metric type you applied them to, the behavior differs:
   * Disables any [interpolation][1].
   * Sets the time aggregator to `SUM`.
   * Floors the query rollup interval to the metric's metadata interval. Queries requested at a rollup interval smaller than the metric's submission interval are silently raised to match the metadata interval.
-  * Rescales each complete bucket post-aggregation by `min(metadata_interval, rollup_interval) / rollup_interval`. When the rollup interval equals the metadata interval this is a no-op and the bucket value equals the post-aggregation `SUM`. When the rollup interval is larger than the metadata interval, the value becomes the time-mean of the `per-second` rate samples in that bucket. For example, for a metric submitted every `60 seconds` queried with a `1800 second` rollup interval, `as_rate()` returns `post_aggregation / 30` for each complete bucket.
+  * Rescales each complete bucket post-aggregation by `min(metadata_interval, rollup_interval) / rollup_interval`. When the rollup interval equals the metadata interval, this is a no-op, and the bucket value equals the post-aggregation `SUM`. When the rollup interval is larger than the metadata interval, the value becomes the time-mean of the `per-second` rate samples in that bucket. For example, for a metric submitted every `60 seconds` queried with a `1800 second` rollup interval, `as_rate()` returns `post_aggregation / 30` for each complete bucket.
   * Rescales the rightmost partial bucket (when the query end time is not aligned to a rollup boundary) so that it represents the mean of the samples actually observed in that partial window, instead of an artificially low value.
 
-  **Note**: If a `RATE` metric has no metadata interval set, none of the rescaling steps above are applied and the time aggregator falls back to `AVG` instead of `SUM`.
+  **Note**: If a `RATE` metric has no metadata interval set, none of the rescaling steps above are applied, and the time aggregator falls back to `AVG` instead of `SUM`.
 
-  **Note**: For example, when validating this, use the formula `(post_aggregation / rollup_interval) * min(metadata_interval, rollup_interval)` in a [Advanced graphing](https://docs.datadoghq.com/dashboards/querying/#advanced-graphing). The expression cannot be plotted directly in a basic timeseries query widget, because it depends on the active rollup interval as a numeric value.
+  **Note**: For example, when validating this, use the formula `(post_aggregation / rollup_interval) * min(metadata_interval, rollup_interval)` in [Advanced graphing](https://docs.datadoghq.com/dashboards/querying/#advanced-graphing). The expression cannot be plotted directly in a basic timeseries query widget, because it depends on the active rollup interval as a numeric value.
 
 [1]: /metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
