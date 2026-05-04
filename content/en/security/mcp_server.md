@@ -54,6 +54,14 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : Searches and retrieves security signals from Datadog, including Cloud SIEM signals, App & API Protection signals, and Workload Protection signals. Use this to surface and investigate suspicious activity.
 : *Permissions required: `Security Signals Read`*
 
+`analyze_datadog_security_signals`
+: Analyzes security signals using SQL for aggregations, grouping, and trend analysis. Use this for counts, top-N breakdowns, and time-based questions. To list signals or retrieve a single signal, use `search_datadog_security_signals` or `get_datadog_security_signal` instead.
+: *Permissions required: `Security Signals Read`, `Timeseries`*
+
+`get_datadog_security_signal`
+: Retrieves the full details of a single security signal by ID, including attributes, rule information, triage state, tags, and case correlations. Use `search_datadog_security_signals` to find signal IDs first.
+: *Permissions required: `Security Signals Read`*
+
 `security_findings_schema`
 : Returns the available fields and their types for security findings. Call this before using `analyze_security_findings` to discover which fields you can filter and group by. Supports filtering by finding type.
 : *Permissions required: `Security Monitoring Findings Read`*
