@@ -7,7 +7,7 @@ further_reading:
   text: "Learn about APM"
 - link: "/tracing/trace_collection/dd_libraries/"
   tag: "Documentation"
-  text: "Learn about Datadog Tracing Libraries"
+  text: "Learn about Datadog SDKs"
 ---
 
 ## Overview
@@ -18,13 +18,13 @@ If you have [APM][6] set up already, navigate to [**Integrations** > **Link Sour
 
 Your telemetry must be tagged with Git information that ties the running application version with a particular repository and commit.
 
-For supported languages, Datadog recommends [embedding Git information](#embed-git-information-in-your-build-artifacts) in the deployed artifacts, which is then extracted by the [Datadog Tracing Libraries][9] automatically.
+For supported languages, Datadog recommends [embedding Git information](#embed-git-information-in-your-build-artifacts) in the deployed artifacts, which is then extracted by the [Datadog SDKs][9] automatically.
 
 For other languages and configurations, you can [configure telemetry tagging](#configure-telemetry-tagging) yourself.
 
 ## Embed Git information in your build artifacts
 
-You can embed the repository URL and commit hash in your build artifact. The [Datadog Tracing Libraries][9] use this information to automatically add the right tags to your APM service telemetry.
+You can embed the repository URL and commit hash in your build artifact. The [Datadog SDKs][9] use this information to automatically add the right tags to your APM service telemetry.
 
 Select one of the following languages that supports embedding git information:
 
@@ -35,13 +35,13 @@ Select one of the following languages that supports embedding git information:
 
 ### Containers
 
-If you are using Docker containers, you have three options: using Docker, using the Datadog tracing library, or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have three options: using Docker, using the Datadog SDK, or configuring your application with `DD_GIT_*` environment variables.
 
 #### Option 1: Docker
 
 {{% sci-docker %}}
 
-#### Option 2: Datadog tracing library
+#### Option 2: Datadog SDK
 
 {{% sci-dd-tracing-library %}}
 
@@ -57,7 +57,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 {{% sci-dd-serverless %}}
 
-#### Option 2: Datadog tracing library
+#### Option 2: Datadog SDK
 
 {{% sci-dd-tracing-library %}}
 
@@ -69,7 +69,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 If you are using a host, you have two options.
 
-#### Option 1: Datadog tracing library
+#### Option 1: Datadog SDK
 
 {{% sci-dd-tracing-library %}}
 
@@ -371,7 +371,18 @@ If your build process is executed in CI within a Docker container, use a [named 
 
 ## Configure telemetry tagging
 
-For unsupported languages, use the `git.commit.sha` and `git.repository_url` tags to link data to a specific commit.
+If your language is not listed in the [Embed Git information](#embed-git-information-in-your-build-artifacts) section, you can manually tag your telemetry with Git information by setting environment variables in the environment where your application runs.
+
+Set the `DD_GIT_COMMIT_SHA` and `DD_GIT_REPOSITORY_URL` environment variables on your application's deployment:
+
+```shell
+export DD_GIT_COMMIT_SHA="<commitSha>"
+export DD_GIT_REPOSITORY_URL="<git-provider.example/me/my-repo>"
+```
+
+Replace `<commitSha>` with the commit SHA used to build your application. You can retrieve this by running `git rev-parse HEAD` at build time, and it needs to be passed into the runtime environment variables. Replace `<git-provider.example/me/my-repo>` with your repository URL.
+
+These environment variables add `git.commit.sha` and `git.repository_url` tags to your APM spans, linking your service to a specific commit in your source code repository.
 
 ## Further reading
 

@@ -120,6 +120,8 @@ Check your Ingress-NGINX Controller version and ensure you have the matching Dat
 The init-container version ([datadog/ingress-nginx-injection][1]) must exactly match your controller version to prevent startup issues.
 For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-nginx-injection:v1.11.3][2].
 
+<div class="alert alert-info">Version tags like <code>v1.11.3</code> are rolling tags. The underlying Datadog NGINX module may be updated while the tag stays the same. To pin an exact version, reference the image by its digest (for example, <code>datadog/ingress-nginx-injection@sha256:...</code>).</div>
+
 **2. Modify your controller's pod specification**<br>
 Update the controller pod specification to include the init-container and configure the Datadog Agent host environment variable:
 
@@ -183,6 +185,8 @@ This configuration ensures that the Datadog module is loaded and ready to trace 
 Check your Ingress-NGINX Controller version and ensure you have the matching Datadog init-container available.
 The init-container version ([datadog/ingress-nginx-injection][1]) must exactly match your controller version to prevent startup issues.
 For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-nginx-injection:v1.11.3][2].
+
+<div class="alert alert-info">Version tags like <code>v1.11.3</code> are rolling tags. The underlying Datadog NGINX module may be updated while the tag stays the same. To pin an exact version, reference the image by its digest (for example, <code>datadog/ingress-nginx-injection@sha256:...</code>).</div>
 
 **2. Overriding Helm chart values**<br>
 To customize the Ingress-NGINX Helm chart and load the required Datadog module, create a YAML file or modify an existing one with the following configuration:

@@ -52,6 +52,8 @@ If you use an application key tied to a user to enable SCIM and that user leaves
 
 To avoid losing access to your data, Datadog strongly recommends that you create a [service account][6] dedicated to SCIM. Within that service account, create an application key to use in the SCIM integration.
 
+The service account requires at minimum the `user_access_invite` and `user_access_manage` permissions. For the full list of required permissions, see the [SCIM API documentation][10].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -65,3 +67,4 @@ To avoid losing access to your data, Datadog strongly recommends that you create
 [7]: https://app.datadoghq.com/organization-settings/users
 [8]: /help/
 [9]: https://scim.cloud/
+[10]: /api/latest/scim/

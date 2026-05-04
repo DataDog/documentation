@@ -13,7 +13,7 @@ further_reading:
   Security Graph is in Limited Availability.
 {{< /callout >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Security Graph is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

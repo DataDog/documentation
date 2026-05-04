@@ -1,8 +1,8 @@
 ---
-title: Send logs to CloudPrem with REST API
+title: Send logs to BYOC Logs with REST API
 aliases:
 - /cloudprem/ingest_logs/rest_api/
-description: Learn how to integrate with CloudPrem using direct API calls
+description: Learn how to integrate with BYOC Logs using direct API calls
 further_reading:
 - link: "/cloudprem/ingest_logs/datadog_agent/"
   tag: "Documentation"
@@ -12,13 +12,13 @@ further_reading:
   text: "Observability Pipelines Integration"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="true" header="In Preview" >}}
+  BYOC Logs is in Preview.
 {{< /callout >}}
 
 ## Overview
 
-You can send logs to CloudPrem using direct REST API calls. This method is useful for custom integrations or scripts that can't use a Datadog Agent or Observability Pipelines.
+You can send logs to BYOC Logs using direct REST API calls. This method is useful for custom integrations or scripts that can't use a Datadog Agent or Observability Pipelines.
 
 ## Datadog Logs API
 

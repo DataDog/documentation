@@ -1,5 +1,5 @@
 ---
-title: Configuring the Java Tracing Library
+title: Configuring the Java SDK
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -18,7 +18,7 @@ further_reading:
       text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the SDK with your code and configure the Agent to collect APM data, optionally configure the SDK as desired, including setting up [Unified Service Tagging][1].
 
 {{% apm-config-visibility %}}
 
@@ -38,7 +38,7 @@ Unless otherwise stated, you can convert between system properties and environme
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the Java Tracing Library (legacy)][24].
+The previous version of this configuration documentation is still available at [Configuring the Java SDK (legacy)][24].
 
 {{< partial name="apm/registry-config-list.html" >}}
 

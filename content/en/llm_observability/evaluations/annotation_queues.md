@@ -152,6 +152,60 @@ Export annotated traces for analysis or use in other workflows:
 3. Select traces (or select all).
 4. Click **Export**.
 
+The file downloads as `annotations_<queue-id>.csv`. You can also retrieve span data programmatically using the [Export API][5].
+
+{{% collapse-content title="CSV format" level="h4" expanded=false id="csv-format" %}}
+
+Each row represents one annotated interaction. The file begins with these fixed columns:
+
+| Column | Description |
+|--------|-------------|
+| `Content ID` | ID of the annotated content (for example, a trace ID or session ID) |
+| `Type` | Interaction type: `trace`, `experiment_trace`, or `session` |
+| `Input` | Input summary (empty for session interactions) |
+| `Output` | Output summary (empty for session interactions) |
+| `Expected Output` | Only present when **Include Expected Output** is enabled; populated for experiment traces only |
+
+After the fixed columns, there is one set of columns per reviewer per label. Reviewers are sorted alphabetically by display name (spaces replaced with underscores). Labels follow the order defined in the queue schema:
+
+| Column | Description |
+|--------|-------------|
+| `{reviewer}_{label}` | Label value (string, number, boolean, or JSON array) |
+| `{reviewer}_{label}_assessment` | `pass` or `fail`, if assessment criteria is enabled for that label |
+| `{reviewer}_{label}_reasoning` | Free-text reasoning, if reasoning is enabled for that label |
+
+If a reviewer has not annotated a given row, those cells are empty.
+
+**Example**: A queue with reviewers Alice Johnson and Bob Smith and labels `quality` (score) and `failure_type` (categorical) produces these column headers:
+
+```
+Content ID,Type,Input,Output,Alice_Johnson_quality,Alice_Johnson_quality_assessment,Alice_Johnson_quality_reasoning,Alice_Johnson_failure_type,Alice_Johnson_failure_type_assessment,Alice_Johnson_failure_type_reasoning,Bob_Smith_quality,...
+```
+
+{{% /collapse-content %}}
+
+#### Retrieve spans by trace ID or session ID
+
+After exporting annotation data, use the [Export API][5] to retrieve the full span data for traces or sessions in the CSV and join it with your annotation labels.
+
+**By trace ID**:
+
+{{< code-block lang="bash" >}}
+curl -G "https://api.datadoghq.com/api/v2/llm-obs/v1/spans/events" \
+  -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+  --data-urlencode "filter[trace_id]=<TRACE_ID>"
+{{< /code-block >}}
+
+**By session ID**:
+
+{{< code-block lang="bash" >}}
+curl -G "https://api.datadoghq.com/api/v2/llm-obs/v1/spans/events" \
+  -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+  --data-urlencode "filter[query]=@session_id:<SESSION_ID>"
+{{< /code-block >}}
+
 ### Adding to datasets
 
 Transfer annotated traces to datasets for experiment evaluation:
@@ -177,13 +231,19 @@ To delete a queue:
 
 ## Using the API
 
-You can manage annotation queues programmatically with the LLM Observability API. Use the API to:
+You can manage annotation queues programmatically. The following endpoints are available in the [LLM Observability API reference][4]:
 
-- Create, list, update, and delete annotation queues
-- Add interactions to a queue
-- Retrieve annotated interactions from a queue
-
-For endpoints, request schemas, and examples, see the [LLM Observability API reference][4].
+| Endpoint | Description |
+|----------|-------------|
+| [List annotation queues][6] | List all annotation queues in your organization. |
+| [Create an annotation queue][7] | Create an annotation queue. `name` and `project_id` are required. Include an optional `annotation_schema` to define labels at creation time. |
+| [Update an annotation queue][8] | Partially update a queue's `name`, `description`, or `annotation_schema`. |
+| [Delete an annotation queue][9] | Delete an annotation queue by ID. |
+| [Add interactions to a queue][10] | Add one or more traces to an annotation queue for review. |
+| [Delete interactions from a queue][11] | Remove specific interactions from a queue by interaction ID. |
+| [Get annotated interactions][12] | Retrieve all interactions and their applied annotation labels for a queue. |
+| [Get label schema][13] | Retrieve the label schema configured for a queue. |
+| [Update label schema][14] | Create or replace the label schema for a queue. |
 
 ## Data retention
 
@@ -256,3 +316,13 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [2]: https://app.datadoghq.com/llm/annotations/queues
 [3]: /llm_observability/experiments/datasets
 [4]: /api/latest/llm-observability/
+[5]: /llm_observability/evaluations/export_api/?tab=model#api-standards
+[6]: /api/latest/llm-observability/#list-llm-observability-annotation-queues
+[7]: /api/latest/llm-observability/#create-an-llm-observability-annotation-queue
+[8]: /api/latest/llm-observability/#update-an-llm-observability-annotation-queue
+[9]: /api/latest/llm-observability/#delete-an-llm-observability-annotation-queue
+[10]: /api/latest/llm-observability/#add-annotation-queue-interactions
+[11]: /api/latest/llm-observability/#delete-annotation-queue-interactions
+[12]: /api/latest/llm-observability/#get-annotated-queue-interactions
+[13]: /api/latest/llm-observability/#get-annotation-queue-label-schema
+[14]: /api/latest/llm-observability/#update-annotation-queue-label-schema

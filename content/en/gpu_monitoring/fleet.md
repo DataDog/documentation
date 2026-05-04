@@ -1,7 +1,6 @@
 ---
 title: GPU Monitoring Fleet Page
 description: "An inventory of all your GPU-accelerated hosts that helps you diagnose performance issues."
-private: true
 further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-gpu-monitoring/"
       tag: "Blog"

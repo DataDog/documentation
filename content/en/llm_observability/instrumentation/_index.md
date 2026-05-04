@@ -7,6 +7,10 @@ further_reading:
     - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
       tag: Blog
       text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+    - link: "https://learn.datadoghq.com/courses/llm-obs-getting-started"
+      tag: "Learning Center"
+      text: "Getting Started with LLM Observability"
+
 ---
 
 

@@ -1,5 +1,5 @@
 ---
-title: Configuring the .NET Framework Tracing Library
+title: Configuring the .NET Framework SDK
 code_lang: dotnet-framework
 type: multi-code-lang
 code_lang_weight: 70
@@ -39,7 +39,7 @@ further_reading:
     text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
+After you set up the SDK with your code and configure the Agent to collect APM data, optionally configure the SDK as desired, including setting up [Unified Service Tagging][4].
 
 {{% apm-config-visibility %}}
 
@@ -51,7 +51,7 @@ You can set configuration settings in the .NET Tracer with any of the following 
 
 {{% tab "Environment variables" %}}
 
-To configure the tracer using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see [Configuring process environment variables][1].
+To configure the SDK using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see [Configuring process environment variables][1].
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework/#configuring-process-environment-variables
 
@@ -121,7 +121,7 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the .NET Framework Tracing Library (legacy)][24].
+The previous version of this configuration documentation is still available at [Configuring the .NET Framework SDK (legacy)][24].
 
 {{< partial name="apm/registry-config-list.html" >}}
 

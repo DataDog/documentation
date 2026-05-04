@@ -16,7 +16,7 @@ further_reading:
 ---
 
 Send [traces][1] to Datadog from your Android applications with [Datadog's
-`dd-sdk-android-trace` client-side tracing library][2] and leverage the following features:
+`dd-sdk-android-trace` client-side SDK][2] and leverage the following features:
 
 * Create custom [spans][3] for operations in your application.
 * Add `context` and extra custom attributes to each span sent.
@@ -217,6 +217,43 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
           super.onCreate();
           Configuration configuration = new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
             .useSite(DatadogSite.US1_FED)
+            .build();
+          Datadog.initialize(this, configuration, trackingConsent);
+      }
+   }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
+{{< site-region region="gov2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+      override fun onCreate() {
+          super.onCreate()
+          val configuration = Configuration.Builder(
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.US2_FED)
+            .build()
+
+        Datadog.initialize(this, configuration, trackingConsent)
+      }
+   }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   public class SampleApplication extends Application {
+      @Override
+      public void onCreate() {
+          super.onCreate();
+          Configuration configuration = new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
+            .useSite(DatadogSite.US2_FED)
             .build();
           Datadog.initialize(this, configuration, trackingConsent);
       }
@@ -815,7 +852,7 @@ Request request = OkHttpRequestExtKt
 **Note**:
 
 * If you use multiple Interceptors, this one must be called first.
-* If you define custom tracing header types in the Datadog configuration and are using a tracer
+* If you define custom tracing header types in the Datadog configuration and are using an SDK
   registered with `GlobalDatadogTracer`, make sure the same tracing header types are set for the
   tracer in use.
 

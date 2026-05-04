@@ -13,7 +13,7 @@ further_reading:
     text: "IaC Security Rules"
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">IaC Security with GitHub Actions is not supported for the {{< region-param key=dd_site code="true" >}} site.</div>
 {{% /site-region %}}
 

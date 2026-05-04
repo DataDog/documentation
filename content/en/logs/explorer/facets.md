@@ -18,6 +18,10 @@ further_reading:
     - link: 'logs/explorer/saved_views'
       tag: 'Documentation'
       text: 'Automatically configure your Log Explorer'
+    - link: "https://learn.datadoghq.com/courses/log-explorer"
+      tag: "Learning Center"
+      text: "Getting Started with Log Explorer"
+
 ---
 
 {{< img src="logs/explorer/facet/facets_in_explorer.mp4" alt="Facets in Explorer Facet" video=true style="width:100%;">}}

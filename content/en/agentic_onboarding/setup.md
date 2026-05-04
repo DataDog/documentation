@@ -28,7 +28,7 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 
 {{< tabs >}}
 {{% tab "Claude Code" %}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -41,14 +41,14 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
 
 2. Select the MCP server installed in Step 1. You should see a `disconnected - Enter to login` message. Press <kbd>Enter</kbd>.
 3. When you see the option to authenticate, press <kbd>Enter</kbd>. This brings you to the OAuth screen.
-4. After authentication, choose **Open** to continue and grant access to your Datadog account.
+4. After authentication, choose {{< ui >}}Open{{< /ui >}} to continue and grant access to your Datadog account.
 5. Confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
 {{< /site-region >}}
 
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -59,9 +59,39 @@ To install the Datadog Onboarding Model Context Protocol (MCP) server, follow th
    <code>{{< region-param key=cursor_mcp_install_deeplink >}}</code>
    </pre>
 
-2. In Cursor, click **Install** for the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
-3. If the MCP server shows a **Needs login** or **Connect** link, select it and complete the OAuth flow. When prompted, choose **Open** to continue and grant access to your Datadog account.
+2. In Cursor, click {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
+3. If the MCP server shows a {{< ui >}}Needs login{{< /ui >}} or {{< ui >}}Connect{{< /ui >}} link, select it and complete the OAuth flow. When prompted, choose {{< ui >}}Open{{< /ui >}} to continue and grant access to your Datadog account.
 4. After authentication, return to Cursor and confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
+{{< /site-region >}}
+
+{{% /tab %}}
+
+{{% tab "Datadog AI Setup CLI" %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+The Datadog AI Setup CLI configures your project without a coding assistant.
+
+1. Run the `npx` command, replacing `<PRODUCT>` with the identifier for the product you want to set up:
+
+   | Product | Identifier |
+   |---------|------------|
+   | Error Tracking | `error-tracking` |
+   | Infrastructure Monitoring | `infra-monitoring` |
+   | Product Analytics | `product-analytics` |
+   | Real User Monitoring | `rum` |
+   | Studio | `studio` |
+
+   ```shell
+   npx @datadog/ai-setup-cli --product <PRODUCT>
+   ```
+
+2. A browser window opens for authentication. Complete the OAuth flow and grant access to your Datadog account.
+3. Return to your terminal. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary tokens.
+
+After the CLI completes, skip to [Deploy your app to production](#deploy-your-app-to-production).
 {{< /site-region >}}
 
 {{% /tab %}}

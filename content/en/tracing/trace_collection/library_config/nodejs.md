@@ -1,5 +1,5 @@
 ---
-title: Configuring the Node.js Tracing Library
+title: Configuring the Node.js SDK
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30
@@ -24,7 +24,7 @@ further_reading:
       text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the SDK with your code and configure the Agent to collect APM data, optionally configure the SDK as desired, including setting up [Unified Service Tagging][1].
 
 {{% apm-config-visibility %}}
 
@@ -34,7 +34,7 @@ For more examples of how to work with the library see [API documentation][2].
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the Node.js Tracing Library (legacy)][17].
+The previous version of this configuration documentation is still available at [Configuring the Node.js SDK (legacy)][17].
 
 {{< partial name="apm/registry-config-list.html" >}}
 

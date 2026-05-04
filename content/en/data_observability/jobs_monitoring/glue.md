@@ -24,8 +24,8 @@ Before you begin, make sure you have:
 
 ## Configure the AWS account
 
-1. Navigate to [**Datadog Data Observability** > **Settings**][2].
-2. Click **Configure** next to AWS Glue.
+1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][2].
+2. Click {{< ui >}}Configure{{< /ui >}} next to AWS Glue.
 
    {{< img src="data_observability/aws_glue/settings-configure-button.png" alt="AWS Glue configuration option in the Data Observability Settings page" style="width:100%;" >}}
 
@@ -80,11 +80,11 @@ Some of these permissions are related to monitoring Iceberg tables in Glue. For 
 ## Configure the crawler
 
 1. Select the AWS regions where your Glue jobs are located.
-2. Enable the **Job Monitoring** toggle.
+2. Enable the {{< ui >}}Job Monitoring{{< /ui >}} toggle.
 
    {{< img src="data_observability/aws_glue/crawler-configuration.png" alt="Crawler configuration showing region selection and sync frequency options" style="width:100%;" >}}
 
-3. Click **Save**.
+3. Click {{< ui >}}Save{{< /ui >}}.
 
 ## (Optional) Configure Glue jobs logs
 
@@ -101,12 +101,12 @@ Some of these permissions are related to monitoring Iceberg tables in Glue. For 
    - `/aws-glue/jobs/output`
    - `/aws-glue/jobs/logs-v2`
 
-This helps ensure the logs are searchable and available under the **Glue** tab in **Data Observability: Jobs Monitoring**.
+This helps ensure the logs are searchable and available under the {{< ui >}}Glue{{< /ui >}} tab in **Data Observability: Jobs Monitoring**.
 
 ## (Optional) Configure Glue metrics
 
 Enable the [Glue Integration][4] tile for Glue metrics collection.
-Metrics should be available under the **Glue** job tab in **Data Observability: Jobs Monitoring**.
+Metrics should be available under the {{< ui >}}Glue{{< /ui >}} job tab in **Data Observability: Jobs Monitoring**.
 
 ## Next steps
 

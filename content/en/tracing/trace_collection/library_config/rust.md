@@ -1,5 +1,5 @@
 ---
-title: Configuring the Rust Tracing Library
+title: Configuring the Rust SDK
 code_lang: rust
 type: multi-code-lang
 code_lang_weight: 80
@@ -23,7 +23,7 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the Rust Tracing Library (legacy)][3].
+The previous version of this configuration documentation is still available at [Configuring the Rust SDK (legacy)][3].
 
 {{< partial name="apm/registry-config-list.html" >}}
 

@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dont-fear-the-agent/"
   tag: "Blog"
   text: "Don't fear the Agent"
+- link: "https://learn.datadoghq.com/courses/agent-on-host"
+  tag: "Learning Center"
+  text: "The Agent on a Host"
 aliases:
   - /agent/faq/agent-check-directory-structure
   - /agent/faq/install-core-extra

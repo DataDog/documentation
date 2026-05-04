@@ -26,14 +26,14 @@ You can launch a Bits AI SRE investigation from several entry points:
 You can invoke Bits on an individual monitor alert or warn event from several entry points:
 
 #### Option 1: Bits AI SRE Monitors list {#monitor-list}
-1. Go to [**Bits AI SRE** > **Monitors** > **Supported**][5].
-1. Click **Investigate Recent Alerts** and select an alert.
+1. Go to [{{< ui >}}Bits AI SRE{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}Supported{{< /ui >}}][5].
+1. Click {{< ui >}}Investigate Recent Alerts{{< /ui >}} and select an alert.
 
 #### Option 2: Monitor status page
-Navigate to the monitor status page of a [Bits AI SRE-supported monitor](#supported-monitors) and click **Investigate with Bits AI SRE** in the top-right corner.
+Navigate to the monitor status page of a [Bits AI SRE-supported monitor](#supported-monitors) and click {{< ui >}}Investigate with Bits AI SRE{{< /ui >}} in the top-right corner.
 
 #### Option 3: Monitor event side panel
-In the monitor event side panel of a [Bits AI SRE-supported monitor](#supported-monitors), click **Investigate with Bits AI SRE**.
+In the monitor event side panel of a [Bits AI SRE-supported monitor](#supported-monitors), click {{< ui >}}Investigate with Bits AI SRE{{< /ui >}}.
 
 #### Option 4: Slack
 To use the Slack integration, [connect your Slack workspace to Bits AI SRE][8].
@@ -48,13 +48,13 @@ Bits AI SRE investigations started from APM latency graphs and APM Watchdog stor
 
 #### APM latency graphs on service pages
 
-1. In Datadog, navigate to [APM][1] and open the service or resource page you want to investigate. Next to the latency graph, click **Investigate**.
+1. In Datadog, navigate to [APM][1] and open the service or resource page you want to investigate. Next to the latency graph, click {{< ui >}}Investigate{{< /ui >}}.
 1. Click and drag your cursor over the point plot visualization to make a rectangular selection over a region that shows unusual latency to seed the analysis. Initial diagnostics on the latency issue appear, including the observed user impact, anomalous tags contributing to the issue, and recent changes. For more information, see [APM Investigator][2].
-1. Click **Investigate with Bits AI SRE** to run a deeper investigation.
+1. Click {{< ui >}}Investigate with Bits AI SRE{{< /ui >}} to run a deeper investigation.
 
 #### APM latency Watchdog stories
 
-On a Watchdog APM latency story, click **Investigate with Bits AI SRE**.
+On a Watchdog APM latency story, click {{< ui >}}Investigate with Bits AI SRE{{< /ui >}}.
 
 ### Synthetic tests (Preview)
 
@@ -65,15 +65,15 @@ When a Synthetic Browser or API test monitor triggers, you can launch a Bits AI 
 
 #### From the Synthetic test details page
 
-1. On the [Synthetic Tests][18] page, open the Synthetic test you want to investigate and go to the **Timeline** section.
-1. Select the **Alert Triggered** event for the failing test run.
-1. Click **Investigate with Bits AI SRE**.
+1. On the [Synthetic Tests][18] page, open the Synthetic test you want to investigate and go to the {{< ui >}}Timeline{{< /ui >}} section.
+1. Select the {{< ui >}}Alert Triggered{{< /ui >}} event for the failing test run.
+1. Click {{< ui >}}Investigate with Bits AI SRE{{< /ui >}}.
 
 The investigation opens in a new page, and you can also view it from the test details page after it runs.
 
 #### From a Synthetic monitor
 
-Synthetic monitors support the same monitor-based entry points as other supported monitor types. See [Monitor alerts](#manual-monitor-alerts) for the available options, or toggle **Auto-Investigate** on a Synthetic monitor to start investigations automatically. For details, see [Enable automatic investigations](#enable-automatic-investigations).
+Synthetic monitors support the same monitor-based entry points as other supported monitor types. See [Monitor alerts](#manual-monitor-alerts) for the available options, or toggle {{< ui >}}Auto-Investigate{{< /ui >}} on a Synthetic monitor to start investigations automatically. For details, see [Enable automatic investigations](#enable-automatic-investigations).
 
 ### General prompt (Preview)
 
@@ -101,12 +101,12 @@ Starting Bits AI SRE investigations from a prompt is in Preview for all customer
 In addition to manual investigations, you can configure Bits to run automatically when a monitor transitions to the alert state:
 
 #### From the Bits AI SRE Monitors list
-1. Go to [**Bits AI SRE** > **Monitors** > **Supported**][5].
-1. Toggle **Auto-Investigate** on for a single monitor, or bulk-edit multiple monitors by selecting multiple monitors, then clicking **Auto-Investigate All**.
+1. Go to [{{< ui >}}Bits AI SRE{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}Supported{{< /ui >}}][5].
+1. Toggle {{< ui >}}Auto-Investigate{{< /ui >}} on for a single monitor, or bulk-edit multiple monitors by selecting multiple monitors, then clicking {{< ui >}}Auto-Investigate All{{< /ui >}}.
 
 #### For a single monitor
-1. Open the monitor's status page and click **Edit**.
-1. Scroll to **Configure notifications & automations** and toggle **Investigate with Bits AI SRE**.
+1. Open the monitor's status page and click {{< ui >}}Edit{{< /ui >}}.
+1. Scroll to {{< ui >}}Configure notifications & automations{{< /ui >}} and toggle {{< ui >}}Investigate with Bits AI SRE{{< /ui >}}.
 
 <div class="alert alert-info"><ul><li>Enabling automatic investigations using the Datadog API or Terraform is not supported.</li><li>An investigation initiates when a monitor transitions to the alert state.</li><li>Transitions to the warn or no data state, <a href="/monitors/notify/#renotify">renotifications</a>, and test notifications do not trigger automatic investigations.
 </li></ul></div>
@@ -167,14 +167,14 @@ For best practices on maximizing the effectiveness of investigations, see [Knowl
 ### Investigation display modes
 There are two display modes: Agent Trace and Investigation.
 
-While an investigation is in progress, Bits captures every step it takes—including how it evaluates evidence and makes decisions—in the **Agent Trace** view. This provides a real-time, detailed record of the agent’s reasoning process.
+While an investigation is in progress, Bits captures every step it takes—including how it evaluates evidence and makes decisions—in the {{< ui >}}Agent Trace{{< /ui >}} view. This provides a real-time, detailed record of the agent’s reasoning process.
 
-Once the investigation is complete, you can switch to the **Investigation** view to explore a structured, tree-based visualization of the investigative path, making it easier to understand findings and conclusions at a glance.
+Once the investigation is complete, you can switch to the {{< ui >}}Investigation{{< /ui >}} view to explore a structured, tree-based visualization of the investigative path, making it easier to understand findings and conclusions at a glance.
 
 
 ## Reports
 
-The Reports tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to conclusion to assess the impact of Bits AI SRE on your on-call efficiency.
+The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investigations run over time by monitor, user, service, and team. You can also track the mean time to conclusion to assess the impact of Bits AI SRE on your on-call efficiency.
 
 [1]: https://app.datadoghq.com/apm/home
 [2]: /tracing/guide/latency_investigator/

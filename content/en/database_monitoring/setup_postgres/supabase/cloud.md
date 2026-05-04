@@ -20,20 +20,20 @@ Database Monitoring for Supabase Cloud provides visibility into your Supabase da
 ## Prerequisites
 
 - A Supabase project with a Postgres database.
-- Your Supabase **Project ID** (found in your Supabase project settings).
-- Your Supabase **API key** (found in your Supabase project settings under **API**).
-- A Supabase **Personal Access Token** with access to the Management API.
+- Your Supabase {{< ui >}}Project ID{{< /ui >}} (found in your Supabase project settings).
+- Your Supabase {{< ui >}}API key{{< /ui >}} (found in your Supabase project settings under {{< ui >}}API{{< /ui >}}).
+- A Supabase {{< ui >}}Personal Access Token{{< /ui >}} with access to the Management API.
 
 ## Setup
 
 {{< img src="database_monitoring/supabase_cloud_integration_tile.png" alt="Supabase Cloud integration tile configuration" style="width:80%;" >}}
 
 1. Navigate to the [Supabase integration tile][1] in Datadog.
-1. Click **Add Account**.
-1. Enter your Supabase **Project ID** and **API Key**.
-1. Select **Enable Database Monitoring for query performance optimizations**.
-1. Enter your **Personal Access Token**.
-1. Click **Save**.
+1. Click {{< ui >}}Add Account{{< /ui >}}.
+1. Enter your Supabase {{< ui >}}Project ID{{< /ui >}} and {{< ui >}}API Key{{< /ui >}}.
+1. Select {{< ui >}}Enable Database Monitoring for query performance optimizations{{< /ui >}}.
+1. Enter your {{< ui >}}Personal Access Token{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 Datadog connects to your Supabase project and begins collecting Database Monitoring telemetry. No Agent installation is required.
 

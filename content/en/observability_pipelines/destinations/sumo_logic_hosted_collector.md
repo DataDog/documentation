@@ -9,19 +9,20 @@ products:
 
 {{< product-availability >}}
 
+## Overview
+
 Use Observability Pipelines' Sumo Logic destination to send logs to your Sumo Logic Hosted Collector.
 
 ## Setup
 
-Set up the Sumo Logic destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure the Sumo Logic destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
-### Set up the destination
+After you select the Sumo Logic destination in the pipeline UI:
 
-<div class="alert alert-danger">Only enter the identifier for the Sumo Logic endpoint URL. Do <b>not</b> enter the actual value.</div>
+- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
+  - **Note**: Only enter the identifier for the Sumo Logic endpoint URL. Do **not** enter the actual value.
 
-- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
-
-#### Optional settings
+### Optional settings
 
 1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in `JSON`, `Logfmt`, or `Raw` text. If no decoding is selected, the decoding defaults to JSON.
 1. Enter a **source name** to override the default `name` value configured for your Sumo Logic collector's source.
@@ -29,11 +30,11 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 1. Enter a **category name** to override the default `category` value configured for your Sumo Logic collector's source.
 1. Click **Add Header** to add any custom header fields and values.
 
-##### Buffering options
+#### Buffering options
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -67,3 +68,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
+[3]: /observability_pipelines/configuration/set_up_pipelines/
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

@@ -1,5 +1,5 @@
 ---
-title: Configuring the Go Tracing Library
+title: Configuring the Go SDK
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
@@ -24,7 +24,7 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], start the tracer and configure the library as desired. {{% tracing-go-v2 %}}
+After you [set up the SDK with your code, configure the Agent to collect APM data, and activate the Go integration][1], start the SDK and configure the library as desired. {{% tracing-go-v2 %}}
 
 {{% apm-config-visibility %}}
 
@@ -32,7 +32,7 @@ Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 
 Read the [Unified Service Tagging][2] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
 
-You may also elect to provide `env`, `service`, and `version` through the tracer's API:
+You may also elect to provide `env`, `service`, and `version` through the SDK's API:
 
 ```go
 package main
@@ -53,7 +53,7 @@ func main() {
     defer tracer.Stop()
 
     // If you expect your application to be shut down by SIGTERM (for example, a container in Kubernetes),
-    // you might want to listen for that signal and explicitly stop the tracer to ensure no data is lost
+    // you might want to listen for that signal and explicitly stop the SDK to ensure no data is lost
     sigChan := make(chan os.Signal, 1)
     signal.Notify(sigChan, syscall.SIGTERM)
     go func() {
@@ -68,11 +68,11 @@ See all available options in the [configuration documentation][20] (or [configur
 
 ## Configure APM environment name
 
-The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][20] start option of the tracer.
+The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][20] start option of the SDK.
 
 ## Configurations keys
 
-The previous version of this configuration documentation is still available at [Configuring the Go Tracing Library (legacy)][21].
+The previous version of this configuration documentation is still available at [Configuring the Go SDK (legacy)][21].
 
 {{< partial name="apm/registry-config-list.html" >}}
 
