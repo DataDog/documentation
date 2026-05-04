@@ -69,7 +69,7 @@ The fully qualified table name is `catalog.schema.table`, for example `main.obs_
 
 ### Set up a service principal
 
-The Databricks (Zerobus) API uses OAuth authentication. The OAuth client ID is the service principal's UUID, and the OAuth client secret is generated when you create the service principal.
+The Databricks (Zerobus) API uses OAuth authentication. When you create the service principal, the OAuth client secret is generated and the OAuth client ID is the service principal's UUID.
 
 To create a service principal:
 
