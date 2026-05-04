@@ -54,31 +54,6 @@ Automation filters use a subset of the Trace Explorer search syntax. When a filt
 | Custom metadata | `@meta.metadata.*` (any key, for example, `@meta.metadata.user_id`) |
 | Prompts and tools | `@meta.input.prompt.*`, `@meta.output.prompt.*`, `@meta.tool_definitions.*` |
 
-### Not supported
-
-These patterns are common in the Trace Explorer but cannot be used in automation rules:
-
-| Pattern | Why | What to use instead |
-|---|---|---|
-| `@trace.*` (for example, `@trace.total_tokens`) | Computed across all spans of a trace at query time. The rule-matcher evaluates one span in isolation. | Use a monitor for trace-level conditions. For per-span token counts, use `@metrics.input_tokens` or `@metrics.output_tokens`. |
-| `@child.*` (for example, `@child.@meta.span.kind`) | Requires walking sibling spans. Per-span evaluation has no graph traversal. | Filter directly on the span you care about, scoped by `@parent_id:undefined` for root spans. |
-| `@event_type` | Trace-explorer scoping field. Automations already operate per span. | Drop it. The **Automate Query** button strips it automatically. |
-| Top-level `@field`s not in the allowed list (for example, `@content`, `@score_value`) | The rule-matcher uses a fixed field accessor. Unmapped fields silently fail to match. | Use the closest allowlisted field. For example, `@input` or `@output` instead of `@content`. |
-| Custom deep `@meta.*` paths outside the allowed prefixes | Only specific prefixes are dynamically dispatched. | Move custom data under `@meta.metadata.*`, which is a catch-all. |
-| Aggregations and formulas (for example, `count:>5`, `avg(@metrics.input_tokens):>500`) | Require a result set. The rule-matcher evaluates one span as a row. | Use a monitor; or rephrase as a per-span condition. |
-
-### Deprecated fields
-
-The following field shapes are deprecated and rejected in new automations. Migrate to the consolidated `@evaluation.<NAME>.*` shape:
-
-| Deprecated prefix | Use instead |
-|---|---|
-| `@evaluations.<NAME>` | `@evaluation.<NAME>.value` |
-| `@evaluation_assessments.<NAME>` | `@evaluation.<NAME>.assessment` |
-| `@evaluation_reasoning.<NAME>` | `@evaluation.<NAME>.reasoning` |
-| `@evaluation_metadata.<NAME>` | `@evaluation.<NAME>.metadata` |
-| `@evaluation_tags.<NAME>` | `@evaluation.<NAME>.tags` |
-
 ## Sampling and limits
 
 Automations include a sampling rate to keep volume manageable.
@@ -105,8 +80,9 @@ Most often, one of:
 The Trace Explorer supports a wider field set than automations. The button's tooltip names the offending fields. Common cases:
 
 - Trace-level fields (`@trace.*`): use a monitor instead.
-- Deprecated `@evaluations.*` fields: migrate to `@evaluation.<NAME>.*`.
+- Deprecated `@evaluations.*`, `@evaluation_assessments.*`, `@evaluation_reasoning.*`, `@evaluation_metadata.*`, and `@evaluation_tags.*` fields: migrate to the consolidated `@evaluation.<NAME>.*` shape.
 - Cross-span references (`@child.*`): rephrase to filter on the span itself.
+- Aggregations and formulas (for example, `count:>5`, `avg(@metrics.input_tokens):>500`): use a monitor, or rephrase as a per-span condition.
 
 **My filter has a custom `@meta.*` path that isn't in the allowlist.**
 
