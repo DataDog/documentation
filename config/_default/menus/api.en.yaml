@@ -8302,6 +8302,23 @@ menu:
           - ListCustomAllocationRules
         unstable: []
         order: 23
+    - name: Cloud Inventory Sync Configs
+      url: /api/latest/cloud-inventory-sync-configs/
+      identifier: cloud-inventory-sync-configs
+      generated: true
+    - name: Create or update a sync configuration
+      url: '#create-or-update-a-sync-configuration'
+      identifier: cloud-inventory-sync-configs-create-or-update-a-sync-configuration
+      parent: cloud-inventory-sync-configs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertSyncConfig
+        unstable:
+          - v2
+        order: 1
     - name: Cloud Network Monitoring
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
