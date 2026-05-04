@@ -10,6 +10,7 @@ import ProductMegaMenu, {
 import LogoDownloadPanel from './LogoDownloadPanel.astro';
 import HeaderScroll from './HeaderScroll.astro';
 import MobileNav from '../MobileNav/MobileNav.tsx';
+import { classListFactory } from '../../utils/classListFactory';
 import {
   getMainLeft,
   getMainRight,
@@ -21,6 +22,8 @@ import {
   type MenuItem,
 } from '../../lib/menuData';
 import { i18n } from '../../lib/i18n/i18n';
+
+const cl = classListFactory(styles);
 
 const mainLeft = getMainLeft();
 const mainRight = getMainRight();
@@ -151,12 +154,12 @@ const mobileLogoUrl = 'https://imgix.datadoghq.com/img/datadog_rbg_n_2x.png';
 const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
 ---
 
-<div class="main-nav-wrapper">
-  <nav class={`${styles.nav} main-nav`}>
-    <div class={styles.container}>
+<div class={`${cl('header__wrapper')} main-nav-wrapper`}>
+  <nav class={`${cl('header__nav')} main-nav`}>
+    <div class={cl('header__container')}>
       {/* Desktop layout */}
-      <div class={styles.desktop}>
-        <ul class={`${styles.leftList} main-left`}>
+      <div class={cl('header__desktop')}>
+        <ul class={`${cl('header__left-list')} main-left`}>
           {productItem && (
             <ProductMegaMenu
               client:load
@@ -168,18 +171,18 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
               hype={i18n('product_hype')}
               carrotSvg={carrotSvg}
               classes={{
-                menuItem: styles.menuItem,
-                menuItemOpen: styles['menuItem--open'],
-                menuLink: styles.menuLink,
-                dropdownMenu: styles.dropdownMenu,
-                dropdownMenuOpen: styles['dropdownMenu--open'],
+                menuItem: cl('header__menu-item'),
+                menuItemOpen: cl('header__menu-item--open'),
+                menuLink: cl('header__menu-link'),
+                dropdownMenu: cl('header__dropdown-menu'),
+                dropdownMenuOpen: cl('header__dropdown-menu--open'),
               }}
             />
           )}
 
           {simpleLeftItems.map((item) => (
-            <li class={`${styles.menuItem} ${item.identifier}-item`}>
-              <a class={`${styles.menuLink} ${item.identifier}-menu`} href={resolveUrl(item.url)}>
+            <li class={`${cl('header__menu-item')} ${item.identifier}-item`}>
+              <a class={`${cl('header__menu-link')} ${item.identifier}-menu`} href={resolveUrl(item.url)}>
                 <span class="menu-text">{i18n(item.lang_key)}</span>
               </a>
             </li>
@@ -193,23 +196,23 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
               identifier="solutions"
               isSolutions={true}
               classes={{
-                menuItem: styles.menuItem,
-                menuItemOpen: styles['menuItem--open'],
-                menuLink: styles.menuLink,
-                dropdownMenu: styles.dropdownMenu,
-                dropdownMenuOpen: styles['dropdownMenu--open'],
-                solutionsMenu: styles.solutionsMenu,
+                menuItem: cl('header__menu-item'),
+                menuItemOpen: cl('header__menu-item--open'),
+                menuLink: cl('header__menu-link'),
+                dropdownMenu: cl('header__dropdown-menu'),
+                dropdownMenuOpen: cl('header__dropdown-menu--open'),
+                solutionsMenu: cl('header__solutions-menu'),
               }}
             >
-              <div class={styles.solutionsGrid}>
+              <div class={cl('header__solutions-grid')}>
                 {solutionsColumns.map((col) => (
-                  <div class={styles.solutionsColumn}>
-                    <p class={styles.solutionsHeader}>{col.label}</p>
-                    <ul class={styles.solutionsList}>
+                  <div class={cl('header__solutions-column')}>
+                    <p class={cl('header__solutions-header')}>{col.label}</p>
+                    <ul class={cl('header__solutions-list')}>
                       {col.items.map((item) => (
                         <li>
                           <a href={item.url}>
-                            <span class={styles.menuText}>{item.label}</span>
+                            <span class={cl('header__menu-text')}>{item.label}</span>
                           </a>
                         </li>
                       ))}
@@ -222,17 +225,17 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
         </ul>
 
         {/* Logo */}
-        <div class="header__logoSlot">
-          <a href="/" class={`${styles.logoColumn} js-logo-download`}>
+        <div class="header__logo-slot">
+          <a href="/" class={`${cl('header__logo-column')} js-logo-download`}>
             <img
               height="75"
-              class={styles.logoBits}
+              class={cl('header__logo-bits')}
               src={bitsLogoUrl}
               srcset={`${bitsLogoUrl} 1x, ${bitsLogoUrl}&dpr=2 2x`}
               alt="Datadog"
             />
             <img
-              class={styles.logoText}
+              class={cl('header__logo-text')}
               height="14"
               src={textLogoUrl}
               srcset={`${textLogoUrl} 1x, ${textLogoUrl}&dpr=2 2x`}
@@ -242,7 +245,7 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
           </a>
         </div>
 
-        <ul class={`${styles.rightList} main-right`}>
+        <ul class={`${cl('header__right-list')} main-right`}>
           {aboutItem && (
             <NavDropdown
               client:load
@@ -250,11 +253,11 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
               href={resolveUrl(aboutItem.url)}
               identifier="about"
               classes={{
-                menuItem: styles.menuItem,
-                menuItemOpen: styles['menuItem--open'],
-                menuLink: styles.menuLink,
-                dropdownMenu: styles.dropdownMenu,
-                dropdownMenuOpen: styles['dropdownMenu--open'],
+                menuItem: cl('header__menu-item'),
+                menuItemOpen: cl('header__menu-item--open'),
+                menuLink: cl('header__menu-link'),
+                dropdownMenu: cl('header__dropdown-menu'),
+                dropdownMenuOpen: cl('header__dropdown-menu--open'),
               }}
             >
               <ul style="list-style:none;margin:0;padding:0;">
@@ -271,11 +274,11 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
               href={resolveUrl(blogItem.url)}
               identifier="blog"
               classes={{
-                menuItem: styles.menuItem,
-                menuItemOpen: styles['menuItem--open'],
-                menuLink: styles.menuLink,
-                dropdownMenu: styles.dropdownMenu,
-                dropdownMenuOpen: styles['dropdownMenu--open'],
+                menuItem: cl('header__menu-item'),
+                menuItemOpen: cl('header__menu-item--open'),
+                menuLink: cl('header__menu-link'),
+                dropdownMenu: cl('header__dropdown-menu'),
+                dropdownMenuOpen: cl('header__dropdown-menu--open'),
               }}
             >
               <ul style="list-style:none;margin:0;padding:0;">
@@ -286,17 +289,17 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
             </NavDropdown>
           )}
           {loginItem && !isDisabledForDocs(loginItem) && (
-            <li class={`${styles.menuItem} login-item`}>
-              <a class={styles.menuLink} href={resolveUrl(loginItem.url)}>
+            <li class={`${cl('header__menu-item')} login-item`}>
+              <a class={cl('header__menu-link')} href={resolveUrl(loginItem.url)}>
                 <span class="menu-text">{i18n(loginItem.lang_key)}</span>
               </a>
             </li>
           )}
           {getStartedItem && (
-            <li class={`${styles.menuItem} get-started-item`}>
-              <a class={styles.btnGradient} href={resolveUrl(getStartedItem.url)}>
-                <span class={styles.btnGradient__full}>{i18n('get_started_free')}</span>
-                <span class={styles.btnGradient__short}>{i18n('free_trial')}</span>
+            <li class={`${cl('header__menu-item')} get-started-item`}>
+              <a class={cl('header__btn-gradient')} href={resolveUrl(getStartedItem.url)}>
+                <span class={cl('header__btn-gradient-full')}>{i18n('get_started_free')}</span>
+                <span class={cl('header__btn-gradient-short')}>{i18n('free_trial')}</span>
               </a>
             </li>
           )}
@@ -304,12 +307,12 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
       </div>
 
       {/* Mobile row */}
-      <div class={styles.mobileRow}>
-        <a href="/" class="header__mobileLogoLink">
+      <div class={cl('header__mobile-row')}>
+        <a href="/" class="header__mobile-logo-link">
           <img
             src={mobileLogoUrl}
             srcset={mobileLogoSrcset}
-            class={styles.mobileLogo}
+            class={cl('header__mobile-logo')}
             alt="Datadog Logo"
             width="157"
             height="40"
@@ -317,7 +320,11 @@ const mobileLogoSrcset = `${mobileLogoUrl} 1x, ${mobileLogoUrl}?dpr=2 2x`;
         </a>
         <MobileNav
           client:load
-          classes={{ hamburger: styles.hamburger, hamburgerOpen: styles['hamburger--open'], hamburgerBar: styles.hamburgerBar }}
+          classes={{
+            hamburger: cl('header__hamburger'),
+            hamburgerOpen: cl('header__hamburger--open'),
+            hamburgerBar: cl('header__hamburger-bar'),
+          }}
           quicknav={mobileNavQuicknav}
           search={mobileNavSearch}
           items={mobileItems}
