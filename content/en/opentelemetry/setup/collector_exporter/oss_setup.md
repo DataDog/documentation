@@ -674,6 +674,8 @@ processors:
 
 The `k8s_attributes` processor requires a ServiceAccount with permissions to read pod metadata. See the [Kubernetes Attributes Processor documentation][101] for RBAC setup instructions.
 
+[101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
+
 {{% /tab %}}
 
 {{% tab "Kubernetes (Helm)" %}}
@@ -700,10 +702,13 @@ You can deploy the Collector in Kubernetes using the [official OpenTelemetry Col
    helm install otelcol open-telemetry/opentelemetry-collector --values values.yaml
    ```
 
+[102]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector
+[103]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-daemonset.yaml
+
 {{% /tab %}}
 {{< /tabs >}}
 
-### 3. Run the collector
+### 3. Run the Collector
 
 Start the Collector with the required feature gate enabled. If you are using Docker or Kubernetes, the run command is included in the configuration tab above.
 
@@ -798,6 +803,3 @@ The configuration sends the Collector's own metrics back to its local OTLP recei
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 [6]: /opentelemetry/guide/otlp_delta_temporality/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
-[101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
-[102]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector
-[103]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-daemonset.yaml
