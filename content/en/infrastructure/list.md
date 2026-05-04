@@ -17,13 +17,15 @@ further_reading:
 
 ## Overview
 
-The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last 15 minutes. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
+The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
 
 {{< img src="infrastructure/index/infra-list-overview.png" alt="The Host List with a filter panel on the left and a list of hosts with customizable columns." style="width:100%;">}}
 
-## View hosts
+By default, the Host List shows hosts with activity in the last 15 minutes. Click the play icon next to the time range to switch to a live view.
 
-### Filter and search
+{{< img src="infrastructure/index/infra-list-time-span.png" alt="The time range control showing a 15-minute window and a play icon to switch to a live view." style="width:50%;">}}
+
+## Filter and search
 
 Use the filter panel on the left to narrow the list of hosts:
 
@@ -36,13 +38,13 @@ You can also use the search box at the top of the list to filter hosts with the 
 
 {{< img src="infrastructure/index/infra-list-filter-panel.png" alt="The Host List filter panel with quick filter checkboxes, a Filter Metrics section, and a search facets section." style="width:100%;">}}
 
-### Saved views
+## Save views
 
 To save your filter and column configuration as a view, click **My View** in the upper-left corner, and then click **Save as new view**. Saved views are accessible from the **My View** panel, where you can filter, sort, and edit them. Star a view to mark it as a favorite.
 
 {{< img src="infrastructure/index/infra-list-views.png" alt="The My View panel with options to save, filter, sort, and edit saved views." style="width:100%;">}}
 
-### Customize columns
+## Customize columns
 
 To add, remove, or reorder columns, click **Columns** above the host list. You can add any of the following as a column:
 
@@ -65,17 +67,11 @@ Software
 Integrations
 : The Datadog Agent integrations enabled on the host. **Note**: This column is similar to the **Apps** column in the legacy view. However, it includes only Agent integrations, not custom metrics reported from the host.
 
-### Hostnames
-
-The Datadog Agent collects potential hostnames from several different sources. For more details, see [How does Datadog determine the Agent hostname?][1].
-
-**Note**: Hostnames should be unique within a Datadog account. Otherwise, you may experience inconsistencies on your host graphs.
-
-### Inspect a host
+## Inspect a host
 
 Click any host to open its detail panel. The detail panel is the [Resource Catalog][15] side panel and includes:
 
-- [Aliases](#aliases)
+- [Hostnames and aliases](#hostnames-and-aliases)
 - [Tags][2]
 - [Metrics][3]
 - [Containers][4]
@@ -85,13 +81,17 @@ Click any host to open its detail panel. The detail panel is the [Resource Catal
 
 {{< img src="infrastructure/index/infra-list-side-panel.png" alt="The host detail side panel with tabs for Host Summary, Metrics, Containers, Processes, and other host data." style="width:100%;">}}
 
-#### Aliases
+### Hostnames and aliases
 
-Datadog creates aliases for host names when there are multiple uniquely identifiable names for a single host. The names collected by the Agent are added as aliases for the chosen canonical name. For example, a single host running in EC2 might have an instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`).
+The Datadog Agent collects potential hostnames from several different sources. For more details, see [How does Datadog determine the Agent hostname?][1].
+
+**Note**: Hostnames should be unique within a Datadog account. Otherwise, you may experience inconsistencies on your host graphs.
+
+When there are multiple uniquely identifiable names for a single host, Datadog creates aliases for those host names. The names collected by the Agent are added as aliases for the chosen canonical name. For example, a single host running in EC2 might have an instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`).
 
 {{< img src="infrastructure/index/infra-list-alias2.png" alt="Host aliases" style="width:100%;">}}
 
-#### Agent configuration
+### Agent configuration
 
 You can view and manage Agent configurations across your entire infrastructure using [Fleet Automation][12].
 
@@ -101,7 +101,7 @@ To view Agent configurations:
 
 {{< img src="infrastructure/index/infra-list-config-4.png" alt="View Agent configurations in Fleet Automation" style="width:100%;">}}
 
-#### OpenTelemetry Collector configuration
+### OpenTelemetry Collector configuration
 
 When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the host detail panel. The Datadog Extension provides visibility into your Collector fleet from within the Datadog interface, helping you manage and debug your OpenTelemetry Collector deployments.
 
