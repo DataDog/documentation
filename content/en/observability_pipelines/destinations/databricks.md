@@ -26,7 +26,7 @@ The SQL examples in this section use the following placeholders:
 
 | Placeholder               | Description                                | Example                    |
 |---------------------------|--------------------------------------------|----------------------------|
-| `<USER>`                  | The user who creates the schema and table. |                            |
+| `<USER>`                  | The user who creates the schema and table. | `databricks-user@example.com` |
 | `<CATALOG_NAME>`          | The Unity Catalog name.                    | `main`                     |
 | `<SCHEMA_NAME>`           | The schema name.                           | `obs_pipelines`            |
 | `<TABLE_NAME>`            | The table name.                            | `apache_common_logs`       |
@@ -36,7 +36,7 @@ The SQL examples in this section use the following placeholders:
 
 In the Databricks workspace:
 
-1. If you're not a Databricks Workspace admin user, have an admin run the following command to grant your user permission to create a schema.
+1. If you're not a Databricks workspace admin, have an admin run the following command to grant your user permission to create a schema:
     ```sql
     GRANT CREATE SCHEMA ON CATALOG <CATALOG_NAME> TO <USER>;
     ```
@@ -46,15 +46,14 @@ In the Databricks workspace:
     CREATE SCHEMA IF NOT EXISTS <CATALOG_NAME>.<SCHEMA_NAME>
     MANAGED LOCATION '<YOUR_MANAGED_LOCATION>';
     ```
-    - **Note**: `MANAGED LOCATION` is optional. See the [Databricks documentation][2] for other options.
-    - See Databricks' [Create Schemas][2] documentation for more information.
+    - **Note**: `MANAGED LOCATION` is optional. See Databricks' [Create Schemas][2] documentation for more information.
 
-1. If you're not an admin user, have an admin run the following command to grant your user permission to create a table on the schema.
+1. If you're not an admin user, have an admin run the following command to grant your user permission to create a table on the schema:
     ```sql
     GRANT CREATE TABLE ON SCHEMA <CATALOG_NAME>.<SCHEMA_NAME> TO <USER>;
     ```
 
-1. Run the following command to create the table that Observability Pipelines sends log data to.
+1. Run the following command to create the table that Observability Pipelines writes log data to:
     ```sql
     CREATE TABLE <CATALOG_NAME>.<SCHEMA_NAME>.<TABLE_NAME> (
       host STRING,
@@ -78,7 +77,7 @@ To create a service principal:
 1. Click **Add service principal**.
 1. After the service principal is created, generate an OAuth secret for it.
     - Take note of the service principal's **Application ID** (client ID) and the OAuth client secret. You need both of them when you configure the Observability Pipelines Databricks destination.
-1. Run this SQL in Databricks to grant the service principal access to the catalog, schema, and table. Replace `<SERVICE_PRINCIPAL_UUID>` with the service principal's application ID from the previous step.
+1. Run this SQL in Databricks to grant the service principal access to the catalog, schema, and table. Replace `<SERVICE_PRINCIPAL_UUID>` with the service principal's application ID from the previous step:
     ```sql
     GRANT USE CATALOG ON CATALOG <CATALOG_NAME> TO <SERVICE_PRINCIPAL_UUID>;
     GRANT USE SCHEMA ON SCHEMA <CATALOG_NAME>.<SCHEMA_NAME> TO <SERVICE_PRINCIPAL_UUID>;
@@ -129,9 +128,9 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
-### How the destination works
+## How the destination works
 
-#### Event batching
+### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][10] for more information.
 
@@ -139,7 +138,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | None           | 10                | 1                   |
 
-[1]: https://docs.databricks.com/aws/en/ingestion/zerobus
+[1]: https://docs.databricks.com/aws/en/ingestion/zerobus-overview
 [2]: https://docs.databricks.com/aws/en/schemas/create-schema
 [3]: https://docs.databricks.com/aws/en/tables/managed#create-a-managed-table
 [4]: https://docs.databricks.com/aws/en/admin/users-groups/manage-service-principals#-add-service-principals-to-your-account
