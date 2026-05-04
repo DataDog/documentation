@@ -82,10 +82,27 @@
 }
 
 // Registry copy-link button
-button.registry-copy-link {
-    background: none;
-    border: none;
-    padding: 0;
+.registry-config-sections details {
+    position: relative;
+}
+
+.registry-config-sections summary {
+    padding-right: 48px;
+}
+
+details > a.registry-copy-link {
+    position: absolute;
+    top: 18px;
+    right: 16px;
+    color: white;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+a.registry-copy-link {
+    border-bottom: none;
     margin-left: 10px;
     position: relative;
     top: 4px;
@@ -100,7 +117,8 @@ button.registry-copy-link {
 }
 
 // Show link icon on hover of the parent dt
-dt:hover .registry-copy-link {
+dt:hover .registry-copy-link,
+summary:hover + .registry-copy-link{
     opacity: 1;
 }
 
