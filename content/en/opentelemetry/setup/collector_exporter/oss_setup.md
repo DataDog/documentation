@@ -268,12 +268,15 @@ Set the `DD_API_KEY` and `DD_SITE` environment variables before starting the Col
 
 ```yaml
 receivers:
+  # Receive telemetry from OpenTelemetry-instrumented applications
   otlp:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
+  # Collect host-level metrics for the Infrastructure List
+  # root_path maps to the host filesystem mounted at /hostfs
   hostmetrics:
     root_path: /hostfs
     collection_interval: 10s
@@ -308,14 +311,18 @@ receivers:
       processes: {}
 
 processors:
+  # Detect host and cloud metadata for hostname resolution and tagging
   resourcedetection:
     detectors: [env]
     timeout: 2s
     override: true
+  # Convert cumulative metrics to delta temporality for Datadog
   cumulativetodelta: {}
 
 connectors:
+  # Separates trace processing from sampling so span metrics are computed on all traces
   forward: {}
+  # Generate RED (Rate, Error, Duration) metrics from traces for APM
   spanmetrics:
     aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
     add_resource_attributes: true
@@ -381,11 +388,13 @@ connectors:
       - name: db.query.text
 
 exporters:
+  # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
     metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
+      # Send resource attributes and scope metadata as metric tags
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
@@ -398,6 +407,7 @@ exporters:
       batch: {}
 
 extensions:
+  # Report Collector metadata to Datadog for host enrichment
   datadog:
     api:
       site: ${env:DD_SITE}
@@ -428,6 +438,7 @@ service:
       receivers: [spanmetrics]
       exporters: [otlp_http]
   telemetry:
+    # Route Collector self-monitoring metrics through its own pipelines
     metrics:
       readers:
         - periodic:
@@ -462,12 +473,15 @@ Set the `DD_API_KEY` and `DD_SITE` environment variables before starting the Col
 
 ```yaml
 receivers:
+  # Receive telemetry from OpenTelemetry-instrumented applications
   otlp:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
+  # Collect host-level metrics for the Infrastructure List
+  # root_path maps to the host filesystem mounted at /hostfs
   hostmetrics:
     root_path: /hostfs
     collection_interval: 10s
@@ -502,11 +516,14 @@ receivers:
       processes: {}
 
 processors:
+  # Detect host and cloud metadata for hostname resolution and tagging
   resourcedetection:
     detectors: [env]
     timeout: 2s
     override: true
+  # Convert cumulative metrics to delta temporality for Datadog
   cumulativetodelta: {}
+  # Enrich telemetry with Kubernetes pod and container metadata
   k8s_attributes:
     extract:
       otel_annotations: true
@@ -545,7 +562,9 @@ processors:
           - from: connection
 
 connectors:
+  # Separates trace processing from sampling so span metrics are computed on all traces
   forward: {}
+  # Generate RED (Rate, Error, Duration) metrics from traces for APM
   spanmetrics:
     aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
     add_resource_attributes: true
@@ -611,11 +630,13 @@ connectors:
       - name: db.query.text
 
 exporters:
+  # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
     metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
+      # Send resource attributes and scope metadata as metric tags
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
@@ -628,8 +649,10 @@ exporters:
       batch: {}
 
 extensions:
+  # Required for Kubernetes liveness/readiness probes
   health_check:
     endpoint: ${env:MY_POD_IP}:13133
+  # Report Collector metadata to Datadog for host enrichment
   datadog:
     api:
       site: ${env:DD_SITE}
@@ -661,6 +684,7 @@ service:
       receivers: [spanmetrics]
       exporters: [otlp_http]
   telemetry:
+    # Route Collector self-monitoring metrics through its own pipelines
     metrics:
       readers:
         - periodic:
