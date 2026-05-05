@@ -11,6 +11,8 @@
 
 {{ $resource_path := print "_data/semantic-core/" (.Get "resource")}}
 {{ $resource := resources.Get $resource_path}}
+
+{{/* Only render otel metric name and description */}}
 {{ $allowed_cols := slice "otel" "description" }}
 
 {{ if $resource }}
@@ -28,15 +30,31 @@
             </tr>
         </thead>
         <tbody>
+        {{/* Get column indices of "otel" and "description" — both form the composite dedupe key */}}
+        {{ $otel_idx := 0 }}
+        {{ $desc_idx := 0 }}
+        {{ range $i, $h := $headers }}
+            {{ if eq $h "otel" }}{{ $otel_idx = $i }}{{ end }}
+            {{ if eq $h "description" }}{{ $desc_idx = $i }}{{ end }}
+        {{ end }}
+
+        {{ $unique_vals := newScratch }}
         {{ range $index, $row := $rows }}
             {{ if $index }}
-                <tr>
-                {{ range $i, $cell := $row }}
-                    {{ if in $allowed_cols (index $headers $i) }}
-                        <td>{{ $cell | markdownify }}</td>
+                {{/* Build a composite key from otel+description vals so rows with the same metric name
+                     but different descriptions are treated as distinct */}}
+                {{ $dedupe_key := print (index $row $otel_idx) "|" (index $row $desc_idx) }}
+                {{/* Deduplicate: skips the row if $unique_vals already recorded this $dedupe_key */}}
+                {{ if not ($unique_vals.Get $dedupe_key) }}
+                    {{ $unique_vals.Set $dedupe_key true }}
+                    <tr>
+                    {{ range $i, $cell := $row }}
+                        {{ if in $allowed_cols (index $headers $i) }}
+                            <td>{{ $cell | markdownify }}</td>
+                        {{ end }}
                     {{ end }}
+                    </tr>
                 {{ end }}
-                </tr>
             {{ end }}
         {{ end }}
         </tbody>
