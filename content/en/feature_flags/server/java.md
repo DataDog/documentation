@@ -544,7 +544,7 @@ In Spring Boot tests, register the `InMemoryProvider` through a `@TestConfigurat
 
 This guide follows the flag data path from the **Flagging Platform** (where flags are configured) through **Remote Configuration** and the **Datadog Agent** to the **Java SDK**, and back to the **Flagging Platform** (where evaluations and exposures appear). Work through each step in sequence to isolate where a problem originates.
 
-### 1. Flagging platform: verify flag configuration
+### 1. Flagging platform: Verify flag configuration
 
 Before checking infrastructure, confirm the flag itself is set up correctly:
 
@@ -552,7 +552,7 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 2. The flag targets the **correct environment** (`DD_ENV`). Flags do not target specific services—they apply to all services within the enabled environment.
 3. Your `DD_ENV` value appears in [Feature Flag Environments][5]. If it is absent, the environment has not received any flag traffic yet.
 
-### 2. Remote Configuration: verify the path
+### 2. Remote Configuration: Verify the path
 
 Remote Configuration delivers flag configurations from the Datadog backend to the Agent.
 
@@ -562,7 +562,7 @@ Remote Configuration delivers flag configurations from the Datadog backend to th
 4. **Fleet Automation**: Open [Fleet Automation][4], select the Agent your application connects to, and confirm Remote Configuration is active.
 5. **Agent CLI**: Run `datadog-agent status` and review the Remote Configuration section of the output. See [Agent Commands][6].
 
-### 3. Agent: verify Agent health and connectivity
+### 3. Agent: Verify Agent health and connectivity
 
 1. **Agent is running and reachable**: See [APM Connection Errors][2] for steps to verify Agent connectivity from the tracer.
 2. **Agent version**: Feature flagging requires Agent 7.x or later with EVP Proxy support.
@@ -576,7 +576,7 @@ Remote Configuration delivers flag configurations from the Datadog backend to th
    Cannot create backend API client since Agentless mode is disabled, and agent does not support EVP proxy
    ```
 
-### 4. SDK: verify Java SDK state
+### 4. SDK: Verify Java SDK state
 
 #### Enable debug logging
 
@@ -652,7 +652,7 @@ Review `reason` and `errorCode` to understand why the provider returned a given 
 
 `TYPE_MISMATCH` is returned when the evaluation method does not match the flag's configured type. Use the correct method for each flag type: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`.
 
-### 5. Flagging platform: verify data appears in Datadog
+### 5. Flagging platform: Verify data appears in Datadog
 
 #### Flag evaluation metrics
 
