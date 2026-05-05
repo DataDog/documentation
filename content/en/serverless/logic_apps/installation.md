@@ -95,7 +95,7 @@ See [Log Indexes][6] for more information.
 
 **Note**: Indexing logs may incur additional costs. Consider your retention requirements and budget when configuring indexes.
 
-## See your Logic App logs and traces in Datadog
+## See your Logic App traces in Datadog
 
 After invoking your Logic App:
 
