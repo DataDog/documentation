@@ -5,7 +5,7 @@ Mobile RUM collects frustration signals to help you identify the highest points 
 Mobile RUM collects two types of frustration signals:
 
 Rage Taps
-: A user taps on an element more than three times in a one-second sliding window within a 48dp radius (approximately 9mm).
+: A user taps on an element more than three times in a one-second sliding window within a radius of approximately 9mm (48dp).
 
 Error Taps
 : A user taps on an element, and at least one error occurs during the action's duration or within 100ms after the action ends.
