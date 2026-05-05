@@ -12,8 +12,8 @@ further_reading:
     text: "Monitor Claude Code adoption in your organization with Datadog's Agent Console"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Preview">}}
-Agent Console is in Preview and is available to all Datadog customers.
+{{< callout >}}
+Agent Console is available to all Datadog customers in Preview.
 {{< /callout >}}
 
 The [Agent Console][1] provides centralized monitoring for agentic developer tools. It collects logs and metrics from developer environments and surfaces them in real time within Datadog, giving you visibility into usage, cost, latency, and errors across your organization.
