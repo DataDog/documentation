@@ -721,7 +721,7 @@ You can deploy the Collector as a DaemonSet in Kubernetes using the [official Op
 {{% /tab %}}
 {{< /tabs >}}
 
-### 3. Run the collector
+### 3. Run the Collector
 
 Start the Collector with the recommended feature gate enabled. If you are using Docker or Kubernetes, the run command is included in the configuration tab above.
 
@@ -789,7 +789,7 @@ The `spanmetrics` connector generates RED metrics from trace data. These metrics
 
 For a complete list of dimensions included in the recommended configuration, see the [full configuration files][5] in the `opentelemetry-examples` repository.
 
-### OTLP HTTP Exporter
+### OTLP HTTP exporter
 
 The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints. Key configuration details:
 
