@@ -1,8 +1,8 @@
-{{/*  
+{{/*
     Render a HTML table from a CSV file located in the assets/_data/semantic-core directory (Global resource).
-    CSV file should be a 2D array with the first array/row as the header. 
+    CSV file should be a 2D array with the first array/row as the header.
 
-    Note: 
+    Note:
     - csv files mounted from websites-sources: https://github.com/DataDog/websites-sources/tree/main/assets/_data/semantic-core
     - csv files cannot be mounted to the ./data directory (https://gohugo.io/content-management/data-sources/)
 
@@ -11,24 +11,30 @@
 
 {{ $resource_path := print "_data/semantic-core/" (.Get "resource")}}
 {{ $resource := resources.Get $resource_path}}
+{{ $allowed_cols := slice "otel" "description" }}
 
 {{ if $resource }}
+{{ $rows := unmarshal $resource }}
+{{ $headers := index $rows 0 }}
 <div class="table-wrapper">
     <table class="table-fixed">
         <thead>
             <tr>
-            {{ range (index (unmarshal $resource) 0) }}
-                {{ $header := cond (eq . "dd") "Datadog" .}}
-                <th>{{ $header | upper }}</th>
+            {{ range $headers }}
+                {{ if in $allowed_cols . }}
+                    <th>{{ . | upper }}</th>
+                {{ end }}
             {{ end }}
             </tr>
         </thead>
         <tbody>
-        {{ range $index, $row := (unmarshal $resource) }}
+        {{ range $index, $row := $rows }}
             {{ if $index }}
                 <tr>
-                {{ range $row }}
-                    <td>{{ . | markdownify }}</td>
+                {{ range $i, $cell := $row }}
+                    {{ if in $allowed_cols (index $headers $i) }}
+                        <td>{{ $cell | markdownify }}</td>
+                    {{ end }}
                 {{ end }}
                 </tr>
             {{ end }}
