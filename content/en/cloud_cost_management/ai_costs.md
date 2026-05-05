@@ -16,20 +16,17 @@ further_reading:
   text: "Tag Pipelines"
 ---
 
-{{< callout btn_hidden="true" header="In Preview" >}}
-  AI Cost Management is in Preview.
-{{< /callout >}}
 
 ## Overview
 
-AI cost visibility gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including OpenAI and Anthropic. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, and attribute usage to the specific users and API keys driving it.
+AI cost visibility gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Anthropic, AWS Bedrock, Google Gemini, OpenAI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, and attribute usage to the specific users and API keys driving it.
 
 ## Prerequisites
 
 To use AI Cost Management, you must:
 
-- Configure [Cloud Cost Management][1] for at least one cloud provider (AWS, Azure, Google Cloud, or Oracle Cloud).
-- Connect your AI providers using [SaaS Cost Integrations][2]. See the setup instructions for each provider:
+- Be using [Cloud Cost Management][1] with a supported cloud provider ([AWS][8] or [Google Cloud][9]) or a connected [SaaS Cost Integration][2].
+- Connect your AI providers. AWS Bedrock, Google Gemini, and Vertex AI are available through your existing AWS and Google Cloud integrations. For OpenAI and Anthropic, see the setup instructions:
 
   - [OpenAI][2]
   - [Anthropic][3]
@@ -48,7 +45,7 @@ The AI cost summary page provides:
 
 ## Normalized AI tags
 
-AI cost data from all supported providers is normalized to a consistent set of tags, so you can filter, group, and compare AI spend consistently across dashboards, monitors, and other Datadog tools. Use the [Cloud Cost Explorer][6] to query and compare spend across providers without writing per-provider logic.
+AI cost data from all supported providers is normalized to a consistent set of tags, so you can filter, group, compare, and plan AI spend consistently across dashboards, monitors, budgets, and other Datadog tools. Use the [Cloud Cost Explorer][6] to query and compare spend across providers without writing per-provider logic.
 
 The following tags are available for all supported AI providers:
 
@@ -56,19 +53,29 @@ The following tags are available for all supported AI providers:
 |---|---|
 | `providername` | The AI provider. |
 | `model` | The AI model identifier (for example, `claude-opus-4-6`, `gpt-4.1`). |
-| `model_name` | The human-readable model name. |
+| `model_name` | The human-readable model name (for example, `Claude Opus 4.6`). |
 | `token_direction` | Whether tokens are being consumed (input) or generated (output) within a service or application. |
 | `token_category` | The specific category of tokens consumed, such as input/output tokens or tokens related to caching and search operations (for example, `cached input`, `cache write`, `standard input`, `output`). |
 | `project` | The project, workspace, or environment the AI costs belong to. |
-| `usage_type` | A combined charge description containing model, direction, cache, and other usage details. |
+
+Additional tags include:
+
+- `account_id`
+- `account_name`
+- `api_key_id`
+- `batch`
+- `endpoint`
+- `org_id`
+- `project_id`
+- `project_name`
+- `user_email`
+- `user_id`
 
 ## Attribute AI spend to users
 
 Out-of-the-box (OOTB) allocation rules use Datadog observability data to attribute AI costs to the users and API keys that generated them. OOTB allocation rules require no configuration and are available for OpenAI.
 
-After costs are attributed to users and API keys, use [Tag Pipelines][7] to automatically map them to teams, services, or business units for streamlined aggregate reporting.
-
-For more information, see [Custom Allocation Rules][8].
+After costs are attributed to users and API keys, use [Tag Pipelines][7] to automatically map them to teams, services, or business units for streamlined aggregate reporting. See [Reporting][10] for more information.
 
 ## Further reading
 
@@ -81,4 +88,6 @@ For more information, see [Custom Allocation Rules][8].
 [5]: https://app.datadoghq.com/cost/summarize/ai-costs
 [6]: https://app.datadoghq.com/cost/explorer
 [7]: /cloud_cost_management/allocation/tag_pipelines
-[8]: /cloud_cost_management/allocation/custom_allocation_rules
+[8]: /cloud_cost_management/setup/aws
+[9]: /cloud_cost_management/setup/google_cloud
+[10]: /cloud_cost_management/reporting
