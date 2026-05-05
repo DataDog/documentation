@@ -76,10 +76,10 @@ Alternatively, query the following span attributes directly:
 ### Why does my trace show "PARTIAL COST" or "COST UNAVAILABLE"?
 
 Each LLM span in a trace is priced independently. The warning appears when one or more LLM spans in the trace are missing a cost estimate:
-- **Partial cost** — some LLM spans in the trace have a cost, while others do not. The **Estimated Cost** value only reflects the priced spans.
-- **Cost unavailable** — none of the LLM spans in the trace have a cost.
+- **Partial cost**: Some LLM spans in the trace have a cost, while others do not. The **Estimated Cost** value reflects only the priced spans.
+- **Cost unavailable**: None of the LLM spans in the trace have a cost.
 
-Hover over the warning to see how many spans are missing cost, the reason for each missing cost, and the names of the affected spans. The reasons fall into one of the categories below.
+Hover over the warning to see how many spans are missing cost, the reason for each missing cost, and the names of the affected spans. The reasons fall into one of the following categories.
 
 ### Unsupported model provider
 
@@ -102,12 +102,12 @@ How to fix:
 The span has no `input_tokens` or `output_tokens` annotation, so Datadog has no token values to multiply by the per-token rate. (For embedding spans, only `input_tokens` is required.)
 
 How to fix:
-- For [auto-instrumentation][1], confirm your provider and SDK version are supported
+- For [auto-instrumentation][1], confirm your provider and SDK version are supported.
 - For manual instrumentation, annotate input and output token counts on the span. See the [SDK Reference][2] or [API][3].
 
 ### Unsupported pricing tier
 
-The provider charges different rates per region, context window size, or other pricing tier, and Datadog does not have a pricing entry for the tier this span hit.
+The provider charges different rates per region, context window size, or other pricing tier, and Datadog does not have a pricing entry for the tier this span uses.
 
 How to fix:
 - Manually supply input and output cost values on the span. See the [SDK Reference][2] or [API][3].
