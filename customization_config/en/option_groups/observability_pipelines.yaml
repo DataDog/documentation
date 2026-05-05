@@ -13,6 +13,6 @@ op_pipelines_setup_method_options:
   - id: terraform
 
 op_secrets_source_options:
-  - id: secrets_manager
+  - id: secrets_management
     default: true
   - id: environment_variables

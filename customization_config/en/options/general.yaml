@@ -511,8 +511,8 @@ options:
 - label: Elixir
   id: elixir
 
-- label: Secrets Manager
-  id: secrets_manager
+- label: Secrets Management
+  id: secrets_management
 
 - label: Environment Variables
   id: environment_variables

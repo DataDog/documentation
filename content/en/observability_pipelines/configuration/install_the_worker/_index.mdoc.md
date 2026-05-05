@@ -33,6 +33,15 @@ content_filters:
 
 ## Overview
 
+<!-- Linux - Overview -->
+{% if equals($platform, "linux") %}
+
+{% alert level="warning" %}
+For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.
+{% /alert %}
+
+{% /if %}
+
 The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your logs and metrics ({% glossary-tooltip term="preview" case="title" /%}), and then route them to different destinations.
 
 <!-- Kubernetes - Overview -->
@@ -64,7 +73,7 @@ This document goes over one of the ways you can set up the Observability Pipelin
 {% if equals($platform, "docker") %}
 
 <!-- API/TF - Docker - Secrets Management -->
-{% if equals($secrets_source, "secrets_manager") %}
+{% if equals($secrets_source, "secrets_management") %}
 1. Run the following command to install the Worker:
     ```
     docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
@@ -142,7 +151,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     ```
 
 <!-- API/TF - Kubernetes - Secrets Management -->
-{% if equals($secrets_source, "secrets_manager") %}
+{% if equals($secrets_source, "secrets_management") %}
 
 3. See [Secrets Management][18] on how to configure your `values.yaml` file for your secrets manager.
 4. Run the following command to install the Worker:
@@ -158,7 +167,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
-    
+
 {% /if %}
 
 <!-- API/TF - Kubernetes - Environment variables -->
@@ -194,15 +203,11 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 <!-- API/TF - Linux -->
 {% if equals($platform, "linux") %}
 
-{% alert level="warning" %}
-For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.
-{% /alert %}
-
 Follow these steps if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker](#manually-install-the-worker).
 
 <!-- API/TF - Linux - Secrets Management -->
 
-{% if equals($secrets_source, "secrets_manager") %}
+{% if equals($secrets_source, "secrets_management") %}
 1. Run this one-step command to install the Worker.
     ```bash
     DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
@@ -258,7 +263,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     | 1-5 TB/day | This option provisions the EC2 Auto Scaling group with a maximum of 2 compute optimized instances `c6g.large`. |
     | 5-10 TB/day | This option provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 5 compute optimized `c6g.large` instances. |
     | >10 TB/day | Datadog recommends this option for large-scale production deployments. It provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 10 compute optimized `c6g.xlarge` instances. |
-    
+
     **Note**: All other parameters are set to reasonable defaults for a Worker deployment, but you can adjust them for your use case as needed in the AWS Console before creating the stack.
 1. Select the AWS region you want to use to install the Worker.
 1. Click **Select API key** to choose the Datadog API key you want to use.
@@ -286,7 +291,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 1. Select **Docker** as your installation platform.
 
 <!-- UI - Docker - Secrets Management -->
-{% if equals($secrets_source, "secrets_manager") %}
+{% if equals($secrets_source, "secrets_management") %}
 
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
 3. Click **Select API key** to choose the Datadog API key you want to use.
@@ -336,7 +341,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 1. Select **Kubernetes** as your installation platform.
 
 <!-- UI - Kubernetes - Secrets Management -->
-{% if equals($secrets_source, "secrets_manager") %}
+{% if equals($secrets_source, "secrets_management") %}
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. See [Secrets Management][18] on how to configure your `values.yaml` file for your secrets manager.
@@ -383,7 +388,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 1. Select **Linux** as your installation platform.
 
 <!-- UI - Linux - Secrets Management -->
-{% if equals($secrets_source, "secrets_manager") %}
+{% if equals($secrets_source, "secrets_management") %}
 
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-linux.mdoc.md" /%}
@@ -423,7 +428,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 1. Select **CloudFormation** as your installation platform.
 
 <!-- UI - Cloudformation - Secrets Management -->
-{% if equals($secrets_source, "secrets_manager") %}
+{% if equals($secrets_source, "secrets_management") %}
 
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
 
@@ -705,7 +710,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 <!-- UI, API, Terraform - Linux - Secrets Management -->
-{% if equals($secrets_source, "secrets_manager") %}
+{% if equals($secrets_source, "secrets_management") %}
 
 3. Add your Datadog API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
     ```
@@ -751,10 +756,6 @@ Follow these steps to manually install the Worker, instead of running the one-li
 {% /tab %}
 {% tab label="RPM" %}
 
-{% alert level="danger" %}
-For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.
-{% /alert %}
-
 1. Set up the Datadog `rpm` repo on your system with the following command.
 
     **Note**: If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration below.
@@ -777,7 +778,7 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
     ```
 
 <!-- UI, API, Terraform - Linux - Secrets Management -->
-{% if equals($secrets_source, "secrets_manager") %}
+{% if equals($secrets_source, "secrets_management") %}
 3. Add your Datadog API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
