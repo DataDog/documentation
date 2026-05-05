@@ -76,7 +76,7 @@ For some vitals, you can also select other versions of the page to investigate b
 
 {{< img src="real_user_monitoring/browser/optimizing_performance/vitals-visualize.png" alt="Select different elements to preview and visualize the user's experience." style="width:100%;" >}}
 
-For Largest Contentful Paint and Interaction to Next Paint, the Optimization page also displays a subparts breakdown that decomposes the metric into its constituent phases. Use the breakdown to identify which phase contributes most to the overall metric and direct optimization work to the relevant phase. For details on what each subpart represents, see [Diagnose Core Web Vitals with subparts][14].
+For Largest Contentful Paint and Interaction to Next Paint, the Optimization page also displays a breakdown of the metric into its individual phases. Use the breakdown to identify which phase contributes most to the overall metric and direct optimization work to the relevant phase. For details on what each subpart represents, see [Diagnose Core Web Vitals with subparts][14].
 
 ## Troubleshoot resources and errors
 
