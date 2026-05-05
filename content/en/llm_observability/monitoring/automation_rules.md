@@ -67,7 +67,7 @@ A higher sampling rate captures more traces but may overflow the destination fas
 
 ## Troubleshooting
 
-**My rule is saved but no traces are showing up.**
+**No traces appear after saving a rule.**
 
 Most often, one of:
 
