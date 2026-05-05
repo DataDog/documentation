@@ -76,7 +76,7 @@ Two OpenAPI 3.x spec files are the source of truth for all API data:
 - [`src/mocked_dependencies/api/v1/full_spec.yaml`](src/mocked_dependencies/api/v1/full_spec.yaml) — v1 endpoints
 - [`src/mocked_dependencies/api/v2/full_spec.yaml`](src/mocked_dependencies/api/v2/full_spec.yaml) — v2 endpoints
 
-Each spec contains `tags` (which map to page categories), `paths` (endpoint definitions), `components/schemas` (reusable data models), and `servers` (region-specific base URLs). These files are imported at build time as raw strings using Vite's `?raw` import syntax, so no runtime file I/O is needed. They live under [`mocked_dependencies/`](src/mocked_dependencies/) until the live spec feed is wired up.
+Each spec contains `tags` (which map to page categories), `paths` (endpoint definitions), `components/schemas` (reusable data models), and `servers` (region-specific base URLs). These files are imported at build time as raw strings using Vite's `?raw` import syntax, so no runtime file I/O is needed. The spec files themselves are pulled from Hugo (the `@hugo-site` alias in Astro) until a shared folder can be set up.
 
 ### 2. Data extraction and transformation
 
