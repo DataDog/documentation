@@ -21,9 +21,11 @@ The Host List gives you a live inventory of all hosts reporting to Datadog throu
 
 {{< img src="infrastructure/index/infra-list-overview.png" alt="The Host List with a filter panel on the left and a list of hosts with customizable columns." style="width:100%;">}}
 
-By default, the Host List shows hosts with activity in the last 15 minutes. Click the play icon next to the time range to switch to a live view.
+By default, the Host List shows hosts with activity in the last 15 minutes, with an option to switch to a live view.
 
 {{< img src="infrastructure/index/infra-list-time-span.png" alt="The time range control showing a 15-minute window and a play icon to switch to a live view." style="width:50%;">}}
+
+**Note**: This page describes the new Host List view. The Host List also has a legacy view, and you can switch between the two with the toggle in the upper-right corner.
 
 **Note**: This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
 
