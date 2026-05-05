@@ -26,7 +26,7 @@ AI cost visibility gives FinOps and engineering teams a unified destination for 
 To use AI Cost Management, you must:
 
 - Be using [Cloud Cost Management][1] with a supported cloud provider ([AWS][8] or [Google Cloud][9]) or a connected [SaaS Cost Integration][2].
-- Connect your AI providers. AWS Bedrock, Google Gemini, and Vertex AI are available through your existing AWS and Google Cloud integrations. For OpenAI and Anthropic, see the setup instructions:
+- Connect your AI providers. AWS Bedrock, Google Gemini, and Vertex AI are available through your existing AWS and Google Cloud integrations and do not require further setup. For OpenAI and Anthropic, see the setup instructions:
 
   - [OpenAI][2]
   - [Anthropic][3]
@@ -58,7 +58,7 @@ The following tags are available for all supported AI providers:
 | `token_category` | The specific category of tokens consumed, such as input/output tokens or tokens related to caching and search operations (for example, `cached input`, `cache write`, `standard input`, `output`). |
 | `project` | The project, workspace, or environment the AI costs belong to. |
 
-Additional tags include:
+Additional normalized tags include:
 
 - `account_id`
 - `account_name`
