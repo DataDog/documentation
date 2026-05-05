@@ -1,8 +1,4 @@
 {
-  "api-management": {
-    "name": "API Management",
-    "description": "Configure your API endpoints through the Datadog API."
-  },
   "apm": {
     "name": "APM",
     "description": "Observe, troubleshoot, and improve cloud-scale applications with all telemetry in context"
