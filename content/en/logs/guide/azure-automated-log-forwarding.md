@@ -17,6 +17,8 @@ The ARM template deploys resources from a series of Azure services (storage acco
 
 **All sites**: Automated log forwarding is available to use on all [Datadog sites][4].
 
+**Supported Azure environments**: Automated log forwarding supports the Azure commercial (public) cloud only. Azure Government and Azure China are not supported.
+
 ## How to choose between automated and manual setup
 
 Choose the manual setup method if you want to:
@@ -45,12 +47,7 @@ Use the **Configure Log Forwarding** flow to set up new or manage existing log f
 
 ### ARM template
 
-Alternatively, you can deploy automated log forwarding with an Azure Resource Manager (ARM) template. Open the ARM template corresponding to your Azure environment:
-
-  - [Azure Public][1]
-  - [Azure China][7]
-
-The sections below provide instructions for completing each page of the template.
+Alternatively, you can deploy automated log forwarding with an [Azure Public ARM template][1]. The sections below provide instructions for completing each page of the template.
 
 #### Basics
 
@@ -205,7 +202,6 @@ The script first discovers any instances running in each subscription, then prom
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /getting_started/site/
 [5]: https://learn.microsoft.com/en-us/azure/cloud-shell/overview
-[7]: https://portal.azure.cn/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2FcreateUiDefinition.json
 [8]: https://azure.microsoft.com/products/container-apps
 [9]: https://learn.microsoft.com/azure/storage/common/storage-account-overview
 [10]: https://learn.microsoft.com/azure/azure-monitor/roles-permissions-security#monitoring-contributor
