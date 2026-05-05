@@ -12,7 +12,7 @@ further_reading:
     text: "Monitor Claude Code adoption in your organization with Datadog's Agent Console"
 ---
 
-{{< callout >}}
+{{< callout url="#" btn_hidden="true" header="Preview">}}
 Agent Console is available to all Datadog customers in Preview.
 {{< /callout >}}
 
