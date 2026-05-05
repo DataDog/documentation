@@ -1,17 +1,5 @@
 ---
 phrase:
-  priority_files:
-    - "data/partials/home.yaml"
-    - "content/en/getting_started/agent/_index.md"
-    - "content/en/bits_ai/mcp_server/setup.md"
-    - "content/en/security/code_security/static_analysis/static_analysis_rules/_index.md"
-    - "content/en/bits_ai/mcp_server/_index.md"
-    - "content/en/synthetics/_index.md"
-    - "content/en/agent/configuration/agent-commands.md"
-    - "content/en/logs/explorer/search_syntax.md"
-    - "content/en/agent/_index.md"
-    - "content/en/standard-attributes/_index.md"
-    - "content/en/real_user_monitoring/guide/proxy-rum-data.mdoc.md"
   sources:
     - src: "content/en/agent/configuration/secrets-management.md"
       dst: "content/{lang}/agent/configuration/secrets-management.md"
