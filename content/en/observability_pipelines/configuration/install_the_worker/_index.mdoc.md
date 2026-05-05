@@ -65,33 +65,23 @@ This document goes over one of the ways you can set up the Observability Pipelin
 
 <!-- API/TF - Docker - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
-Run the following command to install the Worker:
-```
-docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
-    -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
-    -e DD_SITE=<DATADOG_SITE> \
-    -v /path/to/local/bootstrap.yaml:/etc/observability-pipelines-worker/bootstrap.yaml \
-    datadog/observability-pipelines-worker run
-```
-
-You must replace the placeholders with these values:
-- `<DATADOG_API_KEY>`: Your Datadog API key.
-    - **Note**: The API key must be [enabled for Remote Configuration][10].
-- `<PIPELINE_ID>`: The ID of your pipeline.
-- `<DATADOG_SITE>`: The [Datadog site][11].
-
-**Notes**:
-- By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
+1. Run the following command to install the Worker:
     ```
-    -p 8282:8088 datadog/observability-pipelines-worker run
+    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+        -e DD_SITE=<DATADOG_SITE> \
+        -v /path/to/local/bootstrap.yaml:/etc/observability-pipelines-worker/bootstrap.yaml \
+        datadog/observability-pipelines-worker run
     ```
-- Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you identify the Worker.
-- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
-### Connect the Worker to your secrets manager
+    You must replace the placeholders with the following values:
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
+        - **Note**: The API key must be [enabled for Remote Configuration][10].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<DATADOG_SITE>`: The [Datadog site][11].
 
-1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][12] for more information.
-1. Restart the Worker to use the updated bootstrap file:
+2. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][12] for more information.
+3. Restart the Worker to use the updated bootstrap file:
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
@@ -123,6 +113,8 @@ You must replace the placeholders with these values:
     - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
     - See [Environment Variables][7] for a list of destination environment variables.
 
+{% /if %}
+
 **Notes**:
 - By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
     ```
@@ -130,8 +122,6 @@ You must replace the placeholders with these values:
     ```
 - Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you identify the Worker.
 - See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
-
-{% /if %}
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
 
@@ -163,6 +153,12 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     --set datadog.pipelineId=<PIPELINE_ID> \
     datadog/observability-pipelines-worker
     ```
+    You must replace the placeholders with the following values:
+
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
+        - **Note**: The API key must be [enabled for Remote Configuration][10].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    
 {% /if %}
 
 <!-- API/TF - Kubernetes - Environment variables -->
@@ -192,10 +188,6 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
         - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[1].value='https://hec.splunkcloud.com:8088' \`
         - See [Environment Variables][7] for a list of destination environment variables.
 
-    By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
-    ```
-    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
-    ```
 {% /if %}
 {% /if %}
 
@@ -266,6 +258,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     | 1-5 TB/day | This option provisions the EC2 Auto Scaling group with a maximum of 2 compute optimized instances `c6g.large`. |
     | 5-10 TB/day | This option provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 5 compute optimized `c6g.large` instances. |
     | >10 TB/day | Datadog recommends this option for large-scale production deployments. It provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 10 compute optimized `c6g.xlarge` instances. |
+    
     **Note**: All other parameters are set to reasonable defaults for a Worker deployment, but you can adjust them for your use case as needed in the AWS Console before creating the stack.
 1. Select the AWS region you want to use to install the Worker.
 1. Click **Select API key** to choose the Datadog API key you want to use.
@@ -317,7 +310,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
 3. Click **Select API key** to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
-4. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
+4. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered in **Review your secrets management**.
 
 5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
@@ -347,7 +340,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. See [Secrets Management][18] on how to configure your `values.yaml` file for your secrets manager.
-7. Run the following command to install the Worker:
+7. Run the command provided in the UI to install the Worker.
     ```shell
     helm upgrade --install opw \
     -f values.yaml \
@@ -355,7 +348,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     --set datadog.pipelineId=<PIPELINE_ID> \
     datadog/observability-pipelines-worker
     ```
-    
+
 8. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 {% /if %}
@@ -376,10 +369,6 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
     datadog/observability-pipelines-worker
     ```
-    **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
-    ```
-    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
-    ```
 
 7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
@@ -390,8 +379,6 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 {% if equals($platform, "linux") %}
 
 {% partial file="observability_pipelines/install_the_worker/ui-intro.mdoc.md" /%}
-
-The steps below use the one-line installation script to install the Worker.
 
 1. Select **Linux** as your installation platform.
 
@@ -406,6 +393,8 @@ The steps below use the one-line installation script to install the Worker.
     sudo systemctl restart observability-pipelines-worker
     ```
 7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+
+**Notes**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 {% /if %}
 
@@ -583,6 +572,10 @@ Depending on your use case, configure either an [Application Load Balancer][22] 
 {% if equals($platform, "kubernetes") %}
 
 **Notes**:
+- By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
+    ```
+    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
+    ```
 - If you enable [disk buffering][16] for destinations, you must enable Kubernetes [persistent volumes][17] in the Observability Pipelines helm chart.
 - See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
@@ -714,8 +707,8 @@ Follow these steps to manually install the Worker, instead of running the one-li
 <!-- UI, API, Terraform - Linux - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
 
-3. Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
-    ```shell
+3. Add your Datadog API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
+    ```
     sudo cat <<EOF > /etc/default/observability-pipelines-worker
     DD_API_KEY=<DATADOG_API_KEY>
     DD_OP_PIPELINE_ID=<PIPELINE_ID>
@@ -727,8 +720,8 @@ Follow these steps to manually install the Worker, instead of running the one-li
 <!-- UI, API, Terraform - Linux - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-3. Add your API key, site (for example, `datadoghq.com` for US1), source, and destination environment variables to the Worker's environment file:
-    ```shell
+3. Add your Datadog API key, site (for example, `datadoghq.com` for US1), and source and destination [environment variables][7] to the Worker's environment file:
+    ```
     sudo cat <<EOF > /etc/default/observability-pipelines-worker
     DD_API_KEY=<DATADOG_API_KEY>
     DD_OP_PIPELINE_ID=<PIPELINE_ID>
@@ -740,16 +733,18 @@ Follow these steps to manually install the Worker, instead of running the one-li
 {% /if %}
 
 4. Start the worker:
-    ```
+    ```shell
     sudo systemctl restart observability-pipelines-worker
     ```
 
-<!-- UI - Linux -->
+<!-- UI - Linux APT -->
 {% if includes($interface, ["ui"]) %}
 
 5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
-**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+**Notes**:
+- The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
+- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 {% /if %}
 
@@ -763,7 +758,7 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
 1. Set up the Datadog `rpm` repo on your system with the following command.
 
     **Note**: If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration below.
-    ```shell
+    ```
     cat <<EOF > /etc/yum.repos.d/datadog-observability-pipelines-worker.repo
     [observability-pipelines-worker]
     name = Observability Pipelines Worker
@@ -783,29 +778,29 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
 
 <!-- UI, API, Terraform - Linux - Secrets Management -->
 {% if equals($secrets_source, "secrets_manager") %}
-3. Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
-        ```shell
-        sudo cat <<-EOF > /etc/default/observability-pipelines-worker
-        DD_API_KEY=<API_KEY>
-        DD_OP_PIPELINE_ID=<PIPELINE_ID>
-        DD_SITE=<SITE>
-        EOF
-        ```
+3. Add your Datadog API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
+    ```
+    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY=<API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<SITE>
+    EOF
+    ```
 {% /if %}
 
 <!-- UI, API, Terraform - Linux - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-3. Add your API key, site (for example, `datadoghq.com` for US1), source, and destination environment variables to the Worker's environment file:
-        ```shell
-        sudo cat <<-EOF > /etc/default/observability-pipelines-worker
-        DD_API_KEY=<API_KEY>
-        DD_OP_PIPELINE_ID=<PIPELINE_ID>
-        DD_SITE=<SITE>
-        <SOURCE_ENV_VARIABLES>
-        <DESTINATION_ENV_VARIABLES>
-        EOF
-        ```
+3. Add your Datadog API key, site (for example, `datadoghq.com` for US1), and source and destination [environment variables][7] to the Worker's environment file:
+    ```shell
+    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY=<API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<SITE>
+    <SOURCE_ENV_VARIABLES>
+    <DESTINATION_ENV_VARIABLES>
+    EOF
+    ```
 {% /if %}
 
 4. Start the worker:
@@ -818,7 +813,9 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
 
 5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
-**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+**Notes**:
+- The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
+- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
 
 {% /if %}
 
