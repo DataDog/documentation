@@ -27,7 +27,7 @@ The Datadog Feature Flags SDK for Java requires:
 - **Datadog Java SDK**: Version **1.57.0** or later
 - **OpenFeature SDK**: Version **1.18.2** or later
 - **Datadog Agent**: Version **7.x or later** with [Remote Configuration][1] enabled
-- **Datadog [API Key][6]**: Required for Remote Configuration
+- **Datadog [API key][6]**: Configured on the Agent (not the application) for Remote Configuration
 
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
 
@@ -123,9 +123,6 @@ export DD_REMOTE_CONFIG_ENABLED=true
 # Required: Enable experimental feature flagging support
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
-# Required: Your Datadog API key
-export DD_API_KEY=<YOUR_API_KEY>
-
 # Required: Service name
 export DD_SERVICE=<YOUR_SERVICE_NAME>
 
@@ -145,7 +142,6 @@ java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
 java -javaagent:path/to/dd-java-agent.jar \
   -Ddd.remote.config.enabled=true \
   -Ddd.experimental.flagging.provider.enabled=true \
-  -Ddd.api.key=<YOUR_API_KEY> \
   -Ddd.service=<YOUR_SERVICE_NAME> \
   -Ddd.env=<YOUR_ENVIRONMENT> \
   -Ddd.version=<YOUR_APP_VERSION> \
@@ -551,7 +547,7 @@ Before investigating specific errors, confirm these prerequisites are in place:
 
 1. **The Datadog Agent is healthy and reachable**: See [APM Connection Errors][2] to verify Agent connectivity.
 2. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
-3. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
+3. **Required application environment variables are set**: `DD_SERVICE` and `DD_ENV`. (`DD_API_KEY` and `DD_SITE` belong on the Agent, not the application.)
 4. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
 
 After confirming all prerequisites, continue with the following sections if feature flags still aren't working.
