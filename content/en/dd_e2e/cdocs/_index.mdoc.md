@@ -58,6 +58,12 @@ This folder contains a collection of pages used for e2e tests. These pages are n
 * [Definition list](/dd_e2e/cdocs/components/definition_list)
 * Variations of the definition list component render as expected on initial page load.
 ---
+* [Glossary tooltip](/dd_e2e/cdocs/components/glossary_tooltip)
+* Variations of the glossary tooltip component render as expected on initial page load.
+---
+* [Icon](/dd_e2e/cdocs/components/icon)
+* Variations of the icon component render as expected on initial page load.
+---
 * [Image](/dd_e2e/cdocs/components/image)
 * Variations of the image component render as expected on initial page load.
 ---
