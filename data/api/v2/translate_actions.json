@@ -4994,7 +4994,7 @@
   "CreateWidget": {
     "description": "Create a new widget for a given experience type.",
     "summary": "Create a widget",
-    "request_description": "Widget request body.",
+    "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`: every type requires `requests`, and\nsome types require additional fields (e.g. `cloud_cost_summary`\nrequires `graph_options`, `geomap` requires `style` and `view`).\nThe example below shows a complete `cloud_cost_summary` payload\nfor the `ccm_reports` experience type.",
     "request_schema_description": "Request body for creating or updating a widget."
   },
   "DeleteWidget": {
@@ -5008,7 +5008,7 @@
   "UpdateWidget": {
     "description": "Update a widget by its UUID for a given experience type. This performs a full replacement of the widget definition.",
     "summary": "Update a widget",
-    "request_description": "Widget request body.",
+    "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
   },
   "CreateWorkflow": {
