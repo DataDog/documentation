@@ -35,6 +35,8 @@ Configure the `rum.privacy` object in your build plugin options:
 | `rum.privacy.include` | Array of RegExp or String | No | JS/TS files (.js, .ts, .jsx, .tsx, .mjs, .cjs, and variants) | File patterns to process for action name deobfuscation. |
 | `rum.privacy.exclude` | Array of RegExp or String | No | `node_modules`, `.preval.` files | File patterns to skip. |
 
+Set privacy level to `mask-unless-allowlisted`. See more in xxx
+
 ## Example
 
 With default settings (processes all JS/TS files, excludes `node_modules`):
@@ -71,7 +73,6 @@ module.exports = {
   ],
 };
 ```
-
 <div class="alert alert-info">These examples use webpack. The configuration object is identical across all supported bundlers. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions.</div>
 
 ## Further reading
