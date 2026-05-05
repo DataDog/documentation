@@ -81,7 +81,7 @@
     padding: 16px;
 }
 
-// Registry copy-link button
+// Registry copy-links
 .registry-config-sections details {
     position: relative;
 }
@@ -96,7 +96,7 @@ details > a.registry-copy-link {
     right: 16px;
     color: white;
 
-    &:hover {
+    &:hover, &:focus {
         opacity: 1;
     }
 }
@@ -109,6 +109,11 @@ a.registry-copy-link {
     color: inherit;
     cursor: pointer;
     opacity: .5;
+
+    &:focus {
+        outline: none;
+        opacity: 1;
+    }
 
     &--copied {
         color: $ddpurple;
