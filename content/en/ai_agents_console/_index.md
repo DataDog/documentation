@@ -1,5 +1,5 @@
 ---
-title: AI Agents Console
+title: Agent Console
 further_reading:
   - link: '/integrations/anthropic-usage-and-costs/'
     tag: 'Documentation'
@@ -9,16 +9,16 @@ further_reading:
     text: 'Cursor integration'
   - link: "https://www.datadoghq.com/blog/claude-code-monitoring"
     tag: "Blog"
-    text: "Monitor Claude Code adoption in your organization with Datadog's AI Agents Console"
+    text: "Monitor Claude Code adoption in your organization with Datadog's Agent Console"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview">}}
-AI Agents Console is in Preview and is available to all Datadog customers.
+Agent Console is available to all Datadog customers in Preview.
 {{< /callout >}}
 
-The [AI Agents Console][1] provides centralized monitoring for agentic developer tools. It collects logs and metrics from developer environments and surfaces them in real time within Datadog, giving you visibility into usage, cost, latency, and errors across your organization.
+The [Agent Console][1] provides centralized monitoring for agentic developer tools. It collects logs and metrics from developer environments and surfaces them in real time within Datadog, giving you visibility into usage, cost, latency, and errors across your organization.
 
-AI Agents Console supports the following integrations:
+Agent Console supports the following integrations:
 
 | Tool | Description |
 |------|-------------|
@@ -32,9 +32,9 @@ AI Agents Console supports the following integrations:
 
 #### Option 1: Anthropic Usage and Costs integration (recommended)
 
-To monitor Claude Code with AI Agents Console, set up the [Anthropic Usage and Costs][4] integration.
+To monitor Claude Code with Agent Console, set up the [Anthropic Usage and Costs][4] integration.
 
-After setup, navigate to the [AI Agents Console][1] and click the {{< ui >}}Claude Code{{< /ui >}} tile to view metrics.
+After setup, navigate to the [Agent Console][1] and click the {{< ui >}}Claude Code{{< /ui >}} tile to view metrics.
 
 #### Option 2: OpenTelemetry (OTLP)
 
@@ -61,10 +61,10 @@ The following procedure configures Claude Code to send telemetry directly to Dat
 
    Replace `<DATADOG_API_KEY>` with your Datadog API key.
 
-   <div class="alert alert-info">To set up AI Agents Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or <a href="https://code.claude.com/docs/en/server-managed-settings">server-managed settings</a> to distribute the Claude Code settings file across all managed devices.</div>
+   <div class="alert alert-info">To set up Agent Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or <a href="https://code.claude.com/docs/en/server-managed-settings">server-managed settings</a> to distribute the Claude Code settings file across all managed devices.</div>
 4. Restart Claude Code.
 
-After you restart Claude Code, navigate to the [AI Agents Console][1] in Datadog and click on the {{< ui >}}Claude Code{{< /ui >}} tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
+After you restart Claude Code, navigate to the [Agent Console][1] in Datadog and click on the {{< ui >}}Claude Code{{< /ui >}} tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
 
 #### Option 3: Forward data through the Datadog Agent
 
@@ -96,22 +96,22 @@ After you restart Claude Code, navigate to the [AI Agents Console][1] in Datadog
    }
    ```
 
-   <div class="alert alert-info">To set up AI Agents Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or <a href="https://code.claude.com/docs/en/server-managed-settings">server-managed settings</a> to distribute the Claude Code settings file across all managed devices.</div>
+   <div class="alert alert-info">To set up Agent Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or <a href="https://code.claude.com/docs/en/server-managed-settings">server-managed settings</a> to distribute the Claude Code settings file across all managed devices.</div>
 5. Restart Claude Code.
 
-After you restart Claude Code, navigate to the [AI Agents Console][1] in Datadog and click on the {{< ui >}}Claude Code{{< /ui >}} tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
+After you restart Claude Code, navigate to the [Agent Console][1] in Datadog and click on the {{< ui >}}Claude Code{{< /ui >}} tile. Metrics (usage, cost, latency, errors) should appear within a few minutes.
 
 ### Cursor
 
-To monitor Cursor with AI Agents Console, set up the [Cursor][5] integration using the Datadog Extension for Cursor.
+To monitor Cursor with Agent Console, set up the [Cursor][5] integration using the Datadog Extension for Cursor.
 
-After setup, navigate to the [AI Agents Console][1] and click the {{< ui >}}Cursor{{< /ui >}} tile to view metrics.
+After setup, navigate to the [Agent Console][1] and click the {{< ui >}}Cursor{{< /ui >}} tile to view metrics.
 
 ### GitHub Copilot
 
-To monitor GitHub Copilot with AI Agents Console, set up the [GitHub Copilot][10] integration.
+To monitor GitHub Copilot with Agent Console, set up the [GitHub Copilot][10] integration.
 
-After setup, navigate to the [AI Agents Console][1] and click the {{< ui >}}GitHub Copilot{{< /ui >}} tile to view metrics.
+After setup, navigate to the [Agent Console][1] and click the {{< ui >}}GitHub Copilot{{< /ui >}} tile to view metrics.
 
 ## Further reading
 
