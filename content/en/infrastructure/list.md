@@ -17,13 +17,15 @@ further_reading:
 
 ## Overview
 
-The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
+The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog.
 
 {{< img src="infrastructure/index/infra-list-overview.png" alt="The Host List with a filter panel on the left and a list of hosts with customizable columns." style="width:100%;">}}
 
 By default, the Host List shows hosts with activity in the last 15 minutes. Click the play icon next to the time range to switch to a live view.
 
 {{< img src="infrastructure/index/infra-list-time-span.png" alt="The time range control showing a 15-minute window and a play icon to switch to a live view." style="width:50%;">}}
+
+**Note**: This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
 
 ## Filter and search
 
@@ -58,18 +60,13 @@ Drag a column to reorder it. To resize a column, drag its right edge. To hide a 
 
 The following columns combine multiple datapoints into a single column:
 
-Configurations
-: The cloud provider, operating system, and Datadog Agent installation status for each host.
-
-Software
-: The host's web server, database, cache, and container orchestrator (such as Docker or Kubernetes), if detected.
-
-Integrations
-: The Datadog Agent integrations enabled on the host. **Note**: This column is similar to the **Apps** column in the legacy view. However, it includes only Agent integrations, not custom metrics reported from the host.
+- **Configurations**: The cloud provider, operating system, and Datadog Agent installation status for each host.
+- **Software**: The host's web server, database, cache, and container orchestrator (such as Docker or Kubernetes), if detected.
+- **Integrations**: The Datadog Agent integrations enabled on the host. This column is similar to the **Apps** column in the legacy view, but it includes only Agent integrations, not custom metrics reported from the host.
 
 ## Inspect a host
 
-Click any host to open its detail panel. The detail panel is the [Resource Catalog][15] side panel and includes:
+Click any host to open its detail panel, which includes:
 
 - [Hostnames and aliases](#hostnames-and-aliases)
 - [Tags][2]
@@ -80,6 +77,8 @@ Click any host to open its detail panel. The detail panel is the [Resource Catal
 - [OpenTelemetry Collector configuration](#opentelemetry-collector-configuration) (if enabled)
 
 {{< img src="infrastructure/index/infra-list-side-panel.png" alt="The host detail side panel with tabs for Host Summary, Metrics, Containers, Processes, and other host data." style="width:100%;">}}
+
+The detail panel uses the [Resource Catalog][15] side panel.
 
 ### Hostnames and aliases
 
