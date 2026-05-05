@@ -58,6 +58,9 @@ exporters:
       key: ${env:DD_API_KEY}
       site: {{< region-param key="dd_site" >}}
     # hostname: "my-collector-host"  # Optional: must match Datadog Extension hostname if set
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 ```
 
 ### 3. Enable the extension in your service configuration
@@ -70,11 +73,9 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
       exporters: [datadog/exporter]
     metrics:
       receivers: [otlp]
-      processors: [batch]
       exporters: [datadog/exporter]
 ```
 
@@ -309,17 +310,18 @@ exporters:
       key: ${env:DD_API_KEY}
       site: {{< region-param key="dd_site" >}}
     hostname: "my-collector-host"
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 
 service:
   extensions: [datadog]
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
       exporters: [datadog/exporter]
     metrics:
       receivers: [otlp]
-      processors: [batch]
       exporters: [datadog/exporter]
 ```
 
