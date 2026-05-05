@@ -168,9 +168,9 @@ To configure the Snowflake integration in Datadog:
 
 This field is optional. Use it when the Snowflake account name Datadog connects to does not match how other tools reference the same account.
 
-Lineage events arriving from sources outside Datadog (OpenLineage emitters, dbt manifests, query history from other tools) identify the warehouse using whichever name was configured upstream. If those names differ from the canonical account URL Datadog uses, lineage from those sources is not stitched to this Snowflake integration.
+Lineage events from outside Datadog include OpenLineage emitters, dbt manifests, and query history from other tools. These events identify the warehouse using whatever name the upstream tool was configured with. If those names differ from the canonical account URL Datadog uses, lineage from those sources is not stitched to this Snowflake integration.
 
-Registering each alternative name as a {{< ui >}}Custom alias URL{{< /ui >}} tells Datadog to treat them as references to the same Snowflake account, so cross-tool lineage resolves correctly. Common cases include:
+Registering each alternative name as a {{< ui >}}Custom alias URL{{< /ui >}} tells Datadog to treat them as references to the same Snowflake account. Cross-tool lineage then resolves correctly. Common cases include:
 
 - The account is reached through an AWS PrivateLink URL.
 - A dbt project, BI tool, or other connector is configured with an account identifier that does not match the canonical URL.
