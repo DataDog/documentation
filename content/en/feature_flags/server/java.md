@@ -546,9 +546,10 @@ In Spring Boot tests, register the `InMemoryProvider` through a `@TestConfigurat
 Before investigating specific errors, confirm these prerequisites are in place:
 
 1. **The Datadog Agent is healthy and reachable**: See [APM Connection Errors][2] to verify Agent connectivity.
-2. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
-3. **Required application environment variables are set**: `DD_SERVICE` and `DD_ENV`. (`DD_API_KEY` and `DD_SITE` belong on the Agent, not the application.)
-4. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
+2. **Required Agent environment variables are set**: `DD_API_KEY`.
+3. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
+4. **Required tracer environment variables are set**: `DD_ENV` and `DD_SITE`.
+5. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
 
 After confirming all prerequisites, continue with the following sections if feature flags still aren't working.
 
