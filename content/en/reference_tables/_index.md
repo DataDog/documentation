@@ -299,7 +299,7 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_configuration/processors/#lookup-processor
+[1]: /logs/log_configuration/processors/lookup_processor/
 [2]: /account_management/audit_trail/
 [3]: /events/
 [4]: /monitors/types/event/

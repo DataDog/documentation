@@ -791,6 +791,11 @@ components:
           items:
             $ref: "#/components/schemas/ResourceProviderConfig"
           type: array
+        secretless_auth_enabled:
+          description: |-
+            (Preview) When enabled, Datadog authenticates with this app registration using federated workload identity credentials instead of a client secret.
+          example: true
+          type: boolean
         tenant_name:
           description: Your Azure Active Directory ID.
           example: "testc44-1234-5678-9101-cc00736ftest"
@@ -26826,6 +26831,15 @@ paths:
                 - datadoghq.eu
                 - ddog-gov.com
                 - us2.ddog-gov.com
+              x-enum-varnames:
+                - US1
+                - US3
+                - US5
+                - AP1
+                - AP2
+                - EU1
+                - GOV
+                - US2_GOV
             subdomain:
               default: ip-ranges
               description: The subdomain where the API is deployed.
@@ -41213,6 +41227,15 @@ paths:
                 - datadoghq.eu
                 - ddog-gov.com
                 - us2.ddog-gov.com
+              x-enum-varnames:
+                - US1
+                - US3
+                - US5
+                - AP1
+                - AP2
+                - EU1
+                - GOV
+                - US2_GOV
             subdomain:
               default: http-intake.logs
               description: The subdomain where the API is deployed.
