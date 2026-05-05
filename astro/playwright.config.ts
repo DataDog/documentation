@@ -2,11 +2,15 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: 'tests/browser',
+  timeout: 30_000,
+  reporter: 'list',
   webServer: {
-    command: 'npm run build && npm run preview -- --port 4322',
+    command: 'npm run build && npm run preview',
     port: 4322,
     reuseExistingServer: !process.env.CI,
     timeout: 600_000,
+    stdout: 'pipe',
+    stderr: 'pipe',
   },
   use: {
     baseURL: 'http://localhost:4322',

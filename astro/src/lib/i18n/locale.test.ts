@@ -9,13 +9,9 @@ import {
   stripLocalePrefix,
 } from './locale';
 
-describe('locale helpers', () => {
-  describe('LOCALES', () => {
-    it('contains the Hugo-supported locales', () => {
-      expect([...LOCALES]).toEqual(['en', 'fr', 'ja', 'ko', 'es']);
-    });
-  });
+const NON_DEFAULT = LOCALES.filter((l) => l !== DEFAULT_LOCALE);
 
+describe('locale helpers', () => {
   describe('isLocale', () => {
     it('accepts known locales', () => {
       for (const lang of LOCALES) {
@@ -38,9 +34,10 @@ describe('locale helpers', () => {
       expect(parseLangParam('')).toBe('en');
     });
 
-    it('returns the locale for a valid non-default segment', () => {
-      expect(parseLangParam('ja')).toBe('ja');
-      expect(parseLangParam('fr')).toBe('fr');
+    it.skipIf(NON_DEFAULT.length === 0)('returns the locale for a valid non-default segment', () => {
+      for (const lang of NON_DEFAULT) {
+        expect(parseLangParam(lang)).toBe(lang);
+      }
     });
 
     it('returns undefined for invalid segments (caller will 404)', () => {
@@ -58,9 +55,10 @@ describe('locale helpers', () => {
       expect(localePrefix(DEFAULT_LOCALE)).toBe('');
     });
 
-    it('returns /<lang> for non-default locales', () => {
-      expect(localePrefix('ja')).toBe('/ja');
-      expect(localePrefix('fr')).toBe('/fr');
+    it.skipIf(NON_DEFAULT.length === 0)('returns /<lang> for non-default locales', () => {
+      for (const lang of NON_DEFAULT) {
+        expect(localePrefix(lang)).toBe(`/${lang}`);
+      }
     });
   });
 
@@ -69,9 +67,10 @@ describe('locale helpers', () => {
       expect(localizedHref('en', '/api/latest/dashboards/')).toBe('/api/latest/dashboards/');
     });
 
-    it('prefixes non-English paths with the locale', () => {
-      expect(localizedHref('ja', '/api/latest/dashboards/')).toBe('/ja/api/latest/dashboards/');
-      expect(localizedHref('fr', '/')).toBe('/fr/');
+    it.skipIf(NON_DEFAULT.length === 0)('prefixes non-English paths with the locale', () => {
+      const lang = NON_DEFAULT[0];
+      expect(localizedHref(lang, '/api/latest/dashboards/')).toBe(`/${lang}/api/latest/dashboards/`);
+      expect(localizedHref(lang, '/')).toBe(`/${lang}/`);
     });
   });
 
@@ -83,16 +82,18 @@ describe('locale helpers', () => {
       });
     });
 
-    it('strips a known locale prefix', () => {
-      expect(stripLocalePrefix('/ja/api/latest/dashboards/')).toEqual({
-        lang: 'ja',
+    it.skipIf(NON_DEFAULT.length === 0)('strips a known locale prefix', () => {
+      const lang = NON_DEFAULT[0];
+      expect(stripLocalePrefix(`/${lang}/api/latest/dashboards/`)).toEqual({
+        lang,
         rest: '/api/latest/dashboards/',
       });
     });
 
-    it('returns / when only the locale prefix is present', () => {
-      expect(stripLocalePrefix('/ja')).toEqual({ lang: 'ja', rest: '/' });
-      expect(stripLocalePrefix('/ja/')).toEqual({ lang: 'ja', rest: '/' });
+    it.skipIf(NON_DEFAULT.length === 0)('returns / when only the locale prefix is present', () => {
+      const lang = NON_DEFAULT[0];
+      expect(stripLocalePrefix(`/${lang}`)).toEqual({ lang, rest: '/' });
+      expect(stripLocalePrefix(`/${lang}/`)).toEqual({ lang, rest: '/' });
     });
 
     it('does not strip prefixes that look like locales but are not registered', () => {

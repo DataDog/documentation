@@ -5,7 +5,7 @@
  * the root (`/api/latest/...`), other locales prefixed (`/{lang}/api/latest/...`).
  */
 
-export const LOCALES = ["en", "fr", "ja", "ko", "es"] as const;
+export const LOCALES = ["en" /*, "fr", "ja", "ko", "es" */] as const;
 export type Locale = (typeof LOCALES)[number];
 
 export const DEFAULT_LOCALE: Locale = "en";

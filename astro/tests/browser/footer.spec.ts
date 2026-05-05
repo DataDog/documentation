@@ -28,6 +28,10 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await page.setViewportSize({ width: 500, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
     await page.waitForLoadState('networkidle');
+    await page.locator('footer').scrollIntoViewIfNeeded();
+    await page.waitForFunction(() =>
+      document.querySelectorAll('footer astro-island[ssr]').length === 0
+    );
 
     // Default open section is resources.
     const productHeader = page.locator('.footer-section--product [role="button"]');
@@ -46,6 +50,10 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await page.setViewportSize({ width: 1400, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
     await page.waitForLoadState('networkidle');
+    await page.locator('footer').scrollIntoViewIfNeeded();
+    await page.waitForFunction(() =>
+      document.querySelectorAll('footer astro-island[ssr]').length === 0
+    );
 
     const selector = page.locator('.footer-lang-toggle');
     const button = selector.locator('button').first();
@@ -62,15 +70,15 @@ test.describe('Footer — Hugo-identical dimensions and behavior', () => {
     await page.setViewportSize({ width: 1400, height: 900 });
     await page.goto(PAGE_WITH_CONTENT);
     await page.waitForLoadState('networkidle');
+    // FreeTrialModal uses client:idle — wait for it to hydrate.
+    await page.waitForFunction(() =>
+      document.querySelector('.free-trial-modal__overlay') !== null
+    );
 
     const modal = page.locator('.free-trial-modal__overlay');
     const trigger = page.locator('a[data-trigger="free-trial"]').first();
 
     await expect(modal).toBeHidden();
-    // FreeTrialModal uses client:idle — wait for all islands to hydrate.
-    await page.waitForFunction(() =>
-      document.querySelectorAll('astro-island[ssr]').length === 0
-    );
     await trigger.click();
     await expect(modal).toBeVisible();
 

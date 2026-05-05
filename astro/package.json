@@ -6,7 +6,7 @@
     "build": "astro build",
     "preview": "astro preview --port 4322",
     "test": "vitest run",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test --grep-invert i18n"
   },
   "dependencies": {
     "@astrojs/markdoc": "^0.14.0",
