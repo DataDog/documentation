@@ -10,7 +10,7 @@ further_reading:
   text: "Java APM and Distributed Tracing"
 ---
 
-<div class="alert alert-warning">Java Feature Flags support is experimental and requires enabling an experimental flag in the SDK. See the <a href="#configuration">Configuration section</a> for details.</div>
+<div class="alert alert-info">Enable Java Feature Flags by setting <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. The <code>EXPERIMENTAL_</code> prefix is kept for backwards compatibility; the provider is stable. See the <a href="#configuration">Configuration section</a> for details.</div>
 
 ## Overview
 
@@ -27,7 +27,7 @@ The Datadog Feature Flags SDK for Java requires:
 - **Datadog Java SDK**: Version **1.57.0** or later
 - **OpenFeature SDK**: Version **1.18.2** or later
 - **Datadog Agent**: Version **7.x or later** with [Remote Configuration][1] enabled
-- **Datadog [API Key][6]**: Required for Remote Configuration
+- **Datadog [API key][6]**: Configured on the Agent (not the application) for Remote Configuration
 
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
 
@@ -110,7 +110,7 @@ api_key: <YOUR_API_KEY>
 
 ### Application configuration
 
-If your application already runs with `-javaagent:dd-java-agent.jar` and has Remote Configuration enabled (`DD_REMOTE_CONFIG_ENABLED=true`), you only need to add the experimental feature flag (`DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`). Skip the SDK download and JVM configuration steps.
+If your application already runs with `-javaagent:dd-java-agent.jar` and has Remote Configuration enabled (`DD_REMOTE_CONFIG_ENABLED=true`), you only need to add the feature flagging variable (`DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`). Skip the SDK download and JVM configuration steps.
 
 Configure your Java application with the required environment variables or system properties:
 
@@ -120,11 +120,9 @@ Configure your Java application with the required environment variables or syste
 # Required: Enable Remote Configuration in the SDK
 export DD_REMOTE_CONFIG_ENABLED=true
 
-# Required: Enable experimental feature flagging support
+# Required: Enable the feature flagging provider
+# The EXPERIMENTAL_ prefix is historical; the provider is no longer experimental.
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Required: Your Datadog API key
-export DD_API_KEY=<YOUR_API_KEY>
 
 # Required: Service name
 export DD_SERVICE=<YOUR_SERVICE_NAME>
@@ -145,7 +143,6 @@ java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
 java -javaagent:path/to/dd-java-agent.jar \
   -Ddd.remote.config.enabled=true \
   -Ddd.experimental.flagging.provider.enabled=true \
-  -Ddd.api.key=<YOUR_API_KEY> \
   -Ddd.service=<YOUR_SERVICE_NAME> \
   -Ddd.env=<YOUR_ENVIRONMENT> \
   -Ddd.version=<YOUR_APP_VERSION> \
@@ -154,9 +151,9 @@ java -javaagent:path/to/dd-java-agent.jar \
 {{% /tab %}}
 {{< /tabs >}}
 
-The Datadog feature flagging system starts automatically when the tracer is initialized with both Remote Configuration and the experimental flagging provider enabled. No additional initialization code is required in your application.
+The Datadog feature flagging system starts automatically when the tracer is initialized with both Remote Configuration and the feature flagging provider enabled. No additional initialization code is required in your application.
 
-<div class="alert alert-danger">Feature flagging requires both <code>DD_REMOTE_CONFIG_ENABLED=true</code> and <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without the experimental flag, the feature flagging system does not start and the <code>Provider</code> returns the programmatic default.</div>
+<div class="alert alert-danger">Feature flagging requires both <code>DD_REMOTE_CONFIG_ENABLED=true</code> and <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without these settings, the feature flagging system does not start and the <code>Provider</code> returns the programmatic default.</div>
 
 ### Add the Java tracer to the JVM
 
@@ -550,9 +547,10 @@ In Spring Boot tests, register the `InMemoryProvider` through a `@TestConfigurat
 Before investigating specific errors, confirm these prerequisites are in place:
 
 1. **The Datadog Agent is healthy and reachable**: See [APM Connection Errors][2] to verify Agent connectivity.
-2. **The experimental flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
-3. **Required tracer environment variables are set**: `DD_API_KEY`, `DD_ENV`, and `DD_SITE`.
-4. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
+2. **The Agent has a valid API key configured**: Confirm `DD_API_KEY` is set on the Agent.
+3. **The flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
+4. **Required tracer environment variables are set**: `DD_ENV` and `DD_SITE`.
+5. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
 
 After confirming all prerequisites, continue with the following sections if feature flags still aren't working.
 
