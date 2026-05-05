@@ -10,7 +10,7 @@ further_reading:
   text: "Java APM and Distributed Tracing"
 ---
 
-<div class="alert alert-info">The Java Feature Flags provider is enabled by setting <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. The <code>EXPERIMENTAL_</code> prefix in the variable name is preserved for backwards compatibility — the provider itself is no longer experimental. See the <a href="#configuration">Configuration section</a> for details.</div>
+<div class="alert alert-info">Java Feature Flags support is enabled by setting <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. (Note: the provider itself is no longer experimental. The <code>EXPERIMENTAL_</code> prefix in the variable name is there for backwards compatibility reasons.) See the <a href="#configuration">Configuration section</a> for details.</div>
 
 ## Overview
 
