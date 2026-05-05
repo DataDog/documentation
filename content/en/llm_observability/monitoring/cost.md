@@ -99,7 +99,7 @@ How to fix:
 
 ### Missing token counts
 
-The span has no `input_tokens` or `output_tokens` annotation, so Datadog has no token values to multiply by the per-token rate.
+The span has no `input_tokens` or `output_tokens` annotation, so Datadog has no token values to multiply by the per-token rate. (For embedding spans, only `input_tokens` is required.)
 
 How to fix:
 - For [auto-instrumentation][1], confirm your provider and SDK version are supported
