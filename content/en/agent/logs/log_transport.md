@@ -130,7 +130,7 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 
 {{< /site-region >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 The TCP endpoint is not supported for this site.
 
 {{< /site-region >}}

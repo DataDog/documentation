@@ -45,7 +45,7 @@ further_reading:
 
 Reference Tables allow you to combine custom metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata.
 
-{{< img src="reference_tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
+{{< img src="reference_tables/reference_table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
 
 For example, you can:
 
@@ -58,17 +58,16 @@ For example, you can:
 Datadog supports the following data sources, including integrations and manual CSV upload:
 
 {{< tabs >}}
-{{% tab "Cloud storage" %}}
-
-{{% collapse-content title="Manual upload" level="h4" expanded=true %}}
+{{% tab "Manual upload" %}}
 
 Click **New Reference Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
-{{< img src="reference_tables/enrichment-table-setup.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
+{{< img src="reference_tables/schema_setup.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
-{{% /collapse-content %}}
+{{% /tab %}}
+{{% tab "Cloud storage" %}}
 
 {{% collapse-content title="Amazon S3" level="h4" id="amazon-s3" %}}
 
@@ -103,7 +102,7 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 
 Click **New Reference Table +**, then add a name, select Amazon S3, fill out all fields, click import, and define the primary key for lookups.
 
-{{< img src="reference_tables/configure-s3-reference-table.png" alt="The upload your data section with the Amazon S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
+{{< img src="reference_tables/s3_table.png" alt="The upload your data section with the Amazon S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
 
 **Note**: The upload from an S3 bucket method supports files up to 200MB.
 
@@ -123,7 +122,7 @@ Click **New Reference Table +**, then add a name, select Amazon S3, fill out all
 
 After reviewing and assigning the role, you can import into Reference Tables from Azure. It may take a few minutes for your Azure configuration to update in Datadog.
 
-{{< img src="reference_tables/azure_storage.png" alt="An Azure Storage tile in the Upload or import data section of a new reference table workflow" style="width:80%;">}}
+{{< img src="reference_tables/azure_table.png" alt="An Azure Storage tile in the Upload or import data section of a new reference table workflow" style="width:80%;">}}
 
 For more information, see the [Azure integration documentation][4].
 
@@ -139,7 +138,7 @@ For more information, see the [Azure integration documentation][4].
 
 ### Google Cloud storage
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">Reference Tables are not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}})</div>
 {{% /site-region %}}
 
@@ -157,7 +156,7 @@ For more information, see the [Azure integration documentation][4].
 
 After reviewing and assigning the role, you can import into Reference Tables from Google Cloud. It may take a few minutes for your configuration to update in Datadog.
 
-{{< img src="reference_tables/gcp_upload_import_ui.png" alt="Select GCP Storage in Upload or import data when creating a new reference table" style="width:100%;" >}}
+{{< img src="reference_tables/gcp_table.png" alt="Select GCP Storage in Upload or import data when creating a new reference table" style="width:100%;" >}}
 
 **Note**: The upload from cloud object storage supports files up to 200MB.
 
@@ -165,28 +164,29 @@ After reviewing and assigning the role, you can import into Reference Tables fro
 [2]: /integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
 
 {{% /collapse-content %}}
-{{% collapse-content title="API or Terraform" level="h4" id="api-or-terraform" %}}
+{{% collapse-content title="Terraform" level="h4" id="terraform" %}}
 
-Create reference tables programmatically using the [Datadog API][8] or the [Datadog Terraform provider][9].
+Use the [`datadog_reference_table`][9] resource to manage reference tables as infrastructure as code. Configure the resource with your table schema, primary keys, and cloud storage access details.
 
-**Note**: The API and Terraform provider support the same file size limits as cloud storage uploads. See [Reference Table limits](#reference-table-limits) for details.
+**Note**: Terraform supports the same file size limits as cloud storage uploads. See [Reference Table limits](#reference-table-limits) for details.
 
-### API
+[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/reference_table
+
+{{% /collapse-content %}}
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+Create reference tables programmatically using the [Datadog API][8].
 
 Use the [Create Reference Table endpoint][10] to create reference tables from cloud storage or local files.
 - For cloud storage sources (S3, Azure, GCS), provide `access_details` in `file_metadata` pointing to a CSV file in cloud storage.
 - For local files, call `POST /api/latest/reference-tables/uploads` to get an upload ID and upload your CSV data. Then, call the Create Reference Table endpoint with the `upload_id` in `file_metadata`.
 
-### Terraform
-
-Use the `datadog_reference_table` resource to manage reference tables as infrastructure as code. Configure the resource with your table schema, primary keys, and cloud storage access details.
-
+**Note**: The API supports the same file size limits as cloud storage uploads. See [Reference Table limits](#reference-table-limits) for details.
 
 [8]: /api/latest/reference-tables/
-[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/reference_table
 [10]: /api/latest/reference-tables/#create-reference-table
-
-{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "Integrations" %}}
@@ -226,7 +226,7 @@ Once the table is saved, the upserted rows are processed asynchronously and upda
 
 To export a Reference Table, select a table and click **Query in DDSQL Editor**. From there, you can use the [DDSQL Editor][7] to export to CSV, Dashboard, and more.
 
-{{< img src="reference_tables/query_ddsql_editor.png" alt="Table preview with a blue button labeled Query in DDSQL Editor positioned above the results" style="width:100%;" >}}
+{{< img src="reference_tables/query_ddsql.png" alt="Table preview with a blue button labeled Query in DDSQL Editor positioned above the results" style="width:100%;" >}}
 
 ## Delete a Reference Table
 
@@ -284,7 +284,7 @@ For more information on permissions, see the [RBAC documentation][6].
 ### Granular access controls
 Restrict access to individual tables by specifying a list of teams, roles, or users that are allowed to view or edit them.
 
-{{< img src="reference_tables/granular_access_permissions.png" alt="The Permissions cog option that supports setting granular access permissions on a table" style="width:100%;">}}
+{{< img src="reference_tables/granular_permissions.png" alt="The Permissions cog option that supports setting granular access permissions on a table" style="width:100%;">}}
 
 1. Click on a table to open its detail page.
 2. Click the cog icon in the upper-right corner.

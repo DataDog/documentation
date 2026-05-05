@@ -366,9 +366,9 @@ See the [Test Optimization documentation][17] for your language to make sure tha
 There are different ways to enable Test Optimization inside a Jenkins job or pipeline:
 1. Using the Jenkins configuration UI.
 2. Adding the `datadog` step inside the pipeline script.
-3. Configuring the tracer manually.
+3. Configuring the SDK manually.
 
-For pipelines that spin up a Docker container to execute tests, you can only configure the tracer manually.
+For pipelines that spin up a Docker container to execute tests, you can only configure the SDK manually.
 
 ### Enable with the Jenkins configuration UI
 

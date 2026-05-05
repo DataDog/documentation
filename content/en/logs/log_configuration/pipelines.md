@@ -16,9 +16,12 @@ further_reading:
 - link: "/logs/troubleshooting/"
   tag: "Documentation"
   text: "Logs troubleshooting"
-- link: "https://learn.datadoghq.com/courses/going-deeper-with-logs-processing"
+- link: "https://learn.datadoghq.com/courses/integration-pipelines"
   tag: "Learning Center"
-  text: "Going Deeper with Logs Processing"
+  text: "Process Logs Out of the Box with Integration Pipelines"
+- link: "https://learn.datadoghq.com/courses/log-pipelines"
+  tag: "Learning Center"
+  text: "Build and Manage Log Pipelines"
 - link: "https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/"
   tag: "Blog"
   text: "Monitor Cloudflare Zero Trust with Datadog Cloud SIEM"
@@ -178,7 +181,7 @@ Specify alternate attributes to use as the source of a log's service by setting 
 
 #### Trace ID attribute
 
-By default, [Datadog tracers can automatically inject trace and span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
+By default, [Datadog SDKs can automatically inject trace and span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
@@ -196,7 +199,7 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
 #### Span ID attribute
 
-By default, Datadog tracers can [automatically inject span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `span_id`:
+By default, Datadog SDKs can [automatically inject span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `span_id`:
 
 * `dd.span_id`
 * `contextMap.dd.span_id`

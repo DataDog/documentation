@@ -140,7 +140,7 @@ If logs are in JSON format, Datadog automatically [parses the log messages][11] 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
 `env`, `service`, and `version` to your logs by [following the APM Node.js instructions][3].
 
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the Agent configuration.
+**Note**: If the Datadog SDK injects `service` into your logs, it overrides the value set in the Agent configuration.
 
 ## Agentless logging
 

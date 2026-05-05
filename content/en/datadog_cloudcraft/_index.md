@@ -45,7 +45,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you don't grant permission to list S3 buckets, the diagram excludes those buckets. If permissions block certain resources, an alert displays in the UI.
 
 <div class="alert alert-warning">
-Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable <strong>Usage</strong> metrics in the <strong>Metric Collection</strong> tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.
+Enabling resource collection can impact your AWS CloudWatch costs. To avoid these charges, disable {{< ui >}}Usage{{< /ui >}} metrics in the {{< ui >}}Metric Collection{{< /ui >}} tab of the <a href="https://app.datadoghq.com/integrations/amazon-web-services">Datadog AWS Integration</a>.
 </div>
 
 {{< img src="/infrastructure/resource_catalog/aws_usage_toggle.png" alt="The Usage service highlighted in the Metric Collection tab of the AWS integration tile" style="width:100%;" >}}
@@ -65,10 +65,10 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 - You need the Datadog Admin Role, or any role with the `azure_configurations_manage` permission. See the [Azure setup][16] instructions for more information.  
 
 - Enable [resource collection][14] for your Azure accounts:
-  1. Navigate to [**Integrations > Azure**][15].
-  2. Add your Azure subscription by selecting **+ Add New App Registration** if not already added.
+  1. Navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Azure{{< /ui >}}][15].
+  2. Add your Azure subscription by selecting {{< ui >}}+ Add New App Registration{{< /ui >}} if not already added.
   3. Select the App Registration containing your Azure subscription.
-  4. On the Resource Collection tab, ensure the **Enable Resource Collection** toggle is enabled.
+  4. On the {{< ui >}}Resource Collection{{< /ui >}} tab, ensure the {{< ui >}}Enable Resource Collection{{< /ui >}} toggle is enabled.
 
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
   - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
@@ -84,9 +84,9 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 
 - To access Cloudcraft in Datadog, you need the `cloudcraft_read` [permission](#permissions).
 - Enable [resource collection][17] for your GCP accounts:
-  1. In Datadog, navigate to **Datadog Setup > Integration Catalog > Google Cloud**.
-  2. Click on your project name, then select **Resource Collection**.
-  3. Enable the **Enable Resource Collection** toggle.
+  1. In Datadog, navigate to {{< ui >}}Datadog Setup{{< /ui >}} > {{< ui >}}Integration Catalog{{< /ui >}} > {{< ui >}}Google Cloud{{< /ui >}}.
+  2. Click on your project name, then select {{< ui >}}Resource Collection{{< /ui >}}.
+  3. Enable the {{< ui >}}Enable Resource Collection{{< /ui >}} toggle.
 
 - Viewing content on the [Security overlay][10] requires additional products to be enabled:
   - To view security misconfigurations and identity risks, [Cloud Security][3] must be enabled.
@@ -106,21 +106,21 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 ## Getting started
 
 To get started using Cloudcraft, use the following steps:
-1. Navigate to [**Infrastructure > Resources > Cloudcraft**][7]. 
+1. Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Resources{{< /ui >}} > {{< ui >}}Cloudcraft{{< /ui >}}][7]. 
 2. A real-time diagram of the resources is displayed in your environment.
 
 **Note**: If your environment has more than 10,000 resources, filter the diagram by account, region, or tags to display it.
 
 {{< img src="datadog_cloudcraft/getting_started_3.png" alt="Getting started in Cloudcraft, displaying a list of resources for the selected account and region" style="width:100%;" >}}
 
-<div class="alert alert-tip">The account name in the <strong>Account</strong> dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the <strong>Subscription</strong> name comes from the subscription name in your Azure integration tile's list of managed subscriptions. For GCP, the <strong>Project</strong> dropdown lists your GCP project IDs from the Google Cloud integration tile.
+<div class="alert alert-tip">The account name in the {{< ui >}}Account{{< /ui >}} dropdown comes from your AWS account tags in the AWS integration tile. For Azure, the {{< ui >}}Subscription{{< /ui >}} name comes from the subscription name in your Azure integration tile's list of managed subscriptions. For GCP, the {{< ui >}}Project{{< /ui >}} dropdown lists your GCP project IDs from the Google Cloud integration tile.
 </div>
 
 ### Group By
 
 With Group By, Cloudcraft divides your diagram into distinct sections based on different group types. This feature offers a clear and organized perspective of your resources, making it especially helpful for visualizing complex cloud environments.
 
-Enable the **Show All Controls** toggle to display the available **Group By** options. You can remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the **+ Tags** menu.
+Enable the {{< ui >}}Show All Controls{{< /ui >}} toggle to display the available {{< ui >}}Group By{{< /ui >}} options. You can remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the {{< ui >}}+ Tags{{< /ui >}} menu.
 
 {{< img src="datadog_cloudcraft/cloudcraft_group_by_with_network_acl_2.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu." >}}
 
@@ -138,7 +138,7 @@ Saved views allow you to save specific filters on your diagram that are most imp
 
 To apply a saved view to your diagram:
 
-- Navigate to [**Infrastructure > Resources > Cloudcraft**][7]. Select one or more accounts, regions, and resources. Apply any desired filters to your saved view, then click **+Save as new view**.
+- Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Resources{{< /ui >}} > {{< ui >}}Cloudcraft{{< /ui >}}][7]. Select one or more accounts, regions, and resources. Apply any desired filters to your saved view, then click {{< ui >}}+Save as new view{{< /ui >}}.
 - Select the desired saved view from the menu at the top of the diagram view. The diagram automatically updates to reflect the chosen view.
 
 {{< img src="datadog_cloudcraft/saved_views.png" alt="Screenshot of the saved views" style="width:50%;" >}}
@@ -159,7 +159,7 @@ Toggle the projection from 3D (default) to 2D to visualize your resources from a
 
 Diagrams can be filtered by tags, such as team, application, or service, allowing you to concentrate on relevant resources while maintaining context through connected resources. Additionally, Cloudcraft provides a powerful search and highlight feature, enabling ease of location of specific resources or groups of resources.
 
-Click the **+ Filter** menu to filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the **More Filters** option to filter by AWS and Azure tags, custom tags, and Terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
+Click the {{< ui >}}+ Filter{{< /ui >}} menu to filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the {{< ui >}}More Filters{{< /ui >}} option to filter by AWS and Azure tags, custom tags, and Terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
 
 ### Search and highlight
 

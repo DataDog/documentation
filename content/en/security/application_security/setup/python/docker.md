@@ -23,7 +23,7 @@ further_reading:
 - Docker installed on your host
 - Python application containerized with Docker
 - Your Datadog API key
-- Datadog Python tracing library (see [version requirements][1])
+- Datadog Python SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -41,7 +41,7 @@ Install the Datadog Agent by following the [setup instructions for Docker](/agen
 Add the following environment variables to your Dockerfile:
 
 ```dockerfile
-# Install the Datadog Python tracing library
+# Install the Datadog Python SDK
 RUN pip install ddtrace
 
 # Set environment variables
@@ -61,7 +61,7 @@ To disable APM tracing while keeping App and API Protection enabled, you must se
 Add the following environment variables to your Dockerfile:
 
 ```dockerfile
-# Install the Datadog Python tracing library
+# Install the Datadog Python SDK
 RUN pip install ddtrace
 
 # Set environment variables

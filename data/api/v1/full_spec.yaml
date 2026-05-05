@@ -791,6 +791,11 @@ components:
           items:
             $ref: "#/components/schemas/ResourceProviderConfig"
           type: array
+        secretless_auth_enabled:
+          description: |-
+            (Preview) When enabled, Datadog authenticates with this app registration using federated workload identity credentials instead of a client secret.
+          example: true
+          type: boolean
         tenant_name:
           description: Your Azure Active Directory ID.
           example: "testc44-1234-5678-9101-cc00736ftest"
@@ -4912,6 +4917,7 @@ components:
         - incident_management_monthly_active_users_usage
         - indexed_spans_usage
         - infra_host_usage
+        - infra_host_basic_usage
         - ingested_logs_bytes_usage
         - ingested_spans_bytes_usage
         - invocations_usage
@@ -5000,6 +5006,7 @@ components:
         - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
         - INDEXED_SPANS_USAGE
         - INFRA_HOST_USAGE
+        - INFRA_HOST_BASIC_USAGE
         - INGESTED_LOGS_BYTES_USAGE
         - INGESTED_SPANS_BYTES_USAGE
         - INVOCATIONS_USAGE
@@ -9498,6 +9505,8 @@ components:
         - incident_management_monthly_active_users_percentage
         - infra_host_usage
         - infra_host_percentage
+        - infra_host_basic_usage
+        - infra_host_basic_percentage
         - invocations_usage
         - invocations_percentage
         - lambda_traced_invocations_usage
@@ -9665,6 +9674,8 @@ components:
         - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_PERCENTAGE
         - INFRA_HOST_USAGE
         - INFRA_HOST_PERCENTAGE
+        - INFRA_HOST_BASIC_USAGE
+        - INFRA_HOST_BASIC_PERCENTAGE
         - INVOCATIONS_USAGE
         - INVOCATIONS_PERCENTAGE
         - LAMBDA_TRACED_INVOCATIONS_USAGE
@@ -10060,6 +10071,14 @@ components:
           type: number
         indexed_spans_usage:
           description: The total APM Indexed Spans usage by tag(s).
+          format: double
+          type: number
+        infra_host_basic_percentage:
+          description: The percentage of infrastructure host Basic tier usage by tag(s).
+          format: double
+          type: number
+        infra_host_basic_usage:
+          description: The infrastructure host Basic tier usage by tag(s).
           format: double
           type: number
         infra_host_percentage:
@@ -15980,6 +15999,8 @@ components:
           $ref: "#/components/schemas/LogQueryDefinition"
           deprecated: true
           description: Deprecated - Use `queries` and `formulas` instead.
+        sort:
+          $ref: "#/components/schemas/WidgetSortBy"
         style:
           $ref: "#/components/schemas/WidgetStyle"
       type: object
@@ -20669,6 +20690,10 @@ components:
           type: array
         response_format:
           $ref: "#/components/schemas/FormulaAndFunctionResponseFormat"
+        sort:
+          $ref: "#/components/schemas/WidgetSortBy"
+        style:
+          $ref: "#/components/schemas/WidgetRequestStyle"
       type: object
     UsageAnalyzedLogsHour:
       description: The number of analyzed logs for each hour for a given organization.
@@ -22442,6 +22467,18 @@ components:
           description: Shows the sum of all ephemeral infrastructure hosts on Azure over all hours in the current date for the given org.
           format: int64
           type: integer
+        eph_infra_host_basic_infra_basic_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_basic_infra_basic_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier on vSphere over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_basic_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         eph_infra_host_ent_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Enterprise over all hours in the current date for the given org.
           format: int64
@@ -22526,6 +22563,10 @@ components:
           description: Shows the average of all Fargate tasks over all hours in the current date for all organizations.
           format: int64
           type: integer
+        feature_flags_config_requests_sum:
+          description: Shows the sum of all Feature Flags Client-Side SDK config requests over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         flex_logs_compute_large_avg:
           description: Shows the average number of Flex Logs Compute Large Instances over all hours in the current date for the given org.
           format: int64
@@ -22588,6 +22629,18 @@ components:
           type: integer
         infra_edge_monitoring_devices_top99p:
           description: Shows the 99th percentile of all Edge Devices Monitoring devices over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_agent_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_vsphere_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier on vSphere over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier over all hours in the current date for all organizations.
           format: int64
           type: integer
         infra_host_top99p:
@@ -23391,6 +23444,18 @@ components:
           description: Shows the sum of all ephemeral infrastructure hosts on Azure over all hours in the current date for the given org.
           format: int64
           type: integer
+        eph_infra_host_basic_infra_basic_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_basic_infra_basic_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier on vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_basic_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier over all hours in the current date for the given org.
+          format: int64
+          type: integer
         eph_infra_host_ent_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Enterprise over all hours in the current date for the given org.
           format: int64
@@ -23475,6 +23540,10 @@ components:
           description: Shows the high-water mark of all Fargate tasks over all hours in the current date for the given org.
           format: int64
           type: integer
+        feature_flags_config_requests_sum:
+          description: Shows the sum of all Feature Flags Client-Side SDK config requests over all hours in the current date for the given org.
+          format: int64
+          type: integer
         flex_logs_compute_large_avg:
           description: Shows the average number of Flex Logs Compute Large Instances over all hours in the current date for the given org.
           format: int64
@@ -23541,6 +23610,18 @@ components:
           type: integer
         infra_edge_monitoring_devices_top99p:
           description: Shows the 99th percentile of all Edge Devices Monitoring devices over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_agent_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_vsphere_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier on vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_host_basic_top99p:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier over all hours in the current date for the given org.
           format: int64
           type: integer
         infra_host_top99p:
@@ -24350,6 +24431,18 @@ components:
           description: Shows the sum of all ephemeral infrastructure hosts on Azure over all hours in the current month for all organizations.
           format: int64
           type: integer
+        eph_infra_host_basic_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_basic_infra_basic_agent_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_basic_infra_basic_vsphere_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Basic tier on vSphere over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         eph_infra_host_ent_agg_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Enterprise over all hours in the current month for all organizations.
           format: int64
@@ -24434,6 +24527,10 @@ components:
           description: Shows the sum of the high-water marks of all Fargate tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
+        feature_flags_config_requests_agg_sum:
+          description: Shows the sum of all Feature Flags Client-Side SDK config requests over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         flex_logs_compute_large_avg_sum:
           description: Shows the average number of Flex Logs Compute Large Instances over all hours in the current months for all organizations.
           format: int64
@@ -24497,6 +24594,18 @@ components:
           type: integer
         infra_edge_monitoring_devices_top99p_sum:
           description: Shows the 99th percentile of all Edge Devices Monitoring devices over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_agent_top99p_sum:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier with the Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_infra_basic_vsphere_top99p_sum:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier on vSphere over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_host_basic_top99p_sum:
+          description: Shows the 99th percentile of all distinct infrastructure hosts for Basic tier over all hours in the current month for all organizations.
           format: int64
           type: integer
         infra_host_top99p_sum:
@@ -26721,6 +26830,16 @@ paths:
                 - ap2.datadoghq.com
                 - datadoghq.eu
                 - ddog-gov.com
+                - us2.ddog-gov.com
+              x-enum-varnames:
+                - US1
+                - US3
+                - US5
+                - AP1
+                - AP2
+                - EU1
+                - GOV
+                - US2_GOV
             subdomain:
               default: ip-ranges
               description: The subdomain where the API is deployed.
@@ -41107,6 +41226,16 @@ paths:
                 - ap2.datadoghq.com
                 - datadoghq.eu
                 - ddog-gov.com
+                - us2.ddog-gov.com
+              x-enum-varnames:
+                - US1
+                - US3
+                - US5
+                - AP1
+                - AP2
+                - EU1
+                - GOV
+                - US2_GOV
             subdomain:
               default: http-intake.logs
               description: The subdomain where the API is deployed.
@@ -41207,6 +41336,7 @@ servers:
           - ap2.datadoghq.com
           - datadoghq.eu
           - ddog-gov.com
+          - us2.ddog-gov.com
       subdomain:
         default: api
         description: The subdomain where the API is deployed.

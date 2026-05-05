@@ -3,7 +3,7 @@ title: Controls
 description: How to use Governance Console Controls to enforce consistent configurations and organizational best practices across a Datadog environment.
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger"> Governance Console is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> Governance Console is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview

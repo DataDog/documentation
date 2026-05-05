@@ -25,7 +25,7 @@ The [Metrics Explorer][1] is a basic interface for examining your metrics in Dat
 
 ## Natural language queries
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">Natural Language Queries for Metrics Explorer are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

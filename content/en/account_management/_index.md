@@ -12,7 +12,7 @@ further_reading:
       tag: "Blog"
       text: "Best practices for managing Datadog organizations at scale"
 ---
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">The Datadog for Government platform supports only SAML or basic authentication using a username/email and password. Before configuring SAML authentication, ensure that at least one username/email and password account is established to maintain access during the setup process. Datadog recommends enabling multi-factor authentication (MFA) for password-based accounts.
 
 If you need SAML enabled for a trial account, contact <a href="https://docs.datadoghq.com/getting_started/support/">Datadog Support</a>.</div>
@@ -39,7 +39,7 @@ You can manage your time zone, time format, visual accessibility preference, and
 #### Email subscriptions
 
 Under email subscriptions, you have access to the following reports:
-{{< site-region region="us3,us5,gov,ap1,ap2" >}}
+{{< site-region region="us3,us5,gov,gov2,ap1,ap2" >}}
 <div class="alert alert-danger">Email digests are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -50,7 +50,7 @@ If you are unsure if an email digest is relevant to you, you can view an example
 {{% /site-region %}}
 
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 You can manage your time zone, time format, and visual accessibility preference from the [**Preferences** tab][3] within the {{< ui >}}Personal Settings{{< /ui >}} page.
 {{% /site-region %}}
 

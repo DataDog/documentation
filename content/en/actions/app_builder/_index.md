@@ -32,6 +32,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/generate-apps-with-ai/"
   tag: "Blog"
   text: "Build custom apps in seconds with conversational AI in App Builder"
+- link: "https://learn.datadoghq.com/courses/app-builder-integration"
+  tag: "Learning Center"
+  text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
+
 ---
 
 ## Overview 

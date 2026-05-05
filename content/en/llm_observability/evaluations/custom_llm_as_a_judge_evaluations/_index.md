@@ -312,19 +312,19 @@ Each evaluation result includes:
 - The reasoning (when enabled)
 - The pass/fail indicator (based on your assessment criteria)
 
-Use the syntax `@evaluations.custom.<evaluation_name>` to query or visualize results.
+Use the syntax `@evaluation.<evaluation_name>.value` to query or visualize results.
 
 For example:
 ```
-@evaluations.custom.helpfulness-check
+@evaluation.helpfulness-check.value
 ```
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The LLM Observability Traces view. In the search box, the user has entered `@evaluations.custom.budget-guru-intent-classifier:budgeting_question` and results are populated below." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The LLM Observability Traces view. In the search box, the user has entered `@evaluation.budget-guru-intent-classifier.value:budgeting_question` and results are populated below." style="width:100%;" >}}
 
 
 You can:
-- Filter traces by evaluation results (example, `@evaluations.custom.helpfulness-check`)
-- Filter by pass/fail assessment status (example, `@evaluations.assessment.custom.helpfulness-check:fail`)
+- Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
+- Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
 - Use evaluation results as [facets][3]
 - View aggregate results in the LLM Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression

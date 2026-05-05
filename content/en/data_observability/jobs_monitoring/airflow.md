@@ -92,7 +92,7 @@ To get started, follow the instructions below.
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` with your valid [Datadog API key][4].
 
-   * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables along with the previous ones. This fixes an OpenLinage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
+   * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables along with the previous ones. This fixes an OpenLineage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
       ```shell
       #!/bin/sh
       # Required for Airflow v2.7 & v2.8 only
@@ -171,7 +171,7 @@ To get started, follow the instructions below.
 
    * Replace `<DD_DATA_OBSERVABILITY_INTAKE>` fully with `https://data-obs-intake.`{{< region-param key="dd_site" code="true" >}}.
    * Replace `<DD_API_KEY>` fully with your valid [Datadog API key][5].
-   * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables to the startup script. This fixes an OpenLinage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
+   * If you're using **Airflow v2.7 or v2.8**, also add these two environment variables to the startup script. This fixes an OpenLineage config issue fixed at `apache-airflow-providers-openlineage` v1.7, while Airflow v2.7 and v2.8 use previous versions.
       ```shell
       #!/bin/sh
       # Required for Airflow v2.7 & v2.8 only
@@ -288,7 +288,7 @@ Data Observability: Jobs Monitoring for Airflow is not yet compatible with <a hr
 To get started, follow the instructions below.
 
 
-In the Advanced Configuration tab, under **Airflow configuration override**, click **Add Airflow configuration override** and configure these settings:
+In the {{< ui >}}Advanced Configuration{{< /ui >}} tab, under {{< ui >}}Airflow configuration override{{< /ui >}}, click {{< ui >}}Add Airflow configuration override{{< /ui >}} and configure these settings:
 
    - In Section 1, enter `openlineage`.
    - In Key 1, enter `disabled`.
@@ -335,7 +335,7 @@ In Datadog, view the [Data Observability: Jobs Monitoring][7] page to see a list
 
 ### Troubleshooting
 
-Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the Environment variables tab of the Composer page for OpenLineage client and its child modules. This can be useful in troubleshooting as you configure the `openlineage` provider.
+Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the {{< ui >}}Environment variables{{< /ui >}} tab of the Composer page for OpenLineage client and its child modules. This can be useful in troubleshooting as you configure the `openlineage` provider.
 
 {{% /tab %}}
 {{< /tabs >}}
