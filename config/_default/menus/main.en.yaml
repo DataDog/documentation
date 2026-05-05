@@ -2828,6 +2828,12 @@ menu:
       parent: workflows
       identifier: workflows_limits
       weight: 11
+    - name: Datadog Apps
+      url: actions/datadog_apps/
+      pre: dev-code
+      identifier: datadog_apps
+      parent: actions_heading
+      weight: 35000
     - name: App Builder
       url: actions/app_builder/
       pre: app-builder
