@@ -219,31 +219,36 @@ Transfer annotated traces to datasets for experiment evaluation:
    - **From annotation label**: use the values the annotators applied. Pick one or more labels. The record's `expected_output` is built from your selection.
 6. Choose an existing dataset, or create a dataset.
 
-When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": "neutral", "topics": ["safety", "policy"] }`. The same shape applies whether you select one label or multiple labels. Multi-select categorical labels are exported as arrays.
+When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": ["neutral"], "topics": ["safety", "policy"] }`. The same shape applies whether you select one label or multiple labels. Categorical labels are always exported as arrays of selected options, whether the label is single-select or multi-select.
 
 {{% collapse-content title="How annotation values are aggregated across annotators" level="h4" expanded=false id="annotation-aggregation" %}}
 
 When multiple annotators have annotated the same trace, the value for each label is aggregated across them by consensus:
 
-| Label type                 | Aggregation                                                                                  |
-| -------------------------- | -------------------------------------------------------------------------------------------- |
-| Boolean                    | Majority vote                                                                                |
-| Categorical (single-select)| Plurality vote (most-picked option wins)                                                     |
-| Categorical (multi-select) | Per-option majority (keep options where at least half the annotators selected it)            |
-| Score                      | Average                                                                                      |
-| Text                       | List of responses                                                                            |
+| Label type   | Aggregation                                                                |
+| ------------ | -------------------------------------------------------------------------- |
+| Boolean      | Majority vote (ties break in favor of `true`)                              |
+| Categorical  | Intersection: the sorted set of options that every annotator selected      |
+| Score        | Average                                                                    |
+| Text         | List of responses                                                          |
 
-For Boolean labels, ties break in favor of `true`. For categorical single-select, ties break alphabetically.
+For categorical labels (single-select or multi-select), the aggregated value is the sorted array of options that *every* annotator selected. If any annotator's selection differs, the value is an empty array. The result is always an array, even when only one annotator has annotated the trace.
 
-For categorical multi-select, each option is treated as an independent yes/no vote. Keep the option if the number of annotators who selected it is greater than or equal to the number who did not. The aggregated value is the array of options that meet this threshold. If no option meets the threshold, the value falls back to a plurality vote, and a single option is picked with alphabetical tie-break.
+**Example: categorical (consensus).** Three annotators rate `tone` and all agree:
 
-**Example: categorical (single-select).** Three annotators rate `tone`:
+- Annotator A: `polite`
+- Annotator B: `polite`
+- Annotator C: `polite`
+
+Aggregated: `["polite"]`.
+
+**Example: categorical (disagreement).** Three annotators rate `tone` and one differs:
 
 - Annotator A: `polite`
 - Annotator B: `rude`
 - Annotator C: `polite`
 
-Aggregated: `"polite"` (2 of 3 votes).
+Aggregated: `[]`. The intersection is empty because `rude` is not in every annotator's set.
 
 **Example: categorical (multi-select).** Three annotators tag `topics` (each can pick multiple options):
 
@@ -251,15 +256,7 @@ Aggregated: `"polite"` (2 of 3 votes).
 - Annotator B: `["safety", "billing"]`
 - Annotator C: `["safety", "policy"]`
 
-Per-option counts: `safety` 3 yes / 0 no (kept), `policy` 2 yes / 1 no (kept), `billing` 1 yes / 2 no (dropped). Aggregated: `["safety", "policy"]`.
-
-**Example: categorical (multi-select), fallback.** Three annotators tag `topics` with no option appearing in more than one annotator's set:
-
-- Annotator A: `["policy"]`
-- Annotator B: `["billing"]`
-- Annotator C: `["safety"]`
-
-Each option has 1 yes / 2 no: none meet the threshold, so the aggregated set would be empty. The value falls back to a plurality vote: all three options are tied at 1 vote, so alphabetical tie-break picks `["billing"]`.
+Aggregated: `["safety"]`. Only `safety` appears in every annotator's set; `policy` is missing from B's selection and `billing` is missing from A's and C's.
 
 **Example: text.** Two annotators leave notes:
 
