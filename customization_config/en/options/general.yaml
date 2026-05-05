@@ -507,3 +507,15 @@ options:
 
 - label: Elixir
   id: elixir
+
+- label: BigQuery
+  id: bigquery
+
+- label: Databricks
+  id: databricks
+
+- label: Redshift
+  id: redshift
+
+- label: Snowflake
+  id: snowflake

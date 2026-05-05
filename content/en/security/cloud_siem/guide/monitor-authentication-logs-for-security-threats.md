@@ -106,7 +106,7 @@ Datadog ingests and analyzes [all of your logs][18], ensuring that you can detec
 
 [1]: /cloud_siem/
 [2]: /logs/log_collection/?tab=application#application-log-collection
-[3]: /logs/log_configuration/processors/#grok-parser
+[3]: /logs/log_configuration/processors/grok_parser/
 [4]: https://www.datadoghq.com/blog/logs-standard-attributes/
 [5]: /logs/log_configuration/attributes_naming_convention
 [6]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes

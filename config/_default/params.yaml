@@ -351,6 +351,7 @@ unsupported_sites:
   oracle_fusion_integration_setup: [gov,gov2]
   overview_pages: [gov,gov2]
   pr_gates: [gov,gov2]
+  product_analytics: [gov,gov2]
   resource_based_sampling: [gov,gov2]
   remote_config: [gov,gov2]
   remote_config_for_fa: [gov,gov2] #For the Guides page
