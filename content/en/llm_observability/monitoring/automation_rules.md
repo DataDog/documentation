@@ -75,7 +75,7 @@ Most often, one of:
 - **Sampling**: a 1% sampling rate routes 1 in 100 matching traces. Confirm the rate is high enough for your match volume.
 - **Destination is full**: annotation queues cap at 1,000 records and pause; datasets cap at 20,000.
 
-**My filter validates in the Trace Explorer but the Automate Query button is disabled.**
+**The Automate Query button is disabled despite a valid Trace Explorer filter.**
 
 The Trace Explorer supports a wider field set than automations. The button's tooltip names the offending fields. Common cases:
 
