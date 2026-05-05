@@ -557,7 +557,7 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 Remote Configuration delivers flag configurations from the Datadog backend to the Agent.
 
 1. **RC is enabled on the Agent**: Set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIG_ENABLED=true`. See [Remote Configuration][1].
-2. **`DD_API_KEY` is valid** and belongs to the target organization.
+2. **`DD_API_KEY` is valid on the Agent** and belongs to the target organization.
 3. **`DD_SITE` is set correctly** on the Agent (`site` in `datadog.yaml` or `DD_SITE` env var). See [Agent Site Issues][3].
 4. **Fleet Automation**: Open [Fleet Automation][4], select the Agent your application connects to, and confirm Remote Configuration is active.
 5. **Agent CLI**: Run `datadog-agent status` and review the Remote Configuration section of the output. See [Agent Commands][6].
@@ -663,7 +663,7 @@ Flag evaluation counts appear in Datadog when `DD_METRICS_OTEL_ENABLED=true` is 
 Exposures appear in Datadog only for flags associated with an experiment. Standard feature flags without an experiment association do not generate exposure events. If exposures are missing:
 
 1. Verify the flag is associated with an experiment in the Datadog UI.
-2. Verify `DD_API_KEY` is correct and the Agent is receiving events.
+2. Verify the Agent's `DD_API_KEY` is correct and the Agent is receiving events.
 
 ## Further reading
 
