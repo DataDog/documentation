@@ -26,7 +26,7 @@ Datadog's [Host Map][1] visualizes your hosts, pods, containers, and clusters, h
 
 Use the drop-down in the upper left to view suggested queries, or the saved custom queries written by you or someone else in your organization. To write a custom query, click {{< ui >}}Create{{< /ui >}}.
 
-{{< img src="infrastructure/hostmap/draft-query.png" alt="The Draft query editor with two levels. The Main resource is set to Host with Fill by CPU usage. The Secondary resource is set to Pod with Fill by Readiness." style="width:100%;" >}}
+{{< img src="infrastructure/hostmap/draft-query-2.png" alt="The Draft query editor with two levels. The Main resource is set to Host with Fill by CPU usage. The Secondary resource is set to Pod with Fill by Readiness." style="width:100%;" >}}
 
 - {{< ui >}}Main/Secondary resource{{< /ui >}}: Select resources ({{< ui >}}Host{{< /ui >}}, {{< ui >}}Pod{{< /ui >}}, {{< ui >}}Container{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}) to view. Main and Secondary resources have hierarchical relationships.
 - {{< ui >}}Fill by{{< /ui >}}: By default, the color of each object represents CPU usage, where the color ranges from green (0% utilized) to orange (100% utilized). Use the {{< ui >}}Fill by{{< /ui >}} drop-down to color your objects by various metrics or signals, such as memory or error logs.
