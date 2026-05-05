@@ -76,6 +76,8 @@ Largest Contentful Paint and Interaction to Next Paint break down into subparts,
 
 #### Largest Contentful Paint subparts
 
+**Note**: These attributes require Browser SDK v6.32.0 or later.
+
 LCP breaks down into four phases. Time to First Byte is collected separately as `view.first_byte`. The remaining three subparts are collected under `view.performance.lcp.sub_parts`:
 
 | Phase                  | Attribute                                              | Description                                                                                                                                                                |
@@ -84,8 +86,6 @@ LCP breaks down into four phases. Time to First Byte is collected separately as 
 | Resource load delay    | `view.performance.lcp.sub_parts.load_delay`            | Time between TTFB and the start of the LCP resource load. Reflects priority hints, preloads, and render-blocking resources. `0` when the LCP element does not require a resource. |
 | Resource load time     | `view.performance.lcp.sub_parts.load_time`             | Time to load the LCP resource, affected by image format, compression, and network conditions. `0` when the LCP element does not require a resource.                                  |
 | Render delay           | `view.performance.lcp.sub_parts.render_delay`          | Time between the LCP resource finishing loading and the LCP element being painted. High values indicate long tasks or blocking JavaScript or CSS.                                            |
-
-**Note**: Requires Browser SDK v6.32.0 or later.
 
 #### Interaction to Next Paint subparts
 
