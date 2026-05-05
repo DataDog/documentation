@@ -24,6 +24,8 @@ Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Con
 
 <!-- TODO: Replace with updated diagram showing OTLP HTTP exporter flow (no Datadog Exporter) -->
 
+<div class="alert alert-warning">This setup is in Preview. Some Datadog features may behave differently compared to the Datadog Exporter setup. For example, the <a href="/infrastructure/list/">Infrastructure List</a> may show less host metadata until host metadata ingestion support is finalized.</div>
+
 <div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel SDK + OSS Collector</b>.</div>
 
 ## Prerequisites
@@ -51,12 +53,14 @@ Set the `DD_API_KEY` and `DD_SITE` environment variables before starting the Col
 
 ```yaml
 receivers:
+  # Receive telemetry from OpenTelemetry-instrumented applications
   otlp:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
+  # Collect host-level metrics for the Infrastructure List
   hostmetrics:
     collection_interval: 10s
     scrapers:
@@ -90,6 +94,7 @@ receivers:
       processes: {}
 
 processors:
+  # Detect host and cloud metadata for hostname resolution and tagging
   resourcedetection:
     detectors: [env, system]
     timeout: 2s
@@ -116,10 +121,13 @@ processors:
           enabled: true
         os.description:
           enabled: true
+  # Convert cumulative metrics to delta temporality for Datadog
   cumulativetodelta: {}
 
 connectors:
+  # Separates trace processing from sampling so span metrics are computed on all traces
   forward: {}
+  # Generate RED (Rate, Error, Duration) metrics from traces for APM
   spanmetrics:
     aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
     add_resource_attributes: true
@@ -185,11 +193,13 @@ connectors:
       - name: db.query.text
 
 exporters:
+  # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
     metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
+      # Send resource attributes and scope metadata as metric tags
       dd-otel-metric-config: >-
         {
         "resource_attributes_as_tags": true,
@@ -197,11 +207,12 @@ exporters:
         }
     compression: zstd
     compression_params:
-      level: 3
+      level: 3 # Must be set explicitly for zstd; the default uses the lowest compression level
     sending_queue:
       batch: {}
 
 extensions:
+  # Report Collector metadata to Datadog for host enrichment
   datadog:
     api:
       site: ${env:DD_SITE}
@@ -226,11 +237,13 @@ service:
       exporters: [forward, spanmetrics]
     traces/sampling:
       receivers: [forward]
+      # Add sampling processors here (for example, tail_sampling) before exporting traces
       exporters: [otlp_http]
     metrics/spanmetrics:
       receivers: [spanmetrics]
       exporters: [otlp_http]
   telemetry:
+    # Route Collector self-monitoring metrics through its own pipelines
     metrics:
       readers:
         - periodic:
@@ -380,7 +393,7 @@ exporters:
         }
     compression: zstd
     compression_params:
-      level: 3
+      level: 3 # Must be set explicitly for zstd; the default uses the lowest compression level
     sending_queue:
       batch: {}
 
@@ -409,6 +422,7 @@ service:
       exporters: [forward, spanmetrics]
     traces/sampling:
       receivers: [forward]
+      # Add sampling processors here (for example, tail_sampling) before exporting traces
       exporters: [otlp_http]
     metrics/spanmetrics:
       receivers: [spanmetrics]
@@ -609,7 +623,7 @@ exporters:
         }
     compression: zstd
     compression_params:
-      level: 3
+      level: 3 # Must be set explicitly for zstd; the default uses the lowest compression level
     sending_queue:
       batch: {}
 
@@ -641,6 +655,7 @@ service:
       exporters: [forward, spanmetrics]
     traces/sampling:
       receivers: [forward]
+      # Add sampling processors here (for example, tail_sampling) before exporting traces
       exporters: [otlp_http]
     metrics/spanmetrics:
       receivers: [spanmetrics]
@@ -676,9 +691,9 @@ The `k8s_attributes` processor requires a ServiceAccount with permissions to rea
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Helm)" %}}
+{{% tab "Kubernetes (Helm chart)" %}}
 
-You can deploy the Collector in Kubernetes using the [official OpenTelemetry Collector Helm chart][102].
+You can deploy the Collector as a DaemonSet in Kubernetes using the [official OpenTelemetry Collector Helm chart][102].
 
 1. Create a Kubernetes secret with your Datadog API key:
 
@@ -692,7 +707,7 @@ You can deploy the Collector in Kubernetes using the [official OpenTelemetry Col
    helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
    ```
 
-1. Download the [example values file][103] and save it as `values.yaml`. This file configures the Collector as a DaemonSet with the recommended Datadog settings.
+1. Download the [example values file][103] and save it as `values.yaml`. This file configures the Collector as a DaemonSet with the recommended Datadog settings. If your Datadog site is not `datadoghq.com`, update the `DD_SITE` value in `values.yaml` before installing.
 
 1. Install the Collector:
 
@@ -706,9 +721,9 @@ You can deploy the Collector in Kubernetes using the [official OpenTelemetry Col
 {{% /tab %}}
 {{< /tabs >}}
 
-### 3. Run the Collector
+### 3. Run the collector
 
-Start the Collector with the required feature gate enabled. If you are using Docker or Kubernetes, the run command is included in the configuration tab above.
+Start the Collector with the recommended feature gate enabled. If you are using Docker or Kubernetes, the run command is included in the configuration tab above.
 
 For Host installations, run:
 
@@ -726,13 +741,15 @@ Configure your OpenTelemetry-instrumented application to send data to the Collec
 {{% tab "Host" %}}
 ```shell
 export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318"
+export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
 ```
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-Set `OTEL_EXPORTER_OTLP_ENDPOINT` in your application container to point to the Collector container:
+Set the following environment variables in your application container:
 ```
 OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-hostname>:4318
+OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
 ```
 Both containers must be on the same network. If you use Docker Compose, this is handled automatically.
 {{% /tab %}}
@@ -747,6 +764,8 @@ env:
         fieldPath: status.hostIP
   - name: OTEL_EXPORTER_OTLP_ENDPOINT
     value: "http://$(HOST_IP):4318"
+  - name: OTEL_EXPORTER_OTLP_PROTOCOL
+    value: "http/protobuf"
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -770,12 +789,12 @@ The `spanmetrics` connector generates RED metrics from trace data. These metrics
 
 For a complete list of dimensions included in the recommended configuration, see the [full configuration files][5] in the `opentelemetry-examples` repository.
 
-### OTLP HTTP exporter
+### OTLP HTTP Exporter
 
 The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints. Key configuration details:
 
 - **Endpoint**: `https://otlp.{your_dd_site}` for traces and logs, `https://otlp.{your_dd_site}/api/v2/otlpmetrics` for metrics.
-- **Compression**: `zstd` is recommended for reduced bandwidth usage.
+- **Compression**: `zstd` is recommended for reduced bandwidth usage. When using `zstd`, set `compression_params.level` explicitly, because the default uses the lowest compression level.
 - **Resource attributes as tags**: The `dd-otel-metric-config` header enables resource attributes and instrumentation scope metadata to be sent as metric tags.
 
 ### Datadog extension
