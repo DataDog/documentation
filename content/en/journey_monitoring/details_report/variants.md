@@ -12,6 +12,9 @@ further_reading:
 - link: "/journey_monitoring/details_report/"
   tag: "Documentation"
   text: "Learn about the feature details report"
+- link: '/journey_monitoring/uptime/'
+  tag: 'Documentation'
+  text: 'Learn about feature uptime'
 ---
 
 ## Overview

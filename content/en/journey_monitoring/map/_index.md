@@ -15,6 +15,9 @@ further_reading:
 - link: '/journey_monitoring/details_report/variants/'
   tag: 'Documentation'
   text: 'Learn about feature variants'
+- link: '/journey_monitoring/uptime/'
+  tag: 'Documentation'
+  text: 'Learn about feature uptime'
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="false">}}

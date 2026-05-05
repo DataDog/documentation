@@ -15,6 +15,9 @@ further_reading:
 - link: '/journey_monitoring/details_report/variants/'
   tag: 'Documentation'
   text: 'Learn about feature variants'
+- link: '/journey_monitoring/uptime/'
+  tag: 'Documentation'
+  text: 'Learn about feature uptime'
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="true" header="false">}}
@@ -35,7 +38,7 @@ The left side of the report lists the feature and its [variants][5]. Each entry 
 
 ## Attribute filters
 
-The attribute filters at the top of the details report work in tandem with the feature and variant filters. Selecting an attribute filter filters all data in the details report.
+The attribute filters at the top of the details report work in tandem with the feature and variant filters. Selecting an attribute filter filters all data in the details report. Filters are scoped to sessions that triggered this feature.
 
 ## Product Analytics
 
@@ -81,11 +84,7 @@ The Synthetics tests table lists all Synthetic tests in the feature's [test suit
 - The test's uptime
 - When the test most recently ran
 
-Click on **Edit Test Suite** to visit the feature's test suite and edit it directly.
-
-### Add pre-existing tests
-
-Datadog automatically identifies Synthetic tests that cover the feature and surfaces them in this table. These are tests that exist in your account but are not part of the feature's test suite. Each row represents a single test and contains the same data as the table above. You can add each test in this table to the feature's test suite, which automatically starts contributing to the feature's uptime through the test suite SLO.
+Click on **View Test Suite** to visit the feature's test suite and edit it directly.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

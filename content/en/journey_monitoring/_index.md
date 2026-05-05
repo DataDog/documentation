@@ -10,12 +10,14 @@ Feature Monitoring is in Preview.
 
 ## Overview
 
-Teams monitoring critical user flows, such as login, checkout, or media streaming, often need to switch between multiple tools to answer basic questions:
+**Feature Monitoring** lets you track the health of critical user flows—such as login, checkout, or media streaming—from a single place. For any given flow, you can answer:
 - Are users experiencing friction?
 - How fast and reliable is performance?
 - Are issues coming from the frontend, network, or backend?
 
-**Feature Monitoring** addresses this by visualizing the performance of critical user flows in your applications. In Feature Monitoring, a *feature* represents a user flow defined by a start event and an end event, such as the steps between a user landing on a page and completing a checkout. It brings together data from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each feature in one place. This gives engineering, product, and operations teams a shared view of feature health.
+A *feature* is a user flow defined by a start event and an end event. For example, a checkout feature captures the experience from a user landing on the checkout page to completing the checkout process. Feature Monitoring pulls in data from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each feature in one report.
+
+This gives engineering, product, and developer operations teams a shared view of feature health without switching between tools.
 
 {{< img src="journey_monitoring/journey-monitoring-map.png" alt="The Feature Monitoring map showing a catalog of features on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
@@ -26,7 +28,7 @@ For each feature, you can:
 - Track the feature's availability using an uptime SLO based on its [Synthetic test suite][10]
 - Identify where users drop off and investigate individual sessions with [Session Replay][4]
 - Measure the performance of critical steps in the feature with [RUM operations][13]
-- Share a unified view of feature health across engineering, product, and operations teams
+- Share a unified view of feature health across engineering, product, and developer operations teams
 
 ## Setup
 
