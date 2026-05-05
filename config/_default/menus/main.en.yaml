@@ -8543,7 +8543,7 @@ menu:
       identifier: rum_mobile_android_mobile_vitals
       weight: 107
     - name: Frustration Signals
-      url: real_user_monitoring/application_monitoring/android/frustration_signals/
+      url: real_user_monitoring/application_monitoring/android/frustration_signals
       parent: rum_mobile_android
       identifier: rum_mobile_android_frustration_signals
       weight: 108
@@ -8613,7 +8613,7 @@ menu:
       identifier: rum_mobile_ios_mobile_vitals
       weight: 107
     - name: Frustration Signals
-      url: real_user_monitoring/application_monitoring/ios/frustration_signals/
+      url: real_user_monitoring/application_monitoring/ios/frustration_signals
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_frustration_signals
       weight: 108
@@ -8673,7 +8673,7 @@ menu:
       identifier: rum_mobile_flutter_mobile_vitals
       weight: 105
     - name: Frustration Signals
-      url: real_user_monitoring/application_monitoring/flutter/frustration_signals/
+      url: real_user_monitoring/application_monitoring/flutter/frustration_signals
       parent: rum_mobile_flutter
       identifier: rum_mobile_flutter_frustration_signals
       weight: 106
@@ -8723,7 +8723,7 @@ menu:
       identifier: rum_mobile_kotlin_mobile_vitals
       weight: 105
     - name: Frustration Signals
-      url: real_user_monitoring/application_monitoring/kotlin_multiplatform/frustration_signals/
+      url: real_user_monitoring/application_monitoring/kotlin_multiplatform/frustration_signals
       parent: rum_mobile_kotlin
       identifier: rum_mobile_kotlin_frustration_signals
       weight: 106
@@ -8773,7 +8773,7 @@ menu:
       identifier: rum_mobile_react_mobile_vitals
       weight: 105
     - name: Frustration Signals
-      url: real_user_monitoring/application_monitoring/react_native/frustration_signals/
+      url: real_user_monitoring/application_monitoring/react_native/frustration_signals
       parent: rum_mobile_react_native
       identifier: rum_mobile_react_frustration_signals
       weight: 106
