@@ -5317,6 +5317,11 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_metrics
       weight: 307
+    - name: Automation Rules
+      url: llm_observability/monitoring/automation_rules
+      parent: llm_obs_monitoring
+      identifier: llm_obs_monitoring_automation_rules
+      weight: 308
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
