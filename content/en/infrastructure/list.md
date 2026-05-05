@@ -84,7 +84,13 @@ The Datadog Agent collects potential hostnames from several different sources. F
 
 **Note**: Hostnames should be unique within a Datadog account. Otherwise, you may experience inconsistencies on your host graphs.
 
-When there are multiple uniquely identifiable names for a single host, Datadog creates aliases for those host names. The names collected by the Agent are added as aliases for the chosen canonical name. For example, a single host running in EC2 might have an instance ID (`i-abcd1234`), a generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`), and a meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`).
+When there are multiple uniquely identifiable names for a single host, Datadog creates aliases for those host names. The names collected by the Agent are added as aliases for the chosen canonical name.
+
+For example, a single host running in EC2 might have:
+
+- An instance ID (`i-abcd1234`)
+- A generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`)
+- A meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`)
 
 {{< img src="infrastructure/index/infra-list-alias2.png" alt="Host aliases" style="width:100%;">}}
 
@@ -100,13 +106,13 @@ To view Agent configurations:
 
 ### OpenTelemetry Collector configuration
 
-When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the host detail panel. The Datadog Extension provides visibility into your Collector fleet from within the Datadog interface, helping you manage and debug your OpenTelemetry Collector deployments.
+When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the host detail panel. Use the Datadog Extension to manage and debug your OpenTelemetry Collector deployments from the Datadog interface.
 
 To view OpenTelemetry Collector configurations:
 1. Click a host running the OpenTelemetry Collector in the Host List.
 2. In the host detail panel, select the **OTel Collector** tab to view the build information and complete Collector configuration.
 
-For detailed setup instructions and requirements, such as hostname matching and pipeline configuration, see the main [Datadog Extension documentation][14].
+For detailed setup instructions and requirements, such as hostname matching and pipeline configuration, see the [Datadog Extension documentation][14].
 
 {{< img src="infrastructure/index/infra-list-config-otel.png" alt="View OpenTelemetry Collector configurations in the Host List" style="width:100%;">}}
 
@@ -117,13 +123,13 @@ Click **Export** above the host list to download a copy. For a JSON-formatted li
 * The **JSON API permalink** at the top of the Host List.
 * The [search hosts API endpoint][7]. See the [developer guide][8] for an example.
 
-### Agent version
+### Audit Agent versions
 
-It may be useful to audit your Agent versions to confirm you are running the latest version. To do this, use the [get_host_agent_list script][9], which uses the JSON permalink to output the Agents that are running with version numbers. There is also a `json_to_csv` script to convert the JSON output into a CSV file.
+To audit which Agent versions are running across your hosts, use the [get_host_agent_list script][9]. The script uses the JSON permalink to output the running Agents with their version numbers. A `json_to_csv` script also converts the JSON output to CSV.
 
-### No Agent
+### List hosts without an Agent
 
-Another use case of the JSON export would be to get a list of Amazon EC2 (excluding RDS) instances with no Agent installed. These instances appear in the Host List by setting up your AWS account in the Datadog AWS integration tile. See the Python3 script below:
+You can also use the JSON export to list Amazon EC2 (excluding RDS) instances that don't have an Agent installed. These instances appear in the Host List when you set up your AWS account in the Datadog AWS integration tile. The following Python 3 script lists them:
 
 ```python
 # 3p
