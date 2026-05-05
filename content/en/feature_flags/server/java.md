@@ -10,7 +10,7 @@ further_reading:
   text: "Java APM and Distributed Tracing"
 ---
 
-<div class="alert alert-info">Java Feature Flags support is enabled by setting <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. (Note: the provider itself is no longer experimental. The <code>EXPERIMENTAL_</code> prefix in the variable name is there for backwards compatibility reasons.) See the <a href="#configuration">Configuration section</a> for details.</div>
+<div class="alert alert-info">Enable Java Feature Flags by setting <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. The <code>EXPERIMENTAL_</code> prefix is kept for backwards compatibility; the provider is stable. See the <a href="#configuration">Configuration section</a> for details.</div>
 
 ## Overview
 
@@ -121,7 +121,7 @@ Configure your Java application with the required environment variables or syste
 export DD_REMOTE_CONFIG_ENABLED=true
 
 # Required: Enable the feature flagging provider
-# (The EXPERIMENTAL_ prefix is historical — the provider is no longer experimental.)
+# The EXPERIMENTAL_ prefix is historical; the provider is no longer experimental.
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 # Required: Service name
@@ -547,7 +547,7 @@ In Spring Boot tests, register the `InMemoryProvider` through a `@TestConfigurat
 Before investigating specific errors, confirm these prerequisites are in place:
 
 1. **The Datadog Agent is healthy and reachable**: See [APM Connection Errors][2] to verify Agent connectivity.
-2. **Required Agent environment variables are set**: `DD_API_KEY`.
+2. **The Agent has a valid API key configured**: Confirm `DD_API_KEY` is set on the Agent.
 3. **The flagging provider is enabled on the tracer**: Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`.
 4. **Required tracer environment variables are set**: `DD_ENV` and `DD_SITE`.
 5. **Your `DD_ENV` value appears in the Feature Flag environments list**: Confirm your environment is visible in the [Feature Flag Environments][5] settings.
