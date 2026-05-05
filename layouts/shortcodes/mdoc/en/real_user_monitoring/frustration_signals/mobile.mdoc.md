@@ -10,13 +10,13 @@ Rage Taps
 Error Taps
 : A user taps on an element, and at least one error occurs during the action's duration or within 100ms after the action ends.
 
-Frustration signals are automatically detected by the Mobile RUM SDK with no additional configuration.
+The Mobile RUM SDK automatically detects Frustration signals with no additional configuration.
 
 ## Usage
 
 Frustration signals appear in the [RUM Explorer][1] as action attributes. Search through your RUM data to surface trends on frustration signals and analyze patterns of user friction.
 
-Enter a facet in the search query to start your search. Available search fields include:
+Enter a facet in the search query to begin. Available search fields include:
 
 Frustration Type
 : Find actions with a specific frustration signal. For example, to see all actions with a rage tap, add `action.frustration.type:rage_tap` to the search query.
