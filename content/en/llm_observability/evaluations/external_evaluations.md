@@ -103,7 +103,6 @@ To submit evaluations for <a href="/llm_observability/instrumentation/otel_instr
             }
           },
           "ml_app": "weather-bot",
-          "timestamp_ms": 1765990800016,
           "metric_type": "score",
           "label": "Accuracy",
           "score_value": 3,
