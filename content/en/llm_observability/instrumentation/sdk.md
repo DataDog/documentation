@@ -2012,6 +2012,32 @@ llmCall = llmobs.wrap({ kind: 'llm', modelName: 'gpt-5.1', modelProvider: 'opena
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Java" %}}
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+import java.util.Map;
+
+public class MyJavaClass {
+  public String llmCall(String prompt) {
+    LLMObsSpan llmSpan = LLMObs.startLLMSpan("llm-call", "gpt-5.1", "openai", null, null);
+    String resp = ... // llm call here
+    llmSpan.setMetrics(Map.of(
+      "input_tokens", 50,
+      "output_tokens", 120,
+      "total_tokens", 170,
+      "non_cached_input_tokens", 13,  // optional
+      "cache_read_input_tokens", 22,  // optional
+      "cache_write_input_tokens", 15  // optional
+    ));
+    llmSpan.finish();
+    return resp;
+  }
+}
+{{< /code-block >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Use case: Using a custom model
@@ -2060,6 +2086,32 @@ function llmCall (prompt) {
   return resp
 }
 llmCall = llmobs.wrap({ kind: 'llm', modelName: 'custom_model', modelProvider: 'model_provider' }, llmCall)
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+import java.util.Map;
+
+public class MyJavaClass {
+  public String llmCall(String prompt) {
+    LLMObsSpan llmSpan = LLMObs.startLLMSpan("llm-call", "custom_model", "model_provider", null, null);
+    String resp = ... // llm call here
+    llmSpan.setMetrics(Map.of(
+      "input_cost", 3,
+      "output_cost", 7,
+      "total_cost", 10,
+      "non_cached_input_cost", 1,    // optional
+      "cache_read_input_cost", 0.6,  // optional
+      "cache_write_input_cost", 1.4  // optional
+    ));
+    llmSpan.finish();
+    return resp;
+  }
+}
 {{< /code-block >}}
 
 {{% /tab %}}
