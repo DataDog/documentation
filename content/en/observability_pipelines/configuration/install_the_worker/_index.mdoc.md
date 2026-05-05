@@ -609,7 +609,7 @@ If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions
 
 By default, a Worker's hostname is the machine's hostname, such as `COMP-JLXPKWTGJF`. If you run your pipeline across multiple clusters or containers, assign each Worker a unique hostname based on the Pod name and cluster name to make them easier to identify.
 
-In the Helm chart [`values.yaml`][15]
+In the Helm chart [`values.yaml`][15]:
 
 1. Configure the environment variable `POD_NAME` to be automatically set to the Pod's name.
 In the Helm chart:
@@ -746,7 +746,11 @@ Follow these steps to manually install the Worker, instead of running the one-li
 
 <!-- UI - Linux -->
 {% if includes($interface, ["ui"]) %}
+
 5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+
+**Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
 {% /if %}
 
 {% /tab %}
@@ -809,17 +813,9 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
     sudo systemctl restart observability-pipelines-worker
     ```
 
-<!-- API/TF - Linux -->
-{% if includes($interface, ["api","terraform"]) %}
-
-**Notes**:
-- The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
-- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
-
-{% /if %}
-
-<!-- UI - Linux -->
+<!-- UI - Linux RPM -->
 {% if includes($interface, ["ui"]) %}
+
 5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 **Note**: See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
@@ -829,6 +825,14 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
 {% /tab %}
 {% /tabs %}
 
+<!-- API/TF - Linux RPM -->
+{% if includes($interface, ["api","terraform"]) %}
+
+**Notes**:
+- The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
+- See [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist) if you are using a firewall.
+
+{% /if %}
 
 See [Update Existing Pipelines][13] if you want to make changes to your pipeline's configuration.
 

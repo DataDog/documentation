@@ -1,7 +1,7 @@
-3. Download the [Helm chart values file][101]. See the [full list of configuration options][101] available.
+3. Download the [Helm chart values file][101]. See the [full list of configuration options][102] available.
     - If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
 4. Click **Select API key** to choose the Datadog API key you want to use.
-    - **Note**: The API key must be [enabled for Remote Configuration][102].
+    - **Note**: The API key must be [enabled for Remote Configuration][103].
 5. Add the Datadog chart repository to Helm:
     ```shell
     helm repo add datadog https://helm.datadoghq.com
@@ -12,4 +12,5 @@
     ```
 
 [101]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
-[102]: https://app.datadoghq.com/organization-settings/remote-config/setup
+[102]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
+[103]: https://app.datadoghq.com/organization-settings/remote-config/setup
