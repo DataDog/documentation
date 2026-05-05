@@ -17,11 +17,13 @@ further_reading:
 
 ## Overview
 
-The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last 15 minutes, with an option to switch to a live view. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog. This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
+The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last 15 minutes, with an option to switch to a live view. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog.
 
 This page describes the default view of the Host List. To switch to the **Legacy** view, click the toggle in the upper-right corner.
 
 {{< img src="infrastructure/index/infra-list-overview.png" alt="The Host List with a filter panel on the left and a list of hosts with customizable columns." style="width:100%;">}}
+
+**Note**: This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
 
 ## Filter and search
 
