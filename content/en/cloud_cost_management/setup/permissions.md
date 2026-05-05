@@ -27,8 +27,8 @@ CCM also supports [Data Access Control](#data-access-control) to further restric
 | `cloud_cost_management_read` | Grants read-only access to view cost data, budgets, recommendations, and settings across CCM pages and external integrations. |
 | `cloud_cost_management_write` | Grants access to modify CCM configurations, including uploading custom costs and managing cloud accounts. Does not grant access to create, edit, or delete budgets; see `ccm_budget_write`. |
 | `ccm_budget_write` | Grants access to create, update, and delete Cloud Cost Management budgets, including budget metadata and budgeted amounts per entry. Requires the read permission to access pages. |
-| `generate_ccm_report_schedules` | View all report schedules and manage only the ones the user has created. |
-| `manage_ccm_report_schedules` | View, create, and fully manage all report schedules across the organization. |
+| `generate_ccm_report_schedules` | Grants access to view all report schedules and manage only the ones the user has created. |
+| `manage_ccm_report_schedules` | Grants access to view, create, and fully manage all report schedules across the organization. |
 
 ## Permission requirements by page
 
