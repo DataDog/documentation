@@ -24,7 +24,7 @@ Choose Datadog Apps when you need:
 
 - **Team collaboration**: Multiple engineers contributing to the same app, with code review and version history through your existing source control.
 - **Source control and CI/CD**: Store your app in GitHub and deploy automatically on merge.
-- **AI-assisted development**: Use your preferred local tooling (such as Claude) to generate and refine code.
+- **AI-assisted development**: Use your preferred local tooling (such as Cursor, GitHub Copilot, or Claude) to generate and refine code.
 - **Custom cloud providers and APIs**: Integrate with services beyond the [Action Catalog][3] using your own backend code.
 - **Complex UI and logic**: Full React and TypeScript control over components, state, and rendering.
 
@@ -45,16 +45,14 @@ Choose Datadog Apps when you need:
 ## Scaffold an app
 
 1. Run the scaffolding command to create a new app:
-
    ```shell
    npm create @datadog/apps
    ```
-
 2. Follow the interactive prompts to configure your app name and template.
-3. (Optional) Set up Datadog RUM for the app. This automatically sets up the Browser SDK for:
-- RUM tracking
-- Error Tracking
-- Build metrics
+3. (Optional) Set up [Datadog RUM][15] for the app. This automatically sets up the Browser SDK for:
+   - Real User Monitoring (RUM)
+   - Error Tracking
+   - Build metrics
 
 ### Generated app structure
 
@@ -90,7 +88,7 @@ Files matching `*.backend.ts` or `*.js` contain backend functions. Backend funct
 
 Backend functions can call any action in Datadog's [Action Catalog][3] through the [`@datadog/action-catalog`][6] library. The Action Catalog provides reusable, pre-built actions for interacting with cloud providers, SaaS tools, and the Datadog API, so you can build functionality on top of existing integrations instead of writing API clients from scratch.
 
-The library is a fully typed TypeScript client that wraps 50+ integrations, including AWS, Azure, GCP, the Datadog API, GitHub, GitLab, Slack, Jira, PagerDuty, ServiceNow, OpenAI, Anthropic, and generic HTTP. Importing actions from `@datadog/action-catalog` gives you typed inputs and responses for each action.
+The library is a fully typed TypeScript client that wraps integrations, including AWS, Azure, GCP, the Datadog API, GitHub, GitLab, Slack, Jira, PagerDuty, ServiceNow, OpenAI, Anthropic, and generic HTTP. Importing actions from `@datadog/action-catalog` gives you typed inputs and responses for each action.
 
 {{% collapse-content title="Example backend function" level="h4" expanded=false %}}
 
@@ -154,19 +152,18 @@ The following environment variables are available with `npm run build`:
 |---|---|
 | `DD_API_KEY` | Datadog API key. |
 | `DD_APP_KEY` | Datadog application key. |
-| `DD_APPS_VERSION_NAME` | Optional. The version name of the app version to be uploaded. Can be any string, but each app version must have a unique name (not duplicated for the same app). If unset, Datadog assigns a version name. |
-| `DD_APPS_UPLOAD_ASSETS` | If set and `dryRun` is `false`, uploads built assets to Datadog when `npm run build` is run. |
+| `DD_APPS_VERSION_NAME` | Optional. The version name for the uploaded app version. Must be a unique string per app. If unset, Datadog assigns a version name. |
+| `DD_APPS_UPLOAD_ASSETS` | If set and `dryRun` is `false`, uploads built assets to Datadog when you run `npm run build`. |
 
 By default, `npm run build` runs in dry run mode, which builds the app without uploading it to Datadog. Dry run mode is the recommended default for local development, where you typically don't want to upload every local build.
 
-For production deployments, [set up CI/CD with GitHub Actions](#set-up-cicd-with-github-actions). [`DataDog/apps-github-action`][7] handles the upload step on your behalf, so you don't need to change `dryRun` for this workflow.
+For production deployments, [set up CI/CD with GitHub Actions](#set-up-cicd-with-github-actions). [`DataDog/apps-github-action`][7] handles the upload step for you, so you don't need to change `dryRun` for this workflow.
 
 To upload from your local environment as an end-to-end test (for example, to verify that the build pipeline works before a release), set `DD_APPS_UPLOAD_ASSETS`:
 
 ```shell
 DD_APPS_UPLOAD_ASSETS=1 npm run build
 ```
-
 
 After a successful upload, the build output displays a URL where your app is accessible in Datadog.
 
@@ -179,7 +176,7 @@ After you publish an app, it appears in your [App Builder][8] app list alongside
 - Embed the app in dashboards, notebooks, and the Internal Developer Portal
 
 <div class="alert alert-danger">
-Apps built locally cannot be edited through the App Builder drag-and-drop interface. The following App Builder features are not available for locally-built apps:
+The following App Builder features are not available for locally-built apps:
 <ul>
 <li>UI editing with drag-and-drop components</li>
 <li>Variables, events, and expressions managed in the App Builder UI</li>
@@ -189,9 +186,9 @@ To change an app's UI or logic, update the code in your local project and redepl
 
 ## Set up CI/CD with GitHub Actions
 
-To automatically deploy your app on every push to the `main` branch, use the [`DataDog/apps-github-action`][7] GitHub Action. This action builds your app and deploys it to Datadog. See the README for available inputs and configuration options.
+To automatically deploy your app on every push to the `main` branch, use the [`DataDog/apps-github-action`][7] GitHub Action. This action builds your app and deploys it to Datadog.
 
-**If your organization is not on US1** (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][9]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site is  `{{< region-param key="dd_site" >}}`.
+If your organization is not on US1 (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][9]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site is `{{< region-param key="dd_site" >}}`.
 
 {{< site-region region="us3,us5,eu,ap1,ap2" >}}
 
@@ -241,13 +238,9 @@ jobs:
 
 ## Troubleshooting
 
-### 401 or `Missing authentication token` errors
+### Authentication errors
 
-Verify that `DD_API_KEY` and `DD_APP_KEY` are set and that the application key has Actions API Access enabled.
-
-### Backend function calls fail
-
-Check that both `DD_API_KEY` and `DD_APP_KEY` are set and that the application key has Actions API Access enabled.
+For authentication errors (such as 401 or `Missing authentication token`), or backend function call failures, verify that `DD_API_KEY` and `DD_APP_KEY` are set and that the application key has Actions API Access enabled.
 
 ### Build succeeds but nothing uploads
 
@@ -275,3 +268,4 @@ The scaffolding tool requires Node.js v20.12.0 or later. If you still encounter 
 [12]: https://github.com/Schniz/fnm
 [13]: https://nodejs.org
 [14]: https://github.com/DataDog/build-plugin
+[15]: /real_user_monitoring/
