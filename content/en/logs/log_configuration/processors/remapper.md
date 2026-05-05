@@ -94,7 +94,7 @@ Create a Remapper to remap the `user.firstname` attribute to a new `user_name` a
 }
 ```
 
-The Remapper adds the new user_name attribute while preserving the original user.firstname attribute.
+The Remapper adds the new `user_name` attribute while preserving the original `user.firstname` attribute.
 
 {{% /collapse-content %}}
 

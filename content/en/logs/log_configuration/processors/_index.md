@@ -63,7 +63,7 @@ In [log configuration settings][1], you can configure processors such as the [Gr
     {{< nextlink href="logs/log_configuration/processors/threat_intel_processor">}}<strong>Threat Intel Processor</strong>: Enrich logs with Threat Intelligence attributes by matching against an indicator of compromise (IoC) table.{{< /nextlink >}}
     {{< nextlink href="logs/log_configuration/processors/trace_remapper">}}<strong>Trace Remapper</strong>: Define a correlation between application traces and logs.{{< /nextlink >}}
     {{< nextlink href="logs/log_configuration/processors/url_parser">}}<strong>URL Parser</strong>: Extract query parameters and other components from a URL attribute.{{< /nextlink >}}
-    {{< nextlink href="logs/log_configuration/processors/user_agent_parser">}}<strong>User-Agent Parser</strong>: Parse a useragent attribute to extract OS, browser, device, and other user data.{{< /nextlink >}}
+    {{< nextlink href="logs/log_configuration/processors/user_agent_parser">}}<strong>User-Agent Parser</strong>: Parse a user-agent attribute to extract OS, browser, device, and other user data.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

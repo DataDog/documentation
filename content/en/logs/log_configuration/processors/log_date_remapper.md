@@ -43,7 +43,7 @@ To see how a custom date and time format can be parsed in Datadog, see [Parsing 
 
 The Log Date Remapper is typically used to:
 - Select another attribute as the date to be used for the log event, if it doesn't match our default date attributes. For example, logs coming from Akamai Stream use `reqTimeMillis` as the timestamp. Use a Log Date Remapper to set that attribute as the log timestamp.
-- Select an attribute after a grok parser. For example, logs coming from Ruby contain the log timestamp in the message attribute which is only accessible after parsing it.
+- Select an attribute after grok parsing. For example, logs coming from Ruby contain the log timestamp in the message attribute which is only accessible after parsing it.
 
 
 ## Before and after state of logs

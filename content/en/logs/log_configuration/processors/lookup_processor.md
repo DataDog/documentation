@@ -19,10 +19,10 @@ For example, you can use the lookup processor to map an internal service ID into
 
 ## Use cases
 
-The Lookup Processor is typically used to transform an attribute into a human readable attribute. It is commonly used for:
-- Mapping a service ID to a human readable service name
+The Lookup Processor is typically used to transform an attribute into a human-readable attribute. It is commonly used for:
+- Mapping a service ID to a human-readable service name
 - Mapping a user ID to a username
-- Mapping a bit value to a human readable attribute
+- Mapping a bit value to a human-readable attribute
 
 
 ## Setup

@@ -32,7 +32,7 @@ Each incoming status value is mapped as follows:
 ## Use cases
 
 The Status Remapper is typically used to:
-- Select another attribute as the status to be used for the log event, if it doesn't match our default status attributes. For example, logs coming from Genesys use `eventDate` as the status attribute. Use a Status Remapper to set that attribute as the status.
+- Select another attribute as the status to be used for the log event, if it doesn't match default status attributes. For example, logs coming from Genesys use `eventDate` as the status attribute. Use a Status Remapper to set that attribute as the status.
 - Select an attribute after a grok parser. For example, Golang logs contain the status in the message attribute that first needs to be parsed.
 
 ## API

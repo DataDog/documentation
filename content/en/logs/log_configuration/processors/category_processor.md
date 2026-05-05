@@ -65,7 +65,7 @@ Create a Category Processor to set a log status category based on `http.status_c
 }
 ```
 
-The Category Processor added a new attribute called log_status with the status of the log derived from the HTTP status code.
+The Category Processor added a new attribute called `log_status` with the status of the log derived from the HTTP status code.
 
 {{% /collapse-content %}}
 

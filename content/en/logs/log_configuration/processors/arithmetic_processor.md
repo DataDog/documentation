@@ -26,7 +26,7 @@ By default, a calculation is skipped if an attribute is missing. Select *Replace
 
 ## Use cases
 
-The arithmetic processor is used to calculate values using log attributes. The most common use case is converting duration attributes to different timeframes such as with Azure logs where Datadog automatically converts the duration from nanoseconds to milliseconds.
+The arithmetic processor is used to calculate values using log attributes. The most common use case is converting duration attributes to different timeframes, such as with Azure logs, where Datadog automatically converts the duration from nanoseconds to milliseconds.
 
 ## Before and after state of logs
 

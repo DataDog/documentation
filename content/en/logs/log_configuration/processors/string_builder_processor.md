@@ -32,7 +32,7 @@ Define the string builder processor on the [**Pipelines** page][1]:
 
 {{< img src="logs/log_configuration/processor/stringbuilder_processor.png" alt="String builder processor" style="width:80%;">}}
 
-With the following log, use the template `Request %{http.method} %{http.url} was answered with response %{http.status_code}` to returns a result. For example:
+With the following log, use the template `Request %{http.method} %{http.url} was answered with response %{http.status_code}` to return a result. For example:
 
 
 ```json

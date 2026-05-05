@@ -10,14 +10,14 @@ further_reading:
 
 ## Overview
 
-The user-agent parser processor takes a `useragent` attribute and extracts OS, browser, device, and other user data. When set up, the following attributes are produced:
+The User-Agent Parser takes a `useragent` attribute and extracts OS, browser, device, and other user data. When set up, the following attributes are produced:
 
 {{< img src="logs/processing/processors/useragent_processor.png" alt="Useragent Processor" style="width:80%;">}}
 
 **Note**: If your logs contain encoded user-agents (for example, IIS logs), configure this Processor to **decode the URL** before parsing it.
 
 ## Use cases
-The User Agent Parser allows you to extract useful information, for example, browser, device, OS from apache logs.
+The User-Agent Parser allows you to extract useful information, for example, browser, device, OS from apache logs.
 
 
 ## Before and after state of logs
@@ -83,7 +83,7 @@ Create a User-Agent Parser processor and configure it to parse the `user_agent` 
 }
 ```
 
-The User-Agent Parser automatically adds a new nested attribute (http.useragent_details) containing extracted components of the User Agent.
+The User-Agent Parser automatically adds a new nested attribute (`http.useragent_details`) containing extracted components of the User Agent.
 
 {{% /collapse-content %}}
 
