@@ -117,9 +117,9 @@ Use the Library Inventory to understand which dependencies you rely on, where th
 
 To learn more about how the inventory is generated, how Static and Runtime data differ, and how to interpret the library details (usage, vulnerabilities, licenses, versions, and OpenSSF score), see [Library Inventory][14].
 
-### Export a Software Bill of Materials (SBOM)
+### Export a Software Bill of Materials
 
-Export a Software Bill of Materials (SBOM) of your third-party libraries directly from the [Library Inventory][8]. The exported SBOM includes libraries detected both statically (via Static SCA) and at runtime (via Runtime SCA), giving you a single, comprehensive view of your software supply chain.
+Export a SBOM of your third-party libraries directly from the [Library Inventory][8]. The exported SBOM includes libraries detected both statically (with Static SCA) and at runtime (with Runtime SCA), giving you a single, comprehensive view of your software supply chain.
 
 Datadog supports the following SBOM formats:
 

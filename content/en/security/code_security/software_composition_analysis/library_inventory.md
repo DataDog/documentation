@@ -151,9 +151,9 @@ The score ranges from **0 to 10**, where 10 indicates best practices.
 {{< img src="/security/code_security/openSSF_Score_1.png" alt="OpenSSF Scorecard results for the upstream project" style="width:100%;" >}}
 
 
-## Export a Software Bill of Materials (SBOM)
+## Export a Software Bill of Materials
 
-From the [Library Inventory][1], you can export a Software Bill of Materials (SBOM) of all libraries detected across your environment, both statically (via Static SCA) and at runtime (via Runtime SCA). This gives you a single, authoritative inventory of the open source components your organization depends on, regardless of where they were observed.
+From the [Library Inventory][1], you can export a Software Bill of Materials (SBOM) of all libraries detected across your environment, both statically (with Static SCA) and at runtime (with Runtime SCA). This gives you a single, authoritative inventory of the open source components your organization depends on, regardless of where they were observed.
 
 Datadog supports the following SBOM formats:
 
