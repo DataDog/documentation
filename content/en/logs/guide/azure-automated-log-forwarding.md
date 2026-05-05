@@ -17,7 +17,7 @@ The ARM template deploys resources from a series of Azure services (storage acco
 
 **All sites**: Automated log forwarding is available to use on all [Datadog sites][4].
 
-**Supported Azure environments**: Automated log forwarding supports the Azure commercial (public) cloud only. Azure Government and Azure China are not supported.
+**Supported Azure environments**: Automated log forwarding supports the Azure commercial (public) cloud only. Azure Government and Azure China are not supported. Customers on Datadog government sites can use this feature only with workloads in Azure commercial cloud.
 
 ## How to choose between automated and manual setup
 
