@@ -11,7 +11,7 @@
  * endpoint from the next within a category page.
  */
 
-import type { EndpointData } from '../../../data/api/endpoints';
+import type { EndpointData } from '../../../data/api/views';
 import { getDefaultRegions } from '../../../data/api/regions';
 import { appHost } from '../../../config/regions';
 import { htmlToMd } from '../../../data/api/htmlToMd';

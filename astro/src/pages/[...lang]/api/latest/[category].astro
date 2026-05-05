@@ -1,8 +1,7 @@
 ---
 import ApiLayout from '../../../../layouts/ApiLayout.astro';
 import ApiEndpoint from '../../../../components/ApiEndpoint/ApiEndpoint.astro';
-import { getApiCategories, getCategoryBySlug } from '../../../../data/api/index';
-import { getEndpointsForCategory } from '../../../../data/api/endpoints';
+import { getCategoriesView, getCategoryViewBySlug, getEndpointsView } from '../../../../data/api/views';
 import { highlightEndpoints } from '../../../../data/api/highlight';
 import { getApiPageTitle } from '../../../../data/api/pageTitles';
 import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/i18n/locale';
@@ -10,10 +9,10 @@ import { htmlToMetaDescription } from '../../../../lib/seo';
 import { i18n } from '../../../../lib/i18n/i18n';
 import type { GetStaticPaths, GetStaticPathsResult } from 'astro';
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths: GetStaticPathsResult = [];
   for (const lang of LOCALES) {
-    for (const cat of getApiCategories(lang)) {
+    for (const cat of await getCategoriesView(lang)) {
       paths.push({
         params: {
           lang: lang === 'en' ? undefined : lang,
@@ -35,13 +34,13 @@ if (!slug || typeof slug !== 'string') {
   return new Response(null, { status: 404 });
 }
 
-const categories = getApiCategories(lang);
-const current = getCategoryBySlug(slug, lang);
+const categories = await getCategoriesView(lang);
+const current = await getCategoryViewBySlug(slug, lang);
 if (!current) {
   return new Response(null, { status: 404 });
 }
 
-const endpoints = getEndpointsForCategory(slug, lang);
+const endpoints = await getEndpointsView(slug, lang);
 await highlightEndpoints(endpoints);
 ---
 

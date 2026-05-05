@@ -31,9 +31,13 @@ export interface SchemaField {
 
 /* ------------------------------------------------------------------ */
 /*  Module-level cache for resolved $ref schemas                       */
+/*                                                                     */
+/*  Keyed by the spec object itself so v1 and v2 don't share entries — */
+/*  both specs use overlapping ref strings (e.g. `#/components/schemas */
+/*  /APIErrorResponse`) that resolve to different schemas.             */
 /* ------------------------------------------------------------------ */
 
-const refCache = new Map<string, any>();
+const refCache = new WeakMap<object, Map<string, any>>();
 
 /* ------------------------------------------------------------------ */
 /*  $ref resolution                                                    */
@@ -49,8 +53,10 @@ const refCache = new Map<string, any>();
  * @returns The resolved object, or `undefined` if the path is invalid.
  */
 export function resolveRef(spec: any, refString: string): any {
-  if (refCache.has(refString)) {
-    return refCache.get(refString);
+  let perSpec = refCache.get(spec);
+  if (perSpec) {
+    const cached = perSpec.get(refString);
+    if (cached !== undefined || perSpec.has(refString)) return cached;
   }
 
   const parts = refString.replace(/^#\//, '').split('/');
@@ -65,7 +71,11 @@ export function resolveRef(spec: any, refString: string): any {
     current = current[unescaped];
   }
 
-  refCache.set(refString, current);
+  if (!perSpec) {
+    perSpec = new Map();
+    refCache.set(spec, perSpec);
+  }
+  perSpec.set(refString, current);
   return current;
 }
 

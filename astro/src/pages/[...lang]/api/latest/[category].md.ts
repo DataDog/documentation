@@ -1,13 +1,12 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { getApiCategories, getCategoryBySlug } from '../../../../data/api/index';
-import { getEndpointsForCategory } from '../../../../data/api/endpoints';
+import { getCategoriesView, getCategoryViewBySlug, getEndpointsView } from '../../../../data/api/views';
 import { renderCategoryMd } from '../../../../data/api/renderCategoryMd';
 import { LOCALES, parseLangParam } from '../../../../lib/i18n/locale';
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths: ReturnType<GetStaticPaths> = [];
   for (const lang of LOCALES) {
-    for (const cat of getApiCategories(lang)) {
+    for (const cat of await getCategoriesView(lang)) {
       paths.push({
         params: {
           lang: lang === 'en' ? undefined : lang,
@@ -19,17 +18,17 @@ export const getStaticPaths: GetStaticPaths = () => {
   return paths;
 };
 
-export const GET: APIRoute = ({ params }) => {
+export const GET: APIRoute = async ({ params }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) return new Response(null, { status: 404 });
 
   const slug = params.category;
   if (!slug) return new Response(null, { status: 404 });
 
-  const category = getCategoryBySlug(slug, lang);
+  const category = await getCategoryViewBySlug(slug, lang);
   if (!category) return new Response(null, { status: 404 });
 
-  const endpoints = getEndpointsForCategory(slug, lang);
+  const endpoints = await getEndpointsView(slug, lang);
   const body = renderCategoryMd(category, endpoints);
 
   return new Response(body, {

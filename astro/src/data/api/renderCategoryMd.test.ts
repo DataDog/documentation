@@ -1,36 +1,78 @@
 /**
- * Integration tests for `renderCategoryMd`, including a Markdoc round-trip
- * parse to verify that the output is parseable Markdoc (no error nodes).
+ * Unit tests for `renderCategoryMd`, including a Markdoc round-trip parse to
+ * verify that the output is parseable Markdoc (no error nodes).
  *
- * This is the "parseable Markdoc" contract that downstream AI agents rely on:
- * tabs, alerts, and fenced code blocks must all parse cleanly.
+ * Integration coverage of the renderer over the full spec lives in the API
+ * page HTML snapshot tests (which build the site and diff the rendered HTML).
+ * Here we use small fixtures so the test runs without an Astro build.
  */
 
 import { describe, it, expect } from 'vitest';
 import Markdoc from '@markdoc/markdoc';
 import { renderCategoryMd } from './renderCategoryMd';
-import { getCategoryBySlug, getApiCategories } from './index';
-import { getEndpointsForCategory } from './endpoints';
-import type { ApiCategory } from './index';
-import type { EndpointData } from './endpoints';
+import type { ApiCategory, EndpointData } from './views';
 
-function pickRealCategory(): { category: ApiCategory; endpoints: EndpointData[] } {
-  // Prefer action-connection (the example used in the plan) but fall back to
-  // any category with at least one endpoint to keep the test robust.
-  const preferredSlugs = ['action-connection', 'authentication', 'metrics'];
-  for (const slug of preferredSlugs) {
-    const cat = getCategoryBySlug(slug);
-    if (cat) {
-      const eps = getEndpointsForCategory(slug);
-      if (eps.length > 0) return { category: cat, endpoints: eps };
-    }
-  }
-  for (const cat of getApiCategories()) {
-    const eps = getEndpointsForCategory(cat.slug);
-    if (eps.length > 0) return { category: cat, endpoints: eps };
-  }
-  throw new Error('No category with endpoints found in the spec');
-}
+const FIXTURE_CATEGORY: ApiCategory = {
+  name: 'Action Connection',
+  slug: 'action-connection',
+  description: '<p>Manage Action Connections.</p>',
+  operations: [],
+  deprecated: false,
+};
+
+const FIXTURE_ENDPOINTS: EndpointData[] = [
+  {
+    operationId: 'GetConnection',
+    summary: 'Get a connection',
+    slug: 'get-a-connection',
+    method: 'GET',
+    path: '/api/v2/actions/connections/{connection_id}',
+    description: '<p>Get the connection.</p>',
+    version: 'v2',
+    deprecated: false,
+    unstable: false,
+    pathParams: [
+      {
+        name: 'connection_id',
+        type: 'string',
+        required: true,
+        deprecated: false,
+        readOnly: false,
+        description: 'Connection ID',
+      },
+    ],
+    responses: [
+      {
+        statusCode: '200',
+        description: 'OK',
+        schema: [
+          {
+            name: 'data',
+            type: 'object',
+            required: true,
+            deprecated: false,
+            readOnly: false,
+            description: 'The connection.',
+          },
+        ],
+        examples: [{ name: 'Example', value: '{"data":{}}' }],
+      },
+    ],
+    codeExamples: [
+      {
+        language: 'curl',
+        label: 'Curl',
+        entries: [
+          {
+            description: 'Get a connection curl example',
+            code: 'curl -X GET "https://api.datadoghq.com/api/v2/actions/connections/abc"',
+            syntax: 'bash',
+          },
+        ],
+      },
+    ],
+  },
+];
 
 describe('renderCategoryMd', () => {
   it('emits a level-1 heading with the category name and an HR before each endpoint', () => {
@@ -59,16 +101,15 @@ describe('renderCategoryMd', () => {
     expect(md.endsWith('\n')).toBe(true);
   });
 
-  it('renders a real category from the spec without throwing', () => {
-    const { category, endpoints } = pickRealCategory();
-    const md = renderCategoryMd(category, endpoints);
+  it('renders a fixture category without throwing', () => {
+    const md = renderCategoryMd(FIXTURE_CATEGORY, FIXTURE_ENDPOINTS);
     expect(md.length).toBeGreaterThan(0);
-    expect(md).toContain(`# ${category.name}`);
+    expect(md).toContain(`# ${FIXTURE_CATEGORY.name}`);
+    expect(md).toContain('## Get a connection (v2 — latest)');
   });
 
-  it('produces parseable Markdoc (no error nodes) for a real category', () => {
-    const { category, endpoints } = pickRealCategory();
-    const md = renderCategoryMd(category, endpoints);
+  it('produces parseable Markdoc (no error nodes) for the fixture', () => {
+    const md = renderCategoryMd(FIXTURE_CATEGORY, FIXTURE_ENDPOINTS);
 
     const ast = Markdoc.parse(md);
     const errors = Markdoc.validate(ast, {

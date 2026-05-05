@@ -6,7 +6,7 @@
  * block with Model and Example tabs (if both schema and examples are present).
  */
 
-import type { ResponseData } from '../../../data/api/endpoints';
+import type { ResponseData } from '../../../data/api/views';
 import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable.md';
 import { htmlToMd } from '../../../data/api/htmlToMd';
 

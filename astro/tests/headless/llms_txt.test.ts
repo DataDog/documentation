@@ -1,5 +1,25 @@
-import { describe, it, expect } from 'vitest';
-import { GET } from '../../src/pages/llms.txt';
+import { describe, it, expect, vi } from 'vitest';
+
+vi.mock('../../src/data/api/views', () => ({
+  getCategoriesView: vi.fn(async () => [
+    {
+      slug: 'action-connection',
+      name: 'Action Connection',
+      description: '',
+      operations: [],
+      deprecated: false,
+    },
+    {
+      slug: 'aws-integration',
+      name: 'AWS Integration',
+      description: '',
+      operations: [],
+      deprecated: false,
+    },
+  ]),
+}));
+
+const { GET } = await import('../../src/pages/llms.txt');
 
 describe('GET /llms.txt', () => {
   const ctx = { site: new URL('https://docs.datadoghq.com') } as Parameters<typeof GET>[0];

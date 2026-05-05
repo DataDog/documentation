@@ -8,7 +8,7 @@
 import { codeToHtml } from 'shiki';
 import datadogLight from '../../styles/shiki-light';
 import datadogDark from '../../styles/shiki-dark';
-import type { EndpointData } from './endpoints';
+import type { EndpointData } from './views';
 
 /**
  * Highlight a single code string. Returns the highlighted HTML,

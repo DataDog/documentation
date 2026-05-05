@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { renderApiEndpointMd } from './ApiEndpoint.md';
-import type { EndpointData } from '../../../data/api/endpoints';
+import type { EndpointData } from '../../../data/api/views';
 
 const baseEndpoint: EndpointData = {
   operationId: 'getThing',

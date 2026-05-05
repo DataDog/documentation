@@ -7,8 +7,7 @@
  * parseable Markdoc (tabs, alerts, etc. as Markdoc tags).
  */
 
-import type { ApiCategory } from './index';
-import type { EndpointData } from './endpoints';
+import type { ApiCategory, EndpointData } from './views';
 import { renderApiEndpointMd } from '../../components/ApiEndpoint/plaintext/ApiEndpoint.md';
 import { htmlToMd } from './htmlToMd';
 
