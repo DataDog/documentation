@@ -128,9 +128,9 @@ For more information, see [Role Based Access Control][5].
 
 ## Audit Trail
 
-If [Audit Trail][6] is enabled, Audit Trail records all SAT creation, usage, and revocation
-events. Each API call authenticated with a SAT is attributed to the owning service account,
-giving administrators visibility into automated credential usage across the organization.
+If [Audit Trail][6] is enabled, it records all SAT creation, usage, and revocation
+events. Each API call authenticated with a SAT is attributed to the owning service account.
+This gives administrators visibility into automated credential usage across the organization.
 
 To review SAT activity, navigate to [**Security** > **Compliance** > **Audit Trail**][7] and
 filter by the Service Access Token authentication method.
