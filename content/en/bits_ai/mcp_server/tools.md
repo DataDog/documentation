@@ -537,7 +537,7 @@ Tools for investigating Kafka workloads with [Data Streams Monitoring][27], incl
 ### `list_kafka_topic_configs`
 *Toolset: **data-streams***\
 *Permissions Required: `APM Read`*\
-Lists Kafka topic configuration overrides for a cluster, such as `cleanup.policy`, `retention.ms`, and `max.message.bytes`. Optionally filtered to a single topic. Use this to check whether topic-level settings explain producer or consumer behavior.
+Lists Kafka topic configuration overrides for a cluster, such as `cleanup.policy`, `retention.ms`, and `max.message.bytes`. You can optionally filter to a single topic. Use this to check whether topic-level settings explain producer or consumer behavior.
 
 - Show me the topic config for `checkout-orders`.
 - What is the retention setting on the orders Kafka topic?
