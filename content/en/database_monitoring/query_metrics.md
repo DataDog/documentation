@@ -16,7 +16,10 @@ further_reading:
   text: "SQL Server integration"
 - link: "/integrations/oracle/"
   tag: "Documentation"
-  text: "Oracle integration"  
+  text: "Oracle integration"
+- link: "/integrations/mongo/"
+  tag: "Documentation"
+  text: "MongoDB integration"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -80,6 +83,7 @@ The metrics used for Database Monitoring views are, primarily:
 - **Postgres**: `postgresql.queries.*`
 - **SQL Server**: `sqlserver.queries.*`
 - **Oracle**: `oracle.queries.*`
+- **MongoDB**: `mongodb.queries.*`
 
 ## Query details page
 

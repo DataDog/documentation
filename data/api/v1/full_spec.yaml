@@ -791,6 +791,11 @@ components:
           items:
             $ref: "#/components/schemas/ResourceProviderConfig"
           type: array
+        secretless_auth_enabled:
+          description: |-
+            (Preview) When enabled, Datadog authenticates with this app registration using federated workload identity credentials instead of a client secret.
+          example: true
+          type: boolean
         tenant_name:
           description: Your Azure Active Directory ID.
           example: "testc44-1234-5678-9101-cc00736ftest"
@@ -15673,7 +15678,7 @@ components:
           type: string
         url:
           description: Your Slack service hook URL.
-          example: "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+          example: "https://hooks.slack.com/services/example-workspace/example-channel/example-token"
           type: string
       required:
         - account
@@ -26805,6 +26810,35 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    agents:
+                      prefixes_ipv4:
+                        - "1.2.3.4/32"
+                      prefixes_ipv6: []
+                    api:
+                      prefixes_ipv4:
+                        - "1.2.3.4/32"
+                      prefixes_ipv6: []
+                    apm:
+                      prefixes_ipv4:
+                        - "1.2.3.4/32"
+                      prefixes_ipv6: []
+                    logs:
+                      prefixes_ipv4:
+                        - "1.2.3.4/32"
+                      prefixes_ipv6: []
+                    modified: "2019-10-31-20-00-00"
+                    process:
+                      prefixes_ipv4:
+                        - "1.2.3.4/32"
+                      prefixes_ipv6: []
+                    version: 11
+                    webhooks:
+                      prefixes_ipv4:
+                        - "1.2.3.4/32"
+                      prefixes_ipv6: []
               schema:
                 $ref: "#/components/schemas/IPRanges"
           description: OK
@@ -26863,6 +26897,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    api_keys:
+                      - created: "2024-01-01T00:00:00+00:00"
+                        created_by: test@example.com
+                        key: abc123example456key789placeholder0
+                        name: app_key
               schema:
                 $ref: "#/components/schemas/ApiKeyListResponse"
           description: OK
@@ -26899,6 +26941,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    api_key:
+                      created: "2024-01-01T00:00:00+00:00"
+                      created_by: test@example.com
+                      key: abc123example456key789placeholder0
+                      name: app_key
               schema:
                 $ref: "#/components/schemas/ApiKeyResponse"
           description: OK
@@ -26940,6 +26990,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    api_key:
+                      created: "2024-01-01T00:00:00+00:00"
+                      created_by: test@example.com
+                      key: abc123example456key789placeholder0
+                      name: app_key
               schema:
                 $ref: "#/components/schemas/ApiKeyResponse"
           description: OK
@@ -26985,6 +27043,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    api_key:
+                      created: "2024-01-01T00:00:00+00:00"
+                      created_by: test@example.com
+                      key: abc123example456key789placeholder0
+                      name: app_key
               schema:
                 $ref: "#/components/schemas/ApiKeyResponse"
           description: OK
@@ -27034,6 +27100,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    api_key:
+                      created: "2024-01-01T00:00:00+00:00"
+                      created_by: test@example.com
+                      key: abc123example456key789placeholder0
+                      name: app_key
               schema:
                 $ref: "#/components/schemas/ApiKeyResponse"
           description: OK
@@ -27076,6 +27150,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    application_keys:
+                      - hash: 1234512345123459cda4eb9ced49a3d84fd0138c
+                        name: app_key
+                        owner: test@example.com
               schema:
                 $ref: "#/components/schemas/ApplicationKeyListResponse"
           description: OK
@@ -27115,6 +27196,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    application_key:
+                      hash: 1234512345123459cda4eb9ced49a3d84fd0138c
+                      name: app_key
+                      owner: test@example.com
               schema:
                 $ref: "#/components/schemas/ApplicationKeyResponse"
           description: OK
@@ -27164,6 +27252,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    application_key:
+                      hash: 1234512345123459cda4eb9ced49a3d84fd0138c
+                      name: app_key
+                      owner: test@example.com
               schema:
                 $ref: "#/components/schemas/ApplicationKeyResponse"
           description: OK
@@ -27206,6 +27301,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    application_key:
+                      hash: 1234512345123459cda4eb9ced49a3d84fd0138c
+                      name: app_key
+                      owner: test@example.com
               schema:
                 $ref: "#/components/schemas/ApplicationKeyResponse"
           description: OK
@@ -27258,6 +27360,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    application_key:
+                      hash: 1234512345123459cda4eb9ced49a3d84fd0138c
+                      name: app_key
+                      owner: test@example.com
               schema:
                 $ref: "#/components/schemas/ApplicationKeyResponse"
           description: OK
@@ -27326,6 +27435,10 @@ paths:
         "202":
           content:
             text/json:
+              examples:
+                default:
+                  value:
+                    status: ok
               schema:
                 $ref: "#/components/schemas/IntakePayloadAccepted"
           description: Payload accepted
@@ -27401,6 +27514,22 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          computed_on: "2024-01-02"
+                          end_date: "2024-01-01"
+                          size: 1024
+                          start_date: "2024-01-01"
+                          tags:
+                            - env
+                        id: "2024-01-01"
+                        type: reports
+                    meta:
+                      page:
+                        total_count: 1
               schema:
                 $ref: "#/components/schemas/UsageCustomReportsResponse"
           description: OK
@@ -27443,6 +27572,23 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        computed_on: "2024-01-02"
+                        end_date: "2024-01-01"
+                        location: "https://example.s3.amazonaws.com/report.csv"
+                        size: 1024
+                        start_date: "2024-01-01"
+                        tags:
+                          - env
+                      id: "2024-01-01"
+                      type: reports
+                    meta:
+                      page:
+                        total_count: 1
               schema:
                 $ref: "#/components/schemas/UsageSpecifiedCustomReportsResponse"
           description: OK
@@ -27573,6 +27719,17 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    dashboards:
+                      - author_handle: test@example.com
+                        created_at: "2024-01-01T00:00:00+00:00"
+                        id: abc-123-def
+                        layout_type: ordered
+                        modified_at: "2024-01-01T00:00:00+00:00"
+                        title: Example Dashboard
+                        url: /dashboard/abc-123-def/example-dashboard
               schema:
                 $ref: "#/components/schemas/DashboardSummary"
           description: OK
@@ -27686,6 +27843,27 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    author_handle: test@example.com
+                    author_name: Example Name
+                    created_at: "2024-01-01T00:00:00+00:00"
+                    id: abc-123-def
+                    layout_type: ordered
+                    modified_at: "2024-01-01T00:00:00+00:00"
+                    notify_list:
+                    restricted_roles: []
+                    template_variables:
+                    title: Example Dashboard
+                    url: /dashboard/abc-123-def/example-dashboard
+                    widgets:
+                      - definition:
+                          requests:
+                            - q: avg:system.cpu.user{*}
+                          title: CPU Usage
+                          type: timeseries
+                        id: 123
               schema:
                 $ref: "#/components/schemas/Dashboard"
           description: OK
@@ -27726,6 +27904,20 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    dashboard_lists:
+                      - author:
+                          handle: test@example.com
+                          name: Example Name
+                        created: "2024-01-01T00:00:00+00:00"
+                        dashboard_count: 0
+                        id: 123
+                        is_favorite: false
+                        modified: "2024-01-01T00:00:00+00:00"
+                        name: My Dashboard List
+                        type: manual_dashboard_list
               schema:
                 $ref: "#/components/schemas/DashboardListListResponse"
           description: OK
@@ -27769,6 +27961,19 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    author:
+                      handle: test@example.com
+                      name: Example Name
+                    created: "2024-01-01T00:00:00+00:00"
+                    dashboard_count: 0
+                    id: 123
+                    is_favorite: false
+                    modified: "2024-01-01T00:00:00+00:00"
+                    name: My Dashboard List
+                    type: manual_dashboard_list
               schema:
                 $ref: "#/components/schemas/DashboardList"
           description: OK
@@ -27817,6 +28022,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    deleted_dashboard_list_id: 123
               schema:
                 $ref: "#/components/schemas/DashboardListDeleteResponse"
           description: OK
@@ -27863,6 +28072,19 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    author:
+                      handle: test@example.com
+                      name: Example Name
+                    created: "2024-01-01T00:00:00+00:00"
+                    dashboard_count: 0
+                    id: 123
+                    is_favorite: false
+                    modified: "2024-01-01T00:00:00+00:00"
+                    name: My Dashboard List
+                    type: manual_dashboard_list
               schema:
                 $ref: "#/components/schemas/DashboardList"
           description: OK
@@ -27920,6 +28142,19 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    author:
+                      handle: test@example.com
+                      name: Example Name
+                    created: "2024-01-01T00:00:00+00:00"
+                    dashboard_count: 0
+                    id: 123
+                    is_favorite: false
+                    modified: "2024-01-01T00:00:00+00:00"
+                    name: My Dashboard List
+                    type: manual_dashboard_list
               schema:
                 $ref: "#/components/schemas/DashboardList"
           description: OK
@@ -27983,6 +28218,21 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    author:
+                      handle: test@example.com
+                      name: Example Name
+                    created: "2024-01-01T00:00:00+00:00"
+                    dashboard_id: abc-123-def
+                    dashboard_type: custom_timeboard
+                    global_time:
+                      live_span: 1h
+                    public_url: https://p.datadoghq.com/sb/abc-123
+                    share_type: open
+                    status: active
+                    token: abc-123
               schema:
                 $ref: "#/components/schemas/SharedDashboard"
           description: OK
@@ -28042,6 +28292,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    deleted_public_dashboard_token: abc-123
               schema:
                 $ref: "#/components/schemas/DeleteSharedDashboardResponse"
           description: OK
@@ -28093,6 +28347,21 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    author:
+                      handle: test@example.com
+                      name: Example Name
+                    created: "2024-01-01T00:00:00+00:00"
+                    dashboard_id: abc-123-def
+                    dashboard_type: custom_timeboard
+                    global_time:
+                      live_span: 1h
+                    public_url: https://p.datadoghq.com/sb/abc-123
+                    share_type: open
+                    status: active
+                    token: abc-123
               schema:
                 $ref: "#/components/schemas/SharedDashboard"
           description: OK
@@ -28162,6 +28431,21 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    author:
+                      handle: test@example.com
+                      name: Example Name
+                    created: "2024-01-01T00:00:00+00:00"
+                    dashboard_id: abc-123-def
+                    dashboard_type: custom_timeboard
+                    global_time:
+                      live_span: 1h
+                    public_url: https://p.datadoghq.com/sb/abc-123
+                    share_type: open
+                    status: active
+                    token: abc-123
               schema:
                 $ref: "#/components/schemas/SharedDashboard"
           description: OK
@@ -28293,6 +28577,20 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-01T00:00:00+00:00"
+                          email: test@example.com
+                          has_session: false
+                          session_expiry:
+                          share_token: abc-123
+                        type: public_dashboard_invitation
+                    meta:
+                      page:
+                        total_count: 1
               schema:
                 $ref: "#/components/schemas/SharedDashboardInvites"
           description: OK
@@ -28354,6 +28652,20 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2024-01-01T00:00:00+00:00"
+                          email: test@example.com
+                          has_session: false
+                          session_expiry:
+                          share_token: abc-123
+                        type: public_dashboard_invitation
+                    meta:
+                      page:
+                        total_count: 1
               schema:
                 $ref: "#/components/schemas/SharedDashboardInvites"
           description: OK
@@ -28406,6 +28718,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    deleted_dashboard_id: abc-123
               schema:
                 $ref: "#/components/schemas/DashboardDeleteResponse"
           description: OK
@@ -28450,6 +28766,27 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    author_handle: test@example.com
+                    author_name: Example Name
+                    created_at: "2024-01-01T00:00:00+00:00"
+                    id: abc-123-def
+                    layout_type: ordered
+                    modified_at: "2024-01-01T00:00:00+00:00"
+                    notify_list:
+                    restricted_roles: []
+                    template_variables:
+                    title: Example Dashboard
+                    url: /dashboard/abc-123-def/example-dashboard
+                    widgets:
+                      - definition:
+                          requests:
+                            - q: avg:system.cpu.user{*}
+                          title: CPU Usage
+                          type: timeseries
+                        id: 123
               schema:
                 $ref: "#/components/schemas/Dashboard"
           description: OK
@@ -28513,6 +28850,27 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    author_handle: test@example.com
+                    author_name: Example Name
+                    created_at: "2024-01-01T00:00:00+00:00"
+                    id: abc-123-def
+                    layout_type: ordered
+                    modified_at: "2024-01-01T00:00:00+00:00"
+                    notify_list:
+                    restricted_roles: []
+                    template_variables:
+                    title: Example Dashboard
+                    url: /dashboard/abc-123-def/example-dashboard
+                    widgets:
+                      - definition:
+                          requests:
+                            - q: avg:system.cpu.user{*}
+                          title: CPU Usage
+                          type: timeseries
+                        id: 123
               schema:
                 $ref: "#/components/schemas/Dashboard"
           description: OK
@@ -28588,6 +28946,10 @@ paths:
         "202":
           content:
             text/json:
+              examples:
+                default:
+                  value:
+                    status: ok
               schema:
                 $ref: "#/components/schemas/IntakePayloadAccepted"
           description: Payload accepted
@@ -28647,6 +29009,17 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - active: true
+                      disabled: false
+                      end: 1412793983
+                      id: 1625
+                      message: Scheduled maintenance
+                      scope:
+                        - env:staging
+                      start: 1412792983
               schema:
                 items:
                   $ref: "#/components/schemas/Downtime"
@@ -28700,6 +29073,17 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    active: true
+                    disabled: false
+                    end: 1412793983
+                    id: 1625
+                    message: Scheduling downtime for a database maintenance window.
+                    scope:
+                      - env:staging
+                    start: 1412792983
               schema:
                 $ref: "#/components/schemas/Downtime"
           description: OK
@@ -28752,6 +29136,11 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    cancelled_ids:
+                      - 123
               schema:
                 $ref: "#/components/schemas/CanceledDowntimesIds"
           description: OK
@@ -28852,6 +29241,17 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    active: true
+                    disabled: false
+                    end: 1412793983
+                    id: 1625
+                    message: Scheduled maintenance
+                    scope:
+                      - env:staging
+                    start: 1412792983
               schema:
                 $ref: "#/components/schemas/Downtime"
           description: OK
@@ -28919,6 +29319,17 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    active: true
+                    disabled: false
+                    end: 1412793983
+                    id: 1625
+                    message: Updating downtime end time.
+                    scope:
+                      - env:staging
+                    start: 1412792983
               schema:
                 $ref: "#/components/schemas/Downtime"
           description: OK
@@ -29034,6 +29445,23 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    events:
+                      - alert_type: info
+                        date_happened: 1674842440
+                        host: "test.host"
+                        id: 123
+                        id_str: "123"
+                        priority: normal
+                        source_type_name: my_apps
+                        tags:
+                          - "environment:test"
+                        text: "Oh boy!"
+                        title: "Did you hear the news today?"
+                        url: "/event/event?id=123"
+                    status: ok
               schema:
                 $ref: "#/components/schemas/EventListResponse"
           description: OK
@@ -29088,6 +29516,21 @@ paths:
         "202":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    event:
+                      alert_type: info
+                      date_happened: 1674842440
+                      id: 123
+                      id_str: "123"
+                      priority: normal
+                      tags:
+                        - environment:test
+                      text: Oh boy!
+                      title: Did you hear the news today?
+                      url: "/event/event?id=123"
+                    status: ok
               schema:
                 $ref: "#/components/schemas/EventCreateResponse"
           description: OK
@@ -29126,6 +29569,22 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    event:
+                      alert_type: info
+                      date_happened: 1674842440
+                      host: "test.host"
+                      id: 123
+                      id_str: "123"
+                      priority: normal
+                      tags:
+                        - environment:test
+                      text: Oh boy!
+                      title: Did you hear the news today?
+                      url: "/event/event?id=123"
+                    status: ok
               schema:
                 $ref: "#/components/schemas/EventResponse"
           description: OK
@@ -29165,6 +29624,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    embedded_graphs:
+                      - embed_id: abc-123
+                        graph_title: Example Graph
+                        html: '<iframe src="https://app.datadoghq.com/graph/embed?token=abc-123"></iframe>'
               schema:
                 $ref: "#/components/schemas/EmbeddableGraphs"
           description: OK
@@ -29212,6 +29678,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    embed_id: abc-123
+                    graph_title: Example Graph
+                    html: '<iframe src="https://app.datadoghq.com/graph/embed?token=abc-123"></iframe>'
               schema:
                 $ref: "#/components/schemas/EmbeddableGraph"
           description: Payload accepted
@@ -29254,6 +29726,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    embed_id: abc-123
+                    graph_title: Example Graph
+                    html: '<iframe src="https://app.datadoghq.com/graph/embed?token=abc-123"></iframe>'
               schema:
                 $ref: "#/components/schemas/EmbeddableGraph"
           description: OK
@@ -29294,6 +29772,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    success: "Embed abc-123 successfully enabled."
               schema:
                 $ref: "#/components/schemas/EnableEmbeddableGraphResponseSchema"
           description: OK
@@ -29335,6 +29817,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    success: "Embed abc-123 successfully enabled."
               schema:
                 $ref: "#/components/schemas/EnableEmbeddableGraphResponseSchema"
           description: OK
@@ -29427,6 +29913,11 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    metric_query: "avg:system.load.1{*}"
+                    snapshot_url: https://app.datadoghq.com/s/f12345678/aaa-bbb-ccc
               schema:
                 $ref: "#/components/schemas/GraphSnapshot"
           description: OK
@@ -29483,6 +29974,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    action: Muted
+                    end: 1579098130
+                    hostname: test.host
+                    message: Muting this host for a test!
               schema:
                 $ref: "#/components/schemas/HostMuteResponse"
           description: OK
@@ -29520,6 +30018,11 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    action: Unmuted
+                    hostname: test.host
               schema:
                 $ref: "#/components/schemas/HostMuteResponse"
           description: OK
@@ -29608,6 +30111,21 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    host_list:
+                      - apps:
+                          - agent
+                        host_name: "i-deadbeef"
+                        is_muted: false
+                        last_reported_time: 1565000000
+                        name: "i-hostname"
+                        sources:
+                          - aws
+                        up: true
+                    total_matching: 1
+                    total_returned: 1
               schema:
                 $ref: "#/components/schemas/HostListResponse"
           description: OK
@@ -29656,6 +30174,11 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    total_active: 65
+                    total_up: 42
               schema:
                 $ref: "#/components/schemas/HostTotals"
           description: OK
@@ -29707,6 +30230,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 type: object
           description: OK
@@ -29766,6 +30292,23 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    accounts:
+                      - account_id: "123456789012"
+                        account_specific_namespace_rules:
+                          auto_scaling: false
+                        cspm_resource_collection_enabled: true
+                        excluded_regions:
+                          - us-east-1
+                        extended_resource_collection_enabled: true
+                        filter_tags:
+                          - "$KEY:$VALUE"
+                        host_tags:
+                          - "$KEY:$VALUE"
+                        metrics_collection_enabled: false
+                        role_name: "DatadogAWSIntegrationRole"
               schema:
                 $ref: "#/components/schemas/AWSAccountListResponse"
           description: OK
@@ -29828,6 +30371,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    external_id: abc-123
               schema:
                 $ref: "#/components/schemas/AWSAccountCreateResponse"
           description: OK
@@ -29916,6 +30463,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 type: object
           description: OK
@@ -29957,6 +30507,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - namespace1
+                    - namespace2
+                    - namespace3
               schema:
                 example: ["namespace1", "namespace2", "namespace3"]
                 items:
@@ -30001,6 +30557,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    status: empty
               schema:
                 $ref: "#/components/schemas/AWSEventBridgeDeleteResponse"
           description: OK
@@ -30036,6 +30596,17 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    accounts:
+                      - accountId: "123456789012"
+                        eventHubs:
+                          - name: app-alerts-zyxw3210
+                            region: us-east-1
+                        tags:
+                          - "$KEY:$VALUE"
+                    isInstalled: true
               schema:
                 $ref: "#/components/schemas/AWSEventBridgeListResponse"
           description: OK
@@ -30082,6 +30653,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    event_source_name: app-alerts-zyxw3210
+                    has_bus: true
+                    region: us-east-1
+                    status: created
               schema:
                 $ref: "#/components/schemas/AWSEventBridgeCreateResponse"
           description: OK
@@ -30129,6 +30707,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 example: {}
                 type: object
@@ -30171,6 +30752,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    filters:
+                      - namespace: elb
+                        tag_filter_str: "prod*"
               schema:
                 $ref: "#/components/schemas/AWSTagFilterListResponse"
           description: OK
@@ -30219,6 +30806,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 example: {}
                 type: object
@@ -30270,6 +30860,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    external_id: abc-123
               schema:
                 $ref: "#/components/schemas/AWSAccountCreateResponse"
           description: OK
@@ -30317,6 +30911,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 type: object
           description: OK
@@ -30352,6 +30949,18 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - account_id: "123456789101"
+                      lambdas: []
+                      services:
+                        - s3
+                        - elb
+                        - elbv2
+                        - cloudfront
+                        - redshift
+                        - lambda
               schema:
                 example: [{"account_id": "123456789101", "lambdas": [], "services": ["s3", "elb", "elbv2", "cloudfront", "redshift", "lambda"]}]
                 items:
@@ -30400,6 +31009,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 type: object
           description: OK
@@ -30454,6 +31066,11 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    errors: []
+                    status: created
               schema:
                 $ref: "#/components/schemas/AWSLogsAsyncResponse"
           description: OK
@@ -30490,6 +31107,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - id: s3
+                      label: S3 Access Logs
+                    - id: elb
+                      label: Classic ELB Access Logs
               schema:
                 example: [{"id": "s3", "label": "S3 Access Logs"}, {"id": "elb", "label": "Classic ELB Access Logs"}, {"id": "elbv2", "label": "Application ELB Access Logs"}, {"id": "cloudfront", "label": "CloudFront Access Logs"}, {"id": "redshift", "label": "Redshift Logs"}, {"id": "lambda", "label": "Lambda Cloudwatch Logs"}]
                 items:
@@ -30539,6 +31163,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 type: object
           description: OK
@@ -30601,6 +31228,11 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    errors: []
+                    status: created
               schema:
                 $ref: "#/components/schemas/AWSLogsAsyncResponse"
           description: OK
@@ -30648,6 +31280,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 example: {}
                 type: object
@@ -30683,6 +31318,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - client_id: testc7f6-1234-5678-9101-3fcbf464test
+                      errors: []
+                      host_filters: "key:value,filter:example"
+                      tenant_name: testc44-1234-5678-9101-cc00736ftest
               schema:
                 $ref: "#/components/schemas/AzureAccountListResponse"
           description: OK
@@ -30743,6 +31385,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 example: {}
                 type: object
@@ -30800,6 +31445,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 example: {}
                 type: object
@@ -30849,6 +31497,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 example: {}
                 type: object
@@ -30899,6 +31550,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 example: {}
                 type: object
@@ -30935,6 +31589,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - client_email: test@example.com
+                      client_id: "123456712345671234567"
+                      errors: []
+                      project_id: datadog-apitest
+                      type: service_account
               schema:
                 $ref: "#/components/schemas/GCPAccountListResponse"
           description: OK
@@ -30992,6 +31654,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 example: {}
                 type: object
@@ -31047,6 +31712,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 example: {}
                 type: object
@@ -31094,6 +31762,10 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    service_name: test-service
               schema:
                 $ref: "#/components/schemas/PagerDutyServiceName"
           description: OK
@@ -31171,6 +31843,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    service_name: test-service
               schema:
                 $ref: "#/components/schemas/PagerDutyServiceName"
           description: OK
@@ -31277,6 +31953,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    service_hooks:
+                      - account: example-handle
+                        url: https://hooks.slack.com/services/example-workspace/example-channel/example-token
               schema:
                 type: object
           description: OK
@@ -31404,6 +32086,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - display:
+                        message: true
+                        mute_buttons: false
+                        notified: true
+                        snapshot: true
+                        tags: true
+                      name: "#test-channel"
               schema:
                 $ref: "#/components/schemas/SlackIntegrationChannels"
           description: OK
@@ -31461,6 +32153,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    display:
+                      message: true
+                      mute_buttons: false
+                      notified: true
+                      snapshot: true
+                      tags: true
+                    name: "#test-channel"
               schema:
                 $ref: "#/components/schemas/SlackIntegrationChannel"
           description: OK
@@ -31541,6 +32243,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    display:
+                      message: true
+                      mute_buttons: false
+                      notified: true
+                      snapshot: true
+                      tags: true
+                    name: "#test-channel"
               schema:
                 $ref: "#/components/schemas/SlackIntegrationChannel"
           description: OK
@@ -31599,6 +32311,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    display:
+                      message: true
+                      mute_buttons: false
+                      notified: true
+                      snapshot: true
+                      tags: true
+                    name: "#test-channel"
               schema:
                 $ref: "#/components/schemas/SlackIntegrationChannel"
           description: OK
@@ -31652,6 +32374,11 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    is_secret: true
+                    name: CUSTOM_VARIABLE_NAME
               schema:
                 $ref: "#/components/schemas/WebhooksIntegrationCustomVariableResponse"
           description: OK
@@ -31732,6 +32459,11 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    is_secret: true
+                    name: CUSTOM_VARIABLE_NAME
               schema:
                 $ref: "#/components/schemas/WebhooksIntegrationCustomVariableResponse"
           description: OK
@@ -31790,6 +32522,11 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    is_secret: true
+                    name: CUSTOM_VARIABLE_NAME
               schema:
                 $ref: "#/components/schemas/WebhooksIntegrationCustomVariableResponse"
           description: OK
@@ -31843,6 +32580,12 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    encode_as: json
+                    name: WEBHOOK_NAME
+                    url: https://example.com/webhook
               schema:
                 $ref: "#/components/schemas/WebhooksIntegration"
           description: OK
@@ -31924,6 +32667,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    encode_as: json
+                    name: WEBHOOK_NAME
+                    url: https://example.com/webhook
               schema:
                 $ref: "#/components/schemas/WebhooksIntegration"
           description: OK
@@ -31982,6 +32731,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    encode_as: json
+                    name: WEBHOOK_NAME
+                    url: https://example.com/webhook
               schema:
                 $ref: "#/components/schemas/WebhooksIntegration"
           description: OK
@@ -32050,6 +32805,20 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    logs:
+                      - content:
+                          attributes:
+                            customAttribute: 123
+                          host: i-0123
+                          service: test-service
+                          tags:
+                            - team:A
+                          timestamp: "2020-05-26T13:36:14Z"
+                        id: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+                    status: done
               schema:
                 $ref: "#/components/schemas/LogsListResponse"
           description: OK
@@ -32089,6 +32858,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    index_names:
+                      - main
+                      - payments
+                      - web
               schema:
                 $ref: "#/components/schemas/LogsIndexesOrder"
           description: OK
@@ -32131,6 +32907,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    index_names:
+                      - main
+                      - payments
+                      - web
               schema:
                 $ref: "#/components/schemas/LogsIndexesOrder"
           description: OK
@@ -32167,6 +32950,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    indexes:
+                      - daily_limit: 300000000
+                        filter:
+                          query: source:python
+                        is_rate_limited: false
+                        name: main
+                        num_retention_days: 15
               schema:
                 $ref: "#/components/schemas/LogsIndexListResponse"
           description: OK
@@ -32216,6 +33009,15 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    daily_limit: 300000000
+                    filter:
+                      query: source:python
+                    is_rate_limited: false
+                    name: main
+                    num_retention_days: 15
               schema:
                 $ref: "#/components/schemas/LogsIndex"
           description: OK
@@ -32301,6 +33103,15 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    daily_limit: 300000000
+                    filter:
+                      query: source:python
+                    is_rate_limited: false
+                    name: main
+                    num_retention_days: 15
               schema:
                 $ref: "#/components/schemas/LogsIndex"
           description: OK
@@ -32367,6 +33178,15 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    daily_limit: 300000000
+                    filter:
+                      query: source:python
+                    is_rate_limited: false
+                    name: main
+                    num_retention_days: 15
               schema:
                 $ref: "#/components/schemas/LogsIndex"
           description: OK
@@ -32403,6 +33223,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    pipeline_ids:
+                      - tags
+                      - org_ids
+                      - products
               schema:
                 $ref: "#/components/schemas/LogsPipelinesOrder"
           description: OK
@@ -32448,6 +33275,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    pipeline_ids:
+                      - tags
+                      - org_ids
+                      - products
               schema:
                 $ref: "#/components/schemas/LogsPipelinesOrder"
           description: OK
@@ -32490,6 +33324,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - filter:
+                        query: source:python
+                      id: abc-123
+                      is_enabled: true
+                      is_read_only: false
+                      name: My Pipeline
+                      processors: []
               schema:
                 $ref: "#/components/schemas/LogsPipelineList"
           description: OK
@@ -32531,6 +33375,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    filter:
+                      query: source:python
+                    id: abc-123
+                    is_enabled: true
+                    is_read_only: false
+                    name: My Pipeline
+                    processors: []
               schema:
                 $ref: "#/components/schemas/LogsPipeline"
           description: OK
@@ -32611,6 +33465,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    filter:
+                      query: source:python
+                    id: abc-123
+                    is_enabled: true
+                    is_read_only: false
+                    name: My Pipeline
+                    processors: []
               schema:
                 $ref: "#/components/schemas/LogsPipeline"
           description: OK
@@ -32669,6 +33533,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    filter:
+                      query: source:python
+                    id: abc-123
+                    is_enabled: true
+                    is_read_only: false
+                    name: My Pipeline
+                    processors: []
               schema:
                 $ref: "#/components/schemas/LogsPipeline"
           description: OK
@@ -32728,6 +33602,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    from: "1567816237"
+                    metrics:
+                      - system.cpu.idle
+                      - system.load.1
               schema:
                 $ref: "#/components/schemas/MetricsListResponse"
           description: OK
@@ -32773,6 +33654,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    description: Number of requests received.
+                    per_unit: second
+                    type: count
+                    unit: byte
               schema:
                 $ref: "#/components/schemas/MetricMetadata"
           description: OK
@@ -32832,6 +33720,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    description: Number of requests received.
+                    per_unit: second
+                    type: count
+                    unit: byte
               schema:
                 $ref: "#/components/schemas/MetricMetadata"
           description: OK
@@ -32938,6 +33833,20 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - id: 123
+                      message: "You may need to add web hosts if this is consistently high."
+                      name: "My monitor"
+                      options:
+                        no_data_timeframe: 20
+                        notify_no_data: true
+                      query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
+                      tags:
+                        - "app:webserver"
+                        - "frontend"
+                      type: "query alert"
               schema:
                 description: An array of monitor objects.
                 items:
@@ -33233,6 +34142,20 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    id: 123
+                    message: You may need to add web hosts if this is consistently high.
+                    name: Bytes received on host0
+                    options:
+                      no_data_timeframe: 20
+                      notify_no_data: true
+                    query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
+                    tags:
+                      - "app:webserver"
+                      - frontend
+                    type: query alert
               schema:
                 $ref: "#/components/schemas/Monitor"
           description: OK
@@ -33285,6 +34208,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      ok:
+                        - 123
+                    errors:
               schema:
                 $ref: "#/components/schemas/CheckCanDeleteMonitorResponse"
           description: OK
@@ -33371,6 +34301,28 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    counts:
+                      status:
+                        - count: 1
+                          name: OK
+                      type:
+                        - count: 1
+                          name: metric
+                    groups:
+                      - group: "*"
+                        group_tags:
+                          - "*"
+                        monitor_id: 123
+                        monitor_name: Example Monitor
+                        status: OK
+                    metadata:
+                      page: 0
+                      page_count: 1
+                      per_page: 30
+                      total_count: 1
               schema:
                 $ref: "#/components/schemas/MonitorGroupSearchResponse"
           description: OK
@@ -33452,6 +34404,27 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    counts:
+                      status:
+                        - count: 1
+                          name: No Data
+                      type:
+                        - count: 1
+                          name: metric
+                    metadata:
+                      page: 0
+                      page_count: 1
+                      per_page: 30
+                      total_count: 1
+                    monitors:
+                      - id: 123
+                        name: Example Monitor
+                        org_id: 123
+                        status: No Data
+                        type: query alert
               schema:
                 $ref: "#/components/schemas/MonitorSearchResponse"
           description: OK
@@ -33513,6 +34486,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 example: {}
                 type: object
@@ -33569,6 +34545,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    deleted_monitor_id: 123
               schema:
                 $ref: "#/components/schemas/DeletedMonitor"
           description: OK
@@ -33645,6 +34625,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    id: 123
+                    message: You may need to add web hosts if this is consistently high.
+                    name: Bytes received on host0
+                    query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
+                    tags:
+                      - "app:webserver"
+                    type: query alert
               schema:
                 $ref: "#/components/schemas/Monitor"
           description: OK
@@ -33718,6 +34708,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    id: 123
+                    message: Updated notification message for this monitor.
+                    name: Updated monitor name
+                    query: "avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100"
+                    tags:
+                      - "app:webserver"
+                    type: query alert
               schema:
                 $ref: "#/components/schemas/Monitor"
           description: OK
@@ -33779,6 +34779,17 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - active: true
+                      disabled: false
+                      end: 1412793983
+                      id: 1625
+                      message: Scheduled maintenance
+                      scope:
+                        - env:staging
+                      start: 1412792983
               schema:
                 items:
                   $ref: "#/components/schemas/Downtime"
@@ -33843,6 +34854,22 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    created: "2024-01-01T00:00:00+00:00"
+                    id: 123
+                    message: Alert message
+                    modified: "2024-01-01T00:00:00+00:00"
+                    name: Example Monitor
+                    options:
+                      notify_audit: false
+                      notify_no_data: false
+                    overall_state: "No Data"
+                    query: "avg(last_5m):avg:system.cpu.user{*} > 90"
+                    tags:
+                      - env:prod
+                    type: query alert
               schema:
                 $ref: "#/components/schemas/Monitor"
           description: OK
@@ -33911,6 +34938,22 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    created: "2024-01-01T00:00:00+00:00"
+                    id: 123
+                    message: Alert message
+                    modified: "2024-01-01T00:00:00+00:00"
+                    name: Example Monitor
+                    options:
+                      notify_audit: false
+                      notify_no_data: false
+                    overall_state: "No Data"
+                    query: "avg(last_5m):avg:system.cpu.user{*} > 90"
+                    tags:
+                      - env:prod
+                    type: query alert
               schema:
                 $ref: "#/components/schemas/Monitor"
           description: OK
@@ -33985,6 +35028,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 example: {}
                 type: object
@@ -34056,6 +35102,22 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          computed_on: "2024-02-01"
+                          end_date: "2024-01-31"
+                          size: 2048
+                          start_date: "2024-01-01"
+                          tags:
+                            - env
+                        id: "2024-01"
+                        type: reports
+                    meta:
+                      page:
+                        total_count: 1
               schema:
                 $ref: "#/components/schemas/UsageCustomReportsResponse"
           description: OK
@@ -34098,6 +35160,23 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        computed_on: "2024-02-01"
+                        end_date: "2024-01-31"
+                        location: "https://example.s3.amazonaws.com/report.csv"
+                        size: 2048
+                        start_date: "2024-01-01"
+                        tags:
+                          - env
+                      id: "2024-01"
+                      type: reports
+                    meta:
+                      page:
+                        total_count: 1
               schema:
                 $ref: "#/components/schemas/UsageSpecifiedCustomReportsResponse"
           description: OK
@@ -34231,6 +35310,21 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created: "2021-02-24T23:14:15.173964+00:00"
+                          modified: "2021-02-24T23:15:23.274966+00:00"
+                          name: "Example Notebook"
+                          status: published
+                        id: 123456
+                        type: notebooks
+                    meta:
+                      page:
+                        total_count: 1
+                        total_filtered_count: 1
               schema:
                 $ref: "#/components/schemas/NotebooksResponse"
           description: OK
@@ -34310,6 +35404,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        cells:
+                          - attributes:
+                              definition:
+                                text: "## Some test markdown\n\nWith some example content."
+                                type: markdown
+                            id: "bzbycoya"
+                            type: notebook_cells
+                        created: "2021-02-24T23:14:15.173964+00:00"
+                        modified: "2021-02-24T23:15:23.274966+00:00"
+                        name: "Example Notebook"
+                        time:
+                          live_span: 1h
+                      id: 123456
+                      type: notebooks
               schema:
                 $ref: "#/components/schemas/NotebookResponse"
           description: OK
@@ -34394,6 +35507,26 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        cells:
+                          - attributes:
+                              definition:
+                                text: "## Example markdown"
+                                type: markdown
+                            id: abc-123
+                            type: notebook_cells
+                        created: "2024-01-01T00:00:00+00:00"
+                        modified: "2024-01-01T00:00:00+00:00"
+                        name: Example Notebook
+                        status: published
+                        time:
+                          live_span: 1h
+                      id: 123
+                      type: notebooks
               schema:
                 $ref: "#/components/schemas/NotebookResponse"
           description: OK
@@ -34484,6 +35617,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        cells:
+                          - attributes:
+                              definition:
+                                text: "## Some updated test markdown\n\nWith some example content."
+                                type: markdown
+                            id: "abcd1234"
+                            type: notebook_cells
+                        created: "2021-02-24T23:14:15.173964+00:00"
+                        modified: "2021-02-24T23:15:23.274966+00:00"
+                        name: "Example Notebook"
+                        time:
+                          live_span: 1h
+                      id: 123456
+                      type: notebooks
               schema:
                 $ref: "#/components/schemas/NotebookResponse"
           description: OK
@@ -34530,6 +35682,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    orgs:
+                      - created: "2019-09-26T17:28:28Z"
+                        name: Example Org
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/OrganizationListResponse"
           description: OK
@@ -34581,6 +35740,17 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    org:
+                      created: "2019-09-26T17:28:28Z"
+                      name: New child org
+                      public_id: abc-123
+                    user:
+                      email: test@example.com
+                      handle: test@example.com
+                      name: Example Name
               schema:
                 $ref: "#/components/schemas/OrganizationCreateResponse"
           description: OK
@@ -34623,6 +35793,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    org:
+                      created: "2019-09-26T17:28:28Z"
+                      name: Example Org
+                      public_id: abc-123
               schema:
                 $ref: "#/components/schemas/OrganizationResponse"
           description: OK
@@ -34678,6 +35855,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    org:
+                      created: "2019-09-26T17:28:28Z"
+                      name: Example Org
+                      public_id: abc-123
               schema:
                 $ref: "#/components/schemas/OrganizationResponse"
           description: OK
@@ -34716,6 +35900,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    message: "Child organization abc-123 downgraded successfully"
               schema:
                 $ref: "#/components/schemas/OrgDowngradedResponse"
           description: OK
@@ -34769,6 +35957,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    message: IdP metadata successfully uploaded for example org
               schema:
                 $ref: "#/components/schemas/IdpResponse"
           description: OK
@@ -34826,6 +36018,20 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    query: "avg:system.cpu.idle{*}"
+                    res_type: time_series
+                    series:
+                      - aggr: avg
+                        display_name: system.cpu.idle
+                        expression: "avg:system.cpu.idle{*}"
+                        metric: system.cpu.idle
+                        pointlist:
+                          - [1681683300000.0, 77.62145685254418]
+                        scope: "*"
+                    status: ok
               schema:
                 $ref: "#/components/schemas/MetricsQueryResponse"
           description: OK
@@ -34875,6 +36081,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    results:
+                      metrics:
+                        - system.cpu.idle
+                        - system.load.1
               schema:
                 $ref: "#/components/schemas/MetricSearchResponse"
           description: OK
@@ -34928,6 +36141,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    status: updated
               schema:
                 $ref: "#/components/schemas/SuccessfulSignalUpdateResponse"
           description: OK
@@ -34983,6 +36200,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    status: updated
               schema:
                 $ref: "#/components/schemas/SuccessfulSignalUpdateResponse"
           description: OK
@@ -35039,6 +36260,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    status: updated
               schema:
                 $ref: "#/components/schemas/SuccessfulSignalUpdateResponse"
           description: OK
@@ -35119,6 +36344,10 @@ paths:
         "202":
           content:
             text/json:
+              examples:
+                default:
+                  value:
+                    status: ok
               schema:
                 $ref: "#/components/schemas/IntakePayloadAccepted"
           description: Payload accepted
@@ -35196,6 +36425,15 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    service-b:
+                      calls: []
+                    test-service:
+                      calls:
+                        - service-b
+                        - service-c
               schema:
                 $ref: "#/components/schemas/ServiceDependencies"
           description: OK
@@ -35268,6 +36506,15 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    called_by:
+                      - service-a
+                    calls:
+                      - service-b
+                      - service-c
+                    name: test-service
               schema:
                 $ref: "#/components/schemas/SingleServiceDependencies"
           description: OK
@@ -35348,6 +36595,23 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - id: abc-123
+                        name: "Custom Metric SLO"
+                        tags:
+                          - "env:prod"
+                          - "app:core"
+                        thresholds:
+                          - target: 95
+                            timeframe: "7d"
+                          - target: 95
+                            timeframe: "30d"
+                            warning: 97
+                        type: metric
+                    errors: []
               schema:
                 $ref: "#/components/schemas/SLOListResponse"
           description: OK
@@ -35420,6 +36684,22 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - description: "Track the availability of our custom metric."
+                        id: abc-123
+                        name: "Custom Metric SLO"
+                        tags:
+                          - "env:prod"
+                          - "app:core"
+                        thresholds:
+                          - target: 95
+                            target_display: "95.0"
+                            timeframe: 7d
+                        type: metric
+                    errors: []
               schema:
                 $ref: "#/components/schemas/SLOListResponse"
           description: OK
@@ -35480,6 +36760,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      deleted: []
+                      updated:
+                        - abc-123
+                    errors: []
               schema:
                 $ref: "#/components/schemas/SLOBulkDeleteResponse"
           description: OK
@@ -35530,6 +36818,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      ok:
+                        - abc-123
+                    errors: {}
               schema:
                 $ref: "#/components/schemas/CheckCanDeleteSLOResponse"
           description: OK
@@ -35593,6 +36888,18 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          category: Scheduled Maintenance
+                          end: 1600003600
+                          slo_id: abc-123
+                          start: 1600000000
+                          timezone: UTC
+                        id: abc-123
+                        type: correction
               schema:
                 $ref: "#/components/schemas/SLOCorrectionListResponse"
           description: OK
@@ -35648,6 +36955,18 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        category: Scheduled Maintenance
+                        end: 1600003600
+                        slo_id: abc-123
+                        start: 1600000000
+                        timezone: UTC
+                      id: abc-123
+                      type: correction
               schema:
                 $ref: "#/components/schemas/SLOCorrectionResponse"
           description: OK
@@ -35733,6 +37052,18 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        category: Scheduled Maintenance
+                        end: 1600003600
+                        slo_id: abc-123
+                        start: 1600000000
+                        timezone: UTC
+                      id: abc-123
+                      type: correction
               schema:
                 $ref: "#/components/schemas/SLOCorrectionResponse"
           description: OK
@@ -35786,6 +37117,18 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        category: Scheduled Maintenance
+                        end: 1600003600
+                        slo_id: abc-123
+                        start: 1600000000
+                        timezone: UTC
+                      id: abc-123
+                      type: correction
               schema:
                 $ref: "#/components/schemas/SLOCorrectionResponse"
           description: OK
@@ -35852,6 +37195,22 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        slos:
+                          - data:
+                              attributes:
+                                name: Example SLO
+                                thresholds:
+                                  - target: 95
+                                    target_display: "95"
+                                    timeframe: 7d
+                              id: abc-123
+                              type: slo
+                      type: service_level_objective_search_results
               schema:
                 $ref: "#/components/schemas/SearchSLOResponse"
           description: OK
@@ -35907,6 +37266,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - abc-123
+                    errors: {}
               schema:
                 $ref: "#/components/schemas/SLODeleteResponse"
           description: OK
@@ -35964,6 +37329,21 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      description: "Track the availability of our custom metric."
+                      id: abc-123
+                      name: "Custom Metric SLO"
+                      tags:
+                        - "env:prod"
+                      thresholds:
+                        - target: 95
+                          target_display: "95.0"
+                          timeframe: 7d
+                      type: metric
+                    errors: []
               schema:
                 $ref: "#/components/schemas/SLOResponse"
           description: OK
@@ -36033,6 +37413,21 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - description: "Updated description for the SLO."
+                        id: abc-123
+                        name: "Custom Metric SLO"
+                        tags:
+                          - "env:prod"
+                        thresholds:
+                          - target: 95
+                            target_display: "95.0"
+                            timeframe: 7d
+                        type: metric
+                    errors: []
               schema:
                 $ref: "#/components/schemas/SLOListResponse"
           description: OK
@@ -36086,6 +37481,18 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          category: Scheduled Maintenance
+                          end: 1600003600
+                          slo_id: abc-123
+                          start: 1600000000
+                          timezone: UTC
+                        id: abc-123
+                        type: correction
               schema:
                 $ref: "#/components/schemas/SLOCorrectionListResponse"
           description: OK
@@ -36177,6 +37584,22 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      from_ts: 1615323990
+                      overall:
+                        sli_value: 99.99
+                        span_precision: 2.0
+                      thresholds:
+                        "7d":
+                          target: 95
+                          timeframe: 7d
+                      to_ts: 1615928790
+                      type: metric
+                      type_id: 1
+                    errors:
               schema:
                 $ref: "#/components/schemas/SLOHistoryResponse"
           description: OK
@@ -36228,6 +37651,18 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      results:
+                        - location: "aws:eu-west-3"
+                          result_id: "abc-123"
+                          status: passed
+                          test_name: "Example API test"
+                          test_public_id: "abc-def-123"
+                          test_type: api
+                      status: passed
               schema:
                 $ref: "#/components/schemas/SyntheticsBatchDetails"
           description: OK
@@ -36262,6 +37697,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    locations:
+                      - id: "aws:eu-west-3"
+                        name: "Paris (AWS)"
               schema:
                 $ref: "#/components/schemas/SyntheticsLocations"
           description: OK
@@ -36302,6 +37743,15 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    private_location:
+                      description: "Description of private location"
+                      id: "pl:new-private-location-abc-123"
+                      name: "New private location"
+                      tags:
+                        - "team:front"
               schema:
                 $ref: "#/components/schemas/SyntheticsPrivateLocationCreationResponse"
           description: OK
@@ -36384,6 +37834,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    description: "Description of private location"
+                    id: "pl:new-private-location-abc-123"
+                    name: "New private location"
+                    tags:
+                      - "team:front"
               schema:
                 $ref: "#/components/schemas/SyntheticsPrivateLocation"
           description: OK
@@ -36438,6 +37896,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    description: "Description of private location"
+                    id: "pl:new-private-location-abc-123"
+                    name: "New private location"
+                    tags:
+                      - "team:front"
               schema:
                 $ref: "#/components/schemas/SyntheticsPrivateLocation"
           description: OK
@@ -36473,6 +37939,11 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - "aws:eu-west-3"
+                    - "aws:us-east-1"
               schema:
                 $ref: "#/components/schemas/SyntheticsDefaultLocations"
           description: OK
@@ -36510,6 +37981,19 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    tests:
+                      - locations:
+                          - "aws:eu-west-3"
+                        name: "Example API test"
+                        public_id: "abc-def-123"
+                        status: live
+                        subtype: http
+                        tags:
+                          - "env:production"
+                        type: api
               schema:
                 $ref: "#/components/schemas/SyntheticsListTestsResponse"
           description: OK - Returns the list of all Synthetic tests.
@@ -36578,6 +38062,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    config:
+                      assertions:
+                        - operator: is
+                          target: 200
+                          type: statusCode
+                      request:
+                        method: GET
+                        url: "https://example.com"
+                    locations:
+                      - "aws:eu-west-3"
+                    message: Notification message
+                    name: Example API test
+                    options:
+                      tick_every: 60
+                    status: live
+                    type: api
               schema:
                 $ref: "#/components/schemas/SyntheticsTestDetails"
           description: OK - Returns the created test details.
@@ -36653,11 +38156,6 @@ paths:
                     min_failure_duration: 0
                     min_location_failed: 1
                     monitor_options:
-                      include_tags: true
-                      locked: false
-                      new_host_delay: 300
-                      notify_audit: false
-                      notify_no_data: false
                       renotify_interval: 0
                     tick_every: 60
                   status: live
@@ -36778,6 +38276,32 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    config:
+                      assertions:
+                        - operator: is
+                          target: 200
+                          type: statusCode
+                      request:
+                        method: GET
+                        url: "https://example.com"
+                    locations:
+                      - "aws:eu-west-3"
+                    message: "Notification message"
+                    monitor_id: 12345678
+                    name: "Example API test"
+                    options:
+                      min_failure_duration: 0
+                      min_location_failed: 1
+                      tick_every: 60
+                    public_id: "abc-123-def"
+                    status: live
+                    subtype: http
+                    tags:
+                      - "env:production"
+                    type: api
               schema:
                 $ref: "#/components/schemas/SyntheticsAPITest"
           description: OK - Returns the created test details.
@@ -36834,6 +38358,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    config:
+                      request:
+                        method: GET
+                        url: "https://example.com"
+                    locations:
+                      - "aws:eu-west-3"
+                    message: "Notification message"
+                    name: "Example API test"
+                    options:
+                      tick_every: 60
+                    public_id: "abc-def-123"
+                    status: live
+                    subtype: http
+                    tags:
+                      - "env:production"
+                    type: api
               schema:
                 $ref: "#/components/schemas/SyntheticsAPITest"
           description: OK
@@ -36911,6 +38454,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    config:
+                      request:
+                        method: GET
+                        url: "https://example.com"
+                    locations:
+                      - "aws:eu-west-3"
+                    message: "Notification message"
+                    name: "Example API test"
+                    options:
+                      tick_every: 60
+                    public_id: "abc-def-123"
+                    status: live
+                    subtype: http
+                    tags:
+                      - "env:production"
+                    type: api
               schema:
                 $ref: "#/components/schemas/SyntheticsAPITest"
           description: OK
@@ -36994,6 +38556,27 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    config:
+                      assertions: []
+                      request:
+                        method: GET
+                        url: "https://example.com"
+                    locations:
+                      - "aws:eu-west-3"
+                    message: ""
+                    name: "Example browser test"
+                    options:
+                      device_ids:
+                        - chrome.laptop_large
+                      tick_every: 3600
+                    public_id: "abc-def-123"
+                    status: live
+                    tags:
+                      - "env:production"
+                    type: browser
               schema:
                 $ref: "#/components/schemas/SyntheticsBrowserTest"
           description: OK - Returns the created test details.
@@ -37050,6 +38633,27 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    config:
+                      assertions: []
+                      request:
+                        method: GET
+                        url: "https://example.com"
+                    locations:
+                      - "aws:eu-west-3"
+                    message: ""
+                    name: "Example browser test"
+                    options:
+                      device_ids:
+                        - chrome.laptop_large
+                      tick_every: 3600
+                    public_id: "abc-def-123"
+                    status: live
+                    tags:
+                      - "env:production"
+                    type: browser
               schema:
                 $ref: "#/components/schemas/SyntheticsBrowserTest"
           description: OK
@@ -37129,6 +38733,27 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    config:
+                      assertions: []
+                      request:
+                        method: GET
+                        url: "https://example.com"
+                    locations:
+                      - "aws:eu-west-3"
+                    message: ""
+                    name: "Example browser test"
+                    options:
+                      device_ids:
+                        - chrome.laptop_large
+                      tick_every: 3600
+                    public_id: "abc-def-123"
+                    status: live
+                    tags:
+                      - "env:production"
+                    type: browser
               schema:
                 $ref: "#/components/schemas/SyntheticsBrowserTest"
           description: OK
@@ -37211,6 +38836,15 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    last_timestamp_fetched: 1706745600000
+                    results:
+                      - check_time: 1706745600000
+                        probe_dc: "aws:eu-west-3"
+                        result_id: "abc-123"
+                        status: 0
               schema:
                 $ref: "#/components/schemas/SyntheticsGetBrowserTestLatestResultsResponse"
           description: OK
@@ -37267,6 +38901,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    check_time: 1706745600000
+                    probe_dc: "aws:eu-west-3"
+                    result_id: "abc-123"
+                    status: 0
               schema:
                 $ref: "#/components/schemas/SyntheticsBrowserTestResultFull"
           description: OK
@@ -37319,6 +38960,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    deleted_tests:
+                      - deleted_at: "2024-01-01T00:00:00+00:00"
+                        public_id: "abc-def-123"
               schema:
                 $ref: "#/components/schemas/SyntheticsDeleteTestsResponse"
           description: OK.
@@ -37373,13 +39020,16 @@ paths:
                 value:
                   config:
                     variables: []
-                  device_ids:
-                    - "synthetics:mobile:device:apple_iphone_14_ios_16"
                   message: Notification message
                   name: Example mobile test
                   options:
+                    device_ids:
+                      - "synthetics:mobile:device:apple_iphone_14_ios_16"
                     min_failure_duration: 0
-                    min_location_failed: 1
+                    mobileApplication:
+                      applicationId: "abc-123"
+                      referenceId: "abc-456"
+                      referenceType: latest
                     tick_every: 3600
                   tags:
                     - "env:production"
@@ -37392,6 +39042,26 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    config:
+                      variables: []
+                    message: "Notification message"
+                    name: "Example mobile test"
+                    options:
+                      device_ids:
+                        - "synthetics:mobile:device:apple_iphone_14_ios_16"
+                      mobileApplication:
+                        applicationId: "abc-123"
+                        referenceId: "abc-456"
+                        referenceType: latest
+                      tick_every: 3600
+                    public_id: "abc-def-123"
+                    status: live
+                    tags:
+                      - "env:production"
+                    type: mobile
               schema:
                 $ref: "#/components/schemas/SyntheticsMobileTest"
           description: OK - Returns the created test details.
@@ -37448,6 +39118,26 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    config:
+                      variables: []
+                    message: "Notification message"
+                    name: "Example mobile test"
+                    options:
+                      device_ids:
+                        - "synthetics:mobile:device:apple_iphone_14_ios_16"
+                      mobileApplication:
+                        applicationId: "abc-123"
+                        referenceId: "abc-456"
+                        referenceType: latest
+                      tick_every: 3600
+                    public_id: "abc-def-123"
+                    status: live
+                    tags:
+                      - "env:production"
+                    type: mobile
               schema:
                 $ref: "#/components/schemas/SyntheticsMobileTest"
           description: OK
@@ -37498,13 +39188,16 @@ paths:
                 value:
                   config:
                     variables: []
-                  device_ids:
-                    - "synthetics:mobile:device:apple_iphone_14_ios_16"
                   message: Notification message
                   name: Example mobile test
                   options:
+                    device_ids:
+                      - "synthetics:mobile:device:apple_iphone_14_ios_16"
                     min_failure_duration: 0
-                    min_location_failed: 1
+                    mobileApplication:
+                      applicationId: "abc-123"
+                      referenceId: "abc-456"
+                      referenceType: latest
                     tick_every: 3600
                   tags:
                     - "env:production"
@@ -37517,6 +39210,26 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    config:
+                      variables: []
+                    message: "Notification message"
+                    name: "Example mobile test"
+                    options:
+                      device_ids:
+                        - "synthetics:mobile:device:apple_iphone_14_ios_16"
+                      mobileApplication:
+                        applicationId: "abc-123"
+                        referenceId: "abc-456"
+                        referenceType: latest
+                      tick_every: 3600
+                    public_id: "abc-def-123"
+                    status: live
+                    tags:
+                      - "env:production"
+                    type: mobile
               schema:
                 $ref: "#/components/schemas/SyntheticsMobileTest"
           description: OK
@@ -37610,6 +39323,19 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    tests:
+                      - locations:
+                          - aws:eu-west-3
+                        message: Test notification
+                        name: Example Test
+                        public_id: abc-def-123
+                        status: live
+                        tags:
+                          - env:prod
+                        type: api
               schema:
                 $ref: "#/components/schemas/SyntheticsListTestsResponse"
           description: OK - Returns the list of Synthetic tests matching the search.
@@ -37660,6 +39386,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    batch_id: abc-123
+                    results:
+                      - location: 1
+                        public_id: "abc-def-123"
+                        result_id: "abc-123"
+                    triggered_check_ids:
+                      - "abc-def-123"
               schema:
                 $ref: "#/components/schemas/SyntheticsTriggerCITestsResponse"
           description: OK
@@ -37705,6 +39441,16 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    batch_id: abc-123
+                    results:
+                      - location: 1
+                        public_id: "abc-def-123"
+                        result_id: "abc-123"
+                    triggered_check_ids:
+                      - "abc-def-123"
               schema:
                 $ref: "#/components/schemas/SyntheticsTriggerCITestsResponse"
           description: OK
@@ -37752,6 +39498,18 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    - from_ts: 1726041488
+                      overall:
+                        group: "name"
+                        history:
+                          - [1726041488, 0]
+                        span_precision: 2.0
+                        uptime: 99.99
+                      public_id: abc-def-123
+                      to_ts: 1726127888
               schema:
                 items:
                   $ref: "#/components/schemas/SyntheticsTestUptime"
@@ -37801,6 +39559,19 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    locations:
+                      - "aws:eu-west-3"
+                    message: "Notification message"
+                    name: "Example test"
+                    public_id: "abc-def-123"
+                    status: live
+                    subtype: http
+                    tags:
+                      - "env:production"
+                    type: api
               schema:
                 $ref: "#/components/schemas/SyntheticsTestDetailsWithoutSteps"
           description: OK
@@ -37863,6 +39634,19 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    locations:
+                      - "aws:eu-west-3"
+                    message: "Notification message"
+                    name: "New test name"
+                    public_id: "abc-def-123"
+                    status: live
+                    subtype: http
+                    tags:
+                      - "env:production"
+                    type: api
               schema:
                 $ref: "#/components/schemas/SyntheticsTestDetails"
           description: OK
@@ -37946,6 +39730,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    config:
+                      assertions:
+                        - operator: is
+                          target: 200
+                          type: statusCode
+                      request:
+                        method: GET
+                        url: "https://example.com"
+                    locations:
+                      - "aws:eu-west-3"
+                    message: Notification message
+                    name: Example API test
+                    options:
+                      tick_every: 60
+                    status: live
+                    type: api
               schema:
                 $ref: "#/components/schemas/SyntheticsTestDetails"
           description: OK
@@ -38026,6 +39829,17 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    last_timestamp_fetched: 1706745600000
+                    results:
+                      - check_time: 1706745600000
+                        probe_dc: "aws:eu-west-3"
+                        result:
+                          passed: true
+                        result_id: "abc-123"
+                        status: 0
               schema:
                 $ref: "#/components/schemas/SyntheticsGetAPITestLatestResultsResponse"
           description: OK
@@ -38080,6 +39894,13 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    check_time: 1706745600000
+                    probe_dc: "aws:eu-west-3"
+                    result_id: "abc-123"
+                    status: 0
               schema:
                 $ref: "#/components/schemas/SyntheticsAPITestResultFull"
           description: OK
@@ -38138,6 +39959,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: true
               schema:
                 type: boolean
           description: OK - Returns a boolean indicating if the update was successful.
@@ -38185,6 +40009,18 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    variables:
+                      - description: "Example description"
+                        id: abc-123
+                        name: "MY_VARIABLE"
+                        tags:
+                          - "team:front"
+                        value:
+                          secure: false
+                          value: "example-value"
               schema:
                 $ref: "#/components/schemas/SyntheticsListGlobalVariablesResponse"
           description: OK
@@ -38237,6 +40073,18 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    description: "Example description"
+                    id: abc-123
+                    name: "MY_VARIABLE"
+                    tags:
+                      - "team:front"
+                      - "test:workflow-1"
+                    value:
+                      secure: false
+                      value: "variable-value"
               schema:
                 $ref: "#/components/schemas/SyntheticsGlobalVariable"
           description: OK
@@ -38335,6 +40183,17 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    description: "Example description"
+                    id: abc-123
+                    name: "MY_VARIABLE"
+                    tags:
+                      - "team:front"
+                    value:
+                      secure: false
+                      value: "variable-value"
               schema:
                 $ref: "#/components/schemas/SyntheticsGlobalVariable"
           description: OK
@@ -38393,6 +40252,18 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    description: "Example description"
+                    id: abc-123
+                    name: "MY_VARIABLE"
+                    tags:
+                      - "team:front"
+                      - "test:workflow-1"
+                    value:
+                      secure: false
+                      value: "variable-value"
               schema:
                 $ref: "#/components/schemas/SyntheticsGlobalVariable"
           description: OK
@@ -38439,6 +40310,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    tags:
+                      environment:production:
+                        - test.metric.host
               schema:
                 $ref: "#/components/schemas/TagToHosts"
           description: OK
@@ -38528,6 +40405,12 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    host: test.host
+                    tags:
+                      - "environment:production"
               schema:
                 $ref: "#/components/schemas/HostTags"
           description: OK
@@ -38586,6 +40469,12 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    host: test.host
+                    tags:
+                      - "environment:production"
               schema:
                 $ref: "#/components/schemas/HostTags"
           description: Created
@@ -38644,6 +40533,12 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    host: test.host
+                    tags:
+                      - "environment:production"
               schema:
                 $ref: "#/components/schemas/HostTags"
           description: OK
@@ -38694,6 +40589,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - analyzed_logs: 50
+                        hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageAnalyzedLogsResponse"
           description: OK
@@ -38756,6 +40659,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        lines_indexed: 1000
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageAuditLogsResponse"
           description: OK
@@ -38816,6 +40727,15 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - func_count: 10
+                        hour: "2024-01-01T00:00:00+00:00"
+                        invocations_sum: 100
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageLambdaResponse"
           description: OK
@@ -38876,6 +40796,17 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - account_name: Example Name
+                        account_public_id: abc-123
+                        end_date: "2024-01-31T00:00:00+00:00"
+                        num_orgs: 1
+                        org_name: example-handle
+                        public_id: abc-123
+                        start_date: "2024-01-01T00:00:00+00:00"
               schema:
                 $ref: "#/components/schemas/UsageBillableSummaryResponse"
           description: OK
@@ -38938,6 +40869,17 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - ci_pipeline_indexed_spans: 1000
+                        ci_test_indexed_spans: 2000
+                        ci_visibility_itr_committers: 5
+                        ci_visibility_pipeline_committers: 3
+                        ci_visibility_test_committers: 10
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageCIVisibilityResponse"
           description: OK
@@ -39000,6 +40942,18 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - aws_host_count: 2.0
+                        azure_host_count: 1.0
+                        container_count: 10.0
+                        gcp_host_count: 1.0
+                        host_count: 5.0
+                        hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageCloudSecurityPostureManagementResponse"
           description: OK
@@ -39062,6 +41016,15 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - cws_container_count: 10
+                        cws_host_count: 5
+                        hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageCWSResponse"
           description: OK
@@ -39124,6 +41087,15 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - dbm_host_count: 5
+                        dbm_queries_count: 100
+                        hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageDBMResponse"
           description: OK
@@ -39184,6 +41156,15 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - apm_fargate_count: 2
+                        hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
+                        tasks_count: 5
               schema:
                 $ref: "#/components/schemas/UsageFargateResponse"
           description: OK
@@ -39244,6 +41225,19 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - agent_host_count: 1
+                        apm_host_count: 1
+                        aws_host_count: 0
+                        container_count: 2
+                        gcp_host_count: 0
+                        host_count: 1
+                        hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageHostsResponse"
           description: OK
@@ -39350,6 +41344,20 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    metadata:
+                      pagination:
+                        next_record_id:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        org_name: "Test Org"
+                        public_id: "abc-123"
+                        region: "us"
+                        total_usage_sum: 1.0
+                        updated_at: "2024-01-01T00:00:00+00:00"
+                        usage_type: infra_host_usage
               schema:
                 $ref: "#/components/schemas/HourlyUsageAttributionResponse"
           description: OK
@@ -39406,6 +41414,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        monthly_active_users: 5
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageIncidentManagementResponse"
           description: OK
@@ -39467,6 +41483,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        indexed_events_count: 500
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageIndexedSpansResponse"
           description: OK
@@ -39529,6 +41553,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        ingested_events_bytes: 1000000
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageIngestedSpansResponse"
           description: OK
@@ -39591,6 +41623,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        iot_device_count: 100
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageIoTResponse"
           description: OK
@@ -39651,6 +41691,16 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - billable_ingested_bytes: 100
+                        hour: "2024-01-01T00:00:00+00:00"
+                        indexed_events_count: 10
+                        ingested_events_bytes: 200
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageLogsResponse"
           description: OK
@@ -39713,6 +41763,16 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - indexed_events_count: 100
+                        live_indexed_events_count: 80
+                        org_name: example-handle
+                        public_id: abc-123
+                        rehydrated_indexed_events_count: 20
+                        retention: "15"
               schema:
                 $ref: "#/components/schemas/UsageLogsByRetentionResponse"
           description: OK
@@ -39779,6 +41839,17 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - event_count: 1000
+                        hour: "2024-01-01T00:00:00+00:00"
+                        index_id: abc-123
+                        index_name: main
+                        org_name: example-handle
+                        public_id: abc-123
+                        retention: 15
               schema:
                 $ref: "#/components/schemas/UsageLogsByIndexResponse"
           description: OK
@@ -39902,6 +41973,21 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    metadata:
+                      pagination:
+                        next_record_id:
+                    usage:
+                      - month: "2024-01-01T00:00:00+00:00"
+                        org_name: "Test Org"
+                        public_id: "abc-123"
+                        region: "us"
+                        updated_at: "2024-01-01T00:00:00+00:00"
+                        values:
+                          infra_host_percentage: 100.0
+                          infra_host_usage: 1.0
               schema:
                 $ref: "#/components/schemas/MonthlyUsageAttributionResponse"
           description: OK
@@ -39958,6 +42044,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        indexed_events_count: 200
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageNetworkFlowsResponse"
           description: OK
@@ -40018,6 +42112,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - host_count: 5
+                        hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageNetworkHostsResponse"
           description: OK
@@ -40080,6 +42182,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        online_archive_events_count: 5000
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageOnlineArchiveResponse"
           description: OK
@@ -40142,6 +42252,15 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - avg_container_agent_count: 2
+                        host_count: 5
+                        hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageProfilingResponse"
           description: OK
@@ -40202,6 +42321,15 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - browser_rum_units: 50
+                        mobile_rum_units: 50
+                        org_name: example-handle
+                        public_id: abc-123
+                        rum_units: 100
               schema:
                 $ref: "#/components/schemas/UsageRumUnitsResponse"
           description: OK
@@ -40268,6 +42396,15 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
+                        replay_session_count: 10
+                        session_count: 100
               schema:
                 $ref: "#/components/schemas/UsageRumSessionsResponse"
           description: OK
@@ -40331,6 +42468,15 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        logs_scanned_bytes: 1000000
+                        org_name: example-handle
+                        public_id: abc-123
+                        total_scanned_bytes: 2000000
               schema:
                 $ref: "#/components/schemas/UsageSDSResponse"
           description: OK
@@ -40393,6 +42539,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
+                        snmp_devices: 10
               schema:
                 $ref: "#/components/schemas/UsageSNMPResponse"
           description: OK
@@ -40468,6 +42622,18 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    apm_host_top99p_sum: 2
+                    container_avg_sum: 5
+                    end_date: "2024-01-31T00:00:00+00:00"
+                    last_updated: "2024-01-01T00:00:00+00:00"
+                    start_date: "2024-01-01T00:00:00+00:00"
+                    usage:
+                      - apm_host_top99p: 2
+                        container_avg: 5
+                        date: "2024-01-01T00:00:00+00:00"
               schema:
                 $ref: "#/components/schemas/UsageSummaryResponse"
           description: OK
@@ -40528,6 +42694,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - check_calls_count: 50
+                        hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageSyntheticsResponse"
           description: OK
@@ -40588,6 +42762,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - check_calls_count: 50
+                        hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageSyntheticsAPIResponse"
           description: OK
@@ -40648,6 +42830,14 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - browser_check_calls_count: 20
+                        hour: "2024-01-01T00:00:00+00:00"
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageSyntheticsBrowserResponse"
           description: OK
@@ -40708,6 +42898,16 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    usage:
+                      - hour: "2024-01-01T00:00:00+00:00"
+                        num_custom_input_timeseries: 10
+                        num_custom_output_timeseries: 5
+                        num_custom_timeseries: 100
+                        org_name: example-handle
+                        public_id: abc-123
               schema:
                 $ref: "#/components/schemas/UsageTimeseriesResponse"
           description: OK
@@ -40787,6 +42987,18 @@ paths:
         "200":
           content:
             application/json;datetime-format=rfc3339:
+              examples:
+                default:
+                  value:
+                    metadata:
+                      month: "2024-01-01T00:00:00+00:00"
+                      pagination:
+                        next_record_id:
+                    usage:
+                      - avg_metric_hour: 5
+                        max_metric_hour: 10
+                        metric_category: custom
+                        metric_name: test-metric
               schema:
                 $ref: "#/components/schemas/UsageTopAvgMetricsResponse"
           description: OK
@@ -40829,6 +43041,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    users:
+                      - disabled: false
+                        email: test@example.com
+                        handle: test@example.com
+                        name: Example Name
               schema:
                 $ref: "#/components/schemas/UserListResponse"
           description: OK
@@ -40877,6 +43097,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    user:
+                      disabled: false
+                      email: test@example.com
+                      handle: test@example.com
+                      name: Example Name
               schema:
                 $ref: "#/components/schemas/UserResponse"
           description: User created
@@ -40929,6 +43157,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    message: "User user@example.com disabled"
               schema:
                 $ref: "#/components/schemas/UserDisableResponse"
           description: User disabled
@@ -40971,6 +43203,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    user:
+                      disabled: false
+                      email: test@example.com
+                      handle: test@example.com
+                      name: Example Name
               schema:
                 $ref: "#/components/schemas/UserResponse"
           description: OK for get user
@@ -41023,6 +43263,14 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    user:
+                      disabled: false
+                      email: test@example.com
+                      handle: test@example.com
+                      name: Example Name
               schema:
                 $ref: "#/components/schemas/UserResponse"
           description: User updated
@@ -41059,6 +43307,10 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    valid: true
               schema:
                 $ref: "#/components/schemas/AuthenticationValidationResponse"
           description: OK
@@ -41194,6 +43446,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value: {}
               schema:
                 type: object
           description: Response from server (always 200 empty JSON).
@@ -41267,6 +43522,22 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                default:
+                  value:
+                    created: "2024-01-01T00:00:00+00:00"
+                    id: 123
+                    message: Alert message
+                    modified: "2024-01-01T00:00:00+00:00"
+                    name: Example Monitor
+                    options:
+                      notify_audit: false
+                      notify_no_data: false
+                    overall_state: "No Data"
+                    query: "avg(last_5m):avg:system.cpu.user{*} > 90"
+                    tags:
+                      - env:prod
+                    type: query alert
               schema:
                 $ref: "#/components/schemas/Monitor"
           description: OK

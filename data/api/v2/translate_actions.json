@@ -2512,7 +2512,7 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.",
+    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
     "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
@@ -3963,6 +3963,12 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "BulkDeleteSecurityMonitoringRules": {
+    "description": "Delete multiple security monitoring rules in a single request. Default rules cannot be deleted.",
+    "summary": "Bulk delete security monitoring rules",
+    "request_description": "",
+    "request_schema_description": "Payload for bulk deleting security monitoring rules."
+  },
   "BulkExportSecurityMonitoringRules": {
     "description": "Export a list of security monitoring rules as a ZIP file containing JSON rule definitions.\nThe endpoint accepts a list of rule IDs and returns a ZIP archive where each rule is\nsaved as a separate JSON file named after the rule.",
     "summary": "Bulk export security monitoring rules",
@@ -4988,7 +4994,7 @@
   "CreateWidget": {
     "description": "Create a new widget for a given experience type.",
     "summary": "Create a widget",
-    "request_description": "Widget request body.",
+    "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`: every type requires `requests`, and\nsome types require additional fields (e.g. `cloud_cost_summary`\nrequires `graph_options`, `geomap` requires `style` and `view`).\nThe example below shows a complete `cloud_cost_summary` payload\nfor the `ccm_reports` experience type.",
     "request_schema_description": "Request body for creating or updating a widget."
   },
   "DeleteWidget": {
@@ -5002,7 +5008,7 @@
   "UpdateWidget": {
     "description": "Update a widget by its UUID for a given experience type. This performs a full replacement of the widget definition.",
     "summary": "Update a widget",
-    "request_description": "Widget request body.",
+    "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
   },
   "CreateWorkflow": {
