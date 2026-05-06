@@ -537,7 +537,7 @@ Tools for investigating Kafka workloads with [Data Streams Monitoring][27], incl
 *Permissions Required: `APM Read`*\
 Lists Kafka topic configuration overrides for a cluster, such as `cleanup.policy`, `retention.ms`, and `max.message.bytes`. Optionally filtered to a single topic. Use this to check whether topic-level settings explain producer or consumer behavior.
 
-- Show me the topic config for `checkout-orders` on cluster `prod-east-1`.
+- Show me the topic config for `checkout-orders`.
 - What is the retention setting on the orders Kafka topic?
 - Compare `max.message.bytes` across all topics in the payments cluster.
 
@@ -546,7 +546,7 @@ Lists Kafka topic configuration overrides for a cluster, such as `cleanup.policy
 *Permissions Required: `APM Read`*\
 Lists Kafka broker-level configuration for a cluster, optionally filtered to a single broker. Use this to inspect broker tuning when consumers across multiple topics are affected.
 
-- Show broker configs for cluster `prod-east-1`.
+- Show me the broker configs for my Kafka cluster.
 - What's the `num.io.threads` setting on broker 3?
 - Compare broker configs between two clusters.
 
@@ -557,14 +557,14 @@ Returns Kafka client (producer and consumer) configurations for a cluster, inclu
 
 - Show me the consumer config for service `checkout-api` on the payments cluster.
 - What's the `session.timeout.ms` for consumer group `orders-processor`?
-- Compare producer configs across services on cluster `prod-east-1`.
+- Compare producer configs across services on my Kafka cluster.
 
 ### `list_all_kafka_schemas`
 *Toolset: **data-streams***\
 *Permissions Required: `APM Read`*\
 Lists all Schema Registry subjects for a cluster's schema registry. Use this when you don't know the subject name to inspect.
 
-- List all Schema Registry subjects on cluster `prod-east-1`.
+- List all Schema Registry subjects.
 - What schemas are registered for the orders topic?
 
 ### `get_subject_kafka_schemas`
