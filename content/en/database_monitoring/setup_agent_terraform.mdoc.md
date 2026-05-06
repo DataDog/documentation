@@ -41,12 +41,13 @@ This page covers the **Agent** side of the setup. It does not provision the data
 
 ## Hosting note
 
-The Terraform module for this combination was developed against RDS Postgres and uses RDS-flavored variable names (`rds_endpoint`, `rds_security_group_id`, `rds_port`). The same module also works for:
+The Terraform module for this combination works for any Postgres database reachable inside an AWS VPC by security group. Point `db_endpoint` and `db_security_group_id` at:
 
-- **Amazon Aurora Postgres** — set `rds_endpoint` to the Aurora cluster writer endpoint and `rds_security_group_id` to the Aurora cluster's security group.
-- **Self-hosted Postgres on EC2 in the same VPC** — set `rds_endpoint` to the EC2 instance hostname/IP and `rds_security_group_id` to the security group attached to the Postgres EC2 instance.
+- **Amazon RDS Postgres** — the RDS endpoint and the RDS security group.
+- **Amazon Aurora Postgres** — the Aurora cluster writer endpoint and the Aurora cluster's security group.
+- **Self-hosted Postgres on EC2 in the same VPC** — the EC2 instance hostname/IP and the security group attached to the Postgres EC2 instance.
 
-For self-hosted Postgres outside AWS (on-premises, in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
+For Postgres self-hosted outside AWS (on-premises, in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
 
 ## Architecture
 
@@ -81,7 +82,7 @@ git clone https://github.com/DataDog/dd-database-monitoring-example.git
 cd dd-database-monitoring-example/terraform/postgres/aws/ecs-fargate
 
 cp terraform.tfvars.example terraform.tfvars
-# Fill in: vpc_id, subnet_ids, rds_security_group_id, rds_endpoint,
+# Fill in: vpc_id, subnet_ids, db_security_group_id, db_endpoint,
 # database_name, datadog_user_password, datadog_api_key, datadog_site
 
 terraform init
@@ -99,8 +100,8 @@ To attach the Agent service to an ECS cluster you already operate, set `existing
 |---|---|
 | `vpc_id` | The VPC where the database lives |
 | `subnet_ids` | One or more private subnets with NAT egress |
-| `rds_security_group_id` | The security group attached to your database — the example adds an ingress rule on port 5432. For Aurora, this is the cluster SG; for self-hosted on EC2, the EC2 instance SG. |
-| `rds_endpoint` | The database endpoint host (no port). For Aurora, the cluster writer endpoint; for self-hosted on EC2, the instance hostname or IP. |
+| `db_security_group_id` | The security group attached to your database — the example adds an ingress rule on port 5432. For RDS, the RDS instance SG; for Aurora, the cluster SG; for self-hosted on EC2, the EC2 instance SG. |
+| `db_endpoint` | The database endpoint host (no port). For RDS, the RDS endpoint; for Aurora, the cluster writer endpoint; for self-hosted on EC2, the instance hostname or IP. |
 | `database_name` | The Postgres database to monitor |
 | `datadog_user_password` | The password for the Postgres `datadog` user |
 | `datadog_api_key` | The API key for the destination organization |
@@ -150,12 +151,13 @@ For the full input list and defaults, see [`variables.tf`][5] in the example dir
 
 ## Hosting note
 
-The Terraform module for this combination was developed against RDS Postgres and uses RDS-flavored variable names (`rds_endpoint`, `rds_security_group_id`, `rds_port`). The same module also works for:
+The Terraform module for this combination works for any Postgres database reachable inside an AWS VPC by security group. Point `db_endpoint` and `db_security_group_id` at:
 
-- **Amazon Aurora Postgres** — set `rds_endpoint` to the Aurora cluster writer endpoint and `rds_security_group_id` to the Aurora cluster's security group.
-- **Self-hosted Postgres on EC2 in the same VPC** — set `rds_endpoint` to the EC2 instance hostname/IP and `rds_security_group_id` to the security group attached to the Postgres EC2 instance.
+- **Amazon RDS Postgres** — the RDS endpoint and the RDS security group.
+- **Amazon Aurora Postgres** — the Aurora cluster writer endpoint and the Aurora cluster's security group.
+- **Self-hosted Postgres on EC2 in the same VPC** — the EC2 instance hostname/IP and the security group attached to the Postgres EC2 instance.
 
-For self-hosted Postgres outside AWS (on-premises, in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
+For Postgres self-hosted outside AWS (on-premises, in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
 
 ## Architecture
 
@@ -209,7 +211,7 @@ cd dd-database-monitoring-example/terraform/postgres/aws/amazon-eks
 
 cp terraform.tfvars.example terraform.tfvars
 # Pick BYO or greenfield in the file header, then fill in the rest:
-# rds_security_group_id, rds_endpoint, database_name,
+# db_security_group_id, db_endpoint, database_name,
 # datadog_user_password, datadog_api_key, datadog_site
 
 terraform init
@@ -230,8 +232,8 @@ What gets created depends on the mode:
 |---|---|
 | `eks_cluster_name` | Name of the existing EKS cluster |
 | `eks_node_security_group_id` | Security group attached to the EKS worker nodes — the example adds an ingress rule on the database SG from this SG |
-| `rds_security_group_id` | The security group attached to your database — the example adds an ingress rule on port 5432. For Aurora, the cluster SG; for self-hosted on EC2, the EC2 instance SG. |
-| `rds_endpoint` | The database endpoint host (no port). For Aurora, the cluster writer endpoint; for self-hosted on EC2, the instance hostname or IP. |
+| `db_security_group_id` | The security group attached to your database — the example adds an ingress rule on port 5432. For Aurora, the cluster SG; for self-hosted on EC2, the EC2 instance SG. |
+| `db_endpoint` | The database endpoint host (no port). For Aurora, the cluster writer endpoint; for self-hosted on EC2, the instance hostname or IP. |
 | `database_name` | The Postgres database to monitor |
 | `datadog_user_password` | The password for the Postgres `datadog` user |
 | `datadog_api_key` | The API key for the destination organization |
