@@ -1,6 +1,5 @@
 /**
- * Operation-level extraction helpers shared by the `apiOperations` and
- * `apiCodeExamples` content-collection loaders.
+ * Operation-level extraction helpers used by the `views.ts` builder.
  *
  * Pure helper functions: take a parsed spec and an operation object, return
  * structured data. No caching, no I/O.

@@ -67,58 +67,44 @@ Screenshot baselines are captured at 2x retina (1440×900 viewport, `deviceScale
 
 ## How API docs are rendered from YAML
 
-The API reference pages are generated at build time from OpenAPI spec files through a multi-stage pipeline. Here is the step-by-step process:
+The API reference pages are generated at build time. The pipeline has three stages: **the spec parser** loads the OpenAPI YAML into a JS object once per build, **memoized view helpers** walk the spec and assemble component-ready view shapes on demand, and **Astro routes** render the pages.
 
 ### 1. YAML source specs
 
 Two OpenAPI 3.x spec files are the source of truth for all API data:
 
-- [`src/mocked_dependencies/api/v1/full_spec.yaml`](src/mocked_dependencies/api/v1/full_spec.yaml) — v1 endpoints
-- [`src/mocked_dependencies/api/v2/full_spec.yaml`](src/mocked_dependencies/api/v2/full_spec.yaml) — v2 endpoints
+- `@hugo-site/data/api/v1/full_spec.yaml` — v1 endpoints
+- `@hugo-site/data/api/v2/full_spec.yaml` — v2 endpoints
 
-Each spec contains `tags` (which map to page categories), `paths` (endpoint definitions), `components/schemas` (reusable data models), and `servers` (region-specific base URLs). These files are imported at build time as raw strings using Vite's `?raw` import syntax, so no runtime file I/O is needed. The spec files themselves are pulled from Hugo (the `@hugo-site` alias in Astro) until a shared folder can be set up.
+The `@hugo-site` Vite alias points at the sibling Hugo repo's `data/` folder until a shared source is wired up. Each spec contains `tags` (which map to page categories), `paths` (endpoint definitions), `components/schemas` (reusable data models), and `servers` (region-specific base URLs). The files are imported as raw strings via Vite's `?raw` import and parsed once per build by [`src/data/api/spec.ts`](src/data/api/spec.ts).
 
-### 2. Data extraction and transformation
+Translation overlays for non-English locales live alongside the specs (`translate_tags.{lang}.json`, `translate_actions.{lang}.json`) and are loaded by [`src/data/api/translations.ts`](src/data/api/translations.ts).
 
-A set of TypeScript modules in [`src/data/api/`](src/data/api/) parse and transform the raw YAML into structured data:
+### 2. View helpers
 
-1. **[`index.ts`](src/data/api/index.ts)** — Parses both specs with the `yaml` package, validates structure with Zod schemas, and extracts **categories** from OpenAPI `tags`. Each category gets a `name`, `slug`, rendered HTML `description`, and a list of operations. Results are cached after the first call. Exports `getApiCategories()` and `getCategoryBySlug()`.
+[`src/data/api/views.ts`](src/data/api/views.ts) is the public surface for pages. It walks the parsed specs directly, resolves `$ref`s on demand, and assembles the `ApiCategory` and `EndpointData` view shapes that components consume. Module-scoped caches memoize the results: a `Map<lang, ApiCategory[]>` for categories and a `Map<${lang}:${slug}, EndpointData[]>` for endpoints.
 
-2. **[`endpoints.ts`](src/data/api/endpoints.ts)** — The core transformation module. For each operation in a category, it extracts:
-   - Core fields (operationId, summary, method, path, version, deprecated/unstable status)
-   - **Parameters** — merges path-level and operation-level params, splits by location (path/query/header), converts to `SchemaField[]` via `resolver.ts`
-   - **Request body** — resolves `$ref` references, extracts JSON schema, collects or generates examples
-   - **Responses** — per status code, resolves schema and examples
-   - **Permissions and OAuth scopes** — from `x-permission` and `security` extensions
-   - **Region URLs** — builds per-region API base URLs from the spec's `servers` block
-   - **SDK code examples** — loaded from disk via `examples.ts`
-   - **Curl commands** — generated via `curl.ts`
+| View helper | Returns | Work |
+|---|---|---|
+| `getCategoriesView(lang)` | `ApiCategory[]` for the side-nav | Walks `spec.tags` for both versions, applies the locale's tag overlay, then walks operations to attach stubs (operationId, summary, slug, menu order, version) to their categories. Sorts categories alphabetically by name and operations by menu order |
+| `getCategoryViewBySlug(slug, lang)` | `ApiCategory \| undefined` | Convenience over `getCategoriesView` |
+| `getEndpointsView(slug, lang)` | `EndpointData[]` for the rendered endpoints | For each matching operation: applies the locale's action overlay, merges path-level + operation-level parameters, calls `splitParameters` / `paramsToFields` / `extractRequestBody` / `extractResponses` against the parsed spec, builds curl variants per region with `buildCurlByRegion`, and prepends curl to the SDK examples returned by `getCodeExamplesForOperation` |
 
-   Exports `getEndpointsForCategory(slug)` returning `EndpointData[]`.
+The leaf helpers (`schemaToFields`, `extractRequestBody`, `extractResponses`, `paramsToFields`, `buildCurlByRegion`, `generateCurl`, `getRegions`, `getOverlay`, `translateAction`, `renderMarkdown`) are pure functions that take a parsed spec and operation/schema object.
 
-3. **[`resolver.ts`](src/data/api/resolver.ts)** — Handles `$ref` resolution (following JSON Pointer paths through the spec) and recursive schema-to-field conversion. Supports `oneOf`/`anyOf` unions, `allOf` merging, nested objects, arrays, enums, and circular reference protection (with a `visited` set and max depth of 10).
-
-4. **[`markdown.ts`](src/data/api/markdown.ts)** — Wraps the `marked` library to convert Markdown descriptions (from tags and operations) into HTML at build time.
-
-5. **[`regions.ts`](src/data/api/regions.ts)** — Reads the `servers[0].variables.site.enum` from the spec to discover supported Datadog regions (us1, us3, us5, eu, ap1, ap2, gov) and builds region-specific API URLs.
-
-6. **[`examples.ts`](src/data/api/examples.ts)** — Reads `CodeExamples.json` manifests from [`src/mocked_dependencies/api/v{1,2}/`](src/mocked_dependencies/api/) and loads SDK example files (`.py`, `.rb`, `.go`, `.java`, `.ts`) from a sibling `examples/` directory. The mocked inventory does not yet ship the SDK source files, so until a live feed is wired up only curl snippets render.
-
-7. **[`curl.ts`](src/data/api/curl.ts)** — Generates curl command snippets with auth headers, path parameter interpolation, and request body payloads.
-
-8. **[`highlight.ts`](src/data/api/highlight.ts)** — Runs Shiki syntax highlighting over all code examples and JSON response/request bodies, producing pre-rendered HTML with Datadog light and dark themes.
+[`src/data/api/highlight.ts`](src/data/api/highlight.ts) runs Shiki syntax highlighting over the resolved `EndpointData` at page render time, mutating the entries in place. Highlighting stays at the page boundary so the cached view shapes don't carry highlighted HTML on first build.
 
 ### 3. Page generation (Astro routes)
 
-The dynamic route [`src/pages/api/latest/[category].astro`](src/pages/api/latest/[category].astro) generates one page per API category:
+The dynamic route [`src/pages/[...lang]/api/latest/[category].astro`](src/pages/[...lang]/api/latest/[category].astro) generates one page per `(lang, category)` combination:
 
-1. `getStaticPaths()` calls `getApiCategories()` to produce one route per category slug (e.g., `/api/latest/monitors/`, `/api/latest/dashboards/`).
-2. At render time, the page calls `getEndpointsForCategory(slug)` to get the full `EndpointData[]` for that category.
-3. `highlightEndpoints(endpoints)` runs Shiki highlighting over all code examples and response bodies.
+1. `getStaticPaths()` calls `getCategoriesView(lang)` for each locale to produce one route per category slug (e.g. `/api/latest/monitors/`, `/ja/api/latest/monitors/`).
+2. At render time, the page calls `getCategoriesView(lang)` (for the side nav), `getCategoryViewBySlug(slug, lang)` (for the page header), and `getEndpointsView(slug, lang)` (for the rendered endpoints).
+3. `highlightEndpoints(endpoints)` runs Shiki highlighting over all code examples and JSON request/response bodies, mutating the resolved data in place.
 4. The page renders inside [`ApiLayout.astro`](src/layouts/ApiLayout.astro), passing all categories (for side navigation) and the current slug.
-5. Each endpoint is rendered as an `<ApiEndpoint data={JSON.stringify(ep)}>` component, with the entire `EndpointData` object serialized as a JSON string prop.
+5. Each endpoint is rendered as `<ApiEndpoint data={JSON.stringify(ep)}>`, with the assembled `EndpointData` object serialized as a JSON string prop.
 
-An index page at [`src/pages/api/latest/index.astro`](src/pages/api/latest/index.astro) serves as the landing page.
+A plaintext sibling route at [`[category].md.ts`](src/pages/[...lang]/api/latest/[category].md.ts) reuses the same view helpers to emit Markdoc-compatible Markdown at `/api/latest/<slug>.md`. The static index page is at [`index.astro`](src/pages/[...lang]/api/latest/index.astro), and `/llms.txt` ([`llms.txt.ts`](src/pages/llms.txt.ts)) lists every category by name and `.md` URL.
 
 ### 4. Layout and navigation
 
@@ -148,33 +134,36 @@ Interactive components (schema expansion, tab switching) use Preact islands via 
 
 ```
 v1/full_spec.yaml ──┐
-                     ├─ Vite ?raw import → yaml.parse()
+                     ├─ Vite ?raw import → spec.ts (yaml.parse, cached per build)
 v2/full_spec.yaml ──┘         │
-                               ├─→ index.ts ──→ ApiCategory[] (names, slugs, operations)
+translate_*.{lang}.json ──────┤
                                │
-                               └─→ endpoints.ts ──→ EndpointData[]
-                                       │
-                          ┌────────────┼────────────────┐
-                          │            │                 │
-                    resolver.ts   examples.ts        curl.ts
-                  ($ref, schemas)  (SDK snippets)  (curl commands)
-                          │            │                 │
-                          └────────────┼────────────────┘
-                                       │
-                                 highlight.ts (Shiki syntax highlighting)
-                                       │
-                                       ▼
-                          [category].astro (getStaticPaths)
-                                       │
-                                 ApiLayout.astro
-                                       │
-                                 BaseLayout.astro + ApiSideNav
-                                                │
-                                         ApiEndpoint ×N
-                                  ┌──────────┼──────────┐
-                        ApiSchemaTable  ApiResponse  ApiCodeExample
-                        ApiRequestBodyTabs
-                          (Preact islands, client:load)
+                               ▼
+              ┌─── views.ts (memoized, build-time) ──────┐
+              │                                           │
+              │   getCategoriesView(lang) → ApiCategory[] │
+              │     cache: Map<lang, ApiCategory[]>       │
+              │                                           │
+              │   getEndpointsView(slug, lang)            │
+              │     cache: Map<`${lang}:${slug}`,         │
+              │              EndpointData[]>              │
+              │     ↓ walk spec + resolve refs            │
+              │   EndpointData[] (SchemaField trees,      │
+              │     curl variants, request/response data) │
+              └──────────────────┬────────────────────────┘
+                                 │
+                          highlight.ts (Shiki syntax highlighting)
+                                 │
+                                 ▼
+                  [category].astro / [category].md.ts
+                                 │
+                          ApiLayout / BaseLayout
+                                 │
+                          ApiSideNav + ApiEndpoint × N
+                          ┌──────────┼──────────┐
+                ApiSchemaTable  ApiResponse  ApiCodeExample
+                ApiRequestBodyTabs
+                  (Preact islands, client:load)
 ```
 
 ## Auditing guidelines

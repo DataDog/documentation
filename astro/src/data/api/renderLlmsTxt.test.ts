@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { renderLlmsTxt } from './renderLlmsTxt';
-import type { ApiCategory } from './index';
+import type { ApiCategory } from './views';
 
 function cat(name: string, slug: string): ApiCategory {
   return { name, slug, description: '', operations: [], deprecated: false };

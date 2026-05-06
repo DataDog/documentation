@@ -242,3 +242,7 @@ The baselines are large (some categories serialize to hundreds of KB of HTML). T
 6. Rewire `[category].md.ts`, `llms.txt.ts`, and any other callers. Re-run snapshots.
 7. Delete `getApiCategories` / `getCategoryBySlug` / `getEndpointsForCategory` (the public functions on the existing modules); keep the internal helpers they used. Re-run snapshots.
 8. Update unit tests for the loaders. Re-run snapshots one more time before opening the PR.
+
+## Outcome
+
+Reverted. The four API collections (`apiSchemas`, `apiOperations`, `apiCodeExamples`, `apiCategories`) added indirection without a payoff: the data is one structured YAML file consumed by one route, not authored content with many files. There is no second consumer querying it, no markdown rendering, no auto-generated routes. The collection layer cost a heap-flag bump (peak ~2.6 GB even after slimming entries to raw spec slices) and a pile of loader code that mostly re-derived what a direct spec walk produces. We replaced it with plain memoized functions in [`views.ts`](../src/data/api/views.ts) that walk the parsed spec, keeping the public `getCategoriesView` / `getCategoryViewBySlug` / `getEndpointsView` signatures so page code didn't move. See [15_content_collections_revert.md](15_content_collections_revert.md) for the revert plan; the two correctness fixes the snapshot suite caught during this work (per-spec `resolveRef` cache; version+operationId composite keying) carried forward and stayed in place.
