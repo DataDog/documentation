@@ -84,7 +84,9 @@ The `@hugo-site` Vite alias points at the sibling Hugo repo's `data/` folder unt
 
 The parser does not validate the spec structure at runtime — it trusts that the YAML files are valid OpenAPI 3.x, as enforced upstream by OpenAPI linting tools. The parsed result is typed as `OpenAPIV3.Document` from `openapi-types` for compile-time type safety.
 
-Translation overlays for non-English locales live alongside the specs (`translate_tags.{lang}.json`, `translate_actions.{lang}.json`) and are loaded by [`src/data/api/translationsLoader.ts`](src/data/api/translationsLoader.ts).
+Translation overlays for non-English locales live alongside the specs (`translate_tags.{lang}.json`, `translate_actions.{lang}.json`) and are loaded by [`src/data/api/translationsLoader.ts`](src/data/api/translationsLoader.ts). 
+
+At build time, Vite's `import.meta.glob` eagerly inlines all matching JSON files into a single object keyed by file path. `getTranslationOverlay(version, lang)` then uses a regex to find the right file for a given `(version, lang)` pair, assembles a bundle of tag and action overlays, and caches it in a `Map<"v1|v2:lang", OverlayBundle>` so the filesystem scan only happens once per pair. English short-circuits to an empty bundle — the spec is the source of truth for English.
 
 ### 2. View helpers
 

@@ -61,7 +61,10 @@ function bundleKey(version: ApiVersion, lang: string): string {
  * an empty bundle (the spec is the source of truth). Missing JSON files for
  * a locale also return an empty bundle — by design.
  */
-export function getTranslationOverlay(version: ApiVersion, lang: string): OverlayBundle {
+export function getTranslationOverlay(
+  version: ApiVersion,
+  lang: string,
+): OverlayBundle {
   if (lang === "en") {
     return EMPTY_BUNDLE;
   }
