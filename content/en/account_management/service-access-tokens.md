@@ -44,7 +44,7 @@ For Personal Access Tokens, see [Personal Access Tokens][2].
 
 ## Prerequisites
 
-- A Datadog service account. See [Service Accounts][1] to create one.
+- A Datadog service account. To create one, see [Service Accounts][1].
 - The `service_account_write` permission to create SATs for a service account you manage.
 - The `org_app_keys_write` permission to manage SATs for any service account in the organization.
 
