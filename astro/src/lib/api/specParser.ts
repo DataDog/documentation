@@ -2,7 +2,6 @@
  * Shared OpenAPI spec parsing.
  *
  * Loads the v1 and v2 spec YAML once per build via Vite raw imports.
- * Used by all content collection loaders and any remaining runtime helpers.
  */
 
 import { parse as parseYaml } from 'yaml';
