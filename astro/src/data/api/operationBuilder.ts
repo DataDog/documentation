@@ -5,13 +5,13 @@
  * structured data. No caching, no I/O.
  */
 
-import { resolveRef, schemaToFields } from './resolver';
-import type { SchemaField } from './resolver';
-import { generateCurl } from './curl';
-import type { CurlParam } from './curl';
-import { renderMarkdownInline } from './markdown';
-import { getRegions } from './regions';
-import type { ResponseData, RequestBodyData } from './views';
+import { resolveRef, schemaToFields } from './refResolver';
+import type { SchemaField } from './refResolver';
+import { generateCurl } from './curlBuilder';
+import type { CurlParam } from './curlBuilder';
+import { renderMarkdownInline } from './markdownRenderer';
+import { getRegions } from './regionResolver';
+import type { ResponseData, RequestBodyData } from './viewsBuilder';
 
 export interface SplitParams {
   path: any[];
@@ -188,6 +188,43 @@ export function extractResponses(spec: any, operation: any): ResponseData[] {
   return result;
 }
 
+/**
+ * Generate curl commands for the given operation, one per supported region.
+ * Returns a map keyed by region.key (e.g. `us`, `eu`) so the UI can render
+ * a `[data-region]` wrapper per variant.
+ */
+export function buildCurlByRegion(
+  spec: any,
+  method: string,
+  path: string,
+  operation: any,
+  splitParams: SplitParams,
+  requestBodyJson?: string,
+): Record<string, string> {
+  const regions = getRegions(spec, operation);
+  const servers = operation?.servers ?? spec?.servers;
+  const subdomain: string = servers?.[0]?.variables?.subdomain?.default ?? 'api';
+
+  const result: Record<string, string> = {};
+  for (const region of regions) {
+    result[region.key] = generateCurl({
+      method,
+      path,
+      site: region.site,
+      subdomain,
+      pathParams: toCurlParams(splitParams.path),
+      queryParams: toCurlParams(splitParams.query),
+      requestBodyJson,
+      security: operation.security,
+    });
+  }
+  return result;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Private helpers                                                    */
+/* ------------------------------------------------------------------ */
+
 /** Maximum structural depth (objects/arrays) for example generation. */
 const EXAMPLE_MAX_DEPTH = 10;
 
@@ -286,37 +323,4 @@ function toCurlParams(params: any[]): CurlParam[] {
       required: p.required === true,
     };
   });
-}
-
-/**
- * Generate curl commands for the given operation, one per supported region.
- * Returns a map keyed by region.key (e.g. `us`, `eu`) so the UI can render
- * a `[data-region]` wrapper per variant.
- */
-export function buildCurlByRegion(
-  spec: any,
-  method: string,
-  path: string,
-  operation: any,
-  splitParams: SplitParams,
-  requestBodyJson?: string,
-): Record<string, string> {
-  const regions = getRegions(spec, operation);
-  const servers = operation?.servers ?? spec?.servers;
-  const subdomain: string = servers?.[0]?.variables?.subdomain?.default ?? 'api';
-
-  const result: Record<string, string> = {};
-  for (const region of regions) {
-    result[region.key] = generateCurl({
-      method,
-      path,
-      site: region.site,
-      subdomain,
-      pathParams: toCurlParams(splitParams.path),
-      queryParams: toCurlParams(splitParams.query),
-      requestBodyJson,
-      security: operation.security,
-    });
-  }
-  return result;
 }

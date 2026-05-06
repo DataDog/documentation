@@ -1,9 +1,9 @@
 ---
 import ApiLayout from '../../../../../layouts/ApiLayout.astro';
 import ApiEndpoint from '../../../../../components/ApiEndpoint/ApiEndpoint.astro';
-import { getCategoriesView, getCategoryViewBySlug, getEndpointView } from '../../../../../data/api/views';
-import { highlightEndpoint } from '../../../../../data/api/highlight';
-import { getApiPageTitle } from '../../../../../data/api/pageTitles';
+import { getCategoriesView, getCategoryViewBySlug, getEndpointView } from '../../../../../data/api/viewsBuilder';
+import { highlightEndpoint } from '../../../../../data/api/syntaxHighlighter';
+import { getApiPageTitle } from '../../../../../data/api/pageTitleBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '../../../../../lib/i18n/locale';
 import { htmlToMetaDescription } from '../../../../../lib/seo';
 import { i18n } from '../../../../../lib/i18n/i18n';

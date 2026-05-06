@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getDefaultRegions, getRegions, buildApiUrl, buildApiUrlFromServers } from '../../src/data/api/regions';
+import { getDefaultRegions, getRegions, buildApiUrl, buildApiUrlFromServers } from '../../src/data/api/regionResolver';
 
 describe('getDefaultRegions', () => {
   it('returns all known Datadog regions using Hugo-compatible keys', () => {

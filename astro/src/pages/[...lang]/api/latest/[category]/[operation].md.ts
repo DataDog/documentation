@@ -1,5 +1,5 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { getCategoriesView, getEndpointView } from '../../../../../data/api/views';
+import { getCategoriesView, getEndpointView } from '../../../../../data/api/viewsBuilder';
 import { renderApiEndpointMd } from '../../../../../components/ApiEndpoint/plaintext/ApiEndpoint.md';
 import { LOCALES, parseLangParam } from '../../../../../lib/i18n/locale';
 

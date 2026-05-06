@@ -6,9 +6,9 @@
  * block with Model and Example tabs (if both schema and examples are present).
  */
 
-import type { ResponseData } from '../../../data/api/views';
+import type { ResponseData } from '../../../data/api/viewsBuilder';
 import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable.md';
-import { htmlToMd } from '../../../data/api/htmlToMd';
+import { htmlToMd } from '../../../data/api/htmlToMdConverter';
 
 function renderExamples(examples: NonNullable<ResponseData['examples']>): string {
   return examples

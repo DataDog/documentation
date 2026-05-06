@@ -31,78 +31,6 @@ export interface GenerateCurlOptions {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Helpers                                                            */
-/* ------------------------------------------------------------------ */
-
-/**
- * Replace `{param_name}` placeholders in the path with example values or
- * shell-friendly uppercase placeholders.
- */
-function interpolatePath(path: string, pathParams?: CurlParam[]): string {
-  if (!pathParams || pathParams.length === 0) return path;
-
-  let result = path;
-  for (const param of pathParams) {
-    const placeholder = `{${param.name}}`;
-    const value = param.example ?? `\${${param.name.toUpperCase()}}`;
-    result = result.replace(placeholder, value);
-  }
-  return result;
-}
-
-/**
- * Build the query string portion of the URL.
- * Only includes required parameters and those with example values.
- */
-function buildQueryString(queryParams?: CurlParam[]): string {
-  if (!queryParams || queryParams.length === 0) return '';
-
-  const parts: string[] = [];
-  for (const param of queryParams) {
-    if (param.example !== undefined) {
-      parts.push(`${encodeURIComponent(param.name)}=${encodeURIComponent(String(param.example))}`);
-    } else if (param.required) {
-      parts.push(`${encodeURIComponent(param.name)}=\${${param.name.toUpperCase()}}`);
-    }
-  }
-
-  return parts.length > 0 ? `?${parts.join('&')}` : '';
-}
-
-/**
- * Determine whether the operation requires API key and/or App key auth.
- * Falls back to including both if no security block is provided.
- */
-function getAuthHeaders(security?: any[]): { apiKey: boolean; appKey: boolean } {
-  if (!security || security.length === 0) {
-    return { apiKey: true, appKey: true };
-  }
-
-  let apiKey = false;
-  let appKey = false;
-
-  for (const requirement of security) {
-    if (requirement.apiKeyAuth !== undefined) apiKey = true;
-    if (requirement.appKeyAuth !== undefined) appKey = true;
-  }
-
-  // Default to both if we couldn't determine from the security block
-  if (!apiKey && !appKey) {
-    return { apiKey: true, appKey: true };
-  }
-
-  return { apiKey, appKey };
-}
-
-/**
- * Determine whether the method typically sends a request body.
- */
-function methodHasBody(method: string): boolean {
-  const upper = method.toUpperCase();
-  return upper === 'POST' || upper === 'PUT' || upper === 'PATCH';
-}
-
-/* ------------------------------------------------------------------ */
 /*  Main export                                                        */
 /* ------------------------------------------------------------------ */
 
@@ -175,4 +103,76 @@ export function generateCurl(options: GenerateCurlOptions): string {
   }
 
   return lines.join('\n');
+}
+
+/* ------------------------------------------------------------------ */
+/*  Helpers                                                            */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Replace `{param_name}` placeholders in the path with example values or
+ * shell-friendly uppercase placeholders.
+ */
+function interpolatePath(path: string, pathParams?: CurlParam[]): string {
+  if (!pathParams || pathParams.length === 0) return path;
+
+  let result = path;
+  for (const param of pathParams) {
+    const placeholder = `{${param.name}}`;
+    const value = param.example ?? `\${${param.name.toUpperCase()}}`;
+    result = result.replace(placeholder, value);
+  }
+  return result;
+}
+
+/**
+ * Build the query string portion of the URL.
+ * Only includes required parameters and those with example values.
+ */
+function buildQueryString(queryParams?: CurlParam[]): string {
+  if (!queryParams || queryParams.length === 0) return '';
+
+  const parts: string[] = [];
+  for (const param of queryParams) {
+    if (param.example !== undefined) {
+      parts.push(`${encodeURIComponent(param.name)}=${encodeURIComponent(String(param.example))}`);
+    } else if (param.required) {
+      parts.push(`${encodeURIComponent(param.name)}=\${${param.name.toUpperCase()}}`);
+    }
+  }
+
+  return parts.length > 0 ? `?${parts.join('&')}` : '';
+}
+
+/**
+ * Determine whether the operation requires API key and/or App key auth.
+ * Falls back to including both if no security block is provided.
+ */
+function getAuthHeaders(security?: any[]): { apiKey: boolean; appKey: boolean } {
+  if (!security || security.length === 0) {
+    return { apiKey: true, appKey: true };
+  }
+
+  let apiKey = false;
+  let appKey = false;
+
+  for (const requirement of security) {
+    if (requirement.apiKeyAuth !== undefined) apiKey = true;
+    if (requirement.appKeyAuth !== undefined) appKey = true;
+  }
+
+  // Default to both if we couldn't determine from the security block
+  if (!apiKey && !appKey) {
+    return { apiKey: true, appKey: true };
+  }
+
+  return { apiKey, appKey };
+}
+
+/**
+ * Determine whether the method typically sends a request body.
+ */
+function methodHasBody(method: string): boolean {
+  const upper = method.toUpperCase();
+  return upper === 'POST' || upper === 'PUT' || upper === 'PATCH';
 }

@@ -2,8 +2,8 @@
 import ApiLayout from '../../../../layouts/ApiLayout.astro';
 import ApiMethodBadge from '../../../../components/ApiMethodBadge/ApiMethodBadge.astro';
 import ApiStatusAlert from '../../../../components/ApiStatusAlert/ApiStatusAlert.astro';
-import { getCategoriesView, getCategoryViewBySlug } from '../../../../data/api/views';
-import { getApiPageTitle } from '../../../../data/api/pageTitles';
+import { getCategoriesView, getCategoryViewBySlug } from '../../../../data/api/viewsBuilder';
+import { getApiPageTitle } from '../../../../data/api/pageTitleBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/i18n/locale';
 import { htmlToMetaDescription } from '../../../../lib/seo';
 import { i18n } from '../../../../lib/i18n/i18n';

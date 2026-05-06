@@ -13,8 +13,8 @@
  * the option label as their parent.
  */
 
-import type { SchemaField } from '../../../data/api/resolver';
-import { htmlToMdInline } from '../../../data/api/htmlToMd';
+import type { SchemaField } from '../../../data/api/refResolver';
+import { htmlToMdInline } from '../../../data/api/htmlToMdConverter';
 
 const UNNAMED_FIELD_LABEL = '<items>';
 

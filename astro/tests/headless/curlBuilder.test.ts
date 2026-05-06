@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateCurl } from '../../src/data/api/curl';
+import { generateCurl } from '../../src/data/api/curlBuilder';
 
 describe('generateCurl', () => {
   it('generates a simple GET request', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { htmlToMd, htmlToMdInline } from './htmlToMd';
+import { htmlToMd, htmlToMdInline } from './htmlToMdConverter';
 
 describe('htmlToMd', () => {
   it('returns empty string for empty input', () => {

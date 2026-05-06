@@ -10,8 +10,8 @@
 import { DEFAULT_LOCALE, LOCALES, type Locale } from '../../lib/i18n/locale';
 import { API_VERSIONS, getOpenApiDocument, type ApiVersion } from './specParser';
 import type { OpenAPIV3 } from 'openapi-types';
-import { renderMarkdown, renderMarkdownInline } from './markdown';
-import { getRegions, buildApiUrlFromServers } from './regions';
+import { renderMarkdown, renderMarkdownInline } from './markdownRenderer';
+import { getRegions, buildApiUrlFromServers } from './regionResolver';
 import { getTranslationOverlay, translateAction, translateTag } from './translationsLoader';
 import {
   splitParameters,
@@ -20,9 +20,9 @@ import {
   extractPermissions,
   extractOauthScopes,
   buildCurlByRegion,
-} from './operationData';
-import { paramsToFields, type SchemaField } from './resolver';
-import { getCodeExamplesForOperation, type CodeExampleSet } from './examples';
+} from './operationBuilder';
+import { paramsToFields, type SchemaField } from './refResolver';
+import { getCodeExamplesForOperation, type CodeExampleSet } from './codeExampleLoader';
 
 export interface ApiOperationStub {
   operationId: string;
@@ -85,15 +85,59 @@ const SLUG_OVERRIDES: Record<string, string> = {
   'scorecards': 'service-scorecards',
 };
 
+const categoriesCache = new Map<Locale, ApiCategory[]>();
+const endpointCache = new Map<string, EndpointData>();
+
+let _allOperations: RawOperation[] | null = null;
+let _slugByOp: Map<RawOperation, string> | null = null;
+
+export async function getCategoriesView(lang: Locale = DEFAULT_LOCALE): Promise<ApiCategory[]> {
+  if (!LOCALES.includes(lang)) lang = DEFAULT_LOCALE;
+  const cached = categoriesCache.get(lang);
+  if (cached) return cached;
+  const built = buildCategories(lang);
+  categoriesCache.set(lang, built);
+  return built;
+}
+
+export async function getCategoryViewBySlug(
+  slug: string,
+  lang: Locale = DEFAULT_LOCALE,
+): Promise<ApiCategory | undefined> {
+  const all = await getCategoriesView(lang);
+  return all.find((c) => c.slug === slug);
+}
+
+export async function getEndpointView(
+  catSlug: string,
+  opSlug: string,
+  lang: Locale = DEFAULT_LOCALE,
+): Promise<EndpointData | undefined> {
+  if (!LOCALES.includes(lang)) lang = DEFAULT_LOCALE;
+  const key = `${lang}:${catSlug}:${opSlug}`;
+  const cached = endpointCache.get(key);
+  if (cached) return cached;
+
+  const match = getAllOperations().find(
+    (op) => op.categorySlug === catSlug && getOpSlug(op) === opSlug,
+  );
+  if (!match) return undefined;
+
+  const built = buildEndpoint(match, lang);
+  endpointCache.set(key, built);
+  return built;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Private helpers                                                    */
+/* ------------------------------------------------------------------ */
+
 function toSlug(name: string): string {
   return name
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
 }
-
-const categoriesCache = new Map<Locale, ApiCategory[]>();
-const endpointCache = new Map<string, EndpointData>();
 
 interface RawOperation {
   version: ApiVersion;
@@ -104,9 +148,6 @@ interface RawOperation {
   primaryTag: string;
   categorySlug: string;
 }
-
-let _allOperations: RawOperation[] | null = null;
-let _slugByOp: Map<RawOperation, string> | null = null;
 
 function getAllOperations(): RawOperation[] {
   if (_allOperations) return _allOperations;
@@ -252,23 +293,6 @@ function buildCategories(lang: Locale): ApiCategory[] {
   return result;
 }
 
-export async function getCategoriesView(lang: Locale = DEFAULT_LOCALE): Promise<ApiCategory[]> {
-  if (!LOCALES.includes(lang)) lang = DEFAULT_LOCALE;
-  const cached = categoriesCache.get(lang);
-  if (cached) return cached;
-  const built = buildCategories(lang);
-  categoriesCache.set(lang, built);
-  return built;
-}
-
-export async function getCategoryViewBySlug(
-  slug: string,
-  lang: Locale = DEFAULT_LOCALE,
-): Promise<ApiCategory | undefined> {
-  const all = await getCategoriesView(lang);
-  return all.find((c) => c.slug === slug);
-}
-
 function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const spec = getOpenApiDocument(op.version);
   const overlay = getTranslationOverlay(op.version, lang);
@@ -375,24 +399,4 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
     responses,
     codeExamples,
   };
-}
-
-export async function getEndpointView(
-  catSlug: string,
-  opSlug: string,
-  lang: Locale = DEFAULT_LOCALE,
-): Promise<EndpointData | undefined> {
-  if (!LOCALES.includes(lang)) lang = DEFAULT_LOCALE;
-  const key = `${lang}:${catSlug}:${opSlug}`;
-  const cached = endpointCache.get(key);
-  if (cached) return cached;
-
-  const match = getAllOperations().find(
-    (op) => op.categorySlug === catSlug && getOpSlug(op) === opSlug,
-  );
-  if (!match) return undefined;
-
-  const built = buildEndpoint(match, lang);
-  endpointCache.set(key, built);
-  return built;
 }

@@ -1,4 +1,4 @@
-import type { ApiCategory } from './views';
+import type { ApiCategory } from './viewsBuilder';
 
 export function renderLlmsTxt(categories: ApiCategory[], siteUrl: string): string {
   if (!siteUrl) {

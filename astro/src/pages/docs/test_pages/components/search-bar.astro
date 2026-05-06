@@ -1,9 +1,9 @@
 ---
-import DocsLayout from '../../../../layouts/DocsLayout.astro';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import SearchBar from '../../../../components/SearchBar/SearchBar';
 ---
 
-<DocsLayout title="SearchBar">
+<BaseLayout title="SearchBar">
   <div class="docs-page">
     <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
     <div class="prose">
@@ -44,7 +44,7 @@ import SearchBar from '../../../../components/SearchBar/SearchBar';
       <p>Hit normalization (title/section/content with <code>&lt;mark&gt;</code> highlighting and snippet truncation around the first match) is ported from <a href="https://github.com/DataDog/documentation/blob/master/assets/scripts/components/instantsearch/getHitData.js"><code>assets/scripts/components/instantsearch/getHitData.js</code></a>. The Typesense-native <code>highlights[]</code> array is folded into the same normalized shape Hugo produces from instantsearch.js&rsquo;s <code>_highlightResult</code>.</p>
     </div>
   </div>
-</DocsLayout>
+</BaseLayout>
 
 <style>
   .docs-page {

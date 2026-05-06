@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { renderApiSchemaTableMd } from './ApiSchemaTable.md';
-import type { SchemaField } from '../../../data/api/resolver';
+import type { SchemaField } from '../../../data/api/refResolver';
 
 const field = (overrides: Partial<SchemaField> = {}): SchemaField => ({
   name: '',

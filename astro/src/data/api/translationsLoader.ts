@@ -52,10 +52,6 @@ const EMPTY_BUNDLE: OverlayBundle = Object.freeze({
 
 const cache = new Map<string, OverlayBundle>();
 
-function bundleKey(version: ApiVersion, lang: string): string {
-  return `${version}:${lang}`;
-}
-
 /**
  * Resolve the overlay bundle for one (version, locale) pair. English returns
  * an empty bundle (the spec is the source of truth). Missing JSON files for
@@ -120,4 +116,8 @@ export function translateAction(
   operationId: string,
 ): ActionTranslation {
   return overlay.actions[operationId] ?? {};
+}
+
+function bundleKey(version: ApiVersion, lang: string): string {
+  return `${version}:${lang}`;
 }

@@ -6,7 +6,7 @@
  * YAML objects already loaded by `src/data/api/index.ts`.
  */
 
-import { renderMarkdownInline } from './markdown';
+import { renderMarkdownInline } from './markdownRenderer';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -77,41 +77,6 @@ export function resolveRef(spec: any, refString: string): any {
   }
   perSpec.set(refString, current);
   return current;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Helpers                                                            */
-/* ------------------------------------------------------------------ */
-
-/** Maximum recursion depth for circular-reference protection. */
-const MAX_DEPTH = 10;
-
-/**
- * Build a display type string for a schema. Handles format annotations
- * (e.g. "string (date-time)") and enums.
- */
-function displayType(schema: any): string {
-  const base: string = schema.type ?? 'object';
-
-  if (schema.enum) {
-    // Show the underlying type; callers also set `enumValues`
-    return schema.format ? `${base} (${schema.format})` : base;
-  }
-
-  if (schema.format) {
-    return `${base} (${schema.format})`;
-  }
-
-  return base;
-}
-
-/**
- * Extract the human-readable name from a `$ref` string.
- * e.g. `#/components/schemas/DashboardCreateRequest` → `DashboardCreateRequest`
- */
-function refName(refString: string): string {
-  const parts = refString.split('/');
-  return parts[parts.length - 1];
 }
 
 /* ------------------------------------------------------------------ */
@@ -267,8 +232,106 @@ export function schemaToFields(
 }
 
 /* ------------------------------------------------------------------ */
-/*  Internal helpers for schema conversion                             */
+/*  Parameter → SchemaField[] conversion                               */
 /* ------------------------------------------------------------------ */
+
+/**
+ * Convert an array of OpenAPI parameter objects (path, query, header)
+ * into `SchemaField[]`.
+ *
+ * Each parameter typically has `name`, `required`, `description`, and a
+ * `schema` sub-object (which may itself contain a `$ref`).
+ *
+ * @param spec    The full parsed OpenAPI spec object.
+ * @param params  Array of OpenAPI parameter objects.
+ * @returns An array of `SchemaField` objects (one per parameter).
+ */
+export function paramsToFields(spec: any, params: any[]): SchemaField[] {
+  if (!params || !Array.isArray(params)) return [];
+
+  return params.map((param) => {
+    // Parameters themselves can be $ref pointers
+    let resolved = param;
+    if (param.$ref) {
+      resolved = resolveRef(spec, param.$ref) ?? param;
+    }
+
+    const name: string = resolved.name ?? '';
+    const required: boolean = resolved.required === true;
+    const description: string = renderMarkdownInline(resolved.description ?? '');
+    const deprecated: boolean = resolved.deprecated === true;
+
+    // Resolve the parameter's inner schema
+    let paramSchema = resolved.schema;
+    if (paramSchema?.$ref) {
+      paramSchema = resolveRef(spec, paramSchema.$ref) ?? paramSchema;
+    }
+
+    if (!paramSchema) {
+      return {
+        name,
+        type: 'any',
+        required,
+        deprecated,
+        readOnly: false,
+        description,
+      };
+    }
+
+    const field: SchemaField = {
+      name,
+      type: displayType(paramSchema),
+      required,
+      deprecated,
+      readOnly: paramSchema.readOnly === true,
+      description,
+    };
+
+    if (paramSchema.enum) {
+      field.enumValues = paramSchema.enum.map(String);
+    }
+    if (paramSchema.default !== undefined) {
+      field.defaultValue = String(paramSchema.default);
+    }
+
+    return field;
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/*  Private helpers                                                    */
+/* ------------------------------------------------------------------ */
+
+/** Maximum recursion depth for circular-reference protection. */
+const MAX_DEPTH = 10;
+
+/**
+ * Build a display type string for a schema. Handles format annotations
+ * (e.g. "string (date-time)") and enums.
+ */
+function displayType(schema: any): string {
+  const base: string = schema.type ?? 'object';
+
+  if (schema.enum) {
+    // Show the underlying type; callers also set `enumValues`
+    return schema.format ? `${base} (${schema.format})` : base;
+  }
+
+  if (schema.format) {
+    return `${base} (${schema.format})`;
+  }
+
+  return base;
+}
+
+/**
+ * Extract the human-readable name from a `$ref` string.
+ * e.g. `#/components/schemas/DashboardCreateRequest` → `DashboardCreateRequest`
+ */
+function refName(refString: string): string {
+  const parts = refString.split('/');
+  return parts[parts.length - 1];
+}
 
 /**
  * Convert a single named property into a `SchemaField`, recursing into
@@ -457,71 +520,4 @@ function mergeAllOf(schemas: any[], spec: any, visited: Set<string>): any {
   // Deduplicate required array
   merged.required = [...new Set<string>(merged.required)];
   return merged;
-}
-
-/* ------------------------------------------------------------------ */
-/*  Parameter → SchemaField[] conversion                               */
-/* ------------------------------------------------------------------ */
-
-/**
- * Convert an array of OpenAPI parameter objects (path, query, header)
- * into `SchemaField[]`.
- *
- * Each parameter typically has `name`, `required`, `description`, and a
- * `schema` sub-object (which may itself contain a `$ref`).
- *
- * @param spec    The full parsed OpenAPI spec object.
- * @param params  Array of OpenAPI parameter objects.
- * @returns An array of `SchemaField` objects (one per parameter).
- */
-export function paramsToFields(spec: any, params: any[]): SchemaField[] {
-  if (!params || !Array.isArray(params)) return [];
-
-  return params.map((param) => {
-    // Parameters themselves can be $ref pointers
-    let resolved = param;
-    if (param.$ref) {
-      resolved = resolveRef(spec, param.$ref) ?? param;
-    }
-
-    const name: string = resolved.name ?? '';
-    const required: boolean = resolved.required === true;
-    const description: string = renderMarkdownInline(resolved.description ?? '');
-    const deprecated: boolean = resolved.deprecated === true;
-
-    // Resolve the parameter's inner schema
-    let paramSchema = resolved.schema;
-    if (paramSchema?.$ref) {
-      paramSchema = resolveRef(spec, paramSchema.$ref) ?? paramSchema;
-    }
-
-    if (!paramSchema) {
-      return {
-        name,
-        type: 'any',
-        required,
-        deprecated,
-        readOnly: false,
-        description,
-      };
-    }
-
-    const field: SchemaField = {
-      name,
-      type: displayType(paramSchema),
-      required,
-      deprecated,
-      readOnly: paramSchema.readOnly === true,
-      description,
-    };
-
-    if (paramSchema.enum) {
-      field.enumValues = paramSchema.enum.map(String);
-    }
-    if (paramSchema.default !== undefined) {
-      field.defaultValue = String(paramSchema.default);
-    }
-
-    return field;
-  });
 }

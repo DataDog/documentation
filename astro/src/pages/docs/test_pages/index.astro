@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import DocsLayout from '../../../layouts/DocsLayout.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Alert from '../../../components/Alert/Alert.astro';
 
 const docs = await getCollection('docs');
@@ -9,7 +9,7 @@ const components = docs
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 
-<DocsLayout title="Test Pages">
+<BaseLayout title="Test Pages">
   <div class="docs-page">
     <div class="prose">
       <h1>Test Pages</h1>
@@ -65,7 +65,7 @@ const components = docs
       </table>
     </div>
   </div>
-</DocsLayout>
+</BaseLayout>
 
 <style>
   .docs-page {

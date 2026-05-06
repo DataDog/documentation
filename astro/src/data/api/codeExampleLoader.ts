@@ -72,21 +72,6 @@ const LANGUAGES = [
 ] as const;
 
 /* ------------------------------------------------------------------ */
-/*  Internal helpers                                                   */
-/* ------------------------------------------------------------------ */
-
-function buildExampleFilename(operationId: string, suffix: string, ext: string): string {
-  if (suffix) {
-    return `${operationId}_${suffix}${ext}`;
-  }
-  return `${operationId}${ext}`;
-}
-
-function readExampleFile(version: 'v1' | 'v2', filename: string): string | null {
-  return sdkExampleFiles[`../../data/api/${version}/examples/${filename}`] ?? null;
-}
-
-/* ------------------------------------------------------------------ */
 /*  Main export                                                        */
 /* ------------------------------------------------------------------ */
 
@@ -142,4 +127,19 @@ export function getCodeExamplesForOperation(
   }
 
   return results;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Internal helpers                                                   */
+/* ------------------------------------------------------------------ */
+
+function buildExampleFilename(operationId: string, suffix: string, ext: string): string {
+  if (suffix) {
+    return `${operationId}_${suffix}${ext}`;
+  }
+  return `${operationId}${ext}`;
+}
+
+function readExampleFile(version: 'v1' | 'v2', filename: string): string | null {
+  return sdkExampleFiles[`../../data/api/${version}/examples/${filename}`] ?? null;
 }

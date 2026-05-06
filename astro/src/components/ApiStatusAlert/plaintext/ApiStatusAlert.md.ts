@@ -7,7 +7,7 @@
  * we map: deprecated/unstable → warning, beta → info.
  */
 
-import { htmlToMd } from "../../../data/api/htmlToMd";
+import { htmlToMd } from "../../../data/api/htmlToMdConverter";
 
 type StatusType = "deprecated" | "unstable" | "beta";
 

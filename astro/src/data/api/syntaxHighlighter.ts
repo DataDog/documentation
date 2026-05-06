@@ -8,7 +8,17 @@
 import { codeToHtml } from 'shiki';
 import datadogLight from '../../styles/shiki-light';
 import datadogDark from '../../styles/shiki-dark';
-import type { EndpointData } from './views';
+import type { EndpointData } from './viewsBuilder';
+
+/**
+ * Walk all code examples in a single endpoint and populate `highlightedCode`
+ * on each entry. Mutates the endpoint in place.
+ */
+export async function highlightEndpoint(endpoint: EndpointData): Promise<void> {
+  const jobs: Promise<void>[] = [];
+  collectHighlightJobs(endpoint, jobs);
+  await Promise.all(jobs);
+}
 
 /**
  * Highlight a single code string. Returns the highlighted HTML,
@@ -71,14 +81,4 @@ function collectHighlightJobs(ep: EndpointData, jobs: Promise<void>[]): void {
       );
     }
   }
-}
-
-/**
- * Walk all code examples in a single endpoint and populate `highlightedCode`
- * on each entry. Mutates the endpoint in place.
- */
-export async function highlightEndpoint(endpoint: EndpointData): Promise<void> {
-  const jobs: Promise<void>[] = [];
-  collectHighlightJobs(endpoint, jobs);
-  await Promise.all(jobs);
 }

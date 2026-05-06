@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { resolveRef, schemaToFields, paramsToFields } from '../../src/data/api/resolver';
+import { resolveRef, schemaToFields, paramsToFields } from '../../src/data/api/refResolver';
 
 describe('resolveRef', () => {
   it('resolves a simple $ref path', () => {

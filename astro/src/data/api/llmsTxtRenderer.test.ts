@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { renderLlmsTxt } from './renderLlmsTxt';
-import type { ApiCategory, ApiOperationStub } from './views';
+import { renderLlmsTxt } from './llmsTxtRenderer';
+import type { ApiCategory, ApiOperationStub } from './viewsBuilder';
 
 function op(summary: string, slug: string, method = 'GET'): ApiOperationStub {
   return { operationId: `id-${slug}`, summary, slug, menuOrder: 1, version: 'v2', method };

@@ -11,10 +11,10 @@
  * endpoint from the next within a category page.
  */
 
-import type { EndpointData } from '../../../data/api/views';
-import { getDefaultRegions } from '../../../data/api/regions';
+import type { EndpointData } from '../../../data/api/viewsBuilder';
+import { getDefaultRegions } from '../../../data/api/regionResolver';
 import { appHost } from '../../../config/regions';
-import { htmlToMd } from '../../../data/api/htmlToMd';
+import { htmlToMd } from '../../../data/api/htmlToMdConverter';
 import { renderApiStatusAlertMd } from '../../ApiStatusAlert/plaintext/ApiStatusAlert.md';
 import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable.md';
 import { renderApiRequestBodyTabsMd } from '../../ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs.md';
