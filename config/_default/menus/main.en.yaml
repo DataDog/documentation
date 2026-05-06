@@ -5042,16 +5042,21 @@ menu:
       parent: dbm
       identifier: dbm_recommendations
       weight: 16
+    - name: Database Investigator
+      url: database_monitoring/database_investigator/
+      parent: dbm
+      identifier: dbm_database_investigator
+      weight: 17
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 17
+      weight: 18
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 18
+      weight: 19
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -5377,6 +5382,16 @@ menu:
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
       weight: 40101
+    - name: Trace-Level Evaluations
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
+      weight: 40102
+    - name: Prompt Templating
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_prompt_templating
+      weight: 40103
     - name: NeMo
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_external_evaluations
@@ -5488,7 +5503,7 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_fleet
       weight: 3
-    - name: AI Agents Console
+    - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
       identifier: ai_agents_console
