@@ -6,8 +6,8 @@ further_reading:
   text: "BYOC Logs Ingress Configuration"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="BYOC Logs is in Preview" >}}
-  Join the BYOC Logs Preview to access new self-hosted log management features.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="true" header="In Preview" >}}
+  BYOC Logs is in Preview.
 {{< /callout >}}
 
 This document provides an overview of how BYOC Logs and Datadog communicate with each other.

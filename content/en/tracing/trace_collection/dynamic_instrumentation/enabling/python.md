@@ -48,9 +48,11 @@ ddtrace-run python -m myapp.py
 {{% tab "In code" %}}
 
 ```python
-from ddtrace.debugging import DynamicInstrumentation
+import os
 
-DynamicInstrumentation.enable()
+os.environ["DD_DYNAMIC_INSTRUMENTATION_ENABLED"] = "true"
+
+import ddtrace.auto  # IMPORTANT: this must be imported as soon as possible.
 ```
 {{% /tab %}}
 {{< /tabs >}}

@@ -70,6 +70,35 @@ RUM reports the element that is associated with each Core Web Vital instance:
 - For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
 - For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
 
+### Diagnose Core Web Vitals with subparts
+
+Largest Contentful Paint and Interaction to Next Paint break down into subparts, each isolating a specific phase of the metric. Use subpart data to identify which phase contributes most to a slow LCP or INP.
+
+#### Largest Contentful Paint subparts
+
+**Note**: These attributes require Browser SDK v6.32.0 or later.
+
+LCP breaks down into four phases. Time to First Byte is collected separately as `view.first_byte`. The remaining three subparts are collected under `view.performance.lcp.sub_parts`:
+
+| Phase                  | Attribute                                              | Description                                                                                                                                                                |
+|------------------------|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Time to First Byte     | `view.first_byte`                                      | Time until the browser receives the first byte of the HTML response, including server response time, CDN latency, and redirect time.                                                                     |
+| Resource load delay    | `view.performance.lcp.sub_parts.load_delay`            | Time between TTFB and the start of the LCP resource load. Reflects priority hints, preloads, and render-blocking resources. `0` when the LCP element does not require a resource. |
+| Resource load time     | `view.performance.lcp.sub_parts.load_time`             | Time to load the LCP resource, affected by image format, compression, and network conditions. `0` when the LCP element does not require a resource.                                  |
+| Render delay           | `view.performance.lcp.sub_parts.render_delay`          | Time between the LCP resource finishing loading and the LCP element being painted. High values indicate long tasks or blocking JavaScript or CSS.                                            |
+
+#### Interaction to Next Paint subparts
+
+**Note**: These attributes require Browser SDK v6.33.0 or later.
+
+INP breaks down into three phases, collected under `view.performance.inp.sub_parts`:
+
+| Phase                  | Attribute                                              | Description                                                                                                                                                                |
+|------------------------|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Input delay            | `view.performance.inp.sub_parts.input_delay`           | Time from the user input until the event handler starts running. High values indicate main-thread contention and long tasks.                                                                  |
+| Processing duration    | `view.performance.inp.sub_parts.processing_duration`   | Duration of the event handler execution. High values indicate complex or synchronous handler work.                                                                                        |
+| Presentation delay     | `view.performance.inp.sub_parts.presentation_delay`    | Time the browser took to render the next frame. High values indicate expensive style, layout, paint, or composite operations.                                                                                |
+
 ## All performance telemetry
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                                      |

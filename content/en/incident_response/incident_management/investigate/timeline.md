@@ -27,6 +27,7 @@ Each cell has its own content type that indicates the kind of information the ce
 | Integration update | Any changes made through the Incident Management product's [integrations][1].
 | Task               | Any changes made to incident tasks in the Post-Incident section of the Incident Details page.
 | Notification sent  | An update when a manual notification is sent by an incident responder.
+| Meeting Chat       | Any messages sent in a video conferencing meeting's chat.
 
 ### Responder notes
 

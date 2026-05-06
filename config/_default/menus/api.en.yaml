@@ -2965,6 +2965,18 @@ menu:
           - BulkExportSecurityMonitoringRules
         unstable: []
         order: 61
+    - name: Bulk delete security monitoring rules
+      url: '#bulk-delete-security-monitoring-rules'
+      identifier: security-monitoring-bulk-delete-security-monitoring-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkDeleteSecurityMonitoringRules
+        unstable: []
+        order: 97
     - name: Create a detection rule
       url: '#create-a-detection-rule'
       identifier: security-monitoring-create-a-detection-rule
@@ -7930,6 +7942,18 @@ menu:
           - ListTagPipelinesRulesets
         unstable: []
         order: 16
+    - name: List Cloud Cost Management OCI configs
+      url: '#list-cloud-cost-management-oci-configs'
+      identifier: cloud-cost-management-list-cloud-cost-management-oci-configs
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostOCIConfigs
+        unstable: []
+        order: 39
     - name: Update Google Cloud Usage Cost config
       url: '#update-google-cloud-usage-cost-config'
       identifier: cloud-cost-management-update-google-cloud-usage-cost-config
@@ -8302,6 +8326,23 @@ menu:
           - ListCustomAllocationRules
         unstable: []
         order: 23
+    - name: Cloud Inventory Sync Configs
+      url: /api/latest/cloud-inventory-sync-configs/
+      identifier: cloud-inventory-sync-configs
+      generated: true
+    - name: Create or update a sync configuration
+      url: '#create-or-update-a-sync-configuration'
+      identifier: cloud-inventory-sync-configs-create-or-update-a-sync-configuration
+      parent: cloud-inventory-sync-configs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertSyncConfig
+        unstable:
+          - v2
+        order: 1
     - name: Cloud Network Monitoring
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
@@ -15617,8 +15658,7 @@ menu:
           - v2
         operationids:
           - SearchFlakyTests
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Update flaky test states
       url: '#update-flaky-test-states'
@@ -15630,8 +15670,7 @@ menu:
           - v2
         operationids:
           - UpdateFlakyTests
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Get Test Optimization service settings
       url: '#get-test-optimization-service-settings'
@@ -15643,8 +15682,7 @@ menu:
           - v2
         operationids:
           - GetTestOptimizationServiceSettings
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Update Test Optimization service settings
       url: '#update-test-optimization-service-settings'
@@ -15656,8 +15694,7 @@ menu:
           - v2
         operationids:
           - UpdateTestOptimizationServiceSettings
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Delete Test Optimization service settings
       url: '#delete-test-optimization-service-settings'
@@ -15669,8 +15706,7 @@ menu:
           - v2
         operationids:
           - DeleteTestOptimizationServiceSettings
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get Flaky Tests Management policies
       url: '#get-flaky-tests-management-policies'
@@ -15682,8 +15718,7 @@ menu:
           - v2
         operationids:
           - GetFlakyTestsManagementPolicies
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Update Flaky Tests Management policies
       url: '#update-flaky-tests-management-policies'
@@ -15695,8 +15730,7 @@ menu:
           - v2
         operationids:
           - UpdateFlakyTestsManagementPolicies
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: Widgets
       url: /api/latest/widgets/
