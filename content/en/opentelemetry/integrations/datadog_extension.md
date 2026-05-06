@@ -278,7 +278,7 @@ The DaemonSet forwards to `monitoring/otelcol-gateway-l2`, the Layer-2 gateway f
 | `deployment_type` | Deployment type for the Collector. One of: `gateway`, `daemonset`, or `unknown`. | `unknown` |
 | `installation_method` | How the Collector was installed. One of: `kubernetes`, `bare-metal`, `docker`, `ecs-fargate`, `eks-fargate`, or unset. Available in Collector v0.148.0 and later. | unset |
 | `gateway_service` | Set on **gateway** Collectors only. The Kubernetes Service fronting the gateway Collector pods. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |
-| `gateway_destination` | Set on **agent or DaemonSet** Collectors only. The Kubernetes Service that this Collector forwards telemetry to. Must match `gateway_service` on the receiving gateway Collector. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |
+| `gateway_destination` | Set on any Collector that forwards telemetry to a downstream gateway. The Kubernetes Service that this Collector forwards telemetry to. Must match `gateway_service` on the receiving gateway Collector. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |
 | `proxy_url` | HTTP proxy URL for outbound requests. | - |
 | `timeout` | Timeout for HTTP requests. | `30s` |
 | `tls.insecure_skip_verify` | Skip TLS certificate verification. | `false` |
