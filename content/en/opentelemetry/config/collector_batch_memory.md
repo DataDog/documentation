@@ -81,4 +81,4 @@ Memory usage after GC.
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor
-[2]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
+[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/batch-memory.yaml

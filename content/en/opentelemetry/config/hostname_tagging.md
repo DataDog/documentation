@@ -447,7 +447,7 @@ processors:
       action: upsert
       from_attribute: <custom_tag_name>
 ```
-**Note:** This is only supported if you have opted-in as described [here][7].
+**Note:** This is only supported if you have opted-in as described [here][6].
 
 ### Host aliases
 You can set host aliases with the resource attribute `datadog.host.aliases`. 
@@ -462,7 +462,7 @@ processors:
           - set(attributes["datadog.host.aliases"], ["alias1", "alias2", "alias3"])
 ```
 
-**Note:** This is only supported if you have opted-in as described [here][7].
+**Note:** This is only supported if you have opted-in as described [here][6].
 
 ### Custom container tags
 
@@ -482,7 +482,6 @@ processors:
 [1]: https://opentelemetry.io/docs/specs/semconv/resource/
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/k8sattributesprocessor/README.md
-[4]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
+[4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/k8s-values.yaml
 [5]: https://opentelemetry.io/docs/languages/js/resources/
-[6]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
-[7]: https://docs.datadoghq.com/opentelemetry/schema_semantics/host_metadata/  
+[6]: https://docs.datadoghq.com/opentelemetry/schema_semantics/host_metadata/  
