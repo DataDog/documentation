@@ -76,7 +76,7 @@ Largest Contentful Paint and Interaction to Next Paint break down into subparts,
 
 #### Largest Contentful Paint subparts
 
-**Note**: These attributes require Browser SDK v6.32.0 or later.
+<div class="alert alert-info">These attributes require Browser SDK v6.32.0 or later.</div>
 
 LCP breaks down into four phases. Time to First Byte is collected separately as `view.first_byte`. The remaining three subparts are collected under `view.performance.lcp.sub_parts`:
 
@@ -89,7 +89,7 @@ LCP breaks down into four phases. Time to First Byte is collected separately as 
 
 #### Interaction to Next Paint subparts
 
-**Note**: These attributes require Browser SDK v6.33.0 or later.
+<div class="alert alert-info">These attributes require Browser SDK v6.33.0 or later.</div>
 
 INP breaks down into three phases, collected under `view.performance.inp.sub_parts`:
 
