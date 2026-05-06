@@ -54,7 +54,7 @@ For Personal Access Tokens, see [Personal Access Tokens][2].
 2. In the details panel, under **Access Tokens**, click {{< ui >}}+ New Token{{< /ui >}}.
 3. Enter a {{< ui >}}Name{{< /ui >}} for the token.
 4. Select an {{< ui >}}Expiration Date{{< /ui >}}: **1 day**, **1 month**, **1 year**, **Never**,
-   or **Custom**. Select **Never** to create a long-lived token with no automatic expiration.
+   or **Custom**. Select **Never** for a token with no expiration.
 5. Click {{< ui >}}Select Scopes{{< /ui >}} to define what the token can access. Grant only the
    permissions your workflow requires, then click {{< ui >}}Save{{< /ui >}}.
 
