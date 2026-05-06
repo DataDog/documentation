@@ -532,6 +532,8 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 
 Tools for investigating Kafka workloads with [Data Streams Monitoring][27], including topic, broker, and client configuration inspection, Schema Registry browsing, and on-demand reads of Kafka messages through the Datadog Agent.
 
+**Note**: All tools in this toolset require the [Kafka integration][28] to be configured for your Kafka clusters. If a call returns a setup error or an empty result, follow the [Kafka setup guide][28] to enable Data Streams Monitoring on your Agent before retrying.
+
 ### `list_kafka_topic_configs`
 *Toolset: **data-streams***\
 *Permissions Required: `APM Read`*\
@@ -584,8 +586,6 @@ Reads messages from a given Kafka cluster, topic, and partition through the Data
 - What are the last messages on topic `checkout-orders`?
 - Show me the most recent payloads produced to the orders Kafka topic.
 - Read the message at offset 12345 on partition 3 of the `payments` topic.
-
-**Note**: This tool requires the [Kafka integration][28] to be configured for your Kafka clusters. If the call returns a setup error, follow the [Kafka setup guide][28] to enable Data Streams Monitoring on your Agent before retrying.
 
 ## Database Monitoring
 
