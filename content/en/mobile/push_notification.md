@@ -131,7 +131,7 @@ On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb
 </div>
 
 <div class="alert alert-info">
-Even if you are logged out of the mobile app, you will still recieve on-call push notifications. Ensure that you are logged in order to acknowledge and take action for on-call pages.
+You must be logged in to acknowledge and take action for on-call pages. However, you still receive on-call push notifications when you are logged out of the mobile app.
 </div>
 
 {{% /tab %}}
