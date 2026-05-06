@@ -253,7 +253,7 @@ Supply a JavaScript function to assign an assessment based on the output from th
 
 }
 ```
-and the function signature must look like (the function below is )
+and the function signature must be `function __evalPostProcessing(input)` and the `input` is the json from the evaluator. The function below is an example of a post processing function:
 ```
 function __evalPostProcessing(input) {
     /*
