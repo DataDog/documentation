@@ -81,30 +81,49 @@
     padding: 16px;
 }
 
-// Registry copy-link anchors
-.registry-copy-link {
-    display: inline-flex;
-    align-items: center;
-    margin-left: 6px;
-    opacity: 0;
-    transition: opacity 0.2s;
-    color: inherit;
-    vertical-align: middle;
-    text-decoration: none;
+// Registry copy-links
+.registry-config-sections details {
+    position: relative;
+}
 
-    &:hover {
-        opacity: 1 !important;
-    }
+.registry-config-sections summary {
+    padding-right: 48px;
+}
 
-    &--copied svg {
-        color: #632CA5;
+details > a.registry-copy-link {
+    position: absolute;
+    top: 18px;
+    right: 16px;
+    color: white;
+
+    &:hover, &:focus {
+        opacity: 1;
     }
 }
 
-// Show link icon on hover of the parent dt or header-content
+a.registry-copy-link {
+    border-bottom: none;
+    margin-left: 10px;
+    position: relative;
+    top: 4px;
+    color: inherit;
+    cursor: pointer;
+    opacity: .5;
+
+    &:focus {
+        opacity: 1;
+    }
+
+    &--copied {
+        color: $ddpurple;
+        opacity: 1;
+    }
+}
+
+// Show link icon on hover of the parent dt
 dt:hover .registry-copy-link,
-.header-content:hover .registry-copy-link {
-    opacity: 0.5;
+summary:hover + .registry-copy-link{
+    opacity: 1;
 }
 
 // Config entry anchors need scroll-margin for sticky header
