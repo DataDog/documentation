@@ -298,7 +298,129 @@ For the full input list and defaults, see [`variables.tf`][8] in the example dir
 
 {% /if %}
 
-{% if not(and(equals($database, "postgres"), or(equals($db_hosting, "rds"), equals($db_hosting, "aurora"), equals($db_hosting, "self_hosted")), or(equals($agent_runtime, "ecs_fargate"), equals($agent_runtime, "amazon_eks")))) %}
+{% if and(equals($database, "postgres"), or(equals($db_hosting, "rds"), equals($db_hosting, "aurora"), equals($db_hosting, "self_hosted")), equals($agent_runtime, "amazon_ec2")) %}
+
+## Hosting note
+
+The Terraform module for this combination works for any Postgres database reachable inside an AWS VPC by security group. Point `db_endpoint` and `db_security_group_id` at:
+
+- **Amazon RDS Postgres** — the RDS endpoint and the RDS security group.
+- **Amazon Aurora Postgres** — the Aurora cluster writer endpoint and the Aurora cluster's security group.
+- **Self-hosted Postgres on EC2 in the same VPC** — the EC2 instance hostname/IP and the security group attached to the Postgres EC2 instance.
+
+For Postgres self-hosted outside AWS (on-premises, in another cloud), this AWS-side example does not apply. Follow the manual setup in the per-database setup pages from [Database Monitoring][2].
+
+## Architecture
+
+A single Datadog Agent runs in a Docker container on a dedicated Amazon EC2 instance (Amazon Linux 2023) inside the same VPC as your Postgres database. `cloud-init` installs Docker, drops the Postgres check config into `/etc/datadog-agent/conf.d/postgres.d/conf.yaml`, and starts the Agent container with that directory bind-mounted.
+
+You can run the host in either a **public subnet** (with SSH ingress from a CIDR you control) or a **private subnet** (with SSM Session Manager — no SSH key required, since the example attaches the `AmazonSSMManagedInstanceCore` policy to the instance profile).
+
+## Prerequisites
+
+- **Terraform 1.5 or later**, and AWS credentials with permission to create EC2, IAM, and security group resources in the target region.
+- **An existing Postgres instance** (Postgres 10 or later) — RDS, Aurora, or self-hosted on EC2.
+- **A subnet in the database's VPC** with internet egress (an Internet Gateway for a public subnet, or NAT for a private subnet) — the Agent needs to pull its container image and reach `*.${DD_SITE}`.
+- **A Datadog API key** for the destination organization.
+- **A parameter group (RDS/Aurora) or `postgresql.conf` (self-hosted)** with the DBM-required parameters set:
+
+  | Parameter | Value | Purpose |
+  |---|---|---|
+  | `shared_preload_libraries` | `pg_stat_statements` | Required for query metric collection |
+  | `track_activity_query_size` | `4096` | Increases captured SQL text size |
+  | `pg_stat_statements.track` | `ALL` | Captures statements inside functions and procedures |
+  | `pg_stat_statements.max` | `10000` | Retains more normalized queries |
+  | `pg_stat_statements.track_utility` | `off` | Skips PREPARE and EXPLAIN noise |
+
+  Changing `shared_preload_libraries` requires a database restart (for RDS/Aurora, an instance reboot).
+
+- **The `datadog` Postgres user** with the right grants and the `pg_stat_statements` extension installed in each monitored database. See [Set up Database Monitoring for Postgres on RDS][3] for the SQL.
+- *(Optional)* An existing **EC2 key pair** if you want to SSH into the Agent host. Otherwise leave `key_pair_name = ""` and use SSM Session Manager.
+
+## Apply the Terraform
+
+The example for this combination lives at [`terraform/postgres/aws/ec2/`][9] in `dd-database-monitoring-example`.
+
+```bash
+git clone https://github.com/DataDog/dd-database-monitoring-example.git
+cd dd-database-monitoring-example/terraform/postgres/aws/ec2
+
+cp terraform.tfvars.example terraform.tfvars
+# Fill in: vpc_id, subnet_id, db_security_group_id, db_endpoint,
+# database_name, datadog_user_password, datadog_api_key, datadog_site
+
+terraform init
+terraform plan
+terraform apply
+```
+
+`terraform apply` creates an EC2 instance running the Datadog Agent in Docker, an Agent host security group, an ingress rule on the database security group for port 5432 from the Agent host SG, an IAM role with `AmazonSSMManagedInstanceCore` attached, and an EC2 instance profile.
+
+### Required inputs
+
+| Variable | Description |
+|---|---|
+| `vpc_id` | The VPC where the database lives |
+| `subnet_id` | A subnet in that VPC with internet egress (IGW for public, NAT for private) |
+| `db_security_group_id` | The security group attached to your database — the example adds an ingress rule on port 5432. For RDS, the RDS instance SG; for Aurora, the cluster SG; for self-hosted on EC2, the EC2 instance SG. |
+| `db_endpoint` | The database endpoint host (no port). For RDS, the RDS endpoint; for Aurora, the cluster writer endpoint; for self-hosted on EC2, the instance hostname or IP. |
+| `database_name` | The Postgres database to monitor |
+| `datadog_user_password` | The password for the Postgres `datadog` user |
+| `datadog_api_key` | The API key for the destination organization |
+| `datadog_site` | For example, `datadoghq.com` or `datadoghq.eu` |
+| `assign_public_ip` *(optional)* | `true` for a public-subnet demo with SSH; `false` for a private subnet (use SSM). Default `true`. |
+| `key_pair_name`, `ssh_ingress_cidrs` *(optional)* | Provide both to enable SSH access. Leave both empty to disable SSH and rely on SSM Session Manager. |
+
+For the full input list and defaults, see [`variables.tf`][10] in the example directory.
+
+## Verify
+
+1. The instance is running:
+
+   ```bash
+   aws ec2 describe-instances --instance-ids $(terraform output -raw ec2_instance_id) \
+     --query 'Reservations[0].Instances[0].{state:State.Name,ip:PublicIpAddress}'
+   ```
+
+2. Open a shell on the Agent host. Use whichever path matches your configuration:
+
+   ```bash
+   # SSH (assign_public_ip = true and key_pair_name set)
+   $(terraform output -raw ec2_ssh_command)
+
+   # SSM (any subnet, no SSH key needed)
+   aws ssm start-session --target $(terraform output -raw ec2_instance_id)
+   ```
+
+3. The Agent container is healthy:
+
+   ```bash
+   docker ps
+   docker logs datadog-agent | grep -E '(postgres|dbm)' | tail -50
+   ```
+
+   Look for `Running check postgres` and the absence of `pg_stat_statements` errors.
+
+4. In the Datadog UI:
+
+   - **Infrastructure > Hosts**: the EC2 host appears.
+   - **Databases > List**: the database host appears with DBM enabled.
+   - **Databases > Query Metrics**: rows render within ~2 minutes of database traffic.
+
+## Troubleshooting
+
+| Symptom | Likely cause |
+|---|---|
+| Agent logs show `connection refused` to the database | The database security-group ingress rule didn't apply, or the EC2 instance is in a subnet with no route to the database |
+| Agent logs show `pg_stat_statements is not loaded` | The parameter group / `postgresql.conf` is missing `shared_preload_libraries=pg_stat_statements`, or the database was not restarted after the change |
+| Agent logs show `permission denied for relation pg_stat_activity` | The `pg_monitor` role is not granted to the `datadog` user |
+| No data in the Datadog UI | The API key is wrong, `datadog_site` is mismatched, or the instance can't reach `*.${DD_SITE}` (no IGW or NAT egress) |
+| `query_samples` is empty | The `datadog.explain_statement` function is not created in the monitored database |
+| `docker: command not found` on first SSH | `cloud-init` is still running. Wait ~60 seconds and re-check with `cloud-init status --wait`. |
+
+{% /if %}
+
+{% if not(and(equals($database, "postgres"), or(equals($db_hosting, "rds"), equals($db_hosting, "aurora"), equals($db_hosting, "self_hosted")), or(equals($agent_runtime, "ecs_fargate"), equals($agent_runtime, "amazon_eks"), equals($agent_runtime, "amazon_ec2")))) %}
 
 ## Coming soon
 
@@ -316,3 +438,5 @@ For the manual setup today, see the per-database setup pages from [Database Moni
 [6]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/amazon-eks
 [7]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/amazon-eks/README.md
 [8]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/amazon-eks/variables.tf
+[9]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/ec2
+[10]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/ec2/variables.tf
