@@ -55,7 +55,7 @@ Datadog's RUM agent looks at four sources to identify the root causes of poor pe
 
 Each finding is shown as a card with a title, a description of the issue, a severity level, and links to the affected events. Multiple findings appear ranked by impact so you can focus on the highest-impact issues first.
 
-{{< img src="real_user_monitoring/ai_investigations/single-view-ai-investigation-results.png" alt="Results panel showing ranked findings with severity, descriptions, and links to the affected events." style="width:100%;" >}}
+{{< img src="real_user_monitoring/ai_investigations/single-view-ai-investigation-results.png" alt="Results panel showing ranked findings with severity, descriptions, and links to the affected events." style="width:70%;" >}}
 
 A lightweight chat interface lets you follow up on the analysis: ask for more detail on a specific finding, request additional context, or explore related symptoms.
 
