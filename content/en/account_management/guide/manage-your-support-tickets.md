@@ -105,6 +105,8 @@ further_reading:
 
 <p><strong>Note</strong>: After registration, your login username is your email with <code>.ddgov.support</code> appended (for example, <code>john@agency.gov.ddgov.support</code>). Use this full username when logging in.</p>
 
+<p><strong>Note</strong>: To receive registration verification codes, password reset emails, and case notification emails, add the <code>ddog-gov.com</code> domain to your email allowlist. This includes <code>help@ddog-gov.com</code> and <code>support@ddog-gov.com</code>.</p>
+
 <h2>Create a new case</h2>
 
 <p>To create a new case:</p>
@@ -143,7 +145,7 @@ further_reading:
 
 <h3>Password reset not received</h3>
 
-<p>Click <strong>Forgot Password</strong> and follow the process with your full username (with the <code>.ddgov.support</code> suffix).</p>
+<p>Click <strong>Forgot Password</strong> and follow the process with your full username (with the <code>.ddgov.support</code> suffix). If you still do not receive the email, add <code>ddog-gov.com</code> to your email allowlist.</p>
 
 <h3>Registration error</h3>
 
