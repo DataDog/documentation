@@ -508,9 +508,6 @@ options:
 - label: Elixir
   id: elixir
 
-- label: AlloyDB
-  id: alloydb
-
 - label: Amazon Aurora
   id: aurora
 

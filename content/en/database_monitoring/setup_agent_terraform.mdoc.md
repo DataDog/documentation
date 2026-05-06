@@ -420,16 +420,6 @@ For the full input list and defaults, see [`variables.tf`][10] in the example di
 
 {% /if %}
 
-{% if not(and(equals($database, "postgres"), or(equals($db_hosting, "rds"), equals($db_hosting, "aurora"), equals($db_hosting, "self_hosted")), or(equals($agent_runtime, "ecs_fargate"), equals($agent_runtime, "amazon_eks"), equals($agent_runtime, "amazon_ec2")))) %}
-
-## Coming soon
-
-A Terraform example for the selected combination is not yet published in [`dd-database-monitoring-example`][1]. As examples land, this page is updated with the matching directory, required inputs, verify steps, and troubleshooting.
-
-For the manual setup today, see the per-database setup pages from [Database Monitoring][2].
-
-{% /if %}
-
 [1]: https://github.com/DataDog/dd-database-monitoring-example
 [2]: /database_monitoring/
 [3]: /database_monitoring/setup_postgres/rds/
