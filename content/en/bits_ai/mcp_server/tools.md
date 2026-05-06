@@ -944,6 +944,23 @@ Searches and retrieves security signals from Datadog Security Monitoring, includ
 - Find high-severity security signals related to my production environment.
 - List Cloud SIEM signals triggered by suspicious login attempts.
 
+### `analyze_datadog_security_signals`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read` and `Timeseries`*\
+Analyzes security signals using SQL queries for aggregations, grouping, and trend analysis. Use this for counts, top-N, and breakdowns over time. To list or retrieve specific signals, use `search_datadog_security_signals` or `get_datadog_security_signal`.
+
+- Show me the top 10 SIEM rules by signal count over the last 7 days.
+- Count high and critical security signals grouped by severity.
+- How many App & API Protection signals fired per service yesterday?
+
+### `get_datadog_security_signal`
+*Toolset: **security***\
+*Permissions Required: `Security Signals Read`*\
+Retrieves the full details of a single security signal by ID, including attributes, rule information, triage state, tags, and case correlations.
+
+- Get the full details of security signal `AwAAAZ27F1BUjY4rPQAAABhBWjI3RjFCVWpZNHJBQUFBSGFNQVZBQUFBR1Bu`.
+- Show me the rule, triage state, and linked cases for this signal.
+
 ### `security_findings_schema`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`*\
