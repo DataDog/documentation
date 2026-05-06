@@ -30,10 +30,10 @@ This page walks through provisioning the Datadog Agent for Database Monitoring (
 The Terraform examples used on this page live in [`DataDog/dd-database-monitoring-example`][1]. Each combination has its own directory with `main.tf`, `variables.tf`, `outputs.tf`, `versions.tf`, and a `terraform.tfvars.example` you can copy and edit. Path scheme:
 
 ```
-terraform/<database>/<hosting>/<agent-runtime>/
+terraform/<database>/<cloud>/<agent-runtime>/
 ```
 
-For example, the ECS Fargate Agent against an RDS Postgres instance lives at `terraform/postgres/rds/ecs-fargate/`.
+The directory tree is keyed on **cloud** rather than the docs page's `<hosting>` filter — one Terraform module typically covers all of a cloud's database hosting flavors that share the same VPC and security-group semantics. For example, the ECS Fargate Agent against any AWS-side Postgres lives at `terraform/postgres/aws/ecs-fargate/` and works for `db_hosting` ∈ {`rds`, `aurora`, `self_hosted` (on EC2)}.
 
 This page covers the **Agent** side of the setup. It does not provision the database, set database-side parameters, or create the `datadog` user inside the database. For those steps, see the per-database setup pages from [Database Monitoring][2].
 
@@ -74,11 +74,11 @@ A single Datadog Agent task runs on AWS ECS Fargate inside the same VPC as your 
 
 ## Apply the Terraform
 
-The example for this combination lives at [`terraform/postgres/rds/ecs-fargate/`][4] in `dd-database-monitoring-example`.
+The example for this combination lives at [`terraform/postgres/aws/ecs-fargate/`][4] in `dd-database-monitoring-example`.
 
 ```bash
 git clone https://github.com/DataDog/dd-database-monitoring-example.git
-cd dd-database-monitoring-example/terraform/postgres/rds/ecs-fargate
+cd dd-database-monitoring-example/terraform/postgres/aws/ecs-fargate
 
 cp terraform.tfvars.example terraform.tfvars
 # Fill in: vpc_id, subnet_ids, rds_security_group_id, rds_endpoint,
@@ -201,11 +201,11 @@ The example supports two modes:
 
 ## Apply the Terraform
 
-The example for this combination lives at [`terraform/postgres/rds/amazon-eks/`][6] in `dd-database-monitoring-example`.
+The example for this combination lives at [`terraform/postgres/aws/amazon-eks/`][6] in `dd-database-monitoring-example`.
 
 ```bash
 git clone https://github.com/DataDog/dd-database-monitoring-example.git
-cd dd-database-monitoring-example/terraform/postgres/rds/amazon-eks
+cd dd-database-monitoring-example/terraform/postgres/aws/amazon-eks
 
 cp terraform.tfvars.example terraform.tfvars
 # Pick BYO or greenfield in the file header, then fill in the rest:
@@ -309,8 +309,8 @@ For the manual setup today, see the per-database setup pages from [Database Moni
 [1]: https://github.com/DataDog/dd-database-monitoring-example
 [2]: /database_monitoring/
 [3]: /database_monitoring/setup_postgres/rds/
-[4]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/rds/ecs-fargate
-[5]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/rds/ecs-fargate/variables.tf
-[6]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/rds/amazon-eks
-[7]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/rds/amazon-eks/README.md
-[8]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/rds/amazon-eks/variables.tf
+[4]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/ecs-fargate
+[5]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/ecs-fargate/variables.tf
+[6]: https://github.com/DataDog/dd-database-monitoring-example/tree/main/terraform/postgres/aws/amazon-eks
+[7]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/amazon-eks/README.md
+[8]: https://github.com/DataDog/dd-database-monitoring-example/blob/main/terraform/postgres/aws/amazon-eks/variables.tf
