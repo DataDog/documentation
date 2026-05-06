@@ -77,10 +77,10 @@ Alternatively, query the following span attributes directly:
 
 Each LLM span in a trace is priced independently. The warning appears when one or more LLM spans in the trace are missing a cost estimate:
 
-- **PARTIAL COST**: Some LLM spans in the trace have a cost, while others do not. The **Estimated Cost** value reflects only the priced spans.
-- **COST UNAVAILABLE**: None of the LLM spans in the trace have a cost.
+- **PARTIAL COST**: Costs were computed for some LLM spans in the trace, but not for the rest. The **Estimated Cost** value reflects the sum of only the spans for which cost was computed.
+- **COST UNAVAILABLE**: Cost could not be computed for any of the LLM spans in the trace.
 
-Hover over the warning to see how many spans are missing cost, the reason for each missing cost, and the names of the affected spans. The reasons fall into one of the following categories.
+Hover over the warning to see how many spans are missing cost, the reasons for missing cost, and the names of the affected spans. The reasons fall into one of the following categories.
 
 #### Unsupported model provider
 
@@ -100,7 +100,7 @@ How to fix:
 
 #### Missing token counts
 
-The span has no `input_tokens` or `output_tokens` annotation, so Datadog has no token values to multiply by the per-token rate. (For embedding spans, only `input_tokens` is required.)
+The span has no `input_tokens` or `output_tokens` annotation, so Datadog has no token values to compute the costs from. (For embedding spans, only `input_tokens` is required.)
 
 How to fix:
 - For [auto-instrumentation][1], confirm your provider and SDK version are supported.
