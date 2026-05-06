@@ -3808,6 +3808,11 @@ menu:
       parent: nm_parent
       identifier: ndm
       weight: 3
+    - name: Summary Page
+      url: network_monitoring/devices/summary
+      parent: ndm
+      identifier: ndm_summary
+      weight: 300
     - name: Setup
       url: network_monitoring/devices/setup
       parent: ndm
