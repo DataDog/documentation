@@ -89,6 +89,6 @@ With BYOC Logs running, you can:
 [2]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [3]: https://docs.docker.com/get-docker/
 [4]: https://app.datadoghq.com/byoc-logs
-[5]: https://app.datadoghq.com/logs?query=index=cloudprem-demo&storage=hot
+[5]: https://app.datadoghq.com/logs
 [6]: /byoc-logs/ingest/agent/
 [7]: /byoc-logs/ingest/observability_pipelines/
