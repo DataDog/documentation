@@ -10,7 +10,7 @@ Feature Monitoring is in Preview.
 
 ## Overview
 
-**Feature Monitoring** lets you track the health of critical user flows—such as login, checkout, or media streaming—from a single place. For any given flow, you can answer:
+**Feature Monitoring** lets you track the health of critical user flows such as login, checkout, or media streaming, all from a single place. For any given flow, you can answer:
 - Are users experiencing friction?
 - How fast and reliable is performance?
 - Are issues coming from the frontend, network, or backend?
@@ -30,12 +30,22 @@ For each feature, you can:
 - Measure the performance of critical steps in the feature with [RUM operations][13]
 - Share a unified view of feature health across engineering, product, and developer operations teams
 
-## Setup
+## Prerequisites
 
 Feature Monitoring requires the following products for frontend applications, each contributing different data to your features:
 
 - **[RUM without Limits][5]** and **[Product Analytics][8]**: Traffic, conversion rate, time-to-convert metrics, and performance.
 - **[Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]**: Uptime tracking through the feature's automatically created test suite.
+
+## Feature structure
+
+The start and end of a feature can be either action or view events from [Real User Monitoring][1].
+
+Each feature can have one or more variants. A variant is a specific sequence of intermediate steps a user takes between the feature's start and end. Different users naturally take different paths. For example, some may skip optional steps while others take detours before completing the feature.
+
+## Setup
+
+Define a feature by selecting its start and end events, then extend coverage with data from your other Digital Experience products.
 
 ### Step 1 - Create a feature
 
@@ -54,7 +64,7 @@ The right-hand funnel chart updates automatically based on the selected start an
 
 **Note**: Mandatory fields are pre-populated if you start from a suggested feature.
 
-You can also add a description, attribute filters, team ownership, tags, and [variants][9]. Clicking **Save Feature** creates the feature and redirects you to the feature's [details report][12]. The details report is automatically populated with metrics on the feature's volume, conversion rate, and average time to completion.
+You can also add a description, attribute filters, team ownership, tags, and [variants][9]. Clicking **Save Feature** creates the feature and redirects you to the feature's [details report][12]. The details report includes metrics on the feature's volume, conversion rate, and average time to completion.
 
 ### Step 3 - Add coverage from other products
 
@@ -63,15 +73,7 @@ In the feature's details report, you can extend monitoring coverage based on the
 - Create [RUM operations][13] to monitor the performance of critical steps in the feature in your real user environment
 - Add Synthetic tests to the feature's [test suite][15] to start tracking uptime
 
-If you already have any pre-created RUM operations or Synthetic tests that cover the feature, Datadog automatically surfaces the operation or test in the feature's details report.
-
-## Feature structure
-
-A feature is defined as a start and an end. The start and end can either be action or view events.
-
-Each feature can have one or more variants. A variant is a specific sequence of intermediate steps a user takes between the feature's start and end. Different users naturally take different paths — for example, some may skip optional steps while others take detours before completing the feature.
-
-[INSERT DIAGRAM HERE]
+If you already have pre-created RUM operations or Synthetic tests that cover the feature, Datadog surfaces the operation or test in the feature's details report.
 
 ## Metrics
 
