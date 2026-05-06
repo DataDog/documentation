@@ -20,17 +20,17 @@ The Markdoc `docs` collection in [src/content.config.ts](../src/content.config.t
 
 - [src/content.config.ts](../src/content.config.ts) — remove the four API collections from the imports and the `collections` export. Keep only `docs`.
 - [src/data/api/views.ts](../src/data/api/views.ts) — rewrite the body of `getCategoriesView`, `getCategoryViewBySlug`, `getEndpointsView` to walk the parsed spec directly instead of calling `getCollection` / `getEntry`. Keep the **exported function signatures and return types unchanged** so callers don't need updating. Add module-scoped caches (`Map<lang, ApiCategory[]>` and `Map<${lang}:${slug}, EndpointData[]>`) to avoid re-walking on each call.
-  - Walk the spec via `getSpec(version)` from [src/data/api/spec.ts](../src/data/api/spec.ts).
-  - For each `(lang, version, operationId)`: apply translation overlays via [src/data/api/translations.ts](../src/data/api/translations.ts), then resolve params/request body/responses using the helpers in [src/data/api/operationData.ts](../src/data/api/operationData.ts) and [src/data/api/resolver.ts](../src/data/api/resolver.ts). Generate curl variants with `buildCurlByRegion`. Pull SDK examples with `getCodeExamplesForOperation` from [src/data/api/examples.ts](../src/data/api/examples.ts). Don't change any helper signatures.
+  - Walk the spec via `getOpenApiDocument(version)` from [src/data/api/specParser.ts](../src/data/api/specParser.ts).
+  - For each `(lang, version, operationId)`: apply translation overlays via [src/data/api/translationsLoader.ts](../src/data/api/translationsLoader.ts), then resolve params/request body/responses using the helpers in [src/data/api/operationData.ts](../src/data/api/operationData.ts) and [src/data/api/resolver.ts](../src/data/api/resolver.ts). Generate curl variants with `buildCurlByRegion`. Pull SDK examples with `getCodeExamplesForOperation` from [src/data/api/examples.ts](../src/data/api/examples.ts). Don't change any helper signatures.
   - Apply the same `SLUG_OVERRIDES` map (`'case-management' → 'cases'`, `'scorecards' → 'service-scorecards'`) and `toSlug` helper that the loaders had.
   - Slug derived from the **untranslated English summary** (so deep links survive locale switches) — `toSlug(operation.summary)`, not the translated summary.
 
 #### Keep as-is
 
-- [src/data/api/spec.ts](../src/data/api/spec.ts) — shared spec parser
+- [src/data/api/specParser.ts](../src/data/api/specParser.ts) — shared spec parser
 - [src/data/api/operationData.ts](../src/data/api/operationData.ts) — extraction helpers (`splitParameters`, `extractRequestBody`, `extractResponses`, `extractPermissions`, `extractOauthScopes`, `buildCurlByRegion`)
 - [src/data/api/resolver.ts](../src/data/api/resolver.ts) — `$ref` resolution and `schemaToFields`
-- [src/data/api/regions.ts](../src/data/api/regions.ts), [curl.ts](../src/data/api/curl.ts), [markdown.ts](../src/data/api/markdown.ts), [translations.ts](../src/data/api/translations.ts), [examples.ts](../src/data/api/examples.ts), [highlight.ts](../src/data/api/highlight.ts), [pageTitles.ts](../src/data/api/pageTitles.ts) — all unchanged
+- [src/data/api/regions.ts](../src/data/api/regions.ts), [curl.ts](../src/data/api/curl.ts), [markdown.ts](../src/data/api/markdown.ts), [translationsLoader.ts](../src/data/api/translationsLoader.ts), [examples.ts](../src/data/api/examples.ts), [highlight.ts](../src/data/api/highlight.ts), [pageTitles.ts](../src/data/api/pageTitles.ts) — all unchanged
 - All page consumers of `views.ts` (`[category].astro`, `[category].md.ts`, `llms.txt.ts`, the four static pages, `ApiLayout.astro`, `ApiSideNav.astro`) — unchanged
 
 ### Two correctness fixes that MUST stay in place

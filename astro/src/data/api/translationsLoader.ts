@@ -10,8 +10,6 @@
  * coverage is owned upstream — this site does not warn on gaps.
  */
 
-import type { Locale } from '../../lib/i18n/locale';
-
 export interface TagTranslation {
   name?: string;
   description?: string;
@@ -27,16 +25,17 @@ export interface ActionTranslation {
 type TagOverlay = Record<string, TagTranslation>;
 type ActionOverlay = Record<string, ActionTranslation>;
 
-type ApiVersion = 'v1' | 'v2';
+type ApiVersion = "v1" | "v2";
 
 const tagModules: Record<string, TagOverlay> = import.meta.glob<TagOverlay>(
-  '@hugo-site/data/api/v*/translate_tags.*.json',
-  { eager: true, import: 'default' },
+  "@hugo-site/data/api/v*/translate_tags.*.json",
+  { eager: true, import: "default" },
 );
-const actionModules: Record<string, ActionOverlay> = import.meta.glob<ActionOverlay>(
-  '@hugo-site/data/api/v*/translate_actions.*.json',
-  { eager: true, import: 'default' },
-);
+const actionModules: Record<string, ActionOverlay> =
+  import.meta.glob<ActionOverlay>(
+    "@hugo-site/data/api/v*/translate_actions.*.json",
+    { eager: true, import: "default" },
+  );
 
 const TAG_OVERLAY_RE = /\/(v1|v2)\/translate_tags\.([a-z]{2})\.json$/;
 const ACTION_OVERLAY_RE = /\/(v1|v2)\/translate_actions\.([a-z]{2})\.json$/;
@@ -62,8 +61,8 @@ function bundleKey(version: ApiVersion, lang: string): string {
  * an empty bundle (the spec is the source of truth). Missing JSON files for
  * a locale also return an empty bundle — by design.
  */
-export function getOverlay(version: ApiVersion, lang: string): OverlayBundle {
-  if (lang === 'en') {
+export function getTranslationOverlay(version: ApiVersion, lang: string): OverlayBundle {
+  if (lang === "en") {
     return EMPTY_BUNDLE;
   }
 

@@ -8,10 +8,11 @@
  */
 
 import { DEFAULT_LOCALE, LOCALES, type Locale } from '../../lib/i18n/locale';
-import { API_VERSIONS, getSpec, type ApiVersion } from './spec';
+import { API_VERSIONS, getOpenApiDocument, type ApiVersion } from './specParser';
+import type { OpenAPIV3 } from 'openapi-types';
 import { renderMarkdown, renderMarkdownInline } from './markdown';
 import { getRegions, buildApiUrlFromServers } from './regions';
-import { getOverlay, translateAction, translateTag } from './translations';
+import { getTranslationOverlay, translateAction, translateTag } from './translationsLoader';
 import {
   splitParameters,
   extractRequestBody,
@@ -110,7 +111,7 @@ function getAllOperations(): RawOperation[] {
   const result: RawOperation[] = [];
 
   for (const version of API_VERSIONS) {
-    const spec = getSpec(version);
+    const spec = getOpenApiDocument(version);
     const paths = spec?.paths;
     if (!paths || typeof paths !== 'object') continue;
 
@@ -150,8 +151,8 @@ function buildCategories(lang: Locale): ApiCategory[] {
   const opsByCategory = new Map<string, ApiOperationStub[]>();
 
   for (const version of API_VERSIONS) {
-    const spec = getSpec(version);
-    const overlay = getOverlay(version, lang);
+    const spec = getOpenApiDocument(version);
+    const overlay = getTranslationOverlay(version, lang);
 
     for (const tag of spec?.tags ?? []) {
       const rawSlug = toSlug(tag.name);
@@ -166,13 +167,13 @@ function buildCategories(lang: Locale): ApiCategory[] {
         name: translated.name,
         slug,
         description: translated.description ? renderMarkdown(translated.description) : '',
-        deprecated: tag['x-deprecated'] === true,
+        deprecated: (tag as OpenAPIV3.TagObject & { 'x-deprecated'?: boolean })['x-deprecated'] === true,
       });
     }
   }
 
   for (const op of getAllOperations()) {
-    const overlay = getOverlay(op.version, lang);
+    const overlay = getTranslationOverlay(op.version, lang);
 
     if (!categoryMap.has(op.categorySlug)) {
       const translated = translateTag(overlay, op.categorySlug, { name: op.primaryTag });
@@ -250,8 +251,8 @@ function buildEndpoints(slug: string, lang: Locale): EndpointData[] {
   });
 
   return matches.map((op) => {
-    const spec = getSpec(op.version);
-    const overlay = getOverlay(op.version, lang);
+    const spec = getOpenApiDocument(op.version);
+    const overlay = getTranslationOverlay(op.version, lang);
     const operationId: string = op.operation.operationId;
     const action = translateAction(overlay, operationId);
 

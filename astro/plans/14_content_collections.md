@@ -23,7 +23,7 @@ Create the content collections, and use them to render the API docs pages. Prefe
 | `data/api/index.ts` `getApiCategories(lang)` | `apiCategories` collection loader |
 | `data/api/endpoints.ts` `getEndpointsForCategory(slug, lang)` | `apiOperations` collection loader |
 | `data/api/resolver.ts` `resolveRef`, `schemaToFields` | Helper, called by all loaders |
-| `data/api/translations.ts` `getOverlay`, `translateTag`, `translateAction` | Helper, called by `apiCategories` and `apiOperations` loaders |
+| `data/api/translationsLoader.ts` `getTranslationOverlay`, `translateTag`, `translateAction` | Helper, called by `apiCategories` and `apiOperations` loaders |
 | `data/api/examples.ts` `getCodeExamplesForOperation` | `apiCodeExamples` collection loader |
 | `data/api/curl.ts` `generateCurl` | Helper, called by `apiCodeExamples` loader |
 | `data/api/regions.ts` `getRegions`, `buildApiUrlFromServers` | Helper, called by `apiOperations` and `apiCodeExamples` loaders |
