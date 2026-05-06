@@ -24,7 +24,7 @@ The test details page opens after a Synthetic browser test executes and is organ
 On the **Activity** tab, you can see:
 
 - The **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime visualization displays red only if the [alert conditions][20] configured for a test are triggered in the given time interval. Since location uptime is computed based on the final test result after retries complete, [fast retry][24] intervals directly impact what appears in your total uptime graph. For more information about uptime monitoring, see the [Website Uptime Monitoring with SLOs][14] guide.
-- A **Timeline** of alert triggers, recoveries, and summary periods.
+- A **Timeline** of alert triggers, recoveries, and test modifications.
 - A detail panel for the selected alert showing what happened, the failing result, and suggested next steps for investigation.
 
 {{< img src="synthetics/browser_tests/synthetics_test_details_sre.png" alt="The Activity tab on a browser Test Details page showing Global Uptime, an alert timeline, and a failure detail panel" style="width=80%" >}}
@@ -48,7 +48,7 @@ Date
 : The relative time and timestamp when the run executed.
 
 Run Type
-: The type of test run (scheduled, CI, fast retry, or manually triggered).
+: The type of test run (scheduled, CI, or manually triggered).
 
 Steps
 : The number of test steps completed out of the total configured for the run.
@@ -236,7 +236,7 @@ To help during the investigation, click **Compare Screenshots** to receive side-
 
 ## Test events
 
-Alerts from your Synthetic test monitors appear on the timeline in the [**Activity** tab](#test-activity), where you can review alert triggers, recoveries, and summary periods alongside the global uptime graph. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][18] and enter `Event Type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][13].
+Alerts from your Synthetic test monitors appear on the timeline in the [**Activity** tab](#test-activity), where you can review alert triggers, recoveries, and summary periods alongside the global uptime graph. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][18] and enter `@evt.type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][13].
 
 ## Further Reading
 
