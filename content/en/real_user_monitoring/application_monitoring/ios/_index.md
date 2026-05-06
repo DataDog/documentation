@@ -33,7 +33,7 @@ To get started with RUM for Apple platforms, create an application and configure
   {{< nextlink href="/real_user_monitoring/application_monitoring/ios/mobile_vitals">}}<u>Mobile Vitals</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/ios/web_view_tracking/?tab=ios">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/ios/integrated_libraries">}}
-  <u>Integrated Libraries</u>: Import integrated libraries you can use for your iOS and tvOS applications.{{< /nextlink >}}
+  <u>Integrated Libraries</u>: Import integrated libraries you can use for your Apple platform applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/ios/troubleshooting">}}
   <u>Troubleshooting</u>: Common troubleshooting iOS SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}
