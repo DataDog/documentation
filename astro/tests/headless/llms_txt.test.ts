@@ -6,14 +6,18 @@ vi.mock('../../src/data/api/views', () => ({
       slug: 'action-connection',
       name: 'Action Connection',
       description: '',
-      operations: [],
+      operations: [
+        { operationId: 'GetConnection', summary: 'Get a connection', slug: 'get-a-connection', menuOrder: 1, version: 'v2', method: 'GET' },
+      ],
       deprecated: false,
     },
     {
       slug: 'aws-integration',
       name: 'AWS Integration',
       description: '',
-      operations: [],
+      operations: [
+        { operationId: 'CreateRole', summary: 'Create role', slug: 'create-role', menuOrder: 1, version: 'v1', method: 'POST' },
+      ],
       deprecated: false,
     },
   ]),
@@ -35,11 +39,13 @@ describe('GET /llms.txt', () => {
     expect(body.startsWith('## Datadog API Reference\n\n')).toBe(true);
   });
 
-  it('includes one bullet per known API category', async () => {
+  it('includes a heading per category and a bullet per operation', async () => {
     const res = (await GET(ctx)) as Response;
     const body = await res.text();
-    expect(body).toMatch(/- \[Action Connection\]\(https:\/\/docs\.datadoghq\.com\/api\/latest\/action-connection\.md\)/);
-    expect(body).toMatch(/- \[AWS Integration\]\(https:\/\/docs\.datadoghq\.com\/api\/latest\/aws-integration\.md\)/);
+    expect(body).toContain('### Action Connection');
+    expect(body).toMatch(/- \[Get a connection\]\(https:\/\/docs\.datadoghq\.com\/api\/latest\/action-connection\/get-a-connection\.md\)/);
+    expect(body).toContain('### AWS Integration');
+    expect(body).toMatch(/- \[Create role\]\(https:\/\/docs\.datadoghq\.com\/api\/latest\/aws-integration\/create-role\.md\)/);
   });
 
   it('throws when site is not configured', async () => {

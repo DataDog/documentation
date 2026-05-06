@@ -76,11 +76,20 @@ function renderCodeExampleSection(ep: EndpointData): string {
   return ['### Code Example', '', renderApiCodeExampleMd(ep.codeExamples)].join('\n');
 }
 
-export function renderApiEndpointMd(ep: EndpointData): string {
+export interface RenderApiEndpointMdOptions {
+  /** Heading level for the operation summary. Defaults to 2 (used inside category pages). */
+  headingLevel?: 1 | 2;
+}
+
+export function renderApiEndpointMd(
+  ep: EndpointData,
+  options: RenderApiEndpointMdOptions = {},
+): string {
   const blocks: string[] = [];
 
+  const headingMarker = options.headingLevel === 1 ? '#' : '##';
   const versionSuffix = ep.version === 'v2' ? ' (v2 — latest)' : ` (${ep.version})`;
-  blocks.push(`## ${ep.summary}${versionSuffix}`);
+  blocks.push(`${headingMarker} ${ep.summary}${versionSuffix}`);
 
   if (ep.deprecated) {
     blocks.push(renderApiStatusAlertMd({ type: 'deprecated', newerVersionUrl: ep.newerVersionUrl }));

@@ -30,6 +30,7 @@ export interface ApiOperationStub {
   slug: string;
   menuOrder: number;
   version: 'v1' | 'v2';
+  method: string;
 }
 
 export interface ApiCategory {
@@ -92,7 +93,7 @@ function toSlug(name: string): string {
 }
 
 const categoriesCache = new Map<Locale, ApiCategory[]>();
-const endpointsCache = new Map<string, EndpointData[]>();
+const endpointCache = new Map<string, EndpointData>();
 
 interface RawOperation {
   version: ApiVersion;
@@ -105,6 +106,7 @@ interface RawOperation {
 }
 
 let _allOperations: RawOperation[] | null = null;
+let _slugByOp: Map<RawOperation, string> | null = null;
 
 function getAllOperations(): RawOperation[] {
   if (_allOperations) return _allOperations;
@@ -137,6 +139,36 @@ function getAllOperations(): RawOperation[] {
 
   _allOperations = result;
   return result;
+}
+
+/**
+ * Build a `RawOperation -> slug` map, disambiguating colliding summary slugs
+ * within a category by appending the API version. Two operations in the
+ * same category can share an operation summary across v1/v2 (e.g.
+ * `aws-integration` exposes "List all AWS integrations" in both versions),
+ * so we keep slugs unique by category to guarantee one page per operation.
+ */
+function getSlugByOp(): Map<RawOperation, string> {
+  if (_slugByOp) return _slugByOp;
+  const ops = getAllOperations();
+  const counts = new Map<string, number>();
+  for (const op of ops) {
+    const key = `${op.categorySlug}:${toSlug(op.operation.summary ?? '')}`;
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  const map = new Map<RawOperation, string>();
+  for (const op of ops) {
+    const baseSlug = toSlug(op.operation.summary ?? '');
+    const key = `${op.categorySlug}:${baseSlug}`;
+    const slug = (counts.get(key) ?? 0) > 1 ? `${baseSlug}-${op.version}` : baseSlug;
+    map.set(op, slug);
+  }
+  _slugByOp = map;
+  return map;
+}
+
+function getOpSlug(op: RawOperation): string {
+  return getSlugByOp().get(op) ?? toSlug(op.operation.summary ?? '');
 }
 
 function buildCategories(lang: Locale): ApiCategory[] {
@@ -189,7 +221,7 @@ function buildCategories(lang: Locale): ApiCategory[] {
     const action = translateAction(overlay, operationId);
     const summary: string = action.summary ?? op.operation.summary ?? '';
     const menuOrder: number = op.operation['x-menu-order'] ?? 999;
-    const slug = toSlug(op.operation.summary ?? '');
+    const slug = getOpSlug(op);
 
     const list = opsByCategory.get(op.categorySlug) ?? [];
     list.push({
@@ -198,6 +230,7 @@ function buildCategories(lang: Locale): ApiCategory[] {
       slug,
       menuOrder,
       version: op.version,
+      method: op.method.toUpperCase(),
     });
     opsByCategory.set(op.categorySlug, list);
   }
@@ -236,138 +269,130 @@ export async function getCategoryViewBySlug(
   return all.find((c) => c.slug === slug);
 }
 
-function buildEndpoints(slug: string, lang: Locale): EndpointData[] {
-  const matches: RawOperation[] = getAllOperations().filter(
-    (op) => op.categorySlug === slug,
-  );
+function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
+  const spec = getOpenApiDocument(op.version);
+  const overlay = getTranslationOverlay(op.version, lang);
+  const operationId: string = op.operation.operationId;
+  const action = translateAction(overlay, operationId);
 
-  matches.sort((a, b) => {
-    const ao: number = a.operation['x-menu-order'] ?? 999;
-    const bo: number = b.operation['x-menu-order'] ?? 999;
-    if (ao !== bo) return ao - bo;
-    const aSummary: string = a.operation.summary ?? '';
-    const bSummary: string = b.operation.summary ?? '';
-    return aSummary.localeCompare(bSummary);
-  });
+  const summary: string = action.summary ?? op.operation.summary ?? '';
+  const description: string = renderMarkdown(action.description ?? op.operation.description ?? '');
+  const deprecated: boolean = op.operation.deprecated === true;
+  const unstable: boolean = !!op.operation['x-unstable'];
+  const unstableMessage: string | undefined =
+    typeof op.operation['x-unstable'] === 'string'
+      ? renderMarkdownInline(op.operation['x-unstable'])
+      : undefined;
 
-  return matches.map((op) => {
-    const spec = getOpenApiDocument(op.version);
-    const overlay = getTranslationOverlay(op.version, lang);
-    const operationId: string = op.operation.operationId;
-    const action = translateAction(overlay, operationId);
+  const permissions = extractPermissions(op.operation);
+  const oauthScopes = extractOauthScopes(op.operation.security);
 
-    const summary: string = action.summary ?? op.operation.summary ?? '';
-    const description: string = renderMarkdown(action.description ?? op.operation.description ?? '');
-    const deprecated: boolean = op.operation.deprecated === true;
-    const unstable: boolean = !!op.operation['x-unstable'];
-    const unstableMessage: string | undefined =
-      typeof op.operation['x-unstable'] === 'string'
-        ? renderMarkdownInline(op.operation['x-unstable'])
+  const regions = getRegions(spec, op.operation);
+  const operationServers = op.operation?.servers ?? spec?.servers;
+  const regionUrls: Record<string, string> = {};
+  for (const region of regions) {
+    regionUrls[region.key] = buildApiUrlFromServers(operationServers, region.site, op.pathStr);
+  }
+
+  const opSlug = getOpSlug(op);
+
+  const mergedParameters = [
+    ...(op.pathItem.parameters ?? []),
+    ...(op.operation.parameters ?? []),
+  ];
+  const params = splitParameters(spec, mergedParameters);
+  const pathParams = params.path.length > 0 ? paramsToFields(spec, params.path) : undefined;
+  const queryParams = params.query.length > 0 ? paramsToFields(spec, params.query) : undefined;
+  const headerParams = params.header.length > 0 ? paramsToFields(spec, params.header) : undefined;
+
+  const requestBody = extractRequestBody(spec, op.operation);
+  if (requestBody) {
+    if (action.request_description !== undefined) {
+      requestBody.description = action.request_description
+        ? renderMarkdownInline(action.request_description)
         : undefined;
-
-    const permissions = extractPermissions(op.operation);
-    const oauthScopes = extractOauthScopes(op.operation.security);
-
-    const regions = getRegions(spec, op.operation);
-    const operationServers = op.operation?.servers ?? spec?.servers;
-    const regionUrls: Record<string, string> = {};
-    for (const region of regions) {
-      regionUrls[region.key] = buildApiUrlFromServers(operationServers, region.site, op.pathStr);
     }
-
-    const opSlug = toSlug(op.operation.summary ?? '');
-
-    const mergedParameters = [
-      ...(op.pathItem.parameters ?? []),
-      ...(op.operation.parameters ?? []),
-    ];
-    const params = splitParameters(spec, mergedParameters);
-    const pathParams = params.path.length > 0 ? paramsToFields(spec, params.path) : undefined;
-    const queryParams = params.query.length > 0 ? paramsToFields(spec, params.query) : undefined;
-    const headerParams = params.header.length > 0 ? paramsToFields(spec, params.header) : undefined;
-
-    const requestBody = extractRequestBody(spec, op.operation);
-    if (requestBody) {
-      if (action.request_description !== undefined) {
-        requestBody.description = action.request_description
-          ? renderMarkdownInline(action.request_description)
-          : undefined;
-      }
-      if (action.request_schema_description !== undefined && requestBody.schema.length > 0) {
-        requestBody.schema[0].description = action.request_schema_description;
-      }
+    if (action.request_schema_description !== undefined && requestBody.schema.length > 0) {
+      requestBody.schema[0].description = action.request_schema_description;
     }
+  }
 
-    const responses = extractResponses(spec, op.operation);
+  const responses = extractResponses(spec, op.operation);
 
-    const requestBodyJson = requestBody?.examples?.[0]?.value;
-    const curlByRegion = buildCurlByRegion(
-      spec,
-      op.method,
-      op.pathStr,
-      op.operation,
-      params,
-      requestBodyJson,
-    );
-    const regionKeys = Object.keys(curlByRegion);
-    const defaultRegionKey = regionKeys[0] ?? 'us';
-    const defaultCurl = curlByRegion[defaultRegionKey] ?? '';
-    const curlVariants: Record<string, { code: string }> = {};
-    for (const [key, code] of Object.entries(curlByRegion)) {
-      curlVariants[key] = { code };
-    }
+  const requestBodyJson = requestBody?.examples?.[0]?.value;
+  const curlByRegion = buildCurlByRegion(
+    spec,
+    op.method,
+    op.pathStr,
+    op.operation,
+    params,
+    requestBodyJson,
+  );
+  const regionKeys = Object.keys(curlByRegion);
+  const defaultRegionKey = regionKeys[0] ?? 'us';
+  const defaultCurl = curlByRegion[defaultRegionKey] ?? '';
+  const curlVariants: Record<string, { code: string }> = {};
+  for (const [key, code] of Object.entries(curlByRegion)) {
+    curlVariants[key] = { code };
+  }
 
-    const sdkExamples = getCodeExamplesForOperation(operationId, op.version, op.primaryTag);
+  const sdkExamples = getCodeExamplesForOperation(operationId, op.version, op.primaryTag);
 
-    const codeExamples: CodeExampleSet[] = [
-      {
-        language: 'curl',
-        label: 'Curl',
-        entries: [
-          {
-            description: `${summary} curl example`,
-            code: defaultCurl,
-            syntax: 'bash',
-            regionVariants: curlVariants,
-          },
-        ],
-      },
-      ...sdkExamples,
-    ];
+  const codeExamples: CodeExampleSet[] = [
+    {
+      language: 'curl',
+      label: 'Curl',
+      entries: [
+        {
+          description: `${summary} curl example`,
+          code: defaultCurl,
+          syntax: 'bash',
+          regionVariants: curlVariants,
+        },
+      ],
+    },
+    ...sdkExamples,
+  ];
 
-    return {
-      operationId,
-      summary,
-      slug: opSlug,
-      method: op.method.toUpperCase(),
-      path: op.pathStr,
-      description,
-      version: op.version,
-      deprecated,
-      unstable,
-      unstableMessage,
-      permissions,
-      oauthScopes,
-      regionUrls,
-      pathParams,
-      queryParams,
-      headerParams,
-      requestBody,
-      responses,
-      codeExamples,
-    };
-  });
+  return {
+    operationId,
+    summary,
+    slug: opSlug,
+    method: op.method.toUpperCase(),
+    path: op.pathStr,
+    description,
+    version: op.version,
+    deprecated,
+    unstable,
+    unstableMessage,
+    permissions,
+    oauthScopes,
+    regionUrls,
+    pathParams,
+    queryParams,
+    headerParams,
+    requestBody,
+    responses,
+    codeExamples,
+  };
 }
 
-export async function getEndpointsView(
-  slug: string,
+export async function getEndpointView(
+  catSlug: string,
+  opSlug: string,
   lang: Locale = DEFAULT_LOCALE,
-): Promise<EndpointData[]> {
+): Promise<EndpointData | undefined> {
   if (!LOCALES.includes(lang)) lang = DEFAULT_LOCALE;
-  const key = `${lang}:${slug}`;
-  const cached = endpointsCache.get(key);
+  const key = `${lang}:${catSlug}:${opSlug}`;
+  const cached = endpointCache.get(key);
   if (cached) return cached;
-  const built = buildEndpoints(slug, lang);
-  endpointsCache.set(key, built);
+
+  const match = getAllOperations().find(
+    (op) => op.categorySlug === catSlug && getOpSlug(op) === opSlug,
+  );
+  if (!match) return undefined;
+
+  const built = buildEndpoint(match, lang);
+  endpointCache.set(key, built);
   return built;
 }

@@ -14,17 +14,18 @@ interface Props {
   description?: string;
   categories: ApiCategory[];
   currentSlug?: string;
+  currentOperationSlug?: string;
   breadcrumbs?: BreadcrumbItem[];
 }
 
-const { title, description, categories, currentSlug, breadcrumbs } = Astro.props;
+const { title, description, categories, currentSlug, currentOperationSlug, breadcrumbs } = Astro.props;
 const { lang: currentLang, rest: unprefixedPath } = stripLocalePrefix(Astro.url.pathname);
 const hreflang = buildHreflangAlternates(unprefixedPath);
 ---
 
 <BaseLayout title={title} description={description} lang={currentLang} hreflang={hreflang}>
   <div class="api-shell">
-    <ApiSideNav categories={categories} currentSlug={currentSlug} />
+    <ApiSideNav categories={categories} currentSlug={currentSlug} currentOperationSlug={currentOperationSlug} />
     <main class="api-main">
       <div class="api-toolbar">
         {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}

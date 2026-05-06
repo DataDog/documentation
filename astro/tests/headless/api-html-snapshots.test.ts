@@ -12,19 +12,50 @@ interface AuditPage {
   url: string;
 }
 
+/**
+ * Audit set per the README. Each entry covers a meaningful rendering
+ * variation. Static pages and category landing pages are sampled at
+ * the page level; representative operation pages exercise the per-op
+ * route added by the shorter-API-pages migration.
+ */
 const AUDIT_PAGES: AuditPage[] = [
+  // 1-4: Static pages (no operations)
   { name: '01-api-latest-index', url: '/api/latest/' },
   { name: '02-using-the-api', url: '/api/latest/using-the-api/' },
   { name: '03-rate-limits', url: '/api/latest/rate-limits/' },
   { name: '04-scopes', url: '/api/latest/scopes/' },
-  { name: '05-authentication', url: '/api/latest/authentication/' },
-  { name: '06-dashboards', url: '/api/latest/dashboards/' },
-  { name: '07-incidents', url: '/api/latest/incidents/' },
-  { name: '08-aws-integration', url: '/api/latest/aws-integration/' },
-  { name: '09-monitors', url: '/api/latest/monitors/' },
-  { name: '10-dashboard-lists', url: '/api/latest/dashboard-lists/' },
-  { name: '11-screenboards', url: '/api/latest/screenboards/' },
-  { name: '12-usage-metering', url: '/api/latest/usage-metering/' },
+
+  // 5-12: One landing page + one representative operation per dynamic category.
+  // Operation choice per category captures a meaningful variant (deprecated,
+  // unstable, mixed v1+v2, etc.) so a regression in any rendering path shows
+  // up in at least one operation snapshot.
+  { name: '05-authentication-landing', url: '/api/latest/authentication/' },
+  { name: '05-authentication-validate-api-key', url: '/api/latest/authentication/validate-api-key/' },
+
+  { name: '06-dashboards-landing', url: '/api/latest/dashboards/' },
+  { name: '06-dashboards-get-a-dashboard', url: '/api/latest/dashboards/get-a-dashboard/' },
+
+  { name: '07-incidents-landing', url: '/api/latest/incidents/' },
+  { name: '07-incidents-create-an-incident', url: '/api/latest/incidents/create-an-incident/' },
+
+  // aws-integration: collision case — same summary in v1 and v2 produces two
+  // distinct pages (`-v1` and `-v2` suffixes). Capture both.
+  { name: '08-aws-integration-landing', url: '/api/latest/aws-integration/' },
+  { name: '08-aws-integration-list-v1', url: '/api/latest/aws-integration/list-all-aws-integrations-v1/' },
+  { name: '08-aws-integration-list-v2', url: '/api/latest/aws-integration/list-all-aws-integrations-v2/' },
+
+  { name: '09-monitors-landing', url: '/api/latest/monitors/' },
+  { name: '09-monitors-create-a-monitor', url: '/api/latest/monitors/create-a-monitor/' },
+
+  // dashboard-lists: category-level deprecation (with endpoints).
+  { name: '10-dashboard-lists-landing', url: '/api/latest/dashboard-lists/' },
+  { name: '10-dashboard-lists-get-all-dashboard-lists', url: '/api/latest/dashboard-lists/get-all-dashboard-lists/' },
+
+  // screenboards: empty deprecated category (no operations to sample).
+  { name: '11-screenboards-landing', url: '/api/latest/screenboards/' },
+
+  { name: '12-usage-metering-landing', url: '/api/latest/usage-metering/' },
+  { name: '12-usage-metering-get-hourly-usage-for-lambda', url: '/api/latest/usage-metering/get-hourly-usage-for-lambda/' },
 ];
 
 function distFile(urlPath: string): string {
@@ -63,7 +94,6 @@ function normalize(html: string): string {
   // Component-generated IDs that include an 8-hex-char tail, e.g.:
   //   id="api-response-accf4936"   id="api-response-accf4936-panel-0"
   //   aria-controls="..."   data-foo="..."
-  // We match the 8-hex chunk and canonicalize it.
   out = out.replace(/\b[a-f0-9]{8}\b/g, (raw) => canonicalize(raw));
 
   return out;

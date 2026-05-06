@@ -23,6 +23,15 @@ const categories = [
         slug: 'get-a-dashboard',
         menuOrder: 1,
         version: 'v1' as const,
+        method: 'GET',
+      },
+      {
+        operationId: 'createDashboard',
+        summary: 'Create a dashboard',
+        slug: 'create-a-dashboard',
+        menuOrder: 2,
+        version: 'v1' as const,
+        method: 'POST',
       },
     ],
   },
@@ -46,14 +55,15 @@ describe('ApiSideNav component', () => {
     expect(html).toContain('/api/latest/monitors/');
   });
 
-  it('renders operations under their parent category', async () => {
+  it('links each operation to its own page (not a hash anchor)', async () => {
     const container = await createContainer();
     const html = await container.renderToString(ApiSideNav, {
       props: { categories, currentSlug: 'dashboards' },
     });
 
     expect(html).toContain('Get a dashboard');
-    expect(html).toContain('#get-a-dashboard');
+    expect(html).toContain('/api/latest/dashboards/get-a-dashboard/');
+    expect(html).not.toContain('#get-a-dashboard');
   });
 
   it('flags the current category with the active modifier', async () => {
@@ -63,6 +73,24 @@ describe('ApiSideNav component', () => {
     });
 
     expect(html).toMatch(/api-side-nav__category--active/);
+  });
+
+  it('flags the current operation with the active modifier when both slugs are passed', async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(ApiSideNav, {
+      props: {
+        categories,
+        currentSlug: 'dashboards',
+        currentOperationSlug: 'get-a-dashboard',
+      },
+    });
+
+    expect(html).toMatch(/api-side-nav__operation--active/);
+    // Only one operation should carry the active modifier (Get a dashboard).
+    const matches = html.match(/api-side-nav__operation--active/g) ?? [];
+    expect(matches.length).toBeGreaterThanOrEqual(1);
+    // The non-active operation link should still be present without the modifier.
+    expect(html).toContain('Create a dashboard');
   });
 
   it('renders the SearchBar in the dedicated slot at the top of the nav', async () => {

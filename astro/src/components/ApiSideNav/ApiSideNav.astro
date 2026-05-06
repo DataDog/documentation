@@ -8,10 +8,11 @@ import { DEFAULT_LOCALE, localizedHref, type Locale } from '../../lib/i18n/local
 interface Props {
   categories: ApiCategory[];
   currentSlug?: string;
+  currentOperationSlug?: string;
   lang?: Locale;
 }
 
-const { categories, currentSlug, lang = DEFAULT_LOCALE } = Astro.props;
+const { categories, currentSlug, currentOperationSlug, lang = DEFAULT_LOCALE } = Astro.props;
 const cl = classListFactory(styles);
 ---
 
@@ -35,13 +36,19 @@ const cl = classListFactory(styles);
             {cat.name}
           </a>
           <ul class:list={[cl('api-side-nav__operations'), isActive && cl('api-side-nav__operations--expanded')]}>
-            {cat.operations.map((op) => (
-              <li>
-                <a href={`${categoryHref}#${op.slug}`} class={cl('api-side-nav__operation')}>
-                  {op.summary}
-                </a>
-              </li>
-            ))}
+            {cat.operations.map((op) => {
+              const isOpActive = isActive && op.slug === currentOperationSlug;
+              return (
+                <li>
+                  <a
+                    href={`${categoryHref}${op.slug}/`}
+                    class:list={[cl('api-side-nav__operation'), isOpActive && cl('api-side-nav__operation--active')]}
+                  >
+                    {op.summary}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </li>
       );

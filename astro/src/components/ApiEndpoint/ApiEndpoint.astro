@@ -45,9 +45,11 @@ interface EndpointData {
 
 interface Props {
   data: string; // JSON string of EndpointData
+  headingLevel?: 1 | 2;
 }
 
-const { data: dataJson } = Astro.props;
+const { data: dataJson, headingLevel = 2 } = Astro.props;
+const HeadingTag = headingLevel === 1 ? 'h1' : 'h2';
 
 let ep: EndpointData | null = null;
 try {
@@ -74,10 +76,10 @@ const hasParams = ep && (
     )}
 
     {/* Heading + method badge + path */}
-    <h2 id={ep.slug} class={cl('api-endpoint__heading')}>
+    <HeadingTag id={ep.slug} class={cl('api-endpoint__heading')}>
       {ep.summary}
       {ep.version && <span class={cl('api-endpoint__version-badge')}>{ep.version === 'v2' ? 'v2 (latest)' : ep.version}</span>}
-    </h2>
+    </HeadingTag>
     <div class={cl('api-endpoint__url-line')}>
       <ApiMethodBadge method={ep.method} />
       {allRegions.map((region) => {

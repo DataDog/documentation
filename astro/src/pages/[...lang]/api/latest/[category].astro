@@ -1,8 +1,8 @@
 ---
 import ApiLayout from '../../../../layouts/ApiLayout.astro';
-import ApiEndpoint from '../../../../components/ApiEndpoint/ApiEndpoint.astro';
-import { getCategoriesView, getCategoryViewBySlug, getEndpointsView } from '../../../../data/api/views';
-import { highlightEndpoints } from '../../../../data/api/highlight';
+import ApiMethodBadge from '../../../../components/ApiMethodBadge/ApiMethodBadge.astro';
+import ApiStatusAlert from '../../../../components/ApiStatusAlert/ApiStatusAlert.astro';
+import { getCategoriesView, getCategoryViewBySlug } from '../../../../data/api/views';
 import { getApiPageTitle } from '../../../../data/api/pageTitles';
 import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/i18n/locale';
 import { htmlToMetaDescription } from '../../../../lib/seo';
@@ -40,8 +40,8 @@ if (!current) {
   return new Response(null, { status: 404 });
 }
 
-const endpoints = await getEndpointsView(slug, lang);
-await highlightEndpoints(endpoints);
+const validOpSlugs = current.operations.map((op) => op.slug);
+const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
 ---
 
 <ApiLayout
@@ -56,12 +56,59 @@ await highlightEndpoints(endpoints);
   ]}
 >
   <h1>{current.name}</h1>
+  {current.deprecated && <ApiStatusAlert type="deprecated" />}
   {current.description && (
     <div set:html={current.description} />
   )}
-  {endpoints.map((ep) => (
-    <ApiEndpoint data={JSON.stringify(ep)}>
-      <Fragment set:html={ep.description} />
-    </ApiEndpoint>
-  ))}
+  {current.operations.length > 0 && (
+    <ul class="api-category-toc">
+      {current.operations.map((op) => (
+        <li class="api-category-toc__item">
+          <ApiMethodBadge method={op.method} />
+          <a href={`${categoryBaseHref}${op.slug}/`} class="api-category-toc__link">
+            {op.summary}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
 </ApiLayout>
+
+{/*
+  Backward-compat hop: links from the Hugo era of the form
+  `/api/latest/<cat>/#<op-slug>` should land on the new per-operation page.
+  Browsers do not send the hash to the server, so this must run client-side.
+*/}
+<script is:inline define:vars={{ baseHref: categoryBaseHref, validOpSlugs }}>
+  (function () {
+    if (!window.location.hash) return;
+    const slug = window.location.hash.slice(1);
+    if (!slug || !validOpSlugs.includes(slug)) return;
+    window.location.replace(baseHref + slug + '/');
+  })();
+</script>
+
+<style>
+  .api-category-toc {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-md) 0 0 0;
+  }
+
+  .api-category-toc__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-2xs) 0;
+  }
+
+  .api-category-toc__link {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .api-category-toc__link:hover {
+    color: var(--color-brand);
+    text-decoration: underline;
+  }
+</style>

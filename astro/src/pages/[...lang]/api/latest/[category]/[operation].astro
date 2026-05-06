@@ -1,0 +1,70 @@
+---
+import ApiLayout from '../../../../../layouts/ApiLayout.astro';
+import ApiEndpoint from '../../../../../components/ApiEndpoint/ApiEndpoint.astro';
+import { getCategoriesView, getCategoryViewBySlug, getEndpointView } from '../../../../../data/api/views';
+import { highlightEndpoint } from '../../../../../data/api/highlight';
+import { getApiPageTitle } from '../../../../../data/api/pageTitles';
+import { LOCALES, parseLangParam, localizedHref } from '../../../../../lib/i18n/locale';
+import { htmlToMetaDescription } from '../../../../../lib/seo';
+import { i18n } from '../../../../../lib/i18n/i18n';
+import type { GetStaticPaths, GetStaticPathsResult } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: GetStaticPathsResult = [];
+  for (const lang of LOCALES) {
+    for (const cat of await getCategoriesView(lang)) {
+      for (const op of cat.operations) {
+        paths.push({
+          params: {
+            lang: lang === 'en' ? undefined : lang,
+            category: cat.slug,
+            operation: op.slug,
+          },
+        });
+      }
+    }
+  }
+  return paths;
+};
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+const catSlug = Astro.params.category;
+const opSlug = Astro.params.operation;
+if (!catSlug || typeof catSlug !== 'string' || !opSlug || typeof opSlug !== 'string') {
+  return new Response(null, { status: 404 });
+}
+
+const categories = await getCategoriesView(lang);
+const category = await getCategoryViewBySlug(catSlug, lang);
+if (!category) {
+  return new Response(null, { status: 404 });
+}
+
+const endpoint = await getEndpointView(catSlug, opSlug, lang);
+if (!endpoint) {
+  return new Response(null, { status: 404 });
+}
+
+await highlightEndpoint(endpoint);
+---
+
+<ApiLayout
+  title={`${endpoint.summary} - ${category.name} - Datadog API`}
+  description={htmlToMetaDescription(endpoint.description) || `${endpoint.summary} endpoint in the Datadog API.`}
+  categories={categories}
+  currentSlug={catSlug}
+  currentOperationSlug={opSlug}
+  breadcrumbs={[
+    { label: i18n('docs', lang), href: localizedHref(lang, '/') },
+    { label: getApiPageTitle('', lang) ?? 'API Reference', href: localizedHref(lang, '/api/latest/') },
+    { label: endpoint.summary },
+  ]}
+>
+  <ApiEndpoint data={JSON.stringify(endpoint)} headingLevel={1}>
+    <Fragment set:html={endpoint.description} />
+  </ApiEndpoint>
+</ApiLayout>

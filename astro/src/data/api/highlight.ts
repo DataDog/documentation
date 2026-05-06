@@ -29,51 +29,30 @@ async function highlight(code: string, lang: string): Promise<string | undefined
   }
 }
 
-/**
- * Walk all code examples in the given endpoints and populate
- * `highlightedCode` on each entry. Mutates the endpoints in place.
- */
-export async function highlightEndpoints(endpoints: EndpointData[]): Promise<void> {
-  const jobs: Promise<void>[] = [];
+function collectHighlightJobs(ep: EndpointData, jobs: Promise<void>[]): void {
+  for (const exSet of ep.codeExamples) {
+    for (const entry of exSet.entries) {
+      jobs.push(
+        highlight(entry.code, entry.syntax).then((html) => {
+          if (html) entry.highlightedCode = html;
+        })
+      );
 
-  for (const ep of endpoints) {
-    for (const exSet of ep.codeExamples) {
-      for (const entry of exSet.entries) {
-        jobs.push(
-          highlight(entry.code, entry.syntax).then((html) => {
-            if (html) entry.highlightedCode = html;
-          })
-        );
-
-        // Highlight per-region variants (used by curl).
-        if (entry.regionVariants) {
-          for (const variant of Object.values(entry.regionVariants)) {
-            jobs.push(
-              highlight(variant.code, entry.syntax).then((html) => {
-                if (html) variant.highlightedCode = html;
-              })
-            );
-          }
-        }
-      }
-    }
-
-    // Highlight response examples
-    for (const resp of ep.responses) {
-      if (resp.examples) {
-        for (const ex of resp.examples) {
+      if (entry.regionVariants) {
+        for (const variant of Object.values(entry.regionVariants)) {
           jobs.push(
-            highlight(ex.value, 'json').then((html) => {
-              if (html) ex.highlightedValue = html;
+            highlight(variant.code, entry.syntax).then((html) => {
+              if (html) variant.highlightedCode = html;
             })
           );
         }
       }
     }
+  }
 
-    // Highlight request body examples
-    if (ep.requestBody) {
-      for (const ex of ep.requestBody.examples) {
+  for (const resp of ep.responses) {
+    if (resp.examples) {
+      for (const ex of resp.examples) {
         jobs.push(
           highlight(ex.value, 'json').then((html) => {
             if (html) ex.highlightedValue = html;
@@ -83,5 +62,23 @@ export async function highlightEndpoints(endpoints: EndpointData[]): Promise<voi
     }
   }
 
+  if (ep.requestBody) {
+    for (const ex of ep.requestBody.examples) {
+      jobs.push(
+        highlight(ex.value, 'json').then((html) => {
+          if (html) ex.highlightedValue = html;
+        })
+      );
+    }
+  }
+}
+
+/**
+ * Walk all code examples in a single endpoint and populate `highlightedCode`
+ * on each entry. Mutates the endpoint in place.
+ */
+export async function highlightEndpoint(endpoint: EndpointData): Promise<void> {
+  const jobs: Promise<void>[] = [];
+  collectHighlightJobs(endpoint, jobs);
   await Promise.all(jobs);
 }

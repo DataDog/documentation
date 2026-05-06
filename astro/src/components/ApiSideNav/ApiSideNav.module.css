@@ -100,3 +100,8 @@
 .api-side-nav__operation:hover {
   color: var(--color-brand);
 }
+
+.api-side-nav__operation--active {
+  color: var(--color-brand);
+  font-weight: var(--font-weight-semibold);
+}
