@@ -72,7 +72,7 @@ key.
 
 To create a SAT for a service account:
 
-1. Click the service account in the list. The details panel appears.
+1. Navigate to [**Organization Settings** > **Service Accounts**][2] and click a service account. The details panel appears.
 2. Under **Access Tokens**, click {{< ui >}}+ New Token{{< /ui >}}.
 3. Follow the steps in [Create a Service Access Token][5].
 
