@@ -253,15 +253,92 @@ Supply a JavaScript function to assign an assessment based on the output from th
 
 }
 ```
-and the function signature must look lik
+and the function signature must look like (the function below is )
 ```
 function __evalPostProcessing(input) {
-    // FUNCTION LOGIC
-    return {
-        assessment: "pass",
-        value: "label",
-        reasoning: "the reasoning"
+    /*
+     * Expected input shape (from LLM evaluator [this depends on the JSON Structured Output]):
+     * {
+     *   criteria: {
+     *     quality_score: { score: number (0–1), category: "excellent"|"good"|"poor", reasoning: string },
+     *     toxicity:      { score: number (0–1), category: "safe"|"unsafe",           reasoning: string },
+     *     completeness:  { score: number (0–1), category: "complete"|"incomplete",   reasoning: string },
+     *     relevance:     { score: number (0–1), category: "relevant"|"irrelevant",   reasoning: string },
+     *   },
+     *   overall_reasoning: string  // (optional) top-level summary from LLM evaluator
+     * }
+     */
+
+    const SCORE_THRESHOLD = 0.7;
+
+    // Category → pass/fail mappings per criterion
+    const CATEGORY_PASS_MAP = {
+        quality_score: ["excellent", "good"],
+        toxicity:      ["safe"],
+        completeness:  ["complete"],
+        relevance:     ["relevant"],
+    };
+
+    const criteriaResults = {};
+    const failures = [];
+    const passes = [];
+
+    for (const [criterionName, passCategories] of Object.entries(CATEGORY_PASS_MAP)) {
+        const criterion = input?.criteria?.[criterionName];
+
+        if (!criterion) {
+            failures.push(`[${criterionName}] Missing from evaluator output.`);
+            criteriaResults[criterionName] = false;
+            continue;
+        }
+
+        const { score, category, reasoning } = criterion;
+
+        const scorePass    = typeof score === "number" && score >= SCORE_THRESHOLD;
+        const categoryPass = typeof category === "string" && passCategories.includes(category.toLowerCase());
+
+        // Both score AND category must pass
+        const criterionPass = scorePass && categoryPass;
+        criteriaResults[criterionName] = criterionPass;
+
+        if (criterionPass) {
+            passes.push(`[${criterionName}] PASS — score: ${score.toFixed(2)}, category: "${category}". ${reasoning ?? ""}`);
+        } else {
+            const reasons = [];
+            if (!scorePass)    reasons.push(`score ${score?.toFixed(2) ?? "N/A"} below threshold (≥${SCORE_THRESHOLD})`);
+            if (!categoryPass) reasons.push(`category "${category}" not in acceptable set [${passCategories.join(", ")}]`);
+            failures.push(`[${criterionName}] FAIL — ${reasons.join("; ")}. ${reasoning ?? ""}`);
+        }
     }
+
+    // Determine overall assessment
+    const passed = Object.values(criteriaResults).every(Boolean);
+    const failCount = failures.length;
+
+    const assessment = passed ? "pass" : "fail";
+
+    const label = passed
+        ? "high_quality_response"
+        : failCount === 1
+            ? "minor_quality_issue"
+            : failCount === 2
+                ? "moderate_quality_issue"
+                : "low_quality_response";
+
+    const reasoningParts = [
+        passed
+            ? "All criteria passed."
+            : `${failCount} criterion/criteria failed.`,
+        ...failures,
+        ...passes,
+        input?.overall_reasoning ? `Evaluator summary: ${input.overall_reasoning}` : ""
+    ].filter(Boolean);
+
+    return {
+        assessment: assessment,
+        value: label,
+        reasoning: reasoningParts.join(" | ")
+    };
 }
 ```
 {{% /tab %}}
