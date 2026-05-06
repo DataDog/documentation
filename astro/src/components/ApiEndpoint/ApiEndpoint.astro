@@ -8,8 +8,8 @@ import ApiRequestBodyTabs from '../ApiRequestBodyTabs/ApiRequestBodyTabs.astro';
 import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
 import type { ResponseData } from '../ApiResponse/ApiResponse.astro';
 import type { CodeExampleSet } from '../ApiCodeExample/ApiCodeExample.astro';
-import { getDefaultRegions } from '../../data/api/regionResolver';
-import { renderMarkdownInline } from '../../data/api/markdownRenderer';
+import { getDefaultRegions } from '../../lib/api/regionResolver';
+import { renderMarkdownInline } from '../../lib/api/markdownRenderer';
 import styles from './ApiEndpoint.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 

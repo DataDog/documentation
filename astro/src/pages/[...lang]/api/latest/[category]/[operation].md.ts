@@ -1,7 +1,7 @@
-import type { APIRoute, GetStaticPaths } from 'astro';
-import { getCategoriesView, getEndpointView } from '../../../../../data/api/viewsBuilder';
-import { renderApiEndpointMd } from '../../../../../components/ApiEndpoint/plaintext/ApiEndpoint.md';
-import { LOCALES, parseLangParam } from '../../../../../lib/i18n/locale';
+import type { APIRoute, GetStaticPaths } from "astro";
+import { getCategoriesView, getEndpointView } from "@lib/api/viewsBuilder";
+import { renderApiEndpointMd } from "@components/ApiEndpoint/plaintext/ApiEndpoint.md";
+import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: ReturnType<GetStaticPaths> = [];
@@ -10,7 +10,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       for (const op of cat.operations) {
         paths.push({
           params: {
-            lang: lang === 'en' ? undefined : lang,
+            lang: lang === "en" ? undefined : lang,
             category: cat.slug,
             operation: op.slug,
           },
@@ -32,9 +32,9 @@ export const GET: APIRoute = async ({ params }) => {
   const endpoint = await getEndpointView(catSlug, opSlug, lang);
   if (!endpoint) return new Response(null, { status: 404 });
 
-  const body = renderApiEndpointMd(endpoint, { headingLevel: 1 }) + '\n';
+  const body = renderApiEndpointMd(endpoint, { headingLevel: 1 }) + "\n";
 
   return new Response(body, {
-    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
+    headers: { "Content-Type": "text/markdown; charset=utf-8" },
   });
 };

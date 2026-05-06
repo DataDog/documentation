@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 
-vi.mock('../../src/data/api/viewsBuilder', () => ({
+vi.mock('../../src/lib/api/viewsBuilder', () => ({
   getCategoriesView: vi.fn(async () => [
     {
       slug: 'action-connection',

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildCurlCommand } from "../../src/data/api/curlBuilder";
+import { buildCurlCommand } from "../../src/lib/api/curlBuilder";
 
 describe("buildCurlCommand", () => {
   it("generates a simple GET request", () => {

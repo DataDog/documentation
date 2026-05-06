@@ -1,9 +1,9 @@
 ---
-import ApiLayout from '../../../../layouts/ApiLayout.astro';
-import { getCategoriesView } from '../../../../data/api/viewsBuilder';
-import { getApiPageTitle } from '../../../../data/api/pageTitleBuilder';
-import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/i18n/locale';
-import { i18n } from '../../../../lib/i18n/i18n';
+import ApiLayout from '@layouts/ApiLayout.astro';
+import { getCategoriesView } from '@lib/api/viewsBuilder';
+import { getApiPageTitle } from '@lib/api/pageTitleBuilder';
+import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
+import { i18n } from '@lib/i18n/i18n';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = () => {

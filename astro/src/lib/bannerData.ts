@@ -1,13 +1,13 @@
 /**
  * Typed loader for the announcement banner's site params and the geo-target
- * webinar list. Both come from mocked_dependencies snapshots — swap these
+ * webinar list. Both come from mocked-dependencies snapshots — swap these
  * for a live feed by editing the two import paths.
  */
 import { parse as parseYaml } from 'yaml';
 // @ts-ignore — Vite raw import
 import PARAMS_EN_YAML_RAW from '@hugo-site/config/_default/params.en.yaml?raw';
 // @ts-ignore — Vite raw import
-import webinarsRaw from '../mocked_dependencies/hugo_site/data/en/webinars.yaml?raw';
+import webinarsRaw from '../mocked-dependencies/hugo_site/data/en/webinars.yaml?raw';
 
 export type BannerParams = {
   desktop_message?: string;

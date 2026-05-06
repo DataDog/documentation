@@ -69,8 +69,8 @@ Screenshot baselines are captured at 2x retina (1440×900 viewport, `deviceScale
 
 The API reference pages are generated at build time. The pipeline has three stages:
 
-1. **The spec parser** ([src/data/api/specParser.ts](src/data/api/specParser.ts)) loads the OpenAPI YAML into a JS object once per build.
-2. **Memoized view helpers** ([src/data/api/views.ts](src/data/api/views.ts)) walk the spec and assemble component-ready view shapes on demand.
+1. **The spec parser** ([src/lib/api/specParser.ts](src/lib/api/specParser.ts)) loads the OpenAPI YAML into a JS object once per build.
+2. **Memoized view helpers** ([src/lib/api/views.ts](src/lib/api/views.ts)) walk the spec and assemble component-ready view shapes on demand.
 3. **Astro routes** ([src/pages/\[...lang\]/api/latest/\[category\].astro](src/pages/%5B...lang%5D/api/latest/%5Bcategory%5D.astro)) render the pages.
 
 ### 1. YAML source specs
@@ -80,19 +80,17 @@ Two OpenAPI 3.x spec files are the source of truth for all API data:
 - `@hugo-site/data/api/v1/full_spec.yaml` — v1 endpoints
 - `@hugo-site/data/api/v2/full_spec.yaml` — v2 endpoints
 
-The `@hugo-site` Vite alias points at the sibling Hugo repo's `data/` folder until a shared source is wired up. Each spec contains `tags` (which map to page categories), `paths` (endpoint definitions), `components/schemas` (reusable data models), and `servers` (region-specific base URLs). The files are imported as raw strings via Vite's `?raw` import and parsed once per build by [`src/data/api/specParser.ts`](src/data/api/specParser.ts). 
+The `@hugo-site` Vite alias points at the sibling Hugo repo's `data/` folder until a shared source is wired up. Each spec contains `tags` (which map to page categories), `paths` (endpoint definitions), `components/schemas` (reusable data models), and `servers` (region-specific base URLs). The files are imported as raw strings via Vite's `?raw` import and parsed once per build by [`src/lib/api/specParser.ts`](src/lib/api/specParser.ts). 
 
 The parser does not validate the spec structure at runtime — it trusts that the YAML files are valid OpenAPI 3.x, as enforced upstream by OpenAPI linting tools. The parsed result is typed as `OpenAPIV3.Document` from `openapi-types` for compile-time type safety.
 
-Translation overlays for non-English locales live alongside the specs (`translate_tags.{lang}.json`, `translate_actions.{lang}.json`) and are loaded by [`src/data/api/translationsLoader.ts`](src/data/api/translationsLoader.ts). 
+Translation overlays for non-English locales live alongside the specs (`translate_tags.{lang}.json`, `translate_actions.{lang}.json`) and are loaded by [`src/lib/api/translationsLoader.ts`](src/lib/api/translationsLoader.ts). 
 
 At build time, Vite's `import.meta.glob` eagerly inlines all matching JSON files into a single object keyed by file path. `getTranslationOverlay(version, lang)` then uses a regex to find the right file for a given `(version, lang)` pair, assembles a bundle of tag and action overlays, and caches it in a `Map<"v1|v2:lang", OverlayBundle>` so the filesystem scan only happens once per pair. English short-circuits to an empty bundle — the spec is the source of truth for English.
 
 ### 2. View helpers
 
-[`src/data/api/views.ts`](src/data/api/views.ts) is the public surface for pages.
-
-> **Why not Astro content collections?** An earlier branch modeled the API data as four content collections (`apiCategories`, `apiOperations`, `apiSchemas`, `apiCodeExamples`). That approach was reverted: the API data is a single structured YAML file consumed by one route family, not authored content spread across many files. Content collections add a data-layer abstraction — and significant memory overhead — without a payoff here (no second consumer queries them; no markdown rendering; no auto-generated routes). Plain memoized functions that walk the spec directly are simpler and use far less memory at build time. The `docs` collection (authored `.mdoc` files) is a legitimate use of content collections and remains. It walks the parsed specs directly, resolves `$ref`s on demand, and assembles the `ApiCategory` and `EndpointData` view shapes that components consume. Module-scoped caches memoize the results: a `Map<lang, ApiCategory[]>` for categories and a `Map<${lang}:${catSlug}:${opSlug}, EndpointData>` for individual endpoints.
+[`src/lib/api/viewsBuilder.ts`](src/lib/api/viewsBuilder.ts) is the public surface for pages. It walks the parsed specs directly, resolves `$ref`s on demand, and assembles the `ApiCategory` and `EndpointData` view shapes that components consume. Module-scoped caches memoize the results: a `Map<lang, ApiCategory[]>` for categories and a `Map<${lang}:${catSlug}:${opSlug}, EndpointData>` for individual endpoints.
 
 | View helper | Returns | Work |
 |---|---|---|
@@ -102,7 +100,7 @@ At build time, Vite's `import.meta.glob` eagerly inlines all matching JSON files
 
 The leaf helpers (`schemaToFields`, `extractRequestBody`, `extractResponses`, `paramsToFields`, `buildCurlByRegion`, `buildCurlCommand`, `getRegions`, `getTranslationOverlay`, `translateAction`, `renderMarkdown`) are pure functions that take a parsed spec and operation/schema object.
 
-[`src/data/api/highlight.ts`](src/data/api/highlight.ts) runs Shiki syntax highlighting over the resolved `EndpointData` at page render time, mutating the entries in place. Highlighting stays at the page boundary so the cached view shapes don't carry highlighted HTML on first build.
+[`src/lib/api/highlight.ts`](src/lib/api/highlight.ts) runs Shiki syntax highlighting over the resolved `EndpointData` at page render time, mutating the entries in place. Highlighting stays at the page boundary so the cached view shapes don't carry highlighted HTML on first build.
 
 ### 3. Page generation (Astro routes)
 

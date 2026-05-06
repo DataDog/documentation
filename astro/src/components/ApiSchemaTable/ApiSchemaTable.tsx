@@ -2,7 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import styles from './ApiSchemaTable.module.css';
 import { classListFactory } from '../../utils/classListFactory';
-import { renderMarkdownInline } from '../../data/api/markdownRenderer';
+import { renderMarkdownInline } from '../../lib/api/markdownRenderer';
 
 const cl = classListFactory(styles);
 

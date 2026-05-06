@@ -1,13 +1,13 @@
 ---
-import ApiLayout from '../../../../../layouts/ApiLayout.astro';
-import ApiEndpoint from '../../../../../components/ApiEndpoint/ApiEndpoint.astro';
-import { getCategoriesView, getCategoryViewBySlug, getEndpointView } from '../../../../../data/api/viewsBuilder';
-import { renderMarkdown } from '../../../../../data/api/markdownRenderer';
-import { highlightEndpoint } from '../../../../../data/api/syntaxHighlighter';
-import { getApiPageTitle } from '../../../../../data/api/pageTitleBuilder';
-import { LOCALES, parseLangParam, localizedHref } from '../../../../../lib/i18n/locale';
-import { mdToMetaDescription } from '../../../../../lib/seo';
-import { i18n } from '../../../../../lib/i18n/i18n';
+import ApiLayout from '@layouts/ApiLayout.astro';
+import ApiEndpoint from '@components/ApiEndpoint/ApiEndpoint.astro';
+import { getCategoriesView, getCategoryViewBySlug, getEndpointView } from '@lib/api/viewsBuilder';
+import { renderMarkdown } from '@lib/api/markdownRenderer';
+import { highlightEndpoint } from '@lib/api/syntaxHighlighter';
+import { getApiPageTitle } from '@lib/api/pageTitleBuilder';
+import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
+import { mdToMetaDescription } from '@lib/seo';
+import { i18n } from '@lib/i18n/i18n';
 import type { GetStaticPaths, GetStaticPathsResult } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {

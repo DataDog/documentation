@@ -8,7 +8,7 @@ type: interactive
 
 Fixed site-wide banner rendered at the top of every page by `BaseLayout`. Ported from the Hugo `announcement_banner` partial — dimensions, colors, and z-index match the Hugo site pixel-for-pixel. The banner you see above this content is the component itself.
 
-The banner reads its copy from the mocked `announcement_banner` block in `mocked_dependencies/hugo_site/config/_default/params.en.yaml`. A geo-targeting inline script (`GeoTargetScript.astro`) swaps the copy when `mocked_dependencies/hugo_site/data/en/webinars.yaml` contains a webinar whose country codes match the visitor's.
+The banner reads its copy from the mocked `announcement_banner` block in `mocked-dependencies/hugo_site/config/_default/params.en.yaml`. A geo-targeting inline script (`GeoTargetScript.astro`) swaps the copy when `mocked-dependencies/hugo_site/data/en/webinars.yaml` contains a webinar whose country codes match the visitor's.
 
 ## Properties
 

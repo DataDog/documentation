@@ -25,7 +25,7 @@ const defaults: Record<string, { label: string; defaultMessage: string }> = {
 const config = defaults[type];
 const displayMessage = message || config.defaultMessage;
 
-import { renderMarkdownInline } from '../../data/api/markdownRenderer';
+import { renderMarkdownInline } from '../../lib/api/markdownRenderer';
 import styles from './ApiStatusAlert.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 const cl = classListFactory(styles);

@@ -8,7 +8,7 @@
  *   `assets/scripts/config/regions.config.js` and drive per-region labels and
  *   app-host lookups used at runtime (e.g. for referrer detection).
  *
- * Keeping both sources mocked under `mocked_dependencies/hugo_site/` means the
+ * Keeping both sources mocked under `mocked-dependencies/hugo_site/` means the
  * Astro site uses the same region keys (`us`, `eu`, `ap1`, …) as Hugo so the
  * `site` cookie and `?site=` query param transfer seamlessly between sites.
  *

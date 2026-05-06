@@ -5,7 +5,7 @@
  * the Hugo icon-font approach (<i class="icon-twitter-x">) with real SVGs.
  */
 const icons = import.meta.glob<string>(
-  '../../mocked_dependencies/websites_modules/static/icons/*.svg',
+  '../../mocked-dependencies/websites_modules/static/icons/*.svg',
   { query: '?raw', import: 'default', eager: true }
 );
 
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const { name, class: className, size } = Astro.props;
-const key = `../../mocked_dependencies/websites_modules/static/icons/${name}.svg`;
+const key = `../../mocked-dependencies/websites_modules/static/icons/${name}.svg`;
 const raw: string | undefined = icons[key];
 const style = size ? `width:${size};height:${size}` : undefined;
 ---

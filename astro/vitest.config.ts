@@ -7,7 +7,6 @@ export default getViteConfig({
       'tests/headless/**/*.test.ts',
       'src/components/**/*.test.ts',
       'src/utils/**/*.test.ts',
-      'src/data/**/*.test.ts',
       'src/lib/**/*.test.ts',
     ],
   },

@@ -3,7 +3,7 @@
  *
  * This module reads parsed OpenAPI spec objects and converts them to a flat,
  * component-ready format. It does NOT read files — it works with the parsed
- * YAML objects already loaded by `src/data/api/index.ts`.
+ * YAML objects already loaded by `src/lib/api/specParser.ts`.
  */
 
 
