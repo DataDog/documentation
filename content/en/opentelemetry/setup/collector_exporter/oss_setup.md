@@ -19,7 +19,7 @@ further_reading:
 Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Contrib][1] distribution with standard OpenTelemetry components. This setup uses the following key components:
 
 - **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
-- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features like the Service Catalog and Service Page.
+- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
 - **Resource detection processor**: Extracts host and cloud metadata for hostname resolution and tagging in Datadog.
 
 <!-- TODO: Replace with updated diagram showing OTLP HTTP exporter flow (no Datadog Exporter) -->
@@ -125,7 +125,7 @@ processors:
   cumulativetodelta: {}
 
 connectors:
-  # Separates trace processing from sampling so span metrics are computed on all traces
+  # Separate trace processing from sampling so span metrics are computed on all traces
   forward: {}
   # Generate RED (Rate, Error, Duration) metrics from traces for APM
   spanmetrics:
@@ -320,7 +320,7 @@ processors:
   cumulativetodelta: {}
 
 connectors:
-  # Separates trace processing from sampling so span metrics are computed on all traces
+  # Separate trace processing from sampling so span metrics are computed on all traces
   forward: {}
   # Generate RED (Rate, Error, Duration) metrics from traces for APM
   spanmetrics:
@@ -562,7 +562,7 @@ processors:
           - from: connection
 
 connectors:
-  # Separates trace processing from sampling so span metrics are computed on all traces
+  # Separate trace processing from sampling so span metrics are computed on all traces
   forward: {}
   # Generate RED (Rate, Error, Duration) metrics from traces for APM
   spanmetrics:
@@ -747,7 +747,7 @@ You can deploy the Collector as a DaemonSet in Kubernetes using the [official Op
 
 ### 3. Run the Collector
 
-Start the Collector with the recommended feature gate enabled. If you are using Docker or Kubernetes, the run command is included in the configuration tab above.
+Start the Collector with the recommended feature gate enabled. If you are using Docker or Kubernetes, the run command is included in the [Create the collector configuration](#2-create-the-collector-configuration) section.
 
 For Host installations, run:
 
@@ -817,13 +817,13 @@ For a complete list of dimensions included in the recommended configuration, see
 
 The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints. Key configuration details:
 
-- **Endpoint**: `https://otlp.{your_dd_site}` for traces and logs, `https://otlp.{your_dd_site}/api/v2/otlpmetrics` for metrics.
+- **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for traces and logs, `https://otlp.<YOUR_DD_SITE>/api/v2/otlpmetrics` for metrics.
 - **Compression**: `zstd` is recommended for reduced bandwidth usage. When using `zstd`, set `compression_params.level` explicitly, because the default uses the lowest compression level.
 - **Resource attributes as tags**: The `dd-otel-metric-config` header enables resource attributes and instrumentation scope metadata to be sent as metric tags.
 
 ### Datadog extension
 
-The `datadog` extension sends Collector metadata to Datadog for host enrichment. It does not export telemetry data—all telemetry flows through the OTLP HTTP exporter. This extension is part of the [OpenTelemetry Collector Contrib][1] project and handles API key validation and deployment type reporting.
+The `datadog` extension sends Collector metadata to Datadog for host enrichment. It does not export telemetry data. All telemetry flows through the OTLP HTTP exporter. This extension is part of the [OpenTelemetry Collector Contrib][1] project and handles API key validation and deployment type reporting.
 
 ### Cumulative-to-delta processor
 
