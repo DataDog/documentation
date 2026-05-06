@@ -59,6 +59,8 @@ Each finding is shown as a card with a title, a description of the issue, a seve
 
 A lightweight chat interface lets you follow up on the analysis: ask for more detail on a specific finding, request additional context, or explore related symptoms.
 
+{{< img src="real_user_monitoring/ai_investigations/single-view-ai-investigation-chat.png" alt="A chat interface inviting the user to ask follow-up questions about the issues found in the view." style="width:70%;" >}}
+
 Save investigations to a [Notebook][1] to share with your team for future reference.
 
 ## Further reading
