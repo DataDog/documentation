@@ -489,7 +489,7 @@
                       "description": "Rating of the response quality.",
                       "has_assessment": false,
                       "has_reasoning": false,
-                      "id": "ab12cd34",
+                      "id": "abc-123",
                       "is_assessment": false,
                       "is_integer": false,
                       "is_required": true,
@@ -512,9 +512,9 @@
                 "modified_by": "00000000-0000-0000-0000-000000000002",
                 "name": "My annotation queue",
                 "owned_by": "00000000-0000-0000-0000-000000000002",
-                "project_id": "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
+                "project_id": "00000000-0000-0000-0000-000000000002"
               },
-              "id": "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c",
+              "id": "00000000-0000-0000-0000-000000000001",
               "type": "queues"
             }
           ]
@@ -602,7 +602,7 @@
                     "description": "Rating of the response quality.",
                     "has_assessment": false,
                     "has_reasoning": false,
-                    "id": "ab12cd34",
+                    "id": "abc-123",
                     "is_assessment": false,
                     "is_integer": false,
                     "is_required": true,
@@ -625,9 +625,9 @@
               "modified_by": "00000000-0000-0000-0000-000000000002",
               "name": "My annotation queue",
               "owned_by": "00000000-0000-0000-0000-000000000002",
-              "project_id": "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
+              "project_id": "00000000-0000-0000-0000-000000000002"
             },
-            "id": "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c",
+            "id": "00000000-0000-0000-0000-000000000001",
             "type": "queues"
           }
         },
@@ -709,7 +709,7 @@
               ]
             },
             "name": "My annotation queue",
-            "project_id": "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
+            "project_id": "00000000-0000-0000-0000-000000000002"
           },
           "type": "queues"
         }
@@ -723,7 +723,7 @@
                   "description": "Rating of the response quality.",
                   "has_assessment": false,
                   "has_reasoning": false,
-                  "id": "ab12cd34",
+                  "id": "abc-123",
                   "is_assessment": false,
                   "is_integer": false,
                   "is_required": true,
@@ -741,7 +741,7 @@
             },
             "description": "Queue for annotating customer support traces",
             "name": "My annotation queue",
-            "project_id": "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
+            "project_id": "00000000-0000-0000-0000-000000000002"
           },
           "type": "queues"
         }
@@ -832,7 +832,7 @@
                     "description": "Rating of the response quality.",
                     "has_assessment": false,
                     "has_reasoning": false,
-                    "id": "ab12cd34",
+                    "id": "abc-123",
                     "is_assessment": false,
                     "is_integer": false,
                     "is_required": true,
@@ -855,9 +855,9 @@
               "modified_by": "00000000-0000-0000-0000-000000000002",
               "name": "My annotation queue",
               "owned_by": "00000000-0000-0000-0000-000000000002",
-              "project_id": "a33671aa-24fd-4dcd-9b33-a8ec7dde7751"
+              "project_id": "00000000-0000-0000-0000-000000000002"
             },
-            "id": "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c",
+            "id": "00000000-0000-0000-0000-000000000001",
             "type": "queues"
           }
         },
@@ -969,7 +969,7 @@
                   "description": "Rating of the response quality.",
                   "has_assessment": false,
                   "has_reasoning": false,
-                  "id": "ab12cd34",
+                  "id": "abc-123",
                   "is_assessment": false,
                   "is_integer": false,
                   "is_required": true,
@@ -1021,7 +1021,7 @@
                 }
               ]
             },
-            "id": "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c",
+            "id": "00000000-0000-0000-0000-000000000001",
             "type": "annotated_interactions"
           }
         },
@@ -1129,7 +1129,7 @@
                 }
               ]
             },
-            "id": "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c",
+            "id": "00000000-0000-0000-0000-000000000001",
             "type": "interactions"
           }
         },
@@ -1367,7 +1367,7 @@
                     "description": "Rating of the response quality.",
                     "has_assessment": false,
                     "has_reasoning": false,
-                    "id": "ab12cd34",
+                    "id": "abc-123",
                     "is_assessment": false,
                     "is_integer": false,
                     "is_required": true,
@@ -1384,7 +1384,7 @@
                 ]
               }
             },
-            "id": "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c",
+            "id": "00000000-0000-0000-0000-000000000001",
             "type": "queues"
           }
         },
@@ -1489,7 +1489,7 @@
                     "description": "Rating of the response quality.",
                     "has_assessment": false,
                     "has_reasoning": false,
-                    "id": "ab12cd34",
+                    "id": "abc-123",
                     "is_assessment": false,
                     "is_integer": false,
                     "is_required": true,
@@ -1506,7 +1506,7 @@
                 ]
               }
             },
-            "id": "b5e7f3a1-9c2d-4f8b-a1e6-3d7e9f0a2b4c",
+            "id": "00000000-0000-0000-0000-000000000001",
             "type": "queues"
           }
         },
@@ -1636,7 +1636,7 @@
                   "description": "Rating of the response quality.",
                   "has_assessment": false,
                   "has_reasoning": false,
-                  "id": "ab12cd34",
+                  "id": "abc-123",
                   "is_assessment": false,
                   "is_integer": false,
                   "is_required": true,
