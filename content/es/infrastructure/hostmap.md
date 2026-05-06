@@ -4,128 +4,60 @@ aliases:
 - /es/infrastructure/containermap/
 - /es/guides/hostmap
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-host-map
+  tag: Blog
+  text: Un nuevo mapa de servidores para infraestructura moderna
 - link: /infrastructure/livecontainers/
   tag: Documentación
-  text: Obtén visibilidad en tiempo real de todos los contenedores de tu entorno
+  text: Obtén visibilidad en tiempo real de todos los contenedores en tu entorno
 - link: /infrastructure/process/
   tag: Documentación
-  text: Comprender lo que sucede en cualquier nivel del sistema
-title: Mapas de hosts y contenedores
+  text: Entiende lo que está sucediendo en cualquier nivel de tu sistema
+title: Mapa de servidores
 ---
+El [mapa de servidores][1] de Datadog visualiza tus servidores, pods, contenedores y clústeres, ayudándote a entender y diagnosticar tu infraestructura.
 
-## Información general
+{{< img src="infrastructure/hostmap/new-host-map.png" alt="El mapa de servidores muestra los servidores agrupados por Availability Zone y coloreados por uso de CPU. Las celdas hexagonales varían de verde (bajo uso) a naranja-rojo (alto uso). Los grupos incluyen un grupo sin Availability Zone con 395 servidores, otro con eastus con 183 y otro con eastus-1 con 153, además de muchas otras regiones." style="width:100%;" >}}
 
-Los mapas de infraestructuras ([mapas de hosts][4] y [mapas de contenedores][5]) te ayudan a visualizar hosts y contenedores en una pantalla, con métricas que se destacan a través de distintos colores y formas.
+## Uso {#usage}
 
-{{< img src="infrastructure/containermap/containermap.png" alt="Un mapa de contenedores que muestra los contenedores como rectángulos agrupados por zona de disponibilidad de AWS." style="width:80%;">}}
+{{< img src="infrastructure/hostmap/query-selector.png" alt="El menú desplegable del selector de consultas muestra una lista de consultas sugeridas como '¿Cuál es el uso de CPU en mis servidores?' y '¿Cuántos errores se están registrando en mi infraestructura?', junto con consultas personalizadas guardadas. Un botón de Create y un campo de búsqueda de Filter views están en la parte superior." style="width:60%;" >}}
 
-Utiliza el selector desplegable de la parte superior izquierda para cambiar entre hosts y contenedores.
+Utiliza el menú desplegable en la esquina superior izquierda para ver consultas sugeridas, o las consultas personalizadas guardadas escritas por ti o por alguien más en tu organización. Para escribir una consulta personalizada, haz clic en {{< ui >}}Create{{< /ui >}}.
 
-## Instalación
+{{< img src="infrastructure/hostmap/draft-query.png" alt="El editor de Draft Query con dos niveles. El objeto padre está configurado como servidor con Rellenar por uso de CPU. El objeto hijo está configurado como pod con Rellenar por Readiness." style="width:100%;" >}}
 
-Después de desplegar el [Agent][6], no se necesita ninguna otra configuración. Para recopilar información del contenedor de Docker en la instalación estándar en lugar de con el [Docker Agent][7], el usuario `dd-agent` debe contar con permisos para acceder a `docker.sock`. El permiso se puede otorgar al añadir `dd-agent` al grupo `docker`.
+- {{< ui >}}Parent/Child Object{{< /ui >}}: Selecciona recursos ({{< ui >}}Host{{< /ui >}}, {{< ui >}}Pod{{< /ui >}}, {{< ui >}}Container{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}) para ver. Los objetos padre e hijo tienen relaciones jerárquicas.
+- {{< ui >}}Fill by{{< /ui >}}: Por defecto, el color de cada objeto representa el uso de CPU, donde el color varía de verde (0% utilizado) a naranja (100% utilizado). Utiliza el menú desplegable {{< ui >}}Fill by{{< /ui >}} para colorear tus objetos según diversas métricas o señales, como memoria o registros de errores.
+- {{< ui >}}Size by{{< /ui >}}: Si no especificas un objeto hijo, puedes usar el selector {{< ui >}}Size by{{< /ui >}} para dimensionar cada objeto según una métrica o señal.
+  {{< img src="infrastructure/hostmap/size-by.png" alt="El editor de consultas del mapa de servidores con el objeto padre configurado como servidor, Rellenar por configurado como uso de CPU y Tamaño por configurado como registros de errores. El mapa a continuación muestra 1.61k servidores como hexágonos de distintos tamaños y colores, con un tooltip en un servidor que muestra un uso promedio de CPU del 88%." style="width:85%;" >}}
+- {{< ui >}}Group by{{< /ui >}}: Organiza espacialmente tus objetos en grupos. Puedes usar múltiples agrupaciones. Por ejemplo, si agrupas por `tags.availability-zone` `tags.instance-type`, tus objetos se organizan primero por Availability Zone y luego se subdividen por tipo de instancia.
 
-## Uso
+  {{< img src="infrastructure/hostmap/group-by.png" alt="El mapa de servidores agrupado por las etiquetas tags.availability-zone y tags.instance-type. Los servidores se organizan primero en secciones de Availability Zone, como us-east-1a y us-east-1b, y luego se subdividen por tipo de instancia, como m5a.2xlarge y t2.micro. Las celdas se colorean según el uso de CPU de verde a naranja-rojo." style="width:85%;" >}}
+- {{< ui >}}Filter{{< /ui >}}: Limita el mapa de servidores a un subconjunto específico de tu infraestructura. Por ejemplo, puedes filtrar por `production` para ver solo tus recursos de producción. La entrada {{< ui >}}Filter{{< /ui >}} admite operadores lógicos (`AND`, `NOT`, `OR`) y comodines (`*`). Por ejemplo: `(tags.availability-zone:ap* OR tags.availability-zone:eu*) NOT tags.agent_version:5.3*`.
 
-### Filtro
+## Casos de uso {#use-cases}
 
-Utiliza la casilla de entrada **Filter** (Filtro) para limitar un mapa de infraestructuras a un subconjunto específico de una infraestructura. La barra de entrada de filtro de la parte superior izquierda permite filtrar el mapa de infraestructuras por etiquetas (tags), así como por los atributos que proporciona Datadog.
+### Solucionar el rendimiento degradado del servidor {#troubleshoot-degraded-server-performance}
 
-Si la barra de entrada de filtro está vacía, el mapa muestra todos los hosts/contenedores que informan la métrica seleccionada a Datadog.
+Identifica si los problemas de rendimiento provienen de servidores sobrecargados, pods no saludables, reinicios de contenedores o cuellos de botella a nivel de clúster. Verifica `kubernetes_state.pod.status:unready` o `system.cpu.user > 80` y utiliza visualizaciones jerárquicas para aislar la causa raíz.
 
-Por ejemplo, si etiquetas tus hosts por el entorno en el que se encuentran, puedes filtrar por «producción» para eliminar del mapa los hosts de tu entorno de prueba y otros entornos. Si deseas eliminar todos los roles de host excepto uno en producción, también añade ese rol al filtro; los filtros se combinan con `AND`.
+### Identifica los puntos críticos de costo {#identify-cost-hotspots}
+Identifica los clústeres, nodos o cargas de trabajo que contribuyen desproporcionadamente al gasto en la nube consultando etiquetas como `tags.kube_node_instance_type`, `tags.cloud_provider` o etiquetas de asignación personalizadas. Combina esto con señales de CPU y memoria de contenedores/servidores para detectar subaprovisionamiento o sobreaprovisionamiento.
 
-**Nota**: Existe una distinción entre filtrar por `tag:value` y `"tag:value"`. El filtrado por `tag:value` coincide estrictamente con la etiqueta, mientras que el filtrado por `"tag:value"` realiza una búsqueda en ese texto.
+### Gestión del Datadog Agent a nivel de flota {#fleet-wide-datadog-agent-management}
 
-### Grupo
+Encuentra servidores o contenedores que ejecuten versiones desactualizadas del Datadog Agent utilizando consultas como `tags.agent_version < 7.50`. Luego, agrupa por Availability Zone, clúster o servicio para impulsar la planificación de despliegues.
 
-Utiliza la casilla de entrada **Group** (Grupo) para organizar de manera espacial tus hosts/contenedores en grupos. Cualquier host/contenedor en un grupo comparte la etiqueta, o etiquetas, por el que se agrupa.  
+### Monitorea los despliegues de Kubernetes o las migraciones de infraestructura {#monitor-kubernetes-rollouts-or-infrastructure-migrations}.
 
-Por ejemplo, puedes agrupar tus hosts por zona de disponibilidad de AWS. Si añades una segunda etiqueta de agrupación, como tipo de instancia, los hosts se subdividen en grupos: primero por zona de disponibilidad y luego por tipo de instancia, como se muestra a continuación.
+Visualiza la distribución y salud de los pods, nodos y clústeres durante un despliegue o migración. Visualiza tus clústeres, anidados con pods, y observa los cambios en tiempo real para detectar regresiones.
 
-{{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="Un mapa de hosts donde los hosts (representados por hexágonos) se dividen en dos grupos, por zona de disponibilidad. Dentro de cada grupo de zonas de disponibilidad, los hosts se subdividen por tipo de instancia." >}}
+### Verifica la higiene de etiquetado y metadatos {#verify-tagging-and-metadata-hygiene}.
 
-### Relleno y tamaño
+Utiliza operadores lógicos para validar si tus servidores y pods están correctamente etiquetados para propiedad, entorno, región o asignación de costos. Por ejemplo, `tags.env:prod AND NOT (tags.team:*)` para mostrar recursos no asignados o etiquetados incorrectamente.
 
-De manera predeterminada, el color de cada host se establece para representar el porcentaje de uso de la CPU en ese host/contenedor, donde el color va del verde (0 % utilizado) al naranja (100 % utilizado). Puedes seleccionar diferentes métricas desde el selector **Fill** (Relleno).  
-
-Los mapas de infraestructuras también pueden comunicar una métrica opcional adicional con el tamaño del hexágono o rectángulo. Puedes seleccionar esta métrica en el selector **Size** (Tamaño). 
-
-**Nota**: La métrica de utilización de la CPU utiliza la medida más confiable y actualizada de utilización de la CPU, ya sea que la informe el Datadog Agent o directamente AWS o vSphere.
-
-### Etiquetas (tags)
-
-Puedes aplicar [etiquetas][1] de forma manual o utilizar [integraciones][2] para aplicarlas de manera automática. Luego, puedes utilizar estas etiquetas para filtrar tus hosts o contenedores.
-
-Por ejemplo, si algunos de tus hosts se ejecutan en AWS, se encontrarán disponibles las siguientes etiquetas específicas de AWS:
-
-* `availability-zone`
-* `region`
-* `image`
-* `instance-type`
-* `security-group`
-* cualquier etiqueta de EC2 que puedas utilizar, como `name`
-
-El Datadog Agent también recopila metadatos del host e información de la aplicación, algunos de los cuales se pueden utilizar como filtro o para agrupar términos. Esos campos incluyen:
-
-- `field:metadata_agent_version`
-- `field:metadata_platform`
-- `field:metadata_processor`
-- `field:metadata_machine`
-- `field:apps`
-
-### Ampliar
-
-Cuando hayas identificado un host o contenedor que desees investigar, haz clic en él para obtener más detalles. Se ampliará y mostrará hasta seis integraciones que informan métricas de ese host. Si hay más de seis integraciones, se enumerarán bajo el encabezado **Apps** (Aplicaciones) en el panel de detalles del host, como se muestra en la siguiente captura de pantalla.
-
-Haz clic en el nombre de una integración a fin de obtener un dashboard condensado de métricas para esa integración. En la siguiente captura de pantalla, se hizo clic en «system» (sistema) para obtener métricas del sistema, como el uso de la CPU, el uso de la memoria, la latencia del disco, etc.
-
-{{< img src="infrastructure/hostmap/blog-host-maps-01.png" alt="Una vista de lo que se muestra cuando un usuario hace clic en un host en particular. Se muestra un panel de información en la parte inferior y se enumeran varias aplicaciones, así como secciones para métricas y checks de estado." style="width:75%;" >}}
-
-### Visualizar hosts en el mapa de hosts que no tienen un Agent instalado
-
-De forma predeterminada, el mapa de hosts solo muestra los hosts que informan la métrica seleccionada, que luego se puede utilizar a fin de establecer un color o tamaño para el hexágono individual dentro de la cuadrícula.
-
-### Actualización y significado de los datos
-
-Los datos del mapa de hosts se actualizan aproximadamente una vez por minuto, a menos que interactúes de manera continua con el mapa. La parte inferior izquierda de la pantalla indica cuándo se actualizaron los datos por última vez.
-
-## Casos de uso
-
-### Optimización de recursos
-
-Si eres usuario de AWS, es posible que utilices varios tipos de instancias. Algunas instancias se encuentran optimizadas para la memoria, otras para la computación, algunas son pequeñas y otras son grandes.
-
-Si deseas reducir tu gasto en AWS, puedes empezar por averiguar para qué se utilizan las costosas instancias. Primero, agrupa por `instance-type` y, a continuación, por `role` o `name`. Echa un vistazo a tus costosos tipos de instancias, como **c3.8xlarge**. ¿Hay roles de host cuya CPU esté infrautilizada? Si es así, amplía los hosts individuales y observa si se ha necesitado toda esa potencia computacional en los últimos meses, o si este grupo de hosts es un candidato para migrar a un tipo de instancia más barato.  
-
-A continuación se muestra un subconjunto de la infraestructura de Datadog. Como puedes ver, las instancias **c3.2xlarge** se encuentran muy cargadas.
-
-{{< img src="infrastructure/hostmap/hostmappart1image2.png" alt="La vista de una cantidad de hosts, representados por hexágonos, que se han agrupado por tipo de instancia: m3.large, c3.2xlarge y m1.xlarge. La mayoría de los hosts en m3.large y m1.xlarge son de color verde para indicar una baja utilización de la CPU, pero los hosts en c3.2xlarge son de color naranja, lo que significa una alta utilización de la CPU." style="width:80%;">}}
-
-Si haces clic en el grupo c3.2xlarge y luego en el subgrupo por rol (como se muestra a continuación), verás que solo algunos de los roles se encuentran cargados, mientras que otros están casi inactivos. Si cambiaras estos siete nodos verdes a un c3.xlarge, ahorrarías casi 13.000 $ al año. (0,21 $ ahorrados por hora por host x 24 horas/día * 365 días/año * 7 hosts = 12.877,20 $/año)
-
-{{< img src="infrastructure/hostmap/hostmappart1image3.png" alt="El grupo c3.2xlarge que se mostró anteriormente, ahora un subgrupo por rol. Algunos grupos son naranja uniformemente, pero otros son todos verdes." style="width:80%;">}}
-
-### Ubicación de las zonas de disponibilidad
-
-Los mapas de hosts te permiten ver las distribuciones de máquinas en cada una de tus zonas de disponibilidad (AZ). Filtra los hosts que te interesen, agrúpalos por AZ y podrás ver de inmediato si es necesario reequilibrar los recursos.
-
-En el ejemplo que se muestra a continuación, hay una distribución desigual de hosts con `role:daniels` en las zonas de disponibilidad. (Daniels es el nombre de una aplicación interna).
-
-{{< img src="infrastructure/hostmap/hostmappart1image4.png" alt="Mapa de hosts filtrado por role:daniels y agrupado por zona de disponibilidad. Se muestran tres grupos de hosts." style="width:80%;" >}}
-
-### Investigación del problema
-
-Imagina que tienes un problema en la producción. Es posible que las CPUs de algunos de tus hosts se encuentren vinculadas, lo que genera tiempos de respuesta prolongados. Los mapas de hosts pueden ayudarte a ver rápidamente si hay algo diferente entre los hosts cargados y no cargados. Puedes agrupar de manera rápida por dimensiones que te gustaría investigar y determinar de forma visual si los servidores problemáticos pertenecen a un grupo determinado.  
-Por ejemplo, puedes agrupar por AZ, región, tipo de instancia, imagen o cualquier etiqueta que utilices en el sistema. 
-
-En la siguiente captura de pantalla, algunos hosts tienen mucha menos memoria utilizable que otros, a pesar de ser parte del mismo clúster. La agrupación por imagen de máquina revela que había dos imágenes diferentes en uso y una de ellas está sobrecargada.
-
-{{< img src="infrastructure/hostmap/hostmappart1image5.png" alt="Mapas de hosts de Datadog con dos bandas de uso de memoria" style="width:80%;" >}}
-
-{{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Mapas de hosts de Datadog con dos grupos de imágenes" style="width:80%;">}}
-
-## Leer más
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
