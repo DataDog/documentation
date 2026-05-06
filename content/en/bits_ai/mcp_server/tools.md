@@ -564,7 +564,7 @@ Returns Kafka client (producer and consumer) configurations for a cluster, inclu
 ### `list_all_kafka_schemas`
 *Toolset: **data-streams***\
 *Permissions Required: `APM Read`*\
-Lists all Schema Registry subjects for a cluster's schema registry. Use this when you don't know the subject name to inspect.
+Lists all subjects for a cluster's schema registry. Use this when you don't know which subject name to inspect.
 
 - List all Schema Registry subjects.
 - What schemas are registered for the orders topic?
