@@ -33,9 +33,13 @@ The Trace Explorer shows an **Search - Only Indexed Data** indicator whenever yo
 
 Live Search is the default view on the Traces page. Switch from Live Search to Indexed Data Search by using the time selector in the top right-hand corner.
 
-{{< callout url="#" btn_hidden="true" header="Trace Patterns is in Preview" >}}
-<b>Trace Patterns</b> groups spans with similar structure and attributes into recurring patterns, so you can analyze behavior across thousands of traces at once instead of reading them individually. Use it when a query returns too many spans to scan trace-by-trace, such as finding which error shapes are new this week or which latency patterns shifted after a deploy. To request access, contact your Customer Success Manager or Datadog Support.
+### Trace Patterns 
+
+{{< callout url="#" btn_hidden="true" header="Join the  Preview!" >}}
+Trace Patterns is in Preview! To request access, contact your Customer Success Manager or Datadog Support.
 {{< /callout >}}
+
+Trace Patterns groups spans with similar structure and attributes into recurring patterns, so you can analyze behavior across thousands of traces at once instead of reading them individually. Use it when a query returns too many spans to scan trace-by-trace, such as finding which error shapes are new this week or which latency patterns shifted after a deploy. 
 
 ### Trace volume control
 
