@@ -87,7 +87,7 @@ Hover over the warning to see how many spans are missing cost, the reasons for m
 The LLM model provider on the span is not in the [list of supported providers](#supported-providers), so Datadog has no public pricing rates to apply.
 
 How to fix:
-- Switch to a [supported provider](#supported-providers).
+- Ensure the span’s model_provider matches a supported provider identifier (no typos). See the [list of supported providers](#supported-providers).
 - Manually supply cost values on the span. See the [SDK Reference][2] or [API][3].
 
 #### Unsupported model name
@@ -106,12 +106,16 @@ How to fix:
 - For [auto-instrumentation][1], confirm your provider and SDK version are supported.
 - For manual instrumentation, annotate input and output token counts on the span. See the [SDK Reference][2] or [API][3].
 
-#### Unsupported pricing tier
+### Why does my LLM cost look incorrect when prompt caching is in used?
 
-The provider charges different rates per region, context window size, or other pricing tier, and Datadog does not have a pricing entry for the tier this span uses.
+If a span includes only aggregate `input_tokens` and `output_tokens`, but is missing `cache_read_input_tokens`, `cache_write_input_tokens`, or `non_cached_input_tokens`, Datadog applies the standard input rate to the entire `input_tokens`.
+
+For providers that support prompt caching, cache reads, cache writes, and non-cached inputs are billed at different rates. Without this breakdown, the calculated input cost may be inaccurate.
 
 How to fix:
-- Manually supply input and output cost values on the span. See the [SDK Reference][2] or [API][3].
+- For [auto-instrumentation][1], verify that your provider and SDK version emit cache-specific token counts.
+- For manual instrumentation, annotate `cache_read_input_tokens`, `cache_write_input_tokens`, and `non_cached_input_tokens` in addition to `input_tokens`. See the [SDK Reference][2] or [API][3].
+
 
 [1]: /llm_observability/instrumentation/auto_instrumentation
 [2]: /llm_observability/instrumentation/sdk/?tab=python#monitoring-costs
