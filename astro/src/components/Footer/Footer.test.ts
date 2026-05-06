@@ -13,7 +13,6 @@ import {
   resolveFooterUrl,
   splitHalves,
 } from '../../lib/footerMenus';
-import { i18n } from '../../lib/i18n/i18n';
 
 function decodeEntities(s: string): string {
   return s
@@ -105,9 +104,9 @@ describe('FooterBlurb', () => {
     const container = await createContainer();
     const html = decodeEntities(await container.renderToString(FooterBlurb));
 
-    expect(html).toContain(i18n('footer_blurb_heading'));
-    expect(html).toContain(i18n('footer_blurb_desc'));
-    expect(html).toContain(i18n('contact_us'));
+    expect(html).toContain("Can't find something?");
+    expect(html).toContain("Our friendly, knowledgeable solutions engineers are here to help!");
+    expect(html).toContain("Contact Us");
     expect(html).toContain('https://www.datadoghq.com/help/');
   });
 });

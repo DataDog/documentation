@@ -68,7 +68,7 @@ const currentLangOption = {
   code: currentLang,
   primary: getNativeLabel(currentLang),
   secondary: translate(currentLang),
-  href: localizedHref(currentLang, footerLocaleless),
+  href: localizedHref(footerLang, footerLocaleless),
 };
 const alternates = LOCALES
   .filter((c) => c !== currentLang)

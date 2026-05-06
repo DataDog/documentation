@@ -9,6 +9,7 @@
     "test:browser": "playwright test --grep-invert i18n"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@astrojs/markdoc": "^0.14.0",
     "@astrojs/preact": "^4.0.0",
     "astro": "^5.7.0",
@@ -33,7 +34,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "rollup-plugin-visualizer": "^5.14.0",
     "sass": "^1.99.0",
-    "typescript": "^5.7.0",
+    "typescript": "^5.9.3",
     "vitest": "^4.1.4"
   }
 }
