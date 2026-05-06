@@ -47,10 +47,6 @@ Each top-level section on the page reports one of four health states:
 
 A Bits AI summary card explains the current state of the network. It highlights affected devices, interfaces, and any recent configuration changes that may correlate with the observed behavior. Use this summary to understand what's happening before investigating individual sections.
 
-The section also displays a network topology view with health-coded nodes and a row of counters for total devices, alerts, and monitors.
-
-{{< img src="network_device_monitoring/summary/status_counters.png" alt="A row of status counters showing total devices, OK, Degraded, Unreachable, Offline, and Unmonitored counts, and monitor alert and warn counts." style="width:100%;" >}}
-
 ## Issues
 
 The **Issues** list summarizes active alerts on network resources, grouped to reduce noise. Each issue card shows the affected devices and a short description of what was detected. Click an issue to investigate further.
