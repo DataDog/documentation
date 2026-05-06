@@ -3,6 +3,7 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 // @ts-ignore — Preact renderer is registered for SSR of nested islands (CopyButton, etc.).
 import preactRenderer from '@astrojs/preact/server.js';
 import ApiCodeExample from './ApiCodeExample.astro';
+import type { CodeExampleSet } from '../../data/api/examples';
 
 const examples = [
   {
@@ -28,7 +29,7 @@ async function createContainer() {
   return container;
 }
 
-async function renderComponent(props: { examples: typeof examples }) {
+async function renderComponent(props: { examples: CodeExampleSet[] }) {
   const container = await createContainer();
   return container.renderToString(ApiCodeExample, { props });
 }

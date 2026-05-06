@@ -53,7 +53,7 @@ const EMPTY_BUNDLE: OverlayBundle = Object.freeze({
 
 const cache = new Map<string, OverlayBundle>();
 
-function bundleKey(version: ApiVersion, lang: Locale): string {
+function bundleKey(version: ApiVersion, lang: string): string {
   return `${version}:${lang}`;
 }
 
@@ -62,7 +62,7 @@ function bundleKey(version: ApiVersion, lang: Locale): string {
  * an empty bundle (the spec is the source of truth). Missing JSON files for
  * a locale also return an empty bundle — by design.
  */
-export function getOverlay(version: ApiVersion, lang: Locale): OverlayBundle {
+export function getOverlay(version: ApiVersion, lang: string): OverlayBundle {
   if (lang === 'en') {
     return EMPTY_BUNDLE;
   }

@@ -17,7 +17,7 @@ interface LocaleDefaults {
   metaDescription: string;
 }
 
-export const SITE_DEFAULTS: Record<Locale, LocaleDefaults> = {
+export const SITE_DEFAULTS: Record<string, LocaleDefaults> = {
   en: {
     siteName: "Datadog Infrastructure and Application Monitoring",
     metaTitle: "Getting Started with Datadog",

@@ -38,13 +38,13 @@ describe('renderApiResponseMd', () => {
 
   it('omits inner tabs when only one of schema or examples is present', () => {
     const schemaOnly = renderApiResponseMd([
-      { statusCode: '200', schema: responses[0].schema },
+      { statusCode: '200', description: '', schema: responses[0].schema },
     ]);
     expect(schemaOnly).toContain('| Parent field |');
     expect(schemaOnly).not.toContain('{% tab label="Model" %}');
 
     const examplesOnly = renderApiResponseMd([
-      { statusCode: '200', examples: responses[0].examples },
+      { statusCode: '200', description: '', examples: responses[0].examples },
     ]);
     expect(examplesOnly).toContain('```json');
     expect(examplesOnly).not.toContain('{% tab label="Model" %}');

@@ -3,6 +3,7 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 // @ts-ignore — Preact renderer is registered for SSR of nested ApiSchemaTable islands.
 import preactRenderer from '@astrojs/preact/server.js';
 import ApiResponse from './ApiResponse.astro';
+import type { ResponseData } from '../../data/api/views';
 
 const responses = [
   {
@@ -25,7 +26,7 @@ async function createContainer() {
   return container;
 }
 
-async function renderComponent(props: { responses: typeof responses }) {
+async function renderComponent(props: { responses: ResponseData[] }) {
   const container = await createContainer();
   return container.renderToString(ApiResponse, { props });
 }
@@ -81,7 +82,7 @@ describe('ApiResponse (astro)', () => {
 
   it('renders a schema table without inner tabs when a response has only a schema', async () => {
     const html = await renderComponent({
-      responses: [{ statusCode: '200', schema: responses[0].schema }],
+      responses: [{ statusCode: '200', description: '', schema: responses[0].schema }],
     });
 
     expect(html).toContain('schema-table');
@@ -90,7 +91,7 @@ describe('ApiResponse (astro)', () => {
 
   it('renders code blocks without inner tabs when a response has only examples', async () => {
     const html = await renderComponent({
-      responses: [{ statusCode: '200', examples: responses[0].examples }],
+      responses: [{ statusCode: '200', description: '', examples: responses[0].examples }],
     });
 
     expect(html).toContain('code-block');

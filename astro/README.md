@@ -18,7 +18,7 @@ The dev server starts at **http://localhost:4321**.
 
 ## Component documentation
 
-Each component has a dedicated page showing its properties and visual permutations. After starting the dev server, browse them at [http://localhost:4321/docs/components/](http://localhost:4321/docs/components/).
+Each component has a dedicated page showing its properties and visual permutations. After running `npm run build`, browse the index at [http://localhost:4322/docs/test_pages/](http://localhost:4322/docs/test_pages/) (via `npm run preview`). The pages are also reachable under `npm run dev`, but client-side hydration only behaves correctly in a production build.
 
 ## Other commands
 
@@ -168,11 +168,11 @@ translate_*.{lang}.json ──────┤
 
 ## Auditing guidelines
 
-To manually audit the Astro API docs against the Hugo API docs, you don't need to review all 124 category pages. The pages vary along a few key dimensions, and a representative set covers every rendering path.
+To manually audit the Astro API docs against the Hugo API docs, you don't need to review every category page. The pages vary along a few key dimensions, and a representative set covers every rendering path.
 
 ### Page inventory
 
-There are **4 static pages** and **124 dynamic category pages** (one per OpenAPI tag).
+There are **4 static pages** and **~120 dynamic category pages** (one per OpenAPI tag — count drifts as the spec evolves).
 
 **Static pages:**
 
