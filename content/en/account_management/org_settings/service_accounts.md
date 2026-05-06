@@ -67,8 +67,7 @@ To disable a service account, follow the previous procedure to edit the service 
 ### Service Access Tokens
 
 [Service Access Tokens (SATs)][4] are the recommended way to authenticate Datadog API calls from
-a service account. SATs are scoped, optionally long-lived, and do not require pairing with an API
-key.
+a service account. SATs are scoped, optionally long-lived, and standalone — they do not require an API key.
 
 To create a SAT for a service account:
 
