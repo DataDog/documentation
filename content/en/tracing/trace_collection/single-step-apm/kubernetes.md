@@ -31,11 +31,11 @@ Single Step Instrumentation (SSI) installs the Datadog Agent and instruments you
 - [Helm][1] for deploying the Datadog Operator
 - [kubectl][2] for installing the Datadog Agent
 - A supported language runtime per the [SSI compatibility guide][36]
-- **No existing tracer dependencies.** SSI silently disables itself if it detects `ddtrace`, `dd-trace`, an OpenTelemetry SDK, or `-javaagent` in your application. Before enabling SSI, check your dependency manifests:
+- **No existing tracer dependencies.** SSI silently disables itself if it detects `ddtrace`, `dd-trace`, an OpenTelemetry SDK, or `-javaagent` in your application. Before enabling SSI, check your dependency manifests and startup scripts:
   ```shell
-  grep -rn "ddtrace\|dd-trace\|opentelemetry" requirements.txt package.json Gemfile go.mod pom.xml build.gradle 2>/dev/null
+  grep -rn "ddtrace\|dd-trace\|opentelemetry\|dd-java-agent\|javaagent" requirements.txt package.json Gemfile go.mod pom.xml build.gradle 2>/dev/null
   ```
-  Remove any matches and rebuild your application image before proceeding.
+  For Java, also check Dockerfiles and startup scripts for `-javaagent` flags, and check the `JAVA_TOOL_OPTIONS` environment variable. Remove any matches and rebuild your application image before proceeding.
 - **Node.js: CommonJS only.** SSI does not support ECMAScript Modules (ESM). If your application uses `import` syntax or sets `"type": "module"` in `package.json`, use [manually managed SDKs][44] instead.
 - **Ruby: glibc only.** Ruby SSI requires glibc and is not compatible with Alpine or other musl-based images. Other SSI-supported languages work on musl-based images.
 
@@ -220,7 +220,7 @@ If the Agent is not installed, follow the bootstrap steps in the selected tab: a
 If the Agent is already installed, add `instrumentation.enabled: true` to the user's existing Helm values or `DatadogAgent` manifest. Do not create a separate manifest.
 
 If the user wants to pin SDK versions, recommend these defaults:
-`java: "1"`, `python: "2"`, `js: "5"`, `dotnet: "3"`, `ruby: "2"`, `php: "1"`
+`java: "1"`, `python: "3"`, `js: "5"`, `dotnet: "3"`, `ruby: "2"`, `php: "1"`
 
 After applying the config, confirm with the user before restarting their pods. After restart, wait for pods to be ready:
 `kubectl wait --for=condition=Ready pod -l app=<APP_LABEL> -n <APP_NAMESPACE> --timeout=120s`
