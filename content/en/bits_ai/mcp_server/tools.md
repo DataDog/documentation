@@ -581,7 +581,7 @@ Returns all schema versions for a single Schema Registry subject (schema body, I
 ### `read_kafka_messages`
 *Toolset: **data-streams***\
 *Permissions Required: `APM Read` and `Data Streams Monitoring Capture Messages`*\
-Reads messages from a given Kafka cluster, topic, and partition through the Datadog Agent by dispatching a Remote Config action and polling for the agent's response. Rate-limited to 10 calls per minute per organization. Useful for inspecting message payloads when investigating poison messages or stuck consumer offsets.
+Reads messages from a given Kafka cluster, topic, and partition through the Datadog Agent by dispatching a Remote Config action and polling for the Agent's response. This tool is rate-limited to 10 calls per minute per organization, and is useful for inspecting message payloads when investigating poison messages or stuck consumer offsets.
 
 - What are the last messages on topic `checkout-orders`?
 - Show me the most recent payloads produced to the orders Kafka topic.
