@@ -110,8 +110,8 @@ To enable this view, configure each Collector in the pipeline:
 - Set `gateway_destination` on Collectors that forward to a downstream gateway. The value is the Kubernetes Service of the receiving gateway, in `<namespace>/<service>` form.
 - Set `gateway_service` on gateway Collectors. The value is the Kubernetes Service that fronts the gateway pods.
 - A **middle** gateway in a multi-layer pipeline sets **both** `gateway_service` (its own service) and `gateway_destination` (the next gateway).
-- Set `k8s.cluster.name` under `service.telemetry.resource` on every Collector in the pipeline. This is **mandatory**: together with `gateway_service` and `gateway_destination`, it forms the join key that Fleet Automation uses to reconstruct the pipeline graph.
-- Enable Collector internal metrics so the extension can attribute logs, metrics or traces volume data to each edge in the graph with the **Show traffic** toggle. See [OpenTelemetry Collector Health Metrics][10].
+- Set `k8s.cluster.name` under `service.telemetry.resource` on every Collector in the pipeline. This is **required**: together with `gateway_service` and `gateway_destination`, it forms the join key that Fleet Automation uses to reconstruct the pipeline graph.
+- Enable Collector internal metrics so the extension can attribute logs, metrics, or traces volume data to each edge in the graph with the **Show traffic** toggle. See [OpenTelemetry Collector Health Metrics][10].
 
 The example below covers the common two-layer case: a node-local DaemonSet forwards to a gateway Deployment, which sends to Datadog.
 
