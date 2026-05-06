@@ -146,43 +146,6 @@ A plaintext sibling at [`[category]/[operation].md.ts`](src/pages/[...lang]/api/
 
 Interactive components (schema expansion, tab switching) use Preact islands via Astro's `client:load` directive, meaning they hydrate on the client while the rest of the page is static HTML.
 
-### Data flow diagram
-
-```
-v1/full_spec.yaml ──┐
-                     ├─ Vite ?raw import → spec.ts (yaml.parse, cached per build)
-v2/full_spec.yaml ──┘         │
-translate_*.{lang}.json ──────┤
-                               │
-                               ▼
-              ┌─── views.ts (memoized, build-time) ──────┐
-              │                                           │
-              │   getCategoriesView(lang) → ApiCategory[] │
-              │     cache: Map<lang, ApiCategory[]>       │
-              │                                           │
-              │   getEndpointView(catSlug, opSlug, lang)  │
-              │     cache: Map<`${lang}:${catSlug}:${opSlug}`, │
-              │              EndpointData>               │
-              │     ↓ walk spec + resolve refs            │
-              │   EndpointData (SchemaField trees,        │
-              │     curl variants, request/response data) │
-              └──────────────────┬────────────────────────┘
-                                 │
-                          highlight.ts (Shiki syntax highlighting, per-op)
-                                 │
-                                 ▼
-                  [category].astro (landing: name, description, TOC)
-                  [category]/[operation].astro / [operation].md.ts
-                                 │
-                          ApiLayout / BaseLayout
-                                 │
-                          ApiSideNav + ApiEndpoint (one per page)
-                          ┌──────────┼──────────┐
-                ApiSchemaTable  ApiResponse  ApiCodeExample
-                ApiRequestBodyTabs
-                  (Preact islands, client:load)
-```
-
 ## Auditing guidelines
 
 To manually audit the Astro API docs against the Hugo API docs, you don't need to review every category page. The pages vary along a few key dimensions, and a representative set covers every rendering path.
