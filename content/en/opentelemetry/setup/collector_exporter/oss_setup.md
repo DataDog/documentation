@@ -134,6 +134,8 @@ connectors:
     histogram:
       exponential: {}
       unit: s
+    # These dimensions are used to compute container tags, host info,
+    # peer services, operation names, and resource names in Datadog APM.
     dimensions:
       - name: deployment.environment.name
       - name: service.version
@@ -329,6 +331,8 @@ connectors:
     histogram:
       exponential: {}
       unit: s
+    # These dimensions are used to compute container tags, host info,
+    # peer services, operation names, and resource names in Datadog APM.
     dimensions:
       - name: deployment.environment.name
       - name: service.version
@@ -571,6 +575,8 @@ connectors:
     histogram:
       exponential: {}
       unit: s
+    # These dimensions are used to compute container tags, host info,
+    # peer services, operation names, and resource names in Datadog APM.
     dimensions:
       - name: deployment.environment.name
       - name: service.version
