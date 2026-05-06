@@ -154,7 +154,7 @@ static/resources/yaml/observability_pipelines/                  @DataDog/observa
 # Synthetic Monitoring, Continuous Testing, Mobile Application Testing
 
 content/en/synthetics/*.md                                      @Datadog/synthetics-app @Datadog/documentation
-content/en/continuous_testing/*.md                              @Datadog/synthetics-ct @Datadog/documentation
+content/en/continuous_testing/*.md                              @Datadog/synthetics-orchestrating-managing @Datadog/documentation
 content/en/mobile_app_testing/*.md                              @Datadog/synthetics-executing-mobile @Datadog/documentation
 
 # Software Delivery

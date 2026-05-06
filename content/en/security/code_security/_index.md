@@ -2,6 +2,15 @@
 title: Code Security
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
+  tag: "Blog"
+  text: "Introducing Bits AI Dev Agent for Code Security"
+- link: "https://www.datadoghq.com/blog/remediate-faster-code-security"
+  tag: "Blog"
+  text: "Remediate transitive vulnerabilities faster with Datadog Software Composition Analysis"
+- link: "https://www.datadoghq.com/blog/audit-reports-datadog-sheets"
+  tag: "Blog"
+  text: "Generate audit-ready vulnerability and compliance reports with Datadog Sheets"
 - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
   tag: "Blog"
   text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
@@ -17,6 +26,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
   tag: "Blog"
   text: "Using LLMs to filter out false positives from static code analysis"
+- link: "https://learn.datadoghq.com/courses/code-security-SAST"
+  tag: "Learning Center"
+  text: "Write secure code with Datadog Code Security"
 aliases:
 - /code_analysis/
 ---

@@ -29,7 +29,7 @@ Datadog Infrastructure as Code (IaC) Security detects misconfigurations in Terra
 
 ## How it works
 
-IaC Security integrates with your repositories to continuously scan for misconfigurations. It analyzes every commit across all branches and performs a full daily scan of each configured repository. When violations are detected, findings are surfaced and linked to the relevant repository, branch, and file path. This helps you identify, prioritize, and fix misconfigurations directly at the source.
+IaC Security integrates with your repositories to continuously scan for misconfigurations, and scans every commit across all branches for each configured repository. When violations are detected, findings are surfaced and linked to the relevant repository, branch, and file path. This helps you identify, prioritize, and fix misconfigurations directly at the source.
 
 ## Key capabilities
 

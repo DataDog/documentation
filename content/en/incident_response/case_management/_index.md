@@ -4,6 +4,9 @@ aliases:
 - /monitors/case_management/
 - /service_management/case_management/
 further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-risk-management"
+  tag: "Blog"
+  text: "How we centralize and remediate risks with Datadog Case Management"
 - link: https://www.datadoghq.com/blog/datadog-forms
   tag: Blog
   text: Turn feedback into action across your engineering org with Datadog Forms

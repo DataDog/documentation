@@ -36,9 +36,9 @@ The minimum tracer version to get all supported App and API Protection capabilit
 
 ### Supported Go versions
 
-The Datadog Go Tracing library is open source. View the [GitHub repository][2] for more information.
+The Datadog Go SDK is open source. View the [GitHub repository][2] for more information.
 
-The Datadog Go Tracing Library has a [version support policy][3] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][4]. Older versions may function, but no support is provided by default. For special requests, [contact support][5].
+The Datadog Go SDK has a [version support policy][3] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][4]. Older versions may function, but no support is provided by default. For special requests, [contact support][5].
 
 You must be running Datadog Agent v5.21.1+
 

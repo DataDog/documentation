@@ -40,15 +40,18 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
     tag: "Blog"
     text: "Monitor DNS logs for network and security analysis"
-  - link: "https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/"
-    tag: "Architecture Center"
-    text: "A guide to Log Management Indexing Strategies with Datadog"
   - link: "https://www.datadoghq.com/blog/archive-search/"
     tag: "Blog"
     text: "Search your historical logs more efficiently with Datadog Archive Search"
   - link: "https://www.datadoghq.com/blog/human-name-detection"
     tag: "Blog"
     text: "Detect human names in logs with ML in Sensitive Data Scanner"
+  - link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
+    tag: "Blog"
+    text: "Monitor your application and network load balancer logs"
+  - link: "https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/"
+    tag: "Architecture Center"
+    text: "A guide to Log Management Indexing Strategies with Datadog"
 cascade:
     algolia:
         rank: 70

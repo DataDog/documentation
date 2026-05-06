@@ -5,7 +5,6 @@ content_filters:
   - trait_id: platform
     option_group_id: dd_e2e_platform_options
   - trait_id: prog_lang
-    label: language
     option_group_id: dd_e2e_<PLATFORM>_prog_lang_options
 ---
 

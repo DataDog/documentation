@@ -4,18 +4,24 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
     tag: "Blog"
     text: "From performance to impact: Bridging frontend teams through shared context"
+  - link: "https://www.datadoghq.com/blog/product-analytics-faster-decisions"
+    tag: "Blog"
+    text: "Make faster, better product decisions with Datadog Product Analytics"
+  - link: "https://www.datadoghq.com/blog/product-data-best-practices"
+    tag: "Blog"
+    text: "What your product data is actually saying"
 ---
 
 ## Overview
 Action Management is a no-code way to label autocaptured actions from your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page describes how to get started with Action Management.
 
-## Setup 
+## Setup
 
-### Step 1 - Install the browser extension 
+### Step 1 - Install the browser extension
 
-Action Management requires [The Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2]. 
+Action Management requires [The Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2].
 
-### Step 2 - Label your actions 
+### Step 2 - Label your actions
 
 1. Go to the [Actions][3] page in the Datadog UI, and click on **Label New Action**. This takes you to the point-and-click interface where you can select your actions.
 
@@ -24,7 +30,7 @@ Action Management requires [The Datadog test recorder Chrome extension][1]. If y
 
 2. Use the **Navigate Site** mode to browse to the location of the actions you want to label.
 
-{{< img src="product_analytics/action_management/pana-point-click-interface.png" alt="The point and click interface used to locate and labed your action " style="width:90%;">}}
+{{< img src="product_analytics/action_management/pana-point-click-interface.png" alt="The point and click interface used to locate and label your action " style="width:90%;">}}
 
 
 3. To add an action, first, switch to **Label Actions** mode.
@@ -42,7 +48,7 @@ Action Management requires [The Datadog test recorder Chrome extension][1]. If y
 {{< img src="product_analytics/action_management/pana-name-action.png" alt="Give a name and description to your action." style="width:90%;">}}
 
 
-### Step 3 - Retrieve your actions 
+### Step 3 - Retrieve your actions
 
 After you define an action, you can find it in the [list of labeled actions][4]. From this list, you can:
 - Filter to only see your actions
@@ -53,9 +59,9 @@ After you define an action, you can find it in the [list of labeled actions][4].
 
 
 
-## Known limitations 
+## Known limitations
 - Action Management only works for web pages at this time.
-- You cannot label Actions that are hidden behind a hover. If this limitation impacts your use cases, share examples of these with your Customer Success Manager to inform future improvements. 
+- You cannot label Actions that are hidden behind a hover. If this limitation impacts your use cases, share examples of these with your Customer Success Manager to inform future improvements.
 - Labeled actions can only be used in Funnels and Retention graphs at this time.
 - Deleting a labeled action also deletes it from the dashboards where it is being used.
 
@@ -64,3 +70,7 @@ After you define an action, you can find it in the [list of labeled actions][4].
 [2]: https://docs.datadoghq.com/synthetics/guide/manually-adding-chrome-extension/
 [3]: https://app.datadoghq.com/product-analytics/data-management
 [4]: https://app.datadoghq.com/product-analytics/data-management
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -17,7 +17,7 @@ aliases:
   - /tracing/profiler/enabling/nodejs/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+The profiler is shipped within Datadog SDKs. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 
@@ -49,7 +49,7 @@ export DD_SERVICE=my-web-app
 export DD_VERSION=1.0.3
 ```
 
-**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the SDK and the profiler are loaded together:
 
 ```node
 node -r dd-trace/init app.js
@@ -67,7 +67,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the SDK and the profiler are loaded together:
 
 ```node
 const tracer = require('dd-trace/init')

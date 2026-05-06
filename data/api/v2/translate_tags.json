@@ -95,6 +95,10 @@
     "name": "Cloud Cost Management",
     "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
   },
+  "cloud-inventory-sync-configs": {
+    "name": "Cloud Inventory Sync Configs",
+    "description": "Configure cloud inventory file synchronization from your cloud storage to Datadog."
+  },
   "cloud-network-monitoring": {
     "name": "Cloud Network Monitoring",
     "description": "The Cloud Network Monitoring API allows you to fetch aggregated connections and DNS traffic with their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/) and [DNS Monitoring page](https://docs.datadoghq.com/network_monitoring/dns/) for more information."
@@ -129,7 +133,7 @@
   },
   "dashboard-secure-embed": {
     "name": "Dashboard Secure Embed",
-    "description": "Manage securely embedded Datadog dashboards. Secure embeds use HMAC-SHA256 signed sessions for authentication, enabling customers to embed dashboards in their own applications with server-side auth control. Unlike public dashboards (open URL) or invite dashboards (email-based access), secure embeds provide programmatic access control.\n**Requirements:** - Org setting: SharedDashboards > Embed sharing must be enabled. - AuthN: Datadog API key and application key. - Read operations require `dashboards_read` permission. - Write operations require `dashboards_embed_share` permission."
+    "description": "Manage securely embedded Datadog dashboards. Secure embeds use HMAC-SHA256 signed sessions\nfor authentication, enabling customers to embed dashboards in their own applications with\nserver-side auth control. Unlike public dashboards (open URL) or invite dashboards\n(email-based access), secure embeds provide programmatic access control.\n\n**Requirements:**\n- **Embed** sharing must be enabled under **Organization Settings** > **Public Sharing** > **Shared Dashboards**.\n- You need [an API key and an application key](https://docs.datadoghq.com/account_management/api-app-keys/) to interact with these endpoints."
   },
   "datasets": {
     "name": "Datasets",
