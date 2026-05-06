@@ -22,7 +22,7 @@ Database Investigator is in Preview for all customers monitoring Postgres with D
 
 ## Overview
 
-Database Investigator is an AI assistant inside Database Monitoring that helps you investigate, optimize, and understand the databases you monitor. It analyzes the telemetry Database Monitoring already collects including health signals, query metrics, explain plans, instance and infrastructure metrics, calling APM services, related incidents, and recent events. For investigations, it returns a structured root cause analysis with concrete remediation steps.
+Database Investigator is an AI agent inside Database Monitoring that helps you investigate, optimize, and understand the databases you monitor. It analyzes the telemetry Database Monitoring already collects including health signals, query metrics, explain plans, instance and infrastructure metrics, calling APM services, related incidents, and recent events. For investigations, it returns a structured root cause analysis with concrete remediation steps.
 
 Both DBAs and the platform or application teams that own database-backed services can make use of Database Investigator. Describe an issue in plain language and it runs the investigation. Deep database expertise is not required.
 
