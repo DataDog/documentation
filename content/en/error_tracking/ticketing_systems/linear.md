@@ -45,7 +45,7 @@ You can create a Linear issue directly from the issue panel to group investigati
 5. Optionally, access Data Sync settings to configure how data should be synced between Datadog and Linear.
 6. Click **Create** to create the Linear issue.
 
-{{< img src="error_tracking/create-ticket.png" alt="Create a Linear issue from an Error Tracking issue" style="width:100%;" >}}
+{{< img src="error_tracking/create-linear-issue.png" alt="Create a Linear issue from an Error Tracking issue" style="width:100%;" >}}
 
 After it is created, the Linear issue is linked to the Error Tracking issue. The Linear issue link appears in the issue panel, and the Error Tracking issue status automatically changes to **REVIEWED**.
 
@@ -63,7 +63,7 @@ You can attach multiple Error Tracking issues to a single Linear issue to group 
 6. Click **Link to Issue** to attach the Error Tracking issue to the Linear issue.
 7. Repeat these actions on all the Error Tracking issues you want to add to this group.
 
-{{< img src="error_tracking/add-to-existing-ticket.png" alt="Add an Error Tracking issue to an existing Linear issue" style="height:300px;" >}}
+{{< img src="error_tracking/add-to-existing-linear-issue.png" alt="Add an Error Tracking issue to an existing Linear issue" style="height:300px;" >}}
 
 When several Error Tracking issues are linked to a single Linear issue, their state, assignee and comments are two-way synced. See [State dual-way sync between Error Tracking issues and Linear issues](#state-dual-way-sync-between-error-tracking-issues-and-linear-issues) for more information on how the Error Tracking issue states and Linear issue status are synced.
 
@@ -77,7 +77,7 @@ If two-way sync is enabled and configured between Datadog and Linear teams, the 
 
 When a single Error Tracking issue is linked to a Linear issue, their states are two-way synced. The mapping between these states can be configured in the Data Sync settings of the Linear issue creation or automation rule forms:
 
-{{< img src="error_tracking/jira-status-mapping.png" alt="Map Error Tracking issue states to Linear issue states" style="width:100%;" >}}
+{{< img src="error_tracking/linear-status-mapping.png" alt="Map Error Tracking issue states to Linear issue states" style="width:100%;" >}}
 
 ### Multiple Error Tracking issues linked to single Linear issue
 
