@@ -31,13 +31,24 @@ Single Step Instrumentation (SSI) installs the Datadog Agent and instruments you
 - [Helm][1] for deploying the Datadog Operator
 - [kubectl][2] for installing the Datadog Agent
 - A supported language runtime per the [SSI compatibility guide][36]
-- **No existing tracer dependencies.** SSI silently disables itself if it detects `ddtrace`, `dd-trace`, an OpenTelemetry SDK, or `-javaagent` in your application. Before enabling SSI, check your dependency manifests and startup scripts:
-  ```shell
-  grep -rn "ddtrace\|dd-trace\|opentelemetry\|dd-java-agent\|javaagent" requirements.txt package.json Gemfile go.mod pom.xml build.gradle 2>/dev/null
-  ```
-  For Java, also check Dockerfiles and startup scripts for `-javaagent` flags, and check the `JAVA_TOOL_OPTIONS` environment variable. Remove any matches and rebuild your application image before proceeding.
-- **Node.js: CommonJS only.** SSI does not support ECMAScript Modules (ESM). If your application uses `import` syntax or sets `"type": "module"` in `package.json`, use [manually managed SDKs][44] instead.
-- **Ruby: glibc only.** Ruby SSI requires glibc and is not compatible with Alpine or other musl-based images. Other SSI-supported languages work on musl-based images.
+
+### Check for existing tracer dependencies
+
+SSI silently disables itself if it detects an existing tracer in your application. Before enabling SSI, check your dependency manifests and startup scripts:
+
+```shell
+grep -rn "ddtrace\|dd-trace\|opentelemetry\|dd-java-agent\|javaagent" requirements.txt package.json Gemfile go.mod pom.xml build.gradle 2>/dev/null
+```
+
+For Java, also check Dockerfiles and startup scripts for `-javaagent` flags, and check the `JAVA_TOOL_OPTIONS` environment variable.
+
+If any matches are found, remove the tracer dependencies and rebuild your application image before proceeding.
+
+### Compatibility notes
+
+- **Node.js**: SSI requires CommonJS. If your application uses `import` syntax or sets `"type": "module"` in `package.json`, use [manually managed SDKs][44] instead.
+- **Ruby**: SSI requires glibc and is not compatible with Alpine or other musl-based images.
+- **All other languages**: Alpine and musl-based images are supported on Kubernetes. SSI injects through the `LD_PRELOAD` environment variable, not `/etc/ld.so.preload`.
 
 {{< agent-only >}}
 Resolve these variables before starting:
