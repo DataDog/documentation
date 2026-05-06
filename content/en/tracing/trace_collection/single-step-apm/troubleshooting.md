@@ -55,34 +55,47 @@ If you enabled SSI but don't see traces, work through these checks in order:
 If none of these apply, continue with the detailed troubleshooting methods below.
 
 {{< agent-only >}}
-When diagnosing missing traces after SSI enablement, run these diagnostic commands:
+All platforms — start with pup if available:
+- `pup traces search --query "service:<SERVICE_NAME>" --from 1h --limit 5`
+- `pup apm services list --env <ENV>`
+- `pup apm troubleshooting list --hostname <HOSTNAME> --timeframe 1h`
 
-First, resolve the node where the pod is running:
-- `kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.nodeName}'` → use this value as `NODE_HOSTNAME` below
+Kubernetes diagnostics:
 
-Triage (run all simultaneously):
+Resolve the node hostname first:
+- `kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.nodeName}'` → use as NODE_HOSTNAME below
+
+Triage (run simultaneously):
 - `kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.initContainers[*].name}'`
 - `kubectl describe pod <POD_NAME> -n <APP_NAMESPACE> | grep -A 10 "Events:"`
 - `kubectl get datadogagent datadog -n <AGENT_NAMESPACE> -o yaml | grep -A 15 instrumentation`
-- If pup CLI is available:
-  - `pup traces search --query "service:<SERVICE_NAME>" --from 1h --limit 5`
-  - `pup fleet instrumented-pods list <CLUSTER_NAME>`
-  - `pup apm troubleshooting list --hostname <NODE_HOSTNAME> --timeframe 1h`
+- `pup fleet instrumented-pods list <CLUSTER_NAME>`
 
-Diagnosis by signal:
+Kubernetes diagnosis by signal:
 | Signal | Likely cause | Next step |
 |--------|-------------|-----------|
-| No init container on pod | Injection never happened | Check namespace targeting, pod-selector, opt-out annotation, webhook registration, pod not restarted |
+| No init container on pod | Injection never happened | Check namespace targeting, pod-selector, opt-out label, webhook registration, pod not restarted |
 | Init container present, no traces | Injection attempted but tracer not reporting | Check for existing ddtrace/OTel dependencies, runtime version, Agent connectivity |
 | Pod events show CrashLoopBackOff | Init container failure | Check existing instrumentation conflicts, runtime version |
 | Traces arriving but wrong service/env | UST misconfiguration | Check Unified Service Tag labels on the Deployment |
 
+Linux host diagnostics:
+- Check injector is armed: `cat /etc/ld.so.preload` (should contain launcher path)
+- Check tracer loaded in process: `grep datadog /proc/<PID>/maps`
+- Check process started after SSI: compare `ps -o lstart -p <PID>` against `/etc/ld.so.preload` modification time
+- Check libc type: `ldd --version` (musl = incompatible)
+- Check binary type: `file /proc/<PID>/exe` (statically linked = incompatible)
+- Check Agent APM receiver: `datadog-agent status | grep -A 5 "APM Agent"`
+- Check security: `getenforce` (SELinux), `dmesg | grep apparmor` (AppArmor)
+
 Key silent failure modes (SSI produces no error for these):
-- Existing ddtrace or OpenTelemetry instrumentation detected: SSI silently disables itself
+- Existing ddtrace or OpenTelemetry instrumentation: SSI silently disables itself
 - Unsupported runtime version: silently skipped
-- `admission.datadoghq.com/enabled: "false"` label on pod: webhook skips the pod
-- Pod not restarted after SSI enabled: injection happens at pod startup only
-- Pod in the Datadog Agent namespace: SSI never instruments its own namespace
+- Kubernetes: `admission.datadoghq.com/enabled: "false"` label on pod: webhook skips the pod
+- Application not restarted after SSI enabled: injection happens at startup only
+- Kubernetes: pod in the Datadog Agent namespace: SSI skips its own namespace
+- Linux: musl libc or static binary: injector requires glibc
+- Linux: SELinux/AppArmor blocking `/etc/ld.so.preload` reads
 {{< /agent-only >}}
 
 ## Troubleshooting methods
