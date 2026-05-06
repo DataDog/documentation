@@ -60,7 +60,7 @@ The RUM iOS SDK supports the following platforms and versions:
 The SDK is built using the most recent version of [Xcode][1], but is always backwards compatible with the [lowest supported Xcode version][2] for App Store submission.
 
 ### Dependency managers
-We currently support integration of the SDK using the following dependency managers:
+The iOS SDK supports the following dependency managers:
 
 - [Swift Package Manager][3]
 - [Cocoapods][4]
