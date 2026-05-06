@@ -1,13 +1,13 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import ApiSideNav from '../components/ApiSideNav/ApiSideNav.astro';
-import Breadcrumbs from '../components/Breadcrumbs/Breadcrumbs.astro';
-import type { BreadcrumbItem } from '../components/Breadcrumbs/Breadcrumbs.astro';
-import RegionSelectorIsland from '../components/RegionSelector/RegionSelectorIsland.astro';
-import LanguageSelectorIsland from '../components/LanguageSelector/LanguageSelectorIsland.astro';
-import { stripLocalePrefix } from '../lib/i18n/locale';
-import { buildHreflangAlternates } from '../lib/seo';
-import type { ApiCategory } from '../lib/api/viewsBuilder';
+import ApiSideNav from '@components/ApiSideNav/ApiSideNav.astro';
+import Breadcrumbs from '@components/Breadcrumbs/Breadcrumbs.astro';
+import type { BreadcrumbItem } from '@components/Breadcrumbs/Breadcrumbs.astro';
+import RegionSelectorIsland from '@components/RegionSelector/RegionSelectorIsland.astro';
+import LanguageSelectorIsland from '@components/LanguageSelector/LanguageSelectorIsland.astro';
+import { stripLocalePrefix } from '@lib/i18n/locale';
+import { buildHreflangAlternates } from '@lib/seo';
+import type { ApiCategory } from '@lib/api/viewsBuilder';
 
 interface Props {
   title: string;

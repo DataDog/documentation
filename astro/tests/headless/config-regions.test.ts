@@ -6,7 +6,7 @@ import {
   appHost,
   isAllowedRegionKey,
   DEFAULT_REGION_KEY,
-} from '../../src/config/regions';
+} from '@config/regions';
 
 describe('config/regions', () => {
   it('reads allowedRegions from the Hugo params.yaml snapshot', () => {

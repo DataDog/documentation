@@ -21,7 +21,7 @@ const classes = {
 
 const defaultProps = {
   title: 'Start a free trial',
-  iframeSrc: 'https://example.com/trial',
+  iframeSrc: 'about:blank',
   classes,
 };
 
@@ -80,7 +80,7 @@ describe('FreeTrialModal — opens via trigger', () => {
 
     const iframe = overlay.querySelector('iframe');
     expect(iframe).not.toBeNull();
-    expect(iframe?.getAttribute('src')).toBe('https://example.com/trial');
+    expect(iframe?.getAttribute('src')).toBe('about:blank');
     expect(iframe?.classList.contains('free-trial-modal__iframe')).toBe(true);
   });
 

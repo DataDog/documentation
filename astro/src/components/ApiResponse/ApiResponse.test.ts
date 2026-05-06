@@ -3,7 +3,7 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 // @ts-ignore — Preact renderer is registered for SSR of nested ApiSchemaTable islands.
 import preactRenderer from '@astrojs/preact/server.js';
 import ApiResponse from './ApiResponse.astro';
-import type { ResponseData } from '../../lib/api/viewsBuilder';
+import type { ResponseData } from '@lib/api/viewsBuilder';
 
 const responses = [
   {

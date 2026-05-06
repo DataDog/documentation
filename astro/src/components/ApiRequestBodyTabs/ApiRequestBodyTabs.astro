@@ -1,12 +1,12 @@
 ---
-import Tabs from '../Tabs/Tabs.astro';
-import TabPanel from '../Tab/TabPanel.astro';
-import CodeBlock from '../CodeBlock/CodeBlock.astro';
-import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
-import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
-import styles from '../ApiEndpoint/ApiEndpoint.module.css';
-import { classListFactory } from '../../utils/classListFactory';
-import { generateElementId } from '../../utils/generateElementId';
+import Tabs from '@components/Tabs/Tabs.astro';
+import TabPanel from '@components/Tab/TabPanel.astro';
+import CodeBlock from '@components/CodeBlock/CodeBlock.astro';
+import { ApiSchemaTable } from '@components/ApiSchemaTable/ApiSchemaTable';
+import type { SchemaField } from '@components/ApiSchemaTable/ApiSchemaTable';
+import styles from '@components/ApiEndpoint/ApiEndpoint.module.css';
+import { classListFactory } from '@utils/classListFactory';
+import { generateElementId } from '@utils/generateElementId';
 
 const cl = classListFactory(styles);
 

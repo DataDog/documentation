@@ -19,7 +19,7 @@
  * this module (client-bundled) never imports the build-time `regionConfig`.
  */
 
-import type { ClientRegion } from '../../config/regions';
+import type { ClientRegion } from '@config/regions';
 
 const COOKIE_NAME = 'site';
 const QUERY_PARAM = 'site';

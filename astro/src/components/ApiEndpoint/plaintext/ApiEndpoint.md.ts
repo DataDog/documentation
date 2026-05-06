@@ -11,9 +11,9 @@
  * endpoint from the next within a category page.
  */
 
-import type { EndpointData } from '../../../lib/api/viewsBuilder';
-import { getDefaultRegions } from '../../../lib/api/regionResolver';
-import { appHost } from '../../../config/regions';
+import type { EndpointData } from '@lib/api/viewsBuilder';
+import { getDefaultRegions } from '@lib/api/regionResolver';
+import { appHost } from '@config/regions';
 import { renderApiStatusAlertMd } from '../../ApiStatusAlert/plaintext/ApiStatusAlert.md';
 import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable.md';
 import { renderApiRequestBodyTabsMd } from '../../ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs.md';

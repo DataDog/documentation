@@ -9,6 +9,7 @@
       "@websites-modules/*": ["../../../../../../dd/websites-modules/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@components/*": ["./src/components/*"],
+      "@config/*": ["./src/config/*"],
       "@lib/*": ["./src/lib/*"],
       "@utils/*": ["./src/utils/*"]
     }

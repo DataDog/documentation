@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Alert from '../../../components/Alert/Alert.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Alert from '@components/Alert/Alert.astro';
 
 const docs = await getCollection('docs');
 const components = docs

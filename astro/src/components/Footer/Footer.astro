@@ -6,7 +6,7 @@
  * (footer-small, footer-nycactivities, aws-reinvent-2020, footer-slim).
  */
 import styles from './Footer.module.css';
-import { classListFactory } from '../../utils/classListFactory';
+import { classListFactory } from '@utils/classListFactory';
 import FooterBlurb from './FooterBlurb.astro';
 import FooterAccordion from './FooterAccordion.tsx';
 import LanguageSelector from './LanguageSelector.tsx';
@@ -21,10 +21,10 @@ import {
   getFooterSocial,
   resolveFooterUrl,
   splitHalves,
-} from '../../lib/footerMenus';
-import { i18n } from '../../lib/i18n/i18n';
-import { getTranslations, getNativeLabel, type LangCode } from '../../lib/i18n/languageNames';
-import { getProductCategories, getProduct, resolveUrl } from '../../lib/menuData';
+} from '@lib/footerMenus';
+import { i18n } from '@lib/i18n/i18n';
+import { getTranslations, getNativeLabel, type LangCode } from '@lib/i18n/languageNames';
+import { getProductCategories, getProduct, resolveUrl } from '@lib/menuData';
 
 // Products — assembled from the mega-menu product tree so the Product column
 // matches Hugo's `$datadir.menu_data.products` source. Flatten to a deduped
@@ -59,7 +59,7 @@ const year = new Date().getFullYear();
 // Language selector — Astro's i18n routing handles the actual locale switch,
 // so each link is a real localized URL. The footer renders all supported
 // locales; the toolbar instance reuses the same Preact component.
-import { LOCALES, localizedHref, stripLocalePrefix } from '../../lib/i18n/locale';
+import { LOCALES, localizedHref, stripLocalePrefix } from '@lib/i18n/locale';
 
 const { lang: footerLang, rest: footerLocaleless } = stripLocalePrefix(Astro.url.pathname);
 const currentLang: LangCode = footerLang;

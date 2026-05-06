@@ -7,7 +7,7 @@
  * (endpoints) to avoid re-walking on each call within a build.
  */
 
-import { DEFAULT_LOCALE, LOCALES, type Locale } from '../../lib/i18n/locale';
+import { DEFAULT_LOCALE, LOCALES, type Locale } from '@lib/i18n/locale';
 import { API_VERSIONS, getOpenApiDocument, type ApiVersion } from './specParser';
 import type { OpenAPIV3 } from 'openapi-types';
 import { getRegions, buildApiUrlFromServers } from './regionResolver';

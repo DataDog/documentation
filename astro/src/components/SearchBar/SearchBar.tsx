@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import { createPortal } from 'preact/compat';
 import styles from './SearchBar.module.css';
-import { classListFactory } from '../../utils/classListFactory';
-import { multiSearch, type MultiSearchResponse, type TypesenseHit } from '../../lib/typesense';
-import { getTypesenseConfig, type TypesenseEnv } from '../../config/typesense';
+import { classListFactory } from '@utils/classListFactory';
+import { multiSearch, type MultiSearchResponse, type TypesenseHit } from '@lib/typesense';
+import { getTypesenseConfig, type TypesenseEnv } from '@config/typesense';
 // Same magnifying-glass shape Hugo's side-nav search uses (Hugo loads it as an
 // icomoon font glyph; here we inline it as SVG so the icon scales freely and
 // inherits the input-bar text color via `currentColor`).

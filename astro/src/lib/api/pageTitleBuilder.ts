@@ -12,7 +12,7 @@
  */
 
 import { parse as parseYaml } from 'yaml';
-import { DEFAULT_LOCALE, type Locale } from '../../lib/i18n/locale';
+import { DEFAULT_LOCALE, type Locale } from '@lib/i18n/locale';
 
 const rawModules: Record<string, string> = import.meta.glob<string>(
   '@hugo-site/content/*/api/latest/**/_index.md',

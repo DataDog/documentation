@@ -12,7 +12,7 @@ import {
   getFooterSocial,
   resolveFooterUrl,
   splitHalves,
-} from '../../lib/footerMenus';
+} from '@lib/footerMenus';
 
 function decodeEntities(s: string): string {
   return s

@@ -7,7 +7,7 @@ import SearchBar from './SearchBar';
 import basicFixture from './__fixtures__/typesense_basic.json';
 import noHitsFixture from './__fixtures__/typesense_no_hits.json';
 import apiOnlyFixture from './__fixtures__/typesense_api_only.json';
-import { flattenResult, type MultiSearchResponse } from '../../lib/typesense';
+import { flattenResult, type MultiSearchResponse } from '@lib/typesense';
 
 afterEach(() => {
   cleanup();

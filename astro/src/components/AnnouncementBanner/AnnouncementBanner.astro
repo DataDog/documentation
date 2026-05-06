@@ -1,8 +1,8 @@
 ---
 import styles from './AnnouncementBanner.module.css';
 import GeoTargetScript from './GeoTargetScript.astro';
-import { getBannerParams, type BannerParams } from '../../lib/bannerData';
-import { classListFactory } from '../../utils/classListFactory';
+import { getBannerParams, type BannerParams } from '@lib/bannerData';
+import { classListFactory } from '@utils/classListFactory';
 
 interface Props {
   /** Optional override, mirroring Hugo's page-level `announcement_banner` param. */

@@ -1,4 +1,4 @@
-import type { TypesenseEnv } from '../config/typesense';
+import type { TypesenseEnv } from '@config/typesense';
 
 export interface TypesenseHit {
   document: {

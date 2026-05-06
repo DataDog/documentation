@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import styles from './RegionSelector.module.css';
-import { classListFactory } from '../../utils/classListFactory';
+import { classListFactory } from '@utils/classListFactory';
 import {
   getActiveRegion,
   setActiveRegion,
@@ -10,7 +10,7 @@ import {
   initRegionState,
   DEFAULT_REGION_KEY,
 } from './regionState';
-import type { ClientRegion } from '../../config/regions';
+import type { ClientRegion } from '@config/regions';
 
 const cl = classListFactory(styles);
 

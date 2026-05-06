@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { h } from 'preact';
 import type { ComponentType } from 'preact';
 import { RegionSelector } from './RegionSelector';
-import { buildClientRegions } from '../../config/regions';
+import { buildClientRegions } from '@config/regions';
 
 const RegionSelectorComponent = RegionSelector as ComponentType<any>;
 const regions = buildClientRegions();

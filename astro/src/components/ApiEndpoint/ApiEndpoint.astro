@@ -1,17 +1,17 @@
 ---
-import ApiMethodBadge from '../ApiMethodBadge/ApiMethodBadge.astro';
-import ApiStatusAlert from '../ApiStatusAlert/ApiStatusAlert.astro';
-import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
-import ApiResponse from '../ApiResponse/ApiResponse.astro';
-import ApiCodeExample from '../ApiCodeExample/ApiCodeExample.astro';
-import ApiRequestBodyTabs from '../ApiRequestBodyTabs/ApiRequestBodyTabs.astro';
-import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
-import type { ResponseData } from '../ApiResponse/ApiResponse.astro';
-import type { CodeExampleSet } from '../ApiCodeExample/ApiCodeExample.astro';
-import { getDefaultRegions } from '../../lib/api/regionResolver';
-import { renderMarkdownInline } from '../../lib/api/markdownRenderer';
+import ApiMethodBadge from '@components/ApiMethodBadge/ApiMethodBadge.astro';
+import ApiStatusAlert from '@components/ApiStatusAlert/ApiStatusAlert.astro';
+import { ApiSchemaTable } from '@components/ApiSchemaTable/ApiSchemaTable';
+import ApiResponse from '@components/ApiResponse/ApiResponse.astro';
+import ApiCodeExample from '@components/ApiCodeExample/ApiCodeExample.astro';
+import ApiRequestBodyTabs from '@components/ApiRequestBodyTabs/ApiRequestBodyTabs.astro';
+import type { SchemaField } from '@components/ApiSchemaTable/ApiSchemaTable';
+import type { ResponseData } from '@components/ApiResponse/ApiResponse.astro';
+import type { CodeExampleSet } from '@components/ApiCodeExample/ApiCodeExample.astro';
+import { getDefaultRegions } from '@lib/api/regionResolver';
+import { renderMarkdownInline } from '@lib/api/markdownRenderer';
 import styles from './ApiEndpoint.module.css';
-import { classListFactory } from '../../utils/classListFactory';
+import { classListFactory } from '@utils/classListFactory';
 
 const allRegions = getDefaultRegions();
 const cl = classListFactory(styles);

@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import styles from './LanguageSelector.module.css';
-import { classListFactory } from '../../utils/classListFactory';
+import { classListFactory } from '@utils/classListFactory';
 
 const cl = classListFactory(styles);
 

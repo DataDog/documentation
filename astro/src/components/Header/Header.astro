@@ -9,8 +9,8 @@ import ProductMegaMenu, {
 } from './ProductMegaMenu.tsx';
 import LogoDownloadPanel from './LogoDownloadPanel.astro';
 import HeaderScroll from './HeaderScroll.astro';
-import MobileNav from '../MobileNav/MobileNav.tsx';
-import { classListFactory } from '../../utils/classListFactory';
+import MobileNav from '@components/MobileNav/MobileNav.tsx';
+import { classListFactory } from '@utils/classListFactory';
 import {
   getMainLeft,
   getMainRight,
@@ -20,8 +20,8 @@ import {
   isDisabledForDocs,
   resolveUrl,
   type MenuItem,
-} from '../../lib/menuData';
-import { i18n } from '../../lib/i18n/i18n';
+} from '@lib/menuData';
+import { i18n } from '@lib/i18n/i18n';
 
 const cl = classListFactory(styles);
 
@@ -29,10 +29,6 @@ const mainLeft = getMainLeft();
 const mainRight = getMainRight();
 const categories = getDesktopCategories();
 const mobileCategoriesRaw = getMobileCategories();
-
-// Raw SVG import for the carrot icon used in the mega-menu's pricing link.
-const carrotSvgModule = await import('../../mocked-dependencies/websites_modules/static/icons/right-carrot-normal-2.svg?raw');
-const carrotSvg = carrotSvgModule.default as string;
 
 // Raw imports for each product-category icon, keyed by the category's `icon` field.
 const categoryIconMap: Record<string, string> = import.meta.glob<string>(
@@ -44,6 +40,8 @@ function iconHtmlFor(name: string): string {
   const key = `../../mocked-dependencies/websites_modules/static/icons/${name}.svg`;
   return categoryIconMap[key] ?? '';
 }
+
+const carrotSvg = iconHtmlFor('right-carrot-normal-2');
 
 // Assemble the mega-menu data structure (translated, URL-resolved).
 const megaCategories: MegaCategory[] = categories.map((cat) => {

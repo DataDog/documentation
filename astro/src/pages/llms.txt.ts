@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
-import { getCategoriesView } from '../lib/api/viewsBuilder';
-import { renderLlmsTxt } from '../lib/api/llmsTxtRenderer';
+import { getCategoriesView } from '@lib/api/viewsBuilder';
+import { renderLlmsTxt } from '@lib/api/llmsTxtRenderer';
 
 export const GET: APIRoute = async ({ site }) => {
   if (!site) {

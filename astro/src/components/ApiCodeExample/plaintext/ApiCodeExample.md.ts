@@ -9,7 +9,7 @@
  * endpoint covers per-region differences).
  */
 
-import type { CodeExampleSet, CodeExampleEntry } from '../../../lib/api/codeExampleLoader';
+import type { CodeExampleSet, CodeExampleEntry } from '@lib/api/codeExampleLoader';
 
 function renderEntry(entry: CodeExampleEntry, includeHeading: boolean): string {
   const heading = includeHeading && entry.description ? `**${entry.description}**\n\n` : '';
