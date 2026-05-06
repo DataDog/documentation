@@ -1,5 +1,5 @@
 ---
-title: Datadog Apps
+title: Apps
 description: Build and deploy custom Datadog Apps locally using a code-based development workflow with React, backend functions, and a CLI.
 site_support_id: app_builder #Site support banner for US1-FED and US2-FED
 further_reading:
@@ -14,13 +14,15 @@ further_reading:
   text: "Access and Authentication"
 ---
 
+<!-- DOCS-14320: barakshush asks whether to drop "Datadog" from the page title (title: Datadog Apps), since other product pages don't prefix with "Datadog". -->
+
 ## Overview
 
 With Datadog Apps, you build applications locally as code with React and TypeScript (or JavaScript), using your standard development workflow.
 
-Datadog Apps use the same [permissions model][1] as the drag-and-drop apps in App Builder and can also be [embedded in dashboards][2].
+Apps use the same [permissions model][1] as App Builder apps and can also be embedded in other Datadog products such as [dashboards and IDPs][2].
 
-Choose Datadog Apps when you need:
+Choose Apps when you need:
 
 - **Team collaboration**: Multiple engineers contributing to the same app, with code review and version history through your existing source control.
 - **Source control and CI/CD**: Store your app in GitHub and deploy automatically on merge.
@@ -49,7 +51,7 @@ Choose Datadog Apps when you need:
    npm create @datadog/apps
    ```
 2. Follow the interactive prompts to configure your app name and template.
-3. (Optional) Set up [Datadog RUM][15] for the app. This automatically sets up the Browser SDK for:
+3. (Optional) Set up [Datadog RUM][6] for the app. This automatically sets up the Browser SDK for:
    - Real User Monitoring (RUM)
    - Error Tracking
    - Build metrics
@@ -62,7 +64,7 @@ The scaffolded project includes:
 |---|---|
 | `src/App.tsx` | Root UI component (React) |
 | `src/**/*.backend.ts` | Backend functions that run server-side with access to API keys |
-| `vite.config.ts` | Build configuration with [`@datadog/vite-plugin`][14] pre-configured |
+| `vite.config.ts` | Build configuration with [`@datadog/vite-plugin`][7] pre-configured |
 | `package.json` | Dependencies and scripts (`dev`, `build`) |
 
 ## Develop your app locally
@@ -86,7 +88,7 @@ The scaffolded project includes:
 
 Files matching `*.backend.ts` or `*.js` contain backend functions. Backend functions run server-side with access to your API keys and are never shipped to the browser. The frontend imports and calls them like standard ES modules.
 
-Backend functions can call any action in Datadog's [Action Catalog][3] through the [`@datadog/action-catalog`][6] library. The Action Catalog provides reusable, pre-built actions for interacting with cloud providers, SaaS tools, and the Datadog API, so you can build functionality on top of existing integrations instead of writing API clients from scratch.
+Backend functions can call any action in Datadog's [Action Catalog][3] through the [`@datadog/action-catalog`][8] library. The Action Catalog provides reusable, pre-built actions for interacting with cloud providers, SaaS tools, and the Datadog API, so you can build functionality on top of existing integrations instead of writing API clients from scratch.
 
 The library is a fully typed TypeScript client that wraps integrations, including AWS, Azure, GCP, the Datadog API, GitHub, GitLab, Slack, Jira, PagerDuty, ServiceNow, OpenAI, Anthropic, and generic HTTP. Importing actions from `@datadog/action-catalog` gives you typed inputs and responses for each action.
 
@@ -138,7 +140,8 @@ export default App;
 ```
 {{% /collapse-content %}}
 
-## Publish your app
+<!-- DOCS-14320: barakshush asks if this section should be called "Upload your app" instead, since the user uploads their app from their local environment to the Datadog UI. -->
+## Upload your app
 
 Run a production build to upload your app to Datadog:
 
@@ -157,7 +160,7 @@ The following environment variables are available with `npm run build`:
 
 By default, `npm run build` runs in dry run mode, which builds the app without uploading it to Datadog. Dry run mode is the recommended default for local development, where you typically don't want to upload every local build.
 
-For production deployments, [set up CI/CD with GitHub Actions](#set-up-cicd-with-github-actions). [`DataDog/apps-github-action`][7] handles the upload step for you, so you don't need to change `dryRun` for this workflow.
+For production deployments, [set up CI/CD with GitHub Actions](#set-up-cicd-with-github-actions). [`DataDog/apps-github-action`][9] handles the upload step for you, so you don't need to change `dryRun` for this workflow.
 
 To upload from your local environment as an end-to-end test (for example, to verify that the build pipeline works before a release), set `DD_APPS_UPLOAD_ASSETS`:
 
@@ -167,13 +170,18 @@ DD_APPS_UPLOAD_ASSETS=1 npm run build
 
 After a successful upload, the build output displays a URL where your app is accessible in Datadog.
 
-## View and manage your apps
+<!-- DOCS-14320: barakshush suggests renaming this section to "Publish and manage your apps". -->
+## Publish and manage your apps
 
-After you publish an app, it appears in your [App Builder][8] app list alongside your other apps. From the App Builder UI, you can:
+After you upload an app, it appears in your [App Builder][10] app list. From App Builder, you can:
 
-- Edit the app name and description
-- Manage permissions
-- Embed the app in dashboards, notebooks, and the Internal Developer Portal
+<!-- DOCS-14320: barakshush notes that "Publish" should be the first step before managing permissions. Consider reordering and linking to https://docs.datadoghq.com/actions/app_builder/access_and_auth/#app-permissions for the permissions step. -->
+- [Publish your app][11]
+<!-- DOCS-14320: barakshush asks to add a brief explanation (1-2 lines) of how to edit the app name and description here, or link to the relevant App Builder section. -->
+- [Edit the app name and description][11]
+- Manage [permissions][12]
+<!-- DOCS-14320: barakshush asks for an explanation of how to embed the app in dashboards, notebooks, and the IDP. -->
+- [Embed the app][2] in dashboards, notebooks, and the Internal Developer Portal
 
 <div class="alert alert-danger">
 The following App Builder features are not available for locally-built apps:
@@ -186,9 +194,9 @@ To change an app's UI or logic, update the code in your local project and redepl
 
 ## Set up CI/CD with GitHub Actions
 
-To automatically deploy your app on every push to the `main` branch, use the [`DataDog/apps-github-action`][7] GitHub Action. This action builds your app and deploys it to Datadog.
+To automatically deploy your app on every push to the `main` branch, use the [`DataDog/apps-github-action`][9] GitHub Action. This action builds your app and deploys it to Datadog.
 
-If your organization is not on US1 (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][9]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site is `{{< region-param key="dd_site" >}}`.
+If your organization is not on US1 (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][13]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site is `{{< region-param key="dd_site" >}}`.
 
 {{< site-region region="us3,us5,eu,ap1,ap2" >}}
 
@@ -248,7 +256,7 @@ The build defaults to dry run mode. Set `DD_APPS_UPLOAD_ASSETS=1` or configure `
 
 ### Node.js version errors during scaffolding
 
-The scaffolding tool requires Node.js v20.12.0 or later. If you still encounter version errors on a supported version, try upgrading to v22. Use a version manager such as [nvm][10], [Volta][11], or [fnm][12], or download from [nodejs.org][13].
+The scaffolding tool requires Node.js v20.12.0 or later. If you still encounter version errors on a supported version, try upgrading to v22. Use a version manager such as [nvm][14], [Volta][15], or [fnm][16], or download from [nodejs.org][17].
 
 ## Further reading
 
@@ -259,13 +267,15 @@ The scaffolding tool requires Node.js v20.12.0 or later. If you still encounter 
 [3]: /actions/actions_catalog/
 [4]: /account_management/api-app-keys/
 [5]: https://app.datadoghq.com/organization-settings/application-keys
-[6]: https://www.npmjs.com/package/@datadog/action-catalog
-[7]: https://github.com/DataDog/apps-github-action
-[8]: /actions/app_builder/
-[9]: /getting_started/site/
-[10]: https://github.com/nvm-sh/nvm
-[11]: https://volta.sh
-[12]: https://github.com/Schniz/fnm
-[13]: https://nodejs.org
-[14]: https://github.com/DataDog/build-plugin
-[15]: /real_user_monitoring/
+[6]: /real_user_monitoring/
+[7]: https://github.com/DataDog/build-plugin
+[8]: https://www.npmjs.com/package/@datadog/action-catalog
+[9]: https://github.com/DataDog/apps-github-action
+[10]: https://app.datadoghq.com/app-builder/apps/list
+[11]: /actions/app_builder/build/#customize-your-app
+[12]: /actions/app_builder/access_and_auth/#app-permissions
+[13]: /getting_started/site/
+[14]: https://github.com/nvm-sh/nvm
+[15]: https://volta.sh
+[16]: https://github.com/Schniz/fnm
+[17]: https://nodejs.org
