@@ -2,18 +2,32 @@
  * SDK code example loading for API documentation.
  *
  * Reads code example metadata from CodeExamples.json and loads the
- * corresponding source files from data/api via the @hugo-site alias.
- * Currently only curl examples render because no SDK source files exist
- * in data/api yet.
+ * corresponding source files from each operation's resource folder under
+ * content/en/api/<version>/<category>/. When an operationId is missing
+ * from CodeExamples.json the loader synthesizes a single default entry
+ * (no suffix), matching the Hugo template's fallback branch in
+ * layouts/partials/api/code-example.html.
  */
 
 import API_V1_CODE_EXAMPLES from '@hugo-site/data/api/v1/CodeExamples.json';
 import API_V2_CODE_EXAMPLES from '@hugo-site/data/api/v2/CodeExamples.json';
 
 const sdkExampleFiles: Record<string, string> = import.meta.glob(
-  '@hugo-site/data/api/v*/examples/*',
+  '@hugo-site/content/en/api/v*/*/*.{go,java,py,pybeta,rb,rbbeta,rs,ts}',
   { eager: true, query: '?raw', import: 'default' },
 );
+
+const FILE_KEY_RE = /\/content\/en\/api\/(v1|v2)\/([^/]+)\/([^/]+)$/;
+
+const filesByLocation = new Map<string, string>();
+for (const [key, code] of Object.entries(sdkExampleFiles)) {
+  const m = FILE_KEY_RE.exec(key);
+  if (!m) {
+    continue;
+  }
+  const [, version, categorySlug, filename] = m;
+  filesByLocation.set(`${version}/${categorySlug}/${filename}`, code);
+}
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -62,14 +76,24 @@ const CODE_EXAMPLES: Record<'v1' | 'v2', Record<string, CodeExampleMeta[]>> = {
   v2: API_V2_CODE_EXAMPLES as Record<string, CodeExampleMeta[]>,
 };
 
-/** Language configuration: file extensions and display metadata */
-const LANGUAGES = [
-  { id: 'python',     label: 'Python',     ext: '.py',   syntax: 'python' },
-  { id: 'ruby',       label: 'Ruby',       ext: '.rb',   syntax: 'ruby' },
-  { id: 'go',         label: 'Go',         ext: '.go',   syntax: 'go' },
-  { id: 'java',       label: 'Java',       ext: '.java', syntax: 'java' },
-  { id: 'typescript', label: 'TypeScript', ext: '.ts',   syntax: 'typescript' },
-] as const;
+/**
+ * Language configuration. `exts` is tried in order; the first match wins, so
+ * the modern beta extension (e.g. `.pybeta`) takes precedence over the legacy
+ * one (`.py`) when both happen to exist for an operation.
+ */
+const LANGUAGES: ReadonlyArray<{
+  id: string;
+  label: string;
+  exts: readonly string[];
+  syntax: string;
+}> = [
+  { id: 'python',     label: 'Python',     exts: ['.pybeta', '.py'], syntax: 'python' },
+  { id: 'ruby',       label: 'Ruby',       exts: ['.rbbeta', '.rb'], syntax: 'ruby' },
+  { id: 'go',         label: 'Go',         exts: ['.go'],            syntax: 'go' },
+  { id: 'java',       label: 'Java',       exts: ['.java'],          syntax: 'java' },
+  { id: 'typescript', label: 'TypeScript', exts: ['.ts'],            syntax: 'typescript' },
+  { id: 'rust',       label: 'Rust',       exts: ['.rs'],            syntax: 'rust' },
+];
 
 /* ------------------------------------------------------------------ */
 /*  Main export                                                        */
@@ -78,26 +102,23 @@ const LANGUAGES = [
 /**
  * Load all SDK code examples for a given API operation.
  *
- * Reads CodeExamples.json to discover which examples exist, then loads
- * the actual code files from the examples directory for each supported
- * language.
+ * Looks up CodeExamples.json for the per-language file metadata. When the
+ * operationId has no entry there, synthesizes a single default entry so the
+ * resource folder is still scanned for `<OperationId>.<ext>` files.
  *
- * @param operationId  The OpenAPI operationId (e.g. 'CreateDashboard')
- * @param version      The API version ('v1' or 'v2')
- * @param _tag         The category/tag name (reserved for future use)
+ * @param operationId   The OpenAPI operationId (e.g. 'GetActionConnection')
+ * @param version       The API version ('v1' or 'v2')
+ * @param categorySlug  Slugified primary tag (e.g. 'action-connection')
  * @returns An array of CodeExampleSets, one per language that has at least one example
  */
 export function getCodeExamplesForOperation(
   operationId: string,
   version: 'v1' | 'v2',
-  _tag: string
+  categorySlug: string,
 ): CodeExampleSet[] {
-  const metadata = CODE_EXAMPLES[version];
-  const exampleMetas = metadata[operationId];
-
-  if (!exampleMetas || exampleMetas.length === 0) {
-    return [];
-  }
+  const exampleMetas = CODE_EXAMPLES[version][operationId] ?? [
+    { group: '', suffix: '', description: '' },
+  ];
 
   const results: CodeExampleSet[] = [];
 
@@ -105,9 +126,7 @@ export function getCodeExamplesForOperation(
     const entries: CodeExampleEntry[] = [];
 
     for (const meta of exampleMetas) {
-      const filename = buildExampleFilename(operationId, meta.suffix, lang.ext);
-      const code = readExampleFile(version, filename);
-
+      const code = findExampleCode(operationId, meta.suffix, version, categorySlug, lang.exts);
       if (code !== null) {
         entries.push({
           description: meta.description,
@@ -140,6 +159,19 @@ function buildExampleFilename(operationId: string, suffix: string, ext: string):
   return `${operationId}${ext}`;
 }
 
-function readExampleFile(version: 'v1' | 'v2', filename: string): string | null {
-  return sdkExampleFiles[`../../data/api/${version}/examples/${filename}`] ?? null;
+function findExampleCode(
+  operationId: string,
+  suffix: string,
+  version: 'v1' | 'v2',
+  categorySlug: string,
+  exts: readonly string[],
+): string | null {
+  for (const ext of exts) {
+    const filename = buildExampleFilename(operationId, suffix, ext);
+    const code = filesByLocation.get(`${version}/${categorySlug}/${filename}`);
+    if (code !== undefined) {
+      return code;
+    }
+  }
+  return null;
 }

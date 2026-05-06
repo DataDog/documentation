@@ -357,7 +357,7 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
     curlVariants[key] = { code };
   }
 
-  const sdkExamples = getCodeExamplesForOperation(operationId, op.version, op.primaryTag);
+  const sdkExamples = getCodeExamplesForOperation(operationId, op.version, op.categorySlug);
 
   const codeExamples: CodeExampleSet[] = [
     {
