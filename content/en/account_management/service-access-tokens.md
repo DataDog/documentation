@@ -94,7 +94,7 @@ with the SAT only. The `dd-api-key` header is optional and its value is not eval
 
 ### View tokens
 
-Tokens for a service account appear in the service account details panel under
+A service account's tokens appear in the details panel under
 [**Organization Settings** > **Service Accounts**][3].
 
 {{< img src="account_management/service-access-tokens/sat-service-account-panel.png" alt="Service account details panel showing the Access Tokens section with two Service Access Tokens listed" style="width:80%;" >}}
