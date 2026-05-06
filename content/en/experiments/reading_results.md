@@ -1,5 +1,5 @@
 ---
-title: Reading Experiment Results
+title: Read Experiment Results
 description: Read and understand the results of your experiments.
 aliases:
   - /product_analytics/experimentation/reading_results/
@@ -12,32 +12,32 @@ further_reading:
   text: "Analytics Explorer"
 ---
 
+{{< jqmath-vanilla >}}
+
 ## Overview 
 
-After [launching your experiment][1], Datadog begins calculating results for your selected metrics. You can add additional metrics, organize metrics into groups, and explore related user sessions to understand the impact of each variant.
+After [launching an experiment][2], use this page to interpret your metrics, assess statistical significance, and explore results across user segments.
 
 {{< img src="/product_analytics/experiment/exp_reading_exps_overview.png" alt="The experiment results overview showing a decision metrics table with control and treatment values, relative lift, and confidence interval bars for three metrics." style="width:90%;" >}}
 
 ## Confidence intervals
-For each metric, Datadog shows the average per-subject value (typically per user) for both the control and treatment variants. It also reports the relative lift and the associated confidence interval.
 
-The relative lift is defined as:
+The confidence interval represents the range of lift values the experiment's data can support. While the true lift can fall outside this range, values inside the interval are statistically more consistent with the observed data.
 
-```
-                      (Average metric value per treatment subject - Average metric value per control subject)
- Relative lift =   -----------------------------------------------------------------------------------------------             
-                                       (Average metric value per control subject)
-```
+Datadog also reports the relative lift and its associated confidence interval. Datadog calculates the relative lift as:
 
-The confidence interval represents the range of lift values that are plausibly supported by the experiment’s data. While the true lift could fall outside this range, values inside the interval are statistically more consistent with the observed data.
+$$(\text"Average metric value per treatment subject – Average metric value per control subject") / {\text"Average metric value per control subject"}$$
 
-If the entire confidence interval is above zero, then the result is statistically significant. This suggests that the observed difference in metrics is unlikely to be attributable to random noise, and supports the conclusion that the experiment produced a true effect.
+After you launch your experiment, Datadog begins to calculate results for your selected metrics. For each metric, Datadog shows the average per-subject value for both the control and treatment variants. The per-subject value uses the [subject type][3] you are using for your experiment. The default subject type is **User**.
+
+If the confidence interval is above zero, the result is statistically significant. This suggests that the observed difference in metrics is unlikely to be attributable to random noise but that the experiment produced a true effect.
 
 ## Exploring results 
-To dive deeper into experiment results, hover over a metric and click **Chart**. This gives you the option to compare the experiment’s impact across different user segments.
+You can add additional metrics, organize metrics into groups, and explore related user sessions to understand the impact of each variant. To dive deeper into a specific metric, hover over it and click **Chart**. This gives you the option to compare the experiment’s impact across different user segments.
 
 ### Segment-level results
-Subject-level properties are based on attributes at the initial time of exposure (for example, a user's region, whether they are a new visitor, or a repeat visitor). This is useful for understanding when certain cohorts of users reacted differently to the new experience. 
+Each experiment subject (for example, a user) has properties captured at the time of exposure, such as region, device type, or visitor status. Subjects that share a property form a segment. Use segment-level results to understand whether specific groups of users reacted differently to the new experience.
+
 
 {{< img src="/product_analytics/experiment/exp_segment_view.png" alt="Segment-level view of a metric split by Country ISO Code, showing a bar chart of relative lift and a data table with control and treatment values per country." style="width:90%;" >}}
 
@@ -46,3 +46,5 @@ Subject-level properties are based on attributes at the initial time of exposure
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /experiments/
+[2]: /experiments/plan_and_launch_experiments
+[3]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
