@@ -24,7 +24,7 @@ Service Access Tokens (SATs) are credentials that authenticate Datadog API calls
 rather than an individual user — they remain valid when team members join or leave the organization.
 
 With SATs, you can:
-- Authenticate automated workflows and scripts with credentials that outlast individual employees.
+- Authenticate automated workflows and scripts with credentials that remain valid after team members leave the organization.
 - Create long-lived tokens for stable integrations that do not require periodic rotation.
 - Scope tokens to the minimum permissions your workflow requires.
 - Attribute all API activity to the owning service account for clear audit accountability.
