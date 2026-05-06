@@ -537,7 +537,7 @@ Tools for investigating Kafka workloads with [Data Streams Monitoring][27], incl
 *Permissions Required: `APM Read`*\
 Lists Kafka topic configuration overrides for a cluster, such as `cleanup.policy`, `retention.ms`, and `max.message.bytes`. Optionally filtered to a single topic. Use this to check whether topic-level settings explain producer or consumer behavior.
 
-- Show me the topic config for `dbm-events` on cluster `prod-east-1`.
+- Show me the topic config for `checkout-orders` on cluster `prod-east-1`.
 - What is the retention setting on the orders Kafka topic?
 - Compare `max.message.bytes` across all topics in the payments cluster.
 
@@ -574,14 +574,14 @@ Returns all schema versions for a single Schema Registry subject (schema body, I
 
 - Show every version of the `orders-value` schema.
 - What changed in the latest version of the `payments-key` schema?
-- Get the schema body for `dbm-events-value` version 7.
+- Get the schema body for `checkout-orders-value` version 7.
 
 ### `read_kafka_messages`
 *Toolset: **data-streams***\
 *Permissions Required: `APM Read` and `Data Streams Monitoring Capture Messages`*\
 Reads messages from a given Kafka cluster, topic, and partition through the Datadog Agent by dispatching a Remote Config action and polling for the agent's response. Rate-limited to 10 calls per minute per organization. Useful for inspecting message payloads when investigating poison messages or stuck consumer offsets.
 
-- What are the last messages on topic `dbm-events`?
+- What are the last messages on topic `checkout-orders`?
 - Show me the most recent payloads produced to the orders Kafka topic.
 - Read the message at offset 12345 on partition 3 of the `payments` topic.
 
