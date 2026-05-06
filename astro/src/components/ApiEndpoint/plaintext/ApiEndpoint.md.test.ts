@@ -8,7 +8,7 @@ const baseEndpoint: EndpointData = {
   slug: 'get-a-thing',
   method: 'GET',
   path: '/api/v2/things/{thing_id}',
-  description: '<p>Returns a thing by id.</p>',
+  description: 'Returns a thing by id.',
   version: 'v2',
   deprecated: false,
   unstable: false,
@@ -63,15 +63,14 @@ describe('renderApiEndpointMd', () => {
   });
 
   it('renders an unstable alert when the endpoint is unstable (and not deprecated)', () => {
-    const out = renderApiEndpointMd({ ...baseEndpoint, unstable: true, unstableMessage: '<p>Subject to change.</p>' });
+    const out = renderApiEndpointMd({ ...baseEndpoint, unstable: true, unstableMessage: 'Subject to change.' });
     expect(out).toContain('{% alert level="warning" %}');
     expect(out).toContain('**Unstable:** Subject to change.');
   });
 
-  it('converts the description from HTML to Markdown', () => {
+  it('includes the endpoint description', () => {
     const out = renderApiEndpointMd(baseEndpoint);
     expect(out).toContain('Returns a thing by id.');
-    expect(out).not.toContain('<p>');
   });
 
   it('renders an Arguments section with a schema table when path params exist', () => {

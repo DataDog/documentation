@@ -8,7 +8,6 @@
 
 import type { ResponseData } from '../../../data/api/viewsBuilder';
 import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable.md';
-import { htmlToMd } from '../../../data/api/htmlToMdConverter';
 
 function renderExamples(examples: NonNullable<ResponseData['examples']>): string {
   return examples
@@ -48,7 +47,7 @@ function renderInnerTabs(r: ResponseData): string {
 
 function renderResponsePanel(r: ResponseData): string {
   const parts: string[] = [];
-  if (r.description) parts.push(htmlToMd(r.description));
+  if (r.description) parts.push(r.description);
   const inner = renderInnerTabs(r);
   if (inner) parts.push(inner);
   return parts.join('\n\n');

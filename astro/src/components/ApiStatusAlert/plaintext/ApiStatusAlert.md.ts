@@ -7,8 +7,6 @@
  * we map: deprecated/unstable → warning, beta → info.
  */
 
-import { htmlToMd } from "../../../data/api/htmlToMdConverter";
-
 type StatusType = "deprecated" | "unstable" | "beta";
 
 interface Props {
@@ -46,7 +44,7 @@ export function renderApiStatusAlertMd({
   message,
 }: Props): string {
   const config = DEFAULTS[type];
-  const body = htmlToMd(message || config.defaultMessage);
+  const body = message || config.defaultMessage;
   const link =
     newerVersionUrl && type === "deprecated"
       ? ` [Use the newer version.](${newerVersionUrl})`

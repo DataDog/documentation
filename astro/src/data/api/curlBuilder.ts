@@ -40,12 +40,12 @@ export interface GenerateCurlOptions {
  * The output includes shell variable exports as comments and a multi-line
  * curl command suitable for display in documentation.
  */
-export function generateCurl(options: GenerateCurlOptions): string {
+export function buildCurlCommand(options: GenerateCurlOptions): string {
   const {
     method,
     path,
-    site = 'datadoghq.com',
-    subdomain = 'api',
+    site = "datadoghq.com",
+    subdomain = "api",
     pathParams,
     queryParams,
     requestBodyJson,
@@ -68,7 +68,7 @@ export function generateCurl(options: GenerateCurlOptions): string {
   if (auth.appKey) {
     lines.push(`export DD_APP_KEY="<DD_APP_KEY>"`);
   }
-  lines.push('');
+  lines.push("");
 
   // --- curl command ---
   const curlParts: string[] = [];
@@ -93,16 +93,16 @@ export function generateCurl(options: GenerateCurlOptions): string {
   }
 
   // Join with line-continuation backslashes
-  const curlCommand = curlParts.join(' \\\n');
+  const curlCommand = curlParts.join(" \\\n");
   lines.push(curlCommand);
 
   // Append body after the command if present
   if (requestBodyJson) {
     lines.push(requestBodyJson);
-    lines.push('EOF');
+    lines.push("EOF");
   }
 
-  return lines.join('\n');
+  return lines.join("\n");
 }
 
 /* ------------------------------------------------------------------ */
@@ -130,25 +130,32 @@ function interpolatePath(path: string, pathParams?: CurlParam[]): string {
  * Only includes required parameters and those with example values.
  */
 function buildQueryString(queryParams?: CurlParam[]): string {
-  if (!queryParams || queryParams.length === 0) return '';
+  if (!queryParams || queryParams.length === 0) return "";
 
   const parts: string[] = [];
   for (const param of queryParams) {
     if (param.example !== undefined) {
-      parts.push(`${encodeURIComponent(param.name)}=${encodeURIComponent(String(param.example))}`);
+      parts.push(
+        `${encodeURIComponent(param.name)}=${encodeURIComponent(String(param.example))}`,
+      );
     } else if (param.required) {
-      parts.push(`${encodeURIComponent(param.name)}=\${${param.name.toUpperCase()}}`);
+      parts.push(
+        `${encodeURIComponent(param.name)}=\${${param.name.toUpperCase()}}`,
+      );
     }
   }
 
-  return parts.length > 0 ? `?${parts.join('&')}` : '';
+  return parts.length > 0 ? `?${parts.join("&")}` : "";
 }
 
 /**
  * Determine whether the operation requires API key and/or App key auth.
  * Falls back to including both if no security block is provided.
  */
-function getAuthHeaders(security?: any[]): { apiKey: boolean; appKey: boolean } {
+function getAuthHeaders(security?: any[]): {
+  apiKey: boolean;
+  appKey: boolean;
+} {
   if (!security || security.length === 0) {
     return { apiKey: true, appKey: true };
   }
@@ -174,5 +181,5 @@ function getAuthHeaders(security?: any[]): { apiKey: boolean; appKey: boolean } 
  */
 function methodHasBody(method: string): boolean {
   const upper = method.toUpperCase();
-  return upper === 'POST' || upper === 'PUT' || upper === 'PATCH';
+  return upper === "POST" || upper === "PUT" || upper === "PATCH";
 }

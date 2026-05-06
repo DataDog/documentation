@@ -3,9 +3,10 @@ import ApiLayout from '../../../../layouts/ApiLayout.astro';
 import ApiMethodBadge from '../../../../components/ApiMethodBadge/ApiMethodBadge.astro';
 import ApiStatusAlert from '../../../../components/ApiStatusAlert/ApiStatusAlert.astro';
 import { getCategoriesView, getCategoryViewBySlug } from '../../../../data/api/viewsBuilder';
+import { renderMarkdown } from '../../../../data/api/markdownRenderer';
 import { getApiPageTitle } from '../../../../data/api/pageTitleBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '../../../../lib/i18n/locale';
-import { htmlToMetaDescription } from '../../../../lib/seo';
+import { mdToMetaDescription } from '../../../../lib/seo';
 import { i18n } from '../../../../lib/i18n/i18n';
 import type { GetStaticPaths, GetStaticPathsResult } from 'astro';
 
@@ -46,7 +47,7 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
 
 <ApiLayout
   title={`${current.name} - Datadog API`}
-  description={htmlToMetaDescription(current.description) || `${current.name} endpoints in the Datadog API.`}
+  description={mdToMetaDescription(current.description) || `${current.name} endpoints in the Datadog API.`}
   categories={categories}
   currentSlug={slug}
   breadcrumbs={[
@@ -58,7 +59,7 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
   <h1>{current.name}</h1>
   {current.deprecated && <ApiStatusAlert type="deprecated" />}
   {current.description && (
-    <div set:html={current.description} />
+    <div set:html={renderMarkdown(current.description)} />
   )}
   {current.operations.length > 0 && (
     <ul class="api-category-toc">

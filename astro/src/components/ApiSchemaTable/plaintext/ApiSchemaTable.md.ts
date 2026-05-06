@@ -14,7 +14,6 @@
  */
 
 import type { SchemaField } from '../../../data/api/refResolver';
-import { htmlToMdInline } from '../../../data/api/htmlToMdConverter';
 
 const UNNAMED_FIELD_LABEL = '<items>';
 
@@ -35,7 +34,7 @@ function fieldType(field: SchemaField): string {
 
 function fieldDescription(field: SchemaField): string {
   const parts: string[] = [];
-  if (field.description) parts.push(htmlToMdInline(field.description));
+  if (field.description) parts.push(field.description);
   if (field.deprecated) parts.push('**Deprecated.**');
   if (field.readOnly) parts.push('Read-only.');
   if (field.enumValues && field.enumValues.length > 0) {

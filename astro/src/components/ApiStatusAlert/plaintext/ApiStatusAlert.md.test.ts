@@ -44,10 +44,10 @@ describe('renderApiStatusAlertMd', () => {
     expect(unstable).not.toContain('Use the newer version.');
   });
 
-  it('converts HTML in the message to Markdown', () => {
+  it('passes the message through as-is', () => {
     const out = renderApiStatusAlertMd({
       type: 'unstable',
-      message: 'See <a href="https://x.example">docs</a>.',
+      message: 'See [docs](https://x.example).',
     });
     expect(out).toContain('See [docs](https://x.example).');
   });

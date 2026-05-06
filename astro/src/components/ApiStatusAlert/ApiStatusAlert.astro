@@ -25,6 +25,7 @@ const defaults: Record<string, { label: string; defaultMessage: string }> = {
 const config = defaults[type];
 const displayMessage = message || config.defaultMessage;
 
+import { renderMarkdownInline } from '../../data/api/markdownRenderer';
 import styles from './ApiStatusAlert.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 const cl = classListFactory(styles);
@@ -36,7 +37,7 @@ const cl = classListFactory(styles);
 >
   <span class={cl('api-status-alert__label')}>{config.label}</span>
   <span class={cl('api-status-alert__message')}>
-    <Fragment set:html={displayMessage} />
+    <Fragment set:html={renderMarkdownInline(displayMessage)} />
     {newerVersionUrl && type === 'deprecated' && (
       <a href={newerVersionUrl} class={cl('api-status-alert__link')}>Use the newer version.</a>
     )}

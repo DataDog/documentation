@@ -2,6 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import styles from './ApiSchemaTable.module.css';
 import { classListFactory } from '../../utils/classListFactory';
+import { renderMarkdownInline } from '../../data/api/markdownRenderer';
 
 const cl = classListFactory(styles);
 
@@ -88,7 +89,7 @@ function FieldRow({
           {field.deprecated && (
             <><strong class={cl('schema-table__deprecated-label')}>DEPRECATED</strong>{' '}</>
           )}
-          <span dangerouslySetInnerHTML={{ __html: field.description }} />
+          <span dangerouslySetInnerHTML={{ __html: renderMarkdownInline(field.description) }} />
           {field.defaultValue !== undefined && (
             <span class={cl('schema-table__default')}> Default: <code>{field.defaultValue}</code></span>
           )}

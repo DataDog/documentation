@@ -50,15 +50,19 @@ export function getLocaleDefaults(lang: Locale): LocaleDefaults {
 }
 
 /**
- * Strip HTML tags and collapse whitespace, then truncate at a word boundary
- * for use as a meta description. Aim for ~155 chars (search engines truncate
- * around 160).
+ * Strip Markdown syntax and collapse whitespace, then truncate at a word
+ * boundary for use as a meta description. Aim for ~155 chars (search engines
+ * truncate around 160).
  */
-export function htmlToMetaDescription(html: string | undefined | null, maxLen = 155): string {
-  if (!html) {
+export function mdToMetaDescription(md: string | undefined | null, maxLen = 155): string {
+  if (!md) {
     return "";
   }
-  const text = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  const text = md
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/[*_`#]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
   if (text.length <= maxLen) {
     return text;
   }

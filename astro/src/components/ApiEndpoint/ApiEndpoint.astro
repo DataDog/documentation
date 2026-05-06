@@ -9,6 +9,7 @@ import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
 import type { ResponseData } from '../ApiResponse/ApiResponse.astro';
 import type { CodeExampleSet } from '../ApiCodeExample/ApiCodeExample.astro';
 import { getDefaultRegions } from '../../data/api/regionResolver';
+import { renderMarkdownInline } from '../../data/api/markdownRenderer';
 import styles from './ApiEndpoint.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 
@@ -132,7 +133,7 @@ const hasParams = ep && (
       <div class={cl('api-endpoint__section')}>
         <h3>Request Body {ep.requestBody.required ? '(required)' : '(optional)'}</h3>
         {ep.requestBody.description && (
-          <p set:html={ep.requestBody.description} />
+          <p set:html={renderMarkdownInline(ep.requestBody.description)} />
         )}
         <ApiRequestBodyTabs
           schema={ep.requestBody.schema}

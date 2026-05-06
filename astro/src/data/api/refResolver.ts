@@ -6,7 +6,6 @@
  * YAML objects already loaded by `src/data/api/index.ts`.
  */
 
-import { renderMarkdownInline } from './markdownRenderer';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -19,7 +18,7 @@ export interface SchemaField {
   required: boolean;
   deprecated: boolean;
   readOnly: boolean;
-  /** HTML string rendered from the spec's Markdown description */
+  /** Markdown string from the spec's description field */
   description: string;
   enumValues?: string[];
   defaultValue?: string;
@@ -157,7 +156,7 @@ export function schemaToFields(
         required: false,
         deprecated: schema.deprecated === true,
         readOnly: schema.readOnly === true,
-        description: renderMarkdownInline(schema.description ?? ''),
+        description: schema.description ?? '',
         unionOptions,
       },
     ];
@@ -190,7 +189,7 @@ export function schemaToFields(
           required: false,
           deprecated: schema.deprecated === true,
           readOnly: schema.readOnly === true,
-          description: renderMarkdownInline(schema.description ?? ''),
+          description: schema.description ?? '',
         },
       ];
     }
@@ -205,7 +204,7 @@ export function schemaToFields(
         required: false,
         deprecated: schema.deprecated === true,
         readOnly: schema.readOnly === true,
-        description: renderMarkdownInline(schema.description ?? ''),
+        description: schema.description ?? '',
         ...(children.length > 0 ? { children } : {}),
       },
     ];
@@ -218,7 +217,7 @@ export function schemaToFields(
     required: false,
     deprecated: schema.deprecated === true,
     readOnly: schema.readOnly === true,
-    description: renderMarkdownInline(schema.description ?? ''),
+    description: schema.description ?? '',
   };
 
   if (schema.enum) {
@@ -258,7 +257,7 @@ export function paramsToFields(spec: any, params: any[]): SchemaField[] {
 
     const name: string = resolved.name ?? '';
     const required: boolean = resolved.required === true;
-    const description: string = renderMarkdownInline(resolved.description ?? '');
+    const description: string = resolved.description ?? '';
     const deprecated: boolean = resolved.deprecated === true;
 
     // Resolve the parameter's inner schema
@@ -399,7 +398,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: renderMarkdownInline(resolved.description ?? ''),
+      description: resolved.description ?? '',
       unionOptions,
     };
   }
@@ -414,7 +413,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: renderMarkdownInline(resolved.description ?? ''),
+      description: resolved.description ?? '',
       ...(children.length > 0 ? { children } : {}),
     };
   }
@@ -428,7 +427,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: renderMarkdownInline(resolved.description ?? ''),
+      description: resolved.description ?? '',
       ...(children.length > 0 ? { children } : {}),
     };
   }
@@ -445,7 +444,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: renderMarkdownInline(resolved.description ?? ''),
+      description: resolved.description ?? '',
       ...(children.length > 0 ? { children } : {}),
     };
   }
@@ -457,7 +456,7 @@ function propertyToField(
     required,
     deprecated: resolved.deprecated === true,
     readOnly: resolved.readOnly === true,
-    description: renderMarkdownInline(resolved.description ?? ''),
+    description: resolved.description ?? '',
   };
 
   if (resolved.enum) {

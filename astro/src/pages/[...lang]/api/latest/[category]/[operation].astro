@@ -2,10 +2,11 @@
 import ApiLayout from '../../../../../layouts/ApiLayout.astro';
 import ApiEndpoint from '../../../../../components/ApiEndpoint/ApiEndpoint.astro';
 import { getCategoriesView, getCategoryViewBySlug, getEndpointView } from '../../../../../data/api/viewsBuilder';
+import { renderMarkdown } from '../../../../../data/api/markdownRenderer';
 import { highlightEndpoint } from '../../../../../data/api/syntaxHighlighter';
 import { getApiPageTitle } from '../../../../../data/api/pageTitleBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '../../../../../lib/i18n/locale';
-import { htmlToMetaDescription } from '../../../../../lib/seo';
+import { mdToMetaDescription } from '../../../../../lib/seo';
 import { i18n } from '../../../../../lib/i18n/i18n';
 import type { GetStaticPaths, GetStaticPathsResult } from 'astro';
 
@@ -54,7 +55,7 @@ await highlightEndpoint(endpoint);
 
 <ApiLayout
   title={`${endpoint.summary} - ${category.name} - Datadog API`}
-  description={htmlToMetaDescription(endpoint.description) || `${endpoint.summary} endpoint in the Datadog API.`}
+  description={mdToMetaDescription(endpoint.description) || `${endpoint.summary} endpoint in the Datadog API.`}
   categories={categories}
   currentSlug={catSlug}
   currentOperationSlug={opSlug}
@@ -65,6 +66,6 @@ await highlightEndpoint(endpoint);
   ]}
 >
   <ApiEndpoint data={JSON.stringify(endpoint)} headingLevel={1}>
-    <Fragment set:html={endpoint.description} />
+    <Fragment set:html={renderMarkdown(endpoint.description)} />
   </ApiEndpoint>
 </ApiLayout>

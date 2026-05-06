@@ -10,7 +10,6 @@
 import { DEFAULT_LOCALE, LOCALES, type Locale } from '../../lib/i18n/locale';
 import { API_VERSIONS, getOpenApiDocument, type ApiVersion } from './specParser';
 import type { OpenAPIV3 } from 'openapi-types';
-import { renderMarkdown, renderMarkdownInline } from './markdownRenderer';
 import { getRegions, buildApiUrlFromServers } from './regionResolver';
 import { getTranslationOverlay, translateAction, translateTag } from './translationsLoader';
 import {
@@ -239,7 +238,7 @@ function buildCategories(lang: Locale): ApiCategory[] {
       categoryMap.set(slug, {
         name: translated.name,
         slug,
-        description: translated.description ? renderMarkdown(translated.description) : '',
+        description: translated.description ?? '',
         deprecated: (tag as OpenAPIV3.TagObject & { 'x-deprecated'?: boolean })['x-deprecated'] === true,
       });
     }
@@ -300,12 +299,12 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const action = translateAction(overlay, operationId);
 
   const summary: string = action.summary ?? op.operation.summary ?? '';
-  const description: string = renderMarkdown(action.description ?? op.operation.description ?? '');
+  const description: string = action.description ?? op.operation.description ?? '';
   const deprecated: boolean = op.operation.deprecated === true;
   const unstable: boolean = !!op.operation['x-unstable'];
   const unstableMessage: string | undefined =
     typeof op.operation['x-unstable'] === 'string'
-      ? renderMarkdownInline(op.operation['x-unstable'])
+      ? op.operation['x-unstable']
       : undefined;
 
   const permissions = extractPermissions(op.operation);
@@ -332,9 +331,7 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const requestBody = extractRequestBody(spec, op.operation);
   if (requestBody) {
     if (action.request_description !== undefined) {
-      requestBody.description = action.request_description
-        ? renderMarkdownInline(action.request_description)
-        : undefined;
+      requestBody.description = action.request_description || undefined;
     }
     if (action.request_schema_description !== undefined && requestBody.schema.length > 0) {
       requestBody.schema[0].description = action.request_schema_description;

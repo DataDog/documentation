@@ -25,7 +25,7 @@ Create the content collections, and use them to render the API docs pages. Prefe
 | `data/api/resolver.ts` `resolveRef`, `schemaToFields` | Helper, called by all loaders |
 | `data/api/translationsLoader.ts` `getTranslationOverlay`, `translateTag`, `translateAction` | Helper, called by `apiCategories` and `apiOperations` loaders |
 | `data/api/examples.ts` `getCodeExamplesForOperation` | `apiCodeExamples` collection loader |
-| `data/api/curl.ts` `generateCurl` | Helper, called by `apiCodeExamples` loader |
+| `data/api/curl.ts` `buildCurlCommand` | Helper, called by `apiCodeExamples` loader |
 | `data/api/regions.ts` `getRegions`, `buildApiUrlFromServers` | Helper, called by `apiOperations` and `apiCodeExamples` loaders |
 | `data/api/markdown.ts` `renderMarkdown` | Helper, called by all loaders |
 | `data/api/highlight.ts` `highlightEndpoints` | **Stays** — runs at page time after `getCollection`, not inside loaders |

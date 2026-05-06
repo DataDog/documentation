@@ -100,7 +100,7 @@ At build time, Vite's `import.meta.glob` eagerly inlines all matching JSON files
 | `getCategoryViewBySlug(slug, lang)` | `ApiCategory \| undefined` | Convenience over `getCategoriesView` |
 | `getEndpointView(catSlug, opSlug, lang)` | `EndpointData \| undefined` for a single operation | Finds the matching `RawOperation` by both slugs, applies the locale's action overlay, merges path-level + operation-level parameters, calls `splitParameters` / `paramsToFields` / `extractRequestBody` / `extractResponses` against the parsed spec, builds curl variants per region with `buildCurlByRegion`, and prepends curl to the SDK examples returned by `getCodeExamplesForOperation` |
 
-The leaf helpers (`schemaToFields`, `extractRequestBody`, `extractResponses`, `paramsToFields`, `buildCurlByRegion`, `generateCurl`, `getRegions`, `getTranslationOverlay`, `translateAction`, `renderMarkdown`) are pure functions that take a parsed spec and operation/schema object.
+The leaf helpers (`schemaToFields`, `extractRequestBody`, `extractResponses`, `paramsToFields`, `buildCurlByRegion`, `buildCurlCommand`, `getRegions`, `getTranslationOverlay`, `translateAction`, `renderMarkdown`) are pure functions that take a parsed spec and operation/schema object.
 
 [`src/data/api/highlight.ts`](src/data/api/highlight.ts) runs Shiki syntax highlighting over the resolved `EndpointData` at page render time, mutating the entries in place. Highlighting stays at the page boundary so the cached view shapes don't carry highlighted HTML on first build.
 

@@ -4,6 +4,7 @@ import TabPanel from '../Tab/TabPanel.astro';
 import CodeBlock from '../CodeBlock/CodeBlock.astro';
 import { ApiSchemaTable } from '../ApiSchemaTable/ApiSchemaTable';
 import type { SchemaField } from '../ApiSchemaTable/ApiSchemaTable';
+import { renderMarkdownInline } from '../../data/api/markdownRenderer';
 import styles from './ApiResponse.module.css';
 import { classListFactory } from '../../utils/classListFactory';
 import { generateElementId } from '../../utils/generateElementId';
@@ -50,7 +51,7 @@ const innerPanelIds = responses.map((_, i) => [
           <TabPanel id={outerPanelIds[i]} isActive={i === 0}>
             <div class={`api-response__panel api-response__panel--${r.statusCode}`}>
               {r.description && (
-                <p class={cl('api-response__description')} set:html={r.description} />
+                <p class={cl('api-response__description')} set:html={renderMarkdownInline(r.description)} />
               )}
 
               {showInnerTabs && (

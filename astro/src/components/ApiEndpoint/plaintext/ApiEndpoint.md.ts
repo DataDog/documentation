@@ -14,7 +14,6 @@
 import type { EndpointData } from '../../../data/api/viewsBuilder';
 import { getDefaultRegions } from '../../../data/api/regionResolver';
 import { appHost } from '../../../config/regions';
-import { htmlToMd } from '../../../data/api/htmlToMdConverter';
 import { renderApiStatusAlertMd } from '../../ApiStatusAlert/plaintext/ApiStatusAlert.md';
 import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable.md';
 import { renderApiRequestBodyTabsMd } from '../../ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs.md';
@@ -54,7 +53,7 @@ function renderRequestBody(ep: EndpointData): string {
   const heading = `### Request Body ${ep.requestBody.required ? '(required)' : '(optional)'}`;
   const parts: string[] = [heading, ''];
   if (ep.requestBody.description) {
-    parts.push(htmlToMd(ep.requestBody.description));
+    parts.push(ep.requestBody.description);
     parts.push('');
   }
   parts.push(
@@ -98,7 +97,7 @@ export function renderApiEndpointMd(
   }
 
   if (ep.description) {
-    blocks.push(htmlToMd(ep.description));
+    blocks.push(ep.description);
   }
 
   const regionTable = renderRegionTable(ep);
