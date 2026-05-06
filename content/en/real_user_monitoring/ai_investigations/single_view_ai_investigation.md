@@ -15,15 +15,15 @@ further_reading:
 
 ## Overview
 
-Single-View AI Investigation runs an agentic root-cause analysis on a single RUM view. Datadog's RUM agent inspects the view event and its sub-events to surface structured symptoms and the most plausible explanations for why the user's experience was poor — long tasks blocking the main thread, slow backend responses, expensive third-party scripts, and so on.
+Single-View AI Investigation runs an agentic root-cause analysis on a single RUM view. When you find a session with poor performance, such as a page that loaded slowly or threw errors, click **Investigate**. Datadog's RUM agent inspects all the data attached to that view: Javascript errors, slow network requests, long tasks blocking the main thread, backend traces, CPU profiles, and device context.
 
-The goal is to compress the path from signal to plausible explanation. Instead of manually parsing attributes and sub-events to understand what happened, you get a curated set of findings — ranked by impact — directly in the view side panel where you already work. From there, you can iterate through a chat interface and save the result to a [Notebook][1] for sharing.
+Instead of manually combing through RUM events to figure out whether the cause was a slow API call, a Javascript bundle, or a CDN issue, you get a ranked list of findings grouped by root-cause category: App Performance, Server Side, Third Party, and Environment. From there, you can follow up through a chat interface or save the results to a [Notebook][1] to share with your team.
 
 {{< img src="real_user_monitoring/ai_investigations/single-view-ai-investigation-overview.png" alt="The Single-View AI Investigation panel showing categorized findings for a RUM view." style="width:100%;" >}}
 
 ## Data analyzed
 
-To investigate a view, Datadog's RUM agent inspects the data Datadog has collected for that view, and reaches out to correlated telemetry when it's available:
+To investigate a view, Datadog's RUM agent inspects the data Datadog has collected for that view and accesses correlated telemetry when it's available:
 
 - **The view event** and its sub-events: [resources][2], [long tasks][3], [errors][4], and [user actions][5].
 - **Aggregated performance signals** across the view, including auto-detected problems such as uncompressed resources, excessive script evaluation, and bandwidth inefficiencies.
@@ -46,20 +46,20 @@ Datadog's RUM agent looks at four sources to identify the root causes of poor pe
 
 | Source            | What is examined                                                                                              |
 |-------------------|---------------------------------------------------------------------------------------------------------------|
-| App Performance   | Browser and client-side issues, such as long tasks, JavaScript execution, and rendering delays.               |
+| App Performance   | Client-side issues, such as long tasks, JavaScript execution, and rendering delays.               |
 | Server Side       | Backend latency and server-side errors that affected the view.                                                |
 | Third Party       | Performance impact from third-party scripts and libraries loaded on the page.                                 |
 | Environment       | Network and infrastructure conditions that affected the user's experience.                                    |
 
 ## Read the results
 
-Each finding is shown as a card with a title, a description of the issue, a severity level, and links to the affected events. When multiple findings are surfaced, they are ranked so you can focus on the highest-impact issues first.
+Each finding is shown as a card with a title, a description of the issue, a severity level, and links to the affected events. Multiple findings appear ranked by impact so you can focus on the highest-impact issues first.
 
 {{< img src="real_user_monitoring/ai_investigations/single-view-ai-investigation-results.png" alt="Results panel showing ranked findings with severity, descriptions, and links to the affected events." style="width:100%;" >}}
 
 A lightweight chat interface lets you follow up on the analysis: ask for more detail on a specific finding, request additional context, or explore related symptoms.
 
-Investigations can be saved to a [Notebook][1] for sharing with your team or for future reference.
+Save investigations to a [Notebook][1] to share with your team for future reference.
 
 ## Further reading
 
@@ -67,7 +67,7 @@ Investigations can be saved to a [Notebook][1] for sharing with your team or for
 
 [1]: /notebooks/
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
-[3]: /real_user_monitoring/application_monitoring/browser/data_collected/#view-timing-attributes
+[3]: /real_user_monitoring/application_monitoring/browser/data_collected/#long-task-timing-attributes
 [4]: /real_user_monitoring/error_tracking/
 [5]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/
 [6]: /real_user_monitoring/explorer/search/

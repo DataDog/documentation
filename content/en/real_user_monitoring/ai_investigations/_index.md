@@ -9,11 +9,11 @@ further_reading:
 
 ## Overview
 
-Datadog's agentic investigations bring structured, first-pass root-cause analysis directly into the RUM workflows you already use. Instead of manually parsing attributes and sub-events to understand what happened during a specific page load or interaction, you can trigger an agentic investigation and let Datadog's RUM agent surface the structured symptoms and the most plausible explanations.
+Investigating poor user experience in RUM typically means switching between session replays, error panels, traces, and performance timelines to piece together what went wrong. AI Investigations automate that first-pass triage. Datadog's RUM agent inspects the data attached to your views and surfaces ranked, categorized root-cause findings directly in your RUM workflow.
 
-This page lists the investigation types available today.
+This page lists the available investigation types.
 
-## Single-View AI Investigation
+## Single-view AI investigation
 
 Run an agentic investigation on a single RUM view to investigate performance issues or identify optimization opportunities on that specific page load. Datadog's RUM agent inspects the view event and its sub-events to identify root causes from sources spanning the browser, the backend, third-party scripts, and the user's network environment.
 
