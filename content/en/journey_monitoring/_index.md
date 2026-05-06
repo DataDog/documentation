@@ -71,7 +71,7 @@ You can also add a description, attribute filters, team ownership, tags, and [va
 In the feature's details report, you can extend monitoring coverage based on the products you have:
 
 - Create [RUM operations][13] to monitor the performance of critical steps in the feature in your real user environment
-- Add Synthetic tests to the feature's [test suite][15] to start tracking uptime
+- Add Synthetic tests to the feature's [test suite][14] to start tracking uptime
 
 If you already have pre-created RUM operations or Synthetic tests that cover the feature, Datadog surfaces the operation or test in the feature's details report.
 
@@ -81,7 +81,7 @@ Each feature and its variants have the following performance metrics:
 - **Traffic**: Total number of feature attempts across user sessions. Based on the `rum.measure.feature` metric.
 - **Conversion**: Percentage of feature attempts that were completed. Based on the `rum.measure.feature` metric.
 - **Time to convert**: Average time to complete the feature across all user sessions. Based on the `rum.measure.feature.duration` metric.
-- **Uptime**: Availability of the feature based on its [Synthetic test suite][15] uptime.
+- **Uptime**: Availability of the feature based on its [Synthetic test suite][14] uptime.
 
 ## What's next
 
@@ -106,4 +106,4 @@ Each feature and its variants have the following performance metrics:
 [11]: /journey_monitoring/map/suggested_journeys/
 [12]: /journey_monitoring/details_report/
 [13]: /real_user_monitoring/operations_monitoring/
-[15]: /synthetics/test_suites/#service-level-objectives
+[14]: /synthetics/test_suites/#service-level-objectives
