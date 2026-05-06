@@ -92,13 +92,13 @@ At build time, Vite's `import.meta.glob` eagerly inlines all matching JSON files
 
 [`src/data/api/views.ts`](src/data/api/views.ts) is the public surface for pages.
 
-> **Why not Astro content collections?** An earlier branch modeled the API data as four content collections (`apiCategories`, `apiOperations`, `apiSchemas`, `apiCodeExamples`). That approach was reverted: the API data is a single structured YAML file consumed by one route family, not authored content spread across many files. Content collections add a data-layer abstraction — and significant memory overhead — without a payoff here (no second consumer queries them; no markdown rendering; no auto-generated routes). Plain memoized functions that walk the spec directly are simpler and use far less memory at build time. The `docs` collection (authored `.mdoc` files) is a legitimate use of content collections and remains. It walks the parsed specs directly, resolves `$ref`s on demand, and assembles the `ApiCategory` and `EndpointData` view shapes that components consume. Module-scoped caches memoize the results: a `Map<lang, ApiCategory[]>` for categories and a `Map<${lang}:${slug}, EndpointData[]>` for endpoints.
+> **Why not Astro content collections?** An earlier branch modeled the API data as four content collections (`apiCategories`, `apiOperations`, `apiSchemas`, `apiCodeExamples`). That approach was reverted: the API data is a single structured YAML file consumed by one route family, not authored content spread across many files. Content collections add a data-layer abstraction — and significant memory overhead — without a payoff here (no second consumer queries them; no markdown rendering; no auto-generated routes). Plain memoized functions that walk the spec directly are simpler and use far less memory at build time. The `docs` collection (authored `.mdoc` files) is a legitimate use of content collections and remains. It walks the parsed specs directly, resolves `$ref`s on demand, and assembles the `ApiCategory` and `EndpointData` view shapes that components consume. Module-scoped caches memoize the results: a `Map<lang, ApiCategory[]>` for categories and a `Map<${lang}:${catSlug}:${opSlug}, EndpointData>` for individual endpoints.
 
 | View helper | Returns | Work |
 |---|---|---|
 | `getCategoriesView(lang)` | `ApiCategory[]` for the side-nav | Walks `spec.tags` for both versions, applies the locale's tag overlay, then walks operations to attach stubs (operationId, summary, slug, menu order, version) to their categories. Sorts categories alphabetically by name and operations by menu order |
 | `getCategoryViewBySlug(slug, lang)` | `ApiCategory \| undefined` | Convenience over `getCategoriesView` |
-| `getEndpointsView(slug, lang)` | `EndpointData[]` for the rendered endpoints | For each matching operation: applies the locale's action overlay, merges path-level + operation-level parameters, calls `splitParameters` / `paramsToFields` / `extractRequestBody` / `extractResponses` against the parsed spec, builds curl variants per region with `buildCurlByRegion`, and prepends curl to the SDK examples returned by `getCodeExamplesForOperation` |
+| `getEndpointView(catSlug, opSlug, lang)` | `EndpointData \| undefined` for a single operation | Finds the matching `RawOperation` by both slugs, applies the locale's action overlay, merges path-level + operation-level parameters, calls `splitParameters` / `paramsToFields` / `extractRequestBody` / `extractResponses` against the parsed spec, builds curl variants per region with `buildCurlByRegion`, and prepends curl to the SDK examples returned by `getCodeExamplesForOperation` |
 
 The leaf helpers (`schemaToFields`, `extractRequestBody`, `extractResponses`, `paramsToFields`, `buildCurlByRegion`, `generateCurl`, `getRegions`, `getTranslationOverlay`, `translateAction`, `renderMarkdown`) are pure functions that take a parsed spec and operation/schema object.
 
@@ -106,21 +106,29 @@ The leaf helpers (`schemaToFields`, `extractRequestBody`, `extractResponses`, `p
 
 ### 3. Page generation (Astro routes)
 
-The dynamic route [`src/pages/[...lang]/api/latest/[category].astro`](src/pages/[...lang]/api/latest/[category].astro) generates one page per `(lang, category)` combination:
+Two dynamic routes generate the API pages:
 
-1. `getStaticPaths()` calls `getCategoriesView(lang)` for each locale to produce one route per category slug (e.g. `/api/latest/monitors/`, `/ja/api/latest/monitors/`).
-2. At render time, the page calls `getCategoriesView(lang)` (for the side nav), `getCategoryViewBySlug(slug, lang)` (for the page header), and `getEndpointsView(slug, lang)` (for the rendered endpoints).
-3. `highlightEndpoints(endpoints)` runs Shiki highlighting over all code examples and JSON request/response bodies, mutating the resolved data in place.
-4. The page renders inside [`ApiLayout.astro`](src/layouts/ApiLayout.astro), passing all categories (for side navigation) and the current slug.
-5. Each endpoint is rendered as `<ApiEndpoint data={JSON.stringify(ep)}>`, with the assembled `EndpointData` object serialized as a JSON string prop.
+**Category landing page** ([`[category].astro`](src/pages/[...lang]/api/latest/[category].astro)) — one page per `(lang, category)`:
 
-A plaintext sibling route at [`[category].md.ts`](src/pages/[...lang]/api/latest/[category].md.ts) reuses the same view helpers to emit Markdoc-compatible Markdown at `/api/latest/<slug>.md`. The static index page is at [`index.astro`](src/pages/[...lang]/api/latest/index.astro), and `/llms.txt` ([`llms.txt.ts`](src/pages/llms.txt.ts)) lists every category by name and `.md` URL.
+1. `getStaticPaths()` calls `getCategoriesView(lang)` for each locale to produce one route per category slug (e.g. `/api/latest/monitors/`).
+2. At render time, calls `getCategoriesView(lang)` (side nav) and `getCategoryViewBySlug(slug, lang)` (page content).
+3. Renders the category name, description, deprecated alert if applicable, and a TOC list of operation links.
+4. Includes an inline script for backward-compat: if `location.hash` matches a known operation slug, it redirects to the per-operation page (covers Hugo-era `/api/latest/<cat>/#<op-slug>` links).
+
+**Per-operation page** ([`[category]/[operation].astro`](src/pages/[...lang]/api/latest/[category]/[operation].astro)) — one page per `(lang, category, operation)`:
+
+1. `getStaticPaths()` walks all categories and their operations to emit one path per `{ lang, category.slug, operation.slug }`.
+2. At render time, calls `getEndpointView(catSlug, opSlug, lang)` and `highlightEndpoint(endpoint)`.
+3. Renders inside [`ApiLayout.astro`](src/layouts/ApiLayout.astro) with `currentSlug=catSlug` and `currentOperationSlug=opSlug`. A single `<ApiEndpoint>` renders the operation.
+4. Page title is `${operation.summary} - ${category.name} - Datadog API`.
+
+A plaintext sibling at [`[category]/[operation].md.ts`](src/pages/[...lang]/api/latest/[category]/[operation].md.ts) emits Markdoc-compatible Markdown at `/api/latest/<cat>/<op>.md`. The static index page is at [`index.astro`](src/pages/[...lang]/api/latest/index.astro), and `/llms.txt` ([`llms.txt.ts`](src/pages/llms.txt.ts)) lists every operation by name and `.md` URL, grouped under their category heading.
 
 ### 4. Layout and navigation
 
 [`ApiLayout.astro`](src/layouts/ApiLayout.astro) composes [`BaseLayout.astro`](src/layouts/BaseLayout.astro), which supplies the shared announcement banner, header, and footer placeholders. It then provides the API-specific page shell:
 
-- [`ApiSideNav.astro`](src/components/ApiSideNav/ApiSideNav.astro) — Left sidebar listing all categories; the active category expands to show its operations as anchor links
+- [`ApiSideNav.astro`](src/components/ApiSideNav/ApiSideNav.astro) — Left sidebar listing all categories; the active category expands to show its operations as links to per-operation pages; the active operation gets an `api-side-nav__operation--active` BEM modifier
 - [`RegionSelector`](src/components/RegionSelector/RegionSelector.tsx) — A Preact island that lets users switch between Datadog regions, updating displayed URLs
 - [`Breadcrumbs.astro`](src/components/Breadcrumbs/Breadcrumbs.astro) — Breadcrumb navigation
 - Theme detection and toggle (inline script reading/writing `localStorage`)
@@ -154,22 +162,23 @@ translate_*.{lang}.json ──────┤
               │   getCategoriesView(lang) → ApiCategory[] │
               │     cache: Map<lang, ApiCategory[]>       │
               │                                           │
-              │   getEndpointsView(slug, lang)            │
-              │     cache: Map<`${lang}:${slug}`,         │
-              │              EndpointData[]>              │
+              │   getEndpointView(catSlug, opSlug, lang)  │
+              │     cache: Map<`${lang}:${catSlug}:${opSlug}`, │
+              │              EndpointData>               │
               │     ↓ walk spec + resolve refs            │
-              │   EndpointData[] (SchemaField trees,      │
+              │   EndpointData (SchemaField trees,        │
               │     curl variants, request/response data) │
               └──────────────────┬────────────────────────┘
                                  │
-                          highlight.ts (Shiki syntax highlighting)
+                          highlight.ts (Shiki syntax highlighting, per-op)
                                  │
                                  ▼
-                  [category].astro / [category].md.ts
+                  [category].astro (landing: name, description, TOC)
+                  [category]/[operation].astro / [operation].md.ts
                                  │
                           ApiLayout / BaseLayout
                                  │
-                          ApiSideNav + ApiEndpoint × N
+                          ApiSideNav + ApiEndpoint (one per page)
                           ┌──────────┼──────────┐
                 ApiSchemaTable  ApiResponse  ApiCodeExample
                 ApiRequestBodyTabs
@@ -182,7 +191,7 @@ To manually audit the Astro API docs against the Hugo API docs, you don't need t
 
 ### Page inventory
 
-There are **4 static pages** and **~120 dynamic category pages** (one per OpenAPI tag — count drifts as the spec evolves).
+There are **4 static pages**, **~120 dynamic category landing pages**, and **~N per-operation pages** (one per OpenAPI operation across all categories — counts drift as the spec evolves).
 
 **Static pages:**
 
@@ -193,7 +202,7 @@ There are **4 static pages** and **~120 dynamic category pages** (one per OpenAP
 | `/api/latest/rate-limits/` | Rate limits |
 | `/api/latest/scopes/` | OAuth scopes |
 
-**Dynamic category pages** are generated from the v1 and v2 OpenAPI specs. Each category page renders all of its endpoints on a single page. Categories vary by:
+**Dynamic pages** are generated from the v1 and v2 OpenAPI specs. Each **category landing page** (`/api/latest/<cat>/`) renders the category name, description, and a TOC linking to its operations. Each **per-operation page** (`/api/latest/<cat>/<op>/`) renders a single endpoint. Categories vary by:
 
 - **Spec version**: v1-only, v2-only, or mixed v1+v2
 - **Endpoint status flags**: normal, deprecated (with optional link to newer version), unstable/preview
@@ -201,9 +210,9 @@ There are **4 static pages** and **~120 dynamic category pages** (one per OpenAP
 - **Size**: from 1 endpoint to 90+
 - **HTTP methods**: GET, POST, PUT, PATCH, DELETE (each rendered with a colored badge)
 
-### Minimum audit set (12 pages)
+### Minimum audit set
 
-This set covers every rendering variation:
+Each dynamic category is audited at two levels: the category landing page and one representative operation page. This set covers every rendering variation:
 
 | # | Page | What it covers |
 |---|------|----------------|
@@ -211,14 +220,22 @@ This set covers every rendering variation:
 | 2 | `/api/latest/using-the-api/` | Static content page |
 | 3 | `/api/latest/rate-limits/` | Static content page |
 | 4 | `/api/latest/scopes/` | Static content page |
-| 5 | `/api/latest/authentication/` | Smallest category (1 v1 endpoint) |
-| 6 | `/api/latest/dashboards/` | v1-only, medium size (14 ops) |
-| 7 | `/api/latest/incidents/` | v2-only, large (56 ops) |
-| 8 | `/api/latest/aws-integration/` | Mixed v1+v2, has deprecated + unstable ops |
-| 9 | `/api/latest/monitors/` | Mixed v1+v2, has deprecated + unstable ops |
-| 10 | `/api/latest/dashboard-lists/` | Category-level deprecated (with endpoints) |
-| 11 | `/api/latest/screenboards/` | Empty deprecated category (0 endpoints) |
-| 12 | `/api/latest/usage-metering/` | Large (49 ops), all GET, many deprecated |
+| 5 | `/api/latest/authentication/` | Category landing — smallest category (1 v1 endpoint) |
+| 5 | `/api/latest/authentication/validate-api-key/` | Operation page — v1, single endpoint |
+| 6 | `/api/latest/dashboards/` | Category landing — v1-only, medium size (14 ops) |
+| 6 | `/api/latest/dashboards/get-a-dashboard/` | Operation page — v1 |
+| 7 | `/api/latest/incidents/` | Category landing — v2-only, large (56 ops) |
+| 7 | `/api/latest/incidents/create-an-incident/` | Operation page — v2 |
+| 8 | `/api/latest/aws-integration/` | Category landing — mixed v1+v2, deprecated + unstable ops |
+| 8 | `/api/latest/aws-integration/list-all-aws-integrations-v1/` | Operation page — v1 (slug collision with v2 produces `-v1`/`-v2` suffixes) |
+| 8 | `/api/latest/aws-integration/list-all-aws-integrations-v2/` | Operation page — v2 (slug collision case) |
+| 9 | `/api/latest/monitors/` | Category landing — mixed v1+v2, deprecated + unstable ops |
+| 9 | `/api/latest/monitors/create-a-monitor/` | Operation page — mixed v1+v2 |
+| 10 | `/api/latest/dashboard-lists/` | Category landing — category-level deprecated (with endpoints) |
+| 10 | `/api/latest/dashboard-lists/get-all-dashboard-lists/` | Operation page — deprecated category |
+| 11 | `/api/latest/screenboards/` | Category landing — empty deprecated category (0 endpoints, no op page) |
+| 12 | `/api/latest/usage-metering/` | Category landing — large (49 ops), all GET, many deprecated |
+| 12 | `/api/latest/usage-metering/get-hourly-usage-for-lambda/` | Operation page — deprecated op |
 
 ### What to check within each endpoint
 
