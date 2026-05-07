@@ -427,6 +427,10 @@
     "name": "Users",
     "description": "Create, edit, and disable users."
   },
+  "web-integrations": {
+    "name": "Web Integrations",
+    "description": "Manage web integration accounts programmatically through the Datadog API. See the [Web Integrations page](https://app.datadoghq.com/integrations) for more information."
+  },
   "widgets": {
     "name": "Widgets",
     "description": "Create, read, update, and delete saved widgets. Widgets are reusable\nvisualization components stored independently from any dashboard or notebook,\npartitioned by experience type and identified by a UUID."

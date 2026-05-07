@@ -15732,6 +15732,70 @@ menu:
           - UpdateFlakyTestsManagementPolicies
         unstable: []
         order: 7
+    - name: Web Integrations
+      url: /api/latest/web-integrations/
+      identifier: web-integrations
+      generated: true
+    - name: Update a web integration account
+      url: '#update-a-web-integration-account'
+      identifier: web-integrations-update-a-web-integration-account
+      parent: web-integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWebIntegrationAccount
+        unstable: []
+        order: 4
+    - name: Get a web integration account
+      url: '#get-a-web-integration-account'
+      identifier: web-integrations-get-a-web-integration-account
+      parent: web-integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWebIntegrationAccount
+        unstable: []
+        order: 3
+    - name: Delete a web integration account
+      url: '#delete-a-web-integration-account'
+      identifier: web-integrations-delete-a-web-integration-account
+      parent: web-integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWebIntegrationAccount
+        unstable: []
+        order: 5
+    - name: Create a web integration account
+      url: '#create-a-web-integration-account'
+      identifier: web-integrations-create-a-web-integration-account
+      parent: web-integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWebIntegrationAccount
+        unstable: []
+        order: 2
+    - name: List web integration accounts
+      url: '#list-web-integration-accounts'
+      identifier: web-integrations-list-web-integration-accounts
+      parent: web-integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListWebIntegrationAccounts
+        unstable: []
+        order: 1
     - name: Widgets
       url: /api/latest/widgets/
       identifier: widgets
