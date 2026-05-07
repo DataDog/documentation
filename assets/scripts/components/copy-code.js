@@ -73,8 +73,8 @@ function updateCopyBtnText(btn){
         }, 1000)
     }else if(btn?.classList.contains('js-copy-inline-button')){
         // if inline copy button clicked, swap icons
-        const copyIcon = btn.querySelector('.copy-icon');
-        const checkIcon = btn.querySelector('.check-icon');
+        const copyIcon = btn.querySelector('.icon-copy-wui');
+        const checkIcon = btn.querySelector('.icon-check-bold');
         if (copyIcon && checkIcon) {
             copyIcon.style.display = 'none';
             checkIcon.style.display = 'inline';

@@ -1041,25 +1041,16 @@ dl {
         align-items: center;
         justify-content: center;
 
-        svg {
-            fill: #632ca6;
-            transition: fill 0.2s ease;
+        .icon-check-bold {
+            display: none;
         }
 
         &:hover {
             background-color: rgba(99, 44, 166, 0.1);
-
-            svg {
-                fill: #4a1f7d;
-            }
         }
     }
 
     &:hover .js-copy-inline-button {
         opacity: 1;
-    }
-
-    .check-icon {
-        fill: #00a854 !important;
     }
 }
