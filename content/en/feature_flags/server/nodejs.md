@@ -22,6 +22,7 @@ This page describes how to instrument your Node.js application with the Datadog 
 Before setting up the Node.js Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
+- **Datadog [API key][3]** configured on the Agent
 - **Datadog Node.js SDK** `dd-trace` version 5.80.0 or later
 - **@openfeature/server-sdk** version ~1.20.0
 
@@ -235,9 +236,70 @@ console.log(details.errorMessage); // A more detailed message of the error that 
 console.log(details.flagMetadata); // Additional information about the evaluation
 ```
 
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `tracer.openfeature` provider, or swap it for OpenFeature's `TypedInMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `TypedInMemoryProvider` ships with `@openfeature/server-sdk`, so no additional dependency is required.
+
+When using the in-memory provider, do not call `tracer.init()` or set `tracer.openfeature` as the provider — that is the behavior being replaced.
+
+The OpenFeature API is a singleton per Node.js process. Reset it in `afterAll` with `OpenFeature.close()` or `OpenFeature.clearProviders()` to prevent state from one test file leaking into the next.
+
+```javascript
+// flags.test.js
+import { beforeAll, beforeEach, afterAll, expect, test } from 'vitest';
+import { OpenFeature, TypedInMemoryProvider } from '@openfeature/server-sdk';
+
+const flags = {
+  'new-checkout-flow': {
+    variants: { on: true, off: false },
+    defaultVariant: 'off',
+    disabled: false,
+    contextEvaluator: (ctx) => (ctx.companyID === 'beta-co' ? 'on' : 'off'),
+  },
+};
+
+let provider;
+
+beforeAll(async () => {
+  provider = new TypedInMemoryProvider(flags);
+  await OpenFeature.setProviderAndWait(provider);
+});
+
+beforeEach(() => {
+  // Reset flag state between tests to prevent cross-test pollution.
+  provider.putConfiguration(flags);
+});
+
+afterAll(async () => {
+  await OpenFeature.close();
+});
+
+test('beta company sees new checkout', async () => {
+  const client = OpenFeature.getClient();
+  const value = await client.getBooleanValue('new-checkout-flow', false, {
+    targetingKey: 'user-1',
+    companyID: 'beta-co',
+  });
+  expect(value).toBe(true);
+});
+
+test('non-beta company falls back to default', async () => {
+  const client = OpenFeature.getClient();
+  const details = await client.getBooleanDetails('new-checkout-flow', false, {
+    targetingKey: 'user-2',
+    companyID: 'acme',
+  });
+  expect(details.value).toBe(false);
+  expect(details.variant).toBe('off');
+});
+```
+
+The snippet above uses Vitest for its first-class ESM support. The same pattern works with Jest; Jest users may need `--experimental-vm-modules` if their project is ESM. The non-generic `InMemoryProvider` export is deprecated — prefer `TypedInMemoryProvider`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: https://openfeature.dev/
+[3]: /account_management/api-app-keys/#api-keys

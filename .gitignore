@@ -329,6 +329,7 @@ static/llms.txt
 # Playwright
 test-results/
 playwright-report/
+!e2e/components/icon/
 
 # AI
 .claude/*local*

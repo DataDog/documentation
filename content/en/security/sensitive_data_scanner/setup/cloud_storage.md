@@ -15,7 +15,7 @@ further_reading:
     text: "Learn more about creating custom rules"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 
 <div class="alert alert-danger">Cloud Storage scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 

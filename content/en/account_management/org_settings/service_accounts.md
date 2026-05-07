@@ -73,7 +73,7 @@ To create a new application key, follow the steps below:
 
 The dialog box refreshes, showing you the key. Copy and paste the key into your desired location. After you close the dialog box, you cannot retrieve the value of the key.
 
-{{< site-region region="ap2,gov" >}}
+{{< site-region region="ap2,gov,gov2" >}}
 <div class="alert alert-danger">Service account application keys are one-time read only. Make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
 {{< /site-region >}}
 

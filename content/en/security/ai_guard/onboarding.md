@@ -18,7 +18,7 @@ further_reading:
   text: "LLM guardrails: Best practices for deploying LLM apps securely"
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. AI Guard can also detect sensitive data such as PII and secrets in LLM conversations. This page describes how to set it up so you can keep your data secure against these AI-based threats.

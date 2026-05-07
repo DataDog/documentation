@@ -101,6 +101,11 @@ menu:
       url: getting_started/teams/
       parent: getting_started
       weight: 27
+    - name: Organization Topology
+      identifier: getting_started_organization_topology
+      url: getting_started/organization_topology/
+      parent: getting_started
+      weight: 28
     - name: Datadog Site
       identifier: getting_started_datadog_site
       url: getting_started/site/
@@ -1707,7 +1712,7 @@ menu:
       weight: 30000
     - name: Reference Tables
       url: reference_tables/
-      pre: inventories
+      pre: reference-table
       identifier: reference_tables
       parent: platform_heading
       weight: 40000
@@ -2828,6 +2833,12 @@ menu:
       parent: workflows
       identifier: workflows_limits
       weight: 11
+    - name: Datadog Apps
+      url: actions/datadog_apps/
+      pre: dev-code
+      identifier: datadog_apps
+      parent: actions_heading
+      weight: 35000
     - name: App Builder
       url: actions/app_builder/
       pre: app-builder
@@ -2956,7 +2967,12 @@ menu:
       url: actions/connections/aws_integration/
       parent: actions_connections
       identifier: actions_aws_integration
-      weight: 101
+      weight: 102
+    - name: Google Workspace
+      url: actions/connections/google_workspace/
+      parent: actions_connections
+      identifier: actions_google_workspace
+      weight: 103
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
@@ -4454,16 +4470,21 @@ menu:
       parent: tracing_services
       identifier: tracing_service_remapping_rules
       weight: 908
+    - name: Tag Enrichment
+      url: tracing/services/tag_enrichment
+      parent: tracing_services
+      identifier: tracing_tag_enrichment
+      weight: 909
     - name: Integration Override Removal
       url: tracing/services/integration_override_removal
       parent: tracing_services
       identifier: tracing_service_override_removal
-      weight: 909
+      weight: 910
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 910
+      weight: 911
     - name: Endpoint Observability
       url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
@@ -4610,7 +4631,7 @@ menu:
       parent: profiler
       identifier: profiler_enabling
       weight: 1
-    - name: Supported Language and Tracer Versions
+    - name: Supported Language and SDK Versions
       url: profiler/enabling/supported_versions/
       parent: profiler_enabling
       identifier: profiler_supported_langs
@@ -5021,16 +5042,21 @@ menu:
       parent: dbm
       identifier: dbm_recommendations
       weight: 16
+    - name: Database Investigator
+      url: database_monitoring/database_investigator/
+      parent: dbm
+      identifier: dbm_database_investigator
+      weight: 17
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 17
+      weight: 18
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 18
+      weight: 19
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -5181,6 +5207,11 @@ menu:
       identifier: jobs_monitoring_airflow
       parent: data_jobs
       weight: 200000
+    - name: Troubleshooting DAG
+      url: data_observability/jobs_monitoring/airflow_troubleshooting_dag
+      identifier: jobs_monitoring_airflow_troubleshooting_dag
+      parent: jobs_monitoring_airflow
+      weight: 100000
     - name: dbt
       url: data_observability/jobs_monitoring/dbt
       identifier: jobs_monitoring_dbt
@@ -5301,6 +5332,11 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_metrics
       weight: 307
+    - name: Automation Rules
+      url: llm_observability/monitoring/automation_rules
+      parent: llm_obs_monitoring
+      identifier: llm_obs_monitoring_automation_rules
+      weight: 308
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
@@ -5346,6 +5382,16 @@ menu:
       parent: llm_obs_custom_llm_as_a_judge_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
       weight: 40101
+    - name: Trace-Level Evaluations
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_trace_level
+      weight: 40102
+    - name: Prompt Templating
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_prompt_templating
+      weight: 40103
     - name: NeMo
       url: llm_observability/evaluations/submit_nemo_evaluations
       parent: llm_obs_external_evaluations
@@ -5356,6 +5402,11 @@ menu:
       parent: llm_obs_external_evaluations
       identifier: llm_obs_deepeval_evaluations
       weight: 40301
+    - name: Pydantic Evaluations
+      url: llm_observability/evaluations/pydantic_evaluations
+      parent: llm_obs_external_evaluations
+      identifier: llm_obs_pydantic_evaluations
+      weight: 40302
     - name: Annotation Queues
       url: llm_observability/evaluations/annotation_queues
       parent: llm_obs_evaluations
@@ -5406,6 +5457,11 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_prompt_optimization
       weight: 506
+    - name: Playground
+      url: llm_observability/playground
+      parent: llm_obs_experiments
+      identifier: llm_obs_playground
+      weight: 507
     - name: MCP Server
       url: llm_observability/mcp_server
       parent: llm_obs
@@ -5447,7 +5503,7 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_fleet
       weight: 3
-    - name: AI Agents Console
+    - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
       identifier: ai_agents_console
@@ -7012,132 +7068,132 @@ menu:
       weight: 1101
     - name: BYOC Logs
       pre: upload-wui
-      url: cloudprem/
+      url: byoc-logs/
       parent: log_management_heading
       identifier: cloudprem
       weight: 30000
     - name: Introduction
-      url: /cloudprem/introduction/
+      url: /byoc-logs/introduction/
       parent: cloudprem
       identifier: cloudprem_introduction
       weight: 1
     - name: Architecture
-      url: /cloudprem/introduction/architecture
+      url: /byoc-logs/introduction/architecture
       parent: cloudprem_introduction
       identifier: cloudprem_architecture
       weight: 101
     - name: Network
-      url: /cloudprem/introduction/network
+      url: /byoc-logs/introduction/network
       parent: cloudprem_introduction
       identifier: cloudprem_network
       weight: 102
     - name: Supported Features
-      url: /cloudprem/introduction/features
+      url: /byoc-logs/introduction/features
       parent: cloudprem_introduction
       identifier: cloudprem_features
       weight: 104
     - name: Quickstart
-      url: /cloudprem/quickstart
+      url: /byoc-logs/quickstart
       parent: cloudprem
       identifier: cloudprem_quickstart
       weight: 2
     - name: Install
-      url: /cloudprem/install/
+      url: /byoc-logs/install/
       parent: cloudprem
       identifier: cloudprem_install
       weight: 3
     - name: AWS EKS
-      url: /cloudprem/install/aws_eks
+      url: /byoc-logs/install/aws_eks
       parent: cloudprem_install
       identifier: cloudprem_aws_eks
       weight: 301
     - name: Azure AKS
-      url: /cloudprem/install/azure_aks
+      url: /byoc-logs/install/azure_aks
       parent: cloudprem_install
       identifier: cloudprem_azure_aks
       weight: 302
     - name: GCP GKE
-      url: /cloudprem/install/gcp_gke
+      url: /byoc-logs/install/gcp_gke
       parent: cloudprem_install
       identifier: cloudprem_gcp_gke
       weight: 303
     - name: Docker (Local)
-      url: /cloudprem/install/docker
+      url: /byoc-logs/install/docker
       parent: cloudprem_install
       identifier: cloudprem_docker
       weight: 304
     - name: Custom Kubernetes
-      url: /cloudprem/install/custom_k8s
+      url: /byoc-logs/install/custom_k8s
       parent: cloudprem_install
       identifier: cloudprem_custom_k8s
       weight: 305
     - name: Ingest
-      url: /cloudprem/ingest/
+      url: /byoc-logs/ingest/
       parent: cloudprem
       identifier: cloudprem_ingest
       weight: 4
     - name: Datadog Agent
-      url: /cloudprem/ingest/agent
+      url: /byoc-logs/ingest/agent
       parent: cloudprem_ingest
       identifier: cloudprem_ingest_agent
       weight: 401
     - name: Observability Pipelines
-      url: /cloudprem/ingest/observability_pipelines
+      url: /byoc-logs/ingest/observability_pipelines
       parent: cloudprem_ingest
       identifier: cloudprem_ingest_op
       weight: 402
     - name: REST API
-      url: /cloudprem/ingest/api
+      url: /byoc-logs/ingest/api
       parent: cloudprem_ingest
       identifier: cloudprem_ingest_api
       weight: 403
     - name: Configure
-      url: /cloudprem/configure/
+      url: /byoc-logs/configure/
       parent: cloudprem
       identifier: cloudprem_configure
       weight: 5
     - name: Indexes
-      url: /cloudprem/configure/indexes
+      url: /byoc-logs/configure/indexes
       parent: cloudprem_configure
       identifier: cloudprem_configure_indexes
       weight: 500
     - name: Ingress
-      url: /cloudprem/configure/ingress
+      url: /byoc-logs/configure/ingress
       parent: cloudprem_configure
       identifier: cloudprem_ingress
       weight: 503
     - name: Lambda Search Offloading
-      url: /cloudprem/configure/lambda
+      url: /byoc-logs/configure/lambda
       parent: cloudprem_configure
       identifier: cloudprem_configure_lambda
       weight: 504
     - name: Operate
-      url: /cloudprem/operate/
+      url: /byoc-logs/operate/
       parent: cloudprem
       identifier: cloudprem_operate
       weight: 6
     - name: Sizing
-      url: /cloudprem/operate/sizing
+      url: /byoc-logs/operate/sizing
       parent: cloudprem_operate
       identifier: cloudprem_operate_sizing
       weight: 600
     - name: Monitoring
-      url: /cloudprem/operate/monitoring
+      url: /byoc-logs/operate/monitoring
       parent: cloudprem_operate
       identifier: cloudprem_operate_monitoring
       weight: 601
     - name: Troubleshooting
-      url: /cloudprem/operate/troubleshooting
+      url: /byoc-logs/operate/troubleshooting
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
       weight: 602
     - name: Search Logs
-      url: /cloudprem/operate/search_logs
+      url: /byoc-logs/operate/search_logs
       parent: cloudprem_operate
       identifier: cloudprem_operate_search
       weight: 603
     - name: Guides
-      url: /cloudprem/guides/
+      url: /byoc-logs/guides/
       parent: cloudprem
       identifier: cloudprem_guides
       weight: 10
@@ -9047,11 +9103,21 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 809
+    - name: AI Investigations
+      url: real_user_monitoring/ai_investigations/
+      parent: rum
+      identifier: rum_ai_investigations
+      weight: 9
+    - name: Single-View AI Investigation
+      url: real_user_monitoring/ai_investigations/single_view_ai_investigation/
+      parent: rum_ai_investigations
+      identifier: rum_ai_investigations_single_view
+      weight: 901
     - name: RUM Without Limits
       url: real_user_monitoring/rum_without_limits/
       parent: rum
       identifier: rum_without_limits
-      weight: 9
+      weight: 10
     - name: Metrics
       url: real_user_monitoring/rum_without_limits/metrics
       parent: rum_without_limits
@@ -9062,31 +9128,36 @@ menu:
       parent: rum_without_limits
       identifier: rum_without_limits_retention
       weight: 902
+    - name: Retention Quotas
+      url: real_user_monitoring/rum_without_limits/retention_quotas
+      parent: rum_without_limits
+      identifier: rum_without_limits_retention_quotas
+      weight: 903
     - name: Operations Monitoring
       url: real_user_monitoring/operations_monitoring/
       parent: rum
       identifier: rum_operations_monitoring
-      weight: 10
+      weight: 11
     - name: Managed Archive
       url: real_user_monitoring/managed_archive/
       parent: rum
       identifier: rum_managed_archive
-      weight: 11
+      weight: 12
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 12
+      weight: 13
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 13
+      weight: 14
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 14
+      weight: 15
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
@@ -9616,6 +9687,11 @@ menu:
       url: account_management/multi_organization/
       parent: account_management
       weight: 15
+    - name: Organization Groups
+      identifier: account_management_organization_groups
+      url: account_management/organization_groups/
+      parent: account_management_multi_org_accounts
+      weight: 1
     - name: Guides
       identifier: account_management_guides
       url: account_management/guide/
