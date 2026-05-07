@@ -52,6 +52,8 @@ To set up the rename field processor:
 
 {{% observability_pipelines/path_notation %}}
 
+{{% observability_pipelines/path_notation_dots %}}
+
 [1]: /observability_pipelines/guide/remap_reserved_attributes
 [2]: /observability_pipelines/search_syntax/logs/
 

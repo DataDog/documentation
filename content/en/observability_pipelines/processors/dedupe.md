@@ -40,4 +40,6 @@ The default cache size is 5,000 messages (recommended). The cached messages are 
 
 {{% observability_pipelines/path_notation %}}
 
+{{% observability_pipelines/path_notation_dots %}}
+
 [1]: /observability_pipelines/search_syntax/logs/

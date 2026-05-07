@@ -101,6 +101,8 @@ Here are some attribute search syntax examples and logs that match the syntax:
 
 {{% observability_pipelines/path_notation %}}
 
+{{% observability_pipelines/path_notation_dots %}}
+
 ### Arrays
 
 In the following example, CloudWatch logs for Windows contain an array of JSON objects under `Event.EventData.Data`.

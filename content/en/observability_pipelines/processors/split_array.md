@@ -144,4 +144,6 @@ If the processor is splitting the arrays `"message.myfield.firstarray"` and `"se
 
 {{% observability_pipelines/path_notation %}}
 
+{{% observability_pipelines/path_notation_dots %}}
+
 [1]: /observability_pipelines/search_syntax/logs/

@@ -93,6 +93,8 @@ After adding scanning rules from the library, you can edit each rule separately 
 
 {{% observability_pipelines/path_notation %}}
 
+{{% observability_pipelines/path_notation_dots %}}
+
 ## Set up the processor using Terraform
 
 You can use the [Datadog Observability Pipeline Terraform resource][4] to set up a pipeline with the Sensitive Data Scanner processor. To add a rule to the Sensitive Data Scanner processor using Terraform:

@@ -58,6 +58,8 @@ To set up this processor:
 
 {{% observability_pipelines/path_notation %}}
 
+{{% observability_pipelines/path_notation_dots %}}
+
 ### Always use text key example
 
 If **Always use text key** is selected, the text key is the default (`value`), and you have the following XML:
