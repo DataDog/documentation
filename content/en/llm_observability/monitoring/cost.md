@@ -73,12 +73,14 @@ Alternatively, query the following span attributes directly:
 
 ## Troubleshooting
 
-### Trace shows **PARTIAL COST** or **COST UNAVAILABLE**
+If LLM cost values are missing from a trace or appear inaccurate, see the following sections for common causes and fixes.
+
+### Trace shows PARTIAL COST or COST UNAVAILABLE
 
 Each LLM span in a trace is priced independently. The warning appears when one or more LLM spans in the trace are missing a cost estimate:
 
-- **PARTIAL COST**: Costs were computed for some LLM spans in the trace, but not for the rest. The **Estimated Cost** value reflects the sum of only the spans for which cost was computed.
-- **COST UNAVAILABLE**: Cost could not be computed for any of the LLM spans in the trace.
+- **PARTIAL COST**: Datadog computed costs for some LLM spans in the trace, but not the rest. The **Estimated Cost** value reflects the sum of only the spans for which cost was computed.
+- **COST UNAVAILABLE**: Datadog could not compute cost for any LLM span in the trace.
 
 Hover over the warning to see how many spans are missing cost, the reasons for missing cost, and the names of the affected spans. The reasons fall into one of the following categories.
 
@@ -87,7 +89,7 @@ Hover over the warning to see how many spans are missing cost, the reasons for m
 The LLM model provider on the span is not in the [list of supported providers](#supported-providers), so Datadog has no public pricing rates to apply.
 
 How to fix:
-- Verify the span's model_provider matches a supported provider identifier (no typos). See the [list of supported providers](#supported-providers).
+- Verify the span's `model_provider` matches a supported provider identifier. See the [list of supported providers](#supported-providers).
 - Manually supply cost values on the span. See the [SDK Reference][2] or [API][3].
 
 #### Unsupported model name
@@ -100,22 +102,21 @@ How to fix:
 
 #### Missing token counts
 
-The span has no `input_tokens` or `output_tokens` annotation, so Datadog has no token values to compute the costs from. (For embedding spans, only `input_tokens` is required.)
+The span has no `input_tokens` or `output_tokens` annotation, so Datadog has no token values for cost calculation. (For embedding spans, only `input_tokens` is required.)
 
 How to fix:
 - For [auto-instrumentation][1], confirm your provider and SDK version are supported.
 - For manual instrumentation, annotate input and output token counts on the span. See the [SDK Reference][2] or [API][3].
 
-### Cost may appear incorrect when prompt caching is used
+### Cost may appear incorrect with prompt caching
 
 If a span includes only aggregate `input_tokens` and `output_tokens`, but is missing `cache_read_input_tokens`, `cache_write_input_tokens`, or `non_cached_input_tokens`, Datadog applies the standard input rate to the entire `input_tokens`.
 
-For providers that support prompt caching, cache reads, cache writes, and non-cached inputs are billed at different rates. Without this breakdown, the calculated input cost may be inaccurate.
+For providers that support prompt caching, cache reads, cache writes, and non-cached inputs are billed at different rates. Without this breakdown, the input cost calculation may be inaccurate.
 
 How to fix:
 - For [auto-instrumentation][1], verify that your provider and SDK version emit cache-specific token counts.
 - For manual instrumentation, annotate `cache_read_input_tokens`, `cache_write_input_tokens`, and `non_cached_input_tokens` in addition to `input_tokens`. See the [SDK Reference][2] or [API][3].
-
 
 [1]: /llm_observability/instrumentation/auto_instrumentation
 [2]: /llm_observability/instrumentation/sdk/?tab=python#monitoring-costs
