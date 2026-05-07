@@ -5,6 +5,7 @@
  * including auth headers, query parameters, and request body.
  */
 
+import type { OpenAPIV3 } from 'openapi-types';
 import type { CurlParam, GenerateCurlOptions } from './schemas/curl';
 
 /* ------------------------------------------------------------------ */
@@ -129,7 +130,7 @@ function buildQueryString(queryParams?: CurlParam[]): string {
  * Determine whether the operation requires API key and/or App key auth.
  * Falls back to including both if no security block is provided.
  */
-function getAuthHeaders(security?: any[]): {
+function getAuthHeaders(security?: OpenAPIV3.SecurityRequirementObject[]): {
   apiKey: boolean;
   appKey: boolean;
 } {

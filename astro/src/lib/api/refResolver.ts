@@ -145,7 +145,7 @@ export function schemaToFields(
 
   // ── allOf (merged schemas) ───────────────────────────────────────
   if (schema.allOf) {
-    const merged = mergeAllOf(schema.allOf, spec, visited);
+    const merged = mergeAllOf(schema.allOf, spec);
     return schemaToFields(spec, merged, visited);
   }
 
@@ -175,7 +175,7 @@ export function schemaToFields(
       ];
     }
 
-    const itemTypeName = resolveItemTypeName(spec, items);
+    const itemTypeName = resolveItemTypeName(items);
     const children = schemaToFields(spec, items, new Set(visited));
 
     return [
@@ -386,7 +386,7 @@ function propertyToField(
 
   // ── allOf ────────────────────────────────────────────────────────
   if (resolved.allOf) {
-    const merged = mergeAllOf(resolved.allOf, spec, nextVisited);
+    const merged = mergeAllOf(resolved.allOf, spec);
     const children = schemaToFields(spec, merged, nextVisited);
     return {
       name,
@@ -416,7 +416,7 @@ function propertyToField(
   // ── array ────────────────────────────────────────────────────────
   if (resolved.type === 'array') {
     const items = resolved.items;
-    const itemTypeName = items ? resolveItemTypeName(spec, items) : 'any';
+    const itemTypeName = items ? resolveItemTypeName(items) : 'any';
     const children = items ? schemaToFields(spec, items, new Set(nextVisited)) : [];
 
     return {
@@ -453,7 +453,7 @@ function propertyToField(
 /**
  * Determine the display type name for array items.
  */
-function resolveItemTypeName(spec: any, items: any): string {
+function resolveItemTypeName(items: any): string {
   if (items.$ref) {
     return refName(items.$ref);
   }
@@ -470,8 +470,12 @@ function resolveItemTypeName(spec: any, items: any): string {
  * Merge an `allOf` array into a single schema object by combining
  * `properties`, `required`, and top-level fields from each sub-schema.
  */
-function mergeAllOf(schemas: any[], spec: any, visited: Set<string>): any {
-  const merged: any = { type: 'object', properties: {}, required: [] };
+function mergeAllOf(schemas: any[], spec: any): any {
+  const merged: Record<string, unknown> = {
+    type: 'object',
+    properties: {},
+    required: [],
+  };
 
   for (const sub of schemas) {
     let resolved = sub;
@@ -480,10 +484,10 @@ function mergeAllOf(schemas: any[], spec: any, visited: Set<string>): any {
     }
 
     if (resolved.properties) {
-      Object.assign(merged.properties, resolved.properties);
+      Object.assign(merged.properties as Record<string, unknown>, resolved.properties);
     }
     if (resolved.required) {
-      merged.required.push(...resolved.required);
+      (merged.required as string[]).push(...resolved.required);
     }
     // Preserve top-level metadata from the first schema that has it
     if (resolved.description && !merged.description) {
@@ -498,6 +502,6 @@ function mergeAllOf(schemas: any[], spec: any, visited: Set<string>): any {
   }
 
   // Deduplicate required array
-  merged.required = [...new Set<string>(merged.required)];
+  merged.required = [...new Set<string>(merged.required as string[])];
   return merged;
 }

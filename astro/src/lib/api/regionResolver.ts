@@ -8,6 +8,7 @@
  * message in the UI.
  */
 
+import type { OpenAPIV3 } from 'openapi-types';
 import { getAllowedRegions } from '@config/regions';
 import type { Region } from './schemas/region';
 
@@ -35,10 +36,17 @@ export function getDefaultRegions(): Region[] {
  * Reads `servers[0].variables.site.enum` and intersects with `allowedRegions`.
  * Returns regions in allowedRegions order.
  */
-export function getRegions(spec: any, operation?: any): Region[] {
+/**
+ * Both arguments are typed as just the server-bearing slice of their
+ * OpenAPI parents so callers (and tests) can pass minimal stubs.
+ */
+export function getRegions(
+  spec: Pick<OpenAPIV3.Document, "servers">,
+  operation?: Pick<OpenAPIV3.OperationObject, "servers">,
+): Region[] {
   const all = getDefaultRegions();
 
-  const servers = operation?.servers ?? spec?.servers;
+  const servers = operation?.servers ?? spec.servers;
   if (!Array.isArray(servers) || servers.length === 0) return all;
 
   const siteVar = servers[0]?.variables?.site;
@@ -52,7 +60,11 @@ export function getRegions(spec: any, operation?: any): Region[] {
  * Builds an endpoint URL from a server block (or falls back to `api.{site}{path}`).
  * Resolves the `{subdomain}` and `{site}` variables in the server URL template.
  */
-export function buildApiUrlFromServers(servers: any, site: string, path: string): string {
+export function buildApiUrlFromServers(
+  servers: OpenAPIV3.ServerObject[] | undefined,
+  site: string,
+  path: string,
+): string {
   if (!Array.isArray(servers) || servers.length === 0) {
     return `https://api.${site}${path}`;
   }

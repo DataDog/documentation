@@ -17,7 +17,8 @@
     "preact": "^10.25.0",
     "shiki": "^4.0.2",
     "turndown": "^7.2.4",
-    "yaml": "^2.8.3"
+    "yaml": "^2.8.3",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.7",

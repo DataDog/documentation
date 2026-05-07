@@ -1,56 +1,82 @@
-import type { SchemaField } from "./schemaField";
-import type { CodeExampleSet } from "./codeExamples";
+import { z } from "zod";
+import { SchemaFieldSchema } from "./schemaField";
+import { CodeExampleSetSchema } from "./codeExamples";
+import { ApiVersionSchema } from "./version";
 
-export interface ApiOperationStub {
-  operationId: string;
-  summary: string;
-  slug: string;
-  menuOrder: number;
-  version: "v1" | "v2";
-  method: string;
-}
+const ExampleSchema = z
+  .object({
+    name: z.string(),
+    value: z.string(),
+    highlightedValue: z.string().optional(),
+  })
+  .strict();
 
-export interface ApiCategory {
-  name: string;
-  slug: string;
-  description: string;
-  operations: ApiOperationStub[];
-  deprecated: boolean;
-}
+export const ApiOperationStubSchema = z
+  .object({
+    operationId: z.string(),
+    summary: z.string(),
+    slug: z.string(),
+    menuOrder: z.number(),
+    version: ApiVersionSchema,
+    method: z.string(),
+  })
+  .strict();
 
-export interface ResponseData {
-  statusCode: string;
-  description: string;
-  schema?: SchemaField[];
-  examples?: Array<{ name: string; value: string; highlightedValue?: string }>;
-}
+export const ApiCategorySchema = z
+  .object({
+    name: z.string(),
+    slug: z.string(),
+    description: z.string(),
+    operations: z.array(ApiOperationStubSchema),
+    deprecated: z.boolean(),
+  })
+  .strict();
 
-export interface RequestBodyData {
-  required: boolean;
-  description?: string;
-  schema: SchemaField[];
-  examples: Array<{ name: string; value: string; highlightedValue?: string }>;
-}
+export const ResponseDataSchema = z
+  .object({
+    statusCode: z.string(),
+    description: z.string(),
+    schema: z.array(SchemaFieldSchema).optional(),
+    examples: z.array(ExampleSchema).optional(),
+  })
+  .strict();
 
-export interface EndpointData {
-  operationId: string;
-  summary: string;
-  slug: string;
-  method: string;
-  path: string;
-  description: string;
-  version: "v1" | "v2";
-  deprecated: boolean;
-  unstable: boolean;
-  unstableMessage?: string;
-  newerVersionUrl?: string;
-  permissions?: string[];
-  oauthScopes?: string[];
-  regionUrls?: Record<string, string>;
-  pathParams?: SchemaField[];
-  queryParams?: SchemaField[];
-  headerParams?: SchemaField[];
-  requestBody?: RequestBodyData;
-  responses: ResponseData[];
-  codeExamples: CodeExampleSet[];
-}
+export const RequestBodyDataSchema = z
+  .object({
+    required: z.boolean(),
+    description: z.string().optional(),
+    schema: z.array(SchemaFieldSchema),
+    examples: z.array(ExampleSchema),
+  })
+  .strict();
+
+export const EndpointDataSchema = z
+  .object({
+    operationId: z.string(),
+    summary: z.string(),
+    slug: z.string(),
+    method: z.string(),
+    path: z.string(),
+    description: z.string(),
+    version: ApiVersionSchema,
+    deprecated: z.boolean(),
+    unstable: z.boolean(),
+    unstableMessage: z.string().optional(),
+    newerVersionUrl: z.string().optional(),
+    permissions: z.array(z.string()).optional(),
+    oauthScopes: z.array(z.string()).optional(),
+    regionUrls: z.record(z.string(), z.string()).optional(),
+    pathParams: z.array(SchemaFieldSchema).optional(),
+    queryParams: z.array(SchemaFieldSchema).optional(),
+    headerParams: z.array(SchemaFieldSchema).optional(),
+    requestBody: RequestBodyDataSchema.optional(),
+    responses: z.array(ResponseDataSchema),
+    codeExamples: z.array(CodeExampleSetSchema),
+  })
+  .strict();
+
+export type ApiOperationStub = z.infer<typeof ApiOperationStubSchema>;
+export type ApiCategory = z.infer<typeof ApiCategorySchema>;
+export type ResponseData = z.infer<typeof ResponseDataSchema>;
+export type RequestBodyData = z.infer<typeof RequestBodyDataSchema>;
+export type EndpointData = z.infer<typeof EndpointDataSchema>;

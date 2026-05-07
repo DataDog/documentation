@@ -50,10 +50,20 @@ describe('getRegions', () => {
 
   it('prefers per-operation servers when present', () => {
     const spec = {
-      servers: [{ variables: { site: { default: 'datadoghq.com', enum: ['datadoghq.com', 'datadoghq.eu'] } } }],
+      servers: [
+        {
+          url: 'https://{subdomain}.{site}',
+          variables: { site: { default: 'datadoghq.com', enum: ['datadoghq.com', 'datadoghq.eu'] } },
+        },
+      ],
     };
     const operation = {
-      servers: [{ variables: { site: { default: 'datadoghq.com', enum: ['datadoghq.com'] } } }],
+      servers: [
+        {
+          url: 'https://{subdomain}.{site}',
+          variables: { site: { default: 'datadoghq.com', enum: ['datadoghq.com'] } },
+        },
+      ],
     };
     const regions = getRegions(spec, operation);
     expect(regions.map((r) => r.key)).toEqual(['us']);

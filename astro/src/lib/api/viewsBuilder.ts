@@ -140,12 +140,25 @@ function toSlug(name: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
+/**
+ * Operation extensions used to drive the docs UI. None are part of the
+ * OpenAPI 3.x base type, so we widen `OperationObject` here. `operationId`
+ * is also narrowed to required because `getAllOperations` filters out any
+ * operation that lacks one.
+ */
+type ApiOperationObject = Omit<OpenAPIV3.OperationObject, 'operationId'> & {
+  operationId: string;
+  'x-permission'?: { permissions?: string[]; operator?: string };
+  'x-unstable'?: boolean | string;
+  'x-menu-order'?: number;
+};
+
 interface RawOperation {
   version: ApiVersion;
   pathStr: string;
   method: string;
-  operation: any;
-  pathItem: any;
+  operation: ApiOperationObject;
+  pathItem: OpenAPIV3.PathItemObject;
   primaryTag: string;
   categorySlug: string;
 }
@@ -156,24 +169,19 @@ function getAllOperations(): RawOperation[] {
 
   for (const version of API_VERSIONS) {
     const spec = getOpenApiDocument(version);
-    const paths = spec?.paths;
-    if (!paths || typeof paths !== "object") continue;
+    const paths = spec.paths;
+    if (!paths) continue;
 
-    for (const [pathStr, pathItem] of Object.entries(paths) as [
-      string,
-      any,
-    ][]) {
-      if (!pathItem || typeof pathItem !== "object") continue;
+    for (const [pathStr, pathItem] of Object.entries(paths)) {
+      if (!pathItem) continue;
 
       for (const method of HTTP_METHODS) {
         const operation = pathItem[method];
-        if (!operation || typeof operation !== "object") continue;
-
-        const tags: string[] = operation.tags;
-        if (!tags || !Array.isArray(tags) || tags.length === 0) continue;
+        if (!operation) continue;
+        if (!operation.tags || operation.tags.length === 0) continue;
         if (!operation.operationId) continue;
 
-        const primaryTag = tags[0];
+        const primaryTag = operation.tags[0];
         const rawSlug = toSlug(primaryTag);
         const categorySlug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
 
@@ -181,7 +189,7 @@ function getAllOperations(): RawOperation[] {
           version,
           pathStr,
           method,
-          operation,
+          operation: operation as ApiOperationObject,
           pathItem,
           primaryTag,
           categorySlug,
@@ -248,7 +256,9 @@ function buildCategories(lang: Locale): ApiCategory[] {
     const spec = getOpenApiDocument(version);
     const overlay = getTranslationOverlay(version, lang);
 
-    for (const tag of spec?.tags ?? []) {
+    type ApiTagObject = OpenAPIV3.TagObject & { "x-deprecated"?: boolean };
+    const tags = (spec.tags ?? []) as ApiTagObject[];
+    for (const tag of tags) {
       const rawSlug = toSlug(tag.name);
       const slug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
       if (categoryMap.has(slug)) continue;
@@ -261,10 +271,7 @@ function buildCategories(lang: Locale): ApiCategory[] {
         name: translated.name,
         slug,
         description: translated.description ?? "",
-        deprecated:
-          (tag as OpenAPIV3.TagObject & { "x-deprecated"?: boolean })[
-            "x-deprecated"
-          ] === true,
+        deprecated: tag["x-deprecated"] === true,
       });
     }
   }

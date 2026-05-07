@@ -12,7 +12,7 @@
  */
 
 import { parse as parseYaml } from 'yaml';
-import { DEFAULT_LOCALE, type Locale } from '@lib/i18n/locale';
+import { DEFAULT_LOCALE, isLocale, type Locale } from '@lib/i18n/locale';
 
 const rawModules: Record<string, string> = import.meta.glob<string>(
   '@hugo-site/content/*/api/latest/**/_index.md',
@@ -30,7 +30,10 @@ for (const [path, raw] of Object.entries(rawModules)) {
   if (!m) {
     continue;
   }
-  const lang = m[1] as Locale;
+  if (!isLocale(m[1])) {
+    continue;
+  }
+  const lang: Locale = m[1];
   const slug = m[2].replace(/\/$/, '');
   const fm = FRONTMATTER_RE.exec(raw);
   if (!fm) {

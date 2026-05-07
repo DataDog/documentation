@@ -5,6 +5,7 @@
  * structured data. No caching, no I/O.
  */
 
+import type { OpenAPIV3 } from "openapi-types";
 import { resolveRef, schemaToFields } from "./refResolver";
 import { buildCurlCommand } from "./curlBuilder";
 import { getRegions } from "./regionResolver";
@@ -13,20 +14,32 @@ import type { CurlParam } from "./schemas/curl";
 import type { ResponseData, RequestBodyData } from "./schemas/views";
 import type { SplitParams } from "./schemas/params";
 
+type ParameterOrRef = OpenAPIV3.ParameterObject | OpenAPIV3.ReferenceObject;
+type OperationWithExtensions = OpenAPIV3.OperationObject & {
+  "x-permission"?: { permissions?: string[]; operator?: string };
+};
+
+function isReference(o: unknown): o is OpenAPIV3.ReferenceObject {
+  return typeof o === "object" && o !== null && "$ref" in o && typeof (o as { $ref: unknown }).$ref === "string";
+}
+
 /**
  * Split an array of OpenAPI parameter objects by their `in` field,
  * resolving any $ref pointers along the way.
  */
-export function splitParameters(spec: any, params?: any[]): SplitParams {
+export function splitParameters(
+  spec: OpenAPIV3.Document,
+  params?: ParameterOrRef[],
+): SplitParams {
   const result: SplitParams = { path: [], query: [], header: [] };
 
   if (!params || !Array.isArray(params)) return result;
 
   for (const param of params) {
-    const resolved = param.$ref
+    const resolved: OpenAPIV3.ParameterObject = isReference(param)
       ? (resolveRef(spec, param.$ref) ?? param)
       : param;
-    const location = resolved.in as string;
+    const location = resolved.in;
 
     if (location === "path") result.path.push(resolved);
     else if (location === "query") result.query.push(resolved);
@@ -41,7 +54,9 @@ export function splitParameters(spec: any, params?: any[]): SplitParams {
  *
  * Structure: `{ operator: 'AND' | 'OR', permissions: string[] }`
  */
-export function extractPermissions(operation: any): string[] | undefined {
+export function extractPermissions(
+  operation: OperationWithExtensions,
+): string[] | undefined {
   const xPerm = operation["x-permission"];
   if (!xPerm?.permissions || !Array.isArray(xPerm.permissions))
     return undefined;
@@ -51,7 +66,9 @@ export function extractPermissions(operation: any): string[] | undefined {
 /**
  * Extract OAuth scopes from the `security` block's AuthZ requirement.
  */
-export function extractOauthScopes(security?: any[]): string[] | undefined {
+export function extractOauthScopes(
+  security?: OpenAPIV3.SecurityRequirementObject[],
+): string[] | undefined {
   if (!security || !Array.isArray(security)) return undefined;
 
   for (const requirement of security) {
@@ -71,13 +88,15 @@ export function extractOauthScopes(security?: any[]): string[] | undefined {
  * Extract request body schema and examples from the operation.
  */
 export function extractRequestBody(
-  spec: any,
-  operation: any,
+  spec: OpenAPIV3.Document,
+  operation: OpenAPIV3.OperationObject,
 ): RequestBodyData | undefined {
   const rb = operation.requestBody;
   if (!rb) return undefined;
 
-  const resolved = rb.$ref ? (resolveRef(spec, rb.$ref) ?? rb) : rb;
+  const resolved: OpenAPIV3.RequestBodyObject = isReference(rb)
+    ? (resolveRef(spec, rb.$ref) ?? rb)
+    : rb;
 
   const content = resolved.content;
   if (!content) return undefined;
@@ -92,18 +111,15 @@ export function extractRequestBody(
   const examples: Array<{ name: string; value: string }> = [];
 
   if (jsonContent.examples && typeof jsonContent.examples === "object") {
-    for (const [name, exampleObj] of Object.entries(jsonContent.examples) as [
-      string,
-      any,
-    ][]) {
-      const resolved = exampleObj?.$ref
+    for (const [name, exampleObj] of Object.entries(jsonContent.examples)) {
+      const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
         ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)
         : exampleObj;
 
-      if (resolved?.value !== undefined) {
+      if (resolvedExample?.value !== undefined) {
         examples.push({
-          name: resolved.summary ?? name,
-          value: JSON.stringify(resolved.value, null, 2),
+          name: resolvedExample.summary ?? name,
+          value: JSON.stringify(resolvedExample.value, null, 2),
         });
       }
     }
@@ -135,17 +151,17 @@ export function extractRequestBody(
 /**
  * Extract response data for all status codes defined on the operation.
  */
-export function extractResponses(spec: any, operation: any): ResponseData[] {
+export function extractResponses(
+  spec: OpenAPIV3.Document,
+  operation: OpenAPIV3.OperationObject,
+): ResponseData[] {
   const responses = operation.responses;
   if (!responses || typeof responses !== "object") return [];
 
   const result: ResponseData[] = [];
 
-  for (const [statusCode, responseObj] of Object.entries(responses) as [
-    string,
-    any,
-  ][]) {
-    const resolved = responseObj?.$ref
+  for (const [statusCode, responseObj] of Object.entries(responses)) {
+    const resolved: OpenAPIV3.ResponseObject = isReference(responseObj)
       ? (resolveRef(spec, responseObj.$ref) ?? responseObj)
       : responseObj;
 
@@ -160,11 +176,8 @@ export function extractResponses(spec: any, operation: any): ResponseData[] {
     let examples: Array<{ name: string; value: string }> | undefined;
     if (jsonContent?.examples && typeof jsonContent.examples === "object") {
       examples = [];
-      for (const [name, exampleObj] of Object.entries(jsonContent.examples) as [
-        string,
-        any,
-      ][]) {
-        const resolvedExample = exampleObj?.$ref
+      for (const [name, exampleObj] of Object.entries(jsonContent.examples)) {
+        const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
           ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)
           : exampleObj;
 
@@ -211,10 +224,10 @@ export function extractResponses(spec: any, operation: any): ResponseData[] {
  * a `[data-region]` wrapper per variant.
  */
 export function buildCurlByRegion(
-  spec: any,
+  spec: OpenAPIV3.Document,
   method: string,
   path: string,
-  operation: any,
+  operation: OpenAPIV3.OperationObject,
   splitParams: SplitParams,
   requestBodyJson?: string,
 ): Record<string, string> {
@@ -256,14 +269,14 @@ const EXAMPLE_MAX_DEPTH = 10;
  * by a `seen` set of ref paths instead.
  */
 function generateExampleFromSchema(
-  spec: any,
-  schema: any,
+  spec: OpenAPIV3.Document,
+  schema: OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject | undefined,
   depth = 0,
   seen: Set<string> = new Set(),
-): any {
+): unknown {
   if (!schema || depth > EXAMPLE_MAX_DEPTH) return undefined;
 
-  if (schema.$ref) {
+  if (isReference(schema)) {
     if (seen.has(schema.$ref)) return undefined;
     seen.add(schema.$ref);
     const resolved = resolveRef(spec, schema.$ref);
@@ -274,7 +287,7 @@ function generateExampleFromSchema(
   if (schema.example !== undefined) return schema.example;
 
   if (schema.allOf) {
-    const merged: any = {};
+    const merged: Record<string, unknown> = {};
     let hasValue = false;
     for (const sub of schema.allOf) {
       const val = generateExampleFromSchema(spec, sub, depth, seen);
@@ -286,7 +299,11 @@ function generateExampleFromSchema(
     return hasValue ? merged : undefined;
   }
 
-  const unionKey = schema.oneOf ? "oneOf" : schema.anyOf ? "anyOf" : null;
+  const unionKey: "oneOf" | "anyOf" | null = schema.oneOf
+    ? "oneOf"
+    : schema.anyOf
+      ? "anyOf"
+      : null;
   if (unionKey) {
     const variants = schema[unionKey];
     if (Array.isArray(variants) && variants.length > 0) {
@@ -299,13 +316,10 @@ function generateExampleFromSchema(
     const properties = schema.properties;
     if (!properties) return undefined;
 
-    const obj: any = {};
+    const obj: Record<string, unknown> = {};
     let hasValue = false;
 
-    for (const [propName, propSchema] of Object.entries(properties) as [
-      string,
-      any,
-    ][]) {
+    for (const [propName, propSchema] of Object.entries(properties)) {
       const val = generateExampleFromSchema(spec, propSchema, depth + 1, seen);
       if (val !== undefined) {
         obj[propName] = val;
@@ -339,9 +353,10 @@ function generateExampleFromSchema(
 /**
  * Build curl params from resolved parameter objects.
  */
-function toCurlParams(params: any[]): CurlParam[] {
+function toCurlParams(params: OpenAPIV3.ParameterObject[]): CurlParam[] {
   return params.map((p) => {
-    const schema = p.schema;
+    const schema: OpenAPIV3.SchemaObject | undefined =
+      p.schema && !isReference(p.schema) ? p.schema : undefined;
     const example = p.example ?? schema?.example ?? schema?.default;
     return {
       name: p.name,

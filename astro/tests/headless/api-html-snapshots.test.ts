@@ -2,6 +2,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { format as prettierFormat } from 'prettier';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.resolve(__dirname, '../../dist');
@@ -68,8 +69,12 @@ function distFile(urlPath: string): string {
  * with a sequential placeholder (`X1`, `X2`, ...) keyed by first appearance,
  * which preserves cross-references (e.g. `aria-controls` ↔ `id`) so a missing
  * pairing still shows up as a diff.
+ *
+ * The result is then run through Prettier's HTML parser so each tag lands on
+ * its own line. Without that, a single-line minified HTML document produces a
+ * unreadable single-line snapshot diff on any change.
  */
-function normalize(html: string): string {
+async function normalize(html: string): Promise<string> {
   let out = html.replace(
     /\/_astro\/([A-Za-z0-9_-]+)\.[A-Za-z0-9_-]{8}\.(js|css|woff2?|svg|png|jpg|jpeg|webp|map)/g,
     '/_astro/$1.HASH.$2',
@@ -96,7 +101,10 @@ function normalize(html: string): string {
   //   aria-controls="..."   data-foo="..."
   out = out.replace(/\b[a-f0-9]{8}\b/g, (raw) => canonicalize(raw));
 
-  return out;
+  return await prettierFormat(out, {
+    parser: 'html',
+    printWidth: 120,
+  });
 }
 
 describe('API page HTML snapshots', () => {
@@ -109,16 +117,23 @@ describe('API page HTML snapshots', () => {
   });
 
   for (const page of AUDIT_PAGES) {
-    it(`${page.name} (${page.url}) matches snapshot`, async () => {
-      const filepath = distFile(page.url);
-      if (!existsSync(filepath)) {
-        throw new Error(`Built page not found at ${filepath}`);
-      }
-      const html = readFileSync(filepath, 'utf-8');
-      const normalized = normalize(html);
-      await expect(normalized).toMatchFileSnapshot(
-        path.join(SNAPSHOT_DIR, `${page.name}.html`),
-      );
-    });
+    // Some operation pages (notably dashboards/get-a-dashboard) generate
+    // very large HTML documents; Prettier's HTML formatter on those takes
+    // well past the default 5s timeout.
+    it(
+      `${page.name} (${page.url}) matches snapshot`,
+      async () => {
+        const filepath = distFile(page.url);
+        if (!existsSync(filepath)) {
+          throw new Error(`Built page not found at ${filepath}`);
+        }
+        const html = readFileSync(filepath, 'utf-8');
+        const normalized = await normalize(html);
+        await expect(normalized).toMatchFileSnapshot(
+          path.join(SNAPSHOT_DIR, `${page.name}.html`),
+        );
+      },
+      30_000,
+    );
   }
 });

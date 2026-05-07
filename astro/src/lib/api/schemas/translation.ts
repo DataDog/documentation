@@ -1,11 +1,20 @@
-export interface TagTranslation {
-  name?: string;
-  description?: string;
-}
+import { z } from "zod";
 
-export interface ActionTranslation {
-  summary?: string;
-  description?: string;
-  request_description?: string;
-  request_schema_description?: string;
-}
+export const TagTranslationSchema = z
+  .object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+  })
+  .strict();
+
+export const ActionTranslationSchema = z
+  .object({
+    summary: z.string().optional(),
+    description: z.string().optional(),
+    request_description: z.string().optional(),
+    request_schema_description: z.string().optional(),
+  })
+  .strict();
+
+export type TagTranslation = z.infer<typeof TagTranslationSchema>;
+export type ActionTranslation = z.infer<typeof ActionTranslationSchema>;

@@ -9,6 +9,7 @@
  * layouts/partials/api/code-example.html.
  */
 
+import { z } from 'zod';
 import API_V1_CODE_EXAMPLES from '@hugo-site/data/api/v1/CodeExamples.json';
 import API_V2_CODE_EXAMPLES from '@hugo-site/data/api/v2/CodeExamples.json';
 import type {
@@ -34,19 +35,28 @@ for (const [key, code] of Object.entries(sdkExampleFiles)) {
 }
 
 /** Shape of each entry in CodeExamples.json, keyed by operationId */
-interface CodeExampleMeta {
-  group: string;
-  suffix: string;
-  description: string;
-}
+const CodeExampleMetaSchema = z
+  .object({
+    group: z.string(),
+    suffix: z.string(),
+    description: z.string(),
+  })
+  .strict();
+
+const CodeExamplesJsonSchema = z.record(
+  z.string(),
+  z.array(CodeExampleMetaSchema),
+);
+
+type CodeExampleMeta = z.infer<typeof CodeExampleMetaSchema>;
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */
 
 const CODE_EXAMPLES: Record<'v1' | 'v2', Record<string, CodeExampleMeta[]>> = {
-  v1: API_V1_CODE_EXAMPLES as Record<string, CodeExampleMeta[]>,
-  v2: API_V2_CODE_EXAMPLES as Record<string, CodeExampleMeta[]>,
+  v1: CodeExamplesJsonSchema.parse(API_V1_CODE_EXAMPLES),
+  v2: CodeExamplesJsonSchema.parse(API_V2_CODE_EXAMPLES),
 };
 
 /**
