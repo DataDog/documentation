@@ -1,18 +1,18 @@
 ## Overview
 
-Mobile RUM collects frustration signals to help you identify the highest points of user friction in your application by surfacing moments when users exhibit frustration.
+Frustration signals identify points of user friction in your mobile application by capturing patterns like rage taps and error taps.
 
 Mobile RUM collects two types of frustration signals:
 
 Rage Taps
-: A user taps on an element more than three times in a one-second sliding window within a radius of approximately 9mm (48dp).
+: A user taps on an element more than three times in a one-second sliding window within a radius of approximately 9 mm (48 dp).
 
 Error Taps
-: A user taps on an element, and at least one error occurs during the action's duration or within 100ms after the action ends.
+: A user taps on an element, and at least one error occurs during the action's duration or within 100 ms after the action ends.
 
-The Mobile RUM SDK automatically detects Frustration signals with no additional configuration.
+The Mobile RUM SDK automatically detects frustration signals with no additional configuration.
 
-## Usage
+## Search for frustration signals in the RUM Explorer
 
 Frustration signals appear in the [RUM Explorer][1] as action attributes. Search through your RUM data to surface trends on frustration signals and analyze patterns of user friction.
 
