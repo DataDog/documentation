@@ -41,7 +41,7 @@ Use the API token to configure the integration in Data Observability.
 1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1].
 2. In the {{< ui >}}dbt Cloud{{< /ui >}} section, click {{< ui >}}Configure{{< /ui >}}.
 3. If you have already created a dbt Cloud integration account, make sure you have updated it with the API token with permissions described above.
-4. If not, create a new account. Fill in the {{< ui >}}Account Name{{< /ui >}}, {{< ui >}}Account Id{{< /ui >}}, {{< ui >}}Account Url{{< /ui >}}, and {{< ui >}}API Token{{< /ui >}} sections.
+4. If not, create an account. Fill in the {{< ui >}}Account Name{{< /ui >}}, {{< ui >}}Account Id{{< /ui >}}, {{< ui >}}Account Url{{< /ui >}}, and {{< ui >}}API Token{{< /ui >}} sections.
 5. Click {{< ui >}}Save{{< /ui >}} to save your settings.
 
 ## Configure webhooks
@@ -60,7 +60,7 @@ Use this option if you want to use a {{< ui >}}Stakeholder/Read-Only{{< /ui >}} 
 6. Save the webhook in dbt Cloud.
 7. Copy the HMAC secret from dbt Cloud, paste it into the {{< ui >}}HMAC secret from dbt Cloud{{< /ui >}} field in Datadog, and click {{< ui >}}Save{{< /ui >}}.
 
-**Note**: Manually created webhooks can take up to 5 minutes after you save the user-managed webhook configuration in Datadog to start accepting traffic from dbt Cloud.
+**Note**: After saving, webhooks you create yourself can take up to 5 minutes to start accepting traffic from dbt Cloud.
 
 If you remove a user-managed webhook configuration in Datadog later, delete the webhook from dbt Cloud manually.
 
