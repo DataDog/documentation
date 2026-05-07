@@ -89,6 +89,7 @@ The default allowlist includes the following domains:
 | PHP | `packagist.org`, `repo.packagist.org` |
 | Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
 | Rust | `index.crates.io`, `static.crates.io` |
+| Ubuntu | `archive.ubuntu.com`, `ports.ubuntu.com`, `security.ubuntu.com` |
 
 ### Configure repository environment
 
