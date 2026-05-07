@@ -190,7 +190,7 @@ To mitigate:
 
 ### Minimum SDK version
 
-**Ruby SDK**: 2.5.0 or higher
+**Ruby SDK**: Ruby SDK: 2.6.0 or higher
 
 ### Supported runtime versions
 
@@ -198,8 +198,9 @@ For a complete list of supported Ruby versions, see the [Ruby SDK compatibility 
 
 ### Operating system requirements
 
-- Requires Linux distributions using glibc 2.27 or newer
+- Requires Linux distributions using glibc 2.17 or newer
 - Not compatible with Alpine Linux or other musl-based distributions
+- Requires Bundler >= 2.4, < 4.0 and RubyGems >= 3.4, < 4.0
 
 ### Known issues
 
