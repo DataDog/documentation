@@ -1,6 +1,5 @@
 ---
 title: iOS and tvOS Monitoring Supported Versions
-beta: true
 description: "List of supported operating systems and platforms for the RUM iOS SDK."
 aliases:
  - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios
@@ -36,7 +35,7 @@ The RUM iOS SDK supports the following iOS versions:
 | iPadOS | {{< X >}} | 12+ | |
 | macOS (Designed for iPad) | {{< X >}} | 11+ | |
 | macOS (Catalyst) | partially supported | 12+ | Catalyst is supported in build mode only, which means that macOS targets build, but functionalities for the SDK might not work for this target. |
-| macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**:  `DatadogRUM`, `DatadogSessionReplay`, and `DatadogObjc`, which heavily depend on `UIKit`, do not build on macOS. |
+| macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**: `DatadogRUM` and `DatadogSessionReplay` do not build on macOS. |
 | visionOS | | 1.0+ | visionOS is not officially supported by the Datadog SDK. Some features may not be fully functional. |
 | watchOS | | 7.0+ | watchOS is not officially supported by the Datadog SDK. Some features may not be fully functional. |
 | Linux | | n/a | |
@@ -49,11 +48,11 @@ The RUM iOS SDK supports the following iOS versions:
   | DatadogLogs | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
   | DatadogTrace | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
   | DatadogCrashReporting | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-  | DatadogRUM | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | watchOS: automatic view/action tracking, frame rate monitoring, and memory warning detection are not available. |
+  | DatadogRUM | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | On tvOS, scroll and swipe actions, SwiftUI automatic action tracking, and long tasks are not available. On watchOS, automatic view and action tracking, memory warnings, slow frames, long tasks, app hangs, watchdog terminations, frustration signals, and the RUM debugging overlay are not available. |
   | DatadogFlags | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
-  | DatadogProfiling | {{< X >}} | {{< X >}} | | {{< X >}} | Not available on watchOS. The profiling module requires system-level APIs that watchOS does not support. |
-  | DatadogSessionReplay | {{< X >}} | | | | Not available on tvOS, watchOS, and visionOS. SessionReplay requires rendering capabilities not available on these platforms. |
-  | DatadogWebViewTracking | {{< X >}} | | | {{< X >}} | Not available on tvOS and watchOS. WebViewTracking requires browser rendering capabilities not available on these platforms. |
+  | DatadogProfiling | {{< X >}} | {{< X >}} | | {{< X >}} | Available on iOS, tvOS, and visionOS. |
+  | DatadogSessionReplay | {{< X >}} | | | | Available on iOS only. |
+  | DatadogWebViewTracking | {{< X >}} | | | {{< X >}} | Available on iOS and visionOS only. |
 
 ## Supported platforms
 
@@ -71,7 +70,7 @@ We currently support integration of the SDK using the following dependency manag
 
 | Language | Version |
 |----------|---------|
-| UIKit | 5.* |
+| Swift | 5.9+ |
 | Objective-C | 2.0 |
 
 ### UI framework instrumentation
