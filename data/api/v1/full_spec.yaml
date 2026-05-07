@@ -14099,19 +14099,19 @@ components:
       x-enum-varnames:
         - NETFLOW_SANKEY
     SankeyRumDataSource:
-      default: rum
-      description: Sankey widget with RUM data source.
+      default: product_analytics
+      description: Product Analytics or RUM data source type.
       enum:
         - rum
         - product_analytics
-      example: rum
+      example: product_analytics
       type: string
       x-enum-varnames:
         - RUM
         - PRODUCT_ANALYTICS
     SankeyRumQuery:
       additionalProperties: false
-      description: Sankey widget with RUM data source query.
+      description: Query configuration for Product Analytics or RUM Sankey widget.
       properties:
         audience_filters:
           $ref: "#/components/schemas/ProductAnalyticsAudienceFilters"
@@ -14151,7 +14151,7 @@ components:
       type: object
     SankeyRumQueryMode:
       default: source
-      description: Sankey mode for RUM queries.
+      description: Sankey mode for Product Analytics or RUM queries.
       enum:
         - source
         - target
@@ -14162,7 +14162,7 @@ components:
         - TARGET
     SankeyRumRequest:
       additionalProperties: false
-      description: Sankey widget with RUM data source.
+      description: Sankey widget request for Product Analytics or RUM data source.
       properties:
         query:
           $ref: "#/components/schemas/SankeyRumQuery"
