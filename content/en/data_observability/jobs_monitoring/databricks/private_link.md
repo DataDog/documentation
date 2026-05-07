@@ -61,12 +61,13 @@ All authentication to Datadog is handled by the underlying Private Action Runner
    1. Click the **Secrets** tab, then click **Generate secret**.
    1. Set the secret's lifetime in days (maximum 730 days).
    1. Click **Generate**.
-   1. Store both the client ID and secret using your cloud provider's secret storage. Format the secret as a JSON blob:
-      ```json
-      {"client_id": "<CLIENT_ID>", "client_secret": "<CLIENT_SECRET>"}
-      ```
-      Datadog supports **AWS Secrets Manager**, **AWS Parameter Store**, and **Azure Key Vault**.
-   1. Make note of the secret path (AWS ARN, AKV vault-name/secret-name, or AKV URL).
+   1. Make the Databricks credentials available to the runner using **one** of the following methods:
+      - **Cloud secret storage** (AWS Secrets Manager, AWS Parameter Store, or Azure Key Vault): Store the credentials as a JSON blob:
+        ```json
+        {"client_id": "<CLIENT_ID>", "client_secret": "<CLIENT_SECRET>"}
+        ```
+        Make note of the secret path (AWS ARN or AKV URL). You enter this in the integration tile or set it as the `DATABRICKS_SECRET_PATH` environment variable on the runner container or pod.
+      - **Environment variables**: Set `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` directly on the runner container or pod. When using this method, leave the **Secret Path** field blank in the integration tile.
 1. Add the service principal as a workspace admin. Alternatively, assign more granular permissions following the instructions in [Permissions][11].
    1. Click the **Identity and access** tab.
    1. Next to **Groups**, click **Manage**.
@@ -90,7 +91,7 @@ Set up your Private Action Runner using **one** of the following options.
 1. Update the existing `values.yaml` (referencing the [Helm chart values][4]):
    1. Set `image.repository` to `gcr.io/datadoghq/dd-data-observability-par`.
    1. Set `image.tag` to `1.21.0-0`.
-1. Assign an identity ([Workload Identity][5] or [IAM Role][6]) to the pod. This identity **must** have permissions to read the secret created in [Step 2](#step-2-databricks-prerequisites).
+1. If using cloud secret storage: assign an identity ([Workload Identity][5] or [IAM Role][6]) to the pod with permissions to read the secret created in [Step 2](#step-2-databricks-prerequisites).
 1. Restart the deployment for these changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
@@ -112,7 +113,7 @@ Set up your Private Action Runner using **one** of the following options.
       **Important**: Replace `gcr.io/datadoghq/private-action-runner:v1.21.0-large` with `gcr.io/datadoghq/dd-data-observability-par:1.21.0-0`.
 
    1. The Private Action Runner should show up at the bottom as "successfully installed."
-1. Assign an identity ([Managed Identity][3] or [IAM Role][4]) to the instance. This identity **must** have permissions to read the secret created in [Step 2](#step-2-databricks-prerequisites).
+1. If using cloud secret storage: assign an identity ([Managed Identity][3] or [IAM Role][4]) to the instance with permissions to read the secret created in [Step 2](#step-2-databricks-prerequisites).
 1. Restart the Docker container for the changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
@@ -139,14 +140,14 @@ Set up your Private Action Runner using **one** of the following options.
    1. Select **Script**.
    1. Set **Path to File** to `/etc/data-observability/config/script.yaml`.
    1. Select **Next, Confirm Access**.
-   1. Add the service account created in [Step 1](#step-1-datadog-prerequisites) with **Resolver** access.
+   1. Add the service account created in [Step 1](#step-1-datadog-prerequisites) with **Resolver** access. This step is required — the runner uses this service account to authenticate Datadog requests, and the integration cannot function without it.
    1. Select **Create and Test**. Verify the test results do not return an error.
 1. Set up the Databricks integration:
    1. Go to the [Databricks integration][13] tile.
    1. Under **Credentials**, select **Private Action Runner**.
       1. Under **Connection**, select the connection created in the previous step.
       1. Under **Service Account**, select the service account created in [Step 1](#step-1-datadog-prerequisites).
-      1. Enter the secret path noted in [Step 2](#step-2-databricks-prerequisites) under **Secret Path**. Alternatively, set this as an environment variable on the container or pod using `DATABRICKS_SECRET_PATH`.
+      1. Under **Secret Path**, enter the secret path from [Step 2](#step-2-databricks-prerequisites). Leave this field blank if you set credentials using the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables, or if you set the path using the `DATABRICKS_SECRET_PATH` environment variable on the runner.
    1. Complete the remainder of the integration setup as described in [Configure the Datadog-Databricks integration][14]:
       1. Enter the **Workspace Name**, **Workspace URL**, and **System Tables SQL Warehouse ID**.
       1. Enable the products you are interested in.
