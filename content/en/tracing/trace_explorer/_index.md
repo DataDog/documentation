@@ -39,7 +39,7 @@ Live Search is the default view on the Traces page. Switch from Live Search to I
 Trace Patterns is in Preview. Use this form to submit your request today.
 {{< /callout >}}
 
-Trace Patterns groups spans with similar structure and attributes into recurring patterns, so you can analyze behavior across thousands of traces at once instead of reading them individually. Use it when a query returns too many spans to scan trace-by-trace, such as finding which error shapes are new this week or which latency patterns shifted after a deploy. 
+Trace Patterns groups spans with similar structure and attributes into recurring patterns, so you can analyze behavior across thousands of traces at once instead of reading them individually. Use Trace Patterns when a query returns too many spans to scan trace-by-trace, such as finding which error shapes are new this week or which latency patterns shifted after a deploy. 
 
 ### Trace volume control
 
