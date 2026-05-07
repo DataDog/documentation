@@ -41,9 +41,7 @@ The default delivery method uses init containers, but SSI supports additional [i
 
 ### Windows
 
-On Windows, a Datadog kernel driver loads a Datadog DLL into every new process. The DLL's `DllMain` function runs before the application's entry point and performs the same detection and instrumentation steps as the Linux injector.
-
-Windows SSI supports Java and .NET applications.
+On Windows, the injector is delivered as a DLL. A Datadog kernel driver loads the injector DLL into every new process, and the DLL's `DllMain` function runs before the application's entry point. The injector then performs the same detection and instrumentation steps as on Linux.
 
 ## Injector behavior
 
