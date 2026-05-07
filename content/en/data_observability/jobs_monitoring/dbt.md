@@ -79,8 +79,8 @@ After your next dbt job run, you should start seeing job run and lineage data in
 
 {{< img src="data_observability/data-obs-dbt-cloud-final.png" alt="Data Observability overview showing dbt job runs as a stacked bar chart over time and a table of connected dbt Cloud accounts with their status." style="width:100%;" >}}
 
-[1]: https://app.datadoghq.com/datasets/settings/integrations
-[2]: https://app.datadoghq.com/datasets/catalog?integration=dbt
+[1]: https://app.datadoghq.com/data-obs/settings/integrations
+[2]: https://app.datadoghq.com/data-obs/catalog?integration=dbt
 
 {{% /tab %}}
 
@@ -146,7 +146,7 @@ After your next dbt job run, you should start seeing job run and lineage data in
 [3]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
 [4]: /getting_started/site/#access-the-datadog-site
 [5]: https://openlineage.io/docs/client/python/#predefined-datadog-sites
-[6]: https://app.datadoghq.com/datasets/catalog?integration=dbt
+[6]: https://app.datadoghq.com/data-obs/catalog?integration=dbt
 [7]: https://docs.getdbt.com/docs/running-a-dbt-project/run-your-dbt-projects
 
 {{% /tab %}}
