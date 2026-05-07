@@ -18,7 +18,7 @@ further_reading:
 
 With Apps, you build applications locally as code with React and TypeScript (or JavaScript), using your standard development workflow.
 
-Apps use the same [permissions model][1] as App Builder apps and can also be embedded in other Datadog products such as [dashboards and IDPs][2].
+Apps use the same [permissions model][1] as App Builder apps and can also be embedded in other Datadog products such as [dashboards and the Internal Developer Portal][2].
 
 Choose Apps when you need:
 
