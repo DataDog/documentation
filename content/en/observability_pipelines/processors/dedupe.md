@@ -38,23 +38,6 @@ The default cache size is 5,000 messages (recommended). The cached messages are 
 
 ### Path notation example
 
-For the following message structure:
-
-```json
-{
-    "outer_key": {
-        "inner_key": "inner_value",
-        "a": {
-            "double_inner_key": "double_inner_value",
-            "b": "b value"
-        },
-        "c": "c value"
-    },
-    "d": "d value"
-}
-```
-
-- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+{{% observability_pipelines/path_notation %}}
 
 [1]: /observability_pipelines/search_syntax/logs/

@@ -91,24 +91,7 @@ After adding scanning rules from the library, you can edit each rule separately 
 
 ### Path notation example
 
- For the following message structure:
-
-```json
-{
-    "outer_key": {
-        "inner_key": "inner_value",
-        "a": {
-            "double_inner_key": "double_inner_value",
-            "b": "b value"
-        },
-        "c": "c value"
-    },
-    "d": "d value"
-}
-```
-
-- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+{{% observability_pipelines/path_notation %}}
 
 ## Set up the processor using Terraform
 
