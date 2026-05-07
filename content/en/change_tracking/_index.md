@@ -34,7 +34,7 @@ further_reading:
   text: "Unify visibility into changes to your services and dependencies"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Change Tracking is not available in the selected site ({{< region-param key="dd_site_name" >}})</div>
 {{< /site-region >}}
 

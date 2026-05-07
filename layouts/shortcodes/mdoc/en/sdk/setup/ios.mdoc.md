@@ -289,6 +289,42 @@ configuration.site = [DDSite us1_fed];
 {% /tabs %}
 {% /site-region %}
 
+{% site-region region="gov2" %}
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .us2_fed,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite us2_fed];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
 {% site-region region="ap1" %}
 {% tabs %}
 {% tab label="Swift" %}

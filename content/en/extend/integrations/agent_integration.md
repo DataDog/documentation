@@ -16,6 +16,9 @@ further_reading:
 - link: /extend/
   tag: Documentation
   text: Learn how to develop on the Datadog platform
+- link: "https://learn.datadoghq.com/courses/intro-to-integrations"
+  tag: "Learning Center"
+  text: "Create an Agent Integration"
 title: Create an Agent-based Integration
 description: Learn how to develop and publish a Datadog Agent integration.
 ---

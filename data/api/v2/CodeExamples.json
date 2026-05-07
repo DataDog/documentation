@@ -2130,6 +2130,18 @@
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
     }
   ],
+  "MuteSecurityFindings": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_3830190821",
+      "description": "Mute security findings returns \"Accepted\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_298521544",
+      "description": "Unmute security findings returns \"Accepted\" response"
+    }
+  ],
   "PatchSignalNotificationRule": [
     {
       "group": "security_monitoring",

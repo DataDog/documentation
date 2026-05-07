@@ -1,0 +1,23 @@
+{
+  "data": {
+    "attributes": {
+      "mute": {
+        "description": "To be resolved later.",
+        "expire_at": 1778721573794,
+        "is_muted": true,
+        "reason": "RISK_ACCEPTED"
+      }
+    },
+    "relationships": {
+      "findings": {
+        "data": [
+          {
+            "id": "ZGVmLTAwMC0wYmd-MDE4NjcyMDJkMzE4MDE5ODY5MGE4ZmQ2MmFlMjg0Y2M=",
+            "type": "findings"
+          }
+        ]
+      }
+    },
+    "type": "mute"
+  }
+}

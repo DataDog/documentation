@@ -9,6 +9,13 @@ further_reading:
 - link: 'tracing/trace_explorer/search'
   tag: 'Documentation'
   text: 'Search Spans'
+- link: "https://learn.datadoghq.com/courses/getting-started-apm"
+  tag: "Learning Center"
+  text: "Getting Started with APM Metrics and Traces"
+- link: "https://learn.datadoghq.com/courses/diagnosing-bugs-with-apm"
+  tag: "Learning Center"
+  text: "Diagnosing Application Bugs with Datadog APM"
+
 ---
 
 {{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Explorer" >}}

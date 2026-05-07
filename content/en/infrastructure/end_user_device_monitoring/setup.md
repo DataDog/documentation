@@ -68,6 +68,7 @@ To collect additional data from monitored devices, enable one or more of the fol
 - [Network Path][7]
 - [WiFi/WLAN integration][8]
 - [Windows Crash Detection integration][9]
+- [Windows Event Log][13]
 
 ## Further reading
 
@@ -85,3 +86,4 @@ To collect additional data from monitored devices, enable one or more of the fol
 [10]: /network_monitoring/network_path/setup/?tab=windows
 [11]: /infrastructure/end_user_device_monitoring/#key-capabilities
 [12]: https://www.datadoghq.com/product-preview/end-user-device-monitoring/
+[13]: /integrations/event-viewer/?tab=logs

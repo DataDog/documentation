@@ -7,6 +7,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/kubernetes-operator-performance
   tag: Blog
   text: Monitor your Kubernetes operators to keep applications running smoothly
+- link: "https://learn.datadoghq.com/courses/getting-started-k8s"
+  tag: "Learning Center"
+  text: "Getting Started with Kubernetes Observability"
 ---
 
 {{< img src="infrastructure/livecontainers/orch_ex.png" alt="Kubernetes Explorer, showing Kubernetes Pods." style="width:80%;">}}

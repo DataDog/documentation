@@ -1,6 +1,11 @@
 ---
 title: Monitoring
 description: How to explore more of your application in LLM Observability.
+further_reading:
+- link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+  tag: "Learning Center"
+  text: "Investigate with LLM Observability"
+
 ---
 
 ## Overview
@@ -68,6 +73,10 @@ For applications instrumented with Datadog APM, you can [correlate APM and LLM O
 
 Learn how to monitor agentic LLM applications, which use multiple tools or chains of reasoning, with Datadog's [Agent Monitoring][4]. This feature helps you track agent actions, tool usage, and reasoning steps, providing visibility into complex LLM workflows and enabling you to troubleshoot and optimize agentic systems effectively. See the [Agent Monitoring documentation][4] for details.
 
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/monitoring/querying
 [2]: /llm_observability/monitoring/llm_observability_and_apm
