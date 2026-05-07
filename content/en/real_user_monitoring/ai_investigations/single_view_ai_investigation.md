@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-Single-View AI Investigation runs an agentic root-cause analysis on a single RUM view. When you find a session with poor performance, such as a page that loaded slowly or threw errors, click **Investigate**. Datadog's RUM agent inspects all the data attached to that view: Javascript errors, slow network requests, long tasks blocking the main thread, backend traces, CPU profiles, and device context.
+Single-View AI Investigation runs an agentic root-cause analysis on a single RUM view. When you find a session with poor performance, such as a page or screen that loaded slowly or threw errors, click **Investigate**. Datadog's RUM agent inspects all the data attached to that view: errors, slow network requests, main-thread blocking, backend traces, CPU profiles, and device context.
 
-Instead of manually combing through RUM events to figure out whether the cause was a slow API call, a Javascript bundle, or a CDN issue, you get a ranked list of findings grouped by root-cause category: App Performance, Server Side, Third Party, and Environment. From there, you can follow up through a chat interface or save the results to a [Notebook][1] to share with your team.
+Instead of manually combing through RUM events to figure out whether the cause was a slow API call, a heavy client-side computation, or a CDN issue, you get a ranked list of findings grouped by root-cause category: App Performance, Server Side, Third Party, and Environment. From there, you can follow up through a chat interface or save the results to a [Notebook][1] to share with your team.
 
 {{< img src="real_user_monitoring/ai_investigations/single-view-ai-investigation-overview.png" alt="The Single-View AI Investigation panel showing categorized findings for a RUM view." style="width:100%;" >}}
 
@@ -27,11 +27,11 @@ To investigate a view, Datadog's RUM agent inspects the data Datadog has collect
 
 - **The view event** and its sub-events: [resources][2], [long tasks][3], [errors][4], and [user actions][5].
 - **Aggregated performance signals** across the view, including auto-detected problems such as uncompressed resources, excessive script evaluation, and bandwidth inefficiencies.
-- **Device and environment context** captured by the SDK (browser, geography, connection type, and other [RUM attributes][6]).
+- **Device and environment context** captured by the SDK (browser or operating system, geography, connection type, and other [RUM attributes][6]).
 - **APM traces**, when the view's resources are correlated with backend traces. The agent uses the trace data to attribute server-side delays to specific spans and services. For more information, see [Correlate RUM with APM Traces][7].
-- **Browser profiling data**, when [Browser profiling][8] is enabled for the application. The agent uses CPU profiles to attribute App Performance findings to specific JavaScript functions in your code.
+- **Profiling data**, when [RUM profiling correlation][8] is enabled for the application. The agent uses CPU profiles to attribute App Performance findings to specific functions in your code.
 
-The richer the data available for the view, the more precise the analysis. Correlating RUM with APM and enabling Browser profiling helps the agent investigate beyond the frontend timeline.
+The richer the data available for the view, the more precise the analysis. Correlating RUM with APM and enabling profiling helps the agent investigate beyond the client-side timeline.
 
 ## Launch an investigation
 
@@ -46,9 +46,9 @@ Datadog's RUM agent looks at four sources to identify the root causes of poor pe
 
 | Source            | What is examined                                                                                              |
 |-------------------|---------------------------------------------------------------------------------------------------------------|
-| App Performance   | Client-side issues, such as long tasks, JavaScript execution, and rendering delays.               |
+| App Performance   | Client-side issues, such as main-thread contention, code execution, and rendering delays.               |
 | Server Side       | Backend latency and server-side errors that affected the view.                                                |
-| Third Party       | Performance impact from third-party scripts and libraries loaded on the page.                                 |
+| Third Party       | Performance impact from third-party scripts and libraries loaded by the application.                                 |
 | Environment       | Network and infrastructure conditions that affected the user's experience.                                    |
 
 ## Read the results

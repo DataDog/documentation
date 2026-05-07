@@ -15,7 +15,7 @@ This page lists the available investigation types.
 
 ## Single-view AI investigation
 
-Run an agentic investigation on a single RUM view to investigate performance issues or identify optimization opportunities on that specific page load. Datadog's RUM agent inspects the view event and its sub-events to identify root causes from sources spanning the browser, the backend, third-party scripts, and the user's network environment.
+Run an agentic investigation on a single RUM view to investigate performance issues or identify optimization opportunities on that specific page or screen. Datadog's RUM agent inspects the view event and its sub-events to identify root causes from sources spanning the application, the backend, third-party libraries, and the user's network environment.
 
 {{< img src="real_user_monitoring/ai_investigations/single-view-ai-investigation-overview.png" alt="A Single-View AI Investigation surfacing root cause findings for a RUM view." style="width:100%;" >}}
 
