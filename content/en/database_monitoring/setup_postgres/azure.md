@@ -315,7 +315,7 @@ For Postgres 9.6, add the following settings to the instance config where host a
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom Agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM datadog/agent:<AGENT_VERSION>
+FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
