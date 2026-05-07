@@ -2833,7 +2833,7 @@ menu:
       parent: workflows
       identifier: workflows_limits
       weight: 11
-    - name: Datadog Apps
+    - name: Apps
       url: actions/datadog_apps/
       pre: dev-code
       identifier: datadog_apps
