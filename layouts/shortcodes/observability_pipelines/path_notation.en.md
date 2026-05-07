@@ -1,4 +1,4 @@
-To understand path notation, consider the following log structure:
+Consider the following log structure:
 
 ```json
 {
