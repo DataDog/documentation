@@ -51,7 +51,7 @@ After the injector is loaded into a process's memory space—regardless of platf
 - Modifies environment variables or command-line arguments to load the appropriate tracer SDK.
 - Emits telemetry to report status and aid in debugging.
 
-If injection fails, if no supported runtime is detected, or if the process is excluded by configuration, the application continues to run without instrumentation.
+If injection fails or no supported runtime is detected, the application continues to run without instrumentation. The same applies if a process is excluded by configuration.
 
 **Note**: Because the injector runs before the SDK evaluates its environment variables, setting `DD_TRACE_ENABLED=false` does not prevent SSI from loading the SDK. To disable or remove SSI, see the [Single Step APM Instrumentation][1] setup page for your platform.
 
@@ -59,7 +59,7 @@ If injection fails, if no supported runtime is detected, or if the process is ex
 
 The injector runs before the application's `main` function and exits before the application starts. It is not a background process or thread that runs alongside the application.
 
-After it sets the necessary environment variables (or, for NGINX, re-executes the process with the Datadog module loaded), the injected library completes its work and the application proceeds normally. From that point on, the only Datadog code in the process is the tracer SDK that the application itself loads through the configured environment variables.
+After the injector sets the necessary environment variables (or, for NGINX, re-executes the process with the Datadog module loaded), the injected library completes its work and the application proceeds normally. From that point on, the only Datadog code in the process is the tracer SDK that the application itself loads through the configured environment variables.
 
 ## Per-language instrumentation
 
@@ -83,14 +83,14 @@ SSI instruments applications by loading a tracer or profiler into the applicatio
 
 While the injected code runs inside the application process, some deployment modes update OS or runtime configuration so that the injector loads automatically:
 
-- **Kubernetes admission controller injection**: Mutates Pod specs (adds an init container, mounts volumes, sets environment variables). This is a Kubernetes API action, not a host OS modification.
+- **Kubernetes admission controller injection**: Mutates pod specs (adds an init container, mounts volumes, sets environment variables). This is a Kubernetes API action, not a host OS modification.
 - **Linux host injection**: Configures the dynamic loader (typically through `/etc/ld.so.preload`) so that new processes load the injection launcher. This is an OS-level configuration change, but it remains user-space dynamic linking, not kernel code.
-- **Docker runtime injection**: Configures Docker to use a wrapper runtime so that containers start with the tracer mounted and configured. This modifies Docker daemon configuration; it does not modify kernel modules.
-- **Windows injection**: Installs a kernel driver that loads a Datadog DLL into new processes. The driver runs at the OS level; the injected code that runs inside each application process remains user-space.
+- **Docker runtime injection**: Configures Docker to use a wrapper runtime so that containers start with the tracer mounted and configured. This modifies Docker daemon configuration. It does not modify kernel modules.
+- **Windows injection**: Installs a kernel driver that loads the injector DLL into new processes. The driver runs at the OS level; the injected code that runs inside each application process remains user-space.
 
 ### Runtime privileges
 
-After injection, the tracer or profiler runs inside the application process and inherits the same OS permissions as that process. It does not gain additional privileges. If the application runs as a restricted user, the tracer is also restricted to that user's permissions.
+After injection, the tracer or profiler runs inside the application process and inherits the same OS permissions as that process. It does not gain additional privileges. If the application runs as a restricted user, the tracer or profiler is also restricted to that user's permissions.
 
 ### Installation privileges
 
@@ -118,7 +118,7 @@ Privilege requirements at install time depend on the deployment mode:
 #### Windows
 
 - Installing the Datadog Agent on Windows requires Administrator privileges (service installation and system-wide configuration).
-- For application instrumentation (for example, .NET), the profiler runs in the target process context. System-wide configuration changes only enable the profiler for processes and services; they do not grant the profiler additional privileges.
+- For application instrumentation (for example, .NET), the profiler runs in the target process context. System-wide configuration changes enable the profiler for processes and services. They do not grant the profiler additional privileges.
 
 ## Further reading
 
