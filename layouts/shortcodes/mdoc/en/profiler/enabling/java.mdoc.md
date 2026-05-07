@@ -82,7 +82,7 @@ Available profile types
 
 To begin profiling applications:
 
-1. Install and run Datadog Agent v6+. Datadog recommends using [Datadog Agent v7+][3]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+1. Install and run Datadog Agent v6+. Datadog recommends using [Datadog Agent v7+][3]. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and the port to `8126/TCP`.
 
 <!-- JVM -->
 {% if equals($runtime, "jvm") %}

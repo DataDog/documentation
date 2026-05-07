@@ -99,7 +99,7 @@ The profiler can be used either as a standalone executable or as a library. Skip
 
    {% /tabs %}
 
-3. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][4]. If they do not, refer to the [Troubleshooting][5] guide.
+3. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][4]. If they do not, see the [Troubleshooting][5] guide.
 
 ### Library
 

@@ -194,7 +194,7 @@ For standalone applications, manually restart the application as you normally wo
 
 Optional: Set up [Source Code Integration][14] to connect your profiling data with your Git repositories.
 
-A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][15]. If they do not, refer to the [Troubleshooting][16] guide.
+A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][15]. If they do not, see the [Troubleshooting][16] guide.
 {% /tab %}
 
 {% tab label="Internet Information Services (IIS)" %}
@@ -250,7 +250,7 @@ Use `stop` and `start` commands. A reset or restart does not always work.
 
 Optional: Set up [Source Code Integration][14] to connect your profiling data with your Git repositories.
 
-A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][15]. If they do not, refer to the [Troubleshooting][16] guide.
+A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][15]. If they do not, see the [Troubleshooting][16] guide.
 {% /tab %}
 
 {% tab label="Windows services" %}
@@ -322,7 +322,7 @@ Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\MyService -Name Environm
 
 Optional: Set up [Source Code Integration][14] to connect your profiling data with your Git repositories.
 
-A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][15]. If they do not, refer to the [Troubleshooting][16] guide.
+A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][15]. If they do not, see the [Troubleshooting][16] guide.
 {% /tab %}
 
 {% tab label="Windows Standalone applications" %}
@@ -362,7 +362,7 @@ REM start the application here
 
 Optional: Set up [Source Code Integration][14] to connect your profiling data with your Git repositories.
 
-A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][15]. If they do not, refer to the [Troubleshooting][16] guide.
+A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][15]. If they do not, see the [Troubleshooting][16] guide.
 {% /tab %}
 
 {% tab label="NuGet" %}
@@ -420,7 +420,7 @@ You can configure the profiler using the following environment variables. Most o
 | `DD_VERSION`               | String        | The [version][20] of your service. If not set, will be `unspecified-version` |
 | `DD_TAGS`                  | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 | `DD_AGENT_HOST`            | String        | Sets the host where profiles are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to `localhost`.  |
-| `DD_TRACE_AGENT_PORT`      | String        | Sets the port where profiles are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to`8126`.  |
+| `DD_TRACE_AGENT_PORT`      | String        | Sets the port where profiles are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to `8126`.  |
 | `DD_TRACE_AGENT_URL`       | String        | Sets the URL endpoint where profiles are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Defaults to `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.  |
 | `DD_TRACE_DEBUG`           | Boolean        | Enables or disables debug logging (Could help in case of troubleshooting investigation). Valid values are: `true` or `false`. Defaults to `false`.  |
 | `DD_PROFILING_LOG_DIR`     | String        | Sets the directory for .NET Profiler logs. Defaults to `%ProgramData%\Datadog .NET Tracer\logs\`. (Prior to v2.24, the default directory was `%ProgramData%\Datadog-APM\logs\`)  |

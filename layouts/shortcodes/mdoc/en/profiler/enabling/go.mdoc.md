@@ -77,7 +77,7 @@ If you automatically instrument your Go application with [Orchestrion][18], it a
 
 Starting [Go 1.21][19], the Go compiler supports Profile-Guided Optimization (PGO). PGO enables additional optimizations on code identified as hot by CPU profiles of production workloads. This is compatible with Datadog Go Continuous Profiler and can be used for production builds.
 
-Follow [this guide][20] to set it up.
+Follow [the PGO setup guide][20] to set it up.
 
 ## Configuration
 
@@ -103,7 +103,7 @@ Alternatively you can set profiler configuration using environment variables:
 
 By default, Go's CPU profiler only shows detailed information for Go code. If your program calls C code, the time spent running C code is reflected in the profile, but the call stacks only show Go function calls.
 
-To add detailed C function call information to CPU profiles, you may opt to use library such as [ianlancetaylor/cgosymbolizer][22]. To use this library:
+To add detailed C function call information to CPU profiles, you may opt to use a library such as [ianlancetaylor/cgosymbolizer][22]. To use this library:
 
 1. Download the package:
 

@@ -29,7 +29,7 @@ The operating system versions above have all reached end of life (EOL), Datadog 
 {% tab label="Alpine Linux" %}
 Version 3.13 or newer of Alpine Linux is required because the profiler is built against musl v1.2.
 
-Additionally you need to install `libgcc_s` with:
+Additionally, you need to install `libgcc_s` with:
 
 ```shell
 apk add libgcc
