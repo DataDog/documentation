@@ -14,6 +14,18 @@ further_reading:
 - link: "/cloud_cost_management/allocation/tag_pipelines"
   tag: "Documentation"
   text: "Tag Pipelines"
+- link: "/cloud_cost_management/reporting"
+  tag: "Documentation"
+  text: "Reporting"
+- link: "/cloud_cost_management/cost_changes/monitors"
+  tag: "Documentation"
+  text: "Cloud Cost Monitors"
+- link: "/cloud_cost_management/planning/budgets"
+  tag: "Documentation"
+  text: "Budgets"
+- link: "/cloud_cost_management/planning/forecasting"
+  tag: "Documentation"
+  text: "Forecasting"
 ---
 
 
@@ -23,13 +35,15 @@ AI cost visibility gives FinOps and engineering teams a unified destination for 
 
 ## Prerequisites
 
-To use AI Cost Management, you must:
+To use AI Costs, you must have at least one of the following supported providers set up for [Cloud Cost Management][1]:
 
-- Be using [Cloud Cost Management][1] with a supported cloud provider ([AWS][8] or [Google Cloud][9]) or a connected [SaaS Cost Integration][2].
-- Connect your AI providers. AWS Bedrock, Google Gemini, and Vertex AI are available through your existing AWS and Google Cloud integrations and do not require further setup. For OpenAI and Anthropic, see the setup instructions:
-
-  - [OpenAI][2]
-  - [Anthropic][3]
+| AI Provider | Setup method |
+|---|---|
+| Anthropic   | [SaaS integration][3] |
+| AWS Bedrock | [AWS integration][8] |
+| Gemini      | [Google Cloud integration][9] |
+| OpenAI     | [SaaS integration][2] |
+| Vertex AI  | [Google Cloud integration][9] |
 
 ## AI cost summary
 
@@ -45,7 +59,7 @@ The AI cost summary page provides:
 
 ## Normalized AI tags
 
-AI cost data from all supported providers is normalized to a consistent set of tags, so you can filter, group, compare, and plan AI spend consistently across dashboards, monitors, budgets, and other Datadog tools. Use the [Cloud Cost Explorer][6] to query and compare spend across providers without writing per-provider logic.
+AI cost data from all supported providers is normalized to a consistent set of tags, so you can filter, group, compare, and plan AI spend consistently across dashboards, [monitors][11], [budgets][12], [forecasts][13], and other Datadog tools. Use the [Cloud Cost Explorer][6] to query and compare spend across providers without writing per-provider logic.
 
 The following tags are available for all supported AI providers:
 
@@ -58,22 +72,33 @@ The following tags are available for all supported AI providers:
 | `token_category` | The specific category of tokens consumed, such as input/output tokens or tokens related to caching and search operations (for example, `cached input`, `cache write`, `standard input`, `output`). |
 | `project` | The project, workspace, or environment the AI costs belong to. |
 
-Additional normalized tags include:
-
-- `account_id`
-- `account_name`
-- `api_key_id`
-- `batch`
-- `endpoint`
-- `org_id`
-- `project_id`
-- `project_name`
-- `user_email`
-- `user_id`
-
 ## Attribute AI spend to users
 
-Out-of-the-box (OOTB) allocation rules use Datadog observability data to attribute AI costs to the users and API keys that generated them. OOTB allocation rules require no configuration and are available for OpenAI.
+Out-of-the-box (OOTB) allocation rules use Datadog observability data to attribute AI costs to the users and API keys that generated them. OOTB allocation rules require no configuration and are available for OpenAI and Anthropic.
+
+The following tags are available through OOTB allocation rules:
+
+| Tag | OpenAI | Anthropic |
+|---|---|---|
+| `account_id` | {{< X >}} | |
+| `account_name` | {{< X >}} | |
+| `api_key_id` | {{< X >}} | {{< X >}} |
+| `api_key_name` | | {{< X >}} |
+| `batch` | {{< X >}} | |
+| `context_window` | | {{< X >}} |
+| `endpoint` | {{< X >}} | |
+| `model` | {{< X >}} | {{< X >}} |
+| `model_id` | | {{< X >}} |
+| `org_id` | {{< X >}} | {{< X >}} |
+| `org_name` | | {{< X >}} |
+| `project_id` | {{< X >}} | |
+| `project_name` | {{< X >}} | |
+| `service_tier` | | {{< X >}} |
+| `user_email` | {{< X >}} | {{< X >}} |
+| `user_id` | {{< X >}} | {{< X >}} |
+| `user_name` | | {{< X >}} |
+| `workspace_id` | | {{< X >}} |
+| `workspace_name` | | {{< X >}} |
 
 After costs are attributed to users and API keys, use [Tag Pipelines][7] to automatically map them to teams, services, or business units for streamlined aggregate reporting. See [Reporting][10] for more information.
 
@@ -91,3 +116,6 @@ After costs are attributed to users and API keys, use [Tag Pipelines][7] to auto
 [8]: /cloud_cost_management/setup/aws
 [9]: /cloud_cost_management/setup/google_cloud
 [10]: /cloud_cost_management/reporting
+[11]: /cloud_cost_management/cost_changes/monitors
+[12]: /cloud_cost_management/planning/budgets
+[13]: /cloud_cost_management/planning/forecasting
