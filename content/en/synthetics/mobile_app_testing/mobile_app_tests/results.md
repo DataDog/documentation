@@ -167,7 +167,7 @@ Common mobile app test errors include:
 
 ## Test events
 
-Alerts from your Synthetic test monitors appear on the timeline in the [**Activity** tab](#test-activity), where you can review alert triggers, recoveries, and summary periods alongside the global uptime graph. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][7] and enter `@evt.type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][1].
+Alerts from your Synthetic test monitors appear on the timeline in the [**Activity** tab](#test-activity), where you can review alert triggers, recoveries, and test modifications alongside the global uptime graph. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][7] and enter `@evt.type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][1].
 
 ## Further reading
 

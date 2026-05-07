@@ -206,7 +206,7 @@ When a browser test run fails, Datadog generates an AI failure summary to help y
 - A classification of the failure as either a **true failure** (a real problem with your application) or a **test misconfiguration** (an issue with the test setup).
 - Suggested next steps for troubleshooting.
 
-AI failure summaries appear on the test run details page for any failing browser test run. Treat them as a starting point for investigation, not as authoritative root cause analysis, because LLM-generated content can contain inaccuracies.
+AI failure summaries appear on the test run details page for any failing browser test run. Treat them as a starting point for investigation, not as authoritative root cause analysis, because LLM-generated content can contain inaccuracies. Use the 👍 and 👎 buttons on the summary to share feedback and help improve future results.
 
 {{< img src="synthetics/browser_tests/test_results/synthetics_ai_summaries.png" alt="AI failure summary panel on a failing browser test run" style="width:100%" >}}
 
@@ -236,7 +236,7 @@ To help during the investigation, click **Compare Screenshots** to receive side-
 
 ## Test events
 
-Alerts from your Synthetic test monitors appear on the timeline in the [**Activity** tab](#test-activity), where you can review alert triggers, recoveries, and summary periods alongside the global uptime graph. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][18] and enter `@evt.type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][13].
+Alerts from your Synthetic test monitors appear on the timeline in the [**Activity** tab](#test-activity), where you can review alert triggers, recoveries, and test modifications alongside the global uptime graph. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][18] and enter `@evt.type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][13].
 
 ## Further Reading
 
