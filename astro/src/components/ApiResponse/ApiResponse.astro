@@ -2,8 +2,8 @@
 import Tabs from '@components/Tabs/Tabs.astro';
 import TabPanel from '@components/Tab/TabPanel.astro';
 import CodeBlock from '@components/CodeBlock/CodeBlock.astro';
-import { ApiSchemaTable } from '@components/ApiSchemaTable/ApiSchemaTable';
-import type { SchemaField } from '@components/ApiSchemaTable/ApiSchemaTable';
+import ApiSchemaTable from '@components/ApiSchemaTable/ApiSchemaTable.astro';
+import type { SchemaField } from '@lib/api/schemas/schemaField';
 import { renderMarkdownInline } from '@lib/api/markdownRenderer';
 import styles from './ApiResponse.module.css';
 import { classListFactory } from '@utils/classListFactory';
@@ -57,7 +57,7 @@ const innerPanelIds = responses.map((_, i) => [
               {showInnerTabs && (
                 <Tabs id={`${outerGroupId}-inner-${i}`} variant="pills" labels={["Model", "Example"]} panelIds={innerPanelIds[i]}>
                   <TabPanel id={innerPanelIds[i][0]} isActive>
-                    <ApiSchemaTable client:load fields={r.schema!} />
+                    <ApiSchemaTable fields={r.schema!} />
                   </TabPanel>
                   <TabPanel id={innerPanelIds[i][1]}>
                     {r.examples!.map((ex) => (
@@ -70,7 +70,7 @@ const innerPanelIds = responses.map((_, i) => [
               )}
 
               {!showInnerTabs && hasSchema && (
-                <ApiSchemaTable client:load fields={r.schema!} />
+                <ApiSchemaTable fields={r.schema!} />
               )}
 
               {!showInnerTabs && hasExamples && r.examples!.map((ex) => (

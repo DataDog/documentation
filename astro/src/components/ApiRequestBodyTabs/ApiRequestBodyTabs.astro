@@ -2,8 +2,8 @@
 import Tabs from '@components/Tabs/Tabs.astro';
 import TabPanel from '@components/Tab/TabPanel.astro';
 import CodeBlock from '@components/CodeBlock/CodeBlock.astro';
-import { ApiSchemaTable } from '@components/ApiSchemaTable/ApiSchemaTable';
-import type { SchemaField } from '@components/ApiSchemaTable/ApiSchemaTable';
+import ApiSchemaTable from '@components/ApiSchemaTable/ApiSchemaTable.astro';
+import type { SchemaField } from '@lib/api/schemas/schemaField';
 import styles from '@components/ApiEndpoint/ApiEndpoint.module.css';
 import { classListFactory } from '@utils/classListFactory';
 import { generateElementId } from '@utils/generateElementId';
@@ -30,7 +30,7 @@ const panelIds = [`${groupId}-panel-0`, `${groupId}-panel-1`];
 ---
 
 {hasSchema && !hasExamples && (
-  <ApiSchemaTable client:load fields={schema} />
+  <ApiSchemaTable fields={schema} />
 )}
 
 {!hasSchema && hasExamples && (
@@ -44,7 +44,7 @@ const panelIds = [`${groupId}-panel-0`, `${groupId}-panel-1`];
 {hasSchema && hasExamples && (
   <Tabs id={groupId} variant="pills" labels={["Model", "Example"]} panelIds={panelIds}>
     <TabPanel id={panelIds[0]} isActive>
-      <ApiSchemaTable client:load fields={schema} />
+      <ApiSchemaTable fields={schema} />
     </TabPanel>
     <TabPanel id={panelIds[1]}>
       <div class={cl('request-body-tabs__examples')}>

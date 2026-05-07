@@ -35,6 +35,10 @@
   text-decoration: underline;
 }
 
+.schema-table__expand-all-label {
+  /* Both labels are rendered server-side; the island toggles `hidden`. */
+}
+
 .schema-table__columns {
   display: flex;
   border-bottom: var(--border-width) solid var(--color-surface-border);

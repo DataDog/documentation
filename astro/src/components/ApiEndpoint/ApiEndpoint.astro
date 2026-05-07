@@ -1,11 +1,11 @@
 ---
 import ApiMethodBadge from '@components/ApiMethodBadge/ApiMethodBadge.astro';
 import ApiStatusAlert from '@components/ApiStatusAlert/ApiStatusAlert.astro';
-import { ApiSchemaTable } from '@components/ApiSchemaTable/ApiSchemaTable';
+import ApiSchemaTable from '@components/ApiSchemaTable/ApiSchemaTable.astro';
 import ApiResponse from '@components/ApiResponse/ApiResponse.astro';
 import ApiCodeExample from '@components/ApiCodeExample/ApiCodeExample.astro';
 import ApiRequestBodyTabs from '@components/ApiRequestBodyTabs/ApiRequestBodyTabs.astro';
-import type { SchemaField } from '@components/ApiSchemaTable/ApiSchemaTable';
+import type { SchemaField } from '@lib/api/schemas/schemaField';
 import type { ResponseData } from '@components/ApiResponse/ApiResponse.astro';
 import type { CodeExampleSet } from '@components/ApiCodeExample/ApiCodeExample.astro';
 import { getDefaultRegions } from '@lib/api/regionResolver';
@@ -117,13 +117,13 @@ const hasParams = ep && (
       <div class={cl('api-endpoint__section')}>
         <h3>Arguments</h3>
         {ep.pathParams && ep.pathParams.length > 0 && (
-          <ApiSchemaTable client:load fields={ep.pathParams} />
+          <ApiSchemaTable fields={ep.pathParams} />
         )}
         {ep.queryParams && ep.queryParams.length > 0 && (
-          <ApiSchemaTable client:load fields={ep.queryParams} />
+          <ApiSchemaTable fields={ep.queryParams} />
         )}
         {ep.headerParams && ep.headerParams.length > 0 && (
-          <ApiSchemaTable client:load fields={ep.headerParams} />
+          <ApiSchemaTable fields={ep.headerParams} />
         )}
       </div>
     )}

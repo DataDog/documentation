@@ -1,6 +1,6 @@
 ---
-import { ApiSchemaTable } from './ApiSchemaTable';
-import type { SchemaField } from './ApiSchemaTable';
+import ApiSchemaTable from './ApiSchemaTable.astro';
+import type { SchemaField } from '@lib/api/schemas/schemaField';
 
 interface Props {
   fields: string;        // JSON string of SchemaField[]
@@ -18,9 +18,4 @@ try {
 }
 ---
 
-<ApiSchemaTable
-  client:load
-  fields={parsedFields}
-  title={title}
-  showExpandAll={showExpandAll}
-/>
+<ApiSchemaTable fields={parsedFields} title={title} showExpandAll={showExpandAll} />

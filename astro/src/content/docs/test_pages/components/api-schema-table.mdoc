@@ -1,12 +1,14 @@
 ---
 title: "ApiSchemaTable"
-description: "Preact island (client:load). Astro wrapper parses JSON props at build time; the Preact component handles expand/collapse of nested schema rows client-side."
+description: "Astro shell renders the full schema tree at build time; a tiny Preact island (client:idle) toggles expand/collapse on the existing DOM via event delegation."
 type: interactive
 ---
 
 # ApiSchemaTable
 
 An interactive hierarchical table for displaying API parameters, request body fields, or response fields. Supports nested objects, union types, and expand/collapse.
+
+The schema tree is fully rendered server-side, so the entire field hierarchy is in the static HTML even before hydration. The companion `ApiSchemaTableNav` island only flips BEM modifier classes and the `hidden` attribute on rows that are already in the DOM — it never receives the schema as a prop.
 
 ## Properties
 
