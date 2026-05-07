@@ -45,6 +45,7 @@ All authentication to Datadog is handled by the underlying Private Action Runner
    1. Enter a name and email address for your service account.
    1. Under **Assign Roles**, select the **Datadog Standard Role**. Alternatively, select a custom role that has the `Connections Resolve` permission.
    1. Click **Create Service Account**.
+1. Ensure [Remote Configuration][17] is enabled for your Datadog account.
 
 ### Step 2: Databricks prerequisites
 
@@ -55,6 +56,7 @@ All authentication to Datadog is handled by the underlying Private Action Runner
    1. Next to **Service principals**, click **Manage**.
    1. Click **Add service principal**, then click **Add new** and enter a name.
       - Alternatively, to reuse a service principal from another workspace, select an existing service principal and skip the next step.
+      <div class="alert alert-info">Datadog does not support Microsoft Entra ID managed Service Principals over Private Link.</div>
    1. Click **Add**.
 1. Generate secrets for the Databricks service principal ([Databricks documentation][10]):
    1. Select the service principal created above.
@@ -91,7 +93,9 @@ Set up your Private Action Runner using **one** of the following options.
 1. Update the existing `values.yaml` (referencing the [Helm chart values][4]):
    1. Set `image.repository` to `gcr.io/datadoghq/dd-data-observability-par`.
    1. Set `image.tag` to `1.21.0-0`.
-1. If using cloud secret storage: assign an identity ([Workload Identity][5] or [IAM Role][6]) to the pod with permissions to read the secret created in [Step 2](#step-2-databricks-prerequisites).
+1. Configure credentials on the Private Action Runner using one of the following methods:
+    - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. Leave "Secret Path" in the integration tile blank.
+    - Use cloud secret storage. Ensure an identity is assigned to the pod ([Workload Identity][5] or [IAM Role][6]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
 1. Restart the deployment for these changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
@@ -113,7 +117,9 @@ Set up your Private Action Runner using **one** of the following options.
       **Important**: Replace `gcr.io/datadoghq/private-action-runner:v1.21.0-large` with `gcr.io/datadoghq/dd-data-observability-par:1.21.0-0`.
 
    1. The Private Action Runner should show up at the bottom as "successfully installed."
-1. If using cloud secret storage: assign an identity ([Managed Identity][3] or [IAM Role][4]) to the instance with permissions to read the secret created in [Step 2](#step-2-databricks-prerequisites).
+1. Configure credentials on the Private Action Runner using one of the following methods:
+    - Set the `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` environment variables directly on the runner. Leave "Secret Path" in the integration tile blank.
+    - Use cloud secret storage. Ensure an identity is assigned to the pod ([Workload Identity][5] or [IAM Role][6]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
 1. Restart the Docker container for the changes to take effect.
 
 [1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
@@ -157,7 +163,7 @@ Set up your Private Action Runner using **one** of the following options.
 
 ## Validation
 
-After completing the setup, jobs and schema information should appear in [Data Observability: Jobs Monitoring][15] shortly.
+After completing the setup, jobs and cluster information should appear in [Data Observability: Jobs Monitoring][15] shortly.
 
 ## Further Reading
 
@@ -179,3 +185,4 @@ After completing the setup, jobs and schema information should appear in [Data O
 [14]: /data_observability/jobs_monitoring/databricks/#configure-the-datadog-databricks-integration
 [15]: https://app.datadoghq.com/data-jobs/
 [16]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=docker#manage-access
+[17]: https://app.datadoghq.com/organization-settings/remote-config
