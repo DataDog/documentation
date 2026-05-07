@@ -11,7 +11,7 @@
   {{- with .from_version -}}<strong>Since</strong>: <code>{{ . }}</code><br>{{- end -}}
   {{- with .aliases -}}
     {{- if gt (len .) 0 -}}
-      <strong>Key Aliases</strong>:
+      <strong>Aliases</strong>:
       {{- range $i, $a := . -}}
         {{- if $i -}}, {{ end -}}
         <code>{{ $a }}</code>
