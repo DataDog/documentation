@@ -73,7 +73,7 @@ Alternatively, query the following span attributes directly:
 
 ## Troubleshooting
 
-### Trace show **PARTIAL COS** or **COST UNAVAILABLE**
+### Trace shows **PARTIAL COST** or **COST UNAVAILABLE**
 
 Each LLM span in a trace is priced independently. The warning appears when one or more LLM spans in the trace are missing a cost estimate:
 
@@ -106,7 +106,7 @@ How to fix:
 - For [auto-instrumentation][1], confirm your provider and SDK version are supported.
 - For manual instrumentation, annotate input and output token counts on the span. See the [SDK Reference][2] or [API][3].
 
-### LLM cost may appear incorrect when prompt caching is used
+### Cost may appear incorrect when prompt caching is used
 
 If a span includes only aggregate `input_tokens` and `output_tokens`, but is missing `cache_read_input_tokens`, `cache_write_input_tokens`, or `non_cached_input_tokens`, Datadog applies the standard input rate to the entire `input_tokens`.
 
