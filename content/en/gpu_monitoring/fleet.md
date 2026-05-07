@@ -13,7 +13,7 @@ The [GPU Fleet page][0] provides a detailed inventory of all of your GPU-acceler
 
 ## Break down your fleet by any tag
 
-Use quick filter dropdowns at the top of the page to filter by a specific **Provider**, **Device Type**, **Cluster**, **Region**, **Service**, **Data Center**, **Environment** or **Team**.
+Use quick filter dropdowns at the top of the page to filter by a specific **Provider**, **Device Type**, **Cluster**, **Region**, **Service**, **Data Center**, **Environment**, or **Team**.
 
 You can also **Search** or **Group** by other tags in the fields shown below. For example, you can select the toggle for Host and then group by `Team` to view a table entry for each unique team. Click the **`>`** button next to any entry to see the hosts used by that team and the GPU devices accelerating those hosts.
 
