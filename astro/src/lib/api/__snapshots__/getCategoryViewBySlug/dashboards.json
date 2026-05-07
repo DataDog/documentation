@@ -1,0 +1,120 @@
+{
+  "name": "Dashboards",
+  "slug": "dashboards",
+  "description": "Manage all your dashboards, as well as access to your shared dashboards, through the API. See the [Dashboards page](https://docs.datadoghq.com/dashboards/) for more information.",
+  "operations": [
+    {
+      "operationId": "CreateDashboard",
+      "summary": "Create a new dashboard",
+      "slug": "create-a-new-dashboard",
+      "menuOrder": 1,
+      "version": "v1",
+      "method": "POST"
+    },
+    {
+      "operationId": "GetDashboard",
+      "summary": "Get a dashboard",
+      "slug": "get-a-dashboard",
+      "menuOrder": 2,
+      "version": "v1",
+      "method": "GET"
+    },
+    {
+      "operationId": "ListDashboards",
+      "summary": "Get all dashboards",
+      "slug": "get-all-dashboards",
+      "menuOrder": 3,
+      "version": "v1",
+      "method": "GET"
+    },
+    {
+      "operationId": "UpdateDashboard",
+      "summary": "Update a dashboard",
+      "slug": "update-a-dashboard",
+      "menuOrder": 4,
+      "version": "v1",
+      "method": "PUT"
+    },
+    {
+      "operationId": "DeleteDashboard",
+      "summary": "Delete a dashboard",
+      "slug": "delete-a-dashboard",
+      "menuOrder": 5,
+      "version": "v1",
+      "method": "DELETE"
+    },
+    {
+      "operationId": "DeleteDashboards",
+      "summary": "Delete dashboards",
+      "slug": "delete-dashboards",
+      "menuOrder": 6,
+      "version": "v1",
+      "method": "DELETE"
+    },
+    {
+      "operationId": "RestoreDashboards",
+      "summary": "Restore deleted dashboards",
+      "slug": "restore-deleted-dashboards",
+      "menuOrder": 7,
+      "version": "v1",
+      "method": "PATCH"
+    },
+    {
+      "operationId": "CreatePublicDashboard",
+      "summary": "Create a shared dashboard",
+      "slug": "create-a-shared-dashboard",
+      "menuOrder": 8,
+      "version": "v1",
+      "method": "POST"
+    },
+    {
+      "operationId": "GetPublicDashboard",
+      "summary": "Get a shared dashboard",
+      "slug": "get-a-shared-dashboard",
+      "menuOrder": 9,
+      "version": "v1",
+      "method": "GET"
+    },
+    {
+      "operationId": "UpdatePublicDashboard",
+      "summary": "Update a shared dashboard",
+      "slug": "update-a-shared-dashboard",
+      "menuOrder": 10,
+      "version": "v1",
+      "method": "PUT"
+    },
+    {
+      "operationId": "SendPublicDashboardInvitation",
+      "summary": "Send shared dashboard invitation email",
+      "slug": "send-shared-dashboard-invitation-email",
+      "menuOrder": 11,
+      "version": "v1",
+      "method": "POST"
+    },
+    {
+      "operationId": "GetPublicDashboardInvitations",
+      "summary": "Get all invitations for a shared dashboard",
+      "slug": "get-all-invitations-for-a-shared-dashboard",
+      "menuOrder": 12,
+      "version": "v1",
+      "method": "GET"
+    },
+    {
+      "operationId": "DeletePublicDashboard",
+      "summary": "Revoke a shared dashboard URL",
+      "slug": "revoke-a-shared-dashboard-url",
+      "menuOrder": 13,
+      "version": "v1",
+      "method": "DELETE"
+    },
+    {
+      "operationId": "DeletePublicDashboardInvitation",
+      "summary": "Revoke shared dashboard invitations",
+      "slug": "revoke-shared-dashboard-invitations",
+      "menuOrder": 14,
+      "version": "v1",
+      "method": "DELETE"
+    }
+  ],
+  "deprecated": false
+}

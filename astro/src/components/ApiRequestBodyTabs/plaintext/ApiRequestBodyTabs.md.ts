@@ -6,7 +6,7 @@
  * - Both:           a Markdoc `{% tabs %}` block with Model and Example tabs.
  */
 
-import type { SchemaField } from '@lib/api/refResolver';
+import type { SchemaField } from '@lib/api/schemas/schemaField';
 import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable.md';
 
 interface Example {

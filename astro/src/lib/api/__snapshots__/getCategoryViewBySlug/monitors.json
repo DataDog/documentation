@@ -1,0 +1,256 @@
+{
+  "name": "Monitors",
+  "slug": "monitors",
+  "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).\n\n**Note:** `curl` commands require [url encoding](https://curl.se/docs/url-syntax.html).",
+  "operations": [
+    {
+      "operationId": "CreateMonitor",
+      "summary": "Create a monitor",
+      "slug": "create-a-monitor",
+      "menuOrder": 1,
+      "version": "v1",
+      "method": "POST"
+    },
+    {
+      "operationId": "ListMonitors",
+      "summary": "Get all monitors",
+      "slug": "get-all-monitors",
+      "menuOrder": 2,
+      "version": "v1",
+      "method": "GET"
+    },
+    {
+      "operationId": "UpdateMonitor",
+      "summary": "Edit a monitor",
+      "slug": "edit-a-monitor",
+      "menuOrder": 3,
+      "version": "v1",
+      "method": "PUT"
+    },
+    {
+      "operationId": "GetMonitor",
+      "summary": "Get a monitor's details",
+      "slug": "get-a-monitor-s-details",
+      "menuOrder": 4,
+      "version": "v1",
+      "method": "GET"
+    },
+    {
+      "operationId": "DeleteMonitor",
+      "summary": "Delete a monitor",
+      "slug": "delete-a-monitor",
+      "menuOrder": 5,
+      "version": "v1",
+      "method": "DELETE"
+    },
+    {
+      "operationId": "CheckCanDeleteMonitor",
+      "summary": "Check if a monitor can be deleted",
+      "slug": "check-if-a-monitor-can-be-deleted",
+      "menuOrder": 6,
+      "version": "v1",
+      "method": "GET"
+    },
+    {
+      "operationId": "ValidateMonitor",
+      "summary": "Validate a monitor",
+      "slug": "validate-a-monitor",
+      "menuOrder": 7,
+      "version": "v1",
+      "method": "POST"
+    },
+    {
+      "operationId": "ValidateExistingMonitor",
+      "summary": "Validate an existing monitor",
+      "slug": "validate-an-existing-monitor",
+      "menuOrder": 8,
+      "version": "v1",
+      "method": "POST"
+    },
+    {
+      "operationId": "GetMonitorConfigPolicy",
+      "summary": "Get a monitor configuration policy",
+      "slug": "get-a-monitor-configuration-policy",
+      "menuOrder": 9,
+      "version": "v2",
+      "method": "GET"
+    },
+    {
+      "operationId": "SearchMonitors",
+      "summary": "Monitors search",
+      "slug": "monitors-search",
+      "menuOrder": 9,
+      "version": "v1",
+      "method": "GET"
+    },
+    {
+      "operationId": "ListMonitorConfigPolicies",
+      "summary": "Get all monitor configuration policies",
+      "slug": "get-all-monitor-configuration-policies",
+      "menuOrder": 10,
+      "version": "v2",
+      "method": "GET"
+    },
+    {
+      "operationId": "SearchMonitorGroups",
+      "summary": "Monitors group search",
+      "slug": "monitors-group-search",
+      "menuOrder": 10,
+      "version": "v1",
+      "method": "GET"
+    },
+    {
+      "operationId": "CreateMonitorConfigPolicy",
+      "summary": "Create a monitor configuration policy",
+      "slug": "create-a-monitor-configuration-policy",
+      "menuOrder": 11,
+      "version": "v2",
+      "method": "POST"
+    },
+    {
+      "operationId": "UnmuteMonitor",
+      "summary": "Unmute a monitor",
+      "slug": "unmute-a-monitor",
+      "menuOrder": 11,
+      "version": "v1",
+      "method": "POST"
+    },
+    {
+      "operationId": "UpdateMonitorConfigPolicy",
+      "summary": "Edit a monitor configuration policy",
+      "slug": "edit-a-monitor-configuration-policy",
+      "menuOrder": 12,
+      "version": "v2",
+      "method": "PATCH"
+    },
+    {
+      "operationId": "MuteMonitor",
+      "summary": "Mute a monitor",
+      "slug": "mute-a-monitor",
+      "menuOrder": 12,
+      "version": "v1",
+      "method": "POST"
+    },
+    {
+      "operationId": "DeleteMonitorConfigPolicy",
+      "summary": "Delete a monitor configuration policy",
+      "slug": "delete-a-monitor-configuration-policy",
+      "menuOrder": 13,
+      "version": "v2",
+      "method": "DELETE"
+    },
+    {
+      "operationId": "UnmuteAllMonitors",
+      "summary": "Unmute all monitors",
+      "slug": "unmute-all-monitors",
+      "menuOrder": 13,
+      "version": "v1",
+      "method": "POST"
+    },
+    {
+      "operationId": "GetMonitorNotificationRule",
+      "summary": "Get a monitor notification rule",
+      "slug": "get-a-monitor-notification-rule",
+      "menuOrder": 14,
+      "version": "v2",
+      "method": "GET"
+    },
+    {
+      "operationId": "MuteAllMonitors",
+      "summary": "Mute all monitors",
+      "slug": "mute-all-monitors",
+      "menuOrder": 14,
+      "version": "v1",
+      "method": "POST"
+    },
+    {
+      "operationId": "GetMonitorNotificationRules",
+      "summary": "Get all monitor notification rules",
+      "slug": "get-all-monitor-notification-rules",
+      "menuOrder": 15,
+      "version": "v2",
+      "method": "GET"
+    },
+    {
+      "operationId": "CreateMonitorNotificationRule",
+      "summary": "Create a monitor notification rule",
+      "slug": "create-a-monitor-notification-rule",
+      "menuOrder": 16,
+      "version": "v2",
+      "method": "POST"
+    },
+    {
+      "operationId": "UpdateMonitorNotificationRule",
+      "summary": "Update a monitor notification rule",
+      "slug": "update-a-monitor-notification-rule",
+      "menuOrder": 17,
+      "version": "v2",
+      "method": "PATCH"
+    },
+    {
+      "operationId": "DeleteMonitorNotificationRule",
+      "summary": "Delete a monitor notification rule",
+      "slug": "delete-a-monitor-notification-rule",
+      "menuOrder": 18,
+      "version": "v2",
+      "method": "DELETE"
+    },
+    {
+      "operationId": "GetMonitorUserTemplate",
+      "summary": "Get a monitor user template",
+      "slug": "get-a-monitor-user-template",
+      "menuOrder": 19,
+      "version": "v2",
+      "method": "GET"
+    },
+    {
+      "operationId": "ListMonitorUserTemplates",
+      "summary": "Get all monitor user templates",
+      "slug": "get-all-monitor-user-templates",
+      "menuOrder": 20,
+      "version": "v2",
+      "method": "GET"
+    },
+    {
+      "operationId": "CreateMonitorUserTemplate",
+      "summary": "Create a monitor user template",
+      "slug": "create-a-monitor-user-template",
+      "menuOrder": 21,
+      "version": "v2",
+      "method": "POST"
+    },
+    {
+      "operationId": "UpdateMonitorUserTemplate",
+      "summary": "Update a monitor user template to a new version",
+      "slug": "update-a-monitor-user-template-to-a-new-version",
+      "menuOrder": 22,
+      "version": "v2",
+      "method": "PUT"
+    },
+    {
+      "operationId": "DeleteMonitorUserTemplate",
+      "summary": "Delete a monitor user template",
+      "slug": "delete-a-monitor-user-template",
+      "menuOrder": 23,
+      "version": "v2",
+      "method": "DELETE"
+    },
+    {
+      "operationId": "ValidateMonitorUserTemplate",
+      "summary": "Validate a monitor user template",
+      "slug": "validate-a-monitor-user-template",
+      "menuOrder": 24,
+      "version": "v2",
+      "method": "POST"
+    },
+    {
+      "operationId": "ValidateExistingMonitorUserTemplate",
+      "summary": "Validate an existing monitor user template",
+      "slug": "validate-an-existing-monitor-user-template",
+      "menuOrder": 25,
+      "version": "v2",
+      "method": "POST"
+    }
+  ],
+  "deprecated": false
+}

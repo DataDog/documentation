@@ -10,22 +10,14 @@
  * coverage is owned upstream — this site does not warn on gaps.
  */
 
-export interface TagTranslation {
-  name?: string;
-  description?: string;
-}
-
-export interface ActionTranslation {
-  summary?: string;
-  description?: string;
-  request_description?: string;
-  request_schema_description?: string;
-}
+import type {
+  TagTranslation,
+  ActionTranslation,
+} from "./schemas/translation";
+import type { ApiVersion } from "./schemas/version";
 
 type TagOverlay = Record<string, TagTranslation>;
 type ActionOverlay = Record<string, ActionTranslation>;
-
-type ApiVersion = "v1" | "v2";
 
 const tagModules: Record<string, TagOverlay> = import.meta.glob<TagOverlay>(
   "@hugo-site/data/api/v*/translate_tags.*.json",

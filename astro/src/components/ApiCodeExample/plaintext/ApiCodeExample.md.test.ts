@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { renderApiCodeExampleMd } from './ApiCodeExample.md';
-import type { CodeExampleSet } from '@lib/api/codeExampleLoader';
+import type { CodeExampleSet } from '@lib/api/schemas/codeExamples';
 
 const examples: CodeExampleSet[] = [
   {

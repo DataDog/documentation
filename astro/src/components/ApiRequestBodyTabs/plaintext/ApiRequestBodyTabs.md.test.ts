@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { renderApiRequestBodyTabsMd } from './ApiRequestBodyTabs.md';
-import type { SchemaField } from '@lib/api/refResolver';
+import type { SchemaField } from '@lib/api/schemas/schemaField';
 
 const schema: SchemaField[] = [
   { name: 'id', type: 'string', required: true, deprecated: false, readOnly: false, description: 'Identifier' },

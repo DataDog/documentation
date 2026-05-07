@@ -6,17 +6,12 @@
  */
 
 import { resolveRef, schemaToFields } from "./refResolver";
-import type { SchemaField } from "./refResolver";
 import { buildCurlCommand } from "./curlBuilder";
-import type { CurlParam } from "./curlBuilder";
 import { getRegions } from "./regionResolver";
-import type { ResponseData, RequestBodyData } from "./viewsBuilder";
-
-export interface SplitParams {
-  path: any[];
-  query: any[];
-  header: any[];
-}
+import type { SchemaField } from "./schemas/schemaField";
+import type { CurlParam } from "./schemas/curl";
+import type { ResponseData, RequestBodyData } from "./schemas/views";
+import type { SplitParams } from "./schemas/params";
 
 /**
  * Split an array of OpenAPI parameter objects by their `in` field,

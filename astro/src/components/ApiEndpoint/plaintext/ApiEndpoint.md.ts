@@ -11,7 +11,7 @@
  * endpoint from the next within a category page.
  */
 
-import type { EndpointData } from '@lib/api/viewsBuilder';
+import type { EndpointData } from '@lib/api/schemas/views';
 import { getDefaultRegions } from '@lib/api/regionResolver';
 import { appHost } from '@config/regions';
 import { renderApiStatusAlertMd } from '../../ApiStatusAlert/plaintext/ApiStatusAlert.md';

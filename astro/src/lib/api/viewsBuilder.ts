@@ -1,5 +1,6 @@
 /**
- * Page-time view helpers for the API docs.
+ * Page-time view helpers for the API docs. These convert the API spec
+ * data into the shapes needed by the rendering components.
  *
  * Walks the parsed OpenAPI specs directly and assembles the `EndpointData`
  * and `ApiCategory` view shapes that rendering components consume. Results
@@ -7,11 +8,15 @@
  * (endpoints) to avoid re-walking on each call within a build.
  */
 
-import { DEFAULT_LOCALE, LOCALES, type Locale } from '@lib/i18n/locale';
-import { API_VERSIONS, getOpenApiDocument, type ApiVersion } from './specParser';
-import type { OpenAPIV3 } from 'openapi-types';
-import { getRegions, buildApiUrlFromServers } from './regionResolver';
-import { getTranslationOverlay, translateAction, translateTag } from './translationsLoader';
+import { DEFAULT_LOCALE, LOCALES, type Locale } from "@lib/i18n/locale";
+import { API_VERSIONS, getOpenApiDocument } from "./specParser";
+import type { OpenAPIV3 } from "openapi-types";
+import { getRegions, buildApiUrlFromServers } from "./regionResolver";
+import {
+  getTranslationOverlay,
+  translateAction,
+  translateTag,
+} from "./translationsLoader";
 import {
   splitParameters,
   extractRequestBody,
@@ -19,69 +24,30 @@ import {
   extractPermissions,
   extractOauthScopes,
   buildCurlByRegion,
-} from './operationBuilder';
-import { paramsToFields, type SchemaField } from './refResolver';
-import { getCodeExamplesForOperation, type CodeExampleSet } from './codeExampleLoader';
+} from "./operationBuilder";
+import { paramsToFields } from "./refResolver";
+import { getCodeExamplesForOperation } from "./codeExampleLoader";
+import type { CodeExampleSet } from "./schemas/codeExamples";
+import type { ApiVersion } from "./schemas/version";
+import type {
+  ApiOperationStub,
+  ApiCategory,
+  EndpointData,
+} from "./schemas/views";
 
-export interface ApiOperationStub {
-  operationId: string;
-  summary: string;
-  slug: string;
-  menuOrder: number;
-  version: 'v1' | 'v2';
-  method: string;
-}
-
-export interface ApiCategory {
-  name: string;
-  slug: string;
-  description: string;
-  operations: ApiOperationStub[];
-  deprecated: boolean;
-}
-
-export interface ResponseData {
-  statusCode: string;
-  description: string;
-  schema?: SchemaField[];
-  examples?: Array<{ name: string; value: string; highlightedValue?: string }>;
-}
-
-export interface RequestBodyData {
-  required: boolean;
-  description?: string;
-  schema: SchemaField[];
-  examples: Array<{ name: string; value: string; highlightedValue?: string }>;
-}
-
-export interface EndpointData {
-  operationId: string;
-  summary: string;
-  slug: string;
-  method: string;
-  path: string;
-  description: string;
-  version: 'v1' | 'v2';
-  deprecated: boolean;
-  unstable: boolean;
-  unstableMessage?: string;
-  newerVersionUrl?: string;
-  permissions?: string[];
-  oauthScopes?: string[];
-  regionUrls?: Record<string, string>;
-  pathParams?: SchemaField[];
-  queryParams?: SchemaField[];
-  headerParams?: SchemaField[];
-  requestBody?: RequestBodyData;
-  responses: ResponseData[];
-  codeExamples: CodeExampleSet[];
-}
-
-const HTTP_METHODS = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options'] as const;
+const HTTP_METHODS = [
+  "get",
+  "post",
+  "put",
+  "patch",
+  "delete",
+  "head",
+  "options",
+] as const;
 
 const SLUG_OVERRIDES: Record<string, string> = {
-  'case-management': 'cases',
-  'scorecards': 'service-scorecards',
+  "case-management": "cases",
+  scorecards: "service-scorecards",
 };
 
 const categoriesCache = new Map<Locale, ApiCategory[]>();
@@ -90,7 +56,19 @@ const endpointCache = new Map<string, EndpointData>();
 let _allOperations: RawOperation[] | null = null;
 let _slugByOp: Map<RawOperation, string> | null = null;
 
-export async function getCategoriesView(lang: Locale = DEFAULT_LOCALE): Promise<ApiCategory[]> {
+/**
+ * Aggregates categories from these OpenAPI spec keys:
+ *   - `tags[].name`
+ *   - `tags[].description`
+ *   - `tags[].x-deprecated`
+ *   - `paths.{path}.{method}.tags` (first tag → category slug)
+ *   - `paths.{path}.{method}.operationId`
+ *   - `paths.{path}.{method}.summary`
+ *   - `paths.{path}.{method}.x-menu-order`
+ */
+export async function getCategoriesView(
+  lang: Locale = DEFAULT_LOCALE,
+): Promise<ApiCategory[]> {
   if (!LOCALES.includes(lang)) lang = DEFAULT_LOCALE;
   const cached = categoriesCache.get(lang);
   if (cached) return cached;
@@ -99,6 +77,10 @@ export async function getCategoriesView(lang: Locale = DEFAULT_LOCALE): Promise<
   return built;
 }
 
+/**
+ * Filters the category list from `getCategoriesView` by slug. Reads the
+ * same OpenAPI keys as `getCategoriesView`.
+ */
 export async function getCategoryViewBySlug(
   slug: string,
   lang: Locale = DEFAULT_LOCALE,
@@ -107,6 +89,26 @@ export async function getCategoryViewBySlug(
   return all.find((c) => c.slug === slug);
 }
 
+/**
+ * Aggregates a single endpoint's detail from these OpenAPI spec keys:
+ *   - `servers` (top-level, fallback for region URLs)
+ *   - `paths.{path}.parameters` and `paths.{path}.{method}.parameters`
+ *     (with `in`, `name`, `required`, `schema`, `example`, `$ref`)
+ *   - `paths.{path}.{method}.operationId`
+ *   - `paths.{path}.{method}.summary`
+ *   - `paths.{path}.{method}.description`
+ *   - `paths.{path}.{method}.deprecated`
+ *   - `paths.{path}.{method}.tags` (first tag → category slug)
+ *   - `paths.{path}.{method}.servers`
+ *   - `paths.{path}.{method}.security` (AuthZ → OAuth scopes)
+ *   - `paths.{path}.{method}.x-unstable`
+ *   - `paths.{path}.{method}.x-permission.permissions`
+ *   - `paths.{path}.{method}.requestBody`
+ *     (`content['application/json'].{schema, example, examples}`,
+ *      `required`, `description`)
+ *   - `paths.{path}.{method}.responses.{statusCode}`
+ *     (`description`, `content['application/json'].{schema, example, examples}`)
+ */
 export async function getEndpointView(
   catSlug: string,
   opSlug: string,
@@ -134,8 +136,8 @@ export async function getEndpointView(
 function toSlug(name: string): string {
   return name
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
 interface RawOperation {
@@ -155,14 +157,17 @@ function getAllOperations(): RawOperation[] {
   for (const version of API_VERSIONS) {
     const spec = getOpenApiDocument(version);
     const paths = spec?.paths;
-    if (!paths || typeof paths !== 'object') continue;
+    if (!paths || typeof paths !== "object") continue;
 
-    for (const [pathStr, pathItem] of Object.entries(paths) as [string, any][]) {
-      if (!pathItem || typeof pathItem !== 'object') continue;
+    for (const [pathStr, pathItem] of Object.entries(paths) as [
+      string,
+      any,
+    ][]) {
+      if (!pathItem || typeof pathItem !== "object") continue;
 
       for (const method of HTTP_METHODS) {
         const operation = pathItem[method];
-        if (!operation || typeof operation !== 'object') continue;
+        if (!operation || typeof operation !== "object") continue;
 
         const tags: string[] = operation.tags;
         if (!tags || !Array.isArray(tags) || tags.length === 0) continue;
@@ -172,7 +177,15 @@ function getAllOperations(): RawOperation[] {
         const rawSlug = toSlug(primaryTag);
         const categorySlug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
 
-        result.push({ version, pathStr, method, operation, pathItem, primaryTag, categorySlug });
+        result.push({
+          version,
+          pathStr,
+          method,
+          operation,
+          pathItem,
+          primaryTag,
+          categorySlug,
+        });
       }
     }
   }
@@ -193,22 +206,31 @@ function getSlugByOp(): Map<RawOperation, string> {
   const ops = getAllOperations();
   const counts = new Map<string, number>();
   for (const op of ops) {
-    const key = `${op.categorySlug}:${toSlug(op.operation.summary ?? '')}`;
+    const key = `${op.categorySlug}:${toSlug(op.operation.summary ?? "")}`;
     counts.set(key, (counts.get(key) ?? 0) + 1);
   }
   const map = new Map<RawOperation, string>();
   for (const op of ops) {
-    const baseSlug = toSlug(op.operation.summary ?? '');
+    const baseSlug = toSlug(op.operation.summary ?? "");
     const key = `${op.categorySlug}:${baseSlug}`;
-    const slug = (counts.get(key) ?? 0) > 1 ? `${baseSlug}-${op.version}` : baseSlug;
+    const slug =
+      (counts.get(key) ?? 0) > 1 ? `${baseSlug}-${op.version}` : baseSlug;
     map.set(op, slug);
   }
   _slugByOp = map;
   return map;
 }
 
+/**
+ * Returns the URL slug for an operation
+ * (e.g. `list-all-aws-integrations`
+ * in `/api/aws-integration/list-all-aws-integrations/`).
+ */
 function getOpSlug(op: RawOperation): string {
-  return getSlugByOp().get(op) ?? toSlug(op.operation.summary ?? '');
+  const slug = getSlugByOp().get(op);
+  if (slug === undefined)
+    throw new Error(`No slug found for operation: ${op.operation.operationId}`);
+  return slug;
 }
 
 function buildCategories(lang: Locale): ApiCategory[] {
@@ -238,8 +260,11 @@ function buildCategories(lang: Locale): ApiCategory[] {
       categoryMap.set(slug, {
         name: translated.name,
         slug,
-        description: translated.description ?? '',
-        deprecated: (tag as OpenAPIV3.TagObject & { 'x-deprecated'?: boolean })['x-deprecated'] === true,
+        description: translated.description ?? "",
+        deprecated:
+          (tag as OpenAPIV3.TagObject & { "x-deprecated"?: boolean })[
+            "x-deprecated"
+          ] === true,
       });
     }
   }
@@ -248,19 +273,21 @@ function buildCategories(lang: Locale): ApiCategory[] {
     const overlay = getTranslationOverlay(op.version, lang);
 
     if (!categoryMap.has(op.categorySlug)) {
-      const translated = translateTag(overlay, op.categorySlug, { name: op.primaryTag });
+      const translated = translateTag(overlay, op.categorySlug, {
+        name: op.primaryTag,
+      });
       categoryMap.set(op.categorySlug, {
         name: translated.name,
         slug: op.categorySlug,
-        description: '',
+        description: "",
         deprecated: false,
       });
     }
 
     const operationId: string = op.operation.operationId;
     const action = translateAction(overlay, operationId);
-    const summary: string = action.summary ?? op.operation.summary ?? '';
-    const menuOrder: number = op.operation['x-menu-order'] ?? 999;
+    const summary: string = action.summary ?? op.operation.summary ?? "";
+    const menuOrder: number = op.operation["x-menu-order"] ?? 999;
     const slug = getOpSlug(op);
 
     const list = opsByCategory.get(op.categorySlug) ?? [];
@@ -278,7 +305,9 @@ function buildCategories(lang: Locale): ApiCategory[] {
   const result: ApiCategory[] = [];
   for (const meta of Array.from(categoryMap.values())) {
     const ops = opsByCategory.get(meta.slug) ?? [];
-    ops.sort((a, b) => a.menuOrder - b.menuOrder || a.summary.localeCompare(b.summary));
+    ops.sort(
+      (a, b) => a.menuOrder - b.menuOrder || a.summary.localeCompare(b.summary),
+    );
     result.push({
       name: meta.name,
       slug: meta.slug,
@@ -298,13 +327,14 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const operationId: string = op.operation.operationId;
   const action = translateAction(overlay, operationId);
 
-  const summary: string = action.summary ?? op.operation.summary ?? '';
-  const description: string = action.description ?? op.operation.description ?? '';
+  const summary: string = action.summary ?? op.operation.summary ?? "";
+  const description: string =
+    action.description ?? op.operation.description ?? "";
   const deprecated: boolean = op.operation.deprecated === true;
-  const unstable: boolean = !!op.operation['x-unstable'];
+  const unstable: boolean = !!op.operation["x-unstable"];
   const unstableMessage: string | undefined =
-    typeof op.operation['x-unstable'] === 'string'
-      ? op.operation['x-unstable']
+    typeof op.operation["x-unstable"] === "string"
+      ? op.operation["x-unstable"]
       : undefined;
 
   const permissions = extractPermissions(op.operation);
@@ -314,7 +344,11 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const operationServers = op.operation?.servers ?? spec?.servers;
   const regionUrls: Record<string, string> = {};
   for (const region of regions) {
-    regionUrls[region.key] = buildApiUrlFromServers(operationServers, region.site, op.pathStr);
+    regionUrls[region.key] = buildApiUrlFromServers(
+      operationServers,
+      region.site,
+      op.pathStr,
+    );
   }
 
   const opSlug = getOpSlug(op);
@@ -324,16 +358,22 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
     ...(op.operation.parameters ?? []),
   ];
   const params = splitParameters(spec, mergedParameters);
-  const pathParams = params.path.length > 0 ? paramsToFields(spec, params.path) : undefined;
-  const queryParams = params.query.length > 0 ? paramsToFields(spec, params.query) : undefined;
-  const headerParams = params.header.length > 0 ? paramsToFields(spec, params.header) : undefined;
+  const pathParams =
+    params.path.length > 0 ? paramsToFields(spec, params.path) : undefined;
+  const queryParams =
+    params.query.length > 0 ? paramsToFields(spec, params.query) : undefined;
+  const headerParams =
+    params.header.length > 0 ? paramsToFields(spec, params.header) : undefined;
 
   const requestBody = extractRequestBody(spec, op.operation);
   if (requestBody) {
     if (action.request_description !== undefined) {
       requestBody.description = action.request_description || undefined;
     }
-    if (action.request_schema_description !== undefined && requestBody.schema.length > 0) {
+    if (
+      action.request_schema_description !== undefined &&
+      requestBody.schema.length > 0
+    ) {
       requestBody.schema[0].description = action.request_schema_description;
     }
   }
@@ -350,24 +390,28 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
     requestBodyJson,
   );
   const regionKeys = Object.keys(curlByRegion);
-  const defaultRegionKey = regionKeys[0] ?? 'us';
-  const defaultCurl = curlByRegion[defaultRegionKey] ?? '';
+  const defaultRegionKey = regionKeys[0] ?? "us";
+  const defaultCurl = curlByRegion[defaultRegionKey] ?? "";
   const curlVariants: Record<string, { code: string }> = {};
   for (const [key, code] of Object.entries(curlByRegion)) {
     curlVariants[key] = { code };
   }
 
-  const sdkExamples = getCodeExamplesForOperation(operationId, op.version, op.categorySlug);
+  const sdkExamples = getCodeExamplesForOperation(
+    operationId,
+    op.version,
+    op.categorySlug,
+  );
 
   const codeExamples: CodeExampleSet[] = [
     {
-      language: 'curl',
-      label: 'Curl',
+      language: "curl",
+      label: "Curl",
       entries: [
         {
           description: `${summary} curl example`,
           code: defaultCurl,
-          syntax: 'bash',
+          syntax: "bash",
           regionVariants: curlVariants,
         },
       ],

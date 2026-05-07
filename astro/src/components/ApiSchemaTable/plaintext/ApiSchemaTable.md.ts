@@ -13,7 +13,7 @@
  * the option label as their parent.
  */
 
-import type { SchemaField } from '@lib/api/refResolver';
+import type { SchemaField } from '@lib/api/schemas/schemaField';
 
 const UNNAMED_FIELD_LABEL = '<items>';
 

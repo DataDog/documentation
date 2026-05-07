@@ -8,7 +8,7 @@
 import { codeToHtml } from 'shiki';
 import datadogLight from '../../styles/shiki-light';
 import datadogDark from '../../styles/shiki-dark';
-import type { EndpointData } from './viewsBuilder';
+import type { EndpointData } from './schemas/views';
 
 /**
  * Walk all code examples in a single endpoint and populate `highlightedCode`
