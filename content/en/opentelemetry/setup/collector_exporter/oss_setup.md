@@ -134,12 +134,12 @@ connectors:
     histogram:
       exponential: {}
       unit: s
-    # These dimensions are used to compute container tags, host info,
-    # peer services, operation names, and resource names in Datadog APM.
     dimensions:
+      ## Universal Service Monitoring
       - name: deployment.environment.name
       - name: service.version
       - name: http.response.status_code
+      ## Container tags
       - name: container.id
       - name: container.name
       - name: container.image.name
@@ -163,17 +163,20 @@ connectors:
       - name: k8s.cronjob.name
       - name: k8s.namespace.name
       - name: k8s.pod.name
+      ## Host name inference
       - name: aws.ecs.launchtype
       - name: cloud.account.id
       - name: host.id
       - name: host.name
       - name: k8s.node.name
       - name: azure.resourcegroup.name
+      ## Peer service inference
       - name: aws.s3.bucket
       - name: db.namespace
       - name: messaging.destination.name
       - name: messaging.system
       - name: server.address
+      ## Operation name inference
       - name: operation.name
       - name: http.request.method
       - name: http.method
@@ -186,6 +189,7 @@ connectors:
       - name: faas.trigger
       - name: graphql.operation.type
       - name: network.protocol.name
+      ## Resource name inference
       - name: resource.name
       - name: http.route
       - name: messaging.destination
@@ -331,12 +335,12 @@ connectors:
     histogram:
       exponential: {}
       unit: s
-    # These dimensions are used to compute container tags, host info,
-    # peer services, operation names, and resource names in Datadog APM.
     dimensions:
+      ## Universal Service Monitoring
       - name: deployment.environment.name
       - name: service.version
       - name: http.response.status_code
+      ## Container tags
       - name: container.id
       - name: container.name
       - name: container.image.name
@@ -360,17 +364,20 @@ connectors:
       - name: k8s.cronjob.name
       - name: k8s.namespace.name
       - name: k8s.pod.name
+      ## Host name inference
       - name: aws.ecs.launchtype
       - name: cloud.account.id
       - name: host.id
       - name: host.name
       - name: k8s.node.name
       - name: azure.resourcegroup.name
+      ## Peer service inference
       - name: aws.s3.bucket
       - name: db.namespace
       - name: messaging.destination.name
       - name: messaging.system
       - name: server.address
+      ## Operation name inference
       - name: operation.name
       - name: http.request.method
       - name: http.method
@@ -383,6 +390,7 @@ connectors:
       - name: faas.trigger
       - name: graphql.operation.type
       - name: network.protocol.name
+      ## Resource name inference
       - name: resource.name
       - name: http.route
       - name: messaging.destination
@@ -575,12 +583,12 @@ connectors:
     histogram:
       exponential: {}
       unit: s
-    # These dimensions are used to compute container tags, host info,
-    # peer services, operation names, and resource names in Datadog APM.
     dimensions:
+      ## Universal Service Monitoring
       - name: deployment.environment.name
       - name: service.version
       - name: http.response.status_code
+      ## Container tags
       - name: container.id
       - name: container.name
       - name: container.image.name
@@ -604,17 +612,20 @@ connectors:
       - name: k8s.cronjob.name
       - name: k8s.namespace.name
       - name: k8s.pod.name
+      ## Host name inference
       - name: aws.ecs.launchtype
       - name: cloud.account.id
       - name: host.id
       - name: host.name
       - name: k8s.node.name
       - name: azure.resourcegroup.name
+      ## Peer service inference
       - name: aws.s3.bucket
       - name: db.namespace
       - name: messaging.destination.name
       - name: messaging.system
       - name: server.address
+      ## Operation name inference
       - name: operation.name
       - name: http.request.method
       - name: http.method
@@ -627,6 +638,7 @@ connectors:
       - name: faas.trigger
       - name: graphql.operation.type
       - name: network.protocol.name
+      ## Resource name inference
       - name: resource.name
       - name: http.route
       - name: messaging.destination
