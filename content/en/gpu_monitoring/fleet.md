@@ -11,7 +11,7 @@ further_reading:
 
 The [GPU Fleet page][0] provides a detailed inventory of all of your GPU-accelerated hosts for a specified time frame. Use this view to uncover inefficiencies through resource telemetry, ranging from performance and usage metrics to costs. This page also surfaces Datadog's OOTB provisioning and performance optimization recommendations for your devices, to help you maximize the value of your GPU spend. 
 
-## Breakdown your fleet by any tag
+## Break down your fleet by any tag
 
 Use quick filter dropdowns at the top of the page to filter by a specific **Provider**, **Device Type**, **Cluster**, **Region**, **Service**, **Data Center**, **Environment** or **Team**.
 
