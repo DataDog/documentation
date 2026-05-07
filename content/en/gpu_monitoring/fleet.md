@@ -25,8 +25,6 @@ If you select _Cluster_ or _Host_, you can click on the **`>`** button next to e
 
 **Note**: The Cluster table is only populated if you use Kubernetes.
 
-### Explore your GPU fleet with filters and groupings
-
 {{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Filter dropdowns and Group by selector at the top of the GPU Fleet page" style="width:90%;" >}}
 
 ## Use-case driven views
@@ -42,11 +40,12 @@ Built-in recommendations:
 - Datadog detects whether inactive devices should be provisioned to avoid having devices sit idle.
 
 Metrics relevant for your provisioning workflow: 
-- ECC and XID Error Count
-- Graphics Activity
-- SM Activity
+- ECC Errors
+- XID Errors
+- Graphics Engine Activity
+- GPU Utilization
 - GPU Memory
-- Allocated Devices (only available for Kubernetes users) 
+- Allocated Devices (Only available for Kubernetes users) 
 - Active Devices
 - Idle Cost
 
@@ -60,15 +59,16 @@ Built-in recommendations:
 - If your workloads aren't effectively using their allocated GPU devices, Datadog provides recommendations for tuning workloads to get more value out of their capacity.
 
 Metrics relevant for your performance workflow: 
-- ECC and XID Error Count
-- Graphics Activity
-- SM Activity
+- ECC Errors
+- XID Errors
+- Graphics Engine Activity
+- GPU Utilization
 - GPU Memory
 - Effective Devices
 - Power
 - Temperature
-- PCIe RX
-- PCIe Tx
+- PCIe RX Throughput
+- PCIe TX Throughput
 - CPU Utilization
 
 ## Summary Graph
@@ -112,11 +112,11 @@ This table breaks down your GPU-powered infrastructure by any tag of your choosi
 
 By default, the table of results displays the following columns: 
 
-- Device Type 
+- Device Name
 - Graphics Engine Activity 
-- SM Activity (Only if System Probe is enabled) 
+- GPU Utilization (Only if System Probe is enabled) 
 - Core Utilization 
-- Memory Utilization 
+- GPU Memory
 - Idle Cost
 - Recommendation
 
