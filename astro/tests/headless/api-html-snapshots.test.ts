@@ -64,6 +64,23 @@ function distFile(urlPath: string): string {
 }
 
 /**
+ * Slice the document down to its `<main>` element. The surrounding chrome
+ * (side nav listing every operation, inline scripts/styles, footer) is
+ * identical across pages and dwarfs the per-page content — keeping it would
+ * mean every snapshot carries ~600KB of noise that never varies between the
+ * pages we're auditing.
+ */
+function extractMain(html: string): string {
+  const start = html.search(/<main\b/);
+  const endTag = '</main>';
+  const end = html.lastIndexOf(endTag);
+  if (start === -1 || end === -1 || end < start) {
+    throw new Error('Could not locate <main>...</main> in built page');
+  }
+  return html.slice(start, end + endTag.length);
+}
+
+/**
  * Canonicalize build-random tokens so the snapshot tracks semantic content,
  * not non-deterministic per-build identifiers. Each unique token gets replaced
  * with a sequential placeholder (`X1`, `X2`, ...) keyed by first appearance,
@@ -128,7 +145,7 @@ describe('API page HTML snapshots', () => {
           throw new Error(`Built page not found at ${filepath}`);
         }
         const html = readFileSync(filepath, 'utf-8');
-        const normalized = await normalize(html);
+        const normalized = await normalize(extractMain(html));
         await expect(normalized).toMatchFileSnapshot(
           path.join(SNAPSHOT_DIR, `${page.name}.html`),
         );
