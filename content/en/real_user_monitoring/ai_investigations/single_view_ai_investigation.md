@@ -38,7 +38,7 @@ The richer the data available for the view, the more precise the analysis. Corre
 1. Open a RUM view side panel.
 2. Click the **Investigate with AI** button.
 
-   **Note**: If the button is disabled, the view is incomplete and cannot be investigated.
+   **Note**: The button is disabled for up to 15 minutes after a view ends, while the investigation becomes available.
 
 The investigation runs and streams results into the side panel as they become available, so you can start reading the first findings before the analysis is complete.
 
