@@ -895,6 +895,14 @@
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
   },
+  "GetCostAIPreferredTags": {
+    "description": "Get the preferred cost allocation tags for AI agent use. Returns a simplified response with contextual messaging based on configuration status.",
+    "summary": "Get preferred cost allocation tags"
+  },
+  "ListCostTagPipelineActiveKeys": {
+    "description": "List the tag keys that are actively set by tag pipeline rules, sorted by rule count in descending order.",
+    "summary": "List active tag pipeline keys"
+  },
   "ListCustomAllocationRules": {
     "description": "List all custom allocation rules - Retrieve a list of all custom allocation rules for the organization",
     "summary": "List custom allocation rules"
@@ -910,6 +918,10 @@
     "summary": "Reorder custom allocation rules",
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRuleResourceArray` object."
+  },
+  "ListCustomAllocationRulesStatus": {
+    "description": "List the processing status of all custom allocation rules.",
+    "summary": "List custom allocation rule statuses"
   },
   "DeleteCustomAllocationRule": {
     "description": "Delete a custom allocation rule - Delete an existing custom allocation rule by its ID",
@@ -1045,6 +1057,10 @@
   "ListCostOCIConfigs": {
     "description": "List the OCI configs.",
     "summary": "List Cloud Cost Management OCI configs"
+  },
+  "GetCostSetting": {
+    "description": "Get a specific cost management setting by type.",
+    "summary": "Get cost setting"
   },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
@@ -4685,6 +4701,10 @@
     "summary": "Reorder tag pipeline rulesets",
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRulesetResourceArray` object."
+  },
+  "ListTagPipelinesRulesetsStatus": {
+    "description": "List the processing status of all tag pipeline rulesets.",
+    "summary": "List tag pipeline ruleset statuses"
   },
   "ValidateQuery": {
     "description": "Validate a tag pipeline query - Validate the syntax and structure of a tag pipeline query",
