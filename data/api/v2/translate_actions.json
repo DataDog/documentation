@@ -2218,11 +2218,11 @@
     "request_schema_description": "Request to update an LLM Observability annotation queue."
   },
   "GetLLMObsAnnotatedInteractions": {
-    "description": "Retrieve all interactions and their annotations for a given annotation queue.",
+    "description": "Retrieve all interactions (traces and sessions) and their annotations for a given annotation queue.",
     "summary": "Get annotated queue interactions"
   },
   "CreateLLMObsAnnotationQueueInteractions": {
-    "description": "Add one or more interactions (traces) to an annotation queue.\nAt least one interaction must be provided.",
+    "description": "Add one or more interactions (traces or sessions) to an annotation queue.\nAt least one interaction must be provided.",
     "summary": "Add annotation queue interactions",
     "request_description": "Add interactions payload.",
     "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
