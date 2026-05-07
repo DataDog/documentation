@@ -43,7 +43,7 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs][2] for the 
 
 ### v0.1.26 — 2026-05-05
 
-*Bundled in chart: not yet shipped in a published Helm chart release.*
+*Bundled in chart: `0.4.0`.*
 
 #### Changed
 - Up to 4x faster search on cardinality aggregations and term aggregations with order by sub aggregation.
