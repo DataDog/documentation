@@ -16,22 +16,14 @@
     margin-top: -100px;
     pointer-events: none;
   }
-}
 
-.js-group-header {
-  transition: box-shadow 0.125s;
   position: relative;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-  margin-bottom: 9px;
-  border-radius: 4px;
-  cursor: pointer;
-  overflow: hidden;
-  height: 28px;
 
   .group-header-text {
-    margin-top: -1px;
-
-    button {
+    position: absolute;
+    left: 67px;
+    bottom: 2px;
+    button.copy-anchor {
       background: none;
       border: none;
       opacity: 0.5;
@@ -45,9 +37,23 @@
       &:hover {
         opacity: 1;
       }
-      
     }
   }
+}
+
+.js-group-header {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  transition: box-shadow 0.125s;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  margin-bottom: 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  height: 28px;
 
   &:hover {
     box-shadow: 0 2px 3px rgba(0,0,0,0.3);
