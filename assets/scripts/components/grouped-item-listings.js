@@ -159,34 +159,34 @@ export function initializeGroupedListings() {
 
     /**
      * Copy href of a term
-     * @param {object} event 
+     * @param {object} button
      */
-    const copyActionHref = (event) => {
-        const clickableIconWrapper = event.currentTarget.parentElement
-        const copyConfirmedIconWrapper = clickableIconWrapper.nextElementSibling
-        const anchor = clickableIconWrapper.dataset.anchor
+    const copyActionHref = (button) => {
+        const linkIcon = button.querySelector('.icon-link-wui')
+        const checkIcon = button.querySelector('.icon-check-bold')
+        const anchor = button.dataset.anchor
         const {pathname, origin} = window.location
         const path = new URL(`${origin}${pathname}${anchor}`)
 
         const Clipboard = navigator.clipboard
         // write href to clipboard
         Clipboard.writeText(path.href).then(() => {
-            clickableIconWrapper.classList.add('d-none');
-            copyConfirmedIconWrapper.classList.remove('d-none')
+            linkIcon.style.display = 'none';
+            checkIcon.style.display = 'inline';
             setTimeout(function() {
-                clickableIconWrapper.classList.remove('d-none');
-                copyConfirmedIconWrapper.classList.add('d-none')
+                linkIcon.style.display = 'inline';
+                checkIcon.style.display = '';
             }, 1000)
         })
     }
 
     // Copy anchor - event listener
-    const copyIcons = document.querySelectorAll('.group-header-text .icon-click')
+    const copyButtons = document.querySelectorAll('.group-header-text button')
 
-    copyIcons.forEach(e => {
+    copyButtons.forEach(e => {
         e.addEventListener('click', (e) => {
             e.stopPropagation()
-            copyActionHref(e)
+            copyActionHref(e.currentTarget)
         })
     })
 

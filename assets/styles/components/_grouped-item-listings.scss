@@ -30,11 +30,22 @@
 
   .group-header-text {
     margin-top: -1px;
-    i{
-      cursor: copy;
-      position: relative;
-      top: 4px;
-      margin-left: 4px;
+
+    button {
+      background: none;
+      border: none;
+      opacity: 0.5;
+      i{
+        position: relative;
+        top: 2px;
+        &.icon-check-bold {
+          display: none;
+        }
+      }
+      &:hover {
+        opacity: 1;
+      }
+      
     }
   }
 

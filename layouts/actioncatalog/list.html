@@ -99,8 +99,10 @@
           </div>
           <div class="font-semibold ms-1 group-header-text">
             <span>{{ $workflow_title }}</span>
-            <span class="icon-wrapper" data-anchor="#{{ $workflow_title | anchorize }}">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $workflow_title)) }}</span>
-            <span class="icon-wrapper d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9") }}</span>
+            <button aria-label="Copy anchor for {{ $workflow_title }}" data-anchor="#{{ $workflow_title | anchorize }}">
+              {{ partial "icon" (dict "name" "link-wui" "size" "14px" "title" (printf "copy anchor for %s" $workflow_title)) }}
+              {{ partial "icon" (dict "name" "check-bold" "color" "#632ca6" "size" "14px") }}
+            </button>
           </div>
           <div class="js-group-header__arrow">></div>
         </div>
