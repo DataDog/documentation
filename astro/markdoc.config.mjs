@@ -80,7 +80,7 @@ export default defineMarkdocConfig({
       ...schema.tags.apiStatusAlert,
     },
     schemaTable: {
-      render: component('./src/components/ApiSchemaTable/ApiSchemaTableIsland.astro'),
+      render: component('./src/components/ApiSchemaTable/ApiSchemaTable.astro'),
       selfClosing: true,
       ...schema.tags.schemaTable,
     },

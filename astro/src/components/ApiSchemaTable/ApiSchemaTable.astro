@@ -12,12 +12,23 @@ import { generateElementId } from '@utils/generateElementId';
 const cl = classListFactory(styles);
 
 interface Props {
-  fields: SchemaField[];
+  fields: SchemaField[] | string;
   title?: string;
   showExpandAll?: boolean;
 }
 
-const { fields, title, showExpandAll = true } = Astro.props;
+const { fields: fieldsProp, title, showExpandAll = true } = Astro.props;
+
+let fields: SchemaField[] = [];
+if (typeof fieldsProp === 'string') {
+  try {
+    fields = JSON.parse(fieldsProp);
+  } catch {
+    // If parsing fails, render nothing
+  }
+} else {
+  fields = fieldsProp;
+}
 
 const tableId = generateElementId('schema-table');
 const expandAllId = `${tableId}-expand-all`;
