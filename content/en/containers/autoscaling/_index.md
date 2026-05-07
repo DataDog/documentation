@@ -39,7 +39,7 @@ By default, Datadog Kubernetes Autoscaling uses estimated CPU and memory cost va
 
 Automated workload scaling is powered by a `DatadogPodAutoscaler` custom resource that defines scaling behavior on a per-workload level. The Datadog Cluster Agent acts as the controller for this custom resource.
 
-Each cluster can have a maximum of 1000 workloads optimized with Datadog Kubernetes Autoscaler.
+**Note:** Each cluster can have a maximum of 1000 workloads optimized with Datadog Kubernetes Autoscaling.
 
 ### Compatibility
 
@@ -60,6 +60,7 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
    | Live workload scaling | 7.66.1+ |
    | Argo Rollout recommendations and autoscaling | 7.71+ |
    | Cluster autoscaling ([preview sign-up][10]) | 7.72+ |
+   | In-place vertical pod resize (opt-in) | 7.78+ |
 
 - The following user permissions:
    - Org Management (required for Remote Configuration)
@@ -67,54 +68,6 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
    - Workload Scaling Write
    - Autoscaling Manage
 - (Recommended) Linux kernel v5.19+ and cgroup v2
-
-### How vertical recommendations are calculated
-
-Datadog computes vertical scaling recommendations for CPU and memory by analyzing historical container usage data over the last 8 days. Recommendations are calculated differently depending on whether the workload's current resource request equals its resource limit.
-
-#### Memory recommendations
-
-**When memory request differs from memory limit:**
-
-| | How it's computed |
-|---|---|
-| **Request recommendation** | Based on the **p95** of memory usage over the last 8 days, with a decaying weight applied to older samples so that recent usage patterns are prioritized. A **10% safety margin** is then added. |
-| **Limit recommendation** | Based on the **maximum peak memory usage** observed over the last 8 days. A **5% safety margin** is then added. |
-
-**When memory request equals memory limit:**
-
-When the current request and limit are set to the same value, both are computed using the more conservative limit-level methodology:
-
-| | How it's computed |
-|---|---|
-| **Request and limit recommendation** | Based on the **maximum peak memory usage** observed over the last 8 days. A **5% safety margin** is added. If an **OOMKill** is detected, an additional **20% bump** is applied to help prevent future out-of-memory events. |
-
-**Note:** Peak memory tracking captures the highest memory usage ever recorded by any container that has existed within the 8-day lookback window. This means that even if a container started before that window, its peak usage (for example, at startup) is still accounted for in the recommendation.
-
-#### CPU recommendations
-
-**When CPU request differs from CPU limit:**
-
-| | How it's computed |
-|---|---|
-| **Request recommendation** | Based on the **p95** of CPU usage relative to the current request over the last 8 days. A **10% safety margin** is then added. |
-| **Limit recommendation** | Based on the **p99** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. If the resulting request recommendation ever exceeds the limit recommendation, the request value is used for both. |
-
-**When CPU request equals CPU limit:**
-
-When the current request and limit are set to the same value, both are computed using the same methodology:
-
-| | How it's computed |
-|---|---|
-| **Request and limit recommendation** | Based on the **p99** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. |
-
-#### Key design principles
-
-- **8-day lookback window**: All recommendations consider usage data from the past 8 days, providing enough history to capture weekly traffic patterns while remaining responsive to changes.
-- **Decaying weights**: For memory request recommendations (when request ≠ limit), older samples are weighted less heavily, so the recommendation adapts faster to recent usage shifts.
-- **Safety margins**: Every recommendation includes a margin above observed usage (5 to 10%) to provide a buffer against unexpected spikes.
-- **OOMKill response**: When memory requests and limits are equal and an OOMKill occurs, a 20% bump is applied to reduce the likelihood of repeated out-of-memory failures.
-- **Request-equals-limit preservation**: When a workload's request and limit are configured to the same value, Datadog uses the more conservative (limit-level) computation for both, ensuring recommendations do not introduce a gap between request and limit.
 
 ## Setup
 
@@ -253,30 +206,52 @@ _Fixed cost values are subject to refinement over time._
 
 The [Autoscaling Summary page][6] provides a starting point for platform teams to understand the total Kubernetes Resource savings opportunities across an organization, and filter down to key clusters and namespaces. The [Cluster Scaling view][7] provides per-cluster information about total idle CPU, total idle memory, and costs. Click on a cluster for detailed information and a table of the cluster's workloads. If you are an individual application or service owner, you can also filter by your team or service name directly from the [Workload Scaling list view][8].
 
-Click **Optimize** on any workload to see its scaling recommendation.
+From any of these views, click **Optimize** on a workload to see its scaling recommendation, then proceed to [Enable Autoscaling for a workload](#enable-autoscaling-for-a-workload).
 
 ### Enable Autoscaling for a workload
 
-After you identify a workload to optimize, Datadog recommends inspecting its **Scaling Recommendation**. You can also click **Configure Recommendation** to add constraints or adjust target utilization levels.
+After you identify a workload to optimize, inspect its **Scaling Recommendation**. Click **Configure Recommendation** to add constraints or adjust target utilization levels before enabling.
 
-When you are ready to proceed with enabling Autoscaling for a workload, you have two options for deployment:
+There are three ways to enable autoscaling for a workload. Pick the path that matches how you ship workloads today.
 
-- Click **Enable Autoscaling**. (Requires Workload Scaling Write permission.)
+| Path | Best for | Where you start | Ongoing management |
+|------|----------|-----------------|--------------------|
+| **A. Datadog UI setup wizard** | A single workload, demos, or your first rollout | [Setup page][11] in the Datadog UI | Edit the workload's `DatadogPodAutoscaler` from the UI or your cluster |
+| **B. Author a `DatadogPodAutoscaler` manifest** | Existing `kubectl`-driven workflows | Hand-written YAML applied with `kubectl apply` | Edit the manifest and reapply, or let Datadog manage the spec by setting `owner: Remote` |
+| **C. Manage as infrastructure as code** | Fleet teams using GitOps or Terraform | Your IaC repository | Reconciled by your existing IaC tooling against the repo |
 
-   Datadog automatically installs and configures autoscaling for this workload on your behalf.
+#### Path A: Datadog UI setup wizard
 
-- Deploy a `DatadogPodAutoscaler` custom resource.
+The fastest way to get started is the [Setup page][11] in the Datadog UI. The wizard walks you through five steps: select a cluster, verify Agent and permission requirements, choose an install method, pick a scaling template, and deploy. Templates available in the wizard:
 
-   Use your existing deploy process to target and configure Autoscaling for your workload. See the [example configurations](#example-datadogpodautoscaler-configurations) below.
+- **Optimize cost**: high CPU utilization target, aggressive scale-down, lowest replica floor. Best for stateless, cost-sensitive workloads.
+- **Optimize balance**: moderate utilization target, balanced scale-up and scale-down. Best for most stateless workloads.
+- **Optimize performance**: conservative utilization target, slow scale-down, higher replica floor. Best for stateful or critical services.
+- **Customize**: start from any of the above and tune CPU target, replicas, and stabilization windows yourself.
+
+The Setup wizard is best for trying autoscaling on a single workload, getting hands-on with a recommendation, or onboarding a small set of workloads. (Requires `Workload Scaling Write` and `Autoscaling Manage` permissions.)
+
+#### Path B: author a manifest
+
+If you already manage Kubernetes resources with `kubectl apply`, deploy a `DatadogPodAutoscaler` custom resource that targets your workload. See the [example configurations](#example-datadogpodautoscaler-configurations) below for ready-to-edit starting points covering cost optimization, balanced scaling, vertical-only resizing, and custom-query horizontal scaling.
+
+#### Path C: manage as infrastructure as code
+
+If your fleet is managed by GitOps or Terraform, define `DatadogPodAutoscaler` resources in your IaC repository so they're reconciled alongside the rest of your platform. Datadog publishes step-by-step guides for the most common tools:
+
+- [Manage DatadogPodAutoscaler with ArgoCD][12]
+- [Manage DatadogPodAutoscaler with Terraform][13]
+
+This path is best for teams that want a single source of truth, audit trail, and consistent rollout process across many workloads and clusters.
 
 ### Example DatadogPodAutoscaler configurations
 
-The following examples demonstrate common `DatadogPodAutoscaler` configurations for different scaling strategies. You can use these as starting points and adjust the values to match your workload's requirements.
+The following examples demonstrate common `DatadogPodAutoscaler` configurations for different scaling strategies. Use them as starting points and adjust the values to match your workload's requirements. If you would rather pick a template in the UI, follow [Path A](#path-a-datadog-ui-setup-wizard) above.
 
 {{< tabs >}}
 {{% tab "Optimize Cost" %}}
 
-The **Optimize Cost** profile uses multidimensional scaling to aggressively reduce resource waste. It sets a high CPU utilization target (85%), allows scaling down to a single replica, and uses aggressive scale-down rules for fast response to reduced load.
+Pick this template for a stateless, cost-sensitive workload where the controller should remove capacity rapidly when load drops. The defining setting is the high CPU utilization target (85%), combined with an aggressive scale-down rule and a single-replica minimum.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -324,7 +299,7 @@ spec:
 {{% /tab %}}
 {{% tab "Optimize Balance" %}}
 
-The **Optimize Balance** profile provides a middle ground between cost optimization and stability. It uses a moderate CPU utilization target (70%), maintains at least 2 replicas, and applies conservative scale-down rules to avoid disruptive scaling events.
+Pick this template when you want savings without trading off availability. It's a sensible default for most stateless workloads. The defining setting is the moderate CPU utilization target (70%) paired with a conservative scale-down (20% every 20 minutes) and a two-replica minimum. The controller adds capacity rapidly but removes it slowly.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -372,7 +347,15 @@ spec:
 {{% /tab %}}
 {{% tab "Vertical CPU and Memory" %}}
 
-The **Vertical only** profile scales by adjusting CPU and memory requests and limits on existing pods, without changing the replica count. This is useful for workloads that cannot be horizontally scaled, or where you want to rightsize individual pods.
+Pick this template when a workload can't be scaled horizontally, or when you want pure rightsizing without changing replica counts. Common cases are singleton services, stateful workloads, and leader-elected components. The defining setting is `scaleDown.strategy: Disabled` and `scaleUp.strategy: Disabled`, which leaves only `update.strategy: Auto` to apply CPU and memory recommendations.
+
+By default, the controller applies vertical recommendations by triggering a rollout (evict and recreate pods). Cluster Agent **7.78+** also supports **in-place pod resizing**, which updates a pod's CPU and memory requests and limits without restarting it. In-place resize is **opt-in**.
+
+To enable in-place resize, set `autoscaling.workload.in_place_vertical_scaling.enabled: true` on the Cluster Agent (or set the environment variable `DD_AUTOSCALING_WORKLOAD_IN_PLACE_VERTICAL_SCALING_ENABLED=true`).
+
+Your cluster must also expose the `pods/resize` subresource. This is the default in Kubernetes 1.33+ where the `InPlacePodVerticalScaling` feature gate is beta. On Kubernetes 1.27 to 1.32 the feature gate must be enabled on `kube-apiserver` and every `kubelet`.
+
+When both prerequisites are met, workloads with `applyPolicy.update.strategy: Auto` (the default) resize in place. If the kubelet reports a resize as `Infeasible`, the controller falls back to a rollout. To force a workload to always use rollout-based vertical scaling regardless of the cluster setting, set `applyPolicy.update.strategy: TriggerRollout` on its `DatadogPodAutoscaler`.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -402,7 +385,7 @@ spec:
 {{% /tab %}}
 {{% tab "Horizontal Custom Query" %}}
 
-The **Horizontal only with Custom Query** profile scales replica count based on a custom Datadog metric query instead of CPU or memory utilization. This is useful for workloads where application-level metrics (such as queue depth, request latency, or throughput) are better indicators of scaling need.
+Pick this template when CPU and memory aren't the right scaling signal. Examples include a queue worker that should scale on backlog depth, or an API service that should scale on request latency. The defining setting is the `objectives` block, which references a Datadog metric query and an `AbsoluteValue` target instead of a utilization percentage. Replace the example query with one that matches your workload.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -474,7 +457,67 @@ spec:
 
 ### Deploy recommendations manually
 
-As an alternative to Autoscaling, you can also deploy Datadog's scaling recommendations manually. When you configure resources for your Kubernetes deployments, use the values suggested in the scaling recommendations. You can also click **Export Recommendation** to see a generated `kubectl patch` command.
+If you want Datadog's recommendations without enabling autoscaling, you can apply them manually as a one-off. When you configure resources for your Kubernetes deployments, use the values suggested in the scaling recommendation, or click **Export Recommendation** to see a generated `kubectl patch` command. Datadog continues to refresh the recommendation, but the cluster only changes when you reapply.
+
+## Manage workloads at scale
+
+After a workload is autoscaled, day-two operations are managed through a combination of the `DatadogPodAutoscaler` resource and the Datadog UI:
+
+- **Change the scaling template.** Edit the workload's `DatadogPodAutoscaler` spec (CPU target, replica bounds, scale-up and scale-down rules) directly, or pick a different template from the [Workload Scaling list view][8]. Changes take effect on the next reconcile.
+- **Switch between Datadog-managed and self-managed specs.** Set `owner: Remote` to let Datadog refresh the recommendation in place, or `owner: Local` to pin the spec and treat Datadog's recommendations as advisory. Per-workload overrides on a `Local` resource always win.
+- **Pause autoscaling without deleting the resource.** Set `applyPolicy.mode: Preview` to keep recommendations visible in `.status` while preventing the controller from applying them. This is useful when running alongside an HPA or VPA during evaluation.
+- **Watch the rollout.** The Workload Scaling list view shows the live status of each workload's recommendation, last applied action, and any reconcile errors.
+- **Remove autoscaling cleanly.** Delete the `DatadogPodAutoscaler` resource to stop autoscaling. Existing pod resources remain at their last applied values, and the workload reverts to whatever its parent controller (Deployment, StatefulSet, etc.) specifies on the next rollout.
+
+## Reference
+
+### How vertical recommendations are calculated
+
+Datadog computes vertical scaling recommendations for CPU and memory by analyzing historical container usage data over the last 8 days. Recommendations are calculated differently depending on whether the workload's current resource request equals its resource limit.
+
+#### Memory recommendations
+
+**When memory request differs from memory limit:**
+
+| | How it's computed |
+|---|---|
+| **Request recommendation** | Based on the **p95** of memory usage over the last 8 days, with a decaying weight applied to older samples so that recent usage patterns are prioritized. A **10% safety margin** is then added. |
+| **Limit recommendation** | Based on the **maximum peak memory usage** observed over the last 8 days. A **5% safety margin** is then added. |
+
+**When memory request equals memory limit:**
+
+When the current request and limit are set to the same value, both are computed using the more conservative limit-level methodology:
+
+| | How it's computed |
+|---|---|
+| **Request and limit recommendation** | Based on the **maximum peak memory usage** observed over the last 8 days. A **5% safety margin** is added. If an **OOMKill** is detected, an additional **20% bump** is applied to help prevent future out-of-memory events. |
+
+**Note:** Peak memory tracking captures the highest memory usage ever recorded by any container that has existed within the 8-day lookback window. This means that even if a container started before that window, its peak usage (for example, at startup) is still accounted for in the recommendation.
+
+#### CPU recommendations
+
+**When CPU request differs from CPU limit:**
+
+| | How it's computed |
+|---|---|
+| **Request recommendation** | Based on the **p95** of CPU usage relative to the current request over the last 8 days. A **10% safety margin** is then added. |
+| **Limit recommendation** | Based on the **p99** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. If the resulting request recommendation ever exceeds the limit recommendation, the request value is used for both. |
+
+**When CPU request equals CPU limit:**
+
+When the current request and limit are set to the same value, both are computed using the same methodology:
+
+| | How it's computed |
+|---|---|
+| **Request and limit recommendation** | Based on the **p99** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. |
+
+#### Key design principles
+
+- **8-day lookback window**: All recommendations consider usage data from the past 8 days, providing enough history to capture weekly traffic patterns while remaining responsive to changes.
+- **Decaying weights**: For memory request recommendations (when request ≠ limit), older samples are weighted less heavily, so the recommendation adapts faster to recent usage shifts.
+- **Safety margins**: Every recommendation includes a margin above observed usage (5 to 10%) to provide a buffer against unexpected spikes.
+- **OOMKill response**: When memory requests and limits are equal and an OOMKill occurs, a 20% bump is applied to reduce the likelihood of repeated out-of-memory failures.
+- **Request-equals-limit preservation**: When a workload's request and limit are configured to the same value, Datadog uses the more conservative (limit-level) computation for both, ensuring recommendations do not introduce a gap between request and limit.
 
 ## Further reading
 
@@ -490,3 +533,6 @@ As an alternative to Autoscaling, you can also deploy Datadog's scaling recommen
 [8]: https://app.datadoghq.com/orchestration/scaling/workload
 [9]: /integrations/kubernetes_state_core/
 [10]: https://www.datadoghq.com/product-preview/kubernetes-cluster-autoscaling/
+[11]: https://app.datadoghq.com/orchestration/scaling/setup
+[12]: /containers/guide/manage-datadogpodautoscaler-with-argocd/
+[13]: /containers/guide/manage-datdadogpodautoscaler-with-terraform/
