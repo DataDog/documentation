@@ -869,6 +869,12 @@
     "request_description": "",
     "request_schema_description": "Request object to update a resource filter."
   },
+  "UpsertSyncConfig": {
+    "description": "Create or update a cloud inventory sync configuration. Specify the cloud provider in `data.id`\nand provider-specific settings under `data.attributes`. This endpoint uses an upsert model.",
+    "summary": "Create or update a sync configuration",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a cloud inventory sync configuration."
+  },
   "GetCodeCoverageBranchSummary": {
     "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
     "summary": "Get code coverage summary for a branch",
@@ -1035,6 +1041,10 @@
     "summary": "Update Google Cloud Usage Cost config",
     "request_description": "",
     "request_schema_description": "Google Cloud Usage Cost config patch request."
+  },
+  "ListCostOCIConfigs": {
+    "description": "List the OCI configs.",
+    "summary": "List Cloud Cost Management OCI configs"
   },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
@@ -2208,11 +2218,11 @@
     "request_schema_description": "Request to update an LLM Observability annotation queue."
   },
   "GetLLMObsAnnotatedInteractions": {
-    "description": "Retrieve all interactions and their annotations for a given annotation queue.",
+    "description": "Retrieve all interactions (traces and sessions) and their annotations for a given annotation queue.",
     "summary": "Get annotated queue interactions"
   },
   "CreateLLMObsAnnotationQueueInteractions": {
-    "description": "Add one or more interactions (traces) to an annotation queue.\nAt least one interaction must be provided.",
+    "description": "Add one or more interactions (traces or sessions) to an annotation queue.\nAt least one interaction must be provided.",
     "summary": "Add annotation queue interactions",
     "request_description": "Add interactions payload.",
     "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
@@ -2502,7 +2512,7 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.",
+    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
     "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
@@ -3953,6 +3963,12 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "BulkDeleteSecurityMonitoringRules": {
+    "description": "Delete multiple security monitoring rules in a single request. Default rules cannot be deleted.",
+    "summary": "Bulk delete security monitoring rules",
+    "request_description": "",
+    "request_schema_description": "Payload for bulk deleting security monitoring rules."
+  },
   "BulkExportSecurityMonitoringRules": {
     "description": "Export a list of security monitoring rules as a ZIP file containing JSON rule definitions.\nThe endpoint accepts a list of rule IDs and returns a ZIP archive where each rule is\nsaved as a separate JSON file named after the rule.",
     "summary": "Bulk export security monitoring rules",
@@ -4398,7 +4414,7 @@
     "summary": "List status pages"
   },
   "CreateStatusPage": {
-    "description": "Creates a new status page. **Note**: Publishing a status page on creation via the `enabled` property will be deprecated. Use the dedicated [publish](#publish-status-page) status page endpoint after creation instead.",
+    "description": "Creates a new status page in an unpublished state. Use the dedicated [publish](#publish-status-page) status page endpoint to publish the page after creation.",
     "summary": "Create status page",
     "request_description": "",
     "request_schema_description": "Request object for creating a status page."
@@ -4972,13 +4988,13 @@
     "summary": "Get user memberships"
   },
   "SearchWidgets": {
-    "description": "Search and list widgets for a given experience type. Supports filtering by widget type, creator, title, and tags, as well as sorting and pagination.",
+    "description": "Search and list widgets for a given experience type, with filtering, sorting, and pagination.\n\n**Response meta** carries totals scoped to the current filter:\n- `filtered_total` — widgets matching the filter.\n- `created_by_you_total` — among the matches, how many the current user created.\n- `favorited_by_you_total` — among the matches, how many the current user has favorited.\n- `created_by_anyone_total` — total widgets in the experience type, ignoring filters.\n\nEach returned widget includes `is_favorited` reflecting the current user's favorite status.\nFavoriting itself is performed through the shared favorites API, not this endpoint.",
     "summary": "Search widgets"
   },
   "CreateWidget": {
     "description": "Create a new widget for a given experience type.",
     "summary": "Create a widget",
-    "request_description": "Widget request body.",
+    "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`: every type requires `requests`, and\nsome types require additional fields (e.g. `cloud_cost_summary`\nrequires `graph_options`, `geomap` requires `style` and `view`).\nThe example below shows a complete `cloud_cost_summary` payload\nfor the `ccm_reports` experience type.",
     "request_schema_description": "Request body for creating or updating a widget."
   },
   "DeleteWidget": {
@@ -4992,7 +5008,7 @@
   "UpdateWidget": {
     "description": "Update a widget by its UUID for a given experience type. This performs a full replacement of the widget definition.",
     "summary": "Update a widget",
-    "request_description": "Widget request body.",
+    "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
   },
   "CreateWorkflow": {

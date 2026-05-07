@@ -107,5 +107,5 @@ In order for the remapping to work, you must adhere to the status formats specif
 
 [1]: /logs/log_configuration/parsing
 [2]: https://app.datadoghq.com/logs/pipelines/
-[3]: /logs/log_configuration/processors/#log-status-remapper
+[3]: /logs/log_configuration/processors/log_status_remapper/
 [4]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes

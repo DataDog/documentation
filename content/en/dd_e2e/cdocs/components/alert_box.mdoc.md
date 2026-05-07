@@ -1,6 +1,7 @@
 ---
 title: Alert box
 draft: true
+private: true
 ---
 
 ## Overview
