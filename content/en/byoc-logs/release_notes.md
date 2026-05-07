@@ -46,7 +46,7 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs][2] for the 
 *Bundled in chart: `0.4.0`.*
 
 #### Changed
-- Up to 4x faster search on cardinality aggregations and term aggregations with order by sub aggregation.
+- Up to 4x faster term aggregations with order by sub aggregation and up to 1.5x faster cardinality aggregations.
 
 [2]: /byoc-logs/install/
 
