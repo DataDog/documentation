@@ -21,7 +21,7 @@ You can also **Search** or **Group** by other tags using the search and group-by
 
 If you select _Cluster_ or _Host_, you can click on the **`>`** button next to each table entry to view a cluster's hosts or a host's devices, respectively. 
 
-{{< img src="gpu_monitoring/host_row_expansion.png" alt="GPU Fleet table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
+{{< img src="gpu_monitoring/host_row_expansion-2.png" alt="GPU Fleet table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
 
 **Note**: The Cluster table is only populated if you use Kubernetes.
 
@@ -33,7 +33,7 @@ Datadog guides you through your provisioning and performance optimization workfl
 ### Provisioning
 The Provisioning tab shows key recommendations and metrics insights for allocating and managing your capacity. 
 
-{{< img src="gpu_monitoring/provisioning-tab.png" alt="The Provisioning use-case driven view" style="width:90%;" >}}
+{{< img src="gpu_monitoring/provisioning-tab-2.png" alt="The Provisioning use-case driven view" style="width:90%;" >}}
 
 Built-in recommendations: 
 - Datadog proactively detects thermal throttling or hardware defects and instantly recommends remediation based on hardware errors like ECC/XID errors.
@@ -52,7 +52,7 @@ Metrics relevant for your provisioning workflow:
 ### Performance
 The Performance tab helps you understand workload execution and tune GPU utilization to use your devices more effectively.
 
-{{< img src="gpu_monitoring/performance-tab.png" alt="The Performance use-case driven view" style="width:90%;" >}}
+{{< img src="gpu_monitoring/performance-tab-2.png" alt="The Performance use-case driven view" style="width:90%;" >}}
 
 Built-in recommendations: 
 - If your workloads are CPU-intensive, Datadog flags hosts with CPU saturation and recommends solutions.
