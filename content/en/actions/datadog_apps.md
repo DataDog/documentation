@@ -1,6 +1,6 @@
 ---
 title: Apps
-description: Build and deploy custom Datadog Apps locally using a code-based development workflow with React, backend functions, and a CLI.
+description: Build and deploy custom Apps locally using a code-based development workflow with React, backend functions, and a CLI.
 site_support_id: app_builder #Site support banner for US1-FED and US2-FED
 further_reading:
 - link: "/actions/app_builder/"
@@ -14,11 +14,9 @@ further_reading:
   text: "Access and Authentication"
 ---
 
-<!-- DOCS-14320: barakshush asks whether to drop "Datadog" from the page title (title: Datadog Apps), since other product pages don't prefix with "Datadog". -->
-
 ## Overview
 
-With Datadog Apps, you build applications locally as code with React and TypeScript (or JavaScript), using your standard development workflow.
+With Apps, you build applications locally as code with React and TypeScript (or JavaScript), using your standard development workflow.
 
 Apps use the same [permissions model][1] as App Builder apps and can also be embedded in other Datadog products such as [dashboards and IDPs][2].
 
@@ -140,7 +138,6 @@ export default App;
 ```
 {{% /collapse-content %}}
 
-<!-- DOCS-14320: barakshush asks if this section should be called "Upload your app" instead, since the user uploads their app from their local environment to the Datadog UI. -->
 ## Upload your app
 
 Run a production build to upload your app to Datadog:
@@ -170,17 +167,13 @@ DD_APPS_UPLOAD_ASSETS=1 npm run build
 
 After a successful upload, the build output displays a URL where your app is accessible in Datadog.
 
-<!-- DOCS-14320: barakshush suggests renaming this section to "Publish and manage your apps". -->
 ## Publish and manage your apps
 
 After you upload an app, it appears in your [App Builder][10] app list. From App Builder, you can:
 
-<!-- DOCS-14320: barakshush notes that "Publish" should be the first step before managing permissions. Consider reordering and linking to https://docs.datadoghq.com/actions/app_builder/access_and_auth/#app-permissions for the permissions step. -->
 - [Publish your app][11]
-<!-- DOCS-14320: barakshush asks to add a brief explanation (1-2 lines) of how to edit the app name and description here, or link to the relevant App Builder section. -->
 - [Edit the app name and description][11]
 - Manage [permissions][12]
-<!-- DOCS-14320: barakshush asks for an explanation of how to embed the app in dashboards, notebooks, and the IDP. -->
 - [Embed the app][2] in dashboards, notebooks, and the Internal Developer Portal
 
 <div class="alert alert-danger">
