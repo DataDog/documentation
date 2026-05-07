@@ -104,7 +104,7 @@ After toggling Cluster, Host, or Device, the **Summary Graph** displays key reso
 | Host Memory              | % of usable memory in use.                                                                                                                                                                                    | `system.mem.pct_usable`                            |
 {{% /collapse-content %}} 
 
-If you've selected an additional tag to group by---for example, _team_---every unique timeseries in the Summary Graph corresponds to a team's value for the selected metric.
+If you've selected an additional tag to group by—for example, _team_—every unique timeseries in the Summary Graph corresponds to a team's value for the selected metric.
 
 ## Inventory of your GPU-powered infrastructure
 
