@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Single-View AI Investigation runs an agentic root-cause analysis on a single RUM view. When you find a session with poor performance, such as a page or screen that loaded slowly or threw errors, click **Investigate**. Datadog's RUM agent inspects all the data attached to that view: errors, slow network requests, main-thread blocking, backend traces, CPU profiles, and device context.
+Single-View AI Investigation runs an agentic root-cause analysis on a single RUM view. When you find a session with poor performance, such as a page or screen that loaded slowly or threw errors, click **Investigate with AI**. Datadog's RUM agent inspects all the data attached to that view: errors, slow network requests, main-thread blocking, backend traces, CPU profiles, and device context.
 
 Instead of manually combing through RUM events to figure out whether the cause was a slow API call, a heavy client-side computation, or a CDN issue, you get a ranked list of findings grouped by root-cause category: App Performance, Server Side, Third Party, and Environment. From there, you can follow up through a chat interface or save the results to a [Notebook][1] to share with your team.
 
@@ -36,7 +36,9 @@ The richer the data available for the view, the more precise the analysis. Corre
 ## Launch an investigation
 
 1. Open a RUM view side panel.
-2. Click **Investigate**.
+2. Click the **Investigate with AI** button.
+
+   **Note**: The button can take up to 15 minutes to become available after a view ends.
 
 The investigation runs and streams results into the side panel as they become available, so you can start reading the first findings before the analysis is complete.
 
