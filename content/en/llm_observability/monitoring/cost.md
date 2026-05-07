@@ -71,18 +71,18 @@ Alternatively, query the following span attributes directly:
 - `@metrics.cache_write_input_tokens` / `@metrics.estimated_cache_write_input_cost`
 - `@metrics.reasoning_output_tokens` / `@metrics.estimated_reasoning_output_cost`
 
-## Troubleshooting
+## Troubleshoot LLM cost monitoring
 
 If LLM cost values are missing from a trace or appear inaccurate, see the following sections for common causes and fixes.
 
-### Trace shows PARTIAL COST or COST UNAVAILABLE
+### Trace shows "PARTIAL COST" or "COST UNAVAILABLE"
 
 Each LLM span in a trace is priced independently. The warning appears when one or more LLM spans in the trace are missing a cost estimate:
 
 - **PARTIAL COST**: Datadog computed costs for some LLM spans in the trace, but not the rest. The **Estimated Cost** value reflects the sum of only the spans for which cost was computed.
 - **COST UNAVAILABLE**: Datadog could not compute cost for any LLM span in the trace.
 
-Hover over the warning to see how many spans are missing cost, the reasons for missing cost, and the names of the affected spans. The reasons fall into one of the following categories.
+Hover over the warning to see the number of affected spans, the reason cost is missing, and the names of the affected spans. The reasons fall into one of the following categories.
 
 #### Unsupported model provider
 
@@ -108,7 +108,7 @@ How to fix:
 - For [auto-instrumentation][1], confirm your provider and SDK version are supported.
 - For manual instrumentation, annotate input and output token counts on the span. See the [SDK Reference][2] or [API][3].
 
-### Cost may appear incorrect with prompt caching
+### Inaccurate cost when prompt caching is enabled
 
 If a span includes only aggregate `input_tokens` and `output_tokens`, but is missing `cache_read_input_tokens`, `cache_write_input_tokens`, or `non_cached_input_tokens`, Datadog applies the standard input rate to the entire `input_tokens`.
 
