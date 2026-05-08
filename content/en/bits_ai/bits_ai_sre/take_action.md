@@ -20,7 +20,7 @@ To start receiving code fixes, [set up the Bits AI Dev Agent][1]. Then, if Bits 
 
 ## Remediation Recommendations
 
-Bits AI SRE will recommend corrective steps when applicable for the root cause. These recommendations can include commands that are fully configured, so you can copy them and run in your CLI. For example, Bits AI SRE may provide a `kubectl` command to restart or patch an affected Kubernetes deployment.
+Bits AI SRE recommends corrective steps when applicable to the root cause. These recommendations can include fully configured commands that you copy and run in your terminal — for example, a `kubectl` command to restart a Kubernetes deployment, an AWS CLI call to adjust a resource, or a Terraform change to update infrastructure.
 
 Review each recommendation and command before running it in your environment.
 
