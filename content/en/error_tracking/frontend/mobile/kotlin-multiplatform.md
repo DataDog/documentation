@@ -19,7 +19,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the Kotlin Multiplatform SDK yet, follow the [in-app setup instructions][2] or see the [Kotlin Multiplatform setup documentation][3]. Then, follow the steps on this page to enable React Native Crash Reporting and Error Tracking.
+If you have not set up the Kotlin Multiplatform SDK yet, follow the [in-app setup instructions][2] or see the [Kotlin Multiplatform setup documentation][3]. Then, follow the steps on this page to enable Kotlin Multiplatform Crash Reporting and Error Tracking.
 
 **Note**: For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
