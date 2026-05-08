@@ -224,7 +224,7 @@ To get prefix-level access metrics including request counts, server-side latency
 
 ### Post-setup steps
 
-After inventory files begin appearing in the destination bucket, enable Storage Management for that destination bucket by calling the [Cloud Inventory Sync Configs][209] endpoint:
+After inventory files begin appearing in the destination bucket, register it with Storage Management by calling the [Enable Storage Management for a bucket][209] endpoint:
 
 ```bash
 curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
@@ -256,7 +256,7 @@ To use the example above:
 
 A `200` response confirms Storage Management is enabled for the destination bucket.
 
-[209]: /api/latest/cloud-inventory-sync-configs/
+[209]: /api/latest/storage-management/#enable-storage-management-for-a-bucket
 
 {{% /tab %}}
 
@@ -273,7 +273,7 @@ To verify your setup:
 ### Best practices
 
 Follow these best practices to optimize Storage Management setup:
-- **Configure life cycle policies for inventory destination buckets**: S3 Inventory reports are generated daily and stored in your destination bucket. To prevent old inventory files from accumulating and incurring storage costs, add a life cycle policy to automatically delete inventory reports older than three days.
+- **Configure lifecycle policies for inventory destination buckets**: S3 Inventory reports are generated daily and stored in your destination bucket. To prevent old inventory files from accumulating and incurring storage costs, add a lifecycle policy to automatically delete inventory reports older than three days.
 
 - **Configure lifecycle policies for S3 access logs**: If you have enabled S3 access logs for prefix-level request metrics, the raw log files accumulate in your destination bucket. After these logs are forwarded to Datadog, the raw files are no longer needed for Storage Management purposes. To automatically delete access log files after forwarding to Datadog, add a lifecycle rule.
 
