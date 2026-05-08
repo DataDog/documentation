@@ -5477,16 +5477,21 @@ menu:
       parent: pipeline_visibility
       identifier: ci_custom
       weight: 110
+    - name: Automatic Job Retries
+      url: continuous_integration/pipelines/automatic_retries/
+      parent: pipeline_visibility
+      identifier: ci_automatic_retries
+      weight: 111
     - name: Custom Commands
       url: continuous_integration/pipelines/custom_commands/
       parent: pipeline_visibility
       identifier: ci_custom_commands
-      weight: 111
+      weight: 112
     - name: Custom Tags and Measures
       url: continuous_integration/pipelines/custom_tags_and_measures/
       parent: pipeline_visibility
       identifier: ci_custom_tags_and_measures
-      weight: 112
+      weight: 113
     - name: Search and Manage
       url: continuous_integration/search/
       parent: ci
