@@ -258,7 +258,13 @@ This means that even if users open your application while offline, no data is lo
 [12]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#automatically-track-views
 [13]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
 [14]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
+<<<<<<< HEAD:layouts/shortcodes/mdoc/en/sdk/setup/kotlin-multiplatform.mdoc.md
 [15]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#custom-views
 [16]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
 [17]: /real_user_monitoring/explorer/
 
+=======
+[15]: /error_tracking/frontend/mobile/kotlin-multiplatform
+[101]: https://app.datadoghq.com/rum/application/create
+[102]: /real_user_monitoring/kotlin_multiplatform/data_collected/
+>>>>>>> 42b2d97c6fc23373cb382a2b498ed2a13099965e:content/en/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup.md
