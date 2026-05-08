@@ -186,7 +186,7 @@
 .product-menu .category-description .category-description-text {
   font-size: 18px;
   line-height: 22px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   margin: 0;
   color: #ffffff;
 }

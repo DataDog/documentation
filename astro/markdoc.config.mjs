@@ -106,6 +106,17 @@ export default defineMarkdocConfig({
     whatsNext: {
       render: component('./src/components/WhatsNext/WhatsNext.astro'),
       ...schema.tags.whatsNext,
+      // Markdoc groups consecutive nextLink lines into a paragraph node,
+      // which would render <ul><p><li>...</li></p></ul> — invalid HTML that
+      // breaks :first-child / :last-child styling on whatsnext__item.
+      // Unwrap any paragraph children so nextLinks become direct <ul> kids.
+      transform(node, config) {
+        const whatsNextRender = config.tags.whatsNext.render;
+        const children = node.transformChildren(config).flatMap((child) =>
+          child instanceof Markdoc.Tag && child.name === 'p' ? child.children : [child],
+        );
+        return new Markdoc.Tag(whatsNextRender, node.transformAttributes(config), children);
+      },
     },
     nextLink: {
       render: component('./src/components/WhatsNext/NextLink.astro'),

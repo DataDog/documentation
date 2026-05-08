@@ -70,7 +70,7 @@ describe('SearchBar — query renders results', () => {
     expect(document.querySelector('.search-bar__popup')).toBeTruthy();
     expect(document.querySelector('.search-bar__ai-suggestion')).toBeTruthy();
 
-    const labels = Array.from(document.querySelectorAll('.search-bar__category-label'))
+    const labels = Array.from(document.querySelectorAll('.search-category__label'))
       .map((el) => el.textContent);
     // API is pinned first, partners last per the plan.
     expect(labels).toEqual(['API', 'Getting Started', 'Documentation', 'Guides', 'Partners']);
@@ -81,7 +81,7 @@ describe('SearchBar — query renders results', () => {
     mount(apiOnlyFixture);
     await typeAndWait(user, 'monitor');
 
-    const labels = Array.from(document.querySelectorAll('.search-bar__category-label'))
+    const labels = Array.from(document.querySelectorAll('.search-category__label'))
       .map((el) => el.textContent);
     expect(labels).toEqual(['API']);
   });
@@ -102,7 +102,7 @@ describe('SearchBar — URL routing', () => {
     mount();
     await typeAndWait(user, 'dashboard');
 
-    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.search-bar__hit-link'));
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.search-hit__link'));
     const hrefs = links.map((a) => a.getAttribute('href'));
 
     // API hits resolve relative (same-origin in production).
@@ -127,7 +127,7 @@ describe('SearchBar — keyboard navigation', () => {
     expect(document.querySelector('.search-bar__ai-suggestion--selected')).toBeTruthy();
 
     await user.keyboard('{ArrowDown}');
-    const selected = document.querySelectorAll('.search-bar__hit--selected');
+    const selected = document.querySelectorAll('.search-hit--selected');
     expect(selected.length).toBe(1);
   });
 

@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
-  padding: var(--space-md) var(--space-md) var(--space-md) 0;
+  padding: var(--space-md) var(--space-md) 0 0;
   /* box-shadow extends the rail color past the element's left edge so it
      reaches the viewport edge without adding horizontal overflow.
      clip-path trims the shadow's vertical overspill so it can't paint over
@@ -56,10 +56,23 @@
   min-height: 0;
   overflow-y: auto;
   scrollbar-width: none;
+  /* Soften the bottom edge so list items fade out instead of hard-clipping
+     against the side nav's bottom padding / the footer below. */
+  mask-image: linear-gradient(to bottom, black calc(100% - var(--space-md)), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - var(--space-md)), transparent);
 }
 
 .api-side-nav__list::-webkit-scrollbar {
   display: none;
+}
+
+/* Spacer that lives in the fade zone so the last real item stays opaque
+   when the list is scrolled to the bottom. */
+.api-side-nav__list::after {
+  content: '';
+  display: block;
+  height: var(--space-md);
+  flex-shrink: 0;
 }
 
 .api-side-nav__category {

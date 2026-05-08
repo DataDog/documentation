@@ -46,7 +46,7 @@
   justify-content: center;
   border: none;
   background: transparent;
-  padding: 0 var(--space-sm) 0 var(--space-sm);
+  padding: 0 var(--space-sm);
   color: var(--color-text-muted);
   cursor: pointer;
   line-height: 1;
@@ -64,7 +64,7 @@
    `.ais-SearchBox::after` (with the side-nav `right: 10px` override). */
 .search-bar__shortcut {
   position: absolute;
-  right: 10px;
+  right: var(--space-sm);
   top: 50%;
   transform: translateY(-50%) scale(1);
   display: flex;
@@ -72,12 +72,12 @@
   justify-content: center;
   width: 20px;
   height: 24px;
-  padding-bottom: 2px;
-  border: 1px solid #787b7c;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #7d8081;
+  padding-bottom: var(--space-2xs);
+  border: var(--border-width) solid var(--color-border-dark);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
   background: var(--color-bg);
   pointer-events: none;
   user-select: none;
@@ -107,8 +107,8 @@
   max-height: 70vh;
   overflow-y: auto;
   background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius, 4px);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   /* Above `--hugo-banner-z` (1080) and `--hugo-header-z` (200) so neither
      can paint over the popup as the user scrolls. */
@@ -120,15 +120,15 @@
   margin: 0 var(--space-sm) var(--space-sm);
   padding: var(--space-sm) var(--space-md);
   background: var(--color-placeholder-bg);
-  outline: 2px solid var(--color-placeholder-outline);
-  outline-offset: -2px;
+  outline: var(--border-width-thick) solid var(--color-placeholder-outline);
+  outline-offset: calc(-1 * var(--border-width-thick));
   color: var(--color-placeholder-text);
-  font-weight: var(--font-weight-semibold, 600);
+  font-weight: var(--font-weight-semibold);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-align: center;
   user-select: none;
-  font-size: var(--font-size-sm, 0.875rem);
+  font-size: var(--font-size-sm);
 }
 
 .search-bar__ai-suggestion--selected {
@@ -139,35 +139,35 @@
   padding: var(--space-md);
   color: var(--color-text-muted);
   text-align: center;
-  font-size: var(--font-size-sm, 0.875rem);
+  font-size: var(--font-size-sm);
 }
 
-.search-bar__category {
+.search-category {
   padding: var(--space-sm) 0 var(--space-xs);
 }
 
-.search-bar__category-label {
+.search-category__label {
   margin: 0 var(--space-md) var(--space-xs);
   padding: 0 0 var(--space-2xs);
   font-size: var(--font-size-base);
   font-weight: 400;
   color: var(--color-text-muted);
-  border-bottom: 1px solid var(--color-surface-border);
+  border-bottom: var(--border-width) solid var(--color-surface-border);
 }
 
-.search-bar__list {
+.search-category__list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.search-bar__hit {
+.search-hit {
   margin: 0;
 }
 
 /* Two-column row: subcategory on the left, title+snippet on the right.
    Mirrors Hugo's `.ais-Hits-item` layout in the search popup. */
-.search-bar__hit-link {
+.search-hit__link {
   display: grid;
   grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
   column-gap: var(--space-md);
@@ -176,56 +176,56 @@
   text-decoration: none;
 }
 
-.search-bar__hit-link:hover,
-.search-bar__hit--selected .search-bar__hit-link {
+.search-hit__link:hover,
+.search-hit--selected .search-hit__link {
   background: var(--color-bg-hover);
 }
 
-.search-bar__hit-subcategory {
+.search-hit__subcategory {
   margin: 0;
-  font-size: var(--font-size-xs, 0.75rem);
+  font-size: var(--font-size-xs);
   color: var(--color-text-muted);
   line-height: 1.4;
 }
 
-.search-bar__hit-body {
+.search-hit__body {
   min-width: 0;
 }
 
-.search-bar__hit-title {
+.search-hit__title {
   margin: 0;
-  font-size: var(--font-size-xs, 0.75rem);
+  font-size: var(--font-size-xs);
   line-height: 1.4;
   font-weight: 400;
 }
 
-.search-bar__hit-title strong {
+.search-hit__title strong {
   font-weight: 600;
 }
 
-.search-bar__hit-section {
+.search-hit__section {
   color: var(--color-text-muted);
 }
 
-.search-bar__hit-section strong {
+.search-hit__section strong {
   color: var(--color-text);
 }
 
-.search-bar__hit-snippet {
+.search-hit__snippet {
   margin: var(--space-2xs) 0 0;
-  font-size: var(--font-size-xs, 0.75rem);
+  font-size: var(--font-size-xs);
   color: var(--color-text-muted);
   line-height: 1.5;
 }
 
 /* Hugo highlights query terms with a brand-tinted pill. Use the existing
    brand tokens so the look adapts to dark mode. */
-.search-bar__hit-snippet :global(mark),
-.search-bar__hit-title :global(mark),
-.search-bar__hit-section :global(mark) {
+.search-hit__snippet :global(mark),
+.search-hit__title :global(mark),
+.search-hit__section :global(mark) {
   background: var(--color-brand-tint);
   color: var(--color-brand);
   padding: 0 0.15em;
-  border-radius: 2px;
+  border-radius: var(--border-radius-sm);
   font-weight: 600;
 }

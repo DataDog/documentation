@@ -8,6 +8,9 @@
   margin: 0 0 var(--space-sm) 0;
 }
 
+/* Specificity bump and ::before reset defeat the global `.prose ul` /
+   `.prose ul li::before` en-dash bullet styles in global.css when this
+   component is rendered inside a `.prose` container. */
 .whatsnext .whatsnext__list {
   list-style: none;
   padding: 0;

@@ -50,14 +50,12 @@
   cursor: pointer;
   white-space: nowrap;
   position: relative;
-  display: inline-block;
   z-index: 2;
 }
 
 .tabs__button:hover {
   color: var(--color-brand);
   background: var(--color-brand-tint);
-  border-color: transparent;
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
   transition:
@@ -117,10 +115,6 @@
   border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
-/* Stable DOM hook for the currently-visible panel; no visual overrides. */
-:global(.tabs__panel--active) {
-}
-
 /* ── Pills variant (applied when tabs overflow) ── */
 
 .tabs--pills .tabs__nav {
@@ -142,6 +136,8 @@
   margin-bottom: 0;
   font-weight: 600;
   font-size: var(--font-size-sm);
+  /* Asymmetric vertical padding (6/7) is an optical centering adjustment;
+     no spacing token expresses the 1px offset. */
   padding: 6px var(--space-sm) 7px;
   display: inline-flex;
   align-items: center;

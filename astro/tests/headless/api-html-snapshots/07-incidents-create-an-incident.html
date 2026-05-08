@@ -1,10 +1,20 @@
 <main class="api-main" data-astro-cid-hnecgxtf>
   <div class="api-toolbar" data-astro-cid-hnecgxtf>
-    <nav aria-label="Breadcrumb" class="breadcrumbs _breadcrumbs_sk9oc_1">
-      <ol>
-        <li><a href="/">Docs</a></li>
-        <li><a href="/api/latest/">API Reference</a></li>
-        <li><span aria-current="page">Create an incident</span></li>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <ol class="breadcrumbs__list _breadcrumbs__list_ahcrq_1">
+        <li class="breadcrumbs__item _breadcrumbs__item_ahcrq_14">
+          <a class="breadcrumbs__link _breadcrumbs__link_ahcrq_25" href="/">Docs</a>
+        </li>
+        <li class="breadcrumbs__item _breadcrumbs__item_ahcrq_14">
+          <a class="breadcrumbs__link _breadcrumbs__link_ahcrq_25" href="/api/latest/">API Reference</a>
+        </li>
+        <li class="breadcrumbs__item _breadcrumbs__item_ahcrq_14">
+          <span
+            class="breadcrumbs__label breadcrumbs__label--current _breadcrumbs__label--current_ahcrq_34"
+            aria-current="page"
+            >Create an incident</span
+          >
+        </li>
       </ol>
     </nav>
     <div class="api-toolbar__selectors" data-astro-cid-hnecgxtf>
@@ -18,10 +28,10 @@
         client="load"
         opts='{"name":"LanguageSelector","value":true}'
         await-children
-        ><div class="language-selector _language-selector_19nqn_1">
-          <label for="language-select" class="language-selector__label _language-selector__label_19nqn_8"
+        ><div class="language-selector _language-selector_yurur_1">
+          <label for="language-select" class="language-selector__label _language-selector__label_yurur_9"
             >Language</label
-          ><select id="language-select" class="language-selector__select _language-selector__select_19nqn_15">
+          ><select id="language-select" class="language-selector__select _language-selector__select_yurur_16">
             <option selected value="en">English</option>
           </select>
         </div>
@@ -32,7 +42,7 @@
         component-url="/_astro/RegionSelector.HASH.js"
         component-export="RegionSelector"
         renderer-url="/_astro/client.HASH.js"
-        props='{"regions":[1,[[0,{"key":[0,"us"],"label":[0,"US1"],"domain":[0,"datadoghq.com"],"appHost":[0,"app.datadoghq.com"]}],[0,{"key":[0,"us3"],"label":[0,"US3"],"domain":[0,"us3.datadoghq.com"],"appHost":[0,"us3.datadoghq.com"]}],[0,{"key":[0,"us5"],"label":[0,"US5"],"domain":[0,"us5.datadoghq.com"],"appHost":[0,"us5.datadoghq.com"]}],[0,{"key":[0,"eu"],"label":[0,"EU"],"domain":[0,"datadoghq.eu"],"appHost":[0,"app.datadoghq.eu"]}],[0,{"key":[0,"ap1"],"label":[0,"AP1"],"domain":[0,"ap1.datadoghq.com"],"appHost":[0,"ap1.datadoghq.com"]}],[0,{"key":[0,"ap2"],"label":[0,"AP2"],"domain":[0,"ap2.datadoghq.com"],"appHost":[0,"ap2.datadoghq.com"]}],[0,{"key":[0,"gov"],"label":[0,"US1-FED"],"domain":[0,"ddog-gov.com"],"appHost":[0,"app.ddog-gov.com"]}]]]}'
+        props='{"regions":[1,[[0,{"key":[0,"us"],"label":[0,"US1"],"domain":[0,"datadoghq.com"],"appHost":[0,"app.datadoghq.com"]}],[0,{"key":[0,"us3"],"label":[0,"US3"],"domain":[0,"us3.datadoghq.com"],"appHost":[0,"us3.datadoghq.com"]}],[0,{"key":[0,"us5"],"label":[0,"US5"],"domain":[0,"us5.datadoghq.com"],"appHost":[0,"us5.datadoghq.com"]}],[0,{"key":[0,"eu"],"label":[0,"EU"],"domain":[0,"datadoghq.eu"],"appHost":[0,"app.datadoghq.eu"]}],[0,{"key":[0,"ap1"],"label":[0,"AP1"],"domain":[0,"ap1.datadoghq.com"],"appHost":[0,"ap1.datadoghq.com"]}],[0,{"key":[0,"ap2"],"label":[0,"AP2"],"domain":[0,"ap2.datadoghq.com"],"appHost":[0,"ap2.datadoghq.com"]}],[0,{"key":[0,"gov"],"label":[0,"US1-FED"],"domain":[0,"ddog-gov.com"],"appHost":[0,"app.ddog-gov.com"]}]]],"labels":[0,{"Datadog site":[0,"Datadog site"]}]}'
         ssr
         client="load"
         opts='{"name":"RegionSelector","value":true}'
@@ -165,7 +175,7 @@
                       aria-expanded="false"
                       aria-label="Toggle data"
                     >
-                      <svg width="10" height="10" viewBox="0 0 10 10">
+                      <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                         <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                       </svg>
                     </button>
@@ -195,7 +205,7 @@
                         aria-expanded="false"
                         aria-label="Toggle attributes"
                       >
-                        <svg width="10" height="10" viewBox="0 0 10 10">
+                        <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                           <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                         </svg>
                       </button>
@@ -300,7 +310,7 @@
                           aria-expanded="false"
                           aria-label="Toggle initial_cells"
                         >
-                          <svg width="10" height="10" viewBox="0 0 10 10">
+                          <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                             <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                           </svg>
                         </button>
@@ -330,7 +340,7 @@
                             aria-expanded="false"
                             aria-label="Toggle "
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -390,7 +400,7 @@
                               aria-expanded="false"
                               aria-label="Toggle content"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -478,7 +488,7 @@
                           aria-expanded="false"
                           aria-label="Toggle notification_handles"
                         >
-                          <svg width="10" height="10" viewBox="0 0 10 10">
+                          <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                             <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                           </svg>
                         </button>
@@ -565,7 +575,7 @@
                         aria-expanded="false"
                         aria-label="Toggle relationships"
                       >
-                        <svg width="10" height="10" viewBox="0 0 10 10">
+                        <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                           <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                         </svg>
                       </button>
@@ -594,7 +604,7 @@
                           aria-expanded="false"
                           aria-label="Toggle commander_user"
                         >
-                          <svg width="10" height="10" viewBox="0 0 10 10">
+                          <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                             <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                           </svg>
                         </button>
@@ -620,7 +630,7 @@
                             aria-expanded="false"
                             aria-label="Toggle data"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -744,7 +754,7 @@
                       component-url="/_astro/CopyButton.HASH.js"
                       component-export="CopyButton"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"content":[0,"{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}"]}'
+                      props='{"content":[0,"{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                       ssr
                       client="idle"
                       opts='{"name":"CopyButton","value":true}'
@@ -958,7 +968,7 @@
                             aria-expanded="false"
                             aria-label="Toggle data"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -988,7 +998,7 @@
                               aria-expanded="false"
                               aria-label="Toggle attributes"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -1188,7 +1198,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle declared_by"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -1362,7 +1378,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle non_datadog_creator"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -1428,7 +1450,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle notification_handles"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -1717,7 +1745,7 @@
                               aria-expanded="false"
                               aria-label="Toggle relationships"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -1746,7 +1774,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle attachments"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -1775,7 +1809,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle data"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -1864,7 +1904,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle commander_user"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -1893,7 +1939,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle data"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -1980,7 +2032,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle created_by_user"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -2009,7 +2067,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle data"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -2096,7 +2160,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle declared_by_user"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -2125,7 +2195,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle data"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -2212,7 +2288,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle impacts"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -2241,7 +2323,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle data"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -2327,7 +2415,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle integrations"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -2356,7 +2450,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle data"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -2445,7 +2545,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle last_modified_by_user"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -2476,7 +2582,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle data"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -2563,7 +2675,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle responders"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -2592,7 +2710,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle data"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -2678,7 +2802,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle user_defined_fields"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -2707,7 +2837,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle data"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -2817,7 +2953,7 @@
                             aria-expanded="false"
                             aria-label="Toggle included"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -2844,7 +2980,7 @@
                               aria-expanded="false"
                               aria-label="Toggle "
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -2879,7 +3015,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle attributes"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -3047,7 +3189,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle attributes"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -3077,7 +3225,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle attachment"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -3207,7 +3361,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle relationships"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -3237,7 +3397,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle incident"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -3271,7 +3437,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle data"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -3358,7 +3530,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle last_modified_by_user"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -3394,7 +3572,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle data"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -3519,7 +3703,7 @@
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"content":[0,"{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"An example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"public_id\": 1,\n      \"severity\": \"UNKNOWN\",\n      \"title\": \"A test incident title\"\n    },\n    \"id\": \"X38-0000-0000-1234-000000000000\",\n    \"relationships\": {\n      \"attachments\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-abcd-1000-000000000000\",\n            \"type\": \"incident_attachments\"\n          }\n        ]\n      },\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      },\n      \"created_by_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-2345-000000000000\"\n        }\n      },\n      \"impacts\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-0000-2345-000000000000\",\n            \"type\": \"incident_impacts\"\n          }\n        ]\n      },\n      \"integrations\": {\n        \"data\": [\n          {\n            \"id\": \"X38-abcd-0005-0000-000000000000\",\n            \"type\": \"incident_integrations\"\n          },\n          {\n            \"id\": \"X38-abcd-0006-0000-000000000000\",\n            \"type\": \"incident_integrations\"\n          }\n        ]\n      },\n      \"responders\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-0000-2345-000000000000\",\n            \"type\": \"incident_responders\"\n          }\n        ]\n      },\n      \"user_defined_fields\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-0000-2345-000000000000\",\n            \"type\": \"user_defined_field\"\n          }\n        ]\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}"]}'
+                          props='{"content":[0,"{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"An example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"public_id\": 1,\n      \"severity\": \"UNKNOWN\",\n      \"title\": \"A test incident title\"\n    },\n    \"id\": \"X38-0000-0000-1234-000000000000\",\n    \"relationships\": {\n      \"attachments\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-abcd-1000-000000000000\",\n            \"type\": \"incident_attachments\"\n          }\n        ]\n      },\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      },\n      \"created_by_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-2345-000000000000\"\n        }\n      },\n      \"impacts\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-0000-2345-000000000000\",\n            \"type\": \"incident_impacts\"\n          }\n        ]\n      },\n      \"integrations\": {\n        \"data\": [\n          {\n            \"id\": \"X38-abcd-0005-0000-000000000000\",\n            \"type\": \"incident_integrations\"\n          },\n          {\n            \"id\": \"X38-abcd-0006-0000-000000000000\",\n            \"type\": \"incident_integrations\"\n          }\n        ]\n      },\n      \"responders\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-0000-2345-000000000000\",\n            \"type\": \"incident_responders\"\n          }\n        ]\n      },\n      \"user_defined_fields\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-0000-2345-000000000000\",\n            \"type\": \"user_defined_field\"\n          }\n        ]\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"CopyButton","value":true}'
@@ -3714,7 +3898,7 @@
                             aria-expanded="false"
                             aria-label="Toggle errors"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -3769,7 +3953,7 @@
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"]}'
+                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"CopyButton","value":true}'
@@ -3877,7 +4061,7 @@
                             aria-expanded="false"
                             aria-label="Toggle errors"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -3932,7 +4116,7 @@
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"]}'
+                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"CopyButton","value":true}'
@@ -4040,7 +4224,7 @@
                             aria-expanded="false"
                             aria-label="Toggle errors"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -4095,7 +4279,7 @@
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"]}'
+                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"CopyButton","value":true}'
@@ -4203,7 +4387,7 @@
                             aria-expanded="false"
                             aria-label="Toggle errors"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -4258,7 +4442,7 @@
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"]}'
+                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"CopyButton","value":true}'
@@ -4366,7 +4550,7 @@
                             aria-expanded="false"
                             aria-label="Toggle errors"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -4421,7 +4605,7 @@
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"]}'
+                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"CopyButton","value":true}'
@@ -4538,7 +4722,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -4625,7 +4809,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us3.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us3.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -4712,7 +4896,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us5.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us5.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -4799,7 +4983,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.eu/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.eu/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -4886,7 +5070,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap1.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap1.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -4973,7 +5157,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap2.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap2.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -5060,7 +5244,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ddog-gov.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ddog-gov.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -5149,7 +5333,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"\"\"\"\nCreate an incident returns \"CREATED\" response\n\"\"\"\n\nfrom os import environ\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v2.api.incidents_api import IncidentsApi\nfrom datadog_api_client.v2.model.incident_create_attributes import IncidentCreateAttributes\nfrom datadog_api_client.v2.model.incident_create_data import IncidentCreateData\nfrom datadog_api_client.v2.model.incident_create_relationships import IncidentCreateRelationships\nfrom datadog_api_client.v2.model.incident_create_request import IncidentCreateRequest\nfrom datadog_api_client.v2.model.incident_field_attributes_single_value import IncidentFieldAttributesSingleValue\nfrom datadog_api_client.v2.model.incident_field_attributes_single_value_type import (\n    IncidentFieldAttributesSingleValueType,\n)\nfrom datadog_api_client.v2.model.incident_type import IncidentType\nfrom datadog_api_client.v2.model.nullable_relationship_to_user import NullableRelationshipToUser\nfrom datadog_api_client.v2.model.nullable_relationship_to_user_data import NullableRelationshipToUserData\nfrom datadog_api_client.v2.model.users_type import UsersType\n\n# there is a valid \"user\" in the system\nUSER_DATA_ID = environ[\"USER_DATA_ID\"]\n\nbody = IncidentCreateRequest(\n    data=IncidentCreateData(\n        type=IncidentType.INCIDENTS,\n        attributes=IncidentCreateAttributes(\n            title=\"Example-Incident\",\n            customer_impacted=False,\n            fields=dict(\n                state=IncidentFieldAttributesSingleValue(\n                    type=IncidentFieldAttributesSingleValueType.DROPDOWN,\n                    value=\"resolved\",\n                ),\n            ),\n        ),\n        relationships=IncidentCreateRelationships(\n            commander_user=NullableRelationshipToUser(\n                data=NullableRelationshipToUserData(\n                    type=UsersType.USERS,\n                    id=USER_DATA_ID,\n                ),\n            ),\n        ),\n    ),\n)\n\nconfiguration = Configuration()\nconfiguration.unstable_operations[\"create_incident\"] = True\nwith ApiClient(configuration) as api_client:\n    api_instance = IncidentsApi(api_client)\n    response = api_instance.create_incident(body=body)\n\n    print(response)\n"]}'
+                    props='{"content":[0,"\"\"\"\nCreate an incident returns \"CREATED\" response\n\"\"\"\n\nfrom os import environ\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v2.api.incidents_api import IncidentsApi\nfrom datadog_api_client.v2.model.incident_create_attributes import IncidentCreateAttributes\nfrom datadog_api_client.v2.model.incident_create_data import IncidentCreateData\nfrom datadog_api_client.v2.model.incident_create_relationships import IncidentCreateRelationships\nfrom datadog_api_client.v2.model.incident_create_request import IncidentCreateRequest\nfrom datadog_api_client.v2.model.incident_field_attributes_single_value import IncidentFieldAttributesSingleValue\nfrom datadog_api_client.v2.model.incident_field_attributes_single_value_type import (\n    IncidentFieldAttributesSingleValueType,\n)\nfrom datadog_api_client.v2.model.incident_type import IncidentType\nfrom datadog_api_client.v2.model.nullable_relationship_to_user import NullableRelationshipToUser\nfrom datadog_api_client.v2.model.nullable_relationship_to_user_data import NullableRelationshipToUserData\nfrom datadog_api_client.v2.model.users_type import UsersType\n\n# there is a valid \"user\" in the system\nUSER_DATA_ID = environ[\"USER_DATA_ID\"]\n\nbody = IncidentCreateRequest(\n    data=IncidentCreateData(\n        type=IncidentType.INCIDENTS,\n        attributes=IncidentCreateAttributes(\n            title=\"Example-Incident\",\n            customer_impacted=False,\n            fields=dict(\n                state=IncidentFieldAttributesSingleValue(\n                    type=IncidentFieldAttributesSingleValueType.DROPDOWN,\n                    value=\"resolved\",\n                ),\n            ),\n        ),\n        relationships=IncidentCreateRelationships(\n            commander_user=NullableRelationshipToUser(\n                data=NullableRelationshipToUserData(\n                    type=UsersType.USERS,\n                    id=USER_DATA_ID,\n                ),\n            ),\n        ),\n    ),\n)\n\nconfiguration = Configuration()\nconfiguration.unstable_operations[\"create_incident\"] = True\nwith ApiClient(configuration) as api_client:\n    api_instance = IncidentsApi(api_client)\n    response = api_instance.create_incident(body=body)\n\n    print(response)\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -5232,7 +5416,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Create an incident returns \"CREATED\" response\n\nrequire \"datadog_api_client\"\nDatadogAPIClient.configure do |config|\n  config.unstable_operations[\"v2.create_incident\".to_sym] = true\nend\napi_instance = DatadogAPIClient::V2::IncidentsAPI.new\n\n# there is a valid \"user\" in the system\nUSER_DATA_ID = ENV[\"USER_DATA_ID\"]\n\nbody = DatadogAPIClient::V2::IncidentCreateRequest.new({\n  data: DatadogAPIClient::V2::IncidentCreateData.new({\n    type: DatadogAPIClient::V2::IncidentType::INCIDENTS,\n    attributes: DatadogAPIClient::V2::IncidentCreateAttributes.new({\n      title: \"Example-Incident\",\n      customer_impacted: false,\n      fields: {\n        state: DatadogAPIClient::V2::IncidentFieldAttributesSingleValue.new({\n          type: DatadogAPIClient::V2::IncidentFieldAttributesSingleValueType::DROPDOWN,\n          value: \"resolved\",\n        }),\n      },\n    }),\n    relationships: DatadogAPIClient::V2::IncidentCreateRelationships.new({\n      commander_user: DatadogAPIClient::V2::NullableRelationshipToUser.new({\n        data: DatadogAPIClient::V2::NullableRelationshipToUserData.new({\n          type: DatadogAPIClient::V2::UsersType::USERS,\n          id: USER_DATA_ID,\n        }),\n      }),\n    }),\n  }),\n})\np api_instance.create_incident(body)\n"]}'
+                    props='{"content":[0,"# Create an incident returns \"CREATED\" response\n\nrequire \"datadog_api_client\"\nDatadogAPIClient.configure do |config|\n  config.unstable_operations[\"v2.create_incident\".to_sym] = true\nend\napi_instance = DatadogAPIClient::V2::IncidentsAPI.new\n\n# there is a valid \"user\" in the system\nUSER_DATA_ID = ENV[\"USER_DATA_ID\"]\n\nbody = DatadogAPIClient::V2::IncidentCreateRequest.new({\n  data: DatadogAPIClient::V2::IncidentCreateData.new({\n    type: DatadogAPIClient::V2::IncidentType::INCIDENTS,\n    attributes: DatadogAPIClient::V2::IncidentCreateAttributes.new({\n      title: \"Example-Incident\",\n      customer_impacted: false,\n      fields: {\n        state: DatadogAPIClient::V2::IncidentFieldAttributesSingleValue.new({\n          type: DatadogAPIClient::V2::IncidentFieldAttributesSingleValueType::DROPDOWN,\n          value: \"resolved\",\n        }),\n      },\n    }),\n    relationships: DatadogAPIClient::V2::IncidentCreateRelationships.new({\n      commander_user: DatadogAPIClient::V2::NullableRelationshipToUser.new({\n        data: DatadogAPIClient::V2::NullableRelationshipToUserData.new({\n          type: DatadogAPIClient::V2::UsersType::USERS,\n          id: USER_DATA_ID,\n        }),\n      }),\n    }),\n  }),\n})\np api_instance.create_incident(body)\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -5296,7 +5480,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"// Create an incident returns \"CREATED\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2\"\n)\n\nfunc main() {\n\t// there is a valid \"user\" in the system\n\tUserDataID := os.Getenv(\"USER_DATA_ID\")\n\n\tbody := datadogV2.IncidentCreateRequest{\n\t\tData: datadogV2.IncidentCreateData{\n\t\t\tType: datadogV2.INCIDENTTYPE_INCIDENTS,\n\t\t\tAttributes: datadogV2.IncidentCreateAttributes{\n\t\t\t\tTitle:            \"Example-Incident\",\n\t\t\t\tCustomerImpacted: false,\n\t\t\t\tFields: map[string]datadogV2.IncidentFieldAttributes{\n\t\t\t\t\t\"state\": datadogV2.IncidentFieldAttributes{\n\t\t\t\t\t\tIncidentFieldAttributesSingleValue: &amp;datadogV2.IncidentFieldAttributesSingleValue{\n\t\t\t\t\t\t\tType:  datadogV2.INCIDENTFIELDATTRIBUTESSINGLEVALUETYPE_DROPDOWN.Ptr(),\n\t\t\t\t\t\t\tValue: *datadog.NewNullableString(datadog.PtrString(\"resolved\")),\n\t\t\t\t\t\t}},\n\t\t\t\t},\n\t\t\t},\n\t\t\tRelationships: &amp;datadogV2.IncidentCreateRelationships{\n\t\t\t\tCommanderUser: *datadogV2.NewNullableNullableRelationshipToUser(&amp;datadogV2.NullableRelationshipToUser{\n\t\t\t\t\tData: *datadogV2.NewNullableNullableRelationshipToUserData(&amp;datadogV2.NullableRelationshipToUserData{\n\t\t\t\t\t\tType: datadogV2.USERSTYPE_USERS,\n\t\t\t\t\t\tId:   UserDataID,\n\t\t\t\t\t}),\n\t\t\t\t}),\n\t\t\t},\n\t\t},\n\t}\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tconfiguration.SetUnstableOperationEnabled(\"v2.CreateIncident\", true)\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV2.NewIncidentsApi(apiClient)\n\tresp, r, err := api.CreateIncident(ctx, body)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `IncidentsApi.CreateIncident`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `IncidentsApi.CreateIncident`:\\n%s\\n\", responseContent)\n}\n"]}'
+                    props='{"content":[0,"// Create an incident returns \"CREATED\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2\"\n)\n\nfunc main() {\n\t// there is a valid \"user\" in the system\n\tUserDataID := os.Getenv(\"USER_DATA_ID\")\n\n\tbody := datadogV2.IncidentCreateRequest{\n\t\tData: datadogV2.IncidentCreateData{\n\t\t\tType: datadogV2.INCIDENTTYPE_INCIDENTS,\n\t\t\tAttributes: datadogV2.IncidentCreateAttributes{\n\t\t\t\tTitle:            \"Example-Incident\",\n\t\t\t\tCustomerImpacted: false,\n\t\t\t\tFields: map[string]datadogV2.IncidentFieldAttributes{\n\t\t\t\t\t\"state\": datadogV2.IncidentFieldAttributes{\n\t\t\t\t\t\tIncidentFieldAttributesSingleValue: &amp;datadogV2.IncidentFieldAttributesSingleValue{\n\t\t\t\t\t\t\tType:  datadogV2.INCIDENTFIELDATTRIBUTESSINGLEVALUETYPE_DROPDOWN.Ptr(),\n\t\t\t\t\t\t\tValue: *datadog.NewNullableString(datadog.PtrString(\"resolved\")),\n\t\t\t\t\t\t}},\n\t\t\t\t},\n\t\t\t},\n\t\t\tRelationships: &amp;datadogV2.IncidentCreateRelationships{\n\t\t\t\tCommanderUser: *datadogV2.NewNullableNullableRelationshipToUser(&amp;datadogV2.NullableRelationshipToUser{\n\t\t\t\t\tData: *datadogV2.NewNullableNullableRelationshipToUserData(&amp;datadogV2.NullableRelationshipToUserData{\n\t\t\t\t\t\tType: datadogV2.USERSTYPE_USERS,\n\t\t\t\t\t\tId:   UserDataID,\n\t\t\t\t\t}),\n\t\t\t\t}),\n\t\t\t},\n\t\t},\n\t}\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tconfiguration.SetUnstableOperationEnabled(\"v2.CreateIncident\", true)\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV2.NewIncidentsApi(apiClient)\n\tresp, r, err := api.CreateIncident(ctx, body)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `IncidentsApi.CreateIncident`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `IncidentsApi.CreateIncident`:\\n%s\\n\", responseContent)\n}\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -5382,7 +5566,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"// Create an incident returns \"CREATED\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v2.api.IncidentsApi;\nimport com.datadog.api.client.v2.model.IncidentCreateAttributes;\nimport com.datadog.api.client.v2.model.IncidentCreateData;\nimport com.datadog.api.client.v2.model.IncidentCreateRelationships;\nimport com.datadog.api.client.v2.model.IncidentCreateRequest;\nimport com.datadog.api.client.v2.model.IncidentFieldAttributes;\nimport com.datadog.api.client.v2.model.IncidentFieldAttributesSingleValue;\nimport com.datadog.api.client.v2.model.IncidentFieldAttributesSingleValueType;\nimport com.datadog.api.client.v2.model.IncidentResponse;\nimport com.datadog.api.client.v2.model.IncidentType;\nimport com.datadog.api.client.v2.model.NullableRelationshipToUser;\nimport com.datadog.api.client.v2.model.NullableRelationshipToUserData;\nimport com.datadog.api.client.v2.model.UsersType;\nimport java.util.Map;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    defaultClient.setUnstableOperationEnabled(\"v2.createIncident\", true);\n    IncidentsApi apiInstance = new IncidentsApi(defaultClient);\n\n    // there is a valid \"user\" in the system\n    String USER_DATA_ID = System.getenv(\"USER_DATA_ID\");\n\n    IncidentCreateRequest body =\n        new IncidentCreateRequest()\n            .data(\n                new IncidentCreateData()\n                    .type(IncidentType.INCIDENTS)\n                    .attributes(\n                        new IncidentCreateAttributes()\n                            .title(\"Example-Incident\")\n                            .customerImpacted(false)\n                            .fields(\n                                Map.ofEntries(\n                                    Map.entry(\n                                        \"state\",\n                                        new IncidentFieldAttributes(\n                                            new IncidentFieldAttributesSingleValue()\n                                                .type(\n                                                    IncidentFieldAttributesSingleValueType.DROPDOWN)\n                                                .value(\"resolved\"))))))\n                    .relationships(\n                        new IncidentCreateRelationships()\n                            .commanderUser(\n                                new NullableRelationshipToUser()\n                                    .data(\n                                        new NullableRelationshipToUserData()\n                                            .type(UsersType.USERS)\n                                            .id(USER_DATA_ID)))));\n\n    try {\n      IncidentResponse result = apiInstance.createIncident(body);\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling IncidentsApi#createIncident\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n"]}'
+                    props='{"content":[0,"// Create an incident returns \"CREATED\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v2.api.IncidentsApi;\nimport com.datadog.api.client.v2.model.IncidentCreateAttributes;\nimport com.datadog.api.client.v2.model.IncidentCreateData;\nimport com.datadog.api.client.v2.model.IncidentCreateRelationships;\nimport com.datadog.api.client.v2.model.IncidentCreateRequest;\nimport com.datadog.api.client.v2.model.IncidentFieldAttributes;\nimport com.datadog.api.client.v2.model.IncidentFieldAttributesSingleValue;\nimport com.datadog.api.client.v2.model.IncidentFieldAttributesSingleValueType;\nimport com.datadog.api.client.v2.model.IncidentResponse;\nimport com.datadog.api.client.v2.model.IncidentType;\nimport com.datadog.api.client.v2.model.NullableRelationshipToUser;\nimport com.datadog.api.client.v2.model.NullableRelationshipToUserData;\nimport com.datadog.api.client.v2.model.UsersType;\nimport java.util.Map;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    defaultClient.setUnstableOperationEnabled(\"v2.createIncident\", true);\n    IncidentsApi apiInstance = new IncidentsApi(defaultClient);\n\n    // there is a valid \"user\" in the system\n    String USER_DATA_ID = System.getenv(\"USER_DATA_ID\");\n\n    IncidentCreateRequest body =\n        new IncidentCreateRequest()\n            .data(\n                new IncidentCreateData()\n                    .type(IncidentType.INCIDENTS)\n                    .attributes(\n                        new IncidentCreateAttributes()\n                            .title(\"Example-Incident\")\n                            .customerImpacted(false)\n                            .fields(\n                                Map.ofEntries(\n                                    Map.entry(\n                                        \"state\",\n                                        new IncidentFieldAttributes(\n                                            new IncidentFieldAttributesSingleValue()\n                                                .type(\n                                                    IncidentFieldAttributesSingleValueType.DROPDOWN)\n                                                .value(\"resolved\"))))))\n                    .relationships(\n                        new IncidentCreateRelationships()\n                            .commanderUser(\n                                new NullableRelationshipToUser()\n                                    .data(\n                                        new NullableRelationshipToUserData()\n                                            .type(UsersType.USERS)\n                                            .id(USER_DATA_ID)))));\n\n    try {\n      IncidentResponse result = apiInstance.createIncident(body);\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling IncidentsApi#createIncident\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -5478,7 +5662,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"/**\n * Create an incident returns \"CREATED\" response\n */\n\nimport { client, v2 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconfiguration.unstableOperations[\"v2.createIncident\"] = true;\nconst apiInstance = new v2.IncidentsApi(configuration);\n\n// there is a valid \"user\" in the system\nconst USER_DATA_ID = process.env.USER_DATA_ID as string;\n\nconst params: v2.IncidentsApiCreateIncidentRequest = {\n  body: {\n    data: {\n      type: \"incidents\",\n      attributes: {\n        title: \"Example-Incident\",\n        customerImpacted: false,\n        fields: {\n          state: {\n            type: \"dropdown\",\n            value: \"resolved\",\n          },\n        },\n      },\n      relationships: {\n        commanderUser: {\n          data: {\n            type: \"users\",\n            id: USER_DATA_ID,\n          },\n        },\n      },\n    },\n  },\n};\n\napiInstance\n  .createIncident(params)\n  .then((data: v2.IncidentResponse) =&gt; {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) =&gt; console.error(error));\n"]}'
+                    props='{"content":[0,"/**\n * Create an incident returns \"CREATED\" response\n */\n\nimport { client, v2 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconfiguration.unstableOperations[\"v2.createIncident\"] = true;\nconst apiInstance = new v2.IncidentsApi(configuration);\n\n// there is a valid \"user\" in the system\nconst USER_DATA_ID = process.env.USER_DATA_ID as string;\n\nconst params: v2.IncidentsApiCreateIncidentRequest = {\n  body: {\n    data: {\n      type: \"incidents\",\n      attributes: {\n        title: \"Example-Incident\",\n        customerImpacted: false,\n        fields: {\n          state: {\n            type: \"dropdown\",\n            value: \"resolved\",\n          },\n        },\n      },\n      relationships: {\n        commanderUser: {\n          data: {\n            type: \"users\",\n            id: USER_DATA_ID,\n          },\n        },\n      },\n    },\n  },\n};\n\napiInstance\n  .createIncident(params)\n  .then((data: v2.IncidentResponse) =&gt; {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) =&gt; console.error(error));\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -5554,7 +5738,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"// Create an incident returns \"CREATED\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV2::api_incidents::IncidentsAPI;\nuse datadog_api_client::datadogV2::model::IncidentCreateAttributes;\nuse datadog_api_client::datadogV2::model::IncidentCreateData;\nuse datadog_api_client::datadogV2::model::IncidentCreateRelationships;\nuse datadog_api_client::datadogV2::model::IncidentCreateRequest;\nuse datadog_api_client::datadogV2::model::IncidentFieldAttributes;\nuse datadog_api_client::datadogV2::model::IncidentFieldAttributesSingleValue;\nuse datadog_api_client::datadogV2::model::IncidentFieldAttributesSingleValueType;\nuse datadog_api_client::datadogV2::model::IncidentType;\nuse datadog_api_client::datadogV2::model::NullableRelationshipToUser;\nuse datadog_api_client::datadogV2::model::NullableRelationshipToUserData;\nuse datadog_api_client::datadogV2::model::UsersType;\nuse std::collections::BTreeMap;\n\n#[tokio::main]\nasync fn main() {\n    // there is a valid \"user\" in the system\n    let user_data_id = std::env::var(\"USER_DATA_ID\").unwrap();\n    let body = IncidentCreateRequest::new(\n        IncidentCreateData::new(\n            IncidentCreateAttributes::new(false, \"Example-Incident\".to_string()).fields(\n                BTreeMap::from([(\n                    \"state\".to_string(),\n                    IncidentFieldAttributes::IncidentFieldAttributesSingleValue(Box::new(\n                        IncidentFieldAttributesSingleValue::new()\n                            .type_(IncidentFieldAttributesSingleValueType::DROPDOWN)\n                            .value(Some(\"resolved\".to_string())),\n                    )),\n                )]),\n            ),\n            IncidentType::INCIDENTS,\n        )\n        .relationships(IncidentCreateRelationships::new(Some(\n            NullableRelationshipToUser::new(Some(NullableRelationshipToUserData::new(\n                user_data_id.clone(),\n                UsersType::USERS,\n            ))),\n        ))),\n    );\n    let mut configuration = datadog::Configuration::new();\n    configuration.set_unstable_operation_enabled(\"v2.CreateIncident\", true);\n    let api = IncidentsAPI::with_config(configuration);\n    let resp = api.create_incident(body).await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n"]}'
+                    props='{"content":[0,"// Create an incident returns \"CREATED\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV2::api_incidents::IncidentsAPI;\nuse datadog_api_client::datadogV2::model::IncidentCreateAttributes;\nuse datadog_api_client::datadogV2::model::IncidentCreateData;\nuse datadog_api_client::datadogV2::model::IncidentCreateRelationships;\nuse datadog_api_client::datadogV2::model::IncidentCreateRequest;\nuse datadog_api_client::datadogV2::model::IncidentFieldAttributes;\nuse datadog_api_client::datadogV2::model::IncidentFieldAttributesSingleValue;\nuse datadog_api_client::datadogV2::model::IncidentFieldAttributesSingleValueType;\nuse datadog_api_client::datadogV2::model::IncidentType;\nuse datadog_api_client::datadogV2::model::NullableRelationshipToUser;\nuse datadog_api_client::datadogV2::model::NullableRelationshipToUserData;\nuse datadog_api_client::datadogV2::model::UsersType;\nuse std::collections::BTreeMap;\n\n#[tokio::main]\nasync fn main() {\n    // there is a valid \"user\" in the system\n    let user_data_id = std::env::var(\"USER_DATA_ID\").unwrap();\n    let body = IncidentCreateRequest::new(\n        IncidentCreateData::new(\n            IncidentCreateAttributes::new(false, \"Example-Incident\".to_string()).fields(\n                BTreeMap::from([(\n                    \"state\".to_string(),\n                    IncidentFieldAttributes::IncidentFieldAttributesSingleValue(Box::new(\n                        IncidentFieldAttributesSingleValue::new()\n                            .type_(IncidentFieldAttributesSingleValueType::DROPDOWN)\n                            .value(Some(\"resolved\".to_string())),\n                    )),\n                )]),\n            ),\n            IncidentType::INCIDENTS,\n        )\n        .relationships(IncidentCreateRelationships::new(Some(\n            NullableRelationshipToUser::new(Some(NullableRelationshipToUserData::new(\n                user_data_id.clone(),\n                UsersType::USERS,\n            ))),\n        ))),\n    );\n    let mut configuration = datadog::Configuration::new();\n    configuration.set_unstable_operation_enabled(\"v2.CreateIncident\", true);\n    let api = IncidentsAPI::with_config(configuration);\n    let resp = api.create_incident(body).await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'

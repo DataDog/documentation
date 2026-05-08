@@ -1,10 +1,20 @@
 <main class="api-main" data-astro-cid-hnecgxtf>
   <div class="api-toolbar" data-astro-cid-hnecgxtf>
-    <nav aria-label="Breadcrumb" class="breadcrumbs _breadcrumbs_sk9oc_1">
-      <ol>
-        <li><a href="/">Docs</a></li>
-        <li><a href="/api/latest/">API Reference</a></li>
-        <li><span aria-current="page">Create a monitor</span></li>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <ol class="breadcrumbs__list _breadcrumbs__list_ahcrq_1">
+        <li class="breadcrumbs__item _breadcrumbs__item_ahcrq_14">
+          <a class="breadcrumbs__link _breadcrumbs__link_ahcrq_25" href="/">Docs</a>
+        </li>
+        <li class="breadcrumbs__item _breadcrumbs__item_ahcrq_14">
+          <a class="breadcrumbs__link _breadcrumbs__link_ahcrq_25" href="/api/latest/">API Reference</a>
+        </li>
+        <li class="breadcrumbs__item _breadcrumbs__item_ahcrq_14">
+          <span
+            class="breadcrumbs__label breadcrumbs__label--current _breadcrumbs__label--current_ahcrq_34"
+            aria-current="page"
+            >Create a monitor</span
+          >
+        </li>
       </ol>
     </nav>
     <div class="api-toolbar__selectors" data-astro-cid-hnecgxtf>
@@ -18,10 +28,10 @@
         client="load"
         opts='{"name":"LanguageSelector","value":true}'
         await-children
-        ><div class="language-selector _language-selector_19nqn_1">
-          <label for="language-select" class="language-selector__label _language-selector__label_19nqn_8"
+        ><div class="language-selector _language-selector_yurur_1">
+          <label for="language-select" class="language-selector__label _language-selector__label_yurur_9"
             >Language</label
-          ><select id="language-select" class="language-selector__select _language-selector__select_19nqn_15">
+          ><select id="language-select" class="language-selector__select _language-selector__select_yurur_16">
             <option selected value="en">English</option>
           </select>
         </div>
@@ -32,7 +42,7 @@
         component-url="/_astro/RegionSelector.HASH.js"
         component-export="RegionSelector"
         renderer-url="/_astro/client.HASH.js"
-        props='{"regions":[1,[[0,{"key":[0,"us"],"label":[0,"US1"],"domain":[0,"datadoghq.com"],"appHost":[0,"app.datadoghq.com"]}],[0,{"key":[0,"us3"],"label":[0,"US3"],"domain":[0,"us3.datadoghq.com"],"appHost":[0,"us3.datadoghq.com"]}],[0,{"key":[0,"us5"],"label":[0,"US5"],"domain":[0,"us5.datadoghq.com"],"appHost":[0,"us5.datadoghq.com"]}],[0,{"key":[0,"eu"],"label":[0,"EU"],"domain":[0,"datadoghq.eu"],"appHost":[0,"app.datadoghq.eu"]}],[0,{"key":[0,"ap1"],"label":[0,"AP1"],"domain":[0,"ap1.datadoghq.com"],"appHost":[0,"ap1.datadoghq.com"]}],[0,{"key":[0,"ap2"],"label":[0,"AP2"],"domain":[0,"ap2.datadoghq.com"],"appHost":[0,"ap2.datadoghq.com"]}],[0,{"key":[0,"gov"],"label":[0,"US1-FED"],"domain":[0,"ddog-gov.com"],"appHost":[0,"app.ddog-gov.com"]}]]]}'
+        props='{"regions":[1,[[0,{"key":[0,"us"],"label":[0,"US1"],"domain":[0,"datadoghq.com"],"appHost":[0,"app.datadoghq.com"]}],[0,{"key":[0,"us3"],"label":[0,"US3"],"domain":[0,"us3.datadoghq.com"],"appHost":[0,"us3.datadoghq.com"]}],[0,{"key":[0,"us5"],"label":[0,"US5"],"domain":[0,"us5.datadoghq.com"],"appHost":[0,"us5.datadoghq.com"]}],[0,{"key":[0,"eu"],"label":[0,"EU"],"domain":[0,"datadoghq.eu"],"appHost":[0,"app.datadoghq.eu"]}],[0,{"key":[0,"ap1"],"label":[0,"AP1"],"domain":[0,"ap1.datadoghq.com"],"appHost":[0,"ap1.datadoghq.com"]}],[0,{"key":[0,"ap2"],"label":[0,"AP2"],"domain":[0,"ap2.datadoghq.com"],"appHost":[0,"ap2.datadoghq.com"]}],[0,{"key":[0,"gov"],"label":[0,"US1-FED"],"domain":[0,"ddog-gov.com"],"appHost":[0,"app.ddog-gov.com"]}]]],"labels":[0,{"Datadog site":[0,"Datadog site"]}]}'
         ssr
         client="load"
         opts='{"name":"RegionSelector","value":true}'
@@ -603,7 +613,7 @@
                       aria-expanded="false"
                       aria-label="Toggle assets"
                     >
-                      <svg width="10" height="10" viewBox="0 0 10 10">
+                      <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                         <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                       </svg>
                     </button>
@@ -742,7 +752,7 @@
                       aria-expanded="false"
                       aria-label="Toggle creator"
                     >
-                      <svg width="10" height="10" viewBox="0 0 10 10">
+                      <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                         <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                       </svg>
                     </button>
@@ -869,7 +879,7 @@
                       aria-expanded="false"
                       aria-label="Toggle matching_downtimes"
                     >
-                      <svg width="10" height="10" viewBox="0 0 10 10">
+                      <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                         <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                       </svg>
                     </button>
@@ -927,7 +937,7 @@
                         aria-expanded="false"
                         aria-label="Toggle scope"
                       >
-                        <svg width="10" height="10" viewBox="0 0 10 10">
+                        <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                           <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                         </svg>
                       </button>
@@ -1036,7 +1046,7 @@
                       aria-expanded="false"
                       aria-label="Toggle options"
                     >
-                      <svg width="10" height="10" viewBox="0 0 10 10">
+                      <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                         <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                       </svg>
                     </button>
@@ -1065,7 +1075,7 @@
                         aria-expanded="false"
                         aria-label="Toggle aggregation"
                       >
-                        <svg width="10" height="10" viewBox="0 0 10 10">
+                        <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                           <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                         </svg>
                       </button>
@@ -1141,7 +1151,7 @@
                         aria-expanded="false"
                         aria-label="Toggle device_ids"
                       >
-                        <svg width="10" height="10" viewBox="0 0 10 10">
+                        <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                           <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                         </svg>
                       </button>
@@ -1550,7 +1560,7 @@
                         aria-expanded="false"
                         aria-label="Toggle notify_by"
                       >
-                        <svg width="10" height="10" viewBox="0 0 10 10">
+                        <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                           <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                         </svg>
                       </button>
@@ -1697,7 +1707,7 @@
                         aria-expanded="false"
                         aria-label="Toggle renotify_statuses"
                       >
-                        <svg width="10" height="10" viewBox="0 0 10 10">
+                        <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                           <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                         </svg>
                       </button>
@@ -1771,7 +1781,7 @@
                         aria-expanded="false"
                         aria-label="Toggle scheduling_options"
                       >
-                        <svg width="10" height="10" viewBox="0 0 10 10">
+                        <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                           <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                         </svg>
                       </button>
@@ -1800,7 +1810,7 @@
                           aria-expanded="false"
                           aria-label="Toggle custom_schedule"
                         >
-                          <svg width="10" height="10" viewBox="0 0 10 10">
+                          <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                             <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                           </svg>
                         </button>
@@ -1832,7 +1842,7 @@
                             aria-expanded="false"
                             aria-label="Toggle recurrences"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -1919,7 +1929,7 @@
                           aria-expanded="false"
                           aria-label="Toggle evaluation_window"
                         >
-                          <svg width="10" height="10" viewBox="0 0 10 10">
+                          <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                             <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                           </svg>
                         </button>
@@ -2068,7 +2078,7 @@
                         aria-expanded="false"
                         aria-label="Toggle threshold_windows"
                       >
-                        <svg width="10" height="10" viewBox="0 0 10 10">
+                        <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                           <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                         </svg>
                       </button>
@@ -2134,7 +2144,7 @@
                         aria-expanded="false"
                         aria-label="Toggle thresholds"
                       >
-                        <svg width="10" height="10" viewBox="0 0 10 10">
+                        <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                           <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                         </svg>
                       </button>
@@ -2277,7 +2287,7 @@
                         aria-expanded="false"
                         aria-label="Toggle variables"
                       >
-                        <svg width="10" height="10" viewBox="0 0 10 10">
+                        <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                           <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                         </svg>
                       </button>
@@ -2307,7 +2317,7 @@
                           aria-expanded="false"
                           aria-label="Toggle "
                         >
-                          <svg width="10" height="10" viewBox="0 0 10 10">
+                          <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                             <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                           </svg>
                         </button>
@@ -2342,7 +2352,7 @@
                             aria-expanded="false"
                             aria-label="Toggle compute"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -2483,7 +2493,7 @@
                             aria-expanded="false"
                             aria-label="Toggle group_by"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -2551,7 +2561,7 @@
                               aria-expanded="false"
                               aria-label="Toggle sort"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -2651,7 +2661,7 @@
                             aria-expanded="false"
                             aria-label="Toggle indexes"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -2717,7 +2727,7 @@
                             aria-expanded="false"
                             aria-label="Toggle search"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -2892,7 +2902,7 @@
                             aria-expanded="false"
                             aria-label="Toggle group_by"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -2961,7 +2971,7 @@
                             aria-expanded="false"
                             aria-label="Toggle monitor_options"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -3044,7 +3054,7 @@
                               aria-expanded="false"
                               aria-label="Toggle group_by_columns"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -3166,7 +3176,7 @@
                             aria-expanded="false"
                             aria-label="Toggle augment_query"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -3205,7 +3215,7 @@
                               aria-expanded="false"
                               aria-label="Toggle compute"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -3346,7 +3356,7 @@
                               aria-expanded="false"
                               aria-label="Toggle group_by"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -3414,7 +3424,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle sort"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -3516,7 +3532,7 @@
                               aria-expanded="false"
                               aria-label="Toggle indexes"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -3586,7 +3602,7 @@
                               aria-expanded="false"
                               aria-label="Toggle search"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -3641,7 +3657,7 @@
                               aria-expanded="false"
                               aria-label="Toggle columns"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -3788,7 +3804,7 @@
                             aria-expanded="false"
                             aria-label="Toggle base_query"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -3824,7 +3840,7 @@
                               aria-expanded="false"
                               aria-label="Toggle compute"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -3965,7 +3981,7 @@
                               aria-expanded="false"
                               aria-label="Toggle group_by"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -4033,7 +4049,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle sort"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -4135,7 +4157,7 @@
                               aria-expanded="false"
                               aria-label="Toggle indexes"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -4205,7 +4227,7 @@
                               aria-expanded="false"
                               aria-label="Toggle search"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -4346,7 +4368,7 @@
                             aria-expanded="false"
                             aria-label="Toggle compute"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -4485,7 +4507,7 @@
                             aria-expanded="false"
                             aria-label="Toggle group_by"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -4554,7 +4576,7 @@
                               aria-expanded="false"
                               aria-label="Toggle sort"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -4654,7 +4676,7 @@
                             aria-expanded="false"
                             aria-label="Toggle join_condition"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -4765,7 +4787,7 @@
                             aria-expanded="false"
                             aria-label="Toggle base_query"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -4801,7 +4823,7 @@
                               aria-expanded="false"
                               aria-label="Toggle compute"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -4942,7 +4964,7 @@
                               aria-expanded="false"
                               aria-label="Toggle group_by"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -5010,7 +5032,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle sort"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -5112,7 +5140,7 @@
                               aria-expanded="false"
                               aria-label="Toggle indexes"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -5182,7 +5210,7 @@
                               aria-expanded="false"
                               aria-label="Toggle search"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -5323,7 +5351,7 @@
                             aria-expanded="false"
                             aria-label="Toggle compute"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -5461,7 +5489,7 @@
                             aria-expanded="false"
                             aria-label="Toggle filter_query"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -5500,7 +5528,7 @@
                               aria-expanded="false"
                               aria-label="Toggle compute"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -5641,7 +5669,7 @@
                               aria-expanded="false"
                               aria-label="Toggle group_by"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -5709,7 +5737,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle sort"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -5811,7 +5845,7 @@
                               aria-expanded="false"
                               aria-label="Toggle indexes"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -5881,7 +5915,7 @@
                               aria-expanded="false"
                               aria-label="Toggle search"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -5936,7 +5970,7 @@
                               aria-expanded="false"
                               aria-label="Toggle columns"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -6083,7 +6117,7 @@
                             aria-expanded="false"
                             aria-label="Toggle filters"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -6175,7 +6209,7 @@
                             aria-expanded="false"
                             aria-label="Toggle group_by"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -6243,7 +6277,7 @@
                               aria-expanded="false"
                               aria-label="Toggle sort"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -6398,7 +6432,7 @@
                       aria-expanded="false"
                       aria-label="Toggle restricted_roles"
                     >
-                      <svg width="10" height="10" viewBox="0 0 10 10">
+                      <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                         <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                       </svg>
                     </button>
@@ -6448,7 +6482,7 @@
                       aria-expanded="false"
                       aria-label="Toggle state"
                     >
-                      <svg width="10" height="10" viewBox="0 0 10 10">
+                      <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                         <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                       </svg>
                     </button>
@@ -6488,7 +6522,7 @@
                       aria-expanded="false"
                       aria-label="Toggle tags"
                     >
-                      <svg width="10" height="10" viewBox="0 0 10 10">
+                      <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                         <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                       </svg>
                     </button>
@@ -6592,7 +6626,7 @@
                       component-url="/_astro/CopyButton.HASH.js"
                       component-export="CopyButton"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"content":[0,"{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}"]}'
+                      props='{"content":[0,"{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                       ssr
                       client="idle"
                       opts='{"name":"CopyButton","value":true}'
@@ -6759,7 +6793,7 @@
                             aria-expanded="false"
                             aria-label="Toggle assets"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -6906,7 +6940,7 @@
                             aria-expanded="false"
                             aria-label="Toggle creator"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -7045,7 +7079,7 @@
                             aria-expanded="false"
                             aria-label="Toggle matching_downtimes"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -7107,7 +7141,7 @@
                               aria-expanded="false"
                               aria-label="Toggle scope"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -7228,7 +7262,7 @@
                             aria-expanded="false"
                             aria-label="Toggle options"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -7257,7 +7291,7 @@
                               aria-expanded="false"
                               aria-label="Toggle aggregation"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -7341,7 +7375,7 @@
                               aria-expanded="false"
                               aria-label="Toggle device_ids"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -7762,7 +7796,7 @@
                               aria-expanded="false"
                               aria-label="Toggle notify_by"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -7911,7 +7945,7 @@
                               aria-expanded="false"
                               aria-label="Toggle renotify_statuses"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -7988,7 +8022,7 @@
                               aria-expanded="false"
                               aria-label="Toggle scheduling_options"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -8017,7 +8051,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle custom_schedule"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -8049,7 +8089,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle recurrences"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -8141,7 +8187,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle evaluation_window"
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -8296,7 +8348,7 @@
                               aria-expanded="false"
                               aria-label="Toggle threshold_windows"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -8364,7 +8416,7 @@
                               aria-expanded="false"
                               aria-label="Toggle thresholds"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -8527,7 +8579,7 @@
                               aria-expanded="false"
                               aria-label="Toggle variables"
                             >
-                              <svg width="10" height="10" viewBox="0 0 10 10">
+                              <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                                 <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                               </svg>
                             </button>
@@ -8557,7 +8609,13 @@
                                 aria-expanded="false"
                                 aria-label="Toggle "
                               >
-                                <svg width="10" height="10" viewBox="0 0 10 10">
+                                <svg
+                                  class="expand-chevron"
+                                  width="10"
+                                  height="10"
+                                  viewBox="0 0 10 10"
+                                  aria-hidden="true"
+                                >
                                   <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                                 </svg>
                               </button>
@@ -8592,7 +8650,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle compute"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -8744,7 +8808,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle group_by"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -8819,7 +8889,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle sort"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -8926,7 +9002,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle indexes"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -9005,7 +9087,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle search"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -9206,7 +9294,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle group_by"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -9283,7 +9377,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle monitor_options"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -9371,7 +9471,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle group_by_columns"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -9515,7 +9621,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle augment_query"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -9561,7 +9673,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle compute"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -9715,7 +9833,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle group_by"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -9792,7 +9916,13 @@
                                       aria-expanded="false"
                                       aria-label="Toggle sort"
                                     >
-                                      <svg width="10" height="10" viewBox="0 0 10 10">
+                                      <svg
+                                        class="expand-chevron"
+                                        width="10"
+                                        height="10"
+                                        viewBox="0 0 10 10"
+                                        aria-hidden="true"
+                                      >
                                         <path
                                           d="M3 1 L7 5 L3 9"
                                           fill="none"
@@ -9907,7 +10037,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle indexes"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -9990,7 +10126,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle search"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -10052,7 +10194,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle columns"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -10210,7 +10358,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle base_query"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -10255,7 +10409,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle compute"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -10409,7 +10569,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle group_by"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -10486,7 +10652,13 @@
                                       aria-expanded="false"
                                       aria-label="Toggle sort"
                                     >
-                                      <svg width="10" height="10" viewBox="0 0 10 10">
+                                      <svg
+                                        class="expand-chevron"
+                                        width="10"
+                                        height="10"
+                                        viewBox="0 0 10 10"
+                                        aria-hidden="true"
+                                      >
                                         <path
                                           d="M3 1 L7 5 L3 9"
                                           fill="none"
@@ -10601,7 +10773,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle indexes"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -10684,7 +10862,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle search"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -10836,7 +11020,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle compute"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -10986,7 +11176,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle group_by"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -11064,7 +11260,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle sort"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -11171,7 +11373,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle join_condition"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -11301,7 +11509,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle base_query"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -11346,7 +11560,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle compute"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -11500,7 +11720,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle group_by"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -11577,7 +11803,13 @@
                                       aria-expanded="false"
                                       aria-label="Toggle sort"
                                     >
-                                      <svg width="10" height="10" viewBox="0 0 10 10">
+                                      <svg
+                                        class="expand-chevron"
+                                        width="10"
+                                        height="10"
+                                        viewBox="0 0 10 10"
+                                        aria-hidden="true"
+                                      >
                                         <path
                                           d="M3 1 L7 5 L3 9"
                                           fill="none"
@@ -11692,7 +11924,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle indexes"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -11775,7 +12013,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle search"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -11927,7 +12171,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle compute"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -12074,7 +12324,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle filter_query"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -12120,7 +12376,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle compute"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -12274,7 +12536,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle group_by"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -12351,7 +12619,13 @@
                                       aria-expanded="false"
                                       aria-label="Toggle sort"
                                     >
-                                      <svg width="10" height="10" viewBox="0 0 10 10">
+                                      <svg
+                                        class="expand-chevron"
+                                        width="10"
+                                        height="10"
+                                        viewBox="0 0 10 10"
+                                        aria-hidden="true"
+                                      >
                                         <path
                                           d="M3 1 L7 5 L3 9"
                                           fill="none"
@@ -12466,7 +12740,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle indexes"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -12549,7 +12829,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle search"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -12611,7 +12897,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle columns"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -12769,7 +13061,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle filters"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -12872,7 +13170,13 @@
                                   aria-expanded="false"
                                   aria-label="Toggle group_by"
                                 >
-                                  <svg width="10" height="10" viewBox="0 0 10 10">
+                                  <svg
+                                    class="expand-chevron"
+                                    width="10"
+                                    height="10"
+                                    viewBox="0 0 10 10"
+                                    aria-hidden="true"
+                                  >
                                     <path
                                       d="M3 1 L7 5 L3 9"
                                       fill="none"
@@ -12947,7 +13251,13 @@
                                     aria-expanded="false"
                                     aria-label="Toggle sort"
                                   >
-                                    <svg width="10" height="10" viewBox="0 0 10 10">
+                                    <svg
+                                      class="expand-chevron"
+                                      width="10"
+                                      height="10"
+                                      viewBox="0 0 10 10"
+                                      aria-hidden="true"
+                                    >
                                       <path
                                         d="M3 1 L7 5 L3 9"
                                         fill="none"
@@ -13117,7 +13427,7 @@
                             aria-expanded="false"
                             aria-label="Toggle restricted_roles"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -13170,7 +13480,7 @@
                             aria-expanded="false"
                             aria-label="Toggle state"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -13214,7 +13524,7 @@
                             aria-expanded="false"
                             aria-label="Toggle tags"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -13299,7 +13609,7 @@
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"content":[0,"{\n  \"assets\": [\n    {\n      \"category\": \"runbook\",\n      \"name\": \"Monitor Runbook\",\n      \"resource_key\": \"12345\",\n      \"resource_type\": \"notebook\",\n      \"url\": \"/notebooks/12345\"\n    }\n  ],\n  \"draft_status\": \"draft\",\n  \"matching_downtimes\": [\n    {\n      \"end\": 1412792983,\n      \"id\": 1625,\n      \"scope\": [\n        \"env:staging\"\n      ],\n      \"start\": 1412792983\n    }\n  ],\n  \"name\": \"My monitor\",\n  \"options\": {\n    \"aggregation\": {\n      \"group_by\": \"host\",\n      \"metric\": \"metrics.name\",\n      \"type\": \"count\"\n    },\n    \"device_ids\": [\n      \"laptop_large\"\n    ],\n    \"include_tags\": true,\n    \"min_failure_duration\": 0,\n    \"min_location_failed\": 1,\n    \"new_host_delay\": 300,\n    \"notification_preset_name\": \"show_all\",\n    \"notify_audit\": false,\n    \"on_missing_data\": \"default\",\n    \"renotify_interval\": null,\n    \"renotify_statuses\": [\n      \"alert\"\n    ],\n    \"scheduling_options\": {\n      \"custom_schedule\": {\n        \"recurrences\": [\n          {\n            \"rrule\": \"FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR\",\n            \"start\": \"2023-08-31T16:30:00\",\n            \"timezone\": \"Europe/Paris\"\n          }\n        ]\n      },\n      \"evaluation_window\": {\n        \"day_starts\": \"04:00\",\n        \"hour_starts\": 0,\n        \"month_starts\": 1,\n        \"timezone\": \"Europe/Paris\"\n      }\n    },\n    \"timeout_h\": null,\n    \"variables\": [\n      {\n        \"compute\": {\n          \"aggregation\": \"avg\",\n          \"interval\": 60000,\n          \"metric\": \"@duration\",\n          \"name\": \"compute_result\"\n        },\n        \"data_source\": \"rum\",\n        \"group_by\": [\n          {\n            \"facet\": \"status\",\n            \"limit\": 10,\n            \"sort\": {\n              \"order\": \"asc\"\n            }\n          }\n        ],\n        \"indexes\": [\n          \"days-3\",\n          \"days-7\"\n        ],\n        \"name\": \"query_errors\",\n        \"search\": {\n          \"query\": \"service:query\"\n        }\n      }\n    ]\n  },\n  \"overall_state\": \"Alert\",\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"type\": \"query alert\"\n}"]}'
+                          props='{"content":[0,"{\n  \"assets\": [\n    {\n      \"category\": \"runbook\",\n      \"name\": \"Monitor Runbook\",\n      \"resource_key\": \"12345\",\n      \"resource_type\": \"notebook\",\n      \"url\": \"/notebooks/12345\"\n    }\n  ],\n  \"draft_status\": \"draft\",\n  \"matching_downtimes\": [\n    {\n      \"end\": 1412792983,\n      \"id\": 1625,\n      \"scope\": [\n        \"env:staging\"\n      ],\n      \"start\": 1412792983\n    }\n  ],\n  \"name\": \"My monitor\",\n  \"options\": {\n    \"aggregation\": {\n      \"group_by\": \"host\",\n      \"metric\": \"metrics.name\",\n      \"type\": \"count\"\n    },\n    \"device_ids\": [\n      \"laptop_large\"\n    ],\n    \"include_tags\": true,\n    \"min_failure_duration\": 0,\n    \"min_location_failed\": 1,\n    \"new_host_delay\": 300,\n    \"notification_preset_name\": \"show_all\",\n    \"notify_audit\": false,\n    \"on_missing_data\": \"default\",\n    \"renotify_interval\": null,\n    \"renotify_statuses\": [\n      \"alert\"\n    ],\n    \"scheduling_options\": {\n      \"custom_schedule\": {\n        \"recurrences\": [\n          {\n            \"rrule\": \"FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR\",\n            \"start\": \"2023-08-31T16:30:00\",\n            \"timezone\": \"Europe/Paris\"\n          }\n        ]\n      },\n      \"evaluation_window\": {\n        \"day_starts\": \"04:00\",\n        \"hour_starts\": 0,\n        \"month_starts\": 1,\n        \"timezone\": \"Europe/Paris\"\n      }\n    },\n    \"timeout_h\": null,\n    \"variables\": [\n      {\n        \"compute\": {\n          \"aggregation\": \"avg\",\n          \"interval\": 60000,\n          \"metric\": \"@duration\",\n          \"name\": \"compute_result\"\n        },\n        \"data_source\": \"rum\",\n        \"group_by\": [\n          {\n            \"facet\": \"status\",\n            \"limit\": 10,\n            \"sort\": {\n              \"order\": \"asc\"\n            }\n          }\n        ],\n        \"indexes\": [\n          \"days-3\",\n          \"days-7\"\n        ],\n        \"name\": \"query_errors\",\n        \"search\": {\n          \"query\": \"service:query\"\n        }\n      }\n    ]\n  },\n  \"overall_state\": \"Alert\",\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"type\": \"query alert\"\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"CopyButton","value":true}'
@@ -13495,7 +13805,7 @@
                             aria-expanded="false"
                             aria-label="Toggle errors"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -13550,7 +13860,7 @@
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"]}'
+                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"CopyButton","value":true}'
@@ -13658,7 +13968,7 @@
                             aria-expanded="false"
                             aria-label="Toggle errors"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -13713,7 +14023,7 @@
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"]}'
+                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"CopyButton","value":true}'
@@ -13821,7 +14131,7 @@
                             aria-expanded="false"
                             aria-label="Toggle errors"
                           >
-                            <svg width="10" height="10" viewBox="0 0 10 10">
+                            <svg class="expand-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
                               <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5"></path>
                             </svg>
                           </button>
@@ -13876,7 +14186,7 @@
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"]}'
+                          props='{"content":[0,"{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"CopyButton","value":true}'
@@ -13993,7 +14303,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14045,7 +14355,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us3.datadoghq.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us3.datadoghq.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14097,7 +14407,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us5.datadoghq.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us5.datadoghq.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14149,7 +14459,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.eu/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.eu/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14201,7 +14511,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap1.datadoghq.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap1.datadoghq.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14253,7 +14563,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap2.datadoghq.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap2.datadoghq.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14305,7 +14615,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ddog-gov.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ddog-gov.com/api/v1/monitor\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"message\": \"You may need to add web hosts if this is consistently high.\",\n  \"name\": \"Bytes received on host0\",\n  \"options\": {\n    \"no_data_timeframe\": 20,\n    \"notify_no_data\": true\n  },\n  \"query\": \"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} &gt; 100\",\n  \"tags\": [\n    \"app:webserver\",\n    \"frontend\"\n  ],\n  \"type\": \"query alert\"\n}\nEOF"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14359,7 +14669,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"\"\"\"\nCreate a monitor returns \"OK\" response\n\"\"\"\n\nfrom os import environ\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.monitors_api import MonitorsApi\nfrom datadog_api_client.v1.model.monitor import Monitor\nfrom datadog_api_client.v1.model.monitor_type import MonitorType\n\n# there is a valid \"role\" in the system\nROLE_DATA_ID = environ[\"ROLE_DATA_ID\"]\n\nbody = Monitor(\n    name=\"Example-Monitor\",\n    type=MonitorType.LOG_ALERT,\n    query=&#39;logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2&#39;,\n    message=\"some message Notify: @hipchat-channel\",\n    tags=[\n        \"test:examplemonitor\",\n        \"env:ci\",\n    ],\n    priority=3,\n    restricted_roles=[\n        ROLE_DATA_ID,\n    ],\n)\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = MonitorsApi(api_client)\n    response = api_instance.create_monitor(body=body)\n\n    print(response)\n"]}'
+                    props='{"content":[0,"\"\"\"\nCreate a monitor returns \"OK\" response\n\"\"\"\n\nfrom os import environ\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.monitors_api import MonitorsApi\nfrom datadog_api_client.v1.model.monitor import Monitor\nfrom datadog_api_client.v1.model.monitor_type import MonitorType\n\n# there is a valid \"role\" in the system\nROLE_DATA_ID = environ[\"ROLE_DATA_ID\"]\n\nbody = Monitor(\n    name=\"Example-Monitor\",\n    type=MonitorType.LOG_ALERT,\n    query=&#39;logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2&#39;,\n    message=\"some message Notify: @hipchat-channel\",\n    tags=[\n        \"test:examplemonitor\",\n        \"env:ci\",\n    ],\n    priority=3,\n    restricted_roles=[\n        ROLE_DATA_ID,\n    ],\n)\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = MonitorsApi(api_client)\n    response = api_instance.create_monitor(body=body)\n\n    print(response)\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14422,7 +14732,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Create a monitor returns \"OK\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V1::MonitorsAPI.new\n\n# there is a valid \"role\" in the system\nROLE_DATA_ID = ENV[\"ROLE_DATA_ID\"]\n\nbody = DatadogAPIClient::V1::Monitor.new({\n  name: \"Example-Monitor\",\n  type: DatadogAPIClient::V1::MonitorType::LOG_ALERT,\n  query: &#39;logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2&#39;,\n  message: \"some message Notify: @hipchat-channel\",\n  tags: [\n    \"test:examplemonitor\",\n    \"env:ci\",\n  ],\n  priority: 3,\n  restricted_roles: [\n    ROLE_DATA_ID,\n  ],\n})\np api_instance.create_monitor(body)\n"]}'
+                    props='{"content":[0,"# Create a monitor returns \"OK\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V1::MonitorsAPI.new\n\n# there is a valid \"role\" in the system\nROLE_DATA_ID = ENV[\"ROLE_DATA_ID\"]\n\nbody = DatadogAPIClient::V1::Monitor.new({\n  name: \"Example-Monitor\",\n  type: DatadogAPIClient::V1::MonitorType::LOG_ALERT,\n  query: &#39;logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2&#39;,\n  message: \"some message Notify: @hipchat-channel\",\n  tags: [\n    \"test:examplemonitor\",\n    \"env:ci\",\n  ],\n  priority: 3,\n  restricted_roles: [\n    ROLE_DATA_ID,\n  ],\n})\np api_instance.create_monitor(body)\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14474,7 +14784,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"// Create a monitor returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\t// there is a valid \"role\" in the system\n\tRoleDataID := os.Getenv(\"ROLE_DATA_ID\")\n\n\tbody := datadogV1.Monitor{\n\t\tName:    datadog.PtrString(\"Example-Monitor\"),\n\t\tType:    datadogV1.MONITORTYPE_LOG_ALERT,\n\t\tQuery:   `logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2`,\n\t\tMessage: datadog.PtrString(\"some message Notify: @hipchat-channel\"),\n\t\tTags: []string{\n\t\t\t\"test:examplemonitor\",\n\t\t\t\"env:ci\",\n\t\t},\n\t\tPriority: *datadog.NewNullableInt64(datadog.PtrInt64(3)),\n\t\tRestrictedRoles: *datadog.NewNullableList(&amp;[]string{\n\t\t\tRoleDataID,\n\t\t}),\n\t}\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewMonitorsApi(apiClient)\n\tresp, r, err := api.CreateMonitor(ctx, body)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `MonitorsApi.CreateMonitor`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `MonitorsApi.CreateMonitor`:\\n%s\\n\", responseContent)\n}\n"]}'
+                    props='{"content":[0,"// Create a monitor returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\t// there is a valid \"role\" in the system\n\tRoleDataID := os.Getenv(\"ROLE_DATA_ID\")\n\n\tbody := datadogV1.Monitor{\n\t\tName:    datadog.PtrString(\"Example-Monitor\"),\n\t\tType:    datadogV1.MONITORTYPE_LOG_ALERT,\n\t\tQuery:   `logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2`,\n\t\tMessage: datadog.PtrString(\"some message Notify: @hipchat-channel\"),\n\t\tTags: []string{\n\t\t\t\"test:examplemonitor\",\n\t\t\t\"env:ci\",\n\t\t},\n\t\tPriority: *datadog.NewNullableInt64(datadog.PtrInt64(3)),\n\t\tRestrictedRoles: *datadog.NewNullableList(&amp;[]string{\n\t\t\tRoleDataID,\n\t\t}),\n\t}\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewMonitorsApi(apiClient)\n\tresp, r, err := api.CreateMonitor(ctx, body)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `MonitorsApi.CreateMonitor`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `MonitorsApi.CreateMonitor`:\\n%s\\n\", responseContent)\n}\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14549,7 +14859,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"// Create a monitor returns \"OK\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v1.api.MonitorsApi;\nimport com.datadog.api.client.v1.model.Monitor;\nimport com.datadog.api.client.v1.model.MonitorType;\nimport java.util.Arrays;\nimport java.util.Collections;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    MonitorsApi apiInstance = new MonitorsApi(defaultClient);\n\n    // there is a valid \"role\" in the system\n    String ROLE_DATA_ID = System.getenv(\"ROLE_DATA_ID\");\n\n    Monitor body =\n        new Monitor()\n            .name(\"Example-Monitor\")\n            .type(MonitorType.LOG_ALERT)\n            .query(\n                \"\"\"\nlogs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2\n\"\"\")\n            .message(\"some message Notify: @hipchat-channel\")\n            .tags(Arrays.asList(\"test:examplemonitor\", \"env:ci\"))\n            .priority(3L)\n            .restrictedRoles(Collections.singletonList(ROLE_DATA_ID));\n\n    try {\n      Monitor result = apiInstance.createMonitor(body);\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling MonitorsApi#createMonitor\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n"]}'
+                    props='{"content":[0,"// Create a monitor returns \"OK\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v1.api.MonitorsApi;\nimport com.datadog.api.client.v1.model.Monitor;\nimport com.datadog.api.client.v1.model.MonitorType;\nimport java.util.Arrays;\nimport java.util.Collections;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    MonitorsApi apiInstance = new MonitorsApi(defaultClient);\n\n    // there is a valid \"role\" in the system\n    String ROLE_DATA_ID = System.getenv(\"ROLE_DATA_ID\");\n\n    Monitor body =\n        new Monitor()\n            .name(\"Example-Monitor\")\n            .type(MonitorType.LOG_ALERT)\n            .query(\n                \"\"\"\nlogs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2\n\"\"\")\n            .message(\"some message Notify: @hipchat-channel\")\n            .tags(Arrays.asList(\"test:examplemonitor\", \"env:ci\"))\n            .priority(3L)\n            .restrictedRoles(Collections.singletonList(ROLE_DATA_ID));\n\n    try {\n      Monitor result = apiInstance.createMonitor(body);\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling MonitorsApi#createMonitor\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14621,7 +14931,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"/**\n * Create a monitor returns \"OK\" response\n */\n\nimport { client, v1 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v1.MonitorsApi(configuration);\n\n// there is a valid \"role\" in the system\nconst ROLE_DATA_ID = process.env.ROLE_DATA_ID as string;\n\nconst params: v1.MonitorsApiCreateMonitorRequest = {\n  body: {\n    name: \"Example-Monitor\",\n    type: \"log alert\",\n    query: `logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2`,\n    message: \"some message Notify: @hipchat-channel\",\n    tags: [\"test:examplemonitor\", \"env:ci\"],\n    priority: 3,\n    restrictedRoles: [ROLE_DATA_ID],\n  },\n};\n\napiInstance\n  .createMonitor(params)\n  .then((data: v1.Monitor) =&gt; {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) =&gt; console.error(error));\n"]}'
+                    props='{"content":[0,"/**\n * Create a monitor returns \"OK\" response\n */\n\nimport { client, v1 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v1.MonitorsApi(configuration);\n\n// there is a valid \"role\" in the system\nconst ROLE_DATA_ID = process.env.ROLE_DATA_ID as string;\n\nconst params: v1.MonitorsApiCreateMonitorRequest = {\n  body: {\n    name: \"Example-Monitor\",\n    type: \"log alert\",\n    query: `logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2`,\n    message: \"some message Notify: @hipchat-channel\",\n    tags: [\"test:examplemonitor\", \"env:ci\"],\n    priority: 3,\n    restrictedRoles: [ROLE_DATA_ID],\n  },\n};\n\napiInstance\n  .createMonitor(params)\n  .then((data: v1.Monitor) =&gt; {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) =&gt; console.error(error));\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -14682,7 +14992,7 @@
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"// Create a monitor returns \"OK\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV1::api_monitors::MonitorsAPI;\nuse datadog_api_client::datadogV1::model::Monitor;\nuse datadog_api_client::datadogV1::model::MonitorType;\n\n#[tokio::main]\nasync fn main() {\n    // there is a valid \"role\" in the system\n    let role_data_id = std::env::var(\"ROLE_DATA_ID\").unwrap();\n    let body =\n        Monitor::new(\n            r#\"logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2\"#.to_string(),\n            MonitorType::LOG_ALERT,\n        )\n            .message(\"some message Notify: @hipchat-channel\".to_string())\n            .name(\"Example-Monitor\".to_string())\n            .priority(Some(3))\n            .restricted_roles(Some(vec![role_data_id.clone()]))\n            .tags(vec![\"test:examplemonitor\".to_string(), \"env:ci\".to_string()]);\n    let configuration = datadog::Configuration::new();\n    let api = MonitorsAPI::with_config(configuration);\n    let resp = api.create_monitor(body).await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n"]}'
+                    props='{"content":[0,"// Create a monitor returns \"OK\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV1::api_monitors::MonitorsAPI;\nuse datadog_api_client::datadogV1::model::Monitor;\nuse datadog_api_client::datadogV1::model::MonitorType;\n\n#[tokio::main]\nasync fn main() {\n    // there is a valid \"role\" in the system\n    let role_data_id = std::env::var(\"ROLE_DATA_ID\").unwrap();\n    let body =\n        Monitor::new(\n            r#\"logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") &gt; 2\"#.to_string(),\n            MonitorType::LOG_ALERT,\n        )\n            .message(\"some message Notify: @hipchat-channel\".to_string())\n            .name(\"Example-Monitor\".to_string())\n            .priority(Some(3))\n            .restricted_roles(Some(vec![role_data_id.clone()]))\n            .tags(vec![\"test:examplemonitor\".to_string(), \"env:ci\".to_string()]);\n    let configuration = datadog::Configuration::new();\n    let api = MonitorsAPI::with_config(configuration);\n    let resp = api.create_monitor(body).await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n"],"labels":[0,{"Copy code":[0,"Copy code"],"Copy":[0,"Copy"],"Copied!":[0,"Copied!"]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
