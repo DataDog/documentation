@@ -126,9 +126,9 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 1. Click on your project in Xcode and go to the **Package Dependencies** tab.
 2. Add the iOS SDK package dependency by adding `https://github.com/DataDog/dd-sdk-ios.git` as a package URL.
-3. Select the version from the table above.
+3. Select the correct version from the table.
 4. Click on the necessary application target and open the **General** tab.
-5. Scroll down to the **Frameworks, Libraries, and Embedded Content** section and add the dependencies mentioned above.
+5. Scroll down to the **Frameworks, Libraries, and Embedded Content** section and add the necessary dependencies.
 
 #### Add app hang reporting
 
