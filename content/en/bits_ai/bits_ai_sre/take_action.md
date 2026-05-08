@@ -25,7 +25,8 @@ Bits AI SRE recommends corrective steps when applicable to the root cause. These
 Review each recommendation and command before running it in your environment.
 
 ## Triage Suggestions
-Triage Suggestions help you coordinate the response without leaving the investigation page. Bits uses investigation context to prefill messages, incident descriptions, or ticket metadata, so you can take common response tasks with a single click.
+
+Triage Suggestions help you coordinate the response without leaving the investigation page. Bits AI SRE uses investigation context to prefill messages, incident descriptions, or ticket metadata, so you can complete common response tasks with a single click.
 
 Suggestions include but are not limited to
 - Sending Slack messages to update your team on the investigation results
