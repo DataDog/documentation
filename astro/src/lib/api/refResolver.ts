@@ -8,7 +8,19 @@
 
 import type { SchemaField } from "./schemas/schemaField";
 
-/** Maximum recursion depth for circular-reference protection. */
+/**
+ * Maximum row-nesting level emitted in the schema table, matching Hugo's
+ * `assets/scripts/build-api-pages.js` (`if (level > 10) return ''`).
+ *
+ * Counts only parent → child row descents (the same boundary Hugo's
+ * `rowRecursive` uses). $ref resolution, `allOf` merging, and `oneOf`/
+ * `anyOf` unwrapping at the same property level do NOT increment.
+ *
+ * Cycle detection is handled separately by the `visited` set of $ref
+ * strings; Hugo dodges this by replacing circular `items` with the
+ * literal `[Circular]` sentinel upstream, but Astro reads the raw spec
+ * and so still needs an in-pass cycle check.
+ */
 const MAX_DEPTH = 10;
 
 /* ------------------------------------------------------------------ */
@@ -66,6 +78,79 @@ export function resolveRef(spec: any, refString: string): any {
 /* ------------------------------------------------------------------ */
 
 /**
+ * Top-level entry point for converting a request or response body schema
+ * into rows.
+ *
+ * Mirrors the unwrap performed by `schemaTable` in
+ * `assets/scripts/build-api-pages.js` before it calls `rowRecursive`:
+ *
+ * - Top-level array → render the items' fields directly at level 0,
+ *   no wrapping `[Foo]` row.
+ * - Top-level array of arrays → unwrap to the innermost items.
+ * - Top-level array of primitives → no rows (Hugo hides the table).
+ * - Anything else → equivalent to `schemaToFields`.
+ *
+ * `$ref` and `allOf` are resolved before the array check, matching
+ * Hugo's pre-flattened input.
+ */
+export function topLevelSchemaToFields(
+  spec: any,
+  schema: any,
+): SchemaField[] {
+  if (!schema) return [];
+
+  const visited = new Set<string>();
+
+  let resolved: any = schema;
+  while (resolved && resolved.$ref) {
+    if (visited.has(resolved.$ref)) break;
+    visited.add(resolved.$ref);
+    const next = resolveRef(spec, resolved.$ref);
+    if (!next) return [];
+    resolved = next;
+  }
+  if (resolved.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
+  }
+
+  if (resolved.type !== "array") {
+    return schemaToFields(spec, schema);
+  }
+
+  const items = resolved.items;
+  if (!items) return [];
+
+  let resolvedItems: any = items;
+  while (resolvedItems && resolvedItems.$ref) {
+    if (visited.has(resolvedItems.$ref)) break;
+    visited.add(resolvedItems.$ref);
+    const next = resolveRef(spec, resolvedItems.$ref);
+    if (!next) return [];
+    resolvedItems = next;
+  }
+  if (resolvedItems.allOf) {
+    resolvedItems = mergeAllOf(resolvedItems.allOf, spec);
+  }
+
+  if (resolvedItems.type === "array") {
+    return topLevelSchemaToFields(spec, resolvedItems);
+  }
+
+  if (
+    resolvedItems.properties ||
+    resolvedItems.oneOf ||
+    resolvedItems.anyOf
+  ) {
+    // Pass the already-resolved schema, not the original $ref wrapper:
+    // we've added the resolved $refs to `visited` for cycle protection
+    // on later descents, so re-resolving here would self-trigger.
+    return schemaToFields(spec, resolvedItems, visited);
+  }
+
+  return [];
+}
+
+/**
  * Convert an OpenAPI schema object into a `SchemaField[]` tree suitable for
  * rendering in UI components.
  *
@@ -83,21 +168,23 @@ export function resolveRef(spec: any, refString: string): any {
  * @param spec     The full parsed OpenAPI spec object.
  * @param schema   The schema object (or object with `$ref`) to convert.
  * @param visited  Set of `$ref` strings already seen on this path (for cycle detection).
+ * @param level    Hugo-equivalent row-nesting level (0 at the schema root).
  * @returns A flat array of `SchemaField` objects, possibly with nested children.
  */
 export function schemaToFields(
   spec: any,
   schema: any,
   visited: Set<string> = new Set(),
+  level: number = 0,
 ): SchemaField[] {
   if (!schema) return [];
+  if (level > MAX_DEPTH) return [];
 
   // ── $ref resolution ──────────────────────────────────────────────
   if (schema.$ref) {
     const ref: string = schema.$ref;
 
-    // Circular reference guard
-    if (visited.has(ref) || visited.size >= MAX_DEPTH) {
+    if (visited.has(ref)) {
       return [
         {
           name: "(recursive)",
@@ -115,7 +202,7 @@ export function schemaToFields(
 
     const nextVisited = new Set(visited);
     nextVisited.add(ref);
-    return schemaToFields(spec, resolved, nextVisited);
+    return schemaToFields(spec, resolved, nextVisited, level);
   }
 
   // ── oneOf / anyOf (union types) ──────────────────────────────────
@@ -126,7 +213,7 @@ export function schemaToFields(
       const label = variant.$ref ? refName(variant.$ref) : `Option ${idx + 1}`;
       return {
         label,
-        fields: schemaToFields(spec, variant, new Set(visited)),
+        fields: schemaToFields(spec, variant, new Set(visited), level + 2),
       };
     });
 
@@ -147,7 +234,7 @@ export function schemaToFields(
   // ── allOf (merged schemas) ───────────────────────────────────────
   if (schema.allOf) {
     const merged = mergeAllOf(schema.allOf, spec);
-    return schemaToFields(spec, merged, visited);
+    return schemaToFields(spec, merged, visited, level);
   }
 
   // ── object type ──────────────────────────────────────────────────
@@ -163,6 +250,7 @@ export function schemaToFields(
           propSchema,
           requiredSet.has(propName),
           visited,
+          level,
         );
       },
     );
@@ -185,7 +273,9 @@ export function schemaToFields(
     }
 
     const itemTypeName = resolveItemTypeName(items);
-    const children = schemaToFields(spec, items, new Set(visited));
+    const children = arrayItemsHaveChildren(items, spec)
+      ? schemaToFields(spec, items, new Set(visited), level + 1)
+      : [];
 
     return [
       {
@@ -329,6 +419,7 @@ function propertyToField(
   schema: any,
   required: boolean,
   visited: Set<string>,
+  level: number,
 ): SchemaField {
   if (!schema) {
     return {
@@ -348,8 +439,7 @@ function propertyToField(
     const ref = schema.$ref;
     resolvedRef = ref;
 
-    // Circular reference guard
-    if (visited.has(ref) || visited.size >= MAX_DEPTH) {
+    if (visited.has(ref)) {
       return {
         name,
         type: refName(ref),
@@ -374,7 +464,7 @@ function propertyToField(
       const label = variant.$ref ? refName(variant.$ref) : `Option ${idx + 1}`;
       return {
         label,
-        fields: schemaToFields(spec, variant, new Set(nextVisited)),
+        fields: schemaToFields(spec, variant, new Set(nextVisited), level + 2),
       };
     });
 
@@ -392,7 +482,7 @@ function propertyToField(
   // ── allOf ────────────────────────────────────────────────────────
   if (resolved.allOf) {
     const merged = mergeAllOf(resolved.allOf, spec);
-    const children = schemaToFields(spec, merged, nextVisited);
+    const children = schemaToFields(spec, merged, nextVisited, level + 1);
     return {
       name,
       type: "object",
@@ -406,7 +496,7 @@ function propertyToField(
 
   // ── object ───────────────────────────────────────────────────────
   if (resolved.type === "object" || resolved.properties) {
-    const children = schemaToFields(spec, resolved, nextVisited);
+    const children = schemaToFields(spec, resolved, nextVisited, level + 1);
     return {
       name,
       type: "object",
@@ -422,9 +512,10 @@ function propertyToField(
   if (resolved.type === "array") {
     const items = resolved.items;
     const itemTypeName = items ? resolveItemTypeName(items) : "any";
-    const children = items
-      ? schemaToFields(spec, items, new Set(nextVisited))
-      : [];
+    const children =
+      items && arrayItemsHaveChildren(items, spec)
+        ? schemaToFields(spec, items, new Set(nextVisited), level + 1)
+        : [];
 
     return {
       name,
@@ -471,6 +562,34 @@ function resolveItemTypeName(items: any): string {
     return "object";
   }
   return items.type ?? "any";
+}
+
+/**
+ * Decide whether an array's `items` should expand into child rows.
+ *
+ * Mirrors Hugo's `rowRecursive` array branch in
+ * `assets/scripts/build-api-pages.js`, which sets `childData` only when
+ * `items.properties` or `items.oneOf` exists. Primitive items, nested
+ * arrays, and enums get no child row.
+ *
+ * Hugo's upstream pipeline pre-resolves `$ref` and `allOf`, so we do the
+ * same locally before applying that check.
+ */
+function arrayItemsHaveChildren(items: any, spec: any): boolean {
+  if (!items || typeof items !== "object") return false;
+
+  let resolved = items;
+  if (items.$ref) {
+    const r = resolveRef(spec, items.$ref);
+    if (!r) return false;
+    resolved = r;
+  }
+
+  if (resolved.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
+  }
+
+  return !!(resolved.properties || resolved.oneOf || resolved.anyOf);
 }
 
 /**

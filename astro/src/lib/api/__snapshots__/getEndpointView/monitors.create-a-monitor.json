@@ -184,17 +184,7 @@
             "required": false,
             "deprecated": false,
             "readOnly": false,
-            "description": "The scope(s) to which the downtime applies. Must be in `key:value` format. For example, `host:app2`.\nProvide multiple scopes as a comma-separated list like `env:dev,env:prod`.\nThe resulting downtime applies to sources that matches ALL provided scopes (`env:dev` **AND** `env:prod`).",
-            "children": [
-              {
-                "name": "",
-                "type": "string",
-                "required": false,
-                "deprecated": false,
-                "readOnly": false,
-                "description": "A scope. For example, `\"env:staging\"`."
-              }
-            ]
+            "description": "The scope(s) to which the downtime applies. Must be in `key:value` format. For example, `host:app2`.\nProvide multiple scopes as a comma-separated list like `env:dev,env:prod`.\nThe resulting downtime applies to sources that matches ALL provided scopes (`env:dev` **AND** `env:prod`)."
           },
           {
             "name": "start",
@@ -286,28 +276,7 @@
             "required": false,
             "deprecated": true,
             "readOnly": true,
-            "description": "IDs of the device the Synthetics monitor is running on.",
-            "children": [
-              {
-                "name": "",
-                "type": "string",
-                "required": false,
-                "deprecated": false,
-                "readOnly": false,
-                "description": "ID of the device the Synthetics monitor is running on. Same as `SyntheticsDeviceID`.",
-                "enumValues": [
-                  "laptop_large",
-                  "tablet",
-                  "mobile_small",
-                  "chrome.laptop_large",
-                  "chrome.tablet",
-                  "chrome.mobile_small",
-                  "firefox.laptop_large",
-                  "firefox.tablet",
-                  "firefox.mobile_small"
-                ]
-              }
-            ]
+            "description": "IDs of the device the Synthetics monitor is running on."
           },
           {
             "name": "enable_logs_sample",
@@ -450,17 +419,7 @@
             "required": false,
             "deprecated": false,
             "readOnly": false,
-            "description": "Controls what granularity a monitor alerts on. Only available for monitors with groupings.\nFor instance, a monitor grouped by `cluster`, `namespace`, and `pod` can be configured to only notify on each\nnew `cluster` violating the alert conditions by setting `notify_by` to `[\"cluster\"]`. Tags mentioned\nin `notify_by` must be a subset of the grouping tags in the query.\nFor example, a query grouped by `cluster` and `namespace` cannot notify on `region`.\nSetting `notify_by` to `[\"*\"]` configures the monitor to notify as a simple-alert.",
-            "children": [
-              {
-                "name": "",
-                "type": "string",
-                "required": false,
-                "deprecated": false,
-                "readOnly": false,
-                "description": "A grouping tag."
-              }
-            ]
+            "description": "Controls what granularity a monitor alerts on. Only available for monitors with groupings.\nFor instance, a monitor grouped by `cluster`, `namespace`, and `pod` can be configured to only notify on each\nnew `cluster` violating the alert conditions by setting `notify_by` to `[\"cluster\"]`. Tags mentioned\nin `notify_by` must be a subset of the grouping tags in the query.\nFor example, a query grouped by `cluster` and `namespace` cannot notify on `region`.\nSetting `notify_by` to `[\"*\"]` configures the monitor to notify as a simple-alert."
           },
           {
             "name": "notify_no_data",
@@ -507,22 +466,7 @@
             "required": false,
             "deprecated": false,
             "readOnly": false,
-            "description": "The types of monitor statuses for which re-notification messages are sent.\nDefault: **null** if `renotify_interval` is **null**.\nIf `renotify_interval` is set, defaults to renotify on `Alert` and `No Data`.",
-            "children": [
-              {
-                "name": "",
-                "type": "string",
-                "required": false,
-                "deprecated": false,
-                "readOnly": false,
-                "description": "The different statuses for which renotification is supported.",
-                "enumValues": [
-                  "alert",
-                  "warn",
-                  "no data"
-                ]
-              }
-            ]
+            "description": "The types of monitor statuses for which re-notification messages are sent.\nDefault: **null** if `renotify_interval` is **null**.\nIf `renotify_interval` is set, defaults to renotify on `Alert` and `No Data`."
           },
           {
             "name": "require_full_window",
@@ -917,17 +861,7 @@
                         "required": false,
                         "deprecated": false,
                         "readOnly": false,
-                        "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once.",
-                        "children": [
-                          {
-                            "name": "",
-                            "type": "string",
-                            "required": false,
-                            "deprecated": false,
-                            "readOnly": false,
-                            "description": "A log index set up for your organization. For additional indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes) documentation."
-                          }
-                        ]
+                        "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
                       },
                       {
                         "name": "name",
@@ -1038,17 +972,7 @@
                         "required": false,
                         "deprecated": false,
                         "readOnly": false,
-                        "description": "Optional grouping fields for aggregation.",
-                        "children": [
-                          {
-                            "name": "",
-                            "type": "string",
-                            "required": false,
-                            "deprecated": false,
-                            "readOnly": false,
-                            "description": "A field name to group results by."
-                          }
-                        ]
+                        "description": "Optional grouping fields for aggregation."
                       },
                       {
                         "name": "measure",
@@ -1096,17 +1020,7 @@
                             "required": false,
                             "deprecated": false,
                             "readOnly": false,
-                            "description": "Columns to group results by.",
-                            "children": [
-                              {
-                                "name": "",
-                                "type": "string",
-                                "required": false,
-                                "deprecated": false,
-                                "readOnly": false,
-                                "description": "A column name to group results by."
-                              }
-                            ]
+                            "description": "Columns to group results by."
                           },
                           {
                             "name": "model_type_override",
@@ -1324,17 +1238,7 @@
                                 "required": false,
                                 "deprecated": false,
                                 "readOnly": false,
-                                "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once.",
-                                "children": [
-                                  {
-                                    "name": "",
-                                    "type": "string",
-                                    "required": false,
-                                    "deprecated": false,
-                                    "readOnly": false,
-                                    "description": "A log index set up for your organization. For additional indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes) documentation."
-                                  }
-                                ]
+                                "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
                               },
                               {
                                 "name": "name",
@@ -1604,17 +1508,7 @@
                                 "required": false,
                                 "deprecated": false,
                                 "readOnly": false,
-                                "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once.",
-                                "children": [
-                                  {
-                                    "name": "",
-                                    "type": "string",
-                                    "required": false,
-                                    "deprecated": false,
-                                    "readOnly": false,
-                                    "description": "A log index set up for your organization. For additional indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes) documentation."
-                                  }
-                                ]
+                                "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
                               },
                               {
                                 "name": "name",
@@ -2070,17 +1964,7 @@
                                 "required": false,
                                 "deprecated": false,
                                 "readOnly": false,
-                                "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once.",
-                                "children": [
-                                  {
-                                    "name": "",
-                                    "type": "string",
-                                    "required": false,
-                                    "deprecated": false,
-                                    "readOnly": false,
-                                    "description": "A log index set up for your organization. For additional indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes) documentation."
-                                  }
-                                ]
+                                "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
                               },
                               {
                                 "name": "name",
@@ -2406,17 +2290,7 @@
                                 "required": false,
                                 "deprecated": false,
                                 "readOnly": false,
-                                "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once.",
-                                "children": [
-                                  {
-                                    "name": "",
-                                    "type": "string",
-                                    "required": false,
-                                    "deprecated": false,
-                                    "readOnly": false,
-                                    "description": "A log index set up for your organization. For additional indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes) documentation."
-                                  }
-                                ]
+                                "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
                               },
                               {
                                 "name": "name",
@@ -2683,17 +2557,7 @@
         "required": false,
         "deprecated": false,
         "readOnly": false,
-        "description": "A list of unique role identifiers to define which roles are allowed to edit the monitor. The unique identifiers for all roles can be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) and are located in the `data.id` field. Editing a monitor includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time. You can use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage write authorization for individual monitors by teams and users, in addition to roles.",
-        "children": [
-          {
-            "name": "",
-            "type": "string",
-            "required": false,
-            "deprecated": false,
-            "readOnly": false,
-            "description": "A role UUID."
-          }
-        ]
+        "description": "A list of unique role identifiers to define which roles are allowed to edit the monitor. The unique identifiers for all roles can be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) and are located in the `data.id` field. Editing a monitor includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time. You can use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage write authorization for individual monitors by teams and users, in addition to roles."
       },
       {
         "name": "state",
@@ -2719,17 +2583,7 @@
         "required": false,
         "deprecated": false,
         "readOnly": false,
-        "description": "Tags associated to your monitor.",
-        "children": [
-          {
-            "name": "",
-            "type": "string",
-            "required": false,
-            "deprecated": false,
-            "readOnly": false,
-            "description": "A Datadog tag."
-          }
-        ]
+        "description": "Tags associated to your monitor."
       },
       {
         "name": "type",
@@ -2932,17 +2786,7 @@
               "required": false,
               "deprecated": false,
               "readOnly": false,
-              "description": "The scope(s) to which the downtime applies. Must be in `key:value` format. For example, `host:app2`.\nProvide multiple scopes as a comma-separated list like `env:dev,env:prod`.\nThe resulting downtime applies to sources that matches ALL provided scopes (`env:dev` **AND** `env:prod`).",
-              "children": [
-                {
-                  "name": "",
-                  "type": "string",
-                  "required": false,
-                  "deprecated": false,
-                  "readOnly": false,
-                  "description": "A scope. For example, `\"env:staging\"`."
-                }
-              ]
+              "description": "The scope(s) to which the downtime applies. Must be in `key:value` format. For example, `host:app2`.\nProvide multiple scopes as a comma-separated list like `env:dev,env:prod`.\nThe resulting downtime applies to sources that matches ALL provided scopes (`env:dev` **AND** `env:prod`)."
             },
             {
               "name": "start",
@@ -3034,28 +2878,7 @@
               "required": false,
               "deprecated": true,
               "readOnly": true,
-              "description": "IDs of the device the Synthetics monitor is running on.",
-              "children": [
-                {
-                  "name": "",
-                  "type": "string",
-                  "required": false,
-                  "deprecated": false,
-                  "readOnly": false,
-                  "description": "ID of the device the Synthetics monitor is running on. Same as `SyntheticsDeviceID`.",
-                  "enumValues": [
-                    "laptop_large",
-                    "tablet",
-                    "mobile_small",
-                    "chrome.laptop_large",
-                    "chrome.tablet",
-                    "chrome.mobile_small",
-                    "firefox.laptop_large",
-                    "firefox.tablet",
-                    "firefox.mobile_small"
-                  ]
-                }
-              ]
+              "description": "IDs of the device the Synthetics monitor is running on."
             },
             {
               "name": "enable_logs_sample",
@@ -3198,17 +3021,7 @@
               "required": false,
               "deprecated": false,
               "readOnly": false,
-              "description": "Controls what granularity a monitor alerts on. Only available for monitors with groupings.\nFor instance, a monitor grouped by `cluster`, `namespace`, and `pod` can be configured to only notify on each\nnew `cluster` violating the alert conditions by setting `notify_by` to `[\"cluster\"]`. Tags mentioned\nin `notify_by` must be a subset of the grouping tags in the query.\nFor example, a query grouped by `cluster` and `namespace` cannot notify on `region`.\nSetting `notify_by` to `[\"*\"]` configures the monitor to notify as a simple-alert.",
-              "children": [
-                {
-                  "name": "",
-                  "type": "string",
-                  "required": false,
-                  "deprecated": false,
-                  "readOnly": false,
-                  "description": "A grouping tag."
-                }
-              ]
+              "description": "Controls what granularity a monitor alerts on. Only available for monitors with groupings.\nFor instance, a monitor grouped by `cluster`, `namespace`, and `pod` can be configured to only notify on each\nnew `cluster` violating the alert conditions by setting `notify_by` to `[\"cluster\"]`. Tags mentioned\nin `notify_by` must be a subset of the grouping tags in the query.\nFor example, a query grouped by `cluster` and `namespace` cannot notify on `region`.\nSetting `notify_by` to `[\"*\"]` configures the monitor to notify as a simple-alert."
             },
             {
               "name": "notify_no_data",
@@ -3255,22 +3068,7 @@
               "required": false,
               "deprecated": false,
               "readOnly": false,
-              "description": "The types of monitor statuses for which re-notification messages are sent.\nDefault: **null** if `renotify_interval` is **null**.\nIf `renotify_interval` is set, defaults to renotify on `Alert` and `No Data`.",
-              "children": [
-                {
-                  "name": "",
-                  "type": "string",
-                  "required": false,
-                  "deprecated": false,
-                  "readOnly": false,
-                  "description": "The different statuses for which renotification is supported.",
-                  "enumValues": [
-                    "alert",
-                    "warn",
-                    "no data"
-                  ]
-                }
-              ]
+              "description": "The types of monitor statuses for which re-notification messages are sent.\nDefault: **null** if `renotify_interval` is **null**.\nIf `renotify_interval` is set, defaults to renotify on `Alert` and `No Data`."
             },
             {
               "name": "require_full_window",
@@ -3665,17 +3463,7 @@
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
-                          "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once.",
-                          "children": [
-                            {
-                              "name": "",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "A log index set up for your organization. For additional indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes) documentation."
-                            }
-                          ]
+                          "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
                         },
                         {
                           "name": "name",
@@ -3786,17 +3574,7 @@
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
-                          "description": "Optional grouping fields for aggregation.",
-                          "children": [
-                            {
-                              "name": "",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "A field name to group results by."
-                            }
-                          ]
+                          "description": "Optional grouping fields for aggregation."
                         },
                         {
                           "name": "measure",
@@ -3844,17 +3622,7 @@
                               "required": false,
                               "deprecated": false,
                               "readOnly": false,
-                              "description": "Columns to group results by.",
-                              "children": [
-                                {
-                                  "name": "",
-                                  "type": "string",
-                                  "required": false,
-                                  "deprecated": false,
-                                  "readOnly": false,
-                                  "description": "A column name to group results by."
-                                }
-                              ]
+                              "description": "Columns to group results by."
                             },
                             {
                               "name": "model_type_override",
@@ -4072,17 +3840,7 @@
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
-                                  "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once.",
-                                  "children": [
-                                    {
-                                      "name": "",
-                                      "type": "string",
-                                      "required": false,
-                                      "deprecated": false,
-                                      "readOnly": false,
-                                      "description": "A log index set up for your organization. For additional indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes) documentation."
-                                    }
-                                  ]
+                                  "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
                                 },
                                 {
                                   "name": "name",
@@ -4352,17 +4110,7 @@
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
-                                  "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once.",
-                                  "children": [
-                                    {
-                                      "name": "",
-                                      "type": "string",
-                                      "required": false,
-                                      "deprecated": false,
-                                      "readOnly": false,
-                                      "description": "A log index set up for your organization. For additional indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes) documentation."
-                                    }
-                                  ]
+                                  "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
                                 },
                                 {
                                   "name": "name",
@@ -4818,17 +4566,7 @@
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
-                                  "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once.",
-                                  "children": [
-                                    {
-                                      "name": "",
-                                      "type": "string",
-                                      "required": false,
-                                      "deprecated": false,
-                                      "readOnly": false,
-                                      "description": "A log index set up for your organization. For additional indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes) documentation."
-                                    }
-                                  ]
+                                  "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
                                 },
                                 {
                                   "name": "name",
@@ -5154,17 +4892,7 @@
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
-                                  "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once.",
-                                  "children": [
-                                    {
-                                      "name": "",
-                                      "type": "string",
-                                      "required": false,
-                                      "deprecated": false,
-                                      "readOnly": false,
-                                      "description": "A log index set up for your organization. For additional indexes, see the [multiple indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes) documentation."
-                                    }
-                                  ]
+                                  "description": "An array of index names to query in the stream. Omit or use `[]` to query all indexes at once."
                                 },
                                 {
                                   "name": "name",
@@ -5431,17 +5159,7 @@
           "required": false,
           "deprecated": false,
           "readOnly": false,
-          "description": "A list of unique role identifiers to define which roles are allowed to edit the monitor. The unique identifiers for all roles can be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) and are located in the `data.id` field. Editing a monitor includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time. You can use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage write authorization for individual monitors by teams and users, in addition to roles.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "A role UUID."
-            }
-          ]
+          "description": "A list of unique role identifiers to define which roles are allowed to edit the monitor. The unique identifiers for all roles can be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles) and are located in the `data.id` field. Editing a monitor includes any updates to the monitor configuration, monitor deletion, and muting of the monitor for any amount of time. You can use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage write authorization for individual monitors by teams and users, in addition to roles."
         },
         {
           "name": "state",
@@ -5467,17 +5185,7 @@
           "required": false,
           "deprecated": false,
           "readOnly": false,
-          "description": "Tags associated to your monitor.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "A Datadog tag."
-            }
-          ]
+          "description": "Tags associated to your monitor."
         },
         {
           "name": "type",
@@ -5528,17 +5236,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "Array of errors returned by the API.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "Error description."
-            }
-          ]
+          "description": "Array of errors returned by the API."
         }
       ],
       "examples": [
@@ -5558,17 +5256,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "Array of errors returned by the API.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "Error description."
-            }
-          ]
+          "description": "Array of errors returned by the API."
         }
       ],
       "examples": [
@@ -5588,17 +5276,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "Array of errors returned by the API.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "Error description."
-            }
-          ]
+          "description": "Array of errors returned by the API."
         }
       ],
       "examples": [

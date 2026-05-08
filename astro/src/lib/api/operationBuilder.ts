@@ -6,7 +6,7 @@
  */
 
 import type { OpenAPIV3 } from "openapi-types";
-import { resolveRef, schemaToFields } from "./refResolver";
+import { resolveRef, topLevelSchemaToFields } from "./refResolver";
 import { buildCurlCommand } from "./curlBuilder";
 import { getRegions } from "./regionResolver";
 import type { SchemaField } from "./schemas/schemaField";
@@ -105,7 +105,7 @@ export function extractRequestBody(
   if (!jsonContent) return undefined;
 
   const schema = jsonContent.schema
-    ? schemaToFields(spec, jsonContent.schema)
+    ? topLevelSchemaToFields(spec, jsonContent.schema)
     : [];
 
   const examples: Array<{ name: string; value: string }> = [];
@@ -170,7 +170,7 @@ export function extractResponses(
     let schema: SchemaField[] | undefined;
     const jsonContent = resolved?.content?.["application/json"];
     if (jsonContent?.schema) {
-      schema = schemaToFields(spec, jsonContent.schema);
+      schema = topLevelSchemaToFields(spec, jsonContent.schema);
     }
 
     let examples: Array<{ name: string; value: string }> | undefined;

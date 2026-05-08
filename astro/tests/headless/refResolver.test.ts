@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { resolveRef, schemaToFields, paramsToFields } from '@lib/api/refResolver';
+import {
+  resolveRef,
+  schemaToFields,
+  paramsToFields,
+  topLevelSchemaToFields,
+} from '@lib/api/refResolver';
 
 describe('resolveRef', () => {
   it('resolves a simple $ref path', () => {
@@ -237,5 +242,111 @@ describe('paramsToFields', () => {
     const fields = paramsToFields(spec, params);
     expect(fields).toHaveLength(1);
     expect(fields[0].name).toBe('dashboard_id');
+  });
+});
+
+describe('topLevelSchemaToFields', () => {
+  it('unwraps a top-level array of objects to its items\' fields', () => {
+    const spec = {};
+    const schema = {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          name: { type: 'string' },
+        },
+        required: ['id'],
+      },
+    };
+
+    const fields = topLevelSchemaToFields(spec, schema);
+    expect(fields).toHaveLength(2);
+    expect(fields.map((f) => f.name)).toEqual(['id', 'name']);
+  });
+
+  it('unwraps a top-level array of $ref to its items\' fields', () => {
+    const spec = {
+      components: {
+        schemas: {
+          Item: {
+            type: 'object',
+            properties: { value: { type: 'string' } },
+          },
+        },
+      },
+    };
+    const schema = {
+      type: 'array',
+      items: { $ref: '#/components/schemas/Item' },
+    };
+
+    const fields = topLevelSchemaToFields(spec, schema);
+    expect(fields).toHaveLength(1);
+    expect(fields[0].name).toBe('value');
+  });
+
+  it('returns no rows for a top-level array of primitives', () => {
+    const spec = {};
+    const schema = {
+      type: 'array',
+      items: { type: 'string' },
+    };
+
+    expect(topLevelSchemaToFields(spec, schema)).toEqual([]);
+  });
+
+  it('unwraps a top-level array-of-arrays to the innermost items', () => {
+    const spec = {};
+    const schema = {
+      type: 'array',
+      items: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: { x: { type: 'integer' } },
+        },
+      },
+    };
+
+    const fields = topLevelSchemaToFields(spec, schema);
+    expect(fields).toHaveLength(1);
+    expect(fields[0].name).toBe('x');
+  });
+
+  it('falls through to schemaToFields for non-array schemas', () => {
+    const spec = {};
+    const schema = {
+      type: 'object',
+      properties: {
+        items: { type: 'array', items: { type: 'string' } },
+      },
+    };
+
+    const fields = topLevelSchemaToFields(spec, schema);
+    expect(fields).toHaveLength(1);
+    expect(fields[0].name).toBe('items');
+    expect(fields[0].type).toBe('[string]');
+  });
+
+  it('resolves $ref at the top level before checking for array', () => {
+    const spec = {
+      components: {
+        schemas: {
+          ListResponse: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: { id: { type: 'string' } },
+            },
+          },
+        },
+      },
+    };
+    const schema = { $ref: '#/components/schemas/ListResponse' };
+
+    const fields = topLevelSchemaToFields(spec, schema);
+    expect(fields).toHaveLength(1);
+    expect(fields[0].name).toBe('id');
   });
 });

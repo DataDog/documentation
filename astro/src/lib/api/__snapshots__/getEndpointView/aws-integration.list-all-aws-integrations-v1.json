@@ -98,17 +98,7 @@
               "required": false,
               "deprecated": false,
               "readOnly": false,
-              "description": "An array of [AWS regions](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints)\nto exclude from metrics collection.",
-              "children": [
-                {
-                  "name": "",
-                  "type": "string",
-                  "required": false,
-                  "deprecated": false,
-                  "readOnly": false,
-                  "description": "Regions to exclude."
-                }
-              ]
+              "description": "An array of [AWS regions](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints)\nto exclude from metrics collection."
             },
             {
               "name": "extended_resource_collection_enabled",
@@ -125,17 +115,7 @@
               "required": false,
               "deprecated": false,
               "readOnly": false,
-              "description": "The array of EC2 tags (in the form `key:value`) defines a filter that Datadog uses when collecting metrics from EC2.\nWildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.\nOnly hosts that match one of the defined tags\nwill be imported into Datadog. The rest will be ignored.\nHost matching a given tag can also be excluded by adding `!` before the tag.\nFor example, `env:production,instance-type:c1.*,!region:us-east-1`",
-              "children": [
-                {
-                  "name": "",
-                  "type": "string",
-                  "required": false,
-                  "deprecated": false,
-                  "readOnly": false,
-                  "description": "The list of the filter_tags."
-                }
-              ]
+              "description": "The array of EC2 tags (in the form `key:value`) defines a filter that Datadog uses when collecting metrics from EC2.\nWildcards, such as `?` (for single characters) and `*` (for multiple characters) can also be used.\nOnly hosts that match one of the defined tags\nwill be imported into Datadog. The rest will be ignored.\nHost matching a given tag can also be excluded by adding `!` before the tag.\nFor example, `env:production,instance-type:c1.*,!region:us-east-1`"
             },
             {
               "name": "host_tags",
@@ -143,17 +123,7 @@
               "required": false,
               "deprecated": false,
               "readOnly": false,
-              "description": "Array of tags (in the form `key:value`) to add to all hosts\nand metrics reporting through this integration.",
-              "children": [
-                {
-                  "name": "",
-                  "type": "string",
-                  "required": false,
-                  "deprecated": false,
-                  "readOnly": false,
-                  "description": "The list of the host_tags."
-                }
-              ]
+              "description": "Array of tags (in the form `key:value`) to add to all hosts\nand metrics reporting through this integration."
             },
             {
               "name": "metrics_collection_enabled",
@@ -209,17 +179,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "Array of errors returned by the API.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "Error description."
-            }
-          ]
+          "description": "Array of errors returned by the API."
         }
       ],
       "examples": [
@@ -239,17 +199,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "Array of errors returned by the API.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "Error description."
-            }
-          ]
+          "description": "Array of errors returned by the API."
         }
       ],
       "examples": [
@@ -269,17 +219,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "Array of errors returned by the API.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "Error description."
-            }
-          ]
+          "description": "Array of errors returned by the API."
         }
       ],
       "examples": [

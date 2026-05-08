@@ -1239,17 +1239,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "A list of errors.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "A list of items."
-            }
-          ]
+          "description": "A list of errors."
         }
       ],
       "examples": [
@@ -1269,17 +1259,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "A list of errors.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "A list of items."
-            }
-          ]
+          "description": "A list of errors."
         }
       ],
       "examples": [
@@ -1299,17 +1279,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "A list of errors.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "A list of items."
-            }
-          ]
+          "description": "A list of errors."
         }
       ],
       "examples": [
@@ -1329,17 +1299,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "A list of errors.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "A list of items."
-            }
-          ]
+          "description": "A list of errors."
         }
       ],
       "examples": [
@@ -1359,17 +1319,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "A list of errors.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "A list of items."
-            }
-          ]
+          "description": "A list of errors."
         }
       ],
       "examples": [

@@ -57,17 +57,7 @@
                   "required": false,
                   "deprecated": false,
                   "readOnly": false,
-                  "description": "Tags to apply to all hosts and metrics reporting for this account. Defaults to `[]`.",
-                  "children": [
-                    {
-                      "name": "",
-                      "type": "string",
-                      "required": false,
-                      "deprecated": false,
-                      "readOnly": false,
-                      "description": "Tag in the form `key:value`."
-                    }
-                  ]
+                  "description": "Tags to apply to all hosts and metrics reporting for this account. Defaults to `[]`."
                 },
                 {
                   "name": "auth_config",
@@ -172,17 +162,7 @@
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
-                          "description": "Include only these regions.",
-                          "children": [
-                            {
-                              "name": "",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "An AWS region to include in metrics collection."
-                            }
-                          ]
+                          "description": "Include only these regions."
                         }
                       ]
                     }
@@ -218,17 +198,7 @@
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
-                          "description": "List of Datadog Lambda Log Forwarder ARNs in your AWS account. Defaults to `[]`.",
-                          "children": [
-                            {
-                              "name": "",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "The ARN of a Datadog Lambda Log Forwarder function."
-                            }
-                          ]
+                          "description": "List of Datadog Lambda Log Forwarder ARNs in your AWS account. Defaults to `[]`."
                         },
                         {
                           "name": "log_source_config",
@@ -260,17 +230,7 @@
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
-                                  "description": "The AWS resource tags to filter on for the log source specified by `source`.",
-                                  "children": [
-                                    {
-                                      "name": "",
-                                      "type": "string",
-                                      "required": false,
-                                      "deprecated": false,
-                                      "readOnly": false,
-                                      "description": "Tag in the form `key:value`."
-                                    }
-                                  ]
+                                  "description": "The AWS resource tags to filter on for the log source specified by `source`."
                                 }
                               ]
                             }
@@ -282,17 +242,7 @@
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
-                          "description": "List of service IDs set to enable automatic log collection.\nDiscover the list of available services with the\n[Get list of AWS log ready\nservices](https://docs.datadoghq.com/api/latest/aws-logs-integration/#get-list-of-aws-log-ready-services)\nendpoint.",
-                          "children": [
-                            {
-                              "name": "",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "An AWS service ID for which automatic log collection is enabled."
-                            }
-                          ]
+                          "description": "List of service IDs set to enable automatic log collection.\nDiscover the list of available services with the\n[Get list of AWS log ready\nservices](https://docs.datadoghq.com/api/latest/aws-logs-integration/#get-list-of-aws-log-ready-services)\nendpoint."
                         }
                       ]
                     }
@@ -355,17 +305,7 @@
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
-                              "description": "Exclude only these namespaces from metrics collection.\nDefaults to `[\"AWS/SQS\", \"AWS/ElasticMapReduce\", \"AWS/Usage\"]`.\n`AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default\nto reduce your AWS CloudWatch costs from `GetMetricData` API calls.",
-                              "children": [
-                                {
-                                  "name": "",
-                                  "type": "string",
-                                  "required": false,
-                                  "deprecated": false,
-                                  "readOnly": false,
-                                  "description": "An AWS CloudWatch namespace to exclude from metrics collection."
-                                }
-                              ]
+                              "description": "Exclude only these namespaces from metrics collection.\nDefaults to `[\"AWS/SQS\", \"AWS/ElasticMapReduce\", \"AWS/Usage\"]`.\n`AWS/SQS`, `AWS/ElasticMapReduce`, and `AWS/Usage` are excluded by default\nto reduce your AWS CloudWatch costs from `GetMetricData` API calls."
                             }
                           ]
                         },
@@ -378,17 +318,7 @@
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
-                              "description": "Include only these namespaces.",
-                              "children": [
-                                {
-                                  "name": "",
-                                  "type": "string",
-                                  "required": false,
-                                  "deprecated": false,
-                                  "readOnly": false,
-                                  "description": "An AWS CloudWatch namespace to include in metrics collection."
-                                }
-                              ]
+                              "description": "Include only these namespaces."
                             }
                           ]
                         }
@@ -416,17 +346,7 @@
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
-                          "description": "The AWS resource tags to filter on for the service specified by `namespace`.",
-                          "children": [
-                            {
-                              "name": "",
-                              "type": "string",
-                              "required": false,
-                              "deprecated": false,
-                              "readOnly": false,
-                              "description": "Tag in the form `key:value`."
-                            }
-                          ]
+                          "description": "The AWS resource tags to filter on for the service specified by `namespace`."
                         }
                       ]
                     }
@@ -504,17 +424,7 @@
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
-                              "description": "Include only these services.",
-                              "children": [
-                                {
-                                  "name": "",
-                                  "type": "string",
-                                  "required": false,
-                                  "deprecated": false,
-                                  "readOnly": false,
-                                  "description": "An AWS X-Ray service name to include in traces collection."
-                                }
-                              ]
+                              "description": "Include only these services."
                             }
                           ]
                         }
@@ -564,17 +474,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "A list of errors.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "A list of items."
-            }
-          ]
+          "description": "A list of errors."
         }
       ],
       "examples": [
@@ -594,17 +494,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "A list of errors.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "A list of items."
-            }
-          ]
+          "description": "A list of errors."
         }
       ],
       "examples": [

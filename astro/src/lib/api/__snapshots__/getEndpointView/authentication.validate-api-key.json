@@ -49,17 +49,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "Array of errors returned by the API.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "Error description."
-            }
-          ]
+          "description": "Array of errors returned by the API."
         }
       ],
       "examples": [
@@ -79,17 +69,7 @@
           "required": true,
           "deprecated": false,
           "readOnly": false,
-          "description": "Array of errors returned by the API.",
-          "children": [
-            {
-              "name": "",
-              "type": "string",
-              "required": false,
-              "deprecated": false,
-              "readOnly": false,
-              "description": "Error description."
-            }
-          ]
+          "description": "Array of errors returned by the API."
         }
       ],
       "examples": [
