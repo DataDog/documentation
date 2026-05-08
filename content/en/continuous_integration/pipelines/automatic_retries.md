@@ -23,33 +23,33 @@ Automatic job retries save developer time by re-running failures that are likely
 
 Automatic retries reduce the number of pipelines that developers re-run by hand, shorten feedback loops, and keep pipeline success metrics focused on non-transient failures.
 
-## How it works
+<div class="alert alert-info">Automatic job retries are available for [GitHub Actions][1] and [GitLab][2].</div>
+## How automatic job retries work
 
-1. A CI job fails in your pipeline.
-2. Datadog's AI error classifier inspects the job's logs and error context to determine whether the failure is transient.
-3. If the failure is classified as retriable, Datadog requests a retry through the provider's API.
-4. Datadog retries each failing job up to a maximum number of attempts to prevent infinite retry loops. Retries are counted per job per commit—if the same job fails again on a new commit, the counter resets.
-5. Datadog records the retry outcome on the original pipeline in CI Visibility.
+When a job in your CI pipeline fails:
+1. Datadog's AI error classifier inspects the job's logs and error context to determine whether the failure is transient.
+  - This is the same AI error classifier used by [CI jobs failure analysis][6], which reads indexed job logs to decide whether a failure is transient.
+1. If the failure is classified as retriable, Datadog requests a retry through the provider's API.
+1. Datadog retries each failing job up to a maximum number of attempts to prevent infinite retry loops. Retries are counted per job per commit—if the same job fails again on a new commit, the counter resets.
+1. Datadog records the retry outcome on the original pipeline in CI Visibility.
 
-## Requirements
+## Prerequisites
 
-- CI Visibility enabled for your [GitHub Actions][1] or [GitLab][2] integration.
-- [Datadog Source Code Integration][3] configured for the repositories where you want automatic retries.
-- Indexed CI job logs for those repositories (see [Collect job logs for GitHub Actions][4] or [Collect job logs for GitLab][5]).
-- Automatic job retries enabled for your organization (see the banner above for how to request access).
-
-Automatic retries rely on the same AI error classifier used by [CI jobs failure analysis][6], which reads indexed job logs to decide whether a failure is transient.
+To use automatic job retries:
+- CI Visibility must be enabled for your [GitHub Actions][1] or [GitLab][2] integration.
+- [Datadog Source Code Integration][3] must be configured for the repositories where you'd like to use automatic retries.
+- Datadog must have indexed CI job logs for the repositories where you'd like to use automatic retries (see [Collect job logs for GitHub Actions][4] or [Collect job logs for GitLab][5]).
 
 ## Provider-specific behavior
 
 {{< tabs >}}
 {{% tab "GitLab" %}}
 
-Datadog performs **smart retries** on GitLab: only the specific job classified as retriable is re-run. Other failed jobs (that aren't classified as retriable) and passing jobs aren't affected.
+When a job fails in GitLab, Datadog only re-runs the specific job classified as retriable. Other failed jobs (that aren't classified as retriable) and passing jobs aren't affected.
 
 - Retries are triggered per job, as soon as the job fails.
-- Smart retries work with GitLab.com (SaaS) and self-hosted GitLab instances reachable by the Datadog Source Code Integration.
-- There is no additional CI cost beyond the retried job.
+- Automatic job retries works for both SaaS (GitLab.com) and self-hosted GitLab instances.
+- There is no additional CI cost beyond the retried job(s).
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
