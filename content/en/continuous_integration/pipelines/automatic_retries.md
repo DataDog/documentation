@@ -15,8 +15,6 @@ further_reading:
     text: "Troubleshooting CI Visibility"
 ---
 
-<div class="alert alert-info">Automatic job retries are in Preview. To request access, contact your Datadog account team.</div>
-
 ## Overview
 
 Automatic job retries save developer time by re-running failures that are likely transient, such as network timeouts, infrastructure failures, or flaky tests. Genuine code defects are not retried. Datadog runs each failed job through an AI-powered error classifier. When the failure is identified as retriable, Datadog triggers a retry through the CI provider's API without manual intervention.
@@ -43,15 +41,6 @@ To use automatic job retries:
 ## Provider-specific behavior
 
 {{< tabs >}}
-{{% tab "GitLab" %}}
-
-When a job fails in GitLab, Datadog only re-runs the specific job classified as retriable. Other failed jobs (that aren't classified as retriable) and passing jobs aren't affected.
-
-- Retries are triggered per job, as soon as the job fails.
-- Automatic job retries works for both SaaS (GitLab.com) and self-hosted GitLab instances.
-- There is no additional CI cost beyond the retried job(s).
-
-{{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
 GitHub Actions imposes two provider-level limitations that shape how retries work:
@@ -64,12 +53,25 @@ GitHub Actions imposes two provider-level limitations that shape how retries wor
 The Datadog GitHub App's default permissions do not allow retries on protected branches. To enable automatic retries on a protected branch (for example, your default branch), grant the app org-wide Maintainer-level access. Review your organization's policies before expanding permissions.
 
 {{% /tab %}}
+{{% tab "GitLab" %}}
+
+When a job fails in GitLab, Datadog only re-runs the specific job classified as retriable. Other failed jobs (that aren't classified as retriable) and passing jobs aren't affected.
+
+- Retries are triggered per job, as soon as the job fails.
+- Automatic job retries works for both SaaS (GitLab.com) and self-hosted GitLab instances.
+- There is no additional CI cost beyond the retried job(s).
+
+{{% /tab %}}
 {{< /tabs >}}
 
-## Limitations
+## When is a job not retried?
 
-- Jobs classified as non-retriable (for example, compilation errors or asserted test failures) are never retried.
-- If a job has already been retried manually or by provider-native retry rules, Datadog does not issue an additional retry.
+A job is not retried when:
+
+- The AI classifier categorizes the failure as non-retriable (for example, compilation errors or asserted test failures).
+- The job has already been retried manually or by provider-native retry rules.
+
+**Note:** On GitHub Actions, non-retriable failed jobs may still be re-run if another job in the same workflow is classified as retriable. Datadog issues a single "rerun failed jobs" GitHub API call, which re-runs every failed job in the workflow—including non-retriable ones.
 
 ## Further reading
 
