@@ -119,7 +119,6 @@ data:
             "capset",
             "chdir",
             "chmod",
-            "chown",
             "clock_gettime",
             "clone",
             "clone3",
@@ -263,7 +262,6 @@ data:
             "setsockopt",
             "setuid",
             "setuid32",
-            "shutdown",
             "sigaltstack",
             "socket",
             "socketcall",
@@ -285,8 +283,7 @@ data:
             "wait4",
             "waitid",
             "waitpid",
-            "write",
-            "writev"
+            "write"
           ],
           "action": "SCMP_ACT_ALLOW",
           "args": null
