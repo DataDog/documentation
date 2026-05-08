@@ -1,0 +1,19 @@
+---
+import ApiResponse from './ApiResponse.astro';
+import type { ResponseData } from './ApiResponse.astro';
+
+interface Props {
+  responses: string; // JSON string of ResponseData[]
+}
+
+const { responses: responsesJson } = Astro.props;
+
+let parsedResponses: ResponseData[] = [];
+try {
+  parsedResponses = JSON.parse(responsesJson);
+} catch {
+  // fallback
+}
+---
+
+<ApiResponse responses={parsedResponses} />

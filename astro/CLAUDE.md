@@ -100,6 +100,14 @@ Instead, wrapper components like `CodeBlock` and `Tabs` render their content in 
 - Pass DOM references to the Preact island using the `externalContext` prop (typed as `ExternalContext<E>` from `src/utils/loadExternalContext.ts`). This prop carries a `scope` ID (the root element) and an `entries` map of named element IDs. Call `loadExternalContext(externalContext)` inside the island to resolve them to `HTMLElement` references at runtime.
 - The Preact island reads and manipulates the already-rendered DOM nodes (show/hide, copy text, toggle classes) using those references.
 
+## Markdoc adapter components
+
+Markdoc tag attributes are scalars — arrays and objects must be passed as JSON strings. When a component needs typed structured data, write a thin `*Markdoc.astro` wrapper that takes the JSON-string prop, parses it, and forwards the typed value to the real component. Register the wrapper (not the typed component) in `markdoc.config.mjs`.
+
+Naming: suffix Markdoc adapters with `Markdoc` (e.g. `ApiResponseMarkdoc.astro`), not `Island` — they don't hydrate anything. Reserve the `Island` suffix for files that actually use `client:*` directives to mount a Preact component.
+
+Keep the typed component free of JSON-string handling so direct Astro consumers (e.g. another `.astro` component composing it) get a clean typed prop contract.
+
 ## Component design and testing
 
 Verify components both headlessly (in vitest) and in Chrome (using Playwright).

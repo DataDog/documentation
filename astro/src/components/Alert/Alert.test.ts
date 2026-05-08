@@ -10,17 +10,17 @@ describe('Alert component', () => {
     });
 
     expect(html).toContain('Test message');
-    expect(html).toContain('Note');
+    expect(html).toContain('NOTE');
     expect(html).toContain('alert--info');
   });
 
   it('renders each alert level with correct label and attributes', async () => {
     const levels = ['info', 'danger', 'warning', 'tip'] as const;
     const labels: Record<string, string> = {
-      info: 'Note',
-      danger: 'Caution',
-      warning: 'Warning',
-      tip: 'Tip',
+      info: 'NOTE',
+      danger: 'CAUTION',
+      warning: 'WARNING',
+      tip: 'TIP',
     };
     const container = await AstroContainer.create();
 

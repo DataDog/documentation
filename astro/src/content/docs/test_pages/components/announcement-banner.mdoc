@@ -1,6 +1,6 @@
 ---
 title: "Announcement Banner"
-description: "Astro with an inline script (GeoTargetScript) for geo-targeting: fetches the user's country via API and swaps banner copy client-side. No Preact island."
+description: "Static Astro banner ported from the Hugo announcement_banner partial. No client-side scripts."
 type: interactive
 ---
 
@@ -8,13 +8,13 @@ type: interactive
 
 Fixed site-wide banner rendered at the top of every page by `BaseLayout`. Ported from the Hugo `announcement_banner` partial — dimensions, colors, and z-index match the Hugo site pixel-for-pixel. The banner you see above this content is the component itself.
 
-The banner reads its copy from the mocked `announcement_banner` block in `mocked-dependencies/hugo_site/config/_default/params.en.yaml`. A geo-targeting inline script (`GeoTargetScript.astro`) swaps the copy when `mocked-dependencies/hugo_site/data/en/webinars.yaml` contains a webinar whose country codes match the visitor's.
+The banner reads its copy from the mocked `announcement_banner` block in `mocked-dependencies/hugo_site/config/_default/params.en.yaml`.
 
 ## Properties
 
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `override` | `BannerParams` | site params | Page-level override, matching Hugo's per-page `announcement_banner` front-matter. When set, the geo-target webinar swap is skipped (mirrors Hugo's `$isCustomBanner` flag). |
+| `override` | `BannerParams` | site params | Page-level override, matching Hugo's per-page `announcement_banner` front-matter. |
 
 ### BannerParams fields
 

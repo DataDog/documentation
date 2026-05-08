@@ -76,7 +76,7 @@ export default defineMarkdocConfig({
       ...schema.tags.apiMethodBadge,
     },
     schemaTable: {
-      render: component('./src/components/ApiSchemaTable/ApiSchemaTable.astro'),
+      render: component('./src/components/ApiSchemaTable/ApiSchemaTableMarkdoc.astro'),
       selfClosing: true,
       ...schema.tags.schemaTable,
     },
@@ -85,12 +85,12 @@ export default defineMarkdocConfig({
       selfClosing: true,
     },
     apiResponse: {
-      render: component('./src/components/ApiResponse/ApiResponseIsland.astro'),
+      render: component('./src/components/ApiResponse/ApiResponseMarkdoc.astro'),
       selfClosing: true,
       ...schema.tags.apiResponse,
     },
     apiCodeExample: {
-      render: component('./src/components/ApiCodeExample/ApiCodeExampleIsland.astro'),
+      render: component('./src/components/ApiCodeExample/ApiCodeExampleMarkdoc.astro'),
       selfClosing: true,
       ...schema.tags.apiCodeExample,
     },
