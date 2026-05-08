@@ -5,10 +5,18 @@
  * the root (`/api/latest/...`), other locales prefixed (`/{lang}/api/latest/...`).
  */
 
-export const LOCALES = ["en", "fr", "ja", "ko", "es"] as const;
-export type Locale = (typeof LOCALES)[number];
+const ALL_LOCALES = ["en", "fr", "ja", "ko", "es"] as const;
+export type Locale = (typeof ALL_LOCALES)[number];
 
 export const DEFAULT_LOCALE: Locale = "en";
+
+/**
+ * Translations are built by default. Set `SKIP_TRANSLATIONS=true` for a
+ * faster English-only build during local development. The default is to
+ * include translations so production builds can't accidentally omit them.
+ */
+export const LOCALES: readonly Locale[] =
+  process.env.SKIP_TRANSLATIONS === "true" ? [DEFAULT_LOCALE] : ALL_LOCALES;
 
 export function isLocale(value: unknown): value is Locale {
   return (
