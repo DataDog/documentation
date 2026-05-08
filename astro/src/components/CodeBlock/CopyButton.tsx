@@ -5,11 +5,18 @@ import { markSelfAsHydrated } from '@utils/markSelfAsHydrated';
 
 const cl = classListFactory(styles);
 
-interface CopyButtonProps {
-    content: string;
+export interface CopyButtonLabels {
+    "Copy code": string;
+    "Copy": string;
+    "Copied!": string;
 }
 
-export function CopyButton({ content }: CopyButtonProps) {
+interface CopyButtonProps {
+    content: string;
+    labels: CopyButtonLabels;
+}
+
+export function CopyButton({ content, labels }: CopyButtonProps) {
     const [copied, setCopied] = useState(false);
     const ref = useRef<HTMLButtonElement>(null);
 
@@ -26,9 +33,9 @@ export function CopyButton({ content }: CopyButtonProps) {
             ref={ref}
             class={cl('code-block__copy')}
             onClick={handleCopy}
-            aria-label="Copy code"
+            aria-label={labels["Copy code"]}
         >
-            <span>{copied ? 'Copied!' : 'Copy'}</span>
+            <span>{copied ? labels["Copied!"] : labels["Copy"]}</span>
         </button>
     );
 }

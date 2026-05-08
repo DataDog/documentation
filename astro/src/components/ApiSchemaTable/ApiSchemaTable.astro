@@ -5,6 +5,7 @@ import SchemaFieldRow from './SchemaFieldRow.astro';
 import styles from './ApiSchemaTable.module.css';
 import { classListFactory } from '@utils/classListFactory';
 import { generateElementId } from '@utils/generateElementId';
+import { i18n } from '@lib/i18n/i18n';
 
 const cl = classListFactory(styles);
 
@@ -32,6 +33,8 @@ const showToolbar = showExpandAll && anyExpandable;
   {showToolbar && (
     <div class={cl('schema-table__toolbar')}>
       <button id={expandAllId} type="button" class={cl('schema-table__expand-all')}>
+        {/* TODO: translate "Expand All" / "Collapse All" once authoritative
+            translation keys exist in the Hugo i18n bundle. */}
         <span class={cl('schema-table__expand-all-label', 'schema-table__expand-all-label--expand')}>
           Expand All
         </span>
@@ -43,9 +46,9 @@ const showToolbar = showExpandAll && anyExpandable;
   )}
   <div class={cl('schema-table__table')}>
     <div class={cl('schema-table__columns')}>
-      <div class={cl('schema-table__columns-name')}>Name</div>{' '}
-      <div class={cl('schema-table__columns-type')}>Type</div>{' '}
-      <div class={cl('schema-table__columns-description')}>Description</div>
+      <div class={cl('schema-table__columns-name')}>{i18n('name')}</div>{' '}
+      <div class={cl('schema-table__columns-type')}>{i18n('type')}</div>{' '}
+      <div class={cl('schema-table__columns-description')}>{i18n('description')}</div>
     </div>
     {fields.map((field) => <SchemaFieldRow field={field} depth={0} />)}
   </div>

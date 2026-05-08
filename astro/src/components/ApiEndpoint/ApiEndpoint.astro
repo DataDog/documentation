@@ -13,6 +13,7 @@ import { getDefaultRegions } from '@lib/api/regionResolver';
 import { renderMarkdownInline } from '@lib/api/markdownRenderer';
 import styles from './ApiEndpoint.module.css';
 import { classListFactory } from '@utils/classListFactory';
+import { i18n } from '@lib/i18n/i18n';
 
 const allRegions = getDefaultRegions();
 const cl = classListFactory(styles);
@@ -76,6 +77,10 @@ const hasParams = ep && (
     </HeadingTag>
     {/* CopyPageButton placement TBD */}
     {/* Status alerts */}
+    {/* TODO: translate the deprecation/unstable/region-not-supported messages,
+        permissions label, "Request Body" heading, and "(required)/(optional)"
+        markers once authoritative translation keys exist in the Hugo i18n
+        bundle. */}
     {ep.deprecated && (
       <Alert level="warning">
         This endpoint is deprecated.{ep.newerVersionUrl && <> <a href={ep.newerVersionUrl}>Use the newer version.</a></>}
@@ -100,7 +105,7 @@ const hasParams = ep && (
     </div>
 
     {/* Description — rendered as slot content from Markdoc */}
-    {ep.description && <h3>Overview</h3>}
+    {ep.description && <h3>{i18n('overview')}</h3>}
     <slot />
 
     {/* Permissions */}
@@ -121,7 +126,7 @@ const hasParams = ep && (
     {/* Arguments */}
     {hasParams && (
       <div class={cl('api-endpoint__section')}>
-        <h3>Arguments</h3>
+        <h3>{i18n('arguments')}</h3>
         {ep.pathParams && ep.pathParams.length > 0 && (
           <ApiSchemaTable fields={ep.pathParams} />
         )}

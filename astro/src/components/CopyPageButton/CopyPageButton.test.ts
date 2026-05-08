@@ -2,7 +2,13 @@
 import { describe, it, expect, afterEach, vi, beforeEach } from 'vitest';
 import { render, cleanup, fireEvent, waitFor } from '@testing-library/preact';
 import { h } from 'preact';
-import { CopyPageButton } from './CopyPageButton';
+import { CopyPageButton, type CopyPageButtonLabels } from './CopyPageButton';
+
+const labels: CopyPageButtonLabels = {
+    "Copy page contents": "Copy page contents",
+    "Copied page contents": "Copied page contents",
+    "Copied!": "Copied!",
+};
 
 vi.mock('./pageTextLoader', () => ({
     loadPageText: vi.fn().mockResolvedValue('mock page text'),
@@ -23,13 +29,13 @@ beforeEach(() => {
 
 describe('CopyPageButton', () => {
     it('renders with default "Copy page contents" label', () => {
-        render(h(CopyPageButton, null));
-        const btn = document.querySelector('.copy-page-button')!;
-        expect(btn.textContent).toBe('Copy page contents');
+        render(h(CopyPageButton, { labels }));
+        const label = document.querySelector('.copy-page-button__label')!;
+        expect(label.textContent).toBe('Copy page contents');
     });
 
     it('contains a clipboard SVG icon', () => {
-        render(h(CopyPageButton, null));
+        render(h(CopyPageButton, { labels }));
         const svg = document.querySelector('.copy-page-button__icon svg')!;
         expect(svg).toBeTruthy();
         expect(svg.getAttribute('aria-hidden')).toBe('true');
@@ -43,7 +49,7 @@ describe('CopyPageButton', () => {
             writable: true,
         });
 
-        render(h(CopyPageButton, null));
+        render(h(CopyPageButton, { labels }));
         fireEvent.click(document.querySelector('.copy-page-button')!);
 
         await waitFor(() => {
@@ -57,7 +63,7 @@ describe('CopyPageButton', () => {
     it('resets to default label after 3 seconds', async () => {
         vi.useFakeTimers();
 
-        render(h(CopyPageButton, null));
+        render(h(CopyPageButton, { labels }));
         const btn = document.querySelector('.copy-page-button')!;
 
         // Fire click and flush microtasks so the async handler resolves
@@ -74,18 +80,18 @@ describe('CopyPageButton', () => {
     });
 
     it('preloads text on mouseenter', () => {
-        render(h(CopyPageButton, null));
+        render(h(CopyPageButton, { labels }));
         fireEvent.mouseEnter(document.querySelector('.copy-page-button')!);
         expect(loadPageText).toHaveBeenCalled();
     });
 
     it('sets data-hydrated on mount', () => {
-        render(h(CopyPageButton, null));
+        render(h(CopyPageButton, { labels }));
         expect(document.querySelector('.copy-page-button')!.getAttribute('data-hydrated')).toBe('true');
     });
 
     it('shows success icon with checkmark path when copied', async () => {
-        render(h(CopyPageButton, null));
+        render(h(CopyPageButton, { labels }));
         fireEvent.click(document.querySelector('.copy-page-button')!);
 
         await waitFor(() => {

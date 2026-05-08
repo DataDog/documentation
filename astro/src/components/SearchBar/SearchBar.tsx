@@ -9,6 +9,13 @@ import { getTypesenseConfig, type TypesenseEnv } from '@config/typesense';
 // inherits the input-bar text color via `currentColor`).
 import searchIconSvg from '../../assets/images/svg-icons/searchbar_search.svg?raw';
 
+export interface SearchBarLabels {
+  "Search": string;
+  "Search documentation": string;
+  "Search documentation...": string;
+  "No results.": string;
+}
+
 interface Props {
   /**
    * Override Typesense config in tests. Production usage reads from the
@@ -20,6 +27,7 @@ interface Props {
    * synchronously instead of hitting the network.
    */
   search?: (query: string, env: TypesenseEnv, signal?: AbortSignal) => Promise<MultiSearchResponse>;
+  labels: SearchBarLabels;
 }
 
 interface NormalizedHit {
@@ -166,7 +174,7 @@ function groupHits(response: MultiSearchResponse, query: string): Map<string, No
   return buckets;
 }
 
-export default function SearchBar({ env, search }: Props) {
+export default function SearchBar({ env, search, labels }: Props) {
   const config = useMemo(() => env ?? getTypesenseConfig(), [env]);
   const searchFn = search ?? multiSearch;
 
@@ -342,15 +350,15 @@ export default function SearchBar({ env, search }: Props) {
         <button
           type="submit"
           class={cl('search-bar__submit')}
-          aria-label="Search"
+          aria-label={labels["Search"]}
           dangerouslySetInnerHTML={{ __html: searchIconSvg }}
         />
         <input
           ref={inputRef}
           type="search"
           class={cl('search-bar__input')}
-          placeholder="Search documentation..."
-          aria-label="Search documentation"
+          placeholder={labels["Search documentation..."]}
+          aria-label={labels["Search documentation"]}
           value={query}
           onInput={(e) => {
             setQuery((e.target as HTMLInputElement).value);
@@ -381,7 +389,7 @@ export default function SearchBar({ env, search }: Props) {
           </div>
 
           {totalHits === 0 ? (
-            <div class={cl('search-bar__no-hits')}>No results.</div>
+            <div class={cl('search-bar__no-hits')}>{labels["No results."]}</div>
           ) : (
             CATEGORY_ORDER.concat([{ label: 'Partners', key: 'partners' }])
               .map((cat) => {

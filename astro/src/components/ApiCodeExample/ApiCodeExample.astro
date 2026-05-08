@@ -2,9 +2,11 @@
 import Tabs from '@components/Tabs/Tabs.astro';
 import TabPanel from '@components/Tab/TabPanel.astro';
 import CodeBlock from '@components/CodeBlock/CodeBlock.astro';
+import ExpandChevron from '@components/ExpandChevron/ExpandChevron.astro';
 import styles from './ApiCodeExample.module.css';
 import { classListFactory } from '@utils/classListFactory';
 import { generateElementId } from '@utils/generateElementId';
+import { i18n } from '@lib/i18n/i18n';
 
 const cl = classListFactory(styles);
 
@@ -35,7 +37,7 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
 
 {examples.length > 0 && (
   <div class={cl('api-code-example')}>
-    <h3 class={cl('api-code-example__heading')}>Code Example</h3>
+    <h3 class={cl('api-code-example__heading')}>{i18n('code_example')}</h3>
 
     <Tabs id={groupId} variant="pills" labels={labels} panelIds={panelIds}>
       {examples.map((ex, tabIdx) => (
@@ -56,9 +58,7 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
             ex.entries.map((entry, i) => (
               <details class={cl('api-code-example__accordion')} open={i === 0}>
                 <summary class={cl('api-code-example__accordion-header')}>
-                  <svg class={cl('api-code-example__accordion-icon')} width="10" height="10" viewBox="0 0 10 10">
-                    <path d="M3 1 L7 5 L3 9" fill="none" stroke="currentColor" stroke-width="1.5" />
-                  </svg>
+                  <ExpandChevron class={cl('api-code-example__accordion-icon')} />
                   <span>{entry.description}</span>
                 </summary>
                 {entry.regionVariants ? (

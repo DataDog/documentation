@@ -9,11 +9,17 @@ import {
 
 const cl = classListFactory(styles);
 
-interface CollapseToggleProps {
-  externalContext: ExternalContext<{ contentEl: string }>;
+export interface CollapseToggleLabels {
+  "Expand code": string;
+  "Collapse code": string;
 }
 
-export function CollapseToggle({ externalContext }: CollapseToggleProps) {
+interface CollapseToggleProps {
+  externalContext: ExternalContext<{ contentEl: string }>;
+  labels: CollapseToggleLabels;
+}
+
+export function CollapseToggle({ externalContext, labels }: CollapseToggleProps) {
   const [collapsed, setCollapsed] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
   const targetRef = useRef<HTMLElement | null>(null);
@@ -52,7 +58,7 @@ export function CollapseToggle({ externalContext }: CollapseToggleProps) {
       class={cl("code-block__toggle")}
       onClick={handleToggle}
       aria-expanded={!collapsed}
-      aria-label={collapsed ? "Expand code" : "Collapse code"}
+      aria-label={collapsed ? labels["Expand code"] : labels["Collapse code"]}
     >
       <span class={chevronClass} />
     </button>

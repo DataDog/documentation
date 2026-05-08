@@ -2,7 +2,7 @@
 import type { ApiCategory, ApiCategoryStub } from '@lib/api/schemas/views';
 import styles from './ApiSideNav.module.css';
 import { classListFactory } from '@utils/classListFactory';
-import SearchBar from '@components/SearchBar/SearchBar';
+import SearchBar, { type SearchBarLabels } from '@components/SearchBar/SearchBar';
 import { DEFAULT_LOCALE, localizedHref, type Locale } from '@lib/i18n/locale';
 
 interface Props {
@@ -14,6 +14,15 @@ interface Props {
 
 const { categories, activeCategory, currentOperationSlug, lang = DEFAULT_LOCALE } = Astro.props;
 const cl = classListFactory(styles);
+
+// TODO: replace hardcoded English with i18n() once authoritative translation
+// keys exist for these strings in the Hugo i18n bundle.
+const searchLabels: SearchBarLabels = {
+  "Search": "Search",
+  "Search documentation": "Search documentation",
+  "Search documentation...": "Search documentation...",
+  "No results.": "No results.",
+};
 ---
 
 <nav class={cl('api-side-nav')}>
@@ -21,7 +30,7 @@ const cl = classListFactory(styles);
     Datadog Docs&nbsp;&nbsp;<span class={cl('api-side-nav__title-api')}>API</span>
   </a>
   <div class={cl('api-side-nav__search')}>
-    <SearchBar client:load />
+    <SearchBar client:load labels={searchLabels} />
   </div>
   <ul class={cl('api-side-nav__list')}>
     {categories.map((cat) => {

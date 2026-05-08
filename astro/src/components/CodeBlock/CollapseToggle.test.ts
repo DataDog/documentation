@@ -3,7 +3,12 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { render, cleanup } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { h } from 'preact';
-import { CollapseToggle } from './CollapseToggle';
+import { CollapseToggle, type CollapseToggleLabels } from './CollapseToggle';
+
+const labels: CollapseToggleLabels = {
+  "Expand code": "Expand code",
+  "Collapse code": "Collapse code",
+};
 
 afterEach(() => {
   cleanup();
@@ -25,6 +30,7 @@ const mountToggle = (shellId: string, contentId: string) =>
   render(
     h(CollapseToggle, {
       externalContext: { scope: shellId, entries: { contentEl: contentId } },
+      labels,
     }),
   );
 

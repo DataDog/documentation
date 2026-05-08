@@ -3,7 +3,14 @@ import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, cleanup } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { h } from 'preact';
-import SearchBar from './SearchBar';
+import SearchBar, { type SearchBarLabels } from './SearchBar';
+
+const labels: SearchBarLabels = {
+  "Search": "Search",
+  "Search documentation": "Search documentation",
+  "Search documentation...": "Search documentation...",
+  "No results.": "No results.",
+};
 import basicFixture from './__fixtures__/typesense_basic.json';
 import noHitsFixture from './__fixtures__/typesense_no_hits.json';
 import apiOnlyFixture from './__fixtures__/typesense_api_only.json';
@@ -34,7 +41,7 @@ function makeSearch(fixture: { results: any[] }) {
 
 function mount(fixture: { results: any[] } = basicFixture) {
   const search = makeSearch(fixture);
-  const utils = render(h(SearchBar as any, { env, search }));
+  const utils = render(h(SearchBar as any, { env, search, labels }));
   return { ...utils, search };
 }
 

@@ -10,6 +10,14 @@ The scope of this new Astro site is just the API docs. In Hugo, the HTML for the
 - When you update a component, be sure to update its tests and documentation page.
 - After you implement something, list any best practices you used that aren't well known.
 
+## Stay inside `astro/`
+
+Do not edit any files outside the `astro/` directory. Everything outside this folder belongs to the live Hugo site — including but not limited to `i18n/`, `layouts/`, `content/`, `data/`, `assets/`, `static/`, `config/`, and the root-level `package.json` / `Makefile`. Changes there ship to production immediately and can break the live docs site.
+
+This applies even when the Astro work would benefit from it. For example: if an Astro component needs a translation key that doesn't yet exist in `i18n/en.json`, **do not add it**. Hardcode the English string with a `TODO` comment so the key can be added authoritatively later. Adding speculative keys to a shared, production-facing file is not safe.
+
+If a task seems to require a Hugo-side change, stop and ask first.
+
 ## Commands
 
 - `npm run dev` — Start dev server on port 4321

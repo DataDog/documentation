@@ -13,6 +13,10 @@ interface MobileCategory {
   products: NavLink[];
 }
 
+export interface MobileNavLabels {
+  "Toggle navigation": string;
+}
+
 interface Props {
   classes: {
     hamburger: string;
@@ -23,9 +27,10 @@ interface Props {
   search: { placeholder: string; ariaLabel: string };
   items: NavLink[];
   categories: MobileCategory[];
+  labels: MobileNavLabels;
 }
 
-export default function MobileNav({ classes, quicknav, search, items, categories }: Props) {
+export default function MobileNav({ classes, quicknav, search, items, categories, labels }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -42,7 +47,7 @@ export default function MobileNav({ classes, quicknav, search, items, categories
         type="button"
         class={`${classes.hamburger} ${open ? classes.hamburgerOpen : ''} navbar-toggler`}
         aria-expanded={open}
-        aria-label="Toggle navigation"
+        aria-label={labels["Toggle navigation"]}
         onClick={() => setOpen((o) => !o)}
       >
         <span class={classes.hamburgerBar}></span>

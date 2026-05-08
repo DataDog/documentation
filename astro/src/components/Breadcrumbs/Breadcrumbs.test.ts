@@ -32,4 +32,24 @@ describe('Breadcrumbs component', () => {
 
     expect(html).toMatch(/<span[^>]*aria-current="page"[^>]*>Dashboards<\/span>/);
   });
+
+  it('emits BEM classes on every element', async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Breadcrumbs, { props: { crumbs } });
+
+    expect(html).toContain('breadcrumbs');
+    expect(html).toContain('breadcrumbs__list');
+    expect(html).toContain('breadcrumbs__item');
+    expect(html).toContain('breadcrumbs__link');
+    expect(html).toContain('breadcrumbs__label');
+    expect(html).toContain('breadcrumbs__label--current');
+  });
+
+  it('only marks the final crumb with the --current modifier', async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Breadcrumbs, { props: { crumbs } });
+
+    const matches = html.match(/(?<!_)breadcrumbs__label--current(?!_)/g) ?? [];
+    expect(matches).toHaveLength(1);
+  });
 });

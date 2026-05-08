@@ -1,4 +1,4 @@
-.breadcrumbs ol {
+.breadcrumbs__list {
   display: flex;
   align-items: center;
   list-style: none;
@@ -6,31 +6,31 @@
   padding: 0;
   gap: 0;
   font-size: var(--font-size-sm);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
   line-height: 24px;
 }
 
-.breadcrumbs li {
+.breadcrumbs__item {
   display: flex;
   align-items: center;
 }
 
-.breadcrumbs li + li::before {
+.breadcrumbs__item:not(:first-child)::before {
   content: '>';
+  margin: 0 var(--space-sm);
   color: var(--color-text-muted);
-  padding: 0 7px;
 }
 
-.breadcrumbs a {
+.breadcrumbs__link {
   color: var(--color-text-muted);
   text-decoration: none;
 }
 
-.breadcrumbs a:hover {
+.breadcrumbs__link:hover {
   color: var(--color-brand);
 }
 
-.breadcrumbs span[aria-current='page'] {
+.breadcrumbs__label--current {
   color: var(--color-brand);
 }

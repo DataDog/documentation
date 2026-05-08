@@ -27,8 +27,8 @@
 
 .api-side-nav__title {
   display: block;
-  padding: 0 0 10px var(--space-md);
-  margin-top: 14px;
+  padding: 0 0 var(--space-sm) var(--space-md);
+  margin-top: var(--space-md);
   color: var(--color-brand);
   font-size: var(--font-size-h3);
   font-weight: var(--font-weight-light);
@@ -67,7 +67,7 @@
   padding: var(--space-xs) var(--space-md);
   color: var(--color-text);
   font-size: var(--font-size-base);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   text-decoration: none;
   line-height: 1.4;
 }

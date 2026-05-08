@@ -1,6 +1,16 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import SearchBar from '@components/SearchBar/SearchBar';
+import type { SearchBarLabels } from '@components/SearchBar/SearchBar';
+
+// TODO: replace hardcoded English with i18n() once authoritative translation
+// keys exist for these strings in the Hugo i18n bundle.
+const searchLabels: SearchBarLabels = {
+  "Search": "Search",
+  "Search documentation": "Search documentation",
+  "Search documentation...": "Search documentation...",
+  "No results.": "No results.",
+};
 ---
 
 <BaseLayout title="SearchBar">
@@ -37,7 +47,7 @@ import SearchBar from '@components/SearchBar/SearchBar';
 
       <p>The component is mounted inside the API side nav on every API page; the box below shows it standalone for visual checks.</p>
 
-      <SearchBar client:load />
+      <SearchBar client:load labels={searchLabels} />
 
       <h2>Hit normalization</h2>
 

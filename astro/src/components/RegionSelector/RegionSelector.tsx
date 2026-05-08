@@ -14,9 +14,14 @@ import type { ClientRegion } from '@config/regions';
 
 const cl = classListFactory(styles);
 
+export interface RegionSelectorLabels {
+  "Datadog site": string;
+}
+
 export interface RegionSelectorProps {
   /** Allowed Datadog sites. Supplied by `RegionSelectorIsland.astro` at build time. */
   regions: ClientRegion[];
+  labels: RegionSelectorLabels;
 }
 
 /**
@@ -25,7 +30,7 @@ export interface RegionSelectorProps {
  * wrapper so this component (and its client bundle) never imports the
  * build-time region config or the `yaml` parser.
  */
-export function RegionSelector({ regions }: RegionSelectorProps): JSX.Element {
+export function RegionSelector({ regions, labels }: RegionSelectorProps): JSX.Element {
   useMemo(() => initRegionState(regions), [regions]);
 
   const [selected, setSelected] = useState<string>(DEFAULT_REGION_KEY);
@@ -45,7 +50,7 @@ export function RegionSelector({ regions }: RegionSelectorProps): JSX.Element {
 
   return (
     <div class={cl('region-selector')} data-hydrated={hydrated ? 'true' : undefined}>
-      <label class={cl('region-selector__label')} for="region-select">Datadog site</label>
+      <label class={cl('region-selector__label')} for="region-select">{labels["Datadog site"]}</label>
       <select
         id="region-select"
         class={cl('region-selector__select')}

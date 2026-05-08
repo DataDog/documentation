@@ -2,11 +2,12 @@
 import { codeToHtml } from 'shiki';
 import datadogLight from '../../styles/shiki-light';
 import datadogDark from '../../styles/shiki-dark';
-import { CopyButton } from './CopyButton';
-import { CollapseToggle } from './CollapseToggle';
+import { CopyButton, type CopyButtonLabels } from './CopyButton';
+import { CollapseToggle, type CollapseToggleLabels } from './CollapseToggle';
 import styles from './CodeBlock.module.css';
 import { classListFactory } from '@utils/classListFactory';
 import { generateElementId } from '@utils/generateElementId';
+import { i18n } from '@lib/i18n/i18n';
 
 const cl = classListFactory(styles);
 
@@ -49,6 +50,19 @@ const contentId = `${codeBlockId}-content`;
 const containerClass = wrap
   ? cl('code-block', 'code-block--wrap')
   : cl('code-block');
+
+// TODO: replace hardcoded English with i18n() once authoritative translation
+// keys exist for these strings in the Hugo i18n bundle.
+const copyLabels: CopyButtonLabels = {
+  "Copy code": "Copy code",
+  "Copy": i18n('copy'),
+  "Copied!": "Copied!",
+};
+
+const collapseLabels: CollapseToggleLabels = {
+  "Expand code": "Expand code",
+  "Collapse code": "Collapse code",
+};
 ---
 
 <div
@@ -73,6 +87,7 @@ const containerClass = wrap
               scope: codeBlockId,
               entries: { contentEl: contentId },
             }}
+            labels={collapseLabels}
           />
         )}
       </div>
@@ -82,7 +97,7 @@ const containerClass = wrap
     id={contentId}
     class={cl('code-block__content')}
   >
-    {!disable_copy && <CopyButton client:idle content={content} />}
+    {!disable_copy && <CopyButton client:idle content={content} labels={copyLabels} />}
     {highlightedCode ? (
       <div class={cl('code-block__highlighted')} set:html={highlightedCode} />
     ) : (

@@ -27,6 +27,7 @@ const classes = {
 
 const quicknav = { home: 'Home', docs: 'Docs', api: 'API' };
 const search = { placeholder: 'Search', ariaLabel: 'Search' };
+const labels = { "Toggle navigation": 'Toggle navigation' };
 const items = [
   { identifier: 'product', label: 'Product', url: 'https://www.datadoghq.com/product/' },
 ];
@@ -39,7 +40,7 @@ const categories = [
 ];
 
 const renderMobileNav = () =>
-  render(h(MobileNavComponent, { classes, quicknav, search, items, categories }));
+  render(h(MobileNavComponent, { classes, quicknav, search, items, categories, labels }));
 
 function getToggle() {
   return document.querySelector<HTMLButtonElement>('.navbar-toggler')!;

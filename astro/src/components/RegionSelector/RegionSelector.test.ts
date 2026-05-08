@@ -9,7 +9,8 @@ import { buildClientRegions } from '@config/regions';
 
 const RegionSelectorComponent = RegionSelector as ComponentType<any>;
 const regions = buildClientRegions();
-const regionProps = { regions };
+const labels = { "Datadog site": "Datadog site" };
+const regionProps = { regions, labels };
 
 function getContainer() {
   return document.querySelector<HTMLElement>('.region-selector')!;

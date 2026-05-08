@@ -2,6 +2,7 @@
 import type { SchemaField } from '@lib/api/schemas/schemaField';
 import { renderMarkdownInline } from '@lib/api/markdownRenderer';
 import { classListFactory } from '@utils/classListFactory';
+import ExpandChevron from '@components/ExpandChevron/ExpandChevron.astro';
 import styles from './ApiSchemaTable.module.css';
 import Self from './SchemaFieldRow.astro';
 
@@ -47,17 +48,13 @@ const enumRest = enumValues.slice(ENUM_INLINE_LIMIT);
         aria-expanded="false"
         aria-label={`Toggle ${field.name}`}
       >
-        <svg width="10" height="10" viewBox="0 0 10 10">
-          <path
-            d="M3 1 L7 5 L3 9"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-          />
-        </svg>
+        <ExpandChevron />
       </button>
     )}
     <code class={cl('schema-table__name')}>{field.name}</code>
+    {/* TODO: translate "[required]", "DEPRECATED", "Default:", "Allowed enum
+        values:", "Show N more", and "Toggle <field>" once authoritative
+        translation keys exist in the Hugo i18n bundle. */}
     {field.required && (
       <span class={cl('schema-table__required')}>{' '}[required]</span>
     )}
