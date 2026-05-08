@@ -1140,6 +1140,16 @@
     "request_description": "Secure embed update request body.",
     "request_schema_description": "Request to update a secure embed shared dashboard."
   },
+  "ListDatasetRestrictions": {
+    "description": "Retrieve all dataset restriction configurations for the organization.\nReturns one restriction object per configured product type (for example, RUM, APM, or Logs),\nincluding the current restriction mode, ownership mode, and any unrestricted principals.\nRequires the `user_access_read` permission.",
+    "summary": "List dataset restrictions"
+  },
+  "UpdateDatasetRestriction": {
+    "description": "Update the dataset restriction configuration for a specific product type.\nSets the restriction mode, optional ownership mode, and the list of principals\nthat are exempt from restrictions. Requires the `user_access_manage` permission.\nChanges are audited and take effect immediately.",
+    "summary": "Update a dataset restriction",
+    "request_description": "",
+    "request_schema_description": "Payload for updating a dataset restriction configuration."
+  },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
     "summary": "Get all datasets"

@@ -131,6 +131,10 @@
     "name": "Dashboard Secure Embed",
     "description": "Manage securely embedded Datadog dashboards. Secure embeds use HMAC-SHA256 signed sessions\nfor authentication, enabling customers to embed dashboards in their own applications with\nserver-side auth control. Unlike public dashboards (open URL) or invite dashboards\n(email-based access), secure embeds provide programmatic access control.\n\n**Requirements:**\n- **Embed** sharing must be enabled under **Organization Settings** > **Public Sharing** > **Shared Dashboards**.\n- You need [an API key and an application key](https://docs.datadoghq.com/account_management/api-app-keys/) to interact with these endpoints."
   },
+  "dataset-restrictions": {
+    "name": "Dataset Restrictions",
+    "description": "Configure dataset-level access restrictions per Datadog product type. Dataset restrictions\ncontrol whether data is visible by default or hidden until explicitly granted, and how\nownership-based access is determined."
+  },
   "datasets": {
     "name": "Datasets",
     "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."

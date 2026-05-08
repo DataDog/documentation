@@ -8784,6 +8784,36 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Dataset Restrictions
+      url: /api/latest/dataset-restrictions/
+      identifier: dataset-restrictions
+      generated: true
+    - name: Update a dataset restriction
+      url: '#update-a-dataset-restriction'
+      identifier: dataset-restrictions-update-a-dataset-restriction
+      parent: dataset-restrictions
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDatasetRestriction
+        unstable:
+          - v2
+        order: 2
+    - name: List dataset restrictions
+      url: '#list-dataset-restrictions'
+      identifier: dataset-restrictions-list-dataset-restrictions
+      parent: dataset-restrictions
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDatasetRestrictions
+        unstable:
+          - v2
+        order: 1
     - name: Datasets
       url: /api/latest/datasets/
       identifier: datasets
