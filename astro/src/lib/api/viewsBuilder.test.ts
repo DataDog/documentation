@@ -18,11 +18,13 @@ import { describe, it, expect } from 'vitest';
 import { z } from 'zod';
 import {
   getCategoriesView,
+  getCategoryStubsView,
   getCategoryViewBySlug,
   getEndpointView,
 } from './viewsBuilder';
 import {
   ApiCategorySchema,
+  ApiCategoryStubSchema,
   EndpointDataSchema,
 } from './schemas/views';
 
@@ -60,6 +62,23 @@ describe('viewsBuilder snapshots', () => {
       await expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
         './__snapshots__/getCategoriesView/en.json',
       );
+    });
+  });
+
+  describe('getCategoryStubsView', () => {
+    it('returns the same categories as getCategoriesView, minus operations', async () => {
+      const stubs = await getCategoryStubsView();
+      z.array(ApiCategoryStubSchema).parse(stubs);
+
+      const full = await getCategoriesView();
+      expect(stubs.length).toBe(full.length);
+      for (let i = 0; i < stubs.length; i++) {
+        expect(stubs[i]).not.toHaveProperty('operations');
+        expect(stubs[i].slug).toBe(full[i].slug);
+        expect(stubs[i].name).toBe(full[i].name);
+        expect(stubs[i].description).toBe(full[i].description);
+        expect(stubs[i].deprecated).toBe(full[i].deprecated);
+      }
     });
   });
 

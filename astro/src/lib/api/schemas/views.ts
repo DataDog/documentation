@@ -22,15 +22,18 @@ export const ApiOperationStubSchema = z
   })
   .strict();
 
-export const ApiCategorySchema = z
+export const ApiCategoryStubSchema = z
   .object({
     name: z.string(),
     slug: z.string(),
     description: z.string(),
-    operations: z.array(ApiOperationStubSchema),
     deprecated: z.boolean(),
   })
   .strict();
+
+export const ApiCategorySchema = ApiCategoryStubSchema.extend({
+  operations: z.array(ApiOperationStubSchema),
+}).strict();
 
 export const ResponseDataSchema = z
   .object({
@@ -76,6 +79,7 @@ export const EndpointDataSchema = z
   .strict();
 
 export type ApiOperationStub = z.infer<typeof ApiOperationStubSchema>;
+export type ApiCategoryStub = z.infer<typeof ApiCategoryStubSchema>;
 export type ApiCategory = z.infer<typeof ApiCategorySchema>;
 export type ResponseData = z.infer<typeof ResponseDataSchema>;
 export type RequestBodyData = z.infer<typeof RequestBodyDataSchema>;

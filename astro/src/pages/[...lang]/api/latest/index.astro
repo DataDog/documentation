@@ -1,6 +1,6 @@
 ---
 import ApiLayout from '@layouts/ApiLayout.astro';
-import { getCategoriesView } from '@lib/api/viewsBuilder';
+import { getCategoryStubsView } from '@lib/api/viewsBuilder';
 import { getApiPageTitle } from '@lib/api/pageTitleBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
 import { i18n } from '@lib/i18n/i18n';
@@ -17,7 +17,7 @@ if (!lang) {
   return new Response(null, { status: 404 });
 }
 
-const categories = await getCategoriesView(lang);
+const categories = await getCategoryStubsView(lang);
 ---
 
 <ApiLayout

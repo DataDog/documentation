@@ -2,7 +2,7 @@
 import ApiLayout from '@layouts/ApiLayout.astro';
 import ApiMethodBadge from '@components/ApiMethodBadge/ApiMethodBadge.astro';
 import ApiStatusAlert from '@components/ApiStatusAlert/ApiStatusAlert.astro';
-import { getCategoriesView, getCategoryViewBySlug } from '@lib/api/viewsBuilder';
+import { getCategoryStubsView, getCategoryViewBySlug } from '@lib/api/viewsBuilder';
 import { renderMarkdown } from '@lib/api/markdownRenderer';
 import { getApiPageTitle } from '@lib/api/pageTitleBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
@@ -13,7 +13,7 @@ import type { GetStaticPaths, GetStaticPathsResult } from 'astro';
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: GetStaticPathsResult = [];
   for (const lang of LOCALES) {
-    for (const cat of await getCategoriesView(lang)) {
+    for (const cat of await getCategoryStubsView(lang)) {
       paths.push({
         params: {
           lang: lang === 'en' ? undefined : lang,
@@ -35,7 +35,7 @@ if (!slug || typeof slug !== 'string') {
   return new Response(null, { status: 404 });
 }
 
-const categories = await getCategoriesView(lang);
+const categories = await getCategoryStubsView(lang);
 const current = await getCategoryViewBySlug(slug, lang);
 if (!current) {
   return new Response(null, { status: 404 });
@@ -49,7 +49,7 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
   title={`${current.name} - Datadog API`}
   description={mdToMetaDescription(current.description) || `${current.name} endpoints in the Datadog API.`}
   categories={categories}
-  currentSlug={slug}
+  activeCategory={current}
   breadcrumbs={[
     { label: i18n('docs', lang), href: localizedHref(lang, '/') },
     { label: getApiPageTitle('', lang) ?? 'API Reference', href: localizedHref(lang, '/api/latest/') },

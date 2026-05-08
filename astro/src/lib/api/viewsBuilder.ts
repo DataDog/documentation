@@ -32,6 +32,7 @@ import type { ApiVersion } from "./schemas/version";
 import type {
   ApiOperationStub,
   ApiCategory,
+  ApiCategoryStub,
   EndpointData,
 } from "./schemas/views";
 
@@ -75,6 +76,20 @@ export async function getCategoriesView(
   const built = buildCategories(lang);
   categoriesCache.set(lang, built);
   return built;
+}
+
+/**
+ * Lightweight variant of `getCategoriesView` that drops each category's
+ * `operations` array. Use for callers that render only the category list
+ * (e.g. the side nav on pages outside any category, or the side nav's
+ * always-visible category links). Reads the same memoized result as
+ * `getCategoriesView`, so calling both in the same build is free.
+ */
+export async function getCategoryStubsView(
+  lang: Locale = DEFAULT_LOCALE,
+): Promise<ApiCategoryStub[]> {
+  const all = await getCategoriesView(lang);
+  return all.map(({ operations: _operations, ...stub }) => stub);
 }
 
 /**
