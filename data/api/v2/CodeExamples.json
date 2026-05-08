@@ -835,20 +835,6 @@
       "description": "Update an existing incident service returns \"OK\" response"
     }
   ],
-  "CreateIncidentTeam": [
-    {
-      "group": "incident_teams",
-      "suffix": "",
-      "description": "Create a new incident team returns \"CREATED\" response"
-    }
-  ],
-  "UpdateIncidentTeam": [
-    {
-      "group": "incident_teams",
-      "suffix": "",
-      "description": "Update an existing incident team returns \"OK\" response"
-    }
-  ],
   "UpdateIncident": [
     {
       "group": "incidents",
