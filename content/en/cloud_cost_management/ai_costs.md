@@ -113,7 +113,7 @@ The following tags are available through OOTB allocation rules:
 {{% /tab %}}
 {{< /tabs >}}
 
-After costs are attributed to users, API keys, and other sources use [Tag Pipelines][7] to automatically map them to teams, services, or business units for streamlined aggregate reporting. See [Reporting][10] for more information.
+After costs are attributed to users, API keys, and other sources, use [Tag Pipelines][7] to automatically map them to teams, services, or business units for streamlined aggregate reporting. See [Reporting][10] for more information.
 
 ## Further reading
 
