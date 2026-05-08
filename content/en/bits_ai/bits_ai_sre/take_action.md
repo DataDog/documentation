@@ -12,7 +12,7 @@ After Bits AI SRE identifies a root cause, it can help you take action in three 
 
 ## Code Fixes
 
-Bits AI SRE integrates with [Bits AI Dev Agent][2] to automatically generate code fixes. The Dev Agent connects to GitHub or GitLab to create production-ready pull requests and iterates on fixes using CI logs and developer feedback, and uses multiple Datadog products to generate contextual fixes.
+Bits AI SRE integrates with [Bits AI Dev Agent][2] to automatically generate code fixes. The Dev Agent connects to GitHub or GitLab to create production-ready pull requests, iterate on fixes using CI logs and developer feedback, and apply context from multiple Datadog products.
 
 To start receiving code fixes, [set up the Bits AI Dev Agent][1]. Then, if Bits AI SRE has determined a code-related root cause, you will automatically receive suggested code fixes.
 
