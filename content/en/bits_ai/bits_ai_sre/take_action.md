@@ -10,7 +10,7 @@ After Bits AI SRE identifies a root cause, it can help you take action in three 
 - Remediation Recommendations provide corrective steps and fully configured commands.
 - Triage Suggestions help coordinate the response through connected tools.
 
-## Code Fixes
+## Code fixes
 
 Bits AI SRE integrates with [Bits AI Dev Agent][2] to automatically generate code fixes. The Dev Agent connects to GitHub or GitLab to create production-ready pull requests, iterate on fixes using CI logs and developer feedback, and apply context from multiple Datadog products.
 
