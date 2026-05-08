@@ -1,0 +1,25 @@
+.ddsql-schema-single {
+    .highlight .chroma {
+        background: #F9FAFB;
+        border: none;
+        padding: 8px;
+        .chroma {
+            padding: 0;
+        }
+        table {
+            background: #F9FAFB;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            td {
+                border-left: none !important;
+            }
+            code {
+                line-height: 18px;
+                span {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}

@@ -1,5 +1,9 @@
 ---
 description: Filtrar la lista de monitores utilizando la búsqueda por facetas
+further_reading:
+- link: /getting_started/search/
+  tag: Documentación
+  text: Introducción a la búsqueda en Datadog
 title: Buscar monitores
 ---
 
@@ -49,7 +53,7 @@ La búsqueda avanzada te permite filtrar monitores utilizando cualquier combinac
 | Tipo         | [Tipo de monitor][4] del Datadog.                                                                   |
 | Creador      | La persona que crea el monitor.                                                                      |
 | Servicio      | Las etiquetas (tags) de servicio que utilizas en el formulario `service:<VALUE>`.                                         |
-| Etiqueta          | Las [etiquetas][5] asignadas al monitor                                               |
+| Etiqueta (tag)          | Las [etiquetas][5] asignadas al monitor                                               |
 | Entorno          | Las etiquetas de entorno que utilizas en el formulario `env:<VALUE>`.                                         |
 | Contexto        | Busca las etiquetas presentes en el campo `from` de consulta de tu monitor.                                   |
 | Métrica/Check | El check de métrica o servicio que se está monitorizando.                                                     |
@@ -91,6 +95,10 @@ Desde la entrada de la vista predeterminada en el panel Vistas:
 * **Vuelve a cargar** la vista predeterminada haciendo clic en la entrada.
 * **Actualiza** tu vista predeterminada con los parámetros actuales.
 * **Restablece** tu vista predeterminada a los valores por defecto de Datadog para empezar de nuevo.
+
+## Referencias adicionales
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/monitors/status/#properties
 [2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax

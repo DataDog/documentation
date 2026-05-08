@@ -2,6 +2,9 @@
 title: Grouping Logs Into Patterns
 description: 'Group queried logs into patterns.'
 further_reading:
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 - link: 'logs/explorer/'
   tag: 'Documentation'
   text: 'Learn about the Log Explorer'
@@ -53,5 +56,5 @@ For example, if you are investigating an issue, you could see how many hosts are
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/visualize/#list-aggregates-of-logs
-[2]: /logs/log_configuration/processors/#grok-parser
+[2]: /logs/log_configuration/processors/grok_parser/
 [3]: https://app.datadoghq.com/logs

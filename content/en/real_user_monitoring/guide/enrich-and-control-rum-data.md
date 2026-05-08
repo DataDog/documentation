@@ -5,6 +5,10 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
+- link: "https://learn.datadoghq.com/courses/custom-data-rum-javascript"
+  tag: "Learning Center"
+  text: "Collect custom data with RUM for JavaScript web applications"
+
 ---
 
 ## Overview
@@ -272,8 +276,8 @@ The following tabs show the information contained in the `beforeSend` event and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#modify-the-content-of-a-rum-event
-[2]: /real_user_monitoring/browser/data_collected/
+[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#modify-the-content-of-a-rum-event
+[2]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Event
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest

@@ -93,7 +93,7 @@ To set up Mobile Session Replay for Kotlin Multiplatform:
 
 Make sure you've [set up and initialized the Datadog Kotlin Multiplatform RUM SDK][11] with views instrumentation enabled.
 
-### Step 2 - Add the `DatadogSessionReplay` iOS library as a link-only dependency 
+### Step 2 - Add the `DatadogSessionReplay` iOS library as a link-only dependency
 
 For instructions, see the [guide][12].
 
@@ -124,7 +124,7 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 SessionReplay.enable(sessionReplayConfig)
 ```
 
-### Step 5 - Set up Material support on Android (Optional) 
+### Step 5 - Set up Material support on Android (Optional)
 
 If your app uses Material on Android, add:
 
@@ -242,7 +242,7 @@ During this step, you can also configure multiple [privacy levels][17] that appl
 cd ios && pod install
 ```
 
-### Step 5 - Rebuild your app 
+### Step 5 - Rebuild your app
 
 Rebuild your iOS and Android apps
 
@@ -326,6 +326,12 @@ class _MyAppState extends State<MyApp> {
   }
 }
 ```
+
+### Step 5 - Set Strip Style (iOS only)
+
+Flutter Session Replay relies on FFI, and some symbols may be stripped when building an iOS Archive or IPA. To prevent this, set the `Strip Style` setting in your XCode project to `Non-Global Symbols`.
+
+This setting is under the **Runner** target > **Build Settings** > **Deployment**.
 
 {% /if %}
 <!-- end Flutter -->
@@ -586,7 +592,7 @@ DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
 See [Privacy Options][2].
 
 [1]: /real_user_monitoring/application_monitoring/ios/web_view_tracking
-[2]: /real_user_monitoring/session_replay/mobile/privacy_options
+[2]: /session_replay/mobile/privacy_options
 [3]: https://reactnative.dev/architecture/landing-page
 [4]: https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-session-replay/versions
 [5]: /real_user_monitoring/android/?tab=kotlin
@@ -601,16 +607,16 @@ See [Privacy Options][2].
 [14]: /real_user_monitoring/application_monitoring/react_native/setup
 [15]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
 [16]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
-[17]: /real_user_monitoring/session_replay/mobile/privacy_options/?tab=reactnative
+[17]: /session_replay/mobile/privacy_options/?tab=reactnative
 [18]: https://github.com/DataDog/dd-sdk-reactnative
 [19]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
 [20]: /real_user_monitoring/application_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
-[21]: /real_user_monitoring/session_replay/browser/#setup
+[21]: /session_replay/browser/#setup
 [22]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
 [23]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/?tab=ios#instrument-your-web-views
 [24]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
 [25]: /real_user_monitoring/application_monitoring/web_view_tracking/?tab=reactnative#instrument-your-web-views
-[26]: /real_user_monitoring/session_replay/browser/#setup
+[26]: /session_replay/browser/#setup
 [27]: https://reactnative.dev/architecture/landing-page
 [28]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup?tab=rum
 [29]: https://pub.dev/packages/datadog_session_replay

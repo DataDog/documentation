@@ -1,4 +1,5 @@
 ---
+description: Kubernetes、 Docker、クラウド プラットフォーム上のコンテナ化された Datadog Agent デプロイメントで発生するホスト名解決エラーをトラブルシュートします。
 title: コンテナでのホスト名検出
 ---
 

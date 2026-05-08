@@ -29,7 +29,7 @@ further_reading:
   text: 'Glossary entry for "tail"'
 ---
 
-To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent.
+To send your logs to Datadog, log to a file and [tail][1] that file with your Datadog Agent.
 
 Stack traces from typical Java logs are split into multiple lines, which makes them difficult to associate to the original log event. For example:
 
@@ -45,8 +45,8 @@ To address this issue, configure your logging library to produce your logs in JS
 
 * Ensure that the stack trace is properly wrapped into the log event.
 * Ensure that all log event attributes (such as severity, logger name, and thread name) are properly extracted.
-* Gain access to [Mapped Diagnostic Context (MDC)][1] attributes, which you can attach to any log event.
-* Avoid the need for [custom parsing rules][2].
+* Gain access to [Mapped Diagnostic Context (MDC)][2] attributes, which you can attach to any log event.
+* Avoid the need for [custom parsing rules][3].
 
 The following instructions show setup examples for the Log4j, Log4j 2, and Logback logging libraries.
 
@@ -122,7 +122,7 @@ Log4j 2 includes a JSON layout.
   <Configuration>
     <Appenders>
       <File name="FILE" fileName="logs/app.log" >
-        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>      
+        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>
       </File>
     </Appenders>
     <Loggers>
@@ -384,13 +384,13 @@ writer.format   = {level} - {message} - "dd.trace_id":{context: dd.trace_id} - "
 writer.file     = log.txt
 ```
 
-[1]: https://tinylog.org/v2/configuration/#json-writer
+[1]: https://tinylog.org/v2/configuration/#writer
 {{% /tab %}}
 {{< /tabs >}}
 
 #### Inject trace IDs into your logs
 
-If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][3].
+If APM is enabled for this application, you can correlate logs and traces by enabling trace ID injection. See [Connecting Java Logs and Traces][4].
 
 If you are _not_ correlating logs and traces, remove the MDC placeholders (`%X{dd.trace_id} %X{dd.span_id}`) from the log patterns included in the previous configuration examples.
 
@@ -410,9 +410,9 @@ For example, if you are using Log4j 2 but not correlating logs and traces, remov
 
 ## Configure the Datadog Agent
 
-Once [log collection is enabled][4], set up [custom log collection][5] to tail your log files and send them to Datadog.
+Once [log collection is enabled][5], set up [custom log collection][6] to tail your log files and send them to Datadog.
 
-1. Create a `java.d/` folder in the `conf.d/` [Agent configuration directory][6].
+1. Create a `java.d/` folder in the `conf.d/` [Agent configuration directory][7].
 2. Create a `conf.yaml` file in `java.d/` with the following content:
 
     ```yaml
@@ -431,12 +431,12 @@ Once [log collection is enabled][4], set up [custom log collection][5] to tail y
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
 
-3. [Restart the Agent][7].
-4. Run the [Agent's status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+3. [Restart the Agent][8].
+4. Run the [Agent's status subcommand][9] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
-If logs are in JSON format, Datadog automatically [parses the log messages][9] to extract log attributes. Use the [Log Explorer][10] to view and troubleshoot your logs.
+If logs are in JSON format, Datadog automatically [parses the log messages][10] to extract log attributes. Use the [Log Explorer][11] to view and troubleshoot your logs.
 
-## Agentless logging
+## Stream logs directly to the Agent
 
 In the exceptional case where your application is running on a machine that cannot be accessed or cannot log to a file, it is possible to stream logs to Datadog or to the Datadog Agent directly. This is not the recommended setup, because it requires that your application handles connection issues.
 
@@ -518,74 +518,74 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
 {{< /tabs >}}
 
 ### Configure Logback
+Datadog does not support sending logs directly over TCP to Datadog intake. Instead, configure Logback to your local Datadog Agent, which then forwards logs to Datadog over HTTPS with automatic enrichment.
 
-{{< site-region region="us3,us5,ap1,ap2,gov" >}}
-  <div class="alert alert-danger">The TCP endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). For a list of logging endpoints, see <a href="/logs/log_collection/?tab=tcp#additional-configuration-options"> Log Collection and Integrations</a>.</div>
-{{< /site-region >}}
+1. [Install a local Datadog Agent][12] (v6+ / v7+).
+1. Enable log collection in `datadog.yaml`, and ensure the Agent forwards logs over HTTPS (HTTPS is the default transport for Agent v6.19+/v7.19+ and later):
+   ```
+   logs_enabled: true
+   logs_config:
+     # HTTPS is the default. Keep or set this to force HTTPS forwarding.
+     force_use_http: true
+     # (Optional) auto-detect multi-line patterns
+     auto_multi_line_detection: true
+   ```
 
+1. Enable log collection on the Agent.
+   ```yaml
+   # /etc/datadog-agent/conf.d/logback.d/conf.yaml
+   logs:
+     - type: tcp
+       port: 10518           # Port the Agent will listen on
+       service: my-java-app  # Your service name (unified service tagging)
+       source: java          # Or a more specific source, e.g., "logback"
+   ```
+1. Restart the Agent to apply changes.
+1. Configure Logback to send logs to the Agent. Use the [logstash-logback-encoder][13] TCP appender in your `logback.xml` to forward logs to the Agent:
+   ```xml
+   <configuration>
+     <appender name="DD_TCP_JSON" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+       <destination>localhost:10518</destination>
+       <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+         <providers>
+           <timestamp/>
+           <pattern>
+             <pattern>
+               {
+                 "message": "%message",
+                 "level": "%level",
+                 "logger": "%logger",
+                 "service": "${DD_SERVICE:-my-java-app}",
+                 "env": "${DD_ENV:-prod}",
+                 "version": "${DD_VERSION:-1.0.0}",
+                 "dd.trace_id": "%X{dd.trace_id}",
+                 "dd.span_id": "%X{dd.span_id}"
+               }
+             </pattern>
+           </pattern>
+           <arguments/>
+           <stackTrace/>
+         </providers>
+       </encoder>
+     </appender>
+   </configuration>
+   ```
+   Then reference it in your root logger:
+   ```xml
+   <root level="INFO">
+     <appender-ref ref="DD_TCP_JSON"/>
+   </root>
+   ```
 
-{{< site-region region="us,eu" >}}
+1. Verify log forwarding. Run `datadog-agent status` to confirm your TCP listener, and check the Logs Explorer for entries tagged with your service.
 
-Use the [logstash-logback-encoder][11] logging library along with Logback to stream logs directly to Datadog.
-
-1. Configure a TCP appender in your `logback.xml` file. With this configuration, your API key is retrieved from the `DD_API_KEY` environment variable. Alternatively, you can insert your API key directly into the configuration file:
-
-   For the following configuration, replace `<YOUR REGION INTAKE>` with the intake based on your region:{{< region-param key="dd_site_name" code="true" >}}. 
-    - **US1**: `intake.logs.datadoghq.com:10516`    
-    - **EU**: `tcp-intake.logs.datadoghq.eu:443`
-
-    ```xml
-    <configuration>
-      <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>logs/app.log</file>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
-      </appender>
-      <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination><YOUR REGION INTAKE></destination>
-        <keepAliveDuration>20 seconds</keepAliveDuration>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-                <layout class="ch.qos.logback.classic.PatternLayout">
-                    <pattern>${DD_API_KEY} %mdc{keyThatDoesNotExist}</pattern>
-                </layout>
-              </prefix>
-        </encoder>
-        <ssl />
-      </appender>
-
-      <root level="DEBUG">
-        <appender-ref ref="FILE"/>
-        <appender-ref ref="JSON_TCP" />
-      </root>
-    </configuration>
-    ```
-
-    **Note:** `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace. For more information about the prefix parameter, see the [Logback documentation][12].
-
-2. Add the Logstash encoder dependency to your `pom.xml` file. For example:
-
-    ```xml
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.2.9</version>
-    </dependency>
-    <dependency>
-      <groupId>net.logstash.logback</groupId>
-      <artifactId>logstash-logback-encoder</artifactId>
-      <version>6.6</version>
-    </dependency>
-    ```
-[11]: https://github.com/logstash/logstash-logback-encoder
-[12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-{{< /site-region >}}
 ## Getting further
 
 Enrich your log events with contextual attributes.
 
 ### Using the key value parser
 
-The [key value parser][13] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
+The [key value parser][14] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
 
 To enrich your log events in Java, you can re-write messages in your code and introduce `<KEY>=<VALUE>` sequences.
 
@@ -616,7 +616,7 @@ So you can exploit *scope* as a field, and *durationInMs* and *quantity* as log 
 
 ### MDC
 
-Another option to enrich your logs is to use Java's [Mapped Diagnostic Contexts (MDC)][1].
+Another option to enrich your logs is to use Java's [Mapped Diagnostic Contexts (MDC)][2].
 
 If you use SLF4J, use the following Java code:
 
@@ -642,17 +642,17 @@ To generate this JSON:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: http://logback.qos.ch/manual/mdc.html
-[2]: /logs/log_configuration/parsing
-[3]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[4]: /agent/logs/?tab=tailfiles#activate-log-collection
-[5]: /agent/logs/?tab=tailfiles#custom-log-collection
-[6]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[7]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
-[9]: /logs/log_configuration/parsing/?tab=matchers
-[10]: /logs/explorer/#overview
-[11]: https://github.com/logstash/logstash-logback-encoder
-[12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-[13]: /logs/log_configuration/parsing/#key-value-or-logfmt
-[14]: /glossary/#tail
+[1]: /glossary/#tail
+[2]: http://logback.qos.ch/manual/mdc.html
+[3]: /logs/log_configuration/parsing
+[4]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[5]: /agent/logs/?tab=tailfiles#activate-log-collection
+[6]: /agent/logs/?tab=tailfiles#custom-log-collection
+[7]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[8]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[9]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[10]: /logs/log_configuration/parsing/?tab=matchers
+[11]: /logs/explorer/#overview
+[12]: /agent/?tab=Host-based
+[13]: https://github.com/logstash/logstash-logback-encoder
+[14]: /logs/log_configuration/parsing/#key-value-or-logfmt

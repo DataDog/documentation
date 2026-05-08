@@ -452,8 +452,4 @@ Rsyslog를 설정하여 호스트, 컨테이너 및 서비스에서 로그를 �
 
 도움이 필요하신가요? [Datadog 고객지원][1]에 연락하세요.
 
-## 참고 자료
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /ko/help/

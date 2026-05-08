@@ -11,13 +11,16 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
       tag: "Blog"
       text: "Use CIDR notation queries to filter your network traffic logs"
+    - link: "https://learn.datadoghq.com/courses/log-investigations"
+      tag: "Learning Center"
+      text: "Track Logs for Alerting and Investigations"
 algolia:
   tags: ['log metrics', 'generating logs from metrics']
 ---
 
 ## Overview
 
-<div class="alert alert-info">The solutions outlined in this documentation are specific to cloud-based logging environments. To generate metrics from on-premises logs, see the <a href="https://docs.datadoghq.com/observability_pipelines/set_up_pipelines/generate_metrics/">Observability Pipelines</a> documentation.</div>
+<div class="alert alert-info">The solutions outlined in this documentation are specific to cloud-based logging environments. To generate metrics from on-premises logs, see the <a href="https://docs.datadoghq.com/observability_pipelines/configuration/explore_templates#generate-metrics">Observability Pipelines</a> documentation.</div>
 
 Datadog's [Logging without Limits][1]\* lets you dynamically decide what to include or exclude from your indexes for storage and query, at the same time many types of logs are meant to be used for telemetry to track trends, such as KPIs, over long periods of time. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit what you store for exploration, you can still visualize trends and anomalies over all of your log data at 10s granularity for 15 months.
 

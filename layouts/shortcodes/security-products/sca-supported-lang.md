@@ -7,7 +7,3 @@ The following languages are supported:
 - Ruby
 - Go
 - PHP
-- C++
-- Elixir/Erlang
-- Dart
-- R

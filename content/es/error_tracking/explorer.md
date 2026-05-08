@@ -9,7 +9,7 @@ title: Explorador de Error Tracking
 
 ## Información general
 
-{{< img src="error_tracking/error-tracking-overview-2.png" alt="Detalles de un incidente en el Explorador de Error Tracking" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="Detalles de un incidente en el Explorador de Error Tracking" style="width:100%;" >}}
 
 El Explorador de Error Tracking permite ver, filtrar e investigar incidentes. Un incidente es un grupo de errores similares relacionados con el mismo fallo. Datadog crea incidentes contando una huella digital por cada error, utilizando algunos de sus atributos como el tipo de error, el mensaje de error o la traza (trace) de stack tecnológico. Los errores con la misma huella digital se agrupan en el mismo incidente.
 
@@ -46,7 +46,7 @@ Clasifica incidentes en la lista utilizando una de estas opciones:
 
 ### Facetas
 
-{{< img src="/error_tracking/facets-panel.png" alt="Facetas de Error Tracking" style="width:100%;" >}}
+{{< img src="/error_tracking/facets-panel-2.png" alt="Facetas de Error Tracking" style="width:100%;" >}}
 
 Error Tracking indexa automáticamente una lista predefinida de atributos de tus incidentes y crea facetas a partir de ella. Una faceta muestra todos los miembros distintos de un atributo para el periodo de tiempo seleccionado y proporciona algunos análisis básicos, como el número de incidentes representados. Las facetas permiten pivotar o filtrar los incidentes en función de un atributo determinado.
 
@@ -66,7 +66,7 @@ Haz clic en el icono Edit (Editar) para ver la lista de facetas disponibles que 
 
 Además de los eventos de error, Error Tracking ofrece filtros de nivel de incidente para refinar la lista de incidentes mostrados.
 
-{{< img src="error_tracking/issue-level-filters.png" alt="Filtros de nivel de incidente en Error Tracking" style="width:100%;" >}}
+{{< img src="error_tracking/issue-level-filters-2.png" alt="Filtros de nivel de incidente en Error Tracking" style="width:100%;" >}}
 
 #### Fuentes
 
@@ -94,11 +94,11 @@ Realiza un seguimiento de los incidentes, asígnalos a los miembros del equipo c
 
 Haz clic en cualquier incidente para abrir el panel de incidentes y ver más información sobre este.
 
-{{< img src="real_user_monitoring/error_tracking/issue_summary.png" alt="Parte superior del panel de incidentes de Tracking que ofrece una vista resumida del incidente" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="Parte superior del panel de incidentes de Tracking que ofrece una vista resumida del incidente" style="width:80%;" >}}
 
 Los detalles claros que necesitas para solucionar un incidente se encuentran en la parte superior del panel. Desde allí, podrás entender su ciclo de vida: las fechas del primero y el último caso, el recuento total, así como el recuento a lo largo del tiempo para el incidente en cuestión.
 
-{{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="Parte inferior del panel de incidentes de Error Tracking que ofrece ejemplos de error" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="Parte inferior del panel de incidentes de Error Tracking que ofrece ejemplos de error" style="width:80%;" >}}
 
 La información mostrada en el panel de incidentes varía en función de la fuente del error. Por ejemplo, un incidente creado a partir de errores APM muestra etiquetas del tramo de error, como el recurso o el nombre de la operación, con acceso directo a la traza relacionada o a los logs vinculados a ella.
 

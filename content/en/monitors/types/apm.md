@@ -17,6 +17,10 @@ further_reading:
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
+- link: "https://learn.datadoghq.com/courses/apm-monitors-and-alerting"
+  tag: "Learning Center"
+  text: "APM Monitors and Alerting"
+
 ---
 
 ## Overview
@@ -24,6 +28,28 @@ further_reading:
 APM metric monitors work like regular [metric monitors][1], but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures.
 
 Analytics monitors allow you to visualize APM data over time and set up alerts based on Indexed Spans. For example, use an Analytics monitor to receive alerts on a spike in slow requests.
+
+### Automatic APM monitors
+
+Automatic Monitors for APM are available to new organizations and activate as soon as the Datadog Agent is installed and spans begin flowing into Datadog. This provides immediate alerting coverage on your key services with minimal configuration, and helps you to maintain coverage without gaps.
+
+Monitors are automatically created for service entry points, which are identified by operations tagged with <code>[span.kind][6]:server</code> or `span.kind:consumer` and represent where requests enter your service. 
+
+Automatic monitors for APM include:
+
+#### Error rate threshold monitors
+
+Error rate threshold monitors are created per service entry point using APM trace metrics. These alert you when error behavior spikes and help ensure your most critical endpoints are covered by default. The default error rate is 10%, but can be configured for your environment. 
+
+#### Watchdog anomaly monitors
+
+Watchdog anomaly monitors automatically detect unusual patterns in latency, errors, and request volume (hits) for all services without requiring you to manually configure thresholds.
+
+
+**Note**: Automatic monitor creation is only available during a trial.
+
+You can view and manage all automatically created monitors on the [Monitors page][7], where they can be edited, cloned, or disabled.
+
 
 ## Monitor creation
 
@@ -132,3 +158,5 @@ For detailed instructions on the **Configure notifications and automations** sec
 [3]: /monitors/notify/
 [4]: https://app.datadoghq.com/services
 [5]: https://app.datadoghq.com/apm/map
+[6]: /standard-attributes/?search=span.kind&product=apm
+[7]: https://app.datadoghq.com/monitors/

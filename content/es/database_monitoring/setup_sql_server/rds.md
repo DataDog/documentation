@@ -10,6 +10,12 @@ further_reading:
 - link: /database_monitoring/guide/sql_deadlock/
   tag: Documentación
   text: Configurar la monitorización de interbloqueos
+- link: /database_monitoring/guide/sql_extended_events/
+  tag: Documentación
+  text: Configurar la finalización de consultas y la recopilación de errores de consulta
+- link: /database_monitoring/guide/parameterized_queries/
+  tag: Documentación
+  text: Captura de valores de parámetros de consulta SQL
 title: Configuración de Database Monitoring para SQL Server en Amazon RDS
 ---
 
@@ -37,7 +43,7 @@ Habilita la **Recopilación estándar** en la sección **Recopilación de recurs
 
 El Datadog Agent requiere acceso de sólo lectura al servidor de la base de datos para recopilar estadísticas y consultas.
 
-Crea un inicio de sesión de solo lectura para conectarte a tu servidor y concede los permisos necesarios:
+Crea un inicio de sesión de solo lectura para conectarte a tu servidor y conceder los permisos necesarios:
 
 ```SQL
 USE [master];
@@ -243,11 +249,11 @@ Utiliza las etiquetas (tags) `service` y `env` para vincular la telemetría de t
 
 Si estás ejecutando un clúster de Kubernetes, utiliza el [Datadog Cluster Agent][1] para habilitar Database Monitoring. Si los checks de clúster aún no están habilitados, [sigue estas instrucciones][2] para habilitarlos antes de continuar.
 
-### Operator
+### Operador
 
 Sigue los pasos que se indican a continuación para configurar la integración SQL Server, utilizando como referencia las [instrucciones del Operator en Kubernetes e integraciones][6].
 
-1. Crea o actualiza el archivo `datadog-agent.yaml` con la siguiente configuración:
+1. Crea o actualiza el archivo `Datadog-Agent.yaml` con la siguiente configuración:
 
     ```yaml
     apiVersion: datadoghq.com/v2alpha1
@@ -295,7 +301,7 @@ Sigue los pasos que se indican a continuación para configurar la integración S
                     instance_endpoint: <INSTANCE_ENDPOINT>
     ```
 
-2. Aplica los cambios al Datadog Operator utilizando el siguiente comando:
+2. Aplica los cambios al Datadog Operator con el siguiente comando:
 
     ```shell
     kubectl apply -f datadog-agent.yaml
@@ -338,7 +344,7 @@ Realiza los siguientes pasos para instalar el [Datadog Cluster Agent][1] en tu c
     ```
 
 <div class="alert alert-info">
-For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+Para Windows, adjunta <code>--set targetSystem=windows</code> al comando de <code>instalación de Helm</code>.
 </div>
 
 ### Configuración con archivos integrados
@@ -366,7 +372,7 @@ instances:
 
 ### Configuración con anotaciones de servicios de Kubernetes
 
-En lugar de montar un archivo, puedes declarar la configuración de la instancia como un servicio de Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
+En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio con la siguiente sintaxis:
 
 ```yaml
 apiVersion: v1

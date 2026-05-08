@@ -1,88 +1,52 @@
 ---
 app_id: oke
-app_uuid: c3361861-32be-4ed4-a138-d68b85b8d88b
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10255
-    source_type_name: 'Oracle Container Engine para Kubernetes: OKE'
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
-- contenedores
-- kubernetes
+- configuración y despliegue
+- rastreo
+- Kubernetes
+- métricas
 - oracle
 - orquestación
-custom_kind: integration
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/oke/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: oke
-integration_id: oke
-integration_title: Oracle Container Engine para Kubernetes
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: oke
-public_title: Oracle Container Engine para Kubernetes
-short_description: OKE es un servicio de orquestación de contenedores gestionado por
-  Oracle.
+custom_kind: integración
+description: OKE es un servicio de orquestación de contenedores gestionado por OCI.
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-oracle-kubernetes-engine/
+  tag: blog
+  text: Cómo monitorizar el motor de Kubernetes de Oracle con Datadog
+integration_version: 1.0.0
+media: []
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Containers
-  - Category::Kubernetes
-  - Category::Oracle
-  - Category::Orchestration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: OKE es un servicio de orquestación de contenedores gestionado por Oracle.
-  media: []
-  overview: README.md#Overview
-  resources:
-  - resource_type: Blog
-    url: https://www.datadoghq.com/blog/monitor-oracle-kubernetes-engine/
-  support: README.md#Support
-  title: Oracle Container Engine para Kubernetes
+title: Oracle Container Engine para Kubernetes
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
-
-
 ## Información general
 
-Oracle Cloud Infrastructure Container Engine para Kubernetes (OKE) es un servicio totalmente gestionado de Kubernetes para desplegar y ejecutar tus aplicaciones en contenedores en Oracle Cloud. Datadog te proporciona una visibilidad completa de tus clústeres de Kubernetes gestionados por OKE. Una vez que hayas habilitado tu integración de Datadog, puedes ver tu infraestructura de Kubernetes, monitorizar Live Processes y realizar un seguimiento de métricas clave de todos tus pods y contenedores en un solo lugar.
+Oracle Cloud Infrastructure Container Engine para Kubernetes (OKE) es un servicio gestionado de Kubernetes que simplifica las operaciones de Kubernetes a escala empresarial.
+
+Esta integración recopila métricas y etiquetas del espacio de nombres [`oci_oke`](https://docs.oracle.com/en-us/iaas/Content/ContEng/Reference/contengmetrics.htm) para ayudarte a monitorizar tu plano de control de Kubernetes, clústeres y estados de nodos.
+
+El despliegue del [Datadog Agent](https://docs.datadoghq.com/agent/kubernetes/#installation) en tu clúster de OKE también puede ayudarte a realizar un seguimiento de la carga en tus clústeres, pods y nodos individuales para obtener mejores conocimientos sobre cómo aprovisionar y desplegar tus recursos.
+
+Además de la monitorización de tus nodos, pods y contenedores, el Agent también puede recopilar e informar métricas de los servicios que se ejecutan en tu clúster, para que puedas:
+
+- Explora tus clústeres de OKE con [dashboards preconfigurados de Kubernetes](https://app.datadoghq.com/dashboard/lists/preset/3?q=kubernetes)
+- Monitorizar contenedores y procesos en tiempo real
+- Hacer un seguimiento automático y monitorizar servicios en contenedores
 
 ## Configuración
 
+Una vez configurada la integración de [Oracle Cloud Infrastructure](https://docs.datadoghq.com/integrations/oracle_cloud_infrastructure/), asegúrate de que el espacio de nombres `oci_oke` está incluido en tu [Connector Hub](https://cloud.oracle.com/connector-hub/service-connectors).
+
 Dado que Datadog ya se integra con Kubernetes, está preparado para monitorizar OKE. Si estás ejecutando el Agent en un clúster de Kubernetes y planeas migrar a OKE, puedes continuar con la monitorización de tu clúster con Datadog.
 
-Además, se admiten grupos de nodos de OKE.
-
+Desplegar el Agent como un DaemonSet con el [Helm chart](https://docs.datadoghq.com/agent/kubernetes/?tab=helm) es el método más directo (y recomendado), ya que asegura que el Agent se ejecutará como un pod en cada nodo dentro de tu clúster y que cada nuevo nodo tendrá automáticamente el Agent instalado. También puedes configurar el Agent para recopilar datos de procesos, trazas y logs añadiendo unas pocas líneas adicionales a un archivo de valores Helm. Adicionalmente, los grupos de nodos de OKE son compatibles.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de soporte de Datadog][1].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/help/).
 
 ## Referencias adicionales
 
-- [Cómo monitorizar OKE con Datadog][2]
-
-[1]: https://docs.datadoghq.com/es/help/
-[2]: https://www.datadoghq.com/blog/monitor-oracle-kubernetes-engine/
+- [Cómo monitorizar OKE con Datadog](https://www.datadoghq.com/blog/monitor-oracle-kubernetes-engine/)

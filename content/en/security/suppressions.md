@@ -23,6 +23,10 @@ products:
 
 Suppressions are specific conditions for when a signal should not be generated, which can improve the accuracy and relevance of the signals that are generated.
 
+{{< callout btn_hidden="true" header="Suppression evaluation" >}}
+There are two types of suppression queries: suppression on **signal attributes** and suppression on **log or event attributes**. Signal-based suppressions are only evaluated at the time a signal is created. They are not re-evaluated when a signal is updated. Log and event attribute suppressions prevent matching events from new signals and updated existing signals. Datadog recommends using log and event attribute suppressions to reliably exclude specific activity.
+{{< /callout >}}
+
 ## Suppression routes
 
 You can set up a suppression query within an individual [detection rule](#detection-rules), or define a separate [suppression rule](#suppression-rules) to suppress signals across one or more detection rules.
@@ -55,7 +59,7 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 1. Select the detection rules you want to apply this suppression to. You can select multiple detection rules.
 1. In the **Add Suppression Query** section, you have the option to enter suppression queries so that a signal is not generated when the values are met. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input the log query: `@user.username:john.doe`.
 {{< img src="security/security_monitoring/suppressions/suppression_query.png" alt="The add suppression query with the query @user.username:john.doe" style="width:65%;" >}}
-  Suppression rule queries are based on **signal attributes**. 
+  Suppression rule queries are based on **signal attributes**.
 1. Additionally, you can add a log exclusion query to exclude logs from being analyzed. These queries are based on **log attributes**. **Note**: The legacy suppression was based on log exclusion queries, but it is now included in the suppression rule's **Add a suppression query** step.
 
 ### Restrict edit permissions
@@ -69,5 +73,5 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 [1]: https://app.datadoghq.com/security/configuration/siem/rules/new
 [2]: /security/detection_rules/
 [3]: https://app.datadoghq.com/security/configuration/suppressions
-[4]: https://app.datadoghq.com/security/rules
+[4]: https://app.datadoghq.com/security/siem/rules
 [5]: /logs/explorer/facets/#log-side-panel

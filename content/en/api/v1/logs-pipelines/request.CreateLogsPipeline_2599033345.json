@@ -1,0 +1,25 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testPipelineWithNested",
+  "processors": [
+    {
+      "type": "pipeline",
+      "is_enabled": true,
+      "name": "nested_pipeline_with_metadata",
+      "filter": {
+        "query": "env:production"
+      },
+      "tags": [
+        "env:prod",
+        "type:nested"
+      ],
+      "description": "This is a nested pipeline for production logs"
+    }
+  ],
+  "tags": [
+    "team:test"
+  ],
+  "description": "Pipeline containing nested processor with tags and description"
+}

@@ -1,4 +1,6 @@
 ---
+description: Solucionar problemas comunes con el SDK de RUM Browser incluyendo datos
+  perdidos, bloqueadores de anuncios, restricciones de red y problemas de configuración.
 further_reading:
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: Blog
@@ -9,7 +11,7 @@ further_reading:
 title: Solucionar problemas
 ---
 
-Si experimentas algún comportamiento inesperado con Datadog Browser RUM, utiliza esta guía para resolver los problemas rápidamente. Si sigues teniendo problemas, contacta con el [equipo de asistencia de Datadog][1] para obtener más ayuda. Actualiza con regularidad el [RUM Browser SDK][2] a la última versión, ya que cada nueva versión contiene mejoras y correcciones.
+Si experimentas algún comportamiento inesperado con Datadog Browser RUM, utiliza esta guía para resolver los problemas rápidamente. Si sigues teniendo problemas, contacta con el [equipo de asistencia de Datadog][1] para obtener más ayuda. Actualiza con regularidad el [SDK del RUM Browser][2] a la última versión, ya que cada nueva versión contiene mejoras y correcciones.
 
 ## Datos faltantes 
 
@@ -19,16 +21,20 @@ Si no puedes ver ningún dato en RUM o si faltan datos de algún usuario:
 | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Los bloqueadores de anuncios impiden que el SDK del RUM Browser se descargue o envíe datos a Datadog.     | Algunos bloqueadores de anuncios amplían sus restricciones a las herramientas de rastreo de rendimiento y marketing. Consulta los documentos [Instalar el SDK del RUM Browser con npm][3] y [reenviar los datos recopilados a través de un proxy][4]. |
 | Las reglas de red, las VPN o el software antivirus pueden impedir que se descargue el SDK del RUM Browser o que se envíen datos a Datadog. | Permite el acceso a los endpoints necesarios para descargar el SDK del RUM Browser o para enviar datos. La lista de endpoints está disponible en la [documentación sobre la Política de seguridad de contenido][5].                                        |
-| Los scripts, paquetes y clientes inicializados antes del SDK del RUM Browser pueden provocar que se pierdan logs, recursos y acciones del usuario. Por ejemplo, inicializar ApolloClient antes que el SDK del RUM Browser puede provocar que las solicitudes `graphql` no se registren como recursos XHR en el navegador RUM. | Check dónde se inicializa el SDK de RUM Browser y plantéate adelantar este paso en la ejecución del código de tu aplicación.                                             |
-| Si has configurado `trackViewsManually: true` y observas que no hay sesiones, es posible que la aplicación haya dejado de enviar información RUM repentinamente aunque no haya errores red. | Asegúrate de iniciar una vista inicial una vez que hayas inicializado RUM para evitar cualquier pérdida de datos. Consulta [Configuración avanzada][6] para obtener más información.|
+| Los scripts, paquetes y clientes inicializados antes del SDK del RUM Browser pueden provocar que se pierdan logs, recursos y acciones del usuario. Por ejemplo, inicializar ApolloClient antes que el SDK del RUM Browser puede provocar que las solicitudes `graphql` no se registren como recursos XHR en el RUM Explorer. | Check dónde se inicializa el SDK de RUM Browser y plantéate adelantar este paso en la ejecución del código de tu aplicación.                                             |
+| Si has configurado `trackViewsManually: true` y observas que no hay sesiones, es posible que la aplicación haya dejado de enviar información RUM repentinamente aunque no haya errores de red. | Asegúrate de iniciar una vista inicial una vez que hayas inicializado RUM para evitar cualquier pérdida de datos. Consulta [Configuración avanzada][6] para obtener más información.|
 
-Lee las [directrices de la política de seguridad de contenidos][5] y asegúrate de que tu sitio web permita el acceso al CDN del SDK del RUM Browser y al endpoint de ingesta.
+Lee las [directrices de la política de seguridad de contenido][5] y asegúrate de que tu sitio web permita el acceso al CDN del SDK del RUM Browser y al endpoint de ingesta.
+
+## Problemas al ejecutar varias herramientas RUM en la misma aplicación
+
+Datadog solo admite un SDK por aplicación. Para garantizar una recopilación de datos óptima y la plena funcionalidad de todas las características del SDK de Datadog RUM, utiliza únicamente el SDK de Datadog RUM.
 
 ### Inicialización del SDK del RUM Browser
 
 Check si el SDK del RUM Browser se inicializa ejecutando `window.DD_RUM.getInternalContext()` en la consola de tu navegador y verifica que se devuelvan `application_id`, `session_id` y el objeto de vista:
 
-{{< img src="real_user_monitoring/browser/troubleshooting/success_rum_internal_context.png" alt="Comando de obtención de contexto interno ejecutado correctamente">}}
+{{< img src="real_user_monitoring/browser/troubleshooting/success_rum_internal_context.png" alt="El comando de obtención de contexto interno se ejecutó correctamente">}}
 
 Si el SDK del RUM Browser no está instalado o si no se inicializa correctamente, puedes ver el error `ReferenceError: DD_RUM is not defined` como el que se muestra a continuación:
 
@@ -44,13 +50,13 @@ También puedes check la consola de herramientas de desarrollo de tu navegador o
 El SDK de RUM envía lotes de datos de eventos a la ingesta de Datadog cada vez que se cumple una de estas condiciones:
 
 - Cada 30 segundos
-- Cuando se hayan alcanzado 50 eventos 
-- Cuando la carga útil sea >16 kB
+- Cuando se hayan alcanzado 50 eventos 
+- Cuando la carga útil sea >16 kB
 - En `visibility:hidden` o `beforeUnload`
 
-Si se están enviando datos, deberías ver solicitudes de redes dirigidas a `/v1/input` (la parte del origen de la URL puede diferir debido a la configuración de RUM) en la sección de red de las herramientas de desarrollo del navegador:
+Si se están enviando datos, deberías ver las solicitudes de red dirigidas a `api/v2/rum` (la parte del origen de la URL puede diferir debido a la configuración de RUM) en la sección Red de las herramientas de desarrollo de tu navegador:
 
-{{< img src="real_user_monitoring/browser/troubleshooting/network_intake.png" alt="Solicitudes de RUM a la ingesta de Datadog">}}
+{{< img src="real_user_monitoring/browser/troubleshooting/network_intake-1.png" alt="Solicitudes de RUM a la entrada de Datadog">}}
 
 ## Cookies de RUM
 
@@ -120,15 +126,19 @@ El SDK del navegador RUM permite configurar el [contexto global][10], la [inform
 
 Para minimizar el impacto en el ancho de banda del usuario, el SDK del navegador RUM limita los datos enviados a la ingesta de Datadog. Sin embargo, el envío de grandes volúmenes de datos puede afectar al rendimiento de los usuarios con conexiones a Internet lentas.
 
-Para una mejor experiencia de usuario, Datadog recomienda mantener el tamaño del contexto global, la información del usuario y las marcas de funciones por debajo de 3 KiB. Si los datos superan este límite, se muestra una advertencia: `The data exceeds the recommended 3KiB threshold.`
+Para una mejor experiencia de usuario, Datadog recomienda mantener el tamaño del contexto global, la información del usuario y las marcas de funciones por debajo de 3 KiB. Si los datos superan este límite, se mostrará una advertencia: `The data exceeds the recommended 3KiB threshold.`
 
 Desde v5.3.0, el SDK del RUM Browser admite la compresión de datos a través de `compressIntakeRequest` [parámetro de inicialización][13]. Cuando está activado, este límite recomendado se amplía de 3 KiB a 16 KiB.
 
 ## Advertencia de bloqueo de lectura de origen cruzado
 
-En los navegadores basados en Chromium, cuando el SDK del RUM Browser envía datos a la ingesta de Datadog, se muestra una advertencia CORB en la consola: `Cross-Origin Read Blocking (CORB) blocked cross-origin response`.
+En los navegadores de Chromium, cuando el SDK del RUM Browser envía datos a la ingesta de Datadog, se muestra una advertencia CORB en la consola: `Cross-Origin Read Blocking (CORB) blocked cross-origin response`.
 
 La advertencia se muestra porque la ingesta devuelve un objeto JSON no vacío. Este comportamiento es un problema reportado [de Chromium][8]. No afecta al SDK del RUM Browser y se lo puede ignorar en forma segura.
+
+## Advertencia "Deobfuscation failed"
+
+Aparece una advertencia cuando falla el desenmascaramiento de un stack trace. Si el stack trace no está enmascarado para empezar, puedes ignorar esta advertencia. De lo contrario, utiliza la [página Símbolos de depuración de RUM][14] para ver todos tus mapas fuente subidos. Consulta [Investigar stack traces enmascarados con símbolos de depuración de RUM][15].
 
 ## Referencias adicionales
 
@@ -147,3 +157,5 @@ La advertencia se muestra porque la ingesta devuelve un objeto JSON no vacío. E
 [11]: /es/real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [12]: /es/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
 [13]: /es/real_user_monitoring/browser/setup/#initialization-parameters
+[14]: https://app.datadoghq.com/source-code/setup/rum
+[15]: /es/real_user_monitoring/guide/debug-symbols

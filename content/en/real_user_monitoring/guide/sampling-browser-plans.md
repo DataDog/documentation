@@ -5,7 +5,7 @@ description: Learn how to customize your Browser RUM and Browser RUM & Session R
 aliases:
 - /real_user_monitoring/guide/sampling-browser-and-browser-premium/
 further_reading:
-- link: '/real_user_monitoring/browser/'
+- link: '/real_user_monitoring/application_monitoring/browser/'
   tag: 'Documentation'
   text: 'Learn about RUM Browser Monitoring'
 ---
@@ -22,15 +22,17 @@ The `sessionReplaySampleRate` parameter is a percentage of `sessionSampleRate`.
 
 This feature requires the Datadog Browser SDK v3.0.0+.
 
-<blockquote class="alert alert-info">
+<div class="alert alert-info">
 The Datadog Browser SDK v4.20.0 introduces the <code>sessionReplaySampleRate</code> initialization parameter, deprecating the <code>premiumSampleRate</code> and <code>replaySampleRate</code> initialization parameter.
-</blockquote>
-<blockquote class="alert alert-info">
+</div>
+<div class="alert alert-info">
 The Datadog Browser SDK v5.0.0 introduces two major behavior changes:
 
-- Only sessions that have recorded a replay are considered as Browser RUM & Session Replay
-- The <code>sessionReplaySampleRate</code> initialization parameter default value is `0` . Previous versions of the SDK use `100`.
-</blockquote>
+<ul>
+<li>Only sessions that have recorded a replay are considered as Browser RUM & Session Replay</li>
+<li>The <code>sessionReplaySampleRate</code> initialization parameter default value is <code>0</code>. Previous versions of the SDK use <code>100</code>.</li>
+</ul>
+</div>
 When a session is created, RUM tracks it as either:
 
 - [**Browser RUM**][2]: Sessions, views, actions, resources, long tasks, and errors are collected.
@@ -230,6 +232,6 @@ For more information about tagging and exploring attributes, see [Browser Monito
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser#setup
+[1]: /real_user_monitoring/application_monitoring/browser#setup
 [2]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[3]: /real_user_monitoring/browser#tagging
+[3]: /real_user_monitoring/application_monitoring/browser#tagging

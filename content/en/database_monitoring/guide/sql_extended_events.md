@@ -1,5 +1,7 @@
 ---
 title: Configuring Query Completion and Query Error Capture on SQL Server
+aliases:
+- /database_monitoring/sql_extended_events
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
@@ -106,6 +108,9 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
     )
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
+(
+  SET MAX_MEMORY = 1024
+)
 WITH (
     MAX_MEMORY = 1024 KB, -- do not exceed 1024, values above 1 MB may result in data loss due to SQLServer internals
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
@@ -153,6 +158,9 @@ ADD EVENT sqlserver.attention(
     )
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
+(
+  SET MAX_MEMORY = 1024
+)
 WITH (
     MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
@@ -167,10 +175,10 @@ GO
 
    **Note**: If you're using Amazon RDS for SQL Server, remove the `MEMORY_PARTITION_MODE = PER_NODE` line from both session configurations, as this option is not supported on RDS instances.
 
-2. In the Datadog Agent configuration, enable `xe_collection` in `sqlserver.d/conf.yaml`.
+2. In the Datadog Agent configuration, enable `collect_xe` in `sqlserver.d/conf.yaml`.
 See the [sample conf.yaml.example][3] for all available configuration options.
 ```yaml
-  xe_collection:
+  collect_xe:
     query_completions:
       enabled: true
     query_errors:
@@ -252,6 +260,9 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
     )
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
+(
+  SET MAX_MEMORY = 1024
+)
 WITH (
     MAX_MEMORY = 1024 KB, -- do not exceed 1024, values above 1 MB may result in data loss due to SQLServer internals
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
@@ -299,6 +310,9 @@ ADD EVENT sqlserver.attention(
     )
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
+(
+  SET MAX_MEMORY = 1024
+)
 WITH (
     MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,

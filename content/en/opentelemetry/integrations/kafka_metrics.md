@@ -251,11 +251,27 @@ In order to ensure this attribute only gets added to your Kafka logs, use [inclu
 
 ## Data collected
 
+### Kafka metrics receiver
+
+{{< mapping-table resource="kafkametrics.csv">}}
+
+### JMX receiver / JMX Metrics Gatherer
+
+#### Kafka broker
+
 {{< mapping-table resource="kafka.csv">}}
 
-**Note:** In Datadog `-` gets translated to `_`. For the metrics prepended by `otel.`, this means that the OTel metric name and the Datadog metric name are the same (for example, `kafka.producer.request-rate` and `kafka.producer.request_rate`). In order to avoid double counting for these metrics, the OTel metric is then prepended with `otel.`.
+#### Kafka producer
 
-See [OpenTelemetry Metrics Mapping][9] for more information.
+{{< mapping-table resource="kafka-producer.csv">}}
+
+#### Kafka consumer
+
+{{< mapping-table resource="kafka-consumer.csv">}}
+
+**Note:** In Datadog `-` gets translated to `_`. For example, `kafka.producer.request-rate` becomes `kafka.producer.request_rate`.
+
+For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][9].
 
 ## Full example configuration
 
@@ -296,7 +312,7 @@ Please see the following [example application][6] which demonstrates the configu
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/jmxreceiver
 [3]: https://github.com/open-telemetry/opentelemetry-java-contrib/blob/main/jmx-metrics 
 [4]: /opentelemetry/collector_exporter/log_collection
-[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/internal/e2e/examples/kafka.yaml
+[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/kafka.yaml
 [6]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/kafka-metrics
 [7]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering

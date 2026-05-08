@@ -13,12 +13,12 @@ assets:
     metrics:
       check:
       - aws.apigateway.latency
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.apigateway
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 166
-    source_type_name: Amazon API Gateway
+    source_type_name: Amazon Api Gateway
   monitors:
     4XX Error Rate is High: assets/monitors/rec_mon_4xx_errors.json
     5XX Error Rate is high: assets/monitors/rec_mon_5xx_errors.json
@@ -26,42 +26,42 @@ assets:
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
-  sales_email: info@datadoghq.com
+  sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
 - aws
-- metrics
-- cloud
+- モニター
+- クラウド
 custom_kind: インテグレーション
 dependencies: []
-description: ゲートウェイエラー、キャッシュのヒット/ミス、リクエストレイテンシーを追跡。
+description: ゲートウェイエラー、キャッシュのヒット/ミス、リクエストレイテンシーを追跡
 display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/amazon_api_gateway/
 draft: false
 git_integration_title: amazon_api_gateway
 has_logo: true
 integration_id: amazon-api-gateway
-integration_title: Amazon API Gateway
+integration_title: Amazon Api Gateway
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
 name: amazon_api_gateway
 public_title: Amazon API Gateway インテグレーション
-short_description: Amazon API Gateway は API のマネージドサービスです。
+short_description: Amazon API Gateway は API 向けのマネージド サービスです。
 supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::AWS
   - Category::Metrics
-  - Category::クラウド
+  - Category::Cloud
   - Offering::Integration
   configuration: README.md#Setup
-  description: Amazon API Gateway は API のマネージドサービスです。
+  description: Amazon API Gateway は API 向けのマネージドサービスです。
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Amazon API Gateway インテグレーション
+  title: Amazon Api Gateway インテグレーション
 version: '1.0'
 ---
 
@@ -133,7 +133,7 @@ API Gateway ログを有効にするには
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "amazon-api-gateway" >}}
+{{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
 
@@ -155,5 +155,5 @@ Amazon API Gateway インテグレーションには、サービスのチェッ�
 [4]: https://app.datadoghq.com/integrations/amazon-api-gateway
 [5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [6]: https://app.datadoghq.com/logs
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_api_gateway/amazon_api_gateway_metadata.csv
+[7]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_api_gateway/assets/metrics/metric-spec.yaml
 [8]: https://docs.datadoghq.com/ja/help/

@@ -1,0 +1,94 @@
+{{ define "main" }}
+
+    <div class="row">
+        <div class="col-12 order-1">
+            <h1 id="pagetitle">{{ .Title }}</h1>
+        </div>
+        <div class="col-12">
+            {{ if .File }}
+                {{ partial "breadcrumbs.html" . }}
+            {{ end }}
+        </div>
+    </div>
+    {{ partial "translate_status_banner/translate_status_banner.html" . }}
+    {{ partial "site_support_banner/site_support_banner.html" . }}
+
+    <div class="ddsql-schema-single">
+        <p>{{ .Params.summary | markdownify }}</p>
+
+        {{ highlight .Params.id "" }}
+
+        {{ range .Params.links }}
+            <p class="position-relative text-secondary">
+                {{ .description | title }}
+                {{ partial "icon" (dict "name" "external-link" "size" "16px" "vertical_align" "-3px") }}
+                <a class="stretched-link" href="{{ .url }}"></a>
+            </p>
+        {{ end }}
+
+        {{/* PTF (Polymorphic Table Function) specific content */}}
+        {{ with .Params.query_paths }}
+            {{ with .user_sql }}
+                {{ if eq .type "polymorphic_table_function" }}
+                    <h2>Query Parameters</h2>
+                    <p>This dataset uses a <strong>polymorphic table function</strong>. You must specify parameters when querying.</p>
+
+                    {{ with .input_parameters }}
+                    <table class="table-fixed">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {{ range . }}
+                            <tr>
+                                <td><code>{{ .name }}</code></td>
+                                <td><code>{{ .type }}</code></td>
+                                <td>{{ if .required }}Yes{{ else }}No{{ end }}</td>
+                                <td>{{ .description | markdownify }}</td>
+                            </tr>
+                        {{ end }}
+                        </tbody>
+                    </table>
+                    {{ end }}
+
+                    {{ with .examples }}
+                    <h2>Example Queries</h2>
+                    {{ range . }}
+                        {{ highlight . "sql" }}
+                    {{ end }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+
+        <h2>Fields</h2>
+        <table class="table-fixed">
+            {{/*  these values are required by the schema model (https://github.com/DataDog/schemas/blob/main/meta/models/docs.model.yml) */}}
+            {{ $field_order := slice "title" "name" "variant" "data_type" "description" }}
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Data Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{ range $key, $row := .Params.fields }}
+                <tr>
+                {{ range $field_order }}
+                    <td>{{ index $row . }}</td>
+                {{ end }}
+                </tr>
+            {{ end }}
+            </tbody>
+    
+        </table>
+    </div>
+{{ end }}

@@ -94,7 +94,7 @@ Los siguientes pasos crean un ticket de Case Management bidireccional.
    3. **Project (proyecto):** selecciona el project (proyecto) de Jiira a utilizar.
    4. **Tipo de incidencia:** selecciona el tipo de incidencia de Jira que desees crear.
 6. Para añadir más campos al ticket de Jira que crea Datadog, utiliza **Añadir campo opcional** para añadir los campos.
-7. Haz clic en **Crear ticket**. 
+7. Haz clic en **Crear ticket**.
 
 Notas:
 
@@ -117,7 +117,7 @@ Se proporcionan detalles como la persona asignada y el estado, junto con una cro
 
 Los tickets de Jira cerrados son verdes.
 
-En **Datadog Associated Case**, se proporciona la case (incidencia) de Datadog relacionado. Haz clic en el nombre de case (incidencia) para abrirlo en [Case Management][1]. 
+En **Datadog Associated Case**, se proporciona la case (incidencia) de Datadog relacionado. Haz clic en el nombre de case (incidencia) para abrirlo en [Case Management][1].
 
 Al eliminar una case (incidencia) no se eliminan los tickets de Jira relacionados, pero al eliminar un project (proyecto) de case (incidencia) se eliminan todos los tickets de las señales relacionadas.
 
@@ -125,7 +125,7 @@ Al eliminar una case (incidencia) no se eliminan los tickets de Jira relacionado
 
 Hay varias facetas de gestión de case (incidencia) en **Triage**, entre ellas:
 
-- Clave de case (incidencia) 
+- Clave de case (incidencia)
 - Clave de Jira
 - Estado de case (incidencia)
 - Tiene ticket adjunto
@@ -136,10 +136,10 @@ Puedes consultar atributos y crear dashboards utilizando estas facetas.
 [1]: /es/service_management/case_management/
 [2]: /es/integrations/jira/
 [3]: /es/service_management/case_management/notifications_integrations/#third-party-tickets
-[4]: https://app.datadoghq.com/security?column=time&order=desc&product=siem&viz=stream
+[4]: https://app.datadoghq.com/security/siem/signals?column=time&order=desc&viz=stream
 [5]: https://app.datadoghq.com/security/appsec/vm/library
-[6]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&viz=stream
-[7]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Workload%20Security%22&product=cws
+[6]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&viz=stream
+[7]: https://app.datadoghq.com/security/workload-protection/signals?query=%40workflow.rule.type%3A%22Workload%20Security%22
 [8]: /es/integrations/jira/#configure-a-jira-webhook
 [9]: /es/service_management/case_management/projects/
 [10]: /es/security/ticketing_integrations/#prerequisites

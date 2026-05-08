@@ -1,82 +1,26 @@
 ---
 app_id: apache-apisix
-app_uuid: b842d639-caf6-4b3a-8115-52458b9a0753
-assets:
-  dashboards:
-    Apache APISIX Dashboard: assets/dashboards/apache-apisix_overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check:
-      - apisix.request.counter
-      - apisix.request.latency
-      - apisix.upstream.latency
-      - apisix.apisix.latency
-      - apisix.ingress.size
-      - apisix.egress.size
-      metadata_path: metadata.csv
-      prefix: apisix.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10244
-    source_type_name: Apache APISIX
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Comunidad
-  sales_email: dev@apisix.apache.org
-  support_email: dev@apisix.apache.org
 categories:
 - nube
 - métricas
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: apache-apisix
-integration_id: apache-apisix
-integration_title: Apache APISIX
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: apache-apisix
-public_title: Apache APISIX
-short_description: Integración Datadog-APISIX
+description: Integración Datadog-APISIX
+further_reading:
+- link: https://apisix.apache.org/blog/2021/11/12/apisix-datadog
+  tag: blog
+  text: og:title
+media: []
 supported_os:
 - Linux
 - Windows
 - macOS
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Categoría::Nube
-  - Categoría::Métricas
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Oferta::Integración
-  configuration: README.md#Configuración
-  description: Integración Datadog-APISIX
-  media: []
-  overview: README.md#Información general
-  resources:
-  - resource_type: Blog
-    url: https://apisix.apache.org/blog/2021/11/12/apisix-datadog
-  support: README.md#Soporte
-  title: Apache APISIX
+title: Apache APISIX
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
-
-
 ## Información general
 
 Apache APISIX es una pasarela API dinámica en tiempo real, de alto rendimiento, que proporciona abundantes funciones de gestión de tráfico como balanceo de carga, upstream dinámico, lanzamientos de tipo canary, ruptura de circuitos, autenticación, observabilidad y más. Por ejemplo, utiliza Apache APISIX para gestionar el tráfico tradicional norte-sur, así como el tráfico este-oeste entre servicios. También se puede utilizar como controlador de entrada en Kubernetes.
 
-El [complemento APISIX-Datadog][1] envía sus métricas personalizadas al servidor DogStatsD y se incluye con el Datadog Agent en la conexión UDP. DogStatsD es una implementación del protocolo StatsD, que recopila métricas personalizadas del Agent [Apache APISIX][2], las agrega en un único punto de datos y las envía al servidor Datadog configurado.
+El [complemento APISIX-Datadog](https://apisix.apache.org/docs/apisix/plugins/datadog) envía tus métricas personalizadas al servidor DogStatsD y viene incluido con el Datadog Agent mediante conexión UDP. DogStatsD es una implementación del protocolo StatsD. Recopila las métricas personalizadas para el agente [Apache APISIX](https://apisix.apache.org/), las agrega en un único punto de datos y las envía al servidor Datadog configurado.
 
 ## Configuración
 
@@ -88,15 +32,15 @@ Sigue las siguientes instrucciones de configuración.
 
 1. Si ya utilizas Datadog y tienes instalado el Datadog Agent, asegúrate de que el puerto 8125/UDP está autorizado en tu cortafuegos. Por ejemplo, el Agent Apache APISIX puede acceder al puerto 8125 del Datadog Agent. Si ya tienes esto configurado, puedes pasar directamente al paso 3.
 
-> Para obtener más información sobre cómo instalar el Datadog Agent, consulta la [documentación del Agent][3].
+> Para obtener más información sobre cómo instalar el Datadog Agent, consulta la [documentación del Agent](https://docs.datadoghq.com/agent/).
 
 2. Si recién empiezas a utilizar Datadog:
 
-   1. Primero, crea una cuenta visitando el [sitio web de Datadog][4] y haz clic en el botón Get Started Free (Empieza a utilizarlo gratis).
-   2. Genera una clave de API.
-      ![Generar una clave de API][5]
+   1. En primer lugar, crea una cuenta visitando el [sitio web de Datadog](https://www.datadoghq.com/) y haz clic en el botón Get Started Free (Empieza gratis).
+   1. Genera una clave de API.
+      ![Generar una clave de API](https://raw.githubusercontent.com/DataDog/integrations-extras/master/apache-apisix/images/screenshot_1.png)
 
-3. El complemento APISIX-Datadog sólo requiere el componente DogStatsD de `datadog/agent` ya que el complemento envía métricas de forma asíncrona al servidor DogStatsD siguiendo el protocolo statsd mediante un socket UDP estándar. Por esta razón, APISIX recomienda utilizar la imagen independiente `datadog/dogstatsd`, en lugar de la imagen completa del Agent, ya que es extremadamente ligera (sólo ~11 MB de tamaño) en comparación con los ~2,8GB de la imagen `datadog/agent`.
+1. El complemento APISIX-Datadog sólo requiere el componente DogStatsD de `datadog/agent` ya que el complemento envía métricas de forma asíncrona al servidor DogStatsD siguiendo el protocolo statsd mediante un socket UDP estándar. Por esta razón, APISIX recomienda utilizar la imagen independiente `datadog/dogstatsd`, en lugar de la imagen completa del Agent, ya que es extremadamente ligera (sólo ~11 MB de tamaño) en comparación con los ~2,8GB de la imagen `datadog/agent`.
 
 Para ejecutarlo como contenedor:
 
@@ -147,17 +91,24 @@ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 }'
 ```
 
-5. Para conocer otras opciones personalizadas de configuración, consulta la documentación del [complemento Datadog][1].
+5. Consulta la documentación del [complemento Datadog](https://apisix.apache.org/docs/apisix/plugins/datadog) para ver más opciones de configuración personalizadas.
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][6] y busca `apisix` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `apisix` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "apache-apisix" >}}
 
+| | |
+| --- | --- |
+| **apisix.request.counter** <br>(count) | Número de solicitudes recibidas<br>_Se muestra como conexión_ |
+| **apisix.request.latency** <br>(gauge) | Latencia total del ciclo de vida de la respuesta a la solicitud, tiempo que se tarda en procesar la solicitud concreta.<br>_Se muestra como milisegundos_ |
+| **apisix.upstream.latency** <br>(gauge) | Latencia entre el tiempo que transcurre desde que se envía la solicitud al servidor ascendente hasta que se recibe una respuesta.<br>_Se muestra como milisegundos_ |
+| **apisix.apisix.latency** <br>(gauge) | Latencia añadida por Apache APISIX, tiempo que tarda el agente APISIX únicamente en procesar la solicitud.<br>_Se muestra como milisegundos_ |
+| **apisix.ingress.size** <br>(gauge) | Tamaño del cuerpo de la solicitud entrante antes de reenviarla al servidor ascendente.<br>_Se muestra como bytes_ |
+| **apisix.egress.size** <br>(gauge) | Tamaño del cuerpo de la respuesta recibida procedente del servidor ascendente reenviado APISIX.<br>_Se muestra como bytes_ |
 
 ### Eventos
 
@@ -165,18 +116,8 @@ El check de Apache APISIX no incluye eventos.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).
 
 ## Referencias adicionales
 
-- [Monitorización en la nube con Datadog en Apache APISIX][9]
-
-[1]: https://apisix.apache.org/docs/apisix/plugins/datadog
-[2]: https://apisix.apache.org/
-[3]: https://docs.datadoghq.com/es/agent/
-[4]: https://www.datadoghq.com/
-[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apache-apisix/images/screenshot_1.png
-[6]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/metadata.csv
-[8]: https://docs.datadoghq.com/es/help/
-[9]: https://apisix.apache.org/blog/2021/11/12/apisix-datadog
+- [Monitorización de la nube con Datadog en Apache APISIX](https://apisix.apache.org/blog/2021/11/12/apisix-datadog)

@@ -4,6 +4,8 @@ aliases:
 - /es/logs/languages/docker
 - /es/logs/log_collection/docker
 - /es/agent/docker/log
+description: Configura la recopilación de logs de aplicaciones que se ejecutan en
+  contenedores de Docker utilizando el Datadog Agent
 further_reading:
 - link: logs/explorer
   tag: Documentación
@@ -32,11 +34,11 @@ Datadog Agent v6 y posteriores recopila logs de contenedores. Hay dos tipos de i
 
 La configuración de la recopilación de logs depende de tu entorno actual. Elige una de las siguientes instalaciones para empezar:
 
-- Si tu entorno escribe **todos** los logs en `stdout`/`stderr`, sigue la instalación del [Agent contenedorizado](?tab=containerized-agent#installation).
+- Si tu entorno escribe **todos** los logs en `stdout`/`stderr`, sigue la instalación del [containerized Agent](?tab=containerized-agent#installation).
 
-- Si no puedes desplegar el Agent contenedorizado y tu contenedor escribe **todos** los logs en `stdout`/`stderr`, sigue la instalación del [Agent de host](?tab=hostagent#installation) para activar la gestión de logs contenedorizados en tu archivo de configuración del Agent.
+- Si no puedes desplegar el Agent contenedorizado y tu contenedor escribe **todos** los logs en `stdout`/`stderr`, sigue la instalación del [host Agent](?tab=hostagent#installation) para activar la gestión de logs contenedorizados en tu archivo de configuración del Agent.
 
-- Si tu contenedor escribe logs en archivos (sólo escribe logs parcialmente en `stdout`/`stderr` y escribe logs en archivos O escribe logs en archivos completamente), sigue la instalación del [Agent de host con recopilación de logs personalizada](?tab=hostagentwithcustomlogging#installation) o sigue la instalación del [Agent contenedorizado](?tab=containerized-agent#installation) y comprueba la [recopilación de logs de archivos con el ejemplo de configuración de Autodiscovery](?tab=logcollectionfromfile#examples).
+- Si tu contenedor escribe logs en archivos (sólo escribe logs parcialmente en `stdout`/`stderr` y escribe logs en archivos O escribe logs en archivos completamente), sigue la instalación del [host Agent with custom log collection](?tab=hostagentwithcustomlogging#installation) o sigue la instalación del [containerized Agent](?tab=containerized-agent#installation) y comprueba la [recopilación de logs de archivos con el ejemplo de configuración de Autodiscovery](?tab=logcollectionfromfile#examples).
 
 Los comandos CLI en esta página son para el tiempo de ejecución del Docker. Sustituye `docker` por `nerdctl` para el tiempo de ejecución de containerd, o por `podman`, para el tiempo de ejecución de Podman. La compatibilidad con la recopilación de logs containerd y Podman es limitada.
 
@@ -318,7 +320,7 @@ labels:
 
 ## Recopilación avanzada de logs
 
-Utiliza etiquetas de logs (labels) de Autodiscovery para aplicar la lógica de procesamiento de la recopilación avanzada de logs, por ejemplo:
+Utiliza etiquetas (labels) de logs de Autodiscovery para aplicar la lógica de procesamiento de la recopilación avanzada de logs, por ejemplo:
 
 - [Filtra los logs antes de enviarlos a Datadog][7].
 - [Limpia los datos confidenciales en tus logs][8].

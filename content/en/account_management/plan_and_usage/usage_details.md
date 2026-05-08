@@ -5,6 +5,10 @@ aliases:
   - /account_management/billing/usage_details/
 ---
 
+{{< callout url="" btn_hidden="true" header="New: Bill Overview" >}}
+A new Bill Overview experience is now in Limited Availability and will start rolling out automatically to all organizations starting March 2026. [Learn more](/account_management/plan_and_usage/bill_overview/).
+{{< /callout >}}
+
 ## Overview
 
 Administrators can access the [Usage][1] page by hovering over their username at the bottom left, then navigate to:
@@ -67,7 +71,7 @@ Month-to-date usage of each product is calculated as follows:
 
 ## Usage trends
 
-The [Usage Trends][5] section contains product usage graphs displaying summed usage for all organizations across an account. Usage reports are downloadable through the **Download as CSV** button. For each organization, these reports include an hourly breakdown of usage by product. 
+The [Usage Trends][5] section contains product usage graphs displaying summed usage for all organizations across an account. Usage reports are downloadable through the {{< ui >}}Download as CSV{{< /ui >}} button. For each organization, these reports include an hourly breakdown of usage by product. 
 
 {{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Usage Trends graphs page in the Datadog application with Download as CSV option highlighted" style="width:100%; align:left" >}}
 
@@ -93,8 +97,8 @@ Time selection contains options to view usage graphs at daily, weekly, monthly o
 
 Purple on-demand pills highlight the portion of billable usage that is on-demand usage. Blue committed and allotted pills highlight the portion of your usage that is covered by commitments and <a href="https://www.datadoghq.com/pricing/allotments/">allotments</a> from parent products. The dashed `Committed` line shows commitments per product, without any allotments (such as Custom Metrics or Containers).
 
-To display the committed and allotted pills on a card, ensure the **See included usage** toggle is on:
-1. On the total usage card where you want to see committed and allotted usage data, click the eye (**See included usage**) icon.
+To display the committed and allotted pills on a card, ensure the {{< ui >}}See included usage{{< /ui >}} toggle is on:
+1. On the total usage card where you want to see committed and allotted usage data, click the eye ({{< ui >}}See included usage{{< /ui >}}) icon.
 1. The icon changes to an eye with a slash through it. Committed and allotted pills populate on the card.
 
 {{< img src="account_management/billing/UsageTilesWithPillsUsageTrendsWithCommittedLine.png" alt="Billable on-demand pills and committed usage lines on trends graphs." style="width:100%; align:left" >}}
@@ -143,7 +147,7 @@ This data can be downloaded as a CSV file.
 
 The first-time usage notifications feature sends email notifications when there is first-time billable usage for a new product not included in your current contract. Emails are sent approximately 48 hours after the usage first occurs during a given month.
 
-After enabling the feature, a new **Usage Notifications** tab is added to the parent organization's **Plan and Usage** page. On this tab, there is a list of all products covered by the functionality. Unchecking a box stops notifications for that product for all users within the account. If any first-time usage outside of your most recent active contract is detected, users do not receive a notification for any unchecked products.
+After enabling the feature, a new {{< ui >}}Usage Notifications{{< /ui >}} tab is added to the parent organization's {{< ui >}}Plan and Usage{{< /ui >}} page. On this tab, there is a list of all products covered by the functionality. Unchecking a box stops notifications for that product for all users within the account. If any first-time usage outside of your most recent active contract is detected, users do not receive a notification for any unchecked products.
 
 {{< img src="account_management/plan_and_usage/usage-notifications.png" alt="First-time usage notifications page with a product list including checked and unchecked items" style="width:100%; align:left" >}}
 
@@ -170,3 +174,4 @@ For billing questions, contact your [Customer Success][10] Manager.
 [8]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
 [9]: /help/
 [10]: mailto:success@datadoghq.com
+[11]: /account_management/plan_and_usage/bill_overview/

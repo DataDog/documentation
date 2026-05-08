@@ -1,0 +1,332 @@
+{{ define "main" }}
+    {{ $dot := . }}
+
+    <!-- From imported files -->
+    {{ $list := sort .Pages }}
+
+    <div class="row">
+        <div class="col-12 order-1">
+            <h1 id="pagetitle">{{ .Title }}</h1>
+        </div>
+        <div class="col-12">
+            {{ partial "breadcrumbs.html" . }}
+        </div>
+    </div>
+    {{ partial "translate_status_banner/translate_status_banner.html" . }}
+
+    {{ $products := slice }}
+    {{ $set_params := .Params }}
+    {{ $pad := newScratch }}
+
+    <div 
+    class="multifilter-search-component w-100 min-vh-100 d-flex flex-column"
+    x-data="{
+        filterTypes: {
+            datasets: []
+        },
+        searchValue: '',
+        openedFilterForm: null,
+        showEmptyResultsMsg: false,
+        filteredSets: new Set(),
+        resetFilteredSets () {
+            // Empty filtered sets
+
+            this.filteredSets = new Set()
+        },
+        shouldShowSet (set, shouldShowItem) {
+            // Manage visibility of set group
+
+            const setID = set.dataset.setId
+
+            if(shouldShowItem){
+                this.filteredSets.add(setID)
+                set.classList.remove('d-none')
+            }else if (!this.filteredSets.has(setID)){
+                set.classList.add('d-none')
+            }
+        },
+        shouldShowItem (itemEl) {
+            // Determines item display
+            // Compares search values and filter values against itemInfo
+            
+            const itemInfo = itemEl.dataset.info.split(';')
+            const itemFilterInfo = itemInfo[0].toLowerCase().split(',')
+            const itemSearchInfo = itemInfo.slice(1).join(' ').toLowerCase()
+
+            const filterValues = Object.values(this.filterTypes)
+            const searchValues = this.searchValue.split(' ')
+
+            /**
+            *   FILTER LOGIC (containsFilteredValue) e.g.
+            *   {
+            *      languages: [javascript, docker],
+            *      categories: [severity],
+            *      severities: [warning]
+            *   }
+            *   show itemEl if condition met ('Javascript' OR 'Docker') AND Security AND Warning
+            */
+
+            const containsFilteredValue = filterValues.every(t => t.length ? t.some(f => itemFilterInfo.includes(f.toLowerCase())) : true ) // checks filter attrs match at least one filter value. allows for multiple selection of a filter type.
+            const containsSearchValues = searchValues.every(word => itemSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed query
+
+            this.shouldShowSet(itemEl.closest('.set'), containsSearchValues && containsFilteredValue)
+
+            if(containsSearchValues && containsFilteredValue){
+                itemEl.classList.add('show')
+            }else{
+                itemEl.classList.remove('show')    
+            }
+
+            return containsSearchValues && containsFilteredValue
+        },
+        pushState (filterType=undefined, filterOption=undefined) {
+            // Updates url with new query params for filter type and search without refreshing the page
+
+            const url = new URL(window.location.href)
+            let newURL = ''
+            if(filterType){
+                if(!url.searchParams.getAll(filterType).includes(filterOption)){
+                    // add one key:value param
+                    url.searchParams.append(filterType, filterOption)
+                }else{
+                    // remove one key:value param
+                    const regex = new RegExp(`([\\&\\?])${filterType}=${filterOption.replace(' ', '\\+')}(?=\&|$)`, 'g');
+                    newURL = url.toString().replaceAll(regex, '').replace('/&', '/?')
+                }
+                if(!this.filterTypes[filterType].length) {
+                    url.searchParams.delete(filterType)
+                }
+            }else {
+                url.searchParams.set('search', this.searchValue)
+                if(!this.searchValue) {
+                    url.searchParams.delete('search')
+                }
+            }
+
+            window.history.pushState(null,'', newURL || url.toString())
+        },
+        updateWithURLParams () {
+            // Updates x-data properties with url param values
+            
+            const url = new URL(window.location.href)
+            
+            Array.from(url.searchParams.entries()).forEach(([key, value]) => {
+                if (key === 'search'){
+                    this.searchValue = value
+                } else {
+                    this.filterTypes[key]?.push(value)
+                }
+            })
+        },
+        toggleSet (selectedSetEl) {
+            // Manage set accordians
+
+            selectedSetEl.classList.toggle('active')
+            selectedSetEl.previousElementSibling.classList.toggle('d-none')
+        },
+        toggleFilterForm (selectedFilterFormEl) {
+            // manage filter form accordian
+
+            const filterTypeID = selectedFilterFormEl.dataset.id
+            this.openedFilterForm = (this.openedFilterForm === filterTypeID) ? null : filterTypeID
+        },
+        copyHref (selectedItemEl) {
+            // Copy href
+
+            const clickableIconWrapper = selectedItemEl
+            const copyConfirmedIconWrapper = clickableIconWrapper.nextElementSibling
+            const anchor = clickableIconWrapper.dataset.anchor
+            const {pathname, origin} = window.location
+            const path = new URL(`${origin}${pathname}${anchor}`)
+
+            const Clipboard = navigator.clipboard
+            // write href to clipboard
+            Clipboard.writeText(path.href).then(() => {
+                clickableIconWrapper.classList.add('d-none');
+                copyConfirmedIconWrapper.classList.remove('d-none')
+                setTimeout(function() {
+                    clickableIconWrapper.classList.remove('d-none');
+                    copyConfirmedIconWrapper.classList.add('d-none')
+                }, 1000)
+            })
+        },
+        deleteOneSelection (filterType, filterOption) {
+            // delete one filterOption from selections in filter toggler
+
+            this.filterTypes[filterType] = this.filterTypes[filterType].filter(s => s !== filterOption)
+            this.pushState(filterType, filterOption)
+        },
+        deleteAllSelections (filterType) {
+            // delete all selections of a filter type from filter toggler and url params
+
+            this.filterTypes[filterType] = []
+            this.openedFilterForm = null
+            const url = new URL(window.location.href)
+            url.searchParams.delete(filterType)
+            window.history.pushState(null,'', url.toString())
+        },
+        emptyResultsMsg () {
+            // Determine and return the appropriate empty results message
+
+            const filterValues = Object.values(this.filterTypes).flat().map(item => item).join(', ')
+            if(filterValues.length && this.searchValue){
+                return `No results found for query on search: '${this.searchValue}' and filter: '${filterValues}'`
+            }else{
+                return `No results found for query '${this.searchValue || filterValues}'`
+            }
+        }
+    }"
+    x-init="updateWithURLParams()">
+        {{/*  DATA TABLE  */}}
+        <div class="col-12 order-1">
+            <div class="ps-0">
+                {{ range $list.GroupByParam "namespace" }}
+                {{ $namespace := cond (eq .Key "dd") "Datadog" (.Key | upper) }}
+                <div
+                data-set-id="{{ $namespace }}" 
+                class="set d-flex flex-column"
+                id="{{ $namespace | anchorize }}"
+                >
+                    <div class="set-body mb-3 order-1">
+                        <div class="ps-0 mt-1">
+                            {{ range .Pages }}
+                            {{/*  
+                                build a string with item's lookup info for filtering and searching against
+                            */}}
+                            {{ $filter_info := $namespace }}
+                            {{ $item_info := (replaceRE "(`|')" "" (delimit (slice $filter_info .Title) ";")) }}
+                            <div 
+                            class="item d-flex justify-content-between border p-1 position-relative"
+                            data-info="{{ $item_info }}"
+                            data-name="{{ .Title }}"
+                            x-cloak x-show.important="shouldShowItem($el)"
+                            >
+                                <div class="item-name-container d-flex align-items-center">
+                                    <a href="{{.Permalink}}" class="stretched-link">{{.Title}}</a>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <div class="set-header__arrow fw-semibold ms-1">></div>
+                                </div>
+                            </div>
+                            
+                            {{/*  
+                                build object with unique values for filter dropdowns (.filter-selection-container)
+                                e.g:
+                                filters: {
+                                    Datasets: [],
+                                }
+                            */}}
+                            {{ $pad.SetInMap "filters" "Datasets" (union (index ($pad.Get "filters") "Datasets") (slice $namespace)) }}
+                            {{ end }}
+                        </div>
+                    </div>
+
+                    {{/* SET-HEADER - Keep here */}}
+                    <button
+                    data-header-id="{{ $namespace }}" 
+                    class="set-header w-100 border mb-1 d-flex align-items-center justify-content-between"
+                    @click="toggleSet($el)"
+                    >
+                        <div class="d-flex align-items-center h-100">
+                            <span class="set-header__text fw-semibold">{{$namespace}} Datasets</span>
+                            <span data-anchor="#{{$namespace | anchorize}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $namespace) ) }}</span>
+                            <span class="d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
+                        </div>
+                        <div class="set-header__arrow fw-semibold">></div>
+                    </button>
+                </div>
+                {{ end }}
+                {{/*  hook into the app lifecycle. $watch for 'filteredSets' to change and update the 'showEmptyResultsMsg' property  */}}
+                <div x-init="showEmptyResultsMsg = !filteredSets.size; $watch('filteredSets', value => showEmptyResultsMsg = !value.size)">
+                    <template x-if="showEmptyResultsMsg">
+                        <span class="fw-semibold" x-text="emptyResultsMsg"></span>
+                    </template>
+                </div>
+            </div>
+        </div>
+        {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
+        <nav id="multifilter-search-nav" class="container px-0">
+            {{ $filter_types := (slice "Datasets") }}
+            <div class="filters__multifilter row">
+                {{ range $filter_types }}
+                {{ $filter_type := . | lower}}
+                <div class='filter-type flex-column col-12' data-id="{{$filter_type}}" >
+                    <p class="filter-type-name fw-semibold">{{ . }}</p>
+                    <div class="filter-component position-relative">
+                        {{/*  FILTER TOGGLER  */}}
+                        <button 
+                        data-id="{{$filter_type}}"
+                        class="toggler w-100 rounded position-relative"
+                        @click.stop="toggleFilterForm($el)">
+                            <div class="selections d-flex">
+                                {{/*  All  */}}
+                                <template x-if="!filterTypes['{{$filter_type}}'].length">
+                                    <span class="all fw-semibold">All</span>
+                                </template>
+                                {{/*  Show filter selections from `filterTypes` data */}}
+                                <template x-for="(filter, idx) in filterTypes['{{$filter_type}}']" :key="idx">
+                                    <div 
+                                    :data-id="filter.toLowerCase().replaceAll(' ', '-')" 
+                                    class="selection-container rounded d-flex align-items-center">
+                                        <span class="selection-name" x-text="filter"></span>
+                                        <div 
+                                        :data-id="filter.toLowerCase().replaceAll(' ', '-')" 
+                                        class="close-light-wrapper" @click.stop="resetFilteredSets; deleteOneSelection('{{ $filter_type }}', filter )">
+                                            {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                            <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
+                                <template x-if="filterTypes['{{$filter_type}}'].length">
+                                    <span class="cancel-circle-wrapper" @click.stop="resetFilteredSets; deleteAllSelections('{{ $filter_type }}')">
+                                        {{ partial "icon" (dict "name" "x-circle-solid" "title" "delete all" ) }}
+                                    </span>
+                                </template>
+                                <span class="chevron-wrapper d-flex align-items-center justify-content-center position-relative h-100">
+                                    <div class="chevron chevron-down"></div>
+                                </span>
+                            </div>
+                        </button>
+                        {{/*  FILTER FORM  */}}
+                        <form 
+                        data-id="{{$filter_type}}"
+                        class="d-flex flex-column bg-white rounded position-absolute w-100"
+                        x-cloak x-show.important="openedFilterForm === '{{$filter_type}}'"
+                        @click.outside="openedFilterForm = null"
+                        >
+                            <div class="filter-selection-container">
+                                <span>All</span>
+                            </div>
+                            {{ range index ($pad.Get "filters") . }}
+                            <div class="filter-selection-container">
+
+                                {{ $lang_lookup_name := index (split . ";") 0 }}
+                                <input 
+                                id="{{ $lang_lookup_name | anchorize }}" 
+                                type="checkbox" 
+                                value='{{ . }}' 
+                                x-model="filterTypes['{{$filter_type}}']"
+                                @change="resetFilteredSets"
+                                @change.debounce="pushState('{{ $filter_type }}', '{{ $lang_lookup_name }}')"
+                                >  
+                                
+                                <label for="{{ $lang_lookup_name | anchorize }}" class="d-flex align-items-center">
+                                    {{.}}
+                                </label>
+                            </div>
+                            {{ end }}
+                        </form>
+                    </div>                      
+                   
+                </div>
+                {{ end }}
+            </div>
+            {{/*  SEARCH FORM */}}
+            <form class="search__multifilter" @submit.prevent="">
+                <input type="search" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredSets" @input.debounce="pushState()">
+            </form>
+          </nav>
+    </div>
+
+{{ end }}

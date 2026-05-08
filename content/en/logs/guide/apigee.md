@@ -51,6 +51,7 @@ Use the MessageLogging policy type with the syslog parameter on your API to log 
 [2]: https://cloud.google.com/apigee/docs/api-platform/reference/policies/message-logging-policy
 
 {{% /site-region %}}
+
 #### JavaScript policy
 
 Send Apigee proxy logs to Datadog using Apigee's JavaScript policy. For detailed instructions, see the [Apigee documentation][1].
@@ -58,13 +59,16 @@ Send Apigee proxy logs to Datadog using Apigee's JavaScript policy. For detailed
 1. Select the Apigee proxy from which you want to send logs to Datadog.
 2. In the selected proxy overview page, click the **DEVELOP** tab.
 3. Select **New Script**.
-4. Select JavaScript and add flow variables into JavaScript from the [Apigee flow variable reference][4]. 
+4. Select JavaScript and add flow variables into JavaScript from the [Apigee flow variable reference][4].
 
-{{% collapse-content title="Example JavaScript code snippet" level="h4" expanded=false %}}
+
+<details>
+  <summary><strong>Example JavaScript code snippet</strong></summary>
 
 See the following example JavaScript code snippet. Replace `<DATADOG_API_KEY>` in the `dd_api_url` variable with your [Datadog API KEY][3]. The JavaScript has been configured to capture the essential flow variables as log attributes in Datadog. The attributes are named according to the list of standard attributes.
 
-```
+
+```java
 // Set the Datadog API URL here.
 var dd_api_url = "https://http-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=apigee";
 
@@ -138,8 +142,7 @@ var myLoggingRequest = new Request(dd_api_url, "POST", headers, JSON.stringify(l
 httpClient.send(myLoggingRequest);
 ```
 
-{{% /collapse-content %}}
-
+</details>
 
 ## Troubleshooting
 

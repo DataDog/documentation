@@ -1,21 +1,81 @@
 ---
 title: Syslog Destinations
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
+
+## Overview
 
 Use Observability Pipelines' syslog destinations to send logs to rsyslog or syslog-ng.
 
 ## Setup
 
-Set up the rsyslog or syslog-ng destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+<div class="alert alert-danger">The rsyslog and syslog-ng destinations support the <a href="https://datatracker.ietf.org/doc/html/rfc5424">RFC5424</a> format. </div>
 
-### Set up the destination
+Configure the rsyslog or syslog-ng destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The steps in this section are configured in the UI.
 
-{{% observability_pipelines/destination_settings/syslog %}}
+After you select the rsyslog or syslog-ng destination in the pipeline UI:
 
-### Set the environment variables
+- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
+	- **Note**: Only enter the identifiers for the syslog endpoint URL and, if applicable, the key pass. Do **not** enter the actual values.
+
+See [Matching log fields to syslog fields](#matching-log-fields-to-syslog-fields) for information on how fields are matched.
+
+### Optional settings
+
+#### Enable TLS
+
+{{% observability_pipelines/tls_settings %}}
+
+#### Wait time for TCP keepalive probes
+
+Enter the number of seconds to wait before sending TCP keepalive probes on an idle connection.
+
+#### Buffering
+
+{{% observability_pipelines/destination_buffer %}}
+
+## Matching log fields to syslog fields
+
+The rsyslog and syslog-ng destinations match these log fields to the following syslog fields:
+
+| Log Event       | SYSLOG FIELD | Default                    |
+|-----------------|--------------|----------------------------|
+| log["message"]  | MESSAGE      | `NIL`                      |
+| log["procid"]   | PROCID       | The running Worker's process ID. |
+| log["appname"]  | APP-NAME     | `observability_pipelines`  |
+| log["facility"] | FACILITY     | `8 (log_user)`             |
+| log["msgid"]    | MSGID        | `NIL`                      |
+| log["severity"] | SEVERITY     | `info`                     |
+| log["host"]     | HOSTNAME     | `NIL`                      |
+| log["timestamp"]| TIMESTAMP    | Current UTC time.          |
+
+## Secret defaults
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- rsyslog or syslog-ng endpoint URL identifier:
+	- References the address and port to which Observability Pipelines Worker sends logs. For example, `127.0.0.1:9997`.
+	- The default identifier is `DESTINATION_SYSLOG_ENDPOINT_URL`.
+- rsyslog or syslog-ng TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_SYSLOG_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/syslog %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### How the destination works
 
@@ -24,3 +84,6 @@ Set up the rsyslog or syslog-ng destination and its environment variables when y
 The rsyslog and syslog-ng destinations do not batch events.
 
 [1]: https://app.datadoghq.com/observability-pipelines
+[2]: /observability_pipelines/configuration/set_up_pipelines/
+[3]: /api/latest/observability-pipelines/
+[4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

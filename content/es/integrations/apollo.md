@@ -1,77 +1,31 @@
 ---
 app_id: apollo
-app_uuid: b39f1239-b97f-4b3b-ab5a-7a888915eedd
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check:
-      - apollo.operations.count
-      - apollo.engine.operations.count
-      metadata_path: metadatos.csv
-      prefix: apollo.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10014
-    source_type_name: Motor Apolo
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Apollo
-  sales_email: sachin@apollographql.com
-  support_email: sachin@apollographql.com
 categories:
 - almacenamiento en caché
-custom_kind: integration
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: apollo
-integration_id: apollo
-integration_title: Apollo
-integration_version: ''
-is_public: true
-manifest_version: 2.0.0
-name: apollo
-public_title: Apollo
-short_description: Monitorización del rendimiento de tu infraestructura GraphQL
+custom_kind: integración
+description: Monitorización del rendimiento de tu infraestructura GraphQL
+integration_version: 1.2.0
+media: []
 supported_os:
 - Linux
 - Windows
 - macOS
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Categoría::Almacenamiento en caché
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
-  - Oferta::Integración
-  configuration: README.md#Configuración
-  description: Monitorización del rendimiento de tu infraestructura GraphQL
-  media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Apollo
+title: Apollo
 ---
-
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-
-
 ## Información general
 
 La integración Apollo en Datadog te permite reenviar métricas de rendimiento de Studio a tu cuenta Datadog. Datadog es compatible con una API de función avanzada, lo que te permite crear gráficos y alertas de métricas de GraphQL.
 
-![Metrics][1]
+![Métricas](https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/metrics.png)
 
 Studio reenvía las siguientes métricas a Datadog:
 
 - `apollo.operations.count` - El número de operaciones GraphQL que se ejecutaron. Esto incluye consultas, mutaciones y operaciones que dieron lugar a un error.
+
 - `apollo.operations.error_count` - El número de operaciones GraphQL que dieron lugar a un error. Esto incluye errores de ejecución de GraphQL y errores HTTP si Studio no pudo conectarse a tu servidor.
+
 - `apollo.operations.cache_hit_count` - Número de consultas GraphQL cuyo resultado se ha obtenido de la caché de consultas completas del servidor Apollo.
+
 - Un histograma de los tiempos de respuesta de las operaciones GraphQL medidos en milisegundos. Debido al método de agregación de Studio (binning logarítmico), estos valores tienen una precisión de +/- 5%:
 
   - `apollo.operations.latency.min`
@@ -93,33 +47,53 @@ Estas métricas también se etiquetan con el ID del gráfico de Studio asociado 
 
 La configuración con la integración Apollo en Datadog es tan simple como proporcionar una clave de API y una región de Datadog a Studio. No es necesaria ninguna otra configuración.
 
-1. Ve a tu [página de integraciones Datadog][2] y haz clic en el cuadro Apolo. A continuación, ve a la pestaña **Configuración** y haz clic en **Install Integration** (Instalar integración) en la parte inferior.
+1. Ve a tu [página de integraciones Datadog](https://app.datadoghq.com/account/settings#integrations) y haz clic en el cuadro Apollo. A continuación, ve a la pestaña **Configuration** (Configuración) y haz clic en **Install Integration** (Instalar integración) en la parte inferior.
 
-2. Ve a tu [página de las API de Datadog][3] y crea una clave de API.
+1. Ve a la [página de tu API Datadog](https://app.datadoghq.com/organization-settings/api-keys) y crea una clave de API.
 
-3. Determina la región de tu API de Datadog observando la barra de direcciones de tu navegador:
+1. Determina la región de tu API de Datadog observando la barra de direcciones de tu navegador:
+
 - Si el nombre de dominio es `app.datadoghq.com`, la región de tu API es `US`.
 - Si el nombre de dominio es `app.datadoghq.eu`, la región de tu API es `EU`.
 
-4. En [Studio][4], ve a la página Integraciones de tu gráfico:
+4. En [Studio](https://www.apollographql.com/docs/studio/org/graphs/#viewing-graph-information), ve a la página de integraciones de tu gráfico:
 
-   ![IntegrationsPage][5]
+   ![Página Integraciones](https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-link.png)
 
-5. En la sección de reenvío de Datadog, haz clic en **Configure** (Configurar). Indica tu clave y tu región de API y luego haz clic en **Enable** (Habilitar). Dado que todas las métricas reenviadas se etiquetan con el ID del gráfico correspondiente (`graph:<graph-id>`), puedes utilizar la misma clave de API para todos tus gráficos.
+1. En la sección de reenvío de Datadog, haz clic en **Configure** (Configurar). Indica tu clave y tu región de API y luego haz clic en **Enable** (Habilitar). Dado que todas las métricas reenviadas se etiquetan con el ID del gráfico correspondiente (`graph:<graph-id>`), puedes utilizar la misma clave de API para todos tus gráficos.
 
-   ![IntegrationsToggle][6]
+   ![Conmutador de integraciones](https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-toggle.png)
 
-6. Ve al Explorador de métricas de Datadog para ver tus métricas. Las métricas pueden tardar hasta cinco minutos para ser visibles.
+1. Ve al Explorador de métricas de Datadog para ver tus métricas. Las métricas pueden tardar hasta cinco minutos para ser visibles.
 
-### Uso
+### Utilización
 
-Consulta la [documentación de las integraciones Apollo][7] para obtener información más detallada sobre su uso.
+Consulta los [documentos sobre las integraciones Apollo](https://www.apollographql.com/docs/studio/datadog-integration/) para obtener información de uso más detallada.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "apollo" >}}
 
+| | |
+| --- | --- |
+| **apollo.operations.count** <br>(gauge) | Número de operaciones GraphQL (consultas y mutaciones) procesadas.<br>_Se muestra como operación_ |
+| **apollo.operations.latency.avg** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, promedio.<br>_Se muestra como milisegundos_ |
+| **apollo.operations.latency.median** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, mediana/percentil 50.<br>_Se muestra como milisegundos_ |
+| **apollo.operations.latency.95percentile** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, percentil 95.<br>_Se muestra como milisegundos_ |
+| **apollo.operations.latency.99percentile** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, percentil 99.<br>_Se muestra como milisegundos_ |
+| **apollo.operations.latency.max** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, máxima/percentil 100.<br>_Se muestra como milisegundos_ |
+| **apollo.operations.latency.min** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, mínima/percentil 0.<br>_Se muestra como milisegundos_ |
+| **apollo.operations.error_count** <br>(gauge) | Número de operaciones GraphQL que han dado lugar a un error GraphQL, incluidos los errores HTTP de los orígenes.<br>_Se muestra como error_ |
+| **apollo.operations.cache_hit_count** <br>(gauge) | Número de consultas GraphQL que se han proporcionado desde la caché de respuestas completas.<br>_Se muestra como acierto_ |
+| **apollo.engine.operations.count** <br>(gauge) | Número de operaciones GraphQL (consultas y mutaciones) procesadas. (Métrica legacy, las nuevas integraciones utilizan apollo.operations.count.)<br>_Se muestra como operación_ |
+| **apollo.engine.operations.latency.avg** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, promedio. (Métrica legacy, las nuevas integraciones utilizan apollo.operations.latency.avg.)<br>_Se muestra como milisegundos_ |
+| **apollo.engine.operations.latency.median** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, mediana/percentil 50. (Métrica legacy, las nuevas integraciones utilizan apollo.operations.latency.median.)<br>_Se muestra como milisegundos_ |
+| **apollo.engine.operations.latency.95percentile** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, percentil 95. (Métrica legacy, las nuevas integraciones utilizan apollo.operations.latency.95percentile)<br>_Se muestra como milisegundos_ |
+| **apollo.engine.operations.latency.99percentile** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, percentil 99. (Métrica legacy, las nuevas integraciones utilizan apollo.operations.latency.99percentile.)<br>_Se muestra como milisegundos_ |
+| **apollo.engine.operations.latency.max** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, máxima/percentil 100. (Métrica legacy, las nuevas integraciones utilizan apollo.operations.latency.max)<br>_Se muestra como milisegundos_ |
+| **apollo.engine.operations.latency.min** <br>(gauge) | Duración total de la solicitud de una operación GraphQL, mínima/percentil o. (Métrica legacy, las nuevas integraciones utilizan apollo.operations.latency.min.)<br>_Se muestra como milisegundos_ |
+| **apollo.engine.operations.error_count** <br>(gauge) | Número de operaciones GraphQL que han dado lugar a un error GraphQL, incluidos los errores HTTP de los orígenes. (Métrica legacy, las nuevas integraciones utilizan apollo.operations.error_count.)<br>_Se muestra como error_ |
+| **apollo.engine.operations.cache_hit_count** <br>(gauge) | Número de consultas GraphQL que se han proporcionado desde la caché de respuestas completas. (Métrica legacy, las nuevas integraciones utilizan apollo.operations.cache_hit_count.)<br>_Se muestra como acierto_ |
 
 ### Eventos
 
@@ -131,15 +105,4 @@ La integración Apollo no incluye checks de servicios en este momento.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][9].
-
-
-[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/metrics.png
-[2]: https://app.datadoghq.com/account/settings#integrations
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://www.apollographql.com/docs/studio/org/graphs/#viewing-graph-information
-[5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-link.png
-[6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-toggle.png
-[7]: https://www.apollographql.com/docs/studio/datadog-integration/
-[8]: https://github.com/DataDog/integrations-extras/blob/master/apollo/metadata.csv
-[9]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).

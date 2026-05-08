@@ -1,4 +1,5 @@
 ---
+id: delay
 title: delay
 core_product:
   - alerts

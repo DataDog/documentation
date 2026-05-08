@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/monitors/types/network_performance/
+description: Monitoriza el tráfico de red y el rendimiento entre servicios mediante
+  Cloud Network Monitoring con alertas sobre el rendimiento, la latencia y los fallos.
 further_reading:
 - link: /network_monitoring/cloud_network_monitoring/
   tag: Documentación
@@ -112,7 +114,7 @@ El monitor de fallo de DNS realiza un seguimiento del rendimiento del servidor D
 
 {{< img src="monitors/monitor_types/network_performance/common_monitors_dns_failure.png" alt="Configuración de ejemplo para fallos de DNS, configura la Consulta A para medir los Fallos de DNS" style="width:100%;" >}}
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

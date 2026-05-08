@@ -4,7 +4,7 @@ title: Componente de tabla de Azure
 
 ## Información general
 
-Puedes usar el componente de tabla de Azure para representar y visualizar almacenes de clave-valor NoSQL de tu entorno de Azure.
+Puedes utilizar el componente de Azure Table para representar y visualizar almacenes de clave-valor de NoSQL desde tu entorno de Azure.
 
 {{< img src="cloudcraft/components-azure/azure-table/component-azure-table-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft que muestra componentes de Azure interconectados." responsive="true" style="width:60%;">}}
 
@@ -53,12 +53,12 @@ Usa [la API de Cloudcraft][1] para acceder y representar de forma programática 
 - **redundancy: string**: la opción de redundancia para la replicación de datos entre regiones. Acepta uno de tres valores: `LRS`, `ZRS`, `GRS`, `GZRS`, `RA-GRS` y `RA-GRS`. El valor predeterminado es `LRS`.
 - **storageGb: number**: el volumen total de datos disponibles para el almacén de clave-valor en gibibytes. El valor predeterminado es `0`.
 - **requestUnits: number**: la cantidad de solicitudes en unidades de 10 mil. El valor predeterminado es `0`.
-- **color: object**: el color de relleno para el cuerpo del componente.
-  - **isometric: string**: un color hexadecimal para el cuerpo del componente en la vista 3D. El valor predeterminado es `#CEE0F5`.
-  - **2d: string**: un color hexadecimal para el cuerpo del componente en la vista 2D. El valor predeterminado es `null`.
-- **accentColor: object**: el color de énfasis para el logotipo del componente.
-  - **isometric: string**: un color hexadecimal para el logotipo del componente en la vista 3D. El valor predeterminado es `#0078D4`.
-  - **2d: string**: un color hexadecimal para el logotipo del componente en la vista 2D. El valor predeterminado es `null`.
+- **color: objeto**: el color de relleno para el cuerpo del componente.
+  - **isometric: cadena**: un color hexadecimal para el cuerpo del componente en la vista 3D. El valor predeterminado es `#CEE0F5`.
+  - **2d: cadena**: un color hexadecimal para el cuerpo del componente en la vista 2D. El valor predeterminado es `null`.
+- **accentColor: objeto**: el color de énfasis para el logotipo del componente.
+  - **isometric: cadena**: un color hexadecimal para el logotipo del componente en la vista 3D. El valor predeterminado es `#0078D4`.
+  - **2d: cadena**: un color hexadecimal para el logotipo del componente en la vista 2D. El valor predeterminado es `null`.
 - **link: string, uri**: URI que vincula el componente a otro diagrama o a un sitio web externo. Acepta uno de dos formatos: `blueprint://` o `https://`.
 - **locked: boolean**: si se permiten cambios en la posición del componente a través de la interfaz web. El valor predeterminado es `false`.
 

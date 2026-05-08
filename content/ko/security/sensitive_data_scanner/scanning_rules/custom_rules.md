@@ -8,9 +8,6 @@ further_reading:
 - link: /security/sensitive_data_scanner/
   tag: 설명서
   text: 민감 데이터 스캐너 설정
-- link: /security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
-  tag: 설명서
-  text: 커스텀 규칙 생성을 위한 모범 사례
 title: 커스텀 규칙
 ---
 

@@ -55,5 +55,5 @@ This means that any application using Capacitor to embed a landing page, then la
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://capacitorjs.com/
-[2]: /real_user_monitoring/browser/setup/
+[2]: /real_user_monitoring/application_monitoring/browser/setup/
 [3]: /real_user_monitoring/explorer/

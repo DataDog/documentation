@@ -1,0 +1,20 @@
+{
+  "data": {
+    "id": "7d16945b-baf8-411e-ab2a-20fe43af1ea3",
+    "relationships": {
+      "findings": {
+        "data": [
+          {
+            "id": "ZGZhMDI3ZjdjMDM3YjJmNzcxNTlhZGMwMjdmZWNiNTZ-MTVlYTNmYWU3NjNlOTNlYTE2YjM4N2JmZmI4Yjk5N2Y=",
+            "type": "findings"
+          },
+          {
+            "id": "MmUzMzZkODQ2YTI3NDU0OTk4NDk3NzhkOTY5YjU2Zjh-YWJjZGI1ODI4OTYzNWM3ZmUwZTBlOWRkYTRiMGUyOGQ=",
+            "type": "findings"
+          }
+        ]
+      }
+    },
+    "type": "cases"
+  }
+}

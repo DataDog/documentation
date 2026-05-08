@@ -21,30 +21,35 @@ further_reading:
     - link: "https://dtdg.co/fe"
       tag: "Foundation Enablement"
       text: "Join an interactive session on effective tagging with Datadog"
+    - link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+      tag: "Blog"
+      text: "Design effective executive dashboards with Datadog"
+    - link: "https://learn.datadoghq.com/courses/tagging-best-practices"
+      tag: "Learning Center"
+      text: "Tagging Best Practices"
 algolia:
   tags: ["tagging"]
 ---
 
 ## Overview
 
-Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across several hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate data points.
+Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across several hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate datapoints.
 
-Tags are `key:value` pairs containing two parts:
+A tag can be formatted as `<key>:<value>` or `<value>`. Datadog recommends using the `<key>:<value>` format, as it is often semantically clearer and allows for richer querying capabilities (for example, grouping by key). When using a `<key>:<value>` pair:
 
-- The tag key is the identifier. The tag key can only exist once on each resource and is case sensitive.
-- The tag value is the specific data or information associated with the key. Tag values are not unique per resource and can be used across many resources in a `key-value` pair.
+- The tag **key** is the identifier. Commonly used tag keys are `env`, `instance`, and `name`.
+- The tag **value** is the specific data or information associated with the key. Tag values are not unique per resource and can be used across many resources in a `<key>:<value>` pair.
 
 Tagging binds different data types in Datadog, allowing for correlation and calls to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys:
-
-| Tag Key   | Allows for                                                            |
-| --------- | --------------------------------------------------------------------- |
+| Tag key   | Allows for                                                             |
+|-----------|------------------------------------------------------------------------|
 | `host`    | Correlation between metrics, traces, processes, and logs.              |
 | `device`  | Segregation of metrics, traces, processes, and logs by device or disk. |
 | `source`  | Span filtering and automated pipeline creation for Log Management.     |
-| `service` | Scoping of application specific data across metrics, traces, and logs. |
-| `env`     | Scoping of application specific data across metrics, traces, and logs. |
-| `version` | Scoping of application specific data across metrics, traces, and logs. |
-| `team`    | Assign ownership to any resources                                     |
+| `service` | Scoping of application-specific data across metrics, traces, and logs. |
+| `env`     | Scoping of application-specific data across metrics, traces, and logs. |
+| `version` | Scoping of application-specific data across metrics, traces, and logs. |
+| `team`    | Assigning ownership to any resources.                                  |
 
 Datadog recommends looking at containers, VMs, and cloud infrastructure at the `service` level in aggregate. For example, look at CPU usage across a collection of hosts that represents a service, rather than CPU usage for server A or server B separately.
 
@@ -52,30 +57,37 @@ Because containers and cloud environments regularly churn through hosts, using t
 
 ## Define tags
 
-Below are Datadog's tagging requirements:
+Tag strings (that is, the entire content of `<key>:<value>` or `<value>`) must meet the following requirements:
 
-1. Tags must **start with a letter** and after that may contain the characters listed below:
+- Tag strings must **start with a letter** (this applies regardless of whether the tag uses the format `<key>:<value>` or `<value>`). After the leading letter, the tag string may contain the characters listed below:
 
-    - Alphanumerics
-    - Underscores
+    - Letters (all Unicode letters are supported—for example, a, ó, 気, 녕, ك, and ดี)
+    - Numbers
+    - Underscores (leading and trailing underscores are removed, and contiguous underscores are collapsed into one)
     - Minuses
     - Colons
     - Periods
-    - Slashes
+    - Forward slashes
+    - (Only for tags on logs [ingested through HTTP][28]) at signs (`@`)
 
-    Other special characters are converted to underscores.
+    All other characters (including commas, emoji, backslashes, and spaces) are converted to underscores.
+    
+    **Notes**:
+    - A tag that starts with a digit may be accepted in some contexts, such as `env` tags set at the Agent level. However, tags that don't follow standard naming rules may not work consistently across all Datadog products and can increase tag cardinality. Start tags with a letter unless a specific product explicitly supports otherwise.
+    - The `DD_TAGS` environment variable uses whitespace as a separator between tags. Whitespace in `DD_TAGS` values is **not** converted to underscores. For example, `DD_TAGS="test:this is a test"` produces four separate tags: `test:this`, `is`, `a`, and `test`. To set a tag value that contains spaces, use a YAML configuration file or integration annotations, where whitespace is converted to underscores.
 
-2. Tags can be **up to 200 characters** long and support Unicode letters (which includes most character sets, including languages such as Japanese).
-3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
-4. A tag can be in the format `value` or `<KEY>:<VALUE>`. Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
-
+- Tags can be **up to 200 characters** long. If the tag has the format `<key>:<value>`, the key, `:`, and value all count toward the character limit.
+- [Span tags][26] and metric tags are normalized to lowercase, so avoid using camel case in tag keys. Cloud providers normalize camel case inconsistently. For example, AWS converts `TestTag` to `testtag`, while Alibaba Cloud converts `TestTag` to `test_tag`.
+    - Unlike tags, [span attributes][27] and log attributes are case-sensitive and are not normalized.
+- When using the format `<key>:<value>`, the key always precedes the first colon of the global tag definition. For example:
+    
     | Tag                | Key           | Value          |
     | ------------------ | ------------- | -------------- |
     | `env:staging:east` | `env`         | `staging:east` |
     | `env_staging:east` | `env_staging` | `east`         |
 
-5. Tags should not originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
-6. Limitations (such as downcasing) only apply to metric tags, not log attributes or span tags.
+- Tags should not originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so can cause unbounded growth in your number of [metrics][2].
+
 
 ## Assign tags
 
@@ -100,6 +112,8 @@ As a best practice, Datadog recommends using unified service tagging when assign
 
 All metrics, logs, traces, and integrations go through a process of `host-tag` inheritance as data is ingested into Datadog. Since data is associated with a given hostname, those components inherit all the `host-level` tags associated with that host. These tags are visible in the [infrastructure list][12] for a given host, sourced from either the cloud provider or the Datadog Agent. See [missing `host-level` tags on new hosts or nodes][25] for more information.
 
+Because tags can be inherited from multiple sources, choose unique and specific key names to avoid duplicating them across sources. For example, if you've set a `service` key on a host (`service:my-host`) and a `service` key on a pod running on that host (`service:my-service`), your data inherits both tags. Opt for more differentiated key names (such as `infra_service`) to avoid duplicate tag keys.
+
 ### Tag precedence
 
 The Datadog Agent does **not** enforce a precedence order for tags set from different sources. Instead, the Agent collects all tags from every available source, stores each unique value for a given tag key, and emits all of them with the telemetry.
@@ -120,7 +134,7 @@ After you have [assigned tags][7] at the host and [integration][9] level, start 
 
 | Area                 | Use Tags to                                                                                      |
 | -------------------- | ------------------------------------------------------------------------------------------------ |
-| [Events][10]         | Filter the event stream.                                                                          |
+| [Events][10]         | Filter the Event Stream.                                                                          |
 | [Dashboards][11]     | Filter and group metrics on graphs.                                                               |
 | [Infrastructure][12] | Filter and group on the host map, infrastructure list, live containers, and live processes views. |
 | [Monitors][13]       | Manage monitors, create monitors, or manage downtime.                                             |
@@ -132,7 +146,7 @@ After you have [assigned tags][7] at the host and [integration][9] level, start 
 | [Notebooks][19]      | Filter and group metrics on graphs.                                                               |
 | [Logs][20]           | Filter logs search, analytics, patterns, live tail, and pipelines.                                |
 | [SLOs][21]           | Search for SLOs, grouped metric-based SLOs, and grouped monitor-based SLOs.                       |
-| [Developers][22]     | Pull information or setup different areas in the UI with the API.                                 |
+| [Developers][22]     | Pull information or set up different areas in the UI with the API.                                |
 | [Billing][23]        | Report on Datadog usage by choosing up to three tags, for example: `env`, `team`, and `account_id`. |
 | [CI Visibility][24]  | Filter and group test runs or pipeline executions with the CI Visibility Explorer. |
 
@@ -166,4 +180,7 @@ For more information, see [Using Tags][1].
 [22]: /getting_started/tagging/using_tags/#developers
 [23]: /account_management/billing/usage_attribution/
 [24]: /getting_started/tagging/using_tags/#ci-visibility
-[25]: /containers/kubernetes/log/?tab=datadogoperator#missing-host-level-tags-on-new-hosts-or-nodes
+[25]: /containers/troubleshooting/log-collection?tab=datadogoperator#missing-host-level-tags-on-new-hosts-or-nodes
+[26]: /tracing/trace_collection/tracing_naming_convention/#span-tags
+[27]: /tracing/trace_collection/tracing_naming_convention/#span-attributes
+[28]: /api/latest/logs/#send-logs

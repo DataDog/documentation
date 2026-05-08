@@ -1,6 +1,8 @@
 ---
 title: Azure Automated Log Forwarding Setup
-private: true
+aliases:
+- /logs/guide/azure-logging-guide/
+- /logs/guide/azure-automated-logs-architecture/
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitoring-azure-platform-logs/"
   tag: "Blog"
@@ -9,23 +11,45 @@ further_reading:
 
 ## Overview
 
-Use this guide to automate your Azure log forwarding setup with an Azure Resource Manager (ARM) template. 
+Use this guide to set up and manage Azure automated log forwarding. You can configure log forwarding directly in Datadog or deploy it with an Azure Resource Manager (ARM) template.
 
 The ARM template deploys resources from a series of Azure services (storage accounts and function apps) into your subscriptions, which collect and forward logs to Datadog. These services automatically scale up or down to match log volume. Scaling is managed by a control plane, which is a set of function apps deployed to a subscription and region of your choice. Storage accounts and function apps are deployed in each of the subscriptions forwarding logs to Datadog.
 
 **All sites**: Automated log forwarding is available to use on all [Datadog sites][4].
 
+**Supported Azure environments**: Automated log forwarding supports the Azure commercial (public) cloud only. Azure Government and Azure China are not supported. If you use Datadog government sites, you can only use this feature with workloads in Azure commercial cloud.
+
+## How to choose between automated and manual setup
+
+Choose the manual setup method if you want to:
+   - apply custom tags to your resources
+
+Use the automated setup method if you want to:
+   - automate deployment through the Azure portal
+   - manage your infrastructure through declarative templates
+   - centrally control access, tags, and billing
+   - redeploy your resources in the correct order and in a consistent way
+   - save costs by using a storage account rather than an event hub
+
 ## Setup
 
-Begin by opening the Azure Log Forwarding ARM template corresponding to your Azure environment:
-  - [Azure Public][1]
-  - [Azure Government][6]
-  - [Azure China][7]
+### Configure Log Forwarding
 
-The sections below provide instructions for completing each page of the template.
+Use the **Configure Log Forwarding** flow to set up new or manage existing log forwarders directly in Datadog. You can use this flow to deploy automated log forwarding from scratch or update an existing setup, such as adding or removing subscriptions or modifying log filters.
 
-### Basics
+1. In Datadog, navigate to [**Integrations > Azure**][16].
+1. Click **Configure Log Forwarding**.
+1. Choose to deploy a new setup or update an existing one.
+1. Copy the provided command and paste it in your Azure Cloud Shell.
+1. Select the subscriptions to forward logs from.
+1. Optionally, add or remove log filters.
+1. Click **Confirm**.
 
+### ARM template
+
+Alternatively, you can deploy automated log forwarding with an [Azure Public ARM template][1]. The sections below provide instructions for completing each page of the template.
+
+#### Basics
 
 1. Under **Project details**, select the management group. This is needed for the ARM template to grant permissions to the subscriptions you select for automated log forwarding.
 2. Under **Instance details**, select values for:
@@ -38,7 +62,7 @@ The sections below provide instructions for completing each page of the template
 
 3. Click **Next**.
 
-### Datadog Configuration
+#### Datadog configuration
 
 1. Enter your [Datadog API key][2] value.
 2. Select your [Datadog Site][4].
@@ -47,15 +71,116 @@ The sections below provide instructions for completing each page of the template
 
 3. Click **Next**.
 
-### Deployment
+#### Deployment
 
 1. Click the checkbox to acknowledge the deployment warnings.
 2. Click **Review + create**.
 
-### Review + create
+#### Review + create
 
 1. Review the finalized deployment details.
 2. Click **Create**.
+
+## Resource tag filtering
+
+You can use tag filters to control which Azure resources have their logs forwarded to Datadog. For tag filter syntax, wildcard support, and examples, see [Resource tag filtering][21] in the Azure getting started guide.
+
+## Log Analytics Workspaces
+
+You can forward logs from Azure Log Analytics Workspaces (LAWs) to Datadog through the automated log forwarder. Previously, Datadog only supported [diagnostic setting][13] logs from LAWs. With [data export rules][17], you can also forward logs from LAW Log Tables to Datadog.
+
+### Restrictions
+
+- You can only set up forwarding for LAW resources within the same region as the log forwarder.
+- You can have a maximum of 10 data export rules on a LAW. If the LAW has no remaining capacity for a Data Export Rule, delete an existing rule to make room.
+- Not all log tables can be exported. See Microsoft's list of [unsupported tables][18].
+
+### Forward logs from a Log Analytics Workspace
+
+1. If you haven't already created an automated log forwarder, follow the [Setup](#setup) instructions. If you already have a log forwarder, make sure it is updated to the latest version.
+2. In the [Azure Portal][19], navigate to the desired Log Analytics Workspace.
+3. Under **Settings**, click **Data export**.
+4. Click **New export rule**.
+5. Name the rule, check **Enable upon creation**, and click **Next**.
+6. Select the tables to export. You can modify this selection later by editing the data export rule. Click **Next**.
+7. For **Destination type**, select **Storage Account**. Select the subscription containing your log forwarder, and choose a log forwarder storage account. These accounts typically have the prefix `ddlogstorage`. Click **Next**.
+8. Review the rule and click **Create**. Logs from the LAW start appearing in Datadog within a few minutes.
+
+### Troubleshooting
+
+#### Logs are not appearing in Datadog
+
+If you have created a data export rule but do not see logs in Datadog:
+
+1. Verify the data export rule is enabled.
+1. Verify the destination storage account is one created by the automated log forwarder (the name typically starts with `ddlogstorage`).
+1. In the storage account, inspect the containers. Containers with the `am-` prefix indicate LAW exports. If you only see containers with the `insights-` prefix, the data export rule may be improperly configured.
+1. Verify the LAW has collected new logs within the past two hours.
+
+See Microsoft's [data export troubleshooting FAQ][20] for additional information.
+
+#### Selecting which logs are exported
+
+The data export rule allows you to specify which log tables from your Log Analytics Workspace are exported. Edit the data export rule to add or remove tables.
+
+#### Expected latency
+
+LAW logs typically appear in Datadog within two to five minutes, but may take up to 20 minutes to first appear. LAW logs may have different properties from non-LAW logs.
+
+## Architecture
+
+### Services used
+
+- [Azure Function][15] apps are used to discover resources in your Azure subscriptions, scale log forwarders, and configure diagnostic settings on the detected resources.
+- [Azure Container Apps][8] are used to collect resource logs generated by diagnostic settings, track which logs have been processed already, and submit them to Datadog.
+- [Azure Storage Accounts][9] are used to store logs generated by your resources, as well as a small cache of metadata such as subscription IDs, resource IDs, and regions.
+
+### High-level architecture
+
+{{<img src="/logs/guide/azure_automated_logs_architecture/high_level_architecture_06-13-2025.png" alt="Architecture diagram showing three main components of Azure automated log forwarding: Control Plane and Log Forwarder (deployed by Datadog to customer environments) connecting to Azure Resources" style="width:100%">}}
+
+The deployment template sets up a [control plane](#control-plane) and [log forwarders](#log-forwarders) in your selected subscriptions.
+
+#### Control plane
+
+The control plane is a set of Azure Function apps and a storage account for caching. One control plane is deployed in your chosen subscription and performs the following tasks:
+- Discovery of resources in your chosen subscriptions that are able to log through diagnostic settings.
+- Automatic configuration of diagnostic settings on discovered resources to flow logs into a storage account that the log forwarders are tracking.
+- Scaling of log forwarders in regions where your resources are located, enabling them to match log volume dynamically.
+
+#### Log forwarders
+
+Log forwarders consist of an Azure Container Apps job and storage account for logs. They are deployed by the control plane in each subscription you select for log forwarding. The number of log forwarders deployed per subscription scales according to the volume of logs generated by your resources. Log forwarders perform the following tasks:
+- Temporarily store logs generated from your resources' diagnostic settings in a storage account.
+- Process the stored logs and forward them to Datadog.
+
+In Azure, a resource's diagnostic settings can only target storage accounts within the same region. As such, the forwarders are spun up in each region where resources with diagnostic settings exist.
+
+See Azure's [Diagnostic settings in Azure Monitor][13] page for more information.
+
+### Detailed architecture
+
+{{<img src="/logs/guide/azure_automated_logs_architecture/detailed_architecture.png" alt="Workflow diagram showing Azure automated log forwarding: the Control Plane discovers resources, scales log forwarders across regions, configures diagnostic settings to send logs to storage accounts, and then Container Apps check for and forward new logs to Datadog Log Management." style="width:100%">}}
+
+### Security and permissions
+
+The ARM template grants the control plane only the permissions needed to manage the forwarders and place diagnostic settings on your resources. To achieve this, resource groups are created and permissions are granted during the ARM template deployment. After this, you can add permissions for more subscriptions by redeploying the ARM template.
+
+#### Permissions used
+
+- [Monitoring Contributor][10] role at the **subscription** level for the selected subscriptions.
+   - This is needed to discover resources with available diagnostic settings and enable log output to storage.
+
+- [Contributor][11] role at the **resource group** level, for the log-forwarding resource groups in the selected subscriptions.
+   - This is needed to manage (create and delete) forwarder storage accounts and Container Apps jobs.
+
+- [Website Contributor][12] role at the **control plane resource group** level, for updating the control plane function apps.
+
+No information about your resources is exported. Datadog only requests the information required to enable log output, and the only output of this architecture is the logs sent to Datadog.
+
+**Note**: Optionally, you can enable the control plane to submit its own health metrics, logs, and events to Datadog for debugging purposes. To do this, set the environment variable `DD_TELEMETRY=true` on any Function App or Container App in the control plane.
+
+{{% azure-log-archiving %}}
 
 ## Uninstall
 
@@ -73,9 +198,21 @@ The script first discovers any instances running in each subscription, then prom
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json
+[1]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2FcreateUiDefinition.json
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /getting_started/site/
 [5]: https://learn.microsoft.com/en-us/azure/cloud-shell/overview
-[6]: https://portal.azure.us/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json
-[7]: https://portal.azure.cn/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json
+[8]: https://azure.microsoft.com/products/container-apps
+[9]: https://learn.microsoft.com/azure/storage/common/storage-account-overview
+[10]: https://learn.microsoft.com/azure/azure-monitor/roles-permissions-security#monitoring-contributor
+[11]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/privileged#contributor
+[12]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/web-and-mobile#website-contributor
+[13]: https://learn.microsoft.com/azure/azure-monitor/essentials/diagnostic-settings
+[14]: https://app.datadoghq.com/integrations/azure/add?config_azure-new-onboarding=true
+[15]: https://learn.microsoft.com/azure/azure-functions/
+[16]: https://app.datadoghq.com/integrations/azure
+[17]: https://learn.microsoft.com/azure/azure-monitor/logs/logs-data-export?tabs=portal
+[18]: https://learn.microsoft.com/azure/azure-monitor/logs/logs-data-export?tabs=portal#unsupported-tables
+[19]: https://portal.azure.com
+[20]: https://learn.microsoft.com/troubleshoot/azure/azure-monitor/log-analytics/workspaces/workspace-data-export-faq
+[21]: /getting_started/integrations/azure/#resource-tag-filtering-for-logs

@@ -22,23 +22,23 @@ title: Seguimiento de errores para servicios de backend
 
 ## Información general
 
-{{< img src="error_tracking/error-tracking-overview-2.png" alt="Información detallada de un problema en el Explorador de seguimiento de errores" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="Información detallada de un problema en el Explorador de seguimiento de errores" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
 ## Configuración
 
-El seguimiento de errores está disponible para todos los idiomas que admite APM y no requiere el uso de un SDK diferente.
+Error Tracking está disponible para todos los lenguajes compatibles con APM. No requiere un SDK adicional ni cambios de configuración.
 
 Opcionalmente, para ver fragmentos de código en trazas (traces) de stack tecnológico, configura la [integración de GitHub][4].
 
-{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="Un fragmento de código en línea en una traza de stack tecnológico," style="width:70%;" >}}
+{{< img src="tracing/error_tracking/inline_code_snippet_2.png" alt="Un fragmento de código en línea en una traza de stack tecnológico," style="width:70%;" >}}
 
 Para empezar a configurar tu repositorio, consulta la [documentación sobre la integración del código fuente][6].
 
 ## Uso de los atributos de tramos (spans) para realizar el seguimiento de tramos de errores
 
-Los rastreadores de Datadog recopilan errores a través de las integraciones y de la instrumentación manual del código fuente de tus servicios backend. Un tramo de error debe contener los [atributos de tramo][1] `error.stack`, `error.message` y `error.type` para ser rastreado. Si un error se notifica varias veces dentro de un servicio, sólo se conserva el error más destacado.
+Los rastreadores de Datadog recopilan errores a través de las integraciones y de la instrumentación manual del código fuente de tus servicios backend. Un tramo de error debe contener los [atributos de tramo][1] `error.stack`, `error.message` y `error.type` para ser rastreado. Si un error se notifica varias veces dentro de un servicio, solo se conserva el error más destacado.
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Gráfica de llamas con errores." style="width:100%;" >}}
 

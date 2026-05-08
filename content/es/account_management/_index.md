@@ -88,6 +88,40 @@ La pestaña [Apps][14] (Aplicaciones) de **Personal Settings** (Configuración p
 
 Al pasar el cursor por encima de una aplicación, la opción de activarla o desactivarla aparecerá a la derecha de la lista.
 
+#### Verificación del correo electrónico
+Verifica tu dirección de correo electrónico para mejorar la seguridad de tu cuenta y acceder a funciones de gestión adicionales. Los usuarios verificados tienen un mayor control sobre la seguridad de sus cuentas y pueden ver todas las organizaciones a las que pertenecen.
+
+- Los **usuarios que inician sesión en Google** se verifican automáticamente durante su primer inicio de sesión.
+- Los **usuarios con contraseña** verifican su correo electrónico al establecer su contraseña por primera vez.
+- **Los usuarios SAML** deben verificar manualmente su correo electrónico a través de Datadog.
+
+Una vez que apruebes la verificación, tendrás:
+- La posibilidad de **cerrar sesión en todas las sesiones web activas** en todos los dispositivos, garantizando la seguridad en caso de compromiso de credenciales.
+- La posibilidad de **ver y cambiar entre organizaciones** fuera de tu jerarquía orgánica actual.
+
+Los usuarios no verificados pueden seguir accediendo a Datadog, pero solo pueden ver las organizaciones dentro de su jerarquía y no pueden revocar las sesiones activas.
+
+#### Verificar tu correo electrónico
+
+Para verificar tu correo electrónico:
+1. Ve a tus **Parámetros de perfil**.
+2. Haz clic en **Verify Account** (Verificar cuenta).
+3. Introduce el **código de verificación** enviado a tu correo electrónico registrado.
+4. Haz clic en **Submit** (Enviar) para finalizar el proceso de verificación.
+
+#### Cerrar sesión en todas las sesiones web activas
+
+Para cerrar sesión en todas las sesiones web activas:
+Al cerrar sesión en todas las sesiones web activas, cierras sesión en todas las sesiones actuales en todos los dispositivos, incluido el que estás utilizando.
+
+
+Para cerrar sesión en todas las sesiones activas:
+1. Ve a **Personal Settings** (Configuración personal).
+2. Haz clic en **Log Out of All Web Sessions** (Cerrar sesión en todas las sesiones web).
+3. Confirma la acción.
+
+Después de confirmar, se cierran tus sesiones en todos los dispositivos y debes iniciarlas nuevamente.
+
 ## Aspecto
 
 Puedes utilizar Datadog en modo oscuro. Para hacerlo, pasa el cursor sobre tu avatar en la barra lateral o pulsa: `Ctrl+Opt+D` / `Ctrl+Alt+D`.

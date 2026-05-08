@@ -27,4 +27,4 @@ Use the Logstash source to send logs to Observability Pipelines with Filebeat.
 1. [Set up a pipeline][2] with the Logstash source.
 
 [1]: https://www.elastic.co/guide/en/beats/filebeat/current/setup-repositories.html
-[2]: /observability_pipelines/set_up_pipelines/
+[2]: /observability_pipelines/configuration/set_up_pipelines/

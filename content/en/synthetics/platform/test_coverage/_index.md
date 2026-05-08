@@ -11,7 +11,7 @@ further_reading:
 - link: '/synthetics/browser_tests'
   tag: 'Documentation'
   text: 'Learn about Synthetic browser tests'
-- link: '/real_user_monitoring/browser/tracking_user_actions'
+- link: '/real_user_monitoring/application_monitoring/browser/tracking_user_actions'
   tag: 'Documentation'
   text: 'Learn about RUM actions'
 - link: '/real_user_monitoring/session_replay'
@@ -81,11 +81,11 @@ Add the most popular sections of your application to a new or existing browser t
 
 [1]: https://app.datadoghq.com/synthetics/test-coverage/browser
 [2]: /synthetics/guide/explore-rum-through-synthetics/
-[3]: /real_user_monitoring/browser/data_collected/
+[3]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [4]: /synthetics/browser_tests/
 [5]: /real_user_monitoring/guide/send-rum-custom-actions/
 [6]: /synthetics/metrics/
-[7]: /real_user_monitoring/session_replay/browser/
+[7]: /session_replay/browser/
 [8]: https://app.datadoghq.com/rum/explorer/
 [9]: /continuous_testing/
 

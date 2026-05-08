@@ -5,6 +5,17 @@
             <div class="col">
                 <a
                     class="card h-100"
+                    href="/feature_flags"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/datadog_large.svg" "class"
+                        "img-fluid" "alt" "datadog" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a
+                    class="card h-100"
                     href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#amplitude-integration"
                 >
                     <div class="card-body text-center py-2 px-1">

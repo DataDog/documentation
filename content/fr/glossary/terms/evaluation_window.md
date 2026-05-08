@@ -1,4 +1,5 @@
 ---
+id: evaluation_window
 title: fenêtre d'évaluation
 ---
 La fenêtre d'évaluation correspond à la période relative des données que le monitor agrège et utilise pour la comparaison aux seuils définis.

@@ -8,9 +8,6 @@ further_reading:
 - link: /security/sensitive_data_scanner/
   tag: Documentación
   text: Configurar Sensitive Data Scanner
-- link: /security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
-  tag: Documentación
-  text: Prácticas recomendadas para crear reglas personalizadas
 title: Reglas personalizadas
 ---
 

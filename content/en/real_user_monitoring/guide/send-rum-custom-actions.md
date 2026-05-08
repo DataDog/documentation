@@ -10,6 +10,9 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the RUM Explorer'
+- link: "https://learn.datadoghq.com/courses/custom-data-rum-javascript"
+  tag: "Learning Center"
+  text: "Collect custom data with RUM for JavaScript web applications"
 algolia:
   tags: ["addaction"]
 ---
@@ -102,6 +105,6 @@ The following example displays the average cart value per country in the last tw
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/data_collected/?tab=useraction#action-attributes
-[2]: /real_user_monitoring/browser/advanced_configuration/#replace-global-context
+[1]: /real_user_monitoring/application_monitoring/browser/data_collected/?tab=useraction#action-attributes
+[2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#replace-global-context
 [3]: /real_user_monitoring/explorer

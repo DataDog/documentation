@@ -1,0 +1,3 @@
+---
+title: Análisis estático
+---

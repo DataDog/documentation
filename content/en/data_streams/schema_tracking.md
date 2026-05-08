@@ -2,12 +2,6 @@
 title: Schema Tracking
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">
-    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
-
 Data Streams Monitoring provides visibility into schemas used by producers and consumers, and how schema issues impact downstream services. You can track new schemas added, schemas with errors, and schema evolutions to manage schema migrations and identify issues.
 
 Changing a schema produced by a service without updating the consumer can lead to the consumer struggling to process payloads, blocking further data flow downstream. Understanding schema changes ensures data compatibility between producers and consumers, and ultimately prevents issues.
@@ -48,7 +42,7 @@ Selecting a schema from the list displays the throughput of the schema by servic
 
 Use the following steps to view detailed information about a schema:
 1. Navigate to [Data Streams Monitoring][4].
-1. Click the **Schemas** tab.
+1. Click the {{< ui >}}Schemas{{< /ui >}} tab.
 1. Select the time frame.
 1. Use the quick filters to filter for new schemas (first seen within the last 3 hours), schemas with high error rates, or active schemas.
 1. Select a schema. A side panel opens with detailed information for that schema.
@@ -59,9 +53,9 @@ For each service you track in Data Streams Monitoring, you can see information a
 
 To view schema information at the service level:
 1. Navigate to [Data Streams Monitoring][4].
-1. Ensure the **Explore** tab is selected.
+1. Ensure the {{< ui >}}Explore{{< /ui >}} tab is selected.
 1. Click on a service. The service detail side panel appears.
-1. Select the **Schemas** tab.
+1. Select the {{< ui >}}Schemas{{< /ui >}} tab.
 
 On the schemas tab, you can:
 - View input throughput by schema.

@@ -14,14 +14,17 @@ Configure due date rules to ensure findings are addressed within your specified 
 1. Enter a descriptive name for the rule, for example, **Cloud Infrastructure Anomaly Warnings**.
 1. Use the following boxes to configure the rule criteria:
     - **Any of these types**: The types of findings that the rule should check for. Available types include:
-      - **Application Code Vulnerability**
-      - **Application Library Vulnerability**
+      - **Runtime Code Vulnerability**
+      - **Static Code Vulnerability**
+      - **Library Vulnerability**
+      - **Secret**
+      - **Infrastructure as Code**
       - **Container Image Vulnerability**
+      - **Host Vulnerability**
       - **Misconfiguration**
       - **Attack Path**
       - **Identity Risk**
-      - **API Security Finding**
-      - **Host Vulnerability**
+      - **API Security**
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. Set a due date for each severity level that needs one. The due date starts from when the matching finding was discovered, not when the rule was created.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
@@ -53,4 +56,4 @@ When managing findings, due dates can be removed under various conditions, such 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: https://app.datadoghq.com/security/configuration/pipeline-vulnerability
+[2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=set_due_date

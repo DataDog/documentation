@@ -6,9 +6,9 @@ aliases:
   - /real_user_monitoring/installation
   - /real_user_monitoring/faq/
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
-  tag: "Release Notes"
-  text: "Check out the latest Datadog RUM releases! (App login required)"
+- link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
+  tag: "Documentation"
+  text: "RUM Browser Data Collected"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to gain insights through Real User Monitoring"
@@ -42,12 +42,21 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
   tag: "Blog"
   text: "Best practices for monitoring static web applications"
-- link: "/real_user_monitoring/browser/data_collected/"
-  tag: "Documentation"
-  text: "RUM Browser Data Collected"
 - link: "https://www.datadoghq.com/blog/progressive-web-application-monitoring/"
   tag: "Blog"
   text: "Best practices for monitoring progressive web applications"
+- link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+  tag: "Blog"
+  text: "Design effective executive dashboards with Datadog"
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
+- link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog RUM releases! (App login required)"
+- link: "https://learn.datadoghq.com/courses/intro-to-rum"
+  tag: "Learning Center"
+  text: "Intro to Real User Monitoring (RUM)"
 algolia:
   tags: ['rum', 'real user monitoring']
 cascade:
@@ -71,7 +80,28 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 * **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
 
-A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes pageviews and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again.
+### Session definition
+
+A user session is a user journey on your web or mobile application. A session includes all related navigation events (RUM Views), user actions (RUM Actions), network requests (RUM Resources), crashes and errors (RUM Errors), and other events and signals that collectively produce a faithful representation of the user experience.
+
+A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically.
+
+### Technical limitations
+
+| Property                                   | Limitation               |
+| ------------------------------------------ | ------------------------ |
+| Maximum duration of a session              | 4 hours                  |
+| Timeout of a session                       | 15 minutes of inactivity |
+| Maximum number of events per session       | 10 million              |
+| Maximum number of attributes per event     | 1,000                    |
+| Maximum attribute depth per event          | 20                       |
+| Maximum event size                         | 1 MB                     |
+| Maximum intake payload size                | 5 MB                     |
+| Maximum source maps and mapping files size | 500 MB per file          |
+| Maximum dSYM files size                    | 2 GB per file            |
+| Maximum delay at ingestion                 | 24 hours                 |
+
+If an event goes beyond any of the technical limitations listed above, it is rejected by the Datadog intake.
 
 ## What is Session Replay?
 
@@ -120,6 +150,7 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 | US5  | `https://browser-intake-us5-datadoghq.com`    |
 | EU1  | `https://browser-intake-datadoghq.eu`         |
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
+| US2-FED  | `https://browser-intake-us2-ddog-gov.com` |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 | AP2  | `https://browser-intake-ap2-datadoghq.com`    |
 
@@ -227,15 +258,15 @@ You must have edit access to restore general access to a restricted application.
 [4]: /monitors/types/real_user_monitoring/
 [5]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[8]: /real_user_monitoring/ios/mobile_vitals/
-[9]: /real_user_monitoring/android/mobile_vitals/
-[10]: /real_user_monitoring/ios/web_view_tracking/
-[11]: /real_user_monitoring/android/web_view_tracking/
-[12]: /real_user_monitoring/session_replay/browser/
-[13]: /real_user_monitoring/session_replay/browser/privacy_options/
-[14]: /real_user_monitoring/session_replay/browser/developer_tools/
-[15]: /real_user_monitoring/browser/setup/
+[7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[8]: /real_user_monitoring/application_monitoring/ios/mobile_vitals/
+[9]: /real_user_monitoring/application_monitoring/android/mobile_vitals/
+[10]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/
+[11]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
+[12]: /session_replay/browser/
+[13]: /session_replay/browser/privacy_options/
+[14]: /session_replay/browser/dev_tools/
+[15]: /real_user_monitoring/application_monitoring/browser/setup/
 [16]: /real_user_monitoring/application_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
 [18]: /account_management/rbac/

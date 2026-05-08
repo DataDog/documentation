@@ -1,4 +1,5 @@
 ---
+id: pipeline_breakdown_queue_time
 title: pipeline breakdown queue time
 core_product:
   - ci-cd

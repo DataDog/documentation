@@ -5,21 +5,51 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-sentinelone/"
   tag: "blog"
   text: "Optimize EDR logs and route them to SentinelOne with Observability Pipelines"
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
+
+## Overview
 
 Use Observability Pipelines' SentinelOne destination to send logs to SentinelOne.
 
 ## Setup
 
-Set up the SentinelOne destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure the SentinelOne destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
-### Set up the destination
+After you select the SentinelOne destination in the pipeline UI:
 
-{{% observability_pipelines/destination_settings/sentinelone %}}
+<div class="alert alert-danger">Only enter the identifier for the token. Do <b>not</b> enter the actual value.</a></div>
 
-### Set the environment variables
+1. Enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
+1. Select your SentinelOne logs environment in the dropdown menu.
+
+### Optional buffering
+
+{{% observability_pipelines/destination_buffer %}}
+
+## Secret defaults
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- SentinelOne write access token identifier:
+	- The default identifier is `DESTINATION_SENTINEL_ONE_TOKEN`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## View logs in a SentinelOne cluster
 
@@ -36,9 +66,9 @@ After you've set up the pipeline to send logs to the SentinelOne destination, yo
 
 A batch of events is flushed when one of these parameters is met. See [event batching][3] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| None           | 1,000,000       | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 1                 | 1                   |
 
 ## Further reading
 
@@ -47,3 +77,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://usea1-partners.sentinelone.net/login
 [3]: /observability_pipelines/destinations/#event-batching
+[4]: /observability_pipelines/configuration/set_up_pipelines/
+[5]: /api/latest/observability-pipelines/
+[6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

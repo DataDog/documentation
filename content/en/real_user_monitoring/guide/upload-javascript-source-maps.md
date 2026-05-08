@@ -8,23 +8,27 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize your Error Tracking data in the Explorer'
-- link: 'https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command'
+- link: 'https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps'
   tag: 'Source Code'
   text: 'Sourcemaps command reference'
+- link: "https://learn.datadoghq.com/courses/tracking-errors-rum-javascript"
+  tag: "Learning Center"
+  text: "Tracking errors with RUM for JavaScript Web Applications"
+
 ---
 
 ## Overview
 
 If your front-end JavaScript source code is minified, upload your source maps to Datadog to de-obfuscate your different stack traces. For any given error, you can access the file path, line number, and code snippet for each frame of the related stack trace. Datadog can also link stack frames to your source code in your repository.
 
-<div class="alert alert-info">Only errors collected by <a href="/error_tracking/">Error Tracking</a>, <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, and logs from <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> can be unminified.</div>
+<div class="alert alert-info"><ul><li>Only errors collected by <a href="/error_tracking/">Error Tracking</a>, <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, and logs from <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> can be unminified.</li><li>To automate source map uploads as part of your build process, see <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps">Build Plugins: Source Maps</a>.</li></ul></div>
 
 ## Instrument your code
 
 Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute.
 
 <div class="alert alert-danger">
-Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **500 MB**.
+Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of <b>500 MB</b>.
 </div>
 
 See the following configurations for popular JavaScript bundlers.
@@ -67,6 +71,27 @@ module.exports = {
 Parcel generates source maps by default when you run the build command: `parcel build <entry file>`.
 
 {{% /tab %}}
+{{% tab "Vite" %}}
+
+You can generate source maps by configuring the `build.sourcemap` option in your `vite.config.js` file.
+
+See the example configuration:
+
+```javascript
+// vite.config.js
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    sourcemap: true, // generates .js.map files
+    minify: 'terser', // or 'esbuild'
+  }
+})
+```
+
+**Note**: If you are using TypeScript, ensure `compilerOptions.sourceMap` is set to `true` in your `tsconfig.json` file.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 After building your application, bundlers generate a directory (typically named `dist`) with minified JavaScript files co-located with their corresponding source maps.
@@ -83,7 +108,7 @@ See the following example:
 ```
 
 <div class="alert alert-danger">
-If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the 500 MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
+If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>500 MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
 </div>
 
 ## Upload your source maps
@@ -106,7 +131,7 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov,ap1,ap2" >}}
+{{< site-region region="eu,us3,us5,gov,gov2,ap1,ap2" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
 2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
 3. Configure the CLI to upload files to the {{<region-param key="dd_site_name">}} site by exporting two environment variables: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} and `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
@@ -136,6 +161,8 @@ Only source maps with the `.js.map` extension work to correctly unminify stack t
 
 <div class="alert alert-info">If you are serving the same JavaScript source files from different subdomains, upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full URL. For example, specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>.</div>
 
+See all uploaded symbols and manage your source maps on the [Explore RUM Debug Symbols][5] page.
+
 ### Link stack frames to your source code
 
 If you run `datadog-ci sourcemaps upload` within a Git working directory, Datadog collects repository metadata. The `datadog-ci` command collects the repository URL, the current commit hash, and the list of file paths in the repository that relate to your source maps. For more details about Git metadata collection, refer to the [datadog-ci documentation][4].
@@ -158,7 +185,8 @@ On the other hand, an unminified stack trace provides you with all the context y
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
-[2]: https://docs.datadoghq.com/real_user_monitoring/browser/setup/#initialization-parameters
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps
+[2]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/logs/log_collection/javascript/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps#link-errors-with-your-source-code
+[5]: https://app.datadoghq.com/source-code/setup/rum

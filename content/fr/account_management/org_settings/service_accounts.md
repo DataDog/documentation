@@ -1,4 +1,7 @@
 ---
+description: Créez et gérez des comptes de service non interactifs pour des scripts
+  automatisés et des clés d'application partagées entre équipes avec des contrôles
+  d'accès sécurisés.
 further_reading:
 - link: https://docs.datadoghq.com/api/latest/service-accounts/
   tag: Documentation
@@ -56,7 +59,9 @@ Pour modifier un compte de service, cliquez sur lʼun d'entre eux dans la liste 
 2. Modifiez tous les champs de votre choix. Vous pouvez modifier le nom, l'adresse e-mail, le statut et les rôles.
 3. Cliquez sur **Save**.
 
-Pour désactiver un compte de service, suivez le processus ci-dessus pour le modifier, puis définissez le statut sur **Disabled**.
+Pour désactiver un compte de service, l'utilisateur doit disposer de l'autorisation User Manage Access en plus de Service Account Write.
+
+Pour désactiver un compte de service, suivre la procédure précédente pour modifier le compte de service et définir le statut sur **Disabled**.
 
 ### Créer ou révoquer des clés d'application
 
@@ -69,6 +74,10 @@ Pour créer une nouvelle clé d'application, suivez les étapes ci-dessous :
 - Cliquez sur **Create Key**. 
 
 La boîte de dialogue est actualisée, ce qui permet d'afficher la clé. Copiez et collez la clé à l'emplacement de votre choix. Une fois que vous avez fermé la boîte de dialogue, vous ne pouvez plus récupérer la valeur de la clé.
+
+{{< site-region region="ap2,gov" >}}
+<div class='alert alert-danger'>Les clés d'application des comptes de service ne peuvent être consultées qu'une seule fois. Veillez à stocker votre clé d'application en toute sécurité immédiatement après sa création, car le secret de la clé ne pourra plus être récupéré par la suite.</div>
+{{< /site-region >}}
 
 Pour révoquer une clé d'application, recherchez une clé dans le volet latéral permettant de visualiser le compte de service en détail, et passez la souris dessus. Des icônes de corbeille et de crayon s'affichent à droite. Cliquez sur la corbeille pour révoquer la clé. Une fois que la clé est révoquée, cliquez sur **Confirm**.
 
@@ -89,7 +98,7 @@ Vous devez possédez l'autorisation d'écriture pour les comptes de service afin
 Lorsque vous créez un compte de service, vous pouvez lui attribuer n'importe quel sous-ensemble de rôles et d'autorisations dont vous disposez. Il existe une exception si vous disposez de lʼautorisation de gérer l'accès des utilisateurs, ce qui vous donne un accès d'administrateur pour tout ce qui concerne Datadog. Les comptes Datadog ayant le droit de gérer l'accès des utilisateurs n'ont aucune restriction sur les rôles et les autorisations qu'ils peuvent assigner aux comptes de service.
 
 
-## Notifications
+## Section Notifications
 
 Datadog envoie une notification à l'adresse électronique associée au compte de service lorsque les actions suivantes se produisent :
 - Créer une clé d'application

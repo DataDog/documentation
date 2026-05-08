@@ -31,18 +31,15 @@ With one command, you can install, configure, and start the Agent, while also in
 For an Ubuntu host:
 
 1. Run the one-line installation command:
-
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3,php:1" DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:4,js:5,dotnet:3,php:1" DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
-
-   a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4].
-
-   b. Replace `<YOUR_DD_SITE>` with your [Datadog site][3].
+   1. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4].
+   1. Replace `<YOUR_DD_SITE>` with your [Datadog site][3].
    <div class="alert alert-info">
       You can also optionally configure the following:
       <ul>
-         <li><a href="#lib-linux">Specifying tracing library versions.</a></li>
+         <li><a href="#lib-linux">Specifying SDK versions.</a></li>
          <li><a href="#env-linux">Tagging observability data by environment.</a></li>
       </ul>
    </div>
@@ -53,7 +50,7 @@ For an Ubuntu host:
 
 **Note:** To configure single-step for AAP threat protection, add the environment variable `DD_APPSEC_ENABLED=true` to your one-line installation command.
 
-### Specifying tracing library versions {#lib-linux}
+### Specifying SDK versions {#lib-linux}
 
 By default, enabling APM on your server installs support for Java, Python, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command:
 
@@ -61,7 +58,7 @@ By default, enabling APM on your server installs support for Java, Python, Node.
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
+You can optionally provide a version number for the SDK by placing a colon after the language name and specifying the SDK version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
 Supported languages include:
 
@@ -71,7 +68,7 @@ Supported languages include:
 - Node.js (`js`)
 - PHP (`php`)
 
-**Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][6] for more information.
+**Note**: For the Node.js SDK, different versions of Node.js are compatible with different versions of the Node.js SDK. See [DataDog/dd-trace-js: JavaScript APM Tracer][6] for more information.
 
 ### Tagging observability data by environment {#env-linux}
 
@@ -80,7 +77,7 @@ Set `DD_ENV` in your one-line installation command for Linux to automatically ta
 For example:
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3,php:1" DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:4,js:5,dotnet:3,php:1" DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 [2]: /tracing/guide/remote_config
@@ -97,7 +94,7 @@ For a Docker Linux container:
 
 1. Install the library injector:
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3,php:1" DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:4,js:5,dotnet:3,php:1" DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
@@ -111,30 +108,30 @@ For a Docker Linux container:
      -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
      -v /opt/datadog/apm:/opt/datadog/apm \
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
-     gcr.io/datadoghq/agent:7
+     registry.datadoghq.com/agent:7
    ```
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API][5].
    <div class="alert alert-info">
       You can also optionally configure the following:
       <ul>
-         <li><a href="#lib-docker">Specifying tracing library versions.</a></li>
+         <li><a href="#lib-docker">Specifying SDK versions.</a></li>
          <li><a href="#env-docker">Tagging observability data by environment.</a></li>
       </ul>
    </div>
 3. Restart the Docker containers.
 4. [Explore the performance observability of your services in Datadog][6].
 
-### Specifying tracing library versions {#lib-docker}
+### Specifying SDK versions {#lib-docker}
 
 By default, enabling APM on your server installs support for Java, Python, Node.js, and .NET services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` when running the installation script.
 
-For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
+For example, to install support for only v1.25.0 of the Java SDK and the latest Python SDK, add the following to the installation command:
 
 ```shell
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_APM_INSTRUMENTATION_ENABLED=docker DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
+You can optionally provide a version number for the SDK by placing a colon after the language name and specifying the SDK version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
 Supported languages include:
 
@@ -145,7 +142,7 @@ Supported languages include:
 - Ruby (`ruby`)
 - PHP (`php`)
 
-**Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][7] for more information.
+**Note**: For the Node.js SDK, different versions of Node.js are compatible with different versions of the Node.js SDK. See [DataDog/dd-trace-js: JavaScript APM Tracer][7] for more information.
 
 ### Tagging observability data by environment {#env-docker}
 
@@ -165,7 +162,7 @@ docker run -d --name dd-agent \
   -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
   -v /opt/datadog/apm:/opt/datadog/apm \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  gcr.io/datadoghq/agent:7
+  registry.datadoghq.com/agent:7
 {{< /highlight >}}
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys

@@ -15,10 +15,6 @@ title: Attribution de l'utilisation
 
 ## Présentation
 
-<div class="alert alert-danger">
-L'attribution de l'utilisation est une fonctionnalité avancée incluse dans la formule Enterprise. Pour toutes les autres formules, contactez votre chargé de compte ou envoyez un e-mail à <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> pour demander l'activation de cette fonctionnalité.
-</div>
-
 Les administrateurs ou les utilisateurs disposant de l'autorisation Usage Read peuvent accéder à l'onglet Usage Attribution depuis la section Plan & Usage dans Datadog. La page Usage Attribution fournit les informations et fonctionnalités suivantes :
 
 - Consulter la répartition de l'utilisation en fonction des différentes clés de tag et ajouter ou modifier de nouvelles clés (jusqu'à trois clés de tag)

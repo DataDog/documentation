@@ -62,6 +62,6 @@ In Agent 6, DogStatsD is a Golang implementation of [Etsy's StatsD][6] metric ag
 [2]: /tracing/guide/terminology/
 [3]: /agent/configuration/network/#open-ports
 [4]: /agent/configuration/network#configure-ports
-[5]: /developers/custom_checks/write_agent_check/
+[5]: /extend/custom_checks/write_agent_check/
 [6]: https://github.com/etsy/statsd
 [7]: /metrics/custom_metrics/dogstatsd_metrics_submission/

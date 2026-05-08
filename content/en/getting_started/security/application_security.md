@@ -17,11 +17,15 @@ further_reading:
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
+- link: "https://learn.datadoghq.com/courses/app-protection-block-attacks"
+  tag: "Learning Center"
+  text: "Block Application Attacks with Application & API Protection"
+
 ---
 
 ## Overview
 
-Datadog App and API Protection (AAP) helps secure your web applications and APIs in production. 
+Datadog App and API Protection (AAP) helps secure your web applications and APIs in production.
 - With threat detection, Datadog provides real-time protection against attacks and attackers targeting code-level vulnerabilities.
 - With [Code Security][28], Datadog detects code and library vulnerabilities in your repositories and your running services, providing end-to-end visibility from development to production.
 
@@ -36,10 +40,10 @@ This guide walks you through best practices for getting your team up and running
 
 These security insights are detected from data reported by APM. The insights help prioritize your security efforts. AAP identifies, prioritizes, and helps remediate all security risks on your services.
 
-**Note**: If no vulnerabilities or suspicious requests are reported, ensure your services are using a recent Datadog tracing library version. From the [Security Software Catalog][2], open any service's side panel and look at its **Tracing Configuration**.
+**Note**: If no vulnerabilities or suspicious requests are reported, ensure your services are using a recent Datadog SDK version. From the [Security Software Catalog][2], open any service's side panel and look at its **Tracing Configuration**.
 
 
-{{< img src="getting_started/appsec/ASM_Tracing_Configuration.png" alt="Tracer Configuration tab in APM Software Catalog page view. Highlighting which version of the Datadog Agent, and Datadog tracing library are being used by your services." style="width:100%;" >}}
+{{< img src="getting_started/appsec/ASM_Tracing_Configuration.png" alt="Tracer Configuration tab in APM Software Catalog page view. Highlighting which version of the Datadog Agent, and Datadog SDK are being used by your services." style="width:100%;" >}}
 
 
 ## Enable AAP
@@ -51,7 +55,7 @@ These security insights are detected from data reported by APM. The insights hel
 
 <!-- On the [AAP landing page,][18] follow the instructions to get started. This includes:
 - Guided selection of services that would benefit from AAP.
-- Configuring your Datadog tracing libraries with an environment variable.
+- Configuring your Datadog SDKs with an environment variable.
 - Restarting your services. </br>
 
 1. Click **Get Started with AAP**.
@@ -104,7 +108,7 @@ For information on disabling AAP or its related capabilities, see the following:
 {{% sec-hipaa-limits %}}
 
 1. Set up [notification rules][23] to receive alerts using Slack, Jira, email, and more.
-2. Subscribe to the weekly [threat digest][22] reports to begin investigation and remediation of the most important security threats discovered in the last seven days. 
+2. Subscribe to the weekly [threat digest][22] reports to begin investigation and remediation of the most important security threats discovered in the last seven days.
 
 ## Further reading
 
@@ -115,7 +119,7 @@ For information on disabling AAP or its related capabilities, see the following:
 [3]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [4]: /security/application_security/how-it-works/
 [5]: /security/application_security/how-it-works/add-user-info/
-[6]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal&viz=stream&start=1674824351640&end=1675429151640&paused=false
+[6]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&view=signal&viz=stream&start=1674824351640&end=1675429151640&paused=false
 [7]: https://app.datadoghq.com/security/appsec
 [8]: https://app.datadoghq.com/security/appsec/traces
 [9]: /security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections

@@ -24,7 +24,7 @@ author:
 categories:
 - notifications
 - event management
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -56,7 +56,11 @@ tile:
 
 ## 概要
 
-<div class="alert alert-warning">New Relic APM インテグレーションは非推奨となり、機能が低下しています。APM メトリクスラベルは利用できません。</div>
+<div class="alert alert-danger">New Relic APM インテグレーションは非推奨となり、機能が低下しています。APM メトリクスラベルは利用できません。</div>
+
+<div class="alert alert-warning">2025 年 3 月 1 日以降、 New Relic の REST API v2 は REST API キーを受け付けなくなります。
+
+このインテグレーションの機能を維持するには、インテグレーション設定で既存の REST API キーを User API キーに置き換えてください。</div>
 
 New Relic に接続すると、イベントストリームに New Relic のアラートが表示されます。
 
@@ -81,6 +85,58 @@ New Relic に接続すると、イベントストリームに New Relic のア�
 7. "Create Channel" をクリックします。
 8. "Alert Policies" をクリックします。
 9. Datadog に送信したいアラートについて、アラートポリシーを選択します。
+
+### 必須 Webhook フォーマット
+
+このセクションでは、 Datadog で処理できる New Relic アラートの各種タイプと、それぞれのアラート タイプに必要なフィールドについて説明します。必須フィールドが 1 つでも欠けている場合、そのイベントは拒否され、 Event Explorer には表示されません。
+
+#### デプロイメント通知
+
+Webhook ペイロードに "deployment" が含まれている場合、そのイベントは INFO イベントとして扱われます。
+
+必須フィールド:
+
+1. created_at
+2. revision
+3. 説明
+4. deployed_by
+5. changelog
+
+#### Alert
+
+Webhook ペイロードに "alert" が含まれている場合、イベント タイプは short_description の内容に基づき、次のルールで判定されます:
+1. SUCCESS: 説明文に "ended", "closed", "recovered" のいずれかが含まれている場合
+2. INFO: 説明文に "acknowledged" が含まれている場合
+3. ERROR: 上記以外のすべての場合
+
+必須フィールド
+1. short_description
+2. message
+3. alert_url
+4. created_at
+5. severity
+
+#### デフォルト
+
+上記の条件を満たさない場合は、 severity フィールドがアラート タイプにマッピングされます。
+
+必須フィールド:
+1. account_id
+2. account_name
+3. condition_id
+4. condition_name
+5. current_state
+6. details
+7. event_type
+8. incident_acknowledge_url
+9. targets
+10. incident_id
+11. incident_url
+12. policy_name
+13. policy_url
+14. severity - このフィールドは info, warn, critical のいずれかである必要があります。イベント タイプの info, warning, error にマッピングされます。
+15. タイムスタンプ
+
 
 ### ベータアラートにカスタムタグを含める
 

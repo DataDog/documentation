@@ -1,17 +1,18 @@
 ---
+description: データベースの正常性とパフォーマンスを監視し、遅いクエリをトラブルシュートし、クエリの分析と最適化のためのダッシュボードを作成します。
 further_reading:
 - link: /database_monitoring/
   tag: ドキュメント
-  text: データベース モニタリング
+  text: Database Monitoring
 - link: /database_monitoring/troubleshooting/
   tag: ドキュメント
-  text: トラブルシューティング
+  text: トラブル シューティング
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog/
   tag: ブログ
   text: Datadog によるデータベースパフォーマンスの監視
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
-  text: データベースモニタリングのレベルアップのためのインタラクティブなセッションに参加できます
+  text: 対話型セッションに参加して Database Monitoring を強化しましょう
 title: Database モニタリングの概要
 ---
 
@@ -127,7 +128,7 @@ Datadog データベースモニタリングが提供するすぐに使用でき
 
 必要に応じて、すぐに使用できるダッシュボードのクローンを作成して変更できます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

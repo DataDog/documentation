@@ -5,27 +5,30 @@ aliases:
   - /synthetics/browser_check
   - /synthetics/browser_test
 further_reading:
-- link: "/synthetics/guide/version_history/"
-  tag: "Guide"
-  text: "Version History for Synthetic Monitoring"
-- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
-  tag: "Blog"
-  text: "Best practices for creating end-to-end tests"
-- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
-  tag: 'Learning Center'
-  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/getting_started/synthetics/browser_test"
   tag: "Documentation"
   text: "Getting started with Browser Tests"
 - link: "/synthetics/guide/synthetic-test-monitors"
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
-- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
-  tag: "External Site"
-  text: "Create and manage Synthetic Browser Tests with Terraform"
+- link: "/synthetics/guide/version_history/"
+  tag: "Guide"
+  text: "Version History for Synthetic Monitoring"
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
+  tag: 'Learning Center'
+  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
+- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
+  tag: "Blog"
+  text: "Best practices for creating end-to-end tests"
+- link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
+  tag: "Blog"
+  text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
 - link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
   tag: "Blog"
   text: "How I helped my client scale their browser tests with Datadog"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
+  tag: "External Site"
+  text: "Create and manage Synthetic Browser Tests with Terraform"
 ---
 
 ## Overview
@@ -151,7 +154,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    Enter one or more request patterns to block from loading while the test is run. Enter one request pattern per line using the [match pattern format][1]. Wildcards (for example, `*://*.example.com/*`) are supported.
 
-   Blocked requests are skipped during test execution but do not affect page rendering when [recording steps](/synthetics/browser_tests/actions). View blocked requests in the [Resources tab](/synthetics/browser_tests/test_results#resources) of test runs. Blocked requests have a status of `blocked`.
+   Blocked requests are skipped during test execution but do not affect page rendering when [recording steps](/synthetics/browser_tests/test_steps). View blocked requests in the [Resources tab](/synthetics/browser_tests/test_results#resources) of test runs. Blocked requests have a status of `blocked`.
 
 [1]: https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns
 
@@ -181,10 +184,30 @@ For more information about using variables in your browser test recording, see [
 
 You can customize alert conditions to define the circumstances under which you want a test to send a notification alert.
 
-{{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule" style="width:80%" >}}
+{{< img src="synthetics/browser_tests/alerting_rules_2.png" alt="Browser test alerting rule" style="width:80%" >}}
 
-* An alert is triggered if any assertion fails for `X` minutes from any `n` of `N` locations. This alerting rule allows you to specify for how much time and in how many locations a test needs to fail before triggering the notification.
-* Retry `X` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured with the [API][6].
+#### Alerting rule
+
+An alert is triggered if any assertion fails for `X` minutes from any `n` of `N` locations. This alerting rule allows you to specify for how much time and in how many locations a test needs to fail before triggering the notification.
+
+An alert is triggered only if these two conditions are true:
+
+- At least one location was in failure (at least one assertion failed) during the last X minutes;
+- At one moment during the last X minutes, at least `N` locations were in failure.
+
+In case of failure, retry `X` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a `300ms` wait before retrying a test that failed. This interval can be configured with the [API][6].
+
+#### Fast retry
+
+When a test fails, fast retry allows you to retry the test X times after Y ms before marking it as failed. Customizing the retry interval helps reduce false positives and improves your alerting accuracy.
+
+Since location uptime is computed based on the final test result after retries complete, fast retry intervals directly impact what appears in your total uptime graph. The total uptime is computed based on the configured alert conditions, and notifications are sent based on the total uptime.
+
+<div class="alert alert-info">
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see <a href="/synthetics/guide/how-synthetics-monitors-trigger-alerts/">Understanding Synthetic Monitor Alerting</a>.
+</div>
+
+{{% synthetics-downtimes %}}
 
 ### Configure the test monitor
 
@@ -244,17 +267,13 @@ You can switch tabs in a browser test recording to perform an action on your app
    Datadog recommends ending your browser test with an **[assertion][12]** to confirm the journey executed by the browser test resulted in the expected state.
 6. Once you have finished your scenario, click **Save and Launch Test**.
 
-## Step replay
+## Replay your steps
 
-Step replay allows you to re-run one or more steps of your browser test directly in your browser with the [Datadog Record Test extension][11]. This feature helps you establish the correct state when adding or editing steps in the middle of a test, so you don't need to do it manually.
+To re-run one or more steps of your browser test directly in your browser, download the [Datadog Record Test extension][11].
 
-### Debugger permission
+The Step Replay feature helps you debug individual steps, reach the right application state when editing a browser test, and confirm entire flows before saving your test.
 
-JavaScript-based steps and keystroke simulations require the debugger permission.
-
-The first time the extension is updated to a version requiring debugger permission, you'll see a permission request and the extension is disabled until you approve it:
-{{< img src="synthetics/browser_tests/recording__replay--accepting-permission_2.mp4" alt="Accepting the debugger permission" video="true" height="400px" >}}
-<p style="text-align: center;"><em>Click on the three dots {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu to accept the permission.</em></p>
+**Note**: Step Replay may behave differently than a full Synthetic Monitoring test run due to different conditions (browser version, network, user agent, login state) or limitations.
 
 ### How to use step replay
 
@@ -309,7 +328,14 @@ The following table summarizes which Browser Test step types are supported by st
 | Extract from email body  | Not supported yet        |
 | Go to email link         | Not supported yet        |
 | Upload files             | Not supported yet        |
-| Assert natural language  | Not supported yet        |
+
+### Debugger permission
+
+To be as close as possible to a full Synthetic Monitoring test run, some steps like JavaScript-based steps or keystroke simulations require the debugger permission to be replayed.
+
+The first time the extension is updated to a version requiring debugger permission, a permission request appears and the extension is disabled until you approve it:
+{{< img src="synthetics/browser_tests/recording__replay--accepting-permission_2.mp4" alt="Accepting the debugger permission" video="true" height="400px" >}}
+<p style="text-align: center;"><em>Click on the three dots {{< img src="icons/kebab.png" inline="true" style="width:14px;">}} menu to accept the permission.</em></p>
 
 ## Permissions
 
@@ -346,17 +372,18 @@ Use [granular access control][17] to limit who has access to your test based on 
 [2]: /continuous_testing/environments/proxy_firewall_vpn
 [3]: /help/
 [4]: /synthetics/settings/#global-variables
-[5]: /synthetics/browser_tests/actions#variables
+[5]: /synthetics/browser_tests/test_steps#variables
 [6]: /api/latest/synthetics/#create-or-clone-a-test
 [7]: http://daringfireball.net/projects/markdown/syntax
 [8]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [9]: /synthetics/notifications/
 [10]: https://www.google.com/chrome
 [11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[12]: /synthetics/browser_tests/actions/#assertion
+[12]: /synthetics/browser_tests/test_steps/#assertion
 [13]: /synthetics/guide/explore-rum-through-synthetics/
-[14]: /synthetics/browser_tests/actions/
+[14]: /synthetics/browser_tests/test_steps/
 [15]: /account_management/rbac#custom-roles
 [16]: /account_management/rbac/#create-a-custom-role
 [17]: /account_management/rbac/granular_access
 [18]: https://www.microsoft.com/edge
+[19]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/

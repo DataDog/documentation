@@ -73,7 +73,7 @@ Then, to send your Step Functions logs to Datadog:
 1. If you haven't already, install the [Datadog CLI][1] v2.18.0+.
 
    ```shell
-   npm install -g @datadog/datadog-ci
+   npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-stepfunctions
    ```
 
 1. Ensure you have deployed the [Datadog Lambda Forwarder][2], and that you are using v3.130.0 or later. As an alternative, you can also use [Amazon Data Firehose][3], which can subscribe to Amazon CloudWatch log groups across multiple AWS regions. Your Step Functions log group name should use this format: 
@@ -210,6 +210,8 @@ For additional settings, [see the documentation on GitHub][2].
 
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% svl-tracing-env %}}
 
 <div class="alert alert-info">Enhanced metrics are automatically enabled if you enable tracing. Therefore, if tracing is enabled, you are billed for both Serverless Workload Monitoring and Serverless APM. See <a href="https://www.datadoghq.com/pricing/?product=serverless-monitoring#products">Pricing</a>.</div>
 

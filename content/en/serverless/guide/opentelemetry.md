@@ -8,7 +8,7 @@ further_reading:
 
 [OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data.
 
-If your code is custom instrumented with the [OpenTelemetry API][2], or you want to write vendor-agnostic custom instrumentation code, you can configure it to generate Datadog-style spans and traces. You can then process these spans and traces with the Datadog tracing library for your language, and send the data to Datadog.
+If your code is custom instrumented with the [OpenTelemetry API][2], or you want to write vendor-agnostic custom instrumentation code, you can configure it to generate Datadog-style spans and traces. You can then process these spans and traces with the Datadog SDK for your language, and send the data to Datadog.
 
 ### AWS Lambda
 

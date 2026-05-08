@@ -1,27 +1,60 @@
 ---
+app_id: google-cloud-functions
+app_uuid: 3101d455-ff1e-432e-a60b-58d8ecc4009a
+assets:
+  dashboards:
+    gcp_cloudfunctions: assets/dashboards/gcp_cloudfunctions.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.cloudfunctions.function.execution_count
+      metadata_path: metadata.csv
+      prefix: gcp.cloudfunctions.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 196
+    source_type_name: Google Cloud Functions
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - google cloud
 - log collection
 custom_kind: 통합
 dependencies: []
-description: 최소, 최대 및 평균 함수 실행 시간을 추적합니다.
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_functions/
+display_on_public_website: true
 draft: false
 git_integration_title: google_cloud_functions
-has_logo: true
 integration_id: google-cloud-functions
 integration_title: Google Cloud Functions
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_functions
-public_title: Datadog-Google Cloud Functions 통합
-short_description: 최소, 최대 및 평균 함수 실행 시간을 추적합니다.
-version: '1.0'
+public_title: Google Cloud Functions
+short_description: 소규모의 단일 목적 함수를 생성할 수 있는 이벤트 기반 비동기 컴퓨팅 솔루션.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Google Cloud
+  - Category::Log Collection
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: 소규모의 단일 목적 함수를 생성할 수 있는 이벤트 기반 비동기 컴퓨팅 솔루션.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Cloud Functions
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Google Cloud  Functions는 이벤트 기반 비동기식 경량 컴퓨팅 솔루션으로, 소규모의 단일 기능 함수를 생성할 수 있습니다.
@@ -53,7 +86,7 @@ Google Cloud Functions 로그는 Google Cloud Logging으로 수집하여 클라�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google-cloud-functions" >}}
+{{< get-metrics-from-git "google_cloud_functions" >}}
 
 
 ### 이벤트

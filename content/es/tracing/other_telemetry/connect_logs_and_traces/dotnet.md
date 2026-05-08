@@ -35,22 +35,21 @@ Configura el .NET Tracer con el [etiquetado de servicios unificado][1] para obte
 
 Asegúrate de que la recopilación de log está configurada en el Datadog Agent y que la [configuración del Logs Agent][15] para los archivos especificados a la cola esté establecida en `source: csharp`, de modo que los pipelines de log puedan analizar los archivos de log. Para obtener más información, consulta [Recopilación de logs de C#][7]. Si `source` se establece en un valor distinto de `csharp`, es posible que tengas que añadir un [reasignador de traza][8] al pipeline de procesamiento de log apropiado para que la correlación funcione correctamente.
 
-<div class="alert alert-danger"><strong>Nota:</strong> La recopilación automática de log solo funciona para logs con formato JSON. Como alternativa, utiliza reglas personalizadas de parseo.</div>
+<div class="alert alert-danger">La recopilación automática de logs solo funciona para logs formateados como JSON. Como alternativa, utiliza reglas de parseo personalizadas.</div>
 
 ## Configuración de la inyección en logs
 
 Para inyectar identificadores de correlación en tus mensajes de log, sigue las instrucciones de tu biblioteca de registro.
 
 <div class="alert alert-info">
-  <div class="alert-info">Consulta los <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">ejemplos en dd-trace-dotnet</a> para ver más ejemplos.</div>
-  </div>
+  Consulta las muestras en <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">dd-trace-dotnet</a> para ver más ejemplos.
 </div>
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
 <div class="alert alert-danger">
- <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la librería de registro de Serilog requiere que la aplicación esté instrumentada con la instrumentación automática.
+  <strong>Nota: </strong>A partir de la versión 2.0.1 del rastreador de .NET, la inyección automática para la biblioteca de registro de Serilog requiere que la aplicación esté instrumentada con la instrumentación automática.
 </div>
 
 Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
@@ -67,7 +66,7 @@ Para inyectar automáticamente identificadores de correlación en tus mensajes d
 {{% tab "log4net" %}}
 
 <div class="alert alert-danger">
- <strong>Nota: </strong>A partir de la versión 1.29.0 de .NET Tracer, la inyección automática para la librería de registro log4net requiere que la aplicación esté instrumentada con la instrumentación automática.
+  <strong>Nota: </strong>A partir de la versión 1.29.0 del rastreador de .NET, la inyección automática para la biblioteca de registro de log4net requiere que la aplicación esté instrumentada con instrumentación automática.
 </div>
 
 Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
@@ -85,21 +84,21 @@ Para inyectar automáticamente identificadores de correlación en tus mensajes d
   <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
     <decorator type="log4net.Layout.Decorators.StandardTypesDecorator, log4net.Ext.Json" />
     <default />
-    <!--miembros explícitos por defecto-->
+    <!--explicit default members-->
     <remove value="ndc" />
-    <!--elimina el miembro del mensaje preformateado por defecto-->
+    <!--remove the default preformatted message member-->
     <remove value="message" />
-    <!--añade mensajes sin formato-->
+    <!--add raw message-->
     <member value="message:messageobject" />
 
-    <!-- Incluye propiedades de Datadog -->
-    <!-- Incluye propiedades individuales con value='<property_name>' -->
+    <!-- Include Datadog properties -->
+    <!-- EITHER Include individual properties with value='<property_name>' -->
     <member value='dd.env' />
     <member value='dd.service' />
     <member value='dd.version' />
     <member value='dd.trace_id' />
     <member value='dd.span_id' />
-    <!-- O incluye todas las propiedades con value='properties' -->
+    <!-- OR Include all properties with value='properties' -->
     <member value='properties'/>
   </layout>
 ```
@@ -112,7 +111,7 @@ Para ver ejemplos adicionales, consulta [el proyecto de inyección automática d
 {{% tab "NLog" %}}
 
 <div class="alert alert-danger">
- <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la librería de registro de NLog requiere que la aplicación esté instrumentada con la instrumentación automática.
+  <strong>Nota: </strong>A partir de la versión 2.0.1 del rastreador de .NET, la inyección automática para la biblioteca de registro de NLog requiere que la aplicación esté instrumentada con instrumentación automática.
 </div>
 
 Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
@@ -127,7 +126,7 @@ Para inyectar automáticamente identificadores de correlación en tus mensajes d
 3. Habilita el contexto de diagnóstico asignado (MDC), como se muestra en el siguiente código de ejemplo para NLog versión 5.0+:
 
 ```xml
-  <!-- Añade includeScopeProperties="true" para emitir propiedades ScopeContext -->
+  <!-- Add includeScopeProperties="true" to emit ScopeContext properties -->
   <layout xsi:type="JsonLayout" includeScopeProperties="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -139,7 +138,7 @@ Para inyectar automáticamente identificadores de correlación en tus mensajes d
 Para NLog versión 4.6+:
 
 ```xml
-  <!-- Añade includeMdlc="true" para emitir propiedades MDC -->
+  <!-- Add includeMdlc="true" to emit MDC properties -->
   <layout xsi:type="JsonLayout" includeMdlc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -151,7 +150,7 @@ Para NLog versión 4.6+:
 Para NLog versión 4.5:
 
 ```xml
-  <!-- Añade includeMdc="true" para emitir propiedades MDC -->
+  <!-- Add includeMdc="true" to emit MDC properties -->
   <layout xsi:type="JsonLayout" includeMdc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -185,7 +184,7 @@ Host.CreateDefaultBuilder(args)
     {
         logging.AddFile(opts =>
         {
-            opts.IncludeScopes = true; // debes incluir contextos para que se añadan identificadores de correlación
+            opts.IncludeScopes = true; // must include scopes so that correlation identifiers are added
             opts.FormatterName = "json";
         });
     }
@@ -193,7 +192,7 @@ Host.CreateDefaultBuilder(args)
 
 Si hay una traza activa cuando se está escribiendo el log, los IDs de traza y tramo se inyectan automáticamente en la aplicación de logs con las propiedades `dd_trace_id` y `dd_span_id`. Si no hay una traza activa, solo se inyectan las propiedades `dd_env`, `dd_service` y `dd_version`.
 
-**Nota:** Si estás utilizando una biblioteca de registro que reemplaza el despliegue`LoggerFactory` por defecto como los paquetes [_Serilog.Extensions.Hosting_][3] o [_Serilog.Extensions.Logging_][4], sigue las instrucciones específicas del marco (en este ejemplo, ve **Serilog**).
+**Nota:** Si estás utilizando una biblioteca de registro que reemplaza el despliegue`LoggerFactory` por defecto como los paquetes [_Serilog.Extensions.Hosting_][3] o [_Serilog.Extensions.Logging_][4], sigue las instrucciones específicas del framework (en este ejemplo, ve **Serilog**).
 
 Para obtener ejemplos adicionales, consulta [el proyecto de inyección de ID de traza automática Microsoft.Extensions.Logging][5] en GitHub.
 
@@ -210,15 +209,17 @@ A continuación, completa la configuración para la inyección automática o man
 
 ## Inyección automática
 
-El último paso para activar la inyección automática de identificadores de correlación es:
+Para activar la inyección automática de identificadores de correlación, asegúrate de que `DD_LOGS_INJECTION` está activado.
 
-1. Activa `DD_LOGS_INJECTION=true` en las variables de entorno del .NET Tracer. Para configurar el .NET Tracer con un método diferente, consulta [Configuración de .NET Tracer][6].
+A partir de la versión 3.24.0, `DD_LOGS_INJECTION` está activado por defecto. Para versiones anteriores, configura `DD_LOGS_INJECTION=true` en las variables de entorno del rastreador de .NET.
+
+Para configurar el rastreador de .NET con un método diferente, consulta [Configuración del rastreador de .NET][6].
 
 Después de configurar la inyección del identificador de correlación, consulta [Recopilación de log de C#][7] para configurar tu recopilación de log.
 
 **Nota:** Para correlacionar trazas con logs, puede que necesites configurar un [reasignador de ID de traza][8] para analizar `dd_trace_id` como el ID de traza del log. Consulta [Los logs correlacionados no aparecen en el panel de ID de traza][9] para obtener más información.
 
-<div class="alert alert-info"><strong>Fase beta</strong>: a partir de la versión 2.35.0, si <a href="/agent/remote_config/">la configuración remota del Agent</a> está habilitada donde se ejecuta este servicio, puedes establecer <code>DD_LOGS_INJECTION</code> en la interfaz de usuario del <a href="/tracing/service_catalog">Catálogo de servicios</a>.</div>
+<div class="alert alert-info">A partir de la versión 2.35.0, si <a href="/remote_configuration">la configuración remota del Agent</a> está habilitada donde se ejecuta este servicio, puedes establecer <code>DD_LOGS_INJECTION</code> en la interfaz de usuario de <a href="/tracing/software_catalog">Software Catalog</a>.</div>
 
 ## Inyección manual
 
@@ -229,8 +230,8 @@ Si prefieres correlacionar manualmente tus trazas con tus logs, puedes añadir i
   | `dd.env`       | Configura globalmente el `env` para el rastreador. Por defecto es `""` si no se configura. |
   | `dd.service`   | Configura globalmente el nombre raíz del servicio. Por defecto es el nombre de la aplicación o el nombre del sitio IIS si no está configurado.  |
   | `dd.version`   | Configura globalmente `version` para el servicio. Por defecto es `""` si no se configura.  |
-  | `dd.trace_id`  | ID activo de traza durante la sentencia de log. Por defecto `0` si no hay traza.  |
-  | `dd.span_id`   | ID activo de tramo durante la sentencia de log. Por defecto `0` si no hay traza. |
+  | `dd.trace_id`  | ID de traza activo (representado como un número decimal de 64 bits) durante la sentencia de log. Por defecto `0` si no hay trazas.  |
+  | `dd.span_id`   | ID de tramo activo (representado como un número decimal de 64 bits) durante la sentencia de log. Por defecto `0` si no hay trazas. |
 
 **Nota:** Si no utilizas [la integración de log de Datadog][7] para analizar tus logs, las reglas personalizadas de parseo de log deben analizar `dd.trace_id` y `dd.span_id` como cadenas. Para obtener más información, consulta [Los Logs correlacionados no aparecen en el panel de ID de traza][10].
 
@@ -249,20 +250,20 @@ Ejemplos:
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-**Nota**: La librería de Serilog requiere que los nombres de las propiedades de los mensajes sean identificadores C# válidos. Los nombres de propiedades obligatorios son: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id` y `dd_span_id`.
+**Nota**: La biblioteca de Serilog requiere que los nombres de las propiedades de los mensajes sean identificadores C# válidos. Los nombres de propiedades obligatorios son: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id` y `dd_span_id`.
 
 ```csharp
 using Datadog.Trace;
 using Serilog.Context;
 
-// deben haber tramos iniciados y activos antes de este bloque.
+// there must be spans started and active before this block.
 using (LogContext.PushProperty("dd_env", CorrelationIdentifier.Env))
 using (LogContext.PushProperty("dd_service", CorrelationIdentifier.Service))
 using (LogContext.PushProperty("dd_version", CorrelationIdentifier.Version))
 using (LogContext.PushProperty("dd_trace_id", CorrelationIdentifier.TraceId.ToString()))
 using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToString()))
 {
-    // Loguear algo
+    // Log something
 }
 ```
 
@@ -273,7 +274,7 @@ using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToStri
 using Datadog.Trace;
 using log4net;
 
-// deben haber tramos iniciados y activos antes de este bloque.
+// there must be spans started and active before this block.
 try
 {
     LogicalThreadContext.Properties["dd.env"] = CorrelationIdentifier.Env;
@@ -282,7 +283,7 @@ try
     LogicalThreadContext.Properties["dd.trace_id"] = CorrelationIdentifier.TraceId.ToString();
     LogicalThreadContext.Properties["dd.span_id"] = CorrelationIdentifier.SpanId.ToString();
 
-    // Loguear algo.
+    // Log something
 
 }
 finally
@@ -302,14 +303,14 @@ finally
 using Datadog.Trace;
 using NLog;
 
-// deben haber tramos iniciados y activos antes de este bloque.
+// there must be spans started and active before this block.
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.env", CorrelationIdentifier.Env))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.service", CorrelationIdentifier.Service))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.version", CorrelationIdentifier.Version))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
 {
-    // Loguear algo.
+    // Log something
 }
 ```
 
@@ -322,7 +323,7 @@ using Microsoft.Extensions.Logging;
 
 ILogger _logger;
 
-// deben haber tramos iniciados y activos antes de este bloque.
+// there must be spans started and active before this block.
 using(_logger.BeginScope(new Dictionary<string, object>
 {
     {"dd.env", CorrelationIdentifier.Env},
@@ -332,7 +333,7 @@ using(_logger.BeginScope(new Dictionary<string, object>
     {"dd.span_id", CorrelationIdentifier.SpanId.ToString()},
 }))
 {
-    // Loguear algo.
+    // Log something
 }
 ```
 
@@ -344,7 +345,7 @@ Puedes obtener más información sobre el uso de BeginScope para crear mensajes 
 - NLog: [propiedades de NLog con Microsoft Extension Logging][13]
 - log4net: [con BeginScope][14]
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

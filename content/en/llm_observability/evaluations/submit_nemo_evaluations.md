@@ -47,7 +47,7 @@ To integrate Datadog's LLM Observability with NeMo Evaluator, submit your NeMo e
    In the snippet above, `span_context` is a dictionary containing `span_id` and `trace_id`.
 
 
-2. **Prepare your outputs file**. In this example, the outputs file is named `outputs.json`. 
+2. **Prepare your outputs file**. In this example, the outputs file is named `outputs.json`.
 
    {{< highlight json "hl_lines=7">}}
    [
@@ -135,7 +135,7 @@ To integrate Datadog's LLM Observability with NeMo Evaluator, submit your NeMo e
            continue
 
        LLMObs.submit_evaluation(
-         span_context={
+         span={
            "trace_id": meta['trace_id'],
            "span_id": meta['span_id']
          },
@@ -155,7 +155,7 @@ After you complete the setup steps, you can view NeMo Evaluator's model evaluati
 
 {{< img src="llm_observability/nemo-demo-after-eval.png" alt="An LLM Observability trace with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
 
-You can view a breakdown of your NeMo Evaluator's model evaluation results in LLM Observability's dashboard and Application Overview, as well as overlay the evaluation results on topic clusters generated on the [Cluster Map][2]. On the traces list, click on **Options** to add the evaluation scores as a column:
+You can view a breakdown of your NeMo Evaluator's model evaluation results in LLM Observability's dashboard and Application Overview. On the traces list, click on **Options** to add the evaluation scores as a column:
 
 {{< img src="llm_observability/nemo-demo-traces-view-eval.png" alt="An LLM Observability traces list with a custom evaluation attached from the NeMo evaluation results" style="width:100%;" >}}
 
@@ -164,5 +164,4 @@ You can view a breakdown of your NeMo Evaluator's model evaluation results in LL
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/setup/sdk/python
-[2]: /llm_observability/cluster_map
-[3]: https://docs.nvidia.com/nemo-framework/user-guide/latest/overview.html
+[2]: https://docs.nvidia.com/nemo-framework/user-guide/latest/overview.html

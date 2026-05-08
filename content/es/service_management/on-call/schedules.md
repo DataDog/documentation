@@ -103,6 +103,13 @@ Si tienes problemas al exportar los datos de tu cronograma On-Call a Google Cale
 
 - Cambia `webcal://` por `http://` o `https://` al principio de la URL. Por ejemplo, cambia `webcal://<your_personal_link>` por `http://<your_personal_link>`.
 
+### Gestión de las bajas de usuarios
+
+Cuando los miembros del equipo abandonan tu organización, no se eliminan automáticamente de los horarios de On-Call:
+
+- **Horario de la membresía**: los usuarios dados de baja permanecen en los horarios de On-Call hasta que se eliminan manualmente. Debes actualizar los horarios para eliminar a los antiguos miembros del equipo y reasignar sus turnos.
+- **Notificaciones**: si se desactiva la cuenta de Datadog de un usuario, este deja de recibir notificaciones de On-Call (como SMS, correo electrónico y notificaciones push), aunque siga asignado a turnos programados.
+
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

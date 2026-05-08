@@ -107,7 +107,7 @@ Cloud SIEM applique des règles de détection prêtes à l'emploi à l'ensemble
 [9]: https://console.cloud.google.com/logs/
 [10]: https://cloud.google.com/pubsub/quotas#quotas
 [11]: /fr/integrations/google_cloud_platform/#monitor-the-log-forwarding
-[12]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
+[12]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc
 [13]: https://app.datadoghq.com/dash/integration/30509/google-cloud-audit-log
 [14]: /fr/security/default_rules/#cat-cloud-siem
 [15]: /fr/security/detection_rules/

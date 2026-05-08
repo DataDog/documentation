@@ -12,11 +12,11 @@ If you need to more precisely control the permissions, for example to exclude ce
 
 ## Creating a custom IAM policy
 
-Start by opening the [IAM Policies Console][1] and clicking the **Create Policy** button.
+Start by opening the [IAM Policies Console][1] and clicking the {{< ui >}}Create Policy{{< /ui >}} button.
 
 {{< img src="cloudcraft/advanced/minimal-iam-policy/create-policy.png" alt="AWS IAM management console highlighting the Create policy button." responsive="true" style="width:100%;">}}
 
-Switch to the JSON tab and copy the content from one the linked policies below:
+Switch to the {{< ui >}}JSON{{< /ui >}} tab and copy the content from one the linked policies below:
 
 You can also customize the policy to suit your unique requirements.
 
@@ -24,12 +24,12 @@ You can also customize the policy to suit your unique requirements.
 - **[Cloudcraft minimal IAM policy][3]:** This is the strictest form of policy. The policy lists each individual read-only permission for full Cloudcraft functionality. This policy needs to be updated more frequently, both when support for new services are added and when existing services are improved.
 - You may use either of the policies above as a base for your own customizations. For example, individual services or permissions can be removed. If a service cannot be accessed by Cloudcraft, the service will be excluded from the resulting diagram.
 
-Click the **Review policy** button at the bottom of the screen, and then enter a name and description. Cloudcraft recommends using the following values to keep things organized and easier to audit.
+Click the {{< ui >}}Review policy{{< /ui >}} button at the bottom of the screen, and then enter a name and description. Cloudcraft recommends using the following values to keep things organized and easier to audit.
 
-- **Policy Name:** Cloudcraft
-- **Policy Description:** Custom policy for Cloudcraft.
+- {{< ui >}}Policy Name{{< /ui >}}: Cloudcraft
+- {{< ui >}}Policy Description{{< /ui >}}: Custom policy for Cloudcraft.
 
-Next, click **Create policy** to create the policy. The AWS console redirects you back to the policies page.
+Next, click {{< ui >}}Create policy{{< /ui >}} to create the policy. The AWS console redirects you back to the policies page.
 
 Finally, attach the newly created policy to the [Cloudcraft IAM role][4]. If you didn't create the role yet, follow the instructions in the application.
 

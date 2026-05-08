@@ -1,4 +1,28 @@
 ---
+app_id: google-cloud-dataflow
+app_uuid: 27fcc215-6351-4e39-8320-19fe03ed7634
+assets:
+  dashboards:
+    google_cloud_dataflow: assets/dashboards/google_cloud_dataflow.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.dataflow.job.total_vcpu_time
+      metadata_path: metadata.csv
+      prefix: gcp.dataflow.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 265
+    source_type_name: Google Cloud Dataflow
+  monitors:
+    Job backlog time is high: assets/monitors/backlog_monitor.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - google cloud
@@ -6,6 +30,7 @@ categories:
 custom_kind: 통합
 dependencies: []
 description: 주요 Google Cloud Dataflow 메트릭을 추적합니다.
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_dataflow/
 draft: false
 further_reading:
@@ -18,16 +43,33 @@ integration_id: google-cloud-dataflow
 integration_title: Google Cloud Dataflow
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 monitors:
   Job backlog time is high: assets/monitors/backlog_monitor.json
 name: google_cloud_dataflow
-public_title: Datadog-Google Cloud Dataflow 통합
-short_description: 주요 Google Cloud Dataflow 메트릭을 추적합니다.
+public_title: Google Cloud Dataflow
+short_description: 실시간 및 과거 모드에서 데이터를 변환하고 강화하는 관리형 서비스.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Google Cloud
+  - Category::Log Collection
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: 실시간 및 과거 모드에서 데이터를 변환하고 강화하는 관리형 서비스.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/monitor-dataflow-pipelines-with-datadog/
+  support: README.md#Support
+  title: Google Cloud Dataflow
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Google Cloud Dataflow는 스트림(실시간) 및 배치(기록) 모드에서 동일한 안정성과 표현 능력으로 데이터를 변환 및 보강할 수 있는 완전관리형 서비스입니다.
@@ -56,10 +98,10 @@ Google Cloud Dataflow 로그는 Google Cloud Logging으로 수집하여 클라�
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google-cloud-dataflow" >}}
+{{< get-metrics-from-git "google_cloud_dataflow" >}}
 
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Google Cloud Dataflow를 사용하여 Apache Beam 파이프라인 메트릭을 모니터링하는 경우 <a href="https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/metrics/Metrics.html">게이지 정적 메서드</a>에서 생성한 메트릭은 수집하지 않습니다. 해당 메트릭을 모니터링해야 하는 경우 <a href="https://micrometer.io/docs">마이크로미터(Micrometer)</a>를 사용할 수 있습니다.
 </div>
 

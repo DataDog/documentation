@@ -1,6 +1,7 @@
 ---
+id: network_profile
 core_product:
-- network performance monitoring
+- クラウドネットワークモニタリング
 - network device monitoring
 title: ネットワークプロファイル
 ---

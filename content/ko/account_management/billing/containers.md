@@ -8,7 +8,9 @@ title: 컨테이너 청구
 
 추가 컨테이너에는 시간당 컨테이너당 [추가 비용][1]이 청구됩니다. 또한 선불 컨테이너를 구매할 수도 있습니다. 계정용 컨테이너에 대해 문의하려면 [세일즈][2] 또는 [고객 성공][3] 관리자에게 문의하세요.
 
-### 쿠버네티스(Kubernetes)
+Datadog로 모니터링하는 컨테이너를 제한하려면 [컨테이너 검색 관리][8]를 참조하세요.
+
+### Kubernetes
 
 Kubernetes는 일시 중지 컨테이너(Agent v5.8+ 필요)를 생성하여 해당 파드의 IP 주소를 획득하고 해당 파드에 가입하는 다른 모든 컨테이너에 대한 네트워크 네임스페이스를 설정합니다. Datadog은 할당량에서 모든 일시 중지 컨테이너를 제외하고 이에 대한 비용을 청구하지 않습니다(AWS EKS 일시 중지 컨테이너 제외를 위해서는 Agent v7.20+ 필요).
 
@@ -62,3 +64,4 @@ Fargate 요금은 ECS Fargate에서 동시에 모니터링되는 작업 수와 E
 [5]: /ko/agent/kubernetes/distributions/?tab=helm#autopilot
 [6]: /ko/integrations/google_kubernetes_engine/
 [7]: /ko/help/
+[8]: /ko/containers/guide/container-discovery-management

@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on Codefresh Pipelines
+title: Codefresh Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/codefresh
 further_reading:
@@ -15,7 +15,7 @@ further_reading:
 
 [Codefresh][1] is a continuous integration and delivery platform built for Kubernetes which offers automation features that streamline the building, testing, and deploying of your applications.
 
-Set up tracing in Codefresh to collect data on each step of your pipelines, analyze performance bottlenecks, troubleshoot operational challenges, and monitor your deployment workflows.
+Set up CI Visibility for Codefresh to collect data on each step of your pipelines, analyze performance bottlenecks, troubleshoot operational challenges, and monitor your deployment workflows.
 
 ### Compatibility
 
@@ -32,18 +32,18 @@ Set up tracing in Codefresh to collect data on each step of your pipelines, anal
 
 To set up the Datadog integration for [Codefresh][1]:
 
-1. Go to **[Account Settings > Configuration > Integrations][2]** in Codefresh and click **Configure** on the Datadog row.
-2. Click **Add Integration**.
+1. Go to **[Account Settings > Configuration > Integrations][2]** in Codefresh and click {{< ui >}}Configure{{< /ui >}} on the Datadog row.
+2. Click {{< ui >}}Add Integration{{< /ui >}}.
 3. Fill the form with the following information:
-   * **Datadog site**: Select `{{< region-param key="dd_site" code="true" >}}` from the dropdown.
-   * **Token**: Add your [Datadog API key][3].
-4. Click **Save** to save the integration.
+   * {{< ui >}}Datadog site{{< /ui >}}: Select `{{< region-param key="dd_site" code="true" >}}` from the dropdown.
+   * {{< ui >}}Token{{< /ui >}}: Add your [Datadog API key][3].
+4. Click {{< ui >}}Save{{< /ui >}} to save the integration.
 
 ## Visualize pipeline data in Datadog
 
 The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
 
-The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][11].
+The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][11].
 
 ## Further reading
 

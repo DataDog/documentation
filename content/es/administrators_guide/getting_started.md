@@ -19,7 +19,7 @@ A medida que avances en esta guía, puedes consultar los siguientes recursos de 
 
 * Cursos de [formación de Datadog](#learn-datadog-basics).
 * La [documentación][16] de Datadog, especialmente las páginas [Empezando][17], para familiarizarte aún más con la plataforma.  
-* La [interfaz de usuario de Datadog][18], que proporciona ayuda en contexto, información sobre campos específicos de configuración, notas de versión y otros recursos, haz clic en el icono `"?"` en toda la aplicación, o en la parte inferior de navegación del producto.
+* La [interfaz de usuario de Datadog][18], que proporciona ayuda en contexto, información sobre campos específicos de configuración, notas de versión y otros recursos, haz clic en el icono <kbd>?</kbd> en toda la aplicación, o en la parte inferior de navegación del producto.
 
 {{< img src="/administrators_guide/help_center.png" alt="Captura de pantalla del centro de ayuda en la interfaz de usuario de Datadog" style="width:90%;">}} 
 
@@ -39,7 +39,7 @@ Ponte al día con las partes de Datadog que son más importantes para tu caso de
 {{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Fundación de Datadog{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/tagging-best-practices" >}}Prácticas recomendadas de etiquetado{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/managing-service-catalog" >}}Gestión del Catálogo de servicios{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/managing-software-catalog" >}}Gestión de Software Catalog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 **Administradores**:
@@ -82,7 +82,7 @@ La [interfaz de usuario de Datadog][18] es el mejor lugar para empezar a crear t
 
 Algunos ejemplos son:
 
-* Crea un [test de Synthetic][14] para empezar a probar las transacciones empresariales críticas en tus aplicaciones.
+* Crea un [test de Synthetic Monitoring][14] para empezar a probar las transacciones empresariales críticas en tus aplicaciones.
 * Crea unos [Objetivos de nivel de servicio (SLOs)][15] para definir los objetivos de rendimiento de la aplicación.
 * Revisa la página de [Configuración del servicio de APM][9] y sigue las instrucciones paso a paso para comenzar a instrumentar tus servicios.
 * Configura y prueba [Log Pipelines][8] para averiguar cómo te gustaría ingerir diferentes conjuntos de logs procedentes de infraestructura y aplicaciones.
@@ -117,7 +117,7 @@ Para crear con éxito una nueva instalación de Datadog, revisa la página del [
 [7]: /es/getting_started/tagging/
 [8]: https://app.datadoghq.com/logs/pipelines/pipeline/add
 [9]: https://app.datadoghq.com/apm/service-setup
-[10]: https://app.datadoghq.com/monitors/recommended
+[10]: https://app.datadoghq.com/monitors/templates
 [11]: /es/administrators_guide/plan
 [12]: /es/administrators_guide/plan/#resource-tagging
 [13]: https://github.com/DataDog/datadog-agent/tree/main/examples

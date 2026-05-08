@@ -23,14 +23,14 @@ Intento de ataque
 
 Biblioteca de Datadog
 : _también_ rastreador, biblioteca de rastreo
-: una biblioteca específica del lenguaje de programación incrustada en aplicaciones web. Datadog App and API Protection utiliza la librería para monitorizar y proteger. APM utiliza la misma biblioteca para instrumentar código para rastrear telemetría.
+: una biblioteca específica del lenguaje de programación incrustada en aplicaciones web. Datadog App and API Protection utiliza la biblioteca para monitorizar y proteger. APM utiliza la misma biblioteca para instrumentar código para rastrear telemetría.
 
 Regla de detección
 : Definición de lógica condicional que se aplica a los datos ingeridos y a las configuraciones de la nube. Cuando coincide al menos un caso definido en una regla durante un periodo de tiempo determinado, Datadog genera una _señal de seguridad_.
 : Consulta [Reglas de detección][10].
 
 Lista de permisos (antiguo filtro de exclusión)
-: Mecanismo para descartar las trazas de seguridad marcadas por la librería de Datadog App and API Protection y las reglas WAF en la aplicación. La lista de permisos se aplica a medida que las solicitudes se ingieren en Datadog (admisión), y ayuda a gestionar los falsos positivos y los costes de admisión.
+: Mecanismo para descartar las trazas de seguridad marcadas por la biblioteca de Datadog App and API Protection y las reglas WAF en la aplicación. La lista de permisos se aplica a medida que las solicitudes se ingieren en Datadog (admisión), y ayuda a gestionar los falsos positivos y los costes de admisión.
 : Consulta [Filtros de exclusión][11] en la aplicación.
 
 Reglas WAF en la aplicación (antiguas reglas de eventos)
@@ -74,12 +74,12 @@ Información sobre amenazas
 : Consulta [Información sobre amenazas][16].
 
 atacantes sospechosos
-: Precursor de las IP marcadas. Las IPs sospechosas han alcanzado un umbral mínimo de tráfico de ataque para ser clasificadas como sospechosas, pero no el umbral para Flagged. Los umbrales no son configurables por el usuario.
-: Véase [Atacantes Explorer][17]
+: un precursor de las IPs marcadas. Las IPs sospechosas han alcanzado un umbral mínimo de tráfico de ataque para ser clasificadas como sospechosas, pero no el umbral para Flagged (Marcadas). Los umbrales no son configurables por el usuario.
+: Consulta [Attackers Explorer][17]
 
 atacantes marcados
-: IPs que envían grandes cantidades de tráfico de ataque. Se recomienda revisar y bloquear las IP marcadas. Los umbrales no son configurables por el usuario.
-: Ver [Atacantes Explorer][17]
+: IPs que envían grandes cantidades de tráfico de ataque. Se recomienda revisar y bloquear las IPs marcadas. Los umbrales no son configurables por el usuario.
+: Consulta [Attackers Explorer][17]
 
 huella digital del atacante
 : identificadores calculados a partir de las características de la solicitud para rastrear a un atacante a través de múltiples solicitudes.
@@ -134,11 +134,11 @@ Inyección de OGNLi (Object-Graph Navigation Language Injection)
 [5]: https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/
 [6]: https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
 [7]: https://owasp.org/www-project-top-ten/2017/A1_2017-Injection
-[8]: /es/agent/remote_config/
+[8]: /es/remote_configuration
 [10]: /es/security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
 [12]: /es/security/application_security/policies/inapp_waf_rules/
-[13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
+[13]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&view=signal
 [14]: /es/security/application_security/how-it-works/add-user-info/
 [15]: /es/security/application_security/how-it-works/trace_qualification/
 [16]: /es/security/application_security/how-it-works/threat-intelligence/

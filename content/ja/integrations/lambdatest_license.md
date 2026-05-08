@@ -17,7 +17,7 @@ categories:
 - マーケットプレイス
 - クラウド
 - コラボレーション
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -119,5 +119,6 @@ Datadog Marketplace を通じて、LambdaTest のサブスクリプションを�
 [3]: mailto:support@lambdatest.com
 [4]: https://www.lambdatest.com/
 [5]: https://www.datadoghq.com/blog/monitor-user-bugs-with-lambdatest/
+
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/lambdatest-software-license" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/lambdatest-software-license" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

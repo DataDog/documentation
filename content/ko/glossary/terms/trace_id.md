@@ -1,4 +1,5 @@
 ---
+id: trace_id
 core_product:
 - apm
 title: 트레이스 ID

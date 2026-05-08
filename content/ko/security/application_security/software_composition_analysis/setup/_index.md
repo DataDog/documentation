@@ -109,6 +109,9 @@ SCA는 지원되는 언어에서 `-Ddd.appsec.sca.enabled` 플래그 또는 `DD_
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
+`docker run` 명령에 다음 인수를 추가하여 APM에 대한 구성 컨테이너를 업데이트하세요.
+
+
 ```shell
 docker run [...] -e DD_APPSEC_SCA_ENABLED=true [...]
 ```

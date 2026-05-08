@@ -1,6 +1,7 @@
 ---
+id: pbr
 core_product:
-- network performance monitoring
+- クラウドネットワークモニタリング
 title: ポリシーベースルーティング (PBR)
 ---
 コンピュータネットワークにおいて、PBR はポリシーやフィルターに従ってデータをルーティングするための技術のことです。

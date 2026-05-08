@@ -1,21 +1,59 @@
 ---
 title: Sumo Logic Hosted Collector Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
+
+## Overview
 
 Use Observability Pipelines' Sumo Logic destination to send logs to your Sumo Logic Hosted Collector.
 
 ## Setup
 
-Set up the Sumo Logic destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure the Sumo Logic destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
-### Set up the destination
+After you select the Sumo Logic destination in the pipeline UI, enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 
-{{% observability_pipelines/destination_settings/sumo_logic %}}
+**Note**: Only enter the identifier for the Sumo Logic endpoint URL. Do **not** enter the actual value.
 
-### Set the environment variables
+### Optional settings
+
+1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in `JSON`, `Logfmt`, or `Raw` text. If no decoding is selected, the decoding defaults to JSON.
+1. Enter a **source name** to override the default `name` value configured for your Sumo Logic collector's source.
+1. Enter a **host name** to override the default `host` value configured for your Sumo Logic collector's source.
+1. Enter a **category name** to override the default `category` value configured for your Sumo Logic collector's source.
+1. Click **Add Header** to add any custom header fields and values.
+
+#### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
+
+## Secret defaults
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Sumo Logic HTTP Collector URL identifier:
+	- References the Sumo Logic HTTP Source endpoint. The Observability Pipelines Worker sends processed logs to this endpoint. For example, `https://<ENDPOINT>.collection.sumologic.com/receiver/v1/http/<UNIQUE_HTTP_COLLECTOR_CODE>`, where:   
+        - `<ENDPOINT>` is your Sumo collection endpoint.
+        - `<UNIQUE_HTTP_COLLECTOR_CODE>` is the string that follows the last forward slash (`/`) in the upload URL for the HTTP source.
+	- The default identifier is `DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 
@@ -23,9 +61,12 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| None           | 10,000,000      | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 10                | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
+[3]: /observability_pipelines/configuration/set_up_pipelines/
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

@@ -25,11 +25,11 @@ This occurs when Datadog API or App keys configured in the OCI integration tile 
 ## Required OCI IAM permissions are missing
 
 Datadog has received a `403` error when querying OCI, indicating that not all necessary IAM permissions have been granted.
-Ensure that the `dd-svc-policy` and `dd-dynamic-group` policies have all **read-only** permissions properly configured.
+Check the [Policies page][4] in OCI to ensure that the `dd-svc-policy` and `dd-dynamic-group` policies have all **read-only** permissions properly configured.
 
 ## OCI tenancy reaching service connector hub limit
 
-For each tenancy, at least one service connector hub is required per five compartments. Submit a service limit increase request to OCI.
+For each tenancy, at least one service connector hub is required per five compartments. [Request a service limit increase][5] in your OCI account.
 
 ## Cannot collect data from one or more subscribed regions
 
@@ -43,3 +43,5 @@ Still need help? Contact [Datadog support][3].
 [1]: /integrations/oracle-cloud-infrastructure
 [2]: https://app.datadoghq.com/integrations?integrationId=oracle-cloud-infrastructure
 [3]: /help/
+[4]: https://cloud.oracle.com/identity/domains/policies
+[5]: https://docs.oracle.com/en/cloud/get-started/subscriptions-cloud/mmocs/requesting-service-limit-change.html

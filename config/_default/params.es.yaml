@@ -1,16 +1,19 @@
 announcement_banner:
-  desktop_message: Datadog named a Leader in the Gartner® Magic Quadrant™ for Observability
-    Platforms
-  external_link: https://www.datadoghq.com/resources/gartner-magic-quadrant-observability-platforms-2025/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-apm-ww-announcement-corpsite-announcement-gartnermq2025-obsplat
-  mobile_message: Leader in the Gartner® Magic Quadrant™
+  desktop_message: "<span>Join Datadog at DASH in NYC, June 9-10. | The future of AI + Observability starts here.</span>"
+  mobile_message: "<span>DASH NYC, June 9-10 | AI + Observability</span>"
+  background_color: "#000000"
+  custom_classes: 'dash-announcement-banner'
+  external_link: https://dash.datadoghq.com/?utm_source=events&utm_medium=internal&utm_campaign=summit-202606dash&utm_term=HPbanner
 disclaimer: Esta página aún no está disponible en español. Estamos trabajando en su
   traducción. <br> Si tienes alguna pregunta o comentario sobre nuestro actual proyecto
-  de traducción, <a href="https://docs.datadoghq.com/fr/help/">no dudes en ponerte
+  de traducción, <a href="https://docs.datadoghq.com/es/help/">no dudes en ponerte
   en contacto con nosotros</a>.
 meta_description: Datadog, el servicio líder de monitorización a escala en nube.
 meta_title: Empezando con Datadog
 site_name: Monitorización de la infraestructura y las aplicaciones de Datadog
 site_support_banner: Este producto no es compatible con el <a href="/getting_started/site">sitio
   Datadog</a> seleccionado.
+us2_fed_integration_banner_availability: "To find out if this integration is available in your organization, see your <a href=\"https://app.datadoghq.com/integrations\">Datadog Integrations</a> page or ask your organization administrator."
+us2_fed_integration_banner_exception: "To initiate an exception request to enable this integration for your organization, email <a href=\"mailto:support@ddog-gov.com\">support@ddog-gov.com</a>."
 translate_status_banner: Esta traducción no está actualizada. Para consultar la última
   versión en inglés, haz clic aquí

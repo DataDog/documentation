@@ -100,7 +100,7 @@ Por muy importante que sea para ti poder aplicar la protección de forma granula
 [2]: /es/tracing/guide/remote_config
 [3]: /es/agent/versions/upgrade_between_agent_minor_versions
 [4]: /es/security/application_security/how-it-works/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
-[5]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal
+[5]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&view=signal
 [6]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.blocked%3Atrue
 [7]: https://app.datadoghq.com/security/appsec/denylist
 [8]: https://app.datadoghq.com/security/appsec/passlist

@@ -16,8 +16,8 @@ If you are already using a standalone OpenTelemetry (OTel) Collector for your OT
 
 To migrate to the DDOT Collector, you need to install the Datadog Agent and configure your applications to report the telemetry data.
 
-<div class="alert alert-danger">
-  The DDOT Collector only supports deployment as a DaemonSet (following the <a href="https://opentelemetry.io/docs/collector/deployment/agent/">agent deployment pattern</a>), not as a <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">gateway</a>. If you have an existing gateway architecture, you can use the DDOT Collector with the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/loadbalancingexporter">loadbalancingexporter</a> to connect to your existing gateway layer.
+<div class="alert alert-info">
+The DDOT Collector supports deployment as a DaemonSet (following the <a href="https://opentelemetry.io/docs/collector/deployment/agent/">agent deployment pattern</a>), the <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">gateway</a> deployment is available in Preview. If you have an existing gateway architecture, migrate DaemonSet collectors to DDOT by following the instructions in the current guide. Then migrate your gateway layer to DDOT by following <a href="https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/install/kubernetes_gateway/?code-lang=kubernetes_gateway">DDOT Kubernetes Gateway installation guide</a>.
 </div>
 
 ## Prerequisites

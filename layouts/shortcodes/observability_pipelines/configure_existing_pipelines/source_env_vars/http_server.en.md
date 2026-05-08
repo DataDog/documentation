@@ -1,3 +1,8 @@
 - HTTP/S server address:
     - The Observability Pipelines Worker listens to this socket address, such as `0.0.0.0:9997`, for your HTTP client logs.
-    - Stored in the environment variable: `DD_OP_SOURCE_HTTP_SERVER_ADDRESS`.
+    - The default environment variable is `DD_OP_SOURCE_HTTP_SERVER_ADDRESS`.
+- If you are using plain authentication:
+	- HTTP/S endpoint authentication username.
+		- The default environment variable is `DD_OP_SOURCE_HTTP_SERVER_USERNAME`.
+	- HTTP/S endpoint authentication password.
+		- The default environment variable is `DD_OP_SOURCE_HTTP_SERVER_PASSWORD`.

@@ -2,7 +2,7 @@
 categories:
 - cloud
 - configuration & deployment
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md
 description: CloudCheckr で Datadog のメトリクスを表示するために、インテグレーションを有効にします。
@@ -34,10 +34,6 @@ Datadog アカウントを CloudCheckr アカウントに接続するには
 
 - CloudCheckr 拡張機能をクリックします。
 - [Datadog API キーとアプリケーションキー][2]を追加します。
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://spot.io/product/cloudcheckr/
 [2]: https://app.datadoghq.com/organization-settings/api-keys

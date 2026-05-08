@@ -1,4 +1,7 @@
 ---
+description: Rastrea el rendimiento de los recursos web, incluidos los activos de
+  XHR, Fetch, imágenes, CSS y JavaScript, con datos de temporización detallados e
+  identificación del proveedor.
 further_reading:
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: Blog
@@ -31,7 +34,7 @@ Consultar [Conectar RUM y trazas ][2] para obtener información sobre cómo conf
 
 {{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="Información de trazas de APM para un recurso de RUM" >}}
 
-## Tiempos y métricas de recursos
+## Atributos del recurso
 
 Los datos de tiempo de red detallados para recursos se recopilan con los métodos de navegador nativos Fetch y XHR y con la [API de Performance Resource Timing][3].
 
@@ -40,7 +43,7 @@ Los datos de tiempo de red detallados para recursos se recopilan con los método
 | `resource.duration`            | número         | Tiempo total empleado en cargar el recurso.                                                                                                    |
 | `resource.size`                | número (bytes) | Tamaño del recurso.                                                                                                                             |
 | `resource.connect.duration`    | número (ns)    | Tiempo empleado en establecer una conexión con el servidor (connectEnd - connectStart).                                                            |
-| `resource.ssl.duration`        | número (ns)    | Tiempo empleado por el protocolo TLS. Si la última solicitud no es en HTTPS, esta métrica no aparece (connectEnd - secureConnectionStart). |
+| `resource.ssl.duration`        | número (ns)    | Tiempo transcurrido para el apretón de manos de TLS. Si la última solicitud no es en HTTPS, este atributo no aparece (connectEnd - secureConnectionStart). |
 | `resource.dns.duration`        | número (ns)    | Tiempo empleado en resolver el nombre DNS de la última solicitud (domainLookupEnd - domainLookupStart).                                               |
 | `resource.redirect.duration`   | número (ns)    | Tiempo empleado en las siguientes solicitudes HTTP (redirectEnd - redirectStart).                                                                      |
 | `resource.first_byte.duration` | número (ns)    | Tiempo de espera empleado para recibir el primer byte de respuesta (responseStart - RequestStart).                                           |
@@ -58,7 +61,7 @@ Los datos de tiempo de red detallados para recursos se recopilan con los método
 | `resource.url`             | cadena | La URL del recurso.                                                                                 |
 | `resource.url_host`        | cadena | La parte de host de la URL.                                                                         |
 | `resource.url_path`        | cadena | La parte de ruta de la URL.                                                                         |
-| `resource.url_query`       | objecto | Las partes de la cadena de consulta de la URL desglosadas como atributos de clave/valor de parámetros de consulta.                |
+| `resource.url_query`       | objeto | Las partes de la cadena de consulta de la URL desglosadas como atributos de clave/valor de parámetros de consulta.                |
 | `resource.url_scheme`      | cadena | El nombre del protocolo de la URL (HTTP o HTTPS).                                                     |
 | `resource.provider.name`   | cadena | El nombre del proveedor de recursos. Por defecto es `unknown`.                                                 |
 | `resource.provider.domain` | cadena | El dominio del proveedor del recurso.                                                                     |

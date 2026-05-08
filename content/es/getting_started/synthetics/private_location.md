@@ -1,17 +1,17 @@
 ---
+description: Configura localizaciones privadas para monitorizar aplicaciones internas
+  y URL privadas. Crea localizaciones personalizadas para áreas de misión crítica
+  y entornos de pruebas internos.
 further_reading:
 - link: https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/
   tag: Blog
   text: Monitoriza tus localizaciones privadas Synthetic con Datadog
-- link: /getting_started/synthetics/api_test
-  tag: Documentación
-  text: Crea tu primer test de API
-- link: /getting_started/synthetics/browser_test
-  tag: Documentación
-  text: Crea tu primer test de navegador
 - link: /synthetics/private_locations
   tag: Documentación
   text: Más información sobre las localizaciones privadas
+- link: /synthetics/guide/kerberos-authentication/
+  tag: Guía
+  text: Autenticación Kerberos para la monitorización Synthetic
 title: Empezando con las localizaciones privadas
 ---
 
@@ -19,13 +19,14 @@ title: Empezando con las localizaciones privadas
 
 Las localizaciones privadas te permiten **monitorizar aplicaciones internas** o direcciones URL privadas que no son accesibles a través de la red pública de Internet. 
 
-{{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Diagrama de arquitectura que muestra cómo funciona una localización privada durante la monitorización de Synthetic" style="width:100%;">}}
+{{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Diagrama de arquitectura que muestra cómo funciona una localización privada durante la monitorización Synthetic" style="width:100%;">}}
 
 También puedes utilizar las localizaciones privadas para:
 
 - **Crear localizaciones personalizadas** en áreas consideradas críticas para el desarrollo de tu negocio.
 - **Verificar el rendimiento de la aplicación en tu entorno de testeo interno** antes de lanzar nuevas funciones a la fase de producción con [tests Synthetic en tus pipelines de integración/distribución continuas (CI/CD)][1].
 - **Comparar el rendimiento de la aplicación** desde dentro y fuera de tu red interna.
+- **[Autenticar tests de monitorización Synthetic utilizando el inicio de sesión único de Kerberos][16]** para sitios y API internos basados en Windows.
 
 Las localizaciones privadas son contenedores Docker o servicios Windows que puedes instalar en cualquier lugar dentro de tu red privada. Busca la imagen Docker en [Google Container Registry][2] o descarga el [instalador de Windows][13].**\***
 
@@ -87,10 +88,10 @@ Los resultados de los tests de las localizaciones privadas se muestran de forma 
 
 ## Ejecuta tests Synthetic con tu localización privada
 
-Utiliza tu nueva localización privada como si fuese una localización gestionada en tus test de Synthetic.
+Utiliza tu nueva localización privada como si fuese una localización gestionada en tus tests Synthetic.
 
 1. Crea un [test de API][2], un [test de API multipaso][8] o un [test de navegador][9] en cualquier endpoint interno o aplicación que quieras monitorizar.
-2. En la sección **Private Locations**, selecciona tu nueva localización privada:
+2. En la sección **Private Locations** (Localizaciones privadas), selecciona tu nueva localización privada:
 
     {{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Asignar un test Synthetic a una localización privada" style="width:100%;">}}
 
@@ -117,3 +118,4 @@ Utiliza tu nueva localización privada como si fuese una localización gestionad
 [13]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [14]: https://www.datadoghq.com/legal/eula/
 [15]: https://www.datadoghq.com/support/
+[16]: /es/synthetics/guide/kerberos-authentication/

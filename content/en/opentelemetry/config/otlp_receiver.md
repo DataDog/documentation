@@ -198,4 +198,4 @@ Flags: 0
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/internal/e2e/examples/otlp.yaml
+[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/otlp.yaml

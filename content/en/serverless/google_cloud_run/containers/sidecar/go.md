@@ -16,9 +16,9 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Go tracer**.
+1. **Install the Datadog Go SDK**.
 
-   1. In your main application, add the tracing library from `dd-trace-go`.
+   1. In your main application, add the SDK from `dd-trace-go`.
 
       {{< code-block lang="shell" disable_copy="false" >}}
 go get github.com/DataDog/dd-trace-go/v2/ddtrace/tracer
@@ -42,6 +42,8 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
    For more information, see [Tracing Go Applications][1] and the [Tracer README][2].
 
 2. **Install serverless-init as a sidecar**.
+
+   {{% serverless-init-install mode="sidecar" %}}
 
    {{< tabs >}}
 
@@ -92,11 +94,13 @@ logrus.WithContext(ctx).Info("Hello World!")
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="go" %}}
+{{% serverless-init-env-vars-sidecar language="go" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting sidecar="true" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
@@ -105,5 +109,5 @@ logrus.WithContext(ctx).Info("Hello World!")
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
 [2]: https://github.com/DataDog/dd-trace-go?tab=readme-ov-file#installing
 [3]: /tracing/other_telemetry/connect_logs_and_traces/go/
-[4]: /developers/dogstatsd/?tab=go#install-the-dogstatsd-client
-[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples
+[4]: /extend/dogstatsd/?tab=go#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=go#code-examples-5

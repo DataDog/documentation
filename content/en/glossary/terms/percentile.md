@@ -1,4 +1,5 @@
 ---
+id: percentile
 title: percentile
 core_product:
   - dashboards

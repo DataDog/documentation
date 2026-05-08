@@ -10,14 +10,20 @@ aliases:
   - /service_catalog/
   - /software_catalog/
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-forms
+  tag: Blog
+  text: Turn feedback into action across your engineering org with Datadog Forms
 - link: "/internal_developer_portal/use_cases"
   tag: "Documentation"
   text: "Learn about Software Catalog Use Cases"
+- link: "https://learn.datadoghq.com/courses/managing-software-catalog"
+  tag: "Learning Center"
+  text: "Managing Services with the Software Catalog"
 algolia:
   tags: ['software catalog']
 ---
 
-{{< img src="tracing/software_catalog/software_catalog_updated.mp4" video=true alt="Navigating the Software Catalog" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/software-catalog-landing-page.mp4" video=true alt="Navigating the Software Catalog" style="width:100%;" >}}
 
 ## Overview
 
@@ -26,13 +32,10 @@ algolia:
 Built on real-time telemetry and automated metadata collection, Software Catalog offers integrations with observability, security, and cost management tools. This empowers engineering, SRE, security, and platform teams to maintain visibility, streamline operations, and ensure service reliability at scale.
 
 ## What you can do in Software Catalog
-<br>
-{{< img src="tracing/software_catalog/software_catalog_tabs.mp4" video=true alt="A video overview of the Software Catalog, with the Services component type selected, that scrolls through the Ownership, Reliability, Performance, Security, Costs, and Delivery tabs" style="width:100%;" >}}
-<br>
 
 Software Catalog offers multiple views to help you explore and manage your entities.
 
-- **Ownership**: Access your team's Slack, repo, or on-call information.
+- [**Ownership**][8]: Access your team's Slack, repo, or on-call information.
 - **Reliability**: Address risks by surfacing entities with recent deploys, rising error rates, open incidents, or failing monitors.
 - **Performance**: Compare latency, traffic, error rate, and Apdex by environment.
 - **Security**: Find vulnerable libraries and live attacks from a single list to harden security posture.
@@ -57,7 +60,7 @@ Software Catalog includes an entity when:
 - Use the entity type for more precise filtering than the legacy `type` filter (from the `span.type` attribute). For example, use the `datastore type` facet to filter by specific datastore technology.
 - Span summaries and service and resource statistics are retained for up to 30 days. For deeper analysis on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][2].
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 ### Service types
 
 Every monitored service is associated with a type. Datadog automatically determines type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
@@ -88,4 +91,5 @@ Some integrations alias to certain types. For example, Postgres, MySQL, and Cass
 [5]: /internal_developer_portal/software_catalog/set_up/discover_entities
 [6]: /internal_developer_portal/software_catalog/set_up/create_entities
 [7]: /internal_developer_portal/software_catalog/set_up/import_entities
+[8]: /internal_developer_portal/software_catalog/set_up/ownership
 

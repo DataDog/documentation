@@ -5,6 +5,10 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/azure/
   tag: Documentación
   text: Integración de Azure
+- link: https://www.datadoghq.com/blog/azure-log-forwarding/
+  tag: Blog
+  text: Envía logs de Azure a Datadog más rápida y fácilmente con el reenvío automatizado
+    de logs
 title: Guía de gestión programática de la integración de Azure
 ---
 
@@ -12,7 +16,7 @@ title: Guía de gestión programática de la integración de Azure
 
  En esta guía se demuestra cómo gestionar mediante programación la integración de Azure con Datadog, así como otros recursos de Azure, como la extensión de máquina virtual (VM) del Datadog Agent. Esto te permite gestionar la observabilidad en varias cuentas a la vez.
 
-**Todos los sitios**: todos los [sitios de Datadog][3] pueden usar los pasos de esta página a fin de completar el proceso de credenciales de registro de aplicaciones para la recopilación de métricas de Azure y la configuración del centro de eventos para enviar logs de la plataforma de Azure.
+**Todos los sitios**: Todos los [sitios de Datadog][3] pueden utilizar los pasos de esta page (página) para finalizar el proceso de credenciales de registro de aplicaciones para la recopilación de métricas de Azure. Consulta la [guía Azure Logging][18] para conocer las opciones de configuración de reenvío automatizado y manual de logs.
 
 **US3**: si tu organización se encuentra en el sitio US3 de Datadog, puedes usar la integración nativa de Azure para optimizar la gestión y la recopilación de datos para tu entorno de Azure. Datadog recomienda usar este método cuando sea posible. La configuración implica la creación de un [recurso de Datadog en Azure][14] para vincular tus suscripciones de Azure a tu organización de Datadog. Esto reemplaza el proceso de credenciales de registro de aplicaciones para la recopilación de métricas y la configuración del centro de eventos para el reenvío de logs. Consulta la [guía de gestión de la integración nativa de Azure][1] para obtener más información.
 
@@ -57,15 +61,15 @@ Una vez que se haya configurado la integración, Datadog comienza a ejecutar una
 
 Cuando se detectan errores críticos, la integración de Azure genera eventos en el explorador de eventos de Datadog y los vuelve a publicar cada cinco minutos. Puedes configurar un monitor de eventos para que se active cuando se detecten estos eventos y notifique al equipo correspondiente.
 
-Datadog ofrece un monitor recomendado que puedes usar como plantilla para comenzar. Para usar el monitor recomendado:
+Datadog proporciona una plantilla de monitor (noun) para ayudarte a empezar. Para utilizar la plantilla de monitor (noun):
 
-1. En Datadog, dirígete a **Monitors** -> **New Monitor** (Monitores -> Monitor nuevo) y selecciona la pestaña [Recommended Monitors][19] (Monitores recomendados).
-2. Selecciona el monitor recomendado que se denomina `[Azure] Integration Errors` ([Azure] Errores de integración).
+1. En Datadog, ve a **Monitors** (Monitores) y haz clic en el botón **Browse Templates** (Buscar plantillas).
+2. Busca y selecciona la plantilla de monitor (noun) titulada [Errores de integración de [Azure]][19].
 3. Realiza las modificaciones que quieras en la consulta de búsqueda o en las condiciones de alerta. De manera predeterminada, el monitor se activa cuando se detecta un error nuevo y se resuelve cuando no se ha detectado el error durante los últimos 15 minutos.
 4. Actualiza los mensajes de notificación y notificación nueva según lo consideres. Ten en cuenta que los eventos en sí contienen información relevante sobre el evento y se incluyen en la notificación de manera automática. Esto incluye información detallada sobre el contexto, la respuesta a errores y los pasos comunes para solucionarlos.
 5. [Configura notificaciones][20] a través de tus canales preferidos (correo electrónico, Slack, PagerDuty u otros) para asegurarte de que tu equipo esté alerta sobre los problemas que afectan la recopilación de datos de Azure.
 
-#### Envío de logs
+#### Envío de Logs
 
 Consulta la [guía de registro de Azure][18] para configurar el reenvío de logs desde tu entorno de Azure a Datadog.
 
@@ -75,26 +79,48 @@ Consulta la [guía de registro de Azure][18] para configurar el reenvío de logs
 
 Puedes usar Terraform para crear y gestionar la extensión del Datadog Agent. Sigue estos pasos para instalar y configurar el Agent en una sola máquina y, a continuación, carga un archivo de configuración comprimido en el almacenamiento de blobs para que se haga referencia a él en el bloque de Terraform de la extensión de VM.
 
-1. [Instala el Agent][11].
-2. Aplica las [configuraciones del Agent][12] que quieras.
-3. En Windows Server 2008, Vista y versiones posteriores, guarda la carpeta `%ProgramData%\Datadog` como un archivo zip. En Linux, guarda la carpeta `/etc/datadog-agent` como un archivo zip.
-4. Carga el archivo al almacenamiento de blobs.
-5. Haz referencia a la URL del almacenamiento de blobs en el bloque de Terraform con el parámetro `agentConfiguration` para crear la extensión de VM.
+{{< tabs >}}
+{{% tab "Windows" %}}
+1. [Instala el Agent][100].
+2. Aplica las [Configuraciones del Agent][101] que desees.
+3. Ve a `%ProgramData%\Datadog`. Elimina cualquier archivo o artefacto de instalación adicional que pueda estar presente. Asegúrate de que la carpeta contenga solo:
+    -  `datadog.yaml`
+    -  carpeta `conf.d` que contiene las configuraciones de integración
+4. Guarda la carpeta `%ProgramData%\Datadog` desinfectada como archivo zip.
+5. Genera un hash de la carpeta comprimida mediante el comando de PowerShell `Get-FileHash %ProgramData%\Datadog.zip -Algorithm SHA256`. Haz referencia a este hash en el bloque Terraform con el parámetro `agentConfigurationChecksum`.
+6. Carga el archivo al almacenamiento de blobs.
+7. Haz referencia a la URL del almacenamiento de blobs en el bloque de Terraform con el parámetro `agentConfiguration` para crear la extensión de VM.
+
+[100]: https://app.datadoghq.com/account/settings/agent/latest
+[101]: /es/agent/guide/agent-configuration-files/?tab=agentv6v7
+{{% /tab %}}
+{{% tab "Linux" %}}
+1. [Instala el Agent][200].
+2. Aplica las [configuraciones del Agent][201] que desees.
+3. Guarda la carpeta `/etc/datadog-agent` como archivo zip, utilizando el comando `zip -r datadog_config.zip /etc/datadog-agent`.
+4. Genera un hash de la carpeta comprimida utilizando el comando `sha256sum datadog_config.zip`. Haz referencia a este hash en el bloque Terraform con el parámetro `agentConfigurationChecksum`.
+5. Carga el archivo al almacenamiento de blobs.
+6. Haz referencia a la URL del almacenamiento de blobs en el bloque de Terraform con el parámetro `agentConfiguration` para crear la extensión de VM.
+
+[200]: https://app.datadoghq.com/account/settings/agent/latest
+[201]: /es/agent/guide/agent-configuration-files/?tab=agentv6v7
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Configuración de la extensión
 
-La extensión de Azure puede aceptar tanto configuraciones normales como protegidas.
+La extensión Azure puede aceptar tanto parámetros normales como protegidos.
 
-La configuración normal incluye:
+Los parámetros normales incluyen:
 
 | Variable | Tipo | Descripción  |
 |----------|------|--------------|
-| `site` | Cadena | Configura el sitio de ingesta de Datadog. Ejemplo: `SITE=`{{< region-param key="dd_site" code="true">}} |
-| `agentVersion` | Cadena | La versión del Agent a instalar, con el formato `x.y.z` o `latest` |
+| `site` | Cadena | Definir el sitio de ingesta de Datadog, por ejemplo: `SITE=`{{< region-param key="dd_site" code="true">}} |
+| `agentVersion` | Cadena | La versión del Agent a instalar, siguiendo el formato `x.y.z` o `latest` |
 | `agentConfiguration` | URI | (Opcional) URL al blob de Azure que contiene la configuración del Agent como un archivo zip. |
-| `agentConfigurationChecksum` | Cadena | La suma de comprobación SHA256 del archivo zip de la configuración del Agent, obligatoria si se especifica `agentConfiguration`. |
+| `agentConfigurationChecksum` | Cadena | La suma de comprobación SHA256 del archivo zip de configuración del Agent, obligatoria si se define `agentConfiguration`. |
 
-La configuración protegida incluye:
+Los parámetros protegidos incluyen:
 
 | Variable | Tipo | Descripción  |
 |----------|------|--------------|
@@ -111,18 +137,13 @@ La configuración protegida incluye:
   virtual_machine_id   = azurerm_virtual_machine.example.id
   publisher            = "Datadog.Agent"
   type                 = "DatadogWindowsAgent"
-  type_handler_version = "2.0"
-   settings = <<SETTINGS
-  {
-    "site":"<DATADOG_SITE>"
-  }
-  SETTINGS
-   protected_settings = <<PROTECTED_SETTINGS
-  {
-    "api_key": "<DATADOG_API_KEY>"
-  }
-  PROTECTED_SETTINGS
-}
+  type_handler_version = "7.0"
+  settings = jsonencode({
+    site = "<DATADOG_SITE>"
+  })
+  protected_settings = jsonencode({
+    api_key = "<DATADOG_API_KEY>"
+  })
 ```
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -133,17 +154,13 @@ La configuración protegida incluye:
   virtual_machine_id   = azurerm_virtual_machine.example.id
   publisher            = "Datadog.Agent"
   type                 = "DatadogLinuxAgent"
-  type_handler_version = "2.0"
-   settings = <<SETTINGS
-  {
-    "site":"<DATADOG_SITE>"
-  }
-  SETTINGS
-   protected_settings = <<PROTECTED_SETTINGS
-  {
-    "DATADOG_API_KEY": "<DATADOG_API_KEY>"
-  }
-  PROTECTED_SETTINGS
+  type_handler_version = "7.0"
+  settings = jsonencode({
+    site = "<DATADOG_SITE>"
+  })
+  protected_settings = jsonencode({
+    api_key = "<DATADOG_API_KEY>"
+  })
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -168,5 +185,5 @@ Consulta el [recurso de la extensión de máquina virtual][10] en el registro de
 [15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 [18]: /es/logs/guide/azure-logging-guide
-[19]: https://app.datadoghq.com/monitors/recommended
+[19]: https://app.datadoghq.com/monitors/templates?q=Azure%20%22integration%20errors%22&origination=all&p=1
 [20]: /es/monitors/notify/#configure-notifications-and-automations

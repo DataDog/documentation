@@ -1,5 +1,5 @@
 ---
-title: Configuring the C++ Tracing Library
+title: Configuring the C++ SDK
 code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 50
@@ -15,12 +15,14 @@ further_reading:
   text: "Propagating trace context"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+After you set up the SDK with your code and configure the Agent to collect APM data, optionally configure the SDK as desired, including setting up [Unified Service Tagging][1].
+
+{{% apm-config-visibility %}}
 
 It is recommended to use `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` to set `env`, `service` and `version` for your services. Refer to the [Unified Service Tagging][1] docummentation recommendations on which value to set for environment variables.
 
 ## Environment variables
-To configure the tracer using environment variables, set the variables before launching the instrumented application.
+To configure the SDK using environment variables, set the variables before launching the instrumented application.
 
 ### Unified service tagging
 
@@ -89,7 +91,7 @@ If `false`, the tracer will generate legacy 64-bit trace IDs.
 `DD_REMOTE_CONFIGURATION_ENABLED`
 : **Since**: 0.2.0 <br>
 **Default**: `true` <br>
-Enable the capability that allows to remotely configure and change the behavior of the tracer. <br>
+Enable the capability that allows to remotely configure and change the behavior of the SDK. <br>
 When `false` this feature is disabled. <br>
 For more information, see [Remote Configuration][5].
 

@@ -36,7 +36,7 @@ attributes:
 - description: データを生成しているアプリケーションまたはサービスの [統一サービス名](/getting_started/tagging/unified_service_tagging/)
     で、ユーザー セッションを相関付けるために使用します。APM から他の製品に切り替えるためにも使用されるため、APM と他の製品の両方を使用する場合は同じ値を定義してください。RUM
     Browser SDK では、service はブラウザー アプリケーション内で特定の機能を提供する、チームによって構築されたページの集合を表します。 [手動ビュー
-    トラッキング](/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names)
+    トラッキング](/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names)
     を使用して、Web ページを service に割り当てることができます。
   domain: 予約済み
   name: サービス
@@ -909,7 +909,7 @@ attributes:
   - ios
   - roku
   type: 文字列
-- description: ユーザーアクションのタイプ (例えば、`tap` や `application_start` など)。[カスタムブラウザユーザーアクション](/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions)の場合には、`custom`
+- description: ユーザーアクションのタイプ (例えば、`tap` や `application_start` など)。[カスタムブラウザユーザーアクション](/real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions)の場合には、`custom`
     に設定されます。
   domain: アクション (ブラウザイベント、Android イベント、iOS イベント、Roku イベント)
   name: action.type
@@ -920,7 +920,7 @@ attributes:
   - ios
   - roku
   type: 文字列
-- description: わかりやすい名前 (例えば、`Click on checkout`)。[カスタムブラウザユーザーアクション](/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions)の場合には、API
+- description: わかりやすい名前 (例えば、`Click on checkout`)。[カスタムブラウザユーザーアクション](/real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions)の場合には、API
     コールで指定されたアクション名。
   domain: アクション (ブラウザイベント、Android イベント、iOS イベント、Roku イベント)
   name: action.name
@@ -948,7 +948,7 @@ attributes:
   - icon-rum
   - ブラウザ
   type: 文字列
-- description: 'ページ読み込みのタイプ: `initial_load` または `route_change`。詳細については、[シングルページアプリケーションサポートドキュメント](/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa)を参照してください。'
+- description: 'ページ読み込みのタイプ: `initial_load` または `route_change`。詳細については、[シングルページアプリケーションサポートドキュメント](/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa)を参照してください。'
   domain: ビュー (ブラウザ)
   name: view.loading_type
   product_source:
@@ -1606,6 +1606,7 @@ attributes:
   - icon-apm
   type: 文字列
 content: 以下の表は、RUM、Logs、APM の各製品が Agent によって Datadog に送信されるデータにデータドメインに応じて自動的に適用される属性の一覧です。製品別にリストをフィルタリングするか、キーワードや説明テキストで検索することもできます。
+description: RUM、Logs、APM の各製品が Agent によって Datadog に送信されるデータにデータドメインに応じて自動的に適用される属性の表です。
 disable_sidebar: true
 filter_all: All
 further_reading:
@@ -1620,6 +1621,6 @@ title: デフォルトの標準属性
 
 
 
-## 参考資料
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}

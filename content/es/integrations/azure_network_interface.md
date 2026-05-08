@@ -13,7 +13,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 297
-    source_type_name: Interfaz Azure red
+    source_type_name: Azure Network Interface
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,12 +29,12 @@ display_on_public_website: true
 draft: false
 git_integration_title: azure_network_interface
 integration_id: azure-networkinterface
-integration_title: 'Interfaz Azure red '
+integration_title: Azure Network Interface
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
 name: azure_network_interface
-public_title: 'Interfaz Azure red '
+public_title: Azure Network Interface
 short_description: Rastrea las métricas clave de Azure Network Interface.
 supported_os: []
 tile:
@@ -49,7 +49,7 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Interfaz Azure red
+  title: Azure Network Interface
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
@@ -68,7 +68,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{ get-metrics-from-git "azure-networkinterface" }}
+{{< get-metrics-from-git "azure_network_interface" >}}
 
 
 ### Eventos

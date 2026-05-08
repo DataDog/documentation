@@ -102,7 +102,7 @@ For more information, see the [propagating the trace context][27] for your appli
 
 Instrumentation is the process of adding code to your application to capture and report observability data to Datadog, such as traces, metrics, and logs. Datadog provides instrumentation libraries for various programming languages and frameworks.
 
-You can automatically instrument your application when you install the Datadog Agent with [Single Step Instrumentation][24] or when you [manually add Datadog tracing libraries][25] to your code.
+You can automatically instrument your application when you install the Datadog Agent with [Single Step Instrumentation][24] or when you [manually add Datadog SDKs][25] to your code.
 
 You can use custom instrumentation by embedding tracing code directly into your application code. This allows you to programmatically create, modify, or delete traces to send to Datadog.
 
@@ -118,7 +118,7 @@ To learn more, read supported [propagation formats][28] for your application's l
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /developers/guide/data-collection-resolution/
+[2]: /extend/guide/data-collection-resolution/
 [3]: /tracing/setup/
 [4]: /tracing/software_catalog/
 [5]: /tracing/services/services_map/

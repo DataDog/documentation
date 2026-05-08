@@ -24,16 +24,15 @@ aliases:
 
 ## Setup
 
-If your application is deployed as a container image, use the _Container Image_ method.
-
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-If [remote instrumentation][1] is enabled, you can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select **Instrument Functions**.
+You can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
 [1]: /serverless/aws_lambda/remote_instrumentation
 [2]: https://app.datadoghq.com/functions?cloud=aws
+[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -42,7 +41,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 1. Install the Datadog CLI client
 
     ```sh
-    npm install -g @datadog/datadog-ci
+    npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
     ```
 
 2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in the interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
@@ -175,60 +174,23 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+
 {{% tab "AWS CDK" %}}
-
-The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
-
-1. Install the Datadog CDK constructs library
-
-    ```sh
-    # For AWS CDK v1
-    npm install datadog-cdk-constructs --save-dev
-
-    # For AWS CDK v2
-    npm install datadog-cdk-constructs-v2 --save-dev
-    ```
-
-2. Instrument your Lambda functions
-
-    ```javascript
-    // For AWS CDK v1
-    import { Datadog } from "datadog-cdk-constructs";
-
-    // For AWS CDK v2
-    import { DatadogLambda } from "datadog-cdk-constructs-v2";
-
-    const datadogLambda = new DatadogLambda(this, "DatadogLambda", {
-        nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
-        extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}},
-        site: "<DATADOG_SITE>",
-        apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
-    });
-    datadogLambda.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
-    ```
-
-    To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob).The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
-    - Replace `<LAMBDA_FUNCTIONS>` with your Lambda functions.
-
-    More information and additional parameters can be found on the [Datadog CDK documentation][1].
-
-[1]: https://github.com/DataDog/datadog-cdk-constructs
-[2]: https://app.datadoghq.com/organization-settings/api-keys
+{{< lambda-install-cdk language="node" layer="node" layerParamTypescript="nodeLayerVersion" layerParamPython="node_layer_version">}}
 {{% /tab %}}
+
 {{% tab "Container Image" %}}
 
 1. Install the Datadog Lambda Library
 
-    Package the Datadog Lambda and tracing libraries within the image:
+    Package the Datadog Lambda and SDKs within the image:
 
     ```sh
     npm install datadog-lambda-js dd-trace
     ```
 
     Note that the minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
-   
+
     You cannot install the Datadog Lambda Library as a layer if you are deploying your Lambda function as a container image.
 
 2. Install the Datadog Lambda Extension
@@ -349,7 +311,7 @@ To configure Datadog using SST v3, follow these steps:
   1. Configure the Datadog Lambda Library and Datadog Lambda Extension layers
 
      - The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="node-versions" >}}.
-  
+
   2. Add `dd-trace` and `datadog-lambda-js` to the `nodejs.install` list
 
   3. Fill in the environment variable placeholders:
@@ -359,7 +321,7 @@ To configure Datadog using SST v3, follow these steps:
      - Replace `<SERVICE_NAME>` with the name of the Lambda function's service
      - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. (Ensure the correct [Datadog site][1] is selected on this page)
      - Replace `<VERSION>` with the version number of the Lambda function
-    
+
   4. [Apply the Datadog wrapper in your function code][2]
 
 [1]: /getting_started/site/
@@ -430,6 +392,8 @@ To configure Datadog using SST v3, follow these steps:
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% svl-tracing-env %}}
 
 <div class="alert alert-danger">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
 

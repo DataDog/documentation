@@ -2,9 +2,33 @@
 title: Code Security
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
+  tag: "Blog"
+  text: "Introducing Bits AI Dev Agent for Code Security"
+- link: "https://www.datadoghq.com/blog/remediate-faster-code-security"
+  tag: "Blog"
+  text: "Remediate transitive vulnerabilities faster with Datadog Software Composition Analysis"
+- link: "https://www.datadoghq.com/blog/audit-reports-datadog-sheets"
+  tag: "Blog"
+  text: "Generate audit-ready vulnerability and compliance reports with Datadog Sheets"
+- link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+  tag: "Blog"
+  text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
+- link: https://www.datadoghq.com/blog/code-security-secret-scanning
+  tag: Blog
+  text: Detect and block exposed credentials with Datadog Secret Scanning
+- link: https://www.datadoghq.com/blog/code-security-ai-capabilities
+  tag: Blog
+  text: Secure your code at scale with AI-driven vulnerability management
 - link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
   tag: "Blog"
   text: "Identify common security risks in MCP servers"
+- link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
+  tag: "Blog"
+  text: "Using LLMs to filter out false positives from static code analysis"
+- link: "https://learn.datadoghq.com/courses/code-security-SAST"
+  tag: "Learning Center"
+  text: "Write secure code with Datadog Code Security"
 aliases:
 - /code_analysis/
 ---
@@ -22,6 +46,13 @@ Code Security helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
 - **Security Administrators:** enhanced security posture, improved patch management in response to early vulnerability alerts, and compliance monitoring.
 - **Site Reliability Engineers (SREs):** automated security checks throughout CI/CD workflow, security compliance, and system resilience. SAST reduces manual overhead for SREs and ensures that each release is thoroughly tested for vulnerabilities.
+
+The following vulnerability management capabilities are available across Code Security:
+- [Developer tool integrations][16] to flag vulnerabilities in IDE and pull request comments, and block vulnerabilities from being merged to your production codebase
+- [Ticketing integrations][13] with Jira and Datadog Case Management, with bidirectional syncing
+- [Notifications][14]
+- [Automation pipelines][15] for automatically muting vulnerabilities and assigning due dates by severity
+- [MCP server][17] to run Code Security scans directly from AI coding assistants (in Preview)
 
 ## Static Code Analysis (SAST)
 Static Code Analysis (SAST) analyzes pre-production code to identify security and quality issues. You can embed best security and development practices throughout the software development lifecycle with:
@@ -53,11 +84,13 @@ Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your runni
 You can enable IAST on your services instrumented with Datadog APM. See [IAST setup][3] to get started.
 
 ## Secret Scanning
-Secret Scanning identifies and validates leaked secrets in your codebase. [Request access to the Preview][9].
+Secret Scanning identifies and validates leaked secrets in your codebase.
 
 ## Supply Chain Security
-Developers are being actively targeted with supply chain attacks. Prevent malicious packages to enter your dev environments with Datadog Supply Chain Security Firewall, which is available in GitHub. [Request access to the Preview][11].
+Prevent malicious packages from entering your development environments with Datadog Supply Chain Security Firewall, supported for GitHub. [Request access to the Preview][11].
 
+## Code Security MCP Server (Preview)
+The [Code Security MCP Server][17] is a local Model Context Protocol (MCP) server that brings SAST, secrets detection, SCA, IaC scanning, and SBOM generation directly into AI coding assistants such as Cursor, Claude Desktop, and VS Code. Read the [MCP Server documentation][17] to get started.
 
 ## Further Reading
 
@@ -75,3 +108,8 @@ Developers are being actively targeted with supply chain attacks. Prevent malici
 [10]: /security/code_security/iac_security
 [11]: https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc
 [12]: https://www.datadoghq.com/product-preview/malicious-pr-protection/
+[13]: /security/ticketing_integrations
+[14]: /security/notifications/
+[15]: /security/automation_pipelines/
+[16]: /security/code_security/dev_tool_int/
+[17]: /security/code_security/dev_tool_int/mcp_server/

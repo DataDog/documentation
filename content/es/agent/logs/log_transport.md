@@ -67,7 +67,7 @@ De forma predeterminada, el Datadog Agent utiliza el puerto `443` para enviar su
 Al usar HTTP, el Agent envía lotes de logs con los siguientes límites:
 
 * Tamaño máximo del lote: 1 MB
-* Tamaño máximo para un log único: 256 kB
+* Tamaño máximo de un único log: 900 kB
 * Número máximo de Logs en un lote: 1000
 
 ### Compresión de logs

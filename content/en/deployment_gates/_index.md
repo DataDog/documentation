@@ -18,8 +18,8 @@ algolia:
   tags: ["cd gates"]
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">Deployment Gates are not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Deployment Gates are not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}

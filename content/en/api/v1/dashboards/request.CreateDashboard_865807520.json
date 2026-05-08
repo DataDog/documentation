@@ -1,0 +1,30 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Dashboard with combined semantic_mode",
+  "widgets": [
+    {
+      "definition": {
+        "type": "timeseries",
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:system.cpu.user{*}",
+                "semantic_mode": "combined"
+              }
+            ],
+            "response_format": "timeseries",
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ],
+            "display_type": "line"
+          }
+        ]
+      }
+    }
+  ]
+}

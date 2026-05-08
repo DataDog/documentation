@@ -60,7 +60,7 @@ The following conditional variables are available:
 
 ### Examples
 
-Conditional variable must have an opening and closing pair with the text and **@-notifications** in-between.
+Conditional variables must have an opening and closing pair with the text and **@-notifications** in-between. Variables based on monitor state (such as `is_alert` or `is_warning`), must have their own message block. Because a monitor can only be in one state at a time, you cannot combine these. However, you can nest conditionals that match on attributes, see the `is_renotify` examples.
 
 {{< tabs >}}
 {{% tab "is_alert" %}}
@@ -109,7 +109,7 @@ Search for a substring in a [tag variable](#attribute-and-tag-variables) with th
 To notify your DB team if a triggering host has the tag `role:db_cassandra` or `role:db_postgres`, use the following:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -118,7 +118,7 @@ To notify your DB team if a triggering host has the tag `role:db_cassandra` or `
 The `is_match` condition also supports matching multiple strings:
 
 ```text
-{{#is_match "role.name" "db" "database"}}
+{{#is_match "host.role.name" "db" "database"}}
   This displays if the host triggering the alert contains `db` or `database`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -127,7 +127,7 @@ The `is_match` condition also supports matching multiple strings:
 To send a different notification if the tag doesn't contain `db`, use the negation of the condition as follows:
 
 ```text
-{{^is_match "role.name" "db"}}
+{{^is_match "host.role.name" "db"}}
   This displays if the role tag doesn't contain `db`.
   @slack-example
 {{/is_match}}
@@ -136,7 +136,7 @@ To send a different notification if the tag doesn't contain `db`, use the negati
 Or use the `{{else}}` parameter in the first example:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{else}}
@@ -240,9 +240,10 @@ This is the escalation message @dev-team@company.com
 ```
 
 {{% /tab %}}
+
 {{< /tabs >}}
 
-If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, Datadog recommends that you configure a corresponding `recovery` condition to send a recovery notification to the handle.
 
 **Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
 
@@ -474,7 +475,27 @@ For instance, assume your composite monitor has a sub-monitor `a`, which is a Lo
 
 ### Character escape
 
-Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
+Variable content is HTML-encoded by default. To output raw, unencoded content, use triple curly braces instead of double curly braces.
+
+For example, when a variable's value contains a URL with query parameters, the `&` is treated differently depending on whether double or triple braces are used:
+
+| Syntax | Example output |
+--------|----------------|
+| `{{template_variable}}` (double braces) | `https://status.example.com/check?service=web&amp;region=us-east` |
+| `{{{template_variable}}}` (triple braces) | `https://status.example.com/check?service=web&region=us-east` |
+
+| Syntax | Output |
+|--------|--------|
+| `{{variable}}` | HTML-encoded (default) |
+| `{{{variable}}}` | Raw, unencoded |
+
+For example, to render the check message without HTML encoding:
+
+```text
+{{{check_message}}}
+```
+
+This is particularly relevant when `{{check_message}}` contains auto-generated URLs with query parameters (for example, on HTTP Check monitors). The `&` characters in those URLs are HTML-encoded by default, which can break clickable links in notifications. Use `{{{check_message}}}` to preserve the URLs as-is.
 
 ## Template variables
 
@@ -554,7 +575,7 @@ To avoid missed notifications when using dynamic handles with these variables, m
 {{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
   // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exist.
-{{/is_match}}
+{{/is_exact_match}}
 ```
 
 

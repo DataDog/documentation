@@ -1,4 +1,8 @@
 ---
+further_reading:
+- link: https://www.datadoghq.com/blog/zendesk-cost-optimization/#measuring-the-impact-of-our-optimizations
+  tag: Blog
+  text: 'Optimización de Datadog a escala: observabilidad rentable en Zendesk'
 title: Métricas de uso estimadas
 ---
 
@@ -62,10 +66,11 @@ Las métricas de uso estimadas suelen estar disponibles en los siguientes tipos 
 | Modificadores de prueba de CI Visibility | `datadog.estimated_usage.ci_visibility.test.committers` | Modificadores de prueba vistos desde el mes hasta la fecha. |
 | Dispositivos IoT                   | `datadog.estimated_usage.iot.devices`, `datadog.estimated_usage.iot.devices.by_tag` | Dispositivos de IoT únicos vistos en la última hora. |
 | Bytes incorporados de pipelines de observabilidad | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volumen de datos incorporados por pipelines de observabilidad. |
-| Eventos personalizados                   | `datadog.estimated_usage.events.custom_events` | Volumen de eventos personalizados enviados. |
-| Eventos incorporados                        | `datadog.estimated_usage.events.ingested_events` | Volumen de datos ingeridos por eventos. |
+| Eventos personalizados                 | `datadog.estimated_usage.events.custom_events` | Volumen de eventos personalizados enviados. |
+| Eventos incorporados               | `datadog.estimated_usage.events.ingested_events` | Volumen de datos ingeridos por eventos. |
 | Committers SAS de Code Security | `datadog.estimated_usage.code_security.sast.committers` | Committers SAST vistos desde el mes (calendario) hasta la fecha. |
 | Committers SCA de Code Security  | `datadog.estimated_usage.code_security.sca.committers`  | Committers SCA vistos desde el mes (calendario) hasta la fecha.  |
+| Hosts SCA de Code Security       | `datadog.estimated_usage.asm.vulnerability_oss_host`, `datadog.estimated_usage.asm.vulnerability_oss_host.by_tag` | Hosts SCA únicos vistos en la última hora. |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Nombres de las métricas" >}}
 
@@ -89,6 +94,10 @@ En las cuentas con varias organizaciones, es posible agrupar el uso estimado de 
 Si tienes alguna pregunta técnica, ponte en contacto con el [equipo de asistencia de Datadog][1].
 
 Si tienes alguna pregunta sobre facturación, ponte en contacto con tu gestor de [satisfacción al cliente][2].
+
+## Referencias adicionales
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/help/
 [2]: mailto:success@datadoghq.com

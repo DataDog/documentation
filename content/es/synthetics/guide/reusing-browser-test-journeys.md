@@ -9,6 +9,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/test-creation-best-practices/
   tag: Blog
   text: Prácticas recomendadas para crear tests de extremo a extremo
+- link: https://www.datadoghq.com/blog/ambassador-browser-tests/
+  tag: Blog
+  text: Cómo ayudé a mi cliente a ampliar sus tests de navegador con Datadog
 title: Reutiliza los recorridos de tests del navegador en todo el conjunto de tests
 ---
 

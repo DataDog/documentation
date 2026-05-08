@@ -1,27 +1,26 @@
 ---
-title: Explorer des échantillons de requêtes
-description: Obtenir des informations sur les requêtes en cours d'exécution et identifier les singularités problématiques
+description: Obtenir des informations sur les requêtes en cours d'exécution et identifier
+  les singularités problématiques
 further_reading:
-  - link: /database_monitoring/
-    tag: Documentation
-    text: Database Monitoring
-  - link: /database_monitoring/data_collected/
-    tag: Documentation
-    text: Données collectées
-  - link: /database_monitoring/troubleshooting/
-    tag: Documentation
-    text: Dépannage
+- link: /database_monitoring/
+  tag: Documentation
+  text: Database Monitoring
+- link: /database_monitoring/data_collected/
+  tag: Documentation
+  text: Données collectées
+- link: /database_monitoring/troubleshooting/
+  tag: Documentation
+  text: Dépannage
+title: Explorer des échantillons de requêtes
 ---
 
-La vue Query Samples vous aide à identifier les requêtes qui s'exécutent à un instant donné. Comparez chaque exécution aux performances moyennes de la requête et des requêtes connexes.
+La [page Samples][1] vous aide à comprendre quelles requêtes s'exécutaient à un moment donné. Comparez chaque exécution aux performances moyennes de la requête et des requêtes associées.
 
-Pour accéder à la vue Query Samples depuis l'interface Database Monitoring, accédez à **[APM > Databases][1]**, puis sélectionnez l'onglet **Query Samples**.
+La page Samples affiche un instantané des requêtes en cours d'exécution et récemment terminées. Étant donné qu'il s'agit d'un instantané, elle ne représente pas nécessairement _toutes_ les requêtes, mais peut en indiquer les proportions.
 
-La page Query Samples affiche un snapshot ponctuel des requêtes en cours d'exécution et récemment terminées. Puisque ces données sont ponctuelles, le snapshot ne représente pas forcément _toutes_ les requêtes, mais peut vous donner une idée des proportions.
+## Rechercher et filtrer des événements
 
-## Rechercher et filtrer des requêtes
-
-La page Query Samples affiche les requêtes de l'ensemble des produits de gestion de bases de données pris en charge (contrairement à la page Query Metrics, où vous devez sélectionner une base de données à analyser). Filtrez la facette `source` pour visualiser des données pour une base de données spécifique (Postgres ou MySQL).
+La page Samples affiche les requêtes de tous les produits de base de données pris en charge (contrairement à la page Query Metrics, où vous sélectionnez la base de données à analyser). Filtrez sur la facette `source` pour afficher les données d'une base de données spécifique (Postgres ou MySQL).
 
 Dans le champ Search, saisissez les tags en fonction desquels filtrer la liste d'échantillons de requêtes. Vous pouvez également utiliser les facettes répertoriées sur la gauche. Les facettes suivantes sont disponibles :
 
@@ -64,13 +63,13 @@ Les graphiques affichent les métriques de performance d'une requête (nombre d'
 
 La section Explain Plan affiche des statistiques sur la durée et le coût de l'échantillon actif, _ainsi_ que les moyennes et le centile p90 de tous les snapshots recueillis au cours de l'intervalle.
 
-Le plan d'exécution propose également des mesures pour chaque nœud (étape) qui le constitue. Vous pouvez ainsi consulter le coût de lancement, le coût total, le nombre de lignes du plan et la largeur du plan. Passez le curseur sur l'en-tête d'une colonne pour afficher une description de chaque mesure.
+Le plan d'exécution affiche également des mesures pour chaque nœud (étape) du plan : le coût de démarrage, le coût total, le nombre de lignes du plan et la largeur du plan. Survolez l'en-tête de colonne pour afficher la description de chaque mesure.
 
 {{< img src="database_monitoring/dbm_sd_explain_plan.png" alt="Statistiques sur les échantillons avec plan d'exécution et métriques sur les étapes" style="width:100%;">}}
 
 ## Explorer d'autres visualisations
 
-Outre les échantillons de la liste par défaut, vous pouvez visualiser les données d'échantillons de requêtes sous forme de série temporelle, de top list ou de tableau en cliquant sur l'un des boutons **Visualize as**. Vous disposez ainsi de différentes visualisations pour analyser efficacement vos données. Par exemple, pour afficher les requêtes les plus lentes qui s'exécutent dans un datacenter, sélectionnez **Timeseries**, regroupez les données en fonction de `Statement` et représentez la durée moyenne :
+En plus de la vue liste par défaut, affichez les données des échantillons de requêtes sous forme de séries temporelles, de top lists ou de tableaux en cliquant sur l'un des boutons **Visualize as**. Cela peut révéler des façons efficaces d'analyser les données. Par exemple, pour afficher les requêtes les plus lentes s'exécutant dans un centre de données, sélectionnez **Timeseries**, regroupez par `Statement` et représentez graphiquement la durée moyenne :
 
 {{< img src="database_monitoring/dbm_qs_timeseries_viz.png" alt="Identifier les requêtes les plus lentes" style="width:100%;">}}
 
@@ -90,5 +89,5 @@ Pour accéder rapidement à des dashboards représentant des métriques d'infras
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/databases
+[1]: https://app.datadoghq.com/databases/samples
 [2]: /fr/database_monitoring/data_collected/#which-queries-are-tracked

@@ -7,22 +7,22 @@ further_reading:
   text: PHP 로그 수집, 사용자 지정, 분석 방법
 - link: /logs/log_configuration/processors
   tag: 설명서
-  text: 로그 처리하는 방법 배우기
+  text: 로그 처리 방법
 - link: /logs/log_configuration/parsing
   tag: 설명서
-  text: 파싱에 대해 배우기
+  text: 파싱에 대해 알아보기
 - link: /logs/explorer/
   tag: 설명서
   text: 로그 탐색 방법 알아보기
 - link: /logs/explorer/#visualize
   tag: 설명서
-  text: 로그 분석 실행하기
+  text: 로그를 남기다 분석 수행
 - link: /logs/faq/log-collection-troubleshooting-guide
   tag: 설명서
-  text: 로그 수집 트러블슈팅 가이드
+  text: 로그 수집 문제 해결 가이드
 - link: /glossary/#tail
   tag: 용어
-  text: '"tail"에 대한 용어 항목'
+  text: '"tail" 관련 용어 항목'
 title: PHP 로그 수집
 ---
 
@@ -435,7 +435,7 @@ monolog:
 {{% tab "Laravel" %}}
 
 <div class="alert alert-danger">
-<code>\DDTrace\current_context()</code> 함수는 <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> 버전에 도입되었습니다.
+<code>\DDTrace\current_context()</code> 기능이 <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> 버전에 도입되었습니다.
 </div>
 
 다음을 추가합니다.
@@ -533,7 +533,7 @@ class AppServiceProvider extends ServiceProvider
   return $app;
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## 참고 자료

@@ -7,6 +7,9 @@ further_reading:
 - link: "/agent/basic_agent_usage/heroku/"
   tag: "Documentation"
   text: "Datadog Heroku Buildpack"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Capturing SQL Query Parameter Values"
 ---
 
 This guide assumes that you have configured the [Datadog Heroku buildpack][1] in your application dynos.
@@ -27,7 +30,7 @@ heroku pg:credentials:create --name datadog
 heroku addons:attach <database-name> --credential datadog
 ```
 
-Attaching the new credential to the application creates a new environment variable in your application with the connection URL. Note that environment variable, as you will use it later.
+Attaching the new credential to the application creates a new environment variable in your application with the connection URL. Note the environment variable, as you will use it later.
 
 Login to your Postgres database using the default credentials and give the `datadog` credential the right permissions:
 
@@ -72,7 +75,7 @@ SECURITY DEFINER;
 
 ## Configuring the Postgres integration
 
-Next, configure the Datadog agent to enable the Postgres integration, using one of the following two options.
+Configure the Datadog Agent to enable the Postgres integration, using one of the following two options.
 
 **Option A**: Use a buildpack to create a static Postgres configuration that cannot be modified. In addition, Database Monitoring may be enabled through this method.
 
@@ -89,7 +92,7 @@ heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
 git commit --allow-empty -m "enabled postgres integration"
 git push heroku main
 ```
- 
+
 To enable both the Postgres integration and Database Monitoring, set `DD_ENABLE_HEROKU_POSTGRES` and `DD_ENABLE_DBM` to true:
 
 ``` shell
@@ -140,7 +143,7 @@ In the root of the project, create a directory for the Postgres configuration ca
 mkdir -p datadog/conf.d/postgres.d
 touch datadog/conf.d/postgres.d/conf.yaml
 ```
- 
+
 Add the following to `conf.yaml`:
 
 ``` yaml
@@ -217,4 +220,3 @@ The database connection is now configured. To enable additional features, such a
 [4]: https://devcenter.heroku.com/articles/heroku-postgres-plans
 [6]: /database_monitoring/schema_explorer
 [7]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
- 

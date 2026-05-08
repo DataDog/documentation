@@ -17,9 +17,11 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-status-page/"
   tag: "Blog"
   text: "Quickly get rich, actionable context for alerts with Datadog's new Monitor Status page"
----
+- link: "https://learn.datadoghq.com/courses/getting-started-monitors"
+  tag: "Learning Center"
+  text: "Getting Started with Monitors"
 
-<div class="alert alert-danger">The provisional status page has limited support for monitors and their features. For more details, see <a href="#restrictions-of-provisional-status-page">Restrictions of provisional status page</a>.<br><br>If you are using the legacy status page, see the <a href="/monitors/status/status_legacy">Status Page (Legacy)</a> documentation</div>
+---
 
 ## Overview
 
@@ -65,17 +67,6 @@ Use the template variables to scope down the monitor page to specific groups, se
 You can explore different product areas while maintaining the same alerting context, ensuring you view the same timeframe and service parameters as on your monitor's status page. Use Event details to troubleshoot if the monitor is alerting due to recent configuration changes. You can take the query to other product areas to troubleshoot and cross reference without losing context.
 
 For more information, see the [Monitor status events][3] documentation.
-
-## Restrictions of provisional status page
-
-### Limited support for monitor types
-
-The following monitor types are not supported by the provisional status page:
-
-- Anomaly
-- Database Monitoring
-- Forecast
-- Outlier
 
 ## Further reading
 

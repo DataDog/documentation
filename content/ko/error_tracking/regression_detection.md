@@ -32,7 +32,7 @@ title: 회귀 감지
 ## 문제 기록
 **Activity Timeline**에서 문제 활동 기록을 확인할 수 있습니다. Error Tracking 문제의 상세 정보 패널에서 **Activity** 탭을 클릭해 Activity Timeline을 확인할 수 있습니다.
 
-{{< img src="error_tracking/issue-status-history.png" alt="Error Tracking Issue의 Activity Timeline" style="width:80%;" >}}
+{{< img src="error_tracking/issue-status-history-3.png" alt="Error Tracking Issue의 Activity Timeline" style="width:80%;" >}}
 
 ## 참고 자료
 

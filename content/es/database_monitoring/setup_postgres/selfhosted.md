@@ -4,6 +4,9 @@ further_reading:
 - link: /integrations/postgres/
   tag: Documentación
   text: Integración Postgres básica
+- link: /database_monitoring/guide/parameterized_queries/
+  tag: Documentación
+  text: Captura de valores de parámetros de consulta SQL
 title: Configuración de Database Monitoring para Postgres autoalojado
 ---
 
@@ -17,14 +20,14 @@ El Agent recopila telemetría directamente de la base de datos iniciando sesión
 
 ## Antes de empezar
 
-Versiones de PostgreSQL compatibles
-: 9.6, 10, 11, 12, 13, 14, 15, 16
+Versiones PostgreSQL soportadas
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17
 
 Requisitos previos
 : Los módulos de Postgres adicionales proporcionados deben estar instalados. En la mayoría de las instalaciones, esto se incluye por defecto, pero las instalaciones menos convencionales pueden requerir una instalación adicional de tu versión del [paquete `postgresql-contrib`][1].
 
 Versiones del Agent compatibles
-: v7.36.1 o posterior
+: 7.36.1 o posteriores
 
 Impacto en el rendimiento
 : La configuración de Database Monitoring predeterminada del Agent es conservadora, pero puedes ajustar algunos parámetros como el intervalo de recopilación y la frecuencia de muestreo de consultas según tus necesidades. Para la mayoría de las cargas de trabajo, el Agent representa menos del uno por ciento del tiempo de ejecución de la consulta en la base de datos y menos del uno por ciento del uso de CPU. <br/><br/>
@@ -49,7 +52,7 @@ Configura los siguientes [parámetros][4] en el archivo `postgresql.conf` y lueg
 | `pg_stat_statements.track_utility` | `off` | Opcional. Deshabilita comandos de utilidad como PREPARE y EXPLAIN. Configurar este valor en `off` significa que sólo se rastrearán consultas como SELECT, UPDATE y DELETE. |
 | `track_io_timing` | `on` | Opcional. Habilita la recopilación de los tiempos de lectura y escritura de bloques para las consultas. |
 
-## Conceder acceso al Agent 
+## Conceder acceso al Agent
 
 El Datadog Agent requiere acceso de sólo lectura al servidor de la base de datos para recopilar estadísticas y consultas.
 
@@ -132,7 +135,7 @@ SECURITY DEFINER;
 
 <div class="alert alert-info">Para la recopilación de datos o métricas personalizadas que requieren consultar tablas adicionales, es posible que tengas que conceder el permiso <code>SELECT</code> en esas tablas al usuario <code>Datadog</code>. Ejemplo: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. Para obtener más información, consulta <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">Recopilación de métricas personalizadas de PostgreSQL</a>. </div>
 
-Crea la función **en cada base de datos** para permitir al Agent recopilar explain-plans.
+Crea la función **en cada base de datos** para permitir al Agent recopilar planes de explicación.
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
@@ -146,6 +149,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -157,7 +162,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### Guardar tu contraseña de forma segura
+### Guarda tu contraseña de forma segura
 {{% dbm-secret %}}
 
 ### Verificación
@@ -205,320 +210,40 @@ psql -h localhost -U datadog postgres -A \
 
 Cuando se te pida una contraseña, utiliza la que introdujiste al crear el usuario `datadog`.
 
-## Instalación del Agent
+## Instalar el Agent
 
-Al instalar el Datadog Agent también se instala el check de Postgres, necesario para Database Monitoring en Postgres.
+Al instalar el Datadog Agent también se instala el check Postgres, necesario para Database Monitoring en Postgres.
+Si aún no has instalado el Agent, consulta las [instrucciones de instalación del Agent][8], y luego regresa aquí para continuar con las instrucciones de tu método de instalación.
 
-1. Si aún no has instalado el Agent, consulta las [instrucciones de instalación del Agent][8] y luego regresa aquí para configurar el check de Postgres.
+Edita el archivo `conf.d/postgres.d/conf.yaml` del Agent para apuntar a la instancia Postgres que quieres monitorizar. Para ver una lista completa de las opciones de configuración, consulta el [ejemplo postgres.d/conf.yaml][9].
 
-2. Sigue las siguientes instrucciones, dependiendo de cómo hayas instalado el Agent.
+```yaml
+init_config:
+instances:
+ - dbm: true
+   host: localhost
+   port: 5432
+   username: datadog
+   password: 'ENC[datadog_user_database_password]'
 
-<!-- Opciones de despliegue -->
-{{< tabs >}}
-
-{{% tab "Host" %}}
-
-Después de instalar el Agent host, edita el archivo `conf.d/postgres.d/conf.yaml` del Agent para indicar la instancia de Postgres que quieres monitorizar. Para ver una lista completa de las opciones de configuración, consulta el [ejemplo postgres.d/conf.yaml][1].
-
-   ```yaml
-   init_config:
-   instances:
-     - dbm: true
-       host: localhost
-       port: 5432
-       username: datadog
-       password: 'ENC[datadog_user_database_password]'
-
-      ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
-      # pg_stat_statements_view: datadog.pg_stat_statements()
-      # pg_stat_activity_view: datadog.pg_stat_activity()
-
-      ## Optional: Connect to a different database if needed for `custom_queries`
-      # dbname: '<DB_NAME>'
-
-   ```
+  ## Optional: Connect to a different database if needed for `custom_queries`
+  # dbname: '<DB_NAME>'
+```
 
 **Nota**: Si su contraseña incluye caracteres especiales, enciérrala entre comillas simples.
 
-[Reinicia el Agent][2] para aplicar los cambios.
-
-[1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[2]: /es/agent/configuration/agent-commands/#restart-the-agent
-
-{{% /tab %}}
-
-{{% tab "Docker" %}}
-
-Para configurar una integración para un Agent que se ejecuta en un contenedor Docker, hay algunos métodos disponibles que se cubren en detalle en la [documentación de configuración de Docker][1].
-
-Los siguientes ejemplos muestran cómo utilizar [etiquetas (labels) de Docker][2] y [plantillas de Autodiscovery][3] para configurar la integración Postgres.
-
-**Nota**: El Agent debe tener acceso de lectura al socket Docker para que funcione el Autodiscovery basado en etiquetas.
-
-### Línea de comandos
-
-Ejecuta el siguiente comando desde tu [línea de comandos][4] para iniciar el Agent. Sustituye los valores de los marcadores de posición por los de tu cuenta y entorno.
-
-```bash
-export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=<AGENT_VERSION>
-
-docker run -e "DD_API_KEY=${DD_API_KEY}" \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -l com.datadoghq.ad.checks='{"postgres": {
-    "init_config": {},
-    "instances": [{
-      "dbm": true,
-      "host": "<HOST>",
-      "port": 5432,
-      "username": "datadog",
-      "password": "ENC[datadog_user_database_password]"
-    }]
-  }}' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
-```
-
-**Nota**: Para Postgres v9.6, añade las siguientes líneas a la configuración de la instancia:
-
-```json
-"pg_stat_statements_view": "datadog.pg_stat_statements()",
-"pg_stat_activity_view": "datadog.pg_stat_activity()",
-```
-
-### Archivo Docker
-
-También puedes especificar etiquetas en `Dockerfile`, lo que te permite crear y desplegar un Agent personalizado sin modificar la configuración de tu infraestructura:
-
-```Dockerfile
-FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
-
-LABEL "com.datadoghq.ad.checks"='{"postgres": {"init_config": {}, "instances": [{"dbm": true, "host": "<HOST>", "port": 5432, "username": "datadog", "password": "ENC[datadog_user_database_password]"}]}}'
-```
-
-**Nota**: Para Postgres v9.6, añade las siguientes líneas a la configuración de la instancia donde se especifican el host y el puerto:
-
-```json
-"pg_stat_statements_view": "datadog.pg_stat_statements()", "pg_stat_activity_view": "datadog.pg_stat_activity()",
-```
-
-Para evitar exponer la contraseña del usuario `datadog` en texto plano, utiliza el [paquete de gestión de secretos][5] del Agent y declara la contraseña utilizando la sintaxis `ENC[]`. Alternativamente, consulta la [documentación de variables de plantilla de Autodiscovery][6] para proporcionar la contraseña como una variable de entorno.
-
-[1]: /es/containers/docker/integrations/?tab=labels#configuration
-[2]: https://docs.docker.com/engine/manage-resources/labels/
-[3]: /es/getting_started/containers/autodiscovery/
-[4]: /es/containers/docker/integrations/?tab=labels#using-docker-run-nerdctl-run-or-podman-run
-[5]: /es/agent/configuration/secrets-management
-[6]: /es/agent/faq/template_variables/
-
-{{% /tab %}}
-
-{{% tab "Kubernetes" %}}
-
-Si estás ejecutando el clúster de Kubernetes, utiliza el [Datadog Cluster Agent][1] para activar Database Monitoring.
-
-**Nota**: Asegúrate de que los [checks de clúster][2] estén activados para tu Datadog Cluster Agent antes de continuar.
-
-A continuación encontrarás instrucciones paso a paso para configurar la integración Postgres utilizando diferentes métodos de despliegue del Datadog Cluster Agent.
-
-### Operator
-
-Utilizando como referencia las [Instrucciones del Operator en Kubernetes e integraciones][3], sigue los pasos que se indican a continuación para configurar la integración Postgres:
-
-1. Crea o actualiza el archivo `datadog-agent.yaml` con la siguiente configuración:
-
-    ```yaml
-    apiVersion: datadoghq.com/v2alpha1
-    kind: DatadogAgent
-    metadata:
-      name: datadog
-    spec:
-      global:
-        clusterName: <CLUSTER_NAME>
-        site: <DD_SITE>
-        credentials:
-          apiSecret:
-            secretName: datadog-agent-secret
-            keyName: api-key
-
-      features:
-        clusterChecks:
-          enabled: true
-
-      override:
-        nodeAgent:
-          image:
-            name: agent
-            tag: 7.63.3
-
-        clusterAgent:
-          extraConfd:
-            configDataMap:
-              postgres.yaml: |-
-                cluster_check: true
-                init_config:
-                instances:
-                - host: <HOST>
-                  port: 5432
-                  username: datadog
-                  password: 'ENC[datadog_user_database_password]'
-                  dbm: true
-    ```
-
-    **Nota**: Para Postgres v9.6, añade las siguientes líneas a la configuración de la instancia donde se especifican el host y el puerto:
-
-    ```yaml
-    pg_stat_statements_view: datadog.pg_stat_statements()
-    pg_stat_activity_view: datadog.pg_stat_activity()
-    ```
-
-2. Aplica los cambios al Datadog Operator utilizando el siguiente comando:
-
-    ```shell
-    kubectl apply -f datadog-agent.yaml
-    ```
-
-### Helm
-
-Utilizando como referencia las [instrucciones de Helm en Kubernetes e integraciones][4], sigue los pasos que se indican a continuación para configurar la integración Postgres:
-
-1. Actualiza tu archivo `datadog-values.yaml` (utilizado en las instrucciones de instalación del Cluster Agent) con la siguiente configuración:
-
-    ```yaml
-    datadog:
-      clusterChecks:
-        enabled: true
-
-    clusterChecksRunner:
-      enabled: true
-
-    clusterAgent:
-      enabled: true
-      confd:
-        postgres.yaml: |-
-          cluster_check: true
-          init_config:
-          instances:
-          - dbm: true
-            host: <HOST>
-            port: 5432
-            username: datadog
-            password: 'ENC[datadog_user_database_password]'
-
-    ```
-
-    **Nota**: Para Postgres v9.6, añade las siguientes líneas a la configuración de la instancia donde se especifican el host y el puerto:
-
-    ```yaml
-    pg_stat_statements_view: datadog.pg_stat_statements()
-    pg_stat_activity_view: datadog.pg_stat_activity()
-    ```
-
-2. Despliega el Agent con el archivo de configuración anterior utilizando el siguiente comando:
-
-    ```shell
-    helm install datadog-agent -f datadog-values.yaml datadog/datadog
-    ```
-
-<div class="alert alert-info">
-For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
-</div>
-
-### Configuración con archivos integrados
-
-Para configurar un check de clúster con un archivo de configuración montado, monta el archivo de configuración en el contenedor del Cluster Agent en la ruta: `/conf.d/postgres.yaml`:
-
-```yaml
-cluster_check: true  # Make sure to include this flag
-init_config:
-instances:
-  - dbm: true
-    host: '<HOST>'
-    port: 5432
-    username: datadog
-    password: 'ENC[datadog_user_database_password]'
-
-    ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
-    # pg_stat_statements_view: datadog.pg_stat_statements()
-    # pg_stat_activity_view: datadog.pg_stat_activity()
-```
-
-### Configuración con anotaciones de servicios de Kubernetes
-
-En lugar de montar un archivo, puedes declarar la configuración de la instancia como un servicio de Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio en el mismo espacio de nombres que el Datadog Cluster Agent:
-
-#### Anotaciones de Autodiscovery v2
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres
-  labels:
-    tags.datadoghq.com/env: '<ENV>'
-    tags.datadoghq.com/service: '<SERVICE>'
-  annotations:
-    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
-      {
-        "postgres": {
-          "init_config": <INIT_CONFIG>,
-          "instances": [
-            {
-              "dbm": true,
-              "host": "<HOST>",
-              "port": 5432,
-              "username": "datadog",
-              "password": "ENC[datadog_user_database_password]"
-            }
-          ]
-        }
-      }      
-spec:
-  ports:
-  - port: 5432
-    protocol: TCP
-    targetPort: 5432
-    name: postgres
-```
-
-Para obtener más información, consulta [Anotaciones de Autodiscovery][5].
-
-Si utilizas Postgres v9.6, añade lo siguiente a la configuración de la instancia:
-
-```json
-"pg_stat_statements_view": "datadog.pg_stat_statements()",
-"pg_stat_activity_view": "datadog.pg_stat_activity()"
-```
-
-El Cluster Agent registra automáticamente esta configuración y comienza a ejecutar el check de Postgres.
-
-Para evitar exponer la contraseña del usuario `datadog` en texto simple, utiliza el [paquete de gestión de secretos][6] del Agent y declara la contraseña utilizando la sintaxis `ENC[]`.
-
-[1]: /es/containers/cluster_agent/setup/
-[2]: /es/containers/cluster_agent/clusterchecks/
-[3]: /es/containers/kubernetes/integrations/?tab=datadogoperator
-[4]: /es/containers/kubernetes/integrations/?tab=helm
-[5]: /es/containers/kubernetes/integrations/?tab=annotations#configuration
-[6]: /es/agent/configuration/secrets-management
-
-
-{{% /tab %}}
-
-{{< /tabs >}}
+[Reinicia el Agent][16] para aplicar los cambios.
 
 ### Recopilación de logs (opcional)
 
 La generación de logs por defecto de PostgreSQL es en `stderr`. Estos logs no incluyen información detallada. Se recomienda hacerlo en un archivo con detalles adicionales especificados en el prefijo de la línea de logs. Para obtener más detalles, consulta la [documentación][11] de PostgreSQL sobre este tema.
 
-1. La generación de logs se configura en el archivo `/etc/postgresql/<VERSION>/main/postgresql.conf`. Para obtener resultados regulares en logs, incluidos los resultados de sentencias, descomenta los siguientes parámetros en la sección de logs:
+1. La generación de logs está configurada en el archivo `/etc/postgresql/<VERSION>/main/postgresql.conf`. Para obtener resultados regulares de logs, incluidos los resultados de sentencias, configura los siguientes parámetros en la sección de logs:
    ```conf
      logging_collector = on
-     log_directory = 'pg_log'  # directory where log files are written,
-                               # can be absolute or relative to PGDATA
-     log_filename = 'pg.log'   # log file name, can include pattern
-     log_statement = 'all'     # log all queries
-     #log_duration = on
-     log_line_prefix= '%m [%p] %d %a %u %h %c '
+     log_line_prefix = '%m [%p] %d %a %u %h %c ' # this pattern is required to correlate metrics in the Datadog product
      log_file_mode = 0644
+
      ## For Windows
      #log_destination = 'eventlog'
    ```
@@ -533,7 +258,7 @@ La generación de logs por defecto de PostgreSQL es en `stderr`. Estos logs no i
      #log_statement = 'all'
      #log_duration = on
    ```
-3. La recopilación de logs está deshabilitada por defecto en el Datadog Agent; habilítala en tu archivo `datadog.yaml`:
+3. La recopilación de logs está desactivada por omisión en el Datadog Agent, actívala en tu archivo `datadog.yaml`:
    ```yaml
    logs_enabled: true
    ```
@@ -568,9 +293,7 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: https://www.postgresql.org/docs/12/contrib.html
-
+[1]: https://www.postgresql.org/docs/current/contrib.html
 [2]: /es/database_monitoring/agent_integration_overhead/?tab=postgres
 [3]: /es/database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
@@ -585,3 +308,4 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 [13]: /es/agent/configuration/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
 [15]: /es/database_monitoring/troubleshooting/?tab=postgres
+[16]: /es/agent/configuration/agent-commands/#restart-the-agent

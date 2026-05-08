@@ -1,4 +1,6 @@
 ---
+description: Surveillez des appareils IoT et des applications intégrées grâce à l'Agent
+  IoT Datadog, qui est optimisé pour les environnements à ressources limitées.
 further_reading:
 - link: /getting_started/agent/
   tag: Documentation
@@ -25,7 +27,7 @@ L'Agent IoT prend également en charge les fonctionnalités suivantes :
 - La collecte de métriques custom via un serveur [DogStatsD][6] intégré
 - La collecte de logs via le [suivi de fichiers][7], [TCP/UDP][8] et [journald][9]
 
-L'Agent IoT n'inclut pas l'interpréteur Python ni d'autres intégrations packagées avec la version standard de l'Agent. Il ne prend pas non plus en charge le tracing d'APM, la surveillance des live processes ou la surveillance des performances réseau.
+L'Agent IoT n'inclut pas l'interpréteur Python ni d'autres intégrations incluses avec la version standard de l'Agent. Il ne prend pas non plus en charge le tracing d'APM, la surveillance des live processes ou Cloud Network Monitoring.
 
 ## Configuration
 
@@ -51,10 +53,10 @@ Les besoins exacts en ressources dépendent de l'utilisation faite de l'Agent Io
 Pour télécharger et installer automatiquement l'Agent IoT adapté à votre système d'exploitation et à l'architecture de votre chipset, utilisez la commande suivante :
 
 ```shell
-DD_API_KEY=<VOTRE_CLÉ_API_DATADOG> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-#### Méthode manuelle
+#### Configuration manuelle
 
 {{< tabs >}}
 {{% tab "DEB" %}}
@@ -98,7 +100,7 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
 
 6. Définissez votre site Datadog sur {{< region-param key="dd_site" code="true" >}}. Valeur par défaut : `datadoghq.com`.
     ```shell
-    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
+    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
     ```
 
 7. Démarrez l'Agent IoT :
@@ -128,7 +130,7 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
 
     **Remarque** : en raison d'un [bug dans dnf][1], utilisez `repo_gpgcheck=0` au lieu de `repo_gpgcheck=1` pour RHEL/CentOS 8.1.
 
-   `baseurl` dépend du système d'exploitation de votre host :
+    `baseurl` dépend du système d'exploitation de votre host :
     - x86_64 : `https://yum.datadoghq.com/stable/7/x86_64/`
     - arm64 : `https://yum.datadoghq.com/stable/7/aarch64/`
     - ARMv7 : `https://yum.datadoghq.com/stable/7/armv7hl/`
@@ -146,7 +148,7 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
 
 4. Définissez votre site Datadog sur {{< region-param key="dd_site" code="true" >}}. Valeur par défaut : `datadoghq.com`.
     ```shell
-    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
+    sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
     ```
 
 5. Démarrez l'Agent IoT :
@@ -162,7 +164,7 @@ Pour installer manuellement l'Agent IoT sur les systèmes d'exploitation basés 
 
 L'Agent IoT prend en charge les mêmes [commandes CLI][10] que l'Agent standard.
 
-## Désinstaller
+## Désinstallation
 
 ```shell
 sudo apt-get remove datadog-iot-agent -y

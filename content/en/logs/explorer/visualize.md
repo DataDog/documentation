@@ -13,6 +13,10 @@ further_reading:
     - link: '/logs/explorer/export'
       tag: 'Documentation'
       text: 'Export views from the Log Explorer'
+    - link: "https://learn.datadoghq.com/courses/log-queries-aggregations"
+      tag: "Learning Center"
+      text: "Dive Deeper into Log Queries and Aggregations"
+
 ---
 
 ## Overview
@@ -32,9 +36,9 @@ For a list of individual logs, choose which information of interest to display a
 - The **table**, with interactions available in the first row. This is the preferred method to **sort**, **rearrange**, or **remove** columns.
 - The **facet panel** on the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
 
-With the **Options** button, control the **number of lines** displayed in the table per log.
+With the **Options** button, control the Content Height and Content Display in the table per log.
 
-{{< img src="logs/explorer/table_controls.mp4" alt="Configuring the display table" video=true style="width:80%;">}}
+{{< img src="logs/explorer/list_view_controls.mp4" alt="Configuring columns and display options" video=true style="width:80%;">}}
 
 The default **sort** for logs in the list visualization is by timestamp, with the most recent logs on top. This is the fastest and therefore recommended sorting method for general purposes. Surface logs with lowest or highest value for a measure first, or sort your logs lexicographically for the unique value of facet, ordering a column according to that facet.
 
@@ -97,6 +101,8 @@ A tree map helps you organize and show data as a percentage of a whole in a visu
 The following tree map shows the percentage breakdown by **service**.
 
 {{< img src="logs/explorer/doc_tree_map.png" alt="Tree map example showing percentage breakdown by service" style="width:90%;">}}
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

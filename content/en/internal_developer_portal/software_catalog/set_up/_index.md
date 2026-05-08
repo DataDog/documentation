@@ -50,6 +50,10 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/service-ownership-best-practices-datadog/"
     tag: "Blog"
     text: "Best practices for end-to-end service ownership with Datadog Service Catalog"
+  - link: "https://learn.datadoghq.com/courses/managing-software-catalog"
+    tag: "Learning Center"
+    text: "Managing Services with the Software Catalog"
+
 ---
 
 ## Overview
@@ -72,7 +76,7 @@ By default, Software Catalog is automatically populated with entries discovered 
 
 ### APM
 
-When you instrument your application code with Datadog APM SDKs or OpenTelemetry, your applications emit traces and generate unsampled trace metrics. These traces and metrics power the entity discovery and dependency mapping capabilities in IDP. Your instrumentation choices (for example, your Datadog Agent version, your SDK version, and whether you use custom instrumentation or service overrides) affect the quality and accuracy of your dependency maps. See [Discover from APM, USM, and RUM][5] for details.
+When you instrument your application code with Datadog SDKs or OpenTelemetry, your applications emit traces and generate unsampled trace metrics. These traces and metrics power the entity discovery and dependency mapping capabilities in IDP. Your instrumentation choices (for example, your Datadog Agent version, your SDK version, and whether you use custom instrumentation or service overrides) affect the quality and accuracy of your dependency maps. See [Discover from APM, USM, and RUM][5] for details.
 
 ### USM
 
@@ -122,6 +126,10 @@ You can bring your Backstage entities into Datadog's IDP in one of two ways:
 
 Sync your ServiceNow CMDB inventories with Datadog's Software Catalog by setting up a regular query against your ServiceNow CI tables.
 
+## Define entity ownership
+
+Link entities to teams to enable team-based filtering across Datadog products, route notifications to the right owners, and drive accountability through Scorecards and Campaigns. For details, see [Define ownership for Software Catalog entities][12].
+
 ## Verify configuration completeness 
 
 Following monitoring best practices such as tracing, logging, and code profiling helps you ensure that you have all the data you need during incident triage. Software Catalog provides automatic checks for these recommended setups. 
@@ -132,7 +140,7 @@ To view the configuration completeness for an entity, click the entity in the [S
 
 The Setup Guidance table does not necessarily reflect billing for individual products, but rather activity for the entity you are presently examining. For example, if the service does not emit infrastructure metrics for a long time, `Infrastructure Monitoring` might have `Not Detected` specified, even if you have hosts or containers running infrastructure monitoring. 
 
-## Role based access and permissions
+## Configure role based access and permissions
 
 For general information, see [Role Based Access Control][3] and [Role Permissions][4].
 
@@ -170,6 +178,7 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [9]: /internal_developer_portal/software_catalog/entity_model?tab=v30
 [10]: https://app.datadoghq.com/software/settings/get-started
 [11]: https://www.npmjs.com/package/@datadog/backstage-plugin-datadog-entity-sync-backend
+[12]: /internal_developer_portal/software_catalog/set_up/ownership
 
 
 

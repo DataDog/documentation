@@ -33,7 +33,6 @@ The Watchdog Insights carousel sits near the top of the following product pages:
 
 - [Log explorer][1]
 - APM:
-    - [Trace Explorer][2]
     - [Service Page][3]
     - [Resource Page][4]
     - [Database Explorer][5]
@@ -109,10 +108,19 @@ In the full side panel view, you can see:
 {{% /tab %}}
 {{% tab "APM" %}}
 
-APM outliers are available on all APM pages where the Watchdog Insights carousel is available:
+APM outliers are available on the following pages:
  - [Trace Explorer](/tracing/trace_explorer/?tab=listview)
  - [Service Page](/tracing/services/service_page/)
  - [Resource Page](/tracing/services/resource_page/)
+
+In the Trace Explorer, APM outliers are integrated directly through Tag Analysis, enhancing your investigation workflow:
+
+- **Highlighting relevant action**: The "Analyze" button in RED metrics is highlighted when Watchdog detects significant outliers
+- **Providing search suggestions**: Outlier tags appear as suggestions in the search bar with indicators for error or latency correlation
+- **Prioritizing facets**: Outlier tags are promoted to an "OUTLIERS" section at the top of the facets sidebar
+
+
+{{< img src="tracing/trace_explorer/visualize/trace_explorer_outliers.mp4" alt="Analyzing anomalies with integrated insights" video="true" >}}
 
 ### Error outliers
 
@@ -249,8 +257,8 @@ In the full side panel, you can see a timeseries graph about the performance met
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
 [1]: /real_user_monitoring/explorer/search/#facets
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
+[2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[3]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 {{% /tab %}}
 {{% tab "Synthetic Monitoring" %}}
 

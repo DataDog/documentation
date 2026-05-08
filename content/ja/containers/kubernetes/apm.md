@@ -41,7 +41,7 @@ title: Kubernetes APM - トレース収集
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-`datadog-agent.yaml` を編集して `features.liveProcessCollection.enabled` を `true` に設定します。
+`datadog-agent.yaml` を編集して `features.apm.enabled` を `true` に設定します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1

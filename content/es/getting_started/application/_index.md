@@ -1,165 +1,177 @@
 ---
+description: Información general de la navegación por la interfaz de usuario de Datadog,
+  características clave como dashboards, monitores, integraciones y capacidades básicas
+  de la plataforma.
 further_reading:
-- link: https://learn.datadoghq.com/courses/dd-101-dev
+- link: https://learn.datadoghq.com/bundles/frontend-engineer-learning-path
   tag: Centro de aprendizaje
-  text: 'Datadog 101: desarrollador'
-- link: https://learn.datadoghq.com/courses/dd-101-sre
+  text: Ruta de aprendizaje del ingeniero de frontend
+- link: https://learn.datadoghq.com/bundles/backend-engineer-learning-path
   tag: Centro de aprendizaje
-  text: 'Datadog 101: ingeniero de confiabilidad de sitios'
+  text: Trayectoria de aprendizaje del ingeniero de backend
+- link: https://learn.datadoghq.com/bundles/site-reliability-engineer-learning-path
+  tag: Centro de aprendizaje
+  text: Ruta de aprendizaje del ingeniero de fiabilidad del sitio
 - link: https://dtdg.co/fe
-  tag: Habilitar los fundamentos
+  tag: Habilitación de los fundamentos
   text: Participa en una sesión interactiva para construir una base sólida de Datadog
 - link: https://www.datadoghq.com/blog/datadog-quick-nav-menu/
   tag: Blog
   text: Introducción al menú de navegación rápida de Datadog
-- link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
-  tag: Blog
-  text: DRUIDS, el sistema de diseño que impulsa a Datadog
 title: Empezando en Datadog
 ---
 
-{{< learning-center-callout header="Prueba Datadog Foundation en el Centro de aprendizaje" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/datadog-foundation">}}
-Aprende sin coste alguno con capacidad real de computación en la nube y una cuenta de prueba de Datadog. Inicia estos laboratorios prácticos para ponerte al día con servicios, logs, métricas, integraciones, y dashboards.
+{{< learning-center-callout header="Prueba Datadog Core Skills en el centro de aprendizaje" btn_title="Inscríbete ahora" btn_url="https://learn.datadoghq.com/bundles/core-skills-learning-path">}}
+  Aprende sin coste alguno con capacidad real de computación en la nube y una cuenta de prueba de Datadog. Inicia estos laboratorios prácticos para ponerte al día con el etiquetado, las métricas, los monitores y los dashboards.
 {{< /learning-center-callout >}}
 
 ## Información general
 
 Esta página ofrece información general de alto nivel sobre las funciones disponibles en el [sitio de Datadog][1].
 
-La experiencia de navegación en el sitio de Datadog varía en función del ancho que tenga tu navegador. Hay hasta tres tipos de navegación disponibles y, para cambiar de uno a otro, es necesario que ajustes el ancho de tu navegador.
+<div class="alert alert-info">
+  La navegación del sitio de Datadog varía según el ancho de tu navegador. Puedes tener hasta tres tipos de navegación. Para cambiar el tipo de navegación, ajusta el ancho de tu navegador.
+  <br><br>
+  Puedes presionar <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> para buscar páginas y entidades, como dashboards y monitores, en todo Datadog.
+</div>
 
-**Consejo**: Puedes pulsar <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> para buscar páginas y entidades, como dashboards y monitores, a través de Datadog.
+## infraestructura
 
-## Integraciones
+La [lista de infraestructura][2] sirve como vista central de todos tus recursos de infraestructura (hosts, contenedores, procesos, etc.) y sus metadatos asociados. 
 
-{{< img src="getting_started/application/integrations-2024.png" alt="Integraciones" >}}
+**Capacidades clave:**
 
-- Datadog tiene más de {{< translate key="integration_count" >}} integraciones [oficiales][2].
-- Las integraciones personalizadas están disponibles a través de la [API de Datadog][3].
-- El Agent es de [código abierto][4].
-- Una vez que se hayan configurado las integraciones, Datadog tratará todos los datos de la misma manera, independientemente de si están en un centro de datos o en un servicio en línea.
+- Investiga el rendimiento de las infraestructuras.
+- Ordena, filtra y visualiza hosts en función de etiquetas y métricas.
+- Inspecciona los hosts para revisar sus etiquetas, rendimiento, estado, etc.
 
-## Dashboards
+Ve a [**Infrastructure > Hosts**][3] (Infraestructura > Hosts) en la aplicación para empezar. Para obtener más información, lee la [documentación de la Lista de infraestructuras][2].
 
-Los [dashboards][12] contienen gráficos con métricas de rendimiento en tiempo real.
+## Mapas de hosts y contenedores
 
-- El cursor se mueve de forma sincronizada por todos los gráficos de un [screenboard][13].
-- Las barras verticales son eventos. Sirven para aportar contexto a la métrica.
-- Haz clic en un gráfico y arrástralo para ampliar un intervalo de tiempo determinado.
-- Cuando pases el cursor sobre el gráfico, el flujo (stream) de eventos se moverá al mismo tiempo.
-- Vistas disponibles por zona, host o uso total.
-- Datadog expone un editor JSON para el gráfico, con el que se pueden someter las métricas a [cálculos aritméticos][14] y [funciones][15].
-- Puedes compartir un snapshot del gráfico que aparezca en el flujo.
-- Los gráficos pueden estar integrados en un iframe. Si se da el caso, puedes permitir que un tercero acceda a un gráfico en tiempo real sin necesidad de darle acceso a tus datos ni a ningún otro tipo de información.
+{{< img src="getting_started/application/host_map_2025.png" alt="Información general del mapa de hosts agrupada por zona de disponibilidad." >}}
 
-## Monitores
+Los [mapas de hosts y contenedores][4] te ofrecen una visión general de todos tus hosts y contenedores, codificados por colores según métricas clave como el uso de la CPU, para que puedas detectar los problemas.
 
-Los [monitores][16] envían alertas y notificaciones en función de los umbrales de métrica, la disponibilidad para la integración, los endpoints de la red, entre otros aspectos.
+**Capacidades clave**:
 
-- Utiliza cualquier métrica que envíe información a Datadog
-- Configura varias alertas por dispositivo, host, etc.
-- Utiliza `@` en los mensajes de alerta para dirigir las notificaciones a las personas adecuadas
-- Programa tiempos de inactividad para suprimir las notificaciones por cierre del sistema, mantenimiento sin conexión, etc.
+- Ve toda tu infraestructura a la vez en un mapa visual.
+- Codifica por colores según diversas métricas para detectar problemas de rendimiento, y filtra y agrupa por etiquetas y metadatos.
+- Analiza en detalle hosts o contenedores individuales para solucionar problemas.
 
-## Eventos
+Ve a [**Infrastructure > Host Map**][5] (Infraestructura > Mapa de hosts) en la aplicación para empezar. Para obtener más información, lee la [documentación de Mapas de hosts y contenedores][4].
 
-El [Event Explorer][10] muestra los últimos eventos generados por tus servicios e infraestructura.
+## Gestión de Logs
 
-Entre los diferentes tipos de eventos, se pueden citar los siguientes:
+[Datadog Log Management][6] te permite enviar y procesar cada log producido por tus aplicaciones e infraestructura. Puedes observar tus logs en tiempo real utilizando [Live Tail][7], sin indexarlos.
 
-- Implementaciones de código
-- Cambios en el estado de un servicio
-- Cambios en la configuración
-- Alertas de monitorización
+**Capacidades clave**:
 
-El Event Explorer agrupa los eventos automáticamente en función del Agent y de las integraciones instaladas.
+- Recopila automáticamente logs de todos los servicios, aplicaciones y plataformas.
+- Ve y busca logs en tiempo real y filtra por elementos como servicio, host y tipo de error.
+- Elige qué logs conservar y durante cuánto tiempo, reduciendo así los costes de almacenamiento.
 
-También puedes enviar tus propios eventos personalizados usando la API de Datadog, los checks de Agent personalizados, DogStatsD o la API de correo electrónico de los eventos. 
+Navega hasta [Logs][8] en la aplicación para empezar. Para obtener más información, consulta la [documentación de Log Management][6].
 
-En el Event Explorer, filtra tus eventos por facetas o por consultas de búsqueda. Agrupa o filtra los eventos por atributo y represéntalos gráficamente con [Event Analytics][11].
+## APM
 
-## Infraestructura
+[Datadog Application Performance Monitoring][9] (APM o rastreo) te proporciona una visión profunda del rendimiento de tu aplicación junto con tus logs y la monitorización de la infraestructura.
 
-- La [lista de la infraestructura][7] muestra todas las máquinas.
-- Puedes ver las etiquetas (tags) que tiene cada máquina. El etiquetado te permite indicar qué máquinas tienen un objetivo concreto.
-- Datadog trata de clasificar tus servidores automáticamente. Si se etiqueta una máquina nueva, verás de inmediato que las estadísticas de esa máquina variarán en función de cómo se haya configurado previamente esa etiqueta. [Más información sobre el etiquetado][8].
+**Capacidades clave**:
 
-## Host map (Mapa del host)
+- Rastrea las solicitudes a una aplicación de extremo a extremo a través de un sistema distribuido.
+- Ve los cuellos de botella de rendimiento visualizando el tiempo empleado en cada paso de la solicitud.
+- Visualiza las dependencias de los servicios y los flujos de datos con el mapa de servicios.
+- Correlaciona las trazas con los correspondientes logs, métricas y sesiones de usuario para obtener un contexto completo.
 
-{{< img src="getting_started/application/host_map_2024.png" alt="Información general del mapa de host" >}}
-
-El [mapa del host][9] se puede encontrar en el menú Infrastructure (Infraestructura). Con él, puedes:
-
-- Visualizar rápidamente tu entorno
-- Identificar outliers
-- Detectar patrones de uso
-- Optimizar recursos
-
-Para más información, consulta el [Mapa del host][9].
-
-## Serverless
-
-La herramienta [Serverless][20] te permite redactar código dependiente de eventos y cargarlo a un proveedor de soluciones en la nube que se encargue de gestionar todos los recursos computacionales subyacentes. Datadog Serverless reúne en una sola vista las métricas, trazas (traces) y logs procedentes de las funciones de AWS Lambda que ejecutan aplicaciones serverless, lo que te permite filtrar las funciones que generan errores, niveles altos de latencia o arranques en frío para optimizar el rendimiento.
-
-## APM y Continuous Profiler
-
-La herramienta [Application Performance Monitoring de Datadog][6] (APM o rastreo) te ofrece información pormenorizada sobre el rendimiento de tu aplicación, desde dashboards generados automáticamente para monitorizar métricas clave, como el volumen o la latencia de las solicitudes, hasta trazas detalladas de solicitudes individuales, junto a la monitorización de tus logs e infraestructura. Cuando se realiza una solicitud a una aplicación, Datadog puede detectar las trazas en un sistema distribuido y mostrarte datos sistemáticos sobre lo que se está haciendo exactamente con esa solicitud.
-
-## Monitorización de redes en la nube
-
-{{< img src="getting_started/npm.png" alt="NPM" >}}
-
-La herramienta [Cloud Network Monitoring][17] (NPM) de Datadog te permite ver el tráfico de red de todos los objetos etiquetados en Datadog, independientemente de si son contenedores, hosts, servicios o zonas de disponibilidad. Agrúpalos como quieras, ya sea por centros de datos, equipos o contenedores individuales, y utiliza etiquetas para filtrar el tráfico según la fuente y el destino. Luego, los filtros se integrarán en los flujos, cada uno de los cuales mostrará el tráfico existente entre una fuente y un destino a través de una página de red y un mapa de red que se pueden personalizar. Cada flujo contiene métricas de red, como la capacidad de procesamiento, el ancho de banda, el recuento de retransmisiones y la información de la fuente/destino relativa a la IP, al puerto y a los niveles de PID. A continuación, envía métricas clave, como el volumen del tráfico y las retransmisiones de TCP.
-
-## Synthetic Monitoring
-
-La herramienta [Synthetic Monitoring][22] de Datadog te permite crear y ejecutar tests de API y navegador que simulan de forma proactiva las transacciones que hacen los usuarios en tus aplicaciones. Asimismo, te permite monitorizar todos los endpoints de red internos y externos en todos los niveles del sistema. Por tanto, puedes detectar errores, identificar regresiones y automatizar reversiones para impedir que los problemas repercutan en la fase de producción.
+Navega hasta [APM][10] en la aplicación para empezar. Para obtener más información, lee la [documentación de APM][9].
 
 ## RUM y Session Replay
 
-La herramienta [Real User Monitoring][18] (RUM) de Datadog te permite visualizar y analizar la actividad y las experiencias de los usuarios en tiempo real. Con [Session Replay][19], puedes capturar y consultar las sesiones de navegación por la web de los usuarios para comprender mejor sus comportamientos. Con el navegador RUM, no solo puedes visualizar los tiempos de carga, los errores frontend y las dependencias de las páginas, sino también correlacionar las métricas empresariales y de la aplicación para solucionar en un único dashboard los problemas con la infraestructura de la aplicación y las métricas empresariales.
+Datadog [Real User Monitoring][11] (RUM) te permite visualizar y analizar en tiempo real las actividades y experiencias de los usuarios en aplicaciones web y móviles. Con [Session Replay][12], puedes capturar y visualizar sesiones de usuario para comprender mejor su comportamiento.
 
-## Cloud SIEM
+**Capacidades clave**:
+- Monitoriza el rendimiento de los navegadores web y plataformas móviles (iOS, Android, React Native, Flutter, etc.) con Core Web Vitals y Mobile Vitals.
+- Realiza un seguimiento de los errores y resuélvelos con agrupaciones automatizadas, informes de fallos e identificación de confirmaciones sospechosas.
+- Detecta señales de frustración del usuario, como clics repetidos y clics de error, para identificar problemas de UX.
+- Monitoriza el rendimiento y adopción de los indicadores de características.
+- Correlaciona los problemas del frontend con las trazas de backend, logs y las métricas de infraestructura para obtener una visibilidad completa.
 
-La herramienta [Cloud SIEM][21] (Información de seguridad y gestión de eventos en la nube) de Datadog detecta automáticamente los elementos que suponen una amenaza para tu aplicación o infraestructura. Por ejemplo: un ataque dirigido, una IP que se comunique con tus sistemas y que forme parte de una lista de amenazas, o una configuración insegura. Datadog presenta estas amenazas como señales de seguridad, que se pueden correlacionar y evaluar en el navegador de seguridad.
+Navega hasta el [RUM Explorer][13] en la aplicación para empezar. Para obtener más información, lee la [documentación de RUM][11].
 
-## Gestión de logs
+## Synthetic Monitoring
 
-La herramienta [Log Management de Datadog][5] te permite enviar y procesar todos los logs producidos por tus aplicaciones e infraestructura. Puedes consultar tus logs en tiempo real con Live Tail, sin necesidad de indexarlos. Asimismo, puedes ingerir todos los logs de tus aplicaciones e infraestructura, decidir cuáles indexar dinámicamente con filtros y, luego, almacenarlos en un archivo.
+Datadog [Synthetic Monitoring][14] te permite crear y ejecutar tests de API, navegador, móvil y Network Path que monitorizan de forma proactiva solicitudes y acciones simuladas de todo el mundo. Estos tests monitorizan tus aplicaciones y APIs para detectar problemas de rendimiento y tiempos de inactividad antes de que afecten a los usuarios.
 
+**Capacidades clave**:
 
-## Datadog para dispositivos móviles
+- Testea endpoints de la API críticos para la empresa y recorridos del usuario.
+- Detecta errores, identifica regresiones y automatiza las reversiones para evitar que surjan problemas en la producción.
+- Detecta problemas de rendimiento de los usuarios en distintas ubicaciones y alerta sobre ellos.
 
-La [aplicación móvil de Datadog][23], disponible en el [App Store de Apple][24] y en [Google Play][25], ofrece datos clave para que tanto los ingenieros en servicio como los usuarios empresariales puedan seguir el estado de sus servicios y evaluar los problemas rápidamente sin necesidad de recurrir a un ordenador. Accede a los dashboards, monitores, incidencias, SLOs, etc., de tu organización directamente desde tu dispositivo móvil.
+Ve a [Synthetic Monitoring & Testing][15] (Synthetic Monitoring y Tests) en la aplicación para empezar. Para obtener más información, lee la [documentación de Synthetic Monitoring][14].
 
-{{< img src="getting_started/application/mobile-app-store-screens.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Mobile App on iOS">}}
+## Integraciones
+
+Utiliza las {{< translate key="integration_count" >}} [integraciones][16] de Datadog para reunir todas las métricas y logs de tu infraestructura y obtener información sobre todo tu sistema de observabilidad.
+
+{{< img src="getting_started/application/integrations-2025.png" alt="Integraciones" >}}
+
+**Capacidades clave**:
+
+- Las integraciones disponibles abarcan tecnologías en la nube, respuesta a incidentes, capas de datos, seguridad, IA y mucho más.
+- Una vez configuradas las integraciones, todos los datos reciben el mismo tratamiento en Datadog, tanto si se encuentran en un centro de datos como en un servicio en línea.
+- Construye tu propia integración utilizando la [documentación para desarrolladores][17].
+
+Ve a [Integraciones][18] en la aplicación para empezar, o consulta la lista de integraciones en la [documentación][19].
+
+## Dashboards
+
+Los [dashboards][20] contienen gráficos con métricas de rendimiento en tiempo real, de manera que unifica tu visión de los datos a través de métricas, logs, trazas y más.
+
+**Capacidades clave**:
+
+- Empieza con los dashboards predefinidos o crea los tuyos propios para adaptarlos a tus preguntas específicas.
+- Personaliza los dashboards con widgets de arrastrar y soltar, consultas personalizadas y diseños flexibles.
+- Combina varios tipos de datos (incluidas métricas, logs, APM y RUM) en un solo lugar y visualiza los datos en tiempo real.
+- Anota tus gráficos con comentarios o eventos para el contexto de tu equipo.
+
+Navega hasta [Dashboard List][21] (Listas de dashboards) en la aplicación para empezar. Para obtener más información, lee la [Documentación sobre dashboards][20].
+
+## Monitores
+
+Los [monitores][22] proporcionan alertas y notificaciones basadas en umbrales de métricas, disponibilidad de integración, endpoints de red, etc.
+
+- Crea monitores utilizando cualquier métrica que informe a Datadog.
+- Construye lógicas de alerta complejas utilizando múltiples condiciones de activación.
+- Envía alertas a Slack, correo electrónico, PagerDuty y más, añadiendo`@` en los mensajes de alerta para dirigir las notificaciones a las personas adecuadas.
+- Programa un horario de tiempos de inactividad para suprimir las notificaciones de caídas del sistema, mantenimiento fuera de línea, etc.
+
+Navega hasta la [Monitors List][23] (Lista de monitores) de la aplicación para empezar. Para obtener más información, consulta la [documentación de monitores][22].
 
 ## Referencias adicionales
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com
-[2]: http://www.datadoghq.com/integrations
-[3]: /es/api/
-[4]: https://github.com/DataDog/datadog-agent
-[5]: /es/logs/
-[6]: /es/tracing/
-[7]: /es/infrastructure/
-[8]: /es/getting_started/tagging/
-[9]: /es/infrastructure/hostmap/
-[10]: /es/service_management/events/
-[11]: /es/service_management/events/explorer/analytics
-[12]: /es/dashboards/
-[13]: /es/dashboards/#screenboards
-[14]: /es/dashboards/functions/arithmetic/
-[15]: /es/dashboards/functions/
-[16]: /es/monitors/
-[17]: /es/network_monitoring/performance/
-[18]: /es/real_user_monitoring/
-[19]: /es/real_user_monitoring/session_replay/browser/
-[20]: /es/serverless
-[21]: /es/security/cloud_siem/
-[22]: /es/synthetics/
-[23]: /es/mobile/
-[24]: https://apps.apple.com/app/datadog/id1391380318
-[25]: https://play.google.com/store/apps/details?id=com.datadog.app
+[2]: /es/infrastructure/list/
+[3]: https://app.datadoghq.com/infrastructure
+[4]: /es/infrastructure/hostmap/
+[5]: https://app.datadoghq.com/infrastructure/map
+[6]: /es/logs/
+[7]: /es/logs/explorer/live_tail/
+[8]: https://app.datadoghq.com/logs
+[9]: /es/tracing/
+[10]: https://app.datadoghq.com/apm/home
+[11]: /es/real_user_monitoring/
+[12]: /es/real_user_monitoring/session_replay/browser/
+[13]: https://app.datadoghq.com/rum/sessions
+[14]: /es/synthetics/
+[15]: https://app.datadoghq.com/synthetics/tests
+[16]: https://www.datadoghq.com/product/platform/integrations/
+[17]: /es/developers/integrations/
+[18]: https://app.datadoghq.com/integrations
+[19]: /es/integrations/
+[20]: /es/dashboards/
+[21]: https://app.datadoghq.com/dashboard/lists
+[22]: /es/monitors/
+[23]: https://app.datadoghq.com/monitors/manage

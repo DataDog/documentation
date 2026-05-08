@@ -38,15 +38,19 @@ La falta de etapas o tareas en la página _Detalles del pipeline_ puede deberse 
 
 [Las variables definidas por el usuario en Gitlab][16] deben ser informadas en el campo `@ci.parameters` en CI Visibility. Sin embargo, esta información sólo está presente en algunos casos, como los pipelines aguas abajo, y puede faltar en el resto de los casos, ya que Gitlab [no siempre proporciona esta información][17] a Datadog.
 
-### Limitaciones en la ejecución de pipelines
+## Limitaciones en la ejecución de pipelines
 
-#### La entrega de eventos de webhook no está garantizada por los proveedores de CI
+### La entrega de eventos de webhook no está garantizada por los proveedores de CI
 
 El soporte para la ejecución de pipelines depende de los datos enviados por los proveedores de CI, indicando el estado de la ejecución. Si estos datos no están disponibles, es posible que las ejecuciones marcadas como `Running` en Datadog ya hayan finalizado.
 
-#### Duración máxima de la ejecución de un pipeline
+### Duración máxima de la ejecución de un pipeline
 
 Una ejecución de pipeline puede conservar el estado `Running` durante un máximo de tres días. Si sigue en ejecución después de ese tiempo, la ejecución del pipeline no aparece en CI Visibility. Si una ejecución de pipeline finaliza después de tres días, la ejecución del pipeline finalizada aparece en CI Visibility con su correspondiente estado final (`Success`, `Error`, `Canceled`, `Skipped`) y con la duración correcta.
+
+## Limitaciones a los trabajos terminados de los pipelines
+
+Los datos de trabajo tienen un límite de tres días para ser procesados tras su finalización. Si un pipeline incluye trabajos que finalizan más de tres días antes de que se reciba el pipeline, esos trabajos no se procesan y no aparecen en CI Visibility.
 
 ## Referencias adicionales
 

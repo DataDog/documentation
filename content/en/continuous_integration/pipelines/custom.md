@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-You can send custom pipelines through HTTP using the [public API endpoint][1]. For more information about how pipeline executions are modeled, see [Pipeline Data Model and Execution Types][2].
+If your CI provider is not supported, you can send custom pipelines through HTTP using the [public API endpoint][1]. For more information about how pipeline executions are modeled, see [Pipeline Data Model and Execution Types][2].
 
 ### Compatibility
 

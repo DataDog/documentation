@@ -4,6 +4,9 @@ description: Install and configure the Datadog Agent on Amazon Elastic Container
 aliases:
   - /agent/amazon_ecs/
 further_reading:
+- link: https://www.datadoghq.com/blog/ecs-managed-instances
+  tag: Blog
+  text: Monitor ECS Managed Instances with Datadog
 - link: "/agent/amazon_ecs/logs/"
   tag: "Documentation"
   text: "Collect your application logs"
@@ -19,6 +22,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
   tag: "blog"
   text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
+- link: "https://www.datadoghq.com/blog/ecs-default-monitors/"
+  tag: "Blog"
+  text: "Catch and remediate ECS issues faster with default monitors and the ECS Explorer"
 - link: "https://www.datadoghq.com/architecture/using-datadog-with-ecs-fargate/"
   tag: "Architecture Center"
   text: "Using Datadog with ECS Fargate"
@@ -56,7 +62,7 @@ The following instructions assume that you have configured an EC2 cluster. See t
 
 **Note:** Datadog's [Autodiscovery][5] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 ## FIPS Compliance
 
 Some setup steps are different for FIPS compliance. Please take into account the specific setup instructions in the [FIPS Compliance][32] documentation.
@@ -118,9 +124,9 @@ aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-
 {{% tab "Web UI" %}}
 After you have your task definition file, use the AWS Console to register the file.
 1. Log in to your AWS Console and navigate to the Elastic Container Service section.
-2. Select **Task Definitions** in the navigation pane. On the **Create new task definition** menu, select **Create new task definition with JSON**.
+2. Select {{< ui >}}Task Definitions{{< /ui >}} in the navigation pane. On the {{< ui >}}Create new task definition{{< /ui >}} menu, select {{< ui >}}Create new task definition with JSON{{< /ui >}}.
 3. In the JSON editor box, paste the contents of your task definition file.
-4. Select **Create**.
+4. Select {{< ui >}}Create{{< /ui >}}.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -132,11 +138,11 @@ To have one Datadog Agent container running on each EC2 instance, run the Datado
 
 #### Schedule a daemon service in AWS using Datadog's ECS task
 
-1. Log in to the AWS Console and navigate to the ECS section. On the **Clusters** page, choose the cluster you run the Agent on.
-2. On your cluster's **Services** tab, select **Create**.
-3. Under **Deployment configuration**, for **Service type**, select **Daemon**.
+1. Log in to the AWS Console and navigate to the ECS section. On the {{< ui >}}Clusters{{< /ui >}} page, choose the cluster you run the Agent on.
+2. On your cluster's {{< ui >}}Services{{< /ui >}} tab, select {{< ui >}}Create{{< /ui >}}.
+3. Under {{< ui >}}Deployment configuration{{< /ui >}}, for {{< ui >}}Service type{{< /ui >}}, select {{< ui >}}Daemon{{< /ui >}}.
 3. You do not need to configure load balancing or autoscaling.
-4. Click **Next Step**, and then **Create Service**.
+4. Click {{< ui >}}Next Step{{< /ui >}}, and then {{< ui >}}Create Service{{< /ui >}}.
 
 ### Set up additional Agent features
 
@@ -145,7 +151,7 @@ The task definition files provided in the previous section are minimal. These fi
 For additional features:
 
 #### APM
-Consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm.json][23].
+Consult the [APM setup documentation][6] and the sample [datadog-agent-ecs-apm-uds.json][23].
 
 #### Log Management
 Consult the [Log collection documentation][7] and the sample [datadog-agent-ecs-logs.json][24]
@@ -285,8 +291,6 @@ If you already have a task definition, update your file to include the following
  ```
 #### Network Path
 
-<div class="alert alert-info">Network Path for Datadog Cloud Network Monitoring is in Limited Availability. Reach out to your Datadog representative to sign up.</div>
-
 1. To enable [Network Path][31] on your ECS clusters, enable the `system-probe` traceroute module by adding the following environment variable in your `datadog-agent-sysprobe-ecs.json` file:
 
    ```json
@@ -344,7 +348,7 @@ Need help? Contact [Datadog support][11].
 [5]: https://docs.datadoghq.com/agent/autodiscovery/
 [6]: /containers/amazon_ecs/apm/
 [7]: /containers/amazon_ecs/logs/
-[8]: /developers/dogstatsd/?tab=containeragent
+[8]: /extend/dogstatsd/?tab=containeragent
 [9]: https://aws.amazon.com/cli
 [10]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
 [11]: https://docs.datadoghq.com/help/
@@ -367,4 +371,4 @@ Need help? Contact [Datadog support][11].
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
 [31]: /network_monitoring/network_path
 [32]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs
-[33]:https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs
+[33]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs

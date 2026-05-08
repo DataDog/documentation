@@ -9,13 +9,19 @@ further_reading:
 
 ## Overview
 
-Network Device Monitoring helps you gain insights into the health and performance of your on-prem routers, switches, and firewalls. 
+Network Device Monitoring (NDM) helps you gain insights into the health and performance of your on-prem routers, switches, and firewalls. 
 For additional definitions and descriptions of important NDM terms such as _layer 2_ and _layer 3_, see the main [Glossary][1].
 
 ## Terminology
 
 Simple network management protocol (SNMP)
 : A network protocol that is used to collect information about bare metal networking gear.
+
+Link Layer Discovery Protocol (LLDP)
+: A protocol used by devices to advertise identity and capabilities to neighboring devices. NDM uses LLDP to map topology.
+
+Managed information base (MIB)
+: A database or list of all the possible OIDs and their definitions that are related to the MIB. For example, the `IF-MIB` (interface MIB) contains all the OIDs for descriptive information about a device's interface.
 
 Object identifier (OID)
 : A unique ID or address on a device that when polled returns the response code of that value. For example, OIDs are CPU or device fan speed.
@@ -35,7 +41,7 @@ Software-defined wide area network (SD-WAN)
 [Device namespaces][3]
 : Namespace of the device. Namespaces can be used as tags to differentiate between multiple network devices that may share the same private IP.
 
-Ping
+[Ping][4]
 : A network tool that measures how long it takes for a signal to travel from one device to another over a network and back again.
 
 
@@ -43,6 +49,7 @@ Ping
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /glossary/
+[1]: /glossary/?product=network-device-monitoring
 [2]: /network_monitoring/devices/profiles
 [3]: /network_monitoring/devices/snmp_traps/?tab=yaml#device-namespaces
+[4]: /network_monitoring/devices/ping

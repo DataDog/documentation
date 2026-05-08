@@ -1,0 +1,3 @@
+---
+title: High Availability MultiRegion
+---

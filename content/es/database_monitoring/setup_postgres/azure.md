@@ -5,6 +5,9 @@ further_reading:
 - link: /integrations/postgres/
   tag: Documentación
   text: Integración Postgres básica
+- link: /database_monitoring/guide/parameterized_queries/
+  tag: Documentación
+  text: Captura de valores de parámetros de consulta SQL
 title: Configuración de Database Monitoring para bases de datos Azure para PostgreSQL
 ---
 
@@ -26,16 +29,17 @@ Tipos de despliegues de Azure PostgreSQL compatibles
 : PostgreSQL en máquinas virtuales Azure, servidor único, servidor flexible
 
 Versiones del Agent compatibles
-: v7.36.1 o posteriores
+: 7.36.1 o posteriores
 
-La configuración de Database Monitoring predeterminada del Agent es conservadora, pero puedes ajustar algunos parámetros como el intervalo de recopilación y la frecuencia de muestreo de consultas según tus necesidades. Para la mayoría de las cargas de trabajo, el Agent representa menos del uno por ciento del tiempo de ejecución de la consulta en la base de datos y menos del uno por ciento del uso de CPU. <br/><br/>
-Database Monitoring se ejecuta como una integración sobre el Agent de base ([consulta las referencias][1]).
+Impacto en el rendimiento
+: El valor predeterminado de configuración del Agent para la monitorización de bases de datos es conservador, pero puedes ajustar parámetros como el intervalo de recopilación y la frecuencia de muestreo de consultas para que se adapten mejor a tus necesidades. Para la mayoría de las cargas de trabajo, el Agent representa menos del uno por ciento del tiempo de ejecución de consultas en la base de datos y menos del uno por ciento de la CPU. <br/><br/>
+La monitorización de bases de datos se ejecuta como integración junto con el Agent de base ([consulta los valores de referencia][1]).
 
 Proxies, balanceadores de carga y agrupadores de conexiones
 : El Datadog Agent debe conectarse directamente al host que se está monitorizando. Para las bases de datos autoalojadas, se prefiere `127.0.0.1` o el socket. El Agent no debe conectarse a la base de datos a través de un proxy, balanceador de carga o agrupador de conexiones como `pgbouncer`. Si el Agent se conecta a diferentes hosts mientras se ejecuta (como en el caso de la conmutación por error, el balanceo de carga, etc.), el Agent calcula la diferencia en las estadísticas entre dos hosts, lo que produce inexactitudes en las métricas.
 
 Consideraciones sobre la seguridad de los datos
-: Para saber qué datos recopila el Agent de tus bases de datos y cómo garantizar tu seguridad, consulta [Información confidencial][2].
+: Para saber qué datos recopila el Agent de tus bases de datos y cómo garantizar su seguridad, consulta [Información confidencial][2].
 
 ## Configuración de parámetros de Postgres
 
@@ -49,7 +53,7 @@ Configura los siguientes [parámetros][3] en los [parámetros del servidor][4] y
 | `track_activity_query_size` | `4096` | Necesario para recopilar consultas de mayor tamaño. Aumenta el tamaño del texto SQL en `pg_stat_activity`. Si se deja con el valor predeterminado, las consultas de más de `1024` caracteres no se recopilan. |
 | `pg_stat_statements.track` | `ALL` | Opcional. Habilita el seguimiento de sentencias dentro de procedimientos almacenados y funciones. |
 | `pg_stat_statements.max` | `10000` | Opcional. Aumenta el número de consultas normalizadas rastreadas en `pg_stat_statements`. Este parámetro se recomienda para bases de datos de gran volumen que reciben muchos tipos diferentes de consultas de muchos clientes distintos. |
-| `pg_stat_statements.track_utility` | `off` | Opcional. Deshabilita comandos de utilidad como PREPARE y EXPLAIN. Configurar este valor en `off` significa que sólo se rastrean consultas como SELECT, UPDATE y DELETE. |
+| `pg_stat_statements.track_utility` | `off` | Opcional. Deshabilita comandos de utilidad como PREPARE y EXPLAIN. Configurar este valor en `off` significa que sólo se rastrearán consultas como SELECT, UPDATE y DELETE. |
 | `track_io_timing` | `on` | Opcional. Habilita la recopilación de los tiempos de lectura y escritura de bloques para las consultas. |
 
 {{% /tab %}}
@@ -61,14 +65,14 @@ Configura los siguientes [parámetros][3] en los [parámetros del servidor][4] y
 | `track_activity_query_size` | `4096` | Necesario para recopilar consultas de mayor tamaño. Aumenta el tamaño del texto SQL en `pg_stat_activity`. Si se deja con el valor predeterminado, las consultas de más de `1024` caracteres no se recopilan. |
 | `pg_stat_statements.track` | `ALL` | Opcional. Habilita el seguimiento de sentencias dentro de procedimientos almacenados y funciones. |
 | `pg_stat_statements.max` | `10000` | Opcional. Aumenta el número de consultas normalizadas rastreadas en `pg_stat_statements`. Este parámetro se recomienda para bases de datos de gran volumen que reciben muchos tipos diferentes de consultas de muchos clientes distintos. |
-| `pg_stat_statements.track_utility` | `off` | Opcional. Deshabilita comandos de utilidad como PREPARE y EXPLAIN. Configurar este valor en `off` significa que sólo se rastrean consultas como SELECT, UPDATE y DELETE. |
+| `pg_stat_statements.track_utility` | `off` | Opcional. Deshabilita comandos de utilidad como PREPARE y EXPLAIN. Configurar este valor en `off` significa que sólo se rastrearán consultas como SELECT, UPDATE y DELETE. |
 | `track_io_timing` | `on` | Opcional. Habilita la recopilación de los tiempos de lectura y escritura de bloques para las consultas. |
 
 [1]: https://www.postgresql.org/docs/current/pgstatstatements.html
 {{% /tab %}}
 {{< /tabs >}}
 
-## Concesión de acceso al Agent 
+## Conceder acceso al Agent
 
 El Datadog Agent requiere acceso de sólo lectura al servidor de la base de datos para recopilar estadísticas y consultas.
 
@@ -158,9 +162,9 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Para la recopilación de datos o las métricas personalizadas que requieren consultar tablas adicionales, es posible que tengas que conceder el permiso <code>SELECT</code> en esas tablas al usuario <code>Datadog</code>. Ejemplo: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. Para obtener más información, consulta <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">Recopilación de métricas personalizadas de PostgreSQL</a>. </div>
+<div class="alert alert-info">Para la recopilación de datos o métricas personalizadas que requieren consultar tablas adicionales, es posible que tengas que conceder el permiso <code>SELECT</code> en esas tablas al usuario <code>Datadog</code>. Ejemplo: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. Para obtener más información, consulta <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">Recopilación de métricas personalizadas de PostgreSQL</a>. </div>
 
-Crea la función **en cada base de datos** para permitir al Agent recopilar explain-plans.
+Crea la función **en cada base de datos** para permitir al Agent recopilar planes de explicación.
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
@@ -174,6 +178,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -231,7 +237,7 @@ psql -h mydb.example.com -U datadog postgres -A \
 
 Cuando se te pida una contraseña, utiliza la que introdujiste al crear el usuario `datadog`.
 
-## Instalación y configuración del Agent
+## Instala y configura el Agent
 
 Para monitorizar bases de datos Postgres de Azure, instala el Datadog Agent en tu infraestructura y configúralo para conectarse a cada endpoint de instancia de forma remota. El Agent no necesita ejecutarse en la base de datos, sólo necesita conectarse a ella. Para conocer otros métodos de instalación del Agent no mencionados aquí, consulta las [instrucciones de instalación del Agent][8].
 
@@ -267,7 +273,7 @@ Para configurar la recopilación de métricas de monitorización de Database Mon
 {{% tab "Docker" %}}
 Para configurar el Agent de Database Monitoring que se ejecuta en un contenedor de Docker, puedes establecer las [plantillas de integración de Autodiscovery][1] como etiquetas (label) de Docker en tu contenedor del Agent.
 
-**Nota**: El Agent debe tener permiso de lectura en el socket Docker para que las etiquetas de Autodiscovery funcionen.
+**Nota**: El Agent debe tener permiso de lectura en el socket Docker para que las etiquetas (labels) de Autodiscovery funcionen.
 
 ### Línea de comandos
 
@@ -303,7 +309,7 @@ Para Postgres v9.6, añade los siguientes parámetros a la configuración de la 
 "pg_stat_activity_view": "datadog.pg_stat_activity()"
 ```
 
-### Archivo Docker
+### Dockerfile
 
 Las etiquetas también pueden especificarse en un `Dockerfile`, por lo que puedes crear y desplegar un Agent personalizado sin cambiar la configuración de tu infraestructura:
 
@@ -326,15 +332,15 @@ Para Postgres v9.6, añade los siguientes parámetros a la configuración de la 
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-Si estás ejecutando un clúster de Kubernetes, usa el [Datadog Cluster Agent][1] para activar Database Monitoring.
+Si está ejecutando un clúster Kubernetes, utilice el [Datadog Clúster Agent][1] para activar Database Monitoring.
 
-**Nota**: Asegúrate de que los [checks de clúster][2] están activados para tu Datadog Cluster Agent antes de continuar.
+**Nota**: Asegúrate de que los [checks del clúster][2] estén activados para tu Datadog Cluster Agent antes de continuar.
 
-A continuación, encontrarás instrucciones paso a paso para configurar la integración de Postgres utilizando diferentes métodos de despliegue del Datadog Cluster Agent.
+A continuación encontrarás instrucciones paso a paso para configurar la integración de Postgres mediante diferentes métodos de despliegue del Datadog Cluster Agent.
 
-### Operación
+### Operador
 
-Tomando como referencia las [instrucciones del Operator en Kubernetes e integraciones][3], sigue los pasos que se indican a continuación para configurar la integración de Postgres:
+Tomando como referencia las [Instrucciones para operadores en Kubernetes e integraciones][3], sigue los steps (UI) / pasos (generic) que se indican a continuación para configurar la integración de Postgres:
 
 1. Crea o actualiza el archivo `Datadog-Agent.yaml` con la siguiente configuración:
 
@@ -383,14 +389,14 @@ Tomando como referencia las [instrucciones del Operator en Kubernetes e integrac
 
     ```
 
-    **Nota**: Para Postgres 9.6, añade las siguientes líneas a la configuración de la instancia donde se especifican el host y el puerto:
+    **Nota**: Para Postgres 9.6, añada las siguientes líneas a la configuración de la instancia donde se especifican el host y el puerto:
 
     ```yaml
     pg_stat_statements_view: datadog.pg_stat_statements()
     pg_stat_activity_view: datadog.pg_stat_activity()
     ```
 
-2. Aplica los cambios al Datadog Operator utilizando el siguiente comando:
+2. Aplica los cambios al Datadog Operator con el siguiente comando:
 
     ```shell
     kubectl apply -f datadog-agent.yaml
@@ -398,7 +404,7 @@ Tomando como referencia las [instrucciones del Operator en Kubernetes e integrac
 
 ### Helm
 
-Tomando como referencia las [instrucciones de Helm en Kubernetes e integraciones][4], sigue los pasos que se indican a continuación para configurar la integración de Postgres :
+Tomando como referencia las [instrucciones de Helm en Kubernetes e integraciones][4], sigue los steps (UI) / pasos (generic) que se indican a continuación para configurar la integración de Postgres:
 
 1. Actualiza tu archivo `Datadog-values.yaml` (utilizado en las instrucciones de instalación del Cluster Agent) con la siguiente configuración:
 
@@ -430,14 +436,14 @@ Tomando como referencia las [instrucciones de Helm en Kubernetes e integraciones
     pg_stat_activity_view: datadog.pg_stat_activity()
     ```
 
-2. Despliega el Agent con el archivo de configuración anterior utilizando el siguiente comando:
+2. Despliega el Agent con el archivo de configuración anterior con el siguiente comando:
 
     ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
     ```
 
 <div class="alert alert-info">
-For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+Para Windows, adjunta <code>--set targetSystem=windows</code> al comando de <code>instalación de Helm</code>.
 </div>
 
 ### Configuración con archivos integrados
@@ -464,7 +470,7 @@ instances:
 
 En lugar de montar un archivo, puedes declarar la configuración de la instancia como servicio Kubernetes. Para configurar este check para un Agent que se ejecuta en Kubernetes, crea un servicio con la siguiente sintaxis:
 
-#### Anotaciones de Autodiscovery v2
+#### Autodiscovery Annotations v2
 
 ```yaml
 apiVersion: v1
@@ -507,11 +513,11 @@ Para Postgres v9.6, añade los siguientes parámetros a la configuración de la 
 "pg_stat_activity_view": "datadog.pg_stat_activity()"
 ```
 
-Para más información, consulta [Anotaciones de Autodiscovery][5].
+Para obtener más información, consulta [Autodiscovery Annotations][5].
 
 El Cluster Agent registra automáticamente esta configuración y comienza a ejecutar el check de Postgres.
 
-Para evitar exponer la contraseña del usuario `datadog` en texto simple, utiliza el [paquete de gestión de secretos][6] del Agent y declara la contraseña utilizando la sintaxis `ENC[]`.
+Para evitar exponer la contraseña del usuario de `datadog` en texto plano, utilice el [paquete de gestión de secretos][6] de Agent y declare la contraseña utilizando la sintaxis de `ENC[]`.
 
 [1]: /es/containers/cluster_agent/setup/
 [2]: /es/containers/cluster_agent/clusterchecks/

@@ -3,7 +3,7 @@ title: Use Custom JavaScript Assertions In Browser Tests
 
 description: Learn how to use custom JavaScript assertions in your Synthetic browser tests.
 further_reading:
-- link: '/synthetics/browser_tests/actions/'
+- link: '/synthetics/browser_tests/test_steps/'
   tag: 'Documentation'
   text: 'Learn about browser test steps'
 - link: '/synthetics/browser_tests/advanced_options/'
@@ -108,4 +108,4 @@ return await loadingTask.promise.then(function(pdf) {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/browser_tests/
-[2]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
+[2]: /synthetics/browser_tests/test_steps/?tab=testanelementontheactivepage#assertion

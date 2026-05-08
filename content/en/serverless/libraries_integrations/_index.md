@@ -10,7 +10,8 @@ aliases:
 
 {{< whatsnext desc="Datadog integrates with popular serverless development tools to install the Datadog Lambda extension and library to your applications automatically." >}}
     {{< nextlink href="/serverless/libraries_integrations/plugin/" >}}Datadog Plugin for Serverless Framework{{< /nextlink >}}
-    {{< nextlink href="/serverless/libraries_integrations/cli/" >}}Datadog Lambda CLI{{< /nextlink >}}
+    {{< nextlink href="/serverless/libraries_integrations/cli/" >}}Datadog CLI for AWS Lambda{{< /nextlink >}}
+    {{< nextlink href="/serverless/libraries_integrations/cli-cloud-run/" >}}Datadog CLI for Google Cloud Run{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/cdk/" >}}Datadog Construct for AWS CDK{{< /nextlink >}}
     {{< nextlink href="/serverless/libraries_integrations/macro/" >}}Datadog Serverless Macro for AWS SAM{{< /nextlink >}}
 {{< /whatsnext >}}

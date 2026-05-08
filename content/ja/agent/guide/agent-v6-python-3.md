@@ -1,8 +1,10 @@
 ---
+description: Datadog Agent v6 を、既定の Python 2 の代わりに Agent チェックおよびインテグレーションで Python
+  3 runtime を使用するように設定します。
 further_reading:
 - link: /agent/versions/upgrade_to_agent_v7/
   tag: ドキュメント
-  text: Agent バージョン7へアップグレード
+  text: Agent v7 へのアップグレード
 title: Python のバージョン管理
 ---
 
@@ -272,7 +274,7 @@ datadog_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

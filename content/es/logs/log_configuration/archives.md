@@ -416,24 +416,6 @@ Los archivos de log que Datadog reenvía a tu bucket de almacenamiento están en
 
 Esta estructura de directorios simplifica el proceso de consulta de tus archivos de log históricos en función de su fecha.
 
-Dentro del archivo JSON comprimido, el contenido de cada evento tiene el siguiente formato:
-
-```json
-{
-    "_id": "123456789abcdefg",
-    "date": "2018-05-15T14:31:16.003Z",
-    "host": "i-12345abced6789efg",
-    "source": "source_name",
-    "service": "service_name",
-    "status": "status_level",
-    "message": "2018-05-15T14:31:16.003Z INFO rid='acb-123' status=403 method=PUT",
-    "attributes": { "rid": "abc-123", "http": { "status_code": 403, "method": "PUT" } },
-    "tags": [ "env:prod", "team:acme" ]
-}
-```
-
-**Nota**: Los logs se almacenan como JSON delimitado por nuevas líneas (NDJSON), lo que significa que cada línea del archivo es un objeto JSON válido que representa un evento de log.
-
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

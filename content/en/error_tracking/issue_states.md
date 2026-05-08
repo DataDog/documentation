@@ -63,7 +63,7 @@ To resume collecting errors for an excluded issue, select any status other than 
 ## Issue history
 View a history of your issue activity with the **Activity Timeline**. On the details panel of any Error Tracking issue, view the Activity Timeline by clicking the **Activity** tab.
 
-{{< img src="error_tracking/issue-status-history.png" alt="The Activity Timeline in the Error Tracking Issue" style="width:80%;" >}}
+{{< img src="error_tracking/issue-status-history-3.png" alt="The Activity Timeline in the Error Tracking Issue" style="width:80%;" >}}
 
 ## Further Reading
 

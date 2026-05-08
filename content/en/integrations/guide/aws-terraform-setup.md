@@ -387,7 +387,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
 {{< /site-region >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 2. Select the tab for your AWS account type, and then use the example below as a base template to set up your Terraform configuration file. Ensure to update the following parameters before you apply the changes:
    * `AWS_ACCOUNT_ID`: Your AWS account ID.
 
@@ -515,7 +515,7 @@ data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
     actions = ["sts:AssumeRole"]
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::065115117704:root"]
+      identifiers = ["arn:aws-us-gov:iam::065115117704:root"]
     }
     condition {
       test     = "StringEquals"
@@ -585,7 +585,7 @@ resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
 }
 resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
   role       = aws_iam_role.datadog_aws_integration.name
-  policy_arn = "arn:aws:iam::aws:policy/SecurityAudit"
+  policy_arn = "arn:aws-us-gov:iam::aws:policy/SecurityAudit"
 }
 
 resource "datadog_integration_aws_account" "datadog_integration" {

@@ -1,4 +1,5 @@
 ---
+id: layer_2
 title: layer 2
 synonyms:
   - data link layer

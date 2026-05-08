@@ -19,6 +19,8 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
 
 ### Setup
 
+Follow the setup instructions in Datadog's [in-app onboarding flow](https://app.datadoghq.com/llm/applications?setupMethod=manual&showOnboarding=true) for an interactive quickstart experience.
+
 {{< tabs >}}
 {{% tab "Python" %}}
 
@@ -33,11 +35,10 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
    ```shell
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
+   DD_SITE=<YOUR_DD_SITE> \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    ddtrace-run <your application command>
    ```
-
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
 
 
 [1]: /llm_observability/setup/sdk/python/#command-line-setup
@@ -55,11 +56,10 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
    ```shell
    DD_LLMOBS_ENABLED=1 \
    DD_LLMOBS_ML_APP=quickstart-app \
+   DD_SITE=<YOUR_DD_SITE> \
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    NODE_OPTIONS="--import dd-trace/initialize.mjs" <your application command>
    ```
-
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
 
 [1]: /llm_observability/setup/sdk/nodejs/#command-line-setup
 [2]: /getting_started/site/
@@ -77,17 +77,19 @@ LLM Observability requires a Datadog API key if you don't have a Datadog Agent r
    java -javaagent:/path/to/dd-java-agent.jar \
    -Ddd.llmobs.enabled=true \
    -Ddd.llmobs.ml.app=quickstart-app \
+   -Ddd.site=<YOUR_DD_SITE> \
    -Ddd.api.key=<YOUR_DATADOG_API_KEY> \
    -jar path/to/your/app.jar
    ```
 
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
 
 [1]: /llm_observability/setup/sdk/java/#command-line-setup
 [2]: /getting_started/site/
 
 {{% /tab %}}
 {{< /tabs >}}
+
+Your Datadog site is {{< region-param key="dd_site" code="true" >}}. Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key.
 
 ### View traces
 
@@ -168,69 +170,6 @@ See below for a simple application that can be used to begin exploring the LLM O
    NODE_OPTIONS="--import dd-trace/initialize.mjs" node app.js
    ```
 
-{{% /tab %}}
-{{% tab "Java" %}}
-1. Install OpenAI:
-   - **Maven**: Add this dependency to your `pom.xml`:
-      ```java
-      <dependency>
-        <groupId>com.openai</groupId>
-        <artifactId>openai</artifactId>
-        <version>1.0.0</version>
-      </dependency>
-      ```
-
-   - **Gradle**: Add this line to your `build.gradle`:
-      ```script
-      implementation 'com.openai:openai:1.0.0'
-      ```
-2. Save example script `app.java`:
-
-   ```java
-   import com.openai.OpenAI;
-   import com.openai.api.models.ChatCompletionRequest;
-   import com.openai.api.models.ChatCompletionResponse;
-   import com.openai.api.models.ChatMessage;
-
-   import java.util.Arrays;
-
-   public class App {
-       public static void main(String[] args) {
-           String apiKey = System.getenv("OPENAI_API_KEY");
-           OpenAI openAI = new OpenAI(apiKey);
-
-           ChatCompletionRequest request = ChatCompletionRequest.builder()
-               .model("gpt-4o-mini")
-               .messages(Arrays.asList(
-                   ChatMessage.builder()
-                       .role("system")
-                       .content("You are a helpful customer assistant for a furniture store.")
-                       .build(),
-                   ChatMessage.builder()
-                       .role("user")
-                       .content("I'd like to buy a chair for my living room.")
-                       .build()
-               ))
-               .build();
-
-           try {
-               ChatCompletionResponse response = openAI.chat().completions().create(request);
-               System.out.println(response);
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-       }
-   }
-
-3. Run the application:
-
-   ```
-   java -javaagent:/path/to/dd-java-agent.jar \
-   -Ddd.llmobs.enabled=true \
-   -Ddd.llmobs.ml.app=quickstart-app \
-   -Ddd.api.key=<YOUR_DATADOG_API_KEY> \
-   -jar path/to/your/app.jar
-   ```
 {{% /tab %}}
 {{< /tabs >}}
 

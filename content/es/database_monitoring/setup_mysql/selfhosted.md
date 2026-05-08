@@ -109,7 +109,6 @@ Crea el siguiente esquema:
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 Crea el procedimiento `explain_statement` para que el Agent pueda recopilar los planes de explicación:
@@ -143,6 +142,15 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
+Para recopilar métricas de índice, concede al usuario `datadog` un privilegio adicional:
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
+A partir del Agent v7.65, el Datadog Agent puede recopilar información de esquemas de bases de datos MySQL. Para obtener más información sobre cómo conceder al Agent permisos para esta recopilación, consulta la sección [Recopilación de esquemas][14] a continuación.
+
+
 ### Consumidores de configuración en tiempo de ejecución
 Datadog recomienda crear el siguiente procedimiento para que el Agent pueda habilitar los consumidores de `performance_schema.events_*` en tiempo de ejecución.
 
@@ -165,7 +173,7 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 
 Al instalar el Datadog Agent también se instala el check de MySQL, necesario para Database Monitoring en MySQL. Si aún no has instalado el Agent para el host de tu base de datos de MySQL, consulta las [Instrucciones de instalación del Agent][6].
 
-A fin de configurar este check para un Agent que se ejecuta en un host:
+Para configurar este check para un Agent que se ejecuta en un host:
 
 Edita el archivo `mysql.d/conf.yaml`, en la carpeta `conf.d/` en la raíz del [directorio de configuración de tu Agent][7] para empezar a recopilar [métricas](#metric-collection) y [logs](#log-collection-optional) de MySQL. Consulta el [archivo mysql.d/conf.yaml de ejemplo][8] para conocer todas las opciones de configuración disponibles, incluidas las de métricas personalizadas.
 
@@ -181,7 +189,7 @@ instances:
     host: 127.0.0.1
     port: 3306
     username: datadog
-    password: 'ENC[datadog_user_database_password]' # del paso CREAR USUARIO anterior
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier
 ```
 
 Ten en cuenta que el usuario `datadog` debe establecerse en la configuración de la integración de MySQL como `host: 127.0.0.1` en lugar de `localhost`. Como alternativa, también puedes utilizar `sock`.
@@ -224,7 +232,7 @@ Además de la telemetría recopilada de la base de datos por el Agent, también 
        }
      ```
 
-2. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
+2. La recopilación de logs está deshabilitada por defecto en el Datadog Agent; habilítala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
@@ -275,7 +283,7 @@ Además de la telemetría recopilada de la base de datos por el Agent, también 
 
 4. [Reinicia el Agent][9].
 
-## Validar
+## Validación
 
 [Ejecuta el subcomando de estado del Agent][10] y busca `mysql` en la sección Checks. Si no, consulta la página [Bases de datos][11] para empezar.
 
@@ -303,3 +311,4 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 [11]: https://app.datadoghq.com/databases
 [12]: /es/database_monitoring/troubleshooting/?tab=mysql
 [13]: /es/database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
+[14]: /es/database_monitoring/setup_mysql/selfhosted?tab=mysql57#collecting-schemas

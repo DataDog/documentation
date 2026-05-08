@@ -4,7 +4,7 @@ further_reading:
     - link: 'logs/log_configuration/attributes_naming_convention'
       tag: 'Documentation'
       text: 'Learn more about standard attributes for Log Management'
-    - link: '/real_user_monitoring/browser/data_collected'
+    - link: '/real_user_monitoring/application_monitoring/browser/data_collected'
       tag: 'Documentation'
       text: 'Data collected for RUM Browser'
     - link: '/tracing/trace_explorer/query_syntax/'
@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-[Datadog tracing libraries][1] provide out-of-the-box support for instrumenting a variety of libraries.
+[Datadog SDKs][1] provide out-of-the-box support for instrumenting a variety of libraries.
 These instrumentations generate spans to represent logical units of work in distributed systems.
 Each span consists of [span tags][2] to provide additional information on the unit of work happening in the system. Naming conventions describe the name and content that can be used in span events.
 

@@ -37,7 +37,7 @@ En la sección **Propiedades**, se pueden ver el ID del test, las fechas de crea
 
 En la sección **Historial**, puedes ver tres gráficos:
 
-- El gráfico de **Tiempo de actividad global** muestra el tiempo total de actividad de todas las localizaciones de test durante un intervalo dado de tiempo. El tiempo de actividad global tiene en cuenta las [condiciones de alerta][20] configuradas para un test.
+- El gráfico **Tiempo de actividad global** muestra el tiempo de actividad total de todas las ubicaciones de test en un intervalo de tiempo determinado. La visualización del tiempo de actividad global se muestra en rojo solo si las [condiciones de alerta][20] configuradas para un test se activan en el intervalo de tiempo dado. Dado que el tiempo de actividad de la ubicación se calcula en función del resultado final de un test una vez completados los reintentos, los intervalos de [reintento rápido][24] afectan directamente a lo que aparece en el gráfico de tiempo de actividad total.
 - El gráfico **Tiempo hasta la interactividad por localización y dispositivo** muestra la cantidad de tiempo en segundos hasta que se pueda interactuar con una página. Para obtener más información sobre la monitorización de tiempos de actividad, consulta la guía [Monitorización de tiempos de actividad de sitios web con SLOs][14].
 - El gráfico **Duración de test por localización y dispositivo** muestra la cantidad de tiempo en minutos que se tarda en completar cada localización y dispositivo en un intervalo dado de tiempo. 
 
@@ -155,9 +155,12 @@ La duración de los pasos es la cantidad de tiempo que tarda el paso en ejecutar
 El resultado de un test se considera `FAILED` si no cumple las aserciones o si el paso ha fallado por alguna otra razón. Se pueden solucionar problemas de ejecuciones fallidas inspeccionando sus capturas de pantallas, buscando [errores](#errors-and-warnings) potenciales a nivel de los pasos y examinando los [recursos][17] y [trazas de backend](#backend-traces) generadas por los pasos.
 
 ### Comparar capturas de pantalla
-Para obtener ayuda durante la investigación, haz clic en **Comparar capturas de pantalla** para recibir capturas de pantalla paralelas del resultado fallido y de la última ejecución exitosa. La comparación te ayudará a detectar cualquier diferencia que pueda haber provocado el fallo del test.
-{{< img src="synthetics/browser_tests/test_results/compare_screenshots.png" alt="Comparar capturas de pantalla de tus ejecuciones exitosas y fallidas" style="width:90%;" >}}
-**Nota**: La comparación se realiza entre dos ejecuciones de test con la misma versión, URL de inicio, dispositivo, navegador y tipo de ejecución (programada, activación manual, CI/CD). Si no hay ninguna ejecución anterior exitosa con los mismos parámetros, no se ofrece ninguna comparación.
+
+Para ayudarte durante la investigación, haz clic en **Compare Screenshots** (Comparar capturas de pantalla) para recibir capturas de pantalla paralelas del resultado fallido y de la última ejecución correcta. La comparación te ayudará a detectar cualquier diferencia que pudiera haber causado el fallo del test.
+
+{{< img src="synthetics/browser_tests/test_results/compare_screenshots.png" alt="Capturas de pantalla comparativas entre tus ejecuciones fallidas y exitosas" style="width:90%;" >}}
+
+**Nota**: La comparación se realiza entre dos ejecuciones de test con la misma versión, URL de inicio, dispositivo, navegador y tipo de ejecución (programada, activación manual, CI/CD). Si no hay ninguna ejecución anterior correcta con los mismos parámetros, no se ofrece ninguna comparación.
 ### Errores comunes en los tests de navegador
 
 `Element located but it's invisible` 
@@ -188,7 +191,7 @@ Las alertas de los monitores de tests Synthetic aparecen en la pestaña **Evento
 [3]: https://web.dev/cls/
 [4]: https://web.dev/fid/
 [5]: /es/real_user_monitoring/
-[6]: /es/real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[6]: /es/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [7]: /es/tracing/trace_explorer/trace_view/
 [8]: /es/synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
 [9]: /es/synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator
@@ -197,7 +200,7 @@ Las alertas de los monitores de tests Synthetic aparecen en la pestaña **Evento
 [12]: /es/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [13]: /es/synthetics/guide/synthetic-test-monitors/
 [14]: /es/synthetics/guide/uptime-percentage-widget/
-[15]: /es/real_user_monitoring/browser/data_collected/#long-task-timing-metrics
+[15]: /es/real_user_monitoring/application_monitoring/browser/data_collected/#long-task-timing-metrics
 [16]: /es/synthetics/guide/explore-rum-through-synthetics/
 [17]: /es/tracing/services/resource_page/
 [18]: https://app.datadoghq.com/event/explorer
@@ -206,3 +209,4 @@ Las alertas de los monitores de tests Synthetic aparecen en la pestaña **Evento
 [21]: /es/logs/guide/ease-troubleshooting-with-cross-product-correlation/#leverage-trace-correlation-to-troubleshoot-synthetic-tests
 [22]: /es/real_user_monitoring/explorer
 [23]: /es/real_user_monitoring/session_replay
+[24]: /es/synthetics/browser_tests/?tab=requestoptions#fast-retry

@@ -64,7 +64,7 @@ Starting with Agent version 7.67, the [Agent Profiling check][8] can be enabled 
 [2]: /agent/basic_agent_usage/#cli
 [3]: /infrastructure/process/
 [4]: /integrations/process/#configuration
-[5]: /developers/write_agent_check/#collection-interval
+[5]: /extend/write_agent_check/#collection-interval
 [6]: /getting_started/containers/#enable-autodiscovery
 [7]: /agent/troubleshooting/debug_mode/
 [8]: /integrations/agentprofiling

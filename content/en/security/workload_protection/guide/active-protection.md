@@ -1,11 +1,16 @@
 ---
 title: Proactively block crypto mining threats with Active Protection
+site_support_id: workload_security_active_protection
 aliases:
   - /security/cloud_security_management/guide/active-protection
 further_reading:
 - link: "security/workload_protection/workload_security_rules"
   tag: "Documentation"
   text: "Workload Protection Detection Rules"
+- link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
+  tag: "Learning Center"
+  text: "Detect Host and Container Compromises with Workload Protection"
+
 ---
 
 <div class="alert alert-danger">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
@@ -143,6 +148,10 @@ A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The
 
 {{< img src="security/cws/guide/active-protection-signal-messages.png" alt="Signal messages" style="width:100%;" >}}
 
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security
 [2]: https://app.datadoghq.com/security/configuration/workload/agent-rules

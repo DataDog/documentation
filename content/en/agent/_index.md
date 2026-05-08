@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/dont-fear-the-agent/"
   tag: "Blog"
   text: "Don't fear the Agent"
+- link: "https://learn.datadoghq.com/courses/agent-on-host"
+  tag: "Learning Center"
+  text: "The Agent on a Host"
 aliases:
   - /agent/faq/agent-check-directory-structure
   - /agent/faq/install-core-extra
@@ -55,6 +58,7 @@ The Datadog Agent is software that runs on your hosts. It collects events and me
 Datadog recommends you update Datadog Agent with every minor and patch release, or, at a minimum, monthly. </p>
 <p>
 Upgrading to a major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes.</p>
+<p> <em>It is recommended to fully install the Agent.</em> However, a standalone DogStatsD package is available for Amazon Linux, CentOS, Debian, Fedora, Red Hat, SUSE, and Ubuntu. This package is used in containerized environments where DogStatsD runs as a sidecar or environments running a DogStatsD server without full Agent functionality.</p>
 </div>
 
 ## Managing the Agent
@@ -65,9 +69,9 @@ Upgrading to a major Datadog Agent version and keeping it updated is the only su
 {{< img src="/agent/basic_agent_usage/basic_agent_2_july_25.png" alt="The Fleet Automation view that allows you to centrally manage your Datadog Agents in one place." style="width:100%;">}}
 
 
-- **View configuration & history**: View every Agent in your fleet, its version, enabled products, configuration files, and historical changes from a single page.
+- **{{< ui >}}View configuration & history{{< /ui >}}**: View every Agent in your fleet, its version, enabled products, configuration files, and historical changes from a single page.
 - **[Upgrade outdated Agents][13]**: Trigger remote upgrades for your Agents to keep your fleet updated in a few clicks.
-- **[Send a flare for support][14]**: From the Support tab of a host, generate a flare and attach it to an existing or new Support case without having to use the command line.
+- **[Send a flare for support][14]**: From the {{< ui >}}Support{{< /ui >}} tab of a host, generate a flare and attach it to an existing or new Support case without having to use the command line.
 - **Audit API-key usage**: Identify which Agents are using a specific API key and rotate keys safely.
 
 

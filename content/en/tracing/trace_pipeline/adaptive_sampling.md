@@ -4,6 +4,7 @@ description: Automatically adjust sampling rates to match specific budgets while
 disable_toc: false
 aliases:
     - /tracing/guide/adaptive_sampling
+site_support_id: adaptive_sampling
 further_reading:
     - link: "/tracing/trace_pipeline/ingestion_mechanisms"
       tag: "Documentation"
@@ -34,7 +35,7 @@ To configure services to use adaptive sampling, follow the instructions listed b
 
 ### Tracing library versions
 
-The following table lists minimum tracing library versions required for adaptive sampling:
+The following table lists minimum SDK versions required for adaptive sampling:
 
 | Language    | Minimum version required |
 |-------------|--------------------------|
@@ -46,6 +47,26 @@ The following table lists minimum tracing library versions required for adaptive
 | .NET        | [v2.54.0][13]            |
 | C++/Proxies | [v0.2.2][14]             |
 | PHP         | [v1.4.0][17]             |
+
+## Limitations
+
+Limits apply to service and environment combinations depending on the sampling configuration:
+
+#### Adaptive sampling
+
+- The maximum number of `service/env` combinations onboarded to adaptive sampling is 800.
+- Each unique `service/env` pair configured for adaptive sampling counts toward this limit.
+
+#### Remote sampling configuration
+
+- The maximum number of `service/env` combinations using remote sampling configuration is **1000**.
+- This limit applies regardless of how many sampling rules are defined for each service.
+- Each unique `service/env` pair with remote sampling enabled counts once toward this limit.
+
+#### Services using both adaptive and remote sampling
+
+- If a `service/env` combination uses both adaptive sampling and remote sampling configuration, it counts once toward each respective limit (once toward the 800 adaptive sampling limit and once toward the 1000 remote sampling limit).
+- It does **not** count twice within either individual limit.
 
 ## Configure the adaptive sampling target
 
@@ -88,7 +109,7 @@ That monthly target volume is recomputed every 30 minutes.
 {{< img src="/tracing/guide/adaptive_sampling/volume_based_target_setting.png" alt="Volume based target setting" style="width:100%;">}}
 
 If you are configuring the first service to adaptive sampling, ensure that the ingestion volume target is `>0`. For subsequent services, you should increase the allocated budget after the new service is onboarded to account for the new volume.  
-  <div class="alert alert-info">The configured budget is only allocated to services enrolled in adaptive sampling. It does not include ingested volume from services not enrolled in adaptive sampling, local sampling rules, or other <a href="/tracing/trace_pipeline/ingestion_mechanisms#in-the-agent">sampling mechanisms</a> configured locally in the Agent or tracing libraries.</div>
+  <div class="alert alert-info">The configured budget is only allocated to services enrolled in adaptive sampling. It does not include ingested volume from services not enrolled in adaptive sampling, local sampling rules, or other <a href="/tracing/trace_pipeline/ingestion_mechanisms#in-the-agent">sampling mechanisms</a> configured locally in the Agent or SDKs.</div>
 
 ## Configure adaptive sampling for a service
 
@@ -109,7 +130,7 @@ The table includes:
 - **Downstream bytes**: Ingested bytes from spans where the sampling decision starts from that service and resource, including downstream services.
 - **Configuration**: Source of the resource sampling rate:
   - `AUTOMATIC`: [Default head-based sampling mechanism][8] from the Agent.
-  - `CONFIGURED LOCAL`: [Sampling rule][7] set locally in the tracing library.
+  - `CONFIGURED LOCAL`: [Sampling rule][7] set locally in the SDK.
   - `CONFIGURED REMOTE`: Remote sampling rule set from the Datadog UI.
   - `ADAPTIVE REMOTE`: Adaptive sampling rules set by Datadog.
 
@@ -131,6 +152,31 @@ To onboard a service to adaptive sampling:
 {{< img src="/tracing/guide/adaptive_sampling/adaptive_sampling_setting_modal.png" alt="Adaptive sampling setting modal" style="width:70%;">}}
 
 The configuration should take effect in 5-6 minutes, the time it takes for Datadog to observe the service's traffic pattern, compute, then apply the sampling rates. Resources that have been configured remotely display as `Configured Remote` in the **Configuration** column.
+
+## Permissions
+
+By default, only users with the `Datadog Admin` role can modify adaptive sampling configurations or onboard services to adaptive sampling.
+
+If your organization uses custom roles, assign your user to a custom role that includes `APM Remote Configuration Write` and `APM Service Ingest Write` [permissions.][4]
+
+### Restrict access
+Use [granular access controls][19] to manage who can modify a service's adaptive sampling configuration. You can restrict access based on roles, teams, or individual users.
+
+{{< img src="/tracing/guide/adaptive_sampling/add_restriction.png" alt="Restrict permission modal" style="width:60%;">}}
+
+To restrict access:
+
+{{< img src="/tracing/guide/adaptive_sampling/restrict_service_ingestion_permissions.png" alt="Open granular access control modal" style="width:100%;">}}
+
+**Note**: Only users with the `remote_config_write` permission can restrict access to the adaptive sampling configuration of individual services.
+
+1. Open the **Permissions** section in the Ingestion Control side panel of the service.
+
+2. Click **Restrict access**.
+
+3. Select the teams, roles, or users to grant access to.
+
+4. Click **Add**.
 
 ## Further reading
 
@@ -154,3 +200,4 @@ The configuration should take effect in 5-6 minutes, the time it takes for Datad
 [16]: /tracing/trace_pipeline/ingestion_controls
 [17]: https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0
 [18]: https://app.datadoghq.com/apm/traces/ingestion-control
+[19]: /account_management/rbac/granular_access/

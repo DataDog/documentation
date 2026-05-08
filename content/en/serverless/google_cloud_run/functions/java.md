@@ -16,9 +16,9 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Java tracer**.
+1. **Install the Datadog Java SDK**.
 
-   1. Download the Datadog Java tracer, and make sure it is deployed with your function:
+   1. Download the Datadog Java SDK, and make sure it is deployed with your function:
 
       {{< code-block lang="bash" disable_copy="false" >}}
 wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
@@ -26,7 +26,7 @@ wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 
       Add the `JAVA_TOOL_OPTIONS: -javaagent:/path/to/dd-java-agent.jar` environment variable to your app.
 
-   2. Add the tracer artifacts.
+   2. Add the SDK artifacts.
       {{< tabs >}}
       {{% tab "Maven" %}}
 {{< code-block lang="xml" disable_copy="false" >}}
@@ -102,11 +102,13 @@ logger.info("Hello World!");
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="java" function="true" %}}
+{{% serverless-init-env-vars-sidecar language="java" function="true" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting sidecar="true" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
@@ -115,5 +117,5 @@ logger.info("Hello World!");
 [1]: https://github.com/DataDog/dd-trace-java/releases
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[4]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
-[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples
+[4]: /extend/dogstatsd/?tab=java#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples-5

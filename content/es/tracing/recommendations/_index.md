@@ -94,6 +94,7 @@ multifiltersearch:
   - filter_by: true
     id: recommendation_prerequisite
     name: Requisito previo de la recomendación
+site_support_id: apm_recommendations
 title: Recomendaciones de APM
 ---
 
@@ -128,7 +129,7 @@ Al examinar conjuntamente estas fuentes, Datadog encuentra formas de ayudarte a 
 
 Revisar las recomendaciones que requieren tu atención:
 
-1. Ve a [**APM** > **Recommendations**][1] (APM > Recomendaciones).
+1. Ve a [**APM** > **Recommendations** (APM > Recomendaciones)][1].
 2. Revisa las recomendaciones en **For Review** (Para revisión).
 3. Selecciona una recomendación de la lista para ver el problema, el impacto y cómo resolverlo.
 4. Revisa el problema, su impacto y la recomendación de Datadog para resolverlo.

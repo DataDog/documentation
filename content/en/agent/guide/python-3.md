@@ -16,7 +16,7 @@ Only Agent v7+ supports running Python 3 custom checks by default. <a href="/age
 
 ## Overview
 
-This guide provides information and best practices on migrating checks between Python 2 and 3. Use Datadog's [Custom Check Compatibility][1] tool to see whether your custom checks are compatible with Python 3 or need to be migrated.
+This guide provides information and best practices on migrating checks between Python 2 and 3. To find out if a custom check is compatible with your Agent, use the `custom_check` filter along with the name of the check on the [Fleet Automation][1] page.
 
 To provide flexibility in allowing code to run multiple on versions of the Agent, this guide focuses on retaining backwards compatibility.
 
@@ -266,7 +266,7 @@ Use the built-in `next` function instead of calling the `next` method. For insta
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/compatibility_check
+[1]: https://app.datadoghq.com/fleet
 [2]: https://portingguide.readthedocs.io/en/latest/tools.html#automated-checker-pylint-py3k
 [3]: https://pip.pypa.io/en/stable/installing
 [4]: https://docs.python.org/3.1/library/2to3.html

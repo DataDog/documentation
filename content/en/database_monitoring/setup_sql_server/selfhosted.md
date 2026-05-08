@@ -14,6 +14,9 @@ further_reading:
 - link: "/database_monitoring/guide/sql_extended_events/"
   tag: "Documentation"
   text: "Configure Query Completion and Query Error Collection"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Capturing SQL Query Parameter Values"
 - link: "https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/"
   tag: "Blog"
   text: "Strategize your Azure migration for SQL workloads with Datadog"
@@ -33,7 +36,7 @@ Do the following steps to enable Database Monitoring with your database:
 ## Before you begin
 
 Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019, 2022
+: 2012, 2014, 2016, 2017, 2019, 2022, 2025 (requires Agent 7.79+)
 
 {{% dbm-sqlserver-before-you-begin %}}
 

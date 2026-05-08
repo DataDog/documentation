@@ -11,7 +11,17 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/metrics'
     tag: Documentation
     text: Analyze Performance with Metrics
+  - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
+    tag: "Blog"
+    text: "Unify and correlate frontend and backend data with retention filters"
+  - link: 'https://learn.datadoghq.com/courses/rum-retention-filters'
+    tag: 'Learning Center'
+    text: 'Interactive Lab: RUM Retention Filters'
 ---
+
+{{< learning-center-callout header="Try RUM Retention Filters in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/rum-retention-filters" hide_image="false" >}}
+  Learn how to use RUM retention filters to control which session data is stored and optimize your observability budget.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -87,6 +97,10 @@ A fallback filter at the bottom of your list captures a small percentage of sess
   |---------|
   | {{< img src="real_user_monitoring/rum_without_limits/retention-filters-catchall-bad-3.png" alt="Poor fallback filter example: 1. Sessions with replays (100% retention), 2. Sessions lasting more than 5 seconds (100% retention), 3. All sessions (10% retention). This risks overriding more specific filters by capturing all sessions immediately." style="width:100%" >}} |
 
+### Excluding sessions
+
+See [Excluding sessions using retention filters][3].
+
 ## Suggested retention filters and use cases
 Below we describe the set of default filters, suggested filters, and their typical use cases.
 
@@ -113,3 +127,4 @@ Below we describe the set of default filters, suggested filters, and their typic
 
 [1]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
 [2]: /real_user_monitoring/rum_without_limits/retention_filters/#logic
+[3]: /real_user_monitoring/rum_without_limits/retention_filters#excluding-sessions-using-retention-filters

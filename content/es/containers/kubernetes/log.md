@@ -1,19 +1,24 @@
 ---
 aliases:
 - /es/agent/kubernetes/log
+description: Configura la recopilación de logs de las aplicaciones en contenedores
+  que se ejecutan en Kubernetes utilizando el Datadog Agent
 further_reading:
+- link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
+  tag: Blog
+  text: Monitorizar logs de Amazon EKS en Fargate con Datadog
 - link: /agent/kubernetes/apm/
   tag: Documentación
   text: Recopilar tus trazas (traces) de aplicaciones
 - link: /agent/kubernetes/prometheus/
   tag: Documentación
-  text: Recopila tus métricas de Prometheus
+  text: Recopilar tus métricas de Prometheus
 - link: /agent/kubernetes/integrations/
   tag: Documentación
-  text: Recopila las métricas de tus aplicaciones y logs automáticamente
+  text: Recopilar las métricas de tus aplicaciones y logs automáticamente
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
-  text: Limita la recopilación de datos solo a un subconjunto de contenedores
+  text: Limitar la recopilación de datos a un subconjunto de contenedores
 - link: /agent/kubernetes/tag/
   tag: Documentación
   text: Asignar etiquetas (tags) a todos los datos emitidos por un contenedor
@@ -139,13 +144,13 @@ datadog:
 <div class="alert alert-danger">
 <strong>Advertencia para instalaciones sin privilegios</strong>
 <br/><br/>
-Cuando se ejecuta una instalación sin privilegios, el Agent necesita poder leer archivos de logs en <code>/var/log/pods</code>.
+Cuando se ejecuta una instalación sin privilegios, el Agent debe poder leer archivos de log en <code>/var/log/pods</code>.
 <br/><br/>
-Si estás utilizando el tiempo de ejecución contenedorizado, los archivos de logs en <code>/var/log/pods</code> son legibles por los miembros del grupo <code>raíz</code>. Con las instrucciones anteriores, el Agent se ejecuta con el grupo <code>raíz</code>. No es necesario realizar ninguna acción.
+Si estás utilizando el tiempo de ejecución de containerd, los archivos de log en <code>/var/log/pods</code> son legibles por los miembros del grupo <code>raíz</code>. Con las instrucciones anteriores, el Agent se ejecuta con el grupo <code>raíz</code>. No es necesario realizar ninguna acción.
 <br/><br/>
-Si estás utilizando el tiempo de ejecución Docker, los archivos de logs en <code>/var/log/pods</code> son enlaces simbólicos a <code>/var/lib/docker/containers</code>, que sólo puede recorrer el usuario <code>raíz</code>. Consecuentemente, con el tiempo de ejecución Docker, no es posible para un Agent <code>no raíz</code> leer logs en <code>/var/log/pods</code>. El socket Docker debe estar montado en el contenedor del Agent, para que pueda obtener logs de pod a través del Docker daemon.
+Si estás utilizando el tiempo de ejecución de Docker, los archivos de log en <code>/var/log/pods</code> son enlaces simbólicos a <code>/var/lib/docker/containers</code> que solo puede recorrer el usuario <code>raíz</code>. Consecuentemente, con el tiempo de ejecución de Docker, no es posible para un Agent que <code>no</code> raíz leer logs en <code>/var/log/pods</code>. El socket de Docker debe estar montado en contenedor del Agent, para que pueda obtener logs de pod a través del daemon de Docker.
 <br/><br/>
-Para recopilar logs de <code>/var/log/pods</code> cuando el socket Docker está montado, define la variable de entorno <code>DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE</code> (o <code>logs_config.k8s_container_use_file</code> en <code>datadog.yaml</code>) como <code>true</code>. Esto fuerza al Agent a utilizar el modo de recopilación de archivos.
+Para recopilar logs de <code>/var/log/pods/</code> cuando el socket de Docker está montado, establece la variable entorno <code>DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE</code> (o <code>logs_config.k8s_container_use_file</code> en <code>datadog.yaml</code>) en <code>true</code>. Esto fuerza al Agent a utilizar el modo de recopilación de archivos.
 </div>
 
 ## Detección de logs
@@ -262,7 +267,7 @@ spec:
 Puedes proporcionar archivos de configuración al Datadog Agent para que ejecute una integración especificada cuando detecte un contenedor que utiliza el identificador de imagen coincidente. Esto permite crear una configuración de log genérica que se aplica a un conjunto de imágenes de contenedor.
 
 {{< tabs >}}
-{{% tab "Datadog Operador" %}}
+{{% tab "Datadog Operator" %}}
 Puede personalizar la colección Logs por integración con un override en el `override.nodeAgent.extraConfd.configDataMap`. Este método crea el ConfigMap y monta el archivo Configuración deseado en el Agent Contenedor .
 
 ```yaml
@@ -392,7 +397,7 @@ Utiliza etiquetas (labels) de logs de Autodiscovery para aplicar la lógica de p
 
 Datadog recomienda que utilices los flujos de salida `stdout` y `stderr` para aplicaciones en contenedores, de modo que puedas configurar más automáticamente la recopilación de logs.
 
-Sin embargo, el Agent también puede recopilar directamente logs de un archivo basándose en una anotación. Para recopilar estos logs, utiliza `ad.datadoghq.com/<CONTAINER_IMAGE>.logs` con una configuración `type: file` y `path`. Los logs recopilados de archivos con es´ta anotación se etiquetan automáticamente con el mismo conjunto de etiquetas (tags) que los logs procedentes del propio contenedor. Datadog recomienda que utilices los flujos de salida `stdout` y `stderr` para aplicaciones en contenedores, de modo que puedas configurar automáticamente la recopilación de logs. Para obtener más información, consulta las [configuraciones recomendadas](#recommended-configurations).
+Sin embargo, el Agent también puede recopilar directamente logs de un archivo basándose en una anotación. Para recopilar estos logs, utiliza `ad.datadoghq.com/<CONTAINER_NAME>.logs` con una configuración de `type: file` y `path`. Los logs recopilados de archivos con dicha anotación se etiquetan automáticamente con el mismo conjunto de etiquetas que los logs procedentes del propio contenedor. Datadog recomienda utilizar los flujos de salida `stdout` y `stderr` para las aplicaciones en contenedores, de modo que puedas configurar automáticamente la recopilación de logs. Para más información, consulta [Configuraciones recomendadas](#recommended-configurations).
 
 Estas rutas de archivo son **relativas** al contenedor del Agent. Por lo tanto, el directorio que contiene el archivo de log debe montarse tanto en la aplicación como en el contenedor del Agent para que éste pueda tener la visibilidad adecuada.
 

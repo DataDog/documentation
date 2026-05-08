@@ -1,4 +1,5 @@
 ---
+id: secret_kubernetes
 title: Secrets (Kubernetes)
 core_product:
   - infrastructure monitoring

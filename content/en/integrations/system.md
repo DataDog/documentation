@@ -42,7 +42,7 @@ The System check is included in the [Datadog Agent][4] package. No additional in
 
 ### Metrics
 
-{{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc. system.swap system.uptime" >}}
+{{< get-metrics-from-git "system" "system.cpu system.fs system.io system.load system.mem system.proc. system.swap system.uptime system.paging" >}}
 
 ### Events
 

@@ -27,7 +27,7 @@ To set up Cloud Cost Management for Oracle Cloud Infrastructure (OCI) in Datadog
 ## Setup
 
 ### Configure the OCI integration
-Navigate to [Setup & Configuration][2] and follow the steps to configure the OCI integration for your parent tenancy.
+Navigate to [Setup & Configuration][2], add an OCI account and follow the steps to configure the OCI integration for your parent tenancy.
 
 **Note**: If the OCI integration was created without the QuickStart method, then you need to follow the [documentation][3] for QuickStart migration.
 
@@ -35,6 +35,12 @@ Navigate to [Setup & Configuration][2] and follow the steps to configure the OCI
 Once the integration is created, enable the toggle for Cloud Cost Management.
 
 {{< img src="cloud_cost/oci/oci_ccm_enablement.png" alt="Toggle for enabling Cloud Cost Management" style="width:100%;" >}}
+
+### Getting historical data
+
+Oracle Cloud Infrastructure retains cost reports for 1 year. When you enable Cloud Cost Management, Datadog automatically ingests up to 15 months of available historical cost data from these retained reports (up to 1 year based on Oracle's retention).
+
+Oracle does not provide a process for backfilling additional historical data beyond what is already retained in the cost reports.
 
 ## Cost types
 You can visualize your ingested data using the following cost types:
@@ -111,7 +117,7 @@ Container cost allocation is not available for OCI. See [Container Cost Allocati
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/oracle-cloud-infrastructure/
-[2]: https://app.datadoghq.com/cost/setup?cloud=oracle
+[2]: https://app.datadoghq.com/cost/setup
 [3]: /integrations/oracle-cloud-infrastructure/?tab=createvcnrecommended#oci-integration-manual-to-quickstart-migration
 [4]: https://docs.oracle.com/en-us/iaas/Content/Billing/Concepts/costusagereportsoverview.htm
-[5]: /cloud_cost_management/cost_allocation/container_cost_allocation/
+[5]: /cloud_cost_management/allocation/container_cost_allocation/

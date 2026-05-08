@@ -1,69 +1,49 @@
 ---
+app_id: php
 categories:
 - languages
 - log collection
 - tracing
-custom_kind: integration
-dependencies: []
-description: Recopila métricas, trazas, logs y datos de perfil de tus aplicaciones PHP.
-doc_link: https://docs.datadoghq.com/integrations/php/
-draft: false
+custom_kind: integración
+description: Recopila métricas, trazas (traces) y logs de tus aplicaciones PHP.
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-php-performance/
-  tag: Blog
-  text: Monitorización de PHP con Datadog APM y rastreo distribuido.
+  tag: blog
+  text: Monitorización PHP con Datadog APM y rastreo distribuido
 - link: https://www.datadoghq.com/blog/php-logging-guide/
-  tag: Blog
-  text: Cómo recopilar, personalizar y analizar logs de PHP.
-git_integration_title: php
-has_logo: true
-integration_id: php
-integration_title: PHP
-integration_version: 
-is_public: true
-manifest_version: 1.0
-name: php
-public_title: Integración de Datadog y PHP
-short_description: Recopila métricas, trazas, logs y datos de perfil de tus aplicaciones PHP.
-version: 1.0
+  tag: blog
+  text: 'Generación de logs PHP: cómo recopilar, personalizar y analizar logs PHP'
+media: []
+title: PHP
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
-La integración de Datadog y PHP te permite recopilar y monitorizar logs, trazas (traces) y métricas personalizadas de tu aplicación de PHP.
+La integración de Datadog y PHP te permite recopilar y monitorizar logs, trazas y métricas personalizadas de tu aplicación PHP.
 
 ## Configuración
 
 ### Recopilación de métricas
 
-Consulta la documentación dedicada a [recopilar métricas personalizadas de PHP con DogStatsD][1].
+Consulta la documentación exclusiva para [recopilar métricas personalizadas de PHP con DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/?tab=php).
 
 ### Recopilación de trazas
 
-Consulta la documentación dedicada a [instrumentar tu aplicación PHP][2] para enviar sus trazas (traces) a Datadog.
+Consulta la documentación exclusiva para [instrumentar tu aplicación PHP](https://docs.datadoghq.com/tracing/setup/php/) para enviar tus trazas a Datadog.
 
-### APM
+### Recopilación de logs
 
 *Disponible para Agent v6.0+*
 
-Consulta la documentación específica sobre cómo [configurar la recopilación de logs de PHP][3] para reenviar tus logs a Datadog.
+Consulta la documentación exclusiva sobre cómo [configurar la recopilación de logs PHP](https://docs.datadoghq.com/logs/log_collection/php/) para reenviar tus logs a Datadog.
 
 ### Recopilación de perfiles
 
-Consulta la documentación específica para [activar el perfilador PHP][4].
+Consulta la documentación exclusiva para [habilitar el generador de perfiles PHP](https://docs.datadoghq.com/profiler/enabling/php/).
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][5].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog](https://docs.datadoghq.com/help/).
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://docs.datadoghq.com/developers/dogstatsd/?tab=php
-[2]: https://docs.datadoghq.com/tracing/setup/php/
-[3]: https://docs.datadoghq.com/logs/log_collection/php/
-[4]: https://docs.datadoghq.com/profiler/enabling/php/
-[5]: https://docs.datadoghq.com/help/
-

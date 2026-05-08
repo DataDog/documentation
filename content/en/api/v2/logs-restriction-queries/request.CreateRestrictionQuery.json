@@ -1,0 +1,8 @@
+{
+  "data": {
+    "attributes": {
+      "restriction_query": "env:sandbox"
+    },
+    "type": "logs_restriction_queries"
+  }
+}

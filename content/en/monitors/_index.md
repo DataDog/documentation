@@ -8,21 +8,33 @@ aliases:
   - /monitoring
 description: "Create monitors, configure notifications and automations, and manage your monitors using the alerting platform"
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Alerting"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog Alerting releases! (App login required)."
+  - link: "/api/v1/monitors/"
+    tag: "Documentation"
+    text: "Datadog Monitors API"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session on creating effective monitors"
   - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
     tag: "Blog"
     text: "Monitoring 101: Alerting on what matters"
-  - link: "/api/v1/monitors/"
-    tag: "Documentation"
-    text: "Datadog Monitors API"
   - link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
     tag: "Blog"
     text: "Route your monitor alerts with Datadog monitor notification rules"
+  - link: "https://www.datadoghq.com/blog/ecs-default-monitors/"
+    tag: "Blog"
+    text: "Catch and remediate ECS issues faster with default monitors and the ECS Explorer"
+  - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization"
+    tag: "Blog"
+    text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
+  - link: "https://www.datadoghq.com/blog/human-name-detection"
+    tag: "Blog"
+    text: "Detect human names in logs with ML in Sensitive Data Scanner"
+  - link: "https://app.datadoghq.com/release-notes?category=Alerting"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Alerting releases! (App login required)."
+  - link: "https://learn.datadoghq.com/courses/apm-monitors-and-alerting"
+    tag: "Learning Center"
+    text: "APM Monitors and Alerting"
 cascade:
     algolia:
         rank: 70
@@ -42,7 +54,7 @@ Monitor critical changes by checking metrics, integration availability, and netw
 
 ## Get started
 
-The fastest way to start with Datadog Monitors is with [Recommended Monitors][1]. These are a collection of monitors within Datadog that are preconfigured by Datadog and integration partners.
+The fastest way to start with Datadog Monitors is with [Monitor templates][1]. These are a collection of monitors within Datadog that are preconfigured by Datadog and integration partners.
 
 You can also build your own monitors from scratch in lab environments in the Learning Center, or in your application by following the Getting Started with Monitors guide.
 
@@ -72,11 +84,11 @@ Monitors and alerts are essential tools for ensuring the reliability, performanc
 1. [Investigate alerts through the status page.][6]
 1. [Resolve misconfigured monitors on the Monitor Quality page.][7]
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors/recommended
+[1]: https://app.datadoghq.com/monitors/templates
 [2]: /monitors/notify
 [3]: /monitors/downtimes
 [4]: /monitors/downtimes/?tab=bymonitorname

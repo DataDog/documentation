@@ -1,4 +1,7 @@
 ---
+description: Aprende a delimitar correctamente los tiempos de inactividad a monitores
+  y grupos específicos mediante etiquetas de monitor, alcances de grupo y filtrado
+  detallado.
 disable_toc: false
 further_reading:
 - link: /monitors/downtimes

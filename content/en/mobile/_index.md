@@ -24,6 +24,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mobile-app-reduce-mttr/"
   tag: "Blog"
   text: "Reduce your mean time to repair with the Datadog mobile app"
+- link: "https://www.datadoghq.com/blog/designing-on-call-sounds"
+  tag: "Blog"
+  text: "How we designed empathetic alert sounds for on-call engineers"
 ---
 
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
@@ -67,6 +70,11 @@ By clicking **Authorize** when logging in, you link the mobile device you're usi
 
 If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][5]
 
+##### Subdomain login
+
+1. Tap subdomain and enter your custom [subdomain][29].
+2. Proceed with login steps as prompted.
+
 ### Switch organizations
 
 To switch organizations, navigate to the **Settings** page on the mobile app and click on **Organization**. 
@@ -95,6 +103,10 @@ The On-Call page provides a comprehensive view of On-Call shifts, schedules, pag
 You can initiate a page to an individual or team, and also override existing shifts by tapping on the shift you would like to override. You can view Bits AI SRE monitor investigations for initial findings and conclusions. For more information, see [Datadog On-Call][20].
 
 To configure On-Call notifications on your mobile device, see the guide to [Set up your Mobile Device for Datadog On-Call][21].
+
+<div class="alert alert-info">
+If you only need to access On-Call on mobile and want to restrict access to sensitive telemetry data on mobile devices, contact Datadog support.
+</div>
 
 ## Incidents
 
@@ -152,9 +164,10 @@ The Notification Center lists all push notifications received so that notificati
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range. 
 
-**Notes**: 
+**Note**: 
 - To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
 - Dashboard links configured in UTC open in UTC on the mobile app. For more information, see [Dashboard Configurations][24].
+- Not all widget types are available, which means they do not display data on the mobile app. This includes Topology Map, List Widget (all data sources), Legacy treemap widget, and SLO Summary widget.
 
 ## Monitors
 
@@ -274,7 +287,7 @@ On the Services page, you can view, search and filter all services that you have
 {{% /tab %}}
 {{< /tabs >}}
 
-On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Chat with Bits AI][27].
+On the Bits AI home page, you can ask questions about your organization's system health. Bits AI supports natural language querying for logs and APM traces. For more information, see [Bits Assistant][27].
 
 ### Bits AI SRE
 {{< tabs >}}
@@ -294,17 +307,20 @@ When enabled, Bits AI SRE initiates investigations directly on On-Call pages. Th
 
 ## Frequently Asked Question
 ### How do I remain logged into the mobile app?
-Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed. 
+Upon successful authentication to the mobile app, you will remain logged in for 90 days.  
 
-**Note**: If you have notifications enabled, proactive notifications will be sent prior to token expiration.
+**Note**: If you have notifications enabled, proactive notifications will be sent 10 days prior to token expiration.
 
 ### Will I still receive notifications if I am automatically signed out?
-If you are automatically logged out due to inactivity during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
+If you are automatically logged out during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
 
 **Note**: If you manually log out from the app, you will stop receiving notifications.
 
 ### Why am I not receiving notifications?
 Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
+
+### Will I receive notifications for all organizations that I am signed into?
+Yes, regardless of the organization that you switch to, you receive notifications for all organizations you are signed into. This includes critical push notifications. 
 
 ### What happens if a user is disabled?
 The mobile app token will be invalid and force the user to log out.
@@ -337,12 +353,13 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [17]: https://docs.datadoghq.com/software_catalog/manage/
 [18]: https://docs.datadoghq.com/notebooks/
 [19]: https://docs.datadoghq.com/notebooks/#notebook-tags
-[20]: https://docs.datadoghq.com/service_management/on-call/
-[21]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
+[20]: https://docs.datadoghq.com/incident_response/on-call/
+[21]: /incident_response/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
 [22]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
 [23]: https://docs.datadoghq.com/logs/explorer/search_syntax/
 [24]: /dashboards/configure/#configuration-actions
 [25]: /logs/explorer/watchdog_insights/
 [26]: /watchdog/insights/?tab=logmanagement
-[27]: /bits_ai/chat_with_bits_ai/
+[27]: /bits_ai/bits_assistant/
 [28]: /bits_ai/bits_ai_sre/
+[29]: /account_management/multi_organization/#custom-sub-domains

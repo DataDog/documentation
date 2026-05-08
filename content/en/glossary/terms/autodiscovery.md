@@ -1,4 +1,5 @@
 ---
+id: autodiscovery
 title: Autodiscovery
 core_product:
   - datadog agent

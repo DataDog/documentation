@@ -18,14 +18,14 @@ further_reading:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/python">available on GitHub</a>.</div>
 
-1. **Install the Datadog Python tracer**.
+1. **Install the Datadog Python SDK**.
 
    Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. You can find the latest version on [PyPI][1]:
    {{< code-block lang="text" filename="requirements.txt" disable_copy="false" collapsible="true" >}}
 ddtrace==<VERSION>
 {{< /code-block >}}
 
-   Alternatively, you can install the tracer in your Dockerfile:
+   Alternatively, you can install the SDK in your Dockerfile:
    {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN pip install ddtrace
 {{< /code-block >}}
@@ -39,7 +39,7 @@ CMD ["ddtrace-run", "python", "app.py"]
 
 2. **Install serverless-init**.
 
-   {{% gcr-install-serverless-init cmd="\"ddtrace-run\", \"python\", \"path/to/your/python/app.py\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"ddtrace-run\", \"python\", \"path/to/your/python/app.py\"" %}}
 
 3. **Set up logs**.
 
@@ -76,7 +76,7 @@ logger.info("Hello world!")
 
 4. **Configure your application**.
 
-{{% gcr-configure %}}
+{{% serverless-init-configure cloudrun="true" %}}
 
 5. {{% gcr-service-label %}}
 
@@ -84,11 +84,19 @@ logger.info("Hello world!")
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-in-container language="python" %}}
+7. **Enable profiling (preview)**.
+
+   To enable the [Continuous Profiler][6], set the environment variable `DD_PROFILING_ENABLED=true`.
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for Google Cloud Run services.</div>
+
+{{% serverless-init-env-vars-in-container language="python" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
@@ -97,5 +105,6 @@ logger.info("Hello world!")
 [1]: https://pypi.org/project/ddtrace/
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [3]: /tracing/other_telemetry/connect_logs_and_traces/python/
-[4]: /developers/dogstatsd/?tab=python#install-the-dogstatsd-client
-[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples
+[4]: /extend/dogstatsd/?tab=python#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=python#code-examples-5
+[6]: /profiler/

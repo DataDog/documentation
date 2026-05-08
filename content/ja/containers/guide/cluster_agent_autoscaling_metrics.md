@@ -3,6 +3,8 @@ aliases:
 - /ja/agent/guide/cluster-agent-custom-metrics-server
 - /ja/agent/cluster_agent/external_metrics
 - /ja/containers/cluster_agent/external_metrics
+description: Cluster Agent と組み合わせて Kubernetes Horizontal Pod Autoscaler を設定し、カスタムおよび外部の
+  Datadog メトリクスを利用できるようにします。
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: ブログ
@@ -391,7 +393,7 @@ Cluster Agent は `DatadogMetric` オブジェクト用に 30 秒ごとにクエ
   value: "900"
 ```
 
-## トラブルシューティング
+## トラブル シューティング
 
 ### DatadogMetric のステータス
 Datadog Cluster Agent は、Datadog へのクエリの結果を反映させるために、すべての `DatadogMetric` リソースの `status` サブリソースの更新を行います。これは動作が失敗した場合に起こる状況を理解するための主な情報源となります。以下を実行してこの情報を出力することができます:
@@ -464,7 +466,7 @@ status:
         averageValue: <METRIC_VALUE>
 ```
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
