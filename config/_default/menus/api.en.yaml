@@ -13527,6 +13527,66 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
+    - name: Rum Replay
+      url: /api/latest/rum-replay/
+      identifier: rum-replay
+      generated: true
+    - name: Generate replay summary
+      url: '#generate-replay-summary'
+      identifier: rum-replay-generate-replay-summary
+      parent: rum-replay
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GenerateReplaySummary
+        unstable:
+          - v2
+        order: 1
+    - name: Rum Replay Analysis
+      url: /api/latest/rum-replay-analysis/
+      identifier: rum-replay-analysis
+      generated: true
+    - name: List replay analysis issue sessions
+      url: '#list-replay-analysis-issue-sessions'
+      identifier: rum-replay-analysis-list-replay-analysis-issue-sessions
+      parent: rum-replay-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListReplayAnalysisIssueSessions
+        unstable:
+          - v2
+        order: 4
+    - name: Get replay analysis issue
+      url: '#get-replay-analysis-issue'
+      identifier: rum-replay-analysis-get-replay-analysis-issue
+      parent: rum-replay-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetReplayAnalysisIssue
+        unstable:
+          - v2
+        order: 3
+    - name: List replay analysis issues
+      url: '#list-replay-analysis-issues'
+      identifier: rum-replay-analysis-list-replay-analysis-issues
+      parent: rum-replay-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListReplayAnalysisIssues
+        unstable:
+          - v2
+        order: 2
     - name: Rum Replay Heatmaps
       url: /api/latest/rum-replay-heatmaps/
       identifier: rum-replay-heatmaps

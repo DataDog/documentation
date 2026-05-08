@@ -3293,6 +3293,18 @@
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
+  "ListReplayAnalysisIssues": {
+    "description": "Retrieve a paginated list of RUM replay analysis issues, optionally filtered by application, severity, view name, or issue category.",
+    "summary": "List replay analysis issues"
+  },
+  "GetReplayAnalysisIssue": {
+    "description": "Retrieve details of a specific RUM replay analysis issue by its identifier.",
+    "summary": "Get replay analysis issue"
+  },
+  "ListReplayAnalysisIssueSessions": {
+    "description": "Retrieve a paginated list of sessions related to a specific RUM replay analysis issue.",
+    "summary": "List replay analysis issue sessions"
+  },
   "ListReplayHeatmapSnapshots": {
     "description": "List heatmap snapshots.",
     "summary": "List replay heatmap snapshots"
@@ -3312,6 +3324,12 @@
     "summary": "Update replay heatmap snapshot",
     "request_description": "",
     "request_schema_description": "Request body for updating a heatmap snapshot."
+  },
+  "GenerateReplaySummary": {
+    "description": "Generate an AI-powered summary for a RUM replay session, including chapter breakdowns and behavioral analysis.",
+    "summary": "Generate replay summary",
+    "request_description": "",
+    "request_schema_description": "Request body for generating a RUM replay summary."
   },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
