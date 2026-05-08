@@ -870,8 +870,8 @@
     "request_schema_description": "Request object to update a resource filter."
   },
   "UpsertSyncConfig": {
-    "description": "Create or update a cloud inventory sync configuration. Specify the cloud provider in `data.id`\nand provider-specific settings under `data.attributes`. This endpoint uses an upsert model.",
-    "summary": "Create or update a sync configuration",
+    "description": "Enable Storage Management for an S3 bucket, GCS bucket, or Azure container by registering the destination that holds its inventory reports. Set `data.id` to the cloud provider (`aws`, `gcp`, or `azure`) and provide the matching settings under data.attributes. Calling this endpoint with the same provider replaces the existing configuration.",
+    "summary": "Enable Storage Management for a bucket",
     "request_description": "",
     "request_schema_description": "Request body for creating or updating a cloud inventory sync configuration."
   },

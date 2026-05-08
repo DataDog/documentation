@@ -8326,23 +8326,6 @@ menu:
           - ListCustomAllocationRules
         unstable: []
         order: 23
-    - name: Cloud Inventory Sync Configs
-      url: /api/latest/cloud-inventory-sync-configs/
-      identifier: cloud-inventory-sync-configs
-      generated: true
-    - name: Create or update a sync configuration
-      url: '#create-or-update-a-sync-configuration'
-      identifier: cloud-inventory-sync-configs-create-or-update-a-sync-configuration
-      parent: cloud-inventory-sync-configs
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpsertSyncConfig
-        unstable:
-          - v2
-        order: 1
     - name: Cloud Network Monitoring
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
@@ -15246,6 +15229,22 @@ menu:
           - ListStatusPages
         unstable: []
         order: 3
+    - name: Storage Management
+      url: /api/latest/storage-management/
+      identifier: storage-management
+      generated: true
+    - name: Enable Storage Management for a bucket
+      url: '#enable-storage-management-for-a-bucket'
+      identifier: storage-management-enable-storage-management-for-a-bucket
+      parent: storage-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertSyncConfig
+        unstable: []
+        order: 1
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
