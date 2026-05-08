@@ -7906,6 +7906,19 @@ menu:
           - ValidateQuery
         unstable: []
         order: 22
+    - name: List tag pipeline ruleset statuses
+      url: '#list-tag-pipeline-ruleset-statuses'
+      identifier: cloud-cost-management-list-tag-pipeline-ruleset-statuses
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagPipelinesRulesetsStatus
+        unstable:
+          - v2
+        order: 43
     - name: Reorder tag pipeline rulesets
       url: '#reorder-tag-pipeline-rulesets'
       identifier: cloud-cost-management-reorder-tag-pipeline-rulesets
@@ -7942,6 +7955,19 @@ menu:
           - ListTagPipelinesRulesets
         unstable: []
         order: 16
+    - name: Get cost setting
+      url: '#get-cost-setting'
+      identifier: cloud-cost-management-get-cost-setting
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostSetting
+        unstable:
+          - v2
+        order: 40
     - name: List Cloud Cost Management OCI configs
       url: '#list-cloud-cost-management-oci-configs'
       identifier: cloud-cost-management-list-cloud-cost-management-oci-configs
@@ -8290,6 +8316,19 @@ menu:
           - DeleteCustomAllocationRule
         unstable: []
         order: 26
+    - name: List custom allocation rule statuses
+      url: '#list-custom-allocation-rule-statuses'
+      identifier: cloud-cost-management-list-custom-allocation-rule-statuses
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCustomAllocationRulesStatus
+        unstable:
+          - v2
+        order: 44
     - name: Reorder custom allocation rules
       url: '#reorder-custom-allocation-rules'
       identifier: cloud-cost-management-reorder-custom-allocation-rules
@@ -8326,6 +8365,32 @@ menu:
           - ListCustomAllocationRules
         unstable: []
         order: 23
+    - name: List active tag pipeline keys
+      url: '#list-active-tag-pipeline-keys'
+      identifier: cloud-cost-management-list-active-tag-pipeline-keys
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagPipelineActiveKeys
+        unstable:
+          - v2
+        order: 42
+    - name: Get preferred cost allocation tags
+      url: '#get-preferred-cost-allocation-tags'
+      identifier: cloud-cost-management-get-preferred-cost-allocation-tags
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostAIPreferredTags
+        unstable:
+          - v2
+        order: 41
     - name: Cloud Inventory Sync Configs
       url: /api/latest/cloud-inventory-sync-configs/
       identifier: cloud-inventory-sync-configs
