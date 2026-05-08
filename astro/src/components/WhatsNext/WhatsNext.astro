@@ -1,0 +1,18 @@
+---
+import styles from './WhatsNext.module.css';
+import { classListFactory } from '@utils/classListFactory';
+
+interface Props {
+  desc?: string;
+}
+
+const { desc = 'Additional helpful documentation, links, and articles:' } = Astro.props;
+const cl = classListFactory(styles);
+---
+
+<aside class={cl('whatsnext')}>
+  {desc && <p class={cl('whatsnext__desc')}>{desc}</p>}
+  <ul class={cl('whatsnext__list')}>
+    <slot />
+  </ul>
+</aside>

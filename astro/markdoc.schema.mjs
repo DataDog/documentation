@@ -80,5 +80,16 @@ export default {
         class: { type: String },
       },
     },
+    whatsNext: {
+      attributes: {
+        desc: { type: String },
+      },
+    },
+    nextLink: {
+      attributes: {
+        href: { type: String, required: true },
+        tag: { type: String },
+      },
+    },
   },
 };

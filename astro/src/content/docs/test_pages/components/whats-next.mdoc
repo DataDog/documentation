@@ -1,0 +1,71 @@
+---
+title: "WhatsNext"
+description: "Pure Astro. No client-side interactivity."
+type: static
+---
+
+# WhatsNext
+
+A "What's next" link list, styled to mirror the Hugo `whatsnext` shortcode. Use it at the bottom of a page to point readers at related docs.
+
+The component has two parts:
+
+- `WhatsNext` — the container with an optional description and a list wrapper.
+- `NextLink` — a single link row, with optional trailing tag.
+
+## WhatsNext properties
+
+| Property | Type     | Default                                                  | Description                                                                 |
+|----------|----------|----------------------------------------------------------|-----------------------------------------------------------------------------|
+| `desc`   | `string` | `Additional helpful documentation, links, and articles:` | Lead-in sentence above the list. Pass an empty string to omit it entirely.  |
+
+## NextLink properties
+
+| Property | Type     | Default | Description                                                                                              |
+|----------|----------|---------|----------------------------------------------------------------------------------------------------------|
+| `href`   | `string` | —       | Required. The URL the link points to.                                                                    |
+| `tag`    | `string` | —       | Optional. A short trailing badge (rendered uppercase). Hidden on narrow viewports (under 576px), as in Hugo. |
+
+The default slot holds the link text. Anything inline is allowed (icons, badges, formatted text).
+
+## Examples
+
+### Default description
+
+{% tabs %}
+{% tab label="Result" %}
+{% whatsNext %}
+{% nextLink href="/api/latest/dashboards/" %}List dashboards{% /nextLink %}
+{% nextLink href="/api/latest/monitors/" tag="guide" %}Manage monitors{% /nextLink %}
+{% nextLink href="/api/latest/logs/" %}Search logs{% /nextLink %}
+{% /whatsNext %}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% whatsNext %}
+{% nextLink href="/api/latest/dashboards/" %}List dashboards{% /nextLink %}
+{% nextLink href="/api/latest/monitors/" tag="guide" %}Manage monitors{% /nextLink %}
+{% nextLink href="/api/latest/logs/" %}Search logs{% /nextLink %}
+{% /whatsNext %}
+```
+{% /tab %}
+{% /tabs %}
+
+### Custom description
+
+{% tabs %}
+{% tab label="Result" %}
+{% whatsNext desc="To learn more about Datadog APM:" %}
+{% nextLink href="/tracing/" %}Trace your applications{% /nextLink %}
+{% nextLink href="/tracing/setup/" tag="setup" %}APM setup{% /nextLink %}
+{% /whatsNext %}
+{% /tab %}
+{% tab label="Markdoc" %}
+```markdoc
+{% whatsNext desc="To learn more about Datadog APM:" %}
+{% nextLink href="/tracing/" %}Trace your applications{% /nextLink %}
+{% nextLink href="/tracing/setup/" tag="setup" %}APM setup{% /nextLink %}
+{% /whatsNext %}
+```
+{% /tab %}
+{% /tabs %}

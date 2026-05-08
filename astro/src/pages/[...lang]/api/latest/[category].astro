@@ -1,7 +1,8 @@
 ---
 import ApiLayout from '@layouts/ApiLayout.astro';
-import ApiMethodBadge from '@components/ApiMethodBadge/ApiMethodBadge.astro';
 import ApiStatusAlert from '@components/ApiStatusAlert/ApiStatusAlert.astro';
+import WhatsNext from '@components/WhatsNext/WhatsNext.astro';
+import NextLink from '@components/WhatsNext/NextLink.astro';
 import { getCategoryStubsView, getCategoryViewBySlug } from '@lib/api/viewsBuilder';
 import { renderMarkdown } from '@lib/api/markdownRenderer';
 import { getApiPageTitle } from '@lib/api/pageTitleBuilder';
@@ -62,16 +63,13 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
     <div set:html={renderMarkdown(current.description)} />
   )}
   {current.operations.length > 0 && (
-    <ul class="api-category-toc">
+    <WhatsNext desc="">
       {current.operations.map((op) => (
-        <li class="api-category-toc__item">
-          <ApiMethodBadge method={op.method} />
-          <a href={`${categoryBaseHref}${op.slug}/`} class="api-category-toc__link">
-            {op.summary}
-          </a>
-        </li>
+        <NextLink href={`${categoryBaseHref}${op.slug}/`}>
+          {op.summary}
+        </NextLink>
       ))}
-    </ul>
+    </WhatsNext>
   )}
 </ApiLayout>
 
@@ -89,27 +87,3 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
   })();
 </script>
 
-<style>
-  .api-category-toc {
-    list-style: none;
-    padding: 0;
-    margin: var(--space-md) 0 0 0;
-  }
-
-  .api-category-toc__item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-2xs) 0;
-  }
-
-  .api-category-toc__link {
-    color: var(--color-text);
-    text-decoration: none;
-  }
-
-  .api-category-toc__link:hover {
-    color: var(--color-brand);
-    text-decoration: underline;
-  }
-</style>

@@ -107,5 +107,13 @@ export default defineMarkdocConfig({
       selfClosing: true,
       ...schema.tags.placeholder,
     },
+    whatsNext: {
+      render: component('./src/components/WhatsNext/WhatsNext.astro'),
+      ...schema.tags.whatsNext,
+    },
+    nextLink: {
+      render: component('./src/components/WhatsNext/NextLink.astro'),
+      ...schema.tags.nextLink,
+    },
   },
 });
