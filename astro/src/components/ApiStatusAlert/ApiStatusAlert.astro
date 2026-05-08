@@ -1,4 +1,8 @@
 ---
+import { renderMarkdownInline } from '@lib/api/markdownRenderer';
+import styles from './ApiStatusAlert.module.css';
+import { classListFactory } from '@utils/classListFactory';
+
 interface Props {
   type: 'deprecated' | 'unstable' | 'beta';
   newerVersionUrl?: string;
@@ -6,6 +10,7 @@ interface Props {
 }
 
 const { type, newerVersionUrl, message } = Astro.props;
+const cl = classListFactory(styles);
 
 const defaults: Record<string, { label: string; defaultMessage: string }> = {
   deprecated: {
@@ -24,11 +29,6 @@ const defaults: Record<string, { label: string; defaultMessage: string }> = {
 
 const config = defaults[type];
 const displayMessage = message || config.defaultMessage;
-
-import { renderMarkdownInline } from '@lib/api/markdownRenderer';
-import styles from './ApiStatusAlert.module.css';
-import { classListFactory } from '@utils/classListFactory';
-const cl = classListFactory(styles);
 ---
 
 <div

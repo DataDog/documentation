@@ -6,8 +6,10 @@
  * YAML objects already loaded by `src/lib/api/specParser.ts`.
  */
 
+import type { SchemaField } from "./schemas/schemaField";
 
-import type { SchemaField } from './schemas/schemaField';
+/** Maximum recursion depth for circular-reference protection. */
+const MAX_DEPTH = 10;
 
 /* ------------------------------------------------------------------ */
 /*  Module-level cache for resolved $ref schemas                       */
@@ -39,15 +41,15 @@ export function resolveRef(spec: any, refString: string): any {
     if (cached !== undefined || perSpec.has(refString)) return cached;
   }
 
-  const parts = refString.replace(/^#\//, '').split('/');
+  const parts = refString.replace(/^#\//, "").split("/");
   let current: any = spec;
 
   for (const part of parts) {
-    if (current == null || typeof current !== 'object') {
+    if (current == null || typeof current !== "object") {
       return undefined;
     }
     // JSON Pointer escapes: ~1 → /, ~0 → ~
-    const unescaped = part.replace(/~1/g, '/').replace(/~0/g, '~');
+    const unescaped = part.replace(/~1/g, "/").replace(/~0/g, "~");
     current = current[unescaped];
   }
 
@@ -86,7 +88,7 @@ export function resolveRef(spec: any, refString: string): any {
 export function schemaToFields(
   spec: any,
   schema: any,
-  visited: Set<string> = new Set()
+  visited: Set<string> = new Set(),
 ): SchemaField[] {
   if (!schema) return [];
 
@@ -98,7 +100,7 @@ export function schemaToFields(
     if (visited.has(ref) || visited.size >= MAX_DEPTH) {
       return [
         {
-          name: '(recursive)',
+          name: "(recursive)",
           type: refName(ref),
           required: false,
           deprecated: false,
@@ -117,12 +119,11 @@ export function schemaToFields(
   }
 
   // ── oneOf / anyOf (union types) ──────────────────────────────────
-  const unionKey = schema.oneOf ? 'oneOf' : schema.anyOf ? 'anyOf' : null;
+  const unionKey = schema.oneOf ? "oneOf" : schema.anyOf ? "anyOf" : null;
   if (unionKey) {
     const variants: any[] = schema[unionKey];
     const unionOptions = variants.map((variant: any, idx: number) => {
-      const label =
-        variant.$ref ? refName(variant.$ref) : `Option ${idx + 1}`;
+      const label = variant.$ref ? refName(variant.$ref) : `Option ${idx + 1}`;
       return {
         label,
         fields: schemaToFields(spec, variant, new Set(visited)),
@@ -132,12 +133,12 @@ export function schemaToFields(
     // Return a single synthetic field that carries the union options
     return [
       {
-        name: schema.title ?? '',
+        name: schema.title ?? "",
         type: unionKey,
         required: false,
         deprecated: schema.deprecated === true,
         readOnly: schema.readOnly === true,
-        description: schema.description ?? '',
+        description: schema.description ?? "",
         unionOptions,
       },
     ];
@@ -150,27 +151,35 @@ export function schemaToFields(
   }
 
   // ── object type ──────────────────────────────────────────────────
-  if (schema.type === 'object' || schema.properties) {
+  if (schema.type === "object" || schema.properties) {
     const requiredSet = new Set<string>(schema.required ?? []);
     const properties: Record<string, any> = schema.properties ?? {};
 
-    return Object.entries(properties).map(([propName, propSchema]: [string, any]) => {
-      return propertyToField(spec, propName, propSchema, requiredSet.has(propName), visited);
-    });
+    return Object.entries(properties).map(
+      ([propName, propSchema]: [string, any]) => {
+        return propertyToField(
+          spec,
+          propName,
+          propSchema,
+          requiredSet.has(propName),
+          visited,
+        );
+      },
+    );
   }
 
   // ── array type ───────────────────────────────────────────────────
-  if (schema.type === 'array') {
+  if (schema.type === "array") {
     const items = schema.items;
     if (!items) {
       return [
         {
-          name: '',
-          type: '[any]',
+          name: "",
+          type: "[any]",
           required: false,
           deprecated: schema.deprecated === true,
           readOnly: schema.readOnly === true,
-          description: schema.description ?? '',
+          description: schema.description ?? "",
         },
       ];
     }
@@ -180,12 +189,12 @@ export function schemaToFields(
 
     return [
       {
-        name: '',
+        name: "",
         type: `[${itemTypeName}]`,
         required: false,
         deprecated: schema.deprecated === true,
         readOnly: schema.readOnly === true,
-        description: schema.description ?? '',
+        description: schema.description ?? "",
         ...(children.length > 0 ? { children } : {}),
       },
     ];
@@ -193,12 +202,12 @@ export function schemaToFields(
 
   // ── primitive types ──────────────────────────────────────────────
   const field: SchemaField = {
-    name: '',
+    name: "",
     type: displayType(schema),
     required: false,
     deprecated: schema.deprecated === true,
     readOnly: schema.readOnly === true,
-    description: schema.description ?? '',
+    description: schema.description ?? "",
   };
 
   if (schema.enum) {
@@ -236,9 +245,9 @@ export function paramsToFields(spec: any, params: any[]): SchemaField[] {
       resolved = resolveRef(spec, param.$ref) ?? param;
     }
 
-    const name: string = resolved.name ?? '';
+    const name: string = resolved.name ?? "";
     const required: boolean = resolved.required === true;
-    const description: string = resolved.description ?? '';
+    const description: string = resolved.description ?? "";
     const deprecated: boolean = resolved.deprecated === true;
 
     // Resolve the parameter's inner schema
@@ -250,7 +259,7 @@ export function paramsToFields(spec: any, params: any[]): SchemaField[] {
     if (!paramSchema) {
       return {
         name,
-        type: 'any',
+        type: "any",
         required,
         deprecated,
         readOnly: false,
@@ -282,15 +291,12 @@ export function paramsToFields(spec: any, params: any[]): SchemaField[] {
 /*  Private helpers                                                    */
 /* ------------------------------------------------------------------ */
 
-/** Maximum recursion depth for circular-reference protection. */
-const MAX_DEPTH = 10;
-
 /**
  * Build a display type string for a schema. Handles format annotations
  * (e.g. "string (date-time)") and enums.
  */
 function displayType(schema: any): string {
-  const base: string = schema.type ?? 'object';
+  const base: string = schema.type ?? "object";
 
   if (schema.enum) {
     // Show the underlying type; callers also set `enumValues`
@@ -309,7 +315,7 @@ function displayType(schema: any): string {
  * e.g. `#/components/schemas/DashboardCreateRequest` → `DashboardCreateRequest`
  */
 function refName(refString: string): string {
-  const parts = refString.split('/');
+  const parts = refString.split("/");
   return parts[parts.length - 1];
 }
 
@@ -322,16 +328,16 @@ function propertyToField(
   name: string,
   schema: any,
   required: boolean,
-  visited: Set<string>
+  visited: Set<string>,
 ): SchemaField {
   if (!schema) {
     return {
       name,
-      type: 'any',
+      type: "any",
       required,
       deprecated: false,
       readOnly: false,
-      description: '',
+      description: "",
     };
   }
 
@@ -361,12 +367,11 @@ function propertyToField(
   if (resolvedRef) nextVisited.add(resolvedRef);
 
   // ── oneOf / anyOf ────────────────────────────────────────────────
-  const unionKey = resolved.oneOf ? 'oneOf' : resolved.anyOf ? 'anyOf' : null;
+  const unionKey = resolved.oneOf ? "oneOf" : resolved.anyOf ? "anyOf" : null;
   if (unionKey) {
     const variants: any[] = resolved[unionKey];
     const unionOptions = variants.map((variant: any, idx: number) => {
-      const label =
-        variant.$ref ? refName(variant.$ref) : `Option ${idx + 1}`;
+      const label = variant.$ref ? refName(variant.$ref) : `Option ${idx + 1}`;
       return {
         label,
         fields: schemaToFields(spec, variant, new Set(nextVisited)),
@@ -379,7 +384,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: resolved.description ?? '',
+      description: resolved.description ?? "",
       unionOptions,
     };
   }
@@ -390,34 +395,36 @@ function propertyToField(
     const children = schemaToFields(spec, merged, nextVisited);
     return {
       name,
-      type: 'object',
+      type: "object",
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: resolved.description ?? '',
+      description: resolved.description ?? "",
       ...(children.length > 0 ? { children } : {}),
     };
   }
 
   // ── object ───────────────────────────────────────────────────────
-  if (resolved.type === 'object' || resolved.properties) {
+  if (resolved.type === "object" || resolved.properties) {
     const children = schemaToFields(spec, resolved, nextVisited);
     return {
       name,
-      type: 'object',
+      type: "object",
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: resolved.description ?? '',
+      description: resolved.description ?? "",
       ...(children.length > 0 ? { children } : {}),
     };
   }
 
   // ── array ────────────────────────────────────────────────────────
-  if (resolved.type === 'array') {
+  if (resolved.type === "array") {
     const items = resolved.items;
-    const itemTypeName = items ? resolveItemTypeName(items) : 'any';
-    const children = items ? schemaToFields(spec, items, new Set(nextVisited)) : [];
+    const itemTypeName = items ? resolveItemTypeName(items) : "any";
+    const children = items
+      ? schemaToFields(spec, items, new Set(nextVisited))
+      : [];
 
     return {
       name,
@@ -425,7 +432,7 @@ function propertyToField(
       required,
       deprecated: resolved.deprecated === true,
       readOnly: resolved.readOnly === true,
-      description: resolved.description ?? '',
+      description: resolved.description ?? "",
       ...(children.length > 0 ? { children } : {}),
     };
   }
@@ -437,7 +444,7 @@ function propertyToField(
     required,
     deprecated: resolved.deprecated === true,
     readOnly: resolved.readOnly === true,
-    description: resolved.description ?? '',
+    description: resolved.description ?? "",
   };
 
   if (resolved.enum) {
@@ -458,12 +465,12 @@ function resolveItemTypeName(items: any): string {
     return refName(items.$ref);
   }
   if (items.oneOf || items.anyOf) {
-    return 'oneOf';
+    return "oneOf";
   }
-  if (items.type === 'object' || items.properties) {
-    return 'object';
+  if (items.type === "object" || items.properties) {
+    return "object";
   }
-  return items.type ?? 'any';
+  return items.type ?? "any";
 }
 
 /**
@@ -472,7 +479,7 @@ function resolveItemTypeName(items: any): string {
  */
 function mergeAllOf(schemas: any[], spec: any): any {
   const merged: Record<string, unknown> = {
-    type: 'object',
+    type: "object",
     properties: {},
     required: [],
   };
@@ -484,7 +491,10 @@ function mergeAllOf(schemas: any[], spec: any): any {
     }
 
     if (resolved.properties) {
-      Object.assign(merged.properties as Record<string, unknown>, resolved.properties);
+      Object.assign(
+        merged.properties as Record<string, unknown>,
+        resolved.properties,
+      );
     }
     if (resolved.required) {
       (merged.required as string[]).push(...resolved.required);
