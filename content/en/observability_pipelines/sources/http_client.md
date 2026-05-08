@@ -21,16 +21,16 @@ Use Observability Pipelines' HTTP/S Client source to pull logs from the upstream
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-To configure your HTTP/S Client source:
-
 <div class="alert alert-danger">Only enter the identifiers for the HTTP Client endpoint URL and, if applicable, your authorization strategy secrets and TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-1. Enter the identifier for your HTTP Client endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+After you select the HTTP Client source in the pipeline UI:
+
+1. Enter the identifier for your HTTP Client endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your authorization strategy. If you selected:
    - **Basic**:
-      - Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#set-secrets) is used.
-      - Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#set-secrets) is used.
-   - **Bearer**: Enter the identifier for your bearer token. If you leave it blank, the [default](#set-secrets) is used.
+      - Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#secret-defaults) is used.
+      - Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#secret-defaults) is used.
+   - **Bearer**: Enter the identifier for your bearer token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select the decoder you want to use on the HTTP messages. Logs pulled from the HTTP source must be in this format.
 
 ### Optional settings
@@ -46,7 +46,7 @@ To configure your HTTP/S Client source:
    - Since requests run concurrently, if a scrape takes longer than the interval given, a new scrape is started, which can consume extra resources. Set the timeout to a value lower than the scrape interval to prevent this from happening.
 - Enter the timeout for each scrape request.
 
-## Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
