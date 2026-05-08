@@ -911,6 +911,10 @@
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRuleResourceArray` object."
   },
+  "ListCustomAllocationRulesStatus": {
+    "description": "List the processing status of all custom allocation rules. Returns only the ID and processing status for each rule.",
+    "summary": "List custom allocation rule statuses"
+  },
   "DeleteCustomAllocationRule": {
     "description": "Delete a custom allocation rule - Delete an existing custom allocation rule by its ID",
     "summary": "Delete custom allocation rule"
@@ -4691,6 +4695,10 @@
     "summary": "Reorder tag pipeline rulesets",
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRulesetResourceArray` object."
+  },
+  "ListTagPipelinesRulesetsStatus": {
+    "description": "List the processing status of all tag pipeline rulesets. Returns only the ID and processing status for each ruleset.",
+    "summary": "List tag pipeline ruleset statuses"
   },
   "ValidateQuery": {
     "description": "Validate a tag pipeline query - Validate the syntax and structure of a tag pipeline query",
