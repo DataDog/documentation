@@ -1,10 +1,7 @@
 ---
 import type { SchemaField } from '@lib/api/schemas/schemaField';
 import { ApiSchemaTableNav } from './ApiSchemaTableNav';
-import {
-  renderFieldsHtml,
-  anyFieldExpandable,
-} from './renderFieldsHtml';
+import SchemaFieldRow from './SchemaFieldRow.astro';
 import styles from './ApiSchemaTable.module.css';
 import { classListFactory } from '@utils/classListFactory';
 import { generateElementId } from '@utils/generateElementId';
@@ -21,9 +18,13 @@ const { fields, title, showExpandAll = true } = Astro.props;
 
 const tableId = generateElementId('schema-table');
 const expandAllId = `${tableId}-expand-all`;
-const showToolbar = showExpandAll && anyFieldExpandable(fields);
 
-const rowsHtml = renderFieldsHtml(fields, cl);
+const anyExpandable = fields.some(
+  (f) =>
+    (f.children !== undefined && f.children.length > 0) ||
+    (f.unionOptions !== undefined && f.unionOptions.length > 0),
+);
+const showToolbar = showExpandAll && anyExpandable;
 ---
 
 <div id={tableId} class="schema-table">
@@ -46,7 +47,7 @@ const rowsHtml = renderFieldsHtml(fields, cl);
       <div class={cl('schema-table__columns-type')}>Type</div>{' '}
       <div class={cl('schema-table__columns-description')}>Description</div>
     </div>
-    <Fragment set:html={rowsHtml} />
+    {fields.map((field) => <SchemaFieldRow field={field} depth={0} />)}
   </div>
   <ApiSchemaTableNav
     client:idle
