@@ -103,9 +103,11 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{< /tabs >}}
 
-<div class="alert alert-danger">
-The known tests endpoint returns a maximum of 100,000 tests per non-paginated request. If your test service has more than 100,000 known tests and the Datadog library does not paginate, the request fails and the library cannot retrieve the list of known tests for that session. Recent tracer versions paginate automatically; update to a version that supports pagination if you are affected.
-</div>
+### Known Tests endpoint size limit
+
+The Datadog backend rejects non-paginated requests for known tests when the response would exceed 100,000 tests. Recent Datadog libraries paginate transparently and handle test services of any size. Older versions do not paginate, and on test services with more than 100,000 known tests they fail to retrieve the baseline. Early Flake Detection then goes dormant for that session: no `@test.early_flake.enabled` tag, and tests that would normally be detected as new are not retried.
+
+If you observe this, update your Datadog library to a version that supports pagination on the known tests endpoint.
 
 ## Explore results in the Test Optimization Explorer
 
@@ -124,8 +126,7 @@ This could be caused by a couple of reasons:
 
 * This test has ran previously.
 * This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
-
-Additionally, the known tests endpoint returns a maximum of 100,000 tests per non-paginated request. If your test service has more than 100,000 known tests and the Datadog library does not paginate, the library cannot retrieve the list of known tests and Early Flake Detection cannot identify new tests for that session. Update to a tracer version that supports pagination.
+* Your test service has more than 100,000 known tests and your Datadog library version does not support pagination. See [Known Tests endpoint size limit](#known-tests-endpoint-size-limit).
 
 ### A test was retried that is not new
 
