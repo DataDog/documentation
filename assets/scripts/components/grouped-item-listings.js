@@ -138,9 +138,13 @@ export function initializeGroupedListings() {
         });
     }
 
-    allGroupHeaders.forEach(elm => {
-        elm.addEventListener("click", e => {
-            e.currentTarget.classList.toggle('active');
+    allGroupHeaders.forEach(header => {
+        const group = header.closest('.js-group')
+        const content = group.querySelector('.group-content')
+        header.addEventListener("click", e => {
+            header.classList.toggle('active');
+            header.setAttribute('aria-expanded', header.getAttribute('aria-expanded') === 'false'); // evaluates and toggles state
+            content.classList.toggle('d-none');
         });
     });
 
@@ -183,10 +187,10 @@ export function initializeGroupedListings() {
     // Copy anchor - event listener
     const copyButtons = document.querySelectorAll('.group-header-text button')
 
-    copyButtons.forEach(e => {
-        e.addEventListener('click', (e) => {
+    copyButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
             e.stopPropagation()
-            copyActionHref(e.currentTarget)
+            copyActionHref(button)
         })
     })
 

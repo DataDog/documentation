@@ -16,7 +16,9 @@
     margin-top: -100px;
     pointer-events: none;
   }
+}
 
+.group-header-container {
   position: relative;
 
   .group-header-text {
@@ -58,9 +60,7 @@
   &:hover {
     box-shadow: 0 2px 3px rgba(0,0,0,0.3);
   }
-  &.active + div {
-    display: block !important;
-  }
+  
   &.active {
     .js-group-header__arrow {
       right: 12px !important;

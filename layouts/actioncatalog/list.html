@@ -93,20 +93,22 @@
       {{ $logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" $icon_id "variant" "avatar" "fallback" "cloud") $icon_id "avatar" }}
       {{ $default_dd_logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" "_datadog" "variant" "avatar" "fallback" "cloud") "_datadog" "avatar" }}
       <div class="js-group js-group-{{ $workflow_title | anchorize }}" id="{{ $workflow_title | anchorize }}">
-        <div class="group-header-text font-semibold">
-          <span>{{ $workflow_title }}</span>
-          <button class="copy-anchor" aria-label="Copy anchor for {{ $workflow_title }}" data-anchor="#{{ $workflow_title | anchorize }}">
-            {{ partial "icon" (dict "name" "link-wui" "size" "14px" "title" (printf "copy anchor for %s" $workflow_title)) }}
-            {{ partial "icon" (dict "name" "check-bold" "color" "#632ca6" "size" "14px") }}
+        <div class="group-header-container">
+          <div class="group-header-text font-semibold">
+            <span>{{ $workflow_title }}</span>
+            <button class="copy-anchor" aria-label="Copy anchor for {{ $workflow_title }}" data-anchor="#{{ $workflow_title | anchorize }}">
+              {{ partial "icon" (dict "name" "link-wui" "size" "14px" "title" (printf "copy anchor for %s" $workflow_title)) }}
+              {{ partial "icon" (dict "name" "check-bold" "color" "#632ca6" "size" "14px") }}
+            </button>
+          </div>
+          <button class="js-group-header mb-1 d-flex align-items-center" aria-expanded=false aria-label="Toggle {{ $workflow_title }} content">
+            <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
+              {{ partial "get-action-catalog-icon" (dict "page_ctx" $dot "icon_name" $icon_name "icon_type" $icon_type "logo_path" $logo_path "workflow_title" $workflow_title "dd_logo_path" $default_dd_logo_path) }}
+            </div>
+            <div class="js-group-header__arrow" aria-hidden="true">></div>
           </button>
         </div>
-        <button class="js-group-header mb-1 d-flex align-items-center" id="">
-          <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
-            {{ partial "get-action-catalog-icon" (dict "page_ctx" $dot "icon_name" $icon_name "icon_type" $icon_type "logo_path" $logo_path "workflow_title" $workflow_title "dd_logo_path" $default_dd_logo_path) }}
-          </div>
-          <div class="js-group-header__arrow">></div>
-        </button>
-        <div class="group-{{ $workflow_title }} mb-2 ms-4 d-none">
+        <div class="group-content group-{{ $workflow_title }} mb-2 ms-4 d-none">
           {{ range $action_name, $action_data := .actions }}
           {{ $base_url := "https://app.datadoghq.com/actions/action-catalog#" }}
           {{ $full_url := print $base_url $workflow_name "/" $workflow_name "." $action_name }}
