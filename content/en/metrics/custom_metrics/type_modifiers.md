@@ -71,9 +71,10 @@ Depending on the metric type you applied them to, the behavior differs:
 
   **Note**: If a `RATE` metric has no metadata interval set, none of the rescaling steps above are applied, and the time aggregator falls back to `AVG` instead of `SUM`.
 
-  **Note**: For example, when validating this, use the formula `(post_aggregation / rollup_interval) * min(metadata_interval, rollup_interval)` in [Advanced graphing](https://docs.datadoghq.com/dashboards/querying/#advanced-graphing). The expression cannot be plotted directly in a basic timeseries query widget, because it depends on the active rollup interval as a numeric value.
+  **Note**: For example, when validating this, use the formula `(post_aggregation / rollup_interval) * min(metadata_interval, rollup_interval)` in [Advanced graphing][2]. The expression cannot be plotted directly in a basic timeseries query widget, because it depends on the active rollup interval as a numeric value.
 
 [1]: /metrics/guide/interpolation-the-fill-modifier-explained/
+[2]: /dashboards/querying/#advanced-graphing
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
