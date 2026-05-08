@@ -23,7 +23,7 @@
 
   .group-header-text {
     position: absolute;
-    left: 67px;
+    left: 67px; // positioning within .js-group-header
     bottom: 2px;
     button.copy-anchor {
       background: none;

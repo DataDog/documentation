@@ -140,10 +140,11 @@ export function initializeGroupedListings() {
 
     allGroupHeaders.forEach(header => {
         const group = header.closest('.js-group')
-        const content = group.querySelector('.group-content')
+        const content = group?.querySelector('.group-content')
         header.addEventListener("click", e => {
+            if(!group || !content) return;
             header.classList.toggle('active');
-            header.setAttribute('aria-expanded', header.getAttribute('aria-expanded') === 'false'); // evaluates and toggles state
+            header.setAttribute('aria-expanded', header.getAttribute('aria-expanded') === 'false');
             content.classList.toggle('d-none');
         });
     });
@@ -181,6 +182,8 @@ export function initializeGroupedListings() {
                 linkIcon.style.display = 'inline';
                 checkIcon.style.display = '';
             }, 1000)
+        }).catch(() => {
+            console.error('Failed to copy anchor to clipboard');
         })
     }
 
