@@ -39,27 +39,29 @@ To use AI Costs, you must have at least one of the following supported providers
 
 | AI Provider | Setup method |
 |---|---|
-| Anthropic   | [SaaS integration][3] |
-| AWS Bedrock | [AWS integration][8] |
-| Gemini      | [Google Cloud integration][9] |
-| OpenAI     | [SaaS integration][2] |
-| Vertex AI  | [Google Cloud integration][9] |
+| Anthropic   | [SaaS integration][2] |
+| AWS Bedrock | [AWS integration][3] |
+| Gemini      | [Google Cloud integration][4] |
+| OpenAI     | [SaaS integration][5] |
+| Vertex AI  | [Google Cloud integration][4] |
 
 ## AI cost summary
 
-After connecting your AI providers, navigate to [**Cloud Cost** > **Summarize** > **AI**][5] to view the AI cost summary page.
+After connecting your AI providers, navigate to [**Cloud Cost** > **Summarize** > **AI**][6] to view the AI cost summary page.
 
 The AI cost summary page provides:
 
 - **Total AI Cost:** Aggregated AI cost and cost change over the selected time frame.
 - **Daily AI Cost:** Daily cost trends across the selected providers over the selected time frame. Use the **Filter to** dropdown to define which providers appear in the graph.
 - **Top Cost Drivers:** The models, projects, services, and users generating the most spend.
-- **Active AI Cost Anomalies:** Cost [anomalies][4] surfaced proactively across all connected providers. Select an anomaly to open a side panel with more details and options for further action.
+- **Active AI Cost Anomalies:** Cost [anomalies][7] surfaced proactively across all connected providers. Select an anomaly to open a side panel with more details and options for further action.
 - **AI Cost Dashboards:** Out-of-the-box dashboard templates for each supported provider, combining cost data with usage signals such as token consumption, model distribution, and user analytics.
+
+{{< img src="cloud_cost/ai_costs/ccm-ai-costs-overview.png" alt="The AI cost summary dashboard, showing daily spend trends over a one-month period, a list of top spend drivers, and an anomaly graph." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 ## Normalized AI tags
 
-AI cost data from all supported providers is normalized to a consistent set of tags, so you can filter, group, compare, and plan AI spend consistently across dashboards, [monitors][11], [budgets][12], [forecasts][13], and other Datadog tools. Use the [Cloud Cost Explorer][6] to query and compare spend across providers without writing per-provider logic.
+AI cost data from all supported providers is normalized to a consistent set of tags, so you can filter, group, compare, and plan AI spend consistently across dashboards, [monitors][8], [budgets][9], [forecasts][10], and other Datadog tools. Use the [Cloud Cost Explorer][11] to query and compare spend across providers without writing per-provider logic.
 
 The following tags are available for all supported AI providers:
 
@@ -74,7 +76,9 @@ The following tags are available for all supported AI providers:
 
 ## Attribute AI spend to users
 
-[Out-of-the-box (OOTB) allocation rules][14] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for OpenAI and Anthropic.
+[Out-of-the-box (OOTB) allocation rules][12] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for OpenAI and Anthropic.
+
+{{< img src="cloud_cost/ai_costs/ccm-anthropic-ai-cost-reporting.png" alt="A provider-specific dashboard with a stacked bar chart graph showing daily provider spend attributed by team and model name, and a summary list of the spend attributions." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 The following tags are available through OOTB allocation rules:
 
@@ -113,23 +117,25 @@ The following tags are available through OOTB allocation rules:
 {{% /tab %}}
 {{< /tabs >}}
 
-After costs are attributed to users, API keys, and other sources, use [Tag Pipelines][7] to automatically map them to teams, services, or business units for streamlined aggregate reporting. See [Reporting][10] for more information.
+After costs are attributed to users, API keys, and other sources, use [Tag Pipelines][13] to automatically map them to teams, services, or business units for streamlined aggregate reporting. See [Cost Reports][14] for more information.
+
+{{< img src="cloud_cost/ai_costs/ccm-tag-pipeline-ai-costs.png" alt="The Tag Pipelines Rule Setup page, showing user_email values mapped to team values via an existing reference table, and additional tag mapping options." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/
-[2]: /cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
-[3]: /cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
-[4]: /cloud_cost_management/cost_changes/anomalies/
-[5]: https://app.datadoghq.com/cost/summarize/ai-costs
-[6]: https://app.datadoghq.com/cost/explorer
-[7]: /cloud_cost_management/allocation/tag_pipelines
-[8]: /cloud_cost_management/setup/aws
-[9]: /cloud_cost_management/setup/google_cloud
-[10]: /cloud_cost_management/reporting
-[11]: /cloud_cost_management/cost_changes/monitors
-[12]: /cloud_cost_management/planning/budgets
-[13]: /cloud_cost_management/planning/forecasting
-[14]: /cloud_cost_management/allocation/custom_allocation_rules/?tab=even
+[2]: /cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
+[3]: /cloud_cost_management/setup/aws
+[4]: /cloud_cost_management/setup/google_cloud
+[5]: /cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
+[6]: https://app.datadoghq.com/cost/summarize/ai-costs
+[7]: /cloud_cost_management/cost_changes/anomalies/
+[8]: /cloud_cost_management/cost_changes/monitors
+[9]: /cloud_cost_management/planning/budgets
+[10]: /cloud_cost_management/planning/forecasting
+[11]: https://app.datadoghq.com/cost/explorer
+[12]: /cloud_cost_management/allocation/custom_allocation_rules/?tab=even
+[13]: /cloud_cost_management/allocation/tag_pipelines
+[14]: /cloud_cost_management/reporting
