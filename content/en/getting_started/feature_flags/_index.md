@@ -29,7 +29,7 @@ Datadog feature flags offer a powerful, integrated way to manage feature deliver
 
 - **Real-time metrics:** Understand who's receiving each variant, as well as how your flag impacts the health & performance of your application—all in real time.
 
-- **Supports any data type:** Use Booleans, strings, numbers or full JSON objects—whatever your use case requires.
+- **Supports common flag types:** Use Boolean, string, numeric, or JSON variants. Some SDKs expose integer and floating-point methods separately, while JavaScript uses `getNumberValue()` for numeric variants.
 
 - **Built for experimentation:** Target specific audiences for A/B tests, roll out features gradually with canary releases, and automatically roll back when regressions are detected.
 
@@ -80,15 +80,17 @@ yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 Then, add the following to your project to initialize the SDK:
 
+Supported browser Feature Flags sites are `datadoghq.com`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ap1.datadoghq.com`, `ap2.datadoghq.com`, and `datadoghq.eu`. Browser Feature Flags are not supported on GovCloud sites.
+
 ```js
 import { DatadogProvider } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 // Initialize the provider
 const provider = new DatadogProvider({
-    clientToken: '<CLIENT_TOKEN>',
+    // Required client-side Datadog credentials
     applicationId: '<APPLICATION_ID>',
-    enableExposureLogging: true, // Can impact RUM costs if enabled
+    clientToken: '<CLIENT_TOKEN>',
     site: 'datadoghq.com',
     env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
     service: '<SERVICE_NAME>',
@@ -99,7 +101,17 @@ const provider = new DatadogProvider({
 await OpenFeature.setProviderAndWait(provider);
 ```
 
-<div class="alert alert-warning">Setting <code>enableExposureLogging</code> to <code>true</code> can impact <a href="https://docs.datadoghq.com/real_user_monitoring/">RUM</a> costs, as it sends exposure events to Datadog through RUM. You can disable it if you don't need to track feature exposure or guardrail metric status.</div>
+<div class="alert alert-info">The browser SDK emits three independent telemetry streams, all enabled by default. <code>enableExposureLogging</code> sends per-evaluation exposure events to the exposures intake. <code>enableFlagEvaluationTracking</code> sends aggregated evaluation telemetry to the flag-evaluation intake. <code>enableRumFeatureFlagTracking</code> attaches flag evaluations to RUM events and is the setting that can affect RUM usage. Disable only the stream you do not need.</div>
+
+### Credentials at a glance
+
+| Credential | Used by | Where it goes | Sensitive? |
+| --- | --- | --- | --- |
+| Client token | Browser, mobile, and game SDKs | Client application configuration | Public-shipping token |
+| Application ID | Browser and RUM-backed client SDKs | Client application configuration | Public-shipping identifier |
+| API key | Datadog Agent for server-side Remote Configuration | Agent configuration only | Secret |
+
+Do not put API keys in browser, mobile, or game applications.
 
 More information about OpenFeature SDK configuration options can be found in its [documentation][1]. For more information on creating client tokens and application IDs, see [API and Application Keys][3].
 
@@ -120,6 +132,8 @@ Go to [{{< ui >}}Create Feature Flag{{< /ui >}}][2] in Datadog and configure the
 ### Step 3: Evaluate the flag and write feature code
 
 In your application code, use the SDK to evaluate the flag and gate the new feature.
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation-context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 ```js
 import { OpenFeature } from '@openfeature/web-sdk';

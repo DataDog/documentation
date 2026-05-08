@@ -77,6 +77,8 @@ var checkoutClient = DdFlags.Instance.CreateClient("checkout");
 
 Define who or what the flag evaluation applies to using a `FlagsEvaluationContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Call this method before evaluating flags to help ensure proper targeting.
 
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation-context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
+
 {{< code-block lang="csharp" >}}
 client.SetEvaluationContext(
     new FlagsEvaluationContext(
@@ -223,6 +225,50 @@ DdFlags.Enable(new FlagsConfiguration(
 
 `customEvaluationEndpoint`
 : Configures a custom server URL for sending flags evaluation telemetry.
+
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `IFlagsClient`, or isolate game logic behind a small application interface and substitute a fake implementation in unit tests. This section shows the fake approach, which keeps tests hermetic and offline.
+
+{{< code-block lang="csharp" >}}
+public interface ICheckoutFlags
+{
+    bool NewCheckoutEnabled();
+}
+
+public sealed class DatadogCheckoutFlags : ICheckoutFlags
+{
+    private readonly IFlagsClient client;
+
+    public DatadogCheckoutFlags(IFlagsClient client)
+    {
+        this.client = client;
+    }
+
+    public bool NewCheckoutEnabled()
+    {
+        return client.GetBooleanValue("new-checkout-flow", false);
+    }
+}
+
+public sealed class TestCheckoutFlags : ICheckoutFlags
+{
+    public bool NewCheckoutEnabled()
+    {
+        return true;
+    }
+}
+
+[Test]
+public void FakeFlagValueCanDriveGameLogic()
+{
+    ICheckoutFlags flags = new TestCheckoutFlags();
+
+    Assert.IsTrue(flags.NewCheckoutEnabled());
+}
+{{< /code-block >}}
+
+Keep calls to `DdFlags.Instance.CreateClient()` at your application boundary. This lets tests replace flag values without initializing the Datadog Unity SDK.
 
 ## Further reading
 

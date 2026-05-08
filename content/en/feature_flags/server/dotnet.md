@@ -32,10 +32,15 @@ Set the following environment variables:
 # Required: Enable the feature flags provider
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
+# Optional: Enable flag evaluation metrics
+DD_METRICS_OTEL_ENABLED=true
+
 # Required: Service identification
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
+
+<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
 ## Installation
 
@@ -108,6 +113,8 @@ var client = Api.Instance.GetClient("my-service");
 ## Set the evaluation context
 
 Define an evaluation context that identifies the user or entity for flag targeting. The evaluation context includes attributes used to determine which flag variations should be returned:
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation-context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 {{< code-block lang="csharp" >}}
 using OpenFeature.Model;

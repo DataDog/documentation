@@ -131,6 +131,8 @@ let flagsClient = FlagsClient.shared(named: "checkout")
 
 Define who or what the flag evaluation applies to using a `FlagsEvaluationContext`. The evaluation context includes user or session information used to determine which flag variations should be returned. Call this method before evaluating flags to ensure proper targeting.
 
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation-context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
+
 {{< code-block lang="swift" >}}
 flagsClient.setEvaluationContext(
     FlagsEvaluationContext(
@@ -240,7 +242,7 @@ When you need more than just the flag value, use the `get<Type>Details` APIs. Th
 For example:
 
 {{< code-block lang="swift" >}}
-let details = flags.getStringDetails(
+let details = flagsClient.getStringDetails(
     key: "paywall.layout",
     defaultValue: "control"
 )
@@ -387,12 +389,15 @@ Flags.enable(with: config)
 `customExposureEndpoint`
 : Configures a custom server URL for sending flags exposure data.
 
+`customEvaluationEndpoint`
+: Configures a custom server URL for sending flag evaluation telemetry.
+
 `customFlagsHeaders`
 : Sets additional HTTP headers to attach to requests made to `customFlagsEndpoint`. It can be useful for authentication or routing when using your own flags service.
 
 ## Testing
 
-The examples above use Datadog's `FlagsClient` API directly. If you prefer to drive feature flags through the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature bridge for iOS at [dd-openfeature-provider-swift](https://github.com/DataDog/dd-openfeature-provider-swift). Use the bridge's `DatadogProvider` in production, and for code-controlled flag values in tests, substitute an in-memory provider.
+The examples above use Datadog's `FlagsClient` API directly. Use `FlagsClient` for production workloads. If you are prototyping against the [OpenFeature](https://openfeature.dev/) bridge or writing tests around the OpenFeature API, substitute an in-memory provider for code-controlled flag values.
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The OpenFeature Swift SDK does not ship an `InMemoryProvider`, so tests use a small custom `FeatureProvider` instead.
 

@@ -76,7 +76,8 @@ After installation, ensure you have initialized the Datadog provider with your c
 import com.datadog.android.flags.FlagsClient
 import com.datadog.android.flags.EvaluationContext
 
-val flagsClient = FlagsClient.getDefault()
+FlagsClient.Builder().build()
+val flagsClient = FlagsClient.get()
 
 // Set evaluation context
 flagsClient.setEvaluationContext(
@@ -105,7 +106,7 @@ if (showNewFeature) {
 {{< code-block lang="swift" >}}
 import DatadogFlags
 
-let flagsClient = FlagsClient.shared()
+let flagsClient = FlagsClient.create()
 
 // Set evaluation context
 flagsClient.setEvaluationContext(
@@ -119,8 +120,8 @@ flagsClient.setEvaluationContext(
 )
 
 // Evaluate flag
-let showNewFeature = flagsClient.resolveBooleanValue(
-    flagKey: "show-new-feature",
+let showNewFeature = flagsClient.getBooleanValue(
+    key: "show-new-feature",
     defaultValue: false
 )
 
@@ -332,11 +333,17 @@ Implement a wrapper function that provides a fallback mechanism to use the Launc
 import com.launchdarkly.sdk.LDContext
 import com.launchdarkly.sdk.android.LDClient
 import com.launchdarkly.sdk.android.LDConfig
+import android.app.Application
+import com.datadog.android.Datadog
+import com.datadog.android.DatadogSite
+import com.datadog.android.core.configuration.Configuration
 import com.datadog.android.flags.Flags
 import com.datadog.android.flags.FlagsClient
 import com.datadog.android.flags.EvaluationContext
+import com.datadog.android.privacy.TrackingConsent
 
 class FallbackWrapper(
+    private val application: Application,
     userId: String,
     evaluationContext: Map<String, String>
 ) {
@@ -345,7 +352,7 @@ class FallbackWrapper(
 
     init {
         val ldConfig = LDConfig.Builder()
-            .mobileKey('YOUR_LD_MOBILE_KEY')
+            .mobileKey("YOUR_LD_MOBILE_KEY")
             .build()
 
         val cb = LDContext.builder(userId)
@@ -353,14 +360,17 @@ class FallbackWrapper(
             cb.set(key, value)
         }
         val ldContext = cb.build()
-        ldClient = LDClient.init(this@BaseApplication, ldConfig, ldContext, 5)
+        ldClient = LDClient.init(application, ldConfig, ldContext, 5)
 
         val ddConfig = Configuration.Builder(
-            clientToken = 'YOUR_DD_CLIENT_TOKEN',
-            env = 'DD_ENV',
-            variant = 'APP_VARIANT_NAME'
+            clientToken = "YOUR_DD_CLIENT_TOKEN",
+            env = "DD_ENV",
+            variant = "APP_VARIANT_NAME"
         )
+            .useSite(DatadogSite.US1)
+            .build()
 
+        Datadog.initialize(application, ddConfig, TrackingConsent.GRANTED)
         Flags.enable()
 
         ddClient = FlagsClient.Builder().build()
@@ -401,11 +411,14 @@ class FallbackWrapper {
     private let ldClient: LDClient
     private let ddClient: FlagsClient
 
-    init(userId: String, evaluationContext: [String: AnyValue] = [:]) {
-        let ldConfig = LDConfig(mobileKey: 'YOUR_LD_MOBILE_KEY', autoEnvAttributes: .enabled)
-        var ldContext = LDContextBuilder(key: userId)
+    init(userId: String, evaluationContext: [String: String] = [:]) {
+        let ldConfig = LDConfig(mobileKey: "YOUR_LD_MOBILE_KEY", autoEnvAttributes: .enabled)
+        var ldContextBuilder = LDContextBuilder(key: userId)
         for (key, value) in evaluationContext {
-            ldContext.trySetValue(key, value)
+            ldContextBuilder.trySetValue(key, LDValue.string(value))
+        }
+        guard let ldContext = try? ldContextBuilder.build().get() else {
+            fatalError("Invalid LaunchDarkly context")
         }
         LDClient.start(config: ldConfig, context: ldContext)
 
@@ -426,21 +439,23 @@ class FallbackWrapper {
         self.ddClient.setEvaluationContext(
             FlagsEvaluationContext(
                 targetingKey: userId,
-                attributes: evaluationContext
+                attributes: evaluationContext.mapValues { .string($0) }
             )
         )
     }
 
     func getBooleanFlag(flagKey: String, defaultValue: Bool) -> Bool {
-        do {
-            return self.ddClient.resolveBooleanValue(
-                flagKey: flagKey,
-                defaultValue: defaultValue
-            )
-        } catch {
-            print("Falling back to LaunchDarkly for flag: \(flagKey)")
-            return self.ldClient.boolVariation(forKey: flagKey, defaultValue: defaultValue)
+        let details = self.ddClient.getBooleanDetails(
+            key: flagKey,
+            defaultValue: defaultValue
+        )
+
+        if details.error == nil {
+            return details.value
         }
+
+        print("Falling back to LaunchDarkly for flag: \(flagKey)")
+        return self.ldClient.boolVariation(forKey: flagKey, defaultValue: defaultValue)
     }
 }
 {{< /code-block >}}
@@ -453,13 +468,14 @@ import { OpenFeature } from '@openfeature/web-sdk';
 import { DatadogProvider } from '@datadog/openfeature-browser';
 
 class FallbackWrapper {
-    private ldClient;
-    private ddClient;
+    ldClient;
+    ddClient;
     async initialize(userId, evaluationContext = {}) {
         try {
             const ddProvider = new DatadogProvider({
                 applicationId: 'YOUR_APP_ID',
                 clientToken: 'YOUR_CLIENT_TOKEN',
+                site: 'datadoghq.com',
                 env: 'ENV_NAME',
             });
 
@@ -487,7 +503,7 @@ class FallbackWrapper {
             }
             return this.ddClient.getBooleanValue(flagKey, defaultValue);
         } catch (e) {
-            console.warn(`Falling back to LaunchDarkly for flag: ${flagKey});
+            console.warn(`Falling back to LaunchDarkly for flag: ${flagKey}`);
             return this.ldClient.variation(flagKey, defaultValue);
         }
     }

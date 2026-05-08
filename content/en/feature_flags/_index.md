@@ -30,7 +30,29 @@ further_reading:
 
 ## Overview
 
-Feature flags enable you to toggle features on and off, conduct A/B/n testing, gradually roll out new functionality, and personalize user experiences—all without the need for extensive code deployments. With feature flags, you can empower your team to make dynamic changes, iterate rapidly, and deliver enhanced user experiences.
+Datadog Feature Flags is Datadog's flag management product. You create flags in Datadog, deliver flag configuration to Datadog SDKs, and evaluate variants in your application through Datadog or OpenFeature APIs.
+
+Feature flags enable you to toggle features on and off, conduct A/B/n testing, gradually roll out new functionality, and personalize user experiences without the need for extensive code deployments. With feature flags, you can empower your team to make dynamic changes, iterate rapidly, and deliver enhanced user experiences.
+
+If your flags are managed by LaunchDarkly, Split, ConfigCat, or another provider and you only want Datadog to record evaluated variants in RUM, see [RUM Feature Flag Tracking](/real_user_monitoring/feature_flag_tracking/) instead.
+
+Use a client-side SDK when the flag must be evaluated in a browser, mobile app, or game client. Use a server-side SDK when the decision should happen in a backend service and the flag configuration can be delivered through the Datadog Agent and Remote Configuration.
+
+### Credentials at a glance
+
+| Credential | Used by | Where it goes | Sensitive? |
+| --- | --- | --- | --- |
+| Client token | Browser, mobile, and game SDKs | Client application configuration | Public-shipping token |
+| Application ID | Browser and RUM-backed client SDKs | Client application configuration | Public-shipping identifier |
+| API key | Datadog Agent for server-side Remote Configuration | Agent configuration only | Secret |
+
+Do not put API keys in browser, mobile, or game applications.
+
+### Evaluation context and telemetry
+
+Evaluation context attributes are the flat string, number, and Boolean values that Datadog uses for targeting rules and rollout bucketing. Set a stable `targetingKey`, such as a user ID, session ID, or device ID, so percentage rollouts are consistent.
+
+Feature Flags telemetry includes exposure events, flag evaluation metrics, and optional RUM correlation depending on the SDK and configuration. For third-party feature flag providers, use [RUM Feature Flag Tracking](/real_user_monitoring/feature_flag_tracking/) to send evaluated variants to RUM without migrating flag management to Datadog.
 
 ## Further reading
 

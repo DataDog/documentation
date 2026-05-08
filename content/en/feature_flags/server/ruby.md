@@ -21,10 +21,10 @@ This page describes how to instrument your Ruby application with the Datadog Fea
 
 Before setting up the Ruby Feature Flags SDK, ensure you have:
 
-- **Datadog Agent** with [Remote Configuration][1] enabled
+- **Datadog Agent** version 7.55 or later with [Remote Configuration][1] enabled
 - **Datadog [API key][4]** configured on the Agent
-- **Datadog Ruby SDK** `datadog` version 2.23.0 or later
-- **OpenFeature Ruby SDK** `openfeature-sdk` version 0.4.1 or later
+- **Datadog Ruby SDK** `datadog` version 2.24.0 or later
+- **OpenFeature Ruby SDK** `openfeature-sdk` version 0.5.1 or later if you need flag evaluation metrics support
 - **Service and environment configured** - Feature flags are targeted by service and environment
 - **Supported operating system** - Feature flags are only [supported on Linux operating systems][2]. Windows and macOS are not natively supported, but Dockerized Linux environments running on those operating systems are.
 
@@ -34,8 +34,22 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install the required gems and configure Remote Configuration with OpenFeature support.
 
 ```shell
-gem install ddtrace openfeature-sdk
+gem install datadog openfeature-sdk
 ```
+
+You can enable Feature Flags with environment variables:
+
+```shell
+# Required: Enable the feature flags provider
+DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+
+# Optional: Enable flag evaluation metrics
+DD_METRICS_OTEL_ENABLED=true
+```
+
+<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+
+Or enable the provider in code:
 
 ```ruby
 require 'datadog'
@@ -68,6 +82,8 @@ Using `set_provider_and_wait` blocks your application from proceeding until the 
 ## Set the evaluation context
 
 Define an evaluation context that identifies the user or entity for flag targeting. The evaluation context includes attributes used to determine which flag variations should be returned:
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation-context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 ```ruby
 context = OpenFeature::SDK::EvaluationContext.new(
