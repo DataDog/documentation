@@ -68,7 +68,7 @@ Example prompts:
 - `Which teams are responsible for the highest S3 storage costs this month?`
 
 #### DDSQL
-Generate and run [DDSQL][7] queries against Datadog telemetry data—including logs, metrics, spans, RUM events, and cloud resources—using natural language.
+Generate and run [DDSQL][7] queries against Datadog [telemetry data][8] using natural language. 
 
 Example prompts:
 - `Write a DDSQL query that shows the top 10 services by error count in the last hour`
@@ -114,3 +114,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 [5]: /dashboards/
 [6]: /notebooks/
 [7]: /ddsql_editor/
+[8]: /ddsql_reference/data_directory/
