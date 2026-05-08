@@ -72,7 +72,7 @@ describe('ApiSideNav component', () => {
     const container = await createContainer();
     const html = await container.renderToString(ApiSideNav, { props: { categories } });
 
-    expect(html).not.toContain('api-side-nav__operation');
+    expect(html).not.toMatch(/<a[^>]*api-side-nav__operation/);
     expect(html).not.toContain('Get a dashboard');
     expect(html).not.toContain('Create a monitor');
   });
@@ -88,7 +88,7 @@ describe('ApiSideNav component', () => {
     expect(html).not.toContain('Create a monitor');
 
     // One link per operation in dashboards (2), and no extra ones.
-    const matches = html.match(/api-side-nav__operation\b/g) ?? [];
+    const matches = html.match(/<a[^>]*api-side-nav__operation\b/g) ?? [];
     expect(matches.length).toBe(dashboards.operations.length);
   });
 
@@ -133,5 +133,19 @@ describe('ApiSideNav component', () => {
     expect(html).toMatch(/api-side-nav__search/);
     // The Preact island's input is server-rendered too, so the markup is present.
     expect(html).toContain('search-bar__input');
+  });
+
+  it('emits an inline script that scrolls the active section into view', async () => {
+    const container = await createContainer();
+    const html = await container.renderToString(ApiSideNav, {
+      props: { categories, activeCategory: dashboards, currentOperationSlug: 'get-a-dashboard' },
+    });
+
+    expect(html).toContain('.api-side-nav__category--active');
+    expect(html).toContain('scrollTop');
+    // The script must come after the list so the active section is already parsed.
+    const listEnd = html.lastIndexOf('</ul>');
+    const scriptStart = html.indexOf('scrollTop');
+    expect(scriptStart).toBeGreaterThan(listEnd);
   });
 });

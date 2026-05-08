@@ -56,4 +56,15 @@ const cl = classListFactory(styles);
       );
     })}
   </ul>
+  {/* Inline + after the list so the active section is parsed and the scroll lands before first paint. */}
+  <script is:inline>
+    {
+      const active = document.querySelector('.api-side-nav__category--active');
+      const section = active?.closest('li');
+      const container = active?.closest('.api-side-nav__list');
+      if (section && container) {
+        container.scrollTop += section.getBoundingClientRect().top - container.getBoundingClientRect().top;
+      }
+    }
+  </script>
 </nav>

@@ -5,9 +5,9 @@
   top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
   align-self: flex-start;
   max-height: calc(100vh - var(--hugo-banner-height) - var(--hugo-header-height));
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   overflow-x: hidden;
-  scrollbar-width: none;
   padding: var(--space-md) var(--space-md) var(--space-md) 0;
   /* box-shadow extends the rail color past the element's left edge so it
      reaches the viewport edge without adding horizontal overflow.
@@ -16,10 +16,6 @@
   background: var(--color-gray-lightest);
   box-shadow: -100vw 0 0 100vw var(--color-gray-lightest);
   clip-path: inset(0 -100vw);
-}
-
-.api-side-nav::-webkit-scrollbar {
-  display: none;
 }
 
 @media (min-width: 992px) {
@@ -56,6 +52,14 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.api-side-nav__list::-webkit-scrollbar {
+  display: none;
 }
 
 .api-side-nav__category {
