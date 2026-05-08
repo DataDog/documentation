@@ -14,6 +14,9 @@ const websitesModules = realpathSync(
 );
 const hugoSite = fileURLToPath(new URL("..", import.meta.url));
 
+const proxied = process.env.PROXIED === "1";
+const proxyPort = 1314;
+
 export default defineConfig({
   site: "https://docs.datadoghq.com",
   integrations: [markdoc(), preact()],
@@ -30,6 +33,10 @@ export default defineConfig({
       fs: {
         allow: [hugoSite, websitesModules],
       },
+      ...(proxied && {
+        origin: `http://localhost:${proxyPort}`,
+        hmr: { clientPort: proxyPort },
+      }),
     },
     resolve: {
       alias: {

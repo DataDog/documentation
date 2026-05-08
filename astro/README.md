@@ -16,6 +16,26 @@ npm run dev
 
 The dev server starts at **http://localhost:4321**.
 
+## Running alongside the Hugo site (Caddy proxy)
+
+The Astro site only serves API docs. To browse it inside the full Hugo site (header, footer, non-API pages), run both behind the Caddy proxy at [Caddyfile](../Caddyfile). The proxy listens on **http://localhost:1314** and routes `/api/*` (and Vite's dev paths) to Astro, everything else to Hugo.
+
+In three terminals, from the repo root:
+
+```bash
+make start-proxied        # Hugo on :1313, baseURL set to :1314
+```
+
+```bash
+cd astro && npm run dev:proxied   # Astro on :4321, HMR through :1314
+```
+
+```bash
+caddy run                 # Proxy on :1314
+```
+
+Then visit **http://localhost:1314**. `npm run dev:proxied` differs from `npm run dev` only in that it points Vite's HMR client and asset origin at the proxy port so hot reload works through Caddy.
+
 ## Component documentation
 
 Each component has a dedicated page showing its properties and visual permutations. After running `npm run build`, browse the index at [http://localhost:4322/docs/test_pages/](http://localhost:4322/docs/test_pages/) (via `npm run preview`). The pages are also reachable under `npm run dev`, but client-side hydration only behaves correctly in a production build.
