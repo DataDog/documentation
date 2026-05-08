@@ -21,7 +21,7 @@ Use Observability Pipelines' Sumo Logic Hosted Collector source to receive logs 
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][2], using the [API][3], or with [Terraform][4]. The instructions in this section are for setting up the source in the UI.
 
-After you select the Sumo Logic source in the pipeline UI enter the identifier for your Sumo Logic address. If you leave it blank, the [default](#secret-defaults) is used.
+After you select the Sumo Logic source in the pipeline UI, enter the identifier for your Sumo Logic address. If you leave it blank, the [default](#secret-defaults) is used.
 
 **Note**: Only enter the identifier for the address. Do **not** enter the actual address.
 

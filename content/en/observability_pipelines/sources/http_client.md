@@ -1,5 +1,5 @@
 ---
-title: HTTP Client Source
+title: HTTP/S Client Source
 disable_toc: false
 products:
 - name: Logs
@@ -21,15 +21,15 @@ Use Observability Pipelines' HTTP/S Client source to pull logs from the upstream
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the HTTP Client endpoint URL and, if applicable, your authorization strategy secrets and TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">Only enter the identifiers for the HTTP/S Client endpoint URL and, if applicable, your authorization strategy secrets and TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-After you select the HTTP Client source in the pipeline UI:
+After you select the HTTP/S Client source in the pipeline UI:
 
-1. Enter the identifier for your HTTP Client endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your HTTP/S Client endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your authorization strategy. If you selected:
    - **Basic**:
-      - Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#secret-defaults) is used.
-      - Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#secret-defaults) is used.
+      - Enter the identifier for your HTTP/S Client username. If you leave it blank, the [default](#secret-defaults) is used.
+      - Enter the identifier for your HTTP/S Client password. If you leave it blank, the [default](#secret-defaults) is used.
    - **Bearer**: Enter the identifier for your bearer token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select the decoder you want to use on the HTTP messages. Logs pulled from the HTTP source must be in this format.
 
@@ -53,18 +53,18 @@ After you select the HTTP Client source in the pipeline UI:
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-- HTTP Client endpoint URL identifier:
+- HTTP/S Client endpoint URL identifier:
 	- References the endpoint from which the Observability Pipelines Worker collects log events.
 	- The default identifier is `SOURCE_HTTP_CLIENT_ENDPOINT_URL`.
-- HTTP Client TLS passphrase identifier (when TLS is enabled):
+- HTTP/S Client TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_HTTP_CLIENT_KEY_PASS`.
 - If you are using basic authentication:
-	- HTTP Client username identifier:
+	- HTTP/S Client username identifier:
 		- The default identifier is `SOURCE_HTTP_CLIENT_USERNAME`.
-	- HTTP Client password identifier:
+	- HTTP/S Client password identifier:
 		- The default identifier is `SOURCE_HTTP_CLIENT_PASSWORD`.
 - If you are using bearer authentication:
-	- HTTP Client bearer token identifier:
+	- HTTP/S Client bearer token identifier:
 		- The default identifier is `SOURCE_HTTP_CLIENT_BEARER_TOKEN`.
 
 {{% /tab %}}
