@@ -1,0 +1,43 @@
+---
+title: "CopyPageButton"
+description: "Preact island (client:idle). Fetches the .md version of the current page on hover/click and copies it to clipboard. Falls back to DOM text extraction if the .md fetch fails."
+type: interactive
+---
+
+# CopyPageButton
+
+A button that copies the current page content as text to the clipboard. Placed below the page title on every API page.
+
+## Properties
+
+This component takes no props. It derives the `.md` URL from the current page pathname.
+
+## Behavior
+
+| Step | Action |
+|------|--------|
+| Mouseenter | Begins fetching the `.md` version of the page from `docs.datadoghq.com` |
+| Click | Copies the fetched text (or DOM-extracted fallback) to clipboard |
+| After copy | Shows "Copied!" with a checkmark icon for 3 seconds |
+| Cache | Results are cached per URL to avoid redundant fetches |
+
+## Fallback
+
+If the `.md` fetch fails (e.g. during local development), the component extracts text from the DOM by walking the `.prose` content area. It converts headings to markdown `#` format, links to `[text](url)` format, and preserves block structure.
+
+## Visual states
+
+The button has two visual states:
+
+- **Default**: clipboard icon + "Copy page as text"
+- **Copied**: clipboard-with-checkmark icon + "Copied!" (resets after 3 seconds)
+
+## Usage
+
+The component is used directly in API page templates with `client:idle` hydration:
+
+```astro
+<CopyPageButton client:idle />
+```
+
+It appears on all API pages: the index, category pages, individual operation pages, and static pages (rate limits, scopes, using the API).

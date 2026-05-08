@@ -54,55 +54,91 @@
     </div>
   </div>
   <div class="prose" data-astro-cid-hnecgxtf>
-    <section class="api-endpoint _api-endpoint_1ylu2_1" data-operation-id="CreateIncident">
-      <h1 id="create-an-incident" class="api-endpoint__heading _api-endpoint__heading_1ylu2_5">
-        Create an incident<span class="api-endpoint__version-badge _api-endpoint__version-badge_1ylu2_11"
+    <section class="api-endpoint _api-endpoint_17nz0_1" data-operation-id="CreateIncident">
+      <h1 id="create-an-incident" class="api-endpoint__heading _api-endpoint__heading_17nz0_5">
+        Create an incident<span class="api-endpoint__version-badge _api-endpoint__version-badge_17nz0_11"
           >v2 (latest)</span
         >
       </h1>
+      <script>
+        (() => {
+          var l = (n, t) => {
+            let i = async () => {
+                await (
+                  await n()
+                )();
+              },
+              e = typeof t.value == "object" ? t.value : void 0,
+              s = { timeout: e == null ? void 0 : e.timeout };
+            "requestIdleCallback" in window ? window.requestIdleCallback(i, s) : setTimeout(i, s.timeout || 200);
+          };
+          (self.Astro || (self.Astro = {})).idle = l;
+          window.dispatchEvent(new Event("astro:idle"));
+        })();
+      </script>
+      <astro-island
+        uid="X3"
+        component-url="/_astro/CopyPageButton.HASH.js"
+        component-export="CopyPageButton"
+        renderer-url="/_astro/client.HASH.js"
+        props="{}"
+        ssr
+        client="idle"
+        opts='{"name":"CopyPageButton","value":true}'
+        await-children
+        ><button aria-label="Copy page as text" class="copy-page-button _copy-page-button_ayhib_1">
+          <span class="copy-page-button__icon _copy-page-button__icon_ayhib_20"
+            ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+              ></path></svg></span
+          ><span class="copy-page-button__label _copy-page-button__label_ayhib_32">Copy page as text</span></button
+        ><!--astro:end--></astro-island
+      >
       <div class="alert _alert_1msim_1 alert--warning _alert--warning_1msim_19">
         <strong class="alert__label _alert__label_1msim_27">Warning</strong> <strong>Note</strong>: This endpoint is in
         public beta. If you have any feedback, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
       </div>
-      <div class="api-endpoint__url-line _api-endpoint__url-line_1ylu2_18">
+      <div class="api-endpoint__url-line _api-endpoint__url-line_17nz0_18">
         <span
           class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
         >
           POST </span
-        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="us"
+        ><code class="api-endpoint__path _api-endpoint__path_17nz0_25" data-region="us"
           >https://api.datadoghq.com/api/v2/incidents</code
-        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="us3"
+        ><code class="api-endpoint__path _api-endpoint__path_17nz0_25" data-region="us3"
           >https://api.us3.datadoghq.com/api/v2/incidents</code
-        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="us5"
+        ><code class="api-endpoint__path _api-endpoint__path_17nz0_25" data-region="us5"
           >https://api.us5.datadoghq.com/api/v2/incidents</code
-        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="eu"
+        ><code class="api-endpoint__path _api-endpoint__path_17nz0_25" data-region="eu"
           >https://api.datadoghq.eu/api/v2/incidents</code
-        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="ap1"
+        ><code class="api-endpoint__path _api-endpoint__path_17nz0_25" data-region="ap1"
           >https://api.ap1.datadoghq.com/api/v2/incidents</code
-        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="ap2"
+        ><code class="api-endpoint__path _api-endpoint__path_17nz0_25" data-region="ap2"
           >https://api.ap2.datadoghq.com/api/v2/incidents</code
-        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="gov"
+        ><code class="api-endpoint__path _api-endpoint__path_17nz0_25" data-region="gov"
           >https://api.ddog-gov.com/api/v2/incidents</code
         >
       </div>
       <h3>Overview</h3>
       <p>Create an incident.</p>
-      <div class="api-endpoint__permissions _api-endpoint__permissions_1ylu2_41">
+      <div class="api-endpoint__permissions _api-endpoint__permissions_17nz0_41">
         <strong>Permissions: </strong><code>incident_write</code>
       </div>
-      <div class="api-endpoint__permissions _api-endpoint__permissions_1ylu2_41">
+      <div class="api-endpoint__permissions _api-endpoint__permissions_17nz0_41">
         <p>OAuth apps require the <code>incident_write</code> authorization scope to access this endpoint.</p>
       </div>
-      <div class="api-endpoint__section _api-endpoint__section_1ylu2_53">
+      <div class="api-endpoint__section _api-endpoint__section_17nz0_53">
         <h3>Request Body (required)</h3>
         <p>Incident payload.</p>
-        <div id="request-body-tabs-X35" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
+        <div id="request-body-tabs-X36" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
           <astro-island
-            uid="X3"
+            uid="X4"
             component-url="/_astro/TabsNav.HASH.js"
             component-export="TabsNav"
             renderer-url="/_astro/client.HASH.js"
-            props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"request-body-tabs-X35"],"entries":[0,{"tabsEl":[0,"request-body-tabs-X35"],"tabPanelEls":[1,[[0,"request-body-tabs-X35-panel-0"],[0,"request-body-tabs-X35-panel-1"]]]}]}],"variant":[0,"pills"]}'
+            props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"request-body-tabs-X36"],"entries":[0,{"tabsEl":[0,"request-body-tabs-X36"],"tabPanelEls":[1,[[0,"request-body-tabs-X36-panel-0"],[0,"request-body-tabs-X36-panel-1"]]]}]}],"variant":[0,"pills"]}'
             ssr
             client="load"
             opts='{"name":"TabsNav","value":true}'
@@ -111,7 +147,7 @@
               <button
                 role="tab"
                 aria-selected="true"
-                aria-controls="request-body-tabs-X35-panel-0"
+                aria-controls="request-body-tabs-X36-panel-0"
                 data-tab-index="0"
                 class="tabs__button _tabs__button_1ub6w_42 tabs__button--active _tabs__button--active_1ub6w_69"
               >
@@ -119,7 +155,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="request-body-tabs-X35-panel-1"
+                aria-controls="request-body-tabs-X36-panel-1"
                 data-tab-index="1"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -128,11 +164,11 @@
             </div>
             <!--astro:end--></astro-island
           >
-          <div id="request-body-tabs-X35-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
-            <div id="schema-table-X36" class="schema-table">
+          <div id="request-body-tabs-X36-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
+            <div id="schema-table-X37" class="schema-table">
               <div class="schema-table__toolbar _schema-table__toolbar_172t8_17">
                 <button
-                  id="schema-table-X36-expand-all"
+                  id="schema-table-X37-expand-all"
                   type="button"
                   class="schema-table__expand-all _schema-table__expand-all_172t8_23"
                 >
@@ -692,30 +728,12 @@
                   </div>
                 </div>
               </div>
-              <script>
-                (() => {
-                  var l = (n, t) => {
-                    let i = async () => {
-                        await (
-                          await n()
-                        )();
-                      },
-                      e = typeof t.value == "object" ? t.value : void 0,
-                      s = { timeout: e == null ? void 0 : e.timeout };
-                    "requestIdleCallback" in window
-                      ? window.requestIdleCallback(i, s)
-                      : setTimeout(i, s.timeout || 200);
-                  };
-                  (self.Astro || (self.Astro = {})).idle = l;
-                  window.dispatchEvent(new Event("astro:idle"));
-                })();
-              </script>
               <astro-island
-                uid="X4"
+                uid="X5"
                 component-url="/_astro/ApiSchemaTableNav.HASH.js"
                 component-export="ApiSchemaTableNav"
                 renderer-url="/_astro/client.HASH.js"
-                props='{"externalContext":[0,{"scope":[0,"schema-table-X36"],"entries":[0,{"tableEl":[0,"schema-table-X36"],"expandAllEl":[0,"schema-table-X36-expand-all"]}]}]}'
+                props='{"externalContext":[0,{"scope":[0,"schema-table-X37"],"entries":[0,{"tableEl":[0,"schema-table-X37"],"expandAllEl":[0,"schema-table-X37-expand-all"]}]}]}'
                 ssr
                 client="idle"
                 opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -725,17 +743,17 @@
               >
             </div>
           </div>
-          <div id="request-body-tabs-X35-panel-1" role="tabpanel" class="tabs__panel" hidden>
-            <div class="request-body-tabs__examples _request-body-tabs__examples_1ylu2_61">
+          <div id="request-body-tabs-X36-panel-1" role="tabpanel" class="tabs__panel" hidden>
+            <div class="request-body-tabs__examples _request-body-tabs__examples_17nz0_61">
               <div>
-                <div id="code-block-X37" class="code-block _code-block_ttpsg_1" data-language="json">
-                  <div id="code-block-X37-content" class="code-block__content _code-block__content_ttpsg_75">
+                <div id="code-block-X38" class="code-block _code-block_ttpsg_1" data-language="json">
+                  <div id="code-block-X38-content" class="code-block__content _code-block__content_ttpsg_75">
                     <astro-island
-                      uid="X5"
+                      uid="X6"
                       component-url="/_astro/CopyButton.HASH.js"
                       component-export="CopyButton"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"content":[0,"{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}"]}'
+                      props='{"content":[0,"{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X39-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X39-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}"]}'
                       ssr
                       client="idle"
                       opts='{"name":"CopyButton","value":true}'
@@ -765,7 +783,7 @@
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">value</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"SEV-5"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        }</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      },</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">incident_type_uuid</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-0000-0000-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">incident_type_uuid</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-0000-0000-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">initial_cells</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        {</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">cell_type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"markdown"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
@@ -795,7 +813,7 @@
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">relationships</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">commander_user</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">data</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-0000-0000-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-0000-0000-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"users"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        }</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      }</span></span>
@@ -813,13 +831,13 @@
       </div>
       <div class="api-response _api-response_1lx33_1">
         <h3 class="api-response__heading _api-response__heading_1lx33_5">Response</h3>
-        <div id="api-response-X39" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
+        <div id="api-response-X40" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
           <astro-island
-            uid="X6"
+            uid="X7"
             component-url="/_astro/TabsNav.HASH.js"
             component-export="TabsNav"
             renderer-url="/_astro/client.HASH.js"
-            props='{"labels":[1,[[0,"201"],[0,"400"],[0,"401"],[0,"403"],[0,"404"],[0,"429"]]],"externalContext":[0,{"scope":[0,"api-response-X39"],"entries":[0,{"tabsEl":[0,"api-response-X39"],"tabPanelEls":[1,[[0,"api-response-X39-panel-0"],[0,"api-response-X39-panel-1"],[0,"api-response-X39-panel-2"],[0,"api-response-X39-panel-3"],[0,"api-response-X39-panel-4"],[0,"api-response-X39-panel-5"]]]}]}],"variant":[0,"pills"]}'
+            props='{"labels":[1,[[0,"201"],[0,"400"],[0,"401"],[0,"403"],[0,"404"],[0,"429"]]],"externalContext":[0,{"scope":[0,"api-response-X40"],"entries":[0,{"tabsEl":[0,"api-response-X40"],"tabPanelEls":[1,[[0,"api-response-X40-panel-0"],[0,"api-response-X40-panel-1"],[0,"api-response-X40-panel-2"],[0,"api-response-X40-panel-3"],[0,"api-response-X40-panel-4"],[0,"api-response-X40-panel-5"]]]}]}],"variant":[0,"pills"]}'
             ssr
             client="load"
             opts='{"name":"TabsNav","value":true}'
@@ -828,7 +846,7 @@
               <button
                 role="tab"
                 aria-selected="true"
-                aria-controls="api-response-X39-panel-0"
+                aria-controls="api-response-X40-panel-0"
                 data-tab-index="0"
                 class="tabs__button _tabs__button_1ub6w_42 tabs__button--active _tabs__button--active_1ub6w_69"
               >
@@ -836,7 +854,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="api-response-X39-panel-1"
+                aria-controls="api-response-X40-panel-1"
                 data-tab-index="1"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -844,7 +862,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="api-response-X39-panel-2"
+                aria-controls="api-response-X40-panel-2"
                 data-tab-index="2"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -852,7 +870,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="api-response-X39-panel-3"
+                aria-controls="api-response-X40-panel-3"
                 data-tab-index="3"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -860,7 +878,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="api-response-X39-panel-4"
+                aria-controls="api-response-X40-panel-4"
                 data-tab-index="4"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -868,7 +886,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="api-response-X39-panel-5"
+                aria-controls="api-response-X40-panel-5"
                 data-tab-index="5"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -877,16 +895,16 @@
             </div>
             <!--astro:end--></astro-island
           >
-          <div id="api-response-X39-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
+          <div id="api-response-X40-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
             <div class="api-response__panel api-response__panel--201">
               <p class="api-response__description _api-response__description_1lx33_9">CREATED</p>
-              <div id="api-response-X39-inner-0" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
+              <div id="api-response-X40-inner-0" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
                 <astro-island
-                  uid="X7"
+                  uid="X8"
                   component-url="/_astro/TabsNav.HASH.js"
                   component-export="TabsNav"
                   renderer-url="/_astro/client.HASH.js"
-                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X39-inner-0"],"entries":[0,{"tabsEl":[0,"api-response-X39-inner-0"],"tabPanelEls":[1,[[0,"api-response-X39-model-0"],[0,"api-response-X39-example-0"]]]}]}],"variant":[0,"pills"]}'
+                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X40-inner-0"],"entries":[0,{"tabsEl":[0,"api-response-X40-inner-0"],"tabPanelEls":[1,[[0,"api-response-X40-model-0"],[0,"api-response-X40-example-0"]]]}]}],"variant":[0,"pills"]}'
                   ssr
                   client="load"
                   opts='{"name":"TabsNav","value":true}'
@@ -895,7 +913,7 @@
                     <button
                       role="tab"
                       aria-selected="true"
-                      aria-controls="api-response-X39-model-0"
+                      aria-controls="api-response-X40-model-0"
                       data-tab-index="0"
                       class="tabs__button _tabs__button_1ub6w_42 tabs__button--active _tabs__button--active_1ub6w_69"
                     >
@@ -903,7 +921,7 @@
                     ><button
                       role="tab"
                       aria-selected="false"
-                      aria-controls="api-response-X39-example-0"
+                      aria-controls="api-response-X40-example-0"
                       data-tab-index="1"
                       class="tabs__button _tabs__button_1ub6w_42"
                     >
@@ -912,11 +930,11 @@
                   </div>
                   <!--astro:end--></astro-island
                 >
-                <div id="api-response-X39-model-0" role="tabpanel" class="tabs__panel tabs__panel--active">
-                  <div id="schema-table-X40" class="schema-table">
+                <div id="api-response-X40-model-0" role="tabpanel" class="tabs__panel tabs__panel--active">
+                  <div id="schema-table-X41" class="schema-table">
                     <div class="schema-table__toolbar _schema-table__toolbar_172t8_17">
                       <button
-                        id="schema-table-X40-expand-all"
+                        id="schema-table-X41-expand-all"
                         type="button"
                         class="schema-table__expand-all _schema-table__expand-all_172t8_23"
                       >
@@ -3455,11 +3473,11 @@
                       </div>
                     </div>
                     <astro-island
-                      uid="X8"
+                      uid="X9"
                       component-url="/_astro/ApiSchemaTableNav.HASH.js"
                       component-export="ApiSchemaTableNav"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"externalContext":[0,{"scope":[0,"schema-table-X40"],"entries":[0,{"tableEl":[0,"schema-table-X40"],"expandAllEl":[0,"schema-table-X40-expand-all"]}]}]}'
+                      props='{"externalContext":[0,{"scope":[0,"schema-table-X41"],"entries":[0,{"tableEl":[0,"schema-table-X41"],"expandAllEl":[0,"schema-table-X41-expand-all"]}]}]}'
                       ssr
                       client="idle"
                       opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -3469,16 +3487,16 @@
                     >
                   </div>
                 </div>
-                <div id="api-response-X39-example-0" role="tabpanel" class="tabs__panel" hidden>
+                <div id="api-response-X40-example-0" role="tabpanel" class="tabs__panel" hidden>
                   <div class="api-response__example _api-response__example_1lx33_14">
-                    <div id="code-block-X41" class="code-block _code-block_ttpsg_1" data-language="json">
-                      <div id="code-block-X41-content" class="code-block__content _code-block__content_ttpsg_75">
+                    <div id="code-block-X42" class="code-block _code-block_ttpsg_1" data-language="json">
+                      <div id="code-block-X42-content" class="code-block__content _code-block__content_ttpsg_75">
                         <astro-island
-                          uid="X9"
+                          uid="X10"
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"content":[0,"{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"An example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"public_id\": 1,\n      \"severity\": \"UNKNOWN\",\n      \"title\": \"A test incident title\"\n    },\n    \"id\": \"X38-0000-0000-1234-000000000000\",\n    \"relationships\": {\n      \"attachments\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-abcd-1000-000000000000\",\n            \"type\": \"incident_attachments\"\n          }\n        ]\n      },\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      },\n      \"created_by_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-2345-000000000000\"\n        }\n      },\n      \"impacts\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-0000-2345-000000000000\",\n            \"type\": \"incident_impacts\"\n          }\n        ]\n      },\n      \"integrations\": {\n        \"data\": [\n          {\n            \"id\": \"X38-abcd-0005-0000-000000000000\",\n            \"type\": \"incident_integrations\"\n          },\n          {\n            \"id\": \"X38-abcd-0006-0000-000000000000\",\n            \"type\": \"incident_integrations\"\n          }\n        ]\n      },\n      \"responders\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-0000-2345-000000000000\",\n            \"type\": \"incident_responders\"\n          }\n        ]\n      },\n      \"user_defined_fields\": {\n        \"data\": [\n          {\n            \"id\": \"X38-0000-0000-2345-000000000000\",\n            \"type\": \"user_defined_field\"\n          }\n        ]\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}"]}'
+                          props='{"content":[0,"{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"An example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X39-0000-0000-0000-000000000000\",\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"public_id\": 1,\n      \"severity\": \"UNKNOWN\",\n      \"title\": \"A test incident title\"\n    },\n    \"id\": \"X39-0000-0000-1234-000000000000\",\n    \"relationships\": {\n      \"attachments\": {\n        \"data\": [\n          {\n            \"id\": \"X39-0000-abcd-1000-000000000000\",\n            \"type\": \"incident_attachments\"\n          }\n        ]\n      },\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X39-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      },\n      \"created_by_user\": {\n        \"data\": {\n          \"id\": \"X39-0000-0000-2345-000000000000\"\n        }\n      },\n      \"impacts\": {\n        \"data\": [\n          {\n            \"id\": \"X39-0000-0000-2345-000000000000\",\n            \"type\": \"incident_impacts\"\n          }\n        ]\n      },\n      \"integrations\": {\n        \"data\": [\n          {\n            \"id\": \"X39-abcd-0005-0000-000000000000\",\n            \"type\": \"incident_integrations\"\n          },\n          {\n            \"id\": \"X39-abcd-0006-0000-000000000000\",\n            \"type\": \"incident_integrations\"\n          }\n        ]\n      },\n      \"responders\": {\n        \"data\": [\n          {\n            \"id\": \"X39-0000-0000-2345-000000000000\",\n            \"type\": \"incident_responders\"\n          }\n        ]\n      },\n      \"user_defined_fields\": {\n        \"data\": [\n          {\n            \"id\": \"X39-0000-0000-2345-000000000000\",\n            \"type\": \"user_defined_field\"\n          }\n        ]\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}"]}'
                           ssr
                           client="idle"
                           opts='{"name":"CopyButton","value":true}'
@@ -3508,7 +3526,7 @@
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">value</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"SEV-5"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        }</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      },</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">incident_type_uuid</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-0000-0000-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">incident_type_uuid</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-0000-0000-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">is_test</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#A90D91;--shiki-dark:#7B7FFF">false</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">notification_handles</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        {</span></span>
@@ -3528,31 +3546,31 @@
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">severity</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"UNKNOWN"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">title</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"A test incident title"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    },</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-0000-0000-1234-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-0000-0000-1234-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">    "</span><span style="color:#836C28;--shiki-dark:#D67AD6">relationships</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">attachments</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">data</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-0000-abcd-1000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-0000-abcd-1000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"incident_attachments"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          }</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        ]</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      },</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">commander_user</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">data</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-0000-0000-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-0000-0000-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"users"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        }</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      },</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">created_by_user</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">data</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-0000-0000-2345-000000000000"</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-0000-0000-2345-000000000000"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        }</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      },</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">impacts</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">data</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-0000-0000-2345-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-0000-0000-2345-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"incident_impacts"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          }</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        ]</span></span>
@@ -3560,11 +3578,11 @@
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">integrations</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">data</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-abcd-0005-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-abcd-0005-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"incident_integrations"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          },</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-abcd-0006-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-abcd-0006-0000-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"incident_integrations"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          }</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        ]</span></span>
@@ -3572,7 +3590,7 @@
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">responders</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">data</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-0000-0000-2345-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-0000-0000-2345-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"incident_responders"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          }</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        ]</span></span>
@@ -3580,7 +3598,7 @@
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">      "</span><span style="color:#836C28;--shiki-dark:#D67AD6">user_defined_fields</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: {</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        "</span><span style="color:#836C28;--shiki-dark:#D67AD6">data</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: [</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          {</span></span>
-<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X38-0000-0000-2345-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
+<span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">id</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"X39-0000-0000-2345-000000000000"</span><span style="color:#000000;--shiki-dark:#E0E0E0">,</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">            "</span><span style="color:#836C28;--shiki-dark:#D67AD6">type</span><span style="color:#000000;--shiki-dark:#E0E0E0">"</span><span style="color:#000000;--shiki-dark:#E0E0E0">: </span><span style="color:#C41A16;--shiki-dark:#E5736E">"user_defined_field"</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">          }</span></span>
 <span class="line"><span style="color:#000000;--shiki-dark:#E0E0E0">        ]</span></span>
@@ -3597,16 +3615,16 @@
               </div>
             </div>
           </div>
-          <div id="api-response-X39-panel-1" role="tabpanel" class="tabs__panel" hidden>
+          <div id="api-response-X40-panel-1" role="tabpanel" class="tabs__panel" hidden>
             <div class="api-response__panel api-response__panel--400">
               <p class="api-response__description _api-response__description_1lx33_9">Bad Request</p>
-              <div id="api-response-X39-inner-1" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
+              <div id="api-response-X40-inner-1" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
                 <astro-island
-                  uid="X10"
+                  uid="X11"
                   component-url="/_astro/TabsNav.HASH.js"
                   component-export="TabsNav"
                   renderer-url="/_astro/client.HASH.js"
-                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X39-inner-1"],"entries":[0,{"tabsEl":[0,"api-response-X39-inner-1"],"tabPanelEls":[1,[[0,"api-response-X39-model-1"],[0,"api-response-X39-example-1"]]]}]}],"variant":[0,"pills"]}'
+                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X40-inner-1"],"entries":[0,{"tabsEl":[0,"api-response-X40-inner-1"],"tabPanelEls":[1,[[0,"api-response-X40-model-1"],[0,"api-response-X40-example-1"]]]}]}],"variant":[0,"pills"]}'
                   ssr
                   client="load"
                   opts='{"name":"TabsNav","value":true}'
@@ -3615,7 +3633,7 @@
                     <button
                       role="tab"
                       aria-selected="true"
-                      aria-controls="api-response-X39-model-1"
+                      aria-controls="api-response-X40-model-1"
                       data-tab-index="0"
                       class="tabs__button _tabs__button_1ub6w_42 tabs__button--active _tabs__button--active_1ub6w_69"
                     >
@@ -3623,7 +3641,7 @@
                     ><button
                       role="tab"
                       aria-selected="false"
-                      aria-controls="api-response-X39-example-1"
+                      aria-controls="api-response-X40-example-1"
                       data-tab-index="1"
                       class="tabs__button _tabs__button_1ub6w_42"
                     >
@@ -3632,11 +3650,11 @@
                   </div>
                   <!--astro:end--></astro-island
                 >
-                <div id="api-response-X39-model-1" role="tabpanel" class="tabs__panel tabs__panel--active">
-                  <div id="schema-table-X42" class="schema-table">
+                <div id="api-response-X40-model-1" role="tabpanel" class="tabs__panel tabs__panel--active">
+                  <div id="schema-table-X43" class="schema-table">
                     <div class="schema-table__toolbar _schema-table__toolbar_172t8_17">
                       <button
-                        id="schema-table-X42-expand-all"
+                        id="schema-table-X43-expand-all"
                         type="button"
                         class="schema-table__expand-all _schema-table__expand-all_172t8_23"
                       >
@@ -3704,11 +3722,11 @@
                       </div>
                     </div>
                     <astro-island
-                      uid="X11"
+                      uid="X12"
                       component-url="/_astro/ApiSchemaTableNav.HASH.js"
                       component-export="ApiSchemaTableNav"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"externalContext":[0,{"scope":[0,"schema-table-X42"],"entries":[0,{"tableEl":[0,"schema-table-X42"],"expandAllEl":[0,"schema-table-X42-expand-all"]}]}]}'
+                      props='{"externalContext":[0,{"scope":[0,"schema-table-X43"],"entries":[0,{"tableEl":[0,"schema-table-X43"],"expandAllEl":[0,"schema-table-X43-expand-all"]}]}]}'
                       ssr
                       client="idle"
                       opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -3718,12 +3736,12 @@
                     >
                   </div>
                 </div>
-                <div id="api-response-X39-example-1" role="tabpanel" class="tabs__panel" hidden>
+                <div id="api-response-X40-example-1" role="tabpanel" class="tabs__panel" hidden>
                   <div class="api-response__example _api-response__example_1lx33_14">
-                    <div id="code-block-X43" class="code-block _code-block_ttpsg_1" data-language="json">
-                      <div id="code-block-X43-content" class="code-block__content _code-block__content_ttpsg_75">
+                    <div id="code-block-X44" class="code-block _code-block_ttpsg_1" data-language="json">
+                      <div id="code-block-X44-content" class="code-block__content _code-block__content_ttpsg_75">
                         <astro-island
-                          uid="X12"
+                          uid="X13"
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
@@ -3759,16 +3777,16 @@
               </div>
             </div>
           </div>
-          <div id="api-response-X39-panel-2" role="tabpanel" class="tabs__panel" hidden>
+          <div id="api-response-X40-panel-2" role="tabpanel" class="tabs__panel" hidden>
             <div class="api-response__panel api-response__panel--401">
               <p class="api-response__description _api-response__description_1lx33_9">Unauthorized</p>
-              <div id="api-response-X39-inner-2" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
+              <div id="api-response-X40-inner-2" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
                 <astro-island
-                  uid="X13"
+                  uid="X14"
                   component-url="/_astro/TabsNav.HASH.js"
                   component-export="TabsNav"
                   renderer-url="/_astro/client.HASH.js"
-                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X39-inner-2"],"entries":[0,{"tabsEl":[0,"api-response-X39-inner-2"],"tabPanelEls":[1,[[0,"api-response-X39-model-2"],[0,"api-response-X39-example-2"]]]}]}],"variant":[0,"pills"]}'
+                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X40-inner-2"],"entries":[0,{"tabsEl":[0,"api-response-X40-inner-2"],"tabPanelEls":[1,[[0,"api-response-X40-model-2"],[0,"api-response-X40-example-2"]]]}]}],"variant":[0,"pills"]}'
                   ssr
                   client="load"
                   opts='{"name":"TabsNav","value":true}'
@@ -3777,7 +3795,7 @@
                     <button
                       role="tab"
                       aria-selected="true"
-                      aria-controls="api-response-X39-model-2"
+                      aria-controls="api-response-X40-model-2"
                       data-tab-index="0"
                       class="tabs__button _tabs__button_1ub6w_42 tabs__button--active _tabs__button--active_1ub6w_69"
                     >
@@ -3785,7 +3803,7 @@
                     ><button
                       role="tab"
                       aria-selected="false"
-                      aria-controls="api-response-X39-example-2"
+                      aria-controls="api-response-X40-example-2"
                       data-tab-index="1"
                       class="tabs__button _tabs__button_1ub6w_42"
                     >
@@ -3794,11 +3812,11 @@
                   </div>
                   <!--astro:end--></astro-island
                 >
-                <div id="api-response-X39-model-2" role="tabpanel" class="tabs__panel tabs__panel--active">
-                  <div id="schema-table-X44" class="schema-table">
+                <div id="api-response-X40-model-2" role="tabpanel" class="tabs__panel tabs__panel--active">
+                  <div id="schema-table-X45" class="schema-table">
                     <div class="schema-table__toolbar _schema-table__toolbar_172t8_17">
                       <button
-                        id="schema-table-X44-expand-all"
+                        id="schema-table-X45-expand-all"
                         type="button"
                         class="schema-table__expand-all _schema-table__expand-all_172t8_23"
                       >
@@ -3866,11 +3884,11 @@
                       </div>
                     </div>
                     <astro-island
-                      uid="X14"
+                      uid="X15"
                       component-url="/_astro/ApiSchemaTableNav.HASH.js"
                       component-export="ApiSchemaTableNav"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"externalContext":[0,{"scope":[0,"schema-table-X44"],"entries":[0,{"tableEl":[0,"schema-table-X44"],"expandAllEl":[0,"schema-table-X44-expand-all"]}]}]}'
+                      props='{"externalContext":[0,{"scope":[0,"schema-table-X45"],"entries":[0,{"tableEl":[0,"schema-table-X45"],"expandAllEl":[0,"schema-table-X45-expand-all"]}]}]}'
                       ssr
                       client="idle"
                       opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -3880,12 +3898,12 @@
                     >
                   </div>
                 </div>
-                <div id="api-response-X39-example-2" role="tabpanel" class="tabs__panel" hidden>
+                <div id="api-response-X40-example-2" role="tabpanel" class="tabs__panel" hidden>
                   <div class="api-response__example _api-response__example_1lx33_14">
-                    <div id="code-block-X45" class="code-block _code-block_ttpsg_1" data-language="json">
-                      <div id="code-block-X45-content" class="code-block__content _code-block__content_ttpsg_75">
+                    <div id="code-block-X46" class="code-block _code-block_ttpsg_1" data-language="json">
+                      <div id="code-block-X46-content" class="code-block__content _code-block__content_ttpsg_75">
                         <astro-island
-                          uid="X12"
+                          uid="X13"
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
@@ -3921,16 +3939,16 @@
               </div>
             </div>
           </div>
-          <div id="api-response-X39-panel-3" role="tabpanel" class="tabs__panel" hidden>
+          <div id="api-response-X40-panel-3" role="tabpanel" class="tabs__panel" hidden>
             <div class="api-response__panel api-response__panel--403">
               <p class="api-response__description _api-response__description_1lx33_9">Forbidden</p>
-              <div id="api-response-X39-inner-3" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
+              <div id="api-response-X40-inner-3" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
                 <astro-island
-                  uid="X15"
+                  uid="X16"
                   component-url="/_astro/TabsNav.HASH.js"
                   component-export="TabsNav"
                   renderer-url="/_astro/client.HASH.js"
-                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X39-inner-3"],"entries":[0,{"tabsEl":[0,"api-response-X39-inner-3"],"tabPanelEls":[1,[[0,"api-response-X39-model-3"],[0,"api-response-X39-example-3"]]]}]}],"variant":[0,"pills"]}'
+                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X40-inner-3"],"entries":[0,{"tabsEl":[0,"api-response-X40-inner-3"],"tabPanelEls":[1,[[0,"api-response-X40-model-3"],[0,"api-response-X40-example-3"]]]}]}],"variant":[0,"pills"]}'
                   ssr
                   client="load"
                   opts='{"name":"TabsNav","value":true}'
@@ -3939,7 +3957,7 @@
                     <button
                       role="tab"
                       aria-selected="true"
-                      aria-controls="api-response-X39-model-3"
+                      aria-controls="api-response-X40-model-3"
                       data-tab-index="0"
                       class="tabs__button _tabs__button_1ub6w_42 tabs__button--active _tabs__button--active_1ub6w_69"
                     >
@@ -3947,7 +3965,7 @@
                     ><button
                       role="tab"
                       aria-selected="false"
-                      aria-controls="api-response-X39-example-3"
+                      aria-controls="api-response-X40-example-3"
                       data-tab-index="1"
                       class="tabs__button _tabs__button_1ub6w_42"
                     >
@@ -3956,11 +3974,11 @@
                   </div>
                   <!--astro:end--></astro-island
                 >
-                <div id="api-response-X39-model-3" role="tabpanel" class="tabs__panel tabs__panel--active">
-                  <div id="schema-table-X46" class="schema-table">
+                <div id="api-response-X40-model-3" role="tabpanel" class="tabs__panel tabs__panel--active">
+                  <div id="schema-table-X47" class="schema-table">
                     <div class="schema-table__toolbar _schema-table__toolbar_172t8_17">
                       <button
-                        id="schema-table-X46-expand-all"
+                        id="schema-table-X47-expand-all"
                         type="button"
                         class="schema-table__expand-all _schema-table__expand-all_172t8_23"
                       >
@@ -4028,11 +4046,11 @@
                       </div>
                     </div>
                     <astro-island
-                      uid="X16"
+                      uid="X17"
                       component-url="/_astro/ApiSchemaTableNav.HASH.js"
                       component-export="ApiSchemaTableNav"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"externalContext":[0,{"scope":[0,"schema-table-X46"],"entries":[0,{"tableEl":[0,"schema-table-X46"],"expandAllEl":[0,"schema-table-X46-expand-all"]}]}]}'
+                      props='{"externalContext":[0,{"scope":[0,"schema-table-X47"],"entries":[0,{"tableEl":[0,"schema-table-X47"],"expandAllEl":[0,"schema-table-X47-expand-all"]}]}]}'
                       ssr
                       client="idle"
                       opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -4042,12 +4060,12 @@
                     >
                   </div>
                 </div>
-                <div id="api-response-X39-example-3" role="tabpanel" class="tabs__panel" hidden>
+                <div id="api-response-X40-example-3" role="tabpanel" class="tabs__panel" hidden>
                   <div class="api-response__example _api-response__example_1lx33_14">
-                    <div id="code-block-X47" class="code-block _code-block_ttpsg_1" data-language="json">
-                      <div id="code-block-X47-content" class="code-block__content _code-block__content_ttpsg_75">
+                    <div id="code-block-X48" class="code-block _code-block_ttpsg_1" data-language="json">
+                      <div id="code-block-X48-content" class="code-block__content _code-block__content_ttpsg_75">
                         <astro-island
-                          uid="X12"
+                          uid="X13"
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
@@ -4083,16 +4101,16 @@
               </div>
             </div>
           </div>
-          <div id="api-response-X39-panel-4" role="tabpanel" class="tabs__panel" hidden>
+          <div id="api-response-X40-panel-4" role="tabpanel" class="tabs__panel" hidden>
             <div class="api-response__panel api-response__panel--404">
               <p class="api-response__description _api-response__description_1lx33_9">Not Found</p>
-              <div id="api-response-X39-inner-4" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
+              <div id="api-response-X40-inner-4" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
                 <astro-island
-                  uid="X17"
+                  uid="X18"
                   component-url="/_astro/TabsNav.HASH.js"
                   component-export="TabsNav"
                   renderer-url="/_astro/client.HASH.js"
-                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X39-inner-4"],"entries":[0,{"tabsEl":[0,"api-response-X39-inner-4"],"tabPanelEls":[1,[[0,"api-response-X39-model-4"],[0,"api-response-X39-example-4"]]]}]}],"variant":[0,"pills"]}'
+                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X40-inner-4"],"entries":[0,{"tabsEl":[0,"api-response-X40-inner-4"],"tabPanelEls":[1,[[0,"api-response-X40-model-4"],[0,"api-response-X40-example-4"]]]}]}],"variant":[0,"pills"]}'
                   ssr
                   client="load"
                   opts='{"name":"TabsNav","value":true}'
@@ -4101,7 +4119,7 @@
                     <button
                       role="tab"
                       aria-selected="true"
-                      aria-controls="api-response-X39-model-4"
+                      aria-controls="api-response-X40-model-4"
                       data-tab-index="0"
                       class="tabs__button _tabs__button_1ub6w_42 tabs__button--active _tabs__button--active_1ub6w_69"
                     >
@@ -4109,7 +4127,7 @@
                     ><button
                       role="tab"
                       aria-selected="false"
-                      aria-controls="api-response-X39-example-4"
+                      aria-controls="api-response-X40-example-4"
                       data-tab-index="1"
                       class="tabs__button _tabs__button_1ub6w_42"
                     >
@@ -4118,11 +4136,11 @@
                   </div>
                   <!--astro:end--></astro-island
                 >
-                <div id="api-response-X39-model-4" role="tabpanel" class="tabs__panel tabs__panel--active">
-                  <div id="schema-table-X48" class="schema-table">
+                <div id="api-response-X40-model-4" role="tabpanel" class="tabs__panel tabs__panel--active">
+                  <div id="schema-table-X49" class="schema-table">
                     <div class="schema-table__toolbar _schema-table__toolbar_172t8_17">
                       <button
-                        id="schema-table-X48-expand-all"
+                        id="schema-table-X49-expand-all"
                         type="button"
                         class="schema-table__expand-all _schema-table__expand-all_172t8_23"
                       >
@@ -4190,11 +4208,11 @@
                       </div>
                     </div>
                     <astro-island
-                      uid="X18"
+                      uid="X19"
                       component-url="/_astro/ApiSchemaTableNav.HASH.js"
                       component-export="ApiSchemaTableNav"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"externalContext":[0,{"scope":[0,"schema-table-X48"],"entries":[0,{"tableEl":[0,"schema-table-X48"],"expandAllEl":[0,"schema-table-X48-expand-all"]}]}]}'
+                      props='{"externalContext":[0,{"scope":[0,"schema-table-X49"],"entries":[0,{"tableEl":[0,"schema-table-X49"],"expandAllEl":[0,"schema-table-X49-expand-all"]}]}]}'
                       ssr
                       client="idle"
                       opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -4204,12 +4222,12 @@
                     >
                   </div>
                 </div>
-                <div id="api-response-X39-example-4" role="tabpanel" class="tabs__panel" hidden>
+                <div id="api-response-X40-example-4" role="tabpanel" class="tabs__panel" hidden>
                   <div class="api-response__example _api-response__example_1lx33_14">
-                    <div id="code-block-X49" class="code-block _code-block_ttpsg_1" data-language="json">
-                      <div id="code-block-X49-content" class="code-block__content _code-block__content_ttpsg_75">
+                    <div id="code-block-X50" class="code-block _code-block_ttpsg_1" data-language="json">
+                      <div id="code-block-X50-content" class="code-block__content _code-block__content_ttpsg_75">
                         <astro-island
-                          uid="X12"
+                          uid="X13"
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
@@ -4245,16 +4263,16 @@
               </div>
             </div>
           </div>
-          <div id="api-response-X39-panel-5" role="tabpanel" class="tabs__panel" hidden>
+          <div id="api-response-X40-panel-5" role="tabpanel" class="tabs__panel" hidden>
             <div class="api-response__panel api-response__panel--429">
               <p class="api-response__description _api-response__description_1lx33_9">Too many requests</p>
-              <div id="api-response-X39-inner-5" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
+              <div id="api-response-X40-inner-5" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
                 <astro-island
-                  uid="X19"
+                  uid="X20"
                   component-url="/_astro/TabsNav.HASH.js"
                   component-export="TabsNav"
                   renderer-url="/_astro/client.HASH.js"
-                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X39-inner-5"],"entries":[0,{"tabsEl":[0,"api-response-X39-inner-5"],"tabPanelEls":[1,[[0,"api-response-X39-model-5"],[0,"api-response-X39-example-5"]]]}]}],"variant":[0,"pills"]}'
+                  props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X40-inner-5"],"entries":[0,{"tabsEl":[0,"api-response-X40-inner-5"],"tabPanelEls":[1,[[0,"api-response-X40-model-5"],[0,"api-response-X40-example-5"]]]}]}],"variant":[0,"pills"]}'
                   ssr
                   client="load"
                   opts='{"name":"TabsNav","value":true}'
@@ -4263,7 +4281,7 @@
                     <button
                       role="tab"
                       aria-selected="true"
-                      aria-controls="api-response-X39-model-5"
+                      aria-controls="api-response-X40-model-5"
                       data-tab-index="0"
                       class="tabs__button _tabs__button_1ub6w_42 tabs__button--active _tabs__button--active_1ub6w_69"
                     >
@@ -4271,7 +4289,7 @@
                     ><button
                       role="tab"
                       aria-selected="false"
-                      aria-controls="api-response-X39-example-5"
+                      aria-controls="api-response-X40-example-5"
                       data-tab-index="1"
                       class="tabs__button _tabs__button_1ub6w_42"
                     >
@@ -4280,11 +4298,11 @@
                   </div>
                   <!--astro:end--></astro-island
                 >
-                <div id="api-response-X39-model-5" role="tabpanel" class="tabs__panel tabs__panel--active">
-                  <div id="schema-table-X50" class="schema-table">
+                <div id="api-response-X40-model-5" role="tabpanel" class="tabs__panel tabs__panel--active">
+                  <div id="schema-table-X51" class="schema-table">
                     <div class="schema-table__toolbar _schema-table__toolbar_172t8_17">
                       <button
-                        id="schema-table-X50-expand-all"
+                        id="schema-table-X51-expand-all"
                         type="button"
                         class="schema-table__expand-all _schema-table__expand-all_172t8_23"
                       >
@@ -4352,11 +4370,11 @@
                       </div>
                     </div>
                     <astro-island
-                      uid="X20"
+                      uid="X21"
                       component-url="/_astro/ApiSchemaTableNav.HASH.js"
                       component-export="ApiSchemaTableNav"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"externalContext":[0,{"scope":[0,"schema-table-X50"],"entries":[0,{"tableEl":[0,"schema-table-X50"],"expandAllEl":[0,"schema-table-X50-expand-all"]}]}]}'
+                      props='{"externalContext":[0,{"scope":[0,"schema-table-X51"],"entries":[0,{"tableEl":[0,"schema-table-X51"],"expandAllEl":[0,"schema-table-X51-expand-all"]}]}]}'
                       ssr
                       client="idle"
                       opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -4366,12 +4384,12 @@
                     >
                   </div>
                 </div>
-                <div id="api-response-X39-example-5" role="tabpanel" class="tabs__panel" hidden>
+                <div id="api-response-X40-example-5" role="tabpanel" class="tabs__panel" hidden>
                   <div class="api-response__example _api-response__example_1lx33_14">
-                    <div id="code-block-X51" class="code-block _code-block_ttpsg_1" data-language="json">
-                      <div id="code-block-X51-content" class="code-block__content _code-block__content_ttpsg_75">
+                    <div id="code-block-X52" class="code-block _code-block_ttpsg_1" data-language="json">
+                      <div id="code-block-X52-content" class="code-block__content _code-block__content_ttpsg_75">
                         <astro-island
-                          uid="X12"
+                          uid="X13"
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
@@ -4411,13 +4429,13 @@
       </div>
       <div class="api-code-example _api-code-example_1poyj_1">
         <h3 class="api-code-example__heading _api-code-example__heading_1poyj_5">Code Example</h3>
-        <div id="api-code-example-X52" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
+        <div id="api-code-example-X53" class="tabs _tabs_1ub6w_1 tabs--pills _tabs--pills_1ub6w_23">
           <astro-island
-            uid="X21"
+            uid="X22"
             component-url="/_astro/TabsNav.HASH.js"
             component-export="TabsNav"
             renderer-url="/_astro/client.HASH.js"
-            props='{"labels":[1,[[0,"Curl"],[0,"Python"],[0,"Ruby"],[0,"Go"],[0,"Java"],[0,"TypeScript"],[0,"Rust"]]],"externalContext":[0,{"scope":[0,"api-code-example-X52"],"entries":[0,{"tabsEl":[0,"api-code-example-X52"],"tabPanelEls":[1,[[0,"api-code-example-X52-panel-0"],[0,"api-code-example-X52-panel-1"],[0,"api-code-example-X52-panel-2"],[0,"api-code-example-X52-panel-3"],[0,"api-code-example-X52-panel-4"],[0,"api-code-example-X52-panel-5"],[0,"api-code-example-X52-panel-6"]]]}]}],"variant":[0,"pills"]}'
+            props='{"labels":[1,[[0,"Curl"],[0,"Python"],[0,"Ruby"],[0,"Go"],[0,"Java"],[0,"TypeScript"],[0,"Rust"]]],"externalContext":[0,{"scope":[0,"api-code-example-X53"],"entries":[0,{"tabsEl":[0,"api-code-example-X53"],"tabPanelEls":[1,[[0,"api-code-example-X53-panel-0"],[0,"api-code-example-X53-panel-1"],[0,"api-code-example-X53-panel-2"],[0,"api-code-example-X53-panel-3"],[0,"api-code-example-X53-panel-4"],[0,"api-code-example-X53-panel-5"],[0,"api-code-example-X53-panel-6"]]]}]}],"variant":[0,"pills"]}'
             ssr
             client="load"
             opts='{"name":"TabsNav","value":true}'
@@ -4426,7 +4444,7 @@
               <button
                 role="tab"
                 aria-selected="true"
-                aria-controls="api-code-example-X52-panel-0"
+                aria-controls="api-code-example-X53-panel-0"
                 data-tab-index="0"
                 class="tabs__button _tabs__button_1ub6w_42 tabs__button--active _tabs__button--active_1ub6w_69"
               >
@@ -4434,7 +4452,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="api-code-example-X52-panel-1"
+                aria-controls="api-code-example-X53-panel-1"
                 data-tab-index="1"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -4442,7 +4460,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="api-code-example-X52-panel-2"
+                aria-controls="api-code-example-X53-panel-2"
                 data-tab-index="2"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -4450,7 +4468,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="api-code-example-X52-panel-3"
+                aria-controls="api-code-example-X53-panel-3"
                 data-tab-index="3"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -4458,7 +4476,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="api-code-example-X52-panel-4"
+                aria-controls="api-code-example-X53-panel-4"
                 data-tab-index="4"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -4466,7 +4484,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="api-code-example-X52-panel-5"
+                aria-controls="api-code-example-X53-panel-5"
                 data-tab-index="5"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -4474,7 +4492,7 @@
               ><button
                 role="tab"
                 aria-selected="false"
-                aria-controls="api-code-example-X52-panel-6"
+                aria-controls="api-code-example-X53-panel-6"
                 data-tab-index="6"
                 class="tabs__button _tabs__button_1ub6w_42"
               >
@@ -4483,16 +4501,16 @@
             </div>
             <!--astro:end--></astro-island
           >
-          <div id="api-code-example-X52-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
+          <div id="api-code-example-X53-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
             <div data-region="us" class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X53" class="code-block _code-block_ttpsg_1" data-language="bash">
-                <div id="code-block-X53-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X54" class="code-block _code-block_ttpsg_1" data-language="bash">
+                <div id="code-block-X54-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X22"
+                    uid="X23"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X39-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X39-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -4528,7 +4546,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "value": "SEV-5"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "initial_cells": [</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "cell_type": "markdown",</span></span>
@@ -4558,7 +4576,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "relationships": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "commander_user": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        "data": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "type": "users"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      }</span></span>
@@ -4572,14 +4590,14 @@
               </div>
             </div>
             <div data-region="us3" class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X54" class="code-block _code-block_ttpsg_1" data-language="bash">
-                <div id="code-block-X54-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X55" class="code-block _code-block_ttpsg_1" data-language="bash">
+                <div id="code-block-X55-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X23"
+                    uid="X24"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us3.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us3.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X39-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X39-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -4615,7 +4633,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "value": "SEV-5"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "initial_cells": [</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "cell_type": "markdown",</span></span>
@@ -4645,7 +4663,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "relationships": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "commander_user": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        "data": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "type": "users"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      }</span></span>
@@ -4659,14 +4677,14 @@
               </div>
             </div>
             <div data-region="us5" class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X55" class="code-block _code-block_ttpsg_1" data-language="bash">
-                <div id="code-block-X55-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X56" class="code-block _code-block_ttpsg_1" data-language="bash">
+                <div id="code-block-X56-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X24"
+                    uid="X25"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us5.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.us5.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X39-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X39-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -4702,7 +4720,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "value": "SEV-5"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "initial_cells": [</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "cell_type": "markdown",</span></span>
@@ -4732,7 +4750,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "relationships": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "commander_user": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        "data": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "type": "users"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      }</span></span>
@@ -4746,14 +4764,14 @@
               </div>
             </div>
             <div data-region="eu" class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X56" class="code-block _code-block_ttpsg_1" data-language="bash">
-                <div id="code-block-X56-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X57" class="code-block _code-block_ttpsg_1" data-language="bash">
+                <div id="code-block-X57-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X25"
+                    uid="X26"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.eu/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.datadoghq.eu/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X39-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X39-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -4789,7 +4807,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "value": "SEV-5"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "initial_cells": [</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "cell_type": "markdown",</span></span>
@@ -4819,7 +4837,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "relationships": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "commander_user": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        "data": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "type": "users"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      }</span></span>
@@ -4833,14 +4851,14 @@
               </div>
             </div>
             <div data-region="ap1" class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X57" class="code-block _code-block_ttpsg_1" data-language="bash">
-                <div id="code-block-X57-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X58" class="code-block _code-block_ttpsg_1" data-language="bash">
+                <div id="code-block-X58-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X26"
+                    uid="X27"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap1.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap1.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X39-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X39-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -4876,7 +4894,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "value": "SEV-5"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "initial_cells": [</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "cell_type": "markdown",</span></span>
@@ -4906,7 +4924,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "relationships": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "commander_user": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        "data": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "type": "users"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      }</span></span>
@@ -4920,14 +4938,14 @@
               </div>
             </div>
             <div data-region="ap2" class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X58" class="code-block _code-block_ttpsg_1" data-language="bash">
-                <div id="code-block-X58-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X59" class="code-block _code-block_ttpsg_1" data-language="bash">
+                <div id="code-block-X59-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X27"
+                    uid="X28"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap2.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ap2.datadoghq.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X39-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X39-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -4963,7 +4981,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "value": "SEV-5"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "initial_cells": [</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "cell_type": "markdown",</span></span>
@@ -4993,7 +5011,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "relationships": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "commander_user": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        "data": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "type": "users"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      }</span></span>
@@ -5007,14 +5025,14 @@
               </div>
             </div>
             <div data-region="gov" class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X59" class="code-block _code-block_ttpsg_1" data-language="bash">
-                <div id="code-block-X59-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X60" class="code-block _code-block_ttpsg_1" data-language="bash">
+                <div id="code-block-X60-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X28"
+                    uid="X29"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ddog-gov.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X38-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X38-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
+                    props='{"content":[0,"# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"&lt;DD_API_KEY&gt;\"\nexport DD_APP_KEY=\"&lt;DD_APP_KEY&gt;\"\n\ncurl -X POST \"https://api.ddog-gov.com/api/v2/incidents\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Content-Type: application/json\" \\\n-H \"Accept: application/json\" \\\n-d @- &lt;&lt; EOF\n{\n  \"data\": {\n    \"attributes\": {\n      \"customer_impact_scope\": \"Example customer impact scope\",\n      \"customer_impacted\": false,\n      \"fields\": {\n        \"severity\": {\n          \"type\": \"dropdown\",\n          \"value\": \"SEV-5\"\n        }\n      },\n      \"incident_type_uuid\": \"X39-0000-0000-0000-000000000000\",\n      \"initial_cells\": [\n        {\n          \"cell_type\": \"markdown\",\n          \"content\": {\n            \"content\": \"An example timeline cell message.\"\n          },\n          \"important\": false\n        }\n      ],\n      \"is_test\": false,\n      \"notification_handles\": [\n        {\n          \"display_name\": \"Jane Doe\",\n          \"handle\": \"@user@email.com\"\n        },\n        {\n          \"display_name\": \"Slack Channel\",\n          \"handle\": \"@slack-channel\"\n        },\n        {\n          \"display_name\": \"Incident Workflow\",\n          \"handle\": \"@workflow-from-incident\"\n        }\n      ],\n      \"title\": \"A test incident title\"\n    },\n    \"relationships\": {\n      \"commander_user\": {\n        \"data\": {\n          \"id\": \"X39-0000-0000-0000-000000000000\",\n          \"type\": \"users\"\n        }\n      }\n    },\n    \"type\": \"incidents\"\n  }\n}\nEOF"]}'
                     ssr
                     client="idle"
                     opts='{"name":"CopyButton","value":true}'
@@ -5050,7 +5068,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "value": "SEV-5"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      },</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "incident_type_uuid": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "initial_cells": [</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "cell_type": "markdown",</span></span>
@@ -5080,7 +5098,7 @@
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">    "relationships": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      "commander_user": {</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        "data": {</span></span>
-<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X38-0000-0000-0000-000000000000",</span></span>
+<span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "id": "X39-0000-0000-0000-000000000000",</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">          "type": "users"</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">        }</span></span>
 <span class="line"><span style="color:#C41A16;--shiki-dark:#E5736E">      }</span></span>
@@ -5094,12 +5112,12 @@
               </div>
             </div>
           </div>
-          <div id="api-code-example-X52-panel-1" role="tabpanel" class="tabs__panel" hidden>
+          <div id="api-code-example-X53-panel-1" role="tabpanel" class="tabs__panel" hidden>
             <div class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X60" class="code-block _code-block_ttpsg_1" data-language="python">
-                <div id="code-block-X60-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X61" class="code-block _code-block_ttpsg_1" data-language="python">
+                <div id="code-block-X61-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X29"
+                    uid="X30"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
@@ -5177,12 +5195,12 @@
               </div>
             </div>
           </div>
-          <div id="api-code-example-X52-panel-2" role="tabpanel" class="tabs__panel" hidden>
+          <div id="api-code-example-X53-panel-2" role="tabpanel" class="tabs__panel" hidden>
             <div class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X61" class="code-block _code-block_ttpsg_1" data-language="ruby">
-                <div id="code-block-X61-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X62" class="code-block _code-block_ttpsg_1" data-language="ruby">
+                <div id="code-block-X62-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X30"
+                    uid="X31"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
@@ -5241,12 +5259,12 @@
               </div>
             </div>
           </div>
-          <div id="api-code-example-X52-panel-3" role="tabpanel" class="tabs__panel" hidden>
+          <div id="api-code-example-X53-panel-3" role="tabpanel" class="tabs__panel" hidden>
             <div class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X62" class="code-block _code-block_ttpsg_1" data-language="go">
-                <div id="code-block-X62-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X63" class="code-block _code-block_ttpsg_1" data-language="go">
+                <div id="code-block-X63-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X31"
+                    uid="X32"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
@@ -5327,12 +5345,12 @@
               </div>
             </div>
           </div>
-          <div id="api-code-example-X52-panel-4" role="tabpanel" class="tabs__panel" hidden>
+          <div id="api-code-example-X53-panel-4" role="tabpanel" class="tabs__panel" hidden>
             <div class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X63" class="code-block _code-block_ttpsg_1" data-language="java">
-                <div id="code-block-X63-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X64" class="code-block _code-block_ttpsg_1" data-language="java">
+                <div id="code-block-X64-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X32"
+                    uid="X33"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
@@ -5423,12 +5441,12 @@
               </div>
             </div>
           </div>
-          <div id="api-code-example-X52-panel-5" role="tabpanel" class="tabs__panel" hidden>
+          <div id="api-code-example-X53-panel-5" role="tabpanel" class="tabs__panel" hidden>
             <div class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X64" class="code-block _code-block_ttpsg_1" data-language="typescript">
-                <div id="code-block-X64-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X65" class="code-block _code-block_ttpsg_1" data-language="typescript">
+                <div id="code-block-X65-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X33"
+                    uid="X34"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
@@ -5499,12 +5517,12 @@
               </div>
             </div>
           </div>
-          <div id="api-code-example-X52-panel-6" role="tabpanel" class="tabs__panel" hidden>
+          <div id="api-code-example-X53-panel-6" role="tabpanel" class="tabs__panel" hidden>
             <div class="api-code-example__code-block _api-code-example__code-block_1poyj_9">
-              <div id="code-block-X65" class="code-block _code-block_ttpsg_1" data-language="rust">
-                <div id="code-block-X65-content" class="code-block__content _code-block__content_ttpsg_75">
+              <div id="code-block-X66" class="code-block _code-block_ttpsg_1" data-language="rust">
+                <div id="code-block-X66-content" class="code-block__content _code-block__content_ttpsg_75">
                   <astro-island
-                    uid="X34"
+                    uid="X35"
                     component-url="/_astro/CopyButton.HASH.js"
                     component-export="CopyButton"
                     renderer-url="/_astro/client.HASH.js"
@@ -5581,7 +5599,7 @@
           </div>
         </div>
       </div>
-      <hr class="api-endpoint__divider _api-endpoint__divider_1ylu2_94" />
+      <hr class="api-endpoint__divider _api-endpoint__divider_17nz0_94" />
     </section>
   </div>
 </main>

@@ -3,7 +3,7 @@
 }
 
 .api-endpoint__heading {
-  margin: 0 0 var(--space-sm);
+  margin: var(--space-lg) 0 var(--space-sm);
   display: flex;
   align-items: center;
 }

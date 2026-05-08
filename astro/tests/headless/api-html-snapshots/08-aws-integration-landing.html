@@ -55,6 +55,42 @@
   </div>
   <div class="prose" data-astro-cid-hnecgxtf>
     <h1>AWS Integration</h1>
+    <script>
+      (() => {
+        var l = (n, t) => {
+          let i = async () => {
+              await (
+                await n()
+              )();
+            },
+            e = typeof t.value == "object" ? t.value : void 0,
+            s = { timeout: e == null ? void 0 : e.timeout };
+          "requestIdleCallback" in window ? window.requestIdleCallback(i, s) : setTimeout(i, s.timeout || 200);
+        };
+        (self.Astro || (self.Astro = {})).idle = l;
+        window.dispatchEvent(new Event("astro:idle"));
+      })();
+    </script>
+    <astro-island
+      uid="X3"
+      component-url="/_astro/CopyPageButton.HASH.js"
+      component-export="CopyPageButton"
+      renderer-url="/_astro/client.HASH.js"
+      props="{}"
+      ssr
+      client="idle"
+      opts='{"name":"CopyPageButton","value":true}'
+      await-children
+      ><button aria-label="Copy page as text" class="copy-page-button _copy-page-button_ayhib_1">
+        <span class="copy-page-button__icon _copy-page-button__icon_ayhib_20"
+          ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="currentColor"
+              d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+            ></path></svg></span
+        ><span class="copy-page-button__label _copy-page-button__label_ayhib_32">Copy page as text</span></button
+      ><!--astro:end--></astro-island
+    >
     <div>
       <p>
         Configure your Datadog-AWS integration directly through the Datadog API. For more information, see the

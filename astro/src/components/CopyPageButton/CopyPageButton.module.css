@@ -1,0 +1,34 @@
+.copy-page-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-brand);
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    line-height: 1;
+}
+
+.copy-page-button:hover {
+    color: var(--color-brand-hover);
+}
+
+.copy-page-button__icon {
+    display: flex;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.copy-page-button__icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.copy-page-button__label {
+    white-space: nowrap;
+}

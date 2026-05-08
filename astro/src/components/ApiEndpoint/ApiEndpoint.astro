@@ -1,4 +1,5 @@
 ---
+import { CopyPageButton } from '@components/CopyPageButton/CopyPageButton';
 import ApiMethodBadge from '@components/ApiMethodBadge/ApiMethodBadge.astro';
 import Alert from '@components/Alert/Alert.astro';
 import ApiSchemaTable from '@components/ApiSchemaTable/ApiSchemaTable.astro';
@@ -73,6 +74,7 @@ const hasParams = ep && (
       {ep.summary}
       {ep.version && <span class={cl('api-endpoint__version-badge')}>{ep.version === 'v2' ? 'v2 (latest)' : ep.version}</span>}
     </HeadingTag>
+    {/* CopyPageButton placement TBD */}
     {/* Status alerts */}
     {ep.deprecated && (
       <Alert level="warning">
