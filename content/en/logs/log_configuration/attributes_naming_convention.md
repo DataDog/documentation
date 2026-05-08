@@ -123,7 +123,7 @@ See [Alias Facets][34] for additional information.
 [11]: /standard-attributes/?product=log+management&search=geolocation
 [12]: /standard-attributes/?search=http.&product=log+management
 [13]: /integrations/amazon_elb/
-[14]: /logs/log_configuration/processors/#url-parser
+[14]: /logs/log_configuration/processors/url_parser/
 [15]: /standard-attributes/?search=logger+error&product=log+management
 [16]: /standard-attributes/?search=db&product=log+management
 [17]: /integrations/cassandra/
@@ -131,7 +131,7 @@ See [Alias Facets][34] for additional information.
 [19]: /integrations/amazon_rds/
 [20]: /integrations/elastic/
 [21]: /standard-attributes/?search=duration&product=log+management
-[22]: /logs/log_configuration/processors/#remapper
+[22]: /logs/log_configuration/processors/remapper/
 [23]: /tracing/app_analytics/search/
 [24]: /standard-attributes/?search=usr&product=log+management
 [25]: /standard-attributes/?search=syslog&product=log+management

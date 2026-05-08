@@ -8,7 +8,7 @@ algolia:
 ---
 
 <div class="alert alert-info">
-SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plans.
+SCIM is available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans.
 </div>
 
 <div class="alert alert-danger">
@@ -25,7 +25,7 @@ For capabilities and limitations of this feature, see [SCIM][1].
 
 ## Prerequisites
 
-SCIM in Datadog is an advanced feature available with the Infrastructure Pro and Infrastructure Enterprise plans.
+SCIM in Datadog is an advanced feature available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans.
 
 This documentation assumes your organization manages user identities using an identity provider.
 
