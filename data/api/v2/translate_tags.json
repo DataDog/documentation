@@ -331,6 +331,14 @@
     "name": "Rum Metrics",
     "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
+  "rum-replay": {
+    "name": "Rum Replay",
+    "description": "Generate and retrieve AI-powered summaries of RUM replay sessions."
+  },
+  "rum-replay-analysis": {
+    "name": "Rum Replay Analysis",
+    "description": "Analyze RUM replay sessions to identify and investigate user-facing issues. Retrieve issues detected by AI analysis, get details for individual issues, and explore the sessions associated with each issue."
+  },
   "rum-replay-heatmaps": {
     "name": "Rum Replay Heatmaps",
     "description": "Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views."
