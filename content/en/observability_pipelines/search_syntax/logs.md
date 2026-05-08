@@ -101,7 +101,7 @@ Here are some attribute search syntax examples and logs that match the syntax:
 
 {{% observability_pipelines/path_notation %}}
 
-{{% observability_pipelines/path_notation_dots %}}
+If you want the query to search for a literal `.` in the attribute key, wrap the key in escaped quotes in the search query. For example, the search query `"service.status":disabled` matches the event `{"service.status": "disabled"}`.
 
 ### Arrays
 

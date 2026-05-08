@@ -1,4 +1,4 @@
-Consider the following log structure:
+For this log structure example:
 
 ```json
 {
@@ -14,6 +14,6 @@ Consider the following log structure:
 }
 ```
 
-Use the following reference rules:
+Follow these reference rules:
 - Use `outer_key.inner_key` to reference the key with the value `inner_value`.
 - Use `outer_key.a.double_inner_key` to reference the key with the value `double_inner_value`.
