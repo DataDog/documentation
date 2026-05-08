@@ -74,33 +74,46 @@ The following tags are available for all supported AI providers:
 
 ## Attribute AI spend to users
 
-Out-of-the-box (OOTB) allocation rules use Datadog observability data to attribute AI costs to the users and API keys that generated them. OOTB allocation rules require no configuration and are available for OpenAI and Anthropic.
+[Out-of-the-box (OOTB) allocation rules][14] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for OpenAI and Anthropic.
 
 The following tags are available through OOTB allocation rules:
 
-| Tag | OpenAI | Anthropic |
-|---|---|---|
-| `account_id` | {{< X >}} | |
-| `account_name` | {{< X >}} | |
-| `api_key_id` | {{< X >}} | {{< X >}} |
-| `api_key_name` | | {{< X >}} |
-| `batch` | {{< X >}} | |
-| `context_window` | | {{< X >}} |
-| `endpoint` | {{< X >}} | |
-| `model` | {{< X >}} | {{< X >}} |
-| `model_id` | | {{< X >}} |
-| `org_id` | {{< X >}} | {{< X >}} |
-| `org_name` | | {{< X >}} |
-| `project_id` | {{< X >}} | |
-| `project_name` | {{< X >}} | |
-| `service_tier` | | {{< X >}} |
-| `user_email` | {{< X >}} | {{< X >}} |
-| `user_id` | {{< X >}} | {{< X >}} |
-| `user_name` | | {{< X >}} |
-| `workspace_id` | | {{< X >}} |
-| `workspace_name` | | {{< X >}} |
+{{< tabs >}}
+{{% tab "Anthropic" %}}
 
-After costs are attributed to users and API keys, use [Tag Pipelines][7] to automatically map them to teams, services, or business units for streamlined aggregate reporting. See [Reporting][10] for more information.
+- `api_key_id`
+- `api_key_name`
+- `context_window`
+- `model`
+- `model_id`
+- `org_id`
+- `org_name`
+- `service_tier`
+- `user_email`
+- `user_id`
+- `user_name`
+- `workspace_id`
+- `workspace_name`
+
+{{% /tab %}}
+{{% tab "OpenAI" %}}
+
+- `account_id`
+- `account_name`
+- `api_key_id`
+- `batch`
+- `endpoint`
+- `model`
+- `org_id`
+- `project_id`
+- `project_name`
+- `user_email`
+- `user_id`
+
+{{% /tab %}}
+{{< /tabs >}}
+
+After costs are attributed to users, API keys, and other sources use [Tag Pipelines][7] to automatically map them to teams, services, or business units for streamlined aggregate reporting. See [Reporting][10] for more information.
 
 ## Further reading
 
@@ -119,3 +132,4 @@ After costs are attributed to users and API keys, use [Tag Pipelines][7] to auto
 [11]: /cloud_cost_management/cost_changes/monitors
 [12]: /cloud_cost_management/planning/budgets
 [13]: /cloud_cost_management/planning/forecasting
+[14]: /cloud_cost_management/allocation/custom_allocation_rules/?tab=even
