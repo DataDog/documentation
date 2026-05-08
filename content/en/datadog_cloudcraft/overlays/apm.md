@@ -25,7 +25,7 @@ further_reading:
 
 The APM overlay displays distributed APM traces as arcs between cloud resources on your Cloudcraft diagram. This helps you understand service-to-service request flows across your infrastructure without leaving the architecture view.
 
-To open the overlay, click the **APM** tab in the overlay selector at the top of your diagram.
+To open the overlay, click the {{< ui >}}APM{{< /ui >}} tab in the overlay selector at the top of your diagram.
 
 ### Supported resource types
 
@@ -59,11 +59,11 @@ Use the legend panel at the bottom of the screen to filter traces by status. The
 
 Click a trace arc to open a side panel showing the list of APM traces between those two resources. The side panel includes:
 
-- A **search bar** to filter traces by query.
-- A **time picker** (defaults to the last 30 minutes).
-- A **live mode** toggle for streaming trace data.
-- A **column picker** to customize which fields are displayed. Default columns include Duration, Service, Resource Name, and Error Type.
-- An **open in APM** link to view the same query in the [Traces Explorer][2].
+- A search bar to filter traces by query.
+- A time picker (defaults to the last 30 minutes).
+- A {{< ui >}}live mode{{< /ui >}} toggle for streaming trace data.
+- A column picker to customize which fields are displayed. Default columns include Duration, Service, Resource Name, and Error Type.
+- An {{< ui >}}open in APM{{< /ui >}} link to view the same query in the [Traces Explorer][2].
 
 Click a trace row in the side panel to open the trace detail view, which displays the standard APM flame graph.
 

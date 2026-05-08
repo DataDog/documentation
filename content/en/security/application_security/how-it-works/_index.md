@@ -22,14 +22,14 @@ Datadog App and API Protection (AAP) provides observability into application and
 
 ### Identify services exposed to application attacks
 
-Datadog App and API Protection Threat Management uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling App and API Protection in the tracing library is necessary to effectively monitor and protect your services.
+Datadog App and API Protection Threat Management uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling App and API Protection in the SDK is necessary to effectively monitor and protect your services.
 
 Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Software Catalog][2], [Service Page][3], [Traces][4]).
 
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses, login account info (for example, user account/ID), and manually-added user tags on all requests.
 
 <div class="alert alert-info"><strong>1-Click Enablement</strong><br>
-If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable App and API Protection</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and an SDK version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable App and API Protection</a> from the Datadog UI without additional configuration of the Agent or SDKs.</div>
 
 ## Compatibility
 
@@ -47,11 +47,11 @@ Datadog App and API Protection uses processes already contained in the Agent and
 
 When APM is enabled, the Datadog library generates distributed traces. Datadog App and API Protection flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
 
-{{< img src="security/application_security/How_Appsec_Works_June2023.png" alt="A diagram illustrates that the Datadog tracer library operates at the application service level and sends traces to the Datadog backend. The Datadog backend flags actionable security signals and sends a notification to the relevant application, such as PagerDuty, Jira or Slack." >}}
+{{< img src="security/application_security/How_Appsec_Works_June2023.png" alt="A diagram illustrates that the Datadog SDK operates at the application service level and sends traces to the Datadog backend. The Datadog backend flags actionable security signals and sends a notification to the relevant application, such as PagerDuty, Jira or Slack." >}}
 
 ## Data sampling and retention
 
-In the tracing library, Datadog App and API Protection collects all traces that include security data. A default [retention filter][9] ensures the retention of all security-related traces in the Datadog platform.
+In the SDK, Datadog App and API Protection collects all traces that include security data. A default [retention filter][9] ensures the retention of all security-related traces in the Datadog platform.
 
 Data for security traces is kept for 90 days. The underlying trace data is kept for 15 days.
 
@@ -77,7 +77,7 @@ To configure the information redacted by App and API Protection, refer to the [d
 
 Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rule Set][12] to detect known threats and vulnerabilities in HTTP requests. When an HTTP request matches one of [the OOTB detection rules][13], a security signal is generated in Datadog.
 
-**Automatic Threat Patterns Updates:** If your service is running with [an Agent with Remote Configuration enabled and a tracing library version that supports it][26] , the threat patterns being used to monitor your service are automatically updated whenever Datadog publishes updates.
+**Automatic Threat Patterns Updates:** If your service is running with [an Agent with Remote Configuration enabled and an SDK version that supports it][26] , the threat patterns being used to monitor your service are automatically updated whenever Datadog publishes updates.
 
 Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
 

@@ -49,7 +49,7 @@ To create a Synthetic Monitoring Test Suite:
 4. _Optionally, remove tests using the Remove Test from Suite icon next to each entry_.
 
 5. Configure alerting for the suite:
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">Alerting for Test Suites is not supported for this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}})</div>
 {{% /site-region %}}
 
@@ -127,15 +127,28 @@ When viewing a test suite, three tabs are available:
 
 ## Run a test suite
 
-To manually trigger the tests in a suite:
+You can trigger test runs in two ways:
+
+- [Run all tests in the suite](#run-all-tests-in-the-suite)
+- [Run selected tests](#run-selected-tests)
+
+### Run all tests in the suite
+
+From the suite detail page, click **Run Suite Now** in the top right to trigger every test in the suite.
+
+{{< img src="synthetics/test_suites/run_suite_now.png" alt="The test suite detail page with the Run Suite Now button in the top right." style="width:100%;" >}}
+
+### Run selected tests
+
+To run a subset of tests:
 
 1. Navigate to the suite and click the **Tests in the Suite** tab.
 2. Select the tests you want to run using the checkboxes.
 3. Click **Run Tests Now**.
 
-{{< img src="synthetics/test_suites/run_tests_now.png" alt="The Tests in the Suite tab with tests bulk selected and the Run Tests Now button visible" style="width:100%;" >}}
+{{< img src="synthetics/test_suites/run_tests_now.png" alt="The Tests in the Suite tab with tests bulk selected and the Run Tests Now button visible." style="width:100%;" >}}
 
-**Note**: You can run a maximum of 50 tests at a time.
+**Note**: You can run a maximum of 50 tests at a time with **Run Tests Now**.
 
 ## Troubleshooting
 

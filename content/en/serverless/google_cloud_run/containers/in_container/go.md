@@ -18,9 +18,9 @@ further_reading:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/go">available on GitHub</a>.</div>
 
-1. **Install the Datadog Go tracer**.
+1. **Install the Datadog Go SDK**.
 
-   1. In your main application, add the tracing library from `dd-trace-go`.
+   1. In your main application, add the SDK from `dd-trace-go`.
 
       {{< code-block lang="shell" disable_copy="false" >}}
 go get github.com/DataDog/dd-trace-go/v2/ddtrace/tracer

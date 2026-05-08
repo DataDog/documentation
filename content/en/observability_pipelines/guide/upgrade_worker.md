@@ -19,7 +19,7 @@ This guide goes over how to upgrade to a specific Worker version and the updates
 To upgrade to Worker version 2.15.0:
 
 - Docker: Run the `docker pull` command for the [2.15.0 image][40].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.15.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.15.0`.
 
@@ -37,6 +37,14 @@ Worker version 2.15.0 gives you access to the following:
 - The OpenTelemetry source now supports metrics pipelines.
 - The Elasticsearch destination is now available for metrics pipelines.
 - The `parse_yaml` function is now available for the Custom Processor. This function parses YAML according to the [YAML 1.1 spec][41].
+- The Enrichment Table file option now supports a `field` option that accepts an event field path or a metadata secret as the lookup key source. Plain text is supported for backwards compatibility.
+    - Explicit event path example:
+        - Observability Pipelines simplified syntax: `field: {event: "message"}`
+        - VRL syntax for the Custom Processor: `field: {vrl: ".message"}`
+    - Metadata secret reference example: `field: {secret: "splunk_hec_token"}`
+    - Plain string (for backwards compatibility):
+        - Observability Pipelines simplified syntax: `field: "message"`
+        - VRL syntax for the Custom Processor: `field: ".message"`
 
 #### Enhancements
 
@@ -59,8 +67,8 @@ Worker version 2.15.0 gives you access to the following:
 
 To upgrade to Worker version 2.14.1:
 
-- Docker: Run the `docker pull` command for the [2.14.1 image][37].
-- Kubernetes: See the [Helm chart][2].
+- Docker: Run the `docker pull` command for the [2.14.1 image][42].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.14.1`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.14.1`.
 
@@ -77,7 +85,7 @@ Worker version 2.14.1 gives you access to the following:
 To upgrade to Worker version 2.14.0:
 
 - Docker: Run the `docker pull` command for the [2.14.0 image][38].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.14.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.14.0`.
 
@@ -118,7 +126,7 @@ Worker version 2.14.0 gives you access to the following:
 To upgrade to Worker version 2.13.2:
 
 - Docker: Run the `docker pull` command for the [2.13.2 image][39].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.13.2`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.13.2`.
 
@@ -135,7 +143,7 @@ Worker version 2.13.2 gives you access to the following:
 To upgrade to Worker version 2.13.1:
 
 - Docker: Run the `docker pull` command for the [2.13.1 image][22].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.13.1`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.13.1`.
 
@@ -152,7 +160,7 @@ Worker version 2.13.1 gives you access to the following:
 To upgrade to Worker version 2.13.0:
 
 - Docker: Run the `docker pull` command for the [2.13.0 image][23].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.13.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.13.0`.
 
@@ -198,7 +206,7 @@ Worker version 2.13.0 gives you access to the following:
 To upgrade to Worker version 2.12.0:
 
 - Docker: Run the `docker pull` command for the [2.12.0 image][27].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.12.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.12.0`.
 
@@ -231,7 +239,7 @@ Worker version 2.12.0 gives you access to the following:
 To upgrade to Worker version 2.11.0:
 
 - Docker: Run the `docker pull` command for the [2.11.0 image][1].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.11.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.11.0`.
 
@@ -254,7 +262,7 @@ Version 2.11.0 gives you access to the following:
 To upgrade to Worker version 2.10.0:
 
 - Docker: Run the `docker pull` command for the [2.10.0 image][4].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.10.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.10.0`.
 
@@ -297,7 +305,7 @@ Worker version 2.10.0 gives you access to the following:
 To upgrade to Worker version 2.9.1:
 
 - Docker: Run the `docker pull` command to pull the [2.9.1 image][7].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.9.1`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.9.1`.
 
@@ -314,7 +322,7 @@ Worker version 2.9.1 gives you access to the following:
 To upgrade to Worker version 2.9.0:
 
 - Docker: Run the `docker pull` command to pull the [2.9.0 image][9].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.9.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.9.0`.
 
@@ -323,7 +331,7 @@ Worker version 2.9.0 gives you access to the following:
 #### New features
 
 - [OpenTelemetry Collector source][10]: Ingest logs from your OpenTelemetry Collector into Observability Pipelines.
-- [Datadog CloudPrem destination][11]: Route logs to the Datadog CloudPrem destination.
+- [Datadog BYOC Logs destination][11]: Route logs to the Datadog BYOC Logs destination.
 - [Google Pub/Sub destination][12]: Send logs from Observability Pipelines to the Google Pub/Sub messaging system.
 - The `haversine` custom function to calculate haversine distance and bearing.
 
@@ -340,7 +348,7 @@ Worker version 2.9.0 gives you access to the following:
 To upgrade to Worker version 2.8.1:
 
 - Docker: Run the `docker pull` command to pull the [2.8.1 image][13].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.8.1`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.8.1`.
 
@@ -357,7 +365,7 @@ Worker version 2.8.1 gives you access to the following:
 To upgrade to Worker version 2.8.0:
 
 - Docker: Run the `docker pull` command to pull the [2.8.0 image][14].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.8.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.8.0`.
 
@@ -385,7 +393,7 @@ Worker version 2.8.0 gives you access to the following:
 To upgrade to Worker version 2.7.0:
 
 - Docker: Run the `docker pull` command to pull the [2.7.0 image][15].
-- Kubernetes: See the [Helm chart][2].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
 - APT: Run the command `apt-get install observability-pipelines-worker=2.7.0`.
 - RPM: Run the command `sudo yum install observability-pipelines-worker-2.7.0`.
 
@@ -421,7 +429,7 @@ Worker version 2.7.0 gives you access to the following:
 [8]: https://learn.microsoft.com/en-us/azure/azure-monitor/fundamentals/service-limits#logs-ingestion-api
 [9]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.9.0
 [10]: /observability_pipelines/sources/opentelemetry/
-[11]: /observability_pipelines/destinations/cloudprem/
+[11]: /observability_pipelines/destinations/datadog_byoc_logs/
 [12]: /observability_pipelines/destinations/google_pubsub/
 [13]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.8.1
 [14]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.8.0
@@ -445,8 +453,9 @@ Worker version 2.7.0 gives you access to the following:
 [34]: /observability_pipelines/destinations/datadog_metrics/?tab=secretsmanagement
 [35]: /observability_pipelines/processors/filter/?tab=metrics
 [36]: /observability_pipelines/processors/tag_control/metrics
-[37]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.14.1
+[37]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#upgrade-the-worker
 [38]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.14.0
 [39]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.13.2
 [40]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.15.0
 [41]: https://yaml.org/spec/1.1/
+[42]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.14.1

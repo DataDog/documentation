@@ -20,7 +20,7 @@ Lineage is derived for all [supported data warehouse destinations][4].
 
 ### Generate an API key
 
-Datadog recommends using a **System Key**. Unlike Scoped Keys, which inherit permissions from a user account, System Keys have permissions set at the key level and continue working if the associated user leaves or changes roles.
+Datadog recommends using a {{< ui >}}System Key{{< /ui >}}. Unlike Scoped Keys, which inherit permissions from a user account, System Keys have permissions set at the key level and continue working if the associated user leaves or changes roles.
 
 Follow the [Fivetran System Keys documentation][1] to generate an API key and secret with the following permissions:
 
@@ -41,7 +41,7 @@ To connect Fivetran to Datadog:
    - API key
    - API secret
 
-2. After you've entered these credentials, click **Save**.
+2. After you've entered these credentials, click {{< ui >}}Save{{< /ui >}}.
 
 ## What's next
 

@@ -26,6 +26,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
   tag: "Blog"
   text: "Using LLMs to filter out false positives from static code analysis"
+- link: "https://learn.datadoghq.com/courses/code-security-SAST"
+  tag: "Learning Center"
+  text: "Write secure code with Datadog Code Security"
 aliases:
 - /code_analysis/
 ---
@@ -81,7 +84,7 @@ Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your runni
 You can enable IAST on your services instrumented with Datadog APM. See [IAST setup][3] to get started.
 
 ## Secret Scanning
-Secret Scanning identifies and validates leaked secrets in your codebase. [Request access to the Preview][9].
+Secret Scanning identifies and validates leaked secrets in your codebase.
 
 ## Supply Chain Security
 Prevent malicious packages from entering your development environments with Datadog Supply Chain Security Firewall, supported for GitHub. [Request access to the Preview][11].

@@ -8,6 +8,9 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/retention_filters'
     tag: Documentation
     text: Retention Filters
+  - link: '/real_user_monitoring/rum_without_limits/retention_quotas'
+    tag: Documentation
+    text: Control Costs with Retention Quotas
   - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
     tag: Guide
     text: Retention Filter Best Practices
