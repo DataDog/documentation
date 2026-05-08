@@ -31,7 +31,7 @@ Triage Suggestions help you coordinate the response without leaving the investig
 Suggestions include but are not limited to:
 - Sending Slack messages to update your team on the investigation results
 - Declaring incidents in Datadog
-- Paging engineers via Datadog On-Call
+- Paging engineers through Datadog On-Call
 - Opening Jira tickets
 
 [1]: /bits_ai/bits_ai_dev_agent/setup/
