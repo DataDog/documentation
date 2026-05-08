@@ -1,6 +1,6 @@
 ---
 import ApiLayout from '@layouts/ApiLayout.astro';
-import ApiStatusAlert from '@components/ApiStatusAlert/ApiStatusAlert.astro';
+import Alert from '@components/Alert/Alert.astro';
 import WhatsNext from '@components/WhatsNext/WhatsNext.astro';
 import NextLink from '@components/WhatsNext/NextLink.astro';
 import { getCategoryStubsView, getCategoryViewBySlug } from '@lib/api/viewsBuilder';
@@ -58,12 +58,12 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
   ]}
 >
   <h1>{current.name}</h1>
-  {current.deprecated && <ApiStatusAlert type="deprecated" />}
+  {current.deprecated && <Alert level="warning">This endpoint is deprecated.</Alert>}
   {current.description && (
     <div set:html={renderMarkdown(current.description)} />
   )}
   {current.operations.length > 0 && (
-    <WhatsNext desc="">
+    <WhatsNext desc="Actions:">
       {current.operations.map((op) => (
         <NextLink href={`${categoryBaseHref}${op.slug}/`}>
           {op.summary}

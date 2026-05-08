@@ -16,6 +16,7 @@
         ? Math.min(window.scrollY, MAX_SHRINK)
         : 0;
       root.style.setProperty('--hugo-header-shrink', shrink + 'px');
+      root.style.setProperty('--hugo-header-shrink-n', shrink);
       // Toggle the legacy .main-nav-scrolled class so ported Hugo CSS rules
       // that key off that class still apply (logo-download-div top, etc).
       if (shrink >= MAX_SHRINK) {

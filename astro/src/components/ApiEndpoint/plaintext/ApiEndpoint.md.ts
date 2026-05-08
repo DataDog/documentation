@@ -14,7 +14,6 @@
 import type { EndpointData } from '@lib/api/schemas/views';
 import { getDefaultRegions } from '@lib/api/regionResolver';
 import { appHost } from '@config/regions';
-import { renderApiStatusAlertMd } from '../../ApiStatusAlert/plaintext/ApiStatusAlert.md';
 import { renderApiSchemaTableMd } from '../../ApiSchemaTable/plaintext/ApiSchemaTable.md';
 import { renderApiRequestBodyTabsMd } from '../../ApiRequestBodyTabs/plaintext/ApiRequestBodyTabs.md';
 import { renderApiResponseMd } from '../../ApiResponse/plaintext/ApiResponse.md';
@@ -91,9 +90,11 @@ export function renderApiEndpointMd(
   blocks.push(`${headingMarker} ${ep.summary}${versionSuffix}`);
 
   if (ep.deprecated) {
-    blocks.push(renderApiStatusAlertMd({ type: 'deprecated', newerVersionUrl: ep.newerVersionUrl }));
+    const link = ep.newerVersionUrl ? ` [Use the newer version.](${ep.newerVersionUrl})` : '';
+    blocks.push(`{% alert level="warning" %}\nThis endpoint is deprecated.${link}\n{% /alert %}`);
   } else if (ep.unstable) {
-    blocks.push(renderApiStatusAlertMd({ type: 'unstable', message: ep.unstableMessage }));
+    const msg = ep.unstableMessage ?? 'This endpoint is unstable and may change without notice.';
+    blocks.push(`{% alert level="warning" %}\n${msg}\n{% /alert %}`);
   }
 
   if (ep.description) {

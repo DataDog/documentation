@@ -38,17 +38,6 @@ export default {
         },
       },
     },
-    apiStatusAlert: {
-      attributes: {
-        type: {
-          type: String,
-          required: true,
-          matches: ["deprecated", "unstable", "beta"],
-        },
-        newerVersionUrl: { type: String },
-        message: { type: String },
-      },
-    },
     schemaTable: {
       attributes: {
         fields: { type: String, required: true },

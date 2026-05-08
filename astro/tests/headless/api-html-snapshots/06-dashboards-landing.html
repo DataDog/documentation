@@ -13,7 +13,7 @@
         component-url="/_astro/LanguageSelector.HASH.js"
         component-export="LanguageSelector"
         renderer-url="/_astro/client.HASH.js"
-        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/dashboards/"]}],[0,{"code":[0,"fr"],"label":[0,"Français"],"href":[0,"/fr/api/latest/dashboards/"]}],[0,{"code":[0,"ja"],"label":[0,"日本語"],"href":[0,"/ja/api/latest/dashboards/"]}],[0,{"code":[0,"ko"],"label":[0,"한국어"],"href":[0,"/ko/api/latest/dashboards/"]}],[0,{"code":[0,"es"],"label":[0,"Español"],"href":[0,"/es/api/latest/dashboards/"]}]]],"currentCode":[0,"en"]}'
+        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/dashboards/"]}]]],"currentCode":[0,"en"]}'
         ssr
         client="load"
         opts='{"name":"LanguageSelector","value":true}'
@@ -23,10 +23,6 @@
             >Language</label
           ><select id="language-select" class="language-selector__select _language-selector__select_19nqn_15">
             <option selected value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="ja">日本語</option>
-            <option value="ko">한국어</option>
-            <option value="es">Español</option>
           </select>
         </div>
         <!--astro:end--></astro-island
@@ -58,170 +54,120 @@
     </div>
   </div>
   <div class="prose" data-astro-cid-hnecgxtf>
-    <h1 data-astro-cid-xz53zqur>Dashboards</h1>
-    <div data-astro-cid-xz53zqur>
+    <h1>Dashboards</h1>
+    <div>
       <p>
         Manage all your dashboards, as well as access to your shared dashboards, through the API. See the
         <a href="https://docs.datadoghq.com/dashboards/">Dashboards page</a> for more information.
       </p>
     </div>
-    <ul class="api-category-toc" data-astro-cid-xz53zqur>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a href="/api/latest/dashboards/create-a-new-dashboard/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Create a new dashboard
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a href="/api/latest/dashboards/get-a-dashboard/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Get a dashboard
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a href="/api/latest/dashboards/get-all-dashboards/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Get all dashboards
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--put _api-method-badge--put_1pgph_23">
-          PUT
-        </span>
-        <a href="/api/latest/dashboards/update-a-dashboard/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Update a dashboard
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a href="/api/latest/dashboards/delete-a-dashboard/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Delete a dashboard
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a href="/api/latest/dashboards/delete-dashboards/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Delete dashboards
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a
-          href="/api/latest/dashboards/restore-deleted-dashboards/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Restore deleted dashboards
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/dashboards/create-a-shared-dashboard/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create a shared dashboard
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a href="/api/latest/dashboards/get-a-shared-dashboard/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Get a shared dashboard
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--put _api-method-badge--put_1pgph_23">
-          PUT
-        </span>
-        <a
-          href="/api/latest/dashboards/update-a-shared-dashboard/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update a shared dashboard
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/dashboards/send-shared-dashboard-invitation-email/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Send shared dashboard invitation email
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/dashboards/get-all-invitations-for-a-shared-dashboard/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get all invitations for a shared dashboard
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/dashboards/revoke-a-shared-dashboard-url/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Revoke a shared dashboard URL
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/dashboards/revoke-shared-dashboard-invitations/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Revoke shared dashboard invitations
-        </a>
-      </li>
-    </ul>
+    <aside class="whatsnext _whatsnext_h396h_1">
+      <p class="whatsnext__desc _whatsnext__desc_h396h_7">Actions:</p>
+      <ul class="whatsnext__list _whatsnext__list_h396h_11">
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/dashboards/create-a-new-dashboard/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create a new dashboard </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/dashboards/get-a-dashboard/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get a dashboard </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/dashboards/get-all-dashboards/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get all dashboards </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/dashboards/update-a-dashboard/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update a dashboard </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/dashboards/delete-a-dashboard/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete a dashboard </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/dashboards/delete-dashboards/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete dashboards </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboards/restore-deleted-dashboards/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Restore deleted dashboards </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/dashboards/create-a-shared-dashboard/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create a shared dashboard </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/dashboards/get-a-shared-dashboard/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get a shared dashboard </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/dashboards/update-a-shared-dashboard/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update a shared dashboard </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboards/send-shared-dashboard-invitation-email/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Send shared dashboard invitation email
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboards/get-all-invitations-for-a-shared-dashboard/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get all invitations for a shared dashboard
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboards/revoke-a-shared-dashboard-url/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Revoke a shared dashboard URL </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboards/revoke-shared-dashboard-invitations/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Revoke shared dashboard invitations </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+    </aside>
   </div>
 </main>

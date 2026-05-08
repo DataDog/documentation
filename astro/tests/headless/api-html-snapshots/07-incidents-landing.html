@@ -13,7 +13,7 @@
         component-url="/_astro/LanguageSelector.HASH.js"
         component-export="LanguageSelector"
         renderer-url="/_astro/client.HASH.js"
-        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/incidents/"]}],[0,{"code":[0,"fr"],"label":[0,"Français"],"href":[0,"/fr/api/latest/incidents/"]}],[0,{"code":[0,"ja"],"label":[0,"日本語"],"href":[0,"/ja/api/latest/incidents/"]}],[0,{"code":[0,"ko"],"label":[0,"한국어"],"href":[0,"/ko/api/latest/incidents/"]}],[0,{"code":[0,"es"],"label":[0,"Español"],"href":[0,"/es/api/latest/incidents/"]}]]],"currentCode":[0,"en"]}'
+        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/incidents/"]}]]],"currentCode":[0,"en"]}'
         ssr
         client="load"
         opts='{"name":"LanguageSelector","value":true}'
@@ -23,10 +23,6 @@
             >Language</label
           ><select id="language-select" class="language-selector__select _language-selector__select_19nqn_15">
             <option selected value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="ja">日本語</option>
-            <option value="ko">한국어</option>
-            <option value="es">Español</option>
           </select>
         </div>
         <!--astro:end--></astro-island
@@ -58,709 +54,462 @@
     </div>
   </div>
   <div class="prose" data-astro-cid-hnecgxtf>
-    <h1 data-astro-cid-xz53zqur>Incidents</h1>
-    <div data-astro-cid-xz53zqur>
+    <h1>Incidents</h1>
+    <div>
       <p>
         Manage incident response, as well as associated attachments, metadata, and todos. See the
         <a href="https://docs.datadoghq.com/service_management/incident_management/">Incident Management page</a> for
         more information.
       </p>
     </div>
-    <ul class="api-category-toc" data-astro-cid-xz53zqur>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a href="/api/latest/incidents/create-an-incident/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Create an incident
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-the-details-of-an-incident/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get the details of an incident
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a
-          href="/api/latest/incidents/update-an-existing-incident/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update an existing incident
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/incidents/delete-an-existing-incident/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete an existing incident
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/incidents/create-postmortem-attachment/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create postmortem attachment
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a href="/api/latest/incidents/search-for-incidents/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Search for incidents
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/list-an-incident-s-impacts/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          List an incident&#39;s impacts
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/incidents/create-an-incident-impact/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create an incident impact
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/incidents/delete-an-incident-impact/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete an incident impact
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/incidents/create-an-incident-integration-metadata/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create an incident integration metadata
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-incident-integration-metadata-details/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get incident integration metadata details
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a
-          href="/api/latest/incidents/update-an-existing-incident-integration-metadata/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update an existing incident integration metadata
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/incidents/delete-an-incident-integration-metadata/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete an incident integration metadata
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-a-list-of-an-incident-s-todos/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get a list of an incident&#39;s todos
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a href="/api/latest/incidents/create-an-incident-todo/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Create an incident todo
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-incident-todo-details/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get incident todo details
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a href="/api/latest/incidents/update-an-incident-todo/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Update an incident todo
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a href="/api/latest/incidents/delete-an-incident-todo/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Delete an incident todo
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a href="/api/latest/incidents/create-an-incident-type/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Create an incident type
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-a-list-of-incident-types/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get a list of incident types
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-incident-type-details/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get incident type details
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a href="/api/latest/incidents/update-an-incident-type/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Update an incident type
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a href="/api/latest/incidents/delete-an-incident-type/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Delete an incident type
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/list-incident-notification-templates/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          List incident notification templates
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/incidents/create-incident-notification-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create incident notification template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-incident-notification-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get incident notification template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a
-          href="/api/latest/incidents/update-incident-notification-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update incident notification template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/incidents/delete-a-notification-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete a notification template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/list-incident-notification-rules/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          List incident notification rules
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/incidents/create-an-incident-notification-rule/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create an incident notification rule
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-an-incident-notification-rule/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get an incident notification rule
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--put _api-method-badge--put_1pgph_23">
-          PUT
-        </span>
-        <a
-          href="/api/latest/incidents/update-an-incident-notification-rule/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update an incident notification rule
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/incidents/delete-an-incident-notification-rule/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete an incident notification rule
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/list-incident-attachments/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          List incident attachments
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/incidents/create-incident-attachment/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create incident attachment
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/incidents/delete-incident-attachment/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete incident attachment
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a
-          href="/api/latest/incidents/update-incident-attachment/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update incident attachment
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-global-incident-settings/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get global incident settings
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a
-          href="/api/latest/incidents/update-global-incident-settings/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update global incident settings
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/list-global-incident-handles/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          List global incident handles
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/incidents/create-global-incident-handle/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create global incident handle
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--put _api-method-badge--put_1pgph_23">
-          PUT
-        </span>
-        <a
-          href="/api/latest/incidents/update-global-incident-handle/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update global incident handle
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/incidents/delete-global-incident-handle/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete global incident handle
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/list-postmortem-templates/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          List postmortem templates
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/incidents/create-postmortem-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create postmortem template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a href="/api/latest/incidents/get-postmortem-template/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Get postmortem template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a
-          href="/api/latest/incidents/update-postmortem-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update postmortem template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/incidents/delete-postmortem-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete postmortem template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a href="/api/latest/incidents/import-an-incident/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Import an incident
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a href="/api/latest/incidents/get-a-list-of-incidents/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Get a list of incidents
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-a-list-of-an-incident-s-integration-metadata/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get a list of an incident&#39;s integration metadata
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-a-list-of-incident-user-defined-fields/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get a list of incident user-defined fields
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/incidents/create-an-incident-user-defined-field/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create an incident user-defined field
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/incidents/get-an-incident-user-defined-field/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get an incident user-defined field
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a
-          href="/api/latest/incidents/update-an-incident-user-defined-field/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update an incident user-defined field
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/incidents/delete-an-incident-user-defined-field/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete an incident user-defined field
-        </a>
-      </li>
-    </ul>
+    <aside class="whatsnext _whatsnext_h396h_1">
+      <p class="whatsnext__desc _whatsnext__desc_h396h_7">Actions:</p>
+      <ul class="whatsnext__list _whatsnext__list_h396h_11">
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/create-an-incident/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create an incident </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/get-the-details-of-an-incident/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get the details of an incident </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/update-an-existing-incident/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update an existing incident </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/delete-an-existing-incident/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete an existing incident </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/create-postmortem-attachment/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create postmortem attachment </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/search-for-incidents/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Search for incidents </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/list-an-incident-s-impacts/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> List an incident&#39;s impacts </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/create-an-incident-impact/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create an incident impact </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/delete-an-incident-impact/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete an incident impact </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/create-an-incident-integration-metadata/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Create an incident integration metadata
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/get-incident-integration-metadata-details/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get incident integration metadata details
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/update-an-existing-incident-integration-metadata/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Update an existing incident integration metadata
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/delete-an-incident-integration-metadata/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Delete an incident integration metadata
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/get-a-list-of-an-incident-s-todos/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get a list of an incident&#39;s todos </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/create-an-incident-todo/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create an incident todo </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/get-incident-todo-details/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get incident todo details </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/update-an-incident-todo/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update an incident todo </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/delete-an-incident-todo/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete an incident todo </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/create-an-incident-type/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create an incident type </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/get-a-list-of-incident-types/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get a list of incident types </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/get-incident-type-details/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get incident type details </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/update-an-incident-type/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update an incident type </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/delete-an-incident-type/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete an incident type </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/list-incident-notification-templates/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> List incident notification templates </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/create-incident-notification-template/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create incident notification template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/get-incident-notification-template/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get incident notification template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/update-incident-notification-template/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update incident notification template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/delete-a-notification-template/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete a notification template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/list-incident-notification-rules/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> List incident notification rules </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/create-an-incident-notification-rule/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create an incident notification rule </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/get-an-incident-notification-rule/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get an incident notification rule </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/update-an-incident-notification-rule/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update an incident notification rule </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/delete-an-incident-notification-rule/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete an incident notification rule </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/list-incident-attachments/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> List incident attachments </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/create-incident-attachment/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create incident attachment </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/delete-incident-attachment/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete incident attachment </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/update-incident-attachment/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update incident attachment </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/get-global-incident-settings/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get global incident settings </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/update-global-incident-settings/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update global incident settings </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/list-global-incident-handles/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> List global incident handles </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/create-global-incident-handle/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create global incident handle </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/update-global-incident-handle/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update global incident handle </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/delete-global-incident-handle/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete global incident handle </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/list-postmortem-templates/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> List postmortem templates </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/create-postmortem-template/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create postmortem template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/get-postmortem-template/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get postmortem template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/update-postmortem-template/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update postmortem template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/delete-postmortem-template/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete postmortem template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/import-an-incident/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Import an incident </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/incidents/get-a-list-of-incidents/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get a list of incidents </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/get-a-list-of-an-incident-s-integration-metadata/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get a list of an incident&#39;s integration metadata
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/get-a-list-of-incident-user-defined-fields/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get a list of incident user-defined fields
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/create-an-incident-user-defined-field/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create an incident user-defined field </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/get-an-incident-user-defined-field/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get an incident user-defined field </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/update-an-incident-user-defined-field/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update an incident user-defined field </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/incidents/delete-an-incident-user-defined-field/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete an incident user-defined field </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+    </aside>
   </div>
 </main>

@@ -1,6 +1,6 @@
 ---
 import ApiMethodBadge from '@components/ApiMethodBadge/ApiMethodBadge.astro';
-import ApiStatusAlert from '@components/ApiStatusAlert/ApiStatusAlert.astro';
+import Alert from '@components/Alert/Alert.astro';
 import ApiSchemaTable from '@components/ApiSchemaTable/ApiSchemaTable.astro';
 import ApiResponse from '@components/ApiResponse/ApiResponse.astro';
 import ApiCodeExample from '@components/ApiCodeExample/ApiCodeExample.astro';
@@ -68,19 +68,23 @@ const hasParams = ep && (
 
 {ep && (
   <section class={cl('api-endpoint')} data-operation-id={ep.operationId}>
-    {/* Status alerts */}
-    {ep.deprecated && (
-      <ApiStatusAlert type="deprecated" newerVersionUrl={ep.newerVersionUrl} />
-    )}
-    {ep.unstable && !ep.deprecated && (
-      <ApiStatusAlert type="unstable" message={ep.unstableMessage} />
-    )}
-
     {/* Heading + method badge + path */}
     <HeadingTag id={ep.slug} class={cl('api-endpoint__heading')}>
       {ep.summary}
       {ep.version && <span class={cl('api-endpoint__version-badge')}>{ep.version === 'v2' ? 'v2 (latest)' : ep.version}</span>}
     </HeadingTag>
+    {/* Status alerts */}
+    {ep.deprecated && (
+      <Alert level="warning">
+        This endpoint is deprecated.{ep.newerVersionUrl && <> <a href={ep.newerVersionUrl}>Use the newer version.</a></>}
+      </Alert>
+    )}
+    {ep.unstable && !ep.deprecated && (
+      <Alert level="warning">
+        <Fragment set:html={renderMarkdownInline(ep.unstableMessage ?? 'This endpoint is unstable and may change without notice.')} />
+      </Alert>
+    )}
+
     <div class={cl('api-endpoint__url-line')}>
       <ApiMethodBadge method={ep.method} />
       {allRegions.map((region) => {

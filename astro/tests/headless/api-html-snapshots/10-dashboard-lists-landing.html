@@ -13,7 +13,7 @@
         component-url="/_astro/LanguageSelector.HASH.js"
         component-export="LanguageSelector"
         renderer-url="/_astro/client.HASH.js"
-        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/dashboard-lists/"]}],[0,{"code":[0,"fr"],"label":[0,"Français"],"href":[0,"/fr/api/latest/dashboard-lists/"]}],[0,{"code":[0,"ja"],"label":[0,"日本語"],"href":[0,"/ja/api/latest/dashboard-lists/"]}],[0,{"code":[0,"ko"],"label":[0,"한국어"],"href":[0,"/ko/api/latest/dashboard-lists/"]}],[0,{"code":[0,"es"],"label":[0,"Español"],"href":[0,"/es/api/latest/dashboard-lists/"]}]]],"currentCode":[0,"en"]}'
+        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/dashboard-lists/"]}]]],"currentCode":[0,"en"]}'
         ssr
         client="load"
         opts='{"name":"LanguageSelector","value":true}'
@@ -23,10 +23,6 @@
             >Language</label
           ><select id="language-select" class="language-selector__select _language-selector__select_19nqn_15">
             <option selected value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="ja">日本語</option>
-            <option value="ko">한국어</option>
-            <option value="es">Español</option>
           </select>
         </div>
         <!--astro:end--></astro-island
@@ -58,137 +54,98 @@
     </div>
   </div>
   <div class="prose" data-astro-cid-hnecgxtf>
-    <h1 data-astro-cid-xz53zqur>Dashboard Lists</h1>
-    <div
-      class="api-status-alert _api-status-alert_1orbj_1 api-status-alert--deprecated _api-status-alert--deprecated_1orbj_12"
-      role="alert"
-    >
-      <span class="api-status-alert__label _api-status-alert__label_1orbj_27">Deprecated</span>
-      <span class="api-status-alert__message _api-status-alert__message_1orbj_44"> This endpoint is deprecated. </span>
+    <h1>Dashboard Lists</h1>
+    <div class="alert _alert_1msim_1 alert--warning _alert--warning_1msim_19">
+      <strong class="alert__label _alert__label_1msim_27">Warning</strong> This endpoint is deprecated.
     </div>
-    <div data-astro-cid-xz53zqur>
+    <div>
       <p>
         Interact with your dashboard lists through the API to organize, find, and share all of your dashboards with your
         team and organization.
       </p>
     </div>
-    <ul class="api-category-toc" data-astro-cid-xz53zqur>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/dashboard-lists/get-all-dashboard-lists/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get all dashboard lists
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/dashboard-lists/get-items-of-a-dashboard-list/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get items of a Dashboard List
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/dashboard-lists/add-items-to-a-dashboard-list/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Add Items to a Dashboard List
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/dashboard-lists/create-a-dashboard-list/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create a dashboard list
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/dashboard-lists/get-a-dashboard-list/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get a dashboard list
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--put _api-method-badge--put_1pgph_23">
-          PUT
-        </span>
-        <a
-          href="/api/latest/dashboard-lists/update-items-of-a-dashboard-list/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update items of a dashboard list
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/dashboard-lists/delete-items-from-a-dashboard-list/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete items from a dashboard list
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--put _api-method-badge--put_1pgph_23">
-          PUT
-        </span>
-        <a
-          href="/api/latest/dashboard-lists/update-a-dashboard-list/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update a dashboard list
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/dashboard-lists/delete-a-dashboard-list/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete a dashboard list
-        </a>
-      </li>
-    </ul>
+    <aside class="whatsnext _whatsnext_h396h_1">
+      <p class="whatsnext__desc _whatsnext__desc_h396h_7">Actions:</p>
+      <ul class="whatsnext__list _whatsnext__list_h396h_11">
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboard-lists/get-all-dashboard-lists/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get all dashboard lists </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboard-lists/get-items-of-a-dashboard-list/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get items of a Dashboard List </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboard-lists/add-items-to-a-dashboard-list/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Add Items to a Dashboard List </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboard-lists/create-a-dashboard-list/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create a dashboard list </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/dashboard-lists/get-a-dashboard-list/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get a dashboard list </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboard-lists/update-items-of-a-dashboard-list/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update items of a dashboard list </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboard-lists/delete-items-from-a-dashboard-list/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete items from a dashboard list </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboard-lists/update-a-dashboard-list/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update a dashboard list </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/dashboard-lists/delete-a-dashboard-list/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete a dashboard list </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+    </aside>
   </div>
 </main>

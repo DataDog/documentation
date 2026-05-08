@@ -32,7 +32,7 @@ test.describe('ApiEndpoint component', () => {
 
   test('renders deprecated alert on deprecated endpoint', async ({ page }) => {
     const deprecatedEndpoint = page.locator('.api-endpoint').nth(1);
-    const alert = deprecatedEndpoint.locator('.api-status-alert');
+    const alert = deprecatedEndpoint.locator('.alert--warning');
     await expect(alert).toBeVisible();
   });
 

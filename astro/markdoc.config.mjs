@@ -75,10 +75,6 @@ export default defineMarkdocConfig({
       selfClosing: true,
       ...schema.tags.apiMethodBadge,
     },
-    apiStatusAlert: {
-      render: component('./src/components/ApiStatusAlert/ApiStatusAlert.astro'),
-      ...schema.tags.apiStatusAlert,
-    },
     schemaTable: {
       render: component('./src/components/ApiSchemaTable/ApiSchemaTable.astro'),
       selfClosing: true,

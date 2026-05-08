@@ -155,17 +155,17 @@
 }
 
 .header__logo-bits {
-  height: 75px;
-  transition: height 200ms ease-in-out;
+  height: calc(75px - max(0px, var(--hugo-header-shrink) - 30px) * 25 / 35);
   max-width: none;
 }
 
 .header__logo-text {
   width: 93px;
-  height: 14px;
-  margin-top: 5px;
-  transition: opacity 200ms ease-in-out;
+  overflow: hidden;
   font-size: 0;
+  opacity: clamp(0, calc(1 - var(--hugo-header-shrink-n) / 30), 1);
+  height: clamp(0px, calc(14px - 14px * var(--hugo-header-shrink-n) / 30), 14px);
+  margin-top: clamp(0px, calc(5px - 5px * var(--hugo-header-shrink-n) / 30), 5px);
 }
 
 /* Scroll-shrink: collapse the wordmark and shrink the bits logo once the
@@ -174,9 +174,6 @@
   display: none;
 }
 
-:global(.main-nav-scrolled) .header__logo-bits {
-  height: 50px;
-}
 
 /* Search toggle (not rendered on desktop docs; kept for parity / styling parent) */
 .header__search-toggle {
@@ -245,15 +242,13 @@
   z-index: -2;
 }
 
-.header__btn-gradient:hover {
+.header__btn-gradient:hover,
+:global(.main-nav-scrolled) .header__btn-gradient {
   color: #ffffff;
-  /* Matches Hugo's hover: magenta at 0% → blue-purple at 100%, 45deg. The
-     tokens are named start/end for the resting ::before direction (left→right);
-     hover reverses the color order. */
   background: linear-gradient(
-    45deg,
-    var(--hugo-btn-gradient-end) 0%,
-    var(--hugo-btn-gradient-start) 100%
+    to right,
+    var(--hugo-btn-gradient-start),
+    var(--hugo-btn-gradient-end)
   );
 }
 

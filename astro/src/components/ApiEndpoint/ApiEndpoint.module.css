@@ -9,16 +9,10 @@
 }
 
 .api-endpoint__version-badge {
-  display: inline-block;
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   font-weight: 600;
-  padding: 0.1em 0.5em;
   margin-left: auto;
-  border-radius: var(--border-radius);
-  background: var(--color-highlight-bg);
   color: var(--color-text-muted);
-  vertical-align: middle;
-  text-transform: uppercase;
 }
 
 .api-endpoint__url-line {
@@ -30,9 +24,10 @@
 
 .api-endpoint__path {
   font-family: var(--font-family-mono);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
   background: var(--color-highlight-bg);
-  padding: 0.15rem var(--space-sm);
+  padding: 3px var(--space-sm);
   border-radius: var(--border-radius);
   word-break: break-all;
 }

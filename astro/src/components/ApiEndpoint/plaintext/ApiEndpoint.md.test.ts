@@ -58,14 +58,14 @@ describe('renderApiEndpointMd', () => {
   it('renders a deprecated alert when the endpoint is deprecated', () => {
     const dep = renderApiEndpointMd({ ...baseEndpoint, deprecated: true, newerVersionUrl: '/api/latest/foo' });
     expect(dep).toContain('{% alert level="warning" %}');
-    expect(dep).toContain('**Deprecated:**');
+    expect(dep).toContain('This endpoint is deprecated.');
     expect(dep).toContain('[Use the newer version.](/api/latest/foo)');
   });
 
   it('renders an unstable alert when the endpoint is unstable (and not deprecated)', () => {
     const out = renderApiEndpointMd({ ...baseEndpoint, unstable: true, unstableMessage: 'Subject to change.' });
     expect(out).toContain('{% alert level="warning" %}');
-    expect(out).toContain('**Unstable:** Subject to change.');
+    expect(out).toContain('Subject to change.');
   });
 
   it('includes the endpoint description', () => {

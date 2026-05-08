@@ -13,7 +13,7 @@
         component-url="/_astro/LanguageSelector.HASH.js"
         component-export="LanguageSelector"
         renderer-url="/_astro/client.HASH.js"
-        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/monitors/"]}],[0,{"code":[0,"fr"],"label":[0,"Français"],"href":[0,"/fr/api/latest/monitors/"]}],[0,{"code":[0,"ja"],"label":[0,"日本語"],"href":[0,"/ja/api/latest/monitors/"]}],[0,{"code":[0,"ko"],"label":[0,"한국어"],"href":[0,"/ko/api/latest/monitors/"]}],[0,{"code":[0,"es"],"label":[0,"Español"],"href":[0,"/es/api/latest/monitors/"]}]]],"currentCode":[0,"en"]}'
+        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/monitors/"]}]]],"currentCode":[0,"en"]}'
         ssr
         client="load"
         opts='{"name":"LanguageSelector","value":true}'
@@ -23,10 +23,6 @@
             >Language</label
           ><select id="language-select" class="language-selector__select _language-selector__select_19nqn_15">
             <option selected value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="ja">日本語</option>
-            <option value="ko">한국어</option>
-            <option value="es">Español</option>
           </select>
         </div>
         <!--astro:end--></astro-island
@@ -58,8 +54,8 @@
     </div>
   </div>
   <div class="prose" data-astro-cid-hnecgxtf>
-    <h1 data-astro-cid-xz53zqur>Monitors</h1>
-    <div data-astro-cid-xz53zqur>
+    <h1>Monitors</h1>
+    <div>
       <p>
         <a href="https://docs.datadoghq.com/monitors">Monitors</a> allow you to watch a metric or check that you care
         about and notifies your team when a defined threshold has exceeded.
@@ -72,367 +68,256 @@
         <a href="https://curl.se/docs/url-syntax.html">url encoding</a>.
       </p>
     </div>
-    <ul class="api-category-toc" data-astro-cid-xz53zqur>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a href="/api/latest/monitors/create-a-monitor/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Create a monitor
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a href="/api/latest/monitors/get-all-monitors/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Get all monitors
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--put _api-method-badge--put_1pgph_23">
-          PUT
-        </span>
-        <a href="/api/latest/monitors/edit-a-monitor/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Edit a monitor
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a href="/api/latest/monitors/get-a-monitor-s-details/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Get a monitor&#39;s details
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a href="/api/latest/monitors/delete-a-monitor/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Delete a monitor
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/monitors/check-if-a-monitor-can-be-deleted/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Check if a monitor can be deleted
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a href="/api/latest/monitors/validate-a-monitor/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Validate a monitor
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/monitors/validate-an-existing-monitor/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Validate an existing monitor
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/monitors/get-a-monitor-configuration-policy/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get a monitor configuration policy
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a href="/api/latest/monitors/monitors-search/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Monitors search
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/monitors/get-all-monitor-configuration-policies/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get all monitor configuration policies
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a href="/api/latest/monitors/monitors-group-search/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Monitors group search
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/monitors/create-a-monitor-configuration-policy/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create a monitor configuration policy
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a href="/api/latest/monitors/unmute-a-monitor/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Unmute a monitor
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a
-          href="/api/latest/monitors/edit-a-monitor-configuration-policy/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Edit a monitor configuration policy
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a href="/api/latest/monitors/mute-a-monitor/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Mute a monitor
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/monitors/delete-a-monitor-configuration-policy/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete a monitor configuration policy
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a href="/api/latest/monitors/unmute-all-monitors/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Unmute all monitors
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/monitors/get-a-monitor-notification-rule/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get a monitor notification rule
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a href="/api/latest/monitors/mute-all-monitors/" class="api-category-toc__link" data-astro-cid-xz53zqur>
-          Mute all monitors
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/monitors/get-all-monitor-notification-rules/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get all monitor notification rules
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/monitors/create-a-monitor-notification-rule/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create a monitor notification rule
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--patch _api-method-badge--patch_1pgph_28"
-        >
-          PATCH
-        </span>
-        <a
-          href="/api/latest/monitors/update-a-monitor-notification-rule/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update a monitor notification rule
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/monitors/delete-a-monitor-notification-rule/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete a monitor notification rule
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/monitors/get-a-monitor-user-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get a monitor user template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/monitors/get-all-monitor-user-templates/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get all monitor user templates
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/monitors/create-a-monitor-user-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Create a monitor user template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--put _api-method-badge--put_1pgph_23">
-          PUT
-        </span>
-        <a
-          href="/api/latest/monitors/update-a-monitor-user-template-to-a-new-version/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Update a monitor user template to a new version
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--delete _api-method-badge--delete_1pgph_33"
-        >
-          DELETE
-        </span>
-        <a
-          href="/api/latest/monitors/delete-a-monitor-user-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Delete a monitor user template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/monitors/validate-a-monitor-user-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Validate a monitor user template
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span
-          class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--post _api-method-badge--post_1pgph_18"
-        >
-          POST
-        </span>
-        <a
-          href="/api/latest/monitors/validate-an-existing-monitor-user-template/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Validate an existing monitor user template
-        </a>
-      </li>
-    </ul>
+    <aside class="whatsnext _whatsnext_h396h_1">
+      <p class="whatsnext__desc _whatsnext__desc_h396h_7">Actions:</p>
+      <ul class="whatsnext__list _whatsnext__list_h396h_11">
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/create-a-monitor/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create a monitor </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/get-all-monitors/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get all monitors </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/edit-a-monitor/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Edit a monitor </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/get-a-monitor-s-details/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get a monitor&#39;s details </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/delete-a-monitor/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete a monitor </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/check-if-a-monitor-can-be-deleted/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Check if a monitor can be deleted </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/validate-a-monitor/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Validate a monitor </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/validate-an-existing-monitor/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Validate an existing monitor </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/get-a-monitor-configuration-policy/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get a monitor configuration policy </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/monitors-search/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Monitors search </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/get-all-monitor-configuration-policies/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get all monitor configuration policies
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/monitors-group-search/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Monitors group search </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/create-a-monitor-configuration-policy/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create a monitor configuration policy </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/unmute-a-monitor/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Unmute a monitor </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/edit-a-monitor-configuration-policy/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Edit a monitor configuration policy </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/mute-a-monitor/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Mute a monitor </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/delete-a-monitor-configuration-policy/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete a monitor configuration policy </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/unmute-all-monitors/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Unmute all monitors </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/get-a-monitor-notification-rule/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get a monitor notification rule </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/mute-all-monitors/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Mute all monitors </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/get-all-monitor-notification-rules/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get all monitor notification rules </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/create-a-monitor-notification-rule/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create a monitor notification rule </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/update-a-monitor-notification-rule/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Update a monitor notification rule </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/delete-a-monitor-notification-rule/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete a monitor notification rule </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a class="whatsnext__link _whatsnext__link_h396h_26" href="/api/latest/monitors/get-a-monitor-user-template/">
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get a monitor user template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/get-all-monitor-user-templates/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get all monitor user templates </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/create-a-monitor-user-template/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Create a monitor user template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/update-a-monitor-user-template-to-a-new-version/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Update a monitor user template to a new version
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/delete-a-monitor-user-template/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Delete a monitor user template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/validate-a-monitor-user-template/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Validate a monitor user template </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/monitors/validate-an-existing-monitor-user-template/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Validate an existing monitor user template
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+    </aside>
   </div>
 </main>

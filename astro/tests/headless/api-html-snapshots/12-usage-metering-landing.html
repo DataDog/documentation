@@ -13,7 +13,7 @@
         component-url="/_astro/LanguageSelector.HASH.js"
         component-export="LanguageSelector"
         renderer-url="/_astro/client.HASH.js"
-        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/usage-metering/"]}],[0,{"code":[0,"fr"],"label":[0,"Français"],"href":[0,"/fr/api/latest/usage-metering/"]}],[0,{"code":[0,"ja"],"label":[0,"日本語"],"href":[0,"/ja/api/latest/usage-metering/"]}],[0,{"code":[0,"ko"],"label":[0,"한국어"],"href":[0,"/ko/api/latest/usage-metering/"]}],[0,{"code":[0,"es"],"label":[0,"Español"],"href":[0,"/es/api/latest/usage-metering/"]}]]],"currentCode":[0,"en"]}'
+        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/usage-metering/"]}]]],"currentCode":[0,"en"]}'
         ssr
         client="load"
         opts='{"name":"LanguageSelector","value":true}'
@@ -23,10 +23,6 @@
             >Language</label
           ><select id="language-select" class="language-selector__select _language-selector__select_19nqn_15">
             <option selected value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="ja">日本語</option>
-            <option value="ko">한국어</option>
-            <option value="es">Español</option>
           </select>
         </div>
         <!--astro:end--></astro-island
@@ -58,8 +54,8 @@
     </div>
   </div>
   <div class="prose" data-astro-cid-hnecgxtf>
-    <h1 data-astro-cid-xz53zqur>Usage Metering</h1>
-    <div data-astro-cid-xz53zqur>
+    <h1>Usage Metering</h1>
+    <div>
       <p>
         The usage metering API allows you to get hourly, daily, and monthly usage across multiple facets of Datadog.
         This API is available to all Pro and Enterprise customers.
@@ -74,595 +70,491 @@
         <a href="https://docs.datadoghq.com/account_management/billing/usage_details/">usage details documentation</a>.
       </p>
     </div>
-    <ul class="api-category-toc" data-astro-cid-xz53zqur>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-attribution/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage attribution
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-lambda-traced-invocations/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for Lambda traced invocations
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-application-security/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for application security
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-monthly-usage-attribution/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get monthly usage attribution
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-billable-usage-across-your-account/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get billable usage across your account
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-observability-pipelines/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for observability pipelines
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-all-custom-metrics-by-hourly-average/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get all custom metrics by hourly average
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-cost-across-multi-org-account/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get cost across multi-org account
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-estimated-cost-across-your-account/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get estimated cost across your account
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-usage-across-your-account/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get usage across your account
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-historical-cost-across-your-account/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get historical cost across your account
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-logs-by-index/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for logs by index
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-logs-usage-by-retention/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly logs usage by retention
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-projected-cost-across-your-account/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get projected cost across your account
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-hosts-and-containers/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for hosts and containers
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-monthly-cost-attribution/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get Monthly Cost Attribution
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-by-product-family/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage by product family
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-logs/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for logs
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-custom-metrics/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for custom metrics
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-usage-attribution-types/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get usage attribution types
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-active-billing-dimensions-for-cost-attribution/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get active billing dimensions for cost attribution
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-indexed-spans/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for indexed spans
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-billing-dimension-mapping-for-usage-endpoints/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get billing dimension mapping for usage endpoints
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-synthetics-checks/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for synthetics checks
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-synthetics-api-checks/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for synthetics API checks
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-synthetics-browser-checks/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for synthetics browser checks
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-fargate/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for Fargate
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-lambda/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for Lambda
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-rum-sessions/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for RUM sessions
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-network-hosts/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for network hosts
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-network-flows/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          get hourly usage for network flows
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-analyzed-logs/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for analyzed logs
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-snmp-devices/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for SNMP devices
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-ingested-spans/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for ingested spans
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-incident-management/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for incident management
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-iot/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for IoT
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-csm-pro/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for CSM Pro
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-cloud-workload-security/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for cloud workload security
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-database-monitoring/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for database monitoring
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-sensitive-data-scanner/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for sensitive data scanner
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-rum-units/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for RUM units
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-profiled-hosts/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for profiled hosts
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-ci-visibility/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for CI visibility
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-online-archive/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for online archive
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-hourly-usage-for-audit-logs/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get hourly usage for audit logs
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-the-list-of-available-daily-custom-reports/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get the list of available daily custom reports
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-specified-daily-custom-reports/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get specified daily custom reports
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-the-list-of-available-monthly-custom-reports/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get the list of available monthly custom reports
-        </a>
-      </li>
-      <li class="api-category-toc__item" data-astro-cid-xz53zqur>
-        <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
-          GET
-        </span>
-        <a
-          href="/api/latest/usage-metering/get-specified-monthly-custom-reports/"
-          class="api-category-toc__link"
-          data-astro-cid-xz53zqur
-        >
-          Get specified monthly custom reports
-        </a>
-      </li>
-    </ul>
+    <aside class="whatsnext _whatsnext_h396h_1">
+      <p class="whatsnext__desc _whatsnext__desc_h396h_7">Actions:</p>
+      <ul class="whatsnext__list _whatsnext__list_h396h_11">
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-attribution/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage attribution </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-lambda-traced-invocations/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get hourly usage for Lambda traced invocations
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-application-security/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get hourly usage for application security
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-monthly-usage-attribution/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get monthly usage attribution </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-billable-usage-across-your-account/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get billable usage across your account
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-observability-pipelines/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get hourly usage for observability pipelines
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-all-custom-metrics-by-hourly-average/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get all custom metrics by hourly average
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-cost-across-multi-org-account/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get cost across multi-org account </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-estimated-cost-across-your-account/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get estimated cost across your account
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-usage-across-your-account/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get usage across your account </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-historical-cost-across-your-account/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get historical cost across your account
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-logs-by-index/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for logs by index </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-logs-usage-by-retention/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly logs usage by retention </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-projected-cost-across-your-account/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get projected cost across your account
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-hosts-and-containers/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get hourly usage for hosts and containers
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-monthly-cost-attribution/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get Monthly Cost Attribution </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-by-product-family/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage by product family </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-logs/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for logs </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-custom-metrics/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for custom metrics </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-usage-attribution-types/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get usage attribution types </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-active-billing-dimensions-for-cost-attribution/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get active billing dimensions for cost attribution
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-indexed-spans/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for indexed spans </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-billing-dimension-mapping-for-usage-endpoints/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get billing dimension mapping for usage endpoints
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-synthetics-checks/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get hourly usage for synthetics checks
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-synthetics-api-checks/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get hourly usage for synthetics API checks
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-synthetics-browser-checks/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get hourly usage for synthetics browser checks
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-fargate/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for Fargate </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-lambda/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for Lambda </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-rum-sessions/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for RUM sessions </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-network-hosts/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for network hosts </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-network-flows/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> get hourly usage for network flows </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-analyzed-logs/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for analyzed logs </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-snmp-devices/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for SNMP devices </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-ingested-spans/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for ingested spans </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-incident-management/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get hourly usage for incident management
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-iot/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for IoT </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-csm-pro/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for CSM Pro </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-cloud-workload-security/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get hourly usage for cloud workload security
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-database-monitoring/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get hourly usage for database monitoring
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-sensitive-data-scanner/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get hourly usage for sensitive data scanner
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-rum-units/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for RUM units </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-profiled-hosts/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for profiled hosts </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-ci-visibility/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for CI visibility </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-online-archive/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for online archive </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-hourly-usage-for-audit-logs/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get hourly usage for audit logs </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-the-list-of-available-daily-custom-reports/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get the list of available daily custom reports
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-specified-daily-custom-reports/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get specified daily custom reports </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-the-list-of-available-monthly-custom-reports/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60">
+              Get the list of available monthly custom reports
+            </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+        <li class="whatsnext__item _whatsnext__item_h396h_17">
+          <a
+            class="whatsnext__link _whatsnext__link_h396h_26"
+            href="/api/latest/usage-metering/get-specified-monthly-custom-reports/"
+          >
+            <span class="whatsnext__content _whatsnext__content_h396h_60"> Get specified monthly custom reports </span>
+            <span class="whatsnext__arrow _whatsnext__arrow_h396h_81" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+    </aside>
   </div>
 </main>

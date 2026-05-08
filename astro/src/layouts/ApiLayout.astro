@@ -78,13 +78,17 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
     top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
     z-index: 5;
     background: var(--color-bg);
-    padding: var(--space-sm) 0;
+    padding: 0;
   }
 
   @media (min-width: 992px) {
     .api-toolbar {
       top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop) - var(--hugo-header-shrink));
     }
+  }
+
+  :global(.main-nav-scrolled) .api-toolbar {
+    padding: var(--space-md) 0;
   }
 
   @media (max-width: 768px) {

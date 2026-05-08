@@ -13,7 +13,7 @@
         component-url="/_astro/LanguageSelector.HASH.js"
         component-export="LanguageSelector"
         renderer-url="/_astro/client.HASH.js"
-        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/usage-metering/get-hourly-usage-for-lambda/"]}],[0,{"code":[0,"fr"],"label":[0,"Français"],"href":[0,"/fr/api/latest/usage-metering/get-hourly-usage-for-lambda/"]}],[0,{"code":[0,"ja"],"label":[0,"日本語"],"href":[0,"/ja/api/latest/usage-metering/get-hourly-usage-for-lambda/"]}],[0,{"code":[0,"ko"],"label":[0,"한국어"],"href":[0,"/ko/api/latest/usage-metering/get-hourly-usage-for-lambda/"]}],[0,{"code":[0,"es"],"label":[0,"Español"],"href":[0,"/es/api/latest/usage-metering/get-hourly-usage-for-lambda/"]}]]],"currentCode":[0,"en"]}'
+        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/usage-metering/get-hourly-usage-for-lambda/"]}]]],"currentCode":[0,"en"]}'
         ssr
         client="load"
         opts='{"name":"LanguageSelector","value":true}'
@@ -23,10 +23,6 @@
             >Language</label
           ><select id="language-select" class="language-selector__select _language-selector__select_19nqn_15">
             <option selected value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="ja">日本語</option>
-            <option value="ko">한국어</option>
-            <option value="es">Español</option>
           </select>
         </div>
         <!--astro:end--></astro-island
@@ -58,37 +54,31 @@
     </div>
   </div>
   <div class="prose" data-astro-cid-hnecgxtf>
-    <section class="api-endpoint _api-endpoint_8m7lw_1" data-operation-id="GetUsageLambda">
-      <div
-        class="api-status-alert _api-status-alert_1orbj_1 api-status-alert--deprecated _api-status-alert--deprecated_1orbj_12"
-        role="alert"
-      >
-        <span class="api-status-alert__label _api-status-alert__label_1orbj_27">Deprecated</span>
-        <span class="api-status-alert__message _api-status-alert__message_1orbj_44">
-          This endpoint is deprecated.
-        </span>
-      </div>
-      <h1 id="get-hourly-usage-for-lambda" class="api-endpoint__heading _api-endpoint__heading_8m7lw_5">
-        Get hourly usage for Lambda<span class="api-endpoint__version-badge _api-endpoint__version-badge_8m7lw_11"
+    <section class="api-endpoint _api-endpoint_1ylu2_1" data-operation-id="GetUsageLambda">
+      <h1 id="get-hourly-usage-for-lambda" class="api-endpoint__heading _api-endpoint__heading_1ylu2_5">
+        Get hourly usage for Lambda<span class="api-endpoint__version-badge _api-endpoint__version-badge_1ylu2_11"
           >v1</span
         >
       </h1>
-      <div class="api-endpoint__url-line _api-endpoint__url-line_8m7lw_24">
+      <div class="alert _alert_1msim_1 alert--warning _alert--warning_1msim_19">
+        <strong class="alert__label _alert__label_1msim_27">Warning</strong> This endpoint is deprecated.
+      </div>
+      <div class="api-endpoint__url-line _api-endpoint__url-line_1ylu2_18">
         <span class="api-method-badge _api-method-badge_1pgph_1 api-method-badge--get _api-method-badge--get_1pgph_13">
           GET </span
-        ><code class="api-endpoint__path _api-endpoint__path_8m7lw_31" data-region="us"
+        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="us"
           >https://api.datadoghq.com/api/v1/usage/aws_lambda</code
-        ><code class="api-endpoint__path _api-endpoint__path_8m7lw_31" data-region="us3"
+        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="us3"
           >https://api.us3.datadoghq.com/api/v1/usage/aws_lambda</code
-        ><code class="api-endpoint__path _api-endpoint__path_8m7lw_31" data-region="us5"
+        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="us5"
           >https://api.us5.datadoghq.com/api/v1/usage/aws_lambda</code
-        ><code class="api-endpoint__path _api-endpoint__path_8m7lw_31" data-region="eu"
+        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="eu"
           >https://api.datadoghq.eu/api/v1/usage/aws_lambda</code
-        ><code class="api-endpoint__path _api-endpoint__path_8m7lw_31" data-region="ap1"
+        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="ap1"
           >https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda</code
-        ><code class="api-endpoint__path _api-endpoint__path_8m7lw_31" data-region="ap2"
+        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="ap2"
           >https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda</code
-        ><code class="api-endpoint__path _api-endpoint__path_8m7lw_31" data-region="gov"
+        ><code class="api-endpoint__path _api-endpoint__path_1ylu2_25" data-region="gov"
           >https://api.ddog-gov.com/api/v1/usage/aws_lambda</code
         >
       </div>
@@ -104,13 +94,13 @@
         >
         for the associated migration guide.
       </p>
-      <div class="api-endpoint__permissions _api-endpoint__permissions_8m7lw_46">
+      <div class="api-endpoint__permissions _api-endpoint__permissions_1ylu2_41">
         <strong>Permissions: </strong><code>usage_read</code>
       </div>
-      <div class="api-endpoint__permissions _api-endpoint__permissions_8m7lw_46">
+      <div class="api-endpoint__permissions _api-endpoint__permissions_1ylu2_41">
         <p>OAuth apps require the <code>usage_read</code> authorization scope to access this endpoint.</p>
       </div>
-      <div class="api-endpoint__section _api-endpoint__section_8m7lw_58">
+      <div class="api-endpoint__section _api-endpoint__section_1ylu2_53">
         <h3>Arguments</h3>
         <div id="schema-table-X19" class="schema-table">
           <div class="schema-table__table _schema-table__table_172t8_1">
@@ -887,7 +877,7 @@
           </div>
         </div>
       </div>
-      <hr class="api-endpoint__divider _api-endpoint__divider_8m7lw_99" />
+      <hr class="api-endpoint__divider _api-endpoint__divider_1ylu2_94" />
     </section>
   </div>
 </main>

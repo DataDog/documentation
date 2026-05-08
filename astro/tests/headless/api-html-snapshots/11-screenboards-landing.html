@@ -13,7 +13,7 @@
         component-url="/_astro/LanguageSelector.HASH.js"
         component-export="LanguageSelector"
         renderer-url="/_astro/client.HASH.js"
-        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/screenboards/"]}],[0,{"code":[0,"fr"],"label":[0,"Français"],"href":[0,"/fr/api/latest/screenboards/"]}],[0,{"code":[0,"ja"],"label":[0,"日本語"],"href":[0,"/ja/api/latest/screenboards/"]}],[0,{"code":[0,"ko"],"label":[0,"한국어"],"href":[0,"/ko/api/latest/screenboards/"]}],[0,{"code":[0,"es"],"label":[0,"Español"],"href":[0,"/es/api/latest/screenboards/"]}]]],"currentCode":[0,"en"]}'
+        props='{"options":[1,[[0,{"code":[0,"en"],"label":[0,"English"],"href":[0,"/api/latest/screenboards/"]}]]],"currentCode":[0,"en"]}'
         ssr
         client="load"
         opts='{"name":"LanguageSelector","value":true}'
@@ -23,10 +23,6 @@
             >Language</label
           ><select id="language-select" class="language-selector__select _language-selector__select_19nqn_15">
             <option selected value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="ja">日本語</option>
-            <option value="ko">한국어</option>
-            <option value="es">Español</option>
           </select>
         </div>
         <!--astro:end--></astro-island
@@ -58,15 +54,11 @@
     </div>
   </div>
   <div class="prose" data-astro-cid-hnecgxtf>
-    <h1 data-astro-cid-xz53zqur>Screenboards</h1>
-    <div
-      class="api-status-alert _api-status-alert_1orbj_1 api-status-alert--deprecated _api-status-alert--deprecated_1orbj_12"
-      role="alert"
-    >
-      <span class="api-status-alert__label _api-status-alert__label_1orbj_27">Deprecated</span>
-      <span class="api-status-alert__message _api-status-alert__message_1orbj_44"> This endpoint is deprecated. </span>
+    <h1>Screenboards</h1>
+    <div class="alert _alert_1msim_1 alert--warning _alert--warning_1msim_19">
+      <strong class="alert__label _alert__label_1msim_27">Warning</strong> This endpoint is deprecated.
     </div>
-    <div data-astro-cid-xz53zqur>
+    <div>
       <p>
         This endpoint is outdated. Use the
         <a href="https://docs.datadoghq.com/api/latest/dashboards/">new Dashboard endpoint</a> instead.
