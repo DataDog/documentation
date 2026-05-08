@@ -19,7 +19,7 @@ To start receiving code fixes, [set up the Bits AI Dev Agent][1]. Then, if Bits 
 {{< img src="bits_ai/bits_ai_sre_suggested_code_fix.png" alt="Flowchart showing Bits' investigation conclusion and a suggested code fix" style="width:100%;" >}}
 
 ## Remediation Recommendations
-
+Triage Suggestions help you coordinate the response without leaving the investigation page. Bits AI SRE uses investigation context to prefill messages, incident descriptions, or ticket metadata, so you can complete common response tasks with a single click.
 Bits AI SRE recommends corrective steps when applicable to the root cause. These recommendations can include fully configured commands that you copy and run in your terminal — for example, a `kubectl` command to restart a Kubernetes deployment, an AWS CLI call to adjust a resource, or a Terraform change to update infrastructure.
 
 Review each recommendation and command before running it in your environment.
