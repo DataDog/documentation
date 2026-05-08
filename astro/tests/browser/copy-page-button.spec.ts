@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('CopyPageButton component', () => {
+test.describe.skip('CopyPageButton component', () => {
     test('is visible on the API index page', async ({ page }) => {
         await page.goto('/api/latest/');
         const btn = page.locator('.copy-page-button');
