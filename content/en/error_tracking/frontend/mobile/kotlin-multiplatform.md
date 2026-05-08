@@ -98,7 +98,7 @@ Add the following Datadog iOS SDK dependencies, which are needed for the linking
 
 #### Adding native iOS dependencies using the CocoaPods plugin
 
-If you are using Kotlin Multiplatform library as a CocoaPods dependency for your iOS application, you can add dependencies as following:
+If you are using Kotlin Multiplatform library as a CocoaPods dependency for your iOS application, you can add dependencies as follows:
 
 ```kotlin
 cocoapods {
@@ -122,19 +122,19 @@ cocoapods {
 
 #### Adding native iOS dependencies using Xcode
 
-If you are integrating Kotlin Multiplatform library as a framework with an `embedAndSignAppleFrameworkForXcode` Gradle task as a part of your Xcode build, you can add the necessary dependencies directly in Xcode as following:
+If you are integrating Kotlin Multiplatform library as a framework with an `embedAndSignAppleFrameworkForXcode` Gradle task as a part of your Xcode build, you can add the necessary dependencies directly in Xcode as follows:
 
 1. Click on your project in Xcode and go to the **Package Dependencies** tab.
 2. Add the iOS SDK package dependency by adding `https://github.com/DataDog/dd-sdk-ios.git` as a package URL.
-3. Select the version from the table above.
+3. Select the version that matches the Kotlin Multiplatform SDK version you're using (see the [version compatibility guide][501]).
 4. Click on the necessary application target and open the **General** tab.
-5. Scroll down to the **Frameworks, Libraries, and Embedded Content** section and add the dependencies mentioned above.
+5. Scroll down to the **Frameworks, Libraries, and Embedded Content** section and add the dependencies (`DatadogObjc` and `DatadogCrashReporting`).
 
 #### Add app hang reporting
 
 App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
 
-By default, app hangs reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method. For more information, see [iOS Crash Reporting and Error Tracking - Add ANR Reporting][6].
+By default, app hang reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last for more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method. For more information, see [iOS Crash Reporting and Error Tracking - Add ANR Reporting][6].
 
 
 [501]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
@@ -148,7 +148,7 @@ By default, app hangs reporting is **disabled**, but you can enable it and set y
 
 1. Navigate to [**Digital Experience** > **Add an Application**][601].
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see the [Kotlin Multiplatform Data Collected][602].
+3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Kotlin Multiplatform Data Collected][602].
 
 To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][603] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code.
 
@@ -156,7 +156,7 @@ For more information about setting up a client token, see the [Client Token docu
 
 
 
-### step 4 - Initialize Datadog SDK
+### Step 4 - Initialize Datadog SDK
 
 In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][701].
 
@@ -340,7 +340,7 @@ Mapping files are limited in size to **500 MB** each, while dSYM files can go up
 The SDK handles crash reporting with the following behaviors:
 
 - The crash can only be detected after the SDK is initialized. Because of this, Datadog recommends that you initialize the SDK as soon as possible in your application.
-- Crashes must be attached to a session view. If a crash occurs before a view is visible, or after the app is sent to the background by the end-user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][9] in your `RumConfiguration` builder.
+- Crashes must be attached to a session view. If a crash occurs before a view is visible, or after the app is sent to the background by the end user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][9] in your `RumConfiguration` builder.
 - Only crashes that occur in sampled sessions are kept.
 
 ## Test your implementation
@@ -349,7 +349,7 @@ To verify your Kotlin Multiplatform Crash Reporting and Error Tracking configura
 
 To test your implementation:
 
-1. Run your application on an Kotlin Multiplatform emulator or a real device.
+1. Run your application on a Kotlin Multiplatform emulator or a real device.
 2. Execute some code containing an error or crash. For example:
 
    ```kotlin
@@ -381,7 +381,7 @@ Tracking consent can be one of the following values:
 - `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
 - `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You are not able to manually send any logs, traces, or events.
 
-To update the tracking consent after the SDK is initialized, call `Datadog.setTrackingConsent(<NEW CONSENT>)`. The SDK changes its behavior according to the new consent. For example, if the current tracking consent is `TrackingConsent.PENDING` and you update it to:
+To update the tracking consent value after the SDK is initialized, call `Datadog.setTrackingConsent(<NEW CONSENT>)`. The SDK changes its behavior according to the new consent. For example, if the current tracking consent value is `TrackingConsent.PENDING` and you update it to:
 
 - `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
 - `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.

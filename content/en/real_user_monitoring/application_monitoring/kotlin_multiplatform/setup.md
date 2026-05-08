@@ -405,6 +405,6 @@ This means that even if users open your application while offline, no data is lo
 [12]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
 [13]: /real_user_monitoring/explorer/
 [14]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
-[15]: /error_tracking/frontend/mobile/kotlin-multiplatform.md
+[15]: /error_tracking/frontend/mobile/kotlin-multiplatform
 [101]: https://app.datadoghq.com/rum/application/create
 [102]: /real_user_monitoring/kotlin_multiplatform/data_collected/
