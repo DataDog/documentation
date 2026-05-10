@@ -528,6 +528,65 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 - Help me debug why this widget is showing fractional values when it should be a count.
 - How do I configure a timeseries to show both bars and lines?
 
+## Data Streams
+
+Tools for investigating Kafka workloads with [Data Streams Monitoring][27], including topic, broker, and client configuration inspection, Schema Registry browsing, and on-demand reads of Kafka messages through the Datadog Agent.
+
+**Note**: All tools in this toolset require the [Kafka integration][28] to be configured for your Kafka clusters. If a call returns a setup error or an empty result, follow the [Kafka setup guide][28] to enable Data Streams Monitoring on your Agent before retrying.
+
+### `list_kafka_topic_configs`
+*Toolset: **data-streams***\
+*Permissions Required: `APM Read`*\
+Lists Kafka topic configuration overrides for a cluster, such as `cleanup.policy`, `retention.ms`, and `max.message.bytes`. You can optionally filter to a single topic. Use this to check whether topic-level settings explain producer or consumer behavior.
+
+- Show me the topic config for `checkout-orders`.
+- What is the retention setting on the orders Kafka topic?
+- Compare `max.message.bytes` across all topics in the payments cluster.
+
+### `list_kafka_broker_configs`
+*Toolset: **data-streams***\
+*Permissions Required: `APM Read`*\
+Lists Kafka broker-level configuration for a cluster, optionally filtered to a single broker. Use this to inspect broker tuning when consumers across multiple topics are affected.
+
+- Show me the broker configs for my Kafka cluster.
+- What's the `num.io.threads` setting on broker 3?
+- Compare broker configs between two clusters.
+
+### `get_kafka_client_configs`
+*Toolset: **data-streams***\
+*Permissions Required: `APM Read`*\
+Returns Kafka client (producer and consumer) configurations for a cluster, including consumer-group settings and client-side tuning.
+
+- Show me the consumer config for service `checkout-api` on the payments cluster.
+- What's the `session.timeout.ms` for consumer group `orders-processor`?
+- Compare producer configs across services on my Kafka cluster.
+
+### `list_all_kafka_schemas`
+*Toolset: **data-streams***\
+*Permissions Required: `APM Read`*\
+Lists all subjects for a cluster's schema registry. Use this when you don't know which subject name to inspect.
+
+- List all Schema Registry subjects.
+- What schemas are registered for the orders topic?
+
+### `get_subject_kafka_schemas`
+*Toolset: **data-streams***\
+*Permissions Required: `APM Read`*\
+Returns all schema versions for a single Schema Registry subject (schema body, ID, version, and references). Use this after `list_all_kafka_schemas` to inspect the version history of a specific subject.
+
+- Show every version of the `orders-value` schema.
+- What changed in the latest version of the `payments-key` schema?
+- Get the schema body for `checkout-orders-value` version 7.
+
+### `read_kafka_messages`
+*Toolset: **data-streams***\
+*Permissions Required: `APM Read` and `Data Streams Monitoring Capture Messages`*\
+Reads messages from a given Kafka cluster, topic, and partition through the Datadog Agent by dispatching a Remote Config action and polling for the Agent's response. This tool is rate-limited to 10 calls per minute per organization, and is useful for inspecting message payloads when investigating poison messages or stuck consumer offsets.
+
+- What are the last messages on topic `checkout-orders`?
+- Show me the most recent payloads produced to the orders Kafka topic.
+- Read the message at offset 12345 on partition 3 of the `payments` topic.
+
 ## Database Monitoring
 
 Tools for interacting with [Database Monitoring][26].
@@ -1139,6 +1198,8 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [15]: /api/latest/events/
 [24]: /tests/
 [26]: /database_monitoring/
+[27]: /data_streams/
+[28]: /data_streams/kafka/setup/
 [31]: /network_monitoring/cloud_network_monitoring/
 [32]: /network_monitoring/devices/
 [38]: /service_management/case_management/

@@ -545,6 +545,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
+- `data-streams`: Tools for investigating Kafka workloads with [Data Streams Monitoring][52], including topic, broker, and client configuration inspection, Schema Registry browsing, and on-demand reads of Kafka messages through the Datadog Agent
 - `dbm`: Tools for interacting with [Database Monitoring][33]
 - `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
@@ -739,3 +740,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [49]: /bits_ai/mcp_server/tools
 [50]: https://github.com/google-gemini/gemini-cli
 [51]: /containers/monitoring/kubernetes_explorer/
+[52]: /data_streams/
