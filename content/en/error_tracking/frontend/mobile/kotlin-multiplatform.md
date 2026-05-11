@@ -153,7 +153,7 @@ To ensure the safety of your data, you must use a client token. For more informa
 
 In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][701].
 
-During initialization, you can also set the tracking consent for GDPR compliance, as described below.
+During initialization, you can also set the tracking consent for GDPR compliance, as described in [Advanced Error Tracking Features](#advanced-error-tracking-features).
 
 {{< site-region region="us" >}}
 ```kotlin
@@ -283,7 +283,7 @@ fun initializeDatadog(context: Any? = null) {
             env = appEnvironment,
             variant = appVariantName
     )
-        .useSite(DatadogSite.US1_FED)
+        .useSite(DatadogSite.US2_FED)
         .trackCrashes(true)
         .build()
 
