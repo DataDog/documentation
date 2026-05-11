@@ -77,14 +77,14 @@ For manual setup, see [Set up Kubernetes Explorer with a DaemonSet][5].
 {{% /tab %}}
 {{% tab "OpenTelemetry" %}}
 
-<div class="alert alert-info">Native OpenTelemetry support for the Kubernetes Explorer is in Preview. Feature flags must be enabled for your Datadog instance. Contact your account team to request access.</div>
+<div class="alert alert-info">Native OpenTelemetry support for the Kubernetes Explorer is in Preview. Contact your account representative to request access.</div>
 
 You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline instead of the Datadog Agent. This setup uses the [`k8sobjects`][10] receiver to collect Kubernetes resource data and forwards it through the [Datadog Exporter's][11] orchestrator explorer functionality.
 
 #### Prerequisites
 
 - OpenTelemetry Collector Contrib [v0.142.0][12] or later.
-- Feature flags enabled on your Datadog instance. Contact your account team to verify activation.
+- Access enabled on your Datadog instance. Contact your account representative to verify activation.
 
 #### Limitations
 
@@ -300,7 +300,7 @@ Follow the [Datadog Exporter installation guide][11] to complete the exporter co
 
 #### Verify the installation
 
-Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name. Your pod and namespace data should appear in the Explorer.
+Open the [Kubernetes Explorer](https://app.datadoghq.com/orchestration/overview) and filter by your OpenTelemetry cluster name. Your pod and namespace data should appear in the Explorer.
 
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
 [11]: /opentelemetry/setup/collector_exporter/install/#2---configure-the-datadog-exporter-and-connector
