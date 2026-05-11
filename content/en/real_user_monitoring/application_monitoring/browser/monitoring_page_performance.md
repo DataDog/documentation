@@ -51,7 +51,7 @@ You can access performance telemetry for your views in:
 
 {{< img src="real_user_monitoring/browser/core-web-vitals-1.png" alt="Core Web Vitals summary visualization" >}}
 
-- Interaction to Next Paint and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
+- LCP and FCP are not collected for pages that start hidden (for example, opened in a background tab). For more on when each vital is reported and how to troubleshoot a missing value, see [When each Core Web Vital is collected](#when-each-core-web-vital-is-collected).
 - Telemetry collected from your real users' pageviews may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab telemetry, not real telemetry.
 
 | Datapoint                   | Focus            | Description                                                                                           | Target value |
@@ -69,6 +69,34 @@ RUM reports the element that is associated with each Core Web Vital instance:
 - For Interaction to Next Paint, RUM reports the CSS selector of the element associated with the longest interaction to the next paint.
 - For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
 - For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
+
+### When each core web vital is collected
+
+The RUM Browser SDK reports each Core Web Vital under different conditions. If a vital is missing from a view event, the SDK most likely did not capture a value for it.
+
+- **Largest Contentful Paint**: Reported on the initial view only. Captured when the `largest-contentful-paint` PerformanceObserver entry fires before the page is hidden and before the user's first interaction. Not reported if the page starts hidden, if the user interacts before any LCP entry arrives, or after a 10-minute cap.
+- **Interaction to Next Paint**: Reported on every view, including SPA route changes. Requires at least one user interaction during the view's lifetime. If the user never interacts, no INP value is emitted. Requires browser support for the `event` PerformanceObserver entry type and `PerformanceEventTiming.interactionId`. If unsupported, no INP value is emitted.
+- **Cumulative Layout Shift**: Reported on every view, including SPA route changes. Requires browser support for the `layout-shift` PerformanceObserver entry type and `WeakRef`. If unsupported, no CLS value is emitted.
+- **First Contentful Paint**: Reported on the initial view only. Captured when the entry fires before the page is hidden, within 10 minutes of view start.
+
+Values are captured up to the point of backgrounding; they are not discarded if a page is later hidden. A page that is hidden at view start (for example, opened in a background tab) emits no LCP or FCP.
+
+### Troubleshooting missing core web vitals
+
+If a Core Web Vital is missing from a view in the [RUM Explorer][4], check the following:
+
+| Symptom | Likely cause |
+|---|---|
+| INP missing on a view | The user did not interact with the page during this view; the browser does not support INP; or the view ended before any interaction. |
+| LCP or FCP missing on a view | The page was opened in a background tab or hidden window; the entry took longer than 10 minutes to fire; or this is a SPA route-change view (LCP and FCP are reported on the initial view only). |
+| CLS missing on a view | The browser does not support the `layout-shift` PerformanceObserver entry type or lacks `WeakRef`. |
+| Any vital below the expected threshold | Verify the loaded `@datadog/browser-rum` version meets the requirements in [Event timings and core web vitals](#event-timings-and-core-web-vitals). |
+
+To check that the SDK is collecting vitals:
+
+1. Open your browser's developer tools and run `window.DD_RUM.getInternalContext()` to confirm the SDK loaded.
+2. In the Network tab, look for view events being sent to the Datadog intake.
+3. In the [RUM Explorer][4], open the view event in question and confirm it has the expected `@view.*` attributes.
 
 ### Diagnose Core Web Vitals with subparts
 
