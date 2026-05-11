@@ -62,9 +62,12 @@ These metrics are reported under two operation names:
 
 An operation name of `universal.http.server` or `universal.http.client` on a service page indicates that the service telemetry comes from APM Basic.
 
-<div class="alert alert-info">APM Basic reports metrics under the <code>universal.http.*</code> namespace, not <code>trace.*</code>. The <code>universal.http.*</code> prefix indicates these metrics are collected without instrumentation.</div>
-
-<div class="alert alert-info">APM Basic metrics are collected at the kernel level using eBPF. Because APM Basic and full APM measure traffic at different layers (kernel vs. application), small discrepancies between the two sets of metrics are expected for the same service.</div>
+<div class="alert alert-info">
+<ul>
+<li>APM Basic reports metrics under the <code>universal.http.*</code> namespace, not <code>trace.*</code>. The <code>universal.http.*</code> prefix indicates these metrics are collected without instrumentation.</li>
+<li>APM Basic metrics are collected at the kernel level using eBPF. Because APM Basic and full APM measure traffic at different layers (kernel vs. application), small discrepancies between the two sets of metrics are expected for the same service.</li>
+</ul>
+</div>
 
 ### Supported protocols
 
@@ -114,7 +117,7 @@ After you configure the Agent, wait about five minutes for your services to appe
 
 If a service has both APM Basic and full APM telemetry, use the operation picker on the service page to switch between `universal.http.*` (APM Basic) and the instrumented operation names (full APM).
 
-{{< img src="tracing/apm_basic/operation-picker.png" alt="The operation picker on a service page, showing a toggle between APM Basic and instrumented operation names" style="width:80%;" >}}
+{{< img src="tracing/apm_basic/operation-picker.png" alt="The operation picker on a service page, showing a toggle between APM Basic and instrumented operation names" style="width:60%;" >}}
 
 After enabling APM Basic, you can:
 
