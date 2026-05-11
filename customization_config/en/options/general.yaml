@@ -508,11 +508,11 @@ options:
 - label: Elixir
   id: elixir
 
-- label: Amazon Aurora
-  id: aurora
+- label: BigQuery
+  id: bigquery
 
-- label: Amazon EC2
-  id: amazon_ec2
+- label: Databricks
+  id: databricks
 
 - label: Cloud SQL
   id: cloud_sql

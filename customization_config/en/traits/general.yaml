@@ -66,6 +66,7 @@ traits:
 - id: secrets_source
   label: Secrets source
   type: text
+<<<<<<< HEAD
   internal_notes: The location of the user's sensitive information, such as API keys or other credentials. For example, Secrets Management or environment variables.
 <<<<<<< HEAD
 =======
@@ -84,3 +85,6 @@ traits:
 =======
   internal_notes: For Database Monitoring docs — where the Datadog Agent process runs. For example, AWS Fargate, Amazon EKS, or an Amazon EC2 host.
 >>>>>>> cb5650d10e (Drop unsupported filter options + remove Coming soon stub)
+=======
+  internal_notes: The location of the user's sensitive information, such as API keys or other credentials. For example, Secrets Management or environment variables.
+>>>>>>> 81a586d397 (Replace cdocs implementation with standard tabs)

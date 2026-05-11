@@ -1,16 +1,6 @@
 ---
 title: Set up Database Monitoring with Terraform
 description: Provision the Datadog Agent for Database Monitoring with Terraform across managed and self-hosted databases.
-content_filters:
-  - trait_id: database
-    option_group_id: dbm_database_options
-    label: "Database"
-  - trait_id: db_hosting
-    option_group_id: dbm_db_hosting_options
-    label: "Database hosting"
-  - trait_id: agent_runtime
-    option_group_id: dbm_agent_runtime_options
-    label: "Agent runtime"
 further_reading:
 - link: "/database_monitoring/setup_postgres/rds/"
   tag: "Documentation"
@@ -25,7 +15,7 @@ further_reading:
 
 ## Overview
 
-This page walks through provisioning the Datadog Agent for Database Monitoring (DBM) with Terraform. Use the dropdowns at the top to pick your **database**, where it is **hosted**, and where the **Agent runs**.
+This page walks through provisioning the Datadog Agent for Database Monitoring (DBM) with Terraform. Select the tab for where the **Agent runs**.
 
 The Terraform examples used on this page live in [`DataDog/dd-database-monitoring-example`][1]. Each combination has its own directory with `main.tf`, `variables.tf`, `outputs.tf`, `versions.tf`, and a `terraform.tfvars.example` you can copy and edit. Path scheme:
 
@@ -33,11 +23,12 @@ The Terraform examples used on this page live in [`DataDog/dd-database-monitorin
 terraform/<database>/<cloud>/<agent-runtime>/
 ```
 
-The directory tree is keyed on **cloud** rather than the docs page's `<hosting>` filter — one Terraform module typically covers all of a cloud's database hosting flavors that share the same VPC and security-group semantics. For example, the ECS Fargate Agent against any AWS-side Postgres lives at `terraform/postgres/aws/ecs-fargate/` and works for `db_hosting` ∈ {`rds`, `aurora`, `self_hosted` (on EC2)}.
+The directory tree is keyed on **cloud** rather than the hosting type — one Terraform module typically covers all of a cloud's database hosting flavors that share the same VPC and security-group semantics. For example, the ECS Fargate Agent against any AWS-side Postgres lives at `terraform/postgres/aws/ecs-fargate/` and works for RDS, Aurora, and self-hosted Postgres on EC2.
 
 This page covers the **Agent** side of the setup. It does not provision the database, set database-side parameters, or create the `datadog` user inside the database. For those steps, see the per-database setup pages from [Database Monitoring][2].
 
-{% if and(equals($database, "postgres"), or(equals($db_hosting, "rds"), equals($db_hosting, "aurora"), equals($db_hosting, "self_hosted")), equals($agent_runtime, "ecs_fargate")) %}
+{{< tabs >}}
+{{% tab "ECS Fargate" %}}
 
 ## Hosting note
 
@@ -145,9 +136,9 @@ For the full input list and defaults, see [`variables.tf`][5] in the example dir
 | No data in the Datadog UI | The API key is wrong, `datadog_site` is mismatched, or the task can't reach `*.${DD_SITE}` (NAT egress missing) |
 | `query_samples` is empty | The `datadog.explain_statement` function is not created in the monitored database |
 
-{% /if %}
+{{% /tab %}}
 
-{% if and(equals($database, "postgres"), or(equals($db_hosting, "rds"), equals($db_hosting, "aurora"), equals($db_hosting, "self_hosted")), equals($agent_runtime, "amazon_eks")) %}
+{{% tab "Amazon EKS (EC2 nodes)" %}}
 
 ## Hosting note
 
@@ -161,7 +152,7 @@ For Postgres self-hosted outside AWS (on-premises, in another cloud), this AWS-s
 
 ## Architecture
 
-The Datadog Agent is installed on Amazon EKS with EC2 node groups via the official Helm chart. The Postgres check is configured as a **cluster check**: the Cluster Agent dispatches it to a dedicated Cluster Check Runner pod, so DBM data is emitted **once cluster-wide** rather than duplicated per node. The runner pod connects to the Postgres database from inside the cluster's VPC.
+The Datadog Agent is installed on Amazon EKS with EC2 node groups through the official Helm chart. The Postgres check is configured as a **cluster check**: the Cluster Agent dispatches it to a dedicated Cluster Check Runner pod, so DBM data is emitted **once cluster-wide** rather than duplicated per node. The runner pod connects to the Postgres database from inside the cluster's VPC.
 
 The example supports two modes:
 
@@ -191,7 +182,7 @@ The example supports two modes:
 
 ### Additionally for BYO mode
 
-- **AWS credentials** with permission to create security-group rules and to call `eks:DescribeCluster` / `eks:GetToken` for the target cluster, plus `kubectl`-equivalent permissions inside the cluster (typically the same IAM principal mapped via `aws-auth` or an EKS access entry).
+- **AWS credentials** with permission to create security-group rules and to call `eks:DescribeCluster` / `eks:GetToken` for the target cluster, plus `kubectl`-equivalent permissions inside the cluster (typically the same IAM principal mapped through `aws-auth` or an EKS access entry).
 - **An existing EKS cluster with EC2 node groups.** The node group's security group ID is required.
 - **Cluster networking** that lets the worker nodes reach `*.${DD_SITE}` over 443 (NAT gateway or a VPC endpoint).
 
@@ -296,9 +287,9 @@ For the full input list and defaults, see [`variables.tf`][8] in the example dir
 | `query_samples` is empty | The `datadog.explain_statement` function is not created in the monitored database |
 | `terraform plan` fails reading the EKS cluster | The IAM principal running Terraform lacks `eks:DescribeCluster` / `eks:GetToken`, or is not mapped in `aws-auth` / EKS access entries for the cluster |
 
-{% /if %}
+{{% /tab %}}
 
-{% if and(equals($database, "postgres"), or(equals($db_hosting, "rds"), equals($db_hosting, "aurora"), equals($db_hosting, "self_hosted")), equals($agent_runtime, "amazon_ec2")) %}
+{{% tab "Amazon EC2" %}}
 
 ## Hosting note
 
@@ -418,7 +409,8 @@ For the full input list and defaults, see [`variables.tf`][10] in the example di
 | `query_samples` is empty | The `datadog.explain_statement` function is not created in the monitored database |
 | `docker: command not found` on first SSH | `cloud-init` is still running. Wait ~60 seconds and re-check with `cloud-init status --wait`. |
 
-{% /if %}
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: https://github.com/DataDog/dd-database-monitoring-example
 [2]: /database_monitoring/
