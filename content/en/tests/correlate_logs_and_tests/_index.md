@@ -111,11 +111,11 @@ Use the following environment variable to enable log submission:
 {{% /tab %}}
 {{% tab "On-Premises CI provider (Datadog Agent)" %}}
 
-1. [Set up log collection](/logs/log_collection/) through the Datadog Agent.
-2. Follow the steps described in [Correlate Logs and Traces](/tracing/other_telemetry/connect_logs_and_traces/).
+1. [Set up log collection][1] through the Datadog Agent.
+2. Follow the steps described in [Correlate Logs and Traces][2].
 
-### Python
-
+[1]: /logs/log_collection/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/
 
 {{% /tab %}}
 {{< /tabs >}}
