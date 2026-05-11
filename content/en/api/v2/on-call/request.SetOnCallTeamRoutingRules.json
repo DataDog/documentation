@@ -30,9 +30,36 @@
           }
         },
         {
-          "policy_id": "ab000000-0000-0000-0000-000000000000",
-          "query": "",
-          "urgency": "low"
+          "actions": [
+            {
+              "ack_timeout_minutes": 10,
+              "policy_id": "ab000000-0000-0000-0000-000000000000",
+              "support_hours": {
+                "time_zone": "Europe/Paris",
+                "restrictions": [
+                  {
+                    "end_day": "friday",
+                    "end_time": "17:00:00",
+                    "start_day": "monday",
+                    "start_time": "09:00:00"
+                  }
+                ]
+              },
+              "type": "escalation_policy",
+              "urgency": "low"
+            }
+          ],
+          "query": "tags.service:test"
+        },
+        {
+          "actions": [
+            {
+              "policy_id": "ab000000-0000-0000-0000-000000000000",
+              "type": "escalation_policy",
+              "urgency": "low"
+            }
+          ],
+          "query": ""
         }
       ]
     },
