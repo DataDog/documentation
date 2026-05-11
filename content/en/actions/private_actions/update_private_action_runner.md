@@ -75,7 +75,7 @@ Update the Datadog Operator and Agent image versions in your DatadogAgent manife
        --set image.tag=latest
    ```
 
-   You can pin a specific version. See available tags on [the Datadog Container Registry][102].
+   You can pin a specific version. To browse available tags, use [Docker Hub][102].
 
 2. Update the Agent image versions in your `datadog-agent.yaml` manifest:
 
@@ -102,7 +102,7 @@ Update the Datadog Operator and Agent image versions in your DatadogAgent manife
    kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=100 | grep private
    ```
 
-[102]: https://registry.datadoghq.com/v2/operator/tags/list
+[102]: https://hub.docker.com/r/datadog/operator/tags
 
 {{% /tab %}}
 
