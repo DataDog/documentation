@@ -1309,7 +1309,6 @@
     "request_schema_description": "Request for editing a downtime."
   },
   "CreateEmailTransportWebhookIntake": {
-    "description": "Receives a batch of email transport webhook log events and emits an audit trail entry\nfor each event with a final delivery status (delivered, dropped, or bounced).\nOnly authorized organizations can submit events.",
     "summary": "Ingest email transport webhook events",
     "request_description": "",
     "request_schema_description": "A batch of email transport webhook log events."
