@@ -352,6 +352,79 @@ export default function App() {
 
 {% /site-region %}
 
+{% site-region region="gov2" %}
+
+```javascript
+import {
+    SdkVerbosity,
+    DatadogProvider,
+    DatadogProviderConfiguration,
+    PropagatorType,
+    TrackingConsent
+} from '@datadog/mobile-react-native';
+
+// Configure Datadog SDK
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    TrackingConsent.GRANTED,
+    {
+        // Optional: Configure the Datadog Site to target. Default is 'US1'.
+        site: 'US2_FED',
+        // Optional: Set the reported service name (by default, it uses the package name or bundleIdentifier of your Android or iOS app respectively)
+        service: 'com.example.reactnative',
+        // Optional: Let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
+        verbosity: SdkVerbosity.WARN,
+        // Enable RUM
+        rumConfiguration: {
+            // Required: RUM Application ID
+            applicationId: '<APPLICATION_ID>',
+            // Track user interactions (set to false if using Error Tracking only)
+            trackInteractions: true,
+            // Track XHR resources (set to false if using Error Tracking only)
+            trackResources: true,
+            // Track errors
+            trackErrors: true,
+            // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
+            sessionSampleRate: 80,
+            // Optional: Enable or disable native crash reports.
+            nativeCrashReportEnabled: true,
+            // Optional: Sample tracing integrations for network calls between your app and your backend
+            // (in this example, 80% of calls to your instrumented backend are linked from the RUM view to
+            // the APM view. Default is 20%).
+            // You need to specify the hosts of your backends to enable tracing with these backends
+            resourceTraceSampleRate: 80,
+            firstPartyHosts: [
+                {
+                    match: 'example.com',
+                    propagatorTypes: [
+                        PropagatorType.DATADOG,
+                        PropagatorType.TRACECONTEXT
+                    ]
+                }
+            ]
+        },
+        // Enable Logs with default configuration
+        logsConfiguration: {},
+        // Enable Trace with default configuration
+        traceConfiguration: {}
+    }
+);
+
+// Wrap the content of your App component in a DatadogProvider component, passing it your configuration:
+export default function App() {
+    return (
+        <DatadogProvider configuration={config}>
+            <Navigation />
+        </DatadogProvider>
+    );
+}
+
+// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
+```
+
+{% /site-region %}
+
 #### Sample session rates
 
 To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK](#step-3--initialize-the-library-with-application-context) as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.

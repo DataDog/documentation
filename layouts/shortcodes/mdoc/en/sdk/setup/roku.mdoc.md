@@ -9,8 +9,9 @@ The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and higher.
 
 ## Setup
 
-### Step 1 - Declare the SDK as a dependency
+{% stepper %}
 
+{% step title="Declare the SDK as a dependency" %}
 #### Using ROPM (recommended)
 
 `ROPM` is a package manager for the Roku platform (based on NPM). If you're not already using `ROPM` in your Roku project, read their [Getting started guide][3]. Once your project is set up to use `ROPM`, you can use the following command to install the Datadog dependency:
@@ -25,8 +26,9 @@ If your project does not use `ROPM`, install the library manually by downloading
 and unzipping it in your project's root folder.
 
 Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and `source` folders of your project.
+{% /step %}
 
-### Step 2 - Specify application details in the UI
+{% step title="Specify application details in the UI" %}
 
 1. Navigate to [**Digital Experience** > **Add an Application**][5].
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
@@ -39,8 +41,9 @@ If you've purchased Error Tracking as a standalone product (without RUM), naviga
 To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][8] to configure the `dd-sdk-roku` library, they are exposed client-side in the Roku channel's BrightScript code.
 
 For more information about setting up a client token, see the [Client Token documentation][9].
+{% /step %}
 
-### Step 3 - Initialize the library
+{% step title="Initialize the library" %}
 
 In the initialization snippet, set an environment name. For more information, see [Using Tags][10].
 
@@ -66,6 +69,9 @@ end sub
 #### Sample session rates
 
 To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Roku SDK][11]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+{% /step %}
+
+{% /stepper %}
 
 ## Instrument the channel
 

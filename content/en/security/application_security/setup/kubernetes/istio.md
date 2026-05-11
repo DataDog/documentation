@@ -206,7 +206,7 @@ Configure the connection from the security processor to the Datadog Agent using 
 | `DD_AGENT_HOST`                        | `localhost`   | Hostname or IP of your Datadog Agent.                                            |
 | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                                  |
 
-The security processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go Tracing Library][8] and [App and API Protection Library Configuration][9].
+The security processor is built on top of the [Datadog Go Tracer][7] and inherits all of its environment variables. See [Configuring the Go SDK][8] and [App and API Protection Library Configuration][9].
 
 <div class="alert alert-info">
   Because the Datadog security processor is built on top of the Datadog Go tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.

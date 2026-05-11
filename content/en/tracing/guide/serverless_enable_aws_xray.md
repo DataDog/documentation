@@ -28,7 +28,7 @@ The `BatchGetTraces` permission is used to return the full traces. The `GetTrace
 To get the most out of the AWS X-Ray integration:
 
 - Enable it on your Lambda functions and API Gateways, either using the Serverless Framework plugin or manually; and
-- Install the tracing libraries in your Lambda functions.
+- Install the SDKs in your Lambda functions.
 
 #### [Recommended] Datadog Serverless Framework plugin
 
@@ -61,7 +61,7 @@ Install the library, import it into your Lambda projects, and patch the services
 
 {{< programming-lang lang="nodejs" >}}
 
-Install the X-Ray tracing library:
+Install the X-Ray SDK:
 
 ```bash
 
@@ -110,7 +110,7 @@ For further configuration, creating subsegments, and recording annotations, see 
 
 {{< programming-lang lang="python" >}}
 
-Install the X-Ray tracing library:
+Install the X-Ray SDK:
 
 ```bash
 pip install aws-xray-sdk

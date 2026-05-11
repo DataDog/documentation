@@ -599,7 +599,7 @@ For more information, see [Code Coverage][6].
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the tracer.
+The following is a list of the most important configuration settings that can be used with the SDK.
 
 `test_session.name`
 : Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
@@ -769,6 +769,12 @@ Mocha's [--exit][16] option may cause data loss. Datadog tries to send data imme
 ### Vitest's browser mode
 Vitest's [browser mode][17] is not supported.
 
+### Vitest's test duration overhead
+
+By default, Vitest's [`isolate`][21] option is `true`, so each test file runs in its own fork or thread. Vitest is ESM-first and relies on [import-in-the-middle][20] for instrumentation, which incurs a setup cost every time a suite starts. With isolation, that setup cost is repeated for every file. The effect is largest when you have many small, fast suites, because setup time can dominate wall-clock time.
+
+To lower overhead, set `isolate: false` in your Vitest config file, or pass `--no-isolate` to the test command.
+
 ## Best practices
 
 Follow these practices to take full advantage of the testing framework and Test Optimization.
@@ -859,3 +865,5 @@ Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary betwe
 [17]: https://vitest.dev/guide/browser/
 [18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [19]: https://www.npmjs.com/package/mocha-each
+[20]: https://github.com/nodejs/import-in-the-middle
+[21]: https://vitest.dev/config/isolate

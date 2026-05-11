@@ -11,11 +11,11 @@ aliases:
 Before setting up Runtime Code Analysis (IAST), ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
-2. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
+2. **Supported SDK:** The Datadog SDK used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
 
-<div class="alert alert-info">The Datadog Agent and tracing library are the only requirements for IAST. APM tracing and Infrastructure Monitoring are not required; IAST reports findings independently of both. To disable APM or Infrastructure Monitoring, see <a href="#disable-apm-and-infrastructure-monitoring">Disable APM and Infrastructure Monitoring</a>.</div>
+<div class="alert alert-info">The Datadog Agent and SDK are the only requirements for IAST. APM tracing and Infrastructure Monitoring are not required; IAST reports findings independently of both. To disable APM or Infrastructure Monitoring, see <a href="#disable-apm-and-infrastructure-monitoring">Disable APM and Infrastructure Monitoring</a>.</div>
 
-## Using Datadog Tracing Libraries
+## Using Datadog SDKs
 
 Select your application language for details on how to enable Runtime Code Analysis (IAST) for your language and infrastructure types.
 
@@ -27,7 +27,7 @@ You can detect code-level vulnerabilities and monitor application security in Ja
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -133,7 +133,7 @@ You can detect code-level vulnerabilities and monitor application security in .N
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][3] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start-up script:
 
    ```sh
@@ -261,10 +261,10 @@ You can detect code-level vulnerabilities and monitor application security in No
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][4] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
-   If you initialize the APM library on the command line using the `--require` option to Node.js:
+   If you initialize the Datadog SDK on the command line using the `--require` option to Node.js:
 
    ```shell
    node --require dd-trace/init app.js
@@ -348,7 +348,7 @@ You can detect code-level vulnerabilities and monitor application security in Py
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -479,14 +479,14 @@ DD_INFRASTRUCTURE_MODE=none
 
 ## Compatibility Requirements
 
-The following code security capabilities are supported relative to each language's tracing library:
+The following code security capabilities are supported relative to each language's SDK:
 
 | Code Security capability                      | Java    | .NET     | Node.js    | Python      | Go             | Ruby          | PHP           |
 |-----------------------------------------------|---------|----------|------------|-------------|----------------|---------------|---------------|
 | Runtime Software Composition Analysis (SCA)   | 1.1.4   | 2.16.0   | 4.0.0      | 1.5.0       | 1.49.0         | 1.11.0        | 0.90.0        |
 | Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0     | 3.18.0      | not supported  | not supported | not supported |
 
-**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require Datadog's tracing library. Therefore, the requirements listed below do not apply to these two Code Security capabilities.
+**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require the Datadog SDK. Therefore, the requirements listed below do not apply to these two Code Security capabilities.
 
 Select your application language for details about framework compatibility and feature support.
 

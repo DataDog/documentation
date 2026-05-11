@@ -21,7 +21,7 @@ Continuous Profiler for AWS Lambda is in Preview.
 
 To enable profiling:
 
-1. Ensure you have [installed the associated tracing library][2] in your Lambda function.
+1. Ensure you have [installed the associated SDK][2] in your Lambda function.
 2. Set the `DD_PROFILING_ENABLED` environment variable to `true`.
 
 Data is available after a minimum of 60 execution seconds of the Lambda function.

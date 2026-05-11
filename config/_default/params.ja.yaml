@@ -10,3 +10,5 @@ meta_title: Datadogを始めてみましょう
 site_name: Datadogでインフラストラクチャーとアプリケーションのモニタリング
 translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。
 site_support_banner: "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."
+us2_fed_integration_banner_availability: "To find out if this integration is available in your organization, see your <a href=\"https://app.datadoghq.com/integrations\">Datadog Integrations</a> page or ask your organization administrator."
+us2_fed_integration_banner_exception: "To initiate an exception request to enable this integration for your organization, email <a href=\"mailto:support@ddog-gov.com\">support@ddog-gov.com</a>."

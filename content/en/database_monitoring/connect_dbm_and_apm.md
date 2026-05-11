@@ -22,7 +22,7 @@ Data privacy
 : Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third parties that have been granted access to the database.
 
 
-APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
+Datadog SDK integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
 
 | Propagation mode | Description |
 |:-----------------|:------------|
@@ -81,7 +81,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 For `full` mode with Java and .NET:
 
-<div class="alert alert-danger">If your application uses <code>context_info</code> for instrumentation, the APM tracer overwrites it.</div>
+<div class="alert alert-danger">If your application uses <code>context_info</code> for instrumentation, the Datadog SDK overwrites it.</div>
 
 - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
 - Prerequisites:
@@ -426,7 +426,7 @@ Enable the database monitoring propagation feature using one of the following me
    DD_DBM_PROPAGATION_MODE=full
    ```
 
-* Set the tracer to use the `dbmPropagationMode` option (default: `ENV['DD_DBM_PROPAGATION_MODE']`):
+* Set the SDK to use the `dbmPropagationMode` option (default: `ENV['DD_DBM_PROPAGATION_MODE']`):
    ```javascript
    const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
    ```

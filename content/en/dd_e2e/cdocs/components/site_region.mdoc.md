@@ -1,6 +1,7 @@
 ---
 title: Site region
 draft: true
+private: true
 ---
 
 ## Overview

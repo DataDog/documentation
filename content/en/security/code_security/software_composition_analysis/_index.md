@@ -39,6 +39,7 @@ Using Software Composition Analysis provides organizations with the following be
 - Identification of emerging and known vulnerabilities affecting open source libraries
 - Risk-based prioritization and remediation based on runtime detection of vulnerabilities
 - Identification of malicious packages, end-of-life libraries, and library riskiness based on OpenSSF standards
+- Export a Software Bill of Materials (SBOM) of detected libraries in CycloneDX 1.6 or SPDX 2.3 format
 
 ## How it works
 
@@ -116,6 +117,19 @@ Use the Library Inventory to understand which dependencies you rely on, where th
 
 To learn more about how the inventory is generated, how Static and Runtime data differ, and how to interpret the library details (usage, vulnerabilities, licenses, versions, and OpenSSF score), see [Library Inventory][14].
 
+### Export a Software Bill of Materials
+
+Export a SBOM of your third-party libraries directly from the [Library Inventory][8]. The exported SBOM includes libraries detected both statically (with Static SCA) and at runtime (with Runtime SCA), giving you a single, comprehensive view of your software supply chain.
+
+Datadog supports the following SBOM formats:
+
+- **CycloneDX 1.6**
+- **SPDX 2.3**
+
+Use the exported SBOM to share dependency data with downstream consumers, satisfy compliance and regulatory requirements, or feed into other supply chain tooling.
+
+For details on how to generate and download an SBOM, see [Library Inventory][29].
+
 ### Create tickets from findings
 
 You can create a bidirectional ticket in Jira or ServiceNow directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and your ticketing tool. For more information, see [Ticketing integrations][19].
@@ -153,19 +167,17 @@ Datadog continuously matches newly published advisories against the stored libra
 - The Repositories Explorer remains a fixed, point-in-time record of what was known at scan time and does not update when new advisories are published.
 
 ### Vulnerability lifecycle
-Vulnerabilities detected in libraries by SCA **at runtime** are closed by Datadog after a certain period, depending on the service's usage of the vulnerable library.
 
-- **Hot Libraries:**
-Libraries from services that are alive for more than 2 hours.
-  - **When vulnerabilities are auto-closed by Datadog:** After 1 day, if they are not detected again and the service is running on all environments where the vulnerability was detected.
+Datadog tracks SCA vulnerabilities differently depending on where they are detected. **Static SCA** findings are scoped to a **repository** and are based on repository scans. **Runtime SCA** findings are scoped to a **service** and are based on libraries that are loaded and used by running services.
 
-- **Lazy Libraries:**
-Libraries that are loaded more than 1 hour after the service has started.
-  - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
+A vulnerability is opened when Datadog detects a vulnerable library in the relevant scope. A vulnerability is closed when Datadog no longer detects it according to the life cycle rules for that product.
 
-- **Cold Libraries:**
-Libraries from services that are alive for less than 2 hours (such as jobs).
-  - **When vulnerabilities are auto-closed by Datadog:** After 5 days, if they have not been detected again during this period.
+| Product | Scope | Scenario | When a vulnerability is opened | When a vulnerability is closed |
+|---|---|---|---|---|
+| Static SCA | Repository | Repository scan | Datadog detects a vulnerable library in a scanned repository. | The vulnerability was last seen more than three hours ago and is not detected in the latest scanned commit. |
+| Runtime SCA | Service | Long-running service | Datadog detects a vulnerable library in a running service. | After one day, if the vulnerability is not detected again and the service is running in all environments where the vulnerability was detected. |
+| Runtime SCA | Service | Library loaded later in the service life cycle | Datadog detects a vulnerable library in a running service. | After five days, if the vulnerability is not detected again during that period. |
+| Runtime SCA | Service | Short-lived service or job | Datadog detects a vulnerable library in a running service. | After five days, if the vulnerability is not detected again during that period. |
 
 ## SCA language support
 
@@ -212,3 +224,4 @@ You can exclude paths from Static SCA analysis by configuring `ignore-paths` in 
 [26]: https://github.com/DataDog/guarddog
 [27]: /security/code_security/software_composition_analysis/configuration/
 [28]: /security/code_security/guides/configuration/
+[29]: /security/code_security/software_composition_analysis/library_inventory/#export-a-software-bill-of-materials-sbom

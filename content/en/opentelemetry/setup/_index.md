@@ -7,6 +7,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/otel-deployments/"
   tag: "Blog"
   text: "How to select your OpenTelemetry deployment"
+- link: "https://learn.datadoghq.com/courses/otel-with-datadog"
+  tag: "Learning Center"
+  text: "Introduction to OpenTelemetry with Datadog"
+- link: "https://learn.datadoghq.com/courses/using-ddot"
+  tag: "Learning Center"
+  text: "Using the Datadog Distribution of OpenTelemetry Collector"
+
 ---
 
 This page describes all of the ways you can send OpenTelemetry (OTel) data to Datadog.
