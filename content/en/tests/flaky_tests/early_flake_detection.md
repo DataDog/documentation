@@ -103,16 +103,9 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{< /tabs >}}
 
-### Known Tests endpoint size limit
-
-If your test service has more than 100,000 known tests, you must use a Datadog library version that supports pagination on the known tests endpoint. Recent libraries paginate transparently; older versions cannot fetch a list of this size and the request fails.
-
-When the library cannot retrieve the known tests baseline for a session:
-
-- Early Flake Detection does not run: there is no `@test.early_flake.enabled` tag, and tests that would otherwise be detected as new are not retried.
-- Tests are not tagged with `@test.is_new`.
-
-The minimum tracer versions in [Compatibility](#compatibility) cover EFD's initial release. Pagination support arrived later. To resolve, upgrade your Datadog library.
+<div class="alert alert-warning">
+Test services with more than 100,000 known tests require a Datadog library version that supports pagination on the known tests endpoint. The minimum versions above cover EFD's initial release; pagination support arrived later. Without it, the library cannot fetch the known tests baseline and Early Flake Detection does not run for that session.
+</div>
 
 ## Explore results in the Test Optimization Explorer
 
@@ -131,7 +124,7 @@ This could be caused by a couple of reasons:
 
 * This test has ran previously.
 * This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
-* Your test service has more than 100,000 known tests. See [Known Tests endpoint size limit](#known-tests-endpoint-size-limit).
+* Your test service has more than 100,000 known tests and your Datadog library version does not support pagination on the known tests endpoint.
 
 ### A test was retried that is not new
 
