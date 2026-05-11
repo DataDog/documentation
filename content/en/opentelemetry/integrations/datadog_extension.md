@@ -97,7 +97,7 @@ The Collector automatically attaches `service.name`, `service.version`, and `ser
 ### 5. (Optional) Configure gateway topology (preview)
 
 <div class="alert alert-info">
-The Gateway topology view in <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> is a preview feature. The Datadog Extension config fields below are available in OpenTelemetry Collector v0.150.0 and later.
+The Gateway topology view in <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> is a preview feature. Please contact Datadog support to join the preview. The Datadog Extension config fields below are available in OpenTelemetry Collector v0.150.0 and later.
 </div>
 
 When you have an OpenTelemetry Collector gateway setup that forwards telemetry through one or more gateway Collectors before reaching Datadog, the Datadog Extension can publish the topology so it appears as a connected pipeline graph in [Fleet Automation][7]:
