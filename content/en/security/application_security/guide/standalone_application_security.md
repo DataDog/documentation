@@ -34,8 +34,8 @@ Standalone App and API Protection uses the same Datadog Agent setup as APM. For 
 
 To disable Infrastructure Monitoring, set the Datadog Agent infrastructure mode to `none` using either:
 
-- The `DD_INFRASTRUCTURE_MODE=none` environment variable, or
-- The `infrastructure_mode: none` setting in the `datadog.yaml` configuration file.
+- The `DD_INFRASTRUCTURE_MODE=none` environment variable
+- The `infrastructure_mode: none` setting in the `datadog.yaml` configuration file
 
 For more details, see the configuration page for [the Datadog Agent infrastructure mode][8].
 
