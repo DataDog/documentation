@@ -62,22 +62,22 @@ This table shows the mapping of concepts between Datadog CI Visibility and GitHu
 The [GitHub Actions][1] integration uses a private [GitHub App][11] to collect workflow information. If you already have an app, you can skip to the next section.
 
 1. Go to the [GitHub integration tile][12].
-2. Click **+ Create GitHub App**.
+2. Click {{< ui >}}+ Create GitHub App{{< /ui >}}.
 3. Configure the integration for a personal or organization account and enter the name of the GitHub organization.
 3. Select the Datadog features you want to enable for the GitHub App.
-4. In the **Edit Permissions** section, grant `Actions: Read Only` access.
-5. Click **Create App in GitHub** to finish the app creation process on GitHub.
+4. In the {{< ui >}}Edit Permissions{{< /ui >}} section, grant `Actions: Read Only` access.
+5. Click {{< ui >}}Create App in GitHub{{< /ui >}} to finish the app creation process on GitHub.
 6. Give the app a name, for example, `Datadog CI Visibility`.
-7. Click **Install GitHub App** and follow the instructions on GitHub.
+7. Click {{< ui >}}Install GitHub App{{< /ui >}} and follow the instructions on GitHub.
 
 ### Configure CI Visibility for GitHub Actions
 
 After the GitHub App is created and installed, enable CI Visibility on the accounts and/or repositories you want visibility into.
 
 1. In Datadog, navigate to [**Software Delivery** > **CI Visibility** > **Add a Pipeline Provider**][13] and select **GitHub**.
-2. Click **Enable Account** for the account you want to enable.
-3. Enable CI Visibility for the whole account by clicking the toggle next to **Enable CI Visibility**.
-4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable CI Visibility** toggle.
+2. Click {{< ui >}}Enable Account{{< /ui >}} for the account you want to enable.
+3. Enable CI Visibility for the whole account by clicking the toggle next to {{< ui >}}Enable CI Visibility{{< /ui >}}.
+4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the {{< ui >}}Enable CI Visibility{{< /ui >}} toggle.
 
 Pipelines appear immediately after enabling CI Visibility for any account or repository.
 
@@ -86,8 +86,8 @@ Pipelines appear immediately after enabling CI Visibility for any account or rep
 To disable the CI Visibility GitHub Actions integration:
 
 1. Go to the [CI GitHub Settings][14] page.
-2. Choose the GitHub account that you want to disable CI Visibility for, and click **Account Enabled**.
-3. Untoggle **Enable CI Visibility**, or choose which repository you want to disable it for individually.
+2. Choose the GitHub account that you want to disable CI Visibility for, and click {{< ui >}}Account Enabled{{< /ui >}}.
+3. Untoggle {{< ui >}}Enable CI Visibility{{< /ui >}}, or choose which repository you want to disable it for individually.
 
 ### Collect job logs
 
@@ -96,9 +96,9 @@ The GitHub Actions CI Visibility integration also allows you to automatically fo
 To enable job logs collection:
 
 1. In Datadog, navigate to [**Software Delivery** > **CI Visibility** > **Add a Pipeline Provider**][13] and select **GitHub**.
-2. Click **Enable Account** for the account you want to enable.
-3. Enable Job Logs Collection for the whole account by clicking the toggle next to **Enable Job Logs Collection**.
-4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the **Enable Job Logs Collection** toggle.
+2. Click {{< ui >}}Enable Account{{< /ui >}} for the account you want to enable.
+3. Enable Job Logs Collection for the whole account by clicking the toggle next to {{< ui >}}Enable Job Logs Collection{{< /ui >}}.
+4. Alternatively, you can enable individual repositories by scrolling through the repository list and clicking the {{< ui >}}Enable Job Logs Collection{{< /ui >}} toggle.
 
 Immediately after toggling logs collection, workflow job logs are forwarded to Datadog Log Management. Log files larger than 1 GiB are truncated.
 
@@ -112,7 +112,7 @@ The GitHub Actions CI Visibility integration allows for correlation between infr
 
 - For other configurations: To correlate jobs with the hosts running them, ensure the GitHub runner name matches the machine's hostname.
 
-To see the metrics, click on a job span in the trace view. A window opens with an **Infrastructure** tab displaying the host metrics.
+To see the metrics, click on a job span in the trace view. A window opens with an {{< ui >}}Infrastructure{{< /ui >}} tab displaying the host metrics.
 
 ### CI jobs failure analysis
 
@@ -126,7 +126,7 @@ For a full explanation, see the guide on [using CI jobs failure analysis][23].
 
 The [**CI Pipeline List**][17] and [**Executions**][18] pages populate with data after the pipelines finish.
 
-The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][19].
+The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][19].
 
 ## Further reading
 

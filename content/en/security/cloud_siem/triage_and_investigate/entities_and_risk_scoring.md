@@ -6,6 +6,12 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/risk-prioritization-entity-analytics/"
       tag: Blog
       text: "Accelerate investigations with Datadog Cloud SIEM Risk-based Insights and AWS Entity Analytics"
+    - link: "https://www.datadoghq.com/blog/ai-powered-threat-analysis"
+      tag: "Blog"
+      text: "AI in cloud security investigations: The role of UEBA and better telemetry"
+    - link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
+      tag: "Blog"
+      text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
 ---
 
 ## Overview
@@ -52,7 +58,7 @@ The **Next steps** section of the entity side panel includes the available mitig
 
 ## Configure notifications for Risk Insights
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">Notification rules are not supported for the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Notification rules are not supported for the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 You can configure Datadog to send you notifications as soon as it detects new threats that match your criteria.

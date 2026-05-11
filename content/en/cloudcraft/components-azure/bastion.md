@@ -12,10 +12,10 @@ You can use the Bastion component to represent and visualize bastion servers fro
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Tier**: Select the service level tier for your bastion server.
-- **Scale units**: Enter the number of scale units for your bastion server. This option is only available for the Standard tier.
-- **Outbound data transfer (GB)**: Enter the total volume of outbound data transferred by your bastion server in gigabytes.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Tier{{< /ui >}}: Select the service level tier for your bastion server.
+- {{< ui >}}Scale units{{< /ui >}}: Enter the number of scale units for your bastion server. This option is only available for the Standard tier.
+- {{< ui >}}Outbound data transfer (GB){{< /ui >}}: Enter the total volume of outbound data transferred by your bastion server in gigabytes.
 
 ## API
 

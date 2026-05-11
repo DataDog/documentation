@@ -15,7 +15,6 @@
           "position": 1
         }
       ],
-      "enabled": true,
       "type": "internal",
       "visualization_type": "bars_and_uptime_percentage"
     },

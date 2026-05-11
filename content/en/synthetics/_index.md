@@ -4,18 +4,12 @@ description: "Use automated testing to ensure the most critical parts of your sy
 aliases:
   - /integrations/synthetics/
 further_reading:
-- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
-  tag: "Blog"
-  text: "From performance to impact: Bridging frontend teams through shared context"
-- link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
-  tag: "Release Notes"
-  text: "Check out the latest Datadog Synthetic Monitoring releases! (App login required)"
-- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
-  tag: 'Learning Center'
-  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
+  tag: 'Learning Center'
+  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to enhance your synthetic testing capabilities"
@@ -40,6 +34,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-terraform-synthetic-testing/"
   tag: "Blog"
   text: "Automating your synthetic test infrastructure with Datadog Synthetic Monitoring and Terraform"
+- link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
+  tag: "Blog"
+  text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
+- link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog Synthetic Monitoring releases! (App login required)"
 algolia:
   tags: ['synthetics']
 cascade:

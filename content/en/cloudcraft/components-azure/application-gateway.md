@@ -12,15 +12,15 @@ You can use the Application Gateway component to represent and visualize applica
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Tier**: Select the service level tier for your application gateway.
-- **Size**: Select the size of your application gateway. This option is only available for the Standard and WAF tiers.
-- **Instances**: Enter the number of instances for high-availability scenarios. This option is only available for the Standard and WAF tiers.
-- **Compute units**: Enter the measure of compute capacity consumed by your application gateway. This option is only available for the Standard V2 and WAF V2 tiers.
-- **Persistent connections**: Enter the number of persistent connections to your application gateway. This option is only available for the Standard V2 and WAF V2 tiers.
-- **Throughput (Mbps)**: Enter the throughput of your application gateway in megabits per second. This option is only available for the Standard V2 and WAF V2 tiers.
-- **Data processed (GB)**: Enter the total volume of data processed per month by your application gateway in gigabytes.
-- **Outbound data processed (GB)**: Enter the total volume of outbound data processed per month by your application gateway in gigabytes.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Tier{{< /ui >}}: Select the service level tier for your application gateway.
+- {{< ui >}}Size{{< /ui >}}: Select the size of your application gateway. This option is only available for the Standard and WAF tiers.
+- {{< ui >}}Instances{{< /ui >}}: Enter the number of instances for high-availability scenarios. This option is only available for the Standard and WAF tiers.
+- {{< ui >}}Compute units{{< /ui >}}: Enter the measure of compute capacity consumed by your application gateway. This option is only available for the Standard V2 and WAF V2 tiers.
+- {{< ui >}}Persistent connections{{< /ui >}}: Enter the number of persistent connections to your application gateway. This option is only available for the Standard V2 and WAF V2 tiers.
+- {{< ui >}}Throughput (Mbps){{< /ui >}}: Enter the throughput of your application gateway in megabits per second. This option is only available for the Standard V2 and WAF V2 tiers.
+- {{< ui >}}Data processed (GB){{< /ui >}}: Enter the total volume of data processed per month by your application gateway in gigabytes.
+- {{< ui >}}Outbound data processed (GB){{< /ui >}}: Enter the total volume of outbound data processed per month by your application gateway in gigabytes.
 
 ## API
 

@@ -213,7 +213,7 @@ This command correlates images from deployment resources. When Datadog receives 
 
 #### Validation
 
-If the command has been correctly run, deployments contain Git metadata from the application repository instead of the configuration repository. Also, the deployment executions view now contains a new **Pipeline** tab representing the related CI pipeline trace.
+If the command has been correctly run, deployments contain Git metadata from the application repository instead of the configuration repository. Also, the deployment executions view now contains a new {{< ui >}}Pipeline{{< /ui >}} tab representing the related CI pipeline trace.
 
 ## Tag an Argo CD application deploying multiple services
 

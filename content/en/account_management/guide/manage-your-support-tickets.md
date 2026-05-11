@@ -87,7 +87,7 @@ further_reading:
 
 {{< /site-region >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 
 
 <h2>Register on the portal</h2>
