@@ -16,7 +16,7 @@ further_reading:
 
 Datadog's [Kubernetes Explorer][1] allows you to monitor the state of pods, deployments, and other Kubernetes resources. You can also view resource specifications for failed pods within a deployment, correlate node activity with related logs, track resource utilization, automatically scale workloads, and remediate errors.
 
-<div class="alert alert-info">Kubernetes Explorer requires Datadog Agent 7.27.0+ and Datadog Cluster Agent 1.11.0+. <br/>If you are using Kubernetes 1.25+, then Cluster Agent 7.40.0+ is required.</div>
+<div class="alert alert-info">When using the Datadog Agent, Kubernetes Explorer requires Agent 7.27.0+ and Cluster Agent 1.11.0+. If you are using Kubernetes 1.25+, then Cluster Agent 7.40.0+ is required. For OpenTelemetry-based setup, see the <strong>OpenTelemetry</strong> tab below.</div>
 
 
 ## Configuration
@@ -115,6 +115,13 @@ image:
   repository: otel/opentelemetry-collector-contrib
   tag: 0.142.0
   pullPolicy: IfNotPresent
+
+extraEnvs:
+  - name: DD_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: datadog-secret
+        key: api-key
 ```
 
 ##### RBAC permissions
@@ -245,12 +252,20 @@ The [`k8sobjects`][10] receiver collects Kubernetes resource data using two mode
           group: apps
 ```
 
-##### Processor and pipeline
+##### Processors and pipeline
 
-Add a resource processor to tag all data with your cluster name, and wire the components together in a `logs/orchestrator` pipeline. Replace `<YOUR_CLUSTER_NAME>` with your cluster name:
+Add a `resourcedetection/kubeadm` processor to detect the cluster UID, and a `resource/add-cluster-name` processor to tag all data with your cluster name. Then wire the components together in a `logs/orchestrator` pipeline. Replace `<YOUR_CLUSTER_NAME>` with your cluster name:
 
 ```yaml
   processors:
+    resourcedetection/kubeadm:
+      detectors: [kubeadm]
+      timeout: 2s
+      override: false
+      kubeadm:
+        resource_attributes:
+          k8s.cluster.name:
+            enabled: false
     resource/add-cluster-name:
       attributes:
         - key: k8s.cluster.name
@@ -261,9 +276,11 @@ Add a resource processor to tag all data with your cluster name, and wire the co
     pipelines:
       logs/orchestrator:
         receivers: [k8sobjects]
-        processors: [resource/add-cluster-name]
+        processors: [resourcedetection/kubeadm, resource/add-cluster-name]
         exporters: [datadog]
 ```
+
+The `resourcedetection/kubeadm` processor detects the cluster UID (`k8s.cluster.uid`), which the Datadog Exporter requires for orchestrator data. Cluster name detection is disabled so the manually set name from `resource/add-cluster-name` takes precedence.
 
 #### Deploy with Helm
 
