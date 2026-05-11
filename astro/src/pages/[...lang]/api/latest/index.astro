@@ -2,7 +2,6 @@
 import ApiLayout from '@layouts/ApiLayout.astro';
 import { CopyPageButton } from '@components/CopyPageButton/CopyPageButton';
 import { getCategoryStubsView } from '@lib/api/viewsBuilder';
-import { getApiPageTitle } from '@lib/api/pageTitleBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
 import { i18n } from '@lib/i18n/i18n';
 import type { GetStaticPaths } from 'astro';
@@ -27,7 +26,7 @@ const categories = await getCategoryStubsView(lang);
   categories={categories}
   breadcrumbs={[
     { label: i18n('docs', lang), href: localizedHref(lang, '/') },
-    { label: getApiPageTitle('', lang) ?? 'API Reference' },
+    { label: i18n('api', lang) },
   ]}
 >
   <h1>API Reference</h1>

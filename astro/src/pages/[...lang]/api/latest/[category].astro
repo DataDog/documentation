@@ -6,7 +6,6 @@ import WhatsNext from '@components/WhatsNext/WhatsNext.astro';
 import NextLink from '@components/WhatsNext/NextLink.astro';
 import { getCategoryStubsView, getCategoryViewBySlug } from '@lib/api/viewsBuilder';
 import { renderMarkdown } from '@lib/api/markdownRenderer';
-import { getApiPageTitle } from '@lib/api/pageTitleBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
 import { mdToMetaDescription } from '@lib/seo';
 import { i18n } from '@lib/i18n/i18n';
@@ -54,7 +53,7 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
   activeCategory={current}
   breadcrumbs={[
     { label: i18n('docs', lang), href: localizedHref(lang, '/') },
-    { label: getApiPageTitle('', lang) ?? 'API Reference', href: localizedHref(lang, '/api/latest/') },
+    { label: i18n('api', lang), href: localizedHref(lang, '/api/latest/') },
     { label: current.name },
   ]}
 >

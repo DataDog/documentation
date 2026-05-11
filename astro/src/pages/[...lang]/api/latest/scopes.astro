@@ -26,7 +26,7 @@ const categories = await getCategoryStubsView(lang);
   categories={categories}
   breadcrumbs={[
     { label: i18n('docs', lang), href: localizedHref(lang, '/') },
-    { label: getApiPageTitle('', lang) ?? 'API Reference', href: localizedHref(lang, '/api/latest/') },
+    { label: i18n('api', lang), href: localizedHref(lang, '/api/latest/') },
     { label: getApiPageTitle('scopes', lang) ?? 'Authorization Scopes' },
   ]}
 >
