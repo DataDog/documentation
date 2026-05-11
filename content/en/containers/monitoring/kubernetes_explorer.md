@@ -75,6 +75,213 @@ For manual setup, see [Set up Kubernetes Explorer with a DaemonSet][5].
 
 [5]: /infrastructure/faq/set-up-orchestrator-explorer-daemonset
 {{% /tab %}}
+{{% tab "OpenTelemetry" %}}
+
+<div class="alert alert-info">Native OpenTelemetry support for the Kubernetes Explorer is in Preview. Feature flags must be enabled for your Datadog instance. Contact your account team to request access.</div>
+
+You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline instead of the Datadog Agent. This setup uses the [`k8sobjects`][10] receiver to collect Kubernetes resource data and forwards it through the [Datadog Exporter's][11] orchestrator explorer functionality.
+
+#### Prerequisites
+
+- OpenTelemetry Collector Contrib [v0.142.0][12] or later.
+- Feature flags enabled on your Datadog instance. Contact your account team to verify activation.
+
+#### Limitations
+
+The `k8sobjects` receiver has known scalability issues (see [open-telemetry/opentelemetry-collector-contrib#43602][13]). In large clusters, the OTel Collector may overwhelm the Kubernetes API server due to the volume and frequency of requests. Enable this feature in smaller clusters first, and monitor API server load before scaling up.
+
+#### Create a Datadog API key secret
+
+Create a Kubernetes secret to store your Datadog API key:
+
+```sh
+export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
+kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
+```
+
+#### Configure the cluster collector
+
+Create a `deployment-collector.yaml` file with the following configuration. Replace `<YOUR_DATADOG_SITE>` with your [Datadog site][14] and `<YOUR_CLUSTER_NAME>` with your cluster name:
+
+```yaml
+mode: deployment
+replicaCount: 1
+
+image:
+  repository: otel/opentelemetry-collector-contrib
+  tag: 0.142.0
+  pullPolicy: IfNotPresent
+
+clusterRole:
+  create: true
+  rules:
+    - apiGroups:
+        - ""
+      resources:
+        - namespaces
+        - nodes
+        - nodes/spec
+        - nodes/stats
+        - pods
+        - pods/status
+        - replicationcontrollers
+        - replicationcontrollers/status
+        - resourcequotas
+        - services
+      verbs:
+        - get
+        - list
+        - watch
+    - apiGroups:
+        - apps
+      resources:
+        - daemonsets
+        - deployments
+        - replicasets
+        - statefulsets
+      verbs:
+        - get
+        - list
+        - watch
+    - apiGroups:
+        - extensions
+      resources:
+        - daemonsets
+        - deployments
+        - replicasets
+        - statefulsets
+      verbs:
+        - get
+        - list
+        - watch
+    - apiGroups:
+        - batch
+      resources:
+        - jobs
+        - cronjobs
+      verbs:
+        - get
+        - list
+        - watch
+    - apiGroups:
+        - autoscaling
+      resources:
+        - horizontalpodautoscalers
+      verbs:
+        - get
+        - list
+        - watch
+
+config:
+  exporters:
+    datadog:
+      api:
+        site: <YOUR_DATADOG_SITE>
+        key: ${env:DD_API_KEY}
+      orchestrator_explorer:
+        enabled: true
+
+  receivers:
+    k8sobjects:
+      auth_type: serviceAccount
+      objects:
+        - name: namespaces
+          mode: pull
+          interval: 3m
+        - name: namespaces
+          mode: watch
+        - name: pods
+          mode: pull
+          interval: 3m
+        - name: pods
+          mode: watch
+        - name: nodes
+          mode: pull
+          interval: 3m
+        - name: nodes
+          mode: watch
+        - name: replicasets
+          mode: pull
+          interval: 3m
+        - name: replicasets
+          mode: watch
+        - name: daemonsets
+          mode: pull
+          interval: 3m
+        - name: daemonsets
+          mode: watch
+        - name: statefulsets
+          mode: pull
+          interval: 3m
+          group: apps
+        - name: statefulsets
+          mode: watch
+          group: apps
+        - name: cronjobs
+          mode: pull
+          interval: 3m
+        - name: cronjobs
+          mode: watch
+        - name: jobs
+          mode: pull
+          interval: 3m
+        - name: jobs
+          mode: watch
+        - name: services
+          mode: pull
+          interval: 3m
+        - name: services
+          mode: watch
+        - name: deployments
+          mode: pull
+          interval: 3m
+          group: apps
+        - name: deployments
+          mode: watch
+          group: apps
+
+  processors:
+    resource/add-cluster-name:
+      attributes:
+        - key: k8s.cluster.name
+          value: <YOUR_CLUSTER_NAME>
+          action: upsert
+
+  service:
+    pipelines:
+      logs/orchestrator:
+        receivers: [k8sobjects]
+        processors: [resource/add-cluster-name]
+        exporters: [datadog]
+```
+
+#### Deploy with Helm
+
+Install the OpenTelemetry Collector using your configuration file:
+
+```sh
+helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+helm repo update
+
+helm install deployment-collector open-telemetry/opentelemetry-collector \
+  --values ./deployment-collector.yaml
+```
+
+#### Configure the Datadog exporter
+
+Follow the [Datadog Exporter installation guide][11] to complete the exporter configuration for the rest of your pipeline (traces, metrics, and logs).
+
+#### Verify the installation
+
+Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name. Your pod and namespace data should appear in the Explorer.
+
+[10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
+[11]: /opentelemetry/setup/collector_exporter/install/#2---configure-the-datadog-exporter-and-connector
+[12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.142.0
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/issues/43602
+[14]: /getting_started/site/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Collect custom resources
