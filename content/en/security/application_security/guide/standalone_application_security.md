@@ -41,7 +41,7 @@ For more details, see the configuration page for [the Datadog Agent infrastructu
 
 ### SDK configuration
 
-Standalone App and API Protection is configured at the SDK level using the following environment variables on the instrumented service: `DD_APM_TRACING_ENABLED=false DD_APPSEC_ENABLED=true`.
+Standalone App and API Protection is configured at the SDK level using the following environment variables on the instrumented service: `DD_APM_TRACING_ENABLED=false` and `DD_APPSEC_ENABLED=true`.
 
 `DD_APM_TRACING_ENABLED=false` limits the amount of APM data sent to the minimum required by App and API Protection. The environment variable can be combined with other [App and API Protection configuration options][4].
 
