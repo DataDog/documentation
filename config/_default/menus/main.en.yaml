@@ -9684,7 +9684,7 @@ menu:
       weight: 16
     - name: Workload Identity Federation
       identifier: account_management_cloud_auth
-      url: account_management/cloud_provider_authentication/
+      url: account_management/workload_identity_federation/
       parent: account_management
       weight: 17
     - name: Data Security

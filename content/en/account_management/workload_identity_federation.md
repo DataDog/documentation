@@ -3,6 +3,7 @@ title: Workload Identity Federation
 description: Authenticate the Datadog Terraform provider and Datadog Agent with Workload Identity Federation, using cloud credentials instead of static API keys with AWS STS authentication and identity mapping.
 aliases:
     - /account_management/cloud_authentication/
+    - /account_management/workload_identity_federation/
 algolia:
   tags: ['workload identity federation', 'cloud authentication', 'aws authentication', 'terraform provider', 'agent authentication', 'delegated auth']
 further_reading:
@@ -22,15 +23,11 @@ further_reading:
 
 <!--
 TODO: Finalize the Workload Identity Federation rename.
-Remaining steps once the Datadog UI and marketing URL are updated:
-1. Rename this file from cloud_provider_authentication.md to workload_identity_federation.md
-2. Update the menu URL in config/_default/menus/main.en.yaml
-3. Update the further_reading link in content/en/account_management/service-access-tokens.md
-4. Add the previous slug to `aliases:` so existing links keep working
-5. Move static/images/account_management/cloud_provider_authentication/ to .../workload_identity_federation/ and update img src paths below
-6. Update the preview signup URL (https://www.datadoghq.com/product-preview/cloud-provider-based-authentication/) once the marketing page is renamed
-7. Update the Datadog product UI link (https://app.datadoghq.com/organization-settings/cloud-authentication) once the in-app route is renamed
-Note: API paths (/api/v2/cloud_auth/*), permissions (cloud_auth_config_*), and the Terraform variable `cloud_provider_type` are intentionally left as-is — backend rename is a separate effort.
+The following external Datadog URLs still reference the old product name and need to be updated once the corresponding pages are renamed:
+- Preview signup: https://www.datadoghq.com/product-preview/cloud-provider-based-authentication/
+- In-app settings page: https://app.datadoghq.com/organization-settings/cloud-authentication
+Backend identifiers (API paths /api/v2/cloud_auth/*, permissions cloud_auth_config_*, Terraform variable `cloud_provider_type`) are intentionally left as-is — backend rename is a separate effort.
+Translated copies (content/es/, menus main.{fr,es,ja,ko}.yaml) are unchanged on purpose; they will re-sync through the external translation pipeline. The old slug is preserved in `aliases:` so their links keep resolving.
 -->
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloud-provider-based-authentication/" btn_hidden="false" header="Join the Preview!" >}}
@@ -94,7 +91,7 @@ If you need to create IAM roles in AWS, see the [AWS IAM role creation documenta
 
 Navigate to [**Organization Settings** > **Workload Identity Federation**][6] and click the **Identity Mappings** tab. Each mapping grants a cloud role the permissions of a specific Datadog user or service account.
 
-{{< img src="account_management/cloud_provider_authentication/identity-mappings-list.png" alt="Identity Mappings tab in Workload Identity Federation showing a list of AWS ARN patterns mapped to Datadog users and service accounts" style="width:100%;" >}}
+{{< img src="account_management/workload_identity_federation/identity-mappings-list.png" alt="Identity Mappings tab in Workload Identity Federation showing a list of AWS ARN patterns mapped to Datadog users and service accounts" style="width:100%;" >}}
 
 To create an identity mapping:
 
@@ -104,7 +101,7 @@ To create an identity mapping:
 4. Search for and select a **Target Identity**. This is the Datadog user or service account this cloud identity authenticates as.
 5. Click {{< ui >}}Create Mapping{{< /ui >}}.
 
-{{< img src="account_management/cloud_provider_authentication/identity-mapping-create.png" alt="Create Identity Mapping dialog with fields for Cloud Provider, Source Pattern ARN, and Target Identity" style="width:70%;" >}}
+{{< img src="account_management/workload_identity_federation/identity-mapping-create.png" alt="Create Identity Mapping dialog with fields for Cloud Provider, Source Pattern ARN, and Target Identity" style="width:70%;" >}}
 
 <div class="alert alert-info">Prefer service accounts over user accounts to avoid tying access to individuals.</div>
 
@@ -283,7 +280,7 @@ If you need to create IAM roles in AWS, see the [AWS IAM role creation documenta
 
 Navigate to [**Organization Settings** > **Workload Identity Federation**][6] and click the **Intake Mappings** tab.
 
-{{< img src="account_management/cloud_provider_authentication/intake-mappings-list.png" alt="Intake Mappings tab in Workload Identity Federation showing a list of AWS ARN patterns authorized for Agent authentication" style="width:100%;" >}}
+{{< img src="account_management/workload_identity_federation/intake-mappings-list.png" alt="Intake Mappings tab in Workload Identity Federation showing a list of AWS ARN patterns authorized for Agent authentication" style="width:100%;" >}}
 
 To create an intake mapping:
 
@@ -292,7 +289,7 @@ To create an intake mapping:
 3. Enter a **Source Pattern (ARN)**. Use `*` for wildcard patterns (for example, `role/terraform-*`).
 4. Click {{< ui >}}Create Mapping{{< /ui >}}.
 
-{{< img src="account_management/cloud_provider_authentication/intake-mapping-create.png" alt="Create Intake Mapping dialog with fields for Cloud Provider and Source Pattern ARN" style="width:70%;" >}}
+{{< img src="account_management/workload_identity_federation/intake-mapping-create.png" alt="Create Intake Mapping dialog with fields for Cloud Provider and Source Pattern ARN" style="width:70%;" >}}
 
 #### Using the API
 
