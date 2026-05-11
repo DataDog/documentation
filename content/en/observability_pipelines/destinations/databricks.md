@@ -94,6 +94,8 @@ Configure the Databricks (Zerobus) destination when you [set up a pipeline][6]. 
 
 After you select the Databricks (Zerobus) destination in the pipeline UI:
 
+<div class="alert alert-warning">Databricks Zerobus doesn't convert timestamps in string format to Databricks' <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> type</a>. See <a href="#convert-a-timestamp-in-string-format-to-timestamp-type">Convert a timestamp in string format to TIMESTAMP type</a> for more information.</div>
+
 <div class="alert alert-danger">Only enter the identifier for the OAuth client secret. Do <b>not</b> enter the actual value.</div>
 
 1. Enter the **Ingestion Endpoint** for your Databricks workspace, such as `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`. The Worker sends logs to this endpoint.
@@ -128,6 +130,23 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Convert a timestamp in string format to TIMESTAMP type
+
+If your source sends logs with timestamps in string format, you must convert the timestamp into [TIMESTAMP type][11]. Otherwise, the Worker throws an error similar to:
+
+```
+Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-04-23T10[41]15Z' to i64: invalid digit found in string
+
+```
+
+To convert timestamps in string format to `TIMESTAMP` type:
+
+1. Add a [Custom Processor][12] to your pipeline.
+1. Add a function with the following custom script:
+    ```
+    .timestamp = parse_timestamp!(.timestamp, format: "%+")
+    ```
+
 ## How the destination works
 
 ### Event batching
@@ -148,3 +167,5 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [10]: /observability_pipelines/destinations/#event-batching
+[11]: https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type
+[12]: /observability_pipelines/processors/custom_processor#setup
