@@ -228,14 +228,14 @@ Datadog publishes container images to the Datadog Container Registry, Google Art
 
 {{% container-images-table %}}
 
-By default, the Helm chart pulls images from the Datadog Container Registry (`registry.datadoghq.com`). The Datadog Operator chart also uses the Datadog Container Registry for the operator image and Agent images it manages.
+By default, the Helm chart pulls images from the Datadog Container Registry (`registry.datadoghq.com`). As of Datadog Operator chart version 2.19.0, the Operator chart also uses the Datadog Container Registry for the operator image and Agent images it manages.
 
 <div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from another registry. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-The Datadog Operator chart uses `registry.datadoghq.com` for both the operator image and Agent images it manages. Earlier versions pulled Agent images from site-specific registries (`gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, `asia.gcr.io/datadoghq`, or `datadoghq.azurecr.io`). To use the previous site-specific registries, set `registryMigrationMode: ""` in your Operator Helm `values.yaml`.
+As of Datadog Operator chart version 2.19.0, the Datadog Operator chart uses `registry.datadoghq.com` for both the operator image and Agent images it manages. Earlier versions pulled Agent images from site-specific registries (`gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, `asia.gcr.io/datadoghq`, or `datadoghq.azurecr.io`). To use the previous site-specific registries, set `registryMigrationMode: ""` in your Operator Helm `values.yaml`.
 
 To use a different container registry, modify `global.registry` in `datadog-agent.yaml`.
 
