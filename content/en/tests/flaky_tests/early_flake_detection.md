@@ -107,6 +107,18 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 Test services with more than 100,000 known tests require a Datadog library version that supports pagination on the known tests endpoint. The minimum versions above cover EFD's initial release; pagination support arrived later. Without it, the library cannot fetch the known tests baseline and Early Flake Detection does not run for that session.
 </div>
 
+The following Datadog library versions add pagination support on the known tests endpoint:
+
+| Library                | Minimum version |
+| ---------------------- | --------------- |
+| `dd-trace-js`          | 5.94.0          |
+| `dd-trace-java`        | 1.60.0          |
+| `dd-trace-dotnet`      | 3.42.0          |
+| `ddtrace` (Python)     | 4.6.0           |
+| `datadog-ci` (Ruby)    | 1.27.0          |
+| `dd-trace-go/v2`       | 2.8.0           |
+| `dd-sdk-swift-testing` | 2.6.7           |
+
 ## Explore results in the Test Optimization Explorer
 
 You can use the following facets to query sessions that run Early Flake Detection and new tests in the [Test Optimization Explorer][8].
