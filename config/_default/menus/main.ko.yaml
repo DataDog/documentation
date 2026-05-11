@@ -8284,7 +8284,7 @@ menu:
       parent: account_management
       weight: 14
     - name: Cloud-based Authentication
-      identifier: account_management_cloud_auth
+      identifier: account_management_workload_identity_federation
       url: account_management/cloud_provider_authentication/
       parent: account_management
       weight: 15

@@ -9683,7 +9683,7 @@ menu:
       parent: account_management
       weight: 16
     - name: Workload Identity Federation
-      identifier: account_management_cloud_auth
+      identifier: account_management_workload_identity_federation
       url: account_management/workload_identity_federation/
       parent: account_management
       weight: 17
