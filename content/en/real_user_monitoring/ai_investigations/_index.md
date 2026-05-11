@@ -21,8 +21,31 @@ Run an agentic investigation on a single RUM view to investigate performance iss
 
 For more information, see [Single-View AI Investigation][1].
 
+## Multi-view AI investigation
+
+Run an agentic investigation across a sample of views that share a slow Core Web Vital. Multi-view extends the same agentic analysis to a population of views, helping you find what to fix when an entire (view × vital) pair is consistently slow across your users. Available from the Optimization page for Loading Time, Largest Contentful Paint, First Contentful Paint, and Interaction to Next Paint.
+
+{{< callout url="https://www.datadoghq.com/product-preview/rum-multi-view-ai-investigation/" header="Join the Preview!">}}
+  Multi-View AI Investigation is in Preview.
+{{< /callout >}}
+
+For more information, see [Multi-View AI Investigation][2].
+
+## Operation AI investigation
+
+Run an agentic investigation on a single operation in [Operations Monitoring][3]. The agent analyzes both the success rate and the latency of the operation, surfacing focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions, with findings grouped into frontend, backend, and network root causes.
+
+{{< callout url="https://www.datadoghq.com/product-preview/rum-operation-ai-investigation/" header="Join the Preview!">}}
+  Operation AI Investigation is in Preview.
+{{< /callout >}}
+
+For more information, see [Operation AI Investigation][4].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/ai_investigations/single_view_ai_investigation/
+[2]: /real_user_monitoring/ai_investigations/multi_view_ai_investigation/
+[3]: /real_user_monitoring/operations_monitoring/
+[4]: /real_user_monitoring/ai_investigations/operation_ai_investigation/
