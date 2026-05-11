@@ -19,12 +19,12 @@ products:
   url: /security/cloud_security_management/
   icon: cloud-security-management
 further_reading:
-  - link: "/api/latest/security-monitoring/#create-cases-for-security-findings"
-    tag: "API"
-    text: "Ticketing integration API"
   - link: "/incident_response/case_management/"
     tag: "Documentation"
     text: "Case Management"
+  - link: "/api/latest/security-monitoring/#create-cases-for-security-findings"
+    tag: "API"
+    text: "Ticketing integration API"
 ---
 
 {{< product-availability >}}

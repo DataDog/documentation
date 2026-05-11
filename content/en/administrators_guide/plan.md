@@ -221,7 +221,7 @@ Datadog infrastructure monitoring comes with additional products that you can us
 
 [Software Catalog][30] provides an overview of services, showing which were recently deployed, which haven't been deployed for a while, which services report the most errors, and those with on-going incidents, and much more.
 
-Software Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you can check in on the Setup Guidance tab of each of your services, to ensure that they have the expected configurations:
+Software Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you can check in on the {{< ui >}}Setup Guidance{{< /ui >}} tab of each of your services, to ensure that they have the expected configurations:
 
 {{< img src="/administrators_guide/software_catalog_2.png" alt="Software Catalog home screen" style="width:90%;">}}
 
@@ -256,7 +256,7 @@ Centrally administer and manage all of your Datadog Agents with [Fleet Automatio
 
 ### Remote Configuration
 
-Use Datadog's [Remote Configuration][35] (enabled by default), to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure. For more information, see [supported products and capabilities][36].
+Use Datadog's [Remote Configuration][35] (enabled by default), to remotely configure and change the behavior of Datadog components (for example, Agents, SDKs, and Observability Pipelines Worker) deployed in your infrastructure. For more information, see [supported products and capabilities][36].
 
 ### Notebooks 
 

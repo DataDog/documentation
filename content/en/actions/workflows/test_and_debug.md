@@ -24,11 +24,11 @@ You can test a monitor trigger during workflow creation. Testing a monitor gener
 
 To test a monitor trigger:
 1. Select the monitor trigger action in your workflow.
-1. Click **Test from Monitor**.
-1. If your monitor passes inputs to the workflow, enter a test value under **Workflow Inputs**.
+1. Click {{< ui >}}Test from Monitor{{< /ui >}}.
+1. If your monitor passes inputs to the workflow, enter a test value under {{< ui >}}Workflow Inputs{{< /ui >}}.
 1. Select a monitor to test.
 1. Select a monitor state.
-1. Click **Run From Monitor**.
+1. Click {{< ui >}}Run From Monitor{{< /ui >}}.
 
 
 ## Test a step
@@ -36,17 +36,17 @@ To test a monitor trigger:
 To ensure a step functions as desired without having to run the entire workflow, you can test the step independently.
 
 To test a workflow step:
-1. Click **Test** in the step **Inputs** section.
+1. Click {{< ui >}}Test{{< /ui >}} in the step {{< ui >}}Inputs{{< /ui >}} section.
 1. Optionally, adjust the step configuration. If your step uses output variables from a previous step, enter some hardcoded test data for the step to use.
-1. Click **Test** to test the action.
-1. When you're finished testing the step, click **Use in configuration** to use your new configuration in the workflow, or close the screen to return to the workflow without saving your test configuration.
+1. Click {{< ui >}}Test{{< /ui >}} to test the action.
+1. When you're finished testing the step, click {{< ui >}}Use in configuration{{< /ui >}} to use your new configuration in the workflow, or close the screen to return to the workflow without saving your test configuration.
 
 Testing is not available for branching and logic actions. To test a JavaScript function or expression action that uses output variables from a previous step, comment out the variables in your code and replace them with test data. For more information, see [Test expressions and functions][6].
 
 
 ## Debug a failed step
 
-You can use a workflow's **Run History** to debug a failed step. Click **Configuration** or **Run History** in the top-left to switch between the configuration and run history views.
+You can use a workflow's {{< ui >}}Run History{{< /ui >}} to debug a failed step. Click {{< ui >}}Configuration{{< /ui >}} or {{< ui >}}Run History{{< /ui >}} in the top-left to switch between the configuration and run history views.
 
 Clicking on a failed step gives you the inputs, outputs, and execution context for the step, as well as the associated error message. The example below shows a failed _GitHub pull request status_ step. The error message shows that the step failed due to missing permissions:
 

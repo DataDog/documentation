@@ -16,6 +16,9 @@ further_reading:
 - link: '/tests/developer_workflows'
   tag: 'Documentation'
   text: 'Learn about enhancing developer workflows in Datadog'
+- link: 'https://learn.datadoghq.com/courses/getting-started-test-optimization'
+  tag: 'Learning Center'
+  text: 'Getting Started with Test Optimization'
 algolia:
   tags: ["test visibility", "ci test", "ci tests", "flaky test", "flaky tests", "test run", "test runs", "test span", "test spans"]
 ---

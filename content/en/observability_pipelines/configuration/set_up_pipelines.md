@@ -39,6 +39,8 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 ## Set up a pipeline in the UI
 
+### Set up pipeline components
+
 {{< tabs >}}
 {{% tab "Logs" %}}
 
@@ -79,7 +81,8 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 {{% /tab %}}
 {{% tab "Metrics" %}}
 
-### Set up pipeline components
+<div class="alert alert-info">
+Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Metric Tag Governance][2] template.

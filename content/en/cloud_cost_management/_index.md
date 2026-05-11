@@ -4,6 +4,12 @@ aliases:
   - /infrastructure/cloud_cost_management
   - /integrations/cloudability
 further_reading:
+  - link: "/monitors/types/cloud_cost/"
+    tag: "Documentation"
+    text: "Create a Cloud Cost monitor"
+  - link: "/cloud_cost_management/tags/"
+    tag: "Documentation"
+    text: "Learn about Tags in Cloud Cost Management"
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
@@ -19,12 +25,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
     tag: "Blog"
     text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
-  - link: "/monitors/types/cloud_cost/"
-    tag: "Documentation"
-    text: "Create a Cloud Cost monitor"
-  - link: "/cloud_cost_management/tags/"
-    tag: "Documentation"
-    text: "Learn about Tags in Cloud Cost Management"
   - link: "https://www.datadoghq.com/blog/cloud-costs-study-learnings/"
     tag: "Blog"
     text: "Key learnings from the State of Cloud Costs study"
@@ -78,7 +78,7 @@ Datadog ingests your cloud cost data and transforms it into metrics you can use 
 
 Visualize infrastructure spend alongside related utilization metrics with a retention period of 15 months to spot potential inefficiencies and savings opportunities.
 
-When creating a dashboard, select **Cloud Cost** as the data source for your search query.
+When creating a dashboard, select {{< ui >}}Cloud Cost{{< /ui >}} as the data source for your search query.
 
 {{< img src="cloud_cost/cloud_cost_data_source-1.png" alt="Cloud Cost available as a data source in dashboard widget creation" style="width:80%;" >}}
 
@@ -88,7 +88,7 @@ Optionally, you can programmatically export a timeseries graph of your cloud cos
 
 Visualize daily Datadog spending alongside related utilization metrics with a retention period of 15 months to spot potential inefficiencies and savings opportunities. Learn more about [Datadog Costs][8].
 
-When creating a dashboard, select **Cloud Cost** as the data source, then choose **Datadog** from the available cost types.
+When creating a dashboard, select {{< ui >}}Cloud Cost{{< /ui >}} as the data source, then choose {{< ui >}}Datadog{{< /ui >}} from the available cost types.
 
 {{< img src="cloud_cost/datadog_costs/dashboard-updated.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:80%;" >}}
 
@@ -102,7 +102,7 @@ You can create tag rules to correct missing or incorrect tags, and add inferred 
 
 ## Create a cost monitor
 
-Proactively manage and optimize your cloud spending by creating a [Cloud Cost Monitor][3]. You can choose **Cost Changes** or **Cost Threshold** to monitor your cloud expenses.
+Proactively manage and optimize your cloud spending by creating a [Cloud Cost Monitor][3]. You can choose {{< ui >}}Cost Changes{{< /ui >}} or {{< ui >}}Cost Threshold{{< /ui >}} to monitor your cloud expenses.
 
 {{< img src="cloud_cost/monitor.png" alt="Create a Cloud Cost monitor that alerts on cost changes" style="width:100%;" >}}
 
@@ -118,10 +118,10 @@ Cloud Cost Management uses two permissions to control access: `cloud_cost_manage
 
 {{< img src="cloud_cost/ccm-data-history.png" alt="View your Cloud Cost data history in Cloud Cost settings." style="width:100%;" >}}
 
-Monitor the freshness and processing status of your cloud cost data on the **Cloud Cost > Settings > Data History** page.
+Monitor the freshness and processing status of your cloud cost data on the {{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Data History{{< /ui >}} page.
 
-- **Last Bill Received**: When your cloud or SaaS provider generated the billing data visible in CCM.
-- **Last Processed**: When Datadog last processed billing data from your cloud provider, including:
+- {{< ui >}}Last Bill Received{{< /ui >}}: When your cloud or SaaS provider generated the billing data visible in CCM.
+- {{< ui >}}Last Processed{{< /ui >}}: When Datadog last processed billing data from your cloud provider, including:
   - Tag pipeline rules (retroactively processes up to 3 months of historical data by default)
   - Cost allocation rules (retroactively processes up to 1 month of historical data by default)
 

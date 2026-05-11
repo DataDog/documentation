@@ -76,7 +76,7 @@ If logs are in JSON format, Datadog automatically [parses the log messages][10] 
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][4].
 
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
+**Note**: If the Datadog SDK injects `service` into your logs, it overrides the value set in the agent configuration.
 
 Once this is done, the log should have the following format:
 

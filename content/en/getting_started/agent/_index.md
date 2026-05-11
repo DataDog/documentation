@@ -32,7 +32,7 @@ This guide introduces the Datadog Agent and covers:
 The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
 
 The Agent can run on:
-- Local hosts (Windows, macOS) 
+- Local hosts (Windows, Linux, macOS) 
 - Containerized environments (Docker, Kubernetes)
 - On-premises data centers 
 
@@ -73,9 +73,9 @@ The Agent reports the following metrics to Datadog about itself. These metrics p
 
 | Metric                           | Description                                      |
 | -------------------------------- |------------------------------------------------- |
-| `datadog.agent.running`        | Shows a value of `1` if the Agent is reporting to Datadog.                    |
-| `datadog.agent.started`        | A count sent with a value of `1` when the Agent starts (available in v6.12+).    |
-| `datadog.agent.python.version` | The metric is tagged with the `python_version`.     |
+| `datadog.agent.running`        | A value of `1` if the Agent is running and reporting to Datadog, tagged with the Agent version.  |
+| `datadog.agent.started`        | A count of `1` each time the Agent starts.    |
+| `datadog.agent.python.version` | A value of `1`, tagged with the Python version.     |
 
 
 See the [Agent Metrics][3] integration for a full list of Agent metrics.

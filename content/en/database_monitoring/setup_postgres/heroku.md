@@ -30,7 +30,7 @@ heroku pg:credentials:create --name datadog
 heroku addons:attach <database-name> --credential datadog
 ```
 
-Attaching the new credential to the application creates a new environment variable in your application with the connection URL. Note that environment variable, as you will use it later.
+Attaching the new credential to the application creates a new environment variable in your application with the connection URL. Note the environment variable, as you will use it later.
 
 Login to your Postgres database using the default credentials and give the `datadog` credential the right permissions:
 
@@ -75,7 +75,7 @@ SECURITY DEFINER;
 
 ## Configuring the Postgres integration
 
-Next, configure the Datadog agent to enable the Postgres integration, using one of the following two options.
+Configure the Datadog Agent to enable the Postgres integration, using one of the following two options.
 
 **Option A**: Use a buildpack to create a static Postgres configuration that cannot be modified. In addition, Database Monitoring may be enabled through this method.
 

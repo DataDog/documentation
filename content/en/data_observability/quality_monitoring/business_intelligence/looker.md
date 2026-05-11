@@ -20,22 +20,22 @@ Datadog's Looker integration helps data teams make changes to their data platfor
 ### Create a Looker API key
 
 1. Go to your Looker dashboard (for example, at `https://<your_company>.cloud.looker.com`).
-2. Navigate to **Admin** > **Users**.
+2. Navigate to {{< ui >}}Admin{{< /ui >}} > {{< ui >}}Users{{< /ui >}}.
 3. Select the user you want to create an API key for.
-4. Next to **API Keys**, click **Edit Keys**.
-5. Click **New API Key**.
+4. Next to {{< ui >}}API Keys{{< /ui >}}, click {{< ui >}}Edit Keys{{< /ui >}}.
+5. Click {{< ui >}}New API Key{{< /ui >}}.
 6. Copy the client ID and secret.
 
 ### Add the API credentials to Datadog
 
 1. Navigate to the [Looker integration tile][2].
-2. Click **Configure** > **+ Add New Account**.
+2. Click {{< ui >}}Configure{{< /ui >}} > {{< ui >}}+ Add New Account{{< /ui >}}.
 3. Fill out the form with the following:
-   - **Account name**: A label to identify this Looker instance
-   - **Instance URL**: The URL of your Looker instance (for example, `https://company.cloud.looker.com`)
-   - **Client ID**: The client ID from the previous step
-   - **API Secret**: The client secret from the previous step
-4. Click **Save**.
+   - {{< ui >}}Account name{{< /ui >}}: A label to identify this Looker instance
+   - {{< ui >}}Instance URL{{< /ui >}}: The URL of your Looker instance (for example, `https://company.cloud.looker.com`)
+   - {{< ui >}}Client ID{{< /ui >}}: The client ID from the previous step
+   - {{< ui >}}API Secret{{< /ui >}}: The client secret from the previous step
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Connect LookML repositories
 

@@ -23,7 +23,7 @@ further_reading:
 - .NET application containerized with Docker
 - AWS CLI configured with appropriate permissions
 - Your Datadog API key
-- Datadog .NET tracing library (see [version requirements][1])
+- Datadog .NET SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 

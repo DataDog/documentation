@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector. In the [DDOT Collector][8], the extension is enabled by default starting with Datadog Agent v7.76.0.
+As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector. In the [DDOT Collector][8], the extension is automatically enabled.
 
 The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly in Datadog using [Fleet Automation][7], the [Infrastructure List][2], and [Resource Catalog][3]. When used with the [Datadog Exporter][1], this extension gives you visibility into your Collector fleet without leaving the Datadog UI.
 
@@ -29,7 +29,7 @@ The Datadog Extension allows you to view OpenTelemetry Collector configuration a
 
 ## Setup
 
-<div class="alert alert-danger">If you use the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, do <strong>not</strong> manually add the Datadog Extension on Agent versions earlier than v7.76.0. Adding the extension on these versions causes duplicate Collector entries in Fleet Automation.</div>
+<div class="alert alert-danger">If you use the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, do <strong>not</strong> manually configure the Datadog Extension. It is automatically enabled in all DDOT Collector versions.</div>
 
 ### 1. Add the Datadog Extension to your Collector configuration
 
@@ -78,19 +78,38 @@ service:
       exporters: [datadog/exporter]
 ```
 
+### 4. (Optional) Add custom resource attributes
+
+The Datadog Extension automatically collects resource attributes from the Collector's internal telemetry and includes them in the metadata payload it sends to Datadog. To attach custom attributes such as deployment environment, team, or Kubernetes cluster name, set them under `service.telemetry.resource`:
+
+```yaml
+service:
+  telemetry:
+    resource:
+      deployment.environment.name: production
+      team.name: platform
+      k8s.cluster.name: prod-us-east1-cluster-a
+```
+
+The Collector automatically attaches `service.name`, `service.version`, and `service.instance.id` (a randomly generated UUID) to its internal telemetry. You don't need to set these manually.
+
 ## Configuration options
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
-| `api.key` | Datadog API key (required) | - |
-| `api.site` | Datadog site (for example, `us5.datadoghq.com`) | `datadoghq.com` |
-| `hostname` | Custom hostname for the Collector | Auto-detected |
-| `http.endpoint` | Local HTTP server endpoint | `localhost:9875` |
-| `http.path` | HTTP server path for metadata | `/metadata` |
+| `api.key` | Datadog API key (required). | - |
+| `api.site` | Datadog site (for example, `us5.datadoghq.com`). | `datadoghq.com` |
+| `api.fail_on_invalid_key` | Exit at startup if the API key is invalid. | `true` |
+| `hostname` | Custom hostname for the Collector. | Auto-detected |
+| `http.endpoint` | Local HTTP server endpoint. | `localhost:9875` |
+| `http.path` | HTTP server path for metadata. | `/metadata` |
 | `deployment_type` | Deployment type for the Collector. One of: `gateway`, `daemonset`, or `unknown`. | `unknown` |
-| `proxy_url` | HTTP proxy URL for outbound requests | - |
-| `timeout` | Timeout for HTTP requests | `30s` |
-| `tls.insecure_skip_verify` | Skip TLS certificate verification | `false` |
+| `installation_method` | How the Collector was installed. One of: `kubernetes`, `bare-metal`, `docker`, `ecs-fargate`, `eks-fargate`, or unset. Available in Collector v0.148.0 and later. | unset |
+| `gateway_service` | Set on **gateway** Collectors only. The Kubernetes Service fronting the gateway Collector pods. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |
+| `gateway_destination` | Set on **agent or DaemonSet** Collectors only. The Kubernetes Service that this Collector forwards telemetry to. Must match `gateway_service` on the receiving gateway Collector. Format: `service` or `namespace/service`. Available in Collector v0.150.0 and later. | - |
+| `proxy_url` | HTTP proxy URL for outbound requests. | - |
+| `timeout` | Timeout for HTTP requests. | `30s` |
+| `tls.insecure_skip_verify` | Skip TLS certificate verification. | `false` |
 
 <div class="alert alert-danger">
 <strong>Hostname Matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it <strong>must</strong> match the <code>hostname</code> value in the Datadog Exporter configuration. The Datadog Extension does not have access to pipeline telemetry and cannot infer hostnames from incoming spans. It only obtains hostnames from system/cloud provider APIs or manual configuration. If telemetry has different <a href="/opentelemetry/config/hostname_tagging/?tab=host">hostname attributes</a> than the hostname reported by the extension, the telemetry will not be correlated to the correct host, and you may see duplicate hosts in Datadog.
