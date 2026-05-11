@@ -95,7 +95,7 @@ If a Core Web Vital is missing from a view in the [RUM Explorer][4], check the f
 To check that the SDK is collecting vitals:
 
 1. Open your browser's developer tools and run `window.DD_RUM.getInternalContext()` to confirm the SDK loaded.
-2. In the Network tab, look for view events being sent to the Datadog intake.
+2. In the {{< ui >}}Network{{< /ui >}} tab, look for view events being sent to the Datadog intake.
 3. In the [RUM Explorer][4], open the view event in question and confirm it has the expected `@view.*` attributes.
 
 ### Diagnose Core Web Vitals with subparts
