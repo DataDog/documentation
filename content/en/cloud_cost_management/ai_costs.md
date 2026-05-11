@@ -49,6 +49,8 @@ To use AI Costs, you must have at least one of the following supported providers
 
 After connecting your AI providers, navigate to [**Cloud Cost** > **Summarize** > **AI**][6] to view the AI cost summary page.
 
+{{< img src="cloud_cost/ai_costs/ccm-ai-costs-overview.png" alt="The AI cost summary dashboard, showing daily spend trends over a one-month period, a list of top spend drivers, and an anomaly graph." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
 The AI cost summary page provides:
 
 - **Total AI Cost:** Aggregated AI cost and cost change over the selected time frame.
@@ -56,8 +58,6 @@ The AI cost summary page provides:
 - **Top Cost Drivers:** The models, projects, services, and users generating the most spend.
 - **Active AI Cost Anomalies:** Cost [anomalies][7] surfaced proactively across all connected providers. Select an anomaly to open a side panel with more details and options for further action.
 - **AI Cost Dashboards:** Out-of-the-box dashboard templates for each supported provider, combining cost data with usage signals such as token consumption, model distribution, and user analytics.
-
-{{< img src="cloud_cost/ai_costs/ccm-ai-costs-overview.png" alt="The AI cost summary dashboard, showing daily spend trends over a one-month period, a list of top spend drivers, and an anomaly graph." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 ## Normalized AI tags
 
@@ -77,8 +77,6 @@ The following tags are available for all supported AI providers:
 ## Attribute AI spend to users
 
 [Out-of-the-box (OOTB) allocation rules][12] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for OpenAI and Anthropic.
-
-{{< img src="cloud_cost/ai_costs/ccm-anthropic-ai-cost-reporting.png" alt="A provider-specific dashboard with a stacked bar chart graph showing daily provider spend attributed by team and model name, and a summary list of the spend attributions." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 The following tags are available through OOTB allocation rules:
 
@@ -117,9 +115,11 @@ The following tags are available through OOTB allocation rules:
 {{% /tab %}}
 {{< /tabs >}}
 
+{{< img src="cloud_cost/ai_costs/ccm-tag-pipeline-ai-costs.png" alt="The Tag Pipelines Rule Setup page, showing user_email values mapped to team values via an existing reference table, and additional tag mapping options." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
 After costs are attributed to users, API keys, and other sources, use [Tag Pipelines][13] to automatically map them to teams, services, or business units for streamlined aggregate reporting. See [Cost Reports][14] for more information.
 
-{{< img src="cloud_cost/ai_costs/ccm-tag-pipeline-ai-costs.png" alt="The Tag Pipelines Rule Setup page, showing user_email values mapped to team values via an existing reference table, and additional tag mapping options." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="cloud_cost/ai_costs/ccm-anthropic-ai-cost-reporting.png" alt="A provider-specific dashboard with a stacked bar chart graph showing daily provider spend attributed by team and model name, and a summary list of the spend attributions." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 ## Further reading
 
