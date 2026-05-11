@@ -1074,6 +1074,16 @@
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"
   },
+  "GetCurrentUser": {
+    "description": "Get the user associated with the current authentication context.\nThe response includes the user's profile attributes (name, email, handle,\nstatus, MFA state), along with related resources: the user's organization,\nassigned roles with their granted permissions, and team-scoped roles.\nNo additional permissions are required beyond valid authentication.",
+    "summary": "Get current user"
+  },
+  "UpdateCurrentUser": {
+    "description": "Edit the profile of the currently authenticated user. Updatable fields\ninclude `name`, `title`, `email`, and `disabled` status. The `id` field\nin the request body must match the authenticated user's UUID; a mismatch\nreturns a 422 error. Email address changes are recorded in the audit trail.\nRequires the `user_self_profile_write` permission.",
+    "summary": "Update current user",
+    "request_description": "",
+    "request_schema_description": "Update a user."
+  },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
     "summary": "Get all application keys owned by current user"

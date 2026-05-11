@@ -5719,6 +5719,30 @@ menu:
           - SendInvitations
         unstable: []
         order: 8
+    - name: Update current user
+      url: '#update-current-user'
+      identifier: users-update-current-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCurrentUser
+        unstable: []
+        order: 13
+    - name: Get current user
+      url: '#get-current-user'
+      identifier: users-get-current-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCurrentUser
+        unstable: []
+        order: 12
     - name: Anonymize users
       url: '#anonymize-users'
       identifier: users-anonymize-users
