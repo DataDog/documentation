@@ -581,10 +581,12 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 
 ## Upgrade the Worker
 
-To upgrade the Worker to the latest version, run the following command:
 
 {{< tabs >}}
 {{% tab "APT" %}}
+
+
+To upgrade the Worker, run the following command:
 
 ```
 sudo apt-get install --only-upgrade observability-pipelines-worker
@@ -593,9 +595,50 @@ sudo apt-get install --only-upgrade observability-pipelines-worker
 {{% /tab %}}
 {{% tab "RPM" %}}
 
+To upgrade the Worker, run the following command:
+
 ```
 sudo yum install --only-upgrade observability-pipelines-worker
 ```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+To upgrade the Worker, you can either [upgrade with a pinned image tag](#upgrade-with-a-pinned-image-tag) or [upgrade with the chart's default image tag](#upgrade-with-the-charts-default-image-tag).
+
+After you update the `values.yaml` file with the new Worker version, new Worker pods are created with the updated image. Old pods are terminated only after the replacements are `Ready`. The update is a rolling update by default, so one pod is upgraded at a time. To change the default values, see the `updateStrategy` options in the `values.yaml` file:
+
+```yaml
+updateStrategy: {}
+#   type: RollingUpdate
+#   rollingUpdate:
+#     maxUnavailable: 1
+
+# terminationGracePeriodSeconds -- Override terminationGracePeriodSeconds.
+```
+
+### Upgrade with a pinned image tag
+
+Update the `image.tag` in your `values.yaml` file, replacing `<WORKER_VERSION>` with the Worker version you want to use (such as `2.15.0`):
+```yaml
+image:
+    # image.name -- Specify the image name to use (relative to `image.repository`).
+    name: observability-pipelines-worker
+    # image.tag -- Specify the image tag to use.
+    tag: <WORKER_VERSION>
+```
+**Note**: Your deployment continues using that image tag until you set `image.tag` in your `values.yaml` file to another version.
+
+### Upgrade with the chart's default image tag
+
+Run these commands to update the Helm repo and upgrade the release to the chart's default image, applying any overrides you previously set. Replace `<YOUR_VALUES_FILE>` with the name of your `values.yaml` file:
+
+```shell
+helm repo update
+helm upgrade --install opw datadog/observability-pipelines-worker -f <YOUR_VALUES_FILE>.yaml
+```
+
+**Note**: Keep all custom settings in your `values.yaml` file and override only the values you need. You can then re-run `helm upgrade` without reapplying manual overrides.
 
 {{% /tab %}}
 {{< /tabs >}}

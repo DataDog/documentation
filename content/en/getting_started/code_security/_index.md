@@ -3,6 +3,11 @@ title: Getting Started with Code Security
 description: Secure applications with SAST, SCA, and IAST tools to detect vulnerabilities in first-party code and open source libraries.
 aliases:
 - /getting_started/code_analysis/
+further_reading:
+- link: "https://learn.datadoghq.com/courses/code-security-SAST"
+  tag: "Learning Center"
+  text: "Write secure code with Datadog Code Security"
+
 ---
 
 ## Overview
@@ -68,7 +73,7 @@ In the side panel for a single library vulnerability in SCA, in addition to deta
 
 - A **Severity breakdown** of the highest severity instance of this vulnerability seen across your repositories and your services. For each detected location of the vulnerability in your repositories and/or services, Datadog adjusts the base severity score of the vulnerability based on environmental factors. To learn more, see [Datadog severity score][8].
 - A **Repositories** table of all instances where the vulnerability was detected in your repositories. For each instance, Datadog shows whether the dependency is classified as direct or transitive, the remediation status of the vulnerability, as well as specific remediation steps.
-- An **Impacted Services** table of all running services affected by this library vulnerability. A service is affected by a library vulnerability if the library was loaded at runtime and detected by Datadog’s application tracing libraries.
+- An **Impacted Services** table of all running services affected by this library vulnerability. A service is affected by a library vulnerability if the library was loaded at runtime and detected by Datadog’s application SDKs.
 
  Severities are scored by the following:
 | CVSS Score    | Qualitative Rating
@@ -137,6 +142,10 @@ Code Security helps you set up workflows to track and manage remediation of find
 ## Link findings to Datadog services and teams
 
 {{% security-products/link-findings-to-datadog-services-and-teams %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/software_composition_analysis/
 [2]: /security/code_security/dev_tool_int/github_pull_requests/

@@ -17,14 +17,14 @@ further_reading:
     text: "IaC Security Rules"
 ---
 
-Infrastructure as Code (IaC) Security detects security misconfigurations in Terraform files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.
+Infrastructure as Code (IaC) Security detects security misconfigurations in IaC files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.
 
 ## Exclusion methods
 
 You can configure exclusions using:
 
 - A configuration file to define exclusions for severity levels, file paths, query IDs, and categories.
-- Inline comments to ignore specific findings within Terraform files.
+- Inline comments to ignore specific findings within IaC files.
 
 <div class="alert alert-info">If an exclusion is defined in both the configuration file and an inline comment, the configuration file takes priority.</div>
 

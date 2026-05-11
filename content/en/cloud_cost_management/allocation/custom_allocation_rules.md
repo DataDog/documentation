@@ -33,7 +33,7 @@ You can manage custom allocation rules using the [API][4], [Terraform][5], or di
 
 ### Step 1 - Define the source
 
-1. Navigate to [Cloud Cost > Settings > Custom Allocation Rules][2] and click **Add New Rule** to start.
+1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Custom Allocation Rules{{< /ui >}}][2] and click {{< ui >}}Add New Rule{{< /ui >}} to start.
 2. From the dropdown, select the shared costs you want to allocate.
 
    _Example: Untagged support costs, shared database costs._
@@ -74,11 +74,11 @@ In the preceding diagram, the pink bar represents a filter on the cost allocatio
 
 To create a rule for this allocation, you can:
 
-- Define the costs to allocate (source): **EC2 support fees** (`aws_product:support`).
-- Choose the allocation method: **Proportional by spend**.
-- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **User** (`User A`, `User B`, `User C`).
-- Refine the allocation by applying [filters](#step-4---optional-apply-filters): **EC2** (`aws_product:ec2`).
-- Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: **environment** (`env`).
+- Define the costs to allocate (source): EC2 support fees (`aws_product:support`).
+- Choose the allocation method: {{< ui >}}Proportional by spend{{< /ui >}}.
+- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: User (`User A`, `User B`, `User C`).
+- Refine the allocation by applying [filters](#step-4---optional-apply-filters): EC2 (`aws_product:ec2`).
+- Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: environment (`env`).
 
 You can also specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, if you partition your costs by environment using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
 
@@ -96,11 +96,11 @@ For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {u
 
 To create a rule for this allocation, you could:
 
-- Define the costs to allocate (source): **PostgreSQL costs** (`azure_product_family:dbforpostgresql`).
-- Choose the allocation method: **Dynamic by metric**
-- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: **User** (`User A`, `User B`, `User C`).
-- Define the metric query used to split the source costs: **Query execution time per user** (`sum:postgresql.queries.time{*}` by `{user}.as_count`).
-- Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: **environment** (`env`).
+- Define the costs to allocate (source): PostgreSQL costs (`azure_product_family:dbforpostgresql`).
+- Choose the allocation method: {{< ui >}}Dynamic by metric{{< /ui >}}
+- Choose the [destination tag](#step-3---define-the-destination) to split your costs by: User (`User A`, `User B`, `User C`).
+- Define the metric query used to split the source costs: Query execution time per user (`sum:postgresql.queries.time{*}` by `{user}.as_count`).
+- Create suballocations by [partitioning](#step-5---optional-apply-a-partition) the allocation rule: environment (`env`).
 
 {{< img src="cloud_cost/custom_allocation_rules/ui-dynamic-by-metric.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:90%;" >}}
 
@@ -122,8 +122,8 @@ Apply a filter across the entire allocation rule. Filters help you target the al
 
 _Example: Only apply cost allocation where environment is production._
 
-- **Proportional by spend**: Let's say you allocate shared costs to the team tag, proportional to how much each team spends. You can add a filter, creating a cost allocation that is proportional to how much team spends on `aws_product` is `ec2`.
-- **Dynamic by metric**: Let's say you allocate shared PostgreSQL costs to the service tag, proportional to the query execution time of each service. You can add a filter, creating a cost allocation that only applies where `environment` is `production`.
+- {{< ui >}}Proportional by spend{{< /ui >}}: Let's say you allocate shared costs to the team tag, proportional to how much each team spends. You can add a filter, creating a cost allocation that is proportional to how much team spends on `aws_product` is `ec2`.
+- {{< ui >}}Dynamic by metric{{< /ui >}}: Let's say you allocate shared PostgreSQL costs to the service tag, proportional to the query execution time of each service. You can add a filter, creating a cost allocation that only applies where `environment` is `production`.
 
 ### Step 5 - (optional) Apply a partition
 

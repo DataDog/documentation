@@ -34,6 +34,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/flex-logs/"
   tag: "Blog"
   text: "Store and analyze high-volume logs efficiently with Flex Logs"
+- link: "https://learn.datadoghq.com/courses/log-indexes"
+  tag: "Learning Center"
+  text: "Manage and Monitor Indexed Log Volumes"
+
 ---
 
 ## Overview
@@ -70,7 +74,7 @@ Use the spectrum of log types shown in the image below to determine when to use 
 
 Compute is the querying capacity to run queries for Flex Logs. It is used when querying logs in the Flex Logs tier. It is not used for ingestion or when only searching Standard Indexing logs. The available compute tiers are:
 
-<div class="alert alert-danger">The compute sizes available for US3, US5, AP1, AP2, and US1-FED are Starter, XS and S.</div>
+<div class="alert alert-danger">The compute sizes available for US3, US5, AP1, AP2, US1-FED, and US2-FED are Starter, XS and S.</div>
 
 - Starter
 - Extra small (XS)

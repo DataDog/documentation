@@ -22,7 +22,7 @@ further_reading:
 - Docker installed on your host
 - .NET application containerized with Docker
 - Your Datadog API key
-- Datadog .NET tracing library (see version requirements [here][1])
+- Datadog .NET SDK (see version requirements [here][1])
 
 ## 1. Installing the Datadog Agent
 

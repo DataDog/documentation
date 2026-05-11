@@ -67,12 +67,20 @@ Example prompts:
 - `Investigate why EC2 costs changed between January and February`
 - `Which teams are responsible for the highest S3 storage costs this month?`
 
+#### DDSQL
+Generate and run [DDSQL][7] queries against Datadog [telemetry data][8] using natural language. 
+
+Example prompts:
+- `Write a DDSQL query that shows the top 10 services by error count in the last hour`
+- `Query average request latency for the payments service broken down by status code`
+- `Show me a DDSQL query for the number of RUM sessions by country over the past day`
+
 ### Web application
 There are multiple ways to open Bits Assistant in the Datadog web application:
-- In the top-right of the navigation bar, click **Ask Bits**
-- In a Datadog product integrated with Bits Assistant, click **Ask Bits** or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon)
+- In the top-right of the navigation bar, click {{< ui >}}Ask Bits{{< /ui >}}
+- In a Datadog product integrated with Bits Assistant, click {{< ui >}}Ask Bits{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon)
 - Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>
-- In the left-side navigation panel, click **Bits AI**
+- In the left-side navigation panel, click {{< ui >}}Bits AI{{< /ui >}}
 
 {{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="Bits Assistant side panel showing example prompts" style="width:40%;">}}
 
@@ -82,7 +90,7 @@ Bits Assistant is available on iOS v5.8.4+.
 </div>
 
 1. [Download the mobile app and log in][2].
-2. On the home screen, tap **Bits Assistant**.
+2. On the home screen, tap {{< ui >}}Bits Assistant{{< /ui >}}.
 3. Start chatting with Bits Assistant in chat or voice mode.
 {{< img src="bits_ai/getting_started/bitsai_mobile_app.PNG" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
@@ -105,3 +113,5 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 [4]: /cloud_cost_management/
 [5]: /dashboards/
 [6]: /notebooks/
+[7]: /ddsql_editor/
+[8]: /ddsql_reference/data_directory/

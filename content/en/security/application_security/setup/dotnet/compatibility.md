@@ -37,7 +37,7 @@ Threat Detection is supported for the following deployment types:
 
 ### Supported .NET versions
 
-The Datadog .NET Tracing library is open source. View the [GitHub repository][2] for more information.
+The Datadog .NET SDK is open source. View the [GitHub repository][2] for more information.
 
 The .NET Tracer supports instrumentation from 
  - .NET Framework 4.6.1 and newer versions

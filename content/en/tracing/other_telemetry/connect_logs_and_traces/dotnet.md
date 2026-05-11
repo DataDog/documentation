@@ -227,7 +227,7 @@ If you prefer to manually correlate your traces with your logs, you can add corr
 
   | Required key   | Description                                  |
   | -------------- | -------------------------------------------- |
-  | `dd.env`       | Globally configures the `env` for the tracer. Defaults to `""` if not set. |
+  | `dd.env`       | Globally configures the `env` for the SDK. Defaults to `""` if not set. |
   | `dd.service`   | Globally configures the root service name. Defaults to the name of the application or IIS site name if not set.  |
   | `dd.version`   | Globally configures `version` for the service. Defaults to `""` if not set.  |
   | `dd.trace_id`  | Active trace ID (represented as a 64-bit decimal number) during the log statement. Defaults to `0` if no trace.  |
@@ -356,7 +356,7 @@ You can read more about using BeginScope to create structured log messages for t
 [5]: https://docs.microsoft.com/en-us/dotnet/core/extensions/logging
 [6]: /tracing/trace_collection/library_config/dotnet-core/#configuring-the-net-tracer
 [7]: /logs/log_collection/csharp/
-[8]: /logs/log_configuration/processors/?tab=ui#trace-remapper
+[8]: /logs/log_configuration/processors/trace_remapper/
 [9]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=withlogintegration
 [10]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [11]: https://www.nuget.org/packages/Datadog.Trace/

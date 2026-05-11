@@ -44,11 +44,11 @@ Supported products (Agent 7.65.0 and above):
 - Orchestrator Explorer
 - Runtime Security
 - Serverless Monitoring
+- Datadog [DDOT Collector][4]
 
 The Datadog FIPS Agent does **not** support the following:
 - Communication between Cluster Agent and Node Agents
 - Outbound communication to anything other than GovCloud
-- Datadog [DDOT Collector][4]
 
 
 ## Compliance guidelines
@@ -91,7 +91,7 @@ The following baseline controls apply to each platform. Your system may require 
 {{< /tabs >}}
 
 In addition to the Operating System (OS) requirements above:
-- You must have access to a FIPS-compliant Datadog environment (US1-FED).
+- You must have access to a FIPS-compliant Datadog environment (US1-FED or US2-FED).
 - The Agent version must be 7.65.0 and above to access the FIPS Agent
 
 ## Installation
@@ -104,9 +104,7 @@ In addition to the Operating System (OS) requirements above:
    **Note:** FIPS support is only available on Agent versions 7.65.0 and above:
    1. If you're using the Agent install script, specify the `DD_AGENT_FLAVOR="datadog-fips-agent"` environment variable in your installation command. For example:
 
-      ```sh
-      DD_SITE="ddog-gov.com" DD_API_KEY="MY_API_KEY" DD_AGENT_FLAVOR="datadog-fips-agent" … bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
-      ```
+      <pre><code>DD_SITE="{{< region-param key="dd_site" >}}" DD_API_KEY="MY_API_KEY" DD_AGENT_FLAVOR="datadog-fips-agent" … bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"</code></pre>
    1. If you're installing with a package, [follow the instructions][1] to install the latest `datadog-fips-agent` package available for your platform.
    1. Add `GOFIPS=1` to your Datadog environment variables, reload all service units, and restart the Datadog Agent service (`datadog-agent.service`). For example, if your host is using systemd:
 
@@ -129,12 +127,10 @@ In addition to the Operating System (OS) requirements above:
 
    **Note:** FIPS support is only available on Agent versions 7.65.0 and above:
 
-   {{< code-block lang="powershell" >}}
-$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-fips-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="ddog-gov.com"'
+   <pre><code>$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-fips-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="&lt;DATADOG_API_KEY&gt;" SITE="{{< region-param key="dd_site" >}}"'
 if ($p.ExitCode -ne 0) {
    Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
-}
-{{< /code-block >}}
+}</code></pre>
 
 3. Run the Agent `status` command and make sure you see `FIPS Mode: enabled` in the status output.
 
@@ -163,7 +159,7 @@ For AWS Lambda FIPS compliance, follow the instructions in the [AWS Lambda FIPS 
 
 When following the [ECS installation instructions][1], make sure to use these FIPS-specific configuration values for your Task Definition:
 - Set `image` in the `containerDefinitions` object to `public.ecr.aws/datadog/agent:7-fips`  
-- Set `DD_SITE` environment variable to `ddog-gov.com`
+- Set `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}}
 
 [1]: /containers/amazon_ecs/
 {{% /tab %}}
@@ -173,19 +169,15 @@ When following the [ECS installation instructions][1], make sure to use these FI
 When following the [Datadog Agent installation on Kubernetes][1] instructions, make sure to include these FIPS-specific configuration values in the `datadog-agent.yaml` file depending on your chosen installation method:
 
 For the Datadog Operator:
-```yaml
-spec:
+<pre><code>spec:
    global:
-      site: "ddog-gov.com"
-      useFIPSAgent: true
-```
+      site: "{{< region-param key="dd_site" >}}"
+      useFIPSAgent: true</code></pre>
 
 For the Datadog Helm Chart:
-```yaml
-datadog:
-   site: "ddog-gov.com"
-useFIPSAgent: true
-```
+<pre><code>datadog:
+   site: "{{< region-param key="dd_site" >}}"
+useFIPSAgent: true</code></pre>
 
 [1]: /containers/kubernetes/installation/
 {{% /tab %}}

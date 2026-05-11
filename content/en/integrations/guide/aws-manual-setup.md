@@ -51,7 +51,7 @@ Use this guide to manually set up the Datadog [AWS Integration][1].
 
 To set up the AWS integration manually, create an IAM policy and IAM role in your AWS account, and configure the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">
   <em>Setting up S3 Log Archives using Role Delegation is in limited availability. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request this feature in your Datadog for Government account</em>.
 </div>
@@ -74,7 +74,7 @@ Changing the access type on an existing AWS account is a destructive operation. 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial regions.
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial or AWS GovCloud regions.
 {{< /site-region >}}
 4. Copy the `AWS External ID`. For more information about the external ID, read the [IAM User Guide][3].
@@ -95,7 +95,7 @@ Datadog assumes this role to collect data on your behalf.
 {{< site-region region="ap2" >}}
 3. Enter `412381753143` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 3. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
 **Note**: Ensure that the **DATADOG SITE** selector on the right of this documentation page is set to your Datadog site before copying the account ID above.
