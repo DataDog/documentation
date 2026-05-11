@@ -1,6 +1,7 @@
 ---
 title: Video
 draft: true
+private: true
 ---
 
 ## Overview
