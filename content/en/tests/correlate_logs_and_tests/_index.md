@@ -74,20 +74,15 @@ Use the following environment variables to enable and configure log submission:
 
 Requirements: `ddtrace >= 4.8.0`.
 
-For **pytest** and the standard library `logging` module, `ddtrace` can forward test log lines to Datadog and attach the active **test span** trace and span identifiers so they appear correlated on the test run.
+Log submission is supported for the pytest test framework, and only when logs are emitted with the standard library `logging` module.
 
-For Test Optimization in **agentless** mode, use the variables below so the pytest plugin submits logs directly to the logs intake:
+Use the following environment variable to enable log submission for agentless mode:
 
-| Name | Description | Default value |
-| ---- | ----------- | ------------- |
-| `DD_AGENTLESS_LOG_SUBMISSION_ENABLED` (required) | Set to `true` to enable log submission from the pytest plugin in agentless mode. | `false` |
-| `DD_CIVISIBILITY_AGENTLESS_ENABLED` (required) | Must be `true` when using agentless log submission. If this is not enabled, log submission stays off and the tracer emits a warning. | `false` |
+| Name                                             | Description                     | Default value |
+| ------------------------------------------------ | ------------------------------- | ------------- |
+| `DD_AGENTLESS_LOG_SUBMISSION_ENABLED` (required) | Enables/disables log submission | `false`       |
 
-When using the Datadog Agent, set instead **`DD_LOGS_INJECTION=true`**, so the pytest plugin forwards standard `logging` output and enriches it with the test span’s trace and span IDs.
-
-| Name | Description | Default value |
-| ---- | ----------- | ------------- |
-| `DD_LOGS_INJECTION` | Required for the pytest log submission path when not using agentless submission. | `false` (unset in environment) |
+If you use the **Datadog Agent** instead of agentless mode, set instead `DD_LOGS_INJECTION=true` in the environment.
 
 ### Ruby
 
