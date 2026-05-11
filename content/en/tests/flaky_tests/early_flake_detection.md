@@ -124,7 +124,8 @@ This could be caused by a couple of reasons:
 
 * This test has ran previously.
 * This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
-* Your test service has more than 100,000 known tests and your Datadog library version does not support pagination on the known tests endpoint.
+
+Finally, if your test service has more than 100,000 known tests and your Datadog library version does not support pagination on the known tests endpoint, the library cannot fetch the known tests baseline and no tests are identified as new. To prevent this, update to the latest tracer version.
 
 ### A test was retried that is not new
 
