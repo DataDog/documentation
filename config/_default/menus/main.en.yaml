@@ -2833,7 +2833,7 @@ menu:
       parent: workflows
       identifier: workflows_limits
       weight: 11
-    - name: Datadog Apps
+    - name: Apps
       url: actions/datadog_apps/
       pre: dev-code
       identifier: datadog_apps
@@ -4636,51 +4636,6 @@ menu:
       parent: profiler_enabling
       identifier: profiler_supported_langs
       weight: 101
-    - name: Java
-      url: profiler/enabling/java/
-      parent: profiler_enabling
-      identifier: profiler_enabling_java
-      weight: 102
-    - name: GraalVM
-      url: profiler/enabling/graalvm/
-      parent: profiler_enabling
-      identifier: profiler_enabling_graalvm
-      weight: 103
-    - name: Python
-      url: profiler/enabling/python/
-      parent: profiler_enabling
-      identifier: profiler_enabling_python
-      weight: 104
-    - name: Go
-      url: profiler/enabling/go/
-      parent: profiler_enabling
-      identifier: profiler_enabling_go
-      weight: 105
-    - name: Ruby
-      url: profiler/enabling/ruby/
-      parent: profiler_enabling
-      identifier: profiler_enabling_ruby
-      weight: 106
-    - name: Node.js
-      url: profiler/enabling/nodejs/
-      parent: profiler_enabling
-      identifier: profiler_enabling_nodejs
-      weight: 107
-    - name: .NET
-      url: profiler/enabling/dotnet/
-      parent: profiler_enabling
-      identifier: profiler_enabling_dotnet
-      weight: 108
-    - name: PHP
-      url: profiler/enabling/php/
-      parent: profiler_enabling
-      identifier: profiler_enabling_php
-      weight: 109
-    - name: C/C++/Rust
-      url: profiler/enabling/ddprof/
-      parent: profiler_enabling
-      identifier: profiler_enabling_linux
-      weight: 110
     - name: Profile Types
       url: profiler/profile_types/
       parent: profiler
@@ -7197,6 +7152,11 @@ menu:
       parent: cloudprem
       identifier: cloudprem_guides
       weight: 10
+    - name: Release Notes
+      url: /byoc-logs/release_notes/
+      parent: cloudprem
+      identifier: cloudprem_release_notes
+      weight: 11
     - name: Security Overview
       url: security/
       pre: security-platform
