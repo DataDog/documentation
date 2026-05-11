@@ -20,15 +20,19 @@
 
 .group-header-container {
   position: relative;
-
+  isolation: isolate; // creates a new stacking context so child z-index values don't compete outside this container
+  
   .group-header-text {
     position: absolute;
     left: 67px; // positioning within .js-group-header
     bottom: 2px;
+
     button.copy-anchor {
       background: none;
       border: none;
       opacity: 0.5;
+      position: relative;
+      z-index: 2; // position above button.js-group-header
       i{
         position: relative;
         top: 2px;
@@ -55,6 +59,7 @@
     cursor: pointer;
     overflow: hidden;
     height: 28px;
+    z-index: 1; // position above .group-header-text
   
     &:hover {
       box-shadow: 0 2px 3px rgba(0,0,0,0.3);
