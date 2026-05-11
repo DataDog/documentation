@@ -106,6 +106,56 @@ menu:
       url: getting_started/organization_topology/
       parent: getting_started
       weight: 28
+    - name: Access for Enterprises
+      identifier: getting_started_access_for_enterprises
+      url: getting_started/access_for_enterprises/
+      parent: getting_started
+      weight: 29
+    - name: Organizing Your Deployment
+      identifier: getting_started_access_for_enterprises_organizing
+      url: getting_started/access_for_enterprises/organizing_your_deployment/
+      parent: getting_started_access_for_enterprises
+      weight: 1
+    - name: Permissions and Feature Access
+      identifier: getting_started_access_for_enterprises_permissions
+      url: getting_started/access_for_enterprises/permissions/
+      parent: getting_started_access_for_enterprises
+      weight: 2
+    - name: Assigning Users to Roles and Teams
+      identifier: getting_started_access_for_enterprises_assigning_users
+      url: getting_started/access_for_enterprises/assigning_users/
+      parent: getting_started_access_for_enterprises
+      weight: 3
+    - name: Protecting Assets
+      identifier: getting_started_access_for_enterprises_protecting_assets
+      url: getting_started/access_for_enterprises/protecting_assets/
+      parent: getting_started_access_for_enterprises
+      weight: 4
+    - name: Protecting Sensitive Data
+      identifier: getting_started_access_for_enterprises_protecting_sensitive_data
+      url: getting_started/access_for_enterprises/protecting_sensitive_data/
+      parent: getting_started_access_for_enterprises
+      weight: 5
+    - name: Credential Management
+      identifier: getting_started_access_for_enterprises_credential_management
+      url: getting_started/access_for_enterprises/credential_management/
+      parent: getting_started_access_for_enterprises
+      weight: 6
+    - name: Creating Access Policies
+      identifier: getting_started_access_for_enterprises_creating_access_policies
+      url: getting_started/access_for_enterprises/creating_access_policies/
+      parent: getting_started_access_for_enterprises
+      weight: 7
+    - name: Sharing Across Organizations
+      identifier: getting_started_access_for_enterprises_sharing
+      url: getting_started/access_for_enterprises/sharing_across_organizations/
+      parent: getting_started_access_for_enterprises
+      weight: 8
+    - name: Example Implementations
+      identifier: getting_started_access_for_enterprises_examples
+      url: getting_started/access_for_enterprises/example_implementations/
+      parent: getting_started_access_for_enterprises
+      weight: 9
     - name: Datadog Site
       identifier: getting_started_datadog_site
       url: getting_started/site/
