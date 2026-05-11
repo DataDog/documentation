@@ -85,7 +85,7 @@ yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 Then, add the following to your project to initialize the SDK:
 
-Supported browser Feature Flags sites are `datadoghq.com`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ap1.datadoghq.com`, `ap2.datadoghq.com`, and `datadoghq.eu`. Browser Feature Flags are not supported on GovCloud sites.
+Note: Browser Feature Flags are currently not supported on GovCloud sites.
 
 {{< code-block lang="javascript" >}}
 import { DatadogProvider } from '@datadog/openfeature-browser';

@@ -47,7 +47,7 @@ pnpm add @datadog/openfeature-browser @openfeature/react-sdk @openfeature/web-sd
 
 Create a `DatadogProvider` instance and register it with OpenFeature. Do this as early as possible in your application, before rendering your React components. `applicationId`, `clientToken`, `site`, and `env` are required. To create a client token, see [Client tokens][2].
 
-Supported browser Feature Flags sites are `datadoghq.com`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ap1.datadoghq.com`, `ap2.datadoghq.com`, and `datadoghq.eu`. Browser Feature Flags are not supported on GovCloud sites.
+Note: Browser Feature Flags are currently not supported on GovCloud sites.
 
 ```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
