@@ -102,8 +102,8 @@ metadata:
   labels: {}
 data:
   install_type: k8s_manual
-  install_id: "e3d69ad7-5d8d-4f19-b7f8-1aa3fd5aecbb"
-  install_time: "1778233441"
+  install_id: "52f0971e-924f-4371-95bf-5dacd080462f"
+  install_time: "1778483129"
 ---
 # Source: datadog/charts/operator/charts/datadogCRDs/templates/datadoghq.com_datadogagents_v1.yaml
 apiVersion: apiextensions.k8s.io/v1

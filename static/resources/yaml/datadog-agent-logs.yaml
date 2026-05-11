@@ -102,8 +102,8 @@ metadata:
   labels: {}
 data:
   install_type: k8s_manual
-  install_id: "6b0298b8-5b19-4619-a9d9-eb7cc96f84d0"
-  install_time: "1778233438"
+  install_id: "3decdaab-218e-4c3d-b364-f20757cabe2b"
+  install_time: "1778483126"
 ---
 # Source: datadog/templates/system-probe-configmap.yaml
 apiVersion: v1
@@ -284,7 +284,6 @@ data:
             "setresuid",
             "setrlimit",
             "setsid",
-            "setsidaccept4",
             "setsockopt",
             "setuid",
             "setuid32",

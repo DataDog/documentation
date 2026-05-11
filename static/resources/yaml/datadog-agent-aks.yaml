@@ -14,7 +14,7 @@ automountServiceAccountToken: true
 metadata:
   labels:
     app: "datadog"
-    chart: "datadog-3.208.1"
+    chart: "datadog-3.208.2"
     heritage: "Helm"
     release: "datadog"
   name: datadog-cluster-agent
@@ -126,8 +126,8 @@ metadata:
   labels: {}
 data:
   install_type: k8s_manual
-  install_id: "0f72b63a-1e98-442c-8be9-a15cbdb5523b"
-  install_time: "1778233437"
+  install_id: "d44b9966-a683-45a9-b14a-c3c8ca6744d4"
+  install_time: "1778483124"
 ---
 # Source: datadog/templates/system-probe-configmap.yaml
 apiVersion: v1
@@ -308,7 +308,6 @@ data:
             "setresuid",
             "setrlimit",
             "setsid",
-            "setsidaccept4",
             "setsockopt",
             "setuid",
             "setuid32",
@@ -8291,7 +8290,7 @@ metadata:
   namespace: default
   labels:
     app: "datadog"
-    chart: "datadog-3.208.1"
+    chart: "datadog-3.208.2"
     release: "datadog"
     heritage: "Helm"
 spec:
