@@ -10,7 +10,7 @@ further_reading:
 algolia:
   tags: ['saml']
 ---
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">The Datadog for Government site only supports SAML login.</div>
 {{< /site-region >}}
 
@@ -36,7 +36,7 @@ After SAML is configured in Datadog and your IdP is set up to accept requests fr
 
 ### SP-initiated login
 
-SP-initiated, or Service Provider-initiated, means login initiated from Datadog. Users log in through the **Single Sign-on URL** shown in the status box at the top of the [SAML Configuration page][4]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL only displays if SAML is enabled for your account and you are using SP-initiated login.
+SP-initiated, or Service Provider-initiated, means login initiated from Datadog. Users log in through the {{< ui >}}Single Sign-on URL{{< /ui >}} shown in the status box at the top of the [SAML Configuration page][4]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL only displays if SAML is enabled for your account and you are using SP-initiated login.
 
 {{< img src="account_management/saml/saml_enabled_cropped.png" alt="Confirmation that SAML Enabled" >}}
 
@@ -104,7 +104,7 @@ With JIT provisioning, a user is created within Datadog the first time they try 
 
 Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact [Datadog support][2]. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 
-Administrators can set the default role for new JIT users. The default role is **Standard**, but you can choose to add new JIT users as **Read-Only**, **Administrators**, or any custom role.
+Administrators can set the default role for new JIT users. The default role is {{< ui >}}Standard{{< /ui >}}, but you can choose to add new JIT users as {{< ui >}}Read-Only{{< /ui >}}, {{< ui >}}Administrators{{< /ui >}}, or any custom role.
 
 <div class="alert alert-danger">
   <strong>Important:</strong> If Role Mapping is enabled, it takes priority over the roles set during JIT provisioning. Without the proper Group Attribute statements, users might end up without roles and lose access to Datadog. To prevent users from being locked out after JIT provisioning, make sure to review your mapping definitions and check your assertions before enabling both Mappings and JIT.
@@ -122,7 +122,7 @@ If you do not use the updated SP metadata, Datadog is not able to associate the 
 
 ### SAML strict
 
-You can make your organization SAML Strict by disabling other login method types in the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username and password, or Google OAuth login, does not work. This ensures that all users with access to Datadog must have valid credentials in your company's identity provider or directory service to access your Datadog account. Org administrators can set per-user [overrides][6] to allow certain users to be SAML Strict exempt.
+You can make your organization SAML Strict by disabling other login method types in the {{< ui >}}Login Methods{{< /ui >}} UI. When this option is configured, all users must, by default, log in with SAML. An existing username and password, or Google OAuth login, does not work. This ensures that all users with access to Datadog must have valid credentials in your company's identity provider or directory service to access your Datadog account. Org administrators can set per-user [overrides][6] to allow certain users to be SAML Strict exempt.
 
 ### Self-updating Datadog SP metadata
 

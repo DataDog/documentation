@@ -15,6 +15,10 @@ further_reading:
   - link: '/monitors/types/error_tracking/'
     tag: 'Documentation'
     text: 'Create an Error Tracking monitor'
+  - link: "https://learn.datadoghq.com/courses/log-investigations"
+    tag: "Learning Center"
+    text: "Track Logs for Alerting and Investigations"
+
 ---
 
 ## Overview

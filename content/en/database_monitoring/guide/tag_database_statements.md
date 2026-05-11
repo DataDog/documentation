@@ -55,7 +55,7 @@ func main() {
 
 ## Explore the tags in DBM
 
-On the [Samples page][4], filter the **Explain Plans** and **Query Samples** views by custom tag.
+On the [Samples page][4], filter the {{< ui >}}Explain Plans{{< /ui >}} and {{< ui >}}Query Samples{{< /ui >}} views by custom tag.
 
 {{< img src="database_monitoring/dbm_filter_explain_plans_by_custom_tag.png" alt="Filter explain plans by custom tag.">}}
 
@@ -63,7 +63,7 @@ You can also view a timeseries of explain plan costs filtered by tag.
 
 {{< img src="database_monitoring/dbm_timeseries_by_custom_tag.png" alt="Explain plan cost by custom tag.">}}
 
-When you select a query, the custom tags are shown on the **Sample Details** page under Propagated Tags.
+When you select a query, the custom tags are shown on the {{< ui >}}Sample Details{{< /ui >}} page under Propagated Tags.
 
 {{< img src="database_monitoring/dbm_explain_plan_with_custom_tags.png" alt="View custom tags on explain plans.">}}
 

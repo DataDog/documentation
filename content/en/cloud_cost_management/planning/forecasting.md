@@ -40,31 +40,31 @@ Cloud Cost Management uses forecasting algorithms to generate cost to generate c
 
 You can generate forecasts for various time horizons and rollup intervals to match your planning needs:
 
-- **Forecast periods**: Predict costs for the next billing period, current month, current year, or a custom date range based on your historical spending data.
-- **Rollup intervals**: View forecasts at daily or monthly intervals depending on your analysis requirements.
+- {{< ui >}}Forecast periods{{< /ui >}}: Predict costs for the next billing period, current month, current year, or a custom date range based on your historical spending data.
+- {{< ui >}}Rollup intervals{{< /ui >}}: View forecasts at daily or monthly intervals depending on your analysis requirements.
 
 ### Data requirements
 
 To generate accurate forecasts, CCM requires:
 
-- **At least 31 *consecutive* days of cost data**: This helps ensure the model has sufficient information to identify meaningful patterns. If fewer days are available, the model pads the remaining days with zeros to generate a forecast.
-- **Recent data**: The model uses up to the last 100 days of your cost history to generate predictions.
+- **At least 64 consecutive days of cost data**: This helps ensure the model has sufficient information to identify meaningful patterns. If fewer days are available, the model pads the remaining days with zeros to generate a forecast.
+- **Recent data**: The model uses up to the last 64 days of your cost history to generate predictions.
 
 ## View forecasts in reports
 
 Navigate to [**Cloud Cost > Analyze > Reports**][1] in Datadog to enable forecasts in your budget reports.
 
-1. Create a report or open an existing **Budget** report.
-2. In the left panel, toggle **Show forecast** to enable forecasting.
-3. Select the forecast period from the **Until end of** dropdown (next period, current month, current year, or a custom range).
+1. Create a report or open an existing {{< ui >}}Budget{{< /ui >}} report.
+2. In the left panel, toggle {{< ui >}}Show forecast{{< /ui >}} to enable forecasting.
+3. Select the forecast period from the {{< ui >}}Until end of{{< /ui >}} dropdown (next period, current month, current year, or a custom range).
 
 {{< img src="cloud_cost/forecasts/budget_report_forecast-2.png" alt="Budget report showing the forecast toggle in the left panel and forecasted costs displayed with historical data" style="width:100%;" >}}
 
 The report displays:
-- **Forecast toggle and controls**: Located in the left panel to enable forecasting and select the time period.
-- **Historical costs**: Your actual spending shown in solid colors.
-- **Forecasted costs**: Predicted costs shown with a hatched pattern.
-- **Forecast summary card**: Shows the total forecasted cost for the selected period.
+- {{< ui >}}Forecast toggle and controls{{< /ui >}}: Located in the left panel to enable forecasting and select the time period.
+- {{< ui >}}Historical costs{{< /ui >}}: Your actual spending shown in solid colors.
+- {{< ui >}}Forecasted costs{{< /ui >}}: Predicted costs shown with a hatched pattern.
+- {{< ui >}}Forecast summary card{{< /ui >}}: Shows the total forecasted cost for the selected period.
 
 ## View forecasts in budgets
 
@@ -72,18 +72,18 @@ Navigate to [**Cloud Cost > Plan > Budgets**][2] in Datadog to view forecasts in
 
 Budget cards automatically display forecast information when available, showing projected costs for each budget period.
 
-If forecasted costs are projected to exceed your budget, the budget status indicates **Projected Over** to help you take action before going over budget.
+If forecasted costs are projected to exceed your budget, the budget status indicates {{< ui >}}Projected Over{{< /ui >}} to help you take action before going over budget.
 
 {{< img src="cloud_cost/forecasts/budget-list-with-forecast.png" alt="Budget list showing forecast values on budget cards" style="width:100%;" >}}
 
 To view detailed forecast information:
 
-1. From the Budgets page, click **View Performance** on any budget to open the detailed budget view.
-2. In the budget performance view, toggle **Show Forecast** to enable forecasting.
+1. From the Budgets page, click {{< ui >}}View Performance{{< /ui >}} on any budget to open the detailed budget view.
+2. In the budget performance view, toggle {{< ui >}}Show Forecast{{< /ui >}} to enable forecasting.
 3. The budget performance chart displays:
-   - **Actual costs**: Your current spending shown in solid colors.
-   - **Forecasted costs**: Predicted costs shown with a hatched pattern extending beyond your actual costs.
-   - **Forecasted Past**: A vertical line indicating where the forecast begins.
+   - {{< ui >}}Actual costs{{< /ui >}}: Your current spending shown in solid colors.
+   - {{< ui >}}Forecasted costs{{< /ui >}}: Predicted costs shown with a hatched pattern extending beyond your actual costs.
+   - {{< ui >}}Forecasted Past{{< /ui >}}: A vertical line indicating where the forecast begins.
 
 {{< img src="cloud_cost/forecasts/updated_budget_status_forecast-1.png" alt="Budget performance view showing the forecast toggle and forecasted costs displayed with a hatched pattern" style="width:100%;" >}}
 

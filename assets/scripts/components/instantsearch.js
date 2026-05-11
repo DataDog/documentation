@@ -358,7 +358,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             if (selectedItem?.classList.contains('ais-Hits-ai-suggestion')) {
                 const query = selectedItem.dataset.query || aisSearchBoxInput.value;
                 if (window.askDocsAI) {
-                    window.askDocsAI(query);
+                    window.askDocsAI(query, { source: 'search_suggestion' });
                     // Hide the search dropdown
                     hitsContainerContainer.classList.add('d-none');
                     searchBoxContainerContainer.classList.remove('active-search');

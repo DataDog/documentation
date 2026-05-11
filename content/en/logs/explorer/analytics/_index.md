@@ -17,6 +17,10 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
       tag: 'Blog'
       text: 'Add more context to your logs with Reference Tables'
+    - link: "https://learn.datadoghq.com/courses/log-queries-aggregations"
+      tag: "Learning Center"
+      text: "Dive Deeper into Log Queries and Aggregations"
+
 ---
 
 ## Overview

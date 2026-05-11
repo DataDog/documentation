@@ -32,7 +32,7 @@ The `ctx` object provides access to all workflow context variables, similar to t
 ## Add a Python function action
 
 In the workflow canvas: 
-1. Click **+** to add a workflow step. 
+1. Click {{< ui >}}+{{< /ui >}} to add a workflow step. 
 1. Search for `Python`. 
 1. Select the Python action to add it to your workflow.
 
@@ -43,13 +43,13 @@ You can use Bits AI to help write Python scripts inside a workflow step.
 To write a script with Bits AI:
 
 1. Add a Python step to your workflow.
-1. In the **Inputs** section, click **Write Code with AI**.
+1. In the {{< ui >}}Inputs{{< /ui >}} section, click {{< ui >}}Write Code with AI{{< /ui >}}.
 1. Enter a custom prompt or select one of the sample prompts. 
-1. Optionally, click **Test script** to generate a preview of the workflow step. 
-1. To save the script, click **Accept changes**. To continue editing the script, click **Reject changes**.
-1. Click the **X** to close the AI dialog. 
-1. Enter a **Description**. 
-1. Click **Save**.
+1. Optionally, click {{< ui >}}Test script{{< /ui >}} to generate a preview of the workflow step. 
+1. To save the script, click {{< ui >}}Accept changes{{< /ui >}}. To continue editing the script, click {{< ui >}}Reject changes{{< /ui >}}.
+1. Click the {{< ui >}}X{{< /ui >}} to close the AI dialog. 
+1. Enter a {{< ui >}}Description{{< /ui >}}. 
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Script examples
 

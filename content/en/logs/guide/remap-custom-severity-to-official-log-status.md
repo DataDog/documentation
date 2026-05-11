@@ -63,6 +63,6 @@ Then add a status remapper that uses the newly created attribute:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_configuration/processors/#log-status-remapper
+[1]: /logs/log_configuration/processors/log_status_remapper/
 [2]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[3]: /logs/log_configuration/processors/#category-processor
+[3]: /logs/log_configuration/processors/category_processor/

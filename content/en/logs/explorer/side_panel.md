@@ -55,11 +55,13 @@ When logs come from a serverless source, the Host Section is replaced with a Ser
 
 Make sure you enable [trace injection in logs][9] and follow the [Unified Service Tagging][10] best practices to benefit from all the capabilities of Logs and APM correlation.
 
+The log side panel displays the trace ID directly in the log event when a trace ID is present. You can use this trace ID to filter logs in the Log Explorer.
+
 Click on the **Trace tab** and see a log in the context of its entire trace, with upstream and downstream services running. Deep dive into the corresponding APM data by clicking on [View Trace Details][11].
 
-Interact with the **Service** section to highlight the part of the trace that corresponds with the selected service. Use this information to refocus your query in the Log Explorer and view other logs from the same trace.
+If a log has a trace ID but the associated trace was not ingested or not retained due to sampling, the side panel displays a message indicating the trace is missing. Because traces and logs are sampled independently, a log can reference a trace that was sampled out. This does not indicate a configuration error. For more information, see [Log has a trace ID but the associated trace is missing][15].
 
-{{< img src="logs/explorer/side_panel/trace.mp4" alt="Hub to APM" video=true style="width:100%;">}}
+Interact with the **Service** section to highlight the part of the trace that corresponds with the selected service. Use this information to refocus your query in the Log Explorer and view other logs from the same trace.
 
 ## Configure your troubleshooting context
 
@@ -98,3 +100,4 @@ Use the **Share** button to share the log opened in side panel to other contexts
 [12]: /logs/explorer/facets/#overview
 [13]: /integrations/#cat-notification
 [14]: /logs/explorer/calculated_fields/
+[15]: /logs/troubleshooting/#log-has-a-trace-id-but-the-associated-trace-is-missing

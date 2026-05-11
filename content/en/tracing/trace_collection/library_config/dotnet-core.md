@@ -1,5 +1,5 @@
 ---
-title: Configuring the .NET Core Tracing Library
+title: Configuring the .NET Core SDK
 code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 60
@@ -36,7 +36,7 @@ further_reading:
     text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
+After you set up the SDK with your code and configure the Agent to collect APM data, optionally configure the SDK as desired, including setting up [Unified Service Tagging][4].
 
 {{% apm-config-visibility %}}
 
@@ -48,14 +48,14 @@ You can set configuration settings in the .NET Tracer with any of the following 
 
 {{% tab "Environment variables" %}}
 
-To configure the tracer using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see [Configuring process environment variables][1].
+To configure the SDK using environment variables, set the variables before launching the instrumented application. To learn how to set environment variables in different environments, see [Configuring process environment variables][1].
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-core/#configuring-process-environment-variables
 {{% /tab %}}
 
 {{% tab "Code" %}}
 
-To configure the tracer in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before calling `Tracer.Configure()`. For example:
+To configure the SDK in application code, create a `TracerSettings` instance from the default configuration sources. Set properties on this `TracerSettings` instance before calling `Tracer.Configure()`. For example:
 
 <div class="alert alert-danger">
   Settings must be set on <code>TracerSettings</code> <em>before</em> creating the <code>Tracer</code>. Changes made to <code>TracerSettings</code> properties after the <code>Tracer</code> is created are ignored.
@@ -83,7 +83,7 @@ Tracer.Configure(settings);
 
 {{% tab "JSON file" %}}
 
-To configure the tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be an object with a key-value pair for each setting. For example:
+To configure the SDK using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be an object with a key-value pair for each setting. For example:
 
 ```json
 {
@@ -234,7 +234,7 @@ Available since version `2.42.0`
 **Default**: `%ProgramData%\Datadog .NET Tracer\logs\` on Windows, `/var/log/datadog/dotnet` on Linux
 
 `DD_TRACE_LOGFILE_RETENTION_DAYS`
-: During the tracer's startup, this configuration uses the tracer's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
+: During the SDK's startup, this configuration uses the SDK's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
 **Default**: `32`
 
 `DD_TRACE_LOGGING_RATE`

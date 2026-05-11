@@ -59,10 +59,10 @@ For a list of supported services, see the [Library Compatibility Requirements][5
 | Low | Session Rewriting                     | SESSION_REWRITING           | TRUE | FALSE | FALSE | FALSE |
 
 ## How IAST detects vulnerabilities
-Datadog Runtime Code Analysis (IAST) utilizes the same tracing libraries as Datadog APM, enabling it to monitor live application traffic and detect code-level vulnerabilities in real time. It follows this process:
+Datadog Runtime Code Analysis (IAST) utilizes the same SDKs as Datadog APM, enabling it to monitor live application traffic and detect code-level vulnerabilities in real time. It follows this process:
 
 - **Tracking data sources:**: IAST observes data entering your application from external sources such as request URLs, bodies, or headers. These inputs are tagged and monitored throughout their lifecycle.
-- **Analyzing data flow**: The Datadog tracing library tracks how the input data moves through the application—even if it's transformed, split, or combined. This allows IAST to understand if and how the original input reaches sensitive parts of the code.
+- **Analyzing data flow**: The Datadog SDK tracks how the input data moves through the application—even if it's transformed, split, or combined. This allows IAST to understand if and how the original input reaches sensitive parts of the code.
 - **Identifying vulnerable points**: IAST detects code locations where user-controlled inputs are used in potentially insecure ways—for example, in SQL queries, dynamic code execution, or HTML rendering.
 - **Confirming the vulnerability**: A vulnerability is only reported when IAST can confirm that tainted input reaches a vulnerable point in the code. This approach minimizes false positives and ensures that findings are actionable.
 
@@ -122,7 +122,7 @@ If a vulnerability that was previously closed is detected again within the follo
 
 ## Enable Runtime Code Analysis (IAST)
 
-To enable IAST, configure the [Datadog Tracing Library][9]. Detailed instructions for both methods can be found in the [**Security > Code Security > Settings**][10] section.
+To enable IAST, configure the [Datadog SDK][9]. Detailed instructions for both methods can be found in the [**Security > Code Security > Settings**][10] section.
 
 If you need additional help, contact [Datadog support][11].
 

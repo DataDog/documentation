@@ -56,7 +56,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
 [1]: /tracing/glossary/#trace
 [2]: /tracing/glossary/#spans
-[3]: /logs/log_configuration/processors/#remapper
+[3]: /logs/log_configuration/processors/remapper/
 [4]: https://app.datadoghq.com/logs/pipelines/remapping
    {{% /tab %}}
    {{% tab "With Log integration" %}}
@@ -84,7 +84,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
 [1]: /tracing/glossary/#trace
 [2]: /tracing/glossary/#spans
-[3]: /logs/log_configuration/processors/#trace-remapper
+[3]: /logs/log_configuration/processors/trace_remapper/
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -92,7 +92,7 @@ Once the IDs are properly injected and remapped to your logs, you can see the lo
 
 {{< img src="tracing/troubleshooting/trace_id_injection.png" alt="A trace page showing the logs section with correlated logs" style="width:90%;">}}
 
-**Note**: Trace IDs and span IDs are not displayed in your logs or log attributes in the UI.
+**Note**: Trace IDs are displayed in the log side panel. If a log has a trace ID but the associated trace was sampled out, the panel displays a message indicating the trace is missing. For more information, see [Log has a trace ID but the associated trace is missing][5].
 
 ## Further Reading
 
@@ -102,3 +102,4 @@ Once the IDs are properly injected and remapped to your logs, you can see the lo
 [2]: https://app.datadoghq.com/logs
 [3]: /logs/guide/logs-not-showing-expected-timestamp/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/
+[5]: /logs/troubleshooting/#log-has-a-trace-id-but-the-associated-trace-is-missing

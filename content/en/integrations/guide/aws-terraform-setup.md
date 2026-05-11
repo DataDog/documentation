@@ -387,7 +387,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
 {{< /site-region >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 2. Select the tab for your AWS account type, and then use the example below as a base template to set up your Terraform configuration file. Ensure to update the following parameters before you apply the changes:
    * `AWS_ACCOUNT_ID`: Your AWS account ID.
 

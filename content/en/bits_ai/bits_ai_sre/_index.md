@@ -5,6 +5,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
     tag: "Blog"
     text: "Introducing Bits AI SRE, your AI on-call teammate"
+  - link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
+    tag: "Blog"
+    text: "Meet the new Bits AI SRE: Deeper reasoning, twice as fast"
 cascade:
     site_support_id: bits_ai_sre
 ---

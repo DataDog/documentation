@@ -9,19 +9,19 @@ algolia:
 
 By default, the Windows Agent uses the `ddagentuser` account created at install time. The account is assigned to the following groups during installation:
 
-* It becomes a member of the "Performance Monitor Users" group
+* It becomes a member of the {{< ui >}}Performance Monitor Users{{< /ui >}} group
   * Necessary to access WMI information
   * Necessary to access Windows performance counter data
-* It becomes a member of the "Event Log Readers" group
-* It becomes a member of the "Performance Log Users" group (since 7.51)
+* It becomes a member of the {{< ui >}}Event Log Readers{{< /ui >}} group
+* It becomes a member of the {{< ui >}}Performance Log Users{{< /ui >}} group (since 7.51)
 
 **Note**: The installer doesn't add the account it creates to the `Users` groups by default. In rare cases, you may encounter permission issues. If so, manually add the created user to the `Users` group.
 
 Additionally, the following security policies are applied to the account during installation:
-* Deny access to this computer from the network
-* Deny log on locally
-* Deny log on through Remote Desktop Services
-* Log on as a service
+* {{< ui >}}Deny access to this computer from the network{{< /ui >}}
+* {{< ui >}}Deny log on locally{{< /ui >}}
+* {{< ui >}}Deny log on through Remote Desktop Services{{< /ui >}}
+* {{< ui >}}Log on as a service{{< /ui >}}
 
 The Windows Agent can also use a user-supplied account. Do not use a 'real' user account. The user-supplied account should be solely dedicated to running the Datadog Agent. The account is modified during installation to restrict its privileges, including login privileges.
 
@@ -52,7 +52,7 @@ Requirements:
 
 ### Installation with group policy
 
-The installer changes the local group policy to allow the newly created user account to **run as a service**.
+The installer changes the local group policy to allow the newly created user account to {{< ui >}}run as a service{{< /ui >}}.
 If the domain group policy disallows that, then the installation setting is overridden, and you must update the domain group policy to allow the user account to run as a service.
 
 ### Installation in a domain environment
@@ -143,7 +143,7 @@ In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because o
 * `exact_match` when set to `false`
 * `user`, which allows selecting processes that belong to a specific user
 
-To restore the old behavior and run the Agent as `Local System` (not recommended) open an Administrator console and run the following command: `sc.exe config "datadogagent" obj= LocalSystem`. Alternatively, open the Service Manager, go to DataDog Agent > Properties and specify Log On as `Local System`.
+To restore the old behavior and run the Agent as `Local System` (not recommended) open an Administrator console and run the following command: `sc.exe config "datadogagent" obj= LocalSystem`. Alternatively, open the Service Manager, go to {{< ui >}}DataDog Agent{{< /ui >}} > {{< ui >}}Properties{{< /ui >}} and specify {{< ui >}}Log On{{< /ui >}} as `Local System`.
 
 ### Cassandra Nodetool integration
 
@@ -157,10 +157,10 @@ For the Cassandra Nodetool integration to continue working, apply the following 
 If you are using the [Datadog- Win 32 event log Integration][10], the Datadog user `ddagentuser` must be added to the Event Log Readers Group to collect logs from the Security logs channel:
 
 1. Open Run with *Windows+R* hotkeys, type `compmgmt.msc`.
-2. Navigate to *System Tools* -> *Local Users and Groups* -> *Groups*.
-3. Right-click **Event Log Readers** and select *Properties*.
-4. Click *Add* and enter `ddagentuser` -> *Check Names*.
-5. Click *OK* and *Apply*.
+2. Navigate to {{< ui >}}System Tools{{< /ui >}} > {{< ui >}}Local Users and Groups{{< /ui >}} > {{< ui >}}Groups{{< /ui >}}.
+3. Right-click {{< ui >}}Event Log Readers{{< /ui >}} and select {{< ui >}}Properties{{< /ui >}}.
+4. Click {{< ui >}}Add{{< /ui >}} and enter `ddagentuser` > {{< ui >}}Check Names{{< /ui >}}.
+5. Click {{< ui >}}OK{{< /ui >}} and {{< ui >}}Apply{{< /ui >}}.
 
 [1]: https://docs.microsoft.com/en-us/windows/win32/adschema/a-samaccountname?redirectedfrom=MSDN
 [2]: /integrations/activemq/

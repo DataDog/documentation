@@ -1,0 +1,29 @@
+{
+  "data": {
+    "attributes": {
+      "formulas": [
+        {
+          "formula": "a",
+          "limit": {
+            "count": 10,
+            "order": "desc"
+          }
+        }
+      ],
+      "from": 1636625471000,
+      "queries": [
+        {
+          "data_source": "container",
+          "name": "a",
+          "metric": "process.stat.container.cpu.system_pct",
+          "aggregator": "avg",
+          "tag_filters": [],
+          "limit": 10,
+          "sort": "desc"
+        }
+      ],
+      "to": 1636629071000
+    },
+    "type": "scalar_request"
+  }
+}

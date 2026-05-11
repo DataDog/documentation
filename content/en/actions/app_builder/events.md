@@ -17,14 +17,14 @@ further_reading:
   text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
 ---
 
-UI components can trigger reactions on an **Event**. Event triggers differ according to the component. For example, a button component can trigger a reaction on a click event, and a table component can trigger a reaction on a page change or table row click event. To see what event triggers are available for a given component, see [Components][1].
+UI components can trigger reactions on an {{< ui >}}Event{{< /ui >}}. Event triggers differ according to the component. For example, a button component can trigger a reaction on a click event, and a table component can trigger a reaction on a page change or table row click event. To see what event triggers are available for a given component, see [Components][1].
 
 An event can set the state of a UI component, open or close a modal, trigger another query, or even run custom JavaScript.
 
-For example, the [GitHub PR summarizer][2] blueprint uses a **Summarize** button with an event that triggers on a click. The event uses the **Trigger Query** reaction which runs the `summarizePulls` query.
+For example, the [GitHub PR summarizer][2] blueprint uses a {{< ui >}}Summarize{{< /ui >}} button with an event that triggers on a click. The event uses the {{< ui >}}Trigger Query{{< /ui >}} reaction which runs the `summarizePulls` query.
 
 In addition to working with events manually, you can use Bits AI to set up event handlers, configure event-driven actions, and optimize event logic:
-   1. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**).
+   1. Click the {{< ui >}}Build with AI{{< /ui >}} icon (**<i class="icon-bits-ai"></i>**).
    1. Enter a custom prompt for an event, or try the prompt `How can you help me with events?`.
 
 
@@ -35,17 +35,17 @@ In App Builder, events and reactions work together to determine component behavi
 Components (such as button clicks or form submissions) and actions (such as execution finished) can both trigger events. Events differ depending on which component you use. For component-specific event details, see [Components][1].
 
 Reactions specify what happens when an event is triggered. Any component that can trigger an event has the following available reactions: 
-- Close Modal
-- Custom
-- Download File
-- Open Modal
-- Open Side Panel
-- Close Side Panel
-- Open URL
-- Set Component State
-- Set State Variable Value
-- Toast Notification
-- Trigger Action
+- {{< ui >}}Close Modal{{< /ui >}}
+- {{< ui >}}Custom{{< /ui >}}
+- {{< ui >}}Download File{{< /ui >}}
+- {{< ui >}}Open Modal{{< /ui >}}
+- {{< ui >}}Open Side Panel{{< /ui >}}
+- {{< ui >}}Close Side Panel{{< /ui >}}
+- {{< ui >}}Open URL{{< /ui >}}
+- {{< ui >}}Set Component State{{< /ui >}}
+- {{< ui >}}Set State Variable Value{{< /ui >}}
+- {{< ui >}}Toast Notification{{< /ui >}}
+- {{< ui >}}Trigger Action{{< /ui >}}
 
 ### Custom reactions
 
@@ -67,7 +67,7 @@ ${() => {
 
 ## State functions
 
-App Builder provides functions for some types of app state changes. These functions are available with the **Set Component State** reaction for specific components and in post-query hooks.
+App Builder provides functions for some types of app state changes. These functions are available with the {{< ui >}}Set Component State{{< /ui >}} reaction for specific components and in post-query hooks.
 
 setIsOpen
 : Sets the status of a modal to open or closed based on the boolean value that you provide.<br>
