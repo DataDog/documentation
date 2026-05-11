@@ -12,13 +12,13 @@ test.describe('RegionSelector component', () => {
   });
 
   test('defaults to US1 (key `us`) when no cookie or query param is set', async ({ page }) => {
-    const select = page.locator('.region-selector__select');
+    const select = page.locator('.region-selector .select__control');
     await expect(select).toHaveValue('us');
     await expect(page.locator('html')).toHaveAttribute('data-active-region', 'us');
   });
 
   test('offers all allowed Datadog sites as options', async ({ page }) => {
-    const select = page.locator('.region-selector__select');
+    const select = page.locator('.region-selector .select__control');
     const values = await select.locator('option').evaluateAll((opts) =>
       opts.map((o) => (o as HTMLOptionElement).value)
     );
@@ -27,7 +27,7 @@ test.describe('RegionSelector component', () => {
 
   test('changes region, writes cookie, updates query param, and sets data-active-region', async ({ page }) => {
     await expect(page.locator('.region-selector[data-hydrated="true"]')).toBeVisible();
-    const select = page.locator('.region-selector__select');
+    const select = page.locator('.region-selector .select__control');
     await select.selectOption('eu');
     await expect(select).toHaveValue('eu');
     await expect(page.locator('html')).toHaveAttribute('data-active-region', 'eu');
@@ -41,7 +41,7 @@ test.describe('RegionSelector component', () => {
 
   test('reads the region from the `?site=` query param on load', async ({ page }) => {
     await page.goto('/docs/test_pages/components/region-selector?site=ap1');
-    const select = page.locator('.region-selector__select');
+    const select = page.locator('.region-selector .select__control');
     await expect(select).toHaveValue('ap1');
     await expect(page.locator('html')).toHaveAttribute('data-active-region', 'ap1');
   });

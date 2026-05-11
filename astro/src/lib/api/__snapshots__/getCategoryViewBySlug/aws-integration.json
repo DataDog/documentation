@@ -8,7 +8,9 @@
       "summary": "Get all AWS tag filters",
       "slug": "get-all-aws-tag-filters",
       "menuOrder": 1,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -16,15 +18,20 @@
       "summary": "List available namespaces",
       "slug": "list-available-namespaces",
       "menuOrder": 1,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
       "operationId": "CreateNewAWSExternalID",
       "summary": "Generate a new external ID",
-      "slug": "generate-a-new-external-id-v2",
+      "slug": "generate-a-new-external-id",
       "menuOrder": 2,
-      "version": "v2",
+      "versions": [
+        "v2",
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -32,7 +39,9 @@
       "summary": "Set an AWS tag filter",
       "slug": "set-an-aws-tag-filter",
       "menuOrder": 2,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -40,7 +49,9 @@
       "summary": "Delete a tag filtering entry",
       "slug": "delete-a-tag-filtering-entry",
       "menuOrder": 3,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "DELETE"
     },
     {
@@ -48,39 +59,41 @@
       "summary": "Get an AWS integration by config ID",
       "slug": "get-an-aws-integration-by-config-id",
       "menuOrder": 3,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
       "operationId": "DeleteAWSAccount",
       "summary": "Delete an AWS integration",
-      "slug": "delete-an-aws-integration-v2",
+      "slug": "delete-an-aws-integration",
       "menuOrder": 4,
-      "version": "v2",
+      "versions": [
+        "v2",
+        "v1"
+      ],
       "method": "DELETE"
-    },
-    {
-      "operationId": "CreateNewAWSExternalID",
-      "summary": "Generate a new external ID",
-      "slug": "generate-a-new-external-id-v1",
-      "menuOrder": 4,
-      "version": "v1",
-      "method": "PUT"
     },
     {
       "operationId": "ListAvailableAWSNamespaces",
       "summary": "List namespace rules",
       "slug": "list-namespace-rules",
       "menuOrder": 5,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
       "operationId": "UpdateAWSAccount",
       "summary": "Update an AWS integration",
-      "slug": "update-an-aws-integration-v2",
+      "slug": "update-an-aws-integration",
       "menuOrder": 5,
-      "version": "v2",
+      "versions": [
+        "v2",
+        "v1"
+      ],
       "method": "PATCH"
     },
     {
@@ -88,39 +101,41 @@
       "summary": "Get AWS integration IAM permissions",
       "slug": "get-aws-integration-iam-permissions",
       "menuOrder": 6,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
       "operationId": "ListAWSAccounts",
       "summary": "List all AWS integrations",
-      "slug": "list-all-aws-integrations-v1",
+      "slug": "list-all-aws-integrations",
       "menuOrder": 6,
-      "version": "v1",
+      "versions": [
+        "v2",
+        "v1"
+      ],
       "method": "GET"
-    },
-    {
-      "operationId": "DeleteAWSAccount",
-      "summary": "Delete an AWS integration",
-      "slug": "delete-an-aws-integration-v1",
-      "menuOrder": 7,
-      "version": "v1",
-      "method": "DELETE"
     },
     {
       "operationId": "GetAWSIntegrationIAMPermissionsStandard",
       "summary": "Get AWS integration standard IAM permissions",
       "slug": "get-aws-integration-standard-iam-permissions",
       "menuOrder": 7,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
       "operationId": "CreateAWSAccount",
       "summary": "Create an AWS integration",
-      "slug": "create-an-aws-integration-v1",
+      "slug": "create-an-aws-integration",
       "menuOrder": 8,
-      "version": "v1",
+      "versions": [
+        "v2",
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -128,23 +143,19 @@
       "summary": "Get resource collection IAM permissions",
       "slug": "get-resource-collection-iam-permissions",
       "menuOrder": 8,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
-    },
-    {
-      "operationId": "UpdateAWSAccount",
-      "summary": "Update an AWS integration",
-      "slug": "update-an-aws-integration-v1",
-      "menuOrder": 9,
-      "version": "v1",
-      "method": "PUT"
     },
     {
       "operationId": "UpdateAWSAccountCCMConfig",
       "summary": "Update AWS CCM config",
       "slug": "update-aws-ccm-config",
       "menuOrder": 9,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -152,63 +163,52 @@
       "summary": "Delete AWS CCM config",
       "slug": "delete-aws-ccm-config",
       "menuOrder": 10,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
       "operationId": "ListAWSEventBridgeSources",
       "summary": "Get all Amazon EventBridge sources",
-      "slug": "get-all-amazon-eventbridge-sources-v1",
+      "slug": "get-all-amazon-eventbridge-sources",
       "menuOrder": 10,
-      "version": "v1",
+      "versions": [
+        "v2",
+        "v1"
+      ],
       "method": "GET"
     },
     {
       "operationId": "CreateAWSEventBridgeSource",
       "summary": "Create an Amazon EventBridge source",
-      "slug": "create-an-amazon-eventbridge-source-v1",
+      "slug": "create-an-amazon-eventbridge-source",
       "menuOrder": 11,
-      "version": "v1",
+      "versions": [
+        "v2",
+        "v1"
+      ],
       "method": "POST"
     },
     {
       "operationId": "DeleteAWSEventBridgeSource",
       "summary": "Delete an Amazon EventBridge source",
-      "slug": "delete-an-amazon-eventbridge-source-v2",
+      "slug": "delete-an-amazon-eventbridge-source",
       "menuOrder": 11,
-      "version": "v2",
+      "versions": [
+        "v2",
+        "v1"
+      ],
       "method": "DELETE"
-    },
-    {
-      "operationId": "DeleteAWSEventBridgeSource",
-      "summary": "Delete an Amazon EventBridge source",
-      "slug": "delete-an-amazon-eventbridge-source-v1",
-      "menuOrder": 12,
-      "version": "v1",
-      "method": "DELETE"
-    },
-    {
-      "operationId": "ListAWSAccounts",
-      "summary": "List all AWS integrations",
-      "slug": "list-all-aws-integrations-v2",
-      "menuOrder": 12,
-      "version": "v2",
-      "method": "GET"
-    },
-    {
-      "operationId": "CreateAWSAccount",
-      "summary": "Create an AWS integration",
-      "slug": "create-an-aws-integration-v2",
-      "menuOrder": 13,
-      "version": "v2",
-      "method": "POST"
     },
     {
       "operationId": "GetAWSAccountCCMConfig",
       "summary": "Get AWS CCM config",
       "slug": "get-aws-ccm-config",
       "menuOrder": 14,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -216,23 +216,9 @@
       "summary": "Create AWS CCM config",
       "slug": "create-aws-ccm-config",
       "menuOrder": 15,
-      "version": "v2",
-      "method": "POST"
-    },
-    {
-      "operationId": "ListAWSEventBridgeSources",
-      "summary": "Get all Amazon EventBridge sources",
-      "slug": "get-all-amazon-eventbridge-sources-v2",
-      "menuOrder": 16,
-      "version": "v2",
-      "method": "GET"
-    },
-    {
-      "operationId": "CreateAWSEventBridgeSource",
-      "summary": "Create an Amazon EventBridge source",
-      "slug": "create-an-amazon-eventbridge-source-v2",
-      "menuOrder": 17,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     }
   ],

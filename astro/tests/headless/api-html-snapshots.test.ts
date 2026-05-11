@@ -39,11 +39,10 @@ const AUDIT_PAGES: AuditPage[] = [
   { name: '07-incidents-landing', url: '/api/latest/incidents/' },
   { name: '07-incidents-create-an-incident', url: '/api/latest/incidents/create-an-incident/' },
 
-  // aws-integration: collision case — same summary in v1 and v2 produces two
-  // distinct pages (`-v1` and `-v2` suffixes). Capture both.
+  // aws-integration: multi-version case — v1 and v2 of "List all AWS
+  // integrations" share one page that renders both as version-tab pills.
   { name: '08-aws-integration-landing', url: '/api/latest/aws-integration/' },
-  { name: '08-aws-integration-list-v1', url: '/api/latest/aws-integration/list-all-aws-integrations-v1/' },
-  { name: '08-aws-integration-list-v2', url: '/api/latest/aws-integration/list-all-aws-integrations-v2/' },
+  { name: '08-aws-integration-list', url: '/api/latest/aws-integration/list-all-aws-integrations/' },
 
   { name: '09-monitors-landing', url: '/api/latest/monitors/' },
   { name: '09-monitors-create-a-monitor', url: '/api/latest/monitors/create-a-monitor/' },
@@ -117,6 +116,19 @@ async function normalize(html: string): Promise<string> {
   //   id="api-response-accf4936"   id="api-response-accf4936-panel-0"
   //   aria-controls="..."   data-foo="..."
   out = out.replace(/\b[a-f0-9]{8}\b/g, (raw) => canonicalize(raw));
+
+  // CSS-module-hashed class names from Vite, of the form
+  // `_<original-class>_<5-or-6-char-hash>_<line-or-counter>`. The leading
+  // underscore is Vite's convention for module-hashed classes; the trailing
+  // hash+counter both shift when the source CSS module is edited, even when
+  // the resulting markup is semantically identical. Collapse them to a
+  // stable `_<class>_MOD` form so unrelated CSS edits don't churn snapshots.
+  // The original static BEM class (no leading underscore) is emitted alongside
+  // by `classListFactory`, so the readable class name is preserved either way.
+  out = out.replace(
+    /\b_([\w-]+?)_[a-z0-9]{5,6}_\d+\b/g,
+    (_m, name) => `_${name}_MOD`,
+  );
 
   return await prettierFormat(out, {
     parser: 'html',

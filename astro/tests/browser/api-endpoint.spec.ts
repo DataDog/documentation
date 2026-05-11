@@ -15,12 +15,12 @@ test.describe('ApiEndpoint component', () => {
     await expect(badge.first()).toBeVisible();
   });
 
-  test('renders endpoint heading with anchor', async ({ page }) => {
+  test('exposes the operation slug as the section anchor', async ({ page }) => {
+    // ApiEndpoint stopped rendering its own summary heading once the
+    // operation page took over the version-tabs layout (the page renders
+    // a single H1 above the tabs). The slug anchor moved onto the section.
     const endpoint = page.locator('.api-endpoint').first();
-    const heading = endpoint.locator('h2');
-    await expect(heading).toBeVisible();
-
-    const id = await heading.getAttribute('id');
+    const id = await endpoint.getAttribute('id');
     expect(id).toBeTruthy();
   });
 
@@ -66,7 +66,7 @@ test.describe('ApiEndpoint region switching', () => {
     await page.goto('/docs/test_pages/components/api-endpoint');
 
     await expect(page.locator('.region-selector[data-hydrated="true"]').first()).toBeVisible();
-    await page.locator('.region-selector__select').selectOption('eu');
+    await page.locator('.region-selector .select__control').selectOption('eu');
 
     const endpoint = page.locator('.api-endpoint').first();
     const euUrl = endpoint.locator('[data-region="eu"]').first();
@@ -82,7 +82,7 @@ test.describe('ApiEndpoint region switching', () => {
     await page.goto('/docs/test_pages/components/api-endpoint');
 
     await expect(page.locator('.region-selector[data-hydrated="true"]').first()).toBeVisible();
-    await page.locator('.region-selector__select').selectOption('eu');
+    await page.locator('.region-selector .select__control').selectOption('eu');
 
     const codeExample = page.locator('.api-code-example').first();
     const euVariant = codeExample.locator('[data-region="eu"]').first();

@@ -8,7 +8,9 @@
       "summary": "Create an incident",
       "slug": "create-an-incident",
       "menuOrder": 1,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -16,7 +18,9 @@
       "summary": "Get the details of an incident",
       "slug": "get-the-details-of-an-incident",
       "menuOrder": 2,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -24,7 +28,9 @@
       "summary": "Update an existing incident",
       "slug": "update-an-existing-incident",
       "menuOrder": 3,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -32,7 +38,9 @@
       "summary": "Delete an existing incident",
       "slug": "delete-an-existing-incident",
       "menuOrder": 4,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -40,7 +48,9 @@
       "summary": "Create postmortem attachment",
       "slug": "create-postmortem-attachment",
       "menuOrder": 5,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -48,7 +58,9 @@
       "summary": "Search for incidents",
       "slug": "search-for-incidents",
       "menuOrder": 6,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -56,7 +68,9 @@
       "summary": "List an incident's impacts",
       "slug": "list-an-incident-s-impacts",
       "menuOrder": 7,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -64,7 +78,9 @@
       "summary": "Create an incident impact",
       "slug": "create-an-incident-impact",
       "menuOrder": 8,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -72,7 +88,9 @@
       "summary": "Delete an incident impact",
       "slug": "delete-an-incident-impact",
       "menuOrder": 9,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -80,7 +98,9 @@
       "summary": "Create an incident integration metadata",
       "slug": "create-an-incident-integration-metadata",
       "menuOrder": 10,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -88,7 +108,9 @@
       "summary": "Get incident integration metadata details",
       "slug": "get-incident-integration-metadata-details",
       "menuOrder": 11,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -96,7 +118,9 @@
       "summary": "Update an existing incident integration metadata",
       "slug": "update-an-existing-incident-integration-metadata",
       "menuOrder": 12,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -104,7 +128,9 @@
       "summary": "Delete an incident integration metadata",
       "slug": "delete-an-incident-integration-metadata",
       "menuOrder": 13,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -112,7 +138,9 @@
       "summary": "Get a list of an incident's todos",
       "slug": "get-a-list-of-an-incident-s-todos",
       "menuOrder": 14,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -120,7 +148,9 @@
       "summary": "Create an incident todo",
       "slug": "create-an-incident-todo",
       "menuOrder": 15,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -128,7 +158,9 @@
       "summary": "Get incident todo details",
       "slug": "get-incident-todo-details",
       "menuOrder": 16,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -136,7 +168,9 @@
       "summary": "Update an incident todo",
       "slug": "update-an-incident-todo",
       "menuOrder": 17,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -144,7 +178,9 @@
       "summary": "Delete an incident todo",
       "slug": "delete-an-incident-todo",
       "menuOrder": 18,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -152,7 +188,9 @@
       "summary": "Create an incident type",
       "slug": "create-an-incident-type",
       "menuOrder": 19,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -160,7 +198,9 @@
       "summary": "Get a list of incident types",
       "slug": "get-a-list-of-incident-types",
       "menuOrder": 20,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -168,7 +208,9 @@
       "summary": "Get incident type details",
       "slug": "get-incident-type-details",
       "menuOrder": 21,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -176,7 +218,9 @@
       "summary": "Update an incident type",
       "slug": "update-an-incident-type",
       "menuOrder": 22,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -184,7 +228,9 @@
       "summary": "Delete an incident type",
       "slug": "delete-an-incident-type",
       "menuOrder": 23,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -192,7 +238,9 @@
       "summary": "List incident notification templates",
       "slug": "list-incident-notification-templates",
       "menuOrder": 24,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -200,7 +248,9 @@
       "summary": "Create incident notification template",
       "slug": "create-incident-notification-template",
       "menuOrder": 25,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -208,7 +258,9 @@
       "summary": "Get incident notification template",
       "slug": "get-incident-notification-template",
       "menuOrder": 26,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -216,7 +268,9 @@
       "summary": "Update incident notification template",
       "slug": "update-incident-notification-template",
       "menuOrder": 27,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -224,7 +278,9 @@
       "summary": "Delete a notification template",
       "slug": "delete-a-notification-template",
       "menuOrder": 28,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -232,7 +288,9 @@
       "summary": "List incident notification rules",
       "slug": "list-incident-notification-rules",
       "menuOrder": 29,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -240,7 +298,9 @@
       "summary": "Create an incident notification rule",
       "slug": "create-an-incident-notification-rule",
       "menuOrder": 30,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -248,7 +308,9 @@
       "summary": "Get an incident notification rule",
       "slug": "get-an-incident-notification-rule",
       "menuOrder": 31,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -256,7 +318,9 @@
       "summary": "Update an incident notification rule",
       "slug": "update-an-incident-notification-rule",
       "menuOrder": 32,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PUT"
     },
     {
@@ -264,7 +328,9 @@
       "summary": "Delete an incident notification rule",
       "slug": "delete-an-incident-notification-rule",
       "menuOrder": 33,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -272,7 +338,9 @@
       "summary": "List incident attachments",
       "slug": "list-incident-attachments",
       "menuOrder": 34,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -280,7 +348,9 @@
       "summary": "Create incident attachment",
       "slug": "create-incident-attachment",
       "menuOrder": 35,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -288,7 +358,9 @@
       "summary": "Delete incident attachment",
       "slug": "delete-incident-attachment",
       "menuOrder": 36,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -296,7 +368,9 @@
       "summary": "Update incident attachment",
       "slug": "update-incident-attachment",
       "menuOrder": 37,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -304,7 +378,9 @@
       "summary": "Get global incident settings",
       "slug": "get-global-incident-settings",
       "menuOrder": 38,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -312,7 +388,9 @@
       "summary": "Update global incident settings",
       "slug": "update-global-incident-settings",
       "menuOrder": 39,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -320,7 +398,9 @@
       "summary": "List global incident handles",
       "slug": "list-global-incident-handles",
       "menuOrder": 40,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -328,7 +408,9 @@
       "summary": "Create global incident handle",
       "slug": "create-global-incident-handle",
       "menuOrder": 41,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -336,7 +418,9 @@
       "summary": "Update global incident handle",
       "slug": "update-global-incident-handle",
       "menuOrder": 42,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PUT"
     },
     {
@@ -344,7 +428,9 @@
       "summary": "Delete global incident handle",
       "slug": "delete-global-incident-handle",
       "menuOrder": 43,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -352,7 +438,9 @@
       "summary": "List postmortem templates",
       "slug": "list-postmortem-templates",
       "menuOrder": 44,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -360,7 +448,9 @@
       "summary": "Create postmortem template",
       "slug": "create-postmortem-template",
       "menuOrder": 45,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -368,7 +458,9 @@
       "summary": "Get postmortem template",
       "slug": "get-postmortem-template",
       "menuOrder": 46,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -376,7 +468,9 @@
       "summary": "Update postmortem template",
       "slug": "update-postmortem-template",
       "menuOrder": 47,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -384,7 +478,9 @@
       "summary": "Delete postmortem template",
       "slug": "delete-postmortem-template",
       "menuOrder": 48,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -392,7 +488,9 @@
       "summary": "Import an incident",
       "slug": "import-an-incident",
       "menuOrder": 49,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -400,7 +498,9 @@
       "summary": "Get a list of incidents",
       "slug": "get-a-list-of-incidents",
       "menuOrder": 50,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -408,7 +508,9 @@
       "summary": "Get a list of an incident's integration metadata",
       "slug": "get-a-list-of-an-incident-s-integration-metadata",
       "menuOrder": 51,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -416,7 +518,9 @@
       "summary": "Get a list of incident user-defined fields",
       "slug": "get-a-list-of-incident-user-defined-fields",
       "menuOrder": 52,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -424,7 +528,9 @@
       "summary": "Create an incident user-defined field",
       "slug": "create-an-incident-user-defined-field",
       "menuOrder": 53,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -432,7 +538,9 @@
       "summary": "Get an incident user-defined field",
       "slug": "get-an-incident-user-defined-field",
       "menuOrder": 54,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -440,7 +548,9 @@
       "summary": "Update an incident user-defined field",
       "slug": "update-an-incident-user-defined-field",
       "menuOrder": 55,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -448,7 +558,9 @@
       "summary": "Delete an incident user-defined field",
       "slug": "delete-an-incident-user-defined-field",
       "menuOrder": 56,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     }
   ],

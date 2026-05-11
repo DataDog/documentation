@@ -37,9 +37,9 @@ const baseEndpoint: EndpointData = {
 };
 
 describe('renderApiEndpointMd', () => {
-  it('emits a level-2 heading with the endpoint summary and version', () => {
+  it('does not emit its own summary heading (the operation page composes one)', () => {
     const out = renderApiEndpointMd(baseEndpoint);
-    expect(out).toContain('## Get a thing (v2 — latest)');
+    expect(out).not.toMatch(/^#\s/m);
   });
 
   it('renders a Datadog site → API endpoint table for each supported region', () => {

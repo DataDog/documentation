@@ -8,50 +8,58 @@ beforeEach(() => {
     delete document.documentElement.dataset.commitRef;
 });
 
+function setLocation({ origin, pathname }: { origin: string; pathname: string }) {
+    Object.defineProperty(window, 'location', {
+        value: { origin, pathname },
+        writable: true,
+    });
+}
+
 describe('getMdUrl', () => {
-    it('strips trailing slash and appends .md', () => {
-        Object.defineProperty(window, 'location', {
-            value: { pathname: '/api/latest/metrics/' },
-            writable: true,
-        });
+    it('strips trailing slash and appends .md, anchored to the current origin', () => {
+        setLocation({ origin: 'https://docs.datadoghq.com', pathname: '/api/latest/metrics/' });
         expect(getMdUrl()).toBe('https://docs.datadoghq.com/api/latest/metrics.md');
     });
 
     it('handles paths without a trailing slash', () => {
-        Object.defineProperty(window, 'location', {
-            value: { pathname: '/api/latest/metrics' },
-            writable: true,
-        });
+        setLocation({ origin: 'https://docs.datadoghq.com', pathname: '/api/latest/metrics' });
         expect(getMdUrl()).toBe('https://docs.datadoghq.com/api/latest/metrics.md');
     });
 
     it('handles locale-prefixed paths', () => {
-        Object.defineProperty(window, 'location', {
-            value: { pathname: '/ja/api/latest/metrics/' },
-            writable: true,
-        });
+        setLocation({ origin: 'https://docs.datadoghq.com', pathname: '/ja/api/latest/metrics/' });
         expect(getMdUrl()).toBe('https://docs.datadoghq.com/ja/api/latest/metrics.md');
     });
 
     it('strips commitRef branch prefix from pathname', () => {
         document.documentElement.dataset.commitRef = 'my-branch';
-        Object.defineProperty(window, 'location', {
-            value: { pathname: '/my-branch/api/latest/metrics/' },
-            writable: true,
+        setLocation({
+            origin: 'https://docs.datadoghq.com',
+            pathname: '/my-branch/api/latest/metrics/',
         });
         expect(getMdUrl()).toBe('https://docs.datadoghq.com/api/latest/metrics.md');
+    });
+
+    it('uses the current origin instead of forcing docs.datadoghq.com', () => {
+        setLocation({ origin: 'http://localhost:4322', pathname: '/api/latest/metrics/' });
+        expect(getMdUrl()).toBe('http://localhost:4322/api/latest/metrics.md');
+    });
+
+    it('uses the current origin for preview deployments', () => {
+        setLocation({
+            origin: 'https://preview.datadoghq.example',
+            pathname: '/api/latest/metrics/',
+        });
+        expect(getMdUrl()).toBe('https://preview.datadoghq.example/api/latest/metrics.md');
     });
 });
 
 describe('loadPageText', () => {
     beforeEach(() => {
-        Object.defineProperty(window, 'location', {
-            value: { pathname: '/api/latest/metrics/' },
-            writable: true,
-        });
+        setLocation({ origin: 'https://docs.datadoghq.com', pathname: '/api/latest/metrics/' });
     });
 
-    it('fetches the .md URL and returns text', async () => {
+    it('fetches the .md URL from the current origin and returns text', async () => {
         const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
             new Response('# Metrics\n\nSome content', { status: 200 }),
         );

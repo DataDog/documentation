@@ -20,7 +20,9 @@
   box-shadow: var(--hugo-header-shadow);
   background-color: var(--color-bg);
   z-index: var(--hugo-header-z);
-  transition: height 0.2s ease;
+  /* Match Hugo's `logoAnimation` 200ms ease-in-out so the nav height shrinks
+     in lockstep with the bits logo when `.main-nav-scrolled` is added. */
+  transition: height 0.2s ease-in-out;
 }
 
 .header__container {
@@ -35,7 +37,17 @@
 
 @media (min-width: 992px) {
   .header__nav {
-    height: calc(var(--hugo-header-height-desktop) - var(--hugo-header-shrink));
+    height: var(--hugo-header-height-desktop);
+  }
+}
+
+/* Once the user scrolls past the threshold, snap the header to its shrunk
+   height. Hugo does the same thing — `.main-nav-scrolled` applies
+   `tablet-lg:tw-h-[65px]` in the Tailwind nav partial. The transition on
+   `.header__nav` smooths the snap to 200ms ease-in-out. */
+@media (min-width: 992px) {
+  :global(.main-nav-scrolled) .header__nav {
+    height: var(--hugo-header-height-desktop-scrolled);
   }
 }
 
@@ -155,23 +167,35 @@
 }
 
 .header__logo-bits {
-  height: calc(75px - max(0px, var(--hugo-header-shrink) - 30px) * 25 / 35);
+  height: 75px;
   max-width: none;
+  /* Match Hugo's `logoAnimation 200ms ease-in-out`. The CSS `ease` default
+     is front-loaded (fast start, slow end), which read as a faster shrink
+     than Hugo's ease-in-out curve. */
+  transition: height 0.2s ease-in-out;
 }
 
 .header__logo-text {
   width: 93px;
+  height: 14px;
+  margin-top: 5px;
   overflow: hidden;
   font-size: 0;
-  opacity: clamp(0, calc(1 - var(--hugo-header-shrink-n) / 30), 1);
-  height: clamp(0px, calc(14px - 14px * var(--hugo-header-shrink-n) / 30), 14px);
-  margin-top: clamp(0px, calc(5px - 5px * var(--hugo-header-shrink-n) / 30), 5px);
 }
 
-/* Scroll-shrink: collapse the wordmark and shrink the bits logo once the
-   inline HeaderScroll listener has added `.main-nav-scrolled` to the root. */
+/* Once the header is fully shrunk: hide the wordmark and shrink the bits
+   logo to its compact size. Hugo triggers the same pair of changes together
+   at the same threshold (see `.main-nav-scrolled` in websites-modules
+   `_main-nav.scss`, with `logoAnimation` 76→50px and `logoTextAnimation`
+   opacity 1→0 both running for 200ms). The wordmark hides instantly because
+   interpolating only `height` while `width` stays fixed at 93px visibly
+   squashes the 807×14 source image. */
 :global(.main-nav-scrolled) .header__logo-text {
   display: none;
+}
+
+:global(.main-nav-scrolled) .header__logo-bits {
+  height: 50px;
 }
 
 

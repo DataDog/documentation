@@ -7,7 +7,7 @@ import type { OpenAPIV3 } from "openapi-types";
  *
  * Not validated at runtime — these never escape the builder pipeline as
  * a public return value, so they don't need a Zod schema. The view
- * functions that *do* return data (`getCategoriesView`, `getEndpointView`)
+ * functions that *do* return data (`getCategoriesView`, `getOperationView`)
  * have Zod schemas in this folder.
  */
 export interface SplitParams {

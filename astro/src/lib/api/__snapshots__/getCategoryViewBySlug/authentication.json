@@ -8,7 +8,9 @@
       "summary": "Validate API key",
       "slug": "validate-api-key",
       "menuOrder": 1,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     }
   ],

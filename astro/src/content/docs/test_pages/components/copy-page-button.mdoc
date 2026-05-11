@@ -29,8 +29,10 @@ If the `.md` fetch fails (e.g. during local development), the component extracts
 
 The button has two visual states:
 
-- **Default**: clipboard icon + "Copy page as text"
-- **Copied**: clipboard-with-checkmark icon + "Copied!" (resets after 3 seconds)
+- **Default**: clipboard icon + "Copy page"
+- **Copied**: clipboard-with-checkmark icon + "Copied" (resets after 3 seconds)
+
+Both label strings render at all times — the inactive one is hidden with `visibility: hidden` so the button keeps a constant width. The icon stays in place when the label flips between states.
 
 ## Usage
 

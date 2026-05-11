@@ -2,13 +2,14 @@
  * Markdown twin of `ApiEndpoint.astro`.
  *
  * Composes the leaf `.md.ts` renderers into a complete Markdown rendering of
- * one API endpoint. Output is parseable Markdoc — tabbed content (request
- * body, response, code examples) emits `{% tabs %}` blocks; status notices
- * emit `{% alert %}` blocks.
+ * one API endpoint's body. Output is parseable Markdoc — tabbed content
+ * (request body, response, code examples) emits `{% tabs %}` blocks; status
+ * notices emit `{% alert %}` blocks.
  *
- * The endpoint heading is at level 2 so the category renderer can emit a
- * level-1 heading at the page root. A horizontal rule separates each
- * endpoint from the next within a category page.
+ * The renderer no longer emits the top-level summary heading: the operation
+ * page composes a single `# Summary` plus per-variant `## v{N} (latest?)`
+ * sub-headings around each call, so a multi-version operation reads as one
+ * outline rather than parallel duplicated H1s.
  */
 
 import type { EndpointData } from '@lib/api/schemas/views';
@@ -74,20 +75,8 @@ function renderCodeExampleSection(ep: EndpointData): string {
   return ['### Code Example', '', renderApiCodeExampleMd(ep.codeExamples)].join('\n');
 }
 
-export interface RenderApiEndpointMdOptions {
-  /** Heading level for the operation summary. Defaults to 2 (used inside category pages). */
-  headingLevel?: 1 | 2;
-}
-
-export function renderApiEndpointMd(
-  ep: EndpointData,
-  options: RenderApiEndpointMdOptions = {},
-): string {
+export function renderApiEndpointMd(ep: EndpointData): string {
   const blocks: string[] = [];
-
-  const headingMarker = options.headingLevel === 1 ? '#' : '##';
-  const versionSuffix = ep.version === 'v2' ? ' (v2 — latest)' : ` (${ep.version})`;
-  blocks.push(`${headingMarker} ${ep.summary}${versionSuffix}`);
 
   if (ep.deprecated) {
     const link = ep.newerVersionUrl ? ` [Use the newer version.](${ep.newerVersionUrl})` : '';

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import styles from './RegionSelector.module.css';
 import { classListFactory } from '@utils/classListFactory';
+import { Select } from '@components/Select/Select';
 import {
   getActiveRegion,
   setActiveRegion,
@@ -51,18 +52,13 @@ export function RegionSelector({ regions, labels }: RegionSelectorProps): JSX.El
   return (
     <div class={cl('region-selector')} data-hydrated={hydrated ? 'true' : undefined}>
       <label class={cl('region-selector__label')} for="region-select">{labels["Datadog site"]}</label>
-      <select
-        id="region-select"
-        class={cl('region-selector__select')}
-        value={selected}
-        onChange={handleChange}
-      >
+      <Select id="region-select" value={selected} onChange={handleChange}>
         {regions.map((r) => (
           <option key={r.key} value={r.key}>
             {r.label}
           </option>
         ))}
-      </select>
+      </Select>
     </div>
   );
 }

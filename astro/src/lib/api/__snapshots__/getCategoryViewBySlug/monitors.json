@@ -8,7 +8,9 @@
       "summary": "Create a monitor",
       "slug": "create-a-monitor",
       "menuOrder": 1,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -16,7 +18,9 @@
       "summary": "Get all monitors",
       "slug": "get-all-monitors",
       "menuOrder": 2,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -24,7 +28,9 @@
       "summary": "Edit a monitor",
       "slug": "edit-a-monitor",
       "menuOrder": 3,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "PUT"
     },
     {
@@ -32,7 +38,9 @@
       "summary": "Get a monitor's details",
       "slug": "get-a-monitor-s-details",
       "menuOrder": 4,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -40,7 +48,9 @@
       "summary": "Delete a monitor",
       "slug": "delete-a-monitor",
       "menuOrder": 5,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "DELETE"
     },
     {
@@ -48,7 +58,9 @@
       "summary": "Check if a monitor can be deleted",
       "slug": "check-if-a-monitor-can-be-deleted",
       "menuOrder": 6,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -56,7 +68,9 @@
       "summary": "Validate a monitor",
       "slug": "validate-a-monitor",
       "menuOrder": 7,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -64,7 +78,9 @@
       "summary": "Validate an existing monitor",
       "slug": "validate-an-existing-monitor",
       "menuOrder": 8,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -72,7 +88,9 @@
       "summary": "Get a monitor configuration policy",
       "slug": "get-a-monitor-configuration-policy",
       "menuOrder": 9,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -80,7 +98,9 @@
       "summary": "Monitors search",
       "slug": "monitors-search",
       "menuOrder": 9,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -88,7 +108,9 @@
       "summary": "Get all monitor configuration policies",
       "slug": "get-all-monitor-configuration-policies",
       "menuOrder": 10,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -96,7 +118,9 @@
       "summary": "Monitors group search",
       "slug": "monitors-group-search",
       "menuOrder": 10,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -104,7 +128,9 @@
       "summary": "Create a monitor configuration policy",
       "slug": "create-a-monitor-configuration-policy",
       "menuOrder": 11,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -112,7 +138,9 @@
       "summary": "Unmute a monitor",
       "slug": "unmute-a-monitor",
       "menuOrder": 11,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -120,7 +148,9 @@
       "summary": "Edit a monitor configuration policy",
       "slug": "edit-a-monitor-configuration-policy",
       "menuOrder": 12,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -128,7 +158,9 @@
       "summary": "Mute a monitor",
       "slug": "mute-a-monitor",
       "menuOrder": 12,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -136,7 +168,9 @@
       "summary": "Delete a monitor configuration policy",
       "slug": "delete-a-monitor-configuration-policy",
       "menuOrder": 13,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -144,7 +178,9 @@
       "summary": "Unmute all monitors",
       "slug": "unmute-all-monitors",
       "menuOrder": 13,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -152,7 +188,9 @@
       "summary": "Get a monitor notification rule",
       "slug": "get-a-monitor-notification-rule",
       "menuOrder": 14,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -160,7 +198,9 @@
       "summary": "Mute all monitors",
       "slug": "mute-all-monitors",
       "menuOrder": 14,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -168,7 +208,9 @@
       "summary": "Get all monitor notification rules",
       "slug": "get-all-monitor-notification-rules",
       "menuOrder": 15,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -176,7 +218,9 @@
       "summary": "Create a monitor notification rule",
       "slug": "create-a-monitor-notification-rule",
       "menuOrder": 16,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -184,7 +228,9 @@
       "summary": "Update a monitor notification rule",
       "slug": "update-a-monitor-notification-rule",
       "menuOrder": 17,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PATCH"
     },
     {
@@ -192,7 +238,9 @@
       "summary": "Delete a monitor notification rule",
       "slug": "delete-a-monitor-notification-rule",
       "menuOrder": 18,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -200,7 +248,9 @@
       "summary": "Get a monitor user template",
       "slug": "get-a-monitor-user-template",
       "menuOrder": 19,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -208,7 +258,9 @@
       "summary": "Get all monitor user templates",
       "slug": "get-all-monitor-user-templates",
       "menuOrder": 20,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -216,7 +268,9 @@
       "summary": "Create a monitor user template",
       "slug": "create-a-monitor-user-template",
       "menuOrder": 21,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -224,7 +278,9 @@
       "summary": "Update a monitor user template to a new version",
       "slug": "update-a-monitor-user-template-to-a-new-version",
       "menuOrder": 22,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PUT"
     },
     {
@@ -232,7 +288,9 @@
       "summary": "Delete a monitor user template",
       "slug": "delete-a-monitor-user-template",
       "menuOrder": 23,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -240,7 +298,9 @@
       "summary": "Validate a monitor user template",
       "slug": "validate-a-monitor-user-template",
       "menuOrder": 24,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -248,7 +308,9 @@
       "summary": "Validate an existing monitor user template",
       "slug": "validate-an-existing-monitor-user-template",
       "menuOrder": 25,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     }
   ],

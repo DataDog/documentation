@@ -9,9 +9,8 @@ import clipboardSuccessIcon from '../../assets/images/svg-icons/clipboard-succes
 const cl = classListFactory(styles);
 
 export interface CopyPageButtonLabels {
-    "Copy page contents": string;
-    "Copied page contents": string;
-    "Copied!": string;
+    "Copy page": string;
+    "Copied": string;
 }
 
 interface CopyPageButtonProps {
@@ -33,20 +32,39 @@ export function CopyPageButton({ labels }: CopyPageButtonProps) {
         setTimeout(() => setCopied(false), 3000);
     };
 
+    // Both labels render at all times; only one is visible. Stacking them in
+    // the same grid cell locks the label slot to the width of the longer
+    // string, so swapping between "Copy page" and "Copied" doesn't reflow
+    // the icon or the surrounding layout.
     return (
         <button
             ref={ref}
             class={cl('copy-page-button')}
             onMouseEnter={handleMouseEnter}
             onClick={handleClick}
-            aria-label={copied ? labels["Copied page contents"] : labels["Copy page contents"]}
+            aria-label={copied ? labels["Copied"] : labels["Copy page"]}
         >
             <span
                 class={cl('copy-page-button__icon')}
                 dangerouslySetInnerHTML={{ __html: copied ? clipboardSuccessIcon : clipboardIcon }}
             />
             <span class={cl('copy-page-button__label')}>
-                {copied ? labels["Copied!"] : labels["Copy page contents"]}
+                <span
+                    class={copied
+                        ? cl('copy-page-button__label-text')
+                        : cl('copy-page-button__label-text', 'copy-page-button__label-text--visible')}
+                    aria-hidden={copied ? 'true' : undefined}
+                >
+                    {labels["Copy page"]}
+                </span>
+                <span
+                    class={copied
+                        ? cl('copy-page-button__label-text', 'copy-page-button__label-text--visible')
+                        : cl('copy-page-button__label-text')}
+                    aria-hidden={copied ? undefined : 'true'}
+                >
+                    {labels["Copied"]}
+                </span>
             </span>
         </button>
     );

@@ -16,7 +16,7 @@ Site-wide header rendered at the top of every page by `BaseLayout`. Ported from 
 | `NavDropdown.tsx` | Preact island | Hover-open dropdown used for Solutions, About, and Blog menus. Opens on mouse-enter, closes 150ms after mouse-leave. |
 | `ProductMegaMenu.tsx` | Preact island | The Product dropdown. Holds `openCategory` state with a 160ms hover debounce; resets to the first category when the dropdown closes. |
 | `LogoDownloadPanel.astro` | Static + tiny `<script is:inline>` | Hidden "Looking for Datadog logos?" popover. Click-toggle behavior mirrors Hugo's `.js-logo-download`. |
-| `HeaderScroll.astro` | `<script is:inline>` | Sets `--hugo-header-shrink` to `min(scrollY, 65px)` at ≥992px, and adds/removes the `.main-nav-scrolled` class on `<html>`. |
+| `HeaderScroll.astro` | `<script is:inline>` | Adds `.main-nav-scrolled` to `<html>` once `scrollY > 30` at ≥992px (matching Hugo's `tailwind-main-nav.html`). The class snaps the nav from 130→65px, animates the bits logo 75→50px, and hides the wordmark — all via a shared 200ms ease-in-out transition. |
 | `MobileNav.tsx` | Preact island | Hamburger-triggered right-side overlay. Renders the docs mobile nav variant with home/docs/api quick-links, search stub, and full menu tree. Receives already-resolved labels and URLs as props so the client bundle doesn't pull in `menuData` / `i18n` / `yaml`. |
 | `NavIcon.astro` | Static | Renders a websites-modules iconfont icon (`<i class="icon-{name}">`) and colors it via `currentColor`. |
 
@@ -26,11 +26,10 @@ Menu data is loaded at build time via `src/lib/menuData.ts`, which reads `data/m
 
 ## Dimensions (Hugo-identical)
 
-| Viewport | Header height | Scroll shrink |
-|----------|---------------|---------------|
-| <992px   | 60px          | No shrink     |
-| ≥992px, scrollY = 0  | 130px | — |
-| ≥992px, scrollY = 30 | 100px | 30px shrink |
-| ≥992px, scrollY ≥ 65 | 65px  | clamped at 65px |
+| Viewport | Header height | Behavior on scroll |
+|----------|---------------|--------------------|
+| <992px   | 60px          | No change |
+| ≥992px, `scrollY ≤ 30` | 130px | Resting state. |
+| ≥992px, `scrollY > 30` | 65px  | `.main-nav-scrolled` is added: the nav, bits logo, and wordmark all transition together over 200ms ease-in-out. |
 
 The corresponding tokens live in the Hugo-identical section of `src/styles/tokens.css`.

@@ -1,0 +1,171 @@
+{
+  "slug": "get-hourly-usage-for-lambda",
+  "summary": "Get hourly usage for Lambda",
+  "deprecated": true,
+  "variants": [
+    {
+      "operationId": "GetUsageLambda",
+      "summary": "Get hourly usage for Lambda",
+      "slug": "get-hourly-usage-for-lambda",
+      "method": "GET",
+      "path": "/api/v1/usage/aws_lambda",
+      "description": "Get hourly usage for Lambda.\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+      "version": "v1",
+      "deprecated": true,
+      "unstable": false,
+      "permissions": [
+        "usage_read"
+      ],
+      "oauthScopes": [
+        "usage_read"
+      ],
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/usage/aws_lambda",
+        "us3": "https://api.us3.datadoghq.com/api/v1/usage/aws_lambda",
+        "us5": "https://api.us5.datadoghq.com/api/v1/usage/aws_lambda",
+        "eu": "https://api.datadoghq.eu/api/v1/usage/aws_lambda",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda",
+        "gov": "https://api.ddog-gov.com/api/v1/usage/aws_lambda"
+      },
+      "queryParams": [
+        {
+          "name": "start_hr",
+          "type": "string (date-time)",
+          "required": true,
+          "deprecated": false,
+          "readOnly": false,
+          "description": "Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour."
+        },
+        {
+          "name": "end_hr",
+          "type": "string (date-time)",
+          "required": false,
+          "deprecated": false,
+          "readOnly": false,
+          "description": "Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending **before** this hour."
+        }
+      ],
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK"
+        },
+        {
+          "statusCode": "400",
+          "description": "Bad Request"
+        },
+        {
+          "statusCode": "403",
+          "description": "Forbidden - User is not authorized"
+        },
+        {
+          "statusCode": "429",
+          "description": "Too many requests"
+        }
+      ],
+      "codeExamples": [
+        {
+          "language": "curl",
+          "label": "Curl",
+          "entries": [
+            {
+              "description": "Get hourly usage for Lambda curl example",
+              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\"",
+              "syntax": "bash",
+              "regionVariants": {
+                "us": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "us3": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us3.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "us5": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us5.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "eu": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.eu/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "ap1": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap1.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "ap2": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap2.datadoghq.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "gov": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ddog-gov.com/api/v1/usage/aws_lambda?start_hr=${START_HR}\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "language": "python",
+          "label": "Python",
+          "entries": [
+            {
+              "description": "",
+              "code": "\"\"\"\nGet hourly usage for Lambda returns \"OK\" response\n\"\"\"\n\nfrom datetime import datetime\nfrom dateutil.relativedelta import relativedelta\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.usage_metering_api import UsageMeteringApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = UsageMeteringApi(api_client)\n    response = api_instance.get_usage_lambda(\n        start_hr=(datetime.now() + relativedelta(days=-5)),\n        end_hr=(datetime.now() + relativedelta(days=-3)),\n    )\n\n    print(response)\n",
+              "syntax": "python"
+            }
+          ]
+        },
+        {
+          "language": "ruby",
+          "label": "Ruby",
+          "entries": [
+            {
+              "description": "",
+              "code": "# Get hourly usage for Lambda returns \"OK\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V1::UsageMeteringAPI.new\nopts = {\n  end_hr: (Time.now + -3 * 86400),\n}\np api_instance.get_usage_lambda((Time.now + -5 * 86400), opts)\n",
+              "syntax": "ruby"
+            }
+          ]
+        },
+        {
+          "language": "go",
+          "label": "Go",
+          "entries": [
+            {
+              "description": "",
+              "code": "// Get hourly usage for Lambda returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\t\"time\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewUsageMeteringApi(apiClient)\n\tresp, r, err := api.GetUsageLambda(ctx, time.Now().AddDate(0, 0, -5), *datadogV1.NewGetUsageLambdaOptionalParameters().WithEndHr(time.Now().AddDate(0, 0, -3)))\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `UsageMeteringApi.GetUsageLambda`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `UsageMeteringApi.GetUsageLambda`:\\n%s\\n\", responseContent)\n}\n",
+              "syntax": "go"
+            }
+          ]
+        },
+        {
+          "language": "java",
+          "label": "Java",
+          "entries": [
+            {
+              "description": "",
+              "code": "// Get hourly usage for Lambda returns \"OK\" response\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v1.api.UsageMeteringApi;\nimport com.datadog.api.client.v1.api.UsageMeteringApi.GetUsageLambdaOptionalParameters;\nimport com.datadog.api.client.v1.model.UsageLambdaResponse;\nimport java.time.OffsetDateTime;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    UsageMeteringApi apiInstance = new UsageMeteringApi(defaultClient);\n\n    try {\n      UsageLambdaResponse result =\n          apiInstance.getUsageLambda(\n              OffsetDateTime.now().plusDays(-5),\n              new GetUsageLambdaOptionalParameters().endHr(OffsetDateTime.now().plusDays(-3)));\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling UsageMeteringApi#getUsageLambda\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n",
+              "syntax": "java"
+            }
+          ]
+        },
+        {
+          "language": "typescript",
+          "label": "TypeScript",
+          "entries": [
+            {
+              "description": "",
+              "code": "/**\n * Get hourly usage for Lambda returns \"OK\" response\n */\n\nimport { client, v1 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v1.UsageMeteringApi(configuration);\n\nconst params: v1.UsageMeteringApiGetUsageLambdaRequest = {\n  startHr: new Date(new Date().getTime() + -5 * 86400 * 1000),\n  endHr: new Date(new Date().getTime() + -3 * 86400 * 1000),\n};\n\napiInstance\n  .getUsageLambda(params)\n  .then((data: v1.UsageLambdaResponse) => {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) => console.error(error));\n",
+              "syntax": "typescript"
+            }
+          ]
+        },
+        {
+          "language": "rust",
+          "label": "Rust",
+          "entries": [
+            {
+              "description": "",
+              "code": "// Get hourly usage for Lambda returns \"OK\" response\nuse chrono::{DateTime, Utc};\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV1::api_usage_metering::GetUsageLambdaOptionalParams;\nuse datadog_api_client::datadogV1::api_usage_metering::UsageMeteringAPI;\n\n#[tokio::main]\nasync fn main() {\n    let configuration = datadog::Configuration::new();\n    let api = UsageMeteringAPI::with_config(configuration);\n    let resp = api\n        .get_usage_lambda(\n            DateTime::parse_from_rfc3339(\"2021-11-06T11:11:11+00:00\")\n                .expect(\"Failed to parse datetime\")\n                .with_timezone(&Utc),\n            GetUsageLambdaOptionalParams::default().end_hr(\n                DateTime::parse_from_rfc3339(\"2021-11-08T11:11:11+00:00\")\n                    .expect(\"Failed to parse datetime\")\n                    .with_timezone(&Utc),\n            ),\n        )\n        .await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n",
+              "syntax": "rust"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

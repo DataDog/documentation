@@ -5,24 +5,24 @@ test.describe.skip('CopyPageButton component', () => {
         await page.goto('/api/latest/');
         const btn = page.locator('.copy-page-button');
         await expect(btn).toBeVisible();
-        await expect(btn).toContainText('Copy page as text');
+        await expect(btn).toContainText('Copy page');
     });
 
     test('is visible on a category page', async ({ page }) => {
         await page.goto('/api/latest/metrics/');
         const btn = page.locator('.copy-page-button');
         await expect(btn).toBeVisible();
-        await expect(btn).toContainText('Copy page as text');
+        await expect(btn).toContainText('Copy page');
     });
 
     test('is visible on an operation page', async ({ page }) => {
         await page.goto('/api/latest/metrics/edit-metric-metadata/');
         const btn = page.locator('.copy-page-button');
         await expect(btn).toBeVisible();
-        await expect(btn).toContainText('Copy page as text');
+        await expect(btn).toContainText('Copy page');
     });
 
-    test('shows Copied! feedback after click and resets', async ({ page, context }) => {
+    test('shows Copied feedback after click and resets', async ({ page, context }) => {
         await context.grantPermissions(['clipboard-read', 'clipboard-write']);
         await page.goto('/api/latest/');
 
@@ -34,10 +34,10 @@ test.describe.skip('CopyPageButton component', () => {
 
         await btn.click();
 
-        await expect(btn.locator('.copy-page-button__label')).toContainText('Copied!');
+        await expect(btn.locator('.copy-page-button__label')).toContainText('Copied');
 
         // Wait for reset (3 seconds + buffer)
-        await expect(btn.locator('.copy-page-button__label')).toContainText('Copy page as text', { timeout: 5000 });
+        await expect(btn.locator('.copy-page-button__label')).toContainText('Copy page', { timeout: 5000 });
     });
 
     test('contains a clipboard SVG icon', async ({ page }) => {

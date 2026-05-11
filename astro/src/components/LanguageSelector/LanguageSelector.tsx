@@ -2,6 +2,7 @@ import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import styles from './LanguageSelector.module.css';
 import { classListFactory } from '@utils/classListFactory';
+import { Select } from '@components/Select/Select';
 
 const cl = classListFactory(styles);
 
@@ -33,18 +34,13 @@ export function LanguageSelector({ options, currentCode }: Props): JSX.Element {
             of the `language` key in i18n/en.json (currently returns plural). */}
         Language
       </label>
-      <select
-        id="language-select"
-        class={cl('language-selector__select')}
-        value={selected}
-        onChange={handleChange}
-      >
+      <Select id="language-select" value={selected} onChange={handleChange}>
         {options.map((opt) => (
           <option key={opt.code} value={opt.code}>
             {opt.label}
           </option>
         ))}
-      </select>
+      </Select>
     </div>
   );
 }

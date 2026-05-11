@@ -8,7 +8,9 @@
       "summary": "Create a new dashboard",
       "slug": "create-a-new-dashboard",
       "menuOrder": 1,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -16,7 +18,9 @@
       "summary": "Get a dashboard",
       "slug": "get-a-dashboard",
       "menuOrder": 2,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -24,7 +28,9 @@
       "summary": "Get all dashboards",
       "slug": "get-all-dashboards",
       "menuOrder": 3,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -32,7 +38,9 @@
       "summary": "Update a dashboard",
       "slug": "update-a-dashboard",
       "menuOrder": 4,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "PUT"
     },
     {
@@ -40,7 +48,9 @@
       "summary": "Delete a dashboard",
       "slug": "delete-a-dashboard",
       "menuOrder": 5,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "DELETE"
     },
     {
@@ -48,7 +58,9 @@
       "summary": "Delete dashboards",
       "slug": "delete-dashboards",
       "menuOrder": 6,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "DELETE"
     },
     {
@@ -56,7 +68,9 @@
       "summary": "Restore deleted dashboards",
       "slug": "restore-deleted-dashboards",
       "menuOrder": 7,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "PATCH"
     },
     {
@@ -64,7 +78,9 @@
       "summary": "Create a shared dashboard",
       "slug": "create-a-shared-dashboard",
       "menuOrder": 8,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -72,7 +88,9 @@
       "summary": "Get a shared dashboard",
       "slug": "get-a-shared-dashboard",
       "menuOrder": 9,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -80,7 +98,9 @@
       "summary": "Update a shared dashboard",
       "slug": "update-a-shared-dashboard",
       "menuOrder": 10,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "PUT"
     },
     {
@@ -88,7 +108,9 @@
       "summary": "Send shared dashboard invitation email",
       "slug": "send-shared-dashboard-invitation-email",
       "menuOrder": 11,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -96,7 +118,9 @@
       "summary": "Get all invitations for a shared dashboard",
       "slug": "get-all-invitations-for-a-shared-dashboard",
       "menuOrder": 12,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -104,7 +128,9 @@
       "summary": "Revoke a shared dashboard URL",
       "slug": "revoke-a-shared-dashboard-url",
       "menuOrder": 13,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "DELETE"
     },
     {
@@ -112,7 +138,9 @@
       "summary": "Revoke shared dashboard invitations",
       "slug": "revoke-shared-dashboard-invitations",
       "menuOrder": 14,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "DELETE"
     }
   ],

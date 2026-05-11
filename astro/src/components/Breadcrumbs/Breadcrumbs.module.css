@@ -5,8 +5,8 @@
   margin: 0;
   padding: 0;
   gap: 0;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--hugo-breadcrumb-font-size);
+  font-weight: var(--hugo-breadcrumb-font-weight);
   text-transform: uppercase;
   line-height: 24px;
 }

@@ -37,7 +37,7 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     expect(Math.round(box!.y)).toBe(30);
   });
 
-  test('header shrinks with scroll on desktop and clamps at 65px', async ({ page }) => {
+  test('header snaps to 65px after scrolling past the 30px threshold on desktop', async ({ page }) => {
     await page.setViewportSize({ width: 1400, height: 900 });
     await page.goto('/api/latest/authentication/');
     await page.waitForLoadState('networkidle');
@@ -45,22 +45,22 @@ test.describe('Header — Hugo-identical dimensions and behavior', () => {
     const headerHeight = async () =>
       Math.round((await page.locator('.main-nav-wrapper .main-nav').boundingBox())!.height);
 
+    // At scroll 0, full height.
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(350);
     expect(await headerHeight()).toBe(130);
 
+    // At exactly 30px the threshold is not exceeded (> 30), so still full height.
     await page.evaluate(() => window.scrollTo(0, 30));
     await page.waitForTimeout(350);
-    const mid = await headerHeight();
-    // Linear shrink between 130 → 65 means 30px of scroll removes 30px of height.
-    // Allow a small tolerance for subpixel rounding.
-    expect(mid).toBeGreaterThanOrEqual(95);
-    expect(mid).toBeLessThanOrEqual(115);
+    expect(await headerHeight()).toBe(130);
 
-    await page.evaluate(() => window.scrollTo(0, 70));
+    // Past the threshold, header snaps to the compact height.
+    await page.evaluate(() => window.scrollTo(0, 31));
     await page.waitForTimeout(350);
     expect(await headerHeight()).toBe(65);
 
+    // Stays compact on further scroll.
     await page.evaluate(() => window.scrollTo(0, 500));
     await page.waitForTimeout(350);
     expect(await headerHeight()).toBe(65);

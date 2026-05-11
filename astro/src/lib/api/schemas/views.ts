@@ -17,7 +17,7 @@ export const ApiOperationStubSchema = z
     summary: z.string(),
     slug: z.string(),
     menuOrder: z.number(),
-    version: ApiVersionSchema,
+    versions: z.array(ApiVersionSchema),
     method: z.string(),
   })
   .strict();
@@ -78,9 +78,19 @@ export const EndpointDataSchema = z
   })
   .strict();
 
+export const ApiOperationViewSchema = z
+  .object({
+    slug: z.string(),
+    summary: z.string(),
+    deprecated: z.boolean(),
+    variants: z.array(EndpointDataSchema),
+  })
+  .strict();
+
 export type ApiOperationStub = z.infer<typeof ApiOperationStubSchema>;
 export type ApiCategoryStub = z.infer<typeof ApiCategoryStubSchema>;
 export type ApiCategory = z.infer<typeof ApiCategorySchema>;
 export type ResponseData = z.infer<typeof ResponseDataSchema>;
 export type RequestBodyData = z.infer<typeof RequestBodyDataSchema>;
 export type EndpointData = z.infer<typeof EndpointDataSchema>;
+export type ApiOperationView = z.infer<typeof ApiOperationViewSchema>;

@@ -1,5 +1,5 @@
 import type { APIRoute, GetStaticPaths } from "astro";
-import { getCategoriesView, getEndpointView } from "@lib/api/viewsBuilder";
+import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
 import { renderApiEndpointMd } from "@components/ApiEndpoint/plaintext/ApiEndpoint.md";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 
@@ -29,10 +29,17 @@ export const GET: APIRoute = async ({ params }) => {
   const opSlug = params.operation;
   if (!catSlug || !opSlug) return new Response(null, { status: 404 });
 
-  const endpoint = await getEndpointView(catSlug, opSlug, lang);
-  if (!endpoint) return new Response(null, { status: 404 });
+  const operation = await getOperationView(catSlug, opSlug, lang);
+  if (!operation) return new Response(null, { status: 404 });
 
-  const body = renderApiEndpointMd(endpoint, { headingLevel: 1 }) + "\n";
+  // Variants are ordered newest-first. The first variant is "(latest)".
+  const blocks: string[] = [`# ${operation.summary}`];
+  for (const [i, variant] of operation.variants.entries()) {
+    const label = i === 0 ? `${variant.version} (latest)` : variant.version;
+    blocks.push(`## ${label}`);
+    blocks.push(renderApiEndpointMd(variant));
+  }
+  const body = blocks.join("\n\n") + "\n";
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },

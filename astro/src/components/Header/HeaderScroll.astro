@@ -1,25 +1,22 @@
 ---
-// Inline scroll listener that drives the --hugo-header-shrink token. Matches
-// the previous BaseLayout implementation verbatim; relocating the logic here
-// so the header owns its own scroll behavior.
+// Inline scroll listener that toggles the `.main-nav-scrolled` class on
+// <html> once the user has scrolled past the threshold. The class drives
+// the discrete shrink: nav 130→65px, bits logo 75→50px, wordmark hidden,
+// and the LogoDownloadPanel offset. Matches Hugo's Tailwind nav partial
+// (`tailwind-main-nav.html` toggles `navScrolled` at `scrollY > 30`).
 ---
 
 <script is:inline>
   (function () {
     var root = document.documentElement;
     var DESKTOP_MIN_WIDTH = 992;
-    var MAX_SHRINK = 65;
+    var SCROLLED_THRESHOLD = 30;
     var ticking = false;
 
     function update() {
-      var shrink = window.innerWidth >= DESKTOP_MIN_WIDTH
-        ? Math.min(window.scrollY, MAX_SHRINK)
-        : 0;
-      root.style.setProperty('--hugo-header-shrink', shrink + 'px');
-      root.style.setProperty('--hugo-header-shrink-n', shrink);
-      // Toggle the legacy .main-nav-scrolled class so ported Hugo CSS rules
-      // that key off that class still apply (logo-download-div top, etc).
-      if (shrink >= MAX_SHRINK) {
+      var scrolled = window.innerWidth >= DESKTOP_MIN_WIDTH
+        && window.scrollY > SCROLLED_THRESHOLD;
+      if (scrolled) {
         root.classList.add('main-nav-scrolled');
       } else {
         root.classList.remove('main-nav-scrolled');

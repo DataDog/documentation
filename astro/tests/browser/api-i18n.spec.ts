@@ -17,13 +17,13 @@ test.describe('API docs i18n routing', () => {
     await page.goto('/api/latest/aws-integration/');
     const selector = page.locator('.language-selector').first();
     await expect(selector).toBeVisible();
-    const select = selector.locator('.language-selector__select');
+    const select = selector.locator('.language-selector .select__control');
     await expect(select).toHaveValue('en');
   });
 
   test('language selector shows all locales with native labels', async ({ page }) => {
     await page.goto('/api/latest/aws-integration/');
-    const options = page.locator('.language-selector__select option');
+    const options = page.locator('.language-selector .select__control option');
     await expect(options).toHaveCount(5);
     await expect(options.nth(0)).toHaveText('English');
     await expect(options.nth(1)).toHaveText('Français');
@@ -34,7 +34,7 @@ test.describe('API docs i18n routing', () => {
 
   test('switching to Japanese stays on the same endpoint page', async ({ page }) => {
     await page.goto('/api/latest/aws-integration/');
-    await page.selectOption('.language-selector__select', { value: 'ja' });
+    await page.selectOption('.language-selector .select__control', { value: 'ja' });
 
     await expect(page).toHaveURL(/\/ja\/api\/latest\/aws-integration\/?$/);
     await expect(page.locator('h1')).toContainText('AWS インテグレーション');

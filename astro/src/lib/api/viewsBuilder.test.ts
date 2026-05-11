@@ -20,12 +20,12 @@ import {
   getCategoriesView,
   getCategoryStubsView,
   getCategoryViewBySlug,
-  getEndpointView,
+  getOperationView,
 } from './viewsBuilder';
 import {
   ApiCategorySchema,
   ApiCategoryStubSchema,
-  EndpointDataSchema,
+  ApiOperationViewSchema,
 } from './schemas/views';
 
 const CATEGORY_AUDIT_CASES: Array<{ slug: string; label: string }> = [
@@ -47,8 +47,7 @@ const ENDPOINT_AUDIT_CASES: Array<{
   { catSlug: 'authentication', opSlug: 'validate-api-key', label: 'v1, single endpoint' },
   { catSlug: 'dashboards', opSlug: 'get-a-dashboard', label: 'v1' },
   { catSlug: 'incidents', opSlug: 'create-an-incident', label: 'v2' },
-  { catSlug: 'aws-integration', opSlug: 'list-all-aws-integrations-v1', label: 'v1, slug collision suffix' },
-  { catSlug: 'aws-integration', opSlug: 'list-all-aws-integrations-v2', label: 'v2, slug collision suffix' },
+  { catSlug: 'aws-integration', opSlug: 'list-all-aws-integrations', label: 'multi-version (v1 + v2)' },
   { catSlug: 'monitors', opSlug: 'create-a-monitor', label: 'mixed v1+v2 category' },
   { catSlug: 'dashboard-lists', opSlug: 'get-all-dashboard-lists', label: 'inside deprecated category' },
   { catSlug: 'usage-metering', opSlug: 'get-hourly-usage-for-lambda', label: 'deprecated op' },
@@ -94,13 +93,13 @@ describe('viewsBuilder snapshots', () => {
     }
   });
 
-  describe('getEndpointView', () => {
+  describe('getOperationView', () => {
     for (const { catSlug, opSlug, label } of ENDPOINT_AUDIT_CASES) {
       it(`${catSlug}/${opSlug} (${label})`, async () => {
-        const result = await getEndpointView(catSlug, opSlug);
-        EndpointDataSchema.parse(result);
+        const result = await getOperationView(catSlug, opSlug);
+        ApiOperationViewSchema.parse(result);
         await expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
-          `./__snapshots__/getEndpointView/${catSlug}.${opSlug}.json`,
+          `./__snapshots__/getOperationView/${catSlug}.${opSlug}.json`,
         );
       });
     }
@@ -125,7 +124,7 @@ describe('viewsBuilder shape validation across full spec', () => {
     }
   });
 
-  it('every operation across every category returns a valid EndpointData', async () => {
+  it('every operation across every category returns a valid ApiOperationView', async () => {
     const cats = await getCategoriesView();
     const failures: Array<{ catSlug: string; opSlug: string; issues: unknown }> = [];
     let totalOps = 0;
@@ -133,12 +132,12 @@ describe('viewsBuilder shape validation across full spec', () => {
     for (const cat of cats) {
       for (const op of cat.operations) {
         totalOps++;
-        const ep = await getEndpointView(cat.slug, op.slug);
-        if (!ep) {
-          failures.push({ catSlug: cat.slug, opSlug: op.slug, issues: 'getEndpointView returned undefined' });
+        const view = await getOperationView(cat.slug, op.slug);
+        if (!view) {
+          failures.push({ catSlug: cat.slug, opSlug: op.slug, issues: 'getOperationView returned undefined' });
           continue;
         }
-        const result = EndpointDataSchema.safeParse(ep);
+        const result = ApiOperationViewSchema.safeParse(view);
         if (!result.success) {
           failures.push({ catSlug: cat.slug, opSlug: op.slug, issues: result.error.issues });
         }
@@ -148,7 +147,7 @@ describe('viewsBuilder shape validation across full spec', () => {
     if (failures.length > 0) {
       const preview = failures.slice(0, 5);
       throw new Error(
-        `${failures.length} endpoint(s) failed shape validation. First ${preview.length}:\n${JSON.stringify(preview, null, 2)}`,
+        `${failures.length} operation(s) failed shape validation. First ${preview.length}:\n${JSON.stringify(preview, null, 2)}`,
       );
     }
 
@@ -156,11 +155,11 @@ describe('viewsBuilder shape validation across full spec', () => {
     // empty walk silently passing.
     expect(totalOps).toBeGreaterThan(100);
 
-    // Sanity: every known audit-case endpoint must resolve. Catches cases
+    // Sanity: every known audit-case operation must resolve. Catches cases
     // where the spec keeps the slug but the builder fails to surface it.
     for (const { catSlug, opSlug } of ENDPOINT_AUDIT_CASES) {
-      const ep = await getEndpointView(catSlug, opSlug);
-      expect(ep, `getEndpointView("${catSlug}", "${opSlug}") returned undefined`).toBeDefined();
+      const view = await getOperationView(catSlug, opSlug);
+      expect(view, `getOperationView("${catSlug}", "${opSlug}") returned undefined`).toBeDefined();
     }
   });
 });

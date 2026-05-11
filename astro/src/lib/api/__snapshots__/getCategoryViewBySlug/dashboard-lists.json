@@ -8,7 +8,9 @@
       "summary": "Get all dashboard lists",
       "slug": "get-all-dashboard-lists",
       "menuOrder": 1,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -16,7 +18,9 @@
       "summary": "Get items of a Dashboard List",
       "slug": "get-items-of-a-dashboard-list",
       "menuOrder": 1,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -24,7 +28,9 @@
       "summary": "Add Items to a Dashboard List",
       "slug": "add-items-to-a-dashboard-list",
       "menuOrder": 2,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "POST"
     },
     {
@@ -32,7 +38,9 @@
       "summary": "Create a dashboard list",
       "slug": "create-a-dashboard-list",
       "menuOrder": 2,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "POST"
     },
     {
@@ -40,7 +48,9 @@
       "summary": "Get a dashboard list",
       "slug": "get-a-dashboard-list",
       "menuOrder": 3,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -48,7 +58,9 @@
       "summary": "Update items of a dashboard list",
       "slug": "update-items-of-a-dashboard-list",
       "menuOrder": 3,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "PUT"
     },
     {
@@ -56,7 +68,9 @@
       "summary": "Delete items from a dashboard list",
       "slug": "delete-items-from-a-dashboard-list",
       "menuOrder": 4,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "DELETE"
     },
     {
@@ -64,7 +78,9 @@
       "summary": "Update a dashboard list",
       "slug": "update-a-dashboard-list",
       "menuOrder": 4,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "PUT"
     },
     {
@@ -72,7 +88,9 @@
       "summary": "Delete a dashboard list",
       "slug": "delete-a-dashboard-list",
       "menuOrder": 5,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "DELETE"
     }
   ],

@@ -8,7 +8,9 @@
       "summary": "Get hourly usage attribution",
       "slug": "get-hourly-usage-attribution",
       "menuOrder": 1,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -16,7 +18,9 @@
       "summary": "Get hourly usage for Lambda traced invocations",
       "slug": "get-hourly-usage-for-lambda-traced-invocations",
       "menuOrder": 1,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -24,7 +28,9 @@
       "summary": "Get hourly usage for application security",
       "slug": "get-hourly-usage-for-application-security",
       "menuOrder": 2,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -32,7 +38,9 @@
       "summary": "Get monthly usage attribution",
       "slug": "get-monthly-usage-attribution",
       "menuOrder": 2,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -40,7 +48,9 @@
       "summary": "Get billable usage across your account",
       "slug": "get-billable-usage-across-your-account",
       "menuOrder": 3,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -48,7 +58,9 @@
       "summary": "Get hourly usage for observability pipelines",
       "slug": "get-hourly-usage-for-observability-pipelines",
       "menuOrder": 3,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -56,7 +68,9 @@
       "summary": "Get all custom metrics by hourly average",
       "slug": "get-all-custom-metrics-by-hourly-average",
       "menuOrder": 4,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -64,7 +78,9 @@
       "summary": "Get cost across multi-org account",
       "slug": "get-cost-across-multi-org-account",
       "menuOrder": 4,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -72,7 +88,9 @@
       "summary": "Get estimated cost across your account",
       "slug": "get-estimated-cost-across-your-account",
       "menuOrder": 5,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -80,7 +98,9 @@
       "summary": "Get usage across your account",
       "slug": "get-usage-across-your-account",
       "menuOrder": 5,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -88,7 +108,9 @@
       "summary": "Get historical cost across your account",
       "slug": "get-historical-cost-across-your-account",
       "menuOrder": 6,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -96,7 +118,9 @@
       "summary": "Get hourly usage for logs by index",
       "slug": "get-hourly-usage-for-logs-by-index",
       "menuOrder": 6,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -104,7 +128,9 @@
       "summary": "Get hourly logs usage by retention",
       "slug": "get-hourly-logs-usage-by-retention",
       "menuOrder": 7,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -112,7 +138,9 @@
       "summary": "Get projected cost across your account",
       "slug": "get-projected-cost-across-your-account",
       "menuOrder": 7,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -120,7 +148,9 @@
       "summary": "Get hourly usage for hosts and containers",
       "slug": "get-hourly-usage-for-hosts-and-containers",
       "menuOrder": 8,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -128,7 +158,9 @@
       "summary": "Get Monthly Cost Attribution",
       "slug": "get-monthly-cost-attribution",
       "menuOrder": 8,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -136,7 +168,9 @@
       "summary": "Get hourly usage by product family",
       "slug": "get-hourly-usage-by-product-family",
       "menuOrder": 9,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -144,7 +178,9 @@
       "summary": "Get hourly usage for logs",
       "slug": "get-hourly-usage-for-logs",
       "menuOrder": 9,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -152,7 +188,9 @@
       "summary": "Get hourly usage for custom metrics",
       "slug": "get-hourly-usage-for-custom-metrics",
       "menuOrder": 10,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -160,7 +198,9 @@
       "summary": "Get usage attribution types",
       "slug": "get-usage-attribution-types",
       "menuOrder": 10,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -168,7 +208,9 @@
       "summary": "Get active billing dimensions for cost attribution",
       "slug": "get-active-billing-dimensions-for-cost-attribution",
       "menuOrder": 11,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -176,7 +218,9 @@
       "summary": "Get hourly usage for indexed spans",
       "slug": "get-hourly-usage-for-indexed-spans",
       "menuOrder": 11,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -184,7 +228,9 @@
       "summary": "Get billing dimension mapping for usage endpoints",
       "slug": "get-billing-dimension-mapping-for-usage-endpoints",
       "menuOrder": 12,
-      "version": "v2",
+      "versions": [
+        "v2"
+      ],
       "method": "GET"
     },
     {
@@ -192,7 +238,9 @@
       "summary": "Get hourly usage for synthetics checks",
       "slug": "get-hourly-usage-for-synthetics-checks",
       "menuOrder": 12,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -200,7 +248,9 @@
       "summary": "Get hourly usage for synthetics API checks",
       "slug": "get-hourly-usage-for-synthetics-api-checks",
       "menuOrder": 13,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -208,7 +258,9 @@
       "summary": "Get hourly usage for synthetics browser checks",
       "slug": "get-hourly-usage-for-synthetics-browser-checks",
       "menuOrder": 14,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -216,7 +268,9 @@
       "summary": "Get hourly usage for Fargate",
       "slug": "get-hourly-usage-for-fargate",
       "menuOrder": 15,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -224,7 +278,9 @@
       "summary": "Get hourly usage for Lambda",
       "slug": "get-hourly-usage-for-lambda",
       "menuOrder": 16,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -232,7 +288,9 @@
       "summary": "Get hourly usage for RUM sessions",
       "slug": "get-hourly-usage-for-rum-sessions",
       "menuOrder": 17,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -240,7 +298,9 @@
       "summary": "Get hourly usage for network hosts",
       "slug": "get-hourly-usage-for-network-hosts",
       "menuOrder": 18,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -248,7 +308,9 @@
       "summary": "get hourly usage for network flows",
       "slug": "get-hourly-usage-for-network-flows",
       "menuOrder": 19,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -256,7 +318,9 @@
       "summary": "Get hourly usage for analyzed logs",
       "slug": "get-hourly-usage-for-analyzed-logs",
       "menuOrder": 20,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -264,7 +328,9 @@
       "summary": "Get hourly usage for SNMP devices",
       "slug": "get-hourly-usage-for-snmp-devices",
       "menuOrder": 21,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -272,7 +338,9 @@
       "summary": "Get hourly usage for ingested spans",
       "slug": "get-hourly-usage-for-ingested-spans",
       "menuOrder": 22,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -280,7 +348,9 @@
       "summary": "Get hourly usage for incident management",
       "slug": "get-hourly-usage-for-incident-management",
       "menuOrder": 23,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -288,7 +358,9 @@
       "summary": "Get hourly usage for IoT",
       "slug": "get-hourly-usage-for-iot",
       "menuOrder": 24,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -296,7 +368,9 @@
       "summary": "Get hourly usage for CSM Pro",
       "slug": "get-hourly-usage-for-csm-pro",
       "menuOrder": 25,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -304,7 +378,9 @@
       "summary": "Get hourly usage for cloud workload security",
       "slug": "get-hourly-usage-for-cloud-workload-security",
       "menuOrder": 26,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -312,7 +388,9 @@
       "summary": "Get hourly usage for database monitoring",
       "slug": "get-hourly-usage-for-database-monitoring",
       "menuOrder": 27,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -320,7 +398,9 @@
       "summary": "Get hourly usage for sensitive data scanner",
       "slug": "get-hourly-usage-for-sensitive-data-scanner",
       "menuOrder": 28,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -328,7 +408,9 @@
       "summary": "Get hourly usage for RUM units",
       "slug": "get-hourly-usage-for-rum-units",
       "menuOrder": 29,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -336,7 +418,9 @@
       "summary": "Get hourly usage for profiled hosts",
       "slug": "get-hourly-usage-for-profiled-hosts",
       "menuOrder": 30,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -344,7 +428,9 @@
       "summary": "Get hourly usage for CI visibility",
       "slug": "get-hourly-usage-for-ci-visibility",
       "menuOrder": 31,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -352,7 +438,9 @@
       "summary": "Get hourly usage for online archive",
       "slug": "get-hourly-usage-for-online-archive",
       "menuOrder": 32,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -360,7 +448,9 @@
       "summary": "Get hourly usage for audit logs",
       "slug": "get-hourly-usage-for-audit-logs",
       "menuOrder": 33,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -368,7 +458,9 @@
       "summary": "Get the list of available daily custom reports",
       "slug": "get-the-list-of-available-daily-custom-reports",
       "menuOrder": 34,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -376,7 +468,9 @@
       "summary": "Get specified daily custom reports",
       "slug": "get-specified-daily-custom-reports",
       "menuOrder": 35,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -384,7 +478,9 @@
       "summary": "Get the list of available monthly custom reports",
       "slug": "get-the-list-of-available-monthly-custom-reports",
       "menuOrder": 36,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     },
     {
@@ -392,7 +488,9 @@
       "summary": "Get specified monthly custom reports",
       "slug": "get-specified-monthly-custom-reports",
       "menuOrder": 37,
-      "version": "v1",
+      "versions": [
+        "v1"
+      ],
       "method": "GET"
     }
   ],

@@ -4,9 +4,8 @@
 :root {
   --hugo-banner-height: 30px;
   --hugo-header-height: 60px;                  /* <992px */
-  --hugo-header-height-desktop: 130px;         /* ≥992px, top of page */
-  --hugo-header-height-desktop-min: 65px;      /* ≥992px, after shrink-on-scroll */
-  --hugo-header-shrink: 0px;                   /* set by BaseLayout scroll listener: min(scrollY, 65px) */
+  --hugo-header-height-desktop: 130px;         /* ≥992px, resting */
+  --hugo-header-height-desktop-scrolled: 65px; /* ≥992px, after .main-nav-scrolled */
   --hugo-breakpoint-desktop: 992px;            /* header height changes here */
   --hugo-breakpoint-tablet: 768px;             /* footer padding changes here */
   --hugo-footer-padding-y: 1rem;               /* <768px (pt-3 pb-3) */
@@ -79,6 +78,10 @@
   --hugo-footer-cta-primary-bg: #632ca6;
   --hugo-footer-cta-primary-border: #632ca6;
 
+  /* Hugo breadcrumbs */
+  --hugo-breadcrumb-font-size: 16px;
+  --hugo-breadcrumb-font-weight: 700;
+
   /* Hugo footer typography */
   --hugo-footer-link-font-size: 16px;
   --hugo-footer-link-line-height: 16px;
@@ -95,6 +98,11 @@
   --hugo-lang-toggle-height: 32px;
   --hugo-lang-toggle-min-width: 120px;
   --hugo-lang-toggle-max-width: 166px;
+
+  /* Hugo chevron (from .chevron in _dropdown.scss). Used as the dropdown
+     indicator on <select> elements. The rotation is applied at the call site. */
+  --hugo-chevron-size: 8px;
+  --hugo-chevron-border-width: 2px;
 
   /* Hugo footer CTA button */
   --hugo-footer-btn-height: 42px;

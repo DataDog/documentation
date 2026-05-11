@@ -16,7 +16,7 @@ function getContainer() {
   return document.querySelector<HTMLElement>('.region-selector')!;
 }
 function getSelect() {
-  return document.querySelector<HTMLSelectElement>('.region-selector__select')!;
+  return document.querySelector<HTMLSelectElement>('.select__control')!;
 }
 
 beforeEach(() => {
@@ -71,7 +71,7 @@ describe('RegionSelector — BEM class state', () => {
 
     expect(container.classList.contains('region-selector')).toBe(true);
     expect(label.classList.contains('region-selector__label')).toBe(true);
-    expect(select.classList.contains('region-selector__select')).toBe(true);
+    expect(select.classList.contains('select__control')).toBe(true);
   });
 });
 
@@ -93,7 +93,7 @@ describe('RegionSelector — interactivity', () => {
     await user.selectOptions(select, targetRegion!.key);
 
     // BEM-classed select reflects the new value
-    expect(select.classList.contains('region-selector__select')).toBe(true);
+    expect(select.classList.contains('select__control')).toBe(true);
     expect(select.value).toBe(targetRegion!.key);
   });
 

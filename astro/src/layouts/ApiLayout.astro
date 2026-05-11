@@ -60,7 +60,7 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
   .api-main {
     flex: 1;
     min-width: 0;
-    padding: var(--space-xl) var(--space-xl) var(--space-xl) 29px;
+    padding: var(--space-sm) var(--space-xl) var(--space-xl) 29px;
   }
 
   .api-toolbar__selectors {
@@ -73,26 +73,35 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
     margin-top: var(--space-lg);
   }
 
+  /* Negative left/right margin + matching padding extends the toolbar's
+     background across .api-main's left/right padding too. Without it, pill
+     shadows in the scrolling content peek through the unbacked padding
+     strip as they pass beneath the sticky toolbar. */
   .api-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--space-md);
+    margin: 0 calc(-1 * var(--space-xl)) var(--space-md) -29px;
     position: sticky;
     top: calc(var(--hugo-banner-height) + var(--hugo-header-height));
     z-index: 5;
     background: var(--color-bg);
-    padding: 0;
+    padding: var(--space-sm) var(--space-xl) 0 29px;
   }
 
   @media (min-width: 992px) {
     .api-toolbar {
-      top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop) - var(--hugo-header-shrink));
+      top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop));
+      transition: top 0.2s ease-in-out;
+    }
+
+    :global(.main-nav-scrolled) .api-toolbar {
+      top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop-scrolled));
     }
   }
 
   :global(.main-nav-scrolled) .api-toolbar {
-    padding: var(--space-md) 0;
+    padding: var(--space-md) var(--space-xl) var(--space-md) 29px;
   }
 
   @media (max-width: 768px) {
@@ -101,6 +110,15 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
     }
 
     .api-main {
+      padding: var(--space-md);
+    }
+
+    .api-toolbar {
+      margin: 0 calc(-1 * var(--space-md)) var(--space-md);
+      padding: var(--space-sm) var(--space-md) 0;
+    }
+
+    :global(.main-nav-scrolled) .api-toolbar {
       padding: var(--space-md);
     }
 

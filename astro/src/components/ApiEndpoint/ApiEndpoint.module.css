@@ -2,19 +2,6 @@
   margin-bottom: var(--space-xl);
 }
 
-.api-endpoint__heading {
-  margin: var(--space-lg) 0 var(--space-sm);
-  display: flex;
-  align-items: center;
-}
-
-.api-endpoint__version-badge {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  margin-left: auto;
-  color: var(--color-text-muted);
-}
-
 .api-endpoint__url-line {
   display: flex;
   align-items: center;

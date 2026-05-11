@@ -1,0 +1,35 @@
+---
+title: "Select"
+description: "Preact wrapper around a native <select> that applies the shared Hugo-style chevron and form styling. Used by LanguageSelector and RegionSelector."
+type: interactive
+---
+
+# Select
+
+A thin Preact wrapper around the native `<select>` element. It provides the shared visual styling used by every dropdown in the Astro API docs — the brand-purple border, hover/focus states, and the Hugo-style chevron indicator drawn with CSS borders (matching `.chevron`/`.chevron-down` in [_dropdown.scss](../../../../../../assets/styles/_dropdown.scss)).
+
+The component is intentionally minimal. State and persistence live in the consuming component (e.g. `RegionSelector` keeps the region in a signal/state and a cookie); `Select` only renders the form control.
+
+## Properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `id` | `string` | — | Forwarded to the inner `<select>`. Use this to associate an external `<label for=…>`. |
+| `value` | `string` | — | Controlled value of the underlying `<select>`. |
+| `onChange` | `(e: JSX.TargetedEvent<HTMLSelectElement>) => void` | — | Forwarded to the underlying `<select>`. |
+| `aria-label` | `string` | — | Accessible label. Required when no `<label>` element is associated by `id`. |
+| `children` | `<option>` elements | — | Provided as children, exactly as you would write inside a native `<select>`. |
+
+## BEM classes
+
+| Class | Element |
+|-------|---------|
+| `select` | Outer wrapper that positions the chevron. |
+| `select__control` | The native `<select>` element. Tests should target this class to read state. |
+
+## Live examples
+
+Two consumers render the component:
+
+- `LanguageSelector` — in the site header.
+- `RegionSelector` — see the [Region Selector](./region-selector) test page.

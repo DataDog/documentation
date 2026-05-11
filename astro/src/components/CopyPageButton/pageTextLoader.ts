@@ -5,6 +5,10 @@ let loadingPromise: Promise<string> | null = null;
 /**
  * Build the URL of the plaintext (.md) page
  * from the URL of the current HTML page.
+ *
+ * Uses the current window's origin so previews, branch builds, and the live
+ * site each fetch the .md sibling of the page the user is actually looking
+ * at, instead of always pointing at production.
  */
 export function getMdUrl(): string {
     const commitRef = document.documentElement.dataset.commitRef || '';
@@ -15,7 +19,7 @@ export function getMdUrl(): string {
         pathname = pathname.slice(commitRefLen);
     }
 
-    let url = 'https://docs.datadoghq.com' + pathname;
+    let url = window.location.origin + pathname;
     if (url.endsWith('/')) {
         url = url.slice(0, -1);
     }

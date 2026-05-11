@@ -5,10 +5,12 @@ import { h } from 'preact';
 import { CopyPageButton, type CopyPageButtonLabels } from './CopyPageButton';
 
 const labels: CopyPageButtonLabels = {
-    "Copy page contents": "Copy page contents",
-    "Copied page contents": "Copied page contents",
-    "Copied!": "Copied!",
+    "Copy page": "Copy page",
+    "Copied": "Copied",
 };
+
+const visibleLabel = () =>
+    document.querySelector('.copy-page-button__label-text--visible')!.textContent;
 
 vi.mock('./pageTextLoader', () => ({
     loadPageText: vi.fn().mockResolvedValue('mock page text'),
@@ -28,10 +30,17 @@ beforeEach(() => {
 });
 
 describe('CopyPageButton', () => {
-    it('renders with default "Copy page contents" label', () => {
+    it('renders with the "Copy page" label visible by default', () => {
         render(h(CopyPageButton, { labels }));
-        const label = document.querySelector('.copy-page-button__label')!;
-        expect(label.textContent).toBe('Copy page contents');
+        expect(visibleLabel()).toBe('Copy page');
+    });
+
+    it('always renders both label states in the DOM so the icon does not shift on click', () => {
+        render(h(CopyPageButton, { labels }));
+        const texts = Array.from(
+            document.querySelectorAll('.copy-page-button__label-text'),
+        ).map((el) => el.textContent);
+        expect(texts).toEqual(['Copy page', 'Copied']);
     });
 
     it('contains a clipboard SVG icon', () => {
@@ -41,7 +50,7 @@ describe('CopyPageButton', () => {
         expect(svg.getAttribute('aria-hidden')).toBe('true');
     });
 
-    it('copies text and flips label to "Copied!" on click', async () => {
+    it('copies text and flips the visible label to "Copied" on click', async () => {
         const writeText = vi.fn().mockResolvedValue(undefined);
         Object.defineProperty(navigator, 'clipboard', {
             value: { writeText },
@@ -53,14 +62,14 @@ describe('CopyPageButton', () => {
         fireEvent.click(document.querySelector('.copy-page-button')!);
 
         await waitFor(() => {
-            expect(document.querySelector('.copy-page-button__label')!.textContent).toBe('Copied!');
+            expect(visibleLabel()).toBe('Copied');
         });
 
         expect(loadPageText).toHaveBeenCalled();
         expect(writeText).toHaveBeenCalledWith('mock page text');
     });
 
-    it('resets to default label after 3 seconds', async () => {
+    it('resets to the default visible label after 3 seconds', async () => {
         vi.useFakeTimers();
 
         render(h(CopyPageButton, { labels }));
@@ -70,11 +79,11 @@ describe('CopyPageButton', () => {
         fireEvent.click(btn);
         await vi.advanceTimersByTimeAsync(0);
 
-        expect(document.querySelector('.copy-page-button__label')!.textContent).toBe('Copied!');
+        expect(visibleLabel()).toBe('Copied');
 
         await vi.advanceTimersByTimeAsync(3000);
 
-        expect(document.querySelector('.copy-page-button__label')!.textContent).toBe('Copy page contents');
+        expect(visibleLabel()).toBe('Copy page');
 
         vi.useRealTimers();
     });
@@ -95,7 +104,7 @@ describe('CopyPageButton', () => {
         fireEvent.click(document.querySelector('.copy-page-button')!);
 
         await waitFor(() => {
-            expect(document.querySelector('.copy-page-button__label')!.textContent).toBe('Copied!');
+            expect(visibleLabel()).toBe('Copied');
         });
 
         const path = document.querySelector('.copy-page-button__icon svg path')!;

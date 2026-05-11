@@ -48,6 +48,7 @@ import type { SplitParams } from "./schemas/params";
 import type { SchemaField } from "./schemas/schemaField";
 import type {
   ApiOperationStub,
+  ApiOperationView,
   ApiCategory,
   ApiCategoryStub,
   EndpointData,
@@ -70,10 +71,10 @@ const SLUG_OVERRIDES: Record<string, string> = {
 };
 
 const categoriesCache = new Map<Locale, ApiCategory[]>();
-const endpointCache = new Map<string, EndpointData>();
+const operationViewCache = new Map<string, ApiOperationView>();
 
 let _allOperations: RawOperation[] | null = null;
-let _slugByOp: Map<RawOperation, string> | null = null;
+let _logicalGroups: Map<string, RawOperation[]> | null = null;
 
 /**
  * Aggregates categories from these OpenAPI spec keys:
@@ -123,7 +124,11 @@ export async function getCategoryViewBySlug(
 }
 
 /**
- * Aggregates a single endpoint's detail from these OpenAPI spec keys:
+ * Aggregates one logical operation's detail. A logical operation collapses
+ * every API version that shares a `(category, summary)` (e.g. v1 and v2 of
+ * `list-all-aws-integrations`) into a single view with one variant per
+ * version, ordered newest-first. The same OpenAPI keys feed each variant:
+ *
  *   - `servers` (top-level, fallback for region URLs)
  *   - `paths.{path}.parameters` and `paths.{path}.{method}.parameters`
  *     (with `in`, `name`, `required`, `schema`, `example`, `$ref`)
@@ -142,24 +147,28 @@ export async function getCategoryViewBySlug(
  *   - `paths.{path}.{method}.responses.{statusCode}`
  *     (`description`, `content['application/json'].{schema, example, examples}`)
  */
-export async function getEndpointView(
+export async function getOperationView(
   catSlug: string,
   opSlug: string,
   lang: Locale = DEFAULT_LOCALE,
-): Promise<EndpointData | undefined> {
+): Promise<ApiOperationView | undefined> {
   if (!LOCALES.includes(lang)) lang = DEFAULT_LOCALE;
   const key = `${lang}:${catSlug}:${opSlug}`;
-  const cached = endpointCache.get(key);
+  const cached = operationViewCache.get(key);
   if (cached) return cached;
 
-  const match = getAllOperations().find(
-    (op) => op.categorySlug === catSlug && getOpSlug(op) === opSlug,
-  );
-  if (!match) return undefined;
+  const group = getLogicalOperationGroups().get(`${catSlug}:${opSlug}`);
+  if (!group || group.length === 0) return undefined;
 
-  const built = buildEndpoint(match, lang);
-  endpointCache.set(key, built);
-  return built;
+  const variants = group.map((op) => buildEndpoint(op, lang));
+  const view: ApiOperationView = {
+    slug: opSlug,
+    summary: variants[0].summary,
+    deprecated: variants.every((v) => v.deprecated),
+    variants,
+  };
+  operationViewCache.set(key, view);
+  return view;
 }
 
 /* ------------------------------------------------------------------ */
@@ -278,46 +287,52 @@ function collectRawOperationsFromPathItem(
 }
 
 /* ------------------------------------------------------------------ */
-/*  Operation slug helpers                                             */
+/*  Operation slug + grouping helpers                                  */
 /* ------------------------------------------------------------------ */
 
 /**
- * Build a `RawOperation -> slug` map, disambiguating colliding summary slugs
- * within a category by appending the API version. Two operations in the
- * same category can share an operation summary across v1/v2 (e.g.
- * `aws-integration` exposes "List all AWS integrations" in both versions),
- * so we keep slugs unique by category to guarantee one page per operation.
+ * Returns the URL slug for an operation, derived from its summary
+ * (e.g. `list-all-aws-integrations`). When two operations in the same
+ * category share a summary across versions (e.g. v1 + v2 of "List all
+ * AWS integrations"), both produce the same slug — they're variants of
+ * one logical operation and render as version tabs on a single page.
  */
-function getSlugByOp(): Map<RawOperation, string> {
-  if (_slugByOp) return _slugByOp;
-  const ops = getAllOperations();
-  const counts = new Map<string, number>();
-  for (const op of ops) {
-    const key = `${op.categorySlug}:${toSlug(op.operation.summary ?? "")}`;
-    counts.set(key, (counts.get(key) ?? 0) + 1);
-  }
-  const map = new Map<RawOperation, string>();
-  for (const op of ops) {
-    const baseSlug = toSlug(op.operation.summary ?? "");
-    const key = `${op.categorySlug}:${baseSlug}`;
-    const slug =
-      (counts.get(key) ?? 0) > 1 ? `${baseSlug}-${op.version}` : baseSlug;
-    map.set(op, slug);
-  }
-  _slugByOp = map;
-  return map;
+function getOpSlug(op: RawOperation): string {
+  return toSlug(op.operation.summary ?? "");
+}
+
+/** Compare versions newest-first: `v2 < v1` returns -1. */
+function compareVersionsNewestFirst(a: ApiVersion, b: ApiVersion): number {
+  return versionOrdinal(b) - versionOrdinal(a);
+}
+
+function versionOrdinal(v: ApiVersion): number {
+  return Number(v.slice(1));
 }
 
 /**
- * Returns the URL slug for an operation
- * (e.g. `list-all-aws-integrations`
- * in `/api/aws-integration/list-all-aws-integrations/`).
+ * Groups every `RawOperation` by its logical `<categorySlug>:<opSlug>` key.
+ * Each group's operations are ordered newest version first. A group with
+ * a single member is the common case; multi-member groups (v1 + v2 of the
+ * same logical operation) drive the version-tabs UI on the operation page.
  */
-function getOpSlug(op: RawOperation): string {
-  const slug = getSlugByOp().get(op);
-  if (slug === undefined)
-    throw new Error(`No slug found for operation: ${op.operation.operationId}`);
-  return slug;
+function getLogicalOperationGroups(): Map<string, RawOperation[]> {
+  if (_logicalGroups) return _logicalGroups;
+  const groups = new Map<string, RawOperation[]>();
+  for (const op of getAllOperations()) {
+    const key = `${op.categorySlug}:${getOpSlug(op)}`;
+    const list = groups.get(key);
+    if (list) {
+      list.push(op);
+    } else {
+      groups.set(key, [op]);
+    }
+  }
+  for (const list of groups.values()) {
+    list.sort((a, b) => compareVersionsNewestFirst(a.version, b.version));
+  }
+  _logicalGroups = groups;
+  return groups;
 }
 
 /* ------------------------------------------------------------------ */
@@ -428,37 +443,50 @@ function collectImplicitCategoryMetadataFromOperations(
 }
 
 /**
- * Walks every raw operation once and groups stubs by their primary tag's
- * category slug. Categories without operations don't appear as keys.
- * Caller is responsible for sorting each list.
+ * Walks every logical operation group and groups stubs by category slug.
+ * Each logical group becomes one stub regardless of how many version
+ * variants it contains. Categories without operations don't appear as
+ * keys. Caller is responsible for sorting each list.
  */
 function groupOperationStubsByCategorySlug(
   lang: Locale,
 ): Map<string, ApiOperationStub[]> {
   const stubsByCategorySlug = new Map<string, ApiOperationStub[]>();
-  for (const op of getAllOperations()) {
-    const stub = buildOperationStub(op, lang);
-    const list = stubsByCategorySlug.get(op.categorySlug);
+  for (const group of getLogicalOperationGroups().values()) {
+    const stub = buildOperationStub(group, lang);
+    const categorySlug = group[0].categorySlug;
+    const list = stubsByCategorySlug.get(categorySlug);
     if (list) {
       list.push(stub);
     } else {
-      stubsByCategorySlug.set(op.categorySlug, [stub]);
+      stubsByCategorySlug.set(categorySlug, [stub]);
     }
   }
   return stubsByCategorySlug;
 }
 
-function buildOperationStub(op: RawOperation, lang: Locale): ApiOperationStub {
-  const overlay = getTranslationOverlay(op.version, lang);
-  const operationId: string = op.operation.operationId;
+/**
+ * Builds a stub for one logical operation. The latest variant supplies
+ * the identifiers and labels; `versions` lists every variant ordered
+ * newest-first. `menuOrder` takes the minimum across variants so a
+ * lower-numbered v1 doesn't sink a v2-prominent operation in the nav.
+ */
+function buildOperationStub(group: RawOperation[], lang: Locale): ApiOperationStub {
+  const latest = group[0];
+  const overlay = getTranslationOverlay(latest.version, lang);
+  const operationId: string = latest.operation.operationId;
   const action = translateAction(overlay, operationId);
+  const menuOrder = group.reduce(
+    (min, op) => Math.min(min, op.operation["x-menu-order"] ?? 999),
+    Infinity,
+  );
   return {
     operationId,
-    summary: action.summary ?? op.operation.summary ?? "",
-    slug: getOpSlug(op),
-    menuOrder: op.operation["x-menu-order"] ?? 999,
-    version: op.version,
-    method: op.method.toUpperCase(),
+    summary: action.summary ?? latest.operation.summary ?? "",
+    slug: getOpSlug(latest),
+    menuOrder: Number.isFinite(menuOrder) ? menuOrder : 999,
+    versions: group.map((op) => op.version),
+    method: latest.method.toUpperCase(),
   };
 }
 

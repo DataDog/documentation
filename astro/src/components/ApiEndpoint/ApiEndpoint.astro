@@ -1,5 +1,4 @@
 ---
-import { CopyPageButton } from '@components/CopyPageButton/CopyPageButton';
 import ApiMethodBadge from '@components/ApiMethodBadge/ApiMethodBadge.astro';
 import Alert from '@components/Alert/Alert.astro';
 import ApiSchemaTable from '@components/ApiSchemaTable/ApiSchemaTable.astro';
@@ -48,11 +47,9 @@ interface EndpointData {
 
 interface Props {
   data: string; // JSON string of EndpointData
-  headingLevel?: 1 | 2;
 }
 
-const { data: dataJson, headingLevel = 2 } = Astro.props;
-const HeadingTag = headingLevel === 1 ? 'h1' : 'h2';
+const { data: dataJson } = Astro.props;
 
 let ep: EndpointData | null = null;
 try {
@@ -69,13 +66,7 @@ const hasParams = ep && (
 ---
 
 {ep && (
-  <section class={cl('api-endpoint')} data-operation-id={ep.operationId}>
-    {/* Heading + method badge + path */}
-    <HeadingTag id={ep.slug} class={cl('api-endpoint__heading')}>
-      {ep.summary}
-      {ep.version && <span class={cl('api-endpoint__version-badge')}>{ep.version === 'v2' ? 'v2 (latest)' : ep.version}</span>}
-    </HeadingTag>
-    {/* CopyPageButton placement TBD */}
+  <section id={ep.slug} class={cl('api-endpoint')} data-operation-id={ep.operationId}>
     {/* Status alerts */}
     {/* TODO: translate the deprecation/unstable/region-not-supported messages,
         permissions label, "Request Body" heading, and "(required)/(optional)"

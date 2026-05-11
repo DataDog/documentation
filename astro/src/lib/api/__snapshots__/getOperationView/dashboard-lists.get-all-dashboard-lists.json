@@ -1,0 +1,289 @@
+{
+  "slug": "get-all-dashboard-lists",
+  "summary": "Get all dashboard lists",
+  "deprecated": false,
+  "variants": [
+    {
+      "operationId": "ListDashboardLists",
+      "summary": "Get all dashboard lists",
+      "slug": "get-all-dashboard-lists",
+      "method": "GET",
+      "path": "/api/v1/dashboard/lists/manual",
+      "description": "Fetch all of your existing dashboard list definitions.",
+      "version": "v1",
+      "deprecated": false,
+      "unstable": false,
+      "permissions": [
+        "dashboards_read"
+      ],
+      "oauthScopes": [
+        "dashboards_read"
+      ],
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/lists/manual",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/lists/manual",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/lists/manual"
+      },
+      "responses": [
+        {
+          "statusCode": "200",
+          "description": "OK",
+          "schema": [
+            {
+              "name": "dashboard_lists",
+              "type": "[DashboardList]",
+              "required": false,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "List of all your dashboard lists.",
+              "children": [
+                {
+                  "name": "author",
+                  "type": "object",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": true,
+                  "description": "Object describing the creator of the shared element.",
+                  "children": [
+                    {
+                      "name": "email",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Email of the creator."
+                    },
+                    {
+                      "name": "handle",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Handle of the creator."
+                    },
+                    {
+                      "name": "name",
+                      "type": "string",
+                      "required": false,
+                      "deprecated": false,
+                      "readOnly": false,
+                      "description": "Name of the creator."
+                    }
+                  ]
+                },
+                {
+                  "name": "created",
+                  "type": "string (date-time)",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": true,
+                  "description": "Date of creation of the dashboard list."
+                },
+                {
+                  "name": "dashboard_count",
+                  "type": "integer (int64)",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": true,
+                  "description": "The number of dashboards in the list."
+                },
+                {
+                  "name": "id",
+                  "type": "integer (int64)",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": true,
+                  "description": "The ID of the dashboard list."
+                },
+                {
+                  "name": "is_favorite",
+                  "type": "boolean",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": true,
+                  "description": "Whether or not the list is in the favorites."
+                },
+                {
+                  "name": "modified",
+                  "type": "string (date-time)",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": true,
+                  "description": "Date of last edition of the dashboard list."
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true,
+                  "deprecated": false,
+                  "readOnly": false,
+                  "description": "The name of the dashboard list."
+                },
+                {
+                  "name": "type",
+                  "type": "string",
+                  "required": false,
+                  "deprecated": false,
+                  "readOnly": true,
+                  "description": "The type of dashboard list."
+                }
+              ]
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"dashboard_lists\": [\n    {\n      \"name\": \"My Dashboard\",\n      \"type\": \"manual_dashboard_list\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "403",
+          "description": "Forbidden",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Array of errors returned by the API."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "statusCode": "429",
+          "description": "Too many requests",
+          "schema": [
+            {
+              "name": "errors",
+              "type": "[string]",
+              "required": true,
+              "deprecated": false,
+              "readOnly": false,
+              "description": "Array of errors returned by the API."
+            }
+          ],
+          "examples": [
+            {
+              "name": "Example",
+              "value": "{\n  \"errors\": [\n    \"Bad Request\"\n  ]\n}"
+            }
+          ]
+        }
+      ],
+      "codeExamples": [
+        {
+          "language": "curl",
+          "label": "Curl",
+          "entries": [
+            {
+              "description": "Get all dashboard lists curl example",
+              "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\"",
+              "syntax": "bash",
+              "regionVariants": {
+                "us": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "us3": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us3.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "us5": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"us5.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "eu": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"datadoghq.eu\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.datadoghq.eu/api/v1/dashboard/lists/manual\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "ap1": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap1.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "ap2": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ap2.datadoghq.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                },
+                "gov": {
+                  "code": "# Set your Datadog site and credentials\nexport DD_SITE=\"ddog-gov.com\"\nexport DD_API_KEY=\"<DD_API_KEY>\"\nexport DD_APP_KEY=\"<DD_APP_KEY>\"\n\ncurl -X GET \"https://api.ddog-gov.com/api/v1/dashboard/lists/manual\" \\\n-H \"DD-API-KEY: ${DD_API_KEY}\" \\\n-H \"DD-APPLICATION-KEY: ${DD_APP_KEY}\" \\\n-H \"Accept: application/json\""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "language": "python",
+          "label": "Python",
+          "entries": [
+            {
+              "description": "",
+              "code": "\"\"\"\nGet all dashboard lists returns \"OK\" response\n\"\"\"\n\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.dashboard_lists_api import DashboardListsApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = DashboardListsApi(api_client)\n    response = api_instance.list_dashboard_lists()\n\n    print(response)\n",
+              "syntax": "python"
+            }
+          ]
+        },
+        {
+          "language": "ruby",
+          "label": "Ruby",
+          "entries": [
+            {
+              "description": "",
+              "code": "# Get all dashboard lists returns \"OK\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V1::DashboardListsAPI.new\np api_instance.list_dashboard_lists()\n",
+              "syntax": "ruby"
+            }
+          ]
+        },
+        {
+          "language": "go",
+          "label": "Go",
+          "entries": [
+            {
+              "description": "",
+              "code": "// Get all dashboard lists returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewDashboardListsApi(apiClient)\n\tresp, r, err := api.ListDashboardLists(ctx)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `DashboardListsApi.ListDashboardLists`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `DashboardListsApi.ListDashboardLists`:\\n%s\\n\", responseContent)\n}\n",
+              "syntax": "go"
+            }
+          ]
+        },
+        {
+          "language": "java",
+          "label": "Java",
+          "entries": [
+            {
+              "description": "",
+              "code": "// Get all dashboard lists returns \"OK\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v1.api.DashboardListsApi;\nimport com.datadog.api.client.v1.model.DashboardListListResponse;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    DashboardListsApi apiInstance = new DashboardListsApi(defaultClient);\n\n    try {\n      DashboardListListResponse result = apiInstance.listDashboardLists();\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling DashboardListsApi#listDashboardLists\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n",
+              "syntax": "java"
+            }
+          ]
+        },
+        {
+          "language": "typescript",
+          "label": "TypeScript",
+          "entries": [
+            {
+              "description": "",
+              "code": "/**\n * Get all dashboard lists returns \"OK\" response\n */\n\nimport { client, v1 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v1.DashboardListsApi(configuration);\n\napiInstance\n  .listDashboardLists()\n  .then((data: v1.DashboardListListResponse) => {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) => console.error(error));\n",
+              "syntax": "typescript"
+            }
+          ]
+        },
+        {
+          "language": "rust",
+          "label": "Rust",
+          "entries": [
+            {
+              "description": "",
+              "code": "// Get all dashboard lists returns \"OK\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV1::api_dashboard_lists::DashboardListsAPI;\n\n#[tokio::main]\nasync fn main() {\n    let configuration = datadog::Configuration::new();\n    let api = DashboardListsAPI::with_config(configuration);\n    let resp = api.list_dashboard_lists().await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n",
+              "syntax": "rust"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
