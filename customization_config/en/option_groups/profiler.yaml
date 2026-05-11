@@ -14,6 +14,13 @@ profiler_language_options:
   - id: rust
   - id: host
 
+# Mode option groups — only shown when Host is selected (via show_if)
+
+profiler_host_mode_options:
+  - id: bundled
+    default: true
+  - id: standalone
+
 # Runtime option groups — only shown when Java is selected (via show_if)
 
 java_profiler_runtime_options:

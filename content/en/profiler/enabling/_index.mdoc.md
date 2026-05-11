@@ -9,6 +9,11 @@ content_filters:
     label: "Runtime"
     show_if:
       - prog_lang: ["java"]
+  - trait_id: mode
+    option_group_id: profiler_host_mode_options
+    label: "Mode"
+    show_if:
+      - prog_lang: ["host"]
 aliases:
   - /tracing/faq/profiling_migration/
   - /tracing/profiler/enabling/

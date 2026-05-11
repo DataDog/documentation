@@ -531,3 +531,9 @@ options:
 
 - label: eBPF Profiling
   id: host
+
+- label: Bundled
+  id: bundled
+
+- label: Standalone
+  id: standalone
