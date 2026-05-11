@@ -26,7 +26,6 @@ TODO: Finalize the Workload Identity Federation rename.
 The following external Datadog URL still references the old product name and needs to be updated once the corresponding page is renamed:
 - In-app settings page: https://app.datadoghq.com/organization-settings/cloud-authentication
 Backend identifiers (API paths /api/v2/cloud_auth/*, permissions cloud_auth_config_*, Terraform variable `cloud_provider_type`) are kept as-is to avoid a breaking change for existing integrations — to confirm with engineering whether to keep, alias, or rename.
-Translated copies (content/es/, menus main.{fr,es,ja,ko}.yaml) are unchanged on purpose; they will re-sync through the external translation pipeline. The old slug is preserved in `aliases:` so their links keep resolving.
 -->
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloud-provider-based-authentication/" btn_hidden="false" header="Join the Preview!" >}}
