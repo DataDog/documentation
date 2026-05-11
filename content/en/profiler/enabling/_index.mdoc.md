@@ -82,6 +82,11 @@ further_reading:
 {% partial file="profiler/enabling/ddprof.mdoc.md" /%}
 {% /if %}
 
+<!-- Host Profiler -->
+{% if equals($prog_lang, "host") %}
+{% partial file="profiler/enabling/host.mdoc.md" /%}
+{% /if %}
+
 ## Not sure what to do next?
 
 The [Getting Started with Profiler][1] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.

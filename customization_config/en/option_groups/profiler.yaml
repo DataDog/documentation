@@ -12,6 +12,7 @@ profiler_language_options:
   - id: c
   - id: cpp
   - id: rust
+  - id: host
 
 # Runtime option groups — only shown when Java is selected (via show_if)
 
