@@ -254,7 +254,7 @@ Go to [{{< ui >}}Create Feature Flag{{< /ui >}}][2] in Datadog and configure the
 
 In your application code, use the SDK to evaluate the flag and gate the new feature.
 
-<div class="alert alert-warning">Datadog Feature Flags requires evaluation-context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 {{< tabs >}}
 {{% tab "JavaScript browser" %}}
