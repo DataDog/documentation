@@ -10,7 +10,7 @@ further_reading:
       text: "Personal Access Tokens"
     - link: "/account_management/cloud_provider_authentication/"
       tag: "Documentation"
-      text: "Cloud-Based Authentication"
+      text: "Workload Identity Federation"
 ---
 
 {{< callout btn_hidden="true" header="Join the Preview!" >}}

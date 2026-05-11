@@ -1,10 +1,10 @@
 ---
-title: Cloud-based Authentication
-description: Authenticate the Datadog Terraform provider and Datadog Agent using cloud credentials instead of static API keys with AWS STS authentication and identity mapping.
+title: Workload Identity Federation
+description: Authenticate the Datadog Terraform provider and Datadog Agent with Workload Identity Federation, using cloud credentials instead of static API keys with AWS STS authentication and identity mapping.
 aliases:
     - /account_management/cloud_authentication/
 algolia:
-  tags: ['cloud authentication', 'aws authentication', 'terraform provider', 'agent authentication', 'delegated auth']
+  tags: ['workload identity federation', 'cloud authentication', 'aws authentication', 'terraform provider', 'agent authentication', 'delegated auth']
 further_reading:
 - link: "/getting_started/integrations/terraform/"
   tag: "Documentation"
@@ -20,17 +20,30 @@ further_reading:
   text: "AWS Integration"
 ---
 
+<!--
+TODO: Finalize the Workload Identity Federation rename.
+Remaining steps once the Datadog UI and marketing URL are updated:
+1. Rename this file from cloud_provider_authentication.md to workload_identity_federation.md
+2. Update the menu URL in config/_default/menus/main.en.yaml
+3. Update the further_reading link in content/en/account_management/service-access-tokens.md
+4. Add the previous slug to `aliases:` so existing links keep working
+5. Move static/images/account_management/cloud_provider_authentication/ to .../workload_identity_federation/ and update img src paths below
+6. Update the preview signup URL (https://www.datadoghq.com/product-preview/cloud-provider-based-authentication/) once the marketing page is renamed
+7. Update the Datadog product UI link (https://app.datadoghq.com/organization-settings/cloud-authentication) once the in-app route is renamed
+Note: API paths (/api/v2/cloud_auth/*), permissions (cloud_auth_config_*), and the Terraform variable `cloud_provider_type` are intentionally left as-is — backend rename is a separate effort.
+-->
+
 {{< callout url="https://www.datadoghq.com/product-preview/cloud-provider-based-authentication/" btn_hidden="false" header="Join the Preview!" >}}
-Cloud-based authentication is in Preview. Complete the form to request access.
+Workload Identity Federation is in Preview. Complete the form to request access.
 {{< /callout >}}
 
 ## Overview
 
-Cloud-based authentication lets you authenticate the Datadog Terraform provider and the Datadog Agent using cloud credentials instead of static API and application keys.
+Workload Identity Federation lets you authenticate the Datadog Terraform provider and the Datadog Agent using cloud credentials instead of static API and application keys.
 
 During the preview period, AWS is the only supported cloud provider.
 
-Cloud-based authentication is available for the following:
+Workload Identity Federation is available for the following:
 - **Terraform provider**: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account
 - **Datadog Agent**: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys
 
@@ -58,14 +71,14 @@ The authentication process uses the [AWS Security Token Service (STS)][1] to ver
 
 <div class="alert alert-info">If the delegated authentication flow fails, the Agent falls back to the API key configured in your <code>datadog.yaml</code> file. This fallback behavior allows you to onboard with limited risk to your existing configuration.</div>
 
-## Set up cloud-based authentication for AWS
+## Set up Workload Identity Federation for AWS
 
 **Requirements**:
 - Datadog Terraform provider version 3.70 or later.
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
 - Your account has the `cloud_auth_config_read` and `cloud_auth_config_write` permissions. These permissions are available only after you are onboarded to the preview.
 
-Setting up cloud-provider based authentication for AWS involves two parts:
+Setting up Workload Identity Federation for AWS involves two parts:
 1. [Configuring your AWS identity mapping in Datadog](#configure-aws-identity-mapping-in-datadog)
 2. [Updating your Terraform provider configuration](#update-your-terraform-provider-configuration)
 
@@ -79,9 +92,9 @@ If you need to create IAM roles in AWS, see the [AWS IAM role creation documenta
 
 #### Using the UI
 
-Navigate to [**Organization Settings** > **Cloud Authentication**][6] and click the **Identity Mappings** tab. Each mapping grants a cloud role the permissions of a specific Datadog user or service account.
+Navigate to [**Organization Settings** > **Workload Identity Federation**][6] and click the **Identity Mappings** tab. Each mapping grants a cloud role the permissions of a specific Datadog user or service account.
 
-{{< img src="account_management/cloud_provider_authentication/identity-mappings-list.png" alt="Identity Mappings tab in Cloud Authentication showing a list of AWS ARN patterns mapped to Datadog users and service accounts" style="width:100%;" >}}
+{{< img src="account_management/cloud_provider_authentication/identity-mappings-list.png" alt="Identity Mappings tab in Workload Identity Federation showing a list of AWS ARN patterns mapped to Datadog users and service accounts" style="width:100%;" >}}
 
 To create an identity mapping:
 
@@ -205,7 +218,7 @@ curl -X GET "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/p
 
 ### Update your Terraform provider configuration
 
-After you configured the identity mapping, update your Datadog Terraform provider configuration to use cloud provider authentication:
+After you configure the identity mapping, update your Datadog Terraform provider configuration to use Workload Identity Federation:
 
 #### Remove your existing configuration
 
@@ -217,7 +230,7 @@ provider "datadog" {
 }
 ```
 
-#### Add the new cloud authentication configuration
+#### Add the new Workload Identity Federation configuration
 
 To get your `org_uuid`, call this endpoint, or click the link (requires an active session in the target org): [{{< region-param key=dd_api >}}/api/v2/current_user][2]
 
@@ -244,9 +257,9 @@ provider "datadog" {
 
 The Terraform provider automatically uses your configured AWS credentials to authenticate with Datadog.
 
-## Set up cloud-based authentication for the Datadog Agent
+## Set up Workload Identity Federation for the Datadog Agent
 
-Cloud-based authentication for the Agent allows you to authenticate your Agent using AWS credentials instead of managing static API keys. The Agent exchanges an AWS authentication proof for a managed API key that Datadog automatically rotates.
+Workload Identity Federation for the Agent allows you to authenticate your Agent using AWS credentials instead of managing static API keys. The Agent exchanges an AWS authentication proof for a managed API key that Datadog automatically rotates.
 
 **Requirements**:
 - Version `7.78.0` or later of the Datadog Agent.
@@ -254,7 +267,7 @@ Cloud-based authentication for the Agent allows you to authenticate your Agent u
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
 - Your account has the `cloud_auth_config_read` and `cloud_auth_config_write` permissions. These permissions are available only after you are onboarded to the preview.
 
-Setting up cloud-based authentication for the Agent involves two parts:
+Setting up Workload Identity Federation for the Agent involves two parts:
 1. [Configuring your AWS intake mapping in Datadog](#configure-aws-intake-mapping-in-datadog)
 2. [Updating your Agent configuration](#update-your-agent-configuration)
 
@@ -268,9 +281,9 @@ If you need to create IAM roles in AWS, see the [AWS IAM role creation documenta
 
 #### Using the UI
 
-Navigate to [**Organization Settings** > **Cloud Authentication**][6] and click the **Intake Mappings** tab.
+Navigate to [**Organization Settings** > **Workload Identity Federation**][6] and click the **Intake Mappings** tab.
 
-{{< img src="account_management/cloud_provider_authentication/intake-mappings-list.png" alt="Intake Mappings tab in Cloud Authentication showing a list of AWS ARN patterns authorized for Agent authentication" style="width:100%;" >}}
+{{< img src="account_management/cloud_provider_authentication/intake-mappings-list.png" alt="Intake Mappings tab in Workload Identity Federation showing a list of AWS ARN patterns authorized for Agent authentication" style="width:100%;" >}}
 
 To create an intake mapping:
 
@@ -350,11 +363,11 @@ curl -X DELETE "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aw
 
 ### Update your Agent configuration
 
-After you configure the intake mapping, update your Agent configuration to use cloud-based authentication.
+After you configure the intake mapping, update your Agent configuration to use Workload Identity Federation.
 
 #### Global configuration
 
-Add the `delegated_auth` section to your `datadog.yaml` file to enable cloud-based authentication for all Agent data:
+Add the `delegated_auth` section to your `datadog.yaml` file to enable Workload Identity Federation for all Agent data:
 
 ```yaml
 delegated_auth:
@@ -381,7 +394,7 @@ Replace `<AWS_REGION>` with the AWS region to use for STS authentication (for ex
 
 #### Per-product configuration
 
-You can enable delegated authentication for specific Agent products independently. This is useful when you want to send different data types to different Datadog organizations, or when you only want to use cloud-based authentication for specific products.
+You can enable delegated authentication for specific Agent products independently. This is useful when you want to send different data types to different Datadog organizations, or when you only want to use Workload Identity Federation for specific products.
 
 To enable delegated authentication for logs only:
 
