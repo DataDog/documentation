@@ -6,6 +6,20 @@
  * and `ApiCategory` view shapes that rendering components consume. Results
  * are memoized per-locale (categories) and per `(locale, slug)` pair
  * (endpoints) to avoid re-walking on each call within a build.
+ *
+ * The private helpers below follow a naming convention designed to make
+ * the spec-to-view relationships explicit:
+ *
+ *   - `collect<Entity>From<Source>` — walks `<Source>` to produce a list
+ *     of `<Entity>`. The looped entity is `<Source>`; the entity being
+ *     built is `<Entity>`. e.g. `collectCategoryMetadataFromSpecTags` walks
+ *     a spec's `tags[]` and builds `CategoryMetadata` records.
+ *
+ *   - `group<Entity>By<Key>` — walks `<Entity>` once and returns a
+ *     `<Key> -> <Entity>[]` map. e.g. `groupOperationStubsByCategorySlug`
+ *     walks every raw operation and groups stubs by their category slug.
+ *
+ *   - `build<View>` / `extract<X>For<Y>` — single-record assembly.
  */
 
 import { DEFAULT_LOCALE, LOCALES, type Locale } from "@lib/i18n/locale";
@@ -29,11 +43,15 @@ import { paramsToFields } from "./refResolver";
 import { getCodeExamplesForOperation } from "./codeExampleLoader";
 import type { CodeExampleSet } from "./schemas/codeExamples";
 import type { ApiVersion } from "./schemas/version";
+import type { ActionTranslation } from "./schemas/translation";
+import type { SplitParams } from "./schemas/params";
+import type { SchemaField } from "./schemas/schemaField";
 import type {
   ApiOperationStub,
   ApiCategory,
   ApiCategoryStub,
   EndpointData,
+  RequestBodyData,
 } from "./schemas/views";
 
 const HTTP_METHODS = [
@@ -145,7 +163,7 @@ export async function getEndpointView(
 }
 
 /* ------------------------------------------------------------------ */
-/*  Private helpers                                                    */
+/*  Types                                                              */
 /* ------------------------------------------------------------------ */
 
 function toSlug(name: string): string {
@@ -178,44 +196,90 @@ interface RawOperation {
   categorySlug: string;
 }
 
+interface CategoryMetadata {
+  name: string;
+  slug: string;
+  description: string;
+  deprecated: boolean;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Raw operation collection                                           */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Memoized entry point. Returns every operation across every version of
+ * the spec as a flat list of `RawOperation` records.
+ */
 function getAllOperations(): RawOperation[] {
   if (_allOperations) return _allOperations;
+  _allOperations = collectRawOperationsFromAllSpecs();
+  return _allOperations;
+}
+
+/** Walks every API version's spec and collects their operations. */
+function collectRawOperationsFromAllSpecs(): RawOperation[] {
   const result: RawOperation[] = [];
-
   for (const version of API_VERSIONS) {
-    const spec = getOpenApiDocument(version);
-    const paths = spec.paths;
-    if (!paths) continue;
-
-    for (const [pathStr, pathItem] of Object.entries(paths)) {
-      if (!pathItem) continue;
-
-      for (const method of HTTP_METHODS) {
-        const operation = pathItem[method];
-        if (!operation) continue;
-        if (!operation.tags || operation.tags.length === 0) continue;
-        if (!operation.operationId) continue;
-
-        const primaryTag = operation.tags[0];
-        const rawSlug = toSlug(primaryTag);
-        const categorySlug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
-
-        result.push({
-          version,
-          pathStr,
-          method,
-          operation: operation as ApiOperationObject,
-          pathItem,
-          primaryTag,
-          categorySlug,
-        });
-      }
-    }
+    result.push(...collectRawOperationsFromSpec(version));
   }
-
-  _allOperations = result;
   return result;
 }
+
+/**
+ * Walks every `paths.{path}.{method}` in a single spec and emits a
+ * `RawOperation` for each well-formed operation. Skips operations that
+ * lack tags or an `operationId` (they can't be linked or categorized).
+ */
+function collectRawOperationsFromSpec(version: ApiVersion): RawOperation[] {
+  const spec = getOpenApiDocument(version);
+  const paths = spec.paths;
+  if (!paths) return [];
+
+  const result: RawOperation[] = [];
+  for (const [pathStr, pathItem] of Object.entries(paths)) {
+    if (!pathItem) continue;
+    result.push(...collectRawOperationsFromPathItem(version, pathStr, pathItem));
+  }
+  return result;
+}
+
+/**
+ * Walks the HTTP methods on a single path item and emits a `RawOperation`
+ * for each one that's defined and well-formed.
+ */
+function collectRawOperationsFromPathItem(
+  version: ApiVersion,
+  pathStr: string,
+  pathItem: OpenAPIV3.PathItemObject,
+): RawOperation[] {
+  const result: RawOperation[] = [];
+  for (const method of HTTP_METHODS) {
+    const operation = pathItem[method];
+    if (!operation) continue;
+    if (!operation.tags || operation.tags.length === 0) continue;
+    if (!operation.operationId) continue;
+
+    const primaryTag = operation.tags[0];
+    const rawSlug = toSlug(primaryTag);
+    const categorySlug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
+
+    result.push({
+      version,
+      pathStr,
+      method,
+      operation: operation as ApiOperationObject,
+      pathItem,
+      primaryTag,
+      categorySlug,
+    });
+  }
+  return result;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Operation slug helpers                                             */
+/* ------------------------------------------------------------------ */
 
 /**
  * Build a `RawOperation -> slug` map, disambiguating colliding summary slugs
@@ -256,92 +320,162 @@ function getOpSlug(op: RawOperation): string {
   return slug;
 }
 
+/* ------------------------------------------------------------------ */
+/*  Category assembly                                                  */
+/* ------------------------------------------------------------------ */
+
 function buildCategories(lang: Locale): ApiCategory[] {
-  interface CategoryMeta {
-    name: string;
-    slug: string;
-    description: string;
-    deprecated: boolean;
-  }
+  const allMetadata = collectAllCategoryMetadata(lang);
+  const stubsByCategorySlug = groupOperationStubsByCategorySlug(lang);
 
-  const categoryMap = new Map<string, CategoryMeta>();
-  const opsByCategory = new Map<string, ApiOperationStub[]>();
-
-  for (const version of API_VERSIONS) {
-    const spec = getOpenApiDocument(version);
-    const overlay = getTranslationOverlay(version, lang);
-
-    type ApiTagObject = OpenAPIV3.TagObject & { "x-deprecated"?: boolean };
-    const tags = (spec.tags ?? []) as ApiTagObject[];
-    for (const tag of tags) {
-      const rawSlug = toSlug(tag.name);
-      const slug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
-      if (categoryMap.has(slug)) continue;
-
-      const translated = translateTag(overlay, slug, {
-        name: tag.name,
-        description: tag.description,
-      });
-      categoryMap.set(slug, {
-        name: translated.name,
-        slug,
-        description: translated.description ?? "",
-        deprecated: tag["x-deprecated"] === true,
-      });
-    }
-  }
-
-  for (const op of getAllOperations()) {
-    const overlay = getTranslationOverlay(op.version, lang);
-
-    if (!categoryMap.has(op.categorySlug)) {
-      const translated = translateTag(overlay, op.categorySlug, {
-        name: op.primaryTag,
-      });
-      categoryMap.set(op.categorySlug, {
-        name: translated.name,
-        slug: op.categorySlug,
-        description: "",
-        deprecated: false,
-      });
-    }
-
-    const operationId: string = op.operation.operationId;
-    const action = translateAction(overlay, operationId);
-    const summary: string = action.summary ?? op.operation.summary ?? "";
-    const menuOrder: number = op.operation["x-menu-order"] ?? 999;
-    const slug = getOpSlug(op);
-
-    const list = opsByCategory.get(op.categorySlug) ?? [];
-    list.push({
-      operationId,
-      summary,
-      slug,
-      menuOrder,
-      version: op.version,
-      method: op.method.toUpperCase(),
-    });
-    opsByCategory.set(op.categorySlug, list);
-  }
-
-  const result: ApiCategory[] = [];
-  for (const meta of Array.from(categoryMap.values())) {
-    const ops = opsByCategory.get(meta.slug) ?? [];
-    ops.sort(
-      (a, b) => a.menuOrder - b.menuOrder || a.summary.localeCompare(b.summary),
-    );
-    result.push({
+  const categories: ApiCategory[] = allMetadata.map((meta) => {
+    const operations = stubsByCategorySlug.get(meta.slug) ?? [];
+    operations.sort(compareOperationStubsByMenuOrder);
+    return {
       name: meta.name,
       slug: meta.slug,
       description: meta.description,
-      operations: ops,
+      operations,
       deprecated: meta.deprecated,
-    });
+    };
+  });
+  categories.sort(compareCategoriesByName);
+  return categories;
+}
+
+/**
+ * Returns one `CategoryMetadata` per known category. The primary source is
+ * `tags[]` across every spec; operations whose tag never appears in
+ * `tags[]` produce a minimal implicit meta so they still get a category
+ * page.
+ */
+function collectAllCategoryMetadata(lang: Locale): CategoryMetadata[] {
+  const bySlug = new Map<string, CategoryMetadata>();
+
+  for (const version of API_VERSIONS) {
+    for (const meta of collectCategoryMetadataFromSpecTags(version, lang)) {
+      if (!bySlug.has(meta.slug)) {
+        bySlug.set(meta.slug, meta);
+      }
+    }
   }
 
-  result.sort((a, b) => a.name.localeCompare(b.name));
+  for (const meta of collectImplicitCategoryMetadataFromOperations(bySlug, lang)) {
+    bySlug.set(meta.slug, meta);
+  }
+
+  return Array.from(bySlug.values());
+}
+
+/**
+ * Walks `tags[]` in one spec and emits a `CategoryMetadata` for each tag,
+ * applying the translation overlay.
+ */
+function collectCategoryMetadataFromSpecTags(
+  version: ApiVersion,
+  lang: Locale,
+): CategoryMetadata[] {
+  const spec = getOpenApiDocument(version);
+  const overlay = getTranslationOverlay(version, lang);
+  type ApiTagObject = OpenAPIV3.TagObject & { "x-deprecated"?: boolean };
+  const tags = (spec.tags ?? []) as ApiTagObject[];
+
+  const result: CategoryMetadata[] = [];
+  for (const tag of tags) {
+    const rawSlug = toSlug(tag.name);
+    const slug = SLUG_OVERRIDES[rawSlug] ?? rawSlug;
+    const translated = translateTag(overlay, slug, {
+      name: tag.name,
+      description: tag.description,
+    });
+    result.push({
+      name: translated.name,
+      slug,
+      description: translated.description ?? "",
+      deprecated: tag["x-deprecated"] === true,
+    });
+  }
   return result;
 }
+
+/**
+ * Walks every operation and emits a minimal `CategoryMetadata` for any
+ * category slug not already in `alreadyDefined`. This covers categories
+ * referenced by an operation's first tag that have no matching entry in
+ * any spec's `tags[]`.
+ */
+function collectImplicitCategoryMetadataFromOperations(
+  alreadyDefined: Map<string, CategoryMetadata>,
+  lang: Locale,
+): CategoryMetadata[] {
+  const seen = new Set<string>(alreadyDefined.keys());
+  const result: CategoryMetadata[] = [];
+  for (const op of getAllOperations()) {
+    if (seen.has(op.categorySlug)) continue;
+    seen.add(op.categorySlug);
+    const overlay = getTranslationOverlay(op.version, lang);
+    const translated = translateTag(overlay, op.categorySlug, {
+      name: op.primaryTag,
+    });
+    result.push({
+      name: translated.name,
+      slug: op.categorySlug,
+      description: "",
+      deprecated: false,
+    });
+  }
+  return result;
+}
+
+/**
+ * Walks every raw operation once and groups stubs by their primary tag's
+ * category slug. Categories without operations don't appear as keys.
+ * Caller is responsible for sorting each list.
+ */
+function groupOperationStubsByCategorySlug(
+  lang: Locale,
+): Map<string, ApiOperationStub[]> {
+  const stubsByCategorySlug = new Map<string, ApiOperationStub[]>();
+  for (const op of getAllOperations()) {
+    const stub = buildOperationStub(op, lang);
+    const list = stubsByCategorySlug.get(op.categorySlug);
+    if (list) {
+      list.push(stub);
+    } else {
+      stubsByCategorySlug.set(op.categorySlug, [stub]);
+    }
+  }
+  return stubsByCategorySlug;
+}
+
+function buildOperationStub(op: RawOperation, lang: Locale): ApiOperationStub {
+  const overlay = getTranslationOverlay(op.version, lang);
+  const operationId: string = op.operation.operationId;
+  const action = translateAction(overlay, operationId);
+  return {
+    operationId,
+    summary: action.summary ?? op.operation.summary ?? "",
+    slug: getOpSlug(op),
+    menuOrder: op.operation["x-menu-order"] ?? 999,
+    version: op.version,
+    method: op.method.toUpperCase(),
+  };
+}
+
+function compareOperationStubsByMenuOrder(
+  a: ApiOperationStub,
+  b: ApiOperationStub,
+): number {
+  return a.menuOrder - b.menuOrder || a.summary.localeCompare(b.summary);
+}
+
+function compareCategoriesByName(a: ApiCategory, b: ApiCategory): number {
+  return a.name.localeCompare(b.name);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Endpoint assembly                                                  */
+/* ------------------------------------------------------------------ */
 
 function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const spec = getOpenApiDocument(op.version);
@@ -362,6 +496,52 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const permissions = extractPermissions(op.operation);
   const oauthScopes = extractOauthScopes(op.operation.security);
 
+  const regionUrls = buildRegionUrlsForOperation(spec, op);
+
+  const params = collectParametersForOperation(spec, op);
+  const requestBody = buildLocalizedRequestBodyForOperation(spec, op, action);
+  const responses = extractResponses(spec, op.operation);
+
+  const codeExamples = buildCodeExamplesForOperation(
+    spec,
+    op,
+    params.split,
+    requestBody?.examples?.[0]?.value,
+    summary,
+  );
+
+  return {
+    operationId,
+    summary,
+    slug: getOpSlug(op),
+    method: op.method.toUpperCase(),
+    path: op.pathStr,
+    description,
+    version: op.version,
+    deprecated,
+    unstable,
+    unstableMessage,
+    permissions,
+    oauthScopes,
+    regionUrls,
+    pathParams: params.pathFields,
+    queryParams: params.queryFields,
+    headerParams: params.headerFields,
+    requestBody,
+    responses,
+    codeExamples,
+  };
+}
+
+/**
+ * Walks the regions resolved for this operation and builds a `key -> URL`
+ * map. Region resolution falls back to the spec's top-level `servers`
+ * when the operation doesn't declare its own.
+ */
+function buildRegionUrlsForOperation(
+  spec: OpenAPIV3.Document,
+  op: RawOperation,
+): Record<string, string> {
   const regions = getRegions(spec, op.operation);
   const operationServers = op.operation?.servers ?? spec?.servers;
   const regionUrls: Record<string, string> = {};
@@ -372,37 +552,78 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
       op.pathStr,
     );
   }
+  return regionUrls;
+}
 
-  const opSlug = getOpSlug(op);
-
+/**
+ * Merges `paths.{path}.parameters` with `paths.{path}.{method}.parameters`,
+ * splits them by `in` location (path / query / header / cookie / body),
+ * and converts each non-empty group into the field tree the renderer
+ * consumes. Returns both forms because the split parameters are also
+ * needed downstream for curl assembly.
+ */
+function collectParametersForOperation(
+  spec: OpenAPIV3.Document,
+  op: RawOperation,
+): {
+  split: SplitParams;
+  pathFields: SchemaField[] | undefined;
+  queryFields: SchemaField[] | undefined;
+  headerFields: SchemaField[] | undefined;
+} {
   const mergedParameters = [
     ...(op.pathItem.parameters ?? []),
     ...(op.operation.parameters ?? []),
   ];
-  const params = splitParameters(spec, mergedParameters);
-  const pathParams =
-    params.path.length > 0 ? paramsToFields(spec, params.path) : undefined;
-  const queryParams =
-    params.query.length > 0 ? paramsToFields(spec, params.query) : undefined;
-  const headerParams =
-    params.header.length > 0 ? paramsToFields(spec, params.header) : undefined;
+  const split = splitParameters(spec, mergedParameters);
+  return {
+    split,
+    pathFields:
+      split.path.length > 0 ? paramsToFields(spec, split.path) : undefined,
+    queryFields:
+      split.query.length > 0 ? paramsToFields(spec, split.query) : undefined,
+    headerFields:
+      split.header.length > 0 ? paramsToFields(spec, split.header) : undefined,
+  };
+}
 
+/**
+ * Extracts the operation's request body and applies any `action`-level
+ * translation overrides for the body description and the top-level
+ * schema description.
+ */
+function buildLocalizedRequestBodyForOperation(
+  spec: OpenAPIV3.Document,
+  op: RawOperation,
+  action: ActionTranslation,
+): RequestBodyData | undefined {
   const requestBody = extractRequestBody(spec, op.operation);
-  if (requestBody) {
-    if (action.request_description !== undefined) {
-      requestBody.description = action.request_description || undefined;
-    }
-    if (
-      action.request_schema_description !== undefined &&
-      requestBody.schema.length > 0
-    ) {
-      requestBody.schema[0].description = action.request_schema_description;
-    }
+  if (!requestBody) return undefined;
+
+  if (action.request_description !== undefined) {
+    requestBody.description = action.request_description || undefined;
   }
+  if (
+    action.request_schema_description !== undefined &&
+    requestBody.schema.length > 0
+  ) {
+    requestBody.schema[0].description = action.request_schema_description;
+  }
+  return requestBody;
+}
 
-  const responses = extractResponses(spec, op.operation);
-
-  const requestBodyJson = requestBody?.examples?.[0]?.value;
+/**
+ * Assembles the code-examples panel: a curl block (one entry with per-
+ * region variants) followed by any SDK examples discovered for this
+ * operation.
+ */
+function buildCodeExamplesForOperation(
+  spec: OpenAPIV3.Document,
+  op: RawOperation,
+  params: SplitParams,
+  requestBodyJson: string | undefined,
+  summary: string,
+): CodeExampleSet[] {
   const curlByRegion = buildCurlByRegion(
     spec,
     op.method,
@@ -414,18 +635,19 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
   const regionKeys = Object.keys(curlByRegion);
   const defaultRegionKey = regionKeys[0] ?? "us";
   const defaultCurl = curlByRegion[defaultRegionKey] ?? "";
+
   const curlVariants: Record<string, { code: string }> = {};
   for (const [key, code] of Object.entries(curlByRegion)) {
     curlVariants[key] = { code };
   }
 
   const sdkExamples = getCodeExamplesForOperation(
-    operationId,
+    op.operation.operationId,
     op.version,
     op.categorySlug,
   );
 
-  const codeExamples: CodeExampleSet[] = [
+  return [
     {
       language: "curl",
       label: "Curl",
@@ -440,26 +662,4 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
     },
     ...sdkExamples,
   ];
-
-  return {
-    operationId,
-    summary,
-    slug: opSlug,
-    method: op.method.toUpperCase(),
-    path: op.pathStr,
-    description,
-    version: op.version,
-    deprecated,
-    unstable,
-    unstableMessage,
-    permissions,
-    oauthScopes,
-    regionUrls,
-    pathParams,
-    queryParams,
-    headerParams,
-    requestBody,
-    responses,
-    codeExamples,
-  };
 }
