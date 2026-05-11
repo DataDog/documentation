@@ -300,8 +300,9 @@ Follow the [Datadog Exporter installation guide][11] to complete the exporter co
 
 #### Verify the installation
 
-Open the [Kubernetes Explorer](https://app.datadoghq.com/orchestration/overview) and filter by your OpenTelemetry cluster name. Your pod and namespace data should appear in the Explorer.
+Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name. Your pod and namespace data should appear in the Explorer.
 
+[1]: https://app.datadoghq.com/orchestration/overview
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
 [11]: /opentelemetry/setup/collector_exporter/install/#2---configure-the-datadog-exporter-and-connector
 [12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.142.0
