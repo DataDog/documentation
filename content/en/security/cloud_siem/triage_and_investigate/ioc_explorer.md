@@ -1,6 +1,5 @@
 ---
 title: IOC Explorer
-site_support_id: ioc_explorer
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
   tag: "Blog"
