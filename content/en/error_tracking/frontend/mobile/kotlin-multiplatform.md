@@ -87,7 +87,6 @@ Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwi
 
 All uncaught exceptions resulting in a crash are reported by the Kotlin Multiplatform SDK.
 
-
 Add the following Datadog iOS SDK dependencies, which are needed for the linking step:
 
 * `DatadogObjc`
@@ -110,12 +109,12 @@ cocoapods {
 
    pod("DatadogObjc") {
      linkOnly = true
-     version = x.x.x
+     version = "x.x.x"
    }
 
    pod("DatadogCrashReporting") {
      linkOnly = true
-     version = x.x.x
+     version = "x.x.x"
    }
 }
 ```
@@ -136,13 +135,10 @@ App hangs are an iOS-specific type of error that happens when the application is
 
 By default, app hang reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last for more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method. For more information, see [iOS Crash Reporting and Error Tracking - Add ANR Reporting][6].
 
-
 [501]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
 [6]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 {{% /tab %}}
 {{< /tabs >}}
-
-
 
 ### Step 3 - Specify application details in the UI
 
@@ -150,17 +146,14 @@ By default, app hang reporting is **disabled**, but you can enable it and set yo
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Kotlin Multiplatform Data Collected][602].
 
-To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][603] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code.
-
-For more information about setting up a client token, see the [Client Token documentation][604].
+To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][604].
 
 
-
-### Step 4 - Initialize Datadog SDK
+### Step 4 - Initialize the Datadog SDK
 
 In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][701].
 
-See [`trackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][702] to initialize the library.
+During initialization, you can also set the tracking consent for GDPR compliance, as described below.
 
 {{< site-region region="us" >}}
 ```kotlin
@@ -276,6 +269,29 @@ fun initializeDatadog(context: Any? = null) {
 ```
 {{< /site-region >}}
 
+{{< site-region region="gov2" >}}
+```kotlin
+// in common source set
+fun initializeDatadog(context: Any? = null) {
+    // context should be application context on Android and can be null on iOS
+    val appClientToken = <CLIENT_TOKEN>
+    val appEnvironment = <ENV_NAME>
+    val appVariantName = <APP_VARIANT_NAME>
+
+    val configuration = Configuration.Builder(
+            clientToken = appClientToken,
+            env = appEnvironment,
+            variant = appVariantName
+    )
+        .useSite(DatadogSite.US1_FED)
+        .trackCrashes(true)
+        .build()
+
+    Datadog.initialize(context, configuration, trackingConsent)
+}
+```
+{{< /site-region >}}
+
 {{< site-region region="ap1" >}}
 ```kotlin
 // in common source set
@@ -333,7 +349,7 @@ Use the following guides to see how you can upload mapping files (Android) or dS
 
 ### File sizing
 
-Mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
+Mapping files are limited in size to **500 MB** each, while dSYM files are limited to **2 GB**.
 
 ### Collection
 
