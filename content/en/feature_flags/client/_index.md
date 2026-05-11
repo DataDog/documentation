@@ -19,6 +19,8 @@ further_reading:
 
 Set up Datadog Feature Flags for your applications. Follow the platform-specific guides below to integrate feature flags into your application and start collecting feature flag data:
 
+Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open-source, vendor-neutral specification for feature flag APIs. See OpenFeature's getting-started guide if you're new to OpenFeature concepts like providers, evaluation context, and hooks.
+
 {{< card-grid card_width="200px">}}
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_tv_large.svg" alt="Android TV" >}}
@@ -30,6 +32,18 @@ Set up Datadog Feature Flags for your applications. Follow the platform-specific
   {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/tv_os_large.svg" alt="tvOS" >}}
   {{< image-card href="/feature_flags/client/unity/" src="integrations_logos/rum-unity_large.svg" alt="Unity" >}}
 {{< /card-grid >}}
+
+## Telemetry options by platform
+
+The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. When a telemetry option is exposed, its default value is `true`.
+
+| Concept | Web (`@datadog/openfeature-browser`) | Android (`dd-sdk-android-flags`) | iOS (`DatadogFlags`) | React Native | Unity |
+|---|---|---|---|---|---|
+| Send exposure events | `enableExposureLogging` | `trackExposures` | `trackExposures` | `trackExposures` | `trackExposures` |
+| Send aggregated evaluation telemetry | `enableFlagEvaluationTracking` | `trackEvaluations` | `trackEvaluations` | Not exposed | `trackEvaluations` |
+| Attach evaluations to RUM | `enableRumFeatureFlagTracking` | `rumIntegrationEnabled` | `rumIntegrationEnabled` | `rumIntegrationEnabled` | Not exposed |
+
+<div class="alert alert-info">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift">dd-openfeature-provider-swift</a>) is currently in development. For production iOS workloads, use the <code>FlagsClient</code> API directly.</div>
 
 ## Testing with in-memory providers
 

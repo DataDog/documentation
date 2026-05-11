@@ -30,7 +30,7 @@ Here's a minimal example to get feature flags working in your Android app:
 ```kotlin
 // 1. Add dependencies (see Installation section)
 
-// 2. Initialize Datadog SDK (in Application.onCreate)
+// 2. Initialize the Datadog Android SDK (in Application.onCreate)
 val configuration = Configuration.Builder(
     clientToken = "<CLIENT_TOKEN>",
     env = "<ENV_NAME>",
@@ -94,7 +94,7 @@ Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
 ## Enable flags
 
-After initializing Datadog, enable `Flags` to attach it to the current Datadog SDK instance and prepare for provider creation and flag evaluation:
+After initializing Datadog, enable `Flags` to attach it to the current Datadog Android SDK instance and prepare for provider creation and flag evaluation:
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags

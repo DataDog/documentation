@@ -94,7 +94,7 @@ Datadog.initialize(
 
 ## Enable flags
 
-After initializing Datadog, enable `Flags` to attach it to the current Datadog SDK instance and prepare for client creation and flags evaluation:
+After initializing Datadog, enable `Flags` to attach it to the current Datadog iOS SDK instance and prepare for client creation and flags evaluation:
 
 {{< code-block lang="swift" >}}
 import DatadogFlags

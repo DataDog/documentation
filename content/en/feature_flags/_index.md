@@ -30,7 +30,9 @@ further_reading:
 
 ## Overview
 
-Datadog Feature Flags is Datadog's flag management product. You create flags in Datadog, deliver flag configuration to Datadog SDKs, and evaluate variants in your application through Datadog or OpenFeature APIs.
+Datadog Feature Flags is Datadog's flag management product. You create flags in Datadog, deliver flag configuration to Datadog Feature Flags SDKs, and evaluate variants in your application through Datadog or OpenFeature APIs.
+
+Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open-source, vendor-neutral specification for feature flag APIs. See OpenFeature's getting-started guide if you're new to OpenFeature concepts like providers, evaluation context, and hooks.
 
 Feature flags enable you to toggle features on and off, conduct A/B/n testing, gradually roll out new functionality, and personalize user experiences without the need for extensive code deployments. With feature flags, you can empower your team to make dynamic changes, iterate rapidly, and deliver enhanced user experiences.
 

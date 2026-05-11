@@ -25,7 +25,7 @@ Declare the Datadog Unity SDK as a dependency in your project. The Datadog Unity
 
 1. Install the [External Dependency Manager for Unity (EDM4U)][1]. This can be done using [Open UPM][2].
 
-2. Add the [Datadog SDK Unity package][3] using its Git URL `https://github.com/DataDog/unity-package.git`.
+2. Add the [Datadog Unity SDK package][3] using its Git URL `https://github.com/DataDog/unity-package.git`.
 
 3. (Android only) Configure your project to use [Gradle templates][4], and enable both {{< ui >}}Custom Main Template{{< /ui >}} and {{< ui >}}Custom Gradle Properties Template{{< /ui >}}.
 
@@ -47,7 +47,7 @@ For more information about setting up the Unity SDK, see [Unity Monitoring Setup
 
 ## Enable flags
 
-After initializing Datadog, enable `Flags` to attach it to the current Datadog SDK instance and prepare for client creation and flag evaluation:
+After initializing Datadog, enable `Flags` to attach it to the current Datadog Unity SDK instance and prepare for client creation and flag evaluation:
 
 {{< code-block lang="csharp" >}}
 using Datadog.Unity.Flags;
@@ -182,6 +182,7 @@ When you need more than just the flag value, use the `Get<Type>Details` methods.
 * `GetStringDetails(key, defaultValue)` -> `FlagDetails<string>`
 * `GetIntegerDetails(key, defaultValue)` -> `FlagDetails<int>`
 * `GetDoubleDetails(key, defaultValue)` -> `FlagDetails<double>`
+* `GetDetails<T>(key, defaultValue)` -> `FlagDetails<T>` for object or custom detail results
 
 For example:
 

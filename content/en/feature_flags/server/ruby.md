@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Ruby application with the Datadog Feature Flags SDK. The Ruby SDK integrates with [OpenFeature][3], an open standard for feature flag management, and uses the Datadog SDK's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your Ruby application with the Datadog Feature Flags SDK. The Ruby SDK integrates with [OpenFeature][3], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog Ruby tracer (`datadog` gem).
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 - **Datadog Ruby SDK** `datadog` version 2.24.0 or later
 - **OpenFeature Ruby SDK** `openfeature-sdk` version 0.5.1 or later if you need flag evaluation metrics support
 - **Service and environment configured** - Feature flags are targeted by service and environment
-- **Supported operating system** - Feature flags are only [supported on Linux operating systems][2]. Windows and macOS are not natively supported, but Dockerized Linux environments running on those operating systems are.
+- **Supported operating system** - Production support is currently limited to [Linux operating systems][2]. macOS can be used for local development when a compatible prebuilt native artifact is available. Windows and macOS are not natively supported production targets, but Dockerized Linux environments running on those operating systems are.
 
 
 ## Installing and initializing
@@ -279,7 +279,7 @@ If feature flags unexpectedly always return default values, check the following:
 
 ### Remote Configuration connection issues
 
-Check the Datadog SDK logs for Remote Configuration status:
+Check the Datadog Ruby tracer logs for Remote Configuration status:
 
 ```ruby
 # Enable startup and debug logging

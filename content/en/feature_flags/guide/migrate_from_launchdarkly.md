@@ -17,7 +17,7 @@ further_reading:
 
 This guide walks you through the process of migrating feature flags from LaunchDarkly to [Datadog Feature Flags][1]. Follow these general steps:
 
-1. [Install the Datadog SDK.](#install-sdk)
+1. [Install the Datadog Feature Flags provider.](#install-sdk)
 2. [Create a feature flag in Datadog and verify its functionality.](#set-up-flag)
 3. [Identify critical feature flags in LaunchDarkly.](#identify-critical-flags)
 4. [For all non-critical flags, remove existing code.](#remove-non-critical-flags)
@@ -27,7 +27,7 @@ This guide walks you through the process of migrating feature flags from LaunchD
 
 ## Migration process
 
-### 1. Install the Datadog SDK {#install-sdk}
+### 1. Install the Datadog Feature Flags provider {#install-sdk}
 
 Datadog Feature Flags are built on the [OpenFeature][2] standard, which provides vendor-agnostic feature flag APIs. You need to install both the OpenFeature SDK and the Datadog provider for your platform.
 
@@ -323,7 +323,7 @@ end
 
 Implement a wrapper function that provides a fallback mechanism to use the LaunchDarkly flag values if the application experiences issues fetching the Datadog flag.
 
-<div class="alert alert-info">LaunchDarkly and Datadog SDKs use strongly typed methods for flag evaluation (for example, <code>getBooleanValue</code>, <code>getStringValue</code>, <code>getIntegerValue</code>). The examples below demonstrate Boolean flag evaluation. You will need to create similar wrapper functions for each flag type used in your application.</div>
+<div class="alert alert-info">LaunchDarkly and Datadog Feature Flags SDKs use strongly typed methods for flag evaluation (for example, <code>getBooleanValue</code>, <code>getStringValue</code>, <code>getIntegerValue</code>). The examples below demonstrate Boolean flag evaluation. You will need to create similar wrapper functions for each flag type used in your application.</div>
 
 {{< tabs >}}
 {{% tab "Client-side SDKs" %}}
