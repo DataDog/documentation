@@ -26,7 +26,7 @@ If you have not set up the Kotlin Multiplatform SDK yet, follow the [in-app setu
 
 ### Step 1 - Declare the Kotlin Multiplatform SDK as a dependency
 
-Declare [`dd-sdk-kotlin-multiplatform-rum`][301] as a common source set dependency in your Kotlin Multiplatform module's `build.gradle.kts` file.
+Declare [`dd-sdk-kotlin-multiplatform-rum`][4] as a common source set dependency in your Kotlin Multiplatform module's `build.gradle.kts` file.
 
 ```kotlin
 kotlin {
@@ -71,13 +71,13 @@ kotlin {
 NdkCrashReports.enable()
 ```
 
-An "Application Not Responding" ([ANR][4]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
+An "Application Not Responding" ([ANR][12]) is an Android-specific type of error that gets triggered when the application is unresponsive for too long.
 
-For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` (available from Android source set only) to `true` or `false` when initializing the SDK. For more information, see [Android Crash Reporting and Error Tracking - Add ANR Reporting][5].
+For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` (available from Android source set only) to `true` or `false` when initializing the SDK. For more information, see [Android Crash Reporting and Error Tracking - Add ANR Reporting][13].
 
 
-[4]: https://developer.android.com/topic/performance/vitals/anr
-[5]: /real_user_monitoring/error_tracking/mobile/android/#add-anr-reporting
+[12]: https://developer.android.com/topic/performance/vitals/anr
+[13]: /error_tracking/frontend/mobile/android/?tab=kotlin#step-5---add-anr-reporting
 
 {{% /tab %}}
 
@@ -92,7 +92,7 @@ Add the following Datadog iOS SDK dependencies, which are needed for the linking
 * `DatadogObjc`
 * `DatadogCrashReporting`
 
-**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][501].
+**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][14].
 
 
 #### Adding native iOS dependencies using the CocoaPods plugin
@@ -125,7 +125,7 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 1. Click on your project in Xcode and go to the **Package Dependencies** tab.
 2. Add the iOS SDK package dependency by adding `https://github.com/DataDog/dd-sdk-ios.git` as a package URL.
-3. Select the version that matches the Kotlin Multiplatform SDK version you're using (see the [version compatibility guide][501]).
+3. Select the version that matches the Kotlin Multiplatform SDK version you're using (see the [version compatibility guide][14]).
 4. Click on the necessary application target and open the **General** tab.
 5. Scroll down to the **Frameworks, Libraries, and Embedded Content** section and add the dependencies (`DatadogObjc` and `DatadogCrashReporting`).
 
@@ -133,25 +133,25 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long.
 
-By default, app hang reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last for more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method. For more information, see [iOS Crash Reporting and Error Tracking - Add ANR Reporting][6].
+By default, app hang reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last for more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method. For more information, see [iOS Crash Reporting and Error Tracking - Add App Hang Reporting][15].
 
-[501]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
-[6]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[14]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
+[15]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Step 3 - Specify application details in the UI
 
-1. Navigate to [**Digital Experience** > **Add an Application**][601].
-2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Kotlin Multiplatform Data Collected][602].
+1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile**][5] and select **Set Up Manually**.
+2. Select **Kotlin Multiplatform** as the application type, and enter an **Application Name** to generate a unique Datadog application ID and client token.
+3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Kotlin Multiplatform Data Collected][6].
 
-To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][604].
+To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][7].
 
 
 ### Step 4 - Initialize the Datadog SDK
 
-In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][701].
+In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][8].
 
 During initialization, you can also set the tracking consent for GDPR compliance, as described in [Advanced Error Tracking Features](#advanced-error-tracking-features).
 
@@ -342,7 +342,7 @@ fun initializeDatadog(context: Any? = null) {
 
 Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
-Use the following guides to see how you can upload mapping files (Android) or dSYMs (iOS) to Datadog: [Android][7], [iOS][8].
+Use the following guides to see how you can upload mapping files (Android) or dSYMs (iOS) to Datadog: [Android][9], [iOS][10].
 
 
 ## Limitations
@@ -356,7 +356,7 @@ Mapping files are limited in size to **500 MB** each, while dSYM files are limit
 The SDK handles crash reporting with the following behaviors:
 
 - The crash can only be detected after the SDK is initialized. Because of this, Datadog recommends that you initialize the SDK as soon as possible in your application.
-- Because the Kotlin Multiplatform SDK uses the RUM module to collect crashes, each crash must be attached to a session view. If a crash occurs before a view is visible, or after the app is sent to the background by the end user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][9] in your `RumConfiguration` builder.
+- Because the Kotlin Multiplatform SDK uses the RUM module to collect crashes, each crash must be attached to a session view. If a crash occurs before a view is visible, or after the app is sent to the background by the end user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][11] in your `RumConfiguration` builder.
 - Only crashes that occur in sampled sessions are kept.
 
 ## Test your implementation
@@ -411,16 +411,11 @@ To update the tracking consent value after the SDK is initialized, call `Datadog
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup
-[301]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
-[501]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
-[6]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
-[601]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[602]: /real_user_monitoring/kotlin_multiplatform/data_collected/
-[603]: /account_management/api-app-keys/#api-keys
-[604]: /account_management/api-app-keys/#client-tokens
-[701]: /getting_started/tagging/using_tags/
-[702]: /real_user_monitoring/application_monitoring/advanced_configuration/kotlin_multiplatform/#initialization-parameters
-[7]: /real_user_monitoring/error_tracking/mobile/android/#get-deobfuscated-stack-traces
-[8]: /real_user_monitoring/error_tracking/mobile/ios/#get-deobfuscated-stack-traces
-[9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#track-background-events
-
+[4]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
+[5]: https://app.datadoghq.com/error-tracking/settings/setup/client
+[6]: /real_user_monitoring/kotlin_multiplatform/data_collected/
+[7]: /account_management/api-app-keys/#client-tokens
+[8]: /getting_started/tagging/using_tags/
+[9]: /real_user_monitoring/error_tracking/mobile/android/#get-deobfuscated-stack-traces
+[10]: /real_user_monitoring/error_tracking/mobile/ios/#get-deobfuscated-stack-traces
+[11]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration#track-background-events
