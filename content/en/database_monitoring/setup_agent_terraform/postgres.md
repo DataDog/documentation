@@ -1,6 +1,6 @@
 ---
-title: Set up Database Monitoring with Terraform
-description: Provision the Datadog Agent for Database Monitoring with Terraform across managed and self-hosted databases.
+title: "Terraform: Postgres"
+description: Provision the Datadog Agent for Postgres Database Monitoring with Terraform on AWS.
 further_reading:
 - link: "/database_monitoring/setup_postgres/rds/"
   tag: "Documentation"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-This page walks through provisioning the Datadog Agent for Database Monitoring (DBM) with Terraform. Select the tab for where the **Agent runs**.
+This page walks through provisioning the Datadog Agent for Postgres Database Monitoring with Terraform on AWS. Select the tab for where the **Agent runs**.
 
 The Terraform examples used on this page live in [`DataDog/dd-database-monitoring-example`][1]. Each combination has its own directory with `main.tf`, `variables.tf`, `outputs.tf`, `versions.tf`, and a `terraform.tfvars.example` you can copy and edit. Path scheme:
 
