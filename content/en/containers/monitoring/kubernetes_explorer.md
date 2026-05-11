@@ -101,7 +101,11 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
 
 #### Configure the cluster collector
 
-Create a `deployment-collector.yaml` file with the following configuration. Replace `<YOUR_DATADOG_SITE>` with your [Datadog site][14] and `<YOUR_CLUSTER_NAME>` with your cluster name:
+This setup deploys the OTel Collector as a Kubernetes Deployment. Create a `deployment-collector.yaml` file and add each of the following configuration sections.
+
+##### Collector image and mode
+
+Set the Collector to run as a single-replica Deployment using the Contrib distribution:
 
 ```yaml
 mode: deployment
@@ -111,12 +115,17 @@ image:
   repository: otel/opentelemetry-collector-contrib
   tag: 0.142.0
   pullPolicy: IfNotPresent
+```
 
+##### RBAC permissions
+
+The `k8sobjects` receiver needs read access to the Kubernetes API. Grant `get`, `list`, and `watch` permissions for each resource type you want to appear in the Explorer:
+
+```yaml
 clusterRole:
   create: true
   rules:
-    - apiGroups:
-        - ""
+    - apiGroups: [""]
       resources:
         - namespaces
         - nodes
@@ -128,50 +137,37 @@ clusterRole:
         - replicationcontrollers/status
         - resourcequotas
         - services
-      verbs:
-        - get
-        - list
-        - watch
-    - apiGroups:
-        - apps
+      verbs: ["get", "list", "watch"]
+    - apiGroups: ["apps"]
       resources:
         - daemonsets
         - deployments
         - replicasets
         - statefulsets
-      verbs:
-        - get
-        - list
-        - watch
-    - apiGroups:
-        - extensions
+      verbs: ["get", "list", "watch"]
+    - apiGroups: ["extensions"]
       resources:
         - daemonsets
         - deployments
         - replicasets
         - statefulsets
-      verbs:
-        - get
-        - list
-        - watch
-    - apiGroups:
-        - batch
+      verbs: ["get", "list", "watch"]
+    - apiGroups: ["batch"]
       resources:
         - jobs
         - cronjobs
-      verbs:
-        - get
-        - list
-        - watch
-    - apiGroups:
-        - autoscaling
+      verbs: ["get", "list", "watch"]
+    - apiGroups: ["autoscaling"]
       resources:
         - horizontalpodautoscalers
-      verbs:
-        - get
-        - list
-        - watch
+      verbs: ["get", "list", "watch"]
+```
 
+##### Datadog exporter
+
+Enable the `orchestrator_explorer` option in the Datadog Exporter. This is the setting that sends Kubernetes object data to the Explorer. Replace `<YOUR_DATADOG_SITE>` with your [Datadog site][14]:
+
+```yaml
 config:
   exporters:
     datadog:
@@ -180,7 +176,15 @@ config:
         key: ${env:DD_API_KEY}
       orchestrator_explorer:
         enabled: true
+```
 
+##### Resource collection
+
+The [`k8sobjects`][10] receiver collects Kubernetes resource data using two modes for each resource type:
+- **`pull`**: Periodically fetches a full snapshot of the resource (every 3 minutes).
+- **`watch`**: Streams real-time updates as changes occur.
+
+```yaml
   receivers:
     k8sobjects:
       auth_type: serviceAccount
@@ -239,7 +243,13 @@ config:
         - name: deployments
           mode: watch
           group: apps
+```
 
+##### Processor and pipeline
+
+Add a resource processor to tag all data with your cluster name, and wire the components together in a `logs/orchestrator` pipeline. Replace `<YOUR_CLUSTER_NAME>` with your cluster name:
+
+```yaml
   processors:
     resource/add-cluster-name:
       attributes:
