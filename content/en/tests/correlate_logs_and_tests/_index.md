@@ -70,6 +70,21 @@ Use the following environment variables to enable and configure log submission:
 | `DD_ENABLE_STDOUT_INSTRUMENTATION` | Enables/disables stdout log submission | `false`       |
 | `DD_ENABLE_STDERR_INSTRUMENTATION` | Enables/disables stderr log submission | `false`       |
 
+### Python
+
+Agentless log submission is supported for `ddtrace >= 4.8.0` with the `pytest` framework.
+
+#### Standard Python logging
+
+The ddtrace pytest plugin automatically captures log records from Python's built-in `logging` module and forwards them to the logs intake, correlated with the active test span's trace and span IDs.
+
+Use the following environment variables to enable and configure log submission:
+
+| Name                                                | Description                                                                                | Default value |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------- |
+| `DD_AGENTLESS_LOG_SUBMISSION_ENABLED` (required)    | Enables/disables agentless log submission. Also requires `DD_CIVISIBILITY_AGENTLESS_ENABLED=true`. | `false`  |
+
+
 ### Ruby
 
 Agentless logs submission with Test Optimization is supported for Rails applications. Before enabling, ensure
@@ -94,6 +109,16 @@ Use the following environment variable to enable log submission:
 
 1. [Set up log collection][1] through the Datadog Agent.
 2. Follow the steps described in [Correlate Logs and Traces][2].
+
+### Python
+
+When using the Datadog Agent, enable log correlation with the following environment variable:
+
+| Name                    | Description                                                                 | Default value |
+| ----------------------- | --------------------------------------------------------------------------- | ------------- |
+| `DD_LOGS_INJECTION`     | Injects trace and span IDs into log records so they correlate with test spans. | `false`    |
+
+For C-level stderr capture, also set `_DD_CIVISIBILITY_STDERR_CAPTURE_ENABLED=true`. See the **Cloud CI provider** tab for details.
 
 [1]: /logs/log_collection/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/
