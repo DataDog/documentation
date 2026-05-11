@@ -1,4 +1,4 @@
- ---
+---
 title: Setup
 description: Set up Sensitive Data Scanner to detect sensitive content in your telemetry data, LLM Observability data, cloud storage, and code repositories.
 disable_toc: false
@@ -28,7 +28,7 @@ To scan logs before they leave your network, use Observability Pipelines. The Se
 
 ## LLM Observability data
 
-Sensitive Data Scanner can scan LLM Observability traces, prompts, and completions for sensitive content such as PII, credentials, and API keys.
+Sensitive Data Scanner can scan LLM Observability traces, prompts, and completions for sensitive content such as PII, credentials, and API keys. LLM Observability uses a managed configuration with one default scanning group automatically created for your organization.
 
 To configure scanning, navigate to the [LLM Observability Settings page][3].
 
@@ -38,13 +38,13 @@ To configure scanning, navigate to the [LLM Observability Settings page][3].
   Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
-Sensitive Data Scanner can scan your Amazon S3 buckets for sensitive content such as PII, credentials, and API keys.
+Sensitive Data Scanner can scan your Amazon S3 buckets for sensitive content such as PII, credentials, and API keys. Scanning runs through Agentless scanners deployed in your AWS environment, so data stays in your account. Sensitive Data Scanner does not redact data in cloud storage.
 
 To configure scanning, see [Set up for Cloud Storage][2].
 
 ## Code repositories
 
-Sensitive Data Scanner can scan your code repositories for exposed secrets such as API keys, tokens, and credentials.
+Sensitive Data Scanner powers Secret Scanning, which scans your code repositories for exposed secrets such as API keys, tokens, and credentials. Secret Scanning is part of Code Security.
 
 To configure scanning, see [Secret Scanning][4].
 
