@@ -356,7 +356,7 @@ Mapping files are limited in size to **500 MB** each, while dSYM files are limit
 The SDK handles crash reporting with the following behaviors:
 
 - The crash can only be detected after the SDK is initialized. Because of this, Datadog recommends that you initialize the SDK as soon as possible in your application.
-- Crashes must be attached to a session view. If a crash occurs before a view is visible, or after the app is sent to the background by the end user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][9] in your `RumConfiguration` builder.
+- Because the Kotlin Multiplatform SDK uses the RUM module to collect crashes, each crash must be attached to a session view. If a crash occurs before a view is visible, or after the app is sent to the background by the end user navigating away from it, the crash is muted and isn't reported for collection. To mitigate this, use the `trackBackgroundEvents()` [method][9] in your `RumConfiguration` builder.
 - Only crashes that occur in sampled sessions are kept.
 
 ## Test your implementation
@@ -412,8 +412,6 @@ To update the tracking consent value after the SDK is initialized, call `Datadog
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup
 [301]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
-[4]: https://developer.android.com/topic/performance/vitals/anr
-[5]: /real_user_monitoring/error_tracking/mobile/android/#add-anr-reporting
 [501]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
 [6]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [601]: https://app.datadoghq.com/error-tracking/settings/setup/client
