@@ -90,7 +90,7 @@ You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline i
 
 The `k8sobjects` receiver has known scalability issues (see [open-telemetry/opentelemetry-collector-contrib#43602][13]). In large clusters, the OTel Collector may overwhelm the Kubernetes API server due to the volume and frequency of requests. Enable this feature in smaller clusters first, and monitor API server load before scaling up.
 
-#### Create a Datadog API key secret
+#### 1. Create a Datadog API key secret
 
 Create a Kubernetes secret to store your Datadog API key:
 
@@ -99,7 +99,7 @@ export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
 kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
 ```
 
-#### Configure the cluster collector
+#### 2. Configure the cluster collector
 
 This setup deploys the OTel Collector as a Kubernetes Deployment. Create a `deployment-collector.yaml` file and add each of the following configuration sections.
 
@@ -282,7 +282,7 @@ Add a `resourcedetection/kubeadm` processor to detect the cluster UID, and a `re
 
 The `resourcedetection/kubeadm` processor detects the cluster UID (`k8s.cluster.uid`), which the Datadog Exporter requires for orchestrator data. Cluster name detection is disabled so the manually set name from `resource/add-cluster-name` takes precedence.
 
-#### Deploy with Helm
+#### 3. Deploy with Helm
 
 Install the OpenTelemetry Collector using your configuration file:
 
@@ -294,17 +294,13 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
   --values ./deployment-collector.yaml
 ```
 
-#### Configure the Datadog exporter
-
-Follow the [Datadog Exporter installation guide][11] to complete the exporter configuration for the rest of your pipeline (traces, metrics, and logs).
-
-#### Verify the installation
+#### 4. Verify the installation
 
 Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name. Your pod and namespace data should appear in the Explorer.
 
 [1]: https://app.datadoghq.com/orchestration/overview
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
-[11]: /opentelemetry/setup/collector_exporter/install/#2---configure-the-datadog-exporter-and-connector
+[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.142.0
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/issues/43602
 [14]: /getting_started/site/
