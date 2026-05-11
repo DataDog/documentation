@@ -166,7 +166,6 @@ phrase:
 #   - "**/*.es.json"
 #   - "**/es.json"
 
-
 # Legacy Transifex sources (kept for reference)
 # - src: "content/en/**/*.md"
 #   dst: "content/{lang}/**/*.md"
