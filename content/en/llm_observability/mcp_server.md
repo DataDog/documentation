@@ -29,6 +29,7 @@ The LLM Observability MCP tools enable AI-assisted workflows for:
 - **Investigating agent loops**: Review an agent's step-by-step execution loop to understand decision-making and tool invocation patterns.
 - **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
+- **Managing evaluators**: List, inspect, create, update, and delete evaluator configurations across an ML application or the entire organization.
 
 ## Available tools
 
@@ -73,6 +74,23 @@ The `llmobs` toolset includes the following tools:
 
 `get_llmobs_experiment_dimension_values`
 : Get unique values for a dimension with counts, useful for discovering valid filter and segment values.
+
+### Evaluator tools
+
+`list_llmobs_evals`
+: List every LLM-judge evaluator configured across all ML applications. Returns each evaluator's name, ml_app, and enabled status.
+
+`list_llmobs_evals_by_ml_app`
+: List all LLM-judge evaluators configured for a specific ML application.
+
+`get_llmobs_evaluator`
+: Retrieve an LLM-judge evaluator configuration by name, including its target (ml_app, sampling, filter), LLM provider, and judge prompt template.
+
+`create_or_update_llmobs_evaluator`
+: Create or update an LLM-judge evaluator configuration. Targets a specific ML application and optionally a filter or sampling percentage; the judge's model and prompt template define how it scores each span.
+
+`delete_llmobs_evaluator`
+: Delete an LLM-judge evaluator configuration by name.
 
 ## Recommended workflows
 
@@ -130,11 +148,12 @@ To use the LLM Observability tools, connect to the Datadog MCP Server with the `
 
 <div class="alert alert-info">For full setup instructions, including Cursor and VS Code extension configuration, see <a href="/bits_ai/mcp_server/setup/">Set Up the Datadog MCP Server</a>.</div>
 
-Add the `toolsets=llmobs,core` query parameter to the MCP Server endpoint for your [Datadog site][5]:
+Add the `toolsets=llmobs,core` query parameter to the MCP Server endpoint for your [Datadog site][5]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
-```text
-https://mcp.<DD_SITE>/api/unstable/mcp-server/mcp?toolsets=llmobs,core
-```
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+Your selected endpoint ({{< region-param key="dd_site_name" >}}):
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core</code></pre>
+{{< /site-region >}}
 
 For example:
 - **US1**: `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core`
@@ -143,37 +162,40 @@ For example:
 {{< tabs >}}
 {{% tab "Remote authentication" %}}
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 This method uses the MCP specification's [Streamable HTTP][1] transport.
 
 **Claude Code** (command line):
 
-```bash
-claude mcp add --transport http datadog-mcp "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core"
-```
+<pre><code>claude mcp add --transport http datadog-mcp "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core"</code></pre>
 
 **Codex CLI** (`~/.codex/config.toml`):
 
-```toml
-[mcp_servers.datadog]
-url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core"
-```
+<pre><code>[mcp_servers.datadog]
+url = "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core"
+</code></pre>
 
 After adding the configuration, run `codex mcp login datadog` to complete the OAuth flow.
 
 **Gemini CLI, Kiro CLI, or other MCP-compatible clients**:
 
-```json
-{
+<pre><code>{
   "mcpServers": {
     "datadog": {
       "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core"
+      "url": "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core"
     }
   }
 }
-```
+</code></pre>
 
 [1]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{% /tab %}}
 
 {{% tab "Local binary authentication" %}}
@@ -219,20 +241,25 @@ This method uses the MCP specification's [stdio][2] transport. Use this if direc
 
 The MCP Server uses OAuth 2.0 for authentication. If you cannot go through the OAuth flow, provide a Datadog [API key and application key][6] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
 
-{{< code-block lang="json" >}}
-{
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+<pre><code>{
   "mcpServers": {
     "datadog": {
       "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=llmobs,core",
+      "url": "{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core",
       "headers": {
-          "DD_API_KEY": "<YOUR_API_KEY>",
-          "DD_APPLICATION_KEY": "<YOUR_APPLICATION_KEY>"
+          "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
+          "DD_APPLICATION_KEY": "&lt;YOUR_APPLICATION_KEY&gt;"
       }
     }
   }
 }
-{{< /code-block >}}
+</code></pre>
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 For security, use a scoped API key and application key from a [service account][7] that has only the required permissions.
 

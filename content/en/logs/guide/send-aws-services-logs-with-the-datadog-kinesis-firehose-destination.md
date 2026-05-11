@@ -16,6 +16,10 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Guide"
   text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://learn.datadoghq.com/courses/send-aws-logs"
+  tag: "Learning Center"
+  text: "Send AWS Logs"
+
 ---
 
 ## Overview
@@ -154,6 +158,46 @@ To populate all logs by ARN:
 2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Data Firehose ARN, and press **Enter** to see all of your subscribed logs.
 
 **Note**: A single Kinesis payload must not be more than 65,000 log messages. Log messages after that limit are dropped.
+
+## Set the source, service, and tags
+
+When logs arrive through Amazon Data Firehose, Datadog automatically determines the `source`, `service`, and tags for each log based on AWS metadata:
+
+1. **Source**: Detected from the CloudWatch log group name. For example, `/aws/lambda/my-function` sets `source:lambda`, and `/aws/rds/...` sets `source:rds`. If the log group does not match a known AWS service pattern, the log group name itself is used as the source.
+2. **Service**: Defaults to the same value as the detected source. For Lambda logs, the service is set to the function name.
+3. **Tags**: AWS metadata such as `region`, `aws_account`, and `sourcecategory:aws` are added automatically.
+
+### Overriding source, service, and tags
+
+There are two ways to override these auto-detected values:
+
+#### Firehose common attributes
+
+You can set `source`, `service`, and arbitrary tags through the **Parameters** section (Common Attributes) of your Amazon Data Firehose delivery stream configuration. These values apply to all logs flowing through that delivery stream and take priority over the auto-detected values.
+
+For example, setting `source: nodejs` and `env: production` in the Common Attributes adds those as the log source and as a tag, respectively.
+
+#### Reserved attributes in the log body
+
+<div class="alert alert-info">Parsing reserved attributes (<code>ddsource</code>, <code>service</code>, <code>ddtags</code>) from the log body is not enabled by default. To enable it for your organization, <a href="/help/">contact Datadog Support</a>.</div>
+
+If your application writes structured JSON logs that include `ddsource`, `service`, or `ddtags` at the top level of the JSON body, Datadog can use those values instead of the auto-detected ones. For example:
+
+```json
+{
+  "message": "request completed",
+  "ddsource": "nodejs",
+  "service": "my-app",
+  "ddtags": "env:production,version:1.2.3"
+}
+```
+
+When enabled, these fields take the highest priority, overriding both the auto-detected values and the Common Attributes:
+- `ddsource` overrides the log source.
+- `service` overrides the log service.
+- `ddtags` values are merged into the log's tags (for example, `env` and `version` become searchable tags).
+
+These fields are consumed during intake and do not appear as log attributes.
 
 ## Further Reading
 

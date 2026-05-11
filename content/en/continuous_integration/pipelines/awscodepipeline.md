@@ -63,23 +63,23 @@ For more information about monitoring pipeline events, see the [official AWS gui
 
 ## Create the API destination
 
-1. In the AWS Console, navigate to **EventBridge > API destinations** and click **Create API destination**.
+1. In the AWS Console, navigate to {{< ui >}}EventBridge{{< /ui >}} > {{< ui >}}API destinations{{< /ui >}} and click {{< ui >}}Create API destination{{< /ui >}}.
 2. Choose a name for the API Destination (for example, `datadog-ci-visibility-api`) and optionally add a description.
-3. Under **API destination endpoint**, input <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook</code>.
-4. Under **HTTP method**, select **POST**.
-5. Under Connection type, select **Create a new connection**:
+3. Under {{< ui >}}API destination endpoint{{< /ui >}}, input <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook</code>.
+4. Under {{< ui >}}HTTP method{{< /ui >}}, select {{< ui >}}POST{{< /ui >}}.
+5. Under Connection type, select {{< ui >}}Create a new connection{{< /ui >}}:
    1. Choose a name for the connection (for example, `datadog-ci-visibility-connection`) and optionally add a description.
-   2. Under **Destination type**, select **Other**.
-   3. Under **Authorization type**, select **API key**. Input `DD-API-KEY` as the **API key name** and add your [Datadog API key][5] in the **Value** field.
-6. Click **Create**.
+   2. Under {{< ui >}}Destination type{{< /ui >}}, select {{< ui >}}Other{{< /ui >}}.
+   3. Under {{< ui >}}Authorization type{{< /ui >}}, select {{< ui >}}API key{{< /ui >}}. Input `DD-API-KEY` as the {{< ui >}}API key name{{< /ui >}} and add your [Datadog API key][5] in the {{< ui >}}Value{{< /ui >}} field.
+6. Click {{< ui >}}Create{{< /ui >}}.
 
 ## Create the EventBridge rule
 
-1. In the AWS Console, navigate to **EventBridge > Rules** and click **Create Rule**.
+1. In the AWS Console, navigate to {{< ui >}}EventBridge{{< /ui >}} > {{< ui >}}Rules{{< /ui >}} and click {{< ui >}}Create Rule{{< /ui >}}.
 2. Choose a name for the rule (for example, `datadog-ci-visibility-integration`) and optionally add a description.
-3. Leave the event bus as **default**, and under **Rule Type**, select **Rule with an event pattern**. Click **Next**.
-4. Under **Event Source**, select **AWS events or EventBridge partner events**.
-5. Under **Creation Method**, select **Custom pattern (JSON editor)**. Then, under **Event Pattern**, input the following:
+3. Leave the event bus as {{< ui >}}default{{< /ui >}}, and under {{< ui >}}Rule Type{{< /ui >}}, select {{< ui >}}Rule with an event pattern{{< /ui >}}. Click {{< ui >}}Next{{< /ui >}}.
+4. Under {{< ui >}}Event Source{{< /ui >}}, select {{< ui >}}AWS events or EventBridge partner events{{< /ui >}}.
+5. Under {{< ui >}}Creation Method{{< /ui >}}, select {{< ui >}}Custom pattern (JSON editor){{< /ui >}}. Then, under {{< ui >}}Event Pattern{{< /ui >}}, input the following:
 
    ```json
    {
@@ -91,10 +91,10 @@ For more information about monitoring pipeline events, see the [official AWS gui
    The JSON above sets up the integration for all of your pipelines. To restrict the set of pipelines,
    follow the [Only monitor specific pipelines section](#only-monitor-specific-pipelines) below.
 
-6. Click **Next**.
-7. Under **Target Types**, select **EventBridge API destination**. Then, choose **Use an existing API Destination** and select the API destination that you created in the previous step. Alternatively, you can also create the API destination by following the steps outlined in the [Create the API Destination section](#create-the-api-destination).
-8. Under **Headers Parameters**, click **Add header parameter**. Input `DD-CI-PROVIDER-AWSCODEPIPELINE` as the key and `true` as the value.
-9. Choose **Create a new role for this specific resource** (or use an existing one).
+6. Click {{< ui >}}Next{{< /ui >}}.
+7. Under {{< ui >}}Target Types{{< /ui >}}, select {{< ui >}}EventBridge API destination{{< /ui >}}. Then, choose {{< ui >}}Use an existing API Destination{{< /ui >}} and select the API destination that you created in the previous step. Alternatively, you can also create the API destination by following the steps outlined in the [Create the API Destination section](#create-the-api-destination).
+8. Under {{< ui >}}Headers Parameters{{< /ui >}}, click {{< ui >}}Add header parameter{{< /ui >}}. Input `DD-CI-PROVIDER-AWSCODEPIPELINE` as the key and `true` as the value.
+9. Choose {{< ui >}}Create a new role for this specific resource{{< /ui >}} (or use an existing one).
 10. Review that the information is correct and create the rule.
 
 Once you've created the rule, you can monitor your pipelines in Datadog.
@@ -134,11 +134,11 @@ Logs are billed separately from CI Visibility. Log retention, exclusion, and ind
 
 The pipeline execution ID is an identifier Datadog needs to uniquely identify a pipeline execution. Perform the following steps to assign a pipeline execution ID to correlate pipelines with tests and custom commands:
 
-1. In the AWS Console, go to your pipeline configuration and click **Edit**
-2. Go to the stage containing the AWS CodeBuild action, click **Edit Stage**, and then edit the relevant action.
-3. Under **Environment variables**, add an environment variable.
+1. In the AWS Console, go to your pipeline configuration and click {{< ui >}}Edit{{< /ui >}}
+2. Go to the stage containing the AWS CodeBuild action, click {{< ui >}}Edit Stage{{< /ui >}}, and then edit the relevant action.
+3. Under {{< ui >}}Environment variables{{< /ui >}}, add an environment variable.
 Name the variable `DD_PIPELINE_EXECUTION_ID`, and the value `#{codepipeline.PipelineExecutionId}`. Leave the type as _Plaintext_.
-4. Click **Done** to save your changes.
+4. Click {{< ui >}}Done{{< /ui >}} to save your changes.
 
 The steps above allow you to add the pipeline execution ID to your CodeBuild action environment variables. For more information on working with variables, see the [official AWS guide][10].
 
@@ -146,7 +146,7 @@ The steps above allow you to add the pipeline execution ID to your CodeBuild act
 
 View your data on the [**CI Pipeline List**][11] and [**Executions**][12] pages after the pipelines finish.
 
-The **CI Pipeline List** page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][13].
+The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][13].
 
 ## Further reading
 

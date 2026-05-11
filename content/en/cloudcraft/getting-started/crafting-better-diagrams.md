@@ -19,7 +19,7 @@ Before you begin, you must connect your AWS or Azure account to Cloudcraft. For 
 
 ## Enable new live experience
 
-To enable, toggle the **New Live Experience** switch at the top of the **Live** tab in Cloudcraft.
+To enable, toggle the {{< ui >}}New Live Experience{{< /ui >}} switch at the top of the {{< ui >}}Live{{< /ui >}} tab in Cloudcraft.
 
 {{< img src="cloudcraft/getting-started/crafting-better-diagrams/enable-new-experience.png" alt="Screenshot highlighting the switch to enable the new live experience beta feature in the Cloudcraft interface with a red arrow pointing to the switch." responsive="true" style="width:80%;">}}
 
@@ -27,11 +27,11 @@ If you're a new user, you may already have the New Live Experience enabled by de
 
 ## Select account and region
 
-Click the dropdown under the **Account** section and select the account you want to scan. If you only added one AWS or Azure account to Cloudcraft, it's automatically selected for you.
+Click the dropdown under the {{< ui >}}Account{{< /ui >}} section and select the account you want to scan. If you only added one AWS or Azure account to Cloudcraft, it's automatically selected for you.
 
-Under **Region**, select the regions you want to scan. By default, `Global` and your default region are selected, but you can click the **More** button to select or search for additional regions.
+Under {{< ui >}}Region{{< /ui >}}, select the regions you want to scan. By default, `Global` and your default region are selected, but you can click the {{< ui >}}More{{< /ui >}} button to select or search for additional regions.
 
-After you make your selections, regions are scanned automatically and the number of resources found is displayed next to the region name. You can click the **Sync** button above the **Region** section to trigger a manual scan of all selected regions.
+After you make your selections, regions are scanned automatically and the number of resources found is displayed next to the region name. You can click the {{< ui >}}Sync{{< /ui >}} button above the {{< ui >}}Region{{< /ui >}} section to trigger a manual scan of all selected regions.
 
 <div class="alert alert-danger">Selecting many regions may impact performance of the live scanning process.</div>
 
@@ -39,16 +39,16 @@ After you make your selections, regions are scanned automatically and the number
 
 You can filter resources by type and tags.
 
-Tags are automatically detected from your AWS account and displayed in the **Custom tags**, **AWS tags**, **Terraform tags**, and **Kubernetes tags** sections.
+Tags are automatically detected from your AWS account and displayed in the {{< ui >}}Custom tags{{< /ui >}}, {{< ui >}}AWS tags{{< /ui >}}, {{< ui >}}Terraform tags{{< /ui >}}, and {{< ui >}}Kubernetes tags{{< /ui >}} sections.
 
-- **Custom tags** are tags that you added to resources in AWS or Azure.
-- **AWS tags** are tags that are automatically added to resources by AWS.
-- **Terraform tags** are tags that are automatically added to resources by Terraform.
-- **Kubernetes tags** are tags that are automatically added to resources by Kubernetes.
+- {{< ui >}}Custom tags{{< /ui >}} are tags that you added to resources in AWS or Azure.
+- {{< ui >}}AWS tags{{< /ui >}} are tags that are automatically added to resources by AWS.
+- {{< ui >}}Terraform tags{{< /ui >}} are tags that are automatically added to resources by Terraform.
+- {{< ui >}}Kubernetes tags{{< /ui >}} are tags that are automatically added to resources by Kubernetes.
 
-To filter resources by type, click the **Resource** section and select the resource type you want to filter by. By default, all resource types are selected and displayed in order of the number of resources found.
+To filter resources by type, click the {{< ui >}}Resource{{< /ui >}} section and select the resource type you want to filter by. By default, all resource types are selected and displayed in order of the number of resources found.
 
-To filter resources by tags. Click the **Custom tags**, **AWS tags**, **Terraform tags**, or **Kubernetes tags** section and select the tags you want to filter by. By default, all tags are selected and ordered by the number of resources found, with `Untagged` always at the bottom.
+To filter resources by tags. Click the {{< ui >}}Custom tags{{< /ui >}}, {{< ui >}}AWS tags{{< /ui >}}, {{< ui >}}Terraform tags{{< /ui >}}, or {{< ui >}}Kubernetes tags{{< /ui >}} section and select the tags you want to filter by. By default, all tags are selected and ordered by the number of resources found, with `Untagged` always at the bottom.
 
 <div class="alert alert-info">Focus on the most relevant resource types and tags for your specific use case to ensure optimal performance and readability of your diagram.</div>
 
@@ -56,19 +56,19 @@ To filter resources by tags. Click the **Custom tags**, **AWS tags**, **Terrafor
 
 ### Create a diagram showing only EC2 instances and RDS databases
 
-1. Click the **Resource** section.
-2. Deselect all resource types, and select **EC2** and **RDS**.
-3. Click **Apply layout** to create a diagram showing only the selected resources.
+1. Click the {{< ui >}}Resource{{< /ui >}} section.
+2. Deselect all resource types, and select {{< ui >}}EC2{{< /ui >}} and {{< ui >}}RDS{{< /ui >}}.
+3. Click {{< ui >}}Apply layout{{< /ui >}} to create a diagram showing only the selected resources.
 
 {{< img src="cloudcraft/getting-started/crafting-better-diagrams/select-specific-resources.mp4" alt="A 9 seconds video showing a Cloudcraft user selecting EC2 and RDS instances from the Resource section." video="true">}}
 
 ### Create a diagram showing EC2 instances and RDS databases without the `Environment` tag
 
-1. Click the **Resource** section.
-2. Deselect all resource types, and select **EC2** and **RDS**.
-3. Click the **Custom tags** section.
-4. Click the **Environment** tag, and leave only the `Untagged` option selected.
-5. Click **Apply layout** to create a diagram showing only the selected resources without the `Environment` tag.
+1. Click the {{< ui >}}Resource{{< /ui >}} section.
+2. Deselect all resource types, and select {{< ui >}}EC2{{< /ui >}} and {{< ui >}}RDS{{< /ui >}}.
+3. Click the {{< ui >}}Custom tags{{< /ui >}} section.
+4. Click the {{< ui >}}Environment{{< /ui >}} tag, and leave only the `Untagged` option selected.
+5. Click {{< ui >}}Apply layout{{< /ui >}} to create a diagram showing only the selected resources without the `Environment` tag.
 
 {{< img src="cloudcraft/getting-started/crafting-better-diagrams/select-specific-resources-and-tags.mp4" alt="A 15 seconds video showing a Cloudcraft user selecting EC2 and RDS instances and untagged resources from the Resource and Custom tags sections." video="true">}}
 

@@ -5,6 +5,9 @@ further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
   tag: 'Documentation'
   text: 'Learn about RUM Monitors'
+- link: 'https://learn.datadoghq.com/courses/rum-retention-filters'
+  tag: 'Learning Center'
+  text: 'Interactive Lab: RUM Retention Filters'
 ---
 
 ## Overview

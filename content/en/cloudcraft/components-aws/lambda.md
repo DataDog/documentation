@@ -11,11 +11,11 @@ Use the Lambda component to represent Lambda instances from your Amazon Web Serv
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Architecture**: The type of computer processor used by the instance.
-- **Memory**: The amount of memory allocated for the instance.
-- **Requests per month**: The number of requests per month, in millions.
-- **Seconds per request**: The duration of each request in seconds.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Architecture{{< /ui >}}: The type of computer processor used by the instance.
+- {{< ui >}}Memory{{< /ui >}}: The amount of memory allocated for the instance.
+- {{< ui >}}Requests per month{{< /ui >}}: The number of requests per month, in millions.
+- {{< ui >}}Seconds per request{{< /ui >}}: The duration of each request in seconds.
 
 ## API
 

@@ -11,6 +11,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
       tag: "Blog"
       text: "Use CIDR notation queries to filter your network traffic logs"
+    - link: "https://learn.datadoghq.com/courses/log-investigations"
+      tag: "Learning Center"
+      text: "Track Logs for Alerting and Investigations"
 algolia:
   tags: ['log metrics', 'generating logs from metrics']
 ---

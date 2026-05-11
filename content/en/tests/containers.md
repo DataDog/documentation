@@ -11,13 +11,13 @@ further_reading:
 
 ## Overview
 
-If you run your tests inside a container that you launch yourself within the build (for example, using [`docker run`][1] or [`docker-compose`][2]), forward the following environment variables to the container depending on your CI provider. This enables the Datadog tracer to autodetect the build information.
+If you run your tests inside a container that you launch yourself within the build (for example, using [`docker run`][1] or [`docker-compose`][2]), forward the following environment variables to the container depending on your CI provider. This enables the Datadog SDK to autodetect the build information.
 
-Additionally, you need to pass in the environment variables required to configure the tracer as described in the [per-language test instrumentation instructions][3] (such as `DD_SERVICE`, `DD_ENV`, and a valid `DD_TRACE_AGENT_URL` that is accessible from within the container).
+Additionally, you need to pass in the environment variables required to configure the SDK as described in the [per-language test instrumentation instructions][3] (such as `DD_SERVICE`, `DD_ENV`, and a valid `DD_TRACE_AGENT_URL` that is accessible from within the container).
 
 ## Manage environment variables
 
-This table provides a non-exhaustive list of environment variables available for configuring the tracer:
+This table provides a non-exhaustive list of environment variables available for configuring the SDK:
 
 {{< tabs >}}
 {{% tab "AppVeyor" %}}

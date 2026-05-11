@@ -70,16 +70,29 @@ Custom links enhance data interaction by connecting widget data values to releva
 
 To customize interactions with data inline your generic widgets, see [Context Links][2].
 
+## Widget descriptions
+
+Widget descriptions let you add a text description to any dashboard widget. Use descriptions to provide context about a metric, such as what it represents, how to interpret it, or what action to take.
+
+To add a description:
+1. Open the graph editor for the widget.
+2. Enter a **Description** at the bottom of the editor.
+3. Click **Save**.
+
+After saving, hover over the description icon in the top-left corner of the widget to view the description.
+
+{{< img src="dashboards/widgets/configuration/widget-description-hover.png" alt="A bar chart widget titled 'Avg CPU User % by Service (Top 10)' with the cursor hovering over the description icon in the top-left corner, displaying the description tooltip above the widget." >}}
+
 ## Metrics info
 
-On a metric graph, click the context menu (three vertical dots) to find the **Metrics Info** option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, click the context menu (three vertical dots) to find the {{< ui >}}Metrics Info{{< /ui >}} option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
 
 ## Unit override
 
 Unit overrides are a key display option that allows you to customize how data values are presented on widgets, adding meaningful context to your data. For more use cases and information, see the [Customize your visualizations with unit overrides][3].
-- **Unit override**: choose to display units in the family of 'memory', and have Datadog take care of displaying the appropriate scale depending on data (such as megabytes or gigabytes).
-- **Unit and scale override**: fix units to a single scale (display data in megabytes regardless of value).
-- **Define custom units**: define completely custom units (like 'tests' instead of a generic count).
+- {{< ui >}}Unit override{{< /ui >}}: choose to display units in the family of 'memory', and have Datadog take care of displaying the appropriate scale depending on data (such as megabytes or gigabytes).
+- {{< ui >}}Unit and scale override{{< /ui >}}: fix units to a single scale (display data in megabytes regardless of value).
+- {{< ui >}}Define custom units{{< /ui >}}: define completely custom units (like 'tests' instead of a generic count).
 
 This is not an alternative for assigning units to your data.
 {{< whatsnext desc="Set units at the organization level: ">}}
@@ -89,7 +102,7 @@ This is not an alternative for assigning units to your data.
 
 ## Global time selector
 
-The global time selector is a fundamental time configuration option that synchronizes all widgets on a dashboard to use the same time frame. To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in the widget editor under **Set display preferences**, or add a widget (global time is the default time setting).
+The global time selector is a fundamental time configuration option that synchronizes all widgets on a dashboard to use the same time frame. To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in the widget editor under {{< ui >}}Set display preferences{{< /ui >}}, or add a widget (global time is the default time setting).
 
 The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (for example, `Past 1 Hour` or `Past 1 Day`) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][8]. If a moving window is chosen, the widgets are updated to move along with the time window.
 
@@ -108,9 +121,9 @@ The copied widgets can be pasted within Datadog by using <kbd>Ctrl</kbd>/<kbd>Cm
 * **Dashboards**: Adds a new widget positioned under your mouse cursor.
 * **Notebooks**: Adds a new cell at the end of the notebook.
 
-You can also paste the widget into your favorite chat program that displays link previews (like Slack or Microsoft Teams). This displays a snapshot image of your graph along with a direct link to your widget.
+You can also paste the widget into your favorite chat program that displays link previews (like Slack or Microsoft Teams). This displays a snapshot image of your graph along with a direct link to your widget. For more information, see [Widget Public URLs][11].
 
-For more information, see [Datadog Clipboard][9].
+For information on copying widgets for use within Datadog (in dashboards, notebooks, and incidents), see [Datadog Clipboard][9].
 
 ## Groups of widgets
 
@@ -134,28 +147,28 @@ View the graph in [full screen mode](#full-screen).
 
 Click on the export icon of any dashboard graph to open an options menu:
 
-| Option                 | Description                                                        |
-|------------------------|--------------------------------------------------------------------|
-| Copy                   | Create a copy of the dashboard graph.                              |
-| Share snapshot         | Create and send a snapshot of your graph.                          |
+| Option         | Description                               |
+|----------------|-------------------------------------------|
+| Copy           | Create a copy of the dashboard graph.     |
+| Share snapshot | Create and send a snapshot of your graph. |
 
 #### Use within Datadog
 
-| Option                 | Description                                                        |
-|------------------------|--------------------------------------------------------------------|
-| Declare incident       | Declare an incident from the graph.                                |
-| Add to incident        | Add the graph to an existing incident.                             |
-| Create case            | Create a case from the graph.                                      |
-| Save to notebook       | Save the graph to a notebook.                                      |
-| Link to widget         | Get a link to the widget copied to your clipboard.                 |
+| Option           | Description                                        |
+|------------------|----------------------------------------------------|
+| Declare incident | Declare an incident from the graph.                |
+| Add to incident  | Add the graph to an existing incident.             |
+| Create case      | Create a case from the graph.                      |
+| Save to notebook | Save the graph to a notebook.                      |
+| Link to widget   | Get a link to the widget copied to your clipboard. |
 
 #### Share externally
 
-| Format | Description            |
-| -----  | ----------------------- |
-| Download as PNG    | Download the widget in PNG format. |
-| Download as SVG    | Download the widget in SVG format. |
-| Download as CSV    | Download the widget in CSV format. |
+| Format          | Description                        |
+|-----------------|------------------------------------|
+| Download as PNG | Download the widget in PNG format. |
+| Download as SVG | Download the widget in SVG format. |
+| Download as CSV | Download the widget in CSV format. |
 
 ### Edit
 
@@ -165,15 +178,15 @@ Click on the pencil icon of any dashboard graph to make edits.
 
 Click on the context menu (three vertical dots) of any dashboard graph to open an options menu:
 
-| Option                 | Description                                                        |
-|------------------------|--------------------------------------------------------------------|
-| Edit                              | Edit the graph.                                         |
-| Clone                             | Create an adjacent copy of the graph.                   |
-| Split graph                       | Create a [split graph][10].                             |
-| Create custom links               | Create [custom links](#custom-links).                   |
-| Create monitor                    | Create a monitor preconfigured with the graph's query.  |
-| Metrics info (metric graphs only) | Get a description of the metrics in this graph. You can click on the metric names to open them in the Metric Summary page.            |
-| Delete                            | Delete the graph.                                       |
+| Option                            | Description                                                                                                                |
+|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Edit                              | Edit the graph.                                                                                                            |
+| Clone                             | Create an adjacent copy of the graph.                                                                                      |
+| Split graph                       | Create a [split graph][10].                                                                                                |
+| Create custom links               | Create [custom links](#custom-links).                                                                                      |
+| Create monitor                    | Create a monitor preconfigured with the graph's query.                                                                     |
+| Metrics info (metric graphs only) | Get a description of the metrics in this graph. You can click on the metric names to open them in the Metric Summary page. |
+| Delete                            | Delete the graph.                                                                                                          |
 
 ## Further Reading
 
@@ -189,3 +202,4 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 [8]: /dashboards/guide/custom_time_frames/
 [9]: /dashboards/guide/datadog_clipboard/
 [10]: /dashboards/widgets/split_graph/
+[11]: /dashboards/sharing/widget_public_urls/

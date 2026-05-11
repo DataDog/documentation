@@ -28,29 +28,29 @@ To use Multisource Querying, ensure you have configured [Cloud Cost Management][
 
 ## Query your cost data
 
-You can select multiple providers in the **Provider** field on the [**Explorer** page][6].
+You can select multiple providers in the {{< ui >}}Provider{{< /ui >}} field on the [**Explorer** page][6].
 
 {{< img src="cloud_cost/multisource_querying/provider.png" alt="The Provider field below the search query on the Cloud Cost Explorer page" style="width:40%;" >}}
 
-Dropdown filters like **Provider** and **Team** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**.
+Dropdown filters like {{< ui >}}Provider{{< /ui >}} and {{< ui >}}Team{{< /ui >}} maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click {{< ui >}}+ Filter{{< /ui >}}.
 
 {{< img src="cloud_cost/multisource_querying/filters_2.png" alt="A search query that uses the Team filter and groups reports by service on the Cloud Cost Explorer page" style="width:100%;" >}}
 
-Click **Refine Results** to access the following options and filter your cost data.
+Click {{< ui >}}Refine Results{{< /ui >}} to access the following options and filter your cost data.
 
-Usage Charges Only
+{{< ui >}}Usage Charges Only{{< /ui >}}
 : Examine costs impacted by engineering teams, excluding credits, fees, and taxes.
 
-Complete Days Only
+{{< ui >}}Complete Days Only{{< /ui >}}
 : Exclude the past two days of cost data, which are incomplete.
 
-Total Cost
+{{< ui >}}Total Cost{{< /ui >}}
 : Filter the data to view costs within a specific cost range.
 
-Dollar Change
+{{< ui >}}Dollar Change{{< /ui >}}
 : Only display cost changes within a specified dollar change range.
 
-Percent Change
+{{< ui >}}Percent Change{{< /ui >}}
 : Only display cost changes within a specified percentage change range.
 
 {{< img src="cloud_cost/multisource_querying/refine_results_1.png" alt="Additional options to refine your cost data on the Cloud Cost Explorer page" style="width:100%;" >}}
@@ -65,7 +65,7 @@ With Multisource Querying, you can create visualizations using cost data across 
 
 ### Cost metric
 
-Multisource Querying uses the `all.cost` metric, which combines all individual cloud and SaaS cost metrics into a unified view on the **Analytics** page.
+Multisource Querying uses the `all.cost` metric, which combines all individual cloud and SaaS cost metrics into a unified view on the {{< ui >}}Analytics{{< /ui >}} page.
 
 **Note:** The `all.cost` metric does not include resource-level tags. To view costs by resource, use the specific cost metrics for each provider (such as `aws.cost.amortized`). When you filter to a specific provider in the search query, Datadog automatically switches to the corresponding provider-specific metric, enabling more granular querying of your cost data.
 

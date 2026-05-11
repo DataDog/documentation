@@ -12,9 +12,9 @@ You can use the Managed Disk component to represent and visualize managed block 
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Type**: Select the type of your disk.
-- **Size**: Select the size of your disk.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Type{{< /ui >}}: Select the type of your disk.
+- {{< ui >}}Size{{< /ui >}}: Select the size of your disk.
 
 ## API
 

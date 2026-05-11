@@ -16,10 +16,6 @@ To configure GitHub:
 1. Install the [GitHub integration][13].
 1. [Tag your APM telemetry with Git information][14] to link running application versions to specific repositories and commits.
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-sre-pilot-features" >}}
-A subset of third-party integrations is in Preview. Click <strong>Request Access</strong> to join the Preview program.
-{{< /callout >}}
-
 ## Send investigation findings to ITSM and collaboration platforms
 
 By default, all investigations are listed on the [Bits AI Investigations][1] page.
@@ -30,15 +26,18 @@ For monitor alert investigations, a summary of the findings is available on the 
 ### Slack
 
 1. Ensure the [Datadog Slack app][3] is installed in your Slack workspace.
-1. In your monitor, go to **Configure notifications and automations** and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
-1. Lastly, go to [**Bits AI SRE** > **Settings** > **Integrations**][4] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack.
-   <div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
+1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@slack-{channel-name}` handle. This sends monitor notifications to your chosen Slack channel.
+1. Lastly, go to [{{< ui >}}Bits AI SRE{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][4] and connect your Slack workspace. This allows Bits to write its findings directly under the monitor notification in Slack.
 
-<!-- Commenting out this feature which was delayed
-### Microsoft Teams
+<div class="alert alert-info">Each Slack workspace can only be connected to one Datadog organization.</div>
+
+### Microsoft Teams (Preview)
+
 1. [Connect your Microsoft tenant to Datadog][12].
-1. In your monitor, go to **Configure notifications and automations** and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel. Bits will append its findings to these notifications.
--->
+1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@teams-{handle-name}` handle. This sends monitor notifications to your chosen MS Teams channel. Bits will append its findings to these notifications.
+
+<div class="alert alert-info">
+The Microsoft Teams integration with Bits AI SRE is in Preview for all customers.</div>
 
 ### Datadog Case Management
 
@@ -46,9 +45,9 @@ Datadog Case Management provides a centralized workspace for triaging, tracking,
 
 To set up Case Management, and the Jira and ServiceNow integrations:
 1. Create a [Case Management project][5] for your team.
-1. In Datadog, go to [**Case Management** > **Settings**][6]. In the list of projects, expand your project, go to **Integrations** > **Datadog Monitors**, and turn on the **Enable Datadog Monitors integration for this project** toggle. This generates your project's unique handle: `@case-{project_name}`.
-1. On the same page, under **Integrations**, set up the Case Management Jira and/or ServiceNow integrations. When a new case is created, Case Management can automatically open the corresponding Jira ticket or ServiceNow incident.
-1. In your monitor, go to **Configure notifications and automations** and add the `@case-{project_name}` handle. When the monitor triggers:
+1. In Datadog, go to [{{< ui >}}Case Management{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][6]. In the list of projects, expand your project, go to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog Monitors{{< /ui >}}, and turn on the {{< ui >}}Enable Datadog Monitors integration for this project{{< /ui >}} toggle. This generates your project's unique handle: `@case-{project_name}`.
+1. On the same page, under {{< ui >}}Integrations{{< /ui >}}, set up the Case Management Jira and/or ServiceNow integrations. When a new case is created, Case Management can automatically open the corresponding Jira ticket or ServiceNow incident.
+1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@case-{project_name}` handle. When the monitor triggers:
    - Datadog automatically creates a new case
    - The case creates a linked Jira ticket or ServiceNow incident
    - Bits writes its investigation findings directly to the case, which gets appended to Jira as a timeline comment or ServiceNow as a work note
@@ -57,7 +56,7 @@ To set up Case Management, and the Jira and ServiceNow integrations:
 
 Datadog On-Call is a paging solution that unifies monitoring, paging, and incident response in a single platform.
 
-To set up On-Call, in your monitor, go to **Configure notifications and automations** and add the `@oncall-{team}` handle. Bits' findings can then appear on the On-Call page in the Datadog mobile app, helping your teams triage issues on the go.
+To set up On-Call, in your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@oncall-{team}` handle. Bits' findings can then appear on the On-Call page in the Datadog mobile app, helping your teams triage issues on the go.
 
 ## Pull context from knowledge bases
 
@@ -102,10 +101,10 @@ Organization limit
 ### Set a rate limit
 
 To set a rate limit:
-1. Navigate to [**Bits AI SRE** > **Settings** > **Rate Limits**][10].
+1. Navigate to [{{< ui >}}Bits AI SRE{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Rate Limits{{< /ui >}}][10].
 2. Toggle on the rate limit you want to enable.
 3. Set the maximum number of investigations you want to run within a rolling 24-hour window.
-4. Click **Save**.
+4. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="bits_ai/rate_limits.png" alt="Options to set a rate limit" style="width:60%;" >}}
 

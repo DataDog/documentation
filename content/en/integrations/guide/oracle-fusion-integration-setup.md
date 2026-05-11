@@ -13,7 +13,7 @@ further_reading:
 
 Use this guide to give Datadog access to Oracle Fusion REST APIs using OAuth 2.0. The setup process establishes a read-only, least-privilege integration between Datadog and your Fusion instance.
 
-Datadog queries Oracle Fusion REST APIs, including enterprise service scheduler (ESS) logs and data from enterprise resource planning (ERP), human capital management (HCM), supply chain management and manufacturing (SCM), customer experience (CX), and more. To set up the integration, create the following components in your Fusion environment:
+Datadog queries Oracle Fusion REST APIs, including enterprise service scheduler (ESS) logs and data from enterprise resource planning (ERP), human capital management (HCM), supply chain management and manufacturing (SCM), and customer experience (CX). To set up the integration, create the following components in your Fusion environment:
 
 1. [**Confidential Application**](#create-a-confidential-application): An OAuth 2.0 client used for secure machine-to-machine authentication.
 2. [**Integration User**](#create-a-fusion-integration-user): A dedicated Fusion user with read-only and ESS-related roles, created in Fusion Security Console.
