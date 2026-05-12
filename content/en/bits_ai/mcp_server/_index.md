@@ -41,7 +41,22 @@ The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp
 
 **Ready to get started?** Select your agent below or see [Set Up the Datadog MCP Server][27] for connection instructions.
 
-{{< partial name="mcp_server/mcp_server_agents.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=cursor" src="integrations_logos/cursor_avatar.svg" alt="Cursor" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=claudecode" src="integrations_logos/claude-code_avatar.svg" alt="Claude Code" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=geminicli" src="integrations_logos/google-gemini_avatar.svg" alt="Gemini CLI" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=vscode" src="integrations_logos/vscode_avatar.svg" alt="VS Code" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=warp" src="integrations_logos/warp_avatar.png" alt="Warp" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=devin" src="integrations_logos/devin.png" alt="Devin" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=jetbrainsides" src="integrations_logos/jetbrains-ides_avatar.svg" alt="JetBrains" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=codex" src="integrations_logos/codex_avatar.svg" alt="Codex CLI" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=claude" src="integrations_logos/claude_app.png" alt="Claude Desktop" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=goose" src="integrations_logos/goose.svg" alt="Goose" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=opencode" src="integrations_logos/opencode.svg" alt="OpenCode" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=vscode" src="integrations_logos/github-copilot_avatar.svg" alt="GitHub Copilot" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=kiro" src="integrations_logos/kiro.svg" alt="Kiro" >}}
+  {{< image-card href="/bits_ai/mcp_server/setup/?tab=other" src="icons/developers.png" alt="Custom Agent" >}}
+{{< /card-grid >}}
 
 This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unmute for audio):
 

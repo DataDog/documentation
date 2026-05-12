@@ -183,7 +183,17 @@ A vulnerability is opened when Datadog detects a vulnerable library in the relev
 
 Software Composition Analysis (SCA) supports the following languages:
 
-{{< partial name="code_security/sca-lang-support.html" >}}
+{{< card-grid >}}
+  {{< image-card href="#set-up-sca" src="integrations_logos/python_avatar.svg" alt="python" img_width="50" >}}
+  {{< image-card href="#set-up-sca" src="integrations_logos/javascript_large.png" alt="javascript" img_width="50" >}}
+  {{< image-card href="#set-up-sca" src="integrations_logos/java_avatar.svg" alt="java" img_width="50" >}}
+  {{< image-card href="#set-up-sca" src="integrations_logos/dotnet_avatar.svg" alt="c sharp" img_width="50" >}}
+  {{< image-card href="#set-up-sca" src="integrations_logos/golang-avatar.png" alt="go" img_width="60" >}}
+  {{< image-card href="#set-up-sca" src="integrations_logos/ruby_avatar.svg" alt="ruby" img_width="50" >}}
+  {{< image-card href="#set-up-sca" src="integrations_logos/php_opcache.png" alt="php" img_width="80" >}}
+  {{< image-card href="#set-up-sca" src="integrations_logos/rust.png" alt="rust" img_width="80" >}}
+  {{< image-card href="#set-up-sca" src="integrations_logos/c_sharp.png" alt="c sharp" img_width="60" >}}
+{{< /card-grid >}}
 
 ## Customize your configuration
 

@@ -26,13 +26,22 @@ Data Observability: Jobs Monitoring provides visibility into the performance, re
 
 Data Observability: Jobs Monitoring supports multiple job technologies. To get started, select your technology and follow the installation instructions:
 
-{{< partial name="data_jobs/setup-platforms.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/data_jobs/databricks/" src="integrations_logos/databricks.png" alt="Databricks" img_width="200" >}}
+  {{< image-card href="/data_jobs/airflow/" src="integrations_logos/airflow.png" alt="Airflow" img_width="200" >}}
+  {{< image-card href="/data_observability/jobs_monitoring/dbt" src="integrations_logos/dbt-cloud_large.svg" alt="dbt cloud" img_width="200" >}}
+  {{< image-card href="/data_observability/jobs_monitoring/glue/" src="integrations_logos/amazon_glue.png" alt="AWS Glue" img_width="200" >}}
+{{< /card-grid >}}
 
 <br/>
 
 Data Observability: Jobs Monitoring also supports Apache Spark jobs on the following platforms:
 
-{{< partial name="data_jobs/setup-platforms-spark.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/data_jobs/kubernetes/" src="integrations_logos/kubernetes.png" alt="Kubernetes" img_width="200" >}}
+  {{< image-card href="/data_jobs/emr" src="integrations_logos/amazon_emr.png" alt="Amazon EMR" img_width="200" >}}
+  {{< image-card href="/data_jobs/dataproc/" src="integrations_logos/google_cloud_dataproc.png" alt="GCP Dataproc" img_width="200" >}}
+{{< /card-grid >}}
 
 <br/>
 
