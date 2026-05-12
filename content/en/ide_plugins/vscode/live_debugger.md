@@ -68,10 +68,10 @@ The gutter icon reflects the current status of each logpoint:
 
 | Icon | Status | Meaning |
 |------|--------|---------|
-| {{< img src="/ide_plugins/vscode/probe_active_dark.png" alt="Active" style="width:16px; display:inline;" >}} | **Active** | The logpoint is installed and emits log events when the line of code is about to run. |
-| {{< img src="/ide_plugins/vscode/probe_warning_dark.png" alt="Warning" style="width:16px; display:inline;" >}} | **Warning** | The logpoint may not be generating events yet. This is shown when the backend has not processed a recent change (`WAITING`) or no tracer agents are reporting for the targeted service (`NO_AGENTS`). |
-| {{< img src="/ide_plugins/vscode/probe_error_dark.png" alt="Error" style="width:16px; display:inline;" >}} | **Error** | The logpoint is not generating events because of an error, or its status is unknown. |
-| {{< img src="/ide_plugins/vscode/probe_disabled_dark.png" alt="Disabled" style="width:16px; display:inline;" >}} | **Disabled** | The logpoint is inactive — either you disabled it manually or it has expired. |
+| {{< img src="/ide_plugins/vscode/probe_active_dark.png" alt="Active status icon." style="width:16px; display:inline;" >}} | **Active** | The logpoint is installed and emits log events when the line of code is about to run. |
+| {{< img src="/ide_plugins/vscode/probe_warning_dark.png" alt="Warning status icon." style="width:16px; display:inline;" >}} | **Warning** | The logpoint may not be generating events yet. This is shown when the backend has not processed a recent change (`WAITING`) or no tracer agents are reporting for the targeted service (`NO_AGENTS`). |
+| {{< img src="/ide_plugins/vscode/probe_error_dark.png" alt="Error status icon." style="width:16px; display:inline;" >}} | **Error** | The logpoint is not generating events because of an error, or its status is unknown. |
+| {{< img src="/ide_plugins/vscode/probe_disabled_dark.png" alt="Disabled status icon." style="width:16px; display:inline;" >}} | **Disabled** | The logpoint is inactive—either you disabled it manually or it has expired. |
 
 ## Generate a unit test from a log event
 
