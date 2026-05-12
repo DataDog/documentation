@@ -38,13 +38,14 @@ To use automatic job retries:
 - CI Visibility must be enabled for your [GitHub Actions][1] or [GitLab][2] integration.
 - The [Datadog Source Code Integration][3] must be configured for the repositories where you'd like to use automatic retries.
 - Datadog must have indexed CI job logs for the repositories where you'd like to use automatic retries (see [Collect job logs for GitHub Actions][4] or [Collect job logs for GitLab][5]).
+- To enable this feature, you must have the **CI Provider Settings Write** permission in Datadog.
 
 ## Enable automatic job retries
 
 After the prerequisites are met, enable automatic job retries from the CI Visibility repository settings:
 
-1. In Datadog, go to **CI Visibility > Settings > Repositories**, or open the [CI Visibility repository settings page][7] directly.
-2. In the **Auto Job Retries** column, toggle automatic retries on for each repository, or use the global toggle to enable it for all supported repositories at once.
+1. In Datadog, navigate to **CI Visibility** > **Settings** > [**Repositories**][7].
+2. For each repository you'd like to enable automatic job retries for, set the **Auto Job Retries** toggle on. To enable it for all repositories at once, use the **Enable Auto Job Retries for ALL repositories** global toggle.
 
 ## Provider-specific behavior
 
