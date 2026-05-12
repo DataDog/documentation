@@ -64,7 +64,7 @@ When the `analyzers` field is omitted, Datadog only scans OS packages for contai
 
 The `languages` analyzer covers the following package ecosystems:
 
-| Ecosystem | Package manager / format |
+| Ecosystem | Package manager/format |
 |-----------|--------------------------|
 | Ruby | Bundler, GemSpec |
 | Rust | Cargo, Rust binary |
