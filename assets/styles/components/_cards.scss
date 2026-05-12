@@ -43,9 +43,7 @@
 }
 
 .card-grid-card {
-  flex: 1 1 var(--card-min-width, 150px);
-  min-width: var(--card-min-width, 150px);
-  max-width: calc(var(--card-min-width, 150px) * 1.5);
+  flex: 0 1 var(--card-min-width, 150px);
   text-decoration: none;
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
