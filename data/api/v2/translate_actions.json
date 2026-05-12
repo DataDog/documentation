@@ -5003,6 +5003,14 @@
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
   },
+  "Validate": {
+    "description": "Check if the API key is valid. Returns the organization UUID, API key ID, and associated scopes.",
+    "summary": "Validate API key"
+  },
+  "ValidateAPIKey": {
+    "description": "Check that the API key and application key used for the request are both valid.\nReturns `{\"status\": \"ok\"}` on success, `401` or `403` otherwise. Useful as a\nlightweight authentication probe before issuing other API calls that require\nfull credentials.",
+    "summary": "Validate API and application keys"
+  },
   "SearchWidgets": {
     "description": "Search and list widgets for a given experience type, with filtering, sorting, and pagination.\n\n**Response meta** carries totals scoped to the current filter:\n- `filtered_total` — widgets matching the filter.\n- `created_by_you_total` — among the matches, how many the current user created.\n- `favorited_by_you_total` — among the matches, how many the current user has favorited.\n- `created_by_anyone_total` — total widgets in the experience type, ignoring filters.\n\nEach returned widget includes `is_favorited` reflecting the current user's favorite status.\nFavoriting itself is performed through the shared favorites API, not this endpoint.",
     "summary": "Search widgets"

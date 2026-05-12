@@ -1148,6 +1148,31 @@ menu:
       url: /api/latest/key-management/
       identifier: key-management
       generated: true
+    - name: Validate API and application keys
+      url: '#validate-api-and-application-keys'
+      identifier: key-management-validate-api-and-application-keys
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateAPIKey
+        unstable: []
+        order: 21
+    - name: Validate API key
+      url: '#validate-api-key'
+      identifier: key-management-validate-api-key
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - Validate
+        unstable:
+          - v2
+        order: 20
     - name: Update a personal access token
       url: '#update-a-personal-access-token'
       identifier: key-management-update-a-personal-access-token
