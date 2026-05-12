@@ -39,7 +39,7 @@ For lines that have a logpoint defined in the current session, the extension sho
 
 {{< img src="/ide_plugins/vscode/live_debugger_create.mp4" alt="Creating a logpoint from the line-number context menu" style="width:100%" video=true >}}
 
-## Creating a logpoint
+## Create a logpoint
 
 To add a logpoint, right-click the line number for a line of code in the source editor and select **Datadog Live Debugger > Create Logpoint**. The logpoint is added to the current session, or a new session is created if needed.
 
