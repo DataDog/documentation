@@ -70,7 +70,15 @@ Accelerate your application development by combining testing and troubleshooting
 
 To integrate with a CI provider or a collaboration tool like [Slack][28] or [Jira][29], see the respective documentation:
 
-{{< partial name="getting_started/continuous_testing/providers.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/github_actions/" src="integrations_logos/github.png" alt="github actions" img_width="200" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/gitlab/" src="integrations_logos/gitlab.png" alt="gitlab" img_width="200" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" img_width="200" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/circleci_orb/" src="integrations_logos/circleci.png" alt="circleci orb" img_width="200" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/azure_devops_extension/" src="integrations_logos/azure_devops.png" alt="azure devops extension" img_width="200" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_upload/" src="integrations_logos/bitrise_upload.png" alt="bitrise upload-tests step" img_width="200" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_run/" src="integrations_logos/bitrise_run.png" alt="bitrise run-tests step" img_width="200" >}}
+{{< /card-grid >}}
 
 </br>
 
