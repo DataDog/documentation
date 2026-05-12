@@ -221,9 +221,62 @@ Transfer annotated traces to datasets for experiment evaluation:
 2. Open the queue.
 3. Select traces to transfer.
 4. Click **Add to Dataset**.
-5. Choose an existing dataset, or create a dataset.
+5. Set the dataset's **expected output**:
+   - **From interaction**: use each trace's actual output. For experiment traces, you can also pick **Expected output** to use the original expected output from the experiment's source dataset.
+   - **From annotation label**: use the values the annotators applied. Pick one or more labels. The record's `expected_output` is built from your selection.
+6. Choose an existing dataset, or create a dataset.
 
-Labels are included with each trace as metadata.
+When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": ["neutral"], "topics": ["safety", "policy"] }`. The same shape applies whether you select one label or multiple labels. Categorical labels are always exported as arrays of selected options, whether the label is single-select or multi-select.
+
+{{% collapse-content title="How annotation values are aggregated across annotators" level="h4" expanded=false id="annotation-aggregation" %}}
+
+When multiple annotators have annotated the same trace, the value for each label is aggregated across them by consensus:
+
+| Label type   | Aggregation                                                                |
+| ------------ | -------------------------------------------------------------------------- |
+| Boolean      | Majority vote (ties break in favor of `true`)                              |
+| Categorical  | Intersection: the sorted set of options that every annotator selected      |
+| Score        | Average                                                                    |
+| Text         | List of responses                                                          |
+
+For categorical labels (single-select or multi-select), the aggregated value is the sorted array of options that *every* annotator selected. If any annotator's selection differs, the value is an empty array. The result is always an array, even when only one annotator has annotated the trace.
+
+**Example: categorical (consensus).** Three annotators rate `tone` and all agree:
+
+- Annotator A: `polite`
+- Annotator B: `polite`
+- Annotator C: `polite`
+
+Aggregated: `["polite"]`.
+
+**Example: categorical (disagreement).** Three annotators rate `tone` and one differs:
+
+- Annotator A: `polite`
+- Annotator B: `rude`
+- Annotator C: `polite`
+
+Aggregated: `[]`. The intersection is empty because `rude` is not in every annotator's set.
+
+**Example: categorical (multi-select).** Three annotators tag `topics` (each can pick multiple options):
+
+- Annotator A: `["safety", "policy"]`
+- Annotator B: `["safety", "billing"]`
+- Annotator C: `["safety", "policy"]`
+
+Aggregated: `["safety"]`. Only `safety` appears in every annotator's set; `policy` is missing from B's selection and `billing` is missing from A's and C's.
+
+**Example: text.** Two annotators leave notes:
+
+- Annotator A: `"Confusing phrasing"`
+- Annotator B: `"Tone too casual"`
+
+Aggregated: `["Confusing phrasing", "Tone too casual"]`. Every annotator's value is preserved.
+
+Raw per-annotator values are preserved in each record's metadata, along with annotator identity. If the default consensus doesn't fit your workflow, you can recompute with a different strategy (for example, median, weighted vote, or reviewer pick).
+
+{{% /collapse-content %}}
+
+Labels not selected as expected output are also included with each trace as metadata.
 
 See [Datasets][3] for more information about using datasets in experiments.
 

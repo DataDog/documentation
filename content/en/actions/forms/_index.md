@@ -9,10 +9,6 @@ further_reading:
 
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSe_OxTl8E_djqF107dKJDhcUuLxh1n9ytEKT6CZa-u8ZPqokg/viewform" btn_hidden="false" header="Join the Preview!" >}}
-Forms are in Preview. Click {{< ui >}}Request Access{{< /ui >}}, and fill in the Datadog Product Preview Program form.
-{{< /callout >}}
-
 ## Overview
 
 Datadog Forms allow you to collect input, analyze responses, and trigger automations in Datadog. Forms and their responses can be shared across your organization, allowing you to collect and analyze data with your team.

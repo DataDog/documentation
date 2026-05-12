@@ -95,10 +95,6 @@
     "name": "Cloud Cost Management",
     "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
   },
-  "cloud-inventory-sync-configs": {
-    "name": "Cloud Inventory Sync Configs",
-    "description": "Configure cloud inventory file synchronization from your cloud storage to Datadog."
-  },
   "cloud-network-monitoring": {
     "name": "Cloud Network Monitoring",
     "description": "The Cloud Network Monitoring API allows you to fetch aggregated connections and DNS traffic with their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/) and [DNS Monitoring page](https://docs.datadoghq.com/network_monitoring/dns/) for more information."
@@ -151,6 +147,10 @@
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
   },
+  "email-transport": {
+    "name": "Email Transport",
+    "description": "Endpoints for receiving email transport webhook events for audit trail processing."
+  },
   "entity-risk-scores": {
     "name": "Entity Risk Scores",
     "description": "Retrieves security risk scores for entities in your organization."
@@ -194,10 +194,6 @@
   "incident-services": {
     "name": "Incident Services",
     "description": "Create, update, delete, and retrieve services which can be associated with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
-  },
-  "incident-teams": {
-    "name": "Incident Teams",
-    "description": "The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/) to create, update, delete, and retrieve teams which can be associated with incidents."
   },
   "incidents": {
     "name": "Incidents",
@@ -406,6 +402,10 @@
   "status-pages": {
     "name": "Status Pages",
     "description": "Manage your status pages and communicate service disruptions to stakeholders via Datadog's API. See the [Status Pages documentation](https://docs.datadoghq.com/incident_response/status_pages/) for more information."
+  },
+  "storage-management": {
+    "name": "Storage Management",
+    "description": "Enable Storage Management for S3 buckets, GCS buckets, and Azure containers. Each configuration registers the destination that holds inventory reports for the storage being monitored."
   },
   "synthetics": {
     "name": "Synthetics",
