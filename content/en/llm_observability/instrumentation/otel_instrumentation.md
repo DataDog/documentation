@@ -28,7 +28,7 @@ Set the following environment variables in your application:
 
 ```
 OTEL_EXPORTER_OTLP_TRACES_PROTOCOL=http/protobuf
-OTEL_EXPORTER_OTLP_TRACES_ENDPOINT={{< region-param key="otlp_trace_endpoint" code="true" >}}
+OTEL_EXPORTER_OTLP_TRACES_ENDPOINT={{< region-param key="otlp_trace_endpoint" code="true" text="https://otlp.datadoghq.com/v1/traces" >}}
 OTEL_EXPORTER_OTLP_TRACES_HEADERS=dd-api-key=<YOUR_API_KEY>,dd-otlp-source=llmobs
 ```
 
@@ -153,7 +153,7 @@ os.environ["OTEL_SEMCONV_STABILITY_OPT_IN"] = "gen_ai_latest_experimental"
 
 # Configure OTLP endpoint to send traces to Datadog LLM Observability
 os.environ["OTEL_EXPORTER_OTLP_TRACES_PROTOCOL"] = "http/protobuf"
-os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" >}}"
+os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" text="https://otlp.datadoghq.com/v1/traces" >}}"
 os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = f"dd-api-key={os.getenv('DD_API_KEY')},dd-otlp-source=llmobs"
 
 # Initialize telemetry with OTLP exporter
@@ -184,7 +184,7 @@ from opentelemetry.sdk.resources import Resource, SERVICE_NAME
 from openai import OpenAI
 
 # Configure OpenTelemetry to send traces to Datadog
-os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" >}}"
+os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" text="https://otlp.datadoghq.com/v1/traces" >}}"
 os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = "dd-api-key=<YOUR_DATADOG_API_KEY>,dd-otlp-source=llmobs"
 os.environ["OTEL_SEMCONV_STABILITY_OPT_IN"] = "gen_ai_latest_experimental"
 
@@ -286,7 +286,7 @@ provider = TracerProvider(resource=resource)
 trace.set_tracer_provider(provider)
 
 exporter = OTLPSpanExporter(
-    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
+    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" text="https://otlp.datadoghq.com/v1/traces" >}}",
     headers={
         "dd-api-key": "<YOUR_DATADOG_API_KEY>",
         "dd-ml-app": "simple-openllmetry-test",
