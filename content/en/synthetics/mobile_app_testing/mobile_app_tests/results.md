@@ -23,9 +23,13 @@ Test runs appear in a test details page after a Synthetic mobile app test execut
 
 ## Test activity
 
-On the **Activity** tab, you can see the **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][4] configured for a test.
+On the **Activity** tab, you can see:
 
-{{< img src="mobile_app_testing/mobile_activity_global_uptime.png" alt="The Activity tab displays the Global Uptime graph" style="width=80%" >}}
+- The **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime visualization displays red only if the [alert conditions][4] configured for a test are triggered in the given time interval. Since location uptime is computed based on the final test result after retries complete, [fast retry][15] intervals directly impact what appears in your total uptime graph. For more information about uptime monitoring, see the [Uptime Percentage widget][5] guide.
+- A **Timeline** of alert triggers, recoveries, and test modifications.
+- A detail panel for the selected alert showing what happened, the failing result, and suggested next steps for investigation.
+
+{{< img src="mobile_app_testing/mobile_activity_global_uptime.png" alt="The Activity tab on a mobile app Test Details page showing Global Uptime, an alert timeline, and a failure detail panel" style="width=80%" >}}
 
 ## Test results
 
@@ -187,3 +191,4 @@ Alerts from your Synthetic test monitors appear on the timeline in the [**Activi
 [12]: https://app.datadoghq.com/synthetics/explorer
 [13]: /synthetics/test_suites/
 [14]: /synthetics/platform/downtime/
+[15]: /synthetics/guide/synthetic-test-retries-monitor-status/
