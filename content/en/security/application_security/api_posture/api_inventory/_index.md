@@ -158,35 +158,6 @@ datadog:
 
 Without explicit `codeLocations`, endpoints may not merge correctly with data from other sources.
 
-### Processing sensitive data
-
-[App and API Protection][2] matches known patterns for sensitive data in API requests and responses. If it finds a match, the endpoint is tagged with the category and type of sensitive data processed.
-
-The matching occurs within your application, and none of the sensitive data is sent to Datadog.
-
-#### Supported data types
-
-To see the supported data types (for example, `payment:card`), use the **Schema Sensitive Data** facet. You can also see the data type used in the **Sensitive Data** column.
-
-#### Create API data scanners
-
-By default, Datadog App and API Protection scans for PII, credentials, and payment types. Sensitive Data Detection provides API data scanners to define custom scanner data patterns beyond the defaults and improve visibilty into the sensitive data of your API traffic. 
-
-In an API data scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key or value conditions that trigger the scanner.
-
-When the scanner detects sensitive data, it tags the API endpoint with the category and type and displays it in [API Endpoints][7].
-
-To create an API data scanner and view its results, do the following:
-
-1. In App and API Protection **Policies**, go to [Sensitive Data Detection][14].
-2. Click **New Scanner**.
-3. In **Select your scanner tags**, define the category and type to classify the senstive data. The scanner tags API endpoints with the format `category:type`.
-4. In **Define conditions on JSON keys and values**, define the JSON key or value conditions to trigger the scanner.
-5. Click **Save Scanner**. The scanner is enabled by default.
-6. To view the results of the scanner, go to App and API Protection [API Endpoints][7].
-7. In the **Schema Sensitive Data** facet, the category and type of your custom scanner is listed in the format `category:type`. Customer scanner `category:type` tags are also visible in the **Sensitive Data** column of the explorer.
-
-
 ### Business logic
 
 These tags (`(users.login.success`, `users.login.failure`, etc.) are determined by the presence of business logic traces associated with the endpoint.
@@ -253,7 +224,6 @@ Custom authentication detection is possible by configuring [Endpoint Tagging Rul
 [10]: /integrations/amazon-api-gateway
 [11]: /security/application_security/setup/
 [13]: /internal_developer_portal/software_catalog/entity_model/native_entities/?tab=api#native-entity-types
-[14]: https://app.datadoghq.com/security/appsec/policies/scanners
 [15]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
 [16]: /integrations/guide/source-code-integration/
 [17]: /internal_developer_portal/software_catalog/set_up/create_entities/#through-the-datadog-ui
