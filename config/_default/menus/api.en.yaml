@@ -7978,6 +7978,18 @@ menu:
           - ListTagPipelinesRulesets
         unstable: []
         order: 16
+    - name: List Cloud Cost Management tag descriptions
+      url: '#list-cloud-cost-management-tag-descriptions'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-descriptions
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagDescriptions
+        unstable: []
+        order: 42
     - name: List Cloud Cost Management OCI configs
       url: '#list-cloud-cost-management-oci-configs'
       identifier: cloud-cost-management-list-cloud-cost-management-oci-configs
