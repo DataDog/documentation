@@ -18,7 +18,7 @@ To use this feature, your service must be set up for [Datadog Dynamic Instrument
 
 {{< img src="/ide_plugins/vscode/live_debugger_overview.mp4" alt="Overview of the Datadog Live Debugger activity" style="width:100%" video=true >}}
 
-## The Datadog Live Debugger activity
+## Datadog Live Debugger activity
 
 The extension contributes a dedicated **Datadog Live Debugger** activity to the IDE sidebar with the following views:
 
