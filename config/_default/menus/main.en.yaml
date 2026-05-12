@@ -101,11 +101,6 @@ menu:
       url: getting_started/teams/
       parent: getting_started
       weight: 27
-    - name: Organization Topology
-      identifier: getting_started_organization_topology
-      url: getting_started/organization_topology/
-      parent: getting_started
-      weight: 28
     - name: Access for Enterprises
       identifier: getting_started_access_for_enterprises
       url: getting_started/access_for_enterprises/
@@ -9377,16 +9372,21 @@ menu:
       identifier: account_management
       parent: administration_heading
       weight: 10000
+    - name: Organization Topology
+      identifier: account_management_organization_topology
+      url: account_management/organization_topology/
+      parent: account_management
+      weight: 1
     - name: Switching Between Orgs
       identifier: account_management_org_switching
       url: account_management/org_switching/
       parent: account_management
-      weight: 1
+      weight: 2
     - name: Organization Settings
       url: account_management/org_settings/
       parent: account_management
       identifier: organization_settings
-      weight: 2
+      weight: 3
     - name: User Management
       url: account_management/users/
       parent: organization_settings
