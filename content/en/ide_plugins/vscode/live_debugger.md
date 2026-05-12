@@ -1,6 +1,7 @@
 ---
 title: Live Debugger
 type: documentation
+description: Add logpoints to running services to capture runtime data for debugging without redeploying, using the Live Debugger in the Datadog VS Code extension.
 further_reading:
     - link: '/dynamic_instrumentation/'
       tag: 'Documentation'
