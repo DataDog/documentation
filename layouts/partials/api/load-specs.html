@@ -21,7 +21,7 @@
   {{- end -}}
 
   {{- $hasDeref := isset $verData "full_spec_deref" -}}
-  {{- $spec := cond $hasDeref (index $verData "full_spec_deref") (index $verData "full_spec") -}}
+  {{- $spec = cond $hasDeref (index $verData "full_spec_deref") (index $verData "full_spec") -}}
 
   {{- if not $spec -}}
     {{- errorf "Neither full_spec_deref nor full_spec found in .Site.Data.api.%s. Place one at /data/api/%s/." $version $version -}}
