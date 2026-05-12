@@ -81,6 +81,11 @@ further_reading:
 
 <p>If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add <strong>datadog.zendesk.com</strong> to the allow list.</p>
 
+<h3>Ticket is no longer available</h3>
+<p>Tickets are automatically removed after the retention period ends. Closed tickets are deleted 15 months after their last update, and attachments 12 months.</p>
+
+<p>If you need help with a related issue, you can open a new ticket or search our documentation.</p>
+
 <h2>Further reading</h2>
 
 {{< partial name="whats-next/whats-next.html" >}}
