@@ -94,7 +94,7 @@ Configure the Databricks (Zerobus) destination when you [set up a pipeline][6]. 
 
 After you select the Databricks (Zerobus) destination in the pipeline UI:
 
-<div class="alert alert-warning">Databricks Zerobus doesn't convert timestamps in string format to Databricks' <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> type</a>. If your table uses a `TIMESTAMP` column, see <a href="#convert-string-timestamps-to-timestamp-format">Convert string timestamps to timestamp format</a> for more information.</div>
+<div class="alert alert-warning">Databricks Zerobus doesn't convert timestamps in string format to Databricks' <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> type</a>. If your table uses a timestamp column, see <a href="#convert-string-timestamps-to-timestamp-format">Convert string timestamps to timestamp format</a> for more information.</div>
 
 <div class="alert alert-danger">Only enter the identifier for the OAuth client secret. Do <b>not</b> enter the actual value.</div>
 
@@ -112,7 +112,7 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 
 ### Convert string timestamps to timestamp format
 
-If your logs have timestamps in string format and your Databricks table has a timestamp column declared as a [`TIMESTAMP` type][11], you must convert the string into timestamp before sending logs to the Databricks (Zerobus) destination. Otherwise, the Worker throws an error similar to:
+If your logs have timestamps in string format and your Databricks table has a timestamp column declared as a [`TIMESTAMP` type][11], you must convert the string to timestamp format before sending logs to the Databricks (Zerobus) destination. Otherwise, the Worker throws an error similar to:
 
 ```
 Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-04-23T10[41]15Z' to i64: invalid digit found in string
