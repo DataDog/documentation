@@ -2942,12 +2942,12 @@ menu:
       parent: actions_heading
       identifier: forms
       weight: 50000
-    - name: Form components
+    - name: Components
       url: actions/forms/components/
       parent: forms
       identifier: forms_components
       weight: 1
-    - name: Form responses
+    - name: Responses
       url: actions/forms/responses/
       parent: forms
       identifier: forms_responses

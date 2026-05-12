@@ -103,7 +103,7 @@ By default, only the creator of a form can access it. To change the permissions 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/actions/forms
+[1]: https://app.datadoghq.com/forms
 [2]: /actions/forms/components/
 [3]: /actions/forms/responses/
 [4]: https://app.datadoghq.com/actions/action-catalog/

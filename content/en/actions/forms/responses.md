@@ -1,7 +1,6 @@
 ---
 title: Form responses
 description: View, analyze, and manage form responses using Datadog Sheets, dashboards, and response settings.
-disable_toc: false
 further_reading:
   - link: /actions/forms/
     tag: Documentation
@@ -54,7 +53,7 @@ To configure response settings, in the {{< ui >}}Fields{{< /ui >}} panel, click 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/actions/forms
+[1]: https://app.datadoghq.com/forms
 [2]: https://app.datadoghq.com/actions/datastores
 [3]: https://app.datadoghq.com/ddsql/editor
 [4]: /dashboards/#get-started

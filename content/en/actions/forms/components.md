@@ -35,6 +35,7 @@ Each component has a set of configurable elements in the component editor:
 
 | Element | Description |
 |-----|-------------|
+| {{< ui >}}Add a description{{< /ui >}} | An optional description displayed below the component question. |
 | {{< ui >}}Required{{< /ui >}} | Toggle to determine whether the question requires an answer. Required questions are marked with a red asterisk. |
 | {{< ui >}}Advanced{{< /ui >}} | Configure the placeholder text and default value for the component. |
 | {{< ui >}}Rules{{< /ui >}} | Configure validation rules to restrict the values respondents can submit. See [Validation rules](#validation-rules). |
@@ -57,6 +58,8 @@ To configure a conditional field:
 1. Click {{< ui >}}Conditions{{< /ui >}}.
 1. Click {{< ui >}}Add Condition{{< /ui >}} and define the rule.
 1. Click {{< ui >}}Save{{< /ui >}}.
+
+You can also view conditions in the {{< ui >}}Fields{{< /ui >}} panel by clicking the <i class="icon-source-control-branch-wui" style="display:inline-block;transform:rotate(180deg)"></i> branch icon.
 
 ## Dynamic dropdown options
 
