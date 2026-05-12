@@ -48,7 +48,12 @@ After instrumentation, you can optionally:
 
 Click on one of the following tiles to learn how to set up SSI for your deployment type:
 
-{{< partial name="apm/apm-single-step.html" >}} 
+{{< card-grid min_width="200px" >}}
+  {{< image-card href="linux/" src="integrations_logos/linux.png" alt="linux" img_width="200" >}}
+  {{< image-card href="docker/" src="integrations_logos/docker.png" alt="docker" img_width="200" >}}
+  {{< image-card href="kubernetes/" src="integrations_logos/kubernetes.png" alt="kubernetes" img_width="200" >}}
+  {{< image-card href="windows/" src="integrations_logos/windows.png" alt="windows" img_width="200" >}}
+{{< /card-grid >}}
 
 <br>
 

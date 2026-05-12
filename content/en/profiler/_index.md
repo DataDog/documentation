@@ -72,7 +72,19 @@ Profiling your service to visualize all your stack traces in one place takes jus
 
 ### Instrument your application
 
-{{< partial name="profiling/profiling-languages.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=go" src="integrations_logos/go-metro.png" alt="go" img_width="400" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=java" src="integrations_logos/java.png" alt="Java" img_width="400" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=java&runtime=graalvm_native_image" src="integrations_logos/graalvm.png" alt="GraalVM" img_width="400" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=node_js" src="integrations_logos/nodejs.png" alt="Node.js" img_width="400" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=php" src="integrations_logos/php.png" alt="PHP" img_width="400" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=python" src="integrations_logos/python.png" alt="Python" img_width="400" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=ruby" src="integrations_logos/ruby.png" alt="Ruby" img_width="400" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=dot_net" src="integrations_logos/dotnet_text.png" alt=".NET" img_width="400" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=rust" src="integrations_logos/rust.png" alt="Rust" img_width="400" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=c" src="integrations_logos/c.png" alt="C" img_width="400" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=cpp" src="integrations_logos/cpp.png" alt="C++" img_width="400" >}}
+{{< /card-grid >}}
 
 ## Guide to using the profiler
 
