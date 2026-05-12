@@ -31,16 +31,16 @@ further_reading:
 
 ## Overview
 
-AI cost visibility gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Anthropic, AWS Bedrock, Google Gemini, OpenAI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, and attribute usage to the specific users and API keys driving it.
+AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Anthropic, Amazon Bedrock, Google Gemini, OpenAI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, and attribute usage to the specific users and API keys driving it.
 
 ## Prerequisites
 
 To use AI Costs, you must have at least one of the following supported providers set up for [Cloud Cost Management][1]:
 
-| AI Provider | Setup method |
+| AI provider | Setup method |
 |---|---|
 | Anthropic   | [SaaS integration][2] |
-| AWS Bedrock | [AWS integration][3] |
+| Amazon Bedrock | [AWS integration][3] |
 | Gemini      | [Google Cloud integration][4] |
 | OpenAI     | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
@@ -53,19 +53,19 @@ After connecting your AI providers, navigate to [**Cloud Cost** > **Summarize** 
 
 The AI cost summary page provides:
 
-- **Total AI Cost:** Aggregated AI cost and cost change over the selected time frame.
-- **Daily AI Cost:** Daily cost trends across the selected providers over the selected time frame. Use the **Filter to** dropdown to define which providers appear in the graph.
-- **Top Cost Drivers:** The models, projects, services, and users generating the most spend.
-- **Active AI Cost Anomalies:** Cost [anomalies][7] surfaced proactively across all connected providers. Select an anomaly to open a side panel with more details and options for further action.
-- **AI Cost Dashboards:** Out-of-the-box dashboard templates for each supported provider, combining cost data with usage signals such as token consumption, model distribution, and user analytics.
+- **Total AI Cost**: Aggregated AI cost and cost change over the selected time frame.
+- **Daily AI Cost**: Daily cost trends across the selected providers over the selected time frame. Use the **Filter to** dropdown to define which providers appear in the graph.
+- **Top Cost Drivers**: The models, projects, services, and users generating the most spend.
+- **Active AI Cost Anomalies**: Cost [anomalies][7] surfaced proactively across all connected providers. Select an anomaly to open a side panel with more details and options for further action.
+- **AI Cost Dashboards**: Out-of-the-box dashboard templates for each supported provider, combining cost data with usage signals such as token consumption, model distribution, and user analytics.
 
 ## Normalized AI tags
 
-AI cost data from all supported providers is normalized to a consistent set of tags, so you can filter, group, compare, and plan AI spend consistently across dashboards, [monitors][8], [budgets][9], [forecasts][10], and other Datadog tools. Use the [Cloud Cost Explorer][11] to query and compare spend across providers without writing per-provider logic.
+AI cost data from all supported providers is normalized to a consistent set of tags. Use these tags to filter, group, compare, and plan AI spend across dashboards, [monitors][8], [budgets][9], [forecasts][10], and other Datadog tools. The [Cloud Cost Explorer][11] allows you to query and compare spend across providers without writing per-provider logic.
 
 The following tags are available for all supported AI providers:
 
-| Tag Name | Tag Description |
+| Tag name      | Tag description |
 |---|---|
 | `providername` | The AI provider. |
 | `model` | The AI model identifier (for example, `claude-opus-4-6`, `gpt-4.1`). |
