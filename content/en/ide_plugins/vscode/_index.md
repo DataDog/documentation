@@ -149,7 +149,7 @@ Find out more in the [Exception Replay][22] sub-section.
 
 ### Live Debugger
 
-The **Live Debugger** lets you add logpoints — auto-expiring, non-breaking breakpoints — to your running services to capture runtime data for debugging without redeploying your code.
+The **Live Debugger** lets you add logpoints—auto-expiring, non-breaking breakpoints—to your running services to capture runtime data for debugging without redeploying your code.
 
 {{< img src="/ide_plugins/vscode/live_debugger_overview.mp4" alt="Overview of the Datadog Live Debugger activity" style="width:100%" video=true >}}
 
