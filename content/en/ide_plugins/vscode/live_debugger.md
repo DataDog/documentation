@@ -58,7 +58,7 @@ The remote running code may be a different revision from the source you are edit
 
 <div class="alert alert-info">Checking out locally the same revision that is running remotely shows you the same code in the IDE that is running in production, which simplifies the live debugging experience—but it is not required.</div>
 
-## Editing, enabling, disabling, and deleting
+## Edit, enable, disable, and delete logpoints
 
 - **Edit**: Right-click a logpoint in the editor or in the **Logpoints** view and select **Edit** to update its message template, condition, or capture depth. Changing the service or environment requires deleting the logpoint and creating a new one. Saving an edit also extends the expiration to 60 minutes.
 - **Enable / Disable**: Toggle a logpoint or a whole session from the views or the line-number context menu. Re-enabling a logpoint extends its expiration to 60 minutes.
