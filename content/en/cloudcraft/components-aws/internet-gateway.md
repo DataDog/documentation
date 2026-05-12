@@ -11,8 +11,8 @@ Use the Internet Gateway component to represent gateways to the internet from yo
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Rotate**: Rotate the component and change its direction.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Rotate{{< /ui >}}: Rotate the component and change its direction.
 
 ## API
 

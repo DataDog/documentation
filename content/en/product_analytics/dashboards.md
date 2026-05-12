@@ -7,7 +7,7 @@ further_reading:
   text: "Product Analytics"
 ---
 
-## Overview 
+## Overview
 
 The key to getting started with dashboards is knowing what kind of questions you ask yourself regularly. What are common issues your customers face? When a problem occurs, what questions help you find a solution?
 
@@ -17,7 +17,7 @@ This guide gets you started on a path to creating dashboards. These basic dashbo
 
 ## Create a dashboard
 
-To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page. 
+To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page.
 
 {{< img src="product_analytics/dashboard/pana_dashboard_overview.png" alt="Adding a new dashboard" style="width:70%;">}}
 
@@ -26,7 +26,7 @@ Enter a dashboard name and choose a layout option.
 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
-Dashboards 
+Dashboards
 : A grid-based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views which update in real time, and can represent fixed points in the past. They have a maximum width of 12 grid squares and also work well for debugging.
 
 Timeboards

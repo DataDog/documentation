@@ -36,7 +36,7 @@ Datadog recommends upgrading your Agents regularly to make sure you have access 
 
 In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][3] settings page. If you need to enable it:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
-1. From your Organization Settings page, enable [**Remote Configuration**][3]. This enables Datadog components across your organization to receive configurations from Datadog.
+1. From your Organization Settings page, enable [Remote Configuration][3]. This enables Datadog components across your organization to receive configurations from Datadog.
 
 ## Agent Remote Configuration status
 
@@ -105,8 +105,8 @@ datadog:
 To disable Remote Configuration at the organization level:
 1. Ensure you have the required `org_management` permission.
 1. Go to the [Remote Configuration][3] settings page. 
-1. Click **Disable**. 
-1. When the warning message appears, click **Disable** again.
+1. Click {{< ui >}}Disable{{< /ui >}}. 
+1. When the warning message appears, click {{< ui >}}Disable{{< /ui >}} again.
 
 ## Troubleshooting
 

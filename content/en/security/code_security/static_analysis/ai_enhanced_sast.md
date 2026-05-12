@@ -11,6 +11,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives'
       tag: 'Blog'
       text: 'Using LLMs to filter out false positives from static code analysis'
+    - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
+      tag: "Blog"
+      text: "Introducing Bits AI Dev Agent for Code Security"
 ---
 
 Static Code Analysis (SAST) uses AI to help automate detection, validation, and remediation across the vulnerability management lifecycle.
@@ -141,10 +144,6 @@ Each finding includes a section with an explanation of the assessment. You can p
 {{< img src="/code_security/static_analysis/false_positive_filtering_sast_side_panel_higher_res_png.png" alt="Visual indicator of a false positive assessment in SAST side panel" style="width:100%;">}}
 
 ## Remediation
-
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-AI-suggested remediation for SAST is powered by the Bits AI Dev Agent and is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}}
 
 Datadog SAST uses the [Bits AI Dev Agent][10] to generate code fixes for vulnerabilities. You can remediate individual vulnerabilities or fix multiple vulnerabilities using bulk remediation campaigns.
 

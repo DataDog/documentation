@@ -64,7 +64,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.t
 {{< /tabs >}}
 
 ### One-Click Installation
-To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][4]. Navigate to the APM Service Page and `Enable DSM`.
+To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][4]. Navigate to the APM Service Page and {{< ui >}}Enable DSM{{< /ui >}}.
 
 {{< img src="data_streams/enable_dsm_service_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
 
@@ -73,7 +73,7 @@ To set up Data Streams Monitoring from the Datadog UI without needing to restart
 Use Datadog's Java tracer, [`dd-trace-java`][6], to collect information from your Kafka Connect workers.
 
 1. [Add the `dd-java-agent.jar` file][7] to your Kafka Connect workers. Ensure that you are using `dd-trace-java` [v1.44+][8].
-1. Modify your Java options to include the Datadog Java tracer on your worker nodes. For example, on Strimzi, modify `STRIMZI_JAVA_OPTS` to add `-javaagent:/path/to/dd-java-agent.jar`.
+1. Modify your Java options to include the Datadog Java SDK on your worker nodes. For example, on Strimzi, modify `STRIMZI_JAVA_OPTS` to add `-javaagent:/path/to/dd-java-agent.jar`.
 
 {{% data_streams/monitoring-sqs-pipelines %}}
 

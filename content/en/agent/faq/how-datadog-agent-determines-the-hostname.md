@@ -51,7 +51,7 @@ A single host running in EC2 might have an instance ID (i-abcd1234), a generic h
 
 The names collected by the Agent (detailed above) are added as aliases for the chosen canonical name.
 
-See the list of all hosts in your account from the [Infrastructure List][4]. The aliases associated with each host are available in the inspect panel, which is accessed by clicking the **Inspect** button while hovering over a host row:
+See the list of all hosts in your account from the [Infrastructure List][4]. The aliases associated with each host are available in the inspect panel, which is accessed by clicking the {{< ui >}}Inspect{{< /ui >}} button while hovering over a host row:
 
 {{< img src="agent/faq/host_aliases.png" alt="Host aliases" >}}
 

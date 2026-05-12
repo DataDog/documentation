@@ -42,7 +42,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
   |SLO | See the [SLO search documentation][7] to configure an SLO query. |
   |Security Signals <br> App and API Protection <br> Audit Trail | See the [Log search documentation][3] to configure a query. |
 
-  [1]: /logs/log_configuration/processors/#geoip-parser
+  [1]: /logs/log_configuration/processors/geoip_parser/
   [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
   [4]: /logs/logs_to_metrics/
@@ -59,7 +59,7 @@ The geomap widget visualizes geographic data with shaded regions or points. It c
 
   **Note**: The Points layer shows a maximum of 100,000 events at a time.
   
-  [1]: /logs/log_configuration/processors/#geoip-parser
+  [1]: /logs/log_configuration/processors/geoip_parser/
   [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
   [4]: /real_user_monitoring/explorer/search_syntax/
@@ -88,7 +88,7 @@ This widget can be used with the **[Dashboards API][8]**. See the following tabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_configuration/processors/#geoip-parser
+[1]: /logs/log_configuration/processors/geoip_parser/
 [2]: /getting_started/tagging/#define-tags
 [3]: /logs/search_syntax/
 [4]: /logs/logs_to_metrics/

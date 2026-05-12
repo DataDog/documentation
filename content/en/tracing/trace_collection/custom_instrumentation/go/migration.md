@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-The Go tracer v2 introduces API improvements, better performance, and enhanced compatibility with modern Go practices. It represents the latest stable version of Datadog's Go tracing library.
+The Go tracer v2 introduces API improvements, better performance, and enhanced compatibility with modern Go practices. It represents the latest stable version of Datadog's Go SDK.
 
 ## Compatibility
 
@@ -236,7 +236,7 @@ ddtrace.Start(ddtrace.WithService("my-service"))
 ```
 #### WithDogstatsdAddress
 
-`tracer.WithDogstatsdAddress` has been renamed to `tracer.WithDogstatsdAddr`. Use this option to specify a different DogStatsD address when starting the tracer.
+`tracer.WithDogstatsdAddress` has been renamed to `tracer.WithDogstatsdAddr`. Use this option to specify a different DogStatsD address when starting the SDK.
 
 v1:
 ```go

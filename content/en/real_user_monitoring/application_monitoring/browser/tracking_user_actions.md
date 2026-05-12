@@ -16,6 +16,9 @@ further_reading:
     - link: '/real_user_monitoring/platform/dashboards/'
       tag: 'Documentation'
       text: 'Learn about RUM dashboards'
+    - link: "https://learn.datadoghq.com/courses/custom-data-rum-javascript"
+      tag: "Learning Center"
+      text: "Collect custom data with RUM for JavaScript web applications"
 algolia:
   tags: ['user actions']
 ---

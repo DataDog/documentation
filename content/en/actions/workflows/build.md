@@ -24,74 +24,74 @@ further_reading:
 
 You can create workflows or edit existing workflows from the [Workflow Automation][1] page. The page lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
 - Hover over a workflow for the options to delete, clone, or edit the permissions for the workflow.
-- Toggle **My workflows** if you want to see only workflows that you created.
+- Toggle {{< ui >}}My workflows{{< /ui >}} if you want to see only workflows that you created.
 
 ## Build a workflow from a blueprint
 
 1. Click the [**Blueprints**][5] tab.
 1. If desired, use the search bar to narrow the list of blueprints by name, category, or integration.
 1. Find the blueprint you'd like to use, and click on it. The workflow canvas appears.
-1. Click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
+1. Click {{< ui >}}Create From Blueprint{{< /ui >}}. The workflow canvas updates to show your newly created workflow.
 1. Enter a new name and description for the workflow.
 1. Optionally, select or enter tags you'd like to apply to the workflow. For more information on Datadog tags, see [Getting Started with Tags][7].
 1. Optionally, select any related [services][8] to apply to the workflow.
 1. Optionally, select [teams][9] to associate with the workflow. If a team doesn't exist, you can enter a name to create it.
-1. Click **Save** to apply your changes.
-1. Workflow steps that require updates are marked with exclamation marks. Click on each workflow step you'd like to modify and fill in any empty fields on the **Configure** tab.
-1. When you are finished modifying the workflow, Click **Run** to test your workflow.
-1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+1. Click {{< ui >}}Save{{< /ui >}} to apply your changes.
+1. Workflow steps that require updates are marked with exclamation marks. Click on each workflow step you'd like to modify and fill in any empty fields on the {{< ui >}}Configure{{< /ui >}} tab.
+1. When you are finished modifying the workflow, Click {{< ui >}}Run{{< /ui >}} to test your workflow.
+1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 ## Create or edit a workflow with AI {#create-a-workflow-with-ai}
 
 If you're not sure where to start, you can automatically generate a workflow, or iterate on an existing workflow with AI.
 
 To generate a workflow:
-1. From the [Workflow Automation][1] page, click **New Workflow**.
-1. Click **Create a workflow with AI**.
+1. From the [Workflow Automation][1] page, click {{< ui >}}New Workflow{{< /ui >}}.
+1. Click {{< ui >}}Create a workflow with AI{{< /ui >}}.
 1. Enter a detailed prompt for your workflow. Specify the integrations and actions you'd like to use.
-1. Click the up arrow (**↑**) to create your workflow.
+1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to create your workflow.
 
 To iterate on an existing workflow:
-1. From an existing workflow, click **Edit with AI**.
+1. From an existing workflow, click {{< ui >}}Edit with AI{{< /ui >}}.
 1. Enter a detailed prompt for the behavior you'd like to add to your workflow. Include the integrations and actions you'd like to use.
-1. Click the up arrow (**↑**) to add the functionality to your workflow.
+1. Click the up arrow ({{< ui >}}↑{{< /ui >}}) to add the functionality to your workflow.
 
 <div class="alert alert-info">The Workflow Automation AI does not answer questions about the product. If you have questions or feedback, consider joining the <strong>#workflows</strong> channel on the <a href="https://chat.datadoghq.com/">Datadog Community Slack</a></div>
 
 ## Create a custom workflow
 
-To create a workflow, click **New workflow** on the [Workflow Automation][1] page.
+To create a workflow, click {{< ui >}}New workflow{{< /ui >}} on the [Workflow Automation][1] page.
 
 To configure your workflow:
-1. In the workflow configuration panel, enter a **Name** for your workflow.
+1. In the workflow configuration panel, enter a {{< ui >}}Name{{< /ui >}} for your workflow.
 1. Optionally, select or enter tags you'd like to apply to the workflow. For more information on Datadog tags, see [Getting Started with Tags][7].
 1. Optionally, select any related [services][8] to apply to the workflow.
 1. Optionally, select [teams][9] to associate with the workflow. If a team doesn't exist, you can enter a name to create it.
 1. Enter input or output parameters if your workflow uses them.
-1. Click **Save** to apply your changes.
+1. Click {{< ui >}}Save{{< /ui >}} to apply your changes.
 
 If you're not sure about your workflow configuration, you can return to the panel later by clicking anywhere on the workflow canvas.
 
 ### Build a workflow with the workflow builder
 
-1. If your workflow requires a trigger, click **Add Trigger**. For more information, see [Trigger a Workflow][3].
-1. Click **Add Step** to start adding steps to your workflow.
+1. If your workflow requires a trigger, click {{< ui >}}Add Trigger{{< /ui >}}. For more information, see [Trigger a Workflow][3].
+1. Click {{< ui >}}Add Step{{< /ui >}} to start adding steps to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables][14].
-1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon (**+**) to add another step, or save the workflow if you're done.
-1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon ({{< ui >}}+{{< /ui >}}) to add another step, or save the workflow if you're done.
+1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
 
 #### Shortcuts and canvas tools
 
-To see keyboard and mouse shortcuts for the workflow builder canvas, type `?` (shift+`/`) or click the **Keyboard** {{< img src="service_management/workflows/keyboard-icon.png" inline="true" style="width:40px;">}} button. A list of shortcuts appears.
+To see keyboard and mouse shortcuts for the workflow builder canvas, type `?` (shift+`/`) or click the {{< ui >}}Keyboard{{< /ui >}} {{< img src="service_management/workflows/keyboard-icon.png" inline="true" style="width:40px;">}} button. A list of shortcuts appears.
 
-The **Zoom out** {{< img src="service_management/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, **Zoom in** {{< img src="service_management/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}}, and **Reset viewport** {{< img src="service_management/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} buttons control how the viewport is displayed.
+The {{< ui >}}Zoom out{{< /ui >}} {{< img src="service_management/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, {{< ui >}}Zoom in{{< /ui >}} {{< img src="service_management/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}}, and {{< ui >}}Reset viewport{{< /ui >}} {{< img src="service_management/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} buttons control how the viewport is displayed.
 
-The **Auto layout** {{< img src="service_management/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} button aligns and distributes your workflow steps.
+The {{< ui >}}Auto layout{{< /ui >}} {{< img src="service_management/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} button aligns and distributes your workflow steps.
 
-The **Add annotation** {{< img src="service_management/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} button allows you to add annotation notes to your workflow. These notes offer a formatting bar to add various text formatting such as bold and italics, links, and lists. You can also enter your annotations in Markdown.
+The {{< ui >}}Add annotation{{< /ui >}} {{< img src="service_management/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} button allows you to add annotation notes to your workflow. These notes offer a formatting bar to add various text formatting such as bold and italics, links, and lists. You can also enter your annotations in Markdown.
 
 {{< img src="service_management/workflows/workflow-annotation-with-bar.png" alt="An empty annotation, with the formatting bar displayed above it" style="width:70%;" >}}
 
@@ -101,7 +101,7 @@ See the test and debug page for information on [how to test a step][11].
 
 ## Publish a workflow
 
-Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
+Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click {{< ui >}}Publish{{< /ui >}} from the workflow's page.
 
 Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
@@ -109,11 +109,11 @@ Published workflows accrue costs based on workflow executions. For more informat
 
 You can update published workflows without affecting the live version until you are ready.
 
-Editing a published workflow creates a draft. All changes made to the draft do not alter the published workflow. Each workflow can have one active draft, which all editors can modify. When ready, click on **Publish Changes** to replace the published version.
+Editing a published workflow creates a draft. All changes made to the draft do not alter the published workflow. Each workflow can have one active draft, which all editors can modify. When ready, click on {{< ui >}}Publish Changes{{< /ui >}} to replace the published version.
 
 Drafts execute all configured steps like any normal workflow. You can only run drafts from the workflow editor.
 
-To discard the draft, click the **cog icon** in the top-right corner of the editor and select **Discard draft**.
+To discard the draft, click the {{< ui >}}cog icon{{< /ui >}} in the top-right corner of the editor and select {{< ui >}}Discard draft{{< /ui >}}.
 
 **Notes**:
 - Running a draft for published workflows do not accrue costs.
@@ -132,17 +132,17 @@ You can configure your workflow to send you a notification on success or failure
 - Email
 
 To add a notification:
-1. In the workflow configuration panel, scroll down to the **Notifications** section.
+1. In the workflow configuration panel, scroll down to the {{< ui >}}Notifications{{< /ui >}} section.
 1. To add a notification if the workflow succeeds:
-   1. Click the plus (`+`) icon next to **Notify on success**.
+   1. Click the plus ({{< ui >}}+{{< /ui >}}) icon next to {{< ui >}}Notify on success{{< /ui >}}.
    1. Select the integration that you want to use for notifications.
    1. Complete the required fields for the specified integration.
-   1. Click **Save** to save your workflow.
+   1. Click {{< ui >}}Save{{< /ui >}} to save your workflow.
 1. To add a notification if the workflow fails:
-   1. Click the plus (`+`) icon next to **Notify on failure**.
+   1. Click the plus ({{< ui >}}+{{< /ui >}}) icon next to {{< ui >}}Notify on failure{{< /ui >}}.
    1. Select the integration that you want to use for notifications.
    1. Complete the required fields for the specified integration.
-   1. Click **Save** to save your workflow.
+   1. Click {{< ui >}}Save{{< /ui >}} to save your workflow.
 
 ## Error handling
 
@@ -152,7 +152,7 @@ You can specify the number of times you want your workflow to retry a failed ste
 
 To configure retries for a step:
 1. Click on the step in the workflow canvas.
-1. In the **Retries** section, adjust the **Interval** and **Max retries** values.
+1. In the {{< ui >}}Retries{{< /ui >}} section, adjust the {{< ui >}}Interval{{< /ui >}} and {{< ui >}}Max retries{{< /ui >}} values.
 1. Save your workflow to apply the changes.
 
 ### Add an error path
@@ -161,10 +161,10 @@ You can add an error path for the workflow to follow if it encounters an error.
 
 To add an error path:
 1. Hover over the step where you'd like to add an error path.
-1. Click and drag the **Error path** icon {{< img src="service_management/workflows/error-path-icon.png" inline="true" style="width:24px;">}} to place a new error path on the canvas.
+1. Click and drag the {{< ui >}}Error path{{< /ui >}} icon {{< img src="service_management/workflows/error-path-icon.png" inline="true" style="width:24px;">}} to place a new error path on the canvas.
 1. Select a workflow step to add to the error path.
 1. After configuring your step, you can add more steps to an error path and even merge your error path back into the main workflow path.
-1. When you're done configuring your error path steps, click **Save** to apply your changes.
+1. When you're done configuring your error path steps, click {{< ui >}}Save{{< /ui >}} to apply your changes.
 
 ## Wait until condition
 
@@ -172,7 +172,7 @@ Some actions allow you to add a condition that must be met before a workflow can
 
 To add a condition:
 1. Click on the step in the workflow canvas.
-1. In the **Wait until condition** section, use the dropdown to select a preconfigured condition, or select **Configure custom wait condition** and build your own conditional.
+1. In the {{< ui >}}Wait until condition{{< /ui >}} section, use the dropdown to select a preconfigured condition, or select {{< ui >}}Configure custom wait condition{{< /ui >}} and build your own conditional.
    - The list of available preconfigured conditions depends on the action.
    - Conditional statement variables can be either a String, a Number, a Boolean, or a step output variable.
    - Only the current step's output variables can be used in a custom conditional statement.
@@ -182,9 +182,9 @@ To add a condition:
 
 ## Edit a workflow with JSON
 
-Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. The JSON editor also allows you to:
-- **Format JSON**: Beautify your JSON.
-- **Export JSON**: Download the workflow.
+Edit a workflow in JSON by clicking {{< ui >}}Edit JSON Spec{{< /ui >}} on your workflow page. The JSON editor also allows you to:
+- {{< ui >}}Format JSON{{< /ui >}}: Beautify your JSON.
+- {{< ui >}}Export JSON{{< /ui >}}: Download the workflow.
 
 ## Interact with workflows using the API
 
