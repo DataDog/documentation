@@ -141,7 +141,7 @@ The **Browser Test** details page displays an overview of your test configuratio
 
 To troubleshoot a [failed test][10], review the failures on the **Activity** tab or the **Test Runs** tab. Select an alert from the timeline to see a **What happened?** summary describing the failing step and error message. From the **Next Steps** panel, you can investigate with Bits AI SRE, view the recovery, pause scheduling, or declare an incident. You can also review potential **[Errors & Warnings][11]**, **[Resources][12]**, and **[Core Web Vitals][13]** to diagnose the issue.
 
-{{< img src="synthetics/browser_tests/synthetics_test_details_sre.png" alt="Browser test details page showing the Activity tab with an alert timeline, failure summary, and Next Steps panel" style="width:100%;">}}
+{{< img src="synthetics/browser_tests/synthetics_timeline_alert_bits_sre.mp4" alt="Browser test details page showing the Activity tab with an alert timeline, failure summary, and Next Steps panel" video=true style="width:100%;">}}
 
 Use Datadog's [APM integration with Synthetic Monitoring][14] to view traces generated from your backend by the test runs from the **Traces** tab.
 
