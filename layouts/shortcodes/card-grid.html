@@ -1,0 +1,4 @@
+{{ $min_width := .Get "min_width" | default "150px" }}
+<div class="card-grid" style="--card-min-width: {{ $min_width }};">
+  {{ .Inner }}
+</div>
