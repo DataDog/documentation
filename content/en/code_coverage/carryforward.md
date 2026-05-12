@@ -26,6 +26,8 @@ Carryforward solves this problem. When a coverage report is missing for a commit
 
 Carryforward works at the [flag][1] level. For each flag that has no uploaded report on the target commit, Datadog looks back through the commit's ancestors and reuses the latest report tagged with that flag.
 
+{{< img src="code_coverage/carryforward_overview.png" alt="Diagram showing commit A with two uploaded reports, and commit B with one uploaded report and one carried forward from commit A" style="width:80%" >}}
+
 ## Prerequisites
 
 Carryforward builds on top of [Code Coverage flags][1]. Before you enable carryforward:
@@ -90,7 +92,7 @@ Carried-forward data is automatically replaced as soon as a real report is uploa
 
 ## Use with PR Gates
 
-<div class="alert alert-info">While carryforward is in beta, Datadog recommends against using it to evaluate blocking <a href="/code_coverage/configuration#pr-gates">PR Gates</a>. Use carryforward as a signal for tracking and visualization, and gate merges on coverage from reports uploaded for the commit itself.</div>
+<div class="alert alert-info">While carryforward is in beta, Datadog recommends starting with a non-blocking <a href="/code_coverage/configuration#pr-gates">PR Gate</a> to observe how carryforward affects evaluation before enforcing it as a merge requirement.</div>
 
 ## Further reading
 
