@@ -5,6 +5,9 @@ further_reading:
   - link: "/serverless/logic_apps/installation"
     tag: "Documentation"
     text: "Install Serverless Monitoring for Azure Logic Apps"
+  - link: "/serverless/logic_apps/metrics"
+    tag: "Documentation"
+    text: "Azure Logic Apps metrics"
   - link: "/serverless/logic_apps/troubleshooting"
     tag: "Documentation"
     text: "Troubleshoot Serverless Monitoring for Azure Logic Apps"
@@ -15,7 +18,7 @@ further_reading:
 Serverless Monitoring for Azure Logic Apps is in Preview. Complete the form to request access.
 {{< /callout >}}
 
-Azure Logic Apps is a serverless orchestration service that lets developers create and manage multi-step application workflows in Azure. Datadog provides Azure Logic Apps tracing and enhanced metrics through the collection of Azure diagnostic logs.
+Azure Logic Apps is a serverless orchestration service that lets developers create and manage multi-step application workflows in Azure. Datadog provides Azure Logic Apps tracing and [enhanced metrics][3] through the collection of Azure diagnostic logs.
 
 {{< img src="serverless/logic_apps/logic_apps_trace_example.png" alt="An Azure Logic Apps trace." style="width:100%;" >}}
 
@@ -33,3 +36,4 @@ To get started, follow the [installation instructions][1].
 
 [1]: /serverless/logic_apps/installation
 [2]: /logs/guide/azure-automated-log-forwarding/
+[3]: /serverless/logic_apps/metrics

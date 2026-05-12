@@ -56,34 +56,13 @@ User Activity
 
 ## Impact metrics
 
-### AI Coding Assistants
-
-{{< tabs >}}
-{{% tab "Per-Commit" %}}
-
 | Metric | Definition |
 |--------|------------|
-| AI Assisted Commits | Commits where the selected tool directly contributed code, divided by total commits. |
-| AI Assisted Deployments | Deployments containing at least one AI-assisted commit, divided by total deployments. |
-| Change Lead Time | Median lead time of AI-assisted commits compared to non-assisted commits. |
-| PR Review Time | Median review time of PRs containing at least one AI-assisted commit compared to PRs without. |
+| AI-assisted PRs | PRs containing at least one AI-assisted commit, divided by total PRs. |
+| PR Throughput | Number of PRs deployed per user per day for AI-assisted authors compared to non-assisted authors. |
+| PR Cycle Time | Median time from a PR's first commit to merge for AI-assisted PRs compared to non-assisted PRs. |
 | Change Failure Rate | Failure rate weighted by the proportion of AI-assisted commits in each deployment, compared to the weighted rate for non-assisted commits. For example, if a failed deployment has 3 out of 10 commits assisted by AI, only 30% of that failure is attributed to AI. |
 | Recovery Time | Median recovery time of failed deployments containing AI-assisted commits compared to deployments without. |
-
-{{% /tab %}}
-{{% tab "User Activity" %}}
-
-| Metric | Definition |
-|--------|------------|
-| AI Assisted Commits | Commits authored on a day when the author was active with the selected tool, divided by total commits. |
-| AI Assisted Deployments | Deployments containing at least one commit from an active user, divided by total deployments. |
-| Change Lead Time | Median lead time of commits by active users compared to non-active users. |
-| PR Review Time | Median review time of PRs where at least one commit author was active compared to PRs where no author was active. |
-| Change Failure Rate | Failure rate weighted by the proportion of active-user commits in each deployment, compared to the weighted rate for non-active users. |
-| Recovery Time | Median recovery time of failed deployments involving active users compared to deployments without. |
-
-{{% /tab %}}
-{{< /tabs >}}
 
 <div class="alert alert-info">Change Failure Rate only includes deployments linked to code changes. Configuration-only or infrastructure deployments are excluded to help the comparison reflect the impact of AI on code-related failures. This differs from standard DORA Change Failure Rate, which counts all deployment types.</div>
 

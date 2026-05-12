@@ -72,7 +72,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
-[3]: /cloudprem/install/
+[3]: /byoc-logs/install/
 [4]: /observability_pipelines/configuration/set_up_pipelines/
 [5]: /api/latest/observability-pipelines/
 [6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

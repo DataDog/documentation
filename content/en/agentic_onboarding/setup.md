@@ -125,7 +125,11 @@ To get started:
    {{% /tab %}}
 
    {{% tab "Infrastructure Monitoring" %}}
+   **Kubernetes**
    {{< code-block lang="text" >}}Add Datadog for Kubernetes to my project{{< /code-block >}}
+
+   **Docker**
+   {{< code-block lang="text" >}}Add Datadog for Docker to my project{{< /code-block >}}
    {{% /tab %}}
 
    {{% tab "Serverless Monitoring" %}}

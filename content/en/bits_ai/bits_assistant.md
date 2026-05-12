@@ -67,6 +67,14 @@ Example prompts:
 - `Investigate why EC2 costs changed between January and February`
 - `Which teams are responsible for the highest S3 storage costs this month?`
 
+#### DDSQL
+Generate and run [DDSQL][7] queries against Datadog [telemetry data][8] using natural language. 
+
+Example prompts:
+- `Write a DDSQL query that shows the top 10 services by error count in the last hour`
+- `Query average request latency for the payments service broken down by status code`
+- `Show me a DDSQL query for the number of RUM sessions by country over the past day`
+
 ### Web application
 There are multiple ways to open Bits Assistant in the Datadog web application:
 - In the top-right of the navigation bar, click {{< ui >}}Ask Bits{{< /ui >}}
@@ -105,3 +113,5 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 [4]: /cloud_cost_management/
 [5]: /dashboards/
 [6]: /notebooks/
+[7]: /ddsql_editor/
+[8]: /ddsql_reference/data_directory/

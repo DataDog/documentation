@@ -1,6 +1,6 @@
 ---
 title: Agent Builder
-description: Build custom AI agents that can access the Action Catalog. 
+description: Build custom AI agents that can access the Action Catalog.
 disable_toc: false
 further_reading:
 - link: "/actions/actions_catalog/"
@@ -11,15 +11,15 @@ further_reading:
   text: "What are AI agents and how do they work?"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/agent-builder/" btn_hidden="false" header="Join the Preview!" >}}
-Agent Builder is in Preview. Click {{< ui >}}Request Access{{< /ui >}} and fill in the Datadog Product Preview Program form.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Agent Builder is in Preview and available to all customers.
 {{< /callout >}}
 
 ## Overview
 
 You can build custom AI agents to act on your observability data and third-party integrations. Agents can use any action from the [Action Catalog][7] to investigate problems, start remediation, or manage resources.
 
-When building an agent, choose a blueprint to get started. Blueprints come with pre-filled instructions and relevant tools. They're named after their main role, like Security Analyst, Log Analyzer, Incident Responder, or DevOps Assistant. 
+When building an agent, choose a blueprint to get started. Blueprints come with pre-filled instructions and relevant tools. They're named after their main role, like Security Analyst, Log Analyzer, Incident Responder, or DevOps Assistant.
 
 {{< img src="/actions/agents/blank-new-agent.png" alt="The Agents page, filtered to show only 'My agents'" style="width:100%;" >}}
 
@@ -43,19 +43,19 @@ Blueprints are starter agents that cover common use cases. They come loaded with
 
 To build an agent from a blueprint:
 
-1. Navigate to the [Agents][1] page. 
+1. Navigate to the [Agents][1] page.
 1. In {{< ui >}}Agent Blueprints{{< /ui >}}, click the blueprint you want to use. Alternatively, you can click {{< ui >}}New Agent{{< /ui >}} and browse the full list of blueprints.
 1. Click {{< ui >}}Create From Blueprint{{< /ui >}}.
-1. Your new agent has pre-populated settings and tools. You can immediately start chatting with the agent or [further customize it](#customize-your-agent). 
+1. Your new agent has pre-populated settings and tools. You can immediately start chatting with the agent or [further customize it](#customize-your-agent).
 
 ### Create a custom agent
 
-To build an agent from scratch: 
+To build an agent from scratch:
 
-1. Navigate to the [Agents][1] page. 
-1. Click {{< ui >}}New Agent{{< /ui >}}. 
+1. Navigate to the [Agents][1] page.
+1. Click {{< ui >}}New Agent{{< /ui >}}.
 1. [Customize your agent](#customize-your-agent). Changes are saved automatically.
-1. Start chatting with your agent. 
+1. Start chatting with your agent.
 
 ## Customize your agent
 
@@ -69,7 +69,7 @@ Set up your agent to run automatically with a [schedule][13], or trigger it from
 
 ### Instructions
 
-Enter the instructions for your agent to follow when performing tasks. You can describe the agent as if it were a person, including its role, specialties, and steps to follow. Click {{< ui >}}Suggest With AI{{< /ui >}} to get help with writing and refining your instructions. 
+Enter the instructions for your agent to follow when performing tasks. You can describe the agent as if it were a person, including its role, specialties, and steps to follow. Click {{< ui >}}Suggest With AI{{< /ui >}} to get help with writing and refining your instructions.
 
 Below is a sample set of instructions for an agent acting as an incident responder.
 
@@ -107,7 +107,7 @@ To enable this feature, click the settings  **<i class="icon-sliders"></i>**  ic
 
 ### Actions
 
-Click the plus **<i class="icon-plus-circled-wui"></i>** icon to add actions from the [Action Catalog][7] for the agent to use. The agent is restricted to only its added tools. For example, if you encounter an error when the agent attempts to perform a task you've requested, it might be missing a necessary action. 
+Click the plus **<i class="icon-plus-circled-wui"></i>** icon to add actions from the [Action Catalog][7] for the agent to use. The agent is restricted to only its added tools. For example, if you encounter an error when the agent attempts to perform a task you've requested, it might be missing a necessary action.
 
 ### MCP Server
 
@@ -117,29 +117,29 @@ Third-party MCP servers use OAuth for authentication, allowing your agent to int
 
 ## Add an agent action
 
-After you create an agent, you can add it to a workflow or app. 
+After you create an agent, you can add it to a workflow or app.
 
-### Add to a workflow 
+### Add to a workflow
 
 To invoke an agent in a workflow step:
-1. In [Workflow Automation][9], navigate to a workflow and click {{< ui >}}Edit{{< /ui >}}. 
-1. Click the plus **<i class="icon-plus-circled-wui"></i>** icon. 
-1. Select the {{< ui >}}Execute Custom Agent{{< /ui >}} action. 
+1. In [Workflow Automation][9], navigate to a workflow and click {{< ui >}}Edit{{< /ui >}}.
+1. Click the plus **<i class="icon-plus-circled-wui"></i>** icon.
+1. Select the {{< ui >}}Execute Custom Agent{{< /ui >}} action.
 1. Configure the action:
     1. Enter a {{< ui >}}Step name{{< /ui >}}.
     1. Selection a {{< ui >}}Connection{{< /ui >}}.
     1. Select a {{< ui >}}Custom Agent ID{{< /ui >}}.
     1. Enter a {{< ui >}}User Prompt{{< /ui >}}.
-    1. Optionally, add a [**Wait until condition**][11]. 
+    1. Optionally, add a [**Wait until condition**][11].
     1. Optionally, add [**Retries**][12].
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Add to an app
 
 To invoke an agent in an app:
-1. In [App Builder][10], navigate to an app and click {{< ui >}}Edit{{< /ui >}}. 
-1. Click the plus **<i class="icon-plus-2"></i>** icon, then click {{< ui >}}Actions{{< /ui >}}. 
-1. Select the {{< ui >}}Execute Custom Agent{{< /ui >}} action. 
+1. In [App Builder][10], navigate to an app and click {{< ui >}}Edit{{< /ui >}}.
+1. Click the plus **<i class="icon-plus-2"></i>** icon, then click {{< ui >}}Actions{{< /ui >}}.
+1. Select the {{< ui >}}Execute Custom Agent{{< /ui >}} action.
 1. Configure the action:
     1. Select the {{< ui >}}Run Settings{{< /ui >}}.
     1. Selection a {{< ui >}}Connection{{< /ui >}}.
