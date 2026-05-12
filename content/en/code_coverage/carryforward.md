@@ -88,24 +88,11 @@ Carried-forward data is automatically replaced as soon as a real report is uploa
 - Fresh reports uploaded for the commit, plus
 - Carried-forward reports for flags where no fresh report was uploaded.
 
-### Late-arriving reports
-
-When a slow CI job uploads a report for an ancestor commit after a descendant commit has already received carried-forward data, Datadog refreshes the carried-forward data for affected descendants so they reflect the newer report. Reports can refresh carried-forward data for descendant commits up to **one day** after the descendant commit was first processed.
-
-### Counting reports
-
-After carryforward is enabled, the {{< ui >}}Reports{{< /ui >}} count on a commit is split into two values:
-
-- **Reports**: The number of reports actually uploaded for the commit.
-- **Carryforward reports**: The number of reports carried forward from ancestor commits.
-
-This separation helps you distinguish a commit whose coverage came from a fresh CI run from a commit whose coverage was reconstructed from ancestor data.
-
 ## Limitations
 
 - Carryforward is in beta and not yet available in all organizations. Reach out to your Datadog account team for access.
 - Carryforward requires flagged coverage reports. Reports uploaded without `--flags` are not eligible.
-- Late-arriving reports refresh carried-forward data on descendant commits for up to one day. Reports uploaded after that window do not retroactively update carryforward on descendants.
+- Carryforward is computed once, when the descendant commit is first processed. Reports uploaded for an ancestor commit after that point do not retroactively update carryforward on descendants. To get an updated total for the descendant commit, upload a fresh report for the affected flag on the descendant commit itself.
 - Datadog looks back at most **100 ancestor commits** when selecting reports to carry forward. If a flag has no report within that window, no carryforward is produced for it.
 - Carried-forward data is matched by file path. If a file is renamed between the ancestor commit and the target commit, the carried-forward report for the old path does not contribute to coverage for the new path.
 
