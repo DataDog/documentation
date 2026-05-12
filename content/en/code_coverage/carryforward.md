@@ -16,7 +16,7 @@ further_reading:
     text: "Organize coverage data with flags"
 ---
 
-<div class="alert alert-warning">Carryforward is in <strong>beta</strong>. Behavior and configuration options may change before general availability.</div>
+<div class="alert alert-warning">Carryforward is in <strong>beta</strong>. The feature is not yet fully monitored, so coverage data produced by carryforward may be inaccurate, delayed, or temporarily unavailable. Behavior and configuration options may change before general availability. Datadog recommends treating carryforward as a best-effort signal during the beta period and not relying on it for merge-blocking decisions.</div>
 
 ## Overview
 
