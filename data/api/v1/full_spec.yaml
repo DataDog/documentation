@@ -22823,6 +22823,10 @@ components:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
+        infra_storage_mgmt_objects_avg:
+          description: Shows the average of all storage management objects over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ingested_events_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the current date for all organizations.
           format: int64
@@ -23237,6 +23241,10 @@ components:
           type: integer
         siem_analyzed_logs_add_on_count_sum:
           description: Shows the sum of all log events analyzed by Cloud SIEM over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        storage_management_object_count_avg:
+          description: Shows the average of all storage management objects over all hours in the current date for all organizations.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -23820,6 +23828,10 @@ components:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        infra_storage_mgmt_objects_avg:
+          description: Shows the average of all storage management objects over all hours in the current date for the given org.
+          format: int64
+          type: integer
         ingested_events_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the current date for the given org.
           format: int64
@@ -24238,6 +24250,10 @@ components:
           type: integer
         siem_analyzed_logs_add_on_count_sum:
           description: Shows the sum of all log events analyzed by Cloud SIEM over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        storage_management_object_count_avg:
+          description: Shows the average of all storage management objects over all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -24820,6 +24836,10 @@ components:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current month for all organizations.
           format: int64
           type: integer
+        infra_storage_mgmt_objects_avg_sum:
+          description: Shows the average of all storage management objects over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         ingested_events_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the current month for all organizations.
           format: int64
@@ -25263,6 +25283,10 @@ components:
           description: Shows the first date of usage in the current month for all organizations.
           format: date-time
           type: string
+        storage_management_object_count_avg_sum:
+          description: Shows the average of all storage management objects over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic browser tests over all hours in the current month for all organizations.
           format: int64
