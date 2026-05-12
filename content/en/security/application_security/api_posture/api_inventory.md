@@ -1,5 +1,5 @@
 ---
-title: API Security Inventory
+title: API Posture Inventory
 description: Catalog API endpoints, services, and findings, and assess API security risk across your environment.
 aliases:
   - /security/application_security/api-inventory/
@@ -11,7 +11,7 @@ further_reading:
 
 API security relies on visibility. The biggest failure mode in most applications isn't missed vulnerabilities, it's missed APIs.
 
-[API Security Inventory][7] provides a comprehensive, up-to-date catalog and risk assessment of all API endpoints and services in your environment.
+[API Posture Inventory][7] provides a comprehensive, up-to-date catalog and risk assessment of all API endpoints and services in your environment.
 
 **Inventory** is comprised of explorers that correspond to distinct layers in the API security lifecycle:
 
@@ -63,7 +63,7 @@ For Amazon Web Services (AWS) API Gateway integration, you must set up the follo
 
 API Endpoints are discovered from the Datadog Software Catalog and specifically from API definitions [uploaded to Datadog][13]. For instructions on uploading API definitions, see [Create Entities][17].
 
-For information on what library versions are compatible with API Security Inventory, see [Enabling App and API Protection][11]. [Remote Configuration][1] is required.
+For information on what library versions are compatible with API Posture Inventory, see [Enabling App and API Protection][11]. [Remote Configuration][1] is required.
 
 |Technology|Minimum tracer version| Support for sensitive data scanning |
 |----------|----------|----------|
@@ -84,7 +84,7 @@ API Endpoints gathers security metadata about API traffic by leveraging the Data
 
 API Endpoints uses [Remote Configuration][1] to manage and configure scanning rules that detect sensitive data and authentication.
 
-To verify whether discovered endpoints are publicly accessible and require authentication, enable [Endpoint Scanning][19]. Endpoint Scanning actively scans eligible endpoints and enriches API Security Inventory with verified public accessibility, authentication status, HTTP response status, and last evaluation data.
+To verify whether discovered endpoints are publicly accessible and require authentication, enable [Endpoint Scanning][19]. Endpoint Scanning actively scans eligible endpoints and enriches API Posture Inventory with verified public accessibility, authentication status, HTTP response status, and last evaluation data.
 
 The following risks are calculated for each endpoint.
 
@@ -319,4 +319,4 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [16]: /integrations/guide/source-code-integration/
 [17]: /internal_developer_portal/software_catalog/set_up/create_entities/#through-the-datadog-ui
 [18]: /internal_developer_portal/software_catalog/entity_model/
-[19]: /security/application_security/api_security/endpoint_scanning/
+[19]: /security/application_security/api_posture/endpoint_scanning/
