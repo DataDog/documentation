@@ -84,12 +84,13 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
 {{% tab "Private Link Connectivity" %}}
 
-If your Databricks workspace is deployed using [Private Link Connectivity][25], Datadog cannot access the Databricks APIs directly. This requires a different setup approach using a Private Action Runner deployed in your environment.
+If your Databricks workspace is deployed using [Private Link Connectivity][25], Datadog cannot access the Databricks APIs directly. This requires using a [Private Action Runner][26] deployed in your environment.
 
 See [Private Link Connectivity (Preview)][15] for full setup instructions.
 
 [15]: /data_observability/jobs_monitoring/databricks/private_link
 [25]: https://docs.databricks.com/aws/en/security/network/front-end/front-end-private-connect
+[26]: https://docs.datadoghq.com/actions/private_actions/
 
 {{% /tab %}}
 

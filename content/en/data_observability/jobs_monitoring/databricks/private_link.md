@@ -77,7 +77,7 @@ All authentication to Datadog is handled by the underlying Private Action Runner
       1. Select the **admins** group.
       1. Click **Add members** and select the service principal added above.
       1. Click **Add**.
-   1. To access Databricks cost data, grant the service principal `CAN USE` on the SQL Warehouse and read access to [system tables][20] in Unity Catalog. See [Permissions][11] for details.
+   1. To access Databricks cost data or monitor serverless jobs, grant the service principal `CAN USE` on the SQL Warehouse and read access to [system tables][20] in Unity Catalog. See [Permissions][11] for details.
 
 ### Step 3: Set up the Private Action Runner
 
