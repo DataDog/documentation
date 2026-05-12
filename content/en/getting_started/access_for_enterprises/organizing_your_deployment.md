@@ -49,6 +49,8 @@ Some enterprises also use multiple orgs as a workaround when within-org access c
 - **Plan for consolidation.** If you have orgs that were created as workarounds for access control limitations, revisit whether they're still needed as Datadog's within-org controls expand.
 - **Org migrations have limitations.** If you choose to migrate your org setups in the future, it is possible to move configurations and assets like dashboards and monitors, but not historical telemetry data.
 
+For a detailed comparison of single-org and multi-org architectures, including access control models and decision criteria, see [Organization Topology][4].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -56,3 +58,4 @@ Some enterprises also use multiple orgs as a workaround when within-org access c
 [1]: /account_management/rbac/data_access
 [2]: /account_management/rbac/granular_access
 [3]: /account_management/rbac/permissions/#custom-roles
+[4]: /account_management/organization_topology/
