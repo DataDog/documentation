@@ -25,7 +25,7 @@ Before setting up server-side feature flags, ensure you have:
 - **Datadog Agent 7.55 or later** installed and running
 - **Datadog [API key][2]** configured
 - **APM tracing** [enabled in your application][4]
-- **Remote Configuration** enabled for your organization. Verify this in [Organization Settings][3].
+- **Remote Configuration** enabled for your organization. Verify this in [{{< ui >}}Organization Settings{{< /ui >}}][3].
 
 ## Agent configuration
 
