@@ -1148,6 +1148,31 @@ menu:
       url: /api/latest/key-management/
       identifier: key-management
       generated: true
+    - name: Validate API and application keys
+      url: '#validate-api-and-application-keys'
+      identifier: key-management-validate-api-and-application-keys
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateAPIKey
+        unstable: []
+        order: 21
+    - name: Validate API key
+      url: '#validate-api-key'
+      identifier: key-management-validate-api-key
+      parent: key-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - Validate
+        unstable:
+          - v2
+        order: 20
     - name: Update a personal access token
       url: '#update-a-personal-access-token'
       identifier: key-management-update-a-personal-access-token
@@ -5719,6 +5744,30 @@ menu:
           - SendInvitations
         unstable: []
         order: 8
+    - name: Update current user
+      url: '#update-current-user'
+      identifier: users-update-current-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCurrentUser
+        unstable: []
+        order: 13
+    - name: Get current user
+      url: '#get-current-user'
+      identifier: users-get-current-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCurrentUser
+        unstable: []
+        order: 12
     - name: Anonymize users
       url: '#anonymize-users'
       identifier: users-anonymize-users
@@ -7954,6 +8003,18 @@ menu:
           - ListTagPipelinesRulesets
         unstable: []
         order: 16
+    - name: List Cloud Cost Management tag descriptions
+      url: '#list-cloud-cost-management-tag-descriptions'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-descriptions
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagDescriptions
+        unstable: []
+        order: 42
     - name: List Cloud Cost Management OCI configs
       url: '#list-cloud-cost-management-oci-configs'
       identifier: cloud-cost-management-list-cloud-cost-management-oci-configs
@@ -14980,6 +15041,18 @@ menu:
           - GetMaintenance
         unstable: []
         order: 21
+    - name: Create backfilled maintenance
+      url: '#create-backfilled-maintenance'
+      identifier: status-pages-create-backfilled-maintenance
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateBackfilledMaintenance
+        unstable: []
+        order: 22
     - name: Schedule maintenance
       url: '#schedule-maintenance'
       identifier: status-pages-schedule-maintenance
@@ -15028,6 +15101,18 @@ menu:
           - DeleteDegradation
         unstable: []
         order: 17
+    - name: Create backfilled degradation
+      url: '#create-backfilled-degradation'
+      identifier: status-pages-create-backfilled-degradation
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateBackfilledDegradation
+        unstable: []
+        order: 23
     - name: Create degradation
       url: '#create-degradation'
       identifier: status-pages-create-degradation

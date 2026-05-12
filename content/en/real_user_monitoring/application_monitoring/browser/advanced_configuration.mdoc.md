@@ -1796,6 +1796,12 @@ After setup, the `service` and `version` on RUM events identify which micro fron
 -   **RUM Summary dashboard**: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
 -   **Custom dashboards**: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
 
+The `service` and `version` tags representing each micro frontend can also be found in the following [RUM without Limits][24] metrics:
+
+- `rum.measure.error`
+- `rum.measure.operation`
+- `rum.measure.operation.duration`
+
 [1]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
@@ -1819,3 +1825,4 @@ After setup, the `service` and `version` on RUM events identify which micro fron
 [21]: https://module-federation.io/
 [22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
 [23]: https://github.com/DataDog/build-plugins
+[24]: /real_user_monitoring/rum_without_limits/
