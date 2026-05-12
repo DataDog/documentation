@@ -14,6 +14,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/"
   tag: "Blog"
   text: "Best practices for creating custom detection rules with Datadog Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-detect-investigate-threats"
+  tag: "Learning Center"
+  text: "Detect and Investigate Threats with Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-custom-rules"
+  tag: "Learning Center"
+  text: "Write Custom Cloud SIEM Detection Rules"
+
 ---
 
 ## Overview

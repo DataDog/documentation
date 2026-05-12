@@ -1,6 +1,7 @@
 ---
 title: Agent only
 draft: true
+private: true
 ---
 
 ## Overview

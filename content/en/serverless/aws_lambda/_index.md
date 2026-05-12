@@ -37,6 +37,10 @@ further_reading:
   - link: https://www.datadoghq.com/blog/lambda-managed-instances
     tag: Blog
     text: Monitor AWS Lambda Managed Instances with Datadog
+  - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+    tag: "Learning Center"
+    text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
+
 ---
 
 Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lambda functions.

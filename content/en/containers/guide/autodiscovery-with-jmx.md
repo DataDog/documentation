@@ -299,7 +299,7 @@ If you cannot mount these files in the Agent container (for example, on Amazon E
 For example:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:latest-jmx
+FROM registry.datadoghq.com/agent:latest-jmx
 COPY <PATH_JMX_CONF_FILE> conf.d/tomcat.d/
 COPY <PATH_JMX_METRICS_FILE> conf.d/tomcat.d/
 ```

@@ -79,7 +79,9 @@ You can also [route logs to Snowflake using the Amazon S3 destination](#route-lo
 
 ## Set up the destination for your pipeline
 
-Set up the Amazon S3 destination and its environment variables when you create a pipeline. The information below is configured in the pipelines UI.
+Set up the Amazon S3 destination when you [set up a pipeline][11]. You can set up a pipeline in the [UI][8], using the [API][9], or with [Terraform][10]. The steps in this section are configured in the UI.
+
+After you select the Amazon S3 destination in the pipeline UI:
 
 1. Enter your S3 bucket name. If you configured Log Archives, it's the name of the bucket you created earlier.
 1. Enter the AWS region the S3 bucket is in.
@@ -114,7 +116,7 @@ Select an AWS authentication option. If you are only using the [user or role you
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -169,3 +171,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [5]: /observability_pipelines/configuration/set_up_pipelines/
 [6]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3
 [7]: /observability_pipelines/destinations/#event-batching
+[8]: https://app.datadoghq.com/observability-pipelines
+[9]: /api/latest/observability-pipelines/
+[10]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[11]: /observability_pipelines/configuration/set_up_pipelines/
