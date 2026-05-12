@@ -1499,26 +1499,31 @@ menu:
       identifier: bits_ai_bits_assistant
       parent: bits_ai
       weight: 4
+    - name: Bits Infrastructure
+      url: bits_ai/infrastructure
+      identifier: bits_ai_bits_infrastructure
+      parent: bits_ai
+      weight: 5
     - name: MCP Server
       url: bits_ai/mcp_server
       identifier: bits_ai_mcp_server
       parent: bits_ai
-      weight: 5
+      weight: 6
     - name: Setup
       url: bits_ai/mcp_server/setup
       identifier: bits_ai_mcp_server_setup
       parent: bits_ai_mcp_server
-      weight: 501
+      weight: 601
     - name: MCP Tools
       url: bits_ai/mcp_server/tools
       identifier: bits_ai_mcp_server_tools
       parent: bits_ai_mcp_server
-      weight: 502
+      weight: 602
     - name: Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
       parent: bits_ai
-      weight: 6
+      weight: 7
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2998,6 +3003,12 @@ menu:
       parent: private_actions
       identifier: private_actions_creds
       weight: 204
+    - name: Bits Infrastructure
+      url: infrastructure/bits_infrastructure
+      pre: bits-ai
+      identifier: bits_infrastructure
+      parent: infrastructure_heading
+      weight: 9000
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
