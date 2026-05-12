@@ -80,7 +80,7 @@ If your enterprise manages more than a handful of orgs and struggles with config
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/multi_organization/
-[2]: /account_management/multi_organization/#cross-organization-visibility
+[2]: /account_management/org_settings/cross_org_visibility/
 [3]: /dashboards/sharing/
-[4]: /dashboards/sharing/#embed-a-dashboard
+[4]: /dashboards/sharing/shared_dashboards/#embedded-shared-dashboards
 [5]: /account_management/organization_groups/

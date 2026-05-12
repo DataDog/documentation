@@ -134,7 +134,7 @@ Datadog is investing in keyless authentication, based on mapping between Datadog
 [1]: /account_management/api-app-keys/#scopes
 [2]: /account_management/org_settings/service_accounts/
 [3]: /data_security/real_user_monitoring/#authenticated-proxy
-[4]: /account_management/audit_trail/
+[4]: /account_management/governance_console/
 [5]: /account_management/safety_center/
 [6]: /account_management/audit_trail/
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs

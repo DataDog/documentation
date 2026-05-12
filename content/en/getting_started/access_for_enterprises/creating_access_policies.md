@@ -56,7 +56,7 @@ After your access policies are in place, you need visibility into how they are b
 
 ### Governance Console
 
-The [Governance Console][6] provides a centralized view of your organization's access posture. Use it to identify misconfigurations, track policy coverage, and monitor compliance with your access strategy.
+The [Governance Console][7] provides a centralized view of your organization's access posture. Use it to identify misconfigurations, track policy coverage, and monitor compliance with your access strategy.
 
 ### Audit Trail
 
@@ -86,3 +86,4 @@ For organizations with external compliance requirements (SOC 2, ISO 27001, HIPAA
 [4]: /account_management/api-app-keys/#scopes
 [5]: /account_management/org_settings/ip_allowlist/
 [6]: /account_management/audit_trail/
+[7]: /account_management/governance_console/
