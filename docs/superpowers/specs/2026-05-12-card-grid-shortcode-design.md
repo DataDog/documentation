@@ -1,6 +1,6 @@
 # Card Grid Shortcode Design
 
-Replace ~100 one-off Hugo partials that render link card grids with a single parameterized `card-grid`/`card` shortcode pair.
+Replace ~100 one-off Hugo partials that render link card grids with a single parameterized `card-grid`/`image-card` shortcode pair.
 
 ## Problem
 
@@ -10,12 +10,12 @@ Every link card grid on the docs site is a bespoke partial with hardcoded HTML. 
 
 ### Parent: `card-grid`
 
-Wraps one or more `card` child shortcodes in a flex container.
+Wraps one or more `image-card` child shortcodes in a flex container.
 
 ```
 {{< card-grid min_width="150px" >}}
-  {{< card href="/path/" src="integrations_logos/logo.svg" alt="Logo" >}}
-  {{< card href="/path2/" src="integrations_logos/logo2.png" alt="Logo 2" >}}
+  {{< image-card href="/path/" src="integrations_logos/logo.svg" alt="Logo" >}}
+  {{< image-card href="/path2/" src="integrations_logos/logo2.png" alt="Logo 2" >}}
 {{< /card-grid >}}
 ```
 
@@ -25,18 +25,18 @@ Wraps one or more `card` child shortcodes in a flex container.
 |---|---|---|---|
 | `min_width` | No | `150px` | Minimum card width before wrapping to fewer columns |
 
-### Child: `card`
+### Child: `image-card`
 
 Renders a single card inside a `card-grid`.
 
 ```
-{{< card href="/path/" src="integrations_logos/logo.svg" alt="Logo" img_width="200" >}}
+{{< image-card href="/path/" src="integrations_logos/logo.svg" alt="Logo" img_width="200" >}}
 ```
 
 Text-only card (no image):
 
 ```
-{{< card href="/path/" title="Containers" subtitle="(Preview)" >}}
+{{< image-card href="/path/" title="Containers" subtitle="(Preview)" >}}
 ```
 
 **Parameters:**
@@ -122,7 +122,7 @@ The `max-width: calc(min-width * 1.5)` prevents cards from growing more than 50%
 </div>
 ```
 
-### `layouts/shortcodes/card.html`
+### `layouts/shortcodes/image-card.html`
 
 ```go-html-template
 {{ $href := .Get "href" }}
@@ -156,10 +156,10 @@ Note: the `img.html` partial's `root` parameter needs the page context for build
 Hardcoded partials where each card is a static `<a class="card">` block with no conditional logic. These translate 1:1 into shortcode calls. For each page:
 
 1. Extract each card's `href`, `src`, `alt`, and any `width`/`title`/`subtitle` from the partial.
-2. Replace the `{{ partial }}` call in the content `.md` file with a `card-grid`/`card` shortcode block.
+2. Replace the `{{ partial }}` call in the content `.md` file with a `card-grid`/`image-card` shortcode block.
 3. Delete the old partial file.
 
-The ~10 data-driven partials (those using `slice`/`range`) also translate directly — each `dict` entry becomes a `card` shortcode call.
+The ~10 data-driven partials (those using `slice`/`range`) also translate directly — each `dict` entry becomes an `image-card` shortcode call.
 
 ### Deferred (investigate later)
 
@@ -182,8 +182,43 @@ The new `.card-grid` / `.card-grid-card` classes are additive. Existing `.cards-
 
 ## Testing
 
-- Run Hugo dev server and visually compare migrated pages against the current live site.
-- Spot-check responsive behavior at different viewport widths (verify column count adjusts fluidly).
+### E2E tests (Playwright)
+
+Follow the existing pattern in `e2e/components/`. Tests run against the Hugo dev server on `localhost:1313`.
+
+**Fixture page:** `content/en/dd_e2e/card_grid.md`
+
+A `draft: true`, `private: true` page containing multiple `card-grid`/`image-card` shortcode instances that exercise the variations:
+
+1. **Image grid (4 cards)** — basic case with `src`, `alt`, default `min_width`
+2. **Image grid (7 cards)** — odd count to test last-row centering
+3. **Text-only grid** — cards with `title` and `subtitle`, no `src`
+4. **Custom min_width** — grid with `min_width="200px"` to verify the CSS custom property
+5. **Custom img_width** — cards with non-default `img_width` values
+6. **Single card** — edge case, should be centered
+
+Use placeholder images from the existing `static/images/` directory (integration logos already there) so tests don't depend on external assets.
+
+**Test file:** `e2e/components/card-grid/card-grid.spec.ts`
+
+Tests to write:
+
+| Test | What it checks |
+|---|---|
+| Page renders as expected | Screenshot comparison of the full fixture page |
+| Correct number of cards rendered | Each grid section has the expected card count |
+| Cards are links | Every `.card-grid-card` is an `<a>` with a valid `href` |
+| Image cards render images | Cards with `src` contain an `<img>` element |
+| Text-only cards render title | Cards without `src` contain an `<h5>` with the title text |
+| Subtitle renders when present | Cards with `subtitle` contain a `<small>` element |
+| Custom min_width applies | Grid container has the correct `--card-min-width` CSS custom property |
+| Custom img_width applies | Image has the correct `max-width` style or `width` attribute |
+| Last row is centered | For the 7-card grid, the last row's cards are horizontally centered (compare card positions against container center) |
+| Responsive column count | At a narrow viewport (e.g., 400px), cards stack to fewer columns; at wide viewport, more columns appear |
+| Hover state | Card shows box-shadow on hover |
+
+### Manual testing
+
+- Run `yarn run start` and visually compare migrated pages against the current live site.
+- Spot-check responsive behavior at different viewport widths.
 - Verify `img.html` partial works correctly from within shortcode context (`$.Page` vs `.`).
-- Test text-only cards (no `src`), cards with title + subtitle, and image-only cards.
-- Test edge case: single card in a grid (should be centered).
