@@ -44,10 +44,10 @@ To add a logpoint, right-click the line number for a line of code in the source 
 
 The **Logpoint Editor** shows the following fields:
 
-- **Service** and **Environment**: target the service and environment where the logpoint runs. The list of services is filtered by the current file's language to show only compatible services.
-- **Message template**: descriptive text with variable references using the Dynamic Instrumentation expression language. The message is built from the runtime state immediately before the line of code is executed. Generated messages automatically pass through the Dynamic Instrumentation Sensitive Data Scanner.
-- **Condition** (optional): when defined, a log event is emitted only if the expression evaluates to `true`. Use it to capture events based on runtime state (for example, a particular user or transaction ID).
-- **Capture variables depth**: controls how deeply hierarchical data structures are traversed when capturing runtime values. Higher values provide more detail but require more capacity.
+- **Service** and **Environment**: Target the service and environment where the logpoint runs. The list of services is filtered by the current file's language to show only compatible services.
+- **Message template**: Descriptive text with variable references using the Dynamic Instrumentation expression language. The message is built from the runtime state immediately before the line of code is executed. Generated messages automatically pass through the Dynamic Instrumentation Sensitive Data Scanner.
+- **Condition** (optional): When defined, a log event is emitted only if the expression evaluates to `true`. Use it to capture events based on runtime state (for example, a particular user or transaction ID).
+- **Capture variables depth**: Controls how deeply hierarchical data structures are traversed when capturing runtime values. Higher values provide more detail but require more capacity.
 
 The editor warns you when no service or environment matches the file's language, or when the remote service is associated with a different repository than the local workspace. You can still create the logpoint in those cases.
 
