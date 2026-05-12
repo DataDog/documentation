@@ -293,7 +293,7 @@ gates:
 
 ## Carryforward
 
-<div class="alert alert-warning">Carryforward is in <strong>beta</strong>. The feature is not yet fully monitored, so coverage data produced by carryforward may be inaccurate, delayed, or temporarily unavailable. Behavior and configuration options may change before general availability. Datadog recommends treating carryforward as a best-effort signal during the beta period and not relying on it for merge-blocking decisions.</div>
+<div class="alert alert-warning">Carryforward is in <strong>beta</strong> and subject to change.</div>
 
 You can enable [carryforward][4] in the configuration file to reuse coverage data from ancestor commits when not every CI job runs for a commit. Carryforward operates on [flags][3], so every report involved must be tagged with `--flags`.
 
