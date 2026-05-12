@@ -32,7 +32,7 @@ The extension contributes a dedicated **Datadog Live Debugger** activity to the 
 
 For lines that have a logpoint defined in the current session, the extension shows a status icon in the editor gutter and a code lens above the line.
 
-- Right-click the line number of any line of code and select **Datadog Live Debugger > Create Logpoint** to start creating a logpoint on that line.
+- Right-click the line number of any line of code and select **Datadog Live Debugger > Create Logpoint** to create a logpoint on that line.
 - For a line that already has a logpoint, the same submenu offers **Edit**, **Delete**, and either **Enable** or **Disable** depending on the logpoint's current state.
 - Click the code lens above the line to reveal the logpoint in the Live Debugger views.
 
