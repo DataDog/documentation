@@ -66,7 +66,7 @@ Secret Scanning is enabled by default and runs in the background whenever you op
 
 {{< img src="/ide_plugins/vscode/secret-scanning-batch-analysis.png" alt="Batch analysis report with a Secret Scanning section listing findings per file" style="width:100%;" >}}
 
-No local configuration is required; the scan rules are fetched from the Datadog backend. All text files are scanned, binary files are skipped.
+No local configuration is required; the scan rules are fetched from Datadog. All text files are scanned, and binary files are skipped.
 
 <div class="alert alert-info">Secret Scanning requires you to be signed in to Datadog, because detection rules are fetched from your Datadog organization.</div>
 
