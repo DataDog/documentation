@@ -19,18 +19,18 @@ API security relies on visibility. The biggest failure mode in most applications
     
     Each API endpoint is a unique entry point where data or functionality can be accessed. The API Endpoints explorer enables shadow API (undocumented endpoints with no API definition and not detected from Amazon API Gateway) and orphan API (documented endpoints without traffic) detection, asset management, and risk prioritization at the granularity attackers exploit.
 
-2. **Services:** *Where do risky APIs live, who owns them, and how severe is their collective risk?*
+2. **[Services][20]:** *Where do risky APIs live, who owns them, and how severe is their collective risk?*
     
     A service groups multiple endpoints into a logical or deployed component (typically aligned with a microservice, app, or backend system).
-3. **API Findings:** *Which API weaknesses, attacks, or misconfigurations require investigation or remediation?*
+3. **[API Findings][21]:** *Which API weaknesses, attacks, or misconfigurations require investigation or remediation?*
     
     API Findings are security detections and policy evaluation results tied to endpoints. These represent known or inferred weaknesses or threats in API behavior or configuration.
 
 These explorers correspond to the common API security operational flow: 
 
 1. **Discover:** Identify what endpoints exist using **API Endpoints**.
-2. **Contextualize:** Identify ownership and dependencies using **Services**.
-3. **Detect and respond:** See where misconfigurations are, and where attacks could occur, using **API Findings**.
+2. **Contextualize:** Identify ownership and dependencies using **[Services][20]**.
+3. **Detect and respond:** See where misconfigurations are, and where attacks could occur, using **[API Findings][21]**.
 
 ## API Endpoints
 
@@ -239,66 +239,6 @@ Custom authentication detection is possible by configuring [Endpoint Tagging Rul
 |PHP       | v1.15.0                |
 |Golang    | v2.4.0                 |
 
-## Services
-
-The **Services** explorer shows where findings from API Endpoints, vulnerabilities, and runtime signals converge by service. Consider it the operational risk view of your applications.
-
-Review your services for the following:
-
-- **Vulnerability risk:** The **Vulnerability Risk** column shows aggregated SCA and IAST results for each service. Vulnerable services have components needing patching or upgrading.
-- **Signals and attacks:** Click a service to see charts showing ongoing detections for active exploit attempts or recurring attack patterns.
-- **Sensitive data exposure:** Services processing PII (such as SSNs or emails) demand stricter controls and monitoring.
-- **Coverage and mode:** Use the **App & API Protection In Monitoring Mode**, **App & API Protection In Blocking Mode**, and the **Inactive** facet to identify where App and API Protection is enabled and enforcing runtime protection.
-- **Trend graphs:** The **Trend** column indicates activity and attack frequency over time.
-
-### Coverage
-
-The **Coverage** column shows the active protection and analysis capabilities for each service. Use **Coverage** to measure the completeness of your protection stack.
-
-For example, here are some use cases for **Coverage**:
-
-- **Runtime protection coverage with App and API Protection**: 
-  - Identify the services in **Monitoring** or **Blocking** mode.
-  - Move ready-to-block services into blocking mode to actively stop attacks.
-  - Investigate inactive services to see if instrumentation or configuration gaps are leaving APIs exposed.
-- **Software Composition Analysis (SCA) coverage**:
-  - Track the services with analyzed open source dependencies.
-  - Enable SCA for unscanned services to detect vulnerable libraries early.
-  - Prioritize patching inactive services with high dependency risk.
-- **Runtime Code Analysis (IAST) coverage**:
-  - Pinpoint where code-level vulnerability detection is missing.
-  - Enable IAST for production or high-risk apps to uncover exploitable issues in live traffic.
-  - Use results to confirm whether library vulnerabilities are actually reachable in code.
-
-## API Findings
-
-**API Findings** provides a central triage view of all detected API risks across definitions, gateways, and live traffic. It provides a set of default rules to detect common vulnerabilities and misconfigurations. You can also set up [custom rules][12] to adapt to specific use cases.
-
-**API Findings** columns:
-
-- **Severity:** Each issue is ranked by risk.
-- **Endpoints:** Shows how many endpoints are affected and their services.
-- **Status and Ticketing:** `Open` or `In Progress` tracks remediation progress and workflow integration.
-
-Use the **Service** facet to see each service's endpoints to identify ownership and prioritize by business impact.
-
-### Common operations
-
-Click a finding to view its details and perform a workflow such as Validate > Investigate > Fix > Track:
-
-1. Validate:
-   - Review **What Happened** and **Detected In** to ensure the detection is accurate (service, endpoint, method).
-   - In **Next Steps**, choose whether to **Mute**, **Create Ticket**, or **Run Workflow** depending on ownership and impact.
-2. Investigate:
-   - Use the **Context** tab to examine the endpoint snapshot and attributes (method, path, authentication flags, tags).
-   - **Dectected In** provides information for routing ownership and remediation.
-   - In **Detection Rule Query**, you can edit an API finding rule by clicking **See Detection Rule**.
-3. Fix: 
-   - Follow the guidance under **Remediation**.
-4. Track:
-   - Use **Create Ticket** to link the issue to your tracking system.
-   - Use **Reference Links** for developer education or code review.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -312,7 +252,6 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [9]: /integrations/amazon-web-services
 [10]: /integrations/amazon-api-gateway
 [11]: /security/application_security/setup/
-[12]: /security/application_security/policies/custom_rules/
 [13]: /internal_developer_portal/software_catalog/entity_model/native_entities/?tab=api#native-entity-types
 [14]: https://app.datadoghq.com/security/appsec/policies/scanners
 [15]: https://app.datadoghq.com/security/configuration/asm/trace-tagging
@@ -320,3 +259,5 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [17]: /internal_developer_portal/software_catalog/set_up/create_entities/#through-the-datadog-ui
 [18]: /internal_developer_portal/software_catalog/entity_model/
 [19]: /security/application_security/api_posture/endpoint_scanning/
+[20]: /security/application_security/api_posture/api_inventory/services/
+[21]: /security/application_security/api_posture/api_inventory/api_findings/
