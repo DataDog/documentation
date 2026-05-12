@@ -125,7 +125,7 @@ To convert timestamps in string format to timestamp format:
     ```
     .timestamp = parse_timestamp!(.timestamp, format: "%+")
     ```
-    See [Parse timestamp][13] for more information.
+    See [parse_timestamp][13] for more information.
 
 ## Secret defaults
 
