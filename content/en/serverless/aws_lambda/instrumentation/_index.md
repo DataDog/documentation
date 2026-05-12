@@ -29,7 +29,7 @@ The quick start process configures your Lambda functions on the fly. To instrume
 
 ## Instrumentation instructions
 
-{{< card-grid >}}
+{{< card-grid min_width="225px" >}}
   {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/serverless/installation/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
   {{< image-card href="/serverless/installation/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}

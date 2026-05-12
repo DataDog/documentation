@@ -66,7 +66,7 @@ For other environments, see the [Integrations][14] documentation for that enviro
 
 Set up your application to send [traces][2] using one of the following official Datadog SDKs:
 
-{{< card-grid >}}
+{{< card-grid min_width="225px" >}}
   {{< image-card href="/tracing/trace_collection/dd_libraries/java" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="/tracing/trace_collection/dd_libraries/python" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/tracing/trace_collection/dd_libraries/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}

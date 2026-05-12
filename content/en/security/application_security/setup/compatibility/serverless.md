@@ -9,7 +9,7 @@ aliases:
 
 App and API Protection provides serverless capability for the following platforms and libraries:
 
-{{< card-grid >}}
+{{< card-grid min_width="225px" >}}
   {{< image-card href="/security/application_security/serverless/#aws-lambda" src="integrations_logos/amazon_lambda.png" alt="AWS Lambda" img_width="200" >}}
   {{< image-card href="/security/application_security/serverless/#google-cloud-run" src="integrations_logos/google_cloud_run.png" alt="Google Cloud Run" img_width="200" >}}
   {{< image-card href="/security/application_security/serverless/#azure-app-service" src="integrations_logos/azure_app_services.png" alt="Microsoft Azure App Service" img_width="200" >}}

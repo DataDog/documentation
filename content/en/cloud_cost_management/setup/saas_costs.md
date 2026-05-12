@@ -60,7 +60,7 @@ To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for
 
 See the respective documentation for your cloud provider:
 
-{{< card-grid >}}
+{{< card-grid min_width="225px" >}}
   {{< image-card href="/cloud_cost_management/setup/aws/" src="integrations_logos/amazon-web-services_avatar.svg" alt="aws" img_width="50" >}}
   {{< image-card href="/cloud_cost_management/setup/azure/" src="integrations_logos/azure_avatar.svg" alt="azure" img_width="50" >}}
   {{< image-card href="/cloud_cost_management/setup/google_cloud/" src="integrations_logos/google-cloud-platform_avatar.svg" alt="google cloud" img_width="50" >}}

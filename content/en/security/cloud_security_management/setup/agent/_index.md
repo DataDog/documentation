@@ -11,7 +11,7 @@ Use the following instructions to enable Cloud Security features (Misconfigurati
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
-{{< card-grid >}}
+{{< card-grid min_width="225px" >}}
   {{< image-card href="/security/cloud_security_management/setup/agent/kubernetes/" src="integrations_logos/kubernetes.png" alt="Kubernetes" >}}
   {{< image-card href="/security/cloud_security_management/setup/agent/docker/" src="integrations_logos/docker.png" alt="Docker" >}}
   {{< image-card href="/security/cloud_security_management/setup/agent/ecs_ec2/" src="integrations_logos/amazon_ecs.png" alt="ECS EC2" >}}

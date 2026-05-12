@@ -67,7 +67,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 2. To enable log collection, change `logs_enabled: false` to `logs_enabled: true` in your Agent's main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][2] for more information and examples.
 3. Follow your application language installation instructions to configure a logger and start generating logs:
 
-{{< card-grid >}}
+{{< card-grid min_width="120px" >}}
   {{< image-card href="/logs/log_collection/java" src="integrations_logos/java.png" alt="Java" >}}
   {{< image-card href="/logs/log_collection/python" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/logs/log_collection/go" src="integrations_logos/go-metro.png" alt="go" >}}
@@ -92,7 +92,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 
 Choose a container or orchestrator provider and follow their dedicated log collection instructions:
 
-{{< card-grid >}}
+{{< card-grid min_width="120px" >}}
   {{< image-card href="/agent/docker/log/" src="integrations_logos/docker.png" alt="Docker" >}}
   {{< image-card href="/agent/kubernetes/daemonset_setup/?tab=k8sfile#log-collection" src="integrations_logos/kubernetes.png" alt="Kubernetes" >}}
   {{< image-card href="/integrations/openshift/#log-collection" src="integrations_logos/openshift.png" alt="Red Hat OpenShift" >}}
@@ -127,7 +127,7 @@ Use the Datadog Forwarder, an AWS Lambda function that ships logs from your envi
 
 Select your Cloud provider below to see how to automatically collect your logs and forward them to Datadog:
 
-{{< card-grid >}}
+{{< card-grid min_width="120px" >}}
   {{< image-card href="/integrations/amazon_web_services/?tab=allpermissions#log-collection" src="integrations_logos/amazon_web_services.png" alt="Docker" >}}
   {{< image-card href="/integrations/azure/?tab=azurecliv20#log-collection" src="integrations_logos/azure.png" alt="Kubernetes" >}}
   {{< image-card href="/integrations/google_cloud_platform/?tab=datadogussite#log-collection" src="integrations_logos/google_cloud_platform.png" alt="Amazon ECS" >}}

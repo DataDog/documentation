@@ -4,7 +4,7 @@ title: Setup Data Streams Monitoring
 
 ### By language
 
-{{< card-grid >}}
+{{< card-grid min_width="225px" >}}
   {{< image-card href="/data_streams/java/" src="integrations_logos/java.png" alt="java" img_width="200" >}}
   {{< image-card href="/data_streams/python" src="integrations_logos/python.png" alt="Python" img_width="200" >}}
   {{< image-card href="/data_streams/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" img_width="200" >}}
@@ -16,7 +16,7 @@ title: Setup Data Streams Monitoring
 
 ### By technology
 
-{{< card-grid >}}
+{{< card-grid min_width="80px" >}}
   {{< image-card href="/data_streams/setup/technologies/kafka/" src="integrations_logos/kafka.png" alt="Kafka" img_width="200" >}}
   {{< image-card href="/data_streams/setup/technologies/sqs/" src="integrations_logos/sqs.png" alt="Amazon SQS" img_width="200" >}}
   {{< image-card href="/data_streams/setup/technologies/rabbitmq/" src="integrations_logos/rabbitmq.png" alt="RabbitMQ" img_width="200" >}}

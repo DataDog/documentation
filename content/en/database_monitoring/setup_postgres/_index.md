@@ -22,7 +22,7 @@ disable_sidebar: true
 
 To learn how to set up Database Monitoring on a Postgres database, select your hosting type:
 
-{{< card-grid >}}
+{{< card-grid min_width="100px" >}}
   {{< image-card href="/database_monitoring/setup_postgres/selfhosted" src="integrations_logos/postgres.png" alt="Selfhosted" title="Self-hosted" >}}
   {{< image-card href="/database_monitoring/setup_postgres/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
   {{< image-card href="/database_monitoring/setup_postgres/aurora" src="integrations_logos/aurora.png" alt="Aurora" >}}
