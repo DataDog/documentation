@@ -20,7 +20,7 @@ Fargate is charged based on the concurrent number of monitored tasks in ECS Farg
 
 ### GKE Autopilot
 
-Billing of [GKE Autopilot][5] environments is the same as that of [GKE Standard][6].
+[GKE Autopilot][5] is billed as a Serverless Apps workload, priced per monthly active pod rather than per container or host. Use [Container Discovery Management][8] to control the number of billable pods. **Note**: all containers in a given Pod must be excluded from metric collection for that Pod to avoid billable usage. For current pricing, see the [Serverless Monitoring pricing page][9].
 
 ## Frequently asked questions
 
@@ -65,3 +65,4 @@ For billing questions, contact your [Customer Success][3] Manager.
 [6]: /integrations/google_kubernetes_engine/
 [7]: /help/
 [8]: /containers/guide/container-discovery-management
+[9]: https://www.datadoghq.com/pricing/?product=serverless-monitoring&tab=gke-autopilot#products
