@@ -1,7 +1,7 @@
 ---
 title: Point Plot Widget
 description: "Visualize individual events over time to spot anomalies and outliers without aggregation."
-widget_type: "pointplot"
+widget_type: "point_plot"
 aliases:
 - /graphing/widgets/point_plot/
 further_reading:
@@ -90,4 +90,4 @@ This widget can be used with the **[Dashboards API][3]**. See the following tabl
 [1]: /dashboards/widgets/timeseries/
 [2]: /dashboards/guide/context-links/
 [3]: /api/latest/dashboards/
-[4]: /dashboards/graphing_json/widget_json/
+[4]: /dashboards/guide/graphing_json/#widget-json-schema
