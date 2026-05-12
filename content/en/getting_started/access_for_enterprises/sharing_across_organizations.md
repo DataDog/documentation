@@ -64,7 +64,7 @@ Dashboards can be [embedded][4] in external applications or portals, or even ano
 
 ## Organization Groups (Preview)
 
-For enterprises with many Datadog organizations, [Organization Groups][5] (in Preview) provides a governance layer across your multi-org deployment. Organization Groups allow you to manage policies, configurations, and access controls centrally and cascade them to child orgs, reducing the need to configure each org individually.
+For enterprises with many Datadog organizations, [Organization Groups][5] (in Preview) provide a governance layer across your multi-org deployment. Organization Groups allow you to manage policies, configurations, and access controls centrally and cascade them to child orgs, reducing the need to configure each org individually.
 
 If your enterprise manages more than a handful of orgs and struggles with configuration consistency, contact your Datadog account team to learn more about Organization Groups.
 

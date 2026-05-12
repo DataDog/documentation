@@ -55,7 +55,7 @@ To avoid this, establish a break-glass **admin override team** (such as "Platfor
 
 ## Request Access (Preview)
 
-For situations where users need temporary or elevated access beyond their standard role: such as responding to an urgent incident or debugging a production issue in another team's domain: Datadog offers Request Access (in Preview). This allows end users to request access to resources they don't have, with approval workflows for administrators.
+Datadog offers Request Access (in Preview) for situations where users need temporary or elevated access beyond their standard role, such as responding to an urgent incident or debugging a production issue in another team's domain. This allows end users to request access to resources they don't have, with approval workflows for administrators.
 
 ## Recommendations
 
