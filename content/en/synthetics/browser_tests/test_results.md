@@ -27,7 +27,7 @@ On the **Activity** tab, you can see:
 - A **Timeline** of alert triggers, recoveries, and test modifications.
 - A detail panel for the selected alert showing what happened, the failing result, and suggested next steps for investigation.
 
-{{< img src="synthetics/browser_tests/synthetics_timeline_alert_bits_sre.mp4" alt="The Activity tab on a browser Test Details page showing Global Uptime, the alert timeline, and a failure detail panel with Bits AI SRE investigation" video=true style="width:100%;" >}}
+{{< img src="synthetics/browser_tests/synthetics_bits_sre.png" alt="The Activity tab on a browser Test Details page showing Global Uptime, the alert timeline, and a failure detail panel with Bits AI SRE investigation" style="width:100%;" >}}
 
 ## Test runs
 
