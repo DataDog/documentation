@@ -2965,6 +2965,18 @@ menu:
           - BulkExportSecurityMonitoringRules
         unstable: []
         order: 61
+    - name: Bulk delete security monitoring rules
+      url: '#bulk-delete-security-monitoring-rules'
+      identifier: security-monitoring-bulk-delete-security-monitoring-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkDeleteSecurityMonitoringRules
+        unstable: []
+        order: 97
     - name: Create a detection rule
       url: '#create-a-detection-rule'
       identifier: security-monitoring-create-a-detection-rule
@@ -5707,6 +5719,30 @@ menu:
           - SendInvitations
         unstable: []
         order: 8
+    - name: Update current user
+      url: '#update-current-user'
+      identifier: users-update-current-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCurrentUser
+        unstable: []
+        order: 13
+    - name: Get current user
+      url: '#get-current-user'
+      identifier: users-get-current-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCurrentUser
+        unstable: []
+        order: 12
     - name: Anonymize users
       url: '#anonymize-users'
       identifier: users-anonymize-users
@@ -7894,6 +7930,18 @@ menu:
           - ValidateQuery
         unstable: []
         order: 22
+    - name: List tag pipeline ruleset statuses
+      url: '#list-tag-pipeline-ruleset-statuses'
+      identifier: cloud-cost-management-list-tag-pipeline-ruleset-statuses
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagPipelinesRulesetsStatus
+        unstable: []
+        order: 41
     - name: Reorder tag pipeline rulesets
       url: '#reorder-tag-pipeline-rulesets'
       identifier: cloud-cost-management-reorder-tag-pipeline-rulesets
@@ -7930,6 +7978,18 @@ menu:
           - ListTagPipelinesRulesets
         unstable: []
         order: 16
+    - name: List Cloud Cost Management OCI configs
+      url: '#list-cloud-cost-management-oci-configs'
+      identifier: cloud-cost-management-list-cloud-cost-management-oci-configs
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostOCIConfigs
+        unstable: []
+        order: 39
     - name: Update Google Cloud Usage Cost config
       url: '#update-google-cloud-usage-cost-config'
       identifier: cloud-cost-management-update-google-cloud-usage-cost-config
@@ -8266,6 +8326,18 @@ menu:
           - DeleteCustomAllocationRule
         unstable: []
         order: 26
+    - name: List custom allocation rule statuses
+      url: '#list-custom-allocation-rule-statuses'
+      identifier: cloud-cost-management-list-custom-allocation-rule-statuses
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCustomAllocationRulesStatus
+        unstable: []
+        order: 40
     - name: Reorder custom allocation rules
       url: '#reorder-custom-allocation-rules'
       identifier: cloud-cost-management-reorder-custom-allocation-rules
@@ -9016,6 +9088,23 @@ menu:
         operationids:
           - GetDomainAllowlist
         unstable: []
+        order: 1
+    - name: Email Transport
+      url: /api/latest/email-transport/
+      identifier: email-transport
+      generated: true
+    - name: Ingest email transport webhook events
+      url: '#ingest-email-transport-webhook-events'
+      identifier: email-transport-ingest-email-transport-webhook-events
+      parent: email-transport
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateEmailTransportWebhookIntake
+        unstable:
+          - v2
         order: 1
     - name: Entity Risk Scores
       url: /api/latest/entity-risk-scores/
@@ -9892,75 +9981,6 @@ menu:
           - v2
         operationids:
           - ListIncidentServices
-        unstable:
-          - v2
-        order: 4
-    - name: Incident Teams
-      url: /api/latest/incident-teams/
-      identifier: incident-teams
-      generated: true
-    - name: Update an existing incident team
-      url: '#update-an-existing-incident-team'
-      identifier: incident-teams-update-an-existing-incident-team
-      parent: incident-teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateIncidentTeam
-        unstable:
-          - v2
-        order: 3
-    - name: Get details of an incident team
-      url: '#get-details-of-an-incident-team'
-      identifier: incident-teams-get-details-of-an-incident-team
-      parent: incident-teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetIncidentTeam
-        unstable:
-          - v2
-        order: 1
-    - name: Delete an existing incident team
-      url: '#delete-an-existing-incident-team'
-      identifier: incident-teams-delete-an-existing-incident-team
-      parent: incident-teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteIncidentTeam
-        unstable:
-          - v2
-        order: 2
-    - name: Create a new incident team
-      url: '#create-a-new-incident-team'
-      identifier: incident-teams-create-a-new-incident-team
-      parent: incident-teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateIncidentTeam
-        unstable:
-          - v2
-        order: 5
-    - name: Get a list of all incident teams
-      url: '#get-a-list-of-all-incident-teams'
-      identifier: incident-teams-get-a-list-of-all-incident-teams
-      parent: incident-teams
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListIncidentTeams
         unstable:
           - v2
         order: 4
@@ -15188,6 +15208,22 @@ menu:
           - ListStatusPages
         unstable: []
         order: 3
+    - name: Storage Management
+      url: /api/latest/storage-management/
+      identifier: storage-management
+      generated: true
+    - name: Enable Storage Management for a bucket
+      url: '#enable-storage-management-for-a-bucket'
+      identifier: storage-management-enable-storage-management-for-a-bucket
+      parent: storage-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertSyncConfig
+        unstable: []
+        order: 1
     - name: Teams
       url: /api/latest/teams/
       identifier: teams

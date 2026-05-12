@@ -157,7 +157,7 @@ If you configured the file log receiver, add a logs pipeline:
 
 {{< mapping-table resource="sqlserver.csv">}}
 
-See [OpenTelemetry Metrics Mapping][4] for more information.
+For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][4].
 
 ## Further reading
 
