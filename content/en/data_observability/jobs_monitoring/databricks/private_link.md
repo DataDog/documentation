@@ -1,6 +1,6 @@
 ---
-title: "Private Link Environments"
-description: "Set up Data Observability: Jobs Monitoring for Databricks workspaces deployed in Private Link environments using a Private Action Runner."
+title: "Private Link Connectivity"
+description: "Set up Data Observability: Jobs Monitoring for Databricks workspaces deployed with Private Link Connectivity using a Private Action Runner."
 further_reading:
     - link: '/data_observability/jobs_monitoring/databricks'
       tag: 'Documentation'
@@ -10,9 +10,9 @@ further_reading:
       text: 'Private Action Runners'
 ---
 
-<div class="alert alert-info">Monitoring Databricks in Private Link environments is in Preview.</div>
+<div class="alert alert-info">Monitoring Databricks via Private Link Connectivity is in Preview.</div>
 
-Databricks workspaces deployed in [Private Link environments][1] are isolated from the public internet, which prevents Datadog crawlers from accessing the Databricks API directly. To monitor these workspaces, deploy a [Private Action Runner][2] (PAR) in your environment. The runner polls Datadog for requests, executes them against the Databricks API locally, and sends the results back through your existing [Datadog VPC Endpoint][3].
+Databricks workspaces deployed using [Private Link Connectivity][1] are isolated from the public internet, which prevents Datadog from accessing the Databricks APIs directly. To monitor these workspaces, deploy a [Private Action Runner][2] (PAR) in your environment. The runner polls Datadog for requests, executes them against the Databricks API locally, and sends the results back through your existing [Datadog VPC Endpoint][3].
 
 ## Architecture
 
@@ -70,12 +70,14 @@ All authentication to Datadog is handled by the underlying Private Action Runner
         ```
         Make note of the secret path (AWS ARN or AKV URL). You enter this in the integration tile or set it as the `DATABRICKS_SECRET_PATH` environment variable on the runner container or pod.
       - **Environment variables**: Set `DATABRICKS_CLIENT_ID` and `DATABRICKS_CLIENT_SECRET` directly on the runner container or pod. When using this method, leave the **Secret Path** field blank in the integration tile.
-1. Add the service principal as a workspace admin. Alternatively, assign more granular permissions following the instructions in [Permissions][11].
-   1. Click the **Identity and access** tab.
-   1. Next to **Groups**, click **Manage**.
-   1. Select the **admins** group.
-   1. Click **Add members** and select the service principal added above.
-   1. Click **Add**.
+1. Provision workspace access and entitlements for the service principal. See [Permissions][11] for full details.
+   1. Grant the service principal **Workspace Admin** privileges. This allows Datadog to manage init script installations and updates automatically. Alternatively, assign more [granular permissions][11] for monitoring jobs, clusters, and queries.
+      1. Click the **Identity and access** tab.
+      1. Next to **Groups**, click **Manage**.
+      1. Select the **admins** group.
+      1. Click **Add members** and select the service principal added above.
+      1. Click **Add**.
+   1. To access Databricks cost data, grant the service principal `CAN USE` on the SQL Warehouse and read access to [system tables][20] in Unity Catalog. See [Permissions][11] for details.
 
 ### Step 3: Set up the Private Action Runner
 
@@ -158,6 +160,7 @@ Set up your Private Action Runner using **one** of the following options.
       1. Enter the **Workspace Name**, **Workspace URL**, and **System Tables SQL Warehouse ID**.
       1. Enable the products you are interested in.
          **Note:** Model Serving behind Private Link is not supported at this time.
+      1. If you enabled **Jobs Monitoring**, deploy the Datadog Agent init script to monitor jobs and clusters on classic compute. Follow the instructions in [Install the Datadog Agent][19] to set up the init script, then restart any running clusters for the changes to take effect.
    1. Click **Save Databricks Workspace**.
    1. Verify there are no errors on save.
 
@@ -186,3 +189,5 @@ After completing the setup, jobs and cluster information should appear in [Data 
 [15]: https://app.datadoghq.com/data-jobs/
 [16]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=docker#manage-access
 [17]: https://app.datadoghq.com/organization-settings/remote-config
+[19]: /data_observability/jobs_monitoring/databricks/#install-the-datadog-agent
+[20]: https://docs.databricks.com/aws/en/admin/system-tables/
