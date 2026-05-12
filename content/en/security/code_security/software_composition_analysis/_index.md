@@ -119,6 +119,19 @@ Use the Library Inventory to understand which dependencies you rely on, where th
 
 To learn more about how the inventory is generated, how Static and Runtime data differ, and how to interpret the library details (usage, vulnerabilities, licenses, versions, and OpenSSF score), see [Library Inventory][14].
 
+### Export a Software Bill of Materials (SBOM)
+
+Export a Software Bill of Materials (SBOM) of your third-party libraries directly from the [Library Inventory][8]. The exported SBOM includes libraries detected both statically (via Static SCA) and at runtime (via Runtime SCA), giving you a single, comprehensive view of your software supply chain.
+
+Datadog supports the following SBOM formats:
+
+- **CycloneDX 1.6**
+- **SPDX 2.3**
+
+Use the exported SBOM to share dependency data with downstream consumers, satisfy compliance and regulatory requirements, or feed into other supply chain tooling.
+
+For details on how to generate and download an SBOM, see [Library Inventory][29].
+
 ### Explore the full CVE catalog
 
 Use the [CVE Explorer][15] to search every CVE and security advisory tracked by Datadog, including those that do not affect your environment. This helps you assess exposure to newly published vulnerabilities before they appear in your findings.
@@ -184,7 +197,7 @@ Software Composition Analysis (SCA) supports the following languages:
 
 ## Customize your configuration
 
-You can exclude paths from Static SCA analysis by configuring `ignore-paths` in Datadog or in a `code-security.datadog.yaml` file. For the full SCA configuration reference, see [Software Composition Analysis (SCA) Configuration][29]. For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][28].
+You can exclude paths from Static SCA analysis by configuring `ignore-paths` in Datadog or in a `code-security.datadog.yaml` file. For the full SCA configuration reference, see [Software Composition Analysis (SCA) Configuration][30]. For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][28].
 
 ## Next steps
 
@@ -223,4 +236,5 @@ You can exclude paths from Static SCA analysis by configuring `ignore-paths` in 
 [26]: https://github.com/DataDog/guarddog
 [27]: /security/code_security/software_composition_analysis/cve_explorer/
 [28]: /security/code_security/guides/configuration/
-[29]: /security/code_security/software_composition_analysis/configuration/
+[29]: /security/code_security/software_composition_analysis/library_inventory/#export-a-software-bill-of-materials-sbom
+[30]: /security/code_security/software_composition_analysis/configuration/
