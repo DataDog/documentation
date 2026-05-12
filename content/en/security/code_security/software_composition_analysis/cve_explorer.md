@@ -22,7 +22,7 @@ To access the CVE Explorer, navigate to [Detection Coverage > CVE Explorer][2].
 
 ## Search and filter CVEs
 
-Use the search bar to find a specific CVE or advisory ID (for example, `CVE-2025-24813` or a GHSA identifier). You can filter the list by:
+Use the search bar to find a specific CVE or advisory ID (for example, `CVE-2025-24813` or a GHSA identifier), or search by package name to see all advisories affecting a specific library. You can filter the list by:
 
 | Filter | Description |
 |--------|-------------|
