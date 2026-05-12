@@ -53,6 +53,41 @@ Datadog bills based on the average number of functions per hour across the month
 
 Billing for serverless APM is based on the sum of AWS Lambda invocations connected to APM ingested spans in a given month. You are also billed for the total number of [indexed spans][4] submitted to the Datadog APM service exceeding the bundled quantity at the end of the month. There are no billable [APM Hosts][4] when using serverless.
 
+## Serverless Apps
+
+Serverless Apps billing applies to serverless-managed compute platforms where Datadog charges per active app instance rather than per host or container. Supported workloads include:
+
+- Azure App Service
+- Azure Functions
+- Azure Container Apps
+- Google Cloud Run
+- Google Cloud Functions
+- Google Kubernetes Engine (GKE) Autopilot
+- AWS Fargate
+
+For current pricing, see the [Serverless Monitoring pricing page][16].
+
+### App instance definition
+
+An app instance is a deployable unit that runs on a serverless-managed compute platform—for example, an Azure Web App, an Azure Function App, a Cloud Run container replica, or a Kubernetes pod on GKE Autopilot. Each combination of app name, region, and environment counts as a separate app instance.
+
+### Metering
+
+Datadog samples usage in 5-minute intervals and calculates the average number of concurrent active app instances over the month. An app instance observed in an active state during one or more intervals contributes to the monthly average proportional to the time it ran.
+
+Two billable categories apply:
+
+- **Serverless Apps (Infra)**: billed when Datadog receives metrics from the workload, through a cloud integration's crawled metrics, a sidecar Agent (Fargate), or the Datadog Agent (GKE Autopilot).
+- **Serverless Apps APM**: billed when an app instance generates APM spans. Logs-only workloads are not counted.
+
+### Controlling Serverless Apps usage
+
+For Azure and GCP workloads monitored through cloud integrations, use the integration's metric collection controls to limit which resources are monitored.
+
+For GKE Autopilot, use [Container Discovery Management][17] to selectively instrument the pods you want to monitor. **Note**: all containers in a given Pod must be excluded from metric collection for that Pod to avoid billable usage.
+
+To stop billing for a specific workload entirely, see [Disable Serverless Monitoring][18].
+
 ## Troubleshooting
 
 For technical questions, contact [Datadog support][7].
@@ -73,4 +108,7 @@ For more information about billing or your plan and usage contact, contact your 
 [13]: /integrations/amazon_lambda/
 [14]: /serverless/aws_lambda
 [15]: /serverless/installation/
+[16]: https://www.datadoghq.com/pricing/?product=serverless-monitoring#products
+[17]: /containers/guide/container-discovery-management
+[18]: /serverless/guide/disable_serverless/
 
