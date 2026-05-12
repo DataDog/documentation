@@ -1,0 +1,134 @@
+<h2>Flexbox Grid Mockup</h2>
+<p class="subtitle">Live demos showing the centering behavior with different card counts and min-widths</p>
+
+<style>
+  .demo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 16px 0;
+    width: 100%;
+  }
+  .demo-grid .demo-card {
+    flex: 0 1 var(--card-max, 180px);
+    min-width: var(--card-min, 150px);
+    background: #1e1e3a;
+    border: 1px solid #3a3a5c;
+    border-radius: 8px;
+    padding: 20px 12px;
+    text-align: center;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .demo-grid .demo-card:hover {
+    border-color: #6366f1;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.3);
+  }
+  .demo-card img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+  .demo-card .card-label {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 4px;
+  }
+  .demo-card .icon-placeholder {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 8px;
+    background: #2a2a4a;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+  .demo-section {
+    margin-bottom: 32px;
+  }
+  .demo-section h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  .demo-section .label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .text-only-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+  }
+  .text-only-card h4 {
+    margin: 0;
+    font-size: 15px;
+    color: #e0e0e0;
+  }
+  .text-only-card small {
+    color: #888;
+    font-size: 12px;
+  }
+</style>
+
+<div class="demo-section">
+  <h3>10 cards, min-width: 150px</h3>
+  <p class="label">Typical CI/CD provider grid — last row (2 cards) is centered</p>
+  <div class="demo-grid" style="--card-min: 150px; --card-max: 180px;">
+    <div class="demo-card"><div class="icon-placeholder">&#9881;</div><div class="card-label">AWS CodePipeline</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#9881;</div><div class="card-label">Azure Pipelines</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#9881;</div><div class="card-label">Buildkite</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#9881;</div><div class="card-label">CircleCI</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#9881;</div><div class="card-label">Codefresh</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#9881;</div><div class="card-label">GitHub Actions</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#9881;</div><div class="card-label">GitLab</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#9881;</div><div class="card-label">Jenkins</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#9881;</div><div class="card-label">TeamCity</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#9881;</div><div class="card-label">Other</div></div>
+  </div>
+</div>
+
+<div class="demo-section">
+  <h3>4 cards, min-width: 200px</h3>
+  <p class="label">Typical platform selector (Linux, Docker, K8s, Windows) — single row, full width</p>
+  <div class="demo-grid" style="--card-min: 200px; --card-max: 240px;">
+    <div class="demo-card"><div class="icon-placeholder">&#128039;</div><div class="card-label">Linux</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#128051;</div><div class="card-label">Docker</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#9096;</div><div class="card-label">Kubernetes</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#9638;</div><div class="card-label">Windows</div></div>
+  </div>
+</div>
+
+<div class="demo-section">
+  <h3>4 text-only cards, min-width: 200px</h3>
+  <p class="label">Cloud Run workloads style — no images, just titles</p>
+  <div class="demo-grid" style="--card-min: 200px; --card-max: 260px;">
+    <div class="demo-card text-only-card"><div><h4>Containers</h4></div></div>
+    <div class="demo-card text-only-card"><div><h4>Jobs</h4><small>(Preview)</small></div></div>
+    <div class="demo-card text-only-card"><div><h4>Functions</h4></div></div>
+    <div class="demo-card text-only-card"><div><h4>Functions</h4><small>(1st generation)</small></div></div>
+  </div>
+</div>
+
+<div class="demo-section">
+  <h3>7 cards, min-width: 150px</h3>
+  <p class="label">Odd count — last row (3 cards) centered under full row of 4</p>
+  <div class="demo-grid" style="--card-min: 150px; --card-max: 180px;">
+    <div class="demo-card"><div class="icon-placeholder">&#128200;</div><div class="card-label">Java</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#128200;</div><div class="card-label">Python</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#128200;</div><div class="card-label">Ruby</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#128200;</div><div class="card-label">Go</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#128200;</div><div class="card-label">Node.js</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#128200;</div><div class="card-label">.NET</div></div>
+    <div class="demo-card"><div class="icon-placeholder">&#128200;</div><div class="card-label">PHP</div></div>
+  </div>
+</div>

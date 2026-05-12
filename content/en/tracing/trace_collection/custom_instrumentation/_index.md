@@ -49,7 +49,19 @@ Follow the relevant documentation for your custom instrumentation approach to le
 
 Datadog SDKs provide an implementation of the OpenTelemetry API for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. You can configure it to generate Datadog-style spans and traces to be processed by the Datadog SDK for your language, and send those to Datadog.
 
-{{< partial name="apm/apm-otel-instrumentation-custom.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api&prog_lang=java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api&prog_lang=python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api&prog_lang=ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api&prog_lang=go" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api&prog_lang=node_js" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api&prog_lang=php" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api&prog_lang=dot_net" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/client-side/ios/" src="integrations_logos/ios_large.svg" alt="iOS" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/client-side/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api&prog_lang=rust" src="integrations_logos/rust_large.svg" alt="Rust" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api&prog_lang=elixir" src="integrations_logos/elixir_large.svg" alt="Elixir" >}}
+{{< /card-grid >}}
 
 <br>
 
@@ -59,7 +71,17 @@ Datadog SDKs provide an implementation of the OpenTelemetry API for instrumentin
 
 Use the Datadog API to add custom instrumentation that allows you to programmatically create, modify, or delete traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, removing unwanted spans from traces, and for providing deeper visibility and context into spans, including adding span tags.
 
-{{< partial name="apm/apm-manual-instrumentation-custom.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=go" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=node_js" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=php" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=cpp" src="integrations_logos/cpp.png" alt="C++" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/server-side/?api_type=dd_api&prog_lang=dot_net" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
+  {{< image-card href="/tracing/trace_collection/custom_instrumentation/client-side/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
+{{< /card-grid >}}
 
 <br>
 
@@ -69,7 +91,15 @@ Use the Datadog API to add custom instrumentation that allows you to programmati
 
 If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
 
-{{< partial name="apm/apm-opentracing-custom.html" >}}
+{{< card-grid >}}
+  {{< image-card href="opentracing/java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="opentracing/python/" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="opentracing/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="opentracing/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="opentracing/dotnet/" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
+  {{< image-card href="opentracing/php/" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="opentracing/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
+{{< /card-grid >}}
 
 <br>
 
