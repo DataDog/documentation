@@ -4495,6 +4495,12 @@
     "request_description": "",
     "request_schema_description": "Request object for creating a degradation."
   },
+  "CreateBackfilledDegradation": {
+    "description": "Creates a backfilled degradation with predefined updates.",
+    "summary": "Create backfilled degradation",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a backfilled degradation."
+  },
   "DeleteDegradation": {
     "description": "Deletes a degradation by its ID.",
     "summary": "Delete degradation"
@@ -4514,6 +4520,12 @@
     "summary": "Schedule maintenance",
     "request_description": "",
     "request_schema_description": "Request object for creating a maintenance."
+  },
+  "CreateBackfilledMaintenance": {
+    "description": "Creates a backfilled maintenance with predefined updates.",
+    "summary": "Create backfilled maintenance",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a backfilled maintenance."
   },
   "GetMaintenance": {
     "description": "Retrieves a specific maintenance by its ID.",
