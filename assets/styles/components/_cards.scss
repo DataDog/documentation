@@ -43,8 +43,16 @@
 }
 
 .card-grid-card {
-  flex: 0 1 var(--card-min-width, 150px);
+  flex: 0 0 var(--card-min-width, 150px);
+  width: var(--card-min-width, 150px);
+  overflow: hidden;
   text-decoration: none;
+
+  img {
+    max-width: 100%;
+    max-height: 100px;
+    object-fit: contain;
+  }
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
   transition: border-color 0.15s, box-shadow 0.15s;
