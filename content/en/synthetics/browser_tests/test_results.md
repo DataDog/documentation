@@ -152,7 +152,7 @@ On the **Performance** tab, you can see aggregate performance metrics across all
 - **Average Test duration by browser type** and **Average Test duration by location & device** graphs, which display the time each browser, location, and device takes to complete the test in a given time interval.
 - **p75 Largest Contentful Paint** and **p75 Cumulative Layout Shift** graphs, which display the 75th percentile of these [Core Web Vital metrics][6] aggregated across runs.
 
-{{< img src="synthetics/browser_tests/synthetics_performance_tab.png" alt="The Performance tab on a browser Test Details page showing browser success rate, test duration graphs, and p75 LCP and CLS Core Web Vital metrics" style="width=80%" >}}
+{{< img src="synthetics/browser_tests/synthetics_browser_graphs.png" alt="The Performance tab on a browser Test Details page showing Chrome, Firefox, and Edge success rates, test duration graphs by browser type and location, and p75 LCP and CLS Core Web Vital metrics" style="width=80%" >}}
 
 Within an individual test run, [Largest Contentful Paint][2] and [Cumulative Layout Shift][3] are displayed as pills to the right of each step URL. [First Input Delay][4] is available as a real metric if you are using [Real User Monitoring][5] to collect real user data. For more information, see [Monitoring Page Performance][6].
 
