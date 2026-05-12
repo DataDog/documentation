@@ -3843,16 +3843,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_datadog_costs
       weight: 1
-    - name: AI
-      url: cloud_cost_management/ai
-      parent: cloud_cost
-      identifier: cloud_cost_ai
-      weight: 2
     - name: Setup
       url: cloud_cost_management/setup/
       parent: cloud_cost
       identifier: cloud_cost_setup
-      weight: 3
+      weight: 2
     - name: Permissions
       url: cloud_cost_management/setup/permissions
       parent: cloud_cost_setup
@@ -3942,7 +3937,7 @@ menu:
       url: cloud_cost_management/tags
       parent: cloud_cost
       identifier: cloud_cost_tags
-      weight: 4
+      weight: 3
     - name: Tag Explorer
       url: cloud_cost_management/tags/tag_explorer
       parent: cloud_cost_tags
@@ -3957,7 +3952,7 @@ menu:
       url: cloud_cost_management/allocation
       parent: cloud_cost
       identifier: cloud_cost_cost_allocation
-      weight: 5
+      weight: 4
     - name: Tag Pipelines
       url: cloud_cost_management/allocation/tag_pipelines
       parent: cloud_cost_cost_allocation
@@ -3982,7 +3977,7 @@ menu:
       url: cloud_cost_management/reporting
       parent: cloud_cost
       identifier: cloud_cost_reporting
-      weight: 6
+      weight: 5
     - name: Scheduled Reports
       url: cloud_cost_management/reporting/scheduled_reports
       parent: cloud_cost_reporting
@@ -4002,7 +3997,7 @@ menu:
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 7
+      weight: 6
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
@@ -4012,7 +4007,7 @@ menu:
       url: cloud_cost_management/planning
       parent: cloud_cost
       identifier: cloud_cost_planning
-      weight: 8
+      weight: 7
     - name: Budgets
       url: cloud_cost_management/planning/budgets
       parent: cloud_cost_planning
@@ -4032,7 +4027,7 @@ menu:
       url: cloud_cost_management/cost_changes
       parent: cloud_cost
       identifier: cloud_cost_cost_changes
-      weight: 9
+      weight: 8
     - name: Monitors
       url: cloud_cost_management/cost_changes/monitors
       parent: cloud_cost_cost_changes
@@ -4048,6 +4043,11 @@ menu:
       parent: cloud_cost_cost_changes
       identifier: cloud_cost_real_time_costs
       weight: 803
+    - name: FinOps Skill
+      url: cloud_cost_management/ai
+      parent: cloud_cost
+      identifier: cloud_cost_finops_skill
+      weight: 9
     - name: APM
       url: tracing/
       pre: apm

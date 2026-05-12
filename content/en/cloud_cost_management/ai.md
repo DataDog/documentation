@@ -1,90 +1,119 @@
 ---
-title: AI for Cloud Cost Management
-description: Use the FinOps Agent in Bits Assistant and the Datadog MCP Server to investigate, explain, and share cloud cost findings.
+title: FinOps Skill in Bits Assistant
+description: Use the FinOps skill in Bits Assistant to investigate, explain, and share cloud cost findings using natural language.
 aliases:
 - /cloud_cost_management/finops_agent/
+- /cloud_cost_management/finops_skill/
 - /cloud_cost_management/ccm_ai/
 algolia:
-  tags: ["cloud cost", "cloud cost management", "ccm", "finops", "finops agent", "bits assistant", "mcp"]
+  tags: ["cloud cost", "cloud cost management", "ccm", "finops", "finops skill", "bits assistant"]
   rank: 75
 further_reading:
 - link: "/bits_ai/bits_assistant/"
   tag: "Documentation"
   text: "Bits Assistant"
-- link: "/bits_ai/mcp_server/"
-  tag: "Documentation"
-  text: "Datadog MCP Server"
 - link: "/cloud_cost_management/reporting/explorer/"
   tag: "Documentation"
   text: "Cost Explorer"
 - link: "/cloud_cost_management/planning/budgets/"
   tag: "Documentation"
   text: "Budgets"
+- link: "/bits_ai/mcp_server/"
+  tag: "Documentation"
+  text: "Datadog MCP Server"
 ---
 
-{{< callout url="#" btn_hidden="true" header="FinOps Agent is in Preview" >}}
-The FinOps Agent runs in Bits Assistant. Fill out the [Bits Assistant Preview form](https://www.datadoghq.com/product-preview/bits-assistant/) to request access.
+{{< callout url="#" btn_hidden="true" header="The FinOps skill is in Preview" >}}
+The FinOps skill runs in Bits Assistant. Fill out the <a href="https://www.datadoghq.com/product-preview/bits-assistant/">Bits Assistant Preview form</a> to request access.
 {{< /callout >}}
 
 ## Overview
 
-AI for Cloud Cost Management (CCM) helps engineering and finance teams use natural language to investigate, explain, and share cost findings. Use the FinOps Agent in [Bits Assistant][1] for guided cost investigations in Datadog, or connect your own AI agent to Datadog cost data with the [Datadog MCP Server][2].
+The FinOps skill is the Cloud Cost Management workflow in [Bits Assistant][1]. It helps engineering and finance teams use natural language to investigate cost changes, identify likely owners, and share findings with the teams that own the spend.
 
-<div class="alert alert-info">This page is about using AI to analyze costs in Cloud Cost Management. It is not a guide to monitoring AI provider spend. To ingest SaaS or AI provider costs into CCM, see <a href="/cloud_cost_management/setup/saas_costs/">SaaS Cost Integrations</a>.</div>
+<div class="alert alert-info">This page describes how to use AI to analyze costs in Cloud Cost Management. It is not a guide to monitoring AI provider spend. To ingest SaaS or AI provider costs into CCM, see <a href="/cloud_cost_management/setup/saas_costs/">SaaS Cost Integrations</a>.</div>
 
-You can use AI for Cloud Cost Management to:
+The first focus of the FinOps skill is **cost change investigations**. Over time, the skill is expanding to cover more workflows across Cloud Cost Management, including recommendations, savings opportunities, anomalies, and budgets.
+
+You can use the FinOps skill to:
 
 - Investigate cost changes, anomalies, and cost monitor alerts.
 - Identify teams, services, accounts, regions, or resources driving spend.
 - Answer ad hoc questions about cloud, SaaS, custom, or Datadog costs.
 - Compare actual spend and forecasts against [budgets][3].
 - Correlate cost changes with observability metrics, such as CPU, memory, request volume, or storage size.
-- Create Datadog Notebooks that capture an investigation for handoff or future reference.
+- Capture an investigation in a Datadog Notebook for handoff or future reference.
 
 ## Prerequisites
 
 - [Set up Cloud Cost Management][4] for the cost sources you want to analyze.
-- To use the FinOps Agent, you need the **Bits Assistant Access** permission and [Cloud Cost Management permissions][9] for the data you ask about. Bits Assistant respects your Datadog role permissions. Creating or editing investigation notebooks also requires notebook permissions.
-- To use an external AI agent, [set up the Datadog MCP Server][5]. If your MCP client filters toolsets, include the `core` toolset to use the metric tools that can query Cloud Cost Management data.
+- Your role needs the **Bits Assistant Access** permission and the relevant [Cloud Cost Management permissions][9] for the data you ask about. Bits Assistant respects your Datadog role permissions.
+- Creating or editing investigation notebooks requires notebook permissions.
 
-## FinOps Agent in Bits Assistant
+## Ways to access the FinOps skill
 
-The FinOps Agent is the Cloud Cost Management analysis workflow in Bits Assistant. It is designed for root cause analysis (RCA), budget follow-up, and general cost questions.
+You can trigger the FinOps skill from many places in Datadog. The skill picks up the cost context from where you start the conversation.
 
-Open Bits Assistant from Datadog and ask a cost question. For example:
+| Entry point | What it investigates |
+| --- | --- |
+| **Bits Assistant** | Open Bits Assistant from anywhere in Datadog and ask a cost question directly. |
+| **Cost change tiles on the CCM Summary page** | The largest cost changes for the selected period. |
+| **Cost Explorer** | The current Cost Explorer query, including any filters you apply (for example, a specific service like `EC2`). |
+| **Cost anomalies** | A detected cost anomaly. |
+| **Cost monitors** | A triggered [cost monitor][10] (cost changes or cost thresholds). |
+| **Budgets** | A budget that is over budget or projected to go over. You can also investigate individual budget line items. |
+
+<div class="alert alert-info">The FinOps skill is only triggered from <strong>cost monitors</strong>. Triggering it from non-cost monitors is not supported.</div>
+
+New entry points are added as the FinOps skill expands across more Cloud Cost Management workflows.
+
+## Cost change investigations
+
+When you ask the FinOps skill to investigate a cost change, it generates a consistent summary for every investigation, then asks what you want to explore next.
+
+### Example prompts
 
 - `Investigate why EC2 costs increased last week for team:payments.`
 - `Which services drove the largest AWS cost increase between March and April?`
 - `Is this cost change putting any budgets at risk?`
 - `Which teams are responsible for the highest S3 storage costs this month?`
-- `Create a handoff notebook for the team that owns this cost spike.`
 
-For more ways to open and use Bits Assistant, see the [Bits Assistant documentation][1].
+### What the summary includes
 
-### Cost change investigations
+Every cost change investigation produces a structured summary:
 
-When you ask the FinOps Agent to investigate a cost change, it starts with a concise summary and then asks what you want to explore next. The initial analysis typically includes:
+- A daily cost chart showing the **baseline period** and **investigation period**.
+- A **summary table** with the total dollar change, percentage change, and projected annual impact when applicable.
+- **Rate-versus-usage** context, to help distinguish price changes from consumption changes.
+- **Likely owners** - the teams, services, or resources that contributed most to the change.
+- **Key findings** describing what changed and why, such as new spend from a single user.
+- A link to open the matching query in [Cost Explorer][6].
 
-- A daily cost chart for the baseline and investigation periods.
-- The baseline period, investigation period, total dollar and percentage change, and projected annual impact when applicable.
-- Rate-versus-usage context when supported, to help distinguish price changes from consumption changes.
-- Likely owner or team attribution based on your cost tags.
-- A link to open the query in Cost Explorer.
+Cost data can lag behind real time. By default, the FinOps skill uses complete cost days and compares equal-length periods so it does not over-explain incomplete data.
 
-Cost data can lag behind real time. By default, the FinOps Agent uses complete cost days and compares equal-length periods so it does not over-explain incomplete data.
+### Guided follow-up paths
 
-After the initial summary, choose from guided follow-up paths:
+After the summary, the FinOps skill offers a set of guided follow-up paths. You can also keep asking free-form questions instead of choosing one. Typical follow-ups include:
 
-1. **Cost Breakdown** - Find the top services, accounts, regions, resources, or tags driving the change.
+1. **Cost Breakdown** - Find the top services, accounts, regions, resources, or tags driving the change. You can break the cost down further by tag, user, API key, or other dimensions.
 2. **Observability** - Correlate the cost change with metrics such as CPU requests, memory requests, request count, bucket size, or database usage.
 3. **Check Budget Impact** - Find related budgets and compare actual or forecasted spend against budget targets.
-4. **Create Handoff Notebook** - Create a structured Datadog Notebook for the team that owns the change.
-5. **Save to Notebook** - Capture the investigation for your records.
-6. **Look up Communication Channel** - Find a team communication channel when ownership metadata is available in Datadog.
+4. **Recommendations** - Surface cost recommendations and savings opportunities related to the change.
+5. **Create Handoff Notebook** - Generate a structured notebook for the team that owns the change. See [Notebooks](#notebooks).
+6. **Look up Communication Channel** - Find a team communication channel (for example, a Slack channel) when ownership metadata is available in Datadog.
 
-### Budgets and forecasting
+## Notebooks
 
-If you use [Cloud Cost Management Budgets][3], ask the FinOps Agent to explain budget status and variance. It can help summarize:
+The FinOps skill can capture an investigation in a Datadog Notebook. There are two notebook templates:
+
+- **Handoff notebook** - Designed for the engineering team that owns the affected service. It includes the investigation findings plus a structured set of questions for the owning team to confirm, such as whether the change is expected and whether it is expected to continue.
+- **Summary notebook** - A lighter capture of the conversation and findings, without the handoff-specific status questions. Use this when you want a personal record of the investigation rather than a handoff.
+
+Both notebooks include links back to [Cost Explorer][6] and other Datadog views where you can validate the underlying queries.
+
+## Budgets and forecasting
+
+If you use [Cloud Cost Management Budgets][3], ask the FinOps skill to explain budget status and variance. It can summarize:
 
 - Actual spend versus budgeted amount.
 - Forecasted spend versus budgeted amount.
@@ -97,9 +126,9 @@ Example prompts:
 - `Show actual and forecasted spend for the payments team budget.`
 - `Does last week's EC2 cost increase affect any active budgets?`
 
-### General cost questions
+## General cost questions
 
-You can also ask the FinOps Agent exploratory cost questions, even if you are not investigating a specific alert:
+You can also ask the FinOps skill exploratory cost questions, even if you are not investigating a specific alert:
 
 - `Show total cloud cost by provider for the last 30 complete days.`
 - `What are our top Kubernetes namespace costs this month?`
@@ -109,34 +138,19 @@ You can also ask the FinOps Agent exploratory cost questions, even if you are no
 
 For deeper manual analysis, use [Cost Explorer][6] to adjust filters, groupings, and time ranges directly.
 
-## Use the Datadog MCP Server for cost analysis
+## Access through the Datadog MCP Server
 
-The [Datadog MCP Server][2] lets external AI agents query Datadog data. This is useful when you want to ask cost questions from an IDE, terminal-based assistant, or custom AI workflow.
+To query Cloud Cost Management data from an external AI agent (for example, from an IDE or terminal-based assistant), use the [Datadog MCP Server][2]. Cost data is available through the core metric tools.
 
-Cloud Cost Management data is available through the core metric tools:
+For cost metrics such as `all.cost`, `aws.cost.*`, `azure.cost.*`, `gcp.cost.*`, `oci.cost.*`, `custom.cost.*`, or `datadog.cost.*`, ask your agent to set `use_cloud_cost` to `true`. See [Datadog MCP Server Tools][7] for the full tool reference and [Set Up the Datadog MCP Server][5] for connection instructions.
 
-| MCP tool | Use it for |
-| --- | --- |
-| [`get_datadog_metric`][7] | Query cost metrics, compare periods, and group costs by provider, service, team, account, resource, or tag. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics. |
-| [`get_datadog_metric_context`][7] | Discover metadata, available tag keys, and tag values for a cost metric before querying it. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics. |
-
-Example prompts for MCP-connected agents:
-
-- `Use Datadog MCP to query cloud cost data. Set use_cloud_cost=true and show daily all.cost grouped by provider for the last 30 complete days.`
-- `Use get_datadog_metric_context with use_cloud_cost=true to find available tags for aws.cost.net.amortized.shared.resources.allocated, then group EC2 costs by team.`
-- `Compare this week's complete EC2 cost to the previous week and explain which teams or accounts changed the most.`
-
-Use the cloud cost flag only for Cloud Cost Management metrics such as `all.cost`, `aws.cost.*`, `azure.cost.*`, `gcp.cost.*`, `oci.cost.*`, `custom.cost.*`, or `datadog.cost.*`. For observability metrics that explain a cost change, such as Kubernetes CPU or S3 bucket size, use the standard metric query behavior.
-
-For connection instructions, supported clients, and toolset configuration, see [Set Up the Datadog MCP Server][5]. For the full MCP tool reference, see [Datadog MCP Server Tools][7].
-
-## Other AI-assisted CCM features
+## Related AI features in Cloud Cost Management
 
 Cloud Cost Management also includes AI-assisted workflows outside of chat:
 
 - [Cost anomalies][8] use Watchdog Explains to highlight what is driving unexpected cost changes.
 - The [Cost Explorer][6] Cost Change Summary panel helps identify associated teams and change drivers for selected cost rows.
-- Datadog Notebooks can capture and share cost investigations with engineering teams.
+- Datadog Notebooks capture and share cost investigations with engineering teams.
 
 ## Further reading
 
@@ -151,3 +165,4 @@ Cloud Cost Management also includes AI-assisted workflows outside of chat:
 [7]: /bits_ai/mcp_server/tools/
 [8]: /cloud_cost_management/cost_changes/anomalies/
 [9]: /cloud_cost_management/setup/permissions/
+[10]: /monitors/types/cloud_cost/

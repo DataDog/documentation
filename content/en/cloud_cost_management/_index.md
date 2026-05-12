@@ -12,7 +12,7 @@ further_reading:
     text: "Learn about Tags in Cloud Cost Management"
   - link: "/cloud_cost_management/ai/"
     tag: "Documentation"
-    text: "Use AI for Cloud Cost Management"
+    text: "Use the FinOps skill in Bits Assistant"
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
@@ -67,7 +67,7 @@ Datadog ingests your cloud cost data and transforms it into metrics you can use 
 
 ## Use AI for cost analysis
 
-Use the [FinOps Agent in Bits Assistant][10] to investigate cost changes, identify likely owners, compare spend against budgets, correlate cost with observability metrics, and create handoff notebooks for engineering teams. You can also connect external AI agents to Cloud Cost Management data with the [Datadog MCP Server][11].
+Use the [FinOps skill in Bits Assistant][10] to investigate cost changes, identify likely owners, compare spend against budgets, correlate cost with observability metrics, and create handoff notebooks for engineering teams. You can also connect external AI agents to Cloud Cost Management data with the [Datadog MCP Server][11].
 
 ## Setup
 

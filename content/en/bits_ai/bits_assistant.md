@@ -10,7 +10,7 @@ further_reading:
   text: "Coordinate incidents with Incident AI"
 - link: "/cloud_cost_management/ai/"
   tag: "Documentation"
-  text: "AI for Cloud Cost Management"
+  text: "FinOps Skill in Bits Assistant"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai
@@ -64,7 +64,7 @@ Example prompts:
 - `Summarize this trace and identify the root cause of the error`
 
 #### Cloud Cost Management
-Investigate [cloud cost][4] changes and identify the teams or resources responsible. For a detailed overview of the FinOps Agent workflow in Bits Assistant, see [AI for Cloud Cost Management][7].
+Investigate [cloud cost][4] changes and identify the teams or resources responsible. For a detailed overview of the FinOps skill workflow in Bits Assistant, see [FinOps Skill in Bits Assistant][7].
 
 Example prompts:
 - `Investigate why EC2 costs changed between January and February`
