@@ -56,7 +56,7 @@ The editor warns you when no service or environment matches the file's language,
 
 The remote running code may be a different revision from the source you are editing. The extension uses Git commit information to map line numbers from your local file to the remote revision, so logpoints land on the correct line even if the remote is on a different commit. This requires your service to be tagged with Git information.
 
-<div class="alert alert-info">Checking out locally the same revision that is running remotely shows you the same code in the IDE that is running in production, which simplifies the live debugging experience — but it is not required.</div>
+<div class="alert alert-info">Checking out locally the same revision that is running remotely shows you the same code in the IDE that is running in production, which simplifies the live debugging experience—but it is not required.</div>
 
 ## Editing, enabling, disabling, and deleting
 
