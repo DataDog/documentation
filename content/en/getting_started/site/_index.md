@@ -30,16 +30,6 @@ Developers are responsible for:
 
 ## Access the Datadog site
 
-If you are signed in to Datadog, find your site listed at the top of the **My Preferences** page. This also works for custom domains.
-
-{{< img src="getting_started/site/site-in-preferences.png" alt="The top of the My Preferences page in Datadog, showing the organization name and site URL" style="width:80%" >}}
-
-To navigate to **My Preferences**, click your profile avatar in the lower-left, then select **My Preferences** from the menu.
-
-{{< img src="getting_started/site/my-preferences-menu.png" alt="The Datadog account menu, accessed by clicking your profile avatar in the lower-left navigation, showing the My Preferences option under Personal Settings" style="width:80%" >}}
-
-You can identify which site you are on by matching your Datadog website URL to the site URL in the table below.
-
 {{< img src="getting_started/site/site.png" alt="The site URL in your browser tab" style="width:40%" >}}
 
 | Site    | Site URL                    | Site Parameter      | Location |
@@ -52,6 +42,14 @@ You can identify which site you are on by matching your Datadog website URL to t
 | US2-FED | `https://us2.ddog-gov.com`  | `us2.ddog-gov.com`  | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
 | AP2     | `https://ap2.datadoghq.com` | `ap2.datadoghq.com` | Australia |
+
+If you have a custom domain, e.g. `demo.datadoghq.com` you can also find your site listed at the top of the **My Preferences** page. This also works for custom domains.
+
+{{< img src="getting_started/site/site-in-preferences.png" alt="The top of the My Preferences page in Datadog, showing the organization name and site URL" style="width:80%" >}}
+
+To navigate to **My Preferences**, click your profile avatar in the lower-left, then select **My Preferences** from the menu.
+
+{{< img src="getting_started/site/my-preferences-menu.png" alt="The Datadog account menu, accessed by clicking your profile avatar in the lower-left navigation, showing the My Preferences option under Personal Settings" style="width:80%" >}}
 
 To send data to more than one destination through multiple endpoints, see the [Dual Shipping][2] guide.
 
