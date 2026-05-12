@@ -1050,6 +1050,10 @@
     "description": "List the OCI configs.",
     "summary": "List Cloud Cost Management OCI configs"
   },
+  "ListCostTagDescriptions": {
+    "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
+    "summary": "List Cloud Cost Management tag descriptions"
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
@@ -1077,6 +1081,16 @@
   "ListAllCSMServerlessAgents": {
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"
+  },
+  "GetCurrentUser": {
+    "description": "Get the user associated with the current authentication context.\nThe response includes the user's profile attributes (name, email, handle,\nstatus, MFA state), along with related resources: the user's organization,\nassigned roles with their granted permissions, and team-scoped roles.\nNo additional permissions are required beyond valid authentication.",
+    "summary": "Get current user"
+  },
+  "UpdateCurrentUser": {
+    "description": "Edit the profile of the currently authenticated user. Updatable fields\ninclude `name`, `title`, `email`, and `disabled` status. The `id` field\nin the request body must match the authenticated user's UUID; a mismatch\nreturns a 422 error. Email address changes are recorded in the audit trail.\nRequires the `user_self_profile_write` permission.",
+    "summary": "Update current user",
+    "request_description": "",
+    "request_schema_description": "Update a user."
   },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
@@ -4481,6 +4495,12 @@
     "request_description": "",
     "request_schema_description": "Request object for creating a degradation."
   },
+  "CreateBackfilledDegradation": {
+    "description": "Creates a backfilled degradation with predefined updates.",
+    "summary": "Create backfilled degradation",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a backfilled degradation."
+  },
   "DeleteDegradation": {
     "description": "Deletes a degradation by its ID.",
     "summary": "Delete degradation"
@@ -4500,6 +4520,12 @@
     "summary": "Schedule maintenance",
     "request_description": "",
     "request_schema_description": "Request object for creating a maintenance."
+  },
+  "CreateBackfilledMaintenance": {
+    "description": "Creates a backfilled maintenance with predefined updates.",
+    "summary": "Create backfilled maintenance",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a backfilled maintenance."
   },
   "GetMaintenance": {
     "description": "Retrieves a specific maintenance by its ID.",
@@ -4976,6 +5002,14 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "Validate": {
+    "description": "Check if the API key is valid. Returns the organization UUID, API key ID, and associated scopes.",
+    "summary": "Validate API key"
+  },
+  "ValidateAPIKey": {
+    "description": "Check that the API key and application key used for the request are both valid.\nReturns `{\"status\": \"ok\"}` on success, `401` or `403` otherwise. Useful as a\nlightweight authentication probe before issuing other API calls that require\nfull credentials.",
+    "summary": "Validate API and application keys"
   },
   "SearchWidgets": {
     "description": "Search and list widgets for a given experience type, with filtering, sorting, and pagination.\n\n**Response meta** carries totals scoped to the current filter:\n- `filtered_total` — widgets matching the filter.\n- `created_by_you_total` — among the matches, how many the current user created.\n- `favorited_by_you_total` — among the matches, how many the current user has favorited.\n- `created_by_anyone_total` — total widgets in the experience type, ignoring filters.\n\nEach returned widget includes `is_favorited` reflecting the current user's favorite status.\nFavoriting itself is performed through the shared favorites API, not this endpoint.",

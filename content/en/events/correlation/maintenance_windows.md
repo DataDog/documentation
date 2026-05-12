@@ -15,8 +15,8 @@ Datadog Event Management supports maintenance windows to suppress case notificat
 
 To create a [Maintenance Window][2]:
 1. Navigate to Event Management Settings.
-1. Select **Maintenance Windows** next to Case Attributes in the left navigation bar.
-1. Click **New Maintenance Window** in the top right.
+1. Select {{< ui >}}Maintenance Windows{{< /ui >}} next to Case Attributes in the left navigation bar.
+1. Click {{< ui >}}New Maintenance Window{{< /ui >}} in the top right.
 1. Enter a Maintenance Window name.
 1. Set conditions for the cases that should be impacted by this maintenance window using tags or attributes. By default, Event Management cases inherit tags from the alerts they correlate.
 1. Select the start and end times for the Maintenance Window.
@@ -29,8 +29,8 @@ After you save, your Maintenance Window will be added to the Maintenance Window 
 To sync Maintenance Windows with ServiceNow changes so your ServiceNow changes create, update, or delete case Maintenance Windows:
 1. See [Forward change requests to Datadog][3] and follow the steps to ingest ServiceNow changes.
 1. Navigate to Event Management Settings.
-1. Select **Maintenance Windows** next to Case Attributes in the left navigation bar.
-1. Click **Sync from ServiceNow** in the top right
+1. Select {{< ui >}}Maintenance Windows{{< /ui >}} next to Case Attributes in the left navigation bar.
+1. Click {{< ui >}}Sync from ServiceNow{{< /ui >}} in the top right
 1. Optionally, define a filter for the ServiceNow changes that should create, update, or delete maintenance windows.
 1. Set conditions for the cases that should be impacted by this maintenance window using tags or attributes. You can dynamically reference a value from your ServiceNow changes by prefacing the attribute with `$`.
 1. Set the ServiceNow change datetime fields that should be used for maintenance window start and end times.
