@@ -1,25 +1,68 @@
 <main class="api-main" data-astro-cid-hnecgxtf>
   <div class="api-toolbar" data-astro-cid-hnecgxtf>
-    <nav aria-label="Breadcrumb" class="breadcrumbs">
-      <ol class="breadcrumbs__list _breadcrumbs__list_MOD">
-        <li class="breadcrumbs__item _breadcrumbs__item_MOD">
-          <a class="breadcrumbs__link _breadcrumbs__link_MOD" href="/">Docs</a>
-        </li>
-        <li class="breadcrumbs__item _breadcrumbs__item_MOD">
-          <a class="breadcrumbs__link _breadcrumbs__link_MOD" href="/api/latest/">API</a>
-        </li>
-        <li class="breadcrumbs__item _breadcrumbs__item_MOD">
-          <span
-            class="breadcrumbs__label breadcrumbs__label--current _breadcrumbs__label--current_MOD"
-            aria-current="page"
-            >Create a monitor</span
-          >
-        </li>
-      </ol>
-    </nav>
-    <div class="api-toolbar__selectors" data-astro-cid-hnecgxtf>
+    <div class="api-toolbar__left" data-astro-cid-hnecgxtf>
+      <nav aria-label="Breadcrumb" class="breadcrumbs">
+        <ol class="breadcrumbs__list _breadcrumbs__list_MOD">
+          <li class="breadcrumbs__item _breadcrumbs__item_MOD">
+            <a class="breadcrumbs__link _breadcrumbs__link_MOD" href="/">Docs</a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_MOD">
+            <a class="breadcrumbs__link _breadcrumbs__link_MOD" href="/api/latest/">API</a>
+          </li>
+          <li class="breadcrumbs__item _breadcrumbs__item_MOD">
+            <span
+              class="breadcrumbs__label breadcrumbs__label--current _breadcrumbs__label--current_MOD"
+              aria-current="page"
+              >Create a monitor</span
+            >
+          </li>
+        </ol>
+      </nav>
+      <script>
+        (() => {
+          var l = (n, t) => {
+            let i = async () => {
+                await (
+                  await n()
+                )();
+              },
+              e = typeof t.value == "object" ? t.value : void 0,
+              s = { timeout: e == null ? void 0 : e.timeout };
+            "requestIdleCallback" in window ? window.requestIdleCallback(i, s) : setTimeout(i, s.timeout || 200);
+          };
+          (self.Astro || (self.Astro = {})).idle = l;
+          window.dispatchEvent(new Event("astro:idle"));
+        })();
+      </script>
       <astro-island
         uid="X1"
+        component-url="/_astro/CopyPageButton.HASH.js"
+        component-export="CopyPageButton"
+        renderer-url="/_astro/client.HASH.js"
+        props='{"labels":[0,{"Copy page":[0,"Copy page"],"Copied":[0,"Copied"]}],"variant":[0,"icon"]}'
+        ssr
+        client="idle"
+        opts='{"name":"CopyPageButton","value":true}'
+        await-children
+        ><button
+          aria-label="Copy page"
+          title="Copy page"
+          class="copy-page-button _copy-page-button_MOD copy-page-button--icon _copy-page-button--icon_MOD"
+        >
+          <span class="copy-page-button__icon _copy-page-button__icon_MOD"
+            ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M6 5h2.5a3 3 0 0 1 3-3a3 3 0 0 1 3 3H17a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-1v3H7V6zm2 2h7V6H8zm3.5-5a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2"
+              />
+            </svg>
+          </span></button
+        ><!--astro:end--></astro-island
+      >
+    </div>
+    <div class="api-toolbar__selectors" data-astro-cid-hnecgxtf>
+      <astro-island
+        uid="X2"
         component-url="/_astro/LanguageSelector.HASH.js"
         component-export="LanguageSelector"
         renderer-url="/_astro/client.HASH.js"
@@ -39,7 +82,7 @@
         <!--astro:end--></astro-island
       >
       <astro-island
-        uid="X2"
+        uid="X3"
         component-url="/_astro/RegionSelector.HASH.js"
         component-export="RegionSelector"
         renderer-url="/_astro/client.HASH.js"
@@ -67,31 +110,15 @@
     </div>
   </div>
   <div class="prose" data-astro-cid-hnecgxtf>
-    <div class="api-operation-header _api-operation-header_MOD">
-      <h1 class="api-operation-header__title _api-operation-header__title_MOD">Create a monitor</h1>
-      <div class="api-operation-header__copy _api-operation-header__copy_MOD">
-        <script>
-          (() => {
-            var l = (n, t) => {
-              let i = async () => {
-                  await (
-                    await n()
-                  )();
-                },
-                e = typeof t.value == "object" ? t.value : void 0,
-                s = { timeout: e == null ? void 0 : e.timeout };
-              "requestIdleCallback" in window ? window.requestIdleCallback(i, s) : setTimeout(i, s.timeout || 200);
-            };
-            (self.Astro || (self.Astro = {})).idle = l;
-            window.dispatchEvent(new Event("astro:idle"));
-          })();
-        </script>
+    <div class="api-page-header _api-page-header_MOD">
+      <h1 class="api-page-header__title _api-page-header__title_MOD">Create a monitor</h1>
+      <div class="api-page-header__copy _api-page-header__copy_MOD">
         <astro-island
-          uid="X3"
+          uid="X4"
           component-url="/_astro/CopyPageButton.HASH.js"
           component-export="CopyPageButton"
           renderer-url="/_astro/client.HASH.js"
-          props='{"labels":[0,{"Copy page":[0,"Copy page"],"Copied":[0,"Copied"]}]}'
+          props='{"labels":[0,{"Copy page":[0,"Copy page"],"Copied":[0,"Copied"]}],"variant":[0,"default"]}'
           ssr
           client="idle"
           opts='{"name":"CopyPageButton","value":true}'
@@ -118,7 +145,7 @@
     </div>
     <div id="api-endpoint-create-a-monitor" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
       <astro-island
-        uid="X4"
+        uid="X5"
         component-url="/_astro/TabsNav.HASH.js"
         component-export="TabsNav"
         renderer-url="/_astro/client.HASH.js"
@@ -626,13 +653,13 @@
           <div class="api-endpoint__section _api-endpoint__section_MOD">
             <h3>Request Body (required)</h3>
             <p>Create a monitor request body.</p>
-            <div id="request-body-tabs-X33" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
+            <div id="request-body-tabs-X34" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
               <astro-island
-                uid="X5"
+                uid="X6"
                 component-url="/_astro/TabsNav.HASH.js"
                 component-export="TabsNav"
                 renderer-url="/_astro/client.HASH.js"
-                props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"request-body-tabs-X33"],"entries":[0,{"tabsEl":[0,"request-body-tabs-X33"],"tabPanelEls":[1,[[0,"request-body-tabs-X33-panel-0"],[0,"request-body-tabs-X33-panel-1"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
+                props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"request-body-tabs-X34"],"entries":[0,{"tabsEl":[0,"request-body-tabs-X34"],"tabPanelEls":[1,[[0,"request-body-tabs-X34-panel-0"],[0,"request-body-tabs-X34-panel-1"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
                 ssr
                 client="load"
                 opts='{"name":"TabsNav","value":true}'
@@ -641,7 +668,7 @@
                   <button
                     role="tab"
                     aria-selected="true"
-                    aria-controls="request-body-tabs-X33-panel-0"
+                    aria-controls="request-body-tabs-X34-panel-0"
                     data-tab-index="0"
                     class="tabs__button _tabs__button_MOD tabs__button--active _tabs__button--active_MOD"
                   >
@@ -649,7 +676,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="request-body-tabs-X33-panel-1"
+                    aria-controls="request-body-tabs-X34-panel-1"
                     data-tab-index="1"
                     class="tabs__button _tabs__button_MOD"
                   >
@@ -658,11 +685,11 @@
                 </div>
                 <!--astro:end--></astro-island
               >
-              <div id="request-body-tabs-X33-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
-                <div id="schema-table-X34" class="schema-table">
+              <div id="request-body-tabs-X34-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
+                <div id="schema-table-X35" class="schema-table">
                   <div class="schema-table__toolbar _schema-table__toolbar_MOD">
                     <button
-                      id="schema-table-X34-expand-all"
+                      id="schema-table-X35-expand-all"
                       type="button"
                       class="schema-table__expand-all _schema-table__expand-all_MOD"
                     >
@@ -6521,11 +6548,11 @@
                     </div>
                   </div>
                   <astro-island
-                    uid="X6"
+                    uid="X7"
                     component-url="/_astro/ApiSchemaTableNav.HASH.js"
                     component-export="ApiSchemaTableNav"
                     renderer-url="/_astro/client.HASH.js"
-                    props='{"externalContext":[0,{"scope":[0,"schema-table-X34"],"entries":[0,{"tableEl":[0,"schema-table-X34"],"expandAllEl":[0,"schema-table-X34-expand-all"]}]}]}'
+                    props='{"externalContext":[0,{"scope":[0,"schema-table-X35"],"entries":[0,{"tableEl":[0,"schema-table-X35"],"expandAllEl":[0,"schema-table-X35-expand-all"]}]}]}'
                     ssr
                     client="idle"
                     opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -6535,13 +6562,13 @@
                   >
                 </div>
               </div>
-              <div id="request-body-tabs-X33-panel-1" role="tabpanel" class="tabs__panel" hidden>
+              <div id="request-body-tabs-X34-panel-1" role="tabpanel" class="tabs__panel" hidden>
                 <div class="request-body-tabs__examples _request-body-tabs__examples_MOD">
                   <div>
-                    <div id="code-block-X35" class="code-block _code-block_MOD" data-language="json">
-                      <div id="code-block-X35-content" class="code-block__content _code-block__content_MOD">
+                    <div id="code-block-X36" class="code-block _code-block_MOD" data-language="json">
+                      <div id="code-block-X36-content" class="code-block__content _code-block__content_MOD">
                         <astro-island
-                          uid="X7"
+                          uid="X8"
                           component-url="/_astro/CopyButton.HASH.js"
                           component-export="CopyButton"
                           renderer-url="/_astro/client.HASH.js"
@@ -6588,13 +6615,13 @@
           </div>
           <div class="api-response _api-response_MOD">
             <h3 class="api-response__heading _api-response__heading_MOD">Response</h3>
-            <div id="api-response-X36" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
+            <div id="api-response-X37" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
               <astro-island
-                uid="X8"
+                uid="X9"
                 component-url="/_astro/TabsNav.HASH.js"
                 component-export="TabsNav"
                 renderer-url="/_astro/client.HASH.js"
-                props='{"labels":[1,[[0,"200"],[0,"400"],[0,"403"],[0,"429"]]],"externalContext":[0,{"scope":[0,"api-response-X36"],"entries":[0,{"tabsEl":[0,"api-response-X36"],"tabPanelEls":[1,[[0,"api-response-X36-panel-0"],[0,"api-response-X36-panel-1"],[0,"api-response-X36-panel-2"],[0,"api-response-X36-panel-3"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
+                props='{"labels":[1,[[0,"200"],[0,"400"],[0,"403"],[0,"429"]]],"externalContext":[0,{"scope":[0,"api-response-X37"],"entries":[0,{"tabsEl":[0,"api-response-X37"],"tabPanelEls":[1,[[0,"api-response-X37-panel-0"],[0,"api-response-X37-panel-1"],[0,"api-response-X37-panel-2"],[0,"api-response-X37-panel-3"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
                 ssr
                 client="load"
                 opts='{"name":"TabsNav","value":true}'
@@ -6603,7 +6630,7 @@
                   <button
                     role="tab"
                     aria-selected="true"
-                    aria-controls="api-response-X36-panel-0"
+                    aria-controls="api-response-X37-panel-0"
                     data-tab-index="0"
                     class="tabs__button _tabs__button_MOD tabs__button--active _tabs__button--active_MOD"
                   >
@@ -6611,7 +6638,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-response-X36-panel-1"
+                    aria-controls="api-response-X37-panel-1"
                     data-tab-index="1"
                     class="tabs__button _tabs__button_MOD"
                   >
@@ -6619,7 +6646,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-response-X36-panel-2"
+                    aria-controls="api-response-X37-panel-2"
                     data-tab-index="2"
                     class="tabs__button _tabs__button_MOD"
                   >
@@ -6627,7 +6654,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-response-X36-panel-3"
+                    aria-controls="api-response-X37-panel-3"
                     data-tab-index="3"
                     class="tabs__button _tabs__button_MOD"
                   >
@@ -6636,16 +6663,16 @@
                 </div>
                 <!--astro:end--></astro-island
               >
-              <div id="api-response-X36-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
+              <div id="api-response-X37-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
                 <div class="api-response__panel api-response__panel--200">
                   <p class="api-response__description _api-response__description_MOD">OK</p>
-                  <div id="api-response-X36-inner-0" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
+                  <div id="api-response-X37-inner-0" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
                     <astro-island
-                      uid="X9"
+                      uid="X10"
                       component-url="/_astro/TabsNav.HASH.js"
                       component-export="TabsNav"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X36-inner-0"],"entries":[0,{"tabsEl":[0,"api-response-X36-inner-0"],"tabPanelEls":[1,[[0,"api-response-X36-model-0"],[0,"api-response-X36-example-0"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
+                      props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X37-inner-0"],"entries":[0,{"tabsEl":[0,"api-response-X37-inner-0"],"tabPanelEls":[1,[[0,"api-response-X37-model-0"],[0,"api-response-X37-example-0"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
                       ssr
                       client="load"
                       opts='{"name":"TabsNav","value":true}'
@@ -6654,7 +6681,7 @@
                         <button
                           role="tab"
                           aria-selected="true"
-                          aria-controls="api-response-X36-model-0"
+                          aria-controls="api-response-X37-model-0"
                           data-tab-index="0"
                           class="tabs__button _tabs__button_MOD tabs__button--active _tabs__button--active_MOD"
                         >
@@ -6662,7 +6689,7 @@
                         ><button
                           role="tab"
                           aria-selected="false"
-                          aria-controls="api-response-X36-example-0"
+                          aria-controls="api-response-X37-example-0"
                           data-tab-index="1"
                           class="tabs__button _tabs__button_MOD"
                         >
@@ -6671,11 +6698,11 @@
                       </div>
                       <!--astro:end--></astro-island
                     >
-                    <div id="api-response-X36-model-0" role="tabpanel" class="tabs__panel tabs__panel--active">
-                      <div id="schema-table-X37" class="schema-table">
+                    <div id="api-response-X37-model-0" role="tabpanel" class="tabs__panel tabs__panel--active">
+                      <div id="schema-table-X38" class="schema-table">
                         <div class="schema-table__toolbar _schema-table__toolbar_MOD">
                           <button
-                            id="schema-table-X37-expand-all"
+                            id="schema-table-X38-expand-all"
                             type="button"
                             class="schema-table__expand-all _schema-table__expand-all_MOD"
                           >
@@ -13060,11 +13087,11 @@
                           </div>
                         </div>
                         <astro-island
-                          uid="X10"
+                          uid="X11"
                           component-url="/_astro/ApiSchemaTableNav.HASH.js"
                           component-export="ApiSchemaTableNav"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"externalContext":[0,{"scope":[0,"schema-table-X37"],"entries":[0,{"tableEl":[0,"schema-table-X37"],"expandAllEl":[0,"schema-table-X37-expand-all"]}]}]}'
+                          props='{"externalContext":[0,{"scope":[0,"schema-table-X38"],"entries":[0,{"tableEl":[0,"schema-table-X38"],"expandAllEl":[0,"schema-table-X38-expand-all"]}]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -13074,12 +13101,12 @@
                         >
                       </div>
                     </div>
-                    <div id="api-response-X36-example-0" role="tabpanel" class="tabs__panel" hidden>
+                    <div id="api-response-X37-example-0" role="tabpanel" class="tabs__panel" hidden>
                       <div class="api-response__example _api-response__example_MOD">
-                        <div id="code-block-X38" class="code-block _code-block_MOD" data-language="json">
-                          <div id="code-block-X38-content" class="code-block__content _code-block__content_MOD">
+                        <div id="code-block-X39" class="code-block _code-block_MOD" data-language="json">
+                          <div id="code-block-X39-content" class="code-block__content _code-block__content_MOD">
                             <astro-island
-                              uid="X11"
+                              uid="X12"
                               component-url="/_astro/CopyButton.HASH.js"
                               component-export="CopyButton"
                               renderer-url="/_astro/client.HASH.js"
@@ -13203,16 +13230,16 @@
                   </div>
                 </div>
               </div>
-              <div id="api-response-X36-panel-1" role="tabpanel" class="tabs__panel" hidden>
+              <div id="api-response-X37-panel-1" role="tabpanel" class="tabs__panel" hidden>
                 <div class="api-response__panel api-response__panel--400">
                   <p class="api-response__description _api-response__description_MOD">Bad Request</p>
-                  <div id="api-response-X36-inner-1" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
+                  <div id="api-response-X37-inner-1" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
                     <astro-island
-                      uid="X12"
+                      uid="X13"
                       component-url="/_astro/TabsNav.HASH.js"
                       component-export="TabsNav"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X36-inner-1"],"entries":[0,{"tabsEl":[0,"api-response-X36-inner-1"],"tabPanelEls":[1,[[0,"api-response-X36-model-1"],[0,"api-response-X36-example-1"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
+                      props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X37-inner-1"],"entries":[0,{"tabsEl":[0,"api-response-X37-inner-1"],"tabPanelEls":[1,[[0,"api-response-X37-model-1"],[0,"api-response-X37-example-1"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
                       ssr
                       client="load"
                       opts='{"name":"TabsNav","value":true}'
@@ -13221,7 +13248,7 @@
                         <button
                           role="tab"
                           aria-selected="true"
-                          aria-controls="api-response-X36-model-1"
+                          aria-controls="api-response-X37-model-1"
                           data-tab-index="0"
                           class="tabs__button _tabs__button_MOD tabs__button--active _tabs__button--active_MOD"
                         >
@@ -13229,7 +13256,7 @@
                         ><button
                           role="tab"
                           aria-selected="false"
-                          aria-controls="api-response-X36-example-1"
+                          aria-controls="api-response-X37-example-1"
                           data-tab-index="1"
                           class="tabs__button _tabs__button_MOD"
                         >
@@ -13238,8 +13265,8 @@
                       </div>
                       <!--astro:end--></astro-island
                     >
-                    <div id="api-response-X36-model-1" role="tabpanel" class="tabs__panel tabs__panel--active">
-                      <div id="schema-table-X39" class="schema-table">
+                    <div id="api-response-X37-model-1" role="tabpanel" class="tabs__panel tabs__panel--active">
+                      <div id="schema-table-X40" class="schema-table">
                         <div class="schema-table__table _schema-table__table_MOD">
                           <div class="schema-table__columns _schema-table__columns_MOD">
                             <div class="schema-table__columns-name _schema-table__columns-name_MOD">Name</div>
@@ -13262,11 +13289,11 @@
                           </div>
                         </div>
                         <astro-island
-                          uid="X13"
+                          uid="X14"
                           component-url="/_astro/ApiSchemaTableNav.HASH.js"
                           component-export="ApiSchemaTableNav"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"externalContext":[0,{"scope":[0,"schema-table-X39"],"entries":[0,{"tableEl":[0,"schema-table-X39"]}]}]}'
+                          props='{"externalContext":[0,{"scope":[0,"schema-table-X40"],"entries":[0,{"tableEl":[0,"schema-table-X40"]}]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -13276,12 +13303,12 @@
                         >
                       </div>
                     </div>
-                    <div id="api-response-X36-example-1" role="tabpanel" class="tabs__panel" hidden>
+                    <div id="api-response-X37-example-1" role="tabpanel" class="tabs__panel" hidden>
                       <div class="api-response__example _api-response__example_MOD">
-                        <div id="code-block-X40" class="code-block _code-block_MOD" data-language="json">
-                          <div id="code-block-X40-content" class="code-block__content _code-block__content_MOD">
+                        <div id="code-block-X41" class="code-block _code-block_MOD" data-language="json">
+                          <div id="code-block-X41-content" class="code-block__content _code-block__content_MOD">
                             <astro-island
-                              uid="X14"
+                              uid="X15"
                               component-url="/_astro/CopyButton.HASH.js"
                               component-export="CopyButton"
                               renderer-url="/_astro/client.HASH.js"
@@ -13317,16 +13344,16 @@
                   </div>
                 </div>
               </div>
-              <div id="api-response-X36-panel-2" role="tabpanel" class="tabs__panel" hidden>
+              <div id="api-response-X37-panel-2" role="tabpanel" class="tabs__panel" hidden>
                 <div class="api-response__panel api-response__panel--403">
                   <p class="api-response__description _api-response__description_MOD">Forbidden</p>
-                  <div id="api-response-X36-inner-2" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
+                  <div id="api-response-X37-inner-2" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
                     <astro-island
-                      uid="X15"
+                      uid="X16"
                       component-url="/_astro/TabsNav.HASH.js"
                       component-export="TabsNav"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X36-inner-2"],"entries":[0,{"tabsEl":[0,"api-response-X36-inner-2"],"tabPanelEls":[1,[[0,"api-response-X36-model-2"],[0,"api-response-X36-example-2"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
+                      props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X37-inner-2"],"entries":[0,{"tabsEl":[0,"api-response-X37-inner-2"],"tabPanelEls":[1,[[0,"api-response-X37-model-2"],[0,"api-response-X37-example-2"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
                       ssr
                       client="load"
                       opts='{"name":"TabsNav","value":true}'
@@ -13335,7 +13362,7 @@
                         <button
                           role="tab"
                           aria-selected="true"
-                          aria-controls="api-response-X36-model-2"
+                          aria-controls="api-response-X37-model-2"
                           data-tab-index="0"
                           class="tabs__button _tabs__button_MOD tabs__button--active _tabs__button--active_MOD"
                         >
@@ -13343,7 +13370,7 @@
                         ><button
                           role="tab"
                           aria-selected="false"
-                          aria-controls="api-response-X36-example-2"
+                          aria-controls="api-response-X37-example-2"
                           data-tab-index="1"
                           class="tabs__button _tabs__button_MOD"
                         >
@@ -13352,8 +13379,8 @@
                       </div>
                       <!--astro:end--></astro-island
                     >
-                    <div id="api-response-X36-model-2" role="tabpanel" class="tabs__panel tabs__panel--active">
-                      <div id="schema-table-X41" class="schema-table">
+                    <div id="api-response-X37-model-2" role="tabpanel" class="tabs__panel tabs__panel--active">
+                      <div id="schema-table-X42" class="schema-table">
                         <div class="schema-table__table _schema-table__table_MOD">
                           <div class="schema-table__columns _schema-table__columns_MOD">
                             <div class="schema-table__columns-name _schema-table__columns-name_MOD">Name</div>
@@ -13376,11 +13403,11 @@
                           </div>
                         </div>
                         <astro-island
-                          uid="X16"
+                          uid="X17"
                           component-url="/_astro/ApiSchemaTableNav.HASH.js"
                           component-export="ApiSchemaTableNav"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"externalContext":[0,{"scope":[0,"schema-table-X41"],"entries":[0,{"tableEl":[0,"schema-table-X41"]}]}]}'
+                          props='{"externalContext":[0,{"scope":[0,"schema-table-X42"],"entries":[0,{"tableEl":[0,"schema-table-X42"]}]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -13390,12 +13417,12 @@
                         >
                       </div>
                     </div>
-                    <div id="api-response-X36-example-2" role="tabpanel" class="tabs__panel" hidden>
+                    <div id="api-response-X37-example-2" role="tabpanel" class="tabs__panel" hidden>
                       <div class="api-response__example _api-response__example_MOD">
-                        <div id="code-block-X42" class="code-block _code-block_MOD" data-language="json">
-                          <div id="code-block-X42-content" class="code-block__content _code-block__content_MOD">
+                        <div id="code-block-X43" class="code-block _code-block_MOD" data-language="json">
+                          <div id="code-block-X43-content" class="code-block__content _code-block__content_MOD">
                             <astro-island
-                              uid="X14"
+                              uid="X15"
                               component-url="/_astro/CopyButton.HASH.js"
                               component-export="CopyButton"
                               renderer-url="/_astro/client.HASH.js"
@@ -13431,16 +13458,16 @@
                   </div>
                 </div>
               </div>
-              <div id="api-response-X36-panel-3" role="tabpanel" class="tabs__panel" hidden>
+              <div id="api-response-X37-panel-3" role="tabpanel" class="tabs__panel" hidden>
                 <div class="api-response__panel api-response__panel--429">
                   <p class="api-response__description _api-response__description_MOD">Too many requests</p>
-                  <div id="api-response-X36-inner-3" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
+                  <div id="api-response-X37-inner-3" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
                     <astro-island
-                      uid="X17"
+                      uid="X18"
                       component-url="/_astro/TabsNav.HASH.js"
                       component-export="TabsNav"
                       renderer-url="/_astro/client.HASH.js"
-                      props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X36-inner-3"],"entries":[0,{"tabsEl":[0,"api-response-X36-inner-3"],"tabPanelEls":[1,[[0,"api-response-X36-model-3"],[0,"api-response-X36-example-3"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
+                      props='{"labels":[1,[[0,"Model"],[0,"Example"]]],"externalContext":[0,{"scope":[0,"api-response-X37-inner-3"],"entries":[0,{"tabsEl":[0,"api-response-X37-inner-3"],"tabPanelEls":[1,[[0,"api-response-X37-model-3"],[0,"api-response-X37-example-3"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
                       ssr
                       client="load"
                       opts='{"name":"TabsNav","value":true}'
@@ -13449,7 +13476,7 @@
                         <button
                           role="tab"
                           aria-selected="true"
-                          aria-controls="api-response-X36-model-3"
+                          aria-controls="api-response-X37-model-3"
                           data-tab-index="0"
                           class="tabs__button _tabs__button_MOD tabs__button--active _tabs__button--active_MOD"
                         >
@@ -13457,7 +13484,7 @@
                         ><button
                           role="tab"
                           aria-selected="false"
-                          aria-controls="api-response-X36-example-3"
+                          aria-controls="api-response-X37-example-3"
                           data-tab-index="1"
                           class="tabs__button _tabs__button_MOD"
                         >
@@ -13466,8 +13493,8 @@
                       </div>
                       <!--astro:end--></astro-island
                     >
-                    <div id="api-response-X36-model-3" role="tabpanel" class="tabs__panel tabs__panel--active">
-                      <div id="schema-table-X43" class="schema-table">
+                    <div id="api-response-X37-model-3" role="tabpanel" class="tabs__panel tabs__panel--active">
+                      <div id="schema-table-X44" class="schema-table">
                         <div class="schema-table__table _schema-table__table_MOD">
                           <div class="schema-table__columns _schema-table__columns_MOD">
                             <div class="schema-table__columns-name _schema-table__columns-name_MOD">Name</div>
@@ -13490,11 +13517,11 @@
                           </div>
                         </div>
                         <astro-island
-                          uid="X18"
+                          uid="X19"
                           component-url="/_astro/ApiSchemaTableNav.HASH.js"
                           component-export="ApiSchemaTableNav"
                           renderer-url="/_astro/client.HASH.js"
-                          props='{"externalContext":[0,{"scope":[0,"schema-table-X43"],"entries":[0,{"tableEl":[0,"schema-table-X43"]}]}]}'
+                          props='{"externalContext":[0,{"scope":[0,"schema-table-X44"],"entries":[0,{"tableEl":[0,"schema-table-X44"]}]}]}'
                           ssr
                           client="idle"
                           opts='{"name":"ApiSchemaTableNav","value":true}'
@@ -13504,12 +13531,12 @@
                         >
                       </div>
                     </div>
-                    <div id="api-response-X36-example-3" role="tabpanel" class="tabs__panel" hidden>
+                    <div id="api-response-X37-example-3" role="tabpanel" class="tabs__panel" hidden>
                       <div class="api-response__example _api-response__example_MOD">
-                        <div id="code-block-X44" class="code-block _code-block_MOD" data-language="json">
-                          <div id="code-block-X44-content" class="code-block__content _code-block__content_MOD">
+                        <div id="code-block-X45" class="code-block _code-block_MOD" data-language="json">
+                          <div id="code-block-X45-content" class="code-block__content _code-block__content_MOD">
                             <astro-island
-                              uid="X14"
+                              uid="X15"
                               component-url="/_astro/CopyButton.HASH.js"
                               component-export="CopyButton"
                               renderer-url="/_astro/client.HASH.js"
@@ -13549,13 +13576,13 @@
           </div>
           <div class="api-code-example _api-code-example_MOD">
             <h3 class="api-code-example__heading _api-code-example__heading_MOD">Code Example</h3>
-            <div id="api-code-example-X45" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
+            <div id="api-code-example-X46" class="tabs _tabs_MOD tabs--pills _tabs--pills_MOD">
               <astro-island
-                uid="X19"
+                uid="X20"
                 component-url="/_astro/TabsNav.HASH.js"
                 component-export="TabsNav"
                 renderer-url="/_astro/client.HASH.js"
-                props='{"labels":[1,[[0,"Curl"],[0,"Python"],[0,"Ruby"],[0,"Go"],[0,"Java"],[0,"TypeScript"],[0,"Rust"]]],"externalContext":[0,{"scope":[0,"api-code-example-X45"],"entries":[0,{"tabsEl":[0,"api-code-example-X45"],"tabPanelEls":[1,[[0,"api-code-example-X45-panel-0"],[0,"api-code-example-X45-panel-1"],[0,"api-code-example-X45-panel-2"],[0,"api-code-example-X45-panel-3"],[0,"api-code-example-X45-panel-4"],[0,"api-code-example-X45-panel-5"],[0,"api-code-example-X45-panel-6"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
+                props='{"labels":[1,[[0,"Curl"],[0,"Python"],[0,"Ruby"],[0,"Go"],[0,"Java"],[0,"TypeScript"],[0,"Rust"]]],"externalContext":[0,{"scope":[0,"api-code-example-X46"],"entries":[0,{"tabsEl":[0,"api-code-example-X46"],"tabPanelEls":[1,[[0,"api-code-example-X46-panel-0"],[0,"api-code-example-X46-panel-1"],[0,"api-code-example-X46-panel-2"],[0,"api-code-example-X46-panel-3"],[0,"api-code-example-X46-panel-4"],[0,"api-code-example-X46-panel-5"],[0,"api-code-example-X46-panel-6"]]]}]}],"variant":[0,"pills"],"disabled":[0]}'
                 ssr
                 client="load"
                 opts='{"name":"TabsNav","value":true}'
@@ -13564,7 +13591,7 @@
                   <button
                     role="tab"
                     aria-selected="true"
-                    aria-controls="api-code-example-X45-panel-0"
+                    aria-controls="api-code-example-X46-panel-0"
                     data-tab-index="0"
                     class="tabs__button _tabs__button_MOD tabs__button--active _tabs__button--active_MOD"
                   >
@@ -13572,7 +13599,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-code-example-X45-panel-1"
+                    aria-controls="api-code-example-X46-panel-1"
                     data-tab-index="1"
                     class="tabs__button _tabs__button_MOD"
                   >
@@ -13580,7 +13607,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-code-example-X45-panel-2"
+                    aria-controls="api-code-example-X46-panel-2"
                     data-tab-index="2"
                     class="tabs__button _tabs__button_MOD"
                   >
@@ -13588,7 +13615,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-code-example-X45-panel-3"
+                    aria-controls="api-code-example-X46-panel-3"
                     data-tab-index="3"
                     class="tabs__button _tabs__button_MOD"
                   >
@@ -13596,7 +13623,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-code-example-X45-panel-4"
+                    aria-controls="api-code-example-X46-panel-4"
                     data-tab-index="4"
                     class="tabs__button _tabs__button_MOD"
                   >
@@ -13604,7 +13631,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-code-example-X45-panel-5"
+                    aria-controls="api-code-example-X46-panel-5"
                     data-tab-index="5"
                     class="tabs__button _tabs__button_MOD"
                   >
@@ -13612,7 +13639,7 @@
                   ><button
                     role="tab"
                     aria-selected="false"
-                    aria-controls="api-code-example-X45-panel-6"
+                    aria-controls="api-code-example-X46-panel-6"
                     data-tab-index="6"
                     class="tabs__button _tabs__button_MOD"
                   >
@@ -13621,12 +13648,12 @@
                 </div>
                 <!--astro:end--></astro-island
               >
-              <div id="api-code-example-X45-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
+              <div id="api-code-example-X46-panel-0" role="tabpanel" class="tabs__panel tabs__panel--active">
                 <div data-region="us" class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X46" class="code-block _code-block_MOD" data-language="bash">
-                    <div id="code-block-X46-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X47" class="code-block _code-block_MOD" data-language="bash">
+                    <div id="code-block-X47-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X20"
+                        uid="X21"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -13680,10 +13707,10 @@
                   </div>
                 </div>
                 <div data-region="us3" class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X47" class="code-block _code-block_MOD" data-language="bash">
-                    <div id="code-block-X47-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X48" class="code-block _code-block_MOD" data-language="bash">
+                    <div id="code-block-X48-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X21"
+                        uid="X22"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -13737,10 +13764,10 @@
                   </div>
                 </div>
                 <div data-region="us5" class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X48" class="code-block _code-block_MOD" data-language="bash">
-                    <div id="code-block-X48-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X49" class="code-block _code-block_MOD" data-language="bash">
+                    <div id="code-block-X49-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X22"
+                        uid="X23"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -13794,10 +13821,10 @@
                   </div>
                 </div>
                 <div data-region="eu" class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X49" class="code-block _code-block_MOD" data-language="bash">
-                    <div id="code-block-X49-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X50" class="code-block _code-block_MOD" data-language="bash">
+                    <div id="code-block-X50-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X23"
+                        uid="X24"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -13851,10 +13878,10 @@
                   </div>
                 </div>
                 <div data-region="ap1" class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X50" class="code-block _code-block_MOD" data-language="bash">
-                    <div id="code-block-X50-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X51" class="code-block _code-block_MOD" data-language="bash">
+                    <div id="code-block-X51-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X24"
+                        uid="X25"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -13908,10 +13935,10 @@
                   </div>
                 </div>
                 <div data-region="ap2" class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X51" class="code-block _code-block_MOD" data-language="bash">
-                    <div id="code-block-X51-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X52" class="code-block _code-block_MOD" data-language="bash">
+                    <div id="code-block-X52-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X25"
+                        uid="X26"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -13965,10 +13992,10 @@
                   </div>
                 </div>
                 <div data-region="gov" class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X52" class="code-block _code-block_MOD" data-language="bash">
-                    <div id="code-block-X52-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X53" class="code-block _code-block_MOD" data-language="bash">
+                    <div id="code-block-X53-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X26"
+                        uid="X27"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -14022,12 +14049,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X45-panel-1" role="tabpanel" class="tabs__panel" hidden>
+              <div id="api-code-example-X46-panel-1" role="tabpanel" class="tabs__panel" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X53" class="code-block _code-block_MOD" data-language="python">
-                    <div id="code-block-X53-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X54" class="code-block _code-block_MOD" data-language="python">
+                    <div id="code-block-X54-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X27"
+                        uid="X28"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -14090,12 +14117,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X45-panel-2" role="tabpanel" class="tabs__panel" hidden>
+              <div id="api-code-example-X46-panel-2" role="tabpanel" class="tabs__panel" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X54" class="code-block _code-block_MOD" data-language="ruby">
-                    <div id="code-block-X54-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X55" class="code-block _code-block_MOD" data-language="ruby">
+                    <div id="code-block-X55-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X28"
+                        uid="X29"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -14147,12 +14174,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X45-panel-3" role="tabpanel" class="tabs__panel" hidden>
+              <div id="api-code-example-X46-panel-3" role="tabpanel" class="tabs__panel" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X55" class="code-block _code-block_MOD" data-language="go">
-                    <div id="code-block-X55-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X56" class="code-block _code-block_MOD" data-language="go">
+                    <div id="code-block-X56-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X29"
+                        uid="X30"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -14227,12 +14254,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X45-panel-4" role="tabpanel" class="tabs__panel" hidden>
+              <div id="api-code-example-X46-panel-4" role="tabpanel" class="tabs__panel" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X56" class="code-block _code-block_MOD" data-language="java">
-                    <div id="code-block-X56-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X57" class="code-block _code-block_MOD" data-language="java">
+                    <div id="code-block-X57-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X30"
+                        uid="X31"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -14304,12 +14331,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X45-panel-5" role="tabpanel" class="tabs__panel" hidden>
+              <div id="api-code-example-X46-panel-5" role="tabpanel" class="tabs__panel" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X57" class="code-block _code-block_MOD" data-language="typescript">
-                    <div id="code-block-X57-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X58" class="code-block _code-block_MOD" data-language="typescript">
+                    <div id="code-block-X58-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X31"
+                        uid="X32"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
@@ -14370,12 +14397,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X45-panel-6" role="tabpanel" class="tabs__panel" hidden>
+              <div id="api-code-example-X46-panel-6" role="tabpanel" class="tabs__panel" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_MOD">
-                  <div id="code-block-X58" class="code-block _code-block_MOD" data-language="rust">
-                    <div id="code-block-X58-content" class="code-block__content _code-block__content_MOD">
+                  <div id="code-block-X59" class="code-block _code-block_MOD" data-language="rust">
+                    <div id="code-block-X59-content" class="code-block__content _code-block__content_MOD">
                       <astro-island
-                        uid="X32"
+                        uid="X33"
                         component-url="/_astro/CopyButton.HASH.js"
                         component-export="CopyButton"
                         renderer-url="/_astro/client.HASH.js"
