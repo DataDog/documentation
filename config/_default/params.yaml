@@ -333,6 +333,7 @@ unsupported_sites:
   fleet_automation: [gov,gov2]
   high_availability_datadog_agent: [gov,gov2]
   iac_security: [gov,gov2]
+  ioc_explorer: [gov,gov2]
   incident_ai: [gov,gov2]
   jetbrains-ides: [gov,gov2]
   jira-service-management-ops: [gov,gov2]
