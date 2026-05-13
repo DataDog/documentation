@@ -65,7 +65,7 @@ To install and activate the Datadog CSI Driver, set `datadog.csi.enabled` to `tr
 {{% tab "Datadog Operator" %}}
 
 <div class="alert alert-info">
-Operator-managed CSI Driver installation requires Datadog Operator <strong>v1.26.0</strong> or later. If you are using an earlier version, see <a href="#legacy-helm-based-installation">Legacy Helm-based installation</a> below.
+Operator-managed CSI Driver installation requires Datadog Operator <strong>v1.26.0</strong> or later. If you are using an earlier version, see <a href="#legacy-helm-based-installation">Legacy Helm-based installation</a>.
 </div>
 
 Starting with Datadog Operator v1.26.0, the Operator can install and manage the CSI Driver on your behalf. Set `csi.enabled` to `true` in your `DatadogAgent` resource, and the Operator automatically creates a `DatadogCSIDriver` custom resource to deploy the driver:
