@@ -207,7 +207,13 @@ _Fixed cost values are subject to refinement over time._
 
 ### Identify resources to rightsize
 
-The [Autoscaling Summary page][6] provides a starting point for platform teams to understand the total Kubernetes Resource savings opportunities across an organization, and filter down to key clusters and namespaces. The [Cluster Scaling view][7] provides per-cluster information about total idle CPU, total idle memory, and costs. Click on a cluster for detailed information and a table of the cluster's workloads. If you are an individual application or service owner, you can also filter by your team or service name directly from the [Workload Scaling list view][8].
+The [Autoscaling Summary page][6] provides a starting point for platform teams to understand the total Kubernetes Resource savings opportunities across an organization, and filter down to key clusters and namespaces.
+
+The [Setup page][11] provides the option to select multiple workloads to scale, and manage your optimization in batches.
+
+The [Cluster Scaling view][7] provides per-cluster information about total idle CPU, total idle memory, and costs.
+
+Click on a cluster for detailed information and a table of the cluster's workloads sorted by estimated savings. If you are an individual application or service owner, you can also filter by your team or service name directly from the [Workload Scaling list view][8].
 
 From any of these views, click {{< ui >}}Optimize{{< /ui >}} on a workload to see its scaling recommendation, then proceed to [Enable Autoscaling for a workload](#enable-autoscaling-for-a-workload).
 
@@ -219,7 +225,7 @@ There are two ways to enable autoscaling for a workload. Pick the path that matc
 
 | Path | Best for | Where you start | Ongoing management |
 |------|----------|-----------------|--------------------|
-| **A. Datadog UI setup wizard** | A single workload, demos, or your first rollout | [Setup page][11] in the Datadog UI | Edit the workload's `DatadogPodAutoscaler` from the UI or your cluster |
+| **A. Datadog UI setup wizard** | Get started quickly and iterate on settings with immediate visual feedback, or empower your application teams to make better scaling configuration decisions | [Setup page][11] in the Datadog UI | Edit the workload's `DatadogPodAutoscaler` from the UI or your cluster |
 | **B. Author a `DatadogPodAutoscaler` manifest** | Existing workflows for shipping Kubernetes manifests (`kubectl`, Helm, ArgoCD, Terraform, or other GitOps tools) | Hand-written or templated YAML applied through your existing tooling | Edit the manifest and reapply through the same tooling |
 
 #### Path A: Datadog UI setup wizard
