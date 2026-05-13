@@ -30,6 +30,17 @@ Bits Data is an agentic AI tool that lets you explore and analyze your business 
 - Save reusable [skills](#skills) for repeated workflows.
 - Pull results directly into a [Datadog Notebook][2] for further analysis.
 
+## Sample questions
+
+Ask Bits Data questions like:
+
+- `What is the ARR for top customers this quarter?`
+- `Which products have the most active customers?`
+- `What is the monthly support ticket volume trend?`
+- `Which products have the highest open ticket count?`
+- `Which deals have been in negotiation longer than 30 days?`
+- `What is the company headcount by office location?`
+
 ## How it works
 
 1. Type a question in natural language.
