@@ -35,19 +35,19 @@ The CLI can:
 
 ### Install and run
 
-Run the CLI with `npx`, replacing `<PRODUCT>` with one of: `error-tracking`, `rum`, `product-analytics`, `kubernetes`, `docker`, or `serverless`:
-
-```shell
-npx @datadog/ai-setup-cli --product <PRODUCT>
-```
-
-To walk through account setup and product selection interactively, run the CLI with no arguments:
+Run the CLI with `npx`:
 
 ```shell
 npx @datadog/ai-setup-cli
 ```
 
-A browser window opens for authentication. After you complete the OAuth flow, return to your terminal. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary tokens.
+A browser window opens for authentication. After you complete the OAuth flow, return to your terminal. The CLI walks you through account setup and product selection, detects your project's frameworks, applies the required configuration, and provisions any necessary tokens.
+
+To skip product selection, pass `--product` with one of `error-tracking`, `rum`, `product-analytics`, `kubernetes`, `docker`, or `serverless`:
+
+```shell
+npx @datadog/ai-setup-cli --product <PRODUCT>
+```
 
 ### Example flows
 
