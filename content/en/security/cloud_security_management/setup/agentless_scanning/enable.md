@@ -235,15 +235,15 @@ After completing any of the setup methods above, [verify your setup](#verify-you
 {{% collapse-content title="Cloud Shell" level="h3" id="azure-cloud-shell-setup" %}}
 Use Azure Cloud Shell to set up Agentless Scanning for your Azure subscriptions. This method downloads a [setup script](https://github.com/DataDog/integrations-management/tree/main/azure/agentless) that wraps the [Terraform Datadog Agentless Scanner module for Azure](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme), so you do not need to manage Terraform directly. You can review the script before running it.
 
-1. Ensure you have the required Azure permissions:
+1. Ensure the identity you use in Cloud Shell has the required Azure permissions:
 
-   - On the **scanner subscription**, the identity you use in Cloud Shell must have **Owner** (or a role granting role-assignment write and resource creation).
-   - On **each scanned subscription**, you need a role granting `Microsoft.Authorization/roleAssignments/write` (for example, **User Access Administrator** or **Owner**) so the scanner's managed identity can be granted the permissions it needs to snapshot and read disks.
+   - On the **scanner subscription**, the identity must have a role that grants role-assignment write and resource creation, such as **Owner**.
+   - On **each scanned subscription**, the identity must have a role that grants the `Microsoft.Authorization/roleAssignments/write` permission, so the scanner's managed identity can be granted the permissions it needs to snapshot and read disks, such as **User Access Administrator** or **Owner**.
    - For Terraform state, the script creates an Azure Storage Account in the **scanner** subscription unless you set `TF_STATE_STORAGE_ACCOUNT` to reuse an existing storage account in the scanner resource group; the script does not create a new account in that case.
    - The script registers these resource providers in the scanner subscription when possible: `Microsoft.Compute`, `Microsoft.Network`, `Microsoft.ManagedIdentity`, `Microsoft.Storage`, `Microsoft.KeyVault`, `Microsoft.Authorization`.
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **Azure**.
 1. Expand the Tenant containing the subscription where you want to deploy the Agentless scanner.
-1. Click the **Enable** button for the Azure subscription where you want to deploy the Agentless scanner. The **Vulnerability Scanning** modal opens.
+1. Click **Enable** for the Azure subscription where you want to deploy the Agentless scanner. The **Vulnerability Scanning** modal opens.
 1. Turn on the **Vulnerability Scanning** toggle.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Azure Cloud Shell**.
 1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
