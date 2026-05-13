@@ -25,70 +25,70 @@ aliases:
 - /ja/agent/basic_agent_usage/linux/
 further_reading:
 - link: /logs/
-  tag: Documentation
+  tag: よくあるご質問
   text: ログの収集
 - link: /infrastructure/process/
-  tag: Documentation
+  tag: よくあるご質問
   text: プロセスの収集
 - link: /tracing/
-  tag: Documentation
+  tag: よくあるご質問
   text: トレースの収集
 - link: /agent/architecture/#agent-architecture
-  tag: Documentation
-  text: Agent のアーキテクチャに関する詳細
+  tag: よくあるご質問
+  text: Agent のアーキテクチャを詳しく見る
 - link: /agent/configuration/network#configure-ports
-  tag: Documentation
-  text: インバウンドポートの設定
+  tag: よくあるご質問
+  text: インバウンドポートの構成
 platform: Linux
 title: Linux
 ---
 ## 概要 {#overview}
 
-このページでは、Linux 環境用 Datadog Agent の基本機能の概要を説明します。サポートされている Linux ディストリビューションとバージョンの完全なリストについては、[サポート対象プラットフォーム][5] ドキュメントを参照してください。
+このページでは、Linux 環境用の Datadog Agent の基本的な機能を説明します。サポートされている Linux ディストリビューションとバージョンの完全なリストについては、[サポートされているプラットフォーム][5]のドキュメントを参照してください。
 
-##Agent のインストール {#install-the-agent}
-Linux に Agent をインストールするには、[Fleet Automation のアプリ内手順][6]に従い、生成されたスクリプトをホストで実行します。
+## Agent のインストール {#install-the-agent}
+Linux に Agent をインストールするには、[Fleet Automation のアプリ内手順][6]に従い、生成されたスクリプトをホストで実行してください。
 
-{{< img src="/agent/basic_agent_usage/linux_img_july_25.png" alt="Linux ホストへの Datadog Agent のアプリ内インストール手順。" style="width:90%;">}}
-
-
-## Agent の設定 {#configure-the-agent}
-Datadog Agent の設定ファイルは `/etc/datadog-agent/datadog.yaml` にあります。この YAML ファイルには、以下を含む、Datadog にデータを送信するために使用されるホスト全体の接続の詳細が保持されます。
-- `api_key`: 組織の [Datadog API キー][7]
-- `site`: ターゲットの Datadog リージョン (例: `datadoghq.com`、`datadoghq.eu`、`ddog-gov.com`)
-- `proxy`: アウトバウンドトラフィック用の HTTP/HTTPS プロキシエンドポイント ([Datadog Agent プロキシ設定][8]を参照)
-- デフォルトのタグ、ログレベル、および Datadog の設定
-
-`/etc/datadog-agent/datadog.yaml.example` にある完全にコメント化されたリファレンスファイルには、比較やコピーアンドペーストに使用できるすべてのオプションがリストされています。または、サンプルの `config_template.yaml` ファイルで、利用可能なすべての設定オプションを参照してください。
-
-###インテグレーションファイル {#integration-files}
-インテグレーション用の設定ファイルは `/etc/datadog-agent/conf.d/` にあります。各インテグレーションには専用のサブディレクトリ `<INTEGRATION>.d/` があり、次のものが含まれています。
-- `conf.yaml`: インテグレーションがメトリクスとログを収集する方法を制御するアクティブな設定
-- `conf.yaml.example`: サポートされているキーとデフォルトを示すサンプル
+{{< img src="/agent/basic_agent_usage/linux_img_july_25.png" alt="Linux ホストに Datadog Agent をインストールするためのアプリ内の手順。" style="width:90%;">}}
 
 
-## コマンド {#commands}
+## Agent の構成 {#configure-the-agent}
+Datadog Agent 構成ファイルは `/etc/datadog-agent/datadog.yaml` にあります。この YAML ファイルには、Datadog にデータを送信するために使用されるホスト全体のコネクション情報が含まれており、次の項目が含まれます:
+- `api_key`: あなたの組織の [Datadog API キー][7]
+- `site`: 対象 Datadog リージョン（例: `datadoghq.com`, `datadoghq.eu`, `ddog-gov.com`）
+- `proxy`: アウトバウンドトラフィック用の HTTP/HTTPS プロキシエンドポイント（[Datadog Agent プロキシ構成][8]を参照）
+- デフォルトのタグ、ログレベル、および Datadog 構成
 
-| 説明   | コマンド               |
+コメント付きのリファレンスファイルが `/etc/datadog-agent/datadog.yaml.example` にあり、比較やコピー＆ペースト用に利用可能なすべてのオプションがリストされています。または、サンプルの `config_template.yaml` ファイルで、利用可能なすべての構成オプションを参照してください。
+
+###  インテグレーションファイル {#integration-files}
+インテグレーション用の構成ファイルは `/etc/datadog-agent/conf.d/` にあります。各インテグレーションには独自のサブディレクトリ `<INTEGRATION>.d/` があり、以下が含まれています。
+- `conf.yaml`: インテグレーションがメトリクスやログを収集する方法を制御するアクティブな構成
+- `conf.yaml.example`: サポートされているキーやデフォルトを示すサンプル
+
+
+##  コマンド {#commands}
+
+|  説明   |  コマンド               |
 |---------------|-----------------------|
-| Agent をサービスとして開始する           | `sudo systemctl start datadog-agent`                   |
-| サービスとして実行中の Agent を停止する    | `sudo systemctl stop datadog-agent`                    |
-| サービスとして実行中の Agent を再起動する | `sudo systemctl restart datadog-agent`                 |
+| Agent をサービスとして起動します           | `sudo systemctl start datadog-agent`                   |
+| サービスとして実行中の Agent の停止    | `sudo systemctl stop datadog-agent`                    |
+| サービスとして実行中の Agent の再起動 | `sudo systemctl restart datadog-agent`                 |
 | Agent サービスのステータス            | `sudo systemctl status datadog-agent`                  |
 | 実行中の Agent のステータスページ       | `sudo datadog-agent status`                            |
-| フレアを送信する                         | `sudo datadog-agent flare`                             |
-| コマンドの使用方法を表示する              | `sudo datadog-agent --help`                            |
-| チェックを実行する                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
+| フレアの送信                         | `sudo datadog-agent flare`                             |
+| コマンドの使用方法の表示              | `sudo datadog-agent --help`                            |
+| チェックの実行                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-**注**: `CentOS/RHEL 6` や `SUSE 11` などの upstart ベースのシステムでは、`systemctl <action>` を `<action>` に置き換えてください。たとえば、`SUSE 11` システムで Agent をサービスとして開始する場合は、`sudo start datadog-agent` を使用します。
-
-
-##Agent のアンインストール {#uninstall-the-agent}
-
-Agent をアンインストールするには、適切な Linux 環境用のコマンドを実行します。
+**注意**: upstart ベースのシステム、例えば `CentOS/RHEL 6` または `SUSE 11` の場合、`systemctl <action>` を `<action>` に置き換えてください。Agent をサービスとして起動する場合、`SUSE 11` システムでは `sudo start datadog-agent` を使用してください。
 
 
-### CentOS、Rocky、AlmaLinux、Amazon Linux、Oracle Linux、および Red Hat の場合 {#for-centos-rocky-almalinux-amazon-linux-oracle-linux-and-red-hat}
+## Agent のアンインストール {#uninstall-the-agent}
+
+Agent をアンストールするには、該当する Linux 環境のコマンドを実行してください。
+
+
+### CentOS、Rocky、AlmaLinux、Amazon Linux、Oracle Linux、および Red Hat {#for-centos-rocky-almalinux-amazon-linux-oracle-linux-and-red-hat}
 
 ```shell
 sudo yum remove datadog-agent
@@ -108,14 +108,14 @@ sudo zypper remove datadog-agent
 
 <div class="alert alert-info">
 
-**上記のコマンドで Agent は削除されますが、次のものは削除されません。**
-* `datadog.yaml` 設定ファイル
-* `/etc/datadog-agent` 設定フォルダー内のユーザー作成ファイル
-* `/opt/datadog-agent` フォルダー内のユーザー作成ファイル
-* `dd-agent` ユーザー
+**上記のコマンドで Agent は削除されますが、次のものは削除されません**:
+* この `datadog.yaml` 構成ファイル
+* 構成フォルダ内のユーザー作成ファイル `/etc/datadog-agent`
+* フォルダ内のユーザー作成ファイル `/opt/datadog-agent`
+* この `dd-agent` ユーザー
 * Datadog ログファイル
 
-**これらの要素を削除するには、Agent を削除した後に次のコマンドを実行します。**
+**これらの要素を削除するには、エージェント削除後に次のコマンドを実行してください。**
 
 ```shell
 sudo userdel dd-agent \
@@ -124,7 +124,7 @@ sudo userdel dd-agent \
 && sudo rm -rf /var/log/datadog/
 ```
 
-`Debian` および `Ubuntu` の残りの Agent アーティファクトをアンインストールするには、次のコマンドを実行します。
+残りのエージェントのアーティファクトを`Debian`および`Ubuntu`用にアンインストールするには、次のコマンドを実行してください:
 
 ```shell
 sudo apt-get remove --purge datadog-agent -y
@@ -133,22 +133,22 @@ sudo apt-get remove --purge datadog-agent -y
 </div>
 
 
-### Single Step APM Instrumentation のアンインストール {#uninstall-single-step-apm-instrumentation}
-Agent を Single Step APM Instrumentation と共にインストールし、それをアンインストールする場合は、APM Instrumentation を削除するために [追加のコマンドを実行][9]する必要があります。[特定の環境][10]向けの手順に従ってください。
+### Single Step APM インスツルメンテーションのアンインストール {#uninstall-single-step-apm-instrumentation}
+Single Step APM Instrumentation と一緒に Agent をインストールしていて、それをアンインストールする場合は、APM Instrumentation を削除するために[追加のコマンドを実行][9]する必要があります。[自分の環境][10]に該当する手順を実効してください。
 
 
-##トラブルシューティング {#troubleshooting}
+## トラブルシューティング {#troubleshooting}
 
 詳細な手順については、[Agent のトラブルシューティング][2]を参照してください。
 
-##組み込み Agent の操作 {#working-with-the-embedded-agent}
+## 埋め込み Agent の使用 {#working-with-the-embedded-agent}
 
-Agent には、`/opt/datadog-agent/embedded/` に組み込みの Python 環境が含まれています。`python` や `pip` などの一般的なバイナリは `/opt/datadog-agent/embedded/bin/` 内に含まれています。
+Agent には `/opt/datadog-agent/embedded/` に埋め込まれた Python 環境が含まれています。`/opt/datadog-agent/embedded/bin/` には `python` や `pip` などの一般的なバイナリが含まれています。
 
-詳細については、[組み込み Agent へのパッケージの追加][3]に関する説明を参照してください。
+詳細については、[埋め込み Agent へのパッケージの追加方法][3]の手順を参照してください。
 
 
-##その他の参考資料 {#further-reading}
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

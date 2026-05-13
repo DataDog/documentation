@@ -2,7 +2,8 @@
 algolia:
   tags:
   - site
-  - Datadog サイト
+  - datadog site
+description: 地域やセキュリティ要件に応じたさまざまな Datadog サイトについて学び、政府準拠のオプションも含まれています。
 further_reading:
 - link: https://learn.datadoghq.com/courses/dashboards-slos
   tag: ラーニングセンター
@@ -12,30 +13,29 @@ further_reading:
   text: デュアルシッピング
 title: Datadog サイトの概要
 ---
+## 概要 {#overview}
 
-## 概要
+Datadog は世界中にさまざまなサイトを提供しています。各サイトは完全に独立しており、サイト間でデータを共有することはできません。各サイトは、政府のセキュリティ規制などの利点を提供したり、世界の特定の場所にデータを保存することを可能にします。
 
-Datadog では、世界中でさまざまなサイトを提供しています。各サイトは完全に独立しており、サイト間でデータを共有することはできません。各サイトを使用する利点があり（政府のセキュリティ規定など）、世界中の特定した場所にデータを保存することが可能になります。
-
-## 責任の共有
+## 責任の共有 {#shared-responsibility}
 
 ユーザーデータを安全に保つ責任は、Datadog と Datadog 製品を活用する開発者の間で共有されます。
 
 Datadog の責任は以下の通りです。
-- Datadog プラットフォームにデータが転送され、保存される際、それを安全に取り扱う信頼性の高い製品を提供します。
+- Datadog プラットフォームへのデータ転送や保存時にデータを安全に取り扱う信頼性の高い製品を提供します。
 - 社内ポリシーに基づき、セキュリティ上の問題を確実に特定します。
 
 開発者の責任は以下の通りです。
 - Datadog が提供する構成値とデータプライバシーオプションを活用します。
-- 自社の環境内のコードの整合性を確実に保ちます。
+- 各環境におけるコードの整合性を確保します.
 
-## Datadog サイトにアクセスする
+## Datadog サイトにアクセスする {#access-the-datadog-site}
 
 下記の表で、Datadog ウェブサイトの URL とサイト URL を対照させると、ご使用中のサイトがわかります。
 
-{{< img src="getting_started/site/site.png" alt="ブラウザのタブに表示されるサイトの URL" style="width:40%" >}}
+{{< img src="getting_started/site/site.png" alt="ブラウザタブのサイト URL" style="width:40%" >}}
 
-| サイト    | サイト URL                    | サイトパラメーター      | 所在地 |
+| サイト    | サイト URL                    | サイトパラメータ      | 場所 |
 |---------|-----------------------------|---------------------|----------|
 | US1     | `https://app.datadoghq.com` | `datadoghq.com`     | US       |
 | US3     | `https://us3.datadoghq.com` | `us3.datadoghq.com` | US       |
@@ -43,33 +43,30 @@ Datadog の責任は以下の通りです。
 | EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU (ドイツ) |
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | 日本 |
+| AP2     | `https://ap2.datadoghq.com` | `ap2.datadoghq.com` | オーストラリア |
 
-**注**: 複数のエンドポイントを経由して複数の宛先にデータを送信するには、[デュアルシッピング][2]ガイドを参照してください。
+複数のエンドポイントを経由して複数の宛先にデータを送信するには、[デュアルシッピング][2]ガイドを参照してください。
 
-## SDK ドメイン
+## SDK ドメイン {#sdk-domains}
 
 [SDK ドメインでサポートされるエンドポイント][3]を参照してください。
 
-## Datadog のドキュメントをサイト別に見る
+## Datadog のドキュメントをサイト別に見る {#navigate-the-datadog-documentation-by-site}
 
-Datadog サイトによって、インスタンスのセキュリティ要件に応じた異なる機能をサポートする場合があります。そのため、ドキュメントはサイトによって異なる場合があります。Datadog ドキュメントのどのページでも、右側のサイトセレクタードロップダウンメニューを使用して、情報を見たい Datadog サイトを選択することができます。
+異なる Datadog サイトは、インスタンスのセキュリティ要件に応じて異なる機能をサポートする場合があります。したがって、ドキュメントはサイトによって異なる場合があります。Datadog ドキュメントの任意のページの右側にあるサイトセレクタードロップダウンメニューを使用して、情報を表示したい Datadog サイトを選択できます。
 
 {{< img src="getting_started/site/site-selector-gs-with-tags.png" alt="ドキュメントサイトの右側にあるサイトセレクタードロップダウンメニュー" style="width:100%" >}}
 
 例えば、Datadog for Government サイトのドキュメントを見るには、**US1-FED** を選択します。
 
-{{% site-region region="gov" %}}
+## Datadog for Government サイトにアクセスする {#access-the-datadog-for-government-site}
 
-## Datadog for Government サイトにアクセスする
+Datadog for Government サイト (US1-FED) は、Datadog の FedRAMP Moderate 認可サイトです。US1-FED は、米国政府機関およびパートナーがアプリケーションとインフラストラクチャーを監視できるようにすることを目的としています。US1-FED のセキュリティおよびコンプライアンスコントロールとフレームワークに関する情報、ならびに FedRAMP をどのようにサポートしているかについては、[セキュリティページ][1]を参照してください。
 
-Datadog for Government Site (US1-FED) は、アメリカ政府機関およびパートナーがそのアプリケーションやインフラストラクチャーを監視するためのサイトです。Datadog for Government site のセキュリティおよびコンプライアンスコントロール、フレームワークに関する詳細や、FedRAMP への対応については、[セキュリティページ][1]をご参照ください。
-
-[1]: https://www.datadoghq.com/security/
-{{% /site-region %}}
-
-## その他の参考資料
+## さらに読む {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://www.datadoghq.com/security/
 [2]: /ja/agent/configuration/dual-shipping/
 [3]: /ja/real_user_monitoring/#supported-endpoints-for-sdk-domains
