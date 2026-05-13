@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Jira is an issue and project tracking system for software teams. The Datadog Jira integration allows you to create issues from incidents in Datadog and view issues created in Jira as Datadog events.
+Jira is a work item and project tracking system for software teams. The Datadog Jira integration allows you to create work items from incidents in Datadog and view work items created in Jira as Datadog events.
 
 The Jira integration with Datadog Incident Management provides you with the following benefits:
 - **Improved Visibility**: Ensure that all stakeholders are immediately informed about incidents, facilitating a quicker response.
@@ -29,20 +29,26 @@ The Jira integration with Datadog Incident Management provides you with the foll
 
 ## Prerequisites
 
-To use automatic ticket creation, install the integration through the [Jira Integration tile][1]. For more information, see the [Jira integration][2] documentation.
+To use automatic work item creation, install the integration through the [Jira Integration tile][1]. For more information, see the [Jira integration][2] documentation.
 
 ## Setup
 
 1. On the [Integration Settings page][3], find the Jira integration.
-2. Click **Enable Jira issue creation** toggle to allow manual or automatic Jira creation.
-3. Select your Jira account, project, and issue type.
-4. Add a condition to define when to automatically create a Jira issue. If this condition is left blank, a Jira issue is created for all new incidents.
-5. Define a template with dynamic variables to populate Jira ticket fields. Type `{{` to insert incident template variables into fields like **Summary**, **Reporter**, and **Description**. Dynamic variables work only with **string** [Jira field types][5].
-6. Configure status and severity mappings to sync incident states and severities to Jira statuses and priorities.
+2. Click **Automatically create a parent work item for incidents** toggle to allow automatic Jira creation.
+3. Select your Jira account, project, and work item type.
+4. Add a condition to define when to automatically create a Jira work item. If this condition is left blank, a Jira work item is created for all new incidents.
+5. For each Jira work item field, define whether the field should sync one-way or bidirectionally.
+6. For one-way sync (Datadog Incident -> Jira Work Item), use the **Custom Value** field option to define a template with dynamic variables to populate Jira work item fields. Type `{{` to insert incident template variables into fields like **Summary**, **Reporter**, and **Description**. Dynamic variables work with **string**, **number**, **date/datetime** [Jira field types][5].
+7. For bidirectional sync, **string**, **number**, **date/datetime** [Jira field types][5] fields are supported.
+8. Configure status and severity mappings to bidirectionally sync incident states and severities with Jira statuses and priorities.
+9. Click **Manually create new work items or link existing ones** toggle to allow manual Jira creation
+10. Click **Link manually created work items to the parent work item in Jira** to link manually created Jira work items to the bidirectionally syncing Jira work item (if it exists).
 
-As incidents are created, an issue is also created in the corresponding Jira instance. This Jira issue links to the incident in Datadog for reference.
+As incidents are created, a work item is also created in the corresponding Jira instance. This Jira work item links to the incident in Datadog for reference.
 
-The Jira issue is synced with the incident based on the template and mappings defined in the [Integration Settings page][3].
+The Jira work item is bidirectionally synced with the incident based on the template and mappings defined in the [Integration Settings page][3].
+
+Manually created Jira work items are not synced with the incident.
 
 ## Further Reading
 
