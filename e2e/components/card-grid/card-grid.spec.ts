@@ -11,7 +11,8 @@ const SECTION = {
     TEXT_ONLY: 2,
     CUSTOM_MIN_WIDTH: 3,
     CUSTOM_IMG_WIDTH: 4,
-    SINGLE: 5
+    SINGLE: 5,
+    TOOLTIPS: 6
 } as const;
 
 function gridSection(page: Page, index: number) {
@@ -163,5 +164,45 @@ test.describe('card-grid shortcode', () => {
 
         expect(shadowAfter).not.toBe(shadowBefore);
         expect(shadowAfter).not.toBe('none');
+    });
+
+    test('tooltip cards have Bootstrap tooltip attributes', async ({ page }) => {
+        const cards = gridSection(page, SECTION.TOOLTIPS).locator('.card-grid-card');
+        // Bootstrap JS moves title to data-bs-original-title on init
+        await expect(cards.nth(0)).toHaveAttribute('data-bs-original-title', 'Linux');
+        await expect(cards.nth(0)).toHaveAttribute('data-bs-toggle', 'tooltip');
+        await expect(cards.nth(0)).toHaveAttribute('data-bs-placement', 'top');
+        await expect(cards.nth(1)).toHaveAttribute('data-bs-original-title', 'Docker');
+    });
+
+    test('non-tooltip cards do not have tooltip attributes', async ({ page }) => {
+        const card = gridSection(page, SECTION.IMAGE_4).locator('.card-grid-card').first();
+        await expect(card).not.toHaveAttribute('data-bs-toggle');
+    });
+
+    test('tooltip grid emits script tag for page reload', async ({ page }) => {
+        const scripts = await page.locator('script').evaluateAll(els =>
+            els.map(el => el.textContent?.trim())
+        );
+        expect(scripts).toContain('void 0');
+    });
+
+    test('tooltips work after sidenav navigation', async ({ page }) => {
+        // Navigate away to another page
+        await page.goto('/getting_started/');
+        await page.waitForLoadState('domcontentloaded');
+
+        // Navigate back to the card grid page
+        await page.goto(PAGE_URL);
+        await page.waitForSelector(CONTENT_AREA);
+        await hideOverlays(page);
+
+        // Hover over a tooltip card and verify the tooltip appears
+        const card = gridSection(page, SECTION.TOOLTIPS).locator('.card-grid-card').first();
+        await card.hover();
+        await page.waitForTimeout(500);
+
+        const tooltip = page.locator('.tooltip.show, .bs-tooltip-top');
+        await expect(tooltip).toBeVisible();
     });
 });

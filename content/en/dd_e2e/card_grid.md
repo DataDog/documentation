@@ -54,3 +54,10 @@ private: true
 {{< card-grid >}}
   {{< image-card href="/getting_started/" src="integrations_logos/linux.png" alt="Linux" >}}
 {{< /card-grid >}}
+
+## Tooltips
+
+{{< card-grid >}}
+  {{< image-card href="/getting_started/" src="integrations_logos/linux.png" alt="Linux" tooltip="Linux" >}}
+  {{< image-card href="/getting_started/" src="integrations_logos/docker.png" alt="Docker" tooltip="Docker" >}}
+{{< /card-grid >}}

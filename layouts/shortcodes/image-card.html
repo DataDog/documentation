@@ -4,8 +4,9 @@
 {{ $title := .Get "title" }}
 {{ $subtitle := .Get "subtitle" }}
 {{ $img_width := .Get "img_width" | default (.Parent.Get "img_width") | default "150" }}
+{{ $tooltip := .Get "tooltip" }}
 
-<a class="card-grid-card h-100" href="{{ $href }}">
+<a class="card-grid-card h-100" href="{{ $href }}"{{ with $tooltip }} title="{{ . }}" data-bs-toggle="tooltip" data-bs-placement="top"{{ end }}>
   <div class="card-body text-center py-2 px-1 d-flex align-items-center justify-content-center">
     {{ with $src }}
       {{ partial "img.html" (dict "root" $ "src" . "class" "img-fluid" "alt" $alt "width" $img_width) }}
