@@ -34,15 +34,15 @@ Use your expected daily log volume and peak ingestion rates as starting points, 
 
 The following table provides starting-point configurations for common daily log volumes. These are baseline recommendations—adjust based on your observed performance.
 
-As a rule of thumb for a mixed workload, plan for around 14 vCPUs per TB/day ingested—roughly one third for indexers and two thirds for searchers. Incident-response-only workloads may need fewer searcher vCPUs; analytics-heavy use cases (dashboards) may need 2-3x more.
+As a rule of thumb for a mixed workload, plan for around 12 vCPUs per TB/day ingested—4 vCPUs for indexers and 8 vCPUs for searchers. Actual pod counts round up to fit standard pod sizes. Incident-response-only workloads may need fewer searcher vCPUs; analytics-heavy use cases (dashboards) may need 2-3x more.
 
 | Daily volume | Indexer pods | Indexer podSize | Searcher pods | Searcher podSize | Object storage (30-day retention, ~6x compression) |
 |-------------|-------------|-----------------|---------------|-------------------|-----------------------------------------------------|
 | **1 TB/day** | 2 | large | 2 | xlarge | ~5 TB |
-| **5 TB/day** | 6 | xlarge | 6 | 2xlarge | ~25 TB |
-| **10 TB/day** | 6 | 2xlarge | 6 | 4xlarge | ~50 TB |
-| **50 TB/day** | 15 | 4xlarge | 15 | 8xlarge | ~250 TB |
-| **100 TB/day** | 30 | 4xlarge | 30 | 8xlarge | ~500 TB |
+| **5 TB/day** | 5 | xlarge | 5 | 2xlarge | ~25 TB |
+| **10 TB/day** | 10 | xlarge | 5 | 4xlarge | ~50 TB |
+| **50 TB/day** | 25 | 2xlarge | 13 | 8xlarge | ~250 TB |
+| **100 TB/day** | 50 | 2xlarge | 25 | 8xlarge | ~500 TB |
 
 <div class="alert alert-info">
 Searcher vCPUs in this table assume a mixed workload (searches and some dashboards). For dashboard-heavy use cases, increase searcher vCPUs by 2-3x. For search-only use cases (incident response, grep), you may be able to reduce them.
