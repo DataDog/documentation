@@ -424,14 +424,14 @@ To enable all generally available toolsets, use `toolsets=all`. This works best 
 {{% /collapse-content %}}
 
 [1]: /getting_started/site/
-[2]: https://github.com/datadog-labs/opencode-plugin
-[3]: https://opencode.ai/
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+[2]: https://github.com/datadog-labs/opencode-plugin
+[3]: https://opencode.ai/
 {{% /tab %}}
 
 {{% tab "VS Code" %}}
