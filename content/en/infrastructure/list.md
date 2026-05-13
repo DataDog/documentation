@@ -17,13 +17,13 @@ further_reading:
 
 ## Overview
 
-The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last 15 minutes, with an option to switch to a live view. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog.
+The Host List gives you a live inventory of all hosts reporting to Datadog through the Agent or cloud integrations. By default, it shows hosts with activity in the last 15 minutes. To open the Host List, navigate to [**Infrastructure > Hosts**][10] in Datadog.
 
-This page describes the default view of the Host List. To switch to the **Legacy** view, click the toggle in the upper-right corner.
+This page describes the default view of the Host List. To switch between the new and **Legacy** views, use the toggle in the upper-right corner.
 
 {{< img src="infrastructure/index/infra-list-overview-2.png" alt="The Host List with a filter panel on the left and a list of hosts with customizable columns." style="width:100%;">}}
 
-**Note**: This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
+**Note**: This list should not be used to estimate your infrastructure host billing. See the [billing][11] page for details.
 
 ## Filter and search
 
@@ -36,12 +36,6 @@ Use the filter panel on the left to narrow the list of hosts:
 
 You can also use the search box at the top of the list to filter hosts using the [Datadog search syntax][16].
 
-## Saved views
-
-To save your filter and column configuration, open the **Views** panel in the upper-left corner and click **Save as new view**. From this panel, you can filter, sort, edit, and star saved views.
-
-{{< img src="infrastructure/index/infra-list-views.png" alt="The Views panel with options to save, filter, sort, and edit saved views." style="width:40%;">}}
-
 ## Customize columns
 
 To add, remove, or reorder columns, click **Columns** above the Host List. You can add any of the following as a column:
@@ -50,19 +44,27 @@ To add, remove, or reorder columns, click **Columns** above the Host List. You c
 - **Tags**: Any tag applied to the host.
 - **Metrics**: Any metric reported by the host.
 
-Drag a column to reorder it. To resize a column, drag its right edge. To hide a column, toggle it off.
+To reorder a column, drag it to a new position. To resize, drag its right edge. To hide, toggle it off.
 
 {{< img src="infrastructure/index/infra-list-columns.png" alt="The column customization panel with sections for Host Attributes, Tags, and Metrics, and toggles to show or hide each column." style="width:100%;">}}
 
-The following columns combine multiple datapoints into a single column:
+### Combined columns
+
+The Host List includes three columns that combine multiple datapoints:
 
 - **Configurations**: The cloud provider, operating system, and Datadog Agent installation status for each host.
 - **Software**: The host's web server, database, cache, and container orchestrator (such as Docker or Kubernetes), if detected.
 - **Integrations**: The Datadog Agent integrations enabled on the host.
 
+## Saved views
+
+To save your filter and column configuration, open the **Views** panel in the upper-left corner and click **Save as new view**. From this panel, you can filter, sort, edit, and star saved views.
+
+{{< img src="infrastructure/index/infra-list-views.png" alt="The Views panel with options to save, filter, sort, and edit saved views." style="width:40%;">}}
+
 ## Inspect a host
 
-Click any host to open its detail panel, which includes:
+Click any host to open its detail panel, which is the same side panel used by the [Resource Catalog][15]. The panel includes:
 
 - [Hostnames and aliases](/agent/faq/how-datadog-agent-determines-the-hostname/#host-aliases)
 - [Tags][2]
@@ -74,10 +76,6 @@ Click any host to open its detail panel, which includes:
 
 {{< img src="infrastructure/index/infra-list-side-panel.png" alt="The host detail side panel with sections for Host Summary, Metrics, Containers, Processes, and other host data." style="width:100%;">}}
 
-The detail panel uses the [Resource Catalog][15] side panel.
-
-For more information about how the Datadog Agent determines a host's canonical name and aliases, see [How does Datadog determine the Agent hostname?][1].
-
 ### Agent configuration
 
 To view a host's Agent configuration, click the host to open the side panel, and then scroll to the **Agent** section. To view and manage Agent configurations across your entire infrastructure, use [Fleet Automation][12].
@@ -88,11 +86,9 @@ To view a host's Agent configuration, click the host to open the side panel, and
 
 When you configure the [Datadog Extension][14] with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the host detail panel. The extension also lets you manage and debug your Collector deployments from Datadog.
 
-To view a host's OpenTelemetry Collector configuration, click the host to open the side panel. Scroll to the **OTel Collector** section to see the build information and complete Collector configuration.
+To view a host's OpenTelemetry Collector configuration, click the host to open the side panel. Scroll to the **OTel Collector** section to see the build information and complete Collector configuration. For detailed setup instructions and requirements, such as hostname matching and pipeline configuration, see the [Datadog Extension documentation][14].
 
 {{< img src="infrastructure/index/infra-list-otel-config.png" alt="The OTel Collector section of the host side panel showing build information and Collector configuration." style="width:100%;">}}
-
-For detailed setup instructions and requirements, such as hostname matching and pipeline configuration, see the [Datadog Extension documentation][14].
 
 ## Export
 
@@ -107,7 +103,7 @@ To audit which Agent versions are running across your hosts, use the [get_host_a
 
 ### List hosts without an Agent
 
-You can also use the JSON export to list Amazon EC2 (excluding RDS) instances that don't have an Agent installed. These instances appear in the Host List when you set up your AWS account in the Datadog AWS integration tile. The following Python 3 script lists them:
+You can also use the JSON export to list Amazon EC2 (excluding RDS) instances that don't have an Agent installed. These instances appear in the Host List when you set up your AWS account in the Datadog AWS integration. The following Python 3 script lists them:
 
 ```python
 # 3p
@@ -139,7 +135,6 @@ for host in infra['rows']:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/how-datadog-agent-determines-the-hostname/
 [2]: /getting_started/tagging/
 [3]: /metrics/
 [4]: /infrastructure/livecontainers/?tab=helm#overview
