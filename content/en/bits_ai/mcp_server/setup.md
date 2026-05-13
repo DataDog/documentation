@@ -21,7 +21,7 @@ Learn how to set up and configure the Datadog MCP Server, which lets you retriev
 {{< tabs >}}
 {{% tab "Claude" %}}
 
-Install the [Datadog Connector](https://claude.ai/directory) from the Claude Connectors Directory. The official connector is the recommended way to connect Datadog to Claude (including Claude Cowork) and includes MCP Apps for in-product visualizations. If you previously added Datadog as a custom connector, remove it to avoid conflicts.
+Install the [Datadog Connector](https://claude.ai/directory/connectors/datadog) from the Claude Connectors Directory. The official connector is the recommended way to connect Datadog to Claude (including Claude Cowork) and includes MCP Apps for in-product visualizations. If you previously added Datadog as a custom connector, remove it to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. In Claude, click the **+** icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
@@ -53,7 +53,7 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 
 {{% tab "Claude Code" %}}
 
-Install the [Datadog plugin](https://github.com/DataDog/claude-marketplace) from the [Claude Code Plugin Marketplace](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces). The plugin packages the Datadog MCP Server with the `/ddsetup` slash command for first-time configuration, and auto-updates as new toolsets and skills ship. If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
+Install the [Datadog plugin](https://claude.com/plugins/datadog) from the [Claude Code Plugin Marketplace](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces). The plugin packages the Datadog MCP Server with the `/ddsetup` slash command for first-time configuration, and auto-updates as new toolsets and skills ship. If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Add the Datadog marketplace to Claude Code:
@@ -750,5 +750,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [49]: /bits_ai/mcp_server/tools
 [50]: https://github.com/google-gemini/gemini-cli
 [51]: /containers/monitoring/kubernetes_explorer/
-[53]: https://github.com/DataDog/claude-marketplace
-[54]: https://claude.ai/directory
+[53]: https://claude.com/plugins/datadog
+[54]: https://claude.ai/directory/connectors/datadog
