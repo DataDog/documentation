@@ -413,8 +413,7 @@ docker run \
     -v /:/hostfs:ro \
     -v $(pwd)/collector.yaml:/etc/otelcol-contrib/config.yaml \
     otel/opentelemetry-collector-contrib:0.152.0 \
-    --config /etc/otelcol-contrib/config.yaml \
-    --feature-gates connector.spanmetrics.includeCollectorInstanceID
+    --config /etc/otelcol-contrib/config.yaml
 ```
 
 {{% /tab %}}
@@ -688,14 +687,13 @@ You can deploy the Collector as a DaemonSet in Kubernetes using the [official Op
 
 ### 3. Run the Collector
 
-Start the Collector with the recommended feature gate enabled. If you are using Docker or Kubernetes, the run command is included in the [Create the collector configuration](#2-create-the-collector-configuration) section.
+Start the Collector. If you are using Docker or Kubernetes, the run command is included in the [Create the collector configuration](#2-create-the-collector-configuration) section.
 
 For Host installations, run:
 
 ```shell
 DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
-  otelcol-contrib --config collector.yaml \
-  --feature-gates connector.spanmetrics.includeCollectorInstanceID
+  otelcol-contrib --config collector.yaml
 ```
 
 ### 4. Configure your application
