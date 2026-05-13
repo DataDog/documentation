@@ -170,7 +170,8 @@ Skills work standalone, so you don't need the MCP Server installed to use them. 
 
 ## Next steps
 
-Confirm data is flowing in the Datadog UI: [APM > Services][6], [RUM > Applications][7], [Infrastructure > Hosts][8], or [Logs > Live Tail][9].
+- Confirm data is flowing in the Datadog UI: [APM > Services][6], [RUM > Applications][7], [Infrastructure > Hosts][8], or [Logs > Live Tail][9].
+- For team-wide rollout, propagate environment variables through your secret manager.
 
 [1]: /error_tracking/frontend/
 [2]: /real_user_monitoring/
