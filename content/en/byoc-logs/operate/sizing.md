@@ -38,6 +38,8 @@ The following table provides starting-point configurations for common daily log 
 
 As a rule of thumb for a mixed workload, plan for around 12 vCPUs per TB/day ingested—4 vCPUs for indexers and 8 vCPUs for searchers. Workloads dominated by targeted log searches require fewer searcher vCPUs; heavy analytics workloads—such as monitors, notebooks, or complex multi-day aggregations—may need 2x more.
 
+These vCPU recommendations assume modern x86 CPUs such as AWS m6 instance types (or equivalent on other clouds). ARM-based CPUs such as AWS Graviton can offer better cost efficiency at the same throughput.
+
 | Daily volume | Indexer pods | Indexer podSize | Searcher pods | Searcher podSize | Object storage (30-day retention, ~6x compression) |
 |-------------|-------------|-----------------|---------------|-------------------|-----------------------------------------------------|
 | **1 TB/day** | 2 | large | 2 | xlarge | ~5 TB |
