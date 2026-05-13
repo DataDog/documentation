@@ -69,12 +69,30 @@ To configure sharing for a form:
 
 The following sharing options are available:
 
-| Option | Description |
-|--------|-------------|
-| Share within Datadog | Share the form with users in your Datadog organization. |
-| Share with external users | Share the form with users outside your Datadog organization. Add recipients by email address or domain, or share with anyone with a link. You can configure an access expiration date for either option. |
+{{< collapse-content title="Share within Datadog" level="h4" >}}
+Share the form with users in your Datadog organization. To also surface the form in the [Self-Service Actions][9] catalog, enable the **Self-Service Action** toggle.
+{{< /collapse-content >}}
+
+{{< collapse-content title="Share with external users" level="h4" >}}
+Share the form with users outside your Datadog organization. You can configure an access expiration date for each sharing option, and create multiple sharing configurations with different settings and expiration dates.
+
+The following options are available:
+
+- **Specific individuals**: Add recipients by individual email address. For example, `alice@example.com` and `bob@example.com`.
+- **Company domain**: Share with anyone in a specific email domain. For example, `*@yourcompany.com`.
+- **Shareable link**: Generate a link that anyone can use to access the form without a Datadog account.
+{{< /collapse-content >}}
 
 To pause or remove external sharing, click {{< ui >}}Share{{< /ui >}}, then click {{< ui >}}Edit{{< /ui >}} and select {{< ui >}}Pause Sharing{{< /ui >}} or {{< ui >}}Delete Sharing{{< /ui >}}.
+
+## Add a form to a dashboard
+
+To embed a form directly in a dashboard as a widget:
+1. Navigate to a [dashboard][8].
+1. Click **Add Widgets** to open the side panel.
+1. Click the **Apps** tab.
+1. Select **Form Widget**.
+1. Select your form, then click {{< ui >}}Save{{< /ui >}}.
 
 ## Add automation
 
@@ -106,3 +124,5 @@ By default, only the creator of a form can access it. To change the permissions 
 [5]: https://app.datadoghq.com/workflow/blueprints
 [6]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
 [7]: https://app.datadoghq.com/workflow
+[8]: /dashboards/
+[9]: https://app.datadoghq.com/software/self-service
