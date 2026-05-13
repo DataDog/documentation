@@ -4,6 +4,9 @@ description: "Monitor performance, reliability, and cost efficiency of data proc
 aliases:
   - /data_jobs/
 further_reading:
+  - link: '/data_observability/lineage/'
+    tag: 'Documentation'
+    text: 'Data Lineage'
   - link: '/data_streams'
     tag: 'Documentation'
     text: 'Data Streams Monitoring'
@@ -19,6 +22,7 @@ Data Observability: Jobs Monitoring provides visibility into the performance, re
 - Track the health and performance of data processing jobs across your accounts and workspaces. See which take up the most compute resources or have inefficiencies.
 - Receive an alert when a job fails—or when a job is taking too long to complete.
 - Analyze job execution details and stack traces.
+- Use [Data Lineage][2] to assess upstream causes and downstream impact for failing or delayed jobs.
 - Correlate infrastructure metrics, Spark metrics from the Spark UI, logs, and cluster configuration.
 - Compare multiple runs to facilitate troubleshooting, and to optimize provisioning and configuration during deployment.
 
@@ -71,3 +75,4 @@ To determine why a stage is taking a long time to complete, you can use the {{< 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/templates
+[2]: /data_observability/lineage/
