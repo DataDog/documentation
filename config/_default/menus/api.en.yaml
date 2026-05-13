@@ -8964,6 +8964,179 @@ menu:
         unstable:
           - v2
         order: 3
+    - name: Dependency Management
+      url: /api/latest/dependency-management/
+      identifier: dependency-management
+      generated: true
+    - name: List execution steps
+      url: '#list-execution-steps'
+      identifier: dependency-management-list-execution-steps
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExecutionSteps
+        unstable:
+          - v2
+        order: 12
+    - name: Rerun a workflow execution
+      url: '#rerun-a-workflow-execution'
+      identifier: dependency-management-rerun-a-workflow-execution
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RerunWorkflowExecution
+        unstable:
+          - v2
+        order: 11
+    - name: List PR outputs
+      url: '#list-pr-outputs'
+      identifier: dependency-management-list-pr-outputs
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPROutputs
+        unstable:
+          - v2
+        order: 13
+    - name: Cancel a workflow execution
+      url: '#cancel-a-workflow-execution'
+      identifier: dependency-management-cancel-a-workflow-execution
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelWorkflowExecution
+        unstable:
+          - v2
+        order: 10
+    - name: List AI workflow instances
+      url: '#list-ai-workflow-instances'
+      identifier: dependency-management-list-ai-workflow-instances
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAIWorkflowInstances
+        unstable:
+          - v2
+        order: 9
+    - name: Create workflow executions
+      url: '#create-workflow-executions'
+      identifier: dependency-management-create-workflow-executions
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWorkflowExecution
+        unstable:
+          - v2
+        order: 6
+    - name: Delete workflow executions
+      url: '#delete-workflow-executions'
+      identifier: dependency-management-delete-workflow-executions
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWorkflowExecutions
+        unstable:
+          - v2
+        order: 7
+    - name: Cancel workflow executions
+      url: '#cancel-workflow-executions'
+      identifier: dependency-management-cancel-workflow-executions
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelWorkflowExecutions
+        unstable:
+          - v2
+        order: 8
+    - name: Update an AI workflow
+      url: '#update-an-ai-workflow'
+      identifier: dependency-management-update-an-ai-workflow
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAIWorkflow
+        unstable:
+          - v2
+        order: 4
+    - name: Get an AI workflow
+      url: '#get-an-ai-workflow'
+      identifier: dependency-management-get-an-ai-workflow
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAIWorkflow
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an AI workflow
+      url: '#delete-an-ai-workflow'
+      identifier: dependency-management-delete-an-ai-workflow
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAIWorkflow
+        unstable:
+          - v2
+        order: 5
+    - name: List AI workflows
+      url: '#list-ai-workflows'
+      identifier: dependency-management-list-ai-workflows
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAIWorkflows
+        unstable:
+          - v2
+        order: 2
+    - name: Create an AI workflow
+      url: '#create-an-ai-workflow'
+      identifier: dependency-management-create-an-ai-workflow
+      parent: dependency-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAIWorkflow
+        unstable:
+          - v2
+        order: 1
     - name: Deployment Gates
       url: /api/latest/deployment-gates/
       identifier: deployment-gates

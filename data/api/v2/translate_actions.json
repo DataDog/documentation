@@ -1190,6 +1190,62 @@
     "request_description": "Dataset payload",
     "request_schema_description": "Edit request for a dataset."
   },
+  "CreateAIWorkflow": {
+    "description": "Create a new AI workflow for dependency management. This creates both the workflow definition and initializes its executions.",
+    "summary": "Create an AI workflow",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a new AI workflow."
+  },
+  "ListAIWorkflows": {
+    "description": "List AI workflows for the organization with optional filters.",
+    "summary": "List AI workflows"
+  },
+  "DeleteAIWorkflow": {
+    "description": "Delete a specific AI workflow. This also removes the workflow from Datadog Workflow Automation.",
+    "summary": "Delete an AI workflow"
+  },
+  "GetAIWorkflow": {
+    "description": "Get details of a specific AI workflow by its ID.",
+    "summary": "Get an AI workflow"
+  },
+  "UpdateAIWorkflow": {
+    "description": "Update the configuration of an existing AI workflow. Only the provided fields are updated.",
+    "summary": "Update an AI workflow",
+    "request_description": "",
+    "request_schema_description": "Request body for updating an existing AI workflow. All fields are optional."
+  },
+  "CancelWorkflowExecutions": {
+    "description": "Cancel all running workflow execution instances for the given AI workflow.",
+    "summary": "Cancel workflow executions"
+  },
+  "DeleteWorkflowExecutions": {
+    "description": "Delete all workflow executions for a given AI workflow. Running instances are canceled before deletion.",
+    "summary": "Delete workflow executions"
+  },
+  "CreateWorkflowExecution": {
+    "description": "Create workflow executions for an AI workflow. One execution is created per entity group defined in the workflow.",
+    "summary": "Create workflow executions"
+  },
+  "ListAIWorkflowInstances": {
+    "description": "List all workflow instances for a given AI workflow with their live status from Workflow Automation and entity information.",
+    "summary": "List AI workflow instances"
+  },
+  "CancelWorkflowExecution": {
+    "description": "Cancel a specific workflow execution instance. Returns 409 if the instance is not currently in a running state.",
+    "summary": "Cancel a workflow execution"
+  },
+  "ListPROutputs": {
+    "description": "Get the pull request outputs for a specific workflow execution. Includes PR URL, status, and CI status enriched from GitHub.",
+    "summary": "List PR outputs"
+  },
+  "RerunWorkflowExecution": {
+    "description": "Rerun a failed or canceled workflow execution. This replaces the existing execution with a new one using the same entities.",
+    "summary": "Rerun a workflow execution"
+  },
+  "ListExecutionSteps": {
+    "description": "Get the real-time step status for a specific workflow execution instance from Datadog Workflow Automation.",
+    "summary": "List execution steps"
+  },
   "ListDeploymentGates": {
     "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
     "summary": "Get all deployment gates"

@@ -135,6 +135,10 @@
     "name": "Datasets",
     "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
   },
+  "dependency-management": {
+    "name": "Dependency Management",
+    "description": "Manage AI-powered dependency upgrade workflows for your organization's repositories."
+  },
   "deployment-gates": {
     "name": "Deployment Gates",
     "description": "Manage Deployment Gates using this API to reduce the likelihood and impact of incidents caused by deployments. See the [Deployment Gates documentation](https://docs.datadoghq.com/deployment_gates/) for more information."
