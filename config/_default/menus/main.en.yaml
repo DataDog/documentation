@@ -1176,6 +1176,12 @@ menu:
       identifier: api
       parent: essentials_heading
       weight: 90000
+    - name: Command Line
+      url: cli/
+      pre: prompt-wui
+      identifier: cli
+      parent: essentials_heading
+      weight: 100000
     - name: Partners
       url: partners/
       pre: colab
