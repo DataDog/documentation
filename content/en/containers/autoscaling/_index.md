@@ -215,13 +215,12 @@ From any of these views, click {{< ui >}}Optimize{{< /ui >}} on a workload to se
 
 After you identify a workload to optimize, inspect its {{< ui >}}Scaling Recommendation{{< /ui >}}. Click {{< ui >}}Configure Recommendation{{< /ui >}} to add constraints or adjust target utilization levels before enabling.
 
-There are three ways to enable autoscaling for a workload. Pick the path that matches how you ship workloads today.
+There are two ways to enable autoscaling for a workload. Pick the path that matches how you ship workloads today.
 
 | Path | Best for | Where you start | Ongoing management |
 |------|----------|-----------------|--------------------|
 | **A. Datadog UI setup wizard** | A single workload, demos, or your first rollout | [Setup page][11] in the Datadog UI | Edit the workload's `DatadogPodAutoscaler` from the UI or your cluster |
-| **B. Author a `DatadogPodAutoscaler` manifest** | Existing `kubectl`-driven workflows | Hand-written YAML applied with `kubectl apply` | Edit the manifest and reapply, or let Datadog manage the spec by setting `owner: Remote` |
-| **C. Manage as infrastructure as code** | Fleet teams using GitOps or Terraform | Your IaC repository | Reconciled by your existing IaC tooling against the repo |
+| **B. Author a `DatadogPodAutoscaler` manifest** | Existing workflows for shipping Kubernetes manifests (`kubectl`, Helm, ArgoCD, Terraform, or other GitOps tools) | Hand-written or templated YAML applied through your existing tooling | Edit the manifest and reapply through the same tooling |
 
 #### Path A: Datadog UI setup wizard
 
@@ -236,16 +235,12 @@ The Setup wizard is best for trying autoscaling on a single workload, getting ha
 
 #### Path B: author a manifest
 
-If you already manage Kubernetes resources with `kubectl apply`, deploy a `DatadogPodAutoscaler` custom resource that targets your workload. See the [example configurations](#example-datadogpodautoscaler-configurations) below for ready-to-edit starting points covering cost optimization, balanced scaling, vertical-only resizing, and custom-query horizontal scaling.
+Define a `DatadogPodAutoscaler` custom resource that targets your workload and apply it through whatever tooling you already use to ship Kubernetes manifests, whether that's `kubectl apply`, Helm, ArgoCD, Terraform, or another GitOps tool. Authoring the manifest is the same regardless of delivery mechanism. See the [example configurations](#example-datadogpodautoscaler-configurations) below for ready-to-edit starting points covering cost optimization, balanced scaling, vertical-only resizing, and custom-query horizontal scaling.
 
-#### Path C: manage as infrastructure as code
-
-If your fleet is managed by GitOps or Terraform, define `DatadogPodAutoscaler` resources in your IaC repository so they're reconciled alongside the rest of your platform. Datadog publishes step-by-step guides for the most common tools:
+For tool-specific guides, see:
 
 - [Manage DatadogPodAutoscaler with ArgoCD][12]
 - [Manage DatadogPodAutoscaler with Terraform][13]
-
-This path is best for teams that want a single source of truth, audit trail, and consistent rollout process across many workloads and clusters.
 
 ### Example DatadogPodAutoscaler configurations
 
@@ -467,7 +462,6 @@ If you want Datadog's recommendations without enabling autoscaling, you can appl
 After a workload is autoscaled, day-two operations are managed through a combination of the `DatadogPodAutoscaler` resource and the Datadog UI:
 
 - **Change the scaling template.** Edit the workload's `DatadogPodAutoscaler` spec (CPU target, replica bounds, scale-up and scale-down rules) directly, or pick a different template from the [Workload Scaling list view][8]. Changes take effect on the next reconcile.
-- **Switch between Datadog-managed and self-managed specs.** Set `owner: Remote` to let Datadog refresh the recommendation in place, or `owner: Local` to pin the spec and treat Datadog's recommendations as advisory. Per-workload overrides on a `Local` resource always win.
 - **Pause autoscaling without deleting the resource.** Set `applyPolicy.mode: Preview` to keep recommendations visible in `.status` while preventing the controller from applying them. This is useful when running alongside an HPA or VPA during evaluation.
 - **Watch the rollout.** The Workload Scaling list view shows the live status of each workload's recommendation, last applied action, and any reconcile errors.
 - **Remove autoscaling cleanly.** Delete the `DatadogPodAutoscaler` resource to stop autoscaling. Existing pod resources remain at their last applied values, and the workload reverts to whatever its parent controller (Deployment, StatefulSet, etc.) specifies on the next rollout.
@@ -503,7 +497,7 @@ When the current request and limit are set to the same value, both are computed 
 
 | | How it's computed |
 |---|---|
-| **Request recommendation** | Based on the **p95** of CPU usage relative to the current request over the last 8 days. A **10% safety margin** is then added. |
+| **Request recommendation** | Based on the **p95** of CPU usage relative to the current request over the last 8 days, with a decaying weight applied to older samples so that recent usage patterns are prioritized. A **10% safety margin** is then added. |
 | **Limit recommendation** | Based on the **p99** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. If the resulting request recommendation ever exceeds the limit recommendation, the request value is used for both. |
 
 **When CPU request equals CPU limit:**
@@ -516,8 +510,8 @@ When the current request and limit are set to the same value, both are computed 
 
 #### Key design principles
 
-- **8-day lookback window**: All recommendations consider usage data from the past 8 days, providing enough history to capture weekly traffic patterns while remaining responsive to changes.
-- **Decaying weights**: For memory request recommendations (when request ≠ limit), older samples are weighted less heavily, so the recommendation adapts faster to recent usage shifts.
+- **8-day lookback window (configurable)**: By default, all recommendations consider usage data from the past 8 days, providing enough history to capture weekly traffic patterns while remaining responsive to changes. The lookback window is configurable per workload.
+- **Decaying weights**: For both CPU and memory request recommendations (when request ≠ limit), older samples are weighted less heavily, so the recommendation adapts faster to recent usage shifts.
 - **Safety margins**: Every recommendation includes a margin above observed usage (5 to 10%) to provide a buffer against unexpected spikes.
 - **OOMKill response**: When memory requests and limits are equal and an OOMKill occurs, a 20% bump is applied to reduce the likelihood of repeated out-of-memory failures.
 - **Request-equals-limit preservation**: When a workload's request and limit are configured to the same value, Datadog uses the more conservative (limit-level) computation for both, ensuring recommendations do not introduce a gap between request and limit.
