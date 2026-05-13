@@ -68,7 +68,7 @@ To install and activate the Datadog CSI Driver, set `datadog.csi.enabled` to `tr
 Operator-managed CSI Driver installation requires Datadog Operator <strong>v1.26.0</strong> or later. If you are using an earlier version, see <a href="#legacy-helm-based-installation">Legacy Helm-based installation</a>.
 </div>
 
-Starting with Datadog Operator v1.26.0, the Operator can install and manage the CSI Driver on your behalf. Set `csi.enabled` to `true` in your `DatadogAgent` resource, and the Operator automatically creates a `DatadogCSIDriver` custom resource to deploy the driver:
+Starting with Datadog Operator v1.26.0, the Operator can install and manage the CSI Driver automatically. Set `csi.enabled` to `true` in your `DatadogAgent` resource, and the Operator automatically creates a `DatadogCSIDriver` custom resource to deploy the driver:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -85,7 +85,7 @@ spec:
       enabled: true
 ```
 
-By default, `csi.autoManage` is `true`, which means the Operator owns the lifecycle of the `DatadogCSIDriver` resource. You can optionally customize scheduling through the `DatadogAgent` spec:
+By default, `csi.autoManage` is `true`, which means the Operator owns the life cycle of the `DatadogCSIDriver` resource. To customize scheduling, add the following `DatadogAgent` spec:
 
 ```yaml
     csi:
@@ -175,7 +175,7 @@ If you need configuration options not exposed through the `DatadogAgent` spec (f
 <p>If you previously installed the CSI Driver with the standalone Helm chart, Datadog recommends migrating to Operator-managed installation. Choose one of the following approaches:</p>
 <ul>
 <li><strong>Let the Operator manage the CSI Driver</strong>: Uninstall the Helm chart (<code>helm uninstall datadog-csi-driver</code>) and keep the default values for <code>csi.enabled</code> and <code>csi.autoManage</code>. The Operator automatically creates a new <code>DatadogCSIDriver</code> resource and deploys the driver.</li>
-<li><strong>Keep managing the CSI Driver with Helm</strong>: No action is required. The Operator detects the existing <code>k8s.csi.datadoghq.com</code> CSIDriver and defers to it, regardless of the <code>csi.autoManage</code> value. This backward-compatibility guarantee means your Helm-managed driver continues to run without interference. You can optionally set <code>csi.autoManage: false</code> to make this intent explicit in your configuration.</li>
+<li><strong>Keep managing the CSI Driver with Helm</strong>: No action is required. The Operator detects the existing <code>k8s.csi.datadoghq.com</code> CSIDriver and defers to it, regardless of the <code>csi.autoManage</code> value. The Operator does not interfere with your existing Helm-managed driver. To make this intent explicit, set <code>csi.autoManage: false</code>.</li>
 </ul>
 </div>
 
