@@ -6,6 +6,9 @@ further_reading:
   - link: https://www.datadoghq.com/blog/datadog-forms
     tag: Blog
     text: Turn feedback into action across your engineering org with Datadog Forms
+  - link: https://www.datadoghq.com/blog/datadog-forms-sheets-developer-feedback/
+    tag: Blog
+    text: Turn developer feedback into operational insight with Datadog Forms and Sheets
 
 ---
 
