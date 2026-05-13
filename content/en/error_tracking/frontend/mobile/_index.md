@@ -13,14 +13,14 @@ further_reading:
 
 For information about crash reporting and error tracking for your application, choose a platform:
 
-{{< card-grid >}}
-  {{< image-card href="/error_tracking/frontend/mobile/android/" src="integrations_logos/android_large.svg" alt="android" img_width="200" >}}
-  {{< image-card href="/error_tracking/frontend/mobile/ios/" src="integrations_logos/ios_large.svg" alt="ios" img_width="200" >}}
-  {{< image-card href="/error_tracking/frontend/mobile/expo/" src="integrations_logos/rum-expo_large.svg" alt="rum-expo" img_width="200" >}}
-  {{< image-card href="/error_tracking/frontend/mobile/reactnative/" src="integrations_logos/react-native_large.svg" alt="react-native" img_width="200" >}}
-  {{< image-card href="/error_tracking/frontend/mobile/flutter/" src="integrations_logos/flutter_large.svg" alt="flutter" img_width="200" >}}
-  {{< image-card href="/error_tracking/frontend/mobile/roku/" src="integrations_logos/roku_large.svg" alt="Roku" img_width="200" >}}
-  {{< image-card href="/error_tracking/frontend/mobile/kotlin-multiplatform/" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" img_width="200" >}}
-  {{< image-card href="/error_tracking/frontend/mobile/unity/" src="/integrations_logos/rum-unity_large.svg" alt="Unity" img_width="200" >}}
+{{< card-grid img_width="200" >}}
+  {{< image-card href="/error_tracking/frontend/mobile/android/" src="integrations_logos/android_large.svg" alt="android" >}}
+  {{< image-card href="/error_tracking/frontend/mobile/ios/" src="integrations_logos/ios_large.svg" alt="ios" >}}
+  {{< image-card href="/error_tracking/frontend/mobile/expo/" src="integrations_logos/rum-expo_large.svg" alt="rum-expo" >}}
+  {{< image-card href="/error_tracking/frontend/mobile/reactnative/" src="integrations_logos/react-native_large.svg" alt="react-native" >}}
+  {{< image-card href="/error_tracking/frontend/mobile/flutter/" src="integrations_logos/flutter_large.svg" alt="flutter" >}}
+  {{< image-card href="/error_tracking/frontend/mobile/roku/" src="integrations_logos/roku_large.svg" alt="Roku" >}}
+  {{< image-card href="/error_tracking/frontend/mobile/kotlin-multiplatform/" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
+  {{< image-card href="/error_tracking/frontend/mobile/unity/" src="/integrations_logos/rum-unity_large.svg" alt="Unity" >}}
 {{< /card-grid >}}
 

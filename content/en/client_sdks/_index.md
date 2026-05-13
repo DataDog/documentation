@@ -19,13 +19,13 @@ Datadog Client SDKs enable you to instrument your web and mobile applications wi
 
 Select a platform to start instrumenting your application:
 
-{{< card-grid >}}
-  {{< image-card href="/client_sdks/setup/?sdk=browser" src="integrations_logos/javascript_large.svg" alt="browser" img_width="200" >}}
-  {{< image-card href="/client_sdks/setup/?sdk=android" src="integrations_logos/android_large.svg" alt="android" img_width="200" >}}
-  {{< image-card href="/client_sdks/setup/?sdk=ios" src="integrations_logos/ios_large.svg" alt="ios" img_width="200" >}}
-  {{< image-card href="/client_sdks/setup/?sdk=flutter" src="integrations_logos/flutter_large.svg" alt="flutter" img_width="200" >}}
-  {{< image-card href="/client_sdks/setup/?sdk=react_native" src="integrations_logos/react-native_large.svg" alt="react native" img_width="200" >}}
-  {{< image-card href="/client_sdks/setup/?sdk=kotlin_multiplatform" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" img_width="200" >}}
-  {{< image-card href="/client_sdks/setup/?sdk=roku" src="integrations_logos/roku_large.svg" alt="Roku" img_width="200" >}}
-  {{< image-card href="/client_sdks/setup/?sdk=unity" src="integrations_logos/rum-unity_large.svg" alt="Unity" img_width="200" >}}
+{{< card-grid img_width="200" >}}
+  {{< image-card href="/client_sdks/setup/?sdk=browser" src="integrations_logos/javascript_large.svg" alt="browser" >}}
+  {{< image-card href="/client_sdks/setup/?sdk=android" src="integrations_logos/android_large.svg" alt="android" >}}
+  {{< image-card href="/client_sdks/setup/?sdk=ios" src="integrations_logos/ios_large.svg" alt="ios" >}}
+  {{< image-card href="/client_sdks/setup/?sdk=flutter" src="integrations_logos/flutter_large.svg" alt="flutter" >}}
+  {{< image-card href="/client_sdks/setup/?sdk=react_native" src="integrations_logos/react-native_large.svg" alt="react native" >}}
+  {{< image-card href="/client_sdks/setup/?sdk=kotlin_multiplatform" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
+  {{< image-card href="/client_sdks/setup/?sdk=roku" src="integrations_logos/roku_large.svg" alt="Roku" >}}
+  {{< image-card href="/client_sdks/setup/?sdk=unity" src="integrations_logos/rum-unity_large.svg" alt="Unity" >}}
 {{< /card-grid >}}
