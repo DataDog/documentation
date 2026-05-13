@@ -16,9 +16,9 @@ There are three ways to get started. Pick the one that matches how you work:
 
 | Path | Use when |
 |------|----------|
-| [Setup CLI](#setup-cli) | You want a standalone command-line tool (no coding assistant required) for first-time account creation, linking an existing account, or instrumenting local infrastructure-as-code (IaC) and application code from a terminal. |
-| [MCP Server](#mcp-server) | You work with an LLM coding assistant (such as Claude Code or Cursor) and want it to detect frameworks, write configuration, and provision tokens directly from your IDE. |
-| [Skills](#skills) | You're using Claude and want a focused skill for a single onboarding step (such as installing the Agent or enabling a cloud integration) rather than a full MCP toolset. |
+| [Setup CLI](#setup-cli) | You want to set up Datadog from a terminal, without an AI coding assistant. |
+| [MCP Server](#mcp-server) | You use an LLM coding assistant (such as Claude Code or Cursor) and want it to handle framework detection and configuration from your IDE. |
+| [Skills](#skills) | You want a focused, single-task workflow in Claude rather than a full MCP toolset. |
 
 The three paths are complementary and work against the same Datadog account. You can install the Datadog MCP Server in your IDE, run the CLI in a terminal, and invoke skills from Claude.
 
