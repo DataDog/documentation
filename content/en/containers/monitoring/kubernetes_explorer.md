@@ -88,7 +88,11 @@ You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline i
 
 #### Limitations
 
-The `k8sobjects` receiver has known scalability issues (see [open-telemetry/opentelemetry-collector-contrib#43602][13]). In large clusters, the OTel Collector may overwhelm the Kubernetes API server due to the volume and frequency of requests. Enable this feature in smaller clusters first, and monitor API server load before scaling up.
+The `k8sobjects` receiver has known scalability issues (see [open-telemetry/opentelemetry-collector-contrib#43602][13]). In large clusters, it can place significant load on the Kubernetes API server.
+
+Recommendations:
+1. Use Kubernetes 1.33 or later, which includes [streaming list improvements][16] that reduce API server impact.
+2. Start with smaller clusters. Limit the number of objects per resource type to fewer than 5,000 as a starting point, and scale up gradually while monitoring cluster health.
 
 #### 1. Create a Datadog API key secret
 
@@ -167,6 +171,10 @@ clusterRole:
     - apiGroups: ["autoscaling"]
       resources:
         - horizontalpodautoscalers
+      verbs: ["get", "list", "watch"]
+    - apiGroups: ["apiextensions.k8s.io"]
+      resources:
+        - customresourcedefinitions
       verbs: ["get", "list", "watch"]
 ```
 
@@ -250,22 +258,62 @@ The [`k8sobjects`][10] receiver collects Kubernetes resource data using two mode
         - name: deployments
           mode: watch
           group: apps
+        - name: customresourcedefinitions
+          mode: pull
+          interval: 3m
+          group: apiextensions.k8s.io
+        - name: customresourcedefinitions
+          mode: watch
+          group: apiextensions.k8s.io
 ```
 
 ##### Processors and pipeline
 
-Add a `resourcedetection/kubeadm` processor to detect the cluster UID, and a `resource/add-cluster-name` processor to tag all data with your cluster name. Then wire the components together in a `logs/orchestrator` pipeline. Replace `<YOUR_CLUSTER_NAME>` with your cluster name:
+Add a [`resourcedetection`][15] processor to detect the cluster UID and name.
+
+- The `kubeadm` detector is required to detect the cluster UID (`k8s.cluster.uid`).
+- Cluster name detection depends on your cloud provider. Check the [`resourcedetection` processor documentation][15] for supported providers (EKS, AKS, GCP) and required permissions.
+- If your provider is not supported, use a `resource/add-cluster-name` processor to set the cluster name manually. Replace `<YOUR_CLUSTER_NAME>` with your cluster name.
+
+Then wire the components together in a `logs/orchestrator` pipeline.
+
+The following examples show two approaches. Use the cloud provider example if you run on EKS, AKS, or GCP. Use the manual fallback if your provider is not supported.
+
+**Cloud provider detection (EKS example):**
 
 ```yaml
   processors:
-    resourcedetection/kubeadm:
-      detectors: [kubeadm]
-      timeout: 2s
+    resourcedetection:
+      detectors: [kubeadm, eks]
       override: false
       kubeadm:
         resource_attributes:
           k8s.cluster.name:
             enabled: false
+      eks:
+        resource_attributes:
+          k8s.cluster.name:
+            enabled: true
+
+  service:
+    pipelines:
+      logs/orchestrator:
+        receivers: [k8sobjects]
+        processors: [resourcedetection]
+        exporters: [datadog]
+```
+
+Replace `eks` with your provider's detector (`aks`, `gcp`). See the [`resourcedetection` processor documentation][15] for provider-specific configuration.
+
+**Manual fallback:**
+
+If the `resourcedetection` processor does not support your cloud provider, set the cluster name manually. Replace `<YOUR_CLUSTER_NAME>` with your cluster name:
+
+```yaml
+  processors:
+    resourcedetection:
+      detectors: [kubeadm]
+      override: false
     resource/add-cluster-name:
       attributes:
         - key: k8s.cluster.name
@@ -276,11 +324,9 @@ Add a `resourcedetection/kubeadm` processor to detect the cluster UID, and a `re
     pipelines:
       logs/orchestrator:
         receivers: [k8sobjects]
-        processors: [resourcedetection/kubeadm, resource/add-cluster-name]
+        processors: [resourcedetection, resource/add-cluster-name]
         exporters: [datadog]
 ```
-
-The `resourcedetection/kubeadm` processor detects the cluster UID (`k8s.cluster.uid`), which the Datadog Exporter requires for orchestrator data. Cluster name detection is disabled so the manually set name from `resource/add-cluster-name` takes precedence.
 
 #### 3. Deploy with Helm
 
@@ -296,7 +342,7 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
 
 #### 4. Verify the installation
 
-Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name. Your pod and namespace data should appear in the Explorer.
+Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**. The **Custom Resources > Resources** section is not supported with this setup.
 
 [1]: https://app.datadoghq.com/orchestration/overview
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
@@ -304,6 +350,8 @@ Open the [Kubernetes Explorer][1] and filter by your OpenTelemetry cluster name.
 [12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.142.0
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/issues/43602
 [14]: /getting_started/site/
+[15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
+[16]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
 
 {{% /tab %}}
 {{< /tabs >}}
