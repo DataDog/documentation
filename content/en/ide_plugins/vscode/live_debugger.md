@@ -56,7 +56,7 @@ The editor warns you when no service or environment matches the file's language,
 
 The remote running code may be a different revision from the source you are editing. The extension uses Git commit information to map line numbers from your local file to the remote revision, so logpoints land on the correct line even if the remote is on a different commit. This requires your service to be tagged with Git information.
 
-<div class="alert alert-info">Checking out locally the same revision that is running remotely shows you the same code in the IDE that is running in production, which simplifies the live debugging experience—but it is not required.</div>
+<div class="alert alert-info">Checking out locally the same revision that is running remotely shows you the same code in the IDE that is running in production, which simplifies the live debugging experience, but it is not required.</div>
 
 ## Edit, enable, disable, and delete logpoints
 
@@ -66,12 +66,12 @@ The remote running code may be a different revision from the source you are edit
 
 The gutter icon reflects the current status of each logpoint:
 
-| Icon | Status | Meaning |
-|------|--------|---------|
-| {{< img src="/ide_plugins/vscode/probe_active_dark.png" alt="Active status icon." style="width:16px; display:inline;" >}} | **Active** | The logpoint is installed and emits log events when the line of code is about to run. |
-| {{< img src="/ide_plugins/vscode/probe_warning_dark.png" alt="Warning status icon." style="width:16px; display:inline;" >}} | **Warning** | The logpoint may not be generating events yet. This is shown when the backend has not processed a recent change (`WAITING`) or no tracer agents are reporting for the targeted service (`NO_AGENTS`). |
-| {{< img src="/ide_plugins/vscode/probe_error_dark.png" alt="Error status icon." style="width:16px; display:inline;" >}} | **Error** | The logpoint is not generating events because of an error, or its status is unknown. |
-| {{< img src="/ide_plugins/vscode/probe_disabled_dark.png" alt="Disabled status icon." style="width:16px; display:inline;" >}} | **Disabled** | The logpoint is inactive—either you disabled it manually or it has expired. |
+| Icon                                                                                                                          | Status       | Meaning                                                                                                                                                                                               |
+| ----------------------------------------------------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| {{< img src="/ide_plugins/vscode/probe_active_dark.png" alt="Active status icon." style="width:16px; display:inline;" >}}     | **Active**   | The logpoint is installed and emits log events when the line of code is about to run.                                                                                                                 |
+| {{< img src="/ide_plugins/vscode/probe_warning_dark.png" alt="Warning status icon." style="width:16px; display:inline;" >}}   | **Warning**  | The logpoint may not be generating events yet. This is shown when the backend has not processed a recent change (`WAITING`) or no tracer agents are reporting for the targeted service (`NO_AGENTS`). |
+| {{< img src="/ide_plugins/vscode/probe_error_dark.png" alt="Error status icon." style="width:16px; display:inline;" >}}       | **Error**    | The logpoint is not generating events because of an error, or its status is unknown.                                                                                                                  |
+| {{< img src="/ide_plugins/vscode/probe_disabled_dark.png" alt="Disabled status icon." style="width:16px; display:inline;" >}} | **Disabled** | The logpoint is inactive—either you disabled it manually or it has expired.                                                                                                                           |
 
 ## Generate a unit test from a log event
 
