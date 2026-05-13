@@ -9166,8 +9166,7 @@ menu:
           - v2
         operationids:
           - CreateEmailTransportWebhookIntake
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Entity Risk Scores
       url: /api/latest/entity-risk-scores/
