@@ -65,7 +65,7 @@ AI cost data from all supported providers is normalized to a consistent set of t
 
 The following tags are available for all supported AI providers:
 
-| Tag name      | Tag description |
+| Tag&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Tag description |
 |---|---|
 | `providername` | The AI provider. |
 | `model` | The AI model identifier (for example, `claude-opus-4-6`, `gpt-4.1`). |
@@ -74,9 +74,9 @@ The following tags are available for all supported AI providers:
 | `token_category` | The specific category of tokens consumed, such as input/output tokens or tokens related to caching and search operations (for example, `cached input`, `cache write`, `standard input`, `output`). |
 | `project` | The project, workspace, or environment the AI costs belong to. |
 
-## Attribute AI spend to users
+## Attribute AI spend to sources
 
-[Out-of-the-box (OOTB) allocation rules][12] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for OpenAI and Anthropic.
+[Out-of-the-box (OOTB) allocation rules][12] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for Anthropic and OpenAI.
 
 The following tags are available through OOTB allocation rules:
 
@@ -115,11 +115,13 @@ The following tags are available through OOTB allocation rules:
 {{% /tab %}}
 {{< /tabs >}}
 
-{{< img src="cloud_cost/ai_costs/ccm-tag-pipeline-ai-costs.png" alt="The Tag Pipelines Rule Setup page, showing user_email values mapped to team values via an existing reference table, and additional tag mapping options." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+Configure [Tag Pipelines][13] to map OOTB tags (such as `user_email`) to teams, services, or business units for aggregate reporting:
 
-After costs are attributed to users, API keys, and other sources, use [Tag Pipelines][13] to automatically map them to teams, services, or business units for streamlined aggregate reporting. See [Cost Reports][14] for more information.
+{{< img src="cloud_cost/ai_costs/ccm-tag-pipeline-ai-costs.png" alt="The Tag Pipelines Rule Setup page, showing user_email values mapped to team values through an existing reference table, and additional tag mapping options." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-{{< img src="cloud_cost/ai_costs/ccm-anthropic-ai-cost-reporting.png" alt="A provider-specific dashboard with a stacked bar chart graph showing daily provider spend attributed by team and model name, and a summary list of the spend attributions." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+Once mapped, attributed spend appears in provider-specific dashboards and [Cost Reports][14]:
+
+{{< img src="cloud_cost/ai_costs/ccm-anthropic-ai-cost-reporting.png" alt="A provider-specific dashboard with a stacked bar graph showing daily provider spend attributed by team and model name, and a summary list of the spend attributions." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 ## Further reading
 
