@@ -8411,6 +8411,32 @@ menu:
           - ListCustomAllocationRules
         unstable: []
         order: 23
+    - name: Get cost anomaly
+      url: '#get-cost-anomaly'
+      identifier: cloud-cost-management-get-cost-anomaly
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostAnomaly
+        unstable:
+          - v2
+        order: 44
+    - name: List cost anomalies
+      url: '#list-cost-anomalies'
+      identifier: cloud-cost-management-list-cost-anomalies
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostAnomalies
+        unstable:
+          - v2
+        order: 43
     - name: Cloud Network Monitoring
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
