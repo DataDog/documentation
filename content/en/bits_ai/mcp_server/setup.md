@@ -21,12 +21,20 @@ Learn how to set up and configure the Datadog MCP Server, which lets you retriev
 {{< tabs >}}
 {{% tab "Claude" %}}
 
-Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it as a {{< ui >}}custom connector{{< /ui >}} with the remote MCP URL.
+Install the [Datadog Connector][1] from the Claude Connectors Directory—the official connector is the recommended way to connect Datadog to Claude (including Claude Cowork) and includes MCP Apps for in-product visualizations. If you previously added Datadog as a custom connector, remove it to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. Follow the Claude help center guide on [custom connectors][1] to add a new custom connector.
+1. In Claude, click the **+** icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
+1. Find **Datadog** in the directory and enable it.
+1. Complete the OAuth login flow when prompted.
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-1. When prompted for a URL, enter the Datadog MCP Server endpoint for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
+{{% collapse-content title="Manual setup with a custom connector" level="h4" expanded=false id="claude-custom-connector" %}}
+If the directory connector is not available to you, you can add Datadog as a [custom connector][3] using the remote MCP URL for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
+
+1. Follow the Claude help center guide on [custom connectors][3] to add a new custom connector.
+
+1. When prompted for a URL, enter:
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
@@ -34,11 +42,11 @@ Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. Complete the OAuth login flow when prompted.
+{{% /collapse-content %}}
 
-1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
-
-[1]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
+[1]: https://claude.ai/directory
 [2]: /getting_started/site/
+[3]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
@@ -49,10 +57,21 @@ Connect Claude (including Claude Cowork) to the Datadog MCP Server by adding it 
 
 {{% tab "Claude Code" %}}
 
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
+Install the [Datadog plugin][2] from the [Claude Code Plugin Marketplace][3]—the plugin packages the Datadog MCP Server with the `/ddsetup` slash command for first-time configuration, and auto-updates as new toolsets and skills ship. If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+1. Add the Datadog marketplace to Claude Code:
+    <pre><code>/plugin marketplace add DataDog/claude-marketplace</code></pre>
+
+1. Install the Datadog plugin when prompted, or run:
+    <pre><code>/plugin install datadog@datadog</code></pre>
+
+1. Run `/ddsetup` to choose your [Datadog site][1] and organization.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+{{% collapse-content title="Manual MCP Server configuration" level="h4" expanded=false id="claudecode-manual" %}}
+If the plugin is not available to you, point Claude Code at the MCP Server endpoint for your regional [Datadog site][1] directly. Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 1. Run in terminal:
     <pre><code>claude mcp add --transport http datadog-mcp {{< region-param key="mcp_server_endpoint" >}}</code></pre>
@@ -71,11 +90,11 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
-
 <div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
+{{% /collapse-content %}}
 
-[1]: /getting_started/site/
+[2]: https://github.com/DataDog/claude-marketplace
+[3]: https://docs.claude.com/en/docs/claude-code/plugin-marketplaces
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
@@ -570,8 +589,8 @@ These toolsets are in Preview. Sign up for a toolset by completing the Product P
 | Client | Developer | Notes |
 |--------|------|------|
 | [Cursor][3] | Cursor | Datadog [Cursor & VS Code extension][15] recommended. |
-| [Claude Code][4] | Anthropic | |
-| [Claude][19] | Anthropic | Use [custom connector setup](?tab=claude#installation). Includes Claude Cowork. |
+| [Claude Code][4] | Anthropic | Datadog [Claude Code plugin][53] recommended. |
+| [Claude][19] | Anthropic | Datadog [Claude Connector][54] recommended. Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
 | [Gemini CLI][50] | Google | |
 | [Warp][28] | Warp | |
@@ -739,3 +758,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [49]: /bits_ai/mcp_server/tools
 [50]: https://github.com/google-gemini/gemini-cli
 [51]: /containers/monitoring/kubernetes_explorer/
+[53]: https://github.com/DataDog/claude-marketplace
+[54]: https://claude.ai/directory
