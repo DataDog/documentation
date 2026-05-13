@@ -22,7 +22,7 @@ Jira is an issue and project tracking system for software teams. The Datadog Jir
 
 The Jira integration with Datadog Incident Management provides the following benefits:
 - **Improved Visibility**: Ensure that all stakeholders are immediately informed about incidents, facilitating a quicker response.
-- **Supporting Existing Workflows**: Seamlessly integrate with your current processes, making it easier to plan work and manage priorities in Jira.
+- **Supporting Existing Workflows**: Integrate with your current processes, making it easier to plan work and manage priorities in Jira.
 - **Flexible Mapping and Configuration**: With dynamic templates, you can map Datadog severities to Jira priorities, map incident statuses to Jira statuses, add custom labels, and define dynamic assignees.
 - **Bidirectional Sync**: Teams can collaborate across Datadog and Jira simultaneously. When fields are configured for two-way sync, changes made in either platform are automatically reflected in the other.
 
@@ -34,14 +34,14 @@ To enable bidirectional sync, you must also configure a Jira webhook. See [Confi
 
 ## Setup
 
-### Create a Jira issue
+### Configuring Jira issue creation
 
 1. On the [Integration Settings page][3], find the Jira integration.
 2. Enable the **Automatically create a parent work item** toggle.
 3. Select your Jira account, project, and issue type.
 4. Optionally, add a condition to define when to automatically create a Jira issue. If left blank, a Jira issue is created for all new incidents.
 
-### Sync data between Datadog and Jira
+### Configuring bidirectional sync
 
 To sync fields between an incident and its linked Jira issue, enable the **Sync Data Between Incident Management and Jira** toggle. When enabled, a field configuration table appears.
 
@@ -57,11 +57,11 @@ For each field you want to sync, configure the following:
 To add fields beyond the defaults, click **Add custom field** and select a Jira field from the dropdown.
 
 {{< collapse-content title="Sync comments" level="h4" >}}
-To sync comments between the Datadog incident timeline and Jira, add <strong>Comments</strong> as a custom field. When set to <strong>Two-way</strong>, Jira comments appear as incident timeline entries, and incident timeline entries appear as Jira comments.
+To sync comments between the Datadog incident timeline and Jira, add <strong>Comments</strong> as a custom field. When set to <strong>Two-way sync</strong>, Jira comments appear as incident timeline entries, and incident timeline entries appear as Jira comments.
 {{< /collapse-content >}}
 
 {{< collapse-content title="Status and severity mappings" level="h4" >}}
-Configure status and severity mappings to translate incident states and severities to Jira statuses and priorities. Each mapping can be set to <strong>One-way</strong> or <strong>Two-way</strong> sync independently.
+Configure status and severity mappings to translate incident states and severities to Jira statuses and priorities. Each mapping can be set to <strong>One-way sync</strong> or <strong>Two-way sync</strong> sync independently.
 {{< /collapse-content >}}
 
 ### Manually link additional work items
