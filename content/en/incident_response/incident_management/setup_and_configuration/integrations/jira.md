@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Jira is an issue and project tracking system for software teams. The Datadog Jira integration allows you to create Jira issues from Datadog incidents and sync data between the two platforms.
+Jira is a work item and project tracking system for software teams. The Datadog Jira integration allows you to create Jira work items from Datadog incidents and sync data between the two platforms.
 
 The Jira integration with Datadog Incident Management provides the following benefits:
 - **Improved Visibility**: Ensure that all stakeholders are immediately informed about incidents, facilitating a quicker response.
@@ -28,22 +28,22 @@ The Jira integration with Datadog Incident Management provides the following ben
 
 ## Prerequisites
 
-To use automatic issue creation, install the integration through the [Jira Integration tile][1]. For more information, see the [Jira integration][2] documentation.
+To use automatic work item creation, install the integration through the [Jira Integration tile][1]. For more information, see the [Jira integration][2] documentation.
 
 To enable bidirectional sync, you must also configure a Jira webhook. See [Configure a Jira webhook][6] for instructions.
 
 ## Setup
 
-### Configuring Jira issue creation
+### Configuring Jira work item creation
 
 1. On the [Integration Settings page][3], find the Jira integration.
 2. Enable the **Automatically create a parent work item** toggle.
-3. Select your Jira account, project, and issue type.
-4. Optionally, add a condition to define when to automatically create a Jira issue. If left blank, a Jira issue is created for all new incidents.
+3. Select your Jira account, project, and work item type.
+4. Optionally, add a condition to define when to automatically create a Jira work item. If left blank, a Jira work item is created for all new incidents.
 
 ### Configuring bidirectional sync
 
-To sync fields between an incident and its linked Jira issue, enable the **Sync Data Between Incident Management and Jira** toggle. When enabled, a field configuration table appears.
+To sync fields between an incident and its linked Jira work item, enable the **Sync Data Between Incident Management and Jira** toggle. When enabled, a field configuration table appears.
 
 <div class="alert alert-danger">To enable bidirectional sync, you must configure a Jira webhook. See <a href="/integrations/jira/#configure-a-jira-webhook">Configure a Jira webhook</a> for instructions.</a></div>
 
@@ -52,7 +52,7 @@ To sync fields between an incident and its linked Jira issue, enable the **Sync 
 For each field you want to sync, configure the following:
 - **Jira field**: The Jira field to populate. You can use any standard or custom Jira field.
 - **Incident field or custom value**: Select a pre-populated incident field (such as **Incident Title** or **Incident Commander**), or enter a custom value using `{{` to insert incident template variables. Dynamic variables work only with **string** [Jira field types][5].
-- **Sync direction**: Choose **One-way sync** (Datadog to Jira only) or **Two-way sync** (bidirectional) for each field independently.
+- **Sync direction**: Choose **One-way sync** (Datadog to Jira only) or **Two-way sync** (bidirectional) for each field independently. Bidirectional sync supports **string**, **number**, and **date/datetime** [Jira field types][5].
 
 To add fields beyond the defaults, click **Add custom field** and select a Jira field from the dropdown.
 
@@ -61,12 +61,14 @@ To sync comments between the Datadog incident timeline and Jira, add <strong>Com
 {{< /collapse-content >}}
 
 {{< collapse-content title="Status and severity mappings" level="h4" >}}
-Configure status and severity mappings to translate incident states and severities to Jira statuses and priorities. Each mapping can be set to <strong>One-way sync</strong> or <strong>Two-way sync</strong> sync independently.
+Configure status and severity mappings to translate incident states and severities to Jira statuses and priorities. Each mapping can be set to <strong>One-way sync</strong> or <strong>Two-way sync</strong> independently.
 {{< /collapse-content >}}
 
 ### Manually link additional work items
 
-In addition to the automatically created parent work item, you can manually link additional Jira issues to an incident. These manually linked items appear alongside the auto-created issue in the incident view.
+In addition to the automatically created parent work item, you can manually link additional Jira work items to an incident. These manually linked items appear alongside the auto-created work item in the incident view.
+
+Manually created Jira work items are not synced with the incident.
 
 ### Save your settings
 
