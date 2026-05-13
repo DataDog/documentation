@@ -1,6 +1,6 @@
 ---
 title: Agentic Onboarding Setup
-description: Set up Datadog instrumentation with the AI Setup CLI, the Datadog MCP server, or task-scoped skills for Claude.
+description: Set up Datadog instrumentation with the AI Setup CLI, the Datadog MCP Server, or task-scoped skills for Claude.
 
 ---
 
@@ -17,14 +17,14 @@ There are three ways to get started. Pick the one that matches how you work:
 | Path | Use when |
 |------|----------|
 | [Setup CLI](#setup-cli) | You want a standalone command-line tool, no coding assistant required. Useful for first-time account creation, linking an existing account, or instrumenting local IaC and application code from a terminal. |
-| [MCP server](#mcp-server) | You work with an LLM coding assistant (Claude Code, Cursor, and so on) and want it to detect frameworks, write configuration, and provision tokens directly from your IDE. |
-| [Skills](#skills) | You're using Claude and want task-scoped skills for specific onboarding steps (install the Agent, enable a cloud integration, and so on) rather than a full MCP toolset. |
+| [MCP Server](#mcp-server) | You work with an LLM coding assistant (such as Claude Code or Cursor) and want it to detect frameworks, write configuration, and provision tokens directly from your IDE. |
+| [Skills](#skills) | You're using Claude and want task-scoped skills for specific onboarding steps (such as installing the Agent or enabling a cloud integration) rather than a full MCP toolset. |
 
-The three paths are complementary. You can install the MCP server in your IDE, run the CLI in a terminal, and invoke skills from Claude—all against the same Datadog account.
+The three paths are complementary and work against the same Datadog account. You can install the Datadog MCP Server in your IDE, run the CLI in a terminal, and invoke skills from Claude.
 
 ## Setup CLI
 
-The Datadog AI Setup CLI is a standalone tool that runs from your terminal. Use it when you don't want to install an MCP server, or when you need to do something the MCP flow doesn't cover—typically account bootstrapping.
+The Datadog AI Setup CLI is a standalone tool that runs from your terminal. Use it when you don't want to install an MCP server, or when you need to do something the MCP flow doesn't cover, such as account bootstrapping.
 
 The CLI can:
 
@@ -70,7 +70,7 @@ After the CLI completes, see [Next steps](#next-steps).
 
 ## MCP Server
 
-The Datadog MCP server exposes the `onboarding` toolset to any MCP-compatible coding assistant. After you install and authenticate the server, you instrument a project by typing a one-line prompt. The agent reads your code, calls MCP tools (with your permission), applies changes, and verifies the result.
+The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible coding assistant. After you install and authenticate the server, you instrument a project by typing a one-line prompt. The agent reads your code, calls MCP tools (with your permission), applies changes, and verifies the result.
 
 ### Supported frameworks
 
@@ -90,11 +90,13 @@ In an active Claude Code session, run:
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
-Click the install deeplink for your [Datadog site][1]:
+Install the MCP Server using one of the following methods.
+
+**Deeplink (recommended)**: Click the install deeplink for your [Datadog site](/getting_started/site/), then click {{< ui >}}Install{{< /ui >}} in Cursor for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server:
 
    <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
 
-Alternatively, add the server manually in `~/.cursor/mcp.json`:
+**Manual configuration**: Add the server to `~/.cursor/mcp.json`:
 
    <pre><code>{
   "mcpServers": {
@@ -103,25 +105,19 @@ Alternatively, add the server manually in `~/.cursor/mcp.json`:
     }
   }
 }</code></pre>
-
-In Cursor, click {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server.
-
-[1]: /getting_started/site/
 {{% /tab %}}
 
 {{% tab "Other MCP clients" %}}
-Any MCP client that supports HTTP transport works. Point it at the endpoint for your [Datadog site][1]:
+Any MCP client that supports HTTP transport works. Point it at the endpoint for your [Datadog site](/getting_started/site/):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding</code></pre>
-
-[1]: /getting_started/site/
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Authenticate
 
 1. When prompted to authenticate, press <kbd>Enter</kbd>. This opens the Datadog OAuth screen in your browser.
-1. After authentication completes, choose {{< ui >}}Open{{< /ui >}} to return to your IDE and grant the MCP server access to your Datadog account.
+1. After authentication completes, choose {{< ui >}}Open{{< /ui >}} to return to your IDE and grant the MCP Server access to your Datadog account.
 1. Confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server.
 
 ### Instrument your project
@@ -162,7 +158,7 @@ After the agent completes, see [Next steps](#next-steps).
 
 ## Skills
 
-Skills are task-scoped capabilities for Claude. The MCP server exposes a broad onboarding toolset, but a skill is a focused workflow for a single onboarding step. Use a skill when you only need one thing done and don't want to load a full MCP server.
+Skills are task-scoped capabilities for Claude. The Datadog MCP Server exposes a broad onboarding toolset, but a skill is a focused workflow for a single onboarding step. Use a skill when you only need one thing done and don't want to load a full MCP server.
 
 <div class="alert alert-info">This section is in progress. Additional onboarding skills are planned, and the content below is subject to change before general availability.</div>
 
@@ -178,14 +174,14 @@ Skills are task-scoped capabilities for Claude. The MCP server exposes a broad o
 Skills are discoverable inside Claude. From a Claude conversation:
 
 1. Reference the skill by name (for example, "install the Datadog Agent on this host").
-1. Claude loads the skill, asks for any required credentials or scope (host or cluster, cloud account ID, and so on), and walks through the steps.
+1. Claude loads the skill, asks for any required credentials or scope (such as host or cluster type, or cloud account ID), and walks through the steps.
 1. The skill prints verification commands when it finishes.
 
-Skills work standalone—you don't need the MCP server installed to use them.
+Skills work standalone, so you don't need the MCP Server installed to use them. After the skill completes, see [Next steps](#next-steps).
 
 ## Next steps
 
-After any of the three paths completes:
+After your setup completes:
 
 - Commit the agent-generated configuration to your repository, and set any new environment variables (API keys, application IDs) in your production environment. For team-wide rollout, propagate these variables through your secret manager.
 - Confirm data is flowing in the Datadog UI: [APM > Services][6], [RUM > Applications][7], [Infrastructure > Hosts][8], or [Logs > Live Tail][9].
