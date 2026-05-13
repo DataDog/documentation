@@ -1,6 +1,6 @@
 ---
 title: Agentic Onboarding Setup
-description: Set up the Datadog MCP server to instrument your applications with coding agents like Cursor or Claude Code.
+description: Set up Datadog instrumentation with the AI Setup CLI, the Datadog MCP server, or task-scoped skills for Claude.
 
 ---
 
@@ -10,145 +10,192 @@ Agentic Onboarding is in Preview.
 
 ## Overview
 
-Agentic Onboarding lets LLM coding agents instrument your frontend applications for [Error Tracking][3], [Real User Monitoring (RUM)][4], [Product Analytics][5], [Infrastructure Monitoring][8], and [Serverless Monitoring][7] with a single prompt.
+Agentic Onboarding lets LLM coding agents instrument your applications and infrastructure for [Error Tracking][1], [Real User Monitoring (RUM)][2], [Product Analytics][3], [Infrastructure Monitoring][4], and [Serverless Monitoring][5].
 
-Your coding assistant, such as [Cursor][1] or [Claude Code][2], detects your project's frameworks, adds configuration, and provisions required tokens and apps directly from your IDE.
+There are three ways to get started. Pick the one that matches how you work:
 
-## Supported frameworks
-Agentic Onboarding is available for the following frameworks:
-- **Error Tracking, RUM, and Product Analytics**: Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, and Vue.
-- **Infrastructure Monitoring with Kubernetes**: Terraform, Ansible, Kustomize, and more.
-- **Serverless Monitoring for AWS Lambda**: Terraform, AWS CDK, Serverless Framework, and more.
+| Path | Use when |
+|------|----------|
+| [Setup CLI](#setup-cli) | You want a standalone command-line tool, no coding assistant required. Useful for first-time account creation, linking an existing account, or instrumenting local IaC and application code from a terminal. |
+| [MCP server](#mcp-server) | You work with an LLM coding assistant (Claude Code, Cursor, and so on) and want it to detect frameworks, write configuration, and provision tokens directly from your IDE. |
+| [Skills](#skills) | You're using Claude and want task-scoped skills for specific onboarding steps (install the Agent, enable a cloud integration, and so on) rather than a full MCP toolset. |
 
-## Setup
+The three paths are complementary. You can install the MCP server in your IDE, run the CLI in a terminal, and invoke skills from Claude—all against the same Datadog account.
 
-### Install the Datadog Onboarding MCP server
+## Setup CLI
 
-To install the Datadog Onboarding Model Context Protocol (MCP) server, follow the steps for your coding assistant:
+The Datadog AI Setup CLI is a standalone tool that runs from your terminal. Use it when you don't want to install an MCP server, or when you need to do something the MCP flow doesn't cover—typically account bootstrapping.
+
+The CLI can:
+
+- Create a Datadog account end-to-end from the terminal.
+- Link an existing Datadog account to your local environment.
+- Instrument local infrastructure-as-code (Terraform, Helm, Kustomize, Ansible, Pulumi, raw Kubernetes manifests) by editing files in place.
+- Instrument local application code by adding SDK initialization and configuration for supported frontends and backends.
+
+### Install and run
+
+Run the CLI with `npx`, replacing `<PRODUCT>` with one of: `error-tracking`, `rum`, `product-analytics`, `kubernetes`, `docker`, or `serverless`:
+
+```shell
+npx @datadog/ai-setup-cli --product <PRODUCT>
+```
+
+To walk through account setup and product selection interactively, run the CLI with no arguments:
+
+```shell
+npx @datadog/ai-setup-cli
+```
+
+A browser window opens for authentication. After you complete the OAuth flow, return to your terminal. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary tokens.
+
+### Example flows
+
+**First-time user, no Datadog account yet:**
+
+```shell
+npx @datadog/ai-setup-cli
+# Prompts for account creation, then product selection.
+```
+
+**Existing account, instrumenting a local Terraform repo for Kubernetes:**
+
+```shell
+cd my-k8s-terraform-repo
+npx @datadog/ai-setup-cli --product kubernetes
+# Detects Terraform, adds the Datadog Agent module, and writes the API key to .env.
+```
+
+After the CLI completes, see [Next steps](#next-steps).
+
+## MCP Server
+
+The Datadog MCP server exposes the `onboarding` toolset to any MCP-compatible coding assistant. After you install and authenticate the server, you instrument a project by typing a one-line prompt. The agent reads your code, calls MCP tools (with your permission), applies changes, and verifies the result.
+
+### Supported frameworks
+
+| Product | Frameworks |
+|---------|------------|
+| Error Tracking, RUM, Product Analytics | Android, Angular, iOS, Next.js, React, Svelte, Vanilla JS, Vue |
+| Infrastructure Monitoring (Kubernetes) | Terraform, Ansible, Kustomize, Helm, Pulumi, raw manifests |
+| Serverless Monitoring (AWS Lambda) | Terraform, AWS CDK, Serverless Framework, SAM |
+
+### Install
 
 {{< tabs >}}
 {{% tab "Claude Code" %}}
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+In an active Claude Code session, run:
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. Open an active Claude Code session with the /mcp command:
-
-   <pre>
-   <code>claude mcp add --transport http datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}} "https://mcp.{{< region-param key=dd_site >}}/api/unstable/mcp-server/mcp?toolsets=onboarding"</code>
-   </pre>
-
-2. Select the MCP server installed in Step 1. You should see a `disconnected - Enter to login` message. Press <kbd>Enter</kbd>.
-3. When you see the option to authenticate, press <kbd>Enter</kbd>. This brings you to the OAuth screen.
-4. After authentication, choose {{< ui >}}Open{{< /ui >}} to continue and grant access to your Datadog account.
-5. Confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
-{{< /site-region >}}
-
+   <pre><code>claude mcp add --transport http datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}} "{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding"</code></pre>
 {{% /tab %}}
 
 {{% tab "Cursor" %}}
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+Click the install deeplink for your [Datadog site][1]:
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-1. Copy and paste the following deeplink into your browser:
+   <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
 
-   <pre>
-   <code>{{< region-param key=cursor_mcp_install_deeplink >}}</code>
-   </pre>
+Alternatively, add the server manually in `~/.cursor/mcp.json`:
 
-2. In Cursor, click {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
-3. If the MCP server shows a {{< ui >}}Needs login{{< /ui >}} or {{< ui >}}Connect{{< /ui >}} link, select it and complete the OAuth flow. When prompted, choose {{< ui >}}Open{{< /ui >}} to continue and grant access to your Datadog account.
-4. After authentication, return to Cursor and confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key=dd_datacenter_lowercase >}}** server.
-{{< /site-region >}}
+   <pre><code>{
+  "mcpServers": {
+    "datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}": {
+      "url": "{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding"
+    }
+  }
+}</code></pre>
 
+In Cursor, click {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server.
+
+[1]: /getting_started/site/
 {{% /tab %}}
 
-{{% tab "Datadog AI Setup CLI" %}}
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">Agentic Onboarding is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% tab "Other MCP clients" %}}
+Any MCP client that supports HTTP transport works. Point it at the endpoint for your [Datadog site][1]:
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-The Datadog AI Setup CLI configures your project without a coding assistant.
+   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=onboarding</code></pre>
 
-1. Run the `npx` command, replacing `<PRODUCT>` with the identifier for the product you want to set up:
-
-   | Product | Identifier |
-   |---------|------------|
-   | Error Tracking | `error-tracking` |
-   | Infrastructure Monitoring | `infra-monitoring` |
-   | Product Analytics | `product-analytics` |
-   | Real User Monitoring | `rum` |
-   | Studio | `studio` |
-
-   ```shell
-   npx @datadog/ai-setup-cli --product <PRODUCT>
-   ```
-
-2. A browser window opens for authentication. Complete the OAuth flow and grant access to your Datadog account.
-3. Return to your terminal. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary tokens.
-
-After the CLI completes, skip to [Deploy your app to production](#deploy-your-app-to-production).
-{{< /site-region >}}
-
+[1]: /getting_started/site/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Set up your project
+### Authenticate
 
-Your AI coding agent can help configure Datadog for your project. When you provide a setup prompt, the agent:
+1. When prompted to authenticate, press <kbd>Enter</kbd>. This opens the Datadog OAuth screen in your browser.
+1. After authentication completes, choose {{< ui >}}Open{{< /ui >}} to return to your IDE and grant the MCP server access to your Datadog account.
+1. Confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server.
 
-- Analyzes your project and identifies the framework, language, and bundler
-- Calls the MCP tool and requests permission before running
-- Applies the configuration changes specified by the tool
-- Provides steps to verify that your application is sending telemetry to Datadog
+### Instrument your project
+
+Send the prompt that matches the product you want to install:
+
+{{< tabs >}}
+{{% tab "Error Tracking" %}}
+{{< code-block lang="text" >}}Add Datadog Error Tracking to my project{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Real User Monitoring" %}}
+{{< code-block lang="text" >}}Add Datadog Real User Monitoring to my project{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Product Analytics" %}}
+{{< code-block lang="text" >}}Add Datadog Product Analytics to my project{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+{{< code-block lang="text" >}}Add Datadog for Kubernetes to my project{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Docker" %}}
+{{< code-block lang="text" >}}Add Datadog for Docker to my project{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Serverless" %}}
+{{< code-block lang="text" >}}Instrument my AWS Lambda functions with Datadog{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+The agent detects your stack, requests permission before each tool call, applies changes, and prints verification steps.
 
 **Note**: Your coding agent makes changes locally but does not commit them.
 
-To get started:
-1. Choose the product you want to use and paste its setup prompt into your AI agent:
+After the agent completes, see [Next steps](#next-steps).
 
-   {{< tabs >}}
-   {{% tab "Error Tracking" %}}
-   {{< code-block lang="text" >}}Add Datadog Error Tracking to my project{{< /code-block >}}
-   {{% /tab %}}
+## Skills
 
-   {{% tab "Real User Monitoring" %}}
-   {{< code-block lang="text" >}}Add Datadog Real User Monitoring to my project{{< /code-block >}}
-   {{% /tab %}}
+Skills are task-scoped capabilities for Claude. The MCP server exposes a broad onboarding toolset, but a skill is a focused workflow for a single onboarding step. Use a skill when you only need one thing done and don't want to load a full MCP server.
 
-   {{% tab "Product Analytics" %}}
-   {{< code-block lang="text" >}}Add Datadog Product Analytics to my project{{< /code-block >}}
-   {{% /tab %}}
+<div class="alert alert-info">This section is in progress. Additional onboarding skills are planned, and the content below is subject to change before general availability.</div>
 
-   {{% tab "Infrastructure Monitoring" %}}
-   **Kubernetes**
-   {{< code-block lang="text" >}}Add Datadog for Kubernetes to my project{{< /code-block >}}
+### Available skills
 
-   **Docker**
-   {{< code-block lang="text" >}}Add Datadog for Docker to my project{{< /code-block >}}
-   {{% /tab %}}
+| Skill | What it does |
+|-------|--------------|
+| Install Datadog Agent | Detects the host or cluster type and installs the Datadog Agent with the right configuration. |
+| Enable cloud integration | Wires up AWS, GCP, or Azure cloud integrations against your Datadog account. |
 
-   {{% tab "Serverless Monitoring" %}}
-   {{< code-block lang="text" >}}Instrument my AWS Lambda functions with Datadog{{< /code-block >}}
-   {{% /tab %}}
-   {{< /tabs >}}
+### How to invoke
 
-2. Review and accept each action your AI agent proposes to complete the setup process.
+Skills are discoverable inside Claude. From a Claude conversation:
 
-### Deploy your app to production
+1. Reference the skill by name (for example, "install the Datadog Agent on this host").
+1. Claude loads the skill, asks for any required credentials or scope (host or cluster, cloud account ID, and so on), and walks through the steps.
+1. The skill prints verification commands when it finishes.
 
-Commit the changes to your repository and configure the provided environment variables in your production environment.
+Skills work standalone—you don't need the MCP server installed to use them.
 
-[1]: https://cursor.com/
-[2]: https://claude.ai/
-[3]: /error_tracking/frontend/
-[4]: /real_user_monitoring/
-[5]: /product_analytics/
-[6]: /integrations/kubernetes
-[7]: /serverless/
-[8]: /containers/kubernetes/
+## Next steps
 
+After any of the three paths completes:
+
+- Commit the agent-generated configuration to your repository, and set any new environment variables (API keys, application IDs) in your production environment. For team-wide rollout, propagate these variables through your secret manager.
+- Confirm data is flowing in the Datadog UI: [APM > Services][6], [RUM > Applications][7], [Infrastructure > Hosts][8], or [Logs > Live Tail][9].
+
+[1]: /error_tracking/frontend/
+[2]: /real_user_monitoring/
+[3]: /product_analytics/
+[4]: /containers/kubernetes/
+[5]: /serverless/
+[6]: https://app.datadoghq.com/services
+[7]: https://app.datadoghq.com/rum/list
+[8]: https://app.datadoghq.com/infrastructure
+[9]: https://app.datadoghq.com/logs/livetail
