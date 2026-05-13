@@ -30,10 +30,10 @@ title: Trafic réseau
 ## Aperçu {#overview}
 
 <div class="alert alert-danger">
-Le trafic est toujours initié par l'Agent vers Datadog. Aucune session n'est jamais initiée de Datadog vers l'Agent.
+Le trafic est toujours initié par l'Agent vers Datadog. Aucune session n'est initiée de Datadog vers l'Agent.
 </div>
 
-Tout le trafic de l'Agent est envoyé via SSL. La destination dépend du service et du site Datadog. Pour voir les destinations basées sur votre [site Datadog][11], cliquez sur le sélecteur `DATADOG SITE` à droite.
+Tout le trafic de l'Agent est envoyé via SSL. La destination dépend du service et du site Datadog. Pour voir les destinations en fonction de votre [Datadog site][11], cliquez sur le sélecteur {{< ui >}}DATADOG SITE{{< /ui >}} situé à droite.
 
 ## Installation {#installation}
 
@@ -49,7 +49,7 @@ Ajoutez les domaines suivants à votre liste d'inclusion pour permettre l'instal
 <div class="alert alert-warning">
 À partir de la version 7.67.0, l'Agent convertit les sites Datadog en noms de domaine entièrement qualifiés (en ajoutant un point à la fin du domaine) pour réduire le nombre de requêtes DNS.
 Par exemple, il envoie des charges utiles APM à <code>trace.agent.datadoghq.com.</code>.<br>
-Ce comportement peut être désactivé dans la version 7.72.0 et ultérieure en définissant <code>convert_dd_site_fqdn.enabled</code> sur <code>false</code> dans la configuration, ou avec la variable d'environnement <code>DD_CONVERT_DD_SITE_FQDN_ENABLED=false</code>.
+Ce comportement peut être désactivé dans la version 7.72.0 et ultérieure en définissant <code>convert_dd_site_fqdn.enabled</code> par <code>false</code> dans la configuration, ou avec la variable d'environnement <code>DD_CONVERT_DD_SITE_FQDN_ENABLED=false</code>.
 </div>
 
 [APM][1]
@@ -62,16 +62,17 @@ Ce comportement peut être désactivé dans la version 7.72.0 et ultérieure en 
 [Images de Conteneurs][13]
 : `contimage-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Conteneurs en Direct][3], [Processus en Direct][4], [Surveillance du Réseau Cloud][24], [Surveillance Universelle des Services][25]
+[Conteneurs en Direct][3], [Processus en Direct][4], [Surveillance du Réseau Cloud][24], [Surveillance de Service Universel][25]
 : `process.`{{< region-param key="dd_site" code="true" >}}
 
-[Surveillance des Dispositifs Réseau][10]
+[Surveillance des dispositifs réseau][10]
 : `ndm-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Chemin Réseau][14]
-: `netpath-intake.`{{< region-param key="dd_site" code="true" >}}
+[Chemin réseau][14]
+: `netpath-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+Dans l'Agent v7.75+, le Chemin réseau contacte des services externes via HTTPS pour résoudre l'adresse IP publique de l'hôte source. C'est optionnel et le Chemin réseau fonctionne sans cela, mais si votre réseau restreint le trafic sortant et que vous souhaitez la résolution de l'adresse IP publique source, ajoutez les éléments suivants à votre liste d'autorisation : `icanhazip.com`, `ipinfo.io`, `checkip.amazonaws.com`, `api.ipify.org`, `whatismyip.akamai.com`. Voir [Configuration du Chemin réseau][33] pour plus de détails.
 
 [Orchestrateur][5]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -80,24 +81,24 @@ Ce comportement peut être désactivé dans la version 7.72.0 et ultérieure en 
 [Profilage][7]
 : `intake.profile.`{{< region-param key="dd_site" code="true" >}}
 
-[Surveillance des Utilisateurs Réels (RUM)][6]
+[Surveillance des utilisateurs réels (RUM)][6]
 : {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
-[Vulnérabilités de Sécurité Cloud][29]
+[Vulnérabilités de sécurité dans le cloud][29]
 : `sbom-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[Emplacements Privés de Surveillance Synthétique][8]
-: Travailleurs Synthétiques v1.5.0 ou ultérieur : `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} est le seul point de terminaison que vous devez configurer.<br>
-Résultats des tests API pour le Travailleur Synthétique > v0.1.6 : `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
-Résultats des tests de navigateur pour le Travailleur Synthétique > v0.2.0 : `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
-Résultats des tests API pour le Travailleur Synthétique < v0.1.5 : `api.`{{< region-param key="dd_site" code="true" >}}
+[Surveillance synthétique des emplacements privés][8]
+: Synthetics Worker v1.5.0 ou ultérieur : `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} est le seul point de terminaison que vous devez configurer.<br>
+Résultats des tests API pour le Synthetics Worker > v0.1.6 : `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
+Résultats des tests de navigateur pour le Synthetics Worker > v0.2.0 : `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
+Résultats des tests API pour le Synthetics Worker < v0.1.5 : `api.`{{< region-param key="dd_site" code="true" >}}
 
 {{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
 
-[Configuration à Distance][101]
+[Configuration à distance][101]
 : `config.`{{< region-param key="dd_site" code="true" >}}
 
-[Surveillance de Base de Données][102]
+[Surveillance de base de données][102]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
@@ -108,12 +109,12 @@ Résultats des tests API pour le Travailleur Synthétique < v0.1.5 : `api.`{{< r
 
 {{% logs-tcp-disclaimer %}}
 
-[Logs][30] & [logs HIPAA][31]
+[Journaux][30] & [journaux HIPAA][31]
 : (Obsolète) TCP : {{< region-param key=tcp_endpoint code="true" >}}<br>
 HTTP : {{< region-param key=agent_http_endpoint code="true" >}}<br>
 Autre : Voir [points de terminaison des journaux][32]
 
-[Journaux HIPAA hérités][31] (Obsolète, TCP non pris en charge)
+[Journaux HIPAA anciens][31] (Obsolète, TCP non pris en charge)
 : {{< region-param key=hipaa_logs_legacy code="true" >}}
 
 [Métriques][26], [Vérifications de service][27], [Événements][28] et autres métadonnées de l'Agent
@@ -123,9 +124,9 @@ Depuis v6.1.0, l'Agent interroge également l'API de Datadog pour fournir des fo
 Agent v7.18.0 ou 6.18.0 et versions ultérieures : `api.`{{< region-param key="dd_site" code="true" >}}<br>
 Agent < v7.18.0 ou 6.18.0 : `app.`{{< region-param key="dd_site" code="true" >}}
 
-[Flare de l'Agent][12]
+[Agent flare][12]
 : `<VERSION>-flare.agent.`{{< region-param key="dd_site" code="true" >}}<br>
-Par exemple, l'Agent v7.31.0 envoie des données de flare à `7-31-0-flare.agent.`{{< region-param key="dd_site" code="true" >}}. Vous devez ajouter `*.agent.`{{< region-param key="dd_site" code="true" >}} à votre liste d'inclusion dans votre(s) pare-feu(s).<br>
+Par exemple, l'Agent v7.31.0 envoie des données flare à `7-31-0-flare.agent.`{{< region-param key="dd_site" code="true" >}}. Vous devez ajouter `*.agent.`{{< region-param key="dd_site" code="true" >}} à votre liste d'inclusion dans votre(s) pare-feu(s).<br>
 
 ### Adresses IP statiques {#static-ip-addresses}
 
@@ -165,14 +166,14 @@ Chaque section possède un endpoint dédié sur, par exemple :
 
 ### Inclusion {#inclusion}
 
-Ajoutez tous les `ip-ranges` à votre liste d'inclusion. Bien qu'un sous-ensemble soit actif à tout moment, il existe des variations dans l'ensemble en raison du fonctionnement et de la maintenance réguliers du réseau.
+Ajoutez tous les `ip-ranges` à votre liste d'inclusion. Bien qu'un sous-ensemble soit actif à tout moment, il existe des variations au fil du temps au sein de l'ensemble complet en raison du fonctionnement et de la maintenance réguliers du réseau.
 
 ## Ports ouverts {#open-ports}
 
 <div class="alert alert-danger">
 Tout le trafic sortant est envoyé via SSL par TCP ou UDP.
 <br><br>
-Assurez-vous que l'Agent est uniquement accessible par vos applications ou des sources réseau de confiance en utilisant une règle de pare-feu ou une restriction réseau similaire. Un accès non fiable peut permettre à des acteurs malveillants d'effectuer plusieurs actions invasives, y compris, mais sans s'y limiter, l'écriture de traces et de métriques dans votre compte Datadog, ou l'obtention d'informations sur votre configuration et vos services.
+Assurez-vous que l'Agent est uniquement accessible par vos applications ou des sources réseau de confiance en utilisant une règle de pare-feu ou une restriction réseau similaire. Un accès provenant de sources non approuvées peut permettre à des acteurs malveillants d'effectuer plusieurs actions invasives, notamment l'envoi de traces et de métriques dans votre compte Datadog ou l'obtention d'informations sur votre configuration et vos services.
 </div>
 
 Ouvrez les ports suivants pour bénéficier de toutes les fonctionnalités de l'**Agent** :
@@ -184,9 +185,9 @@ Ouvrez les ports suivants pour bénéficier de toutes les fonctionnalités de l'
 | Produit/Fonctionnalité                                                                                                                                                    | Port                                           | Protocole         | Description                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Agent<br>APM<br>Conteneurs<br>Processus en direct<br>Métriques<br>Surveillance du réseau Cloud<br>Surveillance des services universels                                                      | 443                                            | TCP              | La plupart des données de l'Agent utilisent le port 443.                                                                                                                                                              |
-| [Autoscaling d'Agent personnalisé][22]                                                                                                                                           | 8443                                           | TCP              |                                                                                                                                                                                             |
-| Collecte de journaux                                                                                                                                                           | {{< region-param key=web_integrations_port >}} | (Obsolète) TCP | Journalisation via TCP. <br>**Remarque** : La collecte de journaux TCP n'est **pas prise en charge**. Datadog ne fournit **aucune garantie de livraison ou de fiabilité** lors de l'utilisation de TCP, et les données de journal peuvent être perdues sans préavis. Pour une ingestion fiable, utilisez le point de terminaison d'entrée HTTP, un Agent Datadog officiel ou une intégration de transfert à la place. Pour d'autres types de connexion, voir [points de terminaison de journaux][21]. |
-| NTP                                                                                                                                                                      | 123                                            | UDP              | Protocole de temps réseau (NTP). Voir [cibles NTP par défaut][20].<br> Pour des informations sur le dépannage NTP, voir [problèmes NTP][19].                                                                |
+| [Custom Agent Autoscaling][22]                                                                                                                                           | 8443                                           | TCP              |                                                                                                                                                                                             |
+| Collecte de journaux                                                                                                                                                           | {{< region-param key=web_integrations_port >}} | (Obsolète) TCP | Journalisation sur TCP. <br>**Remarque** : La collecte de journaux TCP n'est **pas prise en charge**. Datadog ne fournit **aucune garantie de livraison ou de fiabilité** lors de l'utilisation de TCP, et les données de journaux peuvent être perdues sans préavis. Pour une ingestion fiable, utilisez le point de terminaison HTTP d'ingestion, un Agent Datadog officiel ou une intégration de transfert à la place. Pour d'autres types de connexion, voir [points de terminaison des journaux][21]. |
+| NTP                                                                                                                                                                      | 123                                            | UDP              | Protocole de temps réseau (NTP). Voir [cibles NTP par défaut][20].<br>Pour des informations sur le dépannage NTP, voir [problèmes NTP][19].                                                                |
 
 [19]: /fr/agent/faq/network-time-protocol-ntp-offset-issues/
 [20]: /fr/integrations/ntp/#overview
@@ -195,12 +196,12 @@ Ouvrez les ports suivants pour bénéficier de toutes les fonctionnalités de l'
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov,ap1,ap2" %}}
+{{% site-region region="us3,us5,gov,gov2,ap1,ap2" %}}
 
 | Produit/Fonctionnalité                                                                                               | Port | Protocole | Description                                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------------- | ---- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Agent<br>APM<br>Conteneurs<br>Processus en direct<br>Métriques<br>Surveillance du réseau Cloud<br>Surveillance des services universels | 443  | TCP      | La plupart des données de l'Agent utilisent le port 443.                                                                                               |
-| NTP                                                                                                                 | 123  | UDP      | Protocole de temps réseau (NTP). Voir [cibles NTP par défaut][20].<br>Pour des informations sur le dépannage de NTP, voir [problèmes NTP][19]. |
+| Agent<br>APM<br>Conteneurs<br>Processus en direct<br>Métriques<br>Surveillance du réseau Cloud<br>Surveillance des services universels | 443  | TCP      | La plupart des données de l'Agent utilisent le port 443. |
+| NTP                                                                                                                 | 123  | UDP      | Protocole de temps réseau (NTP). Voir [cibles NTP par défaut][20].<br>Pour des informations sur le dépannage NTP, voir [problèmes NTP][19]. |
 
 [19]: /fr/agent/faq/network-time-protocol-ntp-offset-issues/
 [20]: /fr/integrations/ntp/#overview
@@ -213,12 +214,12 @@ Ports utilisés pour les services de l'Agent qui communiquent entre eux en local
 
 | Produit/Fonctionnalité        | Port | Protocole | Description                                                                                                                    |
 | ---------------------------- | ---- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| [Interface graphique de l'agent navigateur][16]      | 5002 | TCP      |                                                                                                                                |
+| [Agent browser GUI][16]      | 5002 | TCP      |                                                                                                                                |
 | Récepteur APM                 | 8126 | TCP      | Inclut le traçage et le profileur.                                                                                             |
-| [DogStatsD][18]              | 8125 | UDP      | Port pour DogStatsD sauf si `dogstatsd_non_local_traffic` est défini sur vrai. Ce port est disponible sur localhost IPv4 : `127.0.0.1`. |
+| [DogStatsD][18]              | 8125 | UDP      | Port pour DogStatsD à moins que `dogstatsd_non_local_traffic` ne soit défini sur vrai. Ce port est disponible sur localhost IPv4 : `127.0.0.1`. |
 | serveur go_expvar (APM)       | 5012 | TCP      | Pour plus d'informations, voir [la documentation d'intégration go_expar][15].                                                        |
 | serveur d'intégration go_expvar | 5000 | TCP      | Pour plus d'informations, voir [la documentation d'intégration go_expar][15].                                                        |
-| API IPC                      | 5001 | TCP      | Port utilisé pour la communication entre processus (IPC).                                                                               |
+| API IPC                      | 5001 | TCP      | Port utilisé pour la communication inter-processus (IPC).                                                                               |
 | Débogage de l'agent de processus          | 6062 | TCP      | Points de terminaison de débogage pour l'agent de processus.                                                                                         |
 | Exécution de l'agent de processus        | 6162 | TCP      | Paramètres de configuration d'exécution pour l'agent de processus.                                                                          |
 
@@ -227,52 +228,52 @@ Ports utilisés pour les services de l'Agent qui communiquent entre eux en local
 Si vous devez changer un port entrant parce que le port par défaut est déjà utilisé par un service existant sur votre réseau, modifiez le fichier de configuration `datadog.yaml`. Vous pouvez trouver la plupart des ports dans la section **Configuration avancée** du fichier :
 
 {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
-## @param expvar_port - integer - optional - default: 5000 {#param-expvar-port-integer-optional-default-5000}
-## @env DD_EXPVAR_PORT - integer - optional - default: 5000 {#env-dd-expvar-port-integer-optional-default-5000}
-## The port for the go_expvar server. {#the-port-for-the-go-expvar-server}
+## @param expvar_port - integer - optional - default: 5000
+## @env DD_EXPVAR_PORT - integer - optional - default: 5000
+## The port for the go_expvar server.
 #
-# expvar_port: 5000 {#expvar-port-5000}
+# expvar_port: 5000
 
-## @param cmd_port - integer - optional - default: 5001 {#param-cmd-port-integer-optional-default-5001}
-## @env DD_CMD_PORT - integer - optional - default: 5001 {#env-dd-cmd-port-integer-optional-default-5001}
-## The port on which the IPC api listens. {#the-port-on-which-the-ipc-api-listens}
+## @param cmd_port - integer - optional - default: 5001
+## @env DD_CMD_PORT - integer - optional - default: 5001
+## The port on which the IPC api listens.
 #
-# cmd_port: 5001 {#cmd-port-5001}
+# cmd_port: 5001
 
-## @param GUI_port - integer - optional {#param-gui-port-integer-optional}
-## @env DD_GUI_PORT - integer - optional {#env-dd-gui-port-integer-optional}
-## The port for the browser GUI to be served. {#the-port-for-the-browser-gui-to-be-served}
-## Setting 'GUI_port: -1' turns off the GUI completely {#setting-gui-port-1-turns-off-the-gui-completely}
-## Default is: {#default-is}
-##  * Windows & macOS : `5002` {#windows-macos-5002}
-##  * Linux: `-1` {#linux-1}
+## @param GUI_port - integer - optional
+## @env DD_GUI_PORT - integer - optional
+## The port for the browser GUI to be served.
+## Setting 'GUI_port: -1' turns off the GUI completely
+## Default is:
+##  * Windows & macOS : `5002`
+##  * Linux: `-1`
 ##
 #
-# GUI_port: <GUI_PORT> {#gui-port}
+# GUI_port: <GUI_PORT>
 
 {{< /code-block >}}
 
 Le récepteur APM et les ports DogStatsD se trouvent dans les sections **Configuration de collecte de traces** et **Configuration de DogStatsD** du fichier de configuration `datadog.yaml`, respectivement :
 
 {{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="true" >}}
-## @param dogstatsd_port - integer - optional - default: 8125 {#param-dogstatsd-port-integer-optional-default-8125}
-## @env DD_DOGSTATSD_PORT - integer - optional - default: 8125 {#env-dd-dogstatsd-port-integer-optional-default-8125}
-## Override the Agent DogStatsD port. {#override-the-agent-dogstatsd-port}
-## Note: Make sure your client is sending to the same UDP port. {#note-make-sure-your-client-is-sending-to-the-same-udp-port}
+## @param dogstatsd_port - integer - optional - default: 8125
+## @env DD_DOGSTATSD_PORT - integer - optional - default: 8125
+## Override the Agent DogStatsD port.
+## Note: Make sure your client is sending to the same UDP port.
 #
-# dogstatsd_port: 8125 {#dogstatsd-port-8125}
+# dogstatsd_port: 8125
 
 [...]
 
-## @param receiver_port - integer - optional - default: 8126 {#param-receiver-port-integer-optional-default-8126}
-## @env DD_APM_RECEIVER_PORT - integer - optional - default: 8126 {#env-dd-apm-receiver-port-integer-optional-default-8126}
-## The port that the trace receiver should listen on. {#the-port-that-the-trace-receiver-should-listen-on}
-## Set to 0 to disable the HTTP receiver. {#set-to-0-to-disable-the-http-receiver}
+## @param receiver_port - integer - optional - default: 8126
+## @env DD_APM_RECEIVER_PORT - integer - optional - default: 8126
+## The port that the trace receiver should listen on.
+## Set to 0 to disable the HTTP receiver.
 #
-# receiver_port: 8126 {#receiver-port-8126}
+# receiver_port: 8126
 {{< /code-block >}}
 
-<div class="alert alert-danger">Si vous changez la valeur du port DogStatsD ou du port du récepteur APM ici, vous devez également changer la configuration de la bibliothèque de traçage APM pour le port correspondant. Voir les informations sur la configuration des ports dans la <a href="/tracing/trace_collection/library_config/">documentation de configuration de la bibliothèque pour votre langue</a>.</div>
+<div class="alert alert-danger">Si vous changez la valeur du port DogStatsD ou du port du récepteur APM ici, vous devez également changer la configuration du SDK Datadog pour le port correspondant. Voir les informations sur la configuration des ports dans la <a href="/tracing/trace_collection/library_config/">documentation de configuration de la bibliothèque pour votre langue</a>.</div>
 
 ## Utilisation de proxies {#using-proxies}
 
@@ -281,7 +282,7 @@ Pour obtenir des instructions détaillées sur la configuration d'un proxy, cons
 ## Mise en mémoire tampon des données {#data-buffering}
 
 Si le réseau devient indisponible, l'Agent stocke les métriques en mémoire.
-L'utilisation maximale de la mémoire pour stocker les métriques est définie par le paramètre de configuration `forwarder_retry_queue_payloads_max_size`. Lorsque cette limite est atteinte, les métriques sont supprimées.
+La consommation maximale de mémoire pour le stockage des métriques est définie par le paramètre de configuration `forwarder_retry_queue_payloads_max_size`. Lorsque cette limite est atteinte, les métriques sont supprimées.
 
 L'Agent v7.27.0 ou version ultérieure stocke les métriques sur disque lorsque la limite de mémoire est atteinte. Activez cette fonctionnalité en définissant `forwarder_storage_max_size_in_bytes` sur une valeur positive indiquant la quantité maximale d'espace de stockage, en octets, que l'Agent peut utiliser pour stocker les métriques sur disque.
 
@@ -339,3 +340,4 @@ Si vous installez l'Opérateur Datadog dans un environnement Kubernetes avec une
 [30]: /fr/logs/
 [31]: /fr/data_security/logs/#hipaa-enabled-customers
 [32]: /fr/logs/log_collection/#logging-endpoints
+[33]: /fr/network_monitoring/network_path/setup/#source-public-ip-resolution
