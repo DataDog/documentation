@@ -66,7 +66,7 @@ npx @datadog/ai-setup-cli --product kubernetes
 # Detects Terraform, adds the Datadog Agent module, and writes the API key to .env.
 ```
 
-After the CLI completes, see [Next steps](#next-steps).
+After the CLI completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see [Next steps](#next-steps) to confirm data is flowing.
 
 ## MCP Server
 
@@ -154,7 +154,7 @@ The agent detects your stack, requests permission before each tool call, applies
 
 **Note**: Your coding agent makes changes locally but does not commit them.
 
-After the agent completes, see [Next steps](#next-steps).
+After the agent completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see [Next steps](#next-steps) to confirm data is flowing.
 
 ## Skills
 
@@ -181,10 +181,7 @@ Skills work standalone, so you don't need the MCP Server installed to use them. 
 
 ## Next steps
 
-After your setup completes:
-
-- Commit the agent-generated configuration to your repository, and set any new environment variables (API keys, application IDs) in your production environment. For team-wide rollout, propagate these variables through your secret manager.
-- Confirm data is flowing in the Datadog UI: [APM > Services][6], [RUM > Applications][7], [Infrastructure > Hosts][8], or [Logs > Live Tail][9].
+Confirm data is flowing in the Datadog UI: [APM > Services][6], [RUM > Applications][7], [Infrastructure > Hosts][8], or [Logs > Live Tail][9].
 
 [1]: /error_tracking/frontend/
 [2]: /real_user_monitoring/
