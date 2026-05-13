@@ -34,9 +34,9 @@ Use the filter panel on the left to narrow the list of hosts:
 - **Filter Metrics**: Select a metric and define a value range to filter hosts by metric value.
 - **Search facets**: Filter by any host property or tag, such as Cloud Provider, Env, Region, Resource Type, Instance Type, OS, OS Version, Agent, or Docker Version.
 
-You can also use the search box at the top of the list to filter hosts with the [Datadog search syntax][16].
+You can also use the search box at the top of the list to filter hosts using the [Datadog search syntax][16].
 
-## Save views
+## Saved views
 
 To save your filter and column configuration, open the **Views** panel in the upper-left corner and click **Save as new view**. From this panel, you can filter, sort, edit, and star saved views.
 
@@ -44,7 +44,7 @@ To save your filter and column configuration, open the **Views** panel in the up
 
 ## Customize columns
 
-To add, remove, or reorder columns, click **Columns** above the host list. You can add any of the following as a column:
+To add, remove, or reorder columns, click **Columns** above the Host List. You can add any of the following as a column:
 
 - **Host Attributes**: Properties of the host, such as hostname or status.
 - **Tags**: Any tag applied to the host.
@@ -72,7 +72,7 @@ Click any host to open its detail panel, which includes:
 - [Agent configuration](#agent-configuration) (if enabled)
 - [OpenTelemetry Collector configuration](#opentelemetry-collector-configuration) (if enabled)
 
-{{< img src="infrastructure/index/infra-list-side-panel.png" alt="The host detail side panel with tabs for Host Summary, Metrics, Containers, Processes, and other host data." style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-side-panel.png" alt="The host detail side panel with sections for Host Summary, Metrics, Containers, Processes, and other host data." style="width:100%;">}}
 
 The detail panel uses the [Resource Catalog][15] side panel.
 
@@ -86,7 +86,7 @@ To view a host's Agent configuration, click the host to open the side panel, and
 
 ### OpenTelemetry Collector configuration
 
-When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the host detail panel. Use the Datadog Extension to manage and debug your OpenTelemetry Collector deployments from the Datadog interface.
+When you configure the [Datadog Extension][14] with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the host detail panel. The extension also lets you manage and debug your Collector deployments from Datadog.
 
 To view a host's OpenTelemetry Collector configuration, click the host to open the side panel. Scroll to the **OTel Collector** section to see the build information and complete Collector configuration.
 
@@ -96,14 +96,14 @@ For detailed setup instructions and requirements, such as hostname matching and 
 
 ## Export
 
-Click **Export** above the host list to download a copy. For a JSON-formatted list of your hosts reporting to Datadog, you can also use one of the following:
+Click **Export** above the Host List to download a copy of the list. For a JSON-formatted list of your hosts reporting to Datadog, you can also use one of the following:
 
-* The [host overview report][17].
-* The [search hosts API endpoint][7]. See the [developer guide][8] for an example.
+- The [host overview report][17].
+- The [search hosts API endpoint][7]. See the [developer guide][8] for an example.
 
 ### Audit Agent versions
 
-To audit which Agent versions are running across your hosts, use the [get_host_agent_list script][9]. The script uses the JSON permalink to output the running Agents with their version numbers. A `json_to_csv` script also converts the JSON output to CSV.
+To audit which Agent versions are running across your hosts, use the [get_host_agent_list script][9]. The script uses the [host overview report][17] to output the running Agents with their version numbers. A `json_to_csv` script also converts the JSON output to CSV.
 
 ### List hosts without an Agent
 
@@ -144,14 +144,12 @@ for host in infra['rows']:
 [3]: /metrics/
 [4]: /infrastructure/livecontainers/?tab=helm#overview
 [5]: /logs/
-[6]: /agent/configuration/agent-configuration-files/
 [7]: /api/v1/hosts/#get-the-total-number-of-active-hosts
 [8]: /extend/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
 [11]: https://docs.datadoghq.com/account_management/billing/
 [12]: https://app.datadoghq.com/release-notes/fleet-automation-is-now-generally-available
-[13]: /agent/fleet_automation
 [14]: /opentelemetry/integrations/datadog_extension/
 [15]: /infrastructure/resource_catalog/#investigate-a-host-or-resource
 [16]: /getting_started/search/
