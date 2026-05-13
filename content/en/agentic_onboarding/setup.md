@@ -35,15 +35,15 @@ The CLI can:
 
 ### Install and run
 
-Choose the `npx` command that matches your situation:
+Run the CLI with `npx`:
 
-- **First-time user, or want to be walked through product selection**: Run the CLI with no arguments to step through account setup and product choice.
+- **No Datadog account yet, or want to choose your product interactively**: Run with no arguments to step through account setup and product choice.
 
     ```shell
     npx @datadog/ai-setup-cli
     ```
 
-- **Existing account, know which product to install**: Pass `--product` to skip product selection.
+- **Existing account, installing a specific product**: Pass `--product` to skip product selection.
 
     ```shell
     npx @datadog/ai-setup-cli --product <PRODUCT>
@@ -51,9 +51,11 @@ Choose the `npx` command that matches your situation:
 
     Replace `<PRODUCT>` with one of `error-tracking`, `rum`, `product-analytics`, `kubernetes`, `docker`, or `serverless`.
 
-A browser window opens for authentication. After you complete the OAuth flow, return to your terminal. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary tokens.
+After you run the command:
 
-After the CLI completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see [Next steps](#next-steps) to confirm data is flowing.
+1. Complete the OAuth flow in your browser when prompted. After authentication, the CLI detects your project's frameworks, applies the required configuration, and provisions any necessary tokens.
+1. Commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment.
+1. See [Next steps](#next-steps) to confirm data is flowing.
 
 ## MCP Server
 
