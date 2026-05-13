@@ -54,7 +54,7 @@ cascade:
         rank: 70
 ---
 
-{{< learning-center-callout hide_image="true" header="Try \"Introduction to OTel with Datadog\" in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
+{{< learning-center-callout hide_image="true" header='Try "Introduction to OTel with Datadog" in the Learning Center' btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
   Learn how to configure OpenTelemetry to export metrics, traces, and logs to Datadog, and explore the collected data in the platform.
 {{< /learning-center-callout >}}
 
