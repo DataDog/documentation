@@ -35,36 +35,23 @@ The CLI can:
 
 ### Install and run
 
-Run the CLI with `npx`:
+Choose the `npx` command that matches your situation:
 
-```shell
-npx @datadog/ai-setup-cli
-```
+- **First-time user, or want to be walked through product selection**: Run the CLI with no arguments to step through account setup and product choice.
 
-A browser window opens for authentication. After you complete the OAuth flow, return to your terminal. The CLI walks you through account setup and product selection, detects your project's frameworks, applies the required configuration, and provisions any necessary tokens.
+    ```shell
+    npx @datadog/ai-setup-cli
+    ```
 
-To skip product selection, pass `--product` with one of `error-tracking`, `rum`, `product-analytics`, `kubernetes`, `docker`, or `serverless`:
+- **Existing account, know which product to install**: Pass `--product` to skip product selection.
 
-```shell
-npx @datadog/ai-setup-cli --product <PRODUCT>
-```
+    ```shell
+    npx @datadog/ai-setup-cli --product <PRODUCT>
+    ```
 
-### Example flows
+    Replace `<PRODUCT>` with one of `error-tracking`, `rum`, `product-analytics`, `kubernetes`, `docker`, or `serverless`.
 
-**First-time user, no Datadog account yet:**
-
-```shell
-npx @datadog/ai-setup-cli
-# Prompts for account creation, then product selection.
-```
-
-**Existing account, instrumenting a local Terraform repo for Kubernetes:**
-
-```shell
-cd my-k8s-terraform-repo
-npx @datadog/ai-setup-cli --product kubernetes
-# Detects Terraform, adds the Datadog Agent module, and writes the API key to .env.
-```
+A browser window opens for authentication. After you complete the OAuth flow, return to your terminal. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary tokens.
 
 After the CLI completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see [Next steps](#next-steps) to confirm data is flowing.
 
