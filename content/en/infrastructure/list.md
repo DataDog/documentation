@@ -38,9 +38,9 @@ You can also use the search box at the top of the list to filter hosts with the 
 
 ## Save views
 
-To save your filter and column configuration, open the **Views** panel in the upper-left corner and click **Save as new view**. From the same panel, you can filter, sort, edit, and star saved views.
+To save your filter and column configuration, open the **Views** panel in the upper-left corner and click **Save as new view**. From this panel, you can filter, sort, edit, and star saved views.
 
-{{< img src="infrastructure/index/infra-list-views.png" alt="The Views panel with options to save, filter, sort, and edit saved views." style="width:50%;">}}
+{{< img src="infrastructure/index/infra-list-views.png" alt="The Views panel with options to save, filter, sort, and edit saved views." style="width:40%;">}}
 
 ## Customize columns
 
