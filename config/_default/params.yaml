@@ -333,6 +333,7 @@ unsupported_sites:
   fleet_automation: [gov,gov2]
   high_availability_datadog_agent: [gov,gov2]
   iac_security: [gov,gov2]
+  ioc_explorer: [gov,gov2]
   incident_ai: [gov,gov2]
   jetbrains-ides: [gov,gov2]
   jira-service-management-ops: [gov,gov2]
@@ -351,6 +352,8 @@ unsupported_sites:
   oracle_fusion_integration_setup: [gov,gov2]
   overview_pages: [gov,gov2]
   pr_gates: [gov,gov2]
+  product_analytics: [gov,gov2]
+  recorded-future: [gov,gov2]
   resource_based_sampling: [gov,gov2]
   remote_config: [gov,gov2]
   remote_config_for_fa: [gov,gov2] #For the Guides page

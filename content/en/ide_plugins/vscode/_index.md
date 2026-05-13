@@ -54,6 +54,8 @@ The extension includes these features:
 
 -   [**Exception Replay**](#exception-replay): Debug your production code.
 
+-   [**Live Debugger**](#live-debugger): Add non-breaking logpoints to running services to capture runtime data without redeploying.
+
 -   [**Fix in Chat**](?tab=cursor#fix-in-chat): Fix code errors, vulnerabilities, and flaky tests with AI-powered suggestions and explanations.
 
 <div class="alert alert-info">Unless stated otherwise, all extension features are available for both VS Code and any other IDEs based on VS Code forks, such as Cursor.</div>
@@ -100,15 +102,13 @@ Install the extension either directly in the IDE, or from the web:
 
 -   **From the web**: Download the VSIX file from [Open VSX Registry][2], and install with `Extensions: Install from VSIX` in the command palette (`Shift` + `Cmd/Ctrl` + `P`).
 
-### MCP Server setup
+### Datadog MCP Server setup
 
-The extension includes access to the [Datadog Model Context Protocol (MCP) Server][3]. Ensure the MCP Server is enabled to enhance the editor's AI capabilities with your specific Datadog environment:
-
-1. Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP** tab.
-1. Find the Datadog server and turn on the toggle to enable it. A list of available tools is displayed (expand or refresh if necessary).
+Install the Datadog Plugin to enable the [Datadog MCP Server][3]. You can install the plugin from the [Cursor Marketplace][4] or in **Cursor Settings** > **Plugins**.
 
 [2]: https://open-vsx.org/extension/datadog/datadog-vscode
-[3]: /bits_ai/mcp_server/
+[3]: /bits_ai/mcp_server/setup/?tab=cursor
+[4]: https://cursor.com/marketplace/datadog
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -146,6 +146,14 @@ Find out more in the [Code Security][19] sub-section.
 {{< img src="/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
 
 Find out more in the [Exception Replay][22] sub-section.
+
+### Live Debugger
+
+The **Live Debugger** lets you add logpoints—auto-expiring, non-breaking breakpoints—to your running services to capture runtime data for debugging without redeploying your code.
+
+{{< img src="/ide_plugins/vscode/live_debugger_overview.mp4" alt="Overview of the Datadog Live Debugger activity" style="width:100%" video=true >}}
+
+Find out more in the [Live Debugger][23] sub-section.
 
 ## Other features
 
@@ -208,3 +216,4 @@ Read the [End-User License Agreement][12] carefully before downloading or using 
 [20]: /ide_plugins/vscode/logs/
 [21]: /ide_plugins/vscode/code_insights/
 [22]: /ide_plugins/vscode/exception_replay/
+[23]: /ide_plugins/vscode/live_debugger/

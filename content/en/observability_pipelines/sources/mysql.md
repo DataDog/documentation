@@ -133,9 +133,11 @@ Store the SQL query that the Worker executes in a local file.
 - The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
 - The file must be in the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][2] for more information.
 
-## Set up the source while setting up a pipeline
+## Setup
 
 Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, set up the MySQL source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+
+After you select the MySQL source in the pipeline UI:
 
 1. Enter the connection string.
 1. Set the SQL query parameters.

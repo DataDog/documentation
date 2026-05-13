@@ -869,6 +869,12 @@
     "request_description": "",
     "request_schema_description": "Request object to update a resource filter."
   },
+  "UpsertSyncConfig": {
+    "description": "Enable Storage Management for an S3 bucket, GCS bucket, or Azure container by registering the destination that holds its inventory reports. Set `data.id` to the cloud provider (`aws`, `gcp`, or `azure`) and provide the matching settings under data.attributes. Calling this endpoint with the same provider replaces the existing configuration.",
+    "summary": "Enable Storage Management for a bucket",
+    "request_description": "",
+    "request_schema_description": "Request body for creating or updating a cloud inventory sync configuration."
+  },
   "GetCodeCoverageBranchSummary": {
     "description": "Retrieve aggregated code coverage statistics for a specific branch in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
     "summary": "Get code coverage summary for a branch",
@@ -904,6 +910,10 @@
     "summary": "Reorder custom allocation rules",
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRuleResourceArray` object."
+  },
+  "ListCustomAllocationRulesStatus": {
+    "description": "List the processing status of all custom allocation rules. Returns only the ID and processing status for each rule.",
+    "summary": "List custom allocation rule statuses"
   },
   "DeleteCustomAllocationRule": {
     "description": "Delete a custom allocation rule - Delete an existing custom allocation rule by its ID",
@@ -1036,6 +1046,14 @@
     "request_description": "",
     "request_schema_description": "Google Cloud Usage Cost config patch request."
   },
+  "ListCostOCIConfigs": {
+    "description": "List the OCI configs.",
+    "summary": "List Cloud Cost Management OCI configs"
+  },
+  "ListCostTagDescriptions": {
+    "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
+    "summary": "List Cloud Cost Management tag descriptions"
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
@@ -1063,6 +1081,16 @@
   "ListAllCSMServerlessAgents": {
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"
+  },
+  "GetCurrentUser": {
+    "description": "Get the user associated with the current authentication context.\nThe response includes the user's profile attributes (name, email, handle,\nstatus, MFA state), along with related resources: the user's organization,\nassigned roles with their granted permissions, and team-scoped roles.\nNo additional permissions are required beyond valid authentication.",
+    "summary": "Get current user"
+  },
+  "UpdateCurrentUser": {
+    "description": "Edit the profile of the currently authenticated user. Updatable fields\ninclude `name`, `title`, `email`, and `disabled` status. The `id` field\nin the request body must match the authenticated user's UUID; a mismatch\nreturns a 422 error. Email address changes are recorded in the audit trail.\nRequires the `user_self_profile_write` permission.",
+    "summary": "Update current user",
+    "request_description": "",
+    "request_schema_description": "Update a user."
   },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
@@ -1297,6 +1325,12 @@
     "summary": "Update a downtime",
     "request_description": "Update a downtime request body.",
     "request_schema_description": "Request for editing a downtime."
+  },
+  "CreateEmailTransportWebhookIntake": {
+    "description": "Receives a batch of email transport webhook log events and emits an audit trail entry\nfor each event with a final delivery status (delivered, dropped, or bounced).\nOnly authorized organizations can submit events.",
+    "summary": "Ingest email transport webhook events",
+    "request_description": "",
+    "request_schema_description": "A batch of email transport webhook log events."
   },
   "SearchIssues": {
     "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.",
@@ -2208,11 +2242,11 @@
     "request_schema_description": "Request to update an LLM Observability annotation queue."
   },
   "GetLLMObsAnnotatedInteractions": {
-    "description": "Retrieve all interactions and their annotations for a given annotation queue.",
+    "description": "Retrieve all interactions (traces and sessions) and their annotations for a given annotation queue.",
     "summary": "Get annotated queue interactions"
   },
   "CreateLLMObsAnnotationQueueInteractions": {
-    "description": "Add one or more interactions (traces) to an annotation queue.\nAt least one interaction must be provided.",
+    "description": "Add one or more interactions (traces or sessions) to an annotation queue.\nAt least one interaction must be provided.",
     "summary": "Add annotation queue interactions",
     "request_description": "Add interactions payload.",
     "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
@@ -2502,7 +2536,7 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListTagConfigurations": {
-    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.",
+    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
     "summary": "Get a list of metrics"
   },
   "DeleteBulkTagsMetricsConfiguration": {
@@ -3953,6 +3987,12 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "BulkDeleteSecurityMonitoringRules": {
+    "description": "Delete multiple security monitoring rules in a single request. Default rules cannot be deleted.",
+    "summary": "Bulk delete security monitoring rules",
+    "request_description": "",
+    "request_schema_description": "Payload for bulk deleting security monitoring rules."
+  },
   "BulkExportSecurityMonitoringRules": {
     "description": "Export a list of security monitoring rules as a ZIP file containing JSON rule definitions.\nThe endpoint accepts a list of rule IDs and returns a ZIP archive where each rule is\nsaved as a separate JSON file named after the rule.",
     "summary": "Bulk export security monitoring rules",
@@ -4398,7 +4438,7 @@
     "summary": "List status pages"
   },
   "CreateStatusPage": {
-    "description": "Creates a new status page. **Note**: Publishing a status page on creation via the `enabled` property will be deprecated. Use the dedicated [publish](#publish-status-page) status page endpoint after creation instead.",
+    "description": "Creates a new status page in an unpublished state. Use the dedicated [publish](#publish-status-page) status page endpoint to publish the page after creation.",
     "summary": "Create status page",
     "request_description": "",
     "request_schema_description": "Request object for creating a status page."
@@ -4455,6 +4495,12 @@
     "request_description": "",
     "request_schema_description": "Request object for creating a degradation."
   },
+  "CreateBackfilledDegradation": {
+    "description": "Creates a backfilled degradation with predefined updates.",
+    "summary": "Create backfilled degradation",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a backfilled degradation."
+  },
   "DeleteDegradation": {
     "description": "Deletes a degradation by its ID.",
     "summary": "Delete degradation"
@@ -4474,6 +4520,12 @@
     "summary": "Schedule maintenance",
     "request_description": "",
     "request_schema_description": "Request object for creating a maintenance."
+  },
+  "CreateBackfilledMaintenance": {
+    "description": "Creates a backfilled maintenance with predefined updates.",
+    "summary": "Create backfilled maintenance",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a backfilled maintenance."
   },
   "GetMaintenance": {
     "description": "Retrieves a specific maintenance by its ID.",
@@ -4670,6 +4722,10 @@
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRulesetResourceArray` object."
   },
+  "ListTagPipelinesRulesetsStatus": {
+    "description": "List the processing status of all tag pipeline rulesets. Returns only the ID and processing status for each ruleset.",
+    "summary": "List tag pipeline ruleset statuses"
+  },
   "ValidateQuery": {
     "description": "Validate a tag pipeline query - Validate the syntax and structure of a tag pipeline query",
     "summary": "Validate query",
@@ -4845,30 +4901,6 @@
     "request_description": "",
     "request_schema_description": "Team permission setting update request"
   },
-  "ListIncidentTeams": {
-    "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
-    "summary": "Get a list of all incident teams"
-  },
-  "CreateIncidentTeam": {
-    "description": "Creates a new incident team.",
-    "summary": "Create a new incident team",
-    "request_description": "Incident Team Payload.",
-    "request_schema_description": "Create request with an incident team payload."
-  },
-  "DeleteIncidentTeam": {
-    "description": "Deletes an existing incident team.",
-    "summary": "Delete an existing incident team"
-  },
-  "GetIncidentTeam": {
-    "description": "Get details of an incident team. If the `include[users]` query parameter is provided,\nthe included attribute will contain the users related to these incident teams.",
-    "summary": "Get details of an incident team"
-  },
-  "UpdateIncidentTeam": {
-    "description": "Updates an existing incident team. Only provide the attributes which should be updated as this request is a partial update.",
-    "summary": "Update an existing incident team",
-    "request_description": "Incident Team Payload.",
-    "request_schema_description": "Update request with an incident team payload."
-  },
   "UpdateFlakyTests": {
     "description": "Update the state of multiple flaky tests in Flaky Test Management.",
     "summary": "Update flaky test states",
@@ -4971,14 +5003,22 @@
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
   },
+  "Validate": {
+    "description": "Check if the API key is valid. Returns the organization UUID, API key ID, and associated scopes.",
+    "summary": "Validate API key"
+  },
+  "ValidateAPIKey": {
+    "description": "Check that the API key and application key used for the request are both valid.\nReturns `{\"status\": \"ok\"}` on success, `401` or `403` otherwise. Useful as a\nlightweight authentication probe before issuing other API calls that require\nfull credentials.",
+    "summary": "Validate API and application keys"
+  },
   "SearchWidgets": {
-    "description": "Search and list widgets for a given experience type. Supports filtering by widget type, creator, title, and tags, as well as sorting and pagination.",
+    "description": "Search and list widgets for a given experience type, with filtering, sorting, and pagination.\n\n**Response meta** carries totals scoped to the current filter:\n- `filtered_total` — widgets matching the filter.\n- `created_by_you_total` — among the matches, how many the current user created.\n- `favorited_by_you_total` — among the matches, how many the current user has favorited.\n- `created_by_anyone_total` — total widgets in the experience type, ignoring filters.\n\nEach returned widget includes `is_favorited` reflecting the current user's favorite status.\nFavoriting itself is performed through the shared favorites API, not this endpoint.",
     "summary": "Search widgets"
   },
   "CreateWidget": {
     "description": "Create a new widget for a given experience type.",
     "summary": "Create a widget",
-    "request_description": "Widget request body.",
+    "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`: every type requires `requests`, and\nsome types require additional fields (e.g. `cloud_cost_summary`\nrequires `graph_options`, `geomap` requires `style` and `view`).\nThe example below shows a complete `cloud_cost_summary` payload\nfor the `ccm_reports` experience type.",
     "request_schema_description": "Request body for creating or updating a widget."
   },
   "DeleteWidget": {
@@ -4992,7 +5032,7 @@
   "UpdateWidget": {
     "description": "Update a widget by its UUID for a given experience type. This performs a full replacement of the widget definition.",
     "summary": "Update a widget",
-    "request_description": "Widget request body.",
+    "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
   },
   "CreateWorkflow": {
