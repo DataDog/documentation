@@ -8003,6 +8003,42 @@ menu:
           - ListTagPipelinesRulesets
         unstable: []
         order: 16
+    - name: List Cloud Cost Management tags
+      url: '#list-cloud-cost-management-tags'
+      identifier: cloud-cost-management-list-cloud-cost-management-tags
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTags
+        unstable: []
+        order: 45
+    - name: Get a Cloud Cost Management tag key
+      url: '#get-a-cloud-cost-management-tag-key'
+      identifier: cloud-cost-management-get-a-cloud-cost-management-tag-key
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostTagKey
+        unstable: []
+        order: 47
+    - name: List Cloud Cost Management tag keys
+      url: '#list-cloud-cost-management-tag-keys'
+      identifier: cloud-cost-management-list-cloud-cost-management-tag-keys
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCostTagKeys
+        unstable: []
+        order: 46
     - name: List Cloud Cost Management tag descriptions
       url: '#list-cloud-cost-management-tag-descriptions'
       identifier: cloud-cost-management-list-cloud-cost-management-tag-descriptions
