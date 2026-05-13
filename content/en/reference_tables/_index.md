@@ -191,12 +191,7 @@ Use the [Create Reference Table endpoint][10] to create reference tables from cl
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
-{{< card-grid img_width="200" >}}
-  {{< image-card href="/integrations/databricks/#reference-table-configuration" src="integrations_logos/databricks_large.svg" alt="databricks" >}}
-  {{< image-card href="/integrations/salesforce/#enabling-ingestion-of-reference-tables" src="integrations_logos/salesforce_large.svg" alt="salesforce" >}}
-  {{< image-card href="/integrations/servicenow/#reference-tables" src="integrations_logos/servicenow_large.svg" alt="servicenow" >}}
-  {{< image-card href="/integrations/snowflake_web/#reference-tables" src="integrations_logos/snowflake_large.svg" alt="snowflake" >}}
-{{< /card-grid >}}
+{{< partial name="reference_tables/ref-tables-saas-integrations.html" >}}
 
 {{% /tab %}}
 {{< /tabs >}}

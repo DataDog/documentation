@@ -133,12 +133,7 @@ When running the Agent in containerized environments, additional configuration i
 1. Verify that DogStatsD non-local traffic is enabled. This setting is enabled by default. If you have previously disabled it, set `dogstatsd_non_local_traffic: true` in your main [`datadog.yaml` configuration file][8], or set the [environment variable][3] `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`.
 2. Follow these container-specific setup instructions:
 
-{{< card-grid min_width="225px" >}}
-  {{< image-card href="/containers/docker/?tab=standard#dogstatsd-custom-metrics" src="integrations_logos/docker.png" alt="Docker" >}}
-  {{< image-card href="/containers/kubernetes/configuration/?tab=datadogoperator#configure-dogstatsd" src="integrations_logos/kubernetes.png" alt="Kubernetes" >}}
-  {{< image-card href="/containers/amazon_ecs/#dogstatsd" src="integrations_logos/amazon_ecs.png" alt="Amazon ECS" >}}
-  {{< image-card href="/integrations/ecs_fargate/#metric-collection" src="integrations_logos/ecs_fargate.png" alt="ECS Fargate" >}}
-{{< /card-grid >}}
+{{< partial name="apm/apm-runtime-metrics-containers.html" >}}
 
 <br>
 

@@ -67,22 +67,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 2. To enable log collection, change `logs_enabled: false` to `logs_enabled: true` in your Agent's main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][2] for more information and examples.
 3. Follow your application language installation instructions to configure a logger and start generating logs:
 
-{{< card-grid min_width="120px" >}}
-  {{< image-card href="/logs/log_collection/java" src="integrations_logos/java.png" alt="Java" >}}
-  {{< image-card href="/logs/log_collection/python" src="integrations_logos/python.png" alt="Python" >}}
-  {{< image-card href="/logs/log_collection/go" src="integrations_logos/go-metro.png" alt="go" >}}
-  {{< image-card href="/logs/log_collection/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
-  {{< image-card href="/logs/log_collection/csharp" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
-  {{< image-card href="/logs/log_collection/php" src="integrations_logos/php.png" alt="PHP" >}}
-  {{< image-card href="/logs/log_collection/nodejs" src="integrations_logos/nodejs.png" alt="Node.js" >}}
-  {{< image-card href="/logs/log_collection/javascript" src="integrations_logos/javascript.png" alt="Javascript" >}}
-  {{< image-card href="/logs/log_collection/reactnative" src="integrations_logos/react_native.png" alt="React Native" >}}
-  {{< image-card href="/logs/log_collection/android" src="integrations_logos/android.png" alt="Android" >}}
-  {{< image-card href="/logs/log_collection/ios" src="integrations_logos/ios_large.svg" alt="ios" >}}
-  {{< image-card href="/logs/log_collection/flutter" src="integrations_logos/flutter_large.svg" alt="Flutter" >}}
-  {{< image-card href="/logs/log_collection/roku" src="integrations_logos/roku_large.svg" alt="Roku" >}}
-  {{< image-card href="/logs/log_collection/kotlin_multiplatform" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
-{{< /card-grid >}}
+{{< partial name="logs/logs-languages.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/logs/
@@ -92,13 +77,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 
 Choose a container or orchestrator provider and follow their dedicated log collection instructions:
 
-{{< card-grid min_width="120px" >}}
-  {{< image-card href="/agent/docker/log/" src="integrations_logos/docker.png" alt="Docker" >}}
-  {{< image-card href="/agent/kubernetes/daemonset_setup/?tab=k8sfile#log-collection" src="integrations_logos/kubernetes.png" alt="Kubernetes" >}}
-  {{< image-card href="/integrations/openshift/#log-collection" src="integrations_logos/openshift.png" alt="Red Hat OpenShift" >}}
-  {{< image-card href="/containers/amazon_ecs/logs/" src="integrations_logos/amazon_ecs.png" alt="Amazon ECS" >}}
-  {{< image-card href="/integrations/ecs_fargate/#log-collection" src="integrations_logos/ecs_fargate.png" alt="ECS Fargate" >}}
-{{< /card-grid >}}
+{{< partial name="logs/logs-containers.html" >}}
 
 **Notes**:
 
@@ -127,13 +106,7 @@ Use the Datadog Forwarder, an AWS Lambda function that ships logs from your envi
 
 Select your Cloud provider below to see how to automatically collect your logs and forward them to Datadog:
 
-{{< card-grid min_width="120px" >}}
-  {{< image-card href="/integrations/amazon_web_services/?tab=allpermissions#log-collection" src="integrations_logos/amazon_web_services.png" alt="Docker" >}}
-  {{< image-card href="/integrations/azure/?tab=azurecliv20#log-collection" src="integrations_logos/azure.png" alt="Kubernetes" >}}
-  {{< image-card href="/integrations/google_cloud_platform/?tab=datadogussite#log-collection" src="integrations_logos/google_cloud_platform.png" alt="Amazon ECS" >}}
-  {{< image-card href="/integrations/oracle-cloud-infrastructure/?tab=ociquickstartpreviewrecommended#log-collection" src="integrations_logos/oracle_cloud_infrastructure.png" alt="Oracle Cloud Infrastructure" >}}
-  {{< image-card href="/logs/guide/collect-heroku-logs/" src="integrations_logos/heroku.png" alt="Amazon ECS" >}}
-{{< /card-grid >}}
+{{< partial name="logs/logs-cloud.html" >}}
 
 Datadog integrations and log collection are tied together. You can use an integration's default configuration file to enable dedicated [processors][1], [parsing][2], and [facets][3] in Datadog. To begin log collection with an integration:
 
