@@ -13,7 +13,7 @@ This error usually indicates an issue with the trust policy associated with the 
 
 Check the following points for the AWS account mentioned in the error:
 
-{{< site-region region="us,us3,us5,eu,gov,gov2" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 1. If you created an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
 
 2. On the Datadog integration role's page in AWS, under the **Trust relationships** tab, ensure that the **Principal** is configured as below:
@@ -41,6 +41,68 @@ Check the following points for the AWS account mentioned in the error:
 {{< /code-block >}}
 
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
+{{< /site-region >}}
+
+{{< site-region region="gov" >}}
+1. If you created an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
+
+2. On the Datadog integration role's page in AWS, under the **Trust relationships** tab, ensure that the **Principal** is configured with the correct Datadog account ID for your AWS partition. Use `392588925713` for commercial AWS accounts or `065115117704` for GovCloud accounts:
+
+{{< code-block lang="json" filename="" disable_copy="true" collapsible="false" >}}
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::392588925713:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "sts:ExternalId": "<YOUR_AWS_EXTERNAL_ID>"
+                }
+            }
+        }
+    ]
+}
+
+{{< /code-block >}}
+
+[2]: https://app.ddog-gov.com/integrations/amazon-web-services
+[3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
+{{< /site-region >}}
+
+{{< site-region region="gov2" >}}
+1. If you created an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
+
+2. On the Datadog integration role's page in AWS, under the **Trust relationships** tab, ensure that the **Principal** is configured with the correct Datadog account ID for your AWS partition. Use `382742775718` for commercial AWS accounts or `486737091498` for GovCloud accounts:
+
+{{< code-block lang="json" filename="" disable_copy="true" collapsible="false" >}}
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::382742775718:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "sts:ExternalId": "<YOUR_AWS_EXTERNAL_ID>"
+                }
+            }
+        }
+    ]
+}
+
+{{< /code-block >}}
+
+[2]: https://us2.ddog-gov.com/integrations/amazon-web-services
 [3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
 {{< /site-region >}}
 
