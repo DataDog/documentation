@@ -1,6 +1,6 @@
 ---
 import ApiLayout from '@layouts/ApiLayout.astro';
-import { CopyPageButton } from '@components/CopyPageButton/CopyPageButton';
+import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
 import { getCategoryStubsView } from '@lib/api/viewsBuilder';
 import { getApiPageTitle } from '@lib/api/pageTitleBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
@@ -30,7 +30,7 @@ const categories = await getCategoryStubsView(lang);
     { label: getApiPageTitle('rate-limits', lang) ?? 'Rate Limits' },
   ]}
 >
-  <h1>Rate Limits</h1>
+  <ApiPageHeader title="Rate Limits" lang={lang} />
 
   <h2>Rate Limits</h2>
 

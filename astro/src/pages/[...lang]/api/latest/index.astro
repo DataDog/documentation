@@ -1,6 +1,6 @@
 ---
 import ApiLayout from '@layouts/ApiLayout.astro';
-import { CopyPageButton } from '@components/CopyPageButton/CopyPageButton';
+import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
 import { getCategoryStubsView } from '@lib/api/viewsBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
 import { i18n } from '@lib/i18n/i18n';
@@ -29,6 +29,6 @@ const categories = await getCategoryStubsView(lang);
     { label: i18n('api', lang) },
   ]}
 >
-  <h1>API Reference</h1>
+  <ApiPageHeader title="API Reference" lang={lang} />
   <p>Welcome to the Datadog API Reference. Select a category from the navigation to get started.</p>
 </ApiLayout>

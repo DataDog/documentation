@@ -1,6 +1,6 @@
 ---
 import ApiLayout from '@layouts/ApiLayout.astro';
-import { CopyPageButton } from '@components/CopyPageButton/CopyPageButton';
+import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
 import Alert from '@components/Alert/Alert.astro';
 import WhatsNext from '@components/WhatsNext/WhatsNext.astro';
 import NextLink from '@components/WhatsNext/NextLink.astro';
@@ -57,7 +57,7 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
     { label: current.name },
   ]}
 >
-  <h1>{current.name}</h1>
+  <ApiPageHeader title={current.name} lang={lang} />
   {current.deprecated && <Alert level="warning">This endpoint is deprecated.</Alert>}
   {current.description && (
     <div set:html={renderMarkdown(current.description)} />

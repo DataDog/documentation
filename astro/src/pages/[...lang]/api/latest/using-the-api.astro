@@ -1,6 +1,6 @@
 ---
 import ApiLayout from '@layouts/ApiLayout.astro';
-import { CopyPageButton } from '@components/CopyPageButton/CopyPageButton';
+import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
 import { getCategoryStubsView } from '@lib/api/viewsBuilder';
 import { getApiPageTitle } from '@lib/api/pageTitleBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
@@ -30,7 +30,7 @@ const categories = await getCategoryStubsView(lang);
     { label: getApiPageTitle('using-the-api', lang) ?? 'Using the API' },
   ]}
 >
-  <h1>Using the API</h1>
+  <ApiPageHeader title="Using the API" lang={lang} />
 
   <h2>Using the API</h2>
 

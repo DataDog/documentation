@@ -1,13 +1,14 @@
 ---
-import BaseLayout from './BaseLayout.astro';
-import ApiSideNav from '@components/ApiSideNav/ApiSideNav.astro';
-import Breadcrumbs from '@components/Breadcrumbs/Breadcrumbs.astro';
-import type { BreadcrumbItem } from '@components/Breadcrumbs/Breadcrumbs.astro';
-import RegionSelectorIsland from '@components/RegionSelector/RegionSelectorIsland.astro';
-import LanguageSelectorIsland from '@components/LanguageSelector/LanguageSelectorIsland.astro';
-import { stripLocalePrefix } from '@lib/i18n/locale';
-import { buildHreflangAlternates } from '@lib/seo';
-import type { ApiCategory, ApiCategoryStub } from '@lib/api/schemas/views';
+import BaseLayout from "./BaseLayout.astro";
+import ApiSideNav from "@components/ApiSideNav/ApiSideNav.astro";
+import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs.astro";
+import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
+import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
+import LanguageSelectorIsland from "@components/LanguageSelector/LanguageSelectorIsland.astro";
+import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
+import { stripLocalePrefix } from "@lib/i18n/locale";
+import { buildHreflangAlternates } from "@lib/seo";
+import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
 
 interface Props {
   title: string;
@@ -18,19 +19,43 @@ interface Props {
   breadcrumbs?: BreadcrumbItem[];
 }
 
-const { title, description, categories, activeCategory, currentOperationSlug, breadcrumbs } = Astro.props;
-const { lang: currentLang, rest: unprefixedPath } = stripLocalePrefix(Astro.url.pathname);
+const {
+  title,
+  description,
+  categories,
+  activeCategory,
+  currentOperationSlug,
+  breadcrumbs,
+} = Astro.props;
+const { lang: currentLang, rest: unprefixedPath } = stripLocalePrefix(
+  Astro.url.pathname,
+);
 const hreflang = buildHreflangAlternates(unprefixedPath);
 ---
 
-<BaseLayout title={title} description={description} lang={currentLang} hreflang={hreflang}>
+<BaseLayout
+  title={title}
+  description={description}
+  lang={currentLang}
+  hreflang={hreflang}
+>
   <div class="api-shell">
-    <ApiSideNav categories={categories} activeCategory={activeCategory} currentOperationSlug={currentOperationSlug} />
+    <ApiSideNav
+      categories={categories}
+      activeCategory={activeCategory}
+      currentOperationSlug={currentOperationSlug}
+    />
     <main class="api-main">
       <div class="api-toolbar">
-        {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
+        <div class="api-toolbar__left">
+          {breadcrumbs && <Breadcrumbs crumbs={breadcrumbs} />}
+          <CopyPageButtonIsland lang={currentLang} variant="icon" />
+        </div>
         <div class="api-toolbar__selectors">
-          <LanguageSelectorIsland currentLang={currentLang} pathname={Astro.url.pathname} />
+          <LanguageSelectorIsland
+            currentLang={currentLang}
+            pathname={Astro.url.pathname}
+          />
           <RegionSelectorIsland />
         </div>
       </div>
@@ -61,6 +86,13 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
     flex: 1;
     min-width: 0;
     padding: var(--space-sm) var(--space-xl) var(--space-xl) 29px;
+  }
+
+  .api-toolbar__left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    min-width: 0;
   }
 
   .api-toolbar__selectors {
@@ -96,7 +128,9 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
     }
 
     :global(.main-nav-scrolled) .api-toolbar {
-      top: calc(var(--hugo-banner-height) + var(--hugo-header-height-desktop-scrolled));
+      top: calc(
+        var(--hugo-banner-height) + var(--hugo-header-height-desktop-scrolled)
+      );
     }
   }
 
