@@ -2612,7 +2612,7 @@
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
   },
   "ListVolumesByMetricName": {
-    "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+    "description": "View hourly average metric volumes for the given metric name over the look back period.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
     "summary": "List distinct metric volumes by metric name"
   },
   "GetMonitorNotificationRules": {
