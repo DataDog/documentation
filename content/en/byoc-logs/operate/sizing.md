@@ -16,6 +16,8 @@ further_reading:
   text: "Learn more about BYOC Logs Architecture"
 ---
 
+{{< jqmath-vanilla >}}
+
 {{< callout btn_hidden="true" header="Join the Preview!" >}}
   BYOC Logs is in Preview.
 {{< /callout >}}
@@ -73,7 +75,7 @@ To index 1 TB of logs per day (~11.6 MB/s), follow these steps:
 {{% collapse-content title="Sizing by event count" level="h4" expanded=false %}}
 If you know your daily event count but not your byte volume, use this formula to estimate:
 
-**Daily volume (TB) = (events per day × average event size in bytes) / 1,000,000,000,000**
+$$\text"Daily volume (TB)" = {\text"events per day" × \text"average event size (bytes)"} / 10^{12}$$
 
 For example, with 1 billion events/day at 1 KB average size:
 
@@ -113,9 +115,9 @@ BYOC Logs compresses and indexes log data before storing it in object storage. T
 
 To estimate your object storage requirements:
 
-**Stored data per day = Daily volume / compression ratio**
+$$\text"Stored data per day" = {\text"Daily volume"} / {\text"compression ratio"}$$
 
-**Total storage = Stored data per day × retention period (days)**
+$$\text"Total storage" = \text"Stored data per day" × \text"retention period (days)"$$
 
 {{% collapse-content title="Example: Storage for 10 TB/day with 30-day retention" level="h4" expanded=false %}}
 Assuming a 6x compression ratio:
