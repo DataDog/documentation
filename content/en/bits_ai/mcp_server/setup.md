@@ -21,7 +21,7 @@ Learn how to set up and configure the Datadog MCP Server, which lets you retriev
 {{< tabs >}}
 {{% tab "Claude" %}}
 
-Install the [Datadog Connector][1] from the Claude Connectors Directory—the official connector is the recommended way to connect Datadog to Claude (including Claude Cowork) and includes MCP Apps for in-product visualizations. If you previously added Datadog as a custom connector, remove it to avoid conflicts.
+Install the [Datadog Connector](https://claude.ai/directory) from the Claude Connectors Directory. The official connector is the recommended way to connect Datadog to Claude (including Claude Cowork) and includes MCP Apps for in-product visualizations. If you previously added Datadog as a custom connector, remove it to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. In Claude, click the **+** icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
@@ -30,9 +30,9 @@ Install the [Datadog Connector][1] from the Claude Connectors Directory—the of
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 {{% collapse-content title="Manual setup with a custom connector" level="h4" expanded=false id="claude-custom-connector" %}}
-If the directory connector is not available to you, you can add Datadog as a [custom connector][3] using the remote MCP URL for your [Datadog site][2] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
+If the directory connector is not available to you, you can add Datadog as a [custom connector](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp) using the remote MCP URL for your [Datadog site](/getting_started/site/) ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
-1. Follow the Claude help center guide on [custom connectors][3] to add a new custom connector.
+1. Follow the Claude help center guide on [custom connectors](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp) to add a new custom connector.
 
 1. When prompted for a URL, enter:
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
@@ -43,10 +43,6 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 
 1. Complete the OAuth login flow when prompted.
 {{% /collapse-content %}}
-
-[1]: https://claude.ai/directory
-[2]: /getting_started/site/
-[3]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
@@ -57,7 +53,7 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 
 {{% tab "Claude Code" %}}
 
-Install the [Datadog plugin][2] from the [Claude Code Plugin Marketplace][3]—the plugin packages the Datadog MCP Server with the `/ddsetup` slash command for first-time configuration, and auto-updates as new toolsets and skills ship. If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
+Install the [Datadog plugin](https://github.com/DataDog/claude-marketplace) from the [Claude Code Plugin Marketplace](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces). The plugin packages the Datadog MCP Server with the `/ddsetup` slash command for first-time configuration, and auto-updates as new toolsets and skills ship. If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Add the Datadog marketplace to Claude Code:
@@ -66,12 +62,12 @@ Install the [Datadog plugin][2] from the [Claude Code Plugin Marketplace][3]—t
 1. Install the Datadog plugin when prompted, or run:
     <pre><code>/plugin install datadog@datadog</code></pre>
 
-1. Run `/ddsetup` to choose your [Datadog site][1] and organization.
+1. Run `/ddsetup` to choose your [Datadog site](/getting_started/site/) and organization.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 {{% collapse-content title="Manual MCP Server configuration" level="h4" expanded=false id="claudecode-manual" %}}
-If the plugin is not available to you, point Claude Code at the MCP Server endpoint for your regional [Datadog site][1] directly. Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+If the plugin is not available to you, point Claude Code at the MCP Server endpoint for your regional [Datadog site](/getting_started/site/) directly. Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 1. Run in terminal:
     <pre><code>claude mcp add --transport http datadog-mcp {{< region-param key="mcp_server_endpoint" >}}</code></pre>
@@ -92,9 +88,6 @@ If the plugin is not available to you, point Claude Code at the MCP Server endpo
 
 <div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
 {{% /collapse-content %}}
-
-[2]: https://github.com/DataDog/claude-marketplace
-[3]: https://docs.claude.com/en/docs/claude-code/plugin-marketplaces
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
@@ -103,7 +96,6 @@ If the plugin is not available to you, point Claude Code at the MCP Server endpo
 
 {{< /site-region >}}
 
-[1]: /getting_started/site/
 {{% /tab %}}
 
 {{% tab "Codex" %}}
