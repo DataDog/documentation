@@ -74,6 +74,8 @@ Use this guide to get started with monitoring your Google Cloud environment. Thi
 
 ### Metric collection
 
+{{% google-cloud-collection-scope %}}
+
 <div class="alert alert-info">If your Google Cloud organization uses <a href="https://cloud.google.com/vpc-service-controls/docs/overview">VPC Service Controls</a>, you must explicitly allow Datadog service accounts to access protected resources. If these service accounts are not permitted within your service perimeter, metric, resource, and metadata collection may fail. Contact <a href="/help/">Datadog Support</a> for the service account identifiers for your site or region.</div>
 
 {{< tabs >}}
@@ -370,9 +372,7 @@ In the below example, only Google Cloud hosts with the label `datadog:true` are 
 
 {{< img src="integrations/google_cloud_platform/limit_metric_collection.png" alt="The fields to limit metric collection in the Google Cloud integration tile" style="width:100%;" >}}
 
-#### Best practices for monitoring multiple projects
-
-##### Enable per-project cost and API quota attribution
+#### Enable per-project cost and API quota attribution
 
 By default, Google Cloud attributes the cost of monitoring API calls, as well as API quota usage, to the project containing the service account for this integration. As a best practice for Google Cloud environments with multiple projects, enable per-project cost attribution of monitoring API calls and API quota usage. With this enabled, costs and quota usage are attributed to the project being *queried*, rather than the project containing the service account. This provides visibility into the monitoring costs incurred by each project, and also helps to prevent reaching API rate limits.
 

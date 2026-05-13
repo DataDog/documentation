@@ -346,7 +346,7 @@ To enable Agentless logging, set the following environment variables:
 
 `DD_SITE`
 : The name of [your Datadog site][16]. Choose from one of the following examples:<br>
-**Example**: `datadoghq.com` (US1), `datadoghq.eu` (EU), `us3.datadoghq.com` (US3), `us5.datadoghq.com` (US5), `ddog-gov.com` (US1-FED) <br>
+**Example**: `datadoghq.com` (US1), `datadoghq.eu` (EU), `us3.datadoghq.com` (US3), `us5.datadoghq.com` (US5), `ap1.datadoghq.com` (AP1), `ap2.datadoghq.com` (AP2), `ddog-gov.com` (US1-FED), `us2.ddog-gov.com` (US2-FED) <br>
 **Default**: `datadoghq.com` (US1)
 
 `DD_LOGS_INJECTION`

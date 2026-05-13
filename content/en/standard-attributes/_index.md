@@ -239,7 +239,7 @@ attributes:
     type: string
     domain: Database
   - name: duration
-    description: "A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, and so on. [Remap](/logs/log_configuration/processors/#remapper) any durations within logs to this attribute because Datadog displays and uses it as a default measure for trace search."
+    description: "A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, and so on. [Remap](/logs/log_configuration/processors/remapper/) any durations within logs to this attribute because Datadog displays and uses it as a default measure for trace search."
     product_source: 
       - icon-log
     type: number
@@ -594,22 +594,16 @@ attributes:
     type: string
     domain: Geolocation
   
-  - name: user.id
-    description: Identifier of the user.
-    product_source:
-      - icon-rum
-      - android
-      - roku
-    type: string
-    domain: RUM user attributes (Android, Roku)
   - name: usr.id
     description: Identifier of the user.
     product_source:
       - icon-rum
+      - android
       - ios
       - browser
+      - roku
     type: string
-    domain: RUM user attributes (iOS, Browser)
+    domain: RUM user attributes
   - name: usr.name
     description: Name of the user.
     product_source:
@@ -873,8 +867,8 @@ attributes:
     type: string
     domain: Error (Browser events, Android events, iOS events, Roku events)
   
-  - name: error.issue_id
-    description: The stack trace or complementary information about the error.
+  - name: error.id
+    description: UUID of the error.
     product_source:
       - icon-rum
       - android
@@ -963,18 +957,8 @@ attributes:
       - roku
     type: string
     domain: Action (Browser events, Android events, iOS events, Roku events)
-  - name: action.name
-    description: A user-friendly name (for example, `Click on checkout`). For [Custom Browser User Actions](/real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), the action name given in the API call.
-    product_source:
-      - icon-rum
-      - android
-      - browser
-      - ios
-      - roku
-    type: string
-    domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.target.name
-    description: Element that the user interacted with. Only for automatically collected actions.
+    description: For automatically collected actions, the name of the element the user interacted with. For custom actions, the name provided in the API call (for example, `Click on checkout`).
     product_source:
       - icon-rum
       - android
@@ -1342,24 +1326,8 @@ attributes:
     type: string
     domain: Resource (Browser events)
 
-  - name: action.frustration.type:dead_click
-    description: The dead clicks detected by the RUM Browser SDK.
-    product_source:
-      - icon-rum
-      - browser
-    type: string
-    domain: Frustration signals (Browser events)
-  
-  - name: action.frustration.type:rage_click
-    description: The rage clicks detected by the RUM Browser SDK.
-    product_source:
-      - icon-rum
-      - browser
-    type: string
-    domain: Frustration signals (Browser events)
-  
-  - name: action.frustration.type:error_click
-    description: The error clicks detected by the RUM Browser SDK.
+  - name: action.frustration.type
+    description: The type of frustration signal detected by the RUM Browser SDK (`rage_click`, `dead_click`, or `error_click`).
     product_source:
       - icon-rum
       - browser
@@ -1536,6 +1504,102 @@ attributes:
       - icon-apm
     type: string
     domain: HTTP requests
+  - name: http.client_ip_details.type
+    description: The type of IP address, such as `public`, `private`, or `reserved`.
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.country.name
+    description: The name of the country the client IP resolves to.
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.country.iso_code
+    description: "[ISO code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (for example, `US` for the United States, `FR` for France)."
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.continent.code
+    description: The ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.continent.name
+    description: The name of the continent the client IP resolves to.
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.subdivision.name
+    description: The name of the first-level subdivision (such as a state or region) the client IP resolves to.
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.subdivision.iso_code
+    description: "The [ISO code](https://en.wikipedia.org/wiki/ISO_3166-2) of the first-level subdivision (for example, `CA-ON` for Ontario, Canada)."
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.city.name
+    description: Name of the city the client IP resolves to.
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.location.latitude
+    description: The latitude of the location the client IP resolves to.
+    product_source:
+      - icon-apm
+    type: number
+    domain: HTTP client IP details
+  - name: http.client_ip_details.location.longitude
+    description: The longitude of the location the client IP resolves to.
+    product_source:
+      - icon-apm
+    type: number
+    domain: HTTP client IP details
+  - name: http.client_ip_details.timezone
+    description: The IANA timezone identifier (for example, `America/Toronto`) associated with the client IP.
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.as.number
+    description: The autonomous system number (ASN) the client IP belongs to (for example, `AS577`).
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.as.name
+    description: The name of the organization that operates the autonomous system (for example, `Bell Canada`).
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.as.domain
+    description: The primary domain associated with the autonomous system (for example, `bell.ca`).
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.as.route
+    description: The IP prefix announced by the autonomous system (for example, `65.95.0.0/16`).
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
+  - name: http.client_ip_details.as.type
+    description: The classification of the autonomous system (for example, `isp`, `hosting`, `business`, `education`).
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP client IP details
   - name: http.useragent
     description: The `User-Agent` header received with the request.
     product_source:
@@ -1712,7 +1776,38 @@ attributes:
       - icon-apm
     type: string
     domain: Remote procedure calls
-  
+
+  - name: appsec.security_activity
+    description: The kind of security activity detected on the request, expressed as `<category>.<type>` (for example, `attack_attempt.sql_injection`, `business_logic.users.login.failure`). A span can have more than one value when multiple rules match.
+    product_source:
+      - icon-apm
+    type: string
+    domain: Application & API Protection (AAP)
+  - name: appsec.category
+    description: The top-level classification of the detected security activity (for example, `attack_attempt`, `business_logic`).
+    product_source:
+      - icon-apm
+    type: string
+    domain: Application & API Protection (AAP)
+  - name: appsec.type
+    description: The specific threat or event type within the category (for example, `sql_injection`, `xss`, `users.login.failure`).
+    product_source:
+      - icon-apm
+    type: string
+    domain: Application & API Protection (AAP)
+  - name: appsec.rule_id
+    description: The identifier of the AAP rule that matched the request (for example, `crs-942-100`). A span can have multiple values when more than one rule triggers.
+    product_source:
+      - icon-apm
+    type: string
+    domain: Application & API Protection (AAP)
+  - name: appsec.blocked
+    description: Whether the request was blocked by AAP. `true` if the request was blocked, `false` otherwise.
+    product_source:
+      - icon-apm
+    type: string
+    domain: Application & API Protection (AAP)
+
 ---
 
 

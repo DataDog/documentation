@@ -1,0 +1,163 @@
+---
+title: Google Workspace
+description: Connect Datadog Actions to Google Workspace services using OAuth 2.0 to automate tasks in Gmail, Calendar, Drive, Docs, Sheets, Forms, and Chat.
+disable_toc: false
+further_reading:
+- link: "/actions/connections/"
+  tag: "Documentation"
+  text: "Find out more about connection credentials"
+---
+
+Use a Google Workspace connection to authenticate Datadog Actions against Google Workspace APIs. This allows you to interact with Gmail, Google Calendar, Google Drive, Google Docs, Google Sheets, Google Forms, and Google Chat in your workflows and apps.
+
+## Prerequisites
+
+You must have an OAuth 2.0 client in Google Cloud to create a connection in Datadog. If you don't already have a Google Cloud project, follow Google's [Create a Google Cloud project][1] guide.
+
+### Enable the required APIs
+
+Enable the Google APIs you plan to use in your workflows and apps:
+
+1. Navigate to [**APIs & Services** > **Library**][2] in the Google Cloud Console.
+1. Search for and enable the APIs for the Google Workspace services you intend to use, listed in the following table.
+
+| Google Workspace service | API to enable |
+|---|---|
+| Gmail | Gmail API |
+| Google Calendar | Google Calendar API |
+| Google Drive | Google Drive API |
+| Google Docs | Google Docs API |
+| Google Sheets | Google Sheets API |
+| Google Forms | Google Forms API |
+| Google Chat | Google Chat API |
+
+### Configure the OAuth consent screen
+
+1. Navigate to [**APIs & Services** > **OAuth consent screen**][3] in the Google Cloud Console.
+1. Select a user type:
+   - **Internal**: Limits access to users in your Google Workspace organization. Recommended for most enterprise use cases.
+   - **External**: Allows any Google account to authorize the app. Requires [app verification][4] for production use.
+1. Fill in the required app information fields and click **Save and Continue**.
+1. Under **Scopes**, add the OAuth scopes required for the actions you intend to use. See the [scopes reference](#scopes-reference).
+1. Complete the remaining steps and click **Back to Dashboard**.
+
+### Create OAuth 2.0 credentials
+
+1. Navigate to [**APIs & Services** > **Credentials**][5] in the Google Cloud Console.
+1. Click **Create Credentials** > **OAuth client ID**.
+1. For **Application type**, select **Web application**.
+1. Under **Authorized JavaScript origins**, add the Datadog origin URL. Under **Authorized redirect URIs**, add the Datadog OAuth callback URL. Both URLs are displayed in the Datadog connection creation dialog when you select **Google Workspace**.
+1. Click **Create**.
+1. Copy the **Client ID** and **Client Secret**—you need these when creating the connection in Datadog.
+
+## Create the connection in Datadog
+
+1. From the [Action Catalog page][6], click the {{< ui >}}Connections{{< /ui >}} tab.
+1. Click {{< ui >}}New Connection{{< /ui >}}.
+1. Select the {{< ui >}}Google Workspace{{< /ui >}} icon.
+1. Enter a {{< ui >}}Connection Name{{< /ui >}}.
+1. Enter the {{< ui >}}Client ID{{< /ui >}} and {{< ui >}}Client Secret{{< /ui >}} from your Google Cloud OAuth 2.0 credentials.
+1. Select the {{< ui >}}Scopes{{< /ui >}} required for the actions you plan to use. See the [scopes reference](#scopes-reference).
+1. Leave the {{< ui >}}Authorize URL{{< /ui >}} and {{< ui >}}Token URL{{< /ui >}} fields as their pre-populated default values unless you have a specific reason to change them.
+1. Click {{< ui >}}Create{{< /ui >}}.
+1. In the authorization window that opens, sign in with the Google account you want to use and grant the requested permissions.
+
+## Scopes reference
+
+Select only the scopes required by the actions you intend to use.
+
+### Gmail
+
+| Scope label | Scope value | Description |
+|---|---|---|
+| Gmail: Full Access | `https://mail.google.com/` | Full read and write access to all Gmail resources |
+| Gmail: Read, Compose, Send, and Permanently Delete Threads | `https://www.googleapis.com/auth/gmail.modify` | All access except deleting permanently |
+| Gmail: Read Only | `https://www.googleapis.com/auth/gmail.readonly` | View email messages and settings |
+| Gmail: Send Only | `https://www.googleapis.com/auth/gmail.send` | Send email on behalf of the user |
+| Gmail: Compose and Send | `https://www.googleapis.com/auth/gmail.compose` | Manage drafts and send email |
+| Gmail: Manage Labels | `https://www.googleapis.com/auth/gmail.labels` | Create, read, update, and delete labels |
+| Gmail: View Metadata Only | `https://www.googleapis.com/auth/gmail.metadata` | View email metadata such as labels and headers |
+
+### Google Calendar
+
+| Scope label | Scope value | Description |
+|---|---|---|
+| Calendar: Full Access | `https://www.googleapis.com/auth/calendar` | Full read and write access to calendars |
+| Calendar: Read Only | `https://www.googleapis.com/auth/calendar.readonly` | View calendars |
+| Calendar: Manage Events | `https://www.googleapis.com/auth/calendar.events` | View and edit events on all calendars |
+| Calendar: View Events | `https://www.googleapis.com/auth/calendar.events.readonly` | View events on all calendars |
+
+### Google Drive
+
+| Scope label | Scope value | Description |
+|---|---|---|
+| Drive: Full Access | `https://www.googleapis.com/auth/drive` | Full read and write access to all Drive files |
+| Drive: Read Only | `https://www.googleapis.com/auth/drive.readonly` | View files in Drive |
+| Drive: Access Files Created by This App | `https://www.googleapis.com/auth/drive.file` | Access only files created or opened by this app |
+| Drive: App Data Folder | `https://www.googleapis.com/auth/drive.appdata` | Access the app-specific data folder |
+| Drive: Manage Metadata | `https://www.googleapis.com/auth/drive.metadata` | View and manage metadata of files |
+| Drive: View Metadata | `https://www.googleapis.com/auth/drive.metadata.readonly` | View metadata of files |
+
+### Google Docs
+
+| Scope label | Scope value | Description |
+|---|---|---|
+| Docs: Full Access | `https://www.googleapis.com/auth/documents` | View and manage documents in Google Docs |
+| Docs: Read Only | `https://www.googleapis.com/auth/documents.readonly` | View documents in Google Docs |
+
+### Google Sheets
+
+| Scope label | Scope value | Description |
+|---|---|---|
+| Sheets: Full Access | `https://www.googleapis.com/auth/spreadsheets` | View and manage spreadsheets in Google Sheets |
+| Sheets: Read Only | `https://www.googleapis.com/auth/spreadsheets.readonly` | View spreadsheets in Google Sheets |
+
+### Google Forms
+
+| Scope label | Scope value | Description |
+|---|---|---|
+| Forms: Create and Edit Forms | `https://www.googleapis.com/auth/forms.body` | View and manage form definitions |
+| Forms: View Forms | `https://www.googleapis.com/auth/forms.body.readonly` | View form definitions |
+| Forms: View Responses | `https://www.googleapis.com/auth/forms.responses.readonly` | View form responses |
+
+### Google Chat
+
+| Scope label | Scope value | Description |
+|---|---|---|
+| Chat: View, Compose, and Delete Messages | `https://www.googleapis.com/auth/chat.messages` | View, create, update, and delete messages |
+| Chat: Compose and Send Messages | `https://www.googleapis.com/auth/chat.messages.create` | Create and send messages in spaces |
+| Chat: View Messages | `https://www.googleapis.com/auth/chat.messages.readonly` | View messages and reactions |
+| Chat: Manage Spaces | `https://www.googleapis.com/auth/chat.spaces` | Create, view, update, and delete spaces |
+| Chat: Create Spaces | `https://www.googleapis.com/auth/chat.spaces.create` | Create spaces |
+| Chat: View Spaces | `https://www.googleapis.com/auth/chat.spaces.readonly` | View spaces |
+
+### User identity
+
+| Scope label | Scope value | Description |
+|---|---|---|
+| User Info: Email Address | `https://www.googleapis.com/auth/userinfo.email` | View the user's email address |
+| User Info: Basic Profile | `https://www.googleapis.com/auth/userinfo.profile` | View the user's basic profile information |
+| OpenID Connect | `openid` | Authenticate using OpenID Connect |
+
+### Google Workspace Admin
+
+| Scope label | Scope value | Description |
+|---|---|---|
+| Admin: Manage Users | `https://www.googleapis.com/auth/admin.directory.user` | Create, read, update, and delete users |
+| Admin: View Users | `https://www.googleapis.com/auth/admin.directory.user.readonly` | View users in the directory |
+| Admin: Manage Groups | `https://www.googleapis.com/auth/admin.directory.group` | Create, read, update, and delete groups |
+| Admin: View Groups | `https://www.googleapis.com/auth/admin.directory.group.readonly` | View groups in the directory |
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+<br>Do you have questions or feedback? Join the **#workflows** or **#app-builder** channel on the [Datadog Community Slack][7].
+
+[1]: https://developers.google.com/workspace/guides/create-project
+[2]: https://console.cloud.google.com/apis/library
+[3]: https://console.cloud.google.com/apis/credentials/consent
+[4]: https://developers.google.com/identity/protocols/oauth2/production-readiness/restricted-scope-verification
+[5]: https://console.cloud.google.com/apis/credentials
+[6]: https://app.datadoghq.com/actions/action-catalog
+[7]: https://chat.datadoghq.com/

@@ -12,6 +12,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-distribution-otel-collector/"
   tag: "Blog"
   text: "Unify OpenTelemetry and Datadog with the DDOT Collector"
+- link: "https://learn.datadoghq.com/courses/using-ddot"
+  tag: "Learning Center"
+  text: "Using the Datadog Distribution of OpenTelemetry Collector"
+
 ---
 
 {{< callout btn_hidden="true" >}}
