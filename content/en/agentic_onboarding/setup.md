@@ -28,10 +28,10 @@ The Datadog AI Setup CLI is a standalone tool that runs from your terminal. Use 
 
 The CLI can:
 
-- Create a Datadog account end-to-end from the terminal.
-- Link an existing Datadog account to your local environment.
-- Instrument local infrastructure-as-code (Terraform, Helm, Kustomize, Ansible, Pulumi, raw Kubernetes manifests) by editing files in place.
-- Instrument local application code by adding SDK initialization and configuration for supported frontends and backends.
+- Create a Datadog account end-to-end from the terminal
+- Link an existing Datadog account to your local environment
+- Instrument local infrastructure-as-code (Terraform, Helm, Kustomize, Ansible, Pulumi, raw Kubernetes manifests) by editing files in place
+- Instrument local application code by adding SDK initialization and configuration for supported frontends and backends
 
 ### Install and run
 
