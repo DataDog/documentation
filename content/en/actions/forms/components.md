@@ -40,6 +40,7 @@ Each component has a set of configurable elements in the component editor:
 | {{< ui >}}Advanced{{< /ui >}} | Configure the placeholder text and default value for the component. |
 | {{< ui >}}Rules{{< /ui >}} | Configure validation rules to restrict the values respondents can submit. See [Validation rules](#validation-rules). |
 | {{< ui >}}Conditions{{< /ui >}} | Configure conditional logic to show or hide the component based on a respondent's previous answers. See [Conditional fields](#conditional-fields). |
+| {{< ui >}}Style{{< /ui >}} | Change the component type while preserving its existing options. For example, switch a dropdown to checkboxes without removing and recreating the component. |
 
 ## Validation rules
 
