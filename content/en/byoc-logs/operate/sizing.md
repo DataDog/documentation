@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Proper cluster sizing ensures optimal performance, cost efficiency, and reliability for your BYOC Logs deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, retention period, and the complexity of your log data.
+Proper cluster sizing helps ensure optimal performance, cost efficiency, and reliability for your BYOC Logs deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, retention period, and the complexity of your log data.
 
 The [sizing examples](#sizing-examples) below provide starting-point configurations for common daily log volumes. For deeper guidance on each component, see the sections that follow.
 
@@ -34,7 +34,7 @@ Use your expected daily log volume and peak ingestion rates as starting points, 
 
 The following table provides starting-point configurations for common daily log volumes. These are baseline recommendations—adjust based on your observed performance.
 
-As a rule of thumb for a mixed workload, plan for around 12 vCPUs per TB/day ingested—4 vCPUs for indexers and 8 vCPUs for searchers. Actual pod counts round up to fit standard pod sizes. Incident-response-only workloads may need fewer searcher vCPUs; analytics-heavy use cases (dashboards) may need 2-3x more.
+As a rule of thumb for a mixed workload, plan for around 12 vCPUs per TB/day ingested—4 vCPUs for indexers and 8 vCPUs for searchers. Workloads dominated by targeted log searches require fewer searcher vCPUs; heavy analytics workloads—such as monitors, notebooks, or complex multi-day aggregations—may need 2x more.
 
 | Daily volume | Indexer pods | Indexer podSize | Searcher pods | Searcher podSize | Object storage (30-day retention, ~6x compression) |
 |-------------|-------------|-----------------|---------------|-------------------|-----------------------------------------------------|
@@ -43,10 +43,6 @@ As a rule of thumb for a mixed workload, plan for around 12 vCPUs per TB/day ing
 | **10 TB/day** | 10 | xlarge | 5 | 4xlarge | ~50 TB |
 | **50 TB/day** | 25 | 2xlarge | 13 | 8xlarge | ~250 TB |
 | **100 TB/day** | 50 | 2xlarge | 25 | 8xlarge | ~500 TB |
-
-<div class="alert alert-info">
-Searcher vCPUs in this table assume a mixed workload (searches and some dashboards). For dashboard-heavy use cases, increase searcher vCPUs by 2-3x. For search-only use cases (incident response, grep), you may be able to reduce them.
-</div>
 
 ## Indexers
 
@@ -91,14 +87,6 @@ A general starting point is to provision roughly double the total number of vCPU
 - **Performance:** Search performance depends heavily on the workload (query complexity, concurrency, amount of data scanned). For instance, term queries (`status:error AND message:exception`) are usually computationally less expensive than wildcard or whole event search queries.
 - **Memory:** 4 GB of RAM per searcher vCPU. Provision more RAM if you expect many concurrent aggregation requests.
 
-{{% collapse-content title="Impact of query patterns on searcher sizing" level="h4" expanded=false %}}
-The number of searcher vCPUs you need varies significantly based on how you use CloudPrem:
-
-- **Incident response** (searching for specific errors, grep-style queries): Relatively low searcher resources are needed, even with large datasets.
-- **Dashboards with aggregations** (timeseries, top lists, percentiles over multi-day ranges): Significantly more searcher resources are required. Aggregation queries scan more data and consume more CPU and memory.
-
-If your primary use case involves dashboards, plan for 2-3x more searcher vCPUs than the baseline recommendation.
-{{% /collapse-content %}}
 
 ## Other services
 
@@ -112,7 +100,7 @@ Allocate the following resources for these lightweight components:
 
 ## Object storage estimation
 
-CloudPrem compresses and indexes log data before storing it in object storage. The compression ratio depends on the log format, structure, and redundancy in your data.
+BYOC Logs compresses and indexes log data before storing it in object storage. The compression ratio depends on the log format, structure, and redundancy in your data.
 
 | Metric | Typical range |
 |--------|---------------|
@@ -131,7 +119,7 @@ Assuming a 6x compression ratio:
 1. **Stored per day:** `10 TB / 6 ≈ 1.67 TB/day`
 2. **Total for 30 days:** `1.67 TB × 30 ≈ 50 TB`
 
-Use standard-tier object storage (for example, S3 Standard, GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with CloudPrem.
+Use standard-tier object storage (for example, S3 Standard, GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with BYOC Logs.
 {{% /collapse-content %}}
 
 ## PostgreSQL database
