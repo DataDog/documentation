@@ -6,11 +6,19 @@ type: interactive
 
 # CopyPageButton
 
-A button that copies the current page content as text to the clipboard. Placed below the page title on every API page.
+A button that copies the current page content as text to the clipboard. Two variants:
+
+- **`default`** — full button with clipboard icon + "Copy page" label. Rendered in the page body (e.g. under the H1) on every API page.
+- **`icon`** — clipboard-only button with a `title="Copy page"` tooltip. Rendered in the sticky API toolbar. Hidden by default; reveals itself once the main (default-variant) button scrolls behind the sticky toolbar, so the page-copy action is always within reach. Visibility is driven by sampling `getBoundingClientRect` on scroll/resize rather than an IntersectionObserver against the viewport, because the latter would only fire after the target left the *entire* viewport — well past the moment it disappeared behind the sticky region.
 
 ## Properties
 
-This component takes no props. It derives the `.md` URL from the current page pathname.
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `labels` | `{ "Copy page": string; "Copied": string }` | required | i18n strings. Localized in the `CopyPageButtonIsland.astro` wrapper. |
+| `variant` | `'default' \| 'icon'` | `'default'` | Layout. `'icon'` drops the label and adds the scroll-driven visibility behavior. |
+| `watchTargetSelector` | `string` | `.copy-page-button:not(.copy-page-button--icon)` | Icon variant only. CSS selector for the element this button shadows; the icon appears once it scrolls behind the sticky anchor. |
+| `stickyAnchorSelector` | `string` | `.api-toolbar` | Icon variant only. CSS selector for the sticky container whose bottom edge marks where the watch target is considered hidden. Resolved via `closest()` from the icon button. |
 
 ## Behavior
 
@@ -36,10 +44,16 @@ Both label strings render at all times — the inactive one is hidden with `visi
 
 ## Usage
 
-The component is used directly in API page templates with `client:idle` hydration:
+API pages render the localized `CopyPageButtonIsland.astro` wrapper, which forwards translated `labels` to the underlying Preact component. The wrapper is used twice: once in the page body (default variant) and once in `ApiLayout`'s sticky toolbar (icon variant).
 
 ```astro
-<CopyPageButton client:idle />
+<!-- in the page body, below the <h1> -->
+<CopyPageButtonIsland lang={lang} />
+
+<!-- in ApiLayout's toolbar (already wired up) -->
+<CopyPageButtonIsland lang={currentLang} variant="icon" />
 ```
+
+The icon-variant island finds the main button via a CSS selector at hydration time. If no main button is present on the page, the icon variant stays hidden.
 
 It appears on all API pages: the index, category pages, individual operation pages, and static pages (rate limits, scopes, using the API).

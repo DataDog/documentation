@@ -111,3 +111,89 @@ describe('CopyPageButton', () => {
         expect(path.getAttribute('d')).toContain('l-3.2-3.2');
     });
 });
+
+describe('CopyPageButton (icon variant)', () => {
+    // happy-dom doesn't run layout, so getBoundingClientRect returns zeros by
+    // default. Stub specific rects per test to drive the position check.
+    function stubRect(el: Element, bottom: number) {
+        el.getBoundingClientRect = () =>
+            ({ top: 0, left: 0, right: 0, bottom, width: 0, height: bottom, x: 0, y: 0, toJSON: () => ({}) }) as DOMRect;
+    }
+
+    function setupDom(targetBottom: number, anchorBottom: number) {
+        // The icon variant looks for `.api-toolbar` as its sticky anchor via
+        // `closest()`, so the test container must carry that class and
+        // contain the rendered icon button.
+        document.body.innerHTML = `
+            <button class="copy-page-button" data-testid="main-button"></button>
+            <div class="api-toolbar" data-testid="toolbar"></div>
+        `;
+        const target = document.querySelector('[data-testid="main-button"]')!;
+        const toolbar = document.querySelector('[data-testid="toolbar"]')!;
+        stubRect(target, targetBottom);
+        stubRect(toolbar, anchorBottom);
+        return { target, toolbar };
+    }
+
+    function renderIcon(toolbar: Element) {
+        return render(h(CopyPageButton, { labels, variant: 'icon' }), {
+            container: toolbar as HTMLElement,
+        });
+    }
+
+    it('renders no label and uses title for the tooltip', () => {
+        const { toolbar } = setupDom(200, 100);
+        renderIcon(toolbar);
+        const btn = document.querySelector('.copy-page-button--icon')!;
+        expect(btn.getAttribute('title')).toBe('Copy page');
+        expect(document.querySelector('.copy-page-button--icon .copy-page-button__label')).toBeNull();
+    });
+
+    it('starts hidden while the watch target sits below the sticky anchor', async () => {
+        const { toolbar } = setupDom(200, 100);
+        renderIcon(toolbar);
+        // Initial position sample runs synchronously in useEffect after mount.
+        await waitFor(() => {
+            const btn = document.querySelector('.copy-page-button--icon')!;
+            expect(btn.classList.contains('copy-page-button--icon-visible')).toBe(false);
+        });
+    });
+
+    it('reveals itself once the watch target scrolls behind the sticky anchor', async () => {
+        const { toolbar, target } = setupDom(200, 100);
+        renderIcon(toolbar);
+
+        // Simulate the user scrolling far enough that the main button is now
+        // above (or at) the sticky toolbar's bottom edge.
+        stubRect(target, 80);
+        window.dispatchEvent(new Event('scroll'));
+
+        await waitFor(() => {
+            const btn = document.querySelector('.copy-page-button--icon')!;
+            expect(btn.classList.contains('copy-page-button--icon-visible')).toBe(true);
+        });
+    });
+
+    it('hides itself once the watch target scrolls back below the sticky anchor', async () => {
+        const { toolbar, target } = setupDom(200, 100);
+        renderIcon(toolbar);
+
+        stubRect(target, 80);
+        window.dispatchEvent(new Event('scroll'));
+        await waitFor(() => {
+            expect(
+                document.querySelector('.copy-page-button--icon')!
+                    .classList.contains('copy-page-button--icon-visible'),
+            ).toBe(true);
+        });
+
+        stubRect(target, 250);
+        window.dispatchEvent(new Event('scroll'));
+        await waitFor(() => {
+            expect(
+                document.querySelector('.copy-page-button--icon')!
+                    .classList.contains('copy-page-button--icon-visible'),
+            ).toBe(false);
+        });
+    });
+});

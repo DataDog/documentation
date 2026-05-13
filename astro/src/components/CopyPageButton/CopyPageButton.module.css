@@ -50,3 +50,17 @@
 .copy-page-button__label-text--visible {
     visibility: visible;
 }
+
+/* Icon-only variant used in the sticky API toolbar. The full-label button
+   sits in the page header and scrolls away; this slim version takes its
+   place once the main button leaves the viewport. Hidden with `display:
+   none` (rather than `opacity: 0`) so the element doesn't reserve a flex
+   slot to the left of the language/region selectors while inactive. */
+.copy-page-button--icon {
+    display: none;
+    margin-bottom: 0;
+}
+
+.copy-page-button--icon-visible {
+    display: inline-flex;
+}
