@@ -3,7 +3,7 @@
 {{ $alt := .Get "alt" | default "" }}
 {{ $title := .Get "title" }}
 {{ $subtitle := .Get "subtitle" }}
-{{ $img_width := .Get "img_width" | default "150" }}
+{{ $img_width := .Get "img_width" | default (.Parent.Get "img_width") | default "150" }}
 
 <a class="card-grid-card h-100" href="{{ $href }}">
   <div class="card-body text-center py-2 px-1 d-flex align-items-center justify-content-center">
