@@ -1,6 +1,6 @@
 ---
 title: Data Lineage
-description: "Trace upstream dependencies and downstream consumers across data assets, jobs, dashboards, and applications."
+description: Trace upstream dependencies and downstream consumers across data assets, jobs, dashboards, and applications.
 aliases:
   - /data_observability/lineage/
 further_reading:
@@ -24,6 +24,8 @@ Data Lineage shows how data flows through your stack—from source systems and w
 
 Datadog builds lineage automatically from metadata collected through your [Quality Monitoring][1] and [Jobs Monitoring][2] integrations (Snowflake, BigQuery, Databricks, dbt, Airflow, Fivetran, Looker, Tableau, and others). Anything in the Data Observability Catalog can appear in the graph.
 
+{{< img src="data_observability/lineage/lineage-overview.png" alt="The Data Lineage page showing upstream and downstream dependencies for an anchored Snowflake table" style="width:100%;" >}}
+
 To open Data Lineage, go to **Data Observability > Lineage**.
 
 ## Select anchor assets
@@ -35,6 +37,8 @@ To set an anchor, use the search bar at the top of the page:
 1. Choose an asset type from the **Any asset** dropdown (for example, *Table*, *Column*, *Dashboard*, or *Job*). Leave it set to **Any asset** to search across all types.
 2. Enter the asset name. Datadog searches all connected sources in the Data Observability Catalog.
 3. Select a result to anchor the graph.
+
+{{< img src="data_observability/lineage/anchor-search-bar.png" alt="The anchor search bar with the asset type dropdown open, showing Table, Column, Dashboard, and Job options" style="width:80%;" >}}
 
 The graph renders with the anchors in the center and upstream and downstream neighbors expanding to the left and right.
 
@@ -65,6 +69,8 @@ The **Find in map** search box highlights nodes in the current graph by name. Un
 - The left selector sets **upstream depth** (levels of parents).
 - The right selector sets **downstream depth** (levels of children).
 - Set either to `∞` to load all available hops in that direction.
+
+{{< img src="data_observability/lineage/depth-controls.png" alt="The Depth controls showing upstream and downstream selectors flanking the ANCHOR badge" style="width:40%;" >}}
 
 Increase depth to find a distant root cause or downstream consumer. Decrease depth when the graph is too dense to navigate.
 
@@ -102,6 +108,8 @@ Before changing or dropping a column, table, or model, use lineage to see what d
 2. Set downstream depth to `∞` and upstream depth to `0`.
 3. Filter to the asset types you care about—for example, leave dashboards and reports visible to identify affected BI consumers.
 4. Switch to **List** view to export the full list of affected assets or share it with the owning teams.
+
+{{< img src="data_observability/lineage/impact-analysis-list-view.png" alt="The List view showing every downstream asset that depends on a given Snowflake table, with type and source columns" style="width:100%;" >}}
 
 ### Tracing a column end-to-end
 
