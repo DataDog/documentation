@@ -1,8 +1,6 @@
 ---
-title: Data Lineage
+title: Lineage
 description: Trace upstream dependencies and downstream consumers across data assets, jobs, dashboards, and applications.
-aliases:
-  - /data_observability/lineage/
 further_reading:
 - link: "/data_observability/data_catalog/"
   tag: "Documentation"
@@ -20,13 +18,13 @@ further_reading:
 
 ## Overview
 
-Data Lineage shows how data flows through your stack—from source systems and warehouse tables, through transformations and jobs, to the dashboards and applications that consume it. Use it to trace quality issues to their root cause, assess the blast radius of a failing job or a planned schema change, and route incidents to the right owner.
+Lineage shows how data flows through your stack—from source systems and warehouse tables, through transformations and jobs, to the dashboards and applications that consume it. Use it to trace quality issues to their root cause, assess the blast radius of a failing job or a planned schema change, and route incidents to the right owner.
 
 Datadog builds lineage automatically from metadata collected through your [Quality Monitoring][1] and [Jobs Monitoring][2] integrations (Snowflake, BigQuery, Databricks, dbt, Airflow, Fivetran, Looker, Tableau, and others). Anything in the Data Observability Catalog can appear in the graph.
 
-{{< img src="data_observability/lineage/lineage-overview.png" alt="The Data Lineage page showing upstream and downstream dependencies for an anchored Snowflake table" style="width:100%;" >}}
+{{< img src="data_observability/lineage/lineage-overview.png" alt="The Lineage page showing upstream and downstream dependencies for an anchored Snowflake table" style="width:100%;" >}}
 
-To open Data Lineage, go to **Data Observability > Lineage**.
+To open Lineage, go to **Data Observability > Lineage**.
 
 ## Select anchor assets
 
@@ -38,7 +36,29 @@ To set an anchor, use the search bar at the top of the page:
 2. Enter the asset name. Datadog searches all connected sources in the Data Observability Catalog.
 3. Select a result to anchor the graph.
 
-{{< img src="data_observability/lineage/anchor-search-bar.png" alt="The anchor search bar with the asset type dropdown open, showing Table, Column, Dashboard, and Job options" style="width:80%;" >}}
+**One Anchor**
+
+Search for a single asset by name to make it the anchor for the lineage graph.
+{{< img src="data_observability/lineage/anchors-1-search.png" alt="The anchor search bar with one anchor selected" style="width:100%;" >}}
+
+The graph centers on the selected anchor and shows its upstream dependencies and downstream consumers.
+{{< img src="data_observability/lineage/anchors-1-map.png" alt="The lineage map with one anchor selected" style="width:100%;" >}}
+
+**Multiple Anchors**
+
+Add multiple assets to the search bar to compare related lineage paths in the same view.
+{{< img src="data_observability/lineage/anchors-2-search.png" alt="The anchor search bar with 2 anchors selected" style="width:100%;" >}}
+
+Each selected asset is marked with an `ANCHOR` badge, and the graph shows how their upstream and downstream paths connect.
+{{< img src="data_observability/lineage/anchors-2-map.png" alt="The lineage map with 2 anchors selected" style="width:100%;" >}}
+
+**Search Query**
+
+Use an attribute query, such as `schema:staging`, to select a dynamic set of matching assets.
+{{< img src="data_observability/lineage/anchors-n-search.png" alt="The anchor search bar with a dynamic query" style="width:100%;" >}}
+
+The graph marks every matching asset as an anchor so you can inspect lineage for the full query result set.
+{{< img src="data_observability/lineage/anchors-n-map.png" alt="The lineage map with many anchors selected via a dynamic query" style="width:100%;" >}}
 
 The graph renders with the anchors in the center and upstream and downstream neighbors expanding to the left and right.
 
@@ -53,6 +73,8 @@ The time selector in the top-right corner (`1w`, `Past 1 Week`, and so on) sets 
 ## Lineage Controls
 
 The **Lineage Controls** panel on the left configures the shape and contents of the graph.
+
+<div class="alert alert-info">Lineage controls do not apply to anchor assets. Anchors remain visible even when depth, filter, or grouping settings would otherwise hide matching assets.</div>
 
 ### Map, List, and Find
 

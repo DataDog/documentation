@@ -12,7 +12,7 @@ further_reading:
     text: 'Jobs Monitoring'
   - link: '/data_observability/lineage/'
     tag: 'Documentation'
-    text: 'Data Lineage'
+    text: 'Lineage'
 ---
 
 ## Overview
@@ -26,7 +26,7 @@ With Quality Monitoring, you can:
 - Surface changes in column-level metrics such as null counts or uniqueness
 - Set up monitors using static thresholds or historical baselines
 - Trace quality issues using lineage views that show upstream jobs and downstream impact
-- Explore end-to-end dependencies in [Data Lineage][1] to identify root causes and downstream impact
+- Explore end-to-end dependencies in [Lineage][1] to identify root causes and downstream impact
 
 ## Supported data sources
 

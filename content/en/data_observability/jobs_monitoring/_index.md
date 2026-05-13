@@ -6,7 +6,7 @@ aliases:
 further_reading:
   - link: '/data_observability/lineage/'
     tag: 'Documentation'
-    text: 'Data Lineage'
+    text: 'Lineage'
   - link: '/data_streams'
     tag: 'Documentation'
     text: 'Data Streams Monitoring'
@@ -22,7 +22,7 @@ Data Observability: Jobs Monitoring provides visibility into the performance, re
 - Track the health and performance of data processing jobs across your accounts and workspaces. See which take up the most compute resources or have inefficiencies.
 - Receive an alert when a job fails—or when a job is taking too long to complete.
 - Analyze job execution details and stack traces.
-- Use [Data Lineage][2] to assess upstream causes and downstream impact for failing or delayed jobs.
+- Use [Lineage][2] to assess upstream causes and downstream impact for failing or delayed jobs.
 - Correlate infrastructure metrics, Spark metrics from the Spark UI, logs, and cluster configuration.
 - Compare multiple runs to facilitate troubleshooting, and to optimize provisioning and configuration during deployment.
 
