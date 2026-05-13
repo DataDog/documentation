@@ -30,13 +30,13 @@ The previous sections covered the building blocks of your access strategy: permi
 
 Use this decision table to determine which access control mechanism to use:
 
-| What you want to control | Mechanism | How it works |
-| :---- | :---- | :---- |
-| **Whether a user can use a feature at all** (for example, "contractors cannot see any Logs") | [Permissions and RBAC][1] | Remove the relevant read or write permission from the user's role. This is an all-or-nothing control per feature. |
-| **Who can edit or view a specific resource** (for example, "only Team A can edit this Dashboard") | [Granular Access Control][2] | Set Edit, View, or No Access per resource, targeted at Roles, Teams, or individual users. Applied per resource with UI, API, or Terraform. |
-| **Which telemetry data a user can see** (for example, "only the Payments team can see data from `service:payment-processor`") | [Data Access Control][3] | Create a restricted dataset defined by tag values and telemetry type. Assign access to specific Roles or Teams. Enforced across the platform wherever that data appears. |
-| **What an application key can do** (for example, "this key should only manage monitors, not read logs") | [Application Key Scoping][4] | Scope the application key to specific API endpoints. The key cannot exceed its creator's permissions, but can be restricted further. |
-| **Which networks can access your Datadog org** (for example, "only corporate network IPs") | [IP Allowlist][5] | Restrict access to your Datadog org to specific IP ranges, for both the API and UI. Useful for organizations that require network-level access controls as part of their security posture. |
+| What you want to control | Example | Mechanism | How it works |
+| :---- | :---- | :---- | :---- |
+| Whether a user can use a feature at all | Contractors cannot see any Logs | [Permissions and RBAC][1] | Remove the relevant read or write permission from the user's role. This is an all-or-nothing control per feature. |
+| Who can edit or view a specific resource | Only Team A can edit this Dashboard | [Granular Access Control][2] | Set Edit, View, or No Access per resource, targeted at Roles, Teams, or individual users. Applied per resource with UI, API, or Terraform. |
+| Which telemetry data a user can see | Only the Payments team can see data from `service:payment-processor` | [Data Access Control][3] | Create a restricted dataset defined by tag values and telemetry type. Assign access to specific Roles or Teams. Enforced across the platform wherever that data appears. |
+| What an application key can do | This key should only manage monitors, not read logs | [Application Key Scoping][4] | Scope the application key to specific API endpoints. The key cannot exceed its creator's permissions, but can be restricted further. |
+| Which networks can access your Datadog org | Only corporate network IPs | [IP Allowlist][5] | Restrict access to your Datadog org to specific IP ranges, for both the API and UI. Useful for organizations that require network-level access controls as part of their security posture. |
 
 ## How the mechanisms layer together
 
