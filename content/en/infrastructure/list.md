@@ -36,13 +36,11 @@ Use the filter panel on the left to narrow the list of hosts:
 
 You can also use the search box at the top of the list to filter hosts with the [Datadog search syntax][16].
 
-{{< img src="infrastructure/index/infra-list-filter-panel.png" alt="The Host List filter panel with quick filter checkboxes, a Filter Metrics section, and a search facets section." style="width:100%;">}}
-
 ## Save views
 
-To save your filter and column configuration as a view, click **My View** in the upper-left corner, and then click **Save as new view**. Saved views are accessible from the **My View** panel, where you can filter, sort, and edit them. Star a view to mark it as a favorite.
+To save your filter and column configuration, open the **Views** panel in the upper-left corner and click **Save as new view**. From the same panel, you can filter, sort, edit, and star saved views.
 
-{{< img src="infrastructure/index/infra-list-views.png" alt="The My View panel with options to save, filter, sort, and edit saved views." style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-views.png" alt="The Views panel with options to save, filter, sort, and edit saved views." style="width:50%;">}}
 
 ## Customize columns
 
@@ -66,7 +64,7 @@ The following columns combine multiple datapoints into a single column:
 
 Click any host to open its detail panel, which includes:
 
-- [Hostnames and aliases](#hostnames-and-aliases)
+- [Hostnames and aliases](/agent/faq/how-datadog-agent-determines-the-hostname/#host-aliases)
 - [Tags][2]
 - [Metrics][3]
 - [Containers][4]
@@ -78,49 +76,29 @@ Click any host to open its detail panel, which includes:
 
 The detail panel uses the [Resource Catalog][15] side panel.
 
-### Hostnames and aliases
-
-The Datadog Agent collects potential hostnames from several different sources. For more details, see [How does Datadog determine the Agent hostname?][1].
-
-**Note**: Hostnames should be unique within a Datadog account. Otherwise, you may experience inconsistencies on your host graphs.
-
-When there are multiple uniquely identifiable names for a single host, Datadog creates aliases for those host names. The names collected by the Agent are added as aliases for the chosen canonical name.
-
-For example, a single host running in EC2 might have:
-
-- An instance ID (`i-abcd1234`)
-- A generic hostname provided by EC2 based on the host's IP address (`ip-192-0-0-1`)
-- A meaningful host name provided by an internal DNS server or a config-managed hosts file (`myhost.mydomain`)
-
-{{< img src="infrastructure/index/infra-list-alias2.png" alt="Host aliases" style="width:100%;">}}
+For more information about how the Datadog Agent determines a host's canonical name and aliases, see [How does Datadog determine the Agent hostname?][1].
 
 ### Agent configuration
 
-You can view and manage Agent configurations across your entire infrastructure using [Fleet Automation][12].
+To view a host's Agent configuration, click the host to open the side panel, and then scroll to the **Agent** section. To view and manage Agent configurations across your entire infrastructure, use [Fleet Automation][12].
 
-To view Agent configurations:
-1. Click **Open Host** in the top-right corner of the host detail panel.
-2. Select **View Agent Configurations** from the dropdown menu to go directly to Fleet Automation.
-
-{{< img src="infrastructure/index/infra-list-config-4.png" alt="View Agent configurations in Fleet Automation" style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-agent-config.png" alt="The Agent section of the host side panel showing the Agent configuration in JSON format." style="width:100%;">}}
 
 ### OpenTelemetry Collector configuration
 
 When the [Datadog Extension][14] is configured with your OpenTelemetry Collector, you can view Collector configuration and build information directly in the host detail panel. Use the Datadog Extension to manage and debug your OpenTelemetry Collector deployments from the Datadog interface.
 
-To view OpenTelemetry Collector configurations:
-1. Click a host running the OpenTelemetry Collector in the Host List.
-2. In the host detail panel, select the **OTel Collector** tab to view the build information and complete Collector configuration.
+To view a host's OpenTelemetry Collector configuration, click the host to open the side panel. Scroll to the **OTel Collector** section to see the build information and complete Collector configuration.
+
+{{< img src="infrastructure/index/infra-list-otel-config.png" alt="The OTel Collector section of the host side panel showing build information and Collector configuration." style="width:100%;">}}
 
 For detailed setup instructions and requirements, such as hostname matching and pipeline configuration, see the [Datadog Extension documentation][14].
-
-{{< img src="infrastructure/index/infra-list-config-otel.png" alt="View OpenTelemetry Collector configurations in the Host List" style="width:100%;">}}
 
 ## Export
 
 Click **Export** above the host list to download a copy. For a JSON-formatted list of your hosts reporting to Datadog, you can also use one of the following:
 
-* The **JSON API permalink** at the top of the Host List.
+* The [host overview report][17].
 * The [search hosts API endpoint][7]. See the [developer guide][8] for an example.
 
 ### Audit Agent versions
@@ -175,5 +153,6 @@ for host in infra['rows']:
 [12]: https://app.datadoghq.com/release-notes/fleet-automation-is-now-generally-available
 [13]: /agent/fleet_automation
 [14]: /opentelemetry/integrations/datadog_extension/
-[15]: /infrastructure/resource_catalog/
+[15]: /infrastructure/resource_catalog/#investigate-a-host-or-resource
 [16]: /getting_started/search/
+[17]: https://app.datadoghq.com/reports/v2/overview?metrics=avg%3Aaws.ec2.cpuutilization%2Cavg%3Aazure.vm.percentage_cpu%2Cavg%3Agcp.gce.instance.cpu.utilization%2Cavg%3Asystem.cpu.idle%2Cavg%3Asystem.cpu.iowait%2Cavg%3Asystem.load.norm.15%2Cavg%3Avsphere.cpu.usage%2Cavg%3Avsphere.cpu.usage.avg%2Cavg%3Aalibabacloud.ecs.cpu_utilization.average&with_apps=true&with_sources=true&with_aliases=true&with_meta=true&with_mute_status=true&with_tags=true
