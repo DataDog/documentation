@@ -39,22 +39,22 @@ Static Code Analysis helps you identify security vulnerabilities and maintainabi
 
 Static Code Analysis supports scanning for security vulnerabilities and poor coding practices in the following languages and technologies:
 
-{{< card-grid >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Python" src="integrations_logos/python_avatar.svg" alt="python" img_width="50" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=JavaScript" src="integrations_logos/javascript_large.png" alt="javascript" img_width="50" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=TypeScript" src="integrations_logos/typescript_large.svg" alt="typescript" img_width="50" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Java" src="integrations_logos/java_avatar.svg" alt="java" img_width="50" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=CSharp" src="integrations_logos/dotnet_avatar.svg" alt="c sharp" img_width="50" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Go" src="integrations_logos/golang-avatar.png" alt="go" img_width="60" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Ruby" src="integrations_logos/ruby_avatar.svg" alt="ruby" img_width="50" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=PHP" src="integrations_logos/php_opcache.png" alt="php" img_width="80" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Docker" src="integrations_logos/docker_avatar.svg" alt="docker" img_width="50" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=YAML" src="integrations_logos/yaml.png" alt="yaml" img_width="50" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Kotlin" src="integrations_logos/kotlin.png" alt="kotlin" img_width="80" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Elixir" src="integrations_logos/elixir.png" alt="elixir" img_width="50" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Apex" src="integrations_logos/salesforce_large.svg" alt="apex" img_width="90" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Swift" src="integrations_logos/swift_large.svg" alt="swift" img_width="80" >}}
-  {{< image-card href="/security/code_security/static_analysis/setup/?tab=circleciorbs#upload-third-party-static-analysis-results-to-datadog" src="integrations_logos/datadog_avatar.svg" alt="other" img_width="50" >}}
+{{< card-grid img_width="50" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Python" src="integrations_logos/python_avatar.svg" alt="python" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=JavaScript" src="integrations_logos/javascript_large.png" alt="javascript" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=TypeScript" src="integrations_logos/typescript_large.svg" alt="typescript" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Java" src="integrations_logos/java_avatar.svg" alt="java" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=CSharp" src="integrations_logos/dotnet_avatar.svg" alt="c sharp" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Go" src="integrations_logos/golang-avatar.png" alt="go" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Ruby" src="integrations_logos/ruby_avatar.svg" alt="ruby" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=PHP" src="integrations_logos/php_opcache.png" alt="php" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Docker" src="integrations_logos/docker_avatar.svg" alt="docker" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=YAML" src="integrations_logos/yaml.png" alt="yaml" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Kotlin" src="integrations_logos/kotlin.png" alt="kotlin" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Elixir" src="integrations_logos/elixir.png" alt="elixir" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Apex" src="integrations_logos/salesforce_large.svg" alt="apex" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Swift" src="integrations_logos/swift_large.svg" alt="swift" >}}
+  {{< image-card href="/security/code_security/static_analysis/setup/?tab=circleciorbs#upload-third-party-static-analysis-results-to-datadog" src="integrations_logos/datadog_avatar.svg" alt="other" >}}
 {{< /card-grid >}}
 
 <!-- </br>  -->
