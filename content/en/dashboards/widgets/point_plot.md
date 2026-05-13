@@ -16,10 +16,6 @@ further_reading:
   text: "Scatter Plot Widget"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Point Plot is in Preview">}}
-  The Point Plot widget is in preview. Contact your account team to learn more.
-{{< /callout >}}
-
 A point plot displays one dot per individual event over time, giving you an unaggregated view of your data. Unlike a [Timeseries widget][1], which visualizes trends as averaged or aggregated lines, a point plot surfaces the raw underlying datapoints. Use it to catch the single slow request hidden in an otherwise healthy p95, identify which specific host or service is the outlier, and click directly into that event to investigate.
 
 Point plots are already available in APM Traces, Database Monitoring, and LLM Observability explorers. This widget lets you bring that same view into your own dashboards.

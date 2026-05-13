@@ -6144,16 +6144,21 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_insights
       weight: 102
-    - name: Exception Replay
-      url: ide_plugins/vscode/exception_replay/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_exception_replay
-      weight: 103
     - name: Code Security
       url: ide_plugins/vscode/code_security/
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_security
+      weight: 103
+    - name: Exception Replay
+      url: ide_plugins/vscode/exception_replay/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_exception_replay
       weight: 104
+    - name: Live Debugger
+      url: ide_plugins/vscode/live_debugger/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_live_debugger
+      weight: 105
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
@@ -7540,6 +7545,11 @@ menu:
       url: /security/code_security/software_composition_analysis/library_inventory/
       parent: software_composition_analysis
       weight: 4
+    - name: CVE Explorer
+      identifier: sca_cve_explorer
+      url: /security/code_security/software_composition_analysis/cve_explorer/
+      parent: software_composition_analysis
+      weight: 5
     - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
