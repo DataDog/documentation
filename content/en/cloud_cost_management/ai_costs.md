@@ -31,7 +31,7 @@ further_reading:
 
 ## Overview
 
-AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Anthropic, Amazon Bedrock, Google Gemini, OpenAI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, and attribute usage to the specific users and API keys driving it.
+AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Anthropic, Google Gemini, OpenAI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, and attribute usage to the specific users and API keys driving it.
 
 ## Prerequisites
 
@@ -39,9 +39,9 @@ To use AI Costs, you must have at least one of the following supported providers
 
 | AI provider | Setup method |
 |---|---|
-| Anthropic   | [SaaS integration][2] |
-| Amazon Bedrock | [AWS integration][3] |
-| Gemini      | [Google Cloud integration][4] |
+| Amazon Bedrock | [AWS integration][2] |
+| Anthropic   | [SaaS integration][3] |
+| Google Gemini  | [Google Cloud integration][4] |
 | OpenAI     | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
 
@@ -61,7 +61,7 @@ The AI cost summary page provides:
 
 ## Normalized AI tags
 
-AI cost data from all supported providers is normalized to a consistent set of tags. Use these tags to filter, group, compare, and plan AI spend across dashboards, [monitors][8], [budgets][9], [forecasts][10], and other Datadog tools. The [Cloud Cost Explorer][11] allows you to query and compare spend across providers without writing per-provider logic.
+AI cost data from all supported providers is normalized to a consistent set of tags. Use these tags to filter, group, compare, and plan AI spend across dashboards, [monitors][8], [budgets][9], [forecasts][10], and other Datadog tools. Use [Cloud Cost Explorer][11] to query and compare spend across providers without writing per-provider logic.
 
 The following tags are available for all supported AI providers:
 
@@ -71,7 +71,7 @@ The following tags are available for all supported AI providers:
 | `model` | The AI model identifier (for example, `claude-opus-4-6`, `gpt-4.1`). |
 | `model_name` | The human-readable model name (for example, `Claude Opus 4.6`). |
 | `token_direction` | Whether tokens are being consumed (input) or generated (output) within a service or application. |
-| `token_category` | The specific category of tokens consumed, such as input/output tokens or tokens related to caching and search operations (for example, `cached input`, `cache write`, `standard input`, `output`). |
+| `token_category` | The specific category of tokens consumed, such as input tokens, output tokens, or tokens related to caching and search operations (for example, `cached input`, `cache write`, `standard input`, `output`). |
 | `project` | The project, workspace, or environment the AI costs belong to. |
 
 ## Attribute AI spend to sources
@@ -119,7 +119,7 @@ Configure [Tag Pipelines][13] to map OOTB tags (such as `user_email`) to teams, 
 
 {{< img src="cloud_cost/ai_costs/ccm-tag-pipeline-ai-costs.png" alt="The Tag Pipelines Rule Setup page, showing user_email values mapped to team values through an existing reference table, and additional tag mapping options." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-Once mapped, attributed spend appears in provider-specific dashboards and [Cost Reports][14]:
+After mapping, attributed spend appears in provider-specific dashboards and [Cost Reports][14]:
 
 {{< img src="cloud_cost/ai_costs/ccm-anthropic-ai-cost-reporting.png" alt="A provider-specific dashboard with a stacked bar graph showing daily provider spend attributed by team and model name, and a summary list of the spend attributions." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
@@ -128,8 +128,8 @@ Once mapped, attributed spend appears in provider-specific dashboards and [Cost 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_cost_management/
-[2]: /cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
-[3]: /cloud_cost_management/setup/aws
+[2]: /cloud_cost_management/setup/aws
+[3]: /cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
 [4]: /cloud_cost_management/setup/google_cloud
 [5]: /cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
 [6]: https://app.datadoghq.com/cost/summarize/ai-costs
