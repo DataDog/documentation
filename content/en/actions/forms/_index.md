@@ -18,31 +18,27 @@ Datadog Forms allow you to collect input, analyze responses, and trigger automat
 
 Some ways you can use forms:
 - Scaffold services from predefined templates.
-- Collect engineering feedback in an internal developer portal (IDP).
-- Create service requests for security, platform, or IT teams directly from employee form responses.
+- Survey engineering feedback in an internal developer portal (IDP).
+- Create service requests and [cases][] for security, platform, or IT teams directly from employee form responses.
 
 ## Create a form
 
-When creating a form, you can use a blueprint or start from scratch. Blueprints are starter forms that cover common use cases. They come loaded with a sample description and questions to help familiarize yourself with form elements, and some blueprints include a pre-configured automation. Blueprints include Developer Experience Survey, IDP Feedback, Case Management Service Request, Report an Incident, Bug Report, On-Call Escalation, Post-Incident Review, and more.
+When creating a form, you can use a blueprint, [import an existing form](#import-a-form), or start from scratch. Blueprints are starter forms that cover common use cases. They come loaded with a sample description and questions to help familiarize yourself with form elements, and some blueprints include a pre-configured automation. Blueprints include Developer Experience Survey, IDP Feedback, Case Management Service Request, Report an Incident, Bug Report, On-Call Escalation, Post-Incident Review, and more.
 
 To create a form:
 1. On the [Forms][1] page, click {{< ui >}}New Form{{< /ui >}}.
-1. Select a blueprint or start with a blank form, then click {{< ui >}}Continue{{< /ui >}}.
+1. Select a blueprint, import a form, or start with a blank form, then click {{< ui >}}Continue{{< /ui >}}.
 1. Optionally, name your form and give it a description. Click {{< ui >}}Continue{{< /ui >}}.
 1. To add a new component, click **Add Component**, or on the Fields side panel, click the **+** icon. See [Form components][2] for the full list of component types and their options.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-To preview, share, and debug your form:
+To preview or share your form:
 1. Click {{< ui >}}View{{< /ui >}} to display the form as it appears to respondents. Click {{< ui >}}Edit{{< /ui >}} to return to the creator view.
 1. Click {{< ui >}}Share{{< /ui >}} to copy the form link or configure sharing options.
-1. In the {{< ui >}}Debug{{< /ui >}} section, you can:
-    - Click {{< ui >}}Form{{< /ui >}} to show a mini-preview of your form.
-    - Click {{< ui >}}Data Definition{{< /ui >}} to show the JSON version of the components' definition.
-    - Click {{< ui >}}UI Definition{{< /ui >}} to show the JSON version of the form's UI.
 
 ## Import a form
 
-You can import an existing form into Datadog from a JSON file or migrate directly from Google Forms.
+You can import an existing form into Datadog from a PDF or JSON file.
 
 To import a form:
 1. On the [Forms][1] page, click {{< ui >}}New Form{{< /ui >}}.
@@ -57,6 +53,7 @@ From the [Forms][1] page, click a form. In the {{< ui >}}Fields{{< /ui >}} panel
 |---------|-------------|
 | Accepting Responses | Toggle to set the form as active or inactive. When inactive, the form does not accept new responses. |
 | Anonymous Responses | When enabled, respondent emails are not stored. |
+| Single Responses | When enabled, prevents the same person from submitting more than one response by tracking user identity. You can enable this setting together with Anonymous Responses. |
 | Manage Permissions | Configure who can view the form and submitted responses. See [Manage access](#manage-access). |
 | Edit Theme | Change the form's color theme. |
 | Clone Form | Create a copy of the form. |
@@ -106,7 +103,7 @@ After creating a form, you can add an [action][4] or [workflow blueprint][5] tha
 1. The action or blueprint opens in a workflow canvas, where you can [edit it][6].
 1. Click {{< ui >}}Create{{< /ui >}}.
 
-**Note**: Automations triggered by forms appear under [Workflow Automation][7]. There is no charge for workflow executions triggered by a form.
+**Note**: Automations triggered by forms appear under [Workflow Automation][7].
 
 ## Manage access
 
@@ -129,3 +126,4 @@ By default, only the creator of a form can access it. To change the permissions 
 [7]: https://app.datadoghq.com/workflow
 [8]: /dashboards/
 [9]: https://app.datadoghq.com/software/self-service
+[10]: /incident_response/case_management/
