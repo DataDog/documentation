@@ -30,7 +30,7 @@ With these three tags, you can:
 **Notes**:
 
 - The `version` tag is expected to change with each new application deployment. Two different versions of your application's code should have distinct `version` tags.
-- The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+- The official `service` of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official `service` of a log, use the Unified Service Tagging options below or add a full custom Autodiscovery log configuration.
 - Host information is excluded for database and cache spans because the host associated with the span is not the database/cache host.
 
 ### Requirements
@@ -79,11 +79,11 @@ To setup unified service tagging in a containerized environment:
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
-
 ##### Full configuration
 
-To get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
+To get the full range of unified service tagging when using Kubernetes, add the labels to both the parent workload level and the pod template level. 
+
+The `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables are used by APM enabled applications. These environemnt variables can be set manually or by the [Kubernetes's downward API][2] as seen below. If you are using the Cluster Agent's [Admission Controller][1] to mutate your pods, those three environment variables are automatically injected to match your pod labels.
 
 ```yaml
 apiVersion: apps/v1
@@ -93,28 +93,29 @@ metadata:
     tags.datadoghq.com/env: "<ENV>"
     tags.datadoghq.com/service: "<SERVICE>"
     tags.datadoghq.com/version: "<VERSION>" 
-...
-template:
-  metadata:
-    labels:
-      tags.datadoghq.com/env: "<ENV>"
-      tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>" 
-  containers:
-  -  ...
-     env:
-          - name: DD_ENV
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.labels['tags.datadoghq.com/env']
-          - name: DD_SERVICE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.labels['tags.datadoghq.com/service']
-          - name: DD_VERSION 
-            valueFrom: 
-              fieldRef: 
-                fieldPath: metadata.labels['tags.datadoghq.com/version']
+# (...)
+spec: 
+  template:
+    metadata:
+      labels:
+        tags.datadoghq.com/env: "<ENV>"
+        tags.datadoghq.com/service: "<SERVICE>"
+        tags.datadoghq.com/version: "<VERSION>" 
+    containers:
+    - # (...)
+      env:
+            - name: DD_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+            - name: DD_SERVICE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
+            - name: DD_VERSION 
+              valueFrom: 
+                fieldRef: 
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
 You can also use the OpenTelemetry Resource Attributes environment variables to set the `env`, `service`, and `version` tags:
@@ -130,11 +131,13 @@ You can also use the OpenTelemetry Resource Attributes environment variables to 
 ```
 <div class="alert alert-danger">The <code>OTEL_SERVICE_NAME</code> environment variable takes precedence over the <code>service.name</code> attribute in the <code>OTEL_RESOURCE_ATTRIBUTES</code> environment variable.</div>
 
+These labels cover Kubernetes CPU, memory, network, and disk metrics. As well as general container tagging and log collection. These labels are also used by the Cluster Agent and its reported [Kubernetes State Metrics][3].
+
 ##### Partial configuration
 
 ###### Pod-level metrics
 
-To configure pod-level metrics, add the following standard labels (`tags.datadoghq.com`) to the pod spec of a Deployment, StatefulSet, or Job:
+If you are not using APM in your applications you can omit the `DD_ENV`, `DD_SERVICE`, `DD_VERSION` environment variables. Just adding the following standard labels (`tags.datadoghq.com`) to the pod spec as well as optionally to the parent workload like the Deployment, StatefulSet, or Job:
 
 ```yaml
 template:
@@ -144,40 +147,14 @@ template:
       tags.datadoghq.com/service: "<SERVICE>"
       tags.datadoghq.com/version: "<VERSION>" 
 ```
-These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][2].
 
 If you have multiple containers per pod, you can specify standard labels by container:
 
 ```yaml
-tags.datadoghq.com/<container-name>.env
-tags.datadoghq.com/<container-name>.service
-tags.datadoghq.com/<container-name>.version 
+tags.datadoghq.com/<CONTAINER_NAME>.env
+tags.datadoghq.com/<CONTAINER_NAME>.service
+tags.datadoghq.com/<CONTAINER_NAME>.version 
 ```
-
-###### State metrics
-
-To configure [Kubernetes State Metrics][3]:
-
-1. Set `join_standard_tags` to `true` in your configuration file. See this [example configuration file][4] for the setting location.
-
-2. Add the same standard labels to the collection of labels for the parent resource, for example: `Deployment`.
-
-  ```yaml
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    labels:
-      tags.datadoghq.com/env: "<ENV>"
-      tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>" 
-  spec:
-    template:
-      metadata:
-        labels:
-          tags.datadoghq.com/env: "<ENV>"
-          tags.datadoghq.com/service: "<SERVICE>"
-          tags.datadoghq.com/version: "<VERSION>" 
-  ```
 
 ###### Datadog SDK and StatsD client
 
