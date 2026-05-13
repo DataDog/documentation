@@ -30,13 +30,13 @@ The Jira integration with Datadog Incident Management provides the following ben
 
 To use automatic work item creation, install the integration through the [Jira Integration tile][1]. For more information, see the [Jira integration][2] documentation.
 
-To enable bidirectional sync, you must also configure a Jira webhook. See [Configure a Jira webhook][6] for instructions.
+To enable bidirectional sync, you must also configure a Jira webhook. See [Configure a Jira webhook][3] for instructions.
 
 ## Setup
 
 ### Configuring Jira work item creation
 
-1. On the [Integration Settings page][3], find the Jira integration.
+1. On the [Integration Settings page][4], find the Jira integration.
 2. Enable the **Automatically create a parent work item** toggle.
 3. Select your Jira account, project, and work item type.
 4. Optionally, add a condition to define when to automatically create a Jira work item. If left blank, a Jira work item is created for all new incidents.
@@ -80,7 +80,6 @@ When you save changes to the configuration of an incident type that already has 
 
 [1]: https://app.datadoghq.com/integrations/jira
 [2]: /integrations/jira/
-[3]: https://app.datadoghq.com/incidents/settings?integration=jira&section=integrations
-[4]: https://app.datadoghq.com/incidents
+[3]: /integrations/jira/#configure-a-jira-webhook
+[4]: https://app.datadoghq.com/incidents/settings?integration=jira&section=integrations
 [5]: https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field-type
-[6]: /integrations/jira/#configure-a-jira-webhook
