@@ -385,9 +385,9 @@ Connect [OpenCode][3] to the Datadog MCP Server with the official [Datadog OpenC
 
 1. Add the plugin to your `opencode.json` configuration file. Create the file if it doesn't exist:
 
-    <pre><code>{
-      "plugin": ["@datadog/opencode-plugin"]
-    }</code></pre>
+   <pre><code>{
+     "plugin": ["@datadog/opencode-plugin"]
+   }</code></pre>
 
     If your `opencode.json` already has a `plugin` array, append `"@datadog/opencode-plugin"` to it.
 
