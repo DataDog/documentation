@@ -200,35 +200,12 @@ containers:
               fieldPath: metadata.labels['tags.datadoghq.com/version'] 
 ```
 
-##### Automatic version tagging for APM data in containerized environments
-
-<div class="alert alert-info">This feature is only enabled for <a href="https://docs.datadoghq.com/tracing/">Application Performance Monitoring (APM)</a> data.</div>
-
-You can use the `version` tag in APM to [monitor deployments][7] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][8].
-
-For APM data, Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
-
-| Priority         | Version Value |
-|--------------|------------|
-| 1    |  {your version value}       |
-| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
-| 3         |  {image_tag} or {first_7_digits_of_git_commit_sha} if only one is available      |
-
-Requirements: 
-- Datadog Agent Version 7.52.0 or greater
-- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed.
-- If your services are not running in a containerized environment, or if you'd also like to have the Git SHA included, [embed Git information in your build artifacts][9].
-
-
 [1]: /agent/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[3]: /agent/kubernetes/data_collected/#kube-state-metrics
+[3]: /integrations/kubernetes_state_core/?tab=helm#data-collected
 [4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
 [5]: /tracing/send_traces/
 [6]: /integrations/statsd/
-[7]: /tracing/services/deployment_tracking/
-[8]: /watchdog/faulty_deployment_detection/
-[9]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
 
 {{% /tab %}}
 
@@ -276,30 +253,6 @@ com.datadoghq.tags.version
 ```
 
 As explained in the full configuration, these labels can be set in a Dockerfile or as arguments for launching the container.
-
-##### Automatic version tagging for APM data in containerized environments
-
-<div class="alert alert-info">This feature is only enabled for <a href="/tracing/">Application Performance Monitoring (APM)</a> data.</div>
-
-You can use the `version` tag in APM to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
-
-For APM data, Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
-
-| Priority         | Version Value |
-|--------------|------------|
-| 1    |  {your version value}       |
-| 2   | {image_tag}_{first_7_digits_of_git_commit_sha}       |
-| 3         |  {image_tag} or {first_7_digits_of_git_commit_sha} if only one is available      |
-
-Requirements: 
-- Datadog Agent Version 7.52.0 or greater
-- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed.
-- If your services are not running in a containerized environment, or if you'd also like to have the Git SHA included, [embed Git information in your build artifacts][3].
- 
-
-[1]: /tracing/services/deployment_tracking/
-[2]: /watchdog/faulty_deployment_detection/
-[3]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
 
 {{% /tab %}}
 
@@ -351,11 +304,14 @@ If your service has no need for the Datadog environment variables (for example, 
 }
 ```
 
+{{% /tab %}}
+{{% /tabs %}}
+
 ##### Automatic version tagging for APM data in containerized environments
 
 <div class="alert alert-info">This feature is only enabled for <a href="/tracing/">Application Performance Monitoring (APM)</a> data.</div>
 
-You can use the `version` tag in APM to [monitor deployments][1] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][2].
+You can use the `version` tag in APM to [monitor deployments][18] and to identify faulty code deployments through [Automatic Faulty Deployment Detection][19].
 
 For APM data, Datadog sets the `version` tag for you in the following priority order. If you manually set `version`, Datadog does not override your `version` value.
 
@@ -368,14 +324,7 @@ For APM data, Datadog sets the `version` tag for you in the following priority o
 Requirements: 
 - Datadog Agent Version 7.52.0 or greater
 - If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed.
-- If your services are not running in a containerized environment, or if you'd also like to have the Git SHA included, [embed Git information in your build artifacts][3].
-
-[1]: /tracing/services/deployment_tracking/
-[2]: /watchdog/faulty_deployment_detection/
-[3]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
-
-{{% /tab %}}
-{{% /tabs %}}
+- If your services are not running in a containerized environment, or if you'd also like to have the Git SHA included, [embed Git information in your build artifacts][20].
 
 ### Non-containerized environment
 
@@ -588,3 +537,6 @@ processors:
 [15]: /serverless/configuration/#connect-telemetry-using-tags
 [16]: https://opentelemetry.io/docs/languages/js/resources/
 [17]: https://github.com/open-telemetry/semantic-conventions/releases/tag/v1.27.0
+[18]: /tracing/services/deployment_tracking/
+[19]: /watchdog/faulty_deployment_detection/
+[20]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
