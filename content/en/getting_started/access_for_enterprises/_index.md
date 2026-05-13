@@ -47,9 +47,9 @@ You can read this guide sequentially to plan a new access strategy, or jump to t
 
 This guide assumes familiarity with Datadog basics. Before starting, review:
 
-- [Administrator's Guide: Getting Started][10]: for overall platform setup and onboarding
-- [Getting Started with Teams][11]: for team structure, sync strategies, and ownership workflows
-- [Access Control (RBAC)][12]: for Datadog's role and permission model
+- [Administrator's Guide: Getting Started][10] for overall platform setup and onboarding
+- [Getting Started with Teams][11] for team structure, sync strategies, and ownership workflows
+- [Access Control (RBAC)][12] for Datadog's role and permission model
 
 ## Next steps
 
