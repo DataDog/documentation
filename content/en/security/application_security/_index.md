@@ -41,11 +41,11 @@ algolia:
   tags: ["asm", "App and API Protection"]
 ---
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
 {{< learning-center-callout header="Get real-time security guardrails for your AI apps and agents" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
   AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Try it today!
 {{< /learning-center-callout >}}
-{{< /site-region >}}
+{{% /site-region %}}
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
