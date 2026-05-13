@@ -2334,6 +2334,188 @@
       "html": ""
     }
   },
+  "ListCostTagKeys": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": [
+            {
+              "attributes": {
+                "sources": [
+                  "focus"
+                ],
+                "value": "providername"
+              },
+              "id": "providername",
+              "type": "cost_tag_key"
+            },
+            {
+              "attributes": {
+                "sources": [],
+                "value": "service"
+              },
+              "id": "service",
+              "type": "cost_tag_key"
+            }
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[object]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The list of Cloud Cost Management tag keys.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Attributes of a Cloud Cost Management tag key.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> details</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Additional details for a Cloud Cost Management tag key, including its description and example tag values.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"details\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">description&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Description of the tag key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"details\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">tag_values&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Example tag values observed for this tag key.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">sources&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">List of sources that define this tag key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">value&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The tag key name.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The tag key identifier.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Type of the Cloud Cost Management tag key resource. \nAllowed enum values: <code>cost_tag_key</code></p><p>default: <code>cost_tag_key</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "GetCostTagKey": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": {
+            "attributes": {
+              "details": {
+                "description": "The cloud provider name reported for the cost line item.",
+                "tag_values": [
+                  "aws",
+                  "gcp",
+                  "azure"
+                ]
+              },
+              "sources": [
+                "focus"
+              ],
+              "value": "providername"
+            },
+            "id": "providername",
+            "type": "cost_tag_key"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A Cloud Cost Management tag key.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Attributes of a Cloud Cost Management tag key.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> details</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Additional details for a Cloud Cost Management tag key, including its description and example tag values.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"details\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">description&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Description of the tag key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"details\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">tag_values&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Example tag values observed for this tag key.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">sources&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">List of sources that define this tag key.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">value&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The tag key name.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The tag key identifier.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Type of the Cloud Cost Management tag key resource. \nAllowed enum values: <code>cost_tag_key</code></p><p>default: <code>cost_tag_key</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "404": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
+  "ListCostTags": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": [
+            {
+              "attributes": {
+                "sources": [
+                  "focus"
+                ],
+                "value": "providername:aws"
+              },
+              "id": "providername:aws",
+              "type": "cost_tag"
+            },
+            {
+              "attributes": {
+                "sources": [
+                  "focus"
+                ],
+                "value": "providername:gcp"
+              },
+              "id": "providername:gcp",
+              "type": "cost_tag"
+            }
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[object]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The list of Cloud Cost Management tags.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Attributes of a Cloud Cost Management tag.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">sources&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">List of sources that define this tag.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">value&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The tag value in <code>key:value</code> format.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The tag identifier, equal to its <code>key:value</code> representation.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Type of the Cloud Cost Management tag resource. \nAllowed enum values: <code>cost_tag</code></p><p>default: <code>cost_tag</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {},
+      "json": {},
+      "html": ""
+    }
+  },
   "ListTagPipelinesRulesets": {
     "responses": {
       "200": {

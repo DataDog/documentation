@@ -1054,6 +1054,18 @@
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
     "summary": "List Cloud Cost Management tag descriptions"
   },
+  "ListCostTagKeys": {
+    "description": "List Cloud Cost Management tag keys.",
+    "summary": "List Cloud Cost Management tag keys"
+  },
+  "GetCostTagKey": {
+    "description": "Get details for a specific Cloud Cost Management tag key, including example tag values and description.",
+    "summary": "Get a Cloud Cost Management tag key"
+  },
+  "ListCostTags": {
+    "description": "List Cloud Cost Management tags for a given metric.",
+    "summary": "List Cloud Cost Management tags"
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
