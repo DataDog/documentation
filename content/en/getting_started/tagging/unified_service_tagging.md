@@ -83,7 +83,7 @@ To setup unified service tagging in a containerized environment:
 
 To get the full range of unified service tagging when using Kubernetes, add the labels to both the parent workload level and the pod template level. 
 
-The `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables are used by APM enabled applications. These environemnt variables can be set manually or by the [Kubernetes's downward API][2] as seen below. If you are using the Cluster Agent's [Admission Controller][1] to mutate your pods, those three environment variables are automatically injected to match your pod labels.
+The `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables are used by APM enabled applications. These environment variables can be set manually or by the [Kubernetes's downward API][2] as seen below. If you are using the Cluster Agent's [Admission Controller][1] to mutate your pods, those three environment variables are automatically injected to match your labels.
 
 ```yaml
 apiVersion: apps/v1
@@ -104,18 +104,18 @@ spec:
     containers:
     - # (...)
       env:
-            - name: DD_ENV
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/env']
-            - name: DD_SERVICE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/service']
-            - name: DD_VERSION 
-              valueFrom: 
-                fieldRef: 
-                  fieldPath: metadata.labels['tags.datadoghq.com/version']
+        - name: DD_ENV
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/env']
+        - name: DD_SERVICE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/service']
+        - name: DD_VERSION
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
 You can also use the OpenTelemetry Resource Attributes environment variables to set the `env`, `service`, and `version` tags:
@@ -135,9 +135,31 @@ These labels cover Kubernetes CPU, memory, network, and disk metrics. As well as
 
 ##### Partial configuration
 
+###### Global env handling
+If your Kubernetes cluster is entirely a single environment, for example only `env:production` nodes and workloads, you can provide this to your Agent configuration rather than tagging each workload individually.
+
+With the Datadog Operator:
+```yaml
+#(...)
+spec:
+  global:
+    tags:
+      - "env:<ENV>"
+```
+
+With the Datadog Helm Chart:
+```yaml
+datadog:
+  #(...)
+  tags:
+    - "env:<ENV>"
+```
+
+This will establish this as a host level tag inherited on all your data associated with each host. This will also be applied to all [Kubernetes State Metrics][3] and be the default `env` on your APM spans. Take care with these tags as if you have a global `env` tag set and a *different* `env` tag set on your pod, that pod's data will have both `env` tags present.
+
 ###### Pod-level metrics
 
-If you are not using APM in your applications you can omit the `DD_ENV`, `DD_SERVICE`, `DD_VERSION` environment variables. Just adding the following standard labels (`tags.datadoghq.com`) to the pod spec as well as optionally to the parent workload like the Deployment, StatefulSet, or Job:
+If you are not using APM in your applications you can omit the `DD_ENV`, `DD_SERVICE`, `DD_VERSION` environment variables. Add the following standard labels (`tags.datadoghq.com`) to the pod spec as well as optionally to the parent workload like the Deployment, StatefulSet, or Job:
 
 ```yaml
 template:
@@ -172,9 +194,9 @@ containers:
           valueFrom:
             fieldRef:
               fieldPath: metadata.labels['tags.datadoghq.com/service']
-        - name: DD_VERSION 
-          valueFrom: 
-            fieldRef: 
+        - name: DD_VERSION
+          valueFrom:
+            fieldRef:
               fieldPath: metadata.labels['tags.datadoghq.com/version'] 
 ```
 
