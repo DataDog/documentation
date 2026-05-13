@@ -389,22 +389,26 @@ Connect [OpenCode][3] to the Datadog MCP Server with the official [Datadog OpenC
      "plugin": ["@datadog/opencode-plugin"]
    }</code></pre>
 
-    If your `opencode.json` already has a `plugin` array, append `"@datadog/opencode-plugin"` to it.
+    If a `plugin` array already exists, add `"@datadog/opencode-plugin"` to it.
 
     If you previously configured the Datadog MCP Server manually in `opencode.json`, remove or disable that entry to avoid conflicts with the plugin.
 
-1. Restart OpenCode. The package is fetched from npm at startup, so no separate install step is needed.
+1. Restart OpenCode. The package is fetched from npm at startup.
 
-1. Ask the agent a Datadog-related question, or tell it to run `ddsetup`. The plugin walks through site selection and writes the MCP Server configuration to `opencode.json`.
+1. Ask the agent to run `ddsetup`. The plugin walks through site selection.
 
 1. Restart OpenCode again to activate the MCP Server, and complete the OAuth login flow when prompted.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-After setup, ask the agent to run `ddconfig` to change your Datadog site or troubleshoot the connection, or `ddtoolsets` to enable or disable groups of [tools](#toolsets).
+1. To enable [product-specific tools](#toolsets), ask the agent to run `ddtoolsets`.
+
+After setup, ask the agent to run `ddconfig` to change your Datadog site or troubleshoot the connection.
 
 {{% collapse-content title="Manual configuration" level="h4" expanded=false id="opencode-manual" %}}
-To configure the MCP Server without the plugin, add the following to your `opencode.json` configuration file. Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+To configure the MCP Server without the plugin, add the following to your `opencode.json` configuration file.
+
+Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 <pre><code>{
   "mcp": {
