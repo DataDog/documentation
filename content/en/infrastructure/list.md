@@ -58,7 +58,7 @@ The following columns combine multiple datapoints into a single column:
 
 - **Configurations**: The cloud provider, operating system, and Datadog Agent installation status for each host.
 - **Software**: The host's web server, database, cache, and container orchestrator (such as Docker or Kubernetes), if detected.
-- **Integrations**: The Datadog Agent integrations enabled on the host. This column is similar to the **Apps** column in the legacy view, but it includes only Agent integrations, not custom metrics reported from the host.
+- **Integrations**: The Datadog Agent integrations enabled on the host.
 
 ## Inspect a host
 
