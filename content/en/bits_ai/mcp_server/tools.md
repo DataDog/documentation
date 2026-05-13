@@ -1061,7 +1061,7 @@ Tools for interacting with Datadog [Synthetic tests][47].
 ### `get_synthetics_tests`
 *Toolset: **synthetics***\
 *Permissions Required: `Synthetics Read`*\
-Searches Datadog Synthetic tests.
+Searches Datadog Synthetic HTTP API tests.
 
 - Help me understand why the Synthetic test on endpoint `/v1/my/tested/endpoint` is failing.
 - There is an outage; find all the failing Synthetic tests on the domain `api.mycompany.com`.
