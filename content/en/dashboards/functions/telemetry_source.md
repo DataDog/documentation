@@ -5,7 +5,7 @@ aliases:
     - /graphing/functions/telemetry_source/
 ---
 
-Environments that submit metrics with both OpenTelemetry and Datadog agents can choose which data sources to display metrics from.
+Environments that submit metrics with both OpenTelemetry and Datadog agents can choose which data sources to display metrics from. For more information on querying across both sources, see [Query Across Datadog and OpenTelemetry Metrics][1].
 
 ## Semantic mode combined
 
@@ -13,7 +13,7 @@ Environments that submit metrics with both OpenTelemetry and Datadog agents can 
 
 In the query editor, select **Modify** and then **Combined telemetry** in the **Telemetry sources** section.
 
-{{< img src="dashboards/functions/telemetry_source_combined.png" alt="Formula example - ratio" style="width:75%;" >}}
+{{< img src="dashboards/functions/telemetry_source_combined.png" alt="Telemetry sources query modifier showing Combined telemetry selected." style="width:75%;" >}}
 
 Alternatively, specify the semantic mode `combined` in the JSON editor.
 
@@ -95,3 +95,5 @@ Alternatively, specify the semantic mode `native` in the JSON editor.
     {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /metrics/open_telemetry/query_metrics

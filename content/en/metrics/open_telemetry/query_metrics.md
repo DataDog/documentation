@@ -17,18 +17,18 @@ Datadog helps you bridge this gap by enabling you to:
 
 ## Unify OpenTelemetry and Datadog metrics in queries
 
-The [Metrics Query Editor][1] includes a Semantic Mode selector, allowing you to control how Datadog handles potentially equivalent metrics from OTel and Datadog sources.
+The [Metrics Query Editor][1] and dashboard widgets include a [Telemetry source][3] query modifier, allowing you to control how Datadog handles potentially equivalent metrics from OTel and Datadog sources. Select **Modify** and then choose **Native telemetry** or **Combined telemetry** in the **Telemetry sources** section.
 
-{{< img src="/metrics/otel/semantic_mode.png" alt="Semantic mode selector on Metrics Explorer page." style="width:100%;" >}}
+{{< img src="dashboards/functions/telemetry_source_combined.png" alt="Telemetry sources query modifier showing Combined telemetry selected." style="width:100%;" >}}
 
 Choose between two modes:
 
-### Strictly adhere to native data source (Default)
+### Native telemetry (default)
 
 - This mode queries only the specific metric name you enter (whether it's a Datadog or OTel metric).
 - It does not include data from any equivalent metrics.
 
-### Combine data from all telemetry sources
+### Combined telemetry
 
 - This mode automatically combines data from equivalent Datadog and OTel metrics into a single query, even if you only enter one of the metric names.
 - It handles the mapping between equivalent metrics (including complex ones) and aggregates all related timeseries as a single metric.
@@ -81,3 +81,4 @@ You can also see the tag-based logic used for these mappings. Hover over an equi
 
 [1]: https://app.datadoghq.com/metric/explorer
 [2]: https://app.datadoghq.com/metric/summary
+[3]: /dashboards/functions/telemetry_source/
