@@ -41,7 +41,7 @@ Imagine you're monitoring system load using two different metrics:
 - **OTel native**: `system.cpu.load_average.15m`
 - **Datadog Agent**: `system.load.15`
 
-If you query for `system.cpu.load_average.15m`, apply a max space aggregation, and set the Semantic Mode to **Combine data from all telemetry sources**, Datadog automatically:
+If you query for `system.cpu.load_average.15m`, apply a max space aggregation, and set the telemetry source to **Combined telemetry**, Datadog automatically:
 
 1. Identifies the equivalent Datadog metric: `system.load.15`.
 2. Combines the timeseries from both `system.cpu.load_average.15m` and `system.load.15`.

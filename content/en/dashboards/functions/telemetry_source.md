@@ -7,15 +7,15 @@ aliases:
 
 Environments that submit metrics with both OpenTelemetry and Datadog agents can choose which data sources to display metrics from. For more information on querying across both sources, see [Query Across Datadog and OpenTelemetry Metrics][1].
 
-## Semantic mode combined
+## Combined telemetry
 
-"Combined" mode automatically combines data from the Datadog Agent with data from any equivalent OpenTelemetry metrics.
+"Combined" mode automatically combines data from equivalent Datadog and OpenTelemetry metrics into a single query result.
 
 In the query editor, select **Modify** and then **Combined telemetry** in the **Telemetry sources** section.
 
 {{< img src="dashboards/functions/telemetry_source_combined.png" alt="Telemetry sources query modifier showing Combined telemetry selected." style="width:75%;" >}}
 
-Alternatively, specify the semantic mode `combined` in the JSON editor.
+Alternatively, set `semantic_mode` to `combined` in the JSON editor.
 
 ```text
 {
@@ -44,17 +44,17 @@ Alternatively, specify the semantic mode `combined` in the JSON editor.
 }
 ```
 
-## Semantic mode native
+## Native telemetry (default)
 
-In "native" mode, only the metric in the query returns data. The query does not include equivalent OpenTelemetry metrics.
+In "native" mode (the default), only the metric in the query returns data. The query does not include equivalent metrics from another telemetry source.
 
 In the query editor, select **Modify** and then **Native telemetry** in the **Telemetry sources** section.
 
-Alternatively, specify the semantic mode `native` in the JSON editor.
+Alternatively, set `semantic_mode` to `native` in the JSON editor.
 
 ```text
 {
-    "title": "Goroutine Count Metrics - OTel Only",
+    "title": "Goroutine Count Metrics",
     "type": "timeseries",
     "requests": [
         {
