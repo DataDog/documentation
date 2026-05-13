@@ -332,4 +332,4 @@ playwright-report/
 !e2e/components/icon/
 
 # AI
-.claude/*local*
+.claude/*local*.superpowers/
