@@ -1,15 +1,16 @@
 ---
 attributes:
-- description: El nombre del host de origen según se define en las métricas. Datadog
-    recupera automáticamente las etiquetas de host correspondientes del host coincidente
-    en Datadog y las aplica a su telemetría. El Agente establece este valor automáticamente.
+- description: Le nom de l'hôte d'origine tel que défini dans les métriques. Datadog
+    récupère automatiquement les balises d'hôte correspondantes de l'hôte correspondant
+    dans Datadog et les applique à votre télémétrie. L'Agent définit cette valeur
+    automatiquement.
   domain: Reserved
   name: host
   product_source:
   - icon-log
   - icon-apm
   type: string
-- description: El tipo de dispositivo de origen.
+- description: Le type de dispositif d'origine.
   domain: Reserved
   name: device
   product_source:
@@ -19,31 +20,31 @@ attributes:
   - browser
   - roku
   type: string
-- description: Esto corresponde al nombre de la integración, la tecnología de la cual
-    se originaron los datos. Cuando coincide con un nombre de integración, Datadog
-    instala automáticamente los analizadores y facetas correspondientes. Por ejemplo,
-    `nginx`, `postgresql`, y así sucesivamente.
+- description: Cela correspond au nom de l'intégration, à la technologie dont les
+    données proviennent. Lorsqu'il correspond à un nom d'intégration, Datadog installe
+    automatiquement les parseurs et facettes correspondants. Par exemple, `nginx`,
+    `postgresql`, etc.
   domain: Reserved
   name: source
   product_source:
   - icon-log
   type: string
-- description: Esto corresponde al nivel o severidad de los datos. Para los registros,
-    se utiliza para definir [patrones de registro](/logs/explorer/patterns/) y cuenta
-    con un diseño dedicado en la Log Management UI.
+- description: Cela correspond au niveau ou à la gravité des données. Pour les journaux,
+    il est utilisé pour définir [les modèles de journaux](/logs/explorer/patterns/)
+    et a une mise en page dédiée dans l'interface de gestion des journaux.
   domain: Reserved
   name: status
   product_source:
   - icon-log
   - icon-apm
   type: string
-- description: El [nombre de servicio unificado](/getting_started/tagging/unified_service_tagging/)
-    para la aplicación o servicio que está generando los datos, utilizado para correlacionar
-    sesiones de usuario. Se utiliza para cambiar de APM a otros productos, así que
-    asegúrese de definir el mismo valor cuando use ambos productos. En el RUM Browser
-    SDK, un servicio denota un conjunto de páginas construidas por un equipo que ofrece
-    una funcionalidad específica en su aplicación de navegador. Puede asignar páginas
-    web a un servicio con [seguimiento manual de visualización](/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names).
+- description: Le [nom de service unifié](/getting_started/tagging/unified_service_tagging/)
+    pour l'application ou le service qui génère les données, utilisé pour corréler
+    les sessions utilisateur. Il est utilisé pour passer de l'APM à d'autres produits,
+    donc assurez-vous de définir la même valeur lorsque vous utilisez les deux produits.
+    Dans le SDK RUM Browser, un service désigne un ensemble de pages construites par
+    une équipe qui offre une fonctionnalité spécifique dans votre application de navigateur.
+    Vous pouvez assigner des pages web à un service avec [le suivi de vue manuel](/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names).
   domain: Reserved
   name: service
   product_source:
@@ -55,213 +56,214 @@ attributes:
   - browser
   - roku
   type: string
-- description: El ID de traza utilizado para las trazas. Se utiliza para correlacionar
-    sus trazas con otros datos, incluidos los registros.
+- description: L'ID de trace utilisé pour les traces. Il est utilisé pour corréler
+    vos traces avec d'autres données, y compris les journaux.
   domain: Reserved
   name: trace_id
   product_source:
   - icon-log
   - icon-apm
   type: number
-- description: El cuerpo de una entrada de registro, resaltado y mostrado en Logs
-    Live Tail, donde se indexa para búsqueda de texto completo.
+- description: Le corps d'une entrée de journal, mis en évidence et affiché dans Logs
+    Live Tail, où il est indexé pour une recherche en texte intégral.
   domain: Reserved
   name: message
   product_source:
   - icon-log
   type: string
-- description: Número total de bytes transmitidos desde el cliente al servidor cuando
-    se emite el registro.
+- description: Le nombre total d'octets transmis depuis le client vers le serveur
+    lorsque le log est envoyé.
   domain: Network communications
   name: network.bytes_read
   product_source:
   - icon-log
   type: number
-- description: Número total de bytes transmitidos desde el servidor al cliente cuando
-    se emite el registro.
+- description: Le nombre total d'octets transmis depuis le serveur vers le client
+    lorsque le log est envoyé.
   domain: Network communications
   name: network.bytes_written
   product_source:
   - icon-log
   type: number
-- description: Nombre del país.
+- description: Le nom du pays.
   domain: Geolocation
   name: network.client.geoip.country.name
   product_source:
   - icon-log
   type: string
-- description: '[Código ISO](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
-    del país (por ejemplo, `US` para Estados Unidos, `FR` para Francia).'
+- description: Le [code ISO](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+    du pays (par exemple, `US` pour les États-Unis, `FR` pour la France).
   domain: Geolocation
   name: network.client.geoip.country.iso_code
   product_source:
   - icon-log
   type: string
-- description: Código ISO del continente (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).
+- description: Code ISO du continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).
   domain: Geolocation
   name: network.client.geoip.continent.code
   product_source:
   - icon-log
   type: string
-- description: Nombre del continente (`Europa`, `Australia`, `América del Norte`,
-    `África`, `Antártida`, `América del Sur`, `Oceanía`).
+- description: Nom du continent (`Europe`, `Australia`, `North America`, `Africa`,
+    `Antartica`, `South America`, `Oceania`).
   domain: Geolocation
   name: network.client.geoip.continent.name
   product_source:
   - icon-log
   type: string
-- description: Nombre del primer nivel de subdivisión del país (por ejemplo, `California`
-    en los Estados Unidos o el departamento de `Sarthe` en Francia).
+- description: 'Nom du premier niveau de division du pays (par exemple : `California`
+    aux États-Unis ou le département de la `Sarthe` en France).'
   domain: Geolocation
   name: network.client.geoip.subdivision.name
   product_source:
   - icon-log
   type: string
-- description: Código ISO del primer nivel de subdivisión del país (por ejemplo, `CA`
-    en los Estados Unidos o el departamento de `SA` en Francia).
+- description: Le [code ISO](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+    du premier niveau de division du pays (par exemple, `CA` aux États-Unis ou le
+    département `SA` en France).
   domain: Geolocation
   name: network.client.geoip.subdivision.iso_code
   product_source:
   - icon-log
   type: string
-- description: El nombre de la ciudad (por ejemplo, `París`, `Nueva York`).
+- description: Le nom de la ville (par exemple, `Paris` ou `New York`).
   domain: Geolocation
   name: network.client.geoip.city.name
   product_source:
   - icon-log
   type: string
-- description: Campo de encabezado HTTP que identifica la dirección de la página web
-    que enlazó al recurso que se está solicitando.
+- description: Le champ d'un en-tête HTTP qui identifie l'adresse de la page Web liée
+    à la ressource demandée.
   domain: HTTP
   name: http.referer
   product_source:
   - icon-log
   type: string
-- description: El ID de la solicitud HTTP.
+- description: L'ID de la requête HTTP.
   domain: HTTP
   name: http.request_id
   product_source:
   - icon-log
   type: string
-- description: La parte del host HTTP de la URL.
+- description: La partie du host HTTP de l'URL.
   domain: HTTP, URL Details
   name: http.url_details.host
   product_source:
   - icon-log
   - icon-apm
   type: string
-- description: La parte del puerto HTTP de la URL.
+- description: La partie du port HTTP de l'URL.
   domain: HTTP, URL Details
   name: http.url_details.port
   product_source:
   - icon-log
   - icon-apm
   type: number
-- description: La parte de la ruta HTTP de la URL.
+- description: La partie du chemin HTTP de l'URL.
   domain: HTTP, URL Details
   name: http.url_details.path
   product_source:
   - icon-log
   - icon-apm
   type: string
-- description: Las partes de la cadena de consulta HTTP de la URL descompuestas como
-    atributos clave/valor de parámetros de consulta.
+- description: Les parties de chaîne de requête HTTP de l'URL décomposées en attributs
+    key/value des paramètres de requête.
   domain: HTTP, URL Details
   name: http.url_details.queryString
   product_source:
   - icon-log
   - icon-apm
   type: object
-- description: El nombre del protocolo de la URL (HTTP o HTTPS).
+- description: Le nom du protocole de l'URL (HTTP ou HTTPS).
   domain: HTTP, URL Details
   name: http.url_details.scheme
   product_source:
   - icon-log
   - icon-apm
   type: string
-- description: La familia de sistemas operativos reportada por el User-Agent.
+- description: La famille du système d'exploitation indiquée par le user-agent.
   domain: User-Agent
   name: http.useragent_details.os.family
   product_source:
   - icon-log
   type: string
-- description: La familia de navegadores reportada por el User-Agent.
+- description: La famille de navigateurs indiquée par le user-agent.
   domain: User-Agent
   name: http.useragent_details.browser.family
   product_source:
   - icon-log
   type: string
-- description: La familia de dispositivos reportada por el User-Agent.
+- description: La famille d'appareils indiquée par le user-agent.
   domain: User-Agent
   name: http.useragent_details.device.family
   product_source:
   - icon-log
   type: string
-- description: El nombre del logger.
+- description: Le nom de l'enregistreur.
   domain: Source code
   name: logger.name
   product_source:
   - icon-log
   type: string
-- description: El nombre del hilo actual cuando se genera el registro.
+- description: Le nom du thread actuel lorsque le log est déclenché.
   domain: Source code
   name: logger.thread_name
   product_source:
   - icon-log
   type: string
-- description: El nombre del método de la clase.
+- description: Le nom de la méthode de la classe.
   domain: Source code
   name: logger.method_name
   product_source:
   - icon-log
   type: string
-- description: La versión del logger.
+- description: La version du logger.
   domain: Source code
   name: logger.version
   product_source:
   - icon-log
   type: string
-- description: El tipo o clase de error (o código en algunos casos).
+- description: Le type ou la catégorie d'erreur (ou le code dans certains cas).
   domain: Source code
   name: error.kind
   product_source:
   - icon-log
   type: string
-- description: El nombre de la base de datos a la que se está conectando. Por ejemplo,
-    en Java, si `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, el nombre de la
-    instancia es `customers`.
+- description: Le nom de la base de données à laquelle la connexion est établie. Par
+    exemple, en Java, si `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, le nom
+    de l'instance est `customers`.
   domain: Database
   name: db.instance
   product_source:
   - icon-apm
   - icon-log
   type: string
-- description: 'Una declaración de base de datos para el tipo de base de datos dado.
-    Por ejemplo, para mySQL: `''SELECT * FROM wuser_table'';` y para Redis: `''SET
-    mykey ''WuValue''''`.'
+- description: 'Une instruction de base de données pour le type de base de données
+    donné. Par exemple, pour mySQL : `''SELECT * FROM wuser_table'';` et pour Redis
+    : `''SET mykey ''WuValue''''`.'
   domain: Database
   name: db.statement
   product_source:
   - icon-apm
   - icon-log
   type: string
-- description: Usuario que realiza la operación.
+- description: L'utilisateur à l'origine de l'opération.
   domain: Database
   name: db.user
   product_source:
   - icon-apm
   - icon-log
   type: string
-- description: 'Una duración de cualquier tipo en **nanosegundos**: tiempo de respuesta
-    HTTP, tiempo de consulta a la base de datos, latencia, etc. [Remapear](/logs/log_configuration/processors/remapper/)
-    cualquier duración dentro de los registros a este atributo porque Datadog lo muestra
-    y lo utiliza como medida predeterminada para la búsqueda de trazas.'
+- description: 'Une durée de tout type en **nanosecondes** : temps de réponse HTTP,
+    temps de requête de base de données, latence, etc. [Remapper](/logs/log_configuration/processors/remapper/)
+    toutes les durées dans les journaux à cet attribut car Datadog l''affiche et l''utilise
+    comme mesure par défaut pour la recherche de traces.'
   domain: Performance
   name: duration
   product_source:
   - icon-log
   type: number
-- description: El identificador del usuario.
+- description: L'identificateur de l'utilisateur.
   domain: User
   name: usr.id
   product_source:
@@ -272,7 +274,7 @@ attributes:
   - browser
   - roku
   type: string
-- description: El nombre amigable del usuario.
+- description: Le nom courant de l'utilisateur.
   domain: User
   name: usr.name
   product_source:
@@ -283,7 +285,7 @@ attributes:
   - browser
   - roku
   type: string
-- description: El correo electrónico del usuario.
+- description: L'adresse e-mail de l'utilisateur.
   domain: User
   name: usr.email
   product_source:
@@ -294,115 +296,115 @@ attributes:
   - browser
   - roku
   type: string
-- description: El nombre del host.
+- description: Le hostname.
   domain: Syslog and log shippers
   name: syslog.hostname
   product_source:
   - icon-log
   type: string
-- description: El nombre de la aplicación. Generalmente remapeado al atributo reservado
+- description: Le nom de l'application. Généralement remappé à l'attribut réservé
     `service`.
   domain: Syslog and log shippers
   name: syslog.appname
   product_source:
   - icon-log
   type: string
-- description: La severidad del registro. Generalmente remapeado al atributo reservado
-    `status`.
+- description: La gravité du journal. Généralement remappé à l'attribut réservé `status`.
   domain: Syslog and log shippers
   name: syslog.severity
   product_source:
   - icon-log
   type: number
-- description: La marca de tiempo del registro. Generalmente remapeado al atributo
-    reservado `date`.
+- description: L'horodatage du journal. Généralement remappé à l'attribut réservé
+    `date`.
   domain: Syslog and log shippers
   name: syslog.timestamp
   product_source:
   - icon-log
   type: string
-- description: El nombre del entorno de donde provienen los registros.
+- description: Le nom de l'environnement d'où provient la source des logs.
   domain: Syslog and log shippers
   name: syslog.env
   product_source:
   - icon-log
   type: string
-- description: El identificador de la consulta DNS.
+- description: L'identificateur de la requête DNS.
   domain: DNS
   name: dns.id
   product_source:
   - icon-log
   type: string
-- description: El nombre de dominio consultado.
+- description: Le nom de domaine interrogé.
   domain: DNS
   name: dns.question.name
   product_source:
   - icon-log
   type: string
-- description: Un [código de dos octetos](https://es.wikipedia.org/wiki/Lista_de_tipos_de_registros_DNS)
-    que especifica el tipo de pregunta DNS.
+- description: Un [code de deux octets](https://en.wikipedia.org/wiki/List_of_DNS_record_types)
+    spécifiant le type de question DNS.
   domain: DNS
   name: dns.question.type
   product_source:
   - icon-log
   type: string
-- description: La clase buscada por la pregunta DNS (como IP al usar internet).
+- description: La classe recherchée par la question DNS (par exemple, IP lorsque vous
+    utilisez Internet).
   domain: DNS
   name: dns.question.class
   product_source:
   - icon-log
   type: string
-- description: El tamaño de la pregunta DNS en bytes.
+- description: La taille de la requête DNS en octets.
   domain: DNS
   name: dns.question.size
   product_source:
   - icon-log
   type: number
-- description: La dirección IP con la que responde el DNS.
+- description: L'adresse IP avec laquelle le DNS répond.
   domain: DNS
   name: dns.answer.name
   product_source:
   - icon-log
   type: string
-- description: Un [código de dos octetos](https://es.wikipedia.org/wiki/Lista_de_tipos_de_registros_DNS)
-    que especifica el tipo de respuesta DNS.
+- description: Un [code de deux octets](https://en.wikipedia.org/wiki/List_of_DNS_record_types)
+    spécifiant le type de réponse DNS.
   domain: DNS
   name: dns.answer.type
   product_source:
   - icon-log
   type: string
-- description: La clase respondida por el DNS.
+- description: La classe correspondant à la réponse du DNS.
   domain: DNS
   name: dns.answer.class
   product_source:
   - icon-log
   type: string
-- description: El tamaño de la respuesta DNS en bytes.
+- description: La taille de la réponse du DNS en octets.
   domain: DNS
   name: dns.answer.size
   product_source:
   - icon-log
   type: number
-- description: El código de respuesta del DNS.
+- description: Le code de réponse du DNS.
   domain: DNS
   name: dns.flags.rcode
   product_source:
   - icon-log
   type: string
-- description: El nombre compartido entre eventos generados por la misma actividad
-    (por ejemplo, autenticación).
+- description: Le nom partagé entre les événements générés par une même activité (par
+    exemple, authentification).
   domain: Events
   name: evt.name
   product_source:
   - icon-log
   type: string
-- description: El resultado del evento (por ejemplo, `éxito`, `fracaso`).
+- description: Le résultat de l'événement (par exemple, `success`, `failure`).
   domain: Events
   name: evt.outcome
   product_source:
   - icon-log
   type: string
-- description: Inicio del evento en milisegundos desde la época.
+- description: Le début de l'événement en millisecondes (format epoch).
   domain: RUM core attributes
   name: date
   product_source:
@@ -411,7 +413,7 @@ attributes:
   - ios
   - roku
   type: integer
-- description: El tipo de evento (por ejemplo, `visualización` o `recurso`).
+- description: Le type de l'événement (par exemple, `view` ou `resource`).
   domain: RUM core attributes
   name: type
   product_source:
@@ -421,7 +423,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: El ID de la aplicación Datadog generado al crear una aplicación RUM.
+- description: L'ID d'application Datadog généré lorsque vous créez une application
+    RUM.
   domain: RUM core attributes
   name: application.id
   product_source:
@@ -431,7 +434,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El nombre de la aplicación Datadog.
+- description: Le nom de l'application Datadog.
   domain: RUM core attributes
   name: application.name
   product_source:
@@ -440,8 +443,7 @@ attributes:
   - browser
   - ios
   type: string
-- description: El tipo de dispositivo reportado por el dispositivo (User-Agent del
-    sistema).
+- description: Le type d'appareil indiqué par l'appareil (User-Agent système)
   domain: Device (Android, iOS, Roku)
   name: device.type
   product_source:
@@ -450,8 +452,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: La marca del dispositivo reportada por el dispositivo (agente de usuario
-    del sistema).
+- description: La marque d'appareil indiquée par l'appareil (User-Agent système)
   domain: Device (Android, iOS, Roku)
   name: device.brand
   product_source:
@@ -460,8 +461,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El modelo del dispositivo reportado por el dispositivo (agente de usuario
-    del sistema).
+- description: Le modèle d'appareil indiqué par l'appareil (User-Agent système)
   domain: Device (Android, iOS, Roku)
   name: device.model
   product_source:
@@ -470,8 +470,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El nombre del dispositivo reportado por el dispositivo (agente de usuario
-    del sistema).
+- description: Le nom d'appareil indiqué par l'appareil (User-Agent système)
   domain: Device (Android, iOS, Roku)
   name: device.name
   product_source:
@@ -480,8 +479,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: Estado de la conexión de red del dispositivo (`conectado`, `no conectado`
-    o `quizás`).
+- description: Le statut de l'accessibilité au réseau de l'appareil (`connected`,
+    `not connected` ou `maybe`).
   domain: Connectivity (Android, iOS)
   name: connectivity.status
   product_source:
@@ -489,8 +488,8 @@ attributes:
   - android
   - ios
   type: string
-- description: La lista de interfaces de red disponibles (por ejemplo, `bluetooth`,
-    `celular`, `ethernet` o `wifi`).
+- description: La liste des interfaces réseau disponibles (par exemple, `bluetooth`,
+    `cellular`, `ethernet` ou `wifi`).
   domain: Connectivity (Android, iOS)
   name: connectivity.interfaces
   product_source:
@@ -498,7 +497,7 @@ attributes:
   - android
   - ios
   type: string
-- description: El tipo de tecnología de radio utilizada para la conexión celular.
+- description: Le type de technologie radio utilisée pour la connexion cellulaire.
   domain: Connectivity (Android, iOS)
   name: connectivity.cellular.technology
   product_source:
@@ -506,7 +505,7 @@ attributes:
   - android
   - ios
   type: string
-- description: El nombre del operador de la SIM.
+- description: Le nom de l'opérateur de la carte SIM.
   domain: Connectivity (Android, iOS)
   name: connectivity.cellular.carrier_name
   product_source:
@@ -514,8 +513,8 @@ attributes:
   - android
   - ios
   type: string
-- description: El nombre del sistema operativo según lo reportado por el dispositivo
-    (User-Agent del sistema).
+- description: Le nom du système d'exploitation indiqué par l'appareil (User-Agent
+    système).
   domain: Operating System (Android, iOS, Roku)
   name: os.name
   product_source:
@@ -524,8 +523,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: La versión del sistema operativo según lo reportado por el dispositivo
-    (User-Agent del sistema).
+- description: La version du système d'exploitation indiquée par l'appareil (User-Agent
+    système).
   domain: Operating System (Android, iOS, Roku)
   name: os.version
   product_source:
@@ -534,8 +533,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: La versión principal del sistema operativo según lo reportado por el
-    dispositivo (User-Agent del sistema).
+- description: La version majeure du système d'exploitation indiquée par l'appareil
+    (User-Agent système).
   domain: Operating System (Android, iOS, Roku)
   name: os.version_major
   product_source:
@@ -544,7 +543,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: Nombre del país.
+- description: Le nom du pays.
   domain: Geolocation
   name: geo.country
   product_source:
@@ -554,8 +553,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: El [código ISO](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
-    del país (por ejemplo, `US` para Estados Unidos o `FR` para Francia).
+- description: Le [code ISO](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+    du pays (par exemple, `US` pour les États-Unis ou `FR` pour la France).
   domain: Geolocation
   name: geo.country_iso_code
   product_source:
@@ -565,8 +564,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: Nombre del primer nivel de subdivisión del país (por ejemplo, `California`
-    en los Estados Unidos o el departamento de `Sarthe` en Francia).
+- description: 'Nom du premier niveau de division du pays (par exemple : `California`
+    aux États-Unis ou le département de la `Sarthe` en France).'
   domain: Geolocation
   name: geo.country_subdivision
   product_source:
@@ -576,7 +575,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: Código ISO del continente (`EU`, `AS`, `NA`, `AF`, `AN`, `SA` o `OC`).
+- description: Le code ISO du continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA` ou `OC`).
   domain: Geolocation
   name: geo.continent_code
   product_source:
@@ -586,8 +585,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: Nombre del continente (`Europa`, `Australia`, `América del Norte`,
-    `África`, `Antártida`, `América del Sur` o `Oceanía`).
+- description: Le nom du continent (`Europe`, `Australia`, `North America`, `Africa`,
+    `Antarctica`, `South America` ou `Oceania`).
   domain: Geolocation
   name: geo.continent
   product_source:
@@ -597,8 +596,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El nombre de la ciudad (por ejemplo, `San Francisco`, `París` o `Nueva
-    York`).
+- description: Le nom de la ville (par exemple, `San Francisco`, `Paris` ou `New York`).
   domain: Geolocation
   name: geo.city
   product_source:
@@ -608,7 +606,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: Identificador del usuario.
+- description: L'identificateur de l'utilisateur.
   domain: RUM user attributes
   name: usr.id
   product_source:
@@ -618,7 +616,7 @@ attributes:
   - browser
   - roku
   type: string
-- description: Nombre del usuario.
+- description: Le nom de l'utilisateur.
   domain: Global user attributes (Android, iOS, Browser, Roku)
   name: usr.name
   product_source:
@@ -628,7 +626,7 @@ attributes:
   - browser
   - roku
   type: string
-- description: Correo electrónico del usuario.
+- description: L'adresse e-mail de l'utilisateur.
   domain: Global user attributes (Android, iOS, Browser, Roku)
   name: usr.email
   product_source:
@@ -638,7 +636,7 @@ attributes:
   - browser
   - roku
   type: string
-- description: ID único de la sesión.
+- description: Identifiant unique de la session.
   domain: Session (Android events, iOS events, Roku events)
   name: session.id
   product_source:
@@ -647,7 +645,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: Tipo de la sesión (`usuario`).
+- description: Le type de la session (`user`).
   domain: Session (Android events, iOS events, Roku events)
   name: session.type
   product_source:
@@ -656,9 +654,9 @@ attributes:
   - ios
   - roku
   type: string
-- description: Indica si la sesión está actualmente activa. La sesión finaliza si
-    un usuario navega fuera de la aplicación o cierra la ventana del navegador, y
-    expira después de 4 horas de actividad o 15 minutos de inactividad.
+- description: Le statut d'activité de la session. La session se termine lorsqu’un
+    utilisateur quitte l’application ou ferme la fenêtre du navigateur. Elle expire
+    après 4 heures d’activité ou 15 minutes d’inactivité.
   domain: Session (Android events, iOS events, Roku events)
   name: session.is_active
   product_source:
@@ -667,7 +665,7 @@ attributes:
   - ios
   - roku
   type: boolean
-- description: URL de la vista inicial de la sesión.
+- description: L'URL de la vue initiale de la session.
   domain: Session (Android events, iOS events, Roku events)
   name: session.initial_view.url
   product_source:
@@ -676,7 +674,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: Nombre de la vista inicial de la sesión.
+- description: Le nom de la vue initiale de la session.
   domain: Session (Android events, iOS events, Roku events)
   name: session.initial_view.name
   product_source:
@@ -685,7 +683,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: URL de la última vista de la sesión.
+- description: L'URL de la dernière vue de la session.
   domain: Session (Android events, iOS events, Roku events)
   name: session.last_view.url
   product_source:
@@ -694,7 +692,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: Nombre de la última vista de la sesión.
+- description: Le nom de la dernière vue de la session.
   domain: Session (Android events, iOS events, Roku events)
   name: session.last_view.name
   product_source:
@@ -703,9 +701,9 @@ attributes:
   - ios
   - roku
   type: string
-- description: Dirección IP de la sesión extraída de la conexión TCP de la ingesta.
-    Si desea dejar de recopilar este atributo, cambie la configuración en los [detalles
-    de la aplicación](/data_security/real_user_monitoring/#ip-address).
+- description: L'adresse IP de la session extraite à partir de la connexion TCP de
+    l'admission. Si vous souhaitez arrêter de collecter cet attribut, modifiez le
+    paramètre dans vos [détails de l'application](/data_security/real_user_monitoring/#ip-address).
   domain: Session (Android events, iOS events, Roku events)
   name: session.ip
   product_source:
@@ -714,8 +712,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: Información del `User-Agent` del sistema para interpretar la información
-    del dispositivo.
+- description: Les informations `User-Agent` système interprétant les informations
+    de l'appareil.
   domain: Session (Android events, iOS events, Roku events)
   name: session.useragent
   product_source:
@@ -724,7 +722,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: ID único de la vista inicial correspondiente al evento.
+- description: L'ID unique de la vue initiale correspondant à l'événement.
   domain: View (Android events, iOS events, Roku events)
   name: view.id
   product_source:
@@ -733,8 +731,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: Nombre canónico de la clase correspondiente al evento. Para iOS, la
-    URL de la clase `UIViewController` correspondiente al evento.
+- description: Nom canonique de la classe correspondant à l'événement. Pour iOS, l'URL
+    de la classe `UIViewController` correspondant à l'événement.
   domain: View (Android events, iOS events, Roku events)
   name: view.url
   product_source:
@@ -743,7 +741,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: Nombre personalizable de la vista correspondiente al evento.
+- description: Nom personnalisable de la vue correspond à l'événement.
   domain: View (Android events, iOS events, Roku events)
   name: view.name
   product_source:
@@ -752,7 +750,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: Identificador único del recurso.
+- description: Identifiant unique de la ressource.
   domain: Resource (Android events, iOS events, Roku events)
   name: resource.id
   product_source:
@@ -761,8 +759,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: El tipo de recurso que se está recopilando (por ejemplo, `xhr`, `imagen`,
-    `fuente`, `css` o `js`).
+- description: Le type de ressource à recueillir (par exemple, `xhr`, `image`, `font`,
+    `css` ou `js`).
   domain: Resource (Android events, iOS events, Roku events)
   name: resource.type
   product_source:
@@ -771,7 +769,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El método HTTP (por ejemplo, `POST`, `GET`, `PATCH` o `DELETE`).
+- description: La méthode HTTP (par exemple, `POST`, `GET` `PATCH` ou `DELETE`).
   domain: Resource (Android events, iOS events, Roku events)
   name: resource.method
   product_source:
@@ -780,7 +778,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El código de estado de la respuesta.
+- description: Le code de statut de la réponse.
   domain: Resource (Android events, iOS events, Roku events)
   name: resource.status_code
   product_source:
@@ -789,7 +787,7 @@ attributes:
   - ios
   - roku
   type: number
-- description: La URL del recurso.
+- description: L'URL de la ressource.
   domain: Resource (Android events, iOS events, Roku events)
   name: resource.url
   product_source:
@@ -798,7 +796,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El nombre del proveedor del recurso. El valor predeterminado es `desconocido`.
+- description: Le nom du fournisseur de ressources. Par défaut, c'est `unknown`.
   domain: Resource (Android events, iOS events, Roku events)
   name: resource.provider.name
   product_source:
@@ -807,7 +805,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El dominio del proveedor del recurso.
+- description: Le domaine du fournisseur de ressource.
   domain: Resource (Android events, iOS events, Roku events)
   name: resource.provider.domain
   product_source:
@@ -816,8 +814,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: El tipo de proveedor del recurso (por ejemplo, `first-party`, `cdn`,
-    `ad` o `analytics`).
+- description: Le type de fournisseur de ressources (par exemple, `first-party`, `cdn`,
+    `ad` ou `analytics`).
   domain: Resource (Android events, iOS events, Roku events)
   name: resource.provider.type
   product_source:
@@ -826,7 +824,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: De dónde proviene el error (por ejemplo, `webview`, `logger` o `red`).
+- description: L'origine de l'erreur (par exemple, `webview`, `logger` ou `network`).
   domain: Error (Browser events, Android events, iOS events, Roku events)
   name: error.source
   product_source:
@@ -836,7 +834,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El tipo de error (o código de error en algunos casos).
+- description: Le type d'erreur (ou le code dans certains cas).
   domain: Error (Browser events, Android events, iOS events, Roku events)
   name: error.type
   product_source:
@@ -847,8 +845,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: Un mensaje conciso, legible por humanos, de una línea que explica el
-    evento.
+- description: Un message d'une ligne lisible et concis décrivant l'événement.
   domain: Error (Browser events, Android events, iOS events, Roku events)
   name: error.message
   product_source:
@@ -860,7 +857,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: La traza de pila o información complementaria sobre el error.
+- description: La trace de pile ou toutes informations complémentaires relatives à
+    l'erreur.
   domain: Error (Browser events, Android events, iOS events, Roku events)
   name: error.stack
   product_source:
@@ -872,7 +870,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: UUID del error.
+- description: UUID de l'erreur.
   domain: Error (Android events, iOS events, Roku events)
   name: error.id
   product_source:
@@ -881,7 +879,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El código de estado de la respuesta.
+- description: Le code de statut de la réponse.
   domain: Network error (Android events, iOS events, Roku events)
   name: error.resource.status_code
   product_source:
@@ -890,7 +888,7 @@ attributes:
   - ios
   - roku
   type: number
-- description: El método HTTP (por ejemplo, `POST` o `GET`).
+- description: La méthode HTTP (par exemple, `POST` ou `GET`).
   domain: Network error (Android events, iOS events, Roku events)
   name: error.resource.method
   product_source:
@@ -899,7 +897,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: La URL del recurso.
+- description: L'URL de la ressource.
   domain: Network error (Android events, iOS events, Roku events)
   name: error.resource.url
   product_source:
@@ -908,7 +906,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El nombre del proveedor del recurso. El valor predeterminado es `desconocido`.
+- description: Le nom du fournisseur de ressources. Par défaut, c'est `unknown`.
   domain: Network error (Android events, iOS events, Roku events)
   name: error.resource.provider.name
   product_source:
@@ -917,7 +915,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: El dominio del proveedor del recurso.
+- description: Le domaine du fournisseur de ressource.
   domain: Network error (Android events, iOS events, Roku events)
   name: error.resource.provider.domain
   product_source:
@@ -926,8 +924,8 @@ attributes:
   - ios
   - roku
   type: string
-- description: El tipo de proveedor del recurso (por ejemplo, `primera parte`, `cdn`,
-    `anuncio` o `analítica`).
+- description: Le type de fournisseur de ressources (par exemple, `first-party`, `cdn`,
+    `ad` ou `analytics`).
   domain: Network error (Android events, iOS events, Roku events)
   name: error.resource.provider.type
   product_source:
@@ -936,7 +934,7 @@ attributes:
   - ios
   - roku
   type: string
-- description: UUID de la acción del usuario.
+- description: UUID de l'action utilisateur.
   domain: Action (Browser events, Android events, iOS events, Roku events)
   name: action.id
   product_source:
@@ -946,9 +944,9 @@ attributes:
   - ios
   - roku
   type: string
-- description: Tipo de la acción del usuario (por ejemplo, `tap` o `inicio_de_aplicación`).
-    Para [Acciones de Usuario de Navegador Personalizadas](/real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions),
-    se establece en `custom`.
+- description: Le type de l'action utilisateur (par exemple, `tap` ou `application_start`).
+    Pour [Actions Utilisateur Personnalisées](/real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions),
+    il est défini sur `custom`.
   domain: Action (Browser events, Android events, iOS events, Roku events)
   name: action.type
   product_source:
@@ -958,9 +956,9 @@ attributes:
   - ios
   - roku
   type: string
-- description: Para acciones recolectadas automáticamente, el nombre del elemento
-    con el que interactuó el usuario. Para acciones personalizadas, el nombre proporcionado
-    en la llamada a la API (por ejemplo, `Clic en finalizar compra`).
+- description: Pour les actions collectées automatiquement, le nom de l'élément avec
+    lequel l'utilisateur a interagi. Pour les actions personnalisées, le nom fourni
+    dans l'appel API (par exemple, `Click on checkout`).
   domain: Action (Browser events, Android events, iOS events, Roku events)
   name: action.target.name
   product_source:
@@ -970,690 +968,687 @@ attributes:
   - ios
   - roku
   type: string
-- description: ID generado aleatoriamente para cada vista de página.
+- description: ID généré aléatoirement pour chaque vue de page.
   domain: View (Browser)
   name: view.id
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El tipo de carga de página, `carga_inicial` o `cambio_de_ruta`. Para
-    más información, consulte la [documentación de soporte para aplicaciones de una
-    sola página](/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa).
+- description: Le type de chargement de page, `initial_load` ou `route_change`. Pour
+    plus d'informations, consultez la [documentation de support des applications à
+    page unique](/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa).
   domain: View (Browser)
   name: view.loading_type
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La URL de la página web anterior desde la cual se siguió un enlace
-    a la página actualmente solicitada.
+- description: L'URL de la page web précédente, à partir de laquelle un lien vers
+    la page demandée à été sélectionné.
   domain: View (Browser)
   name: view.referrer
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La URL de la visualización.
+- description: L'URL de la vue.
   domain: View (Browser)
   name: view.url
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La parte hash de la URL.
+- description: La partie de l'URL correspondant au hachage.
   domain: View (Browser)
   name: view.url_hash
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La parte del servidor de la URL.
+- description: La partie de l'URL correspondant au host.
   domain: View (Browser)
   name: view.url_host
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La parte de la ruta de la URL.
+- description: La partie de l'URL correspondant au chemin.
   domain: View (Browser)
   name: view.url_path
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El grupo de URL automático generado para URLs similares (por ejemplo,
-    `/dashboard/?` para `/dashboard/123` y `/dashboard/456`).
+- description: Le groupe d'URL généré automatiquement pour les URL connexes (par exemple,
+    `/dashboard/?` pour `/dashboard/123` et `/dashboard/456`).
   domain: View (Browser)
   name: view.url_path_group
   product_source:
   - icon-rum
   - browser
   type: string
-- description: Las partes de la cadena de consulta de la URL descompuestas como atributos
-    clave/valor de parámetros de consulta.
+- description: Les parties de l'URL correspondant à la chaîne de requête, décomposées
+    en attributs key/value de paramètres de requête.
   domain: View (Browser)
   name: view.url_query
   product_source:
   - icon-rum
   - browser
   type: object
-- description: La parte del esquema de la URL.
+- description: La partie de l'URL correspondant au format.
   domain: View (Browser)
   name: view.url_scheme
   product_source:
   - icon-rum
   - browser
   type: object
-- description: El tipo de dispositivo reportado por el dispositivo (encabezado HTTP
-    User-Agent).
+- description: Le type d'appareil indiqué par l'appareil (en-tête HTTP User-Agent).
   domain: Device (Browser)
   name: device.type
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La marca del dispositivo reportada por el dispositivo (encabezado HTTP
-    User-Agent).
+- description: La marque de l'appareil indiquée par l'appareil (en-tête HTTP User-Agent).
   domain: Device (Browser)
   name: device.brand
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El modelo del dispositivo según lo reportado por el dispositivo (encabezado
-    HTTP User-Agent).
+- description: Le modèle de l'appareil indiqué par l'appareil (en-tête HTTP User-Agent).
   domain: Device (Browser)
   name: device.model
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El nombre del dispositivo según lo reportado por el dispositivo (encabezado
-    HTTP User-Agent).
+- description: Le nom de l'appareil indiqué par l'appareil (en-tête HTTP User-Agent).
   domain: Device (Browser)
   name: device.name
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El nombre del sistema operativo según lo reportado por el dispositivo
-    (encabezado HTTP User-Agent).
+- description: Le nom du système d'exploitation indiqué par l'appareil (en-tête HTTP
+    User-Agent).
   domain: Operating system (Browser)
   name: os.name
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La versión del sistema operativo según lo reportado por el dispositivo
-    (encabezado HTTP User-Agent).
+- description: La version du système d'exploitation indiquée par l'appareil (en-tête
+    HTTP User-Agent).
   domain: Operating system (Browser)
   name: os.version
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La versión principal del sistema operativo según lo reportado por el
-    dispositivo (encabezado HTTP User-Agent).
+- description: La version majeure du système d'exploitation indiquée par l'appareil
+    (en-tête HTTP User-Agent).
   domain: Operating system (Browser)
   name: os.version_major
   product_source:
   - icon-rum
   - browser
   type: string
-- description: ID generado aleatoriamente para cada sesión.
+- description: Un ID généré aléatoirement pour chaque session.
   domain: Session (Browser events)
   name: session.id
   product_source:
   - icon-rum
   - browser
   type: string
-- description: Dirección IP del cliente. Si desea dejar de recopilar este atributo,
-    cambie la configuración en los [detalles de la aplicación](/data_security/real_user_monitoring/#ip-address).
+- description: Adresse IP du client. Si vous souhaitez arrêter de collecter cet attribut,
+    modifiez le paramètre dans vos [détails de l'application](/data_security/real_user_monitoring/#ip-address).
   domain: Session (Browser events)
   name: session.ip
   product_source:
   - icon-rum
   - browser
   type: string
-- description: Indica si la sesión está actualmente activa. La sesión termina después
-    de 4 horas de actividad o 15 minutos de inactividad.
+- description: Le statut d'activité de la session. La session se termine après 4 heures
+    d'activité ou 15 minutes d'inactivité.
   domain: Session (Browser events)
   name: session.is_active
   product_source:
   - icon-rum
   - browser
   type: boolean
-- description: El tipo de sesión, `usuario` o `synthetics`. Las sesiones de [Synthetic
-    Browser Tests](/synthetics/browser_tests/) están excluidas de la facturación.
+- description: Le type de session, `utilisateur` ou `synthétiques`. Les sessions provenant
+    des [Tests de Navigateur Synthétiques](/synthetics/browser_tests/) sont exclues
+    de la facturation.
   domain: Session (Browser events)
   name: session.type
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La URL de la página web anterior desde la cual se siguió un enlace
-    a la página actualmente solicitada.
+- description: L'URL de la page web précédente, à partir de laquelle un lien vers
+    la page demandée à été sélectionné.
   domain: Session (Browser events)
   name: session.referrer
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El ID de la primera visualización RUM generada por el usuario.
+- description: L'ID de la première vue RUM générée par l'utilisateur.
   domain: Session (Browser events)
   name: session.initial_view.id
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La parte del servidor de la URL.
+- description: La partie de l'URL correspondant au host.
   domain: Session (Browser events)
   name: session.initial_view.url_host
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La parte de la ruta de la URL.
+- description: La partie de l'URL correspondant au chemin.
   domain: Session (Browser events)
   name: session.initial_view.url_path
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El grupo de URL automático generado para URLs similares (por ejemplo,
-    `/dashboard/?` para `/dashboard/123` y `/dashboard/456`).
+- description: Le groupe d'URL généré automatiquement pour les URL connexes (par exemple,
+    `/dashboard/?` pour `/dashboard/123` et `/dashboard/456`).
   domain: Session (Browser events)
   name: session.initial_view.url_path_group
   product_source:
   - icon-rum
   - browser
   type: string
-- description: Las partes de la cadena de consulta de la URL descompuestas como atributos
-    clave/valor de parámetros de consulta.
+- description: Les parties de l'URL correspondant à la chaîne de requête, décomposées
+    en attributs key/value de paramètres de requête.
   domain: Session (Browser events)
   name: session.initial_view.url_query
   product_source:
   - icon-rum
   - browser
   type: object
-- description: La parte del esquema de la URL.
+- description: La partie de l'URL correspondant au format.
   domain: Session (Browser events)
   name: session.initial_view.url_scheme
   product_source:
   - icon-rum
   - browser
   type: object
-- description: El ID de la última visualización RUM generada por el usuario.
+- description: L'ID de la dernière vue RUM générée par l'utilisateur.
   domain: Session (Browser events)
   name: session.last_view.id
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La parte del servidor de la URL.
+- description: La partie de l'URL correspondant au host.
   domain: Session (Browser events)
   name: session.last_view.url_host
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La parte de la ruta de la URL.
+- description: La partie de l'URL correspondant au chemin.
   domain: Session (Browser events)
   name: session.last_view.url_path
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El grupo de URL automático generado para URLs similares (por ejemplo,
-    `/dashboard/?` para `/dashboard/123` y `/dashboard/456`).
+- description: Le groupe d'URL généré automatiquement pour les URL connexes (par exemple,
+    `/dashboard/?` pour `/dashboard/123` et `/dashboard/456`).
   domain: Session (Browser events)
   name: session.last_view.url_path_group
   product_source:
   - icon-rum
   - browser
   type: string
-- description: Las partes de la cadena de consulta de la URL descompuestas como atributos
-    clave/valor de parámetros de consulta.
+- description: Les parties de l'URL correspondant à la chaîne de requête, décomposées
+    en attributs key/value de paramètres de requête.
   domain: Session (Browser events)
   name: session.last_view.url_query
   product_source:
   - icon-rum
   - browser
   type: object
-- description: La parte del esquema de la URL.
+- description: La partie de l'URL correspondant au format.
   domain: Session (Browser events)
   name: session.last_view.url_scheme
   product_source:
   - icon-rum
   - browser
   type: object
-- description: El tipo de recurso que se está recolectando (por ejemplo, `css`, `javascript`,
-    `media`, `XHR` o `imagen`).
+- description: Le type de ressource à recueillir (par exemple, `css`, `javascript`,
+    `media`, `XHR` ou `image`).
   domain: Resource (Browser events)
   name: resource.type
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El método HTTP (por ejemplo, `POST` o `GET`).
+- description: La méthode HTTP (par exemple, `POST` ou `GET`).
   domain: Resource (Browser events)
   name: resource.method
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El código de estado de la respuesta.
+- description: Le code de statut de la réponse.
   domain: Resource (Browser events)
   name: resource.status_code
   product_source:
   - icon-rum
   - browser
   type: number
-- description: La URL del recurso.
+- description: L'URL de la ressource.
   domain: Resource (Browser events)
   name: resource.url
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La parte del servidor de la URL.
+- description: La partie de l'URL correspondant au host.
   domain: Resource (Browser events)
   name: resource.url_host
   product_source:
   - icon-rum
   - browser
   type: string
-- description: La parte de la ruta de la URL.
+- description: La partie de l'URL correspondant au chemin.
   domain: Resource (Browser events)
   name: resource.url_path
   product_source:
   - icon-rum
   - browser
   type: string
-- description: Las partes de la cadena de consulta de la URL descompuestas como atributos
-    clave/valor de parámetros de consulta.
+- description: Les parties de l'URL correspondant à la chaîne de requête, décomposées
+    en attributs key/value de paramètres de requête.
   domain: Resource (Browser events)
   name: resource.url_query
   product_source:
   - icon-rum
   - browser
   type: object
-- description: El nombre del protocolo de la URL (HTTP o HTTPS).
+- description: Le nom du protocole de l'URL (HTTP ou HTTPS).
   domain: Resource (Browser events)
   name: resource.url_scheme
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El nombre del proveedor del recurso. El valor predeterminado es `desconocido`.
+- description: Le nom du fournisseur de ressources. Par défaut, c'est `unknown`.
   domain: Resource (Browser events)
   name: resource.provider.name
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El dominio del proveedor del recurso.
+- description: Le domaine du fournisseur de ressource.
   domain: Resource (Browser events)
   name: resource.provider.domain
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El tipo de proveedor del recurso (por ejemplo, `primera parte`, `cdn`,
-    `anuncio` o `analítica`).
+- description: Le type de fournisseur de ressources (par exemple, `first-party`, `cdn`,
+    `ad` ou `analytics`).
   domain: Resource (Browser events)
   name: resource.provider.type
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El tipo de señal de frustración detectada por el SDK del Navegador
-    RUM (`rage_click`, `dead_click` o `error_click`).
+- description: Le type de signal de frustration détecté par le RUM Browser SDK (`rage_click`,
+    `dead_click` ou `error_click`).
   domain: Frustration signals (Browser events)
   name: action.frustration.type
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El parámetro en la URL que rastrea la fuente del tráfico.
+- description: Le paramètre de l'URL effectuant le suivi de la source du trafic.
   domain: UTM (Browser events)
   name: view.url_query.utm_source
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El parámetro en la URL que rastrea el canal de donde proviene el tráfico.
+- description: Le paramètre de l'URL effectuant le suivi du canal à l'origine du trafic.
   domain: UTM (Browser events)
   name: view.url_query.utm_medium
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El parámetro en la URL que identifica la campaña de marketing específica
-    vinculada a esa visualización.
+- description: Le paramètre de l'URL identifiant la campagne marketing spécifique
+    liée à cette vue.
   domain: UTM (Browser events)
   name: view.url_query.utm_campaign
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El parámetro en la URL que identifica el elemento específico en el
-    que un usuario hizo clic dentro de una campaña de marketing.
+- description: Le paramètre de l'URL identifiant l'élément spécifique sur lequel un
+    utilisateur a cliqué dans une campagne marketing.
   domain: UTM (Browser events)
   name: view.url_query.utm_content
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El parámetro en la URL que rastrea la palabra clave que un usuario
-    buscó para activar una campaña dada.
+- description: Le paramètre de l'URL effectuant le suivi du mot clé recherché par
+    un utilisateur et ayant déclenché une campagne donnée.
   domain: UTM (Browser events)
   name: view.url_query.utm_term
   product_source:
   - icon-rum
   - browser
   type: string
-- description: El lenguaje del SDK del cliente utilizado para generar el tramo. Puede
-    ser uno de `cpp`, `dotnet`, `go`, `jvm`, `javascript`, `php`, `python`, `ruby`.
+- description: Le langage du SDK client utilisé pour générer le span. Il peut s'agir
+    de `cpp`, `dotnet`, `go`, `jvm`, `javascript`, `php`, `python`, `ruby`.
   domain: APM core
   name: language
   product_source:
   - icon-apm
   type: string
-- description: El valor de la variable de entorno `DD_ENV` o `env` definido por el
-    usuario para el proceso en ejecución.
+- description: La valeur de la variable d'environnement `DD_ENV` ou du paramètre `env`
+    défini par l'utilisateur pour le processus en cours d'exécution.
   domain: APM core (Reserved)
   name: env
   product_source:
   - icon-apm
   type: string
-- description: El valor de la variable de entorno `DD_VERSION` o `version` definido
-    por el usuario para el proceso en ejecución.
+- description: La valeur de la variable d'environnement `DD_VERSION` ou du paramètre
+    `version` défini par l'utilisateur pour le processus en cours d'exécution.
   domain: APM core (Reserved)
   name: version
   product_source:
   - icon-apm
   type: string
-- description: La cadena que representa el tipo de unidad de trabajo manejada por
-    el tramo. Puede ser uno de servidor, cliente, productor, consumidor o interno.
-    Para más información, consulte la [documentación de OpenTelemetry SpanKind](https://opentelemetry.io/docs/specs/otel/trace/api/#spankind).
+- description: La chaîne représentant le type d'unité de travail gérée par le span.
+    Il peut s'agir de serveur, client, producteur, consommateur, ou interne. Pour
+    plus d'informations, consultez la [documentation OpenTelemetry SpanKind](https://opentelemetry.io/docs/specs/otel/trace/api/#spankind).
   domain: APM core
   name: span.kind
   product_source:
   - icon-apm
   type: string
-- description: El nombre de la biblioteca o integración que creó el tramo.
+- description: Le nom de la bibliothèque ou de l'intégration qui a créé la span.
   domain: APM core
   name: component
   product_source:
   - icon-apm
   type: string
-- description: La dirección IP del cliente que inició la conexión entrante.
+- description: L'adresse IP du client à l'origine de la connexion entrante.
   domain: Network communications
   name: network.client.ip
   product_source:
   - icon-apm
   - icon-log
   type: string
-- description: La dirección IP a la que se está realizando la conexión saliente.
+- description: L'adresse IP de destination de la connexion sortante.
   domain: Network communications
   name: network.destination.ip
   product_source:
   - icon-apm
   - icon-log
   type: string
-- description: La dirección IP del servidor local.
+- description: L'adresse IP du host local.
   domain: Network communications
   name: network.host.ip
   product_source:
   - icon-apm
   type: string
-- description: El puerto del cliente que inició la conexión.
+- description: Le port du client qui a établi la connexion.
   domain: Network communications
   name: network.client.port
   product_source:
   - icon-apm
   - icon-log
   type: number
-- description: El número de puerto remoto de la conexión saliente.
+- description: Le numéro de port distant de la connexion sortante.
   domain: Network communications
   name: network.destination.port
   product_source:
   - icon-apm
   - icon-log
   type: number
-- description: El nombre del servidor del cliente que inició la conexión entrante.
+- description: Le hostname du client à l'origine de la connexion entrante.
   domain: Network communications
   name: network.client.name
   product_source:
   - icon-apm
   type: string
-- description: El nombre del servidor local.
+- description: Le hostname local.
   domain: Network communications
   name: network.host.name
   product_source:
   - icon-apm
   type: string
-- description: El protocolo de transporte utilizado para realizar la conexión entrante.
+- description: Le protocole de transport utilisé pour la connexion entrante.
   domain: Network communications
   name: network.client.transport
   product_source:
   - icon-apm
   type: string
-- description: El protocolo de transporte utilizado para realizar la conexión saliente.
+- description: Le protocole de transport utilisé pour la connexion sortante.
   domain: Network communications
   name: network.destination.transport
   product_source:
   - icon-apm
   type: string
-- description: El código de estado de la respuesta HTTP.
+- description: Le code de statut de la réponse HTTP.
   domain: HTTP requests
   name: http.status_code
   product_source:
   - icon-apm
   - icon-log
   type: string
-- description: La URL de la solicitud HTTP, incluyendo la cadena de consulta ofuscada.
-    Para más información sobre ofuscación, consulte [Configurar la Seguridad de Datos](https://docs.datadoghq.com/tracing/configure_data_security/).
+- description: L'URL de la requête HTTP, y compris la chaîne de requête obfusquée.
+    Pour plus d'informations sur l'obfuscation, consultez [Configurer la Sécurité
+    des Données](https://docs.datadoghq.com/tracing/configure_data_security/).
   domain: HTTP requests
   name: http.url
   product_source:
   - icon-apm
   - icon-log
   type: string
-- description: La versión de HTTP utilizada para la solicitud.
+- description: La version HTTP utilisée pour la requête.
   domain: HTTP requests
   name: http.version
   product_source:
   - icon-apm
   - icon-log
   type: string
-- description: El puerto del cliente que inició la conexión.
+- description: Le port du client qui a établi la connexion.
   domain: HTTP requests
   name: http.method
   product_source:
   - icon-apm
   - icon-log
   type: string
-- description: La ruta coincidente (plantilla de ruta). Por ejemplo, `/users/:userID`.
+- description: La route correspondante (modèle de chemin). Par exemple, `/users/:userID`.
   domain: HTTP requests
   name: http.route
   product_source:
   - icon-apm
   type: string
-- description: La dirección IP del cliente original detrás de todos los proxies, si
-    se conoce. Descubierto a partir de encabezados como `X-Forwarded-For`.
+- description: L'adresse IP du client d'origine derrière tous les proxies, si connue.
+    Découverte à partir d'en-têtes tels que `X-Forwarded-For`.
   domain: HTTP requests
   name: http.client_ip
   product_source:
   - icon-apm
   type: string
-- description: El tipo de dirección IP, como `pública`, `privada` o `reservada`.
+- description: Le type d'adresse IP, tel que `publique`, `privée`, ou `réservée`.
   domain: HTTP client IP details
   name: http.client_ip_details.type
   product_source:
   - icon-apm
   type: string
-- description: El nombre del país al que se resuelve la IP del cliente.
+- description: Le nom du pays auquel l'adresse IP du client correspond.
   domain: HTTP client IP details
   name: http.client_ip_details.country.name
   product_source:
   - icon-apm
   type: string
-- description: Código [ISO](https://es.wikipedia.org/wiki/Anexo:C%C3%B3digos_ISO_3166-1)
-    del país (por ejemplo, `US` para Estados Unidos, `FR` para Francia).
+- description: Le [code ISO](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+    du pays (par exemple, `US` pour les États-Unis, `FR` pour la France).
   domain: HTTP client IP details
   name: http.client_ip_details.country.iso_code
   product_source:
   - icon-apm
   type: string
-- description: El código ISO del continente (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).
+- description: Le code ISO du continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).
   domain: HTTP client IP details
   name: http.client_ip_details.continent.code
   product_source:
   - icon-apm
   type: string
-- description: El nombre del continente al que se resuelve la IP del cliente.
+- description: Le nom du continent auquel l'adresse IP du client correspond.
   domain: HTTP client IP details
   name: http.client_ip_details.continent.name
   product_source:
   - icon-apm
   type: string
-- description: El nombre de la subdivisión de primer nivel (como un estado o región)
-    a la que se resuelve la IP del cliente.
+- description: Le nom de la subdivision de premier niveau (comme un état ou une région)
+    à laquelle l'adresse IP du client correspond.
   domain: HTTP client IP details
   name: http.client_ip_details.subdivision.name
   product_source:
   - icon-apm
   type: string
-- description: El [código ISO](https://es.wikipedia.org/wiki/ISO_3166-2) de la subdivisión
-    de primer nivel (por ejemplo, `CA-ON` para Ontario, Canadá).
+- description: Le [code ISO](https://en.wikipedia.org/wiki/ISO_3166-2) de la subdivision
+    de premier niveau (par exemple, `CA-ON` pour l'Ontario, Canada).
   domain: HTTP client IP details
   name: http.client_ip_details.subdivision.iso_code
   product_source:
   - icon-apm
   type: string
-- description: Nombre de la ciudad a la que se resuelve la IP del cliente.
+- description: Le nom de la ville auquel l'adresse IP du client correspond.
   domain: HTTP client IP details
   name: http.client_ip_details.city.name
   product_source:
   - icon-apm
   type: string
-- description: La latitud de la ubicación a la que se resuelve la IP del cliente.
+- description: La latitude de l'emplacement auquel l'adresse IP du client correspond.
   domain: HTTP client IP details
   name: http.client_ip_details.location.latitude
   product_source:
   - icon-apm
   type: number
-- description: La longitud de la ubicación a la que se resuelve la IP del cliente.
+- description: La longitude de l'emplacement auquel l'adresse IP du client correspond.
   domain: HTTP client IP details
   name: http.client_ip_details.location.longitude
   product_source:
   - icon-apm
   type: number
-- description: El identificador de zona horaria de IANA (por ejemplo, `America/Toronto`)
-    asociado con la IP del cliente.
+- description: L'identifiant de fuseau horaire IANA (par exemple, `America/Toronto`)
+    associé à l'adresse IP du client.
   domain: HTTP client IP details
   name: http.client_ip_details.timezone
   product_source:
   - icon-apm
   type: string
-- description: El número de sistema autónomo (ASN) al que pertenece la IP del cliente
-    (por ejemplo, `AS577`).
+- description: Le numéro de système autonome (ASN) auquel appartient l'adresse IP
+    du client (par exemple, `AS577`).
   domain: HTTP client IP details
   name: http.client_ip_details.as.number
   product_source:
   - icon-apm
   type: string
-- description: El nombre de la organización que opera el sistema autónomo (por ejemplo,
+- description: Le nom de l'organisation qui gère le système autonome (par exemple,
     `Bell Canada`).
   domain: HTTP client IP details
   name: http.client_ip_details.as.name
   product_source:
   - icon-apm
   type: string
-- description: El dominio principal asociado con el sistema autónomo (por ejemplo,
-    `bell.ca`).
+- description: Le domaine principal associé au système autonome (par exemple, `bell.ca`).
   domain: HTTP client IP details
   name: http.client_ip_details.as.domain
   product_source:
   - icon-apm
   type: string
-- description: El prefijo IP anunciado por el sistema autónomo (por ejemplo, `65.95.0.0/16`).
+- description: Le préfixe IP annoncé par le système autonome (par exemple, `65.95.0.0/16`).
   domain: HTTP client IP details
   name: http.client_ip_details.as.route
   product_source:
   - icon-apm
   type: string
-- description: La clasificación del sistema autónomo (por ejemplo, `isp`, `hosting`,
-    `negocios`, `educación`).
+- description: La classification du système autonome (par exemple, `isp`, `hosting`,
+    `business`, `education`).
   domain: HTTP client IP details
   name: http.client_ip_details.as.type
   product_source:
   - icon-apm
   type: string
-- description: El encabezado `User-Agent` recibido con la solicitud.
+- description: Le `User-Agent` indiqué dans l'en-tête de la requête reçue.
   domain: HTTP requests
   name: http.useragent
   product_source:
   - icon-apm
   - icon-log
   type: string
-- description: El tamaño del cuerpo de la carga útil de la solicitud en bytes.
+- description: La taille en octets du corps de la charge utile de la requête.
   domain: HTTP requests
   name: http.request.content_length
   product_source:
   - icon-apm
   type: number
-- description: El tamaño del cuerpo de la carga útil de la respuesta en bytes.
+- description: La taille en octets du corps de la charge utile de la réponse.
   domain: HTTP requests
   name: http.response.content_length
   product_source:
   - icon-apm
   type: number
-- description: El tamaño del cuerpo de la carga útil de la solicitud sin comprimir
-    después de la decodificación del transporte.
+- description: La taille du corps de la charge utile de la requête sans compression
+    après décodage du transport.
   domain: HTTP requests
   name: http.request.content_length_uncompressed
   product_source:
   - icon-apm
   type: number
-- description: El tamaño del cuerpo de la carga útil de la respuesta sin comprimir
-    después de la decodificación del transporte.
+- description: La taille du corps de la charge utile de la réponse sans compression
+    après décodage du transport.
   domain: HTTP requests
   name: http.response.content_length_uncompressed
   product_source:
   - icon-apm
   type: number
-- description: Los encabezados HTTP de la solicitud. Ninguno se recopila por defecto,
-    pero se puede configurar opcionalmente con `DD_TRACE_HEADER_TAGS`.
+- description: Les en-têtes HTTP de la requête. Aucun n'est collecté par défaut, mais
+    peut être configuré optionnellement avec `DD_TRACE_HEADER_TAGS`.
   domain: HTTP requests
   name: http.request.headers.*
   product_source:
   - icon-apm
   type: string
-- description: Identificador del producto del sistema de gestión de bases de datos
-    (DBMS) que se está utilizando.
+- description: L'identifiant du système de gestion de bases de données (solution SGBD)
+    utilisé.
   domain: Database spans
   name: db.system
   product_source:
   - icon-apm
   type: string
-- description: Los encabezados HTTP de la respuesta. Ninguno se recopila por defecto,
-    pero se puede configurar opcionalmente con `DD_TRACE_HEADER_TAGS`.
+- description: Les en-têtes HTTP de la réponse. Aucun n'est collecté par défaut, mais
+    peut être configuré optionnellement avec `DD_TRACE_HEADER_TAGS`.
   domain: HTTP requests
   name: http.response.headers.*
   product_source:
   - icon-apm
   type: string
-- description: La cadena de conexión utilizada para conectarse a la base de datos.
+- description: La chaîne utilisée pour la connexion à la base de données.
   domain: Database spans
   name: db.connection_string
   product_source:
   - icon-apm
   type: string
-- description: El nombre de la operación que se está ejecutando. Por ejemplo, `SELECT`,
+- description: Le nom de l'opération en cours d'exécution. Par exemple, `SELECT`,
     `findAndModify`, `HMSET`.
   domain: Database spans
   name: db.operation
@@ -1661,164 +1656,162 @@ attributes:
   - icon-apm
   - icon-log
   type: string
-- description: El nombre de la tabla principal sobre la que actúa la operación, incluyendo
-    el nombre de la base de datos (si aplica).
+- description: Le nom de la table principale à laquelle s'applique l'opération, y
+    compris le nom de la base de données (le cas échéant).
   domain: Database spans
   name: db.sql.table
   product_source:
   - icon-apm
   type: string
-- description: El número de filas/resultados de la consulta o operación.
+- description: Le nombre de lignes/résultats renvoyés par la requête ou l'opération.
   domain: Database spans
   name: db.row_count
   product_source:
   - icon-apm
   type: number
-- description: El identificador del sistema de mensajería.
+- description: L'identifiant du système de messagerie.
   domain: Message queue spans
   name: messaging.system
   product_source:
   - icon-apm
   type: string
-- description: El nombre del destino del mensaje.
+- description: Le nom de la destination du message.
   domain: Message queue spans
   name: messaging.destination
   product_source:
   - icon-apm
   type: string
-- description: El tipo de destino del mensaje.
+- description: Le type de la destination du message.
   domain: Message queue spans
   name: messaging.destination_kind
   product_source:
   - icon-apm
   type: string
-- description: El nombre del protocolo de transporte.
+- description: Le nom du protocole de transport.
   domain: Message queue spans
   name: messaging.protocol
   product_source:
   - icon-apm
   type: string
-- description: La versión del protocolo de transporte.
+- description: La version du protocole de transport.
   domain: Message queue spans
   name: messaging.protocol_version
   product_source:
   - icon-apm
   type: string
-- description: La cadena de conexión al sistema de mensajería.
+- description: La chaîne de connexion au système de messagerie.
   domain: Message queue spans
   name: messaging.url
   product_source:
   - icon-apm
   type: string
-- description: Un valor utilizado por el sistema de mensajería como un identificador
-    para el mensaje, representado como una cadena.
+- description: Une valeur utilisée par le système de messagerie en tant qu'identifiant
+    pour le message, sous forme de chaîne.
   domain: Message queue spans
   name: messaging.message_id
   product_source:
   - icon-apm
   type: string
-- description: El ID de la conversación que identifica la conversación a la que pertenece
-    el mensaje, representado como una cadena.
+- description: L'ID de conversation identifiant la conversation à laquelle le message
+    appartient ; représenté par une chaîne.
   domain: Message queue spans
   name: messaging.conversation_id
   product_source:
   - icon-apm
   type: string
-- description: El tamaño de la carga útil del mensaje sin comprimir en bytes.
+- description: La taille en octets de la charge utile du message sans compression.
   domain: Message queue spans
   name: messaging.message_payload_size
   product_source:
   - icon-apm
   type: number
-- description: Una cadena que identifica el tipo de consumo del mensaje. Por ejemplo,
-    `enviar` (un mensaje enviado a un productor), `recibir` (un mensaje recibido por
-    un consumidor) o `procesar` (un mensaje previamente recibido que es procesado
-    por un consumidor).
+- description: Une chaîne identifiant le type de consommation de message. Par exemple,
+    `send` (un message envoyé à un producteur), `receive` (un message reçu par un
+    consommateur), ou `process` (un message précédemment reçu est traité par un consommateur).
   domain: Message queue spans
   name: messaging.operation
   product_source:
   - icon-apm
   type: string
-- description: El identificador del consumidor que recibe un mensaje.
+- description: L'identifiant du consommateur recevant un message.
   domain: Message queue spans
   name: messaging.consumer_id
   product_source:
   - icon-apm
   type: string
-- description: El identificador del sistema remoto.
+- description: L'identifiant du système distant.
   domain: Remote procedure calls
   name: rpc.system
   product_source:
   - icon-apm
   type: string
-- description: El nombre del servicio que se está llamando.
+- description: Le nom du service appelé.
   domain: Remote procedure calls
   name: rpc.service
   product_source:
   - icon-apm
   type: string
-- description: El nombre del método que se está llamando.
+- description: Le nom de la méthode appelée.
   domain: Remote procedure calls
   name: rpc.method
   product_source:
   - icon-apm
   type: string
-- description: El tipo de actividad de seguridad detectada en la solicitud, expresada
-    como `<categoría>.<tipo>` (por ejemplo, `intento_de_ataque.inyección_sql`, `lógica_de_negocios.usuarios.login.fallo`).
-    Un tramo puede tener más de un valor cuando múltiples reglas coinciden.
+- description: Le type d'activité de sécurité détectée sur la requête, exprimé sous
+    la forme `<category>.<type>` (par exemple, `attack_attempt.sql_injection`, `business_logic.users.login.failure`).
+    Un span peut avoir plus d'une valeur lorsque plusieurs règles correspondent.
   domain: Application & API Protection (AAP)
   name: appsec.security_activity
   product_source:
   - icon-apm
   type: string
-- description: La clasificación de nivel superior de la actividad de seguridad detectada
-    (por ejemplo, `intento_de_ataque`, `lógica_de_negocios`).
+- description: La classification de premier niveau de l'activité de sécurité détectée
+    (par exemple, `attack_attempt`, `business_logic`).
   domain: Application & API Protection (AAP)
   name: appsec.category
   product_source:
   - icon-apm
   type: string
-- description: El tipo de amenaza o evento específico dentro de la categoría (por
-    ejemplo, `inyección_sql`, `xss`, `usuarios.login.fallo`).
+- description: Le type de menace ou d'événement spécifique au sein de la catégorie
+    (par exemple, `sql_injection`, `xss`, `users.login.failure`).
   domain: Application & API Protection (AAP)
   name: appsec.type
   product_source:
   - icon-apm
   type: string
-- description: El identificador de la regla AAP que coincidió con la solicitud (por
-    ejemplo, `crs-942-100`). Un tramo puede tener múltiples valores cuando más de
-    una regla se activa.
+- description: L'identifiant de la règle AAP qui correspond à la demande (par exemple,
+    `crs-942-100`). Un span peut avoir plusieurs valeurs lorsque plusieurs règles
+    sont déclenchées.
   domain: Application & API Protection (AAP)
   name: appsec.rule_id
   product_source:
   - icon-apm
   type: string
-- description: Si la solicitud fue bloqueada por AAP. `true` si la solicitud fue bloqueada,
-    `false` de lo contrario.
+- description: Indique si la demande a été bloquée par AAP. `true` si la demande a
+    été bloquée, `false` sinon.
   domain: Application & API Protection (AAP)
   name: appsec.blocked
   product_source:
   - icon-apm
   type: string
-content: La siguiente tabla enumera los atributos aplicados automáticamente a los
-  datos enviados a Datadog por el Agent de cada uno de los productos RUM, Logs y APM,
-  según corresponda al dominio de datos. Opcionalmente, filtre la lista por producto
-  o busque por palabra clave o texto de descripción para encontrar los atributos que
-  le interesan.
-description: Una tabla de los atributos aplicados automáticamente a los datos enviados
-  a Datadog por el Agent de cada uno de los productos RUM, Logs y APM, según corresponda
-  al dominio de datos.
+content: Le tableau suivant répertorie les attributs appliqués automatiquement aux
+  données envoyées à Datadog par l'Agent pour chacun des produits RUM, Logs et APM,
+  selon le domaine de données. Optionnellement, filtrez la liste par produit ou recherchez
+  par mot-clé ou texte de description pour trouver les attributs qui vous intéressent.
+description: Un tableau des attributs appliqués automatiquement aux données envoyées
+  à Datadog par l'Agent pour chacun des produits RUM, Logs et APM, selon le domaine
+  de données.
 disable_sidebar: true
 filter_all: All
 further_reading:
 - link: /data_security/
-  tag: Documentación
-  text: Asegurando la seguridad de los datos enviados a Datadog
+  tag: Documentation
+  text: Assurer la sécurité des données envoyées à Datadog
 - link: /tracing/trace_collection/tracing_naming_convention/
-  tag: Documentación
-  text: Semántica de la etiqueta de tramo
-title: Atributos estándar predeterminados
+  tag: Documentation
+  text: Sémantique des tags de span
+title: Attributs standards par défaut
 ---
-## Lectura adicional {#further-reading}
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
