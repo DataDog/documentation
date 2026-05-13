@@ -21,7 +21,7 @@ The Host List gives you a live inventory of all hosts reporting to Datadog throu
 
 This page describes the default view of the Host List. To switch to the **Legacy** view, click the toggle in the upper-right corner.
 
-{{< img src="infrastructure/index/infra-list-overview.png" alt="The Host List with a filter panel on the left and a list of hosts with customizable columns." style="width:100%;">}}
+{{< img src="infrastructure/index/infra-list-overview-2.png" alt="The Host List with a filter panel on the left and a list of hosts with customizable columns." style="width:100%;">}}
 
 **Note**: This list should not be used to estimate your infrastructure host billing. See the [billing][11] page to learn about billing.
 
