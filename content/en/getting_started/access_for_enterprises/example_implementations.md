@@ -31,12 +31,12 @@ Most enterprises are a blend of these archetypes. Use the following questions to
 
 | Question | If yes, look at... |
 | :---- | :---- |
-| Do you have regulated data that must be invisible to certain user groups? | Template 1 (Financial) or Template 2 (Regulated Multi-BU) |
-| Do you have hard compliance boundaries requiring complete data isolation between divisions? | Template 2 (Regulated Multi-BU) |
-| Do you have high API key volume and many automation pipelines? | Template 3 (Large Tech Company) |
-| Do you serve multiple internal tenants or clients on a shared platform? | Template 4 (Platform Provider) |
-| Do you manage configuration through Terraform or similar IaC tools? | Template 4 (Platform Provider) for the most comprehensive IaC pattern |
-| Do you operate many orgs and need consistent access controls across them? | Template 4 (Platform Provider) |
+| Do you have regulated data that must be invisible to certain user groups? | [Template 1 (Financial)](#template-1-large-financial-institution) or [Template 2 (Regulated Multi-BU)](#template-2-regulated-enterprise-with-multiple-business-units) |
+| Do you have hard compliance boundaries requiring complete data isolation between divisions? | [Template 2 (Regulated Multi-BU)](#template-2-regulated-enterprise-with-multiple-business-units) |
+| Do you have high API key volume and many automation pipelines? | [Template 3 (Large Tech Company)](#template-3-large-technology-company) |
+| Do you serve multiple internal tenants or clients on a shared platform? | [Template 4 (Platform Provider)](#template-4-government-agency--platform-provider) |
+| Do you manage configuration through Terraform or similar IaC tools? | [Template 4 (Platform Provider)](#template-4-government-agency--platform-provider) for the most comprehensive IaC pattern |
+| Do you operate many orgs and need consistent access controls across them? | [Template 4 (Platform Provider)](#template-4-government-agency--platform-provider) |
 
 ---
 
