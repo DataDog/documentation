@@ -79,6 +79,8 @@ phrase:
       dst: "content/{lang}/security/code_security/static_analysis/static_analysis_rules/_index.md"
     - src: "content/en/bits_ai/mcp_server/_index.md"
       dst: "content/{lang}/bits_ai/mcp_server/_index.md"
+    - src: "content/en/bits_ai/mcp_server/tools.md"
+      dst: "content/{lang}/bits_ai/mcp_server/tools.md"
     - src: "content/en/synthetics/_index.md"
       dst: "content/{lang}/synthetics/_index.md"
     - src: "content/en/agent/configuration/agent-commands.md"
