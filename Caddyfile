@@ -1,5 +1,5 @@
 :1314 {
-	@astro path_regexp ^/(api|@vite|@id|@fs|_astro|src|node_modules)(/|$)
+	@astro path_regexp ^/(api|fr/api|es/api|ja/api|ko/api|@vite|@id|@fs|_astro|src|node_modules)(/|$)
 	handle @astro {
 		reverse_proxy localhost:4321
 	}
