@@ -44,6 +44,10 @@ As a rule of thumb for a mixed workload, plan for around 12 vCPUs per TB/day ing
 | **50 TB/day** | 25 | 2xlarge | 13 | 8xlarge | ~250 TB |
 | **100 TB/day** | 50 | 2xlarge | 25 | 8xlarge | ~500 TB |
 
+<div class="alert alert-info">
+<strong>Billing vs. provisioning:</strong> Provisioned vCPUs and billed vCPUs are different. A production cluster is intentionally overprovisioned to absorb ingestion and search spikes. Contact your Datadog representative for billing guidance.
+</div>
+
 ## Indexers
 
 Indexers receive logs from Datadog Agents, then process, index, and store them as index files (called _splits_) in object storage. Proper sizing is critical for maintaining ingestion throughput and ensuring your cluster can handle your log volume.
