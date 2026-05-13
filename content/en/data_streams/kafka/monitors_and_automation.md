@@ -1,8 +1,14 @@
 ---
 title: Monitors and Automation
-description: Recommended Datadog monitors for Kafka clusters and topics tracked by Data Streams Monitoring, and examples of using webhooks to automate a response when a monitor triggers.
+description: Recommended Datadog monitors for Kafka clusters and topics tracked by Data Streams Monitoring, and examples of automating responses with Workflow Automation or webhooks when a monitor triggers.
 weight: 2
 further_reading:
+- link: "/actions/workflows/"
+  tag: "Documentation"
+  text: "Workflow Automation"
+- link: "/actions/workflows/trigger/#add-a-monitor-trigger-to-your-workflow"
+  tag: "Documentation"
+  text: "Trigger a workflow from a monitor"
 - link: "/integrations/webhooks/"
   tag: "Documentation"
   text: "Webhooks integration"
@@ -14,7 +20,7 @@ further_reading:
   text: "Kafka Monitoring setup"
 ---
 
-Once your Kafka clusters are connected to Data Streams Monitoring (see [Kafka Monitoring Setup][1]), the next step is to alert on the conditions that put your pipelines at risk and, where possible, automate the response. This page covers the monitor templates that Data Streams Monitoring provides out of the box, and shows how to wire those monitors to a webhook so a triggered alert can take action automatically.
+After your Kafka clusters are connected to Data Streams Monitoring (see [Kafka Monitoring Setup][1]), the next step is to alert on the conditions that put your pipelines at risk and, where possible, automate the response. This page covers the monitor templates that Data Streams Monitoring provides, and shows how to connect those monitors to Datadog Workflow Automation or a webhook so a triggered alert can take action automatically.
 
 ## Recommended monitors
 
@@ -41,11 +47,14 @@ Both monitors are grouped by `kafka_cluster_id` so each cluster alerts its own o
 
 The two "approaching retention" monitors are the most important guardrails against data loss: when lag exceeds retention, the broker deletes messages before the consumer reads them.
 
-## Automate responses with webhooks
+## Automate responses to triggered monitors
 
-Datadog monitors can call any HTTP endpoint when they trigger, recover, or change state. Use this to take action automatically when a Kafka condition fires, rather than waiting for a human to triage. See [Webhooks integration][2] for how to configure the webhook destination, payload variables, and authentication.
+When a monitor triggers, Datadog can take action automatically rather than waiting for a human to triage. Two options:
 
-A common pattern is to add `@webhook-<name>` to a monitor's notification message — Datadog calls the webhook each time the monitor changes state, with monitor metadata available as template variables (`{{topic.name}}`, `{{kafka_cluster_id.name}}`, `{{value}}`, and so on).
+- **Workflow Automation** — Build a Datadog Workflow that chains pre-built actions across your infrastructure and tools (PagerDuty, Slack, Jira, AWS, Kubernetes, and so on), and run it from a monitor trigger. Best for the "trigger a runbook" patterns below. See [Trigger a workflow from a monitor][3].
+- **Webhooks** — Call any HTTP endpoint when a monitor triggers, recovers, or changes state. Best when the action lives in a system outside Datadog and you already have an HTTPS callback. See [Webhooks integration][2].
+
+Either option can be added to a monitor by mentioning it in the notification message — `@workflow-<name>` for Workflow Automation, `@webhook-<name>` for a webhook. Monitor metadata is available as template variables (`{{topic.name}}`, `{{kafka_cluster_id.name}}`, `{{value}}`, and so on) and can be passed to the workflow or webhook payload.
 
 The examples below show conditions where automation is particularly valuable in a Kafka pipeline.
 
@@ -53,7 +62,7 @@ The examples below show conditions where automation is particularly valuable in 
 
 When the **Consumer lag is high for topic** monitor triggers, automate one of the following:
 
-- **Scale the consumer group.** Call a CI/CD or autoscaler webhook to increase the consumer deployment's replica count.
+- **Scale the consumer group.** Run a workflow that increases the consumer deployment's replica count (for example, with the Kubernetes or AWS actions in Workflow Automation), or call a CI/CD or autoscaler webhook.
 - **Notify the owning team.** Post to the consumer service's on-call channel with the topic, consumer group, and current lag pulled from the monitor's template variables.
 - **Open an incident** for the consumer service if lag stays elevated past a recovery window.
 
@@ -66,7 +75,7 @@ When **Consumer lag is approaching time retention limit** or **bytes retention l
 
 ### Disk space running out on brokers
 
-A broker that runs out of disk goes offline and takes its partitions with it. Create a monitor on the broker host's `system.disk.in_use` (or your Kafka deployment's equivalent) and have its webhook:
+A broker that runs out of disk goes offline and takes its partitions with it. This is not a Data Streams Monitoring template — create a monitor on the broker host's `system.disk.in_use` (or your Kafka deployment's equivalent) and have its automation:
 
 - **Notify the platform team's on-call** with the broker hostname and current disk usage.
 - **Trigger a capacity workflow** to add storage, expand the cluster, or compact a candidate topic, depending on your operational model.
@@ -84,3 +93,4 @@ When the cluster-level **Offline partitions detected** or **Under-replicated par
 
 [1]: /data_streams/kafka/setup/
 [2]: /integrations/webhooks/
+[3]: /actions/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
