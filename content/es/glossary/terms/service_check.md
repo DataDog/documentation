@@ -1,4 +1,5 @@
 ---
+id: service_check
 title: check de servicio
 ---
 Un check de servicio monitoriza si el estado de un servicio específico está activo o inactivo.

@@ -25,6 +25,8 @@ When a host is renamed at the operating system (OS) level or decommissioned, the
 
 The old hostname remains in an alert state until the retention period expires, after which it automatically ages out and disappears from the monitor. **Note**: The old hostname will no longer appear in **Infrastructure > Hosts**, but will continue to be evaluated by monitors until the retention window passes.
 
+<div class="alert alert-danger">If a Custom Schedule is applied to a monitor, decommissioned hosts continue to be evaluated past the standard retention window. For more information, see <a href="/monitors/guide/custom_schedules">Custom Schedules</a>.</div>
+
 ### Workarounds
 
 If you need to remove the old hostname from alerts before the retention period expires, you can use one of the following workarounds:

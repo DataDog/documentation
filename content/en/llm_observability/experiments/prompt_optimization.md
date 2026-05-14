@@ -14,10 +14,6 @@ further_reading:
     text: "Create and monitor LLM experiments with Datadog"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Preview Feature">}}
-Prompt Optimization is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Prompt Optimization automates the process of improving LLM prompts through systematic evaluation and AI-powered refinement. Instead of manually testing and tweaking prompts, you can use Prompt Optimization to analyze performance data, identify failure patterns, and suggest targeted improvements.

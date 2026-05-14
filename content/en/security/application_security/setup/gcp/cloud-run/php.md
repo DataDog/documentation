@@ -66,12 +66,12 @@ CMD php-fpm; nginx -g daemon off;
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Copy and install the Datadog PHP tracer.
+2. Copy and install the Datadog PHP SDK.
    ```dockerfile
    ADD https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php /datadog-setup.php
    RUN php /datadog-setup.php --php-bin=all
    ```
-   If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
+   If you install the Datadog SDK directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
 
 3. (Optional) Add Datadog tags.
    ```dockerfile

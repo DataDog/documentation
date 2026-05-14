@@ -17,7 +17,7 @@ further_reading:
 
 The Infrastructure overlay provides a broad overview of your cloud environment by grouping resources into Account, Region, and VPC. This is the default view when opening a Cloudcraft diagram.
 
-{{< img src="datadog_cloudcraft/infra_overlay_4.png" alt="Infrastructure overlay in Cloudcraft." style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/infra_overlay_5.png" alt="Infrastructure overlay in Cloudcraft." style="width:100%;" >}}
 
 ## Use cases
 
@@ -30,11 +30,13 @@ The Infrastructure overlay is ideal for:
 
 ## Resource grouping
 
-Resources are organized in a hierarchical structure:
+Resources are organized in a hierarchical structure. The grouping labels vary by provider:
 
-- **Account**: Top-level grouping by AWS account
-- **Region**: Resources grouped by geographic region within each account
-- **VPC**: Resources grouped by Virtual Private Cloud within each region
+| Level | AWS | Azure | GCP |
+|-------|-----|-------|-----|
+| Top-level | Account | Subscription | Project |
+| Geographic | Region | Region | Region |
+| Network | VPC | Virtual Network | VPC |
 
 This hierarchy helps you understand how resources are distributed across your cloud infrastructure.
 
@@ -50,9 +52,19 @@ Click any resource to open a side panel with additional details, including:
 
 To reduce visual clutter and highlight the most important parts of your architecture, the Infrastructure overlay excludes certain components by default:
 
+**AWS**
 - EBS volumes
 - NAT Gateways
 - Transit Gateways
+
+**GCP**
+- Compute Disk
+- GKE Cronjob
+- GKE Daemonset
+- GKE Deployment
+- GKE Job
+- GKE Pod
+- GKE Statefulset
 
 These components are still part of your infrastructure but are hidden to keep the diagram focused on core resources.
 

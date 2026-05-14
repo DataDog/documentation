@@ -1,4 +1,5 @@
 ---
+id: signal_correlation
 core_product:
 - セキュリティ
 - cloud siem

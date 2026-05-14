@@ -1,79 +1,27 @@
 ---
 app_id: kepler
-app_uuid: 0cae7d1b-d0e9-48f1-b8c7-ea73f40370d7
-assets:
-  dashboards:
-    'Kepler Overview ': assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: kepler.container.usage.joules.count
-      metadata_path: metadata.csv
-      prefix: kepler.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 16318151
-    source_type_name: Kepler
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Comunidad
-  sales_email: sarah.witt@datadoghq.com
-  support_email: sarah.witt@datadoghq.com
 categories:
 - kubernetes
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/kepler/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: kepler
-integration_id: kepler
-integration_title: Kepler
+description: Ver cálculos del consumo de energía de las cargas de trabajo de Kubernetes
+  desde Kepler
 integration_version: 1.0.0
-is_public: true
-manifest_version: 2.0.0
-name: kepler
-public_title: Kepler
-short_description: Ver cálculos del consumo de energía de las cargas de trabajo de
-  Kubernetes desde Kepler
+media: []
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Category::Kubernetes
-  - Offering::Integration
-  - Submitted Data Type::Metrics
-  configuration: README.md#Configuración
-  description: Ver cálculos del consumo de energía de las cargas de trabajo de Kubernetes
-    desde Kepler
-  media: []
-  overview: README.md#Información general
-  support: README.md#Soporte
-  title: Kepler
+title: Kepler
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
-
-
 ## Información general
 
-Este check transfiere los cálculos del consumo de energía de las cargas de trabajo de Kubernetes desde [Kepler][1] a Datadog.
+Este check lleva las estimaciones de uso de energía de las cargas de trabajo de Kuberenetes de [Kepler](https://sustainable-computing.io/) a Datadog.
 
 ## Configuración
 
 ### Instalación
 
-Para versiones 7.21/6.21 o posteriores del Agent, sigue las siguientes instrucciones para instalar el check de Kepler en tu host. Para instalarlo con el Agent Docker o versiones anteriores del Agent, consulta [Uso de integraciones de la comunidad][2].
+Para las versiones del Agent 7.21+/6.21+, sigue las instrucciones a continuación para instalar el check de Kepler en tu host. Consulta [Uso de integraciones de la comunidad](https://docs.datadoghq.com/agent/guide/use-community-integrations/?tab=agentv721v621) para realizar la instalación con el Docker Agent o versiones anteriores del Agent.
 
 1. Ejecute el siguiente comando para instalar la integración:
 
@@ -81,24 +29,57 @@ Para versiones 7.21/6.21 o posteriores del Agent, sigue las siguientes instrucci
    datadog-agent integration install -t datadog-kepler==<INTEGRATION_VERSION>
    ```
 
-2. Configura tu integración como una [integración][3] de base.
+1. Configura tu integración de forma similar a las [integraciones] núcleo(https://github.com/DataDog/integrations-extras/blob/master/kepler/datadog_checks/kepler/data/conf.yaml.example).
 
 ### Configuración
 
+1. Edita el archivo `kepler.d/conf.yaml`, en la carpeta `conf.d/` en la raíz del directorio de configuración del Agent para empezar a recopilar los datos de rendimiento de tu kepler. Consulta el [kepler.d/conf.yaml de ejemplo](https://github.com/DataDog/integrations-extras/blob/master/kepler/datadog_checks/kepler/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles.
 
-1. Edita el archivo `kepler.d/conf.yaml` que se encuentra en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent para empezar a recopilar tus datos de rendimiento de Kepler. Para conocer todas las opciones de configuración disponibles, consulta el [kepler.d/conf.yaml de ejemplo][3].
-
-2. [Reinicia el Agent][4].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][5] y busca `kepler` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `kepler` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "kepler" >}}
 
+| | |
+| --- | --- |
+| **kepler.container.usage.bpf_cpu_time.count** <br>(count) | Valor agregado en el valor bpf_cpu_time_ms de bpf|
+| **kepler.container.usage.bpf_net_rx_irq.count** <br>(count) | Valor agregado en el valor bpf_net_rx_irq de bpf|
+| **kepler.container.usage.bpf_net_tx_irq.count** <br>(count) | Valor agregado en el valor bpf_net_tx_irq de bpf|
+| **kepler.container.usage.bpf_page_cache_hit.count** <br>(count) | Valor agregado en el valor bpf_page_cache_hit de bpf|
+| **kepler.container.usage.cache_miss.count** <br>(count) | Valor agregado en el valor cache_miss de bpf|
+| **kepler.container.usage.core_joules.count** <br>(count) | Valor agregado en el valor central de trained_power_model|
+| **kepler.container.usage.cpu_cycles.count** <br>(count) | Valor agregado en el valor cpu_cycles de bpf|
+| **kepler.container.usage.cpu_instructions.count** <br>(count) | Valor agregado en el valor cpu_instructions de bpf|
+| **kepler.container.usage.dram_joules.count** <br>(count) | Valor agregado en el valor de dram de trained_power_model|
+| **kepler.container.usage.gpu_joules.count** <br>(count) | Valor agregado en el valor de gpu de nvidia|
+| **kepler.container.usage.joules.count** <br>(count) | Valor agregado en el valor de julios de|
+| **kepler.container.usage.package_joules.count** <br>(count) | Valor agregado en el valor de paquete de trained_power_model|
+| **kepler.container.usage.platform_joules.count** <br>(count) | Valor agregado en el valor de plataforma de trained_power_model|
+| **kepler.container.usage.task_clock.count** <br>(count) | Valor agregado en el valor task_clock_ms de bpf|
+| **kepler.container.usage.uncore_joules.count** <br>(count) | Valor agregado en el valor de uncore de trained_power_model|
+| **kepler.exporter.build_info** <br>(gauge) | Una métrica con un valor constante '1' etiquetado por versión, revisión, rama, goversion desde la que se construyó kepler_exporter, y los goos y goarch para la compilación.|
+| **kepler.node.usage.dram_joules.count** <br>(count) | Valor agregado en el valor dram de trained_power_model|
+| **kepler.node_info.count** <br>(count) | Valor agregado en el valor de os|
+| **kepler.node.usage.platform_joules.count** <br>(count) | Valor agregado en el valor de plataforma de trained_power_model|
+| **kepler.node.usage.uncore_joules.count** <br>(count) | Valor agregado en el valor uncore de trained_power_model|
+| **kepler.container.usage.bpf_block_irq.count** <br>(count) | Valor agregado en el valor bpf_block_irq de bpf|
+| **kepler.container.usage.other_joules.count** <br>(count) | Valor agregado en otro valor de trained_power_model|
+| **kepler.node.usage.core_joules.count** <br>(count) | Valor agregado en el valor central de trained_power_model|
+| **kepler.node.usage.package_joules.count** <br>(count) | Valor agregado en el valor de paquete de trained_power_model|
+| **kepler.promhttp.metric.handler.errors.count** <br>(count) | Número total de errores internos encontrados por el gestor de métricas promhttp.|
+
+### Checks de servicio
+
+**kepler.openmetrics.health**
+
+Devuelve `CRITICAL` si el Agent no puede conectarse al endpoint de Kepler OpenMetrics, en caso contrario devuelve `OK`.
+
+_Estados: ok, critical_
 
 ### Eventos
 
@@ -106,12 +87,4 @@ Kepler no incluye eventos.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][2].
-
-
-[1]: https://sustainable-computing.io/
-[2]: https://docs.datadoghq.com/es/agent/guide/use-community-integrations/?tab=agentv721v621
-[3]: https://github.com/DataDog/integrations-extras/blob/master/kepler/datadog_checks/kepler/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://github.com/DataDog/integrations-extras/blob/master/kepler/assets/service_checks.json
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/agent/guide/use-community-integrations/?tab=agentv721v621).

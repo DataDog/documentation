@@ -17,6 +17,7 @@ further_reading:
     - link: "/tracing/services/service_remapping_rules"
       tag: "Documentation"
       text: "Service Remapping Rules"
+site_support_id: apm_processing_pipelines
 ---
 
 {{< img src="/tracing/processing_pipelines/processing_pipelines_overview.jpg" alt="APM data flow diagram showing instrumented applications, ingestion sampling rules, Processing Pipelines, metrics from spans, retention filters, and indexed search" style="width:100%;">}}

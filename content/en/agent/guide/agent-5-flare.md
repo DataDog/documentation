@@ -29,9 +29,9 @@ To send Datadog support a copy of your Windows logs and configurations, do the f
 
 * Open the Datadog Agent Manager.
 
-* Select Actions.
+* Select {{< ui >}}Actions{{< /ui >}}.
 
-* Select Flare.
+* Select {{< ui >}}Flare{{< /ui >}}.
 
 * Enter your ticket number (if you don't have one, leave the value as zero).
 

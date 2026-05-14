@@ -1,4 +1,5 @@
 ---
+id: csrf
 core_product:
 - seguridad
 synonyms:

@@ -120,8 +120,57 @@ To create an experiment:
    A task can take any non-null type as `input_data` (string, number, Boolean, object, array). The output that will be used in the Evaluators can be of any type.
    This example generates a string, but a dict can be generated as output to store any intermediary information and compare in the Evaluators.
 
+   Optionally, your task function can accept a third `metadata` parameter to receive the dataset record's metadata:
+   ```python
+   def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None, metadata: Optional[Dict[str, Any]] = None) -> str:
+       difficulty = metadata.get("difficulty", "unknown") if metadata else "unknown"
+       question = input_data["question"]
+       return "Beijing" if "China" in question else "Unknown"
+   ```
+
    You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][2] you use in production.
    If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
+
+   #### Using OpenTelemetry spans inside experiments
+
+   If your application uses [OpenTelemetry instrumentation][6], you can create OTel spans inside your experiment task. With `DD_TRACE_OTEL_ENABLED=1`, ddtrace acts as the OpenTelemetry TracerProvider, so OTel spans appear as children of the experiment span automatically.
+
+   ```python
+   import json
+   from opentelemetry import trace
+
+   tracer = trace.get_tracer(__name__)
+
+   def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
+       question = input_data["question"]
+
+       # OTel gen_ai span — automatically becomes a child of the experiment span
+       with tracer.start_as_current_span("my-llm-call") as span:
+           span.set_attribute("gen_ai.operation.name", "chat")
+           span.set_attribute("gen_ai.system", "openai")
+           span.set_attribute("gen_ai.request.model", "gpt-4o")
+           span.set_attribute("gen_ai.usage.input_tokens", 25)
+           span.set_attribute("gen_ai.usage.output_tokens", 8)
+           span.set_attribute(
+               "gen_ai.input.messages",
+               json.dumps([{"role": "user", "parts": [{"type": "text", "content": question}]}]),
+           )
+
+           result = call_my_llm(question)
+
+           span.set_attribute(
+               "gen_ai.output.messages",
+               json.dumps([{"role": "assistant", "parts": [{"type": "text", "content": result}]}]),
+           )
+
+       return result
+   ```
+
+   To enable this, set the `DD_TRACE_OTEL_ENABLED` environment variable:
+
+   ```shell
+   DD_TRACE_OTEL_ENABLED=1 python my_experiment.py
+   ```
 
 
 ### 3. Define evaluators
@@ -279,3 +328,4 @@ Note: LLM Experiments traces are retained for 90 days.
 [3]: /llm_observability/instrumentation/auto_instrumentation?tab=python
 [4]: /llm_observability/guide/evaluation_developer_guide
 [5]: /llm_observability/monitoring/llm_observability_and_apm/
+[6]: /llm_observability/instrumentation/otel_instrumentation

@@ -102,6 +102,8 @@ dogstatsd_mapper_profiles:
 
 It would send the metric `custom_metric.process` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value.with.dots._2`.
 
+Because DogStatsD is written in Go, use the [Go regex syntax][2] for name matching.
+
 ## Expand group in metric name
 
 For the `regex` and `wildcard` match type, group collected can be expanded as tags value with an associated tag key as see above, but can also be used in the metric `name` parameter. For instance, if you have the metric `custom_metric.process.value_1.value_2` with the following mapping group configuration:
@@ -125,3 +127,4 @@ It would send the metric `custom_metric.process.prod.value_1.live` to Datadog wi
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: https://pkg.go.dev/regexp/syntax

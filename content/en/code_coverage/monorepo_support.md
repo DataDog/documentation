@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/product/software-catalog/"
     tag: "Product page"
     text: "Datadog Software Catalog"
+  - link: "https://www.datadoghq.com/blog/datadog-code-coverage"
+    tag: "Blog"
+    text: "Identify untested code across every level of your codebase"
 ---
 
 ## Overview
@@ -99,7 +102,7 @@ To manually define services, add a `services` section to the `code-coverage.data
 
 After services or code owners are configured, coverage data becomes available filtered by service or code owner for any coverage reports uploaded after the configuration changes.
 
-On the Branch overview, Pull Request details, and Commit details pages in [Code Coverage UI][5], use the **Code Owner** or **Service** selector dropdown at the top to:
+On the Branch overview, Pull Request details, and Commit details pages in [Code Coverage UI][5], use the {{< ui >}}Code Owner{{< /ui >}} or {{< ui >}}Service{{< /ui >}} selector dropdown at the top to:
 - View coverage metrics or detailed coverage data filtered to a specific service or code owner
 - Identify which files belong to each service or are owned by specific teams
 - Compare coverage across different services or code owners
@@ -115,7 +118,7 @@ You can configure [PR Gates][7] to enforce coverage thresholds for specific serv
 
 1. Navigate to [PR Gates rule creation][3].
 2. Configure the coverage threshold (total or patch coverage).
-3. In the **per service** or **per code owner** field, select one or more services or code owner teams the gate should apply to.
+3. In the {{< ui >}}per service{{< /ui >}} or {{< ui >}}per code owner{{< /ui >}} field, select one or more services or code owner teams the gate should apply to.
 4. Save the rule.
 
 {{< img src="/code_coverage/pr_gate_codeowners.png" text="Code Coverage PR gate creation page in Datadog" style="width:100%" >}}
@@ -152,27 +155,27 @@ Gates defined in the YAML file and in the Datadog UI are both evaluated when a p
 
 **Enforce high coverage for backend services:**
 
-- Condition type: `Overall Code Coverage`
+- Condition type: {{< ui >}}Overall Code Coverage{{< /ui >}}
 - Threshold: `80%`
-- Scope: `Per service`
+- Scope: {{< ui >}}Per service{{< /ui >}}
 - Services: `backend-*`
 
 {{< img src="/code_coverage/pr_gate_backend_services.png" text="Code Coverage PR gate configured for backend services" style="width:100%" >}}
 
 **Require all new code in frontend to be tested:**
 
-- Condition type: `Patch Code Coverage`
+- Condition type: {{< ui >}}Patch Code Coverage{{< /ui >}}
 - Threshold: `100%`
-- Scope: `Per service`
+- Scope: {{< ui >}}Per service{{< /ui >}}
 - Services: `admin-dashboard`, `frontend-*`
 
 {{< img src="/code_coverage/pr_gate_frontend.png" text="Code Coverage PR gate configured for frontend services" style="width:100%" >}}
 
 **Enforce coverage for specific team's code:**
 
-- Condition type: `Patch Code Coverage`
+- Condition type: {{< ui >}}Patch Code Coverage{{< /ui >}}
 - Threshold: `90%`
-- Scope: `Per code owner`
+- Scope: {{< ui >}}Per code owner{{< /ui >}}
 - Code owners: `@team/platform`
 
 {{< img src="/code_coverage/pr_gate_codeowners_team.png" text="Code Coverage PR gate configured for a specific team" style="width:100%" >}}

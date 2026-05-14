@@ -3,48 +3,47 @@ aliases:
 - /es/security_platform/application_security/add-user-info
 - /es/security/application_security/add-user-info
 - /es/security/application_security/threats/add-user-info/
-title: Monitorización y protección de usuarios
+title: Seguimiento y Protección de Usuarios
 ---
+## Resumen
 
-## Información general
+Instrumenta tus servicios y haz seguimiento de la actividad de los usuarios para detectar y bloquear a los actores maliciosos.
 
-Instrumenta tus servicios y rastrea la actividad de los usuarios para detectar y bloquear a los actores malintencionados.
+[ Agrega información de usuario autenticado en las trazas ](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) para identificar y bloquear a los actores maliciosos que apuntan a tu superficie de ataque autenticada. Para hacer esto, establece la etiqueta de ID de usuario en la traza APM en ejecución, proporcionando la instrumentación necesaria para que AAP bloquee a los atacantes autenticados. Esto permite que AAP asocie ataques y eventos de lógica de negocio a los usuarios.
 
-[Añade información de usuarios autenticados a las trazas](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) para identificar y bloquear a los malos actores que atacan tu superficie de ataque autenticada. Para ello, establece la etiqueta de ID de usuario en la traza de APM en ejecución, proporcionando la instrumentación necesaria para que AAP bloquee a los atacantes autenticados. Esto permite a AAP asociar ataques y eventos de lógica empresarial a los usuarios.
+[ Haz seguimiento de los inicios de sesión y la actividad del usuario ](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) para detectar tomas de control de cuentas y abusos de lógica de negocio con reglas de detección listas para usar, y para finalmente bloquear a los atacantes.
 
-[Rastrea los inicios de sesión y la actividad de los usuarios](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) para detectar las apropiaciones de cuentas y los abusos de la lógica empresarial con reglas de detección predefinidas y, en última instancia, bloquear a los atacantes.
+La actividad de usuario personalizada para la cual hay reglas de detección listas para usar es la siguiente:
 
-Las actividades personalizadas del usuario para las cuales se dispone de reglas de detección predefinidas son las siguientes:
-
-| Nombres de eventos integrados   | Metadatos necesarios                                    | Normas relacionadas                                                                                                                                                                                                       |
+| Nombres de eventos incorporados | Metadatos requeridos | Reglas relacionadas |
 |------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Tasa de actividad limitada desde la IP][4]<br>[Actividad no autorizada detectada][5] |
-| `users.login.success`  | El ID de usuario es obligatorio, se pueden añadir metadatos opcionales  | [Ataque de relleno de credenciales][6]<br>[Ataque por la fuerza bruta][12]<br>[Relleno de credenciales distribuido][13]               |
-| `users.login.failure`  | El ID de usuario y `usr.exists` son obligatorios, se pueden añadir metadatos opcionales  | [Ataque de relleno de credenciales][6]<br>[Ataque por la fuerza bruta][12]<br>[Relleno de credenciales distribuido][13]  |
-| `users.signup`         | `{ "usr.id": "12345" }`                              | [Excesivas creaciones de cuentas desde una IP][7]                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                              | [Excesiva eliminación de cuentas desde una IP][8]                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "usr.login": "user@email.com", "exists": true }` | [Intentos de restablecimiento de contraseña por la fuerza bruta][9]                                                                                                         |
-| `payment.failure`      | Ninguno                                                 | [Excesivos errores de pago desde una IP][10]                                                                                                        |
+| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Actividad limitada por tasa desde IP][4]<br>[Actividad no autorizada detectada][5] |
+| `users.login.success`  | El ID de usuario es obligatorio, se pueden agregar metadatos opcionales | [Ataque de Credential Stuffing][6]<br>[Ataque de Fuerza Bruta][12]<br>[Credential Stuffing Distribuido][13] |
+| `users.login.failure`  | El ID de usuario y `usr.exists` son obligatorios, se pueden agregar metadatos opcionales | [Ataque de Credential Stuffing][6]<br>[Ataque de Fuerza Bruta][12]<br>[Credential Stuffing Distribuido][13] |
+| `users.signup`         | `{ "usr.id": "12345" }`                              | [Creaciones excesivas de cuentas desde una IP][7] |
+| `users.delete`         | `{ "usr.id": "12345" }`                              | [Eliminaciones excesivas de cuentas desde una IP][8] |
+| `users.password_reset` | `{ "usr.id": "12345", "usr.login": "user@email.com", "exists": true }` | [Intentos de fuerza bruta de restablecimiento de contraseña][9] |
+| `payment.failure`      | Ninguno | [Fallos excesivos de pago desde IP][10] |
 
-## Añadir información de usuarios autenticados a las trazas y habilitar la capacidad de bloqueo de los usuarios
+## Agregar información de usuario autenticado a las trazas y habilitar la capacidad de bloqueo de usuarios
 
 <div class="alert alert-info">
-<strong>Detección automática de la actividad del usuario:</strong> las bibliotecas de rastreo de Datadog intentan detectar y reportar eventos de actividad del usuario automáticamente. Para obtener más información, consulta <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Desactivación del seguimiento automático de eventos de actividad del usuario</a>.
+<strong> Detección Automatizada de Actividad del Usuario: </strong> Las bibliotecas de trazado de Datadog intentan detectar e informar eventos de actividad del usuario automáticamente. Para más información, consulte <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Deshabilitar el seguimiento automático de eventos de actividad del usuario</a>.
 </div>
 
-Puedes [añadir etiquetas personalizadas a tu tramo raíz][3], o utilizar las funciones de instrumentación que se describen a continuación.
+Puede [agregar etiquetas personalizadas a su tramo raíz][3], o utilizar las funciones de instrumentación descritas a continuación.
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
-Utiliza la API del rastreador de Java para añadir etiquetas personalizadas a un tramo raíz y añade la información del usuario para poder monitorizar solicitudes autenticadas en la aplicación.
+Utilice la API del trazador de Java para agregar etiquetas personalizadas a un tramo raíz y añadir información del usuario para que pueda hacer seguimiento de las solicitudes autenticadas en la aplicación.
 
-Las etiquetas de monitorización del usuario se aplican en el tramo raíz y comienzan con el prefijo `usr` seguido del nombre del campo. Por ejemplo, `usr.name` es una etiqueta de monitorización de usuario que rastrea el nombre de este.
+Las etiquetas de seguimiento de usuarios se aplican en el tramo raíz y comienzan con el prefijo `usr` seguido del nombre del campo. Por ejemplo, `usr.name` es una etiqueta de seguimiento de usuarios que rastrea el nombre del usuario.
 
-**Nota**: Comprueba que hayas añadido [las dependencias necesarias a tu aplicación][1].
+**Nota**: Verifique que ha agregado [las dependencias necesarias a su aplicación][1].
 
-En el siguiente ejemplo, se muestra cómo obtener el tramo raíz, añadir las etiquetas relevantes de monitorización de usuarios y habilitar la capacidad de bloqueo de estos:
+El ejemplo a continuación muestra cómo obtener el tramo raíz, agregar las etiquetas de seguimiento de usuario relevantes y habilitar la capacidad de bloqueo de usuarios:
 
 ```java
 import io.opentracing.Span;
@@ -52,13 +51,13 @@ import io.opentracing.util.GlobalTracer;
 import datadog.appsec.api.blocking.Blocking;
 import datadog.trace.api.interceptor.MutableSpan;
 
-// Obtener el tramo activo
+// Get the active span
 final Span span = GlobalTracer.get().activeSpan();
-si ((span instanceof MutableSpan)) {
+if ((span instanceof MutableSpan)) {
    MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
-   // Configurar la etiqueta obligatoria del ID de usuario
+   // Setting the mandatory user id tag
    localRootSpan.setTag("usr.id", "d131dd02c56eec4");
-   // Configurar las etiquetas opcionales de monitorización de usuarios
+   // Setting optional user monitoring tags
    localRootSpan.setTag("usr.name", "Jean Example");
    localRootSpan.setTag("usr.email", "jean.example@example.com");
    localRootSpan.setTag("usr.session_id", "987654321");
@@ -66,7 +65,7 @@ si ((span instanceof MutableSpan)) {
    localRootSpan.setTag("usr.scope", "read:message, write:files");
 }
 
-Bloquear
+Blocking
     .forUser("d131dd02c56eec4")
     .blockIfMatch();
 ```
@@ -76,9 +75,9 @@ Bloquear
 
 {{< programming-lang lang="dotnet" >}}
 
-El paquete de rastreadores de .NET ofrece la función de `SetUser()`, que permite monitorizar solicitudes autenticadas añadiendo la información de usuario a la traza.
+El paquete del rastreador .NET proporciona la función `SetUser()`, que le permite realizar el seguimiento de solicitudes autenticadas al agregar información del usuario a la traza.
 
-En el siguiente ejemplo se muestra cómo añadir las etiquetas relevantes de monitorización de usuarios y habilitar la capacidad de bloqueo de estos:
+El ejemplo a continuación muestra cómo agregar las etiquetas de seguimiento de usuario relevantes y habilitar la capacidad de bloqueo de usuarios:
 
 ```csharp
 
@@ -88,21 +87,21 @@ using Datadog.Trace;
 
     var userDetails = new UserDetails()
     {
-        // el identificador interno de sistemas para los usuarios
+        // the systems internal identifier for the users
         Id = "d41452f2-483d-4082-8728-171a3570e930",
-        // la dirección de correo electrónico del usuario
+        // the email address of the user
         Email = "test@adventure-works.com",
-        // el nombre de usuario, como lo muestra el sistema
+        // the user's name, as displayed by the system
         Name = "Jane Doh",
-        // el ID de la sesión delusuario
+        // the user's session id
         SessionId = "d0632156-132b-4baa-95b2-a492c5f9cb16",
-        // el rol en el cual el usuario está realizando la solicitud
+        // the role the user is making the request under
         Role = "standard",
     };
     Tracer.Instance.ActiveScope?.Span.SetUser(userDetails);
 ```
 
-Para más información y opciones, consulta [la documentación del rastreador de .NET][1].
+Para información y opciones, lea [la documentación del rastreador .NET][1].
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace#user-identification
 
@@ -110,9 +109,9 @@ Para más información y opciones, consulta [la documentación del rastreador de
 
 {{< programming-lang lang="go" >}}
 
-El paquete del rastreador Go proporciona la función `SetUser()`, que te permite monitorizar solicitudes autenticadas añadiendo información del usuario a la traza. Para más opciones, consulta [la documentación del rastreador Go][2] (o [la documentación de v1][1]).
+El paquete del rastreador Go proporciona la función `SetUser()`, que le permite realizar el seguimiento de solicitudes autenticadas al agregar información del usuario a la traza. Para más opciones, consulte [la documentación del rastreador Go][2] (o [documentación v1][1]).
 
-Este ejemplo muestra cómo recuperar el tramo del rastreador actual, cómo utilizarlo para establecer etiquetas de monitorización de usuarios y activar la capacidad de bloqueo de usuarios. {{% tracing-go-v2 %}}
+Este ejemplo muestra cómo recuperar el tramo del rastreador actual, usarlo para establecer etiquetas de seguimiento de usuario y habilitar la capacidad de bloqueo de usuarios. {{% tracing-go-v2 %}}
 
 ```go
 import (
@@ -135,34 +134,34 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{< programming-lang lang="ruby" >}}
 
-Utiliza una de las siguientes API para añadir la información del usuario a una traza de modo que se puedan monitorizar las solicitudes autenticadas en la aplicación:
+Utilice una de las siguientes API para agregar información del usuario a una traza para que pueda realizar el seguimiento de las solicitudes autenticadas en la aplicación:
 
 {{% collapse-content title="set_user" level="h4" expanded="true" %}}
 
-Empezando con `ddtrace` 1.1.0, el método `Datadog::Kit::Identity.set_user` está disponible. Se trata de la API recomendada para añadir la información del usuario a las trazas:
+A partir de `ddtrace` 1.1.0, el método `Datadog::Kit::Identity.set_user` está disponible. Esta es la API recomendada para agregar información del usuario a las trazas:
 
 ```ruby
-# Obtener la traza activa
+# Get the active trace
 trace = Datadog::Tracing.active_trace
 
-# Configurar la etiqueta obligatoria del ID de usuario
+# Set mandatory user id tag
 Datadog::Kit::Identity.set_user(trace, id: 'd131dd02c56eeec4')
 
-# O configurar cualquiera de estas etiquetas opcionales de monitorización de usuarios
+# Or set any of these optional user monitoring tags
 Datadog::Kit::Identity.set_user(
   trace,
 
-  # ID obligatorio
+  # mandatory id
   id: 'd131dd02c56eeec4',
 
-  # etiquetas opcionales con una semántica conocida
+  # optional tags with known semantics
   name: 'Jean Example',
   email:, 'jean.example@example.com',
   session_id:, '987654321',
   role: 'admin',
   scope: 'read:message, write:files',
 
-  # etiquetas opcionales con forma libre
+  # optional free-form tags
   another_tag: 'another_value',
 )
 ```
@@ -170,31 +169,31 @@ Datadog::Kit::Identity.set_user(
 
 {{% collapse-content title="set_tag" level="h4" expanded="false" id="ruby-set-tag" %}}
 
-Si `Datadog::Kit::Identity.set_user` no satisface tus necesidades, puedes utilizar `set_tag` en su lugar.
+Si `Datadog::Kit::Identity.set_user` no satisface tus necesidades, puedes usar `set_tag` en su lugar.
 
-Las etiquetas de monitorización de usuario se aplican en la traza y comienzan con el prefijo `usr.` seguido del nombre del campo. Por ejemplo, `usr.name` es una etiqueta de monitorización de usuario que rastrea el nombre de este.
+Las etiquetas de seguimiento de usuario se aplican en la traza y comienzan con el prefijo `usr.` seguido del nombre del campo. Por ejemplo, `usr.name` es una etiqueta de seguimiento de usuario que rastrea el nombre del usuario.
 
-En el siguiente ejemplo se muestra cómo obtener la traza activa y añadir las etiquetas relevantes de monitorización de usuario:
+El ejemplo a continuación muestra cómo obtener la traza activa y agregar etiquetas de seguimiento de usuario relevantes:
 
 **Notas**:
 - Los valores de las etiquetas deben ser cadenas.
-- La etiqueta de `usr.id` es obligatoria.
+- La etiqueta `usr.id` es obligatoria.
 
 ```ruby
-# Obtener la traza activa
+# Get the active trace
 trace = Datadog::Tracing.active_trace
 
-# Configurar la etiqueta obligatoria del ID de usuario
+# Set mandatory user id tag
 trace.set_tag('usr.id', 'd131dd02c56eeec4')
 
-# Configurar las etiquetas opcionales de monitorización de usuarios con una semántica conocida
+# Set optional user monitoring tags with known sematics
 trace.set_tag('usr.name', 'Jean Example')
 trace.set_tag('usr.email', 'jean.example@example.com')
 trace.set_tag('usr.session_id', '987654321')
 trace.set_tag('usr.role', 'admin')
 trace.set_tag('usr.scope', 'read:message, write:files')
 
-# Configurar etiquetas con forma libre:
+# Set free-form tags:
 trace.set_tag('usr.another_tag', 'another_value')
 ```
 {{% /collapse-content %}}
@@ -203,20 +202,20 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 {{< programming-lang lang="php" >}}
 
-El rastreador de PHP ofrece la función de `\DDTrace\set_user()`, que permite monitorizar y bloquear solicitudes autenticadas.
+El rastreador de PHP proporciona la función `\DDTrace\set_user()`, que te permite monitorear y bloquear solicitudes autenticadas.
 
-`\DDTrace\set_user()` añade las etiquetas relevantes del usuario y los metadatos a la traza y realiza automáticamente el bloqueo de usuarios.
+`\DDTrace\set_user()` agrega las etiquetas de usuario relevantes y los metadatos a la traza y realiza automáticamente el bloqueo de usuarios.
 
-En el siguiente ejemplo se muestra cómo configurar las etiquetas de monitorización de usuarios y habilitar el bloqueo de estos:
+El siguiente ejemplo muestra cómo establecer etiquetas de seguimiento de usuarios y habilitar la capacidad de bloqueo de usuarios:
 
 ```php
 <?php
-// El bloqueo se realiza internamente a través de la llamada de configuración_usuario.
+// Blocking is performed internally through the set_user call.
 \DDTrace\set_user(
-    // Se necesita un identificador único de usuario.
+    // A unique identifier of the user is required.
     '123456789',
 
-    // Todos los demás campos son opcionales.
+    // All other fields are optional.
     [
         'name' =>  'Jean Example',
         'email' => 'jean.example@example.com',
@@ -232,37 +231,37 @@ En el siguiente ejemplo se muestra cómo configurar las etiquetas de monitorizac
 
 {{< programming-lang lang="nodejs" >}}
 
-El paquete de rastreadores de Node ofrece la función de`tracer.setUser(user)`, que permite monitorizar solicitudes autenticadas añadiendo la información de usuario a la traza.
+El paquete de rastreo de Node proporciona la función `tracer.setUser(user)`, que te permite realizar el seguimiento de solicitudes autenticadas al agregar información del usuario a la traza.
 
-En el siguiente ejemplo se muestra cómo añadir etiquetas relevantes de monitorización de usuarios y habilitar la capacidad de bloqueo de estos:
+El ejemplo a continuación muestra cómo agregar etiquetas de seguimiento de usuario relevantes y habilitar la capacidad de bloqueo de usuarios:
 
 ```javascript
 const tracer = require('dd-trace').init()
 
 function handle () {
   tracer.setUser({
-    id: '123456789', // *NECESARIO* Identificador único de usuario.
+    id: '123456789', // *REQUIRED* Unique identifier of the user.
 
-    // Todos los demás campos son opcionales.
-    email: 'jane.doe@example.com', // Dirección de correo electrónico del usuario.
-    name: 'Jane Doe', // Nombre intuitivo del usuario.
-    session_id: '987654321', // ID de la sesión del usuario.
-    role: 'admin', // El rol en el cual el usuario está realizando la solicitud.
-    scope: 'read:message, write:files', // Ámbitos o autorizaciones otorgadas que el usuario posee actualmente.
+    // All other fields are optional.
+    email: 'jane.doe@example.com', // Email of the user.
+    name: 'Jane Doe', // User-friendly name of the user.
+    session_id: '987654321', // Session ID of the user.
+    role: 'admin', // Role the user is making the request under.
+    scope: 'read:message, write:files', // Scopes or granted authorizations the user currently possesses.
 
-    // También se aceptan campos arbitrarios para adjuntar datos personalizados al usuario (RBAC, Oauth, etc...)
+    // Arbitrary fields are also accepted to attach custom data to the user (RBAC, Oauth, etc…)
     custom_tag: 'custom data'
   })
 
-// Configurar el usuario autenticado actualmente y comprobar si está bloqueado
-si (tracer.appsec.isUserBlocked(user)) {  // configurar también el usuario autenticado actualmente
-  return tracer.appsec.blockRequest(req, res) // se envía la respuesta de bloqueo
+// Set the currently authenticated user and check whether they are blocked
+if (tracer.appsec.isUserBlocked(user)) {  // also set the currently authenticated user
+  return tracer.appsec.blockRequest(req, res) // blocking response is sent
   }
 
 }
 ```
 
-Para más información y opciones, consulta [la documentación del rastreador de Node.js][1].
+Para información y opciones, lea [la documentación del rastreador de Node.js][1].
 
 
 
@@ -271,13 +270,13 @@ Para más información y opciones, consulta [la documentación del rastreador de
 
 {{< programming-lang lang="python" >}}
 
-A partir de dd-trace-py v3.7, puedes utilizar el nuevo SDK del rastreador Python para rastrear usuarios y eventos de usuario.
+A partir de dd-trace-py v3.7, puede usar el nuevo SDK del rastreador de Python para realizar el seguimiento de usuarios y eventos de usuario.
 
-En versiones anteriores, puedes monitorizar solicitudes autenticadas añadiendo información del usuario a la traza con la función `set_user` proporcionada por el paquete del rastreador Python.
+En versiones anteriores, puede realizar el seguimiento de solicitudes autenticadas al agregar información del usuario a la traza con la función `set_user` proporcionada por el paquete de rastreo de Python.
 
-{{% collapse-content title="SDK del seguimiento de usuarios" level="h4" expanded="true" id="python-user-info-sdk" %}}
+{{% collapse-content title="SDK de seguimiento de usuarios" level="h4" expanded="true" id="python-user-info-sdk" %}}
 
-A partir de dd-trace-py v3.7, este ejemplo muestra cómo establecer etiquetas de monitorización de usuarios y activar la capacidad de bloqueo de usuarios:
+A partir de dd-trace-py v3.7, este ejemplo muestra cómo establecer etiquetas de seguimiento de usuarios y habilitar la capacidad de bloqueo de usuarios:
 
 ```python
 from ddtrace.appsec.track_user_sdk import track_user
@@ -317,16 +316,16 @@ track_user(
 
 {{% collapse-content title="API heredada" level="h4" expanded="false" id="python-user-info-legacy" %}}
 
-Este ejemplo muestra cómo establecer etiquetas de monitorización de usuarios y activar la capacidad de bloqueo de usuarios utilizando la API heredada; sin embargo, se recomienda utilizar el nuevo SDK de seguimiento de usuarios descrito anteriormente.
+Este ejemplo muestra cómo establecer etiquetas de seguimiento de usuarios y habilitar la capacidad de bloqueo de usuarios utilizando la API heredada; sin embargo, se recomienda usar el nuevo SDK de seguimiento de usuarios, descrito anteriormente.
 
-```Python
+```python
 from ddtrace.contrib.trace_utils import set_user
 from ddtrace import tracer
-# Llamada de configuración_usuario() para rastrear el ID de usuario autenticado actualmente
-user_id = "som_user_id"
+# Call set_user() to trace the currently authenticated user id
+user_id = "some_user_id"
 set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
          role="manager", session_id="session_id", propagate=True)
-```3
+```
 
 {{% /collapse-content %}}
 
@@ -334,22 +333,23 @@ set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope"
 
 {{< /programming-lang-wrapper >}}
 
-## Añadir la información de la lógica empresarial (inicio de sesión correcto, inicio de sesión fallido, cualquier lógica empresarial) a las trazas
+## Agregando información de lógica de negocio (éxito de inicio de sesión, fallo de inicio de sesión, cualquier lógica de negocio) a las trazas
 
 <div class="alert alert-info">
-<strong>Una nota sobre usr.id y usr.login:</strong> la investigación del abuso en el inicio de sesión se basa en dos conceptos similares, pero diferentes. usr.id contiene el identificador único de la cuenta de usuario en la base de datos. Es único e inmutable. No está disponible cuando alguien intenta iniciar sesión en una cuenta inexistente. El bloqueo de usuarios tiene como objetivo usr.id.</br>
-El usuario generalmente no es consciente de su ID de usuario. En su lugar, confía en identificadores mutables (número de teléfono, nombre de usuario, dirección de email...). La cadena utilizada por el usuario para iniciar sesión en una cuenta debe ser informada como usr.login en eventos de inicio de sesión.</br>
-Si no se proporciona ningún usr.login, se utilizará usr.id en su lugar.</a>
+<strong>Una nota sobre usr.id y usr.login:</strong> La investigación del abuso de inicio de sesión se basa en dos conceptos similares, pero diferentes. usr.id contiene el identificador único de la cuenta de usuario en la base de datos. Es único e inmutable. No está disponible cuando alguien intenta iniciar sesión en una cuenta que no existe. El bloqueo de usuario se dirige a usr.id.</br>
+El usuario generalmente no es consciente de su ID de usuario. En cambio, confía en identificadores mutables (número de teléfono, nombre de usuario, dirección de correo electrónico...). La cadena utilizada por el usuario para iniciar sesión en una cuenta debe ser reportada como usr.login en los eventos de inicio de sesión.</br>
+Si no se proporciona usr.login, se utilizará usr.id en su lugar.</a>
 </div>
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
-A partir de dd-trace-java v1.8.0, puedes utilizar la API del rastreador Java para realizar un seguimiento de los eventos de usuario.
+A partir de dd-trace-java v1.8.0, puede usar la API de Java del rastreador para rastrear eventos de usuario.
 
-En los siguientes ejemplos se muestra cómo rastrear los eventos de inicio de sesión o los eventos personalizados (utilizando el registro como ejemplo).
+Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo).
 
-{{% collapse-content title="Inicio de sesión exitoso" level="h4" expanded="true" %}}
+{{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -378,7 +378,8 @@ public class LoginController {
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inicio de sesión fallido" level="h4" expanded="false" id="java-login-failure" %}}
+{{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="java-login-failure" %}}
+
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -411,6 +412,7 @@ public class LoginController {
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="java-custom-business" %}}
+
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -438,11 +440,12 @@ public class LoginController {
 
 {{< programming-lang lang="dotnet" >}}
 
-A partir de dd-trace-dotnet v2.23.0, puedes utilizar la API del rastreador .NET para realizar un seguimiento de los eventos de usuario.
+A partir de dd-trace-dotnet v2.23.0, puede usar la API de .NET del rastreador para rastrear eventos de usuario.
 
-En los siguientes ejemplos se muestra cómo rastrear los eventos de inicio de sesión o los eventos personalizados (utilizando el registro como ejemplo).
+Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo).
 
-{{% collapse-content title="Inicio de sesión exitoso" level="h4" expanded="true" %}}
+{{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```csharp
 using Datadog.Trace.AppSec;
 
@@ -460,7 +463,8 @@ void OnLogonSuccess(string userId, string login...)
 
 ```
 {{% /collapse-content %}}
-{{% collapse-content title="Inicio de sesión fallido" level="h4" expanded="false" id="dotnet-login-failure" %}}
+{{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="dotnet-login-failure" %}}
+
 ```csharp
 using Datadog.Trace.AppSec;
 
@@ -480,15 +484,16 @@ void OnLogonFailure(string userId, string login, bool userExists, ...)
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="dotnet-custom-business" %}}
+
 ```csharp
 void OnUserSignupComplete(string userId, ...)
 {
-    // el parámetro de metadatos es opcional, pero añadiendo el "usr.id"
+    // the metadata parameter is optional, but adding the "usr.id"
     var metadata = new Dictionary<string, string>()
     {
         { "usr.id", userId }
     };
-    // Aprovechar el rastreo personalizado de la lógica empresarial para rastrear los registros de los usuarios
+    // Leveraging custom business logic tracking to track user signups
     EventTrackingSdk.TrackCustomEvent("users.signup", metadata);
 
     // ...
@@ -499,11 +504,12 @@ void OnUserSignupComplete(string userId, ...)
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-A partir de dd-trace-go v1.47.0, puedes utilizar la API del rastreador Go para realizar un seguimiento de los eventos de usuario.
+A partir de dd-trace-go v1.47.0, puede usar la API de Go del rastreador para rastrear eventos de usuario.
 
-Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (utilizando el registro como ejemplo). {{% tracing-go-v2 %}}
+Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo). {{% tracing-go-v2 %}}
 
-{{% collapse-content title="Inicio de sesión exitoso" level="h4" expanded="true" %}}
+{{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```go
 import (
   "github.com/DataDog/dd-trace-go/v2/appsec"
@@ -524,7 +530,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 {{% /collapse-content %}}
-{{% collapse-content title="Inicio de sesión fallido" level="h4" expanded="false" id="go-login-failure" %}}
+{{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="go-login-failure" %}}
+
 ```go
 import (
   "github.com/DataDog/dd-trace-go/v2/appsec"
@@ -542,6 +549,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="go-custom-business" %}}
+
 ```go
 import (
   "github.com/DataDog/dd-trace-go/v2/appsec"
@@ -559,11 +567,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-A partir de dd-trace-rb v1.9.0, puedes utilizar la API del rastreador Ruby para realizar un seguimiento de los eventos de usuario. La versión v2.19.0 de dd-trace-rb introduce nuevos métodos bajo el espacio de nombres `Datadog::Kit::AppSec::Events::V2`. Los métodos de seguimiento de eventos existentes se mantienen por compatibilidad.
+A partir de dd-trace-rb v1.9.0, puede usar la API de Ruby del rastreador para rastrear eventos de usuario. La versión v2.19.0 de dd-trace-rb introduce nuevos métodos bajo el espacio de nombres `Datadog::Kit::AppSec::Events::V2`. Los métodos existentes de seguimiento de eventos se mantienen para compatibilidad.
 
-En los siguientes ejemplos se muestra cómo rastrear los eventos de inicio de sesión o los eventos personalizados (utilizando el registro como ejemplo).
+Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo).
 
-{{% collapse-content title="Inicio de sesión exitoso" level="h4" expanded="true" %}}
+{{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
@@ -579,7 +588,8 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inicio de sesión fallido" level="h4" expanded="false" id="ruby-login-failure" %}}
+{{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="ruby-login-failure" %}}
+
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
@@ -592,6 +602,7 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="ruby-custom-business" %}}
+
 ```ruby
 require 'datadog/kit/appsec/events'
 
@@ -604,20 +615,21 @@ Datadog::Kit::AppSec::Events.track(event_name, trace, span, metadata)
 ```
 {{% /collapse-content %}}
 
-#### Migración a los nuevos métodos de inicio de sesión exitosos y fallidos
+#### Migrando a los nuevos métodos de éxito y fallo de inicio de sesión
 
-Los nuevos métodos de `Datadog::Kit::AppSec::Events::V2` introducen un orden de parámetros más intuitivo y una separación más clara de las preocupaciones. Éstos son los cambios clave:
+Los nuevos métodos en `Datadog::Kit::AppSec::Events::V2` introducen un orden de parámetros más intuitivo y una separación de preocupaciones más clara. Aquí están los cambios clave:
 
-1. El identificador de inicio de sesión (email, nombre de usuario) es el primer parámetro y es obligatorio.
-2. El objeto/ID de usuario es opcional en los eventos exitosos y se ha eliminado de los eventos fallidos.
+1. El identificador de inicio de sesión (correo electrónico, nombre de usuario) es el primer parámetro y es obligatorio.
+2. El objeto/ID de usuario es opcional en eventos de éxito y se ha eliminado de los eventos de fracaso.
 3. Los metadatos se han simplificado y ya no requieren el campo `usr.login`.
-4. Los parámetros de traza y tramo ya no son necesarios y se deducen automáticamente.
+4. Los parámetros de traza y de tramo ya no son obligatorios y se infieren automáticamente.
 
-**Nota**: los antiguos métodos `track_login_success` y `track_login_failure` quedan obsoletos en favor de los nuevos métodos `track_user_login_success` y `track_user_login_failure`, respectivamente.
+**Nota**: los métodos heredados `track_login_success` y `track_login_failure` están obsoletos en favor de los nuevos métodos `track_user_login_success` y `track_user_login_failure`, respectivamente.
 
 En el siguiente ejemplo, el código comentado ya no es necesario.
 
-{{% collapse-content title="Inicio de sesión exitoso" level="h4" expanded="true" id="ruby-v2-migration-login-success" %}}
+{{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" id="ruby-v2-migration-login-success" %}}
+
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
@@ -638,7 +650,8 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_success(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inicio de sesión fallido" level="h4" expanded="false" id="ruby-v2-migration-login-failure" %}}
+{{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="ruby-v2-migration-login-failure" %}}
+
 ```ruby
 require 'datadog/kit/appsec/events/v2'
 
@@ -659,11 +672,12 @@ Datadog::Kit::AppSec::Events::V2.track_user_login_failure(login, user_exists, me
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
-A partir de dd-trace-php v0.84.0, puedes usar la API del rastreador PHP para rastrear eventos de usuario. La versión v1.11.0 de dd-trace-php introduce nuevos métodos bajo el espacio de nombres `\datadog\appsec\v2\`. Los métodos de seguimiento de eventos existentes se mantienen por compatibilidad.
+A partir de dd-trace-php v0.84.0, puedes usar la API del rastreador de PHP para rastrear eventos de usuario. La versión v1.11.0 de dd-trace-php introduce nuevos métodos bajo el espacio de nombres `\datadog\appsec\v2\`. Los métodos existentes de rastreo de eventos se mantienen para compatibilidad.
 
-En los siguientes ejemplos se muestra cómo rastrear los eventos de inicio de sesión o los eventos personalizados (utilizando el registro como ejemplo).
+Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo).
 
-{{% collapse-content title="Inicio de sesión exitoso" level="h4" expanded="true" %}}
+{{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```php
 <?php
 $user = [
@@ -681,7 +695,8 @@ $metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inicio de sesión fallido" level="h4" expanded="false" id="php-login-failure" %}}
+{{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="php-login-failure" %}}
+
 ```php
 <?php
 $login = 'user-id'; // the string used by the user to log in
@@ -697,6 +712,7 @@ $metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="php-custom-business" %}}
+
 ```php
 <?php
 $eventName = 'users.signup'; // custom event name
@@ -706,19 +722,20 @@ $metadata = ['usr.id' => $id]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-#### Migración a los nuevos métodos de inicio de sesión exitosos y fallidos
+#### Migrando a los nuevos métodos de inicio de sesión para el éxito y el fallo
 
-Los nuevos métodos del espacio de nombres `\datadog\appsec\v2\` introducen un orden de parámetros más intuitivo y una separación más clara de las problemáticas. Estos son los cambios clave:
+Los nuevos métodos en el espacio de nombres `\datadog\appsec\v2\` introducen un orden de parámetros más intuitivo y una separación de preocupaciones más clara. Aquí están los cambios clave:
 
-1. El identificador de inicio de sesión (email, nombre de usuario) es el primer parámetro y es obligatorio.
-2. La matriz/ID de usuario es opcional en los eventos exitosos y se ha eliminado de los eventos fallidos.
+1. El identificador de inicio de sesión (correo electrónico, nombre de usuario) es el primer parámetro y es obligatorio.
+2. El arreglo/ID de usuario es opcional en eventos de éxito y se ha eliminado de los eventos de fracaso.
 3. Los metadatos se han simplificado y ya no requieren el campo `usr.login`.
 
-**Nota**: los antiguos métodos `\datadog\appsec\track_user_login_success_event` y `\datadog\appsec\track_user_login_failure_event` quedan obsoletos en favor de los nuevos métodos `\datadog\appsec\v2\track_user_login_success` y `\datadog\appsec\v2\track_user_login_failure`, respectivamente.
+**Nota**: los métodos heredados `\datadog\appsec\track_user_login_success_event` y `\datadog\appsec\track_user_login_failure_event` están obsoletos en favor de los nuevos métodos `\datadog\appsec\v2\track_user_login_success` y `\datadog\appsec\v2\track_user_login_failure`, respectivamente.
 
 En el siguiente ejemplo, el código comentado ya no es necesario.
 
-{{% collapse-content title="Inicio de sesión exitoso" level="h4" expanded="true" %}}
+{{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```php
 <?php
 // in a controller:
@@ -740,7 +757,8 @@ $metadata = [
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inicio de sesión fallido" level="h4" expanded="false" id="php-migration-login-failure" %}}
+{{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="php-migration-login-failure" %}}
+
 ```php
 <?php
 
@@ -761,12 +779,13 @@ $metadata = [
 
 {{< programming-lang lang="nodejs" >}}
 
-A partir de dd-trace-js v3.13.1, puedes utilizar la API del rastreador Node.js para realizar un seguimiento de los eventos de usuario. La versión v5.48.0 de dd-trace-js introduce nuevos métodos bajo el espacio de nombres `eventTrackingV2`. Los métodos de seguimiento de eventos existentes se mantienen por compatibilidad.
+A partir de dd-trace-js v3.13.1, puedes usar la API del rastreador de Node.js para rastrear eventos de usuario. La versión v5.48.0 de dd-trace-js introduce nuevos métodos bajo el espacio de nombres `eventTrackingV2`. Los métodos existentes de rastreo de eventos se mantienen para compatibilidad.
 
 
-En los siguientes ejemplos se muestra cómo rastrear los eventos de inicio de sesión o los eventos personalizados (utilizando el registro como ejemplo).
+Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión o eventos personalizados (usando el registro como ejemplo).
 
-{{% collapse-content title="Inicio de sesión exitoso" level="h4" expanded="true" %}}
+{{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```javascript
 const tracer = require('dd-trace')
 
@@ -785,7 +804,8 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inicio de sesión fallido" level="h4" expanded="false" id="nodejs-login-failure" %}}
+{{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="nodejs-login-failure" %}}
+
 ```javascript
 const tracer = require('dd-trace')
 
@@ -802,10 +822,11 @@ tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 {{% /collapse-content %}}
 
 {{% collapse-content title="Lógica de negocio personalizada" level="h4" expanded="false" id="nodejs-custom-business" %}}
+
 ```javascript
 const tracer = require('dd-trace')
 
-// en un controlador:
+// in a controller:
 const eventName = 'users.signup'
 const metadata = { 'usr.id': 'user-id' }
 
@@ -813,19 +834,20 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 ```
 {{% /collapse-content %}}
 
-#### Migración a los nuevos métodos de inicio de sesión exitosos y fallidos
+#### Migrando a los nuevos métodos de inicio de sesión para el éxito y el fallo
 
-Los nuevos métodos de `eventTrackingV2` introducen un orden de parámetros más intuitivo y una separación más clara de las preocupaciones. Éstos son los cambios clave:
+Los nuevos métodos en `eventTrackingV2` introducen un orden de parámetros más intuitivo y una separación de preocupaciones más clara. Aquí están los cambios clave:
 
-1. El identificador de inicio de sesión (email, nombre de usuario) es el primer parámetro y es obligatorio.
-2. El objeto/ID de usuario es opcional en los eventos exitosos y se ha eliminado de los eventos fallidos.
+1. El identificador de inicio de sesión (correo electrónico, nombre de usuario) es el primer parámetro y es obligatorio.
+2. El objeto/ID de usuario es opcional en eventos de éxito y se ha eliminado de los eventos de fracaso.
 3. Los metadatos se han simplificado y ya no requieren el campo `usr.login`.
 
-**Nota**: los métodos antiguos `trackUserLoginSuccessEvent` y `trackUserLoginFailureEvent` quedan obsoletos en favor de los nuevos métodos `eventTrackingV2.trackUserLoginSuccess` y `eventTrackingV2.trackUserLoginFailure`, respectivamente.
+**Nota**: los métodos heredados `trackUserLoginSuccessEvent` y `trackUserLoginFailureEvent` están obsoletos en favor de los nuevos métodos `eventTrackingV2.trackUserLoginSuccess` y `eventTrackingV2.trackUserLoginFailure`, respectivamente.
 
 En el siguiente ejemplo, el código comentado ya no es necesario.
 
-{{% collapse-content title="Inicio de sesión exitoso" level="h4" expanded="true" %}}
+{{% collapse-content title="Éxito de inicio de sesión" level="h4" expanded="true" %}}
+
 ```javascript
 const tracer = require('dd-trace')
 
@@ -847,7 +869,8 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inicio de sesión fallido" level="h4" expanded="false" id="nodejs-migration-login-failure" %}}
+{{% collapse-content title="Fallo de inicio de sesión" level="h4" expanded="false" id="nodejs-migration-login-failure" %}}
+
 ```javascript
 const tracer = require('dd-trace')
 
@@ -871,13 +894,13 @@ tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 {{< programming-lang lang="python" >}}
 
 
-Empezando en dd-rastrear-py v1.9.0, se puede utilizar la API del rastreador de Python para rastrear los eventos del usuario.
+A partir de dd-trace-py v1.9.0, puedes usar la API del rastreador de Python para rastrear eventos de usuario.
 
-A partir de dd-trace-py v3.7, puedes utilizar el nuevo SDK del rastreador Python para rastrear usuarios y eventos de usuario.
+A partir de dd-trace-py v3.7, puedes usar el nuevo SDK del rastreador de Python para rastrear usuarios y eventos de usuarios.
 
-Los siguientes ejemplos muestran cómo realizar un seguimiento de eventos de inicio de sesión, eventos de registro o eventos personalizados.
+Los siguientes ejemplos muestran cómo rastrear eventos de inicio de sesión, eventos de registro o eventos personalizados.
 
-{{% collapse-content title="SDK de seguimiento de usuarios" level="h4" expanded="true" id="python-business-logic-sdk" %}}
+{{% collapse-content title="SDK de Seguimiento de Usuarios" level="h4" expanded="true" id="python-business-logic-sdk" %}}
 
 Disponible desde dd-trace-py v3.7, `track_user_sdk` proporciona 5 funciones:
 
@@ -958,9 +981,9 @@ track_user_sdk.track_custom_event("my_event_name", metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Aplicación de FastAPI Toy con el SDK" level="h4" expanded="false" id="python-business-logic-example" %}}
+{{% collapse-content title="Aplicación de juguete FastAPI con SDK" level="h4" expanded="false" id="python-business-logic-example" %}}
 
-El siguiente ejemplo es una aplicación Toy en pleno funcionamiento que utiliza el SDK de seguimiento de usuarios con una base de datos de usuarios basada en memoria. Este ejemplo ilustra el posible uso del kit de desarrollo de software (SDK), pero no proporciona los requisitos necesarios de una aplicación real, como un modelo de datos persistente o un sistema de autenticación seguro.
+El siguiente ejemplo es una aplicación de juguete completamente funcional que utiliza el SDK de seguimiento de usuarios con una base de datos de usuarios basada en memoria. Este ejemplo ilustra el uso posible del SDK, pero no proporciona los requisitos necesarios de una aplicación real, como un modelo de datos persistente o un sistema de autenticación seguro.
 
 ```python
 from uuid import uuid4
@@ -1066,7 +1089,7 @@ async def whoami(request: Request) -> User:
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="API heredada" level="h4" expanded="false" id="python-business-logic-legacy" %}}
+{{% collapse-content title="API Legado" level="h4" expanded="false" id="python-business-logic-legacy" %}}
 
 El método preferido es utilizar el nuevo SDK de seguimiento de usuarios (disponible desde dd-trace-py v1.9) en lugar de la API heredada.
 
@@ -1098,80 +1121,80 @@ track_custom_event(tracer, event_name, metadata)
 
 {{< /programming-lang-wrapper >}}
 
-### Rastrear la información de la lógica empresarial sin modificar el código
+### Seguimiento de información de lógica de negocio sin modificar el código
 
-Si tu servicio tiene AAP activado y la [configuración remota][1] activada, puedes crear una regla WAF personalizada para marcar cualquier solicitud que coincida con una etiqueta de lógica de negocio personalizada. Esto no requiere ninguna modificación en tu aplicación, y puede hacerse completamente desde Datadog.
+Si su servicio tiene AAP habilitado y [Configuración Remota][1] habilitada, puede crear una regla WAF personalizada para marcar cualquier solicitud que coincida con una etiqueta de lógica de negocio personalizada. Esto no requiere ninguna modificación a su aplicación y se puede hacer completamente desde Datadog.
 
-Para empezar, ve a la [Página de la regla WAF personalizada][2] y haz clic en "Crear regla nueva".
+Para comenzar, navegue a la [página de Regla WAF Personalizada][2] y haga clic en "Crear Nueva Regla".
 
-{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Accede al menú de Reglas personalizas de WAF desde la página de inicio de AAP haciendo clic en Protección, luego en WAF dentro de la aplicación y reglas personalizadas" style="width:100%;" >}}
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Acceda al Menú de Regla WAF Personalizada desde la página de inicio de AAP haciendo clic en Protección, luego en WAF en la Aplicación y Reglas Personalizadas" style="width:100%;" >}}
 
-Esto abrirá un menú en el que podrás definir tu regla WAF personalizada. Seleccionando la categoría "Business Logic" (Lógica de negocio), podrás configurar un tipo de evento (por ejemplo, `users.password_reset`). A continuación, podrás seleccionar el servicio que deseas rastrear y un endpoint específico. También puedes utilizar la condición de la regla para apuntar a un parámetro específico para identificar el flujo de código que deseas _instrumentar_. Cuando la condición coincide, la biblioteca etiqueta la traza y la marca para reenviarla a AAP. Si no necesitas la condición, puedes establecer una condición amplia para que coincida con todo.
+Esto abrirá un menú en el que puede definir su regla WAF personalizada. Al seleccionar la categoría "Lógica de Negocio", podrá configurar un tipo de evento (por ejemplo, `users.password_reset`). Luego puede seleccionar el servicio que desea rastrear y un punto de conexión específico. También puede usar la condición de la regla para apuntar a un parámetro específico para identificar el flujo de código que desea _instrumentar_. Cuando la condición coincide, la biblioteca etiqueta la traza y la marca para ser enviada a AAP. Si no necesitas la condición, puedes establecer una condición amplia para que coincida con todo.
 
-{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Captura de pantalla de la forma que aparece cuando haces clic en el botón Crear regla nueva" style="width:50%;" >}}
+{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Captura de pantalla del formulario que aparece cuando hace clic en el botón Crear Nueva Regla." style="width:50%;" >}}
 
-Una vez guardada, la regla se despliega en las instancias del servicio que tienen habilitada la Configuración remota.
+Una vez guardada, la regla se despliega en las instancias del servicio que tienen habilitada la Configuración Remota.
 
 
 [1]: /es/tracing/guide/remote_config
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 
-## Rastreo automático de los eventos de actividad de los usuarios
+## Seguimiento automático de eventos de actividad del usuario
 
-Cuando AAP está activada, las bibliotecas de rastreo de Datadog intentan detectar automáticamente los eventos de actividad del usuario.
+Cuando AAP está habilitado, las bibliotecas de instrumentación de Datadog intentan detectar automáticamente los eventos de actividad del usuario.
 
-Los eventos que se pueden detectar automáticamente son los siguientes:
+Los eventos que se pueden detectar automáticamente son:
 
 - `users.login.success`
 - `users.login.failure`
 - `users.signup`
 
-### Modos de rastreo automáticos de los eventos de actividad del usuario
+### Modos de seguimiento automático de eventos de actividad del usuario
 
-El rastreo automático de la actividad del usuario ofrece los siguientes modos:
+El seguimiento automático de la actividad del usuario ofrece los siguientes modos:
 
-- `identification` (nombre abreviado: `ident`):
-  - Este modo es el predeterminado y siempre recopila el ID de usuario o la mejor posibilidad.
-  - El ID de usuario se recopila cuando el inicio de sesión es correcto y cuando es fallido. Cuando es fallido, el ID de usuario se recopila independientemente de si el usuario existe o no.
-  - Cuando el marco instrumentado no proporciona claramente un ID de usuario, sino un objeto de usuario estructurado, el ID de usuario se determina sobre la base del mejor esfuerzo basado en los nombres de campo del objeto. Se considera esta lista de nombres de campo, ordenados por prioridad:
+- `identification` modo (nombre corto: `ident`):
+  - Este modo es el predeterminado y siempre recopila el ID del usuario o hace el mejor esfuerzo.
+  - El ID del usuario se recopila en el éxito y en el fallo del inicio de sesión. Con el fallo, el ID del usuario se recopila independientemente de si el usuario existe o no.
+  - Cuando el marco instrumentado no proporciona claramente un ID de usuario, sino más bien un objeto de usuario estructurado, el ID del usuario se determina en función del mejor esfuerzo basado en los nombres de los campos del objeto. Esta lista de nombres de campos se considera, ordenada por prioridad:
     - `id`
     - `email`
     - `username`
     - `login`
     - `user`
-  - Si no hay ID de usuario disponible o este no se encuentra, el evento del usuario no se emite.
-- Modo `anonymization` (nombre abreviado: `anon`):
-  - Este modo es el mismo que `identification`, pero anonimiza el ID de usuario mediante un hash (SHA256) y recortando el hash resultante.
-- Modo `disabled`:
-  - Las bibliotecas de AAP *no* recopilan ningún ID de usuario de sus instrumentaciones automatizadas.
-  - Los eventos de inicio de sesión del usuario no se emiten.
+  - Si no hay un ID de usuario disponible o encontrado, el evento del usuario no se emite.
+- `anonymization` modo (nombre corto: `anon`):
+  - Este modo es el mismo que `identification`, pero anonimiza el ID del usuario al aplicar un hash (SHA256) y recortar el hash resultante.
+- `disabled` modo:
+  - Las bibliotecas de AAP *no* recogen ningún ID del usuario de sus instrumentaciones automatizadas.
+  - No se emiten eventos de inicio de sesión de usuario.
 
-<div class="alert alert-info">Todos los modos solo afectan a la instrumentación automatizada. Los modos no se aplican a la recopilación manual. Esta se configura mediante un SDK, y esos ajustes no se anulan por una instrumentación automatizada.</div>
+<div class="alert alert-info"> Todos los modos solo afectan la instrumentación automatizada. Los modos no se aplican a la recolección manual. La recolección manual se configura utilizando un SDK, y esos ajustes no son anulados por la instrumentación automatizada.</div>
 
 ### Configuración manual
 
-Las bibliotecas de Datadog permiten configurar la auto-instrumentación utilizando la variable de entorno `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` con el nombre abreviado del modo: `ident`|`anon`|`disabled`.
+Las bibliotecas de Datadog te permiten configurar la auto-instrumentación utilizando la variable de entorno `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` con el nombre corto para el modo: `ident`|`anon`|`disabled`.
 
-El modo por defecto es el modo `identification` (nombre abreviado: `ident`).
+El modo predeterminado es el modo `identification` (nombre corto: `ident`).
 
 Por ejemplo, `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE=anon`.
 
 ### Modos obsoletos
 
-<div class="alert alert-info">Los modos anteriores están obsoletos, pero se mantendrá la compatibilidad hasta la próxima versión principal.</div>
+<div class="alert alert-info"> Los modos anteriores están obsoletos, pero la compatibilidad se mantendrá hasta la próxima versión importante.</div>
 
 Los siguientes modos están obsoletos:
 
-- Modo `safe`: La biblioteca de rastreo no incluye ninguna información PII en los metadatos de los eventos. La biblioteca del rastreador intenta recopilar el ID de usuario, y solo si este es un [GUID][10] válido.
-- Modo `extended`: La biblioteca de rastreo intenta recopilar el ID de usuario y el correo electrónico del usuario. En este modo, Datadog no comprueba el tipo para que el ID de usuario sea un GUID. La biblioteca de rastreado reporta cualquier valor que se pueda ser extraer del evento.
+- `safe` modo: La biblioteca de trazas no incluye ninguna información de PII en los metadatos de los eventos. La biblioteca de trazadores intenta recopilar el ID del usuario, y solo si el ID del usuario es un [GUID][10] válido.
+- `extended` modo: La biblioteca de trazas intenta recopilar el ID del usuario y el correo electrónico del usuario. En este modo, Datadog no realiza la verificación de que el tipo del ID de usuario sea un GUID. La biblioteca de traza informa cualquier valor que se pueda extraer del evento.
 
-**Nota**: Podrían darse casos en los que la biblioteca de rastreo no sea capaz de extraer ninguna información del evento del usuario. El evento se reportaría con metadatos vacíos. En esos casos, utiliza el [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) para instrumentar manualmente los eventos del usuario.
+**Nota**: Podría haber casos en los que la biblioteca de traza no pueda extraer ninguna información del evento del usuario. El evento se reportaría con metadatos vacíos. En esos casos, utiliza el [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) para instrumentar manualmente los eventos del usuario.
 
-## Desactivación del seguimiento de la actividad del usuario
+## Deshabilitando el seguimiento de eventos de actividad del usuario
 
-Para desactivar la detección automática de la actividad del usuario a través de tu [Software Catalog de AAP][14], cambia la variable de entorno de modo de seguimiento automático `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` a `disabled` en el servicio que desees desactivar. Todos los modos solo afectan a la instrumentación automatizada y requieren que la [configuración remota][15] esté activada.
+Para deshabilitar la detección automática de actividad del usuario a través de tu [AAP Software Catalog][14], cambia la variable de entorno del modo de seguimiento automático `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` a `disabled` en el servicio que deseas desactivar. Todos los modos solo afectan la instrumentación automática y requieren que [Remote Configuration][15] esté habilitada.
 
-Para la configuración manual, puedes establecer la variable de entorno `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` en `false` en tu servicio y reiniciarlo. Esto debe establecerse en la aplicación que aloja la biblioteca de rastreo de Datadog, y no en el Datadog Agent.
+Para la configuración manual, puedes establecer la variable de entorno `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` a `false` en tu servicio y reiniciarlo. Esto debe configurarse en la aplicación que aloja el Datadog Tracing Library, y no en el Datadog Agent.
 
 [3]: /es/tracing/trace_collection/custom_instrumentation/
 [4]: /es/security/default_rules/bl-rate-limiting/

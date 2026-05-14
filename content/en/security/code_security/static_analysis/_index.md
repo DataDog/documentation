@@ -7,6 +7,9 @@ is_beta: false
 algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
 further_reading:
+- link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
+  tag: "Blog"
+  text: "Introducing Bits AI Dev Agent for Code Security"
 - link: https://www.datadoghq.com/blog/code-security-secret-scanning
   tag: Blog
   text: Detect and block exposed credentials with Datadog Secret Scanning
@@ -15,7 +18,7 @@ further_reading:
   text: "Using LLMs to filter out false positives from static code analysis"
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
     Code Security is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
@@ -76,7 +79,7 @@ The content of the violation is shown in tabs:
 - **Event**: JSON metadata regarding the violation.
 
 ### Filter out false positives
-For a subset of SAST vulnerabilities, Bits AI can review the context of the finding and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
+For a subset of SAST vulnerabilities, Bits AI can review the context and assess whether it is more likely to be a true or false positive, along with a short explanation of the reasoning. 
 
 For more information, see [AI-Enhanced Static Code Analysis][17].
 
@@ -144,7 +147,7 @@ If you believe a specific violation is a false positive, you can flag it as a fa
 [10]: /security/code_security/dev_tool_int/github_pull_requests/
 [11]: /getting_started/code_security/
 [12]: https://app.datadoghq.com/security/configuration/code-security/setup
-[13]: https://docs.datadoghq.com/security/code_security/static_analysis/#link-results-to-datadog-services-and-teams
+[13]: /security/code_security/static_analysis/setup/?tab=github#link-findings-to-datadog-services-and-teams
 [14]: /account_management/teams/
 [15]: /integrations/github/#connect-github-teams-to-datadog-teams
 [16]: /integrations/azure-devops-source-code/

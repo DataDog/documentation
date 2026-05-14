@@ -1,4 +1,5 @@
 ---
+id: downtime
 core_product:
 - alertas
 - slos

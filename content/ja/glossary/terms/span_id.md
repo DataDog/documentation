@@ -1,4 +1,5 @@
 ---
+id: span_id
 core_product:
 - apm
 short_definition: スパン ID は、トレーシングライブラリがスパンに対して生成する数値の識別子です。トレース ID とともに、Datadog でトレースとログを関連付けるために使用されます。

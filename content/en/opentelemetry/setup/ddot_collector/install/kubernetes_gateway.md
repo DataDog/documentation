@@ -1,9 +1,8 @@
 ---
 title: Install the DDOT Collector as a Gateway on Kubernetes
-private: true
-# code_lang: kubernetes_gateway
-# type: multi-code-lang
-# code_lang_weight: 2
+code_lang: kubernetes_gateway
+type: multi-code-lang
+code_lang_weight: 2
 further_reading:
 - link: https://www.datadoghq.com/blog/ddot-gateway
   tag: Blog
@@ -22,10 +21,6 @@ further_reading:
   text: "Tail Sampling Processor"
 ---
 
-{{< callout header="false" btn_hidden="true">}}
-  Support for installing the DDOT Collector as a gateway on Kubernetes is in Preview.
-{{< /callout >}}
-
 <div class="alert alert-info">
 This guide assumes you are familiar with deploying the DDOT Collector as a DaemonSet. For more information, see <a href="/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset">Install the DDOT Collector as a DaemonSet on Kubernetes</a>.
 </div>
@@ -38,7 +33,7 @@ The OpenTelemetry Collector can be deployed in multiple ways. The *daemonset* pa
 
 The [gateway][6] pattern provides an additional deployment option that uses a centralized, standalone Collector service. This gateway layer can perform actions such as tail-based sampling, aggregation, filtering, and routing before exporting the data to one or more backends such as Datadog. It acts as a central point for managing and enforcing observability policies.
 
-{{< img src="opentelemetry/embedded_collector/ddot_gateway.png" alt="Architecture diagram of the OpenTelemetry Collector gateway pattern. Applications send OTLP data to local Agent DaemonSets running on each node. The DaemonSets forward this data to a central load balancer, which distributes it to a separate deployment of gateway Collector pods. These gateway pods then process and send the telemetry data to Datadog." style="width:100%;" >}}
+{{< img src="opentelemetry/embedded_collector/ddot_gateway_diagram.png" alt="Architecture diagram of the OpenTelemetry Collector gateway pattern. Applications send OTLP data to local DDOT DaemonSets running on each node. The DaemonSets forward this data to a central load balancer, which distributes it to a separate deployment of DDOT gateway pods. These gateway pods then send the telemetry data to Datadog." style="width:100%;" >}}
 
 When you enable the gateway:
 1.  A Kubernetes Deployment (`<RELEASE_NAME>-datadog-otel-agent-gateway-deployment`) manages the standalone **gateway Collector pods**.
@@ -562,7 +557,7 @@ spec:
       # Custom image (optional)
       image:
         name: ddot-collector
-        tag: "7.74.0"
+        tag: "{{< version key="ddot_gateway_version" >}}"
         pullPolicy: IfNotPresent
 
       # Pod-level security context
@@ -868,8 +863,8 @@ To use a custom-built Collector image for your gateway, specify the image reposi
 <strong>Note:</strong> The Datadog Operator supports the following image name formats:
 <ul>
   <li><code>name</code> - The image name (for example, <code>ddot-collector</code>)</li>
-  <li><code>name:tag</code> - Image name with tag (for example, <code>ddot-collector:7.74.0</code>)</li>
-  <li><code>registry/name:tag</code> - Full image reference (for example, <code>gcr.io/datadoghq/ddot-collector:7.74.0</code>)</li>
+  <li><code>name:tag</code> - Image name with tag (for example, <code>ddot-collector:{{% version key="ddot_gateway_version" %}}</code>)</li>
+  <li><code>registry/name:tag</code> - Full image reference (for example, <code>gcr.io/datadoghq/ddot-collector:{{% version key="ddot_gateway_version" %}}</code>)</li>
 </ul>
 The <code>registry/name</code> format (without tag in the name field) is <strong>not supported</strong> when using a separate <code>tag</code> field. Either include the full image reference with tag in the <code>name</code> field, or use the image name with a separate <code>tag</code> field.
 </div>

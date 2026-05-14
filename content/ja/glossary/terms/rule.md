@@ -1,4 +1,5 @@
 ---
+id: rule
 core_product:
 - security
 - csm

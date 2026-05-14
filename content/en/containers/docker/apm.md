@@ -31,7 +31,7 @@ As of Agent 6.0.0, the Trace Agent is enabled by default. If it has been turned 
 
 The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
 
-<div class="alert alert-info">If you are collecting traces from a containerized app (your Agent and app running in separate containers), as an alternative to the following instructions, you can automatically inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">Injecting Libraries</a> for instructions.</div>
+<div class="alert alert-info">If you are collecting traces from a containerized app (your Agent and app running in separate containers), as an alternative to the following instructions, you can automatically inject the SDK into your application. Read <a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">Injecting Libraries</a> for instructions.</div>
 
 ## Tracing from the host
 
@@ -225,7 +225,7 @@ Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (d
 This exposes the hostname `datadog-agent` in your `app` container.
 If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.
 
-Your application tracers must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers. The example above uses host `datadog-agent` and port `8126` (the default value so you don't have to set it).
+Your application SDKs must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers. The example above uses host `datadog-agent` and port `8126` (the default value so you don't have to set it).
 
 Alternately, see the examples below to set the Agent host manually in each supported language:
 

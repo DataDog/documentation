@@ -23,6 +23,22 @@ If no results appear after two hours:
 - Confirm that [Remote Configuration][3] is enabled on the API key you used to set up Agentless Scanning. Scanners receive their scan instructions through Remote Configuration.
 - Check that the cloud integration is properly configured. On the [Cloud Security Setup][4] page, verify that your cloud account appears with Agentless Scanning enabled.
 
+## GCP: Failed to create state bucket (storage.buckets.create 403)
+
+If the GCP Cloud Shell setup fails at **"Setting up Terraform state storage"** with an error like:
+
+```
+Failed to create state bucket: datadog-agentless-tfstate-<project>
+HTTPError 403: ... does not have storage.buckets.create access to the Google Cloud project.
+```
+
+the identity running the script does not have permission to create or manage GCS buckets in the scanner project.
+
+**Fix (choose one):**
+
+1. **Grant Storage permissions** on the scanner project to the user (or service account) running the script. For example, grant **Storage Admin** (`roles/storage.admin`) on that project, or a custom role that includes `storage.buckets.create`, `storage.buckets.get`, and `storage.buckets.update`.
+2. **Reuse an existing bucket:** Use a bucket that already exists (create it with an identity that has Storage permissions if needed), then set `TF_STATE_BUCKET` to that bucket name when running the script. The script will use the existing bucket for Terraform state and will not try to create one.
+
 ## Deployment fails due to VPC creation restrictions
 
 If your organization is using Terraform and uses Service Control Policies (SCPs) that restrict Virtual Private Cloud (VPC) creation, scanner deployment fails because the scanner creates a new VPC by default.

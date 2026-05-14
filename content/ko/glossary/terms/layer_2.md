@@ -1,4 +1,5 @@
 ---
+id: layer_2
 core_product:
 - network device monitoring
 - network performance monitoring

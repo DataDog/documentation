@@ -16,7 +16,7 @@ further_reading:
 
 ### Versioning
 
-Versioning of the Datadog Node.js tracing library follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here's an outline of what constitutes each type of semver change:
+Versioning of the Datadog Node.js SDK follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here's an outline of what constitutes each type of semver change:
 
 | Major          | Minor                                                          | Patch    |
 |---------------------------------|-------------------------------------------------------------------------|----------------------|
@@ -108,7 +108,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [koa][13]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
 | [moleculer][17]         | `>=0.14` | Fully supported |                                            |
-| [next][18]              | `>=10.2` | Fully supported | See note on [Complex framework usage](#complex-framework-usage).<br /><br />The tracer supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul><br /><br /><strong>Note</strong>: Next.js is under heavy active development, and it is not uncommon for patch releases to break compatibility with dd-trace. Test automations alert Datadog to these issues, but it can often take a few days to fix compatibility with the latest Next.js release. |
+| [next][18]              | `>=10.2` | Fully supported | See note on [Complex framework usage](#complex-framework-usage).<br /><br />The SDK supports the following Next.js features: <ul><li>Standalone (`output: 'standalone'`)</li><li>App Router</li><li>Middleware: Not traced, use tracer versions `4.18.0` and `3.39.0` or higher for best experience.</li></ul><br /><br /><strong>Note</strong>: Next.js is under heavy active development, and it is not uncommon for patch releases to break compatibility with dd-trace. Test automations alert Datadog to these issues, but it can often take a few days to fix compatibility with the latest Next.js release. |
 | [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20].    |
 | [restify][21]           | `>=3`    | Fully supported |                                            |
 
@@ -116,9 +116,9 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 Some modern complex Node.js frameworks, such as Next.js and Nest.js, provide their own entry-point into an application. For example, instead of running `node app.js`, you may need to run `next start`. In these cases, the entry point is a file that ships in the framework package, not a local application file (`app.js`).
 
-Loading the Datadog tracer early in your application code isn't effective because the framework could have already loaded modules that should be instrumented.
+Loading the Datadog SDK early in your application code isn't effective because the framework could have already loaded modules that should be instrumented.
 
-To load the tracer before the framework, use one of the following methods:
+To load the SDK before the framework, use one of the following methods:
 
 Prefix all commands you run with an environment variable:
 
@@ -166,6 +166,11 @@ Or, modify the `package.json` file if you typically start an application with np
 | [sharedb][40]          | `>=1`      | Fully supported     |                                                   |
 | [tedious][41]          | `>=1`      | Fully supported     | SQL Server driver for `mssql` and `sequelize`.    |
 
+
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
 
 ### Worker compatibility
 
@@ -224,7 +229,7 @@ The [JavaScript and TypeScript Tests][66] page contains a list of instrumented t
 
 ### Known transitive package compatibility
 
-While the Datadog tracer doesn't provide direct support for modules listed here, they are known to work, as they depend on modules that the tracer does instrument.
+While the Datadog SDK doesn't provide direct support for modules listed here, they are known to work, as they depend on modules that the SDK does instrument.
 
 | Module           | Notes                                        |
 | ---------------- | -------------------------------------------- |

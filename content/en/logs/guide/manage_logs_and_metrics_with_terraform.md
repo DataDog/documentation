@@ -49,7 +49,7 @@ Tags add dimensions to your metrics so that they can be filtered, aggregated, an
 [7]: /logs/log_configuration/indexes/#exclusion-filters
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/logs_index_order
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/logs_custom_pipeline
-[10]: /logs/log_configuration/processors/?tab=ui
+[10]: /logs/log_configuration/processors/
 [11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/logs_pipeline_order
 [12]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/logs_integration_pipeline
 [13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/logs_archive

@@ -2,12 +2,12 @@
 title: AWS コンポーネント
 ---
 
-{{< whatsnext desc="Common:" >}}
-    {{< nextlink href="cloudcraft/components-aws/region">}}Region{{< /nextlink >}}
+{{< whatsnext desc="共通:" >}}
+    {{< nextlink href="cloudcraft/components-aws/region">}}リージョン{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/vpc">}}VPC{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-aws/security-group">}}Security group{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-aws/network-acl">}}Network ACL{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-aws/subnet">}}Subnet{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-aws/security-group">}}セキュリティ グループ{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-aws/network-acl">}}ネットワーク ACL{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-aws/subnet">}}サブネット{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="コンピュート:" >}}
@@ -53,6 +53,7 @@ title: AWS コンポーネント
 {{< whatsnext desc="データベース:" >}}
     {{< nextlink href="cloudcraft/components-aws/rds">}}RDS{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/documentdb">}}DocumentDB{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-aws/dynamodb">}}DynamoDB{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/elasticache">}}ElastiCache{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/neptune">}}Neptune{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/timestream">}}Timestream{{< /nextlink >}}

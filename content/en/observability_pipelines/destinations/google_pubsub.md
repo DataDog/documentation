@@ -81,9 +81,9 @@ You reference this file in the Google Pub/Sub destination's **Credentials path**
 
 ## Setup
 
-Set up the Google Pub/Sub destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Configure the Google Pub/Sub destination when you [set up a pipeline][9]. You can set up a pipeline in the [UI][1], using the [API][10], or with [Terraform][11]. The steps in this section are configured in the UI.
 
-### Set up the destination
+After you select the Google Pub/Sub destination in the pipeline UI:
 
 1. Enter the destination project name.
 	- This is the GCP project where your Pub/Sub topic lives.
@@ -97,22 +97,19 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 	- Or set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 	- Credentials are automatically managed if you're using [workload identity][7] on GKE.
 
-#### Optional settings
+### Optional settings
 
-##### Enable TLS
+#### Enable TLS
 
-Toggle the switch to **Enable TLS** if your organization requires secure connections with custom certificates.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+{{% observability_pipelines/tls_settings %}}
 
-##### Buffering options
+#### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
 
 {{< img src="observability_pipelines/destinations/google_pubsub_settings.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -180,9 +177,9 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 A batch of events is flushed when one of these parameters is met. See [event batching][6] for more information.
 
-| Max Events     | Max Bytes       | Timeout (seconds)   |
-|----------------|-----------------|---------------------|
-| 1,000          | 10,000,000      | 1                   |
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 1,000          | 10                | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://cloud.google.com/docs/authentication#auth-flowchart
@@ -191,3 +188,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [6]: /observability_pipelines/destinations/#event-batching
 [7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[9]: /observability_pipelines/configuration/set_up_pipelines/
+[10]: /api/latest/observability-pipelines/
+[11]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

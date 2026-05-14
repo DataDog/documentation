@@ -1,4 +1,5 @@
 ---
+id: ping
 title: ping
 core_product:
   - network device monitoring

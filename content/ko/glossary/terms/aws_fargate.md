@@ -1,4 +1,5 @@
 ---
+id: aws_fargate
 core_product:
 - serverless monitoring
 synonyms:

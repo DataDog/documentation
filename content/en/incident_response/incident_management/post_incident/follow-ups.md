@@ -11,6 +11,8 @@ further_reading:
 - link: "/service_management/incident_management/integrations/slack/"
   tag: "Documentation"
   text: "Integrate Slack with Datadog Incident Management"
+algolia:
+  tags: ["follow ups", "follow-up", "follow up"]
 ---
 
 ## Overview
@@ -25,6 +27,14 @@ Common examples for creating follow-ups include:
 - **Root cause fixes**: Underlying issues that require more time to address than the immediate mitigation
 
 By capturing these items as follow-ups, your team can stay focused on incident resolution while ensuring important improvements aren't forgotten.
+
+## AI-suggested follow-up tasks
+
+After an incident is resolved, Incident AI scans the incident channel for follow-up tasks that responders mentioned during the incident. It then prompts you to review and create them with a single click. Tasks saved this way appear as Incident Follow-ups in Datadog Incident Management.
+
+To view AI-suggested follow-up tasks:
+1. Navigate to the relevant incident in Datadog.
+1. Open the **Post-Incident** tab to view a list of all follow-up tasks saved from Slack.
 
 ## Create and manage follow-ups
 
@@ -61,7 +71,6 @@ After defining an export template, you have two options:
 | **Automatic export** | Configure Incident Management to automatically export all follow-ups using the template whenever they're created. | Choose this if you want all follow-ups to be tracked in your external system by default.         |
 
 ### Case Management exports
-
 
 When you export your follow-ups to [Case Management][2], you can manage, track, and analyze your follow-ups directly in Datadog. For example, you can:
 

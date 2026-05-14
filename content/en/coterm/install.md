@@ -48,9 +48,9 @@ CoTerm is supported on macOS and Linux.
 ## Authorize CoTerm to connect to Datadog
 
 During initialization, you can choose one of the following ways to authorize CoTerm to access your Datadog Account:
-- **OAuth**: Opens a browser for you to log in with OAuth.
-- **API Key + App Key**: Prompts you to set your [Datadog API key][1] and [application key][2] in `~/.ddcoterm/config.yaml`.
-- **API Key Only**: Prompts you to set your Datadog API key in `~/.ddcoterm/config.yaml`.
+- {{< ui >}}OAuth{{< /ui >}}: Opens a browser for you to log in with OAuth.
+- {{< ui >}}API Key + App Key{{< /ui >}}: Prompts you to set your [Datadog API key][1] and [application key][2] in `~/.ddcoterm/config.yaml`.
+- {{< ui >}}API Key Only{{< /ui >}}: Prompts you to set your Datadog API key in `~/.ddcoterm/config.yaml`.
 
 <div class="alert alert-info">If you select the <strong>API Key Only</strong> option, you cannot <a href="/coterm/usage/#require-approval-for-commands">require approvals with Case Management</a>.</div>
 

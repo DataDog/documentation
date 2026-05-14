@@ -1,7 +1,6 @@
 ---
 title: Setting Up Database Monitoring for ClickHouse Cloud
 description: Install and configure Database Monitoring for ClickHouse Cloud.
-private: true
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"

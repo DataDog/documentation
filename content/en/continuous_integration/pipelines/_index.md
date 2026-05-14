@@ -43,7 +43,7 @@ Select your CI provider to set up CI Visibility in Datadog:
 
 | <div style="width:200px"><div> | AWS CodePipeline | Azure Pipelines | Buildkite | CircleCI | Codefresh | GitHub Actions | GitLab | Jenkins | TeamCity | Other CI Providers |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| {{< ci-details title="Logs collection" >}}Retrieval of pipeline or job logs from the CI provider. Logs are displayed on the <strong>Logs</strong> tab in the Pipeline Execution view.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
+| {{< ci-details title="Logs collection" >}}Retrieval of pipeline or job logs from the CI provider. Logs are displayed on the <strong>Logs</strong> tab in the Pipeline Execution view.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
 | {{< ci-details title="Infrastructure correlation" >}}Correlation of host-level information for the Datadog Agent, CI pipelines, or job runners to CI pipeline execution data.{{< /ci-details >}} |  |  | {{< X >}} |  |  | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
 | {{< ci-details title="Running pipelines" >}}Identification of pipelines executions that are running with associated tracing.{{< /ci-details >}} | {{< X >}} | | | | | {{< X >}} | {{< X >}} | {{< X >}} | | {{< X >}} |
 | {{< ci-details title="Partial retries" >}}Identification of partial retries (for example, when only a subset of jobs were retried).{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  {{< X >}} |
@@ -80,7 +80,7 @@ When creating a [dashboard][8] or a [notebook][9], you can use CI pipeline data 
 
 ## Alert on pipeline data
 
-You can export your search query to a [CI Pipeline monitor][12] on the [**Executions** page][6] or the [**Test Runs** page][13] by clicking the **Export** button.
+You can export your search query to a [CI Pipeline monitor][12] on the [{{< ui >}}Executions{{< /ui >}} page][6] or the [{{< ui >}}Test Runs{{< /ui >}} page][13] by clicking the {{< ui >}}Export{{< /ui >}} button.
 
 ## Further reading
 

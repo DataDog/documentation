@@ -20,6 +20,9 @@ further_reading:
 - link: '/synthetics/guide/synthetic-test-monitors'
   tag: 'Documentation'
   text: 'Learn about Synthetic test monitors'
+- link: '/synthetics/guide/export-tests-to-terraform'
+  tag: 'Guide'
+  text: 'Export Synthetic tests to Terraform'
 
 ---
 

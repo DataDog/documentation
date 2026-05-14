@@ -1,4 +1,5 @@
 ---
+id: global_variable
 core_product:
 - monitorización Synthetic
 title: variable global

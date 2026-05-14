@@ -1,4 +1,5 @@
 ---
+id: list
 core_product:
 - dashboards
 - log management

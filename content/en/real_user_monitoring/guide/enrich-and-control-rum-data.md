@@ -5,6 +5,10 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
+- link: "https://learn.datadoghq.com/courses/custom-data-rum-javascript"
+  tag: "Learning Center"
+  text: "Collect custom data with RUM for JavaScript web applications"
+
 ---
 
 ## Overview

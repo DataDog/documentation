@@ -44,7 +44,7 @@ https://*.datadoghq.com/*
 
 ## Supported libraries
 
-The following Datadog tracing libraries are supported:
+The following Datadog SDKs are supported:
 
 | Library                             | Minimum Version                                                                                                             |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|

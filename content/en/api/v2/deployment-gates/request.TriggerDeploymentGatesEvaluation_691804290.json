@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "env": "production",
+      "identifier": "pre",
+      "service": "my-service"
+    },
+    "type": "deployment_gates_evaluation_request"
+  }
+}

@@ -1,0 +1,2182 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "children": {
+    "listTranslationData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Setup ",
+                      "itemTranslationData": {
+                        "d822299ada7538ebf25d51ad06f51f38": {
+                          "string": "Configuración"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 5-6"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 5-6"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 5-6"
+      },
+      "1": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "OpenTelemetry is supported in Java after version 1.24.0.",
+                            "itemTranslationData": {
+                              "f73034fb3c97ff615ddd5c8f1f4006ba": {
+                                "string": "OpenTelemetry es compatible con Java a partir de la versión 1.24.0."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 8-9"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 8-9"
+                  }
+                }
+              },
+              "type": "paragraph",
+              "location": "line 8-9"
+            }
+          }
+        },
+        "type": "tag",
+        "tag": "alert",
+        "location": "line 7-8"
+      },
+      "2": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "To configure OpenTelemetry to use the Datadog trace provider:",
+                      "itemTranslationData": {
+                        "8d0e4ff0c3ebb7402ab480f74dbe33c6": {
+                          "string": "Para configurar OpenTelemetry para utilizar el proveedor de traza de Datadog:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 11-12"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 11-12"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 11-12"
+      },
+      "3": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": false,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "If you have not yet read the instructions for auto-instrumentation and setup, start with the ",
+                                  "itemTranslationData": {
+                                    "e0ce67de286db5009bc98fc1a8163cd5": {
+                                      "string": "Si aún no has leído las instrucciones de autoinstrumentación y configuración, empieza por la sección "
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 13-14"
+                              },
+                              "1": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "children": {
+                                  "listTranslationData": {
+                                    "0": {
+                                      "$$mdtype": "Node",
+                                      "inline": true,
+                                      "attributes": {
+                                        "content": "Java Setup Instructions",
+                                        "itemTranslationData": {
+                                          "8dc9560f3d41a316c6fc387b41612e9d": {
+                                            "string": "Instrucciones de instalación de Java"
+                                          }
+                                        }
+                                      },
+                                      "type": "text",
+                                      "location": "line 13-14"
+                                    }
+                                  }
+                                },
+                                "type": "link",
+                                "location": "line 13-14"
+                              },
+                              "2": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": ".",
+                                  "itemTranslationData": {
+                                    "e56952054383fb97424b7598d6779c38": {
+                                      "string": "."
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 13-14"
+                              }
+                            }
+                          },
+                          "type": "inline",
+                          "location": "line 13-14"
+                        }
+                      }
+                    },
+                    "type": "paragraph",
+                    "location": "line 13-14"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 13-15"
+            },
+            "1": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": false,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).",
+                                  "itemTranslationData": {
+                                    "f428d2e766c152e7b2e262b70b01bae1": {
+                                      "string": "Asegúrate de que solo dependes de la API de OpenTelemetry (y no del SDK de OpenTelemetry)."
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 15-16"
+                              }
+                            }
+                          },
+                          "type": "inline",
+                          "location": "line 15-16"
+                        }
+                      }
+                    },
+                    "type": "paragraph",
+                    "location": "line 15-16"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 15-17"
+            },
+            "2": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": false,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Set the ",
+                                  "itemTranslationData": {
+                                    "1c259f1326b6304f6a41ee9bf5594b4e": {
+                                      "string": "Establece la "
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 17-18"
+                              },
+                              "2": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": " system property or the ",
+                                  "itemTranslationData": {
+                                    "b51e13a2a60a04e0f769b6f62ca2550b": {
+                                      "string": " propiedad de sistema o la "
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 17-18"
+                              },
+                              "4": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": " environment variable to ",
+                                  "itemTranslationData": {
+                                    "0c908f53c26cee49ea4bd6b4dac265fa": {
+                                      "string": " la variable de entorno para"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 17-18"
+                              },
+                              "6": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": ".",
+                                  "itemTranslationData": {
+                                    "e56952054383fb97424b7598d6779c38": {
+                                      "string": "."
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 17-18"
+                              }
+                            }
+                          },
+                          "type": "inline",
+                          "location": "line 17-18"
+                        }
+                      }
+                    },
+                    "type": "paragraph",
+                    "location": "line 17-18"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 17-19"
+            }
+          }
+        },
+        "type": "list",
+        "location": "line 13-19"
+      },
+      "4": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Adding span tags ",
+                      "itemTranslationData": {
+                        "252af6df5c449a83f7d2d4f03991b2a9": {
+                          "string": "Añadir etiquetas de tramo"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 19-20"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 19-20"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 19-20"
+      },
+      "5": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Add custom span tags ",
+                      "itemTranslationData": {
+                        "7b707afa867f3346840c857af0a186be": {
+                          "string": "Añadir etiquetas personalizadas de tramo"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 21-22"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 21-22"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 21-22"
+      },
+      "6": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Add custom tags to your spans corresponding to any dynamic value within your application code such as ",
+                      "itemTranslationData": {
+                        "7faca5b8f16ff2cb71c3eb267595c960": {
+                          "string": "Añade etiquetas personalizadas a tus tramos correspondientes a cualquier valor dinámico dentro del código de tu aplicación como, por ejemplo,"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 23-24"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ".",
+                      "itemTranslationData": {
+                        "e56952054383fb97424b7598d6779c38": {
+                          "string": "."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 23-24"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 23-24"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 23-24"
+      },
+      "8": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Adding tags globally to all spans ",
+                      "itemTranslationData": {
+                        "a1520037540c2d0de78b6718740cf206": {
+                          "string": "Añadir etiquetas globalmente a todos los tramos"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 34-35"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 34-35"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 34-35"
+      },
+      "9": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "The ",
+                      "itemTranslationData": {
+                        "8faf49cbd3367ffecf66a5fecd7e6d62": {
+                          "string": "La"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 36-37"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " property allows you to set tags across all generated spans for an application. This is useful for grouping stats for your applications, data centers, or any other tags you would like to see in Datadog.",
+                      "itemTranslationData": {
+                        "3b0f2d5a694f3bb5dcd48860a76aee6e": {
+                          "string": " propiedad te permite establecer etiquetas en todos los tramos generados para una aplicación. Esto puede ser útil para agrupar las estadísticas de las aplicaciones, los centros de datos o cualquier otra etiqueta que desees ver en la interfaz de usuario de Datadog."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 36-37"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 36-37"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 36-37"
+      },
+      "11": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Setting errors on span ",
+                      "itemTranslationData": {
+                        "741362936e1ef785f6923ab1375c6744": {
+                          "string": "Configuración de errores en el tramo"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 44-45"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 44-45"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 44-45"
+      },
+      "12": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "To set an error on a span, use the ",
+                      "itemTranslationData": {
+                        "81efe42c341808c5d4456c8719c056be": {
+                          "string": "Para configurar un error en un tramo, utiliza el"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 46-47"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " method:",
+                      "itemTranslationData": {
+                        "48345cf2d8962b0197508f9c761e4403": {
+                          "string": " método:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 46-47"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 46-47"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 46-47"
+      },
+      "14": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Setting tags and errors on a root span from a child span ",
+                      "itemTranslationData": {
+                        "d1f16165775f5029b97c6beaabc554a3": {
+                          "string": "Configuración de etiquetas y errores en un tramo raíz desde un tramo secundario "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 58-59"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 58-59"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 58-59"
+      },
+      "15": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "When you want to set tags or errors on the root span from within a child span, you can use the OpenTelemetry Context API:",
+                      "itemTranslationData": {
+                        "33c60ffcdcdeaa0937da4c39e910ef6b": {
+                          "string": "Si deseas establecer etiquetas o errores en el tramo raíz desde un tramo secundario, puedes utilizar la API de contexto de OpenTelemetry:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 60-61"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 60-61"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 60-61"
+      },
+      "17": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Adding spans ",
+                      "itemTranslationData": {
+                        "5b2e00c5280890f2ced5883f7e4cfda1": {
+                          "string": "Añadir tramos"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 101-102"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 101-102"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 101-102"
+      },
+      "18": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "If you aren't using a ",
+                      "itemTranslationData": {
+                        "bcd010878e550c3622497dd4ac013bc8": {
+                          "string": "Si no utilizas un "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 103-104"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "supported framework instrumentation",
+                            "itemTranslationData": {
+                              "829526df5a04b1e317e97e658a550a71": {
+                                "string": "framework de instrumentación compatible"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 103-104"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 103-104"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ", or you would like additional depth in your application's ",
+                      "itemTranslationData": {
+                        "68a33a95bd6e05baa4dc11d0c825001b": {
+                          "string": "o si deseas una mayor profundidad en las"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 103-104"
+                  },
+                  "3": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "traces",
+                            "itemTranslationData": {
+                              "9996e9ed01fb23d000ec46c79e0a9fd2": {
+                                "string": "trazas de tu aplicación"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 103-104"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 103-104"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ", you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.",
+                      "itemTranslationData": {
+                        "ee2292e7be942f3680e2c4ab9ad5d2a0": {
+                          "string": ", es posible que desees añadir instrumentación personalizada a tu código para obtener gráficos de llama completos o para medir los tiempos de ejecución de fragmentos de código."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 103-104"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 103-104"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 103-104"
+      },
+      "19": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "If modifying application code is not possible, use the environment variable ",
+                      "itemTranslationData": {
+                        "da83d5bc585a700ed86d8ca5f99daca1": {
+                          "string": "Si no es posible modificar el código de la aplicación, utiliza la variable de entorno "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 105-106"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " to detail these methods.",
+                      "itemTranslationData": {
+                        "0cfd2288a0868006126f53b6bc5a28d4": {
+                          "string": " para detallar estos métodos."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 105-106"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 105-106"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 105-106"
+      },
+      "20": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "If you have existing ",
+                      "itemTranslationData": {
+                        "37162ed44e1d6a8e8eed409c9cda1b2b": {
+                          "string": "Si ya tienes "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 107-108"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " or similar annotations, or prefer to use annotations to complete any incomplete traces within Datadog, use Trace Annotations.",
+                      "itemTranslationData": {
+                        "20b07497f6d876e4e39d0d3bbddc301a": {
+                          "string": " anotaciones existentes o similares, o prefieres utilizar anotaciones para completar cualquier traza incompleta dentro de Datadog, utiliza Trace Annotations."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 107-108"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 107-108"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 107-108"
+      },
+      "21": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Trace annotations ",
+                      "itemTranslationData": {
+                        "ece1368c4fd33dfb8f70eee4caea397e": {
+                          "string": "Anotaciones de trazas"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 109-110"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 109-110"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 109-110"
+      },
+      "22": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Add ",
+                      "itemTranslationData": {
+                        "a74701b4de275032746d8667746c1427": {
+                          "string": "Añade"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 111-112"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " to methods to have them be traced when running OpenTelemetry and the ",
+                      "itemTranslationData": {
+                        "8848d98cea8f4913efaf1bb266532573": {
+                          "string": " a los métodos para que sean rastreados al ejecutar OpenTelemetry y la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 111-112"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ". If the Agent is not attached, this annotation has no effect on your application.",
+                      "itemTranslationData": {
+                        "4f7ac02f176ee16953de417835d0629e": {
+                          "string": ". Si no se adjunta el Agent, esta anotación no tendrá ningún efecto en tu aplicación."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 111-112"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 111-112"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 111-112"
+      },
+      "23": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "OpenTelemetry's ",
+                      "itemTranslationData": {
+                        "b6c1ce819afabf6ab878e8d58eb6cbcb": {
+                          "string": "La anotación de OpenTelemetry"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 113-114"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " annotation is provided by the ",
+                      "itemTranslationData": {
+                        "a40a7e5903209d11ccaf630d58c49893": {
+                          "string": " es proporcionada por la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 113-114"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " dependency.",
+                      "itemTranslationData": {
+                        "b456605b16608b63699796304b7a6d76": {
+                          "string": " dependencia."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 113-114"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 113-114"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 113-114"
+      },
+      "25": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Manually creating a new span ",
+                      "itemTranslationData": {
+                        "2729b6aefe32b0c119e946df3dcb1d99": {
+                          "string": "Creación manual de un nuevo tramo"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 127-128"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 127-128"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 127-128"
+      },
+      "26": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "To manually create new spans within the current trace context:",
+                      "itemTranslationData": {
+                        "86eb539360ddfc0cf26d6a62f647e14a": {
+                          "string": "Para crear manualmente nuevos tramos en el contexto de traza actual:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 129-130"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 129-130"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 129-130"
+      },
+      "28": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Adding span events ",
+                      "itemTranslationData": {
+                        "ee3d629ccbaa5373890a209b0fec8a7c": {
+                          "string": "Añadir eventos de tramo"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 153-154"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 153-154"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 153-154"
+      },
+      "29": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Adding span events requires SDK version 1.40.0 or higher.",
+                            "itemTranslationData": {
+                              "e4b93bea3407e8e206e513d0483081a8": {
+                                "string": "Para añadir eventos de tramos se requiere el kit de desarrollo de software (SDK) versión 1.40.0 o posterior."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 156-157"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 156-157"
+                  }
+                }
+              },
+              "type": "paragraph",
+              "location": "line 156-157"
+            }
+          }
+        },
+        "type": "tag",
+        "tag": "alert",
+        "location": "line 155-156"
+      },
+      "30": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "You can add span events using the ",
+                      "itemTranslationData": {
+                        "db64e6eba00b8f0cbd5f387337901a54": {
+                          "string": "Puedes añadir eventos de tramos utilizando la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 159-160"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " API. This method requires a ",
+                      "itemTranslationData": {
+                        "d7811d128e41547eaacff67b2023ae92": {
+                          "string": " API. Este método requiere un "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 159-160"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " parameter and optionally accepts ",
+                      "itemTranslationData": {
+                        "75dfd6ad131b96a1a3712686187b61e7": {
+                          "string": " parámetro y opcionalmente acepta los parámetros"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 159-160"
+                  },
+                  "6": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " and ",
+                      "itemTranslationData": {
+                        "5aac82a5ed212375a0d055476ac47839": {
+                          "string": " y "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 159-160"
+                  },
+                  "8": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.",
+                      "itemTranslationData": {
+                        "200a10c40196d11d130ac1090e32e2c4": {
+                          "string": " . El método crea un nuevo evento de tramo con las propiedades especificadas y lo asocia al correspondiente tramo."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 159-160"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 159-160"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 159-160"
+      },
+      "31": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Name",
+                                  "itemTranslationData": {
+                                    "66b804d1ba7f063b52c8489002763d97": {
+                                      "string": "Nombre"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 161-162"
+                              }
+                            }
+                          },
+                          "type": "strong",
+                          "location": "line 161-162"
+                        },
+                        "1": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": " [",
+                            "itemTranslationData": {
+                              "e979c20315b8c4d9875d6bb3e8a23336": {
+                                "string": " ["
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 161-162"
+                        },
+                        "2": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "required",
+                                  "itemTranslationData": {
+                                    "3785eeeea9515e931f23317febfe091a": {
+                                      "string": "obligatorio"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 161-162"
+                              }
+                            }
+                          },
+                          "type": "em",
+                          "location": "line 161-162"
+                        },
+                        "3": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "]: A string representing the event's name.",
+                            "itemTranslationData": {
+                              "355034a1333a675d2253edeca367240c": {
+                                "string": "]: una cadena que representa el nombre del evento."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 161-162"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 161-162"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 161-162"
+            },
+            "1": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Attributes",
+                                  "itemTranslationData": {
+                                    "10b8c16de8b9f062dfb91529e41b34d7": {
+                                      "string": "Atributos"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 162-163"
+                              }
+                            }
+                          },
+                          "type": "strong",
+                          "location": "line 162-163"
+                        },
+                        "1": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": " [",
+                            "itemTranslationData": {
+                              "e979c20315b8c4d9875d6bb3e8a23336": {
+                                "string": " ["
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 162-163"
+                        },
+                        "2": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "optional",
+                                  "itemTranslationData": {
+                                    "b215a72a5c9e9471e450cfe69b7b2d5a": {
+                                      "string": "opcional"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 162-163"
+                              }
+                            }
+                          },
+                          "type": "em",
+                          "location": "line 162-163"
+                        },
+                        "3": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "]: Key-value pairs where the key is a non-empty string and the value is a primitive type or a homogeneous array of primitive values.",
+                            "itemTranslationData": {
+                              "9d7cf7e1285ce76360582ccc368914da": {
+                                "string": "]: pares clave-valor donde la clave es una cadena no vacía y el valor es un tipo primitivo o una matriz homogénea de valores primitivos."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 162-163"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 162-163"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 162-163"
+            },
+            "2": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": false,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "Timestamp",
+                                  "itemTranslationData": {
+                                    "47d983b721a679ae4ebf2a49f95201cc": {
+                                      "string": "Marca de tiempo"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 163-164"
+                              }
+                            }
+                          },
+                          "type": "strong",
+                          "location": "line 163-164"
+                        },
+                        "1": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": " [",
+                            "itemTranslationData": {
+                              "e979c20315b8c4d9875d6bb3e8a23336": {
+                                "string": " ["
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 163-164"
+                        },
+                        "2": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "children": {
+                            "listTranslationData": {
+                              "0": {
+                                "$$mdtype": "Node",
+                                "inline": true,
+                                "attributes": {
+                                  "content": "optional",
+                                  "itemTranslationData": {
+                                    "b215a72a5c9e9471e450cfe69b7b2d5a": {
+                                      "string": "opcional"
+                                    }
+                                  }
+                                },
+                                "type": "text",
+                                "location": "line 163-164"
+                              }
+                            }
+                          },
+                          "type": "em",
+                          "location": "line 163-164"
+                        },
+                        "3": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "]: A UNIX timestamp representing the event's occurrence time. Expects an ",
+                            "itemTranslationData": {
+                              "e826e62f3fd741bc0d07ddad0209b3c1": {
+                                "string": "]: una marca de tiempo UNIX que representa la hora de ocurrencia del evento. Se espera un "
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 163-164"
+                        },
+                        "5": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": " object.",
+                            "itemTranslationData": {
+                              "4bb0c28cf152c235e16aebae61090acf": {
+                                "string": " objeto."
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 163-164"
+                        }
+                      }
+                    },
+                    "type": "inline",
+                    "location": "line 163-164"
+                  }
+                }
+              },
+              "type": "item",
+              "location": "line 163-165"
+            }
+          }
+        },
+        "type": "list",
+        "location": "line 161-165"
+      },
+      "33": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Read the ",
+                      "itemTranslationData": {
+                        "782408ea3678b6659db504beaa5b7f44": {
+                          "string": "Lee la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 178-179"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "OpenTelemetry specification for adding events",
+                            "itemTranslationData": {
+                              "07bd63bb32d69a03842cda3e96d1625f": {
+                                "string": "especificación de OpenTelemetry para añadir eventos"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 178-179"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 178-179"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " for more information.",
+                      "itemTranslationData": {
+                        "06dfe7c26d81094111032e26c46b6176": {
+                          "string": " para obtener más información."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 178-179"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 178-179"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 178-179"
+      },
+      "34": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Recording exceptions ",
+                      "itemTranslationData": {
+                        "3ba349575848840f032906c495c90c1e": {
+                          "string": "Registro de excepciones "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 180-181"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 180-181"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 180-181"
+      },
+      "35": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "To record exceptions, use the ",
+                      "itemTranslationData": {
+                        "d06cfe60e4fc35f7958c491364fd94e8": {
+                          "string": "Para registrar excepciones, utiliza la "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 182-183"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " API:",
+                      "itemTranslationData": {
+                        "07c27ed75a34703e8d81ef914e78ec9a": {
+                          "string": " API:"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 182-183"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 182-183"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 182-183"
+      },
+      "37": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Read the ",
+                      "itemTranslationData": {
+                        "782408ea3678b6659db504beaa5b7f44": {
+                          "string": "Lee la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 190-191"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "OpenTelemetry specification for recording exceptions",
+                            "itemTranslationData": {
+                              "ea6101432999f92fe959bf3fd85872a2": {
+                                "string": "especificación de OpenTelemetry para el registro de excepciones"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 190-191"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 190-191"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " for more information.",
+                      "itemTranslationData": {
+                        "06dfe7c26d81094111032e26c46b6176": {
+                          "string": " para más información."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 190-191"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 190-191"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 190-191"
+      },
+      "38": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Trace client and Agent configuration ",
+                      "itemTranslationData": {
+                        "821d91dc5ec5ed8f48c0414c49fc79d7": {
+                          "string": "Rastrear la configuración del cliente y del Agent "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 192-193"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 192-193"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 192-193"
+      },
+      "39": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Both the tracing client and Datadog Agent offer additional configuration options for context propagation. You can also exclude specific resources from sending traces to Datadog if you don't want those traces to be included in calculated metrics, such as traces related to health checks.",
+                      "itemTranslationData": {
+                        "5d4c5272511f265bf0e8415036156285": {
+                          "string": "Tanto el cliente de rastreo como el Datadog Agent ofrecen opciones adicionales de configuración para la propagación de contexto. También puedes excluir recursos específicos del envío de trazas a Datadog si no deseas que esas trazas se incluyan en métricas calculadas, como trazas relacionadas con los checks de estado."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 194-195"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 194-195"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 194-195"
+      },
+      "40": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Propagating context with headers extraction and injection ",
+                      "itemTranslationData": {
+                        "714ab393e72ab7d431a8b0e0e9d02ade": {
+                          "string": "Propagación del contexto con extracción e inserción de encabezados"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 196-197"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 196-197"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 196-197"
+      },
+      "41": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "You can configure the propagation of context for distributed traces by injecting and extracting headers. Read ",
+                      "itemTranslationData": {
+                        "78fea2f750fd51da986162d96a380a13": {
+                          "string": "Puedes configurar la propagación del contexto para traces (trazas) distribuidas insertando y extrayendo encabezados. Lee "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 198-199"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Trace Context Propagation",
+                            "itemTranslationData": {
+                              "a2077e7cd77e82c61ec49c0ab7316ebb": {
+                                "string": "Propagación de contextos de trazas"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 198-199"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 198-199"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " for information.",
+                      "itemTranslationData": {
+                        "8a3dbdd3091d9c91d6d1371979299fd9": {
+                          "string": " para obtener información."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 198-199"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 198-199"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 198-199"
+      },
+      "42": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Resource filtering ",
+                      "itemTranslationData": {
+                        "c6b6099b6397c58c41aa94c8b789222b": {
+                          "string": "Filtrado de recursos "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 200-201"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 200-201"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 200-201"
+      },
+      "43": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the ",
+                      "itemTranslationData": {
+                        "e7e9f709cb46834e4b9676c44cfef119": {
+                          "string": "Las trazas pueden excluirse en función de su nombre de recurso, para evitar que el tráfico sintético, como los checks de estado, informe de las trazas a Datadog. Esta y otras configuraciones de seguridad y ajuste se pueden encontrar en la"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 202-203"
+                  },
+                  "1": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Security",
+                            "itemTranslationData": {
+                              "815dfb96cf3ce9e401ef031e7787bb6f": {
+                                "string": "Seguridad"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 202-203"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 202-203"
+                  },
+                  "2": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": " page or in ",
+                      "itemTranslationData": {
+                        "2193394a74174ad6f936f24375d61c66": {
+                          "string": " página o en "
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 202-203"
+                  },
+                  "3": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "children": {
+                      "listTranslationData": {
+                        "0": {
+                          "$$mdtype": "Node",
+                          "inline": true,
+                          "attributes": {
+                            "content": "Ignoring Unwanted Resources",
+                            "itemTranslationData": {
+                              "03095b1dc0aa3d11fcab6a003128e091": {
+                                "string": "Ignorar los recursos no deseados"
+                              }
+                            }
+                          },
+                          "type": "text",
+                          "location": "line 202-203"
+                        }
+                      }
+                    },
+                    "type": "link",
+                    "location": "line 202-203"
+                  },
+                  "4": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": ".",
+                      "itemTranslationData": {
+                        "e56952054383fb97424b7598d6779c38": {
+                          "string": "."
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 202-203"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 202-203"
+            }
+          }
+        },
+        "type": "paragraph",
+        "location": "line 202-203"
+      }
+    }
+  },
+  "type": "document"}

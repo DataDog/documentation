@@ -7,7 +7,7 @@ This page describes how to instrument your iOS and tvOS applications for [Real U
 
 ## Prerequisites
 
-Before you begin, ensure you have:
+Before you begin, you need:
 - Xcode 12.0 or later
 - iOS 11.0+ or tvOS 11.0+ deployment target
 - A Datadog account with RUM or Error Tracking enabled
@@ -23,8 +23,9 @@ Before you begin, ensure you have:
 
 To send RUM data from your iOS or tvOS application to Datadog, complete the following steps.
 
-### Step 1 - Add the iOS SDK as a dependency
+{% stepper %}
 
+{% step title="Add the iOS SDK as a dependency" %}
 Add the iOS SDK to your project using your preferred package manager. Datadog recommends using Swift Package Manager (SPM).
 
 {% tabs %}
@@ -86,20 +87,21 @@ DatadogRUM.xcframework
 
 {% /tab %}
 {% /tabs %}
+{% /step %}
 
-### Step 2 - Specify application details in the UI
-
+{% step title="Specify application details in the UI" %}
 1. Navigate to [**Digital Experience** > **Add an Application**][10].
-2. Select `iOS` as the application type and enter an application name to generate a unique Datadog application ID and client token.
+2. Select `iOS` as the application type and enter an application name to generate a unique application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][11].
+{% /step %}
 
-### Step 3 - Initialize the library
+{% step title="Initialize the library" %}
 
 In the initialization snippet, set an environment name, service name, and client token.
 
-The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. The `AppDelegate` is your app's main entry point that handles app lifecycle events. 
+The SDK should be initialized as early as possible in the app life cycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. The `AppDelegate` is your app's main entry point that handles app life cycle events. 
 
-This ensures the SDK can correctly capture all measurements, including application startup duration. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
+Initializing here allows the SDK to correctly capture all measurements, including application startup duration. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
 
 {% alert level="warning" %}
 Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.
@@ -287,6 +289,42 @@ configuration.site = [DDSite us1_fed];
 {% /tabs %}
 {% /site-region %}
 
+{% site-region region="gov2" %}
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .us2_fed,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite us2_fed];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
 {% site-region region="ap1" %}
 {% tabs %}
 {% tab label="Swift" %}
@@ -406,8 +444,9 @@ For example, if the current tracking consent is `.pending`:
 
 - If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
 - If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
+{% /step %}
 
-### Step 4 - Start sending data
+{% step title="Start sending data" %}
 
 #### Enable RUM
 
@@ -485,6 +524,11 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 
 {% /tab %}
 {% /tabs %}
+{% /step %}
+
+{% /stepper %}
+
+**Note**: `URLSessionInstrumentation` requires access to a `URLSession` delegate class. For third-party libraries that don't expose a session delegate, use the [Custom Resources API][17] to manually track those network calls.
 
 ### Instrument views
 
@@ -534,6 +578,33 @@ struct BarView: View {
 }
 ```
 
+## Verify your setup
+
+After completing setup, verify that the iOS SDK is correctly sending data to Datadog.
+
+### Check the Xcode console
+
+Enable verbose SDK logging to confirm data is being sent. Add the following in the `DEBUG` build configuration only:
+
+```swift
+Datadog.verbosityLevel = .debug
+```
+
+After running your app, look for output similar to the following in the Xcode debugger console:
+
+```
+[DATADOG SDK] 🐶 → 17:23:09.849 [DEBUG] ⏳ (rum) Uploading batch...
+[DATADOG SDK] 🐶 → 17:23:10.972 [DEBUG]    → (rum) accepted, won't be retransmitted: success
+```
+
+**Note**: Remove `Datadog.verbosityLevel` before building for Release.
+
+### View your data in Datadog
+
+After running your app, navigate to the [RUM Explorer][8] to see sessions from your application. You should see session data within a few minutes.
+
+To view crash reports and iOS errors, navigate to [**Error Tracking**][14]. For more details on crash analysis with symbolicated stack traces, see [iOS Crash Reporting and Error Tracking][7].
+
 ## Track iOS errors
 
 [iOS Crash Reporting and Error Tracking][7] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][8].
@@ -548,17 +619,17 @@ To disable automatic user data collection for client IP or geolocation data:
 2. Click **User Data Collection**.
 3. Use the toggles for those settings. For more information, see [RUM iOS Data Collected][12].
 
-To ensure the safety of your data, you must use a client token. Using only [Datadog API keys][2] to configure the `dd-sdk-ios` library would expose them client-side in your iOS application's byte code.
+Use a client token to help protect your data. Using only [Datadog API keys][2] to configure the `dd-sdk-ios` library would expose them client-side in your iOS application's byte code.
 
 For more information about setting up a client token, see the [Client token documentation][3].
 
 ## Sending data when device is offline
 
-The iOS SDK ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the iOS SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+The iOS SDK maintains data availability when your user device is offline. In cases of low-network areas or low battery, all events are first stored on the local device in batches. Batches are sent when the network is available and the battery is sufficient. If a network upload fails, the batch is kept until it can be sent successfully.
 
 This means that even if users open your application while offline, no data is lost.
 
-**Note**: The data on the disk is automatically discarded if it gets too old to ensure the iOS SDK does not use too much disk space.
+**Note**: The data on the disk is automatically discarded if it gets too old, helping the iOS SDK avoid using too much disk space.
 
 ## Supported versions
 
@@ -580,4 +651,5 @@ See [Supported versions][9] for a list of operating system versions and platform
 [14]: /error_tracking/
 [15]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-actions
 [16]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
+[17]: /real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-resources
 

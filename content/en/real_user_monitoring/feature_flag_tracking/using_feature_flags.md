@@ -1,13 +1,10 @@
 ---
-title: Using Feature Flags
+title: Using Feature Flag Tracking
 beta: true
 description: View and understand your feature flag's health and usage.
-aliases:
-- /real_user_monitoring/guide/getting-started-feature-flags/
-- /real_user_monitoring/guide/setup-feature-flag-data-collection/
 disable_toc: false
 further_reading:
-- link: "/real_user_monitoring/guide/setup-feature-flag-data-collection/"
+- link: "/real_user_monitoring/feature_flag_tracking/setup/"
   tag: "Documentation"
   text: "Set up Feature Flag data collection"
 - link: "/real_user_monitoring/explorer/"
@@ -18,7 +15,7 @@ further_reading:
   text: "Ensure release safety with feature flag tracking in Datadog RUM"
 ---
 
-Once you have set up your feature flag data collection, navigate to the [**Feature Flags**][1] tab within RUM.
+Once you have set up your feature flag data collection, navigate to the [**Feature Flag Tracking**][1] tab within RUM.
 
 From this view, you can investigate any questions you have about your feature flag's health and usage.
 - Monitor the number of users experiencing each variant and see summary statistics of your feature flag.

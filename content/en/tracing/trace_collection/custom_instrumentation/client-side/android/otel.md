@@ -239,6 +239,43 @@ android {
    {{< /tabs >}}
    {{< /site-region >}}
 
+{{< site-region region="gov2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+        override fun onCreate() {
+            super.onCreate()
+            val configuration = Configuration.Builder(
+                  clientToken = <CLIENT_TOKEN>,
+                  env = <ENV_NAME>,
+                  variant = <APP_VARIANT_NAME>
+                )
+                .useSite(DatadogSite.US2_FED)
+                .build()
+            Datadog.initialize(this, configuration, trackingConsent)
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   public class SampleApplication extends Application {
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            Configuration configuration =
+                    new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                            .useSite(DatadogSite.US2_FED)
+                            .build();
+            Datadog.initialize(this, configuration, trackingConsent);
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
    {{< site-region region="ap1" >}}
    {{< tabs >}}
    {{% tab "Kotlin" %}}
@@ -356,7 +393,7 @@ Trace.enable(traceConfig);
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Datadog tracer implements the [OpenTelemetry standard][18]. Create `OtelTracerProvider` and register `OpenTelemetrySdk` in `GlobalOpenTelemetry` in your `onCreate()` method:
+4. Datadog SDK implements the [OpenTelemetry standard][18]. Create `OtelTracerProvider` and register `OpenTelemetrySdk` in `GlobalOpenTelemetry` in your `onCreate()` method:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
