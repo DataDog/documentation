@@ -14,6 +14,8 @@ further_reading:
   text: "Data Streams Monitoring"
 ---
 
+*Tracing your Kafka producers and consumers? **[Data Streams Monitoring for Kafka][7]** adds end-to-end lag, throughput, and message lineage tracking on top of your APM data.*
+
 ## Overview
 
 In event-driven pipelines, queuing and streaming technologies such as Kafka are essential to the successful operation of your systems. Ensuring that messages are being reliably and quickly conveyed between services can be difficult due to the many technologies and teams involved in such an environment. The Datadog Kafka integration and APM enable your team to monitor the health and efficiency of your infrastructure and pipelines.
@@ -125,3 +127,4 @@ If you want to disable Kafka tracing on an application, set the appropriate [lan
 [4]: /tracing/trace_collection/compatibility/
 [5]: /tracing/trace_collection/
 [6]: /tracing/trace_collection/library_config/
+[7]: /data_streams/kafka?utm_source=docs&utm_medium=callout&utm_campaign=DocsCTA-DSMKafka-TracingGuide
