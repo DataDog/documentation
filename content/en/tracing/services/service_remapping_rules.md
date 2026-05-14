@@ -73,6 +73,7 @@ Remapping rules are applied across APM, Logs, Metrics, USM, DSM, DJM, DBM, Profi
 - **Logs service remapper:** Service remapping rules occur before logs pipelines. If the logs service remapper and remapping rules are both applied to a service, the remapping rules take precedence. 
 - **Dashboards and monitors:** Existing queries that reference old service names are not automatically updated. Review and update these manually.
 - **Integration overrides:** Remapping rules apply to base services; integration overrides are not remapped. [Remove integration overrides][15] for the best APM experience.
+- **Service naming hierarchy** Remapping rules take precedence over all other ways to set a service name. The full service naming hierarchy is as follows: service remapping rules > service defined in code (tracer.Start(WithService(xx))) > service defined in the system property (-Ddd.service={}) > service defined in env var (DD_SERVICE) > service defined in the config file.
 
 [1]: /account_management/rbac/permissions
 [2]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.20.0
