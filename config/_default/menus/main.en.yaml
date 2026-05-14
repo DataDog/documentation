@@ -5316,36 +5316,31 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 4
-    - name: Managed Evaluations
-      url: llm_observability/evaluations/managed_evaluations
-      parent: llm_obs_evaluations
-      identifier: llm_obs_managed_evaluations
-      weight: 400
     - name: Custom LLM-as-a-Judge
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations
+      weight: 400
+    - name: Language Mismatch
+      url: llm_observability/evaluations/language_mismatch
+      parent: llm_obs_evaluations
+      identifier: llm_obs_language_mismatch
       weight: 401
+    - name: Security and Safety Evaluations
+      url: llm_observability/evaluations/security_and_safety_evaluations
+      parent: llm_obs_evaluations
+      identifier: llm_obs_security_and_safety_evaluations
+      weight: 402
     - name: External Evaluations
       url: llm_observability/evaluations/external_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
-      weight: 402
+      weight: 403
     - name: Developer Guide
       url: llm_observability/guide/evaluation_developer_guide
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_developer_guide
-      weight: 4021
-    - name: Quality Evaluations
-      url: llm_observability/evaluations/managed_evaluations/quality_evaluations
-      parent: llm_obs_managed_evaluations
-      identifier: llm_obs_managed_evaluations_quality
-      weight: 40001
-    - name: Security and Safety Evaluations
-      url: llm_observability/evaluations/managed_evaluations/security_and_safety_evaluations
-      parent: llm_obs_managed_evaluations
-      identifier: llm_obs_managed_evaluations_security
-      weight: 40002
+      weight: 4031
     - name: Connect Your LLM Provider
       url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account
       parent: llm_obs_custom_llm_as_a_judge_evaluations
