@@ -31,6 +31,9 @@ static/resources/json/full_spec_v2.json
 # Ignoring all automated content
 temp
 
+# Vitest snapshot harness for shorter-api-pages migration — only ignore deps
+assets/scripts/tests/api-snapshots/node_modules/
+
 # Developers/ui_extensions (source removed in #27992)
 content/en/developers/ui_extensions.md
 content/en/developers/faq/ui_extensions.md
