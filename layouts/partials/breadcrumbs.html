@@ -1,6 +1,6 @@
 {{- $text := "" -}}
 {{- /* On API endpoint pages, suppress the trailing breadcrumb — the H1 already shows the page title, and the breadcrumb chain is long. */ -}}
-{{- $hideCurrent := and (eq .Section "api") (.Params.operationid) -}}
+{{- $hideCurrent := and (eq .Section "api") (eq .Kind "page") -}}
 {{- $.Scratch.Set "shownAny" false -}}
 <div id="breadcrumbs" {{- if (eq .Section "api") -}}class="position-relative"{{- end -}}>
     {{- range .Ancestors.Reverse }}

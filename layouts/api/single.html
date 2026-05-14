@@ -8,12 +8,15 @@
     {{ $endpointSlug := path.Base $relPath }}
     {{ $identifier := printf "%s-%s" $tagSlug $endpointSlug }}
 
-    <!-- Look up the menu entry by identifier to get versions and operationids. -->
+    <!-- Look up the menu entry by identifier to get versions and operationids.
+         Endpoint entries live under .Children of their tag parent, not at the top level. -->
     {{ $menuEntry := dict }}
     {{ with index .Site.Menus "api" }}
       {{ range . }}
-        {{ if eq .Identifier $identifier }}
-          {{ $menuEntry = . }}
+        {{ range .Children }}
+          {{ if eq .Identifier $identifier }}
+            {{ $menuEntry = . }}
+          {{ end }}
         {{ end }}
       {{ end }}
     {{ end }}
