@@ -27,7 +27,7 @@ Key features:
 - **Scoped authentication**: OAuth2 + PKCE for scoped access without long-lived API keys.
 - **Broad product coverage**: Supports monitors, logs, metrics, RUM, security, and more.
 
-<div class="alert alert-info">This page covers the Pup's core features. See the <a href="https://github.com/DataDog/pup/blob/main/README.md">Pup repository documentation</a> for the full list of features and commands.</div>
+<div class="alert alert-info">This page covers the Pup's core features. See the <a href="https://github.com/DataDog/pup/blob/main/README.md" target="_blank">Pup repository documentation</a> for the full list of features and commands.</div>
 
 ## Installation
 
