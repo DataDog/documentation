@@ -20,36 +20,63 @@ Agent Builder is in Preview.
 
 ## Overview
 
-Agent Builder lets you create AI agents that automate operational tasks using Datadog's tools and integrations. Agents can search logs, query metrics, create cases, send Slack messages, run workflows, and take action across 2500+ integrations — working with the same data you use every day.
+Agent Builder lets you create custom AI agents that use Datadog's tools and integrations to automate operational tasks. Agents can search logs, query metrics, create cases, send messages, or any other action from the [Action Catalog][7].
 
-Use agents to handle work that's too complex for static automation but too repetitive to do manually: triaging errors, investigating incidents, analyzing trends, and escalating issues.
+Use agents to handle work that's too complex for static automation but too repetitive for humans: triaging errors, responding to incidents, analyzing trends, and escalating issues.
 
-Once created, agents can be triggered from workflows, monitors, incidents, Slack, or on a schedule.
+{{< img src="/actions/agents/blank-new-agent.png" alt="The Agent Builder interface" style="width:100%;" >}}
 
-## Agents page
+## Creating an agent
 
-The [Agents page][1] lists all agents in your organization. From here, you can create new agents, search existing ones, or filter to see only agents you've created.
+From the [Agent Builder page][1], click **New Agent**. From there, you can create an agent in three ways:
+
+- **Build with AI**: Describe what you want the agent to do in plain language. Agent Builder generates the instructions, selects relevant tools, and configures the agent for you.
+- **Start from a blueprint**: Choose a pre-built template for common use cases like error triage, incident response, security analysis, or DevOps assistance. Blueprints come pre-configured with instructions, tools, and automations.
+- **Start from scratch**: Configure the agent manually—write instructions, pick a model, and add tools.
 
 {{< img src="/actions/agents/agent-dashboard.png" alt="The Agents page showing a list of agents" style="width:100%;" >}}
 
-## Create an agent
+## Configuring your agent
 
-You can create an agent in three ways:
+### Instructions
 
-### Build with AI
+Instructions tell the agent what to do when it runs. Write them in natural language—describe the goal, the process, and any constraints. Edit instructions directly or use **Edit with AI** to refine them.
 
-Describe what you want the agent to do in natural language. Agent Builder generates instructions, selects relevant tools, and configures the agent for you.
+Good instructions are specific and outcome-oriented. For example:
 
-1. Navigate to the [Agents page][1].
-1. Click **New Agent**.
-1. Enter a description of what the agent should do.
-1. Agent Builder creates the agent with generated instructions and suggested tools. Customize further or start testing in the chat interface.
+```
+You are an Error Triage agent for the payments service. Each run, survey
+the last 24 hours of error-level logs. For each distinct error pattern,
+determine if it's a transient issue or a code-level bug. For non-transient
+patterns, create a case in Case Management.
+```
 
-### Start from a blueprint
+### Model
 
-Blueprints are pre-built agent templates for common use cases. Each blueprint includes instructions, tools, and automations that follow best practices for that use case.
+Select which LLM powers the agent's reasoning. Different models balance capability, speed, and cost differently—choose based on your agent's workload. To change your agent's model, click the model name in the chatbox to open a dropdown menu and choose another model. You can compare these models using [OpenAI's comparison tool][6] and [Anthropic's models comparison][5].
 
-Available blueprints include:
+### Tools
+
+Tools define what actions the agent can take. Add tools from the [Action Catalog][7], which includes 2500+ integrations. The agent can only use tools that have been added to its configuration.
+
+In the **MCP Servers** section, the [Datadog MCP Server][8] is enabled by default. You can also connect third-party MCP servers. MCP servers use the Model Context Protocol to provide additional tools and capabilities that the agent can use to interact with external systems.
+
+### Automations
+
+Automations let you trigger agents beyond the chat interface:
+
+- **Schedule**: Run an agent on a recurring basis (for example, daily error triage).
+- **Workflow triggers**: Run an agent as a step in any workflow—triggered by [monitors][14], [incidents][15], [security signals][16], or other events.
+
+To use an agent in a workflow, add the **Run Agent** step from the workflow editor.
+
+## Testing your agent
+
+Use the built-in chat interface to test your agent. Send messages, review the agent's reasoning, and verify it takes the right actions. Chat history is preserved across sessions.
+
+## Blueprints
+
+Blueprints are pre-built agent templates for common operational use cases:
 
 | Blueprint | Description |
 |-----------|-------------|
@@ -60,98 +87,17 @@ Available blueprints include:
 | DevOps Assistant | Helps with infrastructure monitoring and deployment tasks |
 | Feedback Digest | Summarizes user feedback from support channels |
 
-To create an agent from a blueprint:
+Blueprints can be customized after creation—modify instructions, add or remove tools, and configure automations.
 
-1. Navigate to the [Agents page][1].
-1. Select a blueprint from the page, or click **New Agent** to browse the full list.
-1. Configure the required fields (such as service name or project name).
-1. Click **Create From Blueprint**.
+## Using agents in workflows
 
-### Start from scratch
+Agents integrate with [Workflow Automation][9] and [App Builder][10] through the **Run Agent** action. This lets you embed AI reasoning into any workflow:
 
-1. Navigate to the [Agents page][1].
-1. Click **New Agent**.
-1. Click **Start from scratch**.
-1. Write instructions, select a model, and add tools. Changes save automatically.
+1. Open or create a workflow in [Workflow Automation][9], or open or create an app in [App Builder][10].
+1. Add the **Run Agent** step from the action catalog.
+1. Select which agent to run and configure the Run Instructions.
 
-## Configure your agent
-
-### Instructions
-
-Instructions define what your agent does — its goal, process, and constraints. Write them in natural language as if you're describing a task to a teammate.
-
-Effective instructions are specific and outcome-oriented. For example:
-
-```
-You are an Error Triage agent for the payments service. Each run:
-
-1. Search the last 24 hours of error-level logs for service:payments.
-2. Group errors by message signature and identify distinct patterns.
-3. For each pattern, determine if it's transient (network blip, recovered outage) or a code-level bug.
-4. For non-transient patterns, create a case in Case Management with the error details, stack trace, and occurrence count.
-5. Summarize what you triaged and what cases you created.
-```
-
-You can use **Edit with AI** to help refine your instructions.
-
-### Model
-
-Select which LLM powers the agent's reasoning. Different models offer trade-offs between capability, speed, and cost. New agents default to Claude Sonnet.
-
-### Tools
-
-Tools define what actions the agent can take. Add tools from the [Action Catalog][7], which includes 2500+ integrations:
-
-- **Log search** — query and analyze log data
-- **Metrics** — pull metric values and trends
-- **Case Management** — create and manage cases
-- **Slack and Microsoft Teams** — send messages and notifications
-- **PagerDuty and Opsgenie** — manage incidents and on-call
-- **Jira and GitHub** — create tickets and issues
-- **Sub-agents** — delegate tasks to other agents
-
-The agent can only use tools that have been added to its configuration. If the agent fails to perform a task, check that the necessary tool is added.
-
-### MCP servers
-
-The [Datadog MCP Server][8] is enabled by default, giving agents access to Datadog monitoring tools. You can also connect third-party MCP servers that use OAuth for authentication, such as Atlassian, Notion, Sentry, Linear, Supabase, and Netlify.
-
-### Automations
-
-Automations let you trigger agents beyond the chat interface:
-
-- **Schedule**: Run an agent on a recurring basis (for example, daily error triage).
-- **Monitor**: Trigger an agent when a [monitor][14] enters an alert, warning, or recovery state.
-- **Incident**: Run an agent as part of [incident][15] response.
-- **Security signal**: Trigger an agent in response to a [security signal][16].
-
-Automations use [Workflow Automation][9] under the hood. You can configure them directly from the agent's settings.
-
-## Test your agent
-
-Use the built-in chat interface to interact with your agent. Send messages, review the agent's reasoning and tool usage, and verify it takes the correct actions. Chat history is preserved across sessions, and previous conversations are accessible from the sidebar.
-
-## Use agents in workflows
-
-Agents integrate with Workflow Automation through the **Run Agent** step. This lets you combine AI reasoning (triage, analysis, summarization) with deterministic automation (if/then logic, data transforms) in a single workflow.
-
-To add an agent to a workflow:
-
-1. Open a workflow in [Workflow Automation][9].
-1. Click the **+** icon to add a step.
-1. Select the **Run Agent** action.
-1. Select the agent and configure the input prompt.
-
-The agent executes with its configured tools and instructions, and returns its output to the workflow for downstream steps.
-
-## Use agents in apps
-
-You can also invoke agents from [App Builder][10] apps:
-
-1. Open an app in [App Builder][10].
-1. Click the **+** icon, then click **Actions**.
-1. Select the **Run Agent** action.
-1. Select the agent, configure the connection and input prompt.
+The agent executes with its configured tools and instructions and returns its output to the workflow. Combine rule-based automation—if/then logic, data transforms—with AI reasoning for triage, analysis, and summarization, all in one workflow.
 
 ## Further Reading
 
