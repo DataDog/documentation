@@ -347,7 +347,7 @@ function __evalPostProcessing(input) {
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Post-Processing (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="post-processing" %}}
+{{% collapse-content title="Post-Processing (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
 1. Select the **JSON** output type.
    <div class="alert alert-info">
 
