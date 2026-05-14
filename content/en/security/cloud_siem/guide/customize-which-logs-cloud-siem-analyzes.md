@@ -60,30 +60,28 @@ Security Filters are **inclusive**: Datadog analyzes a log if the log matches at
 - Zero or more **exclusion filters**, each with its own query. A log matched by the main query is removed from analysis if it also matches any exclusion query.
 - A **status** (active or inactive). Inactive filters are ignored by Cloud SIEM but remain saved for later use.
 
-Cloud SIEM tags every ingested log with `datadog.cloud_siem:true` or `datadog.cloud_siem:false` based on whether Security Filters selected the log for analysis. You can use this tag in Logs Explorer to verify the effect of your Security Filters on any specific log.
+Cloud SIEM tags every ingested log with `datadog.cloud_siem:true` or `datadog.cloud_siem:false`, based on whether Security Filters selected the log for analysis. You can use this tag in Logs Explorer to verify the effect of your Security Filters on any specific log.
 
 ### Limitations on Security Filter queries
 
-Security Filters are evaluated before Cloud SIEM applies geoIP, threat intel, and OCSF observable enrichment. Fields populated by that enrichment are not present on the log when Security Filters evaluate it, so Security Filter queries cannot reliably reference them. The constraint applies in two distinct ways.
+Datadog evaluates Security Filters before Cloud SIEM applies geoIP, threat intel, and OCSF observable enrichment. The fields that enrichment populates are not present on the log when Security Filters evaluate it, so Security Filter queries cannot reliably reference them. The constraint applies in two distinct ways:
 
-**Fields not present at filter-evaluation time.** These fields are populated only by Cloud SIEM's out-of-the-box enrichment, which runs after Security Filters. A Security Filter query that references one of these fields matches no logs.
+- **Fields not present at filter-evaluation time.** These fields are populated only by Cloud SIEM's out-of-the-box enrichment, which runs after Security Filters. A Security Filter query that references one of these fields matches no logs.
+  - `network.ip.list`
+  - `network.ip.attributes`
+  - `network.client.is_private_network_ip`
+  - `network.destination.is_private_network_ip`
+  - `ocsf.observables`
+  - `ocsf.type_uid`
 
-- `network.ip.list`
-- `network.ip.attributes`
-- `network.client.is_private_network_ip`
-- `network.destination.is_private_network_ip`
-- `ocsf.observables`
-- `ocsf.type_uid`
+  To filter on these categories of data, rewrite the query using attributes present at ingestion time, such as `source`, `service`, `host`, tags, and parsed log attributes.
 
-To filter on these categories of data, rewrite the query using attributes present at ingestion time, such as `source`, `service`, `host`, tags, and parsed log attributes.
+- **Fields whose availability depends on Pipeline configuration.** These fields can be populated either by a Logs Pipeline processor (before Security Filters), or by Cloud SIEM's out-of-the-box enrichment (after Security Filters). Whether a Security Filter query against one of these fields works depends on whether the corresponding Pipeline processor is configured.
+  - `network.client.geoip` (and sub-attributes such as `network.client.geoip.country.iso_code`)
+  - `threat_intel.results`
+  - `threat_intel.indicators_matched`
 
-**Fields whose availability depends on Pipeline configuration.** These fields can be populated either by Cloud SIEM's out-of-the-box enrichment (after Security Filters) or by a Logs Pipeline processor (before Security Filters). Whether a Security Filter query against one of these fields works depends on whether the corresponding Pipeline processor is configured.
-
-- `network.client.geoip` (and sub-attributes such as `network.client.geoip.country.iso_code`)
-- `threat_intel.results`
-- `threat_intel.indicators_matched`
-
-To make these fields available to Security Filter queries, configure the corresponding GeoIP or Threat Intel Enrichment processor in your [Logs Pipeline][8]. With the processor in place, the field is populated before Security Filters run.
+  To make these fields available to Security Filter queries, configure the corresponding GeoIP or Threat Intel Enrichment processor in your [Logs Pipeline][8]. With the processor in place, the fields get populated before Security Filters run.
 
 Cloud SIEM's geoIP enrichment uses the same GeoIPFilter and IPinfo database as a Pipeline GeoIP processor, so the geoIP data is identical regardless of which path populates it. The threat intel workaround is different: a Pipeline Threat Intel Enrichment processor draws on your own threat intel sources (see [Bring your own threat intelligence][9] for setup guidance), which produces a different set of matches than Cloud SIEM's out-of-the-box, Datadog-managed threat intel. If you rely on Cloud SIEM's out-of-the-box threat intel, the matching cannot be moved upstream of Security Filters.
 
@@ -321,13 +319,19 @@ curl -L -X DELETE 'https://api.{{< region-param key="dd_site" code="true" >}}/ap
 
 A successful request returns `HTTP 204 No Content`.
 
-## Troubleshooting Security Filters
+## Troubleshoot Security Filters
 
-If a log you expect Cloud SIEM to analyze is not producing signals, work through these checks in order.
+If a log you expect Cloud SIEM to analyze is not producing signals, work through these checks in order:
 
-1. **Verify Security Filters selected the log for analysis.** Open the log in Logs Explorer and check the value of `datadog.cloud_siem`. If the tag is `false`, the log was excluded by Security Filters — review your filter set and confirm that at least one enabled filter matches the log, and that no exclusion removes it. If the tag is `true`, the log was selected for analysis and the issue is downstream of Security Filters (for example, no detection rule matched).
-2. **Check whether your filter query references an unsupported field.** See [Limitations on Security Filter queries](#limitations-on-security-filter-queries). A query against a field not present at filter-evaluation time returns zero matches. A query against a field whose availability depends on Pipeline configuration returns matches only when the corresponding Pipeline processor is configured.
-3. **Validate the combined effect of all filters.** In the UI, expand the **Preview** pane in the Security Filters Configuration section to stream the logs that reach analysis after every enabled filter is applied. With the API, send a `GET` request to list all filters and review the combined `query` and `exclusion_filters` payloads.
+1. **Verify that Security Filters selected the log for analysis.** Open the log in Logs Explorer and check the value of `datadog.cloud_siem`.
+   - If the tag is `false`, the log was excluded by Security Filters. Review your filter set and confirm that at least one enabled filter matches the log, and that no exclusion removes it.
+   - If the tag is `true`, the log was selected for analysis and the issue is downstream of Security Filters (for example, no detection rule matched).
+2. **Check whether your filter query references an unsupported field.** See [Limitations on Security Filter queries](#limitations-on-security-filter-queries).
+   - A query against a field not present at filter-evaluation time returns zero matches.
+   - A query against a field whose availability depends on Pipeline configuration returns matches only when the corresponding Pipeline processor is configured.
+3. **Validate the combined effect of all filters.**
+   - In the UI, expand the **Preview** pane in the Security Filters Configuration section to stream the logs that reach analysis after every enabled filter is applied.
+   - With the API, send a `GET` request to list all filters and review the combined `query` and `exclusion_filters` payloads.
 
 ## Useful tags and attributes for Security Filter queries
 
