@@ -656,9 +656,9 @@ export default function App() {
     );
 }
 ```
-When initializing the SDK in ASYNC mode, the SDK will use React Native's [requestIdleCallback][16] https://reactnative.dev/docs/global-requestIdleCallback to run the initialization code after all animations and UI rendering have settled.
+When initializing the SDK in ASYNC mode, the SDK uses React Native's [requestIdleCallback][16] https://reactnative.dev/docs/global-requestIdleCallback to run the initialization code after all animations and UI rendering have settled.
 
-If this function is not available, the SDK will fall back to React Native's [InteractionManager.runAfterInteractions][17] to delay its initialization.
+If this function is not available, the SDK uses React Native's [InteractionManager.runAfterInteractions][17] to delay its initialization.
 
 All interactions with the RUM SDK (view tracking, actions, resources tracing, and so on) are still recorded and kept in a queue with a limit of 100 events.
 
