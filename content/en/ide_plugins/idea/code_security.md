@@ -75,4 +75,4 @@ The Datadog Static Analyzer can be activated and deactivated in the IDE settings
 [3]: /security/code_security/static_analysis/static_analysis_rules/
 [4]: /security/code_security/
 [5]: /security/code_security/static_analysis/setup/?tab=github#customize-your-configuration
-[6]: security/code_security/secret_scanning/
+[6]: /security/code_security/secret_scanning/
