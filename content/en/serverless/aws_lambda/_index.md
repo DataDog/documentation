@@ -95,6 +95,12 @@ Easily correlate serverless code, configuration, and deployment changes with met
 
 {{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
 
+### Visualize your event driven architectures
+
+Understand the topology of your event driven architectures, measure end-to-end latency across multiple message channels, pinpoint faulty producers or consumers and better see the topology of your serverless applications with [Data Streams Monitoring][2].
+
+{{< img src="data_streams/map_view2.png" alt="Data Streams Monitoring page in Datadog, showing the Map view. Highlights a service called 'authenticator'. A topology map visualization of left-to-right data flow, where the authenticator service is displayed in the center with its upstream and downstream services and queues." style="width:100%;" >}}
+
 ## Additional capabilities
 
 {{< whatsnext desc=" ">}}
@@ -108,3 +114,4 @@ Easily correlate serverless code, configuration, and deployment changes with met
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/installation
+[2]: /data_streams/setup/technologies/aws_serverless
