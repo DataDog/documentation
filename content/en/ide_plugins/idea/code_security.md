@@ -28,7 +28,7 @@ Click on the link in the **Code Links** section to navigate to the source locati
 ## Local code analysis
 
 ### File editing
-As you edit your source files, the Datadog plugin checks the content locally against a set of [rules][2] to detect and flag quality and security issues before you commit. It also flags hard-coded secret values with [Secret Scanning][6].
+As you edit your source files, the Datadog plugin checks the content locally against a set of [rules][2] to detect and flag quality and security issues before you commit. The plugin also flags hard-coded secret values with [Secret Scanning][6].
 
 The local analysis engine supports all the file types listed in [Static Analysis Rules][3]. Issues are shown in the source code editor with the JetBrains inspection system, and you can apply suggested fixes directly.
 
