@@ -1,6 +1,8 @@
 {{/*
 Renders a compact per-endpoint summary block for the category landing page:
-H2 anchor, method + URL pattern, short description, link to the full endpoint page.
+H2 anchor, method + URL pattern, link to the full endpoint page. The endpoint's
+own description is usually just the H2 summary restated plus boilerplate, so we
+omit it here.
 Each summary keeps the original H2 id so existing `/api/.../#endpoint-slug`
 deep-links continue to scroll to the matching block.
 
@@ -28,9 +30,6 @@ Required dict keys:
 {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $dot.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions) }}
 
 {{ if $endpoint }}
-  {{ $translate_action := (index $translate_actions $endpoint.action.operationId) | default (dict) }}
-  {{ $rawDesc := $translate_action.description | default $endpoint.action.description | default "" }}
-  {{ $firstPara := index (split $rawDesc "\n\n") 0 }}
   {{ $isDeprecated := $endpoint.action.deprecated | default false }}
   {{ $isUnstable := isset $endpoint.action "x-unstable" }}
 
@@ -51,9 +50,6 @@ Required dict keys:
         {{- end -}}
       {{- end -}}
     </p>
-    {{ with $firstPara }}
-      <p class="mb-1">{{ . | $dot.Page.RenderString }}</p>
-    {{ end }}
     <p class="mb-0"><a href="{{ $menuChild.URL }}">See full reference &rarr;</a></p>
   </div>
 {{ end }}
