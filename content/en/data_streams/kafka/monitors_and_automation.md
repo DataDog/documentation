@@ -1,7 +1,6 @@
 ---
 title: Monitors and Automation
 description: Recommended Datadog monitors for Kafka clusters and topics tracked by Data Streams Monitoring, and examples of automating responses with Workflow Automation or webhooks when a monitor triggers.
-weight: 2
 further_reading:
 - link: "/actions/workflows/"
   tag: "Documentation"
@@ -57,9 +56,9 @@ When a monitor triggers, Datadog can take action automatically rather than waiti
 - **Workflow Automation** — Build a Datadog Workflow that chains pre-built actions across your infrastructure and tools (PagerDuty, Slack, Jira, AWS, Kubernetes, and so on), and run it from a monitor trigger. Best for the "trigger a runbook" patterns below. See [Trigger a workflow from a monitor][3].
 - **Webhooks** — Call any HTTP endpoint when a monitor triggers, recovers, or changes state. Best when the action lives in a system outside Datadog and you already have an HTTPS callback. See [Webhooks integration][2].
 
-Either option can be added to a monitor by mentioning it in the notification message — `@workflow-<name>` for Workflow Automation, `@webhook-<name>` for a webhook. Monitor metadata is available as template variables (`{{topic.name}}`, `{{kafka_cluster_id.name}}`, `{{value}}`, and so on) and can be passed to the workflow or webhook payload.
+Either option can be added to a monitor by mentioning it in the notification message: `@workflow-<name>` for Workflow Automation, `@webhook-<name>` for a webhook. Monitor metadata is available as template variables (`{{topic.name}}`, `{{kafka_cluster_id.name}}`, `{{value}}`, etc.) and can be passed to the workflow or webhook payload.
 
-The examples below show conditions where automation is particularly valuable in a Kafka pipeline.
+The following examples show conditions where automation is particularly valuable in a Kafka pipeline.
 
 ### Consumer lag is high
 
