@@ -1,11 +1,14 @@
 ---
 title: Agent Builder
-description: Build custom AI agents that can access the Action Catalog.
+description: Build and deploy custom AI agents that automate operational tasks using Datadog's tools and integrations.
 site_support_id: agent_builder
 further_reading:
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
   text: "Action Catalog"
+- link: "/actions/workflows/"
+  tag: "Documentation"
+  text: "Workflow Automation"
 - link: "https://www.datadoghq.com/knowledge-center/aiops/ai-agents/"
   tag: "Knowledge Center"
   text: "What are AI agents and how do they work?"
@@ -17,135 +20,138 @@ Agent Builder is in Preview.
 
 ## Overview
 
-You can build custom AI agents to act on your observability data and third-party integrations. Agents can use any action from the [Action Catalog][7] to investigate problems, start remediation, or manage resources.
+Agent Builder lets you create AI agents that automate operational tasks using Datadog's tools and integrations. Agents can search logs, query metrics, create cases, send Slack messages, run workflows, and take action across 2500+ integrations — working with the same data you use every day.
 
-When building an agent, choose a blueprint to get started. Blueprints come with pre-filled instructions and relevant tools. They're named after their main role, like Security Analyst, Log Analyzer, Incident Responder, or DevOps Assistant.
+Use agents to handle work that's too complex for static automation but too repetitive to do manually: triaging errors, investigating incidents, analyzing trends, and escalating issues.
 
-{{< img src="/actions/agents/blank-new-agent.png" alt="The Agents page, filtered to show only 'My agents'" style="width:100%;" >}}
+Once created, agents can be triggered from workflows, monitors, incidents, Slack, or on a schedule.
 
 ## Agents page
 
-You can create a new agent from the [Agents][1] page. The page lists information about existing agents, including the following:
-- Agent Name
-- Description
-- Author
-- Creation date
+The [Agents page][1] lists all agents in your organization. From here, you can create new agents, search existing ones, or filter to see only agents you've created.
 
-Hover over an agent for options to clone or delete it. You can also enable the {{< ui >}}My agents{{< /ui >}} toggle to see only agents that you've created:
-
-{{< img src="/actions/agents/agent-dashboard.png" alt="The Agents page, filtered to show only 'My agents'" style="width:100%;" >}}
+{{< img src="/actions/agents/agent-dashboard.png" alt="The Agents page showing a list of agents" style="width:100%;" >}}
 
 ## Create an agent
 
-### Build an agent from a blueprint
+You can create an agent in three ways:
 
-Blueprints are starter agents that cover common use cases. They come loaded with instructions for the agent's behavior and related tools from the Action Catalog. Blueprints also showcase best practices for setting up agent functionality.
+### Build with AI
 
-To build an agent from a blueprint:
+Describe what you want the agent to do in natural language. Agent Builder generates instructions, selects relevant tools, and configures the agent for you.
 
-1. Navigate to the [Agents][1] page.
-1. In {{< ui >}}Agent Blueprints{{< /ui >}}, click the blueprint you want to use. Alternatively, you can click {{< ui >}}New Agent{{< /ui >}} and browse the full list of blueprints.
-1. Click {{< ui >}}Create From Blueprint{{< /ui >}}.
-1. Your new agent has pre-populated settings and tools. You can immediately start chatting with the agent or [further customize it](#customize-your-agent).
+1. Navigate to the [Agents page][1].
+1. Click **New Agent**.
+1. Enter a description of what the agent should do.
+1. Agent Builder creates the agent with generated instructions and suggested tools. Customize further or start testing in the chat interface.
 
-### Create a custom agent
+### Start from a blueprint
 
-To build an agent from scratch:
+Blueprints are pre-built agent templates for common use cases. Each blueprint includes instructions, tools, and automations that follow best practices for that use case.
 
-1. Navigate to the [Agents][1] page.
-1. Click {{< ui >}}New Agent{{< /ui >}}.
-1. [Customize your agent](#customize-your-agent). Changes are saved automatically.
-1. Start chatting with your agent.
+Available blueprints include:
 
-## Customize your agent
+| Blueprint | Description |
+|-----------|-------------|
+| Daily Error Triager | Finds error logs daily and opens a case for non-transient issues |
+| Incident Responder | Gathers context and coordinates response during active incidents |
+| Security Analyst | Investigates security signals and recommends remediation |
+| Log Analyzer | Analyzes system logs, identifies patterns, and helps troubleshoot |
+| DevOps Assistant | Helps with infrastructure monitoring and deployment tasks |
+| Feedback Digest | Summarizes user feedback from support channels |
 
-When configuring your agent, you have the following options for customization.
+To create an agent from a blueprint:
 
-### Automation
+1. Navigate to the [Agents page][1].
+1. Select a blueprint from the page, or click **New Agent** to browse the full list.
+1. Configure the required fields (such as service name or project name).
+1. Click **Create From Blueprint**.
 
-Set up your agent to run automatically with a [schedule][13], or trigger it from a Datadog [monitor][14], [incident][15], or [security signal][16]. These automations use [Workflow Automation][9].
+### Start from scratch
 
-**Note**: If a [monitor][14] triggers the workflow, update the monitor's configuration to trigger the workflow upon alert, warning, or recovery.
+1. Navigate to the [Agents page][1].
+1. Click **New Agent**.
+1. Click **Start from scratch**.
+1. Write instructions, select a model, and add tools. Changes save automatically.
+
+## Configure your agent
 
 ### Instructions
 
-Enter the instructions for your agent to follow when performing tasks. You can describe the agent as if it were a person, including its role, specialties, and steps to follow. Click {{< ui >}}Suggest With AI{{< /ui >}} to get help with writing and refining your instructions.
+Instructions define what your agent does — its goal, process, and constraints. Write them in natural language as if you're describing a task to a teammate.
 
-Below is a sample set of instructions for an agent acting as an incident responder.
+Effective instructions are specific and outcome-oriented. For example:
 
 ```
-You are an Incident Responder AI assistant specialized in managing and coordinating incident response activities.
+You are an Error Triage agent for the payments service. Each run:
 
-Your role involves:
-- Guiding incident response procedures and best practices
-- Helping assess incident severity and impact
-- Coordinating communication between teams and stakeholders
-- Managing incident lifecycle from detection to resolution
-- Facilitating post-incident reviews and improvements
-
-During incident response:
-1. Help classify incident severity (P0/P1/P2/etc.)
-2. Guide through incident response runbooks and procedures
-3. Assist with stakeholder communication and updates
-4. Track action items and follow-up tasks
-5. Support post-mortem analysis and lessons learned
-
-Focus on clear communication, structured processes, and continuous improvement of incident response capabilities.
+1. Search the last 24 hours of error-level logs for service:payments.
+2. Group errors by message signature and identify distinct patterns.
+3. For each pattern, determine if it's transient (network blip, recovered outage) or a code-level bug.
+4. For non-transient patterns, create a case in Case Management with the error details, stack trace, and occurrence count.
+5. Summarize what you triaged and what cases you created.
 ```
+
+You can use **Edit with AI** to help refine your instructions.
 
 ### Model
 
-By default, new custom agents run on Claude Sonnet.
+Select which LLM powers the agent's reasoning. Different models offer trade-offs between capability, speed, and cost. New agents default to Claude Sonnet.
 
-To change your agent's model, click the model name in the chatbox to open a dropdown menu and choose another model. You can compare these models using [OpenAI's comparison tool][6] and [Anthropic's models comparison][5].
+### Tools
 
-### Self Improve
+Tools define what actions the agent can take. Add tools from the [Action Catalog][7], which includes 2500+ integrations:
 
-By default, the {{< ui >}}Self Improve{{< /ui >}} feature is not enabled. Self improvement allows the agent to read its own configuration and update it when requested or when it determines its configuration can be changed to improve.
+- **Log search** — query and analyze log data
+- **Metrics** — pull metric values and trends
+- **Case Management** — create and manage cases
+- **Slack and Microsoft Teams** — send messages and notifications
+- **PagerDuty and Opsgenie** — manage incidents and on-call
+- **Jira and GitHub** — create tickets and issues
+- **Sub-agents** — delegate tasks to other agents
 
-To enable this feature, click the settings  **<i class="icon-sliders"></i>**  icon, then the toggle button next to {{< ui >}}Self Improve{{< /ui >}}.
+The agent can only use tools that have been added to its configuration. If the agent fails to perform a task, check that the necessary tool is added.
 
-### Actions
+### MCP servers
 
-Click the plus **<i class="icon-plus-circled-wui"></i>** icon to add actions from the [Action Catalog][7] for the agent to use. The agent is restricted to only its added tools. For example, if you encounter an error when the agent attempts to perform a task you've requested, it might be missing a necessary action.
+The [Datadog MCP Server][8] is enabled by default, giving agents access to Datadog monitoring tools. You can also connect third-party MCP servers that use OAuth for authentication, such as Atlassian, Notion, Sentry, Linear, Supabase, and Netlify.
 
-### MCP Server
+### Automations
 
-In the {{< ui >}}MCP Servers{{< /ui >}} section, the [Datadog MCP Server][8] is enabled by default. You can also connect third-party MCP servers. MCP servers use the Model Context Protocol to provide additional tools and capabilities that the agent can use to interact with external systems.
+Automations let you trigger agents beyond the chat interface:
 
-Third-party MCP servers use OAuth for authentication, allowing your agent to integrate with popular tools such as Atlassian, Notion, GitHub, PagerDuty, Asana, and Linear.
+- **Schedule**: Run an agent on a recurring basis (for example, daily error triage).
+- **Monitor**: Trigger an agent when a [monitor][14] enters an alert, warning, or recovery state.
+- **Incident**: Run an agent as part of [incident][15] response.
+- **Security signal**: Trigger an agent in response to a [security signal][16].
 
-## Add an agent action
+Automations use [Workflow Automation][9] under the hood. You can configure them directly from the agent's settings.
 
-After you create an agent, you can add it to a workflow or app.
+## Test your agent
 
-### Add to a workflow
+Use the built-in chat interface to interact with your agent. Send messages, review the agent's reasoning and tool usage, and verify it takes the correct actions. Chat history is preserved across sessions, and previous conversations are accessible from the sidebar.
 
-To invoke an agent in a workflow step:
-1. In [Workflow Automation][9], navigate to a workflow and click {{< ui >}}Edit{{< /ui >}}.
-1. Click the plus **<i class="icon-plus-circled-wui"></i>** icon.
-1. Select the {{< ui >}}Execute Custom Agent{{< /ui >}} action.
-1. Configure the action:
-    1. Enter a {{< ui >}}Step name{{< /ui >}}.
-    1. Selection a {{< ui >}}Connection{{< /ui >}}.
-    1. Select a {{< ui >}}Custom Agent ID{{< /ui >}}.
-    1. Enter a {{< ui >}}User Prompt{{< /ui >}}.
-    1. Optionally, add a [**Wait until condition**][11].
-    1. Optionally, add [**Retries**][12].
-1. Click {{< ui >}}Save{{< /ui >}}.
+## Use agents in workflows
 
-### Add to an app
+Agents integrate with Workflow Automation through the **Run Agent** step. This lets you combine AI reasoning (triage, analysis, summarization) with deterministic automation (if/then logic, data transforms) in a single workflow.
 
-To invoke an agent in an app:
-1. In [App Builder][10], navigate to an app and click {{< ui >}}Edit{{< /ui >}}.
-1. Click the plus **<i class="icon-plus-2"></i>** icon, then click {{< ui >}}Actions{{< /ui >}}.
-1. Select the {{< ui >}}Execute Custom Agent{{< /ui >}} action.
-1. Configure the action:
-    1. Select the {{< ui >}}Run Settings{{< /ui >}}.
-    1. Selection a {{< ui >}}Connection{{< /ui >}}.
-    1. Select a {{< ui >}}Custom Agent ID{{< /ui >}}.
-    1. Enter a {{< ui >}}User Prompt{{< /ui >}}.
-1. Click {{< ui >}}Save{{< /ui >}}.
+To add an agent to a workflow:
+
+1. Open a workflow in [Workflow Automation][9].
+1. Click the **+** icon to add a step.
+1. Select the **Run Agent** action.
+1. Select the agent and configure the input prompt.
+
+The agent executes with its configured tools and instructions, and returns its output to the workflow for downstream steps.
+
+## Use agents in apps
+
+You can also invoke agents from [App Builder][10] apps:
+
+1. Open an app in [App Builder][10].
+1. Click the **+** icon, then click **Actions**.
+1. Select the **Run Agent** action.
+1. Select the agent, configure the connection and input prompt.
 
 ## Further Reading
 
