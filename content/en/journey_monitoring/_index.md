@@ -43,7 +43,7 @@ The start and end of a feature can be either action or view events from [Real Us
 
 Each feature can have one or more variants. A variant is a specific sequence of intermediate steps a user takes between the feature's start and end. Different users naturally take different paths. For example, some may skip optional steps while others take detours before completing the feature.
 
-{{< img src="journey_monitoring/journey-monitoring-diagram-test.png" alt="Diagram of a feature with a start event, end event, and three variants, monitored by RUM and Product Analytics in the Live Environment and by Synthetic tests in the Synthetic Environment." style="width:100%;" >}}
+{{< img src="journey_monitoring/journey-monitoring-explainer-diagram-final.png" alt="Diagram of a feature with a start event, end event, and three variants, monitored by RUM and Product Analytics in the Live Environment and by Synthetic tests in the Synthetic Environment." style="width:100%;" >}}
 
 ## Setup
 
