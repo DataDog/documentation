@@ -25,7 +25,10 @@ further_reading:
   text: "Using LLM-as-a-judge for an automated and versatile evaluation"
 ---
 
-Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another LLM. You can define evaluation logic with natural language prompts, capture subjective or objective criteria (like tone, helpfulness, or factuality), and run these evaluations at scale across your traces and spans.
+Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another LLM. Define evaluation logic with natural language prompts, capture subjective or objective criteria (like tone, helpfulness, or factuality), and run the evaluations at scale on:
+
+- **Span scope**—score the input and output of one LLM call, agent step, or tool invocation in isolation.
+- **Trace scope**—feed every span of a trace to the LLM judge in a single prompt, so the evaluation can reason across steps. See [Trace-Level Evaluations][16] for the full walkthrough, use cases, and prompt examples.
 
 ## Create a custom LLM-as-a-judge evaluation
 
@@ -86,9 +89,9 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-8. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate. You can reference any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. An autocomplete dropdown appears when you type `{{` to help you select available fields.
+8. In the **User** field, provide your user prompt. Explicitly specify what parts of the span or trace to evaluate. You can reference any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. For trace-scoped evaluations, use `{{spans...}}` paths to read across spans—see [Prompt Templating][15] for the full reference. An autocomplete dropdown appears when you type `{{` to help you select available fields.
 
-   Additional variables are available: type `{{` to see the full list. You may also use **Filtered Spans** or **Filtered Traces** (on the right side) to add span data as a variable:
+   You may also use the panel on the right (**Filtered Spans** in span scope, **Spans in Selected Trace** in trace scope) to add span data as a variable:
    1. Choose an account and an application so that spans/traces show up on the right.
    2. Select one of the spans on the right to view its JSON.
    3. Use the three-dots menu and select **Add variable to message** to insert the JSON into your prompt.
@@ -279,14 +282,15 @@ Assessment Criteria is not currently available for JSON evaluations.
 
 <div class="alert alert-info">Span fields used in evaluations are limited to 250 KB each. Fields exceeding this size are truncated before being sent to the LLM judge.</div>
 
-Under **Evaluation Scope**, define where and how your evaluation runs. This helps control coverage (which spans are included) and cost (how many spans are sampled).
+Under **Evaluation Scope**, define where and how your evaluation runs. This helps control coverage (which spans or traces are included) and cost (how many are sampled).
    - **Application**: Select the application you want to evaluate.
    - **Evaluate On**: Choose one of the following:
-      - **Traces**: Evaluate only root spans
-      - **All Spans**: Evaluate both root and child spans
-   - **Query**: (Optional) Enter a query using Datadog query syntax to filter which spans are evaluated. For example:
+      - **Trace**: Evaluate the full trace, including all its spans, as a single unit. Use this when the answer depends on context across multiple spans (agent goal completion, tool-use chains, RAG faithfulness). See [Trace-Level Evaluations][16] for examples and details on how trace completion is determined.
+      - **Span**: Evaluate matching spans individually. Use the **Query** field to scope to specific spans (for example, only root spans, only `llm` spans, or spans with a specific tag).
+   - **Query**: (Optional) Enter a query using Datadog query syntax to filter which spans or traces are evaluated. For example:
       - `@name:agent.workflow` to filter by span name
       - `env:prod` to filter by tag
+      - `@parent_id:undefined` to evaluate only root spans (when **Evaluate On** is set to **Span**)
       - `@name:agent.workflow AND env:prod` to filter by span name and tag
    - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
@@ -396,4 +400,6 @@ You can use basic CRUD operations to manipluate managed evaluation configs, one 
 [12]: /api/latest/llm-observability/#create-or-update-a-custom-evaluator-configuration
 [13]: /api/latest/llm-observability/#delete-a-custom-evaluator-configuration
 [14]: /account_management/api-app-keys
+[15]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
+[16]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
 

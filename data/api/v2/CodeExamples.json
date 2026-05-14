@@ -835,20 +835,6 @@
       "description": "Update an existing incident service returns \"OK\" response"
     }
   ],
-  "CreateIncidentTeam": [
-    {
-      "group": "incident_teams",
-      "suffix": "",
-      "description": "Create a new incident team returns \"CREATED\" response"
-    }
-  ],
-  "UpdateIncidentTeam": [
-    {
-      "group": "incident_teams",
-      "suffix": "",
-      "description": "Update an existing incident team returns \"OK\" response"
-    }
-  ],
   "UpdateIncident": [
     {
       "group": "incidents",
@@ -2409,6 +2395,20 @@
       "group": "spans_metrics",
       "suffix": "",
       "description": "Update a span-based metric returns \"OK\" response"
+    }
+  ],
+  "CreateBackfilledDegradation": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create backfilled degradation returns \"Created\" response"
+    }
+  ],
+  "CreateBackfilledMaintenance": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create backfilled maintenance returns \"Created\" response"
     }
   ],
   "CreateComponent": [

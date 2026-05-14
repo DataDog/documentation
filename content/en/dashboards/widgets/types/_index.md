@@ -25,6 +25,8 @@ further_reading:
         img="dashboards/widgets/icons/heatmap_light_large.png">}} Heatmap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/pie_chart"
         img="dashboards/widgets/icons/pie_light_large.png">}} Pie Chart{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/point_plot"
+        img="dashboards/widgets/icons/scatter-plot_light_large.png">}} Point Plot{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value"
         img="dashboards/widgets/icons/query-value_light_large.png">}} Query Value{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot"

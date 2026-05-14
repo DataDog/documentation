@@ -1773,12 +1773,20 @@ The regular expression must match your application's file path structure. Adjust
 
 ### Limitations
 
+#### Events without an attributed origin
+
 Some events cannot be attributed to an origin because they do not have an associated handling stack:
 
 -   Action events collected automatically
 -   Resource events other than XHR and Fetch
 -   View events collected automatically
 -   CORS and CSP violations
+
+#### Source map resolution across micro frontends
+
+When a stack trace contains frames from multiple micro frontends, the event receives a single `service` and `version` from the topmost frame (where the error was thrown). Source maps are resolved for the event under that single service, so frames from other micro frontends remain minified, even when their source maps were correctly uploaded under their own `service`.
+
+To control which micro frontend's source maps are used, use the [manual attribution](#manual-service-and-version-attribution) approach with `beforeSend` to set `event.service` and `event.version`. Only frames belonging to the chosen micro frontend are unminified.
 
 ### Explore micro frontend data in Datadog
 
@@ -1787,6 +1795,12 @@ After setup, the `service` and `version` on RUM events identify which micro fron
 -   **Side panels**: The `service` and `version` attributes appear in the session, view, error, resource, action, and long task side panels in the RUM Explorer.
 -   **RUM Summary dashboard**: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
 -   **Custom dashboards**: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
+
+The `service` and `version` tags representing each micro frontend can also be found in the following [RUM without Limits][24] metrics:
+
+- `rum.measure.error`
+- `rum.measure.operation`
+- `rum.measure.operation.duration`
 
 [1]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/
@@ -1811,3 +1825,4 @@ After setup, the `service` and `version` on RUM events identify which micro fron
 [21]: https://module-federation.io/
 [22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
 [23]: https://github.com/DataDog/build-plugins
+[24]: /real_user_monitoring/rum_without_limits/

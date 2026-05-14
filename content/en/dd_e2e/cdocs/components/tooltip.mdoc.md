@@ -1,6 +1,7 @@
 ---
 title: Tooltip
 draft: true
+private: true
 ---
 
 ## Overview

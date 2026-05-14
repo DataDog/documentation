@@ -191,10 +191,6 @@
     "name": "Incident Services",
     "description": "Create, update, delete, and retrieve services which can be associated with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
-  "incident-teams": {
-    "name": "Incident Teams",
-    "description": "The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/) to create, update, delete, and retrieve teams which can be associated with incidents."
-  },
   "incidents": {
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
@@ -402,6 +398,10 @@
   "status-pages": {
     "name": "Status Pages",
     "description": "Manage your status pages and communicate service disruptions to stakeholders via Datadog's API. See the [Status Pages documentation](https://docs.datadoghq.com/incident_response/status_pages/) for more information."
+  },
+  "storage-management": {
+    "name": "Storage Management",
+    "description": "Enable Storage Management for S3 buckets, GCS buckets, and Azure containers. Each configuration registers the destination that holds inventory reports for the storage being monitored."
   },
   "synthetics": {
     "name": "Synthetics",
