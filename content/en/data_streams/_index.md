@@ -74,7 +74,7 @@ Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM t
 
 {{< partial name="data_streams/setup-technologies.html" >}}
 
-### AWS Serverless
+### AWS Lambda
 
 Serverless applications naturally gravitate towards event-driven architectures. If you're building applications using AWS Lambda, [per runtime Lambda specific instructions are available.][12]
 
