@@ -42,6 +42,8 @@ To export OTLP data to the Datadog OTLP traces intake endpoint:
 
 To send OTLP data to the Datadog OTLP traces intake endpoint, you need to use the OTLP HTTP Protobuf exporter. The process differs depending on whether you are using automatic or manual instrumentation for OpenTelemetry.
 
+[Trace metrics][7] are not computed by default for traces sent directly to the Datadog OTLP traces intake endpoint. The following examples include `compute_stats=true` to enable trace metrics.
+
 #### Automatic instrumentation
 
 If you are using [OpenTelemetry automatic instrumentation][3], set the following environment variables:
@@ -147,8 +149,6 @@ exporter = OTLPSpanExporter(
 
 {{% /tab %}}
 {{< /tabs >}}
-
-<div class="alert alert-info"><a href="/tracing/metrics/">Trace metrics</a> are not computed by default for traces sent to the OTLP traces intake endpoint. To enable trace metrics, add the <code>compute_stats</code> HTTP header with a value of <code>true</code>.</div>
 
 ### (Optional) Map or filter span names
 
@@ -273,3 +273,4 @@ This ensures that the span operation names are consistent across the Datadog OTL
 [4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter
 [5]: https://github.com/open-telemetry/opentelemetry-go/issues/3706
 [6]: https://github.com/open-telemetry/opentelemetry-specification/issues/3203
+[7]: /tracing/metrics/
