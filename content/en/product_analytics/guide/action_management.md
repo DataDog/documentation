@@ -13,13 +13,17 @@ further_reading:
 ---
 
 ## Overview
-Action Management is a no-code way to label autocaptured actions from your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page describes how to get started with Action Management.
+Action Management is a no-code way to label autocaptured actions from your web and mobile applications. Labeled actions can be used in all Product Analytics charts. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis.
 
-## Setup
+Two labeling methods are available:
+- **Visual labeling**: A point-and-click interface for labeling actions on web pages. Requires the Datadog test recorder Chrome extension.
+- **Manual labeling**: Label actions for web and mobile applications without a browser extension. Specify a custom CSS selector or use the CSS builder for greater control and granularity over your labels.
+
+## Visual labeling
 
 ### Step 1 - Install the browser extension
 
-Action Management requires [The Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2].
+Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2].
 
 ### Step 2 - Label your actions
 
@@ -53,16 +57,27 @@ Action Management requires [The Datadog test recorder Chrome extension][1]. If y
 After you define an action, you can find it in the [list of labeled actions][4]. From this list, you can:
 - Filter to only see your actions
 - Edit actions
-- View actions in a funnel, retention chart, related session replay
+- View actions in any Product Analytics chart or related session replay
 
  {{< img src="product_analytics/action_management/pana-action-list.png" alt="List of your labeled actions." style="width:90%;">}}
 
+## Manual labeling
 
+Manual labeling is available for both web and mobile applications and does not require the Chrome extension.
+
+1. Go to the [Actions][3] page in the Datadog UI, and click **Label New Action**.
+2. Select the **Manual** labeling option.
+3. Specify a CSS selector directly, or use the CSS builder to construct one for greater control over which actions are labeled.
+4. Configure the action:
+    - **Choose the scope**: Select whether the action should be tracked on the current page only or across all pages.
+    - **Set targeting options**: (Optional) Limit the action to a specific target text.
+    - **Name the action**: Provide a name (required) and a description (optional) to help identify the action in your dashboards and reports.
+
+After you define an action, it appears in the [list of labeled actions][4] and can be used in any Product Analytics chart.
 
 ## Known limitations
-- Action Management only works for web pages at this time.
-- You cannot label Actions that are hidden behind a hover. If this limitation impacts your use cases, share examples of these with your Customer Success Manager to inform future improvements.
-- Labeled actions can only be used in Funnels and Retention graphs at this time.
+- Visual labeling is only available for web pages. Use manual labeling for mobile applications.
+- You cannot label actions that are hidden behind a hover. If this limitation impacts your use cases, share examples with your Customer Success Manager to inform future improvements.
 - Deleting a labeled action also deletes it from the dashboards where it is being used.
 
 
