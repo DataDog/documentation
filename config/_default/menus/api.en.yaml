@@ -8595,6 +8595,23 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Compliance
+      url: /api/latest/compliance/
+      identifier: compliance
+      generated: true
+    - name: Get the rule-based view of compliance findings
+      url: '#get-the-rule-based-view-of-compliance-findings'
+      identifier: compliance-get-the-rule-based-view-of-compliance-findings
+      parent: compliance
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRuleBasedView
+        unstable:
+          - v2
+        order: 1
     - name: Confluent Cloud
       url: /api/latest/confluent-cloud/
       identifier: confluent-cloud
