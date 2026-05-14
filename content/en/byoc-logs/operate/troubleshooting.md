@@ -84,10 +84,11 @@ The cluster eventually crashes, and the BYOC Logs console shows multiple cluster
 ERROR quickwit: command failed error=failed to resolve metastore uri postgresql://user:***redacted***@<host>/<database>
 ```
 
-**Solution:** Verify the metastore URI is set correctly. Inspect the running configuration through the local node API endpoint:
+**Solution:** Verify the metastore URI is set correctly. Port-forward to the metastore pod and inspect the running configuration:
 
 ```bash
-kubectl exec -n datadog-byoc-logs <pod-name> -- curl -s http://localhost:7280/api/v1/node_config
+kubectl port-forward -n datadog-byoc-logs <pod-name> 7280:7280
+curl -s http://localhost:7280/api/v1/config
 ```
 
 Confirm `metastore_uri` points to your PostgreSQL instance. If the password contains special characters, verify it is URL-encoded (see [Metastore cannot connect to PostgreSQL](#metastore-cannot-connect-to-postgresql)).
