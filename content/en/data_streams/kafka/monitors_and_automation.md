@@ -20,11 +20,16 @@ further_reading:
   text: "Kafka Monitoring setup"
 ---
 
-After your Kafka clusters are connected to Data Streams Monitoring (see [Kafka Monitoring Setup][1]), the next step is to alert on the conditions that put your pipelines at risk and, where possible, automate the response. This page covers the monitor templates that Data Streams Monitoring provides, and shows how to connect those monitors to Datadog Workflow Automation or a webhook so a triggered alert can take action automatically.
+After your Kafka clusters are connected to Data Streams Monitoring (see [Kafka Monitoring Setup][1]), the next step is to alert on the conditions that put your pipelines at risk and, where possible, automate the response.
+
+This page covers:
+
+- [Recommended monitors](#recommended-monitors): available out-of-the-box monitor templates for cluster and topic health
+- [Automate responses to triggered monitors](#automate-responses-to-triggered-monitors): using Datadog Workflow Automation or a webhook to take action when a monitor triggers
 
 ## Recommended monitors
 
-Data Streams Monitoring ships with monitor templates that you can create directly from a cluster or topic detail page — no query writing required. On any cluster or topic, open the {{< ui >}}Monitors{{< /ui >}} side panel and click {{< ui >}}Start{{< /ui >}} on a template to pre-fill the query with the right scope.
+Data Streams Monitoring ships with monitor templates that you can create directly from a cluster or topic detail page.
 
 ### Cluster-level templates
 
@@ -39,13 +44,11 @@ Both monitors are grouped by `kafka_cluster_id` so each cluster alerts its own o
 
 | Template                                                   | Metric                                                                  | Condition |
 |------------------------------------------------------------|-------------------------------------------------------------------------|-----------|
-| Incoming message rate has dropped                          | `kafka.topic.message_rate`                                              | Produce rate to the topic drops below a threshold (default `< 1` msg/sec). Catches silent producer failures. |
-| Consumer lag is high for topic                             | `kafka.estimated_consumer_lag`                                          | Consumer lag exceeds a threshold for a topic and consumer group (default `> 1000` messages). |
+| Consumer lag is high for topic                             | `kafka.estimated_consumer_lag`                                          | Consumer lag exceeds a threshold for a topic and consumer group. |
+| Incoming message rate has dropped                          | `kafka.topic.message_rate`                                              | Produce rate to the topic drops below a threshold. Catches silent producer failures. |
 | Offline partitions on topic                                | `kafka.partition.offline`                                               | Any partition for this specific topic goes offline, indicating data unavailability for that topic. |
-| Consumer lag is approaching time retention limit           | `kafka.estimated_consumer_lag` / `kafka.topic.config.retention_ms`      | Estimated lag exceeds 80% of the topic's time-based retention. Beyond 100% means the consumer cannot recover lost data. |
-| Consumer lag is approaching bytes retention limit          | `kafka.consumer_lag` × throughput / `kafka.topic.config.retention_bytes` | Estimated lag exceeds 80% of the topic's bytes-based retention. Requires Kafka broker metrics to be available. |
-
-The two "approaching retention" monitors are the most important guardrails against data loss: when lag exceeds retention, the broker deletes messages before the consumer reads them.
+| Consumer lag is approaching time retention limit           | `kafka.estimated_consumer_lag` / `kafka.topic.config.retention_ms`      | Estimated lag approaches the topic's time-based retention. Beyond the retention limit, the consumer cannot recover lost data. |
+| Consumer lag is approaching bytes retention limit          | `kafka.consumer_lag` × throughput / `kafka.topic.config.retention_bytes` | Estimated lag approaches the topic's bytes-based retention. Requires Kafka broker metrics to be available. |
 
 ## Automate responses to triggered monitors
 
@@ -58,34 +61,29 @@ Either option can be added to a monitor by mentioning it in the notification mes
 
 The examples below show conditions where automation is particularly valuable in a Kafka pipeline.
 
-### Consumer lag increasing
+### Consumer lag is high
 
-When the **Consumer lag is high for topic** monitor triggers, automate one of the following:
+Signals that a consumer group is falling behind its producer, with messages accumulating in the topic faster than they can be read.
 
-- **Scale the consumer group.** Run a workflow that increases the consumer deployment's replica count (for example, with the Kubernetes or AWS actions in Workflow Automation), or call a CI/CD or autoscaler webhook.
-- **Notify the owning team.** Post to the consumer service's on-call channel with the topic, consumer group, and current lag pulled from the monitor's template variables.
-- **Open an incident** for the consumer service if lag stays elevated past a recovery window.
+**Potential action:** Run a workflow that scales the consumer group's replica count (for example, with the Kubernetes or AWS actions in Workflow Automation), or call a CI/CD or autoscaler webhook.
 
-### Risk of data loss (lag approaching retention)
+### Lag approaching retention limit
 
-When **Consumer lag is approaching time retention limit** or **bytes retention limit** triggers, the topic is within 80% of the point where unread messages are deleted. This is the highest-severity automation:
+Signals that unread messages are approaching the topic's retention window. If lag exceeds retention, those messages get deleted before the consumer can read them.
 
-- **Page on-call immediately**, with the topic and remaining retention budget in the payload.
-- **Trigger an emergency runbook** that can, for example, temporarily extend retention on the affected topic, pause the upstream producer, or scale the consumer group ahead of the threshold.
+**Potential action:** Trigger an emergency runbook that can temporarily extend retention on the affected topic, pause the upstream producer, or scale the consumer group ahead of the threshold.
 
-### Disk space running out on brokers
+### Broker disk filling up
 
-A broker that runs out of disk goes offline and takes its partitions with it. This is not a Data Streams Monitoring template — create a monitor on the broker host's `system.disk.in_use` (or your Kafka deployment's equivalent) and have its automation:
+Signals that a broker host is running low on disk space. If the disk fills up, the broker goes offline and its partitions become unavailable.
 
-- **Notify the platform team's on-call** with the broker hostname and current disk usage.
-- **Trigger a capacity workflow** to add storage, expand the cluster, or compact a candidate topic, depending on your operational model.
+**Potential action:** Trigger a capacity workflow to add storage, expand the cluster, or compact a candidate topic.
 
 ### Offline or under-replicated partitions
 
-When the cluster-level **Offline partitions detected** or **Under-replicated partitions detected** monitor triggers:
+Signals that one or more partitions in the cluster are offline (unavailable) or under-replicated, which puts data durability at risk if a broker fails.
 
-- **Notify the cluster owner's on-call**, including the affected broker IDs and partition counts from the monitor's template variables.
-- **Trigger a broker-health workflow** (for example, restart a stuck broker or rebalance partitions) if your runbook supports it.
+**Potential action:** Trigger a broker-health workflow — for example, restart a stuck broker or rebalance partitions.
 
 ## Further reading
 
