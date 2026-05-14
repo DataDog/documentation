@@ -48,7 +48,7 @@ Both monitors are grouped by `kafka_cluster_id` so each cluster alerts its own o
 | Incoming message rate has dropped                          | `kafka.topic.message_rate`                                              | Produce rate to the topic drops below a threshold. Catches silent producer failures. |
 | Offline partitions on topic                                | `kafka.partition.offline`                                               | Any partition for this specific topic goes offline, indicating data unavailability for that topic. |
 | Consumer lag is approaching time retention limit           | `kafka.estimated_consumer_lag` / `kafka.topic.config.retention_ms`      | Estimated lag approaches the topic's time-based retention. Beyond the retention limit, the consumer cannot recover lost data. |
-| Consumer lag is approaching bytes retention limit          | `kafka.consumer_lag` × throughput / `kafka.topic.config.retention_bytes` | Estimated lag approaches the topic's bytes-based retention. Requires Kafka broker metrics to be available. |
+| Consumer lag is approaching bytes retention limit          | `kafka.consumer_lag` × throughput / `kafka.topic.config.retention_bytes` | Estimated lag approaches the topic's bytes-based retention. Requires [Kafka broker metrics](/integrations/kafka/?tab=host#overview) to be available. |
 
 ## Automate responses to triggered monitors
 
@@ -77,7 +77,7 @@ Signals that unread messages are approaching the topic's retention window. If la
 
 Signals that a broker host is running low on disk space. If the disk fills up, the broker goes offline and its partitions become unavailable.
 
-**Potential action:** Trigger a capacity workflow to add storage, expand the cluster, or compact a candidate topic.
+**Potential action:** Trigger a capacity workflow to add storage, expand the cluster, or reduce retention on a candidate topic.
 
 ### Offline or under-replicated partitions
 
