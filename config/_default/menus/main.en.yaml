@@ -2947,6 +2947,16 @@ menu:
       parent: actions_heading
       identifier: forms
       weight: 50000
+    - name: Components
+      url: actions/forms/components/
+      parent: forms
+      identifier: forms_components
+      weight: 1
+    - name: Responses
+      url: actions/forms/responses/
+      parent: forms
+      identifier: forms_responses
+      weight: 2
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
