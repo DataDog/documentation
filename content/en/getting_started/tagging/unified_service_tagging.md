@@ -30,7 +30,7 @@ With these three tags, you can:
 **Notes**:
 
 - The `version` tag is expected to change with each new application deployment. Two different versions of your application's code should have distinct `version` tags.
-- The official `service` of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official `service` of a log, use the Unified Service Tagging options below or add a full custom Autodiscovery log configuration.
+- The official `service` of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official `service` of a log, use the Unified Service Tagging options below or add a full custom [Docker][21] or [Kubernetes][22] Autodiscovery log configuration.
 - Host information is excluded for database and cache spans because the host associated with the span is not the database/cache host.
 
 ### Requirements
@@ -81,9 +81,9 @@ To setup unified service tagging in a containerized environment:
 
 ##### Full configuration
 
-To get the full range of unified service tagging when using Kubernetes, add the labels to both the parent workload level and the pod template level. 
+To get the full range of unified service tagging in Kubernetes, add the following labels to both the parent workload and the pod template.
 
-The `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables are used by APM enabled applications. These environment variables can be set manually or by the [Kubernetes's downward API][2] as seen below. If you are using the Cluster Agent's [Admission Controller][1] to mutate your pods, those three environment variables are automatically injected to match your labels.
+The `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables are used by APM-enabled applications. You can set these environment variables manually or using the [Kubernetes's downward API][2] as seen below. If you are using the Cluster Agent's [Admission Controller][1] to mutate your pods, those three environment variables are automatically injected to match your labels.
 
 ```yaml
 apiVersion: apps/v1
@@ -540,3 +540,5 @@ processors:
 [18]: /tracing/services/deployment_tracking/
 [19]: /watchdog/faulty_deployment_detection/
 [20]: /integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts
+[21]: /containers/docker/log
+[22]: /containers/kubernetes/log
