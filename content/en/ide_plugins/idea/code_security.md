@@ -39,7 +39,7 @@ Additionally, all issues detected by this feature are listed in the standard **P
 ### Analyzing multiple files
 You can run the local code analysis across multiple files. In the **Code** menu, select **Analyze Code** → **Run Inspection By Name…** and choose `Datadog Code Security`:
 
-{{< img src="/ide_plugins/idea/code_security/inspection-by-name.png" alt="Datadog Code Security inspection" style="width:60%;" >}}
+{{< img src="/ide_plugins/idea/code_security/run-inspection-by-name.png" alt="The JetBrains Run Inspection By Name dialog with Datadog Code Security selected from the inspection list." style="width:60%;" >}}
 
 Choose the scope, click **OK**, and review the flagged issues in the **Problems** view.
 
@@ -62,9 +62,9 @@ You can save a local configuration file (`static-analysis.datadog.yml`) at the r
 Read more about how to [customize your configuration][5].
 
 ### Settings
-The Datadog Static Analyzer can be activated and deactivated in the IDE settings under **Editor** → **Inspections**.
+The Datadog Code Security inspection can be activated and deactivated in the IDE settings under **Editor** → **Inspections**.
 
-{{< img src="/ide_plugins/idea/code_security/inspections-settings.png" alt="Settings to activate and deactivate Static Analysis" style="width:80%;" >}}
+{{< img src="/ide_plugins/idea/code_security/code-security-inspection-settings.png" alt="Settings to activate and deactivate Code Security" style="width:80%;" >}}
 
 ## Further reading
 
