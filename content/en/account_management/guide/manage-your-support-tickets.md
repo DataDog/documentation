@@ -82,7 +82,7 @@ further_reading:
 <p>If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add <strong>datadog.zendesk.com</strong> to the allow list.</p>
 
 <h3>Ticket is no longer available</h3>
-<p>Closed tickets, including their attachments, are deleted 15 months after their last update.</p>
+<p>Datadog deletes closed tickets, including their attachments, 15 months after their last update.</p>
 
 <p>If you need help with a related issue, you can open a new ticket or search the Datadog documentation.</p>
 
