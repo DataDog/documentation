@@ -810,7 +810,7 @@ Starting with version 96, you can store the secret value in one of the following
 ```sh
   { "dd_api_key": "<YOUR_DATADOG_API_KEY>" }
 ```
-Attention: If the JSON object does not contain a `dd_api_key` field, or the value is not valid JSON, the extension falls back to using the raw secret string. The JSON key name is fixed as dd_api_key and is not configurable.
+**Note**: If the JSON object does not contain a `dd_api_key` field, or the value is not valid JSON, the extension falls back to using the raw secret string. The JSON key name is fixed as `dd_api_key` and is not configurable.
 
 ## Troubleshoot
 
