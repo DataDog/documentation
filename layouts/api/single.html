@@ -49,14 +49,14 @@
     {{ $versionCount := (len $versions) }}
     {{ $anchorStr := .Title }}
 
-    <h1 class="mb-2 api-task-description" id="{{ $anchorStr | anchorize }}">
-        {{- $anchorStr -}}
-    </h1>
-
-    {{ if gt $versionCount 0 }}
     <div class="row">
-      {{ if gt $versionCount 1 }}
-      <div class="col-12 col-md-12 api-version-label-wrapper">
+      <div class="col-12 {{ if gt $versionCount 0 }}col-md-9{{ end }}">
+          <h1 class="mb-2 api-task-description" id="{{ $anchorStr | anchorize }}">
+              {{- $anchorStr -}}
+          </h1>
+      </div>
+      {{ if gt $versionCount 0 }}
+      <div class="col-12 col-md-3 api-version-label-wrapper">
           <ul class="nav nav-tabs response-toggle border-none justify-content-md-end">
             {{ range $versionIndex, $versionNum := $versions }}
               {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
@@ -64,13 +64,19 @@
               {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $operationids "spec" $adat "generalRegions" $generalRegions ) }}
               {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuEntry "endpoint" $endpoint) }}
               <li class="nav-item">
-                <a class="nav-link me-1 api-version-label {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if $endpointVisibility.isVisibleVersion }}active{{ end }}" data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
+                <a class="nav-link me-1 api-version-label {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt $versionCount 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq $versionCount 1) }}disabled{{ end }}" data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
               </li>
             {{ end }}
           </ul>
       </div>
       {{ end }}
     </div>
+
+    <div style="margin-top: -30px; padding-bottom: 16px;">
+      {{ partial "page-copy.html" (dict "ctx" . "copyLabel" "Copy page contents" "linkClass" "text-primary font-semibold") }}
+    </div>
+
+    {{ if gt $versionCount 0 }}
 
     <div class="tab-content">
     {{ range $versionIndex, $versionNum := $versions }}

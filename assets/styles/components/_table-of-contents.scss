@@ -233,6 +233,10 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     a {
         position: relative;
         font-size: 18px;
+        border-bottom: none;
+        &:hover {
+            border-bottom: none;
+        }
         &:lang(ja) {
             font-size: 16px;
 
