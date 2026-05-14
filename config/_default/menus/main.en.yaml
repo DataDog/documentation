@@ -3999,76 +3999,81 @@ menu:
       parent: cloud_cost_cost_allocation
       identifier: cloud_cost_custom_allocation_rules
       weight: 404
+    - name: AI Costs
+      url: cloud_cost_management/ai_costs
+      parent: cloud_cost
+      identifier: cloud_cost_ai_costs
+      weight: 5
     - name: Reporting
       url: cloud_cost_management/reporting
       parent: cloud_cost
       identifier: cloud_cost_reporting
-      weight: 5
+      weight: 6
     - name: Scheduled Reports
       url: cloud_cost_management/reporting/scheduled_reports
       parent: cloud_cost_reporting
       identifier: cloud_cost_scheduled_reports
-      weight: 501
+      weight: 601
     - name: Explorer
       url: cloud_cost_management/reporting/explorer
       parent: cloud_cost_reporting
       identifier: cloud_cost_explorer
-      weight: 502
+      weight: 602
     - name: Dashboard
       url: cloud_cost_management/reporting/dashboards
       parent: cloud_cost_reporting
       identifier: cloud_cost_dashboards
-      weight: 503
+      weight: 603
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 6
+      weight: 7
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
-      weight: 601
+      weight: 701
     - name: Planning
       url: cloud_cost_management/planning
       parent: cloud_cost
       identifier: cloud_cost_planning
-      weight: 7
+      weight: 8
     - name: Budgets
       url: cloud_cost_management/planning/budgets
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_budgets
-      weight: 701
+      weight: 801
     - name: Forecasting
       url: cloud_cost_management/planning/forecasting
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_forecasting
-      weight: 702
+      weight: 802
     - name: Commitment Programs
       url: cloud_cost_management/planning/commitment_programs
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_commitment_programs
-      weight: 703
+      weight: 803
     - name: Cost Changes
       url: cloud_cost_management/cost_changes
       parent: cloud_cost
       identifier: cloud_cost_cost_changes
-      weight: 8
+      weight: 9
     - name: Monitors
       url: cloud_cost_management/cost_changes/monitors
       parent: cloud_cost_cost_changes
       identifier: cloud_cost_cost_changes_monitors
-      weight: 801
+      weight: 901
     - name: Anomalies
       url: cloud_cost_management/cost_changes/anomalies
       parent: cloud_cost_cost_changes
       identifier: cloud_cost_cost_changes_anomalies
-      weight: 802
+      weight: 902
     - name: Real-Time Costs
       url: cloud_cost_management/cost_changes/real_time_costs
       parent: cloud_cost_cost_changes
       identifier: cloud_cost_real_time_costs
-      weight: 803
+      weight: 903
     - name: APM
       url: tracing/
       pre: apm
@@ -5535,16 +5540,21 @@ menu:
       parent: pipeline_visibility
       identifier: ci_custom
       weight: 110
+    - name: Automatic Job Retries
+      url: continuous_integration/pipelines/automatic_retries/
+      parent: pipeline_visibility
+      identifier: ci_automatic_retries
+      weight: 111
     - name: Custom Commands
       url: continuous_integration/pipelines/custom_commands/
       parent: pipeline_visibility
       identifier: ci_custom_commands
-      weight: 111
+      weight: 112
     - name: Custom Tags and Measures
       url: continuous_integration/pipelines/custom_tags_and_measures/
       parent: pipeline_visibility
       identifier: ci_custom_tags_and_measures
-      weight: 112
+      weight: 113
     - name: Search and Manage
       url: continuous_integration/search/
       parent: ci
@@ -6109,16 +6119,21 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_insights
       weight: 102
-    - name: Exception Replay
-      url: ide_plugins/vscode/exception_replay/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_exception_replay
-      weight: 103
     - name: Code Security
       url: ide_plugins/vscode/code_security/
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_security
+      weight: 103
+    - name: Exception Replay
+      url: ide_plugins/vscode/exception_replay/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_exception_replay
       weight: 104
+    - name: Live Debugger
+      url: ide_plugins/vscode/live_debugger/
+      parent: ide_plugins_vscode
+      identifier: ide_plugins_vscode_live_debugger
+      weight: 105
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
@@ -7505,6 +7520,11 @@ menu:
       url: /security/code_security/software_composition_analysis/library_inventory/
       parent: software_composition_analysis
       weight: 4
+    - name: CVE Explorer
+      identifier: sca_cve_explorer
+      url: /security/code_security/software_composition_analysis/cve_explorer/
+      parent: software_composition_analysis
+      weight: 5
     - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
