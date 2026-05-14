@@ -14,7 +14,6 @@ Use Terraform to provision the Datadog Agent for Database Monitoring (DBM) on AW
 
 Select your database to get started:
 
-- [Postgres][2]
+{{< partial name="dbm/dbm-setup-agent-terraform" >}}
 
 [1]: https://github.com/DataDog/dd-database-monitoring-example
-[2]: /database_monitoring/setup_agent_terraform/postgres/
