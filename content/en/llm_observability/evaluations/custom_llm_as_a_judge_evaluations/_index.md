@@ -351,77 +351,9 @@ function __evalPostProcessing(input) {
 1. Select the **JSON** output type.
    <div class="alert alert-info">
 
-2. Provide a JavaScript function to identify the evaluator's assessment, value, and reasoning. Post-processing enables you to do more complex assessment than previously.
+2. Provide a JavaScript function to identify the evaluator's assessment, value, and reasoning. Post-processing enables you to do more complex assessment than just using Boolean, Score, or Categorical structured output.
 
-   Datadog searches the LLM-as-a-judge's response text for your defined keywords and provides the appropriate results for the evaluation. For this reason, you should instruct the LLM to respond with your chosen keywords.
-
-   For example, if you set:
-
-   - **True keywords**: Yes, yes
-   - **False keywords**: No, no
-
-   Then your system prompt should include something like `Respond with "yes" or "no"`.
-
-3. For **Assessment Criteria**:
-   - Select **True** to mark a result as "Pass"
-   - Select **False** to mark a result as "Fail"
-
-   This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
-{{% /collapse-content %}}
-
-
-{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
-1. Select the **Boolean** output type.
-   <div class="alert alert-info">For Keyword Search Output, only the <strong>Boolean</strong> output type is available.</div>
-
-2. Provide **True keywords** and **False keywords** that define when the evaluation result is true or false, respectively.
-
-   Datadog searches the LLM-as-a-judge's response text for your defined keywords and provides the appropriate results for the evaluation. For this reason, you should instruct the LLM to respond with your chosen keywords.
-
-   For example, if you set:
-
-   - **True keywords**: Yes, yes
-   - **False keywords**: No, no
-
-   Then your system prompt should include something like `Respond with "yes" or "no"`.
-
-3. For **Assessment Criteria**:
-   - Select **True** to mark a result as "Pass"
-   - Select **False** to mark a result as "Fail"
-
-   This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
-{{% /collapse-content %}}
-
-{{< img src="llm_observability/evaluations/custom_llm_judge_5-2.png" alt="Configuring the custom evaluation output under Structured Output, including reasoning and assessment criteria." style="width:100%;" >}}
-
-### Define the evaluation scope: Filtering and sampling
-
-<div class="alert alert-info">Span fields used in evaluations are limited to 250 KB each. Fields exceeding this size are truncated before being sent to the LLM judge.</div>
-
-Under **Evaluation Scope**, define where and how your evaluation runs. This helps control coverage (which spans are included) and cost (how many spans are sampled).
-   - **Application**: Select the application you want to evaluate.
-   - **Evaluate On**: Choose one of the following:
-      - **Traces**: Evaluate only root spans
-      - **All Spans**: Evaluate both root and child spans
-   - **Query**: (Optional) Enter a query using Datadog query syntax to filter which spans are evaluated. For example:
-      - `@name:agent.workflow` to filter by span name
-      - `env:prod` to filter by tag
-      - `@name:agent.workflow AND env:prod` to filter by span name and tag
-   - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
-
-{{< img src="llm_observability/evaluations/evaluation_scope.png" alt="Configuring the evaluation scope." style="width:100%;" >}}
-
-### Test and preview
-
-The pane on the right shows **Filtered Spans** (or traces) corresponding to the configured evaluation scope.
-
-Select a span to show JSON data available for use in an evaluation. Then, click **Test Evaluation** to pre-fill inputs to your evaluation with data from the span, and click **Run** to test.
-
-### Post-processing
-
-For LLM-as-a-Judge evaluators with JSON output, a JavaScript function can be applied to assign an assessment to the evaluation result. A label for the evaluation result and the reasoning can also be supplied.
-
-The function must return a json object of the following format
+    <div class="alert alert-info"> The post-processing function must return an object containing an assessment of value "pass" or "fail" and optionally value or reasoning strings. The function must return a json object of the following format
 ```
 {
     assessment: "pass", // "pass" | "fail" [REQUIRED],
@@ -518,6 +450,55 @@ function __evalPostProcessing(input) {
     };
 }
 ```
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
+1. Select the **Boolean** output type.
+   <div class="alert alert-info">For Keyword Search Output, only the <strong>Boolean</strong> output type is available.</div>
+
+2. Provide **True keywords** and **False keywords** that define when the evaluation result is true or false, respectively.
+
+   Datadog searches the LLM-as-a-judge's response text for your defined keywords and provides the appropriate results for the evaluation. For this reason, you should instruct the LLM to respond with your chosen keywords.
+
+   For example, if you set:
+
+   - **True keywords**: Yes, yes
+   - **False keywords**: No, no
+
+   Then your system prompt should include something like `Respond with "yes" or "no"`.
+
+3. For **Assessment Criteria**:
+   - Select **True** to mark a result as "Pass"
+   - Select **False** to mark a result as "Fail"
+
+   This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
+{{% /collapse-content %}}
+
+{{< img src="llm_observability/evaluations/custom_llm_judge_5-2.png" alt="Configuring the custom evaluation output under Structured Output, including reasoning and assessment criteria." style="width:100%;" >}}
+
+### Define the evaluation scope: Filtering and sampling
+
+<div class="alert alert-info">Span fields used in evaluations are limited to 250 KB each. Fields exceeding this size are truncated before being sent to the LLM judge.</div>
+
+Under **Evaluation Scope**, define where and how your evaluation runs. This helps control coverage (which spans are included) and cost (how many spans are sampled).
+   - **Application**: Select the application you want to evaluate.
+   - **Evaluate On**: Choose one of the following:
+      - **Traces**: Evaluate only root spans
+      - **All Spans**: Evaluate both root and child spans
+   - **Query**: (Optional) Enter a query using Datadog query syntax to filter which spans are evaluated. For example:
+      - `@name:agent.workflow` to filter by span name
+      - `env:prod` to filter by tag
+      - `@name:agent.workflow AND env:prod` to filter by span name and tag
+   - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
+
+{{< img src="llm_observability/evaluations/evaluation_scope.png" alt="Configuring the evaluation scope." style="width:100%;" >}}
+
+### Test and preview
+
+The pane on the right shows **Filtered Spans** (or traces) corresponding to the configured evaluation scope.
+
+Select a span to show JSON data available for use in an evaluation. Then, click **Test Evaluation** to pre-fill inputs to your evaluation with data from the span, and click **Run** to test.
 
 ## Viewing and using results
 
