@@ -66,25 +66,4 @@ traits:
 - id: secrets_source
   label: Secrets source
   type: text
-<<<<<<< HEAD
   internal_notes: The location of the user's sensitive information, such as API keys or other credentials. For example, Secrets Management or environment variables.
-<<<<<<< HEAD
-=======
-
-- id: db_hosting
-  label: Database hosting
-  type: text
-  internal_notes: For Database Monitoring docs — where the customer's database lives. For example, RDS, Aurora, or self-hosted.
-
-- id: agent_runtime
-  label: Agent runtime
-  type: text
-<<<<<<< HEAD
-  internal_notes: For Database Monitoring docs — where the Datadog Agent process runs. For example, AWS Fargate, ECS on EC2, Amazon EKS, or an Amazon EC2 host.
->>>>>>> c5cb835154 ([DBMON-6566] Add Set up Database Monitoring with Terraform page)
-=======
-  internal_notes: For Database Monitoring docs — where the Datadog Agent process runs. For example, AWS Fargate, Amazon EKS, or an Amazon EC2 host.
->>>>>>> cb5650d10e (Drop unsupported filter options + remove Coming soon stub)
-=======
-  internal_notes: The location of the user's sensitive information, such as API keys or other credentials. For example, Secrets Management or environment variables.
->>>>>>> 81a586d397 (Replace cdocs implementation with standard tabs)
