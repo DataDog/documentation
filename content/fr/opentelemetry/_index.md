@@ -60,7 +60,7 @@ further_reading:
   text: Comprendre OpenTelemetry
 title: OpenTelemetry dans Datadog
 ---
-{{< learning-center-callout hide_image="true" header="Essayez "Introduction à OTel avec Datadog" dans le Centre d'apprentissageer" btn_title="Inscrivez-vous maintenant" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
+{{< learning-center-callout hide_image="true" header="Essayez \"Introduction à OTel avec Datadog\" dans le Centre d'apprentissageer" btn_title="Inscrivez-vous maintenant" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
   Apprenez à configurer OpenTelemetry pour exporter des métriques, des traces et des journaux vers Datadog, et explorez les données collectées sur la plateforme.
 {{< /learning-center-callout >}}
 
