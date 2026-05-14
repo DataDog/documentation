@@ -10,16 +10,16 @@ further_reading:
   text: "Fleet Automation API"
 ---
 
-Fleet Automation allows you to roll out and manage Datadog Agent configuration at scale. Configuration changes can be applied using guided workflows in the UI or by providing custom YAML files. Fleet Automation allows you to standardize Agent configuration across environments. With Fleet Automation, you can:
-- Set up Datadog product telemetry such as APM, Logs, and NDM
+Fleet Automation allows you to roll out and manage Datadog Agent configuration at scale. Apply configuration changes through guided workflows in the UI or with custom YAML files. With Fleet Automation, you can:
+- Enable Datadog capabilities such as APM, Logs, and NDM
 - Enable or adjust Agent integrations
 - Manage Agent tags
-- Apply consistent configuration across environments
+- Standardize configuration across environments
 
 ## Configure multiple Agents
 
 1. In Fleet Automation, open the [Configure Agents][1] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
-1. Scope the configuration to the target Agents. You can target a group of Agents by filtering on host information or tags.
+1. Scope the configuration to the target Agents. Filter by host information or tags to target a specific group.
 
    {{< img src="/agent/fleet_automation/fa_scope_config.png" alt="The Scope this configuration step in Fleet Automation's Configure Agents workflow, showing filters for environment, operating system, and hostname, a list of 33 Agents included in scope, and a Configuration Summary panel on the right." style="width:100%;" >}}
 
@@ -32,29 +32,31 @@ Fleet Automation allows you to roll out and manage Datadog Agent configuration a
 
 ## Edit the configuration of a single Agent
 
-1. In the Datadog UI, navigate to the [Fleet Automation][3] page and select {{< ui >}}View Agents{{< /ui >}}. 
+1. Navigate to the [Fleet Automation][3] page and select {{< ui >}}View Agents{{< /ui >}}. 
 
-1. (Optional) You can target a group of Agents by filtering on host information or tags.
+1. (Optional) Filter by host information or tags to narrow the list.
 
-1. Select your host to open a side panel. In the side panel, click the {{< ui >}}Configuration{{< /ui >}} tab to access your modifiable configurations. 
+1. Select a host to open its side panel, then click the {{< ui >}}Configuration{{< /ui >}} tab. 
 
-1. Click the {{< ui >}}Edit{{< /ui >}} button to edit your configuration. 
+1. Click {{< ui >}}Edit{{< /ui >}} to modify the configuration. 
 
-1. Submit these changes by selecting {{< ui >}}Deploy Changes{{< /ui >}}.
+1. Click {{< ui >}}Deploy Changes{{< /ui >}} to apply your updates.
 
 **Note**: Some configuration fields (for example, `api_key`, `site`, and `notable_events`) cannot be modified.
 
-In the following example, the `logs_enabled` field is changed from `false` to `true`. After the changes are deployed, log collection on this Agent is enabled. 
+The example below shows the `logs_enabled` field changed from `false` to `true`, which enables log collection on the Agent after deployment.
 
 {{< img src="/agent/fleet_automation/agent_remote_management_single_agent_config2.png" alt="Edit and deploy Agent configuration changes." style="width:90%;" >}}
 
-## Configure Agents using the API
+## Configure Agents with the API
 
-Fleet Automation provides an API to apply configuration updates to your Agents programmatically. Deploy changes to any group of hosts using filter queries, supplying either full configuration files or targeted patches. Fleet Automation does not support all Agent configuration fields, and settings related to Agent connection or secrets (site, API keys, and other authentication parameters) cannot be managed through the API. Push configuration on demand or integrate it into your existing automation workflows. For full details, see the [Fleet Automation API][4].
+Fleet Automation provides an API to apply configuration updates programmatically. Deploy changes to any group of hosts with filter queries, supplying either full configuration files or targeted patches. Push configuration on demand or integrate it into your existing automation workflows. For full details, see the [Fleet Automation API][4].
+
+**Note**: The API does not support all Agent configuration fields. Settings related to Agent connection or secrets (`site`, `api_key`, and other authentication parameters) cannot be managed through the API.
 
 ## Configuration precedence
 
-Configuration changes deployed through Fleet Automation are appended to the Datadog Agent's local configuration. If a conflict occurs at the configuration-field level, Fleet Automation overrides the local value. In short, the most recent configuration change, whether applied by Fleet Automation, configuration management tools, or directly on the host, becomes the Agent's active configuration.
+Configuration changes deployed through Fleet Automation are appended to the Datadog Agent's local configuration. If a conflict occurs at the field level, Fleet Automation overrides the local value. The most recent change becomes the Agent's active configuration, regardless of the source (Fleet Automation, configuration management tools, or direct host edits).
 
 You can use [Fleet Automation Audit Trail][5] to gain visibility into recent configuration changes to your Agents and to set up alerts on those changes.
 

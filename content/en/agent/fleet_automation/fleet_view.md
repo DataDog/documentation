@@ -18,7 +18,7 @@ For each Datadog Agent, you can see:
 - The services that the Agent is monitoring
 - The Agent's Remote Configuration status
 - The products that are enabled on the Agent
-- Agent Audit Trail events including configuration changes, upgrades and flares
+- Agent Audit Trail events including configuration changes, upgrades, and flares
 
 For each OTel Collector, you can see:
 - The Collector version
@@ -27,34 +27,34 @@ For each OTel Collector, you can see:
 - Pipeline visualization of the Collector
 
 ## Examine a Datadog Agent or OpenTelemetry Collector
-Selecting a Datadog Agent or OTel Collector gives you more information about it, including its configuration, connected integrations, audit events, and a support tab that you can use to send a remote flare.
+Select a Datadog Agent or OTel Collector to view its configuration, connected integrations, audit events, and a support tab for sending a remote flare.
 
-{{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="An Agent's integration information" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="The Agent detail panel showing configuration, connected integrations, and audit events." style="width:100%;" >}}
 
-## Visualize an OTel Collector Pipeline
+## Visualize an OTel Collector pipeline
 The {{< ui >}}Pipeline Visualization{{< /ui >}} toggle in the {{< ui >}}Configurations{{< /ui >}} tab of an OTel Collector provides a pipeline view of the Collector. Use Pipeline Visualization to:
 - Validate telemetry routing between configured OTel Collector components.
 - Spot unexpected data drops along the OTel Collector pipeline.
 - Inspect specific component configuration YAML snippets by hovering over any component.
 
-{{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="OTel Collector pipeline view" style="width:100%;" >}}
+{{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="Pipeline visualization showing telemetry routing between OTel Collector components." style="width:100%;" >}}
 
 ## View Agent Audit Trail events
 
 The {{< ui >}}Audit Events{{< /ui >}} tab displays Audit Trail events associated with the selected Agent.
 Use this tab to:
-- Identify configuration changes, API key updates, installs, upgrades and support flares.
-- Determine when changes were made and from where
+- Identify configuration changes, API key updates, installs, upgrades, and support flares
+- Determine when and where changes were made
 
 Audit Trail event visibility depends on your plan. When Audit Trail is enabled in your organization, you can view Agent events for up to 90 days based on your Audit Trail retention settings. If Audit Trail is not enabled in your organization, you can view the past 24 hours of events.
 
 ## Send a remote flare
 
-You can send a flare from the Datadog Agent or DDOT Collector after enabling Remote Configuration on the Agent. For instructions on sending a flare, see [Send a flare from the Datadog site][2].
+You can send a flare from the Datadog Agent or DDOT Collector after enabling Remote Configuration on the Agent. For instructions, see [Send a flare from the Datadog site][2].
 
-When contacting Datadog Support with Remote Configuration enabled for an Agent, the Support team may initiate a flare from your environment in order to better assist you in a timely manner. Flares provide troubleshooting information to Datadog Support to help you resolve your issue.
+When you contact Datadog Support with Remote Configuration enabled, the Support team may initiate a flare from your environment to help resolve your issue faster.
 
-{{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="Send a remote flare" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="The support tab for an Agent with the Send Flare button." style="width:100%;" >}}
 
 ## Further Reading
 

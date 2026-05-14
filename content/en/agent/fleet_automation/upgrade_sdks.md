@@ -19,20 +19,20 @@ Scheduling SDK upgrades is not supported.
 
 ## Requirements
 
-- You must already be instrumenting services with [Single Step Instrumentation (SSI)][1].
-- Your services must be running on Linux or Windows VMs. Remotely upgrading SDKs in containerized or Kubernetes environments is not supported.
+- Services must be instrumented with [Single Step Instrumentation (SSI)][1].
+- Services must be running on Linux or Windows VMs. Remotely upgrading SDKs in containerized or Kubernetes environments is not supported.
 
-## Upgrade SDKs
+## Upgrade SDK versions
 
 1. In Fleet Automation, open the [Upgrade Agents][2] tab and click {{< ui >}}Upgrade Now{{< /ui >}}.
 
-   {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="The Upgrade Agents tab with the Upgrade Now button highlighted." style="width:100%;" >}}
+   {{< img src="/agent/fleet_automation/upgrade-screen2.png" alt="The Upgrade Agents tab with the Upgrade Now button." style="width:100%;" >}}
 
 1. Select the {{< ui >}}SDK language{{< /ui >}} and {{< ui >}}version{{< /ui >}}. You can update one language SDK at a time.
 
-   {{< img src="agent/fleet_automation/sdk-upgrade-language.png" alt="Select the language and version to upgrade to." style="width:100%;" >}}
+   {{< img src="agent/fleet_automation/sdk-upgrade-language.png" alt="SDK language and version selection dropdown." style="width:100%;" >}}
 
-1. Select the hosts on which you want to upgrade the selected SDK. You can target a group by filtering on host information or tags.
+1. Select the hosts to upgrade. Filter by host information or tags to target a specific group.
 
    {{< img src="agent/fleet_automation/sdk-upgrade-hosts.png" alt="Service selection screen with filtering options to narrow the list of services to upgrade." style="width:100%;" >}}
 
