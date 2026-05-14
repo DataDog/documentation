@@ -45,8 +45,6 @@ Each feature can have one or more variants. A variant is a specific sequence of 
 
 {{< img src="journey_monitoring/journey-monitoring-diagram-test.png" alt="Diagram of a feature with a start event, end event, and three variants, monitored by RUM and Product Analytics in the Live Environment and by Synthetic tests in the Synthetic Environment." style="width:100%;" >}}
 
-{{< img src="journey_monitoring/journey-monitoring-diagram-vertical.png" alt="Diagram of a feature with a start event, end event, and three variants, monitored by RUM and Product Analytics in the Live Environment and by Synthetic tests in the Synthetic Environment." style="width:100%;" >}}
-
 ## Setup
 
 Define a feature by selecting its start and end events, then extend coverage with data from your other Digital Experience products.
