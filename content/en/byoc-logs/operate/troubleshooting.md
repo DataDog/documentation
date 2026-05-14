@@ -126,8 +126,6 @@ A low rate of 429 errors is not a problem in itself. The Datadog Agent or Observ
 - An indexer pod went down
 - Ingestion paused for a while and shards scaled down
 
-**Mitigation:** Configure `index.minShards` in your indexer values to keep a baseline number of shards available at all times, even after periods of low ingestion.
-
 The real concern is sustained 429s that overflow the client buffer. If 429s persist, the cluster is likely undersized—add indexer pods or increase `indexer.podSize`.
 
 **Monitor for client-side log loss:** Watch the following Datadog Agent metrics to detect dropped logs:
