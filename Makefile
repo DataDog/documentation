@@ -82,6 +82,9 @@ watch-cdocs:
 build-api-derefs:
 	@node ./assets/scripts/build-api-derefs.js
 
+build-api-pages:
+	@node -e 'require("./assets/scripts/build-api-pages.js").init().catch(e => { console.error(e); process.exit(1); })'
+
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
@@ -91,6 +94,7 @@ start:
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
 	@make setup-build-scripts
 	@make build-cdocs
+	@make build-api-pages
 	@make server
 
 # Leave build scripts as is for local testing
@@ -131,7 +135,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-api-derefs
+	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-api-derefs build-api-pages
 
 # Download files from S3 bucket and add them to the file system.
 # Preview S3 content locally: add FF_S3_PATH env var when executing appropriate Make targets

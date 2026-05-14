@@ -56,8 +56,7 @@ Each dynamic category is audited at two levels: the category landing page and on
 | 7 | `/api/latest/incidents/` | Category landing — v2-only, large (56 ops) |
 | 7 | `/api/latest/incidents/create-an-incident/` | Operation page — v2 |
 | 8 | `/api/latest/aws-integration/` | Category landing — mixed v1+v2, deprecated + unstable ops |
-| 8 | `/api/latest/aws-integration/list-all-aws-integrations-v1/` | Operation page — v1 (slug collision with v2 produces `-v1`/`-v2` suffixes) |
-| 8 | `/api/latest/aws-integration/list-all-aws-integrations-v2/` | Operation page — v2 (slug collision case) |
+| 8 | `/api/latest/aws-integration/list-all-aws-integrations/` | Operation page — shared v1+v2 endpoint (same summary + operationId), single page hosting both version tabs |
 | 9 | `/api/latest/monitors/` | Category landing — mixed v1+v2, deprecated + unstable ops |
 | 9 | `/api/latest/monitors/create-a-monitor/` | Operation page — mixed v1+v2 |
 | 10 | `/api/latest/dashboard-lists/` | Category landing — category-level deprecated (with endpoints) |

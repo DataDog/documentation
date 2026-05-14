@@ -8,18 +8,10 @@ const safeJsonStringify = require('safe-json-stringify');
 const oneOfLimit = 50;
 const ENUM_DISPLAY_LIMIT = 10;
 
-// Support both marked v1 (require('marked')) and v12+ (marked.umd.js or default export)
+// marked v17+ is ESM-only and blocks deep CJS imports via its "exports" field.
+// Load it via dynamic import() in init(), then assign to this module-scoped variable
+// so downstream synchronous callers (parseDescWithTableCell -> schemaTable -> ...) still work.
 let marked;
-try {
-  const markedModule = require('marked/lib/marked.umd.js');
-  marked = markedModule.marked || markedModule.default || markedModule;
-} catch (_) {
-  const markedModule = require('marked');
-  marked = { parse: markedModule.parse };
-}
-if (!marked || typeof marked.parse !== 'function') {
-  throw new Error('marked.parse not found. Check marked package version.');
-}
 
 const supportedLangs = ['en'];
 
@@ -97,9 +89,12 @@ const updateMenu = (specData, specs, languages) => {
           } else {
             // instead of push we need to insert after last parent: tag.name
             const indx = newMenuArray.findIndex((i) => i.identifier === tagSlug);
+            const endpointUrl = (language === 'en')
+              ? `/api/latest/${tagSlug}/${actionSlug}/`
+              : `/${language}/api/latest/${tagSlug}/${actionSlug}/`;
             const item = {
               name: action.summary,
-              url: `#` + actionSlug,
+              url: endpointUrl,
               identifier: itemIdentifier,
               parent: tagSlug,
               generated: true,
@@ -163,6 +158,66 @@ const createPages = (apiYaml, deref, apiVersion) => {
     console.log(`successfully wrote ./content/en/api/${apiVersion}/${newDirName}/_index.md`);
   });
 
+};
+
+
+/**
+ * Create per-endpoint leaf bundles under content/en/api/latest/{tag}/{endpoint}/index.md.
+ * Aggregates versions and operationIds for endpoints that exist in both v1 and v2
+ * (matched by summary slug), so a single page hosts the version tabs.
+ * @param {array} specData - array of parsed YAML spec objects (one per spec)
+ * @param {array} specs - array of spec file paths (parallel to specData)
+ */
+const createEndpointPages = (specData, specs) => {
+  const endpoints = new Map();
+
+  specData.forEach((apiYaml, index) => {
+    const apiVersion = specs[index].split('/')[3];
+    apiYaml.tags.forEach((tag) => {
+      const tagSlug = getTagSlug(tag.name);
+      Object.keys(apiYaml.paths)
+        .filter((path) => isTagMatch(apiYaml.paths[path], tag.name))
+        .map((path) => Object.entries(apiYaml.paths[path])
+            .filter(([key, _]) => !key.startsWith("x-"))
+            .map(([_, values]) => values))
+        .reduce((obj, item) => ([...obj, ...item]), [])
+        .forEach((action) => {
+          const endpointSlug = getTagSlug(action.summary);
+          const mapKey = `${tagSlug}/${endpointSlug}`;
+          if (endpoints.has(mapKey)) {
+            const entry = endpoints.get(mapKey);
+            if (!entry.versions.includes(apiVersion)) entry.versions.push(apiVersion);
+            if (!entry.operationids.includes(action.operationId)) entry.operationids.push(action.operationId);
+          } else {
+            endpoints.set(mapKey, {
+              tag: tag.name,
+              tagSlug,
+              endpointSlug,
+              title: action.summary,
+              versions: [apiVersion],
+              operationids: [action.operationId],
+            });
+          }
+        });
+    });
+  });
+
+  endpoints.forEach((entry) => {
+    const dir = `./content/en/api/latest/${entry.tagSlug}/${entry.endpointSlug}`;
+    fs.mkdirSync(dir, { recursive: true });
+    const frontMatter = {
+      title: entry.title,
+      operationid: entry.operationids[0],
+      tag: entry.tag,
+      tagslug: entry.tagSlug,
+      versions: entry.versions,
+      operationids: entry.operationids,
+    };
+    const yamlStr = `---\n${yaml.safeDump(frontMatter)}---\n`;
+    fs.writeFileSync(`${dir}/index.md`, yamlStr, 'utf8');
+  });
+
+  console.log(`successfully wrote ${endpoints.size} per-endpoint pages under content/en/api/latest/`);
 };
 
 
@@ -1050,6 +1105,7 @@ const processSpecs = (specs) => {
   // update menu with all specs
   const specData = specs.map((spec) => yaml.safeLoad(fs.readFileSync(spec, 'utf8')));
   updateMenu(specData, specs, supportedLangs);
+  createEndpointPages(specData, specs);
 };
 
 // Helper function to find spec files with fallback
@@ -1077,7 +1133,14 @@ const findSpecFiles = () => {
   return specs;
 };
 
-const init = () => {
+const init = async () => {
+  const markedModule = await import('marked');
+  const parse = markedModule.parse || (markedModule.marked && markedModule.marked.parse) || markedModule.default;
+  if (typeof parse !== 'function') {
+    throw new Error('marked.parse not found. Check marked package version.');
+  }
+  marked = { parse };
+
   const specs = findSpecFiles();
   processSpecs(specs);
 };
@@ -1095,5 +1158,6 @@ module.exports = {
   getSchema,
   getTagSlug,
   outputExample,
-  getJsonWrapChars
+  getJsonWrapChars,
+  createEndpointPages,
 };
