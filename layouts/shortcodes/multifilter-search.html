@@ -29,11 +29,11 @@
   {{ $headers = $.Page.Params.multifiltersearch.headers}}
   {{ $data = $.Page.Params.multifiltersearch.data}}
 {{ else if $resource_path}}
-  {{/*  Get JSON dataset */}}
+  {{/*  Get dataset */}}
   {{ $resource_asset := resources.Get $resource_path }}
   {{ $resource_data := index .Site.Data $resource_path }}
   {{ if $resource_asset }}
-    {{/*  Get JSON dataset from assets directory */}}
+    {{/*  Get dataset from assets directory */}}
     {{ $resource := unmarshal $resource_asset}}
     {{ $headers = (index $resource "multifiltersearch" "headers")}}
     {{ $data = (index $resource "multifiltersearch" "data")}}
