@@ -65,7 +65,6 @@ indexer:
     storageClass: gp3
 ```
 
-
 ## Monitor disk capacity on indexers
 
 Indexer disk usage grows as the WAL accumulates data and during merge operations. If disk space runs out, indexers stop ingesting logs.
