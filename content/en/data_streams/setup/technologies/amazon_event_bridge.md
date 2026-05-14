@@ -178,10 +178,6 @@ func handler(ctx context.Context, event events.SQSEvent) (lambdainternal.BatchRe
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /agent
 [2]: /serverless/aws_lambda/instrumentation/
 [3]: /data_streams/manual_instrumentation/

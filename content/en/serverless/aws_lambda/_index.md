@@ -99,7 +99,7 @@ Easily correlate serverless code, configuration, and deployment changes with met
 
 Understand the topology of your event driven architectures, measure end-to-end latency across multiple message channels, pinpoint faulty producers or consumers and better see the topology of your serverless applications with [Data Streams Monitoring][2].
 
-{{< img src="data_streams/map_view2.png" alt="Data Streams Monitoring page in Datadog, showing the Map view. Highlights a service called 'authenticator'. A topology map visualization of left-to-right data flow, where the authenticator service is displayed in the center with its upstream and downstream services and queues." style="width:100%;" >}}
+{{< img src="data_streams/sqs_map_view.png" alt="Data Streams Monitoring page in Datadog, showing the Map view. A topology map visualization of left-to-right data flow, where a client notification service is displayed in the center with its upstream and downstream services and queues." style="width:100%;" >}}
 
 ## Additional capabilities
 
