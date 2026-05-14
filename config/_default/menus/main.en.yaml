@@ -7911,6 +7911,11 @@ menu:
       parent: asm_api_security
       identifier: asm_api_security_data_sources
       weight: 10002
+    - name: API Endpoints
+      url: security/application_security/api_posture/api_inventory/api_endpoints/
+      parent: asm_api_security
+      identifier: asm_api_security_api_endpoints
+      weight: 10003
     - name: Endpoint Scanning
       url: security/application_security/api_posture/endpoint_scanning/
       parent: application_security_api_security
