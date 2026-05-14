@@ -1497,7 +1497,6 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 - Check protocol configuration. Only `grpc` and `http/protobuf` protocols are supported. HTTP/JSON is not supported.
 {% /if %}
 {% if equals($prog_lang, "java") %}
-- Verify `DD_LOGS_OTEL_ENABLED=true` is set. Logs are disabled by default in dd-trace-java.
 - Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function.
 {% /if %}
 
