@@ -17,7 +17,7 @@ Action Management is a no-code way to label autocaptured actions from your web a
 
 Two labeling methods are available:
 - [**Visual labeling**](#visual-labeling): A point-and-click interface for labeling actions on web pages. Requires the Datadog test recorder Chrome extension.
-- [**Manual labeling**](#manual-labeling): Label actions for web and mobile applications without a browser extension. Specify a custom CSS selector or use the CSS builder for greater control and granularity over your labels.
+- [**Manual labeling**](#manual-labeling): Label actions for web and mobile applications without a browser extension.
 
 ## Visual labeling {#visual-labeling}
 
@@ -35,7 +35,7 @@ Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you
 
    {{< img src="product_analytics/action_management/pana-label-mode-2.png" alt="Click on and label your actions." style="width:90%;">}}
 
-6. Select **New Labeled Action** and use the modal to define the scope of your label. Add a label name, description (optional), and tags (optional). Then select **Save**.
+6. Select **New Labeled Action** and use the modal to define the scope of your label. Add a label name, description (optional), and tags (optional). You can specify a custom CSS selector for tracking clicks, or use the CSS builder to label events, for more control and granularity. Then select **Save**.
 
    You can also hold the Shift key to select multiple actions on the page and label them under the same name. This functionality enables "OR" analysis.
 
