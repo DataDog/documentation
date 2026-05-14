@@ -75,8 +75,8 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
     export DATADOG_API_KEY="<DATADOG_API_KEY>"
     ```
     The Datadog Lambda Extension supports two formats for the secret value:
-    - Plain string — the secret value is used directly as the API key.
-    - JSON object — if the secret value is a JSON object, the extension extracts the `dd_api_key` field and uses its value as the API key. This is useful if you store the Datadog API key alongside other credentials in a single     
+    - **Plain string**: the secret value is used directly as the API key.
+    - J**SON object**: if the secret value is a JSON object, the extension extracts the `dd_api_key` field and uses its value as the API key. This is useful if you store the Datadog API key alongside other credentials in a single     
   secret: 
     ```sh
     { "dd_api_key": "<YOUR_DATADOG_API_KEY>" }
