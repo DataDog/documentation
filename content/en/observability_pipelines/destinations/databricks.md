@@ -94,6 +94,8 @@ Configure the Databricks (Zerobus) destination when you [set up a pipeline][6]. 
 
 After you select the Databricks (Zerobus) destination in the pipeline UI:
 
+<div class="alert alert-warning">Databricks (Zerobus) doesn't convert timestamps in string format to Databricks' <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> type</a>. If your table uses a timestamp column, see <a href="#convert-string-timestamps-to-timestamp-format">Convert string timestamps to timestamp format</a> for more information.</div>
+
 <div class="alert alert-danger">Only enter the identifier for the OAuth client secret. Do <b>not</b> enter the actual value.</div>
 
 1. Enter the **Ingestion Endpoint** for your Databricks workspace, such as `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`. The Worker sends logs to this endpoint.
@@ -107,6 +109,25 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 #### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
+
+### Convert string timestamps to timestamp format
+
+If your logs have timestamps in string format and your Databricks table has a timestamp column declared as a [`TIMESTAMP` type][11], you must convert the string to timestamp format before sending logs to the Databricks (Zerobus) destination. Databricks (Zerobus) can only convert the timestamp format to its `TIMESTAMP` type. 
+
+If you do not convert the string timestamp, the Worker throws an error similar to:
+
+```
+Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-04-23T10[41]15Z' to i64: invalid digit found in string
+```
+
+To convert timestamps in string format to timestamp format:
+
+1. Add a [Custom Processor][12] to your pipeline.
+1. Add a function with the following custom script:
+    ```
+    .timestamp = parse_timestamp!(.timestamp, format: "%+")
+    ```
+    See [parse_timestamp][13] for more information.
 
 ## Secret defaults
 
@@ -148,3 +169,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [10]: /observability_pipelines/destinations/#event-batching
+[11]: https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type
+[12]: /observability_pipelines/processors/custom_processor#setup
+[13]: /observability_pipelines/processors/custom_processor/#parse_timestamp
