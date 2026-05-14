@@ -130,6 +130,15 @@ After a notice is published, the notice:
 
 You can post **updates** over time to keep users informed, and then mark the notice as **Resolved**.
 
+## Backfill a notice
+
+If an incident occurred before you had a chance to publish a notice, you can retroactively document it using a backfilled notice. Unlike a regular notice, a backfilled notice is built from a list of updates, each with its own start time, so the notice accurately reflects the full incident timeline in the uptime history.
+
+1. From a status page, click **Publish Backfilled Notice**.
+1. Enter a **Title** for the notice.
+1. Add one or more **Updates**. For each update, provide a start time and any relevant details.
+1. Click **Publish Notice**.
+
 ## Email subscriptions
 
 Email subscriptions on status pages are **double opt-in**: users must confirm their email address before they are added as subscribers. After entering an email to subscribe, a confirmation email is sent, and the subscription is only activated after the user clicks the confirmation link.
