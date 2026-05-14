@@ -1,5 +1,5 @@
 ---
-title: Set up Database Monitoring with Terraform
+title: Provision the Datadog Agent with Terraform
 description: Provision the Datadog Agent for Database Monitoring with Terraform across managed and self-hosted databases.
 further_reading:
 - link: "/database_monitoring/data_collected/"
