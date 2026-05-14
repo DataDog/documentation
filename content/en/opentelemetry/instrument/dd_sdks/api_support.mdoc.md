@@ -12,7 +12,6 @@ aliases:
   - /opentelemetry/instrument/api_support/go/metrics
   - /opentelemetry/instrument/api_support/go/traces
   - /opentelemetry/instrument/api_support/java
-  - /opentelemetry/instrument/api_support/java/logs
   - /opentelemetry/instrument/api_support/java/metrics
   - /opentelemetry/instrument/api_support/java/traces
   - /opentelemetry/instrument/api_support/nodejs/
@@ -917,8 +916,8 @@ If you encounter an issue after upgrading `@opentelemetry/api-logs`, [open an is
 - **OpenTelemetry Rust SDK**: The SDK provides the logs implementation automatically.
 {% /if %}
 {% if equals($prog_lang, "java") %}
-- **Datadog SDK**: dd-trace-java version 1.62.0 or later.
-- **OpenTelemetry API**: `opentelemetry-api` version 1.27.0 or later (the version that introduced the stable Logs API).
+- **Datadog SDK**: `dd-trace-java` version 1.62.0 or later.
+- **OpenTelemetry API**: `opentelemetry-api` version 1.27.0 (the version that introduced the stable Logs API) or later.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
 
