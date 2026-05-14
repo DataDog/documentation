@@ -16,75 +16,63 @@ further_reading:
 Action Management is a no-code way to label autocaptured actions from your web and mobile applications. Labeled actions can be used in all Product Analytics charts. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis.
 
 Two labeling methods are available:
-- **Visual labeling**: A point-and-click interface for labeling actions on web pages. Requires the Datadog test recorder Chrome extension.
-- **Manual labeling**: Label actions for web and mobile applications without a browser extension. Specify a custom CSS selector or use the CSS builder for greater control and granularity over your labels.
+- [**Visual labeling**](#visual-labeling): A point-and-click interface for labeling actions on web pages. Requires the Datadog test recorder Chrome extension.
+- [**Manual labeling**](#manual-labeling): Label actions for web and mobile applications without a browser extension. Specify a custom CSS selector or use the CSS builder for greater control and granularity over your labels.
 
-## Visual labeling
+## Visual labeling {#visual-labeling}
 
-### Step 1 - Install the browser extension
+Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2] for extension installation — or use [manual labeling](#manual-labeling) instead.
 
-Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2].
+1. Go to the [Actions][3] page in Datadog and select your application.
 
-### Step 2 - Label your actions
+2. Select **Visual Labeler**.
 
-1. Go to the [Actions][3] page in the Datadog UI, and click on **Label New Action**. This takes you to the point-and-click interface where you can select your actions.
+3. Use the **Navigate Site** mode to browse to the location of the actions you want to label.
 
-{{< img src="product_analytics/action_management/pana-labeled-new-action.png" alt="Actions page to start labelling" style="width:90%;">}}
+4. When you are ready to label an action, switch to **Label Actions** mode.
 
+5. Click on the element you would like to add as an action.
 
-2. Use the **Navigate Site** mode to browse to the location of the actions you want to label.
+   {{< img src="product_analytics/action_management/pana-label-mode-2.png" alt="Click on and label your actions." style="width:90%;">}}
 
-{{< img src="product_analytics/action_management/pana-point-click-interface.png" alt="The point and click interface used to locate and label your action " style="width:90%;">}}
+6. Select **New Labeled Action** and use the modal to define the scope of your label. Add a label name, description (optional), and tags (optional). Then select **Save**.
 
+   You can also hold the Shift key to select multiple actions on the page and label them under the same name. This functionality enables "OR" analysis.
 
-3. To add an action, first, switch to **Label Actions** mode.
+After you define an action, it appears in the list of labeled actions on the [Actions][3] page, and you can use it in any Product Analytics chart.
 
-{{< img src="product_analytics/action_management/pana-label-mode.png" alt="Click on and label your actions." style="width:90%;">}}
-
-
-4. Next, select the UI element that you would like to add as an action, click on **New Labeled Action**, and:
-    - **Choose the scope**: Select whether the action should be tracked on the current page only or across all pages.
-    - **Set targeting options**: (Optional) Limit the action to a specific target text. This is useful for localized sites where the same element may appear in multiple languages.
-    - **Name the action**: Provide a name (required) and a description (optional) to help identify the action in your dashboards and reports.
-
-    You can also hold the Shift key to select multiple actions on the page and label them under the same name. This functionality enables "OR" analysis.
-
-{{< img src="product_analytics/action_management/pana-name-action.png" alt="Give a name and description to your action." style="width:90%;">}}
-
-
-### Step 3 - Retrieve your actions
-
-After you define an action, you can find it in the [list of labeled actions][4]. From this list, you can:
-- Filter to only see your actions
-- Edit actions
-- View actions in any Product Analytics chart or related session replay
-
- {{< img src="product_analytics/action_management/pana-action-list.png" alt="List of your labeled actions." style="width:90%;">}}
-
-## Manual labeling
+## Manual labeling {#manual-labeling}
 
 Manual labeling is available for both web and mobile applications and does not require the Chrome extension.
 
-1. Go to the [Actions][3] page in the Datadog UI, and click **Label New Action**.
-2. Select the **Manual** labeling option.
-3. Specify a CSS selector directly, or use the CSS builder to construct one for greater control over which actions are labeled.
-4. Configure the action:
-    - **Choose the scope**: Select whether the action should be tracked on the current page only or across all pages.
-    - **Set targeting options**: (Optional) Limit the action to a specific target text.
-    - **Name the action**: Provide a name (required) and a description (optional) to help identify the action in your dashboards and reports.
+1. Go to the [Actions][3] page in Datadog and select your application. 
+2. Select **Add Labeled Action**, then select **Create manually**.
+3. Add a label name, description (optional), and tags (optional).
+4. Under **Definition**, define one or more events to track:
+   - **Action Type**: `click` or `custom` events
+   - **Action Name**: Use the drop-down to select an action
+   - **Page Location**: Use the drop-down to target one or more pages
 
-After you define an action, it appears in the [list of labeled actions][4] and can be used in any Product Analytics chart.
+   For `click` events, you can specify a custom CSS selector for tracking clicks, or use the CSS builder to label events, for more control and granularity. 
+
+   Select **Add New Definition** to add a definition.
+5. Select **Save**.
+
+After you define an action, it appears in the list of labeled actions on the [Actions][3] page, and you can use it in any Product Analytics chart.
+
+## Retrieve your actions
+After you define an action, you can find it on the [Actions][3] page. 
+
+{{< img src="product_analytics/action_management/pana-action-list-2.png" alt="List of your labeled actions." style="width:90%;">}}
 
 ## Known limitations
 - Visual labeling is only available for web pages. Use manual labeling for mobile applications.
 - You cannot label actions that are hidden behind a hover. If this limitation impacts your use cases, share examples with your Customer Success Manager to inform future improvements.
 - Deleting a labeled action also deletes it from the dashboards where it is being used.
 
-
 [1]: https://chromewebstore.google.com/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [2]: https://docs.datadoghq.com/synthetics/guide/manually-adding-chrome-extension/
 [3]: https://app.datadoghq.com/product-analytics/data-management
-[4]: https://app.datadoghq.com/product-analytics/data-management
 
 ## Further reading
 
