@@ -10,7 +10,7 @@ Other Google Cloud resources (CloudSQL, Google App Engine, Pub/Sub, and others) 
 
 ## Google Cloud metric exclusion
 
-Use the [Google Cloud integration tile][1] to control your metric collection. Go to the **Configuration** tab and select a project or add a new one. Each project is controlled under **Optionally Limit Metrics Collection to hosts with tag**. Limit metrics by [host tag][2]:
+Use the [Google Cloud integration tile][1] to control your metric collection. Go to the {{< ui >}}Configuration{{< /ui >}} tab and select a project or add a new one. Each project is controlled under {{< ui >}}Optionally Limit Metrics Collection to hosts with tag{{< /ui >}}. Limit metrics by [host tag][2]:
 
 {{< img src="account_management/billing/google_cloud_metric_filter.png" alt="The Google Cloud page in Datadog, on the General tab, with the option to limit metric collection highlighted" >}}
 

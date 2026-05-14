@@ -139,8 +139,8 @@ Attach the `AmazonRedshiftDataFullAccess` AWS managed policy and an inline polic
 
 To configure the Redshift integration in Datadog:
 
-1. Navigate to [**Datadog Data Observability** > **Settings**][1].
-2. Click the **Configure** button for the Redshift option.
+1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1].
+2. Click the {{< ui >}}Configure{{< /ui >}} button for the Redshift option.
 
    {{< img src="data_observability/redshift/data_obs_redshift_on_integrations_page.png" alt="Redshift on the Settings page of Data Observability integrations" style="width:100%;" >}}
 
@@ -153,24 +153,24 @@ To configure the Redshift integration in Datadog:
 {{< tabs >}}
 {{% tab "Provisioned Cluster" %}}
 
-- **Cluster identifier**: Your Redshift cluster identifier.
-- **Region**: The AWS region where your cluster is hosted (for example, `us-east-1`).
-- **Database user**: The Datadog user created during setup (for example, `datadog_user`).
-- **Initial database**: The name of the database to connect to (defaults to `dev`).
+- {{< ui >}}Cluster identifier{{< /ui >}}: Your Redshift cluster identifier.
+- {{< ui >}}Region{{< /ui >}}: The AWS region where your cluster is hosted (for example, `us-east-1`).
+- {{< ui >}}Database user{{< /ui >}}: The Datadog user created during setup (for example, `datadog_user`).
+- {{< ui >}}Initial database{{< /ui >}}: The name of the database to connect to (defaults to `dev`).
 
 {{% /tab %}}
 {{% tab "Serverless" %}}
 
-- **Workgroup name**: Your Redshift Serverless workgroup name.
-- **Region**: The AWS region where your workgroup is hosted (for example, `us-east-1`).
-- **Initial database**: The name of the database to connect to (defaults to `dev`).
+- {{< ui >}}Workgroup name{{< /ui >}}: Your Redshift Serverless workgroup name.
+- {{< ui >}}Region{{< /ui >}}: The AWS region where your workgroup is hosted (for example, `us-east-1`).
+- {{< ui >}}Initial database{{< /ui >}}: The name of the database to connect to (defaults to `dev`).
 
 {{% /tab %}}
 {{< /tabs >}}
 
    {{< img src="data_observability/redshift/data_obs_redshift_add_credentials.png" alt="Input fields for Redshift credentials for Data Observability integrations" style="width:100%;" >}}
 
-5. Click **Add account**.
+5. Click {{< ui >}}Add account{{< /ui >}}.
 
 ## Next steps
 

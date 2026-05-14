@@ -11,9 +11,9 @@ Use the VPC Endpoint component to visualize VPC endpoints from your Amazon Web S
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
-- **Type**: Select the type for your VPC endpoint.
-- **Data processed (GB)**: Enter the total volume of data processed by the endpoint, in gigabytes. Not available for the gateway type.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
+- {{< ui >}}Type{{< /ui >}}: Select the type for your VPC endpoint.
+- {{< ui >}}Data processed (GB){{< /ui >}}: Enter the total volume of data processed by the endpoint, in gigabytes. Not available for the gateway type.
 
 ## API
 

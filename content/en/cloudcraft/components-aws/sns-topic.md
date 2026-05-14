@@ -11,8 +11,8 @@ Use the SNS Topic component to represent visualize SNS topics from your Amazon W
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
-- **Requests / month (K)**: Enter the number of requests per month, in thousands.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
+- {{< ui >}}Requests / month (K){{< /ui >}}: Enter the number of requests per month, in thousands.
 
 ## API
 

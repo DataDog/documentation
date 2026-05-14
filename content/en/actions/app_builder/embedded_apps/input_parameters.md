@@ -14,17 +14,17 @@ A common use case for input parameters is to reuse and customize an app for diff
 
 ## Create an input parameter 
 
-1. In [App Builder][1], select an app and click **Edit**. 
-1. Click the **App Properties** icon ({{< img src="service_management/app_builder/embedded_apps/app_properties_icon.png" inline="true" width="12px" style="position:relative; bottom:1px;">}}).
+1. In [App Builder][1], select an app and click {{< ui >}}Edit{{< /ui >}}. 
+1. Click the {{< ui >}}App Properties{{< /ui >}} icon ({{< img src="service_management/app_builder/embedded_apps/app_properties_icon.png" inline="true" width="12px" style="position:relative; bottom:1px;">}}).
 1. Click the plus icon (<i class="icon-plus-2" style="position:relative; top:2px;font-size: 12px; max-width: 12px"></i>) to add an input parameter. 
 1. Click the new input parameter to configure its elements: 
-    - Parameter Name
-    - Display Name (Optional) 
-    - Data Type
-    - Allowed Values
-    - Default Value
-    - Description (Optional) 
-1. Click **Save**.
+    - {{< ui >}}Parameter Name{{< /ui >}}
+    - {{< ui >}}Display Name{{< /ui >}} (Optional) 
+    - {{< ui >}}Data Type{{< /ui >}}
+    - {{< ui >}}Allowed Values{{< /ui >}}
+    - {{< ui >}}Default Value{{< /ui >}}
+    - {{< ui >}}Description{{< /ui >}} (Optional) 
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Example input parameter 
 
@@ -40,18 +40,18 @@ This example input parameter shows the same app in various staging environments:
 To embed an app with input parameters:
 
 1. In [App Builder][1], select an app with a configured input parameter.
-1. Click **Add to a dashboard**. 
-1. Select a dashboard, then click **Save and Open**.
-1. In your dashboard, hover over the app and click the **Edit** icon ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}).
-1. In the **Input Parameters** section, select an input parameter:
+1. Click {{< ui >}}Add to a dashboard{{< /ui >}}. 
+1. Select a dashboard, then click {{< ui >}}Save and Open{{< /ui >}}.
+1. In your dashboard, hover over the app and click the {{< ui >}}Edit{{< /ui >}} icon ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}).
+1. In the {{< ui >}}Input Parameters{{< /ui >}} section, select an input parameter:
 {{< img src="/service_management/app_builder/embedded_apps/example-input-params-configuring-in-dashboard.png" alt="An example of an app in editing mode with Input Parameters circled" style="width:80%;" >}}
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Reuse an app 
 
 After embedding an app in a dashboard or notebook, you can create a copy to reuse it with different contexts:
 1. Select the embedded app. 
-1. Click the **Options** icon (<i class="icon-kebab-wui" style="position:relative; top:2px;font-size: 12px; max-width: 12px"></i>), then click **Clone**.
+1. Click the {{< ui >}}Options{{< /ui >}} icon (<i class="icon-kebab-wui" style="position:relative; top:2px;font-size: 12px; max-width: 12px"></i>), then click {{< ui >}}Clone{{< /ui >}}.
     - Alternatively, you can select the app and use copy and paste keyboard shortcuts.
 1. Follow the steps [above][2] to select a different input parameter.
 

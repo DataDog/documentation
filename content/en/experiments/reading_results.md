@@ -34,7 +34,7 @@ The confidence interval represents the range of lift values that are plausibly s
 If the entire confidence interval is above zero, then the result is statistically significant. This suggests that the observed difference in metrics is unlikely to be attributable to random noise, and supports the conclusion that the experiment produced a true effect.
 
 ## Exploring results 
-To dive deeper into experiment results, hover over a metric and click **Chart**. This gives you the option to compare the experiment’s impact across different user segments.
+To dive deeper into experiment results, hover over a metric and click {{< ui >}}Chart{{< /ui >}}. This gives you the option to compare the experiment’s impact across different user segments.
 
 ### Segment-level results
 Subject-level properties are based on attributes at the initial time of exposure (for example, a user's region, whether they are a new visitor, or a repeat visitor). This is useful for understanding when certain cohorts of users reacted differently to the new experience. 

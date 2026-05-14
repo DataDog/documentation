@@ -22,6 +22,51 @@ The **Records** section contains traces related to the execution of your task on
 
 You can use the facets (on the left-hand side) to filter the records based on their evaluation results to uncover patterns.
 
+### Customizing the results table
+
+You can customize the experiment results table to surface the fields that matter most to you without opening each trace individually.
+
+#### Column picker
+
+Use the column picker to toggle columns on or off and drag to reorder them. By default, raw JSON blob columns (Input, Output, Expected Output) are hidden to keep the table scannable. You can toggle them back on at any time.
+
+The table includes a **Record ID** column that shows which dataset record each experiment run was executed against. For experiments with multiple runs per record, expand a record to see all runs underneath.
+
+#### Custom columns
+
+Extract specific fields from your top-level experiment span, such as an input key, output key, or metadata key, and display them as dedicated table columns. This lets you compare key properties across records at a glance.
+
+To add a custom column, type a field path in the **Add Column** input at the top of the table:
+
+| Source          | Path format                    | Example                          |
+| --------------- | ------------------------------ | -------------------------------- |
+| Input           | `@meta.input.<key>`           | `@meta.input.user_query`        |
+| Output          | `@meta.output.<key>`          | `@meta.output.result.status`    |
+| Expected output | `@meta.expected_output.<key>` | `@meta.expected_output.answer`  |
+| Metadata        | `@meta.metadata.<key>`        | `@meta.metadata.scenario_type`  |
+| Tag             | `<tag_key>`                    | `env`                            |
+
+You can add multiple custom columns and reorder them with drag-and-drop. Column configuration is saved to your browser's local storage per project.
+
+#### Quick actions from the span detail
+
+When viewing the root span in the span detail side panel, you can act on fields directly from the context menu instead of manually typing paths.
+
+The following options are available on JSON fields (Input, Output, Expected Output, Metadata):
+
+- **Copy key path**: Copies the field's full path (for example, `@meta.input.user_query`) so you can paste it into the custom column input, search bar, or a dashboard widget query.
+- **Add column**: Adds the field as a custom column in the results table in one click.
+- **Filter by / Exclude**: Adds the field's key-value pair to the search query to narrow down or exclude matching records. Available on leaf values (strings, numbers, booleans) only.
+
+The following options are available on tags:
+
+- **Copy key**: Copies the tag key (for example, `env`).
+- **Copy to clipboard**: Copies the full tag including its value (for example, `env:prod`).
+- **Add column**: Adds the tag key as a custom column in the results table.
+- **Filter by / Exclude**: Adds the tag's key-value pair to the search query.
+
+<div class="alert alert-info">These actions are available on the root span of a trace.</div>
+
 ### Searching for specific records
 
 You can use the search bar to find specific records, based on their properties (dataset records data) or on the result of the experiment (output and evaluations). The search is executed at trace level.

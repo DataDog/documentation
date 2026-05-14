@@ -22,7 +22,7 @@ You can copy, export, or download your aggregated search query and visualization
 
 {{< img src="continuous_integration/explorer/pipeline_export_updated.png" alt="Export your pipelines view in the CI Visibility Explorer" style="width:100%;">}}
 
-Click the **Export** button on the right hand corner and select an option from the dropdown menu:
+Click the {{< ui >}}Export{{< /ui >}} button on the right hand corner and select an option from the dropdown menu:
 
 - Share your [saved view][7] of the [CI Visibility Explorer][3].
 - Export your search results to a [CI Pipeline monitor][5] that triggers alerts on predefined thresholds.

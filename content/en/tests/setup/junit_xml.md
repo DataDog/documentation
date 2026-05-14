@@ -27,11 +27,11 @@ further_reading:
 
 JUnit test report files are XML files that contain test execution information, such as test and suite names, pass or fail status, duration, and sometimes error logs. Although introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
-If your testing framework can generate JUnit XML test reports, you can use these as a lightweight alternative to [instrumenting your tests natively][2] using Datadog tracers. Test results imported from JUnit XML reports appear alongside test data reported by tracers.
+If your testing framework can generate JUnit XML test reports, you can use these as a lightweight alternative to [instrumenting your tests natively][2] using Datadog SDKs. Test results imported from JUnit XML reports appear alongside test data reported by tracers.
 
 ## Compatibility
 
-Supported Datadog tracing library:
+Supported Datadog SDK:
 
 | Datadog Library | Version |
 |---|---|

@@ -13,7 +13,7 @@ further_reading:
 ---
 
 <div class="alert alert-danger">
-Tracers always initiate traffic to Datadog. Sessions are never initiated from Datadog back to the tracers.
+Tracers always initiate traffic to Datadog. Sessions are never initiated from Datadog back to the SDKs.
 </div>
 
 ## Destinations

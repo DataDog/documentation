@@ -53,7 +53,7 @@ Cloudcraft supports the following AWS components:
 - VPN Gateways
 - WAF
 
-For components that aren't supported, you can use the **Design** tab to create your own using blocks, icons, images, and text labels.
+For components that aren't supported, you can use the {{< ui >}}Design{{< /ui >}} tab to create your own using blocks, icons, images, and text labels.
 
 You can also [contact our support team][1] to help us identify which components you need the most.
 

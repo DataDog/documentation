@@ -1,6 +1,7 @@
 ---
 title: Definition list
 draft: true
+private: true
 ---
 
 ## Overview

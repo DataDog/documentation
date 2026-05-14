@@ -11,13 +11,13 @@ Use the FSx component to represent FSx file systems from your Amazon Web Service
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **File system**: The file system used for FSx.
-- **Storage (GiB)**: The amount of storage provisioned for the file system.
-- **Storage type**: Select a storage type for the file system. Not available for the Lustre file system.
-- **Throughput (MiB/s)**: The amount of aggregate throughput capacity. Not available for the Lustre file system.
-- **Backup size (GiB)**: The amount of storage provisioned for data deduplication. Not available for the Lustre file system.
-- **Deployment type**: The type of deployment for the file system, single or multi AZ. Not available for the Lustre file system.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}File system{{< /ui >}}: The file system used for FSx.
+- {{< ui >}}Storage (GiB){{< /ui >}}: The amount of storage provisioned for the file system.
+- {{< ui >}}Storage type{{< /ui >}}: Select a storage type for the file system. Not available for the Lustre file system.
+- {{< ui >}}Throughput (MiB/s){{< /ui >}}: The amount of aggregate throughput capacity. Not available for the Lustre file system.
+- {{< ui >}}Backup size (GiB){{< /ui >}}: The amount of storage provisioned for data deduplication. Not available for the Lustre file system.
+- {{< ui >}}Deployment type{{< /ui >}}: The type of deployment for the file system, single or multi AZ. Not available for the Lustre file system.
 
 ## API
 

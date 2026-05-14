@@ -36,7 +36,7 @@ When creating a [dashboard][1] or a [notebook][2], you can use deployment data i
 
 ## Share deployment data
 
-You can export your search query to a [saved view][5] by clicking the **Export** button.
+You can export your search query to a [saved view][5] by clicking the {{< ui >}}Export{{< /ui >}} button.
 
 {{< img src="continuous_delivery/explorer/deployment_executions_export.png" alt="Deployment execution results appearing in the CD Visibility Explorer" width="100%" >}}
 

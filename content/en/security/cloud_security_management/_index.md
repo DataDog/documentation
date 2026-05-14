@@ -48,6 +48,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-cloud-security-compliance"
     tag: "Blog"
     text: "Scale compliance across global frameworks with Datadog Cloud Security"
+  - link: "https://www.datadoghq.com/blog/ec2-ami-risks"
+    tag: "Blog"
+    text: "AWS AMI security: How misconfigured and public AMIs expand your cloud attack surface"
+  - link: "https://www.datadoghq.com/blog/cloud-security-oci"
+    tag: "Blog"
+    text: "Protect your OCI resources with Datadog Cloud Security"
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:
@@ -63,7 +69,7 @@ Datadog Cloud Security delivers deep visibility, continuous configuration audits
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -118,7 +124,7 @@ To get more detail, use [Findings][7] to review and remediate your organization'
 - Use the [Security Graph][17] to model your cloud environment as a relationship graph, so you can visualize and query the connections between your cloud resources. You can write queries to search for specific relationships between resources, such as publicly accessible EC2 instances that can access S3 buckets containing sensitive data, so you can proactively mitigate those infrastructure risks.
   {{< img src="security/csm/security_graph.png" alt="Security Graph displaying an example EC2 instance" width="100%">}}
 - Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. For more information, see the [Resource Catalog][13] documentation.
-  {{< site-region region="gov" >}}
+  {{< site-region region="gov,gov2" >}}
   <div class="alert alert-danger">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
   {{< /site-region >}}
   {{< img src="infrastructure/resource_catalog/resource_catalog_infra_3.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}

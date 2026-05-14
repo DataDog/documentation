@@ -16,7 +16,7 @@ further_reading:
   text: "Getting Started with Test Optimization"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
@@ -150,16 +150,13 @@ After you fix a flaky test, it can take time for the fix to propagate to all bra
 
 A 14-day grace period applies to every flaky test with a successful fix after using the [remediation flow](#confirm-fixes-for-flaky-tests). During this period, Datadog checks if the commit where the test run contains the fix:
 - If the fix is not present in the commit and the test was **Active** or **Quarantined**, Datadog treats the test as **Quarantined**.
-- If the test was **Disabled**, Datadog treats the test as **Disabled**.
+- If the fix is not present in the commit and the test was **Disabled**, Datadog treats the test as **Disabled**.
+- If the fix is present in the commit, Datadog treats the test as healthy regardless of its previous status.
 This method avoids unnecessary CI failures and saves developer time.
 
 If a test inside the grace period flakes and the commit doesn't contain the fix, Datadog tags the test run event with `@test.test_management.flaky_fix_missing:true`.
 
 ## AI-powered flaky test fixes
-
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}}
 
 Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been detected by Test Optimization. When a flaky test is identified, Bits AI analyzes the test failure patterns and generates production-ready fixes that can be submitted as GitHub pull requests.
 
@@ -228,7 +225,7 @@ Notifications are bundled over a short period to reduce noise.
 
 ## Compatibility
 
-To use Flaky Tests Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog tracing library required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
+To use Flaky Tests Management features, you must use Datadog's native instrumentation for your test framework. The table below outlines the minimum versions of each Datadog SDK required to quarantine, disable, and attempt to fix flaky tests. Click a language name for setup information:
 
 | Language        | Quarantine & Disable          | Attempt to fix               |
 | --------------- | ----------------------------- | ---------------------------- |

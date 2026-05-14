@@ -167,13 +167,13 @@ You can view all your policies and filtered metrics from the [Metrics Settings p
 
 ### View all policies
 
-Select the **Policies** tab from the sidebar to see a list of all your policies. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png" alt="The Show Sidebar button" inline="true" >}}.
+Select the **Policies** tab from the sidebar to see a list of all your policies. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png" inline="true" width="22" >}}.
 
 Click on any metric filtering policy to open its detail view for edits or deletion.
 
 ### View all filtered metrics
 
-Select the **Filtered Metrics** tab from the sidebar to see a list of all your filtered. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png" alt="The Show Sidebar button" inline="true" >}}.
+Select the **Filtered Metrics** tab from the sidebar to see a list of all your filtered. If you don't see the sidebar, click the **Show Sidebar** button {{< img src="metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png" inline="true" width="22" >}}.
 
 Click on a filtered metric's attached policies in the **ATTACHED POLICIES** column for edits or deletion.
 
