@@ -347,6 +347,29 @@ function __evalPostProcessing(input) {
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="Post-Processing (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="post-processing" %}}
+1. Select the **JSON** output type.
+   <div class="alert alert-info">
+
+2. Provide a JavaScript function to identify the evaluator's assessment, value, and reasoning. Post-processing enables you to do more complex assessment than previously.
+
+   Datadog searches the LLM-as-a-judge's response text for your defined keywords and provides the appropriate results for the evaluation. For this reason, you should instruct the LLM to respond with your chosen keywords.
+
+   For example, if you set:
+
+   - **True keywords**: Yes, yes
+   - **False keywords**: No, no
+
+   Then your system prompt should include something like `Respond with "yes" or "no"`.
+
+3. For **Assessment Criteria**:
+   - Select **True** to mark a result as "Pass"
+   - Select **False** to mark a result as "Fail"
+
+   This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
+{{% /collapse-content %}}
+
+
 {{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. Select the **Boolean** output type.
    <div class="alert alert-info">For Keyword Search Output, only the <strong>Boolean</strong> output type is available.</div>
@@ -393,6 +416,108 @@ Under **Evaluation Scope**, define where and how your evaluation runs. This help
 The pane on the right shows **Filtered Spans** (or traces) corresponding to the configured evaluation scope.
 
 Select a span to show JSON data available for use in an evaluation. Then, click **Test Evaluation** to pre-fill inputs to your evaluation with data from the span, and click **Run** to test.
+
+### Post-processing
+
+For LLM-as-a-Judge evaluators with JSON output, a JavaScript function can be applied to assign an assessment to the evaluation result. A label for the evaluation result and the reasoning can also be supplied.
+
+The function must return a json object of the following format
+```
+{
+    assessment: "pass", // "pass" | "fail" [REQUIRED],
+    value: "evaluation_label" // string [OPTIONAL],
+    reasoning: "explanation behind the assessment" // string [OPTIONAL]
+
+}
+```
+and the function signature must be `function __evalPostProcessing(input)` and the `input` is the json from the evaluator. The function below is an example of a post processing function:
+```
+function __evalPostProcessing(input) {
+    /*
+     * Expected input shape (from LLM evaluator [this depends on the JSON Structured Output]):
+     * {
+     *   criteria: {
+     *     quality_score: { score: number (0–1), category: "excellent"|"good"|"poor", reasoning: string },
+     *     toxicity:      { score: number (0–1), category: "safe"|"unsafe",           reasoning: string },
+     *     completeness:  { score: number (0–1), category: "complete"|"incomplete",   reasoning: string },
+     *     relevance:     { score: number (0–1), category: "relevant"|"irrelevant",   reasoning: string },
+     *   },
+     *   overall_reasoning: string  // (optional) top-level summary from LLM evaluator
+     * }
+     */
+
+    const SCORE_THRESHOLD = 0.7;
+
+    // Category → pass/fail mappings per criterion
+    const CATEGORY_PASS_MAP = {
+        quality_score: ["excellent", "good"],
+        toxicity:      ["safe"],
+        completeness:  ["complete"],
+        relevance:     ["relevant"],
+    };
+
+    const criteriaResults = {};
+    const failures = [];
+    const passes = [];
+
+    for (const [criterionName, passCategories] of Object.entries(CATEGORY_PASS_MAP)) {
+        const criterion = input?.criteria?.[criterionName];
+
+        if (!criterion) {
+            failures.push(`[${criterionName}] Missing from evaluator output.`);
+            criteriaResults[criterionName] = false;
+            continue;
+        }
+
+        const { score, category, reasoning } = criterion;
+
+        const scorePass    = typeof score === "number" && score >= SCORE_THRESHOLD;
+        const categoryPass = typeof category === "string" && passCategories.includes(category.toLowerCase());
+
+        // Both score AND category must pass
+        const criterionPass = scorePass && categoryPass;
+        criteriaResults[criterionName] = criterionPass;
+
+        if (criterionPass) {
+            passes.push(`[${criterionName}] PASS — score: ${score.toFixed(2)}, category: "${category}". ${reasoning ?? ""}`);
+        } else {
+            const reasons = [];
+            if (!scorePass)    reasons.push(`score ${score?.toFixed(2) ?? "N/A"} below threshold (≥${SCORE_THRESHOLD})`);
+            if (!categoryPass) reasons.push(`category "${category}" not in acceptable set [${passCategories.join(", ")}]`);
+            failures.push(`[${criterionName}] FAIL — ${reasons.join("; ")}. ${reasoning ?? ""}`);
+        }
+    }
+
+    // Determine overall assessment
+    const passed = Object.values(criteriaResults).every(Boolean);
+    const failCount = failures.length;
+
+    const assessment = passed ? "pass" : "fail";
+
+    const label = passed
+        ? "high_quality_response"
+        : failCount === 1
+            ? "minor_quality_issue"
+            : failCount === 2
+                ? "moderate_quality_issue"
+                : "low_quality_response";
+
+    const reasoningParts = [
+        passed
+            ? "All criteria passed."
+            : `${failCount} criterion/criteria failed.`,
+        ...failures,
+        ...passes,
+        input?.overall_reasoning ? `Evaluator summary: ${input.overall_reasoning}` : ""
+    ].filter(Boolean);
+
+    return {
+        assessment: assessment,
+        value: label,
+        reasoning: reasoningParts.join(" | ")
+    };
+}
+```
 
 ## Viewing and using results
 
