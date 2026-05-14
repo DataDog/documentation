@@ -50,7 +50,7 @@ Bits Code can suggest code improvements in the following Datadog products:
 | [Bits Chat][16]   | Suggests code changes arising from Bits Chat conversations |
 | [Cloud Cost][22]          | Generates code changes for [Cloud Cost Recommendations][23] |
 | [Error Tracking][1]       | Diagnoses issues and generates code fixes on-demand or autonomously |
-| [Code Security][2]        | Remediates code vulnerabilities individually or in bulk  |
+| [Code Security][2]        | Remediates [SAST vulnerabilities][15] individually or in bulk  |
 | [Test Optimization][4]    | Provides code fixes for [flaky tests][24] and verifies that tests remain stable  |
 | [Continuous Profiler][3]  | Provides code changes for [Automated Analysis][10] insights   |
 | [Containers][12]          | Provides code changes for [Kubernetes Remediations][13]  |
@@ -140,7 +140,7 @@ Datadog Code Security uses Bits AI to enhance static analysis and generate remed
 [12]: /containers/
 [13]: /containers/bits_ai_kubernetes_remediation
 [14]: https://app.datadoghq.com/code/settings
-[15]: /security/code_security/static_analysis/ai_enhanced_sast/
+[15]: /security/code_security/static_analysis/ai_enhanced_sast/#remediation
 [16]: /bits_ai/bits_assistant/
 [17]: /bits_ai/bits_ai_sre/
 [18]: #start-a-code-session
@@ -149,4 +149,4 @@ Datadog Code Security uses Bits AI to enhance static analysis and generate remed
 [21]: /tracing/recommendations/
 [22]: /cloud_cost_management/
 [23]: /cloud_cost_management/recommendations
-[24]: /tests/flaky_management#ai-powered-flaky-test-fixes
+[24]: /tests/flaky_management#bits-ai-powered-flaky-test-fixes
