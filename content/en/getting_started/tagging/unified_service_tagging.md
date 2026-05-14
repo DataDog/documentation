@@ -131,12 +131,12 @@ You can also use the OpenTelemetry Resource Attributes environment variables to 
 ```
 <div class="alert alert-danger">The <code>OTEL_SERVICE_NAME</code> environment variable takes precedence over the <code>service.name</code> attribute in the <code>OTEL_RESOURCE_ATTRIBUTES</code> environment variable.</div>
 
-These labels cover Kubernetes CPU, memory, network, and disk metrics. As well as general container tagging and log collection. These labels are also used by the Cluster Agent and its reported [Kubernetes State Metrics][3].
+These labels cover Kubernetes CPU, memory, network, and disk metrics, as well as general container tagging and log collection. These labels are also used by the Cluster Agent and its reported [Kubernetes State Metrics][3].
 
 ##### Partial configuration
 
 ###### Global env handling
-If your Kubernetes cluster is entirely a single environment, for example only `env:production` nodes and workloads, you can provide this to your Agent configuration rather than tagging each workload individually.
+If your Kubernetes cluster is entirely a single environment, for example, only `env:production` nodes and workloads, you can provide this to your Agent configuration rather than tagging each workload individually.
 
 With the Datadog Operator:
 ```yaml
@@ -155,11 +155,11 @@ datadog:
     - "env:<ENV>"
 ```
 
-This will establish this as a host level tag inherited on all your data associated with each host. This will also be applied to all [Kubernetes State Metrics][3] and be the default `env` on your APM spans. Take care with these tags as if you have a global `env` tag set and a *different* `env` tag set on your pod, that pod's data will have both `env` tags present.
+This establishes this as a host-level tag inherited on all your data associated with each host. This is also applied to all [Kubernetes State Metrics][3] and is the default `env` on your APM spans. Take care with these tags, as if you have a global `env` tag set and a *different* `env` tag set on your pod, that pod's data contains **both** `env` tags.
 
 ###### Pod-level metrics
 
-If you are not using APM in your applications you can omit the `DD_ENV`, `DD_SERVICE`, `DD_VERSION` environment variables. Add the following standard labels (`tags.datadoghq.com`) to the pod spec as well as optionally to the parent workload like the Deployment, StatefulSet, or Job:
+The `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables are only required if you are using APM in your applications; otherwise, you can omit them. Add the following standard labels (`tags.datadoghq.com`) to the pod spec, as well as optionally to the parent workload, like the Deployment, StatefulSet, or Job:
 
 ```yaml
 template:
@@ -324,7 +324,7 @@ For APM data, Datadog sets the `version` tag for you in the following priority o
 Requirements: 
 - Datadog Agent Version 7.52.0 or greater
 - If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed.
-- If your services are not running in a containerized environment, or if you'd also like to have the Git SHA included, [embed Git information in your build artifacts][20].
+- If your services are not running in a containerized environment, or to include the Git SHA, [embed Git information in your build artifacts][20].
 
 ### Non-containerized environment
 
