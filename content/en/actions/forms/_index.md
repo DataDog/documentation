@@ -27,9 +27,9 @@ When creating a form, you can use a blueprint, [import an existing form](#import
 
 To create a form:
 1. On the [Forms][2] page, click {{< ui >}}New Form{{< /ui >}}.
-1. Select a blueprint, import a form, or start with a blank form, then click {{< ui >}}Continue{{< /ui >}}.
+1. Select a blueprint, import a form, or start with a blank form. Click {{< ui >}}Continue{{< /ui >}}.
 1. Optionally, name your form and give it a description. Click {{< ui >}}Continue{{< /ui >}}.
-1. To add a new component, click **Add Component**, or on the Fields side panel, click the **+** icon. See [Form components][3] for the full list of component types and their options.
+1. To add a new component, click **Add Component**, or on the {{< ui >}}Fields{{< /ui >}} side panel, click the plus **+** icon. See [Form components][3] for the full list of component types and their options.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 To preview or share your form:
@@ -54,7 +54,7 @@ From the [Forms][2] page, click a form. In the {{< ui >}}Fields{{< /ui >}} panel
 | Accepting Responses | Toggle to set the form as active or inactive. When inactive, the form does not accept new responses. You can also set an end date to automatically close the form on a specific date. |
 | Anonymous Responses | When enabled, respondent emails are not stored. |
 | Single Responses | When enabled, prevents the same person from submitting more than one response by tracking user identity. You can enable this setting together with Anonymous Responses. |
-| Manage Permissions | Configure who can view the form and submitted responses. See [Manage access](#manage-access). |
+| Manage Permissions | Configure who can view the form and submit responses. See [Manage access](#manage-access). |
 | Edit Theme | Change the form's color theme. |
 | Clone Form | Create a copy of the form. |
 | Export Form | Download the form as a JSON file. |
