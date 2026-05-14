@@ -7162,25 +7162,25 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_sizing
       weight: 600
-    - name: Production Best Practices
-      url: /byoc-logs/operate/best_practices
-      parent: cloudprem_operate
-      identifier: cloudprem_operate_best_practices
-      weight: 601
     - name: Monitoring
       url: /byoc-logs/operate/monitoring
       parent: cloudprem_operate
       identifier: cloudprem_operate_monitoring
-      weight: 602
-    - name: Troubleshooting
-      url: /byoc-logs/operate/troubleshooting
-      parent: cloudprem_operate
-      identifier: cloudprem_operate_troubleshooting
-      weight: 603
+      weight: 601
     - name: Search Logs
       url: /byoc-logs/operate/search_logs
       parent: cloudprem_operate
       identifier: cloudprem_operate_search
+      weight: 602
+    - name: Production Best Practices
+      url: /byoc-logs/operate/best_practices
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_best_practices
+      weight: 603
+    - name: Troubleshooting
+      url: /byoc-logs/operate/troubleshooting
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_troubleshooting
       weight: 604
     - name: Guides
       url: /byoc-logs/guides/
