@@ -84,7 +84,7 @@ further_reading:
 <h3>Ticket is no longer available</h3>
 <p>Closed tickets, including their attachments, are deleted 15 months after their last update.</p>
 
-<p>If you need help with a related issue, you can open a new ticket or search our documentation.</p>
+<p>If you need help with a related issue, you can open a new ticket or search the Datadog documentation.</p>
 
 <h2>Further reading</h2>
 
