@@ -232,14 +232,9 @@ const createEndpointPages = (specData, specs) => {
   endpoints.forEach((entry) => {
     const dir = `./content/en/api/latest/${entry.tagSlug}/${entry.endpointSlug}`;
     fs.mkdirSync(dir, { recursive: true });
-    const frontMatter = {
-      title: entry.title,
-      operationid: entry.operationids[0],
-      tag: entry.tag,
-      tagslug: entry.tagSlug,
-      versions: entry.versions,
-      operationids: entry.operationids,
-    };
+    // Only title — versions, operationids, tag name, tag slug are all derived in
+    // layouts/api/single.html from the URL and the menu entry.
+    const frontMatter = { title: entry.title };
     const yamlStr = `---\n${yaml.safeDump(frontMatter)}---\n`;
     fs.writeFileSync(`${dir}/index.md`, yamlStr, 'utf8');
   });

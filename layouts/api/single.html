@@ -2,14 +2,30 @@
 
     {{ $dot := . }}
 
-    {{ $operationids := .Params.operationids | default (slice .Params.operationid) }}
-    {{ $versions := .Params.versions | default (slice "v2") }}
-    {{ $tagName := .Params.tag }}
-    <!-- tagslug is written by build-api-pages.js; fall back to deriving from URL just in case. -->
-    {{ $tagSlug := .Params.tagslug }}
-    {{ if not $tagSlug }}
-      {{ $relPath := strings.TrimSuffix "/" .RelPermalink }}
-      {{ $tagSlug = path.Base (path.Dir $relPath) }}
+    <!-- Derive tag slug + endpoint slug from URL so we don't need them in frontmatter. -->
+    {{ $relPath := strings.TrimSuffix "/" .RelPermalink }}
+    {{ $tagSlug := path.Base (path.Dir $relPath) }}
+    {{ $endpointSlug := path.Base $relPath }}
+    {{ $identifier := printf "%s-%s" $tagSlug $endpointSlug }}
+
+    <!-- Look up the menu entry by identifier to get versions and operationids. -->
+    {{ $menuEntry := dict }}
+    {{ with index .Site.Menus "api" }}
+      {{ range . }}
+        {{ if eq .Identifier $identifier }}
+          {{ $menuEntry = . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    {{ $versions := $menuEntry.Params.versions | default (slice) }}
+    {{ $operationids := $menuEntry.Params.operationids | default (slice) }}
+
+    <!-- Tag display name comes from the parent section page (always English, since translated content/ files don't exist). -->
+    {{ $tagPage := $dot.Site.GetPage (print "/api/latest/" $tagSlug) }}
+    {{ $tagName := "" }}
+    {{ with $tagPage }}
+      {{ $tagName = .Title }}
     {{ end }}
 
     <!-- Load YAML specs using shared partial -->
@@ -26,16 +42,6 @@
         {{ end }}
     {{ end }}
     {{ $translate_actions := ($.Scratch.Get "translate_actions") }}
-
-    <!-- look up our menu entry by operationid so we get versions/unstable/order -->
-    {{ $menuEntry := dict }}
-    {{ with index .Site.Menus "api" }}
-      {{ range . }}
-        {{ if and .Params.operationids (in .Params.operationids (index $operationids 0)) }}
-          {{ $menuEntry = . }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
 
     {{ $versionCount := (len $versions) }}
     {{ $anchorStr := .Title }}
