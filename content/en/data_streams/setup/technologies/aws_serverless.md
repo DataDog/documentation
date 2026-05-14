@@ -45,6 +45,14 @@ Node.js Lambda functions automatically instrument Amazon SQS with Data Streams M
 ```yaml
 environment:
   DD_DATA_STREAMS_ENABLED: "true"
+  DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+```
+
+As a default, the context is **only** injected into the first message in the batch. If you need to inject the context into all messages in the batch set the following environment variable:
+
+```yaml
+environment:
+  DD_TRACE_AWS_SDK_BATCH_PROPAGATION_ENABLED: "true"
 ```
 
 {{% data_streams/monitoring-sqs-pipelines %}}
@@ -56,6 +64,33 @@ Node.js Lambda functions automatically instrument Amazon SNS with Data Streams M
 ```yaml
 environment:
   DD_DATA_STREAMS_ENABLED: "true"
+  DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+```
+
+As a default, the context is **only** injected into the first message in the batch. If you need to inject the context into all messages in the batch set the following environment variable:
+
+```yaml
+environment:
+  DD_TRACE_AWS_SDK_BATCH_PROPAGATION_ENABLED: "true"
+```
+
+{{% data_streams/monitoring-sns-to-sqs-pipelines %}}
+
+### Amazon Kinesis
+
+Node.js Lambda functions automatically instrument Amazon Kinesis with Data Streams Monitoring. Set the following environment variable on your producer Lambda function:
+
+```yaml
+environment:
+  DD_DATA_STREAMS_ENABLED: "true"
+  DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+```
+
+As a default, the context is **only** injected into the first message in the batch. If you need to inject the context into all messages in the batch set the following environment variable:
+
+```yaml
+environment:
+  DD_TRACE_AWS_SDK_BATCH_PROPAGATION_ENABLED: "true"
 ```
 
 {{% data_streams/monitoring-sns-to-sqs-pipelines %}}
