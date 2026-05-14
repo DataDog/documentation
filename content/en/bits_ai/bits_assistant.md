@@ -8,9 +8,9 @@ further_reading:
 - link: "/incident_response/incident_management/investigate/incident_ai"
   tag: "Documentation"
   text: "Coordinate incidents with Incident AI"
-- link: "/cloud_cost_management/ai/"
+- link: "/cloud_cost_management/finops_skill/"
   tag: "Documentation"
-  text: "AI for Cloud Cost Management"
+  text: "FinOps skill in BitsAssistant"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai
@@ -118,4 +118,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 [6]: /notebooks/
 [7]: /ddsql_editor/
 [8]: /ddsql_reference/data_directory/
-[9]: /cloud_cost_management/ai/
+[9]: /cloud_cost_management/finops_skill/

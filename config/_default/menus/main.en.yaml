@@ -3859,11 +3859,6 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_datadog_costs
       weight: 1
-    - name: AI
-      url: cloud_cost_management/ai
-      parent: cloud_cost
-      identifier: cloud_cost_ai
-      weight: 2
     - name: Setup
       url: cloud_cost_management/setup/
       parent: cloud_cost
@@ -4069,6 +4064,11 @@ menu:
       parent: cloud_cost_cost_changes
       identifier: cloud_cost_real_time_costs
       weight: 903
+    - name: FinOps Skill
+      url: cloud_cost_management/finops_skill
+      parent: cloud_cost
+      identifier: cloud_cost_finops_skill
+      weight: 10
     - name: APM
       url: tracing/
       pre: apm

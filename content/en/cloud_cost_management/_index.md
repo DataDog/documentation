@@ -10,9 +10,9 @@ further_reading:
   - link: "/cloud_cost_management/tags/"
     tag: "Documentation"
     text: "Learn about Tags in Cloud Cost Management"
-  - link: "/cloud_cost_management/ai/"
+  - link: "/cloud_cost_management/finops_skill/"
     tag: "Documentation"
-    text: "Use AI for Cloud Cost Management"
+    text: "Use FinOps skill in BitsAssistant"
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
@@ -151,5 +151,5 @@ Use this page to troubleshoot data delays or confirm that recent tag pipelines a
 [7]: https://www.datadoghq.com/product-preview/data-access-control/
 [8]: /cloud_cost_management/datadog_costs
 [9]: /cloud_cost_management/setup/permissions
-[10]: /cloud_cost_management/ai/
+[10]: /cloud_cost_management/finops_skill//
 [11]: /bits_ai/mcp_server/
