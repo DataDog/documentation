@@ -37,6 +37,7 @@ After you set up [log collection][1], you can customize your collection configur
 - [Automatically aggregate multi-line logs](#automatically-aggregate-multi-line-logs)
 - [Commonly used log processing rules](#commonly-used-log-processing-rules)
 - [Tail directories using wildcards](#tail-directories-using-wildcards)
+  - [Tail nested directories using recursive globs](#tail-nested-directories-using-recursive-globs)
   - [Prioritize tailed files by modification time](#prioritize-tailed-files-by-modification-time)
 - [Log file encodings](#log-file-encodings)
 - [Global processing rules](#global-processing-rules)
@@ -614,6 +615,52 @@ The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.
 **Note**:
 - The Agent requires read and execute permissions on a directory to list all the available files in it.
 - The path and exclude_paths values are case sensitive.
+
+### Tail nested directories using recursive globs
+
+This feature requires Agent version 7.76.0 or above.
+
+To match files across an arbitrary number of nested directories, use the recursive glob (`**`) in the `path` or `exclude_paths` attributes. Recursive globs are opt-in and must be enabled by setting `logs_config.enable_recursive_glob` to `true` in your Agent configuration.
+
+Enable recursive globs in `datadog.yaml`:
+
+```yaml
+logs_enabled: true
+
+logs_config:
+  enable_recursive_glob: true
+```
+
+Then use `**` in a log source's `path`:
+
+```yaml
+logs:
+  - type: file
+    path: /var/log/myapp/**/*.log
+    service: mywebapp
+    source: go
+```
+
+With recursive globs enabled, the example above matches `.log` files at any depth, such as:
+- `/var/log/myapp/app.log`
+- `/var/log/myapp/sub/app.log`
+- `/var/log/myapp/sub/nested/app.log`
+
+You can also use `**` in `exclude_paths` to exclude matching files at any depth:
+
+```yaml
+logs:
+  - type: file
+    path: /var/log/myapp/**/*.log
+    exclude_paths:
+      - /var/log/myapp/**/debug.log
+    service: mywebapp
+    source: go
+```
+
+**Note**:
+- When `logs_config.enable_recursive_glob` is not set or is `false`, paths containing `**` are not expanded and no files are matched. The default value is `false` to preserve existing behavior.
+- The `open_files_limit` and `file_wildcard_selection_mode` settings described below also apply to files matched by recursive globs.
 
 ### Prioritize tailed files by modification time
 
