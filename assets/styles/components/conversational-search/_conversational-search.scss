@@ -1,0 +1,584 @@
+// Design token variables
+$conv-search-purple: #b37bff;
+$conv-search-purple-dark: #9654e8;
+$conv-search-purple-light: #e3d2ff;
+$conv-search-bg: #ffffff;
+$conv-search-surface: #efefef;
+$conv-search-border: #c7c7c7;
+$conv-search-text-muted: #616161;
+
+$conv-primary-400: #b37bff;
+$conv-primary-300: #ccadff;
+$conv-primary-200: #e3d2ff;
+$conv-primary-100: #f0e7ff;
+$conv-neutral-700: #323232;
+$conv-neutral-600: #616161;
+$conv-neutral-500: #969696;
+$conv-neutral-400: #c7c7c7;
+$conv-neutral-200: #efefef;
+
+@import "dialog";
+@import "resources";
+@import "message-actions";
+@import "home-ask-ai";
+
+// Messages area (scrollable)
+.conv-search-messages {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.08);
+        border-radius: 3px;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.15);
+        }
+    }
+}
+
+// Empty state
+.conv-search-empty-state {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 36px 36px 28px;
+
+    @media (max-width: 640px) {
+        padding: 20px 20px 16px;
+    }
+}
+
+.conv-search-empty-text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @media (max-width: 640px) {
+        gap: 8px;
+    }
+}
+
+.conv-search-empty-title {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.32px;
+    line-height: 32px;
+    margin: 0;
+    color: #000;
+
+    @media (max-width: 640px) {
+        font-size: 26px;
+        letter-spacing: -0.26px;
+        line-height: 26px;
+    }
+}
+
+.conv-search-empty-subtitle {
+    font-size: 20px;
+    line-height: 28px;
+    color: #000;
+    margin: 0;
+
+    @media (max-width: 640px) {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+
+.conv-search-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    @media (max-width: 640px) {
+        gap: 4px;
+    }
+}
+
+.conv-search-suggestion {
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 7px 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid $conv-primary-200;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease;
+    text-align: left;
+    font-family: inherit;
+    line-height: 22px;
+    color: $conv-neutral-700;
+    white-space: nowrap;
+
+    &:hover {
+        background: $conv-primary-100;
+        border-color: $conv-primary-300;
+    }
+
+    &:active {
+        background: $conv-primary-300;
+        border-color: $conv-primary-300;
+    }
+
+    @media (max-width: 640px) {
+        font-size: 13px;
+        line-height: 18px;
+        white-space: normal;
+        height: auto;
+        border-radius: 16px;
+        padding: 7px 16px;
+    }
+}
+
+// Chat messages
+.conv-search-message {
+    display: flex;
+    flex-direction: column;
+
+    &-user {
+        align-items: flex-end;
+        padding: 0 36px;
+
+        .conv-search-message-content {
+            background: $conv-neutral-200;
+            border: 1px solid $conv-primary-100;
+            border-radius: 24px;
+            padding: 10px 20px;
+            font-size: 20px;
+            line-height: 28px;
+            color: $conv-neutral-700;
+
+            @media (max-width: 640px) {
+                font-size: 16px;
+                line-height: 24px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            padding: 0 20px;
+        }
+    }
+
+    &-assistant {
+        align-items: stretch;
+        padding: 0 36px;
+
+        .conv-search-message-content {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid $conv-primary-300;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow:
+                0 4px 4px 0 rgba(199, 230, 253, 0.5),
+                0 4px 8px 0 rgba(255, 209, 228, 0.25),
+                0 4px 16px 0 $conv-primary-200;
+        }
+
+        @media (max-width: 640px) {
+            padding: 0 20px;
+
+            .conv-search-message-content {
+                padding: 12px;
+            }
+        }
+    }
+}
+
+// Typography inside messages
+.conv-search-message-content {
+    font-size: 20px;
+    line-height: 28px;
+    color: $conv-neutral-700;
+    word-break: break-word;
+
+    @media (max-width: 640px) {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    p, ul, ol, li, blockquote, td, th, dd, dt {
+        font-size: inherit;
+        line-height: inherit;
+        color: inherit;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    ul, ol {
+        padding-left: 30px;
+
+        @media (max-width: 640px) {
+            padding-left: 24px;
+        }
+    }
+
+    li {
+        margin-bottom: 8px;
+
+        @media (max-width: 640px) {
+            margin-bottom: 4px;
+        }
+    }
+
+    pre {
+        position: relative;
+        background: #fff;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        border-top: 3px solid rgba($conv-search-purple, 0.3);
+        padding: 12px;
+        overflow-x: auto;
+        margin: 12px 0 16px;
+
+        code {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #374151;
+            letter-spacing: -0.01em;
+        }
+
+        .hljs-comment,
+        .hljs-quote { color: #177500; font-style: italic; }
+
+        .hljs-keyword,
+        .hljs-selector-tag,
+        .hljs-built_in { color: #a90d91; }
+
+        .hljs-string,
+        .hljs-title,
+        .hljs-section,
+        .hljs-attribute,
+        .hljs-literal,
+        .hljs-template-tag,
+        .hljs-template-variable,
+        .hljs-type,
+        .hljs-addition { color: #c41a16; }
+
+        .hljs-deletion,
+        .hljs-selector-attr,
+        .hljs-selector-pseudo,
+        .hljs-meta { color: #633820; }
+
+        .hljs-doctag,
+        .hljs-attr { color: #836c28; }
+
+        .hljs-symbol,
+        .hljs-bullet,
+        .hljs-subst,
+        .hljs-name { color: #3f6e75; }
+
+        .hljs-number,
+        .hljs-link { color: #1c01ce; }
+
+        .hljs-class .hljs-title,
+        .hljs-title.class_ { color: #3f6e75; }
+
+        .hljs-emphasis { font-style: italic; }
+        .hljs-strong { font-weight: bold; }
+    }
+}
+
+.conv-search-code-copy {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    color: #555;
+    cursor: pointer;
+    opacity: 1;
+    transition: background 0.15s ease;
+
+    img {
+        opacity: 0.4;
+        transition: opacity 0.15s ease;
+    }
+
+    &:hover {
+        background: #f5f5f5;
+
+        img {
+            opacity: 0.7;
+        }
+    }
+}
+
+// Loading indicator (spinner + status text, shown before first content token)
+.conv-search-loading-state {
+    padding: 0 36px;
+
+    @media (max-width: 640px) {
+        padding: 0 20px;
+    }
+}
+
+.conv-search-loading-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+}
+
+.conv-search-loading-spinner {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    position: relative;
+
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+    }
+
+    &::before {
+        border: 2px solid $conv-primary-200;
+    }
+
+    &::after {
+        border: 2px solid transparent;
+        border-top-color: $conv-primary-400;
+        animation: conv-search-spin 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+}
+
+.conv-search-status-text {
+    color: $conv-neutral-600;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    animation: conv-search-fade-in 0.3s ease;
+}
+
+@keyframes conv-search-fade-in {
+    from { opacity: 0; transform: translateY(2px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.conv-search-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 16px;
+    background: $conv-search-purple;
+    animation: conv-search-blink 1s infinite;
+    vertical-align: text-bottom;
+}
+
+@keyframes conv-search-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+// Footer with input and disclaimer
+.conv-search-footer {
+    flex-shrink: 0;
+    padding: 0 36px 36px;
+    position: relative;
+    z-index: 1;
+
+    background: transparent;
+
+    @media (max-width: 640px) {
+        padding: 0 20px 20px;
+    }
+
+    @media (max-height: 600px) {
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+    }
+}
+
+.conv-search-input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 10px 20px;
+    background: #fff;
+    border: 1px solid $conv-primary-300;
+    border-radius: 24px;
+    box-shadow:
+        0 4px 4px 0 rgba(199, 230, 253, 0.5),
+        0 4px 8px 0 rgba(255, 209, 228, 0.25),
+        0 4px 16px 0 $conv-primary-200;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus-within {
+        border-color: $conv-primary-400;
+    }
+}
+
+.conv-search-input {
+    flex: 1;
+    resize: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 28px;
+    background: transparent;
+    font-family: inherit;
+    min-height: 28px;
+    max-height: 120px;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: 'liga' off, 'clig' off;
+
+    &::placeholder {
+        color: $conv-neutral-500;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    @media (max-width: 640px) {
+        font-size: 16px;
+        line-height: 24px;
+        min-height: 24px;
+    }
+}
+
+.conv-search-send {
+    width: 28px;
+    height: 28px;
+    border-radius: 28px;
+    background: transparent;
+    border: 1px solid $conv-primary-400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $conv-primary-400;
+    flex-shrink: 0;
+    padding: 6px;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease, opacity 0.15s ease;
+
+    &:hover:not(:disabled) {
+        background: rgba($conv-search-purple, 0.08);
+    }
+
+    &:active:not(:disabled) {
+        transform: scale(0.92);
+    }
+
+    &:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+    }
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.conv-search-disclaimer {
+    margin: 0;
+    padding: 8px 0 0;
+    font-size: 14px;
+    color: $conv-neutral-600;
+    line-height: 18px;
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+
+        &:hover {
+            color: $conv-neutral-700;
+        }
+    }
+
+    @media (max-width: 640px) {
+        font-size: 12px;
+        line-height: 14px;
+    }
+}
+
+// Loading spinner for assistant messages
+.conv-search-message-assistant .conv-search-message-content:empty::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $conv-search-border;
+    border-top-color: $conv-search-purple;
+    border-radius: 50%;
+    animation: conv-search-spin 0.8s linear infinite;
+}
+
+@keyframes conv-search-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// Scrollable content area when messages are visible (no empty state)
+.conv-search-messages:not(:has(.conv-search-empty-state)) {
+    padding: 0 0 28px;
+    gap: 16px;
+
+    &::before {
+        content: '';
+        position: sticky;
+        top: 0;
+        display: block;
+        width: 100%;
+        height: 60px;
+        background: linear-gradient(to bottom, white 0%, white 1px, transparent 100%);
+        pointer-events: none;
+        z-index: 2;
+        flex-shrink: 0;
+        margin-top: -1px;
+        margin-bottom: -59px;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    &.has-scrolled::before {
+        opacity: 1;
+    }
+
+    @media (max-width: 640px) {
+        padding: 0 0 16px;
+
+        &::before {
+            height: 40px;
+            margin-bottom: -39px;
+        }
+    }
+}

@@ -1,4 +1,5 @@
 ---
+id: iframe
 title: iframe
 core_product:
   - dashboards

@@ -25,8 +25,15 @@ docker run --rm datadog/synthetics-private-location-worker --help
 {{% /tab %}}
 {{% tab "Windows" %}}
 ```
-synthetics-private-location.exe --help
+synthetics-pl-worker.exe --help
 ```
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+Consulta el ejemplo en el [repositorio Helm de Datadog][1].
+
+[1]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -37,12 +44,12 @@ Estas opciones de configuración para localizaciones privadas se pueden pasar co
 {{< tabs >}}
 {{% tab "Docker" %}}
 ```shell
-docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest --logFormat=json
+docker run -d --restart always -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest --logFormat=json
 ```
 {{% /tab %}}
 {{% tab "Windows" %}}
 ```cmd
-synthetics-private-location.exe --config=<PathToYourConfiguration> --logFormat=json
+synthetics-pl-worker.exe --config=<PathToYourConfiguration> --logFormat=json
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -74,7 +81,7 @@ IP de servidores DNS que se deben utilizar en el orden indicado (por ejemplo, `-
 
 En los tests de navegador, la resolución DNS la realiza directamente el navegador, que normalmente lee los servidores DNS del host. Como alternativa, puedes configurarlo a nivel de contenedor (por ejemplo, utilizando el indicador `--dns` en [Docker][1] o `dnsConfig.nameservers` en [Kubernetes][2]).
 
-### Configuración de proxy
+### Configuración del proxy
 
 Los siguientes parámetros pueden utilizarse para configurar un proxy para conectarse a Datadog:
 
@@ -100,9 +107,14 @@ Habilita la tunelización `HTTP CONNECT` para proxies HTTP. Si esta opción no e
 Los siguientes parámetros se pueden utilizar para configurar un proxy predeterminado para utilizarlo en los tests de monitorización Synthetic:
 
 `proxyTestRequests`
-: **Tipo**: Cadena <br>
-**Por defecto**: `none`<br>
-URL de proxy utilizada por la localización privada para enviar solicitudes de test al endpoint. Los archivos PAC son compatibles con la siguiente sintaxis: `pac+https://...` o `pac+http://...`.
+: **Tipo**: cadena <br>
+**Predeterminado**: `none`<br>
+URL proxy utilizada por la ubicación privada para enviar solicitudes de test al endpoint. Admite archivos HTTP(S), SOCKS y PAC con la siguiente sintaxis: `pac+http://...`, `pac+https://...`, `pac+file://...` o `pac+data:...`.
+
+`proxyTestRequestsBypassList`
+: **Tipo**: matriz de cadenas <br>
+**Predeterminado**: `none`<br>
+Hosts para los que no se utiliza el proxy definido con `proxyTestRequests`, por ejemplo: `--proxyTestRequestsBypassList="example.org" --proxyTestRequestsBypassList="*.com"`.
 
 ### Configuración avanzada
 
@@ -116,6 +128,21 @@ Número máximo de tests ejecutados en paralelo.
 **Por defecto**: `10`<br>
 Número máximo de tests recuperados de Datadog.
 
+`maxAPIDownloadBodySize`
+: **Tipo**: número <br>
+**Predeterminado**: `52428800`<br>
+Tamaño máximo del cuerpo HTTP para una descarga, en bytes. Por defecto es 50 MB (50 * 1024 * 1024).
+
+`maxAPIBodySizeIfProcessed`
+: **Tipo**: número <br>
+**Predeterminado**: `5242880`<br>
+Tamaño máximo del cuerpo HTTP para una aserción, en bytes. Por defecto es 5 MB (5 * 1024 * 1024).
+
+`apiRequestMaxTimeout`
+: **Tipo**: número <br>
+**Predeterminado**: `60000`<br>
+Duración máxima de la ejecución del test de la API, en milisegundos. Por defecto es un minuto (60 * 1000).
+
 **Nota**: Los contenedores de localizaciones privadas envían logs a `stdout` y `stderr` sin guardarlos en el contenedor.
 
 ## Todas las opciones de configuración 
@@ -126,18 +153,18 @@ Número máximo de tests recuperados de Datadog.
 Clave de acceso para la autenticación de la API Datadog.
 
 `--secretAccessKey`
-: **Tipo**: Cadena <br>
-**Por defecto**: `none`<br>
-Clave de acceso secreta para la autenticación de la API Datadog.
+: **Tipo**: cadena <br>
+**Predeterminado**: `none`<br>
+Clave de acceso secreta para la autenticación de la API de Datadog.
 
 `--datadogApiKey`
-: **Tipo**: Cadena <br>
-**Por defecto**: `none`<br>
-Clave de la API Datadog para enviar artefactos de tests de navegador (como capturas de pantalla).
+: **Tipo**: cadena <br>
+**Predeterminado**: `none`<br>
+Clave de API de Datadog para enviar artefactos de tests de navegador (como capturas de pantalla).
 
-`--privateKey`      
-: **Tipo**: Matriz <br>
-**Por defecto**: `none`<br>
+`--privateKey`
+: **Tipo**: matriz <br>
+**Predeterminado**: `none`<br>
 Clave privada utilizada para descifrar configuraciones de test.
 
 `--publicKey`
@@ -165,12 +192,6 @@ Número máximo de tests recuperados de Datadog.
 **Por defecto**: `none`<br>
 URL de proxy utilizada por la localización privada para enviar solicitudes a Datadog (por ejemplo, `--proxyDatadog=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
 
-`--disableFipsCompliance`
-: **Tipo:** Booleano <br>
-**Por defecto**: `false`<br>
-Deshabilita la conformidad FIPS para una localización privada que utiliza `ddog-gov.com`.
-Por defecto, las localizaciones privadas que informan a `ddog-gov.com` se comunican con Datadog utilizando el cifrado conforme a FIPS. La comunicación cumple con el uso de FIPS 140-2 validado [Módulo criptográfico - Certificado #4282][3]. Esta opción es necesaria si estás utilizando una localización Windows privada que informa a `ddog-gov.com`.
-
 `--dumpConfig`
 : **Tipo**: Booleano <br>
 **Por defecto**: `none`<br>
@@ -196,6 +217,11 @@ Ruta de acceso al archivo de configuración JSON.
 **Por defecto**: `none`<br>
 URL de proxy utilizada por la localización privada para enviar solicitudes de test al endpoint. Los archivos PAC son compatibles con la siguiente sintaxis: `pac+https://...` o `pac+http://...`.
 
+`proxyTestRequestsBypassList`
+: **Tipo**: matriz de cadenas <br>
+**Predeterminado**: `none`<br>
+Hosts para los que no se utiliza el proxy definido con `proxyTestRequests`, por ejemplo: `--proxyTestRequestsBypassList="example.org" --proxyTestRequestsBypassList="*.com"`.
+
 `--proxyIgnoreSSLErrors`
 : **Tipo**: Booleano <br>
 **Por defecto**: `false`<br>
@@ -217,11 +243,15 @@ Anula las variables utilizadas en los tests que se ejecutan en la localización 
 Todas las variables importadas de esta forma están ofuscadas.
 
 `--environmentVariableOverride`
-: **Tipo**: Cadena <br>
-Anula las variables utilizadas en los tests que se ejecutan en la localización privada con variables de entorno.
-Requiere que las variables de entorno sean importadas en el entorno contenedorizado.
+: **Tipo**: cadena <br>
+Anula las variables utilizadas en los tests que se ejecutan en la Ubicación privada con variables de entorno. Requiere que las variables de entorno sean importadas en el entorno del contenedor.
 Con Docker, por ejemplo, `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
-Todas las variables importadas de esta manera están ofuscadas. 
+Todas las variables importadas de esta forma están enmascaradas.
+
+`--retryAPIErrors`
+: **Tipo**: booleano <br>
+**Predeterminado**: `false`<br>
+Reintenta cualquier error en los tests de API
 
 `--allowedIPRanges`
 : **Tipo**: Matriz de cadenas <br>
@@ -280,7 +310,7 @@ ERROR | `-v` | `"verbosity": 1`
 Muestra el resultado del comando de ayuda.
 
 ## Variables de entorno
-Las opciones de comandos también pueden definirse utilizando variables de entorno como `DATADOG_API_KEY="...", DATADOG_WORKER_CONCURRENCY="15", DATADOG_DNS_USE_HOST="true"`. Para las opciones que aceptan múltiples argumentos, utiliza la notación de la matriz de cadenas JSON (`DATADOG_TESTS_DNS_SERVER='["8.8.8.8", "1.1.1.1"]'`).
+Las opciones de comandos también pueden establecerse utilizando variables de entorno como `DATADOG_API_KEY="...", DATADOG_WORKER_CONCURRENCY="15", DATADOG_TESTS_DNS_USE_HOST="true"`. Para las opciones que aceptan múltiples argumentos, utiliza la notación de matriz de cadenas JSON (`DATADOG_TESTS_DNS_SERVER='["8.8.8.8", "1.1.1.1"]'`)
 ### Variables de entorno compatibles:
 `DATADOG_ACCESS_KEY`, `DATADOG_API_KEY`, `DATADOG_PRIVATE_KEY`, `DATADOG_PUBLIC_KEY_PEM`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_SITE`, `DATADOG_WORKER_CONCURRENCY`, `DATADOG_WORKER_LOG_FORMAT`, `DATADOG_WORKER_LOG_VERBOSITY`, `DATADOG_WORKER_MAX_NUMBER_MESSAGES_TO_FETCH`, `DATADOG_WORKER_PROXY`, `DATADOG_TESTS_DNS_SERVER`, `DATADOG_TESTS_DNS_USE_HOST`, `DATADOG_TESTS_PROXY`, `DATADOG_TESTS_PROXY_ENABLE_CONNECT_TUNNEL`, `DATADOG_TESTS_PROXY_IGNORE_SSL_ERRORS`, `DATADOG_ALLOWED_IP_RANGES_4`, `DATADOG_ALLOWED_IP_RANGES_6`, `DATADOG_BLOCKED_IP_RANGES_4`, `DATADOG_BLOCKED_IP_RANGES_6`, `DATADOG_ENABLE_DEFAULT_WINDOWS_FIREWALL_RULES`, `DATADOG_ALLOWED_DOMAIN_NAMES`, `DATADOG_BLOCKED_DOMAIN_NAMES`, `DATADOG_WORKER_ENABLE_STATUS_PROBES`, `DATADOG_WORKER_STATUS_PROBES_PORT`
 

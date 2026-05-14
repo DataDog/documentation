@@ -1,4 +1,5 @@
 ---
+id: ingested
 title: ingested
 core_product:
   - log management

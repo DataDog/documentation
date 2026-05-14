@@ -130,6 +130,8 @@ If either requirement is not met, SSI falls back gracefully and your application
 
 For a complete list of supported Java versions, see the [Java SDK compatibility documentation][1].
 
+<div class="alert alert-info">SSI uses the <code>--enable-native-access=ALL-UNNAMED</code> flag on Java 24+ to enable native access for all code on the class path. This is necessary for products such as Profiling, which requires native access. See <a href="https://openjdk.org/jeps/472">JEP 472</a> for more information.</div>
+
 ### Limitations
 
 By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or non-actionable traces. These exclusions are defined in the [Java SDK denylist][2]. If your workload is included, SSI skips loading the Java SDK.
@@ -141,12 +143,8 @@ By default, SSI does not instrument some Java applications and libraries to avoi
 - Consider moving some configurations to a `.properties` file
 - Check application logs for specific initialization errors
 
-**Java 24+ warnings**: When using SSI for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. These warnings can be suppressed with the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables. See [JEP 472][3] and [JEP 498][4] for more information.
-
 [1]: /tracing/trace_collection/compatibility/java/
 [2]: https://github.com/DataDog/dd-trace-java/blob/master/metadata/requirements.json
-[3]: https://openjdk.org/jeps/472
-[4]: https://openjdk.org/jeps/498
 
 {{< /programming-lang >}}
 
@@ -170,7 +168,21 @@ Python 3.7+ is available by default only on:
 
 For other distributions, you may need to install Python 3.7+ separately.
 
+### Known issues
+
+**Preforking WSGI servers**: Python applications running under preforking WSGI servers can experience worker process crashes (SIGSEGV) on startup when SSI is enabled. This affects uWSGI in preforking mode, gunicorn with `--preload`, and Apache `mod_wsgi` in daemon mode with preload.
+
+Recent Python SDK releases include partial fixes. See the [dd-trace-py releases page][2] for the latest status.
+
+To mitigate:
+- Disable SSI for the affected service. See [your platform's SSI setup page][3] for removal steps.
+- Switch to a lazy-loading deployment pattern (for example, gunicorn without `--preload`, or uWSGI with lazy-apps mode).
+- Install the [Python SDK][4] manually (`pip install ddtrace` + `ddtrace-run`) instead of using SSI.
+
 [1]: /tracing/trace_collection/compatibility/python
+[2]: https://github.com/DataDog/dd-trace-py/releases
+[3]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
+[4]: /tracing/trace_collection/dd_libraries/python/
 
 {{< /programming-lang >}}
 
@@ -178,7 +190,8 @@ For other distributions, you may need to install Python 3.7+ separately.
 
 ### Minimum SDK version
 
-**Ruby SDK**: 2.5.0 or higher
+**Ruby SDK**: 2.6.0 or higher
+
 
 ### Supported runtime versions
 
@@ -186,8 +199,9 @@ For a complete list of supported Ruby versions, see the [Ruby SDK compatibility 
 
 ### Operating system requirements
 
-- Requires Linux distributions using glibc 2.27 or newer
+- Requires Linux distributions using glibc 2.17 or newer
 - Not compatible with Alpine Linux or other musl-based distributions
+- Requires Bundler >= 2.4, < 4.0 and RubyGems >= 3.4, < 4.0
 
 ### Known issues
 
@@ -241,8 +255,20 @@ SSI supports both .NET Core and .NET Framework runtimes. For a complete list of 
 - [.NET Core SDK compatibility][1]
 - [.NET Framework SDK compatibility][2]
 
+### Known issues
+
+**Pre-existing .NET profilers**: The .NET CLR Profiling API loads only one profiler per process. If your application already has a .NET profiler (Datadog or another APM vendor), SSI installs successfully but the pre-existing profiler takes precedence at runtime. As a result, no Datadog traces reach the Agent.
+
+To resolve this, remove the conflicting `CORECLR_*` environment variables and any `LD_PRELOAD` entries that reference the pre-existing profiler before enabling SSI:
+
+- **Linux hosts and Docker**: Remove the variables from your application's startup environment, then restart the application.
+- **Kubernetes**: The SSI admission webhook does not overwrite `CORECLR_*` variables injected by another vendor's operator, init container, or pod template. Remove the variables from their source (the operator that injected them, an init container, the pod template, or Helm values), then restart the affected pods.
+
+For details on the .NET CLR one-profiler constraint, see [.NET Core installation][3].
+
 [1]: /tracing/trace_collection/compatibility/dotnet-core
 [2]: /tracing/trace_collection/compatibility/dotnet-framework
+[3]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
 
 {{< /programming-lang >}}
 

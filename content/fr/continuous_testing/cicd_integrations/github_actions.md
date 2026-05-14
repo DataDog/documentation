@@ -1,19 +1,27 @@
 ---
+algolia:
+  tags:
+  - datadog lambda extension
 aliases:
 - /fr/synthetics/cicd_integrations/github_actions
 dependencies:
 - https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md
 title: Tests continus et GitHub Actions pour la CI
 ---
-## Présentation
+## Section Overview
 
-Déclenchez des tests Synthetic depuis vos workflows GitHub grâce à la [commande CI Synthetics Datadog][1].
+![GitHub Release](https://img.shields.io/github/v/release/DataDog/synthetics-ci-github-action)
+
+Déclenchez des tests Synthetic Datadog depuis vos workflows GitHub.
+
+Pour plus d'informations sur la configuration disponible, consultez la [documentation `datadog-ci synthetics run-tests`][1].
 
 ## Configuration
 
 Pour commencer :
 
-1. Ajoutez vos clés d'API et d'application Datadog à votre référentiel GitHub sous forme de secrets. Pour en savoir plus, consultez la section [Clés d'API et clés d'application][2].
+1. Ajoutez vos clés d'API et d'application Datadog en tant que secrets à votre référentiel GitHub.
+   - Pour plus d'informations, consultez la section [Clés d'API et d'application][2].
 2. Utilisez `DataDog/synthetics-ci-github-action` dans votre workflow GitHub.
 
 Vous pouvez utiliser un workflow [simple](#workflows-simples) ou [complexe](#workflows-complexes).
@@ -23,175 +31,169 @@ Vous pouvez utiliser un workflow [simple](#workflows-simples) ou [complexe](#wor
 ### Exemple de workflow utilisant des ID publics
 
 ```yaml
-name: Exécuter des tests Synthetic avec des ID de test publics
+name: Run Synthetic tests using the test public IDs
 jobs:
   e2e_testing:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.17.0
+        uses: DataDog/synthetics-ci-github-action@v3.8.2
         with:
-          api_key: ${{secrets.DD_API_KEY}}
-          app_key: ${{secrets.DD_APP_KEY}}
-          public_ids: 'abc-d3f-ghi, jkl-mn0-pqr'
+          api-key: ${{secrets.DD_API_KEY}}
+          app-key: ${{secrets.DD_APP_KEY}}
+          public-ids: |
+            abc-d3f-ghi
+            jkl-mn0-pqr
 ```
 
 ### Exemple de workflow utilisant un fichier `synthetics.json` existant
 
 ```yaml
-name: Exécuter des tests Synthetic avec un fichier synthetics.json
+name: Run Synthetic tests using an existing synthetics.json file
 jobs:
   e2e_testing:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.17.0
+        uses: DataDog/synthetics-ci-github-action@v3.8.2
         with:
-          api_key: ${{secrets.DD_API_KEY}}
-          app_key: ${{secrets.DD_APP_KEY}}
+          api-key: ${{secrets.DD_API_KEY}}
+          app-key: ${{secrets.DD_APP_KEY}}
 ```
 
-Pour consulter un exemple de test, référez-vous au [fichier `test.synthetics.json`][12].
+Pour un exemple de fichier de test, consultez ce [fichier `test.synthetics.json`][12].
 
-**Remarque** : par défaut, ce workflow exécute tous les tests répertoriés dans les fichiers `{,!(node_modules)/**/}*.synthetics.json` (à savoir, tous les fichiers qui se termine par `.synthetics.json`, sauf ceux contenus dans le dossier `node_modules`). Vous pouvez également déclencher une liste de tests Synthetic en spécifiant un `public_id` ou en utilisant une requête de recherche.
+**Remarque** : par défaut, ce workflow exécute tous les tests répertoriés dans les fichiers `{,!(node_modules)/**/}*.synthetics.json` (chaque fichier se terminant par `.synthetics.json` à l'exception de ceux dans le dossier `node_modules`). Vous pouvez également déclencher une liste de tests Synthetic en spécifiant un `public_id` ou en utilisant une requête de recherche.
 
 ## Workflows complexes
 
 ### Exemple de workflow utilisant une requête `test_search_query`
 
 ```yaml
-name: Exécuter des tests Synthetic en fonction des tags de test
+name: Run Synthetic tests by test tag
 jobs:
   e2e_testing:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.17.0
+        uses: DataDog/synthetics-ci-github-action@v3.8.2
         with:
-          api_key: ${{secrets.DD_API_KEY}}
-          app_key: ${{secrets.DD_APP_KEY}}
-          test_search_query: 'tag:e2e-tests'
+          api-key: ${{secrets.DD_API_KEY}}
+          app-key: ${{secrets.DD_APP_KEY}}
+          test-search-query: 'tag:e2e-tests'
 ```
 
 ### Exemple de workflow utilisant une requête de recherche de test et des remplacements de variables
 
 ```yaml
-name: Exécuter des tests Synthetic avec une requête de recherche
+name: Run Synthetic tests using search query
 jobs:
   e2e_testing:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.17.0
+        uses: DataDog/synthetics-ci-github-action@v3.8.2
         with:
-          api_key: ${{secrets.DD_API_KEY}}
-          app_key: ${{secrets.DD_APP_KEY}}
-          test_search_query: 'tag:staging'
+          api-key: ${{secrets.DD_API_KEY}}
+          app-key: ${{secrets.DD_APP_KEY}}
+          test-search-query: 'tag:staging'
           variables: 'START_URL=https://staging.website.com,PASSWORD=stagingpassword'
 ```
 
-### Exemple de workflow utilisant un remplacement de la configuration globale avec `config_path`
+### Exemple de workflow utilisant un fichier de configuration globale avec `config_path`
 
-Cette action GitHub remplace le chemin vers le fichier `datadog-ci.config.json` global.
+Par défaut, le chemin vers le fichier de configuration globale est `datadog-ci.json`. Vous pouvez remplacer ce chemin avec l'entrée `config_path`.
 
 ```yaml
-name: Exécuter des tests Synthetic avec une configuration
+name: Run Synthetic tests with custom config
 jobs:
   e2e_testing:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.17.0
+        uses: DataDog/synthetics-ci-github-action@v3.8.2
         with:
-          api_key: ${{secrets.DD_API_KEY}}
-          app_key: ${{secrets.DD_APP_KEY}}
-          config_path: './synthetics-config.json'
+          api-key: ${{secrets.DD_API_KEY}}
+          app-key: ${{secrets.DD_APP_KEY}}
+          config-path: './global.config.json'
 ```
-
-Pour consulter un exemple de test, référez-vous au [fichier `global.config.json`][13].
 
 ## Paramètres
 
-| Nom                      | Type    | Prérequis | Description                                                                                                                                                                                                                                  |
-| ------------------------- | ------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `api_key`                 | chaîne  | _obligatoire_  | Votre clé d'API Datadog. Cette clé est créée par votre [organisation Datadog][2]. Elle doit être stockée sous la forme d'un [secret][3]. **Valeur par défaut** : aucune.                                                                                                        |
-| `app_key`                 | chaîne  | _obligatoire_  | Votre clé d'application Datadog. Cette clé est créée par votre {organisation Datadog][2]. Elle doit être stockée sous la forme d'un [secret][3]. **Valeur par défaut** : aucune.                                                                                                |
-| `public_ids`              | chaîne  | _facultatif_  | Une liste d'ID publics séparés par des virgules correspondant aux tests Synthetic à déclencher. Si aucune valeur n'est fournie, l'action recherche les fichiers dont le nom contient `synthetics.json`. **Valeur par défaut :** aucune.                                                             |
-| `test_search_query`       | chaîne  | _facultatif_  | Déclenche les tests correspondants à une [requête de recherche][5]. **Valeur par défaut :** aucune.                                                                                                                                                                       |
-| `subdomain`               | chaîne  | _facultatif_  | Le nom du sous-domaine personnalisé permettant d'accéder à votre application Datadog. Si l'URL utilisée pour accéder à Datadog est `myorg.datadoghq.com`, la valeur du sous-domaine doit alors être définie sur `myorg`. **Valeur par défaut :** `app`.                                     |
-| `files`                   | chaîne  | _facultatif_  | Expression globale permettant de détecter les fichiers de configuration des tests Synthetic. **Valeur par défaut :** `{,!(node_modules)/**/}*.synthetics.json`.                                                                                                                           |
-| `datadog_site`            | chaîne  | _facultatif_  | Le [site Datadog][11] auquel envoyer les données. **Valeur par défaut :** `datadoghq.com`.                                                                                                                                                                        |
-| `config_path`             | chaîne  | _facultatif_  | La [configuration JSON globale][4] utilisée lors du lancement des tests. Consultez l'[exemple de fichier de configuration][13] pour en savoir plus. **Valeur par défaut** : `datadog-ci.json`.                                                                               |
-| `variables`               | chaîne  | _facultatif_  | La liste de variables globales séparées par des virgules à utiliser pour les tests Synthetic. Exemple :  `START_URL=https://example.org,MY_VARIABLE=My title`. **Valeur par défaut** : `[]`.                                                                                   |
-| `junit_report`            | chaîne  | _facultatif_  | Le nom du fichier de rapport JUnit, si vous souhaitez générer un tel fichier. **Valeur par défaut :** aucune.                                                                                                                                                              |
-| `tunnel`                  | booléen | _facultatif_  | Permet d'utiliser le [tunnel de test en continu][9] afin d'exécuter votre lot de tests. **Valeur par défaut :** `false`.                                                                                                                                                     |
-| `polling_timeout`         | nombre  | _facultatif_  | La durée, exprimée en millisecondes, après laquelle l'action arrête de rechercher les résultats des tests. Pour la CI, les tests qui se finissent après cette durée sont considérés comme des échecs. **Valeur par défaut :** 30 minutes.                                            |
-| `fail_on_critical_errors` | booléen | _facultatif_  | Permet d'entraîner l'échec de la tâche CI si aucun test n'a été déclenché, ou si les résultats n'ont pas pu être récupérés à partir de Datadog. **Valeur par défaut :** `false`.                                                                                                                              |
-| `fail_on_missing_tests`   | booléen | _facultatif_  | Permet d'entraîner l'échec de la tâche CI si au moins l'un des tests spécifiés à l'aide d'un ID public (avec `public_ids` ou avec la liste incluse dans un [fichier de test][12]) est manquant dans une série (par exemple, s'il a été supprimé par programmation ou depuis le site Datadog). **Valeur par défaut :** `false`. |
-| `fail_on_timeout`         | booléen | _facultatif_  | Permet d'entraîner l'échec de la tâche CI si la durée d'exécution d'au moins un test dépasse le délai d'expiration par défaut. **Valeur par défaut :** `true`.                                                                                                                                                  |
+Pour plus d'informations sur la configuration disponible, consultez la [documentation `datadog-ci synthetics run-tests`][1].
 
-## Développement
+| Nom                      | Rôle                                                                                                                                                                                                                                                                                                        |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `api-key`                 | (**Requis**) Votre clé d'API Datadog. Cette clé est [créée dans votre organisation Datadog][2] et doit être stockée en tant que [secret][3].                                                                                                                                                                                  |
+| `app-key`                 | (**Requis**) Votre clé d'application Datadog. Cette clé est [créée dans votre organisation Datadog][2] et doit être stockée en tant que [secret][3].                                                                                                                                                                          |
+| `batch-timeout`           | Spécifie la durée du délai d'expiration en millisecondes pour le batch CI. Lorsqu'un batch expire, la tâche CI échoue et aucune nouvelle exécution de test n'est déclenchée, mais les exécutions de test en cours se terminent normalement. <br><sub>**Par défaut :** `1800000` (30 minutes)</sub>                                                                          |
+| `config-path`             | Le chemin vers le [fichier de configuration globale][4] qui configure datadog-ci. <br><sub>**Par défaut :** `datadog-ci.json`</sub>                                                                                                                                                                                           |
+| `datadog-site`            | Votre site Datadog. Les valeurs possibles sont répertoriées [dans ce tableau][11]. <br><sub>**Par défaut :** `datadoghq.com`</sub> <br><br>Définissez-le sur {{< region-param key="dd_site" code="true" >}} (assurez-vous que le SITE correct est sélectionné à droite).                                                    |
+| `fail-on-critical-errors` | Faire échouer la tâche CI si une erreur critique généralement transitoire se produit, telle que des limitations de débit, des échecs d'authentification ou des problèmes d'infrastructure Datadog. <br><sub>**Par défaut :** `false`</sub>                                                                                                                        |
+| `fail-on-missing-tests`   | Faire échouer la tâche CI si la liste des tests à exécuter est vide ou si certains tests explicitement répertoriés sont manquants. <br><sub>**Par défaut :** `false`</sub>                                                                                                                                                                           |
+| `fail-on-timeout`         | Faire échouer la tâche CI si le batch CI échoue en raison d'un délai d'expiration. <br><sub>**Par défaut :** `true`</sub>                                                                                                                                                                                                                             |
+| `files`                   | Motifs glob pour détecter les [fichiers de configuration de test][12] Synthetic, séparés par des sauts de ligne. <br><sub>**Par défaut :** `{,!(node_modules)/**/}*.synthetics.json`</sub>                                                                                                                                                    |
+| `junit-report`            | Le nom de fichier d'un rapport JUnit si vous souhaitez en générer un. <br><sub>**Par défaut :** aucun</sub>                                                                                                                                                                                                                      |
+| `locations`               | Remplacer la liste des emplacements à partir desquels exécuter le test, séparés par des sauts de ligne ou des virgules. Les valeurs possibles sont répertoriées [dans cette réponse d'API][17]. <br><sub>**Par défaut :** aucun</sub>                                                                                                                                 |
+| `public-ids`              | ID publics des tests Synthetic à exécuter, séparés par des sauts de ligne ou des virgules. Si aucune valeur n'est fournie, les tests sont découverts dans les [fichiers de configuration de test][12] Synthetic. <br><sub>**Par défaut :** aucun</sub>                                                                                                                |
+| `selective-rerun`         | Indique s'il faut uniquement réexécuter les tests ayant échoué. Si un test a déjà réussi pour un commit donné, il n'est pas réexécuté dans les batchs CI suivants. Par défaut, le [paramètre par défaut de votre organisation][16] est utilisé. Définissez-le sur `false` pour forcer des exécutions complètes lorsque votre configuration l'active par défaut. <br><sub>**Par défaut :** aucun</sub> |
+| `subdomain`               | Le sous-domaine personnalisé pour accéder à votre organisation Datadog. Si votre URL est `myorg.datadoghq.com`, le sous-domaine personnalisé est `myorg`. <br><sub>**Par défaut :** `app`</sub>                                                                                                                                                 |
+| `test-search-query`       | Utilisez une [requête de recherche][5] pour sélectionner les tests Synthetic à exécuter. Utilisez la [barre de recherche de la page de liste des tests Synthetic][13] pour élaborer votre requête, puis copiez-la et collez-la. <br><sub>**Par défaut :** aucun</sub>                                                                                                                 |
+| `tunnel`                  | Utilisez le [tunnel Continuous Testing][9] pour lancer des tests contre des environnements internes. <br><sub>**Par défaut :** `false`</sub>                                                                                                                                                                                           |
+| `variables`               | Remplacez les variables locales et [globales][14] existantes ou injecter de nouvelles variables dans les tests Synthetic sous forme de paires clé-valeur, séparées par des sauts de ligne ou des virgules. Par exemple : `START_URL=https://example.org,MY_VARIABLE=My title`. <br><sub>**Par défaut :** aucun</sub>                                                                      |
 
-```bash
+## Sorties
 
+| Nom                        | Rôle                                                                          |
+| --------------------------- | ------------------------------------------------------------------------------------ |
+| `batch-url`                 | L'URL du batch CI.                                                             |
+| `critical-errors-count`     | Le nombre d'erreurs critiques qui se sont produites pendant le batch CI.                     |
+| `failed-count`              | Le nombre de résultats ayant échoué pendant le batch CI.                               |
+| `failed-non-blocking-count` | Le nombre de résultats ayant échoué pendant le batch CI sans bloquer la CI.       |
+| `passed-count`              | Le nombre de résultats ayant réussi pendant le batch CI.                               |
+| `previously-passed-count`   | Le nombre de résultats ayant déjà réussi dans des batchs CI précédents sur le même commit. |
+| `tests-not-found-count`     | Le nombre de tests qui n'ont pas pu être trouvés lors du démarrage du batch CI.              |
+| `tests-skipped-count`       | Le nombre de tests qui ont été ignorés lors du démarrage du batch CI.                    |
+| `timed-out-count`           | Le nombre de résultats ayant échoué en raison du délai d'expiration du batch CI.                    |
+| `raw-results`               | Le tableau [`synthetics.Result[]`][18], sous forme de chaîne encodée en JSON.                     |
 
-yarn jest
+## Contributions
 
-# Créer le projet
-yarn build
-
-# Compiler le projet et ses dépendances afin de le publier
-yarn package
-```
-
-### Processus de publication
-
-Pour publier une nouvelle version de `synthetics-ci-github-action`, procédez comme suit :
-
-1. Créez une nouvelle branche pour la mise à niveau de la version.
-2. Mettez à jour la version du package à l'aide de `yarn version [--patch|--minor|--major]`, en adaptant la commande selon la nature des changements. Consultez la section relative à la [gestion sémantique des versions][7] pour déterminer ce que vous devez incrémenter. Une fois la commande `yarn version` exécutée, un nouveau commit `vX.Y.Z` doté d'un nouveau tag est ajouté à l'arborescence Git.
-3. Mettez à jour les exemples de version de `README.md`, puis exécutez `yarn build && yarn package` pour générer et packager le projet.
-
-   Assurez-vous d'utiliser le **commit contenant le tag `vX.Y.Z`** pour soumettre ces changements. Pour fusionner les changements au sein d'un seul et même commit, utilisez la commande `git commit --amend` ou la commande `git rebase -i HEAD~2`.
-
-4. Envoyez la branche ainsi que le tag de version (`git push --tags`) en amont (à GitHub).
-
-   Créez une pull request en indiquant dans la description les modifications apportées. Cette pull request doit au moins être approuvée une fois.
-
-5. Fusionnez la pull request.
-6. Créez une version GitHub depuis la [page Tags][8], en prenant soin de décrire vos changements.
-
-⚠️ Vérifiez que le numéro de version respecte le format attendu : `vX.Y.Z`.
-
-Une fois ce processus terminé, la nouvelle version de l'action GitHub est disponible en tant que workflow.
+Consulter [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-- [Configuration des tests continus et du CI/CD][6]
-- [Conseils à suivre pour effectuer des tests continus avec Datadog][12]
+- [Débuter avec Continuous Testing][15]
+- [Configuration de Continuous Testing et CI/CD][6]
+- [Conseils à suivre pour effectuer des tests continus avec Datadog][10]
 
-[1]: https://github.com/DataDog/datadog-ci
+[1]: https://docs.datadoghq.com/fr/continuous_testing/cicd_integrations/configuration/?tab=npm#run-tests-command
 [2]: https://docs.datadoghq.com/fr/account_management/api-app-keys/
 [3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-[4]: https://docs.datadoghq.com/fr/continuous_testing/cicd_integrations/configuration/?tab=npm#setup-the-client
-[5]: https://docs.datadoghq.com/fr/synthetics/search/#search
+[4]: https://docs.datadoghq.com/fr/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file
+[5]: https://docs.datadoghq.com/fr/synthetics/explore/#search
 [6]: https://docs.datadoghq.com/fr/continuous_testing/cicd_integrations/configuration
 [7]: https://semver.org/#summary
 [8]: https://github.com/DataDog/synthetics-ci-github-action/tags
-[9]: https://docs.datadoghq.com/fr/continuous_testing/testing_tunnel/
+[9]: https://docs.datadoghq.com/fr/continuous_testing/environments/proxy_firewall_vpn#what-is-the-testing-tunnel
 [10]: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
-[11]: https://docs.datadoghq.com/fr/getting_started/site
+[11]: https://docs.datadoghq.com/fr/getting_started/site/#access-the-datadog-site
 [12]: https://docs.datadoghq.com/fr/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
-[13]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json
+[13]: https://app.datadoghq.com/synthetics/tests
+[14]: https://docs.datadoghq.com/fr/synthetics/platform/settings/?tab=specifyvalue#global-variables
+[15]: https://docs.datadoghq.com/fr/getting_started/continuous_testing/
+[16]: https://app.datadoghq.com/synthetics/settings/continuous-testing
+[17]: https://app.datadoghq.com/api/v1/synthetics/locations?only_public=true
+[18]: https://github.com/DataDog/datadog-ci/blob/251299775d28b0535d0e5557fcc494a8124d3b11/src/commands/synthetics/interfaces.ts#L196-L227

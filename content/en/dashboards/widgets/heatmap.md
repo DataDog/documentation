@@ -46,7 +46,7 @@ They allow you to:
 * Automatically change y-axis bounds based on an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) to remove the "outlier" series.
 * Change the y-axis scale from linear to log, pow, or sqrt.
 
-Change the Y-axis scale by expanding the *Y-Axis Controls* button.
+Change the Y-axis scale by expanding the {{< ui >}}Y-Axis Controls{{< /ui >}} button.
 
 The following configuration options are available:
 

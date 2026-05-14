@@ -18,16 +18,16 @@ further_reading:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/java">available on GitHub</a>.</div>
 
-1. **Install the Datadog Java tracer**.
+1. **Install the Datadog Java SDK**.
 
-   1. Add the Datadog Java tracer to your Dockerfile:
+   1. Add the Datadog Java SDK to your Dockerfile:
 
       {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 ADD 'https://dtdg.co/latest-java-tracer' agent.jar
 ENV JAVA_TOOL_OPTIONS="-javaagent:agent.jar"
 {{< /code-block >}}
 
-   2. Add the tracer artifacts.
+   2. Add the SDK artifacts.
       {{< tabs >}}
       {{% tab "Maven" %}}
 {{< code-block lang="xml" disable_copy="false" >}}
@@ -92,6 +92,8 @@ logger.info("Hello World!");
 
 {{% serverless-init-env-vars-in-container language="java" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
@@ -103,6 +105,6 @@ logger.info("Hello World!");
 [1]: https://github.com/DataDog/dd-trace-java/releases
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[4]: /developers/dogstatsd/?tab=java#install-the-dogstatsd-client
+[4]: /extend/dogstatsd/?tab=java#install-the-dogstatsd-client
 [5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=java#code-examples-5
 

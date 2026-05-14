@@ -8,7 +8,7 @@ further_reading:
 - link: /data_security/synthetics/
   tag: Documentación
   text: Seguridad de los datos en la monitorización Synthetic
-- link: /real_user_monitoring/session_replay/browser/privacy_options/
+- link: /session_replay/browser/privacy_options/
   tag: Documentación
   text: Opciones de privacidad de Session Replay
 - link: https://www.datadoghq.com/blog/default-privacy-session-replay/
@@ -36,8 +36,8 @@ Los desarrolladores son responsables de:
 - Aprovechar los valores de configuración y las opciones de privacidad de los datos que ofrece Datadog.
 - Garantizar la integridad del código en sus entornos.
 
-## Marcos de cumplimiento
-RUM puede configurarse para cumplir numerosas normas y marcos normativos como, por ejemplo:
+## Frameworks de cumplimiento
+RUM puede configurarse para cumplir numerosas normas y frameworks normativos como, por ejemplo:
 
 - RGPD
 - HIPAA
@@ -45,7 +45,7 @@ RUM puede configurarse para cumplir numerosas normas y marcos normativos como, p
 - Leyes CCPA/CPRA
 
 ## Restricciones de privacidad
-Por defecto, existen algunas restricciones de privacidad que protegen los datos de los usuarios para ayudar a cumplir los marcos regulatorios y normativos.
+Por defecto, existen algunas restricciones de privacidad que protegen los datos de los usuarios para ayudar a cumplir los frameworks regulatorios y normativos.
 
 ### Uso de cookies del navegador RUM
 El navegador RUM requiere que las cookies de origen estén habilitadas en el navegador del usuario final para recopilar datos. Si así lo requieren las jurisdicciones en las que operas, eres responsable de configurar tus páginas para que cumplan las leyes de dichas jurisdicciones, incluyendo la recepción del consentimiento para recopilar cookies antes de inicializar RUM.
@@ -140,22 +140,22 @@ Consulta [opciones de privacidad específicas de la Repetición de sesión][19].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/privacy/
-[2]: /es/real_user_monitoring/browser/setup/#configuration
+[2]: /es/real_user_monitoring/application_monitoring/browser/setup/#configuration
 [3]: /es/account_management/api-app-keys/#add-an-api-key-or-client-token
 [4]: /es/real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
 [5]: /es/real_user_monitoring/explorer/search/
-[6]: /es/real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
+[6]: /es/real_user_monitoring/application_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
 [7]: /es/real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
 [8]: /es/real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
-[9]: /es/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
-[10]: /es/real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
+[9]: /es/real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
+[10]: /es/real_user_monitoring/application_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
 [11]: /es/real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
 [12]: /es/real_user_monitoring/guide/proxy-rum-data/?tab=npm
-[13]: /es/real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[13]: /es/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [14]: /es/help/
 [15]: /es/account_management/rbac/permissions/#real-user-monitoring
-[16]: /es/real_user_monitoring/session_replay/privacy_options#override-an-html-element
+[16]: /es/session_replay/privacy_options#override-an-html-element
 [17]: /es/security/sensitive_data_scanner/
 [18]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[19]: /es/real_user_monitoring/session_replay/browser/privacy_options
+[19]: /es/session_replay/browser/privacy_options
 [20]: https://www.datadoghq.com/private-beta/product-analytics/

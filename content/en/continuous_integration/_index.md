@@ -39,6 +39,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cache-purge-ci-cd/"
     tag: "Blog"
     text: "Patterns for safe and efficient cache purging in CI/CD pipelines"
+  - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+    tag: "Blog"
+    text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 cascade:
     algolia:
         rank: 70

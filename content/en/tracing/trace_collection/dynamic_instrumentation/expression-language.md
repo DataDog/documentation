@@ -38,9 +38,9 @@ For example, you can create a histogram from the length of a string using `len(d
 
 Logs can be emitted using templates. In log templates and tag values, expressions are delimited from the static parts of the template with brackets, for example: `User name is {user.name}`. Log template expressions can evaluate to any value.
 
-Probe conditions must evaluate to a Boolean, for example: 
+Probe conditions must evaluate to a Boolean, for example:
  - `startsWith(user.name, "abc")`
- - `len(str) > 20` 
+ - `len(str) > 20`
  - `a == b`
 
 ## Contextual variables
@@ -56,18 +56,19 @@ The Expression Language provides contextual variables for different instrumentat
 | `@key`      | Provides access to the current key during dictionary iteration. Used in predicates for dictionary operations. |
 | `@value`    | Provides access to the current value during dictionary iteration. Used in predicates for dictionary operations. |
 
-## String operations
+## General operations
 
 The following examples assume a variable named `myString` with value `Hello, world!`:
 
 | Operation | Description | Example |
 |-----------|-------------|---------|
+| `isDefined(var)` | Checks whether a variable is defined. Returns `true` if the variable exists in the current scope, `false` otherwise. Useful for conditional logic when a variable may not be present. | {{< expression-language-evaluator expression="isDefined(myString)" >}} |
 | `len(value_src)` | Gets the string length. | {{< expression-language-evaluator expression="len(myString)" >}} |
 | `isEmpty(value_src)` | Checks whether the string is empty. Equivalent to `len(value_src) == 0`. | {{< expression-language-evaluator expression="isEmpty(myString)" >}} |
 | `substring(value_src, startIndex, endIndex)` | Gets a substring. | {{< expression-language-evaluator expression="substring(myString, 0, 2)" >}} |
 | `startsWith(value_src, string_literal)` | Checks whether a string starts with the given string literal. | {{< expression-language-evaluator expression="startsWith(myString, \"He\")" >}} |
 | `endsWith(value_src, string_literal)` | Checks whether the string ends with the given string literal. | {{< expression-language-evaluator expression="endsWith(myString, \"rdl!\")" >}} |
-| `contains(value_src, string_literal)` | Checks whether the string contains the string literal. | {{< expression-language-evaluator expression="contains(myString, \"ll\")" >}} |
+| `contains(value_src, string_literal)` | Checks whether the string contains the string literal, or whether a collection contains an element. | {{< expression-language-evaluator expression="contains(myString, \"ll\")" >}} |
 | `matches(value_src, string_literal)` | Checks whether the string matches the regular expression provided as a string literal. | {{< expression-language-evaluator expression="matches(myString, \"^H.*!$\")" >}} |
 
 ## Collection operations

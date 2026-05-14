@@ -11,13 +11,13 @@ Use the EBS component to represent EBS volumes from your Amazon Web Services arc
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Volume type**: The type of volume used.
-- **Storage**: Amount of storage for the volume in gibibytes.
-- **IOPS**: IOPS limit for the volume. Only available for SSD volumes.
-- **Throughput**: Throughput limit for the volume. Only available for `gp3` volumes.
-- **I/O requests per second**: I/O limit for the volume. Only available for older generation magnetic HDD volumes.
-- **Snapshot**: Amount of storage for snapshots in gibibytes.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Volume type{{< /ui >}}: The type of volume used.
+- {{< ui >}}Storage{{< /ui >}}: Amount of storage for the volume in gibibytes.
+- {{< ui >}}IOPS{{< /ui >}}: IOPS limit for the volume. Only available for SSD volumes.
+- {{< ui >}}Throughput{{< /ui >}}: Throughput limit for the volume. Only available for `gp3` volumes.
+- {{< ui >}}I/O requests per second{{< /ui >}}: I/O limit for the volume. Only available for older generation magnetic HDD volumes.
+- {{< ui >}}Snapshot{{< /ui >}}: Amount of storage for snapshots in gibibytes.
 
 
 ## API

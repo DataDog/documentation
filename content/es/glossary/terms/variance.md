@@ -1,8 +1,9 @@
 ---
+id: variance
 core_product:
 - dashboards
 related_terms:
-- desviación estándar
+- standard_deviation
 title: varianza
 ---
 La varianza es una medida de la dispersión entre los números de un conjunto de datos.

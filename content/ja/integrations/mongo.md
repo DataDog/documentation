@@ -51,7 +51,7 @@ draft: false
 git_integration_title: mongo
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 8.3.0
+integration_version: 10.1.0
 is_public: true
 manifest_version: 2.0.0
 name: mongo
@@ -97,15 +97,21 @@ MongoDB を Datadog に接続して、以下のことができます。
 
 また、カスタム `find`/`count`/`aggregate` クエリを使用して、独自のメトリクスを作成することもできます。
 
-**注**: このインテグレーションには MongoDB v3.0 以降が必要です。MongoDB Atlas と Datadog のインテグレーションは、M10+ クラスターでのみ利用可能です。このインテグレーションは、Alibaba ApsaraDB と AWS DocumentDB のインスタンスベースのクラスターもサポートしています。一方、DocumentDB Elastic クラスターは、クラスター (mongos) エンドポイントのみを公開するためサポートされていません。
+[Database Monitoring][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、リアルタイムおよび過去のクエリ スナップショット、スロー クエリに関するメトリクス、データベースの負荷、オペレーション実行計画、コレクションに関するインサイトが提供されます。
+
+**注**: このインテグレーションには MongoDB v3.0 以降が必要です。MongoDB Atlas と Datadog のインテグレーションは、M10+ クラスターでのみ利用可能です。このインテグレーションは、Alibaba ApsaraDB と Amazon DocumentDB のインスタンス ベースのクラスターもサポートしています。一方、DocumentDB Elastic クラスターは、クラスター (mongos) エンドポイントのみを公開するためサポートされていません。
 
 ## セットアップ
 
+<div class="alert alert-info">このページでは、標準的な MongoDB Agent の統合について説明します。MongoDB 用の Database Monitoring 製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog Database Monitoring</a> をご覧ください。</div>
+
 ### インストール
 
-MongoDB チェックは [Datadog Agent][2] パッケージに含まれています。追加でインストールする必要はありません。
+MongoDB チェックは [Datadog Agent][3] パッケージに含まれています。追加のインストールは不要です。
 
 ### アーキテクチャ
+
+**注**: MongoDB 用の Database Monitoring をインストールするには、使用しているホスティング ソリューションを [Database Monitoring ドキュメント][4]で選択し、手順を確認してください。
 
 ほとんどの低レベルのメトリクス (稼働時間、ストレージサイズなど) は、すべての mongod ノードで収集する必要があります。その他の高レベルのメトリクス (コレクションやインデックスの統計など) は、一度だけ収集する必要があります。これらの理由により、Agent の構成方法は mongo クラスターのデプロイ方法によって異なります。
 
@@ -636,15 +642,15 @@ Agent コンテナで必要な環境変数
 
 ### 検証
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションで `mongo` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `mongo` を探します。
 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "mongodb" >}}
+{{< get-metrics-from-git "mongo" >}}
 
 
-メトリクスの詳細については、[MongoDB 3.0 マニュアル][4]を参照してください。
+メトリクスの詳細については、[MongoDB 3.0 マニュアル][6]を参照してください。
 
 #### 追加のメトリクス
 
@@ -675,25 +681,27 @@ Agent コンテナで必要な環境変数
 このチェックは、Mongo ノードでレプリケーション状態が変化するたびにイベントを送信します。
 
 ### サービスチェック
-{{< get-service-checks-from-git "mongodb" >}}
+{{< get-service-checks-from-git "mongo" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [MongoDB パフォーマンスメトリクスの監視 (WiredTiger)][6]
-- [MongoDB パフォーマンスメトリクスの監視 (MMAP)][7]
+- [MongoDB パフォーマンス メトリクスの監視 (WiredTiger)][8]
+- [MongoDB パフォーマンス メトリクスの監視 (MMAP)][9]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mongo/images/mongo_dashboard.png
-[2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.mongodb.org/manual/reference/command/dbStats
-[5]: https://docs.datadoghq.com/ja/help/
-[6]: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-wiredtiger
-[7]: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-mmap
+[2]: https://docs.datadoghq.com/ja/database_monitoring/
+[3]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: https://docs.datadoghq.com/ja/database_monitoring/#mongodb
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.mongodb.org/manual/reference/command/dbStats
+[7]: https://docs.datadoghq.com/ja/help/
+[8]: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-wiredtiger
+[9]: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-mmap

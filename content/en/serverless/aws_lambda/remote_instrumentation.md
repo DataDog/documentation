@@ -1,8 +1,12 @@
 ---
 title: Remote instrumentation for AWS Lambda
+further_reading:
+- link: "https://www.datadoghq.com/blog/faster-visibility-into-aws-lambda-functions"
+  tag: "Blog"
+  text: "Bring faster visibility into AWS Lambda functions with remote instrumentation"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">This feature is not supported for your selected Datadog site. ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
@@ -112,3 +116,7 @@ If you see issues related to IAM roles, ensure that you have permission to creat
 [4]: /agent/remote_config/?tab=configurationyamlfile#setup
 [5]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=datadog-remote-instrument
 [6]: https://github.com/DataDog/serverless-remote-instrumentation/releases
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

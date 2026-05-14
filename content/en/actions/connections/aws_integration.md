@@ -38,7 +38,7 @@ To successfully execute actions with this integration:
 
 - The **AWS Integration IAM Role** configured for Role Delegation must have the permissions required for the operations desired (such as  `ecs:ListClusters`).
 - The selected action must be read-only. Write or mutating actions (such as `Put*`, `Delete*`, and `Update*`) are not supported and fail when running.
-- The user, user's team, or user's org **must** have been given explicit 'Executor' permission on the AWS Integration in Datadog (more details [below][3]).
+- The user, user's team, or user's org **must** have been given explicit 'Executor' permission on the AWS Integration in Datadog (more details [below](#configuration)).
 
 <div class="alert alert-info">
 Executing actions using the Datadog AWS Integration is only available for users that have set up the Datadog AWS Integration through <a href="/integrations/guide/aws-manual-setup/?tab=roledelegation" target="_blank">role delegation</a>. Additionally, while operations under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> are allowed, the IAM Role associated with the Datadog AWS Integration may not have the permissions needed. Make sure that the role has the correct permissions if you encounter issues.
@@ -58,26 +58,25 @@ Before getting started, make sure these conditions have been met:
 
 ### 1. Configure AWS Integration permissions
   
-To configure the **Executor** permission for the Datadog AWS Integration:
+To configure the {{< ui >}}Executor{{< /ui >}} permission for the Datadog AWS Integration:
 1. In Datadog, navigate to [**Integrations**][4].
-1. Click the **Amazon Web Services** integration.
+1. Click the {{< ui >}}Amazon Web Services{{< /ui >}} integration.
 1. In the left pane, select the AWS Account you want to run actions with. 
-1. Click **Set Permissions**.
-    - If you see a **Request Edit Access** button instead of a **Set Permissions** button, ask your Datadog organization's admin to add you as an Editor for the AWS account. 
-1. Select a user, term, or organization and click **Add**. 
-1. Under **People with access**, select the **Executor** permission.
-1. Click **Save**.
+1. Click {{< ui >}}Set Permissions{{< /ui >}}.
+    - If you see a {{< ui >}}Request Edit Access{{< /ui >}} button instead of a {{< ui >}}Set Permissions{{< /ui >}} button, ask your Datadog organization's admin to add you as an Editor for the AWS account. 
+1. Select a user, team, or organization and click {{< ui >}}Add{{< /ui >}}. 
+1. Under {{< ui >}}People with access{{< /ui >}}, select the {{< ui >}}Executor{{< /ui >}} permission.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### 2. Add the integration to an action
 
 1. In [Workflow Automation][5], click the workflow you want to edit.
-1. Add an AWS action, such as **List ECS Clusters**.
-1. In the configuration pane, click the **Connection** dropdown and scroll to **Existing AWS Integrations**. 
+1. Add an AWS action, such as {{< ui >}}List ECS Clusters{{< /ui >}}.
+1. In the configuration pane, click the {{< ui >}}Connection{{< /ui >}} dropdown and scroll to {{< ui >}}Existing AWS Integrations{{< /ui >}}. 
 1. Select the AWS Account you configured in step one.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html 
-[2]: /actions/connections/?tab=workflowautomation#work-with-connections 
-[3]: /add-aws-int-docs/actions/connections/aws_integration/#configuration 
+[2]: /actions/connections/?tab=workflowautomation#work-with-connections
 [4]: https://app.datadoghq.com/integrations 
 [5]: https://app.datadoghq.com/workflow

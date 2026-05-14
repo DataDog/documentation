@@ -290,7 +290,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "name": "<AZURE_ENDPOINT_ADDRESS>"
     }
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 See the [SQL Server integration spec][3] for additional information on setting `deployment_type` and `name` fields.

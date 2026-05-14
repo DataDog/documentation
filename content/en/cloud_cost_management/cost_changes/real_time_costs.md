@@ -35,7 +35,7 @@ Real-time costs are currently available in Preview for:
 
 ## How to query real-time costs
 
-Real-time costs can be found under the standard "Metrics" source in Metrics Explorer and dashboards, and should be queried using `sum:aws.cost.net.amortized.realtime.estimated{*}.as_count().rollup(sum, 300)`:
+Real-time costs can be found under the standard {{< ui >}}Metrics{{< /ui >}} source in Metrics Explorer and dashboards, and should be queried using `sum:aws.cost.net.amortized.realtime.estimated{*}.as_count().rollup(sum, 300)`:
 - the `sum` or `sum by` aggregation
 - as `count` (learn more about [rate vs count metrics][1])
 - rollup `sum`, minimum of 5 minutes (or 300 seconds in the query above, since real-time costs are updated every 5 minutes)

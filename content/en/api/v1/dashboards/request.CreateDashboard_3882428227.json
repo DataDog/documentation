@@ -35,8 +35,7 @@
               "name": "query1",
               "indexes": [
                 "*"
-              ],
-              "group_by": []
+              ]
             },
             "request_type": "histogram"
           }

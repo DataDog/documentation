@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="error_tracking/error-tracking-overview-2.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 The Error Tracking Explorer allows you to view, filter, and investigate issues. An issue is a group of similar errors related to the same bug. Datadog creates issues by computing a fingerprint for each error using some of its attributes such as the error type, the error message, or the stack trace. Errors with the same fingerprint are grouped together in the same issue.
 
@@ -25,8 +25,8 @@ Each item listed in the Error Tracking Explorer is an issue that contains high-l
     -   Number of occurrences in the selected time period
 
 Issue are also tagged as:
-- `New` if the issue was first seen less than two days ago and is in state **FOR REVIEW** (see [Issue States][5])
-- `Regression` if the issue was **RESOLVED** and occurred again in a newer version (see [Regression Detection][6])
+- `New` if the issue was first seen less than two days ago and is in state {{< ui >}}FOR REVIEW{{< /ui >}} (see [Issue States][5])
+- `Regression` if the issue was {{< ui >}}RESOLVED{{< /ui >}} and occurred again in a newer version (see [Regression Detection][6])
 - `Crash` if the application crashed
 - Having a [Suspected Cause][3]
 
@@ -39,14 +39,14 @@ The time range appears on the top right of the Explorer as a timeline. This feat
 ### Sorting
 
 Order issues in the list using one of these options:
--   **Relevance** combines multiple issue features to prioritize code related, recent, or spiking issues. Error Tracking analyzes how old issues are, occurrences over the last day, notable increase over the past hour, or if they triggered an application crash.
--   **Count** sorts issues based on the total count of occurrences over the selected time range.
--   **Newest** orders issues by when they were first seen.
--   **Impacted Sessions** sorts issues by the number of impacted [RUM sessions][4].
+-   {{< ui >}}Relevance{{< /ui >}} combines multiple issue features to prioritize code related, recent, or spiking issues. Error Tracking analyzes how old issues are, occurrences over the last day, notable increase over the past hour, or if they triggered an application crash.
+-   {{< ui >}}Count{{< /ui >}} sorts issues based on the total count of occurrences over the selected time range.
+-   {{< ui >}}Newest{{< /ui >}} orders issues by when they were first seen.
+-   {{< ui >}}Impacted Sessions{{< /ui >}} sorts issues by the number of impacted [RUM sessions][4].
 
 ### Facets
 
-{{< img src="/error_tracking/facets-panel.png" alt="Error Tracking Facets" style="width:100%;" >}}
+{{< img src="/error_tracking/facets-panel-2.png" alt="Error Tracking Facets" style="width:100%;" >}}
 
 Error Tracking automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
 
@@ -66,11 +66,11 @@ Click the Edit icon to see the list of available facets that you can show or hid
 
 In addition to error events, Error Tracking offers issue level filters to refine the list of displayed issues.
 
-{{< img src="error_tracking/issue-level-filters.png" alt="Issue level filters in Error Tracking" style="width:100%;" >}}
+{{< img src="error_tracking/issue-level-filters-2.png" alt="Issue level filters in Error Tracking" style="width:100%;" >}}
 
 #### Sources
 
-Error Tracking consolidates errors from multiple Datadog products (Rum, Logs, APM) into a unified view, allowing you to watch and troubleshoot errors across your entire stack. You can choose to display **All**, **Browser**, **Mobile**, or **Backend** issues in the explorer.
+Error Tracking consolidates errors from multiple Datadog products (Rum, Logs, APM) into a unified view, allowing you to watch and troubleshoot errors across your entire stack. You can choose to display {{< ui >}}All{{< /ui >}}, {{< ui >}}Browser{{< /ui >}}, {{< ui >}}Mobile{{< /ui >}}, or {{< ui >}}Backend{{< /ui >}} issues in the explorer.
 
 For more granular filtering, you can narrow down issues by specific log sources or by SDK and scope to a programming language.
 
@@ -94,11 +94,11 @@ Track and assign issues to yourself or the most knowledgeable team members, and 
 
 Click on any issue to open the issue panel and see more information about it.
 
-{{< img src="real_user_monitoring/error_tracking/issue_summary.png" alt="Upper part of the Error Tracking issue panel offering a summarized view of the issue" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="Upper part of the Error Tracking issue panel offering a summarized view of the issue" style="width:80%;" >}}
 
 The high-level details you need when troubleshooting an issue can be found in the upper part of the panel. From here, you can understand its lifecycle: first and last occurrence dates, total count, as well as the count over time for the given issue.
 
-{{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="Lower part of the Error Tracking issue panel offering error samples" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="Lower part of the Error Tracking issue panel offering error samples" style="width:80%;" >}}
 
 The information shown in the issue panel varies depending on the error source. For example, an issue created from APM errors shows the error span tags, such as the resource or operation name, with direct access to the related trace or to logs that are linked to it.
 

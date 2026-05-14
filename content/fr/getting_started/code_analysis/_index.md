@@ -93,8 +93,6 @@ Il faut [exécuter une analyse de votre référentiel](#executer-code-analysis-d
 
 Pour téléverser les résultats vers Datadog, assurez-vous de disposer d'une [clé d'API Datadog et d'une clé d'application][110].
 
-Indiquez un nom pour le service ou la bibliothèque dans le champ `dd_service`, comme `shopist`.
-
 ### Action GitHub
 
 Il est possible de configurer une GitHub Action pour exécuter des analyses Static Analysis et Software Composition Analysis dans le cadre de vos workflows CI.
@@ -112,15 +110,13 @@ jobs:
     name: Datadog Static Analyzer
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
     - name: Check code meets quality and security standards
       id: datadog-static-analysis
-      uses: DataDog/datadog-static-analyzer-github-action@v1
+      uses: DataDog/datadog-static-analyzer-github-action@v3
       with:
         dd_api_key: ${{ secrets.DD_API_KEY }}
         dd_app_key: ${{ secrets.DD_APP_KEY }}
-        dd_service: shopist
-        dd_env: ci
         dd_site: datadoghq.com
         cpu_count: 2
 ```
@@ -138,15 +134,13 @@ jobs:
     name: Datadog SBOM Generation and Upload
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
     - name: Check imported libraries are secure and compliant
       id: datadog-software-composition-analysis
       uses: DataDog/datadog-sca-github-action@main
       with:
         dd_api_key: ${{ secrets.DD_API_KEY }}
         dd_app_key: ${{ secrets.DD_APP_KEY }}
-        dd_service: shopist
-        dd_env: ci
         dd_site: datadoghq.com
 ```
 
@@ -179,7 +173,7 @@ mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
 /usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif
 
 # Upload results
-datadog-ci sarif upload /tmp/report.sarif --service "shopist" --env "ci"
+datadog-ci sarif upload /tmp/report.sarif
 ```
 
 #### Software Composition Analysis
@@ -209,7 +203,7 @@ chmod 755 /osv-scanner/osv-scanner
 /osv-scanner/osv-scanner --skip-git -r --experimental-only-packages --format=cyclonedx-1-5 --paths-relative-to-scan-dir  --output=/tmp/sbom.json /path/to/repository
 
 # Upload results
-datadog-ci sbom upload --service "shopist" --env "ci" /tmp/sbom.json
+datadog-ci sbom upload /tmp/sbom.json
 ```
 
 Une fois que vous avez configuré ces scripts, exécutez une analyse de votre référentiel sur la branche par défaut. Les résultats commenceront ensuite à apparaître sur la page **Repositories**.

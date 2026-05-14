@@ -5,14 +5,14 @@ description: Crear y gestionar incidencias
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Incident%20Management
   tag: Notas de versiones
-  text: Consulta las últimas versiones de Gestión de incidencias. (Es necesario iniciar
+  text: Consulta las últimas versiones de Incident Management. (Es necesario iniciar
     sesión en la aplicación).
 - link: dashboards/querying/#incident-management-analytics
   tag: Documentación
-  text: Análisis de la gestión de incidencias
+  text: Análisis de Incident Management
 - link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
-  text: Participa en una sesión interactiva para mejorar su gestión de incidencias
+  text: Participa en una sesión interactiva para mejorar tu Incident Management
 - link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
   tag: Blog
   text: Programación en pareja más eficaz con Datadog CoScreen
@@ -42,7 +42,7 @@ title: Incident Management
   Explora e inscríbete en las sesiones de Foundation Enablement. Descubre cómo Datadog Incident Management permite a equipos y SRE de DevOps gestionar más eficazmente sus flujos de trabajo de respuesta ante incidentes de principio a fin, ahorrando tiempo y reduciendo la frustración cuando más importa.
 {{< /learning-center-callout >}}
 
-Incident Management de Datadog ayuda a los miembros de tu equipo a identificar, mitigar y analizar las interrupciones y amenazas a los servicios de tu organización. Con Incident Management, puedes diseñar un proceso de respuesta mejorado mediante automatización que ayude a tu equipo a reunirse en torno de un marco y un kit de herramientas compartidos. También puedes utilizar análisis de incident (incidente) para evaluar la eficacia de tu proceso de respuesta de incident (incidente). 
+Incident Management de Datadog ayuda a los miembros de tu equipo a identificar, mitigar y analizar las interrupciones y amenazas a los servicios de tu organización. Con Incident Management, puedes diseñar un proceso de respuesta mejorado mediante automatización que ayude a tu equipo a reunirse en torno de un framework y un kit de herramientas compartidos. También puedes utilizar análisis de incident (incidente) para evaluar la eficacia de tu proceso de respuesta de incident (incidente). 
 
 Los incidents (incidentes) conviven en Datadog con tus métricas, traces (trazas) y logs. Tus equipos pueden declarar incidentes desde alertas de monitor (noun), señales de seguridad, eventos, casos y más. También puedes configurar monitores para que [declaren incidentes automáticamente][30].
 
@@ -109,6 +109,10 @@ Incident Management se integra con aplicaciones de terceros, como:
 - [Webhooks][16] para enviar notificaciones de incidencias mediante webhooks (por ejemplo, [envío de SMS a Twilio][17]).
 - [Zoom][24] para lanzar videollamadas para incidentes.
 
+## Facturación
+
+Incident Management es una SKU basada en asientos. Para obtener más información sobre cómo se factura Incident Management y cómo gestionar asientos en Datadog, consulta nuestra [página de precios][31] y la [documentación de facturación de incident Response][32].
+
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -143,3 +147,5 @@ Incident Management se integra con aplicaciones de terceros, como:
 [28]: /es/notebooks/
 [29]: /es/actions/workflows/
 [30]: /es/service_management/incident_management/declare#from-a-monitor
+[31]: https://www.datadoghq.com/pricing/?product=incident-response#products
+[32]: /es/account_management/billing/incident_response/

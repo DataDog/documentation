@@ -42,7 +42,7 @@ An [S3 bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|The bucket policy allows the `s3:GetObject` permission unconditionally, with resource and principal set to `"*"`. |This defines a public policy on the bucket, meaning that unauthenticated access is allowed. `"*"` is a wildcard, meaning access is given to any resource and principal. |
+|The bucket policy allows risky S3 actions (read, write, delete, or management permissions) unconditionally, with resource and principal set to `"*"`. |This defines a public policy on the bucket, meaning that unauthenticated access is allowed. `"*"` is a wildcard, meaning access is given to any resource and principal. Wildcard actions such as `s3:*` or `s3:Put*` are also matched. |
 | None of the bucket's `public_access_block_configuration` and the AWS account's public access block (`aws_s3_account_public_access_block`) have `restrict_public_buckets` set to `true`. | None of the buckets or accounts explicitly block public access, meaning that the public bucket policy takes effect. |
 
 ***OR***
@@ -315,6 +315,51 @@ A Storage Bucket (`gcp_storage_bucket`) is considered publicly accessible if:
 
 Explore more information about making storage buckets public [here][57].
 
+### Google Cloud Kubernetes Engine clusters
+
+A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publicly accessible if it meets **all** of the following **base criteria** AND **at least one** of the additional conditions listed below:
+
+**Base criteria (all required):**
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+| Private endpoint is disabled | The cluster's [private endpoint][62] is not enabled (`enable_private_endpoint` is false), meaning the control plane has a public IP address. |
+| Public endpoint is enabled | The cluster has a public endpoint configured (`public_endpoint` is true). |
+
+**AND at least one of the following conditions:**
+
+* _Authorized networks is disabled:_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+| [Authorized networks][63] is not enabled. | There are no IP allowlist restrictions on who can access the cluster's control plane, allowing access from any IP address. |
+
+***OR***
+
+* _Unrestricted CIDR block allowed:_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+| The authorized networks configuration includes the `0.0.0.0/0` CIDR block. | This CIDR block allows access from any IP address on the internet. |
+
+***OR***
+
+* _Google Cloud external IP addresses added to authorized networks:_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+| Google Cloud external IP addresses are added to authorized networks (`gcpPublicCidrsAccessEnabled` is set to `true`). | This allows access from any external IP address assigned to Google Cloud VMs, meaning anyone can create a VM in Google Cloud and access the cluster's control plane. |
+
+***OR***
+
+* _Broad Google Cloud IP range allowed:_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+| The authorized networks configuration includes the `34.0.0.0/7` CIDR block. | This CIDR range is sometimes used to allow access from Google Cloud IP ranges and is considered publicly accessible. |
+
+**Note**: A cluster with authorized networks enabled (`{"enabled":true}`) but with an empty CIDR blocks list (`{"enabled":true, "cidr_blocks":[]}`) is **not** considered publicly accessible, as it blocks all external access to the control plane.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -380,3 +425,6 @@ Explore more information about making storage buckets public [here][57].
 [59]: https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html
 [60]: https://learn.microsoft.com/en-us/azure/aks/intro-kubernetes
 [61]: https://learn.microsoft.com/en-us/azure/aks/best-practices
+[62]: https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#private_cp
+[63]: https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#overview
+

@@ -4,21 +4,45 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
 {{< product-availability >}}
+
+## Overview
 
 Use Observability Pipelines' syslog destinations to send logs to rsyslog or syslog-ng.
 
 ## Setup
 
-Set up the rsyslog or syslog-ng destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
-
-### Set up the destination
-
 <div class="alert alert-danger">The rsyslog and syslog-ng destinations support the <a href="https://datatracker.ietf.org/doc/html/rfc5424">RFC5424</a> format. </div>
 
-The rsyslog and syslog-ng destinations match these log fields to the following Syslog fields:
+Configure the rsyslog or syslog-ng destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The steps in this section are configured in the UI.
+
+After you select the rsyslog or syslog-ng destination in the pipeline UI:
+
+- Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
+	- **Note**: Only enter the identifiers for the syslog endpoint URL and, if applicable, the key pass. Do **not** enter the actual values.
+
+See [Matching log fields to syslog fields](#matching-log-fields-to-syslog-fields) for information on how fields are matched.
+
+### Optional settings
+
+#### Enable TLS
+
+{{% observability_pipelines/tls_settings %}}
+
+#### Wait time for TCP keepalive probes
+
+Enter the number of seconds to wait before sending TCP keepalive probes on an idle connection.
+
+#### Buffering
+
+{{% observability_pipelines/destination_buffer %}}
+
+## Matching log fields to syslog fields
+
+The rsyslog and syslog-ng destinations match these log fields to the following syslog fields:
 
 | Log Event       | SYSLOG FIELD | Default                    |
 |-----------------|--------------|----------------------------|
@@ -31,22 +55,27 @@ The rsyslog and syslog-ng destinations match these log fields to the following S
 | log["host"]     | HOSTNAME     | `NIL`                      |
 | log["timestamp"]| TIMESTAMP    | Current UTC time.          |
 
-The following destination settings are optional:
+## Secret defaults
 
-1. Toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required:
-    - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-    - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
-    - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
-1. Enter the number of seconds to wait before sending TCP keepalive probes on an idle connection.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
+{{% observability_pipelines/set_secrets_intro %}}
 
-### Set the environment variables
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- rsyslog or syslog-ng endpoint URL identifier:
+	- References the address and port to which Observability Pipelines Worker sends logs. For example, `127.0.0.1:9997`.
+	- The default identifier is `DESTINATION_SYSLOG_ENDPOINT_URL`.
+- rsyslog or syslog-ng TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_SYSLOG_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/syslog %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### How the destination works
 
@@ -55,3 +84,6 @@ The following destination settings are optional:
 The rsyslog and syslog-ng destinations do not batch events.
 
 [1]: https://app.datadoghq.com/observability-pipelines
+[2]: /observability_pipelines/configuration/set_up_pipelines/
+[3]: /api/latest/observability-pipelines/
+[4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

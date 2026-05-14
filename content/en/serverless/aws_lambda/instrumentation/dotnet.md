@@ -19,8 +19,6 @@ further_reading:
 
 ## Setup
 
-If your application is deployed as a container image, use the _Container Image_ method.
-
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your .NET AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
@@ -313,9 +311,11 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+{{% svl-tracing-env %}}
+
 ## Add custom spans
 
-When using the [Datadog Lambda tracing layer for .NET][9], ensure that a second version of the .NET tracer is not also packaged with your application code. Add the `ExcludeAssets` instruction to ensure this extra tracer is excluded.
+When using the [Datadog Lambda tracing layer for .NET][9], ensure that a second version of the .NET SDK is not also packaged with your application code. Add the `ExcludeAssets` instruction to ensure this extra tracer is excluded.
 
 ```xml
 <PackageReference Include="Datadog.Trace" Version="3.26.3"/>

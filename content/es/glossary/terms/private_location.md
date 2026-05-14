@@ -1,4 +1,5 @@
 ---
+id: private_location
 core_product:
 - monitorización Synthetic
 title: localización privada

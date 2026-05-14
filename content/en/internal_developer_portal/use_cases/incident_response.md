@@ -9,7 +9,7 @@ aliases:
   - /service_catalog/use_cases/upstream_downstream_dependencies
   - /software_catalog/use_cases/incident_response
 further_reading:
-  - link: "/service_management/incident_management/"
+  - link: "/incident_response/incident_management/"
     tag: "Documentation"
     text: "Incident Management"
   - link: "/integrations/pagerduty/"
@@ -43,5 +43,5 @@ To view incident statuses for upstream and downstream dependencies, click a serv
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/
+[1]: /incident_response/incident_management/
 [2]: /integrations/pagerduty/

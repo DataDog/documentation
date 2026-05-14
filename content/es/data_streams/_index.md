@@ -37,13 +37,6 @@ further_reading:
 title: Data Streams Monitoring
 ---
 
-
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">
-    Data Streams Monitoring no está disponible para el sitio {{< region-param key="dd_site_name" >}}.
-</div>
-{{% /site-region %}}
-
 {{< img src="data_streams/map_view2.png" alt="Página de Data Streams Monitoring en Datadog, que muestra la vista Mapas. Se resalta un servicio llamado 'autenticador'. Visualización de un mapa de topología de flujos de datos de izquierda a derecha, donde el servicio autenticador se muestra en el centro con sus servicios y colas ascendentes y descendentes." style="width:100%;" >}}
 
 Data Streams Monitoring proporciona un método estandarizado para que los equipos comprendan y gestionen los pipelines a escala y así facilita:

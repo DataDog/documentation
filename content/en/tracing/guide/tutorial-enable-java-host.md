@@ -4,10 +4,10 @@ title: Tutorial - Enabling Tracing for a Java Application on the Same Host as th
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/java/
   tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
@@ -149,7 +149,7 @@ Run more API calls to see the application in action. When you're done, type Ctrl
 
 ## Install Datadog tracing
 
-Next, download the Java tracing library (sometimes called the Java Agent). From your `apm-tutorial-java-host` directory, run:
+Next, download the Java SDK (sometimes called the Java Agent). From your `apm-tutorial-java-host` directory, run:
 
 {{< code-block lang="sh" >}}
 curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
@@ -240,7 +240,7 @@ A `GET /notes` trace looks something like this:
 
 ### Tracing configuration
 
-The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
+The Java SDK uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` tells the JVM where to find the Java SDK so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
 In addition to the `javaagent` flag, which enables the Java Agent, the launch commands specify three [Unified Service Tagging][10] settings to uniquely identify your application within Datadog. Always specify `env`, `service`, and `version` tags for every monitored application.
 
@@ -312,46 +312,32 @@ The following steps walk you through adding annotations to the code to trace som
 
 5. Update your build script configuration, and build the application:
 {{< tabs >}}
-
 {{% tab "Maven" %}}
+   1. Open `notes/pom.xml` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
+   1. Run:
+      ```sh
+      ./mvnw clean package
 
-a. Open `notes/pom.xml` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
-
-b. Run:
-
-   ```sh
-   ./mvnw clean package
-
-   java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 target/notes-0.0.1-SNAPSHOT.jar
-   ```
-
-   Or use the script:
-
-   ```sh
-   sh ./scripts/mvn_instrumented_run.sh
-   ```
-
+      java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 target/notes-0.0.1-SNAPSHOT.jar
+      ```
+      Or use the script:
+      ```sh
+      sh ./scripts/mvn_instrumented_run.sh
+      ```
 {{% /tab %}}
-
 {{% tab "Gradle" %}}
+  1. Open `notes/build.gradle` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
+  1. Run:
+      ```sh
+      ./gradlew clean bootJar
 
-a. Open `notes/build.gradle` and uncomment the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
-
-b. Run:
-   ```sh
-   ./gradlew clean bootJar
-
-   java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 build/libs/notes-0.0.1-SNAPSHOT.jar
-   ```
-
-   Or use the script:
-
-   ```sh
-   sh ./scripts/gradle_instrumented_run.sh
-   ```
-
+      java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes -Ddd.env=dev -jar -Ddd.version=0.0.1 build/libs/notes-0.0.1-SNAPSHOT.jar
+      ```
+      Or use the script:
+      ```sh
+      sh ./scripts/gradle_instrumented_run.sh
+      ```
 {{% /tab %}}
-
 {{< /tabs >}}
 
 6. Resend some HTTP requests, specifically some `GET` requests.

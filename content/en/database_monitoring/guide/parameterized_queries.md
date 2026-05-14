@@ -1,5 +1,7 @@
 ---
 title: Capturing SQL Query Parameter Values With Database Monitoring
+aliases:
+- /database_monitoring/parameterized_queries
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
@@ -54,7 +56,7 @@ To capture SQL query text and execution plans with parameter values, update the 
 For SQL Server, capturing parameter values from prepared statements requires enabling query completion capture through Extended Events. See <a href="/database_monitoring/guide/sql_extended_events/">configure your SQL Server instance and integration to capture query completions</a> in order to complete the database set up. </div>
 
 ```yaml
-  xe_collection:
+  collect_xe:
     query_completions:
       enabled: true
     query_errors:

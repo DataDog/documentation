@@ -1,4 +1,5 @@
 ---
+id: multi_alert
 title: alerte multiple
 ---
 Lorsqu'une alerte multiple se produit, l'alerte est appliquée à chaque source en fonction du paramètre de groupe du monitor. Une notification d'alerte est envoyée pour chaque groupe qui remplit les conditions définies.

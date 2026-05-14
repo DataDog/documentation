@@ -1,8 +1,15 @@
 ---
+description: Choisissez des couleurs appropriées pour les séries de vos graphiques
+  afin de distinguer facilement les données et d'améliorer les capacités de dépannage
+  des équipes.
+further_reading:
+- link: /dashboards/guide/consistent_color_palette
+  tag: Documentation
+  text: Comprendre les couleurs en double dans la palette Consistent
 title: Sélectionner des couleurs appropriées pour vos graphiques
 ---
 
-Dans les graphiques Datadog, l'utilisation de couleurs est la principale façon de distinguer les différentes séries de données. En sélectionnant les couleurs appropriées pour vos graphiques, les membres de votre équipe pourront analyser les données qui y figurent, tirer des conclusions et résoudre les problèmes efficacement. 
+Dans les graphiques Datadog, l'utilisation de couleurs est la principale façon de distinguer les différentes séries de données. En sélectionnant les couleurs appropriées pour vos graphiques, les membres de votre équipe pourront analyser les données qui y figurent, tirer des conclusions et résoudre les problèmes efficacement.
 
 {{< img src="dashboards/guide/colors/colors_top.png" alt="Sous Graph your data, l'utilisateur sélectionne l'une des palettes de couleurs disponibles." style="width:90%;" >}}
 
@@ -16,7 +23,7 @@ Les palettes catégorielles sont optimales pour différencier des données qui n
 
 #### Classic
 
-La palette Classic par défaut utilise un ensemble de six couleurs différentes optimisées pour améliorer la lisibilité. Les couleurs attribuées aux séries se répètent si le nombre de séries est supérieur à six. Des couleurs distinctes sont attribuées aux séries adjacentes. 
+La palette Classic utilisée par défaut repose sur un ensemble de six couleurs distinctes qui sont optimisées pour améliorer la lisibilité. Les couleurs attribuées aux séries se répètent après la sixième série. Les séries adjacentes ont généralement des couleurs distinctes. Toutefois, dans de rares cas, des séries adjacentes peuvent utiliser la même couleur si les séries intermédiaires n'ont aucune valeur pour des intervalles partiels.
 
 La palette de couleurs Classic prend en charge l'accessibilité visuelle.
 
@@ -24,20 +31,19 @@ La palette de couleurs Classic prend en charge l'accessibilité visuelle.
 
 #### Consistent/Semantic
 
-La palette Consistent vous permet de toujours attribuer la même couleur à une série de données précise, ce qui facilite la corrélation des données entre les différents graphiques. Contrairement à la palette Classic, la palette Consistent ne garantit pas que la même couleur sera attribuée aux séries de données adjacentes et ne prend pas en charge l'accessibilité visuelle.
-
+La palette Consistent attribue de façon cohérente une couleur fixe à une série de données, en fonction de sa valeur tav. Cela facilite la corrélation des données entre différents graphiques. Cependant, cette approche **ne garantit pas** des couleurs uniques pour les séries de données adjacentes au sein d'un même widget. De plus, l'accessibilité visuelle n'est pas prise en charge. Pour en savoir plus, consultez la section [Comprendre les couleurs en double dans la palette Consistent][3].
 
 {{< img src="dashboards/guide/colors/4_consistent_palette.png" alt="Exemple de palette de couleurs Consistent/Semantic." style="width:70%;" >}}
 
 {{< img src="dashboards/guide/colors/5_consistent_interface.png" alt="Graphiques à barres avec la palette Consistent." style="width:90%;" >}}
 
-Pour un petit sous-ensemble de tags compatibles, Datadog est en mesure d'identifier automatiquement la signification de chaque série de données. Dans ce cas, la palette de couleurs Consistent se présente sous la forme d'une palette de couleurs Semantic, qui utilise une couleur pour représenter la signification. Par exemple, la couleur rouge peut être utilisée pour représenter une erreur.
+Pour un petit sous-ensemble de tags compatibles, Datadog est en mesure d'identifier automatiquement la signification de chaque série de données. Dans ce cas, la palette de couleurs Consistent se présente sous la forme d'une palette de couleurs Semantic, qui utilise une couleur pour représenter la signification. Par exemple, la couleur rouge peut être utilisée pour représenter une erreur. Consultez la section [Tags sémantiques compatibles][2] pour obtenir la liste des tags pris en charge.
 
 {{< img src="dashboards/guide/colors/6_semantic_interface.png" alt="Graphique à barres avec la palette Semantic." style="width:90%;" >}}
 
 ### Palettes divergentes
 
-Utilisez une palette divergente lorsque vous devez mettre en avant l'écart entre des valeurs au sein d'un ensemble de données. Les palettes divergentes sont idéales pour les données qui présentent un ordre et un point médian naturels. Exemple : l'évolution de l'utilisation de la mémoire, de -100 % à +100 %, avec un point médian naturel à 0 %. 
+Utilisez une palette divergente lorsque vous devez mettre en avant l'écart entre des valeurs au sein d'un ensemble de données. Les palettes divergentes sont idéales pour les données qui présentent un ordre et un point médian naturels. Exemple : l'évolution de l'utilisation de la mémoire, de -100 % à +100 %, avec un point médian naturel à 0 %.
 
 Deux options sont disponibles pour les palettes divergentes : Cool (vert et bleu) ou Warm (interpolation entre les couleurs jaune et orange).
 
@@ -61,6 +67,10 @@ Les remplacements de couleur vous permettent d'attribuer une couleur de votre ch
 
 {{< img src="dashboards/guide/colors/11_overrides.png" alt="Le volet permettant à l'utilisateur de configurer des remplacements de couleur." style="width:80%;" >}}
 
+**Remarque** : si votre requête est agrégée selon une balise (par exemple, avec « sum by » ou « avg by »), vous ne pouvez sélectionner qu'une palette de remplacement. Cela permet d'éviter que des séries différentes utilisent la même couleur, afin de ne pas nuire à la lisibilité.
+
+{{< img src="dashboards/guide/colors/12_palette_and_color_override_comparison.png" alt="Une comparaison côte à côte des menus déroulants de remplacement de couleur et de remplacement de palette." style="width:80%;" >}}
+
 ## Paramètres d'accessibilité
 
 Datadog propose des modes de couleurs accessibles pour les graphiques afin de répondre à différents besoins visuels, notamment le daltonisme, la faible acuité visuelle et la sensibilité aux contrastes. Lorsque vous sélectionnez un mode de couleurs accessibles, la palette Classic est appliquée à tous les graphiques avec un ensemble de couleurs accessibles répondant à un besoin visuel précis. Il est possible de définir un mode de couleurs accessibles depuis la [page User Preferences][1].
@@ -68,3 +78,5 @@ Datadog propose des modes de couleurs accessibles pour les graphiques afin de r�
 {{< img src="dashboards/guide/colors/visual_accessibility.png" alt="Options d'accessibilité visuelle disponibles : Default, Protanopia (difficulté à distinguer les tons verts et rouges), Deuteranopia (difficulté à distinguer les tons rouges, verts et jaunes), Tritanopia (difficulté à distinguer les tons bleus et verts), High Contrast (séparation plus marquée entre les couleurs en cas de faible acuité visuelle), Low Saturation (diminution du contraste en cas de sensibilité visuelle aux contrastes)." style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/personal-settings/preferences
+[2]: /fr/dashboards/guide/compatible_semantic_tags
+[3]: /fr/dashboards/guide/consistent_color_palette

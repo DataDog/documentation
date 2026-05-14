@@ -35,7 +35,7 @@ You can forward your logs through an [Azure Container App][4], or [Azure Blob St
 
 **Note**: Resources can only stream to a Storage Account in the same Azure region.
 
-[200]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json
+[200]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fforwarder.json
 [201]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings
 {{% /tab %}}
 
@@ -55,10 +55,10 @@ If you already have a function app configured for this purpose, skip to [Add a n
 
 1. In the Azure portal, navigate to the [Function App overview][106] and click **Create**.
 2. In the **Instance Details** section, configure the following settings:
-  a. Select the **Code** radio button
-  b. For **Runtime stack**, select `Node.js`
-  c. For **Version**, select `18 LTS`.
-  d. For **Operating System**, select `Windows`.
+   1. Select the **Code** radio button.
+   1. For **Runtime stack**, select `Node.js`.
+   1. For **Version**, select `18 LTS`.
+   1. For **Operating System**, select `Windows`.
 3. Configure other settings as desired.
 4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
 

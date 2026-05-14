@@ -29,6 +29,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
       text: 'Collect traces, logs, and custom metrics from your Google Cloud Run services with Datadog'
       tag: 'Blog'
+    - link: 'https://learn.datadoghq.com/courses/getting-started-gcp'
+      tag: 'Learning Center'
+      text: 'Getting Started with Observability in Google Cloud with Datadog'
 ---
 
 ## Overview
@@ -70,6 +73,10 @@ Use this guide to get started with monitoring your Google Cloud environment. Thi
 <div class="alert alert-info">You can confirm if these APIs are enabled by going to <a href="https://console.cloud.google.com/apis/dashboard">Enabled APIs & Services</a>.</div>
 
 ### Metric collection
+
+{{% google-cloud-collection-scope %}}
+
+<div class="alert alert-info">If your Google Cloud organization uses <a href="https://cloud.google.com/vpc-service-controls/docs/overview">VPC Service Controls</a>, you must explicitly allow Datadog service accounts to access protected resources. If these service accounts are not permitted within your service perimeter, metric, resource, and metadata collection may fail. Contact <a href="/help/">Datadog Support</a> for the service account identifiers for your site or region.</div>
 
 {{< tabs >}}
 
@@ -218,7 +225,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
-   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
+   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
 7. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment).
 8. Copy the provided **Terraform Code**.
 9. Paste the code into a `.tf` file, and run the **Initialize and apply the Terraform** command. If successful, the command:
@@ -253,7 +260,7 @@ To use the Quick Start method, your Datadog user role must be able to create API
    2. Choose whether to apply tags to the metrics associated with the created service account.
    3. Choose whether to disable metric collection for specific Google Cloud services to help control Google Cloud Monitoring costs.
    4. Choose whether to apply granular metric filters for any Google Cloud services enabled for metric collection.
-   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Intance`, or `Cloud Function` to help control Datadog costs.
+   5. Choose whether to filter metrics by tags for GCP resource types `Cloud Run Revision`, `VM Instance`, or `Cloud Function` to help control Datadog costs.
 9. Configure **Resource Collection** (attributes and configuration information of the resources in your Google Cloud environment, optional).
 10. Click **Verify and Save Account**.
 
@@ -340,6 +347,16 @@ To apply granular metric filtering for enabled services, click on the service in
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="Limit metric collection by Google Cloud region, and by global resources" level="h4" %}}
+
+Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][11], deselect which regions to exclude from metrics collection.
+
+You can also specify additional locations not listed and disable any global metrics not associated with a region.
+
+{{< img src="integrations/google_cloud_platform/metric_region_filtering.png" alt="The metric collection tab in the Datadog Google Cloud integration page, with the Enable Global Metrics option highlighted and a subset of regions selected. The Additional Locations option is also highlighted with a multi-region filter defined" style="width:80%;">}}
+
+{{% /collapse-content %}}
+
 {{% collapse-content title="Limit metric collection by host or Cloud Run instance" level="h4" %}}
 1. Assign a tag (such as `datadog:true`) to the hosts or Cloud Run instances you want to monitor with Datadog.
 2. Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][11], enter the tags in the **Limit Metric Collection Filters** textbox. Only hosts that match one of the defined tags are imported into Datadog. You can use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. This example includes all `c1*` sized instances, but excludes staging hosts:
@@ -355,9 +372,7 @@ In the below example, only Google Cloud hosts with the label `datadog:true` are 
 
 {{< img src="integrations/google_cloud_platform/limit_metric_collection.png" alt="The fields to limit metric collection in the Google Cloud integration tile" style="width:100%;" >}}
 
-#### Best practices for monitoring multiple projects
-
-##### Enable per-project cost and API quota attribution
+#### Enable per-project cost and API quota attribution
 
 By default, Google Cloud attributes the cost of monitoring API calls, as well as API quota usage, to the project containing the service account for this integration. As a best practice for Google Cloud environments with multiple projects, enable per-project cost attribution of monitoring API calls and API quota usage. With this enabled, costs and quota usage are attributed to the project being *queried*, rather than the project containing the service account. This provides visibility into the monitoring costs incurred by each project, and also helps to prevent reaching API rate limits.
 
@@ -378,7 +393,7 @@ Use the [Datadog Dataflow template][14] to batch and compresses your log events 
 
 ## Leveraging the Datadog Agent
 
-After the Google Cloud integration is configured, Datadog automatically starts collecting Google Cloud metrics. However, you can leverage the Datadog Agent to gather deeper insights into your infrastructure.
+After the Google Cloud integration is configured, Datadog automatically starts collecting Google Cloud metrics. However, you can use the Datadog Agent to gather deeper insights into your infrastructure.
 
 The [Datadog Agent][31] provides the [most granular, low-latency metrics][32] from your infrastructure, delivering real-time insights into CPU, memory, disk usage, and more for your Google Cloud hosts.
 The Agent can be installed on any host, including [GKE][33].
@@ -436,7 +451,7 @@ After setting up Cloud Security, toggle the **Enable Resource Collection** optio
 
 ### Expanded BigQuery monitoring
 
-You can get granular visibility into your BigQuery environments to monitor the performance of your BigQuery jobs and the quality of your BigQuery data. See the [Expanded BigQuery monitoring section][65] in the main Google Cloud integration page for more information and setup instructions.
+Expanded BigQuery monitoring provides granular visibility into your BigQuery environments. See the [BigQuery Data Observability][68] documentation for more information.
 
 ## Further reading
 
@@ -470,7 +485,7 @@ You can get granular visibility into your BigQuery environments to monitor the p
 [29]: https://www.datadoghq.com/blog/datadog-google-security-command-center/
 [30]: https://www.datadoghq.com/blog/google-cloud-vertex-ai-monitoring-datadog/
 [31]: /agent/
-[32]: /developers/guide/data-collection-resolution-retention/#pagetitle:~:text=n/a-,Infrastructure,-Agent%20integrations
+[32]: /extend/guide/data-collection-resolution-retention/#pagetitle:~:text=n/a-,Infrastructure,-Agent%20integrations
 [33]: /integrations/gke/?tab=standard
 [34]: /integrations/
 [35]: /tracing/
@@ -502,6 +517,6 @@ You can get granular visibility into your BigQuery environments to monitor the p
 [61]: https://cloud.google.com/vpc/docs/private-service-connect-compatibility#third-party-services
 [62]: https://app.datadoghq.com/event/overview
 [63]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
-[65]: /integrations/google_cloud_platform/#expanded-bigquery-monitoring
 [66]: https://cloud.google.com/identity/docs/overview
 [67]: https://docs.datadoghq.com/logs/guide/google-cloud-log-forwarding
+[68]: https://docs.datadoghq.com/data_observability/quality_monitoring/data_warehouses/bigquery/

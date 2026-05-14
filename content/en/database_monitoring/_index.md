@@ -2,6 +2,9 @@
 title: Database Monitoring
 description: Learn about Database Monitoring and get started
 further_reading:
+- link: "https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency"
+  tag: "Blog"
+  text: "Analyzing round trip query latency"
 - link: "https://www.datadoghq.com/blog/database-monitoring-recommendations/"
   tag: "Blog"
   text: "Improve database host and query performance with Database Monitoring Recommendations"
@@ -13,7 +16,10 @@ further_reading:
   text: "Monitor SQL Server and Azure managed databases with Datadog DBM"
 - link: "https://www.datadoghq.com/blog/mongodb-database-monitoring/"
   tag: "Blog"
-  text: "Track and troubleshoot MongoDB performance"
+  text: "Track and troubleshoot MongoDB performance with Datadog Database Monitoring"
+- link: "https://www.datadoghq.com/blog/datadog-database-research/"
+  tag: "Blog"
+  text: "How microservice architectures have shaped the usage of database technologies"
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -23,9 +29,9 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to level up your Database Monitoring"
-- link: "https://www.datadoghq.com/blog/mongodb-database-monitoring/"
-  tag: "Blog"
-  text: "Track and troubleshoot MongoDB performance with Datadog Database Monitoring"
+- link: "https://learn.datadoghq.com/courses/database-monitoring"
+  tag: "Learning Center"
+  text: "Monitoring a Postgres Database with Datadog DBM"
 algolia:
   tags: ['database monitoring', 'dbm']
 cascade:
@@ -42,7 +48,7 @@ Datadog Database Monitoring provides deep visibility into databases across all o
 
 ## Getting started
 
-Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **Oracle**, **SQL Server**, **MongoDB**, and **Amazon DocumentDB**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
+Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **Oracle**, **SQL Server**, **MongoDB**, **Amazon DocumentDB**, and **ClickHouse**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
 
 ### Postgres
 
@@ -72,6 +78,11 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 ### Amazon DocumentDB
 
 {{< partial name="dbm/dbm-setup-documentdb" >}}
+<p></p>
+
+### ClickHouse
+
+{{< partial name="dbm/dbm-setup-clickhouse" >}}
 <p></p>
 
 ## Explore Datadog Database Monitoring
@@ -108,9 +119,13 @@ The [Query Samples view][3] helps you understand which queries are running at a 
 
 {{< img src="database_monitoring/dbm-explain-plan-3.png" alt="Database Monitoring" style="width:100%;">}}
 
+### Collect custom metrics
+
+Use [`custom_queries`][7] to collect metrics from your own database tables — application state, business counters, queue depths, or any data you want correlated with query performance.
+
 ### Visualize everything on enriched dashboards
 
-Quickly pinpoint problem areas by viewing database and system metrics together on enriched integration dashboards for both self-hosted and cloud-managed instances. Clone dashboards for customization and enhancement with your own custom metrics. Click the **Dashboards** link at the top of the Query Metrics and Query Samples pages to go to the Database Monitoring dashboards.
+Quickly pinpoint problem areas by viewing database and system metrics together on enriched integration dashboards for both self-hosted and cloud-managed instances. Clone dashboards for customization and enhancement with your own custom metrics. Click the {{< ui >}}Dashboards{{< /ui >}} link at the top of the Query Metrics and Query Samples pages to go to the Database Monitoring dashboards.
 
 {{< img src="database_monitoring/dbm-dashboard-postgres.png" alt="Database Monitoring" style="width:100%;">}}
 
@@ -141,3 +156,4 @@ The [Recommendations page][6] highlights problems and optimization opportunities
 [4]: /database_monitoring/query_metrics/#explain-plans
 [5]: /database_monitoring/database_hosts/
 [6]: /database_monitoring/recommendations/
+[7]: /database_monitoring/custom_metrics/

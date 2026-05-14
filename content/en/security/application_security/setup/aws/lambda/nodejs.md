@@ -141,21 +141,12 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 1. Install the Datadog CDK constructs library:
 
     ```sh
-    # For AWS CDK v1
-    npm install datadog-cdk-constructs --save-dev
-
-    # For AWS CDK v2
     npm install datadog-cdk-constructs-v2 --save-dev
     ```
 
 2. Instrument your Lambda functions
 
     ```javascript
-    // For AWS CDK v1
-    import { Datadog } from "datadog-cdk-constructs";
-    // NOT SUPPORTED IN V1
-
-    // For AWS CDK v2
     import { Datadog, DatadogAppSecMode } from "datadog-cdk-constructs-v2";
 
     const datadog = new Datadog(this, "Datadog", {
@@ -179,7 +170,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-1. Install the Datadog tracer:
+1. Install the Datadog SDK:
    ```sh
    # Use this format for AWS commercial regions
    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}

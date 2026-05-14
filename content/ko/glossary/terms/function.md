@@ -1,4 +1,5 @@
 ---
+id: function
 core_product:
 - serverless monitoring
 title: 함수

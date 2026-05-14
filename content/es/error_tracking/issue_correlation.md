@@ -14,7 +14,7 @@ La Correlación de incidentes con Error Tracking está actualmente en vista prev
 {{< /callout >}} 
 ## Información general
 
-{{< img src="error_tracking/issue-correlation-overview.png" alt="Vista de la pestaña de incidentes correlacionados en el contexto del explorador de Error Tracking" style="width:100%;" >}}
+{{< img src="error_tracking/issue-correlation-overview-2.png" alt="Vista de la pestaña de incidentes correlacionados en el contexto del explorador de Error Tracking" style="width:100%;" >}}
 
 Utiliza Error Tracking para simplificar la depuración agrupando miles de errores similares en un único incidente. Utiliza la correlación de incidentes para determinar la causa del incidente, el impacto que tiene en otros servicios y si el error es consecuencia de una dependencia posterior.
 
@@ -23,15 +23,15 @@ La correlación de incidentes también ayuda a reducir el ruido de la lista de i
 ## Identificar incidentes correlacionados
 Para identificar qué incidentes de tus servicios están correlacionadas, ve a la página de Error Tracking en [**Error > Issues** (Error > Incidentes)][1].
 
-{{< img src="error_tracking/issue-correlation-et-page.png" alt="Lista de incidentes en el explorador de Error Tracking" style="width:70%;" >}}
+{{< img src="error_tracking/issue-correlation-et-page-2.png" alt="Lista de incidentes en el explorador de Error Tracking" style="width:70%;" >}}
 
 Selecciona un incidente para abrir el panel lateral y ver su información.
 
-{{< img src="error_tracking/issue-correlation-side-panel.png" alt="Información de un incidente en el explorador de Error Tracking" style="width:70%;" >}}
+{{< img src="error_tracking/issue-correlation-side-panel-2.png" alt="Información de un incidente en el explorador de Error Tracking" style="width:70%;" >}}
 
 Abre la pestaña `Correlated issues` para ver el mapa de correlación de incidentes.
 
-{{< img src="error_tracking/issue-correlation-correlation-tab.png" alt="Información de un incidente en el explorador de Error Tracking, centrada en la pestaña de correlación de incidentes" style="width:70%;" >}}
+{{< img src="error_tracking/issue-correlation-correlation-tab-2.png" alt="Información de un incidente en el explorador de Error Tracking, centrada en la pestaña de correlación de incidentes" style="width:70%;" >}}
 
 El mapa de correlación de incidentes muestra la siguiente información de un incidente determinado:
 - **Root cause** (Causa de origen): servicios que probablemente estén causando el incidente

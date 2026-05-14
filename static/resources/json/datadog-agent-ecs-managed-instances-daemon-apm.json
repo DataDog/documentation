@@ -1,0 +1,78 @@
+{
+    "family": "<TASK_NAME>",
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_API_KEY",
+                    "value": "<YOUR_DATADOG_API_KEY>"
+                },
+                {
+                    "name": "DD_SITE",
+                    "value": "<YOUR_DATADOG_SITE>"
+                },
+                {
+                    "name": "ECS_MANAGED_INSTANCES",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_CRI_SOCKET_PATH",
+                    "value": "/var/run/containerd/containerd.sock"
+                }
+            ],
+            "mountPoints": [
+                {
+                    "containerPath": "/var/run/containerd/containerd.sock",
+                    "sourceVolume": "containerd_sock",
+                    "readOnly": true
+                },
+                {
+                    "containerPath": "/host/sys/fs/cgroup",
+                    "sourceVolume": "cgroup",
+                    "readOnly": true
+                },
+                {
+                    "containerPath": "/host/proc",
+                    "sourceVolume": "proc",
+                    "readOnly": true
+                },
+                {
+                    "containerPath": "/var/run/datadog",
+                    "sourceVolume": "dd-sockets",
+                    "readOnly": false
+                }
+            ]
+        }
+    ],
+    "volumes": [
+        {
+            "name": "containerd_sock",
+            "host": {
+                "sourcePath": "/var/run/containerd/containerd.sock"
+            }
+        },
+        {
+            "name": "proc",
+            "host": {
+                "sourcePath": "/proc/"
+            }
+        },
+        {
+            "name": "cgroup",
+            "host": {
+                "sourcePath": "/sys/fs/cgroup/"
+            }
+        },
+        {
+            "name": "dd-sockets",
+            "host": {
+                "sourcePath": "/var/run/datadog"
+            }
+        }
+    ],
+    "cpu": "256",
+    "memory": "512"
+}

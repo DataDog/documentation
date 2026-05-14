@@ -14,13 +14,13 @@ code_lang_weight: 20
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Source Code"
-  text: "Tracer library source code"
+  text: "SDK source code"
 - link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
   tag: "External Site"
-  text: "Tracer library API documentation"
+  text: "SDK API documentation"
 - link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
   tag: "External Site"
-  text: "Tracer library API documentation for v2"
+  text: "SDK API documentation for v2"
 - link: https://github.com/DataDog/orchestrion
   tag: "Source Code"
   text: "Orchestrion source code"
@@ -226,9 +226,9 @@ func excluded() {
 
 Some of the instrumentation performed by `orchestrion` is done callee-side (or library-side), meaning the integration is added directly within the dependency itself. In such cases, it is not possible to locally opt out of such integrations.
 
-#### Use the tracing library
+#### Use the SDK
 
-You can use the [tracing library][4] in your Orchestrion-built application. This is useful for instrumenting frameworks not yet supported by Orchestrion. However, be aware that this may result in duplicated trace spans in the future as Orchestrion support expands. Review the [release notes][11] when updating your `orchestrion` dependency to stay informed about new features and adjust your manual instrumentation as necessary.
+You can use the [SDK][4] in your Orchestrion-built application. This is useful for instrumenting frameworks not yet supported by Orchestrion. However, be aware that this may result in duplicated trace spans in the future as Orchestrion support expands. Review the [release notes][11] when updating your `orchestrion` dependency to stay informed about new features and adjust your manual instrumentation as necessary.
 
 #### Use the continuous profiler
 
@@ -244,9 +244,13 @@ or if you want to reduce the number of transitive dependencies for integrations 
 By default, Orchestrion imports `github.com/DataDog/dd-trace-go/orchestrion/all/v2`,
 which imports every library for which there is an Orchestrion integration.
 You can replace this import with imports of only the integrations you want to use.
-See [the tracer source code][17] for the list of supported integrations.
+See [the SDK source code][17] for the list of supported integrations.
 
 **Note**: If you choose to import specific integrations, you must manually update `orchestrion.tool.go` each time you want to add a new integration.
+
+### Building with Docker
+
+For more information on how to create a fitting Docker image, See [Creating a Dockerfile for APM for Go][18].
 
 ### Troubleshooting
 
@@ -264,15 +268,15 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 [15]: /security/application_security/exploit-prevention/
 [16]: /tracing/trace_collection/library_config/go/#traces
 [17]: https://github.com/DataDog/dd-trace-go/blob/main/orchestrion/all/orchestrion.tool.go
-
+[18]: /tracing/guide/orchestrion_dockerfile/
 
 {{% /tab %}}
 
 {{% tab "Manual instrumentation" %}}
 
-### Add the tracer library to your application
+### Add the SDK to your application
 
-First, import and start the tracer in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][6] (or the [API documentation v1][4]) for configuration instructions and details about using the API.
+First, import and start the SDK in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][6] (or the [API documentation v1][4]) for configuration instructions and details about using the API.
 
 ### Activate Go integrations to create spans
 

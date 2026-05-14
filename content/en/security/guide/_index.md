@@ -9,6 +9,11 @@ disable_toc: true
     {{< nextlink href="/security/guide/byoti_guide" >}}Bring Your Own Threat Intelligence{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Reference:" >}}
+   {{< nextlink href="/security/guide/findings-schema/" >}}Security Findings Schema Reference
+{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Cloud SIEM Guides:" >}}
     {{< nextlink href="/getting_started/cloud_siem" >}}Getting Started with Cloud SIEM{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/automate-the-remediation-of-detected-threats" >}}Automate the remediation of detected threats with Cloud SIEM{{< /nextlink >}}
@@ -50,6 +55,5 @@ disable_toc: true
 
 {{< whatsnext desc="Sensitive Data Scanner Guides:" >}}
    {{< nextlink href="security/sensitive_data_scanner/guide/investigate_sensitive_data_findings" >}}Investigate Sensitive Data Findings{{< /nextlink >}}
-   {{< nextlink href="security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules" >}}Best Practices for Creating Custom Rules{{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -156,11 +156,11 @@ Up until this point, you let Datadog automatically instrument the `hello.py` app
 
 However, if you need to collect traces from custom code or require more fine-grained control, you can add [custom instrumentation][6].
 
-To illustrate this, you will import the Datadog Python tracing library into `hello.py` and create a custom span and span tag.
+To illustrate this, you will import the Datadog Python SDK into `hello.py` and create a custom span and span tag.
 
 To add custom instrumentation:
 
-1. Install the Datadog tracing library:
+1. Install the Datadog SDK:
 
    ```shell
    pip install ddtrace
@@ -208,6 +208,17 @@ To add custom instrumentation:
 
 1. Notice that the custom `quote` span tag displays on the **Info** tab.
 
+## What's next?
+
+After you set up tracing and your application is sending data to Datadog, explore additional APM features:
+
+### Software Catalog
+
+[Software Catalog][9] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, and cost allocation in one place. Configure [service metadata][10] using tags, annotations, or a `service.datadog.yaml` file to enrich your services with ownership information, runbooks, and documentation links.
+
+### Trace ingestion and retention
+
+Control costs and manage data volume by configuring [ingestion controls][11] and [retention filters][12]. Ingestion controls let you customize sampling rates at the Datadog Agent or SDK level, while retention filters determine which spans are indexed for search and analytics.
 
 ## Further reading
 
@@ -221,3 +232,7 @@ To add custom instrumentation:
 [6]: /tracing/trace_collection/custom_instrumentation/
 [7]: /getting_started/site/
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[9]: /internal_developer_portal/software_catalog/
+[10]: /internal_developer_portal/software_catalog/entity_model/
+[11]: /tracing/trace_pipeline/ingestion_controls/
+[12]: /tracing/trace_pipeline/trace_retention/

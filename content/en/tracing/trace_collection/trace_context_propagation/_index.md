@@ -23,7 +23,7 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-Trace Context propagation is the mechanism of passing tracing information like Trace ID, Span ID, and sampling decisions from one part of a distributed application to another. This enables all traces (and additional telemetry) in a request to be correlated. When automatic instrumentation is enabled, trace context propagation is handled automatically by the APM SDK.
+Trace Context propagation is the mechanism of passing tracing information like Trace ID, Span ID, and sampling decisions from one part of a distributed application to another. This enables all traces (and additional telemetry) in a request to be correlated. When automatic instrumentation is enabled, trace context propagation is handled automatically by the Datadog SDK.
 
 By default, the Datadog SDK extracts and injects distributed tracing headers using the following formats:
 
@@ -311,7 +311,7 @@ This function's optional argument accepts an array of injection style names. It 
 
 {{% collapse-content title="RabbitMQ" level="h4" %}}
 
-The PHP APM SDK supports automatic tracing of the `php-amqplib/php-amqplib` library (version 0.87.0+). However, in some cases, your distributed trace may be disconnected. For example, when reading messages from a distributed queue using the `basic_get` method outside an existing trace, you need to add a custom trace around the `basic_get` call and corresponding message processing:
+The PHP SDK supports automatic tracing of the `php-amqplib/php-amqplib` library (version 0.87.0+). However, in some cases, your distributed trace may be disconnected. For example, when reading messages from a distributed queue using the `basic_get` method outside an existing trace, you need to add a custom trace around the `basic_get` call and corresponding message processing:
 
 ```php
 // Create a surrounding trace
@@ -791,17 +791,17 @@ By default, `user.id,session.id,account.id` baggage keys are added as span tags.
 
 Support for baggage as span tags was introduced in the following releases:
 
-| Language  | Minimum SDK version             |
-|-----------|---------------------------------|
-| Java      | 1.52.0                          |
-| Python    | 3.7.0                           |
-| Ruby      | 2.20.0                          |
-| Go        | 2.2.2                           |
-| .NET      | 3.23.0                          |
-| Node      | 5.54.0                          |
-| PHP       | 1.10.0                          |
-| C++/Proxy | Not supported                   |
-| Rust      | Not supported                   |
+| Language  | Minimum SDK version                         |
+|-----------|---------------------------------------------|
+| Java      | 1.52.0                                      |
+| Python    | 3.7.0                                       |
+| Ruby      | 2.20.0                                      |
+| Go        | 2.2.2                                       |
+| .NET      | 3.23.0                                      |
+| Node      | 5.54.0                                      |
+| PHP       | 1.10.0                                      |
+| C++/Proxy | 1.9.0 (Nginx). Other proxies not supported. |
+| Rust      | Not supported                               |
 
 ## Further reading
 

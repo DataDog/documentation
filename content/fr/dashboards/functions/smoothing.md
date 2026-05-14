@@ -1,14 +1,17 @@
 ---
 aliases:
 - /fr/graphing/functions/smoothing/
+description: Réduisez le bruit dans les données de métrique en utilisant autosmooth,
+  les moyennes mobiles pondérées exponentiellement, les filtres médians et les fonctions
+  pondérées.
 title: Lissage
 ---
 
 ## Autosmooth
 
-| Fonction       | Description                                                           | Exemple                        |
+| Fonction       | Rôle                                                           | Exemple                        |
 | :----          | :-------                                                              | :---------                     |
-| `autosmooth()` | Supprime automatiquement les valeurs parasites tout en préservant la tendance de la métrique. | `autosmooth(<NOM_MÉTRIQUE>{*})` |
+| `autosmooth()` | Supprime automatiquement les valeurs parasites tout en préservant la tendance de la métrique. | `autosmooth(<METRIC_NAME>{*})` |
 
 La fonction `autosmooth()` applique une moyenne mobile avec un intervalle sélectionné automatiquement. Elle lisse une série temporelle tout en préservant sa tendance. Dans cet exemple, la fonction choisit l'intervalle optimal pour lisser la série temporelle :
 
@@ -24,11 +27,11 @@ La fonction `autosmooth()` ne peut pas être utilisée dans les monitors. L'inte
 
 ### Ewma 3
 
-| Fonction   | Description                                                         | Exemple                    |
+| Fonction   | Rôle                                                         | Exemple                    |
 | :----      | :-------                                                            | :---------                 |
-| `ewma_3()` | Calcule la moyenne mobile avec pondération exponentielle sur un intervalle de 3.  | `ewma_3(<NOM_MÉTRIQUE>{*})` |
+| `ewma_3()` | Calcule la moyenne mobile avec pondération exponentielle sur un intervalle de 3.  | `ewma_3(<METRIC_NAME>{*})` |
 
-Remarque : la valeur de l'intervalle correspond au nombre de points de données. Par conséquent, `ewma_3()` utilise les 3 derniers points de données pour calculer la moyenne.
+Remarque : la valeur de span est le double de l'âge moyen pondéré de la série. Ainsi, `ewma_3()` est comparable à une moyenne mobile de 3 jours.
 
 Exemple :
 
@@ -38,11 +41,11 @@ Si une métrique `10 + x%10 {*}` s'incrémente de 1 à partir de 10 puis revient
 
 ### Ewma 5
 
-| Fonction   | Description                                                         | Exemple                    |
+| Fonction   | Rôle                                                         | Exemple                    |
 | :----      | :-------                                                            | :---------                 |
-| `ewma_5()` | Calcule la moyenne mobile avec pondération exponentielle sur un intervalle de 5. | `ewma_5(<NOM_MÉTRIQUE>{*})` |
+| `ewma_5()` | Calcule la moyenne mobile avec pondération exponentielle sur un intervalle de 5. | `ewma_5(<METRIC_NAME>{*})` |
 
-Remarque : la valeur de l'intervalle correspond au nombre de points de données. Par conséquent, `ewma_5()` utilise les 5 derniers points de données pour calculer la moyenne.
+Remarque : la valeur de span est le double de l'âge moyen pondéré de la série. Ainsi, `ewma_5()` est comparable à une moyenne mobile de 5 jours.
 
 Exemple :
 
@@ -52,19 +55,19 @@ Si une métrique `10 + x%10 {*}` s'incrémente de 1 à partir de 10 puis revient
 
 ### Ewma 7
 
-| Fonction   | Description                                                         | Exemple                    |
+| Fonction   | Rôle                                                         | Exemple                    |
 | :----      | :-------                                                            | :---------                 |
-| `ewma_7()` | Calcule la moyenne mobile avec pondération exponentielle sur un intervalle de 7. | `ewma_7(<METRIC_NAME>{*})` |
+| `ewma_7()` | Calculer la moyenne mobile pondérée exponentiellement sur un span de 7. | `ewma_7(<METRIC_NAME>{*})` |
 
-Remarque : la valeur de l'intervalle correspond au nombre de points de données. Par conséquent, `ewma_7()` utilise les 7 derniers points de données pour calculer la moyenne.
+Remarque : la valeur de span est le double de l'âge moyen pondéré de la série. Ainsi, `ewma_7()` est comparable à une moyenne mobile de 7 jours.
 
 ### Ewma 10
 
-| Fonction    | Description                                                          | Exemple                     |
+| Fonction    | Rôle                                                          | Exemple                     |
 | :----       | :-------                                                             | :---------                  |
-| `ewma_10()` | Calcule la moyenne mobile avec pondération exponentielle sur un intervalle de 10. | `ewma_10(<NOM_MÉTRIQUE>{*})` |
+| `ewma_10()` | Calcule la moyenne mobile avec pondération exponentielle sur un intervalle de 10. | `ewma_10(<METRIC_NAME>{*})` |
 
-Remarque : la valeur de l'intervalle correspond au nombre de points de données. Par conséquent, `ewma_10()` utilise les 10 derniers points de données pour calculer la moyenne.
+Remarque : la valeur de span est le double de l'âge moyen pondéré de la série. Ainsi, `ewma_10()` est comparable à une moyenne mobile de 10 jours.
 
 Exemple :
 
@@ -74,11 +77,11 @@ Si une métrique `10 + x%10 {*}` s'incrémente de 1 à partir de 10 puis revient
 
 ### Ewma 20
 
-| Fonction    | Description                                                          | Exemple                     |
+| Fonction    | Rôle                                                          | Exemple                     |
 | :----       | :-------                                                             | :---------                  |
-| `ewma_20()` | Calcule la moyenne mobile avec pondération exponentielle sur un intervalle de 20. | `ewma_20(<NOM_MÉTRIQUE>{*})` |
+| `ewma_20()` | Calcule la moyenne mobile avec pondération exponentielle sur un intervalle de 20. | `ewma_20(<METRIC_NAME>{*})` |
 
-Remarque : la valeur de l'intervalle correspond au nombre de points de données. Par conséquent, `ewma_20()` utilise les 20 derniers points de données pour calculer la moyenne.
+Remarque : la valeur de span est le double de l'âge moyen pondéré de la série. Ainsi, `ewma_20()` est comparable à une moyenne mobile de 20 jours.
 
 Exemple :
 
@@ -90,40 +93,40 @@ Si une métrique `10 + x%10 {*}` s'incrémente de 1 à partir de 10 puis revient
 
 ### Median 3
 
-| Fonction     | Description                      | Exemple                      |
+| Fonction     | Rôle                      | Exemple                      |
 | :----        | :-------                         | :---------                   |
-| `median_3()` | Médiane mobile avec un intervalle de 3. | `median_3(<NOM_MÉTRIQUE>{*})` |
+| `median_3()` | Médiane mobile avec un intervalle de 3. | `median_3(<METRIC_NAME>{*})` |
 
 Remarque : la valeur de l'intervalle correspond au nombre de points de données. Par conséquent, `median_3()` utilise les 3 derniers points de données pour calculer la valeur médiane.
 
 ### Median 5
 
-| Fonction     | Description                      | Exemple                      |
+| Fonction     | Rôle                      | Exemple                      |
 | :----        | :-------                         | :---------                   |
-| `median_5()` | Médiane mobile avec un intervalle de 5. | `median_5(<NOM_MÉTRIQUE>{*})` |
+| `median_5()` | Médiane mobile avec un intervalle de 5. | `median_5(<METRIC_NAME>{*})` |
 
 Remarque : la valeur de l'intervalle correspond au nombre de points de données. Par conséquent, `median_5()` utilise les 5 derniers points de données pour calculer la valeur médiane.
 
 ### Median 7
 
-| Fonction     | Description                      | Exemple                      |
+| Fonction     | Rôle                      | Exemple                      |
 | :----        | :-------                         | :---------                   |
-| `median_7()` | Médiane mobile avec un intervalle de 7. | `median_7(<NOM_MÉTRIQUE>{*})` |
+| `median_7()` | Médiane mobile avec un intervalle de 7. | `median_7(<METRIC_NAME>{*})` |
 
 Remarque : la valeur de l'intervalle correspond au nombre de points de données. Par conséquent, `median_7()` utilise les 7 derniers points de données pour calculer la valeur médiane.
 
 ### Median 9
 
-| Fonction     | Description                      | Exemple                      |
+| Fonction     | Rôle                      | Exemple                      |
 | :----        | :-------                         | :---------                   |
-| `median_9()` | Médiane mobile avec un intervalle de 9. | `median_9(<NOM_MÉTRIQUE>{*})` |
+| `median_9()` | Médiane mobile avec un intervalle de 9. | `median_9(<METRIC_NAME>{*})` |
 
 Remarque : la valeur de l'intervalle correspond au nombre de points de données. Par conséquent, `median_9()` utilise les 9 derniers points de données pour calculer la valeur médiane.
 
 ## Pondéré 
 <div class="alert alert-info">La fonction Weighted() n'est disponible que lors de l'interrogation de `SUM BY` sur des métriques de type gauge.</div> 
 
-| Fonction       | Description                                                           | Exemple                        |
+| Fonction       | Rôle                                                           | Exemple                        |
 | :----          | :-------                                                              | :---------                     |
 | `weighted()`   | Supprime automatiquement les valeurs parasites tout en préservant le poids des tags transitoires. | `sum:(<GAUGE_METRIC_NAME>{*}).weighted()` |
 

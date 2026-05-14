@@ -1,8 +1,11 @@
 ---
-title: De la requête au graphique
 aliases:
-  - /fr/dashboards/faq/query-to-the-graph
+- /fr/dashboards/faq/query-to-the-graph
+description: Découvrez comment le système de graphiques de Datadog traite les requêtes
+  et affiche les lignes de graphiques avec les étapes d'exécution backend.
+title: De la requête au graphique
 ---
+
 Cette page décrit les étapes suivies par le système de graphiques de Datadog pour passer d'une requête à un graphique. Ainsi, vous comprendrez mieux comment choisir les paramètres de votre graphique.
 
 Lorsque vous créez un graphique dans un [timeboard][1] ou un [screenboard][2], vous pouvez utiliser l'éditeur ou l'onglet JSON pour configurer des requêtes avancées. L'exemple ci-dessous utilise la métrique `system.disk.total` issue d'un serveur spécifique (`host:bubs`).
@@ -21,19 +24,19 @@ En effet, cette métrique est renvoyée par différents hosts, et chaque Agent D
 Ainsi, cette métrique peut être consultée avec différentes combinaisons de tags `{host, device}`.
 
 Pour chaque source (définie par un host et un ensemble de tags), les données sont stockées séparément.
-Dans cet exemple, imaginons que `host:moby` dispose de 5 appareils. Datadog enregistre alors 5 séries temporelles (tous les points de données envoyés au fil du temps pour une source) pour :
+Dans cet exemple, considérez `host:bubs` comme ayant 5 appareils. Ainsi, Datadog stocke 5 séries temporelles (tous les points de données soumis au fil du temps pour une source) pour :
 
-* `{host:moby, device:tmpfs}`
-* `{host:moby, device:cgroup_root}`
-* `{host:moby, device:/dev/vda1}`
-* `{host:moby, device:overlay}`
-* `{host:moby, device:shm}`
+* `{host:bubs, device:tmpfs}`
+* `{host:bubs, device:cgroup_root}`
+* `{host:bubs, device:/dev/vda1}`
+* `{host:bubs, device:overlay}`
+* `{host:bubs, device:shm}`
 
 Considérez à présent les étapes successives suivies par le backend pour la requête présentée ci-dessus.
 
 ## Trouver quelles séries temporelles sont requises pour la requête
 
-Dans cette requête, vous demandiez seulement les données associées au tag `host:moby`. La première chose à faire pour le backend de Datadog est d'analyser toutes les sources (dans ce cas, toutes les combinaisons `{host, device}` avec lesquelles la métrique `system.disk.total` est envoyée) et de conserver seulement celles qui correspondent au contexte de la requête.
+Dans cette requête, vous avez uniquement demandé des données associées à `host:bubs`. La première étape pour le backend de Datadog consiste donc à analyser toutes les sources (dans ce cas, toutes les combinaisons `{host, device}` avec lesquelles la métrique `system.disk.total` est soumise) et à ne conserver que celles correspondant à la portée de la requête.
 
 Comme vous l'avez sûrement deviné, le backend trouve cinq sources correspondantes (voir le paragraphe précédent).
 
@@ -45,8 +48,8 @@ Il faut alors agréger les données de ces sources afin d'obtenir une métrique 
 
 [Cliquez ici pour obtenir plus d'informations sur les séries temporelles et la cardinalité des tags][4].
 
-**Paramètre impliqué : contexte**  
-Vous pouvez utiliser plusieurs tags, p. ex. `{host:moby, device:udev}`, si vous souhaitez récupérer les données correspondant aux deux tags.
+**Paramètre impliqué : portée**
+Vous pouvez utiliser plusieurs tags, tels que `{host:bubs, device:udev}`, si vous souhaitez récupérer des données correspondant aux deux tags.
 
 ## Effectuer l'agrégation temporelle
 
@@ -56,7 +59,7 @@ Toutefois, avant de combiner toutes les données des différentes sources (étap
 
 ### Pourquoi ?
 
-Datadog stocke les données à une granularité de 1 seconde. Par conséquent, il n'est pas possible de représenter toutes les données réelles dans les graphiques. Consultez la section relative à l'[agrégation des données dans les graphiques][5] pour en savoir plus.
+Comme Datadog stocke les données avec une granularité de 1 seconde, il ne peut pas afficher toutes les données réelles sur les graphiques. Consultez la section [Agrégation de métriques][5] pour plus de détails.
 
 Pour un graphique avec un intervalle d'une semaine, il faudrait envoyer des centaines de milliers de valeurs à votre navigateur. De plus, tous ces points ne pourraient pas être représentés sur un widget occupant une petite partie de votre écran. Ainsi, Datadog est contraint d'effectuer une agrégation des données et d'envoyer un nombre limité de points à votre navigateur afin d'afficher un graphique.
 
@@ -66,8 +69,8 @@ Par exemple, pour une vue du jour avec affichage des lignes, chaque point de don
 
 ### Comment ?
 
-Par défaut, le backend de Datadog calcule les données agrégées et cumulées en faisant la moyenne de toutes les valeurs réelles, ce qui permet de lisser les graphiques lorsque vous effectuez un zoom arrière. [Découvrez pourquoi un zoom arrière sur un intervalle permet également de lisser vos graphiques][6].
-L'agrégation de données est nécessaire, que vous ayez 1 ou 1 000 sources, tant que vous consultez les données d'un intervalle de temps conséquent. Les valeurs que vous voyez sur le graphique ne correspondent généralement pas aux valeurs réelles envoyées, mais plutôt à des agrégats locaux.
+Par défaut, le backend de Datadog calcule l'agrégat de rollup en faisant la moyenne de toutes les valeurs réelles, ce qui a tendance à lisser les graphiques lorsque vous effectuez un zoom arrière. [Consultez la section contenant plus d'informations sur la raison pour laquelle effectuer un zoom arrière sur une plage temporelle lisse également vos graphiques][6].
+L'agrégation des données doit se produire que vous ayez 1 ou 1000 sources tant que vous consultez une grande fenêtre temporelle. Ce que vous voyez généralement sur un graphique n'est pas les valeurs réelles soumises mais des agrégats locaux.
 
 {{< img src="dashboards/faq/metrics_graph_3.png" alt="graphique_métriques_3" style="width:75%;">}}
 
@@ -84,7 +87,7 @@ Dans cet exemple, `rollup(avg,60)` définit une période d'agrégation de 60 se
 
 ## Effectuer l'agrégation spatiale
 
-Vous pouvez ensuite combiner les données de différentes sources en une seule ligne.
+Ensuite, vous pouvez mélanger des données provenant de différentes sources en une seule ligne.
 
 Vous disposez de ~300 points pour chaque source. Chacun d'eux représente une minute.
 Dans cet exemple, Datadog calcule la moyenne de toutes les sources pour chaque minute, ce qui donne le graphique suivant :
@@ -93,7 +96,7 @@ Dans cet exemple, Datadog calcule la moyenne de toutes les sources pour chaque m
 
 La valeur obtenue (25,74 Go) représente la moyenne des valeurs renvoyées par toutes les sources (voir l'image ci-dessus).
 
-**Remarque** : s'il n'y a qu'une seule source (par exemple, si vous avez choisi le contexte `{host:moby, device:/dev/disk}` pour la requête), les paramètres `sum`, `avg`, `max` ou `min` n'ont aucun effet, car aucune agrégation spatiale ne doit être effectuée. Consultez la [FAQ sur le changement d'un agrégateur sum, min, max ou avg à un autre][8].
+**Remarque** : s'il n'y a qu'une seule source (par exemple, si vous avez choisi la portée `{host:bubs, device:/dev/disk}` pour la requête), l'utilisation de `sum`, `avg`, `max`, `min` n'a aucun effet car aucune agrégation spatiale ne doit être effectuée. Consultez la section FAQ sur le [basculement entre les agrégateurs sum/min/max/avg][8].
 
 **Paramètre impliqué : space aggregator**
 
@@ -134,7 +137,7 @@ Dans cet exemple, la fonction `abs` veille à ce que vos résultats corresponden
 La logique reste la même :
 
 1. Le backend de Datadog trouve tous les appareils associés à la source sélectionnée.
-2. Pour chaque appareil, le backend effectue la requête `system.disk.total{host:example, device:<APPAREIL>}`, comme expliqué dans cet article.
+2. Pour chaque appareil, le backend effectue la requête `system.disk.total{host:example, device:<DEVICE>}`, comme expliqué dans cet article.
 3. Tous les résultats finaux sont représentés sur le même graphique.
 
 {{< img src="dashboards/faq/metric_graph_7.png" alt="graphique_métriques_7" style="width:75%;">}}
@@ -143,7 +146,7 @@ La logique reste la même :
 
 **Autre remarque** : vous pouvez utiliser plusieurs tags, par exemple : `system.disk.in_use{*} by {host,device}`.
 
-#### Opérations arithmétiques
+#### Arithmétique
 
 Les opérations arithmétiques sont également appliquées après l'agrégation temporelle et spatiale ([étape 4 : Appliquer des fonctions](#appliquer-des-fonctions-facultatif)).
 
@@ -155,13 +158,13 @@ Les opérations arithmétiques sont également appliquées après l'agrégation 
 
 Pour en savoir plus, consultez l'article [Visualisation des métriques StatsD avec la représentation graphique de counts][9] (en anglais) et la documentation relative à [StatsD et à DogStatsD][10].
 
-[1]: /fr/dashboards/timeboard/
-[2]: /fr/dashboards/screenboard/
+[1]: /fr/dashboards/#get-started
+[2]: /fr/dashboards/#screenboards
 [3]: /fr/agent/
 [4]: /fr/metrics/custom_metrics/
-[5]: /fr/dashboards/faq/how-is-data-aggregated-in-graphs/
+[5]: /fr/dashboards/querying/#aggregate-and-rollup
 [6]: /fr/dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [7]: /fr/dashboards/functions/rollup/
-[8]: /fr/dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same/
+[8]: /fr/metrics/guide/different-aggregators-look-same/
 [9]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[10]: /fr/metrics/dogstatsd_metrics_submission/
+[10]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/

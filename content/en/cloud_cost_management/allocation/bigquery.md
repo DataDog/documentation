@@ -88,9 +88,9 @@ You can identify BigQuery schedules to help connect costs to specific scheduled 
 
 To identify which BigQuery schedule a `DTS_CONFIG_ID` refers to:
 
-1.  Go to **BigQuery** in the [**GCP Console**][8].
-2.  Navigate to **Transfers > Schedules**.
-3.  Use the **search bar** or **Ctrl+F** to locate the `DTS_CONFIG_ID`.
+1.  Go to {{< ui >}}BigQuery{{< /ui >}} in the [GCP Console][8].
+2.  Navigate to {{< ui >}}Transfers{{< /ui >}} > {{< ui >}}Schedules{{< /ui >}}.
+3.  Use the {{< ui >}}search bar{{< /ui >}} or Ctrl+F to locate the `DTS_CONFIG_ID`.
 4.  Click the matched entry to view details about the query schedule, including source, frequency, and target dataset.
 
 #### Additional cost analysis tags

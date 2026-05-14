@@ -26,7 +26,7 @@
         {{ with $translate_action.responses }}
           {{ $translate_action_response = (index $translate_action.responses $response_code) }}
         {{ end }}
-        <div role="tabpanel" class="tab-pane {{ if eq $count 0}} active {{end}}" id="{{ $operationid }}-{{ $response_code }}-{{ $version }}">
+        <div role="tabpanel" class="tab-pane {{ if eq $count 0}} active {{end}}" id="{{ $operationid }}-{{ $response_code }}-{{ $version }}" data-title="{{ $response_code }}">
             {{ with $response.content }}
 
                 <p class="mb-2">{{ $translate_action_response.description | default $response.description }}</p>
@@ -107,7 +107,7 @@
                             </ul>
 
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $operationid }}-{{ $response_code }}-model">
+                                <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $operationid }}-{{ $response_code }}-model" data-title="{{ i18n "model" }}">
 
                                     {{ with $schema.description }}
                                         <p>{{- . | markdownify -}}</p>
@@ -137,7 +137,7 @@
                                     {{ end }}
 
                                 </div>
-                                <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid }}-{{ $response_code }}-example">
+                                <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid }}-{{ $response_code }}-example" data-title="{{ i18n "example" }}">
                                     <div class="code-snippet-wrapper append-copy-btn">
                                         {{/*  $json is a highlight hugo function  */}}
                                         {{ $json }}

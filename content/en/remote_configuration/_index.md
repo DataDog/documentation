@@ -1,6 +1,6 @@
 ---
 title: Remote Configuration
-description: "Remotely configure and change behavior of Datadog components like Agents, tracing libraries, and Observability Pipelines Workers deployed in your infrastructure."
+description: "Remotely configure and change behavior of Datadog components like Agents, SDKs, and Observability Pipelines Workers deployed in your infrastructure."
 aliases:
 - /agent/guide/how_rc_works
 - /agent/guide/how_remote_config_works
@@ -27,9 +27,9 @@ algolia:
 
 ## Overview
 
-Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of select product features in Datadog components such as Agents, tracing libraries, and Observability Pipelines Workers deployed in your infrastructure. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
+Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of select product features in Datadog components such as Agents, SDKs, and Observability Pipelines Workers deployed in your infrastructure. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
-For Datadog security products, App and API Protection and Workload Protection, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
+For Datadog security products, App and API Protection and Workload Protection, Remote Configuration-enabled Agents and compatible SDKs provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
 
 ## How it works
 
@@ -86,6 +86,9 @@ Observability Pipelines
 Private action runner
 : - Run Datadog workflows and apps that interact with services hosted on your private network without exposing your services to the public internet. For more information, see [Private Actions][30].
 
+Feature Flags
+: - Deliver flag configurations (targeting and assignment rules) to server-side SDKs for synchronous variant assignment based on evaluation context. See [Feature Flags][48] for more information.
+
 ## Security considerations
 
 Datadog implements the following safeguards to protect the confidentiality, integrity, and availability of configurations received and applied by your Datadog components:
@@ -115,6 +118,7 @@ Enabling Remote Configuration impacts the following products. Each product defin
 | Network Device Monitoring (NDM) | `NDM_DEVICE_PROFILES_VIEW`<br>`NDM_DEVICE_PROFILES_EDIT` |
 | Container Autoscaling | `ORCHESTRATION_AUTOSCALING_MANAGE`<br>`ORCHESTRATION_WORKLOAD_SCALING_WRITE`<br>`ORCHESTRATION_WORKLOAD_SCALING_READ` |
 | Serverless Lambda Auto-instrumentation | `SERVERLESS_AWS_INSTRUMENTATION_READ`<br>`SERVERLESS_AWS_INSTRUMENTATION_WRITE`<br><br>For more information, see [Serverless][46]. |
+| Feature Flags | `FEATURE_FLAG_CONFIG_READ`<br>`FEATURE_FLAG_CONFIG_WRITE`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_READ`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_WRITE`<br><br>For more information, see [Feature Flags][48]. |
 
 ## Enable Remote Configuration
 
@@ -136,6 +140,7 @@ Consult the documentation below for instructions specific to the product you're 
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount) |
 | Private Action Runner | [Private Actions Overview](/actions/private_actions/) |
+| Feature Flags | [Server-Side Feature Flags](/feature_flags/server/) |
 
 ## Best practices
 
@@ -201,3 +206,4 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [45]: /account_management/rbac/permissions/#app-builder--workflow-automation
 [46]: /account_management/rbac/permissions/#serverless
 [47]: /containers/autoscaling
+[48]: /feature_flags/

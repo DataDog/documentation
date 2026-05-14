@@ -25,31 +25,9 @@ aliases:
 
 ## Setup
 
-If your application is deployed as a container image, use the _Container Image_ method.
-
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-You can instrument your Ruby AWS Lambda application directly within Datadog.
-
-1. Configure your Lambda functions
-
-    Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
-
-    ```ruby
-    require 'datadog/lambda'
-
-    Datadog::Lambda.configure_apm do |c|
-    # Enable the instrumentation
-    end
-
-    def handler(event:, context:)
-        Datadog::Lambda.wrap(event, context) do
-            return { statusCode: 200, body: 'Hello World' }
-        end
-    end
-    ```
-
-2. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+You can instrument your Ruby AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
@@ -187,10 +165,6 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 
-{{% tab "AWS CDK" %}}
-{{< lambda-install-cdk language="ruby" layer="ruby" layerParamTypescript="rubyLayerVersion" layerParamPython="ruby_layer_version">}}
-{{% /tab %}}
-
 {{% tab "AWS SAM" %}}
 
 The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog on your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
@@ -255,11 +229,15 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 
+{{% tab "AWS CDK" %}}
+{{< lambda-install-cdk language="ruby" layer="ruby" layerParamTypescript="rubyLayerVersion" layerParamPython="ruby_layer_version">}}
+{{% /tab %}}
+
 {{% tab "Container Image" %}}
 
 1. Install the Datadog Lambda Library
 
-    If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda library as a Lambda Layer. Instead, you must package the Datadog Lambda and tracing libraries within the image.
+    If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda library as a Lambda Layer. Instead, you must package the Datadog Lambda and SDKs within the image.
 
     Add the following to your Gemfile:
 
@@ -502,6 +480,8 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% svl-tracing-env %}}
 
 ## FIPS compliance
 

@@ -1,12 +1,18 @@
 ---
 aliases:
 - /fr/agent/guide/operator-eks-addon
+description: Installer et configurer l'Agent Datadog sur Amazon EKS en utilisant l'opérateur
+  Datadog comme add-on EKS
 further_reading:
 - link: agent/kubernetes/log
   tag: Documentation
   text: Datadog et Kubernetes
 title: Installer l'Agent Datadog sur Amazon EKS avec l'Operator Datadog
 ---
+
+<div class="alert alert-info">À partir de la v0.1.9, l'add-on de l'opérateur Datadog prend en charge l'injection automatique de sidecar de l'Agent dans les pods planifiés sur des instances Fargate. Consultez <a href="https://docs.datadoghq.com/integrations/eks_fargate/?tab=datadogoperator#admission-controller-using-datadog-operator">ce guide</a> pour plus de détails.
+</div>
+
 
 Vous pouvez installer l'Agent Datadog sur un cluster Amazon EKS. Pour ce faire, installez l'[Operator Datadog](/containers/datadog_operator) en tant que [module complémentaire Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) et appliquez le manifeste `DatadogAgent`.
 
@@ -38,12 +44,12 @@ Ces restrictions sont nécessaires pour rendre l'Operator conforme aux politique
 
 Pour installer l'Operator en tant que module, exécutez :
   ```bash
-  aws eks create-addon --addon-name datadog_operator --region <RÉGION_AWS> --cluster-name <NOM_CLUSTER>
+  aws eks create-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME>
   ```
 
 Le processus d'installation est asynchrone. Pour vérifier le statut de l'installation, exécutez :
   ```bash
-  aws eks describe-addon --addon-name datadog_operator --region <RÉGION_AWS> --cluster-name <NOM_CLUSTER>
+  aws eks describe-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME>
   ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -79,7 +85,7 @@ Suivez les instructions pour configurer l'Agent Datadog en utilisant la ressourc
      global:
        # Required in case the Agent cannot resolve the cluster name through IMDS. See the note below.
        clusterName: <CLUSTER_NAME>
-       registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com/datadog
+       registry: <PRIVATE_EKS_REGISTRY_PATH>
        credentials:
          apiSecret:
            secretName: datadog-secret
@@ -127,7 +133,7 @@ Vérifiez que toutes les ressources de l'Agent ont été supprimées et continue
 
 Pour supprimer le module, exécutez :
   ```bash
-  aws eks delete-addon --addon-name datadog_operator --region <RÉGION_AWS> --cluster-name <NOM_CLUSTER>
+  aws eks delete-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME>
   ```
 
 {{% /tab %}}

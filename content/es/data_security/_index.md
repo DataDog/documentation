@@ -18,7 +18,7 @@ further_reading:
 - link: /data_security/real_user_monitoring/
   tag: Documentación
   text: Seguridad de los datos en RUM
-- link: /real_user_monitoring/session_replay/browser/privacy_options
+- link: /session_replay/browser/privacy_options
   tag: Documentación
   text: Opciones de privacidad de Session Replay
 - link: /security/sensitive_data_scanner/
@@ -161,8 +161,8 @@ Pipelines y tests de integración continua
 [18]: /es/tracing/configure_data_security/
 [19]: /es/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /es/data_security/synthetics/
-[21]: /es/real_user_monitoring/browser/advanced_configuration/
-[22]: /es/real_user_monitoring/session_replay/browser/privacy_options
+[21]: /es/real_user_monitoring/application_monitoring/browser/advanced_configuration/
+[22]: /es/session_replay/browser/privacy_options
 [23]: /es/database_monitoring/data_collected/#sensitive-information
 [24]: /es/getting_started/tagging/
 [25]: /es/tracing/glossary/

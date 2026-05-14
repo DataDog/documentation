@@ -41,7 +41,7 @@ Additional protocols and traffic encryption methods are in <a href="/universal_s
     - **In Preview:** For non-containerized services, see the [instructions here](#additional-configuration).
 - If on Windows:
     - Your service is running on a virtual machine.
-- Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
+- Datadog Agent is installed alongside your service. Installing an SDK is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
 
 ## How USM detects service names
@@ -196,7 +196,7 @@ To enable Universal Service Monitoring with the [Datadog Operator][1], update yo
      serviceAccountName: datadog-agent
      containers:
        - name: datadog-agent
-         image: 'gcr.io/datadoghq/agent:latest'
+         image: 'registry.datadoghq.com/agent:latest'
          ...
      volumeMounts:
        ...
@@ -212,10 +212,10 @@ To enable Universal Service Monitoring with the [Datadog Operator][1], update yo
      serviceAccountName: datadog-agent
      containers:
        - name: datadog-agent
-         image: 'gcr.io/datadoghq/agent:latest'
+         image: 'registry.datadoghq.com/agent:latest'
          ...
        - name: system-probe
-         image: 'gcr.io/datadoghq/agent:latest'
+         image: 'registry.datadoghq.com/agent:latest'
          imagePullPolicy: Always
          securityContext:
            capabilities:
@@ -396,7 +396,7 @@ docker run --cgroupns host \
 --cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
 --cap-add=CHOWN \
-gcr.io/datadoghq/agent:latest
+registry.datadoghq.com/agent:latest
 ```
 
 {{% /tab %}}

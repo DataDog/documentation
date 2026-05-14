@@ -1,8 +1,10 @@
 ---
+description: Configura el Datadog Agent v6 para utilizar el tiempo de ejecución de
+  Python 3 en checks e integraciones del Agent en lugar del Python 2 predeterminado.
 further_reading:
 - link: /agent/versions/upgrade_to_agent_v7/
   tag: Documentación
-  text: Actualizar el Agent a la versión 7
+  text: Actualizar al Agent v7
 title: Gestión de las versiones de Python
 ---
 

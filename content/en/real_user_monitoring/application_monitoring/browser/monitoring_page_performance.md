@@ -25,6 +25,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
     tag: "Blog"
     text: "From performance to impact: Bridging frontend teams through shared context"
+  - link: "https://www.datadoghq.com/blog/javascript-cache"
+    tag: "Blog"
+    text: "Configuring JavaScript caches for better performance"
 ---
 
 ## Overview
@@ -67,6 +70,35 @@ RUM reports the element that is associated with each Core Web Vital instance:
 - For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
 - For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
 
+### Diagnose Core Web Vitals with subparts
+
+Largest Contentful Paint and Interaction to Next Paint break down into subparts, each isolating a specific phase of the metric. Use subpart data to identify which phase contributes most to a slow LCP or INP.
+
+#### Largest Contentful Paint subparts
+
+<div class="alert alert-info">These attributes require Browser SDK v6.32.0 or later.</div>
+
+LCP breaks down into four phases. Time to First Byte is collected separately as `view.first_byte`. The remaining three subparts are collected under `view.performance.lcp.sub_parts`:
+
+| Phase                  | Attribute                                              | Description                                                                                                                                                                |
+|------------------------|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Time to First Byte     | `view.first_byte`                                      | Time until the browser receives the first byte of the HTML response, including server response time, CDN latency, and redirect time.                                                                     |
+| Resource load delay    | `view.performance.lcp.sub_parts.load_delay`            | Time between TTFB and the start of the LCP resource load. Reflects priority hints, preloads, and render-blocking resources. `0` when the LCP element does not require a resource. |
+| Resource load time     | `view.performance.lcp.sub_parts.load_time`             | Time to load the LCP resource, affected by image format, compression, and network conditions. `0` when the LCP element does not require a resource.                                  |
+| Render delay           | `view.performance.lcp.sub_parts.render_delay`          | Time between the LCP resource finishing loading and the LCP element being painted. High values indicate long tasks or blocking JavaScript or CSS.                                            |
+
+#### Interaction to Next Paint subparts
+
+<div class="alert alert-info">These attributes require Browser SDK v6.33.0 or later.</div>
+
+INP breaks down into three phases, collected under `view.performance.inp.sub_parts`:
+
+| Phase                  | Attribute                                              | Description                                                                                                                                                                |
+|------------------------|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Input delay            | `view.performance.inp.sub_parts.input_delay`           | Time from the user input until the event handler starts running. High values indicate main-thread contention and long tasks.                                                                  |
+| Processing duration    | `view.performance.inp.sub_parts.processing_duration`   | Duration of the event handler execution. High values indicate complex or synchronous handler work.                                                                                        |
+| Presentation delay     | `view.performance.inp.sub_parts.presentation_delay`    | Time the browser took to render the next frame. High values indicate expensive style, layout, paint, or composite operations.                                                                                |
+
 ## All performance telemetry
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                                      |
@@ -108,6 +140,19 @@ To account for modern web applications, loading time watches for network request
   - The difference between `navigationStart` and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
 - **SPA Route Change**: Loading Time is equal to the difference between the URL change and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
+
+### Manually set the loading time
+
+If the automatic loading time calculation does not accurately reflect when your view has finished loading, you can manually set it using `setViewLoadingTime`. Call this method when your view is fully loaded and displayed to the user. The loading time is computed as the elapsed time since the current view started.
+
+```javascript
+window.DD_RUM.setViewLoadingTime()
+```
+
+Each call replaces any previously set value (last-call-wins). After it is called, the automatic loading time detection is stopped and the manual value is used instead.
+
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
+
 
 ### How page activity is calculated
 
@@ -163,7 +208,8 @@ The RUM SDK automatically monitors frameworks that rely on hash (`#`) navigation
 
 ### Measure component-level performance with custom vitals
 
-Use the `customVital` API to measure the performance of your application at the component level. For example, you can measure how long it takes for part of your page to render or for a component to respond to a user interaction. **Note**: Custom vital names can't contain spaces or special characters.
+Use the `customVital` API to measure the performance of your application at the component level. For example, you can measure how long it takes for part of your page to render or for a component to respond to a user interaction. **Note**: Custom vital names must contain only letters, digits, or the characters `- _ . @ $`.
+
 
 #### Start and stop duration measurements
 
@@ -269,6 +315,6 @@ document.addEventListener("scroll", function handler() {
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [16]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[17]: https://en.wikipedia.org/wiki/Comet_&#40;programming&#41;
+[17]: https://en.wikipedia.org/wiki/Comet_(programming)
 [18]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [19]: https://web.dev/inp/
