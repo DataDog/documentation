@@ -69,6 +69,29 @@ postgresql://user:abc%2Fdef%2Bghi%3D@host:5432/byoc-logs
 postgresql://user:abc/def+ghi=@host:5432/byoc-logs
 ```
 
+### Index not found or multiple clusters in the console
+
+**Symptom:** Indexer logs repeatedly show:
+```
+ERROR quickwit: command failed error=metastore error `index `datadog` not found`
+```
+
+The cluster eventually crashes, and the BYOC Logs console shows multiple clusters where you expect one.
+
+**Cause:** The metastore URI is not set correctly, so the metastore falls back to a local file-backed store. Each time the metastore pod restarts, the file is wiped and a fresh metastore is created—all index metadata is lost. An earlier error in the logs often points to the misconfiguration:
+
+```
+ERROR quickwit: command failed error=failed to resolve metastore uri postgresql://user:***redacted***@<host>/<database>
+```
+
+**Solution:** Verify the metastore URI is set correctly. Inspect the running configuration through the local node API endpoint:
+
+```bash
+kubectl exec -n datadog-byoc-logs <pod-name> -- curl -s http://localhost:7280/api/v1/node_config
+```
+
+Confirm `metastore_uri` points to your PostgreSQL instance. If the password contains special characters, verify it is URL-encoded (see [Metastore cannot connect to PostgreSQL](#metastore-cannot-connect-to-postgresql)).
+
 ## Storage errors
 
 If you set the wrong AWS/GKE/Azure credentials or region, you see this error message with kind `Unauthorized` or `Internal` in the logs of your indexers:
