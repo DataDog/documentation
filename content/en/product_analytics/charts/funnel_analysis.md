@@ -132,6 +132,9 @@ The top list visualization identifies the top values from a facet based on your 
 To gain more context about user conversions and dropoffs, click on a funnel step to access:
 
 - **Conversion analysis**: View conversion drivers, user journeys, available user replays for conversions and dropoffs, and user details.
+
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="The side panel view after clicking a funnel step, showing conversion drivers, available replays, and converted users." style="width:100%;" >}}
+
 - **User journeys**: View conversion and dropoff user paths for the selected step sequence, including branching paths to other steps outside of the funnel.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_user_journeys.png" alt="A user journey showing the top five dropoff paths following step 1 in the funnel." style="width:100%;" >}}
