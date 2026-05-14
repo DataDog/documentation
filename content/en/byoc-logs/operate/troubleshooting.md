@@ -105,7 +105,7 @@ Action: Check if your pod has access to the bucket.
 
 ## Ingestion issues
 
-### Ingest errors on CloudPrem indexers
+### Ingest errors on BYOC Logs indexers
 
 **Symptom:** Indexer logs show ingest errors, or the `ingest_requests.count` metric shows failures in the OOTB dashboard.
 
@@ -113,7 +113,7 @@ Action: Check if your pod has access to the bucket.
 - **Indexers undersized:** Check CPU utilization and the `pending_merge_ops.gauge` metric. If merge operations are backing up, indexers need more CPU or additional pods.
 - **Disk full:** Check `disk.available_space.gauge`. If the write-ahead log (WAL) fills up, indexers stop accepting new data. Increase persistent volume size or add more indexer pods.
 
-In case you use Observability Pipelines in front of CloudPrem, you will need to check what's happening there, see OP [Scaling and Performance][2].
+In case you use Observability Pipelines in front of BYOC Logs, you will need to check what's happening there, see OP [Scaling and Performance][2].
 
 ### Occasional 429 (Too Many Requests) errors
 
