@@ -339,6 +339,10 @@ A test is considered `FAILED` if it does not satisfy one or more assertions or i
 
 For a complete list of HTTP and SSL error codes, see [API Testing Errors][12].
 
+## Investigate with Bits AI SRE
+
+To identify the root cause of a failing Synthetic HTTP test, launch a [Bits AI SRE investigation][18]. Bits AI SRE analyzes Synthetic test results and history alongside traces, logs, and metrics, then surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
+
 ## Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][13].
@@ -367,3 +371,4 @@ If you are using the [custom role feature][14], add your user to any custom role
 [15]: /account_management/rbac/#create-a-custom-role
 [16]: /synthetics/api_tests/errors/#http-errors
 [17]: /api_catalog
+[18]: /bits_ai/bits_ai_sre/investigate_issues/#from-the-synthetic-test-details-page

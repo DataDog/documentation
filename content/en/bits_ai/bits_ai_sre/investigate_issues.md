@@ -56,10 +56,7 @@ Bits AI SRE investigations started from APM latency graphs and APM Watchdog stor
 
 On a Watchdog APM latency story, click {{< ui >}}Investigate with Bits AI SRE{{< /ui >}}.
 
-### Synthetic tests (Preview)
-
-<div class="alert alert-info">
-Bits AI SRE investigations started from Synthetic Browser and API tests are in Preview.</div>
+### Synthetic tests
 
 When a Synthetic Browser or API test monitor triggers, you can launch a Bits AI SRE investigation to identify the root cause. Bits AI SRE analyzes Synthetic test results and history alongside traces, logs, and metrics. It surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
 
@@ -70,6 +67,8 @@ When a Synthetic Browser or API test monitor triggers, you can launch a Bits AI 
 1. Click {{< ui >}}Investigate with Bits AI SRE{{< /ui >}}.
 
 The investigation opens in a new page, and you can also view it from the test details page after it runs.
+
+{{< img src="bits_ai/synthetics_bits_sre.png" alt="Synthetic test details page showing the Activity tab with an Alert Triggered timeline event selected, the failure summary panel, and the Investigate with Bits AI SRE button in the Next Steps panel" style="width:100%;" >}}
 
 #### From a Synthetic monitor
 
@@ -123,7 +122,7 @@ Bits is able to run investigations on the following monitor types:
   - APM (`APM Metrics` type only; `Trace Analytics` is not supported)
   - Composites
   - SLOs (Preview)
-  - Synthetics API and Browser tests (Preview)
+  - Synthetics API and Browser tests
 
 ## How Bits AI SRE investigates
 When Bits AI SRE investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits AI SRE updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause.

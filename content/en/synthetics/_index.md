@@ -101,6 +101,10 @@ Use the [integration between Synthetic tests and APM traces][16] to find the roo
 
 {{< img src="synthetics/synthetics_traces.mp4" alt="Synthetic Monitoring" video=true style="width:100%;">}}
 
+### Investigate failures with Bits AI SRE
+
+When a Synthetic Browser or API test monitor triggers, launch a Bits AI SRE investigation to identify the root cause. Bits AI SRE analyzes Synthetic test results and history alongside traces, logs, and metrics, and surfaces a likely root cause. For more information, see [Investigate Issues with Bits AI SRE][27].
+
 ## Access out-of-the-box dashboards
 
 Analyze performance information about your API tests, multistep API tests, browser tests, and private locations, as well as Datadog events, with [out-of-the-box Synthetic dashboards][17]. 
@@ -176,3 +180,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [24]: /synthetics/notifications/
 [25]: /synthetics/network_path_tests/
 [26]: /synthetics/test_suites/
+[27]: /bits_ai/bits_ai_sre/investigate_issues/
