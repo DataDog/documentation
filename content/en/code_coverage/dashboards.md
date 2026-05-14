@@ -54,27 +54,25 @@ Each recipe is the query filter for one widget. Replace `<REPOSITORY_ID>` with t
 Use this filter in a Query Value widget for the current coverage number, or a Timeseries widget for a trend line over time.
 
 {{< code-block lang="text" >}}
-@git.repository.id:<REPOSITORY_ID> @git.default_branch:true -@service:* -@codeowner:* -@report.flag:* -@split:true
+@git.repository.id:<REPOSITORY_ID> @git.default_branch:true -@split:true -@report.flag:*
 {{< /code-block >}}
 
-The combined `-@service:*`, `-@codeowner:*`, `-@report.flag:*`, and `-@split:true` filters exclude every split event, leaving only the repository event.
+`-@split:true` excludes per-service and per-code-owner events, and `-@report.flag:*` excludes per-flag events, leaving only the repository event.
 
 ### Break down coverage by service
 
 Compare coverage across the services in a monorepo. Use this filter in a Top List or a Timeseries widget, grouped by `@service`.
 
 {{< code-block lang="text" >}}
-@git.repository.id:<REPOSITORY_ID> @service:* -@codeowner:* -@report.flag:*
+@git.repository.id:<REPOSITORY_ID> @service:*
 {{< /code-block >}}
-
-`@service:*` already restricts results to per-service events (which carry `@split:true`), so adding `-@split:true` would exclude all matching events and return no data.
 
 ### Break down coverage by code owner
 
 Compare coverage across teams. Use this filter in a Top List or a Timeseries widget, grouped by `@codeowner`.
 
 {{< code-block lang="text" >}}
-@git.repository.id:<REPOSITORY_ID> @codeowner:* -@service:* -@report.flag:*
+@git.repository.id:<REPOSITORY_ID> @codeowner:*
 {{< /code-block >}}
 
 ### Break down coverage by flag
@@ -82,13 +80,13 @@ Compare coverage across teams. Use this filter in a Top List or a Timeseries wid
 Compare coverage across [flags][4], for example by test type or runtime version. Use this filter in a Top List or a Timeseries widget, grouped by `@report.flag`.
 
 {{< code-block lang="text" >}}
-@git.repository.id:<REPOSITORY_ID> @report.flag:* -@service:* -@codeowner:*
+@git.repository.id:<REPOSITORY_ID> @report.flag:*
 {{< /code-block >}}
 
 ### Example: coverage on `main` for a specific repository
 
 {{< code-block lang="text" >}}
-@git.repository.id:github.com/datadog/documentation @git.branch:main -@service:* -@codeowner:* -@report.flag:* -@split:true
+@git.repository.id:github.com/datadog/documentation @git.branch:main -@split:true -@report.flag:*
 {{< /code-block >}}
 
 This example uses `@git.branch:main` to target a named branch. To follow the default branch on any repository, use `@git.default_branch:true` instead.
