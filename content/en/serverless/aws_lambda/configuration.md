@@ -800,7 +800,7 @@ Example use case: For security, every day (86400 seconds), the API key is rotate
 
 This is available for version 88+ of the Datadog Lambda Extension.
 
-## Store API key in AWS Secrets Manager
+## Store the API key in AWS Secrets Manager
 
 `DD_API_KEY_SECRET_ARN` specifies the ARN of an AWS Secrets Manager secret that stores your Datadog API key. When set, the Datadog Lambda Extension fetches the secret at cold start and uses its value as the API key. The Lambda function's execution role must be granted secretsmanager:GetSecretValue permission on the referenced ARN.
 
