@@ -1,4 +1,6 @@
 {{- $text := "" -}}
+{{- /* On API endpoint pages, suppress the trailing breadcrumb — the H1 already shows the page title, and the breadcrumb chain is long. */ -}}
+{{- $hideCurrent := and (eq .Section "api") (.Params.operationid) -}}
 <div id="breadcrumbs" {{- if (eq .Section "api") -}}class="position-relative"{{- end -}}>
     {{- range .Ancestors.Reverse }}
       {{- if .File -}}
@@ -11,11 +13,12 @@
         {{- end -}}
 
         {{ if not $exclusions }}
-          <a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ $text }}</a>&nbsp;>&nbsp;
+          <a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ $text }}</a>{{ if not $hideCurrent }}&nbsp;>&nbsp;{{ end }}
         {{ end }}
       {{- end -}}
     {{- end -}}
 
+    {{ if not $hideCurrent }}
     <a class="text-primary text-uppercase" href="{{ .RelPermalink }}">
       {{- if and (eq .Section "integrations") (.Params.integration_title) -}}
         {{- .Params.integration_title -}}
@@ -23,4 +26,5 @@
         {{- .Title -}}
       {{- end -}}
     </a>
+    {{ end }}
 </div>

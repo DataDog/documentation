@@ -8,23 +8,36 @@ const safeJsonStringify = require('safe-json-stringify');
 const oneOfLimit = 50;
 const ENUM_DISPLAY_LIMIT = 10;
 
-// Support both marked v1 (require('marked')) and v12+ (marked.umd.js or default export)
+// marked v17+ is ESM-only and breaks raw `node` require(). Load lazily so the rest of
+// this module (updateMenu, createPages, etc.) can be required without marked working.
+// Jest tests that exercise descColumn etc. will trigger the load via parseDescWithTableCell;
+// inside Jest, babel-jest transforms the ESM module so the require succeeds.
 let marked;
-try {
-  const markedModule = require('marked/lib/marked.umd.js');
-  marked = markedModule.marked || markedModule.default || markedModule;
-} catch (_) {
-  const markedModule = require('marked');
-  marked = { parse: markedModule.parse };
-}
-if (!marked || typeof marked.parse !== 'function') {
-  throw new Error('marked.parse not found. Check marked package version.');
+function loadMarked() {
+  if (marked) return marked;
+  try {
+    const m = require('marked/lib/marked.umd.js');
+    const parse = (m.marked && m.marked.parse) || m.parse || (m.default && m.default.parse);
+    if (typeof parse === 'function') marked = { parse };
+  } catch (_) { /* fall through */ }
+  if (!marked) {
+    try {
+      const m = require('marked');
+      const parse = m.parse || (m.default && m.default.parse) || (m.marked && m.marked.parse);
+      if (typeof parse === 'function') marked = { parse };
+    } catch (_) { /* fall through */ }
+  }
+  if (!marked || typeof marked.parse !== 'function') {
+    throw new Error('marked.parse not found. Check marked package version.');
+  }
+  return marked;
 }
 
-const supportedLangs = ['en'];
+const supportedLangs = ['en', 'fr', 'ja', 'ko'];
 
 /** Parse markdown, add table-cell class to paragraph tags, and add id to headings (for API description tables). */
 function parseDescWithTableCell(desc) {
+  loadMarked();
   const html = marked.parse(desc || '', typeof marked.use === 'function' ? {} : undefined);
   let out = (html || '').trim()
     .replace(/<p>/g, '<p class="table-cell">')
@@ -47,6 +60,15 @@ const updateMenu = (specData, specs, languages) => {
   languages.forEach((language) => {
     const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/api.${language}.yaml`, 'utf8'));
 
+  // Build a map of identifier → existing name for generated entries so we can preserve
+  // translated names (e.g. "Intégration AWS") when regenerating non-English menus.
+  const existingNames = {};
+  (currentMenuYaml['menu']['api'] || []).forEach((entry) => {
+    if (entry.generated && entry.identifier && entry.name) {
+      existingNames[entry.identifier] = entry.name;
+    }
+  });
+
   // filter out auto generated menu items so we just have hardcoded ones
   const newMenuArray = (currentMenuYaml['menu']['api'] || []).filter((entry => !entry.hasOwnProperty("generated")));
 
@@ -63,7 +85,7 @@ const updateMenu = (specData, specs, languages) => {
       } else {
         // doesn't exist lets add it
         newMenuArray.push({
-          name: tag.name,
+          name: existingNames[tagSlug] || tag.name,
           url: (language === 'en' ? `/api/latest/${tagSlug}/` : `/${language}/api/latest/${tagSlug}/` ),
           identifier: tagSlug,
           generated: true
@@ -101,7 +123,7 @@ const updateMenu = (specData, specs, languages) => {
               ? `/api/latest/${tagSlug}/${actionSlug}/`
               : `/${language}/api/latest/${tagSlug}/${actionSlug}/`;
             const item = {
-              name: action.summary,
+              name: existingNames[itemIdentifier] || action.summary,
               url: endpointUrl,
               identifier: itemIdentifier,
               parent: tagSlug,
@@ -1161,4 +1183,5 @@ module.exports = {
   outputExample,
   getJsonWrapChars,
   createEndpointPages,
+  updateMenu,
 };
