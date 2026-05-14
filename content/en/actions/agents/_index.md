@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Agent Builder is in Preview and available to all customers.
+Agent Builder is in Preview and available to all customers, excluding GovCloud customers.
 {{< /callout >}}
 
 ## Overview
