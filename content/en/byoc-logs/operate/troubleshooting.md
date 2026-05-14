@@ -112,9 +112,32 @@ Action: Check if your pod has access to the bucket.
 **Common causes:**
 - **Indexers undersized:** Check CPU utilization and the `pending_merge_ops.gauge` metric. If merge operations are backing up, indexers need more CPU or additional pods.
 - **Disk full:** Check `disk.available_space.gauge`. If the write-ahead log (WAL) fills up, indexers stop accepting new data. Increase persistent volume size or add more indexer pods.
-- **Rate limiting:** On initial deployment or after a restart, you may see `429 Too Many Requests` errors. This is typically transient while the cluster stabilizes. If it persists, check that your indexer count matches your ingestion volume.
 
 In case you use Observability Pipelines in front of CloudPrem, you will need to check what's happening there, see OP [Scaling and Performance][2].
+
+### Occasional 429 (Too Many Requests) errors
+
+A low rate of 429 errors is not a problem in itself. The Datadog Agent or Observability Pipelines buffers payloads and retries the request automatically.
+
+429s usually mean the cluster is temporarily short on shards. Common triggers:
+
+- On initial deployment or after a restart, while the cluster stabilizes
+- Ingestion throughput increased quickly
+- An indexer pod went down
+- Ingestion paused for a while and shards scaled down
+
+**Mitigation:** Configure `index.minShards` in your indexer values to keep a baseline number of shards available at all times, even after periods of low ingestion.
+
+The real concern is sustained 429s that overflow the client buffer. If 429s persist, the cluster is likely undersized—add indexer pods or increase `indexer.podSize`.
+
+**Monitor for client-side log loss:** Watch the following Datadog Agent metrics to detect dropped logs:
+
+| Metric | What it measures |
+|--------|------------------|
+| `datadog.logs.bytes_missed` | Bytes from logs that could not be tailed after a file rotation (the Agent had not finished reading the previous file). |
+| `datadog.logs_client_http_destination.payloads_dropped` | Log payloads dropped because of HTTP errors. The Agent retries on almost all errors, so a non-zero value indicates a real issue. |
+
+If either metric is rising, contact Datadog support.
 
 ## Search performance
 
