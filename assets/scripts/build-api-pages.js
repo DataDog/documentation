@@ -86,7 +86,7 @@ const updateMenu = (specData, specs, languages) => {
         // doesn't exist lets add it
         newMenuArray.push({
           name: existingNames[tagSlug] || tag.name,
-          url: (language === 'en' ? `/api/latest/${tagSlug}/` : `/${language}/api/latest/${tagSlug}/` ),
+          url: `/api/latest/${tagSlug}/`,
           identifier: tagSlug,
           generated: true
         });
@@ -119,12 +119,9 @@ const updateMenu = (specData, specs, languages) => {
           } else {
             // instead of push we need to insert after last parent: tag.name
             const indx = newMenuArray.findIndex((i) => i.identifier === tagSlug);
-            const endpointUrl = (language === 'en')
-              ? `/api/latest/${tagSlug}/${actionSlug}/`
-              : `/${language}/api/latest/${tagSlug}/${actionSlug}/`;
             const item = {
               name: existingNames[itemIdentifier] || action.summary,
-              url: endpointUrl,
+              url: `/api/latest/${tagSlug}/${actionSlug}/`,
               identifier: itemIdentifier,
               parent: tagSlug,
               generated: true,
