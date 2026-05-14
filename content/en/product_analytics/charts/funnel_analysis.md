@@ -15,7 +15,7 @@ algolia:
 
 ## Overview
 
-Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. Specifically, you can:
+Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end journey paths. Specifically, you can:
 
 - See if customers drop off at a certain point due to poor website performance
 - Track how the conversion rate changes over time as new features are built
@@ -50,13 +50,22 @@ You can combine multiple events within a single funnel step, to account for end 
 
 To add multiple events to a step, click the **or** button next to an existing event.
 
-### Group data
+### Compare data
 
-To group data by a specific attribute, like device type or geolocation, select **Compare** > **By breakdown**, then choose the attribute you would like to group and compare by. You can also adjust whether to show the top (most common) or bottom (least common) occurrences within the attribute, and how many values to compare.
+Select **Compare**, then choose one of the options below to compare funnel data in different ways:
+
+**By breakdown**: Group data by a specific attribute, like device type or geolocation. You can also adjust whether to show the top (most common) or bottom (least common) values within the attribute, and how many values to include.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_compare_by_country.png" alt="The Compare by breakdown view, configured to show the top five conversion sources by country." >}}
 
-For side-by-side data comparison, select **Compare** > **By property or segment**, then choose the properties or segments you would like to compare.
+**By property or segment**: Compare multiple user segments or user attributes side by side.
+
+- To compare user segments, select the segments you want to compare.
+- To compare a user attribute, select a property (such as Browser Name or Country), then choose the values you want to compare (such as Firefox, Chrome, and Safari).
+
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_side_by_side.png" alt="The Compare by property or segment view, showing side-by-side comparison of five selected Browser Name values." >}}
+
+**By time**: Compare conversion data side by side between time periods.
 
 ## Refine conversion insights
 
@@ -127,17 +136,19 @@ The top list visualization identifies the top values from a facet based on your 
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="The top list visualization, configured to show the top four conversion sources by continent." style="width:80%;" >}}
 
-## View user journeys and conversion driver insights 
+## View conversion drivers and journey paths
 
-To gain more context about user conversions and dropoffs, click on a funnel step to access:
+To gain more context about user conversions and dropoffs, click on a funnel step to access conversion analysis and journey paths.
+
+<div class="alert alert-info">Conversion analysis is in Preview.</div>
 
 - **Conversion analysis**: View conversion drivers, user journeys, available user replays for conversions and dropoffs, and user details.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="The side panel view after clicking a funnel step, showing conversion drivers, available replays, and converted users." style="width:100%;" >}}
 
-- **User journeys**: View conversion and dropoff user paths for the selected step sequence, including branching paths to other steps outside of the funnel.
+- **Journey paths**: View conversion and dropoff user paths for the selected step sequence, including branching paths to other steps outside of the funnel.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_user_journeys.png" alt="A user journey showing the top five dropoff paths following step 1 in the funnel." style="width:100%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_journey_paths.png" alt="A journey path showing the top five dropoff paths following step 1 in the funnel." style="width:100%;" >}}
 
 ## Share a funnel
 
