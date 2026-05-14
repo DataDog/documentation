@@ -3364,6 +3364,7 @@ components:
         - incident_analytics
         - product_analytics
         - on_call_events
+        - errors
       example: "logs"
       type: string
       x-enum-varnames:
@@ -3380,6 +3381,7 @@ components:
         - INCIDENT_ANALYTICS
         - PRODUCT_ANALYTICS
         - ON_CALL_EVENTS
+        - ERRORS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
