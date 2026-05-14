@@ -170,9 +170,9 @@ You can post updates if plans change or reschedule the maintenance window as nee
 
 ## Backfill a notice
 
-If an incident occurred before you had a chance to publish a notice, you can retroactively document it using a backfilled notice. Unlike a regular notice, a backfilled notice is built from a list of updates, each with its own start time, so the notice accurately reflects the full incident timeline in the uptime history.
+If an incident occurred and you did not publish a notice to the status page while it was happening, you can still document it retroactively using a backfilled notice. Unlike a regular notice, a backfilled notice is built from a list of updates, each with its own start time, so the notice accurately reflects the full incident timeline in the uptime history.
 
-1. From a status page, click **Publish Backfilled Notice**.
+1. From a status page, under **Publish Notice**, click **Publish Backfilled Notice**.
 1. Enter a **Title** for the notice.
 1. Add one or more **Updates**. For each update, provide a start time and any relevant details.
 1. Click **Publish Notice**.
