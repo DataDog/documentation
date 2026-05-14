@@ -807,8 +807,8 @@ This is available for version 88+ of the Datadog Lambda Extension.
 Starting with version 96, you can store the secret value in one of the following formats:
 - **Plain string**: The extension uses the secret value as the API key.
 - **JSON object**: If the secret value parses as a JSON object containing a `dd_api_key` field, the extension extracts that field's value and uses it as the API key. This is useful when the same secret stores multiple credentials (for example, alongside an app key or other tokens).
-```sh
-  { "dd_api_key": "<YOUR_DATADOG_API_KEY>" }
+```json
+{ "dd_api_key": "<YOUR_DATADOG_API_KEY>" }
 ```
 **Note**: If the JSON object does not contain a `dd_api_key` field, or the value is not valid JSON, the extension falls back to using the raw secret string. The JSON key name is fixed as `dd_api_key` and is not configurable.
 
