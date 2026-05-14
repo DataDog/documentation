@@ -33,22 +33,22 @@ Data Streams Monitoring ships with monitor templates that you can create directl
 
 ### Cluster-level templates
 
-| Template                                | Metric                              | Condition                                  |
-|-----------------------------------------|-------------------------------------|--------------------------------------------|
-| Offline partitions detected             | `kafka.partition.offline`           | Any partition in the cluster is offline.   |
-| Under-replicated partitions detected    | `kafka.partition.under_replicated`  | Any partition in the cluster is under-replicated, which puts data at risk if a broker fails. |
+| Template                                | Description                                                                                                                                    | Metric                              | Condition                                                      |
+|-----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|----------------------------------------------------------------|
+| Offline partitions detected             | Topic data is unavailable for both reads and writes, risking message loss, consumer lag, and service outages until leadership is reassigned    | `kafka.partition.offline`           | Any partition in the cluster is offline                        |
+| Under-replicated partitions detected    | Topic data has fewer in-sync replicas than configured, increasing risk of data loss if the leader broker fails before replication catches up   | `kafka.partition.under_replicated`  | Any partition in the cluster is under-replicated               |
 
 Both monitors are grouped by `kafka_cluster_id` so each cluster alerts its own owner.
 
 ### Topic-level templates
 
-| Template                                                   | Metric                                                                  | Condition |
-|------------------------------------------------------------|-------------------------------------------------------------------------|-----------|
-| Consumer lag is high for topic                             | `kafka.estimated_consumer_lag`                                          | Consumer lag exceeds a threshold for a topic and consumer group. |
-| Incoming message rate has dropped                          | `kafka.topic.message_rate`                                              | Produce rate to the topic drops below a threshold. Catches silent producer failures. |
-| Offline partitions on topic                                | `kafka.partition.offline`                                               | Any partition for this specific topic goes offline, indicating data unavailability for that topic. |
-| Consumer lag is approaching time retention limit           | `kafka.estimated_consumer_lag` / `kafka.topic.config.retention_ms`      | Estimated lag approaches the topic's time-based retention. Beyond the retention limit, the consumer cannot recover lost data. |
-| Consumer lag is approaching bytes retention limit          | `kafka.consumer_lag` × throughput / `kafka.topic.config.retention_bytes` | Estimated lag approaches the topic's bytes-based retention. Requires [Kafka broker metrics](/integrations/kafka/?tab=host#overview) to be available. |
+| Template                                                   | Description                                                                                                                                 | Metric                                                                  | Condition |
+|------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|-----------|
+| Consumer lag is high for topic                             | Measured in seconds, indicating stale data served to customers, message backlog buildup, and delayed downstream processing                  | `kafka.estimated_consumer_lag`                                          | Consumer lag in seconds exceeds a threshold for a topic and consumer group |
+| Incoming message rate has dropped                          | Catches silent producer failures                                                                                                            | `kafka.topic.message_rate`                                              | Produce rate to the topic drops below a threshold |
+| Offline partitions on topic                                | Topic data is unavailable for both reads and writes, risking message loss, consumer lag, and service outages until leadership is reassigned | `kafka.partition.offline`                                               | Any partition for this specific topic goes offline |
+| Consumer lag is approaching time retention limit           | Increased risk of data loss. Beyond the retention limit, the consumer cannot recover lost data                                              | `kafka.estimated_consumer_lag` / `kafka.topic.config.retention_ms`      | Estimated lag approaches the topic's time-based retention |
+| Consumer lag is approaching bytes retention limit          | Increased risk of data loss. Beyond the retention limit, the consumer cannot recover lost data                                              | `kafka.consumer_lag` × throughput / `kafka.topic.config.retention_bytes` | Estimated lag approaches the topic's bytes-based retention.<br><br>Requires [Kafka broker metrics](/integrations/kafka/?tab=host#overview) to be available |
 
 ## Automate responses to triggered monitors
 
