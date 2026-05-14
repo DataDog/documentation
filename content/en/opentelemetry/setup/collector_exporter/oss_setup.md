@@ -161,7 +161,6 @@ exporters:
   # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
-    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
       # Send resource attributes and scope metadata as metric tags
@@ -345,7 +344,6 @@ exporters:
   # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
-    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
       # Send resource attributes and scope metadata as metric tags
@@ -573,7 +571,6 @@ exporters:
   # Send telemetry to Datadog's OTLP intake endpoints
   otlp_http:
     endpoint: https://otlp.${env:DD_SITE}
-    metrics_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlpmetrics
     headers:
       dd-api-key: ${env:DD_API_KEY}
       # Send resource attributes and scope metadata as metric tags
@@ -756,7 +753,7 @@ For a complete list of dimensions included in the recommended configuration, inc
 
 The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints. Key configuration details:
 
-- **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for traces and logs, `https://otlp.<YOUR_DD_SITE>/api/v2/otlpmetrics` for metrics.
+- **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for all signals.
 - **Compression**: `zstd` is recommended for reduced bandwidth usage. When using `zstd`, set `compression_params.level` explicitly, because the default uses the lowest compression level.
 - **Resource attributes as tags**: The `dd-otel-metric-config` header enables resource attributes and instrumentation scope metadata to be sent as metric tags.
 
