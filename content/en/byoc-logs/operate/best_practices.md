@@ -1,35 +1,35 @@
 ---
 title: Production Best Practices
-description: Recommendations for running CloudPrem reliably in production.
+description: Recommendations for running BYOC Logs reliably in production.
 further_reading:
-- link: "/cloudprem/operate/sizing/"
+- link: "/byoc-logs/operate/sizing/"
   tag: "Documentation"
   text: "Cluster Sizing"
-- link: "/cloudprem/operate/monitoring/"
+- link: "/byoc-logs/operate/monitoring/"
   tag: "Documentation"
-  text: "Monitor CloudPrem"
-- link: "/cloudprem/operate/troubleshooting/"
+  text: "Monitor BYOC Logs"
+- link: "/byoc-logs/operate/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
-  Join the CloudPrem Preview to use self-hosted log management features.
+{{< callout btn_hidden="true" header="Join the Preview!" >}}
+  BYOC Logs is in Preview.
 {{< /callout >}}
 
 ## Overview
 
-This page outlines operational best practices for running CloudPrem in production to help reduce common deployment issues.
+This page outlines operational best practices for running BYOC Logs in production to help reduce common deployment issues.
 
 ## Enable monitoring from the start
 
-Set up CloudPrem monitoring before sending production traffic. Without monitoring, diagnosing ingestion or search issues is difficult.
+Set up BYOC Logs monitoring before sending production traffic. Without monitoring, diagnosing ingestion or search issues is difficult.
 
-1. Deploy the Datadog Agent (or standalone DogStatsD) in the same cluster as CloudPrem.
-2. Verify that CloudPrem metrics appear in the [out-of-the-box dashboard][1].
+1. Deploy the Datadog Agent (or standalone DogStatsD) in the same cluster as BYOC Logs.
+2. Verify that BYOC Logs metrics appear in the [out-of-the-box dashboard][1].
 3. Confirm that key metrics are reporting: `indexed_events.count`, `search_requests.count`, `disk.available_space.gauge`.
 
-See [Monitor CloudPrem][2] for detailed setup instructions.
+See [Monitor BYOC Logs][2] for detailed setup instructions.
 
 ## Use the podSize Helm parameter
 
@@ -89,7 +89,7 @@ If you observe search timeouts or slow dashboard loads, adjust capacity:
 
 ## Use Lambda search offloading on AWS
 
-On AWS, CloudPrem can offload leaf search operations to AWS Lambda. Instead of provisioning searcher pods for peak query load, Lambda handles overflow automatically.
+On AWS, BYOC Logs can offload leaf search operations to AWS Lambda. Instead of provisioning searcher pods for peak query load, Lambda handles overflow automatically.
 
 This is useful when:
 - Your query load has significant peaks (for example, during incidents or business hours)
@@ -100,13 +100,13 @@ With Lambda offloading enabled, you can run fewer searcher pods sized for your b
 
 ## Keep your Helm chart version up to date
 
-CloudPrem improvements and bug fixes are delivered through Helm chart updates.
+BYOC Logs improvements and bug fixes are delivered through Helm chart updates.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists?q=byoc&p=1
-[2]: /cloudprem/operate/monitoring/
-[3]: /cloudprem/operate/sizing/#helm-chart-sizing-tiers
-[4]: /cloudprem/configure/lambda/
+[2]: /byoc-logs/operate/monitoring/
+[3]: /byoc-logs/operate/sizing/#helm-chart-sizing-tiers
+[4]: /byoc-logs/configure/lambda/
