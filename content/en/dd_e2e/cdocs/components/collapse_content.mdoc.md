@@ -1,6 +1,7 @@
 ---
 title: Collapse content
 draft: true
+private: true
 ---
 
 ## Overview

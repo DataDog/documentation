@@ -142,23 +142,8 @@ If the processor is splitting the arrays `"message.myfield.firstarray"` and `"se
 
 ### Path notation example {#path-notation-example-split-array}
 
-For the following message structure:
+{{% observability_pipelines/path_notation %}}
 
-```json
-{
-    "outer_key": {
-        "inner_key": "inner_value",
-        "a": {
-            "double_inner_key": "double_inner_value",
-            "b": "b value"
-        },
-        "c": "c value"
-    },
-    "d": "d value"
-}
-```
-
-- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+{{% observability_pipelines/path_notation_dots %}}
 
 [1]: /observability_pipelines/search_syntax/logs/

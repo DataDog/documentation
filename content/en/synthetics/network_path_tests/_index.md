@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
+- link: "/api/latest/synthetics/#create-or-clone-a-test"
+  tag: "API"
+  text: "Synthetics API"
 ---
 
 ## Overview

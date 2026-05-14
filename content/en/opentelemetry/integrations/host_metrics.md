@@ -116,11 +116,11 @@ The metrics, mapped to Datadog metrics, are used in the following views:
 
 **Note**: To correlate trace and host metrics, configure [Unified Service Tagging attributes][10] for each service, and set the `host.name` resource attribute to the corresponding underlying host for both service and collector instances. 
 
-The following table shows which Datadog host metric names are associated with corresponding OpenTelemetry host metric names, and, if applicable, what math is applied to the OTel host metric to transform it to Datadog units during the mapping.
+The following table lists the OpenTelemetry host metrics collected for Datadog's out-of-the-box in-app experiences.
 
 {{< mapping-table resource="host.csv">}}
 
-See [OpenTelemetry Metrics Mapping][2] for more information.
+For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][2].
 
 
 ## Full example configuration
