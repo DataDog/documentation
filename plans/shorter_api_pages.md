@@ -10,6 +10,74 @@ In its current state, this API docs build creates one page for each category, su
 - On the category page, show the description and a `whatsnext` list of links to the endpoint pages
 - Set up aliases for the existing `some/category#some_endpoint`, since the page will now be `some/category/some_endpoint`. New aliases will not need to exist, we just need to cover the existing ones programmatically somehow.
 
+To confirm that this change did not impact the HTML of the endpoint/operation content itself, create an NPM subpackage in the Hugo folder that exists just to install Vitest and use Vitest to take snapshots of several of the pre-existing endpoint HTML sections (under each H2 on a category page, in the HTML files already in Hugo's `public` folder). We won't commit this subpackage or the snapshots, it's just a temporary safety check.
+
+See the audit guidelines below.
+
+### Auditing guidelines
+
+To manually audit the Astro API docs against the Hugo API docs, you don't need to review every category page. The pages vary along a few key dimensions, and a representative set covers every rendering path.
+
+#### Page inventory
+
+There are **4 static pages**, **~120 dynamic category landing pages**, and **~N per-operation pages** (one per OpenAPI operation across all categories — counts drift as the spec evolves).
+
+**Static pages:**
+
+| Page | Description |
+|------|-------------|
+| `/api/latest/` | Landing/index page |
+| `/api/latest/using-the-api/` | Usage guide |
+| `/api/latest/rate-limits/` | Rate limits |
+| `/api/latest/scopes/` | OAuth scopes |
+
+**Dynamic pages** are generated from the v1 and v2 OpenAPI specs. Each **category landing page** (`/api/latest/<cat>/`) renders the category name, description, and a TOC linking to its operations. Each **per-operation page** (`/api/latest/<cat>/<op>/`) renders a single endpoint. Categories vary by:
+
+- **Spec version**: v1-only, v2-only, or mixed v1+v2
+- **Endpoint status flags**: normal, deprecated (with optional link to newer version), unstable/preview
+- **Category-level deprecation**: entire category marked deprecated (may have 0 endpoints)
+- **Size**: from 1 endpoint to 90+
+- **HTTP methods**: GET, POST, PUT, PATCH, DELETE (each rendered with a colored badge)
+
+#### Minimum audit set
+
+Each dynamic category is audited at two levels: the category landing page and one representative operation page. This set covers every rendering variation:
+
+| # | Page | What it covers |
+|---|------|----------------|
+| 1 | `/api/latest/` | Static index page |
+| 2 | `/api/latest/using-the-api/` | Static content page |
+| 3 | `/api/latest/rate-limits/` | Static content page |
+| 4 | `/api/latest/scopes/` | Static content page |
+| 5 | `/api/latest/authentication/` | Category landing — smallest category (1 v1 endpoint) |
+| 5 | `/api/latest/authentication/validate-api-key/` | Operation page — v1, single endpoint |
+| 6 | `/api/latest/dashboards/` | Category landing — v1-only, medium size (14 ops) |
+| 6 | `/api/latest/dashboards/get-a-dashboard/` | Operation page — v1 |
+| 7 | `/api/latest/incidents/` | Category landing — v2-only, large (56 ops) |
+| 7 | `/api/latest/incidents/create-an-incident/` | Operation page — v2 |
+| 8 | `/api/latest/aws-integration/` | Category landing — mixed v1+v2, deprecated + unstable ops |
+| 8 | `/api/latest/aws-integration/list-all-aws-integrations-v1/` | Operation page — v1 (slug collision with v2 produces `-v1`/`-v2` suffixes) |
+| 8 | `/api/latest/aws-integration/list-all-aws-integrations-v2/` | Operation page — v2 (slug collision case) |
+| 9 | `/api/latest/monitors/` | Category landing — mixed v1+v2, deprecated + unstable ops |
+| 9 | `/api/latest/monitors/create-a-monitor/` | Operation page — mixed v1+v2 |
+| 10 | `/api/latest/dashboard-lists/` | Category landing — category-level deprecated (with endpoints) |
+| 10 | `/api/latest/dashboard-lists/get-all-dashboard-lists/` | Operation page — deprecated category |
+| 11 | `/api/latest/screenboards/` | Category landing — empty deprecated category (0 endpoints, no op page) |
+| 12 | `/api/latest/usage-metering/` | Category landing — large (49 ops), all GET, many deprecated |
+| 12 | `/api/latest/usage-metering/get-hourly-usage-for-lambda/` | Operation page — deprecated op |
+
+#### What to check within each endpoint
+
+- **Header**: operation name, HTTP method badge, version badge (v1 vs "v2 (latest)")
+- **Status alerts**: deprecated banner (with link to newer version if applicable), unstable/preview banner with message
+- **Description**: markdown rendered correctly (links, code, lists)
+- **Permissions and OAuth scopes**: displayed when present
+- **Path/query/header parameters**: names, types, required flags, descriptions, nested objects, enums
+- **Request body**: schema table + example JSON, toggle between Model and Example views
+- **Responses**: tabs per status code (200, 400, 404, 429, etc.), each with schema + example
+- **Code examples**: curl (auto-generated) + SDK tabs (Python, Ruby, Go, Java, TypeScript)
+- **Region selector**: URLs update when switching between sites (US1, US3, US5, EU, AP1, AP2, GOV)
+
 ## Claude's plan
 
 ### Goal
@@ -103,15 +171,27 @@ The per-endpoint frontmatter still lists the legacy anchor URL in `aliases:` as 
   - Shared v1/v2 endpoints produce one page with both versions in the menu entry.
   - The `latest/` mirror gets the endpoint pages.
 
+### HTML snapshot safety check
+
+To confirm the endpoint/operation content itself doesn't change when it moves out of an H2 section and onto its own page, set up a throwaway Vitest harness **before** any layout changes land.
+
+- **Location**: new NPM subpackage under the Hugo folder (e.g. `assets/scripts/tests/api-snapshots/`) with its own `package.json` so Vitest is isolated from the main package. Add the subpackage path to `.gitignore` along with the generated snapshots — neither gets committed.
+- **Inputs**: the existing rendered HTML is already on disk in Hugo's `public/` folder from prior local builds — no need to rebuild `master` to capture a baseline. Point the harness at the existing `public/api/{version}/{tag}/index.html` files for the representative subset, scrape each `<h2 id="…">` block (the endpoint's full rendered HTML), and save one snapshot per endpoint. Use the same set of categories called out in the audit guidelines (`authentication`, `dashboards`, `incidents`, `aws-integration`, `monitors`, `dashboard-lists`, `usage-metering`) so coverage spans v1-only, v2-only, mixed, deprecated, unstable, and slug-collision cases.
+- **Comparison**: after each layout/build-script change, rebuild and run the same harness against the new per-endpoint pages in `public/`. The harness should grab the equivalent rendered HTML from `public/api/{version}/{tag}/{endpoint}/index.html` and diff against the baseline snapshot. Any meaningful difference (ignoring expected wrapper/structural changes — see below) fails the test.
+- **Expected diffs to filter out**: the H2 wrapper itself, outer container classes, and anchor link decorations are expected to change since the content is now a full page rather than a section. Normalize these away in the harness so only the *endpoint content* (overview, permissions, parameters, request, response, code examples) is compared.
+- **Cleanup**: once the migration is verified and merged, the subpackage and snapshots are deleted. Note in the PR description that the harness existed and that snapshots matched — no permanent test artifact is left behind.
+
 ### Rollout / order of work
 
-1. Refactor `list.html` to extract the endpoint-rendering chunk into `partials/api/endpoint.html` with no behavior change. Verify the existing category page renders identically.
-2. Update `build-api-pages.js` to emit per-endpoint `_index.md` files (no layout change yet; pages will 404 or be blank).
-3. Add `layouts/api/single.html` that uses `partials/api/endpoint.html`. Verify a single endpoint page renders correctly end-to-end.
-4. Update `build-api-pages.js` to change child menu `url` to the new per-endpoint path.
-5. Replace the body of `list.html` with the new summary view (tag description + per-endpoint summary blocks with preserved H2 anchors).
-6. Update tests.
-7. Sanity-check a sampling of pages: an endpoint that only exists in v2, one that exists in both v1 and v2, one marked `x-unstable`, one marked deprecated, and one translated page (`ja` or `fr`).
+1. **Stand up the Vitest snapshot harness** (see safety check above) against the existing HTML in `public/`. Capture baseline snapshots for the representative category set. Do not proceed until the baseline is recorded.
+2. Refactor `list.html` to extract the endpoint-rendering chunk into `partials/api/endpoint.html` with no behavior change. Verify the existing category page renders identically — rerun the snapshot harness and confirm zero diffs.
+3. Update `build-api-pages.js` to emit per-endpoint `_index.md` files (no layout change yet; pages will 404 or be blank).
+4. Add `layouts/api/single.html` that uses `partials/api/endpoint.html`. Verify a single endpoint page renders correctly end-to-end. Rerun the snapshot harness — now comparing per-endpoint pages to the baseline category-section snapshots; only the filtered-out wrapper diffs should appear.
+5. Update `build-api-pages.js` to change child menu `url` to the new per-endpoint path.
+6. Replace the body of `list.html` with the new summary view (tag description + per-endpoint summary blocks with preserved H2 anchors).
+7. Update tests.
+8. Sanity-check a sampling of pages: an endpoint that only exists in v2, one that exists in both v1 and v2, one marked `x-unstable`, one marked deprecated, and one translated page (`ja` or `fr`).
+9. Final snapshot harness run across the full representative set. If clean, tear down the subpackage and snapshots before opening the PR.
 
 ### Risks / open questions
 
