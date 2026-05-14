@@ -104,7 +104,7 @@ Because IAST detects vulnerabilities in your first-party code, findings do not h
 
 Click any finding in the [Vulnerabilities Explorer for IAST][1] to open the vulnerability side panel, which gives developers and security engineers the full context needed to fix the issue.
 
-The panel summarizes the finding's severity, vulnerability type, due date, and runtime indicators (such as **Exposed to Attacks** and **Service In Production**), and shows where the vulnerability was confirmed in your code, when it was first and last detected, which service, environment, and team it impacts, and relevant standards references like the CWE. When the [GitHub integration][7] is enabled, Datadog also surfaces the commit that introduced the vulnerability and a snippet of the vulnerable code.
+The panel summarizes the finding's severity, vulnerability type, due date, and runtime indicators (such as **Exposed to Attacks** and **Service In Production**), and shows where the vulnerability was confirmed in your code, when it was first and last detected, which service, environment, and team it impacts, and relevant standards references like the CWE. When the [GitHub][7], [GitLab][8], or [Azure DevOps][18] integration is enabled, Datadog also surfaces the commit that introduced the vulnerability and a snippet of the vulnerable code.
 
 The side panel includes tabs for **Data Flow** (how tainted input reaches the vulnerable sink), **Remediation** (step-by-step guidance and example code for your framework), **Datadog Severity Breakdown** (how runtime context shaped the score), and **More Information** (related references). From the **Next Steps** panel on the right, you can change the finding's status, mute it, create a Jira or ServiceNow ticket, or jump straight to the remediation steps.
 
@@ -168,6 +168,8 @@ For information on disabling IAST, see [Disabling Code Security][12].
 [4]: /account_management/rbac/permissions/#integrations
 [5]: /security/code_security/iast/setup/#using-datadog-tracing-libraries
 [7]: /integrations/github/
+[8]: /integrations/gitlab/
+[18]: /integrations/azure_devops/
 [9]: /security/code_security/iast/setup/
 [10]: https://app.datadoghq.com/security/configuration/code-security/setup
 [11]: https://www.datadoghq.com/support/
