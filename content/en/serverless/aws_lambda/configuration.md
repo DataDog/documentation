@@ -805,8 +805,8 @@ This is available for version 88+ of the Datadog Lambda Extension.
 `DD_API_KEY_SECRET_ARN` specifies the ARN of an AWS Secrets Manager secret that stores your Datadog API key. When set, the Datadog Lambda Extension fetches the secret at cold start and uses its value as the API key. Grant the Lambda function's execution role `secretsmanager:GetSecretValue` permission on the referenced ARN.
 
 Starting with version 96, you can store the secret value in one of the following formats:
-- Plain string: the secret value is used directly as the API key.
-- JSON object: if the secret value parses as a JSON object containing a `dd_api_key` field, the value of that field is extracted and used as the API key. This is convenient when the same secret stores multiple credentials (for example, alongside an app key or other tokens).
+- **Plain string**: The extension uses the secret value as the API key.
+- **JSON object**: If the secret value parses as a JSON object containing a `dd_api_key` field, the extension extracts that field's value and uses it as the API key. This is useful when the same secret stores multiple credentials (for example, alongside an app key or other tokens).
 ```sh
   { "dd_api_key": "<YOUR_DATADOG_API_KEY>" }
 ```
