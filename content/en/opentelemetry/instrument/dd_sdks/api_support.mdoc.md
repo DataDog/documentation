@@ -12,6 +12,7 @@ aliases:
   - /opentelemetry/instrument/api_support/go/metrics
   - /opentelemetry/instrument/api_support/go/traces
   - /opentelemetry/instrument/api_support/java
+  - /opentelemetry/instrument/api_support/java/logs
   - /opentelemetry/instrument/api_support/java/metrics
   - /opentelemetry/instrument/api_support/java/traces
   - /opentelemetry/instrument/api_support/nodejs/
@@ -56,15 +57,6 @@ further_reading:
 <!-- ============================================== -->
 <!-- SIGNAL AVAILABILITY NOTICES -->
 <!-- ============================================== -->
-
-<!-- Java has traces and metrics only -->
-{% if equals($prog_lang, "java") %}
-{% if equals($platform, "logs") %}
-{% alert level="danger" %}
-OpenTelemetry API support for logs is not available for this language. Use [Datadog Log Collection][210] instead.
-{% /alert %}
-{% /if %}
-{% /if %}
 
 <!-- PHP has traces and metrics only -->
 {% if equals($prog_lang, "php") %}
@@ -875,14 +867,14 @@ Here is the minimum version required for each instrument type:
 {% if equals($platform, "logs") %}
 
 <!-- Show content only for languages that support logs -->
-{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "rust"]) %}
+{% if includes($prog_lang, ["dot_net", "node_js", "python", "go", "rust", "java"]) %}
 
 ## Overview
 
 Use the OpenTelemetry Logs API with Datadog SDKs to send custom application logs. This is an alternative to Datadog's traditional log injection.
 
-<!-- Native implementation (.NET, Node.js, Go, Rust) -->
-{% if includes($prog_lang, ["dot_net", "node_js", "go", "rust"]) %}
+<!-- Native implementation (.NET, Node.js, Go, Rust, Java) -->
+{% if includes($prog_lang, ["dot_net", "node_js", "go", "rust", "java"]) %}
 
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
@@ -923,6 +915,11 @@ If you encounter an issue after upgrading `@opentelemetry/api-logs`, [open an is
 - **Datadog SDK**: `datadog-opentelemetry` crate version 0.2.1 or later.
 - **Rust**: MSRV 1.84.1 or later.
 - **OpenTelemetry Rust SDK**: The SDK provides the logs implementation automatically.
+{% /if %}
+{% if equals($prog_lang, "java") %}
+- **Datadog SDK**: `dd-trace-java` version 1.62.0 or later.
+- **OpenTelemetry Logs API**: Requires the `io.opentelemetry:opentelemetry-api` artifact version 1.27.0 or later (this is the version that introduced the stable logs API).
+- **OTLP transport**: Java exports OTel logs only over OTLP HTTP/protobuf. Your OTLP destination must accept logs on port 4318.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
 
@@ -1047,6 +1044,15 @@ Follow these steps to enable OTel Logs API support in your application.
 
     // Shutdown to flush remaining logs
     let _ = logger_provider.shutdown();
+    ```
+{% /if %}
+
+{% if equals($prog_lang, "java") %}
+1. Add the Datadog SDK (`dd-trace-java`) to your project and [enable its instrumentation][207].
+2. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
+3. Enable OTel logs export by setting the following environment variable:
+    ```sh
+    export DD_LOGS_OTEL_ENABLED=true
     ```
 {% /if %}
 
@@ -1342,6 +1348,57 @@ logger.emit(log_record);
 ```
 {% /if %}
 
+{% if equals($prog_lang, "java") %}
+### Emitting a log {% #emitting-log-java %}
+
+After the Datadog SDK is initialized, you can use the standard OpenTelemetry Logs API to get a logger and emit log records.
+
+```java
+import io.opentelemetry.api.GlobalOpenTelemetry;
+import io.opentelemetry.api.common.AttributeKey;
+import io.opentelemetry.api.logs.Logger;
+import io.opentelemetry.api.logs.Severity;
+
+Logger logger = GlobalOpenTelemetry.get().getLogsBridge().get("my-service");
+
+logger.logRecordBuilder()
+    .setBody("User clicked the checkout button.")
+    .setSeverity(Severity.INFO)
+    .setSeverityText("INFO")
+    .setAttribute(AttributeKey.stringKey("cart.id"), "c-12345")
+    .setAttribute(AttributeKey.stringKey("user.id"), "u-54321")
+    .emit();
+```
+
+### Trace and log correlation {% #trace-log-correlation-java %}
+
+Trace and log correlation is automatic. When you emit a log using the OTel Logs API within an active Datadog trace, the `trace_id` and `span_id` are automatically added to the log record.
+
+```java
+import io.opentelemetry.api.GlobalOpenTelemetry;
+import io.opentelemetry.api.logs.Logger;
+import io.opentelemetry.api.logs.Severity;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.Tracer;
+import io.opentelemetry.context.Scope;
+
+Tracer tracer = GlobalOpenTelemetry.getTracer("my-service");
+Logger logger = GlobalOpenTelemetry.get().getLogsBridge().get("my-service");
+
+Span span = tracer.spanBuilder("process.user.request").startSpan();
+try (Scope scope = span.makeCurrent()) {
+    // This log is automatically correlated with the active span
+    logger.logRecordBuilder()
+        .setBody("Processing user request for ID: 12345")
+        .setSeverity(Severity.INFO)
+        .setSeverityText("INFO")
+        .emit();
+} finally {
+    span.end();
+}
+```
+{% /if %}
+
 ## Supported configuration
 
 To enable this feature, you must set `DD_LOGS_OTEL_ENABLED=true`.
@@ -1398,6 +1455,13 @@ The Datadog SDK programmatically configures the OTel SDK for you.
 4. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
 {% /if %}
 
+{% if equals($prog_lang, "java") %}
+1. Add the Datadog SDK (`dd-trace-java`) to your project and [enable its instrumentation][207].
+2. Remove any code that manually configures `SdkLoggerProvider` or an OTLP log record exporter (such as `OtlpHttpLogRecordExporter`). The Datadog SDK handles this configuration automatically.
+3. Remove the `opentelemetry-sdk` and `opentelemetry-exporter-otlp` artifacts from your project's dependencies. Keep `opentelemetry-api`.
+4. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+{% /if %}
+
 ### Existing Datadog log injection
 
 If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
@@ -1433,6 +1497,11 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 - Verify that a transport feature (`logs-grpc` or `logs-http`) is enabled in your `Cargo.toml` file.
 - Verify `datadog_opentelemetry::logs().init()` is called before using the logger.
 - Check protocol configuration. Only `grpc` and `http/protobuf` protocols are supported. HTTP/JSON is not supported.
+{% /if %}
+{% if equals($prog_lang, "java") %}
+- Verify `DD_LOGS_OTEL_ENABLED=true` is set. Logs are disabled by default in dd-trace-java.
+- Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function.
+- Verify your application only depends on the OpenTelemetry API. The Datadog SDK provides the OpenTelemetry SDK implementation.
 {% /if %}
 
 {% /if %}
