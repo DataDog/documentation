@@ -2754,16 +2754,21 @@ menu:
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
+    - name: Case Approvals
+      url: incident_response/case_management/approvals
+      parent: case_management
+      identifier: case_management_approvals
+      weight: 7
     - name: MCP Server
       url: incident_response/case_management/mcp_server
       parent: case_management
       identifier: case_management_mcp_server
-      weight: 7
+      weight: 8
     - name: Troubleshooting
       url: incident_response/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 8
+      weight: 9
     - name: Agents
       weight: 7
     - name: Agent Builder

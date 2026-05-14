@@ -12,10 +12,11 @@ further_reading:
 
 Case Automation Rules streamline your incident management workflow by automatically triggering actions when specific conditions are met, allowing teams to standardize their response processes.
 
-You can define automated actions based on three key triggers:
+You can define automated actions based on four key triggers:
 - **Case creation** - Automatically assign new cases to on-call team members
 - **Status changes** - Trigger follow-up actions when cases move between states
 - **Attribute changes** - Respond instantly when case properties like priority are modified
+- **Case approvals** - Trigger workflows when cases receive approvals or declines
 
 These capabilities deliver faster response times while reducing manual effort. Teams can focus on problem-solving instead of ticket management, ensuring consistent case handling with full audit transparency for compliance and visibility.
 
@@ -35,7 +36,8 @@ Add the following to your configuration:
     1. Upon case creation
     1. When a case's status changes
     1. When a case attribute is added or deleted
-1. **Select a workflow** - Leverage [Workflow Automation][2] to automate actions such as:
+    1. When a case receives an approval or decline
+1. **Select a workflow** - Use [Workflow Automation][2] to automate actions such as:
     1. Assigning the case to a team member
     1. Adding comments
     1. Closing a resolved case
