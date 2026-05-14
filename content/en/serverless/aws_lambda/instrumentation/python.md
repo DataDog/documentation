@@ -81,8 +81,8 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
     ```sh
     { "dd_api_key": "<YOUR_DATADOG_API_KEY>" }
     ``` 
-     The field name `dd_api_key` is fixed and cannot be customized. If the secret is not valid JSON or does not contain `dd_api_key`, the extension falls back to using the raw secret string, so existing plain-string secrets continue to work unchanged.
-     Note: JSON-formatted secrets require Datadog Lambda Extension v96 or later. 
+     The field name `dd_api_key` is fixed and cannot be customized. If the secret is not valid JSON or does not contain `dd_api_key`, the extension falls back to using the raw secret string. Existing plain-string secrets continue to work unchanged.
+     **Note**: JSON-formatted secrets require Datadog Lambda Extension v96 or later. 
 
 6. Instrument your Lambda functions
 
