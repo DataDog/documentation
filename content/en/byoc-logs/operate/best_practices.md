@@ -102,6 +102,21 @@ With Lambda offloading enabled, you can run fewer searcher pods sized for your b
 
 BYOC Logs improvements and bug fixes are delivered through Helm chart updates.
 
+Refresh the Datadog repository and upgrade to the latest chart version with your existing values file:
+
+```shell
+helm repo update datadog
+helm upgrade <RELEASE_NAME> datadog/cloudprem \
+  --namespace datadog-byoc-logs \
+  --values values.yaml
+```
+
+To list the available chart versions before upgrading:
+
+```shell
+helm search repo datadog/cloudprem --versions
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
