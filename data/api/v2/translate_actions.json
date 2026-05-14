@@ -1346,12 +1346,6 @@
     "request_description": "Update a downtime request body.",
     "request_schema_description": "Request for editing a downtime."
   },
-  "CreateEmailTransportWebhookIntake": {
-    "description": "Receives a batch of email transport webhook log events and emits an audit trail entry\nfor each event with a final delivery status (delivered, dropped, or bounced).\nOnly authorized organizations can submit events.",
-    "summary": "Ingest email transport webhook events",
-    "request_description": "",
-    "request_schema_description": "A batch of email transport webhook log events."
-  },
   "SearchIssues": {
     "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.",
     "summary": "Search error tracking issues",
