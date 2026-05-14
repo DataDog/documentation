@@ -8,10 +8,18 @@ const safeJsonStringify = require('safe-json-stringify');
 const oneOfLimit = 50;
 const ENUM_DISPLAY_LIMIT = 10;
 
-// marked v17+ is ESM-only and blocks deep CJS imports via its "exports" field.
-// Load it via dynamic import() in init(), then assign to this module-scoped variable
-// so downstream synchronous callers (parseDescWithTableCell -> schemaTable -> ...) still work.
+// Support both marked v1 (require('marked')) and v12+ (marked.umd.js or default export)
 let marked;
+try {
+  const markedModule = require('marked/lib/marked.umd.js');
+  marked = markedModule.marked || markedModule.default || markedModule;
+} catch (_) {
+  const markedModule = require('marked');
+  marked = { parse: markedModule.parse };
+}
+if (!marked || typeof marked.parse !== 'function') {
+  throw new Error('marked.parse not found. Check marked package version.');
+}
 
 const supportedLangs = ['en'];
 
@@ -1133,14 +1141,7 @@ const findSpecFiles = () => {
   return specs;
 };
 
-const init = async () => {
-  const markedModule = await import('marked');
-  const parse = markedModule.parse || (markedModule.marked && markedModule.marked.parse) || markedModule.default;
-  if (typeof parse !== 'function') {
-    throw new Error('marked.parse not found. Check marked package version.');
-  }
-  marked = { parse };
-
+const init = () => {
   const specs = findSpecFiles();
   processSpecs(specs);
 };

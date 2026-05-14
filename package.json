@@ -21,7 +21,7 @@
         "deploy:preview": "customhugo deploy --target preview -e preview --maxDeletes -1 --workers 100 --invalidateCDN --logLevel info",
         "deploy:liveAssets": "customhugo deploy --target liveAssets -e live --maxDeletes 0 --workers 100 --logLevel info",
         "deploy:live": "customhugo deploy --target live -e live --maxDeletes -1 --workers 100 --logLevel info",
-        "build:apiPages": "node -e 'require(\"./assets/scripts/build-api-pages.js\").init().catch(e => { console.error(e); process.exit(1); })'",
+        "build:apiPages": "node -e 'require(\"./assets/scripts/build-api-pages.js\").init()'",
         "jest-test": "./node_modules/.bin/jest ./assets/scripts/tests",
         "test:e2e": "npx playwright test",
         "postinstall": "husky",
