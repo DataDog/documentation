@@ -1,7 +1,7 @@
 ---
 title: Agent Builder
 description: Build custom AI agents that can access the Action Catalog.
-disable_toc: false
+site_support_id: agent_builder
 further_reading:
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Agent Builder is in Preview and available to all customers, excluding GovCloud customers.
+Agent Builder is in Preview.
 {{< /callout >}}
 
 ## Overview
