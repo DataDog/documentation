@@ -802,7 +802,7 @@ This is available for version 88+ of the Datadog Lambda Extension.
 
 ## Store the API key in AWS Secrets Manager
 
-`DD_API_KEY_SECRET_ARN` specifies the ARN of an AWS Secrets Manager secret that stores your Datadog API key. When set, the Datadog Lambda Extension fetches the secret at cold start and uses its value as the API key. The Lambda function's execution role must be granted secretsmanager:GetSecretValue permission on the referenced ARN.
+`DD_API_KEY_SECRET_ARN` specifies the ARN of an AWS Secrets Manager secret that stores your Datadog API key. When set, the Datadog Lambda Extension fetches the secret at cold start and uses its value as the API key. Grant the Lambda function's execution role `secretsmanager:GetSecretValue` permission on the referenced ARN.
 
 Starting v96, the secret value can be stored in either of two formats:
 - Plain string: the secret value is used directly as the API key.
