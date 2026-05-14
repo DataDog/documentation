@@ -95,7 +95,7 @@ You can filter findings by inferred owner in the [Misconfigurations Explorer][2]
 | `Ownership > Owner` | The suggested or persisted owner handle | `@ownership.owner_handle:team-platform` |
 | `Ownership > Owner type` | The type of owner: `team`, `user`, or `service` | `@ownership.owner_type:team` |
 | `Ownership > Status` | The lifecycle status of the suggestion | `@ownership.status:persisted` |
-| `Ownership > Confidence` | The numeric confidence score (0–1) | `@ownership.confidence:>0.8` |
+| `Ownership > Confidence` | The numeric confidence score (0 to 1) | `@ownership.confidence:>0.8` |
 
 **Example queries**
 
