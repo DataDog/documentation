@@ -24,25 +24,24 @@ Code Coverage events are available as a data source in [Datadog dashboards][1]. 
 
 Each report uploaded with `datadog-ci coverage upload` produces several events in Datadog:
 
-- One **repository event** that represents the report as a whole. This event carries no `@service`, `@codeowner`, or `@report.flag` tag, and is not marked with `@split:true`.
-- One **per-service event** for each [service][3] the report covers. Tagged with `@service` and `@split:true`.
-- One **per-code-owner event** for each [code owner][3] the report covers. Tagged with `@codeowner` and `@split:true`.
-- One **per-flag event** for each [flag][4] applied to the report. Tagged with `@report.flag` and `@split:true`.
+- One **repository event** that represents the report as a whole. This event carries no `@service`, `@codeowner`, or `@report.flag` tag.
+- One **per-service event** for each [service][3] the report covers, tagged with `@service`.
+- One **per-code-owner event** for each [code owner][3] the report covers, tagged with `@codeowner`.
+- One **per-flag event** for each [flag][4] applied to the report, tagged with `@report.flag`.
 
-The absence of `@split:true` is what identifies the repository event. Any dashboard query that doesn't account for the split events ends up double-counting the same report. The query recipes below are written to isolate exactly one of these event types at a time.
+Any dashboard query that doesn't isolate one of these event types ends up combining all of them and counting the same report multiple times. The query recipes below are written to select exactly one event type at a time.
 
 ## Available query facets
 
 | Facet | Description |
 |---|---|
-| `@git.repository.id` | URL-style repository identifier in lowercase, without the scheme, for example `github.com/datadog/documentation`. Scope every widget query to a single repository. |
-| `@git.default_branch` | `true` on events from the repository's default branch. Add this only when a widget should report on the default branch. Use it instead of `@git.branch` when the default branch name differs across repositories. |
-| `@git.branch` | Branch name, for example `main`. Use to target a specific named branch. |
-| `@git.commit.sha` | Commit the report was uploaded for. Useful as a `group by` for per-commit timeseries. |
-| `@service` | Service name. Present only on per-service events. |
-| `@codeowner` | Code owner team. Present only on per-code-owner events. |
-| `@report.flag` | Flag name. Present only on per-flag events. |
-| `@split` | Present only on split events; absent on the repository event. |
+| <code style="white-space:nowrap">@git.repository.id</code> | URL-style repository identifier in lowercase, without the scheme, for example `github.com/datadog/documentation`. Scope every widget query to a single repository. |
+| <code style="white-space:nowrap">@git.default_branch</code> | `true` on events from the repository's default branch. Add this only when a widget should report on the default branch. Use it instead of `@git.branch` when the default branch name differs across repositories. |
+| <code style="white-space:nowrap">@git.branch</code> | Branch name, for example `main`. Use to target a specific named branch. |
+| <code style="white-space:nowrap">@git.commit.sha</code> | Commit the report was uploaded for. Useful as a `group by` for per-commit timeseries. |
+| <code style="white-space:nowrap">@service</code> | Service name. Present only on per-service events. |
+| <code style="white-space:nowrap">@codeowner</code> | Code owner team. Present only on per-code-owner events. |
+| <code style="white-space:nowrap">@report.flag</code> | Flag name. Present only on per-flag events. |
 
 ## Build coverage widgets
 
@@ -68,7 +67,7 @@ Compare coverage across the services in a monorepo. Use this filter in a Top Lis
 @git.repository.id:<REPOSITORY_ID> @service:* -@codeowner:* -@report.flag:*
 {{< /code-block >}}
 
-`@service:*` already restricts results to per-service events (which are split events), so adding `-@split:true` would exclude all matching events and return no data.
+`@service:*` already restricts results to per-service events (which carry `@split:true`), so adding `-@split:true` would exclude all matching events and return no data.
 
 ### Break down coverage by code owner
 
