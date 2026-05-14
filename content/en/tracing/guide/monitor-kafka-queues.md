@@ -14,7 +14,9 @@ further_reading:
   text: "Data Streams Monitoring"
 ---
 
-*Tracing your Kafka producers and consumers? **[Data Streams Monitoring for Kafka][7]** adds end-to-end lag, throughput, and message lineage tracking on top of your APM data.*
+{{< callout url="/data_streams/kafka?utm_source=docs&utm_medium=callout&utm_campaign=DocsCTA-DSMKafka-TracingGuide" btn_hidden="false" header="Learn more" >}}
+**Data Streams Monitoring for Kafka** &mdash; track end-to-end producer/consumer lag, throughput, and message lineage on top of your APM data.
+{{< /callout >}}
 
 ## Overview
 
@@ -127,4 +129,3 @@ If you want to disable Kafka tracing on an application, set the appropriate [lan
 [4]: /tracing/trace_collection/compatibility/
 [5]: /tracing/trace_collection/
 [6]: /tracing/trace_collection/library_config/
-[7]: /data_streams/kafka?utm_source=docs&utm_medium=callout&utm_campaign=DocsCTA-DSMKafka-TracingGuide
