@@ -58,9 +58,9 @@ If you are seeing a prompt when decalring an incident, verify the following:
 
 You can also declare an incident by clicking the `+` sign at the top of a channel and searching for the Datadog app.
 
-## Limitations for US1-FED
+## Limitations for Datadog for Government sites
 
-- Government Community Cloud (GCC) and GCC High tenants are not supported by the app. The Datadog for Government app only supports Datadog US1-FED customers who are trying to connect to their `commercial` Microsoft Teams tenant.
+- Government Community Cloud (GCC) and GCC High tenants are not supported by the app. The Datadog for Government app only supports Datadog for Government (US1-FED and US2-FED) customers who are trying to connect to their `commercial` Microsoft Teams tenant.
 - Datadog Incident management features are not supported.
 
 ## Further reading
