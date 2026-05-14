@@ -38,7 +38,7 @@ For more information on AWS network reachability, see the [AWS documentation][34
 
 An [S3 bucket][1] (`aws_s3_bucket`) is considered publicly accessible in either of the following cases:
 
-* **Public by bucket policy** if **all** of the following are true:
+* **Public by bucket policy** if all of the following are true:
 
   | **Criteria** | **Explanation** |
   |--------------|-----------------|
@@ -47,7 +47,7 @@ An [S3 bucket][1] (`aws_s3_bucket`) is considered publicly accessible in either 
 
 ***OR***
 
-* **Public by Access Control List (ACL)** if **all** of the following are true:
+* **Public by Access Control List (ACL)** if all of the following are true:
 
   | **Criteria** | **Explanation** |
   |--------------|-----------------|
@@ -66,7 +66,7 @@ A [CloudTrail trail][3] (`aws_cloudtrail_trail`) is considered publicly accessib
 
 ### Amazon VPC subnet
 
-A [subnet][4] (`aws_subnet`) is considered public if **all** of the following are true:
+A [subnet][4] (`aws_subnet`) is considered public if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -77,7 +77,7 @@ See [Subnets for your VPC][8] for the AWS definition of a public subnet.
 
 ### Amazon Redshift cluster
 
-A [Redshift cluster][9] (`aws_redshift_cluster`) is considered publicly accessible if **all** of the following are true:
+A [Redshift cluster][9] (`aws_redshift_cluster`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -90,7 +90,7 @@ See [Make a private Amazon Redshift Cluster publicly accessible][13] for more in
 
 ### Amazon RDS DB instance
 
-An [RDS DB instance][14] (`aws_rds_instance`) is considered publicly accessible if **all** of the following are true:
+An [RDS DB instance][14] (`aws_rds_instance`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -112,7 +112,7 @@ See [Sharing a DB snapshot][17] for more information.
 
 ### Amazon Elastic Load Balancer
 
-An ELB (`aws_elbv2_load_balancer`) is considered publicly accessible if **all** of the following are true:
+An ELB (`aws_elbv2_load_balancer`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -125,7 +125,7 @@ See [Create an Application Load Balancer][20] for more information about Interne
 
 An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible in either of the following cases:
 
-* **"Public subnet"-determined access** if **all** of the following are true:
+* **"Public subnet"-determined access** if all of the following are true:
 
   | **Criteria** | **Explanation** |
   |--------------|-----------------|
@@ -135,7 +135,7 @@ An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible in 
 
 ***OR***
 
-* **ELB-determined access** if **all** of the following are true:
+* **ELB-determined access** if all of the following are true:
 
   | **Criteria** | **Explanation** |
   |--------------|-----------------|
@@ -158,7 +158,7 @@ See [Launching your Amazon OpenSearch Service domains within a VPC][24] for more
 
 ### Amazon Machine Images (AMI)
 
-A [Machine Image][25] (`aws_ami`) is considered publicly accessible if **all** of the following are true:
+A [Machine Image][25] (`aws_ami`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -179,7 +179,7 @@ See [Share an Amazon EBS snapshot][29] for information about public EBS snapshot
 
 ### Amazon EKS clusters
 
-An [EKS cluster][30] (`aws_eks_cluster`) is considered publicly accessible if **all** of the following are true:
+An [EKS cluster][30] (`aws_eks_cluster`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -212,7 +212,7 @@ See [Best practices for working with AWS Lambda functions][59] for more informat
 
 ### Azure Network Security Group (NSG)
 
-An Azure NSG (`azure_security_group`) grants public access if **all** of the following are true:
+An Azure NSG (`azure_security_group`) grants public access if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -227,7 +227,7 @@ For details on how Azure NSGs allow and deny Internet access for a resource, see
 
 A Virtual Machine Instance (`azure_virtual_machine_instance`) is considered publicly accessible in either of the following cases:
 
-* **Attached to Network Security Group allowing public access** if **all** of the following are true:
+* **Attached to Network Security Group allowing public access** if all of the following are true:
 
   | Criteria | Explanation |
   |----------|-------------|
@@ -236,7 +236,7 @@ A Virtual Machine Instance (`azure_virtual_machine_instance`) is considered publ
 
 ***OR***
 
-* **Has Public IP with SKU "Basic"** if **all** of the following are true:
+* **Has Public IP with SKU "Basic"** if all of the following are true:
 
   | Criteria | Explanation |
   |----------|-------------|
@@ -247,7 +247,7 @@ To learn more about Azure Virtual Machine Instances and public access, see [Asso
 
 ### Azure Storage blob container
 
-A Storage blob container (`azure_storage_blob_container`) is considered publicly accessible if **all** of the following are true:
+A Storage blob container (`azure_storage_blob_container`) is considered publicly accessible if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -259,7 +259,7 @@ To learn more about disallowing blob public access on Azure Storage accounts, se
 
 ### Azure Kubernetes Service (AKS) cluster
 
-An [AKS cluster][60] (`azure_aks_cluster`) is considered publicly accessible if **all** of the following are true:
+An [AKS cluster][60] (`azure_aks_cluster`) is considered publicly accessible if all of the following are true:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
@@ -272,7 +272,7 @@ See [AKS best practices][61] for more information on public AKS clusters.
 
 ### Google Cloud Compute firewall
 
-A Compute Firewall (`gcp_compute_firewall`) grants public access if **all** of the following are true:
+A Compute Firewall (`gcp_compute_firewall`) grants public access if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -283,7 +283,7 @@ For more information about using Compute firewalls, [Choose to allow or disallow
 
 ### Google Cloud Compute instance
 
-A Compute instance (`gcp_compute_instance`) is considered publicly accessible if **all** of the following are true:
+A Compute instance (`gcp_compute_instance`) is considered publicly accessible if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -294,7 +294,7 @@ Learn more about how compute firewall rules are used to restrict port ranges for
 
 ### Google Cloud BigQuery dataset
 
-A BigQuery dataset (`gcp_bigquery_dataset`) is considered publicly accessible if **all** of the following are true:
+A BigQuery dataset (`gcp_bigquery_dataset`) is considered publicly accessible if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -305,7 +305,7 @@ Learn more about [BigQuery datasets][53].
 
 ### Google Cloud Storage bucket
 
-A Storage Bucket (`gcp_storage_bucket`) is considered publicly accessible if **all** of the following are true:
+A Storage Bucket (`gcp_storage_bucket`) is considered publicly accessible if all of the following are true:
 
 | Criteria | Explanation |
 |----------|-------------|
