@@ -1,5 +1,5 @@
 ---
-title: Secret Scanning Configuration
+title: Rule Configuration
 algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST', 'secret scanning']
 description: Reference documentation for Datadog Secret Scanning (SAST) configuration, covering rule CRUD.
