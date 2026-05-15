@@ -12,7 +12,7 @@ further_reading:
     text: "Learn about Tags in Cloud Cost Management"
   - link: "/cloud_cost_management/finops_skill/"
     tag: "Documentation"
-    text: "Use FinOps skill in BitsAssistant"
+    text: "Use FinOps skill in Bits Assistant"
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"

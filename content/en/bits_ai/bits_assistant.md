@@ -10,7 +10,7 @@ further_reading:
   text: "Coordinate incidents with Incident AI"
 - link: "/cloud_cost_management/finops_skill/"
   tag: "Documentation"
-  text: "FinOps skill in BitsAssistant"
+  text: "FinOps skill in Bits Assistant"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai

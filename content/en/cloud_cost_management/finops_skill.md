@@ -30,7 +30,7 @@ The FinOps skill runs in Bits Assistant. Fill out the [Bits Assistant Preview fo
 
 <div class="alert alert-info">This page describes how to use AI to analyze costs in Cloud Cost Management. It is not a guide on monitoring AI provider spend. To ingest SaaS or AI provider costs into CCM, see <a href="/cloud_cost_management/setup/saas_costs/">SaaS Cost Integrations</a>.</div>
 
-The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assistant][1]. It is designed for root cause analysis (RCA), budget follow-up, and general cost questions. You can use the skill for guided cost investigations, explanations, and to share cost findings. For example:
+The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assistant][1]. It is designed for root cause analysis (RCA), budget follow-up, and general cost questions. You can use the skill for guided cost investigations, cost explanations, and to share cost findings. For example:
 
 - Investigate cost changes, anomalies, and cost monitor alerts.
 - Identify teams, services, accounts, regions, or resources driving spend.
@@ -44,20 +44,22 @@ The FinOps skill is the Cloud Cost Management analysis workflow in [Bits Assista
 To use the FinOps skill for Bits Assistant, you must:
 
 - [Set up Cloud Cost Management][4] for the cost sources you want to analyze.
-- Have the these permissions:
+- Have these permissions:
   - [Bits Assistant Access][9] permission
   - [Cloud Cost Management permissions][7] for the data you ask about
   - (Optional) [Notebook permissions][10], if you want to create or edit investigation notebooks.
 
 ## FinOps skill in Bits Assistant
 
+{{< img src="cloud_cost/budgets_bits_assistant.png" alt="The Budgets page showing over-budget items with an Investigate button to trigger the FinOps skill" style="width:100%;" >}}
+
 Click {{< ui >}}Investigate{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon) to trigger the FinOps skill in areas such as:
 
-- Investigate cost changes section of the [Summarize][11] page
-- Total Cost on the [Explorer][12] page
 - [Budgets][13]
 - [Cost monitors][14] that are triggered
 - [Cost anomalies][15]
+- The Investigate Cost Changes section of the [Summarize][11] page
+- The Total Cost Change section on the [Explorer][12] page
 
 Alternatively, you can click {{< ui >}}Ask Bits{{< /ui >}} on the top left of any Datadog page to open the Bits Assistant and ask a cost question.
 
@@ -69,7 +71,7 @@ Example prompts for cost changes:
 - `Which teams are responsible for the highest S3 storage costs this month?`
 - `Create a handoff notebook for the team that owns this cost spike.`
 
-Example prompts for budgets and overspend:
+Example prompts for budgets and spendings:
 
 - `Why is the infrastructure budget projected to go over this month?`
 - `Show actual and forecasted spend for the payments team budget.`
@@ -79,20 +81,17 @@ Example prompts for exploratory cost questions:
 
 - `Show total cloud cost by provider for the last 30 complete days.`
 - `What are our top Kubernetes namespace costs this month?`
-- `Which teams have the largest Datadog product costs?`
 - `What cost tags are available for breaking down GCP spend?`
 - `Find optimization opportunities for idle or over-provisioned cloud infrastructure.`
 
-For more ways to open and use Bits Assistant, see the [Bits Assistant documentation][1].
-
 ### Cost change investigations
 
-When you ask the FinOps skill to investigate a cost change, Bits Assistant provides a concise summary and then asks what you want to explore next. The initial analysis typically includes:
+When you use the FinOps skill Bits Assistant to investigate a cost change, Bits Assistant provides a concise summary and then asks what you want to explore next. The initial analysis typically includes:
 
 - A daily cost chart for the baseline and investigation periods.
 - The baseline period, investigation period, total dollar and percentage change, and projected annual impact when applicable.
-- Rate-versus-usage context when supported, to help distinguish price changes from consumption changes.
-- Likely owners or teams attribution based on your cost tags.
+- Rate-versus-usage context to help distinguish price changes from consumption changes.
+- Owners or teams attribution based on your cost tags.
 - A link to open the query in Cost Explorer.
 
 Cost data can lag behind real time. By default, the FinOps skill uses complete cost days and compares equal-length periods so it does not over-explain incomplete data.
@@ -108,7 +107,7 @@ After the initial summary, choose from guided follow-up paths:
 
 ### Budgets and forecasting
 
-If you use [Cloud Cost Management Budgets][3], use the FinOps skill to explain budget status and variance. Bits Assistant can help summarize:
+If you set up [Budgets][3], use the FinOps skill in Bits Assistant to explain budget status and spending. Bits Assistant can help summarize:
 
 - Actual spend versus budgeted amount.
 - Forecasted spend versus budgeted amount.
@@ -117,10 +116,10 @@ If you use [Cloud Cost Management Budgets][3], use the FinOps skill to explain b
 
 After the initial summary, choose from guided follow-up paths:
 
-1. Cost Breakdown
-1. Identify Owners
-1. Adjust Budget
-1. Save to Notebook
+1. {{< ui >}}Cost Breakdown{{< /ui >}} - Find the top services, accounts, regions, resources, or tags driving spending.
+1. {{< ui >}}Identify Owners{{< /ui >}} TKTK
+1. {{< ui >}}Adjust Budget{{< /ui >}} TKTK
+1. {{< ui >}}Save to Notebook{{< /ui >}} - Capture the investigation for your records.
 
 ## Use the Datadog MCP Server for cost analysis
 
@@ -132,8 +131,8 @@ Cloud Cost Management data is available through the core metric tools:
 
 | MCP tool                          | Usage                                 |
 | --------------------------------- | ------------------------------------- |
-| [`get_datadog_metric`][6]         | Query cost metrics, compare periods, and group costs by provider, service, team, account, resource, or tag. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics. |
-| [`get_datadog_metric_context`][6] | Discover metadata, available tag keys, and tag values for a cost metric before querying it. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics.               |
+| [`get_datadog_metric`][16]         | Query cost metrics, compare periods, and group costs by provider, service, team, account, resource, or tag. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics. |
+| [`get_datadog_metric_context`][17] | Discover metadata, available tag keys, and tag values for a cost metric before querying it. Ask your agent to set `use_cloud_cost` to `true` for CCM cost metrics.               |
 
 Example prompts for MCP-connected agents:
 
@@ -159,8 +158,10 @@ For connection instructions, supported clients, and toolset configuration, see [
 [8]: https://www.datadoghq.com/product-preview/bits-assistant/
 [9]: /account_management/rbac/permissions/#bits-assistant
 [10]: /account_management/rbac/permissions/#notebooks
-[11]: https://demo.datadoghq.com/cost/summarize/overview
-[12]: https://demo.datadoghq.com/cost/analyze/explorer
-[13]: https://demo.datadoghq.com/cost/plan/budgets
-[14]: https://demo.datadoghq.com/cost/monitor/monitors
-[15]: https://demo.datadoghq.com/cost/monitor/anomalies
+[11]: https://app.datadoghq.com/cost/summarize/overview
+[12]: https://app.datadoghq.com/cost/analyze/explorer
+[13]: https://app.datadoghq.com/cost/plan/budgets
+[14]: https://app.datadoghq.com/cost/monitor/monitors
+[15]: https://app.datadoghq.com/cost/monitor/anomalies
+[16]: /bits_ai/mcp_server/tools/#get_datadog_metric
+[17]: /bits_ai/mcp_server/tools/#get_datadog_metric_context
