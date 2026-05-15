@@ -75,7 +75,7 @@ Select which LLM powers the agent's reasoning. Models vary in capability, speed,
 
 Tools define what actions the agent can take. Add tools from the [Action Catalog][7], which includes 2500+ integrations. The agent can only use tools that have been added to its configuration.
 
-You can hardcode parameters on individual tools so the agent uses the same values every time—for example, locking a Slack tool to a specific channel or a logs query to a specific service.
+Click on any added tool to hardcode its parameters so the agent uses the same values every time—for example, locking a Slack tool to a specific channel or a logs query to a specific service.
 
 The [Datadog MCP Server][8] is enabled by default. Support for third-party MCP servers is coming soon.
 
