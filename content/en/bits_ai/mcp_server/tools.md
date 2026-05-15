@@ -488,8 +488,6 @@ Executes agent-authored TypeScript in a Datadog-managed sandbox. The code receiv
 - Compare latency trends against recent deployments for the `payments` service over the last day.
 - Show me the top 10 error patterns in `auth-service` logs from the last hour, grouped by error kind.
 
-**Note**: The sandbox enforces execution time limits and code-size limits, and blocks sensitive operations. Long-running queries should be scoped to a bounded time window.
-
 ## Dashboards
 
 Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
