@@ -86,7 +86,7 @@ Example prompts for exploratory cost questions:
 
 ### Cost change investigations
 
-When you use the FinOps skill Bits Assistant to investigate a cost change, Bits Assistant provides a concise summary and then asks what you want to explore next. The initial analysis typically includes:
+When you use the FinOps skill in Bits Assistant to investigate a cost change, Bits Assistant provides a concise summary and then asks what you want to explore next. The initial analysis typically includes:
 
 - A daily cost chart for the baseline and investigation periods.
 - The baseline period, investigation period, total dollar and percentage change, and projected annual impact when applicable.
