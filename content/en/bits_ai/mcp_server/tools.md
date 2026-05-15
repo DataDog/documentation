@@ -216,6 +216,20 @@ Edits an existing Datadog notebook.
 - Add a section to notebook abc-123-def with the latest log analysis results.
 - Update the incident response notebook with today's findings.
 
+## Agent
+
+<div class="alert alert-info">The <code>agent</code> toolset is in Preview. <a href="url goes here">Sign up for access.</a></div>
+
+description tk
+
+### `tool_1`
+*Toolset: **agent***\
+*Permissions Required: `tk`*\
+Description goes here.
+
+- Example 1.
+- Example 2.
+
 ## Alerting
 
 Tools for validating monitors, searching monitor groups, and retrieving monitor templates.
