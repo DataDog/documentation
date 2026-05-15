@@ -7906,11 +7906,6 @@ menu:
       parent: asm_api_security
       identifier: asm_api_security_api_findings
       weight: 10001
-    - name: Data sources
-      url: security/application_security/api_posture/api_inventory/data_sources/
-      parent: asm_api_security
-      identifier: asm_api_security_data_sources
-      weight: 10002
     - name: API Endpoints
       url: security/application_security/api_posture/api_inventory/api_endpoints/
       parent: asm_api_security
