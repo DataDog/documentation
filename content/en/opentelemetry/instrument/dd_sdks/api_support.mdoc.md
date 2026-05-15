@@ -919,6 +919,7 @@ If you encounter an issue after upgrading `@opentelemetry/api-logs`, [open an is
 {% if equals($prog_lang, "java") %}
 - **Datadog SDK**: `dd-trace-java` version 1.62.0 or later.
 
+
 - **OpenTelemetry API**: `opentelemetry-api` version 1.27.0 (the version that introduced the stable Logs API) or later.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
