@@ -118,7 +118,7 @@ All AI products adhere to Datadog's standard privacy and security standards. See
 
 **Agent not using a tool**: Verify the tool has been added to the agent's configuration. The agent can only use tools that are explicitly added.
 
-**Automation not running**: Make sure the agent is published and the workflow step is fully configured.
+**Automation not running**: Make sure the automation is published and the Run Agent step is fully configured.
 
 **Conversation length limit**: Long conversations may hit the context length limit. If this happens, start a new conversation. Automatic conversation compaction is coming soon.
 
