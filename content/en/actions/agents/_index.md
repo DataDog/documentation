@@ -24,7 +24,7 @@ Agent Builder lets you create custom AI agents that use Datadog's tools and inte
 
 Use agents to handle work that's too complex for static automation but too repetitive for humans. For example, triaging errors, responding to incidents, analyzing trends, and escalating issues.
 
-{{< img src="/actions/agents/blank-new-agent.png" alt="The Agent Builder new agent interface showing a text field and blueprint options" style="width:100%;" >}}
+{{< img src="/actions/agents/agent-builder-interface.png" alt="The Agent Builder editor showing instructions, model, tools, and automation configuration" style="width:100%;" >}}
 
 ## Create an agent
 
@@ -34,9 +34,9 @@ From the [Agent Builder page][1], click **New Agent**. From there, you can creat
 - **Start from a blueprint**: Choose a prebuilt template for common use cases like error triage, incident response, security analysis, or DevOps assistance. Blueprints come pre-configured with instructions, tools, and automations.
 - **Start from scratch**: Configure the agent manually—write instructions, pick a model, and add tools.
 
-## Configure your agent
+{{< img src="/actions/agents/empty-state.png" alt="The Agent Builder new agent interface showing a text field and blueprint options" style="width:100%;" >}}
 
-{{< img src="/actions/agents/agent-dashboard.png" alt="The Agent Builder editor showing instructions, model, tools, and automation configuration" style="width:100%;" >}}
+## Configure your agent
 
 ### Instructions
 
