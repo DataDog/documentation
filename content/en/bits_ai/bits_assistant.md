@@ -53,12 +53,21 @@ Example prompts:
 - `Create an investigation for the recent spike of errors in the checkout service`
 - `Add an executive summary for this cost spike report`
 
-#### Trace investigation
-Debug errors and latency issues directly from [traces][3] using natural language queries. Bits Assistant analyzes and summarizes large traces, determines likely root causes for errors and latency, and suggests remediations.
+#### APM
+
+##### Trace analysis
+Investigate an individual [trace][3] to diagnose what failed, where, and why. Bits Assistant explores the full span tree, correlates related logs, and surfaces root causes without manual span tree navigation or log cross-referencing.
 
 Example prompts:
+- `Why did this request fail?`
 - `What's causing the latency spike in this trace?`
 - `Summarize this trace and identify the root cause of the error`
+
+##### Latency investigations
+Analyze slow traces at scale, map the service call chain, and pinpoint bottleneck dependencies. Bits Assistant identifies cross-trace patterns and isolates downstream causes faster than manual trace review.
+
+Example prompts:
+- `What caused the latency spike for this service?`
 
 #### Cloud Cost Management
 Investigate [cloud cost][4] changes and identify the teams or resources responsible.
