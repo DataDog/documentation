@@ -5322,7 +5322,7 @@ menu:
       identifier: llm_obs_custom_llm_as_a_judge_evaluations
       weight: 400
     - name: Language Mismatch
-      url: llm_observability/evaluations/language_mismatch
+      url: llm_observability/evaluations/managed_evaluations/language_mismatch
       parent: llm_obs_evaluations
       identifier: llm_obs_language_mismatch
       weight: 401
