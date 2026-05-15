@@ -65,10 +65,6 @@ Cloud Cost Management provides insights for engineering and finance teams to und
 
 Datadog ingests your cloud cost data and transforms it into metrics you can use in a search query on the [**Explorer** page][1]. If costs rise, you can correlate the increase with usage metrics to determine the root cause.
 
-## Use AI for cost analysis
-
-Use the [FinOps Agent in Bits Assistant][10] to investigate cost changes, identify likely owners, compare spend against budgets, correlate cost with observability metrics, and create handoff notebooks for engineering teams. You can also connect external AI agents to Cloud Cost Management data with the [Datadog MCP Server][11].
-
 ## Setup
 
 {{< whatsnext desc="To start managing your cloud costs with Cloud Cost Management, see the following documentation.">}}
@@ -137,6 +133,10 @@ Monitor the freshness and processing status of your cloud cost data on the {{< u
   - Cost allocation rules (retroactively processes up to 1 month of historical data by default)
 
 Use this page to troubleshoot data delays or confirm that recent tag pipelines and cost allocation changes have taken effect.
+
+## Use AI for cost analysis
+
+Use the [FinOps Skill in Bits Assistant][10] to investigate cost changes, identify likely owners, compare spend against budgets, correlate cost with observability metrics, and create handoff notebooks for engineering teams. 
 
 ## Further reading
 

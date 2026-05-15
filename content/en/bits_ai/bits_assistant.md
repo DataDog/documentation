@@ -64,7 +64,7 @@ Example prompts:
 - `Summarize this trace and identify the root cause of the error`
 
 #### Cloud Cost Management
-Investigate [cloud cost][4] changes and identify the teams or resources responsible. For a detailed overview of the FinOps Agent workflow in Bits Assistant, see [FinOps Skill in Bits Assistant][9].
+Investigate [cloud cost][4] changes and identify the teams or resources responsible. See [FinOps Skill in Bits Assistant][9] for more information.
 
 Example prompts:
 - `Investigate why EC2 costs changed between January and February`
