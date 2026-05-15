@@ -8171,6 +8171,110 @@ menu:
           - ListCustomCostsFiles
         unstable: []
         order: 29
+    - name: Get commitments utilization (timeseries)
+      url: '#get-commitments-utilization-timeseries'
+      identifier: cloud-cost-management-get-commitments-utilization-timeseries
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsUtilizationTimeseries
+        unstable:
+          - v2
+        order: 53
+    - name: Get commitments utilization (scalar)
+      url: '#get-commitments-utilization-scalar'
+      identifier: cloud-cost-management-get-commitments-utilization-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsUtilizationScalar
+        unstable:
+          - v2
+        order: 48
+    - name: Get commitments savings (timeseries)
+      url: '#get-commitments-savings-timeseries'
+      identifier: cloud-cost-management-get-commitments-savings-timeseries
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsSavingsTimeseries
+        unstable:
+          - v2
+        order: 52
+    - name: Get commitments savings (scalar)
+      url: '#get-commitments-savings-scalar'
+      identifier: cloud-cost-management-get-commitments-savings-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsSavingsScalar
+        unstable:
+          - v2
+        order: 51
+    - name: Get commitments on-demand hot spots (scalar)
+      url: '#get-commitments-on-demand-hot-spots-scalar'
+      identifier: cloud-cost-management-get-commitments-on-demand-hot-spots-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsOnDemandHotspotsScalar
+        unstable:
+          - v2
+        order: 50
+    - name: Get commitments coverage (timeseries)
+      url: '#get-commitments-coverage-timeseries'
+      identifier: cloud-cost-management-get-commitments-coverage-timeseries
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsCoverageTimeseries
+        unstable:
+          - v2
+        order: 54
+    - name: Get commitments coverage (scalar)
+      url: '#get-commitments-coverage-scalar'
+      identifier: cloud-cost-management-get-commitments-coverage-scalar
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsCoverageScalar
+        unstable:
+          - v2
+        order: 49
+    - name: Get commitments list
+      url: '#get-commitments-list'
+      identifier: cloud-cost-management-get-commitments-list
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCommitmentsCommitmentList
+        unstable:
+          - v2
+        order: 55
     - name: List budgets
       url: '#list-budgets'
       identifier: cloud-cost-management-list-budgets
