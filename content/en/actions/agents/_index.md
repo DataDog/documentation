@@ -31,7 +31,7 @@ Use agents to handle work that's too complex for static automation but too repet
 From the [Agent Builder page][1], click **New Agent**. From there, you can create an agent in three ways:
 
 - **Build with AI**: Describe what you want the agent to do in plain language. Agent Builder generates the instructions, selects relevant tools, and configures the agent for you.
-- **Start from a blueprint**: Choose a prebuilt template for common use cases like error triage, incident response, security analysis, or DevOps assistance. Blueprints come pre-configured with instructions, tools, and automations.
+- **Start from a blueprint**: Choose a prebuilt template for common use cases like error triage, incident response, security analysis, or DevOps assistance. Blueprints come pre-configured with instructions, tools, and automations, and are customizable.
 - **Start from scratch**: Configure the agent manually—write instructions, pick a model, and add tools.
 
 {{< img src="/actions/agents/empty-state.png" alt="The Agent Builder new agent interface showing a text field and blueprint options" style="width:100%;" >}}
@@ -83,21 +83,13 @@ Add an automation to trigger agents beyond the chat interface:
 - **Schedule**: Run an agent on a recurring basis (for example, daily error triage).
 - **Workflow triggers**: Run an agent as a step in any workflow—triggered by [monitors][14], [incidents][15], [security signals][16], or other events.
 
-To use an agent in a workflow, add the **Run Agent** step from the workflow editor.
-
 ## Test your agent
 
 Use the built-in chat interface to test your agent. Send messages, review the agent's reasoning, and verify it takes the right actions. Chat history is preserved across sessions.
 
 {{< img src="/actions/agents/agent-chat.png" alt="The agent chat interface showing a conversation with tool calls" style="width:100%;" >}}
 
-## Blueprints
-
-Blueprints are prebuilt agent templates for common operational use cases. Customize blueprints after creation by modifying instructions, adding or removing tools, and configuring automations.
-
-{{< img src="/actions/agents/agent-blueprints.png" alt="The Agent blueprints modal showing available templates" style="width:100%;" >}}
-
-## Use agents in Workflows and Apps
+## Use agents in workflows and apps
 
 Agents integrate with [Workflow Automation][9] and [App Builder][10] through the **Run Agent** action. This lets you embed AI reasoning into any workflow:
 
