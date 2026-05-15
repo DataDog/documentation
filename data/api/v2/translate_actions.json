@@ -887,6 +887,10 @@
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."
   },
+  "GetRuleBasedView": {
+    "description": "Get an aggregated view of compliance rules with their pass, fail, and muted finding counts.\nSupports filtering by compliance framework, framework version, and additional query filters.",
+    "summary": "Get the rule-based view of compliance findings"
+  },
   "ListContainerImages": {
     "description": "Get all Container Images for your organization.\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
     "summary": "Get all Container Images"
@@ -894,6 +898,14 @@
   "ListContainers": {
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
+  },
+  "ListCostAnomalies": {
+    "description": "List detected Cloud Cost Management anomalies for the organization.",
+    "summary": "List cost anomalies"
+  },
+  "GetCostAnomaly": {
+    "description": "Get a detected Cloud Cost Management anomaly by UUID.",
+    "summary": "Get cost anomaly"
   },
   "ListCustomAllocationRules": {
     "description": "List all custom allocation rules - Retrieve a list of all custom allocation rules for the organization",
@@ -910,6 +922,10 @@
     "summary": "Reorder custom allocation rules",
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRuleResourceArray` object."
+  },
+  "ListCustomAllocationRulesStatus": {
+    "description": "List the processing status of all custom allocation rules. Returns only the ID and processing status for each rule.",
+    "summary": "List custom allocation rule statuses"
   },
   "DeleteCustomAllocationRule": {
     "description": "Delete a custom allocation rule - Delete an existing custom allocation rule by its ID",
@@ -1000,6 +1016,38 @@
     "description": "List budgets.",
     "summary": "List budgets"
   },
+  "GetCommitmentsCommitmentList": {
+    "description": "Get a list of individual cloud commitments (Reserved Instances or Savings Plans) with their utilization details. The response schema varies based on the provider, product, and commitment type.",
+    "summary": "Get commitments list"
+  },
+  "GetCommitmentsCoverageScalar": {
+    "description": "Get scalar coverage metrics for cloud commitment programs, including hours and cost coverage percentages.",
+    "summary": "Get commitments coverage (scalar)"
+  },
+  "GetCommitmentsCoverageTimeseries": {
+    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type (Reserved Instances, Savings Plans, On-Demand, and Spot) for both hours and cost.",
+    "summary": "Get commitments coverage (timeseries)"
+  },
+  "GetCommitmentsOnDemandHotspotsScalar": {
+    "description": "Get scalar on-demand hot-spots data for cloud commitment programs, showing per-dimension breakdowns of on-demand spending with coverage metrics and potential savings.",
+    "summary": "Get commitments on-demand hot spots (scalar)"
+  },
+  "GetCommitmentsSavingsScalar": {
+    "description": "Get scalar savings metrics for cloud commitment programs, including realized savings and effective savings rate.",
+    "summary": "Get commitments savings (scalar)"
+  },
+  "GetCommitmentsSavingsTimeseries": {
+    "description": "Get timeseries savings metrics for cloud commitment programs, including actual cost, on-demand equivalent cost, realized savings, and effective savings rate over time.",
+    "summary": "Get commitments savings (timeseries)"
+  },
+  "GetCommitmentsUtilizationScalar": {
+    "description": "Get scalar utilization metrics for cloud commitment programs, including utilization percentage and unused cost.",
+    "summary": "Get commitments utilization (scalar)"
+  },
+  "GetCommitmentsUtilizationTimeseries": {
+    "description": "Get timeseries utilization metrics for cloud commitment programs, including used and unused cost series over time.",
+    "summary": "Get commitments utilization (timeseries)"
+  },
   "ListCustomCostsFiles": {
     "description": "List the Custom Costs files.",
     "summary": "List Custom Costs files"
@@ -1046,6 +1094,22 @@
     "description": "List the OCI configs.",
     "summary": "List Cloud Cost Management OCI configs"
   },
+  "ListCostTagDescriptions": {
+    "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
+    "summary": "List Cloud Cost Management tag descriptions"
+  },
+  "ListCostTagKeys": {
+    "description": "List Cloud Cost Management tag keys.",
+    "summary": "List Cloud Cost Management tag keys"
+  },
+  "GetCostTagKey": {
+    "description": "Get details for a specific Cloud Cost Management tag key, including example tag values and description.",
+    "summary": "Get a Cloud Cost Management tag key"
+  },
+  "ListCostTags": {
+    "description": "List Cloud Cost Management tags for a given metric.",
+    "summary": "List Cloud Cost Management tags"
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
@@ -1073,6 +1137,16 @@
   "ListAllCSMServerlessAgents": {
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"
+  },
+  "GetCurrentUser": {
+    "description": "Get the user associated with the current authentication context.\nThe response includes the user's profile attributes (name, email, handle,\nstatus, MFA state), along with related resources: the user's organization,\nassigned roles with their granted permissions, and team-scoped roles.\nNo additional permissions are required beyond valid authentication.",
+    "summary": "Get current user"
+  },
+  "UpdateCurrentUser": {
+    "description": "Edit the profile of the currently authenticated user. Updatable fields\ninclude `name`, `title`, `email`, and `disabled` status. The `id` field\nin the request body must match the authenticated user's UUID; a mismatch\nreturns a 422 error. Email address changes are recorded in the audit trail.\nRequires the `user_self_profile_write` permission.",
+    "summary": "Update current user",
+    "request_description": "",
+    "request_schema_description": "Update a user."
   },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
@@ -1307,12 +1381,6 @@
     "summary": "Update a downtime",
     "request_description": "Update a downtime request body.",
     "request_schema_description": "Request for editing a downtime."
-  },
-  "CreateEmailTransportWebhookIntake": {
-    "description": "Receives a batch of email transport webhook log events and emits an audit trail entry\nfor each event with a final delivery status (delivered, dropped, or bounced).\nOnly authorized organizations can submit events.",
-    "summary": "Ingest email transport webhook events",
-    "request_description": "",
-    "request_schema_description": "A batch of email transport webhook log events."
   },
   "SearchIssues": {
     "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.",
@@ -2574,7 +2642,7 @@
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
   },
   "ListVolumesByMetricName": {
-    "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+    "description": "View hourly average metric volumes for the given metric name over the look back period.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
     "summary": "List distinct metric volumes by metric name"
   },
   "GetMonitorNotificationRules": {
@@ -4347,6 +4415,12 @@
     "request_description": "",
     "request_schema_description": "The request for a spans list."
   },
+  "UploadSourceMap": {
+    "description": "Upload source maps, symbol files, and mapping files to Datadog for error deobfuscation.\nThis endpoint enables you to upload various types of debug symbols for RUM Error Tracking,\nallowing Datadog to display readable stack traces instead of minified or obfuscated code.\n\n**Request format:**\n\nEach request is a `multipart/form-data` upload containing two parts:\n\n1. `event` — a JSON-encoded string with the upload metadata (type, service, version, etc.)\n2. One or more binary file fields (for example, `source_map`, `symbols_archive`)\n\n**Supported upload types** (set via `event.type`):\n- `js_sourcemap`: JavaScript source maps for browser applications\n- `react_native_sourcemap`: React Native source maps for mobile applications\n- `jvm_mapping_file`: ProGuard/R8 mapping files for Android crash deobfuscation\n- `ios_symbols`: dSYM files for iOS crash symbolication\n- `flutter_symbol_file`: Flutter symbol files\n- `ndk_symbol_file`: Android NDK symbol files for native crashes\n- `il2cpp_mapping_file`: IL2CPP mapping files for Unity\n- `elf_symbol_file`: ELF symbol files for Linux/Unix\n- `pe_symbol_file`: PE/PDB symbol files for Windows\n- `repository`: Repository metadata for source code linking\n\n**Limits:**\n- Maximum file size: 500 MB\n\n**Note:** For most use cases, Datadog recommends using the\n[Datadog CLI (datadog-ci)](https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps)\nwhich provides a simplified interface for uploading source maps.",
+    "summary": "Upload source maps",
+    "request_description": "",
+    "request_schema_description": "Multipart form data for uploading a source map, symbol file, or mapping file."
+  },
   "CreateSCAResult": {
     "summary": "Post dependencies for analysis",
     "request_description": "",
@@ -4477,6 +4551,12 @@
     "request_description": "",
     "request_schema_description": "Request object for creating a degradation."
   },
+  "CreateBackfilledDegradation": {
+    "description": "Creates a backfilled degradation with predefined updates.",
+    "summary": "Create backfilled degradation",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a backfilled degradation."
+  },
   "DeleteDegradation": {
     "description": "Deletes a degradation by its ID.",
     "summary": "Delete degradation"
@@ -4496,6 +4576,12 @@
     "summary": "Schedule maintenance",
     "request_description": "",
     "request_schema_description": "Request object for creating a maintenance."
+  },
+  "CreateBackfilledMaintenance": {
+    "description": "Creates a backfilled maintenance with predefined updates.",
+    "summary": "Create backfilled maintenance",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a backfilled maintenance."
   },
   "GetMaintenance": {
     "description": "Retrieves a specific maintenance by its ID.",
@@ -4691,6 +4777,10 @@
     "summary": "Reorder tag pipeline rulesets",
     "request_description": "",
     "request_schema_description": "The definition of `ReorderRulesetResourceArray` object."
+  },
+  "ListTagPipelinesRulesetsStatus": {
+    "description": "List the processing status of all tag pipeline rulesets. Returns only the ID and processing status for each ruleset.",
+    "summary": "List tag pipeline ruleset statuses"
   },
   "ValidateQuery": {
     "description": "Validate a tag pipeline query - Validate the syntax and structure of a tag pipeline query",
@@ -4968,6 +5058,14 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "Validate": {
+    "description": "Check if the API key is valid. Returns the organization UUID, API key ID, and associated scopes.",
+    "summary": "Validate API key"
+  },
+  "ValidateAPIKey": {
+    "description": "Check that the API key and application key used for the request are both valid.\nReturns `{\"status\": \"ok\"}` on success, `401` or `403` otherwise. Useful as a\nlightweight authentication probe before issuing other API calls that require\nfull credentials.",
+    "summary": "Validate API and application keys"
   },
   "SearchWidgets": {
     "description": "Search and list widgets for a given experience type, with filtering, sorting, and pagination.\n\n**Response meta** carries totals scoped to the current filter:\n- `filtered_total` — widgets matching the filter.\n- `created_by_you_total` — among the matches, how many the current user created.\n- `favorited_by_you_total` — among the matches, how many the current user has favorited.\n- `created_by_anyone_total` — total widgets in the experience type, ignoring filters.\n\nEach returned widget includes `is_favorited` reflecting the current user's favorite status.\nFavoriting itself is performed through the shared favorites API, not this endpoint.",

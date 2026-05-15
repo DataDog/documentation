@@ -3113,7 +3113,8 @@ components:
       x-enum-varnames:
         - APM_RESOURCE_STATS
     FormulaAndFunctionApmResourceStatsQueryDefinition:
-      description: APM resource stats query using formulas and functions.
+      deprecated: true
+      description: APM resource stats query using formulas and functions. Deprecated - Use `apm_metrics` query type instead.
       properties:
         cross_org_uuids:
           $ref: "#/components/schemas/CrossOrgUuids"
@@ -3363,6 +3364,7 @@ components:
         - incident_analytics
         - product_analytics
         - on_call_events
+        - errors
       example: "logs"
       type: string
       x-enum-varnames:
@@ -3379,6 +3381,7 @@ components:
         - INCIDENT_ANALYTICS
         - PRODUCT_ANALYTICS
         - ON_CALL_EVENTS
+        - ERRORS
     FormulaAndFunctionMetricAggregation:
       description: The aggregation methods available for metrics queries.
       enum:
@@ -22823,6 +22826,10 @@ components:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
+        infra_storage_mgmt_objects_count_avg:
+          description: Shows the average number of storage management objects over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ingested_events_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the current date for all organizations.
           format: int64
@@ -23818,6 +23825,10 @@ components:
           type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        infra_storage_mgmt_objects_count_avg:
+          description: Shows the average number of storage management objects over all hours in the current date for the given org.
           format: int64
           type: integer
         ingested_events_bytes_sum:
@@ -24818,6 +24829,10 @@ components:
           type: integer
         infra_host_top99p_sum:
           description: Shows the 99th percentile of all distinct infrastructure hosts over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        infra_storage_mgmt_objects_count_avg_sum:
+          description: Shows the average number of storage management objects over all hours in the current month for all organizations.
           format: int64
           type: integer
         ingested_events_bytes_agg_sum:
