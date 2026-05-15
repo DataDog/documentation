@@ -38,7 +38,7 @@ Select the user steps that start the funnel, and use **Add step** to add additio
 
 ### Add filters
 
-You can filter funnel users globally, or for specific steps:
+You can filter users globally, or for specific steps:
 
 - To apply global filters to the entire funnel, select **Filter by** and choose your options.
 
@@ -85,7 +85,7 @@ Use the dropdown above the chart side panel to select different conversion analy
 
 - **Time to convert**: A timeseries view of conversions by Sessions, Users, or Accounts.
 
-For any conversion analysis view, you can choose whether to view conversions by count or rate, and can view data for all steps or individual steps. For conversion views by user or account, you can adjust the time frame within which a conversion must occur.
+For any conversion analysis view, you can choose to view conversions by count or rate, and view data for all steps or individual steps. For conversion views by user or account, you can adjust the time frame within which a conversion must occur.
 
 ## Conversion computing metrics
 
@@ -107,7 +107,7 @@ If you analyze your funnel by **user** or by **account**, you can define your co
 
 When computing your conversions, select how conversions are counted by choosing a **unique** conversion option (sessions, users, or accounts) or the **Total Conversion Count** option in your conversion visualization. 
 
-- **Unique**: Counts a conversion only once per session, user, or account. For example, if the user completes the funnel sequence `A → B → C` multiple times within the same session (for example, `A, B, C, A, B, C`), it counts as **one conversion**.
+- **Unique**: Counts a conversion only once per session, user, or account. For example, if the user completes the funnel sequence `A → B → C` multiple times within the same session (`A, B, C, A, B, C`), it counts as **one conversion**.
 
 - **Total**: Counts a conversion each time the same session ID, user, or account completes the defined funnel. Using the same example (`A, B, C, A, B, C`), this method counts **two conversions**. The `Total` setting counts complete flows, not the number of times an intermediate step is repeated.
 
@@ -132,7 +132,7 @@ The query value visualization displays the current value of a metric.
 
 ### Top list
 
-The top list visualization identifies the top values from a facet based on your chosen measure.
+The top list visualization identifies the top values from a facet based on a chosen measure.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="The top list visualization, configured to show the top four conversion sources by continent." style="width:80%;" >}}
 
@@ -144,11 +144,11 @@ To gain more context about user conversions and dropoffs, click on a funnel step
 
 - **Conversion analysis**: View conversion drivers, user journeys, available user replays for conversions and dropoffs, and user details.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="The side panel view after clicking a funnel step, showing conversion drivers, available replays, and converted users." style="width:100%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="The side panel view after clicking a funnel step, showing conversion drivers, available replays, and converted users." style="width:100%;" >}}
 
 - **Journey paths**: View conversion and dropoff user paths for the selected step sequence, including branching paths to other steps outside of the funnel.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_journey_paths.png" alt="A journey path showing the top five dropoff paths following step 1 in the funnel." style="width:100%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_journey_paths.png" alt="A journey path showing the top five dropoff paths following step 1 in the funnel." style="width:100%;" >}}
 
 ## Share a funnel
 
