@@ -484,9 +484,9 @@ Code executed by this toolset runs against your Datadog APIs using your own user
 *Permissions Required: `mcp_read` and `mcp_write`. At runtime, the sandbox also enforces your existing resource permissions (for example, `Logs Read`, `APM Read`, `Dashboards Write`) for each Datadog API call the code makes.*\
 Executes agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent.
 
-- What changed in the last two hours that could explain elevated error rates on the `checkout-api` service?
-- Compare latency trends against recent deployments for the `payments` service over the last day.
-- Show me the top 10 error patterns in `auth-service` logs from the last hour, grouped by error kind.
+- For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
+- Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and surface anything that moved at the same time.
+- For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
 
 ## Dashboards
 
