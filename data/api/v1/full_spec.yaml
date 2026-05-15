@@ -8174,6 +8174,36 @@ components:
         - data_source
         - query
       type: object
+    MonitorFormulaAndFunctionDataJobsQueryDefinition:
+      description: A formula and functions data jobs query.
+      properties:
+        job_type:
+          description: |-
+            The type of job being monitored. Valid values include:
+            `databricks.job`, `spark.application`, `airflow.dag`,
+            `dbt.job`, `dbt.model`, `dbt.test`, `glue.job`.
+            Custom job types are supported with the `custom.ol.` prefix.
+          example: "databricks.job"
+          type: string
+        jobs_query:
+          description: Filter expression used to select the jobs to monitor.
+          example: "job_name:smoke*"
+          type: string
+        name:
+          description: Name of the query for use in formulas. Must be `run_query`.
+          example: "run_query"
+          type: string
+        query_dialect:
+          description: |-
+            Query dialect for data jobs queries. Currently only `metric` is supported.
+          example: "metric"
+          type: string
+      required:
+        - name
+        - jobs_query
+        - job_type
+        - query_dialect
+      type: object
     MonitorFormulaAndFunctionDataQualityDataSource:
       description: Data source for data quality queries.
       enum:
@@ -8480,6 +8510,7 @@ components:
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityQueryDefinition"
+        - $ref: "#/components/schemas/MonitorFormulaAndFunctionDataJobsQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateAugmentedQueryDefinition"
         - $ref: "#/components/schemas/MonitorFormulaAndFunctionAggregateFilteredQueryDefinition"
     MonitorFormulaAndFunctionReferenceTableColumn:
@@ -9312,6 +9343,7 @@ components:
         - "cost alert"
         - "data-quality alert"
         - "network-path alert"
+        - "data-jobs alert"
       example: "query alert"
       type: string
       x-enum-varnames:
@@ -9336,6 +9368,7 @@ components:
         - COST_ALERT
         - DATA_QUALITY_ALERT
         - NETWORK_PATH_ALERT
+        - DATA_JOBS_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
