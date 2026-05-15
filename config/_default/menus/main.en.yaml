@@ -7512,7 +7512,7 @@ menu:
       weight: 2
     - name: Rule Configuration
       identifier: sec_secret_scanning_configuration
-      url: /security/code_security/secret_scanning/rule_configuration/
+      url: /security/code_security/secret_scanning/configuration/
       parent: sec_secret_scanning
       weight: 3
     - name: Secret Validation
