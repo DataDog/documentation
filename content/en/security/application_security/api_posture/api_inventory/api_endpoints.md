@@ -32,7 +32,7 @@ For Amazon Web Services (AWS) API Gateway integration, you must set up the follo
 
 API Endpoints are discovered from the Datadog Software Catalog and specifically from API definitions [uploaded to Datadog][7]. For instructions on uploading API definitions, see [Create Entities][8].
 
-For information on what library versions are compatible with API Posture Inventory, see [Enabling App and API Protection][9]. [Remote Configuration][10] is required.
+For information on what library versions are compatible with API Inventory, see [Enabling App and API Protection][9]. [Remote Configuration][10] is required.
 
 |Technology|Minimum tracer version| Support for sensitive data scanning |
 |----------|----------|----------|
@@ -53,7 +53,7 @@ API Endpoints gathers security metadata about API traffic by leveraging the Data
 
 API Endpoints uses [Remote Configuration][10] to manage and configure scanning rules that detect sensitive data and authentication.
 
-To verify whether discovered endpoints are publicly accessible and require authentication, enable [Endpoint Scanning][11]. Endpoint Scanning actively scans eligible endpoints and enriches API Posture Inventory with verified public accessibility, authentication status, HTTP response status, and last evaluation data.
+To verify whether discovered endpoints are publicly accessible and require authentication, enable [Endpoint Scanning][11]. Endpoint Scanning actively scans eligible endpoints and enriches API Inventory with verified public accessibility, authentication status, HTTP response status, and last evaluation data.
 
 The following risks are calculated for each endpoint.
 

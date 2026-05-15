@@ -1,5 +1,5 @@
 ---
-title: API Posture Inventory
+title: API Inventory
 description: Catalog API endpoints, services, and findings, and assess API security risk across your environment.
 aliases:
   - /security/application_security/api-inventory/
@@ -11,7 +11,7 @@ further_reading:
 
 API security relies on visibility. The biggest failure mode in most applications isn't missed vulnerabilities, it's missed APIs.
 
-[API Posture Inventory][7] provides a comprehensive, up-to-date catalog and risk assessment of all API endpoints and services in your environment.
+[API Inventory][7] provides a comprehensive, up-to-date catalog and risk assessment of all API endpoints and services in your environment.
 
 **Inventory** is comprised of explorers that correspond to distinct layers in the API security lifecycle:
 
