@@ -89,6 +89,8 @@ To use an agent in a workflow, add the **Run Agent** step from the workflow edit
 
 Use the built-in chat interface to test your agent. Send messages, review the agent's reasoning, and verify it takes the right actions. Chat history is preserved across sessions.
 
+{{< img src="/actions/agents/agent-chat.png" alt="The agent chat interface showing a conversation with tool calls" style="width:100%;" >}}
+
 ## Blueprints
 
 Blueprints are prebuilt agent templates for common operational use cases:
