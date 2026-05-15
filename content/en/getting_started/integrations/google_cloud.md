@@ -351,7 +351,9 @@ To apply granular metric filtering for enabled services, click on the service in
 
 Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][11], deselect which regions to exclude from metrics collection.
 
-You can also specify additional locations not listed and disable any global metrics not associated with a region.
+If a region, zone, or location value isn't shown in the checkboxes, add it in the **Additional Locations** field. The filter performs an exact match against the label value reported by Google Cloud, so enter values exactly as they appear on your resources (for example, `us-central` or `us-central1-f`).
+
+You can also disable any global metrics not associated with a region.
 
 {{< img src="integrations/google_cloud_platform/metric_region_filtering.png" alt="The metric collection tab in the Datadog Google Cloud integration page, with the Enable Global Metrics option highlighted and a subset of regions selected. The Additional Locations option is also highlighted with a multi-region filter defined" style="width:80%;">}}
 
