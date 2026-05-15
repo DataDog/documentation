@@ -1,7 +1,7 @@
 ---
 title: Monitor List
 aliases:
-    - /monitors/monitor_list/
+    - /monitors/manage_monitor/
 description: "Send notifications to your teams when monitors trigger alerts"
 further_reading:
 - link: "/monitors/"
@@ -17,7 +17,7 @@ further_reading:
 
 Use the [Monitor List][1] page to search, delete, mute, or resolve your monitors and edit monitor tags in bulk. You can also clone or edit individual monitors from the search results.
 
-{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="manage monitor page" >}}
+{{< img src="monitors/manage_monitor/monitor_page-2.png" alt="The Monitor List page filtered to muted:true, showing 694 muted monitors with columns for status, muted elapsed, muted left, name, and tags. A column visibility dropdown is open on the right." >}}
 
 ## Search
 
