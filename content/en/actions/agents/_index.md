@@ -81,12 +81,7 @@ The [Datadog MCP Server][8] is enabled by default. Support for third-party MCP s
 
 ### Automations
 
-Add an automation to trigger agents beyond the chat interface:
-
-- Schedule
-- Monitor alert
-- Incident
-- Security signal
+Set up your agent to run automatically with a [schedule][13], or trigger it from a Datadog [monitor][14], [incident][15], or [security signal][16]. These automations use [Workflow Automation][9].
 
 ## Test your agent
 
@@ -111,15 +106,13 @@ The **Run Agent** step also supports the following optional fields:
 
 {{< img src="/actions/agents/output-schema-example.png" alt="A workflow using output schema to branch on agent response fields" style="width:100%;" >}}
 
-- **Conversation ID**: Provide a conversation ID to continue a previous agent conversation. This lets the agent retain context across multiple workflow runs instead of starting fresh each time.
-
-By default, each Run Agent invocation is a standalone, single-turn execution—the agent does not retain memory of previous runs. To continue a prior conversation, pass a Conversation ID from a previous run. Multi-turn sessions are subject to the same context window limits as the chat UI.
+- **Conversation ID**: By default, each Run Agent invocation is a standalone, single-turn execution. To continue a prior conversation, pass a Conversation ID from a previous run. This lets the agent retain context across multiple workflow runs. Multi-turn sessions are subject to the same context window limits as the chat UI.
 
 The agent executes with its configured tools and instructions and returns its output to the workflow. Combine rule-based automation with AI reasoning in a single workflow.
 
 ## Data privacy
 
-All AI products adhere to Datadog's standard privacy and security standards. See the [Trust Center][13], [Data Processing Addendum][14], and [Transfer Impact Assessment][15] for details.
+All AI products adhere to Datadog's standard privacy and security standards. See the [Trust Center][17], [Data Processing Addendum][18], and [Transfer Impact Assessment][19] for details.
 
 ## Troubleshooting
 
@@ -144,6 +137,10 @@ All AI products adhere to Datadog's standard privacy and security standards. See
 [10]: https://app.datadoghq.com/app-builder/apps/list
 [11]: /account_management/audit_trail/
 [12]: /actions/actions_catalog/http-action/
-[13]: https://www.datadoghq.com/trust-center/
-[14]: https://www.datadoghq.com/legal/data-processing-addendum/
-[15]: https://www.datadoghq.com/legal/transfer-impact-assessment/
+[13]: /actions/workflows/trigger/#scheduled-triggers
+[14]: /actions/workflows/trigger/#monitor-triggers
+[15]: /actions/workflows/trigger/#incident-triggers
+[16]: /actions/workflows/trigger/#security-triggers
+[17]: https://www.datadoghq.com/trust-center/
+[18]: https://www.datadoghq.com/legal/data-processing-addendum/
+[19]: https://www.datadoghq.com/legal/transfer-impact-assessment/
