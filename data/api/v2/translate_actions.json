@@ -1016,6 +1016,38 @@
     "description": "List budgets.",
     "summary": "List budgets"
   },
+  "GetCommitmentsCommitmentList": {
+    "description": "Get a list of individual cloud commitments (Reserved Instances or Savings Plans) with their utilization details. The response schema varies based on the provider, product, and commitment type.",
+    "summary": "Get commitments list"
+  },
+  "GetCommitmentsCoverageScalar": {
+    "description": "Get scalar coverage metrics for cloud commitment programs, including hours and cost coverage percentages.",
+    "summary": "Get commitments coverage (scalar)"
+  },
+  "GetCommitmentsCoverageTimeseries": {
+    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type (Reserved Instances, Savings Plans, On-Demand, and Spot) for both hours and cost.",
+    "summary": "Get commitments coverage (timeseries)"
+  },
+  "GetCommitmentsOnDemandHotspotsScalar": {
+    "description": "Get scalar on-demand hot-spots data for cloud commitment programs, showing per-dimension breakdowns of on-demand spending with coverage metrics and potential savings.",
+    "summary": "Get commitments on-demand hot spots (scalar)"
+  },
+  "GetCommitmentsSavingsScalar": {
+    "description": "Get scalar savings metrics for cloud commitment programs, including realized savings and effective savings rate.",
+    "summary": "Get commitments savings (scalar)"
+  },
+  "GetCommitmentsSavingsTimeseries": {
+    "description": "Get timeseries savings metrics for cloud commitment programs, including actual cost, on-demand equivalent cost, realized savings, and effective savings rate over time.",
+    "summary": "Get commitments savings (timeseries)"
+  },
+  "GetCommitmentsUtilizationScalar": {
+    "description": "Get scalar utilization metrics for cloud commitment programs, including utilization percentage and unused cost.",
+    "summary": "Get commitments utilization (scalar)"
+  },
+  "GetCommitmentsUtilizationTimeseries": {
+    "description": "Get timeseries utilization metrics for cloud commitment programs, including used and unused cost series over time.",
+    "summary": "Get commitments utilization (timeseries)"
+  },
   "ListCustomCostsFiles": {
     "description": "List the Custom Costs files.",
     "summary": "List Custom Costs files"
