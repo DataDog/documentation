@@ -319,6 +319,8 @@ Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This 
    - If you choose **deploy a new scanner**, select the **scanner project** (which must be one of the selected projects) and the **scanner regions**. Datadog recommends installing scanners in every region where you have more than 150 hosts.
 1. Click **Copy command** to copy the generated command, and click **Open Google Cloud Shell** to open [Google Cloud Shell](https://ssh.cloud.google.com/cloudshell). Review and run the command. The script applies the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme) to deploy and configure the scanner in your selected project and region(s).
 1. After the command completes, return to the Datadog setup page and click **Done**.
+
+[26]: /security/cloud_security_management/troubleshooting/agentless_scanning#gcp-failed-to-create-state-bucket-storagebucketscreate-403
 {{% /collapse-content %}}
 {{% collapse-content title="Terraform" level="h3" id="gcp-terraform-setup" %}}
 The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless_scanning/deployment_methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
@@ -333,7 +335,6 @@ The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terr
 After completing any of the setup methods above, [verify your setup](#verify-your-setup).
 
 [25]: https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=gcp
-[26]: /security/cloud_security_management/troubleshooting/agentless_scanning#gcp-failed-to-create-state-bucket-storagebucketscreate-403
 
 {{% /tab %}}
 {{< /tabs >}}
