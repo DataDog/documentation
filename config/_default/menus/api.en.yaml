@@ -14088,6 +14088,54 @@ menu:
           - ListSCIMUsers
         unstable: []
         order: 1
+    - name: Get schema
+      url: '#get-schema'
+      identifier: scim-get-schema
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMSchema
+        unstable: []
+        order: 16
+    - name: List schemas
+      url: '#list-schemas'
+      identifier: scim-list-schemas
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMSchemas
+        unstable: []
+        order: 15
+    - name: Get resource type
+      url: '#get-resource-type'
+      identifier: scim-get-resource-type
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSCIMResourceType
+        unstable: []
+        order: 14
+    - name: List resource types
+      url: '#list-resource-types'
+      identifier: scim-list-resource-types
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSCIMResourceTypes
+        unstable: []
+        order: 13
     - name: Update group
       url: '#update-group'
       identifier: scim-update-group
