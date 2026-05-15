@@ -152,7 +152,7 @@ From a status page, under **Publish Notice**, click **Publish Backfilled Notice*
 | Field | Description |
 | ---- | ---- |
 | **Notice title** | Short, clear description of the incident <br>*Example: Increased error rates in US region* |
-| **Updates** | One or more timestamped updates reconstructing the incident timeline. Each update includes: <br>- **Started at**: Start time of this phase <br>- **Status**: Investigating, Identified, Monitoring, or Resolved <br>- **Description**: Details about the incident at this stage <br>- **Components impacted**: Affected components |
+| **Updates** | One or more timestamped updates reconstructing the incident timeline. Each update includes a started at timestamp, status (Investigating, Identified, Monitoring, or Resolved), description, and impacted components. |
 
 {{< img src="service_management/status_pages/publish_status_page_backfill_degradation.png" alt="Example publish backfilled notice modal for degradations" style="width:60%;" >}}
 
@@ -190,7 +190,7 @@ From a status page, under **Publish Notice**, click **Publish Backfilled Notice*
 | Field | Description |
 | ---- | ---- |
 | **Notice title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
-| **Updates** | Two timestamped updates representing the start and end of the maintenance window. Each update includes a start time, status, description, and impacted components: <br>- **Initial update**: Status set to In Progress <br>- **Final update**: Status set to Completed |
+| **Updates** | Exactly two timestamped updates representing the start and end of the maintenance window. Each update requires a started at timestamp, status (In Progress or Completed), description, and affected components. |
 
 {{< img src="service_management/status_pages/publish_status_page_backfill_maintenance.png" alt="Example publish backfilled notice modal for maintenance windows" style="width:60%;" >}}
 
