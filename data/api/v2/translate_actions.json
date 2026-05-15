@@ -887,6 +887,10 @@
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."
   },
+  "GetRuleBasedView": {
+    "description": "Get an aggregated view of compliance rules with their pass, fail, and muted finding counts.\nSupports filtering by compliance framework, framework version, and additional query filters.",
+    "summary": "Get the rule-based view of compliance findings"
+  },
   "ListContainerImages": {
     "description": "Get all Container Images for your organization.\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
     "summary": "Get all Container Images"
@@ -894,6 +898,14 @@
   "ListContainers": {
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
+  },
+  "ListCostAnomalies": {
+    "description": "List detected Cloud Cost Management anomalies for the organization.",
+    "summary": "List cost anomalies"
+  },
+  "GetCostAnomaly": {
+    "description": "Get a detected Cloud Cost Management anomaly by UUID.",
+    "summary": "Get cost anomaly"
   },
   "ListCustomAllocationRules": {
     "description": "List all custom allocation rules - Retrieve a list of all custom allocation rules for the organization",
@@ -1004,6 +1016,38 @@
     "description": "List budgets.",
     "summary": "List budgets"
   },
+  "GetCommitmentsCommitmentList": {
+    "description": "Get a list of individual cloud commitments (Reserved Instances or Savings Plans) with their utilization details. The response schema varies based on the provider, product, and commitment type.",
+    "summary": "Get commitments list"
+  },
+  "GetCommitmentsCoverageScalar": {
+    "description": "Get scalar coverage metrics for cloud commitment programs, including hours and cost coverage percentages.",
+    "summary": "Get commitments coverage (scalar)"
+  },
+  "GetCommitmentsCoverageTimeseries": {
+    "description": "Get timeseries coverage metrics for cloud commitment programs, broken down by coverage type (Reserved Instances, Savings Plans, On-Demand, and Spot) for both hours and cost.",
+    "summary": "Get commitments coverage (timeseries)"
+  },
+  "GetCommitmentsOnDemandHotspotsScalar": {
+    "description": "Get scalar on-demand hot-spots data for cloud commitment programs, showing per-dimension breakdowns of on-demand spending with coverage metrics and potential savings.",
+    "summary": "Get commitments on-demand hot spots (scalar)"
+  },
+  "GetCommitmentsSavingsScalar": {
+    "description": "Get scalar savings metrics for cloud commitment programs, including realized savings and effective savings rate.",
+    "summary": "Get commitments savings (scalar)"
+  },
+  "GetCommitmentsSavingsTimeseries": {
+    "description": "Get timeseries savings metrics for cloud commitment programs, including actual cost, on-demand equivalent cost, realized savings, and effective savings rate over time.",
+    "summary": "Get commitments savings (timeseries)"
+  },
+  "GetCommitmentsUtilizationScalar": {
+    "description": "Get scalar utilization metrics for cloud commitment programs, including utilization percentage and unused cost.",
+    "summary": "Get commitments utilization (scalar)"
+  },
+  "GetCommitmentsUtilizationTimeseries": {
+    "description": "Get timeseries utilization metrics for cloud commitment programs, including used and unused cost series over time.",
+    "summary": "Get commitments utilization (timeseries)"
+  },
   "ListCustomCostsFiles": {
     "description": "List the Custom Costs files.",
     "summary": "List Custom Costs files"
@@ -1053,6 +1097,18 @@
   "ListCostTagDescriptions": {
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
     "summary": "List Cloud Cost Management tag descriptions"
+  },
+  "ListCostTagKeys": {
+    "description": "List Cloud Cost Management tag keys.",
+    "summary": "List Cloud Cost Management tag keys"
+  },
+  "GetCostTagKey": {
+    "description": "Get details for a specific Cloud Cost Management tag key, including example tag values and description.",
+    "summary": "Get a Cloud Cost Management tag key"
+  },
+  "ListCostTags": {
+    "description": "List Cloud Cost Management tags for a given metric.",
+    "summary": "List Cloud Cost Management tags"
   },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 19th of the following month.",
@@ -1325,12 +1381,6 @@
     "summary": "Update a downtime",
     "request_description": "Update a downtime request body.",
     "request_schema_description": "Request for editing a downtime."
-  },
-  "CreateEmailTransportWebhookIntake": {
-    "description": "Receives a batch of email transport webhook log events and emits an audit trail entry\nfor each event with a final delivery status (delivered, dropped, or bounced).\nOnly authorized organizations can submit events.",
-    "summary": "Ingest email transport webhook events",
-    "request_description": "",
-    "request_schema_description": "A batch of email transport webhook log events."
   },
   "SearchIssues": {
     "description": "Search issues endpoint allows you to programmatically search for issues within your organization. This endpoint returns a list of issues that match a given search query, following the event search syntax. The search results are limited to a maximum of 100 issues per request.",
@@ -2592,7 +2642,7 @@
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
   },
   "ListVolumesByMetricName": {
-    "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
+    "description": "View hourly average metric volumes for the given metric name over the look back period.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
     "summary": "List distinct metric volumes by metric name"
   },
   "GetMonitorNotificationRules": {
