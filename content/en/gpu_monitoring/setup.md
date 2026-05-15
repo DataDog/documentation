@@ -13,8 +13,6 @@ further_reading:
 ---
 This page provides instructions on setting up Datadog's GPU Monitoring on your infrastructure. Follow the configuration instructions that match your operating environment below.
 
-To get additional insights and advanced eBPF metrics, like GPU core utilization, you can optionally opt-in to enabling System Probe with privileged mode.
-
 ### Prerequisites
 
 To begin using Datadog's GPU Monitoring, your environment must meet the following criteria:
@@ -58,16 +56,13 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
    `gpu.enabled: true`
    : Enables GPU Monitoring.
 
-   `gpu.privilegedMode: true`
-   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.process.core.usage`).
-
    `gpu.patchCgroupPermissions: true`
    : _Only for GKE_. Enables a code path in `system-probe` that helps the Agent access GPU devices.
 
    `gpu.requiredRuntimeClassName:<runtime-name>`
    : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
 
-   Example `datadog-agent.yaml`, running on GKE with advanced eBPF metrics enabled:
+   Example `datadog-agent.yaml`, running on GKE:
 
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
@@ -78,7 +73,6 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
      features:
        gpu:
          enabled: true
-         privilegedMode: true # Only for advanced eBPF metrics
          patchCgroupPermissions: true # Only for GKE
          requiredRuntimeClassName: "" # Only for AWS EKS or Oracle Cloud
    ```
@@ -98,22 +92,18 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
    `gpuMonitoring.enabled: true`
    : Enables GPU Monitoring.
 
-   `gpuMonitoring.privilegedMode: true`
-   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.process.core.usage`).
-
    `gpuMonitoring.configureCgroupPerms: true`
    : _Only for GKE_. Enables a code path in `system-probe` that helps the Agent access GPU devices.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
    : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
 
-   Example `datadog-values.yaml`, running on GKE with advanced eBPF metrics enabled:
+   Example `datadog-values.yaml`, running on GKE:
 
    ```yaml
    datadog:
      gpuMonitoring:
        enabled: true
-       privilegedMode: true        # Only for advanced SP metrics
        configureCgroupPerms: true  # Only for GKE
        runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
    ```
@@ -356,7 +346,6 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
        features:
          gpu:
            enabled: true
-           privilegedMode: true # Only for advanced eBPF metrics
            patchCgroupPermissions: true # Only for GKE
    ```
 
@@ -494,9 +483,6 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two Helm deploymen
    `gpuMonitoring.enabled: true`
    : Enables GPU Monitoring.
 
-   `gpuMonitoring.privilegedMode: true`
-   : _Optional_. Enables advanced eBPF metrics, such as GPU core utilization (`gpu.process.core.usage`).
-
    `gpuMonitoring.configureCgroupPerms: true`
    : _Only for GKE_. Enables a code path in `system-probe` that helps the Agent access GPU devices.
 
@@ -511,7 +497,6 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two Helm deploymen
      kubeStateMetricsEnabled: false # Disabled, as you're joining an existing Cluster Agent
      gpuMonitoring:
        enabled: true
-       privilegedMode: true        # Only for advanced eBPF metrics
        configureCgroupPerms: true  # Only for GKE
        runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
 
