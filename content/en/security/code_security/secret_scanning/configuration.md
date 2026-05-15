@@ -2,7 +2,7 @@
 title: Rule Configuration
 algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST', 'secret scanning']
-description: Reference documentation for Datadog Secret Scanning (SAST) configuration, covering rule CRUD.
+description: Configure rules for Datadog Secret Scanning, including managed default rules and custom regex rules.
 ---
 
 By default, Datadog Secret Scanning scans enabled repositories with all [rules in the Secrets & Credentials category of Sensitive Data Scanner](https://docs.datadoghq.com/security/sensitive_data_scanner/scanning_rules/library_rules/?category=Secrets+and+credentials). You can customize which rules run, modify default rules, and create custom rules in the ['Code' configuration page](https://app.datadoghq.com/sensitive-data-scanner/configuration/code) in SDS.
