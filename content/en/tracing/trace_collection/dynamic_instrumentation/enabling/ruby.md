@@ -95,7 +95,6 @@ Dynamic Instrumentation tracks code as it loads. For line probes to work correct
 
 ## Supported features
 
-- [Dynamic Logs][8] (log probes)
 - Line probes (capture variables at a specific line)
 - Method probes (capture method entry and exit)
 - Probe conditions using [Expression Language][11]
