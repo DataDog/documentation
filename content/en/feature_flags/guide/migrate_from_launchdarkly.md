@@ -76,8 +76,7 @@ After installation, ensure you have initialized the Datadog provider with your c
 import com.datadog.android.flags.FlagsClient
 import com.datadog.android.flags.EvaluationContext
 
-FlagsClient.Builder().build()
-val flagsClient = FlagsClient.get()
+val flagsClient = FlagsClient.Builder().build()
 
 // Set evaluation context
 flagsClient.setEvaluationContext(
@@ -475,7 +474,7 @@ class FallbackWrapper {
             const ddProvider = new DatadogProvider({
                 applicationId: 'YOUR_APP_ID',
                 clientToken: 'YOUR_CLIENT_TOKEN',
-                site: 'datadoghq.com',
+                site: '{{< region-param key="dd_site" code="true" >}}',
                 env: 'ENV_NAME',
             });
 

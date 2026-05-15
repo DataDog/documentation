@@ -96,7 +96,7 @@ const provider = new DatadogProvider({
     // Required client-side Datadog credentials
     applicationId: '<APPLICATION_ID>',
     clientToken: '<CLIENT_TOKEN>',
-    site: 'datadoghq.com',
+    site: '{{< region-param key="dd_site" code="true" >}}',
     env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
     service: '<SERVICE_NAME>',
     version: '1.0.0'

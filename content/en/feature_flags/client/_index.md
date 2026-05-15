@@ -43,7 +43,7 @@ The web, mobile, and Unity providers expose similar telemetry controls with plat
 | Send aggregated evaluation telemetry | `enableFlagEvaluationTracking` | `trackEvaluations` | `trackEvaluations` | Not exposed | `trackEvaluations` |
 | Attach evaluations to RUM | `enableRumFeatureFlagTracking` | `rumIntegrationEnabled` | `rumIntegrationEnabled` | `rumIntegrationEnabled` | Not exposed |
 
-<div class="alert alert-info">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift">dd-openfeature-provider-swift</a>) is currently in development. For production iOS workloads, use the <code>FlagsClient</code> API directly.</div>
+<div class="alert alert-info">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift">dd-openfeature-provider-swift</a>) is available for use as a pre-1.0 package. Until it reaches 1.0, version updates may include breaking changes. For the most stable iOS API surface, use the <code>FlagsClient</code> API directly.</div>
 
 ## Testing with in-memory providers
 

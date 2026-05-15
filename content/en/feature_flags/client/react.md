@@ -180,7 +180,7 @@ Built-in [suspense](https://react.dev/reference/react/Suspense) support allows y
 For example:
 
 {{< code-block lang="jsx" >}}
-import { useBooleanFlag } from '@openfeature/react-sdk';
+import { useBooleanFlagValue } from '@openfeature/react-sdk';
 import { Suspense } from 'react';
 
 function Content() {
@@ -193,7 +193,7 @@ function Content() {
 }
 
 function WelcomeMessage() {
-  const { value: showNewMessage } = useBooleanFlag('show-new-welcome-message', false, { suspend: true });
+  const showNewMessage = useBooleanFlagValue('show-new-welcome-message', false, { suspend: true });
 
   return (
     <>

@@ -259,7 +259,7 @@ Flag details may help you debug evaluation behavior and understand why a user re
 
 The examples above use Datadog's `FlagsClient` API directly. If you prefer the [OpenFeature](https://openfeature.dev/) standard API, Datadog ships an OpenFeature provider for iOS that wraps `FlagsClient` and exposes it through `OpenFeatureAPI.shared`. The same flag data is served through either surface; pick whichever API fits your app.
 
-<div class="alert alert-warning">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift"><code>dd-openfeature-provider-swift</code></a>) is in development and not recommended for production use. Use the <code>FlagsClient</code> API shown above for production workloads; use this section to prototype OpenFeature integrations or to structure tests around the OpenFeature API.</div>
+<div class="alert alert-info">The iOS OpenFeature bridge (<a href="https://github.com/DataDog/dd-openfeature-provider-swift"><code>dd-openfeature-provider-swift</code></a>) is available for use as a pre-1.0 package. Until it reaches 1.0, version updates may include breaking changes. Use this section to integrate through OpenFeature; use <code>FlagsClient</code> directly for the most stable iOS API surface.</div>
 
 ### Install the OpenFeature provider
 
@@ -397,7 +397,7 @@ Flags.enable(with: config)
 
 ## Testing
 
-The examples above use Datadog's `FlagsClient` API directly. Use `FlagsClient` for production workloads. If you are prototyping against the [OpenFeature](https://openfeature.dev/) bridge or writing tests around the OpenFeature API, substitute an in-memory provider for code-controlled flag values.
+The examples above use Datadog's `FlagsClient` API directly. If you use the [OpenFeature](https://openfeature.dev/) bridge or write tests around the OpenFeature API, substitute an in-memory provider for code-controlled flag values.
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for an in-memory `FeatureProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The OpenFeature Swift SDK does not ship an `InMemoryProvider`, so tests use a small custom `FeatureProvider` instead.
 
