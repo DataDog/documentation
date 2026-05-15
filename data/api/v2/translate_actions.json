@@ -416,6 +416,50 @@
     "description": "Publish an app for use by other users. To ensure the app is accessible to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/) on the app if a policy does not yet exist. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Publish App"
   },
+  "UpdateAppFavorite": {
+    "description": "Add or remove an app from the current user's favorites. Favorited apps can be filtered for using the `filter[favorite]` query parameter on the [List Apps](https://docs.datadoghq.com/api/latest/app-builder/#list-apps) endpoint.",
+    "summary": "Update App Favorite Status",
+    "request_description": "",
+    "request_schema_description": "A request to add or remove an app from the current user's favorites."
+  },
+  "UpdateProtectionLevel": {
+    "description": "Update the publication protection level of an app. When set to `approval_required`, future publishes must go through an approval workflow before going live.",
+    "summary": "Update App Protection Level",
+    "request_description": "",
+    "request_schema_description": "A request to update an app's publication protection level."
+  },
+  "CreatePublishRequest": {
+    "description": "Create a publish request to ask for approval to publish an app whose protection level is `approval_required`. Publishing happens automatically once the request is approved by a user with the appropriate permissions.",
+    "summary": "Create Publish Request",
+    "request_description": "",
+    "request_schema_description": "A request to ask for approval to publish an app whose protection level is `approval_required`."
+  },
+  "RevertApp": {
+    "description": "Revert an app to a previous version. The version to revert to is selected through the `version` query parameter. The reverted version becomes the new latest version of the app.",
+    "summary": "Revert App"
+  },
+  "UpdateAppSelfService": {
+    "description": "Enable or disable self-service for an app. Self-service apps can be discovered and run by users in your organization without explicit access being granted.",
+    "summary": "Update App Self-Service Status",
+    "request_description": "",
+    "request_schema_description": "A request to enable or disable self-service for an app."
+  },
+  "UpdateAppTags": {
+    "description": "Replace the tags on an app. The provided list overwrites the existing tags entirely; tags not present in the request body are removed.",
+    "summary": "Update App Tags",
+    "request_description": "",
+    "request_schema_description": "A request to replace the tags on an app."
+  },
+  "UpdateAppVersionName": {
+    "description": "Assign a human-readable name to a specific version of an app. The version is selected through the `version` query parameter.",
+    "summary": "Name App Version",
+    "request_description": "",
+    "request_schema_description": "A request to assign a human-readable name to a specific app version."
+  },
+  "ListAppVersions": {
+    "description": "List the versions of an app. This endpoint is paginated.",
+    "summary": "List App Versions"
+  },
   "ListApplicationKeys": {
     "description": "List all application keys available for your org",
     "summary": "Get all application keys"
