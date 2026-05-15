@@ -139,9 +139,19 @@ To view detailed forecast information in a budget, click {{< ui >}}View Performa
 
 Learn more about how [forecasting][3] works and data requirements.
 
+## Permissions
+
+| Action | Required Permission |
+|--------|---------------------|
+| View budgets | `cloud_cost_management_read` |
+| Create, edit, or delete a budget | `ccm_budget_write` |
+
+For the full list of CCM permissions, see the [Permissions documentation][4].
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/budgets
 [2]: /cloud_cost_management/cost_changes/monitors/
 [3]: /cloud_cost_management/planning/forecasting
+[4]: /cloud_cost_management/setup/permissions

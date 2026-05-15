@@ -95,10 +95,6 @@
     "name": "Cloud Cost Management",
     "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
   },
-  "cloud-inventory-sync-configs": {
-    "name": "Cloud Inventory Sync Configs",
-    "description": "Configure cloud inventory file synchronization from your cloud storage to Datadog."
-  },
   "cloud-network-monitoring": {
     "name": "Cloud Network Monitoring",
     "description": "The Cloud Network Monitoring API allows you to fetch aggregated connections and DNS traffic with their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/) and [DNS Monitoring page](https://docs.datadoghq.com/network_monitoring/dns/) for more information."
@@ -110,6 +106,10 @@
   "code-coverage": {
     "name": "Code Coverage",
     "description": "Retrieve and analyze code coverage data from Code Coverage. See the [Code Coverage page](https://docs.datadoghq.com/code_coverage/) for more information."
+  },
+  "compliance": {
+    "name": "Compliance",
+    "description": "Datadog Cloud Security Misconfigurations provides aggregated views of\ncompliance rules and findings across your cloud resources, helping you assess\nposture against industry frameworks (such as HIPAA, SOC 2, ISO 27001) and custom\nframeworks. Learn more at https://docs.datadoghq.com/security/cloud_security_management/misconfigurations/#maintain-compliance-with-industry-frameworks-and-benchmarks."
   },
   "confluent-cloud": {
     "name": "Confluent Cloud",
@@ -194,10 +194,6 @@
   "incident-services": {
     "name": "Incident Services",
     "description": "Create, update, delete, and retrieve services which can be associated with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
-  },
-  "incident-teams": {
-    "name": "Incident Teams",
-    "description": "The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/) to create, update, delete, and retrieve teams which can be associated with incidents."
   },
   "incidents": {
     "name": "Incidents",
@@ -406,6 +402,10 @@
   "status-pages": {
     "name": "Status Pages",
     "description": "Manage your status pages and communicate service disruptions to stakeholders via Datadog's API. See the [Status Pages documentation](https://docs.datadoghq.com/incident_response/status_pages/) for more information."
+  },
+  "storage-management": {
+    "name": "Storage Management",
+    "description": "Enable Storage Management for S3 buckets, GCS buckets, and Azure containers. Each configuration registers the destination that holds inventory reports for the storage being monitored."
   },
   "synthetics": {
     "name": "Synthetics",
