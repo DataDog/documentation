@@ -6555,6 +6555,102 @@ menu:
       url: /api/latest/app-builder/
       identifier: app-builder
       generated: true
+    - name: List App Versions
+      url: '#list-app-versions'
+      identifier: app-builder-list-app-versions
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAppVersions
+        unstable: []
+        order: 13
+    - name: Name App Version
+      url: '#name-app-version'
+      identifier: app-builder-name-app-version
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppVersionName
+        unstable: []
+        order: 14
+    - name: Update App Tags
+      url: '#update-app-tags'
+      identifier: app-builder-update-app-tags
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppTags
+        unstable: []
+        order: 12
+    - name: Update App Self-Service Status
+      url: '#update-app-self-service-status'
+      identifier: app-builder-update-app-self-service-status
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppSelfService
+        unstable: []
+        order: 11
+    - name: Revert App
+      url: '#revert-app'
+      identifier: app-builder-revert-app
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RevertApp
+        unstable: []
+        order: 16
+    - name: Create Publish Request
+      url: '#create-publish-request'
+      identifier: app-builder-create-publish-request
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePublishRequest
+        unstable: []
+        order: 15
+    - name: Update App Protection Level
+      url: '#update-app-protection-level'
+      identifier: app-builder-update-app-protection-level
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateProtectionLevel
+        unstable: []
+        order: 10
+    - name: Update App Favorite Status
+      url: '#update-app-favorite-status'
+      identifier: app-builder-update-app-favorite-status
+      parent: app-builder
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAppFavorite
+        unstable: []
+        order: 9
     - name: Publish App
       url: '#publish-app'
       identifier: app-builder-publish-app
