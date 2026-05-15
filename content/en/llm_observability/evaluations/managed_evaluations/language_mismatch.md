@@ -9,7 +9,8 @@ further_reading:
   tag: "Documentation"
   text: "Learn how to set up LLM Observability"
 aliases:
-    - /llm_observability/evaluations/language_mismatch
+    - /llm_observability/evaluations/quality_evaluations
+    - /llm_observability/evaluations/managed_evaluations/quality_evaluations
 ---
 
 This check identifies instances where the LLM generates responses in a different language or dialect than the one used by the user, which can lead to confusion or miscommunication. This check ensures that the LLM's responses are clear, relevant, and appropriate for the user's linguistic preferences and needs.
