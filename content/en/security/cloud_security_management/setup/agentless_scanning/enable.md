@@ -239,11 +239,13 @@ Use Azure Cloud Shell to set up Agentless Scanning for your Azure subscriptions.
 
    - On the **scanner subscription**, the identity must have a role that grants role-assignment write and resource creation, such as **Owner**.
    - On **each scanned subscription**, the identity must have a role that grants the `Microsoft.Authorization/roleAssignments/write` permission, so the scanner's managed identity can be granted the permissions it needs to snapshot and read disks, such as **User Access Administrator** or **Owner**.
-   - For Terraform state, the script creates an Azure Storage Account in the **scanner** subscription unless you set `TF_STATE_STORAGE_ACCOUNT` to reuse an existing storage account in the scanner resource group; the script does not create a new account in that case.
-   - The script registers these resource providers in the scanner subscription when possible: `Microsoft.Compute`, `Microsoft.Network`, `Microsoft.ManagedIdentity`, `Microsoft.Storage`, `Microsoft.KeyVault`, `Microsoft.Authorization`.
+
+   Before you run the generated command, note what the setup script does in Azure:
+
+   - **Terraform state**: By default, it creates an Azure Storage Account in the **scanner** subscription. To reuse an existing storage account in the scanner resource group instead, set `TF_STATE_STORAGE_ACCOUNT` before you run the command; the script does not create a new account when that variable is set.
+   - **Resource providers**: When possible, it registers these resource providers in the scanner subscription: `Microsoft.Compute`, `Microsoft.Network`, `Microsoft.ManagedIdentity`, `Microsoft.Storage`, `Microsoft.KeyVault`, `Microsoft.Authorization`.
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **Azure**.
-1. Expand the Tenant containing the subscription where you want to deploy the Agentless scanner.
-1. Click **Enable** for the Azure subscription where you want to deploy the Agentless scanner. The **Vulnerability Scanning** modal opens.
+1. Under the tenant that contains the subscription where you want to deploy the Agentless scanner, click **Enable** for that subscription. Expand the tenant or subscription list first if it is collapsed. The **Vulnerability Scanning** modal opens.
 1. Turn on the **Vulnerability Scanning** toggle.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Azure Cloud Shell**.
 1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
@@ -273,8 +275,7 @@ Use the Azure Resource Manager template to deploy the Agentless Scanner. The tem
 The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless_scanning/deployment_methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **Azure**.
-1. Expand the Tenant containing the subscription where you want to deploy the Agentless scanner.
-1. Click the **Enable** button for the Azure subscription where you want to deploy the Agentless scanner.
+1. Under the tenant that contains the subscription where you want to deploy the Agentless scanner, click **Enable** for that subscription. Expand the tenant or subscription list first if it is collapsed.
 1. Toggle **Vulnerability Scanning** to the on position.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
 1. Follow the instructions for installing the [Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme).
@@ -301,12 +302,15 @@ Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This 
 1. Ensure you have the required GCP permissions:
 
    - On the **scanner project**, the identity you use in Cloud Shell must have **Owner** or equivalent.
-   - The script creates a GCS bucket for Terraform state in that project, so you also need **Storage** permissions (for example, `roles/storage.admin` or `storage.buckets.create` / `storage.buckets.get` / `storage.buckets.update`). Alternatively, set `TF_STATE_BUCKET` to reuse an existing bucket; the script does not create a bucket in that case.
-   - If you see a 403 error on "Setting up Terraform state storage", see [GCP: Failed to create state bucket][26] in the troubleshooting guide.
+   - **Storage**: Include permission to create Terraform state storage in the scanner project, or to use an existing bucket that you reference with `TF_STATE_BUCKET` (for example, `roles/storage.admin`, or the `storage.buckets.create`, `storage.buckets.get`, and `storage.buckets.update` permissions).
+
+   Before you run the generated command, note what the setup script does in GCP:
+
+   - **Terraform state**: By default, it creates a GCS bucket in the **scanner** project. To reuse an existing bucket, set `TF_STATE_BUCKET` before you run the command; the script does not create a bucket when that variable is set.
+   - If you see a 403 error on **Setting up Terraform state storage**, see [GCP: Failed to create state bucket][26] in the troubleshooting guide.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **GCP**.
-1. Expand the account containing the project where you want to deploy the Agentless scanner.
-1. Click the **Enable** button for the GCP project where you want to deploy the Agentless scanner. The **Vulnerability Scanning** modal opens.
+1. Under the account that contains the project where you want to deploy the Agentless scanner, click **Enable** for that project. Expand the account or project list first if it is collapsed. The **Vulnerability Scanning** modal opens.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Cloud Shell**.
 1. Select an **API key** that has [Remote Configuration](/remote_configuration) enabled. An application key is automatically generated.
 1. Select the **GCP projects** you want to scan.
@@ -320,8 +324,7 @@ Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This 
 The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless_scanning/deployment_methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click **Cloud Integrations** > **GCP**.
-1. Expand the account containing the project where you want to deploy the Agentless scanner.
-1. Click the **Enable** button for the GCP project where you want to deploy the Agentless scanner.
+1. Under the account that contains the project where you want to deploy the Agentless scanner, click **Enable** for that project. Expand the account or project list first if it is collapsed.
 1. Toggle **Vulnerability Scanning** to the on position.
 1. Follow the instructions for installing the [Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme).
 1. Click **Done**.
