@@ -83,7 +83,13 @@ To setup unified service tagging in a containerized environment:
 
 To get the full range of unified service tagging in Kubernetes, add the following labels to both the parent workload and the pod template.
 
-The `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables are used by APM-enabled applications. You can set these environment variables manually or using the [Kubernetes's downward API][2] as seen below. If you are using the Cluster Agent's [Admission Controller][1] to mutate your pods, those three environment variables are automatically injected to match your labels.
+- `tags.datadoghq.com/env: "<ENV>"`
+- `tags.datadoghq.com/service: "<SERVICE>"`
+- `tags.datadoghq.com/version: "<VERSION>" `
+
+For APM-enabled applications additionally set the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` for the Datadog tracers.
+
+You can set these environment variables manually or with the [Kubernetes's downward API][2]. If you are using the Cluster Agent's [Admission Controller][1] to mutate your pods, those three environment variables are automatically injected to match your labels.
 
 ```yaml
 apiVersion: apps/v1
