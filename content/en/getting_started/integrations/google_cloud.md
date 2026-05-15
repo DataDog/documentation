@@ -347,7 +347,7 @@ To apply granular metric filtering for enabled services, click on the service in
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Limit metric collection by Google Cloud region, and by global resources" level="h4" %}}
+{{% collapse-content title="Limit metric collection by Google Cloud region and by global resources" level="h4" %}}
 
 Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][11], deselect which regions to exclude from metrics collection.
 
