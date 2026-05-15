@@ -130,6 +130,12 @@ The built-in `all ingested logs` filter cannot be deleted, but you can disable i
 
 **Applies to:** Cloud SIEM Legacy and Cloud SIEM Add-on with Flex Logs.
 
+When working with the API it is critical to understand which Cloud SIEM version you are using. The versions affect the logic of the security filters.
+
+Cloud SIEM only analyzes logs based on the logic of the filters present. For Add-On SKU customers there are no security filters present when you first onboard. Each content pack you enable adds a security filter so that those logs can be analyzed by Cloud SIEM.
+
+Cloud SIEM Legacy operates differently. It comes with a default "built-in" filter that allows _all logs_ to be analyzed. Best practice for Cloud SIEM Legacy is to add exclusion filters to the default filter to reduce your log volumes.
+
 ### Prerequisites for the Cloud SIEM API
 
 - An API key and an application key from an admin user. Both are available on your [Datadog account API key page][5]. Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` in the examples in this section with your API key and application key.
@@ -137,9 +143,52 @@ The built-in `all ingested logs` filter cannot be deleted, but you can disable i
 
 <div class="alert alert-info">Several of the Security Filter API payloads include a <code>version</code> attribute. <code>version</code> is optional: if you omit it, the API updates the latest version of the filter. Include <code>version</code> when you want the request to succeed only against a specific known version (for example, to avoid overwriting concurrent changes).</div>
 
-### Add an exclusion to the default Security Filter
+### Create a custom Security Filter
 
-The built-in `all ingested logs` filter matches every log. To reduce analyzed volume, add one or more exclusions to this filter. This example excludes logs tagged `env:staging`.
+Custom Security Filters tell Cloud SIEM which logs it should analyze. This example call creates a filter that matches `source:cloudtrail`, so Cloud SIEM will analyze logs from AWS CloudTrail.
+
+```bash
+curl -L -X POST 'https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/security_monitoring/configuration/security_filters' \
+--header 'Content-Type: application/json' \
+--header 'DD-API-KEY: <DATADOG_API_KEY>' \
+--header 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' \
+--data-raw '{
+    "data": {
+        "type": "security_filters",
+        "attributes": {
+            "is_enabled": true,
+            "name": "cloudtrail",
+            "exclusion_filters": [],
+            "filtered_data_type": "logs",
+            "query": "source:cloudtrail"
+        }
+    }
+}'
+```
+
+Example response:
+
+```json
+{
+    "data": {
+        "attributes": {
+            "is_enabled": true,
+            "is_builtin": false,
+            "name": "cloudtrail",
+            "filtered_data_type": "logs",
+            "exclusion_filters": [],
+            "version": 1,
+            "query": "source:cloudtrail"
+        },
+        "type": "security_filters",
+        "id": "qa6-tzm-rp7"
+    }
+}
+```
+
+### Add an exclusion to an existing Security Filter
+
+Existing Security Filters can be further refined using exclusion filters. These are useful to remove logs that would otherwise be processed by the main filter query. This example excludes logs tagged `env:staging`.
 
 1. GET existing Security Filters to find the filter's `id`:
    ```bash
@@ -219,52 +268,9 @@ The built-in `all ingested logs` filter matches every log. To reduce analyzed vo
    }
    ```
 
-### Create a custom Security Filter
+### Disable a Security Filter
 
-Custom Security Filters restrict analysis to explicitly specified logs. This example call creates a filter that matches only `source:cloudtrail`, so Datadog analyzes logs from AWS CloudTrail and no other source.
-
-```bash
-curl -L -X POST 'https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/security_monitoring/configuration/security_filters' \
---header 'Content-Type: application/json' \
---header 'DD-API-KEY: <DATADOG_API_KEY>' \
---header 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>' \
---data-raw '{
-    "data": {
-        "type": "security_filters",
-        "attributes": {
-            "is_enabled": true,
-            "name": "cloudtrail",
-            "exclusion_filters": [],
-            "filtered_data_type": "logs",
-            "query": "source:cloudtrail"
-        }
-    }
-}'
-```
-
-Example response:
-
-```json
-{
-    "data": {
-        "attributes": {
-            "is_enabled": true,
-            "is_builtin": false,
-            "name": "cloudtrail",
-            "filtered_data_type": "logs",
-            "exclusion_filters": [],
-            "version": 1,
-            "query": "source:cloudtrail"
-        },
-        "type": "security_filters",
-        "id": "qa6-tzm-rp7"
-    }
-}
-```
-
-### Disable the default Security Filter
-
-Security Filters are inclusive: a log is analyzed if it matches at least one enabled Security Filter. To restrict analysis to only the logs matched by your custom filters, disable the built-in `all ingested logs` filter by setting its `is_enabled` attribute to `false`:
+Security Filters may be enabled and disabled to control whether those logs are analyzed. To keep a filter in your list, but stop it from taking effect, disable it by setting its `is_enabled` attribute to `false`:
 
 ```bash
 curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/security_monitoring/configuration/security_filters/<FILTER_ID>' \
