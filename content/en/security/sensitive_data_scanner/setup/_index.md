@@ -1,5 +1,5 @@
 ---
-title: Setup
+title: Sensitive Data Scanner Setup
 description: Set up Sensitive Data Scanner to detect sensitive content in your telemetry data, LLM Observability data, cloud storage, and code repositories.
 disable_toc: false
 aliases:
