@@ -2340,7 +2340,7 @@
     "summary": "Get annotated queue interactions"
   },
   "CreateLLMObsAnnotationQueueInteractions": {
-    "description": "Add one or more interactions (traces or sessions) to an annotation queue.\nAt least one interaction must be provided.",
+    "description": "Add one or more interactions to an annotation queue. At least one\ninteraction must be provided. Each interaction has a `type`:\n\n- `trace`, `experiment_trace`, `session`: `content_id` references the\n  upstream entity; the server fetches the actual content.\n- `display_block`: omit `content_id` and provide the rendered content\n  in `display_block`. The server generates `content_id` as a\n  deterministic hash of the block list.\n\nItems of different types can be mixed in a single request.",
     "summary": "Add annotation queue interactions",
     "request_description": "Add interactions payload.",
     "request_schema_description": "Request to add interactions to an LLM Observability annotation queue."
