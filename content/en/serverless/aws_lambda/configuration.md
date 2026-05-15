@@ -10,6 +10,9 @@ further_reading:
   - link: '/integrations/github'
     tag: 'Documentation'
     text: 'Datadog GitHub integration'
+  - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+    tag: "Learning Center"
+    text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 aliases:
     - /serverless/distributed_tracing/collect_lambda_payloads
     - /serverless/libraries_integrations/lambda_code_signing
@@ -614,9 +617,9 @@ To enable FIPS compliance for AWS Lambda functions, follow these steps:
 
 3. For Lambda functions using Ruby, .NET, or Java, no additional environment variable configuration is needed.
 
-4. For complete end-to-end FIPS compliance, configure your Lambda function to use the US1-FED Datadog site:
-   - Set the `DD_SITE` to `ddog-gov.com` (required for end-to-end FIPS compliance)
-   **Note**: While the FIPS-compliant Lambda components work with any Datadog site, only the US1-FED site has FIPS-compliant intake endpoints.
+4. For complete end-to-end FIPS compliance, configure your Lambda function to use a Datadog for Government site:
+   - Set `DD_SITE` to `ddog-gov.com` (US1-FED) or `us2.ddog-gov.com` (US2-FED)
+   **Note**: While the FIPS-compliant Lambda components work with any Datadog site, only the Datadog for Government sites have FIPS-compliant intake endpoints.
 
 ## Propagate trace context over AWS resources
 

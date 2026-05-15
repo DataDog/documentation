@@ -81,13 +81,18 @@ further_reading:
 
 <p>If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add <strong>datadog.zendesk.com</strong> to the allow list.</p>
 
+<h3>Ticket is no longer available</h3>
+<p>Datadog deletes closed tickets, including their attachments, 15 months after their last update.</p>
+
+<p>If you need help with a related issue, you can open a new ticket or search the Datadog documentation.</p>
+
 <h2>Further reading</h2>
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 {{< /site-region >}}
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 
 
 <h2>Register on the portal</h2>

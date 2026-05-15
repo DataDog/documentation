@@ -11,6 +11,10 @@ further_reading:
 - link: "/dashboards/querying/"
   tag: "Documentation"
   text: "Learn how to build a graphing query"
+- link: "https://learn.datadoghq.com/courses/discovering-table-list-widgets"
+  tag: "Learning Center"
+  text: "Discovering Table, List, SLO, and Architecture Widgets"
+
 ---
 
 ## Overview

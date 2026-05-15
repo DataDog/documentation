@@ -29,6 +29,10 @@ further_reading:
   - link: "/agent/docker/tag/"
     tag: "Documentation"
     text: "Assign tags to all data emitted by a container"
+  - link: "https://learn.datadoghq.com/courses/agent-on-docker"
+    tag: "Learning Center"
+    text: "The Agent on Docker"
+
 ---
 
 ## Overview

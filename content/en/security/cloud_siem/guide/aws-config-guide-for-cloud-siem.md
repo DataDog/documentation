@@ -19,6 +19,9 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "See how to explore your logs"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-configure-aws"
+  tag: "Learning Center"
+  text: "Configure Cloud SIEM for AWS"
 aliases:
   - /security_platform/guide/aws-config-guide-for-cloud-siem
   - /security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem

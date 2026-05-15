@@ -32,6 +32,9 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Alerting"
     tag: "Release Notes"
     text: "Check out the latest Datadog Alerting releases! (App login required)."
+  - link: "https://learn.datadoghq.com/courses/apm-monitors-and-alerting"
+    tag: "Learning Center"
+    text: "APM Monitors and Alerting"
 cascade:
     algolia:
         rank: 70

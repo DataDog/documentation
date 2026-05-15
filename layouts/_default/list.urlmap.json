@@ -1,11 +1,19 @@
-{{- if eq hugo.Environment "live" -}}
+{{- if ne hugo.Environment "development" -}}
 {{- $urlmap := dict -}}
 {{- range where .Site.AllPages "Kind" "!=" "home" -}}
     {{- $page := . -}}
     {{- if eq $page.Language.Lang "en" -}}
         {{- with $page.File -}}
             {{- $filepath := print "content/en/" .Path -}}
-            {{- $urlmap = merge $urlmap (dict $filepath $page.RelPermalink) -}}
+            {{/* Prefer the .mdoc.md sibling when it exists. Hugo ignores
+                 .mdoc.md files via config, so $page.File.Path always points
+                 at the compiled .md companion. Phrase should pick up the
+                 Markdoc source for translation, not the compiled output. */}}
+            {{- $mdocPath := replaceRE "\\.md$" ".mdoc.md" $filepath -}}
+            {{- if and (ne $mdocPath $filepath) (os.FileExists $mdocPath) -}}
+                {{- $filepath = $mdocPath -}}
+            {{- end -}}
+            {{- $urlmap = merge $urlmap (dict $page.RelPermalink $filepath) -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}
