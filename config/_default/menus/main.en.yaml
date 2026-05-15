@@ -5326,10 +5326,10 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_language_mismatch
       weight: 401
-    - name: Security and Safety Evaluations
-      url: llm_observability/evaluations/security_and_safety_evaluations
+    - name: Sensitive Data Scanner
+      url: llm_observability/evaluations/sensitive_data_scanner
       parent: llm_obs_evaluations
-      identifier: llm_obs_security_and_safety_evaluations
+      identifier: llm_obs_sensitive_data_scanner
       weight: 402
     - name: External Evaluations
       url: llm_observability/evaluations/external_evaluations
