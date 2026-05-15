@@ -108,6 +108,8 @@ Customize blueprints after creation by modifying instructions, adding or removin
 
 Agents integrate with [Workflow Automation][9] and [App Builder][10] through the **Run Agent** action. This lets you embed AI reasoning into any workflow:
 
+{{< img src="/actions/agents/run-agent-step.png" alt="The Run Agent step configuration in a workflow, showing agent selection, run instructions, conversation ID, and output schema fields" style="width:100%;" >}}
+
 1. Open or create a workflow in [Workflow Automation][9], or open or create an app in [App Builder][10].
 1. Add the **Run Agent** step from the action catalog.
 1. Select which agent to run.
