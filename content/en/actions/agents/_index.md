@@ -110,10 +110,6 @@ The **Run Agent** step also supports the following optional fields:
 
 The agent executes with its configured tools and instructions and returns its output to the workflow. Combine rule-based automation with AI reasoning in a single workflow.
 
-## Data privacy
-
-All AI products adhere to Datadog's standard privacy and security standards. See the [Trust Center][17], [Data Processing Addendum][18], and [Transfer Impact Assessment][19] for details.
-
 ## Troubleshooting
 
 **Agent not using a tool**: Verify the tool has been added to the agent's configuration. The agent can only use tools that are explicitly added.
@@ -141,6 +137,3 @@ All AI products adhere to Datadog's standard privacy and security standards. See
 [14]: /actions/workflows/trigger/#monitor-triggers
 [15]: /actions/workflows/trigger/#incident-triggers
 [16]: /actions/workflows/trigger/#security-triggers
-[17]: https://www.datadoghq.com/trust-center/
-[18]: https://www.datadoghq.com/legal/data-processing-addendum/
-[19]: https://www.datadoghq.com/legal/transfer-impact-assessment/
