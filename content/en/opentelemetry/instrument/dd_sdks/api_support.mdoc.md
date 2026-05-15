@@ -830,7 +830,7 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 - Verify `DD_METRICS_OTEL_ENABLED=true` is set before initializing the meter provider.
 {% /if %}
 {% if equals($prog_lang, "java") %}
-- Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function.
+- Verify the `dd-trace-java` javaagent is running. The javaagent registers itself as the global OTel MeterProvider at startup; without it, OTel API calls fall through to no-op providers and no data is sent.
 {% /if %}
 
 {% if equals($prog_lang, "dot_net") %}
@@ -918,6 +918,7 @@ If you encounter an issue after upgrading `@opentelemetry/api-logs`, [open an is
 {% /if %}
 {% if equals($prog_lang, "java") %}
 - **Datadog SDK**: `dd-trace-java` version 1.62.0 or later.
+
 - **OpenTelemetry API**: `opentelemetry-api` version 1.27.0 (the version that introduced the stable Logs API) or later.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
@@ -1497,7 +1498,7 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 - Check protocol configuration. Only `grpc` and `http/protobuf` protocols are supported. HTTP/JSON is not supported.
 {% /if %}
 {% if equals($prog_lang, "java") %}
-- Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function.
+- Verify the `dd-trace-java` javaagent is running. The javaagent registers itself as the global OTel LoggerProvider at startup; without it, OTel API calls fall through to no-op providers and no data is sent.
 {% /if %}
 
 {% /if %}
