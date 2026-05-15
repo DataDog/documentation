@@ -3,7 +3,7 @@ title: Endpoint Scanning
 description: Verify whether discovered API endpoints are publicly accessible and require authentication.
 ---
 
-Endpoint Scanning is an opt-in [App and API Protection][1] (AAP) feature. Instead of inferring endpoint behavior from observed traffic, Datadog scans your endpoints from outside your environment to verify how they respond. The results enrich the [API Posture Inventory][2] with verified authentication and visibility data.
+Endpoint Scanning is an opt-in [App and API Protection][1] (AAP) feature. Instead of inferring endpoint behavior from observed traffic, Datadog scans your endpoints from outside your environment to verify how they respond. The results enrich the [API Inventory][2] with verified authentication and visibility data.
 
 Endpoint Scanning sends only `GET` requests. It does not call POST, PUT, PATCH, or DELETE endpoints, and never modifies data on your endpoints.
 
