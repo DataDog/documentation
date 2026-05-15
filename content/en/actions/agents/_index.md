@@ -93,18 +93,9 @@ Use the built-in chat interface to test your agent. Send messages, review the ag
 
 ## Blueprints
 
-Blueprints are prebuilt agent templates for common operational use cases:
+Blueprints are prebuilt agent templates for common operational use cases. Customize blueprints after creation by modifying instructions, adding or removing tools, and configuring automations.
 
-| Blueprint | Description |
-|-----------|-------------|
-| Daily Error Triager | Finds error logs daily and opens a case for non-transient issues |
-| Incident Responder | Gathers context and coordinates response during active incidents |
-| Security Analyst | Investigates security signals and recommends remediation |
-| Log Analyzer | Analyzes system logs, identifies patterns, and helps troubleshoot |
-| DevOps Assistant | Helps with infrastructure monitoring and deployment tasks |
-| Feedback Digest | Summarizes user feedback from support channels |
-
-Customize blueprints after creation by modifying instructions, adding or removing tools, and configuring automations.
+{{< img src="/actions/agents/agent-blueprints.png" alt="The Agent blueprints modal showing available templates" style="width:100%;" >}}
 
 ## Use agents in Workflows and Apps
 
