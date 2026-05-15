@@ -81,9 +81,9 @@ Use the dropdown above the chart side panel to select different conversion analy
 
 - **Unique converted accounts**: Conversions where the same account, tracked by `@account.id`, completed all steps. This analysis is useful for identifying conversions completed by signed-in users across a longer period of time than the `@user.id` facet persists.
 
-- **Total conversions**: Total conversions across Sessions, Users, or Accounts.
+- **Total conversions**: Total conversions across sessions, users, or accounts.
 
-- **Time to convert**: A timeseries view of conversions by Sessions, Users, or Accounts.
+- **Time to convert**: A timeseries view of conversions by sessions, users, or accounts.
 
 For any conversion analysis view, you can choose to view conversions by count or rate, and view data for all steps or individual steps. For conversion views by user or account, you can adjust the time frame within which a conversion must occur.
 
